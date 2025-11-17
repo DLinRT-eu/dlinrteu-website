@@ -8,7 +8,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     company: "PTW",
     companyUrl: "https://www.ptwdosimetry.com",
     productUrl: "https://www.ptwdosimetry.com/en/products/aiqualis",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/ptw.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/ptw.ts",
     description: "AI contouring quality monitoring solution for clinical practice",
     features: [
       "AI contour monitoring", 

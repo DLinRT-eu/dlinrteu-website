@@ -8,7 +8,7 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/adapt/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/mvision.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/registration/mvision.ts",
     description: "Enable automated contour propagation to support adaptive radiotherapy preparation. Align planning contours to new scans using clinically evaluated image registration methods to help maintain workflow efficiency and consistency. Supports rigid, conventional deformable, and deep learning deformable registration approaches.",
     features: [
       "Automated contour propagation",

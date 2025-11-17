@@ -56,7 +56,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2025-02-10",
     lastRevised: "2025-09-01",
     source: "Automatically retrieved",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
   {
     id: "ge-air-recon-dl",
@@ -112,6 +112,6 @@ export const GE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2025-01-15",
     lastRevised: "2025-09-01",
     source: "Automatically retrieved",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }
 ];

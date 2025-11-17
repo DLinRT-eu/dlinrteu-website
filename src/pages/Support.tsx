@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 const Support = () => {
   const handleGitHubIssue = () => {
-    window.open('https://github.com/DLinRT-eu/website/issues/new', '_blank', 'noopener,noreferrer');
+    window.open('https://github.com/DLinRT-eu/dlinrteu-website/issues/new', '_blank', 'noopener,noreferrer');
   };
 
   const handleDonate = () => {

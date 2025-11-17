@@ -7,7 +7,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
     productUrl: "https://medlever.com/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/platform/medlever.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/medlever.ts",
     description: "AI-powered workflow orchestration platform built from the ground up with data integrity and workflow alignment at its core. Unifies clinical and financial pathways to coordinate simulation, planning, treatment, and QA across all roles and modalities while eliminating fragmented workflows.",
     features: [
       "Workflow orchestration across all modalities",

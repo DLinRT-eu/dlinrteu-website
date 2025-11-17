@@ -8,7 +8,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     company: "PyMedix",
     companyUrl: "https://pymedix.com/",
     productUrl: "https://pymedix.com/autofuse__trashed/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/pymedix.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/registration/pymedix.ts",
     description: "Advanced medical imaging registration solution with AI-powered alignment algorithms for multi-modal image fusion in radiotherapy planning.",
     features: ["Multi-modal registration", "AI-powered alignment", "Real-time processing", "Clinical workflow integration"],
     category: "Registration",

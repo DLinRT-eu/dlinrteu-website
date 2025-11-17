@@ -15,7 +15,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://algomedica.com/",
     productUrl: "https://algomedica.com/low-radation-ct-scans-algomedica",
     githubUrl:
-      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/algomedica.ts",
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/algomedica.ts",
     contactEmail: "info@algomedica.com",
     anatomicalLocation: ["Whole body"],
     modality: "CT",

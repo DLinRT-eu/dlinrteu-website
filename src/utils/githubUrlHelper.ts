@@ -60,7 +60,7 @@ export function createEditUrl(product: any): string {
     filePath = `src/data/products/${categorySlug}/${companySlug}.ts`;
   }
   
-  return `https://github.com/DLinRT-eu/website/edit/main/${filePath}`;
+  return `https://github.com/DLinRT-eu/dlinrteu-website/edit/main/${filePath}`;
 }
 
 export function createIssueUrl(product: any): string {

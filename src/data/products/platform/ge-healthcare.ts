@@ -8,7 +8,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/specialties/oncology-solutions/intelligent-rt",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/platform/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/ge-healthcare.ts",
     description: "Fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management - designed with clinicians for clinicians. AI-supported platform integrating GE Healthcare and third-party AI solutions for comprehensive oncology department management.",
     features: [
       "Analytics reporting for department efficiency",

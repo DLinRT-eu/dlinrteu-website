@@ -338,7 +338,7 @@ class DataService {
     // Contact and engagement info
     const contactInfo = {
       email: "info@dlinrt.eu",
-      githubUrl: "https://github.com/DLinRT-eu/website",
+      githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website",
       newsletterSignups: Math.floor(companies.length * 12), // Estimated engagement
       rssSubscribers: Math.floor(companies.length * 4)
     };
