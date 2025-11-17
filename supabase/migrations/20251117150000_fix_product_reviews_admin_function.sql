@@ -37,9 +37,6 @@ BEGIN
     pr.product_id,
     pr.review_round_id,
     pr.assigned_to,
-    p.first_name as reviewer_first_name,
-    p.last_name as reviewer_last_name,
-    p.email as reviewer_email,
     pr.status,
     pr.priority,
     pr.deadline,
@@ -47,7 +44,10 @@ BEGIN
     pr.started_at,
     pr.completed_at,
     pr.last_activity_at,
-    pr.created_at
+    pr.created_at,
+    p.first_name as reviewer_first_name,
+    p.last_name as reviewer_last_name,
+    p.email as reviewer_email
   FROM public.product_reviews pr
   LEFT JOIN public.profiles p ON p.id = pr.assigned_to
   ORDER BY pr.created_at DESC;

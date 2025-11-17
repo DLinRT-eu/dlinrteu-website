@@ -41,7 +41,7 @@ DROP FUNCTION IF EXISTS public.get_product_reviews_admin_secure() CASCADE;
 DROP FUNCTION IF EXISTS public.delete_product_review_admin(uuid) CASCADE;
 DROP FUNCTION IF EXISTS public.debug_reviewer_access(uuid) CASCADE;
 DROP FUNCTION IF EXISTS public.get_my_reviews_secure() CASCADE;
-DROP FUNCTION IF EXISTS public.start_review_round_atomic(uuid, uuid[], text[]) CASCADE;
+DROP FUNCTION IF EXISTS public.start_review_round_atomic(uuid, jsonb) CASCADE;
 
 DROP FUNCTION IF EXISTS public.hash_ip(text) CASCADE;
 DROP FUNCTION IF EXISTS public.cleanup_old_security_events() CASCADE;
@@ -1043,8 +1043,7 @@ $$;
 
 CREATE OR REPLACE FUNCTION public.start_review_round_atomic(
   p_round_id UUID,
-  p_reviewer_ids UUID[],
-  p_product_ids TEXT[]
+  p_assignments JSONB
 )
 RETURNS JSONB
 LANGUAGE plpgsql
@@ -1052,31 +1051,82 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
 DECLARE
-  v_assignments_created INTEGER := 0;
-  v_result JSONB;
+  v_assignment JSONB;
+  v_success_count INT := 0;
+  v_failed_count INT := 0;
+  v_errors JSONB := '[]'::JSONB;
 BEGIN
+  -- Verify admin role
   IF NOT public.is_admin_secure() THEN
-    RAISE EXCEPTION 'Only admins can start review rounds';
+    RAISE EXCEPTION 'Access denied: admin role required';
   END IF;
   
+  -- Insert assignments atomically
+  FOR v_assignment IN SELECT * FROM jsonb_array_elements(p_assignments)
+  LOOP
+    BEGIN
+      INSERT INTO public.product_reviews (
+        product_id,
+        review_round_id,
+        assigned_to,
+        status,
+        priority,
+        deadline
+      ) VALUES (
+        (v_assignment->>'product_id')::TEXT,
+        p_round_id,
+        (v_assignment->>'assigned_to')::UUID,
+        'pending',
+        COALESCE((v_assignment->>'priority')::TEXT, 'medium'),
+        COALESCE((v_assignment->>'deadline')::DATE, CURRENT_DATE + INTERVAL '14 days')
+      );
+      
+      -- Log to assignment history (if table exists)
+      BEGIN
+        INSERT INTO public.assignment_history (
+          review_round_id,
+          product_id,
+          assigned_to,
+          change_type,
+          changed_by,
+          reason
+        ) VALUES (
+          p_round_id,
+          (v_assignment->>'product_id')::TEXT,
+          (v_assignment->>'assigned_to')::UUID,
+          'initial',
+          auth.uid(),
+          'Review round assignment'
+        );
+      EXCEPTION WHEN undefined_table THEN
+        -- assignment_history table doesn't exist, skip logging
+        NULL;
+      END;
+      
+      v_success_count := v_success_count + 1;
+      
+    EXCEPTION WHEN OTHERS THEN
+      v_failed_count := v_failed_count + 1;
+      v_errors := v_errors || jsonb_build_object(
+        'product_id', v_assignment->>'product_id',
+        'error', SQLERRM
+      );
+    END;
+  END LOOP;
+  
+  -- Update round totals
   UPDATE public.review_rounds
-  SET status = 'active',
-      start_date = CURRENT_DATE
+  SET total_assignments = v_success_count,
+      status = 'active',
+      updated_at = NOW()
   WHERE id = p_round_id;
   
-  v_assignments_created := public.quick_assign_products(
-    p_round_id,
-    p_reviewer_ids,
-    p_product_ids
+  RETURN jsonb_build_object(
+    'success', TRUE,
+    'assigned_count', v_success_count,
+    'failed_count', v_failed_count,
+    'errors', v_errors
   );
-  
-  v_result := jsonb_build_object(
-    'round_id', p_round_id,
-    'assignments_created', v_assignments_created,
-    'status', 'active'
-  );
-  
-  RETURN v_result;
 END;
 $$;
 

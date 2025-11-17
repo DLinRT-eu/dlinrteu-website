@@ -101,11 +101,11 @@ export default function ReviewAssignment() {
     }
 
     const reviewersWithCount = (data || []).map((reviewer: any) => ({
-      id: reviewer.id,
+      id: reviewer.reviewer_id,
       first_name: reviewer.first_name,
       last_name: reviewer.last_name,
       email: reviewer.email,
-      assignedCount: Number(reviewer.active_assignments) || 0
+      assignedCount: Number(reviewer.total_assigned) || 0
     }));
 
     setReviewers(reviewersWithCount);
