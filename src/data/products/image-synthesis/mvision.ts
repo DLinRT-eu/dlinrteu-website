@@ -8,7 +8,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/image/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/mvision.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/mvision.ts",
     description: "Generate synthetic CT images from MRI, CBCT, or contrast-enhanced CT scans to support photon dose calculation in treatment planning and offline adaptive workflows. Clinically evaluated models for brain, pelvis, CBCT, and virtual non-contrast imaging.",
     features: [
       "Synthetic CT generation from MRI",

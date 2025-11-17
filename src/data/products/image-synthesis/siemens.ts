@@ -13,7 +13,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     category: "Image Synthesis",
     certification: "CE & FDA",
     logoUrl: "/logos/siemens.png",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/siemens.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/siemens.ts",
     website: "https://www.siemens-healthineers.com/radiotherapy/software-solutions/syngovia-rt-image-suite",
     anatomicalLocation: ["Brain", "Pelvis"],
     modality: ["MRI"],

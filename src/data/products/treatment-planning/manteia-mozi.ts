@@ -8,7 +8,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     company: "Manteia",
     companyUrl: "https://www.manteiatech.com/",
     productUrl: "https://www.manteiatech.com/mozi",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
     description: "AI-powered treatment planning assistant that optimizes radiation therapy plans using machine learning algorithms for improved plan quality and efficiency.",
     features: ["AI-powered optimization", "Plan quality assessment", "Workflow integration"],
     category: "Treatment Planning",

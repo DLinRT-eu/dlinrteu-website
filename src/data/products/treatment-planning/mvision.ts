@@ -8,7 +8,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/dose/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/mvision.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/mvision.ts",
     description: "Dose+ is an AI-based treatment planning solution that automates VMAT and IMRT radiotherapy plans creation, reducing planning time from hours to minutes while ensuring high quality and consistency.",
     features: ["Automated VMAT/IMRT planning", "Clinical objectives optimization", "Fast plan creation", "Plan quality consistency"],
     category: "Treatment Planning",

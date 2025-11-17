@@ -8,7 +8,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     company: "Mirada Medical",
     companyUrl: "https://mirada-medical.com/radiation-oncology/",
     productUrl: "https://mirada-medical.com/product/mirada-dlcexpert-ai-autocontouring/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/mirada.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mirada.ts",
     description: "Deep learning-based auto-contouring software for radiation oncology providing consistent and rapid contouring of normal tissues.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

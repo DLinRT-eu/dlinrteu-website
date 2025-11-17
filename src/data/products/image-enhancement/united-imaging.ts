@@ -13,7 +13,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/unitedimaging.png",
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://www.united-imaging.com/en/products/radiationtherapy",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/united-imaging.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/united-imaging.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CBCT"],
     diseaseTargeted: ["Cancer"],

@@ -7,7 +7,7 @@ export const SUBTLE_MEDICAL_GAD_PRODUCTS: ProductDetails[] = [
     name: "SubtleGAD",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical-gad.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical-gad.ts",
     description: "AI-powered solution that simulates full-dose gadolinium-enhanced MRI from zero- or low-dose contrast studies.",
     features: ["Deep learning enhancement", "MRI contrast", "Gadolinium reduction"],
     certification: "Research Use Only",

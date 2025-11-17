@@ -66,6 +66,6 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     lastRevised: "2025-09-01",
     source: "Automatically retrieved",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/siemens.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
 ];

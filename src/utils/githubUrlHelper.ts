@@ -83,7 +83,7 @@ File: ${githubInfo.filePath || 'Unknown'}
   }
   
   // Fallback to default repo
-  return `https://github.com/DLinRT-eu/website/issues/new?title=Review%3A+${encodeURIComponent(product.name)}&template=product-review.md&labels=review`;
+  return `https://github.com/DLinRT-eu/dlinrteu-website/issues/new?title=Review%3A+${encodeURIComponent(product.name)}&template=product-review.md&labels=review`;
 }
 
 export function createPullRequestUrl(product: any): string {
@@ -94,5 +94,5 @@ export function createPullRequestUrl(product: any): string {
   }
   
   // Fallback to default repo
-  return `https://github.com/DLinRT-eu/website/compare/main...review/${product.id}?expand=1&title=Review:%20${encodeURIComponent(product.name)}&labels=review`;
+  return `https://github.com/DLinRT-eu/dlinrteu-website/compare/main...review/${product.id}?expand=1&title=Review:%20${encodeURIComponent(product.name)}&labels=review`;
 }

@@ -7,7 +7,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   name: "AccuLearning",
   company: "Manteia",
   productUrl: "https://www.manteiatech.com/acculearning",
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/manteia-acculearning.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia-acculearning.ts",
   description: "Localized deep learning platform for clinics to build/train custom AI models for radiation therapy using institutional data.",
   category: "Model Training",
   certification: "For research use. Clinical deployment requires separate validation",

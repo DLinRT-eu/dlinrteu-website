@@ -8,7 +8,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     company: "RadFormation",
     companyUrl: "https://www.radformation.com/",
     productUrl: "https://www.radformation.com/autocontour/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/radformation.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/radformation.ts",
     description: "Cloud-based auto-contouring solution providing fast and accurate organ at risk delineation for radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

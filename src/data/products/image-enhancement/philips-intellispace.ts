@@ -12,7 +12,7 @@ export const PHILIPS_INTELLISPACE_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/philips.png",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.philips.com/healthcare/solutions/diagnostic-informatics",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/philips-intellispace.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/philips-intellispace.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT", "MRI", "X-ray"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Neurological disorders"],

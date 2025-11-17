@@ -86,10 +86,10 @@ The only requirement is having Node.js & npm installed - [install with nvm](http
 
 ```sh
 # Clone the repository
-git clone https://github.com/DLinRT-eu/website.git
+git clone https://github.com/DLinRT-eu/dlinrteu-website.git
 
 # Navigate to the project directory
-cd website
+cd dlinrteu-website
 
 # Install dependencies
 npm install
@@ -126,13 +126,13 @@ We welcome contributions to improve the accuracy of product information. If you 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/DLinRT-eu/website.svg?style=for-the-badge
-[contributors-url]: https://github.com/DLinRT-eu/website/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/DLinRT-eu/website.svg?style=for-the-badge
-[forks-url]: https://github.com/DLinRT-eu/website/network/members
-[stars-shield]: https://img.shields.io/github/stars/DLinRT-eu/website.svg?style=for-the-badge
-[stars-url]: https://github.com/DLinRT-eu/website/stargazers
-[issues-shield]: https://img.shields.io/github/issues/DLinRT-eu/website.svg?style=for-the-badge
-[issues-url]: https://github.com/DLinRT-eu/website/issues
-[license-shield]: https://img.shields.io/github/license/DLinRT-eu/website.svg?style=for-the-badge
-[license-url]: https://github.com/DLinRT-eu/website/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/DLinRT-eu/dlinrteu-website.svg?style=for-the-badge
+[contributors-url]: https://github.com/DLinRT-eu/dlinrteu-website/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/DLinRT-eu/dlinrteu-website.svg?style=for-the-badge
+[forks-url]: https://github.com/DLinRT-eu/dlinrteu-website/network/members
+[stars-shield]: https://img.shields.io/github/stars/DLinRT-eu/dlinrteu-website.svg?style=for-the-badge
+[stars-url]: https://github.com/DLinRT-eu/dlinrteu-website/stargazers
+[issues-shield]: https://img.shields.io/github/issues/DLinRT-eu/dlinrteu-website.svg?style=for-the-badge
+[issues-url]: https://github.com/DLinRT-eu/dlinrteu-website/issues
+[license-shield]: https://img.shields.io/github/license/DLinRT-eu/dlinrteu-website.svg?style=for-the-badge
+[license-url]: https://github.com/DLinRT-eu/dlinrteu-website/blob/master/LICENSE
