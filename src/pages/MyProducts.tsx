@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Package, Plus, Edit, Trash2, Star, Building2, Info } from 'lucide-react';
+import { Package, Plus, Edit, Trash2, Building2, Info } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
 import { ProductSelectorDialog } from '@/components/products/ProductSelectorDialog';
 
@@ -26,12 +26,22 @@ interface UserProduct {
   adoption_date: string | null;
   institution: string | null;
   department: string | null;
-  experience_rating: number | null;
+  relationship_status: 'currently_using' | 'previously_used' | 'evaluating' | 'planning_to_adopt' | 'owns' | 'other';
+  relationship_status_other: string | null;
   experience_notes: string | null;
   use_case: string | null;
   willing_to_share_experience: boolean;
   contact_preference: 'email' | 'linkedin' | 'no_contact';
 }
+
+const RELATIONSHIP_OPTIONS = [
+  { value: 'currently_using', label: 'Currently Using' },
+  { value: 'previously_used', label: 'Previously Used' },
+  { value: 'evaluating', label: 'Evaluating' },
+  { value: 'planning_to_adopt', label: 'Planning to Adopt' },
+  { value: 'owns', label: 'Owns' },
+  { value: 'other', label: 'Other (specify below)' },
+];
 
 export default function MyProducts() {
   const { user, loading: authLoading } = useAuth();
@@ -48,7 +58,8 @@ export default function MyProducts() {
   const [adoptionDate, setAdoptionDate] = useState('');
   const [institution, setInstitution] = useState('');
   const [department, setDepartment] = useState('');
-  const [rating, setRating] = useState<number>(3);
+  const [relationshipStatus, setRelationshipStatus] = useState<'currently_using' | 'previously_used' | 'evaluating' | 'planning_to_adopt' | 'owns' | 'other'>('currently_using');
+  const [relationshipStatusOther, setRelationshipStatusOther] = useState('');
   const [notes, setNotes] = useState('');
   const [useCase, setUseCase] = useState('');
   const [willingToShare, setWillingToShare] = useState(false);
@@ -83,7 +94,8 @@ export default function MyProducts() {
     setAdoptionDate('');
     setInstitution('');
     setDepartment('');
-    setRating(3);
+    setRelationshipStatus('currently_using');
+    setRelationshipStatusOther('');
     setNotes('');
     setUseCase('');
     setWillingToShare(false);
@@ -98,7 +110,8 @@ export default function MyProducts() {
       setAdoptionDate(product.adoption_date || '');
       setInstitution(product.institution || '');
       setDepartment(product.department || '');
-      setRating(product.experience_rating || 3);
+      setRelationshipStatus(product.relationship_status);
+      setRelationshipStatusOther(product.relationship_status_other || '');
       setNotes(product.experience_notes || '');
       setUseCase(product.use_case || '');
       setWillingToShare(product.willing_to_share_experience);
@@ -140,7 +153,8 @@ export default function MyProducts() {
       adoption_date: adoptionDate || null,
       institution: institution || null,
       department: department || null,
-      experience_rating: rating,
+      relationship_status: relationshipStatus,
+      relationship_status_other: relationshipStatus === 'other' ? relationshipStatusOther : null,
       experience_notes: notes || null,
       use_case: useCase || null,
       willing_to_share_experience: willingToShare,
@@ -306,22 +320,32 @@ export default function MyProducts() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Experience Rating</Label>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((value) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => setRating(value)}
-                        className="p-1 hover:scale-110 transition-transform"
-                      >
-                        <Star
-                          className={`h-6 w-6 ${value <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
-                        />
-                      </button>
-                    ))}
-                  </div>
+                  <Label htmlFor="relationship-status">Relationship with Product</Label>
+                  <Select value={relationshipStatus} onValueChange={(value: any) => setRelationshipStatus(value)}>
+                    <SelectTrigger id="relationship-status">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {RELATIONSHIP_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
+
+                {relationshipStatus === 'other' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="relationship-other">Specify Relationship</Label>
+                    <Input
+                      id="relationship-other"
+                      placeholder="Please describe your relationship with this product"
+                      value={relationshipStatusOther}
+                      onChange={(e) => setRelationshipStatusOther(e.target.value)}
+                    />
+                  </div>
+                )}
 
                 <div className="space-y-2">
                   <Label htmlFor="use-case">Use Case</Label>
@@ -365,6 +389,15 @@ export default function MyProducts() {
                     onCheckedChange={setWillingToShare}
                   />
                 </div>
+
+                {willingToShare && (
+                  <Alert variant="default" className="border-blue-200 bg-blue-50">
+                    <Info className="h-4 w-4 text-blue-600" />
+                    <AlertDescription className="text-blue-900">
+                      <strong>Explicit Consent:</strong> By enabling sharing, you explicitly consent to display your name, institution, relationship status, and experience notes on the product page for other logged-in users to view. Reviewers and the product company will also have access to this information.
+                    </AlertDescription>
+                  </Alert>
+                )}
 
                 {willingToShare && (
                   <div className="space-y-2">
@@ -451,19 +484,14 @@ export default function MyProducts() {
                           <p>{userProduct.department}</p>
                         </div>
                       )}
-                      {userProduct.experience_rating && (
-                        <div>
-                          <Label className="text-xs text-muted-foreground">Rating</Label>
-                          <div className="flex gap-0.5">
-                            {[1, 2, 3, 4, 5].map((value) => (
-                              <Star
-                                key={value}
-                                className={`h-4 w-4 ${value <= userProduct.experience_rating! ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                      <div>
+                        <Label className="text-xs text-muted-foreground">Relationship</Label>
+                        <p className="capitalize">
+                          {userProduct.relationship_status === 'other' 
+                            ? userProduct.relationship_status_other || 'Other'
+                            : userProduct.relationship_status.replace(/_/g, ' ')}
+                        </p>
+                      </div>
                     </div>
 
                     {userProduct.use_case && (

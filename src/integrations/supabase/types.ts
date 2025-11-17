@@ -1146,7 +1146,8 @@ export type Database = {
           created_at: string | null
           department: string | null
           experience_notes: string | null
-          experience_rating: number | null
+          relationship_status: string
+          relationship_status_other: string | null
           id: string
           institution: string | null
           product_id: string
@@ -1162,7 +1163,8 @@ export type Database = {
           created_at?: string | null
           department?: string | null
           experience_notes?: string | null
-          experience_rating?: number | null
+          relationship_status?: string
+          relationship_status_other?: string | null
           id?: string
           institution?: string | null
           product_id: string
@@ -1178,7 +1180,8 @@ export type Database = {
           created_at?: string | null
           department?: string | null
           experience_notes?: string | null
-          experience_rating?: number | null
+          relationship_status?: string
+          relationship_status_other?: string | null
           id?: string
           institution?: string | null
           product_id?: string
@@ -1343,7 +1346,8 @@ export type Database = {
           department: string | null
           email: string | null
           experience_notes: string | null
-          experience_rating: number | null
+          relationship_status: string | null
+          relationship_status_other: string | null
           first_name: string | null
           id: string | null
           institution: string | null

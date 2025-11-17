@@ -15,6 +15,7 @@ import SupportedStructures from "./product/SupportedStructures";
 import ProductRevisionStatus from "./ProductRevisionStatus";
 import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
 import GuidelinesDetails from "./product/GuidelinesDetails";
+import UserRelationships from "./product/UserRelationships";
 import { toast } from "sonner";
 import Footer from "./Footer";
 
@@ -95,6 +96,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         
         <div className="space-y-6">
           <ContactInformation product={product} />
+          
+          {/* User Relationships Section */}
+          <UserRelationships productId={product.id} />
           
           {/* Model Card Export Section */}
           <div className="bg-white shadow rounded-lg p-6">

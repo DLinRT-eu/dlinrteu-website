@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { Star, Mail, Linkedin, Building2, ArrowLeft } from 'lucide-react';
+import { Users, Mail, Linkedin, Building2, ArrowLeft } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
 
 interface UserExperience {
@@ -17,7 +17,8 @@ interface UserExperience {
   adoption_date: string | null;
   institution: string | null;
   department: string | null;
-  experience_rating: number | null;
+  relationship_status: string;
+  relationship_status_other: string | null;
   experience_notes: string | null;
   use_case: string | null;
   contact_preference: 'email' | 'linkedin' | 'no_contact';
@@ -27,6 +28,15 @@ interface UserExperience {
   linkedin_url: string | null;
   specialization: string | null;
 }
+
+const RELATIONSHIP_LABELS: Record<string, string> = {
+  currently_using: 'Currently Using',
+  previously_used: 'Previously Used',
+  evaluating: 'Evaluating',
+  planning_to_adopt: 'Planning to Adopt',
+  owns: 'Owns',
+  other: 'Other'
+};
 
 export default function ProductExperiences() {
   const { productId } = useParams<{ productId: string }>();
@@ -98,7 +108,7 @@ export default function ProductExperiences() {
         {experiences.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-16">
-              <Star className="h-16 w-16 text-muted-foreground mb-4" />
+              <Users className="h-16 w-16 text-muted-foreground mb-4" />
               <h3 className="text-lg font-medium mb-2">No shared experiences yet</h3>
               <p className="text-sm text-muted-foreground text-center max-w-md">
                 No users have opted to share their experience with this product yet.
@@ -117,31 +127,32 @@ export default function ProductExperiences() {
               </CardContent>
             </Card>
 
-            {experiences.map((exp) => (
+            {experiences.map((exp) => {
+              const formatRelationship = () => {
+                if (exp.relationship_status === 'other' && exp.relationship_status_other) {
+                  return exp.relationship_status_other;
+                }
+                return RELATIONSHIP_LABELS[exp.relationship_status] || exp.relationship_status.replace(/_/g, ' ');
+              };
+
+              return (
               <Card key={exp.id}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <CardTitle className="text-xl">
-                        {exp.first_name} {exp.last_name}
-                      </CardTitle>
+                    <div className="space-y-1 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <CardTitle className="text-xl">
+                          {exp.first_name} {exp.last_name}
+                        </CardTitle>
+                        <Badge variant="secondary">
+                          {formatRelationship()}
+                        </Badge>
+                      </div>
                       <CardDescription>
                         {exp.specialization && <span>{exp.specialization} • </span>}
                         {exp.institution || 'Institution not specified'}
                         {exp.department && ` • ${exp.department}`}
                       </CardDescription>
-                    </div>
-                    <div>
-                      {exp.experience_rating && (
-                        <div className="flex gap-0.5">
-                          {[1, 2, 3, 4, 5].map((value) => (
-                            <Star
-                              key={value}
-                              className={`h-5 w-5 ${value <= exp.experience_rating! ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
-                            />
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </CardHeader>
@@ -192,7 +203,8 @@ export default function ProductExperiences() {
                   )}
                 </CardContent>
               </Card>
-            ))}
+            );
+            })}
           </div>
         )}
       </div>
