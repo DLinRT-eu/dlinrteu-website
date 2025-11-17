@@ -14,7 +14,8 @@ import {
   Shield,
   Settings,
   Bell,
-  UserCheck
+  UserCheck,
+  User
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
@@ -91,6 +92,13 @@ export default function Dashboard_Authenticated() {
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
       }
     ] : []),
+    {
+      title: 'My Profile',
+      description: 'View and edit your profile',
+      icon: User,
+      link: '/profile',
+      color: 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+    },
     {
       title: 'Products',
       description: 'Browse all AI medical products',
