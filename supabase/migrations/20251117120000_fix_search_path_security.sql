@@ -193,16 +193,12 @@ LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
 AS $$
-DECLARE
-  v_product_name TEXT;
 BEGIN
   IF (TG_OP = 'INSERT') THEN
-    SELECT name INTO v_product_name FROM public.products WHERE id = NEW.product_id;
-    
     PERFORM public.create_notification(
       NEW.assigned_to,
       'New Review Assignment',
-      'You have been assigned to review: ' || COALESCE(v_product_name, 'Unknown Product'),
+      'You have been assigned to review product: ' || NEW.product_id,
       'info',
       '/review/' || NEW.id
     );
@@ -219,16 +215,13 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
 DECLARE
-  v_product_name TEXT;
   v_message TEXT;
 BEGIN
   IF (NEW.status != OLD.status AND NEW.status IN ('approved', 'needs_revision')) THEN
-    SELECT name INTO v_product_name FROM public.products WHERE id = NEW.product_id;
-    
     IF NEW.status = 'approved' THEN
-      v_message := 'Your review for ' || COALESCE(v_product_name, 'a product') || ' has been approved.';
+      v_message := 'Your review for product ' || NEW.product_id || ' has been approved.';
     ELSE
-      v_message := 'Your review for ' || COALESCE(v_product_name, 'a product') || ' needs revision.';
+      v_message := 'Your review for product ' || NEW.product_id || ' needs revision.';
     END IF;
     
     PERFORM public.create_notification(
@@ -916,15 +909,25 @@ BEGIN
 END;
 $$;
 
+-- This function is replaced by the one in 20251117150000_fix_product_reviews_admin_function.sql
+-- Keeping a stub here to maintain migration order
 CREATE OR REPLACE FUNCTION public.get_product_reviews_admin_secure()
 RETURNS TABLE(
   id UUID,
   product_id TEXT,
-  product_name TEXT,
+  review_round_id UUID,
   assigned_to UUID,
-  reviewer_email TEXT,
   status TEXT,
-  created_at TIMESTAMPTZ
+  priority TEXT,
+  deadline DATE,
+  notes TEXT,
+  started_at TIMESTAMPTZ,
+  completed_at TIMESTAMPTZ,
+  last_activity_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ,
+  reviewer_first_name TEXT,
+  reviewer_last_name TEXT,
+  reviewer_email TEXT
 )
 LANGUAGE plpgsql
 SECURITY DEFINER
@@ -939,13 +942,20 @@ BEGIN
   SELECT 
     pr.id,
     pr.product_id,
-    prod.name as product_name,
+    pr.review_round_id,
     pr.assigned_to,
-    p.email as reviewer_email,
     pr.status,
-    pr.created_at
+    pr.priority,
+    pr.deadline,
+    pr.notes,
+    pr.started_at,
+    pr.completed_at,
+    pr.last_activity_at,
+    pr.created_at,
+    p.first_name as reviewer_first_name,
+    p.last_name as reviewer_last_name,
+    p.email as reviewer_email
   FROM public.product_reviews pr
-  LEFT JOIN public.products prod ON prod.id = pr.product_id
   LEFT JOIN public.profiles p ON p.id = pr.assigned_to
   ORDER BY pr.created_at DESC;
 END;
@@ -1003,7 +1013,6 @@ CREATE OR REPLACE FUNCTION public.get_my_reviews_secure()
 RETURNS TABLE(
   id UUID,
   product_id TEXT,
-  product_name TEXT,
   review_round_id UUID,
   round_name TEXT,
   status TEXT,
@@ -1027,14 +1036,12 @@ BEGIN
   SELECT 
     pr.id,
     pr.product_id,
-    p.name as product_name,
     pr.review_round_id,
     rr.name as round_name,
     pr.status,
     pr.created_at as assigned_at,
     pr.completed_at
   FROM public.product_reviews pr
-  LEFT JOIN public.products p ON p.id = pr.product_id
   LEFT JOIN public.review_rounds rr ON rr.id = pr.review_round_id
   WHERE pr.assigned_to = v_user_id
   ORDER BY pr.created_at DESC;
