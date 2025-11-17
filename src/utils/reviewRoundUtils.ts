@@ -59,6 +59,12 @@ export async function createReviewRound(roundData: {
 }) {
   const { data: { user } } = await supabase.auth.getUser();
   
+  console.log('[createReviewRound] Attempting to insert:', {
+    ...roundData,
+    created_by: user?.id,
+    status: 'draft'
+  });
+  
   const { data, error } = await supabase
     .from('review_rounds')
     .insert({
@@ -69,7 +75,12 @@ export async function createReviewRound(roundData: {
     .select()
     .single();
 
-  if (error) throw error;
+  if (error) {
+    console.error('[createReviewRound] Insert error:', error);
+    throw error;
+  }
+  
+  console.log('[createReviewRound] Success:', data);
   return data as ReviewRound;
 }
 

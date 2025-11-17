@@ -93,7 +93,7 @@ export default function ReviewRounds() {
 
   const fetchReviewerStats = async () => {
     try {
-      // Count total reviewers
+      // Count total reviewers (use DISTINCT to avoid duplicates)
       const { data: reviewers, error: reviewersError } = await supabase
         .from('user_roles')
         .select('user_id')
@@ -101,17 +101,24 @@ export default function ReviewRounds() {
 
       if (reviewersError) throw reviewersError;
 
-      // Count reviewers with expertise
+      // Get unique reviewer IDs
+      const uniqueReviewerIds = new Set(reviewers?.map(r => r.user_id) || []);
+
+      // Count reviewers with expertise (only those who have reviewer role)
       const { data: expertise, error: expertiseError } = await supabase
         .from('reviewer_expertise')
         .select('user_id');
 
       if (expertiseError) throw expertiseError;
 
-      const uniqueReviewersWithExpertise = new Set(expertise?.map(e => e.user_id) || []).size;
+      // Filter expertise to only include current reviewers
+      const reviewerIdsArray = Array.from(uniqueReviewerIds);
+      const uniqueReviewersWithExpertise = new Set(
+        expertise?.filter(e => reviewerIdsArray.includes(e.user_id)).map(e => e.user_id) || []
+      ).size;
 
       setReviewerStats({
-        totalReviewers: reviewers?.length || 0,
+        totalReviewers: uniqueReviewerIds.size,
         reviewersWithExpertise: uniqueReviewersWithExpertise
       });
     } catch (error) {
@@ -147,6 +154,12 @@ export default function ReviewRounds() {
       // Get next round number
       const maxRound = rounds.reduce((max, r) => Math.max(max, r.round_number), 0);
       
+      console.log('[ReviewRounds] Creating round:', {
+        name: formData.name,
+        round_number: maxRound + 1,
+        start_date: formData.start_date
+      });
+
       await createReviewRound({
         name: formData.name,
         description: formData.description,
@@ -156,6 +169,7 @@ export default function ReviewRounds() {
         default_deadline: formData.default_deadline || undefined
       });
 
+      console.log('[ReviewRounds] Round created successfully');
       toast.success('Review round created');
       setShowCreateDialog(false);
       setFormData({
@@ -166,9 +180,12 @@ export default function ReviewRounds() {
         default_deadline: ''
       });
       fetchRounds();
-    } catch (error) {
-      console.error('Error creating round:', error);
-      toast.error('Failed to create review round');
+    } catch (error: any) {
+      console.error('[ReviewRounds] Error creating round:', error);
+      toast.error(
+        `Failed to create review round: ${error.message || 'Unknown error'}`,
+        { duration: 5000 }
+      );
     } finally {
       setCreating(false);
     }
