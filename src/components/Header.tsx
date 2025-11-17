@@ -43,12 +43,12 @@ const Header = () => {
               <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
               <Link to="/admin" className="px-3 py-2 hover:text-white/90 text-sm">Admin</Link>
               <Link to="/admin/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
-              <Link to="/review-dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
+              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
             </>
           )}
           {isReviewer && !isAdmin && (
             <>
-              <Link to="/review-dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
+              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
               <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
             </>
           )}
