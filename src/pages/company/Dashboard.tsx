@@ -302,13 +302,27 @@ export default function CompanyDashboard() {
   return (
     <PageLayout>
       <div className="container max-w-7xl py-8">
+        {companyUser?.company_name === 'ADMIN_OVERSIGHT' && (
+          <Alert className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Company Oversight Mode</AlertTitle>
+            <AlertDescription>
+              You are viewing the company oversight dashboard with administrator privileges. You can see all company revisions and certifications across the platform.
+            </AlertDescription>
+          </Alert>
+        )}
+
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold flex items-center gap-2">
               <Building2 className="h-8 w-8" />
-              Company Dashboard
+              {companyUser?.company_name === 'ADMIN_OVERSIGHT' ? 'Company Oversight' : 'Company Dashboard'}
             </h1>
-            <p className="text-muted-foreground mt-2">Manage your product revisions and certifications</p>
+            <p className="text-muted-foreground mt-2">
+              {companyUser?.company_name === 'ADMIN_OVERSIGHT' 
+                ? 'Monitor and manage all company product revisions and certifications'
+                : 'Manage your product revisions and certifications'}
+            </p>
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline">
@@ -422,9 +436,14 @@ export default function CompanyDashboard() {
               <TabsContent key={tab} value={tab} className="space-y-4 mt-6">
                 {tabRevisions.length === 0 ? (
                   <Card>
-                    <CardContent className="flex flex-col items-center justify-center py-12">
+                    <CardContent className="flex flex-col items-center justify-center py-12 text-center">
                       <FileEdit className="h-12 w-12 text-muted-foreground mb-4" />
-                      <p className="text-lg font-medium">No revisions</p>
+                      <p className="text-lg font-medium mb-2">No {tab === 'all' ? 'revisions' : `${tab} revisions`} yet</p>
+                      <p className="text-sm text-muted-foreground max-w-md">
+                        {companyUser?.company_name === 'ADMIN_OVERSIGHT' 
+                          ? 'When companies submit product revisions or certifications, they will appear here for oversight and verification.'
+                          : 'Submit a revision or certification for your products to get started. Once approved, your products will display a verified badge.'}
+                      </p>
                     </CardContent>
                   </Card>
                 ) : (
