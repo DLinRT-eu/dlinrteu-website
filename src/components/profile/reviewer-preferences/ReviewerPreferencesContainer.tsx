@@ -204,15 +204,19 @@ export function ReviewerPreferencesContainer({ userId }: ReviewerPreferencesCont
         timestamp: new Date().toISOString()
       });
 
-      const query = supabase
+      let query = supabase
         .from('reviewer_expertise')
         .delete()
         .eq('user_id', userId)
         .eq('preference_type', type);
 
-      if (type === 'category') query.eq('category', value);
-      else if (type === 'company') query.eq('company_id', value);
-      else if (type === 'product') query.eq('product_id', value);
+      if (type === 'category') {
+        query = query.eq('category', value);
+      } else if (type === 'company') {
+        query = query.eq('company_id', value);
+      } else if (type === 'product') {
+        query = query.eq('product_id', value);
+      }
 
       const { error } = await query;
 
@@ -270,15 +274,19 @@ export function ReviewerPreferencesContainer({ userId }: ReviewerPreferencesCont
         })
       );
 
-      const query = supabase
+      let query = supabase
         .from('reviewer_expertise')
         .update({ priority })
         .eq('user_id', userId)
         .eq('preference_type', type);
 
-      if (type === 'category') query.eq('category', value);
-      else if (type === 'company') query.eq('company_id', value);
-      else if (type === 'product') query.eq('product_id', value);
+      if (type === 'category') {
+        query = query.eq('category', value);
+      } else if (type === 'company') {
+        query = query.eq('company_id', value);
+      } else if (type === 'product') {
+        query = query.eq('product_id', value);
+      }
 
       const { error } = await query;
 
