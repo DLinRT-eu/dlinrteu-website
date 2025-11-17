@@ -10,17 +10,17 @@ RETURNS TABLE(
   product_id TEXT,
   review_round_id UUID,
   assigned_to UUID,
-  reviewer_first_name TEXT,
-  reviewer_last_name TEXT,
-  reviewer_email TEXT,
   status TEXT,
   priority TEXT,
-  deadline TIMESTAMPTZ,
+  deadline DATE,
   notes TEXT,
   started_at TIMESTAMPTZ,
   completed_at TIMESTAMPTZ,
   last_activity_at TIMESTAMPTZ,
-  created_at TIMESTAMPTZ
+  created_at TIMESTAMPTZ,
+  reviewer_first_name TEXT,
+  reviewer_last_name TEXT,
+  reviewer_email TEXT
 )
 LANGUAGE plpgsql
 SECURITY DEFINER
