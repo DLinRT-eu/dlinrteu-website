@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { formatDistanceToNow, format } from 'date-fns';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
 import OnboardingChecklist from '@/components/reviewer/OnboardingChecklist';
+import { useToast } from '@/hooks/use-toast';
 
 interface ReviewAssignment {
   id: string;
@@ -41,6 +42,7 @@ export default function ReviewerDashboard() {
   const { user, loading: authLoading } = useAuth();
   const { isReviewer, isAdmin, loading: rolesLoading } = useRoles();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('pending');
@@ -143,13 +145,97 @@ export default function ReviewerDashboard() {
   };
 
   const handleStartReview = async (reviewId: string) => {
-    const { error } = await supabase
-      .from('product_reviews')
-      .update({ status: 'in_progress', started_at: new Date().toISOString() })
-      .eq('id', reviewId);
+    try {
+      console.log('[Dashboard] Starting review:', reviewId);
+      
+      const { data, error } = await supabase
+        .rpc('start_review_secure', { review_id: reviewId });
 
-    if (!error) {
+      if (error) {
+        console.error('[Dashboard] RPC error:', error);
+        toast({
+          title: 'Error',
+          description: error.message || 'Failed to start review',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const result = data as { success: boolean; error?: string; message?: string };
+      
+      if (!result.success) {
+        console.error('[Dashboard] Review start failed:', result.error);
+        toast({
+          title: 'Cannot Start Review',
+          description: result.error || 'Failed to start review',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      console.log('[Dashboard] Review started successfully');
+      toast({
+        title: 'Success',
+        description: 'Review started successfully',
+      });
+      
       fetchReviews();
+    } catch (error: any) {
+      console.error('[Dashboard] Unexpected error:', error);
+      toast({
+        title: 'Error',
+        description: error.message || 'An unexpected error occurred',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleCompleteReview = async (reviewId: string) => {
+    try {
+      console.log('[Dashboard] Completing review:', reviewId);
+      
+      const { data, error } = await supabase
+        .rpc('complete_review_secure', { 
+          review_id: reviewId,
+          completion_notes: null 
+        });
+
+      if (error) {
+        console.error('[Dashboard] RPC error:', error);
+        toast({
+          title: 'Error',
+          description: error.message || 'Failed to complete review',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const result = data as { success: boolean; error?: string; message?: string };
+      
+      if (!result.success) {
+        console.error('[Dashboard] Review completion failed:', result.error);
+        toast({
+          title: 'Cannot Complete Review',
+          description: result.error || 'Failed to complete review',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      console.log('[Dashboard] Review completed successfully');
+      toast({
+        title: 'Success',
+        description: 'Review completed successfully',
+      });
+      
+      fetchReviews();
+    } catch (error: any) {
+      console.error('[Dashboard] Unexpected error:', error);
+      toast({
+        title: 'Error',
+        description: error.message || 'An unexpected error occurred',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -222,27 +308,39 @@ export default function ReviewerDashboard() {
             <p className="text-sm text-muted-foreground">{review.notes}</p>
           )}
 
-          <div className="flex gap-2">
-            {review.status === 'pending' && (
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2">
+              {review.status === 'pending' && (
+                <Button
+                  size="sm"
+                  onClick={() => handleStartReview(review.id)}
+                  className="w-full"
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  Start Review
+                </Button>
+              )}
+              {review.status === 'in_progress' && (
+                <Button
+                  size="sm"
+                  onClick={() => handleCompleteReview(review.id)}
+                  className="w-full"
+                >
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  Complete Review
+                </Button>
+              )}
               <Button
                 size="sm"
-                onClick={() => handleStartReview(review.id)}
+                variant="outline"
+                asChild
                 className="w-full"
               >
-                <Play className="mr-2 h-4 w-4" />
-                Start Review
+                <Link to={`/review/${review.product_id}`}>
+                  View Details
+                </Link>
               </Button>
-            )}
-            <Button
-              size="sm"
-              variant="outline"
-              asChild
-              className="w-full"
-            >
-              <Link to={`/review/${review.product_id}`}>
-                View Details
-              </Link>
-            </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
