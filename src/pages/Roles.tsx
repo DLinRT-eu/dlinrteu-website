@@ -326,18 +326,20 @@ export default function Roles() {
                       <p className="text-xs text-muted-foreground">Manage company products and personal tracking</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2 p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-500 mt-0.5">✓</span>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h4 className="font-semibold mb-3 text-red-600">✗ Incompatible Role Combinations</h4>
+                <div className="grid md:grid-cols-1 gap-3 text-sm">
+                  <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <span className="text-red-500 mt-0.5">✗</span>
                     <div>
-                      <p className="font-medium">Reviewer + Company</p>
-                      <p className="text-xs text-muted-foreground">Review products while managing your company's listings</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2 p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    <div>
-                      <p className="font-medium">All Three Roles</p>
-                      <p className="text-xs text-muted-foreground">Full user, reviewer, and company capabilities</p>
+                      <p className="font-medium">Reviewer + Company Representative</p>
+                      <p className="text-xs text-muted-foreground">
+                        These roles are incompatible due to conflict of interest. A company representative cannot review products objectively, 
+                        especially those of competitors. If you need to switch roles, contact an administrator to have your current role removed first.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -356,12 +358,14 @@ export default function Roles() {
                 </ul>
               </div>
 
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <h4 className="font-semibold mb-2 text-blue-900">No Role Conflicts</h4>
-                <p className="text-sm text-blue-800">
-                  All roles are designed to work together harmoniously. There are no conflicts or restrictions 
-                  when holding multiple roles. For example, you can review products from competitors while 
-                  managing your own company's products.
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <h4 className="font-semibold mb-2 text-amber-900">⚠️ Important: Role Conflicts</h4>
+                <p className="text-sm text-amber-800 mb-2">
+                  <strong>Reviewer and Company Representative roles cannot be held simultaneously</strong> due to conflict of interest.
+                </p>
+                <p className="text-sm text-amber-800">
+                  If you attempt to request a Company role while having the Reviewer role (or vice versa), you will need to 
+                  contact an administrator to remove your existing role before the new role can be granted.
                 </p>
               </div>
             </CardContent>
@@ -378,6 +382,13 @@ export default function Roles() {
                 <p className="text-sm text-muted-foreground">
                   Typically 1-3 business days. Reviewer requests from recognized institutions may be faster. 
                   Users with @dlinrt.eu email addresses are automatically approved as reviewers.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-1">Can I be both a Reviewer and Company Representative?</h4>
+                <p className="text-sm text-muted-foreground">
+                  No, these roles are incompatible due to conflict of interest. You must choose one or the other. 
+                  If you need to switch, contact an administrator to remove your current role first.
                 </p>
               </div>
               <div>

@@ -55,15 +55,19 @@ export default function RolesFAQ() {
                 <AccordionItem value="item-2">
                   <AccordionTrigger>Can I have multiple roles?</AccordionTrigger>
                   <AccordionContent>
-                    <p><strong>Important:</strong> User and Company roles are <strong>incompatible</strong> to prevent conflicts of interest.</p>
+                    <p><strong>Important:</strong> Reviewer and Company roles are <strong>incompatible</strong> to prevent conflicts of interest.</p>
                     <p className="mt-2">Compatible role combinations:</p>
                     <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
-                      <li>Reviewer + User (review products and track your adoptions)</li>
-                      <li>Reviewer + Company (not recommended, but allowed)</li>
-                      <li>Admin has all roles for testing purposes</li>
+                      <li>User + Reviewer (track products and review for quality)</li>
+                      <li>User + Company (manage company products and track personal products)</li>
+                      <li>Admin has access to all roles for platform management</li>
                     </ul>
                     <p className="mt-2 text-destructive font-medium">
-                      ❌ You cannot be both a User (tracking products) and a Company Representative
+                      ❌ You cannot be both a Reviewer and a Company Representative
+                    </p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      This restriction exists because company representatives have a vested interest in their products, 
+                      which would compromise the objectivity required for reviewing competing products.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -105,19 +109,23 @@ export default function RolesFAQ() {
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="item-user-company">
-                  <AccordionTrigger>Can I be both a User and Company Representative?</AccordionTrigger>
+                <AccordionItem value="item-reviewer-company">
+                  <AccordionTrigger>Can I be both a Reviewer and Company Representative?</AccordionTrigger>
                   <AccordionContent>
                     <p className="text-destructive font-medium mb-2">
-                      <strong>No.</strong> These roles are mutually exclusive to prevent conflicts of interest.
+                      <strong>No.</strong> These roles are incompatible due to conflict of interest.
                     </p>
-                    <p>If you have user product adoptions, you cannot request the Company role until you remove them.</p>
+                    <p>Company representatives have a vested interest in their own products and may be biased when reviewing competing products.</p>
                     <p className="mt-2">This ensures:</p>
                     <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
-                      <li>Unbiased user experiences</li>
-                      <li>Clear separation between users and vendors</li>
-                      <li>Trust in shared user feedback</li>
+                      <li>Objective and unbiased product reviews</li>
+                      <li>Clear separation between vendors and independent reviewers</li>
+                      <li>Trust in the review process</li>
+                      <li>Fair evaluation of all products</li>
                     </ul>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      If you need to switch roles, contact an administrator to remove your current role first.
+                    </p>
                   </AccordionContent>
                 </AccordionItem>
 

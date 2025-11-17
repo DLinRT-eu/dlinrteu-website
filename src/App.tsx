@@ -34,6 +34,7 @@ import ProductExperiences from "./pages/ProductExperiences";
 import Auth from "./pages/Auth";
 import Changelog from "./pages/Changelog";
 import Roles from "./pages/Roles";
+import RolesFAQ from "./pages/RolesFAQ";
 import ChangelogGenerator from "./pages/admin/ChangelogGenerator";
 import CompanyManagement from "./pages/admin/CompanyManagement";
 
@@ -106,6 +107,7 @@ const App = () => (
               <Route path="auth" element={<Auth />} />
               <Route path="changelog" element={<Changelog />} />
               <Route path="roles" element={<Roles />} />
+              <Route path="roles/faq" element={<RolesFAQ />} />
               
               {/* User Authenticated Routes - Protected by ApprovalGate */}
               <Route path="/profile" element={

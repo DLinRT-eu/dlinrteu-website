@@ -99,9 +99,14 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
       return;
     }
 
-    // Check for conflicting roles
+    // Check for conflicting roles - Reviewer and Company are incompatible
     if (requestedRole === 'company' && hasReviewerRole) {
       toast.error('Company role is incompatible with Reviewer role. Please contact an admin to remove your Reviewer role first.');
+      return;
+    }
+
+    if (requestedRole === 'reviewer' && hasCompanyRole) {
+      toast.error('Reviewer role is incompatible with Company role. Please contact an admin to remove your Company role first.');
       return;
     }
 
@@ -279,6 +284,14 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
                 <AlertTriangle className="h-4 w-4" />
                 <AlertDescription className="text-sm">
                   Company representative role is incompatible with Reviewer role due to conflict of interest. You will need to have your Reviewer role removed first.
+                </AlertDescription>
+              </Alert>
+            )}
+            {hasCompanyRole && requestedRole === 'reviewer' && (
+              <Alert variant="destructive" className="mt-2">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription className="text-sm">
+                  Reviewer role is incompatible with Company representative role due to conflict of interest. You will need to have your Company role removed first.
                 </AlertDescription>
               </Alert>
             )}
