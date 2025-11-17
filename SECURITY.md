@@ -1,13 +1,12 @@
-# Security Policy
+# Security Policy & Implementation
 
 ## Table of Contents
 
 1. [Reporting Vulnerabilities](#reporting-vulnerabilities)
-   - [How to Report](#how-to-report)
 2. [Scope](#scope)
-3. [Out of Scope](#out-of-scope)
-4. [Disclosure Policy](#disclosure-policy)
-5. [Thank you!](#thank-you)
+3. [Security Features](#security-features)
+4. [Security Checklist](#security-checklist)
+5. [Monitoring & Response](#monitoring--response)
 
 ---
 
@@ -16,6 +15,7 @@
 We take security, accuracy, and integrity very seriously.
 
 If you discover a security vulnerability or any critical issue that could compromise:
+
 - User data
 - Website stability
 - Information authenticity
@@ -24,13 +24,15 @@ If you discover a security vulnerability or any critical issue that could compro
 **Please report it confidentially** instead of publicly disclosing it.
 
 ### How to Report
-- Email: m.maspero at umcutrecht.nl 
+
+- Email: m.maspero at umcutrecht.nl
 - Alternatively, open a private GitHub [Security Advisory](https://docs.github.com/en/code-security/security-advisories) if available for this repository.
 
 Please include:
-- A clear description of the vulnerability.
-- Steps to reproduce (if applicable).
-- Any suggested fixes or mitigation ideas.
+
+- A clear description of the vulnerability
+- Steps to reproduce (if applicable)
+- Any suggested fixes or mitigation ideas
 
 We will respond within **5 business days** and aim to resolve any verified security issues promptly.
 
@@ -38,19 +40,20 @@ We will respond within **5 business days** and aim to resolve any verified secur
 
 ## Scope
 
-This project consists mainly of public, factual information.  
-However, security reports are **in-scope** if they involve:
+This project consists mainly of public, factual information.
+
+Security reports are **in-scope** if they involve:
+
 - Unauthorized access or modification of the repository
 - Malicious code or dependency vulnerabilities
 - Leakage of confidential contributor information
 - Data integrity risks (e.g., tampering of commercial product descriptions)
 - Misinformation that could lead to clinical safety risks
 
----
-
-## Out of Scope
+### Out of Scope
 
 The following are *not* considered security vulnerabilities:
+
 - Typos, broken links, or formatting issues
 - Disagreements over interpretation of technical data
 - Lack of endorsements or certifications from manufacturers
@@ -59,18 +62,114 @@ The following are *not* considered security vulnerabilities:
 
 ---
 
-## Disclosure Policy
+## Security Features
 
-We practice **coordinated disclosure**:
-- We will acknowledge receipt of your report.
-- We will work privately with you to understand and resolve the issue.
-- We will publicly disclose security incidents only after a fix is available.
-- You will be credited for responsible disclosure if desired.
+### 1. Rate Limiting
+
+- **Contact Form**: 3 attempts per 5 minutes
+- **Newsletter Signup**: Protected via database constraints
+- **Analytics**: Graceful handling of duplicate visitor tracking
+
+### 2. Content Security Policy (CSP)
+
+- Strict CSP headers prevent XSS attacks
+- Only allows trusted sources for scripts and styles
+- Blocks inline scripts and unsafe eval
+
+### 3. Security Headers
+
+- `Strict-Transport-Security`: Forces HTTPS connections
+- `X-Content-Type-Options`: Prevents MIME type sniffing
+- `X-Frame-Options`: Prevents clickjacking
+- `X-XSS-Protection`: Browser XSS protection
+- `Referrer-Policy`: Controls referrer information
+
+### 4. Input Validation
+
+- All forms use Zod schema validation
+- Server-side validation in edge functions
+- Sanitized database queries via Supabase client
+
+### 5. Database Security
+
+- Row Level Security (RLS) enabled on all tables
+- Public access policies only where necessary
+- Proper unique constraints to prevent duplicates
 
 ---
 
-## Thank you!
+## Security Checklist
+
+- [x] All external links use rel="noopener noreferrer" when target="_blank"
+- [x] User input is validated and sanitized (search, filters, forms)
+- [x] Dependencies are regularly audited (see CI)
+- [x] No secrets or credentials are committed to the repo
+- [x] Data files are checked for consistency and correctness
+- [x] Error boundaries are used for critical UI components
+- [x] All forms use proper CSRF and XSS protections
+- [x] Security policy is documented and up to date
+
+---
+
+## Monitoring & Response
+
+### Security Event Logging
+
+The system logs the following security events:
+
+- Failed form submissions
+- Rate limit violations
+- Unusual activity patterns
+
+### Response Procedures
+
+1. **Rate Limit Exceeded**: Automatic temporary blocking
+2. **Failed Submissions**: Logged with security context
+3. **Database Errors**: Graceful degradation with logging
+
+### Regular Maintenance
+
+**Weekly Tasks**:
+
+- Review security logs
+- Check for failed authentication attempts
+- Monitor database performance
+
+**Monthly Tasks**:
+
+- Review and update security policies
+- Test incident response procedures
+- Update security documentation
+
+### Database Cleanup
+
+- Automatic cleanup of analytics data older than 1 year
+- Regular monitoring of constraint violations
+- Proper error handling for duplicate entries
+
+### GDPR Compliance
+
+- Cookie consent management
+- User data deletion capabilities
+- Transparent data collection practices
+
+---
+
+## Disclosure Policy
+
+We practice **coordinated disclosure**:
+
+- We will acknowledge receipt of your report
+- We will work privately with you to understand and resolve the issue
+- We will publicly disclose security incidents only after a fix is available
+- You will be credited for responsible disclosure if desired
+
+---
+
+## Thank You!
 
 We greatly appreciate your help in making this project safe, reliable, and trustworthy for the entire radiotherapy community.
 
 ---
+
+**Last Updated**: November 17, 2025

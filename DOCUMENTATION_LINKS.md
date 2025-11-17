@@ -1,40 +1,41 @@
 # Documentation Overview
 
-## For Administrators
+Comprehensive guide to all documentation for the DLinRT.eu platform.
+
+## User Guides by Role
+
+### For Administrators
 
 - **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review rounds, security monitoring
 - **[Reviewer Assignment Guide](./docs/REVIEWER_ASSIGNMENT_GUIDE.md)** - Detailed assignment workflows
 
-## For Reviewers
+### For Reviewers
 
 - **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Review workflow, preferences, best practices
-
-## For Product Management
-
 - **[Review Guide](./docs/review/GUIDE.md)** - How to review and update products
+
+### For Contributors
+
+- **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute to the project
+- **[Code of Conduct](./CODE_OF_CONDUCT.md)** - Community standards
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
 
-## Technical Reference
+## Security & Compliance
 
-- **[Admin Routes](./docs/ADMIN_COMPANY_ROUTES.md)** - Complete route reference
-- **[Security](./SECURITY.md)** - Security policies and reporting
-
-## Database & Migrations
-
-- **[Supabase Migration Audit](./docs/SUPABASE_MIGRATION_AUDIT.md)** - Comprehensive audit of all 96 migrations
-- **[Migration Cleanup Guide](./docs/MIGRATION_CLEANUP_GUIDE.md)** - How to clean up duplicate migrations
-- **[Fix: User Registration Notifications](./docs/FIX_USER_REGISTRATION_NOTIFICATIONS.md)** - Internal error fix documentation
+- **[Security Policy](./SECURITY.md)** - Comprehensive security policy, features, monitoring, and reporting
 
 ---
 
 ## Key Application Routes
 
 ### Public Pages
+
 - `/products` - Browse all products
 - `/companies` - Company directory
 - `/timeline` - Product release timeline
 
 ### Admin Pages
+
 - `/admin` - Admin dashboard
 - `/admin/users` - User management
 - `/admin/reviews` - Review assignment
@@ -42,14 +43,16 @@
 - `/admin/companies` - Company management
 
 ### Reviewer Pages
+
 - `/reviewer` - Reviewer dashboard
 - `/reviewer/preferences` - Set expertise preferences
 - `/reviewer/due-reviews` - View assigned reviews
 
 ### Company Pages
+
 - `/company/dashboard` - Company dashboard
 - `/company/products` - Manage company products
 
 ---
 
-**Last Updated**: November 2025
+**Last Updated**: November 17, 2025

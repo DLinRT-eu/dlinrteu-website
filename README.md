@@ -11,15 +11,12 @@
 
 ## Documentation
 
-### For Administrators
-- [Admin Guide](./docs/ADMIN_GUIDE.md) - User management, review assignment, security monitoring
+- **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review assignment, security monitoring
+- **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Product review workflow and best practices
+- **[Review Guide](./docs/review/GUIDE.md)** - How to review and update product information
+- **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
 
-### For Reviewers  
-- [Reviewer Guide](./docs/REVIEWER_GUIDE.md) - Product review workflow and best practices
-
-### For Product Updates
-- [Review Guide](./docs/review/GUIDE.md) - How to review and update product information
-- [Manufacturer Templates](./MANUFACTURER_TEMPLATES.md) - Communication templates
+For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATION_LINKS.md)
 
 
 
