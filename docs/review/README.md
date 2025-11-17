@@ -5,6 +5,7 @@ Quick reference for reviewing and managing products on DLinRT.eu.
 ## Quick Links
 
 - **[Review Guide](./GUIDE.md)** - Complete guide for reviewing and adding products
+- **[Field Reference](../FIELD_REFERENCE.md)** - Definitions for every product data field
 
 ## Quick Start
 
