@@ -38,9 +38,7 @@ export default function Profile() {
   const [lastName, setLastName] = useState(profile?.last_name || '');
   const [institution, setInstitution] = useState(profile?.institution || '');
   const [specialization, setSpecialization] = useState(profile?.specialization || '');
-  const [bio, setBio] = useState(profile?.bio || '');
   const [linkedinUrl, setLinkedinUrl] = useState(profile?.linkedin_url || '');
-  const [publicDisplay, setPublicDisplay] = useState(profile?.public_display || false);
 
   // Sync form state with profile data when it loads
   useEffect(() => {
@@ -49,9 +47,7 @@ export default function Profile() {
       setLastName(profile.last_name || '');
       setInstitution(profile.institution || '');
       setSpecialization(profile.specialization || '');
-      setBio(profile.bio || '');
       setLinkedinUrl(profile.linkedin_url || '');
-      setPublicDisplay(profile.public_display || false);
       setLoadingError(null);
     }
   }, [profile]);
@@ -149,9 +145,7 @@ export default function Profile() {
       last_name: lastName,
       institution: institution || null,
       specialization: specialization || null,
-      bio: bio || null,
       linkedin_url: linkedinUrl || null,
-      public_display: publicDisplay,
     });
 
     setSaving(false);
@@ -496,20 +490,6 @@ export default function Profile() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="bio">Bio</Label>
-                  <Textarea
-                    id="bio"
-                    value={bio}
-                    onChange={(e) => setBio(e.target.value)}
-                    placeholder="Tell us about yourself..."
-                    rows={4}
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    This will be displayed on the About page if you enable public display.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
                   <Label htmlFor="linkedin">LinkedIn URL</Label>
                   <Input
                     id="linkedin"
@@ -517,23 +497,6 @@ export default function Profile() {
                     value={linkedinUrl}
                     onChange={(e) => setLinkedinUrl(e.target.value)}
                     placeholder="https://linkedin.com/in/yourprofile"
-                  />
-                </div>
-
-                <Separator />
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label htmlFor="public-display">Public Display</Label>
-                    <p className="text-sm text-muted-foreground">
-                      Show your profile on the About page (Admins and Reviewers only)
-                    </p>
-                  </div>
-                  <Switch
-                    id="public-display"
-                    checked={publicDisplay}
-                    onCheckedChange={setPublicDisplay}
-                    disabled={!isAdmin && !roles.includes('reviewer')}
                   />
                 </div>
 
