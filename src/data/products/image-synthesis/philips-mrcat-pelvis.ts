@@ -8,7 +8,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     company: "Philips",
     companyUrl: "https://www.philips.com/",
     productUrl: "https://www.philips.com/a-w/about/news/archive/standard/news/press/2020/20200929-philips-advances-oncology-solutions.html",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
     description: "AI-based MR-only simulation platform that generates synthetic CT images from MR scans for radiation therapy planning of pelvic cancers, streamlining the radiation therapy planning process with deep learning technology.",
     features: [
       "MR-only planning",

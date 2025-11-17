@@ -13,7 +13,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     category: "Image Synthesis",
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/therapanacea.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea.ts",
     website: "https://www.therapanacea.eu/our-products/mrbox/",
     anatomicalLocation: ["Pelvis", "Brain", "Head & Neck"],
     modality: ["MRI"],

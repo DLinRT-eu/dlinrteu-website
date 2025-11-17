@@ -9,7 +9,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     company: "Limbus AI",
     companyUrl: "https://limbus.ai/",
     productUrl: "https://limbus.ai/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/limbus.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/limbus.ts",
     description: "AI-powered auto-contouring software for fast and accurate target volume delineation in radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

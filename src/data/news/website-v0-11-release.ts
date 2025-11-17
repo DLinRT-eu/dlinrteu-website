@@ -19,7 +19,7 @@ In just one month, we've successfully gathered and documented **nearly 60 AI pro
 ### Enhanced Review System
 - **New Review Dashboard** at [/review](https://dlinrt.eu/review) for streamlined product verification
 - **Direct Review Links** added to every product page for easy access
-- **Comprehensive Documentation** available at our [review guide](https://github.com/DLinRT-eu/website/tree/main/docs/review)
+- **Comprehensive Documentation** available at our [review guide](https://github.com/DLinRT-eu/dlinrteu-website/tree/main/docs/review)
 
 ### Improved Analytics & Dashboards
 - **Advanced Auto-Contouring Analytics**: When filtering by auto-contouring, the dashboard now provides detailed structure counts categorized by type (OAR, GTV, Elective)
@@ -48,7 +48,7 @@ This first month has laid a solid foundation with robust infrastructure, compreh
 
 - **Review Products**: Visit our [review dashboard](https://dlinrt.eu/review) to help verify product information
 - **Explore Data**: Check out the [timeline visualization](https://dlinrt.eu/timeline) to see industry trends
-- **Read Documentation**: Learn more in our [comprehensive review guide](https://github.com/DLinRT-eu/website/blob/main/docs/review/GUIDE.md)
+- **Read Documentation**: Learn more in our [comprehensive review guide](https://github.com/DLinRT-eu/dlinrteu-website/blob/main/docs/review/GUIDE.md)
 
 Thank you to everyone who has contributed to making DLinRT.eu a valuable resource for the radiotherapy community!`
 };

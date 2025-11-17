@@ -24,7 +24,7 @@ export const GitHubUrlCard: React.FC<GitHubUrlCardProps> = ({ product }) => {
             No GitHub URL specified for this product. Consider adding one to help reviewers locate the source code.
           </p>
           <p className="text-xs text-yellow-600">
-            Expected format: https://github.com/DLinRT-eu/website/tree/main/src/data/products/{'{category}'}/{'{filename}'}
+            Expected format: https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/{'{category}'}/{'{filename}'}
           </p>
         </CardContent>
       </Card>

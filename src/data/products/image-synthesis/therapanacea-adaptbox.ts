@@ -8,7 +8,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu/",
     productUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
     description: "AI-powered software that provides one-click augmented CBCT images with organs-at-risk delineations for improved and more efficient adaptive radiotherapy workflow",
     features: [
       "CBCT auto-contouring",

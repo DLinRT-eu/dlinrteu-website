@@ -8,7 +8,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     company: "Wisdom Tech",
     companyUrl: "http://www.wisdom-tech.online/",
     productUrl: "http://www.wisdom-tech.online/view-16.html",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
     description: "AI solution for automatic contour segmentation in radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "NMPA",

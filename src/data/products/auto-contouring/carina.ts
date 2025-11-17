@@ -9,7 +9,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     company: "Carina AI",
     companyUrl: "https://www.carinaai.com/",
     productUrl: "https://www.carinaai.com/intcontour.html",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/carina.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/carina.ts",
     description: "Fully Customizable AI-Powered OAR & Target Segmentation with Automatic Quality Assurance",
     category: "Auto-Contouring",
     certification: "CE",

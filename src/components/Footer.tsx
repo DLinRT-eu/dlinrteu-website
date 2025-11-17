@@ -41,7 +41,7 @@ const Footer = () => {
               <Link to="/changelog" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
                 Changelog
               </Link>
-              <a href="https://github.com/DLinRT-eu/website" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
+              <a href="https://github.com/DLinRT-eu/dlinrteu-website" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
                 GitHub
               </a>
             </div>

@@ -12,7 +12,7 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/philips.png",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.philips.com/healthcare/solutions/computed-tomography",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/philips-smartdose.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/philips-smartdose.ts",
     anatomicalLocation: ["Whole body"],
     modality: "CT",
     diseaseTargeted: ["Cancer", "Pulmonary disease", "Cardiovascular disorders"],
