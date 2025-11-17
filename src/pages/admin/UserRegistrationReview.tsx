@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -6,24 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { CheckCircle2, XCircle, Clock, Mail, Building2, User, Calendar, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import type { Database } from "@/integrations/supabase/types";
 
-interface RegistrationNotification {
-  id: string;
-  user_id: string;
-  email: string;
-  notification_sent_at: string | null;
-  notification_status: string;
-  failure_reason: string | null;
-  verified: boolean;
-  verified_at: string | null;
-  verified_by: string | null;
-  created_at: string;
-  user?: {
-    first_name?: string;
-    last_name?: string;
-    email_confirmed_at?: string;
-  };
-}
+type RegistrationNotification = Database['public']['Functions']['get_registration_notifications_admin']['Returns'][number];
 
 export default function UserRegistrationReview() {
   const [notifications, setNotifications] = useState<RegistrationNotification[]>([]);
@@ -31,11 +16,7 @@ export default function UserRegistrationReview() {
   const [verifying, setVerifying] = useState<string | null>(null);
   const { toast } = useToast();
 
-  useEffect(() => {
-    loadNotifications();
-  }, []);
-
-  const loadNotifications = async () => {
+  const loadNotifications = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -46,29 +27,23 @@ export default function UserRegistrationReview() {
         throw new Error(`${error.message} (Code: ${error.code || 'unknown'})`);
       }
 
-      // Transform RPC data to match component interface
-      const transformedData = (data || []).map((item: any) => ({
-        ...item,
-        profiles: {
-          first_name: item.first_name,
-          last_name: item.last_name,
-          email: item.email,
-          approval_status: item.approval_status
-        }
-      }));
-
-      setNotifications(transformedData);
-    } catch (error: any) {
+      setNotifications(data || []);
+    } catch (error) {
       console.error('Error loading notifications:', error);
+      const message = error instanceof Error ? error.message : 'Check console for details';
       toast({
         title: 'Failed to Load Registrations',
-        description: error.message || 'Check console for details',
+        description: message,
         variant: 'destructive',
       });
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    loadNotifications();
+  }, [loadNotifications]);
 
   const verifyUser = async (userId: string, verified: boolean) => {
     try {
@@ -88,11 +63,12 @@ export default function UserRegistrationReview() {
 
       // Reload notifications
       await loadNotifications();
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error verifying user:', error);
+      const message = error instanceof Error ? error.message : 'Failed to verify user';
       toast({
         title: "Error",
-        description: error.message || "Failed to verify user",
+        description: message,
         variant: "destructive",
       });
     } finally {
@@ -196,7 +172,7 @@ export default function UserRegistrationReview() {
                           <div className="flex items-center gap-2 text-sm">
                             <User className="h-4 w-4 text-gray-500" />
                             <span className="font-medium">
-                              {(notification as any).profiles?.first_name || 'Unknown'} {(notification as any).profiles?.last_name || ''}
+                              {notification.first_name || 'Unknown'} {notification.last_name || ''}
                             </span>
                           </div>
                           
