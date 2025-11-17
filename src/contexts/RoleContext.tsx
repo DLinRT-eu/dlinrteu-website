@@ -1,8 +1,9 @@
-import { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
 import { useAuth } from './AuthContext';
 
-type AppRole = 'admin' | 'reviewer' | 'company';
+export type AppRole = Database['public']['Enums']['app_role'];
 
 interface RoleContextType {
   roles: AppRole[];
@@ -24,12 +25,13 @@ const RoleContext = createContext<RoleContextType | undefined>(undefined);
 
 export function RoleProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
+  const userId = user?.id ?? null;
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [activeRole, setActiveRoleState] = useState<AppRole | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchRoles = async () => {
-    if (!user) {
+  const fetchRoles = useCallback(async () => {
+    if (!userId) {
       setRoles([]);
       setActiveRoleState(null);
       setLoading(false);
@@ -41,26 +43,26 @@ export function RoleProvider({ children }: { children: ReactNode }) {
       let userRoles: AppRole[] = [];
 
       // 1) Try secure RPC (bypasses RLS)
-      const { data: rpcData, error: rpcError } = await supabase.rpc('current_user_roles' as any);
-      if (!rpcError && Array.isArray(rpcData)) {
-        userRoles = rpcData as AppRole[];
+      const { data: rpcData, error: rpcError } = await supabase.rpc('current_user_roles');
+      if (!rpcError && rpcData) {
+        userRoles = rpcData;
       } else {
         console.warn('[Roles] RPC failed or returned invalid data, falling back to direct select', rpcError);
         // 2) Fallback to direct select with RLS
         const { data: rows, error: selectError } = await supabase
-          .from('user_roles' as any)
+          .from('user_roles')
           .select('role')
-          .eq('user_id', user.id);
+          .eq('user_id', userId);
         if (!selectError && rows) {
-          userRoles = (rows || []).map((r: any) => r.role as AppRole);
+          userRoles = rows.map((r) => r.role);
         } else {
           console.warn('[Roles] Direct select failed, fallback to highest role RPC', selectError);
           // 3) Last resort: get single highest role via secure RPC
-          const { data: highest, error: highestError } = await supabase.rpc('get_user_role_secure' as any, {
-            user_id_param: user.id,
+          const { data: highest, error: highestError } = await supabase.rpc('get_user_role_secure', {
+            user_id_param: userId,
           });
           if (!highestError && highest) {
-            userRoles = [highest as AppRole];
+            userRoles = [highest];
           } else {
             console.error('[Roles] Highest role RPC failed:', highestError);
             throw highestError || selectError || rpcError;
@@ -95,11 +97,11 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
 
   useEffect(() => {
     fetchRoles();
-  }, [user?.id]);
+  }, [fetchRoles]);
 
   const getHighestRole = (roleList: AppRole[]): AppRole | null => {
     if (roleList.includes('admin')) return 'admin';
@@ -108,12 +110,12 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     return null;
   };
 
-  const setActiveRole = (role: AppRole) => {
+  const setActiveRole = useCallback((role: AppRole) => {
     if (roles.includes(role)) {
       setActiveRoleState(role);
       localStorage.setItem('activeRole', role);
     }
-  };
+  }, [roles]);
 
   const highestRole = useMemo(() => getHighestRole(roles), [roles]);
   
@@ -143,7 +145,7 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     loading,
     setActiveRole,
     refetch: fetchRoles,
-  }), [roles, activeRole, highestRole, isAdmin, isReviewer, isCompany, hasAdminRole, hasReviewerRole, hasCompanyRole, requiresRoleSelection, loading]);
+  }), [roles, activeRole, highestRole, isAdmin, isReviewer, isCompany, hasAdminRole, hasReviewerRole, hasCompanyRole, requiresRoleSelection, loading, fetchRoles, setActiveRole]);
 
   return <RoleContext.Provider value={value}>{children}</RoleContext.Provider>;
 }

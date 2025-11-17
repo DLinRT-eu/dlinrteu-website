@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
@@ -43,47 +43,33 @@ export default function ReviewerDashboard() {
   const { isReviewer, isAdmin, loading: rolesLoading } = useRoles();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const userId = user?.id ?? null;
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('pending');
   const [rounds, setRounds] = useState<ReviewRound[]>([]);
   const [hasExpertise, setHasExpertise] = useState(true);
 
-  useEffect(() => {
-    // Wait for both auth and roles to finish loading
-    if (authLoading || rolesLoading) return;
-    
-    if (!user || (!isReviewer && !isAdmin)) {
-      navigate('/auth');
-      return;
-    }
-
-    fetchReviews();
-    fetchRounds();
-    checkExpertise();
-  }, [user, isReviewer, isAdmin, authLoading, rolesLoading, navigate]);
-
-  const checkExpertise = async () => {
-    if (!user) return;
-    
+  const checkExpertise = useCallback(async () => {
+    if (!userId) return;
     const { data, error } = await supabase
       .from('reviewer_expertise')
       .select('id')
-      .eq('user_id', user.id)
+      .eq('user_id', userId)
       .limit(1);
 
     if (!error) {
       setHasExpertise((data?.length || 0) > 0);
     }
-  };
+  }, [userId]);
 
-  const fetchReviews = async () => {
-    if (!user) {
+  const fetchReviews = useCallback(async () => {
+    if (!userId) {
       console.log('[Dashboard] No user, skipping fetch');
       return;
     }
 
-    console.log('[Dashboard] Fetching reviews for user:', user.id);
+    console.log('[Dashboard] Fetching reviews for user:', userId);
     console.log('[Dashboard] isReviewer:', isReviewer, 'isAdmin:', isAdmin);
 
     try {
@@ -105,7 +91,7 @@ export default function ReviewerDashboard() {
       const { data, error } = await supabase
         .from('product_reviews')
         .select('*')
-        .eq('assigned_to', user.id)
+        .eq('assigned_to', userId)
         .order('deadline', { ascending: true, nullsFirst: false });
 
       if (!error && data) {
@@ -116,7 +102,7 @@ export default function ReviewerDashboard() {
         
         // Phase 3: Debug diagnostics
         const { data: debugData, error: debugError } = await supabase
-          .rpc('debug_reviewer_access', { reviewer_id: user.id });
+          .rpc('debug_reviewer_access', { reviewer_id: userId });
         
         if (!debugError) {
           console.log('[Dashboard] 🔍 Debug info:', debugData);
@@ -127,9 +113,9 @@ export default function ReviewerDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, isReviewer, isAdmin]);
 
-  const fetchRounds = async () => {
+  const fetchRounds = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('review_rounds')
@@ -142,9 +128,22 @@ export default function ReviewerDashboard() {
     } catch (error) {
       console.error('Error fetching rounds:', error);
     }
-  };
+  }, []);
 
-  const handleStartReview = async (reviewId: string) => {
+  useEffect(() => {
+    if (authLoading || rolesLoading) return;
+
+    if (!userId || (!isReviewer && !isAdmin)) {
+      navigate('/auth');
+      return;
+    }
+
+    fetchReviews();
+    fetchRounds();
+    checkExpertise();
+  }, [authLoading, rolesLoading, userId, isReviewer, isAdmin, navigate, fetchReviews, fetchRounds, checkExpertise]);
+
+  const handleStartReview = useCallback(async (reviewId: string) => {
     try {
       console.log('[Dashboard] Starting review:', reviewId);
       
@@ -188,9 +187,9 @@ export default function ReviewerDashboard() {
         variant: 'destructive',
       });
     }
-  };
+  }, [toast, fetchReviews]);
 
-  const handleCompleteReview = async (reviewId: string) => {
+  const handleCompleteReview = useCallback(async (reviewId: string) => {
     try {
       console.log('[Dashboard] Completing review:', reviewId);
       
@@ -237,7 +236,7 @@ export default function ReviewerDashboard() {
         variant: 'destructive',
       });
     }
-  };
+  }, [toast, fetchReviews]);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {

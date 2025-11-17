@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
@@ -29,29 +29,15 @@ export default function DueReviews() {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
+  const userId = user?.id ?? null;
 
-  useEffect(() => {
-    // Wait for roles to load
-    if (rolesLoading) {
-      return;
-    }
-
-    // Redirect if not reviewer or admin
-    if (!user || (!isReviewer && !isAdmin)) {
-      navigate('/auth');
-      return;
-    }
-
-    fetchReviews();
-  }, [user, isReviewer, isAdmin, rolesLoading]);
-
-  const fetchReviews = async () => {
-    if (!user) {
+  const fetchReviews = useCallback(async () => {
+    if (!userId) {
       console.log('[DueReviews] No user, skipping fetch');
       return;
     }
 
-    console.log('[DueReviews] Fetching reviews for user:', user.id);
+    console.log('[DueReviews] Fetching reviews for user:', userId);
     console.log('[DueReviews] isReviewer:', isReviewer, 'isAdmin:', isAdmin);
 
     try {
@@ -73,7 +59,7 @@ export default function DueReviews() {
       const { data, error } = await supabase
         .from('product_reviews')
         .select('*')
-        .eq('assigned_to', user.id)
+        .eq('assigned_to', userId)
         .order('deadline', { ascending: true, nullsFirst: false });
 
       if (!error && data) {
@@ -84,7 +70,7 @@ export default function DueReviews() {
         
         // Phase 3: Debug diagnostics
         const { data: debugData, error: debugError } = await supabase
-          .rpc('debug_reviewer_access', { reviewer_id: user.id });
+          .rpc('debug_reviewer_access', { reviewer_id: userId });
         
         if (!debugError) {
           console.log('[DueReviews] 🔍 Debug info:', debugData);
@@ -95,7 +81,20 @@ export default function DueReviews() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, isReviewer, isAdmin]);
+
+  useEffect(() => {
+    if (rolesLoading) {
+      return;
+    }
+
+    if (!userId || (!isReviewer && !isAdmin)) {
+      navigate('/auth');
+      return;
+    }
+
+    fetchReviews();
+  }, [rolesLoading, userId, isReviewer, isAdmin, navigate, fetchReviews]);
 
   const getDeadlineStatus = (deadline: string | null) => {
     if (!deadline) return null;

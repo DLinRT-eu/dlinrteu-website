@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRoles, type AppRole } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Shield, Building2, Eye, UserCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 const RoleSelection = () => {
-  const { availableRoles, activeRole, setActiveRole, loading, requiresRoleSelection } = useAuth();
+  const { roles, activeRole, setActiveRole, loading, requiresRoleSelection } = useRoles();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const RoleSelection = () => {
     }
   }, [loading, requiresRoleSelection, activeRole, navigate]);
 
-  const handleRoleSelect = (role: string) => {
+  const handleRoleSelect = (role: AppRole) => {
     setActiveRole(role);
     navigate('/', { replace: true });
   };
@@ -93,7 +93,7 @@ const RoleSelection = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {availableRoles.map((role) => {
+            {roles.map((role) => {
               const config = roleConfigs[role as keyof typeof roleConfigs];
               if (!config) return null;
 

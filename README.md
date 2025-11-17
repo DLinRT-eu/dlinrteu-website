@@ -14,6 +14,7 @@
 - **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review assignment, security monitoring
 - **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Product review workflow and best practices
 - **[Review Guide](./docs/review/GUIDE.md)** - How to review and update product information
+- **[Field Reference](./docs/FIELD_REFERENCE.md)** - Definitions for every product field (useful when updating `lastUpdated`/`lastRevised`)
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
 
 For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATION_LINKS.md)
@@ -27,11 +28,12 @@ For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATIO
 ### Product Structure Overview
 
 Products in DLinRT.eu support:
+
 - **Multiple Categories**: Products can belong to multiple categories using the `secondaryCategories` field
 - **Multiple Versions**: Different versions of the same product can be tracked with separate `version` and `releaseDate` fields
 - **Comprehensive Data**: Each product includes regulatory, technical, market, and evidence information
 
-### Steps to Add a New Product:
+### Steps to Add a New Product
 
 1. **Determine the Appropriate Category**
    - Products are organized by primary category in `src/data/products/` directory
@@ -63,6 +65,12 @@ Products in DLinRT.eu support:
 6. **Add the Company Logo**
    - Place the company logo in the `/public/logos/` directory
    - Use a consistent naming scheme: `company-name.png`
+
+### Change Tracking & Dates
+
+- Update `lastUpdated` every time you edit any field in the product entry (structure, evidence, regulatory, etc.).
+- Refresh `lastRevised` only after a reviewer-level QA pass—the value feeds the `/review` listing table.
+- When in doubt, consult the [Field Reference](./docs/FIELD_REFERENCE.md) for per-field rules and allowed values.
 
 For complete examples, refer to the example templates in `src/data/products/examples/`.
 
@@ -96,6 +104,7 @@ npm run dev
 ```
 
 You can also use GitHub Codespaces for development:
+
 1. Navigate to the repository
 2. Click "Code" > "Codespaces"
 3. Create a new codespace to start developing
@@ -106,10 +115,8 @@ This project is licensed under the GNU AGPL-3.0 License - see the LICENSE file f
 
 ## Team
 
-<div align="center">
-  <p><strong>Matteo Maspero</strong></p>
-  <p>Project Lead - Computational Imaging Group Utrecht</p>
-</div>
+**Matteo Maspero**  
+Project Lead – Computational Imaging Group Utrecht
 
 Feel free to contact the Project Lead in case you would like to be involved!
 

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,6 +18,11 @@ import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, UserPlus, Search, Filter } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
+
+type ReviewerWithWorkload = Database['public']['Functions']['get_reviewers_with_workload_admin']['Returns'][number];
+type AdminSecureReview = Database['public']['Functions']['get_product_reviews_admin_secure']['Returns'][number];
+type ProductReviewRow = Database['public']['Tables']['product_reviews']['Row'];
+type ProfileRow = Database['public']['Tables']['profiles']['Row'];
 
 interface Reviewer {
   id: string;
@@ -47,6 +53,7 @@ export default function ReviewAssignment() {
   const { isAdmin, loading: rolesLoading } = useRoles();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const userId = user?.id ?? null;
   const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,32 +69,7 @@ export default function ReviewAssignment() {
 
   const products = ALL_PRODUCTS;
 
-  useEffect(() => {
-    // Wait for both auth and roles to load
-    if (authLoading || rolesLoading) {
-      return;
-    }
-
-    // Redirect if not authenticated or not admin
-    if (!user || !isAdmin) {
-      navigate('/');
-      return;
-    }
-
-    // Fetch data only when ready
-    const loadData = async () => {
-      setLoading(true);
-      try {
-        await Promise.all([fetchReviewers(), fetchReviews()]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [user, isAdmin, authLoading, rolesLoading]);
-
-  const fetchReviewers = async () => {
+  const fetchReviewers = useCallback(async () => {
     const { data, error } = await supabase.rpc('get_reviewers_with_workload_admin');
     
     if (error) {
@@ -100,18 +82,18 @@ export default function ReviewAssignment() {
       return;
     }
 
-    const reviewersWithCount = (data || []).map((reviewer: any) => ({
+    const reviewersWithCount = (data || []).map((reviewer: ReviewerWithWorkload) => ({
       id: reviewer.reviewer_id,
       first_name: reviewer.first_name,
       last_name: reviewer.last_name,
       email: reviewer.email,
-      assignedCount: Number(reviewer.total_assigned) || 0
+      assignedCount: reviewer.total_assigned ?? 0,
     }));
 
     setReviewers(reviewersWithCount);
-  };
+  }, [toast]);
 
-  const fetchReviews = async () => {
+  const fetchReviews = useCallback(async () => {
     try {
       // Try direct SELECT first
       const { data: reviewsData, error: reviewsError } = await supabase
@@ -131,7 +113,7 @@ export default function ReviewAssignment() {
         }
 
         // Map RPC results to expected format
-        const reviewsWithReviewer = (rpcData || []).map((r: any) => ({
+        const reviewsWithReviewer = (rpcData || []).map((r: AdminSecureReview) => ({
           id: r.id,
           product_id: r.product_id,
           review_round_id: r.review_round_id,
@@ -158,10 +140,14 @@ export default function ReviewAssignment() {
 
       // Two-step fetch: collect assigned_to IDs and fetch profiles
       const assignedToIds = Array.from(
-        new Set(reviewsData?.map(r => r.assigned_to).filter(Boolean) || [])
+        new Set(
+          (reviewsData || [])
+            .map((review: ProductReviewRow) => review.assigned_to)
+            .filter((id): id is string => Boolean(id))
+        )
       );
 
-      let profilesMap = new Map();
+      const profilesMap = new Map<string, Pick<ProfileRow, 'first_name' | 'last_name' | 'email'>>();
       if (assignedToIds.length > 0) {
         const { data: profilesData, error: profilesError } = await supabase
           .from('profiles')
@@ -177,22 +163,45 @@ export default function ReviewAssignment() {
         }
       }
 
-      const reviewsWithReviewer = (reviewsData || []).map(review => ({
+        const reviewsWithReviewer = (reviewsData || []).map((review: ProductReviewRow) => ({
         ...review,
         reviewer: review.assigned_to ? profilesMap.get(review.assigned_to) : null,
       }));
 
       setReviews(reviewsWithReviewer);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error fetching reviews:', error);
+      const message = error instanceof Error ? error.message : 'Failed to load reviews. Please verify your admin role in System Diagnostics.';
       toast({
         title: 'Permission Denied',
-        description: error.message || 'Failed to load reviews. Please verify your admin role in System Diagnostics.',
+        description: message,
         variant: 'destructive',
       });
       setReviews([]);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    if (authLoading || rolesLoading) {
+      return;
+    }
+
+    if (!userId || !isAdmin) {
+      navigate('/');
+      return;
+    }
+
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        await Promise.all([fetchReviewers(), fetchReviews()]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [authLoading, rolesLoading, userId, isAdmin, navigate, fetchReviewers, fetchReviews]);
 
   const handleAssignReview = async () => {
     if (!selectedProduct || !selectedReviewer) {
@@ -230,11 +239,12 @@ export default function ReviewAssignment() {
       
       fetchReviews();
       fetchReviewers();
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error assigning review:', error);
+      const message = error instanceof Error ? error.message : 'Failed to assign review. Check console for details.';
       toast({
         title: 'Assignment Failed',
-        description: error.message || 'Failed to assign review. Check console for details.',
+        description: message,
         variant: 'destructive',
       });
     }
@@ -244,7 +254,7 @@ export default function ReviewAssignment() {
     const review = reviews.find(r => r.id === reviewId);
     if (!review) return;
 
-    const updates: any = { status: newStatus };
+    const updates: Database['public']['Tables']['product_reviews']['Update'] = { status: newStatus };
     
     // Track timing
     if (newStatus === 'in_progress' && !review.started_at) {
@@ -332,11 +342,12 @@ export default function ReviewAssignment() {
 
       fetchReviews();
       fetchReviewers();
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error deleting review:', error);
+      const message = error instanceof Error ? error.message : 'Failed to delete assignment. Please verify your admin permissions.';
       toast({
         title: 'Delete Failed',
-        description: error.message || 'Failed to delete assignment. Please verify your admin permissions.',
+        description: message,
         variant: 'destructive',
       });
     }

@@ -1388,6 +1388,10 @@ export type Database = {
       cleanup_old_analytics_data: { Args: never; Returns: undefined }
       cleanup_old_contact_submissions: { Args: never; Returns: undefined }
       cleanup_old_security_events: { Args: never; Returns: undefined }
+      complete_review_secure: {
+        Args: { completion_notes?: string | null; review_id: string }
+        Returns: Json
+      }
       create_notification: {
         Args: {
           p_link?: string
@@ -1397,6 +1401,10 @@ export type Database = {
           p_user_id: string
         }
         Returns: string
+      }
+      current_user_roles: {
+        Args: never
+        Returns: Database["public"]["Enums"]["app_role"][]
       }
       debug_reviewer_access: { Args: { reviewer_id: string }; Returns: Json }
       delete_product_review_admin: {
@@ -1541,13 +1549,14 @@ export type Database = {
       get_reviewers_with_workload_admin: {
         Args: never
         Returns: {
-          active_assignments: number
+          reviewer_id: string
           email: string
           first_name: string
-          id: string
-          institution: string
           last_name: string
-          roles: string[]
+          total_assigned: number
+          completed: number
+          in_progress: number
+          pending: number
         }[]
       }
       get_security_events_admin: {
@@ -1633,6 +1642,10 @@ export type Database = {
           p_product_ids: string[]
           p_reviewer_id: string
         }
+        Returns: Json
+      }
+      start_review_secure: {
+        Args: { review_id: string }
         Returns: Json
       }
       schedule_analytics_cleanup: { Args: never; Returns: undefined }

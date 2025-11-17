@@ -8,11 +8,13 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 
 - **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review rounds, security monitoring
 - **[Reviewer Assignment Guide](./docs/REVIEWER_ASSIGNMENT_GUIDE.md)** - Detailed assignment workflows
+- **[Field Reference](./docs/FIELD_REFERENCE.md)** - When to update `lastUpdated` vs `lastRevised`
 
 ### For Reviewers
 
 - **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Review workflow, preferences, best practices
 - **[Review Guide](./docs/review/GUIDE.md)** - How to review and update products
+- **[Field Reference](./docs/FIELD_REFERENCE.md)** - Authoritative definitions for every product field
 
 ### For Contributors
 
@@ -23,6 +25,10 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 ## Security & Compliance
 
 - **[Security Policy](./SECURITY.md)** - Comprehensive security policy, features, monitoring, and reporting
+
+## Field & Data Reference
+
+- **[Field Reference](./docs/FIELD_REFERENCE.md)** - Complete schema details, allowed values, and change-tracking guidance
 
 ---
 
