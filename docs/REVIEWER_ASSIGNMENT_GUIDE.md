@@ -799,7 +799,7 @@ Planned improvements:
 For questions, issues, or feature requests:
 - **Email**: info@dlinrt.eu
 - **GitHub**: Open an issue
-- **Documentation**: https://github.com/DLinRT-eu/website/docs
+- **Documentation**: https://github.com/DLinRT-eu/dlinrteu-website/docs
 
 ## Changelog
 

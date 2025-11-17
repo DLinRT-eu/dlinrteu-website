@@ -109,7 +109,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
     lastRevised: "2025-09-01",
     source: "Automatically retrieved and verified",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },
   {
@@ -166,7 +166,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2024-12-20",
     lastRevised: "2025-09-01",
     source: "Automatically retrieved",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   }
 ];
