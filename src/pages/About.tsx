@@ -135,11 +135,13 @@ const About = () => {
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• Browse comprehensive product database</li>
-                  <li>• Track products you've adopted</li>
-                  <li>• Share your product experiences</li>
-                  <li>• Access regulatory resources</li>
-                  <li>• View market insights and analytics</li>
-                  <li>• Request reviewer or company roles</li>
+                  <li>• View detailed product information and model cards</li>
+                  <li>• Track products you use or have adopted</li>
+                  <li>• Specify your relationship with products</li>
+                  <li>• Optionally share experiences with community</li>
+                  <li>• View other users' product experiences</li>
+                  <li>• Export product data and analytics</li>
+                  <li>• Request reviewer or company roles from profile</li>
                 </ul>
               </CardContent>
             </Card>
@@ -147,22 +149,24 @@ const About = () => {
             {/* Reviewer Card */}
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-3">
-                  <Eye className="h-6 w-6 text-blue-500" />
+                <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mb-3">
+                  <Eye className="h-6 w-6 text-purple-500" />
                 </div>
                 <CardTitle>Reviewer</CardTitle>
                 <CardDescription>
-                  Validate AI/ML products for regulatory compliance
+                  Validate and improve product information quality
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Access dedicated review dashboard</li>
-                  <li>• Review assigned AI/ML products</li>
-                  <li>• Validate regulatory compliance</li>
-                  <li>• View user product experiences</li>
-                  <li>• Provide detailed feedback</li>
-                  <li>• Track review assignments and deadlines</li>
+                  <li>• Access dedicated reviewer dashboard</li>
+                  <li>• Review assigned products for accuracy</li>
+                  <li>• Set expertise preferences (categories, companies, products)</li>
+                  <li>• View all user product experiences and feedback</li>
+                  <li>• Suggest improvements via review mode</li>
+                  <li>• Track review assignments and progress</li>
+                  <li>• Submit feedback on product information</li>
+                  <li>• All regular user capabilities</li>
                 </ul>
               </CardContent>
             </Card>
@@ -175,17 +179,19 @@ const About = () => {
                 </div>
                 <CardTitle>Company Representative</CardTitle>
                 <CardDescription>
-                  Manage your company's product portfolio
+                  Manage your company's product information
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Access company-specific dashboard</li>
-                  <li>• Update product information</li>
-                  <li>• View user adoption statistics</li>
-                  <li>• Submit product revisions</li>
-                  <li>• Respond to user feedback</li>
-                  <li>• Track verification status</li>
+                  <li>• Access company products dashboard</li>
+                  <li>• Submit product information updates and revisions</li>
+                  <li>• View users who adopted your products (with consent)</li>
+                  <li>• Access user feedback and experience notes</li>
+                  <li>• Contact users who opted in for communication</li>
+                  <li>• Track revision status and approval</li>
+                  <li>• Max 3 representatives per company</li>
+                  <li>• All regular user capabilities</li>
                 </ul>
               </CardContent>
             </Card>
@@ -198,17 +204,19 @@ const About = () => {
                 </div>
                 <CardTitle>Administrator</CardTitle>
                 <CardDescription>
-                  Full platform access and user management
+                  Full platform management and oversight
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Full system access and control</li>
-                  <li>• Manage user roles and permissions</li>
-                  <li>• Oversee product reviews</li>
-                  <li>• Assign review tasks</li>
-                  <li>• Monitor security and compliance</li>
-                  <li>• Access analytics and audit logs</li>
+                  <li>• Manage all user accounts and roles</li>
+                  <li>• Approve role requests (reviewer, company)</li>
+                  <li>• Create and manage review rounds</li>
+                  <li>• Assign review tasks to reviewers</li>
+                  <li>• Access security events and audit logs</li>
+                  <li>• Monitor user registrations</li>
+                  <li>• Oversee company certifications</li>
+                  <li>• Full access to all platform features</li>
                 </ul>
               </CardContent>
             </Card>
