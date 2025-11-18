@@ -1,17 +1,27 @@
 
 import React, { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
-import { Search, Building, ArrowDownAZ, ArrowDownZA } from 'lucide-react';
+import { Search, Building, ArrowDownAZ, ArrowDownZA, Download, FileSpreadsheet, FileText, Code } from 'lucide-react';
 import CompanyCard from '@/components/CompanyCard';
 import dataService from '@/services/DataService';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import Footer from '@/components/Footer';
+import { useToast } from '@/hooks/use-toast';
+import { exportCompaniesToExcel, exportCompaniesToPDF, exportCompaniesToJSON, CompanyExportData } from '@/utils/companyExport';
 
 const Companies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortAscending, setSortAscending] = useState(true);
   const [sortActive, setSortActive] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const { toast } = useToast();
 
   // Get companies and their products, filtering out companies with no products
   const companies = useMemo(() => {
@@ -86,6 +96,66 @@ const Companies = () => {
     setSortAscending(prev => !prev);
   };
 
+  const prepareExportData = (companies: typeof sortedCompanies): CompanyExportData[] => {
+    return companies.map(company => {
+      const categories = [...new Set(company.products.map(p => p.category))];
+      const ceCount = company.products.filter(p => p.regulatory?.ce?.status).length;
+      const fdaCount = company.products.filter(p => {
+        const fda = p.regulatory?.fda;
+        return typeof fda === 'string' ? fda : fda?.status;
+      }).length;
+
+      return {
+        company: {
+          id: company.id,
+          name: company.name,
+          website: company.website,
+          logoUrl: company.logoUrl,
+          description: company.description,
+          productIds: company.products.map(p => p.id),
+        },
+        products: company.products,
+        statistics: {
+          totalProducts: company.productCount,
+          categories,
+          certifications: {
+            ce: ceCount,
+            fda: fdaCount,
+          },
+        },
+      };
+    });
+  };
+
+  const handleExport = async (format: 'excel' | 'pdf' | 'json') => {
+    setIsExporting(true);
+    try {
+      const exportData = prepareExportData(sortedCompanies);
+      
+      if (format === 'excel') {
+        exportCompaniesToExcel(exportData);
+      } else if (format === 'pdf') {
+        exportCompaniesToPDF(exportData);
+      } else if (format === 'json') {
+        exportCompaniesToJSON(exportData);
+      }
+
+      toast({
+        title: 'Export successful',
+        description: `Downloaded ${sortedCompanies.length} companies with their products as ${format.toUpperCase()}.`,
+      });
+    } catch (error) {
+      console.error('Export error:', error);
+      toast({
+        title: 'Export failed',
+        description: 'There was an error exporting the data. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <SEO 
@@ -126,6 +196,30 @@ const Companies = () => {
           >
             {sortAscending ? <ArrowDownAZ className="h-4 w-4" /> : <ArrowDownZA className="h-4 w-4" />}
           </Button>
+
+          {/* Export dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" disabled={isExporting || sortedCompanies.length === 0}>
+                <Download className="h-4 w-4 mr-2" />
+                {isExporting ? 'Exporting...' : 'Export'}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={() => handleExport('excel')}>
+                <FileSpreadsheet className="h-4 w-4 mr-2" />
+                Export to Excel
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('pdf')}>
+                <FileText className="h-4 w-4 mr-2" />
+                Export to PDF
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('json')}>
+                <Code className="h-4 w-4 mr-2" />
+                Export to JSON
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Companies count */}

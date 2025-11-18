@@ -450,6 +450,57 @@ export type Database = {
         }
         Relationships: []
       }
+      github_file_checks: {
+        Row: {
+          check_result: Json | null
+          checked_at: string | null
+          created_at: string | null
+          file_changed: boolean | null
+          file_url: string
+          id: string
+          last_modified: string | null
+          review_id: string | null
+          triggered_revision: boolean | null
+        }
+        Insert: {
+          check_result?: Json | null
+          checked_at?: string | null
+          created_at?: string | null
+          file_changed?: boolean | null
+          file_url: string
+          id?: string
+          last_modified?: string | null
+          review_id?: string | null
+          triggered_revision?: boolean | null
+        }
+        Update: {
+          check_result?: Json | null
+          checked_at?: string | null
+          created_at?: string | null
+          file_changed?: boolean | null
+          file_url?: string
+          id?: string
+          last_modified?: string | null
+          review_id?: string | null
+          triggered_revision?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "github_file_checks_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "product_reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "github_file_checks_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       mfa_activity_log: {
         Row: {
           action: string
@@ -577,11 +628,14 @@ export type Database = {
         Row: {
           assigned_at: string | null
           assigned_to: string | null
+          auto_revision_triggered: boolean | null
           company_reviewed_at: string | null
           company_reviewed_by: string | null
           completed_at: string | null
           created_at: string | null
           deadline: string | null
+          github_file_url: string | null
+          github_last_modified: string | null
           id: string
           last_activity_at: string | null
           notes: string | null
@@ -597,11 +651,14 @@ export type Database = {
         Insert: {
           assigned_at?: string | null
           assigned_to?: string | null
+          auto_revision_triggered?: boolean | null
           company_reviewed_at?: string | null
           company_reviewed_by?: string | null
           completed_at?: string | null
           created_at?: string | null
           deadline?: string | null
+          github_file_url?: string | null
+          github_last_modified?: string | null
           id?: string
           last_activity_at?: string | null
           notes?: string | null
@@ -617,11 +674,14 @@ export type Database = {
         Update: {
           assigned_at?: string | null
           assigned_to?: string | null
+          auto_revision_triggered?: boolean | null
           company_reviewed_at?: string | null
           company_reviewed_by?: string | null
           completed_at?: string | null
           created_at?: string | null
           deadline?: string | null
+          github_file_url?: string | null
+          github_last_modified?: string | null
           id?: string
           last_activity_at?: string | null
           notes?: string | null
@@ -856,6 +916,13 @@ export type Database = {
             referencedRelation: "product_reviews"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "review_checklist_items_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
+            referencedColumns: ["id"]
+          },
         ]
       }
       review_comments: {
@@ -889,6 +956,13 @@ export type Database = {
             columns: ["review_id"]
             isOneToOne: false
             referencedRelation: "product_reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "review_comments_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
             referencedColumns: ["id"]
           },
         ]
@@ -1146,11 +1220,11 @@ export type Database = {
           created_at: string | null
           department: string | null
           experience_notes: string | null
-          relationship_status: string
-          relationship_status_other: string | null
           id: string
           institution: string | null
           product_id: string
+          relationship_status: string
+          relationship_status_other: string | null
           updated_at: string | null
           use_case: string | null
           user_id: string
@@ -1163,11 +1237,11 @@ export type Database = {
           created_at?: string | null
           department?: string | null
           experience_notes?: string | null
-          relationship_status?: string
-          relationship_status_other?: string | null
           id?: string
           institution?: string | null
           product_id: string
+          relationship_status?: string
+          relationship_status_other?: string | null
           updated_at?: string | null
           use_case?: string | null
           user_id: string
@@ -1180,11 +1254,11 @@ export type Database = {
           created_at?: string | null
           department?: string | null
           experience_notes?: string | null
-          relationship_status?: string
-          relationship_status_other?: string | null
           id?: string
           institution?: string | null
           product_id?: string
+          relationship_status?: string
+          relationship_status_other?: string | null
           updated_at?: string | null
           use_case?: string | null
           user_id?: string
@@ -1338,6 +1412,23 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews_with_github_tracking: {
+        Row: {
+          assigned_at: string | null
+          assigned_to: string | null
+          auto_revision_triggered: boolean | null
+          check_count: number | null
+          github_file_url: string | null
+          github_last_modified: string | null
+          id: string | null
+          last_check_at: string | null
+          product_id: string | null
+          reviewer_email: string | null
+          reviewer_name: string | null
+          status: string | null
+        }
+        Relationships: []
+      }
       user_product_experiences: {
         Row: {
           adoption_date: string | null
@@ -1346,14 +1437,14 @@ export type Database = {
           department: string | null
           email: string | null
           experience_notes: string | null
-          relationship_status: string | null
-          relationship_status_other: string | null
           first_name: string | null
           id: string | null
           institution: string | null
           last_name: string | null
           linkedin_url: string | null
           product_id: string | null
+          relationship_status: string | null
+          relationship_status_other: string | null
           specialization: string | null
           use_case: string | null
           user_id: string | null
@@ -1363,7 +1454,7 @@ export type Database = {
     }
     Functions: {
       admin_health_check: { Args: never; Returns: Json }
-      auto_grant_dlinrt_reviewer_role: { Args: never; Returns: undefined }
+      batch_check_github_files: { Args: never; Returns: Json }
       can_access_company: {
         Args: { _company_id: string; _user_id: string }
         Returns: boolean
@@ -1385,11 +1476,19 @@ export type Database = {
         Args: { user_id_param: string }
         Returns: boolean
       }
+      check_github_file_modified: {
+        Args: {
+          current_file_modified: string
+          github_file_url: string
+          review_id: string
+        }
+        Returns: Json
+      }
       cleanup_old_analytics_data: { Args: never; Returns: undefined }
-      cleanup_old_contact_submissions: { Args: never; Returns: undefined }
-      cleanup_old_security_events: { Args: never; Returns: undefined }
+      cleanup_old_contact_submissions: { Args: never; Returns: number }
+      cleanup_old_security_events: { Args: never; Returns: number }
       complete_review_secure: {
-        Args: { completion_notes?: string | null; review_id: string }
+        Args: { completion_notes?: string; review_id: string }
         Returns: Json
       }
       create_notification: {
@@ -1402,14 +1501,10 @@ export type Database = {
         }
         Returns: string
       }
-      current_user_roles: {
-        Args: never
-        Returns: Database["public"]["Enums"]["app_role"][]
-      }
       debug_reviewer_access: { Args: { reviewer_id: string }; Returns: Json }
       delete_product_review_admin: {
         Args: { review_id: string }
-        Returns: Json
+        Returns: boolean
       }
       expire_old_invitations: { Args: never; Returns: undefined }
       get_analytics_daily: {
@@ -1440,11 +1535,13 @@ export type Database = {
         Args: never
         Returns: {
           action_type: string
+          admin_email: string
+          admin_user_id: string
           created_at: string
           details: Json
           id: string
-          performed_by_email: string
-          target_user_email: string
+          target_email: string
+          target_user_id: string
         }[]
       }
       get_highest_role: {
@@ -1455,34 +1552,24 @@ export type Database = {
         Args: never
         Returns: {
           assigned_at: string
-          assigned_to: string
           completed_at: string
-          created_at: string
-          deadline: string
           id: string
-          last_activity_at: string
-          notes: string
-          priority: string
           product_id: string
           review_round_id: string
-          started_at: string
+          round_name: string
           status: string
         }[]
       }
       get_pending_role_requests_admin: {
         Args: never
         Returns: {
-          company_id: string
           created_at: string
           email: string
           first_name: string
           id: string
-          institution: string
           justification: string
           last_name: string
           requested_role: Database["public"]["Enums"]["app_role"]
-          reviewed_at: string
-          reviewed_by: string
           status: string
           user_id: string
         }[]
@@ -1528,35 +1615,28 @@ export type Database = {
       get_review_rounds_admin: {
         Args: never
         Returns: {
-          completed_count: number
+          completed_reviews: number
           created_at: string
-          created_by: string
-          default_deadline: string
           description: string
           end_date: string
           id: string
-          in_progress_count: number
           name: string
-          pending_count: number
-          round_number: number
           start_date: string
           status: string
-          total_assignments: number
           total_products: number
-          updated_at: string
         }[]
       }
       get_reviewers_with_workload_admin: {
         Args: never
         Returns: {
-          reviewer_id: string
+          completed: number
           email: string
           first_name: string
-          last_name: string
-          total_assigned: number
-          completed: number
           in_progress: number
+          last_name: string
           pending: number
+          reviewer_id: string
+          total_assigned: number
         }[]
       }
       get_security_events_admin: {
@@ -1564,14 +1644,11 @@ export type Database = {
         Returns: {
           created_at: string
           details: Json
+          email: string
           event_type: string
           id: string
-          ip_hash: string
-          notes: string
-          resolved_at: string
           severity: string
-          url: string
-          user_agent_hash: string
+          user_id: string
         }[]
       }
       get_user_role_secure: {
@@ -1584,10 +1661,10 @@ export type Database = {
           created_at: string
           email: string
           first_name: string
-          id: string
           institution: string
           last_name: string
           roles: string[]
+          user_id: string
         }[]
       }
       get_users_with_roles_admin_only: {
@@ -1596,16 +1673,16 @@ export type Database = {
           created_at: string
           email: string
           first_name: string
-          id: string
           institution: string
           last_name: string
           roles: string[]
+          user_id: string
         }[]
       }
       has_any_role: {
         Args: {
-          _roles: Database["public"]["Enums"]["app_role"][]
-          _user_id: string
+          roles_param: Database["public"]["Enums"]["app_role"][]
+          user_id_param: string
         }
         Returns: boolean
       }
@@ -1617,37 +1694,45 @@ export type Database = {
         Returns: boolean
       }
       hash_ip: { Args: { ip_address: string }; Returns: string }
-      initialize_super_admins: {
-        Args: never
-        Returns: {
-          email: string
-          status: string
-        }[]
-      }
+      initialize_super_admins: { Args: never; Returns: undefined }
       is_admin: { Args: never; Returns: boolean }
       is_admin_secure: { Args: never; Returns: boolean }
       is_institutional_email: { Args: { email: string }; Returns: boolean }
-      log_admin_action: {
-        Args: {
-          p_action_type: string
-          p_details?: Json
-          p_target_user_email?: string
-          p_target_user_id?: string
-        }
-        Returns: string
-      }
-      quick_assign_products: {
-        Args: {
-          p_deadline?: string
-          p_product_ids: string[]
-          p_reviewer_id: string
-        }
-        Returns: Json
-      }
-      start_review_secure: {
-        Args: { review_id: string }
-        Returns: Json
-      }
+      log_admin_action:
+        | {
+            Args: {
+              p_action_type: string
+              p_details?: Json
+              p_target_user_id: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              p_action_type: string
+              p_details?: Json
+              p_target_user_email?: string
+              p_target_user_id?: string
+            }
+            Returns: string
+          }
+      quick_assign_products:
+        | {
+            Args: {
+              p_product_ids: string[]
+              p_reviewer_ids: string[]
+              p_round_id: string
+            }
+            Returns: number
+          }
+        | {
+            Args: {
+              p_deadline?: string
+              p_product_ids: string[]
+              p_reviewer_id: string
+            }
+            Returns: Json
+          }
       schedule_analytics_cleanup: { Args: never; Returns: undefined }
       send_pending_registration_notifications: {
         Args: never
@@ -1657,10 +1742,17 @@ export type Database = {
           user_id: string
         }[]
       }
-      start_review_round_atomic: {
-        Args: { p_assignments: Json; p_round_id: string }
-        Returns: Json
-      }
+      start_review_round_atomic:
+        | {
+            Args: {
+              p_product_ids: string[]
+              p_reviewer_ids: string[]
+              p_round_id: string
+            }
+            Returns: Json
+          }
+        | { Args: { p_assignments: Json; p_round_id: string }; Returns: Json }
+      start_review_secure: { Args: { review_id: string }; Returns: Json }
       verify_user_registration: {
         Args: { p_user_id: string; p_verified?: boolean }
         Returns: boolean
