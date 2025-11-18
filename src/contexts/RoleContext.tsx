@@ -43,11 +43,14 @@ export function RoleProvider({ children }: { children: ReactNode }) {
       let userRoles: AppRole[] = [];
 
       // 1) Try secure RPC (bypasses RLS)
-      const { data: rpcData, error: rpcError } = await supabase.rpc('current_user_roles');
+      const { data: rpcData, error: rpcError } = await supabase.rpc('get_highest_role', {
+        _user_id: userId
+      });
+      
       if (!rpcError && rpcData) {
-        userRoles = rpcData;
+        userRoles = [rpcData];
       } else {
-        console.warn('[Roles] RPC failed or returned invalid data, falling back to direct select', rpcError);
+        console.warn('[Roles] RPC failed, falling back to direct select', rpcError);
         // 2) Fallback to direct select with RLS
         const { data: rows, error: selectError } = await supabase
           .from('user_roles')

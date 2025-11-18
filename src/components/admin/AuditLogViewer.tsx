@@ -15,8 +15,10 @@ import { Button } from '@/components/ui/button';
 interface AuditLog {
   id: string;
   action_type: string;
-  performed_by_email: string;
-  target_user_email: string | null;
+  admin_email: string;
+  admin_user_id: string;
+  target_email: string | null;
+  target_user_id: string | null;
   details: any;
   created_at: string;
 }
@@ -201,10 +203,10 @@ export function AuditLogViewer() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-sm">
-                      {log.performed_by_email}
+                      {log.admin_email}
                     </TableCell>
                     <TableCell className="text-sm">
-                      {log.target_user_email || '-'}
+                      {log.target_email || '-'}
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground max-w-md truncate">
                       {log.details?.target_user_name && (
