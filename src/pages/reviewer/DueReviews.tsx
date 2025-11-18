@@ -48,7 +48,17 @@ export default function DueReviews() {
 
       if (!rpcError && rpcData) {
         console.log('[DueReviews] ✅ RPC successful:', rpcData.length, 'reviews');
-        setReviews(rpcData as ReviewAssignment[]);
+        // Map RPC data to full ReviewAssignment structure with defaults
+        const mappedReviews: ReviewAssignment[] = rpcData.map(r => ({
+          id: r.id,
+          product_id: r.product_id,
+          status: r.status as ReviewAssignment['status'],
+          priority: 'medium' as ReviewAssignment['priority'],
+          deadline: null,
+          assigned_at: r.assigned_at,
+          notes: null
+        }));
+        setReviews(mappedReviews);
         setLoading(false);
         return;
       }

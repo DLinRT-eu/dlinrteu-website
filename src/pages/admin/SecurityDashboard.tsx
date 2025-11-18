@@ -67,7 +67,17 @@ export default function SecurityDashboard() {
         throw new Error(`${eventsError.message} (Code: ${eventsError.code || 'unknown'})`);
       }
 
-      setEvents(eventsData || []);
+      // Map the data to include resolved_at field
+      const mappedEvents: SecurityEvent[] = (eventsData || []).map(event => ({
+        id: event.id,
+        event_type: event.event_type,
+        severity: event.severity,
+        created_at: event.created_at,
+        details: event.details,
+        resolved_at: null
+      }));
+
+      setEvents(mappedEvents);
 
       // Calculate stats from events
       const yesterday = new Date();
