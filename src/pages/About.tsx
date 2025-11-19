@@ -51,6 +51,13 @@ const TEAM_MEMBERS = [
     image: "/people/Viktor.png",
     bio: "https://www.linkedin.com/in/viktor-rogowski/",
     email: "viktor.rogowski@dlinrt.eu",
+  },
+  {
+    name: "Kareem Wahid",
+    role: "Reviewer", 
+    image: "/people/Kareem.jpg",
+    bio: "https://www.linkedin.com/in/kareem-wahid-307241178/",
+    email: "kareem.wahid@dlinrt.eu",
   }
 ];
 
