@@ -230,18 +230,14 @@ export default function UserManagement() {
     setOperationLoading(loadingKey);
 
     try {
-      // If granting admin role, also grant reviewer and company for testing
-      const rolesToGrant: Array<{ user_id: string; role: AppRole; granted_by: string }> = selectedRole === 'admin' 
-        ? [
-            { user_id: selectedUser.id, role: 'admin' as AppRole, granted_by: user.id },
-            { user_id: selectedUser.id, role: 'reviewer' as AppRole, granted_by: user.id },
-            { user_id: selectedUser.id, role: 'company' as AppRole, granted_by: user.id }
-          ]
-        : [{ user_id: selectedUser.id, role: selectedRole, granted_by: user.id }];
-
+      // Grant only the selected role (no automatic multi-role assignment)
       const { error, data } = await supabase
         .from('user_roles')
-        .insert(rolesToGrant)
+        .insert([{ 
+          user_id: selectedUser.id, 
+          role: selectedRole, 
+          granted_by: user.id 
+        }])
         .select();
 
       if (error) {
@@ -264,25 +260,20 @@ export default function UserManagement() {
         });
       } else {
         // Log the role grant action
-        const rolesGranted = rolesToGrant.map(r => r.role).join(', ');
         await supabase.rpc('log_admin_action', {
           p_action_type: 'role_granted',
           p_target_user_id: selectedUser.id,
           p_target_user_email: selectedUser.email,
           p_details: {
             target_user_name: `${selectedUser.first_name} ${selectedUser.last_name}`,
-            roles_granted: rolesGranted,
+            role_granted: selectedRole,
             timestamp: new Date().toISOString()
           }
         });
-
-        const message = selectedRole === 'admin'
-          ? `Admin role granted (includes reviewer & company for testing)`
-          : `${selectedRole} role granted`;
         
         toast({
           title: 'Success',
-          description: `${message} to ${selectedUser.first_name} ${selectedUser.last_name}`,
+          description: `${selectedRole} role granted to ${selectedUser.first_name} ${selectedUser.last_name}`,
         });
         await fetchUsers();
         setDialogOpen(false);

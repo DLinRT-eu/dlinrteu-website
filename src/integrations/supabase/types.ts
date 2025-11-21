@@ -1134,6 +1134,36 @@ export type Database = {
         }
         Relationships: []
       }
+      role_change_log: {
+        Row: {
+          action: string
+          id: string
+          performed_at: string
+          performed_by: string
+          reason: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          action: string
+          id?: string
+          performed_at?: string
+          performed_by: string
+          reason?: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          action?: string
+          id?: string
+          performed_at?: string
+          performed_by?: string
+          reason?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       role_requests: {
         Row: {
           company_id: string | null
@@ -1507,6 +1537,10 @@ export type Database = {
         Returns: boolean
       }
       expire_old_invitations: { Args: never; Returns: undefined }
+      get_all_user_roles: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"][]
+      }
       get_analytics_daily: {
         Args: { end_date?: string; start_date?: string }
         Returns: {
