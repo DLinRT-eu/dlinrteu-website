@@ -12,10 +12,15 @@ SET search_path = public
 AS $$
 DECLARE
   v_admin_id UUID := auth.uid();
+  v_user_email TEXT;
 BEGIN
   IF NOT public.is_admin_secure() THEN
     RAISE EXCEPTION 'Only admins can verify user registrations';
   END IF;
+
+  SELECT email INTO v_user_email
+  FROM public.profiles
+  WHERE id = p_user_id;
 
   UPDATE public.user_registration_notifications
   SET verified = p_verified,
@@ -48,6 +53,7 @@ BEGIN
   PERFORM public.log_admin_action(
     'verify_user_registration',
     p_user_id,
+    v_user_email,
     jsonb_build_object('verified', p_verified)
   );
 
