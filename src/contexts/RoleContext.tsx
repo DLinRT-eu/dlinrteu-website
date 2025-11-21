@@ -42,15 +42,15 @@ export function RoleProvider({ children }: { children: ReactNode }) {
       setLoading(true);
       let userRoles: AppRole[] = [];
 
-      // 1) Try secure RPC (bypasses RLS)
-      const { data: rpcData, error: rpcError } = await supabase.rpc('get_highest_role', {
+      // 1) Try new get_all_user_roles function (returns array of all roles)
+      const { data: rpcData, error: rpcError } = await supabase.rpc('get_all_user_roles', {
         _user_id: userId
       });
       
-      if (!rpcError && rpcData) {
-        userRoles = [rpcData];
+      if (!rpcError && rpcData && Array.isArray(rpcData)) {
+        userRoles = rpcData;
       } else {
-        console.warn('[Roles] RPC failed, falling back to direct select', rpcError);
+        console.warn('[Roles] get_all_user_roles failed, falling back to direct select', rpcError);
         // 2) Fallback to direct select with RLS
         const { data: rows, error: selectError } = await supabase
           .from('user_roles')
@@ -59,15 +59,15 @@ export function RoleProvider({ children }: { children: ReactNode }) {
         if (!selectError && rows) {
           userRoles = rows.map((r) => r.role);
         } else {
-          console.warn('[Roles] Direct select failed, fallback to highest role RPC', selectError);
-          // 3) Last resort: get single highest role via secure RPC
-          const { data: highest, error: highestError } = await supabase.rpc('get_user_role_secure', {
-            user_id_param: userId,
+          console.warn('[Roles] Direct select failed, trying get_highest_role as last resort', selectError);
+          // 3) Last resort: get single highest role via old RPC
+          const { data: highest, error: highestError } = await supabase.rpc('get_highest_role', {
+            _user_id: userId,
           });
           if (!highestError && highest) {
             userRoles = [highest];
           } else {
-            console.error('[Roles] Highest role RPC failed:', highestError);
+            console.error('[Roles] All role fetching methods failed:', highestError);
             throw highestError || selectError || rpcError;
           }
         }
