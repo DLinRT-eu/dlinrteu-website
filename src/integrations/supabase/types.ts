@@ -1716,6 +1716,14 @@ export type Database = {
           user_id: string
         }[]
       }
+      grant_role_admin: {
+        Args: {
+          p_granted_by?: string
+          p_role: Database["public"]["Enums"]["app_role"]
+          p_target_user_id: string
+        }
+        Returns: Json
+      }
       has_any_role: {
         Args: {
           roles_param: Database["public"]["Enums"]["app_role"][]
