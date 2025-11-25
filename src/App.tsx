@@ -1,4 +1,4 @@
-
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,57 +9,59 @@ import { RoleProvider } from "@/contexts/RoleContext";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import Header from "./components/Header";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import About from "./pages/About";
-import ProductDetails from "./pages/ProductDetails";
-import Companies from "./pages/Companies";
-import News from "./pages/News";
-import Support from "./pages/Support";
-import NewsDetail from "./pages/NewsDetail";
-import Products from "./pages/Products";
-import Dashboard from "./pages/Dashboard";
-import Dashboard_Authenticated from "./pages/Dashboard_Authenticated";
-import Timeline from "./pages/Timeline";
-import Initiatives from "./pages/Initiatives";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
-import ReviewDashboard from "./pages/ReviewDashboard";
-import ProductReview from "./pages/ProductReview";
-import ResourcesCompliance from "./pages/ResourcesCompliance";
-import Profile from "./pages/Profile";
-import MyProducts from "./pages/MyProducts";
-import RoleSelection from "./pages/RoleSelection";
-import ProductExperiences from "./pages/ProductExperiences";
-import Auth from "./pages/Auth";
-import Changelog from "./pages/Changelog";
-import Roles from "./pages/Roles";
-import RolesFAQ from "./pages/RolesFAQ";
-import ChangelogGenerator from "./pages/admin/ChangelogGenerator";
-import CompanyManagement from "./pages/admin/CompanyManagement";
+
+// Lazy-loaded page components for code splitting
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const About = lazy(() => import("./pages/About"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const Companies = lazy(() => import("./pages/Companies"));
+const News = lazy(() => import("./pages/News"));
+const Support = lazy(() => import("./pages/Support"));
+const NewsDetail = lazy(() => import("./pages/NewsDetail"));
+const Products = lazy(() => import("./pages/Products"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Dashboard_Authenticated = lazy(() => import("./pages/Dashboard_Authenticated"));
+const Timeline = lazy(() => import("./pages/Timeline"));
+const Initiatives = lazy(() => import("./pages/Initiatives"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
+const ReviewDashboard = lazy(() => import("./pages/ReviewDashboard"));
+const ProductReview = lazy(() => import("./pages/ProductReview"));
+const ResourcesCompliance = lazy(() => import("./pages/ResourcesCompliance"));
+const Profile = lazy(() => import("./pages/Profile"));
+const MyProducts = lazy(() => import("./pages/MyProducts"));
+const RoleSelection = lazy(() => import("./pages/RoleSelection"));
+const ProductExperiences = lazy(() => import("./pages/ProductExperiences"));
+const Auth = lazy(() => import("./pages/Auth"));
+const Changelog = lazy(() => import("./pages/Changelog"));
+const Roles = lazy(() => import("./pages/Roles"));
+const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
+const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
+const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
 
 // Admin Pages
-import AdminOverview from "./pages/admin/AdminOverview";
-import AdminDashboard from "./pages/admin/Dashboard";
-import UserManagement from "./pages/admin/UserManagement";
-import ReviewAssignment from "./pages/admin/ReviewAssignment";
-import SecurityDashboard from "./pages/admin/SecurityDashboard";
-import UserRegistrationReview from "./pages/admin/UserRegistrationReview";
-import ChangelogAdmin from "./pages/admin/ChangelogAdmin";
+const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
+const ReviewAssignment = lazy(() => import("./pages/admin/ReviewAssignment"));
+const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard"));
+const UserRegistrationReview = lazy(() => import("./pages/admin/UserRegistrationReview"));
+const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
 
 // Company Pages
-import CompanyDashboard from "./pages/company/Dashboard";
-import CompanyProductsManager from "./pages/company/ProductsManager";
+const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
+const CompanyProductsManager = lazy(() => import("./pages/company/ProductsManager"));
 
 // Reviewer Pages
-import ReviewerDashboard from "./pages/reviewer/Dashboard";
-import ReviewerGuide from "./pages/reviewer/ReviewerGuide";
-import ReviewerPreferences from "./pages/reviewer/Preferences";
-import DueReviews from "./pages/reviewer/DueReviews";
+const ReviewerDashboard = lazy(() => import("./pages/reviewer/Dashboard"));
+const ReviewerGuide = lazy(() => import("./pages/reviewer/ReviewerGuide"));
+const ReviewerPreferences = lazy(() => import("./pages/reviewer/Preferences"));
+const DueReviews = lazy(() => import("./pages/reviewer/DueReviews"));
 
 // Admin Review Pages
-import ReviewRounds from "./pages/admin/ReviewRounds";
-import ReviewRoundDetails from "./pages/admin/ReviewRoundDetails";
+const ReviewRounds = lazy(() => import("./pages/admin/ReviewRounds"));
+const ReviewRoundDetails = lazy(() => import("./pages/admin/ReviewRoundDetails"));
 
 // Create a client
 const queryClient = new QueryClient({
@@ -80,158 +82,164 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Header />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="products" element={<Products />} />
-              <Route path="initiatives" element={<Initiatives />} />
-              <Route path="about" element={<About />} />
-              <Route path="maintenance-team" element={<Navigate to="/about" replace />} />
-              <Route path="donate" element={<Navigate to="/support" replace />} />
-              <Route path="product/:id" element={<ProductDetails />} />
-              <Route path="companies" element={<Companies />} />
-              <Route path="news" element={<News />} />
-              <Route path="support" element={<Support />} />
-              <Route path="news/:id" element={<NewsDetail />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="dashboard-home" element={
-                <ProtectedRoute requireAuth={true}>
-                  <Dashboard_Authenticated />
-                </ProtectedRoute>
-              } />
-              <Route path="timeline" element={<Timeline />} />
-              <Route path="review" element={<ReviewDashboard />} />
-              <Route path="review/:id" element={<ProductReview />} />
-              <Route path="resources-compliance" element={<ResourcesCompliance />} />
-              <Route path="privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="terms-of-use" element={<TermsOfUse />} />
-              <Route path="auth" element={<Auth />} />
-              <Route path="changelog" element={<Changelog />} />
-              <Route path="roles" element={<Roles />} />
-              <Route path="roles/faq" element={<RolesFAQ />} />
-              
-              {/* User Authenticated Routes - Protected by ApprovalGate */}
-              <Route path="/profile" element={
-                <ProtectedRoute requireAuth={true}>
-                  <ApprovalGate>
-                    <Profile />
-                  </ApprovalGate>
-                </ProtectedRoute>
-              } />
-              <Route path="/my-products" element={
-                <ProtectedRoute requireAuth={true}>
-                  <ApprovalGate>
-                    <MyProducts />
-                  </ApprovalGate>
-                </ProtectedRoute>
-              } />
-              <Route path="/role-selection" element={
-                <ProtectedRoute requireAuth={true}>
-                  <ApprovalGate>
-                    <RoleSelection />
-                  </ApprovalGate>
-                </ProtectedRoute>
-              } />
-              <Route path="/product/:productId/experiences" element={
-                <ProtectedRoute allowedRoles={['admin', 'reviewer', 'company']}>
-                  <ApprovalGate>
-                    <ProductExperiences />
-                  </ApprovalGate>
-                </ProtectedRoute>
-              } />
-              
-              {/* Admin Routes */}
-              <Route path="/admin" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <AdminOverview />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/dashboard" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/users" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <UserManagement />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/reviews" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <ReviewAssignment />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/review-rounds" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <ReviewRounds />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/review-rounds/:roundId" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <ReviewRoundDetails />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/security" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <SecurityDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/registrations" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <UserRegistrationReview />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/changelog" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <ChangelogAdmin />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/changelog-generator" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <ChangelogGenerator />
-                </ProtectedRoute>
-              } />
-              <Route path="/admin/companies" element={
-                <ProtectedRoute allowedRoles={['admin']}>
-                  <CompanyManagement />
-                </ProtectedRoute>
-              } />
-              
-              {/* Reviewer Routes */}
-              <Route path="/reviewer/dashboard" element={
-                <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
-                  <ReviewerDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/reviewer/due-reviews" element={
-                <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
-                  <DueReviews />
-                </ProtectedRoute>
-              } />
-              <Route path="/reviewer/guide" element={
-                <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
-                  <ReviewerGuide />
-                </ProtectedRoute>
-              } />
-              <Route path="/reviewer/preferences" element={
-                <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
-                  <ReviewerPreferences />
-                </ProtectedRoute>
-              } />
-              
-              {/* Company Routes */}
-              <Route path="/company/dashboard" element={
-                <ProtectedRoute allowedRoles={['company', 'admin']}>
-                  <CompanyDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/company/products" element={
-                <ProtectedRoute allowedRoles={['company', 'admin']}>
-                  <CompanyProductsManager />
-                </ProtectedRoute>
-              } />
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+              </div>
+            }>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="products" element={<Products />} />
+                <Route path="initiatives" element={<Initiatives />} />
+                <Route path="about" element={<About />} />
+                <Route path="maintenance-team" element={<Navigate to="/about" replace />} />
+                <Route path="donate" element={<Navigate to="/support" replace />} />
+                <Route path="product/:id" element={<ProductDetails />} />
+                <Route path="companies" element={<Companies />} />
+                <Route path="news" element={<News />} />
+                <Route path="support" element={<Support />} />
+                <Route path="news/:id" element={<NewsDetail />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="dashboard-home" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <Dashboard_Authenticated />
+                  </ProtectedRoute>
+                } />
+                <Route path="timeline" element={<Timeline />} />
+                <Route path="review" element={<ReviewDashboard />} />
+                <Route path="review/:id" element={<ProductReview />} />
+                <Route path="resources-compliance" element={<ResourcesCompliance />} />
+                <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="terms-of-use" element={<TermsOfUse />} />
+                <Route path="auth" element={<Auth />} />
+                <Route path="changelog" element={<Changelog />} />
+                <Route path="roles" element={<Roles />} />
+                <Route path="roles/faq" element={<RolesFAQ />} />
+                
+                {/* User Authenticated Routes - Protected by ApprovalGate */}
+                <Route path="/profile" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <Profile />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
+                <Route path="/my-products" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <MyProducts />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
+                <Route path="/role-selection" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <RoleSelection />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
+                <Route path="/product/:productId/experiences" element={
+                  <ProtectedRoute allowedRoles={['admin', 'reviewer', 'company']}>
+                    <ApprovalGate>
+                      <ProductExperiences />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
+                
+                {/* Admin Routes */}
+                <Route path="/admin" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminOverview />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/dashboard" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/users" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <UserManagement />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/reviews" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <ReviewAssignment />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/review-rounds" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <ReviewRounds />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/review-rounds/:roundId" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <ReviewRoundDetails />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/security" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <SecurityDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/registrations" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <UserRegistrationReview />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/changelog" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <ChangelogAdmin />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/changelog-generator" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <ChangelogGenerator />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/companies" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <CompanyManagement />
+                  </ProtectedRoute>
+                } />
+                
+                {/* Reviewer Routes */}
+                <Route path="/reviewer/dashboard" element={
+                  <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
+                    <ReviewerDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/reviewer/due-reviews" element={
+                  <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
+                    <DueReviews />
+                  </ProtectedRoute>
+                } />
+                <Route path="/reviewer/guide" element={
+                  <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
+                    <ReviewerGuide />
+                  </ProtectedRoute>
+                } />
+                <Route path="/reviewer/preferences" element={
+                  <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
+                    <ReviewerPreferences />
+                  </ProtectedRoute>
+                } />
+                
+                {/* Company Routes */}
+                <Route path="/company/dashboard" element={
+                  <ProtectedRoute allowedRoles={['company', 'admin']}>
+                    <CompanyDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/company/products" element={
+                  <ProtectedRoute allowedRoles={['company', 'admin']}>
+                    <CompanyProductsManager />
+                  </ProtectedRoute>
+                } />
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </BrowserRouter>
         </TooltipProvider>
       </RoleProvider>
