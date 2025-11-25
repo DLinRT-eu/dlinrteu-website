@@ -230,47 +230,66 @@ export default function UserManagement() {
     setOperationLoading(loadingKey);
 
     try {
-      // Grant only the selected role (no automatic multi-role assignment)
-      const { error, data } = await supabase
-        .from('user_roles')
-        .insert([{ 
-          user_id: selectedUser.id, 
-          role: selectedRole, 
-          granted_by: user.id 
-        }])
-        .select();
-
-      if (error) {
-        console.error('Error granting role:', error);
-        
-        // Provide specific error messages
-        let errorMessage = 'Failed to grant role';
-        if (error.code === '23505') {
-          errorMessage = 'This user already has this role';
-        } else if (error.code === '42501') {
-          errorMessage = 'Permission denied. You may not have sufficient privileges';
-        } else if (error.message) {
-          errorMessage = error.message;
-        }
-        
+      // First, verify we have a valid session
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !sessionData.session) {
+        console.error('Session verification failed:', sessionError);
         toast({
-          title: 'Error',
-          description: errorMessage,
+          title: 'Session Expired',
+          description: 'Your session has expired. Please log in again.',
           variant: 'destructive',
         });
-      } else {
-        // Log the role grant action
-        await supabase.rpc('log_admin_action', {
-          p_action_type: 'role_granted',
-          p_target_user_id: selectedUser.id,
-          p_target_user_email: selectedUser.email,
-          p_details: {
-            target_user_name: `${selectedUser.first_name} ${selectedUser.last_name}`,
-            role_granted: selectedRole,
-            timestamp: new Date().toISOString()
-          }
+        // Optionally redirect to login
+        return;
+      }
+
+      console.log('[UserManagement] Session verified, granting role via RPC');
+      console.log('[UserManagement] Target user:', selectedUser.id);
+      console.log('[UserManagement] Role:', selectedRole);
+      console.log('[UserManagement] Granted by:', user.id);
+
+      // Use the secure RPC function to grant the role
+      const { data, error } = await supabase.rpc('grant_role_admin', {
+        p_target_user_id: selectedUser.id,
+        p_role: selectedRole,
+        p_granted_by: user.id
+      });
+
+      console.log('[UserManagement] RPC response:', { data, error });
+
+      if (error) {
+        console.error('RPC error granting role:', error);
+        toast({
+          title: 'Error',
+          description: `Failed to grant role: ${error.message}`,
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      // Cast the response to the expected type
+      const response = data as { success: boolean; error?: string; message?: string } | null;
+
+      // Check the response from the RPC function
+      if (response?.success === false) {
+        console.error('Grant role failed:', response);
+        toast({
+          title: 'Error',
+          description: response.error || 'Failed to grant role',
+          variant: 'destructive',
         });
         
+        // If auth error, suggest re-login
+        if (response.error?.includes('Not authenticated') || response.error?.includes('Session')) {
+          toast({
+            title: 'Session Issue',
+            description: 'Please try logging out and back in.',
+            variant: 'destructive',
+          });
+        }
+      } else if (response?.success) {
+        console.log('[UserManagement] Role granted successfully:', response);
         toast({
           title: 'Success',
           description: `${selectedRole} role granted to ${selectedUser.first_name} ${selectedUser.last_name}`,

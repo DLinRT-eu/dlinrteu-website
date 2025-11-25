@@ -33,6 +33,8 @@ interface AuthContextType {
   updateProfile: (data: Partial<Profile>) => Promise<{ data: any; error: any }>;
   resendVerificationEmail: () => Promise<{ error: Error | null }>;
   refreshProfile: () => Promise<void>;
+  verifySession: () => Promise<{ valid: boolean; error?: string }>;
+  refreshSession: () => Promise<{ success: boolean; error?: string }>;
 }
 
 // Create context with null as initial value instead of undefined
@@ -195,6 +197,60 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const verifySession = async () => {
+    try {
+      const { data: { session: currentSession }, error } = await supabase.auth.getSession();
+      
+      if (error) {
+        console.error('[Auth] Session verification error:', error);
+        return { valid: false, error: error.message };
+      }
+      
+      if (!currentSession) {
+        console.warn('[Auth] No active session found');
+        return { valid: false, error: 'No active session' };
+      }
+      
+      // Check if session is expired
+      const expiresAt = currentSession.expires_at;
+      if (expiresAt && expiresAt * 1000 < Date.now()) {
+        console.warn('[Auth] Session has expired');
+        return { valid: false, error: 'Session expired' };
+      }
+      
+      console.log('[Auth] Session is valid');
+      return { valid: true };
+    } catch (error: any) {
+      console.error('[Auth] Session verification failed:', error);
+      return { valid: false, error: error.message };
+    }
+  };
+
+  const refreshSession = async () => {
+    try {
+      console.log('[Auth] Refreshing session...');
+      const { data: { session: newSession }, error } = await supabase.auth.refreshSession();
+      
+      if (error) {
+        console.error('[Auth] Session refresh error:', error);
+        return { success: false, error: error.message };
+      }
+      
+      if (newSession) {
+        console.log('[Auth] Session refreshed successfully');
+        setSession(newSession);
+        setUser(newSession.user);
+        return { success: true };
+      }
+      
+      console.warn('[Auth] No session returned from refresh');
+      return { success: false, error: 'No session returned' };
+    } catch (error: any) {
+      console.error('[Auth] Session refresh failed:', error);
+      return { success: false, error: error.message };
+    }
+  };
+
   const value: AuthContextType = {
     user,
     session,
@@ -207,6 +263,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateProfile: updateProfileData,
     resendVerificationEmail,
     refreshProfile,
+    verifySession,
+    refreshSession,
     // Stubs - use useRoles() hook instead
     roles: [] as AppRole[],
     highestRole: null,
