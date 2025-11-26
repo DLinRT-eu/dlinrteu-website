@@ -92,59 +92,56 @@ export async function createReviewRound(roundData: {
 }
 
 export async function getReviewersByExpertise(category?: string): Promise<ReviewerWithExpertise[]> {
-  const { data: reviewerRoles, error: rolesError } = await supabase
-    .from('user_roles')
-    .select('user_id')
-    .eq('role', 'reviewer');
+  try {
+    // Use admin RPC function that bypasses RLS
+    const { data, error } = await supabase.rpc('get_reviewers_with_expertise_admin');
 
-  if (rolesError) throw rolesError;
-  if (!reviewerRoles || reviewerRoles.length === 0) return [];
+    if (error) {
+      console.error('[getReviewersByExpertise] RPC error:', error);
+      throw error;
+    }
 
-  const reviewerIds = reviewerRoles.map(r => r.user_id);
+    // Parse the JSONB expertise field and map to our type
+    const reviewersWithExpertise = (data || []).map((reviewer: any) => {
+      let expertise: ReviewerExpertise[] = [];
+      
+      try {
+        // Handle JSONB field - may already be parsed or may be a string
+        expertise = typeof reviewer.expertise === 'string' 
+          ? JSON.parse(reviewer.expertise) 
+          : reviewer.expertise || [];
+      } catch (e) {
+        console.error('[getReviewersByExpertise] Error parsing expertise:', e);
+        expertise = [];
+      }
 
-  const { data: profiles, error: profilesError } = await supabase
-    .from('profiles')
-    .select('id, email, first_name, last_name')
-    .in('id', reviewerIds);
+      // Filter by category if provided
+      if (category && expertise.length > 0) {
+        expertise = expertise.filter((exp: ReviewerExpertise) => 
+          exp.preference_type === 'category' && exp.category === category
+        );
+      }
 
-  if (profilesError) throw profilesError;
+      return {
+        user_id: reviewer.user_id,
+        email: reviewer.email || '',
+        first_name: reviewer.first_name || '',
+        last_name: reviewer.last_name || '',
+        expertise: expertise,
+        current_workload: Number(reviewer.current_workload) || 0,
+      };
+    });
 
-  const { data: expertise, error: expertiseError } = await supabase
-    .from('reviewer_expertise')
-    .select('*')
-    .in('user_id', reviewerIds);
+    // If category filter is applied, only return reviewers with matching expertise
+    if (category) {
+      return reviewersWithExpertise.filter(r => r.expertise.length > 0);
+    }
 
-  if (expertiseError) throw expertiseError;
-
-  const { data: reviews, error: reviewsError } = await supabase
-    .from('product_reviews')
-    .select('assigned_to')
-    .in('assigned_to', reviewerIds)
-    .in('status', ['pending', 'in_progress']);
-
-  if (reviewsError) throw reviewsError;
-
-  const reviewers: ReviewerWithExpertise[] = profiles.map(profile => {
-    const userExpertise = (expertise?.filter(e => e.user_id === profile.id) || []) as ReviewerExpertise[];
-    const workload = reviews?.filter(r => r.assigned_to === profile.id).length || 0;
-
-    return {
-      user_id: profile.id,
-      email: profile.email,
-      first_name: profile.first_name,
-      last_name: profile.last_name,
-      expertise: userExpertise,
-      current_workload: workload
-    };
-  });
-
-  if (category) {
-    return reviewers.filter(r => 
-      r.expertise.some(e => e.preference_type === 'category' && e.category === category)
-    );
+    return reviewersWithExpertise;
+  } catch (error) {
+    console.error('[getReviewersByExpertise] Error fetching reviewers:', error);
+    throw error;
   }
-
-  return reviewers;
 }
 
 export function calculateReviewerWorkload(

@@ -1692,6 +1692,17 @@ export type Database = {
         }[]
       }
       get_reviewer_stats_admin: { Args: never; Returns: Json }
+      get_reviewers_with_expertise_admin: {
+        Args: never
+        Returns: {
+          current_workload: number
+          email: string
+          expertise: Json
+          first_name: string
+          last_name: string
+          user_id: string
+        }[]
+      }
       get_reviewers_with_workload_admin: {
         Args: never
         Returns: {
