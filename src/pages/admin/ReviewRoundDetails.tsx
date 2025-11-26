@@ -21,6 +21,8 @@ import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { ALL_PRODUCTS } from "@/data";
 import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
 import { AssignmentActionsMenu } from "@/components/admin/review-rounds/AssignmentActionsMenu";
+import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMenu";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface AssignmentHistoryRecord {
   id: string;
@@ -77,6 +79,7 @@ export default function ReviewRoundDetails() {
   const [history, setHistory] = useState<AssignmentHistoryRecord[]>([]);
   const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
 
   useEffect(() => {
     if (roundId) {
@@ -221,6 +224,22 @@ export default function ReviewRoundDetails() {
     return <Badge variant={config.variant}>{config.label}</Badge>;
   };
 
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedAssignments(assignments.map(a => a.id));
+    } else {
+      setSelectedAssignments([]);
+    }
+  };
+
+  const handleSelectAssignment = (assignmentId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedAssignments(prev => [...prev, assignmentId]);
+    } else {
+      setSelectedAssignments(prev => prev.filter(id => id !== assignmentId));
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto py-8">
@@ -354,8 +373,20 @@ export default function ReviewRoundDetails() {
         <TabsContent value="assignments" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Current Assignments</CardTitle>
-              <CardDescription>All product assignments for this round</CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Current Assignments</CardTitle>
+                  <CardDescription>All product assignments for this round</CardDescription>
+                </div>
+                {selectedAssignments.length > 0 && (
+                  <BulkActionsMenu
+                    selectedIds={selectedAssignments}
+                    reviewers={reviewers}
+                    onUpdate={fetchRoundDetails}
+                    onClearSelection={() => setSelectedAssignments([])}
+                  />
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               {assignments.length === 0 ? (
@@ -366,6 +397,13 @@ export default function ReviewRoundDetails() {
                 <Table>
                   <TableHeader>
                     <TableRow>
+                      <TableHead className="w-12">
+                        <Checkbox
+                          checked={selectedAssignments.length === assignments.length}
+                          onCheckedChange={handleSelectAll}
+                          aria-label="Select all"
+                        />
+                      </TableHead>
                       <TableHead>Product</TableHead>
                       <TableHead>Assigned To</TableHead>
                       <TableHead>Status</TableHead>
@@ -382,6 +420,15 @@ export default function ReviewRoundDetails() {
                       
                       return (
                         <TableRow key={assignment.id} className={isOverdue ? 'bg-destructive/5' : ''}>
+                          <TableCell>
+                            <Checkbox
+                              checked={selectedAssignments.includes(assignment.id)}
+                              onCheckedChange={(checked) => 
+                                handleSelectAssignment(assignment.id, checked as boolean)
+                              }
+                              aria-label={`Select ${getProductName(assignment.product_id)}`}
+                            />
+                          </TableCell>
                           <TableCell className="font-medium">
                             {getProductName(assignment.product_id)}
                           </TableCell>
