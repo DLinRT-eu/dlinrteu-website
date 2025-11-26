@@ -35,7 +35,8 @@ import {
   PlayCircle,
   Archive,
   Download,
-  FileSpreadsheet
+  FileSpreadsheet,
+  FileText
 } from "lucide-react";
 import {
   createReviewRound,
@@ -57,6 +58,9 @@ import {
   exportToCSV, 
   exportToExcel 
 } from "@/utils/exportReviewRounds";
+import { exportReviewRoundsToPDF } from "@/utils/reviewRoundsPdfExporter";
+import { ReviewRoundsCalendar } from "@/components/admin/review-rounds/ReviewRoundsCalendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ReviewRounds() {
   const navigate = useNavigate();
@@ -365,6 +369,20 @@ export default function ReviewRounds() {
     }
   };
 
+  const handleExportPDF = async () => {
+    setExporting(true);
+    const toastId = toast.loading('Generating PDF report...');
+    try {
+      const result = await exportReviewRoundsToPDF();
+      toast.success(`PDF exported: ${result.filename}`, { id: toastId });
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+      toast.error('Failed to export PDF report', { id: toastId });
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, any> = {
       draft: { variant: 'secondary', icon: Clock },
@@ -427,6 +445,18 @@ export default function ReviewRounds() {
               <FileSpreadsheet className="h-4 w-4 mr-2" />
             )}
             Export Excel
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleExportPDF}
+            disabled={exporting || rounds.length === 0}
+          >
+            {exporting ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <FileText className="h-4 w-4 mr-2" />
+            )}
+            Export PDF
           </Button>
           <Button onClick={() => setShowCreateDialog(true)}>
             <Plus className="h-4 w-4 mr-2" />
@@ -519,15 +549,23 @@ export default function ReviewRounds() {
         </Card>
       </div>
 
-      {/* Rounds Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>All Review Rounds</CardTitle>
-          <CardDescription>
-            View and manage all review rounds
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      {/* Tabs for List and Calendar Views */}
+      <Tabs defaultValue="list" className="w-full">
+        <TabsList>
+          <TabsTrigger value="list">List View</TabsTrigger>
+          <TabsTrigger value="calendar">Calendar View</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="list" className="space-y-4">
+          {/* Rounds Table */}
+          <Card>
+            <CardHeader>
+              <CardTitle>All Review Rounds</CardTitle>
+              <CardDescription>
+                View and manage all review rounds
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
           {rounds.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
@@ -623,6 +661,12 @@ export default function ReviewRounds() {
           )}
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="calendar">
+          <ReviewRoundsCalendar rounds={rounds} />
+        </TabsContent>
+      </Tabs>
 
       {/* Create Round Dialog */}
       <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
