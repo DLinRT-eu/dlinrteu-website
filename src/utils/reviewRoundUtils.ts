@@ -638,6 +638,82 @@ export async function cloneReviewRoundAdmin(
   return data as RPCResponse;
 }
 
+// Create review round using admin RPC
+export async function createReviewRoundAdmin(
+  name: string,
+  roundNumber: number,
+  description?: string,
+  startDate?: string,
+  defaultDeadline?: string
+): Promise<RPCResponse> {
+  const { data, error } = await supabase.rpc('create_review_round_admin', {
+    p_name: name,
+    p_round_number: roundNumber,
+    p_description: description,
+    p_start_date: startDate,
+    p_default_deadline: defaultDeadline
+  });
+
+  if (error) throw error;
+  return data as RPCResponse;
+}
+
+// Get all review rounds using admin RPC
+export async function getReviewRoundsAdmin() {
+  const { data, error } = await supabase.rpc('get_review_rounds_admin');
+  
+  if (error) throw error;
+  return data;
+}
+
+// Get reviewer statistics using admin RPC
+export async function getReviewerStatsAdmin(): Promise<{
+  total_reviewers: number;
+  with_expertise: number;
+  without_expertise: number;
+}> {
+  const { data, error } = await supabase.rpc('get_reviewer_stats_admin');
+  
+  if (error) throw error;
+  return data as any;
+}
+
+// Update review round using admin RPC
+export async function updateReviewRoundAdmin(
+  roundId: string,
+  updates: {
+    name?: string;
+    description?: string;
+    startDate?: string;
+    endDate?: string;
+    defaultDeadline?: string;
+    status?: string;
+  }
+): Promise<RPCResponse> {
+  const { data, error } = await supabase.rpc('update_review_round_admin', {
+    p_round_id: roundId,
+    p_name: updates.name,
+    p_description: updates.description,
+    p_start_date: updates.startDate,
+    p_end_date: updates.endDate,
+    p_default_deadline: updates.defaultDeadline,
+    p_status: updates.status
+  });
+
+  if (error) throw error;
+  return data as RPCResponse;
+}
+
+// Delete review round using admin RPC
+export async function deleteReviewRoundAdmin(roundId: string): Promise<RPCResponse> {
+  const { data, error } = await supabase.rpc('delete_review_round_admin', {
+    round_id_param: roundId
+  });
+
+  if (error) throw error;
+  return data as RPCResponse;
+}
+
 export async function updateRoundStatus(roundId: string, status: string) {
   const { error } = await supabase
     .from('review_rounds')

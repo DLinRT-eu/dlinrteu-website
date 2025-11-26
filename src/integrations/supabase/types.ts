@@ -1544,6 +1544,16 @@ export type Database = {
         }
         Returns: string
       }
+      create_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_name: string
+          p_round_number: number
+          p_start_date?: string
+        }
+        Returns: Json
+      }
       debug_reviewer_access: { Args: { reviewer_id: string }; Returns: Json }
       delete_product_review_admin: {
         Args: { review_id: string }
@@ -1681,6 +1691,7 @@ export type Database = {
           updated_at: string
         }[]
       }
+      get_reviewer_stats_admin: { Args: never; Returns: Json }
       get_reviewers_with_workload_admin: {
         Args: never
         Returns: {
@@ -1841,6 +1852,18 @@ export type Database = {
           p_notes?: string
           p_priority?: string
           p_review_id: string
+          p_status?: string
+        }
+        Returns: Json
+      }
+      update_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_end_date?: string
+          p_name?: string
+          p_round_id: string
+          p_start_date?: string
           p_status?: string
         }
         Returns: Json
