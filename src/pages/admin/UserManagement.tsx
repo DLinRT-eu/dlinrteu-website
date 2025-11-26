@@ -324,48 +324,51 @@ export default function UserManagement() {
   const handleRevokeRole = async () => {
     if (!revokeDialog) return;
     
-    const { userId, role } = revokeDialog;
+    const { userId, role, userName } = revokeDialog;
     const loadingKey = `${userId}-${role}`;
     setOperationLoading(loadingKey);
 
     try {
-      const { error } = await supabase
-        .from('user_roles')
-        .delete()
-        .eq('user_id', userId)
-        .eq('role', role);
-
-      if (error) {
-        console.error('Error revoking role:', error);
-        
-        let errorMessage = 'Failed to revoke role';
-        if (error.code === '42501') {
-          errorMessage = 'Permission denied. You may not have sufficient privileges';
-        } else if (error.message) {
-          errorMessage = error.message;
-        }
-        
+      // Verify session first
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !sessionData.session) {
         toast({
-          title: 'Error',
-          description: errorMessage,
+          title: 'Session Expired',
+          description: 'Your session has expired. Please log in again.',
           variant: 'destructive',
         });
-      } else {
-        // Log the role revocation action
-        await supabase.rpc('log_admin_action', {
-          p_action_type: 'role_revoked',
-          p_target_user_id: userId,
-          p_target_user_email: revokeDialog.userEmail,
-          p_details: {
-            target_user_name: revokeDialog.userName,
-            role_revoked: role,
-            timestamp: new Date().toISOString()
-          }
-        });
+        return;
+      }
 
+      // Use the secure RPC function to revoke the role
+      const { data, error } = await supabase.rpc('revoke_role_admin', {
+        p_target_user_id: userId,
+        p_role: role
+      });
+
+      if (error) {
+        console.error('RPC error revoking role:', error);
+        toast({
+          title: 'Error',
+          description: `Failed to revoke role: ${error.message}`,
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const response = data as { success: boolean; error?: string; message?: string } | null;
+
+      if (response?.success === false) {
+        toast({
+          title: 'Error',
+          description: response.error || 'Failed to revoke role',
+          variant: 'destructive',
+        });
+      } else if (response?.success) {
         toast({
           title: 'Success',
-          description: `${role} role revoked from ${revokeDialog.userName}`,
+          description: `${role} role revoked from ${userName}`,
         });
         await fetchUsers();
       }
@@ -589,29 +592,34 @@ export default function UserManagement() {
     const results = { success: 0, failed: 0, errors: [] as string[] };
 
     try {
+      // Verify session first
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !sessionData.session) {
+        toast({
+          title: 'Session Expired',
+          description: 'Your session has expired. Please log in again.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
       for (const userId of Array.from(selectedUserIds)) {
         try {
-          const { error } = await supabase
-            .from('user_roles')
-            .delete()
-            .eq('user_id', userId)
-            .eq('role', bulkSelectedRole);
+          // Use the secure RPC function to revoke the role
+          const { data, error } = await supabase.rpc('revoke_role_admin', {
+            p_target_user_id: userId,
+            p_role: bulkSelectedRole
+          });
 
-          if (error) {
+          const response = data as { success: boolean; error?: string } | null;
+
+          if (error || response?.success === false) {
             results.failed++;
             const userProfile = users.find(u => u.id === userId);
-            results.errors.push(`${userProfile?.email}: ${error.message}`);
+            results.errors.push(`${userProfile?.email}: ${error?.message || response?.error || 'Unknown error'}`);
           } else {
             results.success++;
-            // Log the action
-            await supabase.rpc('log_admin_action', {
-              p_action_type: 'bulk_role_revoked',
-              p_target_user_id: userId,
-              p_details: {
-                role_revoked: bulkSelectedRole,
-                timestamp: new Date().toISOString()
-              }
-            });
           }
         } catch (err: any) {
           results.failed++;
