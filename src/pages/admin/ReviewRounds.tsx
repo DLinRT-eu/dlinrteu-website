@@ -51,6 +51,7 @@ import { format } from "date-fns";
 import { ALL_PRODUCTS } from "@/data";
 import { ReviewerSelectionDialog } from "@/components/admin/review-rounds/ReviewerSelectionDialog";
 import { AssignmentPreviewDialog, type ProposedAssignment } from "@/components/admin/review-rounds/AssignmentPreviewDialog";
+import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
 import { 
   fetchAllRoundAssignments, 
   exportToCSV, 
@@ -573,26 +574,29 @@ export default function ReviewRounds() {
                       )}
                     </TableCell>
                     <TableCell>
-                      {round.status === 'draft' && (
-                        <Button
-                          size="sm"
-                          onClick={() => handleStartRound(round.id, round.default_deadline)}
-                          disabled={assigning === round.id || reviewerStats.reviewersWithExpertise === 0}
-                          title={reviewerStats.reviewersWithExpertise === 0 ? 'No reviewers with expertise available' : ''}
-                        >
-                          {assigning === round.id ? (
-                            <>
-                              <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                              Assigning...
-                            </>
-                          ) : (
-                            <>
-                              <PlayCircle className="h-3 w-3 mr-1" />
-                              Start Round
-                            </>
-                          )}
-                        </Button>
-                      )}
+                      <div className="flex gap-2">
+                        {round.status === 'draft' && (
+                          <Button
+                            size="sm"
+                            onClick={() => handleStartRound(round.id, round.default_deadline)}
+                            disabled={assigning === round.id || reviewerStats.reviewersWithExpertise === 0}
+                            title={reviewerStats.reviewersWithExpertise === 0 ? 'No reviewers with expertise available' : ''}
+                          >
+                            {assigning === round.id ? (
+                              <>
+                                <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                                Assigning...
+                              </>
+                            ) : (
+                              <>
+                                <PlayCircle className="h-3 w-3 mr-1" />
+                                Start Round
+                              </>
+                            )}
+                          </Button>
+                        )}
+                        <RoundActionsMenu round={round} onUpdate={fetchRounds} />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

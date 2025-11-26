@@ -496,6 +496,143 @@ export async function getRoundStatistics(roundId: string): Promise<ReviewRoundSt
 }
 
 /**
+ * Updates a product review using admin RPC (bypasses RLS)
+ */
+export async function updateProductReviewAdmin(
+  reviewId: string,
+  updates: {
+    status?: string;
+    priority?: string;
+    deadline?: string;
+    notes?: string;
+  }
+): Promise<{ success: boolean; error?: string }> {
+  const { data, error } = await supabase.rpc('update_product_review_admin', {
+    p_review_id: reviewId,
+    p_status: updates.status || null,
+    p_priority: updates.priority || null,
+    p_deadline: updates.deadline || null,
+    p_notes: updates.notes || null
+  });
+
+  if (error) {
+    console.error('Error updating review:', error);
+    return { success: false, error: error.message };
+  }
+
+  const result = data as any;
+  return { 
+    success: result?.success ?? false, 
+    error: result?.error 
+  };
+}
+
+/**
+ * Reassigns a product review to a different reviewer
+ */
+export async function reassignProductReviewAdmin(
+  reviewId: string,
+  newReviewerId: string,
+  reason?: string
+): Promise<{ success: boolean; error?: string }> {
+  const { data, error } = await supabase.rpc('reassign_product_review_admin', {
+    p_review_id: reviewId,
+    p_new_reviewer_id: newReviewerId,
+    p_reason: reason || null
+  });
+
+  if (error) {
+    console.error('Error reassigning review:', error);
+    return { success: false, error: error.message };
+  }
+
+  const result = data as any;
+  return { 
+    success: result?.success ?? false, 
+    error: result?.error 
+  };
+}
+
+/**
+ * Removes a product review assignment
+ */
+export async function removeProductReviewAdmin(
+  reviewId: string,
+  reason?: string
+): Promise<{ success: boolean; error?: string }> {
+  const { data, error } = await supabase.rpc('remove_product_review_admin', {
+    p_review_id: reviewId,
+    p_reason: reason || null
+  });
+
+  if (error) {
+    console.error('Error removing review:', error);
+    return { success: false, error: error.message };
+  }
+
+  const result = data as any;
+  return { 
+    success: result?.success ?? false, 
+    error: result?.error 
+  };
+}
+
+/**
+ * Updates review round status (complete, archive, reopen)
+ */
+export async function updateRoundStatusAdmin(
+  roundId: string,
+  status: 'draft' | 'active' | 'completed' | 'archived'
+): Promise<{ success: boolean; error?: string }> {
+  const { data, error } = await supabase.rpc('update_round_status_admin', {
+    p_round_id: roundId,
+    p_status: status
+  });
+
+  if (error) {
+    console.error('Error updating round status:', error);
+    return { success: false, error: error.message };
+  }
+
+  const result = data as any;
+  return { 
+    success: result?.success ?? false, 
+    error: result?.error 
+  };
+}
+
+/**
+ * Clones a review round with all assignments
+ */
+export async function cloneReviewRoundAdmin(
+  sourceRoundId: string,
+  newName: string,
+  description?: string,
+  startDate?: string,
+  deadline?: string
+): Promise<{ success: boolean; newRoundId?: string; error?: string }> {
+  const { data, error } = await supabase.rpc('clone_review_round_admin', {
+    p_source_round_id: sourceRoundId,
+    p_new_name: newName,
+    p_description: description || null,
+    p_start_date: startDate || null,
+    p_default_deadline: deadline || null
+  });
+
+  if (error) {
+    console.error('Error cloning round:', error);
+    return { success: false, error: error.message };
+  }
+
+  const result = data as any;
+  return { 
+    success: result?.success ?? false,
+    newRoundId: result?.new_round_id,
+    error: result?.error 
+  };
+}
+
+/**
  * Updates the status of a review round
  */
 export async function updateRoundStatus(

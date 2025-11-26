@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { Loader2, ArrowLeft, Clock, Users, Package, History } from "lucide-react";
 import {
   Table,
@@ -18,6 +19,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { ALL_PRODUCTS } from "@/data";
+import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
+import { AssignmentActionsMenu } from "@/components/admin/review-rounds/AssignmentActionsMenu";
 
 interface AssignmentHistoryRecord {
   id: string;
@@ -45,6 +48,13 @@ interface AssignmentHistoryRecord {
   };
 }
 
+interface Reviewer {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
 interface Assignment {
   id: string;
   product_id: string;
@@ -65,13 +75,40 @@ export default function ReviewRoundDetails() {
   const [round, setRound] = useState<ReviewRound | null>(null);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [history, setHistory] = useState<AssignmentHistoryRecord[]>([]);
+  const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (roundId) {
       fetchRoundDetails();
+      fetchReviewers();
     }
   }, [roundId]);
+
+  const fetchReviewers = async () => {
+    try {
+      const { data: reviewerRoles, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('user_id')
+        .eq('role', 'reviewer');
+
+      if (rolesError) throw rolesError;
+
+      const reviewerIds = reviewerRoles?.map(r => r.user_id) || [];
+
+      if (reviewerIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, first_name, last_name, email')
+          .in('id', reviewerIds);
+
+        if (profilesError) throw profilesError;
+        setReviewers(profiles as Reviewer[]);
+      }
+    } catch (error) {
+      console.error('Error fetching reviewers:', error);
+    }
+  };
 
   const fetchRoundDetails = async () => {
     if (!roundId) return;
@@ -209,6 +246,12 @@ export default function ReviewRoundDetails() {
     );
   }
 
+  // Calculate progress
+  const completedCount = assignments.filter(a => a.status === 'completed').length;
+  const progressPercent = assignments.length > 0 
+    ? Math.round((completedCount / assignments.length) * 100) 
+    : 0;
+
   return (
     <div className="container mx-auto py-8 space-y-6">
       {/* Header */}
@@ -225,7 +268,25 @@ export default function ReviewRoundDetails() {
         <Badge variant={round.status === 'active' ? 'default' : 'secondary'}>
           {round.status}
         </Badge>
+        <RoundActionsMenu round={round} onUpdate={fetchRoundDetails} />
       </div>
+
+      {/* Progress Bar */}
+      {assignments.length > 0 && (
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base">Overall Progress</CardTitle>
+              <span className="text-sm text-muted-foreground">
+                {completedCount} of {assignments.length} completed ({progressPercent}%)
+              </span>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Progress value={progressPercent} className="h-2" />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -310,40 +371,59 @@ export default function ReviewRoundDetails() {
                       <TableHead>Status</TableHead>
                       <TableHead>Deadline</TableHead>
                       <TableHead>Assigned At</TableHead>
+                      <TableHead className="w-12"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {assignments.map((assignment) => (
-                      <TableRow key={assignment.id}>
-                        <TableCell className="font-medium">
-                          {getProductName(assignment.product_id)}
-                        </TableCell>
-                        <TableCell>
-                          {assignment.reviewer_profile ? (
-                            <div>
+                    {assignments.map((assignment) => {
+                      const isOverdue = assignment.deadline && 
+                        assignment.status !== 'completed' && 
+                        new Date(assignment.deadline) < new Date();
+                      
+                      return (
+                        <TableRow key={assignment.id} className={isOverdue ? 'bg-destructive/5' : ''}>
+                          <TableCell className="font-medium">
+                            {getProductName(assignment.product_id)}
+                          </TableCell>
+                          <TableCell>
+                            {assignment.reviewer_profile ? (
                               <div>
-                                {assignment.reviewer_profile.first_name}{' '}
-                                {assignment.reviewer_profile.last_name}
+                                <div>
+                                  {assignment.reviewer_profile.first_name}{' '}
+                                  {assignment.reviewer_profile.last_name}
+                                </div>
+                                <div className="text-sm text-muted-foreground">
+                                  {assignment.reviewer_profile.email}
+                                </div>
                               </div>
-                              <div className="text-sm text-muted-foreground">
-                                {assignment.reviewer_profile.email}
+                            ) : (
+                              'Unknown'
+                            )}
+                          </TableCell>
+                          <TableCell>{getStatusBadge(assignment.status)}</TableCell>
+                          <TableCell>
+                            {assignment.deadline ? (
+                              <div className={isOverdue ? 'text-destructive font-medium' : ''}>
+                                {format(new Date(assignment.deadline), 'MMM d, yyyy')}
+                                {isOverdue && ' (Overdue)'}
                               </div>
-                            </div>
-                          ) : (
-                            'Unknown'
-                          )}
-                        </TableCell>
-                        <TableCell>{getStatusBadge(assignment.status)}</TableCell>
-                        <TableCell>
-                          {assignment.deadline
-                            ? format(new Date(assignment.deadline), 'MMM d, yyyy')
-                            : '-'}
-                        </TableCell>
-                        <TableCell>
-                          {format(new Date(assignment.assigned_at), 'MMM d, yyyy HH:mm')}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                            ) : (
+                              '-'
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            {format(new Date(assignment.assigned_at), 'MMM d, yyyy HH:mm')}
+                          </TableCell>
+                          <TableCell>
+                            <AssignmentActionsMenu
+                              assignment={assignment}
+                              reviewers={reviewers}
+                              onUpdate={fetchRoundDetails}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               )}
