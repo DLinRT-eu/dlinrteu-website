@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Shield, AlertTriangle, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { InlineAssignmentCell } from './InlineAssignmentCell';
 
 interface ReviewProduct {
   id: string;
@@ -23,6 +24,8 @@ interface ReviewProductsTableProps {
   enableSelection?: boolean;
   selectedIds?: string[];
   onSelectionChange?: (productId: string, checked: boolean) => void;
+  showInlineAssignment?: boolean;
+  onAssignmentChange?: () => void;
 }
 
 export const ReviewProductsTable: React.FC<ReviewProductsTableProps> = ({
@@ -30,8 +33,11 @@ export const ReviewProductsTable: React.FC<ReviewProductsTableProps> = ({
   defaultSort = [{ id: 'issueCount', desc: true }],
   enableSelection = false,
   selectedIds = [],
-  onSelectionChange
-}) => {  const navigate = useNavigate();
+  onSelectionChange,
+  showInlineAssignment = false,
+  onAssignmentChange
+}) => {  
+  const navigate = useNavigate();
 
   const columns: Column<ReviewProduct>[] = [
     ...(enableSelection ? [{
@@ -114,6 +120,17 @@ export const ReviewProductsTable: React.FC<ReviewProductsTableProps> = ({
       sortFn: (a, b) => a.daysSinceReview - b.daysSinceReview,
       cell: (row) => `${row.daysSinceReview} days`
     },
+    ...(showInlineAssignment ? [{
+      id: "assignment",
+      header: "Assigned To",
+      cell: (row: ReviewProduct) => (
+        <InlineAssignmentCell
+          productId={row.id}
+          productName={row.name}
+          onAssignmentChange={() => onAssignmentChange?.()}
+        />
+      )
+    }] : []),
     {
       id: "actions",
       header: "",
