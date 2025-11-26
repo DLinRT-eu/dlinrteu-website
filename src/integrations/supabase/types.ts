@@ -1549,6 +1549,10 @@ export type Database = {
         Args: { review_id: string }
         Returns: boolean
       }
+      delete_review_round_admin: {
+        Args: { round_id_param: string }
+        Returns: Json
+      }
       expire_old_invitations: { Args: never; Returns: undefined }
       get_all_user_roles: {
         Args: { _user_id: string }
