@@ -17,8 +17,10 @@ import { RoleRequestManager } from '@/components/admin/RoleRequestManager';
 import { PermissionDiagnostics } from '@/components/admin/PermissionDiagnostics';
 
 import { useToast } from '@/hooks/use-toast';
-import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare } from 'lucide-react';
+import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare, Download, FileSpreadsheet } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { exportToCSV, exportToExcel, formatExportDate, type ExportUserData } from '@/utils/userExport';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 type AppRole = 'admin' | 'reviewer' | 'company';
 type SortColumn = 'name' | 'email' | 'institution' | null;
@@ -585,6 +587,52 @@ export default function UserManagement() {
     }
   };
 
+  // Export functionality
+  const prepareExportData = (usersToExport: UserProfile[]): ExportUserData[] => {
+    return usersToExport.map(user => ({
+      id: user.id,
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      institution: user.institution || null,
+      roles: user.roles,
+      approvalStatus: user.approval_status || null,
+      createdAt: formatExportDate(user.created_at || '')
+    }));
+  };
+
+  const handleExportCSV = (selectedOnly: boolean = false) => {
+    const usersToExport = selectedOnly 
+      ? users.filter(u => selectedUserIds.has(u.id))
+      : filteredUsers;
+    
+    const exportData = prepareExportData(usersToExport);
+    const filename = `users_export_${new Date().toISOString().split('T')[0]}.csv`;
+    
+    exportToCSV(exportData, filename);
+    
+    toast({
+      title: 'Export Successful',
+      description: `Exported ${exportData.length} user(s) to CSV`,
+    });
+  };
+
+  const handleExportExcel = (selectedOnly: boolean = false) => {
+    const usersToExport = selectedOnly 
+      ? users.filter(u => selectedUserIds.has(u.id))
+      : filteredUsers;
+    
+    const exportData = prepareExportData(usersToExport);
+    const filename = `users_export_${new Date().toISOString().split('T')[0]}.xlsx`;
+    
+    exportToExcel(exportData, filename);
+    
+    toast({
+      title: 'Export Successful',
+      description: `Exported ${exportData.length} user(s) to Excel`,
+    });
+  };
+
   const handleBulkRevokeRole = async () => {
     if (selectedUserIds.size === 0) return;
 
@@ -717,6 +765,26 @@ export default function UserManagement() {
                   </SelectContent>
                 </Select>
               </div>
+
+              {/* Export Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="default">
+                    <Download className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExportCSV(false)}>
+                    <FileSpreadsheet className="h-4 w-4 mr-2" />
+                    Export as CSV ({filteredUsers.length} users)
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExportExcel(false)}>
+                    <FileSpreadsheet className="h-4 w-4 mr-2" />
+                    Export as Excel ({filteredUsers.length} users)
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* Results count and bulk actions */}
@@ -748,6 +816,27 @@ export default function UserManagement() {
                     <UserMinus className="h-4 w-4 mr-2" />
                     Revoke Role ({selectedUserIds.size})
                   </Button>
+                  
+                  {/* Export selected users */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button size="sm" variant="outline">
+                        <Download className="h-4 w-4 mr-2" />
+                        Export Selected
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={() => handleExportCSV(true)}>
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        CSV ({selectedUserIds.size} users)
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExportExcel(true)}>
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Excel ({selectedUserIds.size} users)
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  
                   <Button
                     size="sm"
                     variant="ghost"
