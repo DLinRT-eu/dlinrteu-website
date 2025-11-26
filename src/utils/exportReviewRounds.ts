@@ -82,6 +82,65 @@ export async function fetchRoundAssignments(roundId: string): Promise<Assignment
 }
 
 /**
+ * Fetches assignments for selected review rounds
+ */
+export async function fetchSelectedRoundAssignments(roundIds: string[]): Promise<AssignmentExportData[]> {
+  if (roundIds.length === 0) {
+    throw new Error('No rounds selected');
+  }
+
+  // Get selected rounds
+  const { data: rounds, error: roundsError } = await supabase
+    .from('review_rounds')
+    .select('id, name, round_number')
+    .in('id', roundIds);
+
+  if (roundsError) throw roundsError;
+
+  // Get product reviews for selected rounds
+  const { data: reviews, error: reviewsError } = await supabase
+    .from('product_reviews')
+    .select(`
+      product_id,
+      assigned_to,
+      status,
+      priority,
+      deadline,
+      assigned_at,
+      review_round_id,
+      profiles!product_reviews_assigned_to_fkey(first_name, last_name, email)
+    `)
+    .in('review_round_id', roundIds);
+
+  if (reviewsError) throw reviewsError;
+
+  // Build the export data
+  const exportData: AssignmentExportData[] = reviews.map((review: any) => {
+    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
+    const reviewer = review.profiles;
+    const round = rounds.find(r => r.id === review.review_round_id);
+    
+    return {
+      roundName: round?.name || 'Unknown Round',
+      roundNumber: round?.round_number || 0,
+      productId: review.product_id,
+      productName: product?.name || 'Unknown Product',
+      productCategory: product?.category || 'Unknown',
+      productCompany: product?.company || 'Unknown',
+      reviewerName: reviewer ? `${reviewer.first_name} ${reviewer.last_name}` : 'Unassigned',
+      reviewerEmail: reviewer?.email || '',
+      matchScore: 0,
+      status: review.status,
+      priority: review.priority,
+      assignedDate: review.assigned_at ? new Date(review.assigned_at).toLocaleDateString() : '',
+      deadline: review.deadline ? new Date(review.deadline).toLocaleDateString() : null
+    };
+  });
+
+  return exportData;
+}
+
+/**
  * Fetches all assignments across all review rounds
  */
 export async function fetchAllRoundAssignments(): Promise<AssignmentExportData[]> {
