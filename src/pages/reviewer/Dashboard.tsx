@@ -130,11 +130,9 @@ export default function ReviewerDashboard() {
 
   const fetchRounds = useCallback(async () => {
     try {
+      // Use secure RPC that bypasses RLS
       const { data, error } = await supabase
-        .from('review_rounds')
-        .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false });
+        .rpc('get_active_rounds_for_reviewer');
 
       if (error) throw error;
       setRounds(data || []);

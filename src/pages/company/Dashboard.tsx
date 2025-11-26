@@ -26,11 +26,12 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 interface CompanyRevision {
   id: string;
   product_id: string;
+  company_id?: string;
   revision_date: string;
   changes_summary: string;
-  verification_status: 'pending' | 'approved' | 'rejected';
-  verified_by: string | null;
-  verified_at: string | null;
+  verification_status: 'pending' | 'approved' | 'rejected' | string;
+  verified_by?: string | null;
+  verified_at?: string | null;
   created_at: string;
 }
 
@@ -140,14 +141,16 @@ export default function CompanyDashboard() {
   const fetchRevisions = async () => {
     if (!user) return;
 
-    const { data, error } = await supabase
-      .from('company_revisions')
-      .select('*')
-      .eq('revised_by', user.id)
-      .order('created_at', { ascending: false});
+    try {
+      // Use secure RPC that bypasses RLS
+      const { data, error } = await supabase
+        .rpc('get_my_company_revisions');
 
-    if (!error && data) {
-      setRevisions(data as CompanyRevision[]);
+      if (!error && data) {
+        setRevisions(data as CompanyRevision[]);
+      }
+    } catch (error) {
+      console.error('Error fetching revisions:', error);
     }
     setLoading(false);
   };
@@ -166,44 +169,24 @@ export default function CompanyDashboard() {
     if (!product || !companyUser) return;
 
     try {
-      // Insert into company_product_verifications (for badge display)
-      const { error: verificationError } = await supabase
-        .from('company_product_verifications')
-        .insert({
-          company_id: product.company,
-          product_id: selectedProduct,
-          verified_by: user!.id,
-          verified_at: new Date().toISOString(),
-          verification_notes: 'Product information certified as accurate by company representative',
-        });
+      // Use secure RPC to certify product
+      const { data, error } = await supabase.rpc('certify_product', {
+        p_product_id: selectedProduct,
+        p_company_id: product.company,
+        p_notes: 'Product information certified as accurate by company representative',
+      });
 
-      if (verificationError) {
-        console.error('Error creating verification:', verificationError);
+      if (error) throw error;
+
+      const result = data as { success: boolean; error?: string; message?: string };
+
+      if (!result.success) {
         toast({
           title: 'Error',
-          description: 'Failed to create product verification. Please try again.',
+          description: result.error || 'Failed to certify product',
           variant: 'destructive',
         });
         return;
-      }
-
-      // Also insert into company_revisions (for audit trail)
-      const { error: revisionError } = await supabase
-        .from('company_revisions')
-        .insert({
-          product_id: selectedProduct,
-          company_id: product.company,
-          revised_by: user!.id,
-          revision_date: format(certificationDate, 'yyyy-MM-dd'),
-          changes_summary: 'Company certification: Product information verified and approved',
-          verification_status: 'approved',
-          verified_by: user!.id,
-          verified_at: new Date().toISOString(),
-        });
-
-      if (revisionError) {
-        console.error('Error creating revision:', revisionError);
-        // Don't fail if revision creation fails, verification is more important
       }
 
       toast({
@@ -237,24 +220,28 @@ export default function CompanyDashboard() {
     const product = products.find(p => p.id === selectedProduct);
     if (!product) return;
 
-    const { error } = await supabase
-      .from('company_revisions')
-      .insert({
-        product_id: selectedProduct,
-        company_id: product.company,
-        revised_by: user!.id,
-        revision_date: new Date().toISOString().split('T')[0],
-        changes_summary: changesSummary,
-        verification_status: 'pending',
+    try {
+      // Use secure RPC to create revision
+      const { data, error } = await supabase.rpc('create_company_revision', {
+        p_product_id: selectedProduct,
+        p_company_id: product.company,
+        p_changes_summary: changesSummary,
+        p_revision_date: new Date().toISOString().split('T')[0],
       });
 
-    if (error) {
-      toast({
-        title: 'Error',
-        description: error.message,
-        variant: 'destructive',
-      });
-    } else {
+      if (error) throw error;
+
+      const result = data as { success: boolean; error?: string; message?: string };
+
+      if (!result.success) {
+        toast({
+          title: 'Error',
+          description: result.error || 'Failed to submit revision',
+          variant: 'destructive',
+        });
+        return;
+      }
+
       toast({
         title: 'Success',
         description: 'Revision submitted for verification',
@@ -263,6 +250,12 @@ export default function CompanyDashboard() {
       setSelectedProduct('');
       setChangesSummary('');
       fetchRevisions();
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
     }
   };
 
