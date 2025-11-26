@@ -1662,15 +1662,19 @@ export type Database = {
       get_review_rounds_admin: {
         Args: never
         Returns: {
-          completed_reviews: number
           created_at: string
+          created_by: string
+          default_deadline: string
           description: string
           end_date: string
           id: string
           name: string
+          round_number: number
           start_date: string
           status: string
+          total_assignments: number
           total_products: number
+          updated_at: string
         }[]
       }
       get_reviewers_with_workload_admin: {
