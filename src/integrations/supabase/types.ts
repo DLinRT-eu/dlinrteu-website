@@ -1778,6 +1778,13 @@ export type Database = {
             }
             Returns: Json
           }
+      revoke_role_admin: {
+        Args: {
+          p_role: Database["public"]["Enums"]["app_role"]
+          p_target_user_id: string
+        }
+        Returns: Json
+      }
       schedule_analytics_cleanup: { Args: never; Returns: undefined }
       send_pending_registration_notifications: {
         Args: never
