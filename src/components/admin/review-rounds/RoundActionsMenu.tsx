@@ -113,28 +113,23 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const handleDeleteRound = async () => {
     setDeleting(true);
     try {
-      // First, delete all associated product reviews
-      const { error: reviewsError } = await supabase
-        .from('product_reviews')
-        .delete()
-        .eq('review_round_id', round.id);
+      const { data, error } = await supabase.rpc('delete_review_round_admin', {
+        round_id_param: round.id
+      });
 
-      if (reviewsError) throw reviewsError;
-
-      // Then delete the review round itself
-      const { error: roundError } = await supabase
-        .from('review_rounds')
-        .delete()
-        .eq('id', round.id);
-
-      if (roundError) throw roundError;
+      if (error) throw error;
+      
+      const result = data as { success: boolean; error?: string };
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to delete round');
+      }
 
       toast.success('Review round deleted successfully');
       setShowDeleteDialog(false);
       onUpdate();
     } catch (error) {
       console.error('Error deleting round:', error);
-      toast.error('Failed to delete review round');
+      toast.error(error instanceof Error ? error.message : 'Failed to delete review round');
     } finally {
       setDeleting(false);
     }
