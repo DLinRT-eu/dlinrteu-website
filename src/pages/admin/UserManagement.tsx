@@ -851,13 +851,17 @@ export default function UserManagement() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-12">
-                    <Checkbox
-                      checked={filteredUsers.length > 0 && selectedUserIds.size === filteredUsers.length}
-                      onCheckedChange={toggleSelectAll}
-                      aria-label="Select all users"
-                    />
-                  </TableHead>
+            <TableHead className="w-12" onClick={(e) => e.stopPropagation()}>
+              <Checkbox
+                checked={filteredUsers.length > 0 && selectedUserIds.size === filteredUsers.length}
+                onCheckedChange={(checked) => {
+                  if (checked !== 'indeterminate') {
+                    toggleSelectAll();
+                  }
+                }}
+                aria-label="Select all users"
+              />
+            </TableHead>
                   <TableHead 
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => handleSort('name')}
@@ -899,13 +903,17 @@ export default function UserManagement() {
                 ) : (
                   filteredUsers.map((userProfile) => (
                   <TableRow key={userProfile.id}>
-                    <TableCell>
-                      <Checkbox
-                        checked={selectedUserIds.has(userProfile.id)}
-                        onCheckedChange={() => toggleUserSelection(userProfile.id)}
-                        aria-label={`Select ${userProfile.first_name} ${userProfile.last_name}`}
-                      />
-                    </TableCell>
+              <TableCell onClick={(e) => e.stopPropagation()}>
+                <Checkbox
+                  checked={selectedUserIds.has(userProfile.id)}
+                  onCheckedChange={(checked) => {
+                    if (checked !== 'indeterminate') {
+                      toggleUserSelection(userProfile.id);
+                    }
+                  }}
+                  aria-label={`Select ${userProfile.first_name} ${userProfile.last_name}`}
+                />
+              </TableCell>
                     <TableCell className="font-medium">
                       {userProfile.first_name} {userProfile.last_name}
                     </TableCell>
