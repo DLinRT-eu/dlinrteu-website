@@ -15,6 +15,7 @@ import { ReviewFilters } from '@/components/revision/ReviewFilters';
 import { ReviewDashboardHeader } from '@/components/dashboard/ReviewDashboardHeader';
 import { ReviewDashboardAlerts } from '@/components/dashboard/ReviewDashboardAlerts';
 import { QuickAssignDialog } from '@/components/revision/QuickAssignDialog';
+import { ReviewerWorkloadCard } from '@/components/revision/ReviewerWorkloadCard';
 import { useReviewData } from '@/hooks/useReviewData';
 import { useAuth } from '@/contexts/AuthContext';
 import { ALL_PRODUCTS } from '@/data';
@@ -43,6 +44,7 @@ const ReviewDashboard = () => {
   // Quick assignment state
   const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
   const [showQuickAssign, setShowQuickAssign] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -139,10 +141,15 @@ const ReviewDashboard = () => {
 
   const handleAssignmentComplete = () => {
     setSelectedProductIds([]);
+    setRefreshKey(prev => prev + 1);
     toast({
       title: "Assignment Complete",
       description: "Products have been assigned and notifications sent",
     });
+  };
+
+  const handleInlineAssignmentChange = () => {
+    setRefreshKey(prev => prev + 1);
   };
 
   const selectedProductNames = filteredProducts
@@ -197,6 +204,10 @@ const ReviewDashboard = () => {
         overdueCount={summaryStats.overdueCount}
       />
 
+      {isAdmin && (
+        <ReviewerWorkloadCard key={refreshKey} />
+      )}
+
       <Tabs defaultValue="table" className="w-full">
         <TabsList className="mb-4">
           <TabsTrigger value="table">Product List</TabsTrigger>
@@ -233,6 +244,8 @@ const ReviewDashboard = () => {
                 enableSelection={isAdmin}
                 selectedIds={selectedProductIds}
                 onSelectionChange={handleProductSelect}
+                showInlineAssignment={isAdmin}
+                onAssignmentChange={handleInlineAssignmentChange}
               />
             </CardContent>
           </Card>
