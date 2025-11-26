@@ -19,10 +19,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle } from "lucide-react";
+import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { updateRoundStatusAdmin, cloneReviewRoundAdmin } from "@/utils/reviewRoundUtils";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface RoundActionsMenuProps {
   round: ReviewRound;
@@ -31,7 +42,9 @@ interface RoundActionsMenuProps {
 
 export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const [showCloneDialog, setShowCloneDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [cloning, setCloning] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [cloneData, setCloneData] = useState({
     name: `${round.name} (Copy)`,
     description: round.description || '',
@@ -97,6 +110,36 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
     }
   };
 
+  const handleDeleteRound = async () => {
+    setDeleting(true);
+    try {
+      // First, delete all associated product reviews
+      const { error: reviewsError } = await supabase
+        .from('product_reviews')
+        .delete()
+        .eq('review_round_id', round.id);
+
+      if (reviewsError) throw reviewsError;
+
+      // Then delete the review round itself
+      const { error: roundError } = await supabase
+        .from('review_rounds')
+        .delete()
+        .eq('id', round.id);
+
+      if (roundError) throw roundError;
+
+      toast.success('Review round deleted successfully');
+      setShowDeleteDialog(false);
+      onUpdate();
+    } catch (error) {
+      console.error('Error deleting round:', error);
+      toast.error('Failed to delete review round');
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <>
       <DropdownMenu>
@@ -135,6 +178,16 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           <DropdownMenuItem onClick={() => setShowCloneDialog(true)}>
             <Copy className="h-4 w-4 mr-2" />
             Clone Round
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem 
+            onClick={() => setShowDeleteDialog(true)}
+            className="text-destructive focus:text-destructive"
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete Round
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -204,6 +257,29 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Review Round?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete "{round.name}" and all {round.total_assignments || 0} associated 
+              product review assignments. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteRound}
+              disabled={deleting}
+              className="bg-destructive hover:bg-destructive/90"
+            >
+              {deleting ? 'Deleting...' : 'Delete Round'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }
