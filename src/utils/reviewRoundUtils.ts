@@ -3,6 +3,14 @@ import { ALL_PRODUCTS } from "@/data";
 
 export type AssignmentAlgorithm = 'balanced' | 'random' | 'expertise-first';
 
+// Type for RPC responses
+export interface RPCResponse {
+  success: boolean;
+  error?: string;
+  message?: string;
+  [key: string]: any;
+}
+
 export interface ReviewRound {
   id: string;
   name: string;
@@ -557,7 +565,7 @@ export async function updateProductReviewAdmin(
     deadline?: string;
     notes?: string;
   }
-) {
+): Promise<RPCResponse> {
   const { data, error } = await supabase.rpc('update_product_review_admin', {
     p_review_id: reviewId,
     p_status: updates.status,
@@ -567,14 +575,14 @@ export async function updateProductReviewAdmin(
   });
 
   if (error) throw error;
-  return data;
+  return data as RPCResponse;
 }
 
 export async function reassignProductReviewAdmin(
   reviewId: string,
   newReviewerId: string,
   reason?: string
-) {
+): Promise<RPCResponse> {
   const { data, error } = await supabase.rpc('reassign_product_review_admin', {
     p_review_id: reviewId,
     p_new_reviewer_id: newReviewerId,
@@ -582,33 +590,33 @@ export async function reassignProductReviewAdmin(
   });
 
   if (error) throw error;
-  return data;
+  return data as RPCResponse;
 }
 
 export async function removeProductReviewAdmin(
   reviewId: string,
   reason?: string
-) {
+): Promise<RPCResponse> {
   const { data, error } = await supabase.rpc('remove_product_review_admin', {
     p_review_id: reviewId,
     p_reason: reason
   });
 
   if (error) throw error;
-  return data;
+  return data as RPCResponse;
 }
 
 export async function updateRoundStatusAdmin(
   roundId: string,
   status: string
-) {
+): Promise<RPCResponse> {
   const { data, error } = await supabase.rpc('update_round_status_admin', {
     p_round_id: roundId,
     p_status: status
   });
 
   if (error) throw error;
-  return data;
+  return data as RPCResponse;
 }
 
 export async function cloneReviewRoundAdmin(
@@ -617,7 +625,7 @@ export async function cloneReviewRoundAdmin(
   startDate?: string,
   description?: string,
   defaultDeadline?: string
-) {
+): Promise<RPCResponse> {
   const { data, error } = await supabase.rpc('clone_review_round_admin', {
     p_source_round_id: sourceRoundId,
     p_new_name: newName,
@@ -627,7 +635,7 @@ export async function cloneReviewRoundAdmin(
   });
 
   if (error) throw error;
-  return data;
+  return data as RPCResponse;
 }
 
 export async function updateRoundStatus(roundId: string, status: string) {

@@ -93,8 +93,8 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
       const result = await cloneReviewRoundAdmin(
         round.id,
         cloneData.name,
-        cloneData.description,
         cloneData.startDate,
+        cloneData.description,
         cloneData.deadline || undefined
       );
 
