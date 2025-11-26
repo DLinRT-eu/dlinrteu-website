@@ -1520,6 +1520,16 @@ export type Database = {
       cleanup_old_analytics_data: { Args: never; Returns: undefined }
       cleanup_old_contact_submissions: { Args: never; Returns: number }
       cleanup_old_security_events: { Args: never; Returns: number }
+      clone_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_new_name: string
+          p_source_round_id: string
+          p_start_date?: string
+        }
+        Returns: Json
+      }
       complete_review_secure: {
         Args: { completion_notes?: string; review_id: string }
         Returns: Json
@@ -1778,6 +1788,18 @@ export type Database = {
             }
             Returns: Json
           }
+      reassign_product_review_admin: {
+        Args: {
+          p_new_reviewer_id: string
+          p_reason?: string
+          p_review_id: string
+        }
+        Returns: Json
+      }
+      remove_product_review_admin: {
+        Args: { p_reason?: string; p_review_id: string }
+        Returns: Json
+      }
       revoke_role_admin: {
         Args: {
           p_role: Database["public"]["Enums"]["app_role"]
@@ -1805,6 +1827,20 @@ export type Database = {
           }
         | { Args: { p_assignments: Json; p_round_id: string }; Returns: Json }
       start_review_secure: { Args: { review_id: string }; Returns: Json }
+      update_product_review_admin: {
+        Args: {
+          p_deadline?: string
+          p_notes?: string
+          p_priority?: string
+          p_review_id: string
+          p_status?: string
+        }
+        Returns: Json
+      }
+      update_round_status_admin: {
+        Args: { p_round_id: string; p_status: string }
+        Returns: Json
+      }
       verify_user_registration: {
         Args: { p_user_id: string; p_verified?: boolean }
         Returns: boolean

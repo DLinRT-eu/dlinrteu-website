@@ -254,34 +254,29 @@ export default function ReviewAssignment() {
     const review = reviews.find(r => r.id === reviewId);
     if (!review) return;
 
-    const updates: Database['public']['Tables']['product_reviews']['Update'] = { status: newStatus };
-    
-    // Track timing
-    if (newStatus === 'in_progress' && !review.started_at) {
-      updates.started_at = new Date().toISOString();
-    }
-    if (newStatus === 'completed') {
-      updates.completed_at = new Date().toISOString();
-    }
+    try {
+      // Use admin RPC function to bypass RLS
+      const { updateProductReviewAdmin } = await import('@/utils/reviewRoundUtils');
+      const result = await updateProductReviewAdmin(reviewId, { status: newStatus });
 
-    const { error } = await supabase
-      .from('product_reviews')
-      .update(updates)
-      .eq('id', reviewId);
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to update status');
+      }
 
-    if (error) {
-      toast({ 
-        title: 'Error', 
-        description: error.message, 
-        variant: 'destructive' 
-      });
-    } else {
       toast({ 
         title: 'Success', 
         description: `Review marked as ${newStatus.replace('_', ' ')}` 
       });
       fetchReviews();
       fetchReviewers();
+    } catch (error) {
+      console.error('Error updating status:', error);
+      const message = error instanceof Error ? error.message : 'Failed to update status';
+      toast({ 
+        title: 'Error', 
+        description: message, 
+        variant: 'destructive' 
+      });
     }
   };
 
@@ -293,67 +288,37 @@ export default function ReviewAssignment() {
   const handleConfirmDelete = async () => {
     if (!reviewToDelete) return;
 
-    const review = reviews.find(r => r.id === reviewToDelete);
-    
     try {
-      // Try direct DELETE first
-      const { error: deleteError } = await supabase
-        .from('product_reviews')
-        .delete()
-        .eq('id', reviewToDelete);
+      // Use admin RPC function to bypass RLS
+      const { removeProductReviewAdmin } = await import('@/utils/reviewRoundUtils');
+      const result = await removeProductReviewAdmin(
+        reviewToDelete,
+        'Removed by admin via assignment manager'
+      );
 
-      // If permission denied, try admin RPC fallback
-      if (deleteError && (deleteError.code === '42501' || deleteError.code === 'PGRST301')) {
-        console.warn('Direct DELETE failed, trying admin RPC:', deleteError);
-        
-        const { data, error: rpcError } = await supabase
-          .rpc('delete_product_review_admin', {
-            review_id: reviewToDelete
-          });
-
-        if (rpcError) {
-          throw new Error(`Failed to delete review: ${rpcError.message}. Please check System Diagnostics.`);
-        }
-
-        toast({
-          title: 'Success',
-          description: 'Assignment removed (via admin function)',
-        });
-      } else if (deleteError) {
-        throw deleteError;
-      } else {
-        // Direct DELETE succeeded - log to assignment history manually
-        if (review && review.review_round_id) {
-          await supabase.from('assignment_history').insert({
-            review_round_id: review.review_round_id,
-            product_id: review.product_id,
-            previous_assignee: review.assigned_to,
-            change_type: 'remove',
-            changed_by: user?.id,
-            reason: 'Removed by admin via assignment manager'
-          });
-        }
-        
-        toast({
-          title: 'Success',
-          description: 'Assignment removed',
-        });
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to remove assignment');
       }
+
+      toast({
+        title: 'Success',
+        description: 'Assignment removed',
+      });
 
       fetchReviews();
       fetchReviewers();
     } catch (error) {
       console.error('Error deleting review:', error);
-      const message = error instanceof Error ? error.message : 'Failed to delete assignment. Please verify your admin permissions.';
+      const message = error instanceof Error ? error.message : 'Failed to delete assignment';
       toast({
         title: 'Delete Failed',
         description: message,
         variant: 'destructive',
       });
+    } finally {
+      setConfirmDeleteOpen(false);
+      setReviewToDelete(null);
     }
-
-    setConfirmDeleteOpen(false);
-    setReviewToDelete(null);
   };
 
   const filteredProducts = products.filter(p => 
