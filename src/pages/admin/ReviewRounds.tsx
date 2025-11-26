@@ -45,6 +45,9 @@ import {
   updateRoundStatus,
   calculateProposedAssignments,
   getReviewersByExpertise,
+  createReviewRoundAdmin,
+  getReviewRoundsAdmin,
+  getReviewerStatsAdmin,
   type ReviewRound,
   type ReviewRoundStats,
   type AssignmentAlgorithm
@@ -102,69 +105,24 @@ export default function ReviewRounds() {
 
   const fetchReviewerStats = async () => {
     try {
-      // Count total reviewers (use DISTINCT to avoid duplicates)
-      const { data: reviewers, error: reviewersError } = await supabase
-        .from('user_roles')
-        .select('user_id')
-        .eq('role', 'reviewer');
-
-      if (reviewersError) throw reviewersError;
-
-      // Get unique reviewer IDs
-      const uniqueReviewerIds = new Set(reviewers?.map(r => r.user_id) || []);
-
-      // Count reviewers with expertise (only those who have reviewer role)
-      const { data: expertise, error: expertiseError } = await supabase
-        .from('reviewer_expertise')
-        .select('user_id');
-
-      if (expertiseError) throw expertiseError;
-
-      // Filter expertise to only include current reviewers
-      const reviewerIdsArray = Array.from(uniqueReviewerIds);
-      const uniqueReviewersWithExpertise = new Set(
-        expertise?.filter(e => reviewerIdsArray.includes(e.user_id)).map(e => e.user_id) || []
-      ).size;
-
+      const stats = await getReviewerStatsAdmin();
       setReviewerStats({
-        totalReviewers: uniqueReviewerIds.size,
-        reviewersWithExpertise: uniqueReviewersWithExpertise
+        totalReviewers: stats.total_reviewers,
+        reviewersWithExpertise: stats.with_expertise
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching reviewer stats:', error);
+      toast.error(error.message || 'Failed to load reviewer statistics');
     }
   };
 
   const fetchRounds = async () => {
     try {
-      // Verify session is ready before querying
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        console.warn('[ReviewRounds] No session found, skipping fetch');
-        setLoading(false);
-        return;
-      }
-
-      // Try direct query first
-      const { data, error } = await supabase
-        .from('review_rounds')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        // If direct query fails, try RPC function as fallback
-        console.warn('[ReviewRounds] Direct query failed, trying RPC:', error);
-        const { data: rpcData, error: rpcError } = await supabase
-          .rpc('get_review_rounds_admin');
-        
-        if (rpcError) throw rpcError;
-        setRounds((rpcData || []) as ReviewRound[]);
-      } else {
-        setRounds((data || []) as ReviewRound[]);
-      }
-    } catch (error) {
-      console.error('[ReviewRounds] Error fetching rounds:', error);
-      toast.error('Failed to load review rounds');
+      const data = await getReviewRoundsAdmin();
+      setRounds((data || []) as ReviewRound[]);
+    } catch (error: any) {
+      console.error('Error fetching rounds:', error);
+      toast.error(error.message || 'Failed to load review rounds. Please ensure you have admin privileges.');
     } finally {
       setLoading(false);
     }
@@ -178,26 +136,21 @@ export default function ReviewRounds() {
 
     setCreating(true);
     try {
-      // Get next round number
       const maxRound = rounds.reduce((max, r) => Math.max(max, r.round_number), 0);
       
-      console.log('[ReviewRounds] Creating round:', {
-        name: formData.name,
-        round_number: maxRound + 1,
-        start_date: formData.start_date
-      });
+      const result = await createReviewRoundAdmin(
+        formData.name,
+        maxRound + 1,
+        formData.description || undefined,
+        formData.start_date,
+        formData.default_deadline || undefined
+      );
 
-      await createReviewRound({
-        name: formData.name,
-        description: formData.description,
-        round_number: maxRound + 1,
-        start_date: formData.start_date,
-        end_date: formData.end_date || undefined,
-        default_deadline: formData.default_deadline || undefined
-      });
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to create review round');
+      }
 
-      console.log('[ReviewRounds] Round created successfully');
-      toast.success('Review round created');
+      toast.success('Review round created successfully');
       setShowCreateDialog(false);
       setFormData({
         name: '',
@@ -208,11 +161,8 @@ export default function ReviewRounds() {
       });
       fetchRounds();
     } catch (error: any) {
-      console.error('[ReviewRounds] Error creating round:', error);
-      toast.error(
-        `Failed to create review round: ${error.message || 'Unknown error'}`,
-        { duration: 5000 }
-      );
+      console.error('Error creating round:', error);
+      toast.error(error.message || 'Failed to create review round');
     } finally {
       setCreating(false);
     }
