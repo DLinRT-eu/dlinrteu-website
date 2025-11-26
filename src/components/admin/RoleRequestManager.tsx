@@ -153,70 +153,18 @@ export const RoleRequestManager = () => {
   const handleApproveRequest = async (request: RoleRequest) => {
     setProcessing(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
+      // Use secure RPC to approve request
+      const { data, error } = await supabase.rpc('approve_role_request', {
+        p_request_id: request.id,
+      });
 
-      // Grant the role
-      const { error: roleError } = await supabase
-        .from('user_roles')
-        .insert({
-          user_id: request.user_id,
-          role: request.requested_role,
-          granted_by: user.id,
-        });
+      if (error) throw error;
 
-      if (roleError) throw roleError;
+      const result = data as { success: boolean; error?: string; message?: string };
 
-      // If company role, verify or create company_representatives entry
-      if (request.requested_role === 'company' && request.company_id) {
-        // Check if entry exists
-        const { data: existingRep } = await supabase
-          .from('company_representatives')
-          .select('*')
-          .eq('user_id', request.user_id)
-          .eq('company_id', request.company_id)
-          .maybeSingle();
-
-        if (existingRep) {
-          // Update existing entry
-          const { error: companyError } = await supabase
-            .from('company_representatives')
-            .update({
-              verified: true,
-              verified_by: user.id,
-              verified_at: new Date().toISOString(),
-            })
-            .eq('id', existingRep.id);
-
-          if (companyError) throw companyError;
-        } else {
-          // Create new entry
-          const { error: companyError } = await supabase
-            .from('company_representatives')
-            .insert({
-              user_id: request.user_id,
-              company_name: request.company_id,
-              company_id: request.company_id,
-              verified: true,
-              verified_by: user.id,
-              verified_at: new Date().toISOString(),
-            });
-
-          if (companyError) throw companyError;
-        }
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to approve request');
       }
-
-      // Update request status
-      const { error: updateError } = await supabase
-        .from('role_requests')
-        .update({
-          status: 'approved',
-          reviewed_by: user.id,
-          reviewed_at: new Date().toISOString(),
-        })
-        .eq('id', request.id);
-
-      if (updateError) throw updateError;
 
       toast({
         title: 'Role Approved',
@@ -224,8 +172,8 @@ export const RoleRequestManager = () => {
       });
 
       setSelectedRequest(null);
-      setSelectedIds(new Set()); // Clear selections
-      setCurrentPage(1); // Reset to first page
+      setSelectedIds(new Set());
+      setCurrentPage(1);
       fetchRoleRequests();
     } catch (error: any) {
       toast({
@@ -241,19 +189,18 @@ export const RoleRequestManager = () => {
   const handleRejectRequest = async (request: RoleRequest) => {
     setProcessing(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
-      const { error } = await supabase
-        .from('role_requests')
-        .update({
-          status: 'rejected',
-          reviewed_by: user.id,
-          reviewed_at: new Date().toISOString(),
-        })
-        .eq('id', request.id);
+      // Use secure RPC to reject request
+      const { data, error } = await supabase.rpc('reject_role_request', {
+        p_request_id: request.id,
+      });
 
       if (error) throw error;
+
+      const result = data as { success: boolean; error?: string; message?: string };
+
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to reject request');
+      }
 
       toast({
         title: 'Role Request Rejected',
@@ -261,8 +208,8 @@ export const RoleRequestManager = () => {
       });
 
       setSelectedRequest(null);
-      setSelectedIds(new Set()); // Clear selections
-      setCurrentPage(1); // Reset to first page
+      setSelectedIds(new Set());
+      setCurrentPage(1);
       fetchRoleRequests();
     } catch (error: any) {
       toast({
@@ -325,69 +272,19 @@ export const RoleRequestManager = () => {
     let failCount = 0;
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
       for (const request of selectedRequests) {
         try {
-          // Grant the role
-          const { error: roleError } = await supabase
-            .from('user_roles')
-            .insert({
-              user_id: request.user_id,
-              role: request.requested_role,
-              granted_by: user.id,
-            });
+          // Use secure RPC to approve each request
+          const { data, error } = await supabase.rpc('approve_role_request', {
+            p_request_id: request.id,
+          });
 
-          if (roleError) throw roleError;
+          if (error) throw error;
 
-          // If company role, verify or create company_representatives entry
-          if (request.requested_role === 'company' && request.company_id) {
-            const { data: existingRep } = await supabase
-              .from('company_representatives')
-              .select('*')
-              .eq('user_id', request.user_id)
-              .eq('company_id', request.company_id)
-              .maybeSingle();
-
-            if (existingRep) {
-              const { error: companyError } = await supabase
-                .from('company_representatives')
-                .update({
-                  verified: true,
-                  verified_by: user.id,
-                  verified_at: new Date().toISOString(),
-                })
-                .eq('id', existingRep.id);
-
-              if (companyError) throw companyError;
-            } else {
-              const { error: companyError } = await supabase
-                .from('company_representatives')
-                .insert({
-                  user_id: request.user_id,
-                  company_name: request.company_id,
-                  company_id: request.company_id,
-                  verified: true,
-                  verified_by: user.id,
-                  verified_at: new Date().toISOString(),
-                });
-
-              if (companyError) throw companyError;
-            }
+          const result = data as { success: boolean; error?: string };
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to approve');
           }
-
-          // Update request status
-          const { error: updateError } = await supabase
-            .from('role_requests')
-            .update({
-              status: 'approved',
-              reviewed_by: user.id,
-              reviewed_at: new Date().toISOString(),
-            })
-            .eq('id', request.id);
-
-          if (updateError) throw updateError;
 
           successCount++;
         } catch (error: any) {
@@ -428,21 +325,20 @@ export const RoleRequestManager = () => {
     let failCount = 0;
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
-
       for (const request of selectedRequests) {
         try {
-          const { error } = await supabase
-            .from('role_requests')
-            .update({
-              status: 'rejected',
-              reviewed_by: user.id,
-              reviewed_at: new Date().toISOString(),
-            })
-            .eq('id', request.id);
+          // Use secure RPC to reject each request
+          const { data, error } = await supabase.rpc('reject_role_request', {
+            p_request_id: request.id,
+          });
 
           if (error) throw error;
+
+          const result = data as { success: boolean; error?: string };
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to reject');
+          }
+
           successCount++;
         } catch (error: any) {
           console.error(`Error rejecting request ${request.id}:`, error);

@@ -1487,6 +1487,7 @@ export type Database = {
     }
     Functions: {
       admin_health_check: { Args: never; Returns: Json }
+      approve_role_request: { Args: { p_request_id: string }; Returns: Json }
       batch_check_github_files: { Args: never; Returns: Json }
       can_access_company: {
         Args: { _company_id: string; _user_id: string }
@@ -1508,6 +1509,10 @@ export type Database = {
       can_view_security_data: {
         Args: { user_id_param: string }
         Returns: boolean
+      }
+      certify_product: {
+        Args: { p_company_id: string; p_notes?: string; p_product_id: string }
+        Returns: Json
       }
       check_github_file_modified: {
         Args: {
@@ -1532,6 +1537,15 @@ export type Database = {
       }
       complete_review_secure: {
         Args: { completion_notes?: string; review_id: string }
+        Returns: Json
+      }
+      create_company_revision: {
+        Args: {
+          p_changes_summary: string
+          p_company_id: string
+          p_product_id: string
+          p_revision_date?: string
+        }
         Returns: Json
       }
       create_notification: {
@@ -1564,6 +1578,18 @@ export type Database = {
         Returns: Json
       }
       expire_old_invitations: { Args: never; Returns: undefined }
+      get_active_rounds_for_reviewer: {
+        Args: never
+        Returns: {
+          assignment_count: number
+          default_deadline: string
+          has_assignments: boolean
+          id: string
+          name: string
+          round_number: number
+          status: string
+        }[]
+      }
       get_all_user_roles: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
@@ -1608,6 +1634,18 @@ export type Database = {
       get_highest_role: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
+      }
+      get_my_company_revisions: {
+        Args: never
+        Returns: {
+          changes_summary: string
+          company_id: string
+          created_at: string
+          id: string
+          product_id: string
+          revision_date: string
+          verification_status: string
+        }[]
       }
       get_my_reviews_secure: {
         Args: never
@@ -1826,6 +1864,7 @@ export type Database = {
         }
         Returns: Json
       }
+      reject_role_request: { Args: { p_request_id: string }; Returns: Json }
       remove_product_review_admin: {
         Args: { p_reason?: string; p_review_id: string }
         Returns: Json
