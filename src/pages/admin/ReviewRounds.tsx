@@ -129,15 +129,33 @@ export default function ReviewRounds() {
 
   const fetchRounds = async () => {
     try {
+      // Verify session is ready before querying
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        console.warn('[ReviewRounds] No session found, skipping fetch');
+        setLoading(false);
+        return;
+      }
+
+      // Try direct query first
       const { data, error } = await supabase
         .from('review_rounds')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setRounds((data || []) as ReviewRound[]);
+      if (error) {
+        // If direct query fails, try RPC function as fallback
+        console.warn('[ReviewRounds] Direct query failed, trying RPC:', error);
+        const { data: rpcData, error: rpcError } = await supabase
+          .rpc('get_review_rounds_admin');
+        
+        if (rpcError) throw rpcError;
+        setRounds((rpcData || []) as ReviewRound[]);
+      } else {
+        setRounds((data || []) as ReviewRound[]);
+      }
     } catch (error) {
-      console.error('Error fetching rounds:', error);
+      console.error('[ReviewRounds] Error fetching rounds:', error);
       toast.error('Failed to load review rounds');
     } finally {
       setLoading(false);
