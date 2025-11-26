@@ -17,7 +17,8 @@ import { RoleRequestManager } from '@/components/admin/RoleRequestManager';
 import { PermissionDiagnostics } from '@/components/admin/PermissionDiagnostics';
 
 import { useToast } from '@/hooks/use-toast';
-import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2 } from 'lucide-react';
+import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type AppRole = 'admin' | 'reviewer' | 'company';
 type SortColumn = 'name' | 'email' | 'institution' | null;
@@ -64,6 +65,13 @@ export default function UserManagement() {
   const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; userId: string; userEmail: string; userName: string } | null>(null);
   const [deleteConfirmEmail, setDeleteConfirmEmail] = useState('');
   const [deleteLoading, setDeleteLoading] = useState(false);
+  
+  // Bulk operations state
+  const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
+  const [bulkGrantDialog, setBulkGrantDialog] = useState(false);
+  const [bulkRevokeDialog, setBulkRevokeDialog] = useState(false);
+  const [bulkSelectedRole, setBulkSelectedRole] = useState<AppRole>('reviewer');
+  const [bulkOperationLoading, setBulkOperationLoading] = useState(false);
 
   useEffect(() => {
     // Don't check permissions while still loading auth
@@ -488,6 +496,155 @@ export default function UserManagement() {
     }
   };
 
+  // Bulk operations handlers
+  const toggleUserSelection = (userId: string) => {
+    const newSelected = new Set(selectedUserIds);
+    if (newSelected.has(userId)) {
+      newSelected.delete(userId);
+    } else {
+      newSelected.add(userId);
+    }
+    setSelectedUserIds(newSelected);
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedUserIds.size === filteredUsers.length) {
+      setSelectedUserIds(new Set());
+    } else {
+      setSelectedUserIds(new Set(filteredUsers.map(u => u.id)));
+    }
+  };
+
+  const handleBulkGrantRole = async () => {
+    if (selectedUserIds.size === 0 || !user) return;
+
+    setBulkOperationLoading(true);
+    const results = { success: 0, failed: 0, errors: [] as string[] };
+
+    try {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !sessionData.session) {
+        toast({
+          title: 'Session Expired',
+          description: 'Your session has expired. Please log in again.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      for (const userId of Array.from(selectedUserIds)) {
+        try {
+          const { data, error } = await supabase.rpc('grant_role_admin', {
+            p_target_user_id: userId,
+            p_role: bulkSelectedRole,
+            p_granted_by: user.id
+          });
+
+          const response = data as { success: boolean; error?: string } | null;
+
+          if (error || response?.success === false) {
+            results.failed++;
+            const userProfile = users.find(u => u.id === userId);
+            results.errors.push(`${userProfile?.email}: ${error?.message || response?.error || 'Unknown error'}`);
+          } else {
+            results.success++;
+          }
+        } catch (err: any) {
+          results.failed++;
+          const userProfile = users.find(u => u.id === userId);
+          results.errors.push(`${userProfile?.email}: ${err.message}`);
+        }
+      }
+
+      // Show results
+      if (results.success > 0) {
+        toast({
+          title: 'Bulk Grant Complete',
+          description: `Successfully granted ${bulkSelectedRole} role to ${results.success} user(s)${results.failed > 0 ? `, ${results.failed} failed` : ''}`,
+        });
+      }
+
+      if (results.failed > 0 && results.errors.length > 0) {
+        console.error('Bulk grant errors:', results.errors);
+        toast({
+          title: 'Some Operations Failed',
+          description: `${results.failed} operation(s) failed. Check console for details.`,
+          variant: 'destructive',
+        });
+      }
+
+      await fetchUsers();
+      setBulkGrantDialog(false);
+      setSelectedUserIds(new Set());
+    } finally {
+      setBulkOperationLoading(false);
+    }
+  };
+
+  const handleBulkRevokeRole = async () => {
+    if (selectedUserIds.size === 0) return;
+
+    setBulkOperationLoading(true);
+    const results = { success: 0, failed: 0, errors: [] as string[] };
+
+    try {
+      for (const userId of Array.from(selectedUserIds)) {
+        try {
+          const { error } = await supabase
+            .from('user_roles')
+            .delete()
+            .eq('user_id', userId)
+            .eq('role', bulkSelectedRole);
+
+          if (error) {
+            results.failed++;
+            const userProfile = users.find(u => u.id === userId);
+            results.errors.push(`${userProfile?.email}: ${error.message}`);
+          } else {
+            results.success++;
+            // Log the action
+            await supabase.rpc('log_admin_action', {
+              p_action_type: 'bulk_role_revoked',
+              p_target_user_id: userId,
+              p_details: {
+                role_revoked: bulkSelectedRole,
+                timestamp: new Date().toISOString()
+              }
+            });
+          }
+        } catch (err: any) {
+          results.failed++;
+          const userProfile = users.find(u => u.id === userId);
+          results.errors.push(`${userProfile?.email}: ${err.message}`);
+        }
+      }
+
+      // Show results
+      if (results.success > 0) {
+        toast({
+          title: 'Bulk Revoke Complete',
+          description: `Successfully revoked ${bulkSelectedRole} role from ${results.success} user(s)${results.failed > 0 ? `, ${results.failed} failed` : ''}`,
+        });
+      }
+
+      if (results.failed > 0 && results.errors.length > 0) {
+        console.error('Bulk revoke errors:', results.errors);
+        toast({
+          title: 'Some Operations Failed',
+          description: `${results.failed} operation(s) failed. Check console for details.`,
+          variant: 'destructive',
+        });
+      }
+
+      await fetchUsers();
+      setBulkRevokeDialog(false);
+      setSelectedUserIds(new Set());
+    } finally {
+      setBulkOperationLoading(false);
+    }
+  };
+
   if (loading || authLoading) {
     return (
       <PageLayout>
@@ -554,14 +711,56 @@ export default function UserManagement() {
               </div>
             </div>
 
-            {/* Results count */}
-            <div className="text-sm text-muted-foreground mb-4">
-              Showing {filteredUsers.length} of {users.length} users
+            {/* Results count and bulk actions */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm text-muted-foreground">
+                Showing {filteredUsers.length} of {users.length} users
+                {selectedUserIds.size > 0 && (
+                  <span className="ml-2 font-medium text-primary">
+                    ({selectedUserIds.size} selected)
+                  </span>
+                )}
+              </div>
+
+              {selectedUserIds.size > 0 && (
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setBulkGrantDialog(true)}
+                  >
+                    <UserPlus className="h-4 w-4 mr-2" />
+                    Grant Role ({selectedUserIds.size})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setBulkRevokeDialog(true)}
+                  >
+                    <UserMinus className="h-4 w-4 mr-2" />
+                    Revoke Role ({selectedUserIds.size})
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setSelectedUserIds(new Set())}
+                  >
+                    Clear Selection
+                  </Button>
+                </div>
+              )}
             </div>
 
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-12">
+                    <Checkbox
+                      checked={filteredUsers.length > 0 && selectedUserIds.size === filteredUsers.length}
+                      onCheckedChange={toggleSelectAll}
+                      aria-label="Select all users"
+                    />
+                  </TableHead>
                   <TableHead 
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => handleSort('name')}
@@ -596,13 +795,20 @@ export default function UserManagement() {
               <TableBody>
                 {filteredUsers.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                       No users found matching your filters
                     </TableCell>
                   </TableRow>
                 ) : (
                   filteredUsers.map((userProfile) => (
                   <TableRow key={userProfile.id}>
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedUserIds.has(userProfile.id)}
+                        onCheckedChange={() => toggleUserSelection(userProfile.id)}
+                        aria-label={`Select ${userProfile.first_name} ${userProfile.last_name}`}
+                      />
+                    </TableCell>
                     <TableCell className="font-medium">
                       {userProfile.first_name} {userProfile.last_name}
                     </TableCell>
@@ -801,6 +1007,134 @@ export default function UserManagement() {
                   </>
                 ) : (
                   'Delete User Permanently'
+                )}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        {/* Bulk Grant Role Dialog */}
+        <Dialog open={bulkGrantDialog} onOpenChange={setBulkGrantDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Bulk Grant Role</DialogTitle>
+              <DialogDescription>
+                Grant a role to {selectedUserIds.size} selected user(s)
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Select Role</label>
+                <Select value={bulkSelectedRole} onValueChange={(v) => setBulkSelectedRole(v as AppRole)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="reviewer">Reviewer</SelectItem>
+                    <SelectItem value="company">Company</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="bg-muted p-3 rounded-md text-sm">
+                <p className="font-medium mb-2">Selected users:</p>
+                <ul className="space-y-1 max-h-32 overflow-y-auto">
+                  {Array.from(selectedUserIds).map(id => {
+                    const user = users.find(u => u.id === id);
+                    return user ? (
+                      <li key={id} className="text-muted-foreground">
+                        {user.first_name} {user.last_name} ({user.email})
+                      </li>
+                    ) : null;
+                  })}
+                </ul>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button 
+                variant="outline" 
+                onClick={() => setBulkGrantDialog(false)}
+                disabled={bulkOperationLoading}
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleBulkGrantRole}
+                disabled={bulkOperationLoading}
+              >
+                {bulkOperationLoading ? (
+                  <>
+                    <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent mr-2" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <CheckSquare className="h-4 w-4 mr-2" />
+                    Grant to {selectedUserIds.size} User(s)
+                  </>
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Bulk Revoke Role Dialog */}
+        <AlertDialog open={bulkRevokeDialog} onOpenChange={setBulkRevokeDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Bulk Revoke Role</AlertDialogTitle>
+              <AlertDialogDescription asChild>
+                <div className="space-y-4">
+                  <p>
+                    You are about to revoke the <strong>{bulkSelectedRole}</strong> role from{' '}
+                    <strong>{selectedUserIds.size}</strong> user(s).
+                  </p>
+                  <div className="bg-muted p-3 rounded-md text-sm">
+                    <p className="font-medium mb-2">Selected users:</p>
+                    <ul className="space-y-1 max-h-32 overflow-y-auto">
+                      {Array.from(selectedUserIds).map(id => {
+                        const user = users.find(u => u.id === id);
+                        return user ? (
+                          <li key={id} className="text-muted-foreground">
+                            {user.first_name} {user.last_name} ({user.email})
+                          </li>
+                        ) : null;
+                      })}
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Select Role to Revoke</label>
+                    <Select value={bulkSelectedRole} onValueChange={(v) => setBulkSelectedRole(v as AppRole)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="reviewer">Reviewer</SelectItem>
+                        <SelectItem value="company">Company</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    This will immediately remove their access to {bulkSelectedRole}-specific features.
+                  </p>
+                </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={bulkOperationLoading}>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleBulkRevokeRole}
+                disabled={bulkOperationLoading}
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              >
+                {bulkOperationLoading ? (
+                  <>
+                    <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent mr-2" />
+                    Processing...
+                  </>
+                ) : (
+                  `Revoke from ${selectedUserIds.size} User(s)`
                 )}
               </AlertDialogAction>
             </AlertDialogFooter>
