@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Loader2, Users, Search } from "lucide-react";
+import { Loader2, Users, Search, AlertCircle } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -20,12 +20,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getReviewersByExpertise, type ReviewerWithExpertise } from "@/utils/reviewRoundUtils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { getReviewersByExpertise, type ReviewerWithExpertise, type AssignmentAlgorithm } from "@/utils/reviewRoundUtils";
 
 interface ReviewerSelectionDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onContinue: (selectedReviewerIds: string[]) => void;
+  onContinue: (selectedReviewerIds: string[], algorithm: AssignmentAlgorithm) => void;
   totalProducts: number;
 }
 
@@ -39,6 +47,7 @@ export function ReviewerSelectionDialog({
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [algorithm, setAlgorithm] = useState<AssignmentAlgorithm>('balanced');
 
   useEffect(() => {
     if (open) {
@@ -95,6 +104,10 @@ export function ReviewerSelectionDialog({
   const maxVariance = selectedCount > 0
     ? Math.ceil(totalProducts / selectedCount) - avgPerReviewer
     : 0;
+  
+  const selectedReviewers = reviewers.filter(r => selectedIds.has(r.user_id));
+  const reviewersWithExpertise = selectedReviewers.filter(r => r.expertise.length > 0);
+  const hasAnyExpertise = reviewersWithExpertise.length > 0;
 
   const getExpertiseCount = (reviewer: ReviewerWithExpertise) => {
     const categories = reviewer.expertise.filter(e => e.preference_type === 'category').length;
@@ -158,6 +171,31 @@ export function ReviewerSelectionDialog({
                   </div>
                 )}
               </div>
+
+              {/* Algorithm Selection */}
+              <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+                <span className="text-sm font-medium">Assignment Algorithm:</span>
+                <Select value={algorithm} onValueChange={(value) => setAlgorithm(value as AssignmentAlgorithm)}>
+                  <SelectTrigger className="w-[220px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="balanced">Balanced + Preferences</SelectItem>
+                    <SelectItem value="random">Pure Random</SelectItem>
+                    <SelectItem value="expertise-first">Expertise First (Legacy)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Warning for no expertise */}
+              {!hasAnyExpertise && selectedCount > 0 && algorithm !== 'random' && (
+                <Alert variant="default" className="border-yellow-500/50 bg-yellow-500/10">
+                  <AlertCircle className="h-4 w-4 text-yellow-600" />
+                  <AlertDescription className="text-sm text-yellow-600">
+                    No selected reviewers have expertise set. Products will be grouped by category for task consistency.
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
 
             {/* Reviewers Table */}
@@ -243,7 +281,7 @@ export function ReviewerSelectionDialog({
             Cancel
           </Button>
           <Button
-            onClick={() => onContinue(Array.from(selectedIds))}
+            onClick={() => onContinue(Array.from(selectedIds), algorithm)}
             disabled={selectedIds.size === 0}
           >
             Continue to Assignment Preview

@@ -46,7 +46,8 @@ import {
   calculateProposedAssignments,
   getReviewersByExpertise,
   type ReviewRound,
-  type ReviewRoundStats
+  type ReviewRoundStats,
+  type AssignmentAlgorithm
 } from "@/utils/reviewRoundUtils";
 import { format } from "date-fns";
 import { ALL_PRODUCTS } from "@/data";
@@ -235,13 +236,13 @@ export default function ReviewRounds() {
     setShowReviewerSelection(true);
   };
 
-  const handleReviewerSelectionContinue = async (selectedReviewerIds: string[]) => {
+  const handleReviewerSelectionContinue = async (selectedReviewerIds: string[], algorithm: AssignmentAlgorithm) => {
     setShowReviewerSelection(false);
     
     try {
-      // Calculate proposed assignments
+      // Calculate proposed assignments with algorithm
       const productIds = ALL_PRODUCTS.map(p => p.id);
-      const proposed = await calculateProposedAssignments(productIds, selectedReviewerIds);
+      const proposed = await calculateProposedAssignments(productIds, selectedReviewerIds, algorithm);
       const reviewers = await getReviewersByExpertise();
       
       setProposedAssignments(proposed);
