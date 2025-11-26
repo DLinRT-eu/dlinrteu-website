@@ -53,6 +53,8 @@ import { ALL_PRODUCTS } from "@/data";
 import { ReviewerSelectionDialog } from "@/components/admin/review-rounds/ReviewerSelectionDialog";
 import { AssignmentPreviewDialog, type ProposedAssignment } from "@/components/admin/review-rounds/AssignmentPreviewDialog";
 import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
+import { RoundsBulkActionsMenu } from "@/components/admin/review-rounds/RoundsBulkActionsMenu";
+import { Checkbox } from "@/components/ui/checkbox";
 import { 
   fetchAllRoundAssignments, 
   exportToCSV, 
@@ -82,6 +84,7 @@ export default function ReviewRounds() {
   const [proposedAssignments, setProposedAssignments] = useState<ProposedAssignment[]>([]);
   const [selectedReviewers, setSelectedReviewers] = useState<any[]>([]);
   const [exporting, setExporting] = useState(false);
+  const [selectedRounds, setSelectedRounds] = useState<Set<string>>(new Set());
   
   const [formData, setFormData] = useState({
     name: '',
@@ -383,6 +386,30 @@ export default function ReviewRounds() {
     }
   };
 
+  const handleSelectRound = (roundId: string) => {
+    setSelectedRounds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(roundId)) {
+        newSet.delete(roundId);
+      } else {
+        newSet.add(roundId);
+      }
+      return newSet;
+    });
+  };
+
+  const handleSelectAll = () => {
+    if (selectedRounds.size === rounds.length) {
+      setSelectedRounds(new Set());
+    } else {
+      setSelectedRounds(new Set(rounds.map(r => r.id)));
+    }
+  };
+
+  const clearSelection = () => {
+    setSelectedRounds(new Set());
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: Record<string, any> = {
       draft: { variant: 'secondary', icon: Clock },
@@ -565,6 +592,13 @@ export default function ReviewRounds() {
                 View and manage all review rounds
               </CardDescription>
             </CardHeader>
+            {selectedRounds.size > 0 && (
+              <RoundsBulkActionsMenu
+                selectedRoundIds={Array.from(selectedRounds)}
+                onUpdate={fetchRounds}
+                onClearSelection={clearSelection}
+              />
+            )}
             <CardContent>
           {rounds.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
@@ -582,6 +616,13 @@ export default function ReviewRounds() {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-12">
+                    <Checkbox
+                      checked={rounds.length > 0 && selectedRounds.size === rounds.length}
+                      onCheckedChange={handleSelectAll}
+                      aria-label="Select all rounds"
+                    />
+                  </TableHead>
                   <TableHead>Round</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Status</TableHead>
@@ -595,6 +636,13 @@ export default function ReviewRounds() {
               <TableBody>
                 {rounds.map((round) => (
                   <TableRow key={round.id}>
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedRounds.has(round.id)}
+                        onCheckedChange={() => handleSelectRound(round.id)}
+                        aria-label={`Select ${round.name}`}
+                      />
+                    </TableCell>
                     <TableCell className="font-medium">#{round.round_number}</TableCell>
                     <TableCell>
                       <div>
