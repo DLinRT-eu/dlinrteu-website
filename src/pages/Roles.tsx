@@ -323,7 +323,14 @@ export default function Roles() {
                     <span className="text-green-500 mt-0.5">✓</span>
                     <div>
                       <p className="font-medium">User + Company</p>
-                      <p className="text-xs text-muted-foreground">Manage company products and personal tracking</p>
+                      <p className="text-xs text-muted-foreground">Manage company products (cannot have personal product adoptions)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2 p-3 bg-green-50 rounded-lg">
+                    <span className="text-green-500 mt-0.5">✓</span>
+                    <div>
+                      <p className="font-medium">Reviewer + Company</p>
+                      <p className="text-xs text-muted-foreground">Review products while representing your company (conflict disclosure required)</p>
                     </div>
                   </div>
                 </div>
@@ -335,10 +342,11 @@ export default function Roles() {
                   <div className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
                     <span className="text-red-500 mt-0.5">✗</span>
                     <div>
-                      <p className="font-medium">Reviewer + Company Representative</p>
+                      <p className="font-medium">Administrator + Company Representative</p>
                       <p className="text-xs text-muted-foreground">
-                        These roles are incompatible due to conflict of interest. A company representative cannot review products objectively, 
-                        especially those of competitors. If you need to switch roles, contact an administrator to have your current role removed first.
+                        Administrators have platform-wide oversight and cannot represent individual companies due to conflict of interest 
+                        and governance requirements. This restriction ensures impartial platform management and prevents conflicts between 
+                        administrative duties and company interests.
                       </p>
                     </div>
                   </div>
