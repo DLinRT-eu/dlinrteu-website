@@ -41,6 +41,7 @@ const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
 const UserProductAdoptions = lazy(() => import("./pages/admin/UserProductAdoptions"));
+const CertificationManagement = lazy(() => import("./pages/admin/CertificationManagement"));
 
 // Admin Pages
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
@@ -214,6 +215,11 @@ const App = () => (
                 <Route path="/admin/user-products" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <UserProductAdoptions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/certifications" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <CertificationManagement />
                   </ProtectedRoute>
                 } />
                 

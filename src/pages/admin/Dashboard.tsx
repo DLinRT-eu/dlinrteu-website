@@ -23,7 +23,8 @@ import {
   Calendar,
   Stethoscope,
   RefreshCw,
-  UserCheck
+  UserCheck,
+  Package
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -427,6 +428,12 @@ export default function AdminDashboard() {
                 <Link to="/admin/companies">
                   <Building2 className="h-5 w-5" />
                   <span>Company Reps</span>
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+                <Link to="/admin/certifications">
+                  <CheckCircle className="h-5 w-5" />
+                  <span>Certifications</span>
                 </Link>
               </Button>
             </div>
