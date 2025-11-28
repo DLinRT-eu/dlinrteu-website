@@ -22,7 +22,8 @@ import {
   Building2,
   Calendar,
   Stethoscope,
-  RefreshCw
+  RefreshCw,
+  UserCheck
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -384,6 +385,12 @@ export default function AdminDashboard() {
                 <Link to="/admin/users">
                   <Users className="h-5 w-5" />
                   <span>Manage Users</span>
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+                <Link to="/admin/registrations">
+                  <UserCheck className="h-5 w-5" />
+                  <span>Registration Review</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
