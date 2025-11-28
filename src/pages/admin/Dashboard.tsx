@@ -108,10 +108,9 @@ export default function AdminDashboard() {
         .select('*', { count: 'exact', head: true })
         .eq('status', 'pending');
 
-      // Fetch review stats
+      // Fetch review stats using RPC
       const { data: reviewsData } = await supabase
-        .from('product_reviews')
-        .select('status, deadline');
+        .rpc('get_product_reviews_admin_secure');
 
       const now = new Date();
       const reviewStats = {
@@ -173,12 +172,20 @@ export default function AdminDashboard() {
       .order('created_at', { ascending: false })
       .limit(5);
 
-    // Step 2: Fetch recent review assignments (last 5)
-    const { data: reviews } = await supabase
-      .from('product_reviews')
-      .select('id, product_id, assigned_at, assigned_to')
-      .order('assigned_at', { ascending: false })
-      .limit(5);
+    // Step 2: Fetch recent review assignments using RPC
+    const { data: allReviews } = await supabase
+      .rpc('get_product_reviews_admin_secure');
+    
+    // Take last 5 and map to expected format
+    const reviews = allReviews
+      ?.sort((a, b) => new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime())
+      .slice(0, 5)
+      .map(r => ({
+        id: r.id,
+        product_id: r.product_id,
+        assigned_at: r.created_at,
+        assigned_to: r.assigned_to
+      }));
 
     // Step 3: Collect all unique user IDs
     const userIds = new Set<string>();
