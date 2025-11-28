@@ -327,6 +327,31 @@ export default function UserManagement() {
     if (!revokeDialog) return;
     
     const { userId, role, userName } = revokeDialog;
+    
+    // Validate userId before proceeding
+    if (!userId || typeof userId !== 'string') {
+      console.error('[UserManagement] Invalid userId for revoke operation:', userId);
+      toast({
+        title: 'Error',
+        description: 'Invalid user ID. Cannot revoke role.',
+        variant: 'destructive',
+      });
+      setRevokeDialog(null);
+      return;
+    }
+    
+    // Validate role
+    if (!role || !['admin', 'reviewer', 'company'].includes(role)) {
+      console.error('[UserManagement] Invalid role for revoke operation:', role);
+      toast({
+        title: 'Error',
+        description: 'Invalid role type. Cannot revoke role.',
+        variant: 'destructive',
+      });
+      setRevokeDialog(null);
+      return;
+    }
+    
     const loadingKey = `${userId}-${role}`;
     setOperationLoading(loadingKey);
 
@@ -343,10 +368,17 @@ export default function UserManagement() {
         return;
       }
 
-      // Use the secure RPC function to revoke the role
+      // Debug logging
+      console.log('[UserManagement] Revoking role with validated parameters:', {
+        userId,
+        role,
+        roleType: typeof role
+      });
+
+      // Use the secure RPC function to revoke the role with explicit type casting
       const { data, error } = await supabase.rpc('revoke_role_admin', {
         p_target_user_id: userId,
-        p_role: role
+        p_role: role as 'admin' | 'reviewer' | 'company' // Explicit type casting for PostgREST
       });
 
       if (error) {
