@@ -36,6 +36,7 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
   // Compute which roles the user already has
   const hasReviewerRole = roles.includes('reviewer');
   const hasCompanyRole = roles.includes('company');
+  const hasAdminRole = roles.includes('admin');
 
   useEffect(() => {
     // Check if user has products (incompatible with company role)
@@ -99,14 +100,9 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
       return;
     }
 
-    // Check for conflicting roles - Reviewer and Company are incompatible
-    if (requestedRole === 'company' && hasReviewerRole) {
-      toast.error('Company role is incompatible with Reviewer role. Please contact an admin to remove your Reviewer role first.');
-      return;
-    }
-
-    if (requestedRole === 'reviewer' && hasCompanyRole) {
-      toast.error('Reviewer role is incompatible with Company role. Please contact an admin to remove your Company role first.');
+    // Check for conflicting roles - Admin and Company are incompatible
+    if (requestedRole === 'company' && hasAdminRole) {
+      toast.error('Company role is incompatible with Administrator role. Administrators cannot represent companies due to conflict of interest.');
       return;
     }
 
@@ -222,7 +218,7 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
           <CardTitle>Request a Role</CardTitle>
           {(hasReviewerRole || hasCompanyRole) && (
             <CardDescription className="text-amber-600">
-              You can request additional roles. Note: Company role is incompatible with Reviewer role.
+              You can request additional roles. Note: Company role is incompatible with Administrator role.
             </CardDescription>
           )}
           {!hasReviewerRole && !hasCompanyRole && (
@@ -238,7 +234,7 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
             <strong>Important Role Restrictions:</strong>
             <ul className="mt-2 ml-4 list-disc text-sm">
               <li><strong>Company Representatives</strong> cannot have user product adoptions (conflict of interest)</li>
-              <li><strong>Company Representatives</strong> and <strong>Reviewers</strong> are incompatible roles</li>
+              <li><strong>Administrators</strong> and <strong>Company Representatives</strong> are incompatible roles</li>
               <li>All registered users have basic access by default - only request specialized roles if needed</li>
             </ul>
           </AlertDescription>
@@ -263,11 +259,12 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
                 </SelectItem>
                 <SelectItem 
                   value="company" 
-                  disabled={hasUserProducts || hasCompanyRole}
+                  disabled={hasUserProducts || hasCompanyRole || hasAdminRole}
                 >
                   Company Representative 
                   {hasCompanyRole && ' (Already assigned)'}
-                  {hasUserProducts && !hasCompanyRole && ' (Remove product adoptions first)'}
+                  {hasAdminRole && ' (Incompatible with Admin role)'}
+                  {hasUserProducts && !hasCompanyRole && !hasAdminRole && ' (Remove product adoptions first)'}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -279,19 +276,11 @@ export default function RoleRequestForm({ onRequestSubmitted }: RoleRequestFormP
                 </AlertDescription>
               </Alert>
             )}
-            {hasReviewerRole && requestedRole === 'company' && (
+            {hasAdminRole && requestedRole === 'company' && (
               <Alert variant="destructive" className="mt-2">
                 <AlertTriangle className="h-4 w-4" />
                 <AlertDescription className="text-sm">
-                  Company representative role is incompatible with Reviewer role due to conflict of interest. You will need to have your Reviewer role removed first.
-                </AlertDescription>
-              </Alert>
-            )}
-            {hasCompanyRole && requestedRole === 'reviewer' && (
-              <Alert variant="destructive" className="mt-2">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription className="text-sm">
-                  Reviewer role is incompatible with Company representative role due to conflict of interest. You will need to have your Company role removed first.
+                  Company representative role is incompatible with Administrator role. Administrators have platform-wide oversight and cannot represent individual companies due to governance requirements.
                 </AlertDescription>
               </Alert>
             )}
