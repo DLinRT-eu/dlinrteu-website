@@ -407,9 +407,9 @@ export default function AdminDashboard() {
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/company/dashboard">
+                <Link to="/admin/companies">
                   <Building2 className="h-5 w-5" />
-                  <span>Company Oversight</span>
+                  <span>Company Management</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">

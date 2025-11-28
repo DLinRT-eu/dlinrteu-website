@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -32,6 +32,9 @@ interface CompanyRepresentative {
   };
 }
 
+type SortField = 'name' | 'reps' | 'verified';
+type SortOrder = 'asc' | 'desc';
+
 export default function CompanyManagement() {
   const { user } = useAuth();
   const [representatives, setRepresentatives] = useState<CompanyRepresentative[]>([]);
@@ -42,6 +45,8 @@ export default function CompanyManagement() {
   const [userEmail, setUserEmail] = useState('');
   const [position, setPosition] = useState('');
   const [processing, setProcessing] = useState(false);
+  const [sortField, setSortField] = useState<SortField>('name');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
 
   useEffect(() => {
     fetchRepresentatives();
@@ -97,13 +102,17 @@ export default function CompanyManagement() {
         return;
       }
 
-      // Check if already assigned
+      // Check if already assigned - match both company_id AND company_name
+      const company = COMPANIES.find(c => c.id === selectedCompanyId);
+      const companyName = company?.name || selectedCompanyId;
+      
       const existing = representatives.find(
-        rep => rep.user_id === profileData.id && rep.company_id === selectedCompanyId
+        rep => rep.user_id === profileData.id && 
+               (rep.company_id === selectedCompanyId || rep.company_name === companyName)
       );
 
       if (existing) {
-        toast.error('User is already assigned to this company');
+        toast.error('This user is already a representative for this company');
         return;
       }
 
@@ -115,7 +124,6 @@ export default function CompanyManagement() {
       }
 
       // Create company representative
-      const company = COMPANIES.find(c => c.id === selectedCompanyId);
       const { error: insertError } = await supabase
         .from('company_representatives')
         .insert({
@@ -137,7 +145,12 @@ export default function CompanyManagement() {
       fetchRepresentatives();
     } catch (error: any) {
       console.error('Error assigning user:', error);
-      toast.error(error.message || 'Failed to assign user');
+      // Better error message for duplicate key constraint
+      if (error.message?.includes('duplicate key') || error.message?.includes('company_representatives_user_id_company_name_key')) {
+        toast.error('This user is already a representative for this company');
+      } else {
+        toast.error(error.message || 'Failed to assign user');
+      }
     } finally {
       setProcessing(false);
     }
@@ -222,13 +235,47 @@ export default function CompanyManagement() {
     }
   };
 
+  const toggleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('asc');
+    }
+  };
+
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) return <ArrowUpDown className="h-4 w-4" />;
+    return sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />;
+  };
+
   const filteredCompanies = COMPANIES.filter(company =>
     company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     company.id.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Sort companies
+  const sortedCompanies = [...filteredCompanies].sort((a, b) => {
+    let compareValue = 0;
+    
+    if (sortField === 'name') {
+      compareValue = a.name.localeCompare(b.name);
+    } else if (sortField === 'reps') {
+      compareValue = getCompanyReps(a.id).length - getCompanyReps(b.id).length;
+    } else if (sortField === 'verified') {
+      compareValue = getVerifiedCount(a.id) - getVerifiedCount(b.id);
+    }
+    
+    return sortOrder === 'asc' ? compareValue : -compareValue;
+  });
+
   const pendingCount = representatives.filter(r => !r.verified).length;
   const totalCompaniesWithReps = new Set(representatives.map(r => r.company_id)).size;
+
+  // Sort pending representatives by date
+  const sortedPendingReps = [...representatives]
+    .filter(rep => !rep.verified)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   if (loading) {
     return (
@@ -300,7 +347,7 @@ export default function CompanyManagement() {
         </TabsContent>
 
         <TabsContent value="companies" className="space-y-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -310,10 +357,36 @@ export default function CompanyManagement() {
                 className="pl-9"
               />
             </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toggleSort('name')}
+                className="gap-2"
+              >
+                Name {getSortIcon('name')}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toggleSort('reps')}
+                className="gap-2"
+              >
+                Reps {getSortIcon('reps')}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => toggleSort('verified')}
+                className="gap-2"
+              >
+                Verified {getSortIcon('verified')}
+              </Button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4">
-            {filteredCompanies.map(company => {
+            {sortedCompanies.map(company => {
               const companyReps = getCompanyReps(company.id);
               const verifiedCount = getVerifiedCount(company.id);
 
@@ -418,9 +491,7 @@ export default function CompanyManagement() {
             </Alert>
           ) : (
             <div className="space-y-4">
-              {representatives
-                .filter(rep => !rep.verified)
-                .map(rep => {
+              {sortedPendingReps.map(rep => {
                   const company = COMPANIES.find(c => c.id === rep.company_id);
                   return (
                     <Card key={rep.id}>
