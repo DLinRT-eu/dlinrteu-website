@@ -8,12 +8,20 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import * as XLSX from 'xlsx';
 
 interface CompanyRepresentative {
   id: string;
@@ -47,6 +55,8 @@ export default function CompanyManagement() {
   const [processing, setProcessing] = useState(false);
   const [sortField, setSortField] = useState<SortField>('name');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [selectedReps, setSelectedReps] = useState<Set<string>>(new Set());
+  const [processingBulk, setProcessingBulk] = useState(false);
 
   useEffect(() => {
     fetchRepresentatives();
@@ -235,6 +245,186 @@ export default function CompanyManagement() {
     }
   };
 
+  const handleBulkVerify = async () => {
+    if (selectedReps.size === 0) return;
+    
+    setProcessingBulk(true);
+    const selectedArray = Array.from(selectedReps);
+    let successCount = 0;
+    let failCount = 0;
+
+    for (const repId of selectedArray) {
+      const rep = representatives.find(r => r.id === repId);
+      if (rep && !rep.verified) {
+        try {
+          const { error: updateError } = await supabase
+            .from('company_representatives')
+            .update({
+              verified: true,
+              verified_by: user?.id,
+              verified_at: new Date().toISOString(),
+            })
+            .eq('id', repId);
+
+          if (updateError) throw updateError;
+
+          const { error: roleError } = await supabase
+            .from('user_roles')
+            .insert([{
+              user_id: rep.user_id,
+              role: 'company',
+              granted_by: user?.id,
+            }]);
+
+          if (roleError && !roleError.message.includes('duplicate key')) {
+            throw roleError;
+          }
+
+          successCount++;
+        } catch (error) {
+          console.error(`[handleBulkVerify] Error verifying ${repId}:`, error);
+          failCount++;
+        }
+      }
+    }
+
+    if (successCount > 0) {
+      toast.success(`Verified ${successCount} representative${successCount > 1 ? 's' : ''}`);
+    }
+    if (failCount > 0) {
+      toast.error(`Failed to verify ${failCount} representative${failCount > 1 ? 's' : ''}`);
+    }
+
+    setSelectedReps(new Set());
+    setProcessingBulk(false);
+    fetchRepresentatives();
+  };
+
+  const handleBulkReject = async () => {
+    if (selectedReps.size === 0) return;
+    
+    if (!confirm(`Are you sure you want to remove ${selectedReps.size} representative${selectedReps.size > 1 ? 's' : ''}?`)) {
+      return;
+    }
+
+    setProcessingBulk(true);
+    const selectedArray = Array.from(selectedReps);
+    let successCount = 0;
+    let failCount = 0;
+
+    for (const repId of selectedArray) {
+      try {
+        const { error } = await supabase
+          .from('company_representatives')
+          .delete()
+          .eq('id', repId);
+
+        if (error) throw error;
+        successCount++;
+      } catch (error) {
+        console.error(`[handleBulkReject] Error removing ${repId}:`, error);
+        failCount++;
+      }
+    }
+
+    if (successCount > 0) {
+      toast.success(`Removed ${successCount} representative${successCount > 1 ? 's' : ''}`);
+    }
+    if (failCount > 0) {
+      toast.error(`Failed to remove ${failCount} representative${failCount > 1 ? 's' : ''}`);
+    }
+
+    setSelectedReps(new Set());
+    setProcessingBulk(false);
+    fetchRepresentatives();
+  };
+
+  const exportToCSV = () => {
+    const csvData = representatives.map(rep => ({
+      'First Name': rep.profiles.first_name,
+      'Last Name': rep.profiles.last_name,
+      'Email': rep.profiles.email,
+      'Company': rep.company_name,
+      'Company ID': rep.company_id || '',
+      'Position': rep.position || '',
+      'Status': rep.verified ? 'Verified' : 'Pending',
+      'Verified Date': rep.verified_at ? new Date(rep.verified_at).toLocaleDateString() : '',
+      'Created Date': new Date(rep.created_at).toLocaleDateString(),
+    }));
+
+    const headers = Object.keys(csvData[0]).join(',');
+    const rows = csvData.map(row => 
+      Object.values(row).map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+    );
+    const csv = [headers, ...rows].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `company_representatives_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast.success('CSV export downloaded');
+  };
+
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+
+    // Sheet 1: All Representatives
+    const repData = representatives.map(rep => ({
+      'First Name': rep.profiles.first_name,
+      'Last Name': rep.profiles.last_name,
+      'Email': rep.profiles.email,
+      'Company': rep.company_name,
+      'Company ID': rep.company_id || '',
+      'Position': rep.position || '',
+      'Status': rep.verified ? 'Verified' : 'Pending',
+      'Verified Date': rep.verified_at ? new Date(rep.verified_at).toLocaleDateString() : '',
+      'Created Date': new Date(rep.created_at).toLocaleDateString(),
+    }));
+
+    const repSheet = XLSX.utils.json_to_sheet(repData);
+    XLSX.utils.book_append_sheet(workbook, repSheet, 'Representatives');
+
+    // Sheet 2: Summary by Company
+    const companySummary = COMPANIES.map(company => ({
+      'Company': company.name,
+      'Total Reps': getCompanyReps(company.id).length,
+      'Verified': getVerifiedCount(company.id),
+      'Pending': getCompanyReps(company.id).length - getVerifiedCount(company.id),
+    }));
+
+    const summarySheet = XLSX.utils.json_to_sheet(companySummary);
+    XLSX.utils.book_append_sheet(workbook, summarySheet, 'Company Summary');
+
+    XLSX.writeFile(workbook, `company_representatives_${new Date().toISOString().split('T')[0]}.xlsx`);
+    
+    toast.success('Excel export downloaded');
+  };
+
+  const toggleSelectAll = () => {
+    const pendingReps = representatives.filter(rep => !rep.verified);
+    if (selectedReps.size === pendingReps.length) {
+      setSelectedReps(new Set());
+    } else {
+      setSelectedReps(new Set(pendingReps.map(r => r.id)));
+    }
+  };
+
+  const toggleSelectRep = (repId: string) => {
+    const newSelected = new Set(selectedReps);
+    if (newSelected.has(repId)) {
+      newSelected.delete(repId);
+    } else {
+      newSelected.add(repId);
+    }
+    setSelectedReps(newSelected);
+  };
+
   const toggleSort = (field: SortField) => {
     if (sortField === field) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -303,6 +493,27 @@ export default function CompanyManagement() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
+          <div className="flex justify-end mb-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Download className="h-4 w-4 mr-2" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={exportToCSV}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToExcel}>
+                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader>
@@ -482,6 +693,64 @@ export default function CompanyManagement() {
         </TabsContent>
 
         <TabsContent value="pending" className="space-y-4">
+          <div className="flex justify-end mb-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Download className="h-4 w-4 mr-2" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={exportToCSV}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToExcel}>
+                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {sortedPendingReps.length > 0 && (
+            <div className="flex items-center justify-between p-4 bg-muted rounded-lg mb-4">
+              <div className="flex items-center gap-3">
+                <Checkbox
+                  checked={selectedReps.size === sortedPendingReps.length && sortedPendingReps.length > 0}
+                  onCheckedChange={toggleSelectAll}
+                />
+                <span className="text-sm font-medium">
+                  {selectedReps.size > 0 
+                    ? `${selectedReps.size} selected` 
+                    : 'Select all'}
+                </span>
+              </div>
+              {selectedReps.size > 0 && (
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    onClick={handleBulkVerify}
+                    disabled={processingBulk}
+                  >
+                    <UserCheck className="h-4 w-4 mr-2" />
+                    Verify Selected
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={handleBulkReject}
+                    disabled={processingBulk}
+                  >
+                    <UserX className="h-4 w-4 mr-2" />
+                    Remove Selected
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+
           {pendingCount === 0 ? (
             <Alert>
               <AlertCircle className="h-4 w-4" />
@@ -496,32 +765,39 @@ export default function CompanyManagement() {
                   return (
                     <Card key={rep.id}>
                       <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <CardTitle className="text-lg">
-                              {rep.profiles.first_name} {rep.profiles.last_name}
-                            </CardTitle>
-                            <CardDescription>
-                              {rep.profiles.email} • {company?.name || rep.company_id}
-                            </CardDescription>
-                            {rep.position && (
-                              <p className="text-sm text-muted-foreground mt-1">{rep.position}</p>
-                            )}
-                          </div>
-                          <div className="flex gap-2">
-                            <Button
-                              variant="default"
-                              onClick={() => handleVerify(rep)}
-                            >
-                              <UserCheck className="h-4 w-4 mr-2" />
-                              Verify
-                            </Button>
-                            <Button
-                              variant="destructive"
-                              onClick={() => handleRemove(rep)}
-                            >
-                              Reject
-                            </Button>
+                        <div className="flex items-start gap-3">
+                          <Checkbox
+                            checked={selectedReps.has(rep.id)}
+                            onCheckedChange={() => toggleSelectRep(rep.id)}
+                            className="mt-1"
+                          />
+                          <div className="flex items-center justify-between flex-1">
+                            <div>
+                              <CardTitle className="text-lg">
+                                {rep.profiles.first_name} {rep.profiles.last_name}
+                              </CardTitle>
+                              <CardDescription>
+                                {rep.profiles.email} • {company?.name || rep.company_id}
+                              </CardDescription>
+                              {rep.position && (
+                                <p className="text-sm text-muted-foreground mt-1">{rep.position}</p>
+                              )}
+                            </div>
+                            <div className="flex gap-2">
+                              <Button
+                                variant="default"
+                                onClick={() => handleVerify(rep)}
+                              >
+                                <UserCheck className="h-4 w-4 mr-2" />
+                                Verify
+                              </Button>
+                              <Button
+                                variant="destructive"
+                                onClick={() => handleRemove(rep)}
+                              >
+                                Reject
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       </CardHeader>
