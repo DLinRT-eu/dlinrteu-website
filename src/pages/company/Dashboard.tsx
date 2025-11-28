@@ -169,11 +169,12 @@ export default function CompanyDashboard() {
     if (!product || !companyUser) return;
 
     try {
-      // Use secure RPC to certify product
+      // Use secure RPC to certify product with lastRevised date
       const { data, error } = await supabase.rpc('certify_product', {
         p_product_id: selectedProduct,
         p_company_id: product.company,
         p_notes: 'Product information certified as accurate by company representative',
+        p_product_last_revised: product.lastRevised ? new Date(product.lastRevised).toISOString() : null,
       });
 
       if (error) throw error;
