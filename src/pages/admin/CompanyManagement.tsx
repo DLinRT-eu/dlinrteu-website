@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -486,9 +486,12 @@ export default function CompanyManagement() {
           <TabsTrigger value="companies">All Companies</TabsTrigger>
           <TabsTrigger value="pending">
             Pending Verifications
-            {pendingCount > 0 && (
-              <Badge variant="destructive" className="ml-2">{pendingCount}</Badge>
-            )}
+            <Badge 
+              variant={pendingCount > 0 ? "destructive" : "secondary"} 
+              className="ml-2"
+            >
+              {pendingCount}
+            </Badge>
           </TabsTrigger>
         </TabsList>
 
@@ -555,6 +558,34 @@ export default function CompanyManagement() {
               Representatives must be verified to certify products.
             </AlertDescription>
           </Alert>
+
+          {/* Debug Info Card */}
+          <Card className="bg-muted/50 border-dashed">
+            <CardHeader className="py-3">
+              <CardTitle className="text-sm">Debug Info</CardTitle>
+            </CardHeader>
+            <CardContent className="py-2">
+              <div className="text-xs space-y-1">
+                <p>Total loaded: {representatives.length}</p>
+                <p>Verified: {representatives.filter(r => r.verified).length}</p>
+                <p>Pending in memory: {representatives.filter(r => !r.verified).length}</p>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => {
+                    console.log('All representatives:', representatives);
+                    console.log('Pending:', representatives.filter(r => !r.verified));
+                    fetchRepresentatives();
+                    toast.success('Data refreshed - check console');
+                  }}
+                  className="mt-2"
+                >
+                  <RefreshCcw className="h-3 w-3 mr-1" />
+                  Refresh & Debug
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="companies" className="space-y-4">
