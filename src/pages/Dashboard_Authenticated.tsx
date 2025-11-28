@@ -119,6 +119,13 @@ export default function Dashboard_Authenticated() {
       icon: ShoppingCart,
       link: '/my-products',
       color: 'bg-teal-50 text-teal-600 hover:bg-teal-100'
+    },
+    {
+      title: 'Notification History',
+      description: 'View and manage all notifications',
+      icon: Bell,
+      link: '/notifications',
+      color: 'bg-yellow-50 text-yellow-600 hover:bg-yellow-100'
     }
   ];
 
