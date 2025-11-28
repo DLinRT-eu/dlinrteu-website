@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -55,6 +55,11 @@ export function AssignmentPreviewDialog({
   const [editedAssignments, setEditedAssignments] = useState<ProposedAssignment[]>(assignments);
   const [searchTerm, setSearchTerm] = useState("");
   const [confirming, setConfirming] = useState(false);
+
+  // Sync editedAssignments with assignments prop when it changes
+  useEffect(() => {
+    setEditedAssignments(assignments);
+  }, [assignments]);
 
   const productsMap = useMemo(() => {
     return new Map(ALL_PRODUCTS.map(p => [p.id, p]));
@@ -237,18 +242,24 @@ export function AssignmentPreviewDialog({
 
         {/* Assignments Table */}
         <div className="flex-1 overflow-auto border rounded-md">
-          <Table>
-            <TableHeader className="sticky top-0 bg-background">
-              <TableRow>
-                <TableHead>Product</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Assigned To</TableHead>
-                <TableHead>Match Score</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredAssignments.map((assignment) => {
+          {editedAssignments.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+              <Loader2 className="h-8 w-8 animate-spin mb-4" />
+              <p>Loading assignments...</p>
+            </div>
+          ) : (
+            <Table>
+              <TableHeader className="sticky top-0 bg-background">
+                <TableRow>
+                  <TableHead>Product</TableHead>
+                  <TableHead>Category</TableHead>
+                  <TableHead>Assigned To</TableHead>
+                  <TableHead>Match Score</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredAssignments.map((assignment) => {
                 const product = productsMap.get(assignment.product_id);
                 const reviewer = reviewersMap.get(assignment.assigned_to);
                 const reviewerCount = workloadStats.counts.get(assignment.assigned_to) || 0;
@@ -309,9 +320,10 @@ export function AssignmentPreviewDialog({
                     </TableCell>
                   </TableRow>
                 );
-              })}
-            </TableBody>
-          </Table>
+                })}
+              </TableBody>
+            </Table>
+          )}
         </div>
 
         <DialogFooter>
