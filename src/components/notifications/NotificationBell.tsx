@@ -14,6 +14,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
+import { toast } from 'sonner';
 
 interface Notification {
   id: string;
@@ -83,6 +84,28 @@ export default function NotificationBell() {
     fetchNotifications();
   };
 
+  const markAllAsRead = async () => {
+    await supabase
+      .from('notifications')
+      .update({ read: true })
+      .eq('user_id', user.id)
+      .eq('read', false);
+
+    fetchNotifications();
+    toast.success('All notifications marked as read');
+  };
+
+  const clearAllRead = async () => {
+    await supabase
+      .from('notifications')
+      .delete()
+      .eq('user_id', user.id)
+      .eq('read', true);
+
+    fetchNotifications();
+    toast.success('All read notifications cleared');
+  };
+
   const handleNotificationClick = async (notification: Notification) => {
     await markAsRead(notification.id);
     if (notification.link) {
@@ -118,7 +141,29 @@ export default function NotificationBell() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
-        <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+        <div className="flex items-center justify-between px-2 py-1.5">
+          <DropdownMenuLabel className="p-0">Notifications</DropdownMenuLabel>
+          {notifications.length > 0 && (
+            <div className="flex gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-xs"
+                onClick={markAllAsRead}
+              >
+                Mark all read
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-xs"
+                onClick={clearAllRead}
+              >
+                Clear read
+              </Button>
+            </div>
+          )}
+        </div>
         <DropdownMenuSeparator />
         {notifications.length === 0 ? (
           <div className="py-6 text-center text-sm text-muted-foreground">

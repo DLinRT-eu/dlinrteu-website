@@ -37,6 +37,7 @@ const Auth = lazy(() => import("./pages/Auth"));
 const Changelog = lazy(() => import("./pages/Changelog"));
 const Roles = lazy(() => import("./pages/Roles"));
 const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
+const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
 
@@ -135,6 +136,13 @@ const App = () => (
                   <ProtectedRoute requireAuth={true}>
                     <ApprovalGate>
                       <RoleSelection />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
+                <Route path="/notifications" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <NotificationHistory />
                     </ApprovalGate>
                   </ProtectedRoute>
                 } />

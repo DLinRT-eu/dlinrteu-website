@@ -1020,6 +1020,7 @@ export type Database = {
           round_number: number
           start_date: string
           status: string
+          task: string | null
           total_assignments: number | null
           total_products: number | null
           updated_at: string | null
@@ -1035,6 +1036,7 @@ export type Database = {
           round_number: number
           start_date: string
           status?: string
+          task?: string | null
           total_assignments?: number | null
           total_products?: number | null
           updated_at?: string | null
@@ -1050,6 +1052,7 @@ export type Database = {
           round_number?: number
           start_date?: string
           status?: string
+          task?: string | null
           total_assignments?: number | null
           total_products?: number | null
           updated_at?: string | null
@@ -1590,6 +1593,7 @@ export type Database = {
           status: string
         }[]
       }
+      get_all_round_assignments_admin: { Args: never; Returns: Json }
       get_all_user_roles: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]

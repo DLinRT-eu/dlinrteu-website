@@ -20,6 +20,7 @@ export interface ReviewRound {
   start_date: string;
   end_date?: string;
   default_deadline?: string;
+  task?: string;
   created_by?: string;
   created_at: string;
   updated_at: string;

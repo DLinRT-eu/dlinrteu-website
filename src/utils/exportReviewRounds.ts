@@ -141,53 +141,40 @@ export async function fetchSelectedRoundAssignments(roundIds: string[]): Promise
 }
 
 /**
- * Fetches all assignments across all review rounds
+ * Fetches all assignments across all review rounds using admin RPC to bypass RLS
  */
 export async function fetchAllRoundAssignments(): Promise<AssignmentExportData[]> {
-  // Get all rounds
-  const { data: rounds, error: roundsError } = await supabase
-    .from('review_rounds')
-    .select('id, name, round_number')
-    .order('round_number', { ascending: false });
+  // Use RPC function to bypass RLS
+  const { data: result, error } = await supabase.rpc('get_all_round_assignments_admin');
 
-  if (roundsError) throw roundsError;
+  if (error) throw error;
 
-  // Get all product reviews
-  const { data: reviews, error: reviewsError } = await supabase
-    .from('product_reviews')
-    .select(`
-      product_id,
-      assigned_to,
-      status,
-      priority,
-      deadline,
-      assigned_at,
-      review_round_id,
-      profiles!product_reviews_assigned_to_fkey(first_name, last_name, email)
-    `);
+  const response = result as { success: boolean; data: any[]; error?: string };
+  
+  if (!response.success) {
+    throw new Error(response.error || 'Failed to fetch assignments');
+  }
 
-  if (reviewsError) throw reviewsError;
-
-  // Build the export data
-  const exportData: AssignmentExportData[] = reviews.map((review: any) => {
-    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
-    const reviewer = review.profiles;
-    const round = rounds.find(r => r.id === review.review_round_id);
+  // Build the export data from RPC result
+  const exportData: AssignmentExportData[] = response.data.map((item: any) => {
+    const product = ALL_PRODUCTS.find(p => p.id === item.product_id);
     
     return {
-      roundName: round?.name || 'Unknown Round',
-      roundNumber: round?.round_number || 0,
-      productId: review.product_id,
+      roundName: item.round_name,
+      roundNumber: item.round_number,
+      productId: item.product_id,
       productName: product?.name || 'Unknown Product',
       productCategory: product?.category || 'Unknown',
       productCompany: product?.company || 'Unknown',
-      reviewerName: reviewer ? `${reviewer.first_name} ${reviewer.last_name}` : 'Unassigned',
-      reviewerEmail: reviewer?.email || '',
+      reviewerName: item.reviewer_first_name && item.reviewer_last_name
+        ? `${item.reviewer_first_name} ${item.reviewer_last_name}`
+        : 'Unassigned',
+      reviewerEmail: item.reviewer_email || '',
       matchScore: 0,
-      status: review.status,
-      priority: review.priority,
-      assignedDate: review.assigned_at ? new Date(review.assigned_at).toLocaleDateString() : '',
-      deadline: review.deadline ? new Date(review.deadline).toLocaleDateString() : null
+      status: item.status,
+      priority: item.priority,
+      assignedDate: item.assigned_at ? new Date(item.assigned_at).toLocaleDateString() : '',
+      deadline: item.deadline ? new Date(item.deadline).toLocaleDateString() : null
     };
   });
 
