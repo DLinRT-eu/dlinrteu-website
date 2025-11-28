@@ -417,6 +417,18 @@ export default function AdminDashboard() {
                   <span>Review Rounds</span>
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+                <Link to="/admin/user-products">
+                  <Activity className="h-5 w-5" />
+                  <span>Product Adoptions</span>
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+                <Link to="/admin/companies">
+                  <Building2 className="h-5 w-5" />
+                  <span>Company Reps</span>
+                </Link>
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -276,6 +276,7 @@ export type Database = {
           created_at: string | null
           id: string
           product_id: string
+          product_last_revised: string | null
           supporting_documents: Json | null
           updated_at: string | null
           verification_notes: string | null
@@ -287,6 +288,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           product_id: string
+          product_last_revised?: string | null
           supporting_documents?: Json | null
           updated_at?: string | null
           verification_notes?: string | null
@@ -298,6 +300,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           product_id?: string
+          product_last_revised?: string | null
           supporting_documents?: Json | null
           updated_at?: string | null
           verification_notes?: string | null
@@ -1513,10 +1516,24 @@ export type Database = {
         Args: { user_id_param: string }
         Returns: boolean
       }
-      certify_product: {
-        Args: { p_company_id: string; p_notes?: string; p_product_id: string }
-        Returns: Json
-      }
+      certify_product:
+        | {
+            Args: {
+              p_company_id: string
+              p_notes?: string
+              p_product_id: string
+              p_product_last_revised?: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_company_id: string
+              p_notes?: string
+              p_product_id: string
+            }
+            Returns: Json
+          }
       check_github_file_modified: {
         Args: {
           current_file_modified: string

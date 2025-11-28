@@ -68,6 +68,15 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
   const formattedRevisionDate = product.lastRevised 
     ? new Date(product.lastRevised).toISOString().split('T')[0]
     : null;
+
+  // Certification status logic: check if certification is outdated
+  const isCertificationOutdated = verificationData && product.lastRevised && 
+    new Date(product.lastRevised) > new Date(verificationData.verified_at);
+  const certificationStatus = verificationData 
+    ? isCertificationOutdated 
+      ? 'outdated' 
+      : 'valid'
+    : null;
   
   return (
     <div className="mb-6">
@@ -89,26 +98,63 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
           <p className="text-gray-500">{product.description}</p>
           
           <div className="mt-2 flex items-center gap-2 flex-wrap">
-            {verificationData && (
+            {/* Company Verification Badge - Valid */}
+            {certificationStatus === 'valid' && (
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
                     <Badge 
-                      variant="default"
-                      className="flex items-center gap-1 bg-blue-600 text-white hover:bg-blue-700"
+                      variant="success"
+                      className="flex items-center gap-1"
                     >
                       <BadgeCheck className="h-3 w-3" />
                       Verified by Company
                       <span className="text-xs ml-1">
-                        ({new Date(verificationData.verified_at).toLocaleDateString()})
+                        ({new Date(verificationData!.verified_at).toLocaleDateString()})
                       </span>
                     </Badge>
                   </TooltipTrigger>
-                  {verificationData.verification_notes && (
-                    <TooltipContent>
-                      <p className="text-sm max-w-xs">{verificationData.verification_notes}</p>
-                    </TooltipContent>
-                  )}
+                  <TooltipContent className="max-w-xs">
+                    <p className="font-semibold mb-1">Company Verified</p>
+                    <p className="text-xs text-muted-foreground">
+                      Verified on: {new Date(verificationData!.verified_at).toLocaleDateString()}
+                    </p>
+                    {verificationData!.verification_notes && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {verificationData!.verification_notes}
+                      </p>
+                    )}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+
+            {/* Company Verification Badge - Outdated */}
+            {certificationStatus === 'outdated' && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Badge 
+                      variant="warning"
+                      className="flex items-center gap-1"
+                    >
+                      <BadgeCheck className="h-3 w-3" />
+                      Certification Outdated
+                      <span className="text-xs ml-1">
+                        (certified {new Date(verificationData!.verified_at).toLocaleDateString()})
+                      </span>
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="font-semibold mb-1 text-yellow-600">Certification Outdated</p>
+                    <p className="text-xs text-muted-foreground">
+                      Product was certified on {new Date(verificationData!.verified_at).toLocaleDateString()}, 
+                      but has been updated on {new Date(product.lastRevised!).toLocaleDateString()}.
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Company needs to re-certify the updated information.
+                    </p>
+                  </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             )}
