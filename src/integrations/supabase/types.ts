@@ -1711,6 +1711,10 @@ export type Database = {
           verified_by: string
         }[]
       }
+      get_review_round_details_admin: {
+        Args: { p_round_id: string }
+        Returns: Json
+      }
       get_review_rounds_admin: {
         Args: never
         Returns: {

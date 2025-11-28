@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsM
 import { AssignmentActionsMenu } from "@/components/admin/review-rounds/AssignmentActionsMenu";
 import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMenu";
 import { Checkbox } from "@/components/ui/checkbox";
+import SortableHeader from "@/components/revision/table/SortableHeader";
 
 interface AssignmentHistoryRecord {
   id: string;
@@ -80,6 +81,18 @@ export default function ReviewRoundDetails() {
   const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
+  
+  // Sorting state for assignments table
+  const [assignmentSort, setAssignmentSort] = useState<{
+    field: 'product' | 'assignedTo' | 'status' | 'deadline' | 'assignedAt';
+    direction: 'asc' | 'desc';
+  }>({ field: 'assignedAt', direction: 'desc' });
+  
+  // Sorting state for history table
+  const [historySort, setHistorySort] = useState<{
+    field: 'date' | 'product' | 'action' | 'changedBy';
+    direction: 'asc' | 'desc';
+  }>({ field: 'date', direction: 'desc' });
 
   useEffect(() => {
     if (roundId) {
@@ -117,84 +130,25 @@ export default function ReviewRoundDetails() {
     if (!roundId) return;
 
     try {
-      // Fetch round details
-      const { data: roundData, error: roundError } = await supabase
-        .from('review_rounds')
-        .select('*')
-        .eq('id', roundId)
-        .single();
+      // Use RPC function to fetch all round details in one call
+      const { data, error } = await supabase.rpc('get_review_round_details_admin', {
+        p_round_id: roundId
+      });
 
-      if (roundError) throw roundError;
-      setRound(roundData as ReviewRound);
-
-      // Fetch assignments with reviewer profiles
-      const { data: assignmentsData, error: assignmentsError } = await supabase
-        .from('product_reviews')
-        .select('id, product_id, assigned_to, status, deadline, assigned_at')
-        .eq('review_round_id', roundId)
-        .order('assigned_at', { ascending: false });
-
-      if (assignmentsError) throw assignmentsError;
-
-      // Fetch reviewer profiles separately
-      if (assignmentsData && assignmentsData.length > 0) {
-        const reviewerIds = [...new Set(assignmentsData.map(a => a.assigned_to))];
-        const { data: profiles } = await supabase
-          .from('profiles')
-          .select('id, first_name, last_name, email')
-          .in('id', reviewerIds);
-
-        const profileMap = new Map(profiles?.map(p => [p.id, p]));
-        
-        const enrichedAssignments = assignmentsData.map(a => ({
-          ...a,
-          reviewer_profile: profileMap.get(a.assigned_to)
-        }));
-        
-        setAssignments(enrichedAssignments as Assignment[]);
-      } else {
-        setAssignments([]);
+      if (error) throw error;
+      
+      const result = data as any;
+      
+      if (!result?.success) {
+        throw new Error(result?.error || 'Failed to load round details');
       }
 
-      // Fetch assignment history
-      const { data: historyData, error: historyError } = await supabase
-        .from('assignment_history')
-        .select('id, product_id, assigned_to, previous_assignee, changed_by, change_type, reason, created_at')
-        .eq('review_round_id', roundId)
-        .order('created_at', { ascending: false });
-
-      if (historyError) throw historyError;
-
-      // Fetch all related profiles
-      if (historyData && historyData.length > 0) {
-        const allUserIds = new Set<string>();
-        historyData.forEach(h => {
-          if (h.assigned_to) allUserIds.add(h.assigned_to);
-          if (h.previous_assignee) allUserIds.add(h.previous_assignee);
-          if (h.changed_by) allUserIds.add(h.changed_by);
-        });
-
-        const { data: profiles } = await supabase
-          .from('profiles')
-          .select('id, first_name, last_name, email')
-          .in('id', Array.from(allUserIds));
-
-        const profileMap = new Map(profiles?.map(p => [p.id, p]));
-        
-        const enrichedHistory = historyData.map(h => ({
-          ...h,
-          changed_by_profile: h.changed_by ? profileMap.get(h.changed_by) : undefined,
-          assigned_to_profile: h.assigned_to ? profileMap.get(h.assigned_to) : undefined,
-          previous_assignee_profile: h.previous_assignee ? profileMap.get(h.previous_assignee) : undefined
-        }));
-        
-        setHistory(enrichedHistory as AssignmentHistoryRecord[]);
-      } else {
-        setHistory([]);
-      }
-    } catch (error) {
+      setRound(result.round as ReviewRound);
+      setAssignments(result.assignments || []);
+      setHistory(result.history || []);
+    } catch (error: any) {
       console.error('Error fetching round details:', error);
-      toast.error('Failed to load round details');
+      toast.error(error.message || 'Failed to load round details');
     } finally {
       setLoading(false);
     }
@@ -239,6 +193,86 @@ export default function ReviewRoundDetails() {
       setSelectedAssignments(prev => prev.filter(id => id !== assignmentId));
     }
   };
+
+  // Sort handlers
+  const handleAssignmentSort = (field: string) => {
+    setAssignmentSort(prev => ({
+      field: field as any,
+      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
+    }));
+  };
+
+  const handleHistorySort = (field: string) => {
+    setHistorySort(prev => ({
+      field: field as any,
+      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
+    }));
+  };
+
+  // Sorted assignments
+  const sortedAssignments = useMemo(() => {
+    return [...assignments].sort((a, b) => {
+      let comparison = 0;
+      
+      switch (assignmentSort.field) {
+        case 'product':
+          comparison = getProductName(a.product_id).localeCompare(getProductName(b.product_id));
+          break;
+        case 'assignedTo':
+          const aName = a.reviewer_profile 
+            ? `${a.reviewer_profile.first_name} ${a.reviewer_profile.last_name}`
+            : '';
+          const bName = b.reviewer_profile 
+            ? `${b.reviewer_profile.first_name} ${b.reviewer_profile.last_name}`
+            : '';
+          comparison = aName.localeCompare(bName);
+          break;
+        case 'status':
+          comparison = a.status.localeCompare(b.status);
+          break;
+        case 'deadline':
+          const aDeadline = a.deadline || '';
+          const bDeadline = b.deadline || '';
+          comparison = aDeadline.localeCompare(bDeadline);
+          break;
+        case 'assignedAt':
+          comparison = new Date(a.assigned_at).getTime() - new Date(b.assigned_at).getTime();
+          break;
+      }
+      
+      return assignmentSort.direction === 'asc' ? comparison : -comparison;
+    });
+  }, [assignments, assignmentSort]);
+
+  // Sorted history
+  const sortedHistory = useMemo(() => {
+    return [...history].sort((a, b) => {
+      let comparison = 0;
+      
+      switch (historySort.field) {
+        case 'date':
+          comparison = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+          break;
+        case 'product':
+          comparison = getProductName(a.product_id).localeCompare(getProductName(b.product_id));
+          break;
+        case 'action':
+          comparison = a.change_type.localeCompare(b.change_type);
+          break;
+        case 'changedBy':
+          const aName = a.changed_by_profile 
+            ? `${a.changed_by_profile.first_name} ${a.changed_by_profile.last_name}`
+            : '';
+          const bName = b.changed_by_profile 
+            ? `${b.changed_by_profile.first_name} ${b.changed_by_profile.last_name}`
+            : '';
+          comparison = aName.localeCompare(bName);
+          break;
+      }
+      
+      return historySort.direction === 'asc' ? comparison : -comparison;
+    });
+  }, [history, historySort]);
 
   if (loading) {
     return (
@@ -404,16 +438,51 @@ export default function ReviewRoundDetails() {
                           aria-label="Select all"
                         />
                       </TableHead>
-                      <TableHead>Product</TableHead>
-                      <TableHead>Assigned To</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Deadline</TableHead>
-                      <TableHead>Assigned At</TableHead>
+                      <SortableHeader
+                        field="product"
+                        sortField={assignmentSort.field}
+                        sortDirection={assignmentSort.direction}
+                        onSort={handleAssignmentSort}
+                      >
+                        Product
+                      </SortableHeader>
+                      <SortableHeader
+                        field="assignedTo"
+                        sortField={assignmentSort.field}
+                        sortDirection={assignmentSort.direction}
+                        onSort={handleAssignmentSort}
+                      >
+                        Assigned To
+                      </SortableHeader>
+                      <SortableHeader
+                        field="status"
+                        sortField={assignmentSort.field}
+                        sortDirection={assignmentSort.direction}
+                        onSort={handleAssignmentSort}
+                      >
+                        Status
+                      </SortableHeader>
+                      <SortableHeader
+                        field="deadline"
+                        sortField={assignmentSort.field}
+                        sortDirection={assignmentSort.direction}
+                        onSort={handleAssignmentSort}
+                      >
+                        Deadline
+                      </SortableHeader>
+                      <SortableHeader
+                        field="assignedAt"
+                        sortField={assignmentSort.field}
+                        sortDirection={assignmentSort.direction}
+                        onSort={handleAssignmentSort}
+                      >
+                        Assigned At
+                      </SortableHeader>
                       <TableHead className="w-12"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {assignments.map((assignment) => {
+                    {sortedAssignments.map((assignment) => {
                       const isOverdue = assignment.deadline && 
                         assignment.status !== 'completed' && 
                         new Date(assignment.deadline) < new Date();
@@ -495,15 +564,43 @@ export default function ReviewRoundDetails() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Product</TableHead>
-                      <TableHead>Action</TableHead>
+                      <SortableHeader
+                        field="date"
+                        sortField={historySort.field}
+                        sortDirection={historySort.direction}
+                        onSort={handleHistorySort}
+                      >
+                        Date
+                      </SortableHeader>
+                      <SortableHeader
+                        field="product"
+                        sortField={historySort.field}
+                        sortDirection={historySort.direction}
+                        onSort={handleHistorySort}
+                      >
+                        Product
+                      </SortableHeader>
+                      <SortableHeader
+                        field="action"
+                        sortField={historySort.field}
+                        sortDirection={historySort.direction}
+                        onSort={handleHistorySort}
+                      >
+                        Action
+                      </SortableHeader>
                       <TableHead>Details</TableHead>
-                      <TableHead>Changed By</TableHead>
+                      <SortableHeader
+                        field="changedBy"
+                        sortField={historySort.field}
+                        sortDirection={historySort.direction}
+                        onSort={handleHistorySort}
+                      >
+                        Changed By
+                      </SortableHeader>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {history.map((record) => (
+                    {sortedHistory.map((record) => (
                       <TableRow key={record.id}>
                         <TableCell className="text-sm text-muted-foreground">
                           {format(new Date(record.created_at), 'MMM d, yyyy HH:mm')}
