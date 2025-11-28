@@ -38,7 +38,7 @@ interface UserProfile {
 }
 
 interface UserWithRolesFromDB {
-  id: string;
+  user_id: string; // Changed from 'id' to match database column name
   email: string;
   first_name: string;
   last_name: string;
@@ -147,7 +147,7 @@ export default function UserManagement() {
       if (!functionError && usersFromFunction) {
         // Success! Convert the roles array to AppRole[]
         const usersWithRoles: UserProfile[] = usersFromFunction.map(user => ({
-          id: user.id,
+          id: user.user_id, // Map user_id from database to id for frontend
           email: user.email,
           first_name: user.first_name,
           last_name: user.last_name,
