@@ -189,18 +189,26 @@ export default function ReviewRounds() {
   const handleReviewerSelectionContinue = async (selectedReviewerIds: string[], algorithm: AssignmentAlgorithm) => {
     setShowReviewerSelection(false);
     
+    const toastId = toast.loading('Calculating optimal assignments...');
+    
     try {
       // Calculate proposed assignments with algorithm
       const productIds = ALL_PRODUCTS.map(p => p.id);
       const proposed = await calculateProposedAssignments(productIds, selectedReviewerIds, algorithm);
       const reviewers = await getReviewersByExpertise();
       
+      if (proposed.length === 0) {
+        toast.error('No assignments could be calculated. Please check reviewer expertise settings.', { id: toastId });
+        return;
+      }
+      
       setProposedAssignments(proposed);
       setSelectedReviewers(reviewers.filter(r => selectedReviewerIds.includes(r.user_id)));
+      toast.dismiss(toastId);
       setShowAssignmentPreview(true);
     } catch (error) {
       console.error('Error calculating assignments:', error);
-      toast.error('Failed to calculate assignments');
+      toast.error('Failed to calculate assignments', { id: toastId });
     }
   };
 
