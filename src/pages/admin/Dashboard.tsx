@@ -406,12 +406,19 @@ export default function AdminDashboard() {
                   <span>Review Dashboard</span>
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/admin/companies">
-                  <Building2 className="h-5 w-5" />
-                  <span>Company Management</span>
-                </Link>
-              </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/companies">
+                <Building2 className="h-5 w-5" />
+                <span>Company Management</span>
+              </Link>
+            </Button>
+
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/company/dashboard">
+                <Shield className="h-5 w-5" />
+                <span>Company Oversight</span>
+              </Link>
+            </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
                 <Link to="/admin/review-rounds">
                   <Calendar className="h-5 w-5" />
