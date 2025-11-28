@@ -93,6 +93,7 @@ export default function ReviewRounds() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    task: '',
     start_date: '',
     end_date: '',
     default_deadline: ''
@@ -155,6 +156,7 @@ export default function ReviewRounds() {
       setFormData({
         name: '',
         description: '',
+        task: '',
         start_date: '',
         end_date: '',
         default_deadline: ''
@@ -584,6 +586,7 @@ export default function ReviewRounds() {
                   </TableHead>
                   <TableHead>Round</TableHead>
                   <TableHead>Name</TableHead>
+                  <TableHead>Task</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Start Date</TableHead>
                   <TableHead>Deadline</TableHead>
@@ -618,6 +621,9 @@ export default function ReviewRounds() {
                           </div>
                         )}
                       </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{round.task || 'General Review'}</Badge>
                     </TableCell>
                     <TableCell>{getStatusBadge(round.status)}</TableCell>
                     <TableCell>
@@ -702,6 +708,18 @@ export default function ReviewRounds() {
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="task">Task Type</Label>
+              <Input
+                id="task"
+                placeholder="General Review"
+                value={formData.task}
+                onChange={(e) => setFormData({ ...formData, task: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                E.g., General Review, Compliance Check, Technical Audit, etc.
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

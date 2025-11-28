@@ -124,6 +124,14 @@ const Header = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild><Link to="/profile">Profile</Link></DropdownMenuItem>
                 <DropdownMenuItem asChild><Link to="/my-products">My Products</Link></DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/notifications" className="flex items-center justify-between w-full">
+                    Notification History
+                    {profile && (
+                      <Badge variant="secondary" className="ml-2">New</Badge>
+                    )}
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
               </DropdownMenuContent>

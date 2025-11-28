@@ -24,6 +24,7 @@ import { AssignmentActionsMenu } from "@/components/admin/review-rounds/Assignme
 import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMenu";
 import { Checkbox } from "@/components/ui/checkbox";
 import SortableHeader from "@/components/revision/table/SortableHeader";
+import { RoundExportButton } from "@/components/admin/review-rounds/RoundExportButton";
 
 interface AssignmentHistoryRecord {
   id: string;
@@ -317,10 +318,14 @@ export default function ReviewRoundDetails() {
           {round.description && (
             <p className="text-muted-foreground mt-1">{round.description}</p>
           )}
+          {round.task && (
+            <Badge variant="outline" className="mt-2">{round.task}</Badge>
+          )}
         </div>
         <Badge variant={round.status === 'active' ? 'default' : 'secondary'}>
           {round.status}
         </Badge>
+        <RoundExportButton round={round} assignments={assignments} history={history} />
         <RoundActionsMenu round={round} onUpdate={fetchRoundDetails} />
       </div>
 
