@@ -22,7 +22,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
-  changelogData, 
   getAllVersions, 
   getCategoryLabel, 
   getCategoryColor,
@@ -75,10 +74,9 @@ const Changelog = () => {
     },
   });
 
-  // Combine static and database entries
+  // Use only database entries (static data removed)
   const allEntries = useMemo(() => {
-    return [...changelogData, ...dbEntries]
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return dbEntries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [dbEntries]);
 
   const versions = useMemo(() => {
