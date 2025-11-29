@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/layout/PageLayout';
-import { Users, Search, Building2, Shield, ArrowRight, HelpCircle, FileText } from 'lucide-react';
+import { Users, Search, Building2, Shield, ArrowRight, HelpCircle, FileText, BookOpen } from 'lucide-react';
 
 export default function Roles() {
   return (
@@ -126,6 +126,12 @@ export default function Roles() {
                 <p className="text-xs text-muted-foreground">
                   Requires admin approval. Users with @dlinrt.eu email are auto-approved.
                 </p>
+                <Button asChild size="sm" variant="outline" className="mt-2 gap-2">
+                  <Link to="/reviewer/guide">
+                    <BookOpen className="h-4 w-4" />
+                    View Complete Guide
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -230,8 +236,14 @@ export default function Roles() {
                   </li>
                 </ul>
               </div>
-              <div className="pt-4">
+              <div className="pt-4 space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">Not requestable - assigned by organization</p>
+                <Button asChild size="sm" variant="outline" className="mt-2 gap-2">
+                  <Link to="/admin/guide">
+                    <BookOpen className="h-4 w-4" />
+                    View Complete Guide
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>

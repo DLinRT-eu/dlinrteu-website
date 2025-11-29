@@ -1,695 +1,607 @@
-import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { ArrowLeft, Search, CheckCircle2, MessageSquare, UserCheck, FileText, Settings, BookOpen, Shield, Target, ClipboardList } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
-import { ArrowLeft, BookOpen, CheckCircle, FileText, GitBranch, Globe, Shield, AlertCircle, Search, X } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 
-export default function ReviewerGuide() {
+const ReviewerGuide = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mark guide as read when component mounts
   useEffect(() => {
-    localStorage.setItem('reviewer_guide_read', 'true');
+    localStorage.setItem('reviewer-guide-read', 'true');
   }, []);
 
-  // Define all guide sections with searchable content
-  const guideSections = useMemo(() => [
+  const quickNavCards = [
+    {
+      title: 'Role Overview',
+      icon: Shield,
+      description: 'Understanding the reviewer role',
+      href: '#role-overview'
+    },
+    {
+      title: 'Registration',
+      icon: UserCheck,
+      description: 'How to become a reviewer',
+      href: '#registration'
+    },
+    {
+      title: 'Dashboard',
+      icon: Target,
+      description: 'Navigate your reviewer dashboard',
+      href: '#dashboard'
+    },
+    {
+      title: 'Review Workflow',
+      icon: ClipboardList,
+      description: 'Step-by-step review process',
+      href: '#workflow'
+    },
+    {
+      title: 'Preferences',
+      icon: Settings,
+      description: 'Set your expertise areas',
+      href: '#preferences'
+    },
+    {
+      title: 'Best Practices',
+      icon: CheckCircle2,
+      description: 'Tips for effective reviews',
+      href: '#best-practices'
+    }
+  ];
+
+  const guideSections = [
+    {
+      id: 'role-overview',
+      title: 'Role Overview',
+      icon: Shield,
+      content: `As a reviewer for DLinRT, you play a critical role in maintaining the accuracy and reliability of our product database. Reviewers are trusted community members with expertise in medical devices and regulatory compliance.
+
+**Your Responsibilities:**
+- Review assigned products for accuracy and completeness
+- Verify regulatory compliance information (CE marking, FDA status)
+- Check technical specifications and documentation
+- Provide constructive feedback to improve product listings
+- Maintain objectivity and follow evidence-based verification
+
+**What Makes a Good Reviewer:**
+- Domain expertise in medical devices or healthcare technology
+- Understanding of regulatory frameworks (MDR, FDA)
+- Attention to detail and commitment to accuracy
+- Professional communication skills
+- Ability to work independently and meet deadlines`,
+      keywords: ['role', 'responsibilities', 'reviewer', 'overview', 'what']
+    },
+    {
+      id: 'registration',
+      title: 'Registration & Authentication Workflow',
+      icon: UserCheck,
+      content: `Follow these steps to become a verified reviewer:
+
+**Step 1: Create a DLinRT Account**
+- Visit the DLinRT website and sign up with your institutional email
+- Institutional emails (@dlinrt.eu) are automatically verified
+- Complete your profile with accurate information
+
+**Step 2: Navigate to Your Profile**
+- Log in to your account
+- Click on your profile icon in the top right
+- Select "Profile" from the dropdown menu
+
+**Step 3: Request Reviewer Role**
+- On your profile page, find the "Request Additional Role" section
+- Click "Request New Role"
+- Select "Reviewer" from the role options
+
+**Step 4: Provide Verification Details**
+- **Institutional Email**: Use your work email for verification (preferred)
+- **Expertise Areas**: Specify your areas of expertise (e.g., cardiology devices, imaging systems)
+- **Institution**: Provide your affiliated organization or institution
+- **Justification**: Explain your qualifications and why you want to be a reviewer
+  - Include relevant experience (years in field, specific domains)
+  - Mention any certifications or credentials
+  - Describe your familiarity with regulatory frameworks
+
+**Step 5: Wait for Admin Approval**
+- Admins review requests typically within 1-3 business days
+- You'll receive a notification when your request is processed
+- Note: Users with @dlinrt.eu emails are auto-approved
+- Once approved, you'll have access to the Reviewer Dashboard
+
+**Verification Tips:**
+✓ Use your institutional email for faster verification
+✓ Be specific about your expertise areas
+✓ Provide concrete examples of relevant experience
+✓ Include any relevant publications or certifications`,
+      keywords: ['registration', 'become', 'request', 'sign up', 'how to', 'join', 'authentication', 'workflow']
+    },
+    {
+      id: 'dashboard',
+      title: 'Reviewer Dashboard Overview',
+      icon: Target,
+      content: `Your Reviewer Dashboard is your central hub for managing review assignments and preferences.
+
+**Assignments Tab**
+View all products assigned to you for review:
+- **Pending**: Not yet started
+- **In Progress**: Currently being reviewed
+- **Completed**: Finished reviews
+
+Each assignment shows:
+- Product name and company
+- Review round information
+- Deadline (if applicable)
+- Priority level
+- Current status
+
+**Preferences Tab**
+Set your expertise and preferences to receive relevant assignments:
+- **Category Preferences**: Select product categories you're knowledgeable about
+- **Company Preferences**: Companies you prefer to review (or exclude)
+- **Product Preferences**: Specific products you have expertise in
+- **Priority Levels**: Set priority for different preference types
+
+Admins use these preferences for auto-assignment in review rounds.
+
+**History Tab**
+Track your completed reviews:
+- Review date and time spent
+- Products reviewed
+- Review scores (if applicable)
+- Feedback provided
+
+**Accessing the Dashboard:**
+Click "Reviewer" in the top navigation menu to access your dashboard.`,
+      keywords: ['dashboard', 'assignments', 'preferences', 'history', 'navigate', 'interface']
+    },
     {
       id: 'getting-started',
-      title: 'Getting Started',
+      title: 'Getting Started with Your First Review',
       icon: BookOpen,
-      keywords: ['reviewer', 'assignments', 'priority', 'deadline', 'onboarding', 'role'],
-      content: 'What is a Reviewer? How Assignments Work Priority Levels deadline management'
+      content: `Welcome! Here's what you need to know to start reviewing:
+
+**Understanding Your Assignment:**
+- Check your deadline and priority level
+- Review the product category and type
+- Note any special instructions from admins
+- Understand the review round objectives
+
+**Before You Begin:**
+1. Ensure you have sufficient time to complete the review
+2. Gather any necessary reference materials
+3. Clear your schedule to focus without interruptions
+4. Familiarize yourself with the product's regulatory context
+
+**Starting a Review:**
+1. Navigate to your Reviewer Dashboard
+2. Find the assigned product in your "Pending" list
+3. Click "Start Review" to begin
+4. The status changes to "In Progress"
+5. The system tracks time spent on the review
+
+**During the Review:**
+- Work through verification checklist items systematically
+- Document your findings as you go
+- Take breaks if needed (your progress is saved)
+- Add notes for unclear or questionable information
+
+**Completing a Review:**
+1. Ensure all checklist items are addressed
+2. Add any final comments or recommendations
+3. Click "Complete Review" when finished
+4. Review is submitted and status changes to "Completed"`,
+      keywords: ['getting started', 'first', 'begin', 'start', 'new', 'introduction']
     },
     {
       id: 'workflow',
-      title: 'Review Workflow',
-      icon: CheckCircle,
-      keywords: ['process', 'steps', 'checklist', 'start', 'complete', 'verify', 'github', 'issue'],
-      content: 'Step-by-Step Process receive assignment start review checklist verify create issues'
+      title: 'Review Workflow & Process',
+      icon: ClipboardList,
+      content: `Follow this systematic approach for effective product reviews:
+
+**Phase 1: Initial Assessment (10-15 minutes)**
+- Read the complete product listing
+- Check for obvious errors or missing information
+- Identify areas requiring deeper verification
+- Note any red flags or concerns
+
+**Phase 2: Regulatory Verification (20-30 minutes)**
+- Verify CE marking status and classification
+- Check FDA clearance/approval claims
+- Confirm regulatory body certifications
+- Cross-reference with official databases
+- Verify compliance with current regulations (MDR vs MDD)
+
+**Phase 3: Technical Review (15-25 minutes)**
+- Verify technical specifications
+- Check product description accuracy
+- Confirm intended use statements
+- Review contraindications and warnings
+- Validate clinical evidence claims
+
+**Phase 4: Documentation Check (10-15 minutes)**
+- Verify manufacturer information
+- Check for complete contact details
+- Confirm product identifiers (UDI, catalog numbers)
+- Review documentation links and references
+- Ensure proper citations
+
+**Phase 5: Final Assessment (5-10 minutes)**
+- Complete all checklist items
+- Add comprehensive review comments
+- Assign review score (if applicable)
+- Make recommendations for improvements
+- Submit completed review
+
+**Time Management:**
+Most reviews take 60-90 minutes. Plan accordingly and take breaks if needed.`,
+      keywords: ['workflow', 'process', 'steps', 'procedure', 'how to review']
     },
     {
       id: 'what-to-review',
-      title: 'What to Review',
+      title: 'What to Review & Verify',
       icon: FileText,
-      keywords: ['information', 'details', 'regulatory', 'compliance', 'documentation', 'technical'],
-      content: 'Basic Product Information Technical Details Regulatory Compliance Documentation'
+      content: `**Regulatory Compliance:**
+✓ CE marking status and validity
+✓ FDA clearance/approval status
+✓ Classification (Class I, IIa, IIb, III)
+✓ Notified Body information (for CE)
+✓ 510(k) numbers or PMA numbers (for FDA)
+✓ Regulatory body certifications (TGA, Health Canada, etc.)
+✓ Current regulation compliance (MDR vs MDD transition)
+
+**Product Information:**
+✓ Accurate product name and description
+✓ Manufacturer details and contact information
+✓ Intended use and indications
+✓ Technical specifications
+✓ Contraindications and warnings
+✓ Clinical evidence references
+
+**Documentation:**
+✓ Valid UDI (Unique Device Identifier)
+✓ Catalog/model numbers
+✓ IFU (Instructions for Use) availability
+✓ Technical documentation links
+✓ Supporting literature references
+
+**Common Issues to Flag:**
+⚠ Expired or invalid certifications
+⚠ Inconsistent regulatory information
+⚠ Missing critical safety information
+⚠ Outdated product versions
+⚠ Broken documentation links
+⚠ Unsubstantiated claims`,
+      keywords: ['verify', 'check', 'what', 'items', 'checklist', 'validation']
     },
     {
-      id: 'verification',
-      title: 'Verification Sources',
-      icon: Globe,
-      keywords: ['sources', 'verify', 'FDA', 'database', 'literature', 'official', 'documentation'],
-      content: 'Primary Sources Regulatory Databases Scientific Literature company websites'
+      id: 'sources',
+      title: 'Verification Sources & Tools',
+      icon: Search,
+      content: `**Official Regulatory Databases:**
+
+**European Union:**
+- EUDAMED (EU Medical Device Database)
+- Notified Body NANDO Database
+- European Commission Medical Devices Portal
+
+**United States:**
+- FDA 510(k) Premarket Notification Database
+- FDA PMA Database
+- FDA Establishment Registration Database
+- FDA UDI Database (GUDID)
+
+**Other Jurisdictions:**
+- Health Canada Medical Devices Active Licence Listing
+- TGA (Australia) ARTG Database
+- PMDA (Japan) Medical Device Information
+- ANVISA (Brazil) Medical Device Registry
+
+**Industry Resources:**
+- Manufacturer websites (official product pages)
+- IFU (Instructions for Use) documents
+- Technical specifications sheets
+- Clinical evidence publications (PubMed, clinical trial registries)
+- Professional medical device associations
+
+**Verification Best Practices:**
+✓ Always use official regulatory databases as primary sources
+✓ Cross-reference information across multiple sources
+✓ Check date of last verification/update
+✓ Document your sources in review comments
+✓ When in doubt, contact the manufacturer directly`,
+      keywords: ['sources', 'databases', 'verify', 'tools', 'where', 'FDA', 'CE', 'regulatory']
     },
     {
-      id: 'checklist',
-      title: 'Review Checklist Explained',
-      icon: CheckCircle,
-      keywords: ['checklist', 'items', 'sections', 'notes', 'verify', 'validation'],
-      content: 'Basic Information Section Technical Details Section Compliance Regulatory Section'
-    },
-    {
-      id: 'github',
-      title: 'Creating Review Issues',
-      icon: GitBranch,
-      keywords: ['github', 'issue', 'template', 'create', 'report', 'bug', 'error'],
-      content: 'When to Create an Issue How to Create an Issue template information evidence'
+      id: 'preferences',
+      title: 'Setting Your Expertise Preferences',
+      icon: Settings,
+      content: `Configure your expertise preferences to receive relevant assignments:
+
+**Why Set Preferences?**
+- Receive assignments matching your expertise
+- Improve review quality and efficiency
+- Reduce time spent on unfamiliar products
+- Help admins optimize workload distribution
+
+**Types of Preferences:**
+
+**1. Category Preferences (Recommended)**
+- Select broad product categories (e.g., Cardiovascular, Imaging, Diagnostics)
+- Helps with automated assignment in review rounds
+- Can select multiple categories
+
+**2. Company Preferences (Optional)**
+- Specify companies you're familiar with
+- Useful for avoiding conflicts of interest
+- Can mark companies as "preferred" or "excluded"
+
+**3. Product Preferences (Advanced)**
+- Select specific products you have deep expertise in
+- Used for targeted assignments
+- Helpful for complex or specialized reviews
+
+**How to Set Preferences:**
+1. Go to Reviewer Dashboard → Preferences Tab
+2. Click "Add Preference"
+3. Select preference type (Category, Company, or Product)
+4. Choose items from dropdown
+5. Set priority level (High, Medium, Low)
+6. Save your preferences
+
+**Tips:**
+✓ Start with 3-5 category preferences
+✓ Update preferences as your expertise grows
+✓ Be honest about your knowledge level
+✓ You can always update preferences later`,
+      keywords: ['preferences', 'expertise', 'settings', 'configure', 'assignments']
     },
     {
       id: 'best-practices',
-      title: 'Best Practices',
-      icon: Shield,
-      keywords: ['quality', 'documentation', 'efficiency', 'communication', 'tips', 'guidelines'],
-      content: 'Review Quality Documentation Efficiency Communication best practices'
+      title: 'Best Practices & Tips',
+      icon: CheckCircle2,
+      content: `**Quality Review Practices:**
+✓ Always verify information against official sources
+✓ Document your verification sources in comments
+✓ Be thorough but efficient with your time
+✓ Flag uncertainties rather than making assumptions
+✓ Provide constructive feedback for improvements
+✓ Maintain objectivity and avoid bias
+
+**Time Management:**
+✓ Set aside dedicated time blocks for reviews
+✓ Aim for 60-90 minutes per standard product review
+✓ Take breaks for complex or lengthy reviews
+✓ Don't rush - accuracy is more important than speed
+✓ Start with easier assignments to build confidence
+
+**Communication:**
+✓ Write clear, specific review comments
+✓ Use professional and respectful language
+✓ Explain your reasoning for flagged issues
+✓ Suggest specific improvements when possible
+✓ Respond to admin queries promptly
+
+**Continuous Improvement:**
+✓ Learn from feedback on your reviews
+✓ Stay updated on regulatory changes
+✓ Attend reviewer training sessions (if offered)
+✓ Share knowledge with fellow reviewers
+✓ Update your preferences as expertise grows
+
+**Ethical Considerations:**
+✓ Disclose any conflicts of interest
+✓ Respect confidentiality of proprietary information
+✓ Avoid reviewing products from your employer
+✓ Maintain independence and objectivity
+✓ Follow GDPR and data protection guidelines`,
+      keywords: ['best practices', 'tips', 'advice', 'quality', 'standards', 'ethics']
     },
     {
-      id: 'faq',
-      title: 'Common Questions',
-      icon: AlertCircle,
-      keywords: ['faq', 'questions', 'help', 'time', 'verify', 'contact', 'mistake', 'deadline'],
-      content: 'FAQ common questions help verify information deadline extension mistakes'
-    }
-  ], []);
+      id: 'common-questions',
+      title: 'Common Questions & Troubleshooting',
+      icon: MessageSquare,
+      content: `**Q: How long does it take to become a verified reviewer?**
+A: Typically 1-3 business days. Users with @dlinrt.eu emails are auto-approved immediately.
 
-  // Filter sections based on search query
+**Q: How many products will I be assigned?**
+A: It varies based on review rounds and your preferences. You can expect 3-10 products per active review round.
+
+**Q: What if I can't complete a review by the deadline?**
+A: Contact an admin as soon as possible to request an extension or reassignment. It's better to communicate early than miss a deadline.
+
+**Q: Can I decline an assignment?**
+A: Yes, contact an admin if you're unable to review an assigned product. Update your preferences to avoid similar assignments in the future.
+
+**Q: What if I find conflicting information?**
+A: Document all sources and the conflicting information in your review comments. Flag it for admin attention and provide your assessment.
+
+**Q: How detailed should my review comments be?**
+A: Provide enough detail for admins and companies to understand your findings. Include specific issues, sources consulted, and recommendations.
+
+**Q: Can I review products from my own company?**
+A: No, to maintain objectivity. Add your employer to your excluded companies in preferences.
+
+**Q: What if I'm unsure about something?**
+A: It's better to flag uncertainty and ask for guidance than to make incorrect assumptions. Add a comment explaining your uncertainty.
+
+**Q: How do I report a serious safety concern?**
+A: Flag it in your review and immediately contact an admin with details. Serious safety issues require urgent attention.
+
+**Q: Can I see other reviewers' comments?**
+A: No, reviews are independent to maintain objectivity. Admins may aggregate feedback from multiple reviewers.`,
+      keywords: ['questions', 'FAQ', 'help', 'troubleshooting', 'problems', 'issues', 'how']
+    }
+  ];
+
   const filteredSections = useMemo(() => {
     if (!searchQuery.trim()) return guideSections;
-
+    
     const query = searchQuery.toLowerCase();
     return guideSections.filter(section => 
       section.title.toLowerCase().includes(query) ||
-      section.keywords.some(keyword => keyword.toLowerCase().includes(query)) ||
-      section.content.toLowerCase().includes(query)
+      section.content.toLowerCase().includes(query) ||
+      section.keywords.some(keyword => keyword.toLowerCase().includes(query))
     );
-  }, [searchQuery, guideSections]);
+  }, [searchQuery]);
 
-  // Automatically open all sections when searching
-  const accordionValue = searchQuery.trim() ? filteredSections.map(s => s.id).join(',') : undefined;
+  const accordionValue = searchQuery ? filteredSections.map(s => s.id) : undefined;
 
   return (
-    <PageLayout>
-      <div className="container max-w-5xl py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Button asChild variant="outline" className="mb-4">
-            <Link to="/reviewer/dashboard">
+    <PageLayout
+      title="Reviewer Guide - DLinRT"
+      description="Comprehensive guide for product reviewers including workflow, best practices, and verification procedures"
+      canonical="https://dlinrt.eu/reviewer/guide"
+    >
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+        {/* Hero Section */}
+        <div className="bg-gradient-to-r from-purple-500/10 via-purple-600/10 to-purple-500/10 border-b">
+          <div className="container mx-auto px-4 py-16">
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/reviewer')}
+              className="mb-6"
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Dashboard
-            </Link>
-          </Button>
-          
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold">Reviewer Guide</h1>
+            </Button>
+            
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-3 bg-purple-500/20 rounded-lg">
+                <Search className="h-8 w-8 text-purple-600" />
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold">Reviewer Guide</h1>
+                <p className="text-muted-foreground text-lg mt-2">
+                  Complete guide to reviewing medical device products with accuracy and expertise
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-lg text-muted-foreground">
-            Complete guide to reviewing products in the DLinRT database
-          </p>
         </div>
 
-        {/* Search Bar */}
-        <Card className="mb-6">
-          <CardContent className="pt-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search guide (e.g., 'github issue', 'verification', 'deadline')..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-9"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Clear search"
+        <div className="container mx-auto px-4 py-8">
+          {/* Quick Navigation Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {quickNavCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <a
+                  key={card.title}
+                  href={card.href}
+                  className="block group"
                 >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-            {searchQuery && (
-              <p className="text-sm text-muted-foreground mt-2">
-                Found {filteredSections.length} {filteredSections.length === 1 ? 'section' : 'sections'} matching "{searchQuery}"
-              </p>
-            )}
-          </CardContent>
-        </Card>
+                  <Card className="h-full hover:shadow-lg transition-shadow border-purple-200/50">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors">
+                          <Icon className="h-5 w-5 text-purple-600" />
+                        </div>
+                        <CardTitle className="text-lg">{card.title}</CardTitle>
+                      </div>
+                      <CardDescription className="mt-2">{card.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </a>
+              );
+            })}
+          </div>
 
-        {/* Quick Start Card */}
-        {!searchQuery && (
-          <Card className="mb-8 border-primary">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-primary" />
-              Quick Start
-            </CardTitle>
-            <CardDescription>New to reviewing? Start here</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ol className="space-y-2 list-decimal list-inside">
-              <li className="text-sm">Check your <Link to="/reviewer/dashboard" className="text-primary hover:underline">Dashboard</Link> for assigned reviews</li>
-              <li className="text-sm">Click "Start Review" on a pending assignment</li>
-              <li className="text-sm">Use the review checklist to verify all information</li>
-              <li className="text-sm">Create a GitHub issue if changes are needed</li>
-              <li className="text-sm">Mark the review as complete when finished</li>
-            </ol>
-          </CardContent>
-        </Card>
-        )}
-
-        {/* Main Guide Content */}
-        {filteredSections.length > 0 ? (
-          <Card>
+          {/* Search */}
+          <Card className="mb-8">
             <CardHeader>
-              <CardTitle>
-                {searchQuery ? `Search Results (${filteredSections.length})` : 'Comprehensive Guide'}
+              <CardTitle className="flex items-center gap-2">
+                <Search className="h-5 w-5" />
+                Search Guide
               </CardTitle>
               <CardDescription>
-                {searchQuery 
-                  ? `Showing sections matching "${searchQuery}"`
-                  : 'Everything you need to know about reviewing products'
-                }
+                Find information quickly by searching for keywords
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Accordion 
-                type="multiple" 
-                value={accordionValue ? accordionValue.split(',') : undefined}
-                className="w-full"
-              >
-              
-              {/* Section 1: Getting Started */}
-              {filteredSections.some(s => s.id === 'getting-started') && (
-              <AccordionItem value="getting-started">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="h-5 w-5" />
-                    Getting Started
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">What is a Reviewer?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Reviewers are experts who verify and validate product information in the DLinRT database. 
-                      Your role is crucial in maintaining the accuracy and reliability of our database for the 
-                      radiation therapy community.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">How Assignments Work</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Product reviews are assigned to you based on your expertise and availability. 
-                      You'll receive assignments through your dashboard with:
-                    </p>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Priority level (low, medium, high, critical)</li>
-                      <li>Deadline (if applicable)</li>
-                      <li>Assignment notes from the admin</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Priority Levels</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="destructive">Critical</Badge>
-                        <span className="text-sm">Urgent issues affecting database integrity</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="default">High</Badge>
-                        <span className="text-sm">Important updates or new products</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary">Medium</Badge>
-                        <span className="text-sm">Regular maintenance reviews</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline">Low</Badge>
-                        <span className="text-sm">Minor updates or routine checks</span>
-                      </div>
-                    </div>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search for topics, keywords, or questions..."
+                  className="pl-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              {searchQuery && (
+                <div className="mt-3 text-sm text-muted-foreground">
+                  {filteredSections.length} {filteredSections.length === 1 ? 'result' : 'results'} found
+                  {filteredSections.length > 0 && ' - All sections expanded below'}
+                </div>
               )}
-
-              {/* Section 2: Review Workflow */}
-              {filteredSections.some(s => s.id === 'workflow') && (
-              <AccordionItem value="workflow">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5" />
-                    Review Workflow
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Step-by-Step Process</h4>
-                    <ol className="space-y-3 list-decimal list-inside">
-                      <li className="text-sm">
-                        <span className="font-medium">Receive Assignment</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          Check your dashboard for new assignments. Review the priority and deadline.
-                        </p>
-                      </li>
-                      <li className="text-sm">
-                        <span className="font-medium">Start Review</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          Click "Start Review" to change the status to "In Progress" and begin your work.
-                        </p>
-                      </li>
-                      <li className="text-sm">
-                        <span className="font-medium">Use the Checklist</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          Go through each item in the review checklist systematically. Mark items as you verify them.
-                        </p>
-                      </li>
-                      <li className="text-sm">
-                        <span className="font-medium">Verify Information</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          Cross-reference all information with official sources. Document your sources in notes.
-                        </p>
-                      </li>
-                      <li className="text-sm">
-                        <span className="font-medium">Create Issues</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          If changes are needed, use the "Create Review Issue" button to generate a GitHub issue.
-                        </p>
-                      </li>
-                      <li className="text-sm">
-                        <span className="font-medium">Complete Review</span>
-                        <p className="text-muted-foreground ml-6 mt-1">
-                          Mark the review as complete once all items are verified or issues are created.
-                        </p>
-                      </li>
-                    </ol>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 3: What to Review */}
-              {filteredSections.some(s => s.id === 'what-to-review') && (
-              <AccordionItem value="what-to-review">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <FileText className="h-5 w-5" />
-                    What to Review
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Basic Product Information</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Product name and manufacturer</li>
-                      <li>Company information and contact details</li>
-                      <li>Official website URL (verify it's accessible and correct)</li>
-                      <li>Product description and purpose</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Technical Details</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Category classification (e.g., TPS, IGRT, QA)</li>
-                      <li>Supported anatomical structures (if applicable)</li>
-                      <li>Modality information (IMRT, VMAT, protons, etc.)</li>
-                      <li>Integration capabilities with other systems</li>
-                      <li>Software version information</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Regulatory & Compliance</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>CE Mark status and certification numbers</li>
-                      <li>FDA clearance or approval status</li>
-                      <li>Regulatory classification (Class I, II, IIb, III)</li>
-                      <li>Clinical evidence and validation studies</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Documentation</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Last updated date (should be recent)</li>
-                      <li>Links to documentation, white papers, publications</li>
-                      <li>User manuals or training materials</li>
-                      <li>Release notes and changelog</li>
-                    </ul>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 4: Verification Sources */}
-              {filteredSections.some(s => s.id === 'verification') && (
-              <AccordionItem value="verification">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <Globe className="h-5 w-5" />
-                    Verification Sources
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Always verify information from authoritative sources. Here are recommended sources:
-                  </p>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Primary Sources</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Official company websites and product pages</li>
-                      <li>Product documentation and user manuals</li>
-                      <li>Direct communication with manufacturers</li>
-                      <li>Official press releases and announcements</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Regulatory Databases</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>FDA 510(k) database (accessdata.fda.gov)</li>
-                      <li>EU MDR/EUDAMED database</li>
-                      <li>National regulatory authority databases</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Scientific Literature</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Peer-reviewed journal publications</li>
-                      <li>Conference proceedings (ESTRO, ASTRO, AAPM)</li>
-                      <li>Clinical trial registries (ClinicalTrials.gov)</li>
-                      <li>Technical white papers</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-muted p-3 rounded-lg">
-                    <p className="text-sm font-medium mb-1">⚠️ Important</p>
-                    <p className="text-sm text-muted-foreground">
-                      Always document your sources in the review notes. Include URLs and access dates 
-                      for web-based sources.
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 5: Review Checklist */}
-              {filteredSections.some(s => s.id === 'checklist') && (
-              <AccordionItem value="checklist">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5" />
-                    Review Checklist Explained
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    The review interface includes a comprehensive checklist. Each section has specific items to verify:
-                  </p>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Basic Information Section</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Product name matches official documentation</li>
-                      <li>Company name is correct and current</li>
-                      <li>Website URL is accessible and correct</li>
-                      <li>Description accurately represents the product</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Technical Details Section</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Category is correctly assigned</li>
-                      <li>Features list is complete and accurate</li>
-                      <li>Supported structures are properly classified</li>
-                      <li>Modalities are correctly specified</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Compliance & Regulatory Section</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>CE Mark information is current</li>
-                      <li>FDA status is verified</li>
-                      <li>Regulatory class is correct</li>
-                      <li>Clinical evidence is documented</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Adding Notes</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Each checklist item can have notes. Use notes to:
-                    </p>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1 mt-2">
-                      <li>Document verification sources</li>
-                      <li>Explain discrepancies found</li>
-                      <li>Note required updates</li>
-                      <li>Record date of verification</li>
-                    </ul>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 6: GitHub Issues */}
-              {filteredSections.some(s => s.id === 'github') && (
-              <AccordionItem value="github">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <GitBranch className="h-5 w-5" />
-                    Creating Review Issues
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">When to Create an Issue</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Create a GitHub issue when you identify:
-                    </p>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Incorrect or outdated information</li>
-                      <li>Missing required fields</li>
-                      <li>Broken or incorrect URLs</li>
-                      <li>Regulatory status changes</li>
-                      <li>Product feature updates</li>
-                      <li>Documentation errors</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">How to Create an Issue</h4>
-                    <ol className="space-y-2 list-decimal list-inside">
-                      <li className="text-sm">
-                        Click the "Create Review Issue" button on the review page
-                      </li>
-                      <li className="text-sm">
-                        A pre-filled GitHub issue template will open in a new tab
-                      </li>
-                      <li className="text-sm">
-                        Fill in the template with specific details about the issue
-                      </li>
-                      <li className="text-sm">
-                        Include evidence: URLs, screenshots, or documentation excerpts
-                      </li>
-                      <li className="text-sm">
-                        Submit the issue to notify the admin and maintenance team
-                      </li>
-                    </ol>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Issue Template Information</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      The template includes:
-                    </p>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Product identification details</li>
-                      <li>Section for describing the issue</li>
-                      <li>Current vs. expected information fields</li>
-                      <li>Evidence/source links section</li>
-                      <li>Severity assessment</li>
-                    </ul>
-                  </div>
-
-                  <div className="bg-muted p-3 rounded-lg">
-                    <p className="text-sm font-medium mb-1">💡 Pro Tip</p>
-                    <p className="text-sm text-muted-foreground">
-                      Be specific in your issue descriptions. Instead of "Website is wrong", 
-                      write "Website URL returns 404 error. Correct URL based on FDA listing is..."
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 7: Best Practices */}
-              {filteredSections.some(s => s.id === 'best-practices') && (
-              <AccordionItem value="best-practices">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <Shield className="h-5 w-5" />
-                    Best Practices
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Review Quality</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Be thorough - check every field systematically</li>
-                      <li>Be accurate - verify all information with reliable sources</li>
-                      <li>Be current - ensure information is up-to-date</li>
-                      <li>Be consistent - follow the same verification process each time</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Documentation</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Always document your sources in review notes</li>
-                      <li>Include access dates for web-based information</li>
-                      <li>Note any discrepancies or unclear information</li>
-                      <li>Keep verification evidence organized</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Efficiency</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Start with official company websites</li>
-                      <li>Check regulatory databases early</li>
-                      <li>Verify links before deep-diving into content</li>
-                      <li>Flag missing information clearly</li>
-                      <li>Don't spend excessive time on unavailable data</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Communication</h4>
-                    <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Contact admin if you're stuck or need clarification</li>
-                      <li>Request deadline extensions early if needed</li>
-                      <li>Share useful verification resources with the team</li>
-                      <li>Report systemic issues (e.g., multiple products affected)</li>
-                    </ul>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-              {/* Section 8: Common Questions */}
-              {filteredSections.some(s => s.id === 'faq') && (
-              <AccordionItem value="faq">
-                <AccordionTrigger className="text-lg font-semibold">
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5" />
-                    Common Questions
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="space-y-4 pt-4">
-                  <div>
-                    <h4 className="font-semibold mb-1">What if I can't verify information?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Create a GitHub issue noting that the information couldn't be verified and explain 
-                      what sources you checked. Mark the review as complete after creating the issue.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">How long should a review take?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Most reviews take 30-60 minutes. Complex products or those requiring extensive 
-                      verification may take longer. Contact admin if a review is taking significantly longer.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">Can I request more time?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Yes. Contact the admin through the platform messaging system or at the provided 
-                      contact email if you need a deadline extension. Do this as early as possible.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">What if product information conflicts?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Document all conflicting sources in your notes. Prioritize regulatory databases 
-                      and official company documentation. Create a GitHub issue highlighting the conflict 
-                      for admin review.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">How do I handle discontinued products?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Verify the product status from official sources. Create a GitHub issue requesting 
-                      the product be marked as discontinued or archived. Document the source confirming 
-                      discontinuation.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">When should I contact the admin?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Contact the admin if: you need deadline extensions, have questions about review 
-                      scope, find systemic issues affecting multiple products, need access to resources, 
-                      or have technical issues with the platform.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-1">What if I make a mistake?</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Contact the admin immediately. All reviews are auditable, and corrections can be made. 
-                      It's better to report and fix mistakes than to let incorrect information persist.
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-              )}
-
-            </Accordion>
-          </CardContent>
-        </Card>
-        ) : (
-          <Card>
-            <CardContent className="py-12 text-center">
-              <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No results found</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                No sections match your search for "{searchQuery}"
-              </p>
-              <Button variant="outline" onClick={() => setSearchQuery('')}>
-                Clear Search
-              </Button>
             </CardContent>
           </Card>
-        )}
 
-        {/* Footer Actions */}
-        <div className="mt-8 flex justify-center gap-4">
-          <Button asChild size="lg">
-            <Link to="/reviewer/dashboard">Go to My Reviews</Link>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link to="/support">Contact Support</Link>
-          </Button>
+          {/* Guide Content */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Complete Reviewer Guide</CardTitle>
+              <CardDescription>
+                Comprehensive documentation for effective product reviews
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {filteredSections.length > 0 ? (
+                <Accordion type="multiple" value={accordionValue} className="w-full">
+                  {filteredSections.map((section) => {
+                    const Icon = section.icon;
+                    return (
+                      <AccordionItem key={section.id} value={section.id} id={section.id}>
+                        <AccordionTrigger className="text-left">
+                          <div className="flex items-center gap-3">
+                            <Icon className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                            <span className="font-semibold">{section.title}</span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="prose prose-sm max-w-none pl-8 whitespace-pre-line">
+                            {section.content}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              ) : (
+                <div className="text-center py-12">
+                  <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">
+                    No results found for "{searchQuery}"
+                  </p>
+                  <Button
+                    variant="link"
+                    onClick={() => setSearchQuery('')}
+                    className="mt-2"
+                  >
+                    Clear search
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Footer Actions */}
+          <div className="flex gap-4 justify-center mt-8">
+            <Button onClick={() => navigate('/reviewer')} variant="outline">
+              Go to Dashboard
+            </Button>
+            <Button onClick={() => navigate('/support')} variant="outline">
+              Contact Support
+            </Button>
+          </div>
         </div>
       </div>
     </PageLayout>
   );
-}
+};
+
+export default ReviewerGuide;
