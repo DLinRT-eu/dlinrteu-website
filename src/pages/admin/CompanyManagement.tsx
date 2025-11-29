@@ -128,8 +128,8 @@ export default function CompanyManagement() {
 
       // Check limit
       const verifiedCount = getVerifiedCount(selectedCompanyId);
-      if (verifiedCount >= 3) {
-        toast.error('Company already has 3 verified representatives (maximum)');
+      if (verifiedCount >= 5) {
+        toast.error('Company already has 5 verified representatives (maximum)');
         return;
       }
 
@@ -459,8 +459,42 @@ export default function CompanyManagement() {
     return sortOrder === 'asc' ? compareValue : -compareValue;
   });
 
-  const pendingCount = representatives.filter(r => !r.verified).length;
-  const totalCompaniesWithReps = new Set(representatives.map(r => r.company_id)).size;
+  // Filter out admin oversight entries for statistics
+  const realCompanyReps = representatives.filter(r => r.company_id !== 'admin_all_companies');
+  const adminOversightCount = representatives.filter(r => r.company_id === 'admin_all_companies').length;
+  const pendingCount = realCompanyReps.filter(r => !r.verified).length;
+  const totalCompaniesWithReps = new Set(realCompanyReps.map(r => r.company_id)).size;
+  
+  // For Representatives tab - add search and sort
+  const [repSearchQuery, setRepSearchQuery] = useState('');
+  const [repSortField, setRepSortField] = useState<'name' | 'email' | 'company' | 'status' | 'date'>('date');
+  const [repSortOrder, setRepSortOrder] = useState<'asc' | 'desc'>('desc');
+  
+  const filteredReps = representatives.filter(rep => {
+    const searchLower = repSearchQuery.toLowerCase();
+    return (
+      rep.profiles.first_name.toLowerCase().includes(searchLower) ||
+      rep.profiles.last_name.toLowerCase().includes(searchLower) ||
+      rep.profiles.email.toLowerCase().includes(searchLower) ||
+      rep.company_name.toLowerCase().includes(searchLower)
+    );
+  });
+  
+  const sortedReps = [...filteredReps].sort((a, b) => {
+    let compareValue = 0;
+    if (repSortField === 'name') {
+      compareValue = `${a.profiles.first_name} ${a.profiles.last_name}`.localeCompare(`${b.profiles.first_name} ${b.profiles.last_name}`);
+    } else if (repSortField === 'email') {
+      compareValue = a.profiles.email.localeCompare(b.profiles.email);
+    } else if (repSortField === 'company') {
+      compareValue = a.company_name.localeCompare(b.company_name);
+    } else if (repSortField === 'status') {
+      compareValue = (a.verified ? 1 : 0) - (b.verified ? 1 : 0);
+    } else if (repSortField === 'date') {
+      compareValue = new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    }
+    return repSortOrder === 'asc' ? compareValue : -compareValue;
+  });
 
   // Sort pending representatives by date
   const sortedPendingReps = [...representatives]
@@ -484,6 +518,12 @@ export default function CompanyManagement() {
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="companies">All Companies</TabsTrigger>
+          <TabsTrigger value="representatives">
+            Representatives
+            <Badge variant="secondary" className="ml-2">
+              {representatives.length}
+            </Badge>
+          </TabsTrigger>
           <TabsTrigger value="pending">
             Pending Verifications
             <Badge 
@@ -496,7 +536,14 @@ export default function CompanyManagement() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="flex justify-end mb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search statistics..."
+                className="pl-9"
+              />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
@@ -534,10 +581,15 @@ export default function CompanyManagement() {
                 <CardTitle>Total Representatives</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-3xl font-bold">{representatives.length}</p>
+                <p className="text-3xl font-bold">{realCompanyReps.length}</p>
                 <p className="text-sm text-muted-foreground">
-                  {representatives.filter(r => r.verified).length} verified
+                  {realCompanyReps.filter(r => r.verified).length} verified
                 </p>
+                {adminOversightCount > 0 && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    + {adminOversightCount} admin oversight
+                  </p>
+                )}
               </CardContent>
             </Card>
             <Card>
@@ -554,8 +606,9 @@ export default function CompanyManagement() {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              Each company can have a maximum of 3 verified representatives.
+              Each company can have a maximum of 5 verified representatives.
               Representatives must be verified to certify products.
+              Admins can certify any company's products without being a representative.
             </AlertDescription>
           </Alert>
 
@@ -599,6 +652,24 @@ export default function CompanyManagement() {
                 className="pl-9"
               />
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Download className="h-4 w-4 mr-2" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={exportToCSV}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToExcel}>
+                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <div className="flex gap-2">
               <Button
                 variant="outline"
@@ -644,13 +715,13 @@ export default function CompanyManagement() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant={verifiedCount >= 3 ? 'default' : 'secondary'}>
-                          {verifiedCount}/3 verified
+                        <Badge variant={verifiedCount >= 5 ? 'default' : 'secondary'}>
+                          {verifiedCount}/5 verified
                         </Badge>
                         <Button
                           size="sm"
                           variant="outline"
-                          disabled={verifiedCount >= 3}
+                          disabled={verifiedCount >= 5}
                           onClick={() => {
                             setSelectedCompanyId(company.id);
                             setAssignDialogOpen(true);
@@ -723,8 +794,168 @@ export default function CompanyManagement() {
           </div>
         </TabsContent>
 
+        <TabsContent value="representatives" className="space-y-4">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search representatives..."
+                value={repSearchQuery}
+                onChange={(e) => setRepSearchQuery(e.target.value)}
+                className="pl-9"
+              />
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Download className="h-4 w-4 mr-2" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={exportToCSV}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToExcel}>
+                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <Card>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th 
+                        className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted"
+                        onClick={() => {
+                          setRepSortField('name');
+                          setRepSortOrder(repSortField === 'name' && repSortOrder === 'asc' ? 'desc' : 'asc');
+                        }}
+                      >
+                        Name {repSortField === 'name' && (repSortOrder === 'asc' ? '↑' : '↓')}
+                      </th>
+                      <th 
+                        className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted"
+                        onClick={() => {
+                          setRepSortField('email');
+                          setRepSortOrder(repSortField === 'email' && repSortOrder === 'asc' ? 'desc' : 'asc');
+                        }}
+                      >
+                        Email {repSortField === 'email' && (repSortOrder === 'asc' ? '↑' : '↓')}
+                      </th>
+                      <th 
+                        className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted"
+                        onClick={() => {
+                          setRepSortField('company');
+                          setRepSortOrder(repSortField === 'company' && repSortOrder === 'asc' ? 'desc' : 'asc');
+                        }}
+                      >
+                        Company {repSortField === 'company' && (repSortOrder === 'asc' ? '↑' : '↓')}
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-medium">Position</th>
+                      <th 
+                        className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted"
+                        onClick={() => {
+                          setRepSortField('status');
+                          setRepSortOrder(repSortField === 'status' && repSortOrder === 'asc' ? 'desc' : 'asc');
+                        }}
+                      >
+                        Status {repSortField === 'status' && (repSortOrder === 'asc' ? '↑' : '↓')}
+                      </th>
+                      <th 
+                        className="px-4 py-3 text-left text-sm font-medium cursor-pointer hover:bg-muted"
+                        onClick={() => {
+                          setRepSortField('date');
+                          setRepSortOrder(repSortField === 'date' && repSortOrder === 'asc' ? 'desc' : 'asc');
+                        }}
+                      >
+                        Created {repSortField === 'date' && (repSortOrder === 'asc' ? '↑' : '↓')}
+                      </th>
+                      <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {sortedReps.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
+                          No representatives found
+                        </td>
+                      </tr>
+                    ) : (
+                      sortedReps.map(rep => (
+                        <tr key={rep.id} className="hover:bg-muted/50">
+                          <td className="px-4 py-3 text-sm font-medium">
+                            {rep.profiles.first_name} {rep.profiles.last_name}
+                          </td>
+                          <td className="px-4 py-3 text-sm">{rep.profiles.email}</td>
+                          <td className="px-4 py-3 text-sm">{rep.company_name}</td>
+                          <td className="px-4 py-3 text-sm text-muted-foreground">
+                            {rep.position || '-'}
+                          </td>
+                          <td className="px-4 py-3">
+                            <Badge variant={rep.verified ? 'default' : 'secondary'}>
+                              {rep.verified ? 'Verified' : 'Pending'}
+                            </Badge>
+                            {rep.company_id === 'admin_all_companies' && (
+                              <Badge variant="outline" className="ml-1">Admin Oversight</Badge>
+                            )}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-muted-foreground">
+                            {new Date(rep.created_at).toLocaleDateString()}
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              {rep.verified ? (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleUnverify(rep)}
+                                >
+                                  Unverify
+                                </Button>
+                              ) : (
+                                <Button
+                                  size="sm"
+                                  variant="default"
+                                  onClick={() => handleVerify(rep)}
+                                >
+                                  Verify
+                                </Button>
+                              )}
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleRemove(rep)}
+                              >
+                                <UserX className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="pending" className="space-y-4">
-          <div className="flex justify-end mb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search pending..."
+                className="pl-9"
+              />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
