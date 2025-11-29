@@ -313,7 +313,7 @@ export default function CompanyProductsManager() {
                         </div>
                         <div className="flex items-center gap-2">
                           {getVerificationBadge(product)}
-                          {isAdmin && (
+                          {(isAdmin || isCompany) && (
                             <Button
                               variant="destructive"
                               size="sm"
@@ -374,7 +374,7 @@ export default function CompanyProductsManager() {
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}
-                            {isAdmin && (
+                            {(isAdmin || isCompany) && (
                               <Button
                                 variant="destructive"
                                 size="sm"
@@ -430,7 +430,7 @@ export default function CompanyProductsManager() {
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}
-                            {isAdmin && (
+                            {(isAdmin || isCompany) && (
                               <Button
                                 variant="destructive"
                                 size="sm"
