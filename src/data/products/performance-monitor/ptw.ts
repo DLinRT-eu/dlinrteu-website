@@ -50,12 +50,15 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
-        class: "IIb",
-        type: "Medical Device"
+        status: "MDR exempt",
+        class: "N/A",
+        type: "Software Tool"
       },
-      fda: "510(k) cleared",
-      intendedUseStatement: "For monitoring and quality assessment of AI-generated contours in clinical radiotherapy practice."
+      fda: {
+        status: "Not applicable",
+        class: "N/A"
+      },
+      intendedUseStatement: "For monitoring and quality assessment of AI-generated contours in clinical radiotherapy practice. Not intended for clinical decision making."
     },
     market: {
       onMarketSince: "2024",
