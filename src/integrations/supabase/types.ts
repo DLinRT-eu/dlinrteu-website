@@ -343,7 +343,22 @@ export type Database = {
           verified_at?: string | null
           verified_by?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_team_members"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       company_revisions: {
         Row: {
@@ -1410,7 +1425,22 @@ export type Database = {
           product_id: string | null
           user_id: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_team_members"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       public_team_members: {
         Row: {

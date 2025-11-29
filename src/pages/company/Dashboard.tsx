@@ -321,7 +321,7 @@ export default function CompanyDashboard() {
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline">
-              <Link to="/company/products-manager">Manage Certifications</Link>
+              <Link to="/company/products">Manage Certifications</Link>
             </Button>
             <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
               <DialogTrigger asChild>
