@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/layout/PageLayout';
-import { Users, Search, Building2, Shield, ArrowRight, HelpCircle } from 'lucide-react';
+import { Users, Search, Building2, Shield, ArrowRight, HelpCircle, FileText } from 'lucide-react';
 
 export default function Roles() {
   return (
@@ -185,6 +185,12 @@ export default function Roles() {
                 <p className="text-xs text-muted-foreground">
                   Requires admin verification of company affiliation. Max 5 representatives per company.
                 </p>
+                <Button asChild size="sm" variant="outline" className="mt-2 gap-2">
+                  <Link to="/company/guide">
+                    <FileText className="h-4 w-4" />
+                    View Complete Guide
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>

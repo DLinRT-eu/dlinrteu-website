@@ -109,46 +109,56 @@ export function getStandardizedCertificationTags(product: ProductDetails): strin
   const fdaInfo = parseFDAInfo(product.regulatory?.fda);
   const ceInfo = parseCEInfo(product.regulatory?.ce);
   
-  if (fdaInfo) {
-    if (fdaInfo.clearanceNumber?.startsWith('K')) {
-      tags.push('FDA 510(k)');
-    } else if (fdaInfo.clearanceNumber?.startsWith('P')) {
-      tags.push('FDA PMA');
-    } else if (fdaInfo.status?.includes('510(k)')) {
-      tags.push('FDA 510(k)');
-    } else if (fdaInfo.status?.includes('PMA')) {
-      tags.push('FDA PMA');
-    } else {
-      tags.push('FDA');
-    }
-  }
+  // Check for exempt status FIRST - from either certification field or CE status
+  const isExempt = 
+    product.certification?.toLowerCase().includes('exempt') ||
+    ceInfo?.status?.toLowerCase().includes('exempt');
   
-  if (ceInfo) {
-    if (ceInfo.type === 'MDR') {
-      tags.push('CE MDR');
-    } else if (ceInfo.type === 'MDD') {
-      tags.push('CE MDD');
-    } else {
-      tags.push('CE');
+  if (isExempt) {
+    tags.push('MDR Exempt');
+    // Don't add other CE tags if exempt
+  } else {
+    // FDA processing (only if not exempt)
+    if (fdaInfo) {
+      if (fdaInfo.clearanceNumber?.startsWith('K')) {
+        tags.push('FDA 510(k)');
+      } else if (fdaInfo.clearanceNumber?.startsWith('P')) {
+        tags.push('FDA PMA');
+      } else if (fdaInfo.status?.includes('510(k)')) {
+        tags.push('FDA 510(k)');
+      } else if (fdaInfo.status?.includes('PMA')) {
+        tags.push('FDA PMA');
+      } else {
+        tags.push('FDA');
+      }
     }
-  }
-  
-  // Fallback to original certification field
-  if (!tags.length && product.certification) {
-    const cert = product.certification.toLowerCase();
-    if (cert.includes('exempt')) {
-      tags.push('MDR Exempt');
-    } else if (cert.includes('ce') && cert.includes('fda')) {
-      if (ceInfo?.type === 'MDR') tags.push('CE MDR');
-      else tags.push('CE');
-      tags.push('FDA');
-    } else if (cert.includes('ce')) {
-      if (ceInfo?.type === 'MDR') tags.push('CE MDR');
-      else tags.push('CE');
-    } else if (cert.includes('fda')) {
-      tags.push('FDA');
-    } else if (cert.includes('nmpa')) {
-      tags.push('NMPA');
+    
+    // CE processing (only if not exempt)
+    if (ceInfo) {
+      if (ceInfo.type === 'MDR') {
+        tags.push('CE MDR');
+      } else if (ceInfo.type === 'MDD') {
+        tags.push('CE MDD');
+      } else if (ceInfo.status) {
+        tags.push('CE');
+      }
+    }
+    
+    // Fallback to original certification field (excluding exempt since handled above)
+    if (!tags.length && product.certification) {
+      const cert = product.certification.toLowerCase();
+      if (cert.includes('ce') && cert.includes('fda')) {
+        if (ceInfo?.type === 'MDR') tags.push('CE MDR');
+        else tags.push('CE');
+        tags.push('FDA');
+      } else if (cert.includes('ce')) {
+        if (ceInfo?.type === 'MDR') tags.push('CE MDR');
+        else tags.push('CE');
+      } else if (cert.includes('fda')) {
+        tags.push('FDA');
+      } else if (cert.includes('nmpa')) {
+        tags.push('NMPA');
+      }
     }
   }
   
