@@ -321,6 +321,9 @@ export default function CompanyDashboard() {
           </div>
           <div className="flex gap-2">
             <Button asChild variant="outline">
+              <Link to="/company/overview">Dashboard Overview</Link>
+            </Button>
+            <Button asChild variant="outline">
               <Link to="/company/products">Manage Certifications</Link>
             </Button>
             <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
