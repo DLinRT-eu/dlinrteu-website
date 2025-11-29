@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -469,6 +469,24 @@ export default function Auth() {
             )}
           </CardContent>
         </Card>
+
+        {/* Role Guides Section */}
+        <div className="mt-6 text-center">
+          <p className="text-sm text-muted-foreground mb-3">
+            New to DLinRT? Learn about the different roles:
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/reviewer/guide">Reviewer Guide</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/company/guide">Company Guide</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/roles">All Roles</Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </>
   );
