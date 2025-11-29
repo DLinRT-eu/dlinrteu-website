@@ -94,6 +94,85 @@ const Index = () => {
         productCount={products.length}
         companyCount={companies.length}
       />
+
+      {/* Community Roles Section */}
+      <div className="bg-gradient-to-b from-primary/5 to-background py-12">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold mb-3">Join the DLinRT Community</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Contribute to the radiotherapy community by becoming a reviewer or representing your company
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="border-purple-500/20 hover:border-purple-500/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-purple-500/10 rounded-lg">
+                    <FileText className="h-5 w-5 text-purple-500" />
+                  </div>
+                  <CardTitle className="text-lg">Reviewer</CardTitle>
+                </div>
+                <CardDescription>
+                  Evaluate and maintain product information quality
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild variant="outline" className="w-full">
+                  <Link to="/reviewer/guide">
+                    Learn More
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-green-500/20 hover:border-green-500/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-green-500/10 rounded-lg">
+                    <Building2 className="h-5 w-5 text-green-500" />
+                  </div>
+                  <CardTitle className="text-lg">Company Rep</CardTitle>
+                </div>
+                <CardDescription>
+                  Manage and update your company's product information
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild variant="outline" className="w-full">
+                  <Link to="/company/guide">
+                    Learn More
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 hover:border-primary/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <BarChart3 className="h-5 w-5 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">All Roles</CardTitle>
+                </div>
+                <CardDescription>
+                  View all available roles and responsibilities
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button asChild variant="outline" className="w-full">
+                  <Link to="/roles">
+                    View All
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
       
       {/* Website Description Section */}
       <div className="bg-gray-50 py-12">
