@@ -33,8 +33,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       "AI contour quality monitoring",
       "Clinical practice integration",
       "Performance analytics",
-      "Quality metrics tracking",
-      "Workflow optimization"
+      "Quality metrics tracking"
     ],
     technicalSpecifications: {
       population: "Radiotherapy patients with AI-generated contours",
@@ -44,7 +43,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       outputFormat: ["PDF", "CSV", "Dashboard"]
     },
     technology: {
-      integration: ["TPS integration", "R&V integration", "LINAC connectivity"],
+      integration: ["Dicom node"],
       deployment: ["On-premises"],
       triggerForAnalysis: "Automatic or manual",
       processingTime: "Minutes per analysis"
@@ -59,14 +58,14 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "For monitoring and quality assessment of AI-generated contours in clinical radiotherapy practice."
     },
     market: {
-      onMarketSince: "2019",
+      onMarketSince: "2024",
       distributionChannels: ["Direct sales", "Distribution partners"],
 
 },
-    version: "2.4",
-    releaseDate: "2023-06-01",
-    lastUpdated: "2024-02-15",
-    lastRevised: "2025-09-01",
-    source: "Automatically retrieved and revised by company"
+    version: "1.1",
+    releaseDate: "2025-09-23",
+    lastUpdated: "2025-11-29",
+    lastRevised: "2025-11-29",
+    source: "Automatically retrieved and revised"
   }
 ];
