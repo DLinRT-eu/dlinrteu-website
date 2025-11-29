@@ -18,6 +18,9 @@ import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, UserPlus, Search, Filter } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
+import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
+import { exportToCSV, exportToExcel, exportToJSON } from '@/utils/exportUtils';
+import { toast as sonnerToast } from 'sonner';
 
 type ReviewerWithWorkload = Database['public']['Functions']['get_reviewers_with_workload_admin']['Returns'][number];
 type AdminSecureReview = Database['public']['Functions']['get_product_reviews_admin_secure']['Returns'][number];
@@ -66,6 +69,8 @@ export default function ReviewAssignment() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState('product_id');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   const products = ALL_PRODUCTS;
 
@@ -326,10 +331,89 @@ export default function ReviewAssignment() {
     p.company.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredReviews = reviews.filter(review => {
-    if (statusFilter === 'all') return true;
-    return review.status === statusFilter;
-  });
+  const filteredAndSortedReviews = reviews
+    .filter(review => {
+      if (statusFilter === 'all') return true;
+      return review.status === statusFilter;
+    })
+    .sort((a, b) => {
+      let aVal: any, bVal: any;
+      
+      switch (sortBy) {
+        case 'product_id':
+          aVal = a.product_id;
+          bVal = b.product_id;
+          break;
+        case 'reviewer':
+          aVal = a.reviewer ? `${a.reviewer.first_name} ${a.reviewer.last_name}` : '';
+          bVal = b.reviewer ? `${b.reviewer.first_name} ${b.reviewer.last_name}` : '';
+          break;
+        case 'status':
+          aVal = a.status;
+          bVal = b.status;
+          break;
+        case 'priority':
+          const priorityOrder = { critical: 4, high: 3, medium: 2, low: 1 };
+          aVal = priorityOrder[a.priority as keyof typeof priorityOrder] || 0;
+          bVal = priorityOrder[b.priority as keyof typeof priorityOrder] || 0;
+          break;
+        case 'deadline':
+          aVal = a.deadline || '';
+          bVal = b.deadline || '';
+          break;
+        default:
+          return 0;
+      }
+
+      if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+  const handleExportCSV = () => {
+    try {
+      const data = filteredAndSortedReviews.map(review => ({
+        'Product ID': review.product_id,
+        'Reviewer': review.reviewer ? `${review.reviewer.first_name} ${review.reviewer.last_name}` : 'Unassigned',
+        'Status': review.status,
+        'Priority': review.priority,
+        'Deadline': review.deadline || 'No deadline',
+        'Started': review.started_at || 'Not started',
+        'Completed': review.completed_at || 'Not completed',
+      }));
+      exportToCSV(data, 'review_assignments');
+      sonnerToast.success('Exported to CSV');
+    } catch (error) {
+      sonnerToast.error('Failed to export');
+    }
+  };
+
+  const handleExportExcel = () => {
+    try {
+      const data = filteredAndSortedReviews.map(review => ({
+        'Product ID': review.product_id,
+        'Reviewer': review.reviewer ? `${review.reviewer.first_name} ${review.reviewer.last_name}` : 'Unassigned',
+        'Status': review.status,
+        'Priority': review.priority,
+        'Deadline': review.deadline || 'No deadline',
+        'Started': review.started_at || 'Not started',
+        'Completed': review.completed_at || 'Not completed',
+      }));
+      exportToExcel(data, 'review_assignments', 'Assignments');
+      sonnerToast.success('Exported to Excel');
+    } catch (error) {
+      sonnerToast.error('Failed to export');
+    }
+  };
+
+  const handleExportJSON = () => {
+    try {
+      exportToJSON(filteredAndSortedReviews, 'review_assignments');
+      sonnerToast.success('Exported to JSON');
+    } catch (error) {
+      sonnerToast.error('Failed to export');
+    }
+  };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -483,10 +567,12 @@ export default function ReviewAssignment() {
         {/* Assignments Table */}
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>All Assignments</CardTitle>
-                <CardDescription>Manage product review assignments</CardDescription>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>All Assignments</CardTitle>
+                  <CardDescription>Manage product review assignments</CardDescription>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <Filter className="h-4 w-4 text-muted-foreground" />
@@ -501,6 +587,26 @@ export default function ReviewAssignment() {
                     <SelectItem value="completed">Completed</SelectItem>
                   </SelectContent>
                 </Select>
+                <DataControlsBar
+                  searchValue=""
+                  onSearchChange={() => {}}
+                  searchPlaceholder=""
+                  sortOptions={[
+                    { value: 'product_id', label: 'Product ID' },
+                    { value: 'reviewer', label: 'Reviewer' },
+                    { value: 'status', label: 'Status' },
+                    { value: 'priority', label: 'Priority' },
+                    { value: 'deadline', label: 'Deadline' },
+                  ]}
+                  sortValue={sortBy}
+                  onSortChange={setSortBy}
+                  sortDirection={sortDirection}
+                  onSortDirectionChange={setSortDirection}
+                  showExportButton
+                  onExportCSV={handleExportCSV}
+                  onExportExcel={handleExportExcel}
+                  onExportJSON={handleExportJSON}
+                />
               </div>
             </div>
           </CardHeader>
@@ -517,7 +623,7 @@ export default function ReviewAssignment() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredReviews.length === 0 ? (
+                {filteredAndSortedReviews.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                       {reviews.length === 0 
@@ -527,7 +633,7 @@ export default function ReviewAssignment() {
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredReviews.map((review) => {
+                  filteredAndSortedReviews.map((review) => {
                     const product = products.find(p => p.id === review.product_id);
                     return (
                       <TableRow key={review.id}>
