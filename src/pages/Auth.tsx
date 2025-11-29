@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,6 +12,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { z } from 'zod';
 import SEO from '@/components/SEO';
+import { MFAVerification } from '@/components/auth/MFAVerification';
 
 const loginSchema = z.object({
   email: z.string()
@@ -57,6 +59,8 @@ export default function Auth() {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
+  const [showMFAVerification, setShowMFAVerification] = useState(false);
+  const [mfaError, setMfaError] = useState<string | null>(null);
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('');
@@ -82,6 +86,7 @@ export default function Auth() {
     e.preventDefault();
     setError(null);
     setSuccessMessage(null);
+    setMfaError(null);
     
     try {
       const validation = loginSchema.parse({ 
@@ -95,13 +100,71 @@ export default function Auth() {
       
       if (signInError) {
         setError(signInError.message || 'Failed to sign in');
+        return;
       }
+
+      // Check if MFA is required
+      const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+      if (aalData?.currentLevel === 'aal1' && aalData?.nextLevel === 'aal2') {
+        setShowMFAVerification(true);
+        return; // Don't navigate yet
+      }
+      
+      // No MFA required, proceed to home
+      navigate('/');
     } catch (err) {
       if (err instanceof z.ZodError) {
         setError(err.errors[0].message);
       } else {
         setError('An unexpected error occurred');
       }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMFAVerify = async (code: string, isBackupCode: boolean) => {
+    setMfaError(null);
+    setLoading(true);
+    
+    try {
+      if (isBackupCode) {
+        // Call edge function for backup code verification
+        const { data, error } = await supabase.functions.invoke('verify-backup-code', {
+          body: { code }
+        });
+        
+        if (error || !data?.success) {
+          throw new Error(data?.error || 'Invalid backup code');
+        }
+      } else {
+        // Standard TOTP verification
+        const { data: factors } = await supabase.auth.mfa.listFactors();
+        const factor = factors?.totp?.find(f => f.status === 'verified');
+        
+        if (!factor) {
+          throw new Error('No verified MFA factor found');
+        }
+        
+        const { data: challenge, error: challengeError } = await supabase.auth.mfa.challenge({ 
+          factorId: factor.id 
+        });
+        
+        if (challengeError) throw challengeError;
+        
+        const { error: verifyError } = await supabase.auth.mfa.verify({
+          factorId: factor.id,
+          challengeId: challenge.id,
+          code
+        });
+        
+        if (verifyError) throw verifyError;
+      }
+      
+      // MFA verified, navigate to home
+      navigate('/');
+    } catch (error: any) {
+      setMfaError(error.message || 'Verification failed');
     } finally {
       setLoading(false);
     }
@@ -191,13 +254,20 @@ export default function Auth() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'login' | 'signup')}>
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Login</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
-              </TabsList>
-            
-              <TabsContent value="login">
+            {showMFAVerification ? (
+              <MFAVerification 
+                onVerify={handleMFAVerify}
+                loading={loading}
+                error={mfaError || undefined}
+              />
+            ) : (
+              <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'login' | 'signup')}>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="login">Login</TabsTrigger>
+                  <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                </TabsList>
+              
+                <TabsContent value="login">
                 <form onSubmit={handleLogin} className="space-y-4">
                   {error && (
                     <Alert variant="destructive">
@@ -395,7 +465,8 @@ export default function Auth() {
                   </Button>
                 </form>
               </TabsContent>
-            </Tabs>
+              </Tabs>
+            )}
           </CardContent>
         </Card>
       </div>

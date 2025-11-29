@@ -2,16 +2,31 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': 'https://dlinrt.eu',
+const getAllowedOrigin = (req: Request) => {
+  const origin = req.headers.get('origin') || '';
+  const allowedOrigins = [
+    'https://dlinrt.eu',
+    'https://lovable.dev',
+    /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
+  ];
+  
+  for (const allowed of allowedOrigins) {
+    if (typeof allowed === 'string' && origin === allowed) return origin;
+    if (allowed instanceof RegExp && allowed.test(origin)) return origin;
+  }
+  return 'https://dlinrt.eu'; // Default fallback
+};
+
+const corsHeaders = (req: Request) => ({
+  'Access-Control-Allow-Origin': getAllowedOrigin(req),
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Credentials': 'true',
-};
+});
 
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: corsHeaders(req) });
   }
 
   try {
@@ -22,7 +37,7 @@ serve(async (req) => {
         JSON.stringify({ error: 'Unauthorized' }),
         { 
           status: 401,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
         }
       );
     }
@@ -48,7 +63,7 @@ serve(async (req) => {
         JSON.stringify({ error: 'Unauthorized' }),
         { 
           status: 401,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
         }
       );
     }
@@ -63,7 +78,7 @@ serve(async (req) => {
         JSON.stringify({ error: 'Missing backup code' }),
         { 
           status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
         }
       );
     }
@@ -86,7 +101,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ success: true }),
       { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        headers: { ...corsHeaders(req), 'Content-Type': 'application/json' },
         status: 200
       }
     );
@@ -96,7 +111,7 @@ serve(async (req) => {
       JSON.stringify({ error: error.message }),
       { 
         status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
       }
     );
   }

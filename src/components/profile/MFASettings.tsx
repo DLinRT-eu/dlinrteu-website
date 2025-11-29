@@ -62,8 +62,18 @@ export const MFASettings = () => {
   const startEnrollment = async () => {
     setEnrolling(true);
     try {
+      // Check for and remove any existing unverified factors
+      const { data: existingFactors } = await supabase.auth.mfa.listFactors();
+      const unverifiedFactor = existingFactors?.totp?.find(f => f.status === 'unverified');
+      
+      if (unverifiedFactor) {
+        await supabase.auth.mfa.unenroll({ factorId: unverifiedFactor.id });
+      }
+      
+      // Now enroll with a friendly name
       const { data, error } = await supabase.auth.mfa.enroll({
         factorType: 'totp',
+        friendlyName: 'DLinRT Authenticator',
       });
 
       if (error) throw error;
@@ -174,12 +184,19 @@ export const MFASettings = () => {
       const { error } = await supabase.auth.mfa.unenroll({ factorId });
       if (error) throw error;
 
+      // Delete all backup codes for this user
+      await supabase
+        .from('mfa_backup_codes')
+        .delete()
+        .eq('user_id', user.id);
+
       // Update profile
       await supabase
         .from('profiles')
         .update({
           mfa_enabled: false,
           mfa_enrolled_at: null,
+          mfa_backup_codes_generated_at: null,
         })
         .eq('id', user.id);
 
