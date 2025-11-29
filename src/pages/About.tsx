@@ -197,7 +197,7 @@ const About = () => {
                   <li>• Access user feedback and experience notes</li>
                   <li>• Contact users who opted in for communication</li>
                   <li>• Track revision status and approval</li>
-                  <li>• Max 3 representatives per company</li>
+                  <li>• Max 5 representatives per company</li>
                   <li>• All regular user capabilities</li>
                 </ul>
               </CardContent>

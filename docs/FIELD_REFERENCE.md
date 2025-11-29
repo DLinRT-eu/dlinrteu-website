@@ -121,4 +121,29 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 
 ---
 
+## Company Certification Fields
+
+These fields are used when company representatives certify product information:
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `company_product_verifications.id` | auto | Unique verification ID | UUID | System-generated |
+| `company_product_verifications.company_id` | ✅ | Company performing certification | Company ID string | Must match representative's company |
+| `company_product_verifications.product_id` | ✅ | Product being certified | Product ID string | Links to product entry |
+| `company_product_verifications.verified_at` | auto | Timestamp of certification | ISO 8601 timestamp | Set automatically on certification |
+| `company_product_verifications.verified_by` | auto | User who certified | UUID | System-managed, links to user |
+| `company_product_verifications.verification_notes` | ➖ | Additional certification notes | Free text | Optional context about certification |
+| `company_product_verifications.product_last_revised` | ➖ | Date product info last updated | ISO 8601 timestamp | Tracks when product was last revised |
+| `company_product_verifications.supporting_documents` | ➖ | Supporting documentation | JSON array | Optional file references |
+
+**Certification Rules**:
+- Maximum **5 verified representatives** per company
+- Only verified representatives can certify products
+- **Admins can certify any company's products** without being a representative
+- Certifications are tracked in audit logs for compliance
+
+---
+
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
+
+**Last Updated**: November 29, 2025

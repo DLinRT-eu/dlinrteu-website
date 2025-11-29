@@ -117,21 +117,46 @@ Assign individual product reviews to reviewers.
 
 ## 4. Company Management
 
-Manage company representatives and product ownership.
+Manage company representatives, product ownership, and certifications.
 
 ### Accessing Company Management
 **Route**: `/admin/companies`
 
+### Interface Overview
+
+The Company Management page has **four tabs**:
+
+1. **Overview** - Statistics and quick actions
+2. **All Companies** - Browse all companies with representatives
+3. **Pending Verifications** - Review pending representative requests
+4. **Representatives** - Full list of all company representatives
+
+All tabs support **search, sorting, and export** (CSV/Excel).
+
 ### Verifying Company Representatives
 
-1. View pending verification requests
+1. Go to "Pending Verifications" tab
 2. Review user's company claim
 3. Verify documentation (if provided)
-4. Approve or reject
+4. Approve or reject request
+5. Maximum **5 verified representatives** per company
+
+### Representative Limits
+
+- Each company can have up to **5 verified representatives**
+- Representatives must be verified before they can certify products
+- **Admins can certify any company's products** without being a representative
+
+### Admin Certification Privileges
+
+Administrators have special certification capabilities:
+- Can certify products for **any company** without being listed as a representative
+- Full oversight of all company activities
+- Access to all company revisions and certifications
 
 ### Assigning Products to Companies
 
-1. Select company representative
+1. Select company representative from Representatives tab
 2. Choose products they can manage
 3. Set access level
 4. Save assignments
@@ -139,10 +164,11 @@ Manage company representatives and product ownership.
 ### Company Oversight
 
 Admins have full visibility of:
-- All company revisions
-- Product update requests
+- All company revisions across all companies
+- Product update/certification requests
 - Verification status
 - Company representative activities
+- Activity audit logs
 
 ---
 
@@ -248,4 +274,52 @@ ON CONFLICT (user_id, role) DO NOTHING;
 
 ---
 
-**Last Updated**: November 2025
+---
+
+## 6. Registration Review
+
+Review and approve new user registrations.
+
+### Accessing Registration Review
+**Route**: `/admin/registrations`
+
+### Features
+- View pending user registrations
+- Review institutional email verification
+- Approve or reject registrations
+- Add notes for rejections
+
+---
+
+## 7. Changelog Management
+
+Manage platform changelog entries.
+
+### Routes
+- `/admin/changelog` - View and edit changelog entries
+- `/admin/changelog-generator` - Generate changelog from commits
+
+### Features
+- Create and edit changelog entries
+- Auto-generate from GitHub commits
+- Publish or archive entries
+- Track version history
+
+---
+
+## 8. Certification Management
+
+Overview of all product certifications.
+
+### Accessing Certification Management
+**Route**: `/admin/certifications`
+
+### Features
+- View all product certifications across companies
+- Filter by company, product, or date
+- Export certification reports
+- Monitor certification activity
+
+---
+
+**Last Updated**: November 29, 2025

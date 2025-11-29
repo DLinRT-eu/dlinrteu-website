@@ -39,26 +39,51 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 - `/products` - Browse all products
 - `/companies` - Company directory
 - `/timeline` - Product release timeline
+- `/initiatives` - Research initiatives & datasets
+- `/resources-compliance` - Resources & regulatory compliance
+- `/changelog` - Platform changelog
+- `/roles` - User roles information
+- `/roles/faq` - Roles FAQ
+- `/support` - Support & contact
+- `/news` - News articles
+- `/about` - About DLinRT
 
 ### Admin Pages
 
-- `/admin` - Admin dashboard
+- `/admin` - Admin overview
+- `/admin/dashboard` - Admin dashboard
 - `/admin/users` - User management
 - `/admin/reviews` - Review assignment
 - `/admin/review-rounds` - Review round management
-- `/admin/companies` - Company management
+- `/admin/review-rounds/:roundId` - Round details
+- `/admin/companies` - Company management (4 tabs: Overview, All Companies, Pending, Representatives)
+- `/admin/security` - Security dashboard
+- `/admin/registrations` - User registration review
+- `/admin/changelog` - Changelog management
+- `/admin/changelog-generator` - Changelog generator
+- `/admin/user-products` - User product adoptions
+- `/admin/certifications` - Certification management
 
 ### Reviewer Pages
 
-- `/reviewer` - Reviewer dashboard
+- `/reviewer/dashboard` - Reviewer dashboard
 - `/reviewer/preferences` - Set expertise preferences
 - `/reviewer/due-reviews` - View assigned reviews
+- `/reviewer/guide` - Reviewer guide
 
 ### Company Pages
 
 - `/company/dashboard` - Company dashboard
-- `/company/products` - Manage company products
+- `/company/overview` - Company statistics overview
+- `/company/products` - Manage company products & certifications
+
+### User Pages (Authenticated)
+
+- `/profile` - User profile
+- `/my-products` - My product adoptions
+- `/role-selection` - Role selection
+- `/notifications` - Notification history
 
 ---
 
-**Last Updated**: November 17, 2025
+**Last Updated**: November 29, 2025
