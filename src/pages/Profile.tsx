@@ -21,12 +21,15 @@ import { MFASettings } from '@/components/profile/MFASettings';
 import { DataExport } from '@/components/profile/DataExport';
 import { DeleteAccount } from '@/components/profile/DeleteAccount';
 import { ConsentManagement } from '@/components/profile/ConsentManagement';
-import { User, Mail, Building2, Briefcase, Shield, AlertCircle, Package, RefreshCw, Users, FileCheck, LayoutDashboard, ShieldCheck } from 'lucide-react';
-import { Link, Navigate } from 'react-router-dom';
+import { RoleQuickActions } from '@/components/profile/RoleQuickActions';
+import { ReviewerProfileSummary } from '@/components/profile/ReviewerProfileSummary';
+import { CompanyProfileSummary } from '@/components/profile/CompanyProfileSummary';
+import { User, Mail, Building2, Briefcase, Shield, AlertCircle, RefreshCw } from 'lucide-react';
+import { Navigate } from 'react-router-dom';
 
 export default function Profile() {
   const { user, profile, updateProfile, signOut, resendVerificationEmail, loading, profileLoading, refreshProfile } = useAuth();
-  const { roles, highestRole, isAdmin, activeRole, setActiveRole } = useRoles();
+  const { roles, highestRole, isAdmin, isReviewer, isCompany, activeRole, setActiveRole } = useRoles();
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
@@ -377,58 +380,8 @@ export default function Profile() {
           {/* Role Selector - for users with multiple roles */}
           <RoleSelector />
 
-          {/* Admin Tools Card - Only show for admins */}
-          {isAdmin && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="h-5 w-5" />
-                  Admin Tools
-                </CardTitle>
-                <CardDescription>Quick access to administrative features</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/admin/users">
-                      <Users className="h-4 w-4 mr-2" />
-                      User Management
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/admin/reviews">
-                      <FileCheck className="h-4 w-4 mr-2" />
-                      Review Assignments
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/admin">
-                      <LayoutDashboard className="h-4 w-4 mr-2" />
-                      Admin Dashboard
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/admin/security">
-                      <ShieldCheck className="h-4 w-4 mr-2" />
-                      Security Dashboard
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/company/dashboard">
-                      <Building2 className="h-4 w-4 mr-2" />
-                      Company Oversight
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" className="justify-start">
-                    <Link to="/company/products">
-                      <Package className="h-4 w-4 mr-2" />
-                      Manage Certifications
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          {/* Role-Specific Quick Actions */}
+          <RoleQuickActions isAdmin={isAdmin} isReviewer={isReviewer} isCompany={isCompany} />
 
           {/* Profile Information Card */}
           <Card>
@@ -507,35 +460,23 @@ export default function Profile() {
             </CardContent>
           </Card>
 
-          {/* Admin Tools */}
-          {isAdmin && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Admin Tools</CardTitle>
-                <CardDescription>Administrative functions and oversight</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button variant="outline" asChild className="w-full justify-start">
-                  <Link to="/admin/user-products">
-                    <Package className="h-4 w-4 mr-2" />
-                    View User Product Adoptions
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
+          {/* Role-Specific Settings */}
+          {isReviewer && <ReviewerProfileSummary userId={user.id} />}
+          {isCompany && <CompanyProfileSummary userId={user.id} />}
 
           {/* Security Settings */}
           <MFASettings />
 
-          {/* GDPR Compliance */}
+          {/* GDPR & Privacy */}
           <ConsentManagement />
           <DataExport />
-          <DeleteAccount />
 
           {/* Role Request Section - Show for all users (can request additional roles) */}
           <RoleRequestForm onRequestSubmitted={() => setRefreshKey(prev => prev + 1)} />
           <RoleRequestHistory key={refreshKey} />
+
+          {/* Danger Zone */}
+          <DeleteAccount />
         </div>
       </div>
     </PageLayout>
