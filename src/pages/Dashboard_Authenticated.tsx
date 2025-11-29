@@ -15,7 +15,9 @@ import {
   Settings,
   Bell,
   UserCheck,
-  User
+  User,
+  ScrollText,
+  Activity
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
@@ -65,6 +67,20 @@ export default function Dashboard_Authenticated() {
         icon: Building2,
         link: '/company/dashboard',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      },
+      {
+        title: 'Changelog Management',
+        description: 'Manage platform changelog entries',
+        icon: ScrollText,
+        link: '/admin/changelog',
+        color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
+      },
+      {
+        title: 'Security Monitoring',
+        description: 'Monitor security events',
+        icon: Activity,
+        link: '/admin/security-monitoring',
+        color: 'bg-red-50 text-red-600 hover:bg-red-100'
       }
     ] : []),
     ...(isReviewer ? [

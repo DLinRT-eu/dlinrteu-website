@@ -6,7 +6,6 @@ import { ALL_PRODUCTS } from '@/data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Table,
@@ -16,11 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, AlertTriangle, XCircle, Search, ExternalLink, Building2 } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
+import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
+import * as XLSX from 'xlsx';
 import type { ProductDetails } from '@/types/productDetails';
 import type { Tables } from '@/integrations/supabase/types';
 
@@ -39,6 +40,8 @@ export default function CertificationManagement() {
   const [certifications, setCertifications] = useState<CertificationRecord[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'all' | 'valid' | 'outdated' | 'never'>('all');
+  const [sortBy, setSortBy] = useState('product_name');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   useEffect(() => {
     if (!isAdmin) {
@@ -99,7 +102,7 @@ export default function CertificationManagement() {
     });
   }, [certifications]);
 
-  // Filter products based on search and active tab
+  // Filter and sort products
   const filteredProducts = useMemo(() => {
     let filtered = productsWithStatus;
 
@@ -119,8 +122,42 @@ export default function CertificationManagement() {
       );
     }
 
+    // Sort
+    filtered = [...filtered].sort((a, b) => {
+      let aVal: any, bVal: any;
+      
+      switch (sortBy) {
+        case 'product_name':
+          aVal = a.product.name;
+          bVal = b.product.name;
+          break;
+        case 'company':
+          aVal = a.product.company;
+          bVal = b.product.company;
+          break;
+        case 'category':
+          aVal = a.product.category;
+          bVal = b.product.category;
+          break;
+        case 'certified_date':
+          aVal = a.certificationRecord?.verified_at || '';
+          bVal = b.certificationRecord?.verified_at || '';
+          break;
+        case 'last_revised':
+          aVal = a.product.lastRevised || '';
+          bVal = b.product.lastRevised || '';
+          break;
+        default:
+          return 0;
+      }
+
+      if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+
     return filtered;
-  }, [productsWithStatus, searchQuery, activeTab]);
+  }, [productsWithStatus, searchQuery, activeTab, sortBy, sortDirection]);
 
   // Calculate stats
   const stats = useMemo(() => {
@@ -156,6 +193,58 @@ export default function CertificationManagement() {
           </Badge>
         );
     }
+  };
+
+  const handleExportCSV = () => {
+    const csvData = filteredProducts.map(item => ({
+      'Product Name': item.product.name,
+      'Company': item.product.company,
+      'Category': item.product.category,
+      'Last Revised': item.product.lastRevised ? format(new Date(item.product.lastRevised), 'yyyy-MM-dd') : 'N/A',
+      'Certification Status': item.certificationStatus,
+      'Certified Date': item.certificationRecord?.verified_at ? format(new Date(item.certificationRecord.verified_at), 'yyyy-MM-dd') : '-',
+    }));
+
+    const csv = [
+      Object.keys(csvData[0]).join(','),
+      ...csvData.map(row => Object.values(row).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `certifications_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    toast.success('Exported to CSV');
+  };
+
+  const handleExportExcel = () => {
+    const data = filteredProducts.map(item => ({
+      'Product Name': item.product.name,
+      'Company': item.product.company,
+      'Category': item.product.category,
+      'Last Revised': item.product.lastRevised ? format(new Date(item.product.lastRevised), 'yyyy-MM-dd') : 'N/A',
+      'Certification Status': item.certificationStatus,
+      'Certified Date': item.certificationRecord?.verified_at ? format(new Date(item.certificationRecord.verified_at), 'yyyy-MM-dd') : '-',
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Certifications');
+    XLSX.writeFile(wb, `certifications_${new Date().toISOString().split('T')[0]}.xlsx`);
+    toast.success('Exported to Excel');
+  };
+
+  const handleExportJSON = () => {
+    const jsonData = JSON.stringify(filteredProducts, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `certifications_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    toast.success('Exported to JSON');
   };
 
   if (loading) {
@@ -244,22 +333,38 @@ export default function CertificationManagement() {
           {/* Filters and Table */}
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle>Product Certifications</CardTitle>
-                  <CardDescription>View and filter product certification status</CardDescription>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="relative w-64">
-                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search products..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-8"
-                    />
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Product Certifications</CardTitle>
+                    <CardDescription>View and filter product certification status</CardDescription>
                   </div>
                 </div>
+                <DataControlsBar
+                  searchValue={searchQuery}
+                  onSearchChange={setSearchQuery}
+                  searchPlaceholder="Search products, companies, categories..."
+                  sortOptions={[
+                    { value: 'product_name', label: 'Product Name' },
+                    { value: 'company', label: 'Company' },
+                    { value: 'category', label: 'Category' },
+                    { value: 'last_revised', label: 'Last Revised' },
+                    { value: 'certified_date', label: 'Certified Date' },
+                  ]}
+                  sortValue={sortBy}
+                  onSortChange={setSortBy}
+                  sortDirection={sortDirection}
+                  onSortDirectionChange={setSortDirection}
+                  showExportButton
+                  onExportCSV={handleExportCSV}
+                  onExportExcel={handleExportExcel}
+                  onExportJSON={handleExportJSON}
+                  onClearFilters={() => {
+                    setSearchQuery('');
+                    setSortBy('product_name');
+                    setSortDirection('asc');
+                  }}
+                />
               </div>
             </CardHeader>
             <CardContent>

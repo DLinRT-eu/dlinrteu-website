@@ -436,31 +436,30 @@ export default function AdminDashboard() {
                 <span>Company Management</span>
               </Link>
             </Button>
-
             <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
               <Link to="/admin/certifications">
                 <CheckCircle className="h-5 w-5" />
                 <span>Product Certifications</span>
               </Link>
             </Button>
-              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/admin/review-rounds">
-                  <Calendar className="h-5 w-5" />
-                  <span>Review Rounds</span>
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/admin/user-products">
-                  <Activity className="h-5 w-5" />
-                  <span>Product Adoptions</span>
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/admin/certifications">
-                  <CheckCircle className="h-5 w-5" />
-                  <span>Certifications</span>
-                </Link>
-              </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/review-rounds">
+                <Calendar className="h-5 w-5" />
+                <span>Review Rounds</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/user-products">
+                <Activity className="h-5 w-5" />
+                <span>Product Adoptions</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/changelog">
+                <Package className="h-5 w-5" />
+                <span>Changelog Admin</span>
+              </Link>
+            </Button>
             </div>
           </CardContent>
         </Card>
