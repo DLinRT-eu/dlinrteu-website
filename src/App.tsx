@@ -69,6 +69,9 @@ const ReviewerGuide = lazy(() => import("./pages/reviewer/ReviewerGuide"));
 const ReviewerPreferences = lazy(() => import("./pages/reviewer/Preferences"));
 const DueReviews = lazy(() => import("./pages/reviewer/DueReviews"));
 
+// Admin Guide
+const AdminGuide = lazy(() => import("./pages/admin/AdminGuide"));
+
 // Admin Review Pages
 const ReviewRounds = lazy(() => import("./pages/admin/ReviewRounds"));
 const ReviewRoundDetails = lazy(() => import("./pages/admin/ReviewRoundDetails"));
@@ -237,6 +240,11 @@ const App = () => (
                 <Route path="/admin/security-monitoring" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <SecurityMonitoring />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/guide" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminGuide />
                   </ProtectedRoute>
                 } />
                 
