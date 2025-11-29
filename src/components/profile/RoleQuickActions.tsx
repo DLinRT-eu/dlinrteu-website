@@ -11,7 +11,8 @@ import {
   FileText,
   Settings,
   CalendarClock,
-  Newspaper
+  Newspaper,
+  BookOpen
 } from 'lucide-react';
 
 interface RoleQuickActionsProps {
@@ -76,6 +77,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                   Security Dashboard
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="justify-start">
+                <Link to="/admin/guide">
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Administrator Guide
+                </Link>
+              </Button>
             </>
           )}
 
@@ -100,6 +107,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                   Expertise Preferences
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="justify-start">
+                <Link to="/reviewer/guide">
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Reviewer Guide
+                </Link>
+              </Button>
             </>
           )}
 
@@ -122,6 +135,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                 <Link to="/company/revisions">
                   <FileText className="h-4 w-4 mr-2" />
                   Submit Revision
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="justify-start">
+                <Link to="/company/guide">
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Company Guide
                 </Link>
               </Button>
             </>
