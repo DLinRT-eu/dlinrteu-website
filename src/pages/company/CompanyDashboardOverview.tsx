@@ -26,7 +26,8 @@ import {
   Trash2,
   ExternalLink,
   Github,
-  Package
+  Package,
+  BookOpen
 } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
@@ -410,6 +411,15 @@ export default function CompanyDashboardOverview() {
       title={`${companyInfo.name} Dashboard`}
       description="Overview of your company's certifications and activity"
     >
+      <div className="mb-4 flex justify-end">
+        <Button asChild variant="outline" size="sm" className="gap-2">
+          <Link to="/company/guide">
+            <BookOpen className="h-4 w-4" />
+            View Company Guide
+          </Link>
+        </Button>
+      </div>
+      
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
