@@ -4,6 +4,7 @@ export interface ModelCardData {
     productName: string;
     version: string;
     company: string;
+    developedBy?: string;  // "InPictura (Technology Partner)"
     category: string;
     secondaryCategories: string;
     releaseDate: string;

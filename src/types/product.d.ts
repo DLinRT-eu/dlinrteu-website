@@ -95,4 +95,11 @@ export interface Product {
     url?: string;
     compliance?: 'full' | 'partial' | 'planned';
   }>;
+  
+  // New field for OEM/developer relationships
+  developedBy?: {
+    company: string;           // Company name that developed the product
+    companyUrl?: string;       // Website URL of the developer
+    relationship?: string;     // Type of relationship (e.g., "Technology Partner", "OEM", "White-label")
+  };
 }

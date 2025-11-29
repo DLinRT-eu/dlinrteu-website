@@ -2,6 +2,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
+import { ExternalLink } from "lucide-react";
 
 interface GeneralInformationProps {
   product: ProductDetails;
@@ -37,6 +38,31 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
             <p className="text-sm font-medium">Company:</p>
             <p className="text-gray-500">{formatField(product.company)}</p>
           </div>
+          {product.developedBy && (
+            <div>
+              <p className="text-sm font-medium">Developed By:</p>
+              <div className="text-gray-500">
+                {product.developedBy.companyUrl ? (
+                  <a 
+                    href={product.developedBy.companyUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline inline-flex items-center gap-1"
+                  >
+                    {product.developedBy.company}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : (
+                  <span>{product.developedBy.company}</span>
+                )}
+                {product.developedBy.relationship && (
+                  <span className="text-xs text-gray-400 ml-2">
+                    ({product.developedBy.relationship})
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
           <div>
             <p className="text-sm font-medium">Category:</p>
             <p className="text-gray-500">{formatField(product.category)}</p>

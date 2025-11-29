@@ -99,6 +99,9 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       productName: product.name || "N/A",
       version: product.version || "N/A",
       company: product.company || "N/A",
+      developedBy: product.developedBy ? 
+        `${product.developedBy.company}${product.developedBy.relationship ? ` (${product.developedBy.relationship})` : ''}` : 
+        undefined,
       category: product.category || "N/A",
       secondaryCategories: formatArray(product.secondaryCategories),
       releaseDate: formatDate(product.releaseDate),
