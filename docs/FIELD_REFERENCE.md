@@ -31,6 +31,7 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | `supportEmail` / `contactEmail` | ➖ | Primary contact for inquiries. | Valid email. | Use vendor-provided generic address when possible. |
 | `contactPhone` | ➖ | Direct phone contact. | `+<country> <number>`. | Optional; include only if listed publicly. |
 | `githubUrl` | ➖ | Source code repository. | `https://github.com/...` | Only for open-source components. |
+| `developedBy` | ➖ | Tracks when a product is developed/manufactured by a different company than the seller. | Object with `company` (required), `companyUrl` (optional URL), `relationship` (optional string like "Technology Partner", "OEM", "White-label"). | Use when vendor partners with another company for product development. Verify partnership publicly disclosed. |
 
 ## Classification & Clinical Scope
 
