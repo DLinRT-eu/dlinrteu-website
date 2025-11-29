@@ -2,15 +2,30 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.8";
 import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': 'https://dlinrt.eu',
+const getAllowedOrigin = (req: Request) => {
+  const origin = req.headers.get('origin') || '';
+  const allowedOrigins = [
+    'https://dlinrt.eu',
+    'https://lovable.dev',
+    /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
+  ];
+  
+  for (const allowed of allowedOrigins) {
+    if (typeof allowed === 'string' && origin === allowed) return origin;
+    if (allowed instanceof RegExp && allowed.test(origin)) return origin;
+  }
+  return 'https://dlinrt.eu'; // Default fallback
+};
+
+const corsHeaders = (req: Request) => ({
+  'Access-Control-Allow-Origin': getAllowedOrigin(req),
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Credentials': 'true',
-};
+});
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: corsHeaders(req) });
   }
 
   try {
@@ -36,6 +51,32 @@ serve(async (req) => {
     
     if (!code || typeof code !== 'string') {
       throw new Error('Invalid code format');
+    }
+
+    // Check rate limiting (max 5 failed attempts per 15 minutes)
+    const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+    const { data: recentAttempts, error: attemptsError } = await supabase
+      .from('mfa_activity_log')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('action', 'failed_backup_code')
+      .gte('created_at', fifteenMinutesAgo);
+
+    if (attemptsError) {
+      console.error('Error checking rate limit:', attemptsError);
+    }
+
+    if (recentAttempts && recentAttempts.length >= 5) {
+      await supabase.from('mfa_activity_log').insert({
+        user_id: user.id,
+        action: 'rate_limited_backup_code',
+        factor_type: 'backup_code',
+      });
+
+      return new Response(
+        JSON.stringify({ success: false, error: 'Too many failed attempts. Please try again in 15 minutes.' }),
+        { headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }, status: 429 }
+      );
     }
 
     // Fetch all unused backup codes for this user
@@ -77,7 +118,7 @@ serve(async (req) => {
 
       return new Response(
         JSON.stringify({ success: false, error: 'Invalid backup code' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 401 }
+        { headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }, status: 401 }
       );
     }
 
@@ -104,14 +145,14 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({ success: true, codeId: foundCodeId }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { ...corsHeaders(req), 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {
     console.error('Error in verify-backup-code:', error);
     return new Response(
       JSON.stringify({ success: false, error: error.message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
+      { headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }, status: 400 }
     );
   }
 });
