@@ -96,3 +96,35 @@ export function createPullRequestUrl(product: any): string {
   // Fallback to default repo
   return `https://github.com/DLinRT-eu/dlinrteu-website/compare/main...review/${product.id}?expand=1&title=Review:%20${encodeURIComponent(product.name)}&labels=review`;
 }
+
+export function getProductGitHubUrl(product: any): string | null {
+  // Use explicit githubUrl if available
+  if (product.githubUrl) {
+    return product.githubUrl;
+  }
+  
+  // Otherwise, construct from product info
+  if (!product.category || !product.id) return null;
+  
+  const categorySlug = product.category.toLowerCase().replace(/ /g, '-');
+  const singleFileCategories = ['registration', 'clinical-prediction'];
+  
+  let filePath = '';
+  if (singleFileCategories.includes(categorySlug)) {
+    filePath = `src/data/products/${categorySlug}.ts`;
+  } else {
+    const functionalTerms = ['contour', 'segmentation', 'enhance', 'suite', 'vision', 'planning', 'dose', 'monitor'];
+    const idParts = product.id ? product.id.split('-') : [];
+    let companyParts = [];
+    
+    for (const part of idParts) {
+      if (functionalTerms.includes(part.toLowerCase())) break;
+      companyParts.push(part);
+    }
+    
+    const companySlug = companyParts.join('-');
+    filePath = `src/data/products/${categorySlug}/${companySlug}.ts`;
+  }
+  
+  return `https://github.com/DLinRT-eu/dlinrteu-website/tree/main/${filePath}`;
+}

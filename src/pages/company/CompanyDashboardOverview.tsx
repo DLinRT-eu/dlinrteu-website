@@ -619,7 +619,7 @@ export default function CompanyDashboardOverview() {
                                 View
                               </Link>
                             </Button>
-                            {product.source && (
+                            {product.githubUrl && (
                               <Button 
                                 size="sm" 
                                 variant="outline" 
@@ -627,7 +627,7 @@ export default function CompanyDashboardOverview() {
                                 className="h-8 w-8 p-0"
                               >
                                 <a 
-                                  href={product.source} 
+                                  href={product.githubUrl} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
                                   title="View on GitHub"
