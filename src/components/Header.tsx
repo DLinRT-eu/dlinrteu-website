@@ -54,7 +54,7 @@ const Header = () => {
           )}
           {isCompany && !isAdmin && !isReviewer && (
             <>
-              <Link to="/company" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
+              <Link to="/company/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
               <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
             </>
           )}

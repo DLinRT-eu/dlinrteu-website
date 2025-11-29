@@ -313,7 +313,7 @@ export default function CertificationManagement() {
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  onClick={() => navigate(`/products/${item.product.id}`)}
+                                  onClick={() => navigate(`/product/${item.product.id}`)}
                                 >
                                   <ExternalLink className="h-4 w-4" />
                                 </Button>
