@@ -233,6 +233,11 @@ const App = () => (
                     <CertificationManagement />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/security-monitoring" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <SecurityMonitoring />
+                  </ProtectedRoute>
+                } />
                 
                 {/* Reviewer Routes */}
                 <Route path="/reviewer/dashboard" element={
