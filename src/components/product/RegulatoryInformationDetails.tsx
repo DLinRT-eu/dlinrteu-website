@@ -3,12 +3,23 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, AlertTriangle, Info } from "lucide-react";
+import { CheckCircle, XCircle, AlertTriangle, Info, HelpCircle } from "lucide-react";
 import { getStandardizedCertificationTags, parseFDAInfo, parseCEInfo, formatFDAInfo, formatCEInfo } from "@/utils/regulatoryUtils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface RegulatoryInformationProps {
   product: ProductDetails;
 }
+
+const MDR_EXEMPT_EXPLANATION = `MDR Exempt products are software tools that fall outside the scope of the EU Medical Device Regulation (MDR 2017/745).
+
+These products are typically:
+• Quality assurance and monitoring tools
+• Educational or training software
+• Administrative or workflow tools
+• Research-only applications
+
+They are NOT intended for diagnosis, treatment planning, or clinical decision-making and therefore don't require CE marking as a medical device.`;
 
 const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) => {
   const certificationTags = getStandardizedCertificationTags(product);
@@ -85,7 +96,8 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
   const fdaStatus = getFDAStatus();
   
   return (
-    <Card>
+    <TooltipProvider>
+      <Card>
       <CardHeader>
         <CardTitle>Regulatory Information</CardTitle>
       </CardHeader>
@@ -101,8 +113,20 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
                 {ceStatus.icon}
                 <span>{ceStatus.label}</span>
               </Badge>
+              {hasMDRExempt && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
+                      <HelpCircle className="h-4 w-4" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-sm p-4">
+                    <p className="text-sm whitespace-pre-line">{MDR_EXEMPT_EXPLANATION}</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
               {ceStatus.description && (
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   {ceStatus.description}
                 </span>
               )}
@@ -159,6 +183,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
         </div>
       </CardContent>
     </Card>
+    </TooltipProvider>
   );
 };
 
