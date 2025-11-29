@@ -219,7 +219,7 @@ export default function CompanyDashboard() {
       return;
     }
 
-    const product = products.find(p => p.id === selectedProduct);
+    const product = companyProducts.find(p => p.id === selectedProduct);
     if (!product) return;
 
     try {
@@ -323,6 +323,77 @@ export default function CompanyDashboard() {
             <Button asChild variant="outline">
               <Link to="/company/products-manager">Manage Certifications</Link>
             </Button>
+            <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="gap-2">
+                  <BadgeCheck className="h-4 w-4" />
+                  Certify Product
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Certify Product</DialogTitle>
+                  <DialogDescription>
+                    Certify that your product information is accurate and up to date
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <Label>Product</Label>
+                    <select
+                      className="w-full rounded-md border border-input bg-background px-3 py-2"
+                      value={selectedProduct}
+                      onChange={(e) => setSelectedProduct(e.target.value)}
+                    >
+                      <option value="">Select a product</option>
+                      {companyProducts.length === 0 ? (
+                        <option disabled>No products assigned to your company</option>
+                      ) : (
+                        companyProducts.map(product => (
+                          <option key={product.id} value={product.id}>
+                            {product.name}
+                          </option>
+                        ))
+                      )}
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Certification Date</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !certificationDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {certificationDate ? format(certificationDate, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={certificationDate}
+                          onSelect={(date) => setCertificationDate(date || new Date())}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setCertifyDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handleCertifyProduct}>
+                    Certify Product
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button className="gap-2">
@@ -346,11 +417,15 @@ export default function CompanyDashboard() {
                     onChange={(e) => setSelectedProduct(e.target.value)}
                   >
                     <option value="">Select a product</option>
-                    {products.map(product => (
-                      <option key={product.id} value={product.id}>
-                        {product.name}
-                      </option>
-                    ))}
+                    {companyProducts.length === 0 ? (
+                      <option disabled>No products assigned to your company</option>
+                    ) : (
+                      companyProducts.map(product => (
+                        <option key={product.id} value={product.id}>
+                          {product.name}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 
