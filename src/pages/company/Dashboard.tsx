@@ -46,7 +46,7 @@ interface CompanyUser {
 
 export default function CompanyDashboard() {
   const { user } = useAuth();
-  const { isCompany } = useRoles();
+  const { isCompany, isAdmin } = useRoles();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [revisions, setRevisions] = useState<CompanyRevision[]>([]);
@@ -62,13 +62,14 @@ export default function CompanyDashboard() {
   const products = ALL_PRODUCTS;
 
   useEffect(() => {
-    if (!user || !isCompany) {
+    // Allow through if user exists AND (has company role OR is admin)
+    if (!user || (!isCompany && !isAdmin)) {
       navigate('/auth');
       return;
     }
 
     fetchCompanyUser();
-  }, [user, isCompany]);
+  }, [user, isCompany, isAdmin]);
 
   const fetchCompanyUser = async () => {
     if (!user) return;
