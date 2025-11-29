@@ -135,3 +135,10 @@ export const extractCompaniesFromProducts = (products: ProductDetails[]): Compan
 
   return Array.from(companyMap.values());
 };
+
+/**
+ * Get all products for a specific company from the catalog
+ */
+export const getCompanyProducts = (companyName: string, allProducts: ProductDetails[]): ProductDetails[] => {
+  return allProducts.filter(product => product.company === companyName);
+};
