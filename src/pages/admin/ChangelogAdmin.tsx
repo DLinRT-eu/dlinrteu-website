@@ -294,10 +294,10 @@ const ChangelogAdmin = () => {
         {/* Info Alert */}
         <Alert className="mb-6">
           <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Automatic Monthly Generation</AlertTitle>
+          <AlertTitle>Fully Automated System</AlertTitle>
           <AlertDescription>
-            Changelog entries are automatically generated on the 1st of each month from GitHub commits. 
-            Review pending entries below and publish them to make them visible on the public changelog page.
+            Changelog entries are automatically generated and published on the 1st of each month from GitHub commits. 
+            No manual action required. Use "Generate Current Month" to manually trigger generation for testing.
           </AlertDescription>
         </Alert>
 
@@ -330,19 +330,17 @@ const ChangelogAdmin = () => {
             <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-lg font-semibold mb-2">No entries found</h3>
             <p className="text-muted-foreground mb-4">
-              {selectedStatus === 'pending' 
-                ? 'No pending entries. Changelog entries are generated automatically on the 1st of each month.'
+              {selectedStatus === 'all' 
+                ? 'No changelog entries yet. Entries are automatically generated and published on the 1st of each month.'
                 : `No ${selectedStatus} entries.`}
             </p>
-            {selectedStatus === 'pending' && (
-              <Button
-                onClick={() => triggerGenerationMutation.mutate()}
-                disabled={triggerGenerationMutation.isPending}
-              >
-                <RefreshCw className={`h-4 w-4 mr-2 ${triggerGenerationMutation.isPending ? 'animate-spin' : ''}`} />
-                Generate Manually
-              </Button>
-            )}
+            <Button
+              onClick={() => triggerGenerationMutation.mutate()}
+              disabled={triggerGenerationMutation.isPending}
+            >
+              <RefreshCw className={`h-4 w-4 mr-2 ${triggerGenerationMutation.isPending ? 'animate-spin' : ''}`} />
+              Generate Current Month
+            </Button>
           </Card>
         ) : (
           <div className="space-y-4">
@@ -383,27 +381,6 @@ const ChangelogAdmin = () => {
                       </CardDescription>
                     </div>
                     <div className="flex gap-2">
-                      {entry.status === 'pending' && (
-                        <>
-                          <Button
-                            size="sm"
-                            onClick={() => publishMutation.mutate(entry.id)}
-                            disabled={publishMutation.isPending}
-                          >
-                            <CheckCircle className="h-4 w-4 mr-1" />
-                            Publish
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => archiveMutation.mutate(entry.id)}
-                            disabled={archiveMutation.isPending}
-                          >
-                            <Archive className="h-4 w-4 mr-1" />
-                            Archive
-                          </Button>
-                        </>
-                      )}
                       {entry.status === 'published' && (
                         <Button
                           size="sm"
@@ -412,7 +389,17 @@ const ChangelogAdmin = () => {
                           disabled={archiveMutation.isPending}
                         >
                           <Archive className="h-4 w-4 mr-1" />
-                          Unpublish
+                          Archive
+                        </Button>
+                      )}
+                      {entry.status === 'archived' && (
+                        <Button
+                          size="sm"
+                          onClick={() => publishMutation.mutate(entry.id)}
+                          disabled={publishMutation.isPending}
+                        >
+                          <CheckCircle className="h-4 w-4 mr-1" />
+                          Republish
                         </Button>
                       )}
                       <Button

@@ -102,25 +102,61 @@ serve(async (req) => {
       }
     });
 
-    // Generate summary details
-    let details = '';
-    const categoryNames = {
-      feature: 'New Features',
-      improvement: 'Improvements',
-      bugfix: 'Bug Fixes',
-      documentation: 'Documentation',
-      security: 'Security',
-    };
+    // Generate summary highlights (top 3-5 features per category)
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthName = monthNames[lastMonth.getMonth()];
+    const year = lastMonth.getFullYear();
+    
+    const totalFeatures = commitsByCategory.feature.length;
+    const totalImprovements = commitsByCategory.improvement.length;
+    const totalBugfixes = commitsByCategory.bugfix.length;
+    const totalDocs = commitsByCategory.documentation.length;
+    const totalSecurity = commitsByCategory.security.length;
 
-    for (const [category, categoryName] of Object.entries(categoryNames)) {
-      const items = commitsByCategory[category];
-      if (items.length > 0) {
-        details += `### ${categoryName} (${items.length})\n`;
-        items.forEach(item => {
-          details += `- ${item}\n`;
-        });
-        details += '\n';
+    // Build highlights - show only top items per category
+    let details = `## ${monthName} ${year} Highlights\n\n`;
+    
+    if (totalFeatures > 0) {
+      details += `### 🚀 New Features\n`;
+      const top3 = commitsByCategory.feature.slice(0, 3);
+      top3.forEach(item => {
+        details += `- ${item}\n`;
+      });
+      if (totalFeatures > 3) {
+        details += `- ...and ${totalFeatures - 3} more features\n`;
       }
+      details += '\n';
+    }
+    
+    if (totalImprovements > 0) {
+      details += `### ✨ Improvements\n`;
+      const top3 = commitsByCategory.improvement.slice(0, 3);
+      top3.forEach(item => {
+        details += `- ${item}\n`;
+      });
+      if (totalImprovements > 3) {
+        details += `- ...and ${totalImprovements - 3} more improvements\n`;
+      }
+      details += '\n';
+    }
+    
+    if (totalBugfixes > 0) {
+      details += `### 🐛 Bug Fixes\n`;
+      details += `- Resolved ${totalBugfixes} issue${totalBugfixes === 1 ? '' : 's'}\n\n`;
+    }
+    
+    if (totalDocs > 0) {
+      details += `### 📚 Documentation\n`;
+      details += `- ${totalDocs} documentation update${totalDocs === 1 ? '' : 's'}\n\n`;
+    }
+    
+    if (totalSecurity > 0) {
+      details += `### 🔒 Security\n`;
+      commitsByCategory.security.forEach(item => {
+        details += `- ${item}\n`;
+      });
+      details += '\n';
     }
 
     // Determine primary category (most commits)
@@ -128,18 +164,9 @@ serve(async (req) => {
       .sort((a, b) => b[1].length - a[1].length)[0][0];
 
     // Generate version and entry ID
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                        'July', 'August', 'September', 'October', 'November', 'December'];
-    const monthName = monthNames[lastMonth.getMonth()];
-    const year = lastMonth.getFullYear();
-    
     const version = `${year}.${String(lastMonth.getMonth() + 1).padStart(2, '0')}.0`;
     const entryId = `changelog-${year}-${String(lastMonth.getMonth() + 1).padStart(2, '0')}`;
     const title = `${monthName} ${year} Updates`;
-    
-    const totalFeatures = commitsByCategory.feature.length;
-    const totalImprovements = commitsByCategory.improvement.length;
-    const totalBugfixes = commitsByCategory.bugfix.length;
     
     const description = `Monthly release including ${totalFeatures} new features, ${totalImprovements} improvements, and ${totalBugfixes} bug fixes`;
 
@@ -163,7 +190,7 @@ serve(async (req) => {
       );
     }
 
-    // Insert into database with 'pending' status
+    // Insert into database with 'published' status (auto-publish)
     const { data: newEntry, error: insertError } = await supabase
       .from('changelog_entries')
       .insert({
@@ -174,7 +201,8 @@ serve(async (req) => {
         title,
         description,
         details: details.trim(),
-        status: 'pending',
+        status: 'published',
+        published_at: new Date().toISOString(),
         auto_generated: true,
         github_data: {
           totalCommits: commits.length,
@@ -192,40 +220,20 @@ serve(async (req) => {
       throw insertError;
     }
 
-    console.log('Monthly changelog created successfully:', entryId);
-
-    // Create notification for admins
-    const { data: adminUsers } = await supabase
-      .from('user_roles')
-      .select('user_id')
-      .eq('role', 'admin');
-
-    if (adminUsers && adminUsers.length > 0) {
-      const notifications = adminUsers.map(admin => ({
-        user_id: admin.user_id,
-        title: 'New Changelog Entry Pending',
-        message: `Monthly changelog for ${monthName} ${year} has been auto-generated and needs review`,
-        type: 'info',
-        link: '/admin/changelog',
-      }));
-
-      await supabase
-        .from('notifications')
-        .insert(notifications);
-      
-      console.log(`Created ${notifications.length} notifications for admins`);
-    }
+    console.log('Monthly changelog auto-published:', entryId);
 
     return new Response(
       JSON.stringify({ 
         success: true,
         entry: newEntry,
-        message: 'Monthly changelog created and pending admin approval',
+        message: 'Monthly changelog created and automatically published',
         stats: {
           totalCommits: commits.length,
           features: totalFeatures,
           improvements: totalImprovements,
           bugfixes: totalBugfixes,
+          documentation: totalDocs,
+          security: totalSecurity,
         },
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
