@@ -45,6 +45,7 @@ interface DashboardStats {
     overdue: number;
   };
   pendingRevisions: number;
+  pendingCompanyReps: number;
   recentSecurityEvents: number;
 }
 
@@ -68,6 +69,7 @@ export default function AdminDashboard() {
     pendingRoleRequests: 0,
     activeReviews: { pending: 0, inProgress: 0, completed: 0, overdue: 0 },
     pendingRevisions: 0,
+    pendingCompanyReps: 0,
     recentSecurityEvents: 0,
   });
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
@@ -130,6 +132,12 @@ export default function AdminDashboard() {
         .select('*', { count: 'exact', head: true })
         .eq('verification_status', 'pending');
 
+      // Fetch pending company representatives
+      const { count: pendingCompanyReps } = await supabase
+        .from('company_representatives')
+        .select('*', { count: 'exact', head: true })
+        .eq('verified', false);
+
       // Fetch recent security events (last 24 hours)
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
@@ -145,6 +153,7 @@ export default function AdminDashboard() {
         pendingRoleRequests: pendingRequests || 0,
         activeReviews: reviewStats,
         pendingRevisions: pendingRevisions || 0,
+        pendingCompanyReps: pendingCompanyReps || 0,
         recentSecurityEvents: recentSecurity || 0,
       });
 
@@ -352,6 +361,21 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
 
+          <Card className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate('/admin/companies')}>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <Building2 className="h-4 w-4" />
+                Pending Company Reps
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.pendingCompanyReps}</div>
+              <div className="text-xs text-muted-foreground mt-1">
+                Awaiting verification
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
@@ -414,9 +438,9 @@ export default function AdminDashboard() {
             </Button>
 
             <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-              <Link to="/company/dashboard">
-                <Shield className="h-5 w-5" />
-                <span>Company Oversight</span>
+              <Link to="/admin/certifications">
+                <CheckCircle className="h-5 w-5" />
+                <span>Product Certifications</span>
               </Link>
             </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
@@ -429,12 +453,6 @@ export default function AdminDashboard() {
                 <Link to="/admin/user-products">
                   <Activity className="h-5 w-5" />
                   <span>Product Adoptions</span>
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
-                <Link to="/admin/companies">
-                  <Building2 className="h-5 w-5" />
-                  <span>Company Reps</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">

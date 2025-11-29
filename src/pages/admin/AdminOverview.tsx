@@ -462,14 +462,14 @@ export default function AdminOverview() {
                     <Button 
                       variant="outline" 
                       className="justify-start h-auto py-3"
-                      onClick={() => navigate('/company/dashboard')}
+                      onClick={() => navigate('/admin/certifications')}
                     >
                       <div className="flex items-start gap-3 w-full">
-                        <Shield className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="h-5 w-5 mt-0.5 flex-shrink-0" />
                         <div className="text-left flex-1">
-                          <div className="font-semibold">Company Oversight</div>
+                          <div className="font-semibold">Product Certifications</div>
                           <div className="text-xs text-muted-foreground mt-0.5">
-                            Admin view of company representative dashboard
+                            Monitor product certification status
                           </div>
                         </div>
                       </div>
@@ -690,7 +690,7 @@ export default function AdminOverview() {
                         </TableCell>
                         <TableCell>{new Date(revision.created_at).toLocaleDateString()}</TableCell>
                         <TableCell className="text-right">
-                          <Button size="sm" variant="outline" onClick={() => navigate('/company/dashboard')}>
+                          <Button size="sm" variant="outline" onClick={() => navigate('/admin/companies')}>
                             Review →
                           </Button>
                         </TableCell>
