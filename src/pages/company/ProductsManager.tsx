@@ -21,7 +21,9 @@ import {
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Package, CheckCircle2, Clock, AlertCircle, Plus, FileText, Trash2 } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Package, CheckCircle2, Clock, AlertCircle, Plus, FileText, Trash2, Search, Filter, X } from 'lucide-react';
 
 interface CompanyProduct {
   id: string;
@@ -42,6 +44,10 @@ export default function CompanyProductsManager() {
   const [products, setProducts] = useState<CompanyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [certificationToDelete, setCertificationToDelete] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -138,8 +144,44 @@ export default function CompanyProductsManager() {
     );
   }
 
-  const verifiedProducts = products.filter(p => p.verified_at);
-  const pendingProducts = products.filter(p => !p.verified_at);
+  // Filter products based on search and date filters
+  const filteredProducts = products.filter(product => {
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = 
+        product.product_id.toLowerCase().includes(query) ||
+        product.company_id.toLowerCase().includes(query);
+      if (!matchesSearch) return false;
+    }
+
+    // Date range filter
+    if (dateFrom) {
+      const productDate = new Date(product.created_at);
+      const fromDate = new Date(dateFrom);
+      if (productDate < fromDate) return false;
+    }
+
+    if (dateTo) {
+      const productDate = new Date(product.created_at);
+      const toDate = new Date(dateTo);
+      toDate.setHours(23, 59, 59, 999); // Include the entire day
+      if (productDate > toDate) return false;
+    }
+
+    return true;
+  });
+
+  const verifiedProducts = filteredProducts.filter(p => p.verified_at);
+  const pendingProducts = filteredProducts.filter(p => !p.verified_at);
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setDateFrom('');
+    setDateTo('');
+  };
+
+  const hasActiveFilters = searchQuery || dateFrom || dateTo;
 
   return (
     <PageLayout>
@@ -154,13 +196,78 @@ export default function CompanyProductsManager() {
               Manage and track your product certification submissions
             </p>
           </div>
-          <Button onClick={() => navigate('/company/dashboard')}>
-            <Plus className="h-4 w-4 mr-2" />
-            New Certification
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <Filter className="h-4 w-4 mr-2" />
+              Filters
+              {hasActiveFilters && (
+                <Badge variant="secondary" className="ml-2">
+                  {[searchQuery, dateFrom, dateTo].filter(Boolean).length}
+                </Badge>
+              )}
+            </Button>
+            <Button onClick={() => navigate('/company/dashboard')}>
+              <Plus className="h-4 w-4 mr-2" />
+              New Certification
+            </Button>
+          </div>
         </div>
 
-        {products.length === 0 ? (
+        {/* Search and Filters */}
+        <Card className="mb-4">
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search by Product ID or Company ID..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+              {hasActiveFilters && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                >
+                  <X className="h-4 w-4 mr-1" />
+                  Clear
+                </Button>
+              )}
+            </div>
+
+            {showFilters && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
+                <div className="space-y-2">
+                  <Label htmlFor="dateFrom">From Date</Label>
+                  <Input
+                    id="dateFrom"
+                    type="date"
+                    value={dateFrom}
+                    onChange={(e) => setDateFrom(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="dateTo">To Date</Label>
+                  <Input
+                    id="dateTo"
+                    type="date"
+                    value={dateTo}
+                    onChange={(e) => setDateTo(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {filteredProducts.length === 0 && products.length === 0 ? (
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>No Certifications Yet</AlertTitle>
@@ -168,11 +275,19 @@ export default function CompanyProductsManager() {
               You haven't submitted any product certifications. Start by submitting your first certification from the Company Dashboard.
             </AlertDescription>
           </Alert>
+        ) : filteredProducts.length === 0 ? (
+          <Alert>
+            <Search className="h-4 w-4" />
+            <AlertTitle>No Results Found</AlertTitle>
+            <AlertDescription>
+              No certifications match your search criteria. Try adjusting your filters.
+            </AlertDescription>
+          </Alert>
         ) : (
           <Tabs defaultValue="all" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="all">
-                All ({products.length})
+                All ({filteredProducts.length})
               </TabsTrigger>
               <TabsTrigger value="verified">
                 Verified ({verifiedProducts.length})
@@ -184,7 +299,7 @@ export default function CompanyProductsManager() {
 
             <TabsContent value="all">
               <div className="grid gap-4">
-                {products.map(product => (
+                {filteredProducts.map(product => (
                   <Card key={product.id}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
