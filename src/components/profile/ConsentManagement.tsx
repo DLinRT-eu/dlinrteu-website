@@ -14,11 +14,55 @@ export const ConsentManagement = () => {
   const { profile, refreshProfile } = useAuth();
   const { toast } = useToast();
   const [showWithdrawDialog, setShowWithdrawDialog] = useState(false);
+  const [showGiveConsentDialog, setShowGiveConsentDialog] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const consentGiven = profile?.data_processing_consent_given;
   const consentWithdrawn = profile?.data_processing_consent_withdrawn;
   const consentTimestamp = profile?.data_processing_consent_timestamp;
+
+  const handleGiveConsent = async () => {
+    setLoading(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          data_processing_consent_given: true,
+          data_processing_consent_timestamp: new Date().toISOString(),
+          data_processing_consent_version: '1.0',
+          data_processing_consent_withdrawn: false,
+          data_processing_consent_withdrawn_at: null,
+        })
+        .eq('id', profile?.id);
+
+      if (error) throw error;
+
+      // Log consent
+      await supabase.from('consent_audit_log').insert({
+        user_id: profile?.id,
+        action: 'given',
+        consent_version: '1.0',
+      });
+
+      toast({
+        title: 'Consent given',
+        description: 'Thank you for consenting to data processing. You now have full access to platform features.',
+      });
+
+      if (refreshProfile) {
+        await refreshProfile();
+      }
+      setShowGiveConsentDialog(false);
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleWithdrawConsent = async () => {
     setLoading(true);
@@ -140,15 +184,80 @@ export const ConsentManagement = () => {
           )}
 
           {!consentGiven && !consentWithdrawn && (
-            <Alert variant="default" className="bg-amber-50 border-amber-200 dark:bg-amber-950 dark:border-amber-800">
-              <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="text-amber-800 dark:text-amber-200">
-                No consent record found. This may indicate an older account created before consent tracking was implemented.
-              </AlertDescription>
-            </Alert>
+            <div className="space-y-3">
+              <Alert className="bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
+                <Shield className="h-4 w-4 text-blue-600" />
+                <AlertDescription className="text-blue-800 dark:text-blue-200">
+                  <p className="font-medium mb-2">Consent Required</p>
+                  <p className="text-sm">
+                    To use this platform, we need your consent to process your personal data in accordance with GDPR. 
+                    This includes storing your profile information and any data you provide through the platform.
+                  </p>
+                </AlertDescription>
+              </Alert>
+              <Button
+                onClick={() => setShowGiveConsentDialog(true)}
+                className="w-full"
+              >
+                <CheckCircle2 className="h-4 w-4 mr-2" />
+                Give Consent to Data Processing
+              </Button>
+            </div>
           )}
         </CardContent>
       </Card>
+
+      {/* Give Consent Dialog */}
+      <Dialog open={showGiveConsentDialog} onOpenChange={setShowGiveConsentDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Data Processing Consent</DialogTitle>
+            <DialogDescription>
+              Please review and consent to data processing
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <Alert>
+              <AlertDescription className="text-sm space-y-2">
+                <p><strong>We will process the following data:</strong></p>
+                <ul className="list-disc pl-4 space-y-1">
+                  <li>Your name, email, and profile information</li>
+                  <li>Your activity on the platform (reviews, submissions, etc.)</li>
+                  <li>Technical data (IP address, browser info) for security</li>
+                  <li>Communication preferences and notification settings</li>
+                </ul>
+                <p className="mt-2"><strong>This data is used to:</strong></p>
+                <ul className="list-disc pl-4 space-y-1">
+                  <li>Provide and improve our services</li>
+                  <li>Communicate with you about your account</li>
+                  <li>Ensure security and prevent fraud</li>
+                  <li>Comply with legal obligations</li>
+                </ul>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  You can withdraw your consent at any time. See our Privacy Policy for more details.
+                </p>
+              </AlertDescription>
+            </Alert>
+
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setShowGiveConsentDialog(false)}
+                variant="outline"
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleGiveConsent}
+                disabled={loading}
+                className="flex-1"
+              >
+                {loading ? 'Processing...' : 'I Consent'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Withdrawal Dialog */}
       <Dialog open={showWithdrawDialog} onOpenChange={setShowWithdrawDialog}>
