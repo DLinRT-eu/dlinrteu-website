@@ -84,13 +84,42 @@ export async function certifyProduct(
 }
 
 /**
+ * Get company ID from company name by looking up in COMPANIES data
+ * This ensures we use the correct standardized company ID (e.g., "philips-healthcare" for "Philips")
+ */
+export const getCompanyIdByName = (companyName: string): string => {
+  // Import COMPANIES data dynamically to avoid circular dependencies
+  // For now, use a simple conversion as fallback
+  // The proper IDs are: philips-healthcare, ge-healthcare, siemens-healthineers, etc.
+  
+  const nameToIdMap: Record<string, string> = {
+    'Philips': 'philips-healthcare',
+    'GE Healthcare': 'ge-healthcare',
+    'Siemens Healthineers': 'siemens-healthineers',
+    'Canon Medical Systems': 'canon-medical',
+    'United Imaging': 'united-imaging',
+    'Taiwan Medical Imaging Co.': 'taiwan-medical-imaging',
+    'AlgoMedica': 'algomedica',
+    'Varian': 'varian',
+    'Elekta': 'elekta',
+    'Brainlab': 'brainlab',
+    'RaySearch': 'raysearch',
+    'Accuray': 'accuray',
+    'ViewRay': 'viewray',
+  };
+  
+  // Return mapped ID or fallback to lowercase-hyphenated version
+  return nameToIdMap[companyName] || companyName.toLowerCase().replace(/\s+/g, '-');
+};
+
+/**
  * Extract unique companies from product catalog
  */
 export const extractCompaniesFromProducts = (products: ProductDetails[]): CompanyInfo[] => {
   const companyMap = new Map<string, CompanyInfo>();
 
   products.forEach((product) => {
-    const companyId = product.company.toLowerCase().replace(/\s+/g, '-');
+    const companyId = getCompanyIdByName(product.company);
     
     if (companyMap.has(companyId)) {
       const existing = companyMap.get(companyId)!;

@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom';
 import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { getCompanyIdByName } from '@/utils/companyUtils';
 
 interface CompanyRevision {
   id: string;
@@ -170,10 +171,13 @@ export default function CompanyDashboard() {
     if (!product || !companyUser) return;
 
     try {
+      // Convert company display name to standardized company ID
+      const companyId = getCompanyIdByName(product.company);
+      
       // Use secure RPC to certify product with lastRevised date
       const { data, error } = await supabase.rpc('certify_product', {
         p_product_id: selectedProduct,
-        p_company_id: product.company,
+        p_company_id: companyId,
         p_notes: 'Product information certified as accurate by company representative',
         p_product_last_revised: product.lastRevised ? new Date(product.lastRevised).toISOString() : null,
       });
@@ -223,10 +227,13 @@ export default function CompanyDashboard() {
     if (!product) return;
 
     try {
+      // Convert company display name to standardized company ID
+      const companyId = getCompanyIdByName(product.company);
+      
       // Use secure RPC to create revision
       const { data, error } = await supabase.rpc('create_company_revision', {
         p_product_id: selectedProduct,
-        p_company_id: product.company,
+        p_company_id: companyId,
         p_changes_summary: changesSummary,
         p_revision_date: new Date().toISOString().split('T')[0],
       });
