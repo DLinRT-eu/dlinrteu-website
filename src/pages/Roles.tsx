@@ -183,7 +183,7 @@ export default function Roles() {
                   Go to Profile → Request Role → Select Company → Provide company name and verification details
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Requires admin verification of company affiliation. Max 3 representatives per company.
+                  Requires admin verification of company affiliation. Max 5 representatives per company.
                 </p>
               </div>
             </CardContent>
@@ -324,13 +324,6 @@ export default function Roles() {
                     <div>
                       <p className="font-medium">User + Company</p>
                       <p className="text-xs text-muted-foreground">Manage company products (cannot have personal product adoptions)</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2 p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-500 mt-0.5">✓</span>
-                    <div>
-                      <p className="font-medium">Reviewer + Company</p>
-                      <p className="text-xs text-muted-foreground">Review products while representing your company (conflict disclosure required)</p>
                     </div>
                   </div>
                 </div>

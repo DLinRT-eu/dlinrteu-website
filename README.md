@@ -76,6 +76,28 @@ For complete examples, refer to the example templates in `src/data/products/exam
 
 ---
 
+## Key Features
+
+- **Product Database**: Comprehensive catalog of AI/ML products in radiotherapy
+- **Multi-Role System**: User, Reviewer, Company Representative, Admin roles
+- **Company Certifications**: Verified product certifications from manufacturers
+- **Review System**: Structured product review with assignment workflows
+- **Compliance Resources**: Regulatory information and compliance checklists
+- **Research Initiatives**: Database of datasets, challenges, and model zoos
+- **User Tracking**: Track products you use or are evaluating
+- **Community Experiences**: Share and view product adoption experiences
+
+## Backend & Database
+
+This project uses **Supabase** for backend functionality:
+- User authentication with role-based access control (RBAC)
+- PostgreSQL database with Row Level Security (RLS)
+- Edge functions for serverless logic
+- Real-time notifications
+- Secure file storage
+
+**User roles**: User, Reviewer, Company Representative, Administrator
+
 ## Development
 
 This project is built with:
@@ -84,6 +106,9 @@ This project is built with:
 - TypeScript
 - React
 - Tailwind CSS
+- Supabase (Database, Auth, Edge Functions)
+- TanStack Query (React Query)
+- Shadcn/ui Components
 
 ### Running Locally
 

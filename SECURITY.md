@@ -96,6 +96,16 @@ The following are *not* considered security vulnerabilities:
 - Public access policies only where necessary
 - Proper unique constraints to prevent duplicates
 
+### 6. Role-Based Access Control (RBAC)
+
+- **Row Level Security (RLS)** enforced on all database tables
+- Role-based route protection (Admin, Reviewer, Company)
+- Four user roles: User, Reviewer, Company Representative, Administrator
+- Automatic admin bypass for company certifications
+- Maximum 5 verified representatives per company
+- Activity logging for company representative actions
+- Audit logs for admin actions and role changes
+
 ---
 
 ## Security Checklist
@@ -172,4 +182,4 @@ We greatly appreciate your help in making this project safe, reliable, and trust
 
 ---
 
-**Last Updated**: November 17, 2025
+**Last Updated**: November 29, 2025
