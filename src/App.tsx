@@ -14,6 +14,11 @@ import Header from "./components/Header";
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const About = lazy(() => import("./pages/About"));
+const Security = lazy(() => import("./pages/Security"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
+const ExportPresentation = lazy(() => import("./pages/ExportPresentation"));
+const SecurityMonitoring = lazy(() => import("./pages/SecurityMonitoring"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Companies = lazy(() => import("./pages/Companies"));
 const News = lazy(() => import("./pages/News"));
@@ -99,6 +104,11 @@ const App = () => (
                 <Route path="maintenance-team" element={<Navigate to="/about" replace />} />
                 <Route path="donate" element={<Navigate to="/support" replace />} />
                 <Route path="product/:id" element={<ProductDetails />} />
+                <Route path="security" element={<Security />} />
+                <Route path="reset-password" element={<ResetPassword />} />
+                <Route path="update-password" element={<UpdatePassword />} />
+                <Route path="export-presentation" element={<ExportPresentation />} />
+                <Route path="security-monitoring" element={<SecurityMonitoring />} />
                 <Route path="companies" element={<Companies />} />
                 <Route path="news" element={<News />} />
                 <Route path="support" element={<Support />} />

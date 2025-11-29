@@ -8,10 +8,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Package, CheckCircle2, Clock, AlertCircle, Plus, FileText } from 'lucide-react';
+import { Package, CheckCircle2, Clock, AlertCircle, Plus, FileText, Trash2 } from 'lucide-react';
 
 interface CompanyProduct {
   id: string;
@@ -31,6 +41,7 @@ export default function CompanyProductsManager() {
   const { toast } = useToast();
   const [products, setProducts] = useState<CompanyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [certificationToDelete, setCertificationToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -82,6 +93,31 @@ export default function CompanyProductsManager() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRemoveCertification = async (certificationId: string) => {
+    try {
+      const { error } = await supabase
+        .from('company_product_verifications')
+        .delete()
+        .eq('id', certificationId);
+
+      if (error) throw error;
+
+      toast({
+        title: 'Success',
+        description: 'Certification removed successfully',
+      });
+      fetchProducts();
+      setCertificationToDelete(null);
+    } catch (error: any) {
+      console.error('Error removing certification:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to remove certification',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -160,7 +196,18 @@ export default function CompanyProductsManager() {
                             Company: {product.company_id}
                           </CardDescription>
                         </div>
-                        {getVerificationBadge(product)}
+                        <div className="flex items-center gap-2">
+                          {getVerificationBadge(product)}
+                          {isAdmin && (
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => setCertificationToDelete(product.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent>
@@ -210,7 +257,18 @@ export default function CompanyProductsManager() {
                             <CardTitle>Product ID: {product.product_id}</CardTitle>
                             <CardDescription>Company: {product.company_id}</CardDescription>
                           </div>
-                          {getVerificationBadge(product)}
+                          <div className="flex items-center gap-2">
+                            {getVerificationBadge(product)}
+                            {isAdmin && (
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => setCertificationToDelete(product.id)}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent>
@@ -255,7 +313,18 @@ export default function CompanyProductsManager() {
                             <CardTitle>Product ID: {product.product_id}</CardTitle>
                             <CardDescription>Company: {product.company_id}</CardDescription>
                           </div>
-                          {getVerificationBadge(product)}
+                          <div className="flex items-center gap-2">
+                            {getVerificationBadge(product)}
+                            {isAdmin && (
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => setCertificationToDelete(product.id)}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </CardHeader>
                       <CardContent>
@@ -280,6 +349,26 @@ export default function CompanyProductsManager() {
           </Tabs>
         )}
       </div>
+
+      <AlertDialog open={!!certificationToDelete} onOpenChange={() => setCertificationToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove Certification</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to remove this product certification? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => certificationToDelete && handleRemoveCertification(certificationToDelete)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Remove
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </PageLayout>
   );
 }
