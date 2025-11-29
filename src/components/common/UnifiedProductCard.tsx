@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ShieldCheck, ShieldAlert } from "lucide-react";
 import { ProductDetails } from "@/types/productDetails";
 import { getModalityColor } from "@/utils/chartColors";
 import { getKeyFeatures, getLogoInfo } from "@/lib/utils";
+import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
 
 interface UnifiedProductCardProps {
   product: ProductDetails;
@@ -66,6 +67,42 @@ const UnifiedProductCard = ({
     ));
   };
 
+  const renderCertificationBadge = () => {
+    const tags = getStandardizedCertificationTags(product);
+    const isMDRExempt = tags.includes('MDR exempt') || 
+                        product.certification?.toLowerCase().includes('exempt') ||
+                        product.regulatory?.ce?.status?.toLowerCase().includes('exempt');
+    
+    if (isMDRExempt) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-amber-50 text-amber-700 border-amber-300 flex items-center gap-1"
+        >
+          <ShieldAlert className="h-3 w-3" />
+          MDR Exempt
+        </Badge>
+      );
+    }
+    
+    const hasCE = tags.some(t => t.includes('CE'));
+    const hasFDA = tags.some(t => t.includes('FDA'));
+    
+    if (hasCE || hasFDA) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-green-50 text-green-700 border-green-300 flex items-center gap-1"
+        >
+          <ShieldCheck className="h-3 w-3" />
+          {hasCE && hasFDA ? 'CE/FDA' : hasCE ? 'CE' : 'FDA'}
+        </Badge>
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <Card 
       className={`h-full transition-all duration-200 hover:shadow-lg ${
@@ -110,6 +147,7 @@ const UnifiedProductCard = ({
           <Badge variant="outline" className="text-xs">
             {product.category}
           </Badge>
+          {renderCertificationBadge()}
           {renderModalityBadges(product.modality)}
         </div>
         

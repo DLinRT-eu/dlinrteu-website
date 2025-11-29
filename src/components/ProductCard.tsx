@@ -2,11 +2,12 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ShieldCheck, ShieldAlert } from "lucide-react";
 import { ProductDetails } from "@/types/productDetails";
 import { getModalityColor } from "@/utils/chartColors";
 import { getKeyFeatures } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
+import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
 
 interface ProductCardProps {
   id?: string;
@@ -95,6 +96,55 @@ const ProductCard = ({
     ));
   };
 
+  const renderCertificationBadge = () => {
+    // Build a ProductDetails-like object for the utility function
+    const productForTags: Partial<ProductDetails> = {
+      id,
+      name,
+      company,
+      description,
+      features,
+      keyFeatures,
+      category,
+      certification,
+      modality,
+      regulatory: undefined // ProductCard doesn't receive regulatory prop directly
+    };
+    
+    const tags = getStandardizedCertificationTags(productForTags as ProductDetails);
+    const isMDRExempt = tags.includes('MDR exempt') || 
+                        certification?.toLowerCase().includes('exempt');
+    
+    if (isMDRExempt) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-amber-50 text-amber-700 border-amber-300 flex items-center gap-1 mr-2"
+        >
+          <ShieldAlert className="h-3 w-3" />
+          MDR Exempt
+        </Badge>
+      );
+    }
+    
+    const hasCE = tags.some(t => t.includes('CE'));
+    const hasFDA = tags.some(t => t.includes('FDA'));
+    
+    if (hasCE || hasFDA) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-green-50 text-green-700 border-green-300 flex items-center gap-1 mr-2"
+        >
+          <ShieldCheck className="h-3 w-3" />
+          {hasCE && hasFDA ? 'CE/FDA' : hasCE ? 'CE' : 'FDA'}
+        </Badge>
+      );
+    }
+    
+    return null;
+  };
+
   return (
     <Card 
       className={`h-full hover:shadow-lg transition-shadow ${!isSelectable ? 'cursor-pointer' : ''} ${isSelected ? 'ring-2 ring-primary' : ''}`}
@@ -149,11 +199,10 @@ const ProductCard = ({
             </ul>
           </div>
         )}
-        {modality && (
-          <div className="flex items-center flex-wrap gap-1 mt-2 mb-4">
-            {renderModalityBadges(modality)}
-          </div>
-        )}
+        <div className="flex items-center flex-wrap gap-1 mt-2 mb-4">
+          {renderCertificationBadge()}
+          {modality && renderModalityBadges(modality)}
+        </div>
       </CardContent>
     </Card>
   );
