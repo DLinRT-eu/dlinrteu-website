@@ -54,6 +54,7 @@ const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
 
 // Company Pages
 const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
+const CompanyDashboardOverview = lazy(() => import("./pages/company/CompanyDashboardOverview"));
 const CompanyProductsManager = lazy(() => import("./pages/company/ProductsManager"));
 
 // Reviewer Pages
@@ -249,6 +250,11 @@ const App = () => (
                 <Route path="/company/dashboard" element={
                   <ProtectedRoute allowedRoles={['company', 'admin']}>
                     <CompanyDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/company/overview" element={
+                  <ProtectedRoute allowedRoles={['company', 'admin']}>
+                    <CompanyDashboardOverview />
                   </ProtectedRoute>
                 } />
                 <Route path="/company/products" element={
