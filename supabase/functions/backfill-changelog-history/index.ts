@@ -66,19 +66,8 @@ serve(async (req) => {
       throw new Error('Admin access required');
     }
 
-    // Validate REPO_NAME environment variable
-    const githubRepo = Deno.env.get('REPO_NAME');
-    
-    if (!githubRepo) {
-      return new Response(
-        JSON.stringify({ 
-          error: 'Repository not configured',
-          message: 'Please set REPO_NAME secret in Supabase Edge Function settings (e.g., "username/repo-name")',
-          instructions: 'Go to Supabase Dashboard → Edge Functions → Secrets → Add REPO_NAME'
-        }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    // Use REPO_NAME environment variable with hardcoded fallback
+    const githubRepo = Deno.env.get('REPO_NAME') || 'DLinRT-eu/dlinrteu-website';
 
     console.log('Starting changelog backfill from April 2025...');
 

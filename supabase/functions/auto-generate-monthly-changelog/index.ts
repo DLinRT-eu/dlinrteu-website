@@ -32,7 +32,7 @@ serve(async (req) => {
     // Fetch GitHub commits for last month
     const GITHUB_TOKEN = Deno.env.get('GITHUB_TOKEN');
     const owner = 'DLinRT-eu';
-    const repo = 'website';
+    const repo = 'dlinrteu-website';
     
     const githubUrl = `https://api.github.com/repos/${owner}/${repo}/commits?since=${since}T00:00:00Z&until=${until}T23:59:59Z&per_page=100`;
     
@@ -119,36 +119,34 @@ serve(async (req) => {
     
     if (totalFeatures > 0) {
       details += `### 🚀 New Features\n`;
-      const top3 = commitsByCategory.feature.slice(0, 3);
-      top3.forEach(item => {
+      commitsByCategory.feature.forEach(item => {
         details += `- ${item}\n`;
       });
-      if (totalFeatures > 3) {
-        details += `- ...and ${totalFeatures - 3} more features\n`;
-      }
       details += '\n';
     }
     
     if (totalImprovements > 0) {
       details += `### ✨ Improvements\n`;
-      const top3 = commitsByCategory.improvement.slice(0, 3);
-      top3.forEach(item => {
+      commitsByCategory.improvement.forEach(item => {
         details += `- ${item}\n`;
       });
-      if (totalImprovements > 3) {
-        details += `- ...and ${totalImprovements - 3} more improvements\n`;
-      }
       details += '\n';
     }
     
     if (totalBugfixes > 0) {
       details += `### 🐛 Bug Fixes\n`;
-      details += `- Resolved ${totalBugfixes} issue${totalBugfixes === 1 ? '' : 's'}\n\n`;
+      commitsByCategory.bugfix.forEach(item => {
+        details += `- ${item}\n`;
+      });
+      details += '\n';
     }
     
     if (totalDocs > 0) {
       details += `### 📚 Documentation\n`;
-      details += `- ${totalDocs} documentation update${totalDocs === 1 ? '' : 's'}\n\n`;
+      commitsByCategory.documentation.forEach(item => {
+        details += `- ${item}\n`;
+      });
+      details += '\n';
     }
     
     if (totalSecurity > 0) {
