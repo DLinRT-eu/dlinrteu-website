@@ -55,7 +55,11 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device",
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For automatic segmentation of brain tumors in radiation therapy planning.",
     },
     market: {

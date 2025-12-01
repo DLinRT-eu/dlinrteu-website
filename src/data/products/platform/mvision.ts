@@ -100,9 +100,10 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         certificateNumber: "Certified October 21, 2025"
       },
       fda: {
-        status: "510(k) Cleared (Dose+ module)",
+        status: "510(k) Cleared (Dose+ module - K250064, Sept 4, 2025)",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K250064"
       },
       intendedUseStatement: "AI-powered solution that automates radiotherapy workflows from imaging to treatment planning. Unifies AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single vendor-neutral, cloud-native platform to support clinicians in standardizing, reviewing, and adapting the course of treatment while enabling faster and more informed decision-making."
     },
@@ -115,6 +116,6 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2025-12-01",
     lastRevised: "2025-12-01",
     source: "Company provided information",
-    clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. One of the first truly cloud-native, vendor-neutral solutions to unify AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single platform. Designed for clinical efficiency and interoperability with seamless integration into hospital PACS, treatment planning systems, and oncology information systems. Cleared for clinical use across Europe and other MDR-recognized markets."
+    clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. One of the first truly cloud-native, vendor-neutral solutions to unify AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single platform. Designed for clinical efficiency and interoperability with seamless integration into hospital PACS, treatment planning systems, and oncology information systems. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025. Dose+ received FDA 510(k) clearance (K250064) on September 4, 2025."
   }
 ];

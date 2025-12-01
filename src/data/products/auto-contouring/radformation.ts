@@ -18,7 +18,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Cloud-based processing", "Fast turnaround", "Clinical workflow integration"],
+    keyFeatures: ["Cloud-based processing", "Fast turnaround", "Clinical workflow integration", "95+ structure models", "Includes Limbus AI technology"],
     supportedStructures: [
       // Head & Neck
       "Head & Neck: A Carotid L",
@@ -117,18 +117,21 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
     market: {
       onMarketSince: "2017",
-      distributionChannels: ["Direct sales", "Cloud platform"],
-
+      distributionChannels: ["Direct sales", "Cloud platform", "Includes Limbus AI (acquired April 30, 2024)"]
 },
-    version: "4.0",
-    releaseDate: "2023-11-15",
-    lastUpdated: "2024-03-20",
-    lastRevised: "2025-09-01",
+    version: "2.6",
+    releaseDate: "2025-01-15",
+    lastUpdated: "2025-12-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved and revised"
   }
 ];

@@ -45,9 +45,10 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared (K230854, Oct 27, 2023)",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K230854"
       },
       intendedUseStatement: "Intended for enhancing magnetic resonance images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },

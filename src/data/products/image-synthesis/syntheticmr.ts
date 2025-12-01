@@ -50,7 +50,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared (Dec 6, 2024)",
         class: "Class II",
         type: "510(k)"
       },
@@ -61,9 +61,9 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
 
 },
-    version: "3.0",
-    releaseDate: "2023-09-01",
-    lastUpdated: "2024-08-08",
+    version: "15",
+    releaseDate: "2024-12-06",
+    lastUpdated: "2025-12-01",
     lastRevised: "2025-12-01",
     source: "Automatically retrieved"
   }
