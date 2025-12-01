@@ -101,6 +101,40 @@ export function formatCEInfo(ce: ParsedCEInfo): string {
 }
 
 /**
+ * Helper to check if CE status indicates actual CE certification
+ */
+function isCECertified(status: string): boolean {
+  const positiveStatuses = ['certified', 'approved', 'ce marked', 'cleared', 'ce mark'];
+  const negativeStatuses = ['not available', 'not specified', 'under review', 'research', 'not applicable', 'n/a', 'pending'];
+  
+  const lowerStatus = status.toLowerCase();
+  
+  // Check for explicit negative statuses first
+  if (negativeStatuses.some(neg => lowerStatus.includes(neg))) {
+    return false;
+  }
+  
+  // Check for positive statuses
+  return positiveStatuses.some(pos => lowerStatus.includes(pos));
+}
+
+/**
+ * Helper to check if FDA status indicates actual FDA clearance
+ */
+function isFDACertified(status: string): boolean {
+  const positiveStatuses = ['cleared', 'approved', '510(k)', 'pma'];
+  const negativeStatuses = ['not available', 'not specified', 'under review', 'research', 'not applicable', 'n/a', 'pending'];
+  
+  const lowerStatus = status.toLowerCase();
+  
+  if (negativeStatuses.some(neg => lowerStatus.includes(neg))) {
+    return false;
+  }
+  
+  return positiveStatuses.some(pos => lowerStatus.includes(pos));
+}
+
+/**
  * Gets standardized certification tags from product data
  */
 export function getStandardizedCertificationTags(product: ProductDetails): string[] {
@@ -139,7 +173,7 @@ export function getStandardizedCertificationTags(product: ProductDetails): strin
         tags.push('CE MDR');
       } else if (ceInfo.type === 'MDD') {
         tags.push('CE MDD');
-      } else if (ceInfo.status) {
+      } else if (ceInfo.status && isCECertified(ceInfo.status)) {
         tags.push('CE');
       }
     }
