@@ -58,6 +58,13 @@ const TEAM_MEMBERS = [
     image: "/people/Kareem.jpg",
     bio: "https://www.linkedin.com/in/kareem-wahid-307241178/",
     email: "kareem.wahid@dlinrt.eu",
+  },
+  {
+    name: "Mark Gooding",
+    role: "Reviewer",
+    image: "/people/mark-gooding.jpg",
+    bio: "https://www.inpictura.com/#WhoWeAre",
+    email: "mark.gooding@dlinrt.eu",
   }
 ];
 
