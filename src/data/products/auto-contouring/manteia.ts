@@ -38,7 +38,11 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For assistance in the delineation of organs at risk in radiation therapy planning."
     },
     market: {
@@ -106,7 +110,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: Sacrum",
       "Pelvis: Iliac Crest (L/R)"
     ],
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved and revised",
     // Adding new fields
     limitations: [

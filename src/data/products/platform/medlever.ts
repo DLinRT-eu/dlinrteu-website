@@ -64,7 +64,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2024-01-01",
     lastUpdated: "2025-11-14",
-    lastRevised: "2025-11-14",
+    lastRevised: "2025-12-01",
     companyRevisionDate: "2025-11-02",
     source: "Company provided information",
     clinicalEvidence: "FDA 510(k) cleared Class II medical device for workflow orchestration and documentation automation in radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."

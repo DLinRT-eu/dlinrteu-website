@@ -39,7 +39,9 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "FDA",
+      fda: {
+        status: "Under review"
+      },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
     market: {
@@ -124,8 +126,8 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
 "Female Pelvis: Uterus",
 "Female Pelvis: Rectum"
     ],
-    lastRevised: "2025-09-01",
-    source: "automatically retrieved and revised",
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved and revised",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract"
   }
 ];

@@ -44,7 +44,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose compared to conventional reconstruction techniques."
     },
     market: {
@@ -54,7 +58,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple clinical studies showing diagnostic equivalence at up to 82% lower dose compared to conventional techniques",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
@@ -100,7 +104,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance signal-to-noise ratio and/or reduce scan time while maintaining diagnostic image quality."
     },
     market: {
@@ -110,7 +118,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }

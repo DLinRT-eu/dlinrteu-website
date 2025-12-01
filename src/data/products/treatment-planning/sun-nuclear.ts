@@ -56,7 +56,12 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       processingTime: "Real-time analysis",
     },
     regulatory: {
-      fda: "510(k) Cleared - Class II (K222803)",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K222803"
+      },
       ce: {
         status: "Not Available",
         class: "N/A",
