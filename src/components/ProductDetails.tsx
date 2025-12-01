@@ -16,6 +16,7 @@ import ProductRevisionStatus from "./ProductRevisionStatus";
 import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
 import GuidelinesDetails from "./product/GuidelinesDetails";
 import UserRelationships from "./product/UserRelationships";
+import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
 
@@ -82,6 +83,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <div className="lg:col-span-2 space-y-6">
           <GeneralInformationDetails product={product} />
           <ProductFeaturesDetails product={product} />
+          <IntegratedModulesDetails product={product} />
           <TechnicalSpecificationsDetails product={product} />
           
           {product.category === "Auto-Contouring" && product.supportedStructures && (
