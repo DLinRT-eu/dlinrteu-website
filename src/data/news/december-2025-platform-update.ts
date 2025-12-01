@@ -4,7 +4,7 @@ export const december2025PlatformUpdate: NewsItem = {
   id: "december-2025-platform-update",
   date: "2025-12-01",
   title: "Platform Update: Expanded Product Categories, New Roles System, and Upcoming Review Rounds",
-  summary: "DLinRT.eu expands to 70+ AI-powered products from 35+ companies, introduces Platform as a new product category, launches a multi-role user authentication system, and announces January 2026 review rounds with company certification.",
+  summary: "DLinRT.eu expands to 64+ DL-powered products from 35+ companies, introduces Platform as a new product category, launches a multi-role user authentication system, and announces January 2026 review rounds with company certification.",
   content: `
 ## 📈 Database Expansion
 
@@ -43,22 +43,22 @@ Verified contacts from medical device manufacturers who can certify and update i
 - Track certification status and revision history
 
 ### **Administrator Role**
-Platform managers who oversee the catalog, coordinate review rounds, manage user roles, and maintain system integrity.
+Platform admins oversee the catalog, coordinate review rounds, manage user roles, and maintain system integrity.
 
 All user data is handled in accordance with European data protection regulations, with institutional email verification and secure authentication protocols. Users can register through institutional email addresses, and role assignments are carefully verified to maintain data quality.
 
 ## 📋 Upcoming: January 2026 Review Round
 
-We are pleased to announce an **upcoming systematic review round** scheduled to begin at the **end of January 2026**. This comprehensive review will include:
+We are pleased to announce an **upcoming systematic review round** scheduled to finish at the **end of January 2026**. This comprehensive review will include:
 
 ### Review Process
 - All listed products will be systematically reviewed by expert reviewers
 - Product information will be validated for accuracy and completeness
-- Updates will be incorporated based on latest regulatory and clinical information
+- Updates will be incorporated based on the latest regulatory and clinical information
 
 ### Company Certification Phase
 Following the completion of reviews, **company certification requests will be sent to all manufacturers**. This process will:
-- Provide manufacturers the opportunity to verify product information
+- Provide manufacturers with the opportunity to verify product information
 - Enable direct updates from company representatives
 - Establish formal certification status for products
 - Create a transparent chain of verification for catalog users
