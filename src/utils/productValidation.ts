@@ -13,6 +13,16 @@ export interface ValidationError {
   invalidValues: string[];
 }
 
+// Helper function to validate URL format
+export const isValidUrl = (url: string): boolean => {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.protocol === 'https:' || urlObj.protocol === 'http:';
+  } catch {
+    return false;
+  }
+};
+
 export const validateProduct = (product: ProductDetails): ValidationResult => {
   const result: ValidationResult = {
     isValid: true,
