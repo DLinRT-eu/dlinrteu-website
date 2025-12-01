@@ -66,14 +66,8 @@ serve(async (req) => {
       throw new Error('Admin access required');
     }
 
-    // Use REPO_NAME environment variable with hardcoded fallback
-    const githubRepo = Deno.env.get('REPO_NAME') || 'DLinRT-eu/dlinrteu-website';
-
     console.log('Starting changelog backfill from April 2025...');
 
-    // Fetch commits from GitHub (April 2025 to now)
-    const startDate = new Date('2025-04-01T00:00:00Z');
-    
     const githubToken = Deno.env.get('REPO_TOKEN');
     const headers: HeadersInit = {
       'Accept': 'application/vnd.github.v3+json',
@@ -84,16 +78,35 @@ serve(async (req) => {
       headers['Authorization'] = `token ${githubToken}`;
     }
 
-    const githubApiUrl = `https://api.github.com/repos/${githubRepo}/commits?since=${startDate.toISOString()}&per_page=100`;
+    // Fetch from old repository (April - September 2025)
+    const oldRepoStartDate = new Date('2025-04-01T00:00:00Z');
+    const oldRepoEndDate = new Date('2025-10-01T00:00:00Z');
     
-    const githubResponse = await fetch(githubApiUrl, { headers });
+    const oldRepoUrl = `https://api.github.com/repos/DLinRT-eu/website/commits?since=${oldRepoStartDate.toISOString()}&until=${oldRepoEndDate.toISOString()}&per_page=100`;
+    console.log('Fetching commits from old repository (April-September 2025)...');
     
-    if (!githubResponse.ok) {
-      throw new Error(`GitHub API error: ${githubResponse.status}`);
+    const oldRepoResponse = await fetch(oldRepoUrl, { headers });
+    const oldRepoCommits: GitHubCommit[] = oldRepoResponse.ok ? await oldRepoResponse.json() : [];
+    console.log(`Fetched ${oldRepoCommits.length} commits from old repository`);
+
+    // Fetch from new repository (October 2025 - now)
+    const newRepoStartDate = new Date('2025-10-01T00:00:00Z');
+    
+    const newRepoUrl = `https://api.github.com/repos/DLinRT-eu/dlinrteu-website/commits?since=${newRepoStartDate.toISOString()}&per_page=100`;
+    console.log('Fetching commits from new repository (October 2025-present)...');
+    
+    const newRepoResponse = await fetch(newRepoUrl, { headers });
+    
+    if (!newRepoResponse.ok) {
+      throw new Error(`GitHub API error: ${newRepoResponse.status}`);
     }
 
-    const commits: GitHubCommit[] = await githubResponse.json();
-    console.log(`Fetched ${commits.length} commits from GitHub`);
+    const newRepoCommits: GitHubCommit[] = await newRepoResponse.json();
+    console.log(`Fetched ${newRepoCommits.length} commits from new repository`);
+
+    // Merge all commits
+    const commits: GitHubCommit[] = [...oldRepoCommits, ...newRepoCommits];
+    console.log(`Total commits from both repositories: ${commits.length}`);
 
     // Group commits by month
     const commitsByMonth = new Map<string, GitHubCommit[]>();
