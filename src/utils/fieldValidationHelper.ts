@@ -52,34 +52,34 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
     failureMessage: 'Description is missing'
   },
   {
-    fieldName: 'URL',
-    checkFunction: (product) => hasAnyFieldValue(product, ['productUrl', 'url']),
-    severity: 'low',
-    successMessage: 'URL is valid',
-    failureMessage: 'URL is missing',
-    alternativeFields: ['productUrl', 'url']
+    fieldName: 'Version',
+    checkFunction: (product) => Boolean(product.version),
+    severity: 'high',
+    successMessage: 'Version is specified',
+    failureMessage: 'Version is missing (required field)'
   },
   {
-    fieldName: 'GitHub URL',
-    checkFunction: (product) => Boolean(product.githubUrl),
-    severity: 'low',
-    successMessage: 'GitHub URL is specified',
-    failureMessage: 'GitHub URL is missing - consider adding for easier code access'
+    fieldName: 'Release Date',
+    checkFunction: (product) => Boolean(product.releaseDate),
+    severity: 'high',
+    successMessage: 'Release Date is specified',
+    failureMessage: 'Release Date is missing (required field)'
+  },
+  {
+    fieldName: 'Website',
+    checkFunction: (product) => hasAnyFieldValue(product, ['website', 'productUrl']),
+    severity: 'high',
+    successMessage: 'Website/Product URL is specified',
+    failureMessage: 'Website is missing (required field)',
+    alternativeFields: ['website', 'productUrl']
   },
   {
     fieldName: 'Contact Email',
     checkFunction: (product) => hasAnyFieldValue(product, ['supportEmail', 'contactEmail']),
-    severity: 'medium',
+    severity: 'low',
     successMessage: 'Contact Email is valid',
     failureMessage: 'Contact Email is missing',
     alternativeFields: ['supportEmail', 'contactEmail']
-  },
-  {
-    fieldName: 'Contact Phone',
-    checkFunction: (product) => Boolean(product.contactPhone),
-    severity: 'low',
-    successMessage: 'Contact Phone is valid',
-    failureMessage: 'Contact Phone is missing'
   },
   {
     fieldName: 'Modality',
@@ -119,10 +119,43 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
   {
     fieldName: 'Regulatory Information',
     checkFunction: (product) => hasAnyFieldValue(product, ['regulatory', 'regulatoryInfo']),
-    severity: 'low',
+    severity: 'high',
     successMessage: 'Regulatory Information is valid',
     failureMessage: 'Regulatory Information is missing',
     alternativeFields: ['regulatory', 'regulatoryInfo']
+  },
+  {
+    fieldName: 'Intended Use Statement',
+    checkFunction: (product) => Boolean(product.regulatory?.intendedUseStatement),
+    severity: 'medium',
+    successMessage: 'Intended use statement is present',
+    failureMessage: 'Intended use statement is missing'
+  },
+  {
+    fieldName: 'Certification Consistency',
+    checkFunction: (product) => {
+      if (!product.certification || !product.regulatory) return true;
+      
+      const cert = product.certification.toLowerCase();
+      const hasCE = Boolean(product.regulatory.ce?.status && 
+        !['not available', 'n/a'].includes(product.regulatory.ce.status.toLowerCase()));
+      
+      let hasFDA = false;
+      if (product.regulatory.fda) {
+        if (typeof product.regulatory.fda === 'string') {
+          hasFDA = !product.regulatory.fda.toLowerCase().includes('not');
+        } else if (typeof product.regulatory.fda === 'object' && product.regulatory.fda.status) {
+          hasFDA = !product.regulatory.fda.status.toLowerCase().includes('not');
+        }
+      }
+      
+      if (cert.includes('ce') && !hasCE) return false;
+      if (cert.includes('fda') && !hasFDA) return false;
+      return true;
+    },
+    severity: 'medium',
+    successMessage: 'Certification matches regulatory information',
+    failureMessage: 'Certification field may not match regulatory details'
   },
   {
     fieldName: 'Market Information',
@@ -148,9 +181,29 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
       }
       return Boolean(product.evidence);
     },
-    severity: 'low',
+    severity: 'medium',
     successMessage: 'Evidence is valid',
     failureMessage: 'Evidence is missing'
+  },
+  {
+    fieldName: 'Supported Structures',
+    checkFunction: (product) => {
+      if (product.category !== 'Auto-Contouring') return true;
+      return Boolean(product.supportedStructures && product.supportedStructures.length > 0);
+    },
+    severity: 'medium',
+    successMessage: 'Supported structures are documented',
+    failureMessage: 'Supported structures missing for Auto-Contouring product'
+  },
+  {
+    fieldName: 'Guidelines Reference',
+    checkFunction: (product) => {
+      if (product.category !== 'Auto-Contouring') return true;
+      return Boolean(product.guidelines && product.guidelines.length > 0);
+    },
+    severity: 'low',
+    successMessage: 'Guidelines are referenced',
+    failureMessage: 'No guidelines referenced - consider adding AAPM TG-263/TG-275 compliance'
   },
   {
     fieldName: 'Limitations',

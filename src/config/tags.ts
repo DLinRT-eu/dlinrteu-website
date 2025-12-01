@@ -6,7 +6,10 @@ export const MODALITY_TAGS = [
   'CBCT',
   'PET',
   'PET/CT',
-  'X-ray'
+  'X-ray',
+  'Treatment Planning System Data',
+  'SPECT',
+  'Ultrasound'
 ];
 
 // Valid anatomical location options
