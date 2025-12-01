@@ -21,7 +21,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     ],
     category: "Platform",
     secondaryCategories: ["Image Synthesis", "Registration", "Treatment Planning"],
-    certification: "CE & FDA",
+    certification: "CE",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/workspace/",
     anatomicalLocation: ["Brain", "Pelvis", "Male Pelvis", "Prostate", "Head & Neck", "Thorax", "Abdomen", "Multiple Sites"],
