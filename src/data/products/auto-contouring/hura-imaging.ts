@@ -83,6 +83,7 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
     version: "2.5",
     releaseDate: "2023-05-20",
     lastUpdated: "2024-01-15",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

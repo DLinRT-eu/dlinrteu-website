@@ -52,7 +52,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     version: "3.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2024-04-15",
-    lastRevised: "2025-08-26",
-    source: "Automatically retrieved and revised"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

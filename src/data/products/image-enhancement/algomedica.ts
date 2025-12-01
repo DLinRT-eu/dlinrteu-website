@@ -66,6 +66,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2025-09-01",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Company provided information"
   }
 ];

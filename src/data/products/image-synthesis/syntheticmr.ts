@@ -49,7 +49,11 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For use in generating synthetic MR contrasts and quantitative tissue maps from a single MRI acquisition to support clinical diagnosis."
     },
     market: {
@@ -60,7 +64,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     version: "3.0",
     releaseDate: "2023-09-01",
     lastUpdated: "2024-08-08",
-    lastRevised: "2025-09-01",
-    source: "Automatically retrieved and revised"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

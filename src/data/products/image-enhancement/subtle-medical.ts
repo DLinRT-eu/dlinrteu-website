@@ -45,7 +45,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in enhancing MR image quality of accelerated acquisitions to support clinical interpretation."
     },
     market: {
@@ -55,7 +59,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   },
   {
     id: "subtle-pet",
@@ -100,7 +105,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in enhancing PET image quality of low-dose or fast-acquisition scans to support clinical interpretation."
     },
     market: {
@@ -110,6 +119,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
     lastUpdated: "2025-01-05",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

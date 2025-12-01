@@ -44,7 +44,11 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for enhancing magnetic resonance images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -53,7 +57,8 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   },
   {
     id: "airs-ct-clarity",
@@ -97,7 +102,11 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Pending",
+      fda: {
+        status: "510(k) Pending",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for enhancing computed tomography images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -106,6 +115,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     clinicalEvidence: "Early clinical evaluations showing improved image quality metrics and reader preference compared to standard CT images",
     lastUpdated: "2025-01-20",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

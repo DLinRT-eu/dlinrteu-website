@@ -51,7 +51,11 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of pelvic cancers."
     },
     market: {
@@ -62,8 +66,8 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2019-05-21",
     lastUpdated: "2025-08-08",
-    lastRevised: "2025-09-01",
-    source: "Automatically retrieved and revised",
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved",
     clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy"
   }
 ];
