@@ -33,28 +33,28 @@ const TEAM_MEMBERS = [
   },
   {
     name: "Ana Maria Barragan Montero",
-    role: "Advisor & Reviewer", 
+    role: "Advisor & Reviewer",
     image: "/people/Ana.png",
     bio: "https://be.linkedin.com/in/ana-maria-barragan-montero-93090266",
     email: "ana.barragan@dlinrt.eu",
   },
   {
     name: "Federico Mastroleo",
-    role: "Advisor & Reviewer", 
+    role: "Advisor & Reviewer",
     image: "/people/Federico.jpg",
     bio: "https://www.linkedin.com/in/federico-mastroleo/",
     email: "federico.mastroleo@dlinrt.eu",
   },
   {
     name: "Viktor Rogowski",
-    role: "Advisor & Reviewer", 
+    role: "Advisor & Reviewer",
     image: "/people/Viktor.png",
     bio: "https://www.linkedin.com/in/viktor-rogowski/",
     email: "viktor.rogowski@dlinrt.eu",
   },
   {
     name: "Kareem Wahid",
-    role: "Reviewer", 
+    role: "Reviewer",
     image: "/people/Kareem.jpg",
     bio: "https://www.linkedin.com/in/kareem-wahid-307241178/",
     email: "kareem.wahid@dlinrt.eu",
@@ -62,10 +62,10 @@ const TEAM_MEMBERS = [
   {
     name: "Mark Gooding",
     role: "Reviewer",
-    image: "/people/mark-gooding.jpg",
+    image: "/people/MarkGooding.jpg",
     bio: "https://www.inpictura.com/#WhoWeAre",
     email: "mark.gooding@dlinrt.eu",
-  }
+  },
 ];
 
 // Fisher-Yates shuffle algorithm
@@ -88,25 +88,25 @@ const About = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "About DLinRT.eu & Team",
-    "description": "Learn about our mission, goals, and meet the experts who maintain the DLinRT products finder",
-    "url": "https://dlinrt.eu/about",
-    "isPartOf": {
+    name: "About DLinRT.eu & Team",
+    description: "Learn about our mission, goals, and meet the experts who maintain the DLinRT products finder",
+    url: "https://dlinrt.eu/about",
+    isPartOf: {
       "@type": "WebSite",
-      "name": "Deep Learning in Radiotherapy",
-      "url": "https://dlinrt.eu"
+      name: "Deep Learning in Radiotherapy",
+      url: "https://dlinrt.eu",
     },
-    "about": {
+    about: {
       "@type": "Organization",
-      "name": "DLinRT Team",
-      "member": shuffledTeamMembers.map(member => ({
+      name: "DLinRT Team",
+      member: shuffledTeamMembers.map((member) => ({
         "@type": "Person",
-        "name": member.name,
-        "jobTitle": member.role,
-        "image": member.image,
-        "sameAs": member.bio
-      }))
-    }
+        name: member.name,
+        jobTitle: member.role,
+        image: member.image,
+        sameAs: member.bio,
+      })),
+    },
   };
 
   return (
@@ -117,18 +117,16 @@ const About = () => {
         canonical="https://dlinrt.eu/about"
         structuredData={structuredData}
       />
-      
+
       <BlackPaperSection />
       <MissionVisionSection />
       <CoreValuesSection />
-      
+
       {/* What Happens After You Log In Section */}
       <section className="py-16 px-4 bg-gradient-to-br from-background to-primary/5">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What Happens After You Log In?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Happens After You Log In?</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               DLinRT.eu offers different experiences based on your role. Here's what you can expect after logging in.
             </p>
@@ -142,9 +140,7 @@ const About = () => {
                   <User className="h-6 w-6 text-blue-500" />
                 </div>
                 <CardTitle>Regular User</CardTitle>
-                <CardDescription>
-                  Explore and track AI/ML products in radiotherapy
-                </CardDescription>
+                <CardDescription>Explore and track AI/ML products in radiotherapy</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -167,9 +163,7 @@ const About = () => {
                   <Eye className="h-6 w-6 text-purple-500" />
                 </div>
                 <CardTitle>Reviewer</CardTitle>
-                <CardDescription>
-                  Validate and improve product information quality
-                </CardDescription>
+                <CardDescription>Validate and improve product information quality</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -192,9 +186,7 @@ const About = () => {
                   <Building2 className="h-6 w-6 text-green-500" />
                 </div>
                 <CardTitle>Company Representative</CardTitle>
-                <CardDescription>
-                  Manage your company's product information
-                </CardDescription>
+                <CardDescription>Manage your company's product information</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -217,9 +209,7 @@ const About = () => {
                   <Shield className="h-6 w-6 text-red-500" />
                 </div>
                 <CardTitle>Administrator</CardTitle>
-                <CardDescription>
-                  Full platform management and oversight
-                </CardDescription>
+                <CardDescription>Full platform management and oversight</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -240,16 +230,13 @@ const About = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Users with multiple roles can switch between them at any time using the role selector in the header menu.
             </p>
-            <a 
-              href="/roles" 
-              className="text-primary hover:underline font-medium"
-            >
+            <a href="/roles" className="text-primary hover:underline font-medium">
               Learn more about roles and permissions →
             </a>
           </div>
         </div>
       </section>
-      
+
       <TeamSection teamMembers={shuffledTeamMembers} />
       <Footer />
     </div>
