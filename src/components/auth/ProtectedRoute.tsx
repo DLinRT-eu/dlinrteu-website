@@ -35,8 +35,8 @@ export const ProtectedRoute = ({
   }
 
   if (allowedRoles && allowedRoles.length > 0) {
-    // Check if active role is in allowed roles (strict role-based access)
-    const hasRequiredRole = activeRole && allowedRoles.includes(activeRole as AppRole);
+    // Check if user has any of the allowed roles (not just active role)
+    const hasRequiredRole = roles.some(role => allowedRoles.includes(role as AppRole));
     if (!hasRequiredRole) {
       return (
         <div className="flex items-center justify-center min-h-screen">
