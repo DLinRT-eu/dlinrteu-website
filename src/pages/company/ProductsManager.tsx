@@ -38,7 +38,7 @@ interface CompanyProduct {
 
 export default function CompanyProductsManager() {
   const { user, loading: authLoading } = useAuth();
-  const { isCompany, isAdmin } = useRoles();
+  const { isCompany, isAdmin, hasCompanyRole, hasAdminRole } = useRoles();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [products, setProducts] = useState<CompanyProduct[]>([]);
@@ -52,13 +52,13 @@ export default function CompanyProductsManager() {
   useEffect(() => {
     if (authLoading) return;
     
-    if (!user || (!isCompany && !isAdmin)) {
+    if (!user || (!hasCompanyRole && !hasAdminRole)) {
       navigate('/auth');
       return;
     }
 
     fetchProducts();
-  }, [user, isCompany, isAdmin, authLoading, navigate]);
+  }, [user, hasCompanyRole, hasAdminRole, authLoading, navigate]);
 
   const fetchProducts = async () => {
     if (!user) return;
@@ -71,8 +71,8 @@ export default function CompanyProductsManager() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      // If company role, filter by their company
-      if (isCompany && !isAdmin) {
+      // If company role (and not admin), filter by their company
+      if (hasCompanyRole && !hasAdminRole) {
         const { data: companyData } = await supabase
           .from('company_representatives')
           .select('company_id')
@@ -313,7 +313,7 @@ export default function CompanyProductsManager() {
                         </div>
                         <div className="flex items-center gap-2">
                           {getVerificationBadge(product)}
-                          {(isAdmin || isCompany) && (
+                          {(hasAdminRole || hasCompanyRole) && (
                             <Button
                               variant="destructive"
                               size="sm"
@@ -374,7 +374,7 @@ export default function CompanyProductsManager() {
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}
-                            {(isAdmin || isCompany) && (
+                            {(hasAdminRole || hasCompanyRole) && (
                               <Button
                                 variant="destructive"
                                 size="sm"
@@ -430,7 +430,7 @@ export default function CompanyProductsManager() {
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}
-                            {(isAdmin || isCompany) && (
+                            {(hasAdminRole || hasCompanyRole) && (
                               <Button
                                 variant="destructive"
                                 size="sm"

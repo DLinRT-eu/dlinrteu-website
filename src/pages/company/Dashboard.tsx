@@ -47,7 +47,7 @@ interface CompanyUser {
 
 export default function CompanyDashboard() {
   const { user } = useAuth();
-  const { isCompany, isAdmin } = useRoles();
+  const { isCompany, isAdmin, hasCompanyRole, hasAdminRole } = useRoles();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [revisions, setRevisions] = useState<CompanyRevision[]>([]);
@@ -64,26 +64,19 @@ export default function CompanyDashboard() {
 
   useEffect(() => {
     // Allow through if user exists AND (has company role OR is admin)
-    if (!user || (!isCompany && !isAdmin)) {
+    if (!user || (!hasCompanyRole && !hasAdminRole)) {
       navigate('/auth');
       return;
     }
 
     fetchCompanyUser();
-  }, [user, isCompany, isAdmin]);
+  }, [user, hasCompanyRole, hasAdminRole]);
 
   const fetchCompanyUser = async () => {
     if (!user) return;
 
-    // Check if user is admin - admins have oversight of all companies
-    const { data: adminRoleData } = await supabase
-      .from('user_roles')
-      .select('role')
-      .eq('user_id', user.id)
-      .eq('role', 'admin')
-      .maybeSingle();
-
-    if (adminRoleData) {
+    // Check if user has admin role - admins have oversight of all companies
+    if (hasAdminRole) {
       // Admin gets access to all companies
       const mappedCompanyUser: CompanyUser = {
         id: 'admin-oversight',
