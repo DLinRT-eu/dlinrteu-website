@@ -93,4 +93,13 @@ export interface ProductDetails extends Product {
   
   // Legacy field for verification date (kept for backward compatibility)
   lastVerified?: string;
+  
+  // New field for integrated modules (for platform products like Workspace+)
+  integratedModules?: Array<{
+    name: string;
+    description: string;
+    category: string;
+    productUrl: string;
+    keyFeatures?: string[];
+  }>;
 }
