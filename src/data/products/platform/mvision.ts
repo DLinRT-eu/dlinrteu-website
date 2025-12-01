@@ -94,26 +94,27 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     regulatory: {
       ce: {
         status: "CE Marked",
-        class: "IIb",
+        class: "IIa",
         type: "MDR",
-        regulation: "MDR 2017/745"
+        regulation: "MDR 2017/745",
+        certificateNumber: "Certified October 21, 2025"
       },
       fda: {
         status: "510(k) Cleared (Dose+ module)",
         class: "Class II",
         type: "510(k)"
       },
-      intendedUseStatement: "Enterprise AI platform for radiation oncology providing integrated modules for image synthesis, deformable registration, and automated treatment planning to support clinical workflows in radiation therapy."
+      intendedUseStatement: "AI-powered solution that automates radiotherapy workflows from imaging to treatment planning. Unifies AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single vendor-neutral, cloud-native platform to support clinicians in standardizing, reviewing, and adapting the course of treatment while enabling faster and more informed decision-making."
     },
     market: {
-      onMarketSince: "2020",
+      onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
-    version: "3.0",
-    releaseDate: "2023-06-15",
-    lastUpdated: "2025-11-02",
-    lastRevised: "2025-11-02",
+    version: "1.0",
+    releaseDate: "2025-10-21",
+    lastUpdated: "2025-12-01",
+    lastRevised: "2025-12-01",
     source: "Company provided information",
-    clinicalEvidence: "Extensively validated across multiple clinical sites with demonstrated improvements in workflow efficiency, image quality, registration accuracy, and treatment plan consistency. Integrated platform approach reduces system complexity while maintaining clinical performance across all modules."
+    clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. One of the first truly cloud-native, vendor-neutral solutions to unify AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single platform. Designed for clinical efficiency and interoperability with seamless integration into hospital PACS, treatment planning systems, and oncology information systems. Cleared for clinical use across Europe and other MDR-recognized markets."
   }
 ];
