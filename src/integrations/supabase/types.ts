@@ -273,6 +273,7 @@ export type Database = {
       company_product_verifications: {
         Row: {
           company_id: string
+          content_hash: string | null
           created_at: string | null
           id: string
           product_id: string
@@ -285,6 +286,7 @@ export type Database = {
         }
         Insert: {
           company_id: string
+          content_hash?: string | null
           created_at?: string | null
           id?: string
           product_id: string
@@ -297,6 +299,7 @@ export type Database = {
         }
         Update: {
           company_id?: string
+          content_hash?: string | null
           created_at?: string | null
           id?: string
           product_id?: string
@@ -1550,6 +1553,16 @@ export type Database = {
         | {
             Args: {
               p_company_id: string
+              p_notes?: string
+              p_product_id: string
+              p_product_last_revised?: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_company_id: string
+              p_content_hash?: string
               p_notes?: string
               p_product_id: string
               p_product_last_revised?: string
