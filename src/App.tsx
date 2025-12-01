@@ -45,6 +45,7 @@ const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
 const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
+const CompanyMappingValidator = lazy(() => import("./pages/admin/CompanyMappingValidator"));
 const UserProductAdoptions = lazy(() => import("./pages/admin/UserProductAdoptions"));
 const CertificationManagement = lazy(() => import("./pages/admin/CertificationManagement"));
 
@@ -225,6 +226,11 @@ const App = () => (
                 <Route path="/admin/companies" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <CompanyManagement />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/company-mapping-validator" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <CompanyMappingValidator />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/user-products" element={

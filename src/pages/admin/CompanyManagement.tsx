@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -514,6 +514,16 @@ export default function CompanyManagement() {
       title="Company Management"
       description="Manage company representatives and verify certification permissions"
     >
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold">Company Management</h1>
+        <Button variant="outline" asChild>
+          <a href="/admin/company-mapping-validator">
+            <Shield className="mr-2 h-4 w-4" />
+            Validate Mappings
+          </a>
+        </Button>
+      </div>
+      
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
