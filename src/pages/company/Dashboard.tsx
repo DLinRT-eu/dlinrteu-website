@@ -167,12 +167,17 @@ export default function CompanyDashboard() {
       // Convert company display name to standardized company ID
       const companyId = getCompanyIdByName(product.company);
       
-      // Use secure RPC to certify product with lastRevised date
+      // Calculate content hash (excluding lastRevised and temporal fields)
+      const { calculateProductContentHash } = await import('@/utils/productHash');
+      const contentHash = await calculateProductContentHash(product);
+      
+      // Use secure RPC to certify product with lastRevised date and content hash
       const { data, error } = await supabase.rpc('certify_product', {
         p_product_id: selectedProduct,
         p_company_id: companyId,
         p_notes: 'Product information certified as accurate by company representative',
         p_product_last_revised: product.lastRevised ? new Date(product.lastRevised).toISOString() : null,
+        p_content_hash: contentHash,
       });
 
       if (error) throw error;

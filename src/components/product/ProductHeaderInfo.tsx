@@ -14,6 +14,7 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
   const [verificationData, setVerificationData] = useState<{
     verified_at: string;
     verification_notes: string | null;
+    content_hash: string | null;
   } | null>(null);
 
   // Fetch company verification from database
@@ -21,7 +22,7 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
     const fetchVerification = async () => {
       const { data } = await supabase
         .from('company_product_verifications')
-        .select('verified_at, verification_notes')
+        .select('verified_at, verification_notes, content_hash')
         .eq('product_id', product.id)
         .eq('company_id', product.company)
         .order('verified_at', { ascending: false })
@@ -69,9 +70,29 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
     ? new Date(product.lastRevised).toISOString().split('T')[0]
     : null;
 
-  // Certification status logic: check if certification is outdated
-  const isCertificationOutdated = verificationData && product.lastRevised && 
-    new Date(product.lastRevised) > new Date(verificationData.verified_at);
+  // Certification status logic: check if content has changed (not just lastRevised)
+  const [isCertificationOutdated, setIsCertificationOutdated] = React.useState(false);
+  
+  React.useEffect(() => {
+    const checkContentHash = async () => {
+      if (!verificationData || !verificationData.content_hash) {
+        // Legacy certification without hash - fall back to date comparison
+        const outdated = verificationData && product.lastRevised && 
+          new Date(product.lastRevised) > new Date(verificationData.verified_at);
+        setIsCertificationOutdated(!!outdated);
+        return;
+      }
+
+      // Compare content hashes to determine if certification is outdated
+      const { calculateProductContentHash } = await import('@/utils/productHash');
+      const currentHash = await calculateProductContentHash(product);
+      const hasChanged = currentHash !== verificationData.content_hash;
+      setIsCertificationOutdated(hasChanged);
+    };
+
+    checkContentHash();
+  }, [verificationData, product]);
+
   const certificationStatus = verificationData 
     ? isCertificationOutdated 
       ? 'outdated' 
