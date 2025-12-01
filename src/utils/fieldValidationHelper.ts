@@ -74,14 +74,6 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
     alternativeFields: ['website', 'productUrl']
   },
   {
-    fieldName: 'Contact Email',
-    checkFunction: (product) => hasAnyFieldValue(product, ['supportEmail', 'contactEmail']),
-    severity: 'low',
-    successMessage: 'Contact Email is valid',
-    failureMessage: 'Contact Email is missing',
-    alternativeFields: ['supportEmail', 'contactEmail']
-  },
-  {
     fieldName: 'Modality',
     checkFunction: (product) => {
       if (Array.isArray(product.modality)) {
@@ -164,14 +156,6 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
     successMessage: 'Market Information is valid',
     failureMessage: 'Market Information is missing',
     alternativeFields: ['market', 'marketInfo']
-  },
-  {
-    fieldName: 'Pricing Information',
-    checkFunction: (product) => hasAnyFieldValue(product, ['pricing', 'pricingInfo']),
-    severity: 'low',
-    successMessage: 'Pricing Information is valid',
-    failureMessage: 'Pricing Information is missing',
-    alternativeFields: ['pricing', 'pricingInfo']
   },
   {
     fieldName: 'Evidence',
