@@ -40,7 +40,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       input: ["AI contours", "Manual contours", "Treatment data"],
       inputFormat: ["DICOM-RT", "RT Structure Sets"],
       output: ["Quality reports", "Performance metrics"],
-      outputFormat: ["PDF", "CSV", "Dashboard"]
+      outputFormat: ["CSV", "Dashboard"]
     },
     technology: {
       integration: ["Dicom node"],
@@ -58,15 +58,15 @@ export const PTW_PRODUCTS: ProductDetails[] = [
         status: "Not applicable",
         class: "N/A"
       },
-      intendedUseStatement: "For monitoring and quality assessment of AI-generated contours in clinical radiotherapy practice. Not intended for clinical decision making."
+      intendedUseStatement: "AIQUALIS is intended for the monitoring of the amount and locations of editing of automatically generated contours taking place in clinical practice within the radiotherapy workflow. It is intended for the trained user to be able to audit the contouring process in the clinic, enabling them to feedback to the manufacturer of any automatic contouring product areas for improvement and to ensure that clinical teams are adhering to institutional contouring practices. This device is intended to allow the review of practice at a departmental or institutional level. It is not intended to be used to determine the correctness of contouring, or to assess, review or influence the treatment of any individual patient. The device is not intended for long-term data storage or archival purposes. This device is not an automatic contouring product. It does not generate any contours."
     },
     market: {
       onMarketSince: "2024",
       distributionChannels: ["Direct sales", "Distribution partners"],
 
 },
-    version: "1.1",
-    releaseDate: "2025-09-23",
+    version: "1.1.2",
+    releaseDate: "2025-11-06",
     lastUpdated: "2025-11-29",
     lastRevised: "2025-11-29",
     source: "Automatically retrieved and revised"
