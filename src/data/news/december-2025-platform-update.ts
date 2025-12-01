@@ -8,7 +8,7 @@ export const december2025PlatformUpdate: NewsItem = {
   content: `
 ## 📈 Database Expansion
 
-The DLinRT.eu catalog continues to grow, now featuring **over 70 AI-powered radiotherapy products** from more than **35 companies worldwide** — a significant increase from 64 products and 32 companies in our previous update. This expansion reflects the rapid advancement of AI technologies in radiation oncology and the growing adoption of AI-powered solutions across clinical workflows.
+The DLinRT.eu catalog continues to grow, now featuring **over 64 AI-powered radiotherapy products** from more than **35 companies worldwide** — a significant increase from 64 products and 32 companies in our previous update. This expansion reflects the rapid advancement of AI technologies in radiation oncology and the growing adoption of AI-powered solutions across clinical workflows.
 
 ## 🔧 New Product Category: Platform
 
