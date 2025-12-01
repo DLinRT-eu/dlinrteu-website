@@ -120,7 +120,7 @@ const Index = () => {
               <CardContent>
                 <Button asChild variant="outline" className="w-full">
                   <Link to="/reviewer/guide">
-                    Learn More
+                    View Reviewer Guide
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Link>
                 </Button>
@@ -142,7 +142,7 @@ const Index = () => {
               <CardContent>
                 <Button asChild variant="outline" className="w-full">
                   <Link to="/company/guide">
-                    Learn More
+                    View Company Representative Guide
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Link>
                 </Button>
