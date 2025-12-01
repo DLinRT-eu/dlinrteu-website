@@ -51,7 +51,11 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of head and neck cancers."
     },
     market: {
@@ -62,8 +66,8 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     version: "1.5",
     releaseDate: "2022-10-20",
     lastUpdated: "2024-08-08",
-    lastRevised: "2025-09-01",
-    source: "Automatically retrieved and revised",
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved",
     clinicalEvidence: "Clinical studies demonstrate comparable treatment planning accuracy to CT-based workflows for head and neck radiation therapy"
   }
 ];

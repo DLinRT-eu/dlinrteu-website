@@ -51,7 +51,11 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of brain tumors."
     },
     market: {
@@ -61,8 +65,8 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2020-01-20",
     lastUpdated: "2024-08-08",
-    lastRevised: "2025-09-01",
-    source: "Automatically retrieved and revised",
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning"
   }
 ];

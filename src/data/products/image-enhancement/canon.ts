@@ -44,7 +44,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for enhancing medical images to improve quality through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -54,6 +58,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple reader studies showing improved diagnostic confidence and reduced reading time for enhanced images",
     lastUpdated: "2025-01-05",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

@@ -66,7 +66,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
     lastRevised: "2025-12-01",
-    source: "Automatically retrieved and revised",
+    source: "Automatically retrieved",
     // Add evidence and limitations
     evidence: ["10.1016/j.ijrobp.2022.04.007", "10.1016/j.prro.2021.12.002", "10.1016/j.radonc.2020.09.026"],
     limitations: [

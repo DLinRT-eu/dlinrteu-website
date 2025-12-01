@@ -44,7 +44,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in enhancing CT images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -54,7 +58,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple clinical evaluations demonstrating improved diagnostic confidence and reduced interpretation time",
     lastUpdated: "2025-01-20",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   },
   {
     id: "ge-air-recon-dl-enhancement",
@@ -97,7 +102,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in enhancing MR image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -107,7 +116,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-09-01"
-
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

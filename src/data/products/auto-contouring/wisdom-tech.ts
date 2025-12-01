@@ -126,7 +126,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-04-10",
     lastUpdated: "2023-12-15",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved"
   }
 ];

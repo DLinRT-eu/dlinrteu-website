@@ -58,7 +58,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     releaseDate: "2023-08-15",
     lastUpdated: "2024-01-20",
-    lastRevised: "2025-08-26",
+    lastRevised: "2025-12-01",
     source: "Company provided information"
   }
 ];

@@ -39,7 +39,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For creating synthetic CT datasets from MR images to be used in radiation therapy planning."
     },
     market: {
@@ -50,6 +54,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     version: "VB80",
     releaseDate: "2024-09-20",
     lastUpdated: "2025-08-11",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

@@ -66,7 +66,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Rectum",
       "Pelvis: Femoral Heads"
     ],
-    lastRevised: "2025-09-01",
-    source: "automatically retrieved"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];
