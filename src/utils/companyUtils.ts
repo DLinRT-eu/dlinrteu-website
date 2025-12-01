@@ -106,6 +106,7 @@ export const getCompanyIdByName = (companyName: string): string => {
     'RaySearch': 'raysearch',
     'Accuray': 'accuray',
     'ViewRay': 'viewray',
+    'PTW': 'ptw-dosimetry',
   };
   
   // Return mapped ID or fallback to lowercase-hyphenated version
