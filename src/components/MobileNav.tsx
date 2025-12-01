@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from './ui/sheet';
@@ -9,11 +9,13 @@ import { Separator } from './ui/separator';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
+import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, profile, signOut } = useAuth();
   const { roles, activeRole, setActiveRole } = useRoles();
+  const navigate = useNavigate();
   const canSwitchRoles = roles.length > 1;
   
   const handleLinkClick = () => {
@@ -22,6 +24,8 @@ const MobileNav = () => {
 
   const handleRoleSwitch = (role: any) => {
     setActiveRole(role);
+    navigate(getRoleDashboardRoute(role));
+    setIsOpen(false);
   };
 
   const handleSignOut = () => {
