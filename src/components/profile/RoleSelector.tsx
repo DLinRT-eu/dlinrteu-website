@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useRoles } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -6,10 +7,13 @@ import { Badge } from '@/components/ui/badge';
 import { Shield, Info } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
+import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
+import type { AppRole } from '@/contexts/RoleContext';
 
 export function RoleSelector() {
   const { roles, activeRole, setActiveRole, loading } = useRoles();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Don't show if user has no roles or only one role
   if (loading || roles.length <= 1) {
@@ -17,7 +21,8 @@ export function RoleSelector() {
   }
 
   const handleRoleChange = (role: string) => {
-    setActiveRole(role as any);
+    setActiveRole(role as AppRole);
+    navigate(getRoleDashboardRoute(role as AppRole));
     toast({
       title: "Role Changed",
       description: `You are now using the ${role.charAt(0).toUpperCase() + role.slice(1)} role.`,

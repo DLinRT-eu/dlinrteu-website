@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Package, Building2, Newspaper, Eye, Shield, LayoutDashboard, BookOpen, Activity, FlaskConical, Lightbulb, Calendar, LogOut, User as UserIcon, Info } from 'lucide-react';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
@@ -10,17 +10,20 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { useToast } from '@/hooks/use-toast';
 import NotificationBell from './notifications/NotificationBell';
+import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
 
 const Header = () => {
   const { user, profile, signOut } = useAuth();
   const { roles, activeRole, setActiveRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const isRegularUser = !activeRole || roles.length === 0;
   const canSwitchRoles = roles.length > 1;
 
   const handleRoleSwitch = (role: any) => {
     setActiveRole(role);
+    navigate(getRoleDashboardRoute(role));
     toast({
       title: "Role Changed",
       description: `You are now using the ${role.charAt(0).toUpperCase() + role.slice(1)} role.`,
