@@ -104,7 +104,9 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "Under review",
+      fda: {
+        status: "Under review"
+      },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
     market: {
@@ -115,7 +117,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved"
   }
 ];

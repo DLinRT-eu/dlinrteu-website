@@ -48,7 +48,11 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
         class: "IIb",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for real-time motion tracking and synchronization during radiation therapy delivery to correct tumor motion and enable precise treatment delivery."
     },
     market: {
@@ -58,6 +62,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue.",
     lastUpdated: "2024-12-15",
-    lastRevised: "2025-09-01"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

@@ -39,7 +39,9 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "Under review",
+      fda: {
+        status: "Under review"
+      },
       intendedUseStatement: "For automatic segmentation and treatment planning assistance in radiation therapy."
     },
     market: {
@@ -84,7 +86,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Pelvis: Prostate",
       "Pelvis: Uterus"
     ],
-    lastRevised: "2025-09-01",
-    source: "automatically retrieved"
+    lastRevised: "2025-12-01",
+    source: "Automatically retrieved"
   }
 ];

@@ -77,7 +77,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2025-09-25",
     lastUpdated: "2025-11-02",
-    lastRevised: "2025-11-02",
+    lastRevised: "2025-12-01",
     source: "Company website and public information",
     clinicalEvidence: "CE Mark and FDA clearance demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
   }

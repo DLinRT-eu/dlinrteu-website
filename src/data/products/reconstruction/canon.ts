@@ -45,7 +45,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose while maintaining diagnostic confidence."
     },
     market: {
@@ -62,7 +66,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-08-26",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved"
 
   },
@@ -108,7 +112,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in MR image reconstruction to accelerate acquisition and/or enhance image quality while maintaining diagnostic confidence."
     },
     market: {
@@ -118,7 +126,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
     
@@ -166,7 +174,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         class: "IIa", 
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance spatial resolution and image quality while maintaining diagnostic confidence."
     },
     market: {
@@ -176,7 +188,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical studies demonstrating significantly improved spatial resolution and image sharpness for enhanced diagnostic capabilities",
     lastUpdated: "2025-01-15", 
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved"
   }
 ];

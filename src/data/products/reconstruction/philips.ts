@@ -43,7 +43,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in CT image reconstruction to provide diagnostic quality images with reduced radiation dose."
     },
     market: {
@@ -53,7 +57,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
 
@@ -100,7 +104,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "Intended for use in accelerated MRI acquisition and reconstruction to reduce scan times while maintaining diagnostic image quality."
     },
     market: {
@@ -110,7 +118,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",
     lastUpdated: "2025-07-30", 
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
 
