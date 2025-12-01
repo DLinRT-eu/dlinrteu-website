@@ -102,7 +102,7 @@ serve(async (req) => {
       }
     });
 
-    // Generate summary highlights (top 3-5 features per category)
+    // Generate summary highlights
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
                         'July', 'August', 'September', 'October', 'November', 'December'];
     const monthName = monthNames[lastMonth.getMonth()];
@@ -114,47 +114,123 @@ serve(async (req) => {
     const totalDocs = commitsByCategory.documentation.length;
     const totalSecurity = commitsByCategory.security.length;
 
-    // Build highlights - show only top items per category
-    let details = `## ${monthName} ${year} Highlights\n\n`;
-    
-    if (totalFeatures > 0) {
-      details += `### 🚀 New Features\n`;
-      commitsByCategory.feature.forEach(item => {
-        details += `- ${item}\n`;
-      });
-      details += '\n';
-    }
-    
-    if (totalImprovements > 0) {
-      details += `### ✨ Improvements\n`;
-      commitsByCategory.improvement.forEach(item => {
-        details += `- ${item}\n`;
-      });
-      details += '\n';
-    }
-    
-    if (totalBugfixes > 0) {
-      details += `### 🐛 Bug Fixes\n`;
-      commitsByCategory.bugfix.forEach(item => {
-        details += `- ${item}\n`;
-      });
-      details += '\n';
-    }
-    
-    if (totalDocs > 0) {
-      details += `### 📚 Documentation\n`;
-      commitsByCategory.documentation.forEach(item => {
-        details += `- ${item}\n`;
-      });
-      details += '\n';
-    }
-    
-    if (totalSecurity > 0) {
-      details += `### 🔒 Security\n`;
-      commitsByCategory.security.forEach(item => {
-        details += `- ${item}\n`;
-      });
-      details += '\n';
+    // Helper function to generate raw details (fallback)
+    const generateRawDetails = () => {
+      let raw = `## ${monthName} ${year} Highlights\n\n`;
+      
+      if (totalFeatures > 0) {
+        raw += `### 🚀 New Features\n`;
+        commitsByCategory.feature.forEach(item => { raw += `- ${item}\n`; });
+        raw += '\n';
+      }
+      
+      if (totalImprovements > 0) {
+        raw += `### ✨ Improvements\n`;
+        commitsByCategory.improvement.forEach(item => { raw += `- ${item}\n`; });
+        raw += '\n';
+      }
+      
+      if (totalBugfixes > 0) {
+        raw += `### 🐛 Bug Fixes\n`;
+        commitsByCategory.bugfix.forEach(item => { raw += `- ${item}\n`; });
+        raw += '\n';
+      }
+      
+      if (totalDocs > 0) {
+        raw += `### 📚 Documentation\n`;
+        commitsByCategory.documentation.forEach(item => { raw += `- ${item}\n`; });
+        raw += '\n';
+      }
+      
+      if (totalSecurity > 0) {
+        raw += `### 🔒 Security\n`;
+        commitsByCategory.security.forEach(item => { raw += `- ${item}\n`; });
+        raw += '\n';
+      }
+      
+      return raw.trim();
+    };
+
+    // Try to generate AI-summarized changelog
+    let details: string;
+    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+
+    if (!LOVABLE_API_KEY) {
+      console.log('No LOVABLE_API_KEY, using raw commits');
+      details = generateRawDetails();
+    } else {
+      try {
+        console.log('Generating AI-summarized changelog...');
+        
+        const prompt = `You are a technical writer creating a changelog for DLinRT.eu (a registry of AI/Deep Learning tools for radiotherapy).
+
+Given these raw git commits grouped by category, create a professional, user-friendly changelog summary:
+
+${JSON.stringify(commitsByCategory, null, 2)}
+
+Guidelines:
+- Write in clear, non-technical language when possible
+- Group related commits into single meaningful entries
+- Focus on user-facing changes and benefits
+- Use action verbs (Added, Improved, Fixed, Updated)
+- Keep each bullet point concise (1-2 sentences max)
+- Remove duplicate or redundant entries
+- Ignore internal refactoring unless it affects users
+- Format as markdown with emoji headers
+
+Output format:
+### 🚀 New Features
+- **Feature Name**: Brief description of what it does and why it matters
+
+### ✨ Improvements  
+- **Improvement Name**: What was improved and the benefit
+
+### 🐛 Bug Fixes
+- Fixed [issue description]
+
+### 📚 Documentation
+- Updated/Added [documentation description]
+
+### 🔒 Security
+- [Security improvement description]
+
+Only include categories that have commits. Be concise but informative.`;
+
+        const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'google/gemini-2.5-flash',
+            messages: [
+              { role: 'system', content: 'You are a professional technical writer specializing in software changelogs.' },
+              { role: 'user', content: prompt }
+            ],
+          }),
+        });
+
+        if (!aiResponse.ok) {
+          if (aiResponse.status === 429) {
+            console.warn('AI rate limited (429), falling back to raw commits');
+          } else if (aiResponse.status === 402) {
+            console.warn('AI credits exhausted (402), falling back to raw commits');
+          } else {
+            const errorText = await aiResponse.text();
+            console.error(`AI API error (${aiResponse.status}):`, errorText);
+          }
+          details = generateRawDetails();
+        } else {
+          const aiData = await aiResponse.json();
+          const aiSummary = aiData.choices[0].message.content;
+          details = `## ${monthName} ${year} Highlights\n\n${aiSummary}`;
+          console.log('Successfully generated AI-summarized changelog');
+        }
+      } catch (aiError) {
+        console.error('AI summarization failed, falling back to raw:', aiError);
+        details = generateRawDetails();
+      }
     }
 
     // Determine primary category (most commits)
