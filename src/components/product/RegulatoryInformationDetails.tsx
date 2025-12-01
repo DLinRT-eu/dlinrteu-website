@@ -32,10 +32,10 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
     
     if (!ceInfo) {
       return {
-        label: "Not available",
+        label: "Not specified",
         icon: <Info className="h-3 w-3" />,
         variant: "outline" as const,
-        description: "CE marking information not available",
+        description: "CE marking information not specified",
         details: null
       };
     }
@@ -46,6 +46,38 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
         icon: <AlertTriangle className="h-3 w-3" />,
         variant: "warning" as const,
         description: "Medical Device Regulation Exempt",
+        details: ceInfo
+      };
+    }
+    
+    // Check for explicit "Not Available" or similar negative statuses
+    const negativeStatuses = ['not available', 'not specified', 'not applicable', 'n/a'];
+    const isNegative = ceInfo.status && negativeStatuses.some(neg => 
+      ceInfo.status!.toLowerCase().includes(neg)
+    );
+    
+    if (isNegative) {
+      return {
+        label: "Not available",
+        icon: <Info className="h-3 w-3" />,
+        variant: "outline" as const,
+        description: ceInfo.status,
+        details: null
+      };
+    }
+    
+    // Check for "Under review" / pending status
+    const pendingStatuses = ['under review', 'pending', 'in progress'];
+    const isPending = ceInfo.status && pendingStatuses.some(pend => 
+      ceInfo.status!.toLowerCase().includes(pend)
+    );
+    
+    if (isPending) {
+      return {
+        label: "Under review",
+        icon: <AlertTriangle className="h-3 w-3" />,
+        variant: "warning" as const,
+        description: ceInfo.status,
         details: ceInfo
       };
     }
@@ -64,10 +96,42 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
     
     if (!fdaInfo) {
       return {
+        label: "Not specified",
+        icon: <Info className="h-3 w-3" />,
+        variant: "outline" as const,
+        description: "FDA clearance information not specified",
+        details: null
+      };
+    }
+    
+    // Check for explicit "Not Available" or similar negative statuses
+    const negativeStatuses = ['not available', 'not specified', 'not applicable', 'n/a'];
+    const isNegative = fdaInfo.status && negativeStatuses.some(neg => 
+      fdaInfo.status.toLowerCase().includes(neg)
+    );
+    
+    if (isNegative) {
+      return {
         label: "Not available",
         icon: <Info className="h-3 w-3" />,
         variant: "outline" as const,
-        description: "FDA clearance information not available",
+        description: fdaInfo.status,
+        details: null
+      };
+    }
+    
+    // Check for "Under review" / pending status
+    const pendingStatuses = ['under review', 'pending', 'in progress'];
+    const isPending = fdaInfo.status && pendingStatuses.some(pend => 
+      fdaInfo.status.toLowerCase().includes(pend)
+    );
+    
+    if (isPending) {
+      return {
+        label: "Under review",
+        icon: <AlertTriangle className="h-3 w-3" />,
+        variant: "warning" as const,
+        description: fdaInfo.status,
         details: null
       };
     }
