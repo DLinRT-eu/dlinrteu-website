@@ -104,9 +104,14 @@ export const getCompanyIdByName = (companyName: string): string => {
     'Elekta': 'elekta',
     'Brainlab': 'brainlab',
     'RaySearch': 'raysearch',
+    'RaySearch Laboratories': 'raysearch',
     'Accuray': 'accuray',
     'ViewRay': 'viewray',
     'PTW': 'ptw-dosimetry',
+    'MedLever, Inc.': 'medlever',
+    'Coreline Soft Co': 'coreline-soft',
+    'Ever Fortune AI': 'everfortune-ai',
+    'MD Anderson Cancer Center': 'md-anderson',
   };
   
   // Return mapped ID or fallback to lowercase-hyphenated version
