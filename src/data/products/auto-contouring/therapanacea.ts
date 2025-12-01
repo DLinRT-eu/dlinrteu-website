@@ -12,7 +12,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
     description: "AI-powered auto-segmentation solution for radiation therapy planning with advanced deep learning algorithms for CT, MRI, and CBCT.",
     category: "Auto-Contouring",
-    certification: "CE",
+    certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
     website: "https://www.therapanacea.eu/our-products/annotate/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
@@ -42,9 +42,10 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         notifiedBody: "GMED (Notified Body 0459)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared - ART-Plan+ v3.0.0 (K242822, Feb 25, 2025)",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K242822"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },

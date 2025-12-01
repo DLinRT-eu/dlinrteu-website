@@ -6,8 +6,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     id: "manteia-mozi",
     name: "MOZI",
     company: "Manteia",
-    companyUrl: "https://www.manteiatech.com/",
-    productUrl: "https://www.manteiatech.com/mozi",
+    companyUrl: "https://www.manteiamedical.com/",
+    productUrl: "https://www.manteiamedical.com/mozi",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
     description: "AI-powered treatment planning assistant that optimizes radiation therapy plans using machine learning algorithms for improved plan quality and efficiency.",
     features: ["AI-powered optimization", "Plan quality assessment", "Workflow integration"],
@@ -41,7 +41,12 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared (K223724, July 10, 2023)",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K223724"
+      },
       intendedUseStatement: "For assisting in radiation therapy treatment planning optimization."
     },
     market: {

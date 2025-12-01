@@ -19,7 +19,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Auto-planning with deep learning driven dose prediction", "Customizable post-processing to match your protocols, clinical goals, and machines", "Models validated against common radiotherapy protocols"],
+    keyFeatures: ["Auto-planning with deep learning driven dose prediction", "Customizable post-processing to match your protocols, clinical goals, and machines", "Models validated against common radiotherapy protocols", "ECHO algorithm for enhanced optimization", "Machine learning-based planning"],
     technicalSpecifications: {
       population: "Adult and pediatric patients",
       input: ["CT", "Structure sets", "Prescriptions"],
@@ -39,16 +39,20 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         class: "IIb",
         type: "Medical Device"
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)"
+      },
       intendedUseStatement: "For radiation therapy treatment planning and dose calculation."
     },
     market: {
       onMarketSince: "2009",
       distributionChannels: ["Direct sales"]
     },
-    version: "12.0",
-    releaseDate: "2023-12-01",
-    lastUpdated: "2025-05-01",
+    version: "2025",
+    releaseDate: "2025-05-02",
+    lastUpdated: "2025-12-01",
     lastRevised: "2025-12-01",
     source: "Automatically retrieved"
   }

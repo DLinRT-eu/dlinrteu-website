@@ -66,16 +66,16 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         notifiedBody: "TÜV SÜD (Notified Body 0123)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared (K230575, April 7, 2023)",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K230575"
       },
       intendedUseStatement: "For use in radiation therapy planning to assist in the delineation of organs at risk."
     },
     market: {
       onMarketSince: "2019",
-      distributionChannels: ["Direct sales", "Partnerships"],
-
+      distributionChannels: ["Direct sales", "Partnerships via Radformation (acquired April 30, 2024)"]
 },
     version: "3.0",
     releaseDate: "2023-06-15",
