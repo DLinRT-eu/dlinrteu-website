@@ -234,14 +234,14 @@ Only include categories that have commits. Be concise but informative.`;
       const { data: existing } = await supabase
         .from('changelog_entries')
         .select('id')
-        .eq('id', entryId)
+        .eq('entry_id', entryId)
         .single();
 
       if (!existing) {
         const { error: insertError } = await supabase
           .from('changelog_entries')
           .insert({
-            id: entryId,
+            entry_id: entryId,
             version,
             date: entryDate,
             category: 'feature',
@@ -250,6 +250,7 @@ Only include categories that have commits. Be concise but informative.`;
             details,
             status: 'published',
             published_at: new Date().toISOString(),
+            auto_generated: true,
           });
 
         if (insertError) {
