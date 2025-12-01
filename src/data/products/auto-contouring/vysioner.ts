@@ -1,11 +1,10 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
 export const VYSIONER_PRODUCTS: ProductDetails[] = [
   {
     id: "vysioner-vbrain",
     name: "Vbrain",
-    company: "Vysioner",
+    company: "Vysioneer",
     companyUrl: "https://www.vysioneer.com/",
     productUrl: "https://www.vysioneer.com/solutions/vbrain",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/vysioner.ts",
@@ -27,59 +26,54 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       "Brain: Eyes",
       "Brain: Cochlea",
       "Brain: Hippocampus",
-      
+
       // Target structures - GTV
       "Brain: GTV (Gross Tumor Volume)",
-      
+
       // Target structures - Elective
       "Brain: CTV (Clinical Target Volume)",
-      
+
       // Special case - metastases
-      "Brain: Brain Metastases"
+      "Brain: Brain Metastases",
     ],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RT"],
     },
     technology: {
       integration: ["TPS integration", "PACS integration"],
       deployment: ["Cloud-based", "On-premises"],
       triggerForAnalysis: "Manual or automated",
-      processingTime: "Minutes per case"
+      processingTime: "Minutes per case",
     },
     regulatory: {
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
       },
       fda: "510(k) cleared",
-      intendedUseStatement: "For automatic segmentation of brain tumors in radiation therapy planning."
+      intendedUseStatement: "For automatic segmentation of brain tumors in radiation therapy planning.",
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"],
-
-},
+    },
     version: "2.5",
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
-    lastRevised: "2025-09-01",
+    lastRevised: "2025-12-01",
     source: "Automatically retrieved and revised",
     // Add evidence and limitations
-    evidence: [
-      "10.1016/j.ijrobp.2022.04.007",
-      "10.1016/j.prro.2021.12.002",
-      "10.1016/j.radonc.2020.09.026"
-    ],
+    evidence: ["10.1016/j.ijrobp.2022.04.007", "10.1016/j.prro.2021.12.002", "10.1016/j.radonc.2020.09.026"],
     limitations: [
       "Limited to brain tumor segmentation only",
       "Performance varies with MRI sequence quality",
       "Requires T1 post-contrast for optimal performance",
-      "Reduced accuracy for tumors smaller than 0.5cm"
-    ]
-  }
+      "Reduced accuracy for tumors smaller than 0.5cm",
+    ],
+  },
 ];
