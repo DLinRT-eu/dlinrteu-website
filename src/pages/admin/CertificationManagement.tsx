@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2 } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import SEO from '@/components/SEO';
@@ -24,6 +24,9 @@ import { DataControlsBar, SortDirection } from '@/components/common/DataControls
 import * as XLSX from 'xlsx';
 import type { ProductDetails } from '@/types/productDetails';
 import type { Tables } from '@/integrations/supabase/types';
+import { calculateProductContentHash } from '@/utils/productHash';
+import { HashStatusBadge, type HashStatus } from '@/components/admin/HashStatusBadge';
+import { CertificationDetailDialog } from '@/components/admin/CertificationDetailDialog';
 
 type CertificationRecord = Tables<'company_product_verifications'>;
 
@@ -31,6 +34,8 @@ interface ProductWithCertification {
   product: ProductDetails;
   certificationRecord?: CertificationRecord;
   certificationStatus: 'valid' | 'outdated' | 'never';
+  hashStatus: HashStatus;
+  currentHash?: string;
 }
 
 export default function CertificationManagement() {
@@ -42,6 +47,10 @@ export default function CertificationManagement() {
   const [activeTab, setActiveTab] = useState<'all' | 'valid' | 'outdated' | 'never'>('all');
   const [sortBy, setSortBy] = useState('product_name');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+  const [productsWithHashes, setProductsWithHashes] = useState<ProductWithCertification[]>([]);
+  const [calculatingHashes, setCalculatingHashes] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState<ProductWithCertification | null>(null);
+  const [detailDialogOpen, setDetailDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!isAdmin) {
@@ -69,42 +78,74 @@ export default function CertificationManagement() {
     }
   };
 
-  // Process products with certification status
-  const productsWithStatus: ProductWithCertification[] = useMemo(() => {
-    // Create certification map (product_id -> latest certification)
-    const certificationMap = new Map<string, CertificationRecord>();
-    certifications.forEach((cert) => {
-      if (!certificationMap.has(cert.product_id)) {
-        certificationMap.set(cert.product_id, cert);
-      }
-    });
+  // Calculate content hashes and determine status
+  useEffect(() => {
+    const calculateHashesForProducts = async () => {
+      setCalculatingHashes(true);
+      
+      // Create certification map
+      const certificationMap = new Map<string, CertificationRecord>();
+      certifications.forEach((cert) => {
+        if (!certificationMap.has(cert.product_id)) {
+          certificationMap.set(cert.product_id, cert);
+        }
+      });
 
-    // Determine status for each product
-    return ALL_PRODUCTS.map((product) => {
-      const cert = certificationMap.get(product.id || '');
-      let status: 'valid' | 'outdated' | 'never' = 'never';
+      // Calculate hash for each product and determine status
+      const productsWithHashData = await Promise.all(
+        ALL_PRODUCTS.map(async (product) => {
+          const cert = certificationMap.get(product.id || '');
+          const currentHash = await calculateProductContentHash(product);
+          
+          let status: 'valid' | 'outdated' | 'never' = 'never';
+          let hashStatus: HashStatus = 'never';
 
-      if (!cert) {
-        status = 'never';
-      } else if (product.lastRevised && cert.verified_at) {
-        const productRevised = new Date(product.lastRevised);
-        const certifiedAt = new Date(cert.verified_at);
-        status = productRevised > certifiedAt ? 'outdated' : 'valid';
-      } else {
-        status = 'valid';
-      }
+          if (!cert) {
+            status = 'never';
+            hashStatus = 'never';
+          } else if (cert.content_hash) {
+            // Hash-based validation
+            if (cert.content_hash === currentHash) {
+              status = 'valid';
+              hashStatus = 'valid';
+            } else {
+              status = 'outdated';
+              hashStatus = 'mismatch';
+            }
+          } else {
+            // Legacy: Fall back to date-based validation
+            hashStatus = 'legacy';
+            if (product.lastRevised && cert.verified_at) {
+              const productRevised = new Date(product.lastRevised);
+              const certifiedAt = new Date(cert.verified_at);
+              status = productRevised > certifiedAt ? 'outdated' : 'valid';
+            } else {
+              status = 'valid';
+            }
+          }
 
-      return {
-        product,
-        certificationRecord: cert,
-        certificationStatus: status,
-      };
-    });
+          return {
+            product,
+            certificationRecord: cert,
+            certificationStatus: status,
+            hashStatus,
+            currentHash,
+          };
+        })
+      );
+
+      setProductsWithHashes(productsWithHashData);
+      setCalculatingHashes(false);
+    };
+
+    if (certifications.length > 0 || ALL_PRODUCTS.length > 0) {
+      calculateHashesForProducts();
+    }
   }, [certifications]);
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = productsWithStatus;
+    let filtered = productsWithHashes;
 
     // Filter by tab
     if (activeTab !== 'all') {
@@ -157,42 +198,23 @@ export default function CertificationManagement() {
     });
 
     return filtered;
-  }, [productsWithStatus, searchQuery, activeTab, sortBy, sortDirection]);
+  }, [productsWithHashes, searchQuery, activeTab, sortBy, sortDirection]);
 
   // Calculate stats
   const stats = useMemo(() => {
     return {
-      total: productsWithStatus.length,
-      valid: productsWithStatus.filter((p) => p.certificationStatus === 'valid').length,
-      outdated: productsWithStatus.filter((p) => p.certificationStatus === 'outdated').length,
-      never: productsWithStatus.filter((p) => p.certificationStatus === 'never').length,
+      total: productsWithHashes.length,
+      valid: productsWithHashes.filter((p) => p.certificationStatus === 'valid').length,
+      outdated: productsWithHashes.filter((p) => p.certificationStatus === 'outdated').length,
+      never: productsWithHashes.filter((p) => p.certificationStatus === 'never').length,
+      hashBased: productsWithHashes.filter((p) => p.hashStatus === 'valid' || p.hashStatus === 'mismatch').length,
+      legacy: productsWithHashes.filter((p) => p.hashStatus === 'legacy').length,
     };
-  }, [productsWithStatus]);
+  }, [productsWithHashes]);
 
-  const getStatusBadge = (status: 'valid' | 'outdated' | 'never') => {
-    switch (status) {
-      case 'valid':
-        return (
-          <Badge variant="success" className="flex items-center gap-1">
-            <CheckCircle2 className="h-3 w-3" />
-            Verified
-          </Badge>
-        );
-      case 'outdated':
-        return (
-          <Badge variant="warning" className="flex items-center gap-1">
-            <AlertTriangle className="h-3 w-3" />
-            Outdated
-          </Badge>
-        );
-      case 'never':
-        return (
-          <Badge variant="secondary" className="flex items-center gap-1">
-            <XCircle className="h-3 w-3" />
-            Not Certified
-          </Badge>
-        );
-    }
+  const handleViewDetails = (item: ProductWithCertification) => {
+    setSelectedProduct(item);
+    setDetailDialogOpen(true);
   };
 
   const handleExportCSV = () => {
@@ -202,6 +224,8 @@ export default function CertificationManagement() {
       'Category': item.product.category,
       'Last Revised': item.product.lastRevised ? format(new Date(item.product.lastRevised), 'yyyy-MM-dd') : 'N/A',
       'Certification Status': item.certificationStatus,
+      'Hash Status': item.hashStatus,
+      'Content Hash': item.currentHash || 'N/A',
       'Certified Date': item.certificationRecord?.verified_at ? format(new Date(item.certificationRecord.verified_at), 'yyyy-MM-dd') : '-',
     }));
 
@@ -226,6 +250,8 @@ export default function CertificationManagement() {
       'Category': item.product.category,
       'Last Revised': item.product.lastRevised ? format(new Date(item.product.lastRevised), 'yyyy-MM-dd') : 'N/A',
       'Certification Status': item.certificationStatus,
+      'Hash Status': item.hashStatus,
+      'Content Hash': item.currentHash || 'N/A',
       'Certified Date': item.certificationRecord?.verified_at ? format(new Date(item.certificationRecord.verified_at), 'yyyy-MM-dd') : '-',
     }));
 
@@ -247,14 +273,16 @@ export default function CertificationManagement() {
     toast.success('Exported to JSON');
   };
 
-  if (loading) {
+  if (loading || calculatingHashes) {
     return (
       <PageLayout>
         <div className="container mx-auto py-8">
           <div className="flex items-center justify-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
-              <p className="text-muted-foreground">Loading certification data...</p>
+              <p className="text-muted-foreground">
+                {loading ? 'Loading certification data...' : 'Calculating content hashes...'}
+              </p>
             </div>
           </div>
         </div>
@@ -328,6 +356,28 @@ export default function CertificationManagement() {
                 <p className="text-xs text-muted-foreground">Never certified</p>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Hash-Based</CardTitle>
+                <CheckCircle2 className="h-4 w-4 text-blue-600" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-blue-600">{stats.hashBased}</div>
+                <p className="text-xs text-muted-foreground">Content hash tracked</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Legacy</CardTitle>
+                <Info className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats.legacy}</div>
+                <p className="text-xs text-muted-foreground">Date-based only</p>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Filters and Table */}
@@ -385,7 +435,7 @@ export default function CertificationManagement() {
                           <TableHead>Company</TableHead>
                           <TableHead>Category</TableHead>
                           <TableHead>Last Revised</TableHead>
-                          <TableHead>Certification Status</TableHead>
+                          <TableHead>Hash Status</TableHead>
                           <TableHead>Certified Date</TableHead>
                           <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
@@ -408,20 +458,31 @@ export default function CertificationManagement() {
                                   ? format(new Date(item.product.lastRevised), 'MMM dd, yyyy')
                                   : 'N/A'}
                               </TableCell>
-                              <TableCell>{getStatusBadge(item.certificationStatus)}</TableCell>
+                              <TableCell>
+                                <HashStatusBadge status={item.hashStatus} />
+                              </TableCell>
                               <TableCell>
                                 {item.certificationRecord?.verified_at
                                   ? format(new Date(item.certificationRecord.verified_at), 'MMM dd, yyyy')
                                   : '-'}
                               </TableCell>
                               <TableCell className="text-right">
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => navigate(`/product/${item.product.id}`)}
-                                >
-                                  <ExternalLink className="h-4 w-4" />
-                                </Button>
+                                <div className="flex items-center justify-end gap-2">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleViewDetails(item)}
+                                  >
+                                    <Eye className="h-4 w-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => navigate(`/product/${item.product.id}`)}
+                                  >
+                                    <ExternalLink className="h-4 w-4" />
+                                  </Button>
+                                </div>
                               </TableCell>
                             </TableRow>
                           ))
@@ -434,6 +495,18 @@ export default function CertificationManagement() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Certification Detail Dialog */}
+        {selectedProduct && (
+          <CertificationDetailDialog
+            open={detailDialogOpen}
+            onOpenChange={setDetailDialogOpen}
+            product={selectedProduct.product}
+            certificationRecord={selectedProduct.certificationRecord}
+            hashStatus={selectedProduct.hashStatus}
+            currentHash={selectedProduct.currentHash}
+          />
+        )}
       </PageLayout>
     </>
   );
