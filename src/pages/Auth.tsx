@@ -77,8 +77,8 @@ export default function Auth() {
   // Redirect if already authenticated
   useEffect(() => {
     if (user && !authLoading) {
-      console.log('[Auth Page] User authenticated, redirecting to home');
-      navigate('/');
+      console.log('[Auth Page] User authenticated, redirecting to dashboard');
+      navigate('/dashboard-home');
     }
   }, [user, authLoading, navigate]);
 
@@ -110,8 +110,8 @@ export default function Auth() {
         return; // Don't navigate yet
       }
       
-      // No MFA required, proceed to home
-      navigate('/');
+      // No MFA required, proceed to dashboard
+      navigate('/dashboard-home');
     } catch (err) {
       if (err instanceof z.ZodError) {
         setError(err.errors[0].message);
@@ -161,8 +161,8 @@ export default function Auth() {
         if (verifyError) throw verifyError;
       }
       
-      // MFA verified, navigate to home
-      navigate('/');
+      // MFA verified, navigate to dashboard
+      navigate('/dashboard-home');
     } catch (error: any) {
       setMfaError(error.message || 'Verification failed');
     } finally {
