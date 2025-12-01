@@ -23,9 +23,9 @@ They are NOT intended for diagnosis, treatment planning, or clinical decision-ma
 
 const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) => {
   const certificationTags = getStandardizedCertificationTags(product);
-  const hasCE = certificationTags.includes('CE');
-  const hasFDA = certificationTags.includes('FDA');
-  const hasMDRExempt = certificationTags.includes('MDR exempt');
+  const hasCE = certificationTags.some(tag => tag.startsWith('CE'));
+  const hasFDA = certificationTags.some(tag => tag.startsWith('FDA'));
+  const hasMDRExempt = certificationTags.includes('MDR Exempt');
   
   const getCEStatus = () => {
     const ceInfo = parseCEInfo(product.regulatory?.ce);
