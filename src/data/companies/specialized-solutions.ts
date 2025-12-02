@@ -7,7 +7,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "name": "Spectronic Medical",
     "description": "Specialists in MRI-only radiotherapy planning solutions.",
     "website": "https://spectronicmedical.com/",
-    "productIds": ["spectronic-mriplus", "spectronic-mri-planner", "spectronic-mriplanner"],
+    "productIds": ["spectronic-mriplanner"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/spectronic-medical.jpg"
   },
