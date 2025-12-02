@@ -2,12 +2,13 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, ShieldCheck, ShieldAlert } from "lucide-react";
+import { ExternalLink, ShieldCheck, ShieldAlert, AlertTriangle } from "lucide-react";
 import { ProductDetails } from "@/types/productDetails";
 import { getModalityColor } from "@/utils/chartColors";
 import { getKeyFeatures } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
+import { isInvestigationalProduct } from "@/utils/productFilters";
 
 interface ProductCardProps {
   id?: string;
@@ -110,6 +111,22 @@ const ProductCard = ({
       modality,
       regulatory: undefined // ProductCard doesn't receive regulatory prop directly
     };
+    
+    // Check if product is investigational/pending
+    const isInvestigational = certification?.toLowerCase().includes('pending') ||
+                              certification?.toLowerCase().includes('investigation');
+    
+    if (isInvestigational) {
+      return (
+        <Badge 
+          variant="warning" 
+          className="text-xs bg-amber-100 text-amber-800 border-amber-300 flex items-center gap-1 mr-2"
+        >
+          <AlertTriangle className="h-3 w-3" />
+          Investigation Use
+        </Badge>
+      );
+    }
     
     const tags = getStandardizedCertificationTags(productForTags as ProductDetails);
     const isMDRExempt = tags.includes('MDR exempt') || 

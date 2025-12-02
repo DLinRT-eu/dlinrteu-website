@@ -85,6 +85,8 @@ export const getAllOptions = (field: keyof Product): string[] => {
             usedCertifications.add("MDR exempt");
           } else if (cert === 'nmpa') {
             usedCertifications.add("NMPA");
+          } else if (cert.includes('pending') || cert.includes('investigation')) {
+            usedCertifications.add("Pending");
           }
         }
       });

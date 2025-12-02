@@ -3,29 +3,92 @@ import { CERTIFICATION_TAGS, CERTIFICATION_MAPPING } from "@/config/tags";
 import { getStandardizedCertificationTags as getRegulatoryCertificationTags } from "@/utils/regulatoryUtils";
 
 /**
- * Checks if a product has CE or FDA regulatory approval
+ * Checks if a product is in pending/investigational status
  */
-export const hasRegulatoryApproval = (product: ProductDetails): boolean => {
+export const isInvestigationalProduct = (product: ProductDetails): boolean => {
+  const cert = product.certification?.toLowerCase() || '';
+  
+  // Check certification field
+  if (cert.includes('pending') || cert.includes('investigation')) {
+    return true;
+  }
+  
+  // Check regulatory status for pending/investigation
+  const ceStatus = product.regulatory?.ce?.status?.toLowerCase() || '';
+  const fdaStatus = typeof product.regulatory?.fda === 'string' 
+    ? product.regulatory.fda.toLowerCase()
+    : product.regulatory?.fda?.status?.toLowerCase() || '';
+  
+  const pendingKeywords = ['pending', 'investigation', 'not yet', 'under review', 'clinical testing'];
+  
+  if (pendingKeywords.some(kw => ceStatus.includes(kw) || fdaStatus.includes(kw))) {
+    // Only mark as investigational if BOTH are pending/not certified
+    const hasCE = hasActualCEApproval(product);
+    const hasFDA = hasActualFDAApproval(product);
+    return !hasCE && !hasFDA;
+  }
+  
+  return false;
+};
+
+/**
+ * Checks if a product has actual FDA clearance/approval
+ */
+const hasActualFDAApproval = (product: ProductDetails): boolean => {
+  const fdaInfo = product.regulatory?.fda;
+  if (!fdaInfo) return false;
+  
+  const status = typeof fdaInfo === 'string' ? fdaInfo : fdaInfo.status || '';
+  const lowerStatus = status.toLowerCase();
+  
+  const positiveStatuses = ['cleared', 'approved', '510(k) cleared'];
+  const negativeStatuses = ['pending', 'not yet', 'investigation', 'under review'];
+  
+  if (negativeStatuses.some(neg => lowerStatus.includes(neg))) {
+    return false;
+  }
+  
+  return positiveStatuses.some(pos => lowerStatus.includes(pos)) || 
+         product.certification?.toLowerCase().includes('fda');
+};
+
+/**
+ * Checks if a product has actual CE mark approval
+ */
+const hasActualCEApproval = (product: ProductDetails): boolean => {
+  const ceInfo = product.regulatory?.ce;
+  if (!ceInfo) return product.certification?.toLowerCase().includes('ce') || false;
+  
+  const status = ceInfo.status?.toLowerCase() || '';
+  const positiveStatuses = ['certified', 'approved', 'ce marked', 'cleared'];
+  const negativeStatuses = ['pending', 'not yet', 'investigation', 'under review'];
+  
+  if (negativeStatuses.some(neg => status.includes(neg))) {
+    return false;
+  }
+  
+  return positiveStatuses.some(pos => status.includes(pos)) ||
+         product.certification?.toLowerCase().includes('ce');
+};
+
+/**
+ * Checks if a product has CE or FDA regulatory approval
+ * @param includeInvestigational - If true, also returns true for pending/investigational products
+ */
+export const hasRegulatoryApproval = (product: ProductDetails, includeInvestigational: boolean = true): boolean => {
   // Check for FDA clearance/approval
-  const hasFDA = product.certification?.toLowerCase().includes('fda') || 
-                 (product.regulatory?.fda && 
-                  (typeof product.regulatory.fda === 'string' ? 
-                   (product.regulatory.fda.includes('510(k)') || 
-                    product.regulatory.fda.includes('Cleared') || 
-                    product.regulatory.fda.includes('Approved')) :
-                   (product.regulatory.fda.status?.includes('510(k)') ||
-                    product.regulatory.fda.status?.includes('Cleared') ||
-                    product.regulatory.fda.status?.includes('Approved'))));
+  const hasFDA = hasActualFDAApproval(product);
   
   // Check for CE mark approval
-  const hasCE = product.certification?.toLowerCase().includes('ce') || 
-               (product.regulatory?.ce?.status === 'Approved' || 
-                product.regulatory?.ce?.status === 'Certified');
+  const hasCE = hasActualCEApproval(product);
                 
   // Check for MDR exempt status
   const hasMDRExempt = product.certification === 'MDR exempt';
   
-  return hasFDA || hasCE || hasMDRExempt;
+  // Check for investigational status if enabled
+  const isInvestigational = includeInvestigational && isInvestigationalProduct(product);
+  
+  return hasFDA || hasCE || hasMDRExempt || isInvestigational;
 };
 
 /**
@@ -90,6 +153,11 @@ export const normalizeAnatomicalLocations = (locations: string[]): string[] => {
 export const standardizeCertification = (certification: string): string => {
   // Normalize certifications to merge variations
   const cert = certification.toLowerCase().trim();
+  
+  // Handle pending/investigation status first
+  if (cert.includes('pending') || cert.includes('investigation')) {
+    return 'pending';
+  }
   
   // Handle combined certifications first
   if (cert.includes('ce') && cert.includes('fda')) {

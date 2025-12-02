@@ -29,7 +29,7 @@ const matchesTask = (product: ProductDetails, task: string): boolean => {
 
 export const useTimelineData = (filters: TimelineFilters) => {
   const productsWithApproval = useMemo(
-    () => ALL_PRODUCTS.filter(hasRegulatoryApproval),
+    () => ALL_PRODUCTS.filter(product => hasRegulatoryApproval(product)),
     []
   );
 

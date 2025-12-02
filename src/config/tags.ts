@@ -33,7 +33,9 @@ export const CERTIFICATION_TAGS = [
   'CE',
   'CE exempt',
   'MDR exempt',
-  'NMPA'
+  'NMPA',
+  'Pending',
+  'Investigation Use'
 ];
 
 // Combined certification values (for display purposes)
@@ -42,7 +44,9 @@ export const COMBINED_CERTIFICATION_TAGS = [
   'CE',
   'FDA',
   'MDR exempt',
-  'NMPA'
+  'NMPA',
+  'Pending',
+  'Investigation Use'
 ];
 
 // Mapping of certification display values to their component tags
