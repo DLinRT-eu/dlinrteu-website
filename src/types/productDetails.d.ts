@@ -45,6 +45,8 @@ export interface ProductDetails extends Product {
       regulationNumber?: string;
       productCode?: string;
       type?: string;
+      decisionDate?: string;
+      notes?: string;
     } | string; // Backward compatibility
     intendedUseStatement?: string;
   };

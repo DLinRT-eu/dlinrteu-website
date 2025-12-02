@@ -17,7 +17,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Whole body"],
     modality: "CT",
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Trauma"],
-    releaseDate: "2021-04-15",
+    releaseDate: "2019-01-15",
     version: "2.0",
     keyFeatures: [
       "Deep Convolutional Neural Network reconstruction",
@@ -48,27 +48,34 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K181862",
+        regulationNumber: "21 CFR 892.1750",
+        productCode: "JAK",
+        type: "510(k)",
+        decisionDate: "2019-01-15"
       },
       intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose while maintaining diagnostic confidence."
     },
     market: {
-      onMarketSince: "2021",
+      onMarketSince: "2019",
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
-
-},
-    clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
+    },
     evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for AiCE CT",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf"
+      },
       {
         type: "Product Information",
         description: "Official Canon AiCE Deep Learning Reconstruction product page with technical specifications and clinical benefits",
         link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
       }
     ],
+    clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
-
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website"
   },
   {
     id: "canon-aice-mr",
@@ -77,14 +84,14 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     category: "Reconstruction",
     description: "Deep learning reconstruction for MRI that accelerates scanning while improving image clarity and detail.",
     features: ["Deep learning reconstruction", "Accelerated MRI", "Enhanced SNR"],
-    certification: "CE Mark",
+    certification: "FDA Cleared",
     logoUrl: "/logos/canon.jpg",
     companyUrl: "https://global.medical.canon/",
     productUrl: "https://global.medical.canon/products/magnetic-resonance/aice",
     anatomicalLocation: ["Whole body"],
     modality: "MRI",
     diseaseTargeted: ["Neurological disorders", "Abdominal pathologies"],
-    releaseDate: "2022-02-01",
+    releaseDate: "2019-12-20",
     version: "1.5",
     keyFeatures: [
       "Deep learning-based MR reconstruction",
@@ -115,21 +122,35 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K192574",
+        regulationNumber: "21 CFR 892.1000",
+        productCode: "LNH",
+        type: "510(k)",
+        decisionDate: "2019-12-20"
       },
       intendedUseStatement: "Intended for use in MR image reconstruction to accelerate acquisition and/or enhance image quality while maintaining diagnostic confidence."
     },
     market: {
-      onMarketSince: "2022",
+      onMarketSince: "2020",
       distributionChannels: ["Integrated in new MR systems", "Upgrade option"],
-
-},
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for AiCE MR",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K192574.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official Canon AiCE MR product page",
+        link: "https://global.medical.canon/products/magnetic-resonance/aice"
+      }
+    ],
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
-    
   },
   {
     id: "canon-piqe",
@@ -138,7 +159,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     category: "Reconstruction", 
     description: "Canon Medical's high resolution Deep Learning Reconstruction for MRI. PIQE increases matrix size, removes noise, and delivers sharp anatomical images to take MR imaging to the next level.",
     features: ["Deep learning reconstruction", "High resolution MRI", "Noise reduction", "Enhanced image quality"],
-    certification: "CE Mark",
+    certification: "FDA Cleared",
     logoUrl: "/logos/canon.jpg",
     companyUrl: "https://global.medical.canon/",
     productUrl: "https://global.medical.canon/products/magnetic-resonance/piqe",
@@ -146,7 +167,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Whole body"],
     modality: "MRI",
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Abdominal pathologies"],
-    releaseDate: "2023-01-15",
+    releaseDate: "2025-01-07",
     version: "1.0",
     keyFeatures: [
       "Deep learning-based high resolution reconstruction",
@@ -177,18 +198,33 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K243335",
+        regulationNumber: "21 CFR 892.1000",
+        productCode: "LNH",
+        type: "510(k)",
+        decisionDate: "2025-01-07"
       },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance spatial resolution and image quality while maintaining diagnostic confidence."
     },
     market: {
-      onMarketSince: "2023",
+      onMarketSince: "2025",
       distributionChannels: ["Integrated in new MR systems", "Upgrade option for compatible systems"],
-
-},
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for PIQE",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243335.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official Canon PIQE product page",
+        link: "https://global.medical.canon/products/magnetic-resonance/piqe"
+      }
+    ],
     clinicalEvidence: "Clinical studies demonstrating significantly improved spatial resolution and image sharpness for enhanced diagnostic capabilities",
     lastUpdated: "2025-01-15", 
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website"
   }
 ];
