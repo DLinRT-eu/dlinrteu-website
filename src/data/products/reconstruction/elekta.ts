@@ -44,19 +44,27 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "Pending",
+        notes: "CE marked for European market; FDA 510(k) submission pending for US market access"
+      },
       intendedUseStatement: "Intended for enhancing CBCT medical images to improve quality through AI-based reconstruction to support radiotherapy treatment planning and verification."
     },
     market: {
       onMarketSince: "2022",
       distributionChannels: ["Integrated with Elekta systems", "Software upgrade"],
-
-},
+    },
+    evidence: [
+      {
+        type: "Product Information",
+        description: "Official Elekta imaging solutions product page",
+        link: "https://www.elekta.com/radiation-oncology/treatment-solutions/imaging/"
+      }
+    ],
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "Company website; FDA status pending verification",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
-
   }
 ];

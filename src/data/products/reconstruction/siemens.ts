@@ -58,8 +58,30 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Integrated in MAGNETOM MRI systems", "Software upgrade for compatible systems"]
     },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for Deep Resolve (initial)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213693.pdf"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for Deep Resolve (K232322)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232322.pdf"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for Deep Resolve (K250436)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250436.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official Siemens Healthineers Deep Resolve product page",
+        link: "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve"
+      }
+    ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     lastRevised: "2025-12-02",
-    source: "Company website and FDA 510(k) databases"
+    source: "FDA 510(k) database and company website"
   }
 ];

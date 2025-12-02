@@ -53,34 +53,41 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     market: {
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Integrated in new CT systems"],
-
-},
+    },
+    evidence: [
+      {
+        type: "Product Information",
+        description: "Official Philips CT Smart Workflow product page",
+        link: "https://www.philips.com/healthcare/technology/ct-smart-workflow"
+      }
+    ],
     clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "Company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
-
   },
   {
     id: "philips-smartspeed",
     name: "SmartSpeed",
     company: "Philips",
     category: "Reconstruction",
-    description: "MRI acceleration technology using deep learning reconstruction algorithms to reduce scan times while maintaining image quality.",
-    features: ["Deep learning-based", "Fast acquisition", "MRI modality"],
-    certification: "CE Mark",
+    description: "MRI acceleration technology using deep learning reconstruction algorithms to reduce scan times while maintaining image quality. Features AI-based denoising and sharpening for up to 3x faster scanning with up to 80% sharper images.",
+    features: ["Deep learning-based", "Fast acquisition", "MRI modality", "AI denoising"],
+    certification: "FDA Cleared",
     logoUrl: "/logos/philips.png",
     companyUrl: "https://www.philips.com/healthcare",
-    productUrl: "https://www.philips.com/healthcare/education-resources/publications/fieldstrength/compressed-sense",
+    productUrl: "https://www.philips.com/healthcare/resources/landing/smartspeed",
     anatomicalLocation: ["Whole body"],
     modality: "MRI",
     diseaseTargeted: ["Multiple sclerosis", "Cancer", "Musculoskeletal disorders"],
     releaseDate: "2021-06-15",
     version: "3.2",
     keyFeatures: [
-      "Up to 50% faster scanning times",
+      "Up to 3x faster scanning times",
+      "Up to 80% sharper images with AI enhancement",
       "Deep learning reconstruction for undersampled data",
+      "Compressed SENSE AI acceleration",
       "Compatible with all anatomical regions",
       "Works with all contrasts (T1, T2, FLAIR, etc.)",
       "Maintains spatial resolution and image contrast"
@@ -107,20 +114,34 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K251397",
+        regulationNumber: "21 CFR 892.1000",
+        productCode: "LNH",
+        type: "510(k)",
+        decisionDate: "2025-06-06"
       },
       intendedUseStatement: "Intended for use in accelerated MRI acquisition and reconstruction to reduce scan times while maintaining diagnostic image quality."
     },
     market: {
       onMarketSince: "2021",
       distributionChannels: ["Integrated in Philips MRI systems", "Software upgrade"],
-
-},
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for SmartSpeed Precise",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251397.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official Philips SmartSpeed product page",
+        link: "https://www.philips.com/healthcare/resources/landing/smartspeed"
+      }
+    ],
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",
     lastUpdated: "2025-07-30", 
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
-
   }
 ];

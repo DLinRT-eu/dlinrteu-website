@@ -16,7 +16,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Whole body"],
     modality: "CT",
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Traumatic injuries"],
-    releaseDate: "2021-10-01",
+    releaseDate: "2019-04-12",
     version: "2.1",
     keyFeatures: [
       "Deep learning-based image reconstruction",
@@ -47,19 +47,34 @@ export const GE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K183202",
+        regulationNumber: "21 CFR 892.1750",
+        productCode: "JAK",
+        type: "510(k)",
+        decisionDate: "2019-04-12"
       },
       intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose compared to conventional reconstruction techniques."
     },
     market: {
-      onMarketSince: "2021",
+      onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Integrated in new CT systems"],
-
-},
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for TrueFidelity",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183202.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official GE Healthcare TrueFidelity product page",
+        link: "https://www.gehealthcare.com/products/computed-tomography/revolution/truefidelity"
+      }
+    ],
     clinicalEvidence: "Multiple clinical studies showing diagnostic equivalence at up to 82% lower dose compared to conventional techniques",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
   {
@@ -76,7 +91,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Whole body"],
     modality: "MRI",
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Abdominal pathologies"],
-    releaseDate: "2020-08-15",
+    releaseDate: "2020-04-10",
     version: "3.0",
     keyFeatures: [
       "Deep learning-based MR image reconstruction",
@@ -107,19 +122,39 @@ export const GE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        clearanceNumber: "K193282, K213717",
+        regulationNumber: "21 CFR 892.1000",
+        productCode: "LNH",
+        type: "510(k)",
+        decisionDate: "2020-04-10"
       },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance signal-to-noise ratio and/or reduce scan time while maintaining diagnostic image quality."
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Integrated in new MR systems", "Upgrade for compatible systems"],
-
-},
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for AIR Recon DL (initial)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for AIR Recon DL (expanded)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official GE Healthcare AIR Recon DL product page",
+        link: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl"
+      }
+    ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2025-12-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }
 ];
