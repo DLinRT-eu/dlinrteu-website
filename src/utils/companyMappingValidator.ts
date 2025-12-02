@@ -126,8 +126,18 @@ export async function validateCompanyMappings(
   });
 
   // Check 3: Representatives for companies not in the product catalog
+  // Skip admin oversight representatives - they have global certification privileges
+  const ADMIN_OVERSIGHT_COMPANY_NAME = 'ADMIN_OVERSIGHT';
+  const ADMIN_OVERSIGHT_COMPANY_ID = 'admin_all_companies';
+  
   const productCompanies = new Set(products.map(p => p.company));
   representatives?.forEach(rep => {
+    // Skip admin oversight representatives - they can certify all companies
+    if (rep.company_name === ADMIN_OVERSIGHT_COMPANY_NAME || 
+        rep.company_id === ADMIN_OVERSIGHT_COMPANY_ID) {
+      return;
+    }
+    
     if (!productCompanies.has(rep.company_name)) {
       issues.push({
         type: 'orphaned_representative',
