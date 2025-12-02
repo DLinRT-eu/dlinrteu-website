@@ -45,7 +45,8 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "siemens-syngo-ct", 
       "siemens-ai-rad-companion", 
       "directorgans",
-      "siemens-dual-energy-optimizer"
+      "siemens-dual-energy-optimizer",
+      "siemens-deep-resolve"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/siemens.png"
