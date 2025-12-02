@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage } from "lucide-react";
+import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle } from "lucide-react";
 import type { ProductDetails as ProductDetailsType } from "@/types/productDetails";
 import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
@@ -19,6 +19,7 @@ import UserRelationships from "./product/UserRelationships";
 import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
+import { isInvestigationalProduct } from "@/utils/productFilters";
 
 interface ProductDetailsProps {
   product: ProductDetailsType;
@@ -26,6 +27,7 @@ interface ProductDetailsProps {
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   const navigate = useNavigate();
+  const isInvestigational = isInvestigationalProduct(product);
 
   const handleExportExcel = () => {
     import("@/utils/modelCard").then(({ exportModelCardToExcel }) => {
@@ -66,6 +68,26 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 md:px-8 py-8 space-y-8">
+      
+      {/* Investigational Product Warning Banner */}
+      {isInvestigational && (
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6">
+          <div className="flex items-start">
+            <AlertTriangle className="h-6 w-6 text-amber-600 mr-3 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="text-amber-800 font-semibold text-lg">Investigation Use Only</h3>
+              <p className="text-amber-700 mt-1">
+                This product is currently in investigational/testing phase and has not yet received CE marking or FDA clearance. 
+                It should only be used for research or investigation purposes and is <strong>not approved for clinical use</strong>.
+              </p>
+              <p className="text-amber-600 text-sm mt-2">
+                Always verify regulatory status with the manufacturer before use.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="flex justify-between items-center">
         <ProductHeaderInfo product={product} />
         <Button 

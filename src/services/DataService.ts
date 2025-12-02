@@ -107,7 +107,7 @@ class DataService {
   filterProducts(filters: FilterState): ProductDetails[] {
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     return productList.filter((product: ProductDetails) => {
-      // First check regulatory approval
+      // First check regulatory approval (includes investigational by default)
       if (!hasRegulatoryApproval(product)) {
         return false;
       }
@@ -125,11 +125,16 @@ class DataService {
         }
       }
       
-      // Standardize certification check - handle merged certifications
+      // Standardize certification check - handle merged certifications and pending
       if (filters.certifications?.length) {
         const productCert = standardizeCertification(product.certification || '');
+        const isPending = product.certification?.toLowerCase().includes('pending') ||
+                         product.certification?.toLowerCase().includes('investigation');
+        
         if (!filters.certifications.some(cert => {
           const filterCert = standardizeCertification(cert);
+          // Match pending products with "Pending" filter
+          if (filterCert === 'pending' && isPending) return true;
           return filterCert === productCert;
         })) {
           return false;
