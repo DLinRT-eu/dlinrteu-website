@@ -1827,11 +1827,13 @@ export type Database = {
         Returns: {
           created_at: string
           details: Json
-          email: string
           event_type: string
           id: string
+          ip_hash: string
+          notes: string
+          resolved_at: string
           severity: string
-          user_id: string
+          url: string
         }[]
       }
       get_user_role_secure: {
