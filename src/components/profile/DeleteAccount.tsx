@@ -22,7 +22,7 @@ export const DeleteAccount = () => {
   const requiresMFA = profile?.mfa_enabled;
 
   const handleDelete = async () => {
-    if (!user?.email || !password) {
+    if (!password) {
       toast({
         title: 'Missing information',
         description: 'Please enter your password',
@@ -42,15 +42,7 @@ export const DeleteAccount = () => {
 
     setLoading(true);
     try {
-      // Re-authenticate
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: user.email,
-        password,
-      });
-
-      if (signInError) throw new Error('Invalid password');
-
-      // Verify MFA if enabled
+      // Verify MFA if enabled (before calling edge function)
       if (requiresMFA && mfaCode) {
         const { data: factors } = await supabase.auth.mfa.listFactors();
         const factor = factors?.totp?.find((f) => f.status === 'verified');
@@ -72,31 +64,22 @@ export const DeleteAccount = () => {
         }
       }
 
-      // Mark account for deletion (soft delete - actual deletion after 30 days)
-      const { error: deleteError } = await supabase
-        .from('profiles')
-        .update({
-          public_display: false,
-          bio: null,
-          specialization: null,
-          institution: null,
-          linkedin_url: null,
-        })
-        .eq('id', user.id);
+      // Call the delete-account edge function
+      const { data, error } = await supabase.functions.invoke('delete-account', {
+        body: { password }
+      });
 
-      if (deleteError) throw deleteError;
+      if (error) {
+        throw new Error(error.message || 'Failed to delete account');
+      }
 
-      // Delete user (this will cascade to related tables)
-      const { error: authDeleteError } = await supabase.auth.admin.deleteUser(user.id);
-      
-      if (authDeleteError) {
-        // If admin delete fails, we at least anonymized the profile
-        console.error('Error deleting user:', authDeleteError);
+      if (data?.error) {
+        throw new Error(data.error);
       }
 
       toast({
-        title: 'Account deletion initiated',
-        description: 'Your account has been scheduled for deletion.',
+        title: 'Account deleted',
+        description: 'Your account has been permanently deleted.',
       });
 
       await signOut();
@@ -127,7 +110,7 @@ export const DeleteAccount = () => {
         <CardContent>
           <Alert variant="destructive" className="mb-4">
             <AlertDescription>
-              This action cannot be undone. All your data will be permanently deleted after 30 days.
+              This action cannot be undone. All your data will be permanently deleted immediately.
             </AlertDescription>
           </Alert>
           <Button
@@ -150,7 +133,7 @@ export const DeleteAccount = () => {
           <div className="space-y-4">
             <Alert variant="destructive">
               <AlertDescription>
-                Your account will be scheduled for permanent deletion in 30 days. During this time, your data will be inaccessible.
+                Your account and all associated data will be permanently deleted immediately. This action cannot be reversed.
               </AlertDescription>
             </Alert>
 
