@@ -25,12 +25,13 @@ import { RoleQuickActions } from '@/components/profile/RoleQuickActions';
 import { ReviewerProfileSummary } from '@/components/profile/ReviewerProfileSummary';
 import { CompanyProfileSummary } from '@/components/profile/CompanyProfileSummary';
 import { User, Mail, Building2, Briefcase, Shield, AlertCircle, RefreshCw } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
   const { user, profile, updateProfile, signOut, resendVerificationEmail, loading, profileLoading, refreshProfile } = useAuth();
   const { roles, highestRole, isAdmin, isReviewer, isCompany, activeRole, setActiveRole } = useRoles();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [saving, setSaving] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const [resendingEmail, setResendingEmail] = useState(false);
@@ -277,7 +278,7 @@ export default function Profile() {
           </div>
           <Button variant="outline" onClick={async () => {
             await signOut();
-            window.location.href = '/';
+            navigate('/');
           }}>
             Sign Out
           </Button>
