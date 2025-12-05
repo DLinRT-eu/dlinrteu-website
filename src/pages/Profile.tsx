@@ -275,7 +275,10 @@ export default function Profile() {
             <h1 className="text-3xl font-bold">My Profile</h1>
             <p className="text-muted-foreground mt-2">Manage your account settings and preferences</p>
           </div>
-          <Button variant="outline" onClick={signOut}>
+          <Button variant="outline" onClick={async () => {
+            await signOut();
+            window.location.href = '/';
+          }}>
             Sign Out
           </Button>
         </div>

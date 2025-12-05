@@ -34,6 +34,7 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     if (!userId) {
       setRoles([]);
       setActiveRoleState(null);
+      localStorage.removeItem('activeRole');
       setLoading(false);
       return;
     }

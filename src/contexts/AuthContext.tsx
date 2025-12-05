@@ -169,14 +169,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (error) {
         console.error('[Auth] Sign out error:', error.message);
-        return;
       }
 
-      console.log('[Auth] Sign out successful');
+      // Clear all auth-related localStorage
+      localStorage.removeItem('activeRole');
+      localStorage.removeItem('dlinrt-auth-token');
+      
+      console.log('[Auth] Sign out successful, localStorage cleared');
       setUser(null);
       setSession(null);
     } catch (error) {
       console.error('[Auth] Sign out exception:', error);
+      // Still clear state even on error
+      localStorage.removeItem('activeRole');
+      localStorage.removeItem('dlinrt-auth-token');
+      setUser(null);
+      setSession(null);
     }
   };
 
