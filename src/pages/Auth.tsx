@@ -568,7 +568,7 @@ export default function Auth() {
                         </p>
                       </div>
                     </div>
-                    {!dataProcessingConsent && (
+                    {!dataProcessingConsent && !successMessage && (
                       <Alert variant="default" className="bg-amber-50 border-amber-200 dark:bg-amber-950 dark:border-amber-800">
                         <AlertTriangle className="h-4 w-4 text-amber-600" />
                         <AlertDescription className="text-xs text-amber-800 dark:text-amber-200">
