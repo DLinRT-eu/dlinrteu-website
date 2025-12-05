@@ -45,7 +45,8 @@ const signupSchema = z.object({
     .trim(),
   dataProcessingConsent: z.boolean().refine(val => val === true, {
     message: 'You must consent to data processing to create an account'
-  })
+  }),
+  requestedRoles: z.array(z.enum(['reviewer', 'company'])).optional().default([]),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -78,6 +79,7 @@ export default function Auth() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dataProcessingConsent, setDataProcessingConsent] = useState(false);
+  const [requestedRoles, setRequestedRoles] = useState<('reviewer' | 'company')[]>([]);
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -189,6 +191,7 @@ export default function Auth() {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         dataProcessingConsent,
+        requestedRoles,
       });
       
       // Check if email is institutional and show warning if not
@@ -215,6 +218,7 @@ export default function Auth() {
           lastName: validation.lastName,
           dataProcessingConsent: true,
           consentTimestamp: new Date().toISOString(),
+          requestedRoles: validation.requestedRoles,
         }
       );
       
@@ -230,6 +234,7 @@ export default function Auth() {
         setFirstName('');
         setLastName('');
         setDataProcessingConsent(false);
+        setRequestedRoles([]);
       }
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -447,6 +452,81 @@ export default function Auth() {
                       >
                         {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
+                    </div>
+                  </div>
+                  
+                  {/* Role Selection Section */}
+                  <div className="space-y-3 rounded-lg border p-4 bg-muted/50">
+                    <div className="space-y-1">
+                      <Label className="text-sm font-medium">Desired Role(s) <span className="text-muted-foreground font-normal">(optional)</span></Label>
+                      <p className="text-xs text-muted-foreground">
+                        Select any additional roles you'd like to request. All role requests require admin approval. 
+                        By default, you'll have basic user access to browse products.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="flex items-start space-x-3">
+                        <Checkbox 
+                          id="role-user"
+                          checked={true}
+                          disabled={true}
+                        />
+                        <div className="space-y-0.5">
+                          <label htmlFor="role-user" className="text-sm font-medium text-muted-foreground">
+                            User (default)
+                          </label>
+                          <p className="text-xs text-muted-foreground">
+                            Browse products, save favorites, view documentation
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-3">
+                        <Checkbox 
+                          id="role-reviewer"
+                          checked={requestedRoles.includes('reviewer')}
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              setRequestedRoles([...requestedRoles, 'reviewer']);
+                            } else {
+                              setRequestedRoles(requestedRoles.filter(r => r !== 'reviewer'));
+                            }
+                          }}
+                          disabled={loading}
+                        />
+                        <div className="space-y-0.5">
+                          <label htmlFor="role-reviewer" className="text-sm font-medium cursor-pointer">
+                            Reviewer
+                          </label>
+                          <p className="text-xs text-muted-foreground">
+                            Review and validate product information, participate in review rounds
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-3">
+                        <Checkbox 
+                          id="role-company"
+                          checked={requestedRoles.includes('company')}
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              setRequestedRoles([...requestedRoles, 'company']);
+                            } else {
+                              setRequestedRoles(requestedRoles.filter(r => r !== 'company'));
+                            }
+                          }}
+                          disabled={loading}
+                        />
+                        <div className="space-y-0.5">
+                          <label htmlFor="role-company" className="text-sm font-medium cursor-pointer">
+                            Company Representative
+                          </label>
+                          <p className="text-xs text-muted-foreground">
+                            Manage your company's product listings, certify product information
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   

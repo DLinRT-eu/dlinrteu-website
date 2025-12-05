@@ -11,6 +11,7 @@ interface SignUpData {
   lastName: string;
   dataProcessingConsent?: boolean;
   consentTimestamp?: string;
+  requestedRoles?: ('reviewer' | 'company')[];
 }
 
 interface AuthContextType {
@@ -142,6 +143,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             last_name: data.lastName,
             dataProcessingConsent: data.dataProcessingConsent,
             consentTimestamp: data.consentTimestamp,
+            requested_roles: data.requestedRoles || [],
           },
         },
       });
