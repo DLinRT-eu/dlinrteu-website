@@ -450,49 +450,38 @@ export default function UserManagement() {
     setDeleteLoading(true);
 
     try {
-      // Log the deletion attempt first (before actual deletion)
-      const { error: logError } = await supabase.rpc('log_admin_action', {
-        p_action_type: 'user_deleted',
-        p_target_user_id: deleteDialog.userId,
-        p_target_user_email: deleteDialog.userEmail,
-        p_details: {
-          target_user_name: deleteDialog.userName,
-          timestamp: new Date().toISOString(),
-          reason: 'admin_deletion'
-        }
+      // Call edge function for admin user deletion
+      const { data, error } = await supabase.functions.invoke('admin-delete-user', {
+        body: { targetUserId: deleteDialog.userId }
       });
-
-      if (logError) {
-        console.error('Error logging deletion:', logError);
-        // Continue with deletion even if logging fails
-      }
-
-      const { error } = await supabase.auth.admin.deleteUser(deleteDialog.userId);
 
       if (error) {
         console.error('Error deleting user:', error);
-        
-        let errorMessage = 'Failed to delete user';
-        if (error.message.includes('permission') || error.message.includes('authorized')) {
-          errorMessage = 'Permission denied. You may not have sufficient privileges';
-        } else if (error.message) {
-          errorMessage = error.message;
-        }
-        
         toast({
           title: 'Error',
-          description: errorMessage,
+          description: error.message || 'Failed to delete user',
           variant: 'destructive',
         });
-      } else {
-        toast({
-          title: 'Success',
-          description: `User ${deleteDialog.userName} has been permanently deleted`,
-        });
-        await fetchUsers();
-        setDeleteDialog(null);
-        setDeleteConfirmEmail('');
+        return;
       }
+
+      if (data?.error) {
+        console.error('Error from edge function:', data.error);
+        toast({
+          title: 'Error',
+          description: data.error,
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      toast({
+        title: 'Success',
+        description: `User ${deleteDialog.userName} has been permanently deleted`,
+      });
+      await fetchUsers();
+      setDeleteDialog(null);
+      setDeleteConfirmEmail('');
     } catch (error: any) {
       console.error('Unexpected error deleting user:', error);
       toast({
