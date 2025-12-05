@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut } from 'lucide-react';
@@ -10,12 +9,14 @@ import { Avatar, AvatarFallback } from './ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
+import { useToast } from '@/hooks/use-toast';
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, profile, signOut } = useAuth();
   const { roles, activeRole, setActiveRole } = useRoles();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const canSwitchRoles = roles.length > 1;
   
   const handleLinkClick = () => {
@@ -32,6 +33,10 @@ const MobileNav = () => {
     await signOut();
     setIsOpen(false);
     navigate('/');
+    toast({
+      title: "Signed out",
+      description: "You have been signed out successfully.",
+    });
   };
 
   return (
