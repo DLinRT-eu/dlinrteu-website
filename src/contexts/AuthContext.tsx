@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
+import { useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useProfile, Profile } from '@/hooks/useProfile';
 
@@ -44,6 +45,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
   
   // Use the useProfile hook to manage profile data (legacy profiles table)
   const { profile, loading: profileLoading, updateProfile: updateProfileData, refetch: refreshProfile } = useProfile(user?.id || null);
@@ -175,7 +177,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.removeItem('activeRole');
       localStorage.removeItem('dlinrt-auth-token');
       
-      console.log('[Auth] Sign out successful, localStorage cleared');
+      // Clear React Query cache to remove stale data
+      queryClient.clear();
+      
+      console.log('[Auth] Sign out successful, localStorage and cache cleared');
       setUser(null);
       setSession(null);
     } catch (error) {
@@ -183,6 +188,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // Still clear state even on error
       localStorage.removeItem('activeRole');
       localStorage.removeItem('dlinrt-auth-token');
+      queryClient.clear();
       setUser(null);
       setSession(null);
     }
