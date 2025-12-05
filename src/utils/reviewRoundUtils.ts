@@ -268,64 +268,96 @@ function calculateRandomAssignments(
 }
 
 /**
- * Expertise-first assignment (legacy)
+ * Expertise-first assignment with task continuity
+ * Prioritizes expertise matches, then adds task continuity bonus during selection
  */
 function calculateExpertiseFirstAssignments(
   products: any[],
   reviewers: ReviewerWithExpertise[],
   productsMap: Map<string, any>
 ): Array<{ product_id: string; assigned_to: string; match_score: number }> {
-  const scoredPairs: Array<{
-    productId: string;
-    reviewerId: string;
-    score: number;
-  }> = [];
-
+  // Pre-calculate base expertise scores for all pairs
+  const baseScores = new Map<string, number>();
+  
   for (const product of products) {
     for (const reviewer of reviewers) {
-      const score = calculateMatchScore(product, reviewer.expertise);
-      scoredPairs.push({
-        productId: product.id,
-        reviewerId: reviewer.user_id,
-        score,
-      });
+      const key = `${product.id}:${reviewer.user_id}`;
+      baseScores.set(key, calculateMatchScore(product, reviewer.expertise));
     }
   }
-
-  scoredPairs.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
-    const workloadA = reviewers.find(r => r.user_id === a.reviewerId)?.current_workload || 0;
-    const workloadB = reviewers.find(r => r.user_id === b.reviewerId)?.current_workload || 0;
-    return workloadA - workloadB;
-  });
 
   const assignments: Array<{ product_id: string; assigned_to: string; match_score: number }> = [];
   const assignedProducts = new Set<string>();
   const reviewerWorkload = new Map<string, number>();
+  const reviewerAssignedCategories = new Map<string, Set<string>>();
   
-  reviewers.forEach(r => reviewerWorkload.set(r.user_id, r.current_workload));
+  reviewers.forEach(r => {
+    reviewerWorkload.set(r.user_id, r.current_workload);
+    reviewerAssignedCategories.set(r.user_id, new Set());
+  });
 
-  for (const pair of scoredPairs) {
-    if (assignedProducts.has(pair.productId)) continue;
+  // Sort products by category first to help natural grouping
+  const sortedProducts = [...products].sort((a, b) => 
+    (a.category || '').localeCompare(b.category || '')
+  );
+
+  // Assign each product to the best available reviewer
+  for (const product of sortedProducts) {
+    if (assignedProducts.has(product.id)) continue;
     
-    assignments.push({
-      product_id: pair.productId,
-      assigned_to: pair.reviewerId,
-      match_score: pair.score,
-    });
+    let bestReviewer: string | null = null;
+    let bestScore = -1;
+    let bestWorkload = Infinity;
     
-    assignedProducts.add(pair.productId);
-    reviewerWorkload.set(
-      pair.reviewerId,
-      (reviewerWorkload.get(pair.reviewerId) || 0) + 1
-    );
+    for (const reviewer of reviewers) {
+      const key = `${product.id}:${reviewer.user_id}`;
+      let score = baseScores.get(key) || 0;
+      
+      // Add task continuity bonus (5 points)
+      const assignedCategories = reviewerAssignedCategories.get(reviewer.user_id);
+      if (assignedCategories?.has(product.category)) {
+        score += TASK_CONTINUITY_BONUS;
+      }
+      
+      const workload = reviewerWorkload.get(reviewer.user_id) || 0;
+      
+      // Select best: highest score, then lowest workload
+      if (score > bestScore || (score === bestScore && workload < bestWorkload)) {
+        bestScore = score;
+        bestReviewer = reviewer.user_id;
+        bestWorkload = workload;
+      }
+    }
+    
+    if (bestReviewer) {
+      assignments.push({
+        product_id: product.id,
+        assigned_to: bestReviewer,
+        match_score: Math.floor(bestScore),
+      });
+      
+      assignedProducts.add(product.id);
+      reviewerWorkload.set(bestReviewer, (reviewerWorkload.get(bestReviewer) || 0) + 1);
+      
+      if (product.category) {
+        reviewerAssignedCategories.get(bestReviewer)?.add(product.category);
+      }
+    }
   }
 
   return assignments;
 }
 
+// Task continuity bonus - lower priority than expertise (5 points vs 10-100 for expertise)
+const TASK_CONTINUITY_BONUS = 5;
+
 /**
  * Balanced assignment with preferences and task grouping
+ * Priority hierarchy:
+ * 1. Product expertise match: 100 points
+ * 2. Company expertise match: 50 points  
+ * 3. Category expertise match: 10 points
+ * 4. Task continuity (same category already assigned): 5 points
  */
 function calculateBalancedAssignments(
   products: any[],
@@ -333,7 +365,12 @@ function calculateBalancedAssignments(
   productsMap: Map<string, any>
 ): Array<{ product_id: string; assigned_to: string; match_score: number }> {
   const assignments: Array<{ product_id: string; assigned_to: string; match_score: number }> = [];
-  const remainingProducts = new Set(products.map(p => p.id));
+  
+  // Sort products by category to help natural grouping
+  const sortedProducts = [...products].sort((a, b) => 
+    (a.category || '').localeCompare(b.category || '')
+  );
+  const remainingProducts = new Set(sortedProducts.map(p => p.id));
   
   const targetPerReviewer = Math.floor(products.length / reviewers.length);
   const remainder = products.length % reviewers.length;
@@ -349,18 +386,16 @@ function calculateBalancedAssignments(
     reviewerAssignedCategories.set(reviewer.user_id, new Set());
   });
   
-  const hasExpertise = (reviewer: ReviewerWithExpertise) => {
-    return reviewer.expertise.length > 0;
-  };
-  
-  const calculateTaskGroupScore = (product: any, reviewerId: string): number => {
+  // Calculate task continuity bonus - applies to ALL reviewers
+  const calculateTaskContinuityBonus = (product: any, reviewerId: string): number => {
     const assignedCategories = reviewerAssignedCategories.get(reviewerId);
     if (!assignedCategories || assignedCategories.size === 0) {
       return 0;
     }
     
+    // If reviewer already has products from this category, add continuity bonus
     if (assignedCategories.has(product.category)) {
-      return 10;
+      return TASK_CONTINUITY_BONUS;
     }
     return 0;
   };
@@ -384,14 +419,13 @@ function calculateBalancedAssignments(
         const product = productsMap.get(productId);
         if (!product) continue;
         
-        let score: number;
+        // Start with expertise score (0-100+ points)
+        let score = calculateMatchScore(product, reviewer.expertise);
         
-        if (hasExpertise(reviewer)) {
-          score = calculateMatchScore(product, reviewer.expertise);
-        } else {
-          score = calculateTaskGroupScore(product, reviewer.user_id);
-        }
+        // Always add task continuity bonus (5 points) - acts as tie-breaker
+        score += calculateTaskContinuityBonus(product, reviewer.user_id);
         
+        // Random tiebreaker for equal scores
         score += Math.random() * 0.1;
         
         if (score > bestScore) {
