@@ -19,7 +19,7 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.notify-reviewer-assignment]
-verify_jwt = false
+verify_jwt = true
 
 [functions.generate-changelog]
 verify_jwt = true
