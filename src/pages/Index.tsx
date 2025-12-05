@@ -16,7 +16,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ArrowRight, BarChart3, Building2, FileText, Package, Info } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, FileText, Package } from "lucide-react";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -65,9 +65,6 @@ const Index = () => {
     count: products.filter(p => p.category === category).length
   }));
 
-  // Check if migration notice should be displayed (until December 15, 2025)
-  const showMigrationNotice = new Date() < new Date('2025-12-15');
-
   // Public landing page
   return (
     <div className="min-h-screen bg-white">
@@ -77,31 +74,6 @@ const Index = () => {
         canonical="https://dlinrt.eu/"
         structuredData={structuredData}
       />
-      
-      {/* Repository Migration Notice */}
-      {showMigrationNotice && (
-        <div className="bg-blue-50 border-b border-blue-200">
-          <div className="max-w-7xl mx-auto px-4 py-3">
-            <Alert className="border-blue-300 bg-transparent">
-              <Info className="h-4 w-4 text-blue-600" />
-              <AlertTitle className="text-blue-900 font-semibold">Repository URL Updated</AlertTitle>
-              <AlertDescription className="text-blue-800">
-                Our GitHub repository has moved! Please update your bookmarks and links from{' '}
-                <code className="bg-blue-100 px-1.5 py-0.5 rounded text-sm">DLinRT-eu/website</code> to{' '}
-                <a 
-                  href="https://github.com/DLinRT-eu/dlinrteu-website" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="font-semibold underline hover:text-blue-900"
-                >
-                  DLinRT-eu/dlinrteu-website
-                </a>
-                . All issues, pull requests, and documentation have been migrated.
-              </AlertDescription>
-            </Alert>
-          </div>
-        </div>
-      )}
       
       <IntroSection />
       
