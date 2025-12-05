@@ -136,7 +136,14 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={signOut}>Sign Out</DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => {
+                  await signOut();
+                  navigate('/');
+                  toast({
+                    title: "Signed out",
+                    description: "You have been signed out successfully.",
+                  });
+                }}>Sign Out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (

@@ -28,9 +28,10 @@ const MobileNav = () => {
     setIsOpen(false);
   };
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     setIsOpen(false);
+    navigate('/');
   };
 
   return (
