@@ -85,6 +85,10 @@ export default function UserRegistrationReview() {
       return <Badge variant="destructive"><XCircle className="h-3 w-3 mr-1" /> Blocked</Badge>;
     }
     
+    if (notification.notification_status === 'rejected') {
+      return <Badge className="bg-orange-500"><XCircle className="h-3 w-3 mr-1" /> Rejected</Badge>;
+    }
+    
     if (notification.notification_status === 'failed') {
       return <Badge variant="destructive"><AlertCircle className="h-3 w-3 mr-1" /> Failed</Badge>;
     }
@@ -107,9 +111,14 @@ export default function UserRegistrationReview() {
     );
   }
 
-  const pendingNotifications = notifications.filter(n => !n.verified && n.notification_status !== 'blocked');
+  const pendingNotifications = notifications.filter(n => 
+    !n.verified && 
+    n.notification_status !== 'blocked' && 
+    n.notification_status !== 'rejected'
+  );
   const verifiedNotifications = notifications.filter(n => n.verified);
   const blockedNotifications = notifications.filter(n => n.notification_status === 'blocked');
+  const rejectedNotifications = notifications.filter(n => n.notification_status === 'rejected');
 
   return (
     <div className="space-y-6">
@@ -121,7 +130,7 @@ export default function UserRegistrationReview() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-200">
               <div className="text-2xl font-bold text-yellow-700">{pendingNotifications.length}</div>
               <div className="text-sm text-yellow-600">Pending Review</div>
@@ -129,6 +138,10 @@ export default function UserRegistrationReview() {
             <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
               <div className="text-2xl font-bold text-green-700">{verifiedNotifications.length}</div>
               <div className="text-sm text-green-600">Verified</div>
+            </div>
+            <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+              <div className="text-2xl font-bold text-orange-700">{rejectedNotifications.length}</div>
+              <div className="text-sm text-orange-600">Rejected</div>
             </div>
             <div className="text-center p-4 bg-red-50 rounded-lg border border-red-200">
               <div className="text-2xl font-bold text-red-700">{blockedNotifications.length}</div>
@@ -256,6 +269,34 @@ export default function UserRegistrationReview() {
                     </div>
                   </div>
                   <Badge className="bg-green-600">Verified</Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Rejected Registrations */}
+      {rejectedNotifications.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Rejected Registrations ({rejectedNotifications.length})</CardTitle>
+            <CardDescription>Registrations manually rejected by administrators</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {rejectedNotifications.slice(0, 10).map((notification) => (
+                <div key={notification.id} className="flex items-center justify-between p-3 bg-orange-50 rounded-lg border border-orange-200">
+                  <div className="flex items-center gap-4">
+                    <XCircle className="h-5 w-5 text-orange-600" />
+                    <div>
+                      <div className="font-medium text-sm">{notification.email}</div>
+                      <div className="text-xs text-gray-600">
+                        Rejected {notification.verified_at ? new Date(notification.verified_at).toLocaleDateString() : 'N/A'}
+                      </div>
+                    </div>
+                  </div>
+                  <Badge className="bg-orange-600">Rejected</Badge>
                 </div>
               ))}
             </div>
