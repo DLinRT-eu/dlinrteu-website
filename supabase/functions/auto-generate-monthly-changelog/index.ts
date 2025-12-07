@@ -3,7 +3,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': 'https://dlinrt.eu',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-cron-secret',
   'Access-Control-Allow-Credentials': 'true',
 };
 
@@ -14,10 +14,64 @@ serve(async (req) => {
   }
 
   try {
+    // Authentication: Require either admin JWT or cron secret
+    const authHeader = req.headers.get('Authorization');
+    const cronSecret = req.headers.get('x-cron-secret');
+    const expectedCronSecret = Deno.env.get('CRON_SECRET');
+
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
+
+    let isAuthorized = false;
+
+    // Option 1: Validate cron secret (for scheduled jobs)
+    if (cronSecret && expectedCronSecret && cronSecret === expectedCronSecret) {
+      console.log('Authenticated via cron secret');
+      isAuthorized = true;
+    }
+
+    // Option 2: Validate admin JWT
+    if (!isAuthorized && authHeader) {
+      const token = authHeader.replace('Bearer ', '');
+      const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+
+      if (authError || !user) {
+        console.error('JWT validation failed:', authError?.message);
+        return new Response(
+          JSON.stringify({ error: 'Invalid authentication token' }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 401 }
+        );
+      }
+
+      // Verify admin role
+      const { data: roles } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
+        .eq('role', 'admin');
+
+      if (roles && roles.length > 0) {
+        console.log('Authenticated as admin:', user.email);
+        isAuthorized = true;
+      } else {
+        console.error('User is not an admin:', user.email);
+        return new Response(
+          JSON.stringify({ error: 'Admin access required' }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 403 }
+        );
+      }
+    }
+
+    // Reject if neither authentication method succeeded
+    if (!isAuthorized) {
+      console.error('No valid authentication provided');
+      return new Response(
+        JSON.stringify({ error: 'Authentication required. Provide admin JWT or cron secret.' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 401 }
+      );
+    }
 
     // Calculate last month's date range
     const now = new Date();
