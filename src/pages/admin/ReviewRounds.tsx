@@ -36,8 +36,20 @@ import {
   Archive,
   Download,
   FileSpreadsheet,
-  FileText
+  FileText,
+  Trash2,
+  AlertTriangle
 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import {
   createReviewRound,
   bulkAssignProducts,
@@ -89,6 +101,13 @@ export default function ReviewRounds() {
   const [selectedReviewers, setSelectedReviewers] = useState<any[]>([]);
   const [exporting, setExporting] = useState(false);
   const [selectedRounds, setSelectedRounds] = useState<Set<string>>(new Set());
+  const [cleanupLoading, setCleanupLoading] = useState(false);
+  const [showCleanupDialog, setShowCleanupDialog] = useState(false);
+  const [cleanupPreview, setCleanupPreview] = useState<{
+    duplicateProducts: number;
+    reviewsToDelete: number;
+    totalReviews: number;
+  } | null>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -347,6 +366,56 @@ export default function ReviewRounds() {
     }
   };
 
+  const handleCleanupPreview = async () => {
+    setCleanupLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('admin-cleanup-duplicate-reviews', {
+        body: { execute: false }
+      });
+      
+      if (error) throw error;
+      
+      if (data.duplicateProducts === 0) {
+        toast.success('No duplicate assignments found');
+        return;
+      }
+      
+      setCleanupPreview({
+        duplicateProducts: data.duplicateProducts,
+        reviewsToDelete: data.reviewsToDelete,
+        totalReviews: data.totalReviews
+      });
+      setShowCleanupDialog(true);
+    } catch (error) {
+      console.error('Error checking duplicates:', error);
+      toast.error('Failed to check for duplicates');
+    } finally {
+      setCleanupLoading(false);
+    }
+  };
+
+  const handleCleanupExecute = async () => {
+    setCleanupLoading(true);
+    const toastId = toast.loading('Cleaning up duplicate assignments...');
+    try {
+      const { data, error } = await supabase.functions.invoke('admin-cleanup-duplicate-reviews', {
+        body: { execute: true }
+      });
+      
+      if (error) throw error;
+      
+      toast.success(`Cleaned up ${data.deletedCount} duplicate assignments`, { id: toastId });
+      setShowCleanupDialog(false);
+      setCleanupPreview(null);
+      fetchRounds();
+    } catch (error) {
+      console.error('Error cleaning up:', error);
+      toast.error('Failed to clean up duplicates', { id: toastId });
+    } finally {
+      setCleanupLoading(false);
+    }
+  };
+
   const handleSelectRound = (roundId: string) => {
     setSelectedRounds(prev => {
       const newSet = new Set(prev);
@@ -412,6 +481,19 @@ export default function ReviewRounds() {
         <div className="flex gap-2">
           <Button 
             variant="outline" 
+            onClick={handleCleanupPreview}
+            disabled={cleanupLoading || rounds.length === 0}
+            className="text-orange-600 border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+          >
+            {cleanupLoading ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <Trash2 className="h-4 w-4 mr-2" />
+            )}
+            Cleanup Duplicates
+          </Button>
+          <Button 
+            variant="outline" 
             onClick={handleExportCSV}
             disabled={exporting || rounds.length === 0}
           >
@@ -452,6 +534,60 @@ export default function ReviewRounds() {
           </Button>
         </div>
       </div>
+
+      {/* Cleanup Confirmation Dialog */}
+      <AlertDialog open={showCleanupDialog} onOpenChange={setShowCleanupDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              Cleanup Duplicate Assignments
+            </AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div className="space-y-3">
+                <p>Found duplicate product assignments that need cleanup:</p>
+                {cleanupPreview && (
+                  <div className="bg-muted p-3 rounded-lg space-y-1 text-sm">
+                    <div className="flex justify-between">
+                      <span>Products with duplicates:</span>
+                      <span className="font-semibold">{cleanupPreview.duplicateProducts}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Reviews to delete:</span>
+                      <span className="font-semibold text-destructive">{cleanupPreview.reviewsToDelete}</span>
+                    </div>
+                    <div className="flex justify-between border-t pt-1 mt-1">
+                      <span>Reviews after cleanup:</span>
+                      <span className="font-semibold text-green-600">
+                        {cleanupPreview.totalReviews - cleanupPreview.reviewsToDelete}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                <p className="text-sm text-muted-foreground">
+                  This will keep the earliest created assignment for each product and remove duplicates.
+                  This action cannot be undone.
+                </p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={cleanupLoading}>Cancel</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleCleanupExecute}
+              disabled={cleanupLoading}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {cleanupLoading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Trash2 className="h-4 w-4 mr-2" />
+              )}
+              Delete Duplicates
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* Reviewer Status Alert */}
       {reviewerStats.totalReviewers === 0 && (
