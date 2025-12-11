@@ -61,7 +61,9 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K211841",
+        decisionDate: "2022-08-25"
       },
       intendedUseStatement: "For generating synthetic CT and structure sets from MRI for radiation therapy planning."
     },
@@ -72,8 +74,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
 },
     version: "3.2",
     releaseDate: "2023-07-10",
-    lastUpdated: "2025-08-08",
-    lastRevised: "2025-12-01",
+    lastUpdated: "2025-12-11",
+    lastRevised: "2025-12-11",
     source: "Automatically retrieved"
   }
 ];

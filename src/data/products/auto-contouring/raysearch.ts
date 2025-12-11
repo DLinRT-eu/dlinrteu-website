@@ -44,7 +44,10 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K240398",
+        decisionDate: "2025-04-04",
+        notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A"
       },
       intendedUseStatement: "For use in treatment planning for radiation therapy."
     },
@@ -55,8 +58,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
 },
     version: "12.0",
     releaseDate: "2023-12-01",
-    lastUpdated: "2025-05-01",
-    lastRevised: "2025-12-01",
+    lastUpdated: "2025-12-11",
+    lastRevised: "2025-12-11",
     source: "Automatically retrieved and verified",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: ["10.1016/j.radonc.2016.10.009"]
