@@ -1555,6 +1555,14 @@ export type Database = {
               p_company_id: string
               p_notes?: string
               p_product_id: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_company_id: string
+              p_notes?: string
+              p_product_id: string
               p_product_last_revised?: string
             }
             Returns: Json
@@ -1566,14 +1574,6 @@ export type Database = {
               p_notes?: string
               p_product_id: string
               p_product_last_revised?: string
-            }
-            Returns: Json
-          }
-        | {
-            Args: {
-              p_company_id: string
-              p_notes?: string
-              p_product_id: string
             }
             Returns: Json
           }
@@ -1896,7 +1896,8 @@ export type Database = {
             Args: {
               p_action_type: string
               p_details?: Json
-              p_target_user_id: string
+              p_target_user_email?: string
+              p_target_user_id?: string
             }
             Returns: string
           }
@@ -1904,20 +1905,11 @@ export type Database = {
             Args: {
               p_action_type: string
               p_details?: Json
-              p_target_user_email?: string
-              p_target_user_id?: string
+              p_target_user_id: string
             }
             Returns: string
           }
       quick_assign_products:
-        | {
-            Args: {
-              p_product_ids: string[]
-              p_reviewer_ids: string[]
-              p_round_id: string
-            }
-            Returns: number
-          }
         | {
             Args: {
               p_deadline?: string
@@ -1925,6 +1917,14 @@ export type Database = {
               p_reviewer_id: string
             }
             Returns: Json
+          }
+        | {
+            Args: {
+              p_product_ids: string[]
+              p_reviewer_ids: string[]
+              p_round_id: string
+            }
+            Returns: number
           }
       reassign_product_review_admin: {
         Args: {
@@ -1956,6 +1956,7 @@ export type Database = {
         }[]
       }
       start_review_round_atomic:
+        | { Args: { p_assignments: Json; p_round_id: string }; Returns: Json }
         | {
             Args: {
               p_product_ids: string[]
@@ -1964,7 +1965,6 @@ export type Database = {
             }
             Returns: Json
           }
-        | { Args: { p_assignments: Json; p_round_id: string }; Returns: Json }
       start_review_secure: { Args: { review_id: string }; Returns: Json }
       update_product_review_admin: {
         Args: {

@@ -42,7 +42,9 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K250035",
+        decisionDate: "2025-02-03"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -53,8 +55,8 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
 },
     version: "7.1",
     releaseDate: "2023-10-15",
-    lastUpdated: "2024-03-20",
-    lastRevised: "2025-09-01",
+    lastUpdated: "2025-12-11",
+    lastRevised: "2025-12-11",
     source: "Company",
     supportedStructures: [
       "Brain: Brain",
