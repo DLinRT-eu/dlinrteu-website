@@ -3,6 +3,15 @@ project_id = "msyfxyxzjyowwasgturs"
 [functions.backfill-changelog-history]
 verify_jwt = true
 
+[functions.send-contact-email]
+verify_jwt = false
+
+[functions.subscribe-newsletter]
+verify_jwt = false
+
+[functions.rss-feed]
+verify_jwt = true
+
 [functions.rss-feed]
 verify_jwt = false
 
