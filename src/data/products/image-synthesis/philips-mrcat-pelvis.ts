@@ -9,11 +9,11 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.philips.com/",
     productUrl: "https://www.philips.com/a-w/about/news/archive/standard/news/press/2020/20200929-philips-advances-oncology-solutions.html",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
-    description: "AI-based MR-only simulation platform that generates synthetic CT images from MR scans for radiation therapy planning of pelvic cancers, streamlining the radiation therapy planning process with deep learning technology.",
+    description: "AI-based MR-only simulation platform that generates synthetic CT images from MR scans for radiation therapy planning of pelvic cancers, streamlining the radiation therapy planning process with proprietary algorithms.",
     features: [
       "MR-only planning",
       "Synthetic CT generation",
-      "Deep learning algorithms",
+      "AI-based algorithms",
       "Automatic CT conversion",
       "Integrated workflow"
     ],
@@ -28,7 +28,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     keyFeatures: [
       "AI-based MR-only simulation platform",
       "Synthetic CT generation for pelvic region",
-      "Deep learning technology",
+      "Proprietary AI technology",
       "Streamlined radiation therapy planning",
       "Superior soft tissue contrast"
     ],
@@ -59,15 +59,14 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of pelvic cancers."
     },
     market: {
-      onMarketSince: "2019",
-      distributionChannels: ["Direct sales", "Partnerships"],
-
-},
-    version: "2.0",
-    releaseDate: "2019-05-21",
-    lastUpdated: "2025-08-08",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+      onMarketSince: "2018",
+      distributionChannels: ["Direct sales"]
+    },
+    version: "Current",
+    releaseDate: "2018",
+    lastUpdated: "2025-12-12",
+    lastRevised: "2025-12-12",
+    source: "Requires company verification - Initial EU availability in 2018, FDA clearance in 2019",
     clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy"
   }
 ];

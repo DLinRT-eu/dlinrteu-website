@@ -74,7 +74,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     category: "Reconstruction",
     description: "MRI acceleration technology using deep learning reconstruction algorithms to reduce scan times while maintaining image quality. Features AI-based denoising and sharpening for up to 3x faster scanning with up to 80% sharper images.",
     features: ["Deep learning-based", "Fast acquisition", "MRI modality", "AI denoising"],
-    certification: "FDA Cleared",
+    certification: "CE Mark, FDA Cleared",
     logoUrl: "/logos/philips.png",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.philips.com/healthcare/resources/landing/smartspeed",

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Package, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
-import { Product } from '@/types/product';
+import { ProductDetails } from '@/types/productDetails';
 import ProductCard from './ProductCard';
 
 interface CompanyCardProps {
@@ -11,7 +11,7 @@ interface CompanyCardProps {
   description: string;
   website?: string;
   logoUrl?: string;
-  products: Product[];
+  products: ProductDetails[];
 }
 
 const CompanyCard = ({ name, description, website, logoUrl, products }: CompanyCardProps) => {
@@ -75,7 +75,7 @@ const CompanyCard = ({ name, description, website, logoUrl, products }: CompanyC
           <CardContent className="pt-0">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <ProductCard key={product.id} {...product} regulatory={product.regulatory} />
               ))}
             </div>
           </CardContent>

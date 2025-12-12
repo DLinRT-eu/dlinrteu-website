@@ -37,13 +37,36 @@ const Companies = () => {
       .filter(company => company.productCount > 0);
   }, []);
 
-  // Shuffle companies randomly on each reload (only once)
+  // Shuffle companies randomly, but persist order in sessionStorage for back navigation
   const shuffledCompanies = useMemo(() => {
+    const storageKey = 'companiesShuffledOrder';
+    const savedOrder = sessionStorage.getItem(storageKey);
+    
+    if (savedOrder) {
+      try {
+        const orderMap: Record<string, number> = JSON.parse(savedOrder);
+        // Verify the saved order matches current companies
+        const savedIds = Object.keys(orderMap);
+        const currentIds = companies.map(c => c.id);
+        if (savedIds.length === currentIds.length && currentIds.every(id => id in orderMap)) {
+          return [...companies].sort((a, b) => orderMap[a.id] - orderMap[b.id]);
+        }
+      } catch (e) {
+        // Invalid JSON, create new order
+      }
+    }
+    
+    // Create new random order
     const arr = [...companies];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+    
+    // Save order to sessionStorage
+    const orderMap = Object.fromEntries(arr.map((c, i) => [c.id, i]));
+    sessionStorage.setItem(storageKey, JSON.stringify(orderMap));
+    
     return arr;
   }, [companies]);
 
