@@ -63,6 +63,7 @@ import {
   FileSpreadsheet,
   FileJson,
   FileText,
+  Upload,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
@@ -73,6 +74,7 @@ import {
   exportNewsletterToExcel, 
   exportNewsletterToJSON 
 } from '@/utils/newsletterExport';
+import { NewsletterImportDialog } from '@/components/admin/NewsletterImportDialog';
 
 interface Stats {
   total: number;
@@ -95,6 +97,7 @@ export default function NewsletterManagement() {
   // Dialog states
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [subscriberToDelete, setSubscriberToDelete] = useState<NewsletterSubscriber | null>(null);
 
   // Add form state
@@ -341,6 +344,10 @@ export default function NewsletterManagement() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              <Button variant="outline" onClick={() => setImportDialogOpen(true)}>
+                <Upload className="h-4 w-4 mr-2" />
+                Import
+              </Button>
               <Button onClick={() => setAddDialogOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Subscriber
@@ -620,6 +627,13 @@ export default function NewsletterManagement() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        {/* Import Dialog */}
+        <NewsletterImportDialog
+          open={importDialogOpen}
+          onOpenChange={setImportDialogOpen}
+          onImportComplete={fetchSubscribers}
+        />
       </PageLayout>
     </>
   );
