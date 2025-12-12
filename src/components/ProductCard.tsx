@@ -25,6 +25,7 @@ interface ProductCardProps {
   website?: string;
   companyUrl?: string;
   productUrl?: string;
+  regulatory?: ProductDetails['regulatory'];
   isSelectable?: boolean;
   isSelected?: boolean;
   onSelectionChange?: (product: ProductDetails, selected: boolean) => void;
@@ -45,6 +46,7 @@ const ProductCard = ({
   website,
   companyUrl,
   productUrl,
+  regulatory,
   isSelectable = false,
   isSelected = false,
   onSelectionChange
@@ -109,7 +111,7 @@ const ProductCard = ({
       category,
       certification,
       modality,
-      regulatory: undefined // ProductCard doesn't receive regulatory prop directly
+      regulatory
     };
     
     // Check if product is investigational/pending
