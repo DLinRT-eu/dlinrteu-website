@@ -10,9 +10,6 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.rss-feed]
-verify_jwt = true
-
-[functions.rss-feed]
 verify_jwt = false
 
 [functions.track-analytics]
@@ -43,4 +40,7 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.admin-cleanup-duplicate-reviews]
+verify_jwt = true
+
+[functions.admin-newsletter-management]
 verify_jwt = true
