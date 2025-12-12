@@ -59,15 +59,26 @@ serve(async (req) => {
 
     console.log(`Admin ${user.email} performing newsletter management operation`);
 
-    const method = req.method;
+    // Parse body safely - handle empty/null body
+    let body: any = {};
+    try {
+      const text = await req.text();
+      if (text && text.trim()) {
+        body = JSON.parse(text);
+      }
+    } catch (e) {
+      console.log('No body or invalid JSON, defaulting to list action');
+    }
 
-    if (method === 'GET') {
+    const action = body.action || 'list';
+    console.log(`Newsletter action: ${action}`);
+
+    if (action === 'list') {
       // List subscribers with optional filters
-      const url = new URL(req.url);
-      const search = url.searchParams.get('search') || '';
-      const status = url.searchParams.get('status') || 'all';
-      const page = parseInt(url.searchParams.get('page') || '1');
-      const limit = parseInt(url.searchParams.get('limit') || '50');
+      const search = body.search || '';
+      const status = body.status || 'all';
+      const page = parseInt(body.page || '1');
+      const limit = parseInt(body.limit || '50');
       const offset = (page - 1) * limit;
 
       let query = supabaseAdmin
@@ -136,9 +147,8 @@ serve(async (req) => {
       );
     }
 
-    if (method === 'POST') {
+    if (action === 'add') {
       // Add new subscriber
-      const body = await req.json();
       const { email, firstName, lastName, consentGiven } = body;
 
       if (!email || !firstName || !lastName) {
@@ -235,9 +245,8 @@ serve(async (req) => {
       );
     }
 
-    if (method === 'DELETE') {
+    if (action === 'delete') {
       // Remove subscriber
-      const body = await req.json();
       const { id } = body;
 
       if (!id) {
@@ -283,10 +292,9 @@ serve(async (req) => {
       );
     }
 
-    if (method === 'PATCH') {
-      // Resubscribe or update subscriber
-      const body = await req.json();
-      const { id, action } = body;
+    if (action === 'resubscribe') {
+      // Resubscribe user
+      const { id } = body;
 
       if (!id) {
         return new Response(
@@ -295,50 +303,43 @@ serve(async (req) => {
         );
       }
 
-      if (action === 'resubscribe') {
-        const { data: subscriber, error: updateError } = await supabaseAdmin
-          .from('newsletter_subscribers')
-          .update({
-            unsubscribed_at: null,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', id)
-          .select()
-          .single();
+      const { data: subscriber, error: updateError } = await supabaseAdmin
+        .from('newsletter_subscribers')
+        .update({
+          unsubscribed_at: null,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', id)
+        .select()
+        .single();
 
-        if (updateError) {
-          console.error('Error resubscribing:', updateError);
-          return new Response(
-            JSON.stringify({ error: 'Failed to resubscribe' }),
-            { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-          );
-        }
-
-        // Log action
-        await supabaseAdmin.from('admin_audit_log').insert({
-          performed_by: user.id,
-          performed_by_email: user.email || 'unknown',
-          action_type: 'newsletter_resubscribe',
-          details: { subscriber_id: id, email: subscriber?.email }
-        });
-
-        console.log(`Resubscribed newsletter subscriber: ${subscriber?.email}`);
-
+      if (updateError) {
+        console.error('Error resubscribing:', updateError);
         return new Response(
-          JSON.stringify({ success: true, subscriber }),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          JSON.stringify({ error: 'Failed to resubscribe' }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
 
+      // Log action
+      await supabaseAdmin.from('admin_audit_log').insert({
+        performed_by: user.id,
+        performed_by_email: user.email || 'unknown',
+        action_type: 'newsletter_resubscribe',
+        details: { subscriber_id: id, email: subscriber?.email }
+      });
+
+      console.log(`Resubscribed newsletter subscriber: ${subscriber?.email}`);
+
       return new Response(
-        JSON.stringify({ error: 'Invalid action' }),
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ success: true, subscriber }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     return new Response(
-      JSON.stringify({ error: 'Method not allowed' }),
-      { status: 405, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      JSON.stringify({ error: 'Invalid action' }),
+      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {

@@ -107,23 +107,15 @@ export default function NewsletterManagement() {
   const fetchSubscribers = useCallback(async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke('admin-newsletter-management', {
-        method: 'GET',
-        body: null,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await supabase.functions.invoke('admin-newsletter-management', {
+        body: {
+          action: 'list',
+          search,
+          status: statusFilter,
+          page,
+          limit: 20
+        }
       });
-
-      // Parse URL params for GET request
-      const params = new URLSearchParams({
-        search,
-        status: statusFilter,
-        page: page.toString(),
-        limit: '20'
-      });
-
-      const response = await supabase.functions.invoke(`admin-newsletter-management?${params.toString()}`);
 
       if (response.error) {
         throw new Error(response.error.message || 'Failed to fetch subscribers');
@@ -171,8 +163,8 @@ export default function NewsletterManagement() {
     setAddLoading(true);
     try {
       const response = await supabase.functions.invoke('admin-newsletter-management', {
-        method: 'POST',
         body: {
+          action: 'add',
           email: newEmail,
           firstName: newFirstName,
           lastName: newLastName,
@@ -214,8 +206,7 @@ export default function NewsletterManagement() {
 
     try {
       const response = await supabase.functions.invoke('admin-newsletter-management', {
-        method: 'DELETE',
-        body: { id: subscriberToDelete.id }
+        body: { action: 'delete', id: subscriberToDelete.id }
       });
 
       if (response.error) {
@@ -235,8 +226,7 @@ export default function NewsletterManagement() {
   const handleResubscribe = async (subscriber: NewsletterSubscriber) => {
     try {
       const response = await supabase.functions.invoke('admin-newsletter-management', {
-        method: 'PATCH',
-        body: { id: subscriber.id, action: 'resubscribe' }
+        body: { action: 'resubscribe', id: subscriber.id }
       });
 
       if (response.error) {
@@ -254,14 +244,15 @@ export default function NewsletterManagement() {
   const handleExport = async (format: 'csv' | 'excel' | 'json') => {
     try {
       // Fetch all subscribers for export
-      const params = new URLSearchParams({
-        search,
-        status: statusFilter,
-        page: '1',
-        limit: '10000' // Get all for export
+      const response = await supabase.functions.invoke('admin-newsletter-management', {
+        body: {
+          action: 'list',
+          search,
+          status: statusFilter,
+          page: 1,
+          limit: 10000 // Get all for export
+        }
       });
-
-      const response = await supabase.functions.invoke(`admin-newsletter-management?${params.toString()}`);
 
       if (response.error) {
         throw new Error(response.error.message || 'Failed to fetch subscribers for export');
