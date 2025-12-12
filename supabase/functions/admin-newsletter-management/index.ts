@@ -337,6 +337,99 @@ serve(async (req) => {
       );
     }
 
+    if (action === 'bulk-import') {
+      // Bulk import subscribers
+      const { subscribers: importList } = body;
+
+      if (!importList || !Array.isArray(importList) || importList.length === 0) {
+        return new Response(
+          JSON.stringify({ error: 'No subscribers provided for import' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      console.log(`Bulk importing ${importList.length} subscribers`);
+
+      let imported = 0;
+      let duplicates = 0;
+      let errors = 0;
+
+      // Process in batches of 100
+      const batchSize = 100;
+      for (let i = 0; i < importList.length; i += batchSize) {
+        const batch = importList.slice(i, i + batchSize);
+        
+        for (const sub of batch) {
+          if (!sub.email) {
+            errors++;
+            continue;
+          }
+
+          const email = sub.email.toLowerCase().trim();
+          const firstName = (sub.firstName || '').trim();
+          const lastName = (sub.lastName || '').trim();
+
+          // Check if exists
+          const { data: existing } = await supabaseAdmin
+            .from('newsletter_subscribers')
+            .select('id, unsubscribed_at')
+            .eq('email', email)
+            .maybeSingle();
+
+          if (existing) {
+            if (existing.unsubscribed_at) {
+              // Resubscribe existing
+              await supabaseAdmin
+                .from('newsletter_subscribers')
+                .update({
+                  first_name: firstName || undefined,
+                  last_name: lastName || undefined,
+                  consent_given: true,
+                  unsubscribed_at: null,
+                  updated_at: new Date().toISOString()
+                })
+                .eq('id', existing.id);
+              imported++;
+            } else {
+              duplicates++;
+            }
+          } else {
+            // Insert new
+            const { error: insertError } = await supabaseAdmin
+              .from('newsletter_subscribers')
+              .insert({
+                email,
+                first_name: firstName || 'Subscriber',
+                last_name: lastName || '',
+                consent_given: true
+              });
+
+            if (insertError) {
+              console.error('Insert error:', insertError);
+              errors++;
+            } else {
+              imported++;
+            }
+          }
+        }
+      }
+
+      // Log action
+      await supabaseAdmin.from('admin_audit_log').insert({
+        performed_by: user.id,
+        performed_by_email: user.email || 'unknown',
+        action_type: 'newsletter_bulk_import',
+        details: { imported, duplicates, errors, total: importList.length }
+      });
+
+      console.log(`Bulk import complete: ${imported} imported, ${duplicates} duplicates, ${errors} errors`);
+
+      return new Response(
+        JSON.stringify({ success: true, imported, duplicates, errors }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     return new Response(
       JSON.stringify({ error: 'Invalid action' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
