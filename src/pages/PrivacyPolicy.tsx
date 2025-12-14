@@ -108,9 +108,8 @@ const PrivacyPolicy = () => (
           We use minimal third-party services for essential functionality:
         </p>
         <ul className="mb-4 ml-6 list-disc">
-          <li><strong>Newsletter service:</strong> ml.kundenserver.de (Germany) - GDPR compliant email list management with explicit consent</li>
-          <li><strong>Email delivery:</strong> We use a secure email service provider to respond to contact form submissions</li>
-          <li><strong>Data storage:</strong> Supabase (EU-hosted) - Personal data is stored securely using industry-standard encryption</li>
+          <li><strong>Data storage & Newsletter:</strong> Supabase (EU-hosted) - All personal data including newsletter subscriptions is stored securely using industry-standard encryption within the European Union</li>
+          <li><strong>Email delivery:</strong> We use a secure, GDPR-compliant email service provider for newsletter delivery and contact form responses</li>
         </ul>
         <p className="mb-4">
           All third-party services are bound by strict data protection agreements and GDPR compliance requirements. Data processing agreements are in place where required by law.
