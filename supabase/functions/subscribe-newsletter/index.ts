@@ -194,15 +194,14 @@ const handler = async (req: Request): Promise<Response> => {
             </ul>
           </div>
           
-          <div style="margin-top: 20px; padding: 15px; background-color: #f0f9ff; border-radius: 8px; border-left: 4px solid #2563eb;">
-            <p style="margin: 0; color: #1e40af; font-size: 14px;">
-              You can unsubscribe at any time by contacting us at info@dlinrt.eu
-            </p>
-          </div>
-          
-          <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 12px;">
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #6b7280; font-size: 12px;">
             <p>This email was sent from DLinRT.eu</p>
             <p>Visit us at <a href="https://dlinrt.eu" style="color: #2563eb;">DLinRT.eu</a></p>
+            <p style="margin-top: 15px;">
+              <a href="https://dlinrt.eu/unsubscribe" style="color: #6b7280; text-decoration: underline;">Unsubscribe from this newsletter</a>
+              &nbsp;|&nbsp;
+              <a href="mailto:info@dlinrt.eu" style="color: #6b7280; text-decoration: underline;">Contact us</a>
+            </p>
           </div>
         </div>
       `,
