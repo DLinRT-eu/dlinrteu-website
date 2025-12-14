@@ -167,7 +167,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email to subscriber
     const welcomeEmailResponse = await resend.emails.send({
-      from: "DLinRT Newsletter <onboarding@resend.dev>",
+      from: "DLinRT Newsletter <noreply@dlinrt.eu>",
       to: [email],
       subject: "Welcome to the DLinRT Newsletter!",
       html: `
@@ -209,7 +209,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "DLinRT Newsletter <onboarding@resend.dev>",
+      from: "DLinRT Newsletter <noreply@dlinrt.eu>",
       to: ["info@dlinrt.eu"],
       subject: "New Newsletter Subscription",
       html: `
