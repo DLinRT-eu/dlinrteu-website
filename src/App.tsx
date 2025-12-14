@@ -49,6 +49,7 @@ const CompanyMappingValidator = lazy(() => import("./pages/admin/CompanyMappingV
 const UserProductAdoptions = lazy(() => import("./pages/admin/UserProductAdoptions"));
 const CertificationManagement = lazy(() => import("./pages/admin/CertificationManagement"));
 const NewsletterManagement = lazy(() => import("./pages/admin/NewsletterManagement"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 // Admin Pages
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
@@ -135,7 +136,7 @@ const App = () => (
                 <Route path="changelog" element={<Changelog />} />
                 <Route path="roles" element={<Roles />} />
                 <Route path="roles/faq" element={<RolesFAQ />} />
-                
+                <Route path="unsubscribe" element={<Unsubscribe />} />
                 {/* User Authenticated Routes - Protected by ApprovalGate */}
                 <Route path="/profile" element={
                   <ProtectedRoute requireAuth={true}>
