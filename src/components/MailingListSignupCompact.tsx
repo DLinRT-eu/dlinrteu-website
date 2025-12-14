@@ -6,7 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Mail } from 'lucide-react';
+import { Mail, CheckCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Valid email required' }),
@@ -23,6 +25,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const MailingListSignupCompact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -33,49 +36,55 @@ const MailingListSignupCompact = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Create a form element and submit it to the external service
-    const formElement = document.createElement('form');
-    formElement.action = 'https://ml.kundenserver.de/cgi-bin/mailinglist.cgi';
-    formElement.method = 'POST';
-    formElement.target = '_blank';
-    
-    // Add required form fields
-    const fields = [
-      { name: 'subscribe_r', value: 'subscribe' },
-      { name: 'mailaccount_r', value: data.email },
-      { name: 'mailaccount2_r', value: data.emailConfirm },
-      { name: 'FBMLNAME', value: 'noreply@dlinrt.eu' },
-      { name: 'FBLANG', value: 'en' },
-      { name: 'FBURLERROR_L', value: 'https://ml.kundenserver.de/mailinglist/error.en.html' },
-      { name: 'FBURLSUBSCRIBE_L', value: 'https://ml.kundenserver.de/mailinglist/subscribe.en.html' },
-      { name: 'FBURLUNSUBSCRIBE_L', value: 'https://ml.kundenserver.de/mailinglist/unsubscribe.en.html' },
-      { name: 'FBURLINVALID_L', value: 'https://ml.kundenserver.de/mailinglist/invalid.en.html' }
-    ];
-    
-    fields.forEach(field => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = field.name;
-      input.value = field.value;
-      formElement.appendChild(input);
-    });
-    
-    document.body.appendChild(formElement);
-    formElement.submit();
-    document.body.removeChild(formElement);
-    
-    // Reset form and submission state
-    form.reset();
-    setIsSubmitting(false);
+    try {
+      // Extract name from email if possible (before @)
+      const emailPrefix = data.email.split('@')[0];
+      
+      const { data: responseData, error } = await supabase.functions.invoke('subscribe-newsletter', {
+        body: {
+          firstName: emailPrefix,
+          lastName: '',
+          email: data.email,
+          consentGiven: data.consent,
+        },
+      });
+
+      if (error) {
+        throw new Error(error.message || 'Failed to subscribe');
+      }
+
+      if (responseData?.error) {
+        throw new Error(responseData.error);
+      }
+
+      setIsSuccess(true);
+      form.reset();
+      toast.success('Successfully subscribed!');
+    } catch (error: any) {
+      console.error('Newsletter subscription error:', error);
+      toast.error(error.message || 'Failed to subscribe. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (isSuccess) {
+    return (
+      <div className="max-w-md text-center p-4 bg-green-50 rounded-lg border border-green-200">
+        <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
+        <p className="text-sm text-green-700 font-medium">Thank you for subscribing!</p>
+        <p className="text-xs text-green-600 mt-1">Check your email for confirmation.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-md">
-      <h3 className="text-sm font-semibold text-gray-700 mb-3">Stay Updated</h3>
-      <p className="text-xs text-gray-500 mb-4">
+      <h3 className="text-sm font-semibold text-foreground mb-3">Stay Updated</h3>
+      <p className="text-xs text-muted-foreground mb-4">
         Get the latest updates on deep learning solutions in radiotherapy.
       </p>
       
@@ -97,10 +106,11 @@ const MailingListSignupCompact = () => {
         <div className="flex items-start space-x-2">
           <Checkbox
             id="compact-consent"
-            {...form.register('consent')}
+            checked={form.watch('consent')}
+            onCheckedChange={(checked) => form.setValue('consent', !!checked)}
           />
-          <label htmlFor="compact-consent" className="text-xs text-gray-500 leading-tight">
-            I agree to join the mailing list for updates. Opens in new window.
+          <label htmlFor="compact-consent" className="text-xs text-muted-foreground leading-tight">
+            I agree to join the mailing list for updates. Data stored securely in the EU.
           </label>
         </div>
         
@@ -110,7 +120,7 @@ const MailingListSignupCompact = () => {
           className="w-full text-xs" 
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Processing...' : 'Join Mailing List'}
+          {isSubmitting ? 'Subscribing...' : 'Join Mailing List'}
           <Mail className="ml-2 h-3 w-3" />
         </Button>
       </form>
@@ -118,7 +128,7 @@ const MailingListSignupCompact = () => {
       {Object.keys(form.formState.errors).length > 0 && (
         <div className="mt-2">
           {Object.values(form.formState.errors).map((error, index) => (
-            <p key={index} className="text-xs text-red-500">{error?.message}</p>
+            <p key={index} className="text-xs text-destructive">{error?.message}</p>
           ))}
         </div>
       )}
