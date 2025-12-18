@@ -8,7 +8,7 @@ export default function Roles() {
   return (
     <PageLayout
       title="User Roles | DLinRT"
-      description="Learn about different user roles and how to contribute to the DLinRT community"
+      description="Explore user roles on DLinRT.eu. Learn how to become a reviewer, company representative, or contributor to advance deep learning adoption in radiotherapy."
       canonical="https://dlinrt.eu/roles"
     >
       <div className="container max-w-7xl py-12">

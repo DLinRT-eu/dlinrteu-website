@@ -160,7 +160,7 @@ const ReviewDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       <SEO
         title="Product Review Dashboard - Quality Control & Data Maintenance"
-        description="Internal quality control dashboard for tracking product data accuracy, review status, and maintenance tasks for the Deep Learning in Radiotherapy database. Monitor data quality metrics and review progress."
+        description="Quality control dashboard for DLinRT data maintenance. Track review status, product accuracy, and database health metrics for our radiotherapy AI platform."
         canonical="https://dlinrt.eu/review"
         structuredData={structuredData}
         noindex={true}
