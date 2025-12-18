@@ -170,7 +170,7 @@ export default function UpdatePassword() {
       <>
         <SEO 
           title="Update Password"
-          description="Update your DLinRT.eu password"
+          description="Securely update your DLinRT.eu account password. Protect your account with a strong password to maintain access to the radiotherapy AI platform."
         />
         <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background to-muted">
           <Card className="w-full max-w-md">
@@ -212,7 +212,7 @@ export default function UpdatePassword() {
     <>
       <SEO 
         title="Update Password"
-        description="Update your DLinRT.eu password"
+        description="Securely update your DLinRT.eu account password. Protect your account with a strong password to maintain access to the radiotherapy AI platform."
       />
       <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background to-muted">
         <Card className="w-full max-w-md">

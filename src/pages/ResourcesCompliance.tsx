@@ -13,7 +13,7 @@ const ResourcesCompliance = () => {
   return (
     <PageLayout
       title="Resources & compliance"
-      description="Essential regulatory and practical resources for deploying deep-learning solutions in clinical radiotherapy workflows, covering EU MDR, AI Act, FDA pathways, and compliance checklists"
+      description="Access regulatory guidance for deploying AI in radiotherapy. Explore EU MDR, AI Act, FDA pathways, compliance checklists, and standards for clinical deep learning deployment."
       canonical="https://dlinrt.eu/resources-compliance"
       structuredData={{
         "@context": "https://schema.org",

@@ -6,7 +6,7 @@ const TermsOfUse = () => (
   <div className="min-h-screen bg-white">
     <SEO
       title="Terms of Use & Legal Conditions - DLinRT Deep Learning Platform"
-      description="Legal terms and conditions for using the DLinRT.eu deep learning in radiotherapy database. Review usage rights, disclaimers, and responsibilities for accessing our AI medical technology platform."
+      description="Review the terms and conditions for using DLinRT.eu. Understand your rights, responsibilities, and legal disclaimers for accessing our radiotherapy AI database."
       canonical="https://dlinrt.eu/terms-of-use"
     />
     <main className="max-w-3xl mx-auto px-4 py-8">

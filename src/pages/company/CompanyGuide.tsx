@@ -23,7 +23,7 @@ export default function CompanyGuide() {
   return (
     <PageLayout
       title="Company Representative Guide | DLinRT"
-      description="Comprehensive guide for company representatives on managing product information and submissions"
+      description="Guide for company representatives on DLinRT. Learn how to manage product listings, submit updates, and connect with healthcare professionals using your solutions."
       canonical="https://dlinrt.eu/company/guide"
     >
       <div className="container max-w-5xl py-12">

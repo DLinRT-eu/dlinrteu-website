@@ -22,7 +22,7 @@ export default function ReviewerGuide() {
   return (
     <PageLayout
       title="Reviewer Guide | DLinRT"
-      description="Comprehensive guide for reviewers on evaluating products and managing reviews"
+      description="Complete guide for DLinRT reviewers. Learn how to evaluate products, verify specifications, and maintain quality standards for our radiotherapy AI database."
       canonical="https://dlinrt.eu/reviewer/guide"
     >
       <div className="container max-w-5xl py-12">

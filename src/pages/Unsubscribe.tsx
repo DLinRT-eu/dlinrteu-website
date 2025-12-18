@@ -70,7 +70,7 @@ const Unsubscribe = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Unsubscribe from Newsletter - DLinRT.eu"
-        description="Unsubscribe from the DLinRT newsletter to stop receiving updates about deep learning solutions in radiotherapy."
+        description="Unsubscribe from the DLinRT newsletter. Manage your email preferences and opt out of updates about deep learning solutions in radiotherapy."
         canonical="https://dlinrt.eu/unsubscribe"
       />
       

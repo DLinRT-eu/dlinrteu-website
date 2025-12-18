@@ -135,7 +135,7 @@ const Dashboard = () => {
       <div className="container px-2 sm:px-4 md:px-8 py-4 md:py-8 mx-auto">
       <SEO
         title="AI Radiotherapy Analytics Dashboard - Product Distribution & Market Insights"
-        description="Interactive analytics dashboard visualizing deep learning products in radiotherapy. Explore comprehensive data on product distribution by clinical task, geography, imaging modality, and manufacturer trends."
+        description="Visualize AI radiotherapy market data with interactive charts. Explore product distribution by clinical task, modality, geography, and manufacturer."
         canonical="https://dlinrt.eu/dashboard"
         structuredData={structuredData}
       />

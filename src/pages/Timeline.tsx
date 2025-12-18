@@ -45,7 +45,7 @@ const Timeline = () => {
     <div className="min-h-screen bg-gray-50">
       <SEO
         title="AI Radiotherapy Product Timeline - Release History & Market Evolution"
-        description="Interactive timeline visualization showing the chronological release history and market evolution of deep learning products in radiotherapy. Track AI innovation trends in radiation oncology."
+        description="Explore the evolution of AI in radiotherapy with our interactive timeline. Track product releases and market trends in deep learning for radiation oncology."
         canonical="https://dlinrt.eu/timeline"
         structuredData={structuredData}
       />

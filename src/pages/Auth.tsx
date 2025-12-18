@@ -252,7 +252,7 @@ export default function Auth() {
     <>
       <SEO 
         title="Sign In | DLinRT"
-        description="Sign in to access the DLinRT platform for deep learning in radiotherapy"
+        description="Sign in or create an account to access the DLinRT platform. Track products, share experiences, and contribute to the radiotherapy deep learning community."
         canonical="https://dlinrt.eu/auth"
       />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
