@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,7 +17,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield, ClipboardList } from 'lucide-react';
+import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -45,6 +47,8 @@ type SortOrder = 'asc' | 'desc';
 
 export default function CompanyManagement() {
   const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const defaultTab = searchParams.get('tab') || 'overview';
   const [representatives, setRepresentatives] = useState<CompanyRepresentative[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -524,7 +528,7 @@ export default function CompanyManagement() {
         </Button>
       </div>
       
-      <Tabs defaultValue="overview" className="space-y-6">
+      <Tabs defaultValue={defaultTab} className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="companies">All Companies</TabsTrigger>
@@ -542,6 +546,10 @@ export default function CompanyManagement() {
             >
               {pendingCount}
             </Badge>
+          </TabsTrigger>
+          <TabsTrigger value="revisions">
+            <ClipboardList className="h-4 w-4 mr-1" />
+            Revisions
           </TabsTrigger>
         </TabsList>
 
@@ -1078,6 +1086,10 @@ export default function CompanyManagement() {
                 })}
             </div>
           )}
+        </TabsContent>
+
+        <TabsContent value="revisions" className="space-y-4">
+          <RevisionApprovalManager />
         </TabsContent>
       </Tabs>
 

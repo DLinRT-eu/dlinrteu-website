@@ -376,7 +376,7 @@ export default function AdminDashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate('/admin/security')}>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
                 <Shield className="h-4 w-4" />
@@ -390,6 +390,23 @@ export default function AdminDashboard() {
               </div>
             </CardContent>
           </Card>
+
+          {stats.pendingRevisions > 0 && (
+            <Card className="cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => navigate('/admin/companies?tab=revisions')}>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Pending Revisions
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats.pendingRevisions}</div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  Awaiting review
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Quick Actions */}

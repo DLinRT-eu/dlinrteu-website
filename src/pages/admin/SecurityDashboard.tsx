@@ -5,10 +5,14 @@ import { useRoles } from '@/contexts/RoleContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { Shield, AlertTriangle, Activity, Lock, Key } from 'lucide-react';
+import { Shield, AlertTriangle, Activity, Lock, Key, CheckCircle, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 
@@ -19,6 +23,7 @@ interface SecurityEvent {
   created_at: string;
   details: any;
   resolved_at: string | null;
+  notes: string | null;
 }
 
 interface SecurityStats {
@@ -43,6 +48,10 @@ export default function SecurityDashboard() {
     mfaEnrollment: 0,
     totalUsers: 0,
   });
+  const [selectedEvent, setSelectedEvent] = useState<SecurityEvent | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [notes, setNotes] = useState('');
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     // Don't check permissions while still loading auth
@@ -74,7 +83,8 @@ export default function SecurityDashboard() {
         severity: event.severity,
         created_at: event.created_at,
         details: event.details,
-        resolved_at: event.resolved_at || null
+        resolved_at: event.resolved_at || null,
+        notes: event.notes || null
       }));
 
       setEvents(mappedEvents);
@@ -113,6 +123,50 @@ export default function SecurityDashboard() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResolve = async (event: SecurityEvent) => {
+    setSelectedEvent(event);
+    setNotes(event.notes || '');
+    setDialogOpen(true);
+  };
+
+  const submitResolve = async () => {
+    if (!selectedEvent) return;
+    
+    setProcessing(true);
+    try {
+      const { data, error } = await supabase.rpc('resolve_security_event_admin', {
+        p_event_id: selectedEvent.id,
+        p_notes: notes || null
+      });
+
+      if (error) throw error;
+      
+      const result = data as { success: boolean; error?: string };
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to resolve event');
+      }
+
+      toast({
+        title: 'Event Resolved',
+        description: 'Security event has been marked as resolved',
+      });
+
+      setDialogOpen(false);
+      setSelectedEvent(null);
+      setNotes('');
+      fetchSecurityData();
+    } catch (error: any) {
+      console.error('Error resolving event:', error);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to resolve event',
+        variant: 'destructive',
+      });
+    } finally {
+      setProcessing(false);
     }
   };
 
@@ -230,12 +284,13 @@ export default function SecurityDashboard() {
                   <TableHead>Severity</TableHead>
                   <TableHead>Details</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {events.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center text-muted-foreground">
+                    <TableCell colSpan={6} className="text-center text-muted-foreground">
                       No security events recorded
                     </TableCell>
                   </TableRow>
@@ -259,12 +314,98 @@ export default function SecurityDashboard() {
                         <Badge variant="outline">Open</Badge>
                       )}
                     </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
+                        {!event.resolved_at && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleResolve(event)}
+                          >
+                            <CheckCircle className="h-4 w-4 mr-1" />
+                            Resolve
+                          </Button>
+                        )}
+                        {event.resolved_at && event.notes && (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setNotes(event.notes || '');
+                              setDialogOpen(true);
+                            }}
+                          >
+                            <MessageSquare className="h-4 w-4 mr-1" />
+                            Notes
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </CardContent>
         </Card>
+
+        {/* Resolve/Notes Dialog */}
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                {selectedEvent?.resolved_at ? 'Event Notes' : 'Resolve Security Event'}
+              </DialogTitle>
+              <DialogDescription>
+                {selectedEvent?.resolved_at 
+                  ? 'View notes for this resolved event'
+                  : 'Add notes about the investigation and resolution'}
+              </DialogDescription>
+            </DialogHeader>
+            
+            {selectedEvent && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Event Type:</span>
+                    <p className="font-medium">{selectedEvent.event_type}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Severity:</span>
+                    <p>{getSeverityBadge(selectedEvent.severity)}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <span className="text-muted-foreground">Details:</span>
+                    <p className="font-medium">{selectedEvent.details?.message || JSON.stringify(selectedEvent.details)}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="notes">Resolution Notes</Label>
+                  <Textarea
+                    id="notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="Describe the investigation findings and resolution..."
+                    rows={4}
+                    disabled={!!selectedEvent.resolved_at}
+                  />
+                </div>
+              </div>
+            )}
+
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setDialogOpen(false)}>
+                {selectedEvent?.resolved_at ? 'Close' : 'Cancel'}
+              </Button>
+              {!selectedEvent?.resolved_at && (
+                <Button onClick={submitResolve} disabled={processing}>
+                  {processing ? 'Resolving...' : 'Mark as Resolved'}
+                </Button>
+              )}
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </PageLayout>
   );
