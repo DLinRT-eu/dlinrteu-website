@@ -690,7 +690,7 @@ export default function AdminOverview() {
                         </TableCell>
                         <TableCell>{new Date(revision.created_at).toLocaleDateString()}</TableCell>
                         <TableCell className="text-right">
-                          <Button size="sm" variant="outline" onClick={() => navigate('/admin/companies')}>
+                          <Button size="sm" variant="outline" onClick={() => navigate('/admin/companies?tab=revisions')}>
                             Review →
                           </Button>
                         </TableCell>

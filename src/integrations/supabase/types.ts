@@ -1939,6 +1939,10 @@ export type Database = {
         Args: { p_reason?: string; p_review_id: string }
         Returns: Json
       }
+      resolve_security_event_admin: {
+        Args: { p_event_id: string; p_notes?: string }
+        Returns: Json
+      }
       revoke_role_admin: {
         Args: {
           p_role: Database["public"]["Enums"]["app_role"]
