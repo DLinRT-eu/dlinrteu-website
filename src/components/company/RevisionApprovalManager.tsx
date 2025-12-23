@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -7,12 +7,16 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCircle2, XCircle, Clock, Eye, User } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, Eye, User, Search, Filter, CalendarIcon, X } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
+import { format } from 'date-fns';
 
 interface SubmitterProfile {
   first_name: string;
@@ -42,6 +46,14 @@ const STATUS_OPTIONS = [
   { value: 'needs-info', label: 'Needs Info' },
 ];
 
+const PRIORITY_OPTIONS = [
+  { value: 'all', label: 'All Priorities' },
+  { value: 'critical', label: 'Critical' },
+  { value: 'high', label: 'High' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'low', label: 'Low' },
+];
+
 const truncateText = (text: string, maxLength: number = 200): string => {
   if (!text || text.length <= maxLength) return text || '';
   return text.substring(0, maxLength) + '...';
@@ -58,6 +70,74 @@ export default function RevisionApprovalManager() {
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [viewingRevision, setViewingRevision] = useState<CompanyRevision | null>(null);
   const [actionType, setActionType] = useState<'approve' | 'reject'>('approve');
+  
+  // Filter states
+  const [searchQuery, setSearchQuery] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState('all');
+  const [companyFilter, setCompanyFilter] = useState('all');
+  const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined);
+  const [dateTo, setDateTo] = useState<Date | undefined>(undefined);
+
+  // Get unique companies from revisions for the filter dropdown
+  const uniqueCompanies = useMemo(() => {
+    const companies = [...new Set(revisions.map(r => r.company_id))];
+    return companies.sort();
+  }, [revisions]);
+
+  // Filtered revisions
+  const filteredRevisions = useMemo(() => {
+    return revisions.filter(revision => {
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const product = ALL_PRODUCTS.find(p => p.id === revision.product_id);
+        const matchesSearch = 
+          revision.changes_summary?.toLowerCase().includes(query) ||
+          revision.company_id?.toLowerCase().includes(query) ||
+          revision.product_id?.toLowerCase().includes(query) ||
+          product?.name?.toLowerCase().includes(query) ||
+          revision.profiles?.first_name?.toLowerCase().includes(query) ||
+          revision.profiles?.last_name?.toLowerCase().includes(query) ||
+          revision.profiles?.email?.toLowerCase().includes(query);
+        if (!matchesSearch) return false;
+      }
+
+      // Priority filter
+      if (priorityFilter !== 'all' && revision.priority !== priorityFilter) {
+        return false;
+      }
+
+      // Company filter
+      if (companyFilter !== 'all' && revision.company_id !== companyFilter) {
+        return false;
+      }
+
+      // Date range filter
+      const revisionDate = new Date(revision.created_at);
+      if (dateFrom && revisionDate < dateFrom) {
+        return false;
+      }
+      if (dateTo) {
+        const endOfDay = new Date(dateTo);
+        endOfDay.setHours(23, 59, 59, 999);
+        if (revisionDate > endOfDay) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [revisions, searchQuery, priorityFilter, companyFilter, dateFrom, dateTo]);
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setPriorityFilter('all');
+    setCompanyFilter('all');
+    setDateFrom(undefined);
+    setDateTo(undefined);
+  };
+
+  const hasActiveFilters = searchQuery || priorityFilter !== 'all' || companyFilter !== 'all' || dateFrom || dateTo;
 
   useEffect(() => {
     if (user && (isReviewer || isAdmin)) {
@@ -183,13 +263,115 @@ export default function RevisionApprovalManager() {
           <CardDescription>Review and approve product information updates from companies</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {revisions.length === 0 ? (
+          {/* Filters Section */}
+          <div className="space-y-4 p-4 bg-muted/50 rounded-lg border">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <Filter className="h-4 w-4" />
+              Filters
+              {hasActiveFilters && (
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="h-6 px-2 text-xs">
+                  <X className="h-3 w-3 mr-1" />
+                  Clear all
+                </Button>
+              )}
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Search */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search content, company, product..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+
+              {/* Priority Filter */}
+              <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  {PRIORITY_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Company Filter */}
+              <Select value={companyFilter} onValueChange={setCompanyFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Company" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Companies</SelectItem>
+                  {uniqueCompanies.map((company) => (
+                    <SelectItem key={company} value={company}>
+                      {company}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Date Range */}
+              <div className="flex gap-2">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" className="flex-1 justify-start text-left font-normal">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {dateFrom ? format(dateFrom, 'MMM d') : 'From'}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={dateFrom}
+                      onSelect={setDateFrom}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" className="flex-1 justify-start text-left font-normal">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {dateTo ? format(dateTo, 'MMM d') : 'To'}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={dateTo}
+                      onSelect={setDateTo}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </div>
+
+            {/* Results count */}
+            <div className="text-sm text-muted-foreground">
+              Showing {filteredRevisions.length} of {revisions.length} revisions
+            </div>
+          </div>
+
+          {filteredRevisions.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No pending revisions to review</p>
+              <p>{hasActiveFilters ? 'No revisions match your filters' : 'No pending revisions to review'}</p>
+              {hasActiveFilters && (
+                <Button variant="link" onClick={clearFilters} className="mt-2">
+                  Clear filters
+                </Button>
+              )}
             </div>
           ) : (
-            revisions.map((revision) => {
+            filteredRevisions.map((revision) => {
               const product = ALL_PRODUCTS.find(p => p.id === revision.product_id);
               const submitterName = revision.profiles 
                 ? `${revision.profiles.first_name} ${revision.profiles.last_name}`
