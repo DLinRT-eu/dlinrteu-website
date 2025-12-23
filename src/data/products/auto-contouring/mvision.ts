@@ -86,6 +86,6 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-27",
     lastUpdated: "2025-12-23",
     lastRevised: "2025-12-23",
-    source: "Company verified - Norina Predescu (MVision AI)"
+    source: "Automatically retrieved and manually revised"
   }
 ];
