@@ -61,7 +61,7 @@ export const MVISION_ALL_STRUCTURES = [
   "Brain-MR: OpticTract_L",
   "Brain-MR: OpticTract_R",
 
-  // Head & Neck CT - OARs (Company verified Dec 2025 - Norina Predescu)
+  // Head & Neck CT - OARs (Company verified Dec 2025)
   "Head & Neck-CT: Brainstem",
   "Head & Neck-CT: Eye_L",
   "Head & Neck-CT: Eye_R",
@@ -166,7 +166,7 @@ export const MVISION_ALL_STRUCTURES = [
   "Breast-CT: Humerus_Head_L",
   "Breast-CT: Humerus_Head_R",
 
-  // Abdomen & Lung CT (Company verified Dec 2025 - Norina Predescu)
+  // Abdomen & Lung CT (Company verified Dec 2025)
   "Abdomen & Lung-CT: Esophagus",
   "Abdomen & Lung-CT: Liver",
   "Abdomen & Lung-CT: Kidney_L",
@@ -282,16 +282,18 @@ export const MVISION_ALL_STRUCTURES = [
   "Male Pelvis-CT: L4_VB",
   "Male Pelvis-CT: Sacrum",
 
-  // Rectum CT with Lymph Nodes
+  // Rectum CT with Lymph Nodes - OARs
   "Rectum CT with Lymph Nodes-CT: Mesorectum",
   "Rectum CT with Lymph Nodes-CT: Canal_Anal",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_EIN_L",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_EIN_R",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_IRF",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_LLNa_L",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_LLNa_R",
-  "Rectum CT with Lymph Nodes-CT: LN_Rectum_PSa",
   "Rectum CT with Lymph Nodes-CT: SphincterComplex",
+
+  // Rectum CT with Lymph Nodes - Elective (Lymph Nodes)
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_EIN_L",
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_EIN_R",
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_IRF",
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_LLNa_L",
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_LLNa_R",
+  "Rectum CT with Lymph Nodes-CT (Elective): LN_Rectum_PSa",
 
   // Male Pelvis MR Dixon
   "Male Pelvis MR Dixon-MR: Prostate",
@@ -349,7 +351,7 @@ export const MVISION_ALL_STRUCTURES = [
   "Whole Body-CT: Heart+A_Pulm",
   "Whole Body-CT: Trachea_Prox",
 
-  // Bones CT (Company verified Dec 2025 - Norina Predescu)
+  // Bones CT (Company verified Dec 2025)
   "Bones-CT: C01",
   "Bones-CT: C02",
   "Bones-CT: C03",
