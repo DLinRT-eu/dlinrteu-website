@@ -8,9 +8,17 @@ import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
-import { CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, Eye, User } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
+
+interface SubmitterProfile {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
 
 interface CompanyRevision {
   id: string;
@@ -23,7 +31,21 @@ interface CompanyRevision {
   reviewer_feedback: string | null;
   priority: string;
   created_at: string;
+  profiles?: SubmitterProfile;
 }
+
+const STATUS_OPTIONS = [
+  { value: 'pending', label: 'Pending' },
+  { value: 'in-review', label: 'In Review' },
+  { value: 'approved', label: 'Approved' },
+  { value: 'rejected', label: 'Rejected' },
+  { value: 'needs-info', label: 'Needs Info' },
+];
+
+const truncateText = (text: string, maxLength: number = 200): string => {
+  if (!text || text.length <= maxLength) return text || '';
+  return text.substring(0, maxLength) + '...';
+};
 
 export default function RevisionApprovalManager() {
   const { user } = useAuth();
@@ -33,6 +55,8 @@ export default function RevisionApprovalManager() {
   const [selectedRevision, setSelectedRevision] = useState<CompanyRevision | null>(null);
   const [feedback, setFeedback] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [viewingRevision, setViewingRevision] = useState<CompanyRevision | null>(null);
   const [actionType, setActionType] = useState<'approve' | 'reject'>('approve');
 
   useEffect(() => {
@@ -42,14 +66,62 @@ export default function RevisionApprovalManager() {
   }, [user, isReviewer, isAdmin]);
 
   const fetchPendingRevisions = async () => {
-    const { data } = await supabase
+    // Fetch revisions
+    const { data: revisionsData } = await supabase
       .from('company_revisions')
       .select('*')
       .eq('verification_status', 'pending')
       .order('created_at', { ascending: false });
 
-    if (data) {
-      setRevisions(data);
+    if (!revisionsData) {
+      setRevisions([]);
+      return;
+    }
+
+    // Fetch profile info for each revision
+    const userIds = [...new Set(revisionsData.map(r => r.revised_by))];
+    const { data: profilesData } = await supabase
+      .from('profiles')
+      .select('id, first_name, last_name, email')
+      .in('id', userIds);
+
+    const profilesMap = new Map(profilesData?.map(p => [p.id, p]) || []);
+
+    const revisionsWithProfiles = revisionsData.map(revision => ({
+      ...revision,
+      profiles: profilesMap.get(revision.revised_by) as SubmitterProfile | undefined,
+    }));
+
+    setRevisions(revisionsWithProfiles);
+  };
+
+  const handleViewDetails = (revision: CompanyRevision) => {
+    setViewingRevision(revision);
+    setViewDialogOpen(true);
+  };
+
+  const handleStatusChange = async (revision: CompanyRevision, newStatus: string) => {
+    const { error } = await supabase
+      .from('company_revisions')
+      .update({
+        verification_status: newStatus,
+        verified_by: user?.id,
+        verified_at: new Date().toISOString(),
+      })
+      .eq('id', revision.id);
+
+    if (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: 'Status Updated',
+        description: `Revision status changed to ${newStatus}`,
+      });
+      fetchPendingRevisions();
     }
   };
 
@@ -119,6 +191,11 @@ export default function RevisionApprovalManager() {
           ) : (
             revisions.map((revision) => {
               const product = ALL_PRODUCTS.find(p => p.id === revision.product_id);
+              const submitterName = revision.profiles 
+                ? `${revision.profiles.first_name} ${revision.profiles.last_name}`
+                : 'Unknown';
+              const isLongSummary = revision.changes_summary && revision.changes_summary.length > 200;
+              
               return (
                 <Card key={revision.id} className="border-l-4 border-l-yellow-500">
                   <CardHeader>
@@ -137,16 +214,69 @@ export default function RevisionApprovalManager() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    {/* Submitter Info */}
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <User className="h-4 w-4" />
+                      <span>Submitted by: <strong>{submitterName}</strong></span>
+                      {revision.profiles?.email && (
+                        <span className="text-xs">({revision.profiles.email})</span>
+                      )}
+                    </div>
+
+                    {/* Truncated Changes Summary */}
                     <div>
                       <Label className="text-sm font-medium">Changes Summary:</Label>
                       <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">
-                        {revision.changes_summary}
+                        {truncateText(revision.changes_summary, 200)}
                       </p>
+                      {isLongSummary && (
+                        <Button 
+                          variant="link" 
+                          size="sm" 
+                          className="px-0 h-auto text-primary"
+                          onClick={() => handleViewDetails(revision)}
+                        >
+                          View full details...
+                        </Button>
+                      )}
                     </div>
+
                     <div className="text-xs text-muted-foreground">
                       Submitted: {new Date(revision.created_at).toLocaleString()}
                     </div>
-                    <div className="flex gap-2">
+
+                    {/* Status Change Dropdown (Admin only) */}
+                    {isAdmin && (
+                      <div className="flex items-center gap-2">
+                        <Label className="text-sm">Status:</Label>
+                        <Select
+                          value={revision.verification_status}
+                          onValueChange={(value) => handleStatusChange(revision, value)}
+                        >
+                          <SelectTrigger className="w-40">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {STATUS_OPTIONS.map((status) => (
+                              <SelectItem key={status.value} value={status.value}>
+                                {status.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    )}
+
+                    <div className="flex gap-2 flex-wrap">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleViewDetails(revision)}
+                        className="gap-2"
+                      >
+                        <Eye className="h-4 w-4" />
+                        View Details
+                      </Button>
                       <Button
                         size="sm"
                         variant="default"
@@ -183,6 +313,7 @@ export default function RevisionApprovalManager() {
         </CardContent>
       </Card>
 
+      {/* Approve/Reject Dialog */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader>
@@ -221,6 +352,114 @@ export default function RevisionApprovalManager() {
               disabled={actionType === 'reject' && !feedback.trim()}
             >
               {actionType === 'approve' ? 'Approve Revision' : 'Reject Revision'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Details Dialog */}
+      <Dialog open={viewDialogOpen} onOpenChange={setViewDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle>Revision Details</DialogTitle>
+            <DialogDescription>
+              Full details of the submitted revision
+            </DialogDescription>
+          </DialogHeader>
+          
+          {viewingRevision && (
+            <ScrollArea className="max-h-[60vh] pr-4">
+              <div className="space-y-6">
+                {/* Product Info */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Product</Label>
+                    <p className="text-sm mt-1">
+                      {ALL_PRODUCTS.find(p => p.id === viewingRevision.product_id)?.name || viewingRevision.product_id}
+                    </p>
+                  </div>
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Company</Label>
+                    <p className="text-sm mt-1">{viewingRevision.company_id}</p>
+                  </div>
+                </div>
+
+                {/* Submitter Info */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Submitted By</Label>
+                    <p className="text-sm mt-1">
+                      {viewingRevision.profiles 
+                        ? `${viewingRevision.profiles.first_name} ${viewingRevision.profiles.last_name}`
+                        : 'Unknown'}
+                    </p>
+                  </div>
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Email</Label>
+                    <p className="text-sm mt-1">{viewingRevision.profiles?.email || 'N/A'}</p>
+                  </div>
+                </div>
+
+                {/* Date and Priority */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Submitted On</Label>
+                    <p className="text-sm mt-1">{new Date(viewingRevision.created_at).toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Priority</Label>
+                    <Badge variant={getPriorityColor(viewingRevision.priority)} className="mt-1">
+                      {viewingRevision.priority}
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Full Changes Summary */}
+                <div>
+                  <Label className="text-sm font-medium text-muted-foreground">Changes Summary</Label>
+                  <div className="mt-2 p-4 bg-muted rounded-lg">
+                    <pre className="text-sm whitespace-pre-wrap font-mono">
+                      {viewingRevision.changes_summary}
+                    </pre>
+                  </div>
+                </div>
+
+                {/* Current Status */}
+                <div>
+                  <Label className="text-sm font-medium text-muted-foreground">Current Status</Label>
+                  <Badge variant="secondary" className="mt-1">
+                    {viewingRevision.verification_status}
+                  </Badge>
+                </div>
+              </div>
+            </ScrollArea>
+          )}
+
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setViewDialogOpen(false)}>
+              Close
+            </Button>
+            <Button
+              variant="default"
+              onClick={() => {
+                setViewDialogOpen(false);
+                if (viewingRevision) handleOpenDialog(viewingRevision, 'approve');
+              }}
+              className="gap-2"
+            >
+              <CheckCircle2 className="h-4 w-4" />
+              Approve
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                setViewDialogOpen(false);
+                if (viewingRevision) handleOpenDialog(viewingRevision, 'reject');
+              }}
+              className="gap-2"
+            >
+              <XCircle className="h-4 w-4" />
+              Reject
             </Button>
           </DialogFooter>
         </DialogContent>
