@@ -17,7 +17,13 @@ import {
   UserCheck,
   User,
   ScrollText,
-  Activity
+  Activity,
+  CalendarClock,
+  RefreshCw,
+  Mail,
+  ClipboardCheck,
+  BadgeCheck,
+  Eye
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
@@ -39,20 +45,21 @@ export default function Dashboard_Authenticated() {
   };
 
   const quickActions = [
+    // Admin quick actions - ordered by workflow priority
     ...(isAdmin ? [
       {
-        title: 'Admin Panel',
-        description: 'Manage users and system settings',
-        icon: Shield,
-        link: '/admin',
-        color: 'bg-red-50 text-red-600 hover:bg-red-100'
+        title: 'Registrations Review',
+        description: 'Approve pending user registrations',
+        icon: UserCheck,
+        link: '/admin/registrations',
+        color: 'bg-amber-50 text-amber-600 hover:bg-amber-100'
       },
       {
-        title: 'User Management',
-        description: 'Assign roles and manage users',
-        icon: Users,
-        link: '/admin/users',
-        color: 'bg-red-50 text-red-600 hover:bg-red-100'
+        title: 'Review Rounds',
+        description: 'Manage review cycles and rounds',
+        icon: RefreshCw,
+        link: '/admin/review-rounds',
+        color: 'bg-purple-50 text-purple-600 hover:bg-purple-100'
       },
       {
         title: 'Review Assignments',
@@ -62,18 +69,25 @@ export default function Dashboard_Authenticated() {
         color: 'bg-purple-50 text-purple-600 hover:bg-purple-100'
       },
       {
-        title: 'Company Oversight',
-        description: 'Oversee all company certifications',
+        title: 'Company Revisions',
+        description: 'Review company-submitted revisions',
         icon: Building2,
-        link: '/company/dashboard',
+        link: '/admin/companies',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
       },
       {
-        title: 'Changelog Management',
-        description: 'Manage platform changelog entries',
-        icon: ScrollText,
-        link: '/admin/changelog',
-        color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
+        title: 'User Management',
+        description: 'Assign roles and manage users',
+        icon: Users,
+        link: '/admin/users',
+        color: 'bg-red-50 text-red-600 hover:bg-red-100'
+      },
+      {
+        title: 'Newsletter',
+        description: 'Manage newsletter subscribers',
+        icon: Mail,
+        link: '/admin/newsletter',
+        color: 'bg-blue-50 text-blue-600 hover:bg-blue-100'
       },
       {
         title: 'Security Monitoring',
@@ -81,15 +95,37 @@ export default function Dashboard_Authenticated() {
         icon: Activity,
         link: '/admin/security-monitoring',
         color: 'bg-red-50 text-red-600 hover:bg-red-100'
+      },
+      {
+        title: 'Changelog',
+        description: 'Manage platform changelog',
+        icon: ScrollText,
+        link: '/admin/changelog',
+        color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
       }
     ] : []),
+    // Reviewer quick actions - ordered by workflow priority
     ...(isReviewer ? [
       {
-        title: 'My Reviews',
-        description: 'View assigned product reviews',
-        icon: FileCheck,
+        title: 'Review Dashboard',
+        description: 'Browse all products for review',
+        icon: Eye,
+        link: '/review',
+        color: 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+      },
+      {
+        title: 'Assigned Reviews',
+        description: 'View your assigned product reviews',
+        icon: ClipboardCheck,
         link: '/reviewer/dashboard',
         color: 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+      },
+      {
+        title: 'Due Reviews',
+        description: 'Reviews approaching deadline',
+        icon: CalendarClock,
+        link: '/reviewer/due-reviews',
+        color: 'bg-orange-50 text-orange-600 hover:bg-orange-100'
       },
       {
         title: 'Expertise Preferences',
@@ -99,15 +135,38 @@ export default function Dashboard_Authenticated() {
         color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
       }
     ] : []),
+    // Company quick actions - ordered by workflow priority
     ...(isCompany ? [
       {
+        title: 'Submit Revision',
+        description: 'Submit product revision for review',
+        icon: FileCheck,
+        link: '/company/revisions',
+        color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      },
+      {
+        title: 'My Products',
+        description: 'View your company products',
+        icon: Package,
+        link: '/company/products',
+        color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      },
+      {
+        title: 'Certify Product',
+        description: 'Request product certification',
+        icon: BadgeCheck,
+        link: '/company/certify',
+        color: 'bg-teal-50 text-teal-600 hover:bg-teal-100'
+      },
+      {
         title: 'Company Dashboard',
-        description: 'Manage your products',
+        description: 'Overview of your company',
         icon: Building2,
         link: '/company/dashboard',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
       }
     ] : []),
+    // Common quick actions for all users
     {
       title: 'My Profile',
       description: 'View and edit your profile',
@@ -130,15 +189,15 @@ export default function Dashboard_Authenticated() {
       color: 'bg-orange-50 text-orange-600 hover:bg-orange-100'
     },
     {
-      title: 'My Products',
+      title: 'My Tracked Products',
       description: 'Track your product adoptions',
       icon: ShoppingCart,
       link: '/my-products',
       color: 'bg-teal-50 text-teal-600 hover:bg-teal-100'
     },
     {
-      title: 'Notification History',
-      description: 'View and manage all notifications',
+      title: 'Notifications',
+      description: 'View all notifications',
       icon: Bell,
       link: '/notifications',
       color: 'bg-yellow-50 text-yellow-600 hover:bg-yellow-100'
