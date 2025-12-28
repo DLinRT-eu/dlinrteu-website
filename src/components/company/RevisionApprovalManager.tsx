@@ -44,6 +44,13 @@ const STATUS_OPTIONS = [
   { value: 'rejected', label: 'Rejected' },
 ];
 
+const STATUS_FILTER_OPTIONS = [
+  { value: 'all', label: 'All Statuses' },
+  { value: 'pending', label: 'Pending' },
+  { value: 'approved', label: 'Approved' },
+  { value: 'rejected', label: 'Rejected' },
+];
+
 const PRIORITY_OPTIONS = [
   { value: 'all', label: 'All Priorities' },
   { value: 'critical', label: 'Critical' },
@@ -71,6 +78,7 @@ export default function RevisionApprovalManager() {
   
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('pending');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [companyFilter, setCompanyFilter] = useState('all');
   const [dateFrom, setDateFrom] = useState<Date | undefined>(undefined);
@@ -129,27 +137,34 @@ export default function RevisionApprovalManager() {
 
   const clearFilters = () => {
     setSearchQuery('');
+    setStatusFilter('pending');
     setPriorityFilter('all');
     setCompanyFilter('all');
     setDateFrom(undefined);
     setDateTo(undefined);
   };
 
-  const hasActiveFilters = searchQuery || priorityFilter !== 'all' || companyFilter !== 'all' || dateFrom || dateTo;
+  const hasActiveFilters = searchQuery || statusFilter !== 'pending' || priorityFilter !== 'all' || companyFilter !== 'all' || dateFrom || dateTo;
 
   useEffect(() => {
     if (user && (isReviewer || isAdmin)) {
-      fetchPendingRevisions();
+      fetchRevisions();
     }
-  }, [user, isReviewer, isAdmin]);
+  }, [user, isReviewer, isAdmin, statusFilter]);
 
-  const fetchPendingRevisions = async () => {
-    // Fetch revisions
-    const { data: revisionsData } = await supabase
+  const fetchRevisions = async () => {
+    // Build query dynamically based on status filter
+    let query = supabase
       .from('company_revisions')
       .select('*')
-      .eq('verification_status', 'pending')
       .order('created_at', { ascending: false });
+    
+    // Apply status filter if not "all"
+    if (statusFilter !== 'all') {
+      query = query.eq('verification_status', statusFilter);
+    }
+    
+    const { data: revisionsData } = await query;
 
     if (!revisionsData) {
       setRevisions([]);
@@ -199,7 +214,7 @@ export default function RevisionApprovalManager() {
         title: 'Status Updated',
         description: `Revision status changed to ${newStatus}`,
       });
-      fetchPendingRevisions();
+      fetchRevisions();
     }
   };
 
@@ -235,7 +250,7 @@ export default function RevisionApprovalManager() {
         description: `Revision ${actionType === 'approve' ? 'approved' : 'rejected'} successfully`,
       });
       setDialogOpen(false);
-      fetchPendingRevisions();
+      fetchRevisions();
     }
   };
 
@@ -249,6 +264,18 @@ export default function RevisionApprovalManager() {
     return colors[priority] || 'outline';
   };
 
+  const getStatusBorderColor = (status: string): string => {
+    switch (status) {
+      case 'approved':
+        return 'border-l-green-500';
+      case 'rejected':
+        return 'border-l-red-500';
+      case 'pending':
+      default:
+        return 'border-l-yellow-500';
+    }
+  };
+
   if (!isReviewer && !isAdmin) {
     return null;
   }
@@ -257,8 +284,8 @@ export default function RevisionApprovalManager() {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>Pending Company Revisions</CardTitle>
-          <CardDescription>Review and approve product information updates from companies</CardDescription>
+          <CardTitle>Company Revisions</CardTitle>
+          <CardDescription>Review and manage product information updates from companies</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Filters Section */}
@@ -274,7 +301,21 @@ export default function RevisionApprovalManager() {
               )}
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {/* Status Filter */}
+              <Select value={statusFilter} onValueChange={(value: 'all' | 'pending' | 'approved' | 'rejected') => setStatusFilter(value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {STATUS_FILTER_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -361,7 +402,11 @@ export default function RevisionApprovalManager() {
           {filteredRevisions.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
               <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>{hasActiveFilters ? 'No revisions match your filters' : 'No pending revisions to review'}</p>
+              <p>
+                {hasActiveFilters 
+                  ? 'No revisions match your filters' 
+                  : 'No revisions found'}
+              </p>
               {hasActiveFilters && (
                 <Button variant="link" onClick={clearFilters} className="mt-2">
                   Clear filters
@@ -375,9 +420,10 @@ export default function RevisionApprovalManager() {
                 ? `${revision.profiles.first_name} ${revision.profiles.last_name}`
                 : 'Unknown';
               const isLongSummary = revision.changes_summary && revision.changes_summary.length > 200;
+              const isPending = revision.verification_status === 'pending';
               
               return (
-                <Card key={revision.id} className="border-l-4 border-l-yellow-500">
+                <Card key={revision.id} className={`border-l-4 ${getStatusBorderColor(revision.verification_status)}`}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="space-y-1">
@@ -388,9 +434,17 @@ export default function RevisionApprovalManager() {
                           Company: {revision.company_id}
                         </CardDescription>
                       </div>
-                      <Badge variant={getPriorityColor(revision.priority)}>
-                        {revision.priority}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={
+                          revision.verification_status === 'approved' ? 'default' :
+                          revision.verification_status === 'rejected' ? 'destructive' : 'secondary'
+                        }>
+                          {revision.verification_status}
+                        </Badge>
+                        <Badge variant={getPriorityColor(revision.priority)}>
+                          {revision.priority}
+                        </Badge>
+                      </div>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -425,8 +479,18 @@ export default function RevisionApprovalManager() {
                       Submitted: {new Date(revision.created_at).toLocaleString()}
                     </div>
 
-                    {/* Status Change Dropdown (Admin only) */}
-                    {isAdmin && (
+                    {/* Reviewer Feedback for processed revisions */}
+                    {!isPending && revision.reviewer_feedback && (
+                      <div className="p-3 bg-muted rounded-lg">
+                        <Label className="text-sm font-medium">Reviewer Feedback:</Label>
+                        <p className="text-sm text-muted-foreground mt-1 whitespace-pre-wrap">
+                          {revision.reviewer_feedback}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Status Change Dropdown (Admin only, for pending) */}
+                    {isAdmin && isPending && (
                       <div className="flex items-center gap-2">
                         <Label className="text-sm">Status:</Label>
                         <Select
@@ -457,24 +521,28 @@ export default function RevisionApprovalManager() {
                         <Eye className="h-4 w-4" />
                         View Details
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="default"
-                        onClick={() => handleOpenDialog(revision, 'approve')}
-                        className="gap-2"
-                      >
-                        <CheckCircle2 className="h-4 w-4" />
-                        Approve
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => handleOpenDialog(revision, 'reject')}
-                        className="gap-2"
-                      >
-                        <XCircle className="h-4 w-4" />
-                        Reject
-                      </Button>
+                      {isPending && (
+                        <>
+                          <Button
+                            size="sm"
+                            variant="default"
+                            onClick={() => handleOpenDialog(revision, 'approve')}
+                            className="gap-2"
+                          >
+                            <CheckCircle2 className="h-4 w-4" />
+                            Approve
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => handleOpenDialog(revision, 'reject')}
+                            className="gap-2"
+                          >
+                            <XCircle className="h-4 w-4" />
+                            Reject
+                          </Button>
+                        </>
+                      )}
                       {product && (
                         <Button
                           size="sm"
@@ -619,28 +687,32 @@ export default function RevisionApprovalManager() {
             <Button variant="outline" onClick={() => setViewDialogOpen(false)}>
               Close
             </Button>
-            <Button
-              variant="default"
-              onClick={() => {
-                setViewDialogOpen(false);
-                if (viewingRevision) handleOpenDialog(viewingRevision, 'approve');
-              }}
-              className="gap-2"
-            >
-              <CheckCircle2 className="h-4 w-4" />
-              Approve
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => {
-                setViewDialogOpen(false);
-                if (viewingRevision) handleOpenDialog(viewingRevision, 'reject');
-              }}
-              className="gap-2"
-            >
-              <XCircle className="h-4 w-4" />
-              Reject
-            </Button>
+            {viewingRevision?.verification_status === 'pending' && (
+              <>
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    setViewDialogOpen(false);
+                    if (viewingRevision) handleOpenDialog(viewingRevision, 'approve');
+                  }}
+                  className="gap-2"
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                  Approve
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    setViewDialogOpen(false);
+                    if (viewingRevision) handleOpenDialog(viewingRevision, 'reject');
+                  }}
+                  className="gap-2"
+                >
+                  <XCircle className="h-4 w-4" />
+                  Reject
+                </Button>
+              </>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
