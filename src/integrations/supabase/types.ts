@@ -1723,6 +1723,7 @@ export type Database = {
           status: string
         }[]
       }
+      get_pending_revisions_count_for_reviewer: { Args: never; Returns: number }
       get_pending_role_requests_admin: {
         Args: never
         Returns: {
