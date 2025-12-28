@@ -6,11 +6,13 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { Calendar, Clock, AlertCircle, CheckCircle2, Play, BookOpen, FileCheck } from 'lucide-react';
+import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
+import { Calendar, Clock, AlertCircle, FileCheck, BookOpen } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 interface ReviewAssignment {
@@ -29,7 +31,31 @@ export default function DueReviews() {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const userId = user?.id ?? null;
+
+  const handleToggleSelection = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const handleSelectAll = () => {
+    const allSelected = reviews.every(r => selectedIds.has(r.id));
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(reviews.map(r => r.id)));
+    }
+  };
+
+  const handleClearSelection = () => setSelectedIds(new Set());
 
   const fetchReviews = useCallback(async () => {
     if (!userId) {
@@ -256,7 +282,14 @@ export default function DueReviews() {
 
         {/* Reviews List */}
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold">All Reviews</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">All Reviews</h2>
+            {reviews.length > 0 && (
+              <Button variant="outline" size="sm" onClick={handleSelectAll}>
+                {reviews.every(r => selectedIds.has(r.id)) ? 'Deselect All' : 'Select All'}
+              </Button>
+            )}
+          </div>
           {reviews.length === 0 ? (
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
@@ -267,16 +300,24 @@ export default function DueReviews() {
           ) : (
             reviews.map(review => {
               const deadlineStatus = getDeadlineStatus(review.deadline);
+              const isSelected = selectedIds.has(review.id);
               return (
-                <Card key={review.id} className="hover:shadow-lg transition-shadow">
+                <Card key={review.id} className={`hover:shadow-lg transition-shadow ${isSelected ? 'ring-2 ring-primary' : ''}`}>
                   <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1 flex-1">
-                        <CardTitle className="text-lg">{review.product_id}</CardTitle>
-                        <CardDescription className="flex items-center gap-2">
-                          <Calendar className="h-3 w-3" />
-                          Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}
-                        </CardDescription>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-3">
+                        <Checkbox
+                          checked={isSelected}
+                          onCheckedChange={() => handleToggleSelection(review.id)}
+                          className="mt-1"
+                        />
+                        <div className="space-y-1 flex-1">
+                          <CardTitle className="text-lg">{review.product_id}</CardTitle>
+                          <CardDescription className="flex items-center gap-2">
+                            <Calendar className="h-3 w-3" />
+                            Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}
+                          </CardDescription>
+                        </div>
                       </div>
                       <div className="flex gap-2">
                         {review.priority && (
@@ -314,6 +355,13 @@ export default function DueReviews() {
             })
           )}
         </div>
+
+        <BulkReviewerActions
+          selectedIds={selectedIds}
+          reviews={reviews}
+          onClearSelection={handleClearSelection}
+          onOperationComplete={fetchReviews}
+        />
       </div>
     </PageLayout>
   );
