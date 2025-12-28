@@ -1757,6 +1757,25 @@ export type Database = {
           status: string
         }[]
       }
+      get_product_revisions_for_reviewer: {
+        Args: { p_product_id: string }
+        Returns: {
+          changes_summary: string
+          company_id: string
+          created_at: string
+          id: string
+          priority: string
+          product_id: string
+          reviewer_feedback: string
+          revised_by: string
+          revised_by_email: string
+          revised_by_name: string
+          revision_date: string
+          verification_status: string
+          verified_at: string
+          verified_by: string
+        }[]
+      }
       get_registration_notifications_admin: {
         Args: never
         Returns: {

@@ -7,9 +7,10 @@ import { ProductReviewStatus } from '@/components/revision/ProductReviewStatus';
 import { GitHubUrlCard } from '@/components/revision/GitHubUrlCard';
 import { useCompanyData } from '@/hooks/useCompanyData';
 import ProductDetails from '@/components/ProductDetails';
+import ProductRevisionHistory from '@/components/reviewer/ProductRevisionHistory';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clipboard, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Clipboard, HelpCircle, FileText } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { createIssueUrl } from '@/utils/githubUrlHelper';
@@ -91,6 +92,10 @@ const ProductReview = () => {
       <Tabs defaultValue="review" className="space-y-4">
         <TabsList>
           <TabsTrigger value="review">Review Progress</TabsTrigger>
+          <TabsTrigger value="revisions" className="flex items-center gap-2">
+            <FileText className="h-4 w-4" />
+            Company Revisions
+          </TabsTrigger>
           <TabsTrigger value="details">Product Details</TabsTrigger>
         </TabsList>
 
@@ -123,6 +128,10 @@ const ProductReview = () => {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="revisions">
+          <ProductRevisionHistory productId={id!} />
         </TabsContent>
 
         <TabsContent value="details">
