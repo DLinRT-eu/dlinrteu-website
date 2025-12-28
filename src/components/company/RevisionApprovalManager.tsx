@@ -40,10 +40,8 @@ interface CompanyRevision {
 
 const STATUS_OPTIONS = [
   { value: 'pending', label: 'Pending' },
-  { value: 'in-review', label: 'In Review' },
   { value: 'approved', label: 'Approved' },
   { value: 'rejected', label: 'Rejected' },
-  { value: 'needs-info', label: 'Needs Info' },
 ];
 
 const PRIORITY_OPTIONS = [
