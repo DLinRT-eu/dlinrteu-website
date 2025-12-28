@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Checkbox } from '@/components/ui/checkbox';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { Calendar, Clock, AlertCircle, CheckCircle2, Play, BookOpen, Package } from 'lucide-react';
@@ -14,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { formatDistanceToNow, format } from 'date-fns';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
 import OnboardingChecklist from '@/components/reviewer/OnboardingChecklist';
+import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
 import { useToast } from '@/hooks/use-toast';
 
 interface ReviewAssignment {
@@ -49,6 +51,34 @@ export default function ReviewerDashboard() {
   const [activeTab, setActiveTab] = useState('pending');
   const [rounds, setRounds] = useState<ReviewRound[]>([]);
   const [hasExpertise, setHasExpertise] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+  const handleToggleSelection = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const handleSelectAllInTab = (tabReviews: ReviewAssignment[]) => {
+    const allSelected = tabReviews.every(r => selectedIds.has(r.id));
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (allSelected) {
+        tabReviews.forEach(r => next.delete(r.id));
+      } else {
+        tabReviews.forEach(r => next.add(r.id));
+      }
+      return next;
+    });
+  };
+
+  const handleClearSelection = () => setSelectedIds(new Set());
 
   const checkExpertise = useCallback(async () => {
     if (!userId) return;
@@ -284,16 +314,24 @@ export default function ReviewerDashboard() {
 
   const ReviewCard = ({ review }: { review: ReviewAssignment }) => {
     const deadlineStatus = getDeadlineStatus(review.deadline);
+    const isSelected = selectedIds.has(review.id);
 
     return (
-      <Card className="hover:shadow-md transition-shadow">
+      <Card className={`hover:shadow-md transition-shadow ${isSelected ? 'ring-2 ring-primary' : ''}`}>
         <CardHeader>
-          <div className="flex items-start justify-between">
-            <div className="space-y-1">
-              <CardTitle className="text-lg">Product: {review.product_id}</CardTitle>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Calendar className="h-4 w-4" />
-                <span>Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}</span>
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex items-start gap-3">
+              <Checkbox
+                checked={isSelected}
+                onCheckedChange={() => handleToggleSelection(review.id)}
+                className="mt-1"
+              />
+              <div className="space-y-1">
+                <CardTitle className="text-lg">Product: {review.product_id}</CardTitle>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}</span>
+                </div>
               </div>
             </div>
             <Badge variant={getPriorityColor(review.priority)}>
@@ -465,12 +503,30 @@ export default function ReviewerDashboard() {
 
         {/* Reviews List */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="all">All ({reviews.length})</TabsTrigger>
-            <TabsTrigger value="pending">Pending ({pendingReviews.length})</TabsTrigger>
-            <TabsTrigger value="in_progress">In Progress ({inProgressReviews.length})</TabsTrigger>
-            <TabsTrigger value="completed">Completed ({completedReviews.length})</TabsTrigger>
-          </TabsList>
+          <div className="flex items-center justify-between">
+            <TabsList>
+              <TabsTrigger value="all">All ({reviews.length})</TabsTrigger>
+              <TabsTrigger value="pending">Pending ({pendingReviews.length})</TabsTrigger>
+              <TabsTrigger value="in_progress">In Progress ({inProgressReviews.length})</TabsTrigger>
+              <TabsTrigger value="completed">Completed ({completedReviews.length})</TabsTrigger>
+            </TabsList>
+            {activeTab !== 'all' && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const tabReviews = activeTab === 'pending' ? pendingReviews :
+                                     activeTab === 'in_progress' ? inProgressReviews : completedReviews;
+                  handleSelectAllInTab(tabReviews);
+                }}
+              >
+                {(activeTab === 'pending' ? pendingReviews : activeTab === 'in_progress' ? inProgressReviews : completedReviews)
+                  .every(r => selectedIds.has(r.id)) && 
+                  (activeTab === 'pending' ? pendingReviews : activeTab === 'in_progress' ? inProgressReviews : completedReviews).length > 0
+                  ? 'Deselect All' : 'Select All'}
+              </Button>
+            )}
+          </div>
 
           <TabsContent value="all" className="space-y-4">
             {reviews.length === 0 ? (
@@ -536,6 +592,13 @@ export default function ReviewerDashboard() {
             )}
           </TabsContent>
         </Tabs>
+
+        <BulkReviewerActions
+          selectedIds={selectedIds}
+          reviews={reviews}
+          onClearSelection={handleClearSelection}
+          onOperationComplete={fetchReviews}
+        />
       </div>
     </PageLayout>
   );
