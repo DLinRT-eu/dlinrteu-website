@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Checkbox } from '@/components/ui/checkbox';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { Calendar, Clock, AlertCircle, CheckCircle2, Play, BookOpen, Package } from 'lucide-react';
+import { Calendar, Clock, AlertCircle, CheckCircle2, Play, BookOpen, Package, FileEdit } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNow, format } from 'date-fns';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
@@ -52,6 +52,7 @@ export default function ReviewerDashboard() {
   const [rounds, setRounds] = useState<ReviewRound[]>([]);
   const [hasExpertise, setHasExpertise] = useState(true);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [pendingRevisionsCount, setPendingRevisionsCount] = useState(0);
 
   const handleToggleSelection = (id: string) => {
     setSelectedIds(prev => {
@@ -171,6 +172,21 @@ export default function ReviewerDashboard() {
     }
   }, []);
 
+  const fetchPendingRevisionsCount = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .rpc('get_pending_revisions_count_for_reviewer');
+
+      if (error) {
+        console.error('Error fetching pending revisions count:', error);
+        return;
+      }
+      setPendingRevisionsCount(data || 0);
+    } catch (error) {
+      console.error('Error fetching pending revisions count:', error);
+    }
+  }, []);
+
   useEffect(() => {
     if (authLoading || rolesLoading) return;
 
@@ -182,7 +198,8 @@ export default function ReviewerDashboard() {
     fetchReviews();
     fetchRounds();
     checkExpertise();
-  }, [authLoading, rolesLoading, userId, isReviewer, isAdmin, navigate, fetchReviews, fetchRounds, checkExpertise]);
+    fetchPendingRevisionsCount();
+  }, [authLoading, rolesLoading, userId, isReviewer, isAdmin, navigate, fetchReviews, fetchRounds, checkExpertise, fetchPendingRevisionsCount]);
 
   const handleStartReview = useCallback(async (reviewId: string) => {
     try {
@@ -461,7 +478,7 @@ export default function ReviewerDashboard() {
         )}
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium">Total Assigned</CardTitle>
@@ -492,6 +509,24 @@ export default function ReviewerDashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-500">{completedReviews.length}</div>
+            </CardContent>
+          </Card>
+          <Card className={pendingRevisionsCount > 0 ? 'border-orange-500/50 bg-orange-500/5' : ''}>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium flex items-center gap-2">
+                <FileEdit className="h-4 w-4" />
+                Pending Revisions
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold ${pendingRevisionsCount > 0 ? 'text-orange-500' : 'text-muted-foreground'}`}>
+                {pendingRevisionsCount}
+              </div>
+              {pendingRevisionsCount > 0 && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Company updates awaiting review
+                </p>
+              )}
             </CardContent>
           </Card>
         </div>
