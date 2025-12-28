@@ -115,7 +115,7 @@ const App = () => (
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="update-password" element={<UpdatePassword />} />
                 <Route path="export-presentation" element={<ExportPresentation />} />
-                <Route path="security-monitoring" element={<SecurityMonitoring />} />
+                <Route path="security-monitoring" element={<Navigate to="/admin/security" replace />} />
                 <Route path="companies" element={<Companies />} />
                 <Route path="news" element={<News />} />
                 <Route path="support" element={<Support />} />

@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { supabase } from '@/integrations/supabase/client';
 import { Shield, AlertTriangle, Clock, TrendingUp } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRoles } from '@/contexts/RoleContext';
 
 interface SecurityEvent {
   id: string;
@@ -13,7 +15,6 @@ interface SecurityEvent {
   created_at: string;
   url: string | null;
   ip_hash: string | null;
-  user_agent_hash: string | null;
   notes: string | null;
   resolved_at: string | null;
 }
@@ -30,37 +31,36 @@ export const SecurityDashboard: React.FC = () => {
   const [stats, setStats] = useState<SecurityStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [accessDenied, setAccessDenied] = useState(false);
+  
+  const { user } = useAuth();
+  const { isAdmin, loading: rolesLoading } = useRoles();
 
   useEffect(() => {
-    fetchSecurityData();
-  }, []);
+    if (!rolesLoading) {
+      if (!user || !isAdmin) {
+        setAccessDenied(true);
+        setLoading(false);
+      } else {
+        fetchSecurityData();
+      }
+    }
+  }, [user, isAdmin, rolesLoading]);
 
   const fetchSecurityData = async () => {
     try {
-      // Fetch recent security events
+      // Use the secure RPC function instead of direct table queries
       const { data: eventsData, error: eventsError } = await supabase
-        .from('security_events')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(20);
+        .rpc('get_security_events_admin', { last_n_days: 7 });
 
       if (eventsError) throw eventsError;
 
-      // Fetch security statistics
-      const { data: statsData, error: statsError } = await supabase
-        .from('security_events')
-        .select('severity, created_at')
-        .gte('created_at', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString());
-
-      if (statsError) throw statsError;
-
       setEvents(eventsData || []);
       
-      // Calculate stats
-      const totalEvents = statsData?.length || 0;
-      const criticalEvents = statsData?.filter(e => e.severity === 'critical').length || 0;
-      const highEvents = statsData?.filter(e => e.severity === 'high').length || 0;
-      const recentEvents = statsData?.filter(e => 
+      // Calculate stats from the returned events
+      const totalEvents = eventsData?.length || 0;
+      const criticalEvents = eventsData?.filter((e: SecurityEvent) => e.severity === 'critical').length || 0;
+      const highEvents = eventsData?.filter((e: SecurityEvent) => e.severity === 'high').length || 0;
+      const recentEvents = eventsData?.filter((e: SecurityEvent) => 
         new Date(e.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)
       ).length || 0;
 
@@ -73,7 +73,7 @@ export const SecurityDashboard: React.FC = () => {
 
     } catch (error: any) {
       console.error('Error fetching security data:', error);
-      if (error?.code === '42501' || String(error?.message || error).includes('permission denied')) {
+      if (error?.code === '42501' || String(error?.message || error).includes('Access denied')) {
         setAccessDenied(true);
       }
     } finally {
