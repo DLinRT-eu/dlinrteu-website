@@ -3,20 +3,33 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Shield, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Shield, CheckCircle, AlertCircle, RefreshCw, ExternalLink, ChevronDown, Info } from 'lucide-react';
 
 interface SecurityHeader {
   name: string;
   expected: string;
   actual?: string;
-  status: 'pass' | 'fail' | 'warning';
+  status: 'pass' | 'fail' | 'warning' | 'unverifiable';
   description: string;
+  configuredInHeaders?: boolean;
 }
+
+// Headers that are configured in public/_headers but cannot be verified client-side due to CORS
+const CONFIGURED_HEADERS = [
+  'X-Frame-Options',
+  'X-Content-Type-Options', 
+  'X-XSS-Protection',
+  'Content-Security-Policy',
+  'Referrer-Policy',
+  'Strict-Transport-Security'
+];
 
 export const SecurityHeadersValidator: React.FC = () => {
   const [headers, setHeaders] = useState<SecurityHeader[]>([]);
   const [loading, setLoading] = useState(false);
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
+  const [showDevToolsGuide, setShowDevToolsGuide] = useState(false);
 
   const expectedHeaders = [
     {
@@ -54,7 +67,6 @@ export const SecurityHeadersValidator: React.FC = () => {
   const checkSecurityHeaders = async () => {
     setLoading(true);
     try {
-      // Check headers using a real request to our own domain
       const testUrl = `${window.location.origin}/favicon.svg`;
       const response = await fetch(testUrl, { 
         method: 'GET',
@@ -63,9 +75,12 @@ export const SecurityHeadersValidator: React.FC = () => {
       
       const checkedHeaders: SecurityHeader[] = expectedHeaders.map(header => {
         const actualValue = response.headers.get(header.name);
+        const isConfigured = CONFIGURED_HEADERS.includes(header.name);
         
-        let status: 'pass' | 'fail' | 'warning' = 'fail';
+        let status: 'pass' | 'fail' | 'warning' | 'unverifiable' = 'fail';
+        
         if (actualValue) {
+          // Header was returned and can be verified
           if (header.name === 'Content-Security-Policy') {
             status = actualValue.includes('default-src') ? 'pass' : 'warning';
           } else if (header.name === 'Strict-Transport-Security') {
@@ -81,12 +96,16 @@ export const SecurityHeadersValidator: React.FC = () => {
           } else {
             status = actualValue.includes(header.expected.split(';')[0]) ? 'pass' : 'warning';
           }
+        } else if (isConfigured) {
+          // Header is configured in _headers but browser doesn't expose it (CORS limitation)
+          status = 'unverifiable';
         }
 
         return {
           ...header,
           actual: actualValue || undefined,
-          status
+          status,
+          configuredInHeaders: isConfigured
         };
       });
 
@@ -94,11 +113,11 @@ export const SecurityHeadersValidator: React.FC = () => {
       setLastChecked(new Date());
     } catch (error) {
       console.error('Error checking security headers:', error);
-      // If we can't check headers, mark them as unknown status
       const errorHeaders = expectedHeaders.map(h => ({ 
         ...h, 
-        status: 'warning' as const,
-        actual: 'Unable to verify - check browser console'
+        status: 'unverifiable' as const,
+        actual: undefined,
+        configuredInHeaders: CONFIGURED_HEADERS.includes(h.name)
       }));
       setHeaders(errorHeaders);
       setLastChecked(new Date());
@@ -114,24 +133,34 @@ export const SecurityHeadersValidator: React.FC = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'pass': return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'warning': return <XCircle className="h-4 w-4 text-yellow-500" />;
-      case 'fail': return <XCircle className="h-4 w-4 text-destructive" />;
-      default: return <XCircle className="h-4 w-4 text-muted-foreground" />;
+      case 'warning': return <AlertCircle className="h-4 w-4 text-yellow-500" />;
+      case 'unverifiable': return <Info className="h-4 w-4 text-blue-500" />;
+      case 'fail': return <AlertCircle className="h-4 w-4 text-destructive" />;
+      default: return <AlertCircle className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: string, configuredInHeaders?: boolean) => {
     switch (status) {
-      case 'pass': return <Badge variant="default" className="bg-green-500">Pass</Badge>;
+      case 'pass': return <Badge variant="default" className="bg-green-500">Verified</Badge>;
       case 'warning': return <Badge variant="secondary" className="bg-yellow-500">Warning</Badge>;
-      case 'fail': return <Badge variant="destructive">Fail</Badge>;
+      case 'unverifiable': 
+        return configuredInHeaders 
+          ? <Badge variant="secondary" className="bg-blue-500 text-white">Configured (Cannot verify)</Badge>
+          : <Badge variant="outline">Cannot verify</Badge>;
+      case 'fail': return <Badge variant="destructive">Missing</Badge>;
       default: return <Badge variant="outline">Unknown</Badge>;
     }
   };
 
   const passCount = headers.filter(h => h.status === 'pass').length;
   const failCount = headers.filter(h => h.status === 'fail').length;
+  const unverifiableCount = headers.filter(h => h.status === 'unverifiable').length;
   const warningCount = headers.filter(h => h.status === 'warning').length;
+
+  const openExternalChecker = () => {
+    window.open(`https://securityheaders.com/?q=${encodeURIComponent(window.location.origin)}&followRedirects=on`, '_blank');
+  };
 
   return (
     <Card>
@@ -141,27 +170,51 @@ export const SecurityHeadersValidator: React.FC = () => {
             <Shield className="h-5 w-5" />
             Security Headers Validation
           </CardTitle>
-          <Button 
-            onClick={checkSecurityHeaders} 
-            disabled={loading}
-            size="sm"
-            variant="outline"
-          >
-            {loading ? (
-              <RefreshCw className="h-4 w-4 animate-spin" />
-            ) : (
-              <RefreshCw className="h-4 w-4" />
-            )}
-            Refresh
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              onClick={openExternalChecker}
+              size="sm"
+              variant="outline"
+            >
+              <ExternalLink className="h-4 w-4 mr-1" />
+              Verify Externally
+            </Button>
+            <Button 
+              onClick={checkSecurityHeaders} 
+              disabled={loading}
+              size="sm"
+              variant="outline"
+            >
+              {loading ? (
+                <RefreshCw className="h-4 w-4 animate-spin" />
+              ) : (
+                <RefreshCw className="h-4 w-4" />
+              )}
+              Refresh
+            </Button>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Browser Limitation Notice */}
+        <Alert>
+          <Info className="h-4 w-4" />
+          <AlertDescription>
+            <strong>Note:</strong> Browsers restrict access to security headers via JavaScript (CORS). 
+            Headers marked "Configured (Cannot verify)" are set in the <code className="bg-muted px-1 rounded">_headers</code> file 
+            but cannot be verified client-side. Use the "Verify Externally" button or browser DevTools for accurate verification.
+          </AlertDescription>
+        </Alert>
+
         {/* Summary */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-500">{passCount}</div>
-            <div className="text-sm text-muted-foreground">Passing</div>
+            <div className="text-sm text-muted-foreground">Verified</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-500">{unverifiableCount}</div>
+            <div className="text-sm text-muted-foreground">Configured</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-yellow-500">{warningCount}</div>
@@ -169,7 +222,7 @@ export const SecurityHeadersValidator: React.FC = () => {
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-destructive">{failCount}</div>
-            <div className="text-sm text-muted-foreground">Failing</div>
+            <div className="text-sm text-muted-foreground">Missing</div>
           </div>
         </div>
 
@@ -190,17 +243,50 @@ export const SecurityHeadersValidator: React.FC = () => {
                   <div className="text-xs text-muted-foreground mt-1">
                     Expected: {header.expected}
                   </div>
-                  {header.actual && (
+                  {header.actual ? (
                     <div className="text-xs text-muted-foreground">
                       Actual: {header.actual}
                     </div>
-                  )}
+                  ) : header.status === 'unverifiable' && header.configuredInHeaders ? (
+                    <div className="text-xs text-blue-600">
+                      ✓ Configured in _headers file (verify via DevTools or external tool)
+                    </div>
+                  ) : null}
                 </div>
               </div>
-              {getStatusBadge(header.status)}
+              {getStatusBadge(header.status, header.configuredInHeaders)}
             </div>
           ))}
         </div>
+
+        {/* DevTools Instructions */}
+        <Collapsible open={showDevToolsGuide} onOpenChange={setShowDevToolsGuide}>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" className="w-full justify-between">
+              <span>How to verify headers manually</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${showDevToolsGuide ? 'rotate-180' : ''}`} />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-2">
+            <div className="bg-muted p-4 rounded-lg text-sm space-y-2">
+              <p className="font-medium">Using Browser DevTools:</p>
+              <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
+                <li>Open DevTools (F12 or Right-click → Inspect)</li>
+                <li>Go to the <strong>Network</strong> tab</li>
+                <li>Refresh the page (F5)</li>
+                <li>Click on the first request (usually the HTML document)</li>
+                <li>Select the <strong>Headers</strong> tab</li>
+                <li>Scroll to <strong>Response Headers</strong> section</li>
+                <li>Look for security headers (X-Frame-Options, CSP, etc.)</li>
+              </ol>
+              <p className="mt-3 font-medium">Using External Tools:</p>
+              <ul className="list-disc list-inside text-muted-foreground">
+                <li><a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">securityheaders.com</a> - Comprehensive header analysis</li>
+                <li><a href="https://observatory.mozilla.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Mozilla Observatory</a> - Security assessment</li>
+              </ul>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
 
         {lastChecked && (
           <div className="text-xs text-muted-foreground text-center pt-2 border-t">
@@ -210,10 +296,10 @@ export const SecurityHeadersValidator: React.FC = () => {
 
         {failCount > 0 && (
           <Alert variant="destructive">
-            <XCircle className="h-4 w-4" />
+            <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              {failCount} security header(s) are missing or misconfigured. 
-              This may expose your application to security vulnerabilities.
+              {failCount} security header(s) are missing. 
+              Configure them in your <code className="bg-destructive/20 px-1 rounded">public/_headers</code> file or server configuration.
             </AlertDescription>
           </Alert>
         )}
