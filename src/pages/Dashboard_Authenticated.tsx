@@ -4,6 +4,7 @@ import { useRoles } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/layout/PageLayout';
+import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { 
   Users, 
   FileCheck, 
@@ -216,6 +217,9 @@ export default function Dashboard_Authenticated() {
             {getRoleDescription()}
           </p>
         </div>
+
+        {/* Pending Stats Widget */}
+        <PendingStatsWidget isAdmin={isAdmin} isReviewer={isReviewer} isCompany={isCompany} />
 
         {/* Quick Actions Grid */}
         <div className="mb-12">
