@@ -1,7 +1,7 @@
 
 import { ProductDetails } from "@/types/productDetails";
 
-// Structure data retrieved on 2024-04-29
+// Structure data retrieved on 2026-01-02
 export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-annotate",
@@ -10,16 +10,22 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.therapanacea.eu/",
     productUrl: "https://www.therapanacea.eu/our-products/annotate/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
-    description: "AI-powered auto-segmentation solution for radiation therapy planning with advanced deep learning algorithms for CT, MRI, and CBCT.",
+    description: "AI-powered auto-segmentation solution within ART-Plan+ platform. Delineates 200+ organs-at-risk and lymph node regions in 2-3 minutes for CT, MRI, and CBCT images.",
     category: "Auto-Contouring",
-    certification: "CE & FDA",
+    certification: "CE, FDA & TGA",
     logoUrl: "/logos/therapanacea.png",
     website: "https://www.therapanacea.eu/our-products/annotate/",
-    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
+    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brain"],
     modality: ["CT", "MRI", "CBCT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["AI-powered segmentation", "Clinical workflow integration", "Rapid processing", "Multi-modality support"],
+    keyFeatures: [
+      "200+ OARs and lymph node regions",
+      "2-3 minute delineation time",
+      "AI-powered segmentation",
+      "Clinical workflow integration",
+      "Multi-modality support (CT, MRI, CBCT)"
+    ],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "MRI", "CBCT"],
@@ -31,12 +37,12 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
       integration: ["TPS integration", "PACS integration"],
       deployment: ["Cloud-based", "On-premises"],
       triggerForAnalysis: "Manual or automated",
-      processingTime: "3-5 minutes per case"
+      processingTime: "2-3 minutes per case"
     },
     regulatory: {
       ce: {
         status: "CE Marked",
-        class: "Class IIa",
+        class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)"
@@ -49,7 +55,11 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ, QKB, LLZ",
         regulationNumber: "21 CFR 892.5050",
         decisionDate: "2025-02-25",
-        notes: "ART-Plan+ v3.0.0. Original ART-Plan clearance: K202700 (Jan 2021)"
+        notes: "ART-Plan+ v3.0.0 cleared. Current version is v3.1.2. Original ART-Plan clearance: K202700 (Jan 2021)"
+      },
+      tga: {
+        status: "TGA Cleared",
+        notes: "Cleared for Australian market"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -57,9 +67,9 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales"],
     },
-    version: "2.5",
-    releaseDate: "2023-11-20",
-    lastUpdated: "2024-03-15",
+    version: "3.1.2",
+    releaseDate: "2025-01-01",
+    lastUpdated: "2026-01-02",
     supportedStructures: [
    //   Head & Neck
 "Head & Neck: Brachial Plexus (L/R)",
@@ -219,6 +229,6 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
 "Pelvis (Female Lymph Nodes): LN Presacral (Gyneco)"
     ],
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database (K242822, K202700), company official sources"
+    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822, K202700)"
   }
 ];

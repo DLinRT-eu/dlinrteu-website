@@ -49,11 +49,16 @@ export interface ProductDetails extends Product {
       decisionDate?: string;
       notes?: string;
     } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
     intendedUseStatement?: string;
   };
   market?: {
     onMarketSince?: string;
     distributionChannels?: string[];
+    availability?: string;
   };
   pricing?: {
     model?: string[];
