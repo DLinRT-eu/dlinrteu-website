@@ -72,8 +72,12 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        clearanceNumber: "K193053",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K241490",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2024-10-18",
+        notes: "Latest version. Previous clearances: K193053 (2020)"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
     },
@@ -85,7 +89,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     version: "1.3.1",
     releaseDate: "2025-10-27",
     lastUpdated: "2025-12-23",
-    lastRevised: "2025-12-23",
-    source: "Automatically retrieved and manually revised"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K241490), company official sources"
   }
 ];

@@ -315,13 +315,16 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     ce: {
       status: "Certified",
       class: "IIa",
-      type: "Medical Device"
+      type: "MDR",
+      regulation: "MDR 2017/745"
     },
-      fda: {
-        status: "510(k) Cleared",
-        class: "Class II",
-        type: "510(k)"
-      },
+    fda: {
+      status: "510(k) Cleared",
+      class: "Class II",
+      type: "510(k)",
+      decisionDate: "2025-02",
+      notes: "510(k) cleared February 2025. Clearance number pending verification."
+    },
     intendedUseStatement: "AI-powered automatic organ and target volume contouring for radiotherapy treatment planning"
   },
   // Market Information
@@ -332,7 +335,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
   version: "2024",
   releaseDate: "2024-01-01",
   lastUpdated: "2025-07-14",
-  lastRevised: "2025-12-01",
+  lastRevised: "2026-01-02",
+  source: "FDA 510(k) database (Feb 2025), company official sources",
   clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
 }
 ];

@@ -37,13 +37,16 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K250035",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
         decisionDate: "2025-02-03"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
@@ -51,13 +54,12 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     market: {
       onMarketSince: "2019",
       distributionChannels: ["Direct sales"],
-
-},
+    },
     version: "7.1",
     releaseDate: "2023-10-15",
     lastUpdated: "2025-12-11",
-    lastRevised: "2025-12-11",
-    source: "Company",
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K250035), company official sources",
     supportedStructures: [
       "Brain: Brain",
       "Brain: Brainstem",

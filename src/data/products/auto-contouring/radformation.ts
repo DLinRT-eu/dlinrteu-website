@@ -115,23 +115,29 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K230685",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2023-04-14",
+        notes: "Also distributes Limbus Contour (K230575) after acquisition in April 2024"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
     market: {
       onMarketSince: "2017",
       distributionChannels: ["Direct sales", "Cloud platform", "Includes Limbus AI (acquired April 30, 2024)"]
-},
+    },
     version: "2.6",
     releaseDate: "2025-01-15",
     lastUpdated: "2025-12-01",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and revised"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K230685), company official sources"
   }
 ];
