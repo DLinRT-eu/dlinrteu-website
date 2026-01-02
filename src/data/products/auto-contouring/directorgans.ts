@@ -1,72 +1,78 @@
 
 import { ProductDetails } from "@/types/productDetails";
 
-// Structure data retrieved on 2024-04-29
+// Structure data retrieved on 2024-04-29, updated 2026-01-02 with accurate regulatory info
 export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
   {
     id: "directorgans",
     name: "DirectORGANS",
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com/",
-    productUrl: "https://www.siemens-healthineers.com/nl-be/infrastructure-it/artificial-intelligence/ai-campaign/organs-rt",
+    productUrl: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/directorgans.ts",
-    description: "Specialized AI solution focused exclusively on automatic organ segmentation for radiation therapy planning.",
+    description: "World's first CT simulator-integrated auto-contouring solution. DirectORGANS uses optimized reconstruction and deep learning to generate organ-at-risk contours directly during CT image acquisition, eliminating the need for separate contouring workstations. Available on SOMATOM go.Sim and SOMATOM go.Open Pro.",
     category: "Auto-Contouring",
     certification: "CE",
     logoUrl: "/logos/siemens.png",
-    website: "https://www.siemens-healthineers.com/nl-be/infrastructure-it/artificial-intelligence/ai-campaign/organs-rt",
-    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
-    modality: ["CT", "MRI"],
+    website: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
+    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brain"],
+    modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["AI-powered segmentation", "Fast processing", "Multiple anatomical sites"],
+    keyFeatures: [
+      "World's first CT simulator-integrated auto-contouring",
+      "Deep learning with optimized image reconstruction",
+      "Contours generated during CT acquisition workflow",
+      "No separate contouring workstation required",
+      "Standardized input optimization for consistent results",
+      "Available for brain, head & neck, breast, lung, abdomen, and prostate",
+      "Advanced packages for cardiac substructures and lung substructures"
+    ],
     technicalSpecifications: {
       population: "Adult patients",
-      input: ["CT", "MRI"],
+      input: ["CT (SOMATOM go.Sim, SOMATOM go.Open Pro)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
       outputFormat: ["DICOM-RT"]
     },
     technology: {
-      integration: ["TPS integration", "PACS integration"],
-      deployment: ["Cloud-based", "On-premises"],
-      triggerForAnalysis: "Manual or automated",
-      processingTime: "Minutes per case"
+      integration: ["Native CT simulator integration", "TPS integration via DICOM-RT"],
+      deployment: ["CT Simulator Integrated (SOMATOM go.Sim, go.Open Pro)"],
+      triggerForAnalysis: "Automatic during CT acquisition",
+      processingTime: "Part of CT reconstruction workflow"
     },
     regulatory: {
       ce: {
         status: "Certified",
-        class: "IIa",
-        type: "Medical Device"
+        class: "IIb",
+        type: "Medical Device (CT Simulator Feature)",
+        regulation: "MDR (EU 2017/745)"
       },
-      fda: "Under review",
-      intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+      fda: {
+        status: "510(k) Cleared",
+        class: "II",
+        clearanceNumber: "K233650, K250822",
+        productCode: "JAK",
+        regulationNumber: "21 CFR 892.1750",
+        notes: "Cleared as integrated feature of SOMATOM go.Sim and SOMATOM go.Open Pro CT simulators. Not a standalone software product."
+      },
+      intendedUseStatement: "DirectORGANS is intended for automatic segmentation of organs at risk during CT simulation for radiation therapy planning. It operates as an integrated feature of compatible SOMATOM CT simulators."
     },
     market: {
       onMarketSince: "2021",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
-    version: "2.0",
+    version: "VA30+",
     releaseDate: "2023-05-25",
-    lastUpdated: "2024-02-10",
+    lastUpdated: "2025-07-03",
     supportedStructures: [
-      "Head & Neck: Brainstem",
-      "Head & Neck: Parotid (L)",
-      "Head & Neck: Parotid (R)",
-      "Head & Neck: Spinal Cord",
-      "Thorax: Heart",
-      "Thorax: Lungs (L)",
-      "Thorax: Lungs (R)",
-      "Thorax: Esophagus",
-      "Abdomen: Liver",
-      "Abdomen: Kidneys (L)",
-      "Abdomen: Kidneys (R)",
-      "Abdomen: Spleen",
-      "Pelvis: Bladder",
-      "Pelvis: Rectum",
-      "Pelvis: Femoral Heads"
+      "Brain structures",
+      "Head & Neck: Brainstem, Parotid (L/R), Spinal Cord, Mandible, Eyes, Optic structures",
+      "Thorax: Heart, Lungs (L/R), Esophagus, Cardiac substructures (advanced)",
+      "Abdomen: Liver, Kidneys (L/R), Spleen, Stomach, Bowel",
+      "Pelvis: Bladder, Rectum, Femoral Heads, Prostate"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Siemens Healthineers official documentation, ASTRO whitepaper, FDA 510(k) K233650/K250822"
   }
 ];
