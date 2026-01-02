@@ -41,12 +41,17 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K210760",
+        regulationNumber: "21 CFR 892.1750",
+        productCode: "JAK",
+        decisionDate: "2022-01-14"
       },
       intendedUseStatement: "Intended for use in CT image reconstruction to provide diagnostic quality images with reduced radiation dose."
     },
@@ -63,8 +68,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-02",
-    source: "Company website",
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   },
   {
@@ -109,7 +114,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -140,7 +146,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",
     lastUpdated: "2025-07-30", 
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   }

@@ -42,12 +42,14 @@ export const GE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of GE Edison Platform AI application clearances"
       },
       intendedUseStatement: "Intended for use in enhancing CT images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -58,8 +60,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple clinical evaluations demonstrating improved diagnostic confidence and reduced interpretation time",
     lastUpdated: "2025-01-20",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   },
   {
     id: "ge-air-recon-dl-enhancement",
@@ -100,12 +102,14 @@ export const GE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of GE AIR Recon DL platform clearances (K193282, K213717)"
       },
       intendedUseStatement: "Intended for use in enhancing MR image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -116,7 +120,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   }
 ];

@@ -56,13 +56,16 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K211841",
+        regulationNumber: "21 CFR 892.5050",
+        productCode: "MUJ",
         decisionDate: "2022-08-25"
       },
       intendedUseStatement: "For generating synthetic CT and structure sets from MRI for radiation therapy planning."
@@ -75,7 +78,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     version: "3.2",
     releaseDate: "2023-07-10",
     lastUpdated: "2025-12-11",
-    lastRevised: "2025-12-11",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   }
 ];

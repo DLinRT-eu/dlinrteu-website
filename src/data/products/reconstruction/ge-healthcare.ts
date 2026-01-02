@@ -42,7 +42,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -73,7 +74,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies showing diagnostic equivalence at up to 82% lower dose compared to conventional techniques",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
@@ -117,7 +118,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -126,7 +128,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH",
         type: "510(k)",
-        decisionDate: "2020-04-10"
+        decisionDate: "2020-04-10",
+        notes: "K193282 initial clearance (Apr 2020). K213717 expanded indications (Dec 2021)."
       },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance signal-to-noise ratio and/or reduce scan time while maintaining diagnostic image quality."
     },
@@ -153,7 +156,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }

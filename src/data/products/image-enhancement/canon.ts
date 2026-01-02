@@ -42,12 +42,14 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of Canon Vitrea Advanced Visualization platform clearances"
       },
       intendedUseStatement: "Intended for enhancing medical images to improve quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -58,7 +60,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple reader studies showing improved diagnostic confidence and reduced reading time for enhanced images",
     lastUpdated: "2025-01-05",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

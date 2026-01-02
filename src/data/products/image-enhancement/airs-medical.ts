@@ -42,13 +42,17 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared (K230854, Oct 27, 2023)",
+        status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K230854"
+        clearanceNumber: "K230854",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "LLZ",
+        decisionDate: "2023-10-27"
       },
       intendedUseStatement: "Intended for enhancing magnetic resonance images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -58,8 +62,8 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images",
     lastUpdated: "2025-02-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   },
   {
     id: "airs-ct-clarity",
@@ -101,12 +105,14 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Pending",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "CE marked for European market. FDA 510(k) submission pending for US market access."
       },
       intendedUseStatement: "Intended for enhancing computed tomography images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -116,7 +122,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     clinicalEvidence: "Early clinical evaluations showing improved image quality metrics and reader preference compared to standard CT images",
     lastUpdated: "2025-01-20",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

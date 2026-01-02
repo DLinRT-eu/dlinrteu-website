@@ -37,12 +37,14 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of Siemens syngo.via RT platform clearances"
       },
       intendedUseStatement: "For creating synthetic CT datasets from MR images to be used in radiation therapy planning."
     },
@@ -54,7 +56,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     version: "VB80",
     releaseDate: "2024-09-20",
     lastUpdated: "2025-08-11",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

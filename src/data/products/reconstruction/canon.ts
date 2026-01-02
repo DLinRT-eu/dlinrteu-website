@@ -43,7 +43,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -74,7 +75,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website"
   },
   {
@@ -117,7 +118,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -148,7 +150,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
@@ -193,7 +195,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa", 
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -224,7 +227,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies demonstrating significantly improved spatial resolution and image sharpness for enhanced diagnostic capabilities",
     lastUpdated: "2025-01-15", 
-    lastRevised: "2025-12-02",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website"
   }
 ];
