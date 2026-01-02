@@ -42,7 +42,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
@@ -50,7 +51,9 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K213693, K232322, K250436",
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH, LNI, MOS",
-        type: "510(k)"
+        type: "510(k)",
+        decisionDate: "2022-02-25",
+        notes: "Initial clearance K213693 (Feb 2022). K250436 for MAGNETOM Flow.Ace/Plus (June 2025)"
       },
       intendedUseStatement: "Intended for use in MRI image reconstruction to accelerate scan times and enhance image quality while maintaining diagnostic utility."
     },
@@ -81,7 +84,9 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
-    lastRevised: "2025-12-02",
+    releaseDate: "2020-09-01",
+    lastUpdated: "2025-07-15",
+    lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website"
   }
 ];

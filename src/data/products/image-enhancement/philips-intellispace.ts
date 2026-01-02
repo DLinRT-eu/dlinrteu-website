@@ -42,9 +42,15 @@ export const PHILIPS_INTELLISPACE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        notes: "Part of Philips IntelliSpace Portal platform clearances"
+      },
       intendedUseStatement: "Intended for use in enhancing diagnostic images through noise reduction and detail enhancement to support clinical interpretation."
     },
     market: {
@@ -54,7 +60,7 @@ export const PHILIPS_INTELLISPACE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple studies showing improved reader confidence and reduced reading time for enhanced images",
     lastUpdated: "2025-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

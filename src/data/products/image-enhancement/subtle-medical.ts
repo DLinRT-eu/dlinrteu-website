@@ -43,12 +43,17 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K191688",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "LLZ",
+        decisionDate: "2019-08-19"
       },
       intendedUseStatement: "Intended for use in enhancing MR image quality of accelerated acquisitions to support clinical interpretation."
     },
@@ -59,8 +64,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
     lastUpdated: "2025-01-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   },
   {
     id: "subtle-pet",
@@ -103,12 +108,17 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K182336",
+        regulationNumber: "21 CFR 892.1200",
+        productCode: "KPS, LLZ",
+        decisionDate: "2018-11-30"
       },
       intendedUseStatement: "Intended for use in enhancing PET image quality of low-dose or fast-acquisition scans to support clinical interpretation."
     },
@@ -119,7 +129,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
     lastUpdated: "2025-01-05",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   }
 ];

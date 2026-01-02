@@ -37,12 +37,14 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of Therapanacea ART-Plan platform. See K242822 for latest ART-Plan+ clearance (May 2025)."
       },
       intendedUseStatement: "For generating synthetic CT datasets from MR images for radiation therapy planning."
     },
@@ -54,7 +56,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-04-25",
     lastUpdated: "2024-08-06",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   }
 ];

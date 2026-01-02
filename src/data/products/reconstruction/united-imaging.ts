@@ -43,12 +43,14 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "FDA Cleared",
+        status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Cleared as part of United Imaging CT system clearances (e.g., K241166 for uCT 550). AI reconstruction is integrated feature."
       },
       intendedUseStatement: "Intended for use in CT image reconstruction to reduce radiation dose and improve image quality compared to conventional reconstruction techniques."
     },
@@ -57,8 +59,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated in CT systems"],
     },
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
 
   },
   {
@@ -100,12 +102,14 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "FDA Cleared",
+        status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Cleared as part of United Imaging MR system clearances. AI reconstruction is integrated feature."
       },
       intendedUseStatement: "Intended for use in MRI image reconstruction to reduce acquisition time or increase image quality."
     },
@@ -115,8 +119,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
 
 },
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and verified",
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },
@@ -160,12 +164,14 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "FDA Cleared",
+        status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Cleared as part of United Imaging PET/CT and PET/MR system clearances. AI reconstruction is integrated feature."
       },
       intendedUseStatement: "Intended for use in PET image reconstruction to enhance image quality and/or reduce acquisition time or injected dose."
     },
@@ -176,8 +182,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection rates and quantitative accuracy compared to conventional reconstruction techniques",
     lastUpdated: "2024-12-20",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   }

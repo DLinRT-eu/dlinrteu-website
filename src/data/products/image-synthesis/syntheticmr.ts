@@ -47,12 +47,15 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared (Dec 6, 2024)",
+        status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        decisionDate: "2024-12-06",
+        notes: "Latest version 15 cleared December 2024"
       },
       intendedUseStatement: "For use in generating synthetic MR contrasts and quantitative tissue maps from a single MRI acquisition to support clinical diagnosis."
     },
@@ -64,7 +67,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     version: "15",
     releaseDate: "2024-12-06",
     lastUpdated: "2025-12-01",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company website"
   }
 ];

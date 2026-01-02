@@ -43,12 +43,14 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of Siemens syngo.via platform clearances"
       },
       intendedUseStatement: "Intended for enhancing dual-energy CT image quality and material discrimination to support clinical interpretation."
     },
@@ -59,7 +61,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection and characterization compared to conventional dual-energy processing",
     lastUpdated: "2025-02-01",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

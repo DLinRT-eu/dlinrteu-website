@@ -42,9 +42,15 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        notes: "Part of Philips CT platform clearances. SmartDose is an integrated low-dose enhancement feature."
+      },
       intendedUseStatement: "Intended for use in enhancing low-dose CT images to reduce noise and improve diagnostic confidence without altering the underlying anatomical information."
     },
     market: {
@@ -54,7 +60,7 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
     lastUpdated: "2025-01-05",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

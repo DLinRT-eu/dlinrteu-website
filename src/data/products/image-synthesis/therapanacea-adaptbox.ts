@@ -50,12 +50,14 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Part of Therapanacea adaptive RT platform clearances"
       },
       intendedUseStatement: "For automatic segmentation of male pelvic structures in CBCT images for adaptive radiation therapy planning."
     },
@@ -67,7 +69,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2023-09-01",
     lastUpdated: "2024-04-26",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and verified"
+    lastRevised: "2026-01-02",
+    source: "Company website"
   }
 ];

@@ -43,9 +43,15 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Approved",
         class: "IIb",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
-      fda: "510(k) Cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        notes: "Cleared as part of United Imaging uRT radiotherapy system clearances. CBCT enhancement is integrated feature."
+      },
       intendedUseStatement: "Intended for enhancing cone-beam CT images to improve image quality and reduce artifacts to support radiotherapy planning and verification."
     },
     market: {
@@ -55,8 +61,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
     lastUpdated: "2024-12-20",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company website"
 
   }
 ];

@@ -50,7 +50,8 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K161625",
         regulationNumber: "21 CFR 892.2050",
         productCode: "LLZ",
-        type: "510(k)"
+        type: "510(k)",
+        decisionDate: "2016-09-19"
       },
       intendedUseStatement:
         "Intended for use in de-noising CT datasets to improve image quality at reduced radiation dose to support clinical interpretation."
@@ -66,7 +67,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2025-09-01",
-    lastRevised: "2025-12-01",
-    source: "Company provided information"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database and company provided information"
   }
 ];
