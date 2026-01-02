@@ -37,6 +37,7 @@ export interface ProductDetails extends Product {
       notifiedBody?: string;
       certificateNumber?: string;
       regulation?: string;
+      notes?: string;
     };
     fda?: {
       status: string;
