@@ -37,10 +37,12 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
-        status: "Under review"
+        status: "Under review",
+        notes: "CardioSuite has FDA clearance (K213731) but RT Suite status unconfirmed"
       },
       intendedUseStatement: "For automatic segmentation and treatment planning assistance in radiation therapy."
     },
@@ -86,7 +88,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Pelvis: Prostate",
       "Pelvis: Uterus"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company official sources"
   }
 ];

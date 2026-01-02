@@ -66,21 +66,24 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         notifiedBody: "TÜV SÜD (Notified Body 0123)"
       },
       fda: {
-        status: "510(k) Cleared (K230575, April 7, 2023)",
+        status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K230575"
+        clearanceNumber: "K230575",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2023-04-07"
       },
       intendedUseStatement: "For use in radiation therapy planning to assist in the delineation of organs at risk."
     },
     market: {
       onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Partnerships via Radformation (acquired April 30, 2024)"]
-},
+    },
     version: "3.0",
     releaseDate: "2023-06-15",
     lastUpdated: "2024-03-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K230575), company official sources"
   }
 ];

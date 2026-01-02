@@ -34,13 +34,13 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "CE Marked (Historical - Product Discontinued)",
         class: "Class IIa",
         type: "MDD",
         regulation: "MDD 93/42/EEC"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared (Historical - Product Discontinued)",
         class: "Class II",
         type: "510(k)"
       },
@@ -48,13 +48,12 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2019",
-      distributionChannels: ["Not available anymore"],
-
-},
+      distributionChannels: ["Discontinued - no longer actively marketed"]
+    },
     version: "2.2",
     releaseDate: "2023-05-20",
     lastUpdated: "2024-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Historical records - product discontinued"
   }
 ];

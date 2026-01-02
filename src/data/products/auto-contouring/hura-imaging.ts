@@ -70,20 +70,23 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
-      fda: "Under review",
+      fda: {
+        status: "Under review",
+        notes: "K212550 is for HuraCTP (CT Perfusion denoising), NOT DV.TARGET. DV.TARGET FDA status pending."
+      },
       intendedUseStatement: "To assist healthcare professionals in the delineation of organs at risk and target volumes for radiotherapy planning."
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Distribution partners"],
-
-},
+    },
     version: "2.5",
     releaseDate: "2023-05-20",
     lastUpdated: "2024-01-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "Company official sources"
   }
 ];

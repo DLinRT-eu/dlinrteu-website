@@ -42,12 +42,14 @@ const rawProduct: ProductDetails = {
     ce: {
       status: "Certified",
       class: "IIa",
-      type: "Medical Device"
+      type: "MDR",
+      regulation: "MDR 2017/745"
     },
     fda: {
       status: "510(k) Cleared",
       class: "Class II",
-      type: "510(k)"
+      type: "510(k)",
+      notes: "FDA clearance confirmed. Clearance number pending verification."
     },
     intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
   },
@@ -58,7 +60,7 @@ const rawProduct: ProductDetails = {
   version: "3.0",
   releaseDate: "2023-04-20",
   lastUpdated: "2024-01-15",
-  lastRevised: "2025-09-01",
+  lastRevised: "2026-01-02",
   supportedStructures: [
     "Brain: Brain",
     "Brain: Pituitary",
@@ -104,7 +106,7 @@ const rawProduct: ProductDetails = {
     "Pelvis: Spinal cord",
     "Pelvis: Prostate"
   ],
-  source: "automatically retrieved and revised",
+  source: "Company official sources",
 };
 
 // Apply all the standardization functions

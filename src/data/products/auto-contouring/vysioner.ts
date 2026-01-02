@@ -53,14 +53,20 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device",
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K212116",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2021-10-12",
+        notes: "VBrain-OAR clearance. First AI tumor auto-contouring FDA clearance for radiation therapy (April 2021)"
       },
-      intendedUseStatement: "For automatic segmentation of brain tumors in radiation therapy planning.",
+      intendedUseStatement: "For automatic segmentation of brain tumors in radiation therapy planning."
     },
     market: {
       onMarketSince: "2020",
@@ -69,9 +75,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     version: "2.5",
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved",
-    // Add evidence and limitations
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K212116), company official sources",
     evidence: ["10.1016/j.ijrobp.2022.04.007", "10.1016/j.prro.2021.12.002", "10.1016/j.radonc.2020.09.026"],
     limitations: [
       "Limited to brain tumor segmentation only",

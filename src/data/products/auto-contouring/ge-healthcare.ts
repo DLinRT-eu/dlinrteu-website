@@ -42,7 +42,11 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K230082",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        notes: "CT Auto Segmentation. MR Contour DL cleared separately as K242925 (April 2025)"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -53,7 +57,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     version: "4.0",
     releaseDate: "2023-03-10",
     lastUpdated: "2024-01-20",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K230082, K242925), company official sources"
   }
 ];

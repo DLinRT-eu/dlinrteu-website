@@ -36,20 +36,24 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K191928",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2020-02-28"
       },
       intendedUseStatement: "For assistance in the delineation of organs at risk in radiation therapy planning."
     },
     market: {
       onMarketSince: "2021",
       distributionChannels: ["Direct sales", "Partnerships"],
-
-},
+    },
     version: "2.1",
     releaseDate: "2024-03-15",
     lastUpdated: "2024-04-25",
@@ -110,9 +114,8 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: Sacrum",
       "Pelvis: Iliac Crest (L/R)"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and revised",
-    // Adding new fields
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K191928), company official sources",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",

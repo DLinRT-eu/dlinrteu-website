@@ -42,18 +42,21 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         notifiedBody: "GMED (Notified Body 0459)"
       },
       fda: {
-        status: "510(k) Cleared - ART-Plan+ v3.0.0 (K242822, Feb 25, 2025)",
+        status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K242822"
+        clearanceNumber: "K242822",
+        productCode: "MUJ, QKB, LLZ",
+        regulationNumber: "21 CFR 892.5050",
+        decisionDate: "2025-02-25",
+        notes: "ART-Plan+ v3.0.0. Original ART-Plan clearance: K202700 (Jan 2021)"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Direct sales"],
-
-},
+    },
     version: "2.5",
     releaseDate: "2023-11-20",
     lastUpdated: "2024-03-15",
@@ -215,7 +218,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
 "Pelvis (Female Lymph Nodes): LN Lomboartic (Gyneco)",
 "Pelvis (Female Lymph Nodes): LN Presacral (Gyneco)"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K242822, K202700), company official sources"
   }
 ];

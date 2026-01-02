@@ -37,10 +37,12 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "Certified",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
-        status: "Under review"
+        status: "Under review",
+        notes: "FDA 510(k) submission pending. CE marked for European market."
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -126,8 +128,8 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
 "Female Pelvis: Uterus",
 "Female Pelvis: Rectum"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and revised",
+    lastRevised: "2026-01-02",
+    source: "Company official sources",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract"
   }
 ];
