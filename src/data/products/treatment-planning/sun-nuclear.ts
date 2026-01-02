@@ -60,11 +60,16 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K222803"
+        clearanceNumber: "K222803",
+        regulationNumber: "21 CFR 892.5050",
+        productCode: "MUJ",
+        decisionDate: "2023-02-02",
+        notes: "Original clearance K202284 (March 12, 2021) for Oncospace. K222803 for expanded capabilities."
       },
       ce: {
         status: "Not Available",
         class: "N/A",
+        notes: "US market only. CE marking not obtained."
       },
       intendedUseStatement:
         "Plan AI is intended to provide AI-powered dosimetric predictions and planning objectives for radiation therapy treatment planning. For use in the United States only.",
@@ -75,9 +80,9 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
-    lastUpdated: "2025-12-01",
-    lastRevised: "2025-12-01",
-    source: "Manufacturer datasheet and FDA database",
+    lastUpdated: "2026-01-02",
+    lastRevised: "2026-01-02",
+    source: "FDA 510(k) database (K222803, K202284), Sun Nuclear official website",
     clinicalEvidence: "FDA 510(k) validation studies using 5,000+ treatment plans from Johns Hopkins University",
     evidence: [
       {
