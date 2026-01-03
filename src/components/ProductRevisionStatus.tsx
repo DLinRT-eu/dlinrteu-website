@@ -2,7 +2,9 @@
 import React from 'react';
 import { ProductDetails } from "@/types/productDetails";
 import { Badge } from "@/components/ui/badge";
-import { CalendarClock, CalendarCheck2, Shield, AlertCircle } from 'lucide-react';
+import { CalendarClock, CalendarCheck2, Shield, AlertCircle, Database, FileText } from 'lucide-react';
+import { useMergedRevisionDate, getDaysSinceRevisionMerged } from '@/hooks/useProductRevisionDates';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ProductRevisionStatusProps {
   product: ProductDetails;
@@ -16,22 +18,12 @@ const formatDate = (dateString: string | undefined): string => {
 };
 
 const ProductRevisionStatus: React.FC<ProductRevisionStatusProps> = ({ product }) => {
-  // Calculate days since last revision
-  const calculateDaysSinceRevision = () => {
-    if (!product.lastRevised) return null;
-    
-    const today = new Date();
-    const lastRevised = new Date(product.lastRevised);
-    const differenceInTime = today.getTime() - lastRevised.getTime();
-    return Math.round(differenceInTime / (1000 * 3600 * 24));
-  };
-  
-  const daysSinceRevision = calculateDaysSinceRevision();
+  // Get merged revision date (most recent from DB or file)
+  const mergedRevision = useMergedRevisionDate(product);
+  const daysSinceRevision = getDaysSinceRevisionMerged(mergedRevision.lastRevised);
   
   // Determine status based on days since revision
   const getRevisionStatus = () => {
-    if (daysSinceRevision === null) return { label: 'Unknown', color: 'bg-gray-400', icon: AlertCircle };
-    
     if (daysSinceRevision <= 90) return { label: 'Recent', color: 'bg-green-500', icon: Shield };
     if (daysSinceRevision <= 180) return { label: 'Due Soon', color: 'bg-yellow-400', icon: CalendarCheck2 };
     if (daysSinceRevision <= 365) return { label: 'Overdue', color: 'bg-orange-500', icon: CalendarClock };
@@ -40,6 +32,7 @@ const ProductRevisionStatus: React.FC<ProductRevisionStatusProps> = ({ product }
   
   const status = getRevisionStatus();
   const StatusIcon = status.icon;
+  const SourceIcon = mergedRevision.source === 'database' ? Database : FileText;
   
   return (
     <div className="flex flex-col gap-3">
@@ -47,8 +40,7 @@ const ProductRevisionStatus: React.FC<ProductRevisionStatusProps> = ({ product }
         <Badge className={`${status.color} gap-1 text-white`}>
           <StatusIcon className="h-3.5 w-3.5" />
           <span>
-            {status.label}
-            {daysSinceRevision !== null && ` (${daysSinceRevision} days)`}
+            {status.label} ({daysSinceRevision} days)
           </span>
         </Badge>
       </div>
@@ -61,7 +53,19 @@ const ProductRevisionStatus: React.FC<ProductRevisionStatusProps> = ({ product }
         
         <div className="flex items-start gap-2">
           <span className="font-medium min-w-[120px]">Last Revised:</span>
-          <span className="text-muted-foreground">{formatDate(product.lastRevised)}</span>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="text-muted-foreground flex items-center gap-1.5 cursor-help">
+                  {formatDate(mergedRevision.lastRevised)}
+                  <SourceIcon className="h-3 w-3 text-muted-foreground/60" />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Source: {mergedRevision.source === 'database' ? 'Review completion' : 'Product file'}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </div>
