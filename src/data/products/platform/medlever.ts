@@ -43,7 +43,8 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
         "Epic EMR",
         "Oncology Information Systems (OIS)",
         "Electronic Medical Records (EMR)",
-        "Billing systems",        "QA systems"
+        "Billing systems",
+        "QA systems"
       ],
       deployment: ["Cloud-based", "On-premise"],
       triggerForAnalysis: "Integrated within clinical workflow",
@@ -51,9 +52,10 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       fda: {
-        status: "Approved",
+        status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        notes: "Clearance number pending verification from vendor. Product marketed as FDA 510(k) cleared Class II medical device."
       },
       intendedUseStatement: "Workflow orchestration and documentation automation for radiation oncology departments"
     },
@@ -64,9 +66,9 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2024-01-01",
     lastUpdated: "2025-11-14",
-    lastRevised: "2025-12-01",
+    lastRevised: "2026-01-03",
     companyRevisionDate: "2025-11-02",
-    source: "Company provided information",
+    source: "Company provided information. FDA clearance number pending vendor verification.",
     clinicalEvidence: "FDA 510(k) cleared Class II medical device for workflow orchestration and documentation automation in radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."
   }
 ];

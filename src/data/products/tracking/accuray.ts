@@ -13,7 +13,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       "Automatic model relearning",
       "Motion validity monitoring"
     ],
-    certification: "FDA Cleared",
+    certification: "CE & FDA",
     logoUrl: "/logos/accuray.png",
     companyUrl: "https://www.accuray.com/",
     productUrl: "https://www.accuray.com/software/synchrony/",
@@ -44,25 +44,31 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "CE Marked",
         class: "IIb",
-        type: "Medical Device"
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
       },
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K182687",
+        regulationNumber: "21 CFR 892.5050",
+        productCode: "IYE",
+        decisionDate: "2018-11-23",
+        notes: "Synchrony Motion Tracking and Compensation Feature for Radixact Treatment Delivery System"
       },
       intendedUseStatement: "Intended for real-time motion tracking and synchronization during radiation therapy delivery to correct tumor motion and enable precise treatment delivery."
     },
     market: {
-      onMarketSince: "2018",
+      onMarketSince: "2019",
       distributionChannels: ["Integrated with Accuray systems"],
 
 },
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue.",
     lastUpdated: "2024-12-15",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-03",
+    source: "FDA 510(k) database (K182687), Accuray official website"
   }
 ];

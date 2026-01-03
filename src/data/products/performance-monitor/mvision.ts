@@ -17,7 +17,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
       "Clinical workflow integration"
     ],
     category: "Performance Monitor",
-    certification: "MDR exempt",
+    certification: "MDR Exempt",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/verify/",
     anatomicalLocation: ["Multiple"],
@@ -46,12 +46,17 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "",
-        class: "IIa",
-        type: "Medical Device"
+        status: "MDR Exempt",
+        class: "N/A",
+        type: "Software Tool",
+        notes: "Visualization and comparison tool - not a diagnostic device"
       },
-      fda: "Under review",
-      intendedUseStatement: "For comparison and visualization of user-generated and AI-generated contours in radiotherapy planning."
+      fda: {
+        status: "Not applicable",
+        class: "N/A",
+        notes: "Non-diagnostic visualization tool for comparing contours. Does not make clinical decisions."
+      },
+      intendedUseStatement: "For comparison and visualization of user-generated and AI-generated contours in radiotherapy planning. Not intended for diagnostic use."
     },
     market: {
       onMarketSince: "2020",
@@ -61,7 +66,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     releaseDate: "2023-08-15",
     lastUpdated: "2024-03-01",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    lastRevised: "2026-01-03",
+    source: "MVision AI official website, regulatory classification based on product function"
   }
 ];
