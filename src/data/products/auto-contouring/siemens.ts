@@ -100,7 +100,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Seminal Vesicles (male)",
       "Pelvis: Penile Bulb (male)"
     ],
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-01",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
