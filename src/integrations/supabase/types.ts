@@ -728,6 +728,39 @@ export type Database = {
           },
         ]
       }
+      product_revision_dates: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_revised_at: string
+          last_revised_by: string | null
+          notes: string | null
+          product_id: string
+          revision_source: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_revised_at?: string
+          last_revised_by?: string | null
+          notes?: string | null
+          product_id: string
+          revision_source?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_revised_at?: string
+          last_revised_by?: string | null
+          notes?: string | null
+          product_id?: string
+          revision_source?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       profile_document_access_log: {
         Row: {
           access_reason: string
