@@ -66,6 +66,13 @@ const TEAM_MEMBERS = [
     bio: "https://www.inpictura.com/#WhoWeAre",
     email: "mark.gooding@dlinrt.eu",
   },
+  {
+    name: "Tamás Ungvári",
+    role: "Reviewer",
+    image: "/people/tamas-ungvari.jpg",
+    bio: "https://linkedin.com/in/ungvaritamas",
+    email: "tamas.ungvari@dlinrt.eu",
+  },
 ];
 
 // Fisher-Yates shuffle algorithm
