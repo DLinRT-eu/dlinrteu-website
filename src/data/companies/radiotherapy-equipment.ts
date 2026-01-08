@@ -46,7 +46,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "varian-mobius3d"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/varian.png"
+    "logoUrl": "/logos/varian.jpg"
   },
   {
     "id": "md-anderson",
