@@ -35,7 +35,13 @@ const MobileChartEnhancer: React.FC<MobileChartEnhancerProps> = ({
   const [zoomLevel, setZoomLevel] = useState(1);
   const [showControls, setShowControls] = useState(true);
   const [lastTap, setLastTap] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Delay transform application until after initial render
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   // Double tap to zoom functionality
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -260,9 +266,9 @@ const MobileChartEnhancer: React.FC<MobileChartEnhancerProps> = ({
             className="h-full w-full overflow-hidden touch-pan-x touch-pan-y"
             onTouchEnd={handleTouchEnd}
             style={{
-              transform: `scale(${zoomLevel})`,
+              transform: mounted && zoomLevel !== 1 ? `scale(${zoomLevel})` : 'none',
               transformOrigin: 'center center',
-              transition: 'transform 0.2s ease-out'
+              transition: mounted ? 'transform 0.2s ease-out' : 'none'
             }}
           >
             {children}

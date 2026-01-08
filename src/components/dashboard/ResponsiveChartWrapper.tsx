@@ -29,9 +29,9 @@ const ResponsiveChartWrapper: React.FC<ResponsiveChartWrapperProps> = ({
     <div 
       ref={containerRef}
       className={cn("w-full", className)}
-      style={{ minHeight }}
+      style={{ minHeight, minWidth: '100px' }}
     >
-      {dimensions.width > 0 && children}
+      {children}
     </div>
   );
 

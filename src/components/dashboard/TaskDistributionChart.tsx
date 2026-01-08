@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/chart";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ResponsiveChartWrapper from './ResponsiveChartWrapper';
+
 import { validateChartData, validateClickData, validateCountingMode, validateTotalCount, validateFilterValue } from '@/utils/chartDataValidation';
 
 interface TaskDistributionChartProps {
