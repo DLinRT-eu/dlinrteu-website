@@ -17,6 +17,7 @@ import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
 import GuidelinesDetails from "./product/GuidelinesDetails";
 import UserRelationships from "./product/UserRelationships";
 import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
+import PartOfDetails from "./product/PartOfDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
 import { isInvestigationalProduct } from "@/utils/productFilters";
@@ -103,6 +104,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
         <div className="lg:col-span-2 space-y-6">
+          <PartOfDetails product={product} />
           <GeneralInformationDetails product={product} />
           <ProductFeaturesDetails product={product} />
           <IntegratedModulesDetails product={product} />

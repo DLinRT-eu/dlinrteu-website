@@ -102,4 +102,12 @@ export interface Product {
     companyUrl?: string;       // Website URL of the developer
     relationship?: string;     // Type of relationship (e.g., "Technology Partner", "OEM", "White-label")
   };
+  
+  // New field for products that are part of larger systems
+  partOf?: {
+    name: string;              // Parent product/system name
+    version?: string;          // Minimum version required
+    productUrl?: string;       // URL to parent product info
+    relationship?: string;     // e.g., "Module", "Feature", "Add-on", "Component"
+  };
 }
