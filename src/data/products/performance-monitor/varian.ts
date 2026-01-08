@@ -19,7 +19,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     category: "Performance Monitor",
     secondaryCategories: ["Treatment Planning"],
     certification: "CE & FDA",
-    logoUrl: "/logos/varian.png",
+    logoUrl: "/logos/varian.jpg",
     website: "https://www.varian.com/products/software/quality-assurance/mobius3d",
     anatomicalLocation: ["Multiple"],
     modality: ["RT Plan", "RT Struct", "RT Dose", "EPID"],
