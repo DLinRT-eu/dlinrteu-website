@@ -27,14 +27,26 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "sun-nuclear",
-    "name": "Sun Nuclear",
-    "description": "Provider of radiation therapy quality assurance and AI-powered treatment planning solutions.",
-    "website": "https://oncospace.com/",
+    "name": "Sun Nuclear (Mirion Medical)",
+    "description": "Leading provider of radiation therapy quality assurance systems, patient QA solutions, and AI-powered treatment planning tools. Part of Mirion Medical since 2021.",
+    "website": "https://www.sunnuclear.com/",
     "productIds": [
-      "oncospace-predictive-planning"
+      "oncospace-predictive-planning",
+      "sun-nuclear-suncheck-patient"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/SunNuclear.png"
+  },
+  {
+    "id": "varian",
+    "name": "Varian (Siemens Healthineers)",
+    "description": "Global leader in radiotherapy solutions including treatment delivery systems, oncology software, and patient quality assurance tools. Part of Siemens Healthineers since 2021.",
+    "website": "https://www.varian.com/",
+    "productIds": [
+      "varian-mobius3d"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/varian.png"
   },
   {
     "id": "md-anderson",
