@@ -101,7 +101,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "RadFormation",
     "description": "Developers of quality assurance and automation tools for radiation oncology.",
     "website": "https://radformation.com/",
-    "productIds": ["radformation-autocontour"],
+    "productIds": ["radformation-autocontour", "radformation-clearcheck"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/radformation.svg"
   },
