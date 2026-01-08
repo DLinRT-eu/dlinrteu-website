@@ -4,13 +4,13 @@ import { ProductDetails } from "@/types/productDetails";
 // Structure data retrieved on 2024-04-29
 export const PHILIPS_PRODUCTS: ProductDetails[] = [
   {
-    id: "philips-auto-contouring",
-    name: "Auto Contouring",
+    id: "philips-mrcat-prostate-auto-contouring",
+    name: "MRCAT Prostate + Auto-Contouring",
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/philips.ts",
-    description: "Integrated auto-segmentation solution within the Pinnacle treatment planning system using model-based and atlas-based algorithms.",
+    description: "MR-only radiotherapy solution for prostate that combines synthetic CT generation (MRCAT) with model-based adaptive auto-contouring, enabling complete treatment planning workflow without CT imaging.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/philips.png",
@@ -18,20 +18,27 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Pelvis"],
     modality: ["MRI"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Multi-atlas based algorithms", "Model-based segmentation", "Seamless TPS integration"],
+    diseaseTargeted: ["Prostate Cancer"],
+    keyFeatures: [
+      "Model-based adaptive auto-contouring",
+      "MR-only workflow (eliminates CT)",
+      "Synthetic CT (MRCAT) generation",
+      "One-click automated workflow",
+      "Bulk motion correction via bone registration",
+      "< 5 minute processing time"
+    ],
     technicalSpecifications: {
-      population: "Adult patients",
-      input: ["MRI"],
+      population: "Adult patients (accuracy: average distance < 1.5mm)",
+      input: ["MRI (T1W mDIXON XD, T2W TSE)"],
       inputFormat: ["DICOM"],
-      output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      output: ["Structure sets", "Synthetic CT (MRCAT)"],
+      outputFormat: ["DICOM-RT", "DICOM CT"]
     },
     technology: {
-      integration: ["Native TPS integration"],
+      integration: ["Ingenia MR-RT console", "DICOM export to any TPS"],
       deployment: ["On-premises"],
-      triggerForAnalysis: "Within treatment planning workflow",
-      processingTime: "Variable based on structures"
+      triggerForAnalysis: "Automated during MR acquisition",
+      processingTime: "< 5 minutes (parallel with scanning)"
     },
     regulatory: {
       ce: {
@@ -44,23 +51,20 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2015",
-      distributionChannels: ["Direct sales"],
-
-},
-    version: "9.2",
-    releaseDate: "2022-10-10",
-    lastUpdated: "2023-11-20",
+      distributionChannels: ["Direct sales"]
+    },
     supportedStructures: [
-      "Pelvis: Prostate",
+      "Pelvis: Prostate (anatomical)",
       "Pelvis: Seminal Vesicles",
-      "Pelvis: Bladder",
+      "Pelvis: Bladder (inner wall)",
+      "Pelvis: Bladder (outer wall)",
       "Pelvis: Rectum",
+      "Pelvis: Penile Bulb",
       "Pelvis: Femoral Head (L)",
       "Pelvis: Femoral Head (R)",
-      "Pelvis: Penile Bulb",
-      "Pelvis: Urethra"
+      "Pelvis: Body Outline"
     ],
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved and verified"
+    lastRevised: "2025-01-08",
+    source: "Philips product documentation (2019)"
   }
 ];
