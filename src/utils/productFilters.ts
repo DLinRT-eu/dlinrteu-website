@@ -82,8 +82,8 @@ export const hasRegulatoryApproval = (product: ProductDetails, includeInvestigat
   // Check for CE mark approval
   const hasCE = hasActualCEApproval(product);
                 
-  // Check for MDR exempt status
-  const hasMDRExempt = product.certification === 'MDR exempt';
+  // Check for MDR exempt status (case-insensitive)
+  const hasMDRExempt = product.certification?.toLowerCase() === 'mdr exempt';
   
   // Check for investigational status if enabled
   const isInvestigational = includeInvestigational && isInvestigationalProduct(product);
