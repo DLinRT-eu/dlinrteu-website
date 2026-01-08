@@ -66,7 +66,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     releaseDate: "2023-08-15",
     lastUpdated: "2024-03-01",
-    lastRevised: "2026-01-03",
+    lastRevised: "2026-01-08",
     source: "MVision AI official website, regulatory classification based on product function"
   }
 ];
