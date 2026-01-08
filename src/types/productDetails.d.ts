@@ -110,4 +110,12 @@ export interface ProductDetails extends Product {
     productUrl: string;
     keyFeatures?: string[];
   }>;
+  
+  // New field for products that are part of larger systems
+  partOf?: {
+    name: string;              // Parent product/system name
+    version?: string;          // Minimum version required
+    productUrl?: string;       // URL to parent product info
+    relationship?: string;     // e.g., "Module", "Feature", "Add-on", "Component"
+  };
 }

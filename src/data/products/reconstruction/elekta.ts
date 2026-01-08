@@ -4,10 +4,10 @@ import { ProductDetails } from "@/types/productDetails";
 export const ELEKTA_PRODUCTS: ProductDetails[] = [
   {
     id: "elekta-iris",
-    name: "IRIS",
+    name: "IRIS Evo",
     company: "Elekta",
     category: "Reconstruction",
-    description: "AI-powered CBCT reconstruction solution that improves image quality for radiation therapy planning and adaptive radiotherapy using deep learning techniques.",
+    description: "AI-powered CBCT reconstruction module within Elekta's XVI imaging system that improves image quality for radiation therapy planning and adaptive radiotherapy using deep learning techniques.",
     features: ["Deep learning reconstruction", "CBCT imaging", "Radiotherapy"],
     certification: "CE Mark (EU only)",
     logoUrl: "/logos/Elekta.png",
@@ -18,11 +18,18 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     diseaseTargeted: ["Cancer"],
     releaseDate: "2022-06-01",
     version: "2.0",
+    partOf: {
+      name: "XVI (X-ray Volume Imaging)",
+      version: "5.1",
+      productUrl: "https://www.elekta.com/radiation-oncology/treatment-solutions/imaging/",
+      relationship: "Module"
+    },
     keyFeatures: [
       "AI-powered CBCT reconstruction",
       "Improved soft tissue contrast",
       "Enhanced tumor and organ-at-risk visualization",
       "Deep learning noise reduction algorithms",
+      "Integrated within Elekta XVI 5.1 imaging platform",
       "Seamless integration with Elekta linacs"
     ],
     technicalSpecifications: {
@@ -64,7 +71,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images",
     lastUpdated: "2025-02-10",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-08",
     source: "Company website; FDA 510(k) database verification",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }
