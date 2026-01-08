@@ -118,4 +118,9 @@ export interface ProductDetails extends Product {
     productUrl?: string;       // URL to parent product info
     relationship?: string;     // e.g., "Module", "Feature", "Add-on", "Component"
   };
+  
+  // Indicates if this product uses AI/DL technology itself
+  usesAI?: boolean;
+  // For Performance Monitor category: describes what AI products it monitors
+  monitorsAIProducts?: string[];
 }

@@ -117,7 +117,7 @@ const IntroSection = () => {
               Deep Learning in Radiotherapy
             </h1>
             <p className="text-xl text-gray-100 mb-8">
-              Find the deep learning-based commercial solutions for radiotherapy available for the European market.
+              Find deep learning-based solutions and QA monitoring tools for radiotherapy available for the European market.
             </p>
             <div className="relative max-w-2xl mx-auto">
               <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-500" />

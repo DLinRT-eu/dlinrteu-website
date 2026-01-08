@@ -46,7 +46,7 @@ const ClinicalTasksGlossary = () => {
     {
       id: "performance-monitor",
       title: "Performance Monitor",
-      definition: "AI-based quality assurance and performance monitoring systems for treatment delivery equipment. These solutions automatically verify treatment accuracy, detect potential errors, and ensure treatments meet established quality standards."
+      definition: "Quality assurance and performance monitoring tools for AI-based products in radiotherapy. These solutions verify the accuracy and consistency of AI-generated outputs (such as contours or treatment plans), detect potential errors, and ensure AI-driven treatments meet established quality standards. Note: Performance Monitor products may or may not use AI/deep learning themselves—their primary purpose is to monitor and QA AI-based products."
     },
     {
       id: "clinical-prediction",

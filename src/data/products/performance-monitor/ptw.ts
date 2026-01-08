@@ -14,7 +14,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       companyUrl: "https://www.inpictura.com/",
       relationship: "Technology Partner"
     },
-    description: "AI contouring quality monitoring solution for clinical practice",
+    description: "Quality monitoring solution for AI-generated contours in clinical practice. Note: This is a QA tool that monitors AI contours—it does not use AI/deep learning itself.",
     features: [
       "AI contour monitoring", 
       "Quality assessment", 
