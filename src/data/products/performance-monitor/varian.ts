@@ -8,7 +8,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.varian.com",
     productUrl: "https://www.varian.com/products/software/quality-assurance/mobius3d",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/varian.ts",
-    description: "Comprehensive patient quality assurance platform with structure verification, independent dose calculation, and automated plan checking for radiotherapy treatment verification",
+    description: "Comprehensive patient quality assurance platform with structure verification, independent dose calculation, and automated plan checking for radiotherapy treatment verification. Note: This QA platform can verify AI-generated plans and structures—it may or may not use AI itself.",
     features: [
       "Structure verification",
       "Independent dose calculation",

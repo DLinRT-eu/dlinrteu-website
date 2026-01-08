@@ -59,7 +59,7 @@ const categoryInfo: Record<string, { icon: React.ElementType, description: strin
   },
   "Performance Monitor": { 
     icon: Monitor, 
-    description: "Tools for quality assurance and performance monitoring in radiotherapy", 
+    description: "QA tools for monitoring AI-based products (may or may not use AI themselves)", 
     color: "bg-gray-100" 
   },
   "Platform": { 

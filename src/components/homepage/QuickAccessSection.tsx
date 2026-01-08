@@ -26,7 +26,7 @@ const QuickAccessSection: React.FC<QuickAccessSectionProps> = ({
           >
             <TrendingUp className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
             <span className="text-sm text-muted-foreground group-hover:text-foreground">
-              <span className="font-semibold text-foreground">{productCount}+</span> products catalogued
+              <span className="font-semibold text-foreground">{productCount}+</span> AI products & QA tools
             </span>
           </Link>
           <Link 

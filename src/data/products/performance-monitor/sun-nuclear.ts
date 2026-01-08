@@ -8,7 +8,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.sunnuclear.com",
     productUrl: "https://www.sunnuclear.com/products/suncheck-patient",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/sun-nuclear.ts",
-    description: "Quality management platform with automated structure validation, contour QA, and pre-treatment quality assurance for comprehensive patient-specific treatment verification",
+    description: "Quality management platform with automated structure validation, contour QA, and pre-treatment quality assurance for comprehensive patient-specific treatment verification. Note: This QA platform can validate AI-generated structures and plans—it may or may not use AI itself.",
     features: [
       "Structure check",
       "Plan verification",
