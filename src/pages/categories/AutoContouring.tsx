@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 import ProductGrid from '@/components/ProductGrid';
-import { Shapes, ArrowRight, Brain, Clock, CheckCircle } from 'lucide-react';
+import { Shapes, ArrowRight, Brain, Clock, CheckCircle, Layers } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import dataService from '@/services/DataService';
 
@@ -82,6 +82,13 @@ const AutoContouringPage = () => {
                 className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Browse All Products <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link 
+                to="/compare/structures"
+                className="inline-flex items-center gap-2 bg-amber-500 text-white px-6 py-3 rounded-lg hover:bg-amber-600 transition-colors"
+              >
+                <Layers className="h-4 w-4" />
+                Compare Structures
               </Link>
               <Link 
                 to="/dashboard"
