@@ -59,8 +59,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     version: "12.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2025-12-11",
-    lastRevised: "2025-12-11",
-    source: "Automatically retrieved and verified",
+    lastRevised: "2026-01-14",
+    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: ["10.1016/j.radonc.2016.10.009"]
   }

@@ -89,7 +89,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     version: "1.3.1",
     releaseDate: "2025-10-27",
     lastUpdated: "2025-12-23",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-14",
     source: "FDA 510(k) database (K241490), company official sources"
   }
 ];

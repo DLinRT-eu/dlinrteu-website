@@ -83,7 +83,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     version: "3.0",
     releaseDate: "2023-06-15",
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-14",
     source: "FDA 510(k) database (K230575), company official sources"
   }
 ];
