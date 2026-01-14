@@ -295,7 +295,7 @@ export const LIMBUS_CNS_STRUCTURES = [
   "CNS-T1: Retina_R"
 ];
 
-// Gyne HDR CT structures
+// Gyne HDR CT structures (updated 2024)
 export const LIMBUS_GYNE_CT_STRUCTURES = [
   "Gyne HDR-CT: Bladder",
   "Gyne HDR-CT: Bowel",
@@ -303,17 +303,103 @@ export const LIMBUS_GYNE_CT_STRUCTURES = [
   "Gyne HDR-CT: Colon_Sigmoid",
   "Gyne HDR-CT: Rectum",
   "Gyne HDR-CT: Urethra",
-  "Gyne HDR-CT: Cylinder"
+  "Gyne HDR-CT: Cylinder",
+  "Gyne HDR-CT: Vagina",
+  "Gyne HDR-CT: Uterus",
+  "Gyne HDR-CT: Parametrium_L",
+  "Gyne HDR-CT: Parametrium_R",
+  // Ring/Tandem applicator models
+  "Gyne HDR-CT: App_Ring",
+  "Gyne HDR-CT: App_Tandem",
+  "Gyne HDR-CT: App_Ovoid_L",
+  "Gyne HDR-CT: App_Ovoid_R",
+  // Venezia applicator models
+  "Gyne HDR-CT: App_Venezia_Ring",
+  "Gyne HDR-CT: App_Venezia_Tandem",
+  "Gyne HDR-CT: App_Venezia_Interstitial"
 ];
 
-// Gyne HDR MR structures
+// Gyne HDR MR structures (updated 2024)
 export const LIMBUS_GYNE_MR_STRUCTURES = [
   "Gyne HDR-MR: Bladder",
   "Gyne HDR-MR: Bowel",
   "Gyne HDR-MR: Canal_Anal",
   "Gyne HDR-MR: Colon_Sigmoid",
   "Gyne HDR-MR: Rectum",
-  "Gyne HDR-MR: Urethra"
+  "Gyne HDR-MR: Urethra",
+  "Gyne HDR-MR: Vagina",
+  "Gyne HDR-MR: Uterus",
+  "Gyne HDR-MR: Parametrium_L",
+  "Gyne HDR-MR: Parametrium_R",
+  // Target volumes for brachytherapy
+  "Gyne HDR-MR: HR-CTV_Ring",
+  "Gyne HDR-MR: HR-CTV_Tandem",
+  "Gyne HDR-MR: HR-CTV_Ovoid",
+  "Gyne HDR-MR: IR-CTV",
+  // Applicator models
+  "Gyne HDR-MR: App_Ring",
+  "Gyne HDR-MR: App_Tandem"
+];
+
+// ESTRO Breast Lymph Node structures (new 2024)
+export const LIMBUS_ESTRO_BREAST_LN_STRUCTURES = [
+  "Breast ESTRO-CT: LN_IMC_L",
+  "Breast ESTRO-CT: LN_IMC_R",
+  "Breast ESTRO-CT: LN_Ax_L1_L",
+  "Breast ESTRO-CT: LN_Ax_L1_R",
+  "Breast ESTRO-CT: LN_Ax_L2_L",
+  "Breast ESTRO-CT: LN_Ax_L2_R",
+  "Breast ESTRO-CT: LN_Ax_L3_L",
+  "Breast ESTRO-CT: LN_Ax_L3_R",
+  "Breast ESTRO-CT: LN_Ax_L4_L",
+  "Breast ESTRO-CT: LN_Ax_L4_R",
+  "Breast ESTRO-CT: LN_Interpec_L",
+  "Breast ESTRO-CT: LN_Interpec_R",
+  "Breast ESTRO-CT: LN_Sclav_L",
+  "Breast ESTRO-CT: LN_Sclav_R"
+];
+
+// Cardiac Substructures (expanded 2024)
+export const LIMBUS_CARDIAC_STRUCTURES = [
+  "Cardiac-CT: Heart",
+  "Cardiac-CT: Atrium_L",
+  "Cardiac-CT: Atrium_R",
+  "Cardiac-CT: Ventricle_L",
+  "Cardiac-CT: Ventricle_R",
+  "Cardiac-CT: A_LAD",
+  "Cardiac-CT: A_Circumflex",
+  "Cardiac-CT: A_RCA",
+  "Cardiac-CT: A_Aorta_Asc",
+  "Cardiac-CT: A_Aorta_Desc",
+  "Cardiac-CT: A_Pulmonary",
+  "Cardiac-CT: V_Pulmonary",
+  "Cardiac-CT: Pericardium",
+  "Cardiac-CT: Valve_Mitral",
+  "Cardiac-CT: Valve_Aortic",
+  "Cardiac-CT: Valve_Tricuspid",
+  "Cardiac-CT: Valve_Pulmonary"
+];
+
+// Additional CBCT Adaptive structures
+export const LIMBUS_CBCT_ADAPTIVE_STRUCTURES = [
+  "CBCT-Adaptive: Bladder",
+  "CBCT-Adaptive: Rectum",
+  "CBCT-Adaptive: Prostate",
+  "CBCT-Adaptive: SeminalVes",
+  "CBCT-Adaptive: Bowel",
+  "CBCT-Adaptive: Femur_Head_L",
+  "CBCT-Adaptive: Femur_Head_R"
+];
+
+// Optic Pathway Combined (SRS/SRT)
+export const LIMBUS_OPTIC_PATHWAY_STRUCTURES = [
+  "SRS-CT: OpticPathway",
+  "SRS-CT: Optics",
+  "SRS-CT: OpticChiasm",
+  "SRS-CT: OpticNrv_L",
+  "SRS-CT: OpticNrv_R",
+  "SRS-CT: OpticTract_L",
+  "SRS-CT: OpticTract_R"
 ];
 
 // Export all structures combined
@@ -327,5 +413,9 @@ export const LIMBUS_ALL_STRUCTURES = [
   ...LIMBUS_PELVIS_MRI_STRUCTURES,
   ...LIMBUS_CNS_STRUCTURES,
   ...LIMBUS_GYNE_CT_STRUCTURES,
-  ...LIMBUS_GYNE_MR_STRUCTURES
+  ...LIMBUS_GYNE_MR_STRUCTURES,
+  ...LIMBUS_ESTRO_BREAST_LN_STRUCTURES,
+  ...LIMBUS_CARDIAC_STRUCTURES,
+  ...LIMBUS_CBCT_ADAPTIVE_STRUCTURES,
+  ...LIMBUS_OPTIC_PATHWAY_STRUCTURES
 ];

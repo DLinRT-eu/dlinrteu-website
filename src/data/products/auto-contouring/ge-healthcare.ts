@@ -1,5 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
+import { GE_HEALTHCARE_ALL_STRUCTURES } from "./ge-healthcare-structures";
 
 export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
   {
@@ -19,6 +20,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["Integrated platform", "Workflow efficiency", "Multiple anatomical sites"],
+    supportedStructures: GE_HEALTHCARE_ALL_STRUCTURES,
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT"],
@@ -57,7 +59,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     version: "4.0",
     releaseDate: "2023-03-10",
     lastUpdated: "2024-01-20",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-14",
     source: "FDA 510(k) database (K230082, K242925), company official sources"
   }
 ];

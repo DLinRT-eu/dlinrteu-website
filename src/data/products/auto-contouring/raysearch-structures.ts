@@ -162,6 +162,35 @@ export const RAYSTATION_SUPPORTED_STRUCTURES: string[] = [
   "Pelvis Male-MR: Prostate",
   "Pelvis Male-MR: Rectum",
   "Pelvis Male-MR: SeminalVes",
+  "Pelvis Male-MR: NVBundle_L",
+  "Pelvis Male-MR: NVBundle_R",
+  "Pelvis Male-MR: BladderTrigone",
+  "Pelvis Male-MR: Urethra_Prostatic",
+  
+  // Pelvis Female structures (v2025)
+  "Pelvis Female: Bladder",
+  "Pelvis Female: Rectum",
+  "Pelvis Female: Colon_Sigmoid",
+  "Pelvis Female: UteroCervix",
+  "Pelvis Female: Vagina",
+  "Pelvis Female: Ovary_L",
+  "Pelvis Female: Ovary_R",
+  "Pelvis Female: Femur_Head_L",
+  "Pelvis Female: Femur_Head_R",
+  "Pelvis Female: Bone_Pelvic_L",
+  "Pelvis Female: Bone_Pelvic_R",
+  
+  // Pelvic Lymph Node structures (v2025)
+  "Pelvis-LN: LN_Iliac_Ext_L",
+  "Pelvis-LN: LN_Iliac_Ext_R",
+  "Pelvis-LN: LN_Iliac_Int_L",
+  "Pelvis-LN: LN_Iliac_Int_R",
+  "Pelvis-LN: LN_Iliac_Com_L",
+  "Pelvis-LN: LN_Iliac_Com_R",
+  "Pelvis-LN: LN_Obturator_L",
+  "Pelvis-LN: LN_Obturator_R",
+  "Pelvis-LN: LN_Presacral",
+  "Pelvis-LN: LN_ParaAortic",
   
   // Vessels structures
   "Vessels: A_Aorta_Arc",
@@ -195,7 +224,7 @@ export const RAYSTATION_SUPPORTED_STRUCTURES: string[] = [
   "Vessels: V_Venacava_I",
   "Vessels: V_Venacava_S",
   
-  // Vertebrae structures
+  // Vertebrae structures (complete spine)
   "Vertebrae: C1",
   "Vertebrae: C2",
   "Vertebrae: C3",
@@ -220,5 +249,33 @@ export const RAYSTATION_SUPPORTED_STRUCTURES: string[] = [
   "Vertebrae: L3",
   "Vertebrae: L4",
   "Vertebrae: L5",
-  "Vertebrae: L6"
+  "Vertebrae: L6",
+  "Vertebrae: S1",
+  "Vertebrae: S2",
+  "Vertebrae: S3",
+  "Vertebrae: S4",
+  "Vertebrae: S5",
+  
+  // SRS/Proton Brain structures (v2025)
+  "Brain-SRS: Brainstem",
+  "Brain-SRS: Hippocampus_L",
+  "Brain-SRS: Hippocampus_R",
+  "Brain-SRS: Cochlea_L",
+  "Brain-SRS: Cochlea_R",
+  "Brain-SRS: OpticChiasm",
+  "Brain-SRS: OpticNrv_L",
+  "Brain-SRS: OpticNrv_R",
+  "Brain-SRS: OpticTract_L",
+  "Brain-SRS: OpticTract_R",
+  "Brain-SRS: Pituitary",
+  "Brain-SRS: Hypothalamus",
+  "Brain-SRS: Cerebellum",
+  
+  // Chest Wall structures (v2025)
+  "Breast: CW_2cm_L",
+  "Breast: CW_2cm_R",
+  "Breast: CW_Anatomical_L",
+  "Breast: CW_Anatomical_R",
+  "Breast: Breast_Seroma_L",
+  "Breast: Breast_Seroma_R"
 ];

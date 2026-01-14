@@ -60,6 +60,13 @@ export const MVISION_ALL_STRUCTURES = [
   "Brain-MR: Eye_R",
   "Brain-MR: OpticTract_L",
   "Brain-MR: OpticTract_R",
+  "Brain-MR: Lens_L",
+  "Brain-MR: Lens_R",
+  "Brain-MR: Cochlea_L",
+  "Brain-MR: Cochlea_R",
+  "Brain-MR: Parotid_L",
+  "Brain-MR: Parotid_R",
+  "Brain-MR: SpinalCord",
 
   // Head & Neck CT - OARs (Company verified Dec 2025)
   "Head & Neck-CT: Brainstem",
@@ -305,13 +312,19 @@ export const MVISION_ALL_STRUCTURES = [
   "Male Pelvis MR Dixon-MR: Femur_R",
   "Male Pelvis MR Dixon-MR: Markers",
 
-  // Male Pelvis MR T2
+  // Male Pelvis MR T2 (expanded per FDA K241490)
   "Male Pelvis MR T2-MR: Prostate",
   "Male Pelvis MR T2-MR: Rectum",
   "Male Pelvis MR T2-MR: Bladder",
   "Male Pelvis MR T2-MR: PenileBulb",
   "Male Pelvis MR T2-MR: BladderTrigone",
   "Male Pelvis MR T2-MR: Spacer",
+  "Male Pelvis MR T2-MR: SeminalVes",
+  "Male Pelvis MR T2-MR: NVBundle_L",
+  "Male Pelvis MR T2-MR: NVBundle_R",
+  "Male Pelvis MR T2-MR: Urethra_Prostatic",
+  "Male Pelvis MR T2-MR: Femur_Head_L",
+  "Male Pelvis MR T2-MR: Femur_Head_R",
 
   // Whole Body CT
   "Whole Body-CT: A_Carotid_L",
