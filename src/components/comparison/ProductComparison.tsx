@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ProductDetails } from '@/types/productDetails';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
-import { Download, ExternalLink } from 'lucide-react';
+import { Download, ExternalLink, Layers } from 'lucide-react';
 import { exportComparisonToExcel, exportComparisonToCSV, exportComparisonToPDF } from '@/utils/comparison/comparisonExporter';
 import StructuredDisplay from './StructuredDisplay';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import StructureComparisonTable from './StructureComparisonTable';
 
 interface ProductComparisonProps {
   products: ProductDetails[];
@@ -25,7 +27,13 @@ interface ComparisonRow {
 const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps) => {
   const [exportFormat, setExportFormat] = useState<'excel' | 'csv' | 'pdf'>('excel');
   const [isExporting, setIsExporting] = useState(false);
+  const [activeTab, setActiveTab] = useState<'general' | 'structures'>('general');
   const { toast } = useToast();
+
+  // Check if any products have supported structures for the structures tab
+  const hasStructures = useMemo(() => {
+    return products.some(p => p.supportedStructures && Array.isArray(p.supportedStructures) && p.supportedStructures.length > 0);
+  }, [products]);
 
   // Create comparison data structure
   const createComparisonData = (): ComparisonRow[] => {
@@ -320,39 +328,72 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
               Compare selected products side by side with export options
             </div>
             <div className="flex items-center gap-2">
-              <select
-                value={exportFormat}
-                onChange={(e) => setExportFormat(e.target.value as 'excel' | 'csv' | 'pdf')}
-                className="px-3 py-1 border rounded text-sm"
-              >
-                <option value="excel">Excel</option>
-                <option value="csv">CSV</option>
-                <option value="pdf">PDF</option>
-              </select>
-              <Button
-                onClick={handleExportComparison}
-                size="sm"
-                className="flex items-center gap-2"
-                disabled={isExporting}
-              >
-                <Download className="h-4 w-4" />
-                {isExporting ? 'Exporting...' : 'Export'}
-              </Button>
+              {activeTab === 'general' && (
+                <>
+                  <select
+                    value={exportFormat}
+                    onChange={(e) => setExportFormat(e.target.value as 'excel' | 'csv' | 'pdf')}
+                    className="px-3 py-1 border rounded text-sm"
+                  >
+                    <option value="excel">Excel</option>
+                    <option value="csv">CSV</option>
+                    <option value="pdf">PDF</option>
+                  </select>
+                  <Button
+                    onClick={handleExportComparison}
+                    size="sm"
+                    className="flex items-center gap-2"
+                    disabled={isExporting}
+                  >
+                    <Download className="h-4 w-4" />
+                    {isExporting ? 'Exporting...' : 'Export'}
+                  </Button>
+                </>
+              )}
             </div>
           </DialogTitle>
         </DialogHeader>
         
-        <div className="overflow-auto max-h-[70vh]">
-          <DataTable
-            columns={columns}
-            data={comparisonData}
-            defaultSort={[]}
-          />
-        </div>
+        {hasStructures ? (
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as typeof activeTab)} className="flex-1">
+            <TabsList className="grid w-full grid-cols-2 mb-4">
+              <TabsTrigger value="general">General Comparison</TabsTrigger>
+              <TabsTrigger value="structures" className="flex items-center gap-2">
+                <Layers className="h-4 w-4" />
+                Structure Comparison
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="general" className="mt-0">
+              <div className="overflow-auto max-h-[60vh]">
+                <DataTable
+                  columns={columns}
+                  data={comparisonData}
+                  defaultSort={[]}
+                />
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="structures" className="mt-0">
+              <div className="max-h-[60vh] overflow-auto">
+                <StructureComparisonTable products={products} />
+              </div>
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <div className="overflow-auto max-h-[70vh]">
+            <DataTable
+              columns={columns}
+              data={comparisonData}
+              defaultSort={[]}
+            />
+          </div>
+        )}
         
         <div className="flex justify-between items-center pt-4 border-t">
           <p className="text-sm text-muted-foreground">
             Comparing {products.length} products
+            {hasStructures && activeTab === 'structures' && ' • Structure comparison view'}
           </p>
           <Button variant="outline" onClick={onClose}>
             Close
