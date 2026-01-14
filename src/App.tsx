@@ -50,6 +50,7 @@ const UserProductAdoptions = lazy(() => import("./pages/admin/UserProductAdoptio
 const CertificationManagement = lazy(() => import("./pages/admin/CertificationManagement"));
 const NewsletterManagement = lazy(() => import("./pages/admin/NewsletterManagement"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
+const CompareStructures = lazy(() => import("./pages/CompareStructures"));
 
 // Admin Pages
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
@@ -106,6 +107,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="products" element={<Products />} />
+                <Route path="compare/structures" element={<CompareStructures />} />
                 <Route path="initiatives" element={<Initiatives />} />
                 <Route path="about" element={<About />} />
                 <Route path="maintenance-team" element={<Navigate to="/about" replace />} />
