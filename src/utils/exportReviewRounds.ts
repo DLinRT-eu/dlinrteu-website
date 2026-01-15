@@ -1,6 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { ALL_PRODUCTS } from "@/data";
-import * as XLSX from 'xlsx';
+import { exportToExcelSimple } from './excelExport';
 
 export interface AssignmentExportData {
   roundName: string;
@@ -251,7 +251,7 @@ export function exportToCSV(data: AssignmentExportData[], filename: string = 're
 /**
  * Exports assignment data to Excel format
  */
-export function exportToExcel(data: AssignmentExportData[], filename: string = 'review-assignments.xlsx') {
+export async function exportToExcel(data: AssignmentExportData[], filename: string = 'review-assignments.xlsx') {
   if (data.length === 0) {
     throw new Error('No data to export');
   }
@@ -273,22 +273,5 @@ export function exportToExcel(data: AssignmentExportData[], filename: string = '
     'Deadline': item.deadline || 'N/A'
   }));
 
-  // Create workbook and worksheet
-  const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Assignments');
-
-  // Auto-size columns
-  const maxWidth = 50;
-  const columnWidths = Object.keys(worksheetData[0] || {}).map(key => {
-    const maxLength = Math.max(
-      key.length,
-      ...worksheetData.map(row => String(row[key as keyof typeof row]).length)
-    );
-    return { wch: Math.min(maxLength + 2, maxWidth) };
-  });
-  worksheet['!cols'] = columnWidths;
-
-  // Write file
-  XLSX.writeFile(workbook, filename);
+  await exportToExcelSimple(worksheetData, filename, 'Assignments');
 }

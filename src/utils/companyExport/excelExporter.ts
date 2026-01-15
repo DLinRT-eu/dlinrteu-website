@@ -1,9 +1,7 @@
-import * as XLSX from 'xlsx';
+import { exportToExcelMultiSheet } from '../excelExport';
 import { CompanyExportData } from './types';
 
-export const exportCompaniesToExcel = (companiesData: CompanyExportData[]) => {
-  const workbook = XLSX.utils.book_new();
-
+export const exportCompaniesToExcel = async (companiesData: CompanyExportData[]) => {
   // Sheet 1: Companies Summary
   const summaryData = companiesData.map(({ company, products, statistics }) => ({
     'Company Name': company.name,
@@ -15,15 +13,8 @@ export const exportCompaniesToExcel = (companiesData: CompanyExportData[]) => {
     'Description': company.description,
   }));
 
-  const summarySheet = XLSX.utils.json_to_sheet(summaryData);
-  summarySheet['!cols'] = [
-    { wch: 20 }, { wch: 30 }, { wch: 12 }, { wch: 30 },
-    { wch: 12 }, { wch: 12 }, { wch: 50 }
-  ];
-  XLSX.utils.book_append_sheet(workbook, summarySheet, 'Companies Summary');
-
   // Sheet 2: All Products by Company
-  const productsData: any[] = [];
+  const productsData: Record<string, any>[] = [];
   companiesData.forEach(({ company, products }) => {
     products.forEach((product, index) => {
       productsData.push({
@@ -40,15 +31,11 @@ export const exportCompaniesToExcel = (companiesData: CompanyExportData[]) => {
     });
   });
 
-  const productsSheet = XLSX.utils.json_to_sheet(productsData);
-  productsSheet['!cols'] = [
-    { wch: 20 }, { wch: 25 }, { wch: 20 }, { wch: 15 },
-    { wch: 15 }, { wch: 12 }, { wch: 50 }
-  ];
-  XLSX.utils.book_append_sheet(workbook, productsSheet, 'All Products');
-
-  // Generate and download
   const timestamp = new Date().toISOString().split('T')[0];
   const filename = `DLinRT_Companies_${timestamp}.xlsx`;
-  XLSX.writeFile(workbook, filename);
+  
+  await exportToExcelMultiSheet([
+    { name: 'Companies Summary', data: summaryData, columnWidths: [20, 30, 12, 30, 12, 12, 50] },
+    { name: 'All Products', data: productsData, columnWidths: [20, 25, 20, 15, 15, 12, 50] }
+  ], filename);
 };

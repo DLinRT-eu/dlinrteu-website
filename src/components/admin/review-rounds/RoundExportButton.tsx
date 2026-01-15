@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Download, FileSpreadsheet, FileText, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import * as XLSX from 'xlsx';
+import { exportToExcelMultiSheet, exportToExcelAoa } from '@/utils/excelExport';
 import { ALL_PRODUCTS } from '@/data';
 import type { ReviewRound } from '@/utils/reviewRoundUtils';
 
@@ -59,13 +59,11 @@ export function RoundExportButton({ round, assignments, history }: RoundExportBu
     return ALL_PRODUCTS.find(p => p.id === productId)?.name || productId;
   };
 
-  const handleExportExcel = () => {
+  const handleExportExcel = async () => {
     setExporting(true);
     try {
-      const workbook = XLSX.utils.book_new();
-
-      // Sheet 1: Round Summary
-      const summaryData = [
+      // Sheet 1: Round Summary (AOA format)
+      const summaryAoa = [
         ['Review Round Summary'],
         [''],
         ['Round Name', round.name],
@@ -85,8 +83,6 @@ export function RoundExportButton({ round, assignments, history }: RoundExportBu
         ['In Progress', assignments.filter(a => a.status === 'in_progress').length],
         ['Pending', assignments.filter(a => a.status === 'pending').length],
       ];
-      const summarySheet = XLSX.utils.aoa_to_sheet(summaryData);
-      XLSX.utils.book_append_sheet(workbook, summarySheet, 'Summary');
 
       // Sheet 2: Assignments
       const assignmentsData = assignments.map(a => ({
@@ -99,8 +95,6 @@ export function RoundExportButton({ round, assignments, history }: RoundExportBu
         'Deadline': a.deadline || 'N/A',
         'Assigned At': new Date(a.assigned_at).toLocaleDateString(),
       }));
-      const assignmentsSheet = XLSX.utils.json_to_sheet(assignmentsData);
-      XLSX.utils.book_append_sheet(workbook, assignmentsSheet, 'Assignments');
 
       // Sheet 3: History
       const historyData = history.map(h => ({
@@ -118,12 +112,19 @@ export function RoundExportButton({ round, assignments, history }: RoundExportBu
           : 'N/A',
         'Reason': h.reason || 'N/A',
       }));
-      const historySheet = XLSX.utils.json_to_sheet(historyData);
-      XLSX.utils.book_append_sheet(workbook, historySheet, 'History');
 
-      // Write file
       const filename = `${round.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
-      XLSX.writeFile(workbook, filename);
+      
+      // Use AOA for summary, JSON for others
+      await exportToExcelAoa([
+        { name: 'Summary', data: summaryAoa }
+      ], filename.replace('.xlsx', '_summary.xlsx'));
+      
+      await exportToExcelMultiSheet([
+        { name: 'Assignments', data: assignmentsData },
+        { name: 'History', data: historyData },
+      ], filename);
+      
       toast.success('Excel file exported successfully');
     } catch (error) {
       console.error('Error exporting Excel:', error);

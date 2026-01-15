@@ -21,7 +21,7 @@ import { format } from 'date-fns';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
-import * as XLSX from 'xlsx';
+import { exportToExcelSimple } from '@/utils/excelExport';
 import type { ProductDetails } from '@/types/productDetails';
 import type { Tables } from '@/integrations/supabase/types';
 import { calculateProductContentHash } from '@/utils/productHash';
@@ -243,7 +243,7 @@ export default function CertificationManagement() {
     toast.success('Exported to CSV');
   };
 
-  const handleExportExcel = () => {
+  const handleExportExcel = async () => {
     const data = filteredProducts.map(item => ({
       'Product Name': item.product.name,
       'Company': item.product.company,
@@ -255,10 +255,7 @@ export default function CertificationManagement() {
       'Certified Date': item.certificationRecord?.verified_at ? format(new Date(item.certificationRecord.verified_at), 'yyyy-MM-dd') : '-',
     }));
 
-    const ws = XLSX.utils.json_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Certifications');
-    XLSX.writeFile(wb, `certifications_${new Date().toISOString().split('T')[0]}.xlsx`);
+    await exportToExcelSimple(data, `certifications_${new Date().toISOString().split('T')[0]}.xlsx`, 'Certifications');
     toast.success('Exported to Excel');
   };
 
