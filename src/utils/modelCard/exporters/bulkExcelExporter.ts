@@ -1,12 +1,10 @@
 import { ProductDetails } from "@/types/productDetails";
-import * as XLSX from 'xlsx';
+import { exportToExcelMultiSheet } from "../../excelExport";
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
 
-export const exportBulkProductsToExcel = (products: ProductDetails[]) => {
+export const exportBulkProductsToExcel = async (products: ProductDetails[]) => {
   try {
-    const wb = XLSX.utils.book_new();
-    
     // Summary Sheet
     const summaryData = products.map((product, index) => ({
       "#": index + 1,
@@ -20,9 +18,6 @@ export const exportBulkProductsToExcel = (products: ProductDetails[]) => {
       "Last Updated": product.lastUpdated || "N/A",
       "Release Date": product.releaseDate || "N/A"
     }));
-    
-    const summarySheet = XLSX.utils.json_to_sheet(summaryData);
-    XLSX.utils.book_append_sheet(wb, summarySheet, "Products Summary");
     
     // Detailed comparison sheet
     const detailedData = products.map(product => {
@@ -58,9 +53,6 @@ export const exportBulkProductsToExcel = (products: ProductDetails[]) => {
       };
     });
     
-    const detailedSheet = XLSX.utils.json_to_sheet(detailedData);
-    XLSX.utils.book_append_sheet(wb, detailedSheet, "Detailed Comparison");
-    
     // Regulatory Details Sheet
     const regulatoryData = products.map(product => ({
       "Product Name": product.name,
@@ -87,12 +79,13 @@ export const exportBulkProductsToExcel = (products: ProductDetails[]) => {
         : "N/A"
     }));
     
-    const regulatorySheet = XLSX.utils.json_to_sheet(regulatoryData);
-    XLSX.utils.book_append_sheet(wb, regulatorySheet, "Regulatory Details");
-    
     // Save the file
     const fileName = createSafeFileName(`bulk-products-export-${products.length}`, 'xlsx');
-    XLSX.writeFileXLSX(wb, fileName);
+    await exportToExcelMultiSheet([
+      { name: "Products Summary", data: summaryData },
+      { name: "Detailed Comparison", data: detailedData },
+      { name: "Regulatory Details", data: regulatoryData },
+    ], fileName);
   } catch (error) {
     console.error('Error exporting bulk products to Excel:', error);
     throw new Error('Failed to export products to Excel format');

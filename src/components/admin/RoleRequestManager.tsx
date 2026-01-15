@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { format } from 'date-fns';
 import { Search, Filter, X, ArrowUpDown, Download, FileSpreadsheet, CheckSquare, XSquare } from 'lucide-react';
-import * as XLSX from 'xlsx';
+import { exportToExcelSimple } from '@/utils/excelExport';
 
 interface RoleRequest {
   id: string;
@@ -415,7 +415,7 @@ export const RoleRequestManager = () => {
     });
   };
 
-  const exportToExcel = () => {
+  const exportToExcel = async () => {
     if (requests.length === 0) {
       toast({
         title: 'No data to export',
@@ -438,27 +438,7 @@ export const RoleRequestManager = () => {
       'Created At': format(new Date(req.created_at), 'yyyy-MM-dd HH:mm:ss'),
     }));
 
-    // Create workbook and worksheet
-    const ws = XLSX.utils.json_to_sheet(excelData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Role Requests');
-
-    // Set column widths
-    const columnWidths = [
-      { wch: 36 }, // Request ID
-      { wch: 30 }, // User Email
-      { wch: 15 }, // First Name
-      { wch: 15 }, // Last Name
-      { wch: 12 }, // Requested Role
-      { wch: 10 }, // Status
-      { wch: 30 }, // Company ID
-      { wch: 50 }, // Justification
-      { wch: 20 }, // Created At
-    ];
-    ws['!cols'] = columnWidths;
-
-    // Download
-    XLSX.writeFile(wb, `role-requests-${format(new Date(), 'yyyy-MM-dd-HHmmss')}.xlsx`);
+    await exportToExcelSimple(excelData, `role-requests-${format(new Date(), 'yyyy-MM-dd-HHmmss')}.xlsx`, 'Role Requests');
 
     toast({
       title: 'Export successful',

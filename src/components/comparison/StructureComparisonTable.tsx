@@ -28,7 +28,7 @@ import { Check, Minus, Star, Search, Filter, Download } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import StructureComparisonSummary from './StructureComparisonSummary';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import * as XLSX from 'xlsx';
+import { exportToExcelSimple } from '@/utils/excelExport';
 
 interface StructureComparisonTableProps {
   products: ProductDetails[];
@@ -55,7 +55,7 @@ const StructureComparisonTable = ({ products }: StructureComparisonTableProps) =
   }, [comparisonResult.allStructures, regionFilter, modalityFilter, showOnly, searchTerm, products.length]);
 
   // Export to Excel
-  const handleExport = () => {
+  const handleExport = async () => {
     const exportData = filteredStructures.map(structure => {
       const row: Record<string, string> = {
         'Structure': structure.structureName,
@@ -72,10 +72,7 @@ const StructureComparisonTable = ({ products }: StructureComparisonTableProps) =
       return row;
     });
 
-    const ws = XLSX.utils.json_to_sheet(exportData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Structure Comparison');
-    XLSX.writeFile(wb, `structure-comparison-${Date.now()}.xlsx`);
+    await exportToExcelSimple(exportData, `structure-comparison-${Date.now()}.xlsx`, 'Structure Comparison');
   };
 
   return (

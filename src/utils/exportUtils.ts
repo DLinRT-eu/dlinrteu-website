@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx';
+import { exportToExcelSimple } from './excelExport';
 
 export const exportToCSV = (data: any[], filename: string) => {
   if (data.length === 0) {
@@ -27,15 +27,12 @@ export const exportToCSV = (data: any[], filename: string) => {
   window.URL.revokeObjectURL(url);
 };
 
-export const exportToExcel = (data: any[], filename: string, sheetName: string = 'Sheet1') => {
+export const exportToExcel = async (data: any[], filename: string, sheetName: string = 'Sheet1') => {
   if (data.length === 0) {
     throw new Error('No data to export');
   }
 
-  const ws = XLSX.utils.json_to_sheet(data);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, sheetName);
-  XLSX.writeFile(wb, `${filename}_${new Date().toISOString().split('T')[0]}.xlsx`);
+  await exportToExcelSimple(data, `${filename}_${new Date().toISOString().split('T')[0]}.xlsx`, sheetName);
 };
 
 export const exportToJSON = (data: any[], filename: string) => {

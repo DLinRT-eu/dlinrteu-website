@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx';
+import { exportToExcelAoa } from './excelExport';
 
 export interface NewsletterSubscriber {
   id: string;
@@ -82,7 +82,7 @@ export const exportNewsletterToCSV = (
 /**
  * Converts newsletter subscribers to Excel format
  */
-export const exportNewsletterToExcel = (
+export const exportNewsletterToExcel = async (
   subscribers: NewsletterSubscriber[], 
   filename: string = 'newsletter_subscribers.xlsx'
 ) => {
@@ -99,22 +99,11 @@ export const exportNewsletterToExcel = (
     ])
   ];
 
-  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Newsletter Subscribers');
+  const columnWidths = [30, 15, 15, 12, 20, 20, 12];
 
-  const columnWidths = [
-    { wch: 30 }, // Email
-    { wch: 15 }, // First Name
-    { wch: 15 }, // Last Name
-    { wch: 12 }, // Consent Given
-    { wch: 20 }, // Subscribed Date
-    { wch: 20 }, // Unsubscribed Date
-    { wch: 12 }  // Status
-  ];
-  worksheet['!cols'] = columnWidths;
-
-  XLSX.writeFile(workbook, filename);
+  await exportToExcelAoa([
+    { name: 'Newsletter Subscribers', data: worksheetData, columnWidths }
+  ], filename);
 };
 
 /**

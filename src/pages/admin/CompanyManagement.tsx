@@ -23,7 +23,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import * as XLSX from 'xlsx';
+import { exportToExcelMultiSheet } from '@/utils/excelExport';
 
 interface CompanyRepresentative {
   id: string;
@@ -375,9 +375,7 @@ export default function CompanyManagement() {
     toast.success('CSV export downloaded');
   };
 
-  const exportToExcel = () => {
-    const workbook = XLSX.utils.book_new();
-
+  const exportToExcel = async () => {
     // Sheet 1: All Representatives
     const repData = representatives.map(rep => ({
       'First Name': rep.profiles.first_name,
@@ -391,9 +389,6 @@ export default function CompanyManagement() {
       'Created Date': new Date(rep.created_at).toLocaleDateString(),
     }));
 
-    const repSheet = XLSX.utils.json_to_sheet(repData);
-    XLSX.utils.book_append_sheet(workbook, repSheet, 'Representatives');
-
     // Sheet 2: Summary by Company
     const companySummary = COMPANIES.map(company => ({
       'Company': company.name,
@@ -402,10 +397,10 @@ export default function CompanyManagement() {
       'Pending': getCompanyReps(company.id).length - getVerifiedCount(company.id),
     }));
 
-    const summarySheet = XLSX.utils.json_to_sheet(companySummary);
-    XLSX.utils.book_append_sheet(workbook, summarySheet, 'Company Summary');
-
-    XLSX.writeFile(workbook, `company_representatives_${new Date().toISOString().split('T')[0]}.xlsx`);
+    await exportToExcelMultiSheet([
+      { name: 'Representatives', data: repData },
+      { name: 'Company Summary', data: companySummary },
+    ], `company_representatives_${new Date().toISOString().split('T')[0]}.xlsx`);
     
     toast.success('Excel export downloaded');
   };

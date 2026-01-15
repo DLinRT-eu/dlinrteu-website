@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx';
+import { exportToExcelAoa } from './excelExport';
 
 export interface ExportUserData {
   id: string;
@@ -69,7 +69,7 @@ export const exportToCSV = (users: ExportUserData[], filename: string = 'users_e
 /**
  * Converts user data to Excel format
  */
-export const exportToExcel = (users: ExportUserData[], filename: string = 'users_export.xlsx') => {
+export const exportToExcel = async (users: ExportUserData[], filename: string = 'users_export.xlsx') => {
   // Prepare data for Excel
   const worksheetData = [
     // Headers
@@ -87,26 +87,11 @@ export const exportToExcel = (users: ExportUserData[], filename: string = 'users
     ])
   ];
 
-  // Create workbook and worksheet
-  const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Users');
+  const columnWidths = [36, 30, 15, 15, 25, 25, 15, 20];
 
-  // Set column widths for better readability
-  const columnWidths = [
-    { wch: 36 }, // User ID
-    { wch: 30 }, // Email
-    { wch: 15 }, // First Name
-    { wch: 15 }, // Last Name
-    { wch: 25 }, // Institution
-    { wch: 25 }, // Roles
-    { wch: 15 }, // Approval Status
-    { wch: 20 }  // Created At
-  ];
-  worksheet['!cols'] = columnWidths;
-
-  // Generate Excel file and download
-  XLSX.writeFile(workbook, filename);
+  await exportToExcelAoa([
+    { name: 'Users', data: worksheetData, columnWidths }
+  ], filename);
 };
 
 /**

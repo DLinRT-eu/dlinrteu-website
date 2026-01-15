@@ -1,5 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
-import * as XLSX from 'xlsx';
+import { exportToExcelMultiSheet } from "../excelExport";
 import jsPDF from 'jspdf';
 import { parseAndGroupStructures, formatGroupedStructuresForPDF } from '@/utils/structureGrouping';
 
@@ -14,16 +14,10 @@ const createSafeFileName = (baseName: string, extension: string): string => {
   return `${cleanName}_${timestamp}.${extension}`;
 };
 
-export const exportComparisonToExcel = (products: ProductDetails[], comparisonData: ComparisonRow[]) => {
+export const exportComparisonToExcel = async (products: ProductDetails[], comparisonData: ComparisonRow[]) => {
   try {
-    const wb = XLSX.utils.book_new();
-    
-    // Create comparison sheet with products as columns
-    const comparisonSheet = XLSX.utils.json_to_sheet(comparisonData);
-    XLSX.utils.book_append_sheet(wb, comparisonSheet, "Product Comparison");
-    
-    // Create individual product details sheets
-    products.forEach((product, index) => {
+    // Create individual product details sheets data
+    const productSheets = products.map((product, index) => {
       const productData = [
         { Field: "Product Name", Value: product.name || "N/A" },
         { Field: "Company", Value: product.company || "N/A" },
@@ -43,14 +37,16 @@ export const exportComparisonToExcel = (products: ProductDetails[], comparisonDa
         { Field: "Clinical Evidence", Value: product.clinicalEvidence || "N/A" },
       ];
       
-      const productSheet = XLSX.utils.json_to_sheet(productData);
       const sheetName = `${product.name?.substring(0, 25) || 'Product'}_${index + 1}`;
-      XLSX.utils.book_append_sheet(wb, productSheet, sheetName);
+      return { name: sheetName, data: productData };
     });
     
     // Save the file
     const fileName = createSafeFileName(`Product_Comparison_${products.map(p => p.name).join('_vs_')}`, 'xlsx');
-    XLSX.writeFileXLSX(wb, fileName);
+    await exportToExcelMultiSheet([
+      { name: "Product Comparison", data: comparisonData },
+      ...productSheets
+    ], fileName);
   } catch (error) {
     console.error('Error exporting comparison to Excel:', error);
     throw new Error('Failed to export comparison to Excel format');
