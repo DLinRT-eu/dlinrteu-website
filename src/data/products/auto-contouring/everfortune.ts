@@ -1,30 +1,29 @@
 
 import { ProductDetails } from "@/types/productDetails";
 
-// Structure data retrieved on 2024-04-29
 export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
   {
     id: "everfortune-rt-suite",
-    name: "RT Suite",
+    name: "RT Suite (HCAP-Segmentation)",
     company: "Ever Fortune AI",
     companyUrl: "https://www.everfortuneai.com.tw/en/",
     productUrl: "https://www.everfortuneai.com.tw/en/2023/11/10/%e6%94%be%e5%b0%84%e6%b2%bb%e7%99%82%e5%99%a8%e5%ae%98%e5%8b%be%e5%8b%92%e7%b3%bb%e7%b5%b1/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/everfortune.ts",
-    description: "Comprehensive AI-powered solution for radiation therapy planning, including auto-segmentation and treatment optimization.",
+    description: "AI-powered head and neck auto-segmentation solution for radiation therapy planning, specialized in comprehensive organ-at-risk delineation for the head and neck region.",
     category: "Auto-Contouring",
-    certification: "CE",
+    certification: "CE & FDA",
     logoUrl: "/logos/ever-fortune.png",
     website: "https://www.everfortuneai.com.tw/en/",
-    anatomicalLocation: ["Brain","Head & Neck", "Thorax", "Abdomen", "Pelvis"],
+    anatomicalLocation: ["Head & Neck"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Deep learning segmentation", "Treatment planning tools", "Workflow integration"],
+    diseaseTargeted: ["Head and Neck Cancer"],
+    keyFeatures: ["Deep learning segmentation", "Head & Neck specialization", "Workflow integration", "Fast processing"],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT"],
       inputFormat: ["DICOM"],
-      output: ["Structure sets", "Treatment plans"],
+      output: ["Structure sets"],
       outputFormat: ["DICOM-RT"]
     },
     technology: {
@@ -41,54 +40,44 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "Under review",
-        notes: "CardioSuite has FDA clearance (K213731) but RT Suite status unconfirmed"
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K252105",
+        productCode: "QKB",
+        decisionDate: "2025-09-26",
+        notes: "HCAP-Segmentation System for head-and-neck CT auto-segmentation"
       },
-      intendedUseStatement: "For automatic segmentation and treatment planning assistance in radiation therapy."
+      intendedUseStatement: "For automatic segmentation of organs at risk in the head and neck region for radiation therapy planning."
     },
     market: {
       onMarketSince: "2021",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
-    version: "2.0",
-    releaseDate: "2023-07-15",
-    lastUpdated: "2024-03-10",
+    version: "2.5",
+    releaseDate: "2025-09-01",
+    lastUpdated: "2026-01-15",
     supportedStructures: [
-      // Head & Neck - 17 structures according to website convention
+      // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
       "Head & Neck: Brain",
-      "Head & Neck: Brain Stem",
-      "Head & Neck: Optic Nerve L",
-      "Head & Neck: Optic Nerve R", 
-      "Head & Neck: Spinal Chord",
+      "Head & Neck: Brainstem",
+      "Head & Neck: Optic Nerve (L/R)",
+      "Head & Neck: Optic Chiasm",
+      "Head & Neck: Spinal Cord",
       "Head & Neck: Esophagus",
       "Head & Neck: Thyroid",
       "Head & Neck: Trachea",
-      "Head & Neck: Parotid L",
-      "Head & Neck: Parotid R",
+      "Head & Neck: Parotid (L/R)",
+      "Head & Neck: Submandibular Gland (L/R)",
       "Head & Neck: Oral Cavity",
       "Head & Neck: Mandible",
-      "Head & Neck: Eye L",
-      "Head & Neck: Eye R",
-      "Head & Neck: Lens L",
-      "Head & Neck: Lens R",
-      "Head & Neck: Optic Chiasm",
-      // Additional supported structures for other anatomical regions
-      "Thorax: Heart",
-      "Thorax: Lungs",
-      "Thorax: Esophagus",
-      "Thorax: Spinal Cord",
-      "Abdomen: Liver",
-      "Abdomen: Kidneys",
-      "Abdomen: Spleen",
-      "Abdomen: Stomach",
-      "Abdomen: Small Bowel",
-      "Pelvis: Bladder",
-      "Pelvis: Rectum",
-      "Pelvis: Femoral Heads",
-      "Pelvis: Prostate",
-      "Pelvis: Uterus"
+      "Head & Neck: Eye (L/R)",
+      "Head & Neck: Lens (L/R)",
+      "Head & Neck: Cochlea (L/R)",
+      "Head & Neck: Larynx",
+      "Head & Neck: Pharyngeal Constrictor"
     ],
-    lastRevised: "2026-01-02",
-    source: "Company official sources"
+    lastRevised: "2026-01-15",
+    source: "FDA 510(k) database (K252105), company official sources"
   }
 ];
