@@ -7,30 +7,30 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     name: "IRIS Evo",
     company: "Elekta",
     category: "Reconstruction",
-    description: "AI-powered CBCT reconstruction module within Elekta's XVI imaging system that improves image quality for radiation therapy planning and adaptive radiotherapy using deep learning techniques.",
+    description: "AI-powered CBCT reconstruction module within Elekta's Evo CT-Linac system that improves image quality for radiation therapy planning and adaptive radiotherapy using deep learning techniques.",
     features: ["Deep learning reconstruction", "CBCT imaging", "Radiotherapy"],
-    certification: "CE Mark (EU only)",
+    certification: "CE & FDA",
     logoUrl: "/logos/Elekta.png",
     companyUrl: "https://www.elekta.com/",
-    productUrl: "https://www.elekta.com/radiation-oncology/treatment-solutions/imaging/",
+    productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
     anatomicalLocation: ["Pelvis"],
     modality: ["CBCT"],
     diseaseTargeted: ["Cancer"],
     releaseDate: "2022-06-01",
     version: "2.0",
     partOf: {
-      name: "XVI (X-ray Volume Imaging)",
-      version: "5.1",
-      productUrl: "https://www.elekta.com/radiation-oncology/treatment-solutions/imaging/",
-      relationship: "Module"
+      name: "Elekta Evo CT-Linac",
+      productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
+      relationship: "Imaging Module"
     },
     keyFeatures: [
       "AI-powered CBCT reconstruction",
       "Improved soft tissue contrast",
       "Enhanced tumor and organ-at-risk visualization",
       "Deep learning noise reduction algorithms",
-      "Integrated within Elekta XVI 5.1 imaging platform",
-      "Seamless integration with Elekta linacs"
+      "Integrated within Elekta Evo CT-Linac platform",
+      "Seamless integration with Elekta linacs",
+      "Available as upgrade for existing Elekta linacs"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
@@ -40,7 +40,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["Elekta Linacs", "Monaco TPS", "MOSAIQ Oncology Information System"],
+      integration: ["Elekta Linacs", "Elekta Evo", "Monaco TPS", "MOSAIQ Oncology Information System"],
       deployment: ["On-premise"],
       triggerForAnalysis: "Automatic after CBCT acquisition",
       processingTime: "<30 seconds per volume"
@@ -53,8 +53,11 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "Not cleared",
-        notes: "CE marked for European market. US FDA 510(k) not yet obtained. IRIS is integrated with Elekta linac systems."
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        decisionDate: "2026-01-16",
+        notes: "Cleared as part of Elekta Evo CT-Linac system. Available as upgrade for existing Elekta linacs."
       },
       intendedUseStatement: "Intended for enhancing CBCT medical images to improve quality through AI-based reconstruction to support radiotherapy treatment planning and verification."
     },
@@ -65,14 +68,19 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Product Information",
-        description: "Official Elekta imaging solutions product page",
-        link: "https://www.elekta.com/radiation-oncology/treatment-solutions/imaging/"
+        description: "Official Elekta Evo product page",
+        link: "https://www.elekta.com/products/radiation-therapy/elekta-evo/"
+      },
+      {
+        type: "Press Release",
+        description: "Elekta receives FDA 510(k) clearance for Elekta Evo linear accelerator",
+        link: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/"
       }
     ],
-    clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images",
-    lastUpdated: "2025-02-10",
-    lastRevised: "2026-01-08",
-    source: "Company website; FDA 510(k) database verification",
+    clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
+    lastUpdated: "2026-01-16",
+    lastRevised: "2026-01-16",
+    source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }
 ];
