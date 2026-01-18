@@ -58,5 +58,51 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/md_anderson.svg"
+  },
+  {
+    "id": "brainlab",
+    "name": "Brainlab",
+    "description": "Global leader in software-driven medical technology providing AI-powered solutions for neurosurgery and radiation oncology, including automated segmentation and treatment planning.",
+    "website": "https://www.brainlab.com/",
+    "productIds": [
+      "brainlab-elements-ai-tumor-seg",
+      "brainlab-elements-rt-seg"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/brainlab.png"
+  },
+  {
+    "id": "viewray",
+    "name": "ViewRay",
+    "description": "Pioneer in MRI-guided radiation therapy systems with AI-powered adaptive radiotherapy, auto-contouring, and real-time motion tracking capabilities.",
+    "website": "https://www.viewray.com/",
+    "productIds": [
+      "viewray-mridian-a3i"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/viewray.png"
+  },
+  {
+    "id": "reflexion-medical",
+    "name": "RefleXion Medical",
+    "description": "Theranostic oncology company commercializing SCINTIX biology-guided radiotherapy (BgRT), using PET emissions to autonomously guide radiation delivery in real-time.",
+    "website": "https://www.reflexion.com/",
+    "productIds": [
+      "reflexion-scintix",
+      "reflexion-x2"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/reflexion.png"
+  },
+  {
+    "id": "leo-cancer-care",
+    "name": "Leo Cancer Care",
+    "description": "Developer of upright radiotherapy solutions, enabling patients to receive treatment while seated or standing, with integrated CT imaging for adaptive therapy.",
+    "website": "https://www.leocancercare.com/",
+    "productIds": [
+      "leo-marie"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/leocancercare.png"
   }
 ];
