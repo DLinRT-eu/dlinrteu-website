@@ -228,7 +228,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
 "Pelvis (Female Lymph Nodes): LN Lomboartic (Gyneco)",
 "Pelvis (Female Lymph Nodes): LN Presacral (Gyneco)"
     ],
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-18",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822, K202700)"
   }
 ];
