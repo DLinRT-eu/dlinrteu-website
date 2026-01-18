@@ -9,7 +9,7 @@ export const VIEWRAY_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Tracking"],
     description: "MRI-guided radiotherapy system with AI-powered auto-contouring, on-table adaptive replanning (Auto-Adapt), and real-time tissue tracking with automatic beam gating (Auto-Gating).",
     certification: "CE & FDA",
-    logoUrl: "/logos/viewray.png",
+    logoUrl: "/logos/Viewray.png",
     companyUrl: "https://www.viewray.com/",
     productUrl: "https://www.viewray.com/mridian/",
     anatomicalLocation: ["Head & Neck", "Pelvis", "Abdomen", "Thorax"],

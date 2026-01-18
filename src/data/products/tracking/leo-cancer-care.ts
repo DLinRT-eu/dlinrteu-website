@@ -9,7 +9,7 @@ export const LEO_CANCER_CARE_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Reconstruction"],
     description: "Revolutionary upright patient positioner with integrated onboard CT scanner for particle therapy. Enables seated or standing treatment while providing real-time imaging for adaptive radiotherapy.",
     certification: "FDA",
-    logoUrl: "/logos/leocancercare.png",
+    logoUrl: "/logos/LeoCancerCare.jpg",
     companyUrl: "https://www.leocancercare.com/",
     productUrl: "https://www.leocancercare.com/marie/",
     anatomicalLocation: ["Whole Body"],

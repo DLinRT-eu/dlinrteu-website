@@ -19,7 +19,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     category: "Performance Monitor",
     secondaryCategories: ["Treatment Planning"],
     certification: "CE & FDA",
-    logoUrl: "/logos/radformation.png",
+    logoUrl: "/logos/radformation.svg",
     website: "https://radformation.com/clearcheck/clearcheck",
     anatomicalLocation: ["Multiple"],
     modality: ["RT Plan", "RT Struct"],
