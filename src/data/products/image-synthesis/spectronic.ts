@@ -7,7 +7,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     name: "MRIplanner",
     company: "Spectronic Medical",
     companyUrl: "https://medical.spectronic.se/",
-    productUrl: "https://medical.spectronic.se/mriplanner",
+    productUrl: "https://medical.spectronic.se/page-2/page6/index.html",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/spectronic.ts",
     description: "AI-based software solution that converts standard MR images to synthetic CT for MR-only radiotherapy planning, with integrated auto-segmentation capabilities.",
     features: ["MR-only workflow", "Deep learning based", "Fast processing", "Synthetic CT generation", "Auto-segmentation"],
@@ -78,7 +78,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     version: "3.2",
     releaseDate: "2023-07-10",
     lastUpdated: "2025-12-11",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-18",
     source: "FDA 510(k) database and company website"
   }
 ];
