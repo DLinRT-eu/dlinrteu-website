@@ -69,7 +69,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "brainlab-elements-rt-seg"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/brainlab.png"
+    "logoUrl": "/logos/Brainlab.jpg"
   },
   {
     "id": "viewray",
@@ -80,7 +80,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "viewray-mridian-a3i"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/viewray.png"
+    "logoUrl": "/logos/Viewray.png"
   },
   {
     "id": "reflexion-medical",
@@ -92,7 +92,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "reflexion-x2"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/reflexion.png"
+    "logoUrl": "/logos/Reflexion.png"
   },
   {
     "id": "leo-cancer-care",
@@ -103,6 +103,6 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "leo-marie"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/leocancercare.png"
+    "logoUrl": "/logos/LeoCancerCare.jpg"
   }
 ];
