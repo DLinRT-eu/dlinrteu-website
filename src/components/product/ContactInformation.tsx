@@ -11,6 +11,7 @@ interface ContactInformationProps {
 
 const ContactInformation = ({ product }: ContactInformationProps) => {
   const githubUrl = getProductGitHubUrl(product);
+  const websiteUrl = product.website || product.productUrl;
   
   return (
     <Card>
@@ -20,9 +21,9 @@ const ContactInformation = ({ product }: ContactInformationProps) => {
       <CardContent className="space-y-2">
         <div>
           <p className="text-sm font-medium">Website:</p>
-          {product.website ? (
-            <a href={product.website} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline flex items-center gap-1">
-              {product.website}
+          {websiteUrl ? (
+            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline flex items-center gap-1">
+              {websiteUrl}
               <ExternalLink className="h-4 w-4" />
             </a>
           ) : (
