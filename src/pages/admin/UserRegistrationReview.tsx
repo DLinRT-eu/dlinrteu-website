@@ -45,7 +45,7 @@ export default function UserRegistrationReview() {
     loadNotifications();
   }, [loadNotifications]);
 
-  const verifyUser = async (userId: string, verified: boolean) => {
+  const verifyUser = async (userId: string, verified: boolean, notification?: RegistrationNotification) => {
     try {
       setVerifying(userId);
       
@@ -55,6 +55,25 @@ export default function UserRegistrationReview() {
       });
 
       if (error) throw error;
+
+      // Send notification email to user
+      if (notification) {
+        try {
+          await supabase.functions.invoke('notify-user-approval', {
+            body: {
+              userId: notification.user_id,
+              email: notification.email,
+              firstName: notification.first_name || 'User',
+              lastName: notification.last_name || '',
+              approved: verified,
+              rejectionReason: verified ? null : 'Your registration did not meet our verification criteria.'
+            }
+          });
+        } catch (emailError) {
+          console.error('Error sending notification email:', emailError);
+          // Don't fail the verification if email fails
+        }
+      }
 
       toast({
         title: "Success",
@@ -222,7 +241,7 @@ export default function UserRegistrationReview() {
                         <Button
                           size="sm"
                           variant="default"
-                          onClick={() => verifyUser(notification.user_id, true)}
+                          onClick={() => verifyUser(notification.user_id, true, notification)}
                           disabled={verifying === notification.user_id}
                           className="bg-green-600 hover:bg-green-700"
                         >
@@ -232,7 +251,7 @@ export default function UserRegistrationReview() {
                         <Button
                           size="sm"
                           variant="destructive"
-                          onClick={() => verifyUser(notification.user_id, false)}
+                          onClick={() => verifyUser(notification.user_id, false, notification)}
                           disabled={verifying === notification.user_id}
                         >
                           <XCircle className="h-4 w-4 mr-1" />

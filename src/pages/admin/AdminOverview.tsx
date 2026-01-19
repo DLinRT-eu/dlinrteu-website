@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
@@ -486,6 +486,22 @@ export default function AdminOverview() {
                           <div className="font-semibold">Newsletter Management</div>
                           <div className="text-xs text-muted-foreground mt-0.5">
                             Manage newsletter subscribers and mailing list
+                          </div>
+                        </div>
+                      </div>
+                    </Button>
+
+                    <Button 
+                      variant="outline" 
+                      className="justify-start h-auto py-3"
+                      onClick={() => window.open('https://resend.com/emails', '_blank')}
+                    >
+                      <div className="flex items-start gap-3 w-full">
+                        <ExternalLink className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                        <div className="text-left flex-1">
+                          <div className="font-semibold">Email Delivery Logs</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">
+                            View Resend dashboard for email delivery status
                           </div>
                         </div>
                       </div>

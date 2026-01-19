@@ -66,7 +66,7 @@ const handler = async (req: Request): Promise<Response> => {
     const hasMore = productNames.length > 5;
 
     const emailResponse = await resend.emails.send({
-      from: "Review System <onboarding@resend.dev>",
+      from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
       to: [profile.email],
       subject: `New Review Assignment: ${roundName}`,
       html: `
