@@ -6,13 +6,16 @@ export interface StructureTypes {
   hasTargets: boolean;
   hasElective: boolean;
   hasGTV: boolean; // Alias for hasTargets for backward compatibility
+  hasInvestigational?: boolean;
 }
 
 export interface StructureTypeCounts {
   OARs: number;
   Targets: number;
   Elective: number;
+  Investigational: number;
   total: number;
+  approvedTotal: number; // Total excluding investigational
 }
 
 /**
@@ -22,6 +25,36 @@ export interface StructureTypeCounts {
  */
 export function hasLateralityPattern(structure: string): boolean {
   return /\(L\/R\)|\(R\/L\)|\sL\/R\s|\sR\/L\s|\s\(L\/R\)|\s\(R\/L\)|\(L\)|\(R\)|\sL\s|\sR\s/.test(structure);
+}
+
+/**
+ * Checks if a structure is marked as investigational use only
+ * @param structure Structure name
+ * @returns true if structure is marked with (investigational)
+ */
+export function isInvestigationalStructure(structure: string): boolean {
+  return /\(investigational\)/i.test(structure);
+}
+
+/**
+ * Checks if a structure is marked as unsupported
+ * @param structure Structure name
+ * @returns true if structure is marked with (unsupported)
+ */
+export function isUnsupportedStructure(structure: string): boolean {
+  return /\(unsupported\)/i.test(structure);
+}
+
+/**
+ * Cleans structure name by removing status markers
+ * @param structure Structure name
+ * @returns Clean structure name without status markers
+ */
+export function cleanStructureName(structure: string): string {
+  return structure
+    .replace(/\s*\(investigational\)/gi, '')
+    .replace(/\s*\(unsupported\)/gi, '')
+    .trim();
 }
 
 /**
@@ -84,14 +117,22 @@ export function countStructureTypes(structures: string[]): StructureTypeCounts {
     OARs: 0,
     Targets: 0,
     Elective: 0,
-    total: 0
+    Investigational: 0,
+    total: 0,
+    approvedTotal: 0
   };
 
   structures.forEach(structure => {
     const { isTarget, isElective } = classifyStructure(structure);
+    const isInvestigational = isInvestigationalStructure(structure);
     
     // Check if structure has L/R pattern - count as two structures if it does
     const multiplier = hasLateralityPattern(structure) ? 2 : 1;
+    
+    // Count investigational structures separately
+    if (isInvestigational) {
+      counts.Investigational += multiplier;
+    }
     
     if (isTarget) {
       counts.Targets += multiplier;
@@ -102,6 +143,11 @@ export function countStructureTypes(structures: string[]): StructureTypeCounts {
     }
     
     counts.total += multiplier;
+    
+    // Only count approved (non-investigational) in approvedTotal
+    if (!isInvestigational) {
+      counts.approvedTotal += multiplier;
+    }
   });
 
   return counts;

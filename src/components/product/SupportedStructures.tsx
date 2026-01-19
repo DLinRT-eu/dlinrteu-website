@@ -2,9 +2,10 @@
 /** @jsxImportSource react */
 import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Target, CircleDot } from "lucide-react";
+import { Shield, Target, CircleDot, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { classifyStructure, StructureTypes, hasLateralityPattern } from '@/utils/structureClassification';
+import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
+import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
 
 interface SupportedStructuresProps {
   structures?: string[] | Array<{
@@ -26,6 +27,7 @@ interface StructureInfo {
   name: string;
   supported: boolean;
   type: "OAR" | "GTV" | "Elective";
+  isInvestigational: boolean;
 }
 
 const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures }) => {
@@ -38,10 +40,15 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
   let hasOARs = false;
   let hasGTV = false;
   let hasElective = false;
+  let hasInvestigational = false;
   const modelTypes: Record<string, StructureTypes> = {};
   let totalOARs = 0;
   let totalGTV = 0;
   let totalElective = 0;
+  let totalInvestigational = 0;
+  let approvedOARs = 0;
+  let approvedGTV = 0;
+  let approvedElective = 0;
 
   // Process and group structures
   const processStructures = structures.map(structure => {
@@ -52,7 +59,8 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
         structureType: structure.type,
         region: 'Default',
         model: 'Default',
-        isSupported: true
+        isSupported: true,
+        isInvestigational: false
       };
     } else if (typeof structure === 'string') {
       const parts = structure.split(":");
@@ -65,21 +73,25 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
         const model = modelMatch ? modelMatch[1].trim() : region;
         
         const isSupported = !structureName.includes("(unsupported)");
-        const cleanName = structureName.replace("(unsupported)", "").trim();
+        const isInvestigational = isInvestigationalStructure(structureName);
+        const cleanName = cleanStructureName(structureName);
         
         return {
           structureName: cleanName,
           region: region,
           model: model,
           isSupported: isSupported,
+          isInvestigational: isInvestigational,
           structureType: ''  // Will be classified below
         };
       }
+      const isInvestigational = isInvestigationalStructure(structure);
       return {
-        structureName: structure,
+        structureName: cleanStructureName(structure),
         region: 'Default',
         model: 'Default',
         isSupported: true,
+        isInvestigational: isInvestigational,
         structureType: ''
       };
     }
@@ -90,7 +102,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
   processStructures.forEach(item => {
     if (!item) return;
     
-    const { structureName, region, model, isSupported } = item;
+    const { structureName, region, model, isSupported, isInvestigational } = item;
     let structureType = item.structureType;
     
     // Use shared utility for classification if type is not already provided
@@ -102,40 +114,51 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
     
     const type = structureType === "GTV" ? "GTV" : structureType === "Elective" ? "Elective" : "OAR";
     const isGTV = type === "GTV";
-    const isElective = type === "Elective";
+    const isElectiveType = type === "Elective";
     const isOAR = type === "OAR";
     
     // Update structure counts with laterality check
     const multiplier = hasLateralityPattern(structureName) ? 2 : 1;
+    
+    // Track investigational separately
+    if (isInvestigational) {
+      totalInvestigational += multiplier;
+      hasInvestigational = true;
+    }
+    
     if (isGTV) {
       totalGTV += multiplier;
       hasGTV = true;
+      if (!isInvestigational) approvedGTV += multiplier;
     }
-    if (isElective) {
+    if (isElectiveType) {
       totalElective += multiplier;
       hasElective = true;
+      if (!isInvestigational) approvedElective += multiplier;
     }
     if (isOAR) {
       totalOARs += multiplier;
       hasOARs = true;
+      if (!isInvestigational) approvedOARs += multiplier;
     }
     
     // Track which types each model supports
     if (!modelTypes[model]) {
-      modelTypes[model] = { hasOAR: false, hasTargets: false, hasElective: false, hasGTV: false };
+      modelTypes[model] = { hasOAR: false, hasTargets: false, hasElective: false, hasGTV: false, hasInvestigational: false };
     }
     if (isGTV) {
       modelTypes[model].hasGTV = true;
       modelTypes[model].hasTargets = true; // GTV is a type of target
     }
-    if (isElective) modelTypes[model].hasElective = true;
+    if (isElectiveType) modelTypes[model].hasElective = true;
     if (isOAR) modelTypes[model].hasOAR = true;
+    if (isInvestigational) modelTypes[model].hasInvestigational = true;
     
     if (!groupedStructures[region]) {
       groupedStructures[region] = {
         name: region,
         structures: [],
-        types: { hasOAR: false, hasTargets: false, hasGTV: false, hasElective: false },
+        types: { hasOAR: false, hasTargets: false, hasGTV: false, hasElective: false, hasInvestigational: false },
         model
       };
     }
@@ -143,7 +166,8 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
     groupedStructures[region].structures.push({
       name: structureName,
       supported: isSupported,
-      type: type as "OAR" | "GTV" | "Elective"
+      type: type as "OAR" | "GTV" | "Elective",
+      isInvestigational: isInvestigational
     });
     
     // Update group types
@@ -151,13 +175,18 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
       groupedStructures[region].types.hasGTV = true;
       groupedStructures[region].types.hasTargets = true;
     }
-    if (isElective) groupedStructures[region].types.hasElective = true;
+    if (isElectiveType) groupedStructures[region].types.hasElective = true;
     if (isOAR) groupedStructures[region].types.hasOAR = true;
+    if (isInvestigational) groupedStructures[region].types.hasInvestigational = true;
   });
 
-  // Sort structures by type
+  // Sort structures by type (investigational goes to the end)
   Object.values(groupedStructures).forEach(group => {
     group.structures.sort((a, b) => {
+      // Investigational structures go to the end
+      if (a.isInvestigational !== b.isInvestigational) {
+        return a.isInvestigational ? 1 : -1;
+      }
       const typeOrder: Record<string, number> = { 
         GTV: 0, 
         Elective: 1, 
@@ -188,7 +217,10 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
   };
 
   // Function to get the appropriate icon and color for a structure type
-  const getStructureIcon = (type: "OAR" | "GTV" | "Elective") => {
+  const getStructureIcon = (type: "OAR" | "GTV" | "Elective", isInvestigational: boolean) => {
+    if (isInvestigational) {
+      return <AlertTriangle className="h-4 w-4 text-amber-600" aria-hidden="true" />;
+    }
     switch (type) {
       case "OAR":
         return <Shield className="h-4 w-4 text-blue-600" aria-hidden="true" />;
@@ -211,34 +243,44 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
       <CardContent>
         {/* Summary badges section */}
         <div className="flex flex-wrap gap-3 mb-6">
-          {totalOARs > 0 && (
+          {approvedOARs > 0 && (
             <div className={cn(
               "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5",
               "bg-blue-50 text-blue-700 border-blue-200"
             )}>
               <Shield className="h-4 w-4" aria-hidden="true" />
               <span className="font-medium">OARs</span>
-              <span className="font-normal">({totalOARs})</span>
+              <span className="font-normal">({approvedOARs})</span>
             </div>
           )}
-          {totalGTV > 0 && (
+          {approvedGTV > 0 && (
             <div className={cn(
               "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5",
               "bg-red-50 text-red-700 border-red-200"
             )}>
               <Target className="h-4 w-4" aria-hidden="true" />
-              <span className="font-medium">GTV</span>
-              <span className="font-normal">({totalGTV})</span>
+              <span className="font-medium">Targets</span>
+              <span className="font-normal">({approvedGTV})</span>
             </div>
           )}
-          {totalElective > 0 && (
+          {approvedElective > 0 && (
             <div className={cn(
               "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5",
               "bg-purple-50 text-purple-700 border-purple-200"
             )}>
               <CircleDot className="h-4 w-4" aria-hidden="true" />
               <span className="font-medium">Elective</span>
-              <span className="font-normal">({totalElective})</span>
+              <span className="font-normal">({approvedElective})</span>
+            </div>
+          )}
+          {totalInvestigational > 0 && (
+            <div className={cn(
+              "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5",
+              "bg-amber-50 text-amber-700 border-amber-200"
+            )}>
+              <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+              <span className="font-medium">Investigational</span>
+              <span className="font-normal">({totalInvestigational})</span>
             </div>
           )}
         </div>
@@ -252,13 +294,15 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
                   {group.types.hasOAR && <Shield className="h-4 w-4 text-blue-600" aria-hidden="true" />}
                   {group.types.hasGTV && <Target className="h-4 w-4 text-red-600" aria-hidden="true" />}
                   {group.types.hasElective && <CircleDot className="h-4 w-4 text-purple-600" aria-hidden="true" />}
+                  {group.types.hasInvestigational && <AlertTriangle className="h-4 w-4 text-amber-600" aria-hidden="true" />}
                 </div>
                 {group.name}
                 <span className="text-sm text-gray-500 font-normal">
                   ({[
                     group.types.hasOAR ? "OARs" : null,
                     group.types.hasGTV ? "GTV" : null,
-                    group.types.hasElective ? "Elective" : null
+                    group.types.hasElective ? "Elective" : null,
+                    group.types.hasInvestigational ? "Investigational" : null
                   ].filter(Boolean).join(" + ")})
                 </span>
               </h4>
@@ -268,17 +312,22 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
                     key={index}
                     className={cn(
                       "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold gap-1",
-                      structure.supported 
-                        ? structure.type === "OAR"
-                          ? "bg-blue-50 text-blue-800 border-blue-200"
-                          : structure.type === "GTV"
-                            ? "bg-red-50 text-red-800 border-red-200"
-                            : "bg-purple-50 text-purple-800 border-purple-200"
-                        : "bg-gray-100 text-gray-600 border-gray-200"
+                      structure.isInvestigational
+                        ? "bg-amber-50 text-amber-800 border-amber-200"
+                        : structure.supported 
+                          ? structure.type === "OAR"
+                            ? "bg-blue-50 text-blue-800 border-blue-200"
+                            : structure.type === "GTV"
+                              ? "bg-red-50 text-red-800 border-red-200"
+                              : "bg-purple-50 text-purple-800 border-purple-200"
+                          : "bg-gray-100 text-gray-600 border-gray-200"
                     )}
                   >
-                    {getStructureIcon(structure.type)}
+                    {getStructureIcon(structure.type, structure.isInvestigational)}
                     {structure.name}
+                    {structure.isInvestigational && (
+                      <InvestigationalStructureBadge className="ml-0.5" />
+                    )}
                   </div>
                 ))}
               </div>
