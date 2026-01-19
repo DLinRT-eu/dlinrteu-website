@@ -5,11 +5,19 @@
 ## Quick Access
 
 - **Admin Dashboard**: `/admin` - Overview of all admin functions
+- **Analytics Dashboard**: `/admin/dashboard` - Platform analytics and metrics
 - **User Management**: `/admin/users` - Manage user roles and permissions
 - **Review Assignment**: `/admin/reviews` - Assign product reviews to reviewers
 - **Review Rounds**: `/admin/review-rounds` - Create and manage review rounds
 - **Company Management**: `/admin/companies` - Manage company representatives
+- **Certification Management**: `/admin/certifications` - View all product certifications
+- **User Product Adoptions**: `/admin/user-products` - Track user product interests
+- **Company Mapping Validator**: `/admin/company-mapping-validator` - Validate company data mappings
 - **Security Dashboard**: `/admin/security` - Monitor security events
+- **Security Monitoring**: `/admin/security-monitoring` - Detailed security monitoring
+- **Changelog Management**: `/admin/changelog` - Manage release notes
+- **Changelog Generator**: `/admin/changelog-generator` - Generate changelog from commits
+- **Registration Review**: `/admin/registrations` - Review user registrations
 
 ---
 
@@ -270,7 +278,7 @@ ON CONFLICT (user_id, role) DO NOTHING;
 
 - [Reviewer Guide](./REVIEWER_GUIDE.md) - For understanding reviewer workflow
 - [Reviewer Assignment Guide](./REVIEWER_ASSIGNMENT_GUIDE.md) - Detailed assignment procedures
-- [Admin Routes Documentation](./ADMIN_COMPANY_ROUTES.md) - Complete route reference
+- [Field Reference](./FIELD_REFERENCE.md) - Complete product field definitions
 
 ---
 

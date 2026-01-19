@@ -35,10 +35,15 @@ This guide covers all aspects of working with products on DLinRT.eu, including r
 
 1. **Choose Primary Category**
    - Auto-Contouring
+   - Clinical Prediction
+   - Image Enhancement
    - Image Synthesis
-   - Registration
-   - Treatment Planning
    - Performance Monitor
+   - Platform
+   - Reconstruction
+   - Registration
+   - Tracking
+   - Treatment Planning
 
 2. **Consider Secondary Categories**
    - Products can span multiple categories
@@ -195,7 +200,11 @@ const currentProduct: ProductDetails = {
 
 ## Example Templates
 
-See example implementations in `src/data/products/examples/`:
+See example implementations in:
+- `docs/examples/products/` - Documentation examples
+- `src/data/products/examples/` - Code examples
+
+**Available Examples**:
 - auto-contouring-example.ts
 - image-synthesis-example.ts
 - registration-example.ts
@@ -206,6 +215,7 @@ All examples include:
 - Multi-category support examples
 - Versioning best practices
 - Complete field documentation
+- AI classification fields (`usesAI`, `monitorsAIProducts`)
 
 ## Need Help?
 
@@ -213,3 +223,7 @@ All examples include:
 - Open GitHub issue
 - Join discussions
 - Review hidden admin pages at `/review` and `/timeline`
+
+---
+
+*Last Updated: January 19, 2026*
