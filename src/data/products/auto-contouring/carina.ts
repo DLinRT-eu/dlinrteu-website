@@ -54,141 +54,230 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2025-06-10",
-    lastUpdated: "2026-01-15",
+    lastUpdated: "2026-01-19",
     supportedStructures: [
-      // Brain Structures - OARs
-      "Brain: Brain",
+      // ========================================
+      // BRAIN - Approved Structures (OARs)
+      // ========================================
       "Brain: Brainstem",
       "Brain: Cerebellum",
-      "Brain: Optic Chiasm",
-      "Brain: Optic Nerve (L/R)",
-      "Brain: Eye (L/R)",
-      "Brain: Lens (L/R)",
-      "Brain: Lacrimal Gland (L/R)",
-      "Brain: Pituitary",
+      "Brain: Cerebrum",
+      "Brain: Chiasm",
       "Brain: Cochlea (L/R)",
-      "Brain: Inner Ear (L/R)",
-      "Brain: Middle Ear (L/R)",
-      "Brain: Temporal Lobe (L/R)",
+      "Brain: Eye (L/R)",
       "Brain: Hippocampus (L/R)",
       "Brain: Hypothalamus",
+      "Brain: Inner Ear (L/R)",
+      "Brain: Lacrimal Gland (L/R)",
+      "Brain: Lens (L/R)",
+      "Brain: Optic Nerve (L/R)",
+      "Brain: Pituitary Gland",
+      "Brain: Temporal Lobe (L/R)",
       
-      // Head & Neck Structures - OARs
-      "Head & Neck: Mandible",
+      // ========================================
+      // HEAD & NECK - Approved Structures (OARs)
+      // ========================================
+      "Head & Neck: A. Carotid (L/R)",
+      "Head & Neck: Arytenoid (L/R)",
       "Head & Neck: Brachial Plexus (L/R)",
-      "Head & Neck: Oral Cavity",
-      "Head & Neck: Submandibular Gland (L/R)",
-      "Head & Neck: Temporomandibular Joint (L/R)",
-      "Head & Neck: Parotid (L/R)",
-      "Head & Neck: Thyroid",
-      "Head & Neck: Larynx",
-      "Head & Neck: Glottic Larynx",
-      "Head & Neck: Supraglottic Larynx",
-      "Head & Neck: Spinal Cord",
-      "Head & Neck: Pharyngeal Constrictor Superior",
-      "Head & Neck: Pharyngeal Constrictor Middle",
-      "Head & Neck: Pharyngeal Constrictor Inferior",
+      "Head & Neck: Brain",
+      "Head & Neck: Brainstem",
+      "Head & Neck: Buccal Mucosa",
+      "Head & Neck: Constrictors",
+      "Head & Neck: Cricoid",
+      "Head & Neck: Cricopharyngeal Muscle",
       "Head & Neck: Esophagus",
-      "Head & Neck: Lymph Node Level IA",
-      "Head & Neck: Lymph Node Level IB",
-      "Head & Neck: Lymph Node Level II",
-      "Head & Neck: Lymph Node Level III",
-      "Head & Neck: Lymph Node Level IV",
-      "Head & Neck: Lymph Node Level V",
-      "Head & Neck: Lymph Node Level VI",
+      "Head & Neck: Extended Oral Cavity",
+      "Head & Neck: Glottic Area",
+      "Head & Neck: Larynx",
+      "Head & Neck: Lips",
+      "Head & Neck: Mandible",
+      "Head & Neck: Oral Cavity",
+      "Head & Neck: Parotid (L/R)",
+      "Head & Neck: Pharynx",
+      "Head & Neck: Spinal Canal",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Submandibular Gland (L/R)",
+      "Head & Neck: Supraglottic Larynx",
+      "Head & Neck: Thyroid",
+      "Head & Neck: Trachea",
       
-      // Head & Neck Target Structures
-      "Head & Neck: GTV Primary",
-      "Head & Neck: GTV Nodal",
-      "Head & Neck: CTV High Risk",
-      "Head & Neck: CTV Low Risk",
-      "Head & Neck: PTV",
-      
-      // Thorax Structures - OARs
-      "Thorax: Pharynx",
-      "Thorax: Pituitary",
-      "Thorax: Proximal Bronchial Tree",
+      // ========================================
+      // THORAX - Approved Structures (OARs)
+      // ========================================
+      "Thorax: A. Pulmonalis",
+      "Thorax: Aorta",
+      "Thorax: Atria",
+      "Thorax: Brachial Plexus (L/R)",
+      "Thorax: Bronchus (L/R)",
       "Thorax: Esophagus",
+      "Thorax: Great Vessels",
       "Thorax: Heart",
+      "Thorax: LAD",
       "Thorax: Lung (L/R)",
+      "Thorax: Mediastinum",
+      "Thorax: Pericardium",
       "Thorax: Spinal Canal",
       "Thorax: Spinal Cord",
+      "Thorax: Sternum",
       "Thorax: Trachea",
-      "Thorax: Aorta",
-      "Thorax: Great Vessels",
-      "Thorax: Brachial Plexus (L/R)",
-      "Thorax: Chest Wall",
+      "Thorax: V. Cava Superior",
+      "Thorax: Ventricles",
       
-      // Thorax Target Structures
-      "Thorax: GTV Lung",
-      "Thorax: CTV Lung",
+      // ========================================
+      // BREAST - Approved Structures (OARs)
+      // ========================================
+      "Breast: Breast (L/R)",
+      "Breast: Chest Wall (L/R)",
+      "Breast: Heart",
+      "Breast: Lung (L/R)",
       
-      // Abdomen Structures - OARs
+      // ========================================
+      // ABDOMEN - Approved Structures (OARs)
+      // ========================================
       "Abdomen: Aorta",
-      "Abdomen: Lumbar Spine",
-      "Abdomen: Adrenal Gland (L/R)",
-      "Abdomen: Thoracic Spine",
-      "Abdomen: Esophagus",
+      "Abdomen: Bowel Bag",
+      "Abdomen: Duodenum",
       "Abdomen: Gallbladder",
       "Abdomen: Kidney (L/R)",
+      "Abdomen: Large Bowel",
       "Abdomen: Liver",
       "Abdomen: Pancreas",
-      "Abdomen: Portal Vein",
-      "Abdomen: Spleen",
-      "Abdomen: Splenic Vein",
-      "Abdomen: Stomach",
-      "Abdomen: Duodenum",
       "Abdomen: Small Bowel",
-      "Abdomen: Inferior Vena Cava",
+      "Abdomen: Spinal Canal",
+      "Abdomen: Spinal Cord",
+      "Abdomen: Spleen",
+      "Abdomen: Stomach",
+      "Abdomen: V. Cava Inferior",
       
-      // Male Pelvis Structures - OARs
+      // ========================================
+      // MALE PELVIS - Approved Structures (OARs)
+      // ========================================
+      "Male Pelvis: Anal Canal",
       "Male Pelvis: Bladder",
-      "Male Pelvis: Bone Marrow",
-      "Male Pelvis: Femoral Head (L/R)",
       "Male Pelvis: Bowel Bag",
-      "Male Pelvis: Sigmoid Colon",
-      "Male Pelvis: Rectum",
+      "Male Pelvis: Cauda Equina",
+      "Male Pelvis: Femoral Head (L/R)",
       "Male Pelvis: Penile Bulb",
       "Male Pelvis: Prostate",
+      "Male Pelvis: Rectum",
       "Male Pelvis: Seminal Vesicles",
-      "Male Pelvis: Cauda Equina",
+      "Male Pelvis: Sigmoid",
       "Male Pelvis: Small Bowel",
-      "Male Pelvis: Duodenum",
-      "Male Pelvis: Pelvic Lymph Node Group",
-      "Male Pelvis: Urethra",
+      "Male Pelvis: Spinal Canal",
       
-      // Male Pelvis Target Structures
-      "Male Pelvis: GTV Prostate",
-      "Male Pelvis: CTV Prostate",
-      "Male Pelvis: CTV Prostate + SV",
-      "Male Pelvis: CTV Pelvic Nodes",
-      "Male Pelvis: PTV Prostate",
-      
-      // Female Pelvis Structures - OARs
+      // ========================================
+      // FEMALE PELVIS - Approved Structures (OARs)
+      // ========================================
+      "Female Pelvis: Anal Canal",
       "Female Pelvis: Bladder",
-      "Female Pelvis: Bone Marrow",
       "Female Pelvis: Bowel Bag",
-      "Female Pelvis: Sigmoid Colon",
-      "Female Pelvis: Small Bowel",
       "Female Pelvis: Cauda Equina",
-      "Female Pelvis: Duodenum",
       "Female Pelvis: Femoral Head (L/R)",
-      "Female Pelvis: Pelvic Lymph Node Group",
-      "Female Pelvis: Uterus",
-      "Female Pelvis: Cervix",
-      "Female Pelvis: Vagina",
+      "Female Pelvis: Kidney (L/R)",
       "Female Pelvis: Ovary (L/R)",
       "Female Pelvis: Rectum",
+      "Female Pelvis: Sigmoid",
+      "Female Pelvis: Small Bowel",
+      "Female Pelvis: Spinal Canal",
+      "Female Pelvis: Uterus",
+      "Female Pelvis: Vagina",
       
-      // Female Pelvis Target Structures
-      "Female Pelvis: GTV Cervix",
-      "Female Pelvis: GTV Uterus",
-      "Female Pelvis: CTV Cervix",
-      "Female Pelvis: CTV Para-aortic Nodes",
-      "Female Pelvis: PTV Cervix"
+      // ========================================
+      // INVESTIGATIONAL USE STRUCTURES
+      // These structures are NOT cleared for clinical use
+      // ========================================
+      
+      // Brain - Investigational
+      "Brain: CTV (investigational)",
+      "Brain: GTV (investigational)",
+      "Brain: Meningioma (investigational)",
+      "Brain: Metastasis (investigational)",
+      
+      // Head & Neck - Investigational (Lymph Nodes)
+      "Head & Neck: CTV N Elective (investigational)",
+      "Head & Neck: CTV N High Risk (investigational)",
+      "Head & Neck: CTV P (investigational)",
+      "Head & Neck: GTV N (investigational)",
+      "Head & Neck: GTV P (investigational)",
+      "Head & Neck: LN Level I (investigational)",
+      "Head & Neck: LN Level Ia (investigational)",
+      "Head & Neck: LN Level Ib (investigational)",
+      "Head & Neck: LN Level II (investigational)",
+      "Head & Neck: LN Level IIa (investigational)",
+      "Head & Neck: LN Level IIb (investigational)",
+      "Head & Neck: LN Level III (investigational)",
+      "Head & Neck: LN Level IV (investigational)",
+      "Head & Neck: LN Level V (investigational)",
+      "Head & Neck: LN Level Va (investigational)",
+      "Head & Neck: LN Level Vb (investigational)",
+      "Head & Neck: LN Level VI (investigational)",
+      "Head & Neck: LN Level VII (investigational)",
+      "Head & Neck: LN Retropharyngeal (investigational)",
+      
+      // Thorax - Investigational
+      "Thorax: CTV (investigational)",
+      "Thorax: GTV (investigational)",
+      "Thorax: ITV (investigational)",
+      "Thorax: LN Station 1 (investigational)",
+      "Thorax: LN Station 2 (investigational)",
+      "Thorax: LN Station 3 (investigational)",
+      "Thorax: LN Station 4 (investigational)",
+      "Thorax: LN Station 5 (investigational)",
+      "Thorax: LN Station 6 (investigational)",
+      "Thorax: LN Station 7 (investigational)",
+      "Thorax: LN Station 8 (investigational)",
+      "Thorax: LN Station 10 (investigational)",
+      "Thorax: LN Station 11 (investigational)",
+      
+      // Breast - Investigational
+      "Breast: CTV Boost (investigational)",
+      "Breast: CTV Breast (investigational)",
+      "Breast: LN Axilla Level I (investigational)",
+      "Breast: LN Axilla Level II (investigational)",
+      "Breast: LN Axilla Level III (investigational)",
+      "Breast: LN IMN (investigational)",
+      "Breast: LN Interpectoral (investigational)",
+      "Breast: LN Supraclavicular (investigational)",
+      "Breast: Seroma (investigational)",
+      
+      // Abdomen - Investigational
+      "Abdomen: Adrenal (L/R) (investigational)",
+      "Abdomen: Celiac Trunk (investigational)",
+      "Abdomen: CTV (investigational)",
+      "Abdomen: GTV (investigational)",
+      "Abdomen: LN Aortocaval (investigational)",
+      "Abdomen: LN Celiac (investigational)",
+      "Abdomen: LN Para-aortic (investigational)",
+      "Abdomen: LN Portocaval (investigational)",
+      "Abdomen: Portal Vein (investigational)",
+      "Abdomen: Superior Mesenteric A. (investigational)",
+      
+      // Male Pelvis - Investigational
+      "Male Pelvis: CTV Prostate (investigational)",
+      "Male Pelvis: CTV Prostate + SV (investigational)",
+      "Male Pelvis: GTV Prostate (investigational)",
+      "Male Pelvis: LN Ext. Iliac (investigational)",
+      "Male Pelvis: LN Int. Iliac (investigational)",
+      "Male Pelvis: LN Obturator (investigational)",
+      "Male Pelvis: LN Para-aortic (investigational)",
+      "Male Pelvis: LN Presacral (investigational)",
+      
+      // Female Pelvis - Investigational
+      "Female Pelvis: Cervix (investigational)",
+      "Female Pelvis: CTV Cervix (investigational)",
+      "Female Pelvis: GTV Cervix (investigational)",
+      "Female Pelvis: LN Com. Iliac (investigational)",
+      "Female Pelvis: LN Ext. Iliac (investigational)",
+      "Female Pelvis: LN Int. Iliac (investigational)",
+      "Female Pelvis: LN Inguinal (investigational)",
+      "Female Pelvis: LN Obturator (investigational)",
+      "Female Pelvis: LN Para-aortic (investigational)",
+      "Female Pelvis: LN Presacral (investigational)",
+      "Female Pelvis: Parametria (investigational)"
     ],
-    lastRevised: "2026-01-15",
-    source: "FDA 510(k) database (K212274), company official sources",
+    lastRevised: "2026-01-19",
+    source: "FDA 510(k) database (K212274), official product page verified 2026-01-19. Investigational structures listed separately per vendor website.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract"
   }
 ];
