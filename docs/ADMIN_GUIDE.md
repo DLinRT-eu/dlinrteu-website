@@ -293,17 +293,56 @@ Review and approve new user registrations.
 
 ## 7. Changelog Management
 
-Manage platform changelog entries.
+Manage platform changelog entries and generate release notes from GitHub commits.
 
 ### Routes
 - `/admin/changelog` - View and edit changelog entries
 - `/admin/changelog-generator` - Generate changelog from commits
 
 ### Features
-- Create and edit changelog entries
-- Auto-generate from GitHub commits
-- Publish or archive entries
-- Track version history
+- Create and edit changelog entries with Markdown support
+- Auto-generate from GitHub commits using AI summarization
+- Publish, archive, or keep entries as drafts
+- Track version history with monthly releases
+- Live preview before publishing
+
+### Repository History & Backfill
+
+The changelog system supports the full project history across repository migrations:
+
+| Period | Repository |
+|--------|------------|
+| April 2025 - September 2025 | `DLinRT-eu/website` (original) |
+| October 2025 - Present | `DLinRT-eu/dlinrteu-website` (current) |
+
+The **backfill function** automatically queries both repositories to generate complete changelog entries from the project's launch in April 2025.
+
+### Backfill Process
+
+To generate missing changelog entries:
+1. Navigate to `/admin/changelog`
+2. Click "Backfill History" to run the backfill function
+3. The system will fetch commits from both repositories
+4. AI generates professional summaries for each month
+5. Existing entries are not duplicated
+
+### Entry Fields
+- **Version**: Format `YYYY.MM.0` (e.g., `2025.10.0`)
+- **Title**: Month and year (e.g., "October 2025 Release")
+- **Description**: 1-2 sentence user-focused summary
+- **Details**: Full Markdown content with categorized changes
+- **Status**: `draft`, `published`, or `archived`
+
+### Best Practices
+- Review AI-generated descriptions before publishing
+- Use the edit dialog to refine content and add context
+- Ensure descriptions highlight user-facing benefits
+- Keep details organized by category (Features, Improvements, Fixes)
+
+### Technical Reference
+- `backfill-changelog-history` - Queries both repositories, generates AI summaries
+- `generate-changelog` - Single-month changelog generation
+- `auto-generate-monthly-changelog` - Scheduled monthly generation (current repo only)
 
 ---
 
@@ -322,4 +361,4 @@ Overview of all product certifications.
 
 ---
 
-**Last Updated**: November 29, 2025
+**Last Updated**: January 19, 2026
