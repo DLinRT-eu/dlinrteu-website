@@ -130,7 +130,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2019-12-20"
       },
-      intendedUseStatement: "Intended for use in MR image reconstruction to accelerate acquisition and/or enhance image quality while maintaining diagnostic confidence."
+      intendedUseStatement: "AiCE is an optional noise reduction algorithm that improves image quality and reduces thermal noise by employing Deep Convolutional Neural Network methods.  AiCE is designed to remove Gaussian distributed noise in MR images for reducing contributions of thermal noise. In order to train a DCNN that can learn a model that represents thermal noise, the training datasets are created by adding Gaussian noise of different amplitudes to high-SNR images acquired with large number of averages.  The device is targeted for Brain and knee regions.  This software and its associated hardware are used on Canon MRI systems that are designed to communicate with the AiCE Reconstruction Processing Unit for MR. "
     },
     market: {
       onMarketSince: "2020",
