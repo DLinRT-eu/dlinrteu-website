@@ -6,7 +6,7 @@ import { Play, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface ReviewStatusControlProps {
   reviewId: string;
-  status: 'pending' | 'in_progress' | 'completed';
+  status: 'pending' | 'in_progress' | 'completed' | 'company_reviewed';
   onStatusChange: () => void;
 }
 
