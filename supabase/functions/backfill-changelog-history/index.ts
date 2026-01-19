@@ -16,7 +16,26 @@ interface GitHubCommit {
       date: string;
     };
   };
+  sourceRepo?: string; // Added for traceability
 }
+
+// Repository history - project migrated to new repo in October 2025
+const REPOSITORIES = [
+  {
+    owner: 'DLinRT-eu',
+    repo: 'website',
+    startDate: '2025-04-01',
+    endDate: '2025-09-30', // Before migration
+    label: 'old'
+  },
+  {
+    owner: 'DLinRT-eu', 
+    repo: 'dlinrteu-website',
+    startDate: '2025-10-01',
+    endDate: null as string | null, // Until now
+    label: 'new'
+  }
+];
 
 // Patterns to filter out low-quality commit messages
 const IGNORED_PATTERNS = [
@@ -151,7 +170,7 @@ serve(async (req) => {
       throw new Error('Admin access required');
     }
 
-    console.log('Starting changelog backfill from October 2025...');
+    console.log('Starting changelog backfill from April 2025 (querying old and new repositories)...');
 
     const githubToken = Deno.env.get('REPO_TOKEN');
     const headers: HeadersInit = {
@@ -163,22 +182,61 @@ serve(async (req) => {
       headers['Authorization'] = `token ${githubToken}`;
     }
 
-    const startDate = new Date('2025-10-01T00:00:00Z');
-    
-    const repoUrl = `https://api.github.com/repos/DLinRT-eu/dlinrteu-website/commits?since=${startDate.toISOString()}&per_page=100`;
-    console.log('Fetching commits from October 2025 to present...');
-    
-    const repoResponse = await fetch(repoUrl, { headers });
-    
-    if (!repoResponse.ok) {
-      throw new Error(`GitHub API error: ${repoResponse.status}`);
-    }
+    // Fetch commits from both repositories
+    let allCommits: GitHubCommit[] = [];
 
-    const allCommits: GitHubCommit[] = await repoResponse.json();
+    for (const repoConfig of REPOSITORIES) {
+      const since = new Date(`${repoConfig.startDate}T00:00:00Z`);
+      const until = repoConfig.endDate 
+        ? new Date(`${repoConfig.endDate}T23:59:59Z`) 
+        : new Date();
+      
+      let page = 1;
+      let hasMore = true;
+      const repoLabel = `${repoConfig.owner}/${repoConfig.repo}`;
+      
+      console.log(`Fetching commits from ${repoLabel} (${repoConfig.startDate} to ${repoConfig.endDate || 'present'})...`);
+      
+      while (hasMore) {
+        const repoUrl = `https://api.github.com/repos/${repoConfig.owner}/${repoConfig.repo}/commits?since=${since.toISOString()}&until=${until.toISOString()}&per_page=100&page=${page}`;
+        
+        const repoResponse = await fetch(repoUrl, { headers });
+        
+        if (!repoResponse.ok) {
+          if (repoResponse.status === 404) {
+            console.warn(`Repository ${repoLabel} not found or inaccessible`);
+            break;
+          }
+          console.error(`GitHub API error for ${repoLabel}: ${repoResponse.status}`);
+          break;
+        }
+        
+        const pageCommits: GitHubCommit[] = await repoResponse.json();
+        
+        if (pageCommits.length === 0) {
+          hasMore = false;
+        } else {
+          // Tag commits with source repository for traceability
+          pageCommits.forEach(c => {
+            c.sourceRepo = repoLabel;
+          });
+          allCommits = allCommits.concat(pageCommits);
+          page++;
+          
+          // Safety limit to prevent infinite loops
+          if (page > 20) {
+            console.warn(`Reached page limit for ${repoLabel}`);
+            hasMore = false;
+          }
+        }
+      }
+      
+      console.log(`Found ${allCommits.length} total commits so far`);
+    }
     
     // Filter to quality commits only
     const commits = allCommits.filter(c => isQualityCommit(c.commit.message));
-    console.log(`Fetched ${allCommits.length} commits, ${commits.length} quality commits`);
+    console.log(`Total: ${allCommits.length} commits, ${commits.length} quality commits after filtering`);
 
     // Group commits by month
     const commitsByMonth = new Map<string, GitHubCommit[]>();
@@ -375,6 +433,9 @@ ${JSON.stringify(categorized, null, 2)}
             published_at: new Date().toISOString(),
             auto_generated: true,
             github_data: {
+              repository: monthCommits.length > 0 && monthCommits[0].sourceRepo 
+                ? monthCommits[0].sourceRepo 
+                : 'DLinRT-eu/dlinrteu-website',
               totalCommits: monthCommits.length,
               filteredOut: allCommits.filter(c => {
                 const d = new Date(c.commit.author.date);
