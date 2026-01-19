@@ -4,16 +4,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { FileText, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import EvidenceLevelBadge from "./EvidenceLevelBadge";
 
 interface EvidenceLimitationsDetailsProps {
   product: ProductDetails;
 }
 
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
-  const { evidence, limitations } = product;
+  const { evidence, limitations, evidenceLevel, evidenceLevelNotes } = product;
   
-  // Skip rendering if no evidence or limitations are available
-  if ((!evidence || evidence.length === 0) && (!limitations || limitations.length === 0)) {
+  // Skip rendering if no evidence, limitations, or evidence level are available
+  const hasEvidence = evidence && evidence.length > 0;
+  const hasLimitations = limitations && limitations.length > 0;
+  const hasEvidenceLevel = !!evidenceLevel;
+  
+  if (!hasEvidence && !hasLimitations && !hasEvidenceLevel) {
     return null;
   }
 
@@ -73,25 +78,35 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Evidence & Limitations</CardTitle>
+        <CardTitle className="flex items-center justify-between">
+          <span>Evidence & Limitations</span>
+          {evidenceLevel && <EvidenceLevelBadge level={evidenceLevel} size="md" />}
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
+        {/* Evidence Level Summary */}
+        {evidenceLevel && evidenceLevelNotes && (
+          <div className="p-3 bg-muted/50 rounded-lg border">
+            <p className="text-sm text-muted-foreground">{evidenceLevelNotes}</p>
+          </div>
+        )}
+
         {/* Evidence Section */}
-        {evidence && evidence.length > 0 && (
+        {hasEvidence && (
           <div>
             <h3 className="font-medium text-lg mb-2">Clinical Evidence</h3>
             <div className="space-y-2">
-              {evidence.map((item, index) => renderEvidenceItem(item, index))}
+              {evidence!.map((item, index) => renderEvidenceItem(item, index))}
             </div>
           </div>
         )}
 
         {/* Limitations Section */}
-        {limitations && limitations.length > 0 && (
+        {hasLimitations && (
           <div>
             <h3 className="font-medium text-lg mb-2">Limitations</h3>
             <ul className="space-y-1">
-              {limitations.map((item, index) => (
+              {limitations!.map((item, index) => (
                 <li key={index} className="flex items-start gap-2">
                   <XCircle className="h-4 w-4 mt-1 text-amber-500 flex-shrink-0" />
                   <span className="text-gray-700">{item}</span>
