@@ -937,6 +937,30 @@ export type Database = {
         }
         Relationships: []
       }
+      reminder_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: Json
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       review_checklist_items: {
         Row: {
           checked: boolean | null
@@ -1831,6 +1855,7 @@ export type Database = {
           verified_by: string
         }[]
       }
+      get_reminder_settings: { Args: never; Returns: Json }
       get_review_round_details_admin: {
         Args: { p_round_id: string }
         Returns: Json
@@ -1878,22 +1903,39 @@ export type Database = {
           total_assigned: number
         }[]
       }
-      get_reviews_needing_reminders: {
-        Args: never
-        Returns: {
-          days_until_deadline: number
-          deadline: string
-          last_reminder_sent_at: string
-          product_id: string
-          review_id: string
-          reviewer_email: string
-          reviewer_first_name: string
-          reviewer_id: string
-          reviewer_last_name: string
-          round_name: string
-          status: string
-        }[]
-      }
+      get_reviews_needing_reminders:
+        | {
+            Args: never
+            Returns: {
+              days_until_deadline: number
+              deadline: string
+              last_reminder_sent_at: string
+              product_id: string
+              review_id: string
+              reviewer_email: string
+              reviewer_first_name: string
+              reviewer_id: string
+              reviewer_last_name: string
+              round_name: string
+              status: string
+            }[]
+          }
+        | {
+            Args: { p_min_interval_hours?: number; p_threshold_days?: number }
+            Returns: {
+              days_until_deadline: number
+              deadline: string
+              last_reminder_sent_at: string
+              product_id: string
+              review_id: string
+              reviewer_email: string
+              reviewer_first_name: string
+              reviewer_id: string
+              reviewer_last_name: string
+              round_name: string
+              status: string
+            }[]
+          }
       get_security_events_admin: {
         Args: { last_n_days?: number }
         Returns: {
@@ -2050,6 +2092,14 @@ export type Database = {
           p_priority?: string
           p_review_id: string
           p_status?: string
+        }
+        Returns: Json
+      }
+      update_reminder_settings: {
+        Args: {
+          p_enabled?: boolean
+          p_min_interval_hours?: number
+          p_threshold_days?: number
         }
         Returns: Json
       }
