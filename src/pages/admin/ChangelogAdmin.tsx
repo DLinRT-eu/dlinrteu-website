@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { 
   Eye, 
   CheckCircle, 
-  XCircle, 
   Archive, 
   Edit, 
   Trash2,
@@ -17,6 +16,7 @@ import {
   FileText,
   Shield,
   AlertCircle,
+  Pencil,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -38,6 +38,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { ChangelogEditDialog } from '@/components/admin/changelog/ChangelogEditDialog';
 
 interface ChangelogEntry {
   id: string;
@@ -64,6 +65,13 @@ const ChangelogAdmin = () => {
   const [selectedStatus, setSelectedStatus] = useState<string>('pending');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState<string | null>(null);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [entryToEdit, setEntryToEdit] = useState<ChangelogEntry | null>(null);
+
+  const handleEdit = (entry: ChangelogEntry) => {
+    setEntryToEdit(entry);
+    setEditDialogOpen(true);
+  };
 
   // Fetch changelog entries
   const { data: entries = [], isLoading } = useQuery({
@@ -381,6 +389,24 @@ const ChangelogAdmin = () => {
                       </CardDescription>
                     </div>
                     <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleEdit(entry)}
+                      >
+                        <Pencil className="h-4 w-4 mr-1" />
+                        Edit
+                      </Button>
+                      {entry.status === 'pending' && (
+                        <Button
+                          size="sm"
+                          onClick={() => publishMutation.mutate(entry.id)}
+                          disabled={publishMutation.isPending}
+                        >
+                          <CheckCircle className="h-4 w-4 mr-1" />
+                          Publish
+                        </Button>
+                      )}
                       {entry.status === 'published' && (
                         <Button
                           size="sm"
@@ -458,6 +484,13 @@ const ChangelogAdmin = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Edit Dialog */}
+      <ChangelogEditDialog
+        entry={entryToEdit}
+        open={editDialogOpen}
+        onOpenChange={setEditDialogOpen}
+      />
     </PageLayout>
   );
 };
