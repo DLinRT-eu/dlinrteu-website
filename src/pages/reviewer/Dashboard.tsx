@@ -16,7 +16,14 @@ import { formatDistanceToNow, format } from 'date-fns';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
 import OnboardingChecklist from '@/components/reviewer/OnboardingChecklist';
 import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
+import ReviewStatusControl from '@/components/reviewer/ReviewStatusControl';
 import { useToast } from '@/hooks/use-toast';
+import { ALL_PRODUCTS } from '@/data';
+
+const getProductName = (productId: string): string => {
+  const product = ALL_PRODUCTS.find(p => p.id === productId);
+  return product?.name || productId;
+};
 
 interface ReviewAssignment {
   id: string;
@@ -332,6 +339,7 @@ export default function ReviewerDashboard() {
   const ReviewCard = ({ review }: { review: ReviewAssignment }) => {
     const deadlineStatus = getDeadlineStatus(review.deadline);
     const isSelected = selectedIds.has(review.id);
+    const productName = getProductName(review.product_id);
 
     return (
       <Card className={`hover:shadow-md transition-shadow ${isSelected ? 'ring-2 ring-primary' : ''}`}>
@@ -344,7 +352,8 @@ export default function ReviewerDashboard() {
                 className="mt-1"
               />
               <div className="space-y-1">
-                <CardTitle className="text-lg">Product: {review.product_id}</CardTitle>
+                <CardTitle className="text-lg">{productName}</CardTitle>
+                <CardDescription className="text-xs">ID: {review.product_id}</CardDescription>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
                   <span>Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}</span>
@@ -373,39 +382,22 @@ export default function ReviewerDashboard() {
             <p className="text-sm text-muted-foreground">{review.notes}</p>
           )}
 
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-              {review.status === 'pending' && (
-                <Button
-                  size="sm"
-                  onClick={() => handleStartReview(review.id)}
-                  className="w-full"
-                >
-                  <Play className="mr-2 h-4 w-4" />
-                  Start Review
-                </Button>
-              )}
-              {review.status === 'in_progress' && (
-                <Button
-                  size="sm"
-                  onClick={() => handleCompleteReview(review.id)}
-                  className="w-full"
-                >
-                  <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Complete Review
-                </Button>
-              )}
-              <Button
-                size="sm"
-                variant="outline"
-                asChild
-                className="w-full"
-              >
-                <Link to={`/review/${review.product_id}`}>
-                  View Details
-                </Link>
-              </Button>
-            </div>
+          <div className="flex flex-col gap-3">
+            <ReviewStatusControl
+              reviewId={review.id}
+              status={review.status}
+              onStatusChange={fetchReviews}
+            />
+            <Button
+              size="sm"
+              variant="outline"
+              asChild
+              className="w-full"
+            >
+              <Link to={`/review/${review.product_id}`}>
+                View Details
+              </Link>
+            </Button>
           </div>
         </CardContent>
       </Card>

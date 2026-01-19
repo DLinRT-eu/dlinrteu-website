@@ -126,8 +126,10 @@ export default function BulkReviewerActions({
 
   if (selectedIds.size === 0) return null;
 
+  const hasActions = pendingSelected.length > 0 || inProgressSelected.length > 0;
+
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-card border rounded-lg shadow-lg p-4 flex items-center gap-4">
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-primary-foreground rounded-lg shadow-xl p-4 flex items-center gap-4 animate-in slide-in-from-bottom-4 duration-300">
       <span className="text-sm font-medium">
         {selectedIds.size} review{selectedIds.size > 1 ? 's' : ''} selected
       </span>
@@ -135,6 +137,7 @@ export default function BulkReviewerActions({
       {pendingSelected.length > 0 && (
         <Button
           size="sm"
+          variant="secondary"
           onClick={handleBulkStart}
           disabled={processing}
         >
@@ -150,6 +153,7 @@ export default function BulkReviewerActions({
       {inProgressSelected.length > 0 && (
         <Button
           size="sm"
+          variant="secondary"
           onClick={handleBulkComplete}
           disabled={processing}
         >
@@ -162,9 +166,16 @@ export default function BulkReviewerActions({
         </Button>
       )}
 
+      {!hasActions && (
+        <span className="text-sm opacity-80">
+          No actions available for completed reviews
+        </span>
+      )}
+
       <Button
         size="sm"
         variant="ghost"
+        className="hover:bg-primary-foreground/20"
         onClick={onClearSelection}
         disabled={processing}
       >
