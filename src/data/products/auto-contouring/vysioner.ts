@@ -14,7 +14,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/vysioner.png",
     website: "https://www.vysioneer.com/solutions/vbrain",
     anatomicalLocation: ["Brain"],
-    modality: ["MRI"],
+    modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Brain Tumors", "Metastases", "Acoustic Neuroma"],
     keyFeatures: ["AI-powered brain tumor segmentation", "Fast processing", "Multiple tumor support"],
