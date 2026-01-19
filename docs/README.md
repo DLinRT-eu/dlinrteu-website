@@ -1,0 +1,168 @@
+# DLinRT.eu Documentation
+
+> Comprehensive documentation for the Deep Learning in Radiotherapy platform
+
+Welcome to the DLinRT.eu documentation. This index helps you navigate to the right guide based on your role and needs.
+
+---
+
+## 📚 Quick Navigation
+
+| I want to... | Go to |
+|--------------|-------|
+| Manage users, rounds, and companies | [Admin Guide](#-admin-guide) |
+| Review assigned products | [Reviewer Guide](#-reviewer-guide) |
+| Understand the assignment system | [Assignment Guide](#-assignment-guide) |
+| Add or update product data | [Product Guide](#-product-guide) |
+| Understand product fields | [Field Reference](#-field-reference) |
+
+---
+
+## 🔐 Admin Guide
+
+**File**: [ADMIN_GUIDE.md](./ADMIN_GUIDE.md)
+
+Complete guide for platform administrators covering:
+
+- **User Management** - Roles, permissions, and access control
+- **Review Rounds** - Creating and managing structured review cycles
+- **Reviewer Assignment** - Manual and automatic product assignments
+- **Company Management** - Representatives, verifications, and certifications
+- **Security Monitoring** - Audit logs and security events
+- **Changelog Management** - Release notes and dual-repository backfill
+- **Registration Review** - Approving new user registrations
+
+**Key Routes**:
+- `/admin` - Dashboard
+- `/admin/users` - User management
+- `/admin/review-rounds` - Review rounds
+- `/admin/companies` - Company management
+- `/admin/changelog` - Changelog management
+
+---
+
+## 👤 Reviewer Guide
+
+**File**: [REVIEWER_GUIDE.md](./REVIEWER_GUIDE.md)
+
+Essential guide for reviewers covering:
+
+- **Getting Started** - Role overview and responsibilities
+- **Setting Preferences** - Categories, companies, and products expertise
+- **Understanding Assignments** - How matching works
+- **Reviewing Products** - Step-by-step review process
+- **Managing Workload** - Time management and prioritization
+- **Best Practices** - Do's, don'ts, and communication
+
+**Key Routes**:
+- `/reviewer/dashboard` - Reviewer workspace
+- `/reviewer/due-reviews` - Upcoming deadlines
+- `/profile` - Manage preferences
+
+---
+
+## 🎯 Assignment Guide
+
+**File**: [REVIEWER_ASSIGNMENT_GUIDE.md](./REVIEWER_ASSIGNMENT_GUIDE.md)
+
+Deep dive into the reviewer assignment system:
+
+- **Preference System** - Three-dimensional expertise (categories, companies, products)
+- **Review Round Management** - Creating rounds and selecting reviewers
+- **Assignment Algorithm** - Weighted scoring and workload balancing
+- **Manual Override** - Preview and adjust assignments
+- **Audit Trail** - Complete assignment history tracking
+- **Email Notifications** - Automated reviewer notifications
+
+**Technical Reference**:
+- `reviewer_expertise` table - Stores preferences
+- `assignment_history` table - Tracks all changes
+- `notify-reviewer-assignment` edge function - Sends emails
+
+---
+
+## 📦 Product Guide
+
+**File**: [review/GUIDE.md](./review/GUIDE.md)
+
+Guide for working with product data:
+
+- **Reviewing Products** - Verification workflow
+- **Adding New Products** - File structure and requirements
+- **Product Categories** - All 10 categories explained
+- **Multi-Category Products** - Using secondary categories
+- **Product Versioning** - Tracking versions over time
+- **Field Requirements** - Required vs optional fields
+
+**Categories**:
+Auto-Contouring • Clinical Prediction • Image Enhancement • Image Synthesis • Performance Monitor • Platform • Reconstruction • Registration • Tracking • Treatment Planning
+
+---
+
+## 📋 Field Reference
+
+**File**: [FIELD_REFERENCE.md](./FIELD_REFERENCE.md)
+
+Complete reference for all product data fields:
+
+- **Core Identification** - id, name, company, description
+- **Classification & Clinical Scope** - modality, anatomy, structures
+- **Regulatory** - CE, FDA, TGA status and clearances
+- **Technical & Deployment** - specs, integrations, processing
+- **Market & Pricing** - availability, pricing models
+- **Evidence & Limitations** - clinical evidence, caveats
+- **Platform & AI Classification** - usesAI, monitorsAIProducts, modules
+- **Company Certification** - verification workflow fields
+
+---
+
+## 📁 Additional Resources
+
+### Examples
+
+**Location**: [examples/products/](./examples/products/)
+
+Example product templates demonstrating:
+- Complete field usage
+- Multi-category support
+- AI classification fields
+- Versioning patterns
+
+### Database Setup
+
+**File**: [REVIEWER_SETUP.sql](./REVIEWER_SETUP.sql)
+
+SQL scripts for:
+- Reviewer expertise tables
+- Assignment history tracking
+- RPC functions
+
+### Review Workflow
+
+**Location**: [review/](./review/)
+
+- [GUIDE.md](./review/GUIDE.md) - Product review guide
+- [README.md](./review/README.md) - Quick reference
+
+---
+
+## 🔗 External Resources
+
+- **Platform**: [https://dlinrt.eu](https://dlinrt.eu)
+- **GitHub**: [DLinRT-eu/dlinrteu-website](https://github.com/DLinRT-eu/dlinrteu-website)
+- **Contact**: info@dlinrt.eu
+
+---
+
+## 📝 Contributing to Documentation
+
+When updating documentation:
+
+1. **Keep it current** - Update dates when making changes
+2. **Cross-reference** - Link related guides where helpful
+3. **Use examples** - Include code snippets and screenshots
+4. **Be consistent** - Follow existing formatting patterns
+
+---
+
+*Last Updated: January 19, 2026*
