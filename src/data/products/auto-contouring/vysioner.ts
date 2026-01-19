@@ -19,22 +19,9 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     diseaseTargeted: ["Brain Tumors", "Metastases", "Acoustic Neuroma"],
     keyFeatures: ["AI-powered brain tumor segmentation", "Fast processing", "Multiple tumor support"],
     supportedStructures: [
-      // OARs
-      "Brain: Brainstem",
-      "Brain: Optic Chiasm",
-      "Brain: Optic Nerves",
-      "Brain: Eyes",
-      "Brain: Cochlea",
-      "Brain: Hippocampus",
-
-      // Target structures - GTV
-      "Brain: GTV (Gross Tumor Volume)",
-
-      // Target structures - Elective
-      "Brain: CTV (Clinical Target Volume)",
-
-      // Special case - metastases
-      "Brain: Brain Metastases",
+  "Brain: Brain Metastases",
+  "Brain: Meningioma",
+  "Brain: Acoustic Neuroma",
     ],
     technicalSpecifications: {
       population: "Adult patients",
