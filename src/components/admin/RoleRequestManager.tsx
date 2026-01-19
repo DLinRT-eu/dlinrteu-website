@@ -166,6 +166,22 @@ export const RoleRequestManager = () => {
         throw new Error(result.error || 'Failed to approve request');
       }
 
+      // Send notification email to user
+      try {
+        await supabase.functions.invoke('notify-role-request-outcome', {
+          body: {
+            userId: request.user_id,
+            email: request.profiles.email,
+            firstName: request.profiles.first_name || 'User',
+            role: request.requested_role,
+            approved: true,
+          }
+        });
+      } catch (emailError) {
+        console.error('Error sending notification email:', emailError);
+        // Don't fail the approval if email fails
+      }
+
       toast({
         title: 'Role Approved',
         description: `Successfully granted ${request.requested_role} role to ${request.profiles.email}`,
@@ -202,12 +218,30 @@ export const RoleRequestManager = () => {
         throw new Error(result.error || 'Failed to reject request');
       }
 
+      // Send notification email to user
+      try {
+        await supabase.functions.invoke('notify-role-request-outcome', {
+          body: {
+            userId: request.user_id,
+            email: request.profiles.email,
+            firstName: request.profiles.first_name || 'User',
+            role: request.requested_role,
+            approved: false,
+            rejectionReason: adminNote || 'Your request did not meet the approval criteria.',
+          }
+        });
+      } catch (emailError) {
+        console.error('Error sending notification email:', emailError);
+        // Don't fail the rejection if email fails
+      }
+
       toast({
         title: 'Role Request Rejected',
         description: `Rejected ${request.requested_role} role request from ${request.profiles.email}`,
       });
 
       setSelectedRequest(null);
+      setAdminNote('');
       setSelectedIds(new Set());
       setCurrentPage(1);
       fetchRoleRequests();

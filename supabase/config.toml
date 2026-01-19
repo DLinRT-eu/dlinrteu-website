@@ -47,3 +47,9 @@ verify_jwt = true
 
 [functions.admin-newsletter-management]
 verify_jwt = true
+
+[functions.notify-user-approval]
+verify_jwt = false
+
+[functions.notify-role-request-outcome]
+verify_jwt = false
