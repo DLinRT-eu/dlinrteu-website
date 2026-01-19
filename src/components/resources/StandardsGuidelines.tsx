@@ -17,6 +17,11 @@ const StandardsGuidelines = () => {
           standard: "IEC 62304",
           description: "Medical device software lifecycle processes", 
           scope: "Software development and maintenance requirements"
+        },
+        {
+          standard: "IEC 82304-1",
+          description: "Health software product safety requirements",
+          scope: "General safety requirements for health software products"
         }
       ]
     },
@@ -27,6 +32,11 @@ const StandardsGuidelines = () => {
           standard: "GMLP / IMDRF",
           description: "Best practices for dataset use, validation, continuous monitoring",
           scope: "International harmonized guidance for ML in medical devices"
+        },
+        {
+          standard: "ISO/IEC 42001:2023",
+          description: "AI management system standard",
+          scope: "Framework for establishing AI management systems (supports AI Act)"
         },
         {
           standard: "ISO/IEC 23053",
@@ -47,6 +57,26 @@ const StandardsGuidelines = () => {
           standard: "FDA AI/ML Guidance",
           description: "Lifecycle management and marketing submission expectations",
           scope: "US regulatory pathway for AI-enabled medical devices"
+        },
+        {
+          standard: "FDA PCCP (Dec 2024)",
+          description: "Predetermined Change Control Plans for iterative AI",
+          scope: "Framework for managing AI/ML device modifications"
+        }
+      ]
+    },
+    {
+      category: "International Harmonization",
+      items: [
+        {
+          standard: "IMDRF GMLP Principles",
+          description: "Harmonized guiding principles for ML in medical device development",
+          scope: "International best practices adopted by FDA, TGA, Health Canada"
+        },
+        {
+          standard: "IMDRF SaMD Framework",
+          description: "Software as a Medical Device risk characterization",
+          scope: "Classification and clinical evaluation framework for SaMD"
         }
       ]
     },

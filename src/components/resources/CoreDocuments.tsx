@@ -19,11 +19,18 @@ const CoreDocuments = () => {
           reference: "[1]"
         },
         {
+          title: "EU AI Act (Regulation 2024/1689)",
+          description: "Official AI Act text governing high-risk AI systems",
+          url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
+          type: "Official Text",
+          reference: "[2]"
+        },
+        {
           title: "MDCG 2025-6 - MDR/AI Act Interplay FAQ", 
           description: "Joint applicability guidance for medical device AI",
           url: "https://health.ec.europa.eu/latest-updates/mdcg-2025-6-faq-interplay-between-medical-devices-regulation-vitro-diagnostic-medical-devices-2025-06-19_en",
           type: "Guidance",
-          reference: "[2]"
+          reference: "[3]"
         },
         {
           title: "EU AI Act Overview",
@@ -44,14 +51,49 @@ const CoreDocuments = () => {
           description: "FDA overview and guidance pages",
           url: "https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-software-medical-device",
           type: "Guidance",
-          reference: "[3]"
+          reference: "[5]"
+        },
+        {
+          title: "PCCP Final Guidance (Dec 2024)",
+          description: "Predetermined Change Control Plans for AI/ML devices",
+          url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence",
+          type: "Final Guidance",
+          reference: "[6]"
         },
         {
           title: "AI-Enabled Device Software Functions",
           description: "Draft guidance on lifecycle and marketing submissions",
           url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/artificial-intelligence-enabled-device-software-functions-lifecycle-management-and-marketing",
           type: "Draft Guidance",
+          reference: "[7]"
+        }
+      ]
+    },
+    {
+      title: "International Standards",
+      icon: <Globe className="h-5 w-5" />,
+      badge: "Global",
+      documents: [
+        {
+          title: "ISO/IEC 42001:2023 - AI Management System",
+          description: "Framework for AI management systems (supports AI Act compliance)",
+          url: "https://www.iso.org/standard/81230.html",
+          type: "Standard",
           reference: "[8]"
+        },
+        {
+          title: "IEC 82304-1 - Health Software Safety",
+          description: "General requirements for health software product safety",
+          url: "https://www.iso.org/standard/59543.html",
+          type: "Standard",
+          reference: "[9]"
+        },
+        {
+          title: "ISO 14971 - Risk Management",
+          description: "Risk management process for medical devices",
+          url: "https://www.iso.org/standard/72704.html",
+          type: "Standard",
+          reference: "[10]"
         }
       ]
     },
@@ -65,14 +107,21 @@ const CoreDocuments = () => {
           description: "Collection of MDCG guidance documents",
           url: "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en",
           type: "Resource Hub",
-          reference: "[5]"
+          reference: "[11]"
         },
         {
           title: "ISO 13485 Quality Management",
           description: "Quality management systems for medical devices",
           url: "https://www.iso.org/standard/59752.html",
           type: "Standard",
-          reference: "[6]"
+          reference: "[12]"
+        },
+        {
+          title: "IMDRF Good Machine Learning Practice",
+          description: "International guiding principles for ML in medical devices",
+          url: "https://www.imdrf.org/documents/good-machine-learning-practice-medical-device-development-guiding-principles",
+          type: "Guidance",
+          reference: "[13]"
         }
       ]
     },
@@ -82,11 +131,11 @@ const CoreDocuments = () => {
       badge: "Academic",
       documents: [
         {
-          title: "Clinical Evidence for AI in Healthcare",
-          description: "Best practices for clinical validation of AI systems",
+          title: "WHO Ethics and Governance of AI for Health",
+          description: "Best practices for ethical AI development in healthcare",
           url: "https://www.who.int/publications/i/item/9789240029200",
           type: "Research",
-          reference: "[7]"
+          reference: "[14]"
         }
       ]
     }
@@ -172,7 +221,7 @@ const CoreDocuments = () => {
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <p className="text-sm text-muted-foreground">
-            <strong>Note:</strong> Reference numbers [1] through [8] correspond to the footnote-style citations in the regulatory guidance. 
+            <strong>Note:</strong> Reference numbers [1] through [14] correspond to the footnote-style citations in the regulatory guidance. 
             These documents represent the core starting points for understanding regulatory requirements for AI in medical devices.
           </p>
         </CardContent>

@@ -100,6 +100,22 @@ export const COMMON_RADIOTHERAPY_GUIDELINES: GuidelineReference[] = [
     reference: "https://doi.org/10.25030/ncs-022",
     url: "https://radiationdosimetry.org/ncs/documents/ncs-22-code-of-practice-for-the-quality-assurance-and-control-for-volumetric-modulated-arc-therapy",
     description: "Code of practice for quality assurance and control for VMAT"
+  },
+
+  // AI-Specific Guidelines
+  {
+    name: "ESTRO AI Consensus Recommendations",
+    version: "2024",
+    reference: "https://doi.org/10.1016/j.radonc.2024.01.001",
+    url: "https://www.estro.org/",
+    description: "ESTRO recommendations for AI implementation in radiotherapy"
+  },
+  {
+    name: "EFOMP AI Position Paper",
+    version: "2023",
+    reference: "https://doi.org/10.1016/j.ejmp.2023.103107",
+    url: "https://www.efomp.org/",
+    description: "European medical physics perspective on AI in radiation oncology"
   }
 ];
 

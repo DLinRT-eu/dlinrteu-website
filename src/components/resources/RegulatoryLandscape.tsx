@@ -39,21 +39,21 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: AI Act
             </CardTitle>
-            <Badge variant="outline">Entered Force Aug 1, 2024</Badge>
+            <Badge variant="outline">Key dates: Aug 2025, Aug 2026</Badge>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). For regulated medical AI, additional AI Act obligations may apply; timelines and exact obligations are clarified by the Commission and MDCG guidance.
+            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). Phased compliance: prohibited AI practices (Feb 2025), high-risk obligations (Aug 2026). For regulated medical AI, additional obligations apply alongside MDR; see MDCG guidance.
           </p>
           <a 
-            href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" 
+            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
           >
             <ExternalLink className="h-4 w-4" />
-            <span>Digital Strategy - AI Act Overview</span>
+            <span>EU AI Act Official Text (Regulation 2024/1689)</span>
           </a>
         </CardContent>
       </Card>
@@ -96,7 +96,7 @@ const RegulatoryLandscape = () => {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The FDA expects premarket demonstration of safety & effectiveness for SaMD. The agency's work on AI/ML includes the AI/ML SaMD Action Plan and guidance on lifecycle management and marketing submissions for AI functions; FDA also publishes an "AI-enabled medical device" list. Plan for iterative learning systems and post-market monitoring.
+            The FDA expects premarket demonstration of safety & effectiveness for SaMD. Key guidance includes the AI/ML SaMD Action Plan, PCCP for iterative AI (Dec 2024), and transparency principles. FDA maintains an "AI-enabled medical device" list and expects post-market monitoring.
           </p>
           <a 
             href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-software-medical-device" 
@@ -106,6 +106,58 @@ const RegulatoryLandscape = () => {
           >
             <ExternalLink className="h-4 w-4" />
             <span>U.S. Food and Drug Administration - AI/ML Guidance</span>
+          </a>
+        </CardContent>
+      </Card>
+
+      {/* UK: UKCA Pathway */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-xl font-semibold text-foreground">
+              UK: UKCA Pathway
+            </CardTitle>
+            <Badge variant="secondary">Post-Brexit</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Post-Brexit, the UK follows its own regulatory framework under MHRA. Medical device AI requires UKCA marking with specific guidance on standalone software and AI/ML systems. MHRA published updated guidance in 2025 addressing AI-specific requirements.
+          </p>
+          <a 
+            href="https://www.gov.uk/guidance/medical-device-standalone-software-including-apps-including-ivdmds" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            <ExternalLink className="h-4 w-4" />
+            <span>MHRA - Software and AI as Medical Devices</span>
+          </a>
+        </CardContent>
+      </Card>
+
+      {/* Australia & International */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-xl font-semibold text-foreground">
+              Australia & International
+            </CardTitle>
+            <Badge variant="secondary">TGA / IMDRF</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Australia's TGA has adopted IMDRF Good Machine Learning Practice (GMLP) principles and published specific evidence requirements for AI software. IMDRF's harmonized frameworks (SaMD, GMLP N88) provide international alignment for AI medical device regulation.
+          </p>
+          <a 
+            href="https://www.imdrf.org/documents/good-machine-learning-practice-medical-device-development-guiding-principles" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            <ExternalLink className="h-4 w-4" />
+            <span>IMDRF Good Machine Learning Practice</span>
           </a>
         </CardContent>
       </Card>

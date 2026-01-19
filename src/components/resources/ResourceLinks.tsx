@@ -5,11 +5,18 @@ import { ExternalLink, FileText, Database, Shield, Users, Globe, BookOpen, Award
 
 const ResourceLinks = () => {
   const resources = [
-    // Regulatory Bodies
+    // Regulatory Bodies - EU
     {
       title: "European Medical Device Regulation (MDR)",
       description: "Official text of EU Regulation 2017/745 governing medical devices in Europe",
       url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745",
+      icon: FileText,
+      category: "EU Regulation"
+    },
+    {
+      title: "EU AI Act (Regulation 2024/1689)",
+      description: "Comprehensive EU regulation on artificial intelligence systems including medical AI",
+      url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
       icon: FileText,
       category: "EU Regulation"
     },
@@ -20,6 +27,26 @@ const ResourceLinks = () => {
       icon: Database,
       category: "EU Database"
     },
+
+    // UK Regulation
+    {
+      title: "MHRA - Software and AI as Medical Devices",
+      description: "UK MHRA guidance on standalone software including AI/ML-based medical devices (UKCA)",
+      url: "https://www.gov.uk/guidance/medical-device-standalone-software-including-apps-including-ivdmds",
+      icon: Shield,
+      category: "UK Regulation"
+    },
+
+    // Australia Regulation
+    {
+      title: "TGA - AI Software as Medical Devices",
+      description: "Australian TGA evidence requirements and regulatory pathway for AI-enabled medical devices",
+      url: "https://www.tga.gov.au/how-we-regulate/manufacturing-and-quality/manufacturing-premises-and-regulatory-requirements/manufacture-specific-types-medical-devices/software-and-ai-medical-devices",
+      icon: Shield,
+      category: "Australia Regulation"
+    },
+
+    // FDA Resources
     {
       title: "FDA Medical Device Database",
       description: "US FDA database of approved and cleared medical devices including AI/ML software",
@@ -35,18 +62,41 @@ const ResourceLinks = () => {
       category: "FDA Guidance"
     },
     {
+      title: "FDA PCCP Final Guidance (Dec 2024)",
+      description: "Predetermined Change Control Plans for AI/ML-enabled device software functions",
+      url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence",
+      icon: Shield,
+      category: "FDA Guidance"
+    },
+    {
+      title: "FDA Transparency for ML Devices (June 2024)",
+      description: "Guiding principles for transparency in machine learning-enabled medical devices",
+      url: "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles",
+      icon: Shield,
+      category: "FDA Guidance"
+    },
+    {
       title: "Health Canada Medical Device License Database",
       description: "Canadian database of licensed medical devices and regulatory information",
       url: "https://health-products.canada.ca/mdall-limh/index-eng.jsp",
       icon: Globe,
       category: "Health Canada"
     },
+
+    // International Harmonization
     {
-      title: "EU AI Act",
-      description: "Comprehensive EU regulation on artificial intelligence systems including medical AI",
-      url: "https://artificialintelligenceact.eu/",
-      icon: FileText,
-      category: "AI Regulation"
+      title: "IMDRF Good Machine Learning Practice (GMLP)",
+      description: "International harmonized guiding principles for ML in medical device development (N88 Final 2025)",
+      url: "https://www.imdrf.org/documents/good-machine-learning-practice-medical-device-development-guiding-principles",
+      icon: Globe,
+      category: "International Harmonization"
+    },
+    {
+      title: "IMDRF SaMD Framework",
+      description: "Software as a Medical Device risk characterization and clinical evaluation framework",
+      url: "https://www.imdrf.org/documents/software-medical-device-samd-application-quality-management-system",
+      icon: Globe,
+      category: "International Harmonization"
     },
     
     // Professional Organizations
@@ -98,6 +148,20 @@ const ResourceLinks = () => {
       title: "ISO 13485 - Medical Device Quality Management",
       description: "International standard for quality management systems in medical device manufacturing",
       url: "https://www.iso.org/standard/59752.html",
+      icon: Award,
+      category: "Standards"
+    },
+    {
+      title: "ISO/IEC 42001:2023 - AI Management System",
+      description: "Framework for establishing AI management systems (supports AI Act compliance)",
+      url: "https://www.iso.org/standard/81230.html",
+      icon: Award,
+      category: "Standards"
+    },
+    {
+      title: "IEC 82304-1 - Health Software Safety",
+      description: "General requirements for health software product safety",
+      url: "https://www.iso.org/standard/59543.html",
       icon: Award,
       category: "Standards"
     },
