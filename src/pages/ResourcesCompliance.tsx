@@ -7,6 +7,7 @@ import RegulatoryLandscape from '@/components/resources/RegulatoryLandscape';
 import StandardsGuidelines from '@/components/resources/StandardsGuidelines';
 import ComplianceChecklist from '@/components/resources/ComplianceChecklist';
 import CoreDocuments from '@/components/resources/CoreDocuments';
+import ResourceLinks from '@/components/resources/ResourceLinks';
 import DisclaimerBox from '@/components/resources/DisclaimerBox';
 
 const ResourcesCompliance = () => {
@@ -117,6 +118,17 @@ const ResourcesCompliance = () => {
               Essential starting points — start here
             </h3>
             <CoreDocuments />
+          </section>
+
+          {/* Extended Resources Library */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Extended resources library
+            </h2>
+            <h3 className="text-xl text-muted-foreground mb-8">
+              Comprehensive collection of authoritative sources
+            </h3>
+            <ResourceLinks />
           </section>
 
           {/* Disclaimer */}
