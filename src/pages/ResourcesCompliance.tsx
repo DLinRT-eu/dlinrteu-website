@@ -3,6 +3,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import TaxonomyDiagram from '@/components/resources/TaxonomyDiagram';
 import ClinicalTasksGlossary from '@/components/resources/ClinicalTasksGlossary';
 import EvidenceLevelTable from '@/components/resources/EvidenceLevelTable';
+import EvidencePyramid from '@/components/resources/EvidencePyramid';
 import PurposeSection from '@/components/resources/PurposeSection';
 import RegulatoryLandscape from '@/components/resources/RegulatoryLandscape';
 import StandardsGuidelines from '@/components/resources/StandardsGuidelines';
@@ -82,6 +83,15 @@ const ResourcesCompliance = () => {
               progressing from technical validation to societal impact. This allows meaningful 
               comparison of the scientific backing behind each solution.
             </p>
+            
+            {/* Pyramid Visualization */}
+            <div className="mb-10">
+              <h4 className="text-lg font-semibold text-foreground mb-4 text-center">Evidence Hierarchy Pyramid</h4>
+              <EvidencePyramid />
+            </div>
+            
+            {/* Detailed Table */}
+            <h4 className="text-lg font-semibold text-foreground mb-4">Detailed Level Definitions</h4>
             <EvidenceLevelTable />
           </section>
 
