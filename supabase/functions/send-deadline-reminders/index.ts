@@ -50,9 +50,52 @@ const handler = async (req: Request): Promise<Response> => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get reviews needing reminders
+    // Parse request body for optional overrides
+    let thresholdDays: number | undefined;
+    let minIntervalHours: number | undefined;
+    let forceRun = false;
+    
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        thresholdDays = body.threshold_days;
+        minIntervalHours = body.min_interval_hours;
+        forceRun = body.force === true;
+        console.log("Request params:", { thresholdDays, minIntervalHours, forceRun });
+      } catch {
+        // No body or invalid JSON, use defaults from settings
+      }
+    }
+
+    // Get settings from database if not overridden
+    const { data: settings } = await supabase.rpc('get_reminder_settings');
+    console.log("Retrieved settings:", settings);
+
+    const enabled = settings?.enabled !== false;
+    const finalThreshold = thresholdDays ?? settings?.threshold_days ?? 3;
+    const finalInterval = minIntervalHours ?? settings?.min_interval_hours ?? 24;
+
+    // Check if reminders are enabled (unless force run)
+    if (!enabled && !forceRun) {
+      console.log("Reminders are disabled and not force run.");
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: "Reminders are disabled",
+        sent: 0 
+      }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    console.log(`Using threshold: ${finalThreshold} days, interval: ${finalInterval} hours`);
+
+    // Get reviews needing reminders with configurable thresholds
     const { data: reviews, error: reviewsError } = await supabase
-      .rpc('get_reviews_needing_reminders');
+      .rpc('get_reviews_needing_reminders', {
+        p_threshold_days: finalThreshold,
+        p_min_interval_hours: forceRun ? 0 : finalInterval
+      });
 
     if (reviewsError) {
       console.error("Error fetching reviews:", reviewsError);
@@ -64,7 +107,8 @@ const handler = async (req: Request): Promise<Response> => {
       return new Response(JSON.stringify({ 
         success: true, 
         message: "No reminders needed",
-        sent: 0 
+        sent: 0,
+        settings: { threshold_days: finalThreshold, min_interval_hours: finalInterval }
       }), {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },

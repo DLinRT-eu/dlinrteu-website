@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
+import DeadlineReminderControls from '@/components/admin/DeadlineReminderControls';
 
 interface PendingRoleRequest {
   id: string;
@@ -552,6 +553,9 @@ export default function AdminOverview() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Deadline Reminder Controls */}
+          <DeadlineReminderControls />
 
           {/* Pending Role Requests */}
           <Card>
