@@ -93,9 +93,32 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `clinicalEvidence` | ➖ | Narrative summary of studies. | Markdown/plain text. | Reference publications. |
-| `evidence` | ➖ | Structured evidence list. | Array of `{ type, description, link }`. | Provide DOI/URL for each entry. |
+| `evidence` | ➖ | Structured evidence list. | Array of `{ type, description, link, level? }`. | Provide DOI/URL for each entry. Optional `level` per study. |
 | `limitations` | ➖ | Known caveats. | Array of strings. | Highlight vendor-declared or publication-based limitations. |
 | `guidelines` | ➖ | Professional guidelines adhered to. | Array of `{ name, version, reference, url, compliance }`. | Use `compliance`: `full`, `partial`, `planned`. |
+
+## Evidence Level Classification
+
+Products are classified using an evidence hierarchy adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z), modified for radiotherapy applications.
+
+| Level | Name | Description | RT Examples |
+| --- | --- | --- | --- |
+| `0` | No Peer-Reviewed Evidence | No publications; vendor claims only | FDA 510(k) summary only |
+| `1t` | Technical Efficacy | Reproducibility, error rates | Auto-contour consistency tests |
+| `1c` | Potential Clinical Efficacy | Correlation studies | Dice vs expert contours on test data |
+| `2` | Stand-Alone Performance | Clinical dataset validation | Multi-center Dice validation |
+| `3` | Workflow Efficacy | Human-AI interaction | Contouring time savings studies |
+| `4` | Treatment Decision Efficacy | Impact on treatment plans | Dose escalation enabled by OAR sparing |
+| `5` | Patient Outcome Efficacy | Clinical endpoints | Toxicity reduction, survival |
+| `6` | Societal Efficacy | Health economics | Cost per QALY analysis |
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `evidenceLevel` | ➖ | Highest achieved evidence level | "0", "1t", "1c", "2", "3", "4", "5", "6" | Assign based on strongest published evidence |
+| `evidenceLevelNotes` | ➖ | Justification for level | Free text | Cite key supporting publications |
+| `evidence[].level` | ➖ | Level for individual study | Same as evidenceLevel | Optional per-study classification |
+
+**Reference**: van Leeuwen KG, et al. Eur Radiol. 2021;31(6):3797-3804. [DOI: 10.1007/s00330-021-07892-z](https://doi.org/10.1007/s00330-021-07892-z)
 
 ## Platform & AI Classification
 

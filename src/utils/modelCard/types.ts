@@ -35,6 +35,8 @@ export interface ModelCardData {
     supportedStructures: string;
     limitations: string;
     evidence: string;
+    evidenceLevel: string;
+    evidenceLevelNotes: string;
   };
   regulatory: {
     ceDetails: string;

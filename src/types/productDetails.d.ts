@@ -74,8 +74,13 @@ export interface ProductDetails extends Product {
     type: string;
     description: string;
     link: string;
+    level?: "0" | "1t" | "1c" | "2" | "3" | "4" | "5" | "6"; // Evidence level for this specific study
   }>;
   limitations?: string[];
+  
+  // Evidence level classification (adapted from van Leeuwen et al. 2021)
+  evidenceLevel?: "0" | "1t" | "1c" | "2" | "3" | "4" | "5" | "6"; // Highest achieved level
+  evidenceLevelNotes?: string; // Justification for the assigned level
   
   // Additional compatibility fields
   url?: string;

@@ -134,6 +134,8 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       supportedStructures: supportedStructures,
       limitations: formatArray(product.limitations),
       evidence: evidenceText,
+      evidenceLevel: product.evidenceLevel || "N/A",
+      evidenceLevelNotes: product.evidenceLevelNotes || "N/A",
     },
     regulatory: {
       ceDetails: product.regulatory?.ce ? 
