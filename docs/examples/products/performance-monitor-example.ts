@@ -78,8 +78,16 @@ export const performanceMonitorExample: ProductDetails = {
     "Network connectivity required for real-time monitoring"
   ],
   
-  lastUpdated: "2023-06-01",
-  lastRevised: "2023-06-01"
+  // AI Classification - Performance monitors may or may not use AI
+  usesAI: false,  // This tool monitors AI outputs but doesn't use AI itself
+  monitorsAIProducts: [
+    "Auto-Contouring outputs",
+    "AI-generated treatment plans",
+    "Deep learning reconstructions"
+  ],
+  
+  lastUpdated: "2026-01-19",
+  lastRevised: "2026-01-19"
 };
 
 export default performanceMonitorExample;

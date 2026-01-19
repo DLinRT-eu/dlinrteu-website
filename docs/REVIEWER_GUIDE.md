@@ -31,7 +31,10 @@ As a reviewer in DLinRT.eu, you help maintain the accuracy and completeness of t
 
 ### Accessing Your Dashboard
 
-**Location**: Navigate to your profile or reviewer dashboard
+**Key Reviewer Routes**:
+- **Dashboard**: `/reviewer/dashboard` - Your main reviewer workspace
+- **Due Reviews**: `/reviewer/due-reviews` - Reviews approaching or past deadline
+- **Profile**: `/profile` - Manage preferences and expertise
 
 **What You'll See**:
 - Current assignments with deadlines
@@ -295,6 +298,17 @@ You're assigned this product because:
 - 🟡 **In Progress**: You've opened and are working on it
 - ✅ **Completed**: Review submitted
 - 🔴 **Overdue**: Past deadline
+
+### Managing Review Status
+
+Use inline controls to transition reviews through the workflow:
+- **Start Review**: Moves status from `pending` to `in_progress` (powered by `start_review_secure` RPC)
+- **Complete Review**: Moves status from `in_progress` to `completed` (powered by `complete_review_secure` RPC)
+
+These controls are available in the reviewer dashboard for each assigned product. The interface displays:
+- Human-readable product and company names resolved from the database
+- Round context (name and task) for each assignment
+- Bulk actions via a floating action bar with status-aware filtering
 
 ---
 
@@ -584,5 +598,5 @@ Welcome to the reviewer community!
 
 ---
 
-*Last Updated: 2025-11-04*
-*Version: 1.0*
+*Last Updated: 2026-01-19*
+*Version: 1.1*

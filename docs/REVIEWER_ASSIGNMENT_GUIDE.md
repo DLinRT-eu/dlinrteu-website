@@ -799,9 +799,10 @@ Planned improvements:
 For questions, issues, or feature requests:
 - **Email**: info@dlinrt.eu
 - **GitHub**: Open an issue
-- **Documentation**: https://github.com/DLinRT-eu/dlinrteu-website/docs
+- **Documentation**: https://github.com/DLinRT-eu/dlinrteu-website/tree/main/docs
 
 ## Changelog
 
+- **2026-01-19**: Documentation alignment with current platform features, updated GitHub URLs
 - **2025-11-04**: Complete overhaul with multi-dimensional preferences, balanced assignments, history tracking, and email notifications
 - **2025-01-15**: Initial reviewer expertise system

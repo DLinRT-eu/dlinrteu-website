@@ -60,7 +60,12 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | --- | --- | --- | --- | --- |
 | `regulatory.ce.status` | ✅ for CE products | Indicates CE marking state. | Enum: `cleared`, `under_review`, `not_applicable`. | Ensure class/NOTIFIED body values align with vendor certificate. |
 | `regulatory.ce.class` | ➖ | CE device class. | I, IIa, IIb, III. | Required when status is cleared. |
+| `regulatory.ce.notes` | ➖ | Additional CE notes. | Free text. | Clarifications about approval scope. |
 | `regulatory.fda.status` | ✅ for US products | FDA clearance status. | `510k_cleared`, `de_novo`, `not_approved`, etc. | Provide `clearanceNumber` when cleared. |
+| `regulatory.fda.decisionDate` | ➖ | FDA clearance decision date. | `YYYY-MM-DD`. | Date from FDA database or 510(k) letter. |
+| `regulatory.fda.notes` | ➖ | Additional FDA notes. | Free text. | Clarifications about approval scope. |
+| `regulatory.tga.status` | ➖ | Australian TGA approval status. | `approved`, `pending`, `not_applicable`. | Document TGA certificate details when available. |
+| `regulatory.tga.notes` | ➖ | Additional TGA notes. | Free text. | Include certificate references. |
 | `intendedUseStatement` | ➖ | Official intended use text. | Vendor-provided string. | Quote verbatim from labeling. |
 | `certification` | ➖ | Combined summary shown on cards. | Concise string (e.g., "CE Class IIb, FDA 510(k)"). | Derived from `regulatory`; keep in sync. |
 
@@ -91,6 +96,15 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | `evidence` | ➖ | Structured evidence list. | Array of `{ type, description, link }`. | Provide DOI/URL for each entry. |
 | `limitations` | ➖ | Known caveats. | Array of strings. | Highlight vendor-declared or publication-based limitations. |
 | `guidelines` | ➖ | Professional guidelines adhered to. | Array of `{ name, version, reference, url, compliance }`. | Use `compliance`: `full`, `partial`, `planned`. |
+
+## Platform & AI Classification
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `usesAI` | ➖ | Indicates if product uses AI/DL technology. | Boolean. | Set `false` for traditional QA tools that don't use AI. |
+| `monitorsAIProducts` | ➖ | For Performance Monitor: AI products it monitors/validates. | Array of product names or categories. | List specific AI products or generic categories like "Auto-Contouring outputs". |
+| `integratedModules` | ➖ | For Platform products: included modules/components. | Array of `{ name, description, category, productUrl, keyFeatures }`. | Document each integrated module separately. |
+| `partOf` | ➖ | Indicates product is part of a larger system. | Object with `name`, `version`, `productUrl`, `relationship`. | Use for modules that require parent platform. |
 
 ## Relationships & Workflow
 
@@ -147,4 +161,4 @@ These fields are used when company representatives certify product information:
 
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: November 29, 2025
+**Last Updated**: January 19, 2026
