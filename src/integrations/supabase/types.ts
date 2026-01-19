@@ -662,6 +662,7 @@ export type Database = {
           github_last_modified: string | null
           id: string
           last_activity_at: string | null
+          last_reminder_sent_at: string | null
           notes: string | null
           priority: string | null
           product_id: string
@@ -685,6 +686,7 @@ export type Database = {
           github_last_modified?: string | null
           id?: string
           last_activity_at?: string | null
+          last_reminder_sent_at?: string | null
           notes?: string | null
           priority?: string | null
           product_id: string
@@ -708,6 +710,7 @@ export type Database = {
           github_last_modified?: string | null
           id?: string
           last_activity_at?: string | null
+          last_reminder_sent_at?: string | null
           notes?: string | null
           priority?: string | null
           product_id?: string
@@ -1875,6 +1878,22 @@ export type Database = {
           total_assigned: number
         }[]
       }
+      get_reviews_needing_reminders: {
+        Args: never
+        Returns: {
+          days_until_deadline: number
+          deadline: string
+          last_reminder_sent_at: string
+          product_id: string
+          review_id: string
+          reviewer_email: string
+          reviewer_first_name: string
+          reviewer_id: string
+          reviewer_last_name: string
+          round_name: string
+          status: string
+        }[]
+      }
       get_security_events_admin: {
         Args: { last_n_days?: number }
         Returns: {
@@ -1962,6 +1981,7 @@ export type Database = {
             }
             Returns: string
           }
+      mark_reminder_sent: { Args: { p_review_ids: string[] }; Returns: number }
       quick_assign_products:
         | {
             Args: {
