@@ -2,6 +2,7 @@ import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import TaxonomyDiagram from '@/components/resources/TaxonomyDiagram';
 import ClinicalTasksGlossary from '@/components/resources/ClinicalTasksGlossary';
+import EvidenceLevelTable from '@/components/resources/EvidenceLevelTable';
 import PurposeSection from '@/components/resources/PurposeSection';
 import RegulatoryLandscape from '@/components/resources/RegulatoryLandscape';
 import StandardsGuidelines from '@/components/resources/StandardsGuidelines';
@@ -66,6 +67,22 @@ const ResourcesCompliance = () => {
               of common tasks you will encounter on our platform.
             </p>
             <ClinicalTasksGlossary />
+          </section>
+
+          {/* Evidence Level Classification */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Evidence level classification
+            </h2>
+            <h3 className="text-xl text-muted-foreground mb-8">
+              Evaluating scientific evidence for radiotherapy AI
+            </h3>
+            <p className="text-muted-foreground mb-8 leading-relaxed">
+              We classify products using an evidence hierarchy adapted from van Leeuwen et al. (2021), 
+              progressing from technical validation to societal impact. This allows meaningful 
+              comparison of the scientific backing behind each solution.
+            </p>
+            <EvidenceLevelTable />
           </section>
 
           {/* Purpose & Regulatory Summary */}
