@@ -18,18 +18,103 @@ interface GitHubCommit {
   };
 }
 
+// Patterns to filter out low-quality commit messages
+const IGNORED_PATTERNS = [
+  /^changes$/i,
+  /^code edited in lovable/i,
+  /^merge pull request/i,
+  /^merge branch/i,
+  /^update \w+\.(ts|tsx|js|jsx|css|json)$/i,
+  /^wip$/i,
+  /^temp$/i,
+  /^test$/i,
+  /^minor$/i,
+  /^cleanup$/i,
+  /^typo$/i,
+];
+
+function isQualityCommit(message: string): boolean {
+  const firstLine = message.split('\n')[0].trim();
+  if (firstLine.length < 8) return false;
+  return !IGNORED_PATTERNS.some(pattern => pattern.test(firstLine));
+}
+
 function categorizeCommit(message: string): string {
   const lowerMessage = message.toLowerCase();
-  if (lowerMessage.includes('feat') || lowerMessage.includes('add') || lowerMessage.includes('new')) {
+  if (lowerMessage.includes('feat') || lowerMessage.includes('add ') || lowerMessage.includes('new ') || lowerMessage.includes('create ')) {
     return 'feature';
-  } else if (lowerMessage.includes('fix') || lowerMessage.includes('bug')) {
+  } else if (lowerMessage.includes('fix') || lowerMessage.includes('bug') || lowerMessage.includes('resolve')) {
     return 'bugfix';
   } else if (lowerMessage.includes('doc') || lowerMessage.includes('readme')) {
     return 'documentation';
-  } else if (lowerMessage.includes('security') || lowerMessage.includes('auth')) {
+  } else if (lowerMessage.includes('security') || lowerMessage.includes('auth') || lowerMessage.includes('rls')) {
     return 'security';
   }
   return 'improvement';
+}
+
+function deduplicateEntries(entries: string[]): string[] {
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  
+  entries.forEach(entry => {
+    const normalized = entry.toLowerCase()
+      .replace(/[^a-z0-9]/g, '')
+      .substring(0, 40);
+    
+    if (!seen.has(normalized) && normalized.length > 5) {
+      seen.add(normalized);
+      unique.push(entry);
+    }
+  });
+  
+  return unique;
+}
+
+function extractThemes(items: string[]): string[] {
+  const themes = new Map<string, number>();
+  const keywords = [
+    'reviewer', 'admin', 'product', 'company', 'authentication', 
+    'dashboard', 'export', 'security', 'search', 'filter', 'report',
+    'workflow', 'notification', 'validation', 'integration', 'performance'
+  ];
+  
+  items.forEach(item => {
+    keywords.forEach(keyword => {
+      if (item.toLowerCase().includes(keyword)) {
+        themes.set(keyword, (themes.get(keyword) || 0) + 1);
+      }
+    });
+  });
+  
+  return Array.from(themes.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([theme]) => theme);
+}
+
+function generateSmartDescription(categorized: Record<string, string[]>, monthName: string, year: number): string {
+  const highlights: string[] = [];
+  
+  const featureThemes = extractThemes(categorized.feature || []);
+  const improvementThemes = extractThemes(categorized.improvement || []);
+  
+  if (featureThemes.length > 0) {
+    highlights.push(`new ${featureThemes.slice(0, 2).join(' and ')} features`);
+  }
+  if (improvementThemes.length > 0) {
+    highlights.push(`enhanced ${improvementThemes.slice(0, 2).join(' and ')} capabilities`);
+  }
+  if ((categorized.bugfix || []).length > 3) {
+    highlights.push('stability improvements');
+  }
+  if ((categorized.security || []).length > 0) {
+    highlights.push('security enhancements');
+  }
+  
+  return highlights.length > 0 
+    ? `${monthName} ${year} release featuring ${highlights.join(', ')}.`
+    : `${monthName} ${year} platform updates and improvements.`;
 }
 
 serve(async (req) => {
@@ -78,7 +163,6 @@ serve(async (req) => {
       headers['Authorization'] = `token ${githubToken}`;
     }
 
-    // Fetch from repository (October 2025 - present)
     const startDate = new Date('2025-10-01T00:00:00Z');
     
     const repoUrl = `https://api.github.com/repos/DLinRT-eu/dlinrteu-website/commits?since=${startDate.toISOString()}&per_page=100`;
@@ -90,8 +174,11 @@ serve(async (req) => {
       throw new Error(`GitHub API error: ${repoResponse.status}`);
     }
 
-    const commits: GitHubCommit[] = await repoResponse.json();
-    console.log(`Fetched ${commits.length} commits from repository`);
+    const allCommits: GitHubCommit[] = await repoResponse.json();
+    
+    // Filter to quality commits only
+    const commits = allCommits.filter(c => isQualityCommit(c.commit.message));
+    console.log(`Fetched ${allCommits.length} commits, ${commits.length} quality commits`);
 
     // Group commits by month
     const commitsByMonth = new Map<string, GitHubCommit[]>();
@@ -107,37 +194,69 @@ serve(async (req) => {
     });
 
     const entriesCreated = [];
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
 
-    // Create changelog entries for each month
     for (const [monthKey, monthCommits] of commitsByMonth.entries()) {
       const [year, month] = monthKey.split('-');
-      const entryDate = `${year}-${month}-01`;
+      const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+      const entryDate = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
       
       // Categorize commits
-      const categorized = {
-        feature: [] as string[],
-        bugfix: [] as string[],
-        security: [] as string[],
-        improvement: [] as string[],
-        documentation: [] as string[],
+      const categorized: Record<string, string[]> = {
+        feature: [],
+        bugfix: [],
+        security: [],
+        improvement: [],
+        documentation: [],
       };
 
       monthCommits.forEach(commit => {
         const category = categorizeCommit(commit.commit.message);
-        const title = commit.commit.message.split('\n')[0].substring(0, 100);
-        categorized[category as keyof typeof categorized].push(title);
+        const title = commit.commit.message.split('\n')[0]
+          .replace(/^(feat|fix|docs|chore|refactor|style|test|perf|build|ci)(\(.+?\))?:\s*/i, '')
+          .trim()
+          .substring(0, 100);
+        if (title && title.length > 5) {
+          categorized[category].push(title);
+        }
       });
 
-      // Helper function to generate raw details (fallback)
+      // Deduplicate each category
+      Object.keys(categorized).forEach(cat => {
+        categorized[cat] = deduplicateEntries(categorized[cat]);
+      });
+
+      // Generate raw details (fallback)
       const generateRawDetails = () => {
         let raw = '';
-        for (const [category, items] of Object.entries(categorized)) {
-          if (items.length > 0) {
-            raw += `### ${category.charAt(0).toUpperCase() + category.slice(1)}\n`;
-            items.forEach(item => { raw += `- ${item}\n`; });
-            raw += '\n';
-          }
+        
+        if (categorized.feature.length > 0) {
+          raw += `### 🚀 New Features\n`;
+          categorized.feature.slice(0, 10).forEach(item => { raw += `- ${item}\n`; });
+          raw += '\n';
         }
+        if (categorized.improvement.length > 0) {
+          raw += `### ✨ Improvements\n`;
+          categorized.improvement.slice(0, 10).forEach(item => { raw += `- ${item}\n`; });
+          raw += '\n';
+        }
+        if (categorized.bugfix.length > 0) {
+          raw += `### 🐛 Bug Fixes\n`;
+          categorized.bugfix.slice(0, 8).forEach(item => { raw += `- ${item}\n`; });
+          raw += '\n';
+        }
+        if (categorized.documentation.length > 0) {
+          raw += `### 📚 Documentation\n`;
+          categorized.documentation.slice(0, 5).forEach(item => { raw += `- ${item}\n`; });
+          raw += '\n';
+        }
+        if (categorized.security.length > 0) {
+          raw += `### 🔒 Security\n`;
+          categorized.security.slice(0, 5).forEach(item => { raw += `- ${item}\n`; });
+          raw += '\n';
+        }
+        
         return raw.trim();
       };
 
@@ -152,39 +271,44 @@ serve(async (req) => {
         try {
           console.log(`Generating AI-summarized changelog for ${monthKey}...`);
           
-          const prompt = `You are a technical writer creating a changelog for DLinRT.eu (a registry of AI/Deep Learning tools for radiotherapy).
+          const prompt = `You are a senior technical writer creating a changelog for DLinRT.eu, the authoritative European registry of AI/Deep Learning tools for radiotherapy.
 
-Given these raw git commits grouped by category, create a professional, user-friendly changelog summary:
+Your audience: Medical physicists, radiation oncologists, and healthcare IT professionals.
 
+**Your Task**: Transform these raw git commits into an engaging, professional changelog.
+
+Raw commits by category:
 ${JSON.stringify(categorized, null, 2)}
 
-Guidelines:
-- Write in clear, non-technical language when possible
-- Group related commits into single meaningful entries
-- Focus on user-facing changes and benefits
-- Use action verbs (Added, Improved, Fixed, Updated)
-- Keep each bullet point concise (1-2 sentences max)
-- Remove duplicate or redundant entries
-- Ignore internal refactoring unless it affects users
-- Format as markdown with emoji headers
+**Writing Guidelines**:
+1. **Lead with impact**: Start each bullet with the user benefit, not the technical change
+2. **Be specific**: Instead of "Improved performance", say "Product search now loads faster with optimized queries"
+3. **Group related changes**: Combine similar commits into one meaningful entry
+4. **Use active voice**: "Added dark mode support" not "Dark mode support was added"
+5. **Skip internal changes**: Ignore refactoring, code cleanup, dependency updates
+6. **Highlight key features**: Use bold (**Feature Name**:) for important new capabilities
 
-Output format:
-### 🚀 New Features
-- **Feature Name**: Brief description of what it does and why it matters
+**Tone**: Professional, authoritative, but accessible. Avoid jargon when possible.
 
-### ✨ Improvements  
-- **Improvement Name**: What was improved and the benefit
+**Format**:
+## 🚀 New Features
+- **Feature Name**: Clear description of what it does and why users should care
 
-### 🐛 Bug Fixes
-- Fixed [issue description]
+## ✨ Improvements
+- **Area Improved**: Specific improvement and the benefit to users
 
-### 📚 Documentation
-- Updated/Added [documentation description]
+## 🐛 Bug Fixes
+- Fixed: Specific issue that was resolved
 
-### 🔒 Security
-- [Security improvement description]
+## 🔒 Security
+- Enhanced: Security improvement description
 
-Only include categories that have commits. Be concise but informative.`;
+**Important**:
+- Maximum 8 bullets per category (group related items)
+- Each bullet should be 1-2 sentences maximum
+- Only include categories with meaningful changes
+- Do NOT include generic entries like "Various improvements" or "Bug fixes"
+- Do NOT include entries that just say "Changes" or "Updates"`;
 
           const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
             method: 'POST',
@@ -195,7 +319,7 @@ Only include categories that have commits. Be concise but informative.`;
             body: JSON.stringify({
               model: 'google/gemini-2.5-flash',
               messages: [
-                { role: 'system', content: 'You are a professional technical writer specializing in software changelogs.' },
+                { role: 'system', content: 'You are a professional technical writer specializing in software changelogs for medical technology platforms. You write clear, user-focused release notes.' },
                 { role: 'user', content: prompt }
               ],
             }),
@@ -222,13 +346,12 @@ Only include categories that have commits. Be concise but informative.`;
         }
       }
 
-      // Generate version number
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const version = `${monthNames[parseInt(month) - 1]} ${year}`;
+      const monthName = monthNames[parseInt(month) - 1];
+      const version = `${year}.${month}.0`;
 
       const entryId = `${monthKey}-backfill`;
-      const title = `${version} Updates`;
-      const description = `${monthCommits.length} changes this month`;
+      const title = `${monthName} ${year} Release`;
+      const description = generateSmartDescription(categorized, monthName, parseInt(year));
 
       // Check if entry already exists
       const { data: existing } = await supabase
@@ -251,12 +374,23 @@ Only include categories that have commits. Be concise but informative.`;
             status: 'published',
             published_at: new Date().toISOString(),
             auto_generated: true,
+            github_data: {
+              totalCommits: monthCommits.length,
+              filteredOut: allCommits.filter(c => {
+                const d = new Date(c.commit.author.date);
+                const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+                return k === monthKey && !isQualityCommit(c.commit.message);
+              }).length,
+              commitsByCategory: Object.fromEntries(
+                Object.entries(categorized).map(([k, v]) => [k, v.length])
+              ),
+            },
           });
 
         if (insertError) {
           console.error(`Error inserting entry for ${monthKey}:`, insertError);
         } else {
-          entriesCreated.push({ month: monthKey, version, commits: monthCommits.length });
+          entriesCreated.push({ month: monthKey, version, commits: monthCommits.length, title });
           console.log(`Created changelog entry for ${monthKey}`);
         }
       }
@@ -267,6 +401,10 @@ Only include categories that have commits. Be concise but informative.`;
         success: true,
         message: `Backfill complete. Created ${entriesCreated.length} changelog entries.`,
         entries: entriesCreated,
+        stats: {
+          totalCommits: commits.length,
+          filteredOut: allCommits.length - commits.length,
+        },
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );

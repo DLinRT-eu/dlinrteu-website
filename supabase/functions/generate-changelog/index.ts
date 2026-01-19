@@ -28,19 +28,40 @@ interface ChangelogEntry {
   details?: string;
 }
 
+// Patterns to filter out low-quality commit messages
+const IGNORED_PATTERNS = [
+  /^changes$/i,
+  /^code edited in lovable/i,
+  /^merge pull request/i,
+  /^merge branch/i,
+  /^update \w+\.(ts|tsx|js|jsx|css|json)$/i,
+  /^wip$/i,
+  /^temp$/i,
+  /^test$/i,
+  /^minor$/i,
+  /^cleanup$/i,
+  /^typo$/i,
+];
+
+function isQualityCommit(message: string): boolean {
+  const firstLine = message.split('\n')[0].trim();
+  if (firstLine.length < 8) return false;
+  return !IGNORED_PATTERNS.some(pattern => pattern.test(firstLine));
+}
+
 function categorizeCommit(message: string): 'feature' | 'improvement' | 'bugfix' | 'documentation' | 'security' {
   const lowerMessage = message.toLowerCase();
   
-  if (lowerMessage.includes('feat:') || lowerMessage.includes('feature:') || lowerMessage.includes('add ')) {
+  if (lowerMessage.includes('feat:') || lowerMessage.includes('feature:') || lowerMessage.includes('add ') || lowerMessage.includes('create ')) {
     return 'feature';
   }
-  if (lowerMessage.includes('fix:') || lowerMessage.includes('bug:') || lowerMessage.includes('fixed ')) {
+  if (lowerMessage.includes('fix:') || lowerMessage.includes('bug:') || lowerMessage.includes('fixed ') || lowerMessage.includes('resolve')) {
     return 'bugfix';
   }
-  if (lowerMessage.includes('docs:') || lowerMessage.includes('documentation')) {
+  if (lowerMessage.includes('docs:') || lowerMessage.includes('documentation') || lowerMessage.includes('readme')) {
     return 'documentation';
   }
-  if (lowerMessage.includes('security') || lowerMessage.includes('auth') || lowerMessage.includes('rls')) {
+  if (lowerMessage.includes('security') || lowerMessage.includes('auth') || lowerMessage.includes('rls') || lowerMessage.includes('vulnerability')) {
     return 'security';
   }
   return 'improvement';
@@ -48,7 +69,7 @@ function categorizeCommit(message: string): 'feature' | 'improvement' | 'bugfix'
 
 function parseCommitMessage(message: string): { title: string; description: string } {
   const lines = message.split('\n').filter(line => line.trim());
-  const title = lines[0].replace(/^(feat|fix|docs|chore|refactor|style|test|perf|ci|build|revert):\s*/i, '');
+  const title = lines[0].replace(/^(feat|fix|docs|chore|refactor|style|test|perf|ci|build|revert)(\(.+?\))?:\s*/i, '').trim();
   const description = lines.slice(1).join(' ').trim() || title;
   
   return { title, description };
@@ -71,33 +92,95 @@ function generateVersionNumber(date: string, existingVersions: Set<string>): str
   return version;
 }
 
+function deduplicateEntries(entries: string[]): string[] {
+  const seen = new Set<string>();
+  const unique: string[] = [];
+  
+  entries.forEach(entry => {
+    const normalized = entry.toLowerCase()
+      .replace(/[^a-z0-9]/g, '')
+      .substring(0, 40);
+    
+    if (!seen.has(normalized) && normalized.length > 5) {
+      seen.add(normalized);
+      unique.push(entry);
+    }
+  });
+  
+  return unique;
+}
+
+function extractThemes(items: string[]): string[] {
+  const themes = new Map<string, number>();
+  const keywords = [
+    'reviewer', 'admin', 'product', 'company', 'authentication', 
+    'dashboard', 'export', 'security', 'search', 'filter', 'report',
+    'workflow', 'notification', 'validation', 'integration', 'performance'
+  ];
+  
+  items.forEach(item => {
+    keywords.forEach(keyword => {
+      if (item.toLowerCase().includes(keyword)) {
+        themes.set(keyword, (themes.get(keyword) || 0) + 1);
+      }
+    });
+  });
+  
+  return Array.from(themes.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([theme]) => theme);
+}
+
+function generateSmartDescription(categorized: Record<string, string[]>, monthName: string, year: number): string {
+  const highlights: string[] = [];
+  
+  const featureThemes = extractThemes(categorized.feature || []);
+  const improvementThemes = extractThemes(categorized.improvement || []);
+  
+  if (featureThemes.length > 0) {
+    highlights.push(`new ${featureThemes.slice(0, 2).join(' and ')} features`);
+  }
+  if (improvementThemes.length > 0) {
+    highlights.push(`enhanced ${improvementThemes.slice(0, 2).join(' and ')} capabilities`);
+  }
+  if ((categorized.bugfix || []).length > 3) {
+    highlights.push('stability improvements');
+  }
+  if ((categorized.security || []).length > 0) {
+    highlights.push('security enhancements');
+  }
+  
+  return highlights.length > 0 
+    ? `${monthName} ${year} release featuring ${highlights.join(', ')}.`
+    : `${monthName} ${year} platform updates and improvements.`;
+}
+
 function aggregateCommitMessages(commits: GitHubCommit[]): string[] {
   const messages: string[] = [];
   
   commits.forEach(commit => {
-    const { title } = parseCommitMessage(commit.commit.message);
-    messages.push(title);
+    if (isQualityCommit(commit.commit.message)) {
+      const { title } = parseCommitMessage(commit.commit.message);
+      if (title && title.length > 5) {
+        messages.push(title);
+      }
+    }
   });
   
-  return messages;
+  return deduplicateEntries(messages);
 }
 
 function generateMonthlySummaries(commitsByMonth: Map<string, GitHubCommit[]>): ChangelogEntry[] {
   const summaries: ChangelogEntry[] = [];
   const sortedMonths = Array.from(commitsByMonth.keys()).sort().reverse();
   
-  sortedMonths.forEach((monthKey, index) => {
+  sortedMonths.forEach((monthKey) => {
     const monthCommits = commitsByMonth.get(monthKey)!;
     const [year, month] = monthKey.split('-');
     
-    // Group by category
-    const categoryCounts: Record<string, number> = {
-      feature: 0,
-      improvement: 0,
-      bugfix: 0,
-      documentation: 0,
-      security: 0,
-    };
+    // Filter to quality commits only
+    const qualityCommits = monthCommits.filter(c => isQualityCommit(c.commit.message));
     
     const categoryCommits: Record<string, GitHubCommit[]> = {
       feature: [],
@@ -107,67 +190,66 @@ function generateMonthlySummaries(commitsByMonth: Map<string, GitHubCommit[]>): 
       security: [],
     };
     
-    monthCommits.forEach(commit => {
+    qualityCommits.forEach(commit => {
       const category = categorizeCommit(commit.commit.message);
-      categoryCounts[category]++;
       categoryCommits[category].push(commit);
     });
     
     // Generate details with categorized changes
     let details = '';
     
-    if (categoryCounts.feature > 0) {
-      details += `### New Features (${categoryCounts.feature})\n`;
-      aggregateCommitMessages(categoryCommits.feature).forEach(msg => {
+    if (categoryCommits.feature.length > 0) {
+      details += `### 🚀 New Features\n`;
+      aggregateCommitMessages(categoryCommits.feature).slice(0, 10).forEach(msg => {
         details += `- ${msg}\n`;
       });
       details += '\n';
     }
     
-    if (categoryCounts.improvement > 0) {
-      details += `### Improvements (${categoryCounts.improvement})\n`;
-      aggregateCommitMessages(categoryCommits.improvement).forEach(msg => {
+    if (categoryCommits.improvement.length > 0) {
+      details += `### ✨ Improvements\n`;
+      aggregateCommitMessages(categoryCommits.improvement).slice(0, 10).forEach(msg => {
         details += `- ${msg}\n`;
       });
       details += '\n';
     }
     
-    if (categoryCounts.bugfix > 0) {
-      details += `### Bug Fixes (${categoryCounts.bugfix})\n`;
-      aggregateCommitMessages(categoryCommits.bugfix).forEach(msg => {
+    if (categoryCommits.bugfix.length > 0) {
+      details += `### 🐛 Bug Fixes\n`;
+      aggregateCommitMessages(categoryCommits.bugfix).slice(0, 8).forEach(msg => {
         details += `- ${msg}\n`;
       });
       details += '\n';
     }
     
-    if (categoryCounts.documentation > 0) {
-      details += `### Documentation (${categoryCounts.documentation})\n`;
-      aggregateCommitMessages(categoryCommits.documentation).forEach(msg => {
+    if (categoryCommits.documentation.length > 0) {
+      details += `### 📚 Documentation\n`;
+      aggregateCommitMessages(categoryCommits.documentation).slice(0, 5).forEach(msg => {
         details += `- ${msg}\n`;
       });
       details += '\n';
     }
     
-    if (categoryCounts.security > 0) {
-      details += `### Security (${categoryCounts.security})\n`;
-      aggregateCommitMessages(categoryCommits.security).forEach(msg => {
+    if (categoryCommits.security.length > 0) {
+      details += `### 🔒 Security\n`;
+      aggregateCommitMessages(categoryCommits.security).slice(0, 5).forEach(msg => {
         details += `- ${msg}\n`;
       });
       details += '\n';
     }
-    
-    // Generate description
-    const parts: string[] = [];
-    if (categoryCounts.feature > 0) parts.push(`${categoryCounts.feature} new feature${categoryCounts.feature > 1 ? 's' : ''}`);
-    if (categoryCounts.improvement > 0) parts.push(`${categoryCounts.improvement} improvement${categoryCounts.improvement > 1 ? 's' : ''}`);
-    if (categoryCounts.bugfix > 0) parts.push(`${categoryCounts.bugfix} bug fix${categoryCounts.bugfix > 1 ? 'es' : ''}`);
-    
-    const description = `Monthly release including ${parts.join(', ')}`;
     
     // Get month name
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
                        'July', 'August', 'September', 'October', 'November', 'December'];
     const monthName = monthNames[parseInt(month) - 1];
+    
+    // Generate smart description
+    const categorizedMessages: Record<string, string[]> = {};
+    Object.entries(categoryCommits).forEach(([cat, commits]) => {
+      categorizedMessages[cat] = aggregateCommitMessages(commits);
+    });
+    
+    const description = generateSmartDescription(categorizedMessages, monthName, parseInt(year));
     
     // Last day of month
     const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
@@ -178,7 +260,7 @@ function generateMonthlySummaries(commitsByMonth: Map<string, GitHubCommit[]>): 
       version: `${year}.${month}.0`,
       date,
       category: 'improvement',
-      title: `${monthName} ${year} Updates`,
+      title: `${monthName} ${year} Release`,
       description,
       details: details.trim(),
     });
@@ -201,13 +283,11 @@ serve(async (req) => {
 
     console.log(`Fetching commits from ${owner}/${repo} since ${since || 'beginning'}`);
 
-    // Build GitHub API URL
     let apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`;
     if (since) {
       apiUrl += `&since=${since}`;
     }
 
-    // Fetch commits from GitHub API
     const response = await fetch(apiUrl, {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
@@ -221,8 +301,11 @@ serve(async (req) => {
       throw new Error(`GitHub API error: ${response.status} ${errorText}`);
     }
 
-    const commits: GitHubCommit[] = await response.json();
-    console.log(`Fetched ${commits.length} commits`);
+    const allCommits: GitHubCommit[] = await response.json();
+    
+    // Filter to quality commits
+    const commits = allCommits.filter(c => isQualityCommit(c.commit.message));
+    console.log(`Fetched ${allCommits.length} commits, ${commits.length} quality commits`);
 
     // Group commits by month
     const commitsByMonth: Map<string, GitHubCommit[]> = new Map();
@@ -244,13 +327,11 @@ serve(async (req) => {
     const existingVersions = new Set<string>();
     let entryCounter = 1;
 
-    // Sort months in descending order
     const sortedMonths = Array.from(commitsByMonth.keys()).sort().reverse();
 
     sortedMonths.forEach(monthKey => {
       const monthCommits = commitsByMonth.get(monthKey)!;
       
-      // Group commits by category within the month
       const commitsByCategory: Map<string, GitHubCommit[]> = new Map();
       
       monthCommits.forEach(commit => {
@@ -261,9 +342,8 @@ serve(async (req) => {
         commitsByCategory.get(category)!.push(commit);
       });
 
-      // Create entries for each category
-      commitsByCategory.forEach((commits, category) => {
-        commits.forEach(commit => {
+      commitsByCategory.forEach((categoryCommits, category) => {
+        categoryCommits.forEach(commit => {
           const { title, description } = parseCommitMessage(commit.commit.message);
           const date = new Date(commit.commit.author.date);
           const version = generateVersionNumber(commit.commit.author.date, existingVersions);
@@ -285,7 +365,6 @@ serve(async (req) => {
 
     console.log(`Generated ${changelogEntries.length} changelog entries`);
 
-    // Generate monthly summaries
     const monthlySummaries = generateMonthlySummaries(commitsByMonth);
     console.log(`Generated ${monthlySummaries.length} monthly summaries`);
 
@@ -295,6 +374,7 @@ serve(async (req) => {
         entries: changelogEntries,
         summaries: monthlySummaries,
         totalCommits: commits.length,
+        filteredOut: allCommits.length - commits.length,
         monthsProcessed: commitsByMonth.size,
       }),
       { 
