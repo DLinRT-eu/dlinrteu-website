@@ -12,8 +12,10 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
-import { Calendar, Clock, AlertCircle, FileCheck, BookOpen } from 'lucide-react';
+import ReviewStatusControl from '@/components/reviewer/ReviewStatusControl';
+import { Calendar, Clock, AlertCircle, FileCheck, BookOpen, ChevronRight, ClipboardList } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { ALL_PRODUCTS } from '@/data';
 
 interface ReviewAssignment {
   id: string;
@@ -23,7 +25,22 @@ interface ReviewAssignment {
   deadline: string | null;
   assigned_at: string;
   notes: string | null;
+  review_round_id: string | null;
+  round_name: string | null;
+  round_task: string | null;
 }
+
+// Helper to get product name from product ID
+const getProductName = (productId: string): string => {
+  const product = ALL_PRODUCTS.find(p => p.id === productId);
+  return product?.name || productId;
+};
+
+// Helper to get product company from product ID
+const getProductCompany = (productId: string): string | null => {
+  const product = ALL_PRODUCTS.find(p => p.id === productId);
+  return product?.company || null;
+};
 
 export default function DueReviews() {
   const { user } = useAuth();
@@ -82,7 +99,10 @@ export default function DueReviews() {
           priority: 'medium' as ReviewAssignment['priority'],
           deadline: null,
           assigned_at: r.assigned_at,
-          notes: null
+          notes: null,
+          review_round_id: r.review_round_id || null,
+          round_name: r.round_name || null,
+          round_task: null
         }));
         setReviews(mappedReviews);
         setLoading(false);
@@ -91,16 +111,34 @@ export default function DueReviews() {
 
       console.warn('[DueReviews] ⚠️ RPC failed, trying direct query:', rpcError?.message);
 
-      // Phase 2: Fallback to direct query with detailed logging
+      // Phase 2: Fallback to direct query with review round info
       const { data, error } = await supabase
         .from('product_reviews')
-        .select('*')
+        .select(`
+          *,
+          review_rounds!product_reviews_review_round_id_fkey (
+            name,
+            task
+          )
+        `)
         .eq('assigned_to', userId)
         .order('deadline', { ascending: true, nullsFirst: false });
 
       if (!error && data) {
         console.log('[DueReviews] ✅ Direct query successful:', data.length, 'reviews');
-        setReviews(data as ReviewAssignment[]);
+        const mappedReviews: ReviewAssignment[] = data.map((r: any) => ({
+          id: r.id,
+          product_id: r.product_id,
+          status: r.status as ReviewAssignment['status'],
+          priority: r.priority as ReviewAssignment['priority'] || 'medium',
+          deadline: r.deadline,
+          assigned_at: r.assigned_at,
+          notes: r.notes,
+          review_round_id: r.review_round_id,
+          round_name: r.review_rounds?.name || null,
+          round_task: r.review_rounds?.task || null
+        }));
+        setReviews(mappedReviews);
       } else {
         console.error('[DueReviews] ❌ Both RPC and direct query failed:', error?.message);
         
@@ -152,6 +190,10 @@ export default function DueReviews() {
     const status = getDeadlineStatus(r.deadline);
     return status && status.days >= 0 && status.days <= 7;
   });
+
+  const handleCardClick = (productId: string) => {
+    navigate(`/review/${productId}`);
+  };
 
   if (loading) {
     return (
@@ -301,54 +343,94 @@ export default function DueReviews() {
             reviews.map(review => {
               const deadlineStatus = getDeadlineStatus(review.deadline);
               const isSelected = selectedIds.has(review.id);
+              const productName = getProductName(review.product_id);
+              const companyName = getProductCompany(review.product_id);
+              
               return (
-                <Card key={review.id} className={`hover:shadow-lg transition-shadow ${isSelected ? 'ring-2 ring-primary' : ''}`}>
+                <Card 
+                  key={review.id} 
+                  className={`hover:shadow-lg transition-all cursor-pointer group ${isSelected ? 'ring-2 ring-primary' : ''}`}
+                  onClick={() => handleCardClick(review.product_id)}
+                >
                   <CardHeader>
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex items-start gap-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start gap-3 flex-1 min-w-0">
                         <Checkbox
                           checked={isSelected}
                           onCheckedChange={() => handleToggleSelection(review.id)}
+                          onClick={(e) => e.stopPropagation()}
                           className="mt-1"
                         />
-                        <div className="space-y-1 flex-1">
-                          <CardTitle className="text-lg">{review.product_id}</CardTitle>
+                        <div className="space-y-2 flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <CardTitle className="text-lg truncate">{productName}</CardTitle>
+                            <ChevronRight className="h-5 w-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                          </div>
+                          {companyName && (
+                            <p className="text-sm text-muted-foreground">{companyName}</p>
+                          )}
+                          
+                          {/* Review Round Info */}
+                          {review.round_name && (
+                            <div className="flex items-center gap-2 text-sm">
+                              <ClipboardList className="h-4 w-4 text-primary" />
+                              <span className="font-medium text-primary">{review.round_name}</span>
+                              {review.round_task && (
+                                <span className="text-muted-foreground">• {review.round_task}</span>
+                              )}
+                            </div>
+                          )}
+                          
                           <CardDescription className="flex items-center gap-2">
                             <Calendar className="h-3 w-3" />
                             Assigned {formatDistanceToNow(new Date(review.assigned_at), { addSuffix: true })}
                           </CardDescription>
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        {review.priority && (
-                          <Badge variant={review.priority === 'critical' || review.priority === 'high' ? 'destructive' : 'secondary'}>
-                            {review.priority}
+                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                        <div className="flex gap-2">
+                          {review.priority && review.priority !== 'medium' && (
+                            <Badge variant={review.priority === 'critical' || review.priority === 'high' ? 'destructive' : 'secondary'}>
+                              {review.priority}
+                            </Badge>
+                          )}
+                          <Badge variant={
+                            review.status === 'completed' ? 'default' :
+                            review.status === 'in_progress' ? 'secondary' : 'outline'
+                          }>
+                            {review.status.replace('_', ' ')}
                           </Badge>
+                        </div>
+                        {review.deadline && deadlineStatus && (
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-muted-foreground" />
+                            <Badge variant={deadlineStatus.variant}>
+                              {deadlineStatus.text}
+                            </Badge>
+                          </div>
                         )}
-                        <Badge variant={
-                          review.status === 'completed' ? 'default' :
-                          review.status === 'in_progress' ? 'secondary' : 'outline'
-                        }>
-                          {review.status.replace('_', ' ')}
-                        </Badge>
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    {review.deadline && deadlineStatus && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        <Badge variant={deadlineStatus.variant}>
-                          {deadlineStatus.text}
-                        </Badge>
+                  <CardContent>
+                    <div className="flex items-center justify-between gap-4">
+                      {review.notes && (
+                        <p className="text-sm text-muted-foreground flex-1 truncate">{review.notes}</p>
+                      )}
+                      <div className="flex items-center gap-3 ml-auto" onClick={(e) => e.stopPropagation()}>
+                        <ReviewStatusControl
+                          reviewId={review.id}
+                          status={review.status}
+                          onStatusChange={fetchReviews}
+                        />
+                        <Button asChild variant="outline" size="sm">
+                          <Link to={`/review/${review.product_id}`} onClick={(e) => e.stopPropagation()}>
+                            Open Review
+                            <ChevronRight className="h-4 w-4 ml-1" />
+                          </Link>
+                        </Button>
                       </div>
-                    )}
-                    {review.notes && (
-                      <p className="text-sm text-muted-foreground">{review.notes}</p>
-                    )}
-                    <Button asChild>
-                      <Link to={`/review/${review.product_id}`}>View Review</Link>
-                    </Button>
+                    </div>
                   </CardContent>
                 </Card>
               );
