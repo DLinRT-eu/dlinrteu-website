@@ -15,13 +15,14 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Image synthesis from MRI/CBCT (Image+)",
       "Deformable registration and contour propagation (Adapt+)",
       "Automated treatment planning (Dose+)",
+      "Automated contouring (Contour+)",
       "PACS and TPS integration",
       "Cloud-native architecture",
       "Scalable deployment options"
     ],
     category: "Platform",
     secondaryCategories: ["Image Synthesis", "Registration", "Treatment Planning"],
-    certification: "CE",
+    certification: "CE & FDA",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/workspace/",
     anatomicalLocation: ["Brain", "Pelvis", "Male Pelvis", "Prostate", "Head & Neck", "Thorax", "Abdomen", "Multiple Sites"],
@@ -66,17 +67,30 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       {
         name: "Dose+",
-        description: "AI-based treatment planning solution that automates VMAT and IMRT radiotherapy plan creation, reducing planning time from hours to minutes while ensuring high quality and consistency.",
-        category: "Treatment Planning",
+        description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimisation for workflow efficiency and plan consistency.",
+        category: "Dose Prediction",
         productUrl: "https://mvision.ai/dose/",
         keyFeatures: [
-          "Fully automated VMAT/IMRT planning",
-          "Minutes-to-plan generation time",
-          "Clinical objectives optimization",
-          "Consistent plan quality",
-          "Seamless TPS integration"
+          "Patient-specific 3D dose prediction",
+          "Supports VMAT planning optimisation workflows",
+          "Provides achievable starting point for objective setting",
+          "Improves planning efficiency and consistency",
+          "Compatible with DICOM-compliant TPS via RTDose export"
         ]
-      }
+      },
+      {
+        name: "Contour+",
+        description:
+          "AI-powered auto-contouring module that generates guideline-based contours for radiotherapy, supporting consistent delineation of organs-at-risk and lymph node regions across major anatomical sites.",
+        category: "Auto-Contouring",
+        productUrl: "https://mvision.ai/contour/",
+        keyFeatures: [
+          "Guideline-based auto-contouring",
+          "Broad anatomical coverage (OARs + lymph node regions)",
+          "Supports consistent delineation across users and clinics",
+          "Designed for rapid turnaround with clinician review"
+        ]
+      },
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -118,6 +132,28 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-21",
     lastUpdated: "2025-12-01",
     lastRevised: "2026-01-03",
+    evidence: [
+      {
+        type: "Company Press Release",
+        description: "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025)",
+        link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
+      },
+      {
+        type: "Company Press Release",
+        description: "Dose+ FDA 510(k) clearance announcement",
+        link: "https://mvision.ai/mvision-ais-dose-receives-fda-510k-clearance-for-clinical-use-in-the-united-states/"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for Dose+ (K250064)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250064.pdf"
+      }
+    ],
+    limitations: [
+      "AI outputs are assistive and require clinician review, editing, and approval before clinical use",
+      "Module availability may vary by country/market and regulatory status",
+      "Performance depends on input image quality, acquisition protocols, and site-specific workflows",
+    ],
     source: "FDA 510(k) database (K250064), company website",
     clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. One of the first truly cloud-native, vendor-neutral solutions to unify AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single platform. Designed for clinical efficiency and interoperability with seamless integration into hospital PACS, treatment planning systems, and oncology information systems. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025. Dose+ received FDA 510(k) clearance (K250064) on September 4, 2025."
   }
