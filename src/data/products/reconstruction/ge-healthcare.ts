@@ -14,13 +14,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.gehealthcare.com",
     productUrl: "https://www.gehealthcare.com/products/computed-tomography/revolution/truefidelity",
     anatomicalLocation: ["Whole body"],
-    modality: "CT",
+    modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Traumatic injuries"],
     releaseDate: "2019-04-12",
     version: "2.1",
     keyFeatures: [
       "Deep learning-based image reconstruction",
-      "Up to 82% dose reduction potential",
       "Improved low-contrast detectability",
       "Enhanced spatial resolution",
       "Reduced image noise and artifacts"
@@ -69,10 +68,20 @@ export const GE_PRODUCTS: ProductDetails[] = [
       {
         type: "Product Information",
         description: "Official GE Healthcare TrueFidelity product page",
-        link: "https://www.gehealthcare.com/products/computed-tomography/revolution/truefidelity"
+        link: "https://www.gehealthcare.com/products/truefidelity"
+      },
+      {
+        type: "Technical White Paper",
+        description: "GE TrueFidelity technical white paper (DLIR method + performance/clinical rationale)",
+        link: "https://www.gehealthcare.com/static/truefidelity/images/whitepaper-download/TrueFidelity%20WP_vFinal.pdf"
       }
     ],
-    clinicalEvidence: "Multiple clinical studies showing diagnostic equivalence at up to 82% lower dose compared to conventional techniques",
+    limitations: [
+      "Performance depends on scanner hardware, acquisition protocol, and reconstruction settings",
+      "Not intended as a diagnostic device; intended to support clinical interpretation by improving image quality",
+      "Dose reduction claims vary by use case and should be validated within site-specific clinical workflows",
+    ],
+    clinicalEvidence: "Vendor white papers and multiple published studies report improved image quality and low-contrast detectability with deep learning image reconstruction, with dose reduction feasibility depending on protocol and clinical indication.",
     lastUpdated: "2025-02-10",
     lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
@@ -90,7 +99,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.gehealthcare.com",
     productUrl: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
     anatomicalLocation: ["Whole body"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Abdominal pathologies"],
     releaseDate: "2020-04-10",
     version: "3.0",
