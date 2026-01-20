@@ -58,6 +58,7 @@ const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
 const ReviewAssignment = lazy(() => import("./pages/admin/ReviewAssignment"));
+const PRManagement = lazy(() => import("./pages/admin/PRManagement"));
 const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard"));
 const UserRegistrationReview = lazy(() => import("./pages/admin/UserRegistrationReview"));
 const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
@@ -227,6 +228,11 @@ const App = () => (
                 <Route path="/admin/changelog-generator" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <ChangelogGenerator />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/pull-requests" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <PRManagement />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/companies" element={
