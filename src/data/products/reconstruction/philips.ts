@@ -90,11 +90,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     version: "3.2",
     keyFeatures: [
       "Up to 3x faster scanning times",
-      "Up to 80% sharper images with AI enhancement",
+      "Ip to 65% higher resolution",
       "Deep learning reconstruction for undersampled data",
       "Compressed SENSE AI acceleration",
       "Compatible with all anatomical regions",
-      "Works with all contrasts (T1, T2, FLAIR, etc.)",
+      "Works with most pulse-sequences. Applicable for 97% of exams",
       "Maintains spatial resolution and image contrast"
     ],
     technicalSpecifications: {
@@ -126,7 +126,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2025-06-06"
       },
-      intendedUseStatement: "Intended for use in accelerated MRI acquisition and reconstruction to reduce scan times while maintaining diagnostic image quality."
+      intendedUseStatement: "SmartSpeed Precise is intended to increase signal-to-noise (SNR), increase sharpness and decrease ringing artefacts in MR images. SmartSpeed Precise is combining denoisers from SmartSpeed AI and Precise Image of the predicate device to increase signal-to-noise ratio (SNR) and to allow higher acceleration factors with equal or better image quality. Similar as Precise Image in the predicate device, contains SmartSpeed Precise anti ringing filtering to increase sharpness and decrease ringing artefacts in MR images. SmartSpeed Precise replaces both SmartSpeed AI and Precise Image in the subject device for 2D Cartesian acquisition. SmartSpeed Precise does not impact the intended use of the device, nor does it raise any new questions of safety and effectiveness.  The user interface provides operators of the system with a new option for selecting SmartSpeed Precise and adjusting the associated level of image noise reduction."
     },
     market: {
       onMarketSince: "2021",
