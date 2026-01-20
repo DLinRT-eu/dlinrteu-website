@@ -22,7 +22,7 @@ interface PendingStatsWidgetProps {
 
 interface AdminStats {
   pendingRegistrations: number;
-  pendingReviews: number;
+  activeReviews: number;
   pendingRevisions: number;
 }
 
@@ -54,7 +54,7 @@ export function PendingStatsWidget({ isAdmin, isReviewer, isCompany }: PendingSt
         if (isAdmin) {
           const [registrationsRes, reviewsRes, revisionsRes] = await Promise.all([
             supabase.rpc('get_registration_notifications_admin'),
-            supabase.from('product_reviews').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+            supabase.from('product_reviews').select('id', { count: 'exact', head: true }).in('status', ['pending', 'in_progress']),
             supabase.from('company_revisions').select('id', { count: 'exact', head: true }).eq('verification_status', 'pending')
           ]);
 
@@ -64,7 +64,7 @@ export function PendingStatsWidget({ isAdmin, isReviewer, isCompany }: PendingSt
 
           setAdminStats({
             pendingRegistrations,
-            pendingReviews: reviewsRes.count || 0,
+            activeReviews: reviewsRes.count || 0,
             pendingRevisions: revisionsRes.count || 0
           });
         }
@@ -178,15 +178,15 @@ export function PendingStatsWidget({ isAdmin, isReviewer, isCompany }: PendingSt
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
                     <FileCheck className="h-4 w-4" />
-                    Pending Reviews
+                    Active Reviews
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
-                    <span className="text-3xl font-bold">{adminStats.pendingReviews}</span>
-                    {adminStats.pendingReviews > 0 && (
+                    <span className="text-3xl font-bold">{adminStats.activeReviews}</span>
+                    {adminStats.activeReviews > 0 && (
                       <Badge variant="secondary" className="bg-purple-100 text-purple-700">
-                        To assign
+                        In progress
                       </Badge>
                     )}
                   </div>
