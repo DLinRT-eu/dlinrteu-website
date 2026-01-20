@@ -1066,19 +1066,28 @@ export class PptxExporter {
       }
 
       // Add all slides with error handling for each
+      // Section 1: Introduction
       this.addTitleSlide();
       this.addMissionVisionSlide();
       this.addOverviewSlide(data);
       this.addCompanyLogosSlide(data);
-      this.addCategoryBreakdownSlide(data);
-      this.addGovernanceSlide();
       
-      // Add product grid slides
+      // Section 2: Analytics & Charts
+      this.addCategoryBreakdownSlide(data);
+      this.addTaskDistributionSlide(data);
+      this.addCompanyDistributionSlide(data);
+      this.addLocationAnalysisSlide(data);
+      this.addModalityAnalysisSlide(data);
+      this.addStructureAnalysisSlide(data);
+      this.addStructureTypeAnalysisSlide(data);
+      
+      // Section 3: Products
       this.addProductGridSlides(data);
       
-      // Add analytics and engagement
+      // Section 4: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
       this.addContactEngagementSlide(data);
+      this.addGovernanceSlide();
 
       // Generate and download the presentation
       await this.pptx.writeFile({ fileName: `DLinRT-Overview-${new Date().toISOString().split('T')[0]}.pptx` });

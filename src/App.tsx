@@ -17,7 +17,6 @@ const About = lazy(() => import("./pages/About"));
 const Security = lazy(() => import("./pages/Security"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
-const ExportPresentation = lazy(() => import("./pages/ExportPresentation"));
 const Presentation = lazy(() => import("./pages/Presentation"));
 const LiveDemoMode = lazy(() => import("./components/presentation/LiveDemoMode").then(m => ({ default: m.LiveDemoMode })));
 const SecurityMonitoring = lazy(() => import("./pages/SecurityMonitoring"));
@@ -120,7 +119,7 @@ const App = () => (
                 <Route path="security" element={<Security />} />
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="update-password" element={<UpdatePassword />} />
-                <Route path="export-presentation" element={<ExportPresentation />} />
+                <Route path="export-presentation" element={<Navigate to="/presentation" replace />} />
                 <Route path="presentation" element={<Presentation />} />
                 <Route path="presentation/demo" element={<LiveDemoMode />} />
                 <Route path="security-monitoring" element={<Navigate to="/admin/security" replace />} />

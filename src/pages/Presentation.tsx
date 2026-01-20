@@ -31,57 +31,39 @@ export default function Presentation() {
     navigate("/presentation/demo");
   };
 
-  const slidePreviewData = [
-    {
-      title: "Welcome",
-      description: "DLinRT.eu introduction and platform overview",
-      icon: PresentationIcon,
-    },
-    {
-      title: "Platform Analytics",
-      description: "Interactive dashboard with real-time statistics",
-      icon: BarChart3,
-    },
-    {
-      title: "Product Directory",
-      description: `Browse ${presentationData.totalProducts} AI products`,
-      icon: Package,
-    },
-    {
-      title: "Auto-Contouring",
-      description: "AI-powered organ and target delineation",
-      icon: FileText,
-    },
-    {
-      title: "Company Directory",
-      description: `${presentationData.totalCompanies} companies developing AI`,
-      icon: Building2,
-    },
-    {
-      title: "Product Comparison",
-      description: "Side-by-side feature analysis tool",
-      icon: Package,
-    },
-    {
-      title: "Product Timeline",
-      description: "Historical view of AI product releases",
-      icon: BarChart3,
-    },
-    {
-      title: "Resources & Compliance",
-      description: "Regulatory guidance and standards",
-      icon: Globe,
-    },
-    {
-      title: "Data Security",
-      description: "GDPR-compliant platform design",
-      icon: FileText,
-    },
-    {
-      title: "Get Involved",
-      description: "Community engagement opportunities",
-      icon: Users,
-    },
+  // PPTX slides - complete list matching the actual export
+  const pptxSlidePreviewData = [
+    { title: "Title Slide", description: "DLinRT.eu branding and introduction", icon: FileText },
+    { title: "Mission & Vision", description: "Platform purpose and strategic direction", icon: Globe },
+    { title: "Platform Overview", description: `${presentationData.totalCompanies} companies, ${presentationData.totalProducts} products`, icon: BarChart3 },
+    { title: "Partner Companies", description: `Grid of ${presentationData.companyLogos.length} company logos`, icon: Building2 },
+    { title: "AI Solution Categories", description: "Category breakdown pie chart", icon: Package },
+    { title: "Task Distribution", description: "Products by clinical task", icon: BarChart3 },
+    { title: "Company Distribution", description: "Top companies by product count", icon: Building2 },
+    { title: "Location Coverage", description: "Anatomical locations analysis", icon: Globe },
+    { title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", icon: BarChart3 },
+    { title: "Structure Analysis", description: "Auto-contouring structures supported", icon: Package },
+    { title: "Structure Types", description: "OARs, Targets, Elective distribution", icon: BarChart3 },
+    { title: "Product Details", description: "Per-category product grids", icon: Package },
+    { title: "Platform Analytics", description: `${presentationData.analyticsData.totalViews.toLocaleString()} views`, icon: BarChart3 },
+    { title: "Get Involved", description: "Contact and community engagement", icon: Users },
+    { title: "Governance & Values", description: "Core values and principles", icon: FileText },
+  ];
+
+  // Live Demo slides - navigable pages
+  const liveDemoSlidePreviewData = [
+    { title: "Welcome", description: "Platform introduction", icon: PresentationIcon },
+    { title: "Mission & Vision", description: "Purpose and direction", icon: Globe },
+    { title: "Platform Analytics", description: "Interactive dashboard", icon: BarChart3 },
+    { title: "Product Directory", description: `Browse ${presentationData.totalProducts} AI products`, icon: Package },
+    { title: "Auto-Contouring", description: "Organ delineation category", icon: FileText },
+    { title: "Company Directory", description: `${presentationData.totalCompanies} companies`, icon: Building2 },
+    { title: "Product Comparison", description: "Side-by-side analysis", icon: Package },
+    { title: "Product Timeline", description: "Historical releases", icon: BarChart3 },
+    { title: "Resources & Compliance", description: "Regulatory guidance", icon: Globe },
+    { title: "Data Security", description: "GDPR compliance", icon: FileText },
+    { title: "Governance & Values", description: "Core principles", icon: FileText },
+    { title: "Get Involved", description: "Community engagement", icon: Users },
   ];
 
   return (
@@ -225,28 +207,71 @@ export default function Presentation() {
             </Card>
           </div>
 
-          {/* Slide Preview */}
-          <Card>
+          {/* Slide Preview - PPTX */}
+          <Card className="mb-6">
             <CardHeader>
-              <CardTitle>Presentation Slides</CardTitle>
-              <CardDescription>
-                Both formats include these {slidePreviewData.length} slides covering all aspects of DLinRT.eu
-              </CardDescription>
+              <div className="flex items-center gap-2">
+                <Download className="h-5 w-5 text-primary" />
+                <div>
+                  <CardTitle>PowerPoint Slides ({pptxSlidePreviewData.length} slides)</CardTitle>
+                  <CardDescription>
+                    Complete slides with all dashboard charts and analytics
+                  </CardDescription>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {slidePreviewData.map((slide, index) => {
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
+                {pptxSlidePreviewData.map((slide, index) => {
                   const IconComponent = slide.icon;
                   return (
                     <div 
                       key={index}
-                      className="flex flex-col items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                      className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                      title={slide.description}
                     >
-                      <Badge variant="secondary" className="mb-2">
+                      <Badge variant="secondary" className="mb-1 text-xs">
                         {index + 1}
                       </Badge>
-                      <IconComponent className="h-5 w-5 text-primary mb-2" />
-                      <h4 className="text-xs font-medium text-foreground text-center">
+                      <IconComponent className="h-4 w-4 text-primary mb-1" />
+                      <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
+                        {slide.title}
+                      </h4>
+                    </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Slide Preview - Live Demo */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <MonitorPlay className="h-5 w-5 text-primary" />
+                <div>
+                  <CardTitle>Live Demo Slides ({liveDemoSlidePreviewData.length} slides)</CardTitle>
+                  <CardDescription>
+                    Interactive slides with "Go Live" navigation to actual pages
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                {liveDemoSlidePreviewData.map((slide, index) => {
+                  const IconComponent = slide.icon;
+                  return (
+                    <div 
+                      key={index}
+                      className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                      title={slide.description}
+                    >
+                      <Badge variant="secondary" className="mb-1 text-xs">
+                        {index + 1}
+                      </Badge>
+                      <IconComponent className="h-4 w-4 text-primary mb-1" />
+                      <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
                         {slide.title}
                       </h4>
                     </div>
