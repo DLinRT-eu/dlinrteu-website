@@ -8,33 +8,20 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.vysioneer.com/",
     productUrl: "https://www.vysioneer.com/solutions/vbrain",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/vysioner.ts",
-    description: "AI-powered solution specialized in brain tumor auto-segmentation for radiation therapy planning.",
+    description: "AI-powered brain tumor auto-contouring solution for radiation therapy planning, including brain metastases, meningioma, and acoustic neuroma.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/vysioner.png",
     website: "https://www.vysioneer.com/solutions/vbrain",
     anatomicalLocation: ["Brain"],
-    modality: ["MRI"],
+    modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Brain Tumors", "Metastases"],
+    diseaseTargeted: ["Brain Tumors", "Metastases", "Acoustic Neuroma"],
     keyFeatures: ["AI-powered brain tumor segmentation", "Fast processing", "Multiple tumor support"],
     supportedStructures: [
-      // OARs
-      "Brain: Brainstem",
-      "Brain: Optic Chiasm",
-      "Brain: Optic Nerves",
-      "Brain: Eyes",
-      "Brain: Cochlea",
-      "Brain: Hippocampus",
-
-      // Target structures - GTV
-      "Brain: GTV (Gross Tumor Volume)",
-
-      // Target structures - Elective
-      "Brain: CTV (Clinical Target Volume)",
-
-      // Special case - metastases
-      "Brain: Brain Metastases",
+  "Brain: Brain Metastases",
+  "Brain: Meningioma",
+  "Brain: Acoustic Neuroma",
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -76,8 +63,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database (K212116), company official sources",
-    evidence: ["10.1016/j.ijrobp.2022.04.007", "10.1016/j.prro.2021.12.002", "10.1016/j.radonc.2020.09.026"],
+    source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
+    evidence: ["10.1186/s13014-023-02246-z"],
     limitations: [
       "Limited to brain tumor segmentation only",
       "Performance varies with MRI sequence quality",
