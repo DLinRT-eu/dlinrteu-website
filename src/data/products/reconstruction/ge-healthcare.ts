@@ -20,7 +20,6 @@ export const GE_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     keyFeatures: [
       "Deep learning-based image reconstruction",
-      "Up to 82% dose reduction potential",
       "Improved low-contrast detectability",
       "Enhanced spatial resolution",
       "Reduced image noise and artifacts"
