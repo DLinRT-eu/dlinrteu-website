@@ -17,6 +17,8 @@ import {
   Shield,
 } from "lucide-react";
 
+import { Globe, Award } from "lucide-react";
+
 const createSlides = () => {
   const data = dataService.getPresentationData();
   
@@ -40,6 +42,20 @@ const createSlides = () => {
         { label: "Categories", value: data.totalCategories.toString() },
         { label: "Views", value: data.analyticsData.totalViews.toLocaleString() },
       ],
+    },
+    {
+      id: "mission",
+      title: "Mission & Vision",
+      subtitle: "Promoting transparency and evidence-based adoption",
+      description: "Our purpose and strategic direction",
+      keyPoints: [
+        "Comprehensive, curated directory of deep learning solutions",
+        "Promoting transparency and innovation in radiotherapy",
+        "Evidence-based information for clinical adoption",
+        "Global resource for radiotherapy professionals",
+      ],
+      liveLink: "/about",
+      icon: <Globe className="h-8 w-8" />,
     },
     {
       id: "dashboard",
@@ -152,6 +168,20 @@ const createSlides = () => {
       ],
       liveLink: "/privacy-security",
       icon: <Shield className="h-8 w-8" />,
+    },
+    {
+      id: "governance",
+      title: "Governance & Values",
+      subtitle: "Core principles guiding the platform",
+      description: "Our commitment to quality and transparency",
+      keyPoints: [
+        "Transparency in all processes",
+        "Quality assurance and peer review",
+        "Independence from commercial interests",
+        "Community-driven development",
+      ],
+      liveLink: "/about",
+      icon: <Award className="h-8 w-8" />,
     },
     {
       id: "community",
