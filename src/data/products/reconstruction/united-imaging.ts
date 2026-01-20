@@ -182,7 +182,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
 },
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection rates and quantitative accuracy compared to conventional reconstruction techniques",
     lastUpdated: "2024-12-20",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-18",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
