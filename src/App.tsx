@@ -18,6 +18,8 @@ const Security = lazy(() => import("./pages/Security"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
 const ExportPresentation = lazy(() => import("./pages/ExportPresentation"));
+const Presentation = lazy(() => import("./pages/Presentation"));
+const LiveDemoMode = lazy(() => import("./components/presentation/LiveDemoMode").then(m => ({ default: m.LiveDemoMode })));
 const SecurityMonitoring = lazy(() => import("./pages/SecurityMonitoring"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Companies = lazy(() => import("./pages/Companies"));
@@ -119,6 +121,8 @@ const App = () => (
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="update-password" element={<UpdatePassword />} />
                 <Route path="export-presentation" element={<ExportPresentation />} />
+                <Route path="presentation" element={<Presentation />} />
+                <Route path="presentation/demo" element={<LiveDemoMode />} />
                 <Route path="security-monitoring" element={<Navigate to="/admin/security" replace />} />
                 <Route path="companies" element={<Companies />} />
                 <Route path="news" element={<News />} />

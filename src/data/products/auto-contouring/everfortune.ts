@@ -85,7 +85,13 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     lastRevised: "2026-01-15",
     guidelines: [
-      "AAPM TG-263 (nomenclature): recommended mapping/standardization of structure names in downstream TPS workflows"
+      {
+        name: "AAPM TG-263",
+        version: "2018",
+        reference: "Nomenclature standardization for structure names in downstream TPS workflows",
+        url: "https://www.aapm.org/pubs/reports/detail.asp?docid=171",
+        compliance: "partial"
+      }
     ],
     evidence: [
       {
