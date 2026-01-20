@@ -54,7 +54,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K240398",
         regulationNumber: "21 CFR 892.5050",
         productCode: "MUJ",
-        decisionDate: "2024-05-22",
+        decisionDate: "2025-04-04",
         notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A, RayStation 2024A SP3, RayPlan 2024A SP3"
       },
       intendedUseStatement: "For radiation therapy treatment planning and dose calculation."
@@ -67,6 +67,34 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-07-01",
     lastUpdated: "2026-01-02",
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database (K240398), RaySearch official press releases"
+    source: "FDA 510(k) database (K240398), RaySearch official press releases",
+    evidence: [
+      {
+        type: "FDA 510(k) Database Entry",
+        description: "FDA 510(k) device listing for RayStation Treatment Planning (K240398)",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K240398"
+      },
+      {
+        type: "RaySearch Product Page",
+        description: "Official RayStation product page",
+        link: "https://www.raysearchlabs.com/raystation/"
+      },
+      {
+        type: "RaySearch Publication",
+        description: "Deep learning planning model catalogue (RayStation planning models)",
+        link: "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/"
+      },
+      {
+        type: "Press / Release Coverage",
+        description: "RayStation 2024B launch coverage (July 2024)",
+        link: "https://www.auntminnie.com/clinical-news/radiation-oncology-therapy/article/15678711/raysearch-launches-latest-version-of-raystation"
+      }
+    ],
+    limitations: [
+      "AI-assisted planning outputs require qualified clinician review and approval before clinical use",
+      "Model performance and deliverability depend on input data quality, contouring consistency, and treatment technique/site",
+      "Planning models and features vary by RayStation version, configuration, and local licensing",
+      "Dose prediction and dose mimicking should be validated within institution-specific protocols and QA procedures"
+    ]
   }
 ];
