@@ -27,7 +27,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     population: "Institutional data",
     input: ["CT", "MRI", "Structure sets", "Dose matrices"],
     inputFormat: ["DICOM", "DICOM-RT"],
-    output: ["Custom AI models"],
+    output: ["Custom AI contouring models","Custom AI planning models","Custom image domain adaption models","TCP/NTCP models"],
     outputFormat: ["DICOM", "DICOM-RT"] // Fixed output format
   },
   technology: {
