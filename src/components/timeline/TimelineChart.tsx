@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { 
   ResponsiveContainer, 
   LineChart, 
@@ -13,6 +13,8 @@ import {
   AreaChart
 } from 'recharts';
 import { ProductDetails } from '@/types/productDetails';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 interface TimelineChartProps {
   data: Array<{
@@ -24,9 +26,17 @@ interface TimelineChartProps {
   }>;
   granularity: "monthly" | "quarterly" | "yearly";
   products: ProductDetails[];
+  isCumulative: boolean;
+  setIsCumulative: (value: boolean) => void;
 }
 
-const TimelineChart: React.FC<TimelineChartProps> = ({ data, granularity, products }) => {
+const TimelineChart: React.FC<TimelineChartProps> = ({ 
+  data, 
+  granularity, 
+  products,
+  isCumulative,
+  setIsCumulative
+}) => {
   const categories = [...new Set(products.map(p => p.category))];
   
   const colors = [
@@ -34,29 +44,66 @@ const TimelineChart: React.FC<TimelineChartProps> = ({ data, granularity, produc
     '#7c3aed', '#db2777', '#0891b2', '#4338ca', '#059669'
   ];
 
+  // Compute cumulative data
+  const cumulativeData = useMemo(() => {
+    let runningTotal = 0;
+    const categoryTotals: Record<string, number> = {};
+    
+    return data.map(point => {
+      const periodCount = point.count;
+      runningTotal += periodCount;
+      
+      categories.forEach(cat => {
+        categoryTotals[cat] = (categoryTotals[cat] || 0) + (point[cat] || 0);
+      });
+      
+      return {
+        ...point,
+        count: runningTotal,
+        periodCount, // Keep original count for tooltip
+        ...Object.fromEntries(
+          categories.map(cat => [cat, categoryTotals[cat] || 0])
+        )
+      };
+    });
+  }, [data, categories]);
+
+  const chartData = isCumulative ? cumulativeData : data;
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload?.length) return null;
 
-    const data = payload[0]?.payload;
-    if (!data) return null;
+    const tooltipData = payload[0]?.payload;
+    if (!tooltipData) return null;
 
     return (
       <div className="bg-white p-4 border rounded-lg shadow-lg">
         <p className="font-semibold text-gray-900 mb-2">{label}</p>
-        <p className="text-sm text-gray-600 mb-2">
-          Total Products Released: <span className="font-medium">{data.count}</span>
-        </p>
-        {data.products?.length > 0 && (
+        {isCumulative ? (
+          <>
+            <p className="text-sm text-gray-600 mb-1">
+              Total Products to Date: <span className="font-medium">{tooltipData.count}</span>
+            </p>
+            <p className="text-sm text-gray-600 mb-2">
+              Released This Period: <span className="font-medium">{tooltipData.periodCount}</span>
+            </p>
+          </>
+        ) : (
+          <p className="text-sm text-gray-600 mb-2">
+            Products Released: <span className="font-medium">{tooltipData.count}</span>
+          </p>
+        )}
+        {tooltipData.products?.length > 0 && (
           <div className="space-y-1">
             <p className="text-xs font-medium text-gray-700">Released Products:</p>
-            {data.products.slice(0, 5).map((product: ProductDetails, idx: number) => (
+            {tooltipData.products.slice(0, 5).map((product: ProductDetails, idx: number) => (
               <p key={idx} className="text-xs text-gray-600">
                 • {product.name} ({product.company})
               </p>
             ))}
-            {data.products.length > 5 && (
+            {tooltipData.products.length > 5 && (
               <p className="text-xs text-gray-500">
-                ... and {data.products.length - 5} more
+                ... and {tooltipData.products.length - 5} more
               </p>
             )}
           </div>
@@ -78,8 +125,20 @@ const TimelineChart: React.FC<TimelineChartProps> = ({ data, granularity, produc
 
   return (
     <div className="w-full">
+      {/* Cumulative Toggle */}
+      <div className="flex items-center justify-end gap-2 mb-4">
+        <Switch
+          id="cumulative-toggle"
+          checked={isCumulative}
+          onCheckedChange={setIsCumulative}
+        />
+        <Label htmlFor="cumulative-toggle" className="text-sm text-gray-600 cursor-pointer">
+          Show Cumulative Growth
+        </Label>
+      </div>
+
       <ResponsiveContainer width="100%" height={400}>
-        <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <AreaChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <defs>
             <linearGradient id="totalGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#00A6D6" stopOpacity={0.8}/>
@@ -102,7 +161,7 @@ const TimelineChart: React.FC<TimelineChartProps> = ({ data, granularity, produc
             stroke="#00A6D6"
             strokeWidth={2}
             fill="url(#totalGradient)"
-            name="Products Released"
+            name={isCumulative ? "Total Products" : "Products Released"}
           />
         </AreaChart>
       </ResponsiveContainer>
@@ -110,9 +169,11 @@ const TimelineChart: React.FC<TimelineChartProps> = ({ data, granularity, produc
       {/* Category breakdown chart */}
       {categories.length > 1 && (
         <div className="mt-8">
-          <h3 className="text-lg font-semibold mb-4">Release Timeline by Category</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            {isCumulative ? "Cumulative Releases by Category" : "Release Timeline by Category"}
+          </h3>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <LineChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
               <XAxis 
                 dataKey="period" 
