@@ -3,8 +3,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import PageLayout from '@/components/layout/PageLayout';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
+import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
 import { 
   Users, 
   FileCheck, 
@@ -24,13 +26,15 @@ import {
   Mail,
   ClipboardCheck,
   BadgeCheck,
-  Eye
+  Eye,
+  GitMerge
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
 export default function Dashboard_Authenticated() {
   const { user, profile } = useAuth();
   const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
+  const { data: prData } = useGitHubPRCount(isAdmin);
 
   const getRoleDescription = () => {
     if (activeRole === 'admin') {
@@ -103,6 +107,14 @@ export default function Dashboard_Authenticated() {
         icon: ScrollText,
         link: '/admin/changelog',
         color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
+      },
+      {
+        title: 'Pull Requests',
+        description: 'Review and prioritize open PRs',
+        icon: GitMerge,
+        link: '/admin/pull-requests',
+        color: 'bg-gray-50 text-gray-600 hover:bg-gray-100',
+        badge: prData?.count
       }
     ] : []),
     // Reviewer quick actions - ordered by workflow priority
@@ -232,7 +244,14 @@ export default function Dashboard_Authenticated() {
                     <div className={`w-12 h-12 rounded-lg ${action.color} flex items-center justify-center mb-3`}>
                       <action.icon className="h-6 w-6" />
                     </div>
-                    <CardTitle>{action.title}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      {action.title}
+                      {'badge' in action && action.badge !== undefined && action.badge > 0 && (
+                        <Badge variant="secondary" className="text-xs">
+                          {action.badge}
+                        </Badge>
+                      )}
+                    </CardTitle>
                     <CardDescription>{action.description}</CardDescription>
                   </CardHeader>
                 </Card>
@@ -308,6 +327,27 @@ export default function Dashboard_Authenticated() {
               <CardContent>
                 <Button asChild className="w-full">
                   <Link to="/admin/registrations">Review Registrations</Link>
+                </Button>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <GitMerge className="h-5 w-5" />
+                  Pull Requests
+                  {prData?.count !== undefined && prData.count > 0 && (
+                    <Badge variant="secondary">{prData.count} open</Badge>
+                  )}
+                </CardTitle>
+                {prData?.rateRemaining && parseInt(prData.rateRemaining) < 10 && (
+                  <p className="text-xs text-amber-600">
+                    API rate limit low: {prData.rateRemaining} remaining
+                  </p>
+                )}
+              </CardHeader>
+              <CardContent>
+                <Button asChild className="w-full">
+                  <Link to="/admin/pull-requests">Review PRs</Link>
                 </Button>
               </CardContent>
             </Card>
