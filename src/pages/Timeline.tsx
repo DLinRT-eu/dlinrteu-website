@@ -12,6 +12,7 @@ const Timeline = () => {
   const [selectedLocation, setSelectedLocation] = useState("all");
   const [selectedModality, setSelectedModality] = useState("all");
   const [timeGranularity, setTimeGranularity] = useState<"monthly" | "quarterly" | "yearly">("quarterly");
+  const [isCumulative, setIsCumulative] = useState(false);
 
   const {
     timelineData,
@@ -91,6 +92,8 @@ const Timeline = () => {
             data={timelineData} 
             granularity={timeGranularity}
             products={filteredProducts}
+            isCumulative={isCumulative}
+            setIsCumulative={setIsCumulative}
           />
         </div>
       </div>
