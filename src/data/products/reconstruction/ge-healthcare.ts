@@ -156,7 +156,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
     lastUpdated: "2025-01-15",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-01-19",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }
