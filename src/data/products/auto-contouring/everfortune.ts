@@ -18,6 +18,12 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Head and Neck Cancer"],
+    features: [
+      "Head & Neck CT auto-contouring (OARs)",
+      "DICOM input and DICOM-RT (RTSTRUCT) output",
+      "Designed for TPS-based clinician review/edit workflow",
+      "Server-based deployment for local hospital networks"
+    ],
     keyFeatures: ["Deep learning segmentation", "Head & Neck specialization", "Workflow integration", "Fast processing"],
     technicalSpecifications: {
       population: "Adult patients",
@@ -43,19 +49,19 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K252105",
+        clearanceNumber: "K220264",
         productCode: "QKB",
-        decisionDate: "2025-09-26",
+        decisionDate: "2022-04-28",
         notes: "HCAP-Segmentation System for head-and-neck CT auto-segmentation"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in the head and neck region for radiation therapy planning."
     },
     market: {
-      onMarketSince: "2021",
+      onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
-    version: "2.5",
-    releaseDate: "2025-09-01",
+    version: "1.0",
+    releaseDate: "2022-04-28",
     lastUpdated: "2026-01-15",
     supportedStructures: [
       // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
@@ -78,6 +84,35 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Head & Neck: Pharyngeal Constrictor"
     ],
     lastRevised: "2026-01-15",
-    source: "FDA 510(k) database (K252105), company official sources"
+    guidelines: [
+      "AAPM TG-263 (nomenclature): recommended mapping/standardization of structure names in downstream TPS workflows"
+    ],
+    evidence: [
+      {
+        type: "FDA 510(k) Database Entry",
+        description:
+          "FDA 510(k) device entry for EFAI RTSuite CT HN-Segmentation System (K220264)",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K220264"
+      },
+      {
+        type: "FDA 510(k) PDF (Decision Letter + Summary)",
+        description:
+          "FDA 510(k) clearance documentation and summary for K220264",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220264.pdf"
+      },
+      {
+        type: "Company Product Page",
+        description:
+          "Ever Fortune AI website (company/product context)",
+        link: "https://www.everfortuneai.com.tw/en/"
+      }
+    ],
+    limitations: [
+      "Assistive software only: outputs must be reviewed, edited, and approved by qualified clinicians before clinical use",
+      "Intended for adult patients and non-contrast CT images (per FDA cleared use)",
+      "Not intended for lesion detection or clinical decision-making",
+      "Performance may vary with CT acquisition protocols and DICOM routing/workflow configuration"
+    ],
+    source: "FDA 510(k) database (K220264), company official sources"
   }
 ];
