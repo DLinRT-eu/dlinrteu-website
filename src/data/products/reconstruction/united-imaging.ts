@@ -15,7 +15,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.united-imaging.com/en/products/ct",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts",
     anatomicalLocation: ["Whole body"],
-    modality: "CT",
+    modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],
     releaseDate: "2022-03-15",
     version: "2.0",
@@ -75,7 +75,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://eu.united-imaging.com/en/product-service/products/mr/uaifi-technology",
     anatomicalLocation: ["Whole body"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],
     releaseDate: "2020-05-05",
     version: "2.0",
@@ -136,7 +136,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://www.united-imaging.com/en/products/molecular-imaging",
     anatomicalLocation: ["Whole body"],
-    modality: "PET",
+    modality: ["PET"],
     diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac diseases"],
     releaseDate: "2021-09-10",
     version: "2.0",
@@ -180,7 +180,26 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in new PET systems", "Upgrade option"],
 
 },
-    clinicalEvidence: "Clinical studies demonstrating improved lesion detection rates and quantitative accuracy compared to conventional reconstruction techniques",
+    evidence: [
+      {
+        type: "Company News / Product Context",
+        description:
+          "United Imaging news item describing 'SiPM-based HD TOF (time of flight)' as part of their PET/MR technology stack (uPMR 790 context).",
+        link: "https://ja.united-imaging.com/news-center/uih-news-list/2022-05-18-en"
+      },
+      {
+        type: "Company Product Landing Page",
+        description:
+          "United Imaging molecular imaging product portfolio (PET/CT & PET/MR).",
+        link: "https://eu.united-imaging.com/en/product-service"
+      }
+    ],
+    limitations: [
+      "Performance depends on scanner hardware, reconstruction settings, and acquisition protocol; results may vary by system configuration",
+      "AI-enhanced reconstruction outputs require qualified clinician review as part of standard image QA processes",
+      "Claims about scan-time or injected-dose reduction depend on clinical indication and should be validated within site-specific workflows"
+    ],
+    clinicalEvidence: "United Imaging describes HD TOF (time-of-flight) capability as part of its PET technology stack; quantitative improvements and scan-time/dose tradeoffs depend on local protocol and system configuration.",
     lastUpdated: "2024-12-20",
     lastRevised: "2026-01-02",
     source: "FDA 510(k) database and company website",
