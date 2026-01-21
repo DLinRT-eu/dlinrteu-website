@@ -1,11 +1,13 @@
 
 import React from 'react';
-import { Calendar, TrendingUp, Package, Clock } from 'lucide-react';
+import { Calendar, TrendingUp, Package, Clock, Brain, Shield } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface TimelineStatsProps {
   stats: {
     totalProducts: number;
+    aiProductsCount: number;
+    nonAIProductsCount: number;
     firstRelease: Date | null;
     lastRelease: Date | null;
     categoryStats: Record<string, number>;
@@ -26,7 +28,7 @@ const TimelineStats: React.FC<TimelineStatsProps> = ({ stats }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Products</CardTitle>
@@ -35,7 +37,33 @@ const TimelineStats: React.FC<TimelineStatsProps> = ({ stats }) => {
         <CardContent>
           <div className="text-2xl font-bold">{stats.totalProducts}</div>
           <p className="text-xs text-muted-foreground">
-            Products with release dates
+            With release dates
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">AI Products</CardTitle>
+          <Brain className="h-4 w-4 text-primary" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{stats.aiProductsCount}</div>
+          <p className="text-xs text-muted-foreground">
+            Deep learning solutions
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">QA Tools</CardTitle>
+          <Shield className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{stats.nonAIProductsCount}</div>
+          <p className="text-xs text-muted-foreground">
+            Monitoring tools
           </p>
         </CardContent>
       </Card>
@@ -61,7 +89,7 @@ const TimelineStats: React.FC<TimelineStatsProps> = ({ stats }) => {
         <CardContent>
           <div className="text-lg font-bold">{formatDate(stats.firstRelease)}</div>
           <p className="text-xs text-muted-foreground">
-            Earliest product launch
+            Earliest launch
           </p>
         </CardContent>
       </Card>
@@ -72,7 +100,7 @@ const TimelineStats: React.FC<TimelineStatsProps> = ({ stats }) => {
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-lg font-bold">
+          <div className="text-lg font-bold truncate">
             {topCategory ? topCategory[0] : 'N/A'}
           </div>
           <p className="text-xs text-muted-foreground">

@@ -17,6 +17,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
       "Clinical workflow integration"
     ],
     category: "Performance Monitor",
+    usesAI: false,
     certification: "MDR Exempt",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/verify/",

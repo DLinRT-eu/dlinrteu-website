@@ -3,17 +3,23 @@ import { Link } from 'react-router-dom';
 import { 
   TrendingUp,
   Building2,
-  BookOpen
+  BookOpen,
+  Brain,
+  Shield
 } from 'lucide-react';
 
 interface QuickAccessSectionProps {
   productCount: number;
   companyCount: number;
+  aiProductCount: number;
+  nonAIProductCount: number;
 }
 
 const QuickAccessSection: React.FC<QuickAccessSectionProps> = ({
   productCount,
-  companyCount
+  companyCount,
+  aiProductCount,
+  nonAIProductCount
 }) => {
   return (
     <section className="py-8 bg-gradient-to-b from-background to-muted/30">
@@ -26,7 +32,12 @@ const QuickAccessSection: React.FC<QuickAccessSectionProps> = ({
           >
             <TrendingUp className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
             <span className="text-sm text-muted-foreground group-hover:text-foreground">
-              <span className="font-semibold text-foreground">{productCount}+</span> AI products & QA tools
+              <span className="font-semibold text-foreground">{productCount}</span> Products
+              <span className="text-xs ml-1.5 inline-flex items-center gap-1">
+                (<Brain className="h-3 w-3 text-primary inline" />{aiProductCount} AI
+                <span className="text-muted-foreground/60">•</span>
+                <Shield className="h-3 w-3 text-emerald-600 dark:text-emerald-400 inline" />{nonAIProductCount} QA)
+              </span>
             </span>
           </Link>
           <Link 

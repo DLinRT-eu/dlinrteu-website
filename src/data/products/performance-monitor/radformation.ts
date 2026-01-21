@@ -17,6 +17,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       "Contour QA"
     ],
     category: "Performance Monitor",
+    usesAI: false,
     secondaryCategories: ["Treatment Planning"],
     certification: "CE & FDA",
     logoUrl: "/logos/radformation.svg",

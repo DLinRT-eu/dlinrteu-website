@@ -58,9 +58,13 @@ export const useProductFiltering = ({
 export const useProductStats = (filteredProducts: ProductDetails[]) => {
   return useMemo(() => {
     const totalProducts = filteredProducts.length;
+    const aiProducts = filteredProducts.filter(p => p.usesAI !== false);
+    const nonAIProducts = filteredProducts.filter(p => p.usesAI === false);
     
     const stats = {
       totalProducts,
+      aiProductsCount: aiProducts.length,
+      nonAIProductsCount: nonAIProducts.length,
       companiesCount: new Set(filteredProducts.map(p => p.company)).size,
       categoriesCount: new Set(filteredProducts.map(p => p.category)).size,
       modalitiesCount: new Set(

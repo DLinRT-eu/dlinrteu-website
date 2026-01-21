@@ -23,6 +23,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       "Performance tracking"
     ],
     category: "Performance Monitor",
+    usesAI: false,
     certification: "MDR exempt",
     logoUrl: "/logos/ptw.jpg",
     website: "https://www.ptwdosimetry.com/en/products/aiqualis",
