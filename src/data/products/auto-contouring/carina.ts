@@ -14,7 +14,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     certification: "CE & FDA",
     logoUrl: "/logos/carina.jpg",
     website: "https://www.carinaai.com/intcontour.html",
-    anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Male Pelvis", "Female Pelvis"],
+    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Male Pelvis", "Female Pelvis"],
     modality: ["CT", "MRI", "PET/CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
@@ -54,230 +54,140 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2025-06-10",
-    lastUpdated: "2026-01-19",
+    lastUpdated: "2026-01-21",
     supportedStructures: [
       // ========================================
-      // BRAIN - Approved Structures (OARs)
+      // HEAD & NECK MODEL - Approved Structures
       // ========================================
-      "Brain: Brainstem",
-      "Brain: Cerebellum",
-      "Brain: Cerebrum",
-      "Brain: Chiasm",
-      "Brain: Cochlea (L/R)",
-      "Brain: Eye (L/R)",
-      "Brain: Hippocampus (L/R)",
-      "Brain: Hypothalamus",
-      "Brain: Inner Ear (L/R)",
-      "Brain: Lacrimal Gland (L/R)",
-      "Brain: Lens (L/R)",
-      "Brain: Optic Nerve (L/R)",
-      "Brain: Pituitary Gland",
-      "Brain: Temporal Lobe (L/R)",
-      
-      // ========================================
-      // HEAD & NECK - Approved Structures (OARs)
-      // ========================================
-      "Head & Neck: A. Carotid (L/R)",
-      "Head & Neck: Arytenoid (L/R)",
+      "Head & Neck: Mandible",
       "Head & Neck: Brachial Plexus (L/R)",
       "Head & Neck: Brain",
       "Head & Neck: Brainstem",
-      "Head & Neck: Buccal Mucosa",
-      "Head & Neck: Constrictors",
-      "Head & Neck: Cricoid",
-      "Head & Neck: Cricopharyngeal Muscle",
-      "Head & Neck: Esophagus",
-      "Head & Neck: Extended Oral Cavity",
-      "Head & Neck: Glottic Area",
+      "Head & Neck: Oval Cavity",
+      "Head & Neck: Cochlea (L/R)",
+      "Head & Neck: Eye (L/R)",
+      "Head & Neck: Lacrimal Gland (L/R)",
+      "Head & Neck: Submandibular Gland (L/R)",
+      "Head & Neck: Inner Ear (L/R)",
+      "Head & Neck: Temporomandibular Joint (L/R)",
+      "Head & Neck: Lens (L/R)",
+      "Head & Neck: Temporal Lobe (L/R)",
       "Head & Neck: Larynx",
-      "Head & Neck: Lips",
-      "Head & Neck: Mandible",
-      "Head & Neck: Oral Cavity",
+      "Head & Neck: Middle Ear (L/R)",
+      "Head & Neck: Optic Chiasm",
+      "Head & Neck: Optic Nerve (L/R)",
       "Head & Neck: Parotid (L/R)",
       "Head & Neck: Pharynx",
-      "Head & Neck: Spinal Canal",
-      "Head & Neck: Spinal Cord",
-      "Head & Neck: Submandibular Gland (L/R)",
-      "Head & Neck: Supraglottic Larynx",
-      "Head & Neck: Thyroid",
-      "Head & Neck: Trachea",
-      
+      "Head & Neck: Pituitary",
+      "Head & Neck: GTV Lymph Node",
+      "Head & Neck: GTV Primary Tumor",
+      "Head & Neck: Oral Cavity, NRG Standard",
+      "Head & Neck: Cerebellum (L/R)",
+      "Head & Neck: Cervical Spine",
+      "Head & Neck: Glottis, NRG Standard",
+      "Head & Neck: Neck Lymph Node Level III (L/R)",
+      "Head & Neck: Neck Lymph Node Level II (L/R)",
+      "Head & Neck: Neck Lymph Node Level IVa (L/R)",
+      "Head & Neck: Neck Lymph Node Level Ib (L/R)",
+      "Head & Neck: Larynx, NRG Standard",
+      "Head & Neck: Larynx Supraglottis, NRG Standard",
+      "Head & Neck: Lips, NRG Standard",
+      "Head & Neck: Cricopharyngeal Muscle",
+      "Head & Neck: Inferior Pharyngeal Constrictor",
+      "Head & Neck: Middle Pharyngeal Constrictor",
+      "Head & Neck: Superior Pharyngeal Constrictor",
+
       // ========================================
-      // THORAX - Approved Structures (OARs)
+      // THORAX MODEL - Approved Structures
       // ========================================
-      "Thorax: A. Pulmonalis",
-      "Thorax: Aorta",
-      "Thorax: Atria",
-      "Thorax: Brachial Plexus (L/R)",
-      "Thorax: Bronchus (L/R)",
+      "Thorax: Proximal Bronchial Tree",
       "Thorax: Esophagus",
-      "Thorax: Great Vessels",
       "Thorax: Heart",
-      "Thorax: LAD",
       "Thorax: Lung (L/R)",
-      "Thorax: Mediastinum",
-      "Thorax: Pericardium",
       "Thorax: Spinal Canal",
       "Thorax: Spinal Cord",
-      "Thorax: Sternum",
       "Thorax: Trachea",
-      "Thorax: V. Cava Superior",
-      "Thorax: Ventricles",
-      
+
+      // THORAX MODEL - Investigational Use
+      "Thorax: Ascending Aorta (investigational)",
+      "Thorax: Breast (L/R) (investigational)",
+      "Thorax: Cervical Spine (investigational)",
+      "Thorax: Clavicle (L/R) (investigational)",
+      "Thorax: Common Carotid Artery (L/R) (investigational)",
+      "Thorax: Humerus (L/R) (investigational)",
+      "Thorax: Axilla Lymph Node I-III (L/R) (investigational)",
+      "Thorax: Internal Mammary Lymph Node (L/R) (investigational)",
+      "Thorax: Supraclavicular Lymph Node (L/R) (investigational)",
+      "Thorax: Myocardium of Left Ventricle (investigational)",
+      "Thorax: Atrium (L/R) (investigational)",
+      "Thorax: Cervical Vertebrae C1-C7 (investigational)",
+      "Thorax: Lumbar Vertebrae L1-L5 (investigational)",
+      "Thorax: Thoracic Vertebrae T1-T12 (investigational)",
+      "Thorax: Pulmonary Artery (investigational)",
+      "Thorax: Ribs (investigational)",
+      "Thorax: Scapula (L/R) (investigational)",
+      "Thorax: Sternum (investigational)",
+      "Thorax: Thoracic Spine (investigational)",
+      "Thorax: Inferior Vena Cava (investigational)",
+      "Thorax: Ventricle (L/R) (investigational)",
+      "Thorax: Lumbar Spine (investigational)",
+
       // ========================================
-      // BREAST - Approved Structures (OARs)
-      // ========================================
-      "Breast: Breast (L/R)",
-      "Breast: Chest Wall (L/R)",
-      "Breast: Heart",
-      "Breast: Lung (L/R)",
-      
-      // ========================================
-      // ABDOMEN - Approved Structures (OARs)
+      // ABDOMEN MODEL - Approved Structures
       // ========================================
       "Abdomen: Aorta",
-      "Abdomen: Bowel Bag",
-      "Abdomen: Duodenum",
+      "Abdomen: Adrenal Gland (L/R)",
+      "Abdomen: Esophagus",
       "Abdomen: Gallbladder",
       "Abdomen: Kidney (L/R)",
-      "Abdomen: Large Bowel",
       "Abdomen: Liver",
       "Abdomen: Pancreas",
-      "Abdomen: Small Bowel",
-      "Abdomen: Spinal Canal",
-      "Abdomen: Spinal Cord",
+      "Abdomen: Portal Vein",
       "Abdomen: Spleen",
+      "Abdomen: Splenic Vein",
       "Abdomen: Stomach",
-      "Abdomen: V. Cava Inferior",
-      
+      "Abdomen: Inferior Vena Cava",
+
+      // ABDOMEN MODEL - Investigational Use
+      "Abdomen: Lumbar Spine (investigational)",
+      "Abdomen: Thoracic Spine (investigational)",
+
       // ========================================
-      // MALE PELVIS - Approved Structures (OARs)
+      // MALE PELVIS MODEL - Approved Structures
       // ========================================
-      "Male Pelvis: Anal Canal",
       "Male Pelvis: Bladder",
-      "Male Pelvis: Bowel Bag",
-      "Male Pelvis: Cauda Equina",
       "Male Pelvis: Femoral Head (L/R)",
       "Male Pelvis: Penile Bulb",
       "Male Pelvis: Prostate",
       "Male Pelvis: Rectum",
-      "Male Pelvis: Seminal Vesicles",
-      "Male Pelvis: Sigmoid",
-      "Male Pelvis: Small Bowel",
-      "Male Pelvis: Spinal Canal",
-      
+      "Male Pelvis: Seminal Vesicle",
+
+      // MALE PELVIS MODEL - Investigational Use
+      "Male Pelvis: Bone Marrow (investigational)",
+      "Male Pelvis: Bowel Bag (investigational)",
+      "Male Pelvis: Sigmoid Colon (investigational)",
+      "Male Pelvis: Duodenum (investigational)",
+      "Male Pelvis: Central Gland of Prostate (investigational)",
+      "Male Pelvis: Pelvic Lymph Node Group (investigational)",
+      "Male Pelvis: Peripheral Zone of Prostate (investigational)",
+
       // ========================================
-      // FEMALE PELVIS - Approved Structures (OARs)
+      // FEMALE PELVIS MODEL - All Investigational Use
       // ========================================
-      "Female Pelvis: Anal Canal",
-      "Female Pelvis: Bladder",
-      "Female Pelvis: Bowel Bag",
-      "Female Pelvis: Cauda Equina",
-      "Female Pelvis: Femoral Head (L/R)",
-      "Female Pelvis: Kidney (L/R)",
-      "Female Pelvis: Ovary (L/R)",
-      "Female Pelvis: Rectum",
-      "Female Pelvis: Sigmoid",
-      "Female Pelvis: Small Bowel",
-      "Female Pelvis: Spinal Canal",
-      "Female Pelvis: Uterus",
-      "Female Pelvis: Vagina",
-      
-      // ========================================
-      // INVESTIGATIONAL USE STRUCTURES
-      // These structures are NOT cleared for clinical use
-      // ========================================
-      
-      // Brain - Investigational
-      "Brain: CTV (investigational)",
-      "Brain: GTV (investigational)",
-      "Brain: Meningioma (investigational)",
-      "Brain: Metastasis (investigational)",
-      
-      // Head & Neck - Investigational (Lymph Nodes)
-      "Head & Neck: CTV N Elective (investigational)",
-      "Head & Neck: CTV N High Risk (investigational)",
-      "Head & Neck: CTV P (investigational)",
-      "Head & Neck: GTV N (investigational)",
-      "Head & Neck: GTV P (investigational)",
-      "Head & Neck: LN Level I (investigational)",
-      "Head & Neck: LN Level Ia (investigational)",
-      "Head & Neck: LN Level Ib (investigational)",
-      "Head & Neck: LN Level II (investigational)",
-      "Head & Neck: LN Level IIa (investigational)",
-      "Head & Neck: LN Level IIb (investigational)",
-      "Head & Neck: LN Level III (investigational)",
-      "Head & Neck: LN Level IV (investigational)",
-      "Head & Neck: LN Level V (investigational)",
-      "Head & Neck: LN Level Va (investigational)",
-      "Head & Neck: LN Level Vb (investigational)",
-      "Head & Neck: LN Level VI (investigational)",
-      "Head & Neck: LN Level VII (investigational)",
-      "Head & Neck: LN Retropharyngeal (investigational)",
-      
-      // Thorax - Investigational
-      "Thorax: CTV (investigational)",
-      "Thorax: GTV (investigational)",
-      "Thorax: ITV (investigational)",
-      "Thorax: LN Station 1 (investigational)",
-      "Thorax: LN Station 2 (investigational)",
-      "Thorax: LN Station 3 (investigational)",
-      "Thorax: LN Station 4 (investigational)",
-      "Thorax: LN Station 5 (investigational)",
-      "Thorax: LN Station 6 (investigational)",
-      "Thorax: LN Station 7 (investigational)",
-      "Thorax: LN Station 8 (investigational)",
-      "Thorax: LN Station 10 (investigational)",
-      "Thorax: LN Station 11 (investigational)",
-      
-      // Breast - Investigational
-      "Breast: CTV Boost (investigational)",
-      "Breast: CTV Breast (investigational)",
-      "Breast: LN Axilla Level I (investigational)",
-      "Breast: LN Axilla Level II (investigational)",
-      "Breast: LN Axilla Level III (investigational)",
-      "Breast: LN IMN (investigational)",
-      "Breast: LN Interpectoral (investigational)",
-      "Breast: LN Supraclavicular (investigational)",
-      "Breast: Seroma (investigational)",
-      
-      // Abdomen - Investigational
-      "Abdomen: Adrenal (L/R) (investigational)",
-      "Abdomen: Celiac Trunk (investigational)",
-      "Abdomen: CTV (investigational)",
-      "Abdomen: GTV (investigational)",
-      "Abdomen: LN Aortocaval (investigational)",
-      "Abdomen: LN Celiac (investigational)",
-      "Abdomen: LN Para-aortic (investigational)",
-      "Abdomen: LN Portocaval (investigational)",
-      "Abdomen: Portal Vein (investigational)",
-      "Abdomen: Superior Mesenteric A. (investigational)",
-      
-      // Male Pelvis - Investigational
-      "Male Pelvis: CTV Prostate (investigational)",
-      "Male Pelvis: CTV Prostate + SV (investigational)",
-      "Male Pelvis: GTV Prostate (investigational)",
-      "Male Pelvis: LN Ext. Iliac (investigational)",
-      "Male Pelvis: LN Int. Iliac (investigational)",
-      "Male Pelvis: LN Obturator (investigational)",
-      "Male Pelvis: LN Para-aortic (investigational)",
-      "Male Pelvis: LN Presacral (investigational)",
-      
-      // Female Pelvis - Investigational
-      "Female Pelvis: Cervix (investigational)",
-      "Female Pelvis: CTV Cervix (investigational)",
-      "Female Pelvis: GTV Cervix (investigational)",
-      "Female Pelvis: LN Com. Iliac (investigational)",
-      "Female Pelvis: LN Ext. Iliac (investigational)",
-      "Female Pelvis: LN Int. Iliac (investigational)",
-      "Female Pelvis: LN Inguinal (investigational)",
-      "Female Pelvis: LN Obturator (investigational)",
-      "Female Pelvis: LN Para-aortic (investigational)",
-      "Female Pelvis: LN Presacral (investigational)",
-      "Female Pelvis: Parametria (investigational)"
+      "Female Pelvis: Bladder (investigational)",
+      "Female Pelvis: Bone Marrow (investigational)",
+      "Female Pelvis: Bowel Bag (investigational)",
+      "Female Pelvis: Sigmoid Colon (investigational)",
+      "Female Pelvis: Small Bowel (investigational)",
+      "Female Pelvis: Cauda Equina (investigational)",
+      "Female Pelvis: Duodenum (investigational)",
+      "Female Pelvis: Femoral Head (L/R) (investigational)",
+      "Female Pelvis: Pelvic Lymph Node Group (investigational)",
+      "Female Pelvis: Uterus (investigational)",
+      "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-01-19",
-    source: "FDA 510(k) database (K212274), official product page verified 2026-01-19. Investigational structures listed separately per vendor website.",
+    lastRevised: "2026-01-21",
+    source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract"
   }
 ];
