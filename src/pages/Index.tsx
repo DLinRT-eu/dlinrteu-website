@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrowRight, BarChart3, Building2, FileText, Package } from "lucide-react";
+import { countProductsByAI } from "@/utils/aiClassification";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -46,6 +47,7 @@ const Index = () => {
   const products = dataService.getAllProducts();
   const companies = dataService.getAllCompanies();
   const categories = getAllOptions('category');
+  const { aiCount, nonAICount } = countProductsByAI(products);
 
   const handleCategoryClick = (category: string) => {
     navigate('/products', { state: { selectedCategory: category } });
@@ -81,6 +83,8 @@ const Index = () => {
       <QuickAccessSection 
         productCount={products.length}
         companyCount={companies.length}
+        aiProductCount={aiCount}
+        nonAIProductCount={nonAICount}
       />
 
       {/* Website Description Section */}

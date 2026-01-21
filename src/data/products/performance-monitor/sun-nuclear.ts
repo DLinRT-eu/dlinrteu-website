@@ -17,6 +17,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       "Reporting"
     ],
     category: "Performance Monitor",
+    usesAI: false,
     secondaryCategories: ["Treatment Planning"],
     certification: "CE & FDA",
     logoUrl: "/logos/sun-nuclear.png",

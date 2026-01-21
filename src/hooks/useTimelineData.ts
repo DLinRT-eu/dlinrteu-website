@@ -148,9 +148,12 @@ export const useTimelineData = (filters: TimelineFilters) => {
     return Array.from(modalities).sort();
   }, [productsWithApproval]);
 
-  // Calculate stats - update to include secondary categories
+  // Calculate stats - update to include secondary categories and AI classification
   const stats = useMemo(() => {
     const totalProducts = filteredProducts.length;
+    const aiProducts = filteredProducts.filter(p => p.usesAI !== false);
+    const nonAIProducts = filteredProducts.filter(p => p.usesAI === false);
+    
     const firstRelease = filteredProducts.reduce((earliest, product) => {
       if (!product.releaseDate) return earliest;
       const releaseDate = new Date(product.releaseDate);
@@ -170,6 +173,8 @@ export const useTimelineData = (filters: TimelineFilters) => {
 
     return {
       totalProducts,
+      aiProductsCount: aiProducts.length,
+      nonAIProductsCount: nonAIProducts.length,
       firstRelease,
       lastRelease,
       categoryStats,

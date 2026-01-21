@@ -17,6 +17,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       "EPID-based verification"
     ],
     category: "Performance Monitor",
+    usesAI: false,
     secondaryCategories: ["Treatment Planning"],
     certification: "CE & FDA",
     logoUrl: "/logos/varian.jpg",
