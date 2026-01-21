@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink } from 'lucide-react';
-
+import { ExternalLink, AlertTriangle } from 'lucide-react';
 const RegulatoryLandscape = () => {
   return (
     <div className="grid gap-8 lg:grid-cols-2 xl:gap-12">
@@ -29,6 +28,47 @@ const RegulatoryLandscape = () => {
             <ExternalLink className="h-4 w-4" />
             <span>EUR-Lex Official Text</span>
           </a>
+        </CardContent>
+      </Card>
+
+      {/* MDR Targeted Revision Alert */}
+      <Card className="border-amber-500/50 bg-amber-50/50 dark:bg-amber-950/20">
+        <CardHeader className="pb-2">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+            <CardTitle className="text-lg font-semibold text-foreground">
+              Proposed MDR Revision (December 2025)
+            </CardTitle>
+            <Badge variant="outline" className="border-amber-500 text-amber-700 dark:text-amber-400">
+              Proposal
+            </Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground leading-relaxed mb-3">
+            On 16 December 2025, the European Commission proposed a <strong>targeted simplification</strong> of MDR and IVDR rules. Key changes include revised requirements for <strong>in-house manufactured devices</strong>, simplified procedures for healthcare institutions, and support for digitalization. This proposal aims to make rules easier, faster, and more effective while maintaining patient safety.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a 
+              href="https://health.ec.europa.eu/medical-devices-sector/new-regulations_en#simpler-and-more-effective-rules-for-medical-devices--commission-proposal-for-a-targeted-revision-of-the-medical-devices-regulations"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>EC Overview</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a 
+              href="https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Full Proposal</span>
+            </a>
+          </div>
         </CardContent>
       </Card>
 

@@ -38,6 +38,13 @@ const CoreDocuments = () => {
           url: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
           type: "Overview",
           reference: "[4]"
+        },
+        {
+          title: "MDR Targeted Revision Proposal (Dec 2025)",
+          description: "Commission proposal simplifying MDR/IVDR rules including in-house use",
+          url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
+          type: "Proposal",
+          reference: "[NEW]"
         }
       ]
     },
