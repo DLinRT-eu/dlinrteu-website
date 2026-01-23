@@ -19,7 +19,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     modality: ["CT", "MRI", "CBCT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Automated contouring", "Cloud-based", "DICOM compatibility"],
+    keyFeatures: ["Automated contouring", "Runs locally", "DICOM compatibility"],
     supportedStructures: LIMBUS_ALL_STRUCTURES,
     guidelines: [
       {
@@ -52,8 +52,8 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM-RT"]
     },
     technology: {
-      integration: ["TPS integration", "Cloud API"],
-      deployment: ["Cloud-based"],
+      integration: ["Standalone"],
+      deployment: ["Local"],
       triggerForAnalysis: "Manual or automatic upload",
       processingTime: "Minutes per case"
     },
