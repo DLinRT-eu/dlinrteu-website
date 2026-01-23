@@ -65,19 +65,19 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Thorax: Pulmonary Vessels",
       "Thorax: Lymph Nodes",
       
-      // Abdomen
-      "Abdomen: Liver",
-      "Abdomen: Kidney (L)",
-      "Abdomen: Kidney (R)",
-      "Abdomen: Spleen",
-      "Abdomen: Stomach",
-      "Abdomen: Pancreas",
-      "Abdomen: Duodenum",
-      "Abdomen: Small Bowel",
-      "Abdomen: Large Bowel",
-      "Abdomen: Spinal Cord",
-      "Abdomen: Adrenal Gland (L)",
-      "Abdomen: Adrenal Gland (R)",
+      // Abdomen - SOURCE UNVERIFIED: Original source unknown
+      "Abdomen: Liver (unverified)",
+      "Abdomen: Kidney (L) (unverified)",
+      "Abdomen: Kidney (R) (unverified)",
+      "Abdomen: Spleen (unverified)",
+      "Abdomen: Stomach (unverified)",
+      "Abdomen: Pancreas (unverified)",
+      "Abdomen: Duodenum (unverified)",
+      "Abdomen: Small Bowel (unverified)",
+      "Abdomen: Large Bowel (unverified)",
+      "Abdomen: Spinal Cord (unverified)",
+      "Abdomen: Adrenal Gland (L) (unverified)",
+      "Abdomen: Adrenal Gland (R) (unverified)",
       
       // Pelvis
       "Pelvis: Bladder",
@@ -131,7 +131,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2025-12-02",
-    source: "Company website and public sources"
+    lastRevised: "2026-01-23",
+    source: "Company website, internal clinical study (Jan 2024). Note: Abdomen structures require source verification."
   }
 ];

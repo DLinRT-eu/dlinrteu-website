@@ -8,6 +8,7 @@ import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
 import ProductFeaturesDetails from "./product/ProductFeaturesDetails";
 import TechnicalSpecificationsDetails from "./product/TechnicalSpecificationsDetails";
+import TechnologyDetails from "./product/TechnologyDetails";
 import RegulatoryInformationDetails from "./product/RegulatoryInformationDetails";
 import MarketPricingDetails from "./product/MarketPricingDetails";
 import ContactInformation from "./product/ContactInformation";
@@ -109,6 +110,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <ProductFeaturesDetails product={product} />
           <IntegratedModulesDetails product={product} />
           <TechnicalSpecificationsDetails product={product} />
+          <TechnologyDetails product={product} />
           
           {product.category === "Auto-Contouring" && product.supportedStructures && (
             <SupportedStructures structures={product.supportedStructures} />
