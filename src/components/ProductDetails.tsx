@@ -13,6 +13,7 @@ import RegulatoryInformationDetails from "./product/RegulatoryInformationDetails
 import MarketPricingDetails from "./product/MarketPricingDetails";
 import ContactInformation from "./product/ContactInformation";
 import SupportedStructures from "./product/SupportedStructures";
+import DosePredictionModels from "./product/DosePredictionModels";
 import ProductRevisionStatus from "./ProductRevisionStatus";
 import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
 import GuidelinesDetails from "./product/GuidelinesDetails";
@@ -114,6 +115,10 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           
           {product.category === "Auto-Contouring" && product.supportedStructures && (
             <SupportedStructures structures={product.supportedStructures} />
+          )}
+          
+          {product.category === "Treatment Planning" && product.dosePredictionModels && (
+            <DosePredictionModels models={product.dosePredictionModels} />
           )}
           
           <EvidenceLimitationsDetails product={product} />
