@@ -28,9 +28,9 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
-      input: ["DICOM MR images"],
+      input: ["DICOM PET images"],
       inputFormat: ["DICOM"],
-      output: ["Enhanced MR images"],
+      output: ["Enhanced PET images"],
       outputFormat: ["DICOM"]
     },
     technology: {
