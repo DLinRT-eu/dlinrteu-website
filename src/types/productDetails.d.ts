@@ -128,4 +128,14 @@ export interface ProductDetails extends Product {
   usesAI?: boolean;
   // For Performance Monitor category: describes what AI products it monitors
   monitorsAIProducts?: string[];
+  
+  // New field for dose prediction models (for Treatment Planning products)
+  dosePredictionModels?: Array<{
+    name: string;                    // Model name (e.g., "H&N VMAT")
+    anatomicalSite: string;          // Target anatomy (e.g., "Head & Neck")
+    technique: string;               // Treatment technique (e.g., "VMAT", "PBS")
+    intent?: string;                 // Curative, Palliative, SBRT
+    description?: string;            // Brief description
+    status?: 'approved' | 'investigational';
+  }>;
 }
