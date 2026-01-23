@@ -19,7 +19,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Machine learning algorithms", "Multi-atlas fallback", "TPS integration"],
+    keyFeatures: ["Deep learning algorithms", "Within TPS"],
     supportedStructures: RAYSTATION_SUPPORTED_STRUCTURES,
     technicalSpecifications: {
       population: "Adult patients",
@@ -62,6 +62,6 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     lastRevised: "2026-01-14",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
-    evidence: ["10.1016/j.radonc.2016.10.009"]
+    evidence: ["10.1016/j.radonc.2016.10.009, 10.3389/fonc.2023.1213068"]
   }
 ];
