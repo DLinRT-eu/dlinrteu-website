@@ -22,7 +22,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     certification: "CE & FDA",
     logoUrl: "/logos/raystation.jpg",
     website: "https://www.raysearchlabs.com/machine-learning-in-raystation/",
-    anatomicalLocation: ["Head & Neck", "Brain", "Thorax", "Breast", "Pelvis"],
+    anatomicalLocation: ["Brain", "Breast", "Head & Neck", "Lung", "Prostate", "Rectum"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
@@ -34,30 +34,32 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       "Models validated against clinical treatment plans",
       "Rapid automated plan generation workflow"
     ],
-    // 13 Dose Prediction Models
+    // 13 Dose Prediction Models from RaySearch DLP Model Catalogue
     dosePredictionModels: [
-      // Head & Neck
-      { name: "H&N Comprehensive", anatomicalSite: "Head & Neck", technique: "VMAT", intent: "Curative" },
-      { name: "H&N Larynx", anatomicalSite: "Head & Neck", technique: "VMAT", intent: "Curative" },
-      
       // Brain
-      { name: "Brain SRS", anatomicalSite: "Brain", technique: "SRS", intent: "Curative" },
-      { name: "Brain Whole", anatomicalSite: "Brain", technique: "VMAT", intent: "Palliative" },
-      { name: "Brain Proton PBS", anatomicalSite: "Brain", technique: "PBS", intent: "Curative" },
+      { name: "RSL Brain Proton", anatomicalSite: "Brain", technique: "Protons (PBS)", intent: "Curative" },
       
       // Breast
-      { name: "Breast Tangent", anatomicalSite: "Breast", technique: "IMRT", intent: "Curative" },
-      { name: "Breast + Nodes", anatomicalSite: "Breast", technique: "VMAT", intent: "Curative" },
+      { name: "RSL Breast Left", anatomicalSite: "Breast", technique: "Photons (SMLC)", intent: "Curative" },
+      { name: "RSL Breast Left 2LVS", anatomicalSite: "Breast", technique: "Photons (Multi-Level)", intent: "Curative" },
+      { name: "RSL Breast Locoregional 2LVS", anatomicalSite: "Breast", technique: "Photons (Locoregional)", intent: "Curative" },
       
-      // Thorax
-      { name: "Lung SBRT", anatomicalSite: "Thorax", technique: "SBRT", intent: "Curative" },
-      { name: "Lung Conventional", anatomicalSite: "Thorax", technique: "VMAT", intent: "Curative" },
-      { name: "Esophagus", anatomicalSite: "Thorax", technique: "VMAT", intent: "Curative" },
+      // Head and Neck
+      { name: "RSL Oropharynx Proton 2LVS", anatomicalSite: "Head & Neck", technique: "Protons (PBS)", intent: "Curative" },
+      { name: "RSL Oropharynx 2LVS", anatomicalSite: "Head & Neck", technique: "Photons (Dual Level)", intent: "Curative" },
+      { name: "RSL Oropharynx 3LVS", anatomicalSite: "Head & Neck", technique: "Photons (Triple Level)", intent: "Curative" },
       
-      // Pelvis
-      { name: "Prostate", anatomicalSite: "Pelvis", technique: "VMAT", intent: "Curative" },
-      { name: "Prostate + Nodes", anatomicalSite: "Pelvis", technique: "VMAT", intent: "Curative" },
-      { name: "Rectum", anatomicalSite: "Pelvis", technique: "VMAT", intent: "Curative" }
+      // Lung
+      { name: "RSL Lung SBRT", anatomicalSite: "Lung", technique: "Photons (SBRT)", intent: "Curative" },
+      
+      // Prostate
+      { name: "RSL Prostate", anatomicalSite: "Prostate", technique: "Photons (Standard)", intent: "Curative" },
+      { name: "RSL ProstateBed SVs Nodes 2LVS", anatomicalSite: "Prostate", technique: "Photons (Post-Op/Nodal)", intent: "Curative" },
+      { name: "RSL Prostate SVs Nodes 2LVS", anatomicalSite: "Prostate", technique: "Photons (Intact/Nodal)", intent: "Curative" },
+      { name: "RSL Prostate 3LVS", anatomicalSite: "Prostate", technique: "Photons (Triple Level)", intent: "Curative" },
+      
+      // Rectum
+      { name: "RSL Rectum", anatomicalSite: "Rectum", technique: "Photons (Standard)", intent: "Curative" }
     ],
     technicalSpecifications: {
       population: "Adult patients",
