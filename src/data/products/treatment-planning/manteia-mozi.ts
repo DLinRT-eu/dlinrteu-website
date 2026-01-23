@@ -66,6 +66,14 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-07-10",
     lastUpdated: "2026-01-02",
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database (K223724), manufacturer official website"
+    source: "FDA 510(k) database (K223724), manufacturer official website",
+    clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K223724 received January 3, 2023 - Class II device under 21 CFR 892.5050",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
+      },
+    ],
   }
 ];
