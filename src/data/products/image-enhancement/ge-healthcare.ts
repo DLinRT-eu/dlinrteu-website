@@ -121,6 +121,21 @@ export const GE_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
     lastUpdated: "2025-01-10",
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database and company website"
+    source: "FDA 510(k) database and company website",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K193282 received March 12, 2020 - Class II device under 21 CFR 892.1000",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf",
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K213717 received May 10, 2022 - Class II device under 21 CFR 892.1000",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf",
+      },
+    ],
+    limitations: [
+      "Tight vendor integration, can only be used with specific GE scanners",
+    ],
   }
 ];
