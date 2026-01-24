@@ -6,13 +6,15 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     id: "philips-smartdose-ct-enhancement",
     name: "SmartDose CT Enhancement",
     company: "Philips",
-    category: "Image Enhancement",
-    description: "AI-driven solution for enhancing low-dose CT images to achieve diagnostic quality comparable to standard dose acquisitions.",
-    certification: "CE Mark",
-    logoUrl: "/logos/philips.png",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.philips.com/healthcare/solutions/computed-tomography",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/philips-smartdose.ts",
+    description: "AI-driven solution for enhancing low-dose CT images to achieve diagnostic quality comparable to standard dose acquisitions.",
+    features: ["Low-dose CT enhancement", "Increased user consistency", "Reduced interventional procedure time"],
+    category: "Image Enhancement",  
+    certification: "CE Mark",
+    logoUrl: "/logos/philips.png",
+    website: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
     anatomicalLocation: ["Whole body"],
     modality: "CT",
     diseaseTargeted: ["Cancer", "Pulmonary disease", "Cardiovascular disorders"],
@@ -61,6 +63,13 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
     lastUpdated: "2025-01-05",
     lastRevised: "2026-01-02",
-    source: "Company website"
+    source: "Company website",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K203020 received January 25, 2021 - Class II device under 21 CFR 892.1750",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203020.pdf",
+      },
+    ],
   }
 ];
