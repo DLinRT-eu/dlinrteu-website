@@ -20,7 +20,10 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["Integrated platform", "Workflow efficiency", "Multiple anatomical sites"],
-    guidelines: ["RTOG", "DAHANCA"],
+    guidelines: [
+      { name: "RTOG", compliance: "partial" },
+      { name: "DAHANCA", compliance: "partial" }
+    ],
     supportedStructures: GE_HEALTHCARE_ALL_STRUCTURES,
     technicalSpecifications: {
       population: "Adult patients",
