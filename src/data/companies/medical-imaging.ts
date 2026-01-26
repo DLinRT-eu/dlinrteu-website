@@ -30,7 +30,6 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "philips-mrcat-pelvis",
       "philips-precise-image",
       "philips-smartspeed",
-      "philips-intellispace-ai-enhancement",
       "philips-smartdose-ct-enhancement"
     ],
     "category": "Medical Imaging",
