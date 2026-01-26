@@ -47,7 +47,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://claripi.com/",
     "productIds": ["claripi-clarict-ai"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/claripi.png"
+    "logoUrl": "/logos/claripi.jpg"
   },
   {
     "id": "subtle-medical",
