@@ -56,7 +56,10 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of Philips MR-RT platform clearances. Initial EU availability 2018, FDA clearance 2019."
+        clearanceNumber: "K182888",
+        productCode: "LLZ",
+        decisionDate: "2019-05",
+        notes: "Part of Philips MR-RT platform. Extended MR-only workflow to broader pelvic applications."
       },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of pelvic cancers."
     },

@@ -56,8 +56,9 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
+        productCode: "LLZ",
         decisionDate: "2022-10",
-        notes: "510(k) cleared October 2022. Part of Philips MR-RT platform."
+        notes: "AI-enabled MR-only head and neck radiotherapy application. Enables MR as sole imaging modality for RT planning of soft tissue tumors in head and neck."
       },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of head and neck cancers."
     },

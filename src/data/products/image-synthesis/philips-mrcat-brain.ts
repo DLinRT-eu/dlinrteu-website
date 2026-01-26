@@ -56,7 +56,10 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of Philips MR-RT platform clearances"
+        clearanceNumber: "K193109",
+        productCode: "MUJ",
+        decisionDate: "2020",
+        notes: "AI-powered application for primary and metastatic brain tumors."
       },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of brain tumors."
     },
