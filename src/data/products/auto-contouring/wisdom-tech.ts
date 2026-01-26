@@ -19,7 +19,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
-    supportedStructures: supportedStructures: [
+    supportedStructures: [
 
     // Head & Neck
     "Head & Neck: Brain",
