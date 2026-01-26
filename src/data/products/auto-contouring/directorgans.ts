@@ -54,7 +54,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K233650, K250822",
         productCode: "JAK",
         regulationNumber: "21 CFR 892.1750",
-        notes: "Cleared as integrated feature of SOMATOM go.Sim and SOMATOM go.Open Pro CT simulators. Not a standalone software product."
+        decisionDate: "2024-03-26",
+        notes: "DirectORGANS is cleared as an integrated software feature within the SOMATOM go. Platform (go.Sim and go.Open Pro CT simulators). K233650 cleared VB10 software (2024-03-26). K250822 cleared VB20 software (2025-07-03). Not a standalone software product."
       },
       intendedUseStatement: "DirectORGANS is intended for automatic segmentation of organs at risk during CT simulation for radiation therapy planning. It operates as an integrated feature of compatible SOMATOM CT simulators."
     },
@@ -73,6 +74,6 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Bladder, Rectum, Femoral Heads, Prostate"
     ],
     lastRevised: "2026-01-26",
-    source: "Siemens Healthineers official documentation, white paper (https://marketing.webassets.siemens-healthineers.com/ac60475b2fc7ceaa/ca46075332b4/siemens-healthineers_DA_AI-Rad-Companion_DirectOrgans_whitepaper.pdf), FDA 510(k) K233650/K250822"
+    source: "Siemens Healthineers official documentation, DirectORGANS white paper (https://www.astro.org/ASTRO/media/ASTRO/Meetings%20and%20Education/PDFs/Refresher21/WhitePaper_DirectORGANS.pdf), FDA 510(k) K233650 (https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233650.pdf), FDA 510(k) K250822"
   }
 ];
