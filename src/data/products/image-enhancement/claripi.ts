@@ -10,7 +10,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/claripi.ts",
     description: "AI-powered CT image denoising solution using deep learning to enhance low-dose CT scans while preserving anatomical details and natural textures.",
     certification: "CE Mark, FDA 510(k)",
-    logoUrl: "/logos/claripi.png",
+    logoUrl: "/logos/claripi.jpg",
     companyUrl: "https://claripi.com/",
     productUrl: "https://claripi.com/clarict-ai/",
     anatomicalLocation: ["Head", "Chest", "Heart", "Abdomen", "Pelvis", "Spine"],
