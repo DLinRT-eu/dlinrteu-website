@@ -1,6 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
-import { PHILIPS_INTELLISPACE_PRODUCTS } from "./philips-intellispace";
+
 import { PHILIPS_SMARTDOSE_PRODUCTS } from "./philips-smartdose";
 import { GE_PRODUCTS } from "./ge-healthcare";
 import { SIEMENS_PRODUCTS } from "./siemens";
@@ -14,7 +14,7 @@ import { CLARIPI_PRODUCTS } from "./claripi";
 
 
 export const IMAGE_ENHANCEMENT_PRODUCTS: ProductDetails[] = [
-  ...PHILIPS_INTELLISPACE_PRODUCTS,
+  
   ...PHILIPS_SMARTDOSE_PRODUCTS,
   ...GE_PRODUCTS,
   ...SIEMENS_PRODUCTS,
