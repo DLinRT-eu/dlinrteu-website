@@ -11,7 +11,7 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ai-medical.ts",
     description: "Long-terms lesion tracking and reporting.",
     category: "Auto-Contouring",
-    certification: "CE",
+    certification: "CE & FDA",
     logoUrl: "/logos/ai-medical.png",
     website: "https://www.ai-medical.ch/jazz",
     anatomicalLocation: ["Brain"],
@@ -48,10 +48,16 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "Under review",
-        type: "510(k)"
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K231572",
+        productCode: "LLZ",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2023-10-23",
+        notes: "First FDA-cleared product from AI Medical AG (Swiss medtech startup)"
       },
-      intendedUseStatement: "For assistance in the delineation of organs at risk and target volumes in radiation therapy planning."
+      intendedUseStatement: "AI-driven radiological software for long-term lesion tracking, quantification, and reporting in MR follow-up scan assessments. Intended to augment clinical assessment by radiologists and radio-oncologists."
     },
     market: {
       onMarketSince: "2020",
@@ -61,7 +67,14 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-05-15",
     lastUpdated: "2024-04-29",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
-    lastRevised: "2025-12-01",
-    source: "Automatically retrieved"
+    limitations: [
+      "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
+      "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",
+      "Requires PACS integration for volumetric quantification and lesion evolution tracking",
+      "Brain lesion tracking only; other anatomical sites not currently supported",
+      "Performance may vary with non-standard MRI sequences or protocols"
+    ],
+    lastRevised: "2026-01-26",
+    source: "FDA 510(k) database (K231572), company official sources"
   }
 ];
