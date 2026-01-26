@@ -5,51 +5,6 @@ const BRAIN_METASTASES_STRUCTURES = [
     name: "Brain_GTV",
     type: "GTV" as const,
     description: "Gross Tumor Volume for brain metastases"
-  },
-  {
-    name: "Brain_CTV",
-    type: "GTV" as const,
-    description: "Clinical Target Volume for brain metastases"
-  },
-  {
-    name: "Brain_Stem",
-    type: "OAR" as const,
-    description: "Brain stem organ at risk"
-  },
-  {
-    name: "Optic_Chiasm",
-    type: "OAR" as const,
-    description: "Optic chiasm organ at risk"
-  },
-  {
-    name: "Optic_Nerve_L",
-    type: "OAR" as const,
-    description: "Left optic nerve"
-  },
-  {
-    name: "Optic_Nerve_R",
-    type: "OAR" as const,
-    description: "Right optic nerve"
-  },
-  {
-    name: "Hippocampus_L",
-    type: "OAR" as const,
-    description: "Left hippocampus"
-  },
-  {
-    name: "Hippocampus_R",
-    type: "OAR" as const,
-    description: "Right hippocampus"
-  },
-  {
-    name: "Cochlea_L",
-    type: "OAR" as const,
-    description: "Left cochlea"
-  },
-  {
-    name: "Cochlea_R",
-    type: "OAR" as const,
-    description: "Right cochlea"
   }
 ];
 
@@ -63,7 +18,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/taiwan-medical-imaging.ts",
     description: "Intelligent assistant specialized in interpreting brain MRI images with advanced segmentation capabilities and longitudinal follow-up of GTV for brain metastases treatment planning.",
     category: "Auto-Contouring",
-    certification: "CE",
+    certification: "Taiwan's Food and Drug Administration (TFDA) approval for SaMD, FDA 510(k)" ,
     logoUrl: "/logos/Taiwan_MedImag.svg",
     website: "https://www.taimedimg.tw/en/samd/",
     anatomicalLocation: ["Brain"],
@@ -84,46 +39,44 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
         reference: "https://doi.org/10.1002/mp.12909",
         url: "https://www.aapm.org/pubs/reports/RPT_263.pdf",
         compliance: "full"
-      },
-      {
-        name: "ESTRO Consensus Guideline on CT-based Auto-contouring",
-        version: "2021",
-        reference: "https://doi.org/10.1016/j.radonc.2021.09.019",
-        url: "https://www.thegreenjournal.com/article/S0167-8140(21)08440-0/fulltext",
-        compliance: "partial"
       }
     ],
     technicalSpecifications: {
       population: "Adult patients with brain metastases",
-      input: ["MRI T1", "MRI T1+Gd", "MRI T2", "MRI FLAIR"],
+      input: ["MRI T1+Gd"],
       inputFormat: ["DICOM"],
-      output: ["Structure sets", "Longitudinal analysis reports", "Performance metrics"],
-      outputFormat: ["DICOM-RT", "JSON", "PDF reports"]
+      output: ["Structure sets"],
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "PACS integration", "RESTful API"],
       deployment: ["On-premise", "Cloud-based"],
       triggerForAnalysis: "Automatic on image import or manual trigger",
-      processingTime: "2-5 minutes per case"
+      processingTime: "-"
     },
     regulatory: {
       ce: {
-        status: "Certified",
-        class: "IIa",
-        type: "Medical Device Software"
+        status: "not_applicable",
+        class: "",
+        type: ""
+      },
+      fda: {
+        status: "510k_cleared",
+        decisionDate: "2025-05-28",
+        notes: "ID=K250427, URL: https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf"
       },
       intendedUseStatement: "For use in radiation therapy planning to assist in the segmentation and longitudinal monitoring of brain metastases on MRI images."
     },
     market: {
-      onMarketSince: "2024",
+      onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Regional partners"],
 
 },
-    version: "1.2",
-    releaseDate: "2024-08-01",
-    lastUpdated: "2025-07-14",
-    lastRevised: "2025-12-01",
-    companyRevisionDate: "2025-07-14",
+    version: "-",
+    releaseDate: "2022-09-01",
+    lastUpdated: "2026-01-26",
+    lastRevised: "2026-01-26",
+    companyRevisionDate: "0000-00-00",
     source: "Automatically retrieved"
   }
 ];
