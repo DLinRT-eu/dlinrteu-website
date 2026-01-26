@@ -1,168 +1,116 @@
 
-# Plan: Update Radformation AutoContour Supported Structures
+
+# Plan: Update AI Medical Jazz with FDA References and Limitations
 
 ## Overview
 
-Update the `supportedStructures` array in the Radformation AutoContour product with the comprehensive new structure list, following the project naming convention (`"Region: Structure Name"`) and expanding vertebrae into individual entries.
+Update the AI Medical Jazz product data with verified FDA 510(k) clearance details (now cleared, not "under review") and add appropriate clinical limitations based on the product's intended use.
 
 ---
 
-## Key Requirements
+## Verified Regulatory Information
 
-1. **Expand vertebrae into individual entries** so they are correctly counted:
-   - Cervical: C1, C2, C3, C4, C5, C6, C7 (7 structures)
-   - Thoracic: T01, T02, ... T12 (12 structures)
-   - Lumbar: L1, L2, L3, L4, L5 (5 structures)
-
-2. **Expand bilateral structures** into L/R entries
-
-3. **Expand ribs** into individual entries (Rib 01-12 L/R = 24 structures)
-
-4. **Follow naming convention**: `"Region: Structure Name"`
+| Field | Value | Source |
+|-------|-------|--------|
+| FDA 510(k) Number | K231572 | FDA 510(k) Database |
+| Decision Date | 2023-10-23 | FDA 510(k) Database |
+| Product Code | LLZ | FDA 510(k) Database |
+| Regulation Number | 21 CFR 892.2050 | FDA 510(k) Database |
+| Classification | Class II | FDA 510(k) Database |
+| CE Class | IIa (MDR) | Already correct |
 
 ---
 
 ## File to Modify
 
-**File:** `src/data/products/auto-contouring/radformation.ts`
+**File:** `src/data/products/auto-contouring/ai-medical.ts`
 
 ---
 
-## Complete Structure List by Region
+## Changes
 
-### Head & Neck (CT) - 58 entries
-Individual structures including:
-- A Carotid L, A Carotid R
-- A Brachiocephls
-- A Subclavian L, A Subclavian R
-- Bone Hyoid, Bone Teeth, Brain, Brainstem, Buccal Mucosa
-- **Cervical Vertebrae C1, C2, C3, C4, C5, C6, C7** (7 separate entries)
-- Cochlea L, Cochlea R
-- Cornea L, Cornea R
-- Dental Artifact
-- Ear Internal L, Ear Internal R
-- Eye L, Eye R
-- Hippocampus L, Hippocampus R
-- Lacrimal L, Lacrimal R
-- Larynx Glottic, Larynx NRG, Larynx SG
-- Lens L, Lens R, Lips
-- Macula L, Macula R, Mandible
-- Neck Lymph Nodes (multiple level combinations)
-- Optic Chiasm, Optic Nerve L, Optic Nerve R
-- Oral Cavity, Oral Cavity Ext
-- Parotid L, Parotid R
-- Pharyngeal Constrictors, Pharynx (Oropharynx)
-- Pituitary
-- Post Neck L, Post Neck R, Neck IB L, Neck IB R
-- Retina L, Retina R, Skull
-- Submandibular L, Submandibular R
-- Temporal Lobe L, Temporal Lobe R, Thyroid
-- V Brachiceph L, V Brachiceph R
-- V Jugular L, V Jugular R
+### 1. Update FDA Section (lines 50-53)
 
-### Head & Neck MR - 21 entries
-- Brain, Brainstem, Cerebellum
-- Eye L, Eye R
-- Hippocampus L, Hippocampus R
-- Hypothalamus L, Hypothalamus R, Hypothalamus True
-- Lens L, Lens R
-- Optic Chiasm, Optic Nerve L, Optic Nerve R
-- Optic Tract L, Optic Tract R
-- Pituitary, SpinalCord Cerv
+**Current:**
+```typescript
+fda: {
+  status: "Under review",
+  type: "510(k)"
+}
+```
 
-### Chest - 71 entries
-Including:
-- A Coronary R, Atrium L, Atrium R
-- Aorta Full, Aorta Asc, Aorta Desc
-- Axillary Lymph Nodes (Levels I, II, III - RTOG, ESTRO variants)
-- Brachial Plexus L, Brachial Plexus R
-- Breast L, Breast R, Breast Prone
-- Bronchus, Carina, Chestwall
-- Clavicle L, Clavicle R, Esophagus
-- Heart, Heart Prone
-- Humerus L, Humerus R
-- iNpEC ESTRO Lymph Nodes L, iNpEC ESTRO Lymph Nodes R
-- Internal Mammary Lymph Nodes (RTOG, RADCOMP variants)
-- LAD Artery, Lung L, Lung R
-- Myocardium, Nipple L, Nipple R, Nipple Prone
-- Pericardium, Pulmonary Artery
-- **Ribs 01-12 L/R** (24 separate entries)
-- Sternum
-- Supraclavicular Lymph Nodes (RTOG, RADCOMP, ESTRO)
-- **Thoracic Vertebrae T01-T12** (12 separate entries)
-- Trachea, Vena Cava Inferior, Vena Cava Superior
-- Ventricle L, Ventricle R
+**Updated:**
+```typescript
+fda: {
+  status: "510(k) Cleared",
+  class: "Class II",
+  type: "510(k)",
+  clearanceNumber: "K231572",
+  productCode: "LLZ",
+  regulationNumber: "21 CFR 892.2050",
+  decisionDate: "2023-10-23",
+  notes: "First FDA-cleared product from AI Medical AG (Swiss medtech startup)"
+}
+```
 
-### Abdomen - 24 entries
-- Aorta Full, Aorta Asc, Aorta Desc
-- Body
-- Bowel Bag, Bowel Loops, Bowel Sm, Bowel Lg
-- Duodenum, Esophagus, Gallbladder
-- Kidney L, Kidney R
-- Kidney Minus Hilum L, Kidney Minus Hilum R
-- Liver, Pancreas, Spleen
-- Spinal Canal, Spinal Cord, Stomach
-- **Thoracic Vertebrae T01-T12** (12 separate entries)
-- Vena Cava Inferior
-- Vertebrae All
+### 2. Update Certification Field (line 14)
 
-### Pelvis (CT) - 53 entries
-Including:
-- Bladder M, Bladder F
-- Bowel Bag, Bowel Loops, Bowel Sm, Bowel Lg
-- Cauda Equina
-- Femur L, Femur R, Femur Head L, Femur Head R, Femur RTOG
-- Foley Balloon, Genitals M, Genitals F
-- HDR Bladder, HDR Bowel, HDR Cylinder, HDR Rectum
-- Iliac L, Iliac R, Iliac Crest L, Iliac Crest R
-- Iliac Int L, Iliac Int R
-- Iliac Marrow L, Iliac Marrow R
-- Inguinofemoral Lymph Nodes L, Inguinofemoral Lymph Nodes R
-- **Lumbar Vertebrae L1, L2, L3, L4, L5** (5 separate entries)
-- Pelvic F Lymph Nodes, Presacral Lymph Nodes
-- Musc Iliopsoas L, Musc Iliopsoas R
-- Paraaortic Lymph Nodes, Pelvic Bones
-- Pelvic Lymph Nodes NRG
-- Penile Bulb, Prostate, ProstateBed
-- Rectum M, Rectum F
-- SacralPlex L, SacralPlex R
-- Seminal Vesicles, Sigmoid Colon, Utero Cervix
+**Current:**
+```typescript
+certification: "CE",
+```
 
-### Pelvis MR - 18 entries
-- A Pud Int L, A Pud Int R
-- Bladder, Bladder Trigone
-- Colon Sigmoid, External Pelvis
-- Femur L, Femur R
-- NVB L, NVB R
-- PenileBulb, Prostate, Prostate Gland
-- Rectal Spacer, Rectum
-- Seminal Vesicles, Urethra
+**Updated:**
+```typescript
+certification: "CE & FDA",
+```
 
----
+### 3. Add Limitations Array (new field after `clinicalEvidence`)
 
-## Total Structure Count
+**Add new field:**
+```typescript
+limitations: [
+  "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
+  "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",
+  "Requires PACS integration for volumetric quantification and lesion evolution tracking",
+  "Brain lesion tracking only; other anatomical sites not currently supported",
+  "Performance may vary with non-standard MRI sequences or protocols"
+]
+```
 
-| Region | Entries |
-|--------|---------|
-| Head & Neck | ~58 |
-| Head & Neck MR | ~21 |
-| Chest | ~71 |
-| Abdomen | ~24 |
-| Pelvis | ~53 |
-| Pelvis MR | ~18 |
-| **Total** | **~245** |
-
----
-
-## Additional Updates
+### 4. Update Metadata
 
 | Field | Current | Updated |
 |-------|---------|---------|
-| `keyFeatures` | "95+ structure models" | "240+ structure models" |
-| `lastRevised` | "2026-01-02" | "2026-01-26" |
+| `lastRevised` | "2025-12-01" | "2026-01-26" |
+| `source` | "Automatically retrieved" | "FDA 510(k) database (K231572), company official sources" |
 
 ---
 
-## Summary
+## Updated Intended Use Statement
 
-Replace the entire `supportedStructures` array (lines 22-100) with the expanded list containing ~245 individually defined structures, with vertebrae (C1-C7, T01-T12, L1-L5) and ribs each on separate rows for accurate counting.
+Update to align with FDA clearance language:
+
+**Current:**
+```typescript
+intendedUseStatement: "For assistance in the delineation of organs at risk and target volumes in radiation therapy planning."
+```
+
+**Updated:**
+```typescript
+intendedUseStatement: "AI-driven radiological software for long-term lesion tracking, quantification, and reporting in MR follow-up scan assessments. Intended to augment clinical assessment by radiologists and radio-oncologists."
+```
+
+---
+
+## Summary of Changes
+
+| Section | Change Type |
+|---------|-------------|
+| `certification` | Update from "CE" to "CE & FDA" |
+| `regulatory.fda` | Add clearance number K231572, product code, decision date |
+| `regulatory.intendedUseStatement` | Update to match FDA-cleared indication |
+| `limitations` | Add new array with 5 clinical/technical limitations |
+| `lastRevised` | Update to current date |
+| `source` | Update to include FDA database reference |
+
