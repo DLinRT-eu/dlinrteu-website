@@ -221,7 +221,7 @@ const ResourceLinks = () => {
     {
       title: "ESTRO Consensus Guidelines",
       description: "Professional consensus statements on radiotherapy techniques and quality standards",
-      url: "https://www.estro.org/About/ESTRO-Organisation-Structure/Committees/ESTRO-Guidelines-Committee",
+      url: "https://doi.org/10.1016/j.radonc.2024.110345",
       icon: Users,
       category: "Clinical Guidelines"
     }
