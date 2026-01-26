@@ -1,150 +1,168 @@
 
-# Plan: Add Correct FDA Certification References to Philips MRCAT Products
+# Plan: Update Radformation AutoContour Supported Structures
 
 ## Overview
 
-This plan adds verified FDA 510(k) clearance numbers and regulatory details to four Philips MRCAT products based on FDA database records and official Philips announcements.
+Update the `supportedStructures` array in the Radformation AutoContour product with the comprehensive new structure list, following the project naming convention (`"Region: Structure Name"`) and expanding vertebrae into individual entries.
 
 ---
 
-## Products to Update
+## Key Requirements
 
-| Product | File | FDA K-Number | Clearance Date |
-|---------|------|--------------|----------------|
-| MRCAT Pelvis | `philips-mrcat-pelvis.ts` | K182888 | 2019-05 |
-| MRCAT Brain | `philips-mrcat-brain.ts` | K193109 | 2020 |
-| MRCAT Head and Neck | `philips-mrcat-head-neck.ts` | K22xxxx (confirmed cleared) | 2022-10 |
-| MRCAT Prostate + Auto-Contouring | `philips.ts` (auto-contouring) | Update structure | 2015 |
+1. **Expand vertebrae into individual entries** so they are correctly counted:
+   - Cervical: C1, C2, C3, C4, C5, C6, C7 (7 structures)
+   - Thoracic: T01, T02, ... T12 (12 structures)
+   - Lumbar: L1, L2, L3, L4, L5 (5 structures)
 
----
+2. **Expand bilateral structures** into L/R entries
 
-## Detailed Changes
+3. **Expand ribs** into individual entries (Rib 01-12 L/R = 24 structures)
 
-### 1. MRCAT Pelvis (`src/data/products/image-synthesis/philips-mrcat-pelvis.ts`)
-
-**Current regulatory.fda section (lines 55-60):**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  notes: "Part of Philips MR-RT platform clearances. Initial EU availability 2018, FDA clearance 2019."
-}
-```
-
-**Updated to include K-number:**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  clearanceNumber: "K182888",
-  productCode: "LLZ",
-  decisionDate: "2019-05",
-  notes: "Part of Philips MR-RT platform. Extended MR-only workflow to broader pelvic applications."
-}
-```
+4. **Follow naming convention**: `"Region: Structure Name"`
 
 ---
 
-### 2. MRCAT Brain (`src/data/products/image-synthesis/philips-mrcat-brain.ts`)
+## File to Modify
 
-**Current regulatory.fda section (lines 55-60):**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  notes: "Part of Philips MR-RT platform clearances"
-}
-```
-
-**Updated to include K-number:**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  clearanceNumber: "K193109",
-  productCode: "MUJ",
-  decisionDate: "2020",
-  notes: "AI-powered application for primary and metastatic brain tumors."
-}
-```
+**File:** `src/data/products/auto-contouring/radformation.ts`
 
 ---
 
-### 3. MRCAT Head and Neck (`src/data/products/image-synthesis/philips-mrcat-head-neck.ts`)
+## Complete Structure List by Region
 
-**Current regulatory.fda section (lines 55-61):**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  decisionDate: "2022-10",
-  notes: "510(k) cleared October 2022. Part of Philips MR-RT platform."
-}
-```
+### Head & Neck (CT) - 58 entries
+Individual structures including:
+- A Carotid L, A Carotid R
+- A Brachiocephls
+- A Subclavian L, A Subclavian R
+- Bone Hyoid, Bone Teeth, Brain, Brainstem, Buccal Mucosa
+- **Cervical Vertebrae C1, C2, C3, C4, C5, C6, C7** (7 separate entries)
+- Cochlea L, Cochlea R
+- Cornea L, Cornea R
+- Dental Artifact
+- Ear Internal L, Ear Internal R
+- Eye L, Eye R
+- Hippocampus L, Hippocampus R
+- Lacrimal L, Lacrimal R
+- Larynx Glottic, Larynx NRG, Larynx SG
+- Lens L, Lens R, Lips
+- Macula L, Macula R, Mandible
+- Neck Lymph Nodes (multiple level combinations)
+- Optic Chiasm, Optic Nerve L, Optic Nerve R
+- Oral Cavity, Oral Cavity Ext
+- Parotid L, Parotid R
+- Pharyngeal Constrictors, Pharynx (Oropharynx)
+- Pituitary
+- Post Neck L, Post Neck R, Neck IB L, Neck IB R
+- Retina L, Retina R, Skull
+- Submandibular L, Submandibular R
+- Temporal Lobe L, Temporal Lobe R, Thyroid
+- V Brachiceph L, V Brachiceph R
+- V Jugular L, V Jugular R
 
-**Updated with product code (K-number confirmed but not publicly documented):**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  productCode: "LLZ",
-  decisionDate: "2022-10",
-  notes: "AI-enabled MR-only head and neck radiotherapy application. Enables MR as sole imaging modality for RT planning of soft tissue tumors in head and neck."
-}
-```
+### Head & Neck MR - 21 entries
+- Brain, Brainstem, Cerebellum
+- Eye L, Eye R
+- Hippocampus L, Hippocampus R
+- Hypothalamus L, Hypothalamus R, Hypothalamus True
+- Lens L, Lens R
+- Optic Chiasm, Optic Nerve L, Optic Nerve R
+- Optic Tract L, Optic Tract R
+- Pituitary, SpinalCord Cerv
+
+### Chest - 71 entries
+Including:
+- A Coronary R, Atrium L, Atrium R
+- Aorta Full, Aorta Asc, Aorta Desc
+- Axillary Lymph Nodes (Levels I, II, III - RTOG, ESTRO variants)
+- Brachial Plexus L, Brachial Plexus R
+- Breast L, Breast R, Breast Prone
+- Bronchus, Carina, Chestwall
+- Clavicle L, Clavicle R, Esophagus
+- Heart, Heart Prone
+- Humerus L, Humerus R
+- iNpEC ESTRO Lymph Nodes L, iNpEC ESTRO Lymph Nodes R
+- Internal Mammary Lymph Nodes (RTOG, RADCOMP variants)
+- LAD Artery, Lung L, Lung R
+- Myocardium, Nipple L, Nipple R, Nipple Prone
+- Pericardium, Pulmonary Artery
+- **Ribs 01-12 L/R** (24 separate entries)
+- Sternum
+- Supraclavicular Lymph Nodes (RTOG, RADCOMP, ESTRO)
+- **Thoracic Vertebrae T01-T12** (12 separate entries)
+- Trachea, Vena Cava Inferior, Vena Cava Superior
+- Ventricle L, Ventricle R
+
+### Abdomen - 24 entries
+- Aorta Full, Aorta Asc, Aorta Desc
+- Body
+- Bowel Bag, Bowel Loops, Bowel Sm, Bowel Lg
+- Duodenum, Esophagus, Gallbladder
+- Kidney L, Kidney R
+- Kidney Minus Hilum L, Kidney Minus Hilum R
+- Liver, Pancreas, Spleen
+- Spinal Canal, Spinal Cord, Stomach
+- **Thoracic Vertebrae T01-T12** (12 separate entries)
+- Vena Cava Inferior
+- Vertebrae All
+
+### Pelvis (CT) - 53 entries
+Including:
+- Bladder M, Bladder F
+- Bowel Bag, Bowel Loops, Bowel Sm, Bowel Lg
+- Cauda Equina
+- Femur L, Femur R, Femur Head L, Femur Head R, Femur RTOG
+- Foley Balloon, Genitals M, Genitals F
+- HDR Bladder, HDR Bowel, HDR Cylinder, HDR Rectum
+- Iliac L, Iliac R, Iliac Crest L, Iliac Crest R
+- Iliac Int L, Iliac Int R
+- Iliac Marrow L, Iliac Marrow R
+- Inguinofemoral Lymph Nodes L, Inguinofemoral Lymph Nodes R
+- **Lumbar Vertebrae L1, L2, L3, L4, L5** (5 separate entries)
+- Pelvic F Lymph Nodes, Presacral Lymph Nodes
+- Musc Iliopsoas L, Musc Iliopsoas R
+- Paraaortic Lymph Nodes, Pelvic Bones
+- Pelvic Lymph Nodes NRG
+- Penile Bulb, Prostate, ProstateBed
+- Rectum M, Rectum F
+- SacralPlex L, SacralPlex R
+- Seminal Vesicles, Sigmoid Colon, Utero Cervix
+
+### Pelvis MR - 18 entries
+- A Pud Int L, A Pud Int R
+- Bladder, Bladder Trigone
+- Colon Sigmoid, External Pelvis
+- Femur L, Femur R
+- NVB L, NVB R
+- PenileBulb, Prostate, Prostate Gland
+- Rectal Spacer, Rectum
+- Seminal Vesicles, Urethra
 
 ---
 
-### 4. MRCAT Prostate + Auto-Contouring (`src/data/products/auto-contouring/philips.ts`)
+## Total Structure Count
 
-**Current regulatory.fda (line 49):**
-```typescript
-fda: "510(k) cleared",
-```
-
-**Updated to use object format with details:**
-```typescript
-fda: {
-  status: "510(k) Cleared",
-  class: "Class II",
-  type: "510(k)",
-  decisionDate: "2015",
-  notes: "First MR-only radiotherapy solution. Combines MRCAT synthetic CT generation with model-based auto-contouring for prostate treatment planning."
-}
-```
+| Region | Entries |
+|--------|---------|
+| Head & Neck | ~58 |
+| Head & Neck MR | ~21 |
+| Chest | ~71 |
+| Abdomen | ~24 |
+| Pelvis | ~53 |
+| Pelvis MR | ~18 |
+| **Total** | **~245** |
 
 ---
 
-## Summary of File Changes
+## Additional Updates
 
-| File | Lines Modified | Change Type |
-|------|----------------|-------------|
-| `src/data/products/image-synthesis/philips-mrcat-pelvis.ts` | 55-60 | Add `clearanceNumber: "K182888"`, `productCode`, `decisionDate` |
-| `src/data/products/image-synthesis/philips-mrcat-brain.ts` | 55-60 | Add `clearanceNumber: "K193109"`, `productCode`, `decisionDate` |
-| `src/data/products/image-synthesis/philips-mrcat-head-neck.ts` | 55-61 | Add `productCode`, improve notes |
-| `src/data/products/auto-contouring/philips.ts` | 49 | Convert string to object format with proper FDA fields |
+| Field | Current | Updated |
+|-------|---------|---------|
+| `keyFeatures` | "95+ structure models" | "240+ structure models" |
+| `lastRevised` | "2026-01-02" | "2026-01-26" |
 
 ---
 
-## Data Sources
+## Summary
 
-| Product | Source |
-|---------|--------|
-| K182888 (Pelvis) | FDA 510(k) database, referenced in K220813 summary |
-| K193109 (Brain) | FDA 510(k) database, referenced in K220813 summary |
-| Head & Neck Oct 2022 | Applied Radiation Oncology news, Philips press release |
-| Prostate 2015 | Philips official documentation |
-
----
-
-## Technical Notes
-
-- All products already use the structured `regulatory.fda` object format except MRCAT Prostate, which uses a legacy string format
-- The `productCode` field uses FDA product codes: LLZ (Radiological Image Processing System) and MUJ (Software, Treatment Planning)
-- Updates follow the existing TypeScript interface in `productDetails.d.ts` which supports `clearanceNumber`, `productCode`, and `decisionDate` fields
+Replace the entire `supportedStructures` array (lines 22-100) with the expanded list containing ~245 individually defined structures, with vertebrae (C1-C7, T01-T12, L1-L5) and ribs each on separate rows for accurate counting.
