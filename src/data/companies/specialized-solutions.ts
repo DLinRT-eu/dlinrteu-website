@@ -35,11 +35,19 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "description": "AI company focused on enhancing medical imaging efficiency and quality.",
     "website": "https://airsmed.com/",
     "productIds": [
-      "airs-swiftmr", 
-      "airs-ct-clarity"
+      "airs-swiftmr"
     ],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/airs.jpg"
+  },
+  {
+    "id": "claripi",
+    "name": "ClariPi",
+    "description": "Korean AI medical imaging company specializing in CT image denoising and dose reduction solutions, founded in 2015 with roots at Seoul National University.",
+    "website": "https://claripi.com/",
+    "productIds": ["claripi-clarict-ai"],
+    "category": "Specialized Solutions",
+    "logoUrl": "/logos/claripi.png"
   },
   {
     "id": "subtle-medical",
