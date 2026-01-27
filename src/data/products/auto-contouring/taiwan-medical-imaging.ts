@@ -42,8 +42,8 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     technicalSpecifications: {
-      population: "Adult patients with brain metastases",
-      input: ["MRI T1+Gd"],
+      population: "Adult patients with brain metastases. Intended for lesions with diameter >= 10mm on contrast-enhanced T1-weighted MRI.",
+      input: ["MRI T1+Gd (Gadolinium contrast-enhanced)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
       outputFormat: ["DICOM-RTSTRUCT"]
@@ -62,21 +62,24 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
       },
       fda: {
         status: "510k_cleared",
+        class: "II",
+        clearanceNumber: "K250427",
+        productCode: "QKB, QIH",
+        regulationNumber: "21 CFR 892.2050",
         decisionDate: "2025-05-28",
-        notes: "ID=K250427, URL: https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf"
+        notes: "Cleared for automatic detection and segmentation of brain metastases on contrast-enhanced T1-weighted MRI images. Device provides contour output for radiation therapy planning."
       },
-      intendedUseStatement: "For use in radiation therapy planning to assist in the segmentation and longitudinal monitoring of brain metastases on MRI images."
+      intendedUseStatement: "DeepMets is a software-only device intended to be used for automatic detection, delineation, and longitudinal tracking of brain metastases on contrast-enhanced T1-weighted MRI images. The software provides contour output compatible with radiation therapy treatment planning systems."
     },
     market: {
       onMarketSince: "2022",
-      distributionChannels: ["Direct sales", "Regional partners"],
-
-},
+      distributionChannels: ["Direct sales", "Regional partners"]
+    },
     version: "-",
     releaseDate: "2022-09-01",
-    lastUpdated: "2026-01-26",
-    lastRevised: "2026-01-26",
+    lastUpdated: "2026-01-27",
+    lastRevised: "2026-01-27",
     companyRevisionDate: "0000-00-00",
-    source: "Automatically retrieved"
+    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Taiwan Medical Imaging official website"
   }
 ];
