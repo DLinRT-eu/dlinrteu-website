@@ -4,7 +4,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
   {
     id: "airs-swiftmr",
-    name: "Medical SwiftMR",
+    name: "SwiftMR",
     company: "AIRS Medical",
     category: "Image Enhancement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/airs-medical.ts",
@@ -13,11 +13,10 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/airs.jpg",
     companyUrl: "https://airsmed.com/",
     productUrl: "https://airsmed.com/swiftmr/",
-    anatomicalLocation: ["Brain", "Spine"],
+    anatomicalLocation: ["Whole body"],
     modality: "MRI",
-    diseaseTargeted: ["Neurological disorders", "Spine pathologies"],
+    diseaseTargeted: ["Neurological disorders", "Spine pathologies", "Musculoskeletal conditions"],
     releaseDate: "2021-05-15",
-    version: "2.1",
     keyFeatures: [
       "Deep learning MRI enhancement",
       "Super-resolution technology",
@@ -54,12 +53,19 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         productCode: "LLZ",
         decisionDate: "2023-10-27"
       },
-      intendedUseStatement: "Intended for enhancing magnetic resonance images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
+      intendedUseStatement: "SwiftMR is a stand-alone software solution intended to be used for acceptance, enhancement and transfer of all body parts MR images in DICOM format. It can be used for noise reduction and increasing image sharpness for MR images. SwiftMR is not intended for use on mobile devices."
     },
     market: {
       onMarketSince: "2021",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for SwiftMR",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230854.pdf"
+      }
+    ],
     clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images",
     lastUpdated: "2025-02-10",
     lastRevised: "2026-01-02",
