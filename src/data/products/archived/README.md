@@ -8,6 +8,7 @@ main website but are preserved for potential future use.
 These products do not meet the platform's criteria:
 - They do not use AI or deep learning
 - They are not used to monitor or implement AI-based solutions
+- They lack verifiable regulatory documentation (e.g., specific FDA clearance numbers)
 
 ## Products in Archive
 
@@ -16,6 +17,7 @@ These products do not meet the platform's criteria:
 | Marie Upright Patient Positioner | Leo Cancer Care | Hardware patient positioner |
 | SCINTIX Biology-Guided Radiotherapy | RefleXion Medical | Signal processing, not DL |
 | RefleXion X2 Platform | RefleXion Medical | Hardware platform |
+| Deep Learning Image Processing for CT | GE Healthcare | Unverified - no specific FDA clearance number, functionality covered by TrueFidelity Pro (K183202) |
 
 ## Restoration
 
