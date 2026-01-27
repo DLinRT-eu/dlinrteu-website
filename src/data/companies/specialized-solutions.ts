@@ -57,7 +57,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "productIds": [
       "subtle-mr", 
       "subtle-pet",
-      "subtle-gad"
+      "aimify",
+      "subtle-hd"
     ],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/SubtleMedical.jpg"
