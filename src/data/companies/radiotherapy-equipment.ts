@@ -82,27 +82,4 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/Viewray.png"
   },
-  {
-    "id": "reflexion-medical",
-    "name": "RefleXion Medical",
-    "description": "Theranostic oncology company commercializing SCINTIX biology-guided radiotherapy (BgRT), using PET emissions to autonomously guide radiation delivery in real-time.",
-    "website": "https://www.reflexion.com/",
-    "productIds": [
-      "reflexion-scintix",
-      "reflexion-x2"
-    ],
-    "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/Reflexion.png"
-  },
-  {
-    "id": "leo-cancer-care",
-    "name": "Leo Cancer Care",
-    "description": "Developer of upright radiotherapy solutions, enabling patients to receive treatment while seated or standing, with integrated CT imaging for adaptive therapy.",
-    "website": "https://www.leocancercare.com/",
-    "productIds": [
-      "leo-marie"
-    ],
-    "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/LeoCancerCare.jpg"
-  }
 ];
