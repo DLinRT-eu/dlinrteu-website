@@ -16,7 +16,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "name": "SyntheticMR",
     "description": "Pioneering medical imaging technology company specializing in quantitative MRI and synthetic image generation.",
     "website": "https://syntheticmr.com/",
-    "productIds": ["syntheticmr-neuro"],
+    "productIds": ["syntheticmr-neuro", "syntheticmr-spine"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/syntheticMRI.png"
   },
