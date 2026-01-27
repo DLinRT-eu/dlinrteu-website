@@ -1,138 +1,109 @@
 
 
-# Plan: Archive Non-AI Products to Separate Folder
+# Plan: Unify Company Count Logic Across Homepage and Companies Page
 
-## Overview
+## Problem Identified
 
-Move three non-AI product entries to an archived folder so they are not displayed on the website, but preserved for potential future use. These products don't use AI and are not used to monitor or implement AI-based solutions.
+The homepage and companies page use different logic to count companies:
 
-## Products to Archive
+| Page | Current Logic | Result |
+|------|---------------|--------|
+| Homepage (`Index.tsx`) | `dataService.getAllCompanies().length` | Counts ALL companies (including those with 0 products) |
+| Companies page (`Companies.tsx`) | Filters companies where `productCount > 0` | Only counts companies with active products |
 
-| Product | File | Reason |
-|---------|------|--------|
-| Leo Cancer Care Marie | `leo-cancer-care.ts` | Hardware patient positioner, not AI software |
-| RefleXion SCINTIX | `reflexion.ts` | Real-time PET signal processing, not deep learning |
-| RefleXion X2 | `reflexion.ts` | Hardware platform with signal processing |
+This causes a discrepancy where archived companies (RefleXion Medical, Leo Cancer Care) are still counted on the homepage but not displayed on the companies page.
+
+## Solution
+
+Create a single source of truth in DataService for counting companies with active products, then use it consistently across both pages.
 
 ## Implementation Steps
 
-### Step 1: Create Archive Folder Structure
+### Step 1: Add New Method to DataService
 
-Create a new folder: `src/data/products/archived/`
+Add a method `getActiveCompanies()` that returns only companies with at least one regulatory-approved product:
 
-This folder will contain:
-- `leo-cancer-care.ts` (moved from tracking/)
-- `reflexion.ts` (moved from tracking/)
-- `index.ts` (for organized exports, not imported into main products)
-- `README.md` (documentation explaining purpose)
-
-### Step 2: Move Product Files
-
-| Source | Destination |
-|--------|-------------|
-| `src/data/products/tracking/leo-cancer-care.ts` | `src/data/products/archived/leo-cancer-care.ts` |
-| `src/data/products/tracking/reflexion.ts` | `src/data/products/archived/reflexion.ts` |
-
-### Step 3: Update Tracking Index
-
-Modify `src/data/products/tracking/index.ts`:
-
-```text
-Before:
-import { ACCURAY_PRODUCTS } from "./accuray";
-import { REFLEXION_PRODUCTS } from "./reflexion";
-import { LEO_CANCER_CARE_PRODUCTS } from "./leo-cancer-care";
-
-export const TRACKING_PRODUCTS: ProductDetails[] = [
-  ...ACCURAY_PRODUCTS,
-  ...REFLEXION_PRODUCTS,
-  ...LEO_CANCER_CARE_PRODUCTS
-];
-
-After:
-import { ACCURAY_PRODUCTS } from "./accuray";
-
-export const TRACKING_PRODUCTS: ProductDetails[] = [
-  ...ACCURAY_PRODUCTS
-];
-```
-
-### Step 4: Create Archive Index and README
-
-**`src/data/products/archived/index.ts`**:
 ```typescript
-// Archived products - not displayed on website
-// These products are preserved for potential future use
+// In src/services/DataService.ts
 
-import { ProductDetails } from "@/types/productDetails";
-import { LEO_CANCER_CARE_PRODUCTS } from "./leo-cancer-care";
-import { REFLEXION_PRODUCTS } from "./reflexion";
-
-// NOT exported to main products - kept for reference only
-export const ARCHIVED_PRODUCTS: ProductDetails[] = [
-  ...LEO_CANCER_CARE_PRODUCTS,
-  ...REFLEXION_PRODUCTS
-];
+/**
+ * Get only companies that have at least one active (regulatory-approved) product
+ * This is the single source of truth for company counts across the platform
+ */
+getActiveCompanies(): CompanyDetails[] {
+  return COMPANIES.filter(company => {
+    const activeProducts = ALL_PRODUCTS.filter(product => 
+      company.productIds.includes(product.id || '') && 
+      hasRegulatoryApproval(product)
+    );
+    return activeProducts.length > 0;
+  });
+}
 ```
 
-**`src/data/products/archived/README.md`**:
-```markdown
-# Archived Products
+### Step 2: Update Homepage to Use New Method
 
-This folder contains product entries that have been removed from the 
-main website but are preserved for potential future use.
+Modify `src/pages/Index.tsx` to use the new method:
 
-## Why Archived?
+```typescript
+// Before (line 48):
+const companies = dataService.getAllCompanies();
 
-These products do not meet the platform's criteria:
-- They do not use AI or deep learning
-- They are not used to monitor or implement AI-based solutions
-
-## Products in Archive
-
-| Product | Company | Reason |
-|---------|---------|--------|
-| Marie Upright Patient Positioner | Leo Cancer Care | Hardware patient positioner |
-| SCINTIX Biology-Guided Radiotherapy | RefleXion Medical | Signal processing, not DL |
-| RefleXion X2 Platform | RefleXion Medical | Hardware platform |
-
-## Restoration
-
-To restore these products to the website:
-1. Move the relevant `.ts` file back to the appropriate category folder
-2. Update the category's `index.ts` to import and include the products
-3. Update `src/data/products/archived/index.ts` to remove the import
-
-Last updated: 2026-01-27
+// After:
+const companies = dataService.getActiveCompanies();
 ```
 
-## Files to Create
+This ensures the homepage count matches the companies page count.
 
-| File | Purpose |
-|------|---------|
-| `src/data/products/archived/leo-cancer-care.ts` | Moved from tracking/ |
-| `src/data/products/archived/reflexion.ts` | Moved from tracking/ |
-| `src/data/products/archived/index.ts` | Organized exports (not imported into main) |
-| `src/data/products/archived/README.md` | Documentation |
+### Step 3: Refactor Companies Page (Optional Cleanup)
+
+Update `src/pages/Companies.tsx` to also use the new method for consistency:
+
+```typescript
+// Before (lines 27-38):
+const companies = useMemo(() => {
+  return dataService.getAllCompanies()
+    .map(company => {...})
+    .filter(company => company.productCount > 0);
+}, []);
+
+// After:
+const companies = useMemo(() => {
+  return dataService.getActiveCompanies()
+    .map(company => {
+      const companyProducts = dataService.getProductsByCompany(company.id);
+      return {
+        ...company,
+        products: companyProducts,
+        productCount: companyProducts.length
+      };
+    });
+  // No need to filter - getActiveCompanies() already excludes empty companies
+}, []);
+```
 
 ## Files to Modify
 
 | File | Change |
 |------|--------|
-| `src/data/products/tracking/index.ts` | Remove imports for RefleXion and Leo Cancer Care |
+| `src/services/DataService.ts` | Add `getActiveCompanies()` method |
+| `src/pages/Index.tsx` | Change `getAllCompanies()` to `getActiveCompanies()` |
+| `src/pages/Companies.tsx` | Use `getActiveCompanies()` and remove redundant filter |
 
-## Files to Delete
-
-| File | Reason |
-|------|--------|
-| `src/data/products/tracking/leo-cancer-care.ts` | Moved to archived/ |
-| `src/data/products/tracking/reflexion.ts` | Moved to archived/ |
-
-## Result
+## Expected Result
 
 After implementation:
-- These 3 products will no longer appear on the website
-- Product data is preserved in `src/data/products/archived/`
-- Clear documentation explains why they were archived and how to restore them
-- The tracking category will only contain Accuray Synchrony (the AI-powered product)
+- Homepage will show **39 companies** (matching the companies page)
+- Both pages use the same `getActiveCompanies()` method
+- Future company archiving will automatically update counts everywhere
+- Single source of truth for "active companies" definition
+
+## Technical Details
+
+The new `getActiveCompanies()` method:
+1. Filters the `COMPANIES` array
+2. For each company, checks if any of its `productIds` have products that pass `hasRegulatoryApproval()`
+3. Returns only companies where at least one product passes this check
+
+This ensures consistency with how products are filtered elsewhere in the codebase.
 
