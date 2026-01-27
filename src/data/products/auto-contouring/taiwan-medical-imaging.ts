@@ -79,7 +79,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     releaseDate: "2022-09-01",
     lastUpdated: "2026-01-27",
     lastRevised: "2026-01-27",
-    companyRevisionDate: "0000-00-00",
+    companyRevisionDate: "",
     source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Taiwan Medical Imaging official website"
   }
 ];
