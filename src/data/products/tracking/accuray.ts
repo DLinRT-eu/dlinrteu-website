@@ -6,7 +6,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     name: "Synchrony",
     company: "Accuray",
     category: "Tracking",
-    description: "Accuray has provided a solution called Synchrony, that allows tumor motion to be corrected during radiation therapy delivery. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life.",
+    description: "Accuray has provided a solution called Synchrony, that allows tumor motion to be corrected during radiation therapy delivery. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life. Uses patient-specific AI model building for motion prediction.",
+    usesAI: true,
     features: [
       "Real-time motion synchronization",
       "Patient-specific AI model building",
