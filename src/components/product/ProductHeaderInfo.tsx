@@ -50,14 +50,21 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
   
   const logoSrc = generateLogoUrl();
   
+  // Helper to check if a date string is valid
+  const isValidDate = (dateStr: string | undefined): boolean => {
+    if (!dateStr || dateStr === "0000-00-00" || dateStr.trim() === "") return false;
+    const date = new Date(dateStr);
+    return !isNaN(date.getTime());
+  };
+
   // Check if product has been revised by company
-  const hasCompanyRevision = !!product.companyRevisionDate;
+  const hasCompanyRevision = isValidDate(product.companyRevisionDate);
   const isRecentCompanyRevision = hasCompanyRevision && 
-    new Date().getTime() - new Date(product.companyRevisionDate).getTime() < 6 * 30 * 24 * 60 * 60 * 1000;
+    new Date().getTime() - new Date(product.companyRevisionDate!).getTime() < 6 * 30 * 24 * 60 * 60 * 1000;
   
   // Format company revision date
-  const formattedCompanyRevisionDate = product.companyRevisionDate 
-    ? new Date(product.companyRevisionDate).toISOString().split('T')[0]
+  const formattedCompanyRevisionDate = hasCompanyRevision
+    ? new Date(product.companyRevisionDate!).toISOString().split('T')[0]
     : null;
   
   // Check if revision is recent (less than 6 months)

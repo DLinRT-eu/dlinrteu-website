@@ -18,8 +18,9 @@ const formatField = (value: any): string => {
 
 // Format date to YYYY-MM-DD
 const formatDate = (dateString: string | undefined): string => {
-  if (!dateString) return "-";
+  if (!dateString || dateString === "0000-00-00" || dateString.trim() === "") return "-";
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "-";
   return date.toISOString().split('T')[0];
 };
 
