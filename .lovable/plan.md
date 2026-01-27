@@ -1,93 +1,96 @@
 
 
-# Plan: Revise Product Regulatory Data
+# Plan: Revise Platform Products - MedLever and GE Healthcare iRT
 
-## Summary of Required Updates
+## Summary of Findings
 
-Based on FDA 510(k) database research and official sources, the following products need updates:
+Based on FDA database research and official documentation, both products require regulatory updates:
 
 | Product | Issue | Required Fix |
 |---------|-------|--------------|
-| **PixelShine** | Intended use statement is summarized | Update to official FDA wording |
-| **Medical SwiftMR** | Incorrect name format, anatomical location incomplete | Fix name to "SwiftMR", expand to "All body parts" per FDA |
-| **uCS-AI** | Missing FDA clearance details, unverified version | Add FDA K number if available or mark as CE-only, remove unverified version |
-| **AiCE CT** | Intended use not from FDA statement | Update with verified intended use |
+| **MedLever Radiation Oncology Work Management** | FDA status incorrectly listed as "510(k) Cleared" | Update to Non-Device-MDDS (exempt workflow software) |
+| **GE Healthcare iRT** | Missing specific clearance numbers | Add K230082 reference for integrated auto-segmentation component |
 
 ---
 
-## 1. PixelShine (AlgoMedica)
-
-### Current vs. FDA-Verified Data
-
-| Field | Current Value | FDA-Verified (K161625) |
-|-------|---------------|------------------------|
-| Intended Use | "Intended for use in de-noising CT datasets to improve image quality at reduced radiation dose to support clinical interpretation." | "The AlgoMedica PixelShine System is intended for networking, communication, processing and enhancement of CT images in DICOM format. It is specifically indicated for assisting professional radiologists and specialists in reaching their own diagnosis. The device processing is not effective for lesion, mass or abnormalities of sizes less than 3.0 mm. The AlgoMedica PixelShine is not intended for use with or for diagnostic interpretation of mammography images." |
-| Version | Not specified | Leave empty (no official version documented) |
-
-### Changes Required
-- Update `intendedUseStatement` with official FDA text from K161625
-- Remove `version` field (none documented)
-
----
-
-## 2. SwiftMR (AIRS Medical)
-
-### Current vs. FDA-Verified Data
-
-| Field | Current Value | FDA-Verified (K230854) |
-|-------|---------------|------------------------|
-| Name | "Medical SwiftMR" | "SwiftMR" |
-| Anatomical Location | ["Brain", "Spine"] | "All body parts" |
-| Intended Use | "Intended for enhancing magnetic resonance images to improve image quality through noise reduction and detail enhancement to support clinical interpretation." | "SwiftMR is a stand-alone software solution intended to be used for acceptance, enhancement and transfer of all body parts MR images in DICOM format. It can be used for noise reduction and increasing image sharpness for MR images. SwiftMR is not intended for use on mobile devices." |
-| Version | "2.1" | Leave empty (not in FDA documentation) |
-
-### Changes Required
-- Change `name` from "Medical SwiftMR" to "SwiftMR"
-- Update `anatomicalLocation` to ["Whole body"] per FDA "all body parts" indication
-- Update `intendedUseStatement` with official FDA text
-- Remove `version` field (unverified)
-- Add evidence entry with FDA 510(k) document link
-
----
-
-## 3. uCS-AI (United Imaging)
-
-### Current vs. Verified Data
-
-| Field | Current Value | Issue |
-|-------|---------------|-------|
-| FDA clearance | "Cleared as part of United Imaging uRT radiotherapy system clearances" | No standalone K number found |
-| Version | "1.2" | Unverified |
-| Intended Use | Generic statement | Not from official FDA source |
+## 1. MedLever: Radiation Oncology Work Management
 
 ### Research Finding
-No standalone FDA 510(k) clearance was found for uCS-AI as a separate product. It appears to be cleared only as an integrated feature within United Imaging's radiotherapy systems (e.g., uRT-linac). The product has CE marking under MDR.
 
-### Changes Required
-- Remove unverified `version` field
-- Clarify FDA status as "Part of system clearance" with specific system reference
-- Keep CE MDR certification as primary regulatory status
-- Fix syntax issue (empty line at line 60)
-- Update intended use to reflect integrated system use
+MedLever's platform is classified as **Non-Device-MDDS** (Medical Device Data System) per FDA's September 2022 guidance. Software solely intended to transfer, store, convert formats, and display medical device data without altering it is **not considered a medical device** and does not require 510(k) clearance.
+
+The current database incorrectly states:
+- `status: "510(k) Cleared"`
+- `class: "Class II"`
+
+This is inaccurate based on the product's actual function as an administrative workflow and documentation orchestration tool.
+
+### Current vs. Corrected Data
+
+| Field | Current Value | Corrected Value |
+|-------|---------------|-----------------|
+| FDA status | "510(k) Cleared" | "Non-Device-MDDS (Exempt)" |
+| FDA class | "Class II" | Remove (not applicable) |
+| FDA type | "510(k)" | "MDDS Exempt" |
+| certification | "FDA" | "Non-Regulated" |
+| version | "1.0" | Remove (unverified) |
+| Intended Use | Generic summary | Updated based on official product description |
+| usesAI | Not specified | Add `usesAI: false` (workflow tool, not AI-powered) |
+
+### Corrected Regulatory Section
+
+```text
+regulatory: {
+  fda: {
+    status: "Non-Device-MDDS (Exempt)",
+    type: "MDDS Exempt",
+    notes: "Per FDA's 2022 guidance on Medical Device Data Systems, workflow management software that transfers, stores, and displays clinical data without diagnostic modification is classified as Non-Device-MDDS and exempt from 510(k) requirements."
+  },
+  intendedUseStatement: "A vendor-independent workflow automation and documentation solution designed to coordinate the full patient care cycle (simulation, planning, treatment, and QA) in radiation oncology. The platform simplifies clinical and administrative activities, automates document generation, and provides real-time visibility through bidirectional synchronization with Oncology Information Systems (OIS)."
+}
+```
 
 ---
 
-## 4. AiCE CT (Canon Medical Systems)
+## 2. GE Healthcare: Intelligent Radiation Therapy (iRT)
 
-### Current vs. FDA-Verified Data
+### Research Finding
 
-| Field | Current Value | FDA-Verified (K181862) |
-|-------|---------------|------------------------|
-| Intended Use | "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose while maintaining diagnostic confidence." | From FDA K181862: "The Aquilion ONE / GENESIS Edition is intended to produce cross-sectional images of the body by computer reconstruction of X-ray transmission data. AiCE is the deep learning-based reconstruction option that provides noise reduction while preserving image texture." |
-| Version | "2.0" | Not verified in FDA docs |
+The iRT platform is a **Radiation Therapy Collaboration System (RTCS)** that orchestrates various cleared components. It does not have a single standalone 510(k) for the "iRT" brand; instead, it integrates specific cleared software modules:
 
-### Note on K181862
-K181862 is the clearance for the Aquilion ONE / GENESIS Edition CT system, of which AiCE is a reconstruction option. The intended use in FDA documentation refers to the system rather than AiCE specifically. The current statement is acceptable as a summary but should note this is for the integrated feature.
+- **K230082** (May 4, 2023): Auto Segmentation component
+- **K213717**: MR Contour DL
+- Third-party integrations: MVision Contour+ (K241490), MIM Contour ProtégéAI+
 
-### Changes Required
-- Remove unverified `version` field
-- Add note to FDA section clarifying AiCE is an integrated reconstruction option
-- Keep current intended use (reasonable summary for the feature)
+The platform itself functions as a workflow orchestration layer.
+
+### Current vs. Corrected Data
+
+| Field | Current Value | Corrected Value |
+|-------|---------------|-----------------|
+| FDA notes | "Specific clearance number pending verification" | Add K230082, K213717 as integrated component clearances |
+| version | "1.0" | Remove (unverified) |
+| Intended Use | Current statement is reasonable | Keep with minor refinement based on official RTCS description |
+
+### Corrected Regulatory Section
+
+```text
+regulatory: {
+  ce: {
+    status: "CE Marked",
+    class: "IIb",
+    type: "MDR",
+    regulation: "MDR (EU 2017/745)"
+  },
+  fda: {
+    status: "510(k) Cleared (via integrated components)",
+    class: "Class II",
+    type: "510(k)",
+    notes: "The iRT platform orchestrates multiple cleared clinical modules. Key component clearances include K230082 (Auto Segmentation, May 2023), K213717 (MR Contour DL), and integrates third-party cleared devices including MVision Contour+ (K241490) and MIM Contour ProtégéAI+."
+  },
+  intendedUseStatement: "A fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management. Designed to integrate AI-supported auto-segmentation, intelligent resource scheduling, analytics reporting, and vendor-neutral connectivity with hospital information systems (OIS, TPS, EMR, QA, PACS) to optimize radiation therapy delivery, reduce treatment delays, and improve departmental efficiency."
+}
+```
 
 ---
 
@@ -95,70 +98,46 @@ K181862 is the clearance for the Aquilion ONE / GENESIS Edition CT system, of wh
 
 | File | Changes |
 |------|---------|
-| `src/data/products/image-enhancement/algomedica.ts` | Update intended use statement |
-| `src/data/products/image-enhancement/airs-medical.ts` | Change name, anatomical location, intended use, remove version |
-| `src/data/products/image-enhancement/united-imaging.ts` | Remove version, fix syntax, clarify FDA status |
-| `src/data/products/reconstruction/canon.ts` | Remove version, add FDA notes |
+| `src/data/products/platform/medlever.ts` | Update FDA status to Non-Device-MDDS, remove version, update intended use, add usesAI: false |
+| `src/data/products/platform/ge-healthcare.ts` | Update FDA notes with component clearances, remove version, refine intended use |
 
 ---
 
 ## Technical Details
 
-### PixelShine (algomedica.ts)
-```text
-Line 56-57: Update intendedUseStatement to:
-"The AlgoMedica PixelShine System is intended for networking, communication, processing and enhancement of CT images in DICOM format. It is specifically indicated for assisting professional radiologists and specialists in reaching their own diagnosis. The device processing is not effective for lesion, mass or abnormalities of sizes less than 3.0 mm. The AlgoMedica PixelShine is not intended for use with or for diagnostic interpretation of mammography images."
+### MedLever (medlever.ts)
 
-Add evidence entry with FDA 510(k) link:
-link: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf"
-```
+| Line | Current | Change To |
+|------|---------|-----------|
+| 19 | `certification: "FDA"` | `certification: "Non-Regulated"` |
+| 54-58 | FDA object with "510(k) Cleared" | FDA object with "Non-Device-MDDS (Exempt)" |
+| 60 | Generic intended use | Official product description |
+| 66 | `version: "1.0"` | Remove field |
+| New | - | Add `usesAI: false` |
 
-### SwiftMR (airs-medical.ts)
-```text
-Line 7: Change name to "SwiftMR"
-Line 16: Change anatomicalLocation to ["Whole body"]
-Line 20: Remove version field
-Line 57: Update intendedUseStatement to:
-"SwiftMR is a stand-alone software solution intended to be used for acceptance, enhancement and transfer of all body parts MR images in DICOM format. It can be used for noise reduction and increasing image sharpness for MR images. SwiftMR is not intended for use on mobile devices."
+### GE Healthcare iRT (ge-healthcare.ts)
 
-Add evidence entry:
-{
-  type: "FDA 510(k) Summary",
-  description: "FDA 510(k) clearance documentation for SwiftMR",
-  link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230854.pdf"
-}
-```
-
-### uCS-AI (united-imaging.ts)
-```text
-Line 21: Remove version field
-Lines 49-54: Update FDA section:
-fda: {
-  status: "Part of system clearance",
-  class: "Class II",
-  type: "510(k)",
-  notes: "uCS-AI is cleared as an integrated feature of United Imaging uRT radiotherapy systems. No standalone 510(k) clearance exists for uCS-AI as a separate device."
-}
-
-Line 55: Update intendedUseStatement to reflect integrated system use
-Line 60: Remove empty line in market object
-```
-
-### AiCE CT (canon.ts)
-```text
-Line 21: Remove version field
-Lines 49-57: Add notes field to FDA section:
-notes: "K181862 is the 510(k) clearance for the Aquilion ONE / GENESIS Edition CT system. AiCE is the deep learning reconstruction option within this system."
-```
+| Line | Current | Change To |
+|------|---------|-----------|
+| 67-72 | FDA notes "pending verification" | FDA notes with K230082, K213717 references |
+| 73 | Intended use statement | Refined RTCS description |
+| 79 | `version: "1.0"` | Remove field |
 
 ---
 
 ## Summary of Changes
 
-| Product | Name Change | Anatomical | Version | Intended Use | FDA Status |
-|---------|-------------|------------|---------|--------------|------------|
-| PixelShine | No | No | Keep empty | Updated to FDA | Verified K161625 |
-| SwiftMR | "Medical SwiftMR" → "SwiftMR" | Brain/Spine → Whole body | Remove 2.1 | Updated to FDA | Verified K230854 |
-| uCS-AI | No | No | Remove 1.2 | Clarified | Part of system |
-| AiCE CT | No | No | Remove 2.0 | Minor clarification | Verified K181862 |
+| Product | Certification | Version | Intended Use | FDA Status |
+|---------|--------------|---------|--------------|------------|
+| MedLever | FDA → Non-Regulated | Remove "1.0" | Updated to official | 510(k) Cleared → Non-Device-MDDS (Exempt) |
+| GE iRT | CE & FDA (keep) | Remove "1.0" | Refined | Add K230082, K213717 component references |
+
+---
+
+## Important Classification Note
+
+**MedLever** should have `usesAI: false` added because:
+- It is a workflow orchestration tool, not an AI-powered medical device
+- The platform provides workflow automation and documentation but does not use AI/ML for clinical decision-making
+- This aligns with the platform's distinction between "AI Products" and "QA Tools" in the UI
 
