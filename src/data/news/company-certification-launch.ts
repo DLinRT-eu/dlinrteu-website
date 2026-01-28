@@ -68,7 +68,7 @@ If you represent a medical device company with products listed on DLinRT.eu, we 
 2. Verify your products during the upcoming certification round
 3. Keep your product information up to date
 
-Visit our [Contact page](/support) to begin the registration process.
+Visit our [Company Certification Guide](/company/certification) to learn more and begin the registration process.
 
 ### For the Community
 The certification program works alongside our independent reviewer community. Together, we ensure that DLinRT.eu remains the most trusted and accurate resource for AI in radiotherapy.
