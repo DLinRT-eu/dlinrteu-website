@@ -35,10 +35,10 @@ const EvidenceImpactMatrix = ({
   const getZoneDescription = (rigor: string, impact: string): { common: boolean; description: string } => {
     // Common zones for RT AI products
     const commonZones: Record<string, string> = {
-      "E1-I0": "New products with technical validation",
-      "E1-I1": "Early-stage performance studies",
-      "E2-I1": "Mature auto-contouring products",
-      "E2-I2": "Workflow-validated tools",
+      "E1-I0": "New products with feasibility demonstrated only",
+      "E1-I1": "QA tools with preliminary validation",
+      "E2-I1": "Mature QA/monitoring tools",
+      "E2-I2": "Workflow-validated tools with time savings",
       "E1-I2": "Single-center workflow studies",
     };
 
@@ -235,8 +235,9 @@ const EvidenceImpactMatrix = ({
 
         {/* Interpretation note */}
         <p className="mt-4 text-xs text-muted-foreground">
-          Most radiotherapy AI products occupy the E1-E2/I0-I2 zone. Higher rigor and higher impact 
-          require progressively more investment in clinical validation. Hover over cells for details.
+          Most radiotherapy AI products occupy the E1-E2/I1-I2 zone (QA and Workflow impact). 
+          I0 indicates no benefit demonstrated yet; I1 recognizes QA tools that ensure safe AI use. 
+          Hover over cells for details.
         </p>
       </CardContent>
     </Card>
