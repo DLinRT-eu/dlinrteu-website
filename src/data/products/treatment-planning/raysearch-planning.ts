@@ -64,9 +64,9 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "Structure sets", "Beam configuration", "Prescriptions"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Predicted dose distribution", "RT plan", "RT dose"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native RayStation integration"],

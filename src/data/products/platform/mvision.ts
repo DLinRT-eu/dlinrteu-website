@@ -95,9 +95,9 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "MRI", "CBCT", "Structure sets", "Clinical goals", "Contrast-enhanced CT"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Synthetic CT images", "Propagated contours", "Treatment plans", "Dose distributions"],
-      outputFormat: ["DICOM", "DICOM-RT"]
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["PACS", "TPS (Varian, Elekta, RaySearch)", "OIS", "Treatment Planning Systems"],

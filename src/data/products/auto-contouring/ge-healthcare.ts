@@ -30,7 +30,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native integration with GE systems"],

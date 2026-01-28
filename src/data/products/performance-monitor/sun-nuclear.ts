@@ -36,7 +36,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM-RTSTRUCT"],
       output: ["QA reports", "Quality metrics", "Trend analysis"],
       outputFormat: ["PDF", "Dashboard", "CSV"]
     },

@@ -105,7 +105,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Multi-vendor TPS integration", "PACS integration"],

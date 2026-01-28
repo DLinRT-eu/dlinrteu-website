@@ -30,7 +30,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "Structure sets", "Treatment plans"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Treatment plans", "RT Dose", "Plan quality metrics"],
       outputFormat: ["DICOM RT-PLAN", "DICOM RT-DOSE", "PDF"]
     },
