@@ -1,8 +1,8 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { ExternalLink } from "lucide-react";
+import { EditableField, useProductEdit } from "@/components/product-editor";
 
 interface GeneralInformationProps {
   product: ProductDetails;
@@ -25,8 +25,13 @@ const formatDate = (dateString: string | undefined): string => {
 };
 
 const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
+  const { isEditMode, editedProduct } = useProductEdit();
+  
+  // Use edited product when in edit mode, otherwise use the original
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  
   // Set default source if not specified
-  const sourceInfo = product.source || "automatically retrieved";
+  const sourceInfo = displayProduct.source || "automatically retrieved";
   
   return (
     <Card>
@@ -37,63 +42,127 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <p className="text-sm font-medium">Company:</p>
-            <p className="text-gray-500">{formatField(product.company)}</p>
+            <EditableField
+              fieldPath="company"
+              value={displayProduct.company}
+              type="text"
+              placeholder="Company name"
+            >
+              <p className="text-muted-foreground">{formatField(displayProduct.company)}</p>
+            </EditableField>
           </div>
-          {product.developedBy && (
+          
+          {displayProduct.developedBy && (
             <div>
               <p className="text-sm font-medium">Developed By:</p>
-              <div className="text-gray-500">
-                {product.developedBy.companyUrl ? (
+              <div className="text-muted-foreground">
+                {displayProduct.developedBy.companyUrl ? (
                   <a 
-                    href={product.developedBy.companyUrl} 
+                    href={displayProduct.developedBy.companyUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline inline-flex items-center gap-1"
+                    className="text-primary hover:underline inline-flex items-center gap-1"
                   >
-                    {product.developedBy.company}
+                    {displayProduct.developedBy.company}
                     <ExternalLink className="h-3 w-3" />
                   </a>
                 ) : (
-                  <span>{product.developedBy.company}</span>
+                  <span>{displayProduct.developedBy.company}</span>
                 )}
-                {product.developedBy.relationship && (
-                  <span className="text-xs text-gray-400 ml-2">
-                    ({product.developedBy.relationship})
+                {displayProduct.developedBy.relationship && (
+                  <span className="text-xs text-muted-foreground ml-2">
+                    ({displayProduct.developedBy.relationship})
                   </span>
                 )}
               </div>
             </div>
           )}
+          
           <div>
             <p className="text-sm font-medium">Category:</p>
-            <p className="text-gray-500">{formatField(product.category)}</p>
+            <EditableField
+              fieldPath="category"
+              value={displayProduct.category}
+              type="text"
+              placeholder="Product category"
+            >
+              <p className="text-muted-foreground">{formatField(displayProduct.category)}</p>
+            </EditableField>
           </div>
-          {product.secondaryCategories && product.secondaryCategories.length > 0 && (
+          
+          {displayProduct.secondaryCategories && displayProduct.secondaryCategories.length > 0 && (
             <div>
               <p className="text-sm font-medium">Secondary Categories:</p>
-              <p className="text-gray-500">{product.secondaryCategories.join(", ")}</p>
+              <EditableField
+                fieldPath="secondaryCategories"
+                value={displayProduct.secondaryCategories}
+                type="array"
+                placeholder="Add category"
+              >
+                <p className="text-muted-foreground">{displayProduct.secondaryCategories.join(", ")}</p>
+              </EditableField>
             </div>
           )}
+          
           <div>
             <p className="text-sm font-medium">Release Date:</p>
-            <p className="text-gray-500">{formatDate(product.releaseDate)}</p>
+            <EditableField
+              fieldPath="releaseDate"
+              value={displayProduct.releaseDate}
+              type="date"
+              placeholder="Release date"
+            >
+              <p className="text-muted-foreground">{formatDate(displayProduct.releaseDate)}</p>
+            </EditableField>
           </div>
+          
           <div>
             <p className="text-sm font-medium">Version:</p>
-            <p className="text-gray-500">{formatField(product.version)}</p>
+            <EditableField
+              fieldPath="version"
+              value={displayProduct.version}
+              type="text"
+              placeholder="Version"
+            >
+              <p className="text-muted-foreground">{formatField(displayProduct.version)}</p>
+            </EditableField>
           </div>
+          
           <div>
             <p className="text-sm font-medium">Certification:</p>
-            <p className="text-gray-500">{formatField(product.certification)}</p>
+            <EditableField
+              fieldPath="certification"
+              value={displayProduct.certification}
+              type="text"
+              placeholder="Certification"
+            >
+              <p className="text-muted-foreground">{formatField(displayProduct.certification)}</p>
+            </EditableField>
           </div>
+          
           <div>
             <p className="text-sm font-medium">Data Source:</p>
-            <p className="text-gray-500">{formatField(sourceInfo)}</p>
+            <EditableField
+              fieldPath="source"
+              value={displayProduct.source}
+              type="text"
+              placeholder="Data source"
+            >
+              <p className="text-muted-foreground">{formatField(sourceInfo)}</p>
+            </EditableField>
           </div>
-          {product.companyRevisionDate && (
+          
+          {displayProduct.companyRevisionDate && (
             <div>
               <p className="text-sm font-medium">Revised by Company:</p>
-              <p className="text-gray-500">{formatDate(product.companyRevisionDate)}</p>
+              <EditableField
+                fieldPath="companyRevisionDate"
+                value={displayProduct.companyRevisionDate}
+                type="date"
+                placeholder="Revision date"
+              >
+                <p className="text-muted-foreground">{formatDate(displayProduct.companyRevisionDate)}</p>
+              </EditableField>
             </div>
           )}
         </div>
