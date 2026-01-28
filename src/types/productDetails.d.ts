@@ -79,8 +79,15 @@ export interface ProductDetails extends Product {
   limitations?: string[];
   
   // Evidence level classification (adapted from van Leeuwen et al. 2021)
+  // LEGACY: Single-axis classification - kept for backward compatibility
   evidenceLevel?: "0" | "1t" | "1c" | "2" | "3" | "4" | "5" | "6"; // Highest achieved level
   evidenceLevelNotes?: string; // Justification for the assigned level
+  
+  // NEW: Dual-axis classification (separates rigor from impact)
+  evidenceRigor?: "E0" | "E1" | "E2" | "E3"; // How robust is the evidence methodology?
+  evidenceRigorNotes?: string;
+  clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
+  clinicalImpactNotes?: string;
   
   // Additional compatibility fields
   url?: string;
@@ -128,4 +135,14 @@ export interface ProductDetails extends Product {
   usesAI?: boolean;
   // For Performance Monitor category: describes what AI products it monitors
   monitorsAIProducts?: string[];
+  
+  // New field for dose prediction models (for Treatment Planning products)
+  dosePredictionModels?: Array<{
+    name: string;                    // Model name (e.g., "H&N VMAT")
+    anatomicalSite: string;          // Target anatomy (e.g., "Head & Neck")
+    technique: string;               // Treatment technique (e.g., "VMAT", "PBS")
+    intent?: string;                 // Curative, Palliative, SBRT
+    description?: string;            // Brief description
+    status?: 'approved' | 'investigational';
+  }>;
 }

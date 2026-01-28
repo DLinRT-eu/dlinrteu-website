@@ -648,6 +648,57 @@ export type Database = {
         }
         Relationships: []
       }
+      product_edit_drafts: {
+        Row: {
+          changed_fields: string[]
+          created_at: string
+          created_by: string
+          draft_data: Json
+          edit_summary: string | null
+          github_pr_url: string | null
+          github_synced_at: string | null
+          id: string
+          product_id: string
+          review_feedback: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          changed_fields?: string[]
+          created_at?: string
+          created_by: string
+          draft_data: Json
+          edit_summary?: string | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
+          id?: string
+          product_id: string
+          review_feedback?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          changed_fields?: string[]
+          created_at?: string
+          created_by?: string
+          draft_data?: Json
+          edit_summary?: string | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
+          id?: string
+          product_id?: string
+          review_feedback?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       product_reviews: {
         Row: {
           assigned_at: string | null

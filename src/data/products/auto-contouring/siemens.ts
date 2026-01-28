@@ -22,7 +22,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Deep learning algorithms for CT and MR segmentation",
       "203+ predefined CT structures including lymph nodes",
       "Multi-guideline support (RTOG and clinical guidelines)",
-      "DICOM-RT Structure Set output",
+      "DICOM-RTSTRUCT Structure Set output",
       "Cloud and edge deployment options",
       "Vendor-agnostic CT input support",
       "Integration with Treatment Planning Systems"
@@ -32,7 +32,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       input: ["CT (vendor agnostic)", "MR (Siemens Healthineers scanners)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Clinical findings"],
-      outputFormat: ["DICOM-RT", "Structured reports"]
+      outputFormat: ["DICOM-RTSTRUCT", "Structured reports"]
     },
     technology: {
       integration: ["Native integration with Siemens systems", "PACS integration", "TPS integration"],

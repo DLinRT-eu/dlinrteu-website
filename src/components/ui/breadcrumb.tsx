@@ -37,15 +37,20 @@ const BreadcrumbLink = React.forwardRef<
   React.AnchorHTMLAttributes<HTMLAnchorElement> & {
     asChild?: boolean;
   }
->(({ asChild, className, ...props }, ref) => {
-  const Comp = asChild ? React.Fragment : "a"
+>(({ asChild, className, children, ...props }, ref) => {
+  if (asChild) {
+    // When asChild is true, just render children directly
+    return <>{children}</>;
+  }
   
   return (
-    <Comp
+    <a
       ref={ref}
       className={cn("hover:text-foreground transition-colors", className)}
       {...props}
-    />
+    >
+      {children}
+    </a>
   );
 });
 BreadcrumbLink.displayName = "BreadcrumbLink"

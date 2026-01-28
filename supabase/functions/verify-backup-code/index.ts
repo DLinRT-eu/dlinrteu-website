@@ -151,7 +151,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error in verify-backup-code:', error);
     return new Response(
-      JSON.stringify({ success: false, error: error.message }),
+      JSON.stringify({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }),
       { headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }, status: 400 }
     );
   }

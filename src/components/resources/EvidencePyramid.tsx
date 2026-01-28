@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { EVIDENCE_LEVELS, getEvidenceLevelColor } from "@/data/evidence-levels";
 import { cn } from "@/lib/utils";
 import {
@@ -7,8 +8,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { FlaskConical, Target, ArrowRight } from "lucide-react";
+import EvidenceImpactMatrix from "./EvidenceImpactMatrix";
+
+type ViewMode = "pyramid" | "matrix";
 
 const EvidencePyramid = () => {
+  const [viewMode, setViewMode] = useState<ViewMode>("matrix");
+  
   // Reverse levels so highest (6) is at top
   const pyramidLevels = [...EVIDENCE_LEVELS].reverse();
   
@@ -16,67 +24,108 @@ const EvidencePyramid = () => {
   const widthPercentages = [30, 40, 50, 60, 70, 80, 90, 100];
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <div className="flex flex-col items-center gap-1">
-        {pyramidLevels.map((level, index) => {
-          const colorClasses = getEvidenceLevelColor(level.level);
-          const width = widthPercentages[index];
+    <div className="w-full">
+      {/* View Toggle */}
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <Button
+          variant={viewMode === "matrix" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setViewMode("matrix")}
+          className="gap-2"
+        >
+          <FlaskConical className="h-4 w-4" />
+          <span>×</span>
+          <Target className="h-4 w-4" />
+          Dual-Axis
+        </Button>
+        <Button
+          variant={viewMode === "pyramid" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setViewMode("pyramid")}
+          className="gap-2"
+        >
+          <FlaskConical className="h-4 w-4" />
+          Legacy Pyramid
+        </Button>
+      </div>
+
+      {viewMode === "matrix" ? (
+        <EvidenceImpactMatrix interactive showLabels />
+      ) : (
+        <div className="max-w-2xl mx-auto">
+          <div className="flex flex-col items-center gap-1">
+            {pyramidLevels.map((level, index) => {
+              const colorClasses = getEvidenceLevelColor(level.level);
+              const width = widthPercentages[index];
+              
+              return (
+                <TooltipProvider key={level.level}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div
+                        className={cn(
+                          "flex items-center justify-center py-3 px-4 rounded-sm cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-md border",
+                          colorClasses
+                        )}
+                        style={{ width: `${width}%` }}
+                      >
+                        <div className="flex items-center gap-2 text-center">
+                          <span className="font-bold text-sm sm:text-base">
+                            L{level.level}
+                          </span>
+                          <span className="hidden sm:inline text-xs sm:text-sm font-medium truncate">
+                            {level.name}
+                          </span>
+                        </div>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="right" className="max-w-xs">
+                      <div className="space-y-2">
+                        <p className="font-semibold">{level.name}</p>
+                        <p className="text-xs text-muted-foreground">{level.description}</p>
+                        <div className="text-xs">
+                          <span className="font-medium">RT Example: </span>
+                          {level.radiotherapyExamples[0]}
+                        </div>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              );
+            })}
+          </div>
           
-          return (
-            <TooltipProvider key={level.level}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div
-                    className={cn(
-                      "flex items-center justify-center py-3 px-4 rounded-sm cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-md border",
-                      colorClasses
-                    )}
-                    style={{ width: `${width}%` }}
-                  >
-                    <div className="flex items-center gap-2 text-center">
-                      <span className="font-bold text-sm sm:text-base">
-                        L{level.level}
-                      </span>
-                      <span className="hidden sm:inline text-xs sm:text-sm font-medium truncate">
-                        {level.name}
-                      </span>
-                    </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent side="right" className="max-w-xs">
-                  <div className="space-y-2">
-                    <p className="font-semibold">{level.name}</p>
-                    <p className="text-xs text-muted-foreground">{level.description}</p>
-                    <div className="text-xs">
-                      <span className="font-medium">RT Example: </span>
-                      {level.radiotherapyExamples[0]}
-                    </div>
-                  </div>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          );
-        })}
-      </div>
-      
-      {/* Legend */}
-      <div className="mt-6 flex justify-center">
-        <div className="flex items-center gap-6 text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-purple-100 dark:bg-purple-900/30 border border-purple-300 dark:border-purple-700 rounded-sm" />
-            <span>Highest evidence</span>
+          {/* Legend */}
+          <div className="mt-6 flex justify-center">
+            <div className="flex items-center gap-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-purple-100 dark:bg-purple-900/30 border border-purple-300 dark:border-purple-700 rounded-sm" />
+                <span>Highest evidence</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-muted border border-border rounded-sm" />
+                <span>Lowest evidence</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-muted border border-border rounded-sm" />
-            <span>Lowest evidence</span>
-          </div>
+          
+          {/* Annotation */}
+          <p className="text-center text-xs text-muted-foreground mt-4">
+            Hover over each level to see details. Fewer products achieve higher levels.
+          </p>
         </div>
+      )}
+
+      {/* Link to full guide */}
+      <div className="mt-6 text-center">
+        <Link 
+          to="/evidence-impact-guide" 
+          className="text-sm text-primary hover:underline inline-flex items-center gap-1"
+        >
+          View full methodology guide
+          <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
-      
-      {/* Annotation */}
-      <p className="text-center text-xs text-muted-foreground mt-4">
-        Hover over each level to see details. Fewer products achieve higher levels.
-      </p>
     </div>
   );
 };

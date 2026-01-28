@@ -7,7 +7,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     name: "MRCAT Pelvis",
     company: "Philips",
     companyUrl: "https://www.philips.com/",
-    productUrl: "https://www.philips.com/a-w/about/news/archive/standard/news/press/2020/20200929-philips-advances-oncology-solutions.html",
+    productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
     description: "AI-based MR-only simulation platform that generates synthetic CT images from MR scans for radiation therapy planning of pelvic cancers, streamlining the radiation therapy planning process with proprietary algorithms.",
     features: [
@@ -56,7 +56,10 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of Philips MR-RT platform clearances. Initial EU availability 2018, FDA clearance 2019."
+        clearanceNumber: "K182888",
+        productCode: "LLZ",
+        decisionDate: "2019-05",
+        notes: "Part of Philips MR-RT platform. Extended MR-only workflow to broader pelvic applications."
       },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of pelvic cancers."
     },

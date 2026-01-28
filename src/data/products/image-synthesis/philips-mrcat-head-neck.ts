@@ -7,7 +7,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     name: "MRCAT Head and Neck",
     company: "Philips",
     companyUrl: "https://www.philips.com/",
-    productUrl: "https://www.philips.com/a-w/about/news/archive/standard/news/press/2020/20200929-philips-advances-oncology-solutions.html",
+    productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRF439/mrcat-head-and-neck-hcnmrf439-mr-rt-clinical-application",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-head-neck.ts",
     description: "AI-powered MR-only simulation solution with deep learning technology that generates synthetic CT images from MR scans for radiation therapy planning of head and neck cancers, enabling simplified workflows and improved soft tissue visualization.",
     features: [
@@ -56,8 +56,9 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
+        productCode: "LLZ",
         decisionDate: "2022-10",
-        notes: "510(k) cleared October 2022. Part of Philips MR-RT platform."
+        notes: "AI-enabled MR-only head and neck radiotherapy application. Enables MR as sole imaging modality for RT planning of soft tissue tumors in head and neck."
       },
       intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of head and neck cancers."
     },

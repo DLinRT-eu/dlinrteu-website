@@ -45,7 +45,7 @@ const Index = () => {
   }
 
   const products = dataService.getAllProducts();
-  const companies = dataService.getAllCompanies();
+  const companies = dataService.getActiveCompanies();
   const categories = getAllOptions('category');
   const { aiCount, nonAICount } = countProductsByAI(products);
 

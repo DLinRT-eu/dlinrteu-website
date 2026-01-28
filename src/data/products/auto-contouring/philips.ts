@@ -32,7 +32,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       input: ["MRI (T1W mDIXON XD, T2W TSE)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Synthetic CT (MRCAT)"],
-      outputFormat: ["DICOM-RT", "DICOM CT"]
+      outputFormat: ["DICOM-RTSTRUCT", "DICOM CT"]
     },
     technology: {
       integration: ["Ingenia MR-RT console", "DICOM export to any TPS"],
@@ -46,7 +46,13 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         class: "IIb",
         type: "Medical Device"
       },
-      fda: "510(k) cleared",
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        decisionDate: "2015",
+        notes: "First MR-only radiotherapy solution. Combines MRCAT synthetic CT generation with model-based auto-contouring for prostate treatment planning."
+      },
       intendedUseStatement: "For use in treatment planning for radiation therapy."
     },
     market: {
@@ -64,7 +70,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head (R)",
       "Pelvis: Body Outline"
     ],
-    lastRevised: "2025-01-08",
+    lastRevised: "2026-01-08",
     source: "Philips product documentation (2019)"
   }
 ];

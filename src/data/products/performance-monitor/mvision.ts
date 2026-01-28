@@ -35,7 +35,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients with contoured structures",
       input: ["AI contours", "Manual contours", "Structure sets"],
-      inputFormat: ["DICOM-RT", "RT Structure Sets"],
+      inputFormat: ["DICOM-RTSTRUCT", "RT Structure Sets"],
       output: ["Comparison reports", "Visualization data"],
       outputFormat: ["PDF", "Interactive dashboard"]
     },

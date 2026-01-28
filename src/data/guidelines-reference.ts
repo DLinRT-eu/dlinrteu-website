@@ -106,16 +106,16 @@ export const COMMON_RADIOTHERAPY_GUIDELINES: GuidelineReference[] = [
   {
     name: "ESTRO AI Consensus Recommendations",
     version: "2024",
-    reference: "https://doi.org/10.1016/j.radonc.2024.01.001",
+    reference: "https://doi.org/10.1016/j.radonc.2024.110345",
     url: "https://www.estro.org/",
     description: "ESTRO recommendations for AI implementation in radiotherapy"
   },
   {
-    name: "EFOMP AI Position Paper",
-    version: "2023",
-    reference: "https://doi.org/10.1016/j.ejmp.2023.103107",
-    url: "https://www.efomp.org/",
-    description: "European medical physics perspective on AI in radiation oncology"
+    name: "RCR Auto-Contouring Guidance",
+    version: "2024",
+    reference: "https://www.rcr.ac.uk/media/rqjlnlny/rcr-auto-contouring-in-radiotherapy-2024.pdf",
+    url: "https://www.rcr.ac.uk/our-services/all-our-publications/clinical-oncology-publications/auto-contouring-in-radiotherapy/",
+    description: "Royal College of Radiologists guidance on auto-contouring in radiotherapy"
   }
 ];
 

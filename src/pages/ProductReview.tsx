@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,10 +9,11 @@ import ProductDetails from '@/components/ProductDetails';
 import ProductRevisionHistory from '@/components/reviewer/ProductRevisionHistory';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Clipboard, HelpCircle, FileText } from 'lucide-react';
+import { ArrowLeft, Clipboard, HelpCircle, FileText, Pencil } from 'lucide-react';
 import { ALL_PRODUCTS } from '@/data';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { createIssueUrl } from '@/utils/githubUrlHelper';
+import { EditModeToggle, EditToolbar } from '@/components/product-editor';
 
 const ProductReview = () => {
   const { id } = useParams<{ id: string }>();
@@ -63,7 +63,8 @@ const ProductReview = () => {
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <p className="text-muted-foreground">Review Mode</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <EditModeToggle product={product} />
           <Button asChild variant="outline">
             <Link to="/reviewer/guide">
               <HelpCircle className="mr-2 h-4 w-4" />
@@ -88,6 +89,9 @@ const ProductReview = () => {
           </Button>
         </div>
       </div>
+
+      {/* Edit Toolbar - appears when in edit mode */}
+      <EditToolbar />
 
       <Tabs defaultValue="review" className="space-y-4">
         <TabsList>
