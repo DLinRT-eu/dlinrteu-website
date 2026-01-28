@@ -1,4 +1,3 @@
-
 /** @jsxImportSource react */
 import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { Shield, Target, CircleDot, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
 import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
+import { useProductEdit, StructuresEditor } from "@/components/product-editor";
 
 interface SupportedStructuresProps {
   structures?: string[] | Array<{
@@ -31,9 +31,45 @@ interface StructureInfo {
 }
 
 const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures }) => {
-  if (!structures || structures.length === 0) {
+  const { isEditMode, editedProduct, canEdit } = useProductEdit();
+  
+  // Use edited structures when in edit mode
+  const displayStructures = isEditMode && editedProduct?.supportedStructures 
+    ? editedProduct.supportedStructures 
+    : structures;
+  const showEditor = isEditMode && canEdit;
+  
+  // Show editor if in edit mode
+  if (showEditor) {
+    return (
+      <div className="space-y-4">
+        <StructuresEditor fieldPath="supportedStructures" />
+        {/* Also show existing display below for reference */}
+        {displayStructures && displayStructures.length > 0 && (
+          <StructuresDisplay structures={displayStructures} />
+        )}
+      </div>
+    );
+  }
+
+  if (!displayStructures || displayStructures.length === 0) {
     return null;
   }
+
+  return <StructuresDisplay structures={displayStructures} />;
+};
+
+// Extracted display component
+interface StructuresDisplayProps {
+  structures: string[] | Array<{
+    name: string;
+    type: string;
+    accuracy?: string;
+    validationDataset?: string;
+  }>;
+}
+
+const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures }) => {
 
   // Parse and categorize structures
   const groupedStructures: Record<string, StructureGroup> = {};

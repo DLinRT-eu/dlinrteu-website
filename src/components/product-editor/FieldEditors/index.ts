@@ -6,3 +6,7 @@ export { RegulatoryEditor } from './RegulatoryEditor';
 export { TechnologyEditor } from './TechnologyEditor';
 export { EvidenceEditor } from './EvidenceEditor';
 export { GuidelinesEditor } from './GuidelinesEditor';
+export { StructuresEditor } from './StructuresEditor';
+export { DosePredictionModelsEditor } from './DosePredictionModelsEditor';
+export { IntegratedModulesEditor } from './IntegratedModulesEditor';
+export { PartOfEditor } from './PartOfEditor';

@@ -26,7 +26,9 @@ import {
   User, 
   Calendar,
   ExternalLink,
-  Eye
+  Eye,
+  Github,
+  Loader2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -62,6 +64,7 @@ export default function EditApprovals() {
   const [reviewAction, setReviewAction] = useState<'approve' | 'reject'>('approve');
   const [reviewFeedback, setReviewFeedback] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [syncingId, setSyncingId] = useState<string | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -161,6 +164,55 @@ export default function EditApprovals() {
     }
   };
 
+  const syncToGitHub = async (draftId: string) => {
+    setSyncingId(draftId);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+
+      const response = await fetch(
+        `https://msyfxyxzjyowwasgturs.supabase.co/functions/v1/apply-product-edit`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ draft_id: draftId }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to sync to GitHub');
+      }
+
+      toast({
+        title: 'Synced to GitHub',
+        description: (
+          <span>
+            Pull request created successfully.{' '}
+            <a href={result.pr_url} target="_blank" rel="noopener noreferrer" className="underline">
+              View PR
+            </a>
+          </span>
+        ),
+      });
+
+      fetchDrafts();
+    } catch (error: any) {
+      console.error('Error syncing to GitHub:', error);
+      toast({
+        title: 'Sync Failed',
+        description: error.message || 'Failed to create GitHub PR',
+        variant: 'destructive',
+      });
+    } finally {
+      setSyncingId(null);
+    }
+  };
+
   const getOriginalProduct = (productId: string): ProductDetails | undefined => {
     return ALL_PRODUCTS.find(p => p.id === productId);
   };
@@ -257,25 +309,8 @@ export default function EditApprovals() {
                   key={draft.id}
                   draft={draft}
                   originalProduct={getOriginalProduct(draft.product_id)}
-                  getStatusBadge={getStatusBadge}
-                />
-              ))
-            )}
-          </TabsContent>
-
-          <TabsContent value="rejected" className="space-y-4">
-            {rejectedDrafts.length === 0 ? (
-              <Card>
-                <CardContent className="py-8 text-center text-muted-foreground">
-                  No rejected edits
-                </CardContent>
-              </Card>
-            ) : (
-              rejectedDrafts.map(draft => (
-                <DraftCard
-                  key={draft.id}
-                  draft={draft}
-                  originalProduct={getOriginalProduct(draft.product_id)}
+                  onSyncToGitHub={!draft.github_pr_url ? () => syncToGitHub(draft.id) : undefined}
+                  syncingId={syncingId}
                   getStatusBadge={getStatusBadge}
                 />
               ))
@@ -371,10 +406,12 @@ interface DraftCardProps {
   originalProduct?: ProductDetails;
   onApprove?: () => void;
   onReject?: () => void;
+  onSyncToGitHub?: () => void;
+  syncingId?: string | null;
   getStatusBadge: (status: string) => React.ReactNode;
 }
 
-function DraftCard({ draft, originalProduct, onApprove, onReject, getStatusBadge }: DraftCardProps) {
+function DraftCard({ draft, originalProduct, onApprove, onReject, onSyncToGitHub, syncingId, getStatusBadge }: DraftCardProps) {
   const [showDiff, setShowDiff] = useState(false);
 
   return (
@@ -434,6 +471,21 @@ function DraftCard({ draft, originalProduct, onApprove, onReject, getStatusBadge
             <Eye className="h-4 w-4 mr-2" />
             {showDiff ? 'Hide Changes' : 'View Changes'}
           </Button>
+          {onSyncToGitHub && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={onSyncToGitHub}
+              disabled={syncingId === draft.id}
+            >
+              {syncingId === draft.id ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Github className="h-4 w-4 mr-2" />
+              )}
+              Sync to GitHub
+            </Button>
+          )}
           {onApprove && (
             <Button variant="default" size="sm" className="bg-green-600 hover:bg-green-700" onClick={onApprove}>
               <CheckCircle className="h-4 w-4 mr-2" />
