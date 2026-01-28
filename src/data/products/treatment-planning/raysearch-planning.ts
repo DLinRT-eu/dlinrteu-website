@@ -66,7 +66,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       input: ["CT", "Structure sets", "Beam configuration", "Prescriptions"],
       inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Predicted dose distribution", "RT plan", "RT dose"],
-      outputFormat: ["DICOM-RTSTRUCT"]
+      outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE"]
     },
     technology: {
       integration: ["Native RayStation integration"],
@@ -99,8 +99,8 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     version: "2024B",
     releaseDate: "2024-07-01",
-    lastUpdated: "2026-01-23",
-    lastRevised: "2026-01-23",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
     evidence: [
       {
