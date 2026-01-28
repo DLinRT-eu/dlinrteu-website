@@ -1,5 +1,5 @@
 import React from "react";
-import { ExternalLink, FlaskConical } from "lucide-react";
+import { ExternalLink, FlaskConical, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -54,7 +54,7 @@ const EvidenceLevelTable = () => {
           </Table>
         </div>
 
-        {/* Reference and link */}
+        {/* Reference and links */}
         <div className="mt-6 pt-6 border-t border-border/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="text-sm text-muted-foreground">
             <span className="font-medium text-foreground">Reference: </span>
@@ -68,12 +68,21 @@ const EvidenceLevelTable = () => {
               DOI <ExternalLink className="h-3 w-3" />
             </a>
           </div>
-          <Button variant="outline" size="sm" asChild>
-            <Link to="/evidence-levels" className="inline-flex items-center gap-2">
-              <FlaskConical className="h-4 w-4" />
-              View full methodology
-            </Link>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/evidence-impact-guide" className="inline-flex items-center gap-2">
+                <FlaskConical className="h-4 w-4" />
+                <Target className="h-4 w-4" />
+                Dual-axis guide
+              </Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/evidence-levels" className="inline-flex items-center gap-2">
+                <FlaskConical className="h-4 w-4" />
+                Legacy methodology
+              </Link>
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
