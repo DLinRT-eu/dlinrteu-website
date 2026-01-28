@@ -26,7 +26,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Treatment plans"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native TPS integration"],
@@ -53,9 +53,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2018",
-      distributionChannels: ["Direct sales"],
-
-},
+      distributionChannels: ["Direct sales"]
+    },
     version: "12.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2025-12-11",

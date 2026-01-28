@@ -30,9 +30,9 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "Structure sets", "Treatment plans"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Treatment plans", "RT Dose", "Plan quality metrics"],
-      outputFormat: ["DICOM RT-PLAN", "DICOM RT-DOSE", "PDF"]
+      outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE", "PDF"]
     },
     technology: {
       integration: ["TPS integration", "Cloud API", "Linac integration"],
@@ -64,8 +64,16 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2023-07-10",
-    lastUpdated: "2026-01-02",
-    lastRevised: "2026-01-02",
-    source: "FDA 510(k) database (K223724), manufacturer official website"
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
+    source: "FDA 510(k) database (K223724), manufacturer official website",
+    clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K223724 received January 3, 2023 - Class II device under 21 CFR 892.5050",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
+      },
+    ],
   }
 ];

@@ -70,9 +70,7 @@ export const useProductSearch = ({ products, searchQuery, advancedSearch }: Prod
         product.website,
         product.productUrl,
         product.companyUrl,
-        product.url,
-        product.contactEmail,
-        product.contactPhone
+        product.url
       ];
 
       if (basicFields.some(field => searchInValue(field))) {

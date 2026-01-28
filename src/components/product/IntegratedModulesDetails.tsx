@@ -1,16 +1,26 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Check } from "lucide-react";
 import { ProductDetails } from "@/types/productDetails";
+import { useProductEdit, IntegratedModulesEditor } from "@/components/product-editor";
 
 interface IntegratedModulesDetailsProps {
   product: ProductDetails;
 }
 
 const IntegratedModulesDetails = ({ product }: IntegratedModulesDetailsProps) => {
-  if (!product.integratedModules || product.integratedModules.length === 0) {
+  const { isEditMode, editedProduct, canEdit } = useProductEdit();
+  
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  const showEditor = isEditMode && canEdit;
+  
+  // Show editor if in edit mode
+  if (showEditor) {
+    return <IntegratedModulesEditor fieldPath="integratedModules" />;
+  }
+  
+  if (!displayProduct.integratedModules || displayProduct.integratedModules.length === 0) {
     return null;
   }
 
@@ -20,7 +30,7 @@ const IntegratedModulesDetails = ({ product }: IntegratedModulesDetailsProps) =>
         <CardTitle>Integrated Clinical Modules</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {product.integratedModules.map((module, index) => (
+        {displayProduct.integratedModules.map((module, index) => (
           <div key={index} className="border-b last:border-b-0 pb-6 last:pb-0">
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-2">

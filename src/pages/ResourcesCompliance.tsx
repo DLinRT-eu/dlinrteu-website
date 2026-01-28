@@ -11,6 +11,7 @@ import ComplianceChecklist from '@/components/resources/ComplianceChecklist';
 import CoreDocuments from '@/components/resources/CoreDocuments';
 import ResourceLinks from '@/components/resources/ResourceLinks';
 import DisclaimerBox from '@/components/resources/DisclaimerBox';
+import PageIndex from '@/components/resources/PageIndex';
 
 const ResourcesCompliance = () => {
   return (
@@ -40,8 +41,11 @@ const ResourcesCompliance = () => {
             </p>
           </div>
 
+          {/* Quick Navigation Index */}
+          <PageIndex />
+
           {/* Classification Taxonomy Section */}
-          <section className="mb-16">
+          <section id="classification-taxonomy" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Our classification taxonomy
             </h2>
@@ -56,7 +60,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Clinical Tasks Glossary */}
-          <section className="mb-16">
+          <section id="clinical-tasks" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Glossary of clinical tasks
             </h2>
@@ -71,7 +75,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Evidence Level Classification */}
-          <section className="mb-16">
+          <section id="evidence-levels" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Evidence level classification
             </h2>
@@ -96,7 +100,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Purpose & Regulatory Summary */}
-          <section className="mb-16">
+          <section id="regulatory-overview" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-8">
               Regulatory overview
             </h2>
@@ -104,7 +108,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Regulatory Landscape Quick Guide */}
-          <section className="mb-16">
+          <section id="regulatory-landscape" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Regulatory landscape — quick guide
             </h2>
@@ -115,7 +119,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Standards & Guidelines */}
-          <section className="mb-16">
+          <section id="standards-guidelines" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Standards, guidelines & principles
             </h2>
@@ -126,7 +130,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Practical Compliance Checklist */}
-          <section className="mb-16">
+          <section id="compliance-checklist" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Practical compliance checklist
             </h2>
@@ -137,7 +141,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Core Documents & References */}
-          <section className="mb-16">
+          <section id="core-documents" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Core documents & references
             </h2>
@@ -148,7 +152,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Extended Resources Library */}
-          <section className="mb-16">
+          <section id="resources-library" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
               Extended resources library
             </h2>
@@ -159,7 +163,7 @@ const ResourcesCompliance = () => {
           </section>
 
           {/* Disclaimer */}
-          <section>
+          <section id="disclaimer" className="scroll-mt-20">
             <DisclaimerBox />
           </section>
         </div>

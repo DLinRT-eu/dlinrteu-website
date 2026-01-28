@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,10 +7,12 @@ import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
 import ProductFeaturesDetails from "./product/ProductFeaturesDetails";
 import TechnicalSpecificationsDetails from "./product/TechnicalSpecificationsDetails";
+import TechnologyDetails from "./product/TechnologyDetails";
 import RegulatoryInformationDetails from "./product/RegulatoryInformationDetails";
 import MarketPricingDetails from "./product/MarketPricingDetails";
 import ContactInformation from "./product/ContactInformation";
 import SupportedStructures from "./product/SupportedStructures";
+import DosePredictionModels from "./product/DosePredictionModels";
 import ProductRevisionStatus from "./ProductRevisionStatus";
 import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
 import GuidelinesDetails from "./product/GuidelinesDetails";
@@ -21,6 +22,7 @@ import PartOfDetails from "./product/PartOfDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
 import { isInvestigationalProduct } from "@/utils/productFilters";
+import { EditModeToggle, EditToolbar, useProductEdit } from "@/components/product-editor";
 
 interface ProductDetailsProps {
   product: ProductDetailsType;
@@ -89,18 +91,23 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
       )}
       
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-wrap gap-4">
         <ProductHeaderInfo product={product} />
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="ml-4"
-          onClick={() => navigate(`/review/${product.id}`)}
-        >
-          <ClipboardEdit className="h-4 w-4 mr-2" />
-          Review Mode
-        </Button>
+        <div className="flex gap-2">
+          <EditModeToggle product={product} />
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => navigate(`/review/${product.id}`)}
+          >
+            <ClipboardEdit className="h-4 w-4 mr-2" />
+            Review Mode
+          </Button>
+        </div>
       </div>
+      
+      {/* Edit Toolbar - appears when in edit mode */}
+      <EditToolbar />
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
         <div className="lg:col-span-2 space-y-6">
@@ -109,9 +116,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <ProductFeaturesDetails product={product} />
           <IntegratedModulesDetails product={product} />
           <TechnicalSpecificationsDetails product={product} />
+          <TechnologyDetails product={product} />
           
           {product.category === "Auto-Contouring" && product.supportedStructures && (
             <SupportedStructures structures={product.supportedStructures} />
+          )}
+          
+          {product.category === "Treatment Planning" && product.dosePredictionModels && (
+            <DosePredictionModels models={product.dosePredictionModels} />
           )}
           
           <EvidenceLimitationsDetails product={product} />

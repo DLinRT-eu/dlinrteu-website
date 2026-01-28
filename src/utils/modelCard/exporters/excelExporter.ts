@@ -87,7 +87,6 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { Field: "Product URL", Value: modelCard.contact.productUrl },
       { Field: "Logo URL", Value: modelCard.contact.logoUrl },
       { Field: "Logo Source", Value: modelCard.contact.logoSource },
-      { Field: "Contact Email", Value: modelCard.contact.contactEmail },
       { Field: "Support Email", Value: modelCard.contact.supportEmail },
     ];
     

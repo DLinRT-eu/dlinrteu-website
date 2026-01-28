@@ -194,11 +194,7 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     addField('Product URL', modelCard.contact.productUrl);
     addField('Logo URL', modelCard.contact.logoUrl);
     addField('Logo Source', modelCard.contact.logoSource);
-    addField('Contact Email', modelCard.contact.contactEmail);
     addField('Support Email', modelCard.contact.supportEmail);
-    if (product.contactPhone) {
-      addField('Contact Phone', product.contactPhone);
-    }
     
     // Quality Assurance Section
     addSectionHeader('Quality Assurance');
