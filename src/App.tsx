@@ -141,6 +141,7 @@ const App = () => (
                 <Route path="review" element={<ReviewDashboard />} />
                 <Route path="review/:id" element={<ProductReview />} />
                 <Route path="resources-compliance" element={<ResourcesCompliance />} />
+                <Route path="resources" element={<Navigate to="/resources-compliance" replace />} />
                 <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
