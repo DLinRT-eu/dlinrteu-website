@@ -1,158 +1,300 @@
 
 
-# Company Certification Page Plan
+# Dual-Axis Classification System: Evidence Rigor and Clinical Impact
 
-## Analysis: Content Overlap Assessment
+## The Problem You Identified
 
-I reviewed the existing content to ensure no duplication:
+The current evidence level classification (adapted from van Leeuwen et al.) conflates two distinct concepts:
 
-| Existing Content | Focus Area |
-|-----------------|------------|
-| `company-certification-launch.ts` (news) | Announcement of the program launch |
-| `CompanyGuide.tsx` | How to use the dashboard, submit revisions |
-| `Roles.tsx` | General role descriptions |
-| `RolesFAQ.tsx` | General role FAQs (approval times, conflicts) |
+| Your Example | Current Rating | What's Missing |
+|-------------|----------------|----------------|
+| AI for patient favorite color with rigorous peer-reviewed proof | Level 1t (low) | High evidence rigor is unrecognized |
+| Life-saving device with no publications | Level 0 (lowest) | High potential impact is unrecognized |
 
-**Gap Identified:** No dedicated content explaining:
-1. The step-by-step certification workflow (verifying product accuracy vs. submitting changes)
-2. Badge states and what they mean in detail
-3. Certification-specific FAQs (re-certification, badge expiry, etc.)
-
-## Solution: Create Dedicated Certification Page
-
-Create a new page at `/company/certification` that provides:
-- Detailed certification process
-- Badge states explained with visual examples
-- Certification-specific FAQs
-- Links to existing guides (no duplication)
+**Core insight**: A product can have high evidence rigor but low clinical impact (or vice versa). Judging both on a single scale does a disservice to useful but lower-impact devices like auto-contouring.
 
 ---
 
-## File to Create
+## Proposed Solution: Two Independent Axes
 
-### New Page: `src/pages/company/CompanyCertification.tsx`
+### Axis 1: Evidence Rigor (How robust is the evidence?)
 
-**Route:** `/company/certification` (publicly accessible - helps prospective company reps)
+Focuses purely on **study quality and methodology**, independent of what is being measured.
 
-**Structure:**
-1. **Hero Section** - Brief intro to certification program
-2. **Quick Links** - To related pages (CompanyGuide, Roles, Support)
-3. **Badge States Explained** - Visual cards for each badge state (green, amber, none)
-4. **Certification Process** - Step-by-step guide for certifying products
-5. **Prerequisites** - What's needed before certification
-6. **FAQ Section** - Certification-specific questions only
+| Level | Name | Description | Example |
+|-------|------|-------------|---------|
+| **E0** | No Evidence | No peer-reviewed publications | Vendor white papers only |
+| **E1** | Preliminary | Single-center, small sample, or pilot studies | n=20 retrospective validation |
+| **E2** | Validated | Multi-center or large prospective studies | 500+ patients, 3+ centers |
+| **E3** | Systematic | Systematic reviews, meta-analyses, or RCTs | Cochrane review, Phase III trial |
+
+### Axis 2: Clinical Impact (What does the evidence demonstrate?)
+
+Focuses on **what outcomes are measured**, independent of how rigorously.
+
+| Level | Name | Description | RT Examples |
+|-------|------|-------------|-------------|
+| **I0** | Technical | Reproducibility, speed, consistency | Processing time benchmarks |
+| **I1** | Performance | Accuracy vs reference standard | Dice scores, DVH accuracy |
+| **I2** | Workflow | Time savings, variability reduction | Contouring time studies |
+| **I3** | Decision | Treatment plan changes | Dose modification, plan selection |
+| **I4** | Outcome | Patient health outcomes | Survival, toxicity, QoL |
+| **I5** | Societal | Health economics, access | Cost-effectiveness, QALYs |
 
 ---
 
-## Content Outline
+## Visual Representation: The Evidence-Impact Matrix
 
-### Hero Section
-- Title: "Company Certification Program"
-- Subtitle explaining what certification means (manufacturer-verified accuracy)
-
-### Badge States Section (with visual cards)
 ```text
-[ Green Badge Card ]
-VERIFIED BY COMPANY
-- What it means
-- How users benefit
-- Validity period
+                        Clinical Impact →
+                 I0      I1      I2      I3      I4      I5
+                Tech   Perf   Workflow  Decision Outcome Societal
+           ┌────────────────────────────────────────────────────┐
+     E3    │                                              ★     │  Systematic
+     Rigor │        ○        ○         ○         ○        ○     │  Reviews/RCTs
+           ├────────────────────────────────────────────────────┤
+     E2    │        ●        ●         ●         ●              │  Multi-center
+     Rigor │   Auto-contouring tools typically here             │  Validation
+           ├────────────────────────────────────────────────────┤
+     E1    │   ●    ●        ●                                  │  Pilot
+     Rigor │   Most products start here                         │  Studies
+           ├────────────────────────────────────────────────────┤
+     E0    │   ○                                          ○     │  No
+     Rigor │   New products       "Life-saving, no pubs" →      │  Evidence
+           └────────────────────────────────────────────────────┘
 
-[ Amber Badge Card ]
-CERTIFICATION OUTDATED
-- When this appears
-- How to update
-- What users see
-
-[ No Badge Card ]
-NOT YET CERTIFIED
-- Default state
-- How to get started
+Legend: ● = common zone    ○ = rare zone    ★ = aspirational goal
 ```
 
-### Step-by-Step Certification Process
-1. Ensure you have Company Representative access (link to registration in CompanyGuide)
-2. Access Company Dashboard
-3. Select product to certify
-4. Review all product information
-5. Click "Certify Product"
-6. Add optional notes
-7. Submit certification
-
-### Prerequisites Card
-- Must be verified company representative
-- Product must belong to your company
-- Previous certification not pending review
-
-### FAQ Section (Certification-specific only)
-
-| Question | Existing Coverage |
-|----------|-------------------|
-| "When does certification expire?" | NEW - not covered elsewhere |
-| "What happens when product info changes?" | NEW - badge state change |
-| "Can I certify products from another company?" | NEW |
-| "Do I need to certify every product?" | NEW |
-| "What if I find incorrect information?" | Links to revision workflow in CompanyGuide |
-| "How long is certification valid?" | NEW |
-
-**Questions NOT included (already covered in RolesFAQ.tsx):**
-- How to request company role
-- Role approval time
-- Role conflicts with reviewer
+This visualization shows:
+- **Auto-contouring products**: Often E2/I1-I2 (well-validated for accuracy and workflow, limited outcome data) - appropriately recognized as having strong evidence for their intended use
+- **Newer products**: E0-E1 at various impact levels depending on claims
+- **Your examples**: Favorite-color AI would be E3/I0 (rigorous but no clinical value); life-saving device would be E0/I4 (high claimed impact, no evidence)
 
 ---
 
-## Route Addition
+## Data Model Changes
 
-**File:** `src/App.tsx`
+### File: `src/types/productDetails.d.ts`
 
-Add new route (publicly accessible for prospective companies):
+**Add new fields** (lines 82-83 area):
+
 ```typescript
-const CompanyCertification = lazy(() => import("./pages/company/CompanyCertification"));
+// Evidence level classification (adapted from van Leeuwen et al. 2021)
+// DEPRECATED - kept for backward compatibility
+evidenceLevel?: "0" | "1t" | "1c" | "2" | "3" | "4" | "5" | "6";
+evidenceLevelNotes?: string;
 
-// In Routes:
-<Route path="/company/certification" element={<CompanyCertification />} />
+// NEW: Dual-axis classification
+evidenceRigor?: "E0" | "E1" | "E2" | "E3";
+evidenceRigorNotes?: string;
+clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+clinicalImpactNotes?: string;
+```
+
+### File: `src/data/evidence-levels.ts`
+
+**Create new data structure:**
+
+```typescript
+export interface EvidenceRigorLevel {
+  level: "E0" | "E1" | "E2" | "E3";
+  name: string;
+  description: string;
+  criteria: string[];
+  color: string;
+}
+
+export interface ClinicalImpactLevel {
+  level: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+  name: string;
+  description: string;
+  rtExamples: string[];
+  color: string;
+}
+
+export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
+  {
+    level: "E0",
+    name: "No Peer-Reviewed Evidence",
+    description: "No peer-reviewed publications. Vendor materials or regulatory submissions only.",
+    criteria: ["Vendor white papers", "Marketing materials", "FDA summary only"],
+    color: "gray"
+  },
+  {
+    level: "E1",
+    name: "Preliminary Evidence",
+    description: "Single-center, small sample size, or pilot studies.",
+    criteria: ["Single institution", "Sample size <100", "Retrospective design", "Pilot studies"],
+    color: "blue"
+  },
+  {
+    level: "E2",
+    name: "Validated Evidence",
+    description: "Multi-center studies, large prospective cohorts, or robust retrospective studies.",
+    criteria: ["Multi-center (3+)", "Sample size >200", "Prospective design", "External validation"],
+    color: "green"
+  },
+  {
+    level: "E3",
+    name: "Systematic Evidence",
+    description: "Systematic reviews, meta-analyses, or randomized controlled trials.",
+    criteria: ["Systematic review", "Meta-analysis", "RCT", "Phase III trial"],
+    color: "purple"
+  }
+];
+
+export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
+  {
+    level: "I0",
+    name: "Technical",
+    description: "Demonstrates technical feasibility, reproducibility, speed.",
+    rtExamples: ["Processing time benchmarks", "Reproducibility tests", "Consistency studies"],
+    color: "slate"
+  },
+  {
+    level: "I1",
+    name: "Performance",
+    description: "Accuracy compared to reference standard or ground truth.",
+    rtExamples: ["Dice coefficient vs expert", "DVH prediction accuracy", "Deformable registration TRE"],
+    color: "blue"
+  },
+  {
+    level: "I2",
+    name: "Workflow",
+    description: "Time savings, efficiency gains, or variability reduction.",
+    rtExamples: ["Contouring time reduction", "Inter-observer variability", "Planning efficiency"],
+    color: "teal"
+  },
+  {
+    level: "I3",
+    name: "Decision",
+    description: "Changes in treatment management or clinical decisions.",
+    rtExamples: ["Dose modification rates", "Treatment intent changes", "Plan quality improvement"],
+    color: "orange"
+  },
+  {
+    level: "I4",
+    name: "Outcome",
+    description: "Patient health outcomes: survival, toxicity, quality of life.",
+    rtExamples: ["Reduced toxicity", "Tumor control", "Survival analysis", "Patient-reported outcomes"],
+    color: "purple"
+  },
+  {
+    level: "I5",
+    name: "Societal",
+    description: "Health economics, cost-effectiveness, access to care.",
+    rtExamples: ["Cost per QALY", "Reduced delays", "Access improvement in LMICs"],
+    color: "rose"
+  }
+];
 ```
 
 ---
 
-## Cross-Linking Updates
+## UI Components to Create/Update
 
-### Update news item to link to new page:
-**File:** `src/data/news/company-certification-launch.ts`
+### 1. New Component: `EvidenceImpactBadges.tsx`
 
-Change:
-```markdown
-Visit our [Contact page](/support) to begin the registration process.
-```
-To:
-```markdown
-Visit our [Company Certification Guide](/company/certification) to learn more and begin the registration process.
+Display both ratings side-by-side:
+
+```text
+┌─────────────────┐  ┌─────────────────┐
+│ 🔬 E2 Validated │  │ 🎯 I2 Workflow  │
+└─────────────────┘  └─────────────────┘
 ```
 
-### Add link in CompanyGuide.tsx:
-Add a card linking to the certification page in the quick navigation section.
+### 2. New Component: `EvidenceImpactMatrix.tsx`
+
+Interactive 2D matrix visualization for the Resources page:
+- 4x6 grid (Rigor × Impact)
+- Clickable cells showing products in each quadrant
+- Color gradient showing density
+
+### 3. Updated: `EvidencePyramid.tsx`
+
+Replace single pyramid with:
+- Side-by-side dual scales, OR
+- The 2D matrix visualization
+
+### 4. Updated: `EvidenceLimitationsDetails.tsx`
+
+Add dual dropdowns for new classification:
+- Evidence Rigor dropdown
+- Clinical Impact dropdown
+- Notes fields for each
+
+### 5. New Page: `src/pages/EvidenceImpactGuide.tsx`
+
+Comprehensive guide explaining the dual-axis system with:
+- Why two axes matter (your favorite-color example)
+- How to assign levels
+- Interactive matrix
+- Mapping from old → new system
 
 ---
 
-## Summary of Changes
+## Migration Strategy
 
-| File | Action |
-|------|--------|
-| `src/pages/company/CompanyCertification.tsx` | NEW - Dedicated certification page |
-| `src/App.tsx` | Add route for certification page |
-| `src/data/news/company-certification-launch.ts` | Update link to new page |
-| `src/pages/company/CompanyGuide.tsx` | Add navigation link to certification page |
+### Mapping Old → New Levels
+
+| Old Level | Evidence Rigor | Clinical Impact | Notes |
+|-----------|---------------|-----------------|-------|
+| 0 | E0 | Needs assessment | No evidence → no impact claim |
+| 1t | E1 | I0 | Technical validation |
+| 1c | E1 | I1 | Performance correlation |
+| 2 | E2 | I1 | Stand-alone performance |
+| 3 | E1-E2 | I2 | Workflow studies |
+| 4 | E1-E2 | I3 | Decision impact |
+| 5 | E2-E3 | I4 | Outcome studies |
+| 6 | E2-E3 | I5 | Societal impact |
+
+**Note**: The mapping is not 1:1 because the old system conflated both. Manual review needed for each product.
 
 ---
 
-## Non-Duplicate Content Strategy
+## Files to Create/Modify
 
-The new page will:
-- Focus exclusively on **product certification** (the badge system)
-- Link to CompanyGuide for registration/revision workflows
-- Link to RolesFAQ for general role questions
-- Provide new FAQs specific to certification only
+| File | Action | Description |
+|------|--------|-------------|
+| `src/data/evidence-impact-levels.ts` | **Create** | New dual-axis level definitions |
+| `src/types/productDetails.d.ts` | Update | Add new classification fields |
+| `src/components/product/EvidenceImpactBadges.tsx` | **Create** | Dual badge display component |
+| `src/components/resources/EvidenceImpactMatrix.tsx` | **Create** | Interactive 2D matrix visualization |
+| `src/pages/EvidenceImpactGuide.tsx` | **Create** | Full methodology documentation |
+| `src/pages/EvidenceLevels.tsx` | Update | Add dual-axis content, keep legacy |
+| `src/components/resources/EvidencePyramid.tsx` | Update | Add matrix view option |
+| `src/components/resources/EvidenceLevelTable.tsx` | Update | Add dual-axis columns |
+| `src/components/product/EvidenceLevelBadge.tsx` | Update | Support new badge types |
+| `src/components/product/EvidenceLimitationsDetails.tsx` | Update | Dual dropdowns for editing |
+| `src/data/evidence-levels.ts` | Update | Add rigor/impact definitions |
+| `src/App.tsx` | Update | Add route for new guide page |
 
-This avoids duplication while providing a complete resource for companies interested in the certification program.
+---
+
+## Benefits of This Approach
+
+1. **Fair representation**: Auto-contouring products with robust validation (E2) are recognized even if they only demonstrate workflow impact (I2)
+
+2. **Clear communication**: Stakeholders immediately understand both:
+   - How trustworthy is the evidence?
+   - What clinical benefit is claimed?
+
+3. **Better decision support**: A clinician choosing between:
+   - E2/I2 (validated workflow improvement) vs
+   - E1/I4 (preliminary outcome claims)
+   - Can make informed trade-off decisions
+
+4. **Publication potential**: As you noted, this makes for a much prettier figure and clearer taxonomy for academic papers
+
+---
+
+## Example Classifications
+
+| Product | Old | Rigor | Impact | Interpretation |
+|---------|-----|-------|--------|----------------|
+| Mature auto-contouring | 2-3 | E2 | I1-I2 | Well-validated for accuracy and workflow |
+| New outcome-focused product | 0-1 | E0 | I4 | Claims outcome benefits, no evidence yet |
+| Patient favorite color AI | 1t | E3 | I0 | Extremely rigorous, no clinical value |
+| Life-saving device (no pubs) | 0 | E0 | I4 | High claimed impact, needs evidence |
 
