@@ -3,18 +3,32 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { FileText, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import EvidenceLevelBadge from "./EvidenceLevelBadge";
-import { EditableField, useProductEdit } from "@/components/product-editor";
+import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 
 interface EvidenceLimitationsDetailsProps {
   product: ProductDetails;
 }
 
+const EVIDENCE_LEVELS = [
+  { value: '0', label: '0 - No Evidence' },
+  { value: '1t', label: '1t - Technical Efficacy' },
+  { value: '1c', label: '1c - Clinical Efficacy' },
+  { value: '2', label: '2 - Stand-Alone Performance' },
+  { value: '3', label: '3 - Workflow Efficacy' },
+  { value: '4', label: '4 - Treatment Decision' },
+  { value: '5', label: '5 - Patient Outcome' },
+  { value: '6', label: '6 - Societal Efficacy' },
+];
+
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
-  const { isEditMode, editedProduct } = useProductEdit();
+  const { isEditMode, editedProduct, updateField, canEdit } = useProductEdit();
   
   // Use edited product when in edit mode, otherwise use the original
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  const showEditor = isEditMode && canEdit;
   
   const { evidence, limitations, evidenceLevel, evidenceLevelNotes } = displayProduct;
   
@@ -23,7 +37,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const hasLimitations = limitations && limitations.length > 0;
   const hasEvidenceLevel = !!evidenceLevel;
   
-  if (!isEditMode && !hasEvidence && !hasLimitations && !hasEvidenceLevel) {
+  if (!showEditor && !hasEvidence && !hasLimitations && !hasEvidenceLevel) {
     return null;
   }
 
@@ -90,19 +104,41 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Evidence Level Summary */}
-        {(evidenceLevel || isEditMode) && (
-          <div className="p-3 bg-muted/50 rounded-lg border">
-            <p className="text-sm font-medium mb-1">Evidence Level Notes:</p>
-            <EditableField
-              fieldPath="evidenceLevelNotes"
-              value={evidenceLevelNotes}
-              type="textarea"
-              placeholder="Add notes about the evidence level"
-            >
-              <p className="text-sm text-muted-foreground">
-                {evidenceLevelNotes || "No notes provided"}
-              </p>
-            </EditableField>
+        {(evidenceLevel || showEditor) && (
+          <div className="p-3 bg-muted/50 rounded-lg border space-y-3">
+            {showEditor && (
+              <div className="space-y-1">
+                <Label className="text-sm font-medium">Evidence Level</Label>
+                <Select
+                  value={evidenceLevel || ''}
+                  onValueChange={(v) => updateField('evidenceLevel', v || undefined)}
+                >
+                  <SelectTrigger className="bg-background w-full">
+                    <SelectValue placeholder="Select evidence level" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background z-50">
+                    {EVIDENCE_LEVELS.map(level => (
+                      <SelectItem key={level.value} value={level.value}>
+                        {level.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            <div>
+              <p className="text-sm font-medium mb-1">Evidence Level Notes:</p>
+              <EditableField
+                fieldPath="evidenceLevelNotes"
+                value={evidenceLevelNotes}
+                type="textarea"
+                placeholder="Add notes about the evidence level"
+              >
+                <p className="text-sm text-muted-foreground">
+                  {evidenceLevelNotes || "No notes provided"}
+                </p>
+              </EditableField>
+            </div>
           </div>
         )}
 
@@ -130,8 +166,13 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
           </EditableField>
         </div>
 
-        {/* Evidence Section - read-only for now as it has complex structure */}
-        {hasEvidence && (
+        {/* Evidence Editor in edit mode */}
+        {showEditor && (
+          <EvidenceEditor fieldPath="evidence" />
+        )}
+
+        {/* Evidence Section - display only when not in edit mode */}
+        {!showEditor && hasEvidence && (
           <div>
             <h3 className="font-medium text-lg mb-2">Clinical Evidence</h3>
             <div className="space-y-2">

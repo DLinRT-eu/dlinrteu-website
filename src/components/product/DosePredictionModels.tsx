@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Zap, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useProductEdit, DosePredictionModelsEditor } from "@/components/product-editor";
 
 interface DosePredictionModel {
   name: string;
@@ -16,10 +17,22 @@ interface DosePredictionModelsProps {
 }
 
 const DosePredictionModels = ({ models }: DosePredictionModelsProps) => {
-  if (!models || models.length === 0) return null;
+  const { isEditMode, editedProduct, canEdit } = useProductEdit();
+  
+  const displayModels = isEditMode && editedProduct?.dosePredictionModels 
+    ? editedProduct.dosePredictionModels 
+    : models;
+  const showEditor = isEditMode && canEdit;
+  
+  // Show editor if in edit mode
+  if (showEditor) {
+    return <DosePredictionModelsEditor fieldPath="dosePredictionModels" />;
+  }
+  
+  if (!displayModels || displayModels.length === 0) return null;
 
   // Group models by anatomical site
-  const groupedModels = models.reduce((acc, model) => {
+  const groupedModels = displayModels.reduce((acc, model) => {
     if (!acc[model.anatomicalSite]) {
       acc[model.anatomicalSite] = [];
     }
@@ -45,7 +58,7 @@ const DosePredictionModels = ({ models }: DosePredictionModelsProps) => {
           <Zap className="h-5 w-5 text-orange-600" />
           Dose Prediction Models
           <span className="text-base font-normal text-muted-foreground">
-            ({models.length} models)
+            ({displayModels.length} models)
           </span>
         </CardTitle>
       </CardHeader>

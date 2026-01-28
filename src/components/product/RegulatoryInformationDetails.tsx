@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, AlertTriangle, Info, HelpCircle } from "lucide-react";
 import { getStandardizedCertificationTags, parseFDAInfo, parseCEInfo, formatFDAInfo, formatCEInfo } from "@/utils/regulatoryUtils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { EditableField, useProductEdit } from "@/components/product-editor";
+import { EditableField, useProductEdit, RegulatoryEditor } from "@/components/product-editor";
 
 interface RegulatoryInformationProps {
   product: ProductDetails;
@@ -259,6 +259,13 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
             ).join(', ') || "artificial intelligence"} technology for {displayProduct.category.toLowerCase()} applications.
           </p>
         </div>
+        
+        {/* Show RegulatoryEditor in edit mode */}
+        {isEditMode && (
+          <div className="pt-4 border-t">
+            <RegulatoryEditor fieldPath="regulatory" />
+          </div>
+        )}
       </CardContent>
     </Card>
     </TooltipProvider>

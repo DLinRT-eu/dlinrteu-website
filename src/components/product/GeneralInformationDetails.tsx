@@ -90,19 +90,81 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
             </EditableField>
           </div>
           
-          {displayProduct.secondaryCategories && displayProduct.secondaryCategories.length > 0 && (
-            <div>
-              <p className="text-sm font-medium">Secondary Categories:</p>
-              <EditableField
-                fieldPath="secondaryCategories"
-                value={displayProduct.secondaryCategories}
-                type="array"
-                placeholder="Add category"
-              >
-                <p className="text-muted-foreground">{displayProduct.secondaryCategories.join(", ")}</p>
-              </EditableField>
-            </div>
-          )}
+          <div>
+            <p className="text-sm font-medium">Secondary Categories:</p>
+            <EditableField
+              fieldPath="secondaryCategories"
+              value={displayProduct.secondaryCategories || []}
+              type="array"
+              placeholder="Add category"
+            >
+              <p className="text-muted-foreground">
+                {displayProduct.secondaryCategories && displayProduct.secondaryCategories.length > 0 
+                  ? displayProduct.secondaryCategories.join(", ") 
+                  : "-"}
+              </p>
+            </EditableField>
+          </div>
+          
+          <div>
+            <p className="text-sm font-medium">Modality:</p>
+            <EditableField
+              fieldPath="modality"
+              value={Array.isArray(displayProduct.modality) ? displayProduct.modality : displayProduct.modality ? [displayProduct.modality] : []}
+              type="array"
+              placeholder="Add modality"
+            >
+              <p className="text-muted-foreground">
+                {Array.isArray(displayProduct.modality) 
+                  ? displayProduct.modality.join(", ") 
+                  : formatField(displayProduct.modality)}
+              </p>
+            </EditableField>
+          </div>
+          
+          <div>
+            <p className="text-sm font-medium">Anatomical Location:</p>
+            <EditableField
+              fieldPath="anatomy"
+              value={displayProduct.anatomy || []}
+              type="array"
+              placeholder="Add anatomy"
+            >
+              <p className="text-muted-foreground">
+                {displayProduct.anatomy && displayProduct.anatomy.length > 0 
+                  ? displayProduct.anatomy.join(", ") 
+                  : "-"}
+              </p>
+            </EditableField>
+          </div>
+          
+          <div>
+            <p className="text-sm font-medium">Subspeciality:</p>
+            <EditableField
+              fieldPath="subspeciality"
+              value={displayProduct.subspeciality}
+              type="text"
+              placeholder="Subspeciality"
+            >
+              <p className="text-muted-foreground">{formatField(displayProduct.subspeciality)}</p>
+            </EditableField>
+          </div>
+          
+          <div>
+            <p className="text-sm font-medium">Disease Targeted:</p>
+            <EditableField
+              fieldPath="diseaseTargeted"
+              value={displayProduct.diseaseTargeted || []}
+              type="array"
+              placeholder="Add disease"
+            >
+              <p className="text-muted-foreground">
+                {displayProduct.diseaseTargeted && displayProduct.diseaseTargeted.length > 0 
+                  ? displayProduct.diseaseTargeted.join(", ") 
+                  : "-"}
+              </p>
+            </EditableField>
+          </div>
           
           <div>
             <p className="text-sm font-medium">Release Date:</p>
@@ -152,19 +214,17 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
             </EditableField>
           </div>
           
-          {displayProduct.companyRevisionDate && (
-            <div>
-              <p className="text-sm font-medium">Revised by Company:</p>
-              <EditableField
-                fieldPath="companyRevisionDate"
-                value={displayProduct.companyRevisionDate}
-                type="date"
-                placeholder="Revision date"
-              >
-                <p className="text-muted-foreground">{formatDate(displayProduct.companyRevisionDate)}</p>
-              </EditableField>
-            </div>
-          )}
+          <div>
+            <p className="text-sm font-medium">Revised by Company:</p>
+            <EditableField
+              fieldPath="companyRevisionDate"
+              value={displayProduct.companyRevisionDate}
+              type="date"
+              placeholder="Revision date"
+            >
+              <p className="text-muted-foreground">{formatDate(displayProduct.companyRevisionDate)}</p>
+            </EditableField>
+          </div>
         </div>
       </CardContent>
     </Card>

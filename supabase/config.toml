@@ -56,3 +56,6 @@ verify_jwt = false
 
 [functions.send-deadline-reminders]
 verify_jwt = false
+
+[functions.apply-product-edit]
+verify_jwt = false
