@@ -288,11 +288,6 @@ const EvidenceImpactGuide = () => {
                 PMID: {EVIDENCE_IMPACT_REFERENCE.originalReference.pmid}
               </Badge>
             </div>
-            <div className="text-sm text-muted-foreground pt-2">
-              <Link to="/evidence-levels" className="text-primary hover:underline">
-                View legacy single-axis classification →
-              </Link>
-            </div>
           </CardContent>
         </Card>
       </div>
