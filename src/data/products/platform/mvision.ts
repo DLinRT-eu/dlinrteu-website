@@ -97,7 +97,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI", "CBCT", "Structure sets", "Clinical goals", "Contrast-enhanced CT"],
       inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Synthetic CT images", "Propagated contours", "Treatment plans", "Dose distributions"],
-      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTDOSE"]
     },
     technology: {
       integration: ["PACS", "TPS (Varian, Elekta, RaySearch)", "OIS", "Treatment Planning Systems"],
@@ -130,8 +130,8 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2025-10-21",
-    lastUpdated: "2025-12-01",
-    lastRevised: "2026-01-03",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     evidence: [
       {
         type: "Company Press Release",
