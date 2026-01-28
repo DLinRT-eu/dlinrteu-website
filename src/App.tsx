@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { RoleProvider } from "@/contexts/RoleContext";
+import { ProductEditProvider } from "@/components/product-editor";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import Header from "./components/Header";
@@ -97,11 +98,12 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <RoleProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Header />
+        <ProductEditProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Header />
             <Suspense fallback={
               <div className="flex items-center justify-center min-h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -320,9 +322,10 @@ const App = () => (
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ProductEditProvider>
       </RoleProvider>
     </AuthProvider>
   </QueryClientProvider>
