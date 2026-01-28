@@ -64,7 +64,6 @@ export const exportModelCardToCSV = (product: ProductDetails) => {
       { Section: "Contact Information", Field: "Product URL", Value: modelCard.contact.productUrl },
       { Section: "Contact Information", Field: "Logo URL", Value: modelCard.contact.logoUrl },
       { Section: "Contact Information", Field: "Logo Source", Value: modelCard.contact.logoSource },
-      { Section: "Contact Information", Field: "Contact Email", Value: modelCard.contact.contactEmail },
       { Section: "Contact Information", Field: "Support Email", Value: modelCard.contact.supportEmail },
       
       // Quality Assurance

@@ -26,9 +26,9 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   technicalSpecifications: {
     population: "Institutional data",
     input: ["CT", "MRI", "Structure sets", "Dose matrices"],
-    inputFormat: ["DICOM", "DICOM-RT"],
+    inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
     output: ["Custom AI contouring models","Custom AI planning models","Custom image domain adaption models","TCP/NTCP models"],
-    outputFormat: ["DICOM", "DICOM-RT"] // Fixed output format
+    outputFormat: ["DICOM", "DICOM-RTSTRUCT"] // Fixed output format
   },
   technology: {
     integration: ["AccuContour", "MOZI", "PACS"],

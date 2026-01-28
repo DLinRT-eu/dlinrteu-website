@@ -35,9 +35,9 @@ export const registrationExample: ProductDetails = {
   technicalSpecifications: {
     population: "Adult patients",
     input: ["CT", "MRI", "PET", "CBCT"],
-    inputFormat: ["DICOM", "LIGHT RT-STRUCT"],
+    inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
     output: ["Registered images", "Fused images"],
-    outputFormat: ["DICOM", "DICOM-RT"]
+    outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
   },
   
   regulatoryInfo: {

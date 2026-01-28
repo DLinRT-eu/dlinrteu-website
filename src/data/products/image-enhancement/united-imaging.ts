@@ -18,7 +18,6 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     modality: ["CBCT"],
     diseaseTargeted: ["Cancer"],
     releaseDate: "2021-11-01",
-    version: "1.2",
     keyFeatures: [
       "Deep learning-based CBCT enhancement",
       "Advanced scatter correction",
@@ -47,18 +46,17 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "Part of system clearance",
         class: "Class II",
         type: "510(k)",
-        notes: "Cleared as part of United Imaging uRT radiotherapy system clearances. CBCT enhancement is integrated feature."
+        notes: "uCS-AI is cleared as an integrated feature of United Imaging uRT radiotherapy systems. No standalone 510(k) clearance exists for uCS-AI as a separate device."
       },
-      intendedUseStatement: "Intended for enhancing cone-beam CT images to improve image quality and reduce artifacts to support radiotherapy planning and verification."
+      intendedUseStatement: "uCS-AI is intended for enhancing cone-beam CT images acquired on United Imaging radiotherapy systems to improve image quality and reduce artifacts for radiotherapy planning and verification workflows."
     },
     market: {
       onMarketSince: "2021",
-      distributionChannels: ["Integrated with uRT systems", "Standalone option"],
-
-},
+      distributionChannels: ["Integrated with uRT systems", "Standalone option"]
+    },
     clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
     lastUpdated: "2024-12-20",
     lastRevised: "2026-01-02",

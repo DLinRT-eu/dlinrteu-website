@@ -41,7 +41,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
       input: ["Medical images", "Clinical data", "Treatment schedules", "Staff availability", "Department metrics"],
       inputFormat: ["DICOM", "HL7", "FHIR"],
       output: ["Workflow schedules", "Analytics reports", "AI-generated contours", "Staff assignments"],
-      outputFormat: ["DICOM-RT", "PDF reports", "HL7 messages", "Dashboard analytics"]
+      outputFormat: ["DICOM-RTSTRUCT", "PDF reports", "HL7 messages", "Dashboard analytics"]
     },
     technology: {
       integration: [
@@ -65,22 +65,21 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510(k) Cleared (via integrated components)",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of GE Healthcare radiation oncology platform. Specific clearance number pending verification from vendor."
+        notes: "The iRT platform orchestrates multiple cleared clinical modules. Key component clearances include K230082 (Auto Segmentation, May 2023), K213717 (MR Contour DL), and integrates third-party cleared devices including MVision Contour+ (K241490) and MIM Contour ProtégéAI+."
       },
-      intendedUseStatement: "Radiation therapy collaboration system (RTCS) for comprehensive patient workflow management in oncology departments. Designed to integrate AI-supported auto-segmentation, intelligent resource scheduling, analytics reporting, and vendor-neutral connectivity with hospital information systems to optimize radiation therapy delivery, reduce treatment delays, and improve departmental efficiency."
+      intendedUseStatement: "A fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management. Designed to integrate AI-supported auto-segmentation, intelligent resource scheduling, analytics reporting, and vendor-neutral connectivity with hospital information systems (OIS, TPS, EMR, QA, PACS) to optimize radiation therapy delivery, reduce treatment delays, and improve departmental efficiency."
     },
     market: {
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Hospital partnerships", "Enterprise healthcare solutions"]
     },
-    version: "1.0",
     releaseDate: "2025-09-25",
     lastUpdated: "2025-11-02",
-    lastRevised: "2026-01-03",
-    source: "Company website, CE MDR documentation. FDA clearance number pending vendor verification.",
-    clinicalEvidence: "CE Mark and FDA clearance demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
+    lastRevised: "2026-01-27",
+    source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717.",
+    clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
   }
 ];

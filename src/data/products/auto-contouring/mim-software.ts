@@ -25,7 +25,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native integration with MIM Software", "TPS integration"],
