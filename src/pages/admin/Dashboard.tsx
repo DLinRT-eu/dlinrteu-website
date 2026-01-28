@@ -24,7 +24,8 @@ import {
   Stethoscope,
   RefreshCw,
   UserCheck,
-  Package
+  Package,
+  FileEdit
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -475,6 +476,12 @@ export default function AdminDashboard() {
               <Link to="/admin/changelog">
                 <Package className="h-5 w-5" />
                 <span>Changelog Admin</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/edit-approvals">
+                <FileEdit className="h-5 w-5" />
+                <span>Edit Approvals</span>
               </Link>
             </Button>
             </div>

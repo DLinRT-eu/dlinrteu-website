@@ -64,6 +64,7 @@ const PRManagement = lazy(() => import("./pages/admin/PRManagement"));
 const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard"));
 const UserRegistrationReview = lazy(() => import("./pages/admin/UserRegistrationReview"));
 const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
+const EditApprovals = lazy(() => import("./pages/admin/EditApprovals"));
 
 // Company Pages
 const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
@@ -273,6 +274,11 @@ const App = () => (
                 <Route path="/admin/newsletter" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <NewsletterManagement />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/edit-approvals" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <EditApprovals />
                   </ProtectedRoute>
                 } />
                 
