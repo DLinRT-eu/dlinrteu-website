@@ -12,6 +12,7 @@ Welcome to the DLinRT.eu documentation. This index helps you navigate to the rig
 |--------------|-------|
 | Manage users, rounds, and companies | [Admin Guide](#-admin-guide) |
 | Review assigned products | [Reviewer Guide](#-reviewer-guide) |
+| Use visual editing to update products | [Visual Editing](#-visual-editing) |
 | Understand the assignment system | [Assignment Guide](#-assignment-guide) |
 | Add or update product data | [Product Guide](#-product-guide) |
 | Understand product fields | [Field Reference](#-field-reference) |
@@ -28,6 +29,7 @@ Complete guide for platform administrators covering:
 - **Review Rounds** - Creating and managing structured review cycles
 - **Reviewer Assignment** - Manual and automatic product assignments
 - **Company Management** - Representatives, verifications, and certifications
+- **Product Edit Approvals** - Reviewing and approving visual edits
 - **Security Monitoring** - Audit logs and security events
 - **Changelog Management** - Release notes and dual-repository backfill
 - **Registration Review** - Approving new user registrations
@@ -37,6 +39,7 @@ Complete guide for platform administrators covering:
 - `/admin/users` - User management
 - `/admin/review-rounds` - Review rounds
 - `/admin/companies` - Company management
+- `/admin/edit-approvals` - Product edit approvals
 - `/admin/changelog` - Changelog management
 
 ---
@@ -58,6 +61,27 @@ Essential guide for reviewers covering:
 - `/reviewer/dashboard` - Reviewer workspace
 - `/reviewer/due-reviews` - Upcoming deadlines
 - `/profile` - Manage preferences
+
+---
+
+## ✏️ Visual Editing
+
+**File**: [REVIEWER_GUIDE.md](./REVIEWER_GUIDE.md#4-reviewing-products)
+
+In-browser product editing system:
+
+- **Edit Mode** - Click "Edit" on any product page to enter visual editing
+- **Smart Editors** - Dropdowns for categories, multi-select for modalities
+- **Auto-Save** - Drafts saved every 30 seconds
+- **Approval Workflow** - Submit edits for admin review before GitHub sync
+- **GitHub Integration** - Approved edits automatically create pull requests
+
+**Who Can Edit**:
+- Administrators (all products)
+- Reviewers (assigned products)
+- Company Representatives (own company products)
+
+**Alternative**: Direct GitHub editing is still supported for those who prefer it
 
 ---
 
@@ -165,4 +189,4 @@ When updating documentation:
 
 ---
 
-*Last Updated: January 19, 2026*
+*Last Updated: January 28, 2026*
