@@ -155,7 +155,6 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       productUrl: product.productUrl || "N/A",
       logoUrl: logoInfo.url,
       logoSource: logoInfo.source,
-      contactEmail: product.contactEmail || "N/A",
       supportEmail: product.supportEmail || "N/A",
     },
     quality: {

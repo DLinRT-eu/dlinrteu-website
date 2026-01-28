@@ -1,19 +1,34 @@
-
 import React from 'react';
 import { ExternalLink, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import type { ProductDetails } from '@/types/productDetails';
+import { useProductEdit, GuidelinesEditor } from "@/components/product-editor";
 
 interface GuidelinesDetailsProps {
   product: ProductDetails;
 }
 
 const GuidelinesDetails: React.FC<GuidelinesDetailsProps> = ({ product }) => {
-  if (!product.guidelines || product.guidelines.length === 0) {
+  const { isEditMode, editedProduct, canEdit } = useProductEdit();
+  
+  // Use edited product when in edit mode
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  const showEditor = isEditMode && canEdit;
+  
+  // Show editor even if no guidelines exist
+  if (showEditor) {
     return (
-      <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Guidelines Compliance</h3>
-        <p className="text-gray-500">No guidelines information available.</p>
+      <div className="bg-card shadow rounded-lg p-6">
+        <GuidelinesEditor fieldPath="guidelines" label="Guidelines Compliance" />
+      </div>
+    );
+  }
+  
+  if (!displayProduct.guidelines || displayProduct.guidelines.length === 0) {
+    return (
+      <div className="bg-card shadow rounded-lg p-6">
+        <h3 className="text-lg font-medium mb-4">Guidelines Compliance</h3>
+        <p className="text-muted-foreground">No guidelines information available.</p>
       </div>
     );
   }
@@ -45,16 +60,16 @@ const GuidelinesDetails: React.FC<GuidelinesDetailsProps> = ({ product }) => {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Guidelines Compliance</h3>
+    <div className="bg-card shadow rounded-lg p-6">
+      <h3 className="text-lg font-medium mb-4">Guidelines Compliance</h3>
       <div className="space-y-4">
-        {product.guidelines.map((guideline, index) => (
+        {displayProduct.guidelines!.map((guideline, index) => (
           <div key={index} className="border rounded-lg p-4">
             <div className="flex items-start justify-between mb-2">
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900">{guideline.name}</h4>
+                <h4 className="font-medium">{guideline.name}</h4>
                 {guideline.version && (
-                  <p className="text-sm text-gray-600">Version: {guideline.version}</p>
+                  <p className="text-sm text-muted-foreground">Version: {guideline.version}</p>
                 )}
               </div>
               {guideline.compliance && (
@@ -68,7 +83,7 @@ const GuidelinesDetails: React.FC<GuidelinesDetailsProps> = ({ product }) => {
             </div>
             
             {guideline.reference && (
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-muted-foreground mb-2">
                 <strong>Reference:</strong> {guideline.reference}
               </p>
             )}

@@ -16,7 +16,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "name": "SyntheticMR",
     "description": "Pioneering medical imaging technology company specializing in quantitative MRI and synthetic image generation.",
     "website": "https://syntheticmr.com/",
-    "productIds": ["syntheticmr-neuro"],
+    "productIds": ["syntheticmr-neuro", "syntheticmr-spine"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/syntheticMRI.png"
   },
@@ -35,11 +35,19 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "description": "AI company focused on enhancing medical imaging efficiency and quality.",
     "website": "https://airsmed.com/",
     "productIds": [
-      "airs-swiftmr", 
-      "airs-ct-clarity"
+      "airs-swiftmr"
     ],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/airs.jpg"
+  },
+  {
+    "id": "claripi",
+    "name": "ClariPi",
+    "description": "Korean AI medical imaging company specializing in CT image denoising and dose reduction solutions, founded in 2015 with roots at Seoul National University.",
+    "website": "https://claripi.com/",
+    "productIds": ["claripi-clarict-ai"],
+    "category": "Specialized Solutions",
+    "logoUrl": "/logos/claripi.jpg"
   },
   {
     "id": "subtle-medical",
@@ -49,7 +57,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "productIds": [
       "subtle-mr", 
       "subtle-pet",
-      "subtle-gad"
+      "aimify",
+      "subtle-hd"
     ],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/SubtleMedical.jpg"

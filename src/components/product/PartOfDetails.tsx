@@ -1,16 +1,27 @@
 import { ExternalLink, Package } from "lucide-react";
 import type { ProductDetails } from "@/types/productDetails";
+import { useProductEdit, PartOfEditor } from "@/components/product-editor";
 
 interface PartOfDetailsProps {
   product: ProductDetails;
 }
 
 const PartOfDetails = ({ product }: PartOfDetailsProps) => {
-  if (!product.partOf) {
+  const { isEditMode, editedProduct, canEdit } = useProductEdit();
+  
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  const showEditor = isEditMode && canEdit;
+  
+  // Show editor if in edit mode
+  if (showEditor) {
+    return <PartOfEditor fieldPath="partOf" />;
+  }
+  
+  if (!displayProduct.partOf) {
     return null;
   }
 
-  const { name, version, productUrl, relationship } = product.partOf;
+  const { name, version, productUrl, relationship } = displayProduct.partOf;
 
   return (
     <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 rounded-lg px-3 py-2 mb-4">

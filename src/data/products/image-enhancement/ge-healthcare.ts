@@ -1,42 +1,37 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
 export const GE_PRODUCTS: ProductDetails[] = [
   {
-    id: "ge-dlip-ct",
-    name: "Deep Learning Image Processing for CT",
+    id: "ge-precision-dl",
+    name: "Precision DL",
     company: "GE Healthcare",
     category: "Image Enhancement",
-    description: "AI-powered CT image enhancement technology that improves image quality and reduces noise in standard and low-dose examinations.",
+    description: "Deep learning-based PET image enhancement that improves image quality and enables potential dose reduction while maintaining diagnostic confidence.",
     certification: "FDA Cleared",
     logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com",
-    productUrl: "https://www.gehealthcare.com/products/computed-tomography",
+    productUrl: "https://www.gehealthcare.com/products/molecular-imaging/pet-ct",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/ge-healthcare.ts",
     anatomicalLocation: ["Whole body"],
-    modality: ["CT"],
-    diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],
-    releaseDate: "2021-09-15",
-    version: "2.0",
+    modality: ["PET", "PET/CT"],
+    diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac conditions"],
+    releaseDate: "2023-05-22",
     keyFeatures: [
-      "Deep learning-based image enhancement",
-      "Works with images from any CT scanner",
-      "Reduces image noise while preserving natural texture",
-      "Enhances lesion conspicuity",
-      "Improves low-contrast detectability"
+      "Deep learning-based PET image enhancement",
+      "Improved signal-to-noise ratio",
+      "Potential for reduced tracer dose",
+      "Compatible with various PET/CT systems"
     ],
     technicalSpecifications: {
-      population: "Adult and pediatric",
-      input: ["DICOM CT images"],
+      population: "Adult",
+      input: ["PET images"],
       inputFormat: ["DICOM"],
-      output: ["Enhanced CT images"],
+      output: ["Enhanced PET images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["PACS", "Edison Platform", "AW Workstations"],
-      deployment: ["On-premise server", "Edge device"],
-      triggerForAnalysis: "Automatic or manual trigger",
-      processingTime: "<8 seconds per series"
+      integration: ["GE PET/CT systems", "PACS"],
+      deployment: ["On-scanner", "Workstation"]
     },
     regulatory: {
       ce: {
@@ -48,20 +43,28 @@ export const GE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
+        clearanceNumber: "K230082",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "MYN",
         type: "510(k)",
-        notes: "Part of GE Edison Platform AI application clearances"
+        decisionDate: "2023-05-22"
       },
-      intendedUseStatement: "Intended for use in enhancing CT images to improve image quality through noise reduction and detail enhancement to support clinical interpretation."
+      intendedUseStatement: "Precision DL is intended for use in PET image enhancement to improve image quality through noise reduction."
     },
     market: {
-      onMarketSince: "2021",
-      distributionChannels: ["Direct sales", "Edison Marketplace"],
-
-},
-    clinicalEvidence: "Multiple clinical evaluations demonstrating improved diagnostic confidence and reduced interpretation time",
-    lastUpdated: "2025-01-20",
-    lastRevised: "2026-01-02",
-    source: "Company website"
+      onMarketSince: "2023",
+      distributionChannels: ["Integrated in PET/CT systems", "Software upgrade"]
+    },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance K230082 for Precision DL - Class II device",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf"
+      }
+    ],
+    lastUpdated: "2026-01-27",
+    lastRevised: "2026-01-27",
+    source: "FDA 510(k) database"
   },
   {
     id: "ge-air-recon-dl-enhancement",
@@ -121,6 +124,21 @@ export const GE_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
     lastUpdated: "2025-01-10",
     lastRevised: "2026-01-02",
-    source: "FDA 510(k) database and company website"
+    source: "FDA 510(k) database and company website",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K193282 received March 12, 2020 - Class II device under 21 CFR 892.1000",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf",
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K213717 received May 10, 2022 - Class II device under 21 CFR 892.1000",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf",
+      },
+    ],
+    limitations: [
+      "Tight vendor integration, can only be used with specific GE scanners",
+    ],
   }
 ];

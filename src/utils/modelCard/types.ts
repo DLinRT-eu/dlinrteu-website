@@ -50,7 +50,6 @@ export interface ModelCardData {
     productUrl: string;
     logoUrl: string;
     logoSource: string;
-    contactEmail: string;
     supportEmail: string;
   };
   quality: {
