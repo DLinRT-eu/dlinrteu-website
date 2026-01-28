@@ -32,9 +32,9 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult cancer patients",
       input: ["CT images", "Structure sets"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Contoured structures", "Treatment plans"],
-      outputFormat: ["DICOM-RT"],
+      outputFormat: ["DICOM-RTSTRUCT", "DICOM-RTPLAN"],
     },
     technology: {
       integration: ["Treatment Planning Systems", "Hospital workflows"],
@@ -67,8 +67,8 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     },
     version: "Latest",
     releaseDate: "2020-01-01",
-    lastUpdated: "2026-01-02",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     source: "FDA 510(k) database (K222728), MD Anderson Cancer Center official website",
     evidence: [
       {

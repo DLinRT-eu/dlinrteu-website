@@ -179,6 +179,20 @@ class DataService {
     })) as CompanyDetails[];
   }
 
+  /**
+   * Get only companies that have at least one active (regulatory-approved) product
+   * This is the single source of truth for company counts across the platform
+   */
+  getActiveCompanies(): CompanyDetails[] {
+    return COMPANIES.filter(company => {
+      const activeProducts = ALL_PRODUCTS.filter(product => 
+        company.productIds.includes(product.id || '') && 
+        hasRegulatoryApproval(product)
+      );
+      return activeProducts.length > 0;
+    });
+  }
+
   // News methods
   getAllNews(): NewsItem[] {
     return NEWS_ITEMS;

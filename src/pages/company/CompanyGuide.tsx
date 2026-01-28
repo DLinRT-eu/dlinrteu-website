@@ -47,7 +47,7 @@ export default function CompanyGuide() {
             <CardDescription>Jump to the section you need</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 gap-3">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
               <Button variant="outline" asChild className="justify-start">
                 <a href="#overview"><Building2 className="h-4 w-4 mr-2" />Role Overview</a>
               </Button>
@@ -62,6 +62,9 @@ export default function CompanyGuide() {
               </Button>
               <Button variant="outline" asChild className="justify-start">
                 <a href="#best-practices"><CheckCircle2 className="h-4 w-4 mr-2" />Best Practices</a>
+              </Button>
+              <Button variant="outline" asChild className="justify-start border-green-500/30 bg-green-50/50 dark:bg-green-950/20 hover:bg-green-100 dark:hover:bg-green-950/40">
+                <Link to="/company/certification"><Shield className="h-4 w-4 mr-2 text-green-600" />Certification Program</Link>
               </Button>
             </div>
           </CardContent>

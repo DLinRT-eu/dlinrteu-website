@@ -31,6 +31,11 @@ export const countModelsInProduct = (product: ProductDetails, countingMode: 'mod
     return 1; // Default to 1 if no modality specified
   }
   
+  // For Treatment Planning products with dose prediction models
+  if (product.category === "Treatment Planning" && product.dosePredictionModels) {
+    return product.dosePredictionModels.length;
+  }
+  
   // For other categories, each product typically represents one model
   return 1;
 };

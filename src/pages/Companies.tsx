@@ -23,9 +23,9 @@ const Companies = () => {
   const [isExporting, setIsExporting] = useState(false);
   const { toast } = useToast();
 
-  // Get companies and their products, filtering out companies with no products
+  // Get companies and their products using centralized getActiveCompanies()
   const companies = useMemo(() => {
-    return dataService.getAllCompanies()
+    return dataService.getActiveCompanies()
       .map(company => {
         const companyProducts = dataService.getProductsByCompany(company.id);
         return {
@@ -33,8 +33,7 @@ const Companies = () => {
           products: companyProducts,
           productCount: companyProducts.length
         };
-      })
-      .filter(company => company.productCount > 0);
+      });
   }, []);
 
   // Shuffle companies randomly, but preserve order only for back/forward navigation

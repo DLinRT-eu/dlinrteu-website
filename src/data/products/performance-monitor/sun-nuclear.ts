@@ -36,7 +36,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"],
       output: ["QA reports", "Quality metrics", "Trend analysis"],
       outputFormat: ["PDF", "Dashboard", "CSV"]
     },
@@ -62,8 +62,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2015",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2025-01-01",
-    lastRevised: "2026-01-08",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     source: "Sun Nuclear official website"
   }
 ];

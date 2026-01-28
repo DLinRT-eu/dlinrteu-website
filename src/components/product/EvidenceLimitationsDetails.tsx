@@ -1,24 +1,43 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { FileText, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import EvidenceLevelBadge from "./EvidenceLevelBadge";
+import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 
 interface EvidenceLimitationsDetailsProps {
   product: ProductDetails;
 }
 
+const EVIDENCE_LEVELS = [
+  { value: '0', label: '0 - No Evidence' },
+  { value: '1t', label: '1t - Technical Efficacy' },
+  { value: '1c', label: '1c - Clinical Efficacy' },
+  { value: '2', label: '2 - Stand-Alone Performance' },
+  { value: '3', label: '3 - Workflow Efficacy' },
+  { value: '4', label: '4 - Treatment Decision' },
+  { value: '5', label: '5 - Patient Outcome' },
+  { value: '6', label: '6 - Societal Efficacy' },
+];
+
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
-  const { evidence, limitations, evidenceLevel, evidenceLevelNotes } = product;
+  const { isEditMode, editedProduct, updateField, canEdit } = useProductEdit();
   
-  // Skip rendering if no evidence, limitations, or evidence level are available
+  // Use edited product when in edit mode, otherwise use the original
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  const showEditor = isEditMode && canEdit;
+  
+  const { evidence, limitations, evidenceLevel, evidenceLevelNotes } = displayProduct;
+  
+  // Skip rendering if no evidence, limitations, or evidence level are available (unless in edit mode)
   const hasEvidence = evidence && evidence.length > 0;
   const hasLimitations = limitations && limitations.length > 0;
   const hasEvidenceLevel = !!evidenceLevel;
   
-  if (!hasEvidence && !hasLimitations && !hasEvidenceLevel) {
+  if (!showEditor && !hasEvidence && !hasLimitations && !hasEvidenceLevel) {
     return null;
   }
 
@@ -34,7 +53,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         href={doiUrl} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="flex items-center gap-2 text-blue-600 hover:underline"
+        className="flex items-center gap-2 text-primary hover:underline"
       >
         <FileText className="h-4 w-4" />
         {cleanDoi.replace(/^https:\/\/doi\.org\//, '').replace(/^doi:/, '')}
@@ -47,25 +66,25 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
     if (typeof item === 'string') {
       // Handle legacy DOI string format
       return (
-        <div key={index} className="pl-2 py-1 border-l-2 border-blue-200">
+        <div key={index} className="pl-2 py-1 border-l-2 border-primary/20">
           {formatDOI(item)}
         </div>
       );
     } else {
       // Handle new object format
       return (
-        <div key={index} className="pl-2 py-2 border-l-2 border-blue-200 space-y-1">
+        <div key={index} className="pl-2 py-2 border-l-2 border-primary/20 space-y-1">
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="text-xs">
               {item.type}
             </Badge>
           </div>
-          <p className="text-sm text-gray-700">{item.description}</p>
+          <p className="text-sm text-muted-foreground">{item.description}</p>
           <a 
             href={item.link} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-blue-600 hover:underline text-sm"
+            className="flex items-center gap-2 text-primary hover:underline text-sm"
           >
             <FileText className="h-4 w-4" />
             View Evidence
@@ -85,34 +104,80 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Evidence Level Summary */}
-        {evidenceLevel && evidenceLevelNotes && (
-          <div className="p-3 bg-muted/50 rounded-lg border">
-            <p className="text-sm text-muted-foreground">{evidenceLevelNotes}</p>
-          </div>
-        )}
-
-        {/* Evidence Section */}
-        {hasEvidence && (
-          <div>
-            <h3 className="font-medium text-lg mb-2">Clinical Evidence</h3>
-            <div className="space-y-2">
-              {evidence!.map((item, index) => renderEvidenceItem(item, index))}
+        {(evidenceLevel || showEditor) && (
+          <div className="p-3 bg-muted/50 rounded-lg border space-y-3">
+            {showEditor && (
+              <div className="space-y-1">
+                <Label className="text-sm font-medium">Evidence Level</Label>
+                <Select
+                  value={evidenceLevel || ''}
+                  onValueChange={(v) => updateField('evidenceLevel', v || undefined)}
+                >
+                  <SelectTrigger className="bg-background w-full">
+                    <SelectValue placeholder="Select evidence level" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background z-50">
+                    {EVIDENCE_LEVELS.map(level => (
+                      <SelectItem key={level.value} value={level.value}>
+                        {level.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            <div>
+              <p className="text-sm font-medium mb-1">Evidence Level Notes:</p>
+              <EditableField
+                fieldPath="evidenceLevelNotes"
+                value={evidenceLevelNotes}
+                type="textarea"
+                placeholder="Add notes about the evidence level"
+              >
+                <p className="text-sm text-muted-foreground">
+                  {evidenceLevelNotes || "No notes provided"}
+                </p>
+              </EditableField>
             </div>
           </div>
         )}
 
         {/* Limitations Section */}
-        {hasLimitations && (
+        <div>
+          <h3 className="font-medium text-lg mb-2">Limitations</h3>
+          <EditableField
+            fieldPath="limitations"
+            value={limitations || []}
+            type="array"
+            placeholder="Add a limitation"
+          >
+            {hasLimitations ? (
+              <ul className="space-y-1">
+                {limitations!.map((item, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <XCircle className="h-4 w-4 mt-1 text-amber-500 flex-shrink-0" />
+                    <span className="text-muted-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-muted-foreground italic">No limitations specified</p>
+            )}
+          </EditableField>
+        </div>
+
+        {/* Evidence Editor in edit mode */}
+        {showEditor && (
+          <EvidenceEditor fieldPath="evidence" />
+        )}
+
+        {/* Evidence Section - display only when not in edit mode */}
+        {!showEditor && hasEvidence && (
           <div>
-            <h3 className="font-medium text-lg mb-2">Limitations</h3>
-            <ul className="space-y-1">
-              {limitations!.map((item, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <XCircle className="h-4 w-4 mt-1 text-amber-500 flex-shrink-0" />
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
+            <h3 className="font-medium text-lg mb-2">Clinical Evidence</h3>
+            <div className="space-y-2">
+              {evidence!.map((item, index) => renderEvidenceItem(item, index))}
+            </div>
           </div>
         )}
       </CardContent>

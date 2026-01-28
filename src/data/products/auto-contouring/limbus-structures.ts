@@ -2,6 +2,10 @@
 /**
  * Supported structures for Limbus Contour product
  * Separated from main product data for better maintainability
+ * 
+ * Last verified: 2026-01-23
+ * Note: Gyne HDR, Cardiac, CBCT Adaptive, and SRS Optic Pathway structures
+ * marked as (unverified) - not found on official Limbus website
  */
 
 // Head & Neck structures
@@ -295,50 +299,50 @@ export const LIMBUS_CNS_STRUCTURES = [
   "CNS-T1: Retina_R"
 ];
 
-// Gyne HDR CT structures (updated 2024)
+// Gyne HDR CT structures - UNVERIFIED: Not found on official Limbus website
 export const LIMBUS_GYNE_CT_STRUCTURES = [
-  "Gyne HDR-CT: Bladder",
-  "Gyne HDR-CT: Bowel",
-  "Gyne HDR-CT: Canal_Anal",
-  "Gyne HDR-CT: Colon_Sigmoid",
-  "Gyne HDR-CT: Rectum",
-  "Gyne HDR-CT: Urethra",
-  "Gyne HDR-CT: Cylinder",
-  "Gyne HDR-CT: Vagina",
-  "Gyne HDR-CT: Uterus",
-  "Gyne HDR-CT: Parametrium_L",
-  "Gyne HDR-CT: Parametrium_R",
+  "Gyne HDR-CT: Bladder (unverified)",
+  "Gyne HDR-CT: Bowel (unverified)",
+  "Gyne HDR-CT: Canal_Anal (unverified)",
+  "Gyne HDR-CT: Colon_Sigmoid (unverified)",
+  "Gyne HDR-CT: Rectum (unverified)",
+  "Gyne HDR-CT: Urethra (unverified)",
+  "Gyne HDR-CT: Cylinder (unverified)",
+  "Gyne HDR-CT: Vagina (unverified)",
+  "Gyne HDR-CT: Uterus (unverified)",
+  "Gyne HDR-CT: Parametrium_L (unverified)",
+  "Gyne HDR-CT: Parametrium_R (unverified)",
   // Ring/Tandem applicator models
-  "Gyne HDR-CT: App_Ring",
-  "Gyne HDR-CT: App_Tandem",
-  "Gyne HDR-CT: App_Ovoid_L",
-  "Gyne HDR-CT: App_Ovoid_R",
+  "Gyne HDR-CT: App_Ring (unverified)",
+  "Gyne HDR-CT: App_Tandem (unverified)",
+  "Gyne HDR-CT: App_Ovoid_L (unverified)",
+  "Gyne HDR-CT: App_Ovoid_R (unverified)",
   // Venezia applicator models
-  "Gyne HDR-CT: App_Venezia_Ring",
-  "Gyne HDR-CT: App_Venezia_Tandem",
-  "Gyne HDR-CT: App_Venezia_Interstitial"
+  "Gyne HDR-CT: App_Venezia_Ring (unverified)",
+  "Gyne HDR-CT: App_Venezia_Tandem (unverified)",
+  "Gyne HDR-CT: App_Venezia_Interstitial (unverified)"
 ];
 
-// Gyne HDR MR structures (updated 2024)
+// Gyne HDR MR structures - UNVERIFIED: Not found on official Limbus website
 export const LIMBUS_GYNE_MR_STRUCTURES = [
-  "Gyne HDR-MR: Bladder",
-  "Gyne HDR-MR: Bowel",
-  "Gyne HDR-MR: Canal_Anal",
-  "Gyne HDR-MR: Colon_Sigmoid",
-  "Gyne HDR-MR: Rectum",
-  "Gyne HDR-MR: Urethra",
-  "Gyne HDR-MR: Vagina",
-  "Gyne HDR-MR: Uterus",
-  "Gyne HDR-MR: Parametrium_L",
-  "Gyne HDR-MR: Parametrium_R",
+  "Gyne HDR-MR: Bladder (unverified)",
+  "Gyne HDR-MR: Bowel (unverified)",
+  "Gyne HDR-MR: Canal_Anal (unverified)",
+  "Gyne HDR-MR: Colon_Sigmoid (unverified)",
+  "Gyne HDR-MR: Rectum (unverified)",
+  "Gyne HDR-MR: Urethra (unverified)",
+  "Gyne HDR-MR: Vagina (unverified)",
+  "Gyne HDR-MR: Uterus (unverified)",
+  "Gyne HDR-MR: Parametrium_L (unverified)",
+  "Gyne HDR-MR: Parametrium_R (unverified)",
   // Target volumes for brachytherapy
-  "Gyne HDR-MR: HR-CTV_Ring",
-  "Gyne HDR-MR: HR-CTV_Tandem",
-  "Gyne HDR-MR: HR-CTV_Ovoid",
-  "Gyne HDR-MR: IR-CTV",
+  "Gyne HDR-MR: HR-CTV_Ring (unverified)",
+  "Gyne HDR-MR: HR-CTV_Tandem (unverified)",
+  "Gyne HDR-MR: HR-CTV_Ovoid (unverified)",
+  "Gyne HDR-MR: IR-CTV (unverified)",
   // Applicator models
-  "Gyne HDR-MR: App_Ring",
-  "Gyne HDR-MR: App_Tandem"
+  "Gyne HDR-MR: App_Ring (unverified)",
+  "Gyne HDR-MR: App_Tandem (unverified)"
 ];
 
 // ESTRO Breast Lymph Node structures (new 2024)
@@ -359,47 +363,47 @@ export const LIMBUS_ESTRO_BREAST_LN_STRUCTURES = [
   "Breast ESTRO-CT: LN_Sclav_R"
 ];
 
-// Cardiac Substructures (expanded 2024)
+// Cardiac Substructures - UNVERIFIED: Not found on official Limbus website
 export const LIMBUS_CARDIAC_STRUCTURES = [
-  "Cardiac-CT: Heart",
-  "Cardiac-CT: Atrium_L",
-  "Cardiac-CT: Atrium_R",
-  "Cardiac-CT: Ventricle_L",
-  "Cardiac-CT: Ventricle_R",
-  "Cardiac-CT: A_LAD",
-  "Cardiac-CT: A_Circumflex",
-  "Cardiac-CT: A_RCA",
-  "Cardiac-CT: A_Aorta_Asc",
-  "Cardiac-CT: A_Aorta_Desc",
-  "Cardiac-CT: A_Pulmonary",
-  "Cardiac-CT: V_Pulmonary",
-  "Cardiac-CT: Pericardium",
-  "Cardiac-CT: Valve_Mitral",
-  "Cardiac-CT: Valve_Aortic",
-  "Cardiac-CT: Valve_Tricuspid",
-  "Cardiac-CT: Valve_Pulmonary"
+  "Cardiac-CT: Heart (unverified)",
+  "Cardiac-CT: Atrium_L (unverified)",
+  "Cardiac-CT: Atrium_R (unverified)",
+  "Cardiac-CT: Ventricle_L (unverified)",
+  "Cardiac-CT: Ventricle_R (unverified)",
+  "Cardiac-CT: A_LAD (unverified)",
+  "Cardiac-CT: A_Circumflex (unverified)",
+  "Cardiac-CT: A_RCA (unverified)",
+  "Cardiac-CT: A_Aorta_Asc (unverified)",
+  "Cardiac-CT: A_Aorta_Desc (unverified)",
+  "Cardiac-CT: A_Pulmonary (unverified)",
+  "Cardiac-CT: V_Pulmonary (unverified)",
+  "Cardiac-CT: Pericardium (unverified)",
+  "Cardiac-CT: Valve_Mitral (unverified)",
+  "Cardiac-CT: Valve_Aortic (unverified)",
+  "Cardiac-CT: Valve_Tricuspid (unverified)",
+  "Cardiac-CT: Valve_Pulmonary (unverified)"
 ];
 
-// Additional CBCT Adaptive structures
+// CBCT Adaptive structures - UNVERIFIED: Not found on official Limbus website
 export const LIMBUS_CBCT_ADAPTIVE_STRUCTURES = [
-  "CBCT-Adaptive: Bladder",
-  "CBCT-Adaptive: Rectum",
-  "CBCT-Adaptive: Prostate",
-  "CBCT-Adaptive: SeminalVes",
-  "CBCT-Adaptive: Bowel",
-  "CBCT-Adaptive: Femur_Head_L",
-  "CBCT-Adaptive: Femur_Head_R"
+  "CBCT-Adaptive: Bladder (unverified)",
+  "CBCT-Adaptive: Rectum (unverified)",
+  "CBCT-Adaptive: Prostate (unverified)",
+  "CBCT-Adaptive: SeminalVes (unverified)",
+  "CBCT-Adaptive: Bowel (unverified)",
+  "CBCT-Adaptive: Femur_Head_L (unverified)",
+  "CBCT-Adaptive: Femur_Head_R (unverified)"
 ];
 
-// Optic Pathway Combined (SRS/SRT)
+// Optic Pathway Combined (SRS/SRT) - UNVERIFIED: Not found on official Limbus website
 export const LIMBUS_OPTIC_PATHWAY_STRUCTURES = [
-  "SRS-CT: OpticPathway",
-  "SRS-CT: Optics",
-  "SRS-CT: OpticChiasm",
-  "SRS-CT: OpticNrv_L",
-  "SRS-CT: OpticNrv_R",
-  "SRS-CT: OpticTract_L",
-  "SRS-CT: OpticTract_R"
+  "SRS-CT: OpticPathway (unverified)",
+  "SRS-CT: Optics (unverified)",
+  "SRS-CT: OpticChiasm (unverified)",
+  "SRS-CT: OpticNrv_L (unverified)",
+  "SRS-CT: OpticNrv_R (unverified)",
+  "SRS-CT: OpticTract_L (unverified)",
+  "SRS-CT: OpticTract_R (unverified)"
 ];
 
 // Export all structures combined

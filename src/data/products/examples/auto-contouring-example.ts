@@ -33,7 +33,7 @@ export const autoContouringExample: ProductDetails = {
   
   technicalSpecs: {
     inputFormat: ["DICOM"],
-    outputFormat: ["DICOM RT-STRUCT", "DICOM RT-PLAN"], // Planning output
+    outputFormat: ["DICOM-RTSTRUCT", "DICOM-RTPLAN"], // Planning output
     integrations: ["Any DICOM compatible TPS"],
     processingTime: "~1-2 minutes per structure set",
     accuracy: "85-95% DSC for most structures"

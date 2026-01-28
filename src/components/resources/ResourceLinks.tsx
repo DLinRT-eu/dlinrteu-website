@@ -98,6 +98,29 @@ const ResourceLinks = () => {
       icon: Globe,
       category: "International Harmonization"
     },
+
+    // AI/ML Guidelines (NEW CATEGORY)
+    {
+      title: "AAPM TG-273: AI/ML Best Practices in CAD",
+      description: "AAPM task group report on best practices for AI and machine learning in computer-aided diagnosis (2023)",
+      url: "https://doi.org/10.1002/mp.16188",
+      icon: BookOpen,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "AAPM TG-211: Auto-Segmentation for PET",
+      description: "Task group report on automated segmentation methods for PET imaging applications (2017)",
+      url: "https://doi.org/10.1002/mp.12078",
+      icon: BookOpen,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "EU AI Act High-Risk AI Requirements",
+      description: "Detailed requirements for high-risk AI systems under the EU AI Act including medical devices",
+      url: "https://artificialintelligenceact.eu/high-risk-ai-systems/",
+      icon: Shield,
+      category: "AI/ML Guidelines"
+    },
     
     // Professional Organizations
     {
@@ -134,6 +157,29 @@ const ResourceLinks = () => {
       url: "https://www.icru.org/",
       icon: Award,
       category: "Standards Body"
+    },
+
+    // Radiotherapy Guidelines (NEW CATEGORY)
+    {
+      title: "ICRU Report 97: MRI-Guided Radiotherapy",
+      description: "Comprehensive guidance on MRI-guided radiation therapy techniques and applications (2023)",
+      url: "https://doi.org/10.1093/jicru/ndad010",
+      icon: BookOpen,
+      category: "Radiotherapy Guidelines"
+    },
+    {
+      title: "AAPM TG-302: Surface Guided Radiotherapy",
+      description: "Task group report on surface-guided radiation therapy implementation and QA (2022)",
+      url: "https://doi.org/10.1002/mp.15532",
+      icon: BookOpen,
+      category: "Radiotherapy Guidelines"
+    },
+    {
+      title: "SBRT-PATHY Guidelines",
+      description: "Consensus guidelines for stereotactic body radiotherapy and partial tumor irradiation (2024)",
+      url: "https://doi.org/10.1016/j.radonc.2024.110183",
+      icon: BookOpen,
+      category: "Radiotherapy Guidelines"
     },
     
     // Standards Organizations
@@ -179,6 +225,20 @@ const ResourceLinks = () => {
       icon: Database,
       category: "Data Standards"
     },
+    {
+      title: "OMOP Common Data Model",
+      description: "Standardized data model for observational health data analytics and research",
+      url: "https://ohdsi.github.io/CommonDataModel/",
+      icon: Database,
+      category: "Data Standards"
+    },
+    {
+      title: "RTOG Contouring Atlases",
+      description: "NRG Oncology standardized contouring atlases for radiotherapy target delineation",
+      url: "https://www.nrgoncology.org/Resources/Atlases",
+      icon: BookOpen,
+      category: "Data Standards"
+    },
     
     // Research & Innovation
     {
@@ -219,9 +279,16 @@ const ResourceLinks = () => {
       category: "QA Guidelines"
     },
     {
+      title: "NCS Report 33: QA for AI Auto-Contouring",
+      description: "Netherlands Commission on Radiation Dosimetry guidance on AI-based auto-contouring QA (2023)",
+      url: "https://doi.org/10.25030/ncs-033",
+      icon: Shield,
+      category: "QA Guidelines"
+    },
+    {
       title: "ESTRO Consensus Guidelines",
       description: "Professional consensus statements on radiotherapy techniques and quality standards",
-      url: "https://www.estro.org/About/ESTRO-Organisation-Structure/Committees/ESTRO-Guidelines-Committee",
+      url: "https://doi.org/10.1016/j.radonc.2024.110345",
       icon: Users,
       category: "Clinical Guidelines"
     }

@@ -36,7 +36,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "RT Dose", "EPID Images", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"],
       output: ["Dose verification", "QA reports", "Structure analysis"],
       outputFormat: ["PDF", "Dashboard"]
     },
@@ -62,8 +62,8 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2012",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2025-01-01",
-    lastRevised: "2026-01-08",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     source: "Varian official website"
   }
 ];
