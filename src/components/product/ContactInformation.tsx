@@ -43,35 +43,6 @@ const ContactInformation = ({ product }: ContactInformationProps) => {
           </EditableField>
         </div>
         
-        <div>
-          <p className="text-sm font-medium">Contact Email:</p>
-          <EditableField
-            fieldPath="contactEmail"
-            value={displayProduct.contactEmail}
-            type="text"
-            placeholder="contact@company.com"
-          >
-            {displayProduct.contactEmail ? (
-              <a href={`mailto:${displayProduct.contactEmail}`} className="text-primary hover:underline">
-                {displayProduct.contactEmail}
-              </a>
-            ) : (
-              <p className="text-muted-foreground">N/A</p>
-            )}
-          </EditableField>
-        </div>
-        
-        <div>
-          <p className="text-sm font-medium">Contact Phone:</p>
-          <EditableField
-            fieldPath="contactPhone"
-            value={displayProduct.contactPhone}
-            type="text"
-            placeholder="Phone number"
-          >
-            <p className="text-muted-foreground">{displayProduct.contactPhone || "N/A"}</p>
-          </EditableField>
-        </div>
         
         {githubUrl && (
           <div>
