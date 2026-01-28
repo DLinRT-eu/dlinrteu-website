@@ -35,9 +35,9 @@ export const treatmentPlanningExample: ProductDetails = {
   technicalSpecifications: {
     population: "Cancer patients",
     input: ["CT", "Structure sets", "Dose constraints"],
-    inputFormat: ["DICOM", "DICOM-RT"],
+    inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
     output: ["Treatment plans", "Dose distributions", "DVH curves"],
-    outputFormat: ["DICOM RT-PLAN", "DICOM RT-DOSE"]
+    outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE"]
   },
   
   regulatoryInfo: {

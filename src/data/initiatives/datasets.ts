@@ -112,7 +112,7 @@ export const DATASET_INITIATIVES: Initiative[] = [
     features: [
       "Multiple cancer sites", 
       "Complete RT planning data", 
-      "DICOM-RT format"
+      "DICOM-RTSTRUCT format"
     ],
     dataAccess: "Available through TCIA",
     participationInfo: "Open to all researchers"

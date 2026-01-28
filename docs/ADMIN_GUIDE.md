@@ -13,6 +13,7 @@
 - **Certification Management**: `/admin/certifications` - View all product certifications
 - **User Product Adoptions**: `/admin/user-products` - Track user product interests
 - **Company Mapping Validator**: `/admin/company-mapping-validator` - Validate company data mappings
+- **Product Edit Approvals**: `/admin/edit-approvals` - Review and approve visual edits
 - **Security Dashboard**: `/admin/security` - Monitor security events
 - **Security Monitoring**: `/admin/security-monitoring` - Detailed security monitoring
 - **Changelog Management**: `/admin/changelog` - Manage release notes
@@ -28,6 +29,10 @@
 3. [Reviewer Assignment](#3-reviewer-assignment)
 4. [Company Management](#4-company-management)
 5. [Security Monitoring](#5-security-monitoring)
+6. [Registration Review](#6-registration-review)
+7. [Changelog Management](#7-changelog-management)
+8. [Certification Management](#8-certification-management)
+9. [Product Edit Approvals](#9-product-edit-approvals)
 
 ---
 
@@ -369,4 +374,58 @@ Overview of all product certifications.
 
 ---
 
-**Last Updated**: January 19, 2026
+## 9. Product Edit Approvals
+
+Review and approve product edits submitted by reviewers and company representatives via visual editing.
+
+### Accessing Edit Approvals
+**Route**: `/admin/edit-approvals`
+
+### Features
+- View all pending edits requiring review
+- Compare changes using visual diff viewer
+- Approve or reject edits with feedback
+- Sync approved edits to GitHub (creates PR automatically)
+
+### Draft Status Lifecycle
+
+| Status | Description |
+|--------|-------------|
+| `draft` | Work in progress, auto-saved every 30 seconds |
+| `pending_review` | Submitted by author, awaiting admin review |
+| `approved` | Ready to sync to GitHub |
+| `rejected` | Returned to author with feedback |
+| `applied` | Synced to GitHub as pull request |
+
+### Review Workflow
+
+1. Navigate to Edit Approvals page
+2. Open "Pending Review" tab
+3. Click "View Changes" to see diff comparison
+4. Review the edit summary provided by author
+5. Click "Approve" or "Reject"
+6. Provide feedback (required for rejections)
+7. For approved edits: Click "Sync to GitHub"
+
+### GitHub Integration
+
+When you click "Sync to GitHub" on an approved edit:
+1. A new branch is created: `visual-edit/{product_id}/{timestamp}`
+2. Product file is updated with the edited data
+3. Pull request is opened automatically
+4. Draft status changes to "applied"
+5. PR link is displayed for review
+
+**Requirement**: `GITHUB_TOKEN` must be configured in Supabase Edge Functions secrets.
+
+### Alternative: Direct GitHub Editing
+
+Product data can still be edited directly via GitHub for those who prefer traditional version control:
+1. Clone the repository locally
+2. Edit product files in `src/data/products/`
+3. Create a pull request for review
+4. Changes are reviewed and merged by maintainers
+
+---
+
+**Last Updated**: January 28, 2026

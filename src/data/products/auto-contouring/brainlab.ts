@@ -27,7 +27,7 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
       input: ["MRI (CE-T1)"],
       inputFormat: ["DICOM"],
       output: ["Tumor contours"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     regulatory: {
       ce: {
@@ -80,7 +80,7 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     regulatory: {
       ce: {

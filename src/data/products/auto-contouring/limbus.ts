@@ -33,14 +33,14 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         name: "AAPM TG-275",
         version: "2022", 
         reference: "https://doi.org/10.1002/mp.15419",
-        url: "https://www.aapm.org/pubs/reports/RPT_275.pdf",
+        url: "https://doi.org/10.1002/mp.15419",
         compliance: "full"
       },
       {
         name: "ESTRO Consensus Guideline on CT-based Auto-contouring",
         version: "2021",
         reference: "https://doi.org/10.1016/j.radonc.2021.09.019",
-        url: "https://www.thegreenjournal.com/article/S0167-8140(21)08440-0/fulltext",
+        url: "https://doi.org/10.1016/j.radonc.2021.09.019",
         compliance: "full"
       }
     ],
@@ -49,7 +49,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI", "CBCT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Standalone"],

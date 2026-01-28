@@ -15,7 +15,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     certification: "CE",
     logoUrl: "/logos/siemens.png",
     website: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
-    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brain"],
+    anatomicalLocation: ["Brain", "Head & Neck", "Breast", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
@@ -33,10 +33,10 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       input: ["CT (SOMATOM go.Sim, SOMATOM go.Open Pro)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["Native CT simulator integration", "TPS integration via DICOM-RT"],
+      integration: ["Native CT simulator integration", "TPS integration via DICOM-RTSTRUCT"],
       deployment: ["CT Simulator Integrated (SOMATOM go.Sim, go.Open Pro)"],
       triggerForAnalysis: "Automatic during CT acquisition",
       processingTime: "Part of CT reconstruction workflow"
@@ -54,7 +54,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K233650, K250822",
         productCode: "JAK",
         regulationNumber: "21 CFR 892.1750",
-        notes: "Cleared as integrated feature of SOMATOM go.Sim and SOMATOM go.Open Pro CT simulators. Not a standalone software product."
+        decisionDate: "2024-03-26",
+        notes: "DirectORGANS is cleared as an integrated software feature within the SOMATOM go. Platform (go.Sim and go.Open Pro CT simulators). K233650 cleared VB10 software (2024-03-26). K250822 cleared VB20 software (2025-07-03). Not a standalone software product."
       },
       intendedUseStatement: "DirectORGANS is intended for automatic segmentation of organs at risk during CT simulation for radiation therapy planning. It operates as an integrated feature of compatible SOMATOM CT simulators."
     },
@@ -64,7 +65,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     },
     version: "VA30+",
     releaseDate: "2023-05-25",
-    lastUpdated: "2025-07-03",
+    lastUpdated: "2026-01-26",
     supportedStructures: [
       "Brain structures",
       "Head & Neck: Brainstem, Parotid (L/R), Spinal Cord, Mandible, Eyes, Optic structures",
@@ -72,7 +73,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Abdomen: Liver, Kidneys (L/R), Spleen, Stomach, Bowel",
       "Pelvis: Bladder, Rectum, Femoral Heads, Prostate"
     ],
-    lastRevised: "2026-01-02",
-    source: "Siemens Healthineers official documentation, ASTRO whitepaper, FDA 510(k) K233650/K250822"
+    lastRevised: "2026-01-26",
+    source: "Siemens Healthineers official documentation, DirectORGANS white paper (https://www.astro.org/ASTRO/media/ASTRO/Meetings%20and%20Education/PDFs/Refresher21/WhitePaper_DirectORGANS.pdf), FDA 510(k) K233650 (https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233650.pdf), FDA 510(k) K250822"
   }
 ];

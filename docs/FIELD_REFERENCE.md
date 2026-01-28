@@ -147,15 +147,48 @@ Products are classified using an evidence hierarchy adapted from [van Leeuwen et
 | `notes` | ➖ | Reviewer comments for administrators. | Markdown/plain text. | Capture key findings or blockers. |
 | `deadline` | auto | Due date for current reviewer. | ISO date. | Provided by admin during assignment. |
 
+## Visual Editing Field Types
+
+When using the in-browser visual editor, fields use specialized editor components:
+
+### Single-Select Dropdowns
+| Field | Options Source |
+|-------|----------------|
+| `category` | 10 predefined categories |
+| `certification` | Standard certification types |
+| `regulatory.*.status` | Regulatory status enums |
+
+### Multi-Select Editors
+| Field | Options Source |
+|-------|----------------|
+| `secondaryCategories` | 10 predefined categories |
+| `modality` | Modality tags (CT, MRI, CBCT, etc.) |
+| `anatomicalLocation` | Anatomy tags (Brain, Thorax, etc.) |
+
+### Specialized Editors
+| Field | Editor |
+|-------|--------|
+| `regulatory` | RegulatoryEditor - Full CE/FDA/TGA editing |
+| `evidence` | EvidenceEditor - Links with evidence levels |
+| `supportedStructures` | StructuresEditor - OAR/GTV/Elective classification |
+| `guidelines` | GuidelinesEditor - Professional guidelines compliance |
+
+### Always-Visible Sections
+- **Evidence & Limitations** card is always visible to encourage setting evidence level
+- Evidence level can be set even when no evidence links exist
+
+---
+
 ## Quick Checklist for Reviewers
 
 1. Confirm **core identity** fields (name, company, description, category).
-2. Validate **modality, anatomy, supportedStructures** against current evidence.
-3. Update **versioning and dates** even if no other change is required.
-4. Verify **regulatory** claims with certificates or official databases.
-5. Ensure **contact & website links** are live.
-6. Record **evidence, limitations, and guidelines** when available.
-7. Refresh **lastUpdated** after every edit to keep `/review` overview accurate.
+2. **Set evidence level** (0-6) - this is now prominently displayed.
+3. Validate **modality, anatomy, supportedStructures** against current evidence.
+4. Update **versioning and dates** even if no other change is required.
+5. Verify **regulatory** claims with certificates or official databases.
+6. Ensure **contact & website links** are live.
+7. Record **evidence, limitations, and guidelines** when available.
+8. **Submit for review** via EditToolbar (or create GitHub PR if editing directly).
 
 ---
 
@@ -184,4 +217,4 @@ These fields are used when company representatives certify product information:
 
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: January 19, 2026
+**Last Updated**: January 28, 2026

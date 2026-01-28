@@ -30,7 +30,6 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "philips-mrcat-pelvis",
       "philips-precise-image",
       "philips-smartspeed",
-      "philips-intellispace-ai-enhancement",
       "philips-smartdose-ct-enhancement"
     ],
     "category": "Medical Imaging",
@@ -59,8 +58,7 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "productIds": [
       "canon-aice-ct", 
       "canon-aice-mr",
-      "canon-piqe",
-      "canon-advanced-vis-ai"
+      "canon-piqe"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/canon.jpg"

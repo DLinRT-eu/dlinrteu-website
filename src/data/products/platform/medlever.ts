@@ -16,7 +16,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Real-time analytics & visibility"
     ],
     category: "Platform",
-    certification: "FDA",
+    certification: "Non-Regulated",
     logoUrl: "/logos/medlever.jpg",
     website: "https://medlever.com/",
     anatomicalLocation: ["Multi-site"],
@@ -34,7 +34,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
       input: ["Clinical data", "Treatment plans", "Scheduling data", "Financial data", "QA metrics", "Staff assignments"],
       inputFormat: ["DICOM", "HL7", "FHIR", "System APIs"],
       output: ["Workflow schedules", "Documentation reports", "Analytics dashboards", "Billing data", "QA reports"],
-      outputFormat: ["DICOM-RT", "HL7 messages", "PDF reports", "API responses", "Dashboard analytics"]
+      outputFormat: ["DICOM-RTSTRUCT", "HL7 messages", "PDF reports", "API responses", "Dashboard analytics"]
     },
     technology: {
       integration: [
@@ -52,23 +52,22 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       fda: {
-        status: "510(k) Cleared",
-        class: "Class II",
-        type: "510(k)",
-        notes: "Clearance number pending verification from vendor. Product marketed as FDA 510(k) cleared Class II medical device."
+        status: "Non-Device-MDDS (Exempt)",
+        type: "MDDS Exempt",
+        notes: "Per FDA's 2022 guidance on Medical Device Data Systems, workflow management software that transfers, stores, and displays clinical data without diagnostic modification is classified as Non-Device-MDDS and exempt from 510(k) requirements."
       },
-      intendedUseStatement: "Workflow orchestration and documentation automation for radiation oncology departments"
+      intendedUseStatement: "A vendor-independent workflow automation and documentation solution designed to coordinate the full patient care cycle (simulation, planning, treatment, and QA) in radiation oncology. The platform simplifies clinical and administrative activities, automates document generation, and provides real-time visibility through bidirectional synchronization with Oncology Information Systems (OIS)."
     },
     market: {
       onMarketSince: "2024",
       distributionChannels: ["Direct sales"]
     },
-    version: "1.0",
+    usesAI: false,
     releaseDate: "2024-01-01",
     lastUpdated: "2025-11-14",
-    lastRevised: "2026-01-03",
+    lastRevised: "2026-01-27",
     companyRevisionDate: "2025-11-02",
-    source: "Company provided information. FDA clearance number pending vendor verification.",
-    clinicalEvidence: "FDA 510(k) cleared Class II medical device for workflow orchestration and documentation automation in radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."
+    source: "Company provided information. Regulatory classification based on FDA 2022 MDDS guidance.",
+    clinicalEvidence: "Non-Device-MDDS workflow management platform for radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."
   }
 ];

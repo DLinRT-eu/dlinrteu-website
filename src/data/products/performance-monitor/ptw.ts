@@ -40,7 +40,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients with AI-generated contours",
       input: ["AI contours", "Manual contours", "Treatment data"],
-      inputFormat: ["DICOM-RT", "RT Structure Sets"],
+      inputFormat: ["DICOM-RTSTRUCT", "RT Structure Sets"],
       output: ["Quality reports", "Performance metrics"],
       outputFormat: ["CSV", "Dashboard"]
     },

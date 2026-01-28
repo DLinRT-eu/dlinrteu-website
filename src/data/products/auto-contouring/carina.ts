@@ -24,7 +24,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI", "PET/CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "Cloud API"],

@@ -99,20 +99,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
 
       if (error) {
-        // Provide user-friendly error messages
-        if (error.message.includes('Invalid login credentials')) {
-          return { error: new Error('Invalid email or password. Please try again.') };
-        }
-        if (error.message.includes('Email not confirmed')) {
-          return { error: new Error('Please verify your email address before signing in.') };
-        }
-        return { error };
+        // Use generic error message to prevent user enumeration attacks
+        // Don't differentiate between invalid credentials, non-existent accounts, or unverified emails
+        return { error: new Error('Unable to sign in. Please check your credentials and ensure your email is verified.') };
       }
 
       return { error: null };
     } catch (error: any) {
       console.error('[Auth] Sign in failed');
-      return { error };
+      // Return generic error to prevent information leakage
+      return { error: new Error('Unable to sign in. Please try again later.') };
     }
   };
 

@@ -20,7 +20,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     diseaseTargeted: ["Head and Neck Cancer"],
     features: [
       "Head & Neck CT auto-contouring (OARs)",
-      "DICOM input and DICOM-RT (RTSTRUCT) output",
+      "DICOM input and DICOM-RTSTRUCT output",
       "Designed for TPS-based clinician review/edit workflow",
       "Server-based deployment for local hospital networks"
     ],
@@ -30,7 +30,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration"],

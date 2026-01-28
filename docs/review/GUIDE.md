@@ -14,22 +14,40 @@ This guide covers all aspects of working with products on DLinRT.eu, including r
 
 ## Reviewing Products
 
+DLinRT.eu supports two methods for reviewing products:
+
+### Method 1: Visual Editing (Recommended)
+
 1. **Start Review**
    - Open product page
-   - Click "Review" button
-   - Follow guided checklist
+   - Click "Edit" button in header (requires reviewer/admin/company role)
+   - EditToolbar appears at bottom of page
 
-2. **Check Information**
-   - Basic details (name, company, website)
-   - Features and capabilities
-   - Primary and secondary categories
-   - Integrations and certifications
-   - Category-specific fields
+2. **Make Changes**
+   - Click on editable fields to modify
+   - Use dropdown menus for predefined options (category, modality, anatomy)
+   - Use specialized editors for complex fields (regulatory, evidence, structures)
+   - Changes auto-save every 30 seconds
 
-3. **Submit Changes**
-   - Document verification sources
-   - Submit through interface
-   - Changes create PR automatically
+3. **Set Evidence Level**
+   - Every product should have an evidence level (0-6)
+   - The Evidence & Limitations section is always visible
+   - Select level from dropdown and add justification notes
+
+4. **Submit for Review**
+   - Click "Submit" in EditToolbar
+   - Write an edit summary describing your changes
+   - Admin reviews and approves/rejects
+   - Approved edits automatically sync to GitHub as PR
+
+### Method 2: Direct GitHub Editing
+
+For developers who prefer traditional version control:
+
+1. **Clone repository** from GitHub
+2. **Edit product files** in `src/data/products/[category]/`
+3. **Create pull request** with your changes
+4. **Maintainers review** and merge
 
 ## Adding New Products
 
@@ -217,6 +235,21 @@ All examples include:
 - Complete field documentation
 - AI classification fields (`usesAI`, `monitorsAIProducts`)
 
+## Evidence Level Classification
+
+Every product should have an evidence level assigned. The classification follows the hierarchy from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z), adapted for radiotherapy:
+
+| Level | Name | When to Use |
+|-------|------|-------------|
+| 0 | No Evidence | FDA summary only, no peer review |
+| 1t | Technical Efficacy | Reproducibility tests |
+| 1c | Potential Clinical Efficacy | Correlation studies |
+| 2 | Stand-Alone Performance | Clinical dataset validation |
+| 3 | Workflow Efficacy | Time savings studies |
+| 4 | Treatment Decision Efficacy | Plan impact studies |
+| 5 | Patient Outcome Efficacy | Toxicity, survival data |
+| 6 | Societal Efficacy | Health economics |
+
 ## Need Help?
 
 - Check example templates
@@ -226,4 +259,4 @@ All examples include:
 
 ---
 
-*Last Updated: January 19, 2026*
+*Last Updated: January 28, 2026*
