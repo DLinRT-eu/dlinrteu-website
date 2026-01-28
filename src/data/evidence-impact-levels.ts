@@ -209,17 +209,3 @@ export const EVIDENCE_IMPACT_REFERENCE = {
     url: "https://doi.org/10.1007/s00330-021-07892-z"
   }
 };
-
-// ==================== MIGRATION MAPPING ====================
-// Maps old single-axis levels to suggested dual-axis values
-
-export const LEGACY_LEVEL_MAPPING: Record<string, { rigor: EvidenceRigorCode; impact: ClinicalImpactCode; notes: string }> = {
-  "0": { rigor: "E0", impact: "I0", notes: "No evidence - requires manual assessment of intended impact" },
-  "1t": { rigor: "E1", impact: "I0", notes: "Technical validation only" },
-  "1c": { rigor: "E1", impact: "I1", notes: "Performance correlation studies" },
-  "2": { rigor: "E2", impact: "I1", notes: "Stand-alone performance validation" },
-  "3": { rigor: "E2", impact: "I2", notes: "Workflow efficacy studies" },
-  "4": { rigor: "E2", impact: "I3", notes: "Decision impact studies" },
-  "5": { rigor: "E2", impact: "I4", notes: "Outcome efficacy studies" },
-  "6": { rigor: "E3", impact: "I5", notes: "Societal impact studies" }
-};

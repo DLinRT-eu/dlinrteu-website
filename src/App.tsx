@@ -45,7 +45,6 @@ const Changelog = lazy(() => import("./pages/Changelog"));
 const Roles = lazy(() => import("./pages/Roles"));
 const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
 const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
-const EvidenceLevels = lazy(() => import("./pages/EvidenceLevels"));
 const EvidenceImpactGuide = lazy(() => import("./pages/EvidenceImpactGuide"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
@@ -142,7 +141,6 @@ const App = () => (
                 <Route path="review" element={<ReviewDashboard />} />
                 <Route path="review/:id" element={<ProductReview />} />
                 <Route path="resources-compliance" element={<ResourcesCompliance />} />
-                <Route path="evidence-levels" element={<EvidenceLevels />} />
                 <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
