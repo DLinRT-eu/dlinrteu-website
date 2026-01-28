@@ -6,13 +6,21 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import EvidenceLevelBadge from "./EvidenceLevelBadge";
+import EvidenceImpactBadges from "./EvidenceImpactBadges";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
+import {
+  EVIDENCE_RIGOR_LEVELS,
+  CLINICAL_IMPACT_LEVELS,
+  EvidenceRigorCode,
+  ClinicalImpactCode,
+} from "@/data/evidence-impact-levels";
 
 interface EvidenceLimitationsDetailsProps {
   product: ProductDetails;
 }
 
-const EVIDENCE_LEVELS = [
+// Legacy single-axis levels
+const LEGACY_EVIDENCE_LEVELS = [
   { value: '0', label: '0 - No Evidence' },
   { value: '1t', label: '1t - Technical Efficacy' },
   { value: '1c', label: '1c - Clinical Efficacy' },
@@ -23,6 +31,17 @@ const EVIDENCE_LEVELS = [
   { value: '6', label: '6 - Societal Efficacy' },
 ];
 
+// Dual-axis options
+const EVIDENCE_RIGOR_OPTIONS = EVIDENCE_RIGOR_LEVELS.map(level => ({
+  value: level.level,
+  label: `${level.level} - ${level.name}`
+}));
+
+const CLINICAL_IMPACT_OPTIONS = CLINICAL_IMPACT_LEVELS.map(level => ({
+  value: level.level,
+  label: `${level.level} - ${level.name}`
+}));
+
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
   const { isEditMode, editedProduct, updateField, canEdit } = useProductEdit();
   
@@ -30,14 +49,24 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
   const showEditor = isEditMode && canEdit;
   
-  const { evidence, limitations, evidenceLevel, evidenceLevelNotes } = displayProduct;
+  const { 
+    evidence, 
+    limitations, 
+    evidenceLevel, 
+    evidenceLevelNotes,
+    evidenceRigor,
+    evidenceRigorNotes,
+    clinicalImpact,
+    clinicalImpactNotes 
+  } = displayProduct;
   
-  // Skip rendering if no evidence, limitations, or evidence level are available (unless in edit mode)
+  // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
   const hasLimitations = limitations && limitations.length > 0;
-  const hasEvidenceLevel = !!evidenceLevel;
+  const hasLegacyLevel = !!evidenceLevel;
+  const hasDualAxis = !!(evidenceRigor || clinicalImpact);
   
-  if (!showEditor && !hasEvidence && !hasLimitations && !hasEvidenceLevel) {
+  if (!showEditor && !hasEvidence && !hasLimitations && !hasLegacyLevel && !hasDualAxis) {
     return null;
   }
 
@@ -97,15 +126,123 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center justify-between">
+        <CardTitle className="flex items-center justify-between flex-wrap gap-2">
           <span>Evidence & Limitations</span>
-          {evidenceLevel && <EvidenceLevelBadge level={evidenceLevel} size="md" />}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Show dual-axis badges if available */}
+            {hasDualAxis && (
+              <EvidenceImpactBadges 
+                evidenceRigor={evidenceRigor as EvidenceRigorCode} 
+                clinicalImpact={clinicalImpact as ClinicalImpactCode}
+                size="md"
+              />
+            )}
+            {/* Show legacy badge if no dual-axis */}
+            {!hasDualAxis && evidenceLevel && (
+              <EvidenceLevelBadge level={evidenceLevel} size="md" />
+            )}
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Evidence Level Summary */}
+        {/* Dual-Axis Classification */}
+        {(hasDualAxis || showEditor) && (
+          <div className="p-4 bg-muted/50 rounded-lg border space-y-4">
+            <h4 className="font-medium text-sm">Dual-Axis Classification</h4>
+            
+            {/* Evidence Rigor */}
+            <div className="space-y-2">
+              {showEditor ? (
+                <>
+                  <Label className="text-sm font-medium">Evidence Rigor (E0-E3)</Label>
+                  <Select
+                    value={evidenceRigor || ''}
+                    onValueChange={(v) => updateField('evidenceRigor', v || undefined)}
+                  >
+                    <SelectTrigger className="bg-background w-full">
+                      <SelectValue placeholder="Select evidence rigor" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      {EVIDENCE_RIGOR_OPTIONS.map(opt => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </>
+              ) : evidenceRigor && (
+                <div className="text-sm">
+                  <span className="font-medium">Evidence Rigor:</span>{" "}
+                  <span className="text-muted-foreground">
+                    {EVIDENCE_RIGOR_OPTIONS.find(o => o.value === evidenceRigor)?.label}
+                  </span>
+                </div>
+              )}
+              
+              <EditableField
+                fieldPath="evidenceRigorNotes"
+                value={evidenceRigorNotes}
+                type="textarea"
+                placeholder="Notes about evidence rigor"
+              >
+                {evidenceRigorNotes && (
+                  <p className="text-sm text-muted-foreground">{evidenceRigorNotes}</p>
+                )}
+              </EditableField>
+            </div>
+
+            {/* Clinical Impact */}
+            <div className="space-y-2">
+              {showEditor ? (
+                <>
+                  <Label className="text-sm font-medium">Clinical Impact (I0-I5)</Label>
+                  <Select
+                    value={clinicalImpact || ''}
+                    onValueChange={(v) => updateField('clinicalImpact', v || undefined)}
+                  >
+                    <SelectTrigger className="bg-background w-full">
+                      <SelectValue placeholder="Select clinical impact" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      {CLINICAL_IMPACT_OPTIONS.map(opt => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </>
+              ) : clinicalImpact && (
+                <div className="text-sm">
+                  <span className="font-medium">Clinical Impact:</span>{" "}
+                  <span className="text-muted-foreground">
+                    {CLINICAL_IMPACT_OPTIONS.find(o => o.value === clinicalImpact)?.label}
+                  </span>
+                </div>
+              )}
+              
+              <EditableField
+                fieldPath="clinicalImpactNotes"
+                value={clinicalImpactNotes}
+                type="textarea"
+                placeholder="Notes about clinical impact"
+              >
+                {clinicalImpactNotes && (
+                  <p className="text-sm text-muted-foreground">{clinicalImpactNotes}</p>
+                )}
+              </EditableField>
+            </div>
+          </div>
+        )}
+
+        {/* Legacy Single-Axis Classification */}
         {(evidenceLevel || showEditor) && (
-          <div className="p-3 bg-muted/50 rounded-lg border space-y-3">
+          <div className="p-3 bg-muted/30 rounded-lg border space-y-3">
+            <h4 className="font-medium text-sm text-muted-foreground">
+              Legacy Classification
+              {hasDualAxis && <span className="ml-2 text-xs">(for backward compatibility)</span>}
+            </h4>
             {showEditor && (
               <div className="space-y-1">
                 <Label className="text-sm font-medium">Evidence Level</Label>
@@ -117,7 +254,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                     <SelectValue placeholder="Select evidence level" />
                   </SelectTrigger>
                   <SelectContent className="bg-background z-50">
-                    {EVIDENCE_LEVELS.map(level => (
+                    {LEGACY_EVIDENCE_LEVELS.map(level => (
                       <SelectItem key={level.value} value={level.value}>
                         {level.label}
                       </SelectItem>
