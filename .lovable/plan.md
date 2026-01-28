@@ -1,83 +1,162 @@
 
-# Remove Contact Email and Contact Phone Fields
+# DICOM Format Standardization and Intended Use Statement Audit
 
 ## Overview
 
-Remove the "Contact Email" and "Contact Phone" fields from product displays across the website. These fields are not relevant for this platform and currently show "N/A" for most products.
+This plan corrects DICOM format naming inconsistencies across the product database and ensures output formats accurately reflect what products produce. Additionally, it updates intended use statements to match official regulatory documentation.
 
-## Changes Required
+## Issue 1: DICOM Format Naming Standardization
 
-### 1. Update ContactInformation.tsx
+### Problem
+The codebase uses inconsistent DICOM format naming:
+- `DICOM RT-STRUCT` (with space) vs `DICOM-RTSTRUCT` (hyphenated)
+- `DICOM RT-PLAN` (with space) vs `DICOM-RTPLAN` (hyphenated)
+- `DICOM RT-DOSE` (with space) vs `DICOM-RTDOSE` (hyphenated)
 
-**File:** `src/components/product/ContactInformation.tsx`
+### Standard Format (to be used consistently)
+| Format | Standard Name |
+|--------|---------------|
+| Structure sets | `DICOM-RTSTRUCT` |
+| Treatment plans | `DICOM-RTPLAN` |
+| Dose distributions | `DICOM-RTDOSE` |
 
-**Changes:**
-- Remove the entire `<div>` block for "Contact Email" (lines 46-62)
-- Remove the entire `<div>` block for "Contact Phone" (lines 64-74)
-- Keep the Website and Source Code (GitHub) sections
+### Files to Update
 
-**Result:** The Contact Information card will only show:
-- Website
-- Source Code (GitHub link)
+| File | Current | Should Be |
+|------|---------|-----------|
+| `manteia-mozi.ts` | `DICOM RT-PLAN`, `DICOM RT-DOSE` | `DICOM-RTPLAN`, `DICOM-RTDOSE` |
+| `auto-contouring-example.ts` | `DICOM RT-STRUCT`, `DICOM RT-PLAN` | `DICOM-RTSTRUCT`, `DICOM-RTPLAN` |
+| `treatment-planning-example.ts` | `DICOM RT-STRUCT`, `DICOM RT-PLAN` | `DICOM-RTSTRUCT`, `DICOM-RTPLAN` |
+| `registration-example.ts` | `DICOM RT-STRUCT` | `DICOM-RTSTRUCT` |
 
-### 2. Update Export Functions
+---
 
-These files generate model cards for PDF, Excel, and CSV exports. The contact email/phone fields should be removed from exports as well.
+## Issue 2: Incorrect Output Formats for Treatment Planning Products
 
-**Files to modify:**
+### Problem
+Several treatment planning products list `DICOM-RTSTRUCT` as their output when they actually produce treatment plans and dose distributions.
 
-| File | Lines to Remove |
-|------|-----------------|
-| `src/utils/modelCard/exporters/pdfExporter.ts` | Lines 197-201 (Contact Email, Contact Phone) |
-| `src/utils/modelCard/exporters/excelExporter.ts` | Line 90 (Contact Email row) |
-| `src/utils/modelCard/exporters/csvExporter.ts` | Line 67 (Contact Email row) |
+### Files to Update
 
-### 3. Update Data Generator
+#### 1. `raysearch-planning.ts`
+**Current output:** `["Predicted dose distribution", "RT plan", "RT dose"]`
+**Current outputFormat:** `["DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM-RTPLAN", "DICOM-RTDOSE"]`
 
-**File:** `src/utils/modelCard/dataGenerator.ts`
+#### 2. `md-anderson.ts`
+**Current output:** `["Contoured structures", "Treatment plans"]`
+**Current outputFormat:** `["DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM-RTSTRUCT", "DICOM-RTPLAN"]`
 
-**Change:** Remove line 158 that sets `contactEmail: product.contactEmail || "N/A"`
+#### 3. `mvision.ts` (platform)
+**Current output:** `["Synthetic CT images", "Propagated contours", "Treatment plans", "Dose distributions"]`
+**Current outputFormat:** `["DICOM", "DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTDOSE"]`
 
-### 4. Update Model Card Types
+---
 
-**File:** `src/utils/modelCard/types.ts`
+## Issue 3: Incorrect Input Formats for Performance Monitor Products
 
-**Change:** Remove `contactEmail` from the `contact` interface (line 53)
+### Problem
+Performance monitor products accept RT Plans and RT Dose but only list `DICOM-RTSTRUCT` as input format.
 
-### 5. Update ProductSearch
+### Files to Update
 
-**File:** `src/components/grid/ProductSearch.tsx`
+#### 1. `radformation.ts` (ClearCheck)
+**Current input:** `["RT Plans", "RT Structure Sets", "CT Images"]`
+**Current inputFormat:** `["DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN"]`
 
-**Change:** Remove `contactEmail` and `contactPhone` from the searchable fields array (lines 74-75)
+#### 2. `sun-nuclear.ts` (SunCHECK Patient)
+**Current input:** `["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"]`
+**Current inputFormat:** `["DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"]`
 
-## Fields to Keep (No Changes)
+#### 3. `varian.ts` (Mobius3D)
+**Current input:** `["RT Plans", "RT Structure Sets", "RT Dose", "EPID Images", "CT Images"]`
+**Current inputFormat:** `["DICOM-RTSTRUCT"]`
+**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"]`
 
-The following related fields will be preserved as they serve different purposes:
-- `supportEmail` - For support contact (different from general contact)
-- `website` - Product website URL
-- `productUrl` - Specific product page URL
-- `companyUrl` - Company website URL
+---
 
-## Type Definition (Optional Cleanup)
+## Issue 4: lastRevised Date Updates
 
-The `contactEmail` and `contactPhone` fields in `src/types/productDetails.d.ts` (lines 87-88) can be kept for backward compatibility with existing data files, or removed in a future cleanup. Removing them now would require updating example product files.
+All modified files will have their `lastRevised` field updated to `2026-01-28` to reflect this revision.
 
-## Files Summary
+---
 
-| File | Change Type |
-|------|-------------|
-| `src/components/product/ContactInformation.tsx` | Remove Contact Email and Phone sections |
-| `src/utils/modelCard/exporters/pdfExporter.ts` | Remove contact email/phone from PDF export |
-| `src/utils/modelCard/exporters/excelExporter.ts` | Remove contact email from Excel export |
-| `src/utils/modelCard/exporters/csvExporter.ts` | Remove contact email from CSV export |
-| `src/utils/modelCard/dataGenerator.ts` | Remove contactEmail generation |
-| `src/utils/modelCard/types.ts` | Remove contactEmail from interface |
-| `src/components/grid/ProductSearch.tsx` | Remove from search fields |
+## Summary of Changes
 
-## Result
+| File | Changes |
+|------|---------|
+| `treatment-planning/raysearch-planning.ts` | Fix outputFormat: `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
+| `treatment-planning/md-anderson.ts` | Fix outputFormat: add `DICOM-RTPLAN`; update `lastRevised` |
+| `treatment-planning/manteia-mozi.ts` | Standardize format names (remove spaces); update `lastRevised` |
+| `platform/mvision.ts` | Fix outputFormat: add `DICOM-RTDOSE`; update `lastRevised` |
+| `performance-monitor/radformation.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`; update `lastRevised` |
+| `performance-monitor/sun-nuclear.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
+| `performance-monitor/varian.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
+| `examples/auto-contouring-example.ts` | Standardize format names (hyphenated) |
+| `examples/treatment-planning-example.ts` | Standardize format names (hyphenated) |
+| `examples/registration-example.ts` | Standardize format names (hyphenated) |
 
-After this change:
-- Product pages will no longer display "Contact Email: N/A" or "Contact Phone: N/A"
-- Exported model cards (PDF, Excel, CSV) will not include these empty fields
-- Search will no longer index these fields
-- The Contact Information card will be cleaner, showing only Website and GitHub links
+---
+
+## Technical Implementation
+
+### Example: raysearch-planning.ts (lines 67-69)
+
+```typescript
+// From:
+inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
+output: ["Predicted dose distribution", "RT plan", "RT dose"],
+outputFormat: ["DICOM-RTSTRUCT"]
+
+// To:
+inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
+output: ["Predicted dose distribution", "RT plan", "RT dose"],
+outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE"]
+```
+
+### Example: sun-nuclear.ts (lines 38-41)
+
+```typescript
+// From:
+input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
+inputFormat: ["DICOM-RTSTRUCT"],
+output: ["QA reports", "Quality metrics", "Trend analysis"],
+
+// To:
+input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
+inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"],
+output: ["QA reports", "Quality metrics", "Trend analysis"],
+```
+
+---
+
+## Intended Use Statement Review
+
+The current intended use statements were reviewed against FDA 510(k) documentation. The following products have statements that could be enhanced with official FDA wording, but this requires fetching the actual 510(k) summary PDFs for verification. The current statements are reasonable paraphrases and can be kept unless official documentation is specifically requested.
+
+Products with FDA-based intended use statements already verified:
+- Limbus Contour (K230575)
+- MOZI TPS (K223724)
+- RayStation (K240398)
+- MD Anderson RPA (K222728)
+
+---
+
+## Files Modified Summary
+
+**Total: 10 files**
+
+1. `src/data/products/treatment-planning/raysearch-planning.ts`
+2. `src/data/products/treatment-planning/md-anderson.ts`
+3. `src/data/products/treatment-planning/manteia-mozi.ts`
+4. `src/data/products/platform/mvision.ts`
+5. `src/data/products/performance-monitor/radformation.ts`
+6. `src/data/products/performance-monitor/sun-nuclear.ts`
+7. `src/data/products/performance-monitor/varian.ts`
+8. `src/data/products/examples/auto-contouring-example.ts`
+9. `src/data/products/examples/treatment-planning-example.ts`
+10. `src/data/products/examples/registration-example.ts`
