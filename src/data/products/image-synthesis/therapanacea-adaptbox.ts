@@ -37,7 +37,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       input: ["CBCT scans"],
       inputFormat: ["DICOM"],
       output: ["Augmented CBCT images", "Structure sets"],
-      outputFormat: ["DICOM", "DICOM-RT"]
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "PACS integration", "All Linac providers"],

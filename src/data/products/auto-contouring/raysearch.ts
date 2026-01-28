@@ -26,7 +26,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Treatment plans"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native TPS integration"],

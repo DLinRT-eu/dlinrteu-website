@@ -44,7 +44,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
       input: ["Standard T1/T2 MRI"],
       inputFormat: ["DICOM"],
       output: ["Synthetic CT", "Structure sets"],
-      outputFormat: ["DICOM", "DICOM-RT"]
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "PACS integration"],

@@ -32,7 +32,7 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
       input: ["MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["PACS integration"],

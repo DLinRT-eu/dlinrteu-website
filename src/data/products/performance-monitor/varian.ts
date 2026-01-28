@@ -36,7 +36,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "RT Dose", "EPID Images", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM-RTSTRUCT"],
       output: ["Dose verification", "QA reports", "Structure analysis"],
       outputFormat: ["PDF", "Dashboard"]
     },

@@ -36,7 +36,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM-RTSTRUCT"],
       output: ["Quality reports", "Compliance documentation"],
       outputFormat: ["PDF", "Dashboard"]
     },

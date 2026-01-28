@@ -36,7 +36,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["Native CT simulator integration", "TPS integration via DICOM-RT"],
+      integration: ["Native CT simulator integration", "TPS integration via DICOM-RTSTRUCT"],
       deployment: ["CT Simulator Integrated (SOMATOM go.Sim, go.Open Pro)"],
       triggerForAnalysis: "Automatic during CT acquisition",
       processingTime: "Part of CT reconstruction workflow"

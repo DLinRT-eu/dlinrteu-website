@@ -32,9 +32,9 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Adult cancer patients",
       input: ["CT images", "Structure sets"],
-      inputFormat: ["DICOM", "DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Contoured structures", "Treatment plans"],
-      outputFormat: ["DICOM-RT"],
+      outputFormat: ["DICOM-RTSTRUCT"],
     },
     technology: {
       integration: ["Treatment Planning Systems", "Hospital workflows"],

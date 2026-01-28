@@ -34,7 +34,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
       input: ["Clinical data", "Treatment plans", "Scheduling data", "Financial data", "QA metrics", "Staff assignments"],
       inputFormat: ["DICOM", "HL7", "FHIR", "System APIs"],
       output: ["Workflow schedules", "Documentation reports", "Analytics dashboards", "Billing data", "QA reports"],
-      outputFormat: ["DICOM-RT", "HL7 messages", "PDF reports", "API responses", "Dashboard analytics"]
+      outputFormat: ["DICOM-RTSTRUCT", "HL7 messages", "PDF reports", "API responses", "Dashboard analytics"]
     },
     technology: {
       integration: [

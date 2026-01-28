@@ -32,7 +32,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       input: ["MRI (T1W mDIXON XD, T2W TSE)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Synthetic CT (MRCAT)"],
-      outputFormat: ["DICOM-RT", "DICOM CT"]
+      outputFormat: ["DICOM-RTSTRUCT", "DICOM CT"]
     },
     technology: {
       integration: ["Ingenia MR-RT console", "DICOM export to any TPS"],

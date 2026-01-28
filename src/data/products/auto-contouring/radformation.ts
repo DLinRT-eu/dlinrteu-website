@@ -320,7 +320,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       input: ["CT", "MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "Cloud API"],

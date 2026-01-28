@@ -41,7 +41,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
       input: ["Medical images", "Clinical data", "Treatment schedules", "Staff availability", "Department metrics"],
       inputFormat: ["DICOM", "HL7", "FHIR"],
       output: ["Workflow schedules", "Analytics reports", "AI-generated contours", "Staff assignments"],
-      outputFormat: ["DICOM-RT", "PDF reports", "HL7 messages", "Dashboard analytics"]
+      outputFormat: ["DICOM-RTSTRUCT", "PDF reports", "HL7 messages", "Dashboard analytics"]
     },
     technology: {
       integration: [
