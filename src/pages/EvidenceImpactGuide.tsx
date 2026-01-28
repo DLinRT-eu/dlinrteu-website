@@ -185,9 +185,16 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" size="sm" showTooltip={false} />
+                    </td>
+                    <td className="py-3 text-muted-foreground">Multi-center validation showing workflow time savings</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4">QA/Monitoring tool</td>
+                    <td className="py-3 pr-4">
                       <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Multi-center validation showing accuracy vs expert contours</td>
+                    <td className="py-3 text-muted-foreground">Well-validated tool that monitors AI accuracy and ensures safe operation</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
@@ -199,23 +206,23 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Single-center performance validation</td>
+                    <td className="py-3 text-muted-foreground">Single-center workflow validation</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
                       <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Vendor claims only, no peer-reviewed evidence</td>
+                    <td className="py-3 text-muted-foreground">Vendor claims only, no demonstrated benefit</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
                       <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but technical only (no clinical value)</td>
+                    <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>
                 </tbody>
               </table>
@@ -236,26 +243,35 @@ const EvidenceImpactGuide = () => {
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">1</Badge>
                 <span>
-                  <strong>Assess both axes independently.</strong> A product can have high rigor 
-                  but low impact, or vice versa. Both are valid and informative.
+                  <strong>Impact describes benefit, not validation method.</strong> "Accuracy" 
+                  or "speed" are how you measure—the impact is what value that provides 
+                  (e.g., faster contouring → I2 Workflow benefit).
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">2</Badge>
                 <span>
-                  <strong>Match rigor to the study type.</strong> An E2-rated workflow study 
-                  may be more useful than an E1-rated outcome study for a workflow-focused tool.
+                  <strong>Assess both axes independently.</strong> A product can have high rigor 
+                  but low impact, or vice versa. Both are valid and informative.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">3</Badge>
                 <span>
-                  <strong>E3 and I5 are rare.</strong> Most RT AI products occupy the E1-E2/I0-I2 zone. 
-                  Don't penalize products for not having RCTs if their intended use doesn't require them.
+                  <strong>QA tools matter.</strong> I1 (Quality Assurance) recognizes tools 
+                  that monitor other AI systems—they enable safe use of AI even if they don't 
+                  directly treat patients.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">4</Badge>
+                <span>
+                  <strong>E3 and I5 are rare.</strong> Most RT AI products occupy the E1-E2/I1-I2 zone. 
+                  Don't penalize products for not having RCTs if their intended use doesn't require them.
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Badge className="mt-0.5 shrink-0">5</Badge>
                 <span>
                   <strong>Document your reasoning.</strong> Use the notes fields to explain 
                   why you assigned specific rigor and impact levels.

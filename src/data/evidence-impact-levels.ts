@@ -85,25 +85,25 @@ export interface ClinicalImpactLevel {
 export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   {
     level: "I0",
-    name: "Technical",
-    description: "Demonstrates technical feasibility, reproducibility, processing speed, or computational performance.",
+    name: "None Demonstrated",
+    description: "No clinical, workflow, or quality benefit demonstrated beyond feasibility. Product works, but no patient-facing value shown.",
     rtExamples: [
-      "Processing time benchmarks",
-      "Reproducibility tests",
-      "Consistency across runs",
-      "Computational performance metrics"
+      "Technical feasibility studies only",
+      "Proof-of-concept without clinical validation",
+      "Computational benchmarks without patient context",
+      "Product works but no impact studies conducted"
     ],
     color: "slate"
   },
   {
     level: "I1",
-    name: "Performance",
-    description: "Accuracy compared to reference standard or ground truth. Stand-alone algorithmic performance.",
+    name: "Quality Assurance",
+    description: "Enables monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe operation.",
     rtExamples: [
-      "Dice coefficient vs expert contours",
-      "DVH prediction accuracy",
-      "Deformable registration TRE",
-      "Synthetic CT HU accuracy"
+      "QA tools validating AI contour accuracy",
+      "Performance monitoring dashboards",
+      "Automated consistency checks",
+      "Measurement devices ensuring correct operation"
     ],
     color: "blue"
   },
