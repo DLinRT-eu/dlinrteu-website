@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
@@ -6,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, AlertTriangle, Info, HelpCircle } from "lucide-react";
 import { getStandardizedCertificationTags, parseFDAInfo, parseCEInfo, formatFDAInfo, formatCEInfo } from "@/utils/regulatoryUtils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { EditableField, useProductEdit } from "@/components/product-editor";
 
 interface RegulatoryInformationProps {
   product: ProductDetails;
@@ -22,13 +22,18 @@ These products are typically:
 They are NOT intended for diagnosis, treatment planning, or clinical decision-making and therefore don't require CE marking as a medical device.`;
 
 const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) => {
-  const certificationTags = getStandardizedCertificationTags(product);
+  const { isEditMode, editedProduct } = useProductEdit();
+  
+  // Use edited product when in edit mode, otherwise use the original
+  const displayProduct = isEditMode && editedProduct ? editedProduct : product;
+  
+  const certificationTags = getStandardizedCertificationTags(displayProduct);
   const hasCE = certificationTags.some(tag => tag.startsWith('CE'));
   const hasFDA = certificationTags.some(tag => tag.startsWith('FDA'));
   const hasMDRExempt = certificationTags.includes('MDR Exempt');
   
   const getCEStatus = () => {
-    const ceInfo = parseCEInfo(product.regulatory?.ce);
+    const ceInfo = parseCEInfo(displayProduct.regulatory?.ce);
     
     if (!ceInfo) {
       return {
@@ -92,7 +97,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
   };
   
   const getFDAStatus = () => {
-    const fdaInfo = parseFDAInfo(product.regulatory?.fda);
+    const fdaInfo = parseFDAInfo(displayProduct.regulatory?.fda);
     
     if (!fdaInfo) {
       return {
@@ -196,7 +201,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
               )}
             </div>
             {ceStatus.details && (
-              <div className="mt-2 text-xs text-gray-500 space-y-1">
+              <div className="mt-2 text-xs text-muted-foreground space-y-1">
                 {ceStatus.details.type && <div>Type: {ceStatus.details.type}</div>}
                 {ceStatus.details.certificateNumber && <div>Certificate: {ceStatus.details.certificateNumber}</div>}
                 {ceStatus.details.notifiedBody && <div>Notified Body: {ceStatus.details.notifiedBody}</div>}
@@ -215,13 +220,13 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
                 <span>{fdaStatus.label}</span>
               </Badge>
               {fdaStatus.description && (
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   {fdaStatus.description}
                 </span>
               )}
             </div>
             {fdaStatus.details && (
-              <div className="mt-2 text-xs text-gray-500 space-y-1">
+              <div className="mt-2 text-xs text-muted-foreground space-y-1">
                 {fdaStatus.details.clearanceNumber && <div>Clearance: {fdaStatus.details.clearanceNumber}</div>}
                 {fdaStatus.details.class && <div>Class: {fdaStatus.details.class}</div>}
                 {fdaStatus.details.regulationNumber && <div>Regulation: {fdaStatus.details.regulationNumber}</div>}
@@ -233,16 +238,25 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
         </div>
         <div>
           <p className="text-sm font-medium">Intended Use Statement:</p>
-          <p className="text-gray-500 text-sm">{product.regulatory?.intendedUseStatement || "N/A"}</p>
+          <EditableField
+            fieldPath="regulatory.intendedUseStatement"
+            value={displayProduct.regulatory?.intendedUseStatement}
+            type="textarea"
+            placeholder="Add intended use statement"
+          >
+            <p className="text-muted-foreground text-sm">
+              {displayProduct.regulatory?.intendedUseStatement || "N/A"}
+            </p>
+          </EditableField>
         </div>
         <div>
           <p className="text-sm font-medium">AI Technology:</p>
-          <p className="text-gray-500 text-sm">
-            This product utilizes {product.features?.filter(f => 
+          <p className="text-muted-foreground text-sm">
+            This product utilizes {displayProduct.features?.filter(f => 
               f.toLowerCase().includes('deep learning') || 
               f.toLowerCase().includes('ai') ||
               f.toLowerCase().includes('artificial intelligence')
-            ).join(', ') || "artificial intelligence"} technology for {product.category.toLowerCase()} applications.
+            ).join(', ') || "artificial intelligence"} technology for {displayProduct.category.toLowerCase()} applications.
           </p>
         </div>
       </CardContent>
