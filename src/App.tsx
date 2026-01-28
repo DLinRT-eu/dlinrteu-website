@@ -71,6 +71,7 @@ const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
 const CompanyDashboardOverview = lazy(() => import("./pages/company/CompanyDashboardOverview"));
 const CompanyProductsManager = lazy(() => import("./pages/company/ProductsManager"));
 const CompanyGuide = lazy(() => import("./pages/company/CompanyGuide"));
+const CompanyCertification = lazy(() => import("./pages/company/CompanyCertification"));
 
 // Reviewer Pages
 const ReviewerDashboard = lazy(() => import("./pages/reviewer/Dashboard"));
@@ -325,6 +326,7 @@ const App = () => (
                     <CompanyGuide />
                   </ProtectedRoute>
                 } />
+                <Route path="/company/certification" element={<CompanyCertification />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
