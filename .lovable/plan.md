@@ -1,119 +1,194 @@
 
-# Remove Legacy Evidence System: Keep Only Dual-Axis Classification
+# Revising I0 and I1: Separating Validation Method from Actual Impact
 
-## Overview
+## The Problem
 
-Since no products currently have evidence levels filled in, we can cleanly remove the legacy single-axis evidence system and keep only the new dual-axis classification (Evidence Rigor + Clinical Impact). This simplifies the codebase and avoids confusion between two overlapping systems.
+The current I0 (Technical) and I1 (Performance) definitions still lean on **type of validation** rather than **actual impact**:
 
-## Files to Delete
+| Current | Description | Issue |
+|---------|-------------|-------|
+| I0 Technical | "reproducibility, speed, consistency" | These are *methods*, not outcomes |
+| I1 Performance | "accuracy vs reference standard" | This is *how you measure*, not *what value it provides* |
 
-| File | Reason |
-|------|--------|
-| `src/pages/EvidenceLevels.tsx` | Legacy single-axis page no longer needed |
-| `src/data/evidence-levels.ts` | Legacy level definitions replaced by dual-axis |
-| `src/components/product/EvidenceLevelBadge.tsx` | Legacy badge component, replaced by `EvidenceImpactBadges` |
+As the user notes: If something is "faster" or "more accurate", the actual *impact* could be workflow (faster = time savings) or quality (more accurate = better care). The "technical" aspect describes the *validation approach*, not the *clinical benefit*.
 
-## Files to Modify
+## Proposed Revision
 
-### 1. `src/App.tsx`
-- Remove the `/evidence-levels` route
-- Remove the lazy import for `EvidenceLevels`
+### Core Principle
+The Impact axis should describe **what benefit is demonstrated**, not **how it was validated**. The validation method belongs to the Rigor axis.
 
-### 2. `src/types/productDetails.d.ts`
-- Remove legacy fields:
-  - `evidenceLevel`
-  - `evidenceLevelNotes`
-  - `level` from EvidenceItem (lines 77, 83, 84)
-- Keep dual-axis fields (already present)
+### Revised I0-I5 Definitions
 
-### 3. `src/components/product/EvidenceLimitationsDetails.tsx`
-- Remove import of `EvidenceLevelBadge`
-- Remove `LEGACY_EVIDENCE_LEVELS` constant (lines 23-32)
-- Remove legacy classification section (lines 240-280)
-- Remove fallback to legacy badge in header (lines 141-143)
-- Update `hasLegacyLevel` check to no longer influence visibility
+| Level | Current Name | Revised Name | Revised Description |
+|-------|--------------|--------------|---------------------|
+| **I0** | Technical | None Demonstrated | No clinical, workflow, or quality benefit demonstrated. Product feasibility only. |
+| **I1** | Performance | Quality Assurance | Enables monitoring, measurement, or quality assurance that indirectly supports patient care. |
+| **I2** | Workflow | Workflow | (unchanged) Time savings, efficiency, variability reduction. |
+| **I3** | Decision | Decision | (unchanged) Changes in clinical decisions. |
+| **I4** | Outcome | Outcome | (unchanged) Patient health outcomes. |
+| **I5** | Societal | Societal | (unchanged) Health economics, access. |
 
-### 4. `src/components/resources/EvidencePyramid.tsx`
-- Remove pyramid view toggle and legacy pyramid rendering
-- Show only the dual-axis matrix
-- Remove imports from `@/data/evidence-levels`
+### Detailed Definitions
 
-### 5. `src/components/resources/EvidenceLevelTable.tsx`
-- Replace legacy table with dual-axis table
-- Remove imports from `@/data/evidence-levels`
-- Show rigor and impact levels side-by-side
+```text
+I0 - None Demonstrated
+━━━━━━━━━━━━━━━━━━━━━
+Description: No clinical, workflow, or quality benefit demonstrated beyond 
+             proving the product works. Feasibility or technical capability only.
 
-### 6. `src/pages/EvidenceImpactGuide.tsx`
-- Remove link to legacy classification (line 292-294)
-- Update to be the primary evidence documentation page
+RT Examples:
+- Product works on test cases (no patient benefit shown)
+- Technical reproducibility without clinical context
+- Computational benchmarks without clinical validation
 
-### 7. `src/data/evidence-impact-levels.ts`
-- Remove `LEGACY_LEVEL_MAPPING` constant (no longer needed)
-
-### 8. `src/utils/modelCard/dataGenerator.ts`
-- Update to use dual-axis fields instead of legacy `evidenceLevel`
-
-### 9. `src/utils/modelCard/types.ts`
-- Update `performance` section to use dual-axis fields
-
-### 10. `src/components/resources/PageIndex.tsx`
-- Update the evidence-levels link text if needed
-
-## Data Model After Changes
-
-```typescript
-// src/types/productDetails.d.ts - Evidence section
-interface EvidenceItem {
-  type: string;
-  description: string;
-  link: string;
-  // Note: 'level' field removed - was legacy
-}
-
-// Product fields (legacy removed)
-evidenceRigor?: "E0" | "E1" | "E2" | "E3";
-evidenceRigorNotes?: string;
-clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
-clinicalImpactNotes?: string;
+When to use:
+- New products with no clinical studies yet
+- Technical proof-of-concept only
+- "Favorite color AI" example (rigorous but no clinical value)
 ```
 
-## Component Changes Summary
+```text
+I1 - Quality Assurance
+━━━━━━━━━━━━━━━━━━━━━
+Description: Enables monitoring, measurement, or quality assurance that 
+             indirectly supports patient care. Does not directly affect 
+             treatment but ensures safe/consistent operation of clinical systems.
 
-### EvidenceLimitationsDetails.tsx (After)
-- Only shows dual-axis classification section
-- No legacy dropdown or badge
-- Simplified visibility logic
+RT Examples:
+- QA tools that validate AI contour accuracy (MVision Verify)
+- Performance monitoring dashboards
+- Automated consistency checks
+- Measurement devices that ensure correct operation
 
-### EvidencePyramid.tsx (After)
-- Renamed to `EvidenceMatrix.tsx` (optional)
-- Shows only the interactive 4x6 matrix
-- No toggle or pyramid view
+When to use:
+- Products that monitor other AI/clinical systems
+- QA and verification tools
+- Calibration and consistency checking
+- "Guardian" products that prevent harm indirectly
+```
 
-### EvidenceLevelTable.tsx (After)
-- Renamed content to show both axes
-- Two side-by-side tables or combined view
-- Links only to `/evidence-impact-guide`
+```text
+I2 - Workflow (unchanged)
+━━━━━━━━━━━━━━━━━━━━━━━━
+Description: Time savings, efficiency gains, or reduction in variability 
+             within clinical workflow.
 
-## Route Changes
+RT Examples:
+- Contouring time reduction (e.g., 30 min → 5 min)
+- Inter-observer variability reduction
+- Treatment planning efficiency
+- Review/approval time savings
+```
 
-| Before | After |
-|--------|-------|
-| `/evidence-levels` (Legacy page) | Removed |
-| `/evidence-impact-guide` (Dual-axis page) | Primary page |
+### How This Addresses the User's Points
 
-Links from `/resources` will point to `/evidence-impact-guide` only.
+| User Concern | How Revised Scale Addresses It |
+|--------------|-------------------------------|
+| "Technical - does the same but faster/more accurate?" | Faster → I2 (Workflow). More accurate → depends on outcome demonstrated. "Technical" now means no benefit shown. |
+| "Performance - could be measurement devices?" | Yes! I1 now explicitly covers QA/monitoring tools that support care indirectly. |
+| "QA tools are important!" | I1 (Quality Assurance) recognizes their value as enablers of safe AI use. |
+| "I0/I1 lean on type of validation" | Revised definitions focus on *what benefit*, not *how measured*. |
+
+### Visual: Where Products Fall
+
+```text
+Product Type                     Current     Revised     Rationale
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Auto-contouring (accuracy)       I1          I2*         Accuracy enables workflow savings
+Auto-contouring (time study)     I2          I2          Direct workflow demonstration
+MVision Verify (QA tool)         I0/I1?      I1          Monitoring tool - indirect impact
+PixelShine (reconstruction)      I0          I2**        If workflow demonstrated, else I0
+Outcome study product            I4          I4          Unchanged
+New product (no data)            I0          I0          No benefit demonstrated yet
+
+* If accuracy study shows clinical workflow benefit, it's I2
+** Reconstruction speed = workflow benefit; pure image quality without clinical 
+   validation = I0 (none demonstrated)
+```
+
+## File Changes
+
+### `src/data/evidence-impact-levels.ts`
+
+Update CLINICAL_IMPACT_LEVELS array (lines 85-158):
+
+```typescript
+export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
+  {
+    level: "I0",
+    name: "None Demonstrated",
+    description: "No clinical, workflow, or quality benefit demonstrated beyond feasibility. Product works, but no patient-facing value shown.",
+    rtExamples: [
+      "Technical feasibility studies only",
+      "Proof-of-concept without clinical validation",
+      "Computational benchmarks without patient context",
+      "Product works but no impact studies conducted"
+    ],
+    color: "slate"
+  },
+  {
+    level: "I1",
+    name: "Quality Assurance",
+    description: "Enables monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe operation.",
+    rtExamples: [
+      "QA tools validating AI contour accuracy",
+      "Performance monitoring dashboards",
+      "Automated consistency checks",
+      "Measurement devices ensuring correct operation"
+    ],
+    color: "blue"
+  },
+  // I2-I5 remain unchanged...
+];
+```
+
+### `src/pages/EvidenceImpactGuide.tsx`
+
+Update the Example Classifications table to reflect new definitions:
+
+```typescript
+// Add QA tool example
+<tr>
+  <td className="py-3 pr-4">QA/Monitoring tool</td>
+  <td className="py-3 pr-4">
+    <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" size="sm" showTooltip={false} />
+  </td>
+  <td className="py-3 text-muted-foreground">Well-validated tool that monitors AI accuracy</td>
+</tr>
+
+// Update "Favorite color AI" example
+<tr>
+  <td className="py-3 pr-4">"Favorite color" AI (example)</td>
+  <td className="py-3 pr-4">
+    <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" size="sm" showTooltip={false} />
+  </td>
+  <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
+</tr>
+```
+
+Add a note about the distinction between validation method and impact.
+
+### `src/components/resources/EvidenceLevelTable.tsx`
+
+Update to use new level names in the Clinical Impact column.
+
+### `src/components/resources/EvidenceImpactMatrix.tsx`
+
+Ensure the matrix uses the updated level names.
+
+## Summary of Changes
+
+| File | Change |
+|------|--------|
+| `src/data/evidence-impact-levels.ts` | Update I0 and I1 definitions, names, descriptions, and examples |
+| `src/pages/EvidenceImpactGuide.tsx` | Update example table, add QA tool example, clarify methodology |
+| `src/components/resources/EvidenceLevelTable.tsx` | Updated automatically via data file |
+| `src/components/resources/EvidenceImpactMatrix.tsx` | Updated automatically via data file |
 
 ## Benefits
 
-1. **Cleaner codebase**: No duplicate systems to maintain
-2. **Clearer UX**: Users see only one evidence classification approach
-3. **Simpler editing**: Product editors only have dual-axis dropdowns
-4. **No migration needed**: Since no products have data, clean removal is safe
-
-## Implementation Order
-
-1. Update type definitions first (remove legacy fields)
-2. Delete legacy files (page, data, badge component)
-3. Update components that imported deleted modules
-4. Update App.tsx routes
-5. Test evidence display on product pages and resources page
+1. **Clear separation**: Impact axis now describes *what benefit*, not *how measured*
+2. **QA tools recognized**: I1 explicitly values monitoring/QA products that support safe AI use
+3. **Consistent classification**: Products with accuracy studies get I2 if workflow benefit is demonstrated
+4. **Future-proof**: Framework clearer for classifying new product types
+5. **User's feedback addressed**: "Technical" no longer describes a validation method
