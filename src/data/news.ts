@@ -7,8 +7,10 @@ import { fdaAiListUpdateJanuary2025 } from "./news/fda-ai-list-update-january-20
 import { websiteLaunchWebinar } from "./news/website-launch-webinar";
 import { webinarSuccessReviewersCall } from "./news/webinar-success-reviewers-call";
 import { december2025PlatformUpdate } from "./news/december-2025-platform-update";
+import { companyCertificationLaunch } from "./news/company-certification-launch";
 
 export const NEWS_ITEMS: NewsItem[] = [
+  companyCertificationLaunch,
   december2025PlatformUpdate,
   webinarSuccessReviewersCall,
   websiteLaunchWebinar,

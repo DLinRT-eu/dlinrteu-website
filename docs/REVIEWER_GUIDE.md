@@ -314,14 +314,113 @@ These controls are available in the reviewer dashboard for each assigned product
 
 ## 4. Reviewing Products
 
-### Starting a Review
+DLinRT.eu supports two methods for reviewing and updating products:
 
-1. **Navigate** to your assignments
-2. **Click** on product name
-3. **Review** existing product information
-4. **Check** all fields for accuracy and completeness
+1. **Visual Editing** (Recommended) - In-browser editing with auto-save and approval workflow
+2. **Direct GitHub Editing** - Traditional file editing for developers
 
-### What to Review
+### Method 1: Visual Editing (Recommended)
+
+#### Using Visual Edit Mode
+
+DLinRT.eu now supports in-browser visual editing for product data.
+
+**Who Can Edit:**
+- Administrators (all products)
+- Reviewers (assigned products)
+- Company Representatives (own company products)
+
+**Starting a Review:**
+1. Navigate to the product page
+2. Click "Edit" button in the header
+3. The page enters edit mode with the EditToolbar appearing at the bottom
+
+#### The EditToolbar
+
+A floating action bar appears showing:
+- Number of changes made
+- Validation status (errors, warnings)
+- Draft status
+
+**Actions:**
+- **Reset** - Discard all changes
+- **Save Draft** - Manually save (also auto-saves every 30 seconds)
+- **Submit** - Submit changes for admin review
+- **X** - Exit edit mode
+
+#### Field Types
+
+Different fields have different editing experiences:
+
+| Type | Example Fields | Editor Style |
+|------|---------------|--------------|
+| Text | Name, Description | Inline text input |
+| Dropdown | Category, Certification | Single-select menu |
+| Multi-Select | Modality, Anatomy | Checkboxes with chips |
+| Array | Features, Limitations | Add/remove items |
+| Date | Release Date, Last Updated | Date picker |
+| URL | Website, Product URL | URL input with validation |
+| Complex | Regulatory, Evidence, Guidelines | Specialized full-screen editors |
+
+#### Evidence Level Classification
+
+Every product should have an evidence level assigned (0-6):
+
+| Level | Name | When to Use |
+|-------|------|-------------|
+| 0 | No Evidence | FDA summary only, no peer review |
+| 1t | Technical | Reproducibility tests |
+| 1c | Potential Clinical | Correlation studies |
+| 2 | Stand-Alone Performance | Clinical dataset validation |
+| 3 | Workflow Efficacy | Time savings studies |
+| 4 | Treatment Decision | Plan impact studies |
+| 5 | Patient Outcome | Toxicity, survival data |
+| 6 | Societal | Health economics |
+
+**The Evidence & Limitations card is now always visible** on every product page to encourage setting this important classification.
+
+#### Saving and Submitting
+
+**Auto-Save:**
+- Changes are automatically saved as a draft every 30 seconds
+- Drafts are stored in the database and persist across sessions
+
+**Submitting for Review:**
+1. Click "Submit" in the EditToolbar
+2. Write an edit summary describing your changes
+3. Click "Submit for Review"
+4. Your edit enters the admin approval queue
+5. You will be notified when approved or rejected
+
+#### Validation
+
+The system validates your changes in real-time:
+
+- **Errors** (red): Must be fixed before submitting
+- **Warnings** (amber): Should be reviewed but won't block submission
+
+Common validation checks:
+- Required fields are present
+- URLs are valid format
+- Regulatory information is consistent
+
+### Method 2: Direct GitHub Editing
+
+For developers and those who prefer traditional version control:
+
+1. **Clone** the repository from GitHub
+2. **Navigate** to `src/data/products/[category]/`
+3. **Edit** the TypeScript product file directly
+4. **Create** a pull request with your changes
+5. **Review** by maintainers before merge
+
+**When to use GitHub directly:**
+- Large-scale refactoring
+- Adding new products with complex structures
+- CI/CD workflow integration
+- Batch updates via scripts
+
+### What to Review (Both Methods)
 
 **Essential Information**:
 - Product name and version
@@ -329,54 +428,18 @@ These controls are available in the reviewer dashboard for each assigned product
 - Product category (primary and secondary)
 - Description and key features
 - Regulatory status (CE, FDA, etc.)
-- Certifications and compliance
+- **Evidence level classification** (always set this!)
 
 **Technical Details**:
 - Supported modalities
 - Anatomical structures/regions
 - Integration capabilities
-- System requirements
 - Performance characteristics
 
-**Market Information**:
-- Release date
-- Availability status
-- Geographic markets
-- Licensing model
-
 **Evidence & Research**:
-- Clinical publications
+- Clinical publications with links
 - Validation studies
-- Performance metrics
-- Real-world evidence
-
-### Making Updates
-
-**How to Edit**:
-1. Click "Edit" or update fields directly
-2. Make necessary corrections or additions
-3. Add notes about changes made
-4. Cite sources when adding new information
-5. Save changes
-
-**Best Practices**:
-- **Verify information**: Use official sources when possible
-- **Add citations**: Link to publications or company documentation
-- **Be objective**: Avoid promotional language
-- **Be complete**: Fill in all applicable fields
-- **Be accurate**: Double-check technical specifications
-
-### Submitting Your Review
-
-1. **Review all changes** you've made
-2. **Add reviewer notes** (optional but recommended):
-   - What you verified
-   - What you updated
-   - Any concerns or questions
-   - Sources consulted
-3. **Set status** to "Completed"
-4. **Submit** review
-5. **Confirmation** shown
+- Evidence level justification
 
 ---
 
@@ -598,5 +661,5 @@ Welcome to the reviewer community!
 
 ---
 
-*Last Updated: 2026-01-19*
-*Version: 1.1*
+*Last Updated: 2026-01-28*
+*Version: 1.2*

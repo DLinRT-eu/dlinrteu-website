@@ -7,8 +7,9 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
     company: "RefleXion Medical",
     category: "Tracking",
     secondaryCategories: ["Treatment Planning"],
-    description: "First and only biology-guided radiotherapy (BgRT) using real-time PET imaging to autonomously guide radiation delivery. Cancer cells act as biological beacons to direct treatment second-by-second.",
+    description: "First and only biology-guided radiotherapy (BgRT) using real-time PET imaging to autonomously guide radiation delivery. Cancer cells act as biological beacons to direct treatment second-by-second. Note: Uses proprietary signal processing algorithms for real-time PET-guided beam steering—not traditional deep learning AI.",
     certification: "FDA",
+    usesAI: false,
     logoUrl: "/logos/Reflexion.png",
     companyUrl: "https://www.reflexion.com/",
     productUrl: "https://www.reflexion.com/scintix-therapy/",
@@ -59,8 +60,8 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/DEN220014.pdf"
       }
     ],
-    lastUpdated: "2026-01-18",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-01-27",
+    lastRevised: "2026-01-27",
     source: "FDA De Novo database (DEN220014), RefleXion official website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/reflexion.ts"
   },
@@ -69,8 +70,9 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
     name: "RefleXion X2 Platform",
     company: "RefleXion Medical",
     category: "Tracking",
-    description: "Next-generation theranostic oncology platform with 20-fold increase in PET sensitivity and quadrupled field-of-view (20cm) for enhanced tumor detection and autonomous SCINTIX therapy delivery.",
+    description: "Next-generation theranostic oncology platform with 20-fold increase in PET sensitivity and quadrupled field-of-view (20cm) for enhanced tumor detection and autonomous SCINTIX therapy delivery. Note: Hardware platform with signal processing—does not use traditional deep learning AI.",
     certification: "FDA",
+    usesAI: false,
     logoUrl: "/logos/Reflexion.png",
     companyUrl: "https://www.reflexion.com/",
     productUrl: "https://www.reflexion.com/",
@@ -113,8 +115,8 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
         link: "https://www.businesswire.com/news/home/20260108005018/en/FDA-Clears-Next-Generation-RefleXion-Platform"
       }
     ],
-    lastUpdated: "2026-01-18",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-01-27",
+    lastRevised: "2026-01-27",
     source: "RefleXion press release (Jan 8, 2026)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/reflexion.ts"
   }

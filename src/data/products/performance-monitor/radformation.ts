@@ -36,7 +36,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Radiotherapy patients",
       input: ["RT Plans", "RT Structure Sets", "CT Images"],
-      inputFormat: ["DICOM-RT"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN"],
       output: ["Quality reports", "Compliance documentation"],
       outputFormat: ["PDF", "Dashboard"]
     },
@@ -62,8 +62,8 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2025-01-01",
-    lastRevised: "2026-01-08",
+    lastUpdated: "2026-01-28",
+    lastRevised: "2026-01-28",
     source: "Radformation official website"
   }
 ];

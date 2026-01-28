@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { RoleProvider } from "@/contexts/RoleContext";
+import { ProductEditProvider } from "@/components/product-editor";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import Header from "./components/Header";
@@ -44,7 +45,7 @@ const Changelog = lazy(() => import("./pages/Changelog"));
 const Roles = lazy(() => import("./pages/Roles"));
 const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
 const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
-const EvidenceLevels = lazy(() => import("./pages/EvidenceLevels"));
+const EvidenceImpactGuide = lazy(() => import("./pages/EvidenceImpactGuide"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
 const CompanyMappingValidator = lazy(() => import("./pages/admin/CompanyMappingValidator"));
@@ -63,12 +64,14 @@ const PRManagement = lazy(() => import("./pages/admin/PRManagement"));
 const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard"));
 const UserRegistrationReview = lazy(() => import("./pages/admin/UserRegistrationReview"));
 const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
+const EditApprovals = lazy(() => import("./pages/admin/EditApprovals"));
 
 // Company Pages
 const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
 const CompanyDashboardOverview = lazy(() => import("./pages/company/CompanyDashboardOverview"));
 const CompanyProductsManager = lazy(() => import("./pages/company/ProductsManager"));
 const CompanyGuide = lazy(() => import("./pages/company/CompanyGuide"));
+const CompanyCertification = lazy(() => import("./pages/company/CompanyCertification"));
 
 // Reviewer Pages
 const ReviewerDashboard = lazy(() => import("./pages/reviewer/Dashboard"));
@@ -97,11 +100,12 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <RoleProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Header />
+        <ProductEditProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Header />
             <Suspense fallback={
               <div className="flex items-center justify-center min-h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -137,7 +141,7 @@ const App = () => (
                 <Route path="review" element={<ReviewDashboard />} />
                 <Route path="review/:id" element={<ProductReview />} />
                 <Route path="resources-compliance" element={<ResourcesCompliance />} />
-                <Route path="evidence-levels" element={<EvidenceLevels />} />
+                <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
                 <Route path="auth" element={<Auth />} />
@@ -273,6 +277,11 @@ const App = () => (
                     <NewsletterManagement />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/edit-approvals" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <EditApprovals />
+                  </ProtectedRoute>
+                } />
                 
                 {/* Reviewer Routes */}
                 <Route path="/reviewer/dashboard" element={
@@ -317,12 +326,14 @@ const App = () => (
                     <CompanyGuide />
                   </ProtectedRoute>
                 } />
+                <Route path="/company/certification" element={<CompanyCertification />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ProductEditProvider>
       </RoleProvider>
     </AuthProvider>
   </QueryClientProvider>

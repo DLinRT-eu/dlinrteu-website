@@ -7,8 +7,9 @@ export const LEO_CANCER_CARE_PRODUCTS: ProductDetails[] = [
     company: "Leo Cancer Care",
     category: "Tracking",
     secondaryCategories: ["Reconstruction"],
-    description: "Revolutionary upright patient positioner with integrated onboard CT scanner for particle therapy. Enables seated or standing treatment while providing real-time imaging for adaptive radiotherapy.",
+    description: "Revolutionary upright patient positioner with integrated onboard CT scanner for particle therapy. Enables seated or standing treatment while providing real-time imaging for adaptive radiotherapy. Note: This is a hardware positioning system—it does not use AI/deep learning.",
     certification: "FDA",
+    usesAI: false,
     logoUrl: "/logos/LeoCancerCare.jpg",
     companyUrl: "https://www.leocancercare.com/",
     productUrl: "https://www.leocancercare.com/marie/",
@@ -56,8 +57,8 @@ export const LEO_CANCER_CARE_PRODUCTS: ProductDetails[] = [
         link: "https://leocancercare.com/news-and-events/press-release/leo-cancer-care-receives-fda-510k-clearance-for-marie/"
       }
     ],
-    lastUpdated: "2026-01-18",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-01-27",
+    lastRevised: "2026-01-27",
     source: "Leo Cancer Care press release (July 2025)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/leo-cancer-care.ts"
   }

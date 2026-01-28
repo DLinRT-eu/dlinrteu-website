@@ -18,7 +18,6 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     modality: "CT",
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Trauma"],
     releaseDate: "2019-01-15",
-    version: "2.0",
     keyFeatures: [
       "Deep Convolutional Neural Network reconstruction",
       "Up to 82% dose reduction potential",
@@ -53,7 +52,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         regulationNumber: "21 CFR 892.1750",
         productCode: "JAK",
         type: "510(k)",
-        decisionDate: "2019-01-15"
+        decisionDate: "2019-01-15",
+        notes: "K181862 is the 510(k) clearance for the Aquilion ONE / GENESIS Edition CT system. AiCE is the deep learning reconstruction option within this system."
       },
       intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose while maintaining diagnostic confidence."
     },

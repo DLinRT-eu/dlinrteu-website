@@ -29,7 +29,7 @@ export const VIEWRAY_PRODUCTS: ProductDetails[] = [
       input: ["MRI (0.35T)"],
       inputFormat: ["DICOM"],
       output: ["Structure sets", "Gating signals"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["MRIdian Linac", "Treatment Planning System"],

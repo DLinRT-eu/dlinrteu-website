@@ -20,13 +20,17 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["Integrated platform", "Workflow efficiency", "Multiple anatomical sites"],
+    guidelines: [
+      { name: "RTOG", compliance: "partial" },
+      { name: "DAHANCA", compliance: "partial" }
+    ],
     supportedStructures: GE_HEALTHCARE_ALL_STRUCTURES,
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RT"]
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Native integration with GE systems"],
@@ -60,6 +64,24 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-03-10",
     lastUpdated: "2024-01-20",
     lastRevised: "2026-01-14",
-    source: "FDA 510(k) database (K230082, K242925), company official sources"
+    source: "FDA 510(k) database (K230082, K242925), company official sources",
+    clinicalEvidence: "FDA 510(k) validation studies using 2552 contours from 302 unique patients across 9 global sites",
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K230082 received April 7, 2023 - Class II device under 21 CFR 892.2050",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K242925 received February 27, 2025 - Class II device under 21 CFR 892.2050",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
+      },
+    ],
+    limitations: [
+      "Deployment options are limited to on-premises",
+      "Tight vendor locking within the GE ecosystem",
+      "Requires manual verification and editing in complex anatomical regions"
+    ]
   }
 ];
