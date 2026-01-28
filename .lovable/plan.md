@@ -1,162 +1,163 @@
 
-# DICOM Format Standardization and Intended Use Statement Audit
+
+# News Item: Company Certification Launch Announcement 
 
 ## Overview
 
-This plan corrects DICOM format naming inconsistencies across the product database and ensures output formats accurately reflect what products produce. Additionally, it updates intended use statements to match official regulatory documentation.
+Create a new news item announcing:
+0. we have finished our round of internal peer-review: all the products have undergone the 4 eyes principle. Which does noit mean that info is perfect, but that accuracy has been increaese
+1. Recent platform updates (DICOM format standardization, contact info cleanup)
+2. Opening of company certification system at the end of the week
+3. Introduction of the "Verified by Company" badge that will appear on products
 
-## Issue 1: DICOM Format Naming Standardization
+## New Files to Create
 
-### Problem
-The codebase uses inconsistent DICOM format naming:
-- `DICOM RT-STRUCT` (with space) vs `DICOM-RTSTRUCT` (hyphenated)
-- `DICOM RT-PLAN` (with space) vs `DICOM-RTPLAN` (hyphenated)
-- `DICOM RT-DOSE` (with space) vs `DICOM-RTDOSE` (hyphenated)
+### 1. News Item File
 
-### Standard Format (to be used consistently)
-| Format | Standard Name |
-|--------|---------------|
-| Structure sets | `DICOM-RTSTRUCT` |
-| Treatment plans | `DICOM-RTPLAN` |
-| Dose distributions | `DICOM-RTDOSE` |
+**File:** `src/data/news/company-certification-launch.ts`
 
-### Files to Update
+```typescript
+import { NewsItem } from "@/types/news";
 
-| File | Current | Should Be |
-|------|---------|-----------|
-| `manteia-mozi.ts` | `DICOM RT-PLAN`, `DICOM RT-DOSE` | `DICOM-RTPLAN`, `DICOM-RTDOSE` |
-| `auto-contouring-example.ts` | `DICOM RT-STRUCT`, `DICOM RT-PLAN` | `DICOM-RTSTRUCT`, `DICOM-RTPLAN` |
-| `treatment-planning-example.ts` | `DICOM RT-STRUCT`, `DICOM RT-PLAN` | `DICOM-RTSTRUCT`, `DICOM-RTPLAN` |
-| `registration-example.ts` | `DICOM RT-STRUCT` | `DICOM-RTSTRUCT` |
+export const companyCertificationLaunch: NewsItem = {
+  id: "company-certification-launch",
+  date: "2026-01-28",
+  title: "Company Certification Program Launches: Manufacturers Can Now Verify Product Information",
+  summary: "DLinRT.eu opens its certification program to medical device companies, enabling manufacturers to verify and certify their product information. Look for the new 'Verified by Company' badge on certified products.",
+  content: `
+## Introducing Company Certification
+
+We are pleased to announce the official launch of our **Company Certification Program**, opening to all manufacturers at the end of this week. This program enables companies to directly verify and certify the accuracy of their product information listed on DLinRT.eu.
+
+## The "Verified by Company" Badge
+
+Products that have been certified by their manufacturers will display a new verification badge:
+
+![Verified by Company Badge](/images/verified-badge-example.png)
+
+This green badge indicates that:
+- A verified company representative has reviewed the product information
+- The manufacturer confirms the accuracy of the listed details
+- The certification is current and the product data matches the certified version
+
+### Badge States
+
+Products may display different badge states:
+
+| Badge | Meaning |
+|-------|---------|
+| **Verified by Company** (green) | Information has been certified by the manufacturer |
+| **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
+| No badge | Product has not yet been certified by the company |
+
+## How It Works
+
+### For Company Representatives
+
+1. **Register** as a company representative on DLinRT.eu
+2. **Verify** your identity and company affiliation
+3. **Review** your company's product listings
+4. **Certify** that the information is accurate
+5. **Update** information when changes occur
+
+### For Users
+
+When browsing products, look for the verification badge to identify products with manufacturer-confirmed information. This adds an additional layer of trust beyond our independent expert reviews.
+
+## Recent Platform Updates
+
+Alongside this launch, we have implemented several data quality improvements:
+
+### DICOM Format Standardization
+All DICOM format references have been standardized across the database:
+- **DICOM-RTSTRUCT** for structure sets
+- **DICOM-RTPLAN** for treatment plans  
+- **DICOM-RTDOSE** for dose distributions
+
+### Data Cleanup
+Product contact information has been streamlined, removing outdated fields and focusing on verified company and product website links.
+
+## Get Involved
+
+### For Companies
+If you represent a medical device company with products listed on DLinRT.eu, we encourage you to:
+1. Register your company representative account
+2. Verify your products during the upcoming certification round
+3. Keep your product information up to date
+
+Visit our [Contact page](/contact) to begin the registration process.
+
+### For the Community
+The certification program works alongside our independent reviewer community. Together, we ensure that DLinRT.eu remains the most trusted and accurate resource for AI in radiotherapy.
 
 ---
 
-## Issue 2: Incorrect Output Formats for Treatment Planning Products
+*For questions about company certification, please contact us at info@dlinrt.eu*
+`
+};
+```
 
-### Problem
-Several treatment planning products list `DICOM-RTSTRUCT` as their output when they actually produce treatment plans and dose distributions.
+### 2. Update News Index
 
-### Files to Update
+**File:** `src/data/news.ts`
 
-#### 1. `raysearch-planning.ts`
-**Current output:** `["Predicted dose distribution", "RT plan", "RT dose"]`
-**Current outputFormat:** `["DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM-RTPLAN", "DICOM-RTDOSE"]`
+Add the import and include in the NEWS_ITEMS array:
 
-#### 2. `md-anderson.ts`
-**Current output:** `["Contoured structures", "Treatment plans"]`
-**Current outputFormat:** `["DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM-RTSTRUCT", "DICOM-RTPLAN"]`
+```typescript
+import { companyCertificationLaunch } from "./news/company-certification-launch";
 
-#### 3. `mvision.ts` (platform)
-**Current output:** `["Synthetic CT images", "Propagated contours", "Treatment plans", "Dose distributions"]`
-**Current outputFormat:** `["DICOM", "DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTDOSE"]`
+export const NEWS_ITEMS: NewsItem[] = [
+  companyCertificationLaunch,  // Add at top (newest first)
+  december2025PlatformUpdate,
+  // ... rest of items
+];
+```
 
----
+## Badge Visual Example
 
-## Issue 3: Incorrect Input Formats for Performance Monitor Products
+The existing badge that will appear on certified products is already implemented in `ProductHeaderInfo.tsx`:
 
-### Problem
-Performance monitor products accept RT Plans and RT Dose but only list `DICOM-RTSTRUCT` as input format.
+```text
+┌─────────────────────────────────────────────────┐
+│  ✓ Verified by Company (Jan 28, 2026)          │
+└─────────────────────────────────────────────────┘
+   └── Green background with BadgeCheck icon
+```
 
-### Files to Update
+**Badge Variants:**
 
-#### 1. `radformation.ts` (ClearCheck)
-**Current input:** `["RT Plans", "RT Structure Sets", "CT Images"]`
-**Current inputFormat:** `["DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN"]`
+```text
+VALID CERTIFICATION:
+┌─────────────────────────────────────────────────┐
+│ ✓ Verified by Company (Jan 28, 2026)           │  ← Green badge
+└─────────────────────────────────────────────────┘
 
-#### 2. `sun-nuclear.ts` (SunCHECK Patient)
-**Current input:** `["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"]`
-**Current inputFormat:** `["DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"]`
+OUTDATED CERTIFICATION:
+┌─────────────────────────────────────────────────┐
+│ ⚠ Certification Outdated (certified Jan 15)    │  ← Amber badge
+└─────────────────────────────────────────────────┘
+```
 
-#### 3. `varian.ts` (Mobius3D)
-**Current input:** `["RT Plans", "RT Structure Sets", "RT Dose", "EPID Images", "CT Images"]`
-**Current inputFormat:** `["DICOM-RTSTRUCT"]`
-**Should be:** `["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"]`
+The badge uses:
+- **BadgeCheck** icon from lucide-react
+- **success** variant (green) when valid
+- **warning** variant (amber) when outdated
+- Tooltip with verification date and notes
 
----
-
-## Issue 4: lastRevised Date Updates
-
-All modified files will have their `lastRevised` field updated to `2026-01-28` to reflect this revision.
-
----
-
-## Summary of Changes
+## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `treatment-planning/raysearch-planning.ts` | Fix outputFormat: `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
-| `treatment-planning/md-anderson.ts` | Fix outputFormat: add `DICOM-RTPLAN`; update `lastRevised` |
-| `treatment-planning/manteia-mozi.ts` | Standardize format names (remove spaces); update `lastRevised` |
-| `platform/mvision.ts` | Fix outputFormat: add `DICOM-RTDOSE`; update `lastRevised` |
-| `performance-monitor/radformation.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`; update `lastRevised` |
-| `performance-monitor/sun-nuclear.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
-| `performance-monitor/varian.ts` | Fix inputFormat: add `DICOM`, `DICOM-RTPLAN`, `DICOM-RTDOSE`; update `lastRevised` |
-| `examples/auto-contouring-example.ts` | Standardize format names (hyphenated) |
-| `examples/treatment-planning-example.ts` | Standardize format names (hyphenated) |
-| `examples/registration-example.ts` | Standardize format names (hyphenated) |
+| `src/data/news/company-certification-launch.ts` | **NEW** - Create news item |
+| `src/data/news.ts` | Add import and include in NEWS_ITEMS array |
 
----
+## Summary
 
-## Technical Implementation
+This news item:
+- Announces the company certification program launch
+- Explains the badge system with visual reference
+- Describes the different badge states
+- Details the certification process for companies
+- Mentions recent platform improvements (DICOM standardization, data cleanup)
+- Provides clear call-to-action for company representatives
 
-### Example: raysearch-planning.ts (lines 67-69)
-
-```typescript
-// From:
-inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
-output: ["Predicted dose distribution", "RT plan", "RT dose"],
-outputFormat: ["DICOM-RTSTRUCT"]
-
-// To:
-inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
-output: ["Predicted dose distribution", "RT plan", "RT dose"],
-outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE"]
-```
-
-### Example: sun-nuclear.ts (lines 38-41)
-
-```typescript
-// From:
-input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
-inputFormat: ["DICOM-RTSTRUCT"],
-output: ["QA reports", "Quality metrics", "Trend analysis"],
-
-// To:
-input: ["RT Plans", "RT Structure Sets", "RT Dose", "CT Images"],
-inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN", "DICOM-RTDOSE"],
-output: ["QA reports", "Quality metrics", "Trend analysis"],
-```
-
----
-
-## Intended Use Statement Review
-
-The current intended use statements were reviewed against FDA 510(k) documentation. The following products have statements that could be enhanced with official FDA wording, but this requires fetching the actual 510(k) summary PDFs for verification. The current statements are reasonable paraphrases and can be kept unless official documentation is specifically requested.
-
-Products with FDA-based intended use statements already verified:
-- Limbus Contour (K230575)
-- MOZI TPS (K223724)
-- RayStation (K240398)
-- MD Anderson RPA (K222728)
-
----
-
-## Files Modified Summary
-
-**Total: 10 files**
-
-1. `src/data/products/treatment-planning/raysearch-planning.ts`
-2. `src/data/products/treatment-planning/md-anderson.ts`
-3. `src/data/products/treatment-planning/manteia-mozi.ts`
-4. `src/data/products/platform/mvision.ts`
-5. `src/data/products/performance-monitor/radformation.ts`
-6. `src/data/products/performance-monitor/sun-nuclear.ts`
-7. `src/data/products/performance-monitor/varian.ts`
-8. `src/data/products/examples/auto-contouring-example.ts`
-9. `src/data/products/examples/treatment-planning-example.ts`
-10. `src/data/products/examples/registration-example.ts`
