@@ -3,14 +3,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, ArrowLeft, FlaskConical, BookOpen } from "lucide-react";
+import { ExternalLink, ArrowLeft, FlaskConical, BookOpen, Target, AlertCircle } from "lucide-react";
 import { EVIDENCE_LEVELS, EVIDENCE_LEVEL_REFERENCE, getEvidenceLevelColor } from "@/data/evidence-levels";
 import EvidenceLevelBadge from "@/components/product/EvidenceLevelBadge";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import SEO from "@/components/SEO";
 
 const EvidenceLevels = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Evidence Level Classification (Legacy)"
+        description="Single-axis evidence hierarchy for radiotherapy AI products - see dual-axis guide for improved methodology"
+        canonical="https://dlinrt.eu/evidence-levels"
+      />
+      
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Header */}
         <div className="mb-8">
@@ -23,18 +31,40 @@ const EvidenceLevels = () => {
           <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
             <FlaskConical className="h-8 w-8 text-primary" />
             Evidence Level Classification
+            <Badge variant="outline" className="text-sm">Legacy</Badge>
           </h1>
           <p className="text-lg text-muted-foreground">
-            A standardized framework for evaluating scientific evidence in radiotherapy AI products
+            Single-axis evidence hierarchy for radiotherapy AI products
           </p>
         </div>
+
+        {/* Upgrade Notice */}
+        <Alert className="mb-8 border-primary/50 bg-primary/5">
+          <Target className="h-4 w-4" />
+          <AlertTitle>New: Dual-Axis Classification Available</AlertTitle>
+          <AlertDescription className="mt-2">
+            We've improved our evidence classification by separating <strong>evidence rigor</strong> (study quality) 
+            from <strong>clinical impact</strong> (what outcomes are measured). This provides more nuanced 
+            evaluation of AI products.
+            <div className="mt-3">
+              <Button asChild size="sm">
+                <Link to="/evidence-impact-guide" className="inline-flex items-center gap-2">
+                  <FlaskConical className="h-4 w-4" />
+                  <span>×</span>
+                  <Target className="h-4 w-4" />
+                  View Dual-Axis Guide
+                </Link>
+              </Button>
+            </div>
+          </AlertDescription>
+        </Alert>
 
         {/* Methodology Card */}
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5" />
-              Methodology
+              Methodology (Single-Axis)
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -50,6 +80,11 @@ const EvidenceLevels = () => {
               <strong> all levels are valuable</strong> — products at Level 2 (stand-alone performance) with robust 
               multi-center validation may be more reliable than those claiming Level 3 with weak methodology.
             </p>
+            <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-sm">
+              <strong>Note:</strong> This single-axis system conflates evidence rigor with clinical impact. 
+              Consider using the <Link to="/evidence-impact-guide" className="text-primary hover:underline">dual-axis classification</Link> for 
+              more nuanced assessment.
+            </div>
             <div className="flex items-center gap-3 pt-4 border-t">
               <span className="text-sm font-medium">Reference:</span>
               <a 
