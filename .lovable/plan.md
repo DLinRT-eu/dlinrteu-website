@@ -1,109 +1,158 @@
 
 
-# Audit and Fix News Item Issues
+# Company Certification Page Plan
 
-## Issue 1: Badge State Table Not Rendering
+## Analysis: Content Overlap Assessment
 
-### Root Cause
-The markdown table is not rendering correctly due to how ReactMarkdown parses the content. Two potential issues:
+I reviewed the existing content to ensure no duplication:
 
-1. **Emoji/Unicode characters in table cells**: The checkmark (✓) and warning (⚠) symbols may interfere with table parsing
-2. **Bold markdown inside table cells**: The `**text**` syntax inside table cells can cause parsing issues
+| Existing Content | Focus Area |
+|-----------------|------------|
+| `company-certification-launch.ts` (news) | Announcement of the program launch |
+| `CompanyGuide.tsx` | How to use the dashboard, submit revisions |
+| `Roles.tsx` | General role descriptions |
+| `RolesFAQ.tsx` | General role FAQs (approval times, conflicts) |
 
-### Current Table in News Content (lines 25-29)
-```markdown
-| Badge | Meaning |
-|-------|---------|
-| ✓ **Verified by Company** (green) | Information has been certified by the manufacturer |
-| ⚠ **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
-| No badge | Product has not yet been certified by the company |
-```
+**Gap Identified:** No dedicated content explaining:
+1. The step-by-step certification workflow (verifying product accuracy vs. submitting changes)
+2. Badge states and what they mean in detail
+3. Certification-specific FAQs (re-certification, badge expiry, etc.)
 
-### Solution
-Simplify the table content to ensure proper rendering:
-- Move special characters and formatting outside the table
-- Use cleaner cell content
+## Solution: Create Dedicated Certification Page
 
-### Updated Table Content
-```markdown
-**Badge States:**
-
-| Badge | Meaning |
-|-------|---------|
-| Verified by Company (green) | Information has been certified by the manufacturer |
-| Certification Outdated (amber) | Product was certified but information has since been updated; re-certification needed |
-| No badge | Product has not yet been certified by the company |
-```
+Create a new page at `/company/certification` that provides:
+- Detailed certification process
+- Badge states explained with visual examples
+- Certification-specific FAQs
+- Links to existing guides (no duplication)
 
 ---
 
-## Issue 2: Contact Page Link Returns 404
+## File to Create
 
-### Root Cause
-The news item contains a link to `/contact` (line 71 of news file):
-```markdown
-Visit our [Contact page](/contact) to begin the registration process.
-```
+### New Page: `src/pages/company/CompanyCertification.tsx`
 
-However, there is **no `/contact` route** defined in `App.tsx`. The correct page is `/support` which contains the "Contact Us" section.
+**Route:** `/company/certification` (publicly accessible - helps prospective company reps)
 
-### Solution
-Change the link from `/contact` to `/support`:
-```markdown
-Visit our [Support & Contact page](/support) to begin the registration process.
-```
+**Structure:**
+1. **Hero Section** - Brief intro to certification program
+2. **Quick Links** - To related pages (CompanyGuide, Roles, Support)
+3. **Badge States Explained** - Visual cards for each badge state (green, amber, none)
+4. **Certification Process** - Step-by-step guide for certifying products
+5. **Prerequisites** - What's needed before certification
+6. **FAQ Section** - Certification-specific questions only
 
 ---
 
-## Files to Modify
+## Content Outline
 
-| File | Changes |
-|------|---------|
-| `src/data/news/company-certification-launch.ts` | Fix table formatting and update contact link |
+### Hero Section
+- Title: "Company Certification Program"
+- Subtitle explaining what certification means (manufacturer-verified accuracy)
+
+### Badge States Section (with visual cards)
+```text
+[ Green Badge Card ]
+VERIFIED BY COMPANY
+- What it means
+- How users benefit
+- Validity period
+
+[ Amber Badge Card ]
+CERTIFICATION OUTDATED
+- When this appears
+- How to update
+- What users see
+
+[ No Badge Card ]
+NOT YET CERTIFIED
+- Default state
+- How to get started
+```
+
+### Step-by-Step Certification Process
+1. Ensure you have Company Representative access (link to registration in CompanyGuide)
+2. Access Company Dashboard
+3. Select product to certify
+4. Review all product information
+5. Click "Certify Product"
+6. Add optional notes
+7. Submit certification
+
+### Prerequisites Card
+- Must be verified company representative
+- Product must belong to your company
+- Previous certification not pending review
+
+### FAQ Section (Certification-specific only)
+
+| Question | Existing Coverage |
+|----------|-------------------|
+| "When does certification expire?" | NEW - not covered elsewhere |
+| "What happens when product info changes?" | NEW - badge state change |
+| "Can I certify products from another company?" | NEW |
+| "Do I need to certify every product?" | NEW |
+| "What if I find incorrect information?" | Links to revision workflow in CompanyGuide |
+| "How long is certification valid?" | NEW |
+
+**Questions NOT included (already covered in RolesFAQ.tsx):**
+- How to request company role
+- Role approval time
+- Role conflicts with reviewer
 
 ---
 
-## Detailed Changes
+## Route Addition
 
-### File: `src/data/news/company-certification-launch.ts`
+**File:** `src/App.tsx`
 
-**Change 1 - Fix table (lines 23-29)**:
-
+Add new route (publicly accessible for prospective companies):
 ```typescript
-// From:
-**Badge States:**
+const CompanyCertification = lazy(() => import("./pages/company/CompanyCertification"));
 
-| Badge | Meaning |
-|-------|---------|
-| ✓ **Verified by Company** (green) | Information has been certified by the manufacturer |
-| ⚠ **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
-| No badge | Product has not yet been certified by the company |
-
-// To:
-**Badge States:**
-
-| Badge | Meaning |
-|-------|---------|
-| Verified by Company (green) | Information has been certified by the manufacturer |
-| Certification Outdated (amber) | Product was certified but information has since been updated; re-certification needed |
-| No badge | Product has not yet been certified by the company |
+// In Routes:
+<Route path="/company/certification" element={<CompanyCertification />} />
 ```
 
-**Change 2 - Fix link (line 71)**:
+---
 
-```typescript
-// From:
-Visit our [Contact page](/contact) to begin the registration process.
+## Cross-Linking Updates
 
-// To:
+### Update news item to link to new page:
+**File:** `src/data/news/company-certification-launch.ts`
+
+Change:
+```markdown
 Visit our [Contact page](/support) to begin the registration process.
 ```
+To:
+```markdown
+Visit our [Company Certification Guide](/company/certification) to learn more and begin the registration process.
+```
+
+### Add link in CompanyGuide.tsx:
+Add a card linking to the certification page in the quick navigation section.
 
 ---
 
-## Summary
+## Summary of Changes
 
-Two fixes for the news item:
-1. Remove special characters (✓, ⚠) and bold formatting from table cells to ensure proper Markdown table parsing
-2. Update the contact link from non-existent `/contact` to the valid `/support` route
+| File | Action |
+|------|--------|
+| `src/pages/company/CompanyCertification.tsx` | NEW - Dedicated certification page |
+| `src/App.tsx` | Add route for certification page |
+| `src/data/news/company-certification-launch.ts` | Update link to new page |
+| `src/pages/company/CompanyGuide.tsx` | Add navigation link to certification page |
+
+---
+
+## Non-Duplicate Content Strategy
+
+The new page will:
+- Focus exclusively on **product certification** (the badge system)
+- Link to CompanyGuide for registration/revision workflows
+- Link to RolesFAQ for general role questions
+- Provide new FAQs specific to certification only
+
+This avoids duplication while providing a complete resource for companies interested in the certification program.
 
