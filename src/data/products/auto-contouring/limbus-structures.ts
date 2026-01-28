@@ -285,7 +285,7 @@ export const LIMBUS_PELVIS_MRI_STRUCTURES = [
   "Pelvis-MRI T2: SeminalVes"
 ];
 
-// CNS T1 structures
+// CNS MRI T1 structures
 export const LIMBUS_CNS_STRUCTURES = [
   "CNS-T1: Brainstem",
   "CNS-T1: Cornea_L",
