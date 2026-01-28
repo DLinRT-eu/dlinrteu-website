@@ -1,49 +1,109 @@
 
 
-# Fix Badge State Table Rendering in News Item
+# Audit and Fix News Item Issues
 
-## Problem
+## Issue 1: Badge State Table Not Rendering
 
-The badge state table in the news item is not rendering because the `ReactMarkdown` component in `NewsDetail.tsx` restricts allowed HTML elements. Table elements (`table`, `thead`, `tbody`, `tr`, `th`, `td`) are not in the allowlist.
+### Root Cause
+The markdown table is not rendering correctly due to how ReactMarkdown parses the content. Two potential issues:
 
-**Current allowedElements (line 68):**
-```typescript
-allowedElements={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre', 'br']}
+1. **Emoji/Unicode characters in table cells**: The checkmark (✓) and warning (⚠) symbols may interfere with table parsing
+2. **Bold markdown inside table cells**: The `**text**` syntax inside table cells can cause parsing issues
+
+### Current Table in News Content (lines 25-29)
+```markdown
+| Badge | Meaning |
+|-------|---------|
+| ✓ **Verified by Company** (green) | Information has been certified by the manufacturer |
+| ⚠ **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
+| No badge | Product has not yet been certified by the company |
 ```
 
-## Solution
+### Solution
+Simplify the table content to ensure proper rendering:
+- Move special characters and formatting outside the table
+- Use cleaner cell content
 
-Add table-related elements to the `allowedElements` array so markdown tables render properly.
-
-## Changes Required
-
-### File: `src/pages/NewsDetail.tsx`
-
-**Line 68** - Update the `allowedElements` array to include table elements:
-
-```typescript
-// From:
-allowedElements={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre', 'br']}
-
-// To:
-allowedElements={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre', 'br', 'table', 'thead', 'tbody', 'tr', 'th', 'td']}
-```
-
-## Result
-
-After this change, the badge state table will render as a proper HTML table:
+### Updated Table Content
+```markdown
+**Badge States:**
 
 | Badge | Meaning |
 |-------|---------|
 | Verified by Company (green) | Information has been certified by the manufacturer |
-| Certification Outdated (amber) | Product was certified but information has since been updated |
+| Certification Outdated (amber) | Product was certified but information has since been updated; re-certification needed |
+| No badge | Product has not yet been certified by the company |
+```
+
+---
+
+## Issue 2: Contact Page Link Returns 404
+
+### Root Cause
+The news item contains a link to `/contact` (line 71 of news file):
+```markdown
+Visit our [Contact page](/contact) to begin the registration process.
+```
+
+However, there is **no `/contact` route** defined in `App.tsx`. The correct page is `/support` which contains the "Contact Us" section.
+
+### Solution
+Change the link from `/contact` to `/support`:
+```markdown
+Visit our [Support & Contact page](/support) to begin the registration process.
+```
+
+---
+
+## Files to Modify
+
+| File | Changes |
+|------|---------|
+| `src/data/news/company-certification-launch.ts` | Fix table formatting and update contact link |
+
+---
+
+## Detailed Changes
+
+### File: `src/data/news/company-certification-launch.ts`
+
+**Change 1 - Fix table (lines 23-29)**:
+
+```typescript
+// From:
+**Badge States:**
+
+| Badge | Meaning |
+|-------|---------|
+| ✓ **Verified by Company** (green) | Information has been certified by the manufacturer |
+| ⚠ **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
 | No badge | Product has not yet been certified by the company |
 
-The table will inherit styling from the `prose` CSS classes already applied to the container (`prose-blue`), ensuring it matches the overall design.
+// To:
+**Badge States:**
 
-## Files Modified
+| Badge | Meaning |
+|-------|---------|
+| Verified by Company (green) | Information has been certified by the manufacturer |
+| Certification Outdated (amber) | Product was certified but information has since been updated; re-certification needed |
+| No badge | Product has not yet been certified by the company |
+```
 
-| File | Change |
-|------|--------|
-| `src/pages/NewsDetail.tsx` | Add table elements to `allowedElements` array (line 68) |
+**Change 2 - Fix link (line 71)**:
+
+```typescript
+// From:
+Visit our [Contact page](/contact) to begin the registration process.
+
+// To:
+Visit our [Contact page](/support) to begin the registration process.
+```
+
+---
+
+## Summary
+
+Two fixes for the news item:
+1. Remove special characters (✓, ⚠) and bold formatting from table cells to ensure proper Markdown table parsing
+2. Update the contact link from non-existent `/contact` to the valid `/support` route
 
