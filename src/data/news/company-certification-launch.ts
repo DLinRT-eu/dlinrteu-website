@@ -24,8 +24,8 @@ Products that have been certified by their manufacturers will display a new veri
 
 | Badge | Meaning |
 |-------|---------|
-| ✓ **Verified by Company** (green) | Information has been certified by the manufacturer |
-| ⚠ **Certification Outdated** (amber) | Product was certified but information has since been updated; re-certification needed |
+| Verified by Company (green) | Information has been certified by the manufacturer |
+| Certification Outdated (amber) | Product was certified but information has since been updated; re-certification needed |
 | No badge | Product has not yet been certified by the company |
 
 This green badge indicates that:
@@ -68,7 +68,7 @@ If you represent a medical device company with products listed on DLinRT.eu, we 
 2. Verify your products during the upcoming certification round
 3. Keep your product information up to date
 
-Visit our [Contact page](/contact) to begin the registration process.
+Visit our [Contact page](/support) to begin the registration process.
 
 ### For the Community
 The certification program works alongside our independent reviewer community. Together, we ensure that DLinRT.eu remains the most trusted and accurate resource for AI in radiotherapy.
