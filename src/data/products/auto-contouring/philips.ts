@@ -70,7 +70,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head (R)",
       "Pelvis: Body Outline"
     ],
-    lastRevised: "2025-01-08",
+    lastRevised: "2026-01-08",
     source: "Philips product documentation (2019)"
   }
 ];
