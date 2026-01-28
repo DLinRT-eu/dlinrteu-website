@@ -11,6 +11,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useProductEdit } from './ProductEditContext';
+import { useProductValidation } from '@/hooks/useProductValidation';
+import { ValidationSummary } from './ValidationIndicator';
 import { 
   Save, 
   X, 
@@ -18,12 +20,15 @@ import {
   RotateCcw, 
   CheckCircle2, 
   AlertCircle,
+  AlertTriangle,
+  XCircle,
   Loader2
 } from 'lucide-react';
 
 export function EditToolbar() {
   const {
     isEditMode,
+    editedProduct,
     changedFields,
     isSaving,
     currentDraft,
@@ -33,12 +38,15 @@ export function EditToolbar() {
     disableEditMode
   } = useProductEdit();
   
+  const validation = useProductValidation(editedProduct);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [editSummary, setEditSummary] = useState('');
   
   if (!isEditMode) return null;
   
   const hasChanges = changedFields.length > 0;
+  const hasErrors = validation.errorCount > 0;
+  const hasWarnings = validation.warningCount > 0;
   
   const handleSubmit = async () => {
     if (!editSummary.trim()) return;
@@ -54,14 +62,34 @@ export function EditToolbar() {
           {/* Status indicator */}
           <div className="flex items-center gap-2 pr-3 border-r border-border">
             {hasChanges ? (
-              <Badge variant="outline" className="bg-amber-500/10 text-amber-600 border-amber-300">
+              <Badge variant="outline" className="bg-amber-500/10 text-amber-600 border-amber-300 dark:text-amber-400">
                 <AlertCircle className="h-3 w-3 mr-1" />
                 {changedFields.length} change{changedFields.length !== 1 ? 's' : ''}
               </Badge>
             ) : (
-              <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-300">
+              <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-300 dark:text-green-400">
                 <CheckCircle2 className="h-3 w-3 mr-1" />
                 No changes
+              </Badge>
+            )}
+          </div>
+          
+          {/* Validation status */}
+          <div className="flex items-center gap-2 pr-3 border-r border-border">
+            {hasErrors ? (
+              <Badge variant="outline" className="bg-red-500/10 text-red-600 border-red-300 dark:text-red-400">
+                <XCircle className="h-3 w-3 mr-1" />
+                {validation.errorCount} error{validation.errorCount !== 1 ? 's' : ''}
+              </Badge>
+            ) : hasWarnings ? (
+              <Badge variant="outline" className="bg-amber-500/10 text-amber-600 border-amber-300 dark:text-amber-400">
+                <AlertTriangle className="h-3 w-3 mr-1" />
+                {validation.warningCount} warning{validation.warningCount !== 1 ? 's' : ''}
+              </Badge>
+            ) : (
+              <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-300 dark:text-green-400">
+                <CheckCircle2 className="h-3 w-3 mr-1" />
+                Valid
               </Badge>
             )}
           </div>
@@ -103,7 +131,8 @@ export function EditToolbar() {
               variant="default"
               size="sm"
               onClick={() => setShowSubmitDialog(true)}
-              disabled={!hasChanges || isSaving}
+              disabled={!hasChanges || isSaving || hasErrors}
+              title={hasErrors ? 'Fix validation errors before submitting' : undefined}
             >
               <Send className="h-4 w-4 mr-1" />
               Submit
@@ -133,6 +162,14 @@ export function EditToolbar() {
           </DialogHeader>
           
           <div className="space-y-4">
+            {/* Validation Summary */}
+            <ValidationSummary
+              errorCount={validation.errorCount}
+              warningCount={validation.warningCount}
+              validCount={validation.validCount}
+              totalChecks={validation.totalChecks}
+            />
+            
             <div>
               <p className="text-sm text-muted-foreground mb-2">
                 Modified fields ({changedFields.length}):
@@ -165,7 +202,7 @@ export function EditToolbar() {
             </Button>
             <Button 
               onClick={handleSubmit} 
-              disabled={!editSummary.trim() || isSaving}
+              disabled={!editSummary.trim() || isSaving || hasErrors}
             >
               {isSaving ? (
                 <Loader2 className="h-4 w-4 mr-1 animate-spin" />
