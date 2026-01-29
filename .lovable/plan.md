@@ -1,194 +1,187 @@
 
-# Revising I0 and I1: Separating Validation Method from Actual Impact
+# Adding Therapanacea SmartFuse Product + Build Error Fix
 
-## The Problem
+## Summary
 
-The current I0 (Technical) and I1 (Performance) definitions still lean on **type of validation** rather than **actual impact**:
+Based on my research of the Therapanacea website, I found that **SmartFuse** is an active, certified product that should be added to the database. The website confirms it's part of the ART-Plan+ platform with CE/FDA/TGA certification.
 
-| Current | Description | Issue |
-|---------|-------------|-------|
-| I0 Technical | "reproducibility, speed, consistency" | These are *methods*, not outcomes |
-| I1 Performance | "accuracy vs reference standard" | This is *how you measure*, not *what value it provides* |
+### Current Therapanacea Products (already in database):
+- **Annotate** - Auto-contouring (CE, FDA, TGA cleared)
+- **MR-Box** - MRI synthetic CT generation (CE, FDA, TGA cleared)
+- **AdaptBox** - CBCT augmentation (CE, FDA, TGA cleared)
 
-As the user notes: If something is "faster" or "more accurate", the actual *impact* could be workflow (faster = time savings) or quality (more accurate = better care). The "technical" aspect describes the *validation approach*, not the *clinical benefit*.
+### Product to Add:
+- **SmartFuse** - AI-powered rigid and deformable image registration/fusion (CE, FDA, TGA cleared)
 
-## Proposed Revision
+### Coming Soon (NOT adding - no clearance yet):
+- SmartPlan - Treatment planning
+- TumorBox - Tumor segmentation
+- BrachyBox - Brachytherapy delineation
 
-### Core Principle
-The Impact axis should describe **what benefit is demonstrated**, not **how it was validated**. The validation method belongs to the Rigor axis.
+---
 
-### Revised I0-I5 Definitions
+## Task 1: Fix Build Error
 
-| Level | Current Name | Revised Name | Revised Description |
-|-------|--------------|--------------|---------------------|
-| **I0** | Technical | None Demonstrated | No clinical, workflow, or quality benefit demonstrated. Product feasibility only. |
-| **I1** | Performance | Quality Assurance | Enables monitoring, measurement, or quality assurance that indirectly supports patient care. |
-| **I2** | Workflow | Workflow | (unchanged) Time savings, efficiency, variability reduction. |
-| **I3** | Decision | Decision | (unchanged) Changes in clinical decisions. |
-| **I4** | Outcome | Outcome | (unchanged) Patient health outcomes. |
-| **I5** | Societal | Societal | (unchanged) Health economics, access. |
+The build is failing due to incorrect property name in the Resend API call.
 
-### Detailed Definitions
+**File:** `supabase/functions/send-contact-email/index.ts`
+**Line:** 139
 
-```text
-I0 - None Demonstrated
-━━━━━━━━━━━━━━━━━━━━━
-Description: No clinical, workflow, or quality benefit demonstrated beyond 
-             proving the product works. Feasibility or technical capability only.
-
-RT Examples:
-- Product works on test cases (no patient benefit shown)
-- Technical reproducibility without clinical context
-- Computational benchmarks without clinical validation
-
-When to use:
-- New products with no clinical studies yet
-- Technical proof-of-concept only
-- "Favorite color AI" example (rigorous but no clinical value)
+**Current (broken):**
+```typescript
+replyTo: email,
 ```
 
-```text
-I1 - Quality Assurance
-━━━━━━━━━━━━━━━━━━━━━
-Description: Enables monitoring, measurement, or quality assurance that 
-             indirectly supports patient care. Does not directly affect 
-             treatment but ensures safe/consistent operation of clinical systems.
-
-RT Examples:
-- QA tools that validate AI contour accuracy (MVision Verify)
-- Performance monitoring dashboards
-- Automated consistency checks
-- Measurement devices that ensure correct operation
-
-When to use:
-- Products that monitor other AI/clinical systems
-- QA and verification tools
-- Calibration and consistency checking
-- "Guardian" products that prevent harm indirectly
+**Fixed:**
+```typescript
+reply_to: email,
 ```
 
-```text
-I2 - Workflow (unchanged)
-━━━━━━━━━━━━━━━━━━━━━━━━
-Description: Time savings, efficiency gains, or reduction in variability 
-             within clinical workflow.
+The Resend API uses snake_case for the `reply_to` property, not camelCase.
 
-RT Examples:
-- Contouring time reduction (e.g., 30 min → 5 min)
-- Inter-observer variability reduction
-- Treatment planning efficiency
-- Review/approval time savings
-```
+---
 
-### How This Addresses the User's Points
+## Task 2: Add SmartFuse Product
 
-| User Concern | How Revised Scale Addresses It |
-|--------------|-------------------------------|
-| "Technical - does the same but faster/more accurate?" | Faster → I2 (Workflow). More accurate → depends on outcome demonstrated. "Technical" now means no benefit shown. |
-| "Performance - could be measurement devices?" | Yes! I1 now explicitly covers QA/monitoring tools that support care indirectly. |
-| "QA tools are important!" | I1 (Quality Assurance) recognizes their value as enablers of safe AI use. |
-| "I0/I1 lean on type of validation" | Revised definitions focus on *what benefit*, not *how measured*. |
+### New File: `src/data/products/registration/therapanacea.ts`
 
-### Visual: Where Products Fall
-
-```text
-Product Type                     Current     Revised     Rationale
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Auto-contouring (accuracy)       I1          I2*         Accuracy enables workflow savings
-Auto-contouring (time study)     I2          I2          Direct workflow demonstration
-MVision Verify (QA tool)         I0/I1?      I1          Monitoring tool - indirect impact
-PixelShine (reconstruction)      I0          I2**        If workflow demonstrated, else I0
-Outcome study product            I4          I4          Unchanged
-New product (no data)            I0          I0          No benefit demonstrated yet
-
-* If accuracy study shows clinical workflow benefit, it's I2
-** Reconstruction speed = workflow benefit; pure image quality without clinical 
-   validation = I0 (none demonstrated)
-```
-
-## File Changes
-
-### `src/data/evidence-impact-levels.ts`
-
-Update CLINICAL_IMPACT_LEVELS array (lines 85-158):
+SmartFuse belongs in the **Registration** category as it's an image fusion/registration tool.
 
 ```typescript
-export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
+import { ProductDetails } from "@/types/productDetails";
+
+export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
-    level: "I0",
-    name: "None Demonstrated",
-    description: "No clinical, workflow, or quality benefit demonstrated beyond feasibility. Product works, but no patient-facing value shown.",
-    rtExamples: [
-      "Technical feasibility studies only",
-      "Proof-of-concept without clinical validation",
-      "Computational benchmarks without patient context",
-      "Product works but no impact studies conducted"
+    id: "therapanacea-smartfuse",
+    name: "SmartFuse",
+    company: "Therapanacea",
+    companyUrl: "https://www.therapanacea.eu/",
+    productUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/therapanacea.ts",
+    description: "AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. Part of the ART-Plan+ platform.",
+    category: "Registration",
+    certification: "CE, FDA & TGA",
+    logoUrl: "/logos/therapanacea.png",
+    website: "https://www.therapanacea.eu/our-products/smartfuse/",
+    anatomicalLocation: ["Whole body"],
+    modality: ["CT", "MRI", "CBCT", "PET/CT"],
+    subspeciality: "Radiation Oncology",
+    diseaseTargeted: ["Multiple Cancer Types"],
+    keyFeatures: [
+      "AI-powered registration algorithm",
+      "Rigid and deformable fusion",
+      "Real-time contour deformation",
+      "Sub-voxel registration accuracy",
+      "4D-CT management",
+      "Multi-modality support (CT, MRI, CBCT, PET-CT)",
+      "Checker-board visualization"
     ],
-    color: "slate"
-  },
-  {
-    level: "I1",
-    name: "Quality Assurance",
-    description: "Enables monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe operation.",
-    rtExamples: [
-      "QA tools validating AI contour accuracy",
-      "Performance monitoring dashboards",
-      "Automated consistency checks",
-      "Measurement devices ensuring correct operation"
-    ],
-    color: "blue"
-  },
-  // I2-I5 remain unchanged...
+    technicalSpecifications: {
+      population: "Adult patients",
+      input: ["CT", "MRI", "CBCT", "PET-CT", "4D-CT"],
+      inputFormat: ["DICOM"],
+      output: ["Registered images", "Deformed contours", "Deformation field"],
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
+    },
+    technology: {
+      integration: ["TPS integration", "PACS integration"],
+      deployment: ["Cloud-based", "On-premises"],
+      triggerForAnalysis: "Manual or automated",
+      processingTime: "Minutes per registration"
+    },
+    regulatory: {
+      ce: {
+        status: "CE Marked",
+        class: "Class IIb",
+        type: "MDR",
+        regulation: "MDR 2017/745",
+        notifiedBody: "GMED (Notified Body 0459)"
+      },
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K242822",
+        productCode: "MUJ, QKB, LLZ",
+        regulationNumber: "21 CFR 892.5050",
+        decisionDate: "2025-02-25",
+        notes: "Module within ART-Plan+ platform (v3.0.0 cleared). Current version is v3.1.2."
+      },
+      tga: {
+        status: "TGA Cleared",
+        notes: "Cleared for Australian market as part of ART-Plan+ platform"
+      },
+      intendedUseStatement: "For multi-modal visualization and rigid- and deformable registration of anatomical and functional images."
+    },
+    market: {
+      onMarketSince: "2020",
+      distributionChannels: ["Direct sales"]
+    },
+    version: "3.1.2",
+    releaseDate: "2025-01-01",
+    lastUpdated: "2026-01-29",
+    lastRevised: "2026-01-29",
+    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822)"
+  }
 ];
 ```
 
-### `src/pages/EvidenceImpactGuide.tsx`
+---
 
-Update the Example Classifications table to reflect new definitions:
+## Task 3: Update Registration Products Index
+
+**File:** `src/data/products/registration/index.ts`
+
+Add the new SmartFuse product to the registration products array:
 
 ```typescript
-// Add QA tool example
-<tr>
-  <td className="py-3 pr-4">QA/Monitoring tool</td>
-  <td className="py-3 pr-4">
-    <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" size="sm" showTooltip={false} />
-  </td>
-  <td className="py-3 text-muted-foreground">Well-validated tool that monitors AI accuracy</td>
-</tr>
+import { ProductDetails } from "@/types/productDetails";
+import { PYMEDIX_PRODUCTS } from "./pymedix";
+import { THERAPANACEA_SMARTFUSE_PRODUCTS } from "./therapanacea";
 
-// Update "Favorite color AI" example
-<tr>
-  <td className="py-3 pr-4">"Favorite color" AI (example)</td>
-  <td className="py-3 pr-4">
-    <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" size="sm" showTooltip={false} />
-  </td>
-  <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
-</tr>
+export const REGISTRATION_PRODUCTS: ProductDetails[] = [
+  ...PYMEDIX_PRODUCTS,
+  ...THERAPANACEA_SMARTFUSE_PRODUCTS
+];
 ```
 
-Add a note about the distinction between validation method and impact.
+---
 
-### `src/components/resources/EvidenceLevelTable.tsx`
+## Task 4: Update Company Product IDs
 
-Update to use new level names in the Clinical Impact column.
+**File:** `src/data/companies/auto-contouring.ts`
 
-### `src/components/resources/EvidenceImpactMatrix.tsx`
+Update Therapanacea's `productIds` array to include SmartFuse:
 
-Ensure the matrix uses the updated level names.
+**Current:**
+```typescript
+"productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic"],
+```
 
-## Summary of Changes
+**Updated:**
+```typescript
+"productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic", "therapanacea-smartfuse"],
+```
 
-| File | Change |
+---
+
+## Files to Modify
+
+| File | Action |
 |------|--------|
-| `src/data/evidence-impact-levels.ts` | Update I0 and I1 definitions, names, descriptions, and examples |
-| `src/pages/EvidenceImpactGuide.tsx` | Update example table, add QA tool example, clarify methodology |
-| `src/components/resources/EvidenceLevelTable.tsx` | Updated automatically via data file |
-| `src/components/resources/EvidenceImpactMatrix.tsx` | Updated automatically via data file |
+| `supabase/functions/send-contact-email/index.ts` | Fix `replyTo` → `reply_to` |
+| `src/data/products/registration/therapanacea.ts` | Create new file with SmartFuse product |
+| `src/data/products/registration/index.ts` | Add import and include SmartFuse products |
+| `src/data/companies/auto-contouring.ts` | Add `therapanacea-smartfuse` to productIds |
 
-## Benefits
+---
 
-1. **Clear separation**: Impact axis now describes *what benefit*, not *how measured*
-2. **QA tools recognized**: I1 explicitly values monitoring/QA products that support safe AI use
-3. **Consistent classification**: Products with accuracy studies get I2 if workflow benefit is demonstrated
-4. **Future-proof**: Framework clearer for classifying new product types
-5. **User's feedback addressed**: "Technical" no longer describes a validation method
+## Why Not Add Other Products
+
+| Product | Status | Reason |
+|---------|--------|--------|
+| SmartPlan | Coming Soon | Listed under "Coming Soon" on website |
+| TumorBox | Coming Soon | Listed under "Coming Soon" on website |
+| BrachyBox | Coming Soon | Listed under "Coming Soon" - described as "future AI-powered module" |
+
+These products will be added once they receive regulatory clearance.
