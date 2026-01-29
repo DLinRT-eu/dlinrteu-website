@@ -18,6 +18,7 @@ These products do not meet the platform's criteria:
 | SCINTIX Biology-Guided Radiotherapy | RefleXion Medical | Signal processing, not DL |
 | RefleXion X2 Platform | RefleXion Medical | Hardware platform |
 | Deep Learning Image Processing for CT | GE Healthcare | Unverified - no specific FDA clearance number, functionality covered by TrueFidelity Pro (K183202) |
+| MRIdian A3i | ViewRay | Uses deformable registration, not AI/DL (FDA K162393, K181989) |
 
 ## Restoration
 
@@ -26,4 +27,4 @@ To restore these products to the website:
 2. Update the category's `index.ts` to import and include the products
 3. Update `src/data/products/archived/index.ts` to remove the import
 
-Last updated: 2026-01-27
+Last updated: 2026-01-29

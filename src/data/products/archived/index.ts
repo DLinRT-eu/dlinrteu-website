@@ -5,10 +5,12 @@ import { ProductDetails } from "@/types/productDetails";
 import { LEO_CANCER_CARE_PRODUCTS } from "./leo-cancer-care";
 import { REFLEXION_PRODUCTS } from "./reflexion";
 import { GE_ARCHIVED_PRODUCTS } from "./ge-healthcare";
+import { VIEWRAY_ARCHIVED_PRODUCTS } from "./viewray";
 
 // NOT exported to main products - kept for reference only
 export const ARCHIVED_PRODUCTS: ProductDetails[] = [
   ...LEO_CANCER_CARE_PRODUCTS,
   ...REFLEXION_PRODUCTS,
-  ...GE_ARCHIVED_PRODUCTS
+  ...GE_ARCHIVED_PRODUCTS,
+  ...VIEWRAY_ARCHIVED_PRODUCTS
 ];

@@ -24,7 +24,6 @@ import { DIRECTORGANS_PRODUCTS } from "./directorgans";
 import { ONCOSOFT_PRODUCTS } from "./oncosoft";
 import { TAIWAN_MEDICAL_IMAGING_PRODUCTS } from "./taiwan-medical-imaging";
 import { BRAINLAB_PRODUCTS } from "./brainlab";
-import { VIEWRAY_PRODUCTS } from "./viewray";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -50,6 +49,5 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...DIRECTORGANS_PRODUCTS,
   ...ONCOSOFT_PRODUCTS,
   ...TAIWAN_MEDICAL_IMAGING_PRODUCTS,
-  ...BRAINLAB_PRODUCTS,
-  ...VIEWRAY_PRODUCTS
+  ...BRAINLAB_PRODUCTS
 ];

@@ -15,6 +15,7 @@ These companies no longer have active products on the platform:
 |---------|--------|
 | RefleXion Medical | Products (SCINTIX, X2) use signal processing, not deep learning |
 | Leo Cancer Care | Product (Marie) is a hardware patient positioner |
+| ViewRay | MRIdian A3i uses deformable registration, not AI/DL |
 
 ## Restoration
 
@@ -24,4 +25,4 @@ To restore a company to the website:
 3. Update this folder's `index.ts` to remove the import
 4. Ensure the company's products are also restored from `src/data/products/archived/`
 
-Last updated: 2026-01-27
+Last updated: 2026-01-29
