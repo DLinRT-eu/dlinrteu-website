@@ -1,20 +1,16 @@
 
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Clock, ArrowRight } from "lucide-react";
 import SearchHeader from "@/components/SearchHeader";
 import ProductGrid from "@/components/ProductGrid";
 import FilterBar from "@/components/FilterBar";
-import { useState, useEffect } from "react";
 import type { FilterState } from "@/types/filters";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
-import { getAllOptions } from "@/utils/filterOptions";
 import dataService from "@/services/DataService";
-import { useLocation } from "react-router-dom";
 import Footer from "@/components/Footer";
 import ActiveFilterChips from "@/components/filters/ActiveFilterChips";
-import { Clock, ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import UnifiedProductCard from "@/components/common/UnifiedProductCard";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const Products = () => {
   const [filtersActive, setFiltersActive] = useState(false);
@@ -26,7 +22,6 @@ const Products = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [advancedSearch, setAdvancedSearch] = useState(false);
-  const [pipelineOpen, setPipelineOpen] = useState(false);
   const location = useLocation();
 
   // Get all products and pipeline products
@@ -206,46 +201,24 @@ const Products = () => {
           />
         )}
         
-        {/* Pipeline Products Section */}
+        {/* Pipeline Products Link */}
         {pipelineProducts.length > 0 && (
-          <Collapsible open={pipelineOpen} onOpenChange={setPipelineOpen} className="mb-8">
-            <div className="p-4 bg-violet-50 rounded-lg border border-violet-200">
-              <CollapsibleTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="w-full flex items-center justify-between p-0 h-auto hover:bg-transparent"
-                >
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-violet-600" />
-                    <h3 className="text-lg font-semibold text-violet-900">
-                      Products in Pipeline ({pipelineProducts.length})
-                    </h3>
-                  </div>
-                  {pipelineOpen ? (
-                    <ChevronUp className="h-5 w-5 text-violet-600" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-violet-600" />
-                  )}
-                </Button>
-              </CollapsibleTrigger>
-              <p className="text-sm text-violet-700 mt-1 ml-7">
-                Announced products not yet certified (CE/FDA). Click to expand.
-              </p>
-              <CollapsibleContent className="mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {pipelineProducts.map((product) => (
-                    <UnifiedProductCard
-                      key={product.id}
-                      product={product}
-                      showModality={true}
-                      showFeatures={false}
-                      compactMode={true}
-                    />
-                  ))}
+          <Link to="/products/pipeline" className="block mb-6">
+            <div className="p-4 bg-violet-50 rounded-lg border border-violet-200 hover:border-violet-400 transition-colors">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-violet-600" />
+                  <span className="text-lg font-semibold text-violet-900">
+                    Products in Pipeline ({pipelineProducts.length})
+                  </span>
                 </div>
-              </CollapsibleContent>
+                <ArrowRight className="h-5 w-5 text-violet-600" />
+              </div>
+              <p className="text-sm text-violet-700 mt-1 ml-7">
+                Announced products not yet certified (CE/FDA). Click to view all.
+              </p>
             </div>
-          </Collapsible>
+          </Link>
         )}
         
         <ProductGrid 
