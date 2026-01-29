@@ -82,6 +82,12 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
       availability: "Not available in all markets yet"
     },
+    partOf: {
+      name: "ART-Plan+",
+      version: "3.1.2",
+      productUrl: "https://www.therapanacea.eu/our-products/",
+      relationship: "Module"
+    },
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-01-02",

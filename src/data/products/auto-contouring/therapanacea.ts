@@ -67,6 +67,12 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales"],
     },
+    partOf: {
+      name: "ART-Plan+",
+      version: "3.1.2",
+      productUrl: "https://www.therapanacea.eu/our-products/",
+      relationship: "Module"
+    },
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-01-29",
