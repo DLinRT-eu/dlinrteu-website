@@ -182,6 +182,15 @@ export const standardizeCertification = (certification: string): string => {
 };
 
 /**
+ * Checks if a product is in the pipeline (announced but not certified)
+ */
+export const isPipelineProduct = (product: ProductDetails): boolean => {
+  return product.developmentStage === 'pipeline' || 
+         product.certification?.toLowerCase() === 'pipeline' ||
+         product.certification?.toLowerCase() === 'coming soon';
+};
+
+/**
  * Gets standardized certification tags from a product
  * Delegates to regulatoryUtils for consistency
  */

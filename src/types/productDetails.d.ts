@@ -130,6 +130,9 @@ export interface ProductDetails extends Product {
   // For Performance Monitor category: describes what AI products it monitors
   monitorsAIProducts?: string[];
   
+  // Development stage for tracking product maturity
+  developmentStage?: "certified" | "pipeline" | "research" | "discontinued";
+  
   // New field for dose prediction models (for Treatment Planning products)
   dosePredictionModels?: Array<{
     name: string;                    // Model name (e.g., "H&N VMAT")

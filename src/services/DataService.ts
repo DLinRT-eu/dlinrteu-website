@@ -9,7 +9,8 @@ import {
   hasRegulatoryApproval, 
   containsDeepLearningKeywords, 
   normalizeAnatomicalLocations,
-  standardizeCertification 
+  standardizeCertification,
+  isPipelineProduct
 } from "@/utils/productFilters";
 import { transformTaskData, transformLocationData, transformModalityData, transformStructureData, transformStructureTypeData } from "@/utils/chartDataTransformation";
 
@@ -69,9 +70,26 @@ class DataService {
 
   // Product methods
   getAllProducts(): ProductDetails[] {
-    // Return all products with regulatory approval
+    // Return all products with regulatory approval (excludes pipeline products)
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
-    return productList.filter(product => hasRegulatoryApproval(product));
+    return productList.filter(product => 
+      hasRegulatoryApproval(product) && !isPipelineProduct(product)
+    );
+  }
+
+  /**
+   * Get all pipeline products (announced but not certified)
+   */
+  getPipelineProducts(): ProductDetails[] {
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return productList.filter(product => isPipelineProduct(product));
+  }
+
+  /**
+   * Get total product count including pipeline products (for homepage display)
+   */
+  getTotalProductCount(): number {
+    return this.getAllProducts().length + this.getPipelineProducts().length;
   }
 
   getProductById(id: string): ProductDetails | undefined {
@@ -83,8 +101,9 @@ class DataService {
     const actualId = legacyIdMapping[id] || id;
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     
+    // Allow finding both certified and pipeline products by ID
     return productList.find(product => product.id === actualId && 
-      hasRegulatoryApproval(product));
+      (hasRegulatoryApproval(product) || isPipelineProduct(product)));
   }
 
   getProductsByCategory(category: string): ProductDetails[] {
@@ -106,9 +125,40 @@ class DataService {
 
   filterProducts(filters: FilterState): ProductDetails[] {
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    
+    // Check if Pipeline filter is active
+    const includePipeline = filters.certifications?.some(
+      cert => cert.toLowerCase() === 'pipeline'
+    );
+    
     return productList.filter((product: ProductDetails) => {
-      // First check regulatory approval (includes investigational by default)
-      if (!hasRegulatoryApproval(product)) {
+      const productIsPipeline = isPipelineProduct(product);
+      
+      // If Pipeline filter is selected, include pipeline products
+      if (includePipeline && productIsPipeline) {
+        // Apply other filters to pipeline products
+        if (filters.tasks?.length && !filters.tasks.some(task => matchesTask(product, task))) {
+          return false;
+        }
+        if (filters.locations?.length) {
+          const normalizedLocations = normalizeAnatomicalLocations(product.anatomicalLocation || []);
+          if (!normalizedLocations.some(loc => filters.locations?.includes(loc))) {
+            return false;
+          }
+        }
+        if (filters.modalities?.length) {
+          const productModalities = Array.isArray(product.modality) 
+            ? product.modality 
+            : (product.modality ? [product.modality] : []);
+          if (!productModalities.some(m => filters.modalities?.includes(m))) {
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      // For non-pipeline products, check regulatory approval first
+      if (productIsPipeline || !hasRegulatoryApproval(product)) {
         return false;
       }
       
@@ -127,17 +177,24 @@ class DataService {
       
       // Standardize certification check - handle merged certifications and pending
       if (filters.certifications?.length) {
-        const productCert = standardizeCertification(product.certification || '');
-        const isPending = product.certification?.toLowerCase().includes('pending') ||
-                         product.certification?.toLowerCase().includes('investigation');
+        // Skip pipeline filter check for non-pipeline products
+        const nonPipelineFilters = filters.certifications.filter(
+          cert => cert.toLowerCase() !== 'pipeline'
+        );
         
-        if (!filters.certifications.some(cert => {
-          const filterCert = standardizeCertification(cert);
-          // Match pending products with "Pending" filter
-          if (filterCert === 'pending' && isPending) return true;
-          return filterCert === productCert;
-        })) {
-          return false;
+        if (nonPipelineFilters.length > 0) {
+          const productCert = standardizeCertification(product.certification || '');
+          const isPending = product.certification?.toLowerCase().includes('pending') ||
+                           product.certification?.toLowerCase().includes('investigation');
+          
+          if (!nonPipelineFilters.some(cert => {
+            const filterCert = standardizeCertification(cert);
+            // Match pending products with "Pending" filter
+            if (filterCert === 'pending' && isPending) return true;
+            return filterCert === productCert;
+          })) {
+            return false;
+          }
         }
       }
       

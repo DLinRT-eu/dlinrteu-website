@@ -14,6 +14,7 @@ import { RECONSTRUCTION_PRODUCTS } from "./products/reconstruction";
 import { IMAGE_ENHANCEMENT_PRODUCTS } from "./products/image-enhancement";
 import { PERFORMANCE_MONITOR_PRODUCTS } from "./products/performance-monitor";
 import { TRACKING_PRODUCTS } from "./products/tracking";
+import { PIPELINE_PRODUCTS } from "./products/pipeline";
 import { 
   ALL_INITIATIVES, 
   CHALLENGE_INITIATIVES, 
@@ -21,7 +22,7 @@ import {
   RESEARCH_PROJECT_INITIATIVES 
 } from "./initiatives";
 
-// Combine all products
+// Combine all products (including pipeline products)
 export const ALL_PRODUCTS: ProductDetails[] = [
   ...AUTO_CONTOURING_PRODUCTS,
   ...IMAGE_SYNTHESIS_PRODUCTS,
@@ -32,7 +33,8 @@ export const ALL_PRODUCTS: ProductDetails[] = [
   ...RECONSTRUCTION_PRODUCTS,
   ...IMAGE_ENHANCEMENT_PRODUCTS,
   ...PERFORMANCE_MONITOR_PRODUCTS,
-  ...TRACKING_PRODUCTS
+  ...TRACKING_PRODUCTS,
+  ...PIPELINE_PRODUCTS
 ];
 
 // Export everything
@@ -49,6 +51,7 @@ export {
   IMAGE_ENHANCEMENT_PRODUCTS,
   PERFORMANCE_MONITOR_PRODUCTS,
   TRACKING_PRODUCTS,
+  PIPELINE_PRODUCTS,
   ALL_INITIATIVES,
   CHALLENGE_INITIATIVES, 
   DATASET_INITIATIVES,
