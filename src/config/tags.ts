@@ -35,7 +35,8 @@ export const CERTIFICATION_TAGS = [
   'MDR exempt',
   'NMPA',
   'Pending',
-  'Investigation Use'
+  'Investigation Use',
+  'Pipeline'
 ];
 
 // Combined certification values (for display purposes)
@@ -46,7 +47,8 @@ export const COMBINED_CERTIFICATION_TAGS = [
   'MDR exempt',
   'NMPA',
   'Pending',
-  'Investigation Use'
+  'Investigation Use',
+  'Pipeline'
 ];
 
 // Mapping of certification display values to their component tags

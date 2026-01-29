@@ -11,6 +11,10 @@ import dataService from "@/services/DataService";
 import { useLocation } from "react-router-dom";
 import Footer from "@/components/Footer";
 import ActiveFilterChips from "@/components/filters/ActiveFilterChips";
+import { Clock, ChevronDown, ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import UnifiedProductCard from "@/components/common/UnifiedProductCard";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const Products = () => {
   const [filtersActive, setFiltersActive] = useState(false);
@@ -22,11 +26,14 @@ const Products = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [advancedSearch, setAdvancedSearch] = useState(false);
+  const [pipelineOpen, setPipelineOpen] = useState(false);
   const location = useLocation();
 
-  // Get all products and count by category
+  // Get all products and pipeline products
   const allProducts = dataService.getAllProducts();
+  const pipelineProducts = dataService.getPipelineProducts();
   const totalProductCount = allProducts.length;
+  const totalWithPipeline = dataService.getTotalProductCount();
 
   // Check URL parameters for initial filters
   useEffect(() => {
@@ -170,7 +177,7 @@ const Products = () => {
           <h2 className="text-xl font-semibold text-gray-900">
             Featured Products
             <span className="ml-2 text-sm font-normal text-gray-500">
-              ({totalProductCount} total products)
+              ({totalProductCount} certified{pipelineProducts.length > 0 ? ` + ${pipelineProducts.length} in pipeline` : ''})
             </span>
           </h2>
           <button 
@@ -198,6 +205,49 @@ const Products = () => {
             className="mb-6"
           />
         )}
+        
+        {/* Pipeline Products Section */}
+        {pipelineProducts.length > 0 && (
+          <Collapsible open={pipelineOpen} onOpenChange={setPipelineOpen} className="mb-8">
+            <div className="p-4 bg-violet-50 rounded-lg border border-violet-200">
+              <CollapsibleTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="w-full flex items-center justify-between p-0 h-auto hover:bg-transparent"
+                >
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-violet-600" />
+                    <h3 className="text-lg font-semibold text-violet-900">
+                      Products in Pipeline ({pipelineProducts.length})
+                    </h3>
+                  </div>
+                  {pipelineOpen ? (
+                    <ChevronUp className="h-5 w-5 text-violet-600" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-violet-600" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              <p className="text-sm text-violet-700 mt-1 ml-7">
+                Announced products not yet certified (CE/FDA). Click to expand.
+              </p>
+              <CollapsibleContent className="mt-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {pipelineProducts.map((product) => (
+                    <UnifiedProductCard
+                      key={product.id}
+                      product={product}
+                      showModality={true}
+                      showFeatures={false}
+                      compactMode={true}
+                    />
+                  ))}
+                </div>
+              </CollapsibleContent>
+            </div>
+          </Collapsible>
+        )}
+        
         <ProductGrid 
           filters={currentFilters} 
           searchQuery={searchQuery}

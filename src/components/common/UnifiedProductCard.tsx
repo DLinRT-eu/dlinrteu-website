@@ -8,6 +8,8 @@ import { ProductDetails } from "@/types/productDetails";
 import { getModalityColor } from "@/utils/chartColors";
 import { getKeyFeatures, getLogoInfo } from "@/lib/utils";
 import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
+import { isPipelineProduct } from "@/utils/productFilters";
+import { PipelineBadge } from "@/components/PipelineBadge";
 
 interface UnifiedProductCardProps {
   product: ProductDetails;
@@ -68,6 +70,11 @@ const UnifiedProductCard = ({
   };
 
   const renderCertificationBadge = () => {
+    // Check for pipeline products first
+    if (isPipelineProduct(product)) {
+      return <PipelineBadge />;
+    }
+    
     const tags = getStandardizedCertificationTags(product);
     const isMDRExempt = tags.includes('MDR exempt') || 
                         product.certification?.toLowerCase().includes('exempt') ||

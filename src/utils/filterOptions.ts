@@ -72,6 +72,13 @@ export const getAllOptions = (field: keyof Product): string[] => {
       const usedCertifications = new Set<string>();
       
       ALL_PRODUCTS.forEach(product => {
+        // Check for pipeline products
+        if (product.developmentStage === 'pipeline' || 
+            product.certification?.toLowerCase() === 'pipeline') {
+          usedCertifications.add("Pipeline");
+          return;
+        }
+        
         if (product.certification) {
           const cert = product.certification.toLowerCase().trim();
           // Standardize the certification values for display
