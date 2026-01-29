@@ -69,7 +69,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-01-02",
+    lastUpdated: "2026-01-29",
     supportedStructures: [
    //   Head & Neck
 "Head & Neck: Brachial Plexus (L/R)",
