@@ -71,15 +71,4 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/Brainlab.jpg"
   },
-  {
-    "id": "viewray",
-    "name": "ViewRay",
-    "description": "Pioneer in MRI-guided radiation therapy systems with AI-powered adaptive radiotherapy, auto-contouring, and real-time motion tracking capabilities.",
-    "website": "https://www.viewray.com/",
-    "productIds": [
-      "viewray-mridian-a3i"
-    ],
-    "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/Viewray.png"
-  },
 ];

@@ -5,9 +5,11 @@
 import { CompanyDetails } from "@/types/company";
 import { REFLEXION_MEDICAL_COMPANY } from "./reflexion-medical";
 import { LEO_CANCER_CARE_COMPANY } from "./leo-cancer-care";
+import { VIEWRAY_COMPANY } from "./viewray";
 
 // NOT exported to main companies - kept for reference only
 export const ARCHIVED_COMPANIES: CompanyDetails[] = [
   REFLEXION_MEDICAL_COMPANY,
-  LEO_CANCER_CARE_COMPANY
+  LEO_CANCER_CARE_COMPANY,
+  VIEWRAY_COMPANY
 ];
