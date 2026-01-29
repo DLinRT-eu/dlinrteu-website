@@ -119,7 +119,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "Therapanacea",
     "description": "Innovators in AI solutions for radiation oncology and medical imaging.",
     "website": "https://www.therapanacea.eu",
-    "productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic"],
+    "productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic", "therapanacea-smartfuse"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/therapanacea.png"
   },
