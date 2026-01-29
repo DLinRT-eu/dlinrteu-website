@@ -1,7 +1,9 @@
 
 import { Product } from "@/types/product";
+import { ProductDetails } from "@/types/productDetails";
 import { ALL_PRODUCTS } from "@/data";
 import { MODALITY_TAGS, ANATOMY_TAGS, COMBINED_CERTIFICATION_TAGS } from "@/config/tags";
+import dataService from "@/services/DataService";
 
 export const getAllOptions = (field: keyof Product): string[] => {
   switch (field) {
@@ -116,6 +118,80 @@ export const getAllOptions = (field: keyof Product): string[] => {
         });
       });
       
+      return Array.from(usedModalities).sort();
+    }
+    default:
+      return [];
+  }
+};
+
+/**
+ * Get filter options specifically for pipeline products
+ */
+export const getPipelineFilterOptions = (field: keyof ProductDetails): string[] => {
+  const pipelineProducts = dataService.getPipelineProducts();
+  
+  switch (field) {
+    case 'category': {
+      const categories = new Set<string>();
+      pipelineProducts.forEach(product => {
+        categories.add(product.category);
+        if (product.secondaryCategories) {
+          product.secondaryCategories.forEach(cat => categories.add(cat));
+        }
+      });
+      
+      // Define the preferred order of categories
+      const preferredOrder = [
+        "Reconstruction",
+        "Image Enhancement",
+        "Image Synthesis",
+        "Auto-Contouring",
+        "Tracking",
+        "Treatment Planning",
+        "Clinical Prediction",
+        "Registration",
+        "Performance Monitor",
+        "Platform"
+      ];
+      
+      return Array.from(categories).sort((a, b) => {
+        const indexA = preferredOrder.indexOf(a);
+        const indexB = preferredOrder.indexOf(b);
+        if (indexA >= 0 && indexB >= 0) return indexA - indexB;
+        if (indexA >= 0) return -1;
+        if (indexB >= 0) return 1;
+        return a.localeCompare(b);
+      });
+    }
+    case 'anatomicalLocation': {
+      const usedLocations = new Set<string>();
+      pipelineProducts.forEach(product => {
+        const locations = product.anatomicalLocation || product.anatomy || [];
+        if (locations && Array.isArray(locations)) {
+          locations.forEach(location => {
+            if (ANATOMY_TAGS.includes(location)) {
+              usedLocations.add(location);
+            } else if (location === "Head" || location === "Neck") {
+              usedLocations.add("Head & Neck");
+            }
+          });
+        }
+      });
+      return Array.from(usedLocations).sort();
+    }
+    case 'modality': {
+      const usedModalities = new Set<string>();
+      pipelineProducts.forEach(product => {
+        const modalitiesArray = Array.isArray(product.modality) 
+          ? product.modality 
+          : (product.modality ? [product.modality] : []);
+        modalitiesArray.forEach(modality => {
+          if (MODALITY_TAGS.includes(modality)) {
+            usedModalities.add(modality);
+          }
+        });
+      });
       return Array.from(usedModalities).sort();
     }
     default:
