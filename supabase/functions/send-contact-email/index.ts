@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "DLinRT.eu Contact Form <noreply@dlinrt.eu>",
       to: ["info@dlinrt.eu"],
-      replyTo: email,
+      reply_to: email,
       subject: `Contact Form: ${escapeHtml(subject)}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
