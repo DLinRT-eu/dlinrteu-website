@@ -18,8 +18,8 @@ import { PIPELINE_PRODUCTS } from "./products/pipeline";
 import { 
   ALL_INITIATIVES, 
   CHALLENGE_INITIATIVES, 
-  DATASET_INITIATIVES, 
-  RESEARCH_PROJECT_INITIATIVES 
+  DATASET_INITIATIVES,
+  MODEL_ZOO_INITIATIVES
 } from "./initiatives";
 
 // Combine all products (including pipeline products)
@@ -55,7 +55,7 @@ export {
   ALL_INITIATIVES,
   CHALLENGE_INITIATIVES, 
   DATASET_INITIATIVES,
-  RESEARCH_PROJECT_INITIATIVES
+  MODEL_ZOO_INITIATIVES
 };
 
 // Type exports

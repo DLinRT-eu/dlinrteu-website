@@ -32,8 +32,9 @@ const InitiativesHeader = () => {
           <h1 className="text-3xl font-bold text-gray-900">Research Initiatives</h1>
         </div>
         <p className="text-lg text-gray-700 max-w-3xl">
-          Discover the latest research initiatives, grand challenges, open datasets, and model zoos in the field of radiotherapy. 
-          These resources aim to accelerate innovation and collaboration in radiation oncology research.
+          Discover resources for AI/Deep Learning development in radiotherapy: grand challenges with standardized benchmarks, 
+          open datasets with RT structures and dose distributions, and model zoos with pre-trained segmentation models. 
+          All resources are freely accessible for research.
         </p>
       </div>
     </>
