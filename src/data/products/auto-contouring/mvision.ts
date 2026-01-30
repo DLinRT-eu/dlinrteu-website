@@ -7,14 +7,14 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     id: "mvision-ai-contouring",
     name: "Contour+",
     company: "MVision AI",
-    companyUrl: "https://www.mvision.ai/",
-    productUrl: "https://www.mvision.ai/ai-contouring/",
+    companyUrl: "https://mvision.ai/",
+    productUrl: "https://mvision.ai/contour/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mvision.ts",
-    description: "AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation.",
+    description: "AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation. Supports 300+ structures including 90 lymph node areas and follows 25+ international contouring guidelines.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/mvision-ai.png",
-    website: "https://www.mvision.ai/ai-contouring/",
+    website: "https://mvision.ai/contour/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
@@ -79,11 +79,16 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         decisionDate: "2024-10-18",
         notes: "Latest version. Previous clearances: K193053 (2020)"
       },
+      tga: {
+        status: "Approved",
+        notes: "MR Models approved February 2025"
+      },
       intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
     },
     market: {
       onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Partnerships"],
+      availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
     },
     contactEmail: "info@mvision.ai",
     version: "1.3.1",
