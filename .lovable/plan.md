@@ -1,226 +1,223 @@
 
-# Moving Pipeline Products to a Dedicated Page
 
-## Overview
+# MVision AI Product Data Update
 
-This plan creates a separate `/products/pipeline` page for pipeline products, removing the collapsible section from the main Products page. This ensures no single company gains disproportionate visibility simply by announcing upcoming products. The link to the pipeline page should be just above the search bar of the prioducts
+## Audit Summary
 
+After reviewing the MVision AI website, I found that the current database structure is mostly correct but needs updates to reflect the latest product information.
 
-## Changes Summary
+## Current Architecture (Correct)
 
-| Component | Change |
-|-----------|--------|
-| New Page | Create `src/pages/Pipeline.tsx` with full search/filter functionality |
-| App Router | Add route `/products/pipeline` |
-| Products Page | Replace collapsible section with a simple link to pipeline page |
-| DataService | Add method for filtering pipeline products |
-| Navigation | Ensure pipeline products are searchable and filterable |
+The database correctly shows:
+- **Contour+** as a standalone product (has its own FDA clearance K241490)
+- **Workspace+** as the unified platform with all modules integrated
+- Empty placeholder files for Image+, Adapt+, Dose+ pointing to Workspace+
 
----
+This is correct because MVision sells Contour+ both standalone AND as part of Workspace+, while Image+, Adapt+, and Dose+ are only available through Workspace+.
 
-## Technical Implementation
+## Updates Required
 
-### 1. Create Pipeline Products Page
+### 1. Update Image+ Module Details in Workspace+
 
-**File:** `src/pages/Pipeline.tsx` (NEW)
+**File:** `src/data/products/platform/mvision.ts`
 
-A dedicated page following the same structure as the main Products page:
-
-- **SearchHeader** - Same search component with product suggestions
-- **FilterBar** - Filters for tasks, modality, anatomy (certifications filter not needed since all are Pipeline)
-- **ProductGrid** - Modified to show pipeline products instead of certified ones
-- **SEO** - Proper meta tags for the pipeline page
-- **Footer** - Consistent with other pages
-
-Key differences from Products page:
-- Uses `dataService.getPipelineProducts()` as base data source
-- Header clarifies "Products in Pipeline - Not Yet Certified"
-- Informational banner explaining pipeline status
-- Simplified certification filter (all are Pipeline status)
-
-### 2. Create Pipeline-Specific ProductGrid Component
-
-**File:** `src/components/PipelineProductGrid.tsx` (NEW)
-
-A variant of ProductGrid that:
-- Sources data from `dataService.getPipelineProducts()`
-- Applies standard filtering logic (task, modality, anatomy)
-- Removes comparison mode (comparing unfinished products may not be meaningful)
-- Maintains search and sorting functionality
-
-### 3. Update App Router
-
-**File:** `src/App.tsx`
-
-Add new route for pipeline page:
-
-```typescript
-const Pipeline = lazy(() => import("./pages/Pipeline"));
-
-// In Routes:
-<Route path="products/pipeline" element={<Pipeline />} />
-```
-
-### 4. Update Main Products Page
-
-**File:** `src/pages/Products.tsx`
-
-Replace the collapsible pipeline section with a simple link:
-
-```typescript
-// Replace the Collapsible section with:
-{pipelineProducts.length > 0 && (
-  <Link to="/products/pipeline" className="block mb-6">
-    <div className="p-4 bg-violet-50 rounded-lg border border-violet-200 hover:border-violet-400 transition-colors">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-violet-600" />
-          <span className="text-lg font-semibold text-violet-900">
-            Products in Pipeline ({pipelineProducts.length})
-          </span>
-        </div>
-        <ArrowRight className="h-5 w-5 text-violet-600" />
-      </div>
-      <p className="text-sm text-violet-700 mt-1 ml-7">
-        Announced products not yet certified (CE/FDA). Click to view all.
-      </p>
-    </div>
-  </Link>
-)}
-```
-
-### 5. Update DataService for Pipeline Filtering
-
-**File:** `src/services/DataService.ts`
-
-Add method to filter pipeline products:
-
-```typescript
-filterPipelineProducts(filters: Partial<FilterState>): ProductDetails[] {
-  return this.getPipelineProducts().filter(product => {
-    // Apply task filter
-    if (filters.tasks?.length && !filters.tasks.some(task => matchesTask(product, task))) {
-      return false;
-    }
-    // Apply location filter
-    if (filters.locations?.length) {
-      const normalizedLocations = normalizeAnatomicalLocations(product.anatomicalLocation || []);
-      if (!normalizedLocations.some(loc => filters.locations?.includes(loc))) {
-        return false;
-      }
-    }
-    // Apply modality filter
-    if (filters.modalities?.length) {
-      const productModalities = Array.isArray(product.modality) 
-        ? product.modality 
-        : (product.modality ? [product.modality] : []);
-      if (!productModalities.some(m => filters.modalities?.includes(m))) {
-        return false;
-      }
-    }
-    return true;
-  });
-}
-```
-
-### 6. Create Pipeline FilterBar Variant
-
-**File:** `src/components/PipelineFilterBar.tsx` (NEW)
-
-A simplified FilterBar that excludes the certification filter (since all products are Pipeline):
-
-- Task filter
-- Modality filter  
-- Anatomy filter
-- No certification filter (all products have same status)
-
-### 7. Update Filter Options Utility
-
-**File:** `src/utils/filterOptions.ts`
-
-Add function to get filter options from pipeline products only:
-
-```typescript
-export function getPipelineFilterOptions(field: keyof ProductDetails): string[] {
-  const pipelineProducts = dataService.getPipelineProducts();
-  // Extract unique values from pipeline products for given field
-  // ...
-}
-```
-
----
-
-## Files Summary
-
-| File | Action | Description |
-|------|--------|-------------|
-| `src/pages/Pipeline.tsx` | **Create** | New dedicated pipeline products page |
-| `src/components/PipelineProductGrid.tsx` | **Create** | Grid component for pipeline products |
-| `src/components/PipelineFilterBar.tsx` | **Create** | Simplified filter bar without certification |
-| `src/App.tsx` | **Update** | Add `/products/pipeline` route |
-| `src/pages/Products.tsx` | **Update** | Replace collapsible with link |
-| `src/services/DataService.ts` | **Update** | Add `filterPipelineProducts` method |
-| `src/utils/filterOptions.ts` | **Update** | Add pipeline-specific filter options |
-
----
-
-## Page Structure
-
-### Pipeline Page Layout
+Current Image+ description is accurate but can be enhanced with specific models:
 
 ```text
-+--------------------------------------------------+
-|  Header with Navigation                          |
-+--------------------------------------------------+
-|  Search Header                                   |
-|  "Products in Pipeline"                          |
-|  [Search input with suggestions]                 |
-+--------------------------------------------------+
-|  Info Banner (violet theme)                      |
-|  "These products have been announced but are     |
-|   not yet certified (no CE/FDA clearance)."      |
-+--------------------------------------------------+
-|  Filter Bar                                      |
-|  [Tasks] [Modality] [Anatomy]                    |
-+--------------------------------------------------+
-|  "Showing X pipeline products"                   |
-+--------------------------------------------------+
-|  Product Grid                                    |
-|  +----------+  +----------+  +----------+        |
-|  | Product  |  | Product  |  | Product  |        |
-|  | Card     |  | Card     |  | Card     |        |
-|  +----------+  +----------+  +----------+        |
-+--------------------------------------------------+
-|  Footer                                          |
-+--------------------------------------------------+
+Current:
+- "Synthetic CT from MRI (T1 brain, T2 pelvis)"
+- "CBCT to synthetic CT conversion"
+- "Virtual non-contrast (VNC) imaging"
+
+Enhanced (from website):
+- Brain MR T1 model
+- Pelvis MR T2 model  
+- CBCT model
+- VNC (virtual non-contrast) model
+- MR-only planning support
+- Adaptive workflow support (CBCT to synthetic CT)
+- Contrast removal capabilities
+```
+
+### 2. Update Adapt+ Module Details
+
+Current description mentions deformable registration but website clarifies multiple methods:
+
+```text
+Add to keyFeatures:
+- "Rigid registration"
+- "Conventional deformable registration"
+- "Deep learning deformable registration"
+- "Offline adaptive workflow support"
+```
+
+### 3. Update Dose+ Module Details
+
+Add dose prediction models to Workspace+ product:
+
+```text
+Add dosePredictionModels field:
+- Prostate Model: localized prostate, VMAT, supports SBRT to conventional fractionation
+- Pelvic LN Model: prostate with lymph nodes, VMAT, conventional/moderate hypofractionation
+```
+
+### 4. Update URLs
+
+```text
+Current: https://www.mvision.ai/, https://www.mvision.ai/ai-contouring/
+Updated: https://mvision.ai/, https://mvision.ai/contour/
+```
+
+### 5. Add Market Approvals
+
+Update regulatory section with latest approvals:
+- Contour+ Singapore approval (May 2025)
+- Contour+ UAE approval (April 2025)  
+- Contour+ Morocco approval (June 2025)
+- Contour+ MR Models TGA Australia (Feb 2025)
+- Dose+ TGA Australia (Aug 2025)
+
+---
+
+## Files to Modify
+
+| File | Changes |
+|------|---------|
+| `src/data/products/platform/mvision.ts` | Update Image+, Adapt+, Dose+ module details; add dosePredictionModels |
+| `src/data/products/auto-contouring/mvision.ts` | Update URLs, add international market approvals |
+
+---
+
+## Detailed Changes
+
+### Workspace+ Platform Update
+
+**Image+ Module Enhancement:**
+```typescript
+{
+  name: "Image+",
+  description: "Generate synthetic CT images from MRI, CBCT, or contrast-enhanced CT scans to support photon dose calculation in treatment planning and offline adaptive workflows.",
+  category: "Image Synthesis",
+  productUrl: "https://mvision.ai/image/",
+  keyFeatures: [
+    "Brain MR T1 synthetic CT model",
+    "Pelvis MR T2 synthetic CT model",
+    "CBCT to synthetic CT conversion",
+    "Virtual non-contrast (VNC) imaging from contrast-enhanced CT",
+    "MR-only planning support",
+    "Offline adaptive workflow integration"
+  ]
+}
+```
+
+**Adapt+ Module Enhancement:**
+```typescript
+{
+  name: "Adapt+",
+  description: "AI-powered contour propagation for adaptive radiotherapy. Transfers and aligns existing contours between image sets using multiple registration methods including rigid, conventional deformable, and deep learning deformable approaches.",
+  category: "Registration",
+  productUrl: "https://mvision.ai/adapt/",
+  keyFeatures: [
+    "Automated contour propagation",
+    "Rigid registration",
+    "Conventional deformable image registration",
+    "Deep learning deformable registration",
+    "CT-to-CT, CBCT, and synthetic CT alignment",
+    "Offline adaptive workflow support"
+  ]
+}
+```
+
+**Add Dose Prediction Models:**
+```typescript
+dosePredictionModels: [
+  {
+    name: "Prostate Model",
+    anatomicalSite: "Prostate",
+    technique: "VMAT",
+    intent: "Curative",
+    description: "AI model for localized prostate cancer without nodal involvement. Supports all fractionation approaches from conventional to SBRT with SIB capability.",
+    status: "approved"
+  },
+  {
+    name: "Pelvic LN Model",
+    anatomicalSite: "Pelvis",
+    technique: "VMAT",
+    intent: "Curative",
+    description: "AI model for prostate cancer with lymph node involvement. Supports conventional and moderate hypofractionation with SIB capability.",
+    status: "approved"
+  }
+]
+```
+
+### Contour+ Standalone Update
+
+**URL Updates:**
+```typescript
+companyUrl: "https://mvision.ai/",
+productUrl: "https://mvision.ai/contour/",
+website: "https://mvision.ai/contour/",
+```
+
+**Add International Approvals:**
+```typescript
+regulatory: {
+  ce: {
+    status: "CE Marked",
+    class: "Class IIa",
+    type: "MDR",
+    regulation: "MDR 2017/745"
+  },
+  fda: {
+    status: "510(k) Cleared",
+    class: "Class II",
+    type: "510(k)",
+    clearanceNumber: "K241490",
+    productCode: "QKB",
+    regulationNumber: "21 CFR 892.2050",
+    decisionDate: "2024-10-18",
+    notes: "Latest version. Previous clearances: K193053 (2020)"
+  },
+  tga: {
+    status: "Approved",
+    notes: "MR Models approved February 2025"
+  },
+  intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
+},
+market: {
+  onMarketSince: "2019",
+  distributionChannels: ["Direct sales", "Partnerships"],
+  availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
+}
+```
+
+**Update Structure Count:**
+```typescript
+// In description or keyFeatures
+"300+ structures including 90 lymph node areas"
+"Follows 25+ international contouring guidelines"
 ```
 
 ---
 
-## Navigation Flow
+## Summary of Key Changes
 
-1. **From Products Page**: Click "Products in Pipeline (X)" link -> Navigate to `/products/pipeline`
-2. **Direct URL**: `/products/pipeline` shows all pipeline products with search/filter
-3. **Back to Products**: Standard header navigation or browser back
-4. **Product Details**: Clicking a pipeline product card goes to `/product/:id` (same as certified products)
-
----
-
-## SEO Considerations
-
-The Pipeline page will have:
-- Title: "Products in Pipeline - Upcoming AI Solutions for Radiotherapy"
-- Description: "Track upcoming AI products for radiotherapy that have been announced but not yet certified."
-- Canonical: `https://dlinrt.eu/products/pipeline`
-- Structured data for CollectionPage
+| Product | Update Type | Details |
+|---------|-------------|---------|
+| Workspace+ | Image+ module | Add specific AI models (Brain T1, Pelvis T2, CBCT, VNC) |
+| Workspace+ | Adapt+ module | Clarify registration methods (rigid, conventional DIR, DL-DIR) |
+| Workspace+ | Dose+ module | Add dosePredictionModels array |
+| Contour+ | URLs | Update to current website structure |
+| Contour+ | Regulatory | Add TGA, Singapore, UAE, Morocco approvals |
+| Contour+ | Features | Update to 300+ structures, 25+ guidelines |
 
 ---
 
-## Benefits
+## Validation
 
-1. **No Company Bias**: All pipeline products have equal visibility on their own page
-2. **Searchable & Filterable**: Full search and filter functionality like the main products page
-3. **Clear Separation**: Certified products and pipeline products are clearly distinguished
-4. **Scalable**: As more pipeline products are added, they have a dedicated home
-5. **Consistent UX**: Same page structure as the main products page for familiarity
+After these updates, the MVision AI products will accurately reflect:
+- Current product architecture (Workspace+ platform with modules)
+- Specific AI models available in each module
+- Complete regulatory status across markets
+- Current website URLs
 
