@@ -45,24 +45,26 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         category: "Image Synthesis",
         productUrl: "https://mvision.ai/image/",
         keyFeatures: [
-          "Synthetic CT from MRI (T1 brain, T2 pelvis)",
+          "Brain MR T1 synthetic CT model",
+          "Pelvis MR T2 synthetic CT model",
           "CBCT to synthetic CT conversion",
-          "Virtual non-contrast (VNC) imaging",
-          "Photon dose calculation support",
+          "Virtual non-contrast (VNC) imaging from contrast-enhanced CT",
+          "MR-only planning support",
           "Offline adaptive workflow integration"
         ]
       },
       {
         name: "Adapt+",
-        description: "AI-powered deformable image registration for adaptive radiotherapy, enabling automated contour propagation across imaging sessions with high accuracy and consistency.",
+        description: "AI-powered contour propagation for adaptive radiotherapy. Transfers and aligns existing contours between image sets using multiple registration methods including rigid, conventional deformable, and deep learning deformable approaches.",
         category: "Registration",
         productUrl: "https://mvision.ai/adapt/",
         keyFeatures: [
           "Automated contour propagation",
-          "Deformable image registration",
-          "CT-to-CT and MRI-to-MRI registration",
-          "Adaptive radiotherapy support",
-          "High accuracy and consistency"
+          "Rigid registration",
+          "Conventional deformable image registration",
+          "Deep learning deformable registration",
+          "CT-to-CT, CBCT, and synthetic CT alignment",
+          "Offline adaptive workflow support"
         ]
       },
       {
@@ -128,6 +130,24 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
+    dosePredictionModels: [
+      {
+        name: "Prostate Model",
+        anatomicalSite: "Prostate",
+        technique: "VMAT",
+        intent: "Curative",
+        description: "AI model for localized prostate cancer without nodal involvement. Supports all fractionation approaches from conventional to SBRT with SIB capability.",
+        status: "approved"
+      },
+      {
+        name: "Pelvic LN Model",
+        anatomicalSite: "Pelvis",
+        technique: "VMAT",
+        intent: "Curative",
+        description: "AI model for prostate cancer with lymph node involvement. Supports conventional and moderate hypofractionation with SIB capability.",
+        status: "approved"
+      }
+    ],
     version: "1.0",
     releaseDate: "2025-10-21",
     lastUpdated: "2026-01-28",
