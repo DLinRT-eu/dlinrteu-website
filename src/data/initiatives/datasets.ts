@@ -136,5 +136,77 @@ export const DATASET_INITIATIVES: Initiative[] = [
     dataAccess: "Freely available after registration",
     participationInfo: "Open to all researchers"
   },
+  {
+    id: "radcure",
+    name: "RADCURE",
+    category: "Open Dataset",
+    description: "Large open-access head and neck cancer CT dataset with 3,346 patients including RT structures, dose distributions, and clinical outcomes for radiotherapy AI research.",
+    website: "https://www.cancerimagingarchive.net/collection/radcure/",
+    organization: "Princess Margaret Cancer Centre / University Health Network",
+    status: "Active",
+    tags: ["Head and Neck Cancer", "CT", "Radiotherapy", "Structures", "Clinical Outcomes", "Large Dataset"],
+    features: [
+      "3,346 HNC patients",
+      "CT images with RT structures",
+      "Treatment outcome data",
+      "Multi-institutional quality"
+    ],
+    dataAccess: "Available through TCIA",
+    participationInfo: "Open to all researchers"
+  },
+  {
+    id: "glis-rt",
+    name: "GLIS-RT",
+    category: "Open Dataset",
+    description: "Glioma radiotherapy dataset with target volumes, organs at risk, and barriers to spread annotations for brain tumor treatment planning research.",
+    website: "https://www.cancerimagingarchive.net/collection/glis-rt/",
+    organization: "The Cancer Imaging Archive",
+    status: "Active",
+    tags: ["Brain Cancer", "Glioma", "CT", "MRI", "Target Volumes", "Organs at Risk", "Radiotherapy"],
+    features: [
+      "Glioma patient imaging",
+      "RT target delineations",
+      "OAR segmentations",
+      "Barriers to spread annotations"
+    ],
+    dataAccess: "Available through TCIA",
+    participationInfo: "Open to all researchers"
+  },
+  {
+    id: "hnc-imrt-70-33",
+    name: "HNC-IMRT-70-33",
+    category: "Open Dataset",
+    description: "Head and neck cancer dataset with patients treated using identical IMRT prescriptions (70Gy in 33 fractions), enabling standardized treatment planning research.",
+    website: "https://www.cancerimagingarchive.net/",
+    organization: "The Cancer Imaging Archive",
+    status: "Active",
+    tags: ["Head and Neck Cancer", "IMRT", "CT", "Radiotherapy", "Treatment Planning", "Standardized Protocol"],
+    features: [
+      "Identical IMRT prescriptions",
+      "70Gy in 33 fractions",
+      "CT imaging data",
+      "Treatment planning standardization"
+    ],
+    dataAccess: "Available through TCIA",
+    participationInfo: "Open to all researchers"
+  },
+  {
+    id: "brain-metastasis-mri",
+    name: "Brain Metastasis MRI Dataset",
+    category: "Open Dataset",
+    description: "Brain metastasis dataset with 3D MRI segmentations for stereotactic radiosurgery (SRS) and stereotactic radiotherapy (SRT) planning applications.",
+    website: "https://www.nature.com/sdata/",
+    organization: "Nature Scientific Data",
+    status: "Active",
+    tags: ["Brain Metastasis", "MRI", "Segmentation", "SRS", "SRT", "Stereotactic Radiotherapy"],
+    features: [
+      "3D brain metastasis segmentations",
+      "MRI imaging data",
+      "SRS/SRT planning applications",
+      "Expert annotations"
+    ],
+    dataAccess: "Available through Nature Scientific Data",
+    participationInfo: "Open to all researchers"
+  },
 ];
 

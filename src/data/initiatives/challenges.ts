@@ -129,5 +129,25 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     dataAccess: "Available for research purposes",
     resultsUrl: "https://www.aapm.org/GrandChallenge/results/",
     participationInfo: "Was open to all participants"
+  },
+  {
+    id: "hnts-mrg-2024",
+    name: "HNTS-MRG 2024",
+    category: "Grand Challenge",
+    description: "Head and Neck Tumor Segmentation for MR-Guided Applications challenge at MICCAI 2024, focusing on gross tumor volume and metastatic lymph node segmentation in MRI for adaptive radiotherapy.",
+    website: "https://hntsmrg24.grand-challenge.org/",
+    organization: "MICCAI Society",
+    startDate: "2024-03-01",
+    endDate: "2024-10-06",
+    status: "Completed",
+    tags: ["Head and Neck Cancer", "MRI", "Segmentation", "Adaptive Radiotherapy", "GTV", "Lymph Nodes"],
+    features: [
+      "Pre-treatment and mid-treatment MRI",
+      "GTV and metastatic lymph node annotations",
+      "Two tasks: pre-RT and mid-RT segmentation"
+    ],
+    dataAccess: "Available after registration",
+    resultsUrl: "https://hntsmrg24.grand-challenge.org/",
+    participationInfo: "Challenge completed, data available for post-challenge research"
   }
 ];
