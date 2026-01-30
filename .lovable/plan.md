@@ -1,223 +1,205 @@
 
 
-# MVision AI Product Data Update
+# Research Initiatives - Scope Definition & Content Update
 
-## Audit Summary
+## Overview
 
-After reviewing the MVision AI website, I found that the current database structure is mostly correct but needs updates to reflect the latest product information.
-
-## Current Architecture (Correct)
-
-The database correctly shows:
-- **Contour+** as a standalone product (has its own FDA clearance K241490)
-- **Workspace+** as the unified platform with all modules integrated
-- Empty placeholder files for Image+, Adapt+, Dose+ pointing to Workspace+
-
-This is correct because MVision sells Contour+ both standalone AND as part of Workspace+, while Image+, Adapt+, and Dose+ are only available through Workspace+.
-
-## Updates Required
-
-### 1. Update Image+ Module Details in Workspace+
-
-**File:** `src/data/products/platform/mvision.ts`
-
-Current Image+ description is accurate but can be enhanced with specific models:
-
-```text
-Current:
-- "Synthetic CT from MRI (T1 brain, T2 pelvis)"
-- "CBCT to synthetic CT conversion"
-- "Virtual non-contrast (VNC) imaging"
-
-Enhanced (from website):
-- Brain MR T1 model
-- Pelvis MR T2 model  
-- CBCT model
-- VNC (virtual non-contrast) model
-- MR-only planning support
-- Adaptive workflow support (CBCT to synthetic CT)
-- Contrast removal capabilities
-```
-
-### 2. Update Adapt+ Module Details
-
-Current description mentions deformable registration but website clarifies multiple methods:
-
-```text
-Add to keyFeatures:
-- "Rigid registration"
-- "Conventional deformable registration"
-- "Deep learning deformable registration"
-- "Offline adaptive workflow support"
-```
-
-### 3. Update Dose+ Module Details
-
-Add dose prediction models to Workspace+ product:
-
-```text
-Add dosePredictionModels field:
-- Prostate Model: localized prostate, VMAT, supports SBRT to conventional fractionation
-- Pelvic LN Model: prostate with lymph nodes, VMAT, conventional/moderate hypofractionation
-```
-
-### 4. Update URLs
-
-```text
-Current: https://www.mvision.ai/, https://www.mvision.ai/ai-contouring/
-Updated: https://mvision.ai/, https://mvision.ai/contour/
-```
-
-### 5. Add Market Approvals
-
-Update regulatory section with latest approvals:
-- Contour+ Singapore approval (May 2025)
-- Contour+ UAE approval (April 2025)  
-- Contour+ Morocco approval (June 2025)
-- Contour+ MR Models TGA Australia (Feb 2025)
-- Dose+ TGA Australia (Aug 2025)
+This plan defines clear boundaries for what belongs on the Research Initiatives page and identifies new initiatives to add based on the established criteria.
 
 ---
 
-## Files to Modify
+## Proposed Scope Definition
+
+### What Should Be Included
+
+The Research Initiatives page should include resources that directly support **AI/Deep Learning development for radiotherapy** in three categories:
+
+| Category | Definition | Inclusion Criteria |
+|----------|------------|---------------------|
+| **Grand Challenges** | Competitive benchmarks with standardized evaluation | Must focus on radiotherapy tasks (segmentation, dose prediction, image synthesis, tracking); Hosted on recognized platforms (grand-challenge.org, MICCAI) |
+| **Open Datasets** | Publicly accessible data collections | Must include radiotherapy-relevant data (RT structures, dose distributions, treatment plans, or radiotherapy-specific imaging); Open for research use |
+| **Model Zoos** | Collections of pre-trained models | Must include models applicable to radiotherapy workflows; Open source or freely accessible |
+
+### What Should Be Excluded
+
+- **General medical imaging challenges** not specifically focused on radiotherapy
+- **Commercial products** (these belong in the Products section)
+- **Individual research papers** without associated datasets/challenges
+- **EU Research Projects** (currently hidden - consider whether to display or formally remove)
+
+---
+
+## Decision: Research Projects Category
+
+The codebase contains 5 EU Research Projects (PANTHER, MEDIRAD, ARTFORCE, REQUITE, ADAPT) but they are **intentionally hidden** from the page.
+
+**Options:**
+
+| Option | Recommendation |
+|--------|----------------|
+| A. Display them | Add a fourth "Research Projects" section to show funded EU consortia |
+| B. Remove from codebase | Delete the research-projects.ts file if not needed |
+| C. Keep hidden (current) | Maintain current behavior - data exists for reference only |
+
+**choice:** B. Remove from codebasw
+
+---
+
+## New Initiatives to Add
+
+### Grand Challenges (3 additions)
+
+| Name | Focus | Status | Platform |
+|------|-------|--------|----------|
+| **HNTS-MRG 2024** | Head & neck tumor segmentation for MR-guided radiotherapy | Completed | grand-challenge.org |
+| **DoseRT** | Dose prediction challenge (if active) | Research needed | TBD |
+| **CBCT-to-CT Challenge** | CBCT image quality for adaptive RT (if exists) | Research needed | TBD |
+
+### Open Datasets (5 additions)
+
+| Name | Content | Source | Relevance |
+|------|---------|--------|-----------|
+| **RADCURE** | 3,346 HNC patients with CT, structures, clinical data | TCIA | Large-scale HNC radiotherapy dataset |
+| **GLIS-RT** | Glioma RT targets, OARs, barriers to spread | TCIA | Brain RT planning |
+| **HNC-IMRT-70-33** | HNC patients treated with identical IMRT prescriptions | TCIA | Treatment planning standardization |
+| **Brain Metastasis MRI** | Brain metastasis 3D segmentations | Nature Scientific Data | Brain SRS/SRT planning |
+| **Prostate-MRI-US-Biopsy** | Prostate imaging with annotations | TCIA | Prostate RT planning (if RT-relevant) |
+
+### Model Zoos (2 additions)
+
+| Name | Description | Relevance |
+|------|-------------|-----------|
+| **TotalSegmentator** | 100+ anatomical structures in CT/MRI | Widely used for OAR segmentation in RT |
+| **nnU-Net** | Self-configuring segmentation framework | Foundation for many RT AI models |
+
+### Research Projects (2 additions - if displaying)
+
+| Name | Focus | Funding | Status |
+|------|-------|---------|--------|
+| **PRE-ACT** | Radiotherapy side effects prediction using AI | Horizon Europe | Active |
+| **CHAIMELEON** | Health imaging repository for AI in cancer | Horizon 2020 | Active |
+
+---
+
+## Implementation Summary
+
+### Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/data/products/platform/mvision.ts` | Update Image+, Adapt+, Dose+ module details; add dosePredictionModels |
-| `src/data/products/auto-contouring/mvision.ts` | Update URLs, add international market approvals |
+| `src/data/initiatives/challenges.ts` | Add HNTS-MRG 2024 |
+| `src/data/initiatives/datasets.ts` | Add RADCURE, GLIS-RT, HNC-IMRT-70-33, Brain Metastasis MRI |
+| `src/data/initiatives/modelzoo.ts` | Add TotalSegmentator, nnU-Net |
+| `src/data/initiatives/research-projects.ts` | Add PRE-ACT, CHAIMELEON (if displaying) |
+| `src/hooks/useInitiativeFilters.ts` | Remove Research Project filter (if displaying) |
+| `src/hooks/useInitiativesSorting.ts` | Add Research Projects grouping (if displaying) |
+| `src/components/initiatives/InitiativesCategorySections.tsx` | Add Research Projects section (if displaying) |
+| `src/components/initiatives/InitiativesHeader.tsx` | Update description to clarify scope |
 
 ---
 
-## Detailed Changes
+## Updated Page Header Description
 
-### Workspace+ Platform Update
+Current:
+```text
+Discover the latest research initiatives, grand challenges, open datasets, 
+and model zoos in the field of radiotherapy.
+```
 
-**Image+ Module Enhancement:**
+Proposed:
+```text
+Discover resources for AI/Deep Learning development in radiotherapy: 
+grand challenges with standardized benchmarks, open datasets with RT structures 
+and dose distributions, and model zoos with pre-trained segmentation models. 
+All resources are freely accessible for research.
+```
+
+---
+
+## Data Structure for New Entries
+
+### HNTS-MRG 2024 Challenge
+
 ```typescript
 {
-  name: "Image+",
-  description: "Generate synthetic CT images from MRI, CBCT, or contrast-enhanced CT scans to support photon dose calculation in treatment planning and offline adaptive workflows.",
-  category: "Image Synthesis",
-  productUrl: "https://mvision.ai/image/",
-  keyFeatures: [
-    "Brain MR T1 synthetic CT model",
-    "Pelvis MR T2 synthetic CT model",
-    "CBCT to synthetic CT conversion",
-    "Virtual non-contrast (VNC) imaging from contrast-enhanced CT",
-    "MR-only planning support",
-    "Offline adaptive workflow integration"
-  ]
+  id: "hnts-mrg-2024",
+  name: "HNTS-MRG 2024",
+  category: "Grand Challenge",
+  description: "Head and Neck Tumor Segmentation for MR-Guided Applications challenge at MICCAI 2024, focusing on gross tumor volume and metastatic lymph node segmentation in MRI for adaptive radiotherapy.",
+  website: "https://hntsmrg24.grand-challenge.org/",
+  organization: "MICCAI Society",
+  startDate: "2024-03-01",
+  endDate: "2024-10-06",
+  status: "Completed",
+  tags: ["Head and Neck Cancer", "MRI", "Segmentation", "Adaptive Radiotherapy", "GTV", "Lymph Nodes"],
+  features: [
+    "Pre-treatment and mid-treatment MRI",
+    "GTV and metastatic lymph node annotations",
+    "Two tasks: pre-RT and mid-RT segmentation"
+  ],
+  dataAccess: "Available after registration",
+  resultsUrl: "https://hntsmrg24.grand-challenge.org/",
+  participationInfo: "Challenge completed, data available for post-challenge research"
 }
 ```
 
-**Adapt+ Module Enhancement:**
+### RADCURE Dataset
+
 ```typescript
 {
-  name: "Adapt+",
-  description: "AI-powered contour propagation for adaptive radiotherapy. Transfers and aligns existing contours between image sets using multiple registration methods including rigid, conventional deformable, and deep learning deformable approaches.",
-  category: "Registration",
-  productUrl: "https://mvision.ai/adapt/",
-  keyFeatures: [
-    "Automated contour propagation",
-    "Rigid registration",
-    "Conventional deformable image registration",
-    "Deep learning deformable registration",
-    "CT-to-CT, CBCT, and synthetic CT alignment",
-    "Offline adaptive workflow support"
-  ]
+  id: "radcure",
+  name: "RADCURE",
+  category: "Open Dataset",
+  description: "Large open-access head and neck cancer CT dataset with 3,346 patients including RT structures, dose distributions, and clinical outcomes for radiotherapy AI research.",
+  website: "https://www.cancerimagingarchive.net/collection/radcure/",
+  organization: "Princess Margaret Cancer Centre / University Health Network",
+  status: "Active",
+  tags: ["Head and Neck Cancer", "CT", "Radiotherapy", "Structures", "Clinical Outcomes", "Large Dataset"],
+  features: [
+    "3,346 HNC patients",
+    "CT images with RT structures",
+    "Treatment outcome data",
+    "Multi-institutional quality"
+  ],
+  dataAccess: "Available through TCIA",
+  participationInfo: "Open to all researchers"
 }
 ```
 
-**Add Dose Prediction Models:**
-```typescript
-dosePredictionModels: [
-  {
-    name: "Prostate Model",
-    anatomicalSite: "Prostate",
-    technique: "VMAT",
-    intent: "Curative",
-    description: "AI model for localized prostate cancer without nodal involvement. Supports all fractionation approaches from conventional to SBRT with SIB capability.",
-    status: "approved"
-  },
-  {
-    name: "Pelvic LN Model",
-    anatomicalSite: "Pelvis",
-    technique: "VMAT",
-    intent: "Curative",
-    description: "AI model for prostate cancer with lymph node involvement. Supports conventional and moderate hypofractionation with SIB capability.",
-    status: "approved"
-  }
-]
-```
+### TotalSegmentator Model Zoo
 
-### Contour+ Standalone Update
-
-**URL Updates:**
 ```typescript
-companyUrl: "https://mvision.ai/",
-productUrl: "https://mvision.ai/contour/",
-website: "https://mvision.ai/contour/",
-```
-
-**Add International Approvals:**
-```typescript
-regulatory: {
-  ce: {
-    status: "CE Marked",
-    class: "Class IIa",
-    type: "MDR",
-    regulation: "MDR 2017/745"
-  },
-  fda: {
-    status: "510(k) Cleared",
-    class: "Class II",
-    type: "510(k)",
-    clearanceNumber: "K241490",
-    productCode: "QKB",
-    regulationNumber: "21 CFR 892.2050",
-    decisionDate: "2024-10-18",
-    notes: "Latest version. Previous clearances: K193053 (2020)"
-  },
-  tga: {
-    status: "Approved",
-    notes: "MR Models approved February 2025"
-  },
-  intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
-},
-market: {
-  onMarketSince: "2019",
-  distributionChannels: ["Direct sales", "Partnerships"],
-  availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
+{
+  id: "totalsegmentator",
+  name: "TotalSegmentator",
+  category: "Model Zoo",
+  description: "Open-source deep learning tool for robust segmentation of 100+ anatomical structures in CT and MRI images. Widely used as foundation for radiotherapy OAR segmentation.",
+  website: "https://github.com/wasserth/TotalSegmentator",
+  organization: "University Hospital Basel / University of Basel",
+  status: "Active",
+  tags: ["CT", "MRI", "Segmentation", "Organs at Risk", "nnU-Net", "Open Source"],
+  features: [
+    "117 anatomical structures in CT",
+    "59 structures in MRI",
+    "nnU-Net-based architecture",
+    "Python package and Docker available",
+    "Validated on clinical data"
+  ],
+  dataAccess: "Freely available on GitHub and PyPI",
+  participationInfo: "Open source under Apache 2.0 license"
 }
-```
-
-**Update Structure Count:**
-```typescript
-// In description or keyFeatures
-"300+ structures including 90 lymph node areas"
-"Follows 25+ international contouring guidelines"
 ```
 
 ---
 
-## Summary of Key Changes
+## Validation Checklist
 
-| Product | Update Type | Details |
-|---------|-------------|---------|
-| Workspace+ | Image+ module | Add specific AI models (Brain T1, Pelvis T2, CBCT, VNC) |
-| Workspace+ | Adapt+ module | Clarify registration methods (rigid, conventional DIR, DL-DIR) |
-| Workspace+ | Dose+ module | Add dosePredictionModels array |
-| Contour+ | URLs | Update to current website structure |
-| Contour+ | Regulatory | Add TGA, Singapore, UAE, Morocco approvals |
-| Contour+ | Features | Update to 300+ structures, 25+ guidelines |
+Before implementation:
 
----
-
-## Validation
-
-After these updates, the MVision AI products will accurately reflect:
-- Current product architecture (Workspace+ platform with modules)
-- Specific AI models available in each module
-- Complete regulatory status across markets
-- Current website URLs
+- [ ] Verify HNTS-MRG 2024 challenge data availability
+- [ ] Confirm RADCURE dataset is on TCIA
+- [ ] Check GLIS-RT radiotherapy relevance
+- [ ] Verify TotalSegmentator has RT-specific models
+- [ ] Decide on Research Projects display (requires user input)
+- [ ] Update SEO metadata for new content
 
