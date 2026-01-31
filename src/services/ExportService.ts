@@ -1,5 +1,6 @@
 import { ProductDetails } from "@/types/productDetails";
 import { Initiative } from "@/types/initiative";
+import { CompanyDetails } from "@/types/company";
 import { exportProductsToCSV } from "@/utils/exportProducts";
 import { exportModelCardToExcel } from "@/utils/modelCard/exporters/excelExporter";
 import { exportModelCardToPDF } from "@/utils/modelCard/exporters/pdfExporter";
@@ -7,14 +8,19 @@ import { exportModelCardToJSON } from "@/utils/modelCard/exporters/jsonExporter"
 import { exportBulkProductsToExcel } from "@/utils/modelCard/exporters/bulkExcelExporter";
 import { exportBulkProductsToPDF } from "@/utils/modelCard/exporters/bulkPdfExporter";
 import { exportBulkProductsToJSON } from "@/utils/modelCard/exporters/bulkJsonExporter";
+import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview } from "@/utils/fhir";
 
-export type ExportFormat = "csv" | "excel" | "pdf" | "json";
+export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
 
 interface ExportOptions {
   filename?: string;
   includeMetadata?: boolean;
   fields?: string[];
+  /** Companies data for FHIR export */
+  companies?: CompanyDetails[];
+  /** Include warnings report for FHIR export */
+  includeWarningsReport?: boolean;
 }
 
 class ExportService {
@@ -55,6 +61,14 @@ class ExportService {
           exportModelCardToJSON(products[0]);
         } else {
           exportBulkProductsToJSON(products);
+        }
+        break;
+      case "fhir":
+        const companies = options.companies || [];
+        if (options.includeWarningsReport) {
+          downloadFHIRBundleWithReport(products, companies);
+        } else {
+          downloadFHIRBundle(products, companies);
         }
         break;
       default:
