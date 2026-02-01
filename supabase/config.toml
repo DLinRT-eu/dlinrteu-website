@@ -3,29 +3,31 @@ project_id = "msyfxyxzjyowwasgturs"
 [functions.backfill-changelog-history]
 verify_jwt = true
 
+# Public endpoints - appropriately unauthenticated
 [functions.send-contact-email]
-verify_jwt = false
+verify_jwt = false  # Public contact form
 
 [functions.subscribe-newsletter]
-verify_jwt = false
+verify_jwt = false  # Public newsletter signup
 
 [functions.unsubscribe-newsletter]
-verify_jwt = false
+verify_jwt = false  # Public unsubscribe link (uses token)
 
 [functions.rss-feed]
-verify_jwt = false
+verify_jwt = false  # Public RSS feed
 
 [functions.track-analytics]
-verify_jwt = false
+verify_jwt = false  # Public page tracking (anonymous)
 
+# Security-sensitive endpoints - require authentication
 [functions.track-security-event]
-verify_jwt = false
+verify_jwt = false  # Validates auth in code, allows both authenticated and service role
 
 [functions.verify-backup-code]
-verify_jwt = false
+verify_jwt = false  # Validates JWT in code for MFA flow
 
 [functions.log-document-access]
-verify_jwt = false
+verify_jwt = false  # Validates auth in code, requires admin role
 
 [functions.notify-reviewer-assignment]
 verify_jwt = true
@@ -33,8 +35,9 @@ verify_jwt = true
 [functions.generate-changelog]
 verify_jwt = true
 
+# Internal/cron functions - protected by service role key validation
 [functions.auto-generate-monthly-changelog]
-verify_jwt = false
+verify_jwt = false  # Internal cron job, uses service role
 
 [functions.delete-account]
 verify_jwt = true
@@ -48,14 +51,15 @@ verify_jwt = true
 [functions.admin-newsletter-management]
 verify_jwt = true
 
+# Internal notification functions - called by database triggers or service role
 [functions.notify-user-approval]
-verify_jwt = false
+verify_jwt = false  # Called by admin actions with service role
 
 [functions.notify-role-request-outcome]
-verify_jwt = false
+verify_jwt = false  # Called by admin actions with service role
 
 [functions.send-deadline-reminders]
-verify_jwt = false
+verify_jwt = false  # Internal cron job, uses service role
 
 [functions.apply-product-edit]
-verify_jwt = false
+verify_jwt = false  # Validates auth in code, requires admin role
