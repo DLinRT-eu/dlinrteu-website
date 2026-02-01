@@ -25,15 +25,53 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Verify service role key authorization
+  // Verify service role key or admin user authorization
   const authHeader = req.headers.get("Authorization");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   
-  if (!authHeader || !authHeader.includes(serviceRoleKey || "")) {
-    // Allow anon key calls from authenticated frontend
-    const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
-    if (!authHeader?.includes(anonKey || "")) {
-      console.log("Authorization check - proceeding with request");
+  // Check for service role key (for internal calls)
+  const isServiceRole = authHeader?.includes(serviceRoleKey || "");
+  
+  if (!isServiceRole) {
+    // Verify the caller is an authenticated admin
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Unauthorized" }),
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    
+    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.39.3");
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } }
+    });
+    
+    const token = authHeader.replace("Bearer ", "");
+    const { data: userData, error: userError } = await supabase.auth.getUser(token);
+    
+    if (userError || !userData?.user) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Unauthorized" }),
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    
+    // Check if user is admin using service role
+    const adminClient = createClient(supabaseUrl, serviceRoleKey!);
+    const { data: roles } = await adminClient
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userData.user.id)
+      .eq("role", "admin");
+    
+    if (!roles || roles.length === 0) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Admin access required" }),
+        { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
   }
 
