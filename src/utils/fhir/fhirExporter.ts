@@ -219,3 +219,32 @@ export function getFHIRExportPreview(
     warningCount: result.warnings.length
   };
 }
+
+/**
+ * Download a FHIR Bundle for a single product
+ * 
+ * @param product - Product to export
+ * @param company - Optional company to include
+ * @param options - Export options
+ */
+export function downloadProductFHIRBundle(
+  product: ProductDetails,
+  company?: CompanyDetails,
+  options?: FHIRExportOptions & { includeWarningsReport?: boolean }
+): void {
+  const { includeWarningsReport = false, ...restOptions } = options || {};
+  
+  const companies = company ? [company] : [];
+  
+  if (includeWarningsReport) {
+    downloadFHIRBundleWithReport([product], companies, {
+      includeOrganizations: true,
+      ...restOptions
+    });
+  } else {
+    downloadFHIRBundle([product], companies, {
+      includeOrganizations: true,
+      ...restOptions
+    });
+  }
+}

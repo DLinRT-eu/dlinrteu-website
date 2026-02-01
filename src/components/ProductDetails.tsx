@@ -19,6 +19,7 @@ import GuidelinesDetails from "./product/GuidelinesDetails";
 import UserRelationships from "./product/UserRelationships";
 import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
 import PartOfDetails from "./product/PartOfDetails";
+import FHIRExportSection from "./product/FHIRExportSection";
 import { toast } from "sonner";
 import Footer from "./Footer";
 import { isInvestigationalProduct } from "@/utils/productFilters";
@@ -180,6 +181,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             </div>
           </div>
           
+          {/* Healthcare Interoperability Section */}
+          <FHIRExportSection product={product} />
           {/* Add revision status component */}
           <div className="bg-white shadow rounded-lg p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4">Revision Information</h3>
