@@ -30,6 +30,7 @@ export {
   exportToFHIR, 
   downloadFHIRBundle,
   downloadFHIRBundleWithReport,
+  downloadProductFHIRBundle,
   validateFHIRBundle,
   getFHIRExportPreview
 } from './fhirExporter';
