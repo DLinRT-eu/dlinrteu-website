@@ -531,7 +531,7 @@ export type Database = {
           created_at: string | null
           factor_type: string
           id: string
-          ip_address: string | null
+          ip_hash: string | null
           user_agent: string | null
           user_id: string
         }
@@ -540,7 +540,7 @@ export type Database = {
           created_at?: string | null
           factor_type: string
           id?: string
-          ip_address?: string | null
+          ip_hash?: string | null
           user_agent?: string | null
           user_id: string
         }
@@ -549,7 +549,7 @@ export type Database = {
           created_at?: string | null
           factor_type?: string
           id?: string
-          ip_address?: string | null
+          ip_hash?: string | null
           user_agent?: string | null
           user_id?: string
         }
