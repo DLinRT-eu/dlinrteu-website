@@ -15,6 +15,7 @@
 - **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Product review workflow and best practices
 - **[Review Guide](./docs/review/GUIDE.md)** - How to review and update product information
 - **[Field Reference](./docs/FIELD_REFERENCE.md)** - Definitions for every product field (useful when updating `lastUpdated`/`lastRevised`)
+- **[Security Policy](./SECURITY.md)** - Security features, GDPR compliance, and reporting vulnerabilities
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
 
 For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATION_LINKS.md)
@@ -86,6 +87,8 @@ For complete examples, refer to the example templates in `src/data/products/exam
 - **Research Initiatives**: Database of datasets, challenges, and model zoos
 - **User Tracking**: Track products you use or are evaluating
 - **Community Experiences**: Share and view product adoption experiences
+- **Healthcare Interoperability**: FHIR R4 export for hospital system integration
+- **GDPR Compliance**: Data export, anonymization, and consent management
 
 ## Backend & Database
 

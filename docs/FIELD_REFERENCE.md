@@ -215,6 +215,62 @@ These fields are used when company representatives certify product information:
 
 ---
 
+## Healthcare Interoperability (FHIR Export)
+
+Products can be exported in FHIR R4 DeviceDefinition format for healthcare system integration.
+
+### FHIR Resource Structure
+
+| FHIR Resource | DLinRT Source |
+|---------------|---------------|
+| `DeviceDefinition` | Product data |
+| `Organization` | Company data |
+| `Bundle` | Container for all resources |
+
+### FHIR Readiness Score
+
+The system calculates a readiness score (0-4) based on terminology mappings:
+
+| Check | Requirement | Points |
+|-------|-------------|--------|
+| Modality | Has DICOM code mapping | 1 |
+| Anatomy | Has SNOMED CT code mapping | 1 |
+| Disease | Has ICD-10/SNOMED code mapping | 1 |
+| Regulatory | Has FDA/CE identifiers | 1 |
+
+**Labels**:
+- **0 points**: Limited - No standard terminology mappings
+- **1-2 points**: Fair - Partial mappings present
+- **3 points**: Good - Most mappings complete
+- **4 points**: Excellent - Full terminology and regulatory IDs
+
+### Terminology Mappings
+
+| Field | Standard | Code System |
+|-------|----------|-------------|
+| `modality` | DICOM | 40+ modality codes |
+| `anatomicalLocation` | SNOMED CT | 60+ anatomy codes |
+| `diseaseTargeted` | ICD-10 / SNOMED CT | Oncology conditions |
+| `regulatory.fda.clearanceNumber` | FDA | 510(k) identifiers |
+| `regulatory.ce.class` | EU MDR | Device class |
+
+### FHIR Export Options
+
+| Option | Purpose |
+|--------|---------|
+| Standard Export | FHIR R4 Bundle with DeviceDefinition resource |
+| Include Warnings Report | Download unmapped terminology report |
+| Readiness Indicator | Visual score (0-4) on product page |
+
+### Accessing FHIR Export
+
+1. Navigate to any product detail page
+2. Scroll to "Healthcare Interoperability" section
+3. Click "Export FHIR Bundle"
+4. Optionally check "Include Warnings Report"
+
+---
+
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: January 28, 2026
+**Last Updated**: February 2, 2026
