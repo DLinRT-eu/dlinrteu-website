@@ -1,316 +1,248 @@
 
 
-# FHIR Export Integration Design Options
+# Comprehensive Security, RLS, and GDPR Audit
 
-## Overview
+## Executive Summary
 
-This analysis compares different approaches for integrating FHIR export functionality with the existing model card export system, considering that FHIR is not currently used but should be available for healthcare interoperability needs. Go for option B
-
----
-
-## Current Architecture Summary
-
-| Component | Purpose | Formats |
-|-----------|---------|---------|
-| **Model Card Export** | Human-readable product documentation | PDF, Excel, CSV, JSON |
-| **FHIR Export** | Healthcare system interoperability | FHIR R4 Bundle (DeviceDefinition) |
-
-The model card exports are designed for **research and documentation**, while FHIR is designed for **system-to-system data exchange** in healthcare environments.
+This audit reveals a strong baseline security posture with comprehensive RLS policies, but identifies several areas requiring attention for GDPR compliance and defense-in-depth security.
 
 ---
 
-## Design Options Analysis
+## Audit Findings
 
-### Option A: Simple Toggle on Export Section
+### Category 1: Critical - Views Without RLS (SECURITY DEFINER Mode)
 
-```text
-┌──────────────────────────────────────────┐
-│ Export Model Card                        │
-├──────────────────────────────────────────┤
-│ ┌─────────────────────────────────────┐  │
-│ │ ☐ Include FHIR-compatible format    │  │
-│ │   (Healthcare interoperability)     │  │
-│ └─────────────────────────────────────┘  │
-│                                          │
-│ [📄 Export to PDF]                       │
-│ [📊 Export to Excel]                     │
-│ [📥 Export to CSV]                       │
-│ [📝 Export to JSON]                      │
-└──────────────────────────────────────────┘
+| View | Issue | Risk Level |
+|------|-------|------------|
+| `reviews_with_github_tracking` | Exposes `reviewer_email` and `reviewer_name` from profiles | **HIGH** |
+| `analytics_public` | Uses SECURITY DEFINER - bypasses RLS on `analytics_daily` | **MEDIUM** |
+| `analytics_summary` | Uses SECURITY DEFINER - bypasses RLS on `analytics_daily` | **MEDIUM** |
+| `company_products` | Uses SECURITY DEFINER - bypasses RLS on underlying tables | **MEDIUM** |
+| `public_team_members` | Uses SECURITY DEFINER - intentionally public but should be verified | **LOW** |
+
+**Impact**: Views with SECURITY DEFINER bypass RLS policies of underlying tables. Anyone with SELECT access to these views can read data regardless of base table restrictions.
+
+**Fix Required**:
+1. Add `security_invoker = on` to critical views OR
+2. Create proper RLS policies on the views themselves OR
+3. Restrict view access using GRANT/REVOKE
+
+---
+
+### Category 2: GDPR - IP Address Storage
+
+**Current State**: Mixed compliance - some areas hash IPs, others store plaintext.
+
+| Table | Column | Status |
+|-------|--------|--------|
+| `mfa_activity_log` | `ip_address` | **Stores RAW IP** - GDPR violation |
+| `admin_audit_log` | `ip_address` | Currently null (good) |
+| `consent_audit_log` | `ip_hash` | **Hashed** (compliant) |
+| `security_events` | `ip_hash` | **Hashed** (compliant) |
+| `profile_document_access_log` | `ip_hash` | **Hashed** (compliant) |
+
+**Edge Functions Analysis**:
+- `track-analytics`: Uses `hash_ip()` RPC - **Compliant**
+- `track-security-event`: Uses `hash_ip()` RPC - **Compliant**
+- `log-document-access`: Uses `hash_ip()` - **Compliant**
+- `subscribe-newsletter`: Uses raw IP for rate limiting only (memory) - **Acceptable**
+
+**Fix Required**: 
+- Rename `mfa_activity_log.ip_address` to `ip_hash` and ensure hashing
+- Update any edge functions writing to `mfa_activity_log` to use `hash_ip()`
+
+---
+
+### Category 3: GDPR - User Tracking Analysis
+
+**Cookie Consent Implementation**: **Compliant**
+- Analytics tracking only activates with explicit consent
+- Consent stored with version and timestamp
+- `isTrackingAllowed()` gate on all tracking operations
+- `clearTrackingIds()` for consent withdrawal
+
+**Visitor ID Tracking**:
+- Visitor ID is a UUID generated client-side
+- Sent to server and **hashed via `hash_ip()` RPC** before storage
+- 2-year expiry on consent-gated cookie
+
+**Session ID**:
+- Stored in `sessionStorage` (cleared on browser close)
+- Never sent to server - **Local only**
+
+**localStorage Usage Audit**:
+
+| Key | Purpose | GDPR Risk |
+|-----|---------|-----------|
+| `activeRole` | Role UI state | None - cleared on logout |
+| `dlinrt-auth-token` | Auth token | Cleared on logout |
+| `recentSearches` | Search history | **LOW** - user convenience |
+
+---
+
+### Category 4: RLS Policy Analysis
+
+**Strengths** (150 policies total):
+- All tables have RLS enabled
+- RESTRICTIVE policies used consistently
+- `has_role()` and `is_admin_secure()` SECURITY DEFINER functions prevent recursion
+- Anonymous access denied on 20+ sensitive tables via `USING(false)` policies
+- Service role access properly gated
+
+**Potential Improvements**:
+
+| Table | Policy Gap | Risk |
+|-------|------------|------|
+| `product_revision_dates` | Public SELECT (`USING(true)`) | **LOW** - only revision metadata |
+| `company_product_verifications` | Public SELECT (`USING(true)`) | **LOW** - intentional transparency |
+| `changelog_entries` | Public SELECT for `status='published'` | **None** - intentional |
+
+---
+
+### Category 5: Edge Function Security
+
+**Authentication Checks** (all functions reviewed):
+
+| Function | Auth Method | Status |
+|----------|-------------|--------|
+| `admin-delete-user` | JWT + admin role check | **Secure** |
+| `delete-account` | JWT + password re-auth | **Secure** |
+| `track-analytics` | Service role key | **Secure** |
+| `track-security-event` | Rate limited + fingerprint hash | **Secure** |
+| `notify-*` functions | Service role key + admin validation | **Secure** |
+
+**CORS Implementation**: Proper origin whitelisting on all reviewed functions.
+
+---
+
+### Category 6: Sensitive Data Exposure Points
+
+**Data Export Feature** (`DataExport.tsx`):
+- ✅ MFA verification for MFA-enabled users
+- ✅ Only exports user's own data (RLS enforced)
+- ⚠️ Exports raw `mfa_activity_log` which may include IPs
+
+**Admin Profile Access**:
+- ✅ Admins can view all profiles (expected for admin functions)
+- ✅ Admin actions logged to `admin_audit_log`
+
+---
+
+## Technical Implementation Plan
+
+### Phase 1: Fix Views Security (High Priority)
+
+```sql
+-- 1. Recreate reviews_with_github_tracking with security_invoker
+DROP VIEW IF EXISTS public.reviews_with_github_tracking;
+CREATE VIEW public.reviews_with_github_tracking
+WITH (security_invoker = on) AS
+SELECT 
+  pr.id,
+  pr.product_id,
+  pr.assigned_to,
+  pr.status,
+  pr.assigned_at,
+  pr.github_file_url,
+  pr.github_last_modified,
+  pr.auto_revision_triggered,
+  (p.first_name || ' ' || p.last_name) AS reviewer_name,
+  -- Remove email from view OR keep with security_invoker
+  p.email AS reviewer_email,
+  (SELECT count(*) FROM github_file_checks WHERE review_id = pr.id) AS check_count,
+  (SELECT max(checked_at) FROM github_file_checks WHERE review_id = pr.id) AS last_check_at
+FROM product_reviews pr
+LEFT JOIN profiles p ON pr.assigned_to = p.id
+WHERE pr.github_file_url IS NOT NULL;
+
+-- 2. Add security_invoker to analytics views or restrict access
+-- Option A: Restrict to authenticated users only
+REVOKE SELECT ON analytics_public FROM anon;
+GRANT SELECT ON analytics_public TO authenticated;
+
+-- Option B: Recreate with security_invoker
+DROP VIEW IF EXISTS public.analytics_summary;
+CREATE VIEW public.analytics_summary
+WITH (security_invoker = on) AS
+SELECT date, total_visits, unique_visitors, created_at, updated_at
+FROM analytics_daily ad
+ORDER BY date DESC;
 ```
 
-**Behavior:** When toggle is ON, JSON export includes both model card data AND FHIR-structured data.
+### Phase 2: Fix IP Address Storage (GDPR Critical)
 
-| Pros | Cons |
-|------|------|
-| Simple, unobtrusive | Confuses model card purpose with FHIR |
-| Easy to discover | Doesn't work well for PDF/Excel |
-| No additional buttons | Users may not understand what FHIR means |
+```sql
+-- Rename column to reflect its hashed nature
+ALTER TABLE mfa_activity_log RENAME COLUMN ip_address TO ip_hash;
 
----
-
-### Option B: Separate Healthcare Interoperability Section (Recommended)
-
-```text
-┌──────────────────────────────────────────┐
-│ Export Model Card                        │
-├──────────────────────────────────────────┤
-│ [📄 Export to PDF]                       │
-│ [📊 Export to Excel]                     │
-│ [📥 Export to CSV]                       │
-│ [📝 Export to JSON]                      │
-└──────────────────────────────────────────┘
-
-┌──────────────────────────────────────────┐
-│ Healthcare Interoperability              │
-├──────────────────────────────────────────┤
-│ Export product data in standardized      │
-│ healthcare formats for integration with  │
-│ hospital information systems.            │
-│                                          │
-│ [🏥 Export FHIR Bundle]                  │
-│                                          │
-│ ☐ Include terminology warnings report    │
-│                                          │
-│ ℹ️ FHIR R4 DeviceDefinition format       │
-│    Uses SNOMED CT & DICOM codes          │
-└──────────────────────────────────────────┘
+-- Add comment for documentation
+COMMENT ON COLUMN mfa_activity_log.ip_hash IS 
+  'SHA-256 hash of IP address for GDPR compliance - never store raw IPs';
 ```
 
-| Pros | Cons |
-|------|------|
-| Clear separation of concerns | More UI space required |
-| Educational - explains FHIR purpose | Two sections instead of one |
-| Can add more interoperability formats later | Slightly more complex |
-| Shows FHIR readiness (unmapped terms) |  |
+**Edge Function Updates**:
+- Audit any code inserting into `mfa_activity_log` to use `hash_ip()` RPC
 
----
-
-### Option C: Enhanced JSON Export with Format Selector
-
-```text
-┌──────────────────────────────────────────┐
-│ Export Model Card                        │
-├──────────────────────────────────────────┤
-│ [📄 Export to PDF]                       │
-│ [📊 Export to Excel]                     │
-│ [📥 Export to CSV]                       │
-│                                          │
-│ JSON Format:                             │
-│ ┌────────────────────────────────────┐   │
-│ │ [▼ Model Card (Default)]           │   │
-│ │     Model Card (Default)           │   │
-│ │     FHIR DeviceDefinition          │   │
-│ │     Combined (Both formats)        │   │
-│ └────────────────────────────────────┘   │
-│ [📝 Export to JSON]                      │
-└──────────────────────────────────────────┘
-```
-
-| Pros | Cons |
-|------|------|
-| Single section, clean UI | Hides FHIR visibility |
-| Logical grouping (all JSON formats) | Less educational |
-| Progressive disclosure | May confuse users about differences |
-
----
-
-### Option D: Collapsible Advanced Export Section
-
-```text
-┌──────────────────────────────────────────┐
-│ Export Model Card                        │
-├──────────────────────────────────────────┤
-│ [📄 Export to PDF]                       │
-│ [📊 Export to Excel]                     │
-│ [📥 Export to CSV]                       │
-│ [📝 Export to JSON]                      │
-│                                          │
-│ ▶ Advanced Export Options                │
-└──────────────────────────────────────────┘
-
-(When expanded:)
-┌──────────────────────────────────────────┐
-│ ▼ Advanced Export Options                │
-├──────────────────────────────────────────┤
-│ Healthcare Interoperability:             │
-│ [🏥 FHIR R4 Bundle]                      │
-│                                          │
-│ ℹ️ SNOMED CT anatomy codes               │
-│ ℹ️ DICOM modality codes                  │
-└──────────────────────────────────────────┘
-```
-
-| Pros | Cons |
-|------|------|
-| Clean default view | FHIR is "hidden" by default |
-| Power users can find it | Less discoverable |
-| Room for future advanced options | Extra click required |
-
----
-
-## Recommendation: Option B with Enhancement
-
-**Recommended approach:** Create a **separate "Healthcare Interoperability" section** below the Model Card export, with:
-
-1. **Clear explanation** of what FHIR is and why it matters
-2. **FHIR readiness indicator** showing if product has unmapped terminology
-3. **Optional warnings report** download for data quality review
-4. **Future extensibility** for other standards (HL7v2, CDA, etc.)
-
-### Additional Feature: FHIR Readiness Badge
-
-Add a small indicator showing FHIR export quality:
-
-```text
-┌──────────────────────────────────────────┐
-│ Healthcare Interoperability              │
-├──────────────────────────────────────────┤
-│                                          │
-│ FHIR Readiness: ●●●○ Good               │
-│ (3/4 fields have standardized codes)     │
-│                                          │
-│ [🏥 Export FHIR Bundle]                  │
-│                                          │
-│ ☐ Include terminology warnings report    │
-└──────────────────────────────────────────┘
-```
-
-This helps users understand that:
-- Not all products have complete SNOMED/DICOM mappings
-- The export will still work, but with warnings for unmapped values
-- They can improve data quality over time
-
----
-
-## Implementation Summary
-
-### New Files
-
-| File | Purpose |
-|------|---------|
-| `src/components/product/FHIRExportSection.tsx` | New UI component for FHIR export |
-
-### Files to Modify
-
-| File | Changes |
-|------|---------|
-| `src/components/ProductDetails.tsx` | Add FHIRExportSection below Model Card export |
-| `src/utils/fhir/fhirExporter.ts` | Add single-product export function |
-
-### New Features
-
-1. **Single-product FHIR export** - Currently only bulk export exists
-2. **FHIR readiness check** - Preview function already exists (`getFHIRExportPreview`)
-3. **Inline warnings display** - Show unmapped fields before export
-
----
-
-## Technical Implementation Details
-
-### Single Product FHIR Export Function
+### Phase 3: Data Export Enhancement
 
 ```typescript
-// New function in fhirExporter.ts
-export function downloadProductFHIRBundle(
-  product: ProductDetails,
-  company?: CompanyDetails
-): FHIRExportResult {
-  return downloadFHIRBundle(
-    [product], 
-    company ? [company] : [],
-    { includeOrganizations: true }
-  );
-}
+// In DataExport.tsx, sanitize mfa_activity_log before export
+const mfaLogSanitized = mfaLogData.data?.map(log => ({
+  ...log,
+  ip_hash: log.ip_address ? '[HASHED]' : null, // Don't export raw or hashed IPs
+  user_agent: log.user_agent ? '[REDACTED]' : null
+}));
 ```
 
-### FHIR Readiness Calculation
+### Phase 4: Additional Hardening
 
-```typescript
-// Calculate readiness score based on mapped terminology
-function calculateFHIRReadiness(product: ProductDetails): {
-  score: number;  // 0-4
-  label: string;  // "Excellent", "Good", "Fair", "Limited"
-  details: string[];  // Unmapped fields
-} {
-  let score = 0;
-  const details: string[] = [];
-  
-  // Check modality mapping
-  if (hasModalityMapping(product.modality)) score++;
-  else details.push("Modality needs DICOM code");
-  
-  // Check anatomy mapping
-  if (hasAnatomyMapping(product.anatomy)) score++;
-  else details.push("Anatomy needs SNOMED CT code");
-  
-  // Check disease mapping
-  if (hasDiseaseMapping(product.diseaseTargeted)) score++;
-  else details.push("Disease needs ICD-10/SNOMED code");
-  
-  // Check regulatory identifiers
-  if (hasRegulatoryIds(product)) score++;
-  else details.push("No FDA/CE identifiers");
-  
-  const labels = ["Limited", "Fair", "Good", "Excellent"];
-  return { score, label: labels[score] || "Limited", details };
-}
+1. **Add Deny Policies on Views**:
+```sql
+-- Block anonymous access to sensitive views
+CREATE POLICY "Deny anon access to reviews_with_github_tracking"
+ON public.reviews_with_github_tracking FOR SELECT
+TO anon USING (false);
 ```
 
-### FHIRExportSection Component Structure
-
-```typescript
-interface FHIRExportSectionProps {
-  product: ProductDetails;
-  company?: CompanyDetails;
-}
-
-const FHIRExportSection = ({ product, company }: FHIRExportSectionProps) => {
-  const [includeWarnings, setIncludeWarnings] = useState(false);
-  const readiness = useMemo(() => calculateFHIRReadiness(product), [product]);
-  
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Healthcare Interoperability</CardTitle>
-        <CardDescription>
-          Export in FHIR R4 format for integration with hospital systems
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {/* Readiness indicator */}
-        <FHIRReadinessIndicator readiness={readiness} />
-        
-        {/* Export button */}
-        <Button onClick={handleFHIRExport}>
-          <Hospital className="h-4 w-4 mr-2" />
-          Export FHIR Bundle
-        </Button>
-        
-        {/* Warnings toggle */}
-        <Checkbox 
-          checked={includeWarnings}
-          onCheckedChange={setIncludeWarnings}
-        />
-        <Label>Include terminology warnings report</Label>
-      </CardContent>
-    </Card>
-  );
-};
+2. **Audit company_products View**:
+```sql
+-- This view exposes user_id which could be sensitive
+-- Consider removing user_id or adding security_invoker
 ```
 
 ---
 
-## Summary
+## Summary of Changes Required
 
-| Aspect | Decision |
-|--------|----------|
-| **Location** | Separate section below Model Card export |
-| **Visibility** | Always visible (not hidden in dropdown) |
-| **Education** | Include explanation of FHIR purpose |
-| **Quality indicator** | Show FHIR readiness score |
-| **Warnings** | Optional downloadable report |
-| **Future-proof** | Room for additional interoperability standards |
+| Priority | Item | Type |
+|----------|------|------|
+| **CRITICAL** | Fix `reviews_with_github_tracking` view to use security_invoker | Migration |
+| **CRITICAL** | Rename `mfa_activity_log.ip_address` to `ip_hash` | Migration |
+| **HIGH** | Add security_invoker to `analytics_summary` view | Migration |
+| **HIGH** | Restrict `analytics_public` view to authenticated users | Migration |
+| **MEDIUM** | Sanitize IP data in DataExport component | Code |
+| **MEDIUM** | Review `company_products` view for user_id exposure | Audit |
+| **LOW** | Consider removing email from `reviews_with_github_tracking` | Design Decision |
 
-This approach keeps FHIR visible and accessible while clearly separating it from research-focused model card exports, acknowledging that different audiences have different needs.
+---
+
+## Compliance Summary
+
+| Regulation | Status | Notes |
+|------------|--------|-------|
+| **GDPR Art. 17** (Right to Erasure) | ✅ Implemented | `delete-account` edge function |
+| **GDPR Art. 20** (Data Portability) | ✅ Implemented | `DataExport` component |
+| **GDPR Art. 7** (Consent) | ✅ Implemented | Cookie consent with audit log |
+| **GDPR Rec. 26** (Anonymization) | ⚠️ Partial | IPs hashed in most places, fix `mfa_activity_log` |
+| **ePrivacy** (Cookies) | ✅ Implemented | Analytics only with consent |
+
+---
+
+## Files to Modify
+
+| File | Change |
+|------|--------|
+| New SQL migration | Fix views and rename IP column |
+| `src/components/profile/DataExport.tsx` | Sanitize exported MFA logs |
+| Edge functions writing to `mfa_activity_log` | Ensure IP hashing |
 
