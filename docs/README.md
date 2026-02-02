@@ -170,6 +170,50 @@ SQL scripts for:
 
 ---
 
+## 🔒 Security & Compliance
+
+**File**: [SECURITY.md](../SECURITY.md)
+
+Security features and GDPR compliance documentation:
+
+- **Row Level Security (RLS)** with restrictive policies
+- **GDPR compliance** - data export, anonymization, consent management
+- **IP address hashing** for privacy (SHA-256)
+- **View security** using `security_invoker = on`
+- **Healthcare interoperability** - FHIR R4 export
+
+### Key Security Features
+
+| Feature | Implementation |
+|---------|----------------|
+| Data Export | Profile → Data Export (JSON) |
+| Account Deletion | Profile → Delete Account |
+| Cookie Consent | Versioned audit log |
+| IP Anonymization | SHA-256 hashing |
+
+---
+
+## 🏥 Healthcare Interoperability
+
+Products can be exported in FHIR R4 format for hospital system integration.
+
+### FHIR Export
+
+- **Format**: FHIR R4 Bundle with DeviceDefinition resource
+- **Terminology**: SNOMED CT, DICOM, ICD-10 mappings
+- **Location**: Product detail page → Export → FHIR
+
+### FHIR Readiness Score
+
+| Score | Label | Criteria |
+|-------|-------|----------|
+| 4 | Excellent | Full terminology + regulatory IDs |
+| 3 | Good | Most mappings present |
+| 1-2 | Fair | Partial mappings |
+| 0 | Limited | No standard mappings |
+
+---
+
 ## 🔗 External Resources
 
 - **Platform**: [https://dlinrt.eu](https://dlinrt.eu)
@@ -189,4 +233,4 @@ When updating documentation:
 
 ---
 
-*Last Updated: January 28, 2026*
+*Last Updated: February 2, 2026*

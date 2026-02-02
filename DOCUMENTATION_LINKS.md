@@ -24,11 +24,23 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 
 ## Security & Compliance
 
-- **[Security Policy](./SECURITY.md)** - Comprehensive security policy, features, monitoring, and reporting
+- **[Security Policy](./SECURITY.md)** - Comprehensive security policy, GDPR compliance, and reporting
+- **GDPR Features**: Data export, anonymization, consent management
+- **View Security**: Database views use `security_invoker = on` for RLS enforcement
 
 ## Field & Data Reference
 
 - **[Field Reference](./docs/FIELD_REFERENCE.md)** - Complete schema details, allowed values, and change-tracking guidance
+
+---
+
+## Healthcare Interoperability
+
+- **FHIR Export**: Available on product detail pages
+  - FHIR R4 DeviceDefinition format
+  - SNOMED CT and DICOM terminology mappings
+  - ICD-10 disease code mappings
+  - Readiness scoring for data quality (0-4 scale)
 
 ---
 
@@ -63,6 +75,7 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 - `/admin/changelog-generator` - Changelog generator
 - `/admin/user-products` - User product adoptions
 - `/admin/certifications` - Certification management
+- `/admin/edit-approvals` - Product edit approvals
 
 ### Reviewer Pages
 
@@ -86,4 +99,4 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 
 ---
 
-**Last Updated**: November 29, 2025
+**Last Updated**: February 2, 2026

@@ -428,4 +428,68 @@ Product data can still be edited directly via GitHub for those who prefer tradit
 
 ---
 
-**Last Updated**: January 28, 2026
+## 10. Data Privacy & GDPR
+
+Manage user data privacy and ensure GDPR compliance.
+
+### User Data Export
+
+Users can export all their data via Profile → Data Export.
+
+**What's Exported**:
+- Profile information (name, email, institution)
+- Role assignments
+- Review history
+- Company representative status
+- Product adoptions
+- MFA activity (sanitized - no IP addresses)
+
+**Privacy Measures Applied**:
+- IP addresses are hashed (SHA-256) before storage
+- User agents redacted in exports
+- GDPR privacy notice included in export files
+- Export timestamp for audit trail
+
+### IP Address Anonymization
+
+All IP addresses are hashed before storage using SHA-256:
+
+| Table | Column | Purpose |
+|-------|--------|---------|
+| `mfa_activity_log` | `ip_hash` | MFA verification tracking |
+| `consent_audit_log` | `ip_hash` | Cookie consent records |
+| `security_events` | `ip_hash` | Security incident tracking |
+| `profile_document_access_log` | `ip_hash` | Document access audit |
+
+### Consent Audit Log
+
+Cookie consent is tracked with full audit trail:
+- Consent version recorded
+- Timestamp of consent/withdrawal
+- Hashed IP for compliance verification
+
+### Database View Security
+
+All sensitive database views use `security_invoker = on`:
+
+| View | Purpose | Protection |
+|------|---------|------------|
+| `reviews_with_github_tracking` | Reviewer assignments | RLS enforced |
+| `analytics_summary` | Platform metrics | RLS enforced |
+| `company_products` | Company relationships | RLS enforced |
+| `analytics_public` | Public stats | Authenticated only |
+
+This prevents RLS bypass attacks where views could expose underlying table data.
+
+### User Account Deletion
+
+Users can delete their account via Profile → Delete Account:
+1. MFA verification required (if enabled)
+2. Password re-authentication
+3. Cascading deletion of all user data
+4. Audit log entry created
+5. Irreversible after confirmation
+
+---
+
+**Last Updated**: February 2, 2026

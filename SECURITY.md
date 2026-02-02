@@ -106,6 +106,55 @@ The following are *not* considered security vulnerabilities:
 - Activity logging for company representative actions
 - Audit logs for admin actions and role changes
 
+### 7. View Security
+
+Database views use `security_invoker = on` to ensure RLS policies are respected:
+- `reviews_with_github_tracking` - Reviewer assignment data
+- `analytics_summary` - Platform analytics
+- `company_products` - Company product relationships
+- `analytics_public` - Restricted to authenticated users only
+
+This prevents RLS bypass attacks where views could expose data from underlying tables.
+
+---
+
+## GDPR Compliance
+
+### Data Anonymization
+
+- **IP Addresses**: All IP addresses are hashed using SHA-256 before storage
+- **Columns**: `ip_hash` used consistently across:
+  - `mfa_activity_log`
+  - `consent_audit_log`
+  - `security_events`
+  - `profile_document_access_log`
+- **Data Export**: User data exports redact IP hashes and user agents
+
+### User Rights Implementation
+
+| Right | GDPR Article | Implementation |
+|-------|--------------|----------------|
+| Right to Erasure | Art. 17 | `delete-account` edge function |
+| Data Portability | Art. 20 | `DataExport` component with JSON download |
+| Consent Management | Art. 7 | Cookie consent with versioned audit log |
+| Access Request | Art. 15 | Profile page with all user data visible |
+
+### Data Export Contents
+
+Users can export their data via Profile → Data Export:
+- Profile information
+- Role assignments
+- Review history
+- MFA activity (sanitized - no IP addresses or user agents)
+- GDPR privacy notice included in export files
+
+### Cookie Consent
+
+- Analytics tracking only activates with explicit consent
+- Consent stored with version and timestamp in `consent_audit_log`
+- `isTrackingAllowed()` gate on all tracking operations
+- `clearTrackingIds()` for consent withdrawal
+
 ---
 
 ## Security Checklist
@@ -118,6 +167,8 @@ The following are *not* considered security vulnerabilities:
 - [x] Error boundaries are used for critical UI components
 - [x] All forms use proper CSRF and XSS protections
 - [x] Security policy is documented and up to date
+- [x] Database views use security_invoker for RLS enforcement
+- [x] IP addresses hashed before storage (GDPR compliance)
 
 ---
 
@@ -182,4 +233,4 @@ We greatly appreciate your help in making this project safe, reliable, and trust
 
 ---
 
-**Last Updated**: November 29, 2025
+**Last Updated**: February 2, 2026
