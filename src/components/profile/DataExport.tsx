@@ -90,8 +90,21 @@ export const DataExport = () => {
         supabase.from('company_revisions').select('*').eq('revised_by', user.id),
       ]);
 
+      // GDPR: Sanitize MFA activity log - redact IP hashes and user agents
+      const mfaLogSanitized = mfaLogData.data?.map(log => ({
+        id: log.id,
+        user_id: log.user_id,
+        action: log.action,
+        factor_type: log.factor_type,
+        created_at: log.created_at,
+        // Redact tracking data for privacy
+        ip_hash: log.ip_hash ? '[REDACTED]' : null,
+        user_agent: log.user_agent ? '[REDACTED]' : null,
+      }));
+
       const exportData = {
         exported_at: new Date().toISOString(),
+        gdpr_notice: 'IP addresses and user agents have been redacted for privacy compliance.',
         user: {
           id: user.id,
           email: user.email,
@@ -100,7 +113,7 @@ export const DataExport = () => {
         profile: profileData.data,
         roles: rolesData.data,
         role_requests: roleRequestsData.data,
-        mfa_activity_log: mfaLogData.data,
+        mfa_activity_log: mfaLogSanitized,
         reviews: reviewsData.data,
         revisions: revisionsData.data,
       };
