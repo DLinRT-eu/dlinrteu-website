@@ -140,6 +140,15 @@ export interface ProductDetails extends Product {
   // Development stage for tracking product maturity
   developmentStage?: "certified" | "pipeline" | "research" | "discontinued";
   
+  // Version evolution tracking (for product line relationships)
+  priorVersions?: Array<{
+    productId?: string;      // ID of prior version in database (if exists)
+    name: string;            // Prior version name
+    fdaClearance?: string;   // FDA clearance number
+    notes?: string;          // What changed
+  }>;
+  supersededBy?: string;     // Product ID of newer version
+  
   // New field for dose prediction models (for Treatment Planning products)
   dosePredictionModels?: Array<{
     name: string;                    // Model name (e.g., "H&N VMAT")
