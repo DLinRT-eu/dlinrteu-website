@@ -21,6 +21,14 @@ These products are typically:
 
 They are NOT intended for diagnosis, treatment planning, or clinical decision-making and therefore don't require CE marking as a medical device.`;
 
+interface TFDAInfo {
+  status?: string;
+  class?: string;
+  approvalNumber?: string;
+  decisionDate?: string;
+  notes?: string;
+}
+
 const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) => {
   const { isEditMode, editedProduct } = useProductEdit();
   
@@ -31,6 +39,21 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
   const hasCE = certificationTags.some(tag => tag.startsWith('CE'));
   const hasFDA = certificationTags.some(tag => tag.startsWith('FDA'));
   const hasMDRExempt = certificationTags.includes('MDR Exempt');
+  
+  const getTFDAStatus = () => {
+    const tfdaInfo: TFDAInfo | undefined = displayProduct.regulatory?.tfda;
+    
+    if (!tfdaInfo || !tfdaInfo.status) {
+      return null;
+    }
+    
+    return {
+      label: tfdaInfo.status,
+      details: tfdaInfo
+    };
+  };
+  
+  const tfdaStatus = getTFDAStatus();
   
   const getCEStatus = () => {
     const ceInfo = parseCEInfo(displayProduct.regulatory?.ce);
@@ -236,6 +259,34 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
             )}
           </div>
         </div>
+        
+        {/* TFDA Status (Taiwan) - only show if data exists */}
+        {tfdaStatus && (
+          <div className="space-y-2">
+            <p className="text-sm font-medium">TFDA Status (Taiwan):</p>
+            <div className="flex items-center gap-2">
+              <Badge 
+                variant={tfdaStatus.label.toLowerCase().includes('approved') ? "success" : "outline"}
+                className="flex items-center gap-1"
+              >
+                {tfdaStatus.label.toLowerCase().includes('approved') ? (
+                  <CheckCircle className="h-3 w-3" />
+                ) : (
+                  <Info className="h-3 w-3" />
+                )}
+                <span>{tfdaStatus.label}</span>
+              </Badge>
+            </div>
+            {tfdaStatus.details && (
+              <div className="mt-2 text-xs text-muted-foreground space-y-1">
+                {tfdaStatus.details.class && <div>Class: {tfdaStatus.details.class}</div>}
+                {tfdaStatus.details.approvalNumber && <div>Approval: {tfdaStatus.details.approvalNumber}</div>}
+                {tfdaStatus.details.decisionDate && <div>Decision Date: {tfdaStatus.details.decisionDate}</div>}
+                {tfdaStatus.details.notes && <div>Notes: {tfdaStatus.details.notes}</div>}
+              </div>
+            )}
+          </div>
+        )}
         <div>
           <p className="text-sm font-medium">Intended Use Statement:</p>
           <EditableField
