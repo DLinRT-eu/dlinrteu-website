@@ -66,6 +66,17 @@ export interface Product {
       productCode?: string;
       type?: string;
     } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
+    tfda?: {
+      status: string;
+      class?: string;
+      approvalNumber?: string;
+      decisionDate?: string;
+      notes?: string;
+    };
     intendedUseStatement?: string;
   };
   market?: {

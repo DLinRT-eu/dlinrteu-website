@@ -52,11 +52,20 @@ interface TGAInfo {
   notes?: string;
 }
 
+interface TFDAInfo {
+  status?: string;
+  class?: string;
+  approvalNumber?: string;
+  decisionDate?: string;
+  notes?: string;
+}
+
 export function RegulatoryEditor({ fieldPath, label = 'Regulatory Information' }: RegulatoryEditorProps) {
   const { isEditMode, editedProduct, updateField, changedFields } = useProductEdit();
   const [ceOpen, setCeOpen] = useState(true);
   const [fdaOpen, setFdaOpen] = useState(true);
   const [tgaOpen, setTgaOpen] = useState(false);
+  const [tfdaOpen, setTfdaOpen] = useState(false);
 
   if (!editedProduct) return null;
 
@@ -64,6 +73,7 @@ export function RegulatoryEditor({ fieldPath, label = 'Regulatory Information' }
   const ce: CEInfo = regulatory.ce || {};
   const fda: FDAInfo = typeof regulatory.fda === 'object' && regulatory.fda !== null ? regulatory.fda : {};
   const tga: TGAInfo = regulatory.tga || {};
+  const tfda: TFDAInfo = regulatory.tfda || {};
 
   const isFieldChanged = (path: string) => changedFields.some(f => f.startsWith(path));
 
@@ -77,6 +87,10 @@ export function RegulatoryEditor({ fieldPath, label = 'Regulatory Information' }
 
   const handleTgaChange = (field: string, value: string) => {
     updateField(`regulatory.tga.${field}`, value || undefined);
+  };
+
+  const handleTfdaChange = (field: string, value: string) => {
+    updateField(`regulatory.tfda.${field}`, value || undefined);
   };
 
   const handleIntendedUseChange = (value: string) => {
@@ -292,6 +306,72 @@ export function RegulatoryEditor({ fieldPath, label = 'Regulatory Information' }
               <Textarea
                 value={tga.notes || ''}
                 onChange={(e) => handleTgaChange('notes', e.target.value)}
+                placeholder="Additional notes..."
+                rows={2}
+                className="bg-background"
+              />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        {/* TFDA Section (Taiwan) */}
+        <Collapsible open={tfdaOpen} onOpenChange={setTfdaOpen}>
+          <CollapsibleTrigger className="flex items-center gap-2 w-full text-left font-medium hover:text-primary">
+            {tfdaOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+            <span className={cn(isFieldChanged('regulatory.tfda') && 'text-amber-600')}>
+              TFDA (Taiwan)
+            </span>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="pt-3 space-y-3">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <Label className="text-xs">Status</Label>
+                <Select value={tfda.status || ''} onValueChange={(v) => handleTfdaChange('status', v)}>
+                  <SelectTrigger className="bg-background">
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background z-50">
+                    {STATUS_OPTIONS.map(opt => (
+                      <SelectItem key={opt} value={opt}>{opt}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">Class</Label>
+                <Input
+                  value={tfda.class || ''}
+                  onChange={(e) => handleTfdaChange('class', e.target.value)}
+                  placeholder="e.g., Class II"
+                  className="bg-background"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <Label className="text-xs">Approval Number</Label>
+                <Input
+                  value={tfda.approvalNumber || ''}
+                  onChange={(e) => handleTfdaChange('approvalNumber', e.target.value)}
+                  placeholder="Approval number"
+                  className="bg-background"
+                />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">Decision Date</Label>
+                <Input
+                  type="date"
+                  value={tfda.decisionDate || ''}
+                  onChange={(e) => handleTfdaChange('decisionDate', e.target.value)}
+                  className="bg-background"
+                />
+              </div>
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Notes</Label>
+              <Textarea
+                value={tfda.notes || ''}
+                onChange={(e) => handleTfdaChange('notes', e.target.value)}
                 placeholder="Additional notes..."
                 rows={2}
                 className="bg-background"
