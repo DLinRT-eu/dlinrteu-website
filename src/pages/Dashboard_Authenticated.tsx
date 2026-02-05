@@ -168,7 +168,7 @@ export default function Dashboard_Authenticated() {
         title: 'Certify Product',
         description: 'Request product certification',
         icon: BadgeCheck,
-        link: '/company/certify',
+        link: '/company/certification',
         color: 'bg-teal-50 text-teal-600 hover:bg-teal-100'
       },
       {
