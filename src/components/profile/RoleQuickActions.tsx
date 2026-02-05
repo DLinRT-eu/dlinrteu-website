@@ -156,7 +156,7 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                 </Link>
               </Button>
               <Button asChild variant="outline" className="justify-start">
-                <Link to="/company/certify">
+                <Link to="/company/certification">
                   <BadgeCheck className="h-4 w-4 mr-2" />
                   Certify Product
                 </Link>
