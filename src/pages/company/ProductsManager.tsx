@@ -24,6 +24,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Package, CheckCircle2, Clock, AlertCircle, Plus, FileText, Trash2, Search, Filter, X } from 'lucide-react';
+import { getProductNameById } from '@/utils/companyUtils';
+import { ALL_PRODUCTS } from '@/data';
 
 interface CompanyProduct {
   id: string;
@@ -305,10 +307,10 @@ export default function CompanyProductsManager() {
                       <div className="flex items-start justify-between">
                         <div>
                           <CardTitle className="flex items-center gap-2">
-                            Product ID: {product.product_id}
+                            {getProductNameById(product.product_id, ALL_PRODUCTS)}
                           </CardTitle>
                           <CardDescription className="mt-1">
-                            Company: {product.company_id}
+                            <span className="text-xs font-mono text-muted-foreground">{product.product_id}</span>
                           </CardDescription>
                         </div>
                         <div className="flex items-center gap-2">
@@ -369,8 +371,10 @@ export default function CompanyProductsManager() {
                       <CardHeader>
                         <div className="flex items-start justify-between">
                           <div>
-                            <CardTitle>Product ID: {product.product_id}</CardTitle>
-                            <CardDescription>Company: {product.company_id}</CardDescription>
+                            <CardTitle>{getProductNameById(product.product_id, ALL_PRODUCTS)}</CardTitle>
+                            <CardDescription>
+                              <span className="text-xs font-mono text-muted-foreground">{product.product_id}</span>
+                            </CardDescription>
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}
@@ -425,8 +429,10 @@ export default function CompanyProductsManager() {
                       <CardHeader>
                         <div className="flex items-start justify-between">
                           <div>
-                            <CardTitle>Product ID: {product.product_id}</CardTitle>
-                            <CardDescription>Company: {product.company_id}</CardDescription>
+                            <CardTitle>{getProductNameById(product.product_id, ALL_PRODUCTS)}</CardTitle>
+                            <CardDescription>
+                              <span className="text-xs font-mono text-muted-foreground">{product.product_id}</span>
+                            </CardDescription>
                           </div>
                           <div className="flex items-center gap-2">
                             {getVerificationBadge(product)}

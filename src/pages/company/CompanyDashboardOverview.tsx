@@ -27,7 +27,10 @@ import {
   ExternalLink,
   Github,
   Package,
-  BookOpen
+  BookOpen,
+  BadgeCheck,
+  FileEdit,
+  HelpCircle
 } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
@@ -36,8 +39,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import { formatDistanceToNow } from 'date-fns';
 import { ALL_PRODUCTS } from '@/data';
 import { getCompanyProducts } from '@/utils/companyUtils';
+import { getProductNameById } from '@/utils/companyUtils';
 import { getDaysSinceRevision, getUrgencyLevel } from '@/utils/revisionUtils';
 import { ProductDetails } from '@/types/productDetails';
+import CertificationProgressWidget from '@/components/company/CertificationProgressWidget';
+import ProductCardWithActions from '@/components/company/ProductCardWithActions';
 
 interface CompanyStats {
   totalProducts: number;
@@ -55,6 +61,7 @@ interface ProductVerification {
   verification_notes: string | null;
   verified_by: string | null;
   product_last_revised: string | null;
+  content_hash: string | null;
 }
 
 interface CompanyRevision {
@@ -104,6 +111,10 @@ export default function CompanyDashboardOverview() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedRevision, setSelectedRevision] = useState<CompanyRevision | null>(null);
   const [editForm, setEditForm] = useState({ changesSummary: '', revisionDate: '' });
+  const [certifyDialogOpen, setCertifyDialogOpen] = useState(false);
+  const [revisionDialogOpen, setRevisionDialogOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState('');
+  const [changesSummary, setChangesSummary] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -255,13 +266,101 @@ export default function CompanyDashboardOverview() {
     }
   };
 
+  const handleCertifyProduct = (productId: string) => {
+    setSelectedProductId(productId);
+    setCertifyDialogOpen(true);
+  };
+
+  const handleSuggestRevision = (productId: string) => {
+    setSelectedProductId(productId);
+    setRevisionDialogOpen(true);
+  };
+
+  const submitCertification = async () => {
+    const product = companyProducts.find(p => p.id === selectedProductId);
+    if (!product || !companyInfo) return;
+
+    try {
+      const { getCompanyIdByName } = await import('@/utils/companyUtils');
+      const { calculateProductContentHash } = await import('@/utils/productHash');
+      
+      const companyId = getCompanyIdByName(product.company);
+      const contentHash = await calculateProductContentHash(product);
+      
+      const { data, error } = await supabase.rpc('certify_product', {
+        p_product_id: selectedProductId,
+        p_company_id: companyId,
+        p_notes: 'Product information certified as accurate',
+        p_product_last_revised: product.lastRevised ? new Date(product.lastRevised).toISOString() : null,
+        p_content_hash: contentHash,
+      });
+
+      if (error) throw error;
+
+      const result = data as { success: boolean; error?: string };
+      if (!result.success) {
+        toast.error(result.error || 'Failed to certify product');
+        return;
+      }
+
+      toast.success(`${product.name} has been certified successfully`);
+      setCertifyDialogOpen(false);
+      setSelectedProductId('');
+      fetchDashboardData();
+    } catch (error: any) {
+      console.error('Error certifying product:', error);
+      toast.error(error.message || 'Failed to certify product');
+    }
+  };
+
+  const submitRevision = async () => {
+    const product = companyProducts.find(p => p.id === selectedProductId);
+    if (!product || !companyInfo || !changesSummary.trim()) {
+      toast.error('Please provide a summary of changes');
+      return;
+    }
+
+    try {
+      const { getCompanyIdByName } = await import('@/utils/companyUtils');
+      const companyId = getCompanyIdByName(product.company);
+      
+      const { data, error } = await supabase.rpc('create_company_revision', {
+        p_product_id: selectedProductId,
+        p_company_id: companyId,
+        p_changes_summary: changesSummary,
+        p_revision_date: new Date().toISOString().split('T')[0],
+      });
+
+      if (error) throw error;
+
+      const result = data as { success: boolean; error?: string };
+      if (!result.success) {
+        toast.error(result.error || 'Failed to submit revision');
+        return;
+      }
+
+      toast.success('Revision submitted for review');
+      setRevisionDialogOpen(false);
+      setSelectedProductId('');
+      setChangesSummary('');
+      fetchDashboardData();
+    } catch (error: any) {
+      console.error('Error submitting revision:', error);
+      toast.error(error.message || 'Failed to submit revision');
+    }
+  };
+
   const revisionColumns: ColumnDef<CompanyRevision>[] = [
     {
       accessorKey: 'product_id',
       header: 'Product',
-      cell: ({ row }) => (
-        <div className="font-medium">{row.getValue('product_id')}</div>
-      ),
+      cell: ({ row }) => {
+        const productId = row.getValue('product_id') as string;
+        const productName = getProductNameById(productId, companyProducts);
+        return (
+          <div className="font-medium">{productName}</div>
+        );
+      },
     },
     {
       accessorKey: 'changes_summary',
@@ -429,30 +528,37 @@ export default function CompanyDashboardOverview() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Certification Progress + Stats */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <CertificationProgressWidget
+              products={companyProducts}
+              verifications={verifications}
+              className="lg:col-span-1"
+            />
+            
+            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Total Products</CardTitle>
-                <Building2 className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium">Catalog Products</CardTitle>
+                <Package className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{stats.totalProducts}</div>
+                <div className="text-2xl font-bold">{companyProducts.length}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Certified products in catalog
+                  Products in the DLinRT catalog
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Verified Products</CardTitle>
+                <CardTitle className="text-sm font-medium">Certified</CardTitle>
                 <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{stats.verifiedProducts}</div>
+                <div className="text-2xl font-bold">{verifications.length}</div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Active certifications
+                  With verified badge
                 </p>
               </CardContent>
             </Card>
@@ -503,8 +609,8 @@ export default function CompanyDashboardOverview() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {stats.totalProducts > 0
-                    ? Math.round((stats.verifiedProducts / stats.totalProducts) * 100)
+                  {companyProducts.length > 0
+                    ? Math.round((verifications.length / companyProducts.length) * 100)
                     : 0}%
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
@@ -512,6 +618,7 @@ export default function CompanyDashboardOverview() {
                 </p>
               </CardContent>
             </Card>
+            </div>
           </div>
 
           {/* Recent Activity Timeline */}
@@ -544,7 +651,7 @@ export default function CompanyDashboardOverview() {
                       </div>
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
-                          <p className="font-medium">{revision.product_id}</p>
+                          <p className="font-medium">{getProductNameById(revision.product_id, companyProducts)}</p>
                           <Badge
                             variant={
                               revision.verification_status === 'approved'
@@ -579,6 +686,22 @@ export default function CompanyDashboardOverview() {
         </TabsContent>
 
         <TabsContent value="products" className="space-y-4">
+          {/* Help Banner */}
+          <Card className="bg-muted/50 border-dashed">
+            <CardContent className="py-4">
+              <div className="flex items-start gap-3">
+                <HelpCircle className="h-5 w-5 text-muted-foreground mt-0.5 shrink-0" />
+                <div className="text-sm">
+                  <p className="font-medium mb-1">Certification vs. Revision</p>
+                  <ul className="text-muted-foreground space-y-1">
+                    <li><strong>Certify:</strong> Confirm product information is accurate. Adds a "Verified by Company" badge.</li>
+                    <li><strong>Suggest Edit:</strong> Propose changes to update product details. Our team will review and apply.</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -597,60 +720,15 @@ export default function CompanyDashboardOverview() {
                 </div>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {companyProducts.map(product => {
-                    const daysSince = getDaysSinceRevision(product);
-                    const urgency = getUrgencyLevel(product);
-                    
-                    return (
-                      <Card key={product.id} className="p-4 hover:shadow-md transition-shadow">
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-start gap-2">
-                            <div className="flex-1 min-w-0">
-                              <h4 className="font-medium text-sm truncate">{product.name}</h4>
-                              <p className="text-xs text-muted-foreground">{product.category}</p>
-                            </div>
-                            <Badge 
-                              variant={
-                                urgency === 'high' ? 'destructive' : 
-                                urgency === 'medium' ? 'default' : 
-                                urgency === 'low' ? 'secondary' : 
-                                'outline'
-                              }
-                              className="shrink-0 text-xs"
-                            >
-                              {daysSince}d
-                            </Badge>
-                          </div>
-                          
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" asChild className="flex-1 h-8 text-xs">
-                              <Link to={`/product/${product.id}`}>
-                                <ExternalLink className="h-3 w-3 mr-1" />
-                                View
-                              </Link>
-                            </Button>
-                            {product.githubUrl && (
-                              <Button 
-                                size="sm" 
-                                variant="outline" 
-                                asChild 
-                                className="h-8 w-8 p-0"
-                              >
-                                <a 
-                                  href={product.githubUrl} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  title="View on GitHub"
-                                >
-                                  <Github className="h-3 w-3" />
-                                </a>
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      </Card>
-                    );
-                  })}
+                  {companyProducts.map(product => (
+                    <ProductCardWithActions
+                      key={product.id}
+                      product={product}
+                      verification={verifications.find(v => v.product_id === product.id)}
+                      onCertify={handleCertifyProduct}
+                      onSuggestRevision={handleSuggestRevision}
+                    />
+                  ))}
                 </div>
               )}
             </CardContent>
@@ -746,7 +824,7 @@ export default function CompanyDashboardOverview() {
           </DialogHeader>
           {selectedRevision && (
             <div className="bg-muted p-3 rounded-md space-y-1">
-              <p className="text-sm font-medium">{selectedRevision.product_id}</p>
+              <p className="text-sm font-medium">{getProductNameById(selectedRevision.product_id, companyProducts)}</p>
               <p className="text-xs text-muted-foreground">{selectedRevision.changes_summary}</p>
             </div>
           )}
@@ -756,6 +834,85 @@ export default function CompanyDashboardOverview() {
             </Button>
             <Button variant="destructive" onClick={confirmDeleteRevision}>
               Delete Revision
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Certify Product Dialog */}
+      <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <BadgeCheck className="h-5 w-5" />
+              Certify Product
+            </DialogTitle>
+            <DialogDescription>
+              Confirm that the product information is accurate and up to date
+            </DialogDescription>
+          </DialogHeader>
+          {selectedProductId && (
+            <div className="space-y-4">
+              <div className="bg-muted p-4 rounded-lg">
+                <p className="font-medium">{getProductNameById(selectedProductId, companyProducts)}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  By certifying, you confirm that all product information displayed on the catalog is accurate.
+                </p>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                <p>A "Verified by Company" badge will be displayed on the product page.</p>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCertifyDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={submitCertification}>
+              <BadgeCheck className="h-4 w-4 mr-2" />
+              Certify Product
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Suggest Revision Dialog */}
+      <Dialog open={revisionDialogOpen} onOpenChange={setRevisionDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileEdit className="h-5 w-5" />
+              Suggest Revision
+            </DialogTitle>
+            <DialogDescription>
+              Propose changes to update the product information
+            </DialogDescription>
+          </DialogHeader>
+          {selectedProductId && (
+            <div className="space-y-4">
+              <div className="bg-muted p-3 rounded-lg">
+                <p className="font-medium text-sm">{getProductNameById(selectedProductId, companyProducts)}</p>
+              </div>
+              <div>
+                <Label htmlFor="changes-summary">Describe the changes needed</Label>
+                <Textarea
+                  id="changes-summary"
+                  value={changesSummary}
+                  onChange={(e) => setChangesSummary(e.target.value)}
+                  placeholder="Describe what information needs to be updated..."
+                  rows={4}
+                  className="mt-1.5"
+                />
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setRevisionDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={submitRevision} disabled={!changesSummary.trim()}>
+              <FileEdit className="h-4 w-4 mr-2" />
+              Submit for Review
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { ProductDetails } from "@/types/productDetails";
+import { ALL_PRODUCTS } from "@/data";
 
 export interface CompanyInfo {
   id: string;
@@ -147,4 +148,19 @@ export const extractCompaniesFromProducts = (products: ProductDetails[]): Compan
  */
 export const getCompanyProducts = (companyName: string, allProducts: ProductDetails[]): ProductDetails[] => {
   return allProducts.filter(product => product.company === companyName);
+};
+
+/**
+ * Get human-readable product name by product ID
+ */
+export const getProductNameById = (productId: string, allProducts: ProductDetails[] = ALL_PRODUCTS): string => {
+  const product = allProducts.find(p => p.id === productId);
+  return product?.name || productId;
+};
+
+/**
+ * Get product details by ID
+ */
+export const getProductById = (productId: string, allProducts: ProductDetails[] = ALL_PRODUCTS): ProductDetails | undefined => {
+  return allProducts.find(p => p.id === productId);
 };
