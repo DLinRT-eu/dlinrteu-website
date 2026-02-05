@@ -113,16 +113,15 @@ export function CompanyProfileSummary({ userId }: CompanyProfileSummaryProps) {
         )}
 
         <div className="flex gap-2">
-          <Button asChild variant="outline" size="sm" className="flex-1">
-            <Link to="/company/dashboard">
+          <Button asChild variant="default" size="sm" className="flex-1">
+            <Link to="/company/overview">
               <Building2 className="h-4 w-4 mr-2" />
-              Company Dashboard
+              Overview
             </Link>
           </Button>
           <Button asChild variant="outline" size="sm" className="flex-1">
-            <Link to="/company/products">
-              <Package className="h-4 w-4 mr-2" />
-              Manage Products
+            <Link to="/company/dashboard">
+              Actions
             </Link>
           </Button>
         </div>

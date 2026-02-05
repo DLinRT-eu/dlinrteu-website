@@ -151,6 +151,13 @@ export default function Dashboard_Authenticated() {
     // Company quick actions - ordered by workflow priority
     ...(isCompany ? [
       {
+        title: 'Company Overview',
+        description: 'View certification progress and products',
+        icon: Building2,
+        link: '/company/overview',
+        color: 'bg-primary/10 text-primary hover:bg-primary/20'
+      },
+      {
         title: 'Submit Revision',
         description: 'Submit product revision for review',
         icon: FileCheck,
