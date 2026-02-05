@@ -144,6 +144,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
           {isCompany && !isAdmin && (
             <>
               <Button asChild variant="outline" className="justify-start">
+                <Link to="/company/overview">
+                  <Building2 className="h-4 w-4 mr-2" />
+                  Company Overview
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="justify-start">
                 <Link to="/company/revisions">
                   <FileText className="h-4 w-4 mr-2" />
                   Submit Revision
