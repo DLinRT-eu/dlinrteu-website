@@ -76,7 +76,7 @@ const TEAM_MEMBERS = [
     {
     name: "Amith Kamath",
     role: "Reviewer",
-    image: "/people/akamth.jpeg",
+    image: "/people/akamath.jpeg",
     bio: "https://amithjkamath.github.io/",
     email: "amith.kamath@dlinrt.eu",
   },
