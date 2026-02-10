@@ -73,6 +73,13 @@ const TEAM_MEMBERS = [
     bio: "https://linkedin.com/in/ungvaritamas",
     email: "tamas.ungvari@dlinrt.eu",
   },
+    {
+    name: "Amith Kamath",
+    role: "Reviewer",
+    image: "/people/akamth.jpeg",
+    bio: "https://amithjkamath.github.io/",
+    email: "amith.kamath@dlinrt.eu",
+  },
 ];
 
 // Fisher-Yates shuffle algorithm
