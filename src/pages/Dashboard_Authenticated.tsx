@@ -11,7 +11,8 @@ import {
   Users, 
   FileCheck, 
   Building2, 
-  BarChart3, 
+  BarChart3,
+  LayoutDashboard,
   Package, 
   ShoppingCart,
   Shield,
@@ -53,6 +54,13 @@ export default function Dashboard_Authenticated() {
     // Admin quick actions - ordered by workflow priority
     ...(isAdmin ? [
       {
+        title: 'Admin Overview',
+        description: 'Central admin hub',
+        icon: LayoutDashboard,
+        link: '/admin',
+        color: 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+      },
+      {
         title: 'Registrations Review',
         description: 'Approve pending user registrations',
         icon: UserCheck,
@@ -79,6 +87,13 @@ export default function Dashboard_Authenticated() {
         icon: Building2,
         link: '/admin/companies',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      },
+      {
+        title: 'Certification Management',
+        description: 'Manage product certifications',
+        icon: BadgeCheck,
+        link: '/admin/certifications',
+        color: 'bg-teal-50 text-teal-600 hover:bg-teal-100'
       },
       {
         title: 'User Management',
