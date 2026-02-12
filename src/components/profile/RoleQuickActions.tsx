@@ -48,6 +48,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
           {isAdmin && (
             <>
               <Button asChild variant="outline" className="justify-start">
+                <Link to="/admin">
+                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                  Admin Overview
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="justify-start">
                 <Link to="/admin/registrations">
                   <UserCheck className="h-4 w-4 mr-2" />
                   Registrations Review
@@ -69,6 +75,12 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                 <Link to="/admin/companies">
                   <Building2 className="h-4 w-4 mr-2" />
                   Company Revisions
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="justify-start">
+                <Link to="/admin/certifications">
+                  <BadgeCheck className="h-4 w-4 mr-2" />
+                  Certification Management
                 </Link>
               </Button>
               <Button asChild variant="outline" className="justify-start">
