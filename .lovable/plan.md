@@ -1,63 +1,41 @@
 
-# Make Company Overview More Accessible
+
+# Add Admin Overview & Certification Management Quick Actions
 
 ## Problem
-The `/company/overview` page (which contains the new Certification Progress widget and Products with quick actions) is not directly accessible from:
-1. The dashboard-home page (landing page after login)
-2. The profile page
 
-Company representatives must navigate through multiple clicks to reach their overview.
+Two important admin pages are missing from the quick actions on the dashboard-home and profile:
+- `/admin` (Admin Overview) - the central admin hub
+- `/admin/certifications` (Certification Management) - manage product certifications
 
----
+## Changes
 
-## Solution
+### 1. `src/pages/Dashboard_Authenticated.tsx`
 
-Add prominent "Company Overview" links to both pages, making it accessible in **1 click** from either location.
+Add two new quick actions to the admin section:
 
----
+| Action | Position | Icon | Color |
+|--------|----------|------|-------|
+| **Admin Overview** | First (top of admin list) | `LayoutDashboard` | `bg-slate-50 text-slate-600` |
+| **Certification Management** | After "Company Revisions" | `BadgeCheck` | `bg-teal-50 text-teal-600` |
 
-## Changes Summary
+### 2. `src/components/profile/RoleQuickActions.tsx`
 
-### 1. Dashboard_Authenticated.tsx
+Add two new buttons to the admin section:
 
-Add a new quick action for company users that links directly to `/company/overview`:
+| Action | Position |
+|--------|----------|
+| **Admin Overview** | First (top of admin list) |
+| **Certification Management** | After "Company Revisions" |
 
-| Current | After |
-|---------|-------|
-| Submit Revision, My Products, Certify Product, Company Dashboard | **Company Overview** (first), Submit Revision, My Products, Certify Product |
+### 3. Import Updates
 
-The new "Company Overview" button will be placed **first** in the company actions list since it's the main entry point with certification progress and product quick actions.
-
-### 2. RoleQuickActions.tsx (Profile page)
-
-Add "Company Overview" as the first quick action for company users:
-
-| Current | After |
-|---------|-------|
-| Submit Revision, My Products, Certify Product, Company Dashboard, Company Guide | **Company Overview** (first), Submit Revision, My Products, Certify Product, Company Guide |
-
-### 3. CompanyProfileSummary.tsx (Profile page)
-
-Add an "Overview" button alongside the existing buttons, making it the primary action:
-
-| Current Buttons | After |
-|-----------------|-------|
-| Company Dashboard, Manage Products | **Overview**, Company Dashboard, Manage Products |
-
----
+Add `LayoutDashboard` icon import to `Dashboard_Authenticated.tsx` (already imported in `RoleQuickActions.tsx`).
 
 ## Files to Modify
 
 | File | Change |
 |------|--------|
-| `src/pages/Dashboard_Authenticated.tsx` | Add "Company Overview" quick action at position 0 in company actions |
-| `src/components/profile/RoleQuickActions.tsx` | Add "Company Overview" button as first company action |
-| `src/components/profile/CompanyProfileSummary.tsx` | Add "Overview" button as primary action |
+| `src/pages/Dashboard_Authenticated.tsx` | Add 2 quick actions + `LayoutDashboard` import |
+| `src/components/profile/RoleQuickActions.tsx` | Add 2 buttons to admin section |
 
----
-
-## Expected Outcome
-
-- Company representatives can access the Overview page in **1 click** from dashboard-home
-- Company representatives can access the Overview page in **1 click** from their profile
-- The Overview page (with certification progress and quick actions) becomes the natural entry point for company workflow
