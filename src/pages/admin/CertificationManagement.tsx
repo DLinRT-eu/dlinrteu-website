@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Loader2, X } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Clock } from 'lucide-react';
 import { toast } from 'sonner';
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
@@ -27,6 +27,7 @@ import type { Tables } from '@/integrations/supabase/types';
 import { calculateProductContentHash } from '@/utils/productHash';
 import { HashStatusBadge, type HashStatus } from '@/components/admin/HashStatusBadge';
 import { CertificationDetailDialog } from '@/components/admin/CertificationDetailDialog';
+import { CertificationReminderDialog } from '@/components/admin/CertificationReminderDialog';
 
 type CertificationRecord = Tables<'company_product_verifications'>;
 
@@ -51,8 +52,8 @@ export default function CertificationManagement() {
   const [calculatingHashes, setCalculatingHashes] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<ProductWithCertification | null>(null);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
-  const [sendingReminders, setSendingReminders] = useState(false);
-  const [reminderResult, setReminderResult] = useState<{ emailsSent: number; companiesContacted: number; companiesList: string[] } | null>(null);
+  const [reminderDialogOpen, setReminderDialogOpen] = useState(false);
+  const [lastSentAt, setLastSentAt] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isAdmin) {
@@ -60,6 +61,7 @@ export default function CertificationManagement() {
       return;
     }
     fetchCertifications();
+    fetchLastSent();
   }, [isAdmin, navigate]);
 
   const fetchCertifications = async () => {
@@ -219,26 +221,16 @@ export default function CertificationManagement() {
     setDetailDialogOpen(true);
   };
 
-  const handleSendReminders = async () => {
-    setSendingReminders(true);
-    setReminderResult(null);
-    try {
-      const { data, error } = await supabase.functions.invoke('send-certification-reminder');
-      if (error) throw error;
-      if (!data.success) throw new Error(data.error || 'Unknown error');
-      setReminderResult({
-        emailsSent: data.emailsSent,
-        companiesContacted: data.companiesContacted,
-        companiesList: data.companiesList || [],
-      });
-      toast.success(`Sent ${data.emailsSent} reminder email${data.emailsSent !== 1 ? 's' : ''} to ${data.companiesContacted} compan${data.companiesContacted !== 1 ? 'ies' : 'y'}`);
-    } catch (error: any) {
-      console.error('Error sending reminders:', error);
-      toast.error(`Failed to send reminders: ${error.message}`);
-    } finally {
-      setSendingReminders(false);
-    }
+  const fetchLastSent = async () => {
+    const { data } = await supabase
+      .from('certification_reminder_logs')
+      .select('sent_at')
+      .order('sent_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (data?.sent_at) setLastSentAt(data.sent_at);
   };
+
 
   const handleExportCSV = () => {
     const csvData = filteredProducts.map(item => ({
@@ -326,55 +318,29 @@ export default function CertificationManagement() {
                 Monitor and manage product certification status across all companies
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                onClick={handleSendReminders}
-                disabled={sendingReminders}
-              >
-                {sendingReminders ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Sending…
-                  </>
-                ) : (
-                  <>
-                    <Mail className="h-4 w-4 mr-2" />
-                    Send Certification Reminders
-                  </>
-                )}
-              </Button>
-              <Button variant="outline" onClick={() => navigate('/admin/companies')}>
-                <Building2 className="h-4 w-4 mr-2" />
-                Manage Companies
-              </Button>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setReminderDialogOpen(true)}
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Send Certification Reminders
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/admin/companies')}>
+                  <Building2 className="h-4 w-4 mr-2" />
+                  Manage Companies
+                </Button>
+              </div>
+              {lastSentAt && (
+                <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <Clock className="h-3 w-3" />
+                  Last sent {formatDistanceToNow(new Date(lastSentAt), { addSuffix: true })}
+                </span>
+              )}
             </div>
           </div>
 
-          {/* Reminder Result Banner */}
-          {reminderResult && (
-            <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg px-4 py-3">
-              <div className="flex items-center gap-2 text-green-800">
-                <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
-                <span className="text-sm font-medium">
-                  Sent {reminderResult.emailsSent} email{reminderResult.emailsSent !== 1 ? 's' : ''} to {reminderResult.companiesContacted} compan{reminderResult.companiesContacted !== 1 ? 'ies' : 'y'}
-                  {reminderResult.companiesList.length > 0 && (
-                    <span className="font-normal text-green-700 ml-1">
-                      ({reminderResult.companiesList.join(', ')})
-                    </span>
-                  )}
-                </span>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0 text-green-600 hover:text-green-800 hover:bg-green-100"
-                onClick={() => setReminderResult(null)}
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-          )}
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -571,7 +537,15 @@ export default function CertificationManagement() {
             currentHash={selectedProduct.currentHash}
           />
         )}
+
+        {/* Certification Reminder Dialog */}
+        <CertificationReminderDialog
+          open={reminderDialogOpen}
+          onOpenChange={setReminderDialogOpen}
+          onSent={() => fetchLastSent()}
+        />
       </PageLayout>
     </>
   );
 }
+

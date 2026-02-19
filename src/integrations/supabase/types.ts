@@ -181,6 +181,42 @@ export type Database = {
           },
         ]
       }
+      certification_reminder_logs: {
+        Row: {
+          companies: string[]
+          emails_failed: number
+          emails_sent: number
+          id: string
+          message_body: string
+          recipients: Json
+          sent_at: string
+          sent_by: string
+          subject: string
+        }
+        Insert: {
+          companies?: string[]
+          emails_failed?: number
+          emails_sent?: number
+          id?: string
+          message_body: string
+          recipients?: Json
+          sent_at?: string
+          sent_by: string
+          subject: string
+        }
+        Update: {
+          companies?: string[]
+          emails_failed?: number
+          emails_sent?: number
+          id?: string
+          message_body?: string
+          recipients?: Json
+          sent_at?: string
+          sent_by?: string
+          subject?: string
+        }
+        Relationships: []
+      }
       changelog_entries: {
         Row: {
           author: string | null
