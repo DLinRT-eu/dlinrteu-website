@@ -1,132 +1,69 @@
 
-# Certification Reminder Composer & Delivery Log
 
-## Overview
+# Complete Missing Information for Brainlab Products
 
-Three improvements are needed:
+## Summary
 
-1. **Editable subject & message** — an admin should be able to customise the email before sending
-2. **Recipient preview** — show exactly who will receive the email before and after sending
-3. **Send history** — persist a log of each outreach batch so it is possible to see when the last reminder was sent and to whom
+Both Brainlab product entries are missing several fields that are present in other well-populated products. Using data extracted from the official FDA 510(k) summaries (K250440 and K243633), I will enrich both products with verified information.
 
-The DB query confirms there are currently **6 recipients across 5 companies** (Accuray, MVision AI ×2, Philips, PTW, Synaptiq). No admin was incorrectly included; the earlier delivery uncertainty was caused by the absence of any logging.
+## Data Sources
 
----
+- **K250440 PDF** (FDA clearance letter for RT Elements 4.5) -- covers AI Tumor Segmentation
+- **K243633 PDF** (FDA clearance letter for Brainlab Elements 7.0) -- covers Contouring 5.0 / APM
+- **Brainlab website** and **Novalis Circle announcement** -- product context
 
-## Root Cause of "Not All Companies Reached"
+## Corrections and Additions
 
-There is no persistent log of what was sent. The only feedback was an in-memory banner that disappears on page reload. PTW's rep also holds a `reviewer` role, which is fine (not excluded), but it confirms that role overlap is present — making auditing essential.
+### Product 1: Elements AI Tumor Segmentation (`brainlab-elements-ai-tumor-seg`)
 
----
+**Corrections:**
+- `productUrl` -- current URL is dead (404). Update to `https://www.brainlab.com/radiosurgery-products/elements/multiple-brain-metastases/` (closest live page)
+- `diseaseTargeted` -- add "Cranial and Paraspinal Nerve Tumors" and "Glioneuronal Tumors" (confirmed from FDA validation data)
+- `keyFeatures` -- also supports cranial/paraspinal nerve tumors and glioneuronal tumors per FDA summary
 
-## Database Change
+**Additions:**
+- `technology` -- integration with RT Contouring 4.5 module, on-premise deployment, GPU-accelerated processing
+- `partOf` -- RT Elements 4.5 suite, module relationship
+- `usesAI` -- `true`
+- `contactEmail` -- `regulatory.affairs@brainlab.com` (from FDA filing)
+- `regulatory.fda.regulationNumber` -- `21 CFR 892.5050`
+- `regulatory.fda.productCode` -- `MUJ, QIH`
+- `regulatory.intendedUseStatement` -- expanded to match FDA wording
+- `evidence` -- add validation data from FDA: 412 patients, 595 scans, 1878 annotations, Dice >= 0.75 overall
+- `limitations` -- minimum tumor diameter 3mm for metastases / 10mm for primary tumors; CE-T1 MRI only; adult patients only
+- `priorVersions` -- link to K223279 (RT Elements 4.0)
+- `developmentStage` -- `"certified"`
 
-A new table `certification_reminder_logs` is required to persist each send batch:
+### Product 2: Elements RT Segmentation / APM (`brainlab-elements-rt-seg`)
 
-```sql
-CREATE TABLE certification_reminder_logs (
-  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  sent_at       timestamptz NOT NULL DEFAULT now(),
-  sent_by       uuid NOT NULL,               -- admin user id
-  subject       text NOT NULL,
-  message_body  text NOT NULL,               -- plain-text version for audit
-  recipients    jsonb NOT NULL,              -- array of { email, name, company }
-  emails_sent   int NOT NULL DEFAULT 0,
-  emails_failed int NOT NULL DEFAULT 0,
-  companies     text[] NOT NULL DEFAULT '{}'
-);
-```
+**Corrections:**
+- `productUrl` -- update to live URL
+- `description` -- clarify it is part of Brainlab Elements Contouring 5.0, not a standalone product
+- `regulatory.fda.notes` -- K243633 covers Brainlab Elements 7.0 suite including Contouring 5.0 (not "RT Segmentation" specifically)
+- `regulatory.fda.regulationNumber` -- `21 CFR 892.2050` (different from the tumor seg product)
+- `regulatory.fda.productCode` -- `QIH, JAK, LLZ`
 
-RLS policies:
-- `SELECT`: admins only (`has_role(auth.uid(), 'admin')`)
-- `INSERT`: service role only (the edge function uses service role)
-- No UPDATE / DELETE
+**Additions:**
+- `technology` -- atlas-based + ML-based segmentation backend, gRPC API, on-premise deployment, integration with TheraPanacea Art-Plan for extracranial structures
+- `partOf` -- Brainlab Elements Contouring 5.0 (part of Brainlab Elements 7.0)
+- `usesAI` -- `true`
+- `contactEmail` -- `regulatory.affairs@brainlab.com`
+- `keyFeatures` -- add: anomaly detection, atlas-based + ML segmentation, customizable segmentation templates, integration with TheraPanacea Art-Plan, basal ganglia region support
+- `anatomicalLocation` -- add "Basal Ganglia" and "Extracranial" (confirmed from K250440 device name listing and K243633)
+- `limitations` -- GPU required for ML features (8GB vRAM minimum); Windows 10/Server only
+- `priorVersions` -- link to K223106 (Brainlab Elements 6.0)
+- `developmentStage` -- `"certified"`
+- `supportedStructures` -- add regions: Cranial, Basal Ganglia, Head and Neck, Pelvic, Spine, Thoracic and Spine, Extracranial (from K250440 device name)
 
----
-
-## Changes
-
-### 1. Migration
-
-Create the `certification_reminder_logs` table with the schema above and appropriate RLS policies.
-
-### 2. Edge Function: `send-certification-reminder/index.ts`
-
-**New request body** (JSON):
-```json
-{
-  "customSubject": "...",    // optional override
-  "customBody": "..."        // optional plain-text body to inject into template
-}
-```
-
-**New behaviour**:
-- Accept `customSubject` and `customBody` from the POST body
-- If `customSubject` is provided, use it instead of the default subject
-- If `customBody` is provided, inject it as the main paragraph block in the HTML template (replacing the fixed paragraphs), while keeping the green header, CTA button, and footer
-- After sending all emails, insert **one row** into `certification_reminder_logs` with the full recipient list, subject used, plain-text body used, counts, and `sent_by` (from the verified admin user id)
-- Also return the enriched `recipients` list in the response body
-
-### 3. New Component: `src/components/admin/CertificationReminderDialog.tsx`
-
-A modal dialog triggered by the "Send Certification Reminders" button, with three sections:
-
-**Section A — Recipients Preview**
-A read-only list fetched from `company_representatives` (via `supabase.functions.invoke` with a `previewOnly: true` flag, or a direct client-side query since admins have access). Shows:
-- Name, email, company name
-- Small badge for role (company / reviewer)
-
-**Section B — Compose**
-- `Subject` — pre-filled with the default, fully editable `Input`
-- `Message` — a `Textarea` pre-filled with the default body text, editable (plain text; the HTML wrapper is applied server-side)
-
-**Section C — Send History** (collapsible/tab)
-- Queries `certification_reminder_logs` ordered by `sent_at DESC`
-- Shows last 5 batches: date, sent by, subject, emails sent/failed, list of companies
-
-**Actions**: "Cancel" and "Send to X recipients →" (disabled while sending)
-
-### 4. Updated Page: `src/pages/admin/CertificationManagement.tsx`
-
-- The "Send Certification Reminders" button now **opens the dialog** instead of calling the function directly
-- The in-memory result banner is replaced by the persistent history shown inside the dialog
-- A small "Last sent: [date]" label appears next to the button when a log entry exists, fetched on page load
-
----
-
-## Files to Create / Modify
+## File Changes
 
 | File | Action |
 |------|--------|
-| DB migration | **Create** — `certification_reminder_logs` table + RLS |
-| `supabase/functions/send-certification-reminder/index.ts` | **Modify** — accept custom subject/body, log to DB, return recipients |
-| `src/components/admin/CertificationReminderDialog.tsx` | **Create** — compose + recipients + history dialog |
-| `src/pages/admin/CertificationManagement.tsx` | **Modify** — wire button to dialog, show "last sent" label |
+| `src/data/products/auto-contouring/brainlab.ts` | Update both product objects with corrected and additional fields |
 
----
+## Technical Details
 
-## Default Subject & Body (pre-filled in the dialog)
+All additions use existing fields from the `ProductDetails` type -- no schema changes needed. The `partOf`, `usesAI`, `evidence`, `limitations`, `priorVersions`, `developmentStage`, `technology`, and `contactEmail` fields are all already defined in the type.
 
-**Subject**
-```
-Action Required: Certify Your Product Information on DLinRT.eu – {CompanyName}
-```
+The `lastUpdated` and `lastRevised` dates will be set to `"2026-02-20"` to reflect this update.
 
-**Body** (editable block — `{FirstName}`, `{CompanyName}` are substituted server-side per recipient)
-```
-We are reaching out regarding the DLinRT.eu Company Certification Program for {CompanyName}.
-
-The certification portal is now open and we kindly invite you to review your company's product information and certify that everything is accurate and up to date.
-
-Your participation helps maintain the quality and reliability of our platform for the entire radiotherapy community.
-```
-
-The action checklist bullets and CTA button remain fixed in the HTML template.
-
----
-
-## Security
-
-- The edge function still validates admin JWT before processing
-- `certification_reminder_logs` is only writable by the service role (via the edge function) and only readable by admins
-- Custom body content is plain text; HTML injection is not possible because the template wraps it in escaped `<p>` tags server-side
