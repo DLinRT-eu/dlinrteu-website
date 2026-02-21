@@ -16,7 +16,9 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "ge-healthcare-irt"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/ge_healthcare.png"
+    "logoUrl": "/logos/ge_healthcare.png",
+    "primaryTask": "Reconstruction",
+    "secondaryTasks": ["Auto-Contouring", "Image Enhancement", "Platform"]
   },
   {
     "id": "philips-healthcare",
@@ -33,7 +35,9 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "philips-smartdose-ct-enhancement"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/philips.png"
+    "logoUrl": "/logos/philips.png",
+    "primaryTask": "Image Synthesis",
+    "secondaryTasks": ["Reconstruction", "Auto-Contouring", "Image Enhancement"]
   },
   {
     "id": "siemens-healthineers",
@@ -48,7 +52,9 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "siemens-deep-resolve"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/siemens.png"
+    "logoUrl": "/logos/siemens.png",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Image Synthesis", "Image Enhancement", "Reconstruction"]
   },
   {
     "id": "canon-medical",
@@ -61,7 +67,9 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "canon-piqe"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/canon.jpg"
+    "logoUrl": "/logos/canon.jpg",
+    "primaryTask": "Reconstruction",
+    "secondaryTasks": ["Image Enhancement"]
   },
   {
     "id": "united-imaging",
@@ -75,7 +83,9 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "united-ucs-ai"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/unitedimaging.png"
+    "logoUrl": "/logos/unitedimaging.png",
+    "primaryTask": "Reconstruction",
+    "secondaryTasks": ["Image Enhancement"]
   },
   {
     "id": "taiwan-medical-imaging",
@@ -86,7 +96,8 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "taimedimg-deepmets"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/Taiwan_MedImag.svg"
+    "logoUrl": "/logos/Taiwan_MedImag.svg",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "algomedica",
@@ -97,6 +108,7 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "algomedica-pixelshine"
     ],
     "category": "Medical Imaging",
-    "logoUrl": "/logos/algomedica.png"
+    "logoUrl": "/logos/algomedica.png",
+    "primaryTask": "Image Enhancement"
   }
 ];

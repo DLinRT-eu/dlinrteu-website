@@ -12,9 +12,11 @@ interface CompanyCardProps {
   website?: string;
   logoUrl?: string;
   products: ProductDetails[];
+  primaryTask?: string;
+  secondaryTasks?: string[];
 }
 
-const CompanyCard = ({ name, description, website, logoUrl, products }: CompanyCardProps) => {
+const CompanyCard = ({ name, description, website, logoUrl, products, primaryTask, secondaryTasks }: CompanyCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded(!expanded);
@@ -53,6 +55,21 @@ const CompanyCard = ({ name, description, website, logoUrl, products }: CompanyC
                 )}
               </div>
               <p className="text-gray-600 text-sm">{description}</p>
+              
+              {/* Task badges */}
+              {primaryTask && (
+                <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                  <Badge className="bg-[#00A6D6] text-white text-xs hover:bg-[#00A6D6]/90">
+                    {primaryTask}
+                  </Badge>
+                  {secondaryTasks?.map((task) => (
+                    <Badge key={task} variant="outline" className="text-xs border-[#00A6D6]/40 text-[#00A6D6]">
+                      {task}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+
               <div className="flex items-center mt-2 text-gray-500">
                 <Package className="w-4 h-4 mr-1" />
                 <span>{products.length} product{products.length !== 1 ? 's' : ''}</span>
