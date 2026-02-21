@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
-import { Search, Building, ArrowDownAZ, ArrowDownZA, Download, FileSpreadsheet, FileText, Code } from 'lucide-react';
+import { Search, Building, ArrowDownAZ, ArrowDownZA, Download, FileSpreadsheet, FileText, Code, Filter } from 'lucide-react';
 import CompanyCard from '@/components/CompanyCard';
 import dataService from '@/services/DataService';
 import SEO from '@/components/SEO';
@@ -12,15 +12,36 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
 import { exportCompaniesToExcel, exportCompaniesToPDF, exportCompaniesToJSON, CompanyExportData } from '@/utils/companyExport';
+
+const TASK_CATEGORIES = [
+  'Auto-Contouring',
+  'Clinical Prediction',
+  'Image Enhancement',
+  'Image Synthesis',
+  'Performance Monitor',
+  'Platform',
+  'Reconstruction',
+  'Registration',
+  'Tracking',
+  'Treatment Planning',
+] as const;
 
 const Companies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortAscending, setSortAscending] = useState(true);
   const [sortActive, setSortActive] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [taskFilter, setTaskFilter] = useState<string>('all');
   const { toast } = useToast();
 
   // Get companies and their products using centralized getActiveCompanies()
@@ -95,12 +116,21 @@ const Companies = () => {
     }))
   };
 
+  // Filter companies based on task category
+  const taskFilteredCompanies = useMemo(() => {
+    if (taskFilter === 'all') return shuffledCompanies;
+    return shuffledCompanies.filter(company => 
+      company.primaryTask === taskFilter || 
+      company.secondaryTasks?.includes(taskFilter)
+    );
+  }, [shuffledCompanies, taskFilter]);
+
   // Filter companies based on search query
   const filteredCompanies = useMemo(() => {
-    if (!searchQuery) return shuffledCompanies;
+    if (!searchQuery) return taskFilteredCompanies;
     
     const query = searchQuery.toLowerCase();
-    return shuffledCompanies.filter(company => 
+    return taskFilteredCompanies.filter(company => 
       company.name.toLowerCase().includes(query) ||
       company.description.toLowerCase().includes(query) ||
       company.products.some(product => 
@@ -108,7 +138,7 @@ const Companies = () => {
         product.description.toLowerCase().includes(query)
       )
     );
-  }, [shuffledCompanies, searchQuery]);
+  }, [taskFilteredCompanies, searchQuery]);
 
   // Sort companies based on name only if sortActive is true
   const sortedCompanies = useMemo(() => {
@@ -213,6 +243,20 @@ const Companies = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+
+          {/* Task filter */}
+          <Select value={taskFilter} onValueChange={setTaskFilter}>
+            <SelectTrigger className="w-[200px]">
+              <Filter className="h-4 w-4 mr-2" />
+              <SelectValue placeholder="Filter by task" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Tasks</SelectItem>
+              {TASK_CATEGORIES.map(task => (
+                <SelectItem key={task} value={task}>{task}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           
           {/* Sort button */}
           <Button
@@ -254,6 +298,7 @@ const Companies = () => {
         <div className="mb-6">
           <p className="text-gray-600">
             Showing {sortedCompanies.length} {sortedCompanies.length === 1 ? 'company' : 'companies'}
+            {taskFilter !== 'all' ? ` for "${taskFilter}"` : ''}
             {sortActive ? (sortAscending ? ' (A-Z)' : ' (Z-A)') : ' (Random order)'}
           </p>
         </div>
@@ -268,6 +313,8 @@ const Companies = () => {
               logoUrl={company.logoUrl}
               products={company.products as any[]}
               description={company.description}
+              primaryTask={company.primaryTask}
+              secondaryTasks={company.secondaryTasks}
             />
           ))}
           

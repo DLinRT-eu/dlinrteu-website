@@ -11,7 +11,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "elekta-iris"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/Elekta.png"
+    "logoUrl": "/logos/Elekta.png",
+    "primaryTask": "Reconstruction"
   },
   {
     "id": "accuray",
@@ -23,7 +24,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/accuray.png"
+    "logoUrl": "/logos/accuray.png",
+    "primaryTask": "Tracking"
   },
   {
     "id": "sun-nuclear",
@@ -35,7 +37,9 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "sun-nuclear-suncheck-patient"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/SunNuclear.png"
+    "logoUrl": "/logos/SunNuclear.png",
+    "primaryTask": "Treatment Planning",
+    "secondaryTasks": ["Performance Monitor"]
   },
   {
     "id": "varian",
@@ -46,7 +50,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "varian-mobius3d"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/varian.jpg"
+    "logoUrl": "/logos/varian.jpg",
+    "primaryTask": "Performance Monitor"
   },
   {
     "id": "md-anderson",
@@ -57,7 +62,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "rpa-radiation-planning-assistant"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/md_anderson.svg"
+    "logoUrl": "/logos/md_anderson.svg",
+    "primaryTask": "Treatment Planning"
   },
   {
     "id": "brainlab",
@@ -69,6 +75,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
       "brainlab-elements-rt-seg"
     ],
     "category": "Radiotherapy Equipment",
-    "logoUrl": "/logos/Brainlab.jpg"
+    "logoUrl": "/logos/Brainlab.jpg",
+    "primaryTask": "Auto-Contouring"
   },
 ];

@@ -9,7 +9,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://spectronicmedical.com/",
     "productIds": ["spectronic-mriplanner"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/spectronic-medical.jpg"
+    "logoUrl": "/logos/spectronic-medical.jpg",
+    "primaryTask": "Image Synthesis"
   },
   {
     "id": "syntheticmr",
@@ -18,7 +19,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://syntheticmr.com/",
     "productIds": ["syntheticmr-neuro", "syntheticmr-spine"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/syntheticMRI.png"
+    "logoUrl": "/logos/syntheticMRI.png",
+    "primaryTask": "Image Synthesis"
   },
   {
     "id": "raysearch",
@@ -27,7 +29,9 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://www.raysearchlabs.com",
     "productIds": ["raysearch-raystation", "raysearch-raystation-planning"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/raystation.jpg"
+    "logoUrl": "/logos/raystation.jpg",
+    "primaryTask": "Treatment Planning",
+    "secondaryTasks": ["Auto-Contouring"]
   },
   {
     "id": "airs-medical",
@@ -38,7 +42,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
       "airs-swiftmr"
     ],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/airs.jpg"
+    "logoUrl": "/logos/airs.jpg",
+    "primaryTask": "Image Enhancement"
   },
   {
     "id": "claripi",
@@ -47,7 +52,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://claripi.com/",
     "productIds": ["claripi-clarict-ai"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/claripi.jpg"
+    "logoUrl": "/logos/claripi.jpg",
+    "primaryTask": "Image Enhancement"
   },
   {
     "id": "subtle-medical",
@@ -61,7 +67,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
       "subtle-hd"
     ],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/SubtleMedical.jpg"
+    "logoUrl": "/logos/SubtleMedical.jpg",
+    "primaryTask": "Image Enhancement"
   },
   {
     "id": "ptw-dosimetry",
@@ -70,7 +77,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://www.ptwdosimetry.com",
     "productIds": ["ptw-aqualis"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/ptw.jpg"
+    "logoUrl": "/logos/ptw.jpg",
+    "primaryTask": "Performance Monitor"
   },
   {
     "id": "pymedix",
@@ -79,7 +87,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://pymedix.com/",
     "productIds": ["pymedix-registration"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/pymedix.png"
+    "logoUrl": "/logos/pymedix.png",
+    "primaryTask": "Registration"
   },
   {
     "id": "medlever",
@@ -88,6 +97,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://medlever.com/",
     "productIds": ["medlever-workflow-management"],
     "category": "Specialized Solutions",
-    "logoUrl": "/logos/medlever.jpg"
+    "logoUrl": "/logos/medlever.jpg",
+    "primaryTask": "Platform"
   }
 ];

@@ -9,7 +9,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.ai-medical.ch/",
     "productIds": ["ai-medical-jazz"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/ai-medical.png"
+    "logoUrl": "/logos/ai-medical.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "carina-ai",
@@ -18,7 +19,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://carina.ai/",
     "productIds": ["carina-intcontour"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/carina.jpg"
+    "logoUrl": "/logos/carina.jpg",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "coreline-soft",
@@ -27,7 +29,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.corelinesoft.com/",
     "productIds": ["coreline-aview-rt-acs"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/coreline.jpg"
+    "logoUrl": "/logos/coreline.jpg",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "everfortune-ai",
@@ -36,7 +39,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.everfortune.ai/",
     "productIds": ["everfortune-rt-suite"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/ever-fortune.png"
+    "logoUrl": "/logos/ever-fortune.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "hura-imaging",
@@ -45,7 +49,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.huraimaging.com/",
     "productIds": ["hura-dvtarget"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/huraimaging.png"
+    "logoUrl": "/logos/huraimaging.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "limbus-ai",
@@ -54,7 +59,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.limbus.ai",
     "productIds": ["limbus-contour"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/Limbus-ai.png"
+    "logoUrl": "/logos/Limbus-ai.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "manteia",
@@ -67,7 +73,9 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
       "manteia-mozi"
     ],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/manteia.png"
+    "logoUrl": "/logos/manteia.png",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Treatment Planning"]
   },
   {
     "id": "mim-software",
@@ -76,7 +84,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.mimsoftware.com/",
     "productIds": ["mim-contour-protegeai"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/mimsoftware.svg"
+    "logoUrl": "/logos/mimsoftware.svg",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "mirada-medical",
@@ -85,7 +94,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://mirada-medical.com",
     "productIds": ["mirada-dlc"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/mirada-medical.png"
+    "logoUrl": "/logos/mirada-medical.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "mvision-ai",
@@ -94,7 +104,9 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.mvision.ai",
     "productIds": ["mvision-ai-contouring", "mvision-verify", "mvision-ai-workspace-plus"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/mvision-ai.png"
+    "logoUrl": "/logos/mvision-ai.png",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Performance Monitor", "Platform"]
   },
   {
     "id": "radformation",
@@ -103,7 +115,9 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://radformation.com/",
     "productIds": ["radformation-autocontour", "radformation-clearcheck"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/radformation.svg"
+    "logoUrl": "/logos/radformation.svg",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Performance Monitor"]
   },
   {
     "id": "synaptiq",
@@ -112,7 +126,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://synaptiq.io/",
     "productIds": ["synaptiq-mediq-rt"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/synaptiq.png"
+    "logoUrl": "/logos/synaptiq.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "therapanacea",
@@ -121,7 +136,9 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.therapanacea.eu",
     "productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic", "therapanacea-smartfuse"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/therapanacea.png"
+    "logoUrl": "/logos/therapanacea.png",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Image Synthesis", "Registration"]
   },
   {
     "id": "vysioner",
@@ -130,7 +147,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.vysioneer.com/",
     "productIds": ["vysioner-vbrain"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/vysioner.png"
+    "logoUrl": "/logos/vysioner.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "wisdom-tech",
@@ -139,7 +157,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "http://www.wisdomtech.com.cn/",
     "productIds": ["wisdom-deep-contour"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/wisdom-tech.png"
+    "logoUrl": "/logos/wisdom-tech.png",
+    "primaryTask": "Auto-Contouring"
   },
   {
     "id": "oncosoft",
@@ -148,6 +167,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.oncosoft.io/",
     "productIds": ["oncosoft-oncostudio"],
     "category": "Auto-Contouring",
-    "logoUrl": "/logos/Oncosoft.png"
+    "logoUrl": "/logos/Oncosoft.png",
+    "primaryTask": "Auto-Contouring"
   }
 ];
