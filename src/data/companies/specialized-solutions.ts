@@ -10,7 +10,8 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "productIds": ["spectronic-mriplanner"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/spectronic-medical.jpg",
-    "primaryTask": "Image Synthesis"
+    "primaryTask": "Image Synthesis",
+    "secondaryTasks": ["Auto-Contouring"]
   },
   {
     "id": "syntheticmr",

@@ -2,6 +2,9 @@
 import React, { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { Search, Building, ArrowDownAZ, ArrowDownZA, Download, FileSpreadsheet, FileText, Code, Filter } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import CompanyLogoGrid from '@/components/CompanyLogoGrid';
 import CompanyCard from '@/components/CompanyCard';
 import dataService from '@/services/DataService';
 import SEO from '@/components/SEO';
@@ -42,6 +45,7 @@ const Companies = () => {
   const [sortActive, setSortActive] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [taskFilter, setTaskFilter] = useState<string>('all');
+  const [logosOnly, setLogosOnly] = useState(false);
   const { toast } = useToast();
 
   // Get companies and their products using centralized getActiveCompanies()
@@ -292,6 +296,11 @@ const Companies = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          {/* Logos only toggle */}
+          <div className="flex items-center gap-2">
+            <Switch id="logos-only" checked={logosOnly} onCheckedChange={setLogosOnly} />
+            <Label htmlFor="logos-only" className="text-sm cursor-pointer">Logos only</Label>
+          </div>
         </div>
 
         {/* Companies count */}
@@ -303,27 +312,31 @@ const Companies = () => {
           </p>
         </div>
 
-        {/* Companies list */}
-        <div className="space-y-6">
-          {sortedCompanies.map((company) => (
-            <CompanyCard 
-              key={company.id} 
-              name={company.name}
-              website={company.website}
-              logoUrl={company.logoUrl}
-              products={company.products as any[]}
-              description={company.description}
-              primaryTask={company.primaryTask}
-              secondaryTasks={company.secondaryTasks}
-            />
-          ))}
-          
-          {sortedCompanies.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No companies found matching your search criteria.</p>
-            </div>
-          )}
-        </div>
+        {/* Companies list or logo grid */}
+        {logosOnly ? (
+          <CompanyLogoGrid companies={sortedCompanies} taskFilter={taskFilter} />
+        ) : (
+          <div className="space-y-6">
+            {sortedCompanies.map((company) => (
+              <CompanyCard 
+                key={company.id} 
+                name={company.name}
+                website={company.website}
+                logoUrl={company.logoUrl}
+                products={company.products as any[]}
+                description={company.description}
+                primaryTask={company.primaryTask}
+                secondaryTasks={company.secondaryTasks}
+              />
+            ))}
+            
+            {sortedCompanies.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg">No companies found matching your search criteria.</p>
+              </div>
+            )}
+          </div>
+        )}
       </main>
       <Footer />
     </div>
