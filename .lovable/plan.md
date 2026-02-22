@@ -1,66 +1,33 @@
-# Add Task Categories to Companies (Primary & Secondary)
 
-## Overview
+# Fix Spectronic Task + Logos-Only View with Export
 
-Add task-level categories to companies, to select only the companes that have products for specific tasks. Try to re-use the products `category` (primary) and `secondaryCategories`. Currently, companies have a broad `category` field ("Auto-Contouring", "Medical Imaging", etc.) that is not displayed in the UI and doesn't align with the product task taxonomy. This change introduces `primaryTask` and `secondaryTasks` fields derived from the same task list used by products.
+## 1. Data Fix: Spectronic Missing Secondary Task
 
-## Task Taxonomy (shared with products)
+Spectronic Medical's product (MRIplanner) has `secondaryCategories: ["Auto-Contouring"]`, but the company entry lacks a corresponding `secondaryTasks` field. This means filtering by "Auto-Contouring" on the Companies page won't show Spectronic.
 
-Reconstruction, Image Enhancement, Image Synthesis, Auto-Contouring, Tracking, Treatment Planning, Clinical Prediction, Registration, Performance Monitor, Platform
+**Fix:** Add `secondaryTasks: ["Auto-Contouring"]` to the Spectronic company entry in `src/data/companies/specialized-solutions.ts`.
 
-## Changes
+## 2. Logos-Only Toggle View
 
-### 1. Type: `src/types/company.d.ts`
+Add a toggle on the Companies page to switch between the current detailed card view and a compact "Logos Only" grid view. This is useful for presentations -- showing all vendor logos at a glance and exporting them as a single image.
 
-Add two new optional fields:
+**How it works:**
+- A Switch toggle labeled "Logos only" in the toolbar area
+- When enabled, the company list is replaced by a responsive grid of company logos (with company names below each logo)
+- An "Export as Image" button appears that captures the logo grid as a PNG using `html2canvas` (already available in the project)
+- The existing search/filter/sort controls still apply to the logos view
 
-- `primaryTask?: string` -- the company's main task area (e.g., "Auto-Contouring")
-- `secondaryTasks?: string[]` -- additional task areas the company operates in
+## Files to Modify
 
-The existing `category` field is kept for backward compatibility (it serves as the broad file-level grouping).
+| File | Change |
+|------|--------|
+| `src/data/companies/specialized-solutions.ts` | Add `secondaryTasks: ["Auto-Contouring"]` to Spectronic |
+| `src/pages/Companies.tsx` | Add logos-only toggle state, conditional rendering of logo grid vs card list, and "Export as Image" button |
 
-### 2. Data Files: All company data files
+## Technical Details
 
-Populate `primaryTask` and `secondaryTasks` for each company based on the task categories of their products. For example:
-
-- **MVision AI** (products: auto-contouring) -> `primaryTask: "Auto-Contouring"`
-- **Brainlab** (products: auto-contouring + treatment planning) -> `primaryTask: "Auto-Contouring"`, `secondaryTasks: ["Treatment Planning"]`
-- **RaySearch** (products: treatment planning + auto-contouring) -> `primaryTask: "Treatment Planning"`, `secondaryTasks: ["Auto-Contouring"]`
-
-Each company's tasks will be derived by looking at their products' `category` and `secondaryCategories` values to ensure accuracy.
-
-Files to update:
-
-- `src/data/companies/auto-contouring.ts`
-- `src/data/companies/medical-imaging.ts`
-- `src/data/companies/specialized-solutions.ts`
-- `src/data/companies/radiotherapy-equipment.ts`
-
-### 3. UI: `src/components/CompanyCard.tsx`
-
-Display the task categories as badges below the company description:
-
-- Primary task shown as a filled badge
-- Secondary tasks shown as outline badges
-
-### 4. Filtering: `src/pages/Companies.tsx`
-
-Add a task filter dropdown (matching the product task taxonomy) so users can filter companies by their primary or secondary task category.
-
-## Files to Create / Modify
-
-
-| File                                           | Action                                        |
-| ---------------------------------------------- | --------------------------------------------- |
-| `src/types/company.d.ts`                       | Add `primaryTask` and `secondaryTasks` fields |
-| `src/data/companies/auto-contouring.ts`        | Populate task fields for all entries          |
-| `src/data/companies/medical-imaging.ts`        | Populate task fields for all entries          |
-| `src/data/companies/specialized-solutions.ts`  | Populate task fields for all entries          |
-| `src/data/companies/radiotherapy-equipment.ts` | Populate task fields for all entries          |
-| `src/components/CompanyCard.tsx`               | Show task badges                              |
-| `src/pages/Companies.tsx`                      | Add task filter dropdown                      |
-
-
-## How Primary/Secondary Tasks Are Determined
-
-For each company, I will inspect the `category` of every product linked via `productIds`, plus their `secondaryCategories`. The most frequent task becomes `primaryTask`; the remaining unique tasks become `secondaryTasks`. This ensures the company-level tasks accurately reflect their product portfolio.
+- The logos-only grid will use a responsive CSS grid (6 columns on desktop, 4 on tablet, 2 on mobile)
+- Each logo cell shows the company logo image (from `logoUrl`) and the company name
+- The "Export as Image" button uses `html2canvas` to render the logo grid div to a canvas, then triggers a PNG download
+- The `Switch` component from `@/components/ui/switch` is used for the toggle
+- All existing filters (task, search, sort) continue to work in logos-only mode, so you can export logos for a specific task category
