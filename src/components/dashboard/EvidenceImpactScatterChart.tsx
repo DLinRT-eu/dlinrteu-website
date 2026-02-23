@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartContainer } from "@/components/ui/chart";
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ResponsiveChartWrapper from './ResponsiveChartWrapper';
-import { TASK_COLORS, getTaskColor } from '@/utils/chartColors';
+import { getTaskColor } from '@/utils/chartColors';
 import { ProductDetails } from '@/types/productDetails';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
@@ -14,42 +17,23 @@ interface EvidenceImpactScatterChartProps {
 const RIGOR_MAP: Record<string, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
 const IMPACT_MAP: Record<string, number> = { I0: 0, I1: 1, I2: 2, I3: 3, I4: 4, I5: 5 };
 
-const RIGOR_LABELS: Record<number, string> = {
-  0: 'E0 – None',
-  1: 'E1 – Single-center',
-  2: 'E2 – Multi-center',
-  3: 'E3 – Independent/RCT',
-};
-const IMPACT_LABELS: Record<number, string> = {
-  0: 'I0 – None',
-  1: 'I1 – QA/Monitor',
-  2: 'I2 – Workflow',
-  3: 'I3 – Dosimetric',
-  4: 'I4 – Clinical',
-  5: 'I5 – Survival',
-};
+const RIGOR_LEVELS = [
+  { key: 'E3', label: 'E3', name: 'Independent/RCT' },
+  { key: 'E2', label: 'E2', name: 'Multi-center' },
+  { key: 'E1', label: 'E1', name: 'Single-center' },
+  { key: 'E0', label: 'E0', name: 'None' },
+];
 
-// Seeded pseudo-random [0,1) from string
-function seededRandom(seed: string): number {
-  let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    hash = ((hash << 5) - hash) + seed.charCodeAt(i);
-    hash |= 0;
-  }
-  return (((hash & 0x7fffffff) % 10000) + 0.5) / 10000; // avoid exact 0
-}
+const IMPACT_LEVELS = [
+  { key: 'I0', label: 'I0', name: 'None' },
+  { key: 'I1', label: 'I1', name: 'QA/Monitor' },
+  { key: 'I2', label: 'I2', name: 'Workflow' },
+  { key: 'I3', label: 'I3', name: 'Dosimetric' },
+  { key: 'I4', label: 'I4', name: 'Clinical' },
+  { key: 'I5', label: 'I5', name: 'Survival' },
+];
 
-// Gaussian-distributed jitter (Box-Muller), clamped to ±0.35
-function gaussianJitter(seed1: string, seed2: string, sigma = 0.15): number {
-  const u1 = seededRandom(seed1);
-  const u2 = seededRandom(seed2);
-  const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-  return Math.max(-0.35, Math.min(0.35, z * sigma));
-}
-
-interface ScatterPoint {
-  x: number;
-  y: number;
+interface CellProduct {
   name: string;
   company: string;
   category: string;
@@ -60,62 +44,39 @@ interface ScatterPoint {
   impactNotes: string;
 }
 
-const CustomTooltip = ({ active, payload }: any) => {
-  if (!active || !payload?.[0]) return null;
-  const d: ScatterPoint = payload[0].payload;
-  return (
-    <div className="bg-background border border-border rounded-lg shadow-lg p-3 max-w-xs text-sm">
-      <p className="font-semibold text-foreground">{d.name}</p>
-      <p className="text-muted-foreground">{d.company}</p>
-      <div className="mt-1.5 space-y-0.5">
-        <p><span className="font-medium">Task:</span> <span style={{ color: d.color }}>{d.category}</span></p>
-        <p><span className="font-medium">Rigor:</span> {d.rigorLabel}</p>
-        <p><span className="font-medium">Impact:</span> {d.impactLabel}</p>
-      </div>
-      {(d.rigorNotes || d.impactNotes) && (
-        <div className="mt-2 pt-2 border-t border-border text-xs text-muted-foreground">
-          {d.rigorNotes && <p className="line-clamp-2">{d.rigorNotes}</p>}
-          {d.impactNotes && <p className="line-clamp-2 mt-1">{d.impactNotes}</p>}
-        </div>
-      )}
-    </div>
-  );
-};
+type CellMap = Record<string, CellProduct[]>;
 
 const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({ filteredProducts }) => {
   const isMobile = useIsMobile();
 
-  const scatterData = useMemo(() => {
-    return filteredProducts
-      .filter(p => p.evidenceRigor && p.clinicalImpact)
-      .map((p): ScatterPoint => {
-        const baseX = IMPACT_MAP[p.clinicalImpact!] ?? 0;
-        const baseY = RIGOR_MAP[p.evidenceRigor!] ?? 0;
-        const jx = gaussianJitter(p.name + '_jx', p.company + '_jx');
-        const jy = gaussianJitter(p.name + '_jy', p.company + '_jy');
-        return {
-          x: baseX + jx,
-          y: baseY + jy,
-          name: p.name,
-          company: p.company,
-          category: p.category,
-          color: getTaskColor(p.category),
-          rigorLabel: RIGOR_LABELS[baseY] ?? p.evidenceRigor!,
-          impactLabel: IMPACT_LABELS[baseX] ?? p.clinicalImpact!,
-          rigorNotes: p.evidenceRigorNotes ?? '',
-          impactNotes: p.clinicalImpactNotes ?? '',
-        };
+  const { cellMap, totalCount, categories } = useMemo(() => {
+    const map: CellMap = {};
+    const catSet = new Map<string, string>();
+    let count = 0;
+
+    for (const p of filteredProducts) {
+      if (!p.evidenceRigor || !p.clinicalImpact) continue;
+      const key = `${p.evidenceRigor}-${p.clinicalImpact}`;
+      const color = getTaskColor(p.category);
+      if (!map[key]) map[key] = [];
+      map[key].push({
+        name: p.name,
+        company: p.company,
+        category: p.category,
+        color,
+        rigorLabel: `${p.evidenceRigor} – ${RIGOR_LEVELS.find(r => r.key === p.evidenceRigor)?.name ?? ''}`,
+        impactLabel: `${p.clinicalImpact} – ${IMPACT_LEVELS.find(i => i.key === p.clinicalImpact)?.name ?? ''}`,
+        rigorNotes: p.evidenceRigorNotes ?? '',
+        impactNotes: p.clinicalImpactNotes ?? '',
       });
+      if (!catSet.has(p.category)) catSet.set(p.category, color);
+      count++;
+    }
+
+    return { cellMap: map, totalCount: count, categories: Array.from(catSet.entries()) };
   }, [filteredProducts]);
 
-  // Unique categories present
-  const categories = useMemo(() => {
-    const seen = new Map<string, string>();
-    scatterData.forEach(d => { if (!seen.has(d.category)) seen.set(d.category, d.color); });
-    return Array.from(seen.entries());
-  }, [scatterData]);
-
-  if (scatterData.length === 0) {
+  if (totalCount === 0) {
     return (
       <Card className="w-full col-span-full">
         <CardHeader className="pb-2">
@@ -130,50 +91,94 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
     );
   }
 
+  const dotSize = isMobile ? 'w-3 h-3' : 'w-3.5 h-3.5';
+
   return (
     <Card className="w-full col-span-full">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg md:text-2xl">
-          Evidence Rigor vs Clinical Impact ({scatterData.length} products)
+          Evidence Rigor vs Clinical Impact ({totalCount} products)
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveChartWrapper minHeight={isMobile ? '350px' : '450px'}>
-          <ChartContainer className="h-full" config={{}}>
-            <ResponsiveContainer>
-              <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: isMobile ? 10 : 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis
-                  type="number"
-                  dataKey="x"
-                  domain={[-0.5, 5.5]}
-                  ticks={[0, 1, 2, 3, 4, 5]}
-                  tickFormatter={(v: number) => isMobile ? `I${v}` : (IMPACT_LABELS[v] ?? `I${v}`)}
-                  label={isMobile ? undefined : { value: 'Clinical Impact →', position: 'insideBottom', offset: -10, style: { fill: 'hsl(var(--muted-foreground))' } }}
-                  tick={{ fontSize: isMobile ? 9 : 11, fill: 'hsl(var(--muted-foreground))' }}
-                  stroke="hsl(var(--border))"
-                />
-                <YAxis
-                  type="number"
-                  dataKey="y"
-                  domain={[-0.5, 3.5]}
-                  ticks={[0, 1, 2, 3]}
-                  tickFormatter={(v: number) => isMobile ? `E${v}` : (RIGOR_LABELS[v] ?? `E${v}`)}
-                  label={isMobile ? undefined : { value: 'Evidence Rigor →', angle: -90, position: 'insideLeft', offset: 10, style: { fill: 'hsl(var(--muted-foreground))' } }}
-                  tick={{ fontSize: isMobile ? 9 : 11, fill: 'hsl(var(--muted-foreground))' }}
-                  stroke="hsl(var(--border))"
-                  width={isMobile ? 30 : 140}
-                />
-                <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={scatterData} isAnimationActive={false}>
-                  {scatterData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} fillOpacity={0.85} stroke={entry.color} strokeWidth={1} r={isMobile ? 6 : 8} />
-                  ))}
-                </Scatter>
-              </ScatterChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-        </ResponsiveChartWrapper>
+        <div className="overflow-x-auto">
+          <div className="min-w-[640px]">
+            {/* Column headers */}
+            <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px mb-1">
+              <div /> {/* empty corner */}
+              {IMPACT_LEVELS.map(imp => (
+                <div key={imp.key} className="text-center px-1">
+                  <div className="text-xs font-semibold text-foreground">{imp.label}</div>
+                  <div className="text-[10px] text-muted-foreground truncate">{imp.name}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Grid rows (E3 at top, E0 at bottom) */}
+            <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px">
+              {RIGOR_LEVELS.map(rig => (
+                <React.Fragment key={rig.key}>
+                  {/* Row label */}
+                  <div className="flex items-center justify-end pr-2 min-h-[72px]">
+                    <div>
+                      <div className="text-xs font-semibold text-foreground text-right">{rig.label}</div>
+                      <div className="text-[10px] text-muted-foreground text-right">{rig.name}</div>
+                    </div>
+                  </div>
+
+                  {/* Cells */}
+                  {IMPACT_LEVELS.map(imp => {
+                    const key = `${rig.key}-${imp.key}`;
+                    const products = cellMap[key] ?? [];
+                    const hasProducts = products.length > 0;
+
+                    return (
+                      <div
+                        key={key}
+                        className={`relative border border-border rounded min-h-[72px] p-1.5 flex flex-wrap content-start gap-1 transition-colors ${
+                          hasProducts ? 'bg-muted/40' : 'bg-background'
+                        }`}
+                      >
+                        {hasProducts && (
+                          <span className="absolute top-0.5 right-1 text-[9px] font-medium text-muted-foreground">
+                            {products.length}
+                          </span>
+                        )}
+                        <TooltipProvider delayDuration={100}>
+                          {products.map((prod, i) => (
+                            <Tooltip key={i}>
+                              <TooltipTrigger asChild>
+                                <span
+                                  className={`${dotSize} rounded-full inline-block cursor-pointer ring-1 ring-black/10 hover:scale-125 transition-transform`}
+                                  style={{ backgroundColor: prod.color }}
+                                />
+                              </TooltipTrigger>
+                              <TooltipContent side="top" className="max-w-xs text-sm">
+                                <p className="font-semibold">{prod.name}</p>
+                                <p className="text-muted-foreground text-xs">{prod.company}</p>
+                                <div className="mt-1 space-y-0.5 text-xs">
+                                  <p><span className="font-medium">Task:</span> <span style={{ color: prod.color }}>{prod.category}</span></p>
+                                  <p><span className="font-medium">Rigor:</span> {prod.rigorLabel}</p>
+                                  <p><span className="font-medium">Impact:</span> {prod.impactLabel}</p>
+                                </div>
+                                {(prod.rigorNotes || prod.impactNotes) && (
+                                  <div className="mt-1.5 pt-1.5 border-t border-border text-[11px] text-muted-foreground">
+                                    {prod.rigorNotes && <p className="line-clamp-2">{prod.rigorNotes}</p>}
+                                    {prod.impactNotes && <p className="line-clamp-2 mt-0.5">{prod.impactNotes}</p>}
+                                  </div>
+                                )}
+                              </TooltipContent>
+                            </Tooltip>
+                          ))}
+                        </TooltipProvider>
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
 
         {/* Legend */}
         <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 justify-center text-xs text-muted-foreground">
