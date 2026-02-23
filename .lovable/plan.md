@@ -1,65 +1,70 @@
 
-
-# Add Evidence-Impact Scatter Matrix to Dashboard
+# Redesign Evidence-Impact Matrix: From Scatter Plot to Categorical Grid
 
 ## Overview
 
-Create a new interactive scatter-plot chart for the Dashboard that plots every product on the Evidence Rigor (Y-axis, E0-E3) vs Clinical Impact (X-axis, I0-I5) grid. Each product is a colored dot based on its task category, with hover tooltips showing product name, company, task, and evidence notes.
+Replace the current Recharts-based scatter chart with a pure HTML/CSS categorical grid matrix, similar to the existing `EvidenceImpactMatrix` component on the Resources & Compliance page. Instead of abstract colored dots and zone indicators, each grid cell will contain the actual product dots, colored by task category, with hover tooltips for details.
 
-## Design Decisions
+## Current Problem
 
-**Color by task category**: Using the existing `TASK_COLORS` map (Auto-Contouring = blue, Treatment Planning = pink, Image Enhancement = amber, etc.) gives immediate visual grouping and is consistent with the other dashboard charts. With ~10 task categories, this is readable and meaningful -- users can instantly see which clinical areas have the most evidence.
+The scatter plot with Gaussian jitter makes it hard to tell which discrete Evidence/Impact level a product belongs to. Products float between grid lines rather than being clearly placed within a cell.
 
-**Jitter for overlapping dots**: Since the grid is discrete (4 rigor x 6 impact = 24 cells), many products will overlap. A small random offset (jitter) within each cell will spread dots out while keeping them visually within the correct cell.
+## New Design
 
-**Recharts ScatterChart**: Consistent with the existing Recharts-based dashboard charts. Uses the same `ChartContainer` wrapper and `ResponsiveContainer` pattern.
+A 4-row (E0-E3, bottom to top) by 6-column (I0-I5, left to right) grid of cells. Each cell contains colored dots (one per product) arranged in a wrapping layout inside the cell box. Hovering a dot shows product details.
 
-## New Component
+### Layout
+
+```text
+         I0       I1       I2       I3       I4       I5
+       +--------+--------+--------+--------+--------+--------+
+  E3   |        |        | o o o  |   o    |        |        |
+       +--------+--------+--------+--------+--------+--------+
+  E2   |        |   o    | oooooo |  o o   |        |        |
+       |        |        | oooo   |        |        |        |
+       +--------+--------+--------+--------+--------+--------+
+  E1   |  o o   |   o    | ooooo  |        |        |        |
+       +--------+--------+--------+--------+--------+--------+
+  E0   |  ooo   |   o    |   o    |        |        |        |
+       +--------+--------+--------+--------+--------+--------+
+```
+
+Each `o` is a colored dot (color = task category). Dots wrap naturally inside the cell.
+
+### Features
+
+- **Categorical clarity**: Each product is unambiguously inside its E/I cell
+- **Task-colored dots**: Same `TASK_COLORS` map as before (blue = Auto-Contouring, pink = Treatment Planning, etc.)
+- **Hover tooltips**: Using Radix UI `Tooltip` (matching the Resources page pattern), showing product name, company, task, rigor/impact labels, and evidence notes
+- **Cell count badge**: Small count number in corner of each non-empty cell
+- **Row/column headers**: E0-E3 labels on the left, I0-I5 labels on top, with short descriptive names
+- **Responsive**: Horizontal scroll on mobile, larger cells on desktop
+- **Task legend**: Below the grid, showing task categories with colored dots (only those present)
+- **Product count**: Title includes total count like before
+
+## File to Modify
 
 ### `src/components/dashboard/EvidenceImpactScatterChart.tsx`
 
-A new dashboard chart component that:
+Complete rewrite of the component internals:
 
-1. Transforms filtered products into scatter data points:
-   - X = numeric value of clinicalImpact (I0=0, I1=1, ..., I5=5)
-   - Y = numeric value of evidenceRigor (E0=0, E1=1, E2=2, E3=3)
-   - Adds small random jitter to prevent dot overlap
-   - Color derived from `TASK_COLORS[product.category]`
+1. **Remove** all Recharts imports (`ScatterChart`, `Scatter`, `XAxis`, `YAxis`, etc.)
+2. **Remove** jitter functions (`seededRandom`, `gaussianJitter`)
+3. **Keep** the `RIGOR_MAP`, `IMPACT_MAP`, label maps, and tooltip data structure
+4. **Add** Radix Tooltip imports (already available in the project)
+5. **Build** a grid using CSS Grid (`grid-cols-7` -- 1 label column + 6 impact columns)
+6. **Group** products by `(evidenceRigor, clinicalImpact)` into cell buckets
+7. **Render** each cell as a bordered box containing wrapped colored dots
+8. **Add** Tooltip on each dot for hover interaction
+9. **Keep** the task-color legend at the bottom
 
-2. Renders a Recharts `ScatterChart` with:
-   - X-axis: Clinical Impact levels (I0-I5) with tick labels
-   - Y-axis: Evidence Rigor levels (E0-E3) with tick labels
-   - Grid lines to form the matrix cells
-   - Scatter dots sized ~8-10px, colored by task category
-   - Custom tooltip on hover showing: product name, company, task, evidence rigor level name, clinical impact level name, and evidence notes (truncated)
+No other files need to change -- the component API (`filteredProducts` prop) stays the same, so `Dashboard.tsx` needs no updates.
 
-3. Legend showing task categories with their colors (only categories present in current filtered data)
+## Technical Notes
 
-4. Respects dashboard filters (task, location, modality) -- uses the same `filteredProducts` array
-
-5. Responsive sizing using the existing mobile detection hook
-
-## Dashboard Integration
-
-### `src/pages/Dashboard.tsx`
-
-- Import and add the new `EvidenceImpactScatterChart` component to the grid
-- Pass `filteredProducts` (already available from `useChartData` hook)
-- Place it after the Certification chart (before the auto-contouring-specific charts)
-- It spans the full width (`col-span-full` on large screens) since the matrix needs horizontal space
-
-## Data Flow
-
-```
-filteredProducts (from useChartData)
-  -> filter out products without evidenceRigor/clinicalImpact
-  -> map to scatter points { x, y, name, company, category, color, rigorNotes, impactNotes }
-  -> add jitter offsets
-  -> render as Recharts ScatterChart
-```
-
-## Files to Create
-1. `src/components/dashboard/EvidenceImpactScatterChart.tsx` -- new scatter chart component
-
-## Files to Modify
-1. `src/pages/Dashboard.tsx` -- import and add the new chart to the dashboard grid
+- The grid renders E3 at the top row and E0 at the bottom (reversed order), matching the Resources page convention
+- Dot size: `w-3.5 h-3.5` on desktop, `w-3 h-3` on mobile -- small enough to fit many per cell but large enough to hover
+- Cells have a minimum height to keep the grid uniform even when empty
+- Non-empty cells get a subtle background tint to highlight populated zones
+- The `ResponsiveChartWrapper` and `ChartContainer` wrappers are removed (not needed for a pure HTML grid)
+- Mobile: `overflow-x-auto` with `min-w-[640px]` on the grid container
