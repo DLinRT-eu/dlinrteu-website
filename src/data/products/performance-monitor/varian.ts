@@ -54,7 +54,11 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       },
       fda: {
         status: "510(k) Cleared",
-        class: "II"
+        class: "Class II",
+        type: "510(k)",
+        productCode: "IYE",
+        regulationNumber: "21 CFR 892.5050",
+        notes: "Originally cleared by Mobius Medical Systems LP (now Varian/Siemens Healthineers). Specific K-number for Mobius3D not publicly identifiable; multiple clearances exist under Mobius Medical Systems."
       },
       intendedUseStatement: "Mobius3D is intended for patient-specific quality assurance including independent dose verification, structure validation, and treatment delivery verification in radiotherapy."
     },
@@ -62,8 +66,8 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2012",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Varian official website"
   }
 ];

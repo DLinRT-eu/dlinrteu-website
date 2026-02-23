@@ -50,8 +50,10 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
+        productCode: "LNH",
+        regulationNumber: "21 CFR 892.1000",
         decisionDate: "2015",
-        notes: "First MR-only radiotherapy solution. Combines MRCAT synthetic CT generation with model-based auto-contouring for prostate treatment planning."
+        notes: "Cleared as part of Philips Ingenia MR-RT system. MRCAT Prostate + Auto-Contouring is a clinical application running on the cleared MR-RT platform. First MR-only radiotherapy solution."
       },
       intendedUseStatement: "For use in treatment planning for radiation therapy."
     },
@@ -70,7 +72,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head (R)",
       "Pelvis: Body Outline"
     ],
-    lastRevised: "2026-01-08",
+    lastRevised: "2026-02-23",
     source: "Philips product documentation (2019)"
   }
 ];

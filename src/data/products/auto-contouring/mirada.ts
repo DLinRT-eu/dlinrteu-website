@@ -42,7 +42,12 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared (Historical - Product Discontinued)",
         class: "Class II",
-        type: "510(k)"
+        type: "510(k)",
+        clearanceNumber: "K181572",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2018-07-10",
+        notes: "Cleared as 'Workflow Box' (includes DLCExpert). First FDA-cleared AI auto-contouring for radiation oncology."
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -52,8 +57,8 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     version: "2.2",
     releaseDate: "2023-05-20",
-    lastUpdated: "2024-01-15",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Historical records - product discontinued"
   }
 ];

@@ -283,8 +283,11 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        decisionDate: "2025-02",
-        notes: "510(k) cleared February 2025. Clearance number pending verification."
+        clearanceNumber: "K242994",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2025-02-24",
+        notes: "Cleared as OncoStudio (OS-01). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242994.pdf"
       },
       intendedUseStatement: "AI-powered automatic organ and target volume contouring for radiotherapy treatment planning"
     },
@@ -295,8 +298,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     },
     version: "2024",
     releaseDate: "2024-01-01",
-    lastUpdated: "2025-07-14",
-    lastRevised: "2026-01-08",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }
