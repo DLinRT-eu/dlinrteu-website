@@ -80,8 +80,12 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
         notes: "Previous version of the RT Elements suite"
       }
     ],
-    lastUpdated: "2026-02-20",
-    lastRevised: "2026-02-20",
+    evidenceRigor: "E1",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA validation: 412 patients, 595 scans, 1878 annotations. Dice >= 0.75. No independent peer-reviewed clinical validation yet.",
+    clinicalImpactNotes: "Technical performance demonstrated via FDA validation but no published workflow or outcome studies.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K250440)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   },
@@ -168,8 +172,12 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
         notes: "Previous version of the Brainlab Elements suite"
       }
     ],
-    lastUpdated: "2026-02-20",
-    lastRevised: "2026-02-20",
+    evidenceRigor: "E1",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA validation K243633. No independent peer-reviewed publications found.",
+    clinicalImpactNotes: "FDA validation data only. No published clinical impact data.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K243633)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   }

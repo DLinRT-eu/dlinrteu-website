@@ -207,7 +207,23 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: CTV Cervix",
       "Pelvis: CTV Para-aortic Nodes"
     ],
-    lastRevised: "2026-01-15",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre H&N evaluation. Multiple independent studies across institutions.",
+    clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI",
+        link: "https://doi.org/10.3389/fonc.2024.1375096"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-centre H&N evaluation",
+        link: "https://doi.org/10.1038/s41746-025-01624-z"
+      }
+    ],
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K191928), company official sources",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

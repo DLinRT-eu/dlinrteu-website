@@ -59,12 +59,27 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"],
     },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al., IJROBP 2021. Single-center retrospective studies.",
+    clinicalImpactNotes: "Demonstrates improved contouring accuracy and efficiency for brain metastases in single-center settings.",
     version: "2.5",
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
-    evidence: ["10.1186/s13014-023-02246-z"],
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Stratified SRS assessment of VBrain for brain metastases",
+        link: "https://doi.org/10.1186/s13014-023-02246-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Deep learning brain metastases auto-segmentation evaluation",
+        link: "https://doi.org/10.1016/j.ijrobp.2021.03.060"
+      }
+    ],
     limitations: [
       "Limited to brain tumor segmentation only",
       "Performance varies with MRI sequence quality",

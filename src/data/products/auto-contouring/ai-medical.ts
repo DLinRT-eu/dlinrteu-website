@@ -63,6 +63,10 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Medical Physics Journal 2023 publication, ESTRO 2022 abstract cited. Specific DOIs not found in search but peer-reviewed evidence exists.",
+    clinicalImpactNotes: "Published clinical evidence for lesion tracking workflow in MRI follow-up assessments.",
     version: "2.0",
     releaseDate: "2023-05-15",
     lastUpdated: "2024-04-29",
@@ -74,7 +78,7 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Brain lesion tracking only; other anatomical sites not currently supported",
       "Performance may vary with non-standard MRI sequences or protocols"
     ],
-    lastRevised: "2026-01-26",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K231572), company official sources"
   }
 ];

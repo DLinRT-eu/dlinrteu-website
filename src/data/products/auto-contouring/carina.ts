@@ -188,7 +188,18 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Uterus (investigational)",
       "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-01-21",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Kibudde et al., Adv Radiat Oncol 2024 - impact study in LMICs. Medical Physics Journal 2023 publication. ESTRO 2022 abstract.",
+    clinicalImpactNotes: "Demonstrates clinical impact particularly in low- and middle-income countries, enabling access to quality contouring.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Impact of AI auto-contouring in low- and middle-income countries",
+        link: "https://doi.org/10.1016/j.adro.2024.101638"
+      }
+    ],
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract"
   }

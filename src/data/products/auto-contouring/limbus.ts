@@ -82,8 +82,19 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2023-06-15",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-institution study (Canada & UK) by Starke et al. BJR 2024. Evaluated time savings and geometric accuracy for prostate and lymph node contours. Found time savings of 13-26 minutes.",
+    clinicalImpactNotes: "Demonstrates meaningful time savings (13-26 minutes) for prostate and lymph node contouring across institutions.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Clinical evaluation of Limbus AI for prostate and nodes radiotherapy (multi-institution, 13-26 min time savings)",
+        link: "https://doi.org/10.1093/bjr/tqae077"
+      }
+    ],
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-01-14",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K230575), company official sources"
   }
 ];

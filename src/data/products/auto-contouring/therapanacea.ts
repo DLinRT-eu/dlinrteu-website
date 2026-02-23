@@ -234,7 +234,18 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
 "Pelvis (Female Lymph Nodes): LN Lomboartic (Gyneco)",
 "Pelvis (Female Lymph Nodes): LN Presacral (Gyneco)"
     ],
-    lastRevised: "2026-01-18",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Blinded prospective evaluation by Gregoire et al. 2020. Young et al. 2024 H&N blinded assessment. Multiple independent validations across institutions.",
+    clinicalImpactNotes: "Blinded prospective study shows clinical acceptability and significant contouring time savings across multiple anatomical sites.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        link: "https://doi.org/10.3389/fonc.2023.1213068"
+      }
+    ],
+    lastRevised: "2026-02-23",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822, K202700)"
   }
 ];
