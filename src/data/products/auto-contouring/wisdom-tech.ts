@@ -128,9 +128,14 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
         status: "Not certified"
       },
       fda: {
-        status: "510k_cleared",
-        decisionDate: "2024-05-08",
-        notes: "ID=K232928, URL: https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf"
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K232928",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2024-05-07",
+        notes: "Cleared as DeepContour (V1.0). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf"
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -140,8 +145,8 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     },
     version: "2.0",
     releaseDate: "2024-04-17",
-    lastUpdated: "2026-01-26",
-    lastRevised: "2026-01-26",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company official sources - NMPA (China) certified"
   }
 ];

@@ -57,7 +57,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
         class: "Class II",
         type: "510(k)",
         decisionDate: "2026-01-16",
-        notes: "Cleared as part of Elekta Evo CT-Linac system. Available as upgrade for existing Elekta linacs."
+        notes: "Cleared as part of Elekta Evo CT-Linac system. K-number not yet published in FDA database as of Feb 2026. Available as upgrade for existing Elekta linacs."
       },
       intendedUseStatement: "Intended for enhancing CBCT medical images to improve quality through AI-based reconstruction to support radiotherapy treatment planning and verification."
     },
@@ -78,8 +78,8 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
-    lastUpdated: "2026-01-16",
-    lastRevised: "2026-01-16",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }

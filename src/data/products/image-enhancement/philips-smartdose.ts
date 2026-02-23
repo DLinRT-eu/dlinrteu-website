@@ -51,6 +51,10 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
+        clearanceNumber: "K203020",
+        productCode: "JAK",
+        regulationNumber: "21 CFR 892.1750",
+        decisionDate: "2021-01-25",
         notes: "Part of Philips CT platform clearances. SmartDose is an integrated low-dose enhancement feature."
       },
       intendedUseStatement: "Intended for use in enhancing low-dose CT images to reduce noise and improve diagnostic confidence without altering the underlying anatomical information."
@@ -61,8 +65,8 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
 
 },
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
-    lastUpdated: "2025-01-05",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company website",
     evidence: [
       {

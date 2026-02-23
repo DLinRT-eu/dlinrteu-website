@@ -50,7 +50,11 @@ const rawProduct: ProductDetails = {
       status: "510(k) Cleared",
       class: "Class II",
       type: "510(k)",
-      notes: "FDA clearance confirmed. Clearance number pending verification."
+      clearanceNumber: "K200714",
+      productCode: "QKB",
+      regulationNumber: "21 CFR 892.2050",
+      decisionDate: "2020-09-17",
+      notes: "Cleared as AVIEW platform. RT ACS is the radiation therapy auto-contouring module. URL: https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
     },
     intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
   },
@@ -60,8 +64,8 @@ const rawProduct: ProductDetails = {
   },
   version: "4.0",
   releaseDate: "2025-08-20",
-  lastUpdated: "2026-01-26",
-  lastRevised: "2026-01-26",
+  lastUpdated: "2026-02-23",
+  lastRevised: "2026-02-23",
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",

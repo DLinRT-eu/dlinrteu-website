@@ -50,7 +50,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of Siemens syngo.via platform clearances"
+        clearanceNumber: "K191468",
+        productCode: "JAK",
+        regulationNumber: "21 CFR 892.1750",
+        decisionDate: "2019-07-03",
+        notes: "Cleared as syngo.CT Dual Energy. Part of Siemens syngo.via platform."
       },
       intendedUseStatement: "Intended for enhancing dual-energy CT image quality and material discrimination to support clinical interpretation."
     },
@@ -60,8 +64,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
 
 },
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection and characterization compared to conventional dual-energy processing",
-    lastUpdated: "2025-02-01",
-    lastRevised: "2026-01-01",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company website"
   }
 ];
