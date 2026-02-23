@@ -15,6 +15,7 @@ import LocationDistributionChart from "@/components/dashboard/LocationDistributi
 import ModalityDistributionChart from "@/components/dashboard/ModalityDistributionChart";
 import CompanyDistributionChart from "@/components/dashboard/CompanyDistributionChart";
 import CertificationDistributionChart from "@/components/dashboard/CertificationDistributionChart";
+import EvidenceImpactScatterChart from "@/components/dashboard/EvidenceImpactScatterChart";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { CountingModeToggle } from "@/components/dashboard/CountingModeToggle";
 
@@ -206,6 +207,8 @@ const Dashboard = () => {
           selectedLocation={selectedLocation}
           selectedModality={selectedModality}
         />
+
+        <EvidenceImpactScatterChart filteredProducts={filteredProducts} />
         
         {/* Auto-Contouring Structures - Only shown when Auto-Contouring is selected */}
         {selectedTask === "Auto-Contouring" && (
