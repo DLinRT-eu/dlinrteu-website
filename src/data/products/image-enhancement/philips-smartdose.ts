@@ -64,6 +64,10 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated solution"],
 
 },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA validation K203020. No independent peer-reviewed publications found for RT-specific use.",
+    clinicalImpactNotes: "Workflow improvement through low-dose CT enhancement enabling diagnostic quality at reduced radiation.",
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",

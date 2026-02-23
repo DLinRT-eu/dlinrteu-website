@@ -61,6 +61,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Integrated in MAGNETOM MRI systems", "Software upgrade for compatible systems"]
     },
+    
+    evidenceRigor: "E3",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Bash et al. Radiol Adv 2025 (113 sequence pairs, 51.6% scan time reduction). Multiple independent validations across institutions.",
+    clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality.",
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -78,6 +83,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250436.pdf"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Bash et al. Deep learning MRI halves scan time and preserves image quality across routine neuroradiologic examinations. Radiology Advances 2025",
+        link: "https://doi.org/10.1093/radadv/umaf029"
+      },
+      {
         type: "Product Information",
         description: "Official Siemens Healthineers Deep Resolve product page",
         link: "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve"
@@ -85,8 +95,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
-    lastUpdated: "2025-07-15",
-    lastRevised: "2026-01-01",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website"
   }
 ];

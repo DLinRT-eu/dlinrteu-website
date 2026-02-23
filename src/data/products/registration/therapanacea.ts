@@ -73,10 +73,14 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA K242822 validation as part of ART-Plan+ platform. Limited independent publications for registration module specifically.",
+    clinicalImpactNotes: "Workflow improvement through AI-powered rigid and deformable image fusion with real-time contour deformation.",
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-01-29",
-    lastRevised: "2026-01-29",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822)"
   }
 ];

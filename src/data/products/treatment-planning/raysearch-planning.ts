@@ -99,10 +99,19 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     version: "2024B",
     releaseDate: "2024-07-01",
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction study. FDA K240398 validation.",
+    clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Eriksson et al. Prostate dose prediction study in Physics in Medicine 2024",
+        link: "https://doi.org/10.1016/j.ejmp.2024.103419"
+      },
       {
         type: "FDA 510(k) Database Entry",
         description: "FDA 510(k) device listing for RayStation (K240398)",

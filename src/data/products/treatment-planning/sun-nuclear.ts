@@ -80,11 +80,20 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
-    lastUpdated: "2026-01-02",
-    lastRevised: "2026-01-02",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Trained on 5000+ plans from Johns Hopkins. Appenzoller et al. Med Phys 2012 (Oncospace foundation). FDA K222803, K202284.",
+    clinicalImpactNotes: "Workflow improvement through AI-powered DVH predictions enabling data-driven planning objectives.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K222803, K202284), Sun Nuclear official website",
     clinicalEvidence: "FDA 510(k) validation studies using 5,000+ treatment plans from Johns Hopkins University",
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Appenzoller et al. Predicting dose-volume histograms for organs-at-risk. Med Phys 2012 (Oncospace foundation)",
+        link: "https://doi.org/10.1118/1.4752212"
+      },
       {
         type: "Regulatory Clearance",
         description: "FDA 510(k) clearance K222803 received February 2, 2023 - Class II device under 21 CFR 892.5050",

@@ -58,8 +58,12 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Integrated in CT systems"],
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "No independent peer-reviewed publications. Cleared as integrated system feature.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact.",
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website"
 
   },
@@ -118,8 +122,12 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated in MRI systems"],
 
 },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "No independent peer-reviewed publications found.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact.",
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastRevised: "2026-01-02",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
@@ -199,9 +207,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "AI-enhanced reconstruction outputs require qualified clinician review as part of standard image QA processes",
       "Claims about scan-time or injected-dose reduction depend on clinical indication and should be validated within site-specific workflows"
     ],
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "No independent peer-reviewed publications. Company product descriptions only.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact.",
     clinicalEvidence: "United Imaging describes HD TOF (time-of-flight) capability as part of its PET technology stack; quantitative improvements and scan-time/dose tradeoffs depend on local protocol and system configuration.",
-    lastUpdated: "2024-12-20",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 

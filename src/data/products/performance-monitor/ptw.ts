@@ -69,8 +69,12 @@ export const PTW_PRODUCTS: ProductDetails[] = [
 },
     version: "1.1.2",
     releaseDate: "2025-11-06",
-    lastUpdated: "2025-11-29",
-    lastRevised: "2025-12-01",
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024).",
+    clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Automatically retrieved and revised"
   }
 ];

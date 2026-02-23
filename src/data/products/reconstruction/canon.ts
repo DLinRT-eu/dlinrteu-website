@@ -61,6 +61,10 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I3",
+    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study; Tatsugami et al. Radiology 2019 coronary CTA.",
+    clinicalImpactNotes: "Dosimetric/diagnostic improvement through up to 82% dose reduction with maintained image quality.",
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -71,11 +75,16 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         type: "Product Information",
         description: "Official Canon AiCE Deep Learning Reconstruction product page with technical specifications and clinical benefits",
         link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Higaki et al. Multi-phantom evaluation of deep learning CT reconstruction in European Radiology",
+        link: "https://doi.org/10.1007/s00330-019-06523-0"
       }
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
-    lastUpdated: "2025-01-15",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website"
   },
   {
@@ -148,9 +157,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         link: "https://global.medical.canon/products/magnetic-resonance/aice"
       }
     ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA K192574 validation. Limited independent publications for MR application.",
+    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in MRI scan time.",
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2025-01-10",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
@@ -225,9 +238,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         link: "https://global.medical.canon/products/magnetic-resonance/piqe"
       }
     ],
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA K243335 (Jan 2025). Very new, no independent publications.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact yet.",
     clinicalEvidence: "Clinical studies demonstrating significantly improved spatial resolution and image sharpness for enhanced diagnostic capabilities",
-    lastUpdated: "2025-01-15", 
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23", 
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website"
   }
 ];

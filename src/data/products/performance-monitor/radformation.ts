@@ -62,8 +62,12 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Published TG-275 compliance automation studies. Limited indexed publications specific to ClearCheck.",
+    clinicalImpactNotes: "QA/monitoring tool for automated plan checking and structure validation.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Radformation official website"
   }
 ];

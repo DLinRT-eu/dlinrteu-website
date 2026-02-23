@@ -64,10 +64,14 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
 
 },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA K233572 validation. Limited independent peer-reviewed publications.",
+    clinicalImpactNotes: "Workflow improvement through AI-powered multi-modal image registration.",
     version: "2.1",
     releaseDate: "2023-08-15",
-    lastUpdated: "2024-01-20",
-    lastRevised: "2026-01-03",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K233572), company website"
   }
 ];

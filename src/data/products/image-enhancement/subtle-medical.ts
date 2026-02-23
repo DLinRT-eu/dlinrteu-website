@@ -62,9 +62,20 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. FDA validation K191688, K223623.",
+    clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling 2-4x faster scanning.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Andre et al. Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols",
+        link: "https://doi.org/10.1016/j.jacr.2021.07.024"
+      }
+    ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
-    lastUpdated: "2025-01-27",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
@@ -127,9 +138,20 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation. Liang et al. 2023 multi-tracer validation.",
+    clinicalImpactNotes: "Workflow improvement through PET enhancement enabling 4x faster scans or 75% dose reduction.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Katsari et al. Low-dose PET validation study in European Journal of Nuclear Medicine",
+        link: "https://doi.org/10.1007/s00259-021-05478-x"
+      }
+    ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
-    lastUpdated: "2025-01-27",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K182336, K211964) and company website"
   },
   {
@@ -191,9 +213,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2024",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA validation K240290 only. New product (2024), limited independent publications.",
+    clinicalImpactNotes: "Workflow improvement through enhanced contrast-to-noise ratio in brain MRI.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
-    lastUpdated: "2025-01-27",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K240290) and company website"
   },
   {
@@ -255,9 +281,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA validation K243250 only. Very new product (Feb 2025), no independent publications.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact yet.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
-    lastUpdated: "2025-01-27",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K243250) and company website"
   }
 ];

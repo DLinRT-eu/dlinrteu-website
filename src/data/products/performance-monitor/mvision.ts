@@ -66,8 +66,12 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
 },
     version: "2.1",
     releaseDate: "2023-08-15",
-    lastUpdated: "2024-03-01",
-    lastRevised: "2026-01-08",
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "QA visualization tool. No peer-reviewed publications. MDR exempt.",
+    clinicalImpactNotes: "QA/monitoring tool for comparing AI-generated and manual contours.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "MVision AI official website, regulatory classification based on product function"
   }
 ];

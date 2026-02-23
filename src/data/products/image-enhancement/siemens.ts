@@ -63,6 +63,10 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in dual-energy CT workflow", "Software upgrade"],
 
 },
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Part of syngo.via platform clearance (FDA K191468). Limited independent RT-specific publications.",
+    clinicalImpactNotes: "Workflow improvement through enhanced material differentiation in dual-energy CT imaging.",
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection and characterization compared to conventional dual-energy processing",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",

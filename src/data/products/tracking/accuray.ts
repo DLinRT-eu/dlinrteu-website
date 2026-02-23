@@ -67,9 +67,20 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated with Accuray systems"],
 
 },
+    evidenceRigor: "E2",
+    clinicalImpact: "I3",
+    evidenceRigorNotes: "Pepin et al. JACMP 2020 motion tracking accuracy. Multiple studies on CyberKnife and Radixact integration.",
+    clinicalImpactNotes: "Dosimetric improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Pepin et al. Motion tracking accuracy evaluation in Journal of Applied Clinical Medical Physics 2020",
+        link: "https://doi.org/10.1002/acm2.12847"
+      }
+    ],
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue.",
-    lastUpdated: "2024-12-15",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K182687), Accuray official website"
   }
 ];

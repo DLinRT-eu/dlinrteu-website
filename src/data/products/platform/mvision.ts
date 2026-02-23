@@ -150,8 +150,12 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.0",
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "CE Mark IIa (Oct 2025). FDA K250064 for Dose+ module. Evidence primarily through individual module publications.",
+    clinicalImpactNotes: "Workflow improvement through unified AI platform integrating contouring, dose prediction, image synthesis, and registration.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     evidence: [
       {
         type: "Company Press Release",

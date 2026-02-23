@@ -71,8 +71,12 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
         link: "https://algomedica.com/medical-imaging-resources#case-studies"      
       }
     ],
-    lastUpdated: "2025-09-01",
-    lastRevised: "2026-01-02",
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Published case studies on company website. FDA K161625. Limited indexed peer-reviewed publications.",
+    clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company provided information"
   }
 ];

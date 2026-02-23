@@ -62,8 +62,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf"
       }
     ],
-    lastUpdated: "2026-01-27",
-    lastRevised: "2026-01-27",
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA validation K230082. Limited independent peer-reviewed publications.",
+    clinicalImpactNotes: "Workflow improvement through enhanced PET image quality and potential dose reduction.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database"
   },
   {
@@ -121,9 +125,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Edison Marketplace"],
 
 },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multiple peer-reviewed publications including Lee et al. 2022 MR enterography, Karaarslan et al. 2022 prostate MRI. Part of broader AIR Recon DL platform with 30+ publications.",
+    clinicalImpactNotes: "Workflow improvement through enhanced MR image quality enabling faster scan protocols.",
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
-    lastUpdated: "2025-01-10",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     evidence: [
       {
@@ -135,6 +143,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "Regulatory Clearance",
         description: "FDA 510(k) clearance K213717 received May 10, 2022 - Class II device under 21 CFR 892.1000",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf",
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lee et al. AIR Recon DL for MR enterography evaluation",
+        link: "https://doi.org/10.1002/jmri.28239",
       },
     ],
     limitations: [

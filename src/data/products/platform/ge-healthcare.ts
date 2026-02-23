@@ -76,9 +76,13 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Hospital partnerships", "Enterprise healthcare solutions"]
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Platform product (2025). No independent publications. Evidence through integrated component clearances.",
+    clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions.",
     releaseDate: "2025-09-25",
-    lastUpdated: "2025-11-02",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717.",
     clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
   }
