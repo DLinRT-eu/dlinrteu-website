@@ -95,10 +95,14 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
       "Contours are intended as input to clinical workflows and require physician review before use in treatment planning",
       "Performance may vary based on image quality and patient anatomy"
     ],
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found.",
+    clinicalImpactNotes: "No published clinical impact data available.",
     version: "2.5",
     releaseDate: "2023-05-20",
     lastUpdated: "2024-01-15",
-    lastRevised: "2026-01-26",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K202928), company official sources"
   }
 ];

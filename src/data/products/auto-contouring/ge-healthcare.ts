@@ -62,8 +62,12 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2023-03-10",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA validation K230082 with 302 retrospective CT exams (2552 contours) from 9 global sites. Dice coefficients reported for 40+ organs.",
+    clinicalImpactNotes: "Large multi-site FDA validation dataset demonstrates consistent geometric accuracy across global clinical sites.",
     lastUpdated: "2024-01-20",
-    lastRevised: "2026-01-14",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K230082, K242925), company official sources",
     clinicalEvidence: "FDA 510(k) validation studies using 2552 contours from 302 unique patients across 9 global sites",
     evidence: [

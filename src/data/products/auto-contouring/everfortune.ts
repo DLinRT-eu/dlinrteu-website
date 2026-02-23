@@ -90,7 +90,11 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Head & Neck: Larynx",
       "Head & Neck: Pharyngeal Constrictor"
     ],
-    lastRevised: "2026-02-03",
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation.",
+    clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3.",
+    lastRevised: "2026-02-23",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -333,7 +337,11 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Abdomen-CT: VB S",
       "Abdomen-CT: VB S1"
     ],
-    lastRevised: "2026-02-03",
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Liu et al. 2023 hippocampal avoidance WBRT (pubmed/36773828). Cardiac substructures study (pubmed/37585426). Single-center studies on specific applications.",
+    clinicalImpactNotes: "Single-center studies demonstrate clinical utility for specific applications (hippocampal avoidance, cardiac substructures).",
+    lastRevised: "2026-02-23",
     guidelines: [
       {
         name: "AAPM TG-263",

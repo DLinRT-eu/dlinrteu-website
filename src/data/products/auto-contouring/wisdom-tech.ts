@@ -143,6 +143,10 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2024",
       distributionChannels: ["Direct sales (China)"]
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA cleared (K232928) but no peer-reviewed publications found.",
+    clinicalImpactNotes: "No published clinical impact data available.",
     version: "2.0",
     releaseDate: "2024-04-17",
     lastUpdated: "2026-02-23",

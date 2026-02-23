@@ -146,6 +146,10 @@ const rawProduct: ProductDetails = {
     "Pelvis: SpinalCord",
     "Pelvis: Prostate"
   ],
+  evidenceRigor: "E1",
+  clinicalImpact: "I2",
+  evidenceRigorNotes: "Limited independent peer-reviewed evidence. FDA validation data (K200714). Single-center evaluations available.",
+  clinicalImpactNotes: "FDA validation data demonstrates geometric accuracy. Limited independent clinical impact publications.",
   source: "Company official sources",
 };
 

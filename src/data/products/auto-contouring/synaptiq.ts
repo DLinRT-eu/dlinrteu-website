@@ -130,10 +130,14 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
       distributionChannels: ["Direct sales", "Hospital partnerships"]
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "Not certified. Investigation use only. Internal studies (Doolan 2024) only - not independently peer-reviewed.",
+    clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only.",
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2026-01-23",
+    lastRevised: "2026-02-23",
     source: "Company website, internal clinical study (Jan 2024). Note: Abdomen structures require source verification."
   }
 ];

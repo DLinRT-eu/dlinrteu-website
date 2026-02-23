@@ -351,10 +351,21 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2017",
       distributionChannels: ["Direct sales", "Cloud platform", "Includes Limbus AI (acquired April 30, 2024)"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Additional geometric/dosimetric comparison by Chuang et al.",
+    clinicalImpactNotes: "Multi-center study demonstrates comparable accuracy and workflow time savings alongside other leading AI contouring systems.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        link: "https://doi.org/10.3389/fonc.2023.1213068"
+      }
+    ],
     version: "2.6",
     releaseDate: "2025-01-15",
     lastUpdated: "2025-12-01",
-    lastRevised: "2026-01-26",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K230685), company official sources"
   }
 ];

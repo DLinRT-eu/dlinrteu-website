@@ -72,6 +72,10 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head (R)",
       "Pelvis: Body Outline"
     ],
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "Legacy product. No auto-contouring-specific peer-reviewed publications found. MRCAT synthetic CT studies exist but not for auto-contouring component.",
+    clinicalImpactNotes: "No published clinical impact data for auto-contouring functionality specifically.",
     lastRevised: "2026-02-23",
     source: "Philips product documentation (2019)"
   }

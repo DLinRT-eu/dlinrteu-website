@@ -55,12 +55,32 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations.",
+    clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     version: "12.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2025-12-11",
-    lastRevised: "2026-01-14",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
-    evidence: ["10.1016/j.radonc.2016.10.009, 10.3389/fonc.2023.1213068"]
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        link: "https://doi.org/10.3389/fonc.2023.1213068"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Breast/thorax validation study in Acta Oncologica",
+        link: "https://doi.org/10.1080/0284186X.2023.2270152"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Early deep learning segmentation validation",
+        link: "https://doi.org/10.1016/j.radonc.2016.10.009"
+      }
+    ]
   }
 ];

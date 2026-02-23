@@ -55,10 +55,21 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Direct sales"],
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024) comparing AccuContour and ProtegeAI. J Med Phys 2025 comparison with Therapanacea.",
+    clinicalImpactNotes: "Multi-center validation demonstrates comparable accuracy for H&N contouring with workflow integration benefits.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI",
+        link: "https://doi.org/10.3389/fonc.2024.1375096"
+      }
+    ],
     version: "1.3.2",
     releaseDate: "2023-10-15",
     lastUpdated: "2025-12-11",
-    lastRevised: "2026-01-08",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K250035), company official sources",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",

@@ -55,6 +55,17 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Discontinued - no longer actively marketed"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Historical evidence - product discontinued.",
+    clinicalImpactNotes: "Multi-center study demonstrated comparable contouring accuracy. Product now discontinued.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        link: "https://doi.org/10.3389/fonc.2023.1213068"
+      }
+    ],
     version: "2.2",
     releaseDate: "2023-05-20",
     lastUpdated: "2026-02-23",

@@ -61,6 +61,17 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Direct sales"],
     },
+    evidenceRigor: "E3",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Independent evaluation by SUNY Upstate Medical University (Tchistiakova et al. 2023, J Appl Clin Med Phys). FDA validation on 579 cases across 5 continents. Multi-continental validation dataset.",
+    clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. FDA validation demonstrates consistent geometric accuracy across global sites.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Independent feasibility evaluation of AI-based deep-learning contouring (30 CT datasets, pelvis/thorax/H&N, 67-84% time savings)",
+        link: "https://doi.org/10.1002/acm2.14090"
+      }
+    ],
     clinicalEvidence: "Performance validated on 579 CT cases across North America, South America, Asia, Australia, and Europe. Ground truth annotations established following RTOG and clinical guidelines. Mean Dice coefficients: Head & Neck 76.1%, Thorax 76.9%, Abdomen 87.3%, Pelvis 85.7%.",
     version: "VA60A",
     releaseDate: "2025-03-27",
@@ -273,7 +284,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Vertebrae: S4",
       "Vertebrae: S5"
     ],
-    lastRevised: "2026-01-14",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }

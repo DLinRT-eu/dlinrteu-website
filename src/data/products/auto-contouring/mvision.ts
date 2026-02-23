@@ -91,10 +91,26 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
     },
     contactEmail: "info@mvision.ai",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023) of 5 AI systems on 80 patients across 4 anatomies (breast, H&N, lung, prostate). Additional studies: Kiljunen (Diagnostics 2020), Langmack (BJR 2024). 11+ peer-reviewed studies across 17 clinics in 12 countries.",
+    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites and institutions.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients (breast, H&N, lung, prostate)",
+        link: "https://doi.org/10.3389/fonc.2023.1213068"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation (DSC 0.92-0.99)",
+        link: "https://doi.org/10.5603/rpor.104144"
+      }
+    ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
     lastUpdated: "2025-12-23",
-    lastRevised: "2026-01-14",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K241490), company official sources"
   }
 ];

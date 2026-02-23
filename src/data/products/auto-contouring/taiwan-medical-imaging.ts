@@ -77,8 +77,12 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     version: "-",
     releaseDate: "2022-09-01",
-    lastUpdated: "2026-01-27",
-    lastRevised: "2026-01-27",
+    evidenceRigor: "E1",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA validation K250427 only. No peer-reviewed publications found.",
+    clinicalImpactNotes: "FDA validation data available but no independent clinical evidence published.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     companyRevisionDate: "",
     source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Taiwan Medical Imaging official website"
   }
