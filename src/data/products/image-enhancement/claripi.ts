@@ -65,11 +65,20 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed publication",
         description: "Validation studies in pediatric abdominal CT, coronary CTA, and liver imaging",
         link: "https://pubmed.ncbi.nlm.nih.gov/?term=ClariCT"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Deep learning CT denoising validation in European Radiology 2020",
+        link: "https://doi.org/10.1007/s00330-020-07081-4"
       }
     ],
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Multiple publications in European Radiology and Radiology. Validation in pediatric, coronary CTA, liver imaging. Kim et al. Eur Radiol 2020.",
+    clinicalImpactNotes: "Workflow improvement through CT denoising enabling dose reduction with preserved diagnostic quality.",
     clinicalEvidence: "Multiple peer-reviewed publications in European Radiology, Radiology, and SPIE demonstrating efficacy in various clinical applications",
-    lastUpdated: "2026-01-26",
-    lastRevised: "2026-01-26",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K183460, K212074) and company website"
   }
 ];

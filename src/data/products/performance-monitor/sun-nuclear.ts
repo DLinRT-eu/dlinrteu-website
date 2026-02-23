@@ -62,8 +62,12 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2015",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Established QA platform. Some peer-reviewed publications on pre-treatment QA workflows.",
+    clinicalImpactNotes: "QA/monitoring tool for patient-specific quality assurance in radiotherapy.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Sun Nuclear official website"
   }
 ];

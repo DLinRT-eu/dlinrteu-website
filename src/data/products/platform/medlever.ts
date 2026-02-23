@@ -63,9 +63,13 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales"]
     },
     usesAI: false,
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Non-Device-MDDS. Workflow management tool. No clinical outcome publications.",
+    clinicalImpactNotes: "QA/monitoring tool for workflow orchestration and documentation in radiation oncology.",
     releaseDate: "2024-01-01",
-    lastUpdated: "2025-11-14",
-    lastRevised: "2026-01-27",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     companyRevisionDate: "2025-11-02",
     source: "Company provided information. Regulatory classification based on FDA 2022 MDDS guidance.",
     clinicalEvidence: "Non-Device-MDDS workflow management platform for radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."

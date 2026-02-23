@@ -59,6 +59,10 @@ export const GE_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Integrated in new CT systems"],
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I3",
+    evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; multiple phantom and clinical studies.",
+    clinicalImpactNotes: "Dosimetric/diagnostic improvement through enhanced low-contrast detectability at reduced dose.",
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -74,6 +78,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "Technical White Paper",
         description: "GE TrueFidelity technical white paper (DLIR method + performance/clinical rationale)",
         link: "https://www.gehealthcare.com/static/truefidelity/images/whitepaper-download/TrueFidelity%20WP_vFinal.pdf"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Greffier et al. Diagnostic and Interventional Imaging 2020 - phantom and clinical evaluation",
+        link: "https://doi.org/10.1016/j.diii.2019.10.007"
       }
     ],
     limitations: [
@@ -82,8 +91,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Dose reduction claims vary by use case and should be validated within site-specific clinical workflows",
     ],
     clinicalEvidence: "Vendor white papers and multiple published studies report improved image quality and low-contrast detectability with deep learning image reconstruction, with dose reduction feasibility depending on protocol and clinical indication.",
-    lastUpdated: "2025-02-10",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
@@ -146,6 +155,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Integrated in new MR systems", "Upgrade for compatible systems"],
     },
+    
+    evidenceRigor: "E3",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "30+ peer-reviewed publications. Bash et al. Radiol Adv 2025 multi-sequence validation (113 pairs, 51.6% time reduction).",
+    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in scan time with maintained diagnostic quality.",
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -158,14 +172,19 @@ export const GE_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Bash et al. Deep learning MRI halves scan time across routine neuroradiologic examinations. Radiology Advances 2025",
+        link: "https://doi.org/10.1093/radadv/umaf029"
+      },
+      {
         type: "Product Information",
         description: "Official GE Healthcare AIR Recon DL product page",
         link: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl"
       }
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
-    lastUpdated: "2025-01-15",
-    lastRevised: "2026-01-19",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }

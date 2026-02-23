@@ -67,8 +67,12 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     },
     version: "Latest",
     releaseDate: "2020-01-01",
-    lastUpdated: "2026-01-28",
-    lastRevised: "2026-01-28",
+    evidenceRigor: "E3",
+    clinicalImpact: "I4",
+    evidenceRigorNotes: "Netherton et al. JCO GO 2023. Demonstrates improved access to quality RT in LMICs. Multiple publications.",
+    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings.",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database (K222728), MD Anderson Cancer Center official website",
     evidence: [
       {

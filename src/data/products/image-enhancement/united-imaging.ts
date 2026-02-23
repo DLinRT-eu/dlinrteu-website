@@ -57,9 +57,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2021",
       distributionChannels: ["Integrated with uRT systems", "Standalone option"]
     },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "No independent peer-reviewed publications found. CE marked but limited external validation.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact.",
     clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
-    lastUpdated: "2024-12-20",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "Company website"
 
   }

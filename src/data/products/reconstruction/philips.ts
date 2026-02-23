@@ -66,9 +66,13 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         link: "https://www.philips.com/healthcare/technology/ct-smart-workflow"
       }
     ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA K210760 validation. Limited independent peer-reviewed publications specific to Precise Image.",
+    clinicalImpactNotes: "Workflow improvement through up to 80% radiation dose reduction.",
     clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
-    lastUpdated: "2025-01-15",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   },
@@ -132,6 +136,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2021",
       distributionChannels: ["Integrated in Philips MRI systems", "Software upgrade"],
     },
+    
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Bonn University clinical case study (cardiac MRI 60 to 20 min). FDA K251397.",
+    clinicalImpactNotes: "Workflow improvement through up to 3x faster MRI scanning.",
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -142,11 +151,16 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         type: "Product Information",
         description: "Official Philips SmartSpeed product page",
         link: "https://www.philips.com/healthcare/resources/landing/smartspeed"
+      },
+      {
+        type: "Clinical Case Study",
+        description: "Bonn University Hospital - Cardiac MRI time reduced from 60 to 20 minutes using SmartSpeed",
+        link: "https://www.philips.com.sg/healthcare/video/philips-mri-enhancement-smartspeed-precise"
       }
     ],
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",
-    lastUpdated: "2025-07-30", 
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-02-23", 
+    lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   }

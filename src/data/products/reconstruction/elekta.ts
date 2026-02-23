@@ -77,6 +77,10 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
         link: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/"
       }
     ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications. Press release only.",
+    clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance.",
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",

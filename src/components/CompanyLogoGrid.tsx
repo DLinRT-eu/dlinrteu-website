@@ -53,22 +53,19 @@ const CompanyLogoGrid = ({ companies, taskFilter }: CompanyLogoGridProps) => {
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 p-4 bg-white"
       >
         {companies.map((company) => (
-          <div key={company.id} className="flex flex-col items-center gap-2">
-            <div className="w-24 h-24 flex items-center justify-center bg-muted rounded-lg p-2">
-              {company.logoUrl ? (
-                <img
-                  src={company.logoUrl}
-                  alt={`${company.name} logo`}
-                  className="max-w-full max-h-full object-contain"
-                  crossOrigin="anonymous"
-                />
-              ) : (
-                <span className="text-xs text-muted-foreground text-center">{company.name}</span>
-              )}
-            </div>
-            <span className="text-xs text-center font-medium text-foreground leading-tight max-w-[100px]">
-              {company.name}
-            </span>
+          <div key={company.id} className="flex items-center justify-center">
+            {company.logoUrl ? (
+              <img
+                src={company.logoUrl}
+                alt={`${company.name} logo`}
+                className="w-32 h-32 object-contain"
+                crossOrigin="anonymous"
+              />
+            ) : (
+              <div className="w-32 h-32 flex items-center justify-center bg-muted rounded-lg">
+                <span className="text-xs text-muted-foreground text-center px-2">{company.name}</span>
+              </div>
+            )}
           </div>
         ))}
       </div>

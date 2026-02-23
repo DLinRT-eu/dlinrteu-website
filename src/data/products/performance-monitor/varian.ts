@@ -66,6 +66,17 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2012",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    evidenceRigor: "E2",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Multiple peer-reviewed publications on independent dose verification. Czarnecki et al. Med Phys 2018.",
+    clinicalImpactNotes: "QA/monitoring tool for independent dose verification and treatment delivery verification.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Czarnecki et al. Independent dose verification in Medical Physics 2018",
+        link: "https://doi.org/10.1002/mp.12736"
+      }
+    ],
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
     source: "Varian official website"
