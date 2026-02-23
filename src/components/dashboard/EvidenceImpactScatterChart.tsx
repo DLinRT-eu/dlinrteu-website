@@ -29,14 +29,22 @@ const IMPACT_LABELS: Record<number, string> = {
   5: 'I5 – Survival',
 };
 
-// Seeded pseudo-random for stable jitter per product
-function stableJitter(seed: string): number {
+// Seeded pseudo-random [0,1) from string
+function seededRandom(seed: string): number {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
     hash = ((hash << 5) - hash) + seed.charCodeAt(i);
     hash |= 0;
   }
-  return ((hash % 1000) / 1000) * 0.6 - 0.3; // range [-0.3, 0.3]
+  return (((hash & 0x7fffffff) % 10000) + 0.5) / 10000; // avoid exact 0
+}
+
+// Gaussian-distributed jitter (Box-Muller), clamped to ±0.35
+function gaussianJitter(seed1: string, seed2: string, sigma = 0.15): number {
+  const u1 = seededRandom(seed1);
+  const u2 = seededRandom(seed2);
+  const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  return Math.max(-0.35, Math.min(0.35, z * sigma));
 }
 
 interface ScatterPoint {
@@ -83,8 +91,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       .map((p): ScatterPoint => {
         const baseX = IMPACT_MAP[p.clinicalImpact!] ?? 0;
         const baseY = RIGOR_MAP[p.evidenceRigor!] ?? 0;
-        const jx = stableJitter(p.name + 'x');
-        const jy = stableJitter(p.name + 'y');
+        const jx = gaussianJitter(p.name + '_jx', p.company + '_jx');
+        const jy = gaussianJitter(p.name + '_jy', p.company + '_jy');
         return {
           x: baseX + jx,
           y: baseY + jy,
