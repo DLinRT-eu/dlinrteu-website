@@ -45,6 +45,10 @@ export interface PresentationData {
     newsletterSignups: number;
     rssSubscribers: number;
   };
+  companyLogosByTask?: Array<{
+    task: string;
+    companies: Array<{ name: string; logo: string }>;
+  }>;
 }
 
 export class PptxExporter {
@@ -1058,6 +1062,56 @@ export class PptxExporter {
      });
   }
 
+  private addCompanyLogosByTaskSlides(data: PresentationData) {
+    if (!data.companyLogosByTask?.length) return;
+
+    const contentWidth = this.getContentWidth();
+
+    data.companyLogosByTask.forEach(group => {
+      const slide = this.pptx.addSlide();
+      slide.background = { color: this.brandColors.background };
+
+      slide.addText(`${group.task} Companies`, {
+        x: this.layout.margin.left,
+        y: this.layout.margin.top,
+        w: contentWidth,
+        h: 1,
+        fontSize: 28,
+        color: this.brandColors.primary,
+        bold: true,
+        fontFace: "Arial"
+      });
+
+      const validLogos = group.companies.filter(c => c.logo).slice(0, 32);
+      if (validLogos.length === 0) return;
+
+      const cols = Math.min(8, Math.ceil(Math.sqrt(validLogos.length * 1.2)));
+      const rows = Math.ceil(validLogos.length / cols);
+      const availableHeight = 5.8;
+      const logoMaxWidth = Math.min(1.2, contentWidth / cols);
+      const logoMaxHeight = Math.min(0.8, availableHeight / (rows * 1.4));
+      const startX = this.layout.margin.left + (contentWidth - (cols * logoMaxWidth)) / 2;
+      const startY = 1.6;
+
+      validLogos.forEach((company, index) => {
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        const x = startX + col * logoMaxWidth;
+        const y = startY + row * (logoMaxHeight * 1.4);
+
+        const logoConfig = {
+          path: company.logo,
+          x,
+          y,
+          w: logoMaxWidth * 0.8,
+          h: logoMaxHeight * 0.8,
+          sizing: { type: "contain", w: logoMaxWidth * 0.8, h: logoMaxHeight * 0.8 }
+        };
+        this.safeAddImage(slide, logoConfig);
+      });
+    });
+  }
+
   public async generatePresentation(data: PresentationData): Promise<void> {
     try {
       // Validate data before proceeding
@@ -1071,6 +1125,7 @@ export class PptxExporter {
       this.addMissionVisionSlide();
       this.addOverviewSlide(data);
       this.addCompanyLogosSlide(data);
+      this.addCompanyLogosByTaskSlides(data);
       
       // Section 2: Analytics & Charts
       this.addCategoryBreakdownSlide(data);

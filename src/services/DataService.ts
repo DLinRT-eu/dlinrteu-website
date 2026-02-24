@@ -379,6 +379,31 @@ class DataService {
       logo: company.logoUrl ? company.logoUrl : ""
     }));
 
+    // Build per-task company logos
+    const taskCompanyMap = new Map<string, Set<string>>();
+    companies.forEach(company => {
+      const tasks: string[] = [];
+      if (company.primaryTask) tasks.push(company.primaryTask);
+      if (company.secondaryTasks) tasks.push(...company.secondaryTasks);
+      tasks.forEach(task => {
+        if (!taskCompanyMap.has(task)) taskCompanyMap.set(task, new Set());
+        taskCompanyMap.get(task)!.add(company.name);
+      });
+    });
+
+    const companyLogosByTask = Array.from(taskCompanyMap.entries())
+      .map(([task, companyNames]) => ({
+        task,
+        companies: Array.from(companyNames)
+          .map(name => {
+            const c = companies.find(co => co.name === name);
+            return { name, logo: c?.logoUrl || "" };
+          })
+          .filter(c => c.logo)
+      }))
+      .filter(group => group.companies.length > 0)
+      .sort((a, b) => b.companies.length - a.companies.length);
+
     // Dashboard-based analytics data (reflecting real platform content)
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -424,6 +449,7 @@ class DataService {
       totalProducts: products.length,
       totalCategories: categories.length,
       companyLogos,
+      companyLogosByTask,
       categoryBreakdown,
       productsByCategory,
       modalityBreakdown,
