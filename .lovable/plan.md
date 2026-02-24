@@ -1,70 +1,259 @@
 
 
-# Improve Evidence Classification Methodology
+# Audit and Fill Study Quality Sub-Attributes for All Products
 
-## Context
+## Overview
 
-The current DLinRT dual-axis system (Evidence Rigor E0-E3 x Clinical Impact I0-I5) is adapted from van Leeuwen et al. 2021. After reviewing several published frameworks, the dual-axis approach remains methodologically sound and is actually more nuanced than alternatives. However, three specific improvements are warranted based on the latest literature.
+After reviewing all product data files across all categories, this plan adds the 5 optional study quality boolean fields (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`) to every product that has sufficient evidence data to make a determination.
 
-## Proposed Changes
+Products with E0 (no evidence) are excluded -- the fields remain undefined (meaning "not assessed"). Products with E1+ have been audited against their cited studies and evidence notes.
 
-### 1. Enrich the Evidence Rigor Axis with Study Quality Sub-Attributes
+## Audit Results Summary
 
-The van Leeuwen 2025 update (173 products, Eur Radiol 2026;36:526-536) tracks additional study quality dimensions that significantly affect evidence reliability. These should be captured as optional boolean/structured metadata on each product, alongside the E0-E3 level.
+| Attribute | Products with TRUE | Notes |
+|-----------|-------------------|-------|
+| vendorIndependent | 22 products | At least one study conducted by non-vendor authors |
+| multiCenter | 14 products | Evidence from 3+ clinical sites |
+| multiNational | 10 products | Data from multiple countries |
+| prospective | 3 products | At least one prospective study design |
+| externalValidation | 16 products | Validated on external (non-training) dataset |
 
-New optional fields on `ProductDetails`:
+## Files to Modify (37 files)
 
-| Field | Type | Description | Source |
-|-------|------|-------------|--------|
-| `evidenceVendorIndependent` | boolean | At least one study conducted independently of vendor | van Leeuwen 2025 |
-| `evidenceMultiCenter` | boolean | Evidence from 3+ clinical sites | van Leeuwen 2025 |
-| `evidenceMultiNational` | boolean | Data from multiple countries | van Leeuwen 2025 |
-| `evidenceProspective` | boolean | At least one prospective study design | van Leeuwen 2025 |
-| `evidenceExternalValidation` | boolean | Validated on external dataset | Pham 2023 |
+### Auto-Contouring (14 files)
 
-These sub-attributes do not change the E0-E3 level but provide richer context. They can be displayed as small icons or badges next to the rigor level on product pages.
+**1. `src/data/products/auto-contouring/ge-healthcare.ts`** (GE Auto Segmentation)
+- `evidenceVendorIndependent: false` (vendor FDA validation)
+- `evidenceMultiCenter: true` (9 global sites)
+- `evidenceMultiNational: true` (global sites)
+- `evidenceProspective: false` (retrospective)
+- `evidenceExternalValidation: true` (multi-site data)
 
-### 2. Align Impact Level Descriptions with Fryback & Thornbury Terminology
+**2. `src/data/products/auto-contouring/limbus.ts`** (Limbus Contour)
+- `evidenceVendorIndependent: true` (Starke et al. BJR 2024)
+- `evidenceMultiCenter: true` (Canada and UK institutions)
+- `evidenceMultiNational: true` (Canada and UK)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-The Impact axis (I0-I5) maps well to the Fryback & Thornbury hierarchy used by van Leeuwen, but the descriptions and names should be more explicitly aligned for cross-referencing. Proposed refinements to names and descriptions in `evidence-impact-levels.ts`:
+**3. `src/data/products/auto-contouring/manteia.ts`** (AccuContour)
+- `evidenceVendorIndependent: true` (Front Oncol 2024 multi-center comparison)
+- `evidenceMultiCenter: true` (multi-center H&N validation)
+- `evidenceMultiNational: false` (not confirmed)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-| Level | Current Name | Proposed Name | Fryback & Thornbury Equivalent |
-|-------|-------------|---------------|-------------------------------|
-| I0 | None Demonstrated | None Demonstrated | (No equivalent -- product exists but no studies) |
-| I1 | Quality Assurance | Technical Efficacy | Level 1: Technical efficacy |
-| I2 | Workflow | Diagnostic/Task Accuracy | Level 2: Diagnostic accuracy efficacy |
-| I3 | Decision | Diagnostic Thinking | Level 3: Diagnostic thinking efficacy |
-| I4 | Outcome | Therapeutic/Patient Outcome | Levels 4-5: Therapeutic + Patient outcome efficacy |
-| I5 | Societal | Societal | Level 6: Societal efficacy |
+**4. `src/data/products/auto-contouring/mim-software.ts`** (Contour ProtegeAI+)
+- `evidenceVendorIndependent: true` (Front Oncol 2024)
+- `evidenceMultiCenter: true` (multi-center comparison)
+- `evidenceMultiNational: false` (not confirmed)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-Note: The current I1 ("Quality Assurance") and I2 ("Workflow") are DLinRT-specific adaptations for radiotherapy that don't map cleanly to Fryback & Thornbury's diagnostic imaging hierarchy. Since DLinRT covers therapeutic AI (contouring, planning, tracking), the adapted names are more appropriate. However, the descriptions should explicitly reference the Fryback & Thornbury levels for academic credibility.
+**5. `src/data/products/auto-contouring/mirada.ts`** (DLC Expert)
+- `evidenceVendorIndependent: true` (Doolan et al. 2023)
+- `evidenceMultiCenter: true` (multi-center 5-system comparison)
+- `evidenceMultiNational: false` (not confirmed)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-**Recommendation**: Keep the current names (they work well for radiotherapy context) but add a `frybackThornburyLevel` field to each impact level for cross-referencing, and update descriptions to mention the mapping.
+**6. `src/data/products/auto-contouring/mvision.ts`** (Contour+)
+- `evidenceVendorIndependent: true` (Doolan et al. 2023, Langmack 2024)
+- `evidenceMultiCenter: true` (17 clinics)
+- `evidenceMultiNational: true` (12 countries)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-### 3. Update References to Include 2025 Literature
+**7. `src/data/products/auto-contouring/oncosoft.ts`** (OncoStudio)
+- `evidenceVendorIndependent: true` (Tokyo Medical University)
+- `evidenceMultiCenter: false` (single-center)
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-Add the van Leeuwen 2025 update and Pham 2023 to the `EVIDENCE_IMPACT_REFERENCE` section in `evidence-impact-levels.ts`, so the Resources page cites the latest evidence.
+**8. `src/data/products/auto-contouring/radformation.ts`** (AutoContour)
+- `evidenceVendorIndependent: true` (Doolan et al. 2023)
+- `evidenceMultiCenter: true` (multi-center 5-system comparison)
+- `evidenceMultiNational: false` (not confirmed)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-New references to add:
-- **van Leeuwen 2025**: Antonissen N, et al. "Artificial intelligence in radiology: 173 commercially available products and their scientific evidence." Eur Radiol. 2026;36:526-536. DOI: 10.1007/s00330-025-11830-8
-- **Pham 2023**: Pham N, et al. "Critical Appraisal of AI-Enabled Imaging Tools Using the Levels of Evidence System." AJNR. 2023;44(5):E21-E28. DOI: 10.3174/ajnr.A7850
-- **FUTURE-AI 2025**: Lekadir K, et al. "FUTURE-AI: international consensus guideline for trustworthy and deployable AI in healthcare." BMJ. 2025;388:e081554
+**9. `src/data/products/auto-contouring/raysearch.ts`** (DLS)
+- `evidenceVendorIndependent: true` (Doolan et al. 2023)
+- `evidenceMultiCenter: true` (multi-center comparison)
+- `evidenceMultiNational: false` (not confirmed)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-## Files to Modify
+**10. `src/data/products/auto-contouring/siemens.ts`** (AI-Rad Companion)
+- `evidenceVendorIndependent: true` (Tchistiakova et al. 2023 SUNY)
+- `evidenceMultiCenter: true` (579 cases, 5 continents)
+- `evidenceMultiNational: true` (5 continents)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
 
-1. **`src/types/productDetails.d.ts`** -- Add 5 new optional boolean fields for study quality sub-attributes
-2. **`src/data/evidence-impact-levels.ts`** -- Add `frybackThornburyLevel` to impact levels, update descriptions, add new references to `EVIDENCE_IMPACT_REFERENCE`
-3. **`src/components/resources/EvidenceImpactMatrix.tsx`** -- Display Fryback & Thornbury cross-references in the matrix tooltips
-4. **`docs/review/GUIDE.md`** -- Update evidence classification documentation with new sub-attributes and references
+**11. `src/data/products/auto-contouring/therapanacea.ts`** (Annotate)
+- `evidenceVendorIndependent: true` (Doolan et al. 2023, Young et al. 2024)
+- `evidenceMultiCenter: true` (multi-center comparison)
+- `evidenceMultiNational: true` (multiple countries)
+- `evidenceProspective: true` (Gregoire et al. 2020 blinded prospective)
+- `evidenceExternalValidation: true`
 
-## Files NOT Changed
+**12. `src/data/products/auto-contouring/vysioner.ts`** (VBrain)
+- `evidenceVendorIndependent: true` (Wang et al. 2023)
+- `evidenceMultiCenter: false` (single-center)
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
 
-- Product data files: The new sub-attributes are all optional; existing products will simply show "not assessed" for these fields. They can be populated gradually during reviews.
-- Dashboard matrix: No structural change needed; the E0-E3 x I0-I5 grid remains the same.
+**13. `src/data/products/auto-contouring/carina.ts`** (INTContour)
+- `evidenceVendorIndependent: true` (Kibudde et al. 2024)
+- `evidenceMultiCenter: false` (not confirmed 3+ sites)
+- `evidenceMultiNational: true` (LMICs, multiple countries)
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
 
-## What This Does NOT Do
+**14. `src/data/products/auto-contouring/ai-medical.ts`** (Jazz)
+- `evidenceVendorIndependent: false` (not confirmed independent)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
 
-- Does **not** replace the dual-axis system (it's methodologically superior to single-axis alternatives)
-- Does **not** add the Pham lifecycle levels (L6-L7 for IT integration and regulatory compliance are already covered by DLinRT's separate regulatory fields)
-- Does **not** add CLAIM/TRIPOD+AI checklists (these are reporting guidelines for study authors, not product classification tools)
+### Products with E1 and all-false sub-attributes (11 files)
+
+These all get all 5 fields set to `false`:
+
+- `src/data/products/auto-contouring/brainlab.ts` (both products)
+- `src/data/products/auto-contouring/coreline.ts`
+- `src/data/products/auto-contouring/directorgans.ts`
+- `src/data/products/auto-contouring/everfortune.ts` (Seg Pro V3 only; RT Suite v1 is E0)
+- `src/data/products/auto-contouring/taiwan-medical-imaging.ts`
+- `src/data/products/image-enhancement/algomedica.ts`
+- `src/data/products/image-enhancement/ge-healthcare.ts` (Precision DL only)
+- `src/data/products/image-enhancement/philips-smartdose.ts`
+- `src/data/products/image-enhancement/siemens.ts`
+- `src/data/products/reconstruction/canon.ts` (AiCE MR only)
+- `src/data/products/reconstruction/elekta.ts`
+- `src/data/products/reconstruction/philips.ts` (Precise Image only)
+- `src/data/products/registration/pymedix.ts`
+- `src/data/products/registration/therapanacea.ts`
+- `src/data/products/treatment-planning/manteia-mozi.ts`
+- `src/data/products/performance-monitor/radformation.ts`
+- `src/data/products/performance-monitor/sun-nuclear.ts`
+- `src/data/products/platform/mvision.ts`
+
+### Image Enhancement (4 files with TRUE values)
+
+**15. `src/data/products/image-enhancement/claripi.ts`** (ClariCT.AI)
+- `evidenceVendorIndependent: true` (Kim et al. Eur Radiol 2020)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+**16. `src/data/products/image-enhancement/airs-medical.ts`** (SwiftMR)
+- `evidenceVendorIndependent: false` (unclear independence)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+**17. `src/data/products/image-enhancement/subtle-medical.ts`** (SubtleMR, SubtlePET)
+- SubtleMR: all false (unclear independence)
+- SubtlePET: `evidenceVendorIndependent: true` (Katsari et al. 2021), rest false
+
+### Reconstruction (5 files with TRUE values)
+
+**18. `src/data/products/reconstruction/canon.ts`** (AiCE CT)
+- `evidenceVendorIndependent: true` (Higaki et al. university study)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+**19. `src/data/products/reconstruction/ge-healthcare.ts`** (TrueFidelity Pro, AIR Recon DL)
+- TrueFidelity Pro: `evidenceVendorIndependent: true` (Greffier et al.), rest false
+- AIR Recon DL: `evidenceVendorIndependent: true`, `evidenceMultiCenter: true`, `evidenceMultiNational: true`, `evidenceProspective: true` (prospective reader studies), `evidenceExternalValidation: true`
+
+**20. `src/data/products/reconstruction/siemens.ts`** (Deep Resolve)
+- `evidenceVendorIndependent: true` (Bash et al. 2025)
+- `evidenceMultiCenter: true`
+- `evidenceMultiNational: true`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: true`
+
+**21. `src/data/products/reconstruction/philips.ts`** (SmartSpeed)
+- `evidenceVendorIndependent: true` (Bonn University)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+### Tracking (1 file)
+
+**22. `src/data/products/tracking/accuray.ts`** (Synchrony)
+- `evidenceVendorIndependent: false` (Pepin et al. unclear independence)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+### Treatment Planning (2 files with TRUE values)
+
+**23. `src/data/products/treatment-planning/md-anderson.ts`** (RPA)
+- `evidenceVendorIndependent: true` (academic center product)
+- `evidenceMultiCenter: true` (LMIC deployment)
+- `evidenceMultiNational: true` (global LMICs)
+- `evidenceProspective: true` (clinical deployment study)
+- `evidenceExternalValidation: true`
+
+**24. `src/data/products/treatment-planning/sun-nuclear.ts`** (Plan AI)
+- `evidenceVendorIndependent: false` (Hopkins collaboration)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+**25. `src/data/products/treatment-planning/raysearch-planning.ts`** (DL Dose Prediction)
+- `evidenceVendorIndependent: false` (unclear independence)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+### Performance Monitor (1 file with TRUE values)
+
+**26. `src/data/products/performance-monitor/varian.ts`** (Mobius3D)
+- `evidenceVendorIndependent: true` (Czarnecki et al. 2018)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+### Image Enhancement GE (AIR Recon DL Enhancement Mode)
+
+**27. `src/data/products/image-enhancement/ge-healthcare.ts`** (AIR Recon DL Enhancement)
+- `evidenceVendorIndependent: false` (unclear)
+- `evidenceMultiCenter: false`
+- `evidenceMultiNational: false`
+- `evidenceProspective: false`
+- `evidenceExternalValidation: false`
+
+## Products NOT Modified (no evidence or pipeline/empty)
+
+- All E0 products (no sub-attributes can be determined)
+- Pipeline products (MedLever, Therapanacea pipeline)
+- Empty arrays (MVision Image Synthesis, MVision Registration, Clinical Prediction)
+- Manteia AccuLearning (research tool, no evidence classification)
+- Image Synthesis products without evidence levels (Philips MRCATs, Siemens syngo, SyntheticMR, Therapanacea MR-Box, AdaptBox, Spectronic)
+
+## Implementation Approach
+
+For each product file:
+1. Add the 5 boolean fields after the existing `evidenceRigorNotes` and `clinicalImpactNotes` fields
+2. Use `true`/`false` explicitly for all assessed products (E1+)
+3. Leave fields undefined for E0 products (already "not assessed" by convention)
+
+Total files to modify: approximately 37 files across all categories.
 
