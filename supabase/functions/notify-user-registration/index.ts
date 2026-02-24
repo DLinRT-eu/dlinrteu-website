@@ -64,7 +64,7 @@ const handler = async (req: Request): Promise<Response> => {
     const authHeader = req.headers.get("authorization");
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     
-    if (!authHeader || !serviceRoleKey || !authHeader.includes(serviceRoleKey)) {
+    if (!authHeader || !serviceRoleKey || authHeader !== `Bearer ${serviceRoleKey}`) {
       console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
