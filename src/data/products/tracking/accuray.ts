@@ -68,9 +68,9 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
 
 },
     evidenceRigor: "E2",
-    clinicalImpact: "I3",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "Pepin et al. JACMP 2020 motion tracking accuracy. Multiple studies on CyberKnife and Radixact integration.",
-    clinicalImpactNotes: "Dosimetric improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose.",
+    clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose.",
     evidence: [
       {
         type: "Peer-reviewed Publication",
