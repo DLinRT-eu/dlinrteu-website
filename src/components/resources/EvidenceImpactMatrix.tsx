@@ -118,6 +118,11 @@ const EvidenceImpactMatrix = ({
                       <TooltipContent side="top" className="max-w-xs">
                         <div className="text-sm font-medium">{impact.level}: {impact.name}</div>
                         <p className="text-xs text-muted-foreground">{impact.description}</p>
+                        {impact.frybackThornburyLevel && (
+                          <p className="text-xs text-muted-foreground/80 italic mt-1 pt-1 border-t border-border/50">
+                            F&T: {impact.frybackThornburyLevel}
+                          </p>
+                        )}
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -202,6 +207,11 @@ const EvidenceImpactMatrix = ({
                               <div className="text-xs">
                                 <span className="text-muted-foreground">Impact:</span> {impact.name}
                               </div>
+                              {impact.frybackThornburyLevel && (
+                                <div className="text-xs italic text-muted-foreground/80">
+                                  F&T: {impact.frybackThornburyLevel}
+                                </div>
+                              )}
                               <div className="text-xs pt-1 border-t">
                                 {zone.description}
                               </div>

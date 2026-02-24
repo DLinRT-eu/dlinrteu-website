@@ -90,6 +90,13 @@ export interface ProductDetails extends Product {
   clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
   clinicalImpactNotes?: string;
   
+  // Study quality sub-attributes (van Leeuwen 2025, Pham 2023)
+  evidenceVendorIndependent?: boolean;  // At least one study independent of vendor
+  evidenceMultiCenter?: boolean;        // Evidence from 3+ clinical sites
+  evidenceMultiNational?: boolean;      // Data from multiple countries
+  evidenceProspective?: boolean;        // At least one prospective study design
+  evidenceExternalValidation?: boolean; // Validated on external dataset
+  
   // Additional compatibility fields
   url?: string;
   contactEmail?: string;
