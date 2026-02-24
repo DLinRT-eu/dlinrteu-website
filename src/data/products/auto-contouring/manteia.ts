@@ -211,6 +211,11 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre H&N evaluation. Multiple independent studies across institutions.",
     clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

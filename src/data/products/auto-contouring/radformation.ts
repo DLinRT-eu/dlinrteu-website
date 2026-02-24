@@ -355,6 +355,11 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Additional geometric/dosimetric comparison by Chuang et al.",
     clinicalImpactNotes: "Multi-center study demonstrates comparable accuracy and workflow time savings alongside other leading AI contouring systems.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

@@ -192,6 +192,11 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Kibudde et al., Adv Radiat Oncol 2024 - impact study in LMICs. Medical Physics Journal 2023 publication. ESTRO 2022 abstract.",
     clinicalImpactNotes: "Demonstrates clinical impact particularly in low- and middle-income countries, enabling access to quality contouring.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: true,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "Peer-reviewed Publication",

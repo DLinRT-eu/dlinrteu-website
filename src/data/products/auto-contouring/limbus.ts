@@ -86,6 +86,11 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-institution study (Canada & UK) by Starke et al. BJR 2024. Evaluated time savings and geometric accuracy for prostate and lymph node contours. Found time savings of 13-26 minutes.",
     clinicalImpactNotes: "Demonstrates meaningful time savings (13-26 minutes) for prostate and lymph node contouring across institutions.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

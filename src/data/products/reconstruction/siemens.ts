@@ -66,6 +66,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Bash et al. Radiol Adv 2025 (113 sequence pairs, 51.6% scan time reduction). Multiple independent validations across institutions.",
     clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "FDA 510(k) Summary",

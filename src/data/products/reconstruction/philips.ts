@@ -70,6 +70,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA K210760 validation. Limited independent peer-reviewed publications specific to Precise Image.",
     clinicalImpactNotes: "Workflow improvement through up to 80% radiation dose reduction.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
@@ -141,6 +146,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Bonn University clinical case study (cardiac MRI 60 to 20 min). FDA K251397.",
     clinicalImpactNotes: "Workflow improvement through up to 3x faster MRI scanning.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "FDA 510(k) Summary",

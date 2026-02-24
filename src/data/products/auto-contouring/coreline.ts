@@ -148,8 +148,13 @@ const rawProduct: ProductDetails = {
   ],
   evidenceRigor: "E1",
   clinicalImpact: "I2",
-  evidenceRigorNotes: "Limited independent peer-reviewed evidence. FDA validation data (K200714). Single-center evaluations available.",
-  clinicalImpactNotes: "FDA validation data demonstrates geometric accuracy. Limited independent clinical impact publications.",
+    evidenceRigorNotes: "Limited independent peer-reviewed evidence. FDA validation data (K200714). Single-center evaluations available.",
+    clinicalImpactNotes: "FDA validation data demonstrates geometric accuracy. Limited independent clinical impact publications.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
   source: "Company official sources",
 };
 

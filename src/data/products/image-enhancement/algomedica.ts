@@ -75,6 +75,11 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Published case studies on company website. FDA K161625. Limited indexed peer-reviewed publications.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company provided information"

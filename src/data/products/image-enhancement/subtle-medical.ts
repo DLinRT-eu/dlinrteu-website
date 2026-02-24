@@ -66,6 +66,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. FDA validation K191688, K223623.",
     clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling 2-4x faster scanning.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "Peer-reviewed Publication",
@@ -142,6 +147,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation. Liang et al. 2023 multi-tracer validation.",
     clinicalImpactNotes: "Workflow improvement through PET enhancement enabling 4x faster scans or 75% dose reduction.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "Peer-reviewed Publication",
