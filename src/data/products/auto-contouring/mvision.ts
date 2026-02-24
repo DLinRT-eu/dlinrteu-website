@@ -95,6 +95,11 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023) of 5 AI systems on 80 patients across 4 anatomies (breast, H&N, lung, prostate). Additional studies: Kiljunen (Diagnostics 2020), Langmack (BJR 2024). 11+ peer-reviewed studies across 17 clinics in 12 countries.",
     clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites and institutions.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

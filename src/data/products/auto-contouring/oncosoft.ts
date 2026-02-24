@@ -300,6 +300,11 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "New peer-reviewed study (2025) from Tokyo Medical University Ibaraki Medical Center: 'Geometric Accuracy Assessment of AI-Based Auto-contouring Using OncoStudio for Prostate Cancer Treatment Planning'. Over 4M contours for 80K patients in clinical practice.",
     clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Peer-reviewed geometric accuracy assessment for prostate cancer treatment planning.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

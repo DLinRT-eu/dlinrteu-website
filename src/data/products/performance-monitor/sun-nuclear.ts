@@ -66,6 +66,11 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Established QA platform. Some peer-reviewed publications on pre-treatment QA workflows.",
     clinicalImpactNotes: "QA/monitoring tool for patient-specific quality assurance in radiotherapy.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
     source: "Sun Nuclear official website"

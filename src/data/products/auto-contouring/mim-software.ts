@@ -59,6 +59,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024) comparing AccuContour and ProtegeAI. J Med Phys 2025 comparison with Therapanacea.",
     clinicalImpactNotes: "Multi-center validation demonstrates comparable accuracy for H&N contouring with workflow integration benefits.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

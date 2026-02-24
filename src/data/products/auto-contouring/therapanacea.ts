@@ -238,6 +238,11 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Blinded prospective evaluation by Gregoire et al. 2020. Young et al. 2024 H&N blinded assessment. Multiple independent validations across institutions.",
     clinicalImpactNotes: "Blinded prospective study shows clinical acceptability and significant contouring time savings across multiple anatomical sites.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: true,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

@@ -341,6 +341,11 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Liu et al. 2023 hippocampal avoidance WBRT (pubmed/36773828). Cardiac substructures study (pubmed/37585426). Single-center studies on specific applications.",
     clinicalImpactNotes: "Single-center studies demonstrate clinical utility for specific applications (hippocampal avoidance, cardiac substructures).",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastRevised: "2026-02-23",
     guidelines: [
       {

@@ -76,6 +76,11 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I0",
     evidenceRigorNotes: "Legacy product. No auto-contouring-specific peer-reviewed publications found. MRCAT synthetic CT studies exist but not for auto-contouring component.",
     clinicalImpactNotes: "No published clinical impact data for auto-contouring functionality specifically.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastRevised: "2026-02-23",
     source: "Philips product documentation (2019)"
   }

@@ -65,6 +65,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Independent evaluation by SUNY Upstate Medical University (Tchistiakova et al. 2023, J Appl Clin Med Phys). FDA validation on 579 cases across 5 continents. Multi-continental validation dataset.",
     clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. FDA validation demonstrates consistent geometric accuracy across global sites.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",

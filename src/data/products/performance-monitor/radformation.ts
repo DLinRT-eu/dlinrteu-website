@@ -66,6 +66,11 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Published TG-275 compliance automation studies. Limited indexed publications specific to ClearCheck.",
     clinicalImpactNotes: "QA/monitoring tool for automated plan checking and structure validation.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
     source: "Radformation official website"

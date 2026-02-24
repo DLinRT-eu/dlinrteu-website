@@ -63,6 +63,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; multiple phantom and clinical studies.",
     clinicalImpactNotes: "Workflow improvement through enhanced low-contrast detectability at reduced dose, improving CT protocol efficiency.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -160,6 +165,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "30+ peer-reviewed publications. Bash et al. Radiol Adv 2025 multi-sequence validation (113 pairs, 51.6% time reduction).",
     clinicalImpactNotes: "Workflow improvement through up to 50% reduction in scan time with maintained diagnostic quality.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceProspective: true,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "FDA 510(k) Summary",

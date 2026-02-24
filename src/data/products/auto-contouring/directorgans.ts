@@ -77,6 +77,11 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Vendor white paper (ASTRO 2021). FDA validation (K233650, K250822). Novel CT-integrated approach but limited independent peer-reviewed publications.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. FDA validation demonstrates technical performance.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     lastRevised: "2026-02-23",
     source: "Siemens Healthineers official documentation, DirectORGANS white paper (https://www.astro.org/ASTRO/media/ASTRO/Meetings%20and%20Education/PDFs/Refresher21/WhitePaper_DirectORGANS.pdf), FDA 510(k) K233650 (https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233650.pdf), FDA 510(k) K250822"
   }

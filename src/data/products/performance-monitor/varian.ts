@@ -70,6 +70,11 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Multiple peer-reviewed publications on independent dose verification. Czarnecki et al. Med Phys 2018.",
     clinicalImpactNotes: "QA/monitoring tool for independent dose verification and treatment delivery verification.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "Peer-reviewed Publication",

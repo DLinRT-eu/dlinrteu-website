@@ -65,6 +65,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study; Tatsugami et al. Radiology 2019 coronary CTA.",
     clinicalImpactNotes: "Workflow improvement through dose reduction (up to 82%) with maintained image quality, enabling more efficient CT protocols.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "FDA 510(k) Summary",
@@ -161,6 +166,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA K192574 validation. Limited independent publications for MR application.",
     clinicalImpactNotes: "Workflow improvement through up to 50% reduction in MRI scan time.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
