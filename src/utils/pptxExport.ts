@@ -33,11 +33,11 @@ export interface PresentationData {
     total: number 
   }>;
   analyticsData: {
-    totalViews: number;
-    uniqueVisitors: number;
-    averageSessionDuration: string;
-    topPages: Array<{ page: string; views: number }>;
-    trafficTrends: Array<{ month: string; visitors: number }>;
+    totalProducts: number;
+    totalCompanies: number;
+    totalCategories: number;
+    certificationBreakdown: Array<{ name: string; count: number }>;
+    categoryBreakdown: Array<{ name: string; count: number }>;
   };
   contactInfo: {
     email: string;
@@ -642,7 +642,7 @@ export class PptxExporter {
     slide.background = { color: this.brandColors.background };
     
     // Title
-    slide.addText("Platform Analytics & Engagement", {
+    slide.addText("Platform Content Summary", {
       x: this.layout.margin.left,
       y: this.layout.margin.top,
       w: contentWidth,
@@ -653,28 +653,19 @@ export class PptxExporter {
       fontFace: "Arial"
     });
     
-    // Validate analytics data
-    const analytics = data.analyticsData || {
-      totalViews: 0,
-      uniqueVisitors: 0,
-      averageSessionDuration: "0:00",
-      topPages: []
-    };
-    
-    // Analytics stats cards - better positioned
+    // Stats cards - real content metrics
     const cardWidth = 2.8;
     const cardSpacing = 0.4;
     const totalCardsWidth = 3 * cardWidth + 2 * cardSpacing;
     const startX = this.layout.margin.left + (contentWidth - totalCardsWidth) / 2;
     
     const stats = [
-      { label: "Total Views", value: analytics.totalViews?.toLocaleString() || "0", x: startX },
-      { label: "Unique Visitors", value: analytics.uniqueVisitors?.toLocaleString() || "0", x: startX + cardWidth + cardSpacing },
-      { label: "Avg. Session", value: analytics.averageSessionDuration || "0:00", x: startX + 2 * (cardWidth + cardSpacing) }
+      { label: "AI Products", value: (data.analyticsData.totalProducts || data.totalProducts)?.toString() || "0", x: startX },
+      { label: "Companies", value: (data.analyticsData.totalCompanies || data.totalCompanies)?.toString() || "0", x: startX + cardWidth + cardSpacing },
+      { label: "Clinical Categories", value: (data.analyticsData.totalCategories || data.totalCategories)?.toString() || "0", x: startX + 2 * (cardWidth + cardSpacing) }
     ];
     
     stats.forEach(stat => {
-      // Card background
       slide.addShape("roundRect", {
         x: stat.x,
         y: 1.8,
@@ -684,7 +675,6 @@ export class PptxExporter {
         line: { color: this.brandColors.secondary, width: 1 }
       });
       
-      // Value
       slide.addText(stat.value, {
         x: stat.x,
         y: 2.1,
@@ -697,7 +687,6 @@ export class PptxExporter {
         fontFace: "Arial"
       });
       
-      // Label
       slide.addText(stat.label, {
         x: stat.x,
         y: 2.8,
@@ -710,24 +699,26 @@ export class PptxExporter {
       });
     });
     
-    // Top pages table - better positioned
-    const validTopPages = analytics.topPages?.slice(0, 5) || [];
-    if (validTopPages.length > 0) {
+    // Products by Category table (real data)
+    const validCategories = (data.analyticsData.categoryBreakdown || data.categoryBreakdown || []).slice(0, 8);
+    if (validCategories.length > 0) {
       const tableData = [
         [
-          { text: "Most Viewed Pages", options: { bold: true, fontSize: 14 } },
-          { text: "Views", options: { bold: true, fontSize: 14 } }
+          { text: "Category", options: { bold: true, fontSize: 14 } },
+          { text: "Products", options: { bold: true, fontSize: 14 } },
+          { text: "Share", options: { bold: true, fontSize: 14 } }
         ],
-        ...validTopPages.map(page => [
-          { text: page.page || "Unknown", options: { fontSize: 12 } },
-          { text: (page.views || 0).toLocaleString(), options: { fontSize: 12 } }
+        ...validCategories.map(item => [
+          { text: item.name || "Unknown", options: { fontSize: 12 } },
+          { text: item.count.toString(), options: { fontSize: 12 } },
+          { text: `${Math.round((item.count / (data.totalProducts || 1)) * 100)}%`, options: { fontSize: 12 } }
         ])
       ];
       
       slide.addTable(tableData, {
         x: this.layout.margin.left,
         y: 4,
-        w: contentWidth * 0.6,
+        w: contentWidth * 0.5,
         h: 2.8,
         fontSize: 12,
         fontFace: "Arial",
@@ -735,41 +726,49 @@ export class PptxExporter {
       });
     }
     
-    // Traffic trends chart - better positioned
-    const trendData = [{
-      name: "Monthly Visitors",
-      labels: data.analyticsData.trafficTrends.map(t => t.month),
-      values: data.analyticsData.trafficTrends.map(t => t.visitors)
-    }];
-    
-    slide.addChart("line", trendData, {
-      x: 7.3,
-      y: 4,
-      w: 5.6,
-      h: 2.8,
-      showTitle: false,
-      showLegend: false,
-      chartColors: [this.brandColors.primary]
-    });
+    // Certification breakdown chart (real data)
+    const validCerts = (data.analyticsData.certificationBreakdown || data.certificationBreakdown || []).filter(c => c.count > 0);
+    if (validCerts.length > 0) {
+      const chartData = [{
+        name: "Certifications",
+        labels: validCerts.map(c => c.name),
+        values: validCerts.map(c => c.count)
+      }];
+      
+      try {
+        slide.addChart("pie", chartData, {
+          x: this.layout.margin.left + contentWidth * 0.55,
+          y: 4,
+          w: contentWidth * 0.45,
+          h: 2.8,
+          showTitle: false,
+          showLegend: true,
+          legendPos: "b",
+          chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444"]
+        });
+      } catch (error) {
+        console.warn('Failed to add certification chart:', error);
+      }
+    }
   }
 
   // Dashboard chart slides
   private addTaskDistributionSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Task Distribution Analysis", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
-    // Chart data for PPTX
     const chartData = [{
       name: "Products by Task",
       labels: data.taskData.map(item => item.name),
@@ -777,29 +776,31 @@ export class PptxExporter {
     }];
     
     slide.addChart("bar", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: false,
+      showValue: true,
       chartColors: data.taskData.map(item => item.fill)
     });
   }
 
   private addCompanyDistributionSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Company Distribution Analysis", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
     const topCompanies = data.companyData.slice(0, 15);
@@ -810,29 +811,31 @@ export class PptxExporter {
     }];
     
     slide.addChart("bar", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: false,
+      showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addLocationAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Anatomical Location Coverage", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
     const topLocations = data.locationBreakdown.slice(0, 12);
@@ -843,10 +846,10 @@ export class PptxExporter {
     }];
     
     slide.addChart("pie", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: true,
       legendPos: "r",
@@ -856,17 +859,18 @@ export class PptxExporter {
 
   private addModalityAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Imaging Modality Coverage", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
     const chartData = [{
@@ -876,29 +880,31 @@ export class PptxExporter {
     }];
     
     slide.addChart("bar", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: false,
+      showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addStructureAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Auto-Contouring: Supported Structures", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
     const topStructures = data.structureData.slice(0, 15);
@@ -909,32 +915,33 @@ export class PptxExporter {
     }];
     
     slide.addChart("bar", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: false,
+      showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addStructureTypeAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Auto-Contouring: Structure Type Distribution", {
-      x: 0.3,
-      y: 0.5,
-      w: 12.6,
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
       h: 1,
       fontSize: 32,
       color: this.brandColors.primary,
       bold: true,
-      fontFace: "Inter"
+      fontFace: "Arial"
     });
     
-    // Aggregate data for stacked chart
     const totalOARs = data.structureTypeData.reduce((sum, item) => sum + item.OARs, 0);
     const totalTargets = data.structureTypeData.reduce((sum, item) => sum + item.Targets, 0);
     const totalElective = data.structureTypeData.reduce((sum, item) => sum + item.Elective, 0);
@@ -946,10 +953,10 @@ export class PptxExporter {
     }];
     
     slide.addChart("pie", chartData, {
-      x: 0.3,
-      y: 1.8,
-      w: 12.6,
-      h: 5,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
       showTitle: false,
       showLegend: true,
       legendPos: "r",
@@ -959,106 +966,107 @@ export class PptxExporter {
 
    private addContactEngagementSlide(data: PresentationData) {
      const slide = this.pptx.addSlide();
+     const contentWidth = this.getContentWidth();
+     const halfWidth = (contentWidth - 0.5) / 2;
      slide.background = { color: this.brandColors.background };
     
-     // Title
      slide.addText("Get Involved & Stay Connected", {
-       x: 0.3,
-       y: 0.5,
-       w: 12.6,
+       x: this.layout.margin.left,
+       y: this.layout.margin.top,
+       w: contentWidth,
        h: 1,
        fontSize: 32,
        color: this.brandColors.primary,
        bold: true,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      // Newsletter section
      slide.addText("📧 Newsletter", {
-       x: 0.3,
+       x: this.layout.margin.left,
        y: 1.9,
-       w: 6.0,
+       w: halfWidth,
        h: 0.6,
        fontSize: 20,
        color: this.brandColors.text,
        bold: true,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      slide.addText(`${data.contactInfo.newsletterSignups} subscribers\nStay updated with latest AI solutions and research`, {
-       x: 0.3,
+       x: this.layout.margin.left,
        y: 2.6,
-       w: 6.0,
+       w: halfWidth,
        h: 1.2,
        fontSize: 14,
        color: this.brandColors.secondary,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      // GitHub section
      slide.addText("💻 Contribute", {
-       x: 6.6,
+       x: this.layout.margin.left + halfWidth + 0.5,
        y: 1.9,
-       w: 6.3,
+       w: halfWidth,
        h: 0.6,
        fontSize: 20,
        color: this.brandColors.text,
        bold: true,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      slide.addText(`GitHub: ${data.contactInfo.githubUrl}\nHelp improve our open-source platform`, {
-       x: 6.6,
+       x: this.layout.margin.left + halfWidth + 0.5,
        y: 2.6,
-       w: 6.3,
+       w: halfWidth,
        h: 1.2,
        fontSize: 14,
        color: this.brandColors.secondary,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      // Contact section
      slide.addText("📬 Contact Us", {
-       x: 0.3,
+       x: this.layout.margin.left,
        y: 4.2,
-       w: 6.0,
+       w: halfWidth,
        h: 0.6,
        fontSize: 20,
        color: this.brandColors.text,
        bold: true,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      slide.addText(`Email: ${data.contactInfo.email}\nFor partnerships, questions, or suggestions`, {
-       x: 0.3,
+       x: this.layout.margin.left,
        y: 4.9,
-       w: 6.0,
+       w: halfWidth,
        h: 1.2,
        fontSize: 14,
        color: this.brandColors.secondary,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      // Review process
      slide.addText("📝 Review Process", {
-       x: 6.6,
+       x: this.layout.margin.left + halfWidth + 0.5,
        y: 4.2,
-       w: 6.3,
+       w: halfWidth,
        h: 0.6,
        fontSize: 20,
        color: this.brandColors.text,
        bold: true,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
      
      slide.addText("Help validate AI solutions through our\npeer-review process and quality assurance", {
-       x: 6.6,
+       x: this.layout.margin.left + halfWidth + 0.5,
        y: 4.9,
-       w: 6.3,
+       w: halfWidth,
        h: 1.2,
        fontSize: 14,
        color: this.brandColors.secondary,
-       fontFace: "Inter"
+       fontFace: "Arial"
      });
   }
 

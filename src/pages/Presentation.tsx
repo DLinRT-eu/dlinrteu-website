@@ -45,7 +45,7 @@ export default function Presentation() {
     { title: "Structure Analysis", description: "Auto-contouring structures supported", icon: Package },
     { title: "Structure Types", description: "OARs, Targets, Elective distribution", icon: BarChart3 },
     { title: "Product Details", description: "Per-category product grids", icon: Package },
-    { title: "Platform Analytics", description: `${presentationData.analyticsData.totalViews.toLocaleString()} views`, icon: BarChart3 },
+    { title: "Platform Analytics", description: `${presentationData.totalProducts} products tracked`, icon: BarChart3 },
     { title: "Get Involved", description: "Contact and community engagement", icon: Users },
     { title: "Governance & Values", description: "Core values and principles", icon: FileText },
   ];
@@ -116,9 +116,9 @@ export default function Presentation() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-2xl font-bold text-primary">
-                  {presentationData.analyticsData.totalViews.toLocaleString()}
+                  {presentationData.certificationBreakdown?.length || 0}
                 </CardTitle>
-                <CardDescription>Total Views</CardDescription>
+                <CardDescription>Certifications</CardDescription>
               </CardHeader>
             </Card>
           </div>

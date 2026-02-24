@@ -40,7 +40,7 @@ const createSlides = () => {
         { label: "Companies", value: data.totalCompanies.toString() },
         { label: "Products", value: data.totalProducts.toString() },
         { label: "Categories", value: data.totalCategories.toString() },
-        { label: "Views", value: data.analyticsData.totalViews.toLocaleString() },
+        { label: "Categories", value: data.analyticsData.totalCategories.toString() },
       ],
     },
     {
