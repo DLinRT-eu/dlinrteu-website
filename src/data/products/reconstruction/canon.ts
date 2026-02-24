@@ -62,9 +62,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I3",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study; Tatsugami et al. Radiology 2019 coronary CTA.",
-    clinicalImpactNotes: "Dosimetric/diagnostic improvement through up to 82% dose reduction with maintained image quality.",
+    clinicalImpactNotes: "Workflow improvement through dose reduction (up to 82%) with maintained image quality, enabling more efficient CT protocols.",
     evidence: [
       {
         type: "FDA 510(k) Summary",

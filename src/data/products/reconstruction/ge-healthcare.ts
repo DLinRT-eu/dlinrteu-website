@@ -60,9 +60,9 @@ export const GE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated in new CT systems"],
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I3",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; multiple phantom and clinical studies.",
-    clinicalImpactNotes: "Dosimetric/diagnostic improvement through enhanced low-contrast detectability at reduced dose.",
+    clinicalImpactNotes: "Workflow improvement through enhanced low-contrast detectability at reduced dose, improving CT protocol efficiency.",
     evidence: [
       {
         type: "FDA 510(k) Summary",

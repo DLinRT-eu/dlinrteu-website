@@ -18,19 +18,19 @@ const RIGOR_MAP: Record<string, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
 const IMPACT_MAP: Record<string, number> = { I0: 0, I1: 1, I2: 2, I3: 3, I4: 4, I5: 5 };
 
 const RIGOR_LEVELS = [
-  { key: 'E3', label: 'E3', name: 'Independent/RCT' },
-  { key: 'E2', label: 'E2', name: 'Multi-center' },
-  { key: 'E1', label: 'E1', name: 'Single-center' },
-  { key: 'E0', label: 'E0', name: 'None' },
+  { key: 'E3', label: 'E3', name: 'Systematic' },
+  { key: 'E2', label: 'E2', name: 'Validated' },
+  { key: 'E1', label: 'E1', name: 'Preliminary' },
+  { key: 'E0', label: 'E0', name: 'No Evidence' },
 ];
 
 const IMPACT_LEVELS = [
-  { key: 'I0', label: 'I0', name: 'None' },
-  { key: 'I1', label: 'I1', name: 'QA/Monitor' },
+  { key: 'I0', label: 'I0', name: 'None Demo.' },
+  { key: 'I1', label: 'I1', name: 'QA' },
   { key: 'I2', label: 'I2', name: 'Workflow' },
-  { key: 'I3', label: 'I3', name: 'Dosimetric' },
-  { key: 'I4', label: 'I4', name: 'Clinical' },
-  { key: 'I5', label: 'I5', name: 'Survival' },
+  { key: 'I3', label: 'I3', name: 'Decision' },
+  { key: 'I4', label: 'I4', name: 'Outcome' },
+  { key: 'I5', label: 'I5', name: 'Societal' },
 ];
 
 interface CellProduct {
