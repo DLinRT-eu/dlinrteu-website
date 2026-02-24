@@ -1,59 +1,99 @@
 
 
-# Fix Logo Export Aspect Ratio and Add Per-Task Logo Slides to PPTX
+# Fix PPTX Export: Positioning, Data Accuracy, and Chart Fidelity
 
-## Problem 1: Image Export Skews Logos
+## Problems Identified
 
-The `CompanyLogoGrid` component uses `object-contain` on `<img>` tags, which correctly preserves aspect ratio on screen. However, when `html2canvas` captures the grid, it renders the images at their natural resolution into the fixed 128x128 container, causing distortion. The fix is to wrap each logo in a fixed-size container with explicit aspect-ratio preservation and use `object-contain` styling that html2canvas respects.
+1. **Content outside page boundaries**: 6 chart slides use hardcoded `x: 0.3, w: 12.6` instead of the layout constants (`margin.left: 1.0`, `contentWidth: 11.33`), pushing content outside the visible slide area.
+2. **Analytics data is fabricated**: Views, visitors, session duration are computed from product/company counts with arbitrary multipliers -- not real data.
+3. **Charts don't match the website**: pptxgenjs's built-in chart renderer produces visually different charts than the Recharts-based ones on the dashboard.
 
-## Problem 2: PPTX Only Has One "All Companies" Logo Slide
+## Approach
 
-Currently, `addCompanyLogosSlide` shows all company logos on a single slide. The user wants per-task logo slides (e.g., "Auto-Contouring Companies", "Treatment Planning Companies") -- matching what the Companies page shows when filtering by task.
+### Fix 1: Consistent Positioning (all chart slides)
 
-## Changes
+Replace all hardcoded `x: 0.3, y: 0.5, w: 12.6` values in the 6 chart slide methods and the contact/engagement slide with the existing `this.layout.margin.*` and `this.getContentWidth()` constants. This is the primary cause of content appearing outside page boundaries.
 
-### 1. `src/components/CompanyLogoGrid.tsx` -- Fix Export Aspect Ratio
+**Affected methods** (lines in `src/utils/pptxExport.ts`):
+- `addTaskDistributionSlide` (lines 757-788)
+- `addCompanyDistributionSlide` (lines 790-821)
+- `addLocationAnalysisSlide` (lines 823-855)
+- `addModalityAnalysisSlide` (lines 857-887)
+- `addStructureAnalysisSlide` (lines 889-920)
+- `addStructureTypeAnalysisSlide` (lines 922-958)
+- `addContactEngagementSlide` (lines 960-1063)
 
-- Wrap each logo `<img>` in a container `<div>` with explicit `width`, `height`, and `display:flex` + `align-items:center` + `justify-content:center`
-- Add inline styles (not just Tailwind classes) for `object-fit: contain` and explicit pixel dimensions so html2canvas renders them correctly
-- html2canvas struggles with CSS `object-contain` on images; the fix is to set explicit `max-width` and `max-height` inline styles on the `<img>` element and let the container handle centering
+All will switch from:
+```text
+x: 0.3, y: 0.5, w: 12.6
+```
+to:
+```text
+x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth
+```
 
-### 2. `src/utils/pptxExport.ts` -- Add Per-Task Company Logo Slides
+And chart areas from `x: 0.3, y: 1.8, w: 12.6, h: 5` to `x: margin.left, y: 1.6, w: contentWidth, h: contentHeight` with proper bounds.
 
-- Add a new `companyLogosByTask` field to the `PresentationData` interface:
-  ```text
-  companyLogosByTask: Array<{
-    task: string;
-    companies: Array<{ name: string; logo: string }>;
-  }>
-  ```
-- Create a new method `addCompanyLogosByTaskSlides(data)` that iterates over each task group and creates a separate slide with:
-  - Title: "{Task} Companies" (e.g., "Auto-Contouring Companies")
-  - Logo grid of only the companies associated with that task
-  - Same logo-only layout as the existing `addCompanyLogosSlide` (no company name labels, just logos)
-- Insert these slides after the existing all-companies logo slide in `generatePresentation()`
+### Fix 2: Remove Fabricated Analytics
 
-### 3. `src/services/DataService.ts` -- Provide Per-Task Company Data
+The `addAnalyticsOverviewSlide` shows fake view counts and traffic trends. Replace the fabricated analytics with a factual content-based summary: total products, companies, categories, certifications tracked. Remove the "Total Views" / "Unique Visitors" / "Avg. Session" cards and the fake traffic line chart. Replace with a content summary that reflects real platform data (product counts by category, certification breakdown, etc.).
 
-- In `getPresentationData()`, build `companyLogosByTask` by grouping companies by their `primaryTask` (and `secondaryTasks`), filtering to only include companies with logos
-- Use the same `TASK_CATEGORIES` list (or derive from company data) to maintain consistent ordering
+In `DataService.ts`, remove the fabricated `analyticsData` fields (totalViews, uniqueVisitors, averageSessionDuration, trafficTrends) and replace with real content metrics derived from actual data.
 
-## Technical Details
+### Fix 3: Improve Chart Fidelity
 
-### CompanyLogoGrid Fix
-The key issue is that `html2canvas` doesn't properly handle CSS `object-fit: contain`. The solution:
-- Keep the visual Tailwind classes for on-screen display
-- Add inline styles `{ objectFit: 'contain', maxWidth: '128px', maxHeight: '128px', width: 'auto', height: 'auto' }` on the `<img>` element
-- This ensures html2canvas captures the image at its natural aspect ratio within the bounding box
+Since capturing actual Recharts screenshots requires html2canvas with offscreen rendering (very fragile), the practical fix is to improve the pptxgenjs charts to better match the website:
 
-### PPTX Per-Task Slides
-- Each task slide uses the same grid layout logic as `addCompanyLogosSlide` but scoped to that task's companies
-- Tasks with no companies (or no logos) are skipped
-- The `sizing: { type: "contain" }` property in pptxgenjs already preserves aspect ratio correctly for PPTX output
-- Company name labels are omitted (logos only, matching the on-screen presentation)
+- Use matching colors from the Recharts chart configs (per-bar colors for task distribution)
+- Add data labels to bar charts (matching the website's tooltip info)
+- Use consistent font (Arial, not Inter -- Inter isn't embeddable in PPTX)
+- Fix chart margins so bars/pies don't get clipped
+
+### Fix 4: Font Consistency
+
+Several slides mix `fontFace: "Inter"` with `fontFace: "Arial"`. Inter is a web font not available in PowerPoint. Standardize all text to `fontFace: "Arial"` to prevent fallback rendering issues.
 
 ## Files Modified
-1. `src/components/CompanyLogoGrid.tsx` -- Fix inline styles for html2canvas aspect ratio
-2. `src/utils/pptxExport.ts` -- Add `companyLogosByTask` to interface, new `addCompanyLogosByTaskSlides` method, wire into `generatePresentation`
-3. `src/services/DataService.ts` -- Build `companyLogosByTask` data in `getPresentationData`
+
+### 1. `src/utils/pptxExport.ts`
+
+**Positioning fix** -- all 7 chart/engagement methods updated to use `this.layout.margin.*` and `this.getContentWidth()`.
+
+**Font fix** -- replace all `fontFace: "Inter"` with `fontFace: "Arial"` (~20 occurrences).
+
+**Analytics slide** -- rewrite `addAnalyticsOverviewSlide` to show real content metrics instead of fabricated traffic data:
+- Card 1: Total Products (from data.totalProducts)
+- Card 2: Total Companies (from data.totalCompanies)
+- Card 3: Clinical Categories (from data.totalCategories)
+- Replace fake traffic line chart with a certification breakdown bar chart
+- Replace "Most Viewed Pages" table with "Products by Category" table (real data)
+
+**Chart improvements** -- add `showValue: true` or `dataLabelPosition` to bar charts; ensure `catAxisOrientation` matches the website's rotated labels.
+
+### 2. `src/services/DataService.ts`
+
+Remove the fabricated analytics block (lines 407-437) that generates fake totalViews/uniqueVisitors/averageSessionDuration/trafficTrends. Replace `analyticsData` with a real content summary:
+
+```text
+analyticsData: {
+  totalProducts: products.length,
+  totalCompanies: companies.length,
+  totalCategories: categories.length,
+  certificationBreakdown: [...],
+  categoryBreakdown: [...]
+}
+```
+
+### 3. `src/utils/pptxExport.ts` (PresentationData interface)
+
+Update the `analyticsData` type in the interface to match the new real-data structure (remove totalViews, uniqueVisitors, etc.; add content-based fields).
+
+## Summary of Changes
+
+| Issue | Fix | Impact |
+|-------|-----|--------|
+| Content outside page | Use layout constants consistently | All chart slides render within bounds |
+| Fake analytics | Replace with real content metrics | Accurate, trustworthy data |
+| Font fallback | Standardize to Arial | Consistent rendering in PowerPoint |
+| Chart mismatch | Better colors, labels, margins | Closer match to website charts |
 
