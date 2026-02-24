@@ -404,36 +404,13 @@ class DataService {
       .filter(group => group.companies.length > 0)
       .sort((a, b) => b.companies.length - a.companies.length);
 
-    // Dashboard-based analytics data (reflecting real platform content)
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth();
-    
-    // Base analytics on actual dashboard content and scale
-    const baseViews = products.length * 125 + companies.length * 65 + categories.length * 45;
-    const totalViews = Math.floor(baseViews * 1.35); // Growth factor
-    
+    // Content-based analytics (real data, no fabricated metrics)
     const analyticsData = {
-      totalViews,
-      uniqueVisitors: Math.floor(totalViews * 0.67),
-      averageSessionDuration: "4:38",
-      topPages: [
-        { page: "Products Directory", views: Math.floor(totalViews * 0.32) },
-        { page: "Auto-contouring Solutions", views: Math.floor(totalViews * 0.22) },
-        { page: "Dashboard Analytics", views: Math.floor(totalViews * 0.14) },
-        { page: "Treatment Planning", views: Math.floor(totalViews * 0.11) },
-        { page: "Company Directory", views: Math.floor(totalViews * 0.09) },
-        { page: "Image Synthesis", views: Math.floor(totalViews * 0.07) }
-      ],
-      trafficTrends: Array.from({ length: 6 }, (_, i) => {
-        const monthIndex = (currentMonth - 5 + i + 12) % 12;
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const growthFactor = 0.88 + (i * 0.024); // Gradual growth trend
-        return {
-          month: monthNames[monthIndex],
-          visitors: Math.floor(totalViews * growthFactor * (0.15 + (i * 0.01)))
-        };
-      })
+      totalProducts: products.length,
+      totalCompanies: companies.length,
+      totalCategories: categories.length,
+      certificationBreakdown: certificationBreakdown,
+      categoryBreakdown: categoryBreakdown
     };
 
     // Contact and engagement info
