@@ -158,6 +158,11 @@ const EvidenceImpactGuide = () => {
                       {level.level}
                     </Badge>
                     <span className="font-medium text-sm">{level.name}</span>
+                    {level.frybackThornburyLevel && (
+                      <Badge variant="outline" className="text-[10px] px-1.5 py-0 leading-tight text-muted-foreground">
+                        F&T: {level.frybackThornburyLevel}
+                      </Badge>
+                    )}
                   </div>
                   <p className="text-xs text-muted-foreground">{level.description}</p>
                 </div>
@@ -281,28 +286,116 @@ const EvidenceImpactGuide = () => {
           </CardContent>
         </Card>
 
-        {/* Reference */}
+        {/* Study Quality Sub-Attributes */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FlaskConical className="h-5 w-5" />
+              Study Quality Sub-Attributes
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Alongside the evidence rigor scale (E0–E3), each product with peer-reviewed evidence is assessed on 
+              five granular study quality dimensions. These complement the rigor level with specific methodological indicators.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 pr-4 font-medium">Attribute</th>
+                    <th className="text-left py-2 pr-4 font-medium">Description</th>
+                    <th className="text-left py-2 font-medium">Source</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="py-2 pr-4 font-medium">Vendor Independent</td>
+                    <td className="py-2 pr-4 text-muted-foreground">At least one study conducted by non-vendor authors</td>
+                    <td className="py-2 text-muted-foreground">van Leeuwen 2025</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 font-medium">Multi-Center</td>
+                    <td className="py-2 pr-4 text-muted-foreground">Evidence from 3 or more clinical sites</td>
+                    <td className="py-2 text-muted-foreground">van Leeuwen 2025</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 font-medium">Multi-National</td>
+                    <td className="py-2 pr-4 text-muted-foreground">Data collected from multiple countries</td>
+                    <td className="py-2 text-muted-foreground">van Leeuwen 2025</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 font-medium">Prospective</td>
+                    <td className="py-2 pr-4 text-muted-foreground">At least one prospective study design</td>
+                    <td className="py-2 text-muted-foreground">van Leeuwen 2025</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4 font-medium">External Validation</td>
+                    <td className="py-2 pr-4 text-muted-foreground">Validated on an external (non-training) dataset</td>
+                    <td className="py-2 text-muted-foreground">Pham 2023</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* References */}
         <Card>
           <CardHeader>
-            <CardTitle>Methodology Reference</CardTitle>
+            <CardTitle>Methodology References</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>{EVIDENCE_IMPACT_REFERENCE.description}</p>
             <p className="text-sm text-muted-foreground">{EVIDENCE_IMPACT_REFERENCE.rationale}</p>
-            <div className="flex items-center gap-3 pt-4 border-t">
-              <span className="text-sm font-medium">Original framework:</span>
-              <a
-                href={EVIDENCE_IMPACT_REFERENCE.originalReference.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-primary hover:underline flex items-center gap-1"
-              >
-                van Leeuwen KG, et al. Eur Radiol. 2021
-                <ExternalLink className="h-3 w-3" />
-              </a>
-              <Badge variant="outline" className="text-xs">
-                PMID: {EVIDENCE_IMPACT_REFERENCE.originalReference.pmid}
-              </Badge>
+            <div className="pt-4 border-t space-y-3">
+              {/* Original reference */}
+              <div>
+                <p className="text-sm">{EVIDENCE_IMPACT_REFERENCE.originalReference.citation}</p>
+                <div className="flex items-center gap-3 mt-1">
+                  <a
+                    href={EVIDENCE_IMPACT_REFERENCE.originalReference.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-primary hover:underline flex items-center gap-1"
+                  >
+                    DOI <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <Badge variant="outline" className="text-xs">
+                    PMID: {EVIDENCE_IMPACT_REFERENCE.originalReference.pmid}
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Additional references */}
+              {EVIDENCE_IMPACT_REFERENCE.additionalReferences.map((ref, i) => (
+                <div key={i}>
+                  <p className="text-sm">{ref.citation}</p>
+                  {ref.notes && <p className="text-xs text-muted-foreground mt-0.5">{ref.notes}</p>}
+                  <a
+                    href={ref.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-primary hover:underline flex items-center gap-1 mt-1"
+                  >
+                    DOI <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              ))}
+
+              {/* Fryback & Thornbury */}
+              <div>
+                <p className="text-sm">{EVIDENCE_IMPACT_REFERENCE.frybackThornburyReference.citation}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{EVIDENCE_IMPACT_REFERENCE.frybackThornburyReference.notes}</p>
+                <a
+                  href={EVIDENCE_IMPACT_REFERENCE.frybackThornburyReference.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-primary hover:underline flex items-center gap-1 mt-1"
+                >
+                  DOI <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
             </div>
           </CardContent>
         </Card>
