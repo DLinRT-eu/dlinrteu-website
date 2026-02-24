@@ -83,9 +83,11 @@ const ResourcesCompliance = () => {
               Evaluating scientific evidence for radiotherapy AI
             </h3>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              We classify products using an evidence hierarchy adapted from van Leeuwen et al. (2021), 
-              progressing from technical validation to societal impact. This allows meaningful 
-              comparison of the scientific backing behind each solution.
+              We classify products using a dual-axis system adapted from van Leeuwen et al. (2021, updated 2025), 
+              separating <strong>evidence rigor</strong> (E0–E3) from <strong>clinical impact</strong> (I0–I5). 
+              The clinical impact axis is cross-referenced with the Fryback & Thornbury hierarchy of diagnostic efficacy (1991). 
+              Each product is further assessed on five granular study quality sub-attributes — vendor independence, 
+              multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
             </p>
             
             {/* Pyramid Visualization */}
