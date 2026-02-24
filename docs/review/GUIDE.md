@@ -237,18 +237,47 @@ All examples include:
 
 ## Evidence Level Classification
 
-Every product should have an evidence level assigned. The classification follows the hierarchy from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z), adapted for radiotherapy:
+Every product should have an evidence level assigned. The classification uses a **dual-axis system** separating Evidence Rigor (E0-E3) from Clinical Impact (I0-I5), adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8). The Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203).
 
-| Level | Name | When to Use |
-|-------|------|-------------|
-| 0 | No Evidence | FDA summary only, no peer review |
-| 1t | Technical Efficacy | Reproducibility tests |
-| 1c | Potential Clinical Efficacy | Correlation studies |
-| 2 | Stand-Alone Performance | Clinical dataset validation |
-| 3 | Workflow Efficacy | Time savings studies |
-| 4 | Treatment Decision Efficacy | Plan impact studies |
-| 5 | Patient Outcome Efficacy | Toxicity, survival data |
-| 6 | Societal Efficacy | Health economics |
+### Evidence Rigor (E0-E3)
+
+| Level | Name | Criteria |
+|-------|------|----------|
+| E0 | No Peer-Reviewed Evidence | Vendor materials, regulatory submissions only |
+| E1 | Preliminary Evidence | Single-center, small cohorts, pilot studies |
+| E2 | Validated Evidence | Multi-center (3+ sites), large prospective cohorts, external validation |
+| E3 | Systematic Evidence | Systematic reviews, meta-analyses, RCTs |
+
+### Clinical Impact (I0-I5)
+
+| Level | Name | F&T Level | When to Use |
+|-------|------|-----------|-------------|
+| I0 | None Demonstrated | — | Feasibility only, no benefit shown |
+| I1 | Quality Assurance | Level 1 | QA tools, monitoring, consistency checks |
+| I2 | Workflow | Level 2 | Time savings, variability reduction, dose reduction |
+| I3 | Decision | Level 3 | Changes in treatment management or plan selection |
+| I4 | Outcome | Levels 4–5 | Toxicity reduction, survival, patient outcomes |
+| I5 | Societal | Level 6 | Cost-effectiveness, access to care |
+
+### Study Quality Sub-Attributes
+
+In addition to the E0-E3 level, products can be tagged with study quality sub-attributes (optional booleans):
+
+| Attribute | Description | Source |
+|-----------|-------------|--------|
+| `evidenceVendorIndependent` | At least one study independent of vendor | van Leeuwen 2025 |
+| `evidenceMultiCenter` | Evidence from 3+ clinical sites | van Leeuwen 2025 |
+| `evidenceMultiNational` | Data from multiple countries | van Leeuwen 2025 |
+| `evidenceProspective` | At least one prospective study design | van Leeuwen 2025 |
+| `evidenceExternalValidation` | Validated on external dataset | Pham 2023 |
+
+### Key References
+
+- van Leeuwen KG, et al. *Eur Radiol.* 2021;31(6):3797-3804. [DOI](https://doi.org/10.1007/s00330-021-07892-z)
+- Antonissen N, et al. *Eur Radiol.* 2026;36:526-536. [DOI](https://doi.org/10.1007/s00330-025-11830-8)
+- Pham N, et al. *AJNR.* 2023;44(5):E21-E28. [DOI](https://doi.org/10.3174/ajnr.A7850)
+- Lekadir K, et al. *BMJ.* 2025;388:e081554. [DOI](https://doi.org/10.1136/bmj-2024-081554)
+- Fryback DG, Thornbury JR. *Med Decis Making.* 1991;11(2):88-94. [DOI](https://doi.org/10.1177/0272989X9101100203)
 
 ## Need Help?
 
