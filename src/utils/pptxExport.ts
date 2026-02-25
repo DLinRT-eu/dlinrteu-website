@@ -48,6 +48,15 @@ export interface PresentationData {
   companyLogosByTask?: Array<{
     task: string;
     companies: Array<{ name: string; logo: string }>;
+    products?: Array<{
+      name: string;
+      company: string;
+      modality: string;
+      ceStatus: string;
+      fdaStatus: string;
+      productUrl: string;
+      anatomy: string;
+    }>;
   }>;
 }
 
@@ -1070,12 +1079,78 @@ export class PptxExporter {
      });
   }
 
+  private addTaskProductTableSlides(group: { task: string; products?: Array<{ name: string; company: string; modality: string; ceStatus: string; fdaStatus: string; productUrl: string; anatomy: string }> }) {
+    const products = group.products || [];
+    if (products.length === 0) return;
+
+    const contentWidth = this.getContentWidth();
+    const rowsPerSlide = 12;
+    const pages = Math.ceil(products.length / rowsPerSlide);
+
+    for (let page = 0; page < pages; page++) {
+      const slide = this.pptx.addSlide();
+      slide.background = { color: this.brandColors.background };
+
+      const pageLabel = pages > 1 ? ` (${page + 1}/${pages})` : '';
+      slide.addText(`${group.task} — Products Overview${pageLabel}`, {
+        x: this.layout.margin.left,
+        y: this.layout.margin.top,
+        w: contentWidth,
+        h: 0.7,
+        fontSize: 22,
+        color: this.brandColors.primary,
+        bold: true,
+        fontFace: "Arial"
+      });
+
+      const pageProducts = products.slice(page * rowsPerSlide, (page + 1) * rowsPerSlide);
+
+      const headerRow = [
+        { text: "Product", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "Company", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "Modality", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "CE", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "FDA", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "Anatomy", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+        { text: "Link", options: { bold: true, fontSize: 9, fill: { color: this.brandColors.primary }, color: "FFFFFF", fontFace: "Arial" } },
+      ];
+
+      const dataRows = pageProducts.map((p, i) => {
+        const rowFill = i % 2 === 0 ? this.brandColors.muted : this.brandColors.background;
+        const baseOpts = { fontSize: 8, fontFace: "Arial" as const, fill: { color: rowFill } };
+        return [
+          { text: p.name, options: { ...baseOpts, bold: true } },
+          { text: p.company, options: baseOpts },
+          { text: p.modality, options: baseOpts },
+          { text: p.ceStatus, options: baseOpts },
+          { text: p.fdaStatus, options: baseOpts },
+          { text: p.anatomy, options: baseOpts },
+          p.productUrl
+            ? { text: "🔗", options: { ...baseOpts, hyperlink: { url: p.productUrl } } }
+            : { text: "", options: baseOpts },
+        ];
+      });
+
+      slide.addTable([headerRow, ...dataRows], {
+        x: this.layout.margin.left,
+        y: 1.3,
+        w: contentWidth,
+        colW: [contentWidth * 0.2, contentWidth * 0.15, contentWidth * 0.12, contentWidth * 0.1, contentWidth * 0.1, contentWidth * 0.23, contentWidth * 0.1],
+        fontSize: 8,
+        fontFace: "Arial",
+        border: { pt: 0.5, color: this.brandColors.secondary },
+        autoPage: false,
+      });
+    }
+  }
+
   private async addCompanyLogosByTaskSlides(data: PresentationData) {
     if (!data.companyLogosByTask?.length) return;
 
     const contentWidth = this.getContentWidth();
 
     for (const group of data.companyLogosByTask) {
+      // Logo slide
       const slide = this.pptx.addSlide();
       slide.background = { color: this.brandColors.background };
 
@@ -1091,30 +1166,33 @@ export class PptxExporter {
       });
 
       const validLogos = group.companies.filter(c => c.logo).slice(0, 32);
-      if (validLogos.length === 0) continue;
+      if (validLogos.length > 0) {
+        const cols = Math.min(8, Math.ceil(Math.sqrt(validLogos.length * 1.2)));
+        const rows = Math.ceil(validLogos.length / cols);
+        const availableHeight = 5.8;
+        const logoMaxWidth = Math.min(1.2, contentWidth / cols);
+        const logoMaxHeight = Math.min(0.8, availableHeight / (rows * 1.4));
+        const startX = this.layout.margin.left + (contentWidth - (cols * logoMaxWidth)) / 2;
+        const startY = 1.6;
 
-      const cols = Math.min(8, Math.ceil(Math.sqrt(validLogos.length * 1.2)));
-      const rows = Math.ceil(validLogos.length / cols);
-      const availableHeight = 5.8;
-      const logoMaxWidth = Math.min(1.2, contentWidth / cols);
-      const logoMaxHeight = Math.min(0.8, availableHeight / (rows * 1.4));
-      const startX = this.layout.margin.left + (contentWidth - (cols * logoMaxWidth)) / 2;
-      const startY = 1.6;
+        for (let index = 0; index < validLogos.length; index++) {
+          const company = validLogos[index];
+          const row = Math.floor(index / cols);
+          const col = index % cols;
+          const x = startX + col * logoMaxWidth;
+          const y = startY + row * (logoMaxHeight * 1.4);
 
-      for (let index = 0; index < validLogos.length; index++) {
-        const company = validLogos[index];
-        const row = Math.floor(index / cols);
-        const col = index % cols;
-        const x = startX + col * logoMaxWidth;
-        const y = startY + row * (logoMaxHeight * 1.4);
-
-        await this.safeAddImage(slide, {
-          path: company.logo,
-          x, y,
-          w: logoMaxWidth * 0.8,
-          h: logoMaxHeight * 0.8,
-        });
+          await this.safeAddImage(slide, {
+            path: company.logo,
+            x, y,
+            w: logoMaxWidth * 0.8,
+            h: logoMaxHeight * 0.8,
+          });
+        }
       }
+
+      // Product table slide(s) right after the logo slide
+      this.addTaskProductTableSlides(group);
     }
   }
 

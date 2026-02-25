@@ -392,15 +392,37 @@ class DataService {
     });
 
     const companyLogosByTask = Array.from(taskCompanyMap.entries())
-      .map(([task, companyNames]) => ({
-        task,
-        companies: Array.from(companyNames)
+      .map(([task, companyNames]) => {
+        const taskCompanies = Array.from(companyNames)
           .map(name => {
             const c = companies.find(co => co.name === name);
             return { name, logo: c?.logoUrl || "" };
           })
-          .filter(c => c.logo)
-      }))
+          .filter(c => c.logo);
+
+        // Collect products matching this task
+        const taskProducts = products
+          .filter(p => matchesTask(p, task))
+          .map(p => {
+            const ceStatus = typeof p.regulatory?.ce === 'object' ? p.regulatory.ce.status : '';
+            const fdaStatus = typeof p.regulatory?.fda === 'object' ? p.regulatory.fda.status : (typeof p.regulatory?.fda === 'string' ? p.regulatory.fda : '');
+            return {
+              name: p.name,
+              company: p.company,
+              modality: Array.isArray(p.modality) ? p.modality.join(', ') : (p.modality || ''),
+              ceStatus: ceStatus || '',
+              fdaStatus: fdaStatus || '',
+              productUrl: p.productUrl || p.url || '',
+              anatomy: (p.anatomicalLocation || []).join(', '),
+            };
+          });
+
+        return {
+          task,
+          companies: taskCompanies,
+          products: taskProducts,
+        };
+      })
       .filter(group => group.companies.length > 0)
       .sort((a, b) => b.companies.length - a.companies.length);
 
