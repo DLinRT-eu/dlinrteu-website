@@ -1,82 +1,68 @@
+# Add Per-Task Product Detail Table Slides to PPTX Export
 
+## Overview
 
-# Fix PPTX Export: Layout Mismatch and Image Loading
+After each task-based logo slide (e.g., "Auto-Contouring Companies"), add a product details table slide showing the key products for that task with relevant columns and clickable links.  
+  
+The slides are at the end duplicated, there are multiple slides with the same content. Remove them.
 
-## Root Cause
+## Changes
 
-The main bug causing "content outside the page" is a **slide layout mismatch**:
+### 1. `src/services/DataService.ts` -- Add product details to per-task data
 
-- The code sets `this.pptx.layout = "LAYOUT_16x9"` which creates slides that are **10 inches x 5.625 inches**
-- But the layout constants use `slideWidth: 13.33` and `slideHeight: 7.5`, which are the dimensions for `LAYOUT_WIDE` (13.33" x 7.5")
-- Result: all content positioned between 10" and 13.33" horizontally (and 5.625" to 7.5" vertically) falls **outside the visible slide area**
-- This affects every single slide in the presentation
+Extend the `companyLogosByTask` data structure to also include products for each task. For each task group, collect all products matching that task (via `category` or `secondaryCategories`) and include key details:
 
-## Fix 1: Correct the Layout Setting
+- Product name
+- Company name
+- Modality
+- CE status
+- FDA status
+- Product URL (for hyperlink in PPTX)
+- Anatomical location
 
-**File**: `src/utils/pptxExport.ts`, line 122
+The updated structure becomes:
 
-Change `this.pptx.layout = "LAYOUT_16x9"` to `this.pptx.layout = "LAYOUT_WIDE"` so the actual PowerPoint slide dimensions match the positioning constants (13.33" x 7.5").
-
-This single change fixes all content overflow issues across every slide.
-
-## Fix 2: Convert Images to Base64 Before Adding
-
-**File**: `src/utils/pptxExport.ts`
-
-The current approach uses `path` URLs for images, which requires pptxgenjs to fetch them at export time. This is fragile -- CORS errors or network issues cause images to silently fail or produce corrupted output.
-
-Replace the image loading strategy:
-- Add a helper method `fetchImageAsBase64(url: string): Promise<string>` that uses `fetch()` + `FileReader`/`canvas` to convert images to base64 data URIs before passing them to pptxgenjs
-- Update `safeAddImage` to use `data` (base64) instead of `path` (URL)
-- This eliminates CORS issues and ensures images are properly embedded in the PPTX file
-- If an image fails to load, skip it gracefully (already handled by try/catch)
-
-## Fix 3: Logo Aspect Ratio Preservation
-
-**File**: `src/utils/pptxExport.ts`
-
-When converting to base64, detect the actual image dimensions using `Image()` object and calculate proper aspect ratio within the bounding box. This ensures logos are not stretched or squished:
-
-- Load each image with `new Image()` to get `naturalWidth` and `naturalHeight`
-- Calculate the fitted dimensions within the target bounding box while preserving aspect ratio
-- Pass these corrected dimensions to `addImage` along with `sizing: { type: 'contain', w, h }`
-
-## Technical Details
-
-### Layout Fix (line 122)
 ```text
-Before: this.pptx.layout = "LAYOUT_16x9";   // 10" x 5.625"
-After:  this.pptx.layout = "LAYOUT_WIDE";    // 13.33" x 7.5"
+companyLogosByTask: Array<{
+  task: string;
+  companies: Array<{ name: string; logo: string }>;
+  products: Array<{
+    name: string;
+    company: string;
+    modality: string;
+    ceStatus: string;
+    fdaStatus: string;
+    productUrl: string;
+    anatomy: string;
+  }>;
+}>
 ```
 
-### Base64 Image Helper
-New private method added to `PptxExporter`:
-- `fetchImageAsBase64(url: string): Promise<{ data: string; width: number; height: number } | null>`
-- Fetches the image via `fetch()`, converts to blob, reads as data URL
-- Also loads via `Image()` to get natural dimensions
-- Returns null on failure (graceful degradation)
+### 2. `src/utils/pptxExport.ts` -- Update interface and add table slide method
 
-### Updated `safeAddImage`
-- Made `async`
-- Calls `fetchImageAsBase64` first
-- Uses `data` property instead of `path`
-- Calculates proper fitted dimensions for aspect ratio preservation
+**Update `PresentationData` interface**: Add `products` array to the `companyLogosByTask` type.
 
-### Updated Methods That Use Images
-The following methods call `safeAddImage` and need to be made `async`:
-- `addTitleSlide` (logo)
-- `addCompanyLogosSlide` (company logos)
-- `addProductGridSlides` (company logos on product cards)
-- `addCompanyLogosByTaskSlides` (company logos per task)
+**New method `addTaskProductTableSlide**`: For each task group, after the logo slide, add one or more table slides:
 
-### `generatePresentation` Updates
-Await the async slide methods instead of calling them synchronously.
+- Title: "{Task} -- Products Overview"
+- Table columns (task-appropriate):
+  - Product Name
+  - Company
+  - Modality
+  - CE Status
+  - FDA Status
+  - Anatomy
+  - Link (hyperlinked product URL)
+- Use pptxgenjs `addTable()` with styled header row matching brand colors
+- Paginate: if more than ~12 products, split across multiple slides
+- Product name cells with `productUrl` get a hyperlink (`hyperlink: { url }`)
 
-## Files Modified
+**Update `addCompanyLogosByTaskSlides**`: After each logo slide, call `addTaskProductTableSlide` for the same task group.
 
-1. **`src/utils/pptxExport.ts`** -- all changes are in this single file:
-   - Fix layout from `LAYOUT_16x9` to `LAYOUT_WIDE`
-   - Add `fetchImageAsBase64` helper method
-   - Update `safeAddImage` to use base64 data
-   - Make image-using slide methods async
-   - Update `generatePresentation` to await async methods
+### 3. File summary
+
+
+| File                          | Change                                                                                 |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| `src/services/DataService.ts` | Add products array to each task group in `companyLogosByTask`                          |
+| `src/utils/pptxExport.ts`     | Update interface; add `addTaskProductTableSlide` method; call it after each logo slide |
