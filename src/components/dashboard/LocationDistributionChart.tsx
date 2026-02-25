@@ -11,6 +11,8 @@ import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { CircleCheckIcon } from 'lucide-react';
 import { LOCATION_COLORS } from '@/utils/chartColors';
 import { validateChartData, validateClickData, validateCountingMode, validateTotalCount, validateFilterValue } from '@/utils/chartDataValidation';
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface LocationDistributionChartProps {
   locationData: {
@@ -40,6 +42,7 @@ const LocationDistributionChart: React.FC<LocationDistributionChartProps> = ({
   onLocationClick,
   colors
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-location');
   const isMobile = useIsMobile();
   
   // Validate and sanitize all inputs
@@ -107,13 +110,17 @@ const LocationDistributionChart: React.FC<LocationDistributionChartProps> = ({
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Location ({validatedTotalLocations} total)
-          {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
-          {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Location ({validatedTotalLocations} total)
+            {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
+            {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('location-distribution')} />
+        </div>
       </CardHeader>
       <CardContent>
+        <div id="chart-location" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="350px">
           <ChartContainer className="h-full" config={{}}>
             <ResponsiveContainer>
@@ -162,6 +169,7 @@ const LocationDistributionChart: React.FC<LocationDistributionChartProps> = ({
             </ResponsiveContainer>
           </ChartContainer>
         </ResponsiveChartWrapper>
+        </div>
         <div className="mt-4 text-sm text-muted-foreground text-center">
           Click on any segment to filter by location
         </div>

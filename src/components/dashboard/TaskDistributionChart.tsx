@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/chart";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 import { validateChartData, validateClickData, validateCountingMode, validateTotalCount, validateFilterValue } from '@/utils/chartDataValidation';
 
@@ -35,6 +37,7 @@ const TaskDistributionChart: React.FC<TaskDistributionChartProps> = ({
   selectedModality = "all",
   onTaskClick
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-task');
   const isMobile = useIsMobile();
   
   // Validate and sanitize all inputs
@@ -56,14 +59,17 @@ const TaskDistributionChart: React.FC<TaskDistributionChartProps> = ({
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Task ({validatedTotalModels} total)
-          {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
-          {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Task ({validatedTotalModels} total)
+            {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
+            {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('task-distribution')} />
+        </div>
       </CardHeader>
       <CardContent className="p-2 md:p-6">
-        <div className={`w-full ${isMobile ? 'h-[450px]' : 'h-[350px]'}`}>
+        <div id="chart-task" ref={chartRef} className={`w-full ${isMobile ? 'h-[450px]' : 'h-[350px]'}`}>
           <ChartContainer className="h-full w-full" config={{}}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 

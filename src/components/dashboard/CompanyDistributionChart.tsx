@@ -9,6 +9,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recha
 import { useIsMobile } from "@/hooks/use-mobile";
 import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { validateChartData, validateCountingMode, validateTotalCount, validateFilterValue } from '@/utils/chartDataValidation';
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 // Custom tooltip component for company chart
 const CompanyTooltip = ({ active, payload, countingMode }: any) => {
@@ -64,6 +66,7 @@ const CompanyDistributionChart: React.FC<CompanyDistributionChartProps> = ({
   selectedLocation = "all",
   selectedModality = "all"
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-company');
   const isMobile = useIsMobile();
   
   // Validate and sanitize all inputs
@@ -98,13 +101,16 @@ const CompanyDistributionChart: React.FC<CompanyDistributionChartProps> = ({
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Company ({totalModelsProducts} total) {filterText}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Company ({totalModelsProducts} total) {filterText}
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('company-distribution')} />
+        </div>
       </CardHeader>
       <CardContent className="p-2 md:p-6">
         {displayData.length > 0 ? (
-          <div className={`w-full ${isMobile ? 'h-[600px]' : 'h-[500px]'}`}>
+          <div id="chart-company" ref={chartRef} className={`w-full ${isMobile ? 'h-[600px]' : 'h-[500px]'}`}>
             <ChartContainer className="h-full w-full" config={{}}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart 

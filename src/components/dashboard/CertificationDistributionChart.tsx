@@ -8,6 +8,8 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 import { useIsMobile } from "@/hooks/use-mobile";
 import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { validateChartData, validateTotalCount, validateCountingMode, validateFilterValue } from '@/utils/chartDataValidation';
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface CertificationDistributionChartProps {
   certificationData: {
@@ -30,6 +32,7 @@ const CertificationDistributionChart: React.FC<CertificationDistributionChartPro
   selectedLocation,
   selectedModality
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-certification');
   const isMobile = useIsMobile();
   
   // Validate and sanitize all inputs
@@ -71,14 +74,18 @@ const CertificationDistributionChart: React.FC<CertificationDistributionChartPro
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          Regulatory Certification Distribution ({validatedTotalCertified} total {validatedCountingMode})
-          {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
-          {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
-          {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            Regulatory Certification Distribution ({validatedTotalCertified} total {validatedCountingMode})
+            {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
+            {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
+            {validatedSelectedModality !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by modality</span>}
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('certification-distribution')} />
+        </div>
       </CardHeader>
       <CardContent>
+        <div id="chart-certification" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="350px">
           <ChartContainer className="h-full" config={{}}>
             <ResponsiveContainer>
@@ -118,6 +125,7 @@ const CertificationDistributionChart: React.FC<CertificationDistributionChartPro
             </ResponsiveContainer>
           </ChartContainer>
         </ResponsiveChartWrapper>
+        </div>
         <div className="mt-4 text-sm text-muted-foreground text-center">
           Distribution of regulatory approvals (CE, FDA, NMPA) across {validatedCountingMode}
         </div>

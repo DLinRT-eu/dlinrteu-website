@@ -402,7 +402,12 @@ class DataService {
 
         // Collect products matching this task
         const taskProducts = products
-          .filter(p => matchesTask(p, task))
+          .filter(p => {
+            if (!matchesTask(p, task)) return false;
+            // Non-AI (QA) products should only appear under Performance Monitor
+            if (task !== "Performance Monitor" && p.usesAI === false) return false;
+            return true;
+          })
           .map(p => {
             const ceStatus = typeof p.regulatory?.ce === 'object' ? p.regulatory.ce.status : '';
             const fdaStatus = typeof p.regulatory?.fda === 'object' ? p.regulatory.fda.status : (typeof p.regulatory?.fda === 'string' ? p.regulatory.fda : '');

@@ -1,6 +1,8 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface StructureTypeData {
   productName: string;
@@ -16,6 +18,7 @@ interface StructureTypeDistributionChartProps {
 }
 
 const StructureTypeDistributionChart: React.FC<StructureTypeDistributionChartProps> = ({ structureTypeData }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-structure-type');
   // Calculate totals for the title
   const totals = structureTypeData.reduce((acc, curr) => ({
     OARs: acc.OARs + curr.OARs,
@@ -26,13 +29,18 @@ const StructureTypeDistributionChart: React.FC<StructureTypeDistributionChartPro
   return (
     <Card className="col-span-1 md:col-span-2">
       <CardHeader>
-        <CardTitle>Structure Type Distribution</CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Total structures by type: {totals.OARs} OARs, {totals.Targets} Targets, {totals.Elective} Elective
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle>Structure Type Distribution</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Total structures by type: {totals.OARs} OARs, {totals.Targets} Targets, {totals.Elective} Elective
+            </p>
+          </div>
+          <ChartExportButton onExport={() => exportToPng('structure-type-distribution')} />
+        </div>
       </CardHeader>
       <CardContent>
-        <div className="h-[400px]">
+        <div id="chart-structure-type" ref={chartRef} className="h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={structureTypeData}
