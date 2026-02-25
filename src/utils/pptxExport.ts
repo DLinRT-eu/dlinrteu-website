@@ -1218,8 +1218,6 @@ export class PptxExporter {
       this.addStructureAnalysisSlide(data);
       this.addStructureTypeAnalysisSlide(data);
       
-      // Section 3: Products (async for image loading)
-      await this.addProductGridSlides(data);
       
       // Section 4: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
