@@ -1,99 +1,82 @@
 
 
-# Fix PPTX Export: Positioning, Data Accuracy, and Chart Fidelity
+# Fix PPTX Export: Layout Mismatch and Image Loading
 
-## Problems Identified
+## Root Cause
 
-1. **Content outside page boundaries**: 6 chart slides use hardcoded `x: 0.3, w: 12.6` instead of the layout constants (`margin.left: 1.0`, `contentWidth: 11.33`), pushing content outside the visible slide area.
-2. **Analytics data is fabricated**: Views, visitors, session duration are computed from product/company counts with arbitrary multipliers -- not real data.
-3. **Charts don't match the website**: pptxgenjs's built-in chart renderer produces visually different charts than the Recharts-based ones on the dashboard.
+The main bug causing "content outside the page" is a **slide layout mismatch**:
 
-## Approach
+- The code sets `this.pptx.layout = "LAYOUT_16x9"` which creates slides that are **10 inches x 5.625 inches**
+- But the layout constants use `slideWidth: 13.33` and `slideHeight: 7.5`, which are the dimensions for `LAYOUT_WIDE` (13.33" x 7.5")
+- Result: all content positioned between 10" and 13.33" horizontally (and 5.625" to 7.5" vertically) falls **outside the visible slide area**
+- This affects every single slide in the presentation
 
-### Fix 1: Consistent Positioning (all chart slides)
+## Fix 1: Correct the Layout Setting
 
-Replace all hardcoded `x: 0.3, y: 0.5, w: 12.6` values in the 6 chart slide methods and the contact/engagement slide with the existing `this.layout.margin.*` and `this.getContentWidth()` constants. This is the primary cause of content appearing outside page boundaries.
+**File**: `src/utils/pptxExport.ts`, line 122
 
-**Affected methods** (lines in `src/utils/pptxExport.ts`):
-- `addTaskDistributionSlide` (lines 757-788)
-- `addCompanyDistributionSlide` (lines 790-821)
-- `addLocationAnalysisSlide` (lines 823-855)
-- `addModalityAnalysisSlide` (lines 857-887)
-- `addStructureAnalysisSlide` (lines 889-920)
-- `addStructureTypeAnalysisSlide` (lines 922-958)
-- `addContactEngagementSlide` (lines 960-1063)
+Change `this.pptx.layout = "LAYOUT_16x9"` to `this.pptx.layout = "LAYOUT_WIDE"` so the actual PowerPoint slide dimensions match the positioning constants (13.33" x 7.5").
 
-All will switch from:
+This single change fixes all content overflow issues across every slide.
+
+## Fix 2: Convert Images to Base64 Before Adding
+
+**File**: `src/utils/pptxExport.ts`
+
+The current approach uses `path` URLs for images, which requires pptxgenjs to fetch them at export time. This is fragile -- CORS errors or network issues cause images to silently fail or produce corrupted output.
+
+Replace the image loading strategy:
+- Add a helper method `fetchImageAsBase64(url: string): Promise<string>` that uses `fetch()` + `FileReader`/`canvas` to convert images to base64 data URIs before passing them to pptxgenjs
+- Update `safeAddImage` to use `data` (base64) instead of `path` (URL)
+- This eliminates CORS issues and ensures images are properly embedded in the PPTX file
+- If an image fails to load, skip it gracefully (already handled by try/catch)
+
+## Fix 3: Logo Aspect Ratio Preservation
+
+**File**: `src/utils/pptxExport.ts`
+
+When converting to base64, detect the actual image dimensions using `Image()` object and calculate proper aspect ratio within the bounding box. This ensures logos are not stretched or squished:
+
+- Load each image with `new Image()` to get `naturalWidth` and `naturalHeight`
+- Calculate the fitted dimensions within the target bounding box while preserving aspect ratio
+- Pass these corrected dimensions to `addImage` along with `sizing: { type: 'contain', w, h }`
+
+## Technical Details
+
+### Layout Fix (line 122)
 ```text
-x: 0.3, y: 0.5, w: 12.6
-```
-to:
-```text
-x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth
+Before: this.pptx.layout = "LAYOUT_16x9";   // 10" x 5.625"
+After:  this.pptx.layout = "LAYOUT_WIDE";    // 13.33" x 7.5"
 ```
 
-And chart areas from `x: 0.3, y: 1.8, w: 12.6, h: 5` to `x: margin.left, y: 1.6, w: contentWidth, h: contentHeight` with proper bounds.
+### Base64 Image Helper
+New private method added to `PptxExporter`:
+- `fetchImageAsBase64(url: string): Promise<{ data: string; width: number; height: number } | null>`
+- Fetches the image via `fetch()`, converts to blob, reads as data URL
+- Also loads via `Image()` to get natural dimensions
+- Returns null on failure (graceful degradation)
 
-### Fix 2: Remove Fabricated Analytics
+### Updated `safeAddImage`
+- Made `async`
+- Calls `fetchImageAsBase64` first
+- Uses `data` property instead of `path`
+- Calculates proper fitted dimensions for aspect ratio preservation
 
-The `addAnalyticsOverviewSlide` shows fake view counts and traffic trends. Replace the fabricated analytics with a factual content-based summary: total products, companies, categories, certifications tracked. Remove the "Total Views" / "Unique Visitors" / "Avg. Session" cards and the fake traffic line chart. Replace with a content summary that reflects real platform data (product counts by category, certification breakdown, etc.).
+### Updated Methods That Use Images
+The following methods call `safeAddImage` and need to be made `async`:
+- `addTitleSlide` (logo)
+- `addCompanyLogosSlide` (company logos)
+- `addProductGridSlides` (company logos on product cards)
+- `addCompanyLogosByTaskSlides` (company logos per task)
 
-In `DataService.ts`, remove the fabricated `analyticsData` fields (totalViews, uniqueVisitors, averageSessionDuration, trafficTrends) and replace with real content metrics derived from actual data.
-
-### Fix 3: Improve Chart Fidelity
-
-Since capturing actual Recharts screenshots requires html2canvas with offscreen rendering (very fragile), the practical fix is to improve the pptxgenjs charts to better match the website:
-
-- Use matching colors from the Recharts chart configs (per-bar colors for task distribution)
-- Add data labels to bar charts (matching the website's tooltip info)
-- Use consistent font (Arial, not Inter -- Inter isn't embeddable in PPTX)
-- Fix chart margins so bars/pies don't get clipped
-
-### Fix 4: Font Consistency
-
-Several slides mix `fontFace: "Inter"` with `fontFace: "Arial"`. Inter is a web font not available in PowerPoint. Standardize all text to `fontFace: "Arial"` to prevent fallback rendering issues.
+### `generatePresentation` Updates
+Await the async slide methods instead of calling them synchronously.
 
 ## Files Modified
 
-### 1. `src/utils/pptxExport.ts`
-
-**Positioning fix** -- all 7 chart/engagement methods updated to use `this.layout.margin.*` and `this.getContentWidth()`.
-
-**Font fix** -- replace all `fontFace: "Inter"` with `fontFace: "Arial"` (~20 occurrences).
-
-**Analytics slide** -- rewrite `addAnalyticsOverviewSlide` to show real content metrics instead of fabricated traffic data:
-- Card 1: Total Products (from data.totalProducts)
-- Card 2: Total Companies (from data.totalCompanies)
-- Card 3: Clinical Categories (from data.totalCategories)
-- Replace fake traffic line chart with a certification breakdown bar chart
-- Replace "Most Viewed Pages" table with "Products by Category" table (real data)
-
-**Chart improvements** -- add `showValue: true` or `dataLabelPosition` to bar charts; ensure `catAxisOrientation` matches the website's rotated labels.
-
-### 2. `src/services/DataService.ts`
-
-Remove the fabricated analytics block (lines 407-437) that generates fake totalViews/uniqueVisitors/averageSessionDuration/trafficTrends. Replace `analyticsData` with a real content summary:
-
-```text
-analyticsData: {
-  totalProducts: products.length,
-  totalCompanies: companies.length,
-  totalCategories: categories.length,
-  certificationBreakdown: [...],
-  categoryBreakdown: [...]
-}
-```
-
-### 3. `src/utils/pptxExport.ts` (PresentationData interface)
-
-Update the `analyticsData` type in the interface to match the new real-data structure (remove totalViews, uniqueVisitors, etc.; add content-based fields).
-
-## Summary of Changes
-
-| Issue | Fix | Impact |
-|-------|-----|--------|
-| Content outside page | Use layout constants consistently | All chart slides render within bounds |
-| Fake analytics | Replace with real content metrics | Accurate, trustworthy data |
-| Font fallback | Standardize to Arial | Consistent rendering in PowerPoint |
-| Chart mismatch | Better colors, labels, margins | Closer match to website charts |
-
+1. **`src/utils/pptxExport.ts`** -- all changes are in this single file:
+   - Fix layout from `LAYOUT_16x9` to `LAYOUT_WIDE`
+   - Add `fetchImageAsBase64` helper method
+   - Update `safeAddImage` to use base64 data
+   - Make image-using slide methods async
+   - Update `generatePresentation` to await async methods
