@@ -1,10 +1,12 @@
 
-import React from 'react';
-import { LayoutDashboard, Filter, RefreshCcw } from "lucide-react";
+import React, { useState } from 'react';
+import { LayoutDashboard, Filter, RefreshCcw, Download, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Badge } from "@/components/ui/badge";
+import { captureAllDashboardCharts } from "@/utils/chartImageCapture";
+import { useToast } from "@/hooks/use-toast";
 
 interface DashboardHeaderProps {
   selectedTask: string;
@@ -32,11 +34,48 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   allModalities
 }) => {
   const isMobile = useIsMobile();
+  const { toast } = useToast();
+  const [exporting, setExporting] = useState(false);
   
   // Check if any filter is active
   const hasActiveFilters = selectedTask !== "all" || 
                           selectedLocation !== "all" || 
                           selectedModality !== "all";
+
+  const handleBatchExport = async () => {
+    setExporting(true);
+    try {
+      const charts = await captureAllDashboardCharts();
+      const entries = Object.entries(charts);
+      if (entries.length === 0) {
+        toast({ description: "No charts found to export", variant: "destructive" });
+        return;
+      }
+
+      const JSZip = (await import('jszip')).default;
+      const zip = new JSZip();
+
+      for (const [name, dataUrl] of entries) {
+        const base64 = dataUrl.split(',')[1];
+        zip.file(`${name}.png`, base64, { base64: true });
+      }
+
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `dlinrt-dashboard-charts-${new Date().toISOString().slice(0, 10)}.zip`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      toast({ description: `Exported ${entries.length} charts as ZIP` });
+    } catch (e) {
+      console.error('Batch export failed:', e);
+      toast({ description: "Failed to export charts", variant: "destructive" });
+    } finally {
+      setExporting(false);
+    }
+  };
 
   return (
     <div className="mb-6">
@@ -45,16 +84,28 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <LayoutDashboard className="h-6 w-6 text-[#00A6D6]" />
           <h1 className="text-xl md:text-2xl font-bold">Analytics Dashboard</h1>
         </div>
-        {hasActiveFilters && (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={handleResetAllFilters}
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleBatchExport}
+            disabled={exporting}
             className="flex items-center gap-1 h-9"
           >
-            <RefreshCcw className="h-4 w-4" /> Reset All Filters
+            {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            {isMobile ? "Export" : "Export All Charts (ZIP)"}
           </Button>
-        )}
+          {hasActiveFilters && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleResetAllFilters}
+              className="flex items-center gap-1 h-9"
+            >
+              <RefreshCcw className="h-4 w-4" /> Reset All Filters
+            </Button>
+          )}
+        </div>
       </div>
       
       {/* Active filter badges */}
