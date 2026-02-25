@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { CheckCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface SlideContentProps {
   slide: {
@@ -15,6 +13,8 @@ interface SlideContentProps {
     liveLink: string;
     icon: ReactNode;
     stats?: { label: string; value: string }[];
+    figureComponent?: ReactNode;
+    highlights?: { label: string; value: string; color?: string }[];
   };
   onGoLive: () => void;
 }
@@ -50,6 +50,29 @@ export function SlideContent({ slide, onGoLive }: SlideContentProps) {
               </CardHeader>
             </Card>
           ))}
+        </div>
+      )}
+
+      {/* Highlights (alternative to stats - horizontal colored cards) */}
+      {slide.highlights && slide.highlights.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {slide.highlights.map((h, index) => (
+            <Card key={index} className="text-center min-w-[140px]">
+              <CardHeader className="pb-2 pt-4 px-4">
+                <CardTitle className="text-xl md:text-2xl text-primary">
+                  {h.value}
+                </CardTitle>
+                <CardDescription className="text-xs">{h.label}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {/* Figure Component (optional inline visual) */}
+      {slide.figureComponent && (
+        <div className="max-w-3xl w-full mb-8">
+          {slide.figureComponent}
         </div>
       )}
 
