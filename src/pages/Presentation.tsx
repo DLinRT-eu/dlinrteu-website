@@ -62,7 +62,7 @@ export default function Presentation() {
 
   const liveDemoSlidePreviewData = [
     { title: "Welcome", description: "Platform introduction with stats", icon: PresentationIcon },
-    { title: "Mission & Vision", description: "Purpose and direction", icon: Globe },
+    { title: "Mission & Governance", description: "Purpose, principles and direction", icon: Globe },
     { title: "Platform Analytics", description: "Dashboard with top tasks figure", icon: BarChart3 },
     { title: "Product Directory", description: `${presentationData.totalProducts} products with cert stats`, icon: Package },
     { title: "Pipeline", description: "Pre-certification AI products", icon: Package },
@@ -70,12 +70,9 @@ export default function Presentation() {
     { title: "Company Directory", description: `${presentationData.totalCompanies} companies`, icon: Building2 },
     { title: "Product Comparison", description: "Side-by-side analysis", icon: Package },
     { title: "Product Timeline", description: "Historical releases", icon: BarChart3 },
-    { title: "Resources & Compliance", description: "Regulatory guidance", icon: Globe },
+    { title: "Resources & Security", description: "Regulatory guidance & GDPR", icon: Globe },
     { title: "Evidence & Impact", description: "E/I scoring framework", icon: BarChart3 },
-    { title: "Data Security", description: "GDPR compliance", icon: FileText },
-    { title: "News & Updates", description: "Latest announcements", icon: FileText },
-    { title: "Governance & Values", description: "Core principles", icon: FileText },
-    { title: "Get Involved", description: "Community engagement", icon: Users },
+    { title: "News & Get Involved", description: "Updates and community", icon: Users },
   ];
 
   return (
