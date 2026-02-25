@@ -88,21 +88,39 @@ export class PptxExporter {
     return this.layout.slideHeight - this.layout.margin.top - this.layout.margin.bottom;
   }
 
-  private validateImagePath(imagePath: string): string {
-    // Convert relative paths to absolute URLs for browser compatibility
-    if (imagePath.startsWith('/')) {
-      return `${window.location.origin}${imagePath}`;
+  private async fetchImageAsBase64(url: string): Promise<{ data: string; width: number; height: number } | null> {
+    try {
+      const fullUrl = url.startsWith('/') ? `${window.location.origin}${url}` : url;
+      const response = await fetch(fullUrl);
+      if (!response.ok) return null;
+      const blob = await response.blob();
+      
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+
+      const dims = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+        img.onerror = reject;
+        img.src = dataUrl;
+      });
+
+      return { data: dataUrl, width: dims.width, height: dims.height };
+    } catch (error) {
+      console.warn('Failed to fetch image as base64:', url, error);
+      return null;
     }
-    return imagePath;
   }
 
   private async safeAddImage(slide: any, imageConfig: any): Promise<void> {
     try {
-      // Validate image path
-      if (imageConfig.path) {
-        imageConfig.path = this.validateImagePath(imageConfig.path);
-      }
-      
+      const imgUrl = imageConfig.path || imageConfig.data;
+      if (!imgUrl) return;
+
       // Validate coordinates are within bounds
       if (imageConfig.x < 0 || imageConfig.y < 0 || 
           imageConfig.x + imageConfig.w > this.layout.slideWidth ||
@@ -110,30 +128,55 @@ export class PptxExporter {
         console.warn('Image coordinates out of bounds, skipping:', imageConfig);
         return;
       }
+
+      // Convert to base64 if it's a URL/path
+      if (imageConfig.path) {
+        const imageData = await this.fetchImageAsBase64(imageConfig.path);
+        if (!imageData) return;
+
+        // Calculate fitted dimensions preserving aspect ratio
+        const targetW = imageConfig.w;
+        const targetH = imageConfig.h;
+        const imgAspect = imageData.width / imageData.height;
+        const boxAspect = targetW / targetH;
+        let fitW = targetW;
+        let fitH = targetH;
+        if (imgAspect > boxAspect) {
+          fitH = targetW / imgAspect;
+        } else {
+          fitW = targetH * imgAspect;
+        }
+
+        delete imageConfig.path;
+        imageConfig.data = imageData.data;
+        imageConfig.w = fitW;
+        imageConfig.h = fitH;
+        // Center within original bounding box
+        imageConfig.x += (targetW - fitW) / 2;
+        imageConfig.y += (targetH - fitH) / 2;
+        delete imageConfig.sizing;
+      }
       
       slide.addImage(imageConfig);
     } catch (error) {
       console.warn('Failed to add image:', error, imageConfig);
-      // Continue without image rather than failing the entire export
     }
   }
 
   private setupPresentationDefaults() {
-    this.pptx.layout = "LAYOUT_16x9";
+    this.pptx.layout = "LAYOUT_WIDE";
     this.pptx.author = "DLinRT.eu";
     this.pptx.company = "DLinRT.eu Initiative";
     this.pptx.subject = "Deep Learning in Radiotherapy Directory Overview";
     this.pptx.title = "DLinRT.eu Platform Overview";
   }
 
-  private addTitleSlide() {
+  private async addTitleSlide() {
     const slide = this.pptx.addSlide();
     const contentWidth = this.getContentWidth();
     
-    // Background
     slide.background = { color: this.brandColors.background };
     
-    // Title
     slide.addText("DLinRT.eu", {
       x: this.layout.margin.left,
       y: 1.5,
@@ -146,7 +189,6 @@ export class PptxExporter {
       fontFace: "Arial"
     });
     
-    // Subtitle
     slide.addText("Deep Learning in Radiotherapy Directory", {
       x: this.layout.margin.left,
       y: 3.2,
@@ -158,17 +200,15 @@ export class PptxExporter {
       fontFace: "Arial"
     });
     
-    // Logo - centered with proper aspect ratio
     const logoConfig = {
       path: "/LogoDLinRT.eu.png",
       x: this.layout.margin.left + (contentWidth - 1.5) / 2,
       y: 4.5,
       w: 1.5,
       h: 1.2,
-      sizing: { type: "contain", w: 1.5, h: 1.2 }
     };
     
-    this.safeAddImage(slide, logoConfig);
+    await this.safeAddImage(slide, logoConfig);
   }
 
   private addMissionVisionSlide() {
@@ -315,13 +355,12 @@ export class PptxExporter {
     });
   }
 
-  private addCompanyLogosSlide(data: PresentationData) {
+  private async addCompanyLogosSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
     const contentWidth = this.getContentWidth();
     
     slide.background = { color: this.brandColors.background };
     
-    // Title
     slide.addText("Our Partner Companies", {
       x: this.layout.margin.left,
       y: this.layout.margin.top,
@@ -333,10 +372,9 @@ export class PptxExporter {
       fontFace: "Arial"
     });
     
-    // Validate and filter logos
     const validLogos = data.companyLogos?.filter(company => 
       company && company.name && company.logo
-    ).slice(0, 32) || []; // Limit for better layout
+    ).slice(0, 32) || [];
     
     if (validLogos.length === 0) {
       slide.addText("No company logos available", {
@@ -352,41 +390,32 @@ export class PptxExporter {
       return;
     }
     
-    // Responsive grid calculation
     const totalLogos = validLogos.length;
     const cols = Math.min(8, Math.ceil(Math.sqrt(totalLogos * 1.2)));
     const rows = Math.ceil(totalLogos / cols);
-    
-    // Dynamic sizing based on available space
     const availableHeight = 5.8;
     const logoMaxWidth = Math.min(1.2, contentWidth / cols);
     const logoMaxHeight = Math.min(0.8, availableHeight / (rows * 1.4));
-    
     const startX = this.layout.margin.left + (contentWidth - (cols * logoMaxWidth)) / 2;
     const startY = 1.6;
-    const spacingX = logoMaxWidth;
-    const spacingY = logoMaxHeight * 1.4;
-    
-    validLogos.forEach((company, index) => {
+
+    for (let index = 0; index < validLogos.length; index++) {
+      const company = validLogos[index];
       const row = Math.floor(index / cols);
       const col = index % cols;
-      const x = startX + (col * spacingX);
-      const y = startY + (row * spacingY);
+      const x = startX + (col * logoMaxWidth);
+      const y = startY + (row * (logoMaxHeight * 1.4));
       
-      // Add logo with safe handling
       if (company.logo) {
-        const logoConfig = {
+        await this.safeAddImage(slide, {
           path: company.logo,
           x,
           y,
           w: logoMaxWidth * 0.8,
           h: logoMaxHeight * 0.8,
-          sizing: { type: "contain", w: logoMaxWidth * 0.8, h: logoMaxHeight * 0.8 }
-        };
-        this.safeAddImage(slide, logoConfig);
+        });
       }
       
-      // Company name (smaller and positioned below logo)
       slide.addText(company.name, {
         x: x - logoMaxWidth * 0.1,
         y: y + logoMaxHeight * 0.85,
@@ -397,7 +426,7 @@ export class PptxExporter {
         align: "center",
         fontFace: "Arial"
       });
-    });
+    }
   }
 
   private addCategoryBreakdownSlide(data: PresentationData) {
@@ -527,14 +556,14 @@ export class PptxExporter {
     });
   }
 
-  private addProductGridSlides(data: PresentationData) {
+  private async addProductGridSlides(data: PresentationData) {
     if (!data.productsByCategory || data.productsByCategory.length === 0) {
       return;
     }
 
-    data.productsByCategory.forEach(categoryData => {
+    for (const categoryData of data.productsByCategory) {
       if (!categoryData || !categoryData.products || categoryData.products.length === 0) {
-        return;
+        continue;
       }
 
       const slide = this.pptx.addSlide();
@@ -542,7 +571,6 @@ export class PptxExporter {
       
       slide.background = { color: this.brandColors.background };
       
-      // Title
       slide.addText(`${categoryData.category} Solutions`, {
         x: this.layout.margin.left,
         y: this.layout.margin.top,
@@ -554,7 +582,6 @@ export class PptxExporter {
         fontFace: "Arial"
       });
       
-      // Product grid (4 columns) - better positioned
       const cols = 4;
       const cardWidth = 2.6;
       const cardHeight = 1.6;
@@ -567,72 +594,45 @@ export class PptxExporter {
       
       const validProducts = categoryData.products.filter(p => p && p.name).slice(0, 12);
       
-      validProducts.forEach((product, index) => {
+      for (let index = 0; index < validProducts.length; index++) {
+        const product = validProducts[index];
         const row = Math.floor(index / cols);
         const col = index % cols;
         const x = startX + (col * spacingX);
         const y = startY + (row * spacingY);
         
-        // Product card background
         slide.addShape("roundRect", {
-          x,
-          y,
-          w: cardWidth,
-          h: cardHeight,
+          x, y, w: cardWidth, h: cardHeight,
           fill: { color: this.brandColors.accent },
           line: { color: this.brandColors.secondary, width: 1 }
         });
         
-        // Company logo (smaller for product cards)
         if (product.companyLogo) {
-          const logoConfig = {
+          await this.safeAddImage(slide, {
             path: product.companyLogo,
-            x: x + 0.1,
-            y: y + 0.1,
-            w: 0.3,
-            h: 0.2,
-            sizing: { type: "contain", w: 0.3, h: 0.2 }
-          };
-          this.safeAddImage(slide, logoConfig);
-        }
-        
-        // Product name
-        slide.addText(product.name || "Unknown Product", {
-          x: x + 0.1,
-          y: y + 0.5,
-          w: cardWidth - 0.2,
-          h: 0.4,
-          fontSize: 11,
-          color: this.brandColors.text,
-          bold: true,
-          fontFace: "Arial"
-        });
-        
-        // Company name
-        slide.addText(product.company || "Unknown Company", {
-          x: x + 0.1,
-          y: y + 0.9,
-          w: cardWidth - 0.2,
-          h: 0.3,
-          fontSize: 9,
-          color: this.brandColors.secondary,
-          fontFace: "Arial"
-        });
-        
-        // Certification status
-        if (product.certification) {
-          slide.addText(product.certification, {
-            x: x + 0.1,
-            y: y + 1.2,
-            w: cardWidth - 0.2,
-            h: 0.2,
-            fontSize: 8,
-            color: this.brandColors.primary,
-            fontFace: "Arial"
+            x: x + 0.1, y: y + 0.1,
+            w: 0.3, h: 0.2,
           });
         }
-      });
-    });
+        
+        slide.addText(product.name || "Unknown Product", {
+          x: x + 0.1, y: y + 0.5, w: cardWidth - 0.2, h: 0.4,
+          fontSize: 11, color: this.brandColors.text, bold: true, fontFace: "Arial"
+        });
+        
+        slide.addText(product.company || "Unknown Company", {
+          x: x + 0.1, y: y + 0.9, w: cardWidth - 0.2, h: 0.3,
+          fontSize: 9, color: this.brandColors.secondary, fontFace: "Arial"
+        });
+        
+        if (product.certification) {
+          slide.addText(product.certification, {
+            x: x + 0.1, y: y + 1.2, w: cardWidth - 0.2, h: 0.2,
+            fontSize: 8, color: this.brandColors.primary, fontFace: "Arial"
+          });
+        }
+      }
+    }
   }
 
   private addAnalyticsOverviewSlide(data: PresentationData) {
@@ -1070,12 +1070,12 @@ export class PptxExporter {
      });
   }
 
-  private addCompanyLogosByTaskSlides(data: PresentationData) {
+  private async addCompanyLogosByTaskSlides(data: PresentationData) {
     if (!data.companyLogosByTask?.length) return;
 
     const contentWidth = this.getContentWidth();
 
-    data.companyLogosByTask.forEach(group => {
+    for (const group of data.companyLogosByTask) {
       const slide = this.pptx.addSlide();
       slide.background = { color: this.brandColors.background };
 
@@ -1091,7 +1091,7 @@ export class PptxExporter {
       });
 
       const validLogos = group.companies.filter(c => c.logo).slice(0, 32);
-      if (validLogos.length === 0) return;
+      if (validLogos.length === 0) continue;
 
       const cols = Math.min(8, Math.ceil(Math.sqrt(validLogos.length * 1.2)));
       const rows = Math.ceil(validLogos.length / cols);
@@ -1101,39 +1101,35 @@ export class PptxExporter {
       const startX = this.layout.margin.left + (contentWidth - (cols * logoMaxWidth)) / 2;
       const startY = 1.6;
 
-      validLogos.forEach((company, index) => {
+      for (let index = 0; index < validLogos.length; index++) {
+        const company = validLogos[index];
         const row = Math.floor(index / cols);
         const col = index % cols;
         const x = startX + col * logoMaxWidth;
         const y = startY + row * (logoMaxHeight * 1.4);
 
-        const logoConfig = {
+        await this.safeAddImage(slide, {
           path: company.logo,
-          x,
-          y,
+          x, y,
           w: logoMaxWidth * 0.8,
           h: logoMaxHeight * 0.8,
-          sizing: { type: "contain", w: logoMaxWidth * 0.8, h: logoMaxHeight * 0.8 }
-        };
-        this.safeAddImage(slide, logoConfig);
-      });
-    });
+        });
+      }
+    }
   }
 
   public async generatePresentation(data: PresentationData): Promise<void> {
     try {
-      // Validate data before proceeding
       if (!data) {
         throw new Error('No presentation data provided');
       }
 
-      // Add all slides with error handling for each
-      // Section 1: Introduction
-      this.addTitleSlide();
+      // Section 1: Introduction (async for image loading)
+      await this.addTitleSlide();
       this.addMissionVisionSlide();
       this.addOverviewSlide(data);
-      this.addCompanyLogosSlide(data);
-      this.addCompanyLogosByTaskSlides(data);
+      await this.addCompanyLogosSlide(data);
+      await this.addCompanyLogosByTaskSlides(data);
       
       // Section 2: Analytics & Charts
       this.addCategoryBreakdownSlide(data);
@@ -1144,15 +1140,14 @@ export class PptxExporter {
       this.addStructureAnalysisSlide(data);
       this.addStructureTypeAnalysisSlide(data);
       
-      // Section 3: Products
-      this.addProductGridSlides(data);
+      // Section 3: Products (async for image loading)
+      await this.addProductGridSlides(data);
       
       // Section 4: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
       this.addContactEngagementSlide(data);
       this.addGovernanceSlide();
 
-      // Generate and download the presentation
       await this.pptx.writeFile({ fileName: `DLinRT-Overview-${new Date().toISOString().split('T')[0]}.pptx` });
       
     } catch (error) {
