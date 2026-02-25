@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,23 +8,31 @@ import { exportToPptx } from "@/utils/pptxExport";
 import dataService from "@/services/DataService";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
+import OffscreenChartRenderer from "@/components/presentation/OffscreenChartRenderer";
 
 export default function Presentation() {
   const navigate = useNavigate();
   const [isExporting, setIsExporting] = useState(false);
+  const [showOffscreenCharts, setShowOffscreenCharts] = useState(false);
   const presentationData = dataService.getPresentationData();
 
-  const handleExport = async () => {
-    setIsExporting(true);
+  const handleChartsCaptured = useCallback(async (chartImages: Record<string, string>) => {
     try {
-      await exportToPptx();
+      console.log(`Captured ${Object.keys(chartImages).length} chart images for PPTX`);
+      await exportToPptx(chartImages);
       toast.success("Presentation exported successfully!");
     } catch (error) {
       console.error("Export failed:", error);
       toast.error("Failed to export presentation. Please try again.");
     } finally {
       setIsExporting(false);
+      setShowOffscreenCharts(false);
     }
+  }, []);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    setShowOffscreenCharts(true);
   };
 
   const handleStartDemo = () => {
@@ -72,7 +80,10 @@ export default function Presentation() {
 
   return (
     <>
-      <SEO 
+      {showOffscreenCharts && (
+        <OffscreenChartRenderer onReady={handleChartsCaptured} />
+      )}
+      <SEO
         title="Presentation Center - DLinRT.eu"
         description="Create presentations about DLinRT.eu - download PowerPoint or start an interactive live demo for conferences and meetings."
       />
