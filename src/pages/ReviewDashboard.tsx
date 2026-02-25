@@ -100,9 +100,9 @@ const ReviewDashboard = () => {
     }
   };
 
-  const handleExportExcel = () => {
+  const handleExportExcel = async () => {
     try {
-      exportReviewToExcel(filteredProducts, assignments);
+      await exportReviewToExcel(filteredProducts, assignments);
       toast({
         title: "Export Successful",
         description: `Exported ${filteredProducts.length} products to Excel`,
