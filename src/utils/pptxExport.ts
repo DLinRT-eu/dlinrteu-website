@@ -1334,14 +1334,16 @@ export class PptxExporter {
   }
 }
 
-export const exportToPptx = async (): Promise<void> => {
+export const exportToPptx = async (preCapturedChartImages?: Record<string, string>): Promise<void> => {
   try {
-    // Capture dashboard charts as images (if dashboard is visible)
-    let chartImages: Record<string, string> = {};
-    try {
-      chartImages = await captureAllDashboardCharts();
-    } catch (e) {
-      console.warn('Could not capture dashboard charts, using native charts:', e);
+    // Use pre-captured images if provided, otherwise try DOM capture as fallback
+    let chartImages: Record<string, string> = preCapturedChartImages || {};
+    if (!preCapturedChartImages || Object.keys(preCapturedChartImages).length === 0) {
+      try {
+        chartImages = await captureAllDashboardCharts();
+      } catch (e) {
+        console.warn('Could not capture dashboard charts, using native charts:', e);
+      }
     }
 
     const rawData = await dataService.getPresentationData();
