@@ -1,135 +1,69 @@
-# Fix Task Product Tables (AI filtering) and Use Dashboard Chart Images in PPTX
 
-## Four Changes
 
-### 1. Filter non-AI products from task-based product tables (except Performance Monitor)
+# Revise Presentation Center and Live Demo
 
-**Problem**: Currently all products (including non-AI QA tools) appear in every task's product table slides. Non-AI products should only appear under "Performance Monitor".
+## Issues Found
 
-**Fix in `src/services/DataService.ts**`: In the `getPresentationData` method where `taskProducts` is built (around line 404), add a filter:
+1. **Welcome slide duplicate stat**: The first demo slide shows "Categories" twice (lines 42-43 in LiveDemoMode.tsx) -- one should be "Certifications"
+2. **Missing demo slides**: Several key platform pages have no corresponding live demo slide: Pipeline, Evidence & Impact Guide, News, Initiatives
+3. **Demo slides are text-only**: Every slide shows the same layout (icon, title, bullet points, Go Live button). No embedded figures, stats, or visual variety
+4. **Presentation Center preview is stale**: The `pptxSlidePreviewData` and `liveDemoSlidePreviewData` arrays on `/presentation` don't match the actual slide content
 
-- If the current task is NOT "Performance Monitor", exclude products where `usesAI === false`
-- If the task IS "Performance Monitor", include all products (both AI and non-AI)
+## Plan
 
-### 2. Add "Export to PNG" button to each dashboard chart
+### 1. Fix duplicate stat on Welcome slide
 
-**New utility `src/utils/chartExport.ts**`: Create a utility function `exportChartAsPng(elementId: string): Promise<string>` that:
+**File: `src/components/presentation/LiveDemoMode.tsx`**
 
-- Uses `html2canvas` approach (or simpler: create a canvas from the chart's DOM element)
-- Since we already have access to the DOM, use the native `html-to-image` pattern with a canvas element
-- Actually, the simplest robust approach: use the `**toDataURL**` pattern -- wrap each chart in a div with a unique `id`, then use `document.querySelector` + the canvas API
+Change the fourth stat from `{ label: "Categories", value: data.analyticsData.totalCategories.toString() }` to `{ label: "Certifications", value: (data.certificationBreakdown?.length || 0).toString() }`.
 
-**Better approach -- use `html2canvas**`: We don't have it installed, but we can use the browser's native approach:
+### 2. Add new Live Demo slides
 
-- Each chart component gets a `ref` and an export button
-- The export function uses a `<canvas>` element and the SVG serialization approach (Recharts renders SVGs)
-- Serialize the SVG to a string, draw it on a canvas, export as PNG
+Add 3 new slides to the `createSlides()` array in `LiveDemoMode.tsx`:
 
-**Implementation -- New hook `src/hooks/useChartExport.ts**`:
+- **Pipeline** (after Product Directory): upcoming/pre-certification AI products, links to `/products/pipeline`
+- **Evidence & Impact** (after Resources): the E/I scoring framework, links to `/evidence-impact-guide`
+- **News & Updates** (before Get Involved): latest platform news, links to `/news`
 
-- `useChartExport()` returns `{ chartRef, exportToPng, getChartDataUrl }`
-- `exportToPng(filename)` -- downloads the chart as PNG
-- `getChartDataUrl()` -- returns base64 data URL (for PPTX use)
-- Uses SVG serialization: gets the `<svg>` element inside the ref, serializes with `XMLSerializer`, draws on canvas via `Image` + `canvas.toDataURL()`
+### 3. Enhance SlideContent with optional figures and richer layouts
 
-**New component `src/components/dashboard/ChartExportButton.tsx**`:
+**File: `src/components/presentation/SlideContent.tsx`**
 
-- Small download icon button positioned in the top-right of each chart card
-- Calls `exportToPng` on click
+Extend the slide data interface and rendering to support optional visual elements:
 
-**Update each dashboard chart component** (6 files):
+- Add optional `figureComponent` field to the slide interface -- a React node rendered below the subtitle (e.g., an inline chart, a mini dashboard summary, or an image)
+- Add optional `highlights` field for a horizontal row of highlight cards (alternative to stats)
+- Keep backward compatibility: slides without these fields render as before
 
-- `TaskDistributionChart.tsx`
-- `LocationDistributionChart.tsx`
-- `ModalityDistributionChart.tsx`
-- `CompanyDistributionChart.tsx`
-- `CertificationDistributionChart.tsx`
-- `EvidenceImpactScatterChart.tsx`
+### 4. Add embedded figures to key demo slides
 
-Each gets:
+**File: `src/components/presentation/LiveDemoMode.tsx`**
 
-- A `ref` on the chart container div
-- A `ChartExportButton` in the card header
-- A unique `id` attribute for the chart container
+For select slides, add inline visual content using real data from `dataService`:
 
-### 3. Use dashboard chart PNG images in PPTX instead of native pptxgenjs charts
+- **Welcome**: Already has stats -- keep as is (with the fix)
+- **Platform Analytics (dashboard)**: Add a small summary showing top 3 tasks with their product counts as colored bars
+- **Product Directory**: Add a mini stat row: total products, total with CE, total with FDA
+- **Companies**: Add a mini stat row: total companies, top company by product count
+- **Evidence & Impact**: Add a brief inline description of the E0-E3 / I0-I5 axes
 
-**Problem**: The current PPTX creates native pptxgenjs charts (bar, pie) that don't match the dashboard visuals. Some charts (Certification, EvidenceImpact) are missing entirely.
+### 5. Update Presentation Center page previews
 
-**Approach**: Before generating the PPTX, capture all dashboard charts as PNG base64 data URLs, then embed them as images in the slides.
+**File: `src/pages/Presentation.tsx`**
 
-**New export flow in `src/utils/chartImageCapture.ts**`:
-
-- `captureAllDashboardCharts(): Promise<Record<string, string>>` 
-- Captures each chart by its DOM element ID
-- Returns a map of chart name to base64 data URL
-- Uses the same SVG-to-canvas serialization approach
-
-**Update `PresentationData` interface** in `src/utils/pptxExport.ts`:
-
-- Add `chartImages?: Record<string, string>` field
-
-**Update chart slide methods** in `src/utils/pptxExport.ts`:
-
-- `addTaskDistributionSlide` -- if `data.chartImages?.task` exists, use `addImage` with the data URL instead of `addChart`
-- `addCompanyDistributionSlide` -- use `chartImages.company`
-- `addLocationAnalysisSlide` -- use `chartImages.location`
-- `addModalityAnalysisSlide` -- use `chartImages.modality`
-- `addStructureAnalysisSlide` -- use `chartImages.structure`
-- `addStructureTypeAnalysisSlide` -- use `chartImages.structureType`
-- **New** `addCertificationSlide` -- use `chartImages.certification`
-- **New** `addEvidenceImpactSlide` -- use `chartImages.evidenceImpact`
-
-Each updated method:
-
-- Checks if the chart image exists in `data.chartImages`
-- If yes: adds it as a full-width image on the slide (with title text above)
-- If no: falls back to the existing native pptxgenjs chart (backward compatibility)
-
-**Update `generatePresentation**`: Add the two new slides (Certification and EvidenceImpact) to Section 2.
-
-**Update `src/services/DataService.ts` `getPresentationData**`: Accept optional `chartImages` parameter and pass through to the returned data.
-
-**Update PPTX export trigger** (wherever `exportToPptx` is called):
-
-- Before calling export, capture charts from the DOM
-- Pass chart images into the presentation data
-
-4. Revise licensing, add disclaimer slice and mention the source in each slide  
-  
-
-  add to each slide of the pptx the licensing BB-CY license with the source: DLinRT.eu and the logo on the bottom. Also, a disclaimer slide should be added that the use of the content of the website is allowed upon referenifg the source + add the date of retrieval on the slice as well.  
-    
-  Make sure the licensing is in-line with the one used for the website.
+Update both `pptxSlidePreviewData` and `liveDemoSlidePreviewData` arrays to accurately reflect the current PPTX export sections and the updated live demo slides (including the 3 new ones).
 
 ## File Summary
 
+| File | Change |
+|------|--------|
+| `src/components/presentation/LiveDemoMode.tsx` | Fix duplicate stat; add 3 new slides; add figure data to select slides |
+| `src/components/presentation/SlideContent.tsx` | Support optional `figureComponent` and `highlights` in slide interface and rendering |
+| `src/pages/Presentation.tsx` | Update preview data arrays to match actual slide content |
 
-| File                                                          | Change                                                                                                                                |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/services/DataService.ts`                                 | Filter non-AI products from non-Performance-Monitor tasks; accept chartImages parameter                                               |
-| `src/hooks/useChartExport.ts`                                 | New hook: SVG-to-canvas chart export with download and data URL functions                                                             |
-| `src/utils/chartImageCapture.ts`                              | New utility: capture all dashboard charts as base64 PNGs by DOM element ID                                                            |
-| `src/components/dashboard/ChartExportButton.tsx`              | New component: download button for each chart                                                                                         |
-| `src/components/dashboard/TaskDistributionChart.tsx`          | Add chart ref, ID, and export button                                                                                                  |
-| `src/components/dashboard/LocationDistributionChart.tsx`      | Add chart ref, ID, and export button                                                                                                  |
-| `src/components/dashboard/ModalityDistributionChart.tsx`      | Add chart ref, ID, and export button                                                                                                  |
-| `src/components/dashboard/CompanyDistributionChart.tsx`       | Add chart ref, ID, and export button                                                                                                  |
-| `src/components/dashboard/CertificationDistributionChart.tsx` | Add chart ref, ID, and export button                                                                                                  |
-| `src/components/dashboard/EvidenceImpactScatterChart.tsx`     | Add chart ref, ID, and export button                                                                                                  |
-| `src/utils/pptxExport.ts`                                     | Update interface; use chart images instead of native charts; add Certification and EvidenceImpact slides; update generatePresentation |
+## Technical Details
 
+The `figureComponent` approach uses React nodes directly in the slide data, which is already the pattern used for the `icon` field. This keeps the implementation simple with no new dependencies.
 
-## Chart ID Mapping
+The new slides follow the existing pattern: each has `id`, `title`, `subtitle`, `description`, `keyPoints`, `liveLink`, and `icon`. The optional enrichments (`stats`, `figureComponent`, `highlights`) add visual variety without breaking existing slides.
 
-
-| Dashboard Chart            | DOM ID                  | chartImages key  |
-| -------------------------- | ----------------------- | ---------------- |
-| Task Distribution          | `chart-task`            | `task`           |
-| Location Distribution      | `chart-location`        | `location`       |
-| Modality Distribution      | `chart-modality`        | `modality`       |
-| Company Distribution       | `chart-company`         | `company`        |
-| Certification Distribution | `chart-certification`   | `certification`  |
-| Evidence Impact            | `chart-evidence-impact` | `evidenceImpact` |
-| Structure Types            | `chart-structure-type`  | `structureType`  |
-| Structures                 | `chart-structure`       | `structure`      |
