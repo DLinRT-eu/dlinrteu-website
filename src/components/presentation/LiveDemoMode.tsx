@@ -3,25 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { usePresentationNavigation } from "@/hooks/usePresentationNavigation";
 import { DemoNavBar } from "./DemoNavBar";
 import { SlideContent } from "./SlideContent";
+import { DemoFigures } from "./DemoFigures";
 import dataService from "@/services/DataService";
 import {
-  Home,
-  BarChart3,
-  Package,
-  Layers,
-  Building2,
-  GitCompare,
-  Calendar,
-  BookOpen,
-  Users,
-  Shield,
+  Home, BarChart3, Package, Layers, Building2, GitCompare,
+  Calendar, BookOpen, Users, Shield, Globe, Award,
+  FlaskConical, Newspaper, TrendingUp,
 } from "lucide-react";
-
-import { Globe, Award } from "lucide-react";
 
 const createSlides = () => {
   const data = dataService.getPresentationData();
-  
+
+  // Pre-compute some values for figures
+  const topTasks = data.taskData?.slice(0, 3) || [];
+  const ceCount = data.certificationBreakdown?.find(c => c.name?.includes("CE"))?.count || 0;
+  const fdaCount = data.certificationBreakdown?.find(c => c.name?.includes("FDA"))?.count || 0;
+  const topCompany = data.companyData?.[0];
+
   return [
     {
       id: "welcome",
@@ -40,7 +38,7 @@ const createSlides = () => {
         { label: "Companies", value: data.totalCompanies.toString() },
         { label: "Products", value: data.totalProducts.toString() },
         { label: "Categories", value: data.totalCategories.toString() },
-        { label: "Categories", value: data.analyticsData.totalCategories.toString() },
+        { label: "Certifications", value: (data.certificationBreakdown?.length || 0).toString() },
       ],
     },
     {
@@ -70,6 +68,7 @@ const createSlides = () => {
       ],
       liveLink: "/analytics",
       icon: <BarChart3 className="h-8 w-8" />,
+      figureComponent: <DemoFigures.TaskBars tasks={topTasks} />,
     },
     {
       id: "products",
@@ -84,6 +83,25 @@ const createSlides = () => {
       ],
       liveLink: "/products",
       icon: <Package className="h-8 w-8" />,
+      highlights: [
+        { label: "Total Products", value: data.totalProducts.toString() },
+        { label: "CE Marked", value: ceCount.toString() },
+        { label: "FDA Cleared", value: fdaCount.toString() },
+      ],
+    },
+    {
+      id: "pipeline",
+      title: "Product Pipeline",
+      subtitle: "Upcoming and pre-certification AI products",
+      description: "Track products in development or awaiting regulatory approval",
+      keyPoints: [
+        "Pre-market AI solutions in development",
+        "Expected certification timelines",
+        "Early access and beta programs",
+        "Research-to-market transition tracking",
+      ],
+      liveLink: "/products/pipeline",
+      icon: <FlaskConical className="h-8 w-8" />,
     },
     {
       id: "auto-contouring",
@@ -112,6 +130,10 @@ const createSlides = () => {
       ],
       liveLink: "/companies",
       icon: <Building2 className="h-8 w-8" />,
+      highlights: [
+        { label: "Total Companies", value: data.totalCompanies.toString() },
+        ...(topCompany ? [{ label: `Top: ${topCompany.name}`, value: topCompany.value?.toString() || "0" }] : []),
+      ],
     },
     {
       id: "compare",
@@ -156,6 +178,21 @@ const createSlides = () => {
       icon: <BookOpen className="h-8 w-8" />,
     },
     {
+      id: "evidence-impact",
+      title: "Evidence & Impact",
+      subtitle: "Dual-axis scoring framework for AI products",
+      description: "Evaluate clinical evidence and workflow impact",
+      keyPoints: [
+        "Evidence levels: E0 (no data) → E3 (multi-centre RCTs)",
+        "Impact levels: I0 (no workflow change) → I5 (full automation)",
+        "Systematic evaluation methodology",
+        "Guidance for procurement decisions",
+      ],
+      liveLink: "/evidence-impact-guide",
+      icon: <TrendingUp className="h-8 w-8" />,
+      figureComponent: <DemoFigures.EvidenceImpactSummary />,
+    },
+    {
       id: "security",
       title: "Data Security",
       subtitle: "GDPR-compliant platform design",
@@ -168,6 +205,20 @@ const createSlides = () => {
       ],
       liveLink: "/privacy-security",
       icon: <Shield className="h-8 w-8" />,
+    },
+    {
+      id: "news",
+      title: "News & Updates",
+      subtitle: "Latest platform news and announcements",
+      description: "Stay informed about DLinRT.eu developments",
+      keyPoints: [
+        "Platform feature announcements",
+        "Regulatory landscape updates",
+        "Community milestones",
+        "Webinar and event information",
+      ],
+      liveLink: "/news",
+      icon: <Newspaper className="h-8 w-8" />,
     },
     {
       id: "governance",
@@ -240,7 +291,6 @@ export function LiveDemoMode() {
     }
   }, []);
 
-  // Listen for fullscreen changes
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);

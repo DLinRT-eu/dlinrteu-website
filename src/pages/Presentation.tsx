@@ -31,7 +31,6 @@ export default function Presentation() {
     navigate("/presentation/demo");
   };
 
-  // PPTX slides - complete list matching the actual export
   const pptxSlidePreviewData = [
     { title: "Title Slide", description: "DLinRT.eu branding and introduction", icon: FileText },
     { title: "Mission & Vision", description: "Platform purpose and strategic direction", icon: Globe },
@@ -42,26 +41,31 @@ export default function Presentation() {
     { title: "Company Distribution", description: "Top companies by product count", icon: Building2 },
     { title: "Location Coverage", description: "Anatomical locations analysis", icon: Globe },
     { title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", icon: BarChart3 },
+    { title: "Certification", description: "Regulatory certification breakdown", icon: FileText },
+    { title: "Evidence & Impact", description: "E/I scoring scatter chart", icon: BarChart3 },
     { title: "Structure Analysis", description: "Auto-contouring structures supported", icon: Package },
     { title: "Structure Types", description: "OARs, Targets, Elective distribution", icon: BarChart3 },
     { title: "Product Details", description: "Per-category product grids", icon: Package },
     { title: "Platform Analytics", description: `${presentationData.totalProducts} products tracked`, icon: BarChart3 },
     { title: "Get Involved", description: "Contact and community engagement", icon: Users },
     { title: "Governance & Values", description: "Core values and principles", icon: FileText },
+    { title: "Disclaimer", description: "CC BY 4.0 licensing and attribution", icon: FileText },
   ];
 
-  // Live Demo slides - navigable pages
   const liveDemoSlidePreviewData = [
-    { title: "Welcome", description: "Platform introduction", icon: PresentationIcon },
+    { title: "Welcome", description: "Platform introduction with stats", icon: PresentationIcon },
     { title: "Mission & Vision", description: "Purpose and direction", icon: Globe },
-    { title: "Platform Analytics", description: "Interactive dashboard", icon: BarChart3 },
-    { title: "Product Directory", description: `Browse ${presentationData.totalProducts} AI products`, icon: Package },
+    { title: "Platform Analytics", description: "Dashboard with top tasks figure", icon: BarChart3 },
+    { title: "Product Directory", description: `${presentationData.totalProducts} products with cert stats`, icon: Package },
+    { title: "Pipeline", description: "Pre-certification AI products", icon: Package },
     { title: "Auto-Contouring", description: "Organ delineation category", icon: FileText },
     { title: "Company Directory", description: `${presentationData.totalCompanies} companies`, icon: Building2 },
     { title: "Product Comparison", description: "Side-by-side analysis", icon: Package },
     { title: "Product Timeline", description: "Historical releases", icon: BarChart3 },
     { title: "Resources & Compliance", description: "Regulatory guidance", icon: Globe },
+    { title: "Evidence & Impact", description: "E/I scoring framework", icon: BarChart3 },
     { title: "Data Security", description: "GDPR compliance", icon: FileText },
+    { title: "News & Updates", description: "Latest announcements", icon: FileText },
     { title: "Governance & Values", description: "Core principles", icon: FileText },
     { title: "Get Involved", description: "Community engagement", icon: Users },
   ];
@@ -75,7 +79,6 @@ export default function Presentation() {
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-5xl mx-auto">
-          {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-4">
               Presentation Center
@@ -87,7 +90,6 @@ export default function Presentation() {
             </p>
           </div>
 
-          {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card>
               <CardHeader className="pb-3">
@@ -123,9 +125,7 @@ export default function Presentation() {
             </Card>
           </div>
 
-          {/* Main Actions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {/* Download PPTX Card */}
             <Card className="border-2 hover:border-primary/50 transition-colors">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -170,7 +170,6 @@ export default function Presentation() {
               </CardContent>
             </Card>
 
-            {/* Live Demo Card */}
             <Card className="border-2 hover:border-primary/50 transition-colors">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -207,7 +206,6 @@ export default function Presentation() {
             </Card>
           </div>
 
-          {/* Slide Preview - PPTX */}
           <Card className="mb-6">
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -244,7 +242,6 @@ export default function Presentation() {
             </CardContent>
           </Card>
 
-          {/* Slide Preview - Live Demo */}
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
@@ -281,7 +278,6 @@ export default function Presentation() {
             </CardContent>
           </Card>
 
-          {/* Keyboard Shortcuts */}
           <div className="mt-8 p-4 bg-muted/50 rounded-lg">
             <h3 className="font-medium text-foreground mb-3">Live Demo Keyboard Shortcuts</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
