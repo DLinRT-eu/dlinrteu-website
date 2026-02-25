@@ -11,6 +11,8 @@ import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { CircleCheckIcon } from 'lucide-react';
 import { validateChartData, validateClickData, validateCountingMode, validateTotalCount, validateFilterValue } from '@/utils/chartDataValidation';
 import { getModalityColor } from '@/utils/chartColors';
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface ModalityDistributionChartProps {
   modalityData: {
@@ -37,6 +39,7 @@ const ModalityDistributionChart: React.FC<ModalityDistributionChartProps> = ({
   selectedLocation,
   onModalityClick
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-modality');
   const isMobile = useIsMobile();
   
   // Validate and sanitize all inputs
@@ -93,13 +96,17 @@ const ModalityDistributionChart: React.FC<ModalityDistributionChartProps> = ({
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Modality ({validatedTotalModalities} total)
-          {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
-          {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            {validatedCountingMode === 'models' ? 'AI Models' : 'Products'} by Modality ({validatedTotalModalities} total)
+            {validatedSelectedTask !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by task</span>}
+            {validatedSelectedLocation !== "all" && <span className="text-sm font-normal ml-2 text-muted-foreground">filtered by location</span>}
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('modality-distribution')} />
+        </div>
       </CardHeader>
       <CardContent>
+        <div id="chart-modality" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="320px">
           <ChartContainer className="h-full" config={{}}>
             <ResponsiveContainer width="100%" height="100%">
@@ -142,6 +149,7 @@ const ModalityDistributionChart: React.FC<ModalityDistributionChartProps> = ({
             </ResponsiveContainer>
           </ChartContainer>
         </ResponsiveChartWrapper>
+        </div>
         <div className="mt-4 text-sm text-muted-foreground text-center">
           Click on any bar to filter by modality
         </div>

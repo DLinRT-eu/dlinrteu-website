@@ -8,6 +8,8 @@ import {
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ResponsiveChartWrapper from './ResponsiveChartWrapper';
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface StructuresChartProps {
   structureData: {
@@ -19,6 +21,7 @@ interface StructuresChartProps {
 const StructuresChart: React.FC<StructuresChartProps> = ({
   structureData
 }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-structure');
   const isMobile = useIsMobile();
   
   // Limit number of structures on mobile for better visibility
@@ -29,11 +32,15 @@ const StructuresChart: React.FC<StructuresChartProps> = ({
   return (
     <Card className="col-span-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          Supported Structures in Auto-Contouring Products ({structureData.length} structures)
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            Supported Structures in Auto-Contouring Products ({structureData.length} structures)
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('structures')} />
+        </div>
       </CardHeader>
       <CardContent>
+        <div id="chart-structure" ref={chartRef}>
         <ResponsiveChartWrapper minHeight={isMobile ? "300px" : "400px"}>
           <ChartContainer className="h-full" config={{}}>
             <ResponsiveContainer width="100%" height="100%">
@@ -61,6 +68,7 @@ const StructuresChart: React.FC<StructuresChartProps> = ({
             </ResponsiveContainer>
           </ChartContainer>
         </ResponsiveChartWrapper>
+        </div>
         {isMobile && structureData.length > 8 && (
           <div className="mt-4 text-xs text-center text-muted-foreground">
             Showing top 8 structures. View on desktop for all {structureData.length} structures.

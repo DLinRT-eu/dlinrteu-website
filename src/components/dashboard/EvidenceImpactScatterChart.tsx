@@ -9,6 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useChartExport } from "@/hooks/useChartExport";
+import ChartExportButton from './ChartExportButton';
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
@@ -47,6 +49,7 @@ interface CellProduct {
 type CellMap = Record<string, CellProduct[]>;
 
 const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({ filteredProducts }) => {
+  const { chartRef, exportToPng } = useChartExport('chart-evidence-impact');
   const isMobile = useIsMobile();
 
   const { cellMap, totalCount, categories } = useMemo(() => {
@@ -96,12 +99,15 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
   return (
     <Card className="w-full col-span-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg md:text-2xl">
-          Evidence Rigor vs Clinical Impact ({totalCount} products)
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg md:text-2xl">
+            Evidence Rigor vs Clinical Impact ({totalCount} products)
+          </CardTitle>
+          <ChartExportButton onExport={() => exportToPng('evidence-impact')} />
+        </div>
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto">
+        <div id="chart-evidence-impact" ref={chartRef} className="overflow-x-auto">
           <div className="min-w-[640px]">
             {/* Column headers */}
             <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px mb-1">

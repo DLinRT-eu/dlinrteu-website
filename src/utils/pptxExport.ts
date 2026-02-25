@@ -1,6 +1,7 @@
 import PptxGenJS from "pptxgenjs";
 import dataService from "@/services/DataService";
 import { transformTaskData, transformLocationData, transformModalityData, transformStructureData, transformStructureTypeData } from "@/utils/chartDataTransformation";
+import { captureAllDashboardCharts } from "@/utils/chartImageCapture";
 
 export interface PresentationData {
   totalCompanies: number;
@@ -55,13 +56,15 @@ export interface PresentationData {
       ceStatus: string;
       fdaStatus: string;
       productUrl: string;
-      anatomy: string;
+     anatomy: string;
     }>;
   }>;
+  chartImages?: Record<string, string>;
 }
 
 export class PptxExporter {
   private pptx: PptxGenJS;
+  private allSlides: any[] = [];
   private brandColors = {
     primary: "#1c2937", // hsl(222.2 47.4% 11.2%) converted to hex
     primaryLight: "#3b82f6", // For charts and accents
@@ -84,8 +87,11 @@ export class PptxExporter {
     }
   };
 
+  private generationDate: string;
+
   constructor() {
     this.pptx = new PptxGenJS();
+    this.generationDate = new Date().toISOString().split('T')[0];
     this.setupPresentationDefaults();
   }
 
@@ -178,6 +184,148 @@ export class PptxExporter {
     this.pptx.company = "DLinRT.eu Initiative";
     this.pptx.subject = "Deep Learning in Radiotherapy Directory Overview";
     this.pptx.title = "DLinRT.eu Platform Overview";
+  }
+
+  /**
+   * Adds a standard footer with licensing info, source, and logo to every slide.
+   */
+  private async addSlideFooter(slide: any) {
+    const contentWidth = this.getContentWidth();
+    const footerY = this.layout.slideHeight - 0.4;
+
+    // Logo on far left
+    await this.safeAddImage(slide, {
+      path: "/LogoDLinRT.eu.png",
+      x: 0.3,
+      y: footerY - 0.05,
+      w: 0.35,
+      h: 0.3,
+    });
+
+    // Source + license text
+    slide.addText(
+      `Source: DLinRT.eu  |  CC BY 4.0  |  Retrieved: ${this.generationDate}`,
+      {
+        x: 0.75,
+        y: footerY,
+        w: contentWidth,
+        h: 0.25,
+        fontSize: 7,
+        color: this.brandColors.secondary,
+        fontFace: "Arial",
+      }
+    );
+  }
+
+  /**
+   * Adds a chart image slide if the image data URL is available, otherwise falls back to native chart.
+   * Returns true if the image was used.
+   */
+  private addChartImageSlide(slide: any, imageDataUrl: string | undefined, title: string): boolean {
+    if (!imageDataUrl) return false;
+    
+    const contentWidth = this.getContentWidth();
+    
+    slide.background = { color: this.brandColors.background };
+    slide.addText(title, {
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
+      h: 1,
+      fontSize: 32,
+      color: this.brandColors.primary,
+      bold: true,
+      fontFace: "Arial"
+    });
+    
+    slide.addImage({
+      data: imageDataUrl,
+      x: this.layout.margin.left,
+      y: 1.6,
+      w: contentWidth,
+      h: 5.2,
+    });
+    
+    return true;
+  }
+
+  private addDisclaimerSlide() {
+    const slide = this.pptx.addSlide();
+    const contentWidth = this.getContentWidth();
+    slide.background = { color: this.brandColors.background };
+    
+    slide.addText("Disclaimer & Licensing", {
+      x: this.layout.margin.left,
+      y: this.layout.margin.top,
+      w: contentWidth,
+      h: 1,
+      fontSize: 32,
+      color: this.brandColors.primary,
+      bold: true,
+      fontFace: "Arial"
+    });
+
+    slide.addText("Important Disclaimer", {
+      x: this.layout.margin.left,
+      y: 1.8,
+      w: contentWidth,
+      h: 0.5,
+      fontSize: 20,
+      color: this.brandColors.text,
+      bold: true,
+      fontFace: "Arial"
+    });
+
+    slide.addText(
+      "DLinRT.eu is an informational resource. The platform does not constitute medical advice, nor does it certify the regulatory status of listed products. It is the sole responsibility of manufacturers to comply with all applicable regulations. Always verify the regulatory status (e.g., CE marking) directly with the manufacturer.",
+      {
+        x: this.layout.margin.left,
+        y: 2.4,
+        w: contentWidth,
+        h: 1.6,
+        fontSize: 14,
+        color: this.brandColors.text,
+        fontFace: "Arial"
+      }
+    );
+
+    slide.addText("Licensing", {
+      x: this.layout.margin.left,
+      y: 4.2,
+      w: contentWidth,
+      h: 0.5,
+      fontSize: 20,
+      color: this.brandColors.text,
+      bold: true,
+      fontFace: "Arial"
+    });
+
+    slide.addText(
+      "This content is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share and adapt the material for any purpose, even commercially, as long as you give appropriate credit to DLinRT.eu as the source.",
+      {
+        x: this.layout.margin.left,
+        y: 4.8,
+        w: contentWidth,
+        h: 1.2,
+        fontSize: 14,
+        color: this.brandColors.text,
+        fontFace: "Arial"
+      }
+    );
+
+    slide.addText(
+      `Source: https://dlinrt.eu  |  Date of retrieval: ${this.generationDate}`,
+      {
+        x: this.layout.margin.left,
+        y: 6.2,
+        w: contentWidth,
+        h: 0.5,
+        fontSize: 14,
+        color: this.brandColors.primaryLight,
+        bold: true,
+        fontFace: "Arial"
+      }
+    );
   }
 
   private async addTitleSlide() {
@@ -764,18 +912,14 @@ export class PptxExporter {
   // Dashboard chart slides
   private addTaskDistributionSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.task, "Task Distribution Analysis")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     
     slide.addText("Task Distribution Analysis", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
     
     const chartData = [{
@@ -785,193 +929,139 @@ export class PptxExporter {
     }];
     
     slide.addChart("bar", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: false,
-      showValue: true,
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
       chartColors: data.taskData.map(item => item.fill)
     });
   }
 
   private addCompanyDistributionSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.company, "Company Distribution Analysis")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    
     slide.addText("Company Distribution Analysis", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    
     const topCompanies = data.companyData.slice(0, 15);
     const chartData = [{
       name: "Products by Company",
       labels: topCompanies.map(item => item.name),
       values: topCompanies.map(item => item.value)
     }];
-    
     slide.addChart("bar", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: false,
-      showValue: true,
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addLocationAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.location, "Anatomical Location Coverage")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    
     slide.addText("Anatomical Location Coverage", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    
     const topLocations = data.locationBreakdown.slice(0, 12);
     const chartData = [{
       name: "Products by Location",
       labels: topLocations.map(item => item.name),
       values: topLocations.map(item => item.count)
     }];
-    
     slide.addChart("pie", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: true,
-      legendPos: "r",
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: true, legendPos: "r",
       chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444", "#8B5CF6", "#EC4899", "#06B6D4", "#84CC16", "#F97316", "#A855F7", "#EAB308"]
     });
   }
 
   private addModalityAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.modality, "Imaging Modality Coverage")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    
     slide.addText("Imaging Modality Coverage", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    
     const chartData = [{
       name: "Products by Modality",
       labels: data.modalityBreakdown.map(item => item.name),
       values: data.modalityBreakdown.map(item => item.count)
     }];
-    
     slide.addChart("bar", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: false,
-      showValue: true,
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addStructureAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.structure, "Auto-Contouring: Supported Structures")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    
     slide.addText("Auto-Contouring: Supported Structures", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    
     const topStructures = data.structureData.slice(0, 15);
     const chartData = [{
       name: "Structures Supported",
       labels: topStructures.map(item => item.name),
       values: topStructures.map(item => item.value)
     }];
-    
     slide.addChart("bar", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: false,
-      showValue: true,
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
       chartColors: [this.brandColors.primaryLight]
     });
   }
 
   private addStructureTypeAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
+    if (this.addChartImageSlide(slide, data.chartImages?.structureType, "Auto-Contouring: Structure Type Distribution")) return;
+    
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    
     slide.addText("Auto-Contouring: Structure Type Distribution", {
-      x: this.layout.margin.left,
-      y: this.layout.margin.top,
-      w: contentWidth,
-      h: 1,
-      fontSize: 32,
-      color: this.brandColors.primary,
-      bold: true,
-      fontFace: "Arial"
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    
     const totalOARs = data.structureTypeData.reduce((sum, item) => sum + item.OARs, 0);
     const totalTargets = data.structureTypeData.reduce((sum, item) => sum + item.Targets, 0);
     const totalElective = data.structureTypeData.reduce((sum, item) => sum + item.Elective, 0);
-    
     const chartData = [{
       name: "Structure Types",
       labels: ["OARs", "Targets", "Elective"],
       values: [totalOARs, totalTargets, totalElective]
     }];
-    
     slide.addChart("pie", chartData, {
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
-      showTitle: false,
-      showLegend: true,
-      legendPos: "r",
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: true, legendPos: "r",
       chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B"]
-     });
-   }
+    });
+  }
+
+  private addCertificationChartSlide(data: PresentationData) {
+    if (!data.chartImages?.certification) return;
+    const slide = this.pptx.addSlide();
+    this.addChartImageSlide(slide, data.chartImages.certification, "Regulatory Certification Distribution");
+  }
+
+  private addEvidenceImpactSlide(data: PresentationData) {
+    if (!data.chartImages?.evidenceImpact) return;
+    const slide = this.pptx.addSlide();
+    this.addChartImageSlide(slide, data.chartImages.evidenceImpact, "Evidence Rigor vs Clinical Impact");
+  }
 
    private addContactEngagementSlide(data: PresentationData) {
      const slide = this.pptx.addSlide();
@@ -1215,16 +1305,27 @@ export class PptxExporter {
       this.addCompanyDistributionSlide(data);
       this.addLocationAnalysisSlide(data);
       this.addModalityAnalysisSlide(data);
+      this.addCertificationChartSlide(data);
+      this.addEvidenceImpactSlide(data);
       this.addStructureAnalysisSlide(data);
       this.addStructureTypeAnalysisSlide(data);
       
-      
-      // Section 4: Engagement & Closing
+      // Section 3: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
       this.addContactEngagementSlide(data);
       this.addGovernanceSlide();
+      this.addDisclaimerSlide();
 
-      await this.pptx.writeFile({ fileName: `DLinRT-Overview-${new Date().toISOString().split('T')[0]}.pptx` });
+      // Add footer to all slides using pptxgenjs internal slides array
+      // pptxgenjs stores slides in _slides array internally
+      const allSlides = (this.pptx as any)._slides || (this.pptx as any).slides || [];
+      if (allSlides.length > 0) {
+        for (const slide of allSlides) {
+          await this.addSlideFooter(slide);
+        }
+      }
+
+      await this.pptx.writeFile({ fileName: `DLinRT-Overview-${this.generationDate}.pptx` });
       
     } catch (error) {
       console.error('Error generating presentation:', error);
@@ -1235,11 +1336,22 @@ export class PptxExporter {
 
 export const exportToPptx = async (): Promise<void> => {
   try {
-    const data = await dataService.getPresentationData();
+    // Capture dashboard charts as images (if dashboard is visible)
+    let chartImages: Record<string, string> = {};
+    try {
+      chartImages = await captureAllDashboardCharts();
+    } catch (e) {
+      console.warn('Could not capture dashboard charts, using native charts:', e);
+    }
+
+    const rawData = await dataService.getPresentationData();
     
-    if (!data) {
+    if (!rawData) {
       throw new Error('Failed to fetch presentation data');
     }
+    
+    // Merge chart images into presentation data
+    const data: PresentationData = { ...rawData, chartImages };
     
     const exporter = new PptxExporter();
     await exporter.generatePresentation(data);
