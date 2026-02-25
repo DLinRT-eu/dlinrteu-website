@@ -391,6 +391,15 @@ class DataService {
       });
     });
 
+    // Auto-enrich: ensure any company whose product matches a task appears in that task's logo set
+    products.forEach(product => {
+      const productTasks = [product.category, ...(product.secondaryCategories || [])].filter(Boolean);
+      productTasks.forEach(task => {
+        if (!taskCompanyMap.has(task)) taskCompanyMap.set(task, new Set());
+        taskCompanyMap.get(task)!.add(product.company);
+      });
+    });
+
     const companyLogosByTask = Array.from(taskCompanyMap.entries())
       .map(([task, companyNames]) => {
         const taskCompanies = Array.from(companyNames)

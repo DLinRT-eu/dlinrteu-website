@@ -106,7 +106,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "category": "Auto-Contouring",
     "logoUrl": "/logos/mvision-ai.png",
     "primaryTask": "Auto-Contouring",
-    "secondaryTasks": ["Performance Monitor", "Platform"]
+    "secondaryTasks": ["Performance Monitor", "Platform", "Image Synthesis", "Registration", "Treatment Planning"]
   },
   {
     "id": "radformation",
