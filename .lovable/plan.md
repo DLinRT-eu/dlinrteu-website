@@ -1,69 +1,58 @@
 
 
-# Revise Presentation Center and Live Demo
+# Fix: Use Dashboard Chart PNGs in PPTX Export
 
-## Issues Found
+## Problem
 
-1. **Welcome slide duplicate stat**: The first demo slide shows "Categories" twice (lines 42-43 in LiveDemoMode.tsx) -- one should be "Certifications"
-2. **Missing demo slides**: Several key platform pages have no corresponding live demo slide: Pipeline, Evidence & Impact Guide, News, Initiatives
-3. **Demo slides are text-only**: Every slide shows the same layout (icon, title, bullet points, Go Live button). No embedded figures, stats, or visual variety
-4. **Presentation Center preview is stale**: The `pptxSlidePreviewData` and `liveDemoSlidePreviewData` arrays on `/presentation` don't match the actual slide content
+The PPTX export calls `captureAllDashboardCharts()` which looks for chart DOM elements by ID (e.g., `chart-task`, `chart-location`). However, the export is triggered from `/presentation`, where these chart components are not rendered. The function finds no DOM elements and returns an empty map, so the PPTX falls back to native pptxgenjs charts instead of using the dashboard visuals.
 
-## Plan
+## Solution
 
-### 1. Fix duplicate stat on Welcome slide
+Create a hidden offscreen chart renderer component that temporarily mounts all dashboard charts during PPTX export, captures them as PNGs, then unmounts them.
 
-**File: `src/components/presentation/LiveDemoMode.tsx`**
+### Approach
 
-Change the fourth stat from `{ label: "Categories", value: data.analyticsData.totalCategories.toString() }` to `{ label: "Certifications", value: (data.certificationBreakdown?.length || 0).toString() }`.
+1. **New component `src/components/presentation/OffscreenChartRenderer.tsx`**
+   - A React component that renders all 8 dashboard charts inside a hidden container (positioned offscreen with `position: fixed; left: -9999px`)
+   - Uses the same data hooks (`useChartData`, `useCompanyData`) with default "all" filters so charts show unfiltered data
+   - Accepts an `onReady` callback -- after mounting and a short delay (to let Recharts render SVGs), it calls `captureAllDashboardCharts()` and passes the results back
+   - Renders all charts including the conditionally-shown Structure and StructureType charts
 
-### 2. Add new Live Demo slides
+2. **Update `src/utils/pptxExport.ts` -- `exportToPptx` function**
+   - Remove the direct call to `captureAllDashboardCharts()` (which fails when not on `/dashboard`)
+   - Instead, accept an optional `chartImages` parameter so the caller can pass pre-captured images
 
-Add 3 new slides to the `createSlides()` array in `LiveDemoMode.tsx`:
+3. **Update `src/pages/Presentation.tsx` -- export flow**
+   - When user clicks "Export PPTX":
+     - Set a state flag to mount the `OffscreenChartRenderer`
+     - Wait for its `onReady` callback with captured chart images
+     - Pass the chart images to `exportToPptx(chartImages)`
+     - Unmount the renderer after export completes
 
-- **Pipeline** (after Product Directory): upcoming/pre-certification AI products, links to `/products/pipeline`
-- **Evidence & Impact** (after Resources): the E/I scoring framework, links to `/evidence-impact-guide`
-- **News & Updates** (before Get Involved): latest platform news, links to `/news`
-
-### 3. Enhance SlideContent with optional figures and richer layouts
-
-**File: `src/components/presentation/SlideContent.tsx`**
-
-Extend the slide data interface and rendering to support optional visual elements:
-
-- Add optional `figureComponent` field to the slide interface -- a React node rendered below the subtitle (e.g., an inline chart, a mini dashboard summary, or an image)
-- Add optional `highlights` field for a horizontal row of highlight cards (alternative to stats)
-- Keep backward compatibility: slides without these fields render as before
-
-### 4. Add embedded figures to key demo slides
-
-**File: `src/components/presentation/LiveDemoMode.tsx`**
-
-For select slides, add inline visual content using real data from `dataService`:
-
-- **Welcome**: Already has stats -- keep as is (with the fix)
-- **Platform Analytics (dashboard)**: Add a small summary showing top 3 tasks with their product counts as colored bars
-- **Product Directory**: Add a mini stat row: total products, total with CE, total with FDA
-- **Companies**: Add a mini stat row: total companies, top company by product count
-- **Evidence & Impact**: Add a brief inline description of the E0-E3 / I0-I5 axes
-
-### 5. Update Presentation Center page previews
-
-**File: `src/pages/Presentation.tsx`**
-
-Update both `pptxSlidePreviewData` and `liveDemoSlidePreviewData` arrays to accurately reflect the current PPTX export sections and the updated live demo slides (including the 3 new ones).
-
-## File Summary
+### File Changes
 
 | File | Change |
 |------|--------|
-| `src/components/presentation/LiveDemoMode.tsx` | Fix duplicate stat; add 3 new slides; add figure data to select slides |
-| `src/components/presentation/SlideContent.tsx` | Support optional `figureComponent` and `highlights` in slide interface and rendering |
-| `src/pages/Presentation.tsx` | Update preview data arrays to match actual slide content |
+| `src/components/presentation/OffscreenChartRenderer.tsx` | **New**: Renders all dashboard charts offscreen and captures them as PNGs |
+| `src/utils/pptxExport.ts` | Update `exportToPptx` to accept optional `chartImages` parameter instead of trying to capture from DOM |
+| `src/pages/Presentation.tsx` | Mount offscreen renderer during export, pass captured images to export function |
 
-## Technical Details
+### Technical Details
 
-The `figureComponent` approach uses React nodes directly in the slide data, which is already the pattern used for the `icon` field. This keeps the implementation simple with no new dependencies.
+The offscreen renderer will:
+- Use `position: fixed; left: -9999px; width: 1200px` to ensure charts render at a consistent desktop size
+- Include a `setTimeout` delay (~1500ms) after mount to allow Recharts to complete SVG rendering
+- Call `captureAllDashboardCharts()` which uses the existing SVG-to-canvas serialization from `useChartExport.ts`
+- Return all 8 chart images: task, location, modality, company, certification, evidenceImpact, structureType, structure
 
-The new slides follow the existing pattern: each has `id`, `title`, `subtitle`, `description`, `keyPoints`, `liveLink`, and `icon`. The optional enrichments (`stats`, `figureComponent`, `highlights`) add visual variety without breaking existing slides.
+The export function signature changes from:
+```
+exportToPptx(): Promise<void>
+```
+to:
+```
+exportToPptx(chartImages?: Record<string, string>): Promise<void>
+```
+
+This preserves backward compatibility (if called without images, it still attempts DOM capture as a fallback).
 
