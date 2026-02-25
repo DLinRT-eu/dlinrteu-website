@@ -35,9 +35,9 @@ const ExportButtons: React.FC<ExportButtonsProps> = ({
     }
   };
 
-  const handleExportExcel = () => {
+  const handleExportExcel = async () => {
     try {
-      exportReviewToExcel(reviewProducts, assignments);
+      await exportReviewToExcel(reviewProducts, assignments);
       toast({
         title: "Export Successful",
         description: `Exported ${productCount} products to Excel`,
