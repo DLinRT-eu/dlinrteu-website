@@ -13,7 +13,8 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "ge-air-recon-dl",
       "ge-dlip-ct",
       "ge-air-recon-dl-enhancement",
-      "ge-healthcare-irt"
+      "ge-healthcare-irt",
+      "ge-mr-contour-dl"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/ge_healthcare.png",
@@ -110,5 +111,14 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "category": "Medical Imaging",
     "logoUrl": "/logos/algomedica.png",
     "primaryTask": "Image Enhancement"
+  },
+  {
+    "id": "quanta-computer",
+    "name": "Quanta Computer, Inc.",
+    "description": "Taiwanese technology company manufacturing AI-powered medical imaging solutions for radiation therapy.",
+    "website": "https://www.quantatw.com/",
+    "productIds": ["qoca-smart-rt"],
+    "category": "Medical Imaging",
+    "primaryTask": "Auto-Contouring"
   }
 ];
