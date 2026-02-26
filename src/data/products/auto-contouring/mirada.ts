@@ -57,7 +57,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Historical evidence - product discontinued.",
+    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Historical evidence - product discontinued. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Multi-center study demonstrated comparable contouring accuracy. Product now discontinued.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,

@@ -57,8 +57,8 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024) comparing AccuContour and ProtegeAI. J Med Phys 2025 comparison with Therapanacea.",
-    clinicalImpactNotes: "Multi-center validation demonstrates comparable accuracy for H&N contouring with workflow integration benefits.",
+    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). Fan et al. JACMP 2025 (4-system comparison including MIM ProtegeAI, 111 abdominal patients). Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Multiple independent multi-system comparison studies demonstrate comparable accuracy for H&N and abdominal contouring with workflow integration benefits.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,
@@ -67,8 +67,18 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI",
+        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI. Front Oncol 2024",
         link: "https://doi.org/10.3389/fonc.2024.1375096"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Fan et al. Evaluation of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        link: "https://doi.org/10.1002/acm2.70010"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
     version: "1.3.2",

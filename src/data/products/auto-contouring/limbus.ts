@@ -83,10 +83,10 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2023-06-15",
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-institution study (Canada & UK) by Starke et al. BJR 2024. Evaluated time savings and geometric accuracy for prostate and lymph node contours. Found time savings of 13-26 minutes.",
-    clinicalImpactNotes: "Demonstrates meaningful time savings (13-26 minutes) for prostate and lymph node contouring across institutions.",
+    evidenceRigorNotes: "15 PubMed-indexed studies. Key: Grossi et al. Curr Oncol 2025 (multicentric prostate VGRT), Fan et al. JACMP 2025 (4-system comparison, 111 patients, abdominal OARs), Fontaine et al. Phys Med 2025 (robustness evaluation across software versions), McLaughlin et al. 2025 (308 prostate patients, rectum dosimetric/toxicity), Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). Multiple independent multi-center multi-national validations. PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Demonstrates meaningful time savings (13-26 minutes) for prostate and lymph node contouring across institutions. Widely validated across breast, prostate, H&N, and lung.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -95,8 +95,33 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Clinical evaluation of Limbus AI for prostate and nodes radiotherapy (multi-institution, 13-26 min time savings)",
+        description: "Grossi et al. Deep Learning-Based Auto-Contouring for Pelvic Volume Delineation in Prostate Cancer RT: Multicentric Analysis. Curr Oncol 2025;32(6):321",
+        link: "https://doi.org/10.3390/curroncol32060321"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        link: "https://doi.org/10.1002/acm2.70010"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Fontaine et al. Robustness evaluation of AI auto-contouring software in daily routine practice (Limbus versions). Phys Med 2025;137:105065",
+        link: "https://doi.org/10.1016/j.ejmp.2025.105065"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "McLaughlin et al. Rectum contours: geometry, dosimetry and predicted toxicity (308 prostate patients). Biomed Phys Eng Express 2025;11(5)",
+        link: "https://doi.org/10.1088/2057-1976/adf8f2"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Starke et al. Clinical evaluation for prostate and nodes RT (multi-institution, Canada & UK, 13-26 min time savings). BJR 2024",
         link: "https://doi.org/10.1093/bjr/tqae077"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
     lastUpdated: "2024-03-10",

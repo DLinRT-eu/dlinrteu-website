@@ -298,18 +298,38 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "New peer-reviewed study (2025) from Tokyo Medical University Ibaraki Medical Center: 'Geometric Accuracy Assessment of AI-Based Auto-contouring Using OncoStudio for Prostate Cancer Treatment Planning'. Over 4M contours for 80K patients in clinical practice.",
-    clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Peer-reviewed geometric accuracy assessment for prostate cancer treatment planning.",
+    evidenceRigorNotes: "Multiple independent peer-reviewed studies: Hoshina et al. Cureus 2025 (geometric accuracy, prostate, 15 patients), Kawaguchi et al. Cureus 2025 (dosimetric comparison, prostate), Choi et al. Cancers 2024 (1200 Korean patients, multi-site comparative), Miura et al. Cureus 2026 (lung SBRT lobe segmentation). Over 4M contours for 80K patients in clinical practice. PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Multiple peer-reviewed geometric and dosimetric accuracy assessments across prostate, lung, H&N, thorax, abdomen, pelvis.",
     evidenceVendorIndependent: true,
-    evidenceMultiCenter: false,
-    evidenceMultiNational: false,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Geometric accuracy assessment of AI-based auto-contouring using OncoStudio for prostate cancer treatment planning (Tokyo Medical University Ibaraki Medical Center, 2025)",
-        link: "https://www.linkedin.com/posts/anzaimedical_geometric-accuracy-assessment-of-ai-based-activity-7381646683341983744-zD-B"
+        description: "Choi et al. Automated Organ Segmentation for Radiation Therapy: A Comparative Analysis of AI-Based Tools (OncoStudio vs ProtegeAI) in 1200 Korean Cancer Patients. Cancers 2024;16(21):3670",
+        link: "https://doi.org/10.3390/cancers16213670"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Hoshina et al. Geometric Accuracy Assessment of AI-Based Auto-contouring Using OncoStudio for Prostate Cancer Treatment Planning. Cureus 2025;17(10):e94067",
+        link: "https://doi.org/10.7759/cureus.94067"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kawaguchi et al. Dosimetric Comparison of OARs Between AI-Based Auto-Contouring and Manual Contouring for High-Risk Prostate Cancer RT. Cureus 2025;17(9):e91810",
+        link: "https://doi.org/10.7759/cureus.91810"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Miura et al. Dosimetric Discrepancy Between Whole-Lung and Lobe-Specific Metrics in Lung SBRT Using OncoStudio Segmentation. Cureus 2026;18(1):e102180",
+        link: "https://doi.org/10.7759/cureus.102180"
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K242994 received February 24, 2025 - Class II device",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242994.pdf"
       }
     ],
     version: "2024",

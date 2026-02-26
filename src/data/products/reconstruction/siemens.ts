@@ -64,8 +64,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Bash et al. Radiol Adv 2025 (113 sequence pairs, 51.6% scan time reduction). Multiple independent validations across institutions.",
-    clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality.",
+    evidenceRigorNotes: "10+ PubMed-indexed studies. Key: Hakim et al. AJNR 2025 (Deep Resolve Boost neuroradiology evaluation), Wilpert et al. Invest Radiol 2025 (3T brain, DL+acceleration), Ponsiglione et al. Eur Radiol 2024 (whole-body diffusion, 50 patients), Estler et al. Radiol Med 2024 (back pain MRI, 60 patients). PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality across neuro, spine, MSK, and whole-body applications.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -73,29 +73,34 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for Deep Resolve (initial)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213693.pdf"
-      },
-      {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for Deep Resolve (K232322)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232322.pdf"
-      },
-      {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for Deep Resolve (K250436)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250436.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Hakim et al. Deep Resolve Boost in 2D MRI for Neuroradiology: Diagnostic Gains and Potential Risks. AJNR Am J Neuroradiol 2025",
+        link: "https://doi.org/10.3174/ajnr.A9081"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Bash et al. Deep learning MRI halves scan time and preserves image quality across routine neuroradiologic examinations. Radiology Advances 2025",
+        description: "Wilpert et al. Deep Learning Reconstruction Combined With Conventional Acceleration Improves Image Quality of 3T Brain MRI. Invest Radiol 2025;60(8):526-534",
+        link: "https://doi.org/10.1097/RLI.0000000000001158"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Ponsiglione et al. Image quality of whole-body diffusion MR comparing deep-learning accelerated and conventional sequences (50 patients). Eur Radiol 2024;34(12):7985-7993",
+        link: "https://doi.org/10.1007/s00330-024-10883-5"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Estler et al. Deep learning-accelerated image reconstruction in back pain MRI: reduction of acquisition time and improvement of image quality (60 patients). Radiol Med 2024;129(3):478-487",
+        link: "https://doi.org/10.1007/s11547-024-01787-x"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Bash et al. Deep learning MRI halves scan time across routine neuroradiologic examinations. Radiology Advances 2025",
         link: "https://doi.org/10.1093/radadv/umaf029"
       },
       {
-        type: "Product Information",
-        description: "Official Siemens Healthineers Deep Resolve product page",
-        link: "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K213693, K232322, K250436",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213693.pdf"
       }
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",

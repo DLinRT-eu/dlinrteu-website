@@ -236,7 +236,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Blinded prospective evaluation by Gregoire et al. 2020. Young et al. 2024 H&N blinded assessment. Multiple independent validations across institutions.",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Blinded prospective evaluation by Gregoire et al. 2020. Young et al. 2024 H&N blinded assessment. Kim et al. Phys Eng Sci Med 2024 (7-system comparison including Therapanacea, 42 cases). Lê et al. 2024 DECT evaluation. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Blinded prospective study shows clinical acceptability and significant contouring time savings across multiple anatomical sites.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
@@ -246,8 +246,18 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        description: "Doolan et al. Multi-center comparison of 5 AI auto-contouring systems on 80 patients. Front Oncol 2023;13:1213068",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lê et al. Head and neck automatic multi-organ segmentation on Dual-Energy CT. Phys Imaging Radiat Oncol 2024;32:100654",
+        link: "https://doi.org/10.1016/j.phro.2024.100654"
       }
     ],
     lastRevised: "2026-02-23",

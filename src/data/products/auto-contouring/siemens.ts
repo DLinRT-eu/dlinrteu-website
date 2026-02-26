@@ -63,8 +63,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Independent evaluation by SUNY Upstate Medical University (Tchistiakova et al. 2023, J Appl Clin Med Phys). FDA validation on 579 cases across 5 continents. Multi-continental validation dataset.",
-    clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. FDA validation demonstrates consistent geometric accuracy across global sites.",
+    evidenceRigorNotes: "6 PubMed-indexed studies. Key: Rayn et al. J Cancer Res Ther 2024 (first multi-institutional DI2IN evaluation), Kim et al. Phys Eng Sci Med 2024 (7-system comparative, 42 cases), Yamauchi et al. Med Dosim 2024 (DL vs atlas comparison), Hu et al. J Appl Clin Med Phys 2023, Marschner et al. Radiat Oncol 2022 (237 thorax + 102 pelvis). FDA validation on 579 cases across 5 continents. PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. Multi-institutional evaluation confirms consistent geometric accuracy. Comparative studies show competitive performance against 6 other AI systems.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -73,8 +73,28 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Independent feasibility evaluation of AI-based deep-learning contouring (30 CT datasets, pelvis/thorax/H&N, 67-84% time savings)",
+        description: "Rayn et al. Evaluation of DI2IN auto-segmentation algorithm across a network of cancer centers (first multi-institutional study). J Cancer Res Ther 2024;20(3):1020-1025",
+        link: "https://doi.org/10.4103/jcrt.jcrt_769_23"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Investigation on performance of multiple AI-based auto-contouring systems (7 systems compared including AI-Rad Companion, 42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yamauchi et al. Clinical evaluation of deep learning and atlas-based auto-segmentation for OAR delineation. Med Dosim 2024;49(3):167-176",
+        link: "https://doi.org/10.1016/j.meddos.2023.11.002"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Maduro Bustos et al. Feasibility evaluation of AI-Rad Companion Organs RT (30 CT datasets, 67-84% time savings). J Appl Clin Med Phys 2023;24(11):e14090",
         link: "https://doi.org/10.1002/acm2.14090"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Marschner et al. DI2IN organ segmentation algorithm: principles and evaluation (237 thorax + 102 pelvis CT). Radiat Oncol 2022;17(1):129",
+        link: "https://doi.org/10.1186/s13014-022-02102-6"
       }
     ],
     clinicalEvidence: "Performance validated on 579 CT cases across North America, South America, Asia, Australia, and Europe. Ground truth annotations established following RTOG and clinical guidelines. Mean Dice coefficients: Head & Neck 76.1%, Thorax 76.9%, Abdomen 87.3%, Pelvis 85.7%.",
