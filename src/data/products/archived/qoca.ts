@@ -8,7 +8,7 @@ export const QOCA_PRODUCTS: ProductDetails[] = [
     company: "Quanta Computer, Inc.",
     companyUrl: "https://www.quantatw.com/",
     productUrl: "https://www.quantatw.com/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/qoca.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/archived/qoca.ts",
     description: "AI-powered auto-contouring system for radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "FDA",

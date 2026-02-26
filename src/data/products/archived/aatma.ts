@@ -1,18 +1,18 @@
 
 import { ProductDetails } from "@/types/productDetails";
 
-export const MEDMIND_PRODUCTS: ProductDetails[] = [
+export const AATMA_PRODUCTS: ProductDetails[] = [
   {
-    id: "medmind-rt-mind-ai",
-    name: "RT-Mind-AI",
-    company: "MedMind Technology Co., Ltd.",
-    companyUrl: "https://www.medmind.com.cn/",
-    productUrl: "https://www.medmind.com.cn/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/medmind.ts",
+    id: "aatma-autocontour",
+    name: "AATMA",
+    company: "Elekta",
+    companyUrl: "",
+    productUrl: "",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/archived/aatma.ts",
     description: "AI-powered auto-contouring solution for radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "FDA",
-    website: "https://www.medmind.com.cn/",
+    website: "",
     anatomicalLocation: [],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
@@ -39,10 +39,9 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K213155",
+        clearanceNumber: "K212218",
         productCode: "QKB",
-        regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2022-03-25"
+        regulationNumber: "21 CFR 892.2050"
       },
       intendedUseStatement: "For automatic segmentation of anatomical structures in radiation therapy planning."
     },
@@ -52,10 +51,10 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Minimal entry based on FDA clearance. No independent publications identified.",
+    evidenceRigorNotes: "Minimal entry based on FDA clearance. No independent publications identified. Limited public documentation.",
     clinicalImpactNotes: "Limited public documentation available.",
     lastUpdated: "2026-02-26",
     lastRevised: "2026-02-26",
-    source: "FDA 510(k) database (K213155). Minimal entry — needs further research and verification."
+    source: "FDA 510(k) database (K212218). Minimal entry — needs further research and verification."
   }
 ];
