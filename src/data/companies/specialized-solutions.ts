@@ -101,4 +101,13 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "logoUrl": "/logos/medlever.jpg",
     "primaryTask": "Platform"
   },
+  {
+    id: "medmind-technology",
+    name: "MedMind Technology Co., Ltd.",
+    description: "Chinese medical AI company developing deep learning auto-contouring solutions for radiation therapy, with 120+ OAR models and deployment in 360+ hospitals.",
+    website: "https://www.medicalmind.cn/en.html",
+    productIds: ["medmind-rt-mind-ai"],
+    category: "Specialized Solutions",
+    primaryTask: "Auto-Contouring"
+  },
 ];

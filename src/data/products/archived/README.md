@@ -21,7 +21,7 @@ These products do not meet the platform's criteria:
 | MRIdian A3i | ViewRay | Uses deformable registration, not AI/DL (FDA K162393, K181989) |
 | AATMA | Elekta | Insufficient public documentation |
 | QOCA Smart RT | Quanta Computer | Insufficient public documentation |
-| RT-Mind-AI | MedMind Technology | Insufficient public documentation |
+
 
 ## Restoration
 

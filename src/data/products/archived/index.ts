@@ -8,7 +8,6 @@ import { GE_ARCHIVED_PRODUCTS } from "./ge-healthcare";
 import { VIEWRAY_ARCHIVED_PRODUCTS } from "./viewray";
 import { AATMA_PRODUCTS } from "./aatma";
 import { QOCA_PRODUCTS } from "./qoca";
-import { MEDMIND_PRODUCTS } from "./medmind";
 
 // NOT exported to main products - kept for reference only
 export const ARCHIVED_PRODUCTS: ProductDetails[] = [
@@ -17,6 +16,5 @@ export const ARCHIVED_PRODUCTS: ProductDetails[] = [
   ...GE_ARCHIVED_PRODUCTS,
   ...VIEWRAY_ARCHIVED_PRODUCTS,
   ...AATMA_PRODUCTS,
-  ...QOCA_PRODUCTS,
-  ...MEDMIND_PRODUCTS
+  ...QOCA_PRODUCTS
 ];
