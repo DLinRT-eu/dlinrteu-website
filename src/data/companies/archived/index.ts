@@ -7,7 +7,6 @@ import { REFLEXION_MEDICAL_COMPANY } from "./reflexion-medical";
 import { LEO_CANCER_CARE_COMPANY } from "./leo-cancer-care";
 import { VIEWRAY_COMPANY } from "./viewray";
 import { QUANTA_COMPUTER_COMPANY } from "./quanta-computer";
-import { MEDMIND_TECHNOLOGY_COMPANY } from "./medmind-technology";
 import { AATMA_COMPANY } from "./aatma";
 
 // NOT exported to main companies - kept for reference only
@@ -16,6 +15,5 @@ export const ARCHIVED_COMPANIES: CompanyDetails[] = [
   LEO_CANCER_CARE_COMPANY,
   VIEWRAY_COMPANY,
   QUANTA_COMPUTER_COMPANY,
-  MEDMIND_TECHNOLOGY_COMPANY,
   AATMA_COMPANY
 ];

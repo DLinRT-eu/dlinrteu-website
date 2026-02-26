@@ -25,6 +25,7 @@ import { ONCOSOFT_PRODUCTS } from "./oncosoft";
 import { TAIWAN_MEDICAL_IMAGING_PRODUCTS } from "./taiwan-medical-imaging";
 import { BRAINLAB_PRODUCTS } from "./brainlab";
 import { GE_MR_CONTOUR_DL_PRODUCTS } from "./ge-mr-contour-dl";
+import { MEDMIND_PRODUCTS } from "./medmind";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -51,5 +52,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...ONCOSOFT_PRODUCTS,
   ...TAIWAN_MEDICAL_IMAGING_PRODUCTS,
   ...BRAINLAB_PRODUCTS,
-  ...GE_MR_CONTOUR_DL_PRODUCTS
+  ...GE_MR_CONTOUR_DL_PRODUCTS,
+  ...MEDMIND_PRODUCTS
 ];

@@ -17,7 +17,7 @@ These companies no longer have active products on the platform:
 | Leo Cancer Care | Product (Marie) is a hardware patient positioner |
 | ViewRay | MRIdian A3i uses deformable registration, not AI/DL |
 | Quanta Computer | Insufficient public documentation for QOCA product |
-| MedMind Technology | Insufficient public documentation for RT-Mind-AI |
+
 | Elekta (AATMA) | Insufficient public documentation |
 
 ## Restoration
