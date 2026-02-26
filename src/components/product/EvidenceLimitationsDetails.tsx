@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
-import { FileText, XCircle } from "lucide-react";
+import { FileText, XCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import {
   EvidenceRigorCode,
   ClinicalImpactCode,
 } from "@/data/evidence-impact-levels";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface EvidenceLimitationsDetailsProps {
   product: ProductDetails;
@@ -31,6 +32,7 @@ const CLINICAL_IMPACT_OPTIONS = CLINICAL_IMPACT_LEVELS.map(level => ({
 
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
   const { isEditMode, editedProduct, updateField, canEdit } = useProductEdit();
+  const [evidenceExpanded, setEvidenceExpanded] = useState(false);
   
   // Use edited product when in edit mode, otherwise use the original
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
@@ -250,8 +252,32 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
           <div>
             <h3 className="font-medium text-lg mb-2">Clinical Evidence</h3>
             <div className="space-y-2">
-              {evidence!.map((item, index) => renderEvidenceItem(item, index))}
+              {evidence!.slice(0, 3).map((item, index) => renderEvidenceItem(item, index))}
             </div>
+            {evidence!.length > 3 && (
+              <Collapsible open={evidenceExpanded} onOpenChange={setEvidenceExpanded}>
+                <CollapsibleContent>
+                  <div className="space-y-2 mt-2">
+                    {evidence!.slice(3).map((item, index) => renderEvidenceItem(item, index + 3))}
+                  </div>
+                </CollapsibleContent>
+                <CollapsibleTrigger asChild>
+                  <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mt-2 transition-colors">
+                    {evidenceExpanded ? (
+                      <>
+                        <ChevronUp className="h-4 w-4" />
+                        Show less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="h-4 w-4" />
+                        Show {evidence!.length - 3} more publication{evidence!.length - 3 > 1 ? 's' : ''}
+                      </>
+                    )}
+                  </button>
+                </CollapsibleTrigger>
+              </Collapsible>
+            )}
           </div>
         )}
       </CardContent>

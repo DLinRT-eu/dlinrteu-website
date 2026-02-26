@@ -92,8 +92,8 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation.",
-    clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3.",
+    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26.",
+    clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     lastRevised: "2026-02-23",
     guidelines: [
       {

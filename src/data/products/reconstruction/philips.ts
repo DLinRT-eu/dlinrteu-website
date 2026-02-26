@@ -61,24 +61,28 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Independent Comparative Study",
+        description: "Shim et al. 2025: Quantitative evaluation of low-dose CT image quality comparing Philips Precise Image and GE TrueFidelity deep learning reconstruction. Independent study.",
+        link: "https://doi.org/10.3390/jimaging11090317"
+      },
+      {
         type: "Product Information",
         description: "Official Philips CT Smart Workflow product page",
         link: "https://www.philips.com/healthcare/technology/ct-smart-workflow"
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K210760 validation. Limited independent peer-reviewed publications specific to Precise Image.",
+    evidenceRigorNotes: "Shim et al. J Imaging 2025 (doi:10.3390/jimaging11090317) - independent comparative study of Precise Image vs GE TrueFidelity for low-dose CT. FDA K210760.",
     clinicalImpactNotes: "Workflow improvement through up to 80% radiation dose reduction.",
-    evidenceVendorIndependent: false,
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    clinicalEvidence: "Multiple peer-reviewed studies showing non-inferiority to standard dose CT with up to 80% dose reduction",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database and company website",
+    evidenceExternalValidation: true,
+    lastUpdated: "2026-02-26",
+    lastRevised: "2026-02-26",
+    source: "FDA 510(k) database (K210760), Shim et al. J Imaging 2025 (doi:10.3390/jimaging11090317)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   },
   {

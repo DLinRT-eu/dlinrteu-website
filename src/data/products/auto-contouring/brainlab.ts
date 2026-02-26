@@ -179,16 +179,28 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA validation K243633. No independent peer-reviewed publications found.",
-    clinicalImpactNotes: "FDA validation data only. No published clinical impact data.",
-    evidenceVendorIndependent: false,
+    evidenceRigorNotes: "FDA validation K243633. Brainlab Anatomical Mapping validated in Strahlentherapie und Onkologie 2019 (doi:10.1007/s00066-019-01463-4) for spinal OARs. Podobnik et al. Sci Rep 2025 (doi:10.1038/s41598-025-18598-3) evaluated commercial AI solutions for H&N OAR segmentation including Brainlab. PubMed searched 2026-02-26.",
+    clinicalImpactNotes: "Technical performance demonstrated but no workflow outcome studies published. PubMed searched 2026-02-26.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K243633)",
+    evidenceExternalValidation: true,
+    evidence: [
+      {
+        type: "Independent Peer-reviewed Publication",
+        description: "Podobnik et al. 2025: Geometric, dosimetric and psychometric evaluation of three commercial AI auto-segmentation solutions for H&N RT. Includes Brainlab Elements.",
+        link: "https://doi.org/10.1038/s41598-025-18598-3"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Brainlab Anatomical Mapping validation for spinal metastasis OAR delineation (9 extracranial OARs, 24 patients).",
+        link: "https://doi.org/10.1007/s00066-019-01463-4"
+      }
+    ],
+    lastUpdated: "2026-02-26",
+    lastRevised: "2026-02-26",
+    source: "FDA 510(k) database (K243633), Podobnik et al. Sci Rep 2025 (doi:10.1038/s41598-025-18598-3)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   }
 ];

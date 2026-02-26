@@ -73,16 +73,23 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Abdomen: Liver, Kidneys (L/R), Spleen, Stomach, Bowel",
       "Pelvis: Bladder, Rectum, Femoral Heads, Prostate"
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Vendor white paper (ASTRO 2021). FDA validation (K233650, K250822). Novel CT-integrated approach but limited independent peer-reviewed publications.",
-    clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. FDA validation demonstrates technical performance.",
-    evidenceVendorIndependent: false,
+    evidenceRigorNotes: "Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8) - independent dosimetric validation of DirectORGANS for prostate RT planning at Gazi University. FDA validation (K233650, K250822).",
+    clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastRevised: "2026-02-23",
-    source: "Siemens Healthineers official documentation, DirectORGANS white paper (https://www.astro.org/ASTRO/media/ASTRO/Meetings%20and%20Education/PDFs/Refresher21/WhitePaper_DirectORGANS.pdf), FDA 510(k) K233650 (https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233650.pdf), FDA 510(k) K250822"
+    evidenceExternalValidation: true,
+    evidence: [
+      {
+        type: "Independent Peer-reviewed Publication",
+        description: "Çatlı Dinç et al. 2025: Dosimetric impacts of DirectORGANS deep learning autocontouring for prostate cancer RT planning. Gazi University, vendor-independent.",
+        link: "https://doi.org/10.1186/s12894-025-01875-8"
+      }
+    ],
+    lastRevised: "2026-02-26",
+    source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
   }
 ];
