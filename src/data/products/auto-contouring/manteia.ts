@@ -209,8 +209,8 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre H&N evaluation. Multiple independent studies across institutions.",
-    clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites.",
+    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre evaluation. Sci Reports 2025 independent comparative study. JACMP 2025 multi-site evaluation. Phys Eng Sci Med 2024 multi-system comparison. Extensive independent evidence base.",
+    clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,
@@ -219,13 +219,28 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI",
+        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI. Frontiers in Oncology 2024.",
         link: "https://doi.org/10.3389/fonc.2024.1375096"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-centre H&N evaluation",
+        description: "Multi-centre evaluation of deep learning CT autosegmentation of H&N for radiotherapy. npj Digital Medicine 2025.",
         link: "https://doi.org/10.1038/s41746-025-01624-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Geometric, dosimetric and psychometric evaluation of three commercial AI solutions for OAR auto-segmentation in H&N RT. Scientific Reports 2025.",
+        link: "https://doi.org/10.1038/s41598-025-18598-3"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Geometric and dosimetric evaluation of a commercial AI auto-contouring tool on multiple anatomical sites. JACMP 2025.",
+        link: "https://doi.org/10.1002/acm2.70067"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Investigation on performance of multiple AI-based auto-contouring systems in OAR delineation. Phys Eng Sci Med 2024.",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
     lastRevised: "2026-02-23",

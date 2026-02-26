@@ -63,7 +63,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study; Tatsugami et al. Radiology 2019 coronary CTA.",
+    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study. Tatsugami et al. Radiology 2019 coronary CTA. Sci Reports 2023 RT-specific dose calculation validation.",
     clinicalImpactNotes: "Workflow improvement through dose reduction (up to 82%) with maintained image quality, enabling more efficient CT protocols.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
@@ -83,8 +83,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Higaki et al. Multi-phantom evaluation of deep learning CT reconstruction in European Radiology",
+        description: "Higaki et al. Multi-phantom evaluation of deep learning CT reconstruction in European Radiology 2020",
         link: "https://doi.org/10.1007/s00330-019-06523-0"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Validation of deep learning-based CT image reconstruction for treatment planning. Scientific Reports 2023.",
+        link: "https://doi.org/10.1038/s41598-023-42775-x"
       }
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
