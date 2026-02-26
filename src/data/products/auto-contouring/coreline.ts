@@ -146,16 +146,33 @@ const rawProduct: ProductDetails = {
     "Pelvis: SpinalCord",
     "Pelvis: Prostate"
   ],
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   clinicalImpact: "I2",
-    evidenceRigorNotes: "Limited independent peer-reviewed evidence. FDA validation data (K200714). Single-center evaluations available.",
-    clinicalImpactNotes: "FDA validation data demonstrates geometric accuracy. Limited independent clinical impact publications.",
-    evidenceVendorIndependent: false,
+    evidenceRigorNotes: "Lee et al. IJROBP 2024 - large-scale (2000+ cases) breast RT implementation study. Kim et al. 2024 - breast target volume validation (PMID 39308634). Independent single-center studies.",
+    clinicalImpactNotes: "Large-scale clinical implementation demonstrates workflow improvement for breast RT contouring.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-  source: "Company official sources",
+    evidenceExternalValidation: true,
+  evidence: [
+    {
+      type: "Peer-reviewed Publication",
+      description: "Lee et al. Experience of implementing DL auto-contouring in breast RT planning: insights from over 2,000 cases. IJROBP 2024.",
+      link: "https://doi.org/10.1016/j.ijrobp.2024.01.001"
+    },
+    {
+      type: "Peer-reviewed Publication",
+      description: "Kim et al. Validation of automated segmentation models for target volume contouring in postoperative breast cancer RT. Radiat Oncol 2024.",
+      link: "https://pubmed.ncbi.nlm.nih.gov/39308634/"
+    },
+    {
+      type: "Regulatory Clearance",
+      description: "FDA 510(k) clearance K200714 - AVIEW platform RT auto-contouring module",
+      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
+    }
+  ],
+  source: "Company official sources, peer-reviewed publications",
 };
 
 // Apply all the standardization functions
