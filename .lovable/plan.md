@@ -1,89 +1,83 @@
 
 
-# Archive AATMA, QOCA, and RT-Mind-AI Products and Companies
+# Search PubMed for Evidence and Add Expandable Evidence UI
 
-## Why
+## Overview
 
-These three products were added as minimal entries based solely on FDA clearance data, but lack sufficient public information for a quality database entry. Archiving preserves them for future restoration when more data becomes available. Note: AATMA is from Elekta (correcting the original entry).
+Update evidence data for ~25 active products currently rated E0 or E1 by searching PubMed/web for peer-reviewed publications. Also add a collapsible/expandable UI to the Evidence section so that when a product has many evidence items, only the most relevant ones are shown initially.
 
-## Changes
+## Part 1: Expandable Evidence UI
 
-### 1. Move product files to archive
+**File:** `src/components/product/EvidenceLimitationsDetails.tsx`
 
-Move the following files from `src/data/products/auto-contouring/` to `src/data/products/archived/`:
-- `aatma.ts` (update company name to "Elekta" before archiving)
-- `qoca.ts`
-- `medmind.ts`
+- When a product has more than 3 evidence items, show only the first 3 by default
+- Add a "Show N more publications" collapsible toggle using the existing Radix `Collapsible` component
+- The first 3 items (most relevant) are always visible; the rest are behind the toggle
+- Styling: a subtle text button with chevron icon, consistent with existing UI patterns
 
-### 2. Remove from auto-contouring index
+## Part 2: PubMed Evidence Search for E0/E1 Products
 
-**File:** `src/data/products/auto-contouring/index.ts`
-- Remove imports for `QOCA_PRODUCTS`, `MEDMIND_PRODUCTS`, `AATMA_PRODUCTS`
-- Remove their spread entries from the `AUTO_CONTOURING_PRODUCTS` array
+Search PubMed and web sources for each product below. For each product found to have publications, update:
+- `evidence` array with structured `{type, description, link}` entries
+- `evidenceRigor` (upgrade from E0/E1 if warranted)
+- `evidenceRigorNotes` and `clinicalImpactNotes`
+- `evidenceMultiCenter`, `evidenceVendorIndependent`, `evidenceExternalValidation`, `evidenceProspective`, `evidenceMultiNational` flags
 
-### 3. Update archived products index
+### Priority E0 Products to Search (active, non-archived)
 
-**File:** `src/data/products/archived/index.ts`
-- Add imports for the three moved product files
-- Add them to the `ARCHIVED_PRODUCTS` array
+| Product | Company | File | Current |
+|---------|---------|------|---------|
+| AiSight | Hura Imaging | auto-contouring/hura-imaging.ts | E0/I0 |
+| AccuContour | Wisdom Tech | auto-contouring/wisdom-tech.ts | E0/I0 |
+| AI Seg (auto-contour) | Philips | auto-contouring/philips.ts | E0/I0 |
+| GE MR Contour DL | GE Healthcare | auto-contouring/ge-mr-contour-dl.ts | E0/I1 |
+| uAI VisionRT | United Imaging | image-enhancement/united-imaging.ts | E0/I0 |
+| uAI DLR CT / MR / PET | United Imaging | reconstruction/united-imaging.ts | E0/I0 |
+| Canon PIQE | Canon | reconstruction/canon.ts | E0/I0 |
+| SubtleSynth | Subtle Medical | image-enhancement/subtle-medical.ts | E0/I0 |
+| Edison AI Orchestrator | GE Healthcare | platform/ge-healthcare.ts | E0/I2 |
+| FALCON RT | EverFortune (v1) | auto-contouring/everfortune.ts | E0/I0 |
 
-### 4. Update archived products README
+### Priority E1 Products to Search
 
-**File:** `src/data/products/archived/README.md`
-- Add three new rows to the table:
-  - AATMA | Elekta | Insufficient public documentation
-  - QOCA Smart RT | Quanta Computer | Insufficient public documentation
-  - RT-Mind-AI | MedMind Technology | Insufficient public documentation
+| Product | Company | File | Current |
+|---------|---------|------|---------|
+| PixelShine | Algomedica | image-enhancement/algomedica.ts | E1/I2 |
+| Vysioner | Vysioner | auto-contouring/vysioner.ts | E1/I2 |
+| Elements Segmentation | Brainlab | auto-contouring/brainlab.ts | E1/I0 |
+| AVIEW RT ACS | Coreline | auto-contouring/coreline.ts | E1/I2 |
+| DirectORGANS | DirectOrgans | auto-contouring/directorgans.ts | E1/I2 |
+| Taiwan Medical AI Seg | TMAI | auto-contouring/taiwan-medical-imaging.ts | E1/I0 |
+| FALCON RT v2 | EverFortune | auto-contouring/everfortune.ts | E1/I2 |
+| MOZI | Manteia | treatment-planning/manteia-mozi.ts | E1/I2 |
+| Precise Image | Philips | reconstruction/philips.ts | E1/I2 |
+| AiCE MR | Canon | reconstruction/canon.ts | E1/I2 |
+| Advanced Intelligent Clear-IQ Engine | Siemens | image-enhancement/siemens.ts | E1/I2 |
+| SmartDose | Philips | image-enhancement/philips-smartdose.ts | E1/I2 |
 
-### 5. Remove company entries
+### Search Strategy
 
-**File:** `src/data/companies/specialized-solutions.ts`
-- Remove the `medmind-technology` and `aatma` company objects
+For each product, search:
+1. PubMed: `"[product name]" OR "[company name]" AND "radiotherapy"` (or relevant modality terms)
+2. Company website for published studies/white papers
+3. FDA 510(k) summaries for referenced validation studies
 
-**File:** `src/data/companies/medical-imaging.ts`
-- Remove the `quanta-computer` company object
+### Update Rules
 
-### 6. Create archived company files
+- **E0 to E1**: If vendor-published or single-center study found
+- **E0/E1 to E2**: If multi-center or comparative study found
+- **No change**: If no publications found, keep current rating but note "searched [date]"
+- Evidence items ordered by relevance: independent multi-center first, then vendor studies, then regulatory summaries
 
-Create three new files in `src/data/companies/archived/`:
-- `quanta-computer.ts` -- archived Quanta Computer entry
-- `medmind-technology.ts` -- archived MedMind Technology entry
-- `aatma.ts` -- archived AATMA/Elekta entry
+## Files Modified
 
-### 7. Update archived companies index and README
-
-**File:** `src/data/companies/archived/index.ts`
-- Import and add the three new archived companies
-
-**File:** `src/data/companies/archived/README.md`
-- Add three rows:
-  - Quanta Computer | Insufficient public documentation for QOCA product
-  - MedMind Technology | Insufficient public documentation for RT-Mind-AI
-  - Elekta (AATMA) | Insufficient public documentation
-
-### 8. Remove GE MR Contour DL product ID reference
-
-**File:** `src/data/companies/medical-imaging.ts`
-- The `ge-mr-contour-dl` product ID was added to GE Healthcare's `productIds` -- this stays as it's a legitimate product. No change needed here.
-
-## Files Summary
-
-| File | Action |
+| File | Change |
 |------|--------|
-| `src/data/products/auto-contouring/aatma.ts` | Delete (recreate in archived) |
-| `src/data/products/auto-contouring/qoca.ts` | Delete (recreate in archived) |
-| `src/data/products/auto-contouring/medmind.ts` | Delete (recreate in archived) |
-| `src/data/products/archived/aatma.ts` | Create (with company corrected to Elekta) |
-| `src/data/products/archived/qoca.ts` | Create |
-| `src/data/products/archived/medmind.ts` | Create |
-| `src/data/products/auto-contouring/index.ts` | Edit -- remove 3 imports and spreads |
-| `src/data/products/archived/index.ts` | Edit -- add 3 imports and spreads |
-| `src/data/products/archived/README.md` | Edit -- add 3 rows |
-| `src/data/companies/specialized-solutions.ts` | Edit -- remove medmind-technology and aatma entries |
-| `src/data/companies/medical-imaging.ts` | Edit -- remove quanta-computer entry |
-| `src/data/companies/archived/quanta-computer.ts` | Create |
-| `src/data/companies/archived/medmind-technology.ts` | Create |
-| `src/data/companies/archived/aatma.ts` | Create |
-| `src/data/companies/archived/index.ts` | Edit -- add 3 imports |
-| `src/data/companies/archived/README.md` | Edit -- add 3 rows |
+| `src/components/product/EvidenceLimitationsDetails.tsx` | Add collapsible evidence list (show 3, expand for more) |
+| ~20 product data files | Update evidence arrays, rigor levels, and notes |
+
+## Implementation Order
+
+1. Implement the collapsible evidence UI first (so new evidence items display properly)
+2. Search and update products in batches by category (auto-contouring first, then others)
 
