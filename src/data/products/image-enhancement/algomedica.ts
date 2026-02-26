@@ -61,6 +61,11 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Independent Peer-reviewed Publication",
+        description: "Steuwe et al. 2022: Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization. University Düsseldorf, vendor-independent.",
+        link: "https://doi.org/10.3390/diagnostics12071627"
+      },
+      {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for PixelShine",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf"
@@ -71,15 +76,15 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
         link: "https://algomedica.com/medical-imaging-resources#case-studies"      
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Published case studies on company website. FDA K161625. Limited indexed peer-reviewed publications.",
+    evidenceRigorNotes: "Steuwe et al. Diagnostics 2022 (doi:10.3390/diagnostics12071627) - independent single-center study from University Düsseldorf evaluating PixelShine noise reduction on CT values and stone characterization. FDA K161625.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols.",
-    evidenceVendorIndependent: false,
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
     source: "FDA 510(k) database and company provided information"
