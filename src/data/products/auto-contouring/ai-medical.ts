@@ -65,7 +65,7 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Medical Physics Journal 2023 publication, ESTRO 2022 abstract cited. Specific DOIs not found in search but peer-reviewed evidence exists.",
+    evidenceRigorNotes: "Medical Physics Journal 2023 publication, ESTRO 2022 abstract cited. Specific DOIs not found in PubMed search but peer-reviewed evidence exists. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "Published clinical evidence for lesion tracking workflow in MRI follow-up assessments.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,

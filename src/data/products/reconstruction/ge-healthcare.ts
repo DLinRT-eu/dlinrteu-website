@@ -163,8 +163,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
     
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "30+ peer-reviewed publications. Bash et al. Radiol Adv 2025 multi-sequence validation (113 pairs, 51.6% time reduction).",
-    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in scan time with maintained diagnostic quality.",
+    evidenceRigorNotes: "30+ peer-reviewed publications across 11+ PubMed-indexed studies specifically mentioning AIR Recon DL. Key studies: Gorodezky et al. Diagnostics 2026 (cardiac MRI, 50 adults), Shaikh et al. Eur Spine J 2025 (spine 1.5T), Zucker et al. Pediatr Radiol 2025 (pediatric abdomen), Yoon et al. Insights Imaging 2024 (liver MRI). PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in scan time with maintained diagnostic quality across neuro, MSK, body, cardiac, and pediatric applications.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -172,14 +172,24 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for AIR Recon DL (initial)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Gorodezky et al. Impact of Deep Learning-Based Reconstruction on Cardiac Tissue Characterization (50 adults). Diagnostics 2026;16(2):348",
+        link: "https://doi.org/10.3390/diagnostics16020348"
       },
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for AIR Recon DL (expanded)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Shaikh et al. Application of deep learning to routine 2D T2 FLEX spine imaging at 1.5T. Eur Spine J 2025",
+        link: "https://doi.org/10.1007/s00586-025-09305-x"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Zucker et al. Deep learning reconstruction for improving image quality of pediatric abdomen MRI. Pediatr Radiol 2025;55(10):2037-2046",
+        link: "https://doi.org/10.1007/s00247-025-06313-3"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yoon et al. Comparison of image quality and lesion conspicuity in gadoxetic acid-enhanced liver MRI. Insights Imaging 2024;15(1):257",
+        link: "https://doi.org/10.1186/s13244-024-01825-2"
       },
       {
         type: "Peer-reviewed Publication",
@@ -187,9 +197,9 @@ export const GE_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1093/radadv/umaf029"
       },
       {
-        type: "Product Information",
-        description: "Official GE Healthcare AIR Recon DL product page",
-        link: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance K193282 (initial) and K213717 (expanded)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
       }
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",

@@ -91,10 +91,10 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
     },
     contactEmail: "info@mvision.ai",
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023) of 5 AI systems on 80 patients across 4 anatomies (breast, H&N, lung, prostate). Additional studies: Kiljunen (Diagnostics 2020), Langmack (BJR 2024). 11+ peer-reviewed studies across 17 clinics in 12 countries.",
-    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites and institutions.",
+    evidenceRigorNotes: "10 PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries), Podobnik et al. Sci Rep 2025 (3-system H&N comparison), Tang et al. Clin Transl Radiat Oncol 2025 (breast target volumes), Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes), Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Doolan et al. Front Oncol 2023 (5-system comparison, 80 patients). PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -103,12 +103,32 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients (breast, H&N, lung, prostate)",
+        description: "Pang et al. Multicentre evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312",
+        link: "https://doi.org/10.1038/s41746-025-01624-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Podobnik et al. Geometric, dosimetric and psychometric evaluation of 3 AI software for H&N OAR auto-segmentation. Sci Rep 2025;15(1):33396",
+        link: "https://doi.org/10.1038/s41598-025-18598-3"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Meyer et al. AI contouring in RT for OARs and lymph node areas. Radiat Oncol 2024;19(1):168",
+        link: "https://doi.org/10.1186/s13014-024-02554-y"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Doolan et al. Clinical evaluation of 5 commercial AI contouring systems on 80 patients. Front Oncol 2023;13:1213068",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation (DSC 0.92-0.99)",
+        description: "Kiljunen et al. Multicenter DL-based automated CT segmentation for prostate cancer (30 patients, 6 clinics). Diagnostics 2020;10(11):959",
+        link: "https://doi.org/10.3390/diagnostics10110959"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Performance evaluation in gastric MALT lymphoma segmentation (DSC 0.92-0.99). Rep Pract Oncol Radiother",
         link: "https://doi.org/10.5603/rpor.104144"
       }
     ],

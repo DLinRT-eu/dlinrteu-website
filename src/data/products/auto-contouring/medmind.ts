@@ -90,7 +90,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple peer-reviewed multicenter blinded randomized controlled studies with vendor co-authorship. Cervical cancer CTV study involved 6 medical centers and 9 oncologists (doi:10.3389/fonc.2021.702270). Rectal cancer studies include multicenter validation with Turing tests. Studies are vendor-affiliated (MedMind employees as co-authors), not fully independent.",
+    evidenceRigorNotes: "Multiple peer-reviewed multicenter blinded randomized controlled studies with vendor co-authorship. Cervical cancer CTV study involved 6 medical centers and 9 oncologists (doi:10.3389/fonc.2021.702270). Rectal cancer studies include multicenter validation with Turing tests. Studies are vendor-affiliated (MedMind employees as co-authors), not fully independent. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",
     evidenceMultiCenter: true,
     evidenceProspective: false,

@@ -353,7 +353,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Additional geometric/dosimetric comparison by Chuang et al.",
+    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Fan et al. JACMP 2025 (4-system comparison including Radformation, 111 patients). Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Multi-center study demonstrates comparable accuracy and workflow time savings alongside other leading AI contouring systems.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
@@ -363,8 +363,18 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        description: "Doolan et al. Multi-center comparison of 5 AI auto-contouring systems on 80 patients. Front Oncol 2023;13:1213068",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        link: "https://doi.org/10.1002/acm2.70010"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
     version: "4.0",

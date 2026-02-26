@@ -57,7 +57,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations.",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,

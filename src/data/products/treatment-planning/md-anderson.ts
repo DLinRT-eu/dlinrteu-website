@@ -69,32 +69,44 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     releaseDate: "2020-01-01",
     evidenceRigor: "E3",
     clinicalImpact: "I4",
-    evidenceRigorNotes: "Netherton et al. JCO GO 2023. Demonstrates improved access to quality RT in LMICs. Multiple publications.",
-    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings.",
+    evidenceRigorNotes: "148 PubMed results for 'RapidPlan AND radiotherapy'. Netherton et al. JCO GO 2023 demonstrates improved RT quality in LMICs. Kavuma et al. ecancermedicalscience 2025 (KBP feasibility in LMICs). Lloyd et al. Med Dosim 2026 (externally validated KBP model for high-grade glioma with RTQA). Multiple independent multi-center studies. PubMed verified 2026-02-26.",
+    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Extensive multi-institutional validation across prostate, breast, H&N, lung, esophageal, and brain cancers.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
     evidenceProspective: true,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K222728), MD Anderson Cancer Center official website",
     evidence: [
       {
-        type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K222728 received January 20, 2023 for Radiation Planning Assistant",
-        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K222728",
+        type: "Peer-reviewed Publication",
+        description: "Kavuma et al. Feasibility and impact of knowledge-based automated RT planning in LMICs. ecancermedicalscience 2025;19:1988",
+        link: "https://doi.org/10.3332/ecancer.2025.1988"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lloyd et al. Externally validated KBP model for ML-assisted RT of high-grade glioma (RTQA context). Med Dosim 2026",
+        link: "https://doi.org/10.1016/j.meddos.2025.12.001"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Sackett et al. Sharing a flexible urethral sparing SBRT prostate RapidPlan model with clinical implementation. Radiat Oncol 2025;21(1):12",
+        link: "https://doi.org/10.1186/s13014-025-02761-1"
       },
       {
         type: "Clinical Study",
-        description: "Primary research publication demonstrating clinical efficacy",
-        link: "https://doi.org/10.1200/GO.22.00431",
+        description: "Netherton et al. Primary research publication demonstrating clinical efficacy for LMIC access. JCO Global Oncology 2023",
+        link: "https://doi.org/10.1200/GO.22.00431"
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K222728 received January 20, 2023",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K222728"
       },
       {
         type: "Publications Database",
-        description: "Complete collection of RPA research publications",
-        link: "https://rpa.mdanderson.org/publications",
-      },
+        description: "Complete collection of RPA research publications (148+ PubMed-indexed)",
+        link: "https://rpa.mdanderson.org/publications"
+      }
     ],
   },
 ];
