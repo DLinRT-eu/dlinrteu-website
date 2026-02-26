@@ -24,6 +24,10 @@ import { DIRECTORGANS_PRODUCTS } from "./directorgans";
 import { ONCOSOFT_PRODUCTS } from "./oncosoft";
 import { TAIWAN_MEDICAL_IMAGING_PRODUCTS } from "./taiwan-medical-imaging";
 import { BRAINLAB_PRODUCTS } from "./brainlab";
+import { GE_MR_CONTOUR_DL_PRODUCTS } from "./ge-mr-contour-dl";
+import { QOCA_PRODUCTS } from "./qoca";
+import { MEDMIND_PRODUCTS } from "./medmind";
+import { AATMA_PRODUCTS } from "./aatma";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -49,5 +53,9 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...DIRECTORGANS_PRODUCTS,
   ...ONCOSOFT_PRODUCTS,
   ...TAIWAN_MEDICAL_IMAGING_PRODUCTS,
-  ...BRAINLAB_PRODUCTS
+  ...BRAINLAB_PRODUCTS,
+  ...GE_MR_CONTOUR_DL_PRODUCTS,
+  ...QOCA_PRODUCTS,
+  ...MEDMIND_PRODUCTS,
+  ...AATMA_PRODUCTS
 ];

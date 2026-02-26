@@ -69,10 +69,11 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K230575",
+        clearanceNumber: "K241837",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2023-04-07"
+        decisionDate: "2024-11-15",
+        notes: "Previous clearance: K230575 (2023). Now distributed by Radformation (acquired April 30, 2024)."
       },
       intendedUseStatement: "For use in radiation therapy planning to assist in the delineation of organs at risk."
     },
@@ -99,7 +100,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K230575), company official sources"
+    lastRevised: "2026-02-26",
+    source: "FDA 510(k) database (K241837), company official sources"
   }
 ];

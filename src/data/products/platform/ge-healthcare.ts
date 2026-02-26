@@ -68,7 +68,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared (via integrated components)",
         class: "Class II",
         type: "510(k)",
-        notes: "The iRT platform orchestrates multiple cleared clinical modules. Key component clearances include K230082 (Auto Segmentation, May 2023), K213717 (MR Contour DL), and integrates third-party cleared devices including MVision Contour+ (K241490) and MIM Contour ProtégéAI+."
+        notes: "The iRT platform orchestrates multiple cleared clinical modules. Key component clearances include K230082 (Auto Segmentation, May 2023), K242925 (MR Contour DL, April 2025; previous: K213717), and integrates third-party cleared devices including MVision Contour+ (K241490) and MIM Contour ProtégéAI+."
       },
       intendedUseStatement: "A fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management. Designed to integrate AI-supported auto-segmentation, intelligent resource scheduling, analytics reporting, and vendor-neutral connectivity with hospital information systems (OIS, TPS, EMR, QA, PACS) to optimize radiation therapy delivery, reduce treatment delays, and improve departmental efficiency."
     },
@@ -81,8 +81,8 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Platform product (2025). No independent publications. Evidence through integrated component clearances.",
     clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions.",
     releaseDate: "2025-09-25",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-02-26",
+    lastRevised: "2026-02-26",
     source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717.",
     clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
   }

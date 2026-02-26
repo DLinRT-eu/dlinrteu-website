@@ -100,5 +100,23 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "category": "Specialized Solutions",
     "logoUrl": "/logos/medlever.jpg",
     "primaryTask": "Platform"
+  },
+  {
+    "id": "medmind-technology",
+    "name": "MedMind Technology Co., Ltd.",
+    "description": "Chinese medical AI company developing auto-contouring solutions for radiation therapy.",
+    "website": "https://www.medmind.com.cn/",
+    "productIds": ["medmind-rt-mind-ai"],
+    "category": "Specialized Solutions",
+    "primaryTask": "Auto-Contouring"
+  },
+  {
+    "id": "aatma",
+    "name": "Advanced Algorithms for Treatment Management Applications",
+    "description": "Developer of AI-powered auto-contouring solutions for radiation therapy planning.",
+    "website": "",
+    "productIds": ["aatma-autocontour"],
+    "category": "Specialized Solutions",
+    "primaryTask": "Auto-Contouring"
   }
 ];
