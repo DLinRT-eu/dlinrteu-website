@@ -19,6 +19,9 @@ These products do not meet the platform's criteria:
 | RefleXion X2 Platform | RefleXion Medical | Hardware platform |
 | Deep Learning Image Processing for CT | GE Healthcare | Unverified - no specific FDA clearance number, functionality covered by TrueFidelity Pro (K183202) |
 | MRIdian A3i | ViewRay | Uses deformable registration, not AI/DL (FDA K162393, K181989) |
+| AATMA | Elekta | Insufficient public documentation |
+| QOCA Smart RT | Quanta Computer | Insufficient public documentation |
+| RT-Mind-AI | MedMind Technology | Insufficient public documentation |
 
 ## Restoration
 
