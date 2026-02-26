@@ -1,119 +1,89 @@
 
 
-# Product Database Audit: FDA Clearance Updates and Missing Products
+# Archive AATMA, QOCA, and RT-Mind-AI Products and Companies
 
-## Summary
+## Why
 
-Cross-referencing the database against the complete FDA QKB (Radiological Image Processing Software for Radiation Therapy) product code registry reveals **3 outdated clearance numbers** and **4 missing products**. The user selected "Update FDA clearances" as the priority, with minimal entries for low-info products.
+These three products were added as minimal entries based solely on FDA clearance data, but lack sufficient public information for a quality database entry. Archiving preserves them for future restoration when more data becomes available. Note: AATMA is from Elekta (correcting the original entry).
 
----
+## Changes
 
-## Part 1: Update Existing FDA Clearance Numbers
+### 1. Move product files to archive
 
-### 1a. Radformation AutoContour -- V3 to V4
+Move the following files from `src/data/products/auto-contouring/` to `src/data/products/archived/`:
+- `aatma.ts` (update company name to "Elekta" before archiving)
+- `qoca.ts`
+- `medmind.ts`
 
-**File:** `src/data/products/auto-contouring/radformation.ts`
+### 2. Remove from auto-contouring index
 
-| Field | Current | Updated |
-|-------|---------|---------|
-| clearanceNumber | K230685 | K242729 |
-| decisionDate | 2023-04-14 | ~2024 (V4) |
-| notes | (reference to Limbus) | Add "Previous clearances: K230685 (V3, 2023), K220598 (V2), K200323 (V1)" |
-| version | 2.6 | 4.0 |
+**File:** `src/data/products/auto-contouring/index.ts`
+- Remove imports for `QOCA_PRODUCTS`, `MEDMIND_PRODUCTS`, `AATMA_PRODUCTS`
+- Remove their spread entries from the `AUTO_CONTOURING_PRODUCTS` array
 
-### 1b. Limbus Contour -- New clearance under Radformation
+### 3. Update archived products index
 
-**File:** `src/data/products/auto-contouring/limbus.ts`
+**File:** `src/data/products/archived/index.ts`
+- Add imports for the three moved product files
+- Add them to the `ARCHIVED_PRODUCTS` array
 
-| Field | Current | Updated |
-|-------|---------|---------|
-| clearanceNumber | K230575 | K241837 |
-| decisionDate | 2023-04-07 | ~2024 |
-| notes | (none) | "Previous clearance: K230575 (2023). Now distributed by Radformation." |
+### 4. Update archived products README
 
-### 1c. GE iRT Platform -- Correct MR Contour DL reference
+**File:** `src/data/products/archived/README.md`
+- Add three new rows to the table:
+  - AATMA | Elekta | Insufficient public documentation
+  - QOCA Smart RT | Quanta Computer | Insufficient public documentation
+  - RT-Mind-AI | MedMind Technology | Insufficient public documentation
 
-**File:** `src/data/products/platform/ge-healthcare.ts`
+### 5. Remove company entries
 
-The iRT platform references `K213717` for MR Contour DL, but the correct/latest clearance is `K242925` (April 2025). Update the `fda.notes` field.
+**File:** `src/data/companies/specialized-solutions.ts`
+- Remove the `medmind-technology` and `aatma` company objects
 
----
+**File:** `src/data/companies/medical-imaging.ts`
+- Remove the `quanta-computer` company object
 
-## Part 2: Add Missing Products (Minimal Entries)
+### 6. Create archived company files
 
-### 2a. GE Healthcare MR Contour DL (standalone entry)
+Create three new files in `src/data/companies/archived/`:
+- `quanta-computer.ts` -- archived Quanta Computer entry
+- `medmind-technology.ts` -- archived MedMind Technology entry
+- `aatma.ts` -- archived AATMA/Elekta entry
 
-**New file:** `src/data/products/auto-contouring/ge-mr-contour-dl.ts`
+### 7. Update archived companies index and README
 
-Currently MR Contour DL is only mentioned in notes inside `ge-healthcare.ts` and the iRT platform. It deserves its own product entry as a standalone FDA-cleared auto-contouring device:
+**File:** `src/data/companies/archived/index.ts`
+- Import and add the three new archived companies
 
-- **Company:** GE Healthcare
-- **Category:** Auto-Contouring
-- **FDA:** K242925 (April 1, 2025), QKB, Class II
-- **Modality:** MRI
-- **Anatomy:** Head and Neck, Pelvis
-- **Structures:** 37+ organs (from FDA clearance documentation)
-- **Certification:** CE and FDA
+**File:** `src/data/companies/archived/README.md`
+- Add three rows:
+  - Quanta Computer | Insufficient public documentation for QOCA product
+  - MedMind Technology | Insufficient public documentation for RT-Mind-AI
+  - Elekta (AATMA) | Insufficient public documentation
 
-Update `src/data/products/auto-contouring/index.ts` to import and include it.
-Update `src/data/companies/medical-imaging.ts` to add the product ID to GE Healthcare's `productIds`.
+### 8. Remove GE MR Contour DL product ID reference
 
-### 2b. QOCA Smart RT Contouring System
+**File:** `src/data/companies/medical-imaging.ts`
+- The `ge-mr-contour-dl` product ID was added to GE Healthcare's `productIds` -- this stays as it's a legitimate product. No change needed here.
 
-**New file:** `src/data/products/auto-contouring/qoca.ts`
-
-- **Company:** Quanta Computer, Inc. (Taiwan)
-- **Product:** QOCA image Smart RT Contouring System
-- **FDA:** K231855 (Feb 12, 2024), QKB, Class II
-- **Category:** Auto-Contouring
-- **Certification:** FDA (minimal -- mark as needing further research)
-
-Add new company entry to `src/data/companies/medical-imaging.ts` for Quanta Computer.
-Update `src/data/products/auto-contouring/index.ts`.
-
-### 2c. RT-Mind-AI (MedMind Technology)
-
-**New file:** `src/data/products/auto-contouring/medmind.ts`
-
-- **Company:** MedMind Technology Co., Ltd. (China)
-- **Product:** RT-Mind-AI
-- **FDA:** K213155 (cleared ~2022), QKB, Class II
-- **Category:** Auto-Contouring
-- **Certification:** FDA (minimal entry)
-
-Add new company entry to `src/data/companies/specialized-solutions.ts`.
-Update `src/data/products/auto-contouring/index.ts`.
-
-### 2d. AATMA (Advanced Algorithms for Treatment Management Applications)
-
-**New file:** `src/data/products/auto-contouring/aatma.ts`
-
-- **FDA:** K212218, QKB, Class II
-- **Category:** Auto-Contouring
-- **Certification:** FDA (minimal entry -- limited public documentation)
-
-Add company entry and update index.
-
----
-
-## Part 3: File Changes Summary
+## Files Summary
 
 | File | Action |
 |------|--------|
-| `src/data/products/auto-contouring/radformation.ts` | Update FDA clearance to K242729 (V4) |
-| `src/data/products/auto-contouring/limbus.ts` | Update FDA clearance to K241837 |
-| `src/data/products/platform/ge-healthcare.ts` | Fix MR Contour DL reference K213717 to K242925 |
-| `src/data/products/auto-contouring/ge-mr-contour-dl.ts` | **New** -- GE MR Contour DL standalone entry |
-| `src/data/products/auto-contouring/qoca.ts` | **New** -- QOCA Smart RT |
-| `src/data/products/auto-contouring/medmind.ts` | **New** -- RT-Mind-AI |
-| `src/data/products/auto-contouring/aatma.ts` | **New** -- AATMA |
-| `src/data/products/auto-contouring/index.ts` | Import and include 4 new product arrays |
-| `src/data/companies/medical-imaging.ts` | Add GE MR Contour DL product ID; add Quanta Computer entry |
-| `src/data/companies/specialized-solutions.ts` | Add MedMind Technology and AATMA company entries |
-
-## Notes
-
-- All new minimal entries will include `lastRevised: "2026-02-26"`, `source` field citing the FDA 510(k) database, and a limitation note indicating the entry needs further research/verification.
-- The ARTAssistant (K250780) is very recent and may not have enough public data yet -- it can be added in a follow-up audit.
-- Existing products that were already up to date (MVision Contour+, Ever Fortune Seg Pro V3, Therapanacea Annotate, etc.) require no changes.
+| `src/data/products/auto-contouring/aatma.ts` | Delete (recreate in archived) |
+| `src/data/products/auto-contouring/qoca.ts` | Delete (recreate in archived) |
+| `src/data/products/auto-contouring/medmind.ts` | Delete (recreate in archived) |
+| `src/data/products/archived/aatma.ts` | Create (with company corrected to Elekta) |
+| `src/data/products/archived/qoca.ts` | Create |
+| `src/data/products/archived/medmind.ts` | Create |
+| `src/data/products/auto-contouring/index.ts` | Edit -- remove 3 imports and spreads |
+| `src/data/products/archived/index.ts` | Edit -- add 3 imports and spreads |
+| `src/data/products/archived/README.md` | Edit -- add 3 rows |
+| `src/data/companies/specialized-solutions.ts` | Edit -- remove medmind-technology and aatma entries |
+| `src/data/companies/medical-imaging.ts` | Edit -- remove quanta-computer entry |
+| `src/data/companies/archived/quanta-computer.ts` | Create |
+| `src/data/companies/archived/medmind-technology.ts` | Create |
+| `src/data/companies/archived/aatma.ts` | Create |
+| `src/data/companies/archived/index.ts` | Edit -- add 3 imports |
+| `src/data/companies/archived/README.md` | Edit -- add 3 rows |
 
