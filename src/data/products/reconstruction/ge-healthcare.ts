@@ -61,33 +61,38 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; multiple phantom and clinical studies.",
+    evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; Shim et al. J Imaging 2025 independent comparative study vs Precise Image. Impact on CT radiomic features (PMC12618174, 2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through enhanced low-contrast detectability at reduced dose, improving CT protocol efficiency.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Greffier et al. Diagnostic and Interventional Imaging 2020 - phantom and clinical evaluation",
+        link: "https://doi.org/10.1016/j.diii.2019.10.007"
+      },
+      {
+        type: "Independent Comparative Study",
+        description: "Shim et al. 2025: Quantitative evaluation comparing Philips Precise Image and GE TrueFidelity for low-dose CT. J Imaging 2025;11(9):317",
+        link: "https://doi.org/10.3390/jimaging11090317"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Impact of deep learning based reconstruction algorithms on CT radiomic features of carotid plaques. PMC 2025",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12618174/"
+      },
       {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for TrueFidelity",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183202.pdf"
       },
       {
-        type: "Product Information",
-        description: "Official GE Healthcare TrueFidelity product page",
-        link: "https://www.gehealthcare.com/products/truefidelity"
-      },
-      {
         type: "Technical White Paper",
         description: "GE TrueFidelity technical white paper (DLIR method + performance/clinical rationale)",
         link: "https://www.gehealthcare.com/static/truefidelity/images/whitepaper-download/TrueFidelity%20WP_vFinal.pdf"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Greffier et al. Diagnostic and Interventional Imaging 2020 - phantom and clinical evaluation",
-        link: "https://doi.org/10.1016/j.diii.2019.10.007"
       }
     ],
     limitations: [

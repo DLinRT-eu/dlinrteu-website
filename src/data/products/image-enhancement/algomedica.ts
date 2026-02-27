@@ -78,7 +78,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Steuwe et al. Diagnostics 2022 (doi:10.3390/diagnostics12071627) - independent single-center study from University Düsseldorf evaluating PixelShine noise reduction on CT values and stone characterization. FDA K161625.",
+    evidenceRigorNotes: "Steuwe et al. Diagnostics 2022 independent study (Uni Düsseldorf). PMID:30523499 pelvic CTA 70kVp study. AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,

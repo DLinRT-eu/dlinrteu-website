@@ -68,18 +68,23 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Multiple peer-reviewed publications on independent dose verification. Czarnecki et al. Med Phys 2018.",
+    evidenceRigorNotes: "Czarnecki et al. Med Phys 2018. Seok et al. Front Oncol 2024 new VMAT QA framework (doi:10.3389/fonc.2024.1478118). Review in PMC12672138 on measurement-based PSQA. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "QA/monitoring tool for independent dose verification and treatment delivery verification.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Czarnecki et al. Independent dose verification in Medical Physics 2018",
+        description: "Czarnecki et al. Independent dose verification. Med Phys 2018",
         link: "https://doi.org/10.1002/mp.12736"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Seok et al. Development of a new VMAT QA framework for Mobius3D using control-point specific EPID images. Front Oncol 2024",
+        link: "https://doi.org/10.3389/fonc.2024.1478118"
       }
     ],
     lastUpdated: "2026-02-23",

@@ -62,8 +62,18 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Independent Comparative Study",
-        description: "Shim et al. 2025: Quantitative evaluation of low-dose CT image quality comparing Philips Precise Image and GE TrueFidelity deep learning reconstruction. Independent study.",
+        description: "Shim et al. 2025: Quantitative evaluation comparing Precise Image and GE TrueFidelity for low-dose CT. J Imaging 2025;11(9):317",
         link: "https://doi.org/10.3390/jimaging11090317"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Impact of Precise Image on image quality and detection of solid lung lesions in chest CT. PMID:40511419, 2025",
+        link: "https://pubmed.ncbi.nlm.nih.gov/40511419/"
+      },
+      {
+        type: "Prospective Study",
+        description: "Prospective comparison of Precise Image vs iDose4 in normal BMI individuals. PMC12374083, 2025",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12374083/"
       },
       {
         type: "Product Information",
@@ -73,7 +83,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Shim et al. J Imaging 2025 (doi:10.3390/jimaging11090317) - independent comparative study of Precise Image vs GE TrueFidelity for low-dose CT. FDA K210760.",
+    evidenceRigorNotes: "Shim et al. J Imaging 2025 independent comparative vs TrueFidelity. PMID:40511419 lung lesion detection study 2025. Prospective comparison vs iDose4 (PMC12374083). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through up to 80% radiation dose reduction.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
@@ -148,28 +158,38 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Bonn University clinical case study (cardiac MRI 60 to 20 min). FDA K251397.",
+    evidenceRigorNotes: "Bonn University cardiac MRI case study. PMID:40428199 prospective 3-min knee MRI protocol 2025. PMID:40240275 prospective knee MRI efficiency study. Fransen et al. Eur Radiol 2025 systematic review. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through up to 3x faster MRI scanning.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
-    evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceProspective: true,
+    evidenceExternalValidation: true,
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for SmartSpeed Precise",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251397.pdf"
+        type: "Prospective Study",
+        description: "Is a 3-minute knee MRI protocol sufficient for daily clinical practice? SuperResolution with SmartSpeed. PMID:40428199, 2025",
+        link: "https://pubmed.ncbi.nlm.nih.gov/40428199/"
       },
       {
-        type: "Product Information",
-        description: "Official Philips SmartSpeed product page",
-        link: "https://www.philips.com/healthcare/resources/landing/smartspeed"
+        type: "Prospective Study",
+        description: "Deep learning in knee MRI: prospective study to enhance efficiency, diagnostic confidence and sustainability. PMID:40240275, 2025",
+        link: "https://pubmed.ncbi.nlm.nih.gov/40240275/"
+      },
+      {
+        type: "Systematic Review",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746",
+        link: "https://doi.org/10.1007/s00330-025-11423-5"
       },
       {
         type: "Clinical Case Study",
         description: "Bonn University Hospital - Cardiac MRI time reduced from 60 to 20 minutes using SmartSpeed",
         link: "https://www.philips.com.sg/healthcare/video/philips-mri-enhancement-smartspeed-precise"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for SmartSpeed Precise",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251397.pdf"
       }
     ],
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",

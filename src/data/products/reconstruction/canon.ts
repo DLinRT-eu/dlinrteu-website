@@ -63,24 +63,14 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study. Tatsugami et al. Radiology 2019 coronary CTA. Sci Reports 2023 RT-specific dose calculation validation.",
+    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study. Tatsugami et al. Radiology 2019 coronary CTA. Sci Reports 2023 RT dose calc. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI/CT. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through dose reduction (up to 82%) with maintained image quality, enabling more efficient CT protocols.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     evidence: [
-      {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for AiCE CT",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf"
-      },
-      {
-        type: "Product Information",
-        description: "Official Canon AiCE Deep Learning Reconstruction product page with technical specifications and clinical benefits",
-        link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
-      },
       {
         type: "Peer-reviewed Publication",
         description: "Higaki et al. Multi-phantom evaluation of deep learning CT reconstruction in European Radiology 2020",
@@ -88,8 +78,18 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Validation of deep learning-based CT image reconstruction for treatment planning. Scientific Reports 2023.",
+        description: "Validation of deep learning-based CT image reconstruction for treatment planning. Scientific Reports 2023",
         link: "https://doi.org/10.1038/s41598-023-42775-x"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance documentation for AiCE CT",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf"
+      },
+      {
+        type: "Product Information",
+        description: "Official Canon AiCE Deep Learning Reconstruction product page",
+        link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
       }
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",

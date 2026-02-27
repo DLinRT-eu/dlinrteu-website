@@ -64,7 +64,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. FDA validation K191688, K223623.",
+    evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SubtleMR. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling 2-4x faster scanning.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
@@ -74,8 +74,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Andre et al. Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols",
+        description: "Andre et al. Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols. JACR 2021",
         link: "https://doi.org/10.1016/j.jacr.2021.07.024"
+      },
+      {
+        type: "Systematic Review",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746",
+        link: "https://doi.org/10.1007/s00330-025-11423-5"
       }
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
@@ -145,7 +150,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation. Liang et al. 2023 multi-tracer validation.",
+    evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation (vendor-independent). Liang et al. 2023 multi-tracer validation. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through PET enhancement enabling 4x faster scans or 75% dose reduction.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
@@ -155,7 +160,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Katsari et al. Low-dose PET validation study in European Journal of Nuclear Medicine",
+        description: "Katsari et al. Low-dose PET validation study (vendor-independent). Eur J Nucl Med 2021",
         link: "https://doi.org/10.1007/s00259-021-05478-x"
       }
     ],

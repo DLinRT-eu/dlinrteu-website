@@ -69,7 +69,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Pepin et al. JACMP 2020 motion tracking accuracy. Multiple studies on CyberKnife and Radixact integration.",
+    evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony fiducial tracking on Radixact X9 (2025). PMID:40600108 lung motion management case report (2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
@@ -79,8 +79,18 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Pepin et al. Motion tracking accuracy evaluation in Journal of Applied Clinical Medical Physics 2020",
+        description: "Pepin et al. Motion tracking accuracy evaluation. JACMP 2020",
         link: "https://doi.org/10.1002/acm2.12847"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Prostate SBRT with Synchrony-based fiducial tracking on Radixact X9. PMID:40486323, Cureus 2025",
+        link: "https://pubmed.ncbi.nlm.nih.gov/40486323/"
+      },
+      {
+        type: "Case Report",
+        description: "Real-time motion management for small lung target with large tumor motion using Radixact Synchrony. PMID:40600108, 2025",
+        link: "https://pubmed.ncbi.nlm.nih.gov/40600108/"
       }
     ],
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue.",

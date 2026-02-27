@@ -101,7 +101,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-07-01",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction study. FDA K240398 validation.",
+    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
