@@ -82,10 +82,10 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021-03-12",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Trained on 5000+ plans from Johns Hopkins. Appenzoller et al. Med Phys 2012 (Oncospace foundation). FDA K222803, K202284.",
+    evidenceRigorNotes: "Appenzoller et al. Med Phys 2012 (Oncospace foundation, 5000+ plans, Johns Hopkins). KBP for 10 cancer sites (PMID:39486482, 2024). Multicenter AI-driven RT planning (PMC12827991, 2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through AI-powered DVH predictions enabling data-driven planning objectives.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
@@ -100,8 +100,18 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1118/1.4752212"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Knowledge-based planning for fully automated RT treatment planning of 10 cancer sites. PMID:39486482, 2024",
+        link: "https://pubmed.ncbi.nlm.nih.gov/39486482/"
+      },
+      {
+        type: "Multicenter Study",
+        description: "Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types. PMC12827991, 2025",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12827991/"
+      },
+      {
         type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K222803 received February 2, 2023 - Class II device under 21 CFR 892.5050",
+        description: "FDA 510(k) clearance K222803 received February 2, 2023",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K222803.pdf",
       },
       {

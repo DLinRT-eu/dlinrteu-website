@@ -61,19 +61,24 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Peer-reviewed Publication",
+        description: "Jeong et al. Multi-reader study on diagnostic equivalence with accelerated MRI protocols. Eur Radiol 2023",
+        link: "https://doi.org/10.1007/s00330-023-09678-3"
+      },
+      {
+        type: "Systematic Review",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746",
+        link: "https://doi.org/10.1007/s00330-025-11423-5"
+      },
+      {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for SwiftMR",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230854.pdf"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Jeong et al. Multi-reader study on diagnostic equivalence with accelerated MRI protocols",
-        link: "https://doi.org/10.1007/s00330-023-09678-3"
       }
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-reader study showing diagnostic equivalence with accelerated protocols. Jeong et al. Eur Radiol 2023.",
+    evidenceRigorNotes: "Jeong et al. Eur Radiol 2023 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SwiftMR. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through enhanced MRI quality enabling faster scan times.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,

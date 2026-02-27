@@ -132,7 +132,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple peer-reviewed publications including Lee et al. 2022 MR enterography, Karaarslan et al. 2022 prostate MRI. Part of broader AIR Recon DL platform with 30+ publications.",
+    evidenceRigorNotes: "Lee et al. 2022 MR enterography, Karaarslan et al. 2022 prostate MRI. Part of broader AIR Recon DL platform (30+ publications, E3 reconstruction). Fransen et al. Eur Radiol 2025 systematic review. PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through enhanced MR image quality enabling faster scan protocols.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
