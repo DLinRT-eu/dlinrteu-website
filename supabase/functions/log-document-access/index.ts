@@ -42,10 +42,28 @@ serve(async (req) => {
       throw new Error('Admin access required');
     }
 
-    const { document_id, access_reason } = await req.json();
+    let body: { document_id?: string; access_reason?: string };
+    try {
+      body = await req.json();
+    } catch {
+      throw new Error('Invalid JSON body');
+    }
+
+    const { document_id, access_reason } = body;
     
     if (!document_id || !access_reason) {
       throw new Error('Missing required fields');
+    }
+
+    // Validate UUID format for document_id
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(document_id)) {
+      throw new Error('Invalid document_id format');
+    }
+
+    // Enforce length limits on access_reason
+    if (typeof access_reason !== 'string' || access_reason.length > 500) {
+      throw new Error('access_reason must be a string under 500 characters');
     }
 
     // Verify document exists

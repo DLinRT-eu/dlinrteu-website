@@ -69,14 +69,57 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const eventData: SecurityEventData = await req.json();
+    let eventData: SecurityEventData;
+    try {
+      eventData = await req.json();
+    } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     // Validate required fields
+    const validEventTypes = ['form_submission_failed', 'unusual_activity', 'rate_limit_exceeded', 'suspicious_request', 'repeated_failures', 'bot_detection', 'malicious_payload', 'authentication_failure'];
+    const validSeverities = ['low', 'medium', 'high', 'critical'];
+
     if (!eventData.event_type || !eventData.client_fingerprint) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
+    }
+
+    if (!validEventTypes.includes(eventData.event_type)) {
+      return new Response(JSON.stringify({ error: 'Invalid event_type' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (eventData.severity && !validSeverities.includes(eventData.severity)) {
+      return new Response(JSON.stringify({ error: 'Invalid severity' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Enforce input length limits
+    if (eventData.client_fingerprint.length > 128) {
+      eventData.client_fingerprint = eventData.client_fingerprint.substring(0, 128);
+    }
+    if (eventData.url && eventData.url.length > 2048) {
+      eventData.url = eventData.url.substring(0, 2048);
+    }
+    if (eventData.user_agent && eventData.user_agent.length > 500) {
+      eventData.user_agent = eventData.user_agent.substring(0, 500);
+    }
+    // Limit details object size
+    if (eventData.details) {
+      const detailsStr = JSON.stringify(eventData.details);
+      if (detailsStr.length > 5000) {
+        eventData.details = { truncated: true, message: 'Details exceeded maximum size' };
+      }
     }
 
     // Rate limiting based on client fingerprint
