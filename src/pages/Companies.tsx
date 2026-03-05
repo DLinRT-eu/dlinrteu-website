@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
+import { useDailyShuffle } from '@/hooks/useProductSorting';
 import { Input } from '@/components/ui/input';
 import { Search, Building, ArrowDownAZ, ArrowDownZA, Download, FileSpreadsheet, FileText, Code, Filter } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
@@ -61,44 +62,8 @@ const Companies = () => {
       });
   }, []);
 
-  // Shuffle companies randomly, but preserve order only for back/forward navigation
-  const shuffledCompanies = useMemo(() => {
-    const storageKey = 'companiesShuffledOrder';
-    
-    // Check if this is back/forward navigation
-    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
-    const navigationType = navEntries[0]?.type;
-    
-    // Only preserve order for back/forward navigation
-    if (navigationType === 'back_forward') {
-      const savedOrder = sessionStorage.getItem(storageKey);
-      if (savedOrder) {
-        try {
-          const orderMap: Record<string, number> = JSON.parse(savedOrder);
-          const savedIds = Object.keys(orderMap);
-          const currentIds = companies.map(c => c.id);
-          if (savedIds.length === currentIds.length && currentIds.every(id => id in orderMap)) {
-            return [...companies].sort((a, b) => orderMap[a.id] - orderMap[b.id]);
-          }
-        } catch (e) {
-          // Invalid JSON, create new order
-        }
-      }
-    }
-    
-    // Create new random order for fresh visits and reloads
-    const arr = [...companies];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    
-    // Save order to sessionStorage (for potential back navigation)
-    const orderMap = Object.fromEntries(arr.map((c, i) => [c.id, i]));
-    sessionStorage.setItem(storageKey, JSON.stringify(orderMap));
-    
-    return arr;
-  }, [companies]);
+  // Daily-stable random shuffle — same order all day, changes next day
+  const shuffledCompanies = useDailyShuffle(companies);
 
   const structuredData = {
     "@context": "https://schema.org",
