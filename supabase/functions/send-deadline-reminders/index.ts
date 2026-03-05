@@ -46,7 +46,9 @@ const handler = async (req: Request): Promise<Response> => {
   const authHeader = req.headers.get("Authorization");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   
-  const isServiceRole = authHeader?.includes(serviceRoleKey || "");
+  // Exact match — fails safely if env var is missing
+  const expectedBearer = `Bearer ${serviceRoleKey ?? ""}`;
+  const isServiceRole = !!serviceRoleKey && authHeader === expectedBearer;
   
   if (!isServiceRole) {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;

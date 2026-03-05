@@ -29,8 +29,9 @@ const handler = async (req: Request): Promise<Response> => {
   const authHeader = req.headers.get("Authorization");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   
-  // Check for service role key (for internal calls)
-  const isServiceRole = authHeader?.includes(serviceRoleKey || "");
+  // Check for service role key (for internal calls) — exact match, fails safely if env var missing
+  const expectedBearer = `Bearer ${serviceRoleKey ?? ""}`;
+  const isServiceRole = !!serviceRoleKey && authHeader === expectedBearer;
   
   if (!isServiceRole) {
     // Verify the caller is an authenticated admin
