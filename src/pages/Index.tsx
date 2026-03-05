@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 import TaskTaxonomy from "@/components/TaskTaxonomy";
 import { getAllOptions } from "@/utils/filterOptions";
+import { matchesTask } from "@/utils/modelCounting";
 import dataService from "@/services/DataService";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +51,7 @@ const Index = () => {
   const { aiCount, nonAICount } = countProductsByAI(products);
 
   const handleCategoryClick = (category: string) => {
-    navigate('/products', { state: { selectedCategory: category } });
+    navigate(`/products?task=${encodeURIComponent(category)}`);
   };
 
   const structuredData = {
@@ -64,7 +65,7 @@ const Index = () => {
 
   const categoryCounts = categories.map(category => ({
     name: category,
-    count: products.filter(p => p.category === category).length
+    count: products.filter(p => matchesTask(p, category)).length
   }));
 
   // Public landing page
