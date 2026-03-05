@@ -183,8 +183,12 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
         </div>
       </div>
       
-      <div className="text-xs text-gray-500 text-center mt-2">
-        Click on a category to explore products
+      <div className="text-xs text-muted-foreground text-center mt-2 space-y-1">
+        <p>Click on a category to explore products</p>
+        <p className="italic">
+          Counts show the number of products per task. Products with multiple tasks are counted in each relevant category.
+          These counts match the filters on the <span className="font-medium">Products</span> and <span className="font-medium">Dashboard</span> pages.
+        </p>
       </div>
     </div>
   );
