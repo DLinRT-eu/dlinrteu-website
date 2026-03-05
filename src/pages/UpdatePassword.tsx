@@ -31,8 +31,7 @@ export default function UpdatePassword() {
   useEffect(() => {
     const establishSession = async () => {
       try {
-        console.log('=== Password Reset Flow Debug ===');
-        console.log('Full URL:', window.location.href);
+        // Debug logging without exposing sensitive URL tokens
         
         const searchParams = new URLSearchParams(window.location.search);
         const hashParams = new URLSearchParams(window.location.hash.substring(1));
