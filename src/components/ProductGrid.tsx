@@ -6,7 +6,7 @@ import dataService from "@/services/DataService";
 import { FilterState } from "@/types/filters";
 import { SortOption } from "./grid/SortControls";
 import { useProductSearch } from "./grid/ProductSearch";
-import { useProductSorting, useProductShuffle } from "@/hooks/useProductSorting";
+import { useProductSorting, useDailyProductShuffle } from "@/hooks/useProductSorting";
 import { ProductDetails } from "@/types/productDetails";
 import ProductComparison from "./comparison/ProductComparison";
 import CompareButton from "./comparison/CompareButton";
@@ -37,7 +37,7 @@ const ProductGrid = ({ filters, searchQuery = "", advancedSearch = false }: Prod
     : dataService.getAllProducts();
 
   // Shuffle products randomly on each reload (only once), but not in compare mode
-  const shuffledProducts = useProductShuffle(filteredProducts);
+  const shuffledProducts = useDailyProductShuffle(filteredProducts);
 
   // Apply search filtering
   const searchFilteredProducts = useProductSearch({
