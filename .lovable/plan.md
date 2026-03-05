@@ -1,98 +1,71 @@
+# Daily-Stable Random Sorting for Products and Company 
+
+## Problem
+
+Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
+
+## Alternatives Considered
 
 
-# Verify and Update Evidence for E2/E3 Products via PubMed Search
+| Approach                                                     | Pros                                                         | Cons                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
+| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
+| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
+| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
 
-## Overview
 
-Search PubMed and Google Scholar for recent publications citing each of the ~30 products rated E2 or higher, verify existing evidence claims, and add any new publications found. The expandable evidence UI (show top 3, collapse rest) is already implemented from the previous task.
+**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
 
-## Products to Search (E2 and E3)
+## Implementation
 
-### E3 Products (highest priority -- verify strong claims)
+### 1. Add a seeded PRNG to `useProductSorting.ts`
 
-| # | Product | Company | File | Notes |
-|---|---------|---------|------|-------|
-| 1 | AIR Recon DL (MR) | GE Healthcare | reconstruction/ge-healthcare.ts | Claims 30+ publications, E3 |
-| 2 | Deep Resolve (MR) | Siemens | reconstruction/siemens.ts | E3 |
-| 3 | AI-Rad Companion ORT | Siemens | auto-contouring/siemens.ts | E3, independent eval |
-| 4 | OncoStudio | Oncosoft/Anzai | auto-contouring/oncosoft.ts | E3, single study link is LinkedIn |
-| 5 | RapidPlan | MD Anderson/Varian | treatment-planning/md-anderson.ts | E3/I4 |
+Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
 
-### E2 Auto-Contouring Products
+- Computes a seed from today's date string (`"2026-03-05"`)
+- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
+- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
 
-| # | Product | Company | File |
-|---|---------|---------|------|
-| 6 | RT-Mind-AI | MedMind | auto-contouring/medmind.ts |
-| 7 | Annotate | Therapanacea | auto-contouring/therapanacea.ts |
-| 8 | AccuContour | Manteia | auto-contouring/manteia.ts |
-| 9 | MVision AI Contour+ | MVision AI | auto-contouring/mvision.ts |
-| 10 | AutoContour | Radformation | auto-contouring/radformation.ts |
-| 11 | RayStation ML Segmentation | RaySearch | auto-contouring/raysearch.ts |
-| 12 | Limbus Contour | Limbus AI | auto-contouring/limbus.ts |
-| 13 | ProtegeAI | MIM Software | auto-contouring/mim-software.ts |
-| 14 | AVIEW RT ACS | Coreline | auto-contouring/coreline.ts |
-| 15 | Carina AI | Carina Medical | auto-contouring/carina.ts |
-| 16 | AI-Medical | AI Medical | auto-contouring/ai-medical.ts |
-| 17 | DirectORGANS | Siemens | auto-contouring/directorgans.ts |
-| 18 | DLCExpert | Mirada | auto-contouring/mirada.ts |
+```typescript
+function mulberry32(seed: number) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
 
-### E2 Reconstruction Products
+function dateToSeed(dateStr: string): number {
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
 
-| # | Product | Company | File |
-|---|---------|---------|------|
-| 19 | TrueFidelity | GE Healthcare | reconstruction/ge-healthcare.ts |
-| 20 | AiCE CT | Canon | reconstruction/canon.ts |
-| 21 | Precise Image | Philips | reconstruction/philips.ts |
-| 22 | SmartSpeed (MR) | Philips | reconstruction/philips.ts |
+export const useDailyProductShuffle = (products: ProductDetails[]) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return useMemo(() => {
+    const rng = mulberry32(dateToSeed(today));
+    const arr = [...products];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [products, today]);
+};
+```
 
-### E2 Image Enhancement Products
+### 2. Update `ProductGrid.tsx`
 
-| # | Product | Company | File |
-|---|---------|---------|------|
-| 23 | SubtleMR | Subtle Medical | image-enhancement/subtle-medical.ts |
-| 24 | SubtlePET | Subtle Medical | image-enhancement/subtle-medical.ts |
-| 25 | SwiftMR | AIRS Medical | image-enhancement/airs-medical.ts |
-| 26 | PixelShine | Algomedica | image-enhancement/algomedica.ts |
-| 27 | ClariCT.AI | ClariPI | image-enhancement/claripi.ts |
-| 28 | AIR Recon DL (Image Enh.) | GE Healthcare | image-enhancement/ge-healthcare.ts |
+- Import `useDailyProductShuffle` instead of `useProductShuffle`
+- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
 
-### E2 Treatment Planning / Tracking / Performance
+### Files Modified
 
-| # | Product | Company | File |
-|---|---------|---------|------|
-| 29 | RayStation ML Dose Prediction | RaySearch | treatment-planning/raysearch-planning.ts |
-| 30 | Oncospace | Sun Nuclear | treatment-planning/sun-nuclear.ts |
-| 31 | Synchrony | Accuray | tracking/accuray.ts |
-| 32 | PerFRACTION / SunCHECK | Sun Nuclear/Varian | performance-monitor/varian.ts |
-
-## Search Strategy
-
-For each product:
-1. Search PubMed: `"[product name]" OR "[company name]" AND radiotherapy/radiology`
-2. Search Google Scholar for recent (2024-2026) citing papers
-3. Check company websites for newly published studies
-4. Cross-reference existing evidence entries with actual DOI links
-
-## Update Rules
-
-- **Add new publications**: Append to `evidence` array, ordered by relevance (independent multi-center first)
-- **Upgrade E2 to E3**: If multiple independent multi-center/multi-national studies with prospective design found
-- **Fix broken/weak links**: Replace LinkedIn or non-DOI links with actual publication DOIs where possible (e.g., OncoStudio)
-- **Update study quality flags**: `evidenceMultiCenter`, `evidenceVendorIndependent`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`
-- **Update notes**: Refresh `evidenceRigorNotes` and `clinicalImpactNotes` with new findings
-- **No downgrade**: If existing evidence can't be verified via PubMed, note "unable to verify" but don't downgrade without clear reason
-
-## Implementation Approach
-
-Process products in batches by category:
-1. **Batch 1**: E3 products (5 products) -- highest priority verification
-2. **Batch 2**: E2 auto-contouring (13 products)
-3. **Batch 3**: E2 reconstruction + image enhancement (10 products)
-4. **Batch 4**: E2 treatment planning, tracking, performance (4 products)
-
-Each batch updates evidence arrays, rigor levels/notes, and quality flags in the corresponding product data files.
-
-## Files Modified
-
-~20-30 product data files in `src/data/products/` across all categories. No UI changes needed (expandable evidence UI already implemented).
-
+- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
+- `src/components/ProductGrid.tsx` — swap to new hook
