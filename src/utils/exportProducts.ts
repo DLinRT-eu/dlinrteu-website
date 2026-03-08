@@ -57,6 +57,15 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     "Developed By", "Developed By Relationship", "Part Of", "Part Of Relationship",
     "Uses AI", "Development Stage",
     "Dose Prediction Models",
+    "Training Data Description", "Training Dataset Size", "Training Dataset Sources",
+    "Training Demographics", "Training Scanner Models", "Training Institutions",
+    "Training Countries", "Training Public Datasets", "Training Disclosure Level",
+    "Training Data Source", "Training Data Source URL",
+    "Evaluation Description", "Evaluation Dataset Size", "Evaluation Sites",
+    "Evaluation Countries", "Evaluation Demographics", "Evaluation Study Design",
+    "Evaluation Primary Endpoint", "Evaluation Results",
+    "Evaluation Source", "Evaluation Source URL",
+    "Safety Corrective Actions",
     "Compatible Systems", "Training Required", "Support Email",
     "Last Updated", "Last Revised", "Source"
   ];
@@ -77,6 +86,18 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
   const formatDoseModels = (models: any[] | undefined): string => {
     if (!models || models.length === 0) return "";
     return models.map(m => `${m.name} [${m.anatomicalSite}/${m.technique}]`).join("; ");
+  };
+
+  // Helper to format safety corrective actions
+  const formatFSCAs = (actions: any[] | undefined): string => {
+    if (!actions || actions.length === 0) return "";
+    return actions.map(a => {
+      let s = `${a.type}: ${a.description}`;
+      if (a.identifier) s += ` [${a.identifier}]`;
+      if (a.authority) s += ` (${a.authority})`;
+      if (a.status) s += ` — ${a.status}`;
+      return s;
+    }).join("; ");
   };
 
   // Helper to format supported structures (handles both string[] and object[])
@@ -158,6 +179,28 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.usesAI),
     escapeValueForCsv(product.developmentStage),
     escapeValueForCsv(formatDoseModels(product.dosePredictionModels)),
+    escapeValueForCsv(product.trainingData?.description),
+    escapeValueForCsv(product.trainingData?.datasetSize),
+    escapeValueForCsv(product.trainingData?.datasetSources),
+    escapeValueForCsv(product.trainingData?.demographics),
+    escapeValueForCsv(product.trainingData?.scannerModels),
+    escapeValueForCsv(product.trainingData?.institutions),
+    escapeValueForCsv(product.trainingData?.countries),
+    escapeValueForCsv(product.trainingData?.publicDatasets),
+    escapeValueForCsv(product.trainingData?.disclosureLevel),
+    escapeValueForCsv(product.trainingData?.source),
+    escapeValueForCsv(product.trainingData?.sourceUrl),
+    escapeValueForCsv(product.evaluationData?.description),
+    escapeValueForCsv(product.evaluationData?.datasetSize),
+    escapeValueForCsv(product.evaluationData?.sites),
+    escapeValueForCsv(product.evaluationData?.countries),
+    escapeValueForCsv(product.evaluationData?.demographics),
+    escapeValueForCsv(product.evaluationData?.studyDesign),
+    escapeValueForCsv(product.evaluationData?.primaryEndpoint),
+    escapeValueForCsv(product.evaluationData?.results),
+    escapeValueForCsv(product.evaluationData?.source),
+    escapeValueForCsv(product.evaluationData?.sourceUrl),
+    escapeValueForCsv(formatFSCAs(product.safetyCorrectiveActions)),
     escapeValueForCsv(product.compatibleSystems),
     escapeValueForCsv(product.trainingRequired),
     escapeValueForCsv(product.supportEmail),

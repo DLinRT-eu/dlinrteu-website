@@ -75,4 +75,34 @@ export interface ModelCardData {
     compliance: string;
     details: string;
   };
+  trainingData: {
+    description: string;
+    datasetSize: string;
+    datasetSources: string;
+    demographics: string;
+    scannerModels: string;
+    institutions: string;
+    countries: string;
+    publicDatasets: string;
+    disclosureLevel: string;
+    source: string;
+    sourceUrl: string;
+  };
+  evaluationData: {
+    description: string;
+    datasetSize: string;
+    sites: string;
+    countries: string;
+    demographics: string;
+    studyDesign: string;
+    primaryEndpoint: string;
+    results: string;
+    source: string;
+    sourceUrl: string;
+  };
+  safetyCorrectiveActions: {
+    count: number;
+    summary: string;
+    details: string;
+  };
 }

@@ -508,6 +508,91 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
     });
   }
 
+  // Training dataset metadata
+  if (product.trainingData) {
+    const td = product.trainingData;
+    if (td.datasetSize) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "training-dataset-size", display: "Training Dataset Size" }] },
+        valueString: [td.datasetSize]
+      });
+    }
+    if (td.datasetSources && td.datasetSources.length > 0) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "training-dataset-sources", display: "Training Dataset Sources" }] },
+        valueString: td.datasetSources
+      });
+    }
+    if (td.institutions) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "training-institutions-count", display: "Training Institutions" }] },
+        valueString: [td.institutions.toString()]
+      });
+    }
+    if (td.disclosureLevel) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "training-data-disclosure-level", display: "Training Data Disclosure Level" }] },
+        valueString: [td.disclosureLevel]
+      });
+    }
+    if (td.source) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "training-data-source", display: "Training Data Source" }] },
+        valueString: [td.source]
+      });
+    }
+  }
+
+  // Clinical evaluation dataset metadata
+  if (product.evaluationData) {
+    const ed = product.evaluationData;
+    if (ed.datasetSize) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "evaluation-dataset-size", display: "Evaluation Dataset Size" }] },
+        valueString: [ed.datasetSize]
+      });
+    }
+    if (ed.studyDesign) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "evaluation-study-design", display: "Evaluation Study Design" }] },
+        valueString: [ed.studyDesign]
+      });
+    }
+    if (ed.primaryEndpoint) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "evaluation-primary-endpoint", display: "Primary Endpoint" }] },
+        valueString: [ed.primaryEndpoint]
+      });
+    }
+    if (ed.source) {
+      properties.push({
+        type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: "evaluation-data-source", display: "Evaluation Data Source" }] },
+        valueString: [ed.source]
+      });
+    }
+  }
+
+  // Safety Corrective Actions (FSCA / Recalls)
+  if (product.safetyCorrectiveActions && product.safetyCorrectiveActions.length > 0) {
+    const fscaTexts = product.safetyCorrectiveActions.map(a => {
+      let s = `[${a.date}] ${a.type}: ${a.description}`;
+      if (a.identifier) s += ` (${a.identifier})`;
+      if (a.authority) s += ` — ${a.authority}`;
+      if (a.status) s += ` [${a.status}]`;
+      return s;
+    });
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "safety-corrective-actions",
+          display: "Field Safety Corrective Actions / Recalls"
+        }]
+      },
+      valueString: fscaTexts
+    });
+  }
+
   return properties;
 }
 
