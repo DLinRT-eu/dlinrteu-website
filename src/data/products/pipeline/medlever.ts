@@ -36,8 +36,8 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
       relationship: "Feature"
     },
     usesAI: true,
-    lastUpdated: "2026-01-29",
-    lastRevised: "2026-01-29",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website - listed as 'Coming Soon'"
   },
   {
