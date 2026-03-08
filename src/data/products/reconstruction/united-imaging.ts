@@ -127,7 +127,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "No independent peer-reviewed publications found. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
