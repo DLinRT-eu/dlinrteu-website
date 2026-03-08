@@ -201,6 +201,54 @@ const RegulatoryLandscape = () => {
           </a>
         </CardContent>
       </Card>
+
+      {/* General-Purpose AI Governance */}
+      <Card className="bg-primary/5 border-primary/20 lg:col-span-2">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-xl font-semibold text-foreground">
+              General-Purpose AI (GPAI) Governance
+            </CardTitle>
+            <Badge variant="outline">AI Act Chapter V</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            The EU AI Act's <strong>Chapter V</strong> introduces obligations for providers of general-purpose AI models, including transparency, copyright compliance, and systemic risk assessment. The International AI Safety Report 2025 (Bengio et al.), commissioned by AI Safety Summit governments, provides the scientific foundation for GPAI risk evaluation. Complementary benchmarks — the Stanford AI Index and the MIT AI Agent Index — track deployment trends and safety features of frontier AI systems.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a 
+              href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2025"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>AI Safety Report 2025</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a 
+              href="https://hai.stanford.edu/ai-index/2025-ai-index-report"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Stanford AI Index 2025</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a 
+              href="https://aiagentindex.mit.edu/"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>MIT AI Agent Index</span>
+            </a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

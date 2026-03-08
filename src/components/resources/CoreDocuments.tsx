@@ -138,11 +138,32 @@ const CoreDocuments = () => {
       badge: "Academic",
       documents: [
         {
-          title: "WHO Ethics and Governance of AI for Health",
+      title: "WHO Ethics and Governance of AI for Health",
           description: "Best practices for ethical AI development in healthcare",
           url: "https://www.who.int/publications/i/item/9789240029200",
           type: "Research",
           reference: "[14]"
+        },
+        {
+          title: "Stanford AI Index Report 2025",
+          description: "8th annual report from Stanford HAI on global AI trends, policy, and governance",
+          url: "https://hai.stanford.edu/ai-index/2025-ai-index-report",
+          type: "Annual Report",
+          reference: "[15]"
+        },
+        {
+          title: "The 2025 AI Agent Index (MIT)",
+          description: "Benchmark of 30 deployed agentic AI systems: capabilities, safety features, and risks",
+          url: "https://aiagentindex.mit.edu/",
+          type: "Research",
+          reference: "[16]"
+        },
+        {
+          title: "International AI Safety Report 2025",
+          description: "Multi-government report (Bengio et al.) on general-purpose AI risks and safeguards",
+          url: "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2025",
+          type: "Safety Report",
+          reference: "[17]"
         }
       ]
     }
@@ -228,7 +249,7 @@ const CoreDocuments = () => {
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <p className="text-sm text-muted-foreground">
-            <strong>Note:</strong> Reference numbers [1] through [14] correspond to the footnote-style citations in the regulatory guidance. 
+            <strong>Note:</strong> Reference numbers [1] through [17] correspond to the footnote-style citations in the regulatory guidance. 
             These documents represent the core starting points for understanding regulatory requirements for AI in medical devices.
           </p>
         </CardContent>
