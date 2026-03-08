@@ -52,6 +52,7 @@ const Changelog = lazy(() => import("./pages/Changelog"));
 const Roles = lazy(() => import("./pages/Roles"));
 const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
 const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
+const NotificationSettings = lazy(() => import("./pages/NotificationSettings"));
 const EvidenceImpactGuide = lazy(() => import("./pages/EvidenceImpactGuide"));
 const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
