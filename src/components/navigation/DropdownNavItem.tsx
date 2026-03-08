@@ -10,11 +10,11 @@ import {
 
 interface DropdownNavItemProps {
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   items: Array<{
     label: string;
     to: string;
-    icon: LucideIcon;
+    icon?: LucideIcon;
   }>;
   className?: string;
 }
