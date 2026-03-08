@@ -142,7 +142,9 @@ const App = () => (
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="dashboard-home" element={
                   <ProtectedRoute requireAuth={true}>
-                    <Dashboard_Authenticated />
+                    <ApprovalGate>
+                      <Dashboard_Authenticated />
+                    </ApprovalGate>
                   </ProtectedRoute>
                 } />
                 <Route path="timeline" element={<Timeline />} />
