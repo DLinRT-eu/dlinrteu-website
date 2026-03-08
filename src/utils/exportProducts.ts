@@ -35,18 +35,28 @@ const escapeValueForCsv = (value: any): string => {
 export const exportProductsToCSV = (products: ProductDetails[]) => {
   // Define comprehensive headers for all product data
   const headers = [
-    "ID", "Name", "Company", "Category", "Description", "Features",
+    "ID", "Name", "Company", "Category", "Secondary Categories", "Description", "Features",
     "Subspeciality", "Modality", "Anatomical Location", "Disease Targeted", 
     "Key Features", "Suggested Use", "Supported Structures", 
     "Technical Population", "Technical Input", "Technical Input Format",
     "Technical Output", "Technical Output Format",
     "Integration Methods", "Deployment Options", "Trigger For Analysis", "Processing Time",
     "CE Status", "CE Class", "CE Type", "CE Certificate Number", "CE Regulation Number",
-    "FDA Status", "FDA Clearance Number", "FDA Regulation Number", "FDA Product Code", "Intended Use Statement",
+    "FDA Status", "FDA Clearance Number", "FDA Regulation Number", "FDA Product Code",
+    "TGA Status", "TGA Notes",
+    "TFDA Status", "TFDA Approval Number", "TFDA Decision Date",
+    "Intended Use Statement",
     "Market Since", "Distribution Channels",
     "Pricing Model", "Pricing Based On",
     "Release Date", "Version", "Website", "Company URL", "Product URL", "GitHub URL",
     "Clinical Evidence", "Evidence", "Limitations",
+    "Evidence Rigor", "Evidence Rigor Notes", "Clinical Impact", "Clinical Impact Notes",
+    "Evidence Vendor Independent", "Evidence Multi-Center", "Evidence Multi-National",
+    "Evidence Prospective", "Evidence External Validation",
+    "Guidelines",
+    "Developed By", "Developed By Relationship", "Part Of", "Part Of Relationship",
+    "Uses AI", "Development Stage",
+    "Dose Prediction Models",
     "Compatible Systems", "Training Required", "Support Email",
     "Last Updated", "Last Revised", "Source"
   ];
