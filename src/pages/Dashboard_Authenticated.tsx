@@ -40,6 +40,8 @@ export default function Dashboard_Authenticated() {
   const { user, profile } = useAuth();
   const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { data: prData } = useGitHubPRCount(isAdmin);
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const getRoleDescription = () => {
     if (activeRole === 'admin') {
