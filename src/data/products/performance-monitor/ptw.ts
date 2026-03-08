@@ -74,7 +74,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024).",
     clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-03-08",
     source: "Automatically retrieved and revised"
   }
 ];

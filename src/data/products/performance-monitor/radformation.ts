@@ -64,15 +64,22 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Published TG-275 compliance automation studies. Limited indexed publications specific to ClearCheck.",
+    evidenceRigorNotes: "Published TG-275 compliance automation studies. Simiele et al. Front Oncol 2025 (ClearCheck in total marrow lymphoid irradiation workflow). PubMed verified 2026-03-08.",
     clinicalImpactNotes: "QA/monitoring tool for automated plan checking and structure validation.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
-    source: "Radformation official website"
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Simiele et al. Automated contouring and QA for total marrow lymphoid irradiation using Radformation tools. Front Oncol 2025",
+        link: "https://doi.org/10.3389/fonc.2025.1500941"
+      }
+    ],
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "Radformation official website, PubMed"
   }
 ];

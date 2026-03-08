@@ -93,7 +93,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     contactEmail: "info@mvision.ai",
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "10 PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries), Podobnik et al. Sci Rep 2025 (3-system H&N comparison), Tang et al. Clin Transl Radiat Oncol 2025 (breast target volumes), Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes), Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Doolan et al. Front Oncol 2023 (5-system comparison, 80 patients). PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "11+ PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries), HARMONY study (npj Digital Medicine 2025, 7 clinics, 4 countries), Podobnik et al. Sci Rep 2025 (3-system H&N comparison), Tang et al. Clin Transl Radiat Oncol 2025 (breast target volumes), Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes), Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Doolan et al. Front Oncol 2023 (5-system comparison, 80 patients). Ng et al. Information 2025 systematic review of commercial DL auto-segmentation. PubMed verified 2026-03-08.",
     clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
@@ -104,6 +104,11 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       {
         type: "Peer-reviewed Publication",
         description: "Pang et al. Multicentre evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312",
+        link: "https://doi.org/10.1038/s41746-025-01624-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "HARMONY study: Multi-institutional evaluation of AI auto-segmentation for H&N (7 clinics, 4 countries). npj Digital Medicine 2025",
         link: "https://doi.org/10.1038/s41746-025-01624-z"
       },
       {
@@ -130,12 +135,17 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Performance evaluation in gastric MALT lymphoma segmentation (DSC 0.92-0.99). Rep Pract Oncol Radiother",
         link: "https://doi.org/10.5603/rpor.104144"
+      },
+      {
+        type: "Systematic Review",
+        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025",
+        link: "https://doi.org/10.3390/info16010001"
       }
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2025-12-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K241490), company official sources"
   }
 ];
