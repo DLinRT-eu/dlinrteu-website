@@ -1,71 +1,92 @@
-# Daily-Stable Random Sorting for Products and Company 
-
-## Problem
-
-Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
-
-## Alternatives Considered
 
 
-| Approach                                                     | Pros                                                         | Cons                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
-| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
-| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
-| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
+# Newsletter, Email & Notification System Audit
 
+## Data Findings
 
-**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
+- **95 total subscribers**, earliest Dec 12 2025, latest Jan 30 2026 — **zero new subscriptions in over 5 weeks**
+- All recent entries appear to be a bulk import (same second-level timestamps, many with `first_name: "Subscriber"` and empty `last_name`)
+- **No edge function logs exist** for `subscribe-newsletter`, `send-contact-email`, `notify-user-approval`, `send-deadline-reminders`, or even `track-analytics` — this strongly suggests **edge functions may not be deployed** or logs have expired
 
-## Implementation
+## Issues Found
 
-### 1. Add a seeded PRNG to `useProductSorting.ts`
+### Critical: Edge Functions Likely Not Deployed
 
-Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
+No logs exist for ANY of the 25 edge functions, including `track-analytics` which fires on every page view. This means either:
+- Functions were never deployed after recent code changes
+- Or Supabase log retention cleared old logs and no new invocations occurred
 
-- Computes a seed from today's date string (`"2026-03-05"`)
-- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
-- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
+**Fix**: Redeploy all edge functions. Add a health-check test to verify deployment.
 
-```typescript
-function mulberry32(seed: number) {
-  return function() {
-    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+### Critical: CORS Blocks Lovable Preview Testing
 
-function dateToSeed(dateStr: string): number {
-  let hash = 0;
-  for (let i = 0; i < dateStr.length; i++) {
-    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-    hash |= 0;
-  }
-  return hash;
-}
+All public-facing edge functions (`subscribe-newsletter`, `send-contact-email`) only allow origins `dlinrt.eu`, `www.dlinrt.eu`, `localhost:5173`, `localhost:3000`. The Lovable preview URL (`*.lovable.app`) is missing. This means:
+- Newsletter signups from the preview silently fail
+- Contact form submissions from the preview silently fail
 
-export const useDailyProductShuffle = (products: ProductDetails[]) => {
-  const today = new Date().toISOString().slice(0, 10);
-  return useMemo(() => {
-    const rng = mulberry32(dateToSeed(today));
-    const arr = [...products];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rng() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }, [products, today]);
-};
+**Fix**: Add `*.lovable.app` to the CORS allowlist in all public edge functions, or better yet, create a shared CORS utility.
+
+### High: CORS Configuration Is Inconsistent Across Functions
+
+| Function | CORS Strategy |
+|----------|--------------|
+| `subscribe-newsletter` | Dynamic allowlist (4 origins) |
+| `send-contact-email` | Dynamic allowlist (4 origins) |
+| `notify-user-approval` | Hardcoded `https://dlinrt.eu` only |
+| `send-deadline-reminders` | Wildcard `*` |
+| `notify-user-registration` | Not visible but likely inconsistent |
+
+**Fix**: Standardize all functions to use the same dynamic CORS allowlist including `lovable.app`.
+
+### High: Notification Preferences Are Saved But Never Consulted
+
+The `NotificationPreferences` component saves granular per-category email/in-app preferences to `profiles.notification_preferences`, but **none of the email-sending edge functions** (`notify-user-approval`, `send-deadline-reminders`, `notify-reviewer-assignment`, `notify-role-request-outcome`) read this field before sending. Preferences are stored but completely ignored.
+
+**Fix**: Update email-sending functions to check `notification_preferences.categories.<relevant_category>.email` before sending. This requires each function to query the user's profile and respect their settings.
+
+### Medium: Resend SDK Version Mismatch
+
+- `subscribe-newsletter`, `notify-user-approval`, `send-deadline-reminders`: use `resend@2.0.0` via `esm.sh`
+- `notify-user-registration`: uses `resend@4.0.0` via `npm:` specifier
+
+Different versions may have different API behaviors. Standardize to one version.
+
+### Low: MailingListSignupCompact Is Orphaned
+
+`MailingListSignupCompact.tsx` is defined but never imported or used anywhere. It also has a bug: it sends `lastName: ''` which would be rejected by the edge function's validation (`!lastName?.trim()` evaluates to `true` for empty strings).
+
+**Fix**: Remove the orphaned file, or fix the validation and wire it into the Footer.
+
+### Low: MFA Implementation Looks Functional
+
+MFA enrollment, verification, unenrollment, and backup codes all use Supabase Auth's native TOTP MFA API correctly. The `verify-backup-code` and `store-backup-code` edge functions exist. No code-level issues found — but can't verify runtime behavior without logs.
+
+---
+
+## Proposed Fix Plan
+
+| # | Task | Severity |
+|---|------|----------|
+| 1 | Redeploy all edge functions and verify they're live | Critical |
+| 2 | Standardize CORS across all public edge functions — add `lovable.app` and create shared allowlist | Critical |
+| 3 | Standardize Resend SDK to `npm:resend@4.0.0` across all functions | High |
+| 4 | Update email-sending functions to respect `notification_preferences` | High |
+| 5 | Remove orphaned `MailingListSignupCompact.tsx` | Low |
+
+### Implementation Details
+
+**Task 2 — Shared CORS**: Create a pattern where all public functions use the same origin list:
+```
+dlinrt.eu, www.dlinrt.eu, *.lovable.app (preview + published), localhost:5173, localhost:3000
 ```
 
-### 2. Update `ProductGrid.tsx`
+**Task 3 — Resend upgrade**: Update all `import { Resend } from "https://esm.sh/resend@2.0.0"` to `import { Resend } from "npm:resend@4.0.0"` across: `subscribe-newsletter`, `send-contact-email`, `notify-user-approval`, `send-deadline-reminders`, `notify-reviewer-assignment`, `notify-role-request-outcome`, `send-certification-reminder`, `invite-reviewer`, `admin-newsletter-management`, `unsubscribe-newsletter`.
 
-- Import `useDailyProductShuffle` instead of `useProductShuffle`
-- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
+**Task 4 — Notification preferences**: Each email function will query the target user's `profiles.notification_preferences` and check the relevant category before sending. Map: `notify-reviewer-assignment` → `review_assignments`, `send-deadline-reminders` → `review_deadlines`, `notify-user-approval` → `registration_updates`, `notify-role-request-outcome` → `registration_updates`.
 
-### Files Modified
+### Scope
+- ~12 edge functions updated (CORS + Resend version)
+- 4 edge functions updated for notification preference checks
+- 1 orphaned file deleted
+- All functions redeployed
 
-- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
-- `src/components/ProductGrid.tsx` — swap to new hook
