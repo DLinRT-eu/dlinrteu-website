@@ -45,7 +45,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
               to={item.to}
               className="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full"
             >
-              <item.icon className="w-4 h-4 mr-2" />
+              {item.icon && <item.icon className="w-4 h-4 mr-2" />}
               {item.label}
             </Link>
           </DropdownMenuItem>
