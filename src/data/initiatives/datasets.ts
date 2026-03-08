@@ -177,7 +177,7 @@ export const DATASET_INITIATIVES: Initiative[] = [
     name: "HNC-IMRT-70-33",
     category: "Open Dataset",
     description: "Head and neck cancer dataset with patients treated using identical IMRT prescriptions (70Gy in 33 fractions), enabling standardized treatment planning research.",
-    website: "https://www.cancerimagingarchive.net/",
+    website: "https://www.cancerimagingarchive.net/collection/hnc-imrt-70-33/",
     organization: "The Cancer Imaging Archive",
     status: "Active",
     tags: ["Head and Neck Cancer", "IMRT", "CT", "Radiotherapy", "Treatment Planning", "Standardized Protocol"],
