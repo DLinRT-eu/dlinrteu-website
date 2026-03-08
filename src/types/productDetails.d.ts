@@ -149,20 +149,63 @@ export interface ProductDetails extends Product {
   
   // Version evolution tracking (for product line relationships)
   priorVersions?: Array<{
-    productId?: string;      // ID of prior version in database (if exists)
-    name: string;            // Prior version name
-    fdaClearance?: string;   // FDA clearance number
-    notes?: string;          // What changed
+    productId?: string;
+    name: string;
+    fdaClearance?: string;
+    notes?: string;
   }>;
-  supersededBy?: string;     // Product ID of newer version
+  supersededBy?: string;
   
   // New field for dose prediction models (for Treatment Planning products)
   dosePredictionModels?: Array<{
-    name: string;                    // Model name (e.g., "H&N VMAT")
-    anatomicalSite: string;          // Target anatomy (e.g., "Head & Neck")
-    technique: string;               // Treatment technique (e.g., "VMAT", "PBS")
-    intent?: string;                 // Curative, Palliative, SBRT
-    description?: string;            // Brief description
+    name: string;
+    anatomicalSite: string;
+    technique: string;
+    intent?: string;
+    description?: string;
     status?: 'approved' | 'investigational';
+  }>;
+
+  // Training dataset metadata (transparency reporting)
+  trainingData?: {
+    description?: string;
+    datasetSize?: string;
+    datasetSources?: string[];
+    demographics?: string;
+    scannerModels?: string[];
+    institutions?: number;
+    countries?: number;
+    publicDatasets?: string[];
+    disclosureLevel?: 'full' | 'partial' | 'minimal' | 'none';
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Clinical evaluation dataset metadata
+  evaluationData?: {
+    description?: string;
+    datasetSize?: string;
+    sites?: number;
+    countries?: number;
+    demographics?: string;
+    studyDesign?: string;
+    primaryEndpoint?: string;
+    results?: string;
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Field Safety Corrective Actions / Recalls
+  safetyCorrectiveActions?: Array<{
+    type: 'recall' | 'FSCA' | 'advisory' | 'software-update';
+    classification?: string;
+    identifier?: string;
+    date: string;
+    status?: 'open' | 'closed' | 'terminated';
+    description: string;
+    affectedVersions?: string[];
+    action?: string;
+    authority: string;
+    sourceUrl?: string;
   }>;
 }

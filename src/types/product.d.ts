@@ -121,4 +121,47 @@ export interface Product {
     productUrl?: string;       // URL to parent product info
     relationship?: string;     // e.g., "Module", "Feature", "Add-on", "Component"
   };
+
+  // Training dataset metadata (transparency reporting)
+  trainingData?: {
+    description?: string;
+    datasetSize?: string;
+    datasetSources?: string[];
+    demographics?: string;
+    scannerModels?: string[];
+    institutions?: number;
+    countries?: number;
+    publicDatasets?: string[];
+    disclosureLevel?: 'full' | 'partial' | 'minimal' | 'none';
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Clinical evaluation dataset metadata
+  evaluationData?: {
+    description?: string;
+    datasetSize?: string;
+    sites?: number;
+    countries?: number;
+    demographics?: string;
+    studyDesign?: string;
+    primaryEndpoint?: string;
+    results?: string;
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Field Safety Corrective Actions / Recalls
+  safetyCorrectiveActions?: Array<{
+    type: 'recall' | 'FSCA' | 'advisory' | 'software-update';
+    classification?: string;
+    identifier?: string;
+    date: string;
+    status?: 'open' | 'closed' | 'terminated';
+    description: string;
+    affectedVersions?: string[];
+    action?: string;
+    authority: string;
+    sourceUrl?: string;
+  }>;
 }

@@ -121,6 +121,41 @@ export function generateMedicalDeviceSchema(product: ProductDetails): MedicalDev
     });
   }
 
+  // Training data transparency
+  if (product.trainingData?.disclosureLevel) {
+    additionalProps.push({
+      "@type": "PropertyValue",
+      name: "Training Data Disclosure Level",
+      value: product.trainingData.disclosureLevel,
+    });
+  }
+  if (product.trainingData?.datasetSize) {
+    additionalProps.push({
+      "@type": "PropertyValue",
+      name: "Training Dataset Size",
+      value: product.trainingData.datasetSize,
+    });
+  }
+
+  // Evaluation data
+  if (product.evaluationData?.studyDesign) {
+    additionalProps.push({
+      "@type": "PropertyValue",
+      name: "Clinical Evaluation Study Design",
+      value: product.evaluationData.studyDesign,
+    });
+  }
+
+  // Safety corrective actions count
+  if (product.safetyCorrectiveActions && product.safetyCorrectiveActions.length > 0) {
+    const openCount = product.safetyCorrectiveActions.filter(a => a.status === 'open').length;
+    additionalProps.push({
+      "@type": "PropertyValue",
+      name: "Safety Corrective Actions",
+      value: `${product.safetyCorrectiveActions.length} total, ${openCount} open`,
+    });
+  }
+
   if (additionalProps.length > 0) {
     schema.additionalProperty = additionalProps;
   }

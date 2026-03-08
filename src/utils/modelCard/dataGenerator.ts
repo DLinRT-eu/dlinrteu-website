@@ -200,5 +200,46 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       githubUrl: product.githubUrl || "N/A",
     },
     guidelines: guidelinesData,
+    trainingData: {
+      description: product.trainingData?.description || "N/A",
+      datasetSize: product.trainingData?.datasetSize || "N/A",
+      datasetSources: formatArray(product.trainingData?.datasetSources),
+      demographics: product.trainingData?.demographics || "N/A",
+      scannerModels: formatArray(product.trainingData?.scannerModels),
+      institutions: product.trainingData?.institutions?.toString() || "N/A",
+      countries: product.trainingData?.countries?.toString() || "N/A",
+      publicDatasets: formatArray(product.trainingData?.publicDatasets),
+      disclosureLevel: product.trainingData?.disclosureLevel || "N/A",
+      source: product.trainingData?.source || "N/A",
+      sourceUrl: product.trainingData?.sourceUrl || "N/A",
+    },
+    evaluationData: {
+      description: product.evaluationData?.description || "N/A",
+      datasetSize: product.evaluationData?.datasetSize || "N/A",
+      sites: product.evaluationData?.sites?.toString() || "N/A",
+      countries: product.evaluationData?.countries?.toString() || "N/A",
+      demographics: product.evaluationData?.demographics || "N/A",
+      studyDesign: product.evaluationData?.studyDesign || "N/A",
+      primaryEndpoint: product.evaluationData?.primaryEndpoint || "N/A",
+      results: product.evaluationData?.results || "N/A",
+      source: product.evaluationData?.source || "N/A",
+      sourceUrl: product.evaluationData?.sourceUrl || "N/A",
+    },
+    safetyCorrectiveActions: {
+      count: product.safetyCorrectiveActions?.length || 0,
+      summary: product.safetyCorrectiveActions && product.safetyCorrectiveActions.length > 0
+        ? `${product.safetyCorrectiveActions.length} action(s): ${product.safetyCorrectiveActions.filter(a => a.status === 'open').length} open, ${product.safetyCorrectiveActions.filter(a => a.status === 'closed').length} closed`
+        : "No safety corrective actions reported",
+      details: product.safetyCorrectiveActions && product.safetyCorrectiveActions.length > 0
+        ? product.safetyCorrectiveActions.map(a => {
+            let s = `[${a.date}] ${a.type.toUpperCase()}: ${a.description}`;
+            if (a.identifier) s += ` (${a.identifier})`;
+            if (a.authority) s += ` — ${a.authority}`;
+            if (a.status) s += ` [${a.status}]`;
+            if (a.affectedVersions?.length) s += ` Affected: ${a.affectedVersions.join(", ")}`;
+            return s;
+          }).join("; ")
+        : "N/A",
+    },
   };
 };
