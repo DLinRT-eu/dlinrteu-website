@@ -74,8 +74,8 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
-    lastUpdated: "2026-02-26",
-    lastRevised: "2026-02-26",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website, peer-reviewed publications",
     evidence: [
       {

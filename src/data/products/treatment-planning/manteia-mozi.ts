@@ -73,8 +73,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K223724), manufacturer official website",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [

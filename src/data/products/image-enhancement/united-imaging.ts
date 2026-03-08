@@ -62,8 +62,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "No independent peer-reviewed publications found. CE marked but limited external validation. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
     clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website"
 
   }

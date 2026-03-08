@@ -108,5 +108,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://rpa.mdanderson.org/publications"
       }
     ],
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
   },
 ];
