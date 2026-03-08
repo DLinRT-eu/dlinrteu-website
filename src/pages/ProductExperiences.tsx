@@ -50,13 +50,13 @@ export default function ProductExperiences() {
   useEffect(() => {
     if (authLoading) return;
     
-    if (!user || (!isAdmin && !isReviewer)) {
+    if (!user || (!hasAdminRole && !hasReviewerRole && !hasCompanyRole)) {
       navigate('/auth');
       return;
     }
 
     fetchExperiences();
-  }, [user, isAdmin, isReviewer, authLoading, productId, navigate]);
+  }, [user, hasAdminRole, hasReviewerRole, hasCompanyRole, authLoading, productId, navigate]);
 
   const fetchExperiences = async () => {
     if (!productId) return;

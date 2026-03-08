@@ -310,7 +310,7 @@ export function PendingStatsWidget({ isAdmin, isReviewer, isCompany }: PendingSt
               </Card>
             </Link>
 
-            <Link to="/company/revisions">
+            <Link to="/company/dashboard">
               <Card className="hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-green-500">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">

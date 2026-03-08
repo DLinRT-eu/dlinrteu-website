@@ -125,6 +125,13 @@ export default function Dashboard_Authenticated() {
         color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
       },
       {
+        title: 'Edit Approvals',
+        description: 'Review product edit submissions',
+        icon: FilePenLine,
+        link: '/admin/edit-approvals',
+        color: 'bg-cyan-50 text-cyan-600 hover:bg-cyan-100'
+      },
+      {
         title: 'Pull Requests',
         description: 'Review and prioritize open PRs',
         icon: GitMerge,

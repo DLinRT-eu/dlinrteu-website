@@ -162,7 +162,7 @@ export function RoleQuickActions({ isAdmin, isReviewer, isCompany }: RoleQuickAc
                 </Link>
               </Button>
               <Button asChild variant="outline" className="justify-start">
-                <Link to="/company/revisions">
+                <Link to="/company/dashboard">
                   <FileText className="h-4 w-4 mr-2" />
                   Submit Revision
                 </Link>

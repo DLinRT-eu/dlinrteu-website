@@ -337,7 +337,11 @@ const App = () => (
                     <CompanyGuide />
                   </ProtectedRoute>
                 } />
-                <Route path="/company/certification" element={<CompanyCertification />} />
+                <Route path="/company/certification" element={
+                  <ProtectedRoute allowedRoles={['company', 'admin']}>
+                    <CompanyCertification />
+                  </ProtectedRoute>
+                } />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
