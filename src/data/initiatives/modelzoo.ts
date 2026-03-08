@@ -41,50 +41,41 @@ export const MODEL_ZOO_INITIATIVES: Initiative[] = [
     participationInfo: "Open to all researchers and developers"
   },
   {
-    id: "totalsegmentator",
-    name: "TotalSegmentator",
+    id: "nvidia-clara-medical",
+    name: "NVIDIA Clara Medical (Open Models)",
     category: "Model Zoo",
-    description: "Open-source deep learning tool for robust segmentation of 100+ anatomical structures in CT and MRI images. Widely used as foundation for radiotherapy OAR segmentation.",
-    website: "https://github.com/wasserth/TotalSegmentator",
-    organization: "University Hospital Basel / University of Basel",
+    description: "A collection of open medical AI models on Hugging Face from NVIDIA's Clara initiative, including segmentation models for CT and MR (VISTA3D-based), synthetic image generation models, and clinical reasoning models. Segment models are directly applicable to radiotherapy OAR and tumor segmentation.",
+    website: "https://huggingface.co/collections/nvidia/clara-medical",
+    organization: "NVIDIA",
     status: "Active",
-    tags: ["CT", "MRI", "Segmentation", "Organs at Risk", "nnU-Net", "Open Source"],
+    tags: ["Segmentation", "CT", "MRI", "Synthetic Imaging", "Organs at Risk", "Hugging Face"],
     features: [
-      "117 anatomical structures in CT",
-      "59 structures in MRI",
-      "nnU-Net-based architecture",
-      "Python package and Docker available",
-      "Validated on clinical data"
+      "NV-Segment-CT (VISTA3D) for CT segmentation",
+      "NV-Segment-CTMR for cross-modality segmentation",
+      "NV-Generate-CT and NV-Generate-MR for synthetic imaging",
+      "Open weights on Hugging Face",
+      "Actively maintained and updated"
     ],
-    dataAccess: "Freely available on GitHub and PyPI",
-    participationInfo: "Open source under Apache 2.0 license"
+    dataAccess: "Freely available on Hugging Face",
+    participationInfo: "Open access under NVIDIA's open model licenses"
   },
   {
-    id: "nnu-net",
-    name: "nnU-Net",
+    id: "mshub",
+    name: "MSHub (Medical Image Segmentation Hub)",
     category: "Model Zoo",
-    description: "Self-configuring deep learning framework for medical image segmentation that automatically adapts to any new dataset. Foundation for many radiotherapy AI models and challenge winners.",
-    website: "https://github.com/MIC-DKFZ/nnUNet",
-    organization: "German Cancer Research Center (DKFZ)",
+    description: "A growing collection of pre-trained nnU-Net models for medical image segmentation, covering tumor and lymph node segmentation tasks relevant to radiotherapy planning. Provides ready-to-use model weights that can be directly applied without retraining.",
+    website: "https://github.com/Luoxd1996/MSHub",
+    organization: "Medical Imaging Research Community",
     status: "Active",
-    tags: ["Segmentation", "Deep Learning", "Self-Configuring", "Open Source", "Medical Imaging"],
+    tags: ["Segmentation", "nnU-Net", "Tumor", "Lymph Nodes", "Open Source"],
     features: [
-      "Automatic hyperparameter tuning",
-      "2D, 3D, and cascade configurations",
-      "State-of-the-art performance",
-      "Extensive documentation",
-      "Active community support"
+      "Pre-trained nnU-Net model weights",
+      "Tumor segmentation models",
+      "Lymph node segmentation models",
+      "Direct inference without retraining",
+      "Apache 2.0 license"
     ],
     dataAccess: "Freely available on GitHub",
-    participationInfo: "Open source under Apache 2.0 license",
-    relatedPublications: [
-      {
-        title: "nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation",
-        url: "https://doi.org/10.1038/s41592-020-01008-z",
-        authors: "F. Isensee et al.",
-        year: "2021"
-      }
-    ]
+    participationInfo: "Open source under Apache 2.0 license; early-stage but actively growing"
   }
 ];
-
