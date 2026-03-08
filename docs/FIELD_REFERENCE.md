@@ -317,9 +317,9 @@ These fields are used when company representatives certify product information:
 
 ---
 
-## Healthcare Interoperability (FHIR Export)
+## Healthcare Interoperability (FHIR & Schema.org)
 
-Products can be exported in FHIR R4 DeviceDefinition format for healthcare system integration.
+Products can be exported in FHIR R4 DeviceDefinition format for healthcare system integration. Product pages also include Schema.org JSON-LD structured data for SEO.
 
 ### FHIR Resource Structure
 
@@ -328,6 +328,23 @@ Products can be exported in FHIR R4 DeviceDefinition format for healthcare syste
 | `DeviceDefinition` | Product data |
 | `Organization` | Company data |
 | `Bundle` | Container for all resources |
+
+### FHIR Property Mappings
+
+| DLinRT Field | FHIR Mapping |
+|--------------|--------------|
+| `modality` | DICOM modality codes (40+ codes) |
+| `anatomicalLocation` | SNOMED CT anatomy codes (60+ codes) |
+| `diseaseTargeted` | ICD-10 / SNOMED CT oncology codes |
+| `regulatory.fda.clearanceNumber` | FDA 510(k) identifiers |
+| `regulatory.ce.class` | EU MDR device class |
+| `regulatory.tga` | TGA approval identifiers |
+| `regulatory.tfda` | Taiwan FDA identifiers |
+| `evidenceRigor` / `clinicalImpact` | Custom DLinRT properties |
+| `trainingData` | Dataset metadata properties |
+| `evaluationData` | Clinical evaluation properties |
+| `safetyCorrectiveActions` | Safety notice extensions |
+| `supportedStructures` | Anatomical structure properties |
 
 ### FHIR Readiness Score
 
@@ -340,29 +357,16 @@ The system calculates a readiness score (0-4) based on terminology mappings:
 | Disease | Has ICD-10/SNOMED code mapping | 1 |
 | Regulatory | Has FDA/CE identifiers | 1 |
 
-**Labels**:
-- **0 points**: Limited - No standard terminology mappings
-- **1-2 points**: Fair - Partial mappings present
-- **3 points**: Good - Most mappings complete
-- **4 points**: Excellent - Full terminology and regulatory IDs
+**Labels**: 0 = Limited, 1-2 = Fair, 3 = Good, 4 = Excellent.
 
-### Terminology Mappings
+### Schema.org JSON-LD
 
-| Field | Standard | Code System |
-|-------|----------|-------------|
-| `modality` | DICOM | 40+ modality codes |
-| `anatomicalLocation` | SNOMED CT | 60+ anatomy codes |
-| `diseaseTargeted` | ICD-10 / SNOMED CT | Oncology conditions |
-| `regulatory.fda.clearanceNumber` | FDA | 510(k) identifiers |
-| `regulatory.ce.class` | EU MDR | Device class |
-
-### FHIR Export Options
-
-| Option | Purpose |
-|--------|---------|
-| Standard Export | FHIR R4 Bundle with DeviceDefinition resource |
-| Include Warnings Report | Download unmapped terminology report |
-| Readiness Indicator | Visual score (0-4) on product page |
+Product pages include structured `MedicalDevice` markup with:
+- Product name, manufacturer, description
+- Regulatory clearance information
+- Training data transparency level and disclosure metrics
+- Safety corrective action counts
+- Evidence classification data
 
 ### Accessing FHIR Export
 
@@ -375,4 +379,4 @@ The system calculates a readiness score (0-4) based on terminology mappings:
 
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: February 2, 2026
+**Last Updated**: March 8, 2026

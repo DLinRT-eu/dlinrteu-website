@@ -110,4 +110,4 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 
 ---
 
-**Last Updated**: February 2, 2026
+**Last Updated**: March 8, 2026

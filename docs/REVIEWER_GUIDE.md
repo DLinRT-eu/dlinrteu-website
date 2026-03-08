@@ -438,8 +438,8 @@ For developers and those who prefer traditional version control:
 - Company/manufacturer details
 - Product category (primary and secondary)
 - Description and key features
-- Regulatory status (CE, FDA, etc.)
-- **Evidence level classification** (always set this!)
+- Regulatory status (CE, FDA, TGA, TFDA)
+- **Evidence classification** (E0-E3 rigor + I0-I5 impact — always set this!)
 
 **Technical Details**:
 - Supported modalities
@@ -450,7 +450,16 @@ For developers and those who prefer traditional version control:
 **Evidence & Research**:
 - Clinical publications with links
 - Validation studies
-- Evidence level justification
+- Evidence classification justification
+
+**Data Transparency** (new):
+- Training data details (dataset size, sources, demographics, disclosure level)
+- Evaluation/clinical validation data (study design, endpoints, results)
+- Source and URL for all transparency claims
+
+**Safety & Corrective Actions** (new):
+- Check FDA Recalls, BfArM, MHRA, EUDAMED for FSCAs/recalls
+- Document identifier, authority, affected versions, status
 
 ---
 
