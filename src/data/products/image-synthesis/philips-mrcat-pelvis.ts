@@ -72,6 +72,20 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2025-12-12",
     lastRevised: "2026-01-02",
     source: "Company website",
-    clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy"
+    clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy",
+    evidence: [
+      {
+        type: "Multicenter Study",
+        description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of Magnetic Resonance Imaging-Only Prostate Treatment Planning Using Synthetic Computed Tomography Images. Int J Radiat Oncol Biol Phys 2020;108(5):1265-1275.",
+        link: "https://doi.org/10.1016/j.ijrobp.2020.07.027"
+      }
+    ],
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020) with multiple clinical sites. Additional clinical implementation studies support dosimetric equivalence.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric equivalence to CT-based planning for pelvic RT (MR-OPERA study).",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceExternalValidation: true
   }
 ];

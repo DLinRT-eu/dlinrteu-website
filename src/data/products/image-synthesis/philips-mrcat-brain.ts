@@ -72,6 +72,19 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2024-08-08",
     lastRevised: "2026-01-02",
     source: "Company website",
-    clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning"
+    clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
+    evidence: [
+      {
+        type: "Clinical Validation",
+        description: "Aljaafari et al. Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning. Tech Innov Patient Support Radiat Oncol 2025;35:100328. 93 patients, 572 CBCT registrations. PTV dose differences <0.4%, positioning within ±1mm/±1°.",
+        link: "https://doi.org/10.1016/j.tipsro.2025.100328"
+      }
+    ],
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Largest MRCAT Brain validation study to date.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025).",
+    evidenceVendorIndependent: true,
+    evidenceExternalValidation: true
   }
 ];
