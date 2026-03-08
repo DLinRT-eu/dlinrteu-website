@@ -142,7 +142,9 @@ const App = () => (
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="dashboard-home" element={
                   <ProtectedRoute requireAuth={true}>
-                    <Dashboard_Authenticated />
+                    <ApprovalGate>
+                      <Dashboard_Authenticated />
+                    </ApprovalGate>
                   </ProtectedRoute>
                 } />
                 <Route path="timeline" element={<Timeline />} />
@@ -335,7 +337,11 @@ const App = () => (
                     <CompanyGuide />
                   </ProtectedRoute>
                 } />
-                <Route path="/company/certification" element={<CompanyCertification />} />
+                <Route path="/company/certification" element={
+                  <ProtectedRoute allowedRoles={['company', 'admin']}>
+                    <CompanyCertification />
+                  </ProtectedRoute>
+                } />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>

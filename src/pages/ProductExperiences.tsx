@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useRoles } from '@/contexts/RoleContext';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -40,7 +41,8 @@ const RELATIONSHIP_LABELS: Record<string, string> = {
 
 export default function ProductExperiences() {
   const { productId } = useParams<{ productId: string }>();
-  const { user, isAdmin, isReviewer, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { hasAdminRole, hasReviewerRole, hasCompanyRole } = useRoles();
   const navigate = useNavigate();
   const [experiences, setExperiences] = useState<UserExperience[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,13 +50,13 @@ export default function ProductExperiences() {
   useEffect(() => {
     if (authLoading) return;
     
-    if (!user || (!isAdmin && !isReviewer)) {
+    if (!user || (!hasAdminRole && !hasReviewerRole && !hasCompanyRole)) {
       navigate('/auth');
       return;
     }
 
     fetchExperiences();
-  }, [user, isAdmin, isReviewer, authLoading, productId, navigate]);
+  }, [user, hasAdminRole, hasReviewerRole, hasCompanyRole, authLoading, productId, navigate]);
 
   const fetchExperiences = async () => {
     if (!productId) return;

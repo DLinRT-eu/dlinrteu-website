@@ -20,6 +20,9 @@ import UserRelationships from "./product/UserRelationships";
 import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
 import PartOfDetails from "./product/PartOfDetails";
 import FHIRExportSection from "./product/FHIRExportSection";
+import TrainingDataDetails from "./product/TrainingDataDetails";
+import EvaluationDataDetails from "./product/EvaluationDataDetails";
+import SafetyCorrectiveActionsDetails from "./product/SafetyCorrectiveActionsDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
 import { isInvestigationalProduct } from "@/utils/productFilters";
@@ -127,6 +130,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <DosePredictionModels models={product.dosePredictionModels} />
           )}
           
+          <TrainingDataDetails product={product} />
+          <EvaluationDataDetails product={product} />
+          <SafetyCorrectiveActionsDetails product={product} />
           <EvidenceLimitationsDetails product={product} />
           <GuidelinesDetails product={product} />
           <RegulatoryInformationDetails product={product} />

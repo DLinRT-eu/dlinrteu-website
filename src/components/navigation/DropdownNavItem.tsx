@@ -10,11 +10,11 @@ import {
 
 interface DropdownNavItemProps {
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   items: Array<{
     label: string;
     to: string;
-    icon: LucideIcon;
+    icon?: LucideIcon;
   }>;
   className?: string;
 }
@@ -29,7 +29,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={`flex items-center px-2 lg:px-3 xl:px-4 py-2 hover:text-white/90 transition-colors text-xs lg:text-sm xl:text-base ${className}`}>
-          <Icon className="w-4 h-4 mr-1 lg:mr-2" />
+          {Icon && <Icon className="w-4 h-4 mr-1 lg:mr-2" />}
           {label}
           <ChevronDown className="w-3 h-3 ml-1" />
         </button>
@@ -45,7 +45,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
               to={item.to}
               className="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full"
             >
-              <item.icon className="w-4 h-4 mr-2" />
+              {item.icon && <item.icon className="w-4 h-4 mr-2" />}
               {item.label}
             </Link>
           </DropdownMenuItem>

@@ -28,7 +28,8 @@ import {
   ClipboardCheck,
   BadgeCheck,
   Eye,
-  GitMerge
+  GitMerge,
+  FilePenLine
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
@@ -124,6 +125,13 @@ export default function Dashboard_Authenticated() {
         color: 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
       },
       {
+        title: 'Edit Approvals',
+        description: 'Review product edit submissions',
+        icon: FilePenLine,
+        link: '/admin/edit-approvals',
+        color: 'bg-cyan-50 text-cyan-600 hover:bg-cyan-100'
+      },
+      {
         title: 'Pull Requests',
         description: 'Review and prioritize open PRs',
         icon: GitMerge,
@@ -176,7 +184,7 @@ export default function Dashboard_Authenticated() {
         title: 'Submit Revision',
         description: 'Submit product revision for review',
         icon: FileCheck,
-        link: '/company/revisions',
+        link: '/company/dashboard',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
       },
       {

@@ -41,9 +41,9 @@ const Header = () => {
         
         {/* Desktop Navigation - Role-Based */}
         <nav className="hidden lg:flex items-center space-x-2">
+          {/* Role-specific links */}
           {isAdmin && (
             <>
-              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
               <Link to="/admin" className="px-3 py-2 hover:text-white/90 text-sm">Admin</Link>
               <Link to="/admin/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
               <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
@@ -52,24 +52,39 @@ const Header = () => {
           {isReviewer && !isAdmin && (
             <>
               <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
-              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
+              <Link to="/reviewer/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">My Assignments</Link>
             </>
           )}
           {isCompany && !isAdmin && !isReviewer && (
             <>
               <Link to="/company/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
               <Link to="/company/overview" className="px-3 py-2 hover:text-white/90 text-sm">Overview</Link>
-              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
             </>
           )}
+          {/* Common links for all users */}
+          <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
           {isRegularUser && (
             <>
-              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
               <Link to="/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
               <Link to="/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
               <Link to="/news" className="px-3 py-2 hover:text-white/90 text-sm">News</Link>
               <Link to="/resources-compliance" className="px-3 py-2 hover:text-white/90 text-sm">Resources & Compliance</Link>
               <Link to="/initiatives" className="px-3 py-2 hover:text-white/90 text-sm">Research & Initiatives</Link>
+            </>
+          )}
+          {!isRegularUser && (
+            <DropdownNavItem label="More" items={[
+              { to: '/companies', label: 'Companies' },
+              { to: '/dashboard', label: 'Analytics' },
+              { to: '/news', label: 'News' },
+              { to: '/resources-compliance', label: 'Resources & Compliance' },
+              { to: '/initiatives', label: 'Research & Initiatives' },
+              { to: '/about', label: 'About' },
+              { to: '/support', label: 'Support & Contact' },
+            ]} />
+          )}
+          {isRegularUser && (
+            <>
               <Link to="/about" className="px-3 py-2 hover:text-white/90 text-sm">About</Link>
               <Link to="/support" className="px-3 py-2 hover:text-white/90 text-sm">Support & Contact</Link>
             </>
