@@ -282,13 +282,15 @@ When using the in-browser visual editor, fields use specialized editor component
 ## Quick Checklist for Reviewers
 
 1. Confirm **core identity** fields (name, company, description, category).
-2. **Set evidence level** (0-6) - this is now prominently displayed.
+2. **Set evidence classification** (E0-E3 rigor + I0-I5 impact) — prominently displayed.
 3. Validate **modality, anatomy, supportedStructures** against current evidence.
 4. Update **versioning and dates** even if no other change is required.
-5. Verify **regulatory** claims with certificates or official databases.
+5. Verify **regulatory** claims with certificates or official databases (CE, FDA, TGA, TFDA).
 6. Ensure **contact & website links** are live.
 7. Record **evidence, limitations, and guidelines** when available.
-8. **Submit for review** via EditToolbar (or create GitHub PR if editing directly).
+8. Review **training data transparency** and **evaluation data** when disclosed.
+9. Check for **safety corrective actions** (FSCAs/recalls) in regulatory databases.
+10. **Submit for review** via EditToolbar (or create GitHub PR if editing directly).
 
 ---
 
