@@ -221,6 +221,11 @@ export default function NotificationHistory() {
             {notifications.length} total notifications ({unreadCount} unread)
           </p>
         </div>
+        <Button variant="outline" asChild>
+          <Link to="/notification-settings">
+            Notification Settings
+          </Link>
+        </Button>
       </div>
 
       <Card>
