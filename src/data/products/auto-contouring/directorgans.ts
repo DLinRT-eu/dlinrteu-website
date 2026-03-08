@@ -67,11 +67,73 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-05-25",
     lastUpdated: "2026-01-26",
     supportedStructures: [
-      "Brain structures",
-      "Head & Neck: Brainstem, Parotid (L/R), Spinal Cord, Mandible, Eyes, Optic structures",
-      "Thorax: Heart, Lungs (L/R), Esophagus, Cardiac substructures (advanced)",
-      "Abdomen: Liver, Kidneys (L/R), Spleen, Stomach, Bowel",
-      "Pelvis: Bladder, Rectum, Femoral Heads, Prostate"
+      // Brain
+      "Brain: Brain",
+      "Brain: Brainstem",
+      "Brain: Eye L",
+      "Brain: Eye R",
+      "Brain: Lens L",
+      "Brain: Lens R",
+      "Brain: Optic Chiasm",
+      "Brain: Optic Nerve L",
+      "Brain: Optic Nerve R",
+      "Brain: Pituitary",
+
+      // Head & Neck
+      "Head & Neck: Brainstem",
+      "Head & Neck: Parotid L",
+      "Head & Neck: Parotid R",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Mandible",
+      "Head & Neck: Eye L",
+      "Head & Neck: Eye R",
+      "Head & Neck: Optic Chiasm",
+      "Head & Neck: Optic Nerve L",
+      "Head & Neck: Optic Nerve R",
+      "Head & Neck: Submandibular Gland L",
+      "Head & Neck: Submandibular Gland R",
+      "Head & Neck: Cochlea L",
+      "Head & Neck: Cochlea R",
+      "Head & Neck: Larynx",
+
+      // Breast
+      "Breast: Breast L",
+      "Breast: Breast R",
+      "Breast: Heart",
+      "Breast: Lung L",
+      "Breast: Lung R",
+
+      // Thorax
+      "Thorax: Heart",
+      "Thorax: Lung L",
+      "Thorax: Lung R",
+      "Thorax: Esophagus",
+      "Thorax: Spinal Cord",
+      // Thorax - Cardiac Substructures (advanced)
+      "Thorax: Left Ventricle",
+      "Thorax: Right Ventricle",
+      "Thorax: Left Atrium",
+      "Thorax: Right Atrium",
+      "Thorax: LAD Coronary Artery",
+      // Thorax - Lung Substructures (advanced)
+      "Thorax: Trachea",
+      "Thorax: Bronchus L",
+      "Thorax: Bronchus R",
+
+      // Abdomen
+      "Abdomen: Liver",
+      "Abdomen: Kidney L",
+      "Abdomen: Kidney R",
+      "Abdomen: Spleen",
+      "Abdomen: Stomach",
+      "Abdomen: Bowel",
+
+      // Pelvis
+      "Pelvis: Bladder",
+      "Pelvis: Rectum",
+      "Pelvis: Femoral Head L",
+      "Pelvis: Femoral Head R",
+      "Pelvis: Prostate"
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",

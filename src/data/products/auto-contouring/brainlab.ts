@@ -127,13 +127,80 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
       deployment: ["On-premise"]
     },
     supportedStructures: [
-      "Cranial",
-      "Basal Ganglia",
-      "Head and Neck",
-      "Pelvic",
-      "Spine",
-      "Thoracic and Spine",
-      "Extracranial"
+      // Cranial
+      "Brain: Brain",
+      "Brain: Brainstem",
+      "Brain: Eye L",
+      "Brain: Eye R",
+      "Brain: Lens L",
+      "Brain: Lens R",
+      "Brain: Optic Chiasm",
+      "Brain: Optic Nerve L",
+      "Brain: Optic Nerve R",
+      "Brain: Pituitary",
+      "Brain: Cochlea L",
+      "Brain: Cochlea R",
+      "Brain: Hippocampus L",
+      "Brain: Hippocampus R",
+      "Brain: Temporal Lobe L",
+      "Brain: Temporal Lobe R",
+      "Brain: Cerebellum",
+
+      // Basal Ganglia
+      "Brain: Caudate L",
+      "Brain: Caudate R",
+      "Brain: Putamen L",
+      "Brain: Putamen R",
+      "Brain: Globus Pallidus L",
+      "Brain: Globus Pallidus R",
+      "Brain: Thalamus L",
+      "Brain: Thalamus R",
+
+      // Head and Neck
+      "Head & Neck: Brainstem",
+      "Head & Neck: Parotid L",
+      "Head & Neck: Parotid R",
+      "Head & Neck: Submandibular Gland L",
+      "Head & Neck: Submandibular Gland R",
+      "Head & Neck: Mandible",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Larynx",
+      "Head & Neck: Oral Cavity",
+      "Head & Neck: Pharyngeal Constrictor",
+      "Head & Neck: Thyroid",
+      "Head & Neck: Esophagus",
+      "Head & Neck: Cochlea L",
+      "Head & Neck: Cochlea R",
+
+      // Pelvic
+      "Pelvis: Bladder",
+      "Pelvis: Rectum",
+      "Pelvis: Femoral Head L",
+      "Pelvis: Femoral Head R",
+      "Pelvis: Prostate",
+      "Pelvis: Seminal Vesicle",
+      "Pelvis: Penile Bulb",
+      "Pelvis: Bowel Bag",
+
+      // Spine
+      "Spine: Spinal Cord",
+      "Spine: Spinal Canal",
+      "Spine: Vertebral Body",
+      "Spine: Kidney L",
+      "Spine: Kidney R",
+
+      // Thoracic and Spine
+      "Thorax: Heart",
+      "Thorax: Lung L",
+      "Thorax: Lung R",
+      "Thorax: Esophagus",
+      "Thorax: Spinal Cord",
+      "Thorax: Liver",
+      "Thorax: Kidney L",
+      "Thorax: Kidney R",
+
+      // Extracranial (via TheraPanacea Art-Plan integration)
+      "Extracranial: Full body OARs (via TheraPanacea integration) (unverified)"
     ],
     regulatory: {
       ce: {

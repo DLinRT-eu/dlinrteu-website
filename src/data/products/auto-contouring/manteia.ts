@@ -58,7 +58,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-09-15",
     lastUpdated: "2026-01-26",
     supportedStructures: [
-     // H&N Structures and elective nodes
+      // H&N Structures and elective nodes
       "Head & Neck: Eye_L",
       "Head & Neck: Eye_R",
       "Head & Neck: Lens_L",
@@ -139,33 +139,34 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Head & Neck: A_Carotid_R",
       "Head & Neck: BrachialPlex_L",
       "Head & Neck: BrachialPlex_R",
-      
-      "Thorax: Trachea",
-      "Thorax: Esophagus",
-      "Thorax: ThoracicSpine", 
 
       // Thorax Structures - OARs
       "Thorax: Heart",
-      "Thorax: Lung (L/R)",
+      "Thorax: Lung_L",
+      "Thorax: Lung_R",
       "Thorax: Esophagus",
       "Thorax: Trachea",
-      "Thorax: Brachial Plexus (L/R)",
+      "Thorax: BrachialPlex_L",
+      "Thorax: BrachialPlex_R",
       "Thorax: Aorta",
       "Thorax: Great Vessels",
       "Thorax: Proximal Bronchial Tree",
       "Thorax: Spinal Cord",
       "Thorax: Spinal Canal",
+      "Thorax: ThoracicSpine",
       "Thorax: Chest Wall",
-      "Thorax: Rib (L/R)",
-      
+      "Thorax: Rib_L",
+      "Thorax: Rib_R",
+
       // Thorax Target Structures
       "Thorax: GTV Lung",
       "Thorax: CTV Lung",
       "Thorax: PTV Lung",
-      
+
       // Abdomen Structures - OARs
       "Abdomen: Liver",
-      "Abdomen: Kidney (L/R)",
+      "Abdomen: Kidney_L",
+      "Abdomen: Kidney_R",
       "Abdomen: Stomach",
       "Abdomen: Pancreas",
       "Abdomen: Spleen",
@@ -173,27 +174,32 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Abdomen: Small Bowel",
       "Abdomen: Large Bowel",
       "Abdomen: Gallbladder",
-      "Abdomen: Adrenal Gland (L/R)",
-      
+      "Abdomen: Adrenal_L",
+      "Abdomen: Adrenal_R",
+
       // Pelvis Structures - OARs
       "Pelvis: Bladder",
       "Pelvis: Rectum",
       "Pelvis: Anal Canal",
       "Pelvis: Sigmoid Colon",
-      "Pelvis: Femoral Head (L/R)",
+      "Pelvis: Femur_L",
+      "Pelvis: Femur_R",
       "Pelvis: Bowel Bag",
       "Pelvis: Cauda Equina",
       "Pelvis: Sacrum",
-      "Pelvis: Iliac Crest (L/R)",
-      "Pelvis: Pelvic Bone (L/R)",
+      "Pelvis: Iliac Crest_L",
+      "Pelvis: Iliac Crest_R",
+      "Pelvis: Pelvic Bone_L",
+      "Pelvis: Pelvic Bone_R",
       "Pelvis: Prostate",
       "Pelvis: Seminal Vesicles",
       "Pelvis: Penile Bulb",
       "Pelvis: Urethra",
       "Pelvis: Uterus",
-      "Pelvis: Ovary (L/R)",
+      "Pelvis: Ovary_L",
+      "Pelvis: Ovary_R",
       "Pelvis: Vagina",
-      
+
       // Pelvis Target Structures - Prostate
       "Pelvis: GTV Prostate",
       "Pelvis: GTV Seminal Vesicle",
@@ -201,19 +207,19 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: CTV Prostate + SV",
       "Pelvis: CTV Pelvic Nodes",
       "Pelvis: PTV Prostate",
-      
+
       // Pelvis Target Structures - Gynecological
       "Pelvis: GTV Cervix",
       "Pelvis: CTV Cervix",
       "Pelvis: CTV Para-aortic Nodes"
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre evaluation. Sci Reports 2025 independent comparative study. JACMP 2025 multi-site evaluation. Phys Eng Sci Med 2024 multi-system comparison. Extensive independent evidence base.",
-    clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
+    evidenceRigorNotes: "Upgraded to E3: 5 independent peer-reviewed publications including npj Digital Medicine 2025 multi-centre evaluation across 7 countries, Sci Reports 2025 psychometric study, JACMP 2025 multi-site geometric/dosimetric evaluation, Phys Eng Sci Med 2024 7-system comparison, Front Oncol 2024 multi-center H&N validation. Meets E3 criteria: multi-center, multi-national, vendor-independent, externally validated.",
+    clinicalImpactNotes: "Multi-center validation studies across multiple countries demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
-    evidenceMultiNational: false,
+    evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
