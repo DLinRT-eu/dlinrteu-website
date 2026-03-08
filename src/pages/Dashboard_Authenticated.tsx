@@ -176,7 +176,7 @@ export default function Dashboard_Authenticated() {
         title: 'Submit Revision',
         description: 'Submit product revision for review',
         icon: FileCheck,
-        link: '/company/revisions',
+        link: '/company/dashboard',
         color: 'bg-green-50 text-green-600 hover:bg-green-100'
       },
       {
