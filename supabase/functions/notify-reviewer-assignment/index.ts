@@ -1,15 +1,23 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@2.0.0";
+import { Resend } from "npm:resend@4.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://dlinrt.eu",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Credentials": "true",
-};
+const ALLOWED_ORIGINS = [
+  "https://dlinrt.eu",
+  "https://www.dlinrt.eu",
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
+function getCorsHeaders(origin: string | null): HeadersInit {
+  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  };
+}
 
 interface NotificationRequest {
   reviewerId: string;
@@ -20,7 +28,9 @@ interface NotificationRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -30,15 +40,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Processing notification for reviewer:", reviewerId);
 
-    // Create Supabase client
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get reviewer details
+    // Get reviewer details including notification preferences
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
-      .select("email, first_name, last_name")
+      .select("email, first_name, last_name, notification_preferences")
       .eq("id", reviewerId)
       .single();
 
@@ -47,12 +56,22 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Reviewer not found");
     }
 
+    // Check notification preferences (review_assignments category)
+    const prefs = (profile.notification_preferences as any) || {};
+    const categoryPrefs = prefs?.categories?.review_assignments;
+    if (categoryPrefs?.email === false) {
+      console.log(`Reviewer ${reviewerId} has disabled email for review_assignments, skipping`);
+      return new Response(JSON.stringify({ 
+        success: true, 
+        skipped: true,
+        reason: 'User has disabled email notifications for review assignments'
+      }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
+    }
+
     console.log("Sending email to:", profile.email);
 
-    // Create dashboard URL
     const dashboardUrl = `${supabaseUrl.replace('.supabase.co', '')}/review`;
 
-    // Format deadline
     const deadlineText = deadline 
       ? new Date(deadline).toLocaleDateString('en-US', { 
           year: 'numeric', 
@@ -61,7 +80,6 @@ const handler = async (req: Request): Promise<Response> => {
         })
       : "No deadline set";
 
-    // Prepare product list (limit to first 5)
     const displayProducts = productNames.slice(0, 5);
     const hasMore = productNames.length > 5;
 
