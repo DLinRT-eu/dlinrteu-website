@@ -77,8 +77,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
 },
     version: "3.2",
     releaseDate: "2023-07-10",
-    lastUpdated: "2025-12-11",
-    lastRevised: "2026-01-18",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website",
     evidence: [
       {

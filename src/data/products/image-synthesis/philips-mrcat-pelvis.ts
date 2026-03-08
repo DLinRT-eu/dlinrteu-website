@@ -69,8 +69,8 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     },
     version: "Current",
     releaseDate: "2018",
-    lastUpdated: "2025-12-12",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website",
     clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy",
     evidence: [
