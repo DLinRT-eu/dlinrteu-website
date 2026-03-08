@@ -69,9 +69,9 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony fiducial tracking on Radixact X9 (2025). PMID:40600108 lung motion management case report (2025). PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose.",
-    evidenceVendorIndependent: false,
+    evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony fiducial tracking on Radixact X9 (2025). PMID:40600108 lung motion management case report (2025). Okada et al. Cureus 2025 liver tumor tracking. Lo Conte et al. Cureus 2025 prostate SBRT toxicity outcomes. PubMed verified 2026-03-08.",
+    clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
@@ -91,11 +91,21 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
         type: "Case Report",
         description: "Real-time motion management for small lung target with large tumor motion using Radixact Synchrony. PMID:40600108, 2025",
         link: "https://pubmed.ncbi.nlm.nih.gov/40600108/"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Okada et al. Liver tumor motion-tracking assessment with Synchrony on Radixact. Cureus 2025",
+        link: "https://doi.org/10.7759/cureus.81598"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lo Conte et al. Prostate SBRT toxicity outcomes with Synchrony motion tracking. Cureus 2025",
+        link: "https://doi.org/10.7759/cureus.85083"
       }
     ],
-    clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue.",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony.",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K182687), Accuray official website"
   }
 ];

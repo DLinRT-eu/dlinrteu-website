@@ -78,12 +78,24 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Platform product (2025). No independent publications. Evidence through integrated component clearances. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "Platform product (2025). No independent peer-reviewed publications. Evidence through integrated component clearances. Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08.",
+    clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions. Marengo CIMS case study reports 25% reduction in treatment planning times.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
+    evidence: [
+      {
+        type: "Case Study",
+        description: "Marengo CIMS case study: 25% reduction in treatment planning times with iRT platform integration. 2025",
+        link: "https://www.gehealthcare.com/specialties/oncology-solutions/intelligent-rt"
+      }
+    ],
     releaseDate: "2025-09-25",
-    lastUpdated: "2026-02-26",
-    lastRevised: "2026-02-26",
-    source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717.",
-    clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization."
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717. Marengo CIMS case study 2025.",
+    clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization. Marengo CIMS case study (2025) reports 25% reduction in treatment planning times."
   }
 ];

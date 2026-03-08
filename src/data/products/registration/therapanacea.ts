@@ -85,7 +85,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-03-08",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822)"
   }
 ];
