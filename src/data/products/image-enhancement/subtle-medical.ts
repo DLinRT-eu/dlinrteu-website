@@ -84,8 +84,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
