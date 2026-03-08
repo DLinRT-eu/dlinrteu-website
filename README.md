@@ -83,11 +83,14 @@ For complete examples, refer to the example templates in `src/data/products/exam
 - **Multi-Role System**: User, Reviewer, Company Representative, Admin roles
 - **Company Certifications**: Verified product certifications from manufacturers
 - **Review System**: Structured product review with assignment workflows
+- **Training Data Transparency**: Dataset size, demographics, disclosure level tracking per product
+- **FSCA/Recall Tracking**: Field Safety Corrective Actions and recalls from FDA, BfArM, MHRA, EUDAMED
 - **Compliance Resources**: Regulatory information and compliance checklists
 - **Research Initiatives**: Database of datasets, challenges, and model zoos
 - **User Tracking**: Track products you use or are evaluating
 - **Community Experiences**: Share and view product adoption experiences
-- **Healthcare Interoperability**: FHIR R4 export for hospital system integration
+- **Healthcare Interoperability**: FHIR R4 export with TGA/TFDA support, evidence classification, and Schema.org JSON-LD SEO
+- **Comprehensive Exports**: CSV with 23+ transparency and safety columns, FHIR R4 bundles, model cards
 - **GDPR Compliance**: Data export, anonymization, and consent management
 
 ## Backend & Database

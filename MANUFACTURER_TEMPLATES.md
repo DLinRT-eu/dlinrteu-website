@@ -49,6 +49,18 @@ Could you please verify or update the following information:
    - Recent clinical validations
    - Updated research references
 
+5. Training & Evaluation Data Transparency
+   - Training dataset size and composition
+   - Patient demographics (age, sex distribution)
+   - Number of institutions/countries contributing data
+   - Clinical evaluation study design and primary endpoints
+   - Public datasets used (if any)
+
+6. Safety History
+   - Any Field Safety Corrective Actions (FSCAs) or recalls
+   - Affected software versions and corrective actions taken
+   - References to official regulatory notices (FDA, BfArM, MHRA, etc.)
+
 Please review the attached product information sheet and indicate any necessary updates. A response within 5 business days would be greatly appreciated.
 
 Best regards,

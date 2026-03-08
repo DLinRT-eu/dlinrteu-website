@@ -216,6 +216,20 @@ const currentProduct: ProductDetails = {
 - `releaseDate`: Version release date
 - Consider separate entries for major versions
 
+### Training & Evaluation Data Transparency
+- `trainingData`: Dataset size, sources, demographics, scanner models, disclosure level, source URL
+- `evaluationData`: Study design, primary endpoint, results, sites, source URL
+- See [Field Reference](../FIELD_REFERENCE.md) for full sub-field documentation
+
+### Safety Corrective Actions
+- `safetyCorrectiveActions`: Array of recall/FSCA entries with type, identifier, authority, status, source URL
+- Check FDA Recalls, BfArM, MHRA, EUDAMED databases
+
+### Additional Fields
+- `developmentStage`: Product lifecycle (`"certified"`, `"pipeline"`, `"research"`, `"discontinued"`)
+- `dosePredictionModels`: Dose prediction capabilities (Treatment Planning products)
+- `priorVersions` / `supersededBy`: Version evolution tracking
+
 ## Example Templates
 
 See example implementations in:
@@ -288,4 +302,4 @@ In addition to the E0-E3 level, products can be tagged with study quality sub-at
 
 ---
 
-*Last Updated: January 28, 2026*
+*Last Updated: March 8, 2026*

@@ -362,20 +362,31 @@ Different fields have different editing experiences:
 | URL | Website, Product URL | URL input with validation |
 | Complex | Regulatory, Evidence, Guidelines | Specialized full-screen editors |
 
-#### Evidence Level Classification
+#### Evidence Level Classification (Dual-Axis System)
 
-Every product should have an evidence level assigned (0-6):
+Every product should have an evidence classification using the dual-axis framework:
+
+**Evidence Rigor (E0-E3)**:
 
 | Level | Name | When to Use |
 |-------|------|-------------|
-| 0 | No Evidence | FDA summary only, no peer review |
-| 1t | Technical | Reproducibility tests |
-| 1c | Potential Clinical | Correlation studies |
-| 2 | Stand-Alone Performance | Clinical dataset validation |
-| 3 | Workflow Efficacy | Time savings studies |
-| 4 | Treatment Decision | Plan impact studies |
-| 5 | Patient Outcome | Toxicity, survival data |
-| 6 | Societal | Health economics |
+| E0 | No Peer-Reviewed Evidence | Vendor materials, regulatory submissions only |
+| E1 | Preliminary Evidence | Single-center, small cohorts, pilot studies |
+| E2 | Validated Evidence | Multi-center (3+ sites), large prospective cohorts |
+| E3 | Systematic Evidence | Systematic reviews, meta-analyses, RCTs |
+
+**Clinical Impact (I0-I5)**:
+
+| Level | Name | When to Use |
+|-------|------|-------------|
+| I0 | None Demonstrated | Feasibility only, no benefit shown |
+| I1 | Quality Assurance | QA tools, monitoring, consistency checks |
+| I2 | Workflow | Time savings, variability reduction, dose reduction |
+| I3 | Decision | Changes in treatment management or plan selection |
+| I4 | Outcome | Toxicity reduction, survival, patient outcomes |
+| I5 | Societal | Cost-effectiveness, access to care |
+
+**Study Quality Sub-Attributes** (optional booleans): `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`.
 
 **The Evidence & Limitations card is now always visible** on every product page to encourage setting this important classification.
 
@@ -427,8 +438,8 @@ For developers and those who prefer traditional version control:
 - Company/manufacturer details
 - Product category (primary and secondary)
 - Description and key features
-- Regulatory status (CE, FDA, etc.)
-- **Evidence level classification** (always set this!)
+- Regulatory status (CE, FDA, TGA, TFDA)
+- **Evidence classification** (E0-E3 rigor + I0-I5 impact — always set this!)
 
 **Technical Details**:
 - Supported modalities
@@ -439,7 +450,16 @@ For developers and those who prefer traditional version control:
 **Evidence & Research**:
 - Clinical publications with links
 - Validation studies
-- Evidence level justification
+- Evidence classification justification
+
+**Data Transparency** (new):
+- Training data details (dataset size, sources, demographics, disclosure level)
+- Evaluation/clinical validation data (study design, endpoints, results)
+- Source and URL for all transparency claims
+
+**Safety & Corrective Actions** (new):
+- Check FDA Recalls, BfArM, MHRA, EUDAMED for FSCAs/recalls
+- Document identifier, authority, affected versions, status
 
 ---
 
