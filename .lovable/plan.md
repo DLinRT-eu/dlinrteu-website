@@ -1,57 +1,71 @@
+# Daily-Stable Random Sorting for Products and Company 
+
+## Problem
+
+Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
+
+## Alternatives Considered
 
 
-# Research Initiatives Audit & Model Zoo Expansion
+| Approach                                                     | Pros                                                         | Cons                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
+| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
+| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
+| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
 
-## Inclusion Criteria (to be stated on the page)
 
-### Grand Challenges
-- Must be a **competitive benchmark challenge** specifically targeting radiotherapy AI tasks (segmentation, treatment planning, image synthesis, tracking, dose prediction)
-- Must provide **standardized evaluation** and a public leaderboard or published results
-- Organized by recognized scientific bodies (MICCAI, ESTRO, AAPM, or equivalent)
+**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
 
-### Open Datasets
-- Must contain **radiotherapy-specific data** (RT structures, dose distributions, treatment plans) or imaging data explicitly intended for RT AI development
-- Must be **freely accessible** for research (with or without registration)
+## Implementation
 
-### Model Zoos
-- Must be a **collection of multiple pre-trained models** (not a single model or a training framework alone)
-- Must include models applicable to **medical imaging tasks relevant to radiotherapy** (segmentation, synthesis, reconstruction)
-- Must be **openly accessible** for research use
+### 1. Add a seeded PRNG to `useProductSorting.ts`
 
-## Audit Findings
+Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
 
-### Current Model Zoos — Issues
-1. **TotalSegmentator** — This is a **single model** (one architecture, one set of weights), not a model zoo. It violates the "collection of multiple models" criterion. **Recommend removal** from Model Zoos. It could be referenced in the page description as a notable open-source tool, but it is not a zoo.
-2. **nnU-Net** — This is a **framework/methodology**, not a model zoo. It does not host pre-trained models for download (users train their own). **Recommend removal** from Model Zoos for the same reason.
-3. **MHub.ai** — Valid. Curated collection of multiple containerized models for medical imaging.
-4. **MONAI Model Zoo** — Valid. Collection of 60+ pre-trained model bundles.
+- Computes a seed from today's date string (`"2026-03-05"`)
+- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
+- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
 
-### New Model Zoos to Add
-1. **NVIDIA Clara Medical (Open Models)** — Collection on Hugging Face with multiple open models: NV-Segment-CT (VISTA3D), NV-Segment-CTMR, NV-Generate-CT, NV-Generate-MR, NV-Reason-CXR. Segment models directly applicable to RT OAR segmentation; Generate models for synthetic CT/MR. Actively maintained (updated days ago). URL: `https://huggingface.co/collections/nvidia/clara-medical`
-2. **MSHub (Medical Image Segmentation Hub)** — Collection of pre-trained nnU-Net models for medical image segmentation, including tumor and lymph node segmentation tasks relevant to RT. Apache 2.0 license. URL: `https://github.com/Luoxd1996/MSHub`. Small but growing (23 stars). Include with caveat that it's early-stage.
+```typescript
+function mulberry32(seed: number) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
 
-### Challenges & Datasets — No Changes Needed
-- All 9 challenges verified as legitimate RT-specific challenges
-- All 10 datasets verified as RT-relevant with open access
-- No new major RT challenges identified that are missing (checked grand-challenge.org for recent RT challenges — current list is comprehensive)
+function dateToSeed(dateStr: string): number {
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
 
-## Planned Changes
+export const useDailyProductShuffle = (products: ProductDetails[]) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return useMemo(() => {
+    const rng = mulberry32(dateToSeed(today));
+    const arr = [...products];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [products, today]);
+};
+```
 
-### 1. Update `src/components/initiatives/InitiativesHeader.tsx`
-- Add a brief inclusion criteria statement beneath the existing description (collapsible or inline note)
+### 2. Update `ProductGrid.tsx`
 
-### 2. Update `src/data/initiatives/modelzoo.ts`
-- **Remove** TotalSegmentator (single model, not a zoo)
-- **Remove** nnU-Net (framework, not a zoo)
-- **Add** NVIDIA Clara Medical (Open Models)
-- **Add** MSHub
-- Keep MHub.ai and MONAI Model Zoo
+- Import `useDailyProductShuffle` instead of `useProductShuffle`
+- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
 
-### 3. No changes to challenges.ts or datasets.ts
+### Files Modified
 
-### Summary
-- 2 entries removed (TotalSegmentator, nnU-Net) for not meeting the "collection of multiple models" criterion
-- 2 entries added (NVIDIA Clara Medical, MSHub)
-- Inclusion criteria statement added to page header
-- Net model zoo count stays at 4
-
+- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
+- `src/components/ProductGrid.tsx` — swap to new hook
