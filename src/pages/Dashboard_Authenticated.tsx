@@ -30,7 +30,8 @@ import {
   BadgeCheck,
   Eye,
   GitMerge,
-  FilePenLine
+  FilePenLine,
+  Search
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
