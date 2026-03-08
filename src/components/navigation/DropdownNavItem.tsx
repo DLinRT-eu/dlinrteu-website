@@ -29,7 +29,7 @@ const DropdownNavItem: React.FC<DropdownNavItemProps> = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={`flex items-center px-2 lg:px-3 xl:px-4 py-2 hover:text-white/90 transition-colors text-xs lg:text-sm xl:text-base ${className}`}>
-          <Icon className="w-4 h-4 mr-1 lg:mr-2" />
+          {Icon && <Icon className="w-4 h-4 mr-1 lg:mr-2" />}
           {label}
           <ChevronDown className="w-3 h-3 ml-1" />
         </button>
