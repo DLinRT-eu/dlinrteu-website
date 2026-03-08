@@ -1,14 +1,23 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@2.0.0";
+import { Resend } from "npm:resend@4.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+const ALLOWED_ORIGINS = [
+  "https://dlinrt.eu",
+  "https://www.dlinrt.eu",
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
+function getCorsHeaders(origin: string | null): HeadersInit {
+  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  };
+}
 
 const SITE_URL = "https://dlinrt.eu";
 const INFO_EMAIL = "info@dlinrt.eu";
@@ -20,7 +29,6 @@ The certification portal is now open and we kindly invite you to review your com
 
 Your participation helps maintain the quality and reliability of our platform for the entire radiotherapy community.`;
 
-/** Convert plain-text body (with {FirstName}/{CompanyName} already substituted) into <p> blocks */
 function bodyToHtml(plainText: string): string {
   return plainText
     .split(/\n\n+/)
@@ -38,65 +46,28 @@ function buildHtml(bodyHtml: string, firstName: string, lastName: string): strin
         <title>Product Certification Program – DLinRT.eu</title>
       </head>
       <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-        
-        <!-- Header -->
         <div style="background: linear-gradient(135deg, #16a34a, #15803d); padding: 32px 30px; border-radius: 10px 10px 0 0; text-align: center;">
           <div style="font-size: 36px; margin-bottom: 8px;">🏆</div>
-          <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.3px;">
-            Product Certification Program
-          </h1>
-          <p style="color: #bbf7d0; margin: 8px 0 0; font-size: 14px;">
-            We Need Your Input
-          </p>
+          <h1 style="color: white; margin: 0; font-size: 22px; font-weight: 700;">Product Certification Program</h1>
+          <p style="color: #bbf7d0; margin: 8px 0 0; font-size: 14px;">We Need Your Input</p>
         </div>
-
-        <!-- Body -->
         <div style="background: #f9fafb; padding: 32px 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-
-          <p style="font-size: 16px; margin-top: 0; color: #111827;">
-            Dear <strong>${firstName} ${lastName}</strong>,
-          </p>
-
+          <p style="font-size: 16px; margin-top: 0; color: #111827;">Dear <strong>${firstName} ${lastName}</strong>,</p>
           ${bodyHtml}
-
-          <!-- Action Items -->
           <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px 24px; margin: 24px 0;">
-            <p style="font-weight: 600; color: #15803d; margin: 0 0 12px; font-size: 15px;">
-              We kindly ask you to:
-            </p>
+            <p style="font-weight: 600; color: #15803d; margin: 0 0 12px; font-size: 15px;">We kindly ask you to:</p>
             <ul style="margin: 0; padding-left: 0; list-style: none;">
-              <li style="padding: 6px 0; color: #374151; font-size: 14px;">
-                <span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>
-                Review your company's product listings for accuracy
-              </li>
-              <li style="padding: 6px 0; color: #374151; font-size: 14px;">
-                <span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>
-                Report anything that may be missing or incorrect
-              </li>
-              <li style="padding: 6px 0; color: #374151; font-size: 14px;">
-                <span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>
-                Certify your current product information when ready
-              </li>
+              <li style="padding: 6px 0; color: #374151; font-size: 14px;"><span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>Review your company's product listings for accuracy</li>
+              <li style="padding: 6px 0; color: #374151; font-size: 14px;"><span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>Report anything that may be missing or incorrect</li>
+              <li style="padding: 6px 0; color: #374151; font-size: 14px;"><span style="color: #16a34a; font-weight: bold; margin-right: 8px;">✓</span>Certify your current product information when ready</li>
             </ul>
           </div>
-
-          <!-- CTA Button -->
           <div style="text-align: center; margin: 32px 0;">
-            <a href="${SITE_URL}/company/overview"
-               style="display: inline-block; background: linear-gradient(135deg, #16a34a, #15803d); color: white; padding: 14px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(22, 163, 74, 0.25);">
-              Go to Company Overview →
-            </a>
+            <a href="${SITE_URL}/company/overview" style="display: inline-block; background: linear-gradient(135deg, #16a34a, #15803d); color: white; padding: 14px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">Go to Company Overview →</a>
           </div>
-
-          <!-- Footer -->
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
-            <p style="margin: 0 0 6px;">
-              <strong>Questions?</strong> Reply to this email or contact us at
-              <a href="mailto:${INFO_EMAIL}" style="color: #16a34a;">${INFO_EMAIL}</a>.
-            </p>
-            <p style="margin: 0; color: #9ca3af; font-size: 13px;">
-              — The DLinRT.eu Team
-            </p>
+            <p style="margin: 0 0 6px;"><strong>Questions?</strong> Reply to this email or contact us at <a href="mailto:${INFO_EMAIL}" style="color: #16a34a;">${INFO_EMAIL}</a>.</p>
+            <p style="margin: 0; color: #9ca3af; font-size: 13px;">— The DLinRT.eu Team</p>
           </div>
         </div>
       </body>
@@ -105,6 +76,9 @@ function buildHtml(bodyHtml: string, firstName: string, lastName: string): strin
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -122,7 +96,6 @@ const handler = async (req: Request): Promise<Response> => {
   const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-  // Verify the user is an authenticated admin
   const userClient = createClient(supabaseUrl, supabaseAnonKey, {
     global: { headers: { Authorization: authHeader } },
   });
@@ -152,7 +125,6 @@ const handler = async (req: Request): Promise<Response> => {
     );
   }
 
-  // Parse optional custom subject / body from request body
   let customSubject: string | undefined;
   let customBody: string | undefined;
   try {
@@ -160,34 +132,19 @@ const handler = async (req: Request): Promise<Response> => {
     customSubject = body?.customSubject || undefined;
     customBody = body?.customBody || undefined;
   } catch {
-    // no body or invalid JSON → use defaults
+    // no body or invalid JSON
   }
 
   try {
     console.log("Starting certification reminder email process...");
 
-    // Fetch all verified company reps (excluding admin oversight company and admin users)
     const { data: reps, error: repsError } = await adminClient
       .from("company_representatives")
-      .select(`
-        id,
-        company_name,
-        company_id,
-        position,
-        user_id,
-        profiles!inner (
-          first_name,
-          last_name,
-          email
-        )
-      `)
+      .select(`id, company_name, company_id, position, user_id, profiles!inner (first_name, last_name, email)`)
       .eq("verified", true)
       .neq("company_id", "admin_all_companies");
 
-    if (repsError) {
-      console.error("Error fetching company reps:", repsError);
-      throw new Error(`Failed to fetch representatives: ${repsError.message}`);
-    }
+    if (repsError) throw new Error(`Failed to fetch representatives: ${repsError.message}`);
 
     if (!reps || reps.length === 0) {
       return new Response(
@@ -196,18 +153,12 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Filter out users who have admin role
     const userIds = reps.map((r: any) => r.user_id);
-    const { data: adminRoles } = await adminClient
-      .from("user_roles")
-      .select("user_id")
-      .in("user_id", userIds)
-      .eq("role", "admin");
-
+    const { data: adminRoles } = await adminClient.from("user_roles").select("user_id").in("user_id", userIds).eq("role", "admin");
     const adminUserIds = new Set((adminRoles || []).map((r: any) => r.user_id));
     const targetReps = reps.filter((rep: any) => !adminUserIds.has(rep.user_id));
 
-    console.log(`Found ${targetReps.length} eligible representatives (excluded ${reps.length - targetReps.length} admins)`);
+    console.log(`Found ${targetReps.length} eligible representatives`);
 
     if (targetReps.length === 0) {
       return new Response(
@@ -230,19 +181,11 @@ const handler = async (req: Request): Promise<Response> => {
       const email = profile?.email;
       const companyName = rep.company_name;
 
-      if (!email) {
-        console.warn(`No email found for rep ${rep.id}, skipping`);
-        continue;
-      }
+      if (!email) continue;
 
-      // Substitute placeholders in body and subject
-      const personalizedBody = bodyTemplate
-        .replace(/\{FirstName\}/g, firstName)
-        .replace(/\{CompanyName\}/g, companyName);
-
+      const personalizedBody = bodyTemplate.replace(/\{FirstName\}/g, firstName).replace(/\{CompanyName\}/g, companyName);
       const subjectTemplate = customSubject || DEFAULT_SUBJECT;
       const personalizedSubject = subjectTemplate.replace(/\{CompanyName\}/g, companyName);
-
       const htmlContent = buildHtml(bodyToHtml(personalizedBody), firstName, lastName);
 
       try {
@@ -264,42 +207,25 @@ const handler = async (req: Request): Promise<Response> => {
       }
     }
 
-    // Persist log row (using service role — bypasses RLS)
     const companiesArray = Array.from(companiesContacted);
-    const { error: logError } = await adminClient
-      .from("certification_reminder_logs")
-      .insert({
-        sent_by: userData.user.id,
-        subject: customSubject || DEFAULT_SUBJECT,
-        message_body: bodyTemplate,
-        recipients: recipientsList,
-        emails_sent: emailsSent,
-        emails_failed: emailsFailed,
-        companies: companiesArray,
-      });
+    await adminClient.from("certification_reminder_logs").insert({
+      sent_by: userData.user.id,
+      subject: customSubject || DEFAULT_SUBJECT,
+      message_body: bodyTemplate,
+      recipients: recipientsList,
+      emails_sent: emailsSent,
+      emails_failed: emailsFailed,
+      companies: companiesArray,
+    });
 
-    if (logError) {
-      console.error("Failed to persist reminder log:", logError);
-    } else {
-      console.log("Reminder log persisted successfully");
-    }
-
-    const summary = {
+    return new Response(JSON.stringify({
       success: true,
       message: "Certification reminder emails sent",
-      emailsSent,
-      emailsFailed,
+      emailsSent, emailsFailed,
       companiesContacted: companiesContacted.size,
       companiesList: companiesArray,
       recipients: recipientsList,
-    };
-
-    console.log("Summary:", summary);
-
-    return new Response(JSON.stringify(summary), {
-      status: 200,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
+    }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
   } catch (error: any) {
     console.error("Error in send-certification-reminder function:", error);
     return new Response(

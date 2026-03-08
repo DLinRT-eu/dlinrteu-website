@@ -1,14 +1,23 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "https://esm.sh/resend@2.0.0";
+import { Resend } from "npm:resend@4.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://dlinrt.eu",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Credentials": "true",
-};
+const ALLOWED_ORIGINS = [
+  "https://dlinrt.eu",
+  "https://www.dlinrt.eu",
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
+function getCorsHeaders(origin: string | null): HeadersInit {
+  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  };
+}
 
 interface NotificationRequest {
   userId: string;
@@ -20,7 +29,9 @@ interface NotificationRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Handle CORS preflight requests
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -29,12 +40,10 @@ const handler = async (req: Request): Promise<Response> => {
   const authHeader = req.headers.get("Authorization");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   
-  // Check for service role key (for internal calls) — exact match, fails safely if env var missing
   const expectedBearer = `Bearer ${serviceRoleKey ?? ""}`;
   const isServiceRole = !!serviceRoleKey && authHeader === expectedBearer;
   
   if (!isServiceRole) {
-    // Verify the caller is an authenticated admin
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     
@@ -45,7 +54,6 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
     
-    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.39.3");
     const supabase = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } }
     });
@@ -60,7 +68,6 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
     
-    // Check if user is admin using service role
     const adminClient = createClient(supabaseUrl, serviceRoleKey!);
     const { data: roles } = await adminClient
       .from("user_roles")
@@ -80,6 +87,28 @@ const handler = async (req: Request): Promise<Response> => {
     const { userId, email, firstName, lastName, approved, rejectionReason }: NotificationRequest = await req.json();
 
     console.log(`Processing ${approved ? 'approval' : 'rejection'} notification for:`, email);
+
+    // Check notification preferences (registration_updates category)
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const { data: targetProfile } = await supabase
+      .from("profiles")
+      .select("notification_preferences")
+      .eq("id", userId)
+      .single();
+
+    const prefs = (targetProfile?.notification_preferences as any) || {};
+    const categoryPrefs = prefs?.categories?.registration_updates;
+    if (categoryPrefs?.email === false) {
+      console.log(`User ${userId} has disabled email for registration_updates, skipping`);
+      return new Response(JSON.stringify({ 
+        success: true, 
+        skipped: true,
+        reason: 'User has disabled email notifications for this category'
+      }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
+    }
 
     const siteUrl = "https://dlinrt.eu";
 
