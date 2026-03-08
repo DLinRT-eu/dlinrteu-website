@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductDetailsPage from '@/components/ProductDetails';
 import dataService from '@/services/DataService';
 import SEO from '@/components/SEO';
+import { generateMedicalDeviceSchema } from '@/utils/schemaOrg/medicalDeviceSchema';
 
 const ProductDetailsRoute = () => {
   const { id } = useParams();
@@ -21,17 +22,7 @@ const ProductDetailsRoute = () => {
     );
   }
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": product.name,
-    "description": product.description,
-    "brand": {
-      "@type": "Organization",
-      "name": product.company
-    },
-    "category": product.category
-  };
+  const structuredData = generateMedicalDeviceSchema(product);
 
   return (
     <>
