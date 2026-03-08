@@ -1,71 +1,85 @@
-# Daily-Stable Random Sorting for Products and Company 
-
-## Problem
-
-Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
-
-## Alternatives Considered
 
 
-| Approach                                                     | Pros                                                         | Cons                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
-| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
-| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
-| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
+# Documentation Consistency Audit
 
+## Issues Found
 
-**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
+### 1. FIELD_REFERENCE.md — Major gaps (most critical)
 
-## Implementation
+**Evidence system is WRONG**: Lines 100-121 still document the **old 0-6 linear scale** (`evidenceLevel`, `evidenceLevelNotes`). The codebase now uses the **dual-axis system** (`evidenceRigor` E0-E3, `clinicalImpact` I0-I5) with 5 study quality booleans. The review GUIDE.md was updated but FIELD_REFERENCE was not.
 
-### 1. Add a seeded PRNG to `useProductSorting.ts`
+**6 new field groups missing entirely**:
+- `trainingData` (dataset size, sources, demographics, disclosure level, scanner models)
+- `evaluationData` (study design, endpoints, results, sites)
+- `safetyCorrectiveActions` (recalls, FSCAs, advisories with authority/identifier)
+- `developmentStage` ("certified" | "pipeline" | "research" | "discontinued")
+- `priorVersions` / `supersededBy` (version evolution tracking)
+- `dosePredictionModels` (treatment planning specific)
 
-Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
+**FHIR section outdated**: Doesn't mention TGA/TFDA regulatory identifiers, evidence classification properties, supported structures mapping, or Schema.org JSON-LD.
 
-- Computes a seed from today's date string (`"2026-03-05"`)
-- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
-- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
+**TFDA regulatory field missing**: `regulatory.tfda` exists in types but is not documented.
 
-```typescript
-function mulberry32(seed: number) {
-  return function() {
-    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+### 2. REVIEWER_GUIDE.md — Wrong evidence table
 
-function dateToSeed(dateStr: string): number {
-  let hash = 0;
-  for (let i = 0; i < dateStr.length; i++) {
-    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-    hash |= 0;
-  }
-  return hash;
-}
+Lines 367-379 still show the old 0-6 evidence levels (Technical Efficacy, Stand-Alone Performance, etc.). Must be replaced with the dual-axis E0-E3 / I0-I5 tables.
 
-export const useDailyProductShuffle = (products: ProductDetails[]) => {
-  const today = new Date().toISOString().slice(0, 10);
-  return useMemo(() => {
-    const rng = mulberry32(dateToSeed(today));
-    const arr = [...products];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rng() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }, [products, today]);
-};
-```
+### 3. docs/review/GUIDE.md — Incomplete field requirements
 
-### 2. Update `ProductGrid.tsx`
+The dual-axis evidence section (lines 238-280) is correct, but the "Field Requirements" section (lines 198-217) is missing the new fields: `trainingData`, `evaluationData`, `safetyCorrectiveActions`, `developmentStage`, `dosePredictionModels`.
 
-- Import `useDailyProductShuffle` instead of `useProductShuffle`
-- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
+### 4. README.md — Missing new features
 
-### Files Modified
+The "Key Features" list (lines 80-91) doesn't mention:
+- Training data transparency reporting
+- FSCA/recall tracking
+- Schema.org SEO markup
+- Expanded FHIR export (TGA/TFDA, evidence, structures)
 
-- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
-- `src/components/ProductGrid.tsx` — swap to new hook
+### 5. DOCUMENTATION_LINKS.md — Incomplete interoperability section
+
+Lines 37-44 only mention FHIR. Should also reference Schema.org JSON-LD and the expanded FHIR coverage.
+
+### 6. MANUFACTURER_TEMPLATES.md — Missing transparency requests
+
+The verification request template doesn't ask manufacturers about training dataset information or known FSCAs/recalls, which are now tracked in the data model.
+
+---
+
+## Planned Changes
+
+### File 1: `docs/FIELD_REFERENCE.md`
+- Replace the old Evidence Level Classification section (lines 100-121) with dual-axis E0-E3/I0-I5 tables + study quality booleans
+- Add new section: "Training & Evaluation Data Transparency" documenting `trainingData` and `evaluationData`
+- Add new section: "Safety Corrective Actions" documenting `safetyCorrectiveActions`
+- Add `developmentStage`, `priorVersions`, `supersededBy`, `dosePredictionModels` to appropriate sections
+- Add `regulatory.tfda` to Regulatory table
+- Update FHIR section to mention TGA/TFDA identifiers, evidence properties, supported structures, and Schema.org
+- Update "Last Updated" date
+
+### File 2: `docs/REVIEWER_GUIDE.md`
+- Replace evidence level table (lines 367-379) with dual-axis E0-E3/I0-I5 tables
+- Add note about training data and FSCA fields to "What to Review" section
+- Update "Last Updated" date
+
+### File 3: `docs/review/GUIDE.md`
+- Add `trainingData`, `evaluationData`, `safetyCorrectiveActions`, `developmentStage`, `dosePredictionModels` to Field Requirements section
+- Update "Last Updated" date
+
+### File 4: `README.md`
+- Add to Key Features: training data transparency, FSCA tracking, Schema.org, expanded FHIR/CSV exports
+
+### File 5: `DOCUMENTATION_LINKS.md`
+- Add Schema.org JSON-LD and expanded export coverage to Healthcare Interoperability section
+- Add "Data Transparency" bullet mentioning training/evaluation datasets and FSCA tracking
+- Update "Last Updated" date
+
+### File 6: `MANUFACTURER_TEMPLATES.md`
+- Add section 5 to the Initial Verification Request template asking about training dataset details and any known FSCAs/recalls
+
+### Scope
+- 6 files updated
+- Evidence classification corrected in 2 files (FIELD_REFERENCE, REVIEWER_GUIDE)
+- ~8 new field definitions added to FIELD_REFERENCE
+- All "Last Updated" timestamps refreshed to March 2026
+
