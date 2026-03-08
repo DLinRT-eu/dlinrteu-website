@@ -234,9 +234,9 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
 "Pelvis (Female Lymph Nodes): LN Lomboartic (Gyneco)",
 "Pelvis (Female Lymph Nodes): LN Presacral (Gyneco)"
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Blinded prospective evaluation by Gregoire et al. 2020. Young et al. 2024 H&N blinded assessment. Kim et al. Phys Eng Sci Med 2024 (7-system comparison including Therapanacea, 42 cases). Lê et al. 2024 DECT evaluation. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Upgraded to E3: Prospective blinded evaluation (Gregoire et al. 2020), multi-center 5-system comparison (Doolan et al. 2023), multinational 7-system comparison (Kim et al. 2024), H&N DECT evaluation (Lê et al. 2024). Meets E3 criteria: multi-center, multi-national, vendor-independent, prospective, externally validated.",
     clinicalImpactNotes: "Blinded prospective study shows clinical acceptability and significant contouring time savings across multiple anatomical sites.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,

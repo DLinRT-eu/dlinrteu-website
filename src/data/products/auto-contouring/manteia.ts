@@ -207,13 +207,13 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: CTV Cervix",
       "Pelvis: CTV Para-aortic Nodes"
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). npj Digital Medicine 2025 multi-centre evaluation. Sci Reports 2025 independent comparative study. JACMP 2025 multi-site evaluation. Phys Eng Sci Med 2024 multi-system comparison. Extensive independent evidence base.",
-    clinicalImpactNotes: "Multi-center validation studies demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
+    evidenceRigorNotes: "Upgraded to E3: 5 independent peer-reviewed publications including npj Digital Medicine 2025 multi-centre evaluation across 7 countries, Sci Reports 2025 psychometric study, JACMP 2025 multi-site geometric/dosimetric evaluation, Phys Eng Sci Med 2024 7-system comparison, Front Oncol 2024 multi-center H&N validation. Meets E3 criteria: multi-center, multi-national, vendor-independent, externally validated.",
+    clinicalImpactNotes: "Multi-center validation studies across multiple countries demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
-    evidenceMultiNational: false,
+    evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
