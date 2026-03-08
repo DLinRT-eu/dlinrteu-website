@@ -63,7 +63,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "No independent peer-reviewed publications. Cleared as integrated system feature. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website"
 
   },
