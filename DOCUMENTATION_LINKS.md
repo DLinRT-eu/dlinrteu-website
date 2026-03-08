@@ -34,13 +34,24 @@ Comprehensive guide to all documentation for the DLinRT.eu platform.
 
 ---
 
-## Healthcare Interoperability
+## Healthcare Interoperability & Exports
 
 - **FHIR Export**: Available on product detail pages
   - FHIR R4 DeviceDefinition format
   - SNOMED CT and DICOM terminology mappings
   - ICD-10 disease code mappings
+  - TGA and TFDA regulatory identifiers
+  - Evidence classification and supported structures
   - Readiness scoring for data quality (0-4 scale)
+- **Schema.org JSON-LD**: Structured SEO markup on product pages (MedicalDevice schema)
+- **CSV Export**: 23+ columns including training data transparency and safety corrective actions
+
+## Data Transparency
+
+- **Training Data**: Dataset size, sources, demographics, scanner models, disclosure level per product
+- **Evaluation Data**: Clinical validation study design, endpoints, results, number of sites
+- **Safety Corrective Actions**: FSCA/recall tracking from FDA, BfArM, MHRA, EUDAMED, TGA
+- **Source Provenance**: Every transparency claim includes source and source URL
 
 ---
 
