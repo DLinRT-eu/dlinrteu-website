@@ -119,7 +119,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     name: "AAPM Thoracic Auto-Segmentation Challenge",
     category: "Grand Challenge",
     description: "Challenge for automatic segmentation of organs at risk in thoracic CT for radiotherapy planning. Associated dataset available on TCIA (AAPM-RT-MAC).",
-    website: "https://www.aapm.org/GrandChallenge/",
+    website: "https://www.aapm.org/GrandChallenge/SegTHOR/",
     organization: "American Association of Physicists in Medicine",
     startDate: "2017-01-01",
     endDate: "2017-07-30",
