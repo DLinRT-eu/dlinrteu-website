@@ -177,8 +177,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },

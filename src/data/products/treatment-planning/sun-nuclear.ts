@@ -89,8 +89,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K222803, K202284), Sun Nuclear official website",
     clinicalEvidence: "FDA 510(k) validation studies using 5,000+ treatment plans from Johns Hopkins University",
     evidence: [

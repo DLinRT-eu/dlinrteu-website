@@ -105,8 +105,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website"
   }
 ];

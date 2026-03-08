@@ -193,8 +193,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple clinical studies showing equivalent diagnostic quality with 30-50% reduced scan times across neurological, musculoskeletal, and body imaging",
-    lastUpdated: "2026-02-23", 
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08", 
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts"
   }

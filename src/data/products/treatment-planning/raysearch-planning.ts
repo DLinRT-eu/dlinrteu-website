@@ -97,19 +97,19 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
-    version: "2024B",
-    releaseDate: "2024-07-01",
+    version: "2025",
+    releaseDate: "2025-05-02",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction.",
+    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). RayStation v2025 with ECHO algorithm (MSK). PubMed verified 2026-03-08.",
+    clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction. ECHO algorithm integration further accelerates planning.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
     evidence: [
       {
@@ -131,6 +131,11 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         type: "RaySearch Publication",
         description: "Deep Learning Planning Model Catalogue",
         link: "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/"
+      },
+      {
+        type: "Product Release",
+        description: "RayStation v2025 with ECHO algorithm (Memorial Sloan Kettering) for fast automated planning. Released May 2025.",
+        link: "https://www.raysearchlabs.com/raystation-v2025/"
       }
     ],
     limitations: [

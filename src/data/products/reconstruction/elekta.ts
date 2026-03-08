@@ -87,8 +87,8 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }
