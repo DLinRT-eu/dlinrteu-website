@@ -121,6 +121,27 @@ const ResourceLinks = () => {
       icon: Shield,
       category: "AI/ML Guidelines"
     },
+    {
+      title: "Stanford AI Index Report 2025",
+      description: "8th annual report from Stanford HAI tracking AI trends, policy, governance, and societal impact worldwide",
+      url: "https://hai.stanford.edu/ai-index/2025-ai-index-report",
+      icon: BookOpen,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "The 2025 AI Agent Index (MIT)",
+      description: "MIT benchmark documenting technical capabilities and safety features of 30 deployed agentic AI systems",
+      url: "https://aiagentindex.mit.edu/",
+      icon: BookOpen,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "International AI Safety Report 2025",
+      description: "Multi-government commissioned report (Bengio et al.) on risks and safeguards for general-purpose AI",
+      url: "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2025",
+      icon: Shield,
+      category: "AI/ML Guidelines"
+    },
     
     // Professional Organizations
     {
