@@ -94,6 +94,29 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
   // Format guidelines data
   const guidelinesData = formatGuidelines(product.guidelines);
 
+  // Format dose prediction models
+  const doseModelsText = product.dosePredictionModels && product.dosePredictionModels.length > 0
+    ? product.dosePredictionModels.map(m => `${m.name} [${m.anatomicalSite}/${m.technique}]`).join("; ")
+    : "N/A";
+
+  // Format TGA details
+  const tgaDetails = product.regulatory?.tga
+    ? `${product.regulatory.tga.status}${product.regulatory.tga.notes ? ` — ${product.regulatory.tga.notes}` : ''}`
+    : "N/A";
+
+  // Format TFDA details
+  const tfdaDetails = product.regulatory?.tfda
+    ? `${product.regulatory.tfda.status}${product.regulatory.tfda.approvalNumber ? ` (${product.regulatory.tfda.approvalNumber})` : ''}`
+    : "N/A";
+
+  // Format partOf
+  const partOfText = product.partOf
+    ? `${product.partOf.name}${product.partOf.relationship ? ` (${product.partOf.relationship})` : ''}`
+    : "N/A";
+
+  // Format boolean as Yes/No/N/A
+  const boolStr = (val: boolean | undefined): string => val === true ? "Yes" : val === false ? "No" : "N/A";
+
   return {
     basicInfo: {
       productName: product.name || "N/A",
@@ -108,6 +131,9 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       lastUpdated: formatDate(product.lastUpdated),
       ceStatus: ceStatus,
       fdaStatus: fdaStatus,
+      usesAI: boolStr(product.usesAI),
+      developmentStage: product.developmentStage || "N/A",
+      partOf: partOfText,
     },
     keyFeatures: {
       features: keyFeatures,
@@ -136,6 +162,14 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       evidence: evidenceText,
       evidenceLevel: product.evidenceRigor ? `${product.evidenceRigor}/${product.clinicalImpact || 'N/A'}` : "N/A",
       evidenceLevelNotes: product.evidenceRigorNotes || product.clinicalImpactNotes || "N/A",
+      dosePredictionModels: doseModelsText,
+    },
+    studyQuality: {
+      vendorIndependent: boolStr(product.evidenceVendorIndependent),
+      multiCenter: boolStr(product.evidenceMultiCenter),
+      multiNational: boolStr(product.evidenceMultiNational),
+      prospective: boolStr(product.evidenceProspective),
+      externalValidation: boolStr(product.evidenceExternalValidation),
     },
     regulatory: {
       ceDetails: product.regulatory?.ce ? 
@@ -146,6 +180,8 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
         (typeof product.regulatory?.fda === 'object' ? 
          `${product.regulatory.fda.status}${product.regulatory.fda.clearanceNumber ? ` (${product.regulatory.fda.clearanceNumber})` : ''}` : 
          "N/A"),
+      tgaDetails: tgaDetails,
+      tfdaDetails: tfdaDetails,
       intendedUseStatement: product.regulatory?.intendedUseStatement || "N/A",
       marketPresence: product.market?.onMarketSince || "N/A",
     },

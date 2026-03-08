@@ -363,6 +363,151 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
     });
   }
 
+  // Evidence classification
+  if (product.evidenceRigor) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "evidence-rigor",
+          display: "Evidence Rigor Level"
+        }]
+      },
+      valueString: [product.evidenceRigor]
+    });
+  }
+
+  if (product.clinicalImpact) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "clinical-impact",
+          display: "Clinical Impact Level"
+        }]
+      },
+      valueString: [product.clinicalImpact]
+    });
+  }
+
+  // Study quality booleans
+  const studyQualityAttrs: Array<{ key: keyof ProductDetails; code: string; display: string }> = [
+    { key: "evidenceVendorIndependent", code: "evidence-vendor-independent", display: "Vendor-Independent Evidence" },
+    { key: "evidenceMultiCenter", code: "evidence-multi-center", display: "Multi-Center Evidence" },
+    { key: "evidenceMultiNational", code: "evidence-multi-national", display: "Multi-National Evidence" },
+    { key: "evidenceProspective", code: "evidence-prospective", display: "Prospective Study Design" },
+    { key: "evidenceExternalValidation", code: "evidence-external-validation", display: "External Validation" },
+  ];
+
+  for (const attr of studyQualityAttrs) {
+    if (product[attr.key] !== undefined) {
+      properties.push({
+        type: {
+          coding: [{
+            system: DLINRT_PROPERTIES_SYSTEM,
+            code: attr.code,
+            display: attr.display
+          }]
+        },
+        valueBoolean: [product[attr.key] as boolean]
+      });
+    }
+  }
+
+  // Supported structures as property
+  if (product.supportedStructures && product.supportedStructures.length > 0) {
+    const structureNames = product.supportedStructures.map(s =>
+      typeof s === 'string' ? s : (s as any).name || String(s)
+    );
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "supported-structures",
+          display: "Supported Structures"
+        }]
+      },
+      valueString: structureNames
+    });
+  }
+
+  // Technical specifications
+  if (product.technicalSpecifications?.inputFormat && product.technicalSpecifications.inputFormat.length > 0) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "input-format",
+          display: "Input Format"
+        }]
+      },
+      valueString: product.technicalSpecifications.inputFormat
+    });
+  }
+
+  if (product.technicalSpecifications?.outputFormat && product.technicalSpecifications.outputFormat.length > 0) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "output-format",
+          display: "Output Format"
+        }]
+      },
+      valueString: product.technicalSpecifications.outputFormat
+    });
+  }
+
+  if (product.technology?.processingTime) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "processing-time",
+          display: "Processing Time"
+        }]
+      },
+      valueString: [product.technology.processingTime]
+    });
+  }
+
+  // Guidelines as safety-related properties
+  if (product.guidelines && product.guidelines.length > 0) {
+    const guidelineTexts = product.guidelines.map(g => {
+      let text = g.name;
+      if (g.version) text += ` v${g.version}`;
+      if (g.compliance) text += ` (${g.compliance})`;
+      return text;
+    });
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "guidelines-compliance",
+          display: "Clinical Guidelines Compliance"
+        }]
+      },
+      valueString: guidelineTexts
+    });
+  }
+
+  // Dose prediction models
+  if (product.dosePredictionModels && product.dosePredictionModels.length > 0) {
+    const modelTexts = product.dosePredictionModels.map(m =>
+      `${m.name} [${m.anatomicalSite}/${m.technique}]`
+    );
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "dose-prediction-models",
+          display: "Dose Prediction Models"
+        }]
+      },
+      valueString: modelTexts
+    });
+  }
+
   return properties;
 }
 
@@ -394,6 +539,29 @@ function createRegulatoryIdentifiers(product: ProductDetails): FHIRRegulatoryIde
         deviceIdentifier: ce.certificateNumber,
         issuer: ce.notifiedBody || "http://ec.europa.eu/medical-devices",
         jurisdiction: "http://unstats.un.org/unsd/methods/m49/m49.htm#150" // Europe
+      });
+    }
+  }
+
+  // TGA (Australia)
+  if (product.regulatory?.tga && product.regulatory.tga.status) {
+    regulatoryIds.push({
+      type: "license",
+      deviceIdentifier: product.regulatory.tga.status,
+      issuer: "https://www.tga.gov.au",
+      jurisdiction: "http://unstats.un.org/unsd/methods/m49/m49.htm#036" // Australia
+    });
+  }
+
+  // TFDA (Taiwan)
+  if (product.regulatory?.tfda) {
+    const tfda = product.regulatory.tfda;
+    if (tfda.status && tfda.status !== "Not Cleared") {
+      regulatoryIds.push({
+        type: "license",
+        deviceIdentifier: tfda.approvalNumber || tfda.status,
+        issuer: "https://www.fda.gov.tw",
+        jurisdiction: "http://unstats.un.org/unsd/methods/m49/m49.htm#158" // Taiwan
       });
     }
   }

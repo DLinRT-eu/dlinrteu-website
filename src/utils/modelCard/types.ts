@@ -11,6 +11,9 @@ export interface ModelCardData {
     lastUpdated: string;
     ceStatus: string;
     fdaStatus: string;
+    usesAI: string;
+    developmentStage: string;
+    partOf: string;
   };
   keyFeatures: {
     features: string[];
@@ -37,10 +40,20 @@ export interface ModelCardData {
     evidence: string;
     evidenceLevel: string;
     evidenceLevelNotes: string;
+    dosePredictionModels: string;
+  };
+  studyQuality: {
+    vendorIndependent: string;
+    multiCenter: string;
+    multiNational: string;
+    prospective: string;
+    externalValidation: string;
   };
   regulatory: {
     ceDetails: string;
     fdaDetails: string;
+    tgaDetails: string;
+    tfdaDetails: string;
     intendedUseStatement: string;
     marketPresence: string;
   };
