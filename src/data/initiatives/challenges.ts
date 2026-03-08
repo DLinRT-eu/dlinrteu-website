@@ -118,7 +118,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     id: "aapm-thoracic",
     name: "AAPM Thoracic Auto-Segmentation Challenge",
     category: "Grand Challenge",
-    description: "Challenge for automatic segmentation of organs at risk in thoracic CT for radiotherapy planning.",
+    description: "Challenge for automatic segmentation of organs at risk in thoracic CT for radiotherapy planning. Associated dataset available on TCIA (AAPM-RT-MAC).",
     website: "https://www.aapm.org/GrandChallenge/",
     organization: "American Association of Physicists in Medicine",
     startDate: "2017-01-01",
@@ -127,7 +127,6 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     tags: ["Thoracic CT", "Auto-Segmentation", "Organs at Risk", "Radiation Therapy"],
     features: ["Thoracic CT scans", "Expert contours", "Standardized evaluation metrics"],
     dataAccess: "Available for research purposes",
-    resultsUrl: "https://www.aapm.org/GrandChallenge/results/",
     participationInfo: "Was open to all participants"
   },
   {

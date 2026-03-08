@@ -194,18 +194,18 @@ export const DATASET_INITIATIVES: Initiative[] = [
     id: "brain-metastasis-mri",
     name: "Brain Metastasis MRI Dataset",
     category: "Open Dataset",
-    description: "Brain metastasis dataset with 3D MRI segmentations for stereotactic radiosurgery (SRS) and stereotactic radiotherapy (SRT) planning applications.",
-    website: "https://www.nature.com/sdata/",
-    organization: "Nature Scientific Data",
+    description: "Large open-access dataset of brain metastasis 3D segmentations on MRI with clinical and imaging information for stereotactic radiosurgery (SRS) and stereotactic radiotherapy (SRT) planning.",
+    website: "https://www.nature.com/articles/s41597-024-03021-9",
+    organization: "University of California San Francisco",
     status: "Active",
     tags: ["Brain Metastasis", "MRI", "Segmentation", "SRS", "SRT", "Stereotactic Radiotherapy"],
     features: [
       "3D brain metastasis segmentations",
       "MRI imaging data",
-      "SRS/SRT planning applications",
+      "Clinical and imaging metadata",
       "Expert annotations"
     ],
-    dataAccess: "Available through Nature Scientific Data",
+    dataAccess: "Open access via Nature Scientific Data",
     participationInfo: "Open to all researchers"
   },
 ];
