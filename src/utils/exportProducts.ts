@@ -57,6 +57,15 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     "Developed By", "Developed By Relationship", "Part Of", "Part Of Relationship",
     "Uses AI", "Development Stage",
     "Dose Prediction Models",
+    "Training Data Description", "Training Dataset Size", "Training Dataset Sources",
+    "Training Demographics", "Training Scanner Models", "Training Institutions",
+    "Training Countries", "Training Public Datasets", "Training Disclosure Level",
+    "Training Data Source", "Training Data Source URL",
+    "Evaluation Description", "Evaluation Dataset Size", "Evaluation Sites",
+    "Evaluation Countries", "Evaluation Demographics", "Evaluation Study Design",
+    "Evaluation Primary Endpoint", "Evaluation Results",
+    "Evaluation Source", "Evaluation Source URL",
+    "Safety Corrective Actions",
     "Compatible Systems", "Training Required", "Support Email",
     "Last Updated", "Last Revised", "Source"
   ];
