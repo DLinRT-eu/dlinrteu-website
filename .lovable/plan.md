@@ -1,41 +1,71 @@
+# Daily-Stable Random Sorting for Products and Company 
+
+## Problem
+
+Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
+
+## Alternatives Considered
 
 
-# ECR 2026 Impact on Reconstruction Products
+| Approach                                                     | Pros                                                         | Cons                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
+| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
+| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
+| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
 
-## Research Findings
 
-I investigated all major vendors' ECR 2026 announcements and searched for new evidence. Here's what I found:
+**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
 
-### New Products / Hardware (not requiring new reconstruction entries)
-- **Philips Rembra CT**: New CT scanner unveiled at ECR 2026 (CE Marked, 510(k) pending). Uses NanoPanel Precise XD detector with AI reconstruction. This is a scanner platform, not a new standalone DL reconstruction algorithm -- existing Precise Image entry covers the reconstruction technology.
-- **Philips Verida**: First detector-based spectral CT with AI (European debut at ECR). Again a scanner, not a new reconstruction algorithm.
-- **Siemens**: ECR 2026 focus was on angiography (ARTIS icono.vision), Alzheimer's initiative, and Fit Upgrades. No new reconstruction product.
-- **GE Healthcare**: No new reconstruction product or version announced at ECR 2026.
-- **United Imaging**: Showed at WHX 2026 (Dubai) but no ECR 2026 reconstruction news.
-- **Subtle Medical**: 14 presentations at ECR 2026 on MRI/PET enhancement and expanding into CT, but these are Image Enhancement products, not Reconstruction category.
+## Implementation
 
-### New Evidence Found
-1. **Canon PIQE (Precise IQ Engine)**: Greffier et al. "Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings." *European Radiology Experimental* 2026;10:9. Published Jan 26, 2026. Independent phantom study comparing PIQE (SR-DLR) vs AiCE (NR-DLR) for abdominal CT. Shows PIQE improved spatial resolution and detectability. DOI: 10.1186/s41747-025-00670-2
+### 1. Add a seeded PRNG to `useProductSorting.ts`
 
-   The paper also references two additional PIQE studies not yet in our database:
-   - Nagayama et al. 2025: PIQE with 1024 matrix improves CT quality for pancreatic ductal adenocarcinoma. DOI: 10.1016/j.ejrad.2025.111953
-   - Funama et al. 2025: Advances in spatial resolution using SR-DLR for abdominal CT. DOI: 10.1016/j.acra.2024.09.012
+Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
 
-## Planned Changes
+- Computes a seed from today's date string (`"2026-03-05"`)
+- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
+- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
 
-### 1. Update Canon PIQE evidence and classification
-- Add 3 new evidence entries (Greffier 2026, Nagayama 2025, Funama 2025)
-- Upgrade `evidenceRigor` from `E0` to `E1` (vendor-independent phantom + clinical studies now exist)
-- Update `evidenceRigorNotes` with new citations
-- Set `evidenceVendorIndependent: true` (Greffier et al. is independent)
-- Set `evidenceExternalValidation: true`
-- Update `clinicalImpact` from `I0` to `I1` (technical efficacy demonstrated)
-- Update `lastUpdated` and `lastRevised` to `2026-03-08`
+```typescript
+function mulberry32(seed: number) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
 
-### 2. No new reconstruction product entries needed
-The ECR 2026 announcements (Rembra, Verida) are CT scanner platforms that use existing DL reconstruction algorithms already tracked in the database. No new standalone reconstruction AI products were announced.
+function dateToSeed(dateStr: string): number {
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
 
----
+export const useDailyProductShuffle = (products: ProductDetails[]) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return useMemo(() => {
+    const rng = mulberry32(dateToSeed(today));
+    const arr = [...products];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [products, today]);
+};
+```
 
-**Summary**: The main actionable update is upgrading Canon PIQE's evidence profile with 3 newly found peer-reviewed publications, changing its classification from E0/I0 to E1/I1.
+### 2. Update `ProductGrid.tsx`
 
+- Import `useDailyProductShuffle` instead of `useProductShuffle`
+- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
+
+### Files Modified
+
+- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
+- `src/components/ProductGrid.tsx` — swap to new hook

@@ -243,6 +243,21 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Peer-reviewed Publication",
+        description: "Greffier et al. Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings. European Radiology Experimental 2026;10:9",
+        link: "https://doi.org/10.1186/s41747-025-00670-2"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Nagayama et al. PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma. European Journal of Radiology 2025",
+        link: "https://doi.org/10.1016/j.ejrad.2025.111953"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Funama et al. Advances in spatial resolution using super-resolution deep learning reconstruction for abdominal CT. Academic Radiology 2025",
+        link: "https://doi.org/10.1016/j.acra.2024.09.012"
+      },
+      {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for PIQE",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243335.pdf"
@@ -253,13 +268,18 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         link: "https://global.medical.canon/products/magnetic-resonance/piqe"
       }
     ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA K243335 (Jan 2025). Very new, no independent publications. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact yet. PubMed searched 2026-02-26.",
-    clinicalEvidence: "Clinical studies demonstrating significantly improved spatial resolution and image sharpness for enhanced diagnostic capabilities",
-    lastUpdated: "2026-02-23", 
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database and company website"
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA K243335 (Jan 2025). Greffier et al. Eur Radiol Exp 2026 independent phantom study comparing PIQE vs AiCE. Nagayama et al. Eur J Radiol 2025 clinical evaluation for pancreatic cancer. Funama et al. Acad Radiol 2025 spatial resolution evaluation. PubMed searched 2026-03-08.",
+    clinicalImpactNotes: "Technical efficacy demonstrated: improved spatial resolution and low-contrast detectability in phantom and clinical studies. PubMed searched 2026-03-08.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
+    clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
+    lastUpdated: "2026-03-08", 
+    lastRevised: "2026-03-08",
+    source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }
 ];
