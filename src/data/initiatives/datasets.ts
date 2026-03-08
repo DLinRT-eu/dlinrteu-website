@@ -52,9 +52,9 @@ export const DATASET_INITIATIVES: Initiative[] = [
     id: "pddca",
     name: "Public Domain Database for Computational Anatomy (PDDCA)",
     category: "Open Dataset",
-    description: "Dataset for head and neck radiotherapy planning with CT images and manually curated segmentations.",
+    description: "Dataset for head and neck radiotherapy planning with CT images and manually curated segmentations from the RTOG 0522 study.",
     website: "http://www.imagenglab.com/newsite/pddca/",
-    organization: "University of Texas MD Anderson Cancer Center",
+    organization: "Harvard Medical School / Massachusetts General Hospital",
     status: "Active",
     tags: ["Head and Neck Cancer", "CT", "Segmentation", "Radiation Therapy"],
     features: [
