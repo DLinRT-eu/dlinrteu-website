@@ -88,6 +88,18 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     return models.map(m => `${m.name} [${m.anatomicalSite}/${m.technique}]`).join("; ");
   };
 
+  // Helper to format safety corrective actions
+  const formatFSCAs = (actions: any[] | undefined): string => {
+    if (!actions || actions.length === 0) return "";
+    return actions.map(a => {
+      let s = `${a.type}: ${a.description}`;
+      if (a.identifier) s += ` [${a.identifier}]`;
+      if (a.authority) s += ` (${a.authority})`;
+      if (a.status) s += ` — ${a.status}`;
+      return s;
+    }).join("; ");
+  };
+
   // Helper to format supported structures (handles both string[] and object[])
   const formatStructures = (structures: any[] | undefined): string => {
     if (!structures || structures.length === 0) return "";
