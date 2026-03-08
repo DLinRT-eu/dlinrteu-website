@@ -190,6 +190,13 @@ const App = () => (
                     </ApprovalGate>
                   </ProtectedRoute>
                 } />
+                <Route path="/notification-settings" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <NotificationSettings />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
                 <Route path="/product/:productId/experiences" element={
                   <ProtectedRoute allowedRoles={['admin', 'reviewer', 'company']}>
                     <ApprovalGate>

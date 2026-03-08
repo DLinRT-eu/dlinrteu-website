@@ -129,7 +129,7 @@ export default function NotificationPreferences() {
     setSaving(true);
     const { error } = await supabase
       .from('profiles')
-      .update({ notification_preferences: prefs as unknown as Record<string, unknown> })
+      .update({ notification_preferences: prefs as unknown as Record<string, never> })
       .eq('id', user.id);
 
     if (error) {

@@ -265,6 +265,27 @@ export default function Dashboard_Authenticated() {
           </p>
         </div>
 
+        {/* Search Bar */}
+        <div className="mb-8">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+              }
+            }}
+            className="relative max-w-2xl"
+          >
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              placeholder="Search AI medical imaging products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-11 h-12 text-base"
+            />
+          </form>
+        </div>
+
         {/* Pending Stats Widget */}
         <PendingStatsWidget isAdmin={isAdmin} isReviewer={isReviewer} isCompany={isCompany} />
 
