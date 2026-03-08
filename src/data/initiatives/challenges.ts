@@ -148,5 +148,54 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     dataAccess: "Available after registration",
     resultsUrl: "https://hntsmrg24.grand-challenge.org/",
     participationInfo: "Challenge completed, data available for post-challenge research"
+  },
+  {
+    id: "aapm-gdp-hmm",
+    name: "AAPM GDP-HMM 2025",
+    category: "Grand Challenge",
+    description: "Generalizable Dose Prediction for Heterogeneous Multi-Cohort and Multi-Site Radiotherapy Planning. Focuses on developing dose prediction models that generalize across institutions and treatment protocols.",
+    website: "https://www.aapm.org/GrandChallenge/GDP-HMM/",
+    organization: "American Association of Physicists in Medicine",
+    startDate: "2025-01-01",
+    status: "Active",
+    tags: ["Dose Prediction", "Treatment Planning", "Multi-Site", "Radiation Therapy"],
+    features: ["Multi-site datasets", "Heterogeneous treatment protocols", "Generalizability evaluation"],
+    participationInfo: "Open to academic and commercial participants worldwide"
+  },
+  {
+    id: "aapm-match",
+    name: "AAPM MATCH",
+    category: "Grand Challenge",
+    description: "MArkerless lung Target Tracking CHallenge. Evaluates markerless tumor tracking algorithms during radiotherapy delivery using kV imaging sequences.",
+    website: "https://www.aapm.org/GrandChallenge/MATCH/",
+    organization: "American Association of Physicists in Medicine",
+    startDate: "2019-01-01",
+    endDate: "2021-12-31",
+    status: "Completed",
+    tags: ["Lung Cancer", "Tracking", "Real-Time", "Radiation Therapy", "kV Imaging"],
+    features: ["kV imaging sequences", "Ground truth tumor positions", "Real-time tracking evaluation"],
+    participationInfo: "Challenge completed",
+    relatedPublications: [
+      {
+        title: "Results of the AAPM MATCH challenge",
+        url: "https://doi.org/10.1002/mp.15418",
+        authors: "P. Mao et al.",
+        year: "2021"
+      }
+    ]
+  },
+  {
+    id: "icassp-3dcbct-2024",
+    name: "ICASSP 3D CBCT Challenge 2024",
+    category: "Grand Challenge",
+    description: "Deep learning challenge for low-dose 3D cone-beam CT reconstruction. CBCT is fundamental to image-guided and adaptive radiotherapy workflows.",
+    website: "https://sites.google.com/view/icassp2024-spgc-3dcbct/home",
+    organization: "IEEE / ICASSP Signal Processing Grand Challenges",
+    startDate: "2024-01-01",
+    endDate: "2024-04-30",
+    status: "Completed",
+    tags: ["CBCT", "Image Reconstruction", "Deep Learning", "Radiation Therapy", "Low-Dose"],
+    features: ["Low-dose CBCT projections", "Reference high-quality reconstructions", "Standardized image quality metrics"],
+    participationInfo: "Challenge completed"
   }
 ];
