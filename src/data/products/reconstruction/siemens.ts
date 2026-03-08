@@ -48,12 +48,12 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        clearanceNumber: "K213693, K232322, K250436",
+        clearanceNumber: "K213693, K232322, K250436, K251822",
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH, LNI, MOS",
         type: "510(k)",
         decisionDate: "2022-02-25",
-        notes: "Initial clearance K213693 (Feb 2022). K250436 for MAGNETOM Flow.Ace/Plus (June 2025)"
+        notes: "Initial clearance K213693 (Feb 2022). K250436 for MAGNETOM Flow.Ace/Plus (June 2025). K251822 for MAGNETOM Free.Max/Free.Star (Nov 2025)."
       },
       intendedUseStatement: "Intended for use in MRI image reconstruction to accelerate scan times and enhance image quality while maintaining diagnostic utility."
     },
