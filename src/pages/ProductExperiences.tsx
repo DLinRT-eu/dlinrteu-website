@@ -41,7 +41,8 @@ const RELATIONSHIP_LABELS: Record<string, string> = {
 
 export default function ProductExperiences() {
   const { productId } = useParams<{ productId: string }>();
-  const { user, isAdmin, isReviewer, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { hasAdminRole, hasReviewerRole, hasCompanyRole } = useRoles();
   const navigate = useNavigate();
   const [experiences, setExperiences] = useState<UserExperience[]>([]);
   const [loading, setLoading] = useState(true);
