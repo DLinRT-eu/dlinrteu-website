@@ -5,6 +5,7 @@ import { useRoles } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import PageLayout from '@/components/layout/PageLayout';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
