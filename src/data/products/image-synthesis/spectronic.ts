@@ -77,8 +77,28 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
 },
     version: "3.2",
     releaseDate: "2023-07-10",
-    lastUpdated: "2025-12-11",
-    lastRevised: "2026-01-18",
-    source: "FDA 510(k) database and company website"
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "FDA 510(k) database and company website",
+    evidence: [
+      {
+        type: "Multicenter Study",
+        description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images. Int J Radiat Oncol Biol Phys 2020;108(5):1265-1275.",
+        link: "https://doi.org/10.1016/j.ijrobp.2020.07.027"
+      },
+      {
+        type: "Clinical Validation",
+        description: "Lerner et al. Clinical validation of a commercially available deep learning software for synthetic CT generation for brain. Radiat Oncol 2021;16:66.",
+        link: "https://doi.org/10.1186/s13014-021-01794-6"
+      }
+    ],
+    evidenceRigor: "E2",
+    evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020, 7 centers, 3 countries). Lerner et al. 2021 provides independent brain validation. Strong vendor-independent evidence base.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric accuracy within clinical tolerance across multiple anatomical sites (MR-OPERA, Lerner et al.).",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
+    evidenceExternalValidation: true
   }
 ];

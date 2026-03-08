@@ -71,7 +71,11 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-12-06",
     lastUpdated: "2025-12-01",
     lastRevised: "2026-01-27",
-    source: "FDA 510(k) database (K242745, K233733) and company website"
+    source: "FDA 510(k) database (K242745, K233733) and company website",
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
+    clinicalImpact: "I0",
+    clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology."
   },
   {
     id: "syntheticmr-spine",

@@ -92,6 +92,10 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-01-01",
     lastUpdated: "2026-01-02",
     lastRevised: "2026-01-02",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822)"
+    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K242822)",
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "No vendor-independent clinical validation studies identified for AdaptBox augmented CBCT generation. Evidence limited to vendor publications.",
+    clinicalImpact: "I0",
+    clinicalImpactNotes: "No independent clinical outcome data available yet."
   }
 ];

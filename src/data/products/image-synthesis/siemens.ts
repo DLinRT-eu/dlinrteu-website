@@ -55,8 +55,12 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
 },
     version: "VB80",
     releaseDate: "2024-09-20",
-    lastUpdated: "2025-08-11",
-    lastRevised: "2026-01-02",
-    source: "Company website"
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "Company website",
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated in clinical studies for brain and pelvic synthetic CT generation."
   }
 ];

@@ -69,9 +69,13 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
 },
     version: "1.5",
     releaseDate: "2022-10-20",
-    lastUpdated: "2024-08-08",
-    lastRevised: "2026-01-02",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "Company website",
-    clinicalEvidence: "Clinical studies demonstrate comparable treatment planning accuracy to CT-based workflows for head and neck radiation therapy"
+    clinicalEvidence: "Clinical studies demonstrate comparable treatment planning accuracy to CT-based workflows for head and neck radiation therapy",
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "Vendor-published clinical studies. No vendor-independent validation studies specific to MRCAT Head and Neck identified yet. Earwong et al. 2025 covers DL-based synthetic CT for H&N but product not confirmed.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated in vendor studies: comparable treatment planning accuracy to CT-based workflows."
   }
 ];
