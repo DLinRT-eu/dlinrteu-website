@@ -62,11 +62,35 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
   ];
   
   // Map product data to CSV rows
+  // Helper to format guidelines array
+  const formatGuidelines = (guidelines: any[] | undefined): string => {
+    if (!guidelines || guidelines.length === 0) return "";
+    return guidelines.map(g => {
+      let s = g.name;
+      if (g.version) s += ` v${g.version}`;
+      if (g.compliance) s += ` (${g.compliance})`;
+      return s;
+    }).join("; ");
+  };
+
+  // Helper to format dose prediction models
+  const formatDoseModels = (models: any[] | undefined): string => {
+    if (!models || models.length === 0) return "";
+    return models.map(m => `${m.name} [${m.anatomicalSite}/${m.technique}]`).join("; ");
+  };
+
+  // Helper to format supported structures (handles both string[] and object[])
+  const formatStructures = (structures: any[] | undefined): string => {
+    if (!structures || structures.length === 0) return "";
+    return structures.map(s => typeof s === 'string' ? s : s.name || String(s)).join("; ");
+  };
+
   const data = products.map(product => [
     escapeValueForCsv(product.id),
     escapeValueForCsv(product.name),
     escapeValueForCsv(product.company),
     escapeValueForCsv(product.category),
+    escapeValueForCsv(product.secondaryCategories),
     escapeValueForCsv(product.description),
     escapeValueForCsv(product.features),
     escapeValueForCsv(product.subspeciality),
@@ -75,7 +99,7 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.diseaseTargeted),
     escapeValueForCsv(product.keyFeatures),
     escapeValueForCsv(product.suggestedUse),
-    escapeValueForCsv(product.supportedStructures),
+    escapeValueForCsv(formatStructures(product.supportedStructures)),
     escapeValueForCsv(product.technicalSpecifications?.population),
     escapeValueForCsv(product.technicalSpecifications?.input),
     escapeValueForCsv(product.technicalSpecifications?.inputFormat),
@@ -88,16 +112,21 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.regulatory?.ce?.status),
     escapeValueForCsv(product.regulatory?.ce?.class),
     escapeValueForCsv(product.regulatory?.ce?.type),
-    escapeValueForCsv((product as any)?.regulatory?.ce?.certificateNumber),
-    escapeValueForCsv((product as any)?.regulatory?.ce?.regulationNumber),
+    escapeValueForCsv(product.regulatory?.ce?.certificateNumber),
+    escapeValueForCsv(product.regulatory?.ce?.regulation),
     escapeValueForCsv(
-      typeof (product as any)?.regulatory?.fda === 'string'
-        ? (product as any)?.regulatory?.fda
-        : (product as any)?.regulatory?.fda?.status
+      typeof product.regulatory?.fda === 'string'
+        ? product.regulatory.fda
+        : product.regulatory?.fda?.status
     ),
-    escapeValueForCsv((product as any)?.regulatory?.fda?.clearanceNumber),
-    escapeValueForCsv((product as any)?.regulatory?.fda?.regulationNumber),
-    escapeValueForCsv((product as any)?.regulatory?.fda?.productCode),
+    escapeValueForCsv(typeof product.regulatory?.fda === 'object' ? product.regulatory.fda?.clearanceNumber : ''),
+    escapeValueForCsv(typeof product.regulatory?.fda === 'object' ? product.regulatory.fda?.regulationNumber : ''),
+    escapeValueForCsv(typeof product.regulatory?.fda === 'object' ? product.regulatory.fda?.productCode : ''),
+    escapeValueForCsv(product.regulatory?.tga?.status),
+    escapeValueForCsv(product.regulatory?.tga?.notes),
+    escapeValueForCsv(product.regulatory?.tfda?.status),
+    escapeValueForCsv(product.regulatory?.tfda?.approvalNumber),
+    escapeValueForCsv(product.regulatory?.tfda?.decisionDate),
     escapeValueForCsv(product.regulatory?.intendedUseStatement),
     escapeValueForCsv(product.market?.onMarketSince),
     escapeValueForCsv(product.market?.distributionChannels),
@@ -112,6 +141,23 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.clinicalEvidence),
     escapeValueForCsv(product.evidence),
     escapeValueForCsv(product.limitations),
+    escapeValueForCsv(product.evidenceRigor),
+    escapeValueForCsv(product.evidenceRigorNotes),
+    escapeValueForCsv(product.clinicalImpact),
+    escapeValueForCsv(product.clinicalImpactNotes),
+    escapeValueForCsv(product.evidenceVendorIndependent),
+    escapeValueForCsv(product.evidenceMultiCenter),
+    escapeValueForCsv(product.evidenceMultiNational),
+    escapeValueForCsv(product.evidenceProspective),
+    escapeValueForCsv(product.evidenceExternalValidation),
+    escapeValueForCsv(formatGuidelines(product.guidelines)),
+    escapeValueForCsv(product.developedBy?.company),
+    escapeValueForCsv(product.developedBy?.relationship),
+    escapeValueForCsv(product.partOf?.name),
+    escapeValueForCsv(product.partOf?.relationship),
+    escapeValueForCsv(product.usesAI),
+    escapeValueForCsv(product.developmentStage),
+    escapeValueForCsv(formatDoseModels(product.dosePredictionModels)),
     escapeValueForCsv(product.compatibleSystems),
     escapeValueForCsv(product.trainingRequired),
     escapeValueForCsv(product.supportEmail),

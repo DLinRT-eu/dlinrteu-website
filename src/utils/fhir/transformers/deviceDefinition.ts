@@ -543,6 +543,29 @@ function createRegulatoryIdentifiers(product: ProductDetails): FHIRRegulatoryIde
     }
   }
 
+  // TGA (Australia)
+  if (product.regulatory?.tga && product.regulatory.tga.status) {
+    regulatoryIds.push({
+      type: "license",
+      deviceIdentifier: product.regulatory.tga.status,
+      issuer: "https://www.tga.gov.au",
+      jurisdiction: "http://unstats.un.org/unsd/methods/m49/m49.htm#036" // Australia
+    });
+  }
+
+  // TFDA (Taiwan)
+  if (product.regulatory?.tfda) {
+    const tfda = product.regulatory.tfda;
+    if (tfda.status && tfda.status !== "Not Cleared") {
+      regulatoryIds.push({
+        type: "license",
+        deviceIdentifier: tfda.approvalNumber || tfda.status,
+        issuer: "https://www.fda.gov.tw",
+        jurisdiction: "http://unstats.un.org/unsd/methods/m49/m49.htm#158" // Taiwan
+      });
+    }
+  }
+
   return regulatoryIds;
 }
 
