@@ -226,16 +226,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2024",
-      distributionChannels: ["Direct sales", "Distribution partners"]
+      distributionChannels: ["Direct sales", "Distribution partners", "Bracco (EU distribution, launched ECR 2026)"]
     },
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA validation K240290 only. New product (2024), limited independent publications.",
-    clinicalImpactNotes: "Workflow improvement through enhanced contrast-to-noise ratio in brain MRI.",
+    evidenceRigorNotes: "FDA validation K240290. Bracco EU launch at ECR 2026. 14 ECR presentations. PubMed searched 2026-03-08.",
+    clinicalImpactNotes: "Workflow improvement through enhanced contrast-to-noise ratio in brain MRI, potentially reducing gadolinium dose.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K240290) and company website"
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release"
   },
   {
     id: "subtle-hd",
