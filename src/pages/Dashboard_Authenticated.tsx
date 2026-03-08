@@ -28,7 +28,8 @@ import {
   ClipboardCheck,
   BadgeCheck,
   Eye,
-  GitMerge
+  GitMerge,
+  FilePenLine
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
