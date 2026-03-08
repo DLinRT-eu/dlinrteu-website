@@ -71,6 +71,11 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       },
       {
+        type: "Clinical White Paper",
+        description: "AIRS Medical clinical white paper: 184 MR exam pairs, 12 anatomical locations, 18 radiologists from 6 subspecialties. 93.7% cases SwiftMR images preferred or equivalent.",
+        link: "https://airsmed.com/en/clinical-white-paper/"
+      },
+      {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for SwiftMR",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230854.pdf"
@@ -78,16 +83,16 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Jeong et al. Eur Radiol 2023 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SwiftMR. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through enhanced MRI quality enabling faster scan times.",
+    evidenceRigorNotes: "Jeong et al. Eur Radiol 2023 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review. Clinical white paper: 184 exams, 18 radiologists, 6 subspecialties. Major update July 2025. PubMed verified 2026-03-08.",
+    clinicalImpactNotes: "Workflow improvement through enhanced MRI quality enabling up to 50% faster scan times.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database and company website"
   }
 ];

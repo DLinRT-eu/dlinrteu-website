@@ -301,8 +301,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "FDA validation K243250 only. Very new product (Feb 2025), no independent publications.",
     clinicalImpactNotes: "No independently demonstrated clinical impact yet.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
     source: "FDA 510(k) database (K243250) and company website"
   }
 ];
