@@ -1,52 +1,71 @@
+# Daily-Stable Random Sorting for Products and Company 
+
+## Problem
+
+Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
+
+## Alternatives Considered
 
 
-# Implement Dashboard Search (Point 11) & Notification Preferences (Point 13)
+| Approach                                                     | Pros                                                         | Cons                                            |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
+| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
+| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
+| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
+| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
 
-## 1. Dashboard Search Bar
 
-Add a product search bar to `Dashboard_Authenticated.tsx` between the hero section and the pending stats widget. When the user types and submits/selects, navigate to `/products?q=<query>`.
+**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
 
-**Approach**: Use a simple search input with a search icon (no need for the full `DebouncedSearchWithSuggestions` component since we're just navigating). On Enter or button click, redirect to `/products?search=<query>`.
+## Implementation
 
-**File**: `src/pages/Dashboard_Authenticated.tsx`
-- Add `useNavigate` import
-- Add search state + handler that navigates to `/products?search=<query>`
-- Render a search bar card between the hero and PendingStatsWidget
+### 1. Add a seeded PRNG to `useProductSorting.ts`
 
-## 2. Notification Preferences Page
+Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
 
-Create a new `NotificationPreferences` component and route where users can configure what notifications they receive and how (email vs in-app).
-
-**Data model**: The `profiles` table already has a `notification_preferences` JSONB column (default: `{"email": true, "in_app": true}`). We'll extend this to store granular preferences:
+- Computes a seed from today's date string (`"2026-03-05"`)
+- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
+- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
 
 ```typescript
-{
-  email: boolean,        // global email toggle
-  in_app: boolean,       // global in-app toggle
-  categories: {
-    review_assignments: { email: boolean, in_app: boolean },
-    review_deadlines: { email: boolean, in_app: boolean },
-    status_updates: { email: boolean, in_app: boolean },
-    system_announcements: { email: boolean, in_app: boolean },
-    company_revisions: { email: boolean, in_app: boolean },
-    registration_updates: { email: boolean, in_app: boolean }
-  }
+function mulberry32(seed: number) {
+  return function() {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
 }
+
+function dateToSeed(dateStr: string): number {
+  let hash = 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
+export const useDailyProductShuffle = (products: ProductDetails[]) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return useMemo(() => {
+    const rng = mulberry32(dateToSeed(today));
+    const arr = [...products];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [products, today]);
+};
 ```
 
-No DB migration needed — the JSONB column already exists and accepts any structure.
+### 2. Update `ProductGrid.tsx`
 
-**New files**:
-- `src/components/notifications/NotificationPreferences.tsx` — Form with switches for each category/channel
-- `src/pages/NotificationSettings.tsx` — Page wrapper
+- Import `useDailyProductShuffle` instead of `useProductShuffle`
+- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
 
-**Modified files**:
-- `src/App.tsx` — Add `/notification-settings` route (protected)
-- `src/pages/NotificationHistory.tsx` — Add link to preferences page
-- `src/pages/Dashboard_Authenticated.tsx` — Add search bar + update Notifications quick action description
+### Files Modified
 
-## Scope
-- 2 new files, 3 modified files
-- No database migration needed (reuses existing JSONB column)
-- All preferences persisted to `profiles.notification_preferences` via existing `updateProfile`
-
+- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
+- `src/components/ProductGrid.tsx` — swap to new hook

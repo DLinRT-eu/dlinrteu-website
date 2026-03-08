@@ -22,7 +22,7 @@ import {
 import { Loader2, Trash2, CheckCircle2, Bell, Search } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 import SortableHeader from '@/components/revision/table/SortableHeader';
@@ -221,6 +221,11 @@ export default function NotificationHistory() {
             {notifications.length} total notifications ({unreadCount} unread)
           </p>
         </div>
+        <Button variant="outline" asChild>
+          <Link to="/notification-settings">
+            Notification Settings
+          </Link>
+        </Button>
       </div>
 
       <Card>

@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import PageLayout from '@/components/layout/PageLayout';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
@@ -29,7 +31,8 @@ import {
   BadgeCheck,
   Eye,
   GitMerge,
-  FilePenLine
+  FilePenLine,
+  Search
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
 
@@ -37,6 +40,8 @@ export default function Dashboard_Authenticated() {
   const { user, profile } = useAuth();
   const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { data: prData } = useGitHubPRCount(isAdmin);
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const getRoleDescription = () => {
     if (activeRole === 'admin') {
@@ -258,6 +263,27 @@ export default function Dashboard_Authenticated() {
           <p className="text-muted-foreground text-lg">
             {getRoleDescription()}
           </p>
+        </div>
+
+        {/* Search Bar */}
+        <div className="mb-8">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchQuery.trim()) {
+                navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+              }
+            }}
+            className="relative max-w-2xl"
+          >
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              placeholder="Search AI medical imaging products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-11 h-12 text-base"
+            />
+          </form>
         </div>
 
         {/* Pending Stats Widget */}
