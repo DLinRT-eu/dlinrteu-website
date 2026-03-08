@@ -1,71 +1,73 @@
-# Daily-Stable Random Sorting for Products and Company 
-
-## Problem
-
-Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
-
-## Alternatives Considered
 
 
-| Approach                                                     | Pros                                                         | Cons                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
-| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
-| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
-| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
+# Workflow Automation, Reporting & Remaining Product Categories Update
 
+## Research Summary
 
-**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
+### Workflow Automation / Reporting
+- **No new standalone workflow automation or reporting products for radiotherapy** announced at ECR 2026. DeepHealth, Ziosoft (REVORAS), and Bracco (AiMIFY) are radiology-focused, not radiotherapy.
+- **MedLever**: No new product launches or evidence. Pipeline products (Assistant, Copilot) remain in development.
+- **GE Healthcare iRT**: Showed updated version at ASTRO 2025 (Sep 2025) with enhanced connectivity, reporting, and planning workflow. A Marengo CIMS case study (2025) documents 25% reduction in treatment planning times. No peer-reviewed publication yet — evidence stays at E0.
 
-## Implementation
+### Tracking
+- **Accuray Synchrony**: 2 new studies found since last update:
+  - Okada et al. Cureus 2025 — liver tumor motion-tracking assessment (DOI: 10.7759/cureus.81598). Vendor-independent.
+  - Lo Conte et al. Cureus 2025 — prostate SBRT toxicity outcomes with Synchrony (DOI: 10.7759/cureus.85083). This reports **clinical toxicity outcomes**, qualifying for I2→I2 (toxicity data but single-center, small cohort — not sufficient for I4).
+  - These are both vendor-independent → set `evidenceVendorIndependent: true`
 
-### 1. Add a seeded PRNG to `useProductSorting.ts`
+### Auto-Contouring (MVision)
+- **HARMONY study**: Pang et al. npj Digital Medicine 2025 appears to already be captured. But the HARMONY study (7 clinics, 4 countries, H&N, published May 2025 in npj Digital Medicine) may be a different paper. Need to verify — the Pang paper is described as "9 clinics, 7 countries" vs HARMONY "7 clinics, 4 countries". If different, add HARMONY to MVision evidence.
+- **Ng 2025 systematic review**: "Performance of Commercial Deep Learning-Based Auto-Segmentation" in Information (MDPI) — a systematic review covering multiple commercial products including MVision Contour+. If this qualifies as systematic evidence, MVision already has E3 — confirms existing level.
 
-Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
+### Registration
+- **Therapanacea SmartFuse**: No new independent evidence found.
+- **Pymedix Autofuse/FIRE**: No new evidence. Company website confirms product but no new publications.
 
-- Computes a seed from today's date string (`"2026-03-05"`)
-- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
-- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
+### Treatment Planning
+- **Nature Communications 2025 multicenter study**: "Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types" — need to verify which product this covers. If RayStation or RapidPlan, may warrant evidence update.
 
-```typescript
-function mulberry32(seed: number) {
-  return function() {
-    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+### Performance Monitor
+- **PTW AIQUALIS**: No new publications. Stays E0.
+- **Radformation ClearCheck**: Frontiers in Oncology 2025 (Simiele et al.) covers Radformation in total marrow lymphoid irradiation workflow — this is new evidence.
 
-function dateToSeed(dateStr: string): number {
-  let hash = 0;
-  for (let i = 0; i < dateStr.length; i++) {
-    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-    hash |= 0;
-  }
-  return hash;
-}
+### Platform
+- No changes needed for MVision Workspace+ or GE iRT beyond current data.
 
-export const useDailyProductShuffle = (products: ProductDetails[]) => {
-  const today = new Date().toISOString().slice(0, 10);
-  return useMemo(() => {
-    const rng = mulberry32(dateToSeed(today));
-    const arr = [...products];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rng() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }, [products, today]);
-};
-```
+### Pipeline
+- No pipeline products have changed status (still "Coming Soon").
 
-### 2. Update `ProductGrid.tsx`
+## Planned Changes
 
-- Import `useDailyProductShuffle` instead of `useProductShuffle`
-- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
+### 1. Update Accuray Synchrony — Add 2 new studies
+- Add Okada et al. 2025 liver tracking study
+- Add Lo Conte et al. 2025 prostate toxicity study
+- Set `evidenceVendorIndependent: true` (both are independent)
+- Keep E2/I2 (new studies are single-center, don't change rigor level)
+- Update `lastRevised` to `2026-03-08`
 
-### Files Modified
+### 2. Update MVision Contour+ — Add HARMONY study (if distinct from Pang et al.)
+- Add HARMONY study reference: npj Digital Medicine 2025, 7 clinics, 4 countries
+- Update `evidenceRigorNotes` to mention HARMONY
+- Keep E3/I2 (already at highest applicable level)
+- Update `lastRevised` to `2026-03-08`
 
-- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
-- `src/components/ProductGrid.tsx` — swap to new hook
+### 3. Update Radformation ClearCheck — Add TMLI study
+- Add Simiele et al. Frontiers Oncol 2025 (automated contouring + QA for total marrow lymphoid irradiation using Radformation tools)
+- Update `evidenceRigorNotes`
+- Keep E1/I1
+- Update `lastRevised` to `2026-03-08`
+
+### 4. Update GE Healthcare iRT — Add Marengo case study reference
+- Add Marengo CIMS case study (2025) as non-peer-reviewed evidence
+- Keep E0/I2 (case study/white paper, not peer-reviewed)
+- Update `lastRevised` to `2026-03-08`
+
+### 5. Touch remaining products' lastRevised dates
+- Update `lastRevised` to `2026-03-08` for all reviewed products where no issues found (confirming data is current as of this review cycle): Pymedix, Therapanacea SmartFuse, PTW AIQUALIS, MedLever platform, MVision Workspace+
+
+### Summary
+- **0 new products** to add
+- **4 products** get evidence updates (Accuray Synchrony, MVision Contour+, Radformation ClearCheck, GE iRT)
+- **5 products** get lastRevised date updates confirming review
+- All remaining categories (tracking, registration, performance monitor, platform, pipeline, treatment planning) checked — no new RT-specific products from ECR 2026
+
