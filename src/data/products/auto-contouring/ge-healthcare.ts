@@ -66,7 +66,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA validation K230082 with 302 retrospective CT exams (2552 contours) from 9 global sites. Dice coefficients reported for 40+ organs.",
     clinicalImpactNotes: "Large multi-site FDA validation dataset demonstrates consistent geometric accuracy across global clinical sites.",
-    evidenceVendorIndependent: false,
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
     evidenceProspective: false,
