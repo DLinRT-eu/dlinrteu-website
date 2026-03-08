@@ -86,6 +86,11 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         description: "FDA 510(k) clearance K242925 received February 27, 2025 - Class II device under 21 CFR 892.2050",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
       },
+      {
+        type: "Independent Peer-reviewed Publication",
+        description: "Kim et al. Investigation on performance of multiple AI-based auto-contouring systems (7-system comparison, 42 cases). Phys Eng Sci Med 2024.",
+        link: "https://doi.org/10.1007/s13246-024-01434-9",
+      },
     ],
     limitations: [
       "Deployment options are limited to on-premises",
