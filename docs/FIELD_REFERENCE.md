@@ -97,28 +97,128 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | `limitations` | ➖ | Known caveats. | Array of strings. | Highlight vendor-declared or publication-based limitations. |
 | `guidelines` | ➖ | Professional guidelines adhered to. | Array of `{ name, version, reference, url, compliance }`. | Use `compliance`: `full`, `partial`, `planned`. |
 
-## Evidence Level Classification
+## Evidence Level Classification (Dual-Axis System)
 
-Products are classified using an evidence hierarchy adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z), modified for radiotherapy applications.
+Products are classified using a **dual-axis framework** separating Evidence Rigor (E0-E3) from Clinical Impact (I0-I5), adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8). The Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203).
 
-| Level | Name | Description | RT Examples |
-| --- | --- | --- | --- |
-| `0` | No Peer-Reviewed Evidence | No publications; vendor claims only | FDA 510(k) summary only |
-| `1t` | Technical Efficacy | Reproducibility, error rates | Auto-contour consistency tests |
-| `1c` | Potential Clinical Efficacy | Correlation studies | Dice vs expert contours on test data |
-| `2` | Stand-Alone Performance | Clinical dataset validation | Multi-center Dice validation |
-| `3` | Workflow Efficacy | Human-AI interaction | Contouring time savings studies |
-| `4` | Treatment Decision Efficacy | Impact on treatment plans | Dose escalation enabled by OAR sparing |
-| `5` | Patient Outcome Efficacy | Clinical endpoints | Toxicity reduction, survival |
-| `6` | Societal Efficacy | Health economics | Cost per QALY analysis |
+### Evidence Rigor (E0-E3)
+
+| Level | Name | Criteria |
+|-------|------|----------|
+| E0 | No Peer-Reviewed Evidence | Vendor materials, regulatory submissions only |
+| E1 | Preliminary Evidence | Single-center, small cohorts, pilot studies |
+| E2 | Validated Evidence | Multi-center (3+ sites), large prospective cohorts, external validation |
+| E3 | Systematic Evidence | Systematic reviews, meta-analyses, RCTs |
+
+### Clinical Impact (I0-I5)
+
+| Level | Name | F&T Level | When to Use |
+|-------|------|-----------|-------------|
+| I0 | None Demonstrated | — | Feasibility only, no benefit shown |
+| I1 | Quality Assurance | Level 1 | QA tools, monitoring, consistency checks |
+| I2 | Workflow | Level 2 | Time savings, variability reduction, dose reduction, image quality improvement |
+| I3 | Decision | Level 3 | Changes in treatment management or plan selection |
+| I4 | Outcome | Levels 4–5 | Toxicity reduction, survival, patient outcomes |
+| I5 | Societal | Level 6 | Cost-effectiveness, access to care |
+
+### Study Quality Sub-Attributes
+
+| Attribute | Type | Description | Source |
+|-----------|------|-------------|--------|
+| `evidenceVendorIndependent` | Boolean | At least one study independent of vendor | van Leeuwen 2025 |
+| `evidenceMultiCenter` | Boolean | Evidence from 3+ clinical sites | van Leeuwen 2025 |
+| `evidenceMultiNational` | Boolean | Data from multiple countries | van Leeuwen 2025 |
+| `evidenceProspective` | Boolean | At least one prospective study design | van Leeuwen 2025 |
+| `evidenceExternalValidation` | Boolean | Validated on external dataset | Pham 2023 |
 
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
-| `evidenceLevel` | ➖ | Highest achieved evidence level | "0", "1t", "1c", "2", "3", "4", "5", "6" | Assign based on strongest published evidence |
-| `evidenceLevelNotes` | ➖ | Justification for level | Free text | Cite key supporting publications |
-| `evidence[].level` | ➖ | Level for individual study | Same as evidenceLevel | Optional per-study classification |
+| `evidenceRigor` | ➖ | Evidence rigor level | `"E0"`, `"E1"`, `"E2"`, `"E3"` | Assign based on strongest published evidence methodology |
+| `clinicalImpact` | ➖ | Clinical impact level | `"I0"`, `"I1"`, `"I2"`, `"I3"`, `"I4"`, `"I5"` | I2 = workflow/dose/image quality; I3 = treatment decision changes |
+| `evidenceLevelNotes` | ➖ | Justification for classification | Free text | Cite key supporting publications |
+| `evidence[].level` | ➖ | Per-study classification | Same dual-axis values | Optional per-study detail |
 
-**Reference**: van Leeuwen KG, et al. Eur Radiol. 2021;31(6):3797-3804. [DOI: 10.1007/s00330-021-07892-z](https://doi.org/10.1007/s00330-021-07892-z)
+**Key References**:
+- van Leeuwen KG, et al. *Eur Radiol.* 2021;31(6):3797-3804. [DOI](https://doi.org/10.1007/s00330-021-07892-z)
+- Antonissen N, et al. *Eur Radiol.* 2026;36:526-536. [DOI](https://doi.org/10.1007/s00330-025-11830-8)
+- Fryback DG, Thornbury JR. *Med Decis Making.* 1991;11(2):88-94. [DOI](https://doi.org/10.1177/0272989X9101100203)
+
+## Training & Evaluation Data Transparency
+
+These fields track the transparency and provenance of AI training and clinical evaluation datasets.
+
+### Training Data (`trainingData`)
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `trainingData.description` | ➖ | Free text summary of training data | String | Summarize key characteristics |
+| `trainingData.datasetSize` | ➖ | Number of samples/scans used | String (e.g., "10,000 CT scans") | Extract from publications or FDA 510(k) summaries |
+| `trainingData.datasetSources` | ➖ | Where data came from | Array of strings (e.g., ["TCIA", "Internal clinical data"]) | Note if vendor-only or public datasets |
+| `trainingData.demographics` | ➖ | Patient population characteristics | String (e.g., "Adult patients, 45% female, age 22-89") | Look for age, sex, ethnicity distribution |
+| `trainingData.scannerModels` | ➖ | Imaging hardware used | Array of strings | Check vendor docs and publications |
+| `trainingData.institutions` | ➖ | Number of contributing institutions | Number | Higher count suggests better generalizability |
+| `trainingData.countries` | ➖ | Number of countries represented | Number | Multi-national data reduces bias |
+| `trainingData.publicDatasets` | ➖ | Named public datasets used | Array of strings | e.g., "AAPM TG-263 benchmark" |
+| `trainingData.disclosureLevel` | ➖ | How transparent the vendor is | `"full"`, `"partial"`, `"minimal"`, `"none"` | Based on Mehta et al. 2025 transparency criteria |
+| `trainingData.source` | ➖ | Where this info was found | String | e.g., "FDA 510(k) Summary K230082" |
+| `trainingData.sourceUrl` | ➖ | URL to source document | URL | Link to FDA summary, publication, or vendor docs |
+
+### Evaluation Data (`evaluationData`)
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `evaluationData.description` | ➖ | Summary of clinical evaluation | String | Summarize study design and key results |
+| `evaluationData.datasetSize` | ➖ | Evaluation cohort size | String (e.g., "302 CT exams, 2552 contours") | Extract from regulatory submissions or publications |
+| `evaluationData.sites` | ➖ | Number of clinical sites | Number | Multi-site = stronger validation |
+| `evaluationData.countries` | ➖ | Number of countries | Number | Cross-national validation |
+| `evaluationData.demographics` | ➖ | Patient demographics | String | Age, sex, disease mix |
+| `evaluationData.studyDesign` | ➖ | Study methodology | String (e.g., "Retrospective multi-site") | Note if prospective vs retrospective |
+| `evaluationData.primaryEndpoint` | ➖ | Main evaluation metric | String (e.g., "Dice Similarity Coefficient >= 0.85") | Include threshold if specified |
+| `evaluationData.results` | ➖ | Summary of key results | String | Brief factual summary |
+| `evaluationData.source` | ➖ | Source of evaluation data | String | FDA summary, publication, vendor docs |
+| `evaluationData.sourceUrl` | ➖ | URL to source | URL | Link to official document |
+
+**Data Sources** (in order of reliability):
+1. Peer-reviewed publications (richest detail, include DOI)
+2. FDA 510(k) summaries (accessdata.fda.gov)
+3. CE Technical Documentation (rarely public; MDR Article 61)
+4. Vendor documentation / IFU
+
+**Reference**: Mehta S, et al. *npj Digital Medicine.* 2025. [DOI](https://doi.org/10.1038/s41746-025-02052-9) — found only 3.3/17 transparency criteria typically reported.
+
+## Safety Corrective Actions (FSCA / Recalls)
+
+Products can have safety-related corrective actions tracked from regulatory databases.
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `safetyCorrectiveActions[].type` | ✅ per entry | Type of action | `"recall"`, `"FSCA"`, `"advisory"`, `"software-update"` | FDA uses "recall"; EU uses "FSCA" |
+| `safetyCorrectiveActions[].classification` | ➖ | Severity class | String (e.g., "Class 2") | FDA: Class 1 (most serious) to Class 3 |
+| `safetyCorrectiveActions[].identifier` | ➖ | Official reference number | String (e.g., "Z-2490-2025") | FDA recall number, BfArM reference, etc. |
+| `safetyCorrectiveActions[].date` | ✅ per entry | Date action initiated | `YYYY-MM-DD` | From official notice |
+| `safetyCorrectiveActions[].status` | ➖ | Current status | `"open"`, `"closed"`, `"terminated"` | Update when status changes |
+| `safetyCorrectiveActions[].description` | ✅ per entry | What the issue was | String | Brief factual description |
+| `safetyCorrectiveActions[].affectedVersions` | ➖ | Software versions affected | Array of strings | Include all affected versions |
+| `safetyCorrectiveActions[].action` | ➖ | Corrective action taken | String | e.g., "Software update released" |
+| `safetyCorrectiveActions[].authority` | ✅ per entry | Regulatory authority | `"FDA"`, `"BfArM"`, `"MHRA"`, `"TGA"`, `"HPRA"`, etc. | Source authority for the notice |
+| `safetyCorrectiveActions[].sourceUrl` | ➖ | Link to official notice | URL | Link to FDA, BfArM, or MHRA database |
+
+**Data Sources**:
+- **FDA Recalls**: accessdata.fda.gov/scripts/cdrh/cfdocs/cfRes/res.cfm
+- **FDA MAUDE** (adverse events): accessdata.fda.gov/scripts/cdrh/cfdocs/cfMAUDE/search.cfm
+- **BfArM** (Germany): bfarm.de/EN/Medical-devices
+- **EUDAMED** (EU-wide, mandatory from May 2026)
+- **MHRA** (UK), **HPRA** (Ireland), **TGA** (Australia)
+
+## Additional Product Fields
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `developmentStage` | ➖ | Product lifecycle stage | `"certified"`, `"pipeline"`, `"research"`, `"discontinued"` | Use "certified" for products with CE/FDA clearance |
+| `priorVersions` | ➖ | Links to earlier product versions | Array of product ID strings | For tracking version evolution |
+| `supersededBy` | ➖ | ID of product that replaces this one | Product ID string | Set when product is discontinued/replaced |
+| `dosePredictionModels` | ➖ | Dose prediction capabilities (Treatment Planning) | Array of model descriptors | Specific to treatment planning products |
+| `regulatory.tfda` | ➖ | Taiwan FDA approval | Object with `status`, `notes` | Same structure as other regulatory entries |
 
 ## Platform & AI Classification
 
