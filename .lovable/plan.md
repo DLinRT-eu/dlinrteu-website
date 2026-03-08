@@ -1,71 +1,45 @@
-# Daily-Stable Random Sorting for Products and Company 
-
-## Problem
-
-Currently, `useProductShuffle` generates a new random order on every page load/refresh. This makes it hard to find the same product when navigating back and forth. Make sure the same behavior is also implemented for the company pages and random sorting.
-
-## Alternatives Considered
 
 
-| Approach                                                     | Pros                                                         | Cons                                            |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
-| **Daily seed-based shuffle**                                 | Deterministic per day, no storage needed, same for all users | Order changes at midnight; simple to implement  |
-| **Session-stable shuffle** (current Companies page approach) | Stable within a browsing session                             | Different per user/session; resets on tab close |
-| **localStorage with daily expiry**                           | Persists across tabs                                         | Unnecessary complexity vs seeded shuffle        |
-| **Weekly seed**                                              | Even more stable                                             | Too long without rotation                       |
+# Update Challenges: Add Missing CBCT and AAPM RT Challenges
 
+## Audit Results
 
-**Recommended: Daily seed-based shuffle** — A seeded pseudo-random number generator (PRNG) using the current date as the seed. All users see the same order on the same day. No storage needed. Cleanest implementation.
+Current challenge list is missing several RT-relevant challenges, particularly around CBCT and AAPM-organized events. After research, here are the findings:
 
-## Implementation
+### Challenges to Add
 
-### 1. Add a seeded PRNG to `useProductSorting.ts`
+1. **AAPM GDP-HMM (2025, Active)** — Generalizable Dose Prediction for Heterogeneous Multi-Cohort and Multi-Site Radiotherapy Planning. Multi-site, multi-cohort dose prediction challenge. Directly RT.
+   - URL: `https://www.aapm.org/GrandChallenge/GDP-HMM/`
+   - Org: AAPM
+   - Tags: Dose Prediction, Treatment Planning, Multi-Site, Radiation Therapy
 
-Replace the current `useProductShuffle` with a `useDailyProductShuffle` that:
+2. **AAPM MATCH (2019–2021, Completed)** — MArkerless lung Target Tracking CHallenge. Evaluates markerless tumor tracking during RT delivery using kV imaging. Directly RT.
+   - URL: `https://www.aapm.org/GrandChallenge/MATCH/`
+   - Org: AAPM
+   - Published results: doi:10.1002/mp.15418
+   - Tags: Lung Cancer, Tracking, Real-Time, Radiation Therapy
 
-- Computes a seed from today's date string (`"2026-03-05"`)
-- Uses a simple seeded PRNG (mulberry32) for the Fisher-Yates shuffle
-- Memoizes on `[products, todayString]` so it only recomputes when the product list changes or the day rolls over
+3. **ICASSP 3D CBCT Challenge (2024, Completed)** — Deep learning for low-dose 3D cone-beam CT reconstruction. CBCT is fundamental to RT image guidance and adaptive RT workflows.
+   - URL: `https://sites.google.com/view/icassp2024-spgc-3dcbct/home`
+   - Org: IEEE / ICASSP Signal Processing Grand Challenges
+   - Tags: CBCT, Image Reconstruction, Deep Learning, Radiation Therapy
 
-```typescript
-function mulberry32(seed: number) {
-  return function() {
-    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  };
-}
+### Challenges Considered but Not Added
 
-function dateToSeed(dateStr: string): number {
-  let hash = 0;
-  for (let i = 0; i < dateStr.length; i++) {
-    hash = ((hash << 5) - hash) + dateStr.charCodeAt(i);
-    hash |= 0;
-  }
-  return hash;
-}
+- **AAPM TrueCT** — General diagnostic CT reconstruction, not RT-specific. Does not meet the "specifically targeting radiotherapy AI tasks" criterion.
+- **OpenKBP as challenge** — Already listed as an Open Dataset with the challenge publication referenced. No duplication needed.
 
-export const useDailyProductShuffle = (products: ProductDetails[]) => {
-  const today = new Date().toISOString().slice(0, 10);
-  return useMemo(() => {
-    const rng = mulberry32(dateToSeed(today));
-    const arr = [...products];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rng() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }, [products, today]);
-};
-```
+### Existing Entry Fix
 
-### 2. Update `ProductGrid.tsx`
+- **AAPM Thoracic Auto-Segmentation**: Update the generic `https://www.aapm.org/GrandChallenge/` URL to the specific challenge page if available, or note that no dedicated page exists.
 
-- Import `useDailyProductShuffle` instead of `useProductShuffle`
-- Replace the call: `const shuffledProducts = useDailyProductShuffle(filteredProducts);`
+## File to Modify
 
-### Files Modified
+**`src/data/initiatives/challenges.ts`** — Add 3 new entries to the `CHALLENGE_INITIATIVES` array.
 
-- `src/hooks/useProductSorting.ts` — add seeded PRNG + `useDailyProductShuffle`, keep old export for backward compat
-- `src/components/ProductGrid.tsx` — swap to new hook
+## Summary
+
+- 3 new challenges added (GDP-HMM, MATCH, ICASSP 3D CBCT)
+- Net challenge count goes from 9 to 12
+- All meet the established inclusion criteria (competitive benchmarks for RT AI tasks, standardized evaluation, recognized organizers)
+
