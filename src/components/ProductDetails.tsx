@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle } from "lucide-react";
+import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle, ArrowRightLeft } from "lucide-react";
 import type { ProductDetails as ProductDetailsType } from "@/types/productDetails";
 import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
