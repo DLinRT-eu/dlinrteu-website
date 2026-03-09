@@ -175,7 +175,7 @@ export function exportProductToAidrtJSON(product: ProductDetails): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${createSafeFileName(product.name)}_aidrt_model_card.json`;
+  a.download = createSafeFileName(`${product.name}_aidrt_model_card`, "json");
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
