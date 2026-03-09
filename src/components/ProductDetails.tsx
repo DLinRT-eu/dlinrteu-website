@@ -193,6 +193,30 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 <FileText className="h-4 w-4" />
                 Export to JSON
               </Button>
+              
+              <div className="border-t border-border pt-3 mt-1">
+                <p className="text-xs text-muted-foreground mb-2">AID-RT Standard Format</p>
+                <Button
+                  onClick={handleExportAidrt}
+                  className="w-full flex items-center justify-center gap-2"
+                  variant="outline"
+                >
+                  <ArrowRightLeft className="h-4 w-4" />
+                  Export AID-RT JSON
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Converts to the{" "}
+                  <a
+                    href="https://doi.org/10.1016/j.phro.2026.100940"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-primary hover:text-primary/80"
+                  >
+                    AID-RT model card standard
+                  </a>
+                  . Unmapped fields are set to null.
+                </p>
+              </div>
             </div>
           </div>
           

@@ -7,3 +7,4 @@ export { exportBulkProductsToExcel } from './bulkExcelExporter';
 export { exportBulkProductsToPDF } from './bulkPdfExporter';
 export { exportBulkProductsToJSON } from './bulkJsonExporter';
 export { createSafeFileName } from './shared';
+export { exportProductToAidrtJSON } from '../aidrtExporter';

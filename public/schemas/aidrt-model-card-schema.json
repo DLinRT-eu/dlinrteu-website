@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AID-RT Model Card Schema (Simplified)",
+  "description": "Simplified version of the AID-RT (Artificial Intelligence Documentation in RadioTherapy) schema. Original: https://github.com/MIRO-UCLouvain/RT-AI-Model-Card. Paper: https://doi.org/10.1016/j.phro.2026.100940",
+  "version": "1.0.0",
+  "sections": {
+    "card_metadata": {
+      "description": "Metadata about the model card document itself",
+      "fields": {
+        "card_creation_date": { "type": "date", "required": true, "description": "Date the model card was created" },
+        "card_version": { "type": "string", "required": true, "description": "Version of the model card" },
+        "card_changes": { "type": "string", "required": false, "description": "Changes since the last version" },
+        "card_DOI": { "type": "string", "required": false, "description": "DOI of the model card if published" }
+      }
+    },
+    "model_basic_information": {
+      "description": "Core model identification, scope, regulatory status, and developer info",
+      "fields": {
+        "name": { "type": "string", "required": true, "description": "Name of the model", "dlinrtMapping": "basicInfo.productName" },
+        "version_number": { "type": "string", "required": true, "description": "Model version number", "dlinrtMapping": "basicInfo.version" },
+        "model_scope_summary": { "type": "string", "required": true, "description": "Brief scope summary (e.g. segmentation, dose prediction)", "dlinrtMapping": "basicInfo.category" },
+        "model_scope_anatomical_site": { "type": "string[]", "required": true, "description": "Target anatomical sites", "dlinrtMapping": "clinicalApplication.targetAnatomy" },
+        "model_scope_structures": { "type": "string[]", "required": false, "description": "Specific structures the model targets (e.g. TG-263 names)", "dlinrtMapping": "keyFeatures.supportedStructures" },
+        "clearance_type": { "type": "string", "required": false, "description": "Regulatory clearance (CE, FDA 510(k), De Novo, etc.)", "dlinrtMapping": "regulatory.ce + regulatory.fda" },
+        "clearance_number": { "type": "string", "required": false, "description": "Regulatory clearance/certificate number" },
+        "intended_use": { "type": "string", "required": true, "description": "Intended clinical use statement", "dlinrtMapping": "clinicalApplication.description" },
+        "intended_users": { "type": "string", "required": true, "description": "Intended user groups (e.g. radiation oncologists, RTTs)" },
+        "observed_limitations": { "type": "string[]", "required": false, "description": "Known model limitations", "dlinrtMapping": "performance.limitations" },
+        "ethical_considerations": { "type": "string", "required": false, "description": "Ethical considerations and bias concerns" },
+        "developers": { "type": "string", "required": true, "description": "Developers and/or vendor", "dlinrtMapping": "basicInfo.company" },
+        "developers_contact": { "type": "string", "required": false, "description": "Developer contact information", "dlinrtMapping": "contact.contactEmail" },
+        "license_type": { "type": "string", "required": false, "description": "Software license type" },
+        "citation": { "type": "string", "required": false, "description": "How to cite the model" },
+        "conflict_of_interest": { "type": "string", "required": false, "description": "Conflict of interest disclosures" },
+        "model_architecture": { "type": "string", "required": false, "description": "Neural network architecture (e.g. 3D U-Net, nnU-Net)" },
+        "model_choice": { "type": "string", "required": false, "description": "Rationale for architecture choice" },
+        "funding_sources": { "type": "string", "required": false, "description": "Funding sources for model development" }
+      }
+    },
+    "technical_specifications": {
+      "description": "Model pipeline, inputs, outputs, and processing details",
+      "fields": {
+        "pipeline": { "type": "string", "required": false, "description": "Overall processing pipeline description", "dlinrtMapping": "technicalSpecs.integration" },
+        "model_inputs": { "type": "string[]", "required": true, "description": "Model input data types", "dlinrtMapping": "technicalSpecs.input" },
+        "input_format": { "type": "string[]", "required": false, "description": "Input file formats (DICOM, NIfTI, etc.)", "dlinrtMapping": "technicalSpecs.inputFormat" },
+        "model_outputs": { "type": "string[]", "required": true, "description": "Model output data types", "dlinrtMapping": "technicalSpecs.output" },
+        "output_format": { "type": "string[]", "required": false, "description": "Output file formats", "dlinrtMapping": "technicalSpecs.outputFormat" },
+        "preprocessing": { "type": "string", "required": false, "description": "Preprocessing steps applied to input data" },
+        "postprocessing": { "type": "string", "required": false, "description": "Postprocessing steps applied to model output" },
+        "hardware_requirements": { "type": "string", "required": false, "description": "Minimum hardware requirements" },
+        "software_dependencies": { "type": "string", "required": false, "description": "Software dependencies and frameworks" }
+      }
+    },
+    "learning_architecture": {
+      "description": "Model training architecture details (mostly AID-RT-only, limited DLinRT coverage)",
+      "fields": {
+        "total_number_trainable_parameters": { "type": "number", "required": false, "description": "Total number of trainable parameters" },
+        "loss_function": { "type": "string", "required": false, "description": "Loss function used for training" },
+        "optimizer": { "type": "string", "required": false, "description": "Optimizer algorithm" },
+        "learning_rate": { "type": "string", "required": false, "description": "Learning rate or schedule" },
+        "batch_size": { "type": "number", "required": false, "description": "Training batch size" },
+        "number_of_epochs": { "type": "number", "required": false, "description": "Number of training epochs" },
+        "data_augmentation": { "type": "string", "required": false, "description": "Data augmentation strategy" },
+        "uncertainty_quantification": { "type": "string", "required": false, "description": "Method for uncertainty estimation" },
+        "explainability": { "type": "string", "required": false, "description": "Explainability / interpretability techniques" },
+        "training_loss_curve": { "type": "string", "required": false, "description": "Description or link to training loss curves" },
+        "input_size": { "type": "string", "required": false, "description": "Input tensor dimensions" },
+        "output_size": { "type": "string", "required": false, "description": "Output tensor dimensions" },
+        "input_format": { "type": "string", "required": false, "description": "Internal input representation format" },
+        "output_format": { "type": "string", "required": false, "description": "Internal output representation format" }
+      }
+    },
+    "training_data": {
+      "description": "Training dataset characteristics and methodology",
+      "fields": {
+        "training_description": { "type": "string", "required": false, "description": "Training data description", "dlinrtMapping": "trainingData.description" },
+        "training_size": { "type": "string", "required": false, "description": "Number of training samples", "dlinrtMapping": "trainingData.datasetSize" },
+        "training_origin": { "type": "string[]", "required": false, "description": "Data origin institutions/databases", "dlinrtMapping": "trainingData.datasetSources" },
+        "imaging_modality": { "type": "string[]", "required": false, "description": "Imaging modalities in training set", "dlinrtMapping": "clinicalApplication.modality" },
+        "scanner_model": { "type": "string[]", "required": false, "description": "Scanner models used", "dlinrtMapping": "trainingData.scannerModels" },
+        "scanner_manufacturer": { "type": "string[]", "required": false, "description": "Scanner manufacturers" },
+        "age": { "type": "string", "required": false, "description": "Age distribution of training cohort", "dlinrtMapping": "trainingData.demographics" },
+        "sex": { "type": "string", "required": false, "description": "Sex distribution of training cohort" },
+        "bmi": { "type": "string", "required": false, "description": "BMI distribution" },
+        "tnm_staging": { "type": "string", "required": false, "description": "TNM staging distribution" },
+        "patient_position": { "type": "string", "required": false, "description": "Patient positioning during scanning" },
+        "scan_acquisition_parameters": { "type": "object", "required": false, "description": "Scan parameters (kV, mAs, slice thickness, TR, TE, FOV, etc.)" },
+        "validation_strategy": { "type": "string", "required": false, "description": "Validation methodology (k-fold, hold-out, etc.)" },
+        "validation_size": { "type": "string", "required": false, "description": "Size of validation dataset" },
+        "number_of_annotators": { "type": "number", "required": false, "description": "Number of expert annotators" },
+        "annotator_qualifications": { "type": "string", "required": false, "description": "Annotator credentials and experience" },
+        "annotation_tool": { "type": "string", "required": false, "description": "Software used for annotations" },
+        "inter_observer_variability": { "type": "string", "required": false, "description": "Inter-observer agreement metrics" },
+        "public_datasets": { "type": "string[]", "required": false, "description": "Public datasets used", "dlinrtMapping": "trainingData.publicDatasets" },
+        "dose_engine": { "type": "string", "required": false, "description": "Dose calculation engine (for dose prediction models)" },
+        "dose_algorithm": { "type": "string", "required": false, "description": "Dose algorithm used to generate ground truth" },
+        "treatment_technique": { "type": "string", "required": false, "description": "Treatment techniques in training data (IMRT, VMAT, etc.)" }
+      }
+    },
+    "evaluation_data": {
+      "description": "Evaluation/testing dataset and performance metrics",
+      "fields": {
+        "evaluation_description": { "type": "string", "required": false, "description": "Evaluation data description", "dlinrtMapping": "evaluationData.description" },
+        "evaluation_size": { "type": "string", "required": false, "description": "Number of evaluation samples", "dlinrtMapping": "evaluationData.datasetSize" },
+        "evaluation_frame": { "type": "string", "required": false, "description": "Evaluation framework (retrospective, prospective)", "dlinrtMapping": "evaluationData.studyDesign" },
+        "evaluation_origin": { "type": "string[]", "required": false, "description": "Evaluation data institutions" },
+        "segmentation_metrics": { "type": "object", "required": false, "description": "Segmentation metrics (DSC, HD95, surface DSC, etc.)" },
+        "dose_metrics": { "type": "object", "required": false, "description": "Dose prediction metrics (gamma pass rate, DVH comparison)" },
+        "image_metrics": { "type": "object", "required": false, "description": "Image quality metrics (SSIM, MAE, PSNR)" },
+        "clinical_acceptability": { "type": "string", "required": false, "description": "Clinical acceptability assessment" },
+        "commissioning_notes": { "type": "string", "required": false, "description": "Commissioning and site validation notes" },
+        "comparison_with_humans": { "type": "string", "required": false, "description": "Performance comparison with human experts" },
+        "failure_analysis": { "type": "string", "required": false, "description": "Analysis of failure cases" }
+      }
+    }
+  }
+}
