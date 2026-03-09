@@ -72,6 +72,15 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
     });
   };
 
+  const handleExportAidrt = () => {
+    import("@/utils/modelCard").then(({ exportProductToAidrtJSON }) => {
+      exportProductToAidrtJSON(product);
+      toast.success(`AID-RT model card exported for ${product.name}`);
+    }).catch(() => {
+      toast.error("Failed to export AID-RT model card");
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 md:px-8 py-8 space-y-8">
