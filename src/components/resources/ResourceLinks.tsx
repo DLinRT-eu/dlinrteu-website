@@ -142,6 +142,34 @@ const ResourceLinks = () => {
       icon: Shield,
       category: "AI/ML Guidelines"
     },
+    {
+      title: "AID-RT: Standardised AI Documentation in Radiotherapy",
+      description: "Domain-specific model card standard for AI in radiotherapy (Phys. Imaging Radiat. Oncol. 2026). Defines a structured 6-section schema covering model info, architecture, training and evaluation data methodology",
+      url: "https://doi.org/10.1016/j.phro.2026.100940",
+      icon: BookOpen,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "AID-RT Model Card Writing Tool",
+      description: "Interactive Streamlit app for creating standardised AI model cards following the AID-RT schema. Export model cards in JSON format compatible with the AID-RT standard",
+      url: "https://rt-modelcard.streamlit.app/",
+      icon: FileText,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "DLinRT Model Card Schema (JSON)",
+      description: "Machine-readable JSON schema defining all DLinRT product fields with required/optional status, types, and AID-RT field mappings",
+      url: "/schemas/dlinrt-model-card-schema.json",
+      icon: Database,
+      category: "AI/ML Guidelines"
+    },
+    {
+      title: "AID-RT Model Card Schema (JSON)",
+      description: "Simplified AID-RT schema JSON with field metadata — use alongside the DLinRT schema to compare nomenclature and coverage",
+      url: "/schemas/aidrt-model-card-schema.json",
+      icon: Database,
+      category: "AI/ML Guidelines"
+    },
     
     // Professional Organizations
     {

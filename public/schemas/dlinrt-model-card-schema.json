@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DLinRT Product Model Card Schema",
+  "description": "Schema for Deep Learning in Radiotherapy product data, aligned with the ProductDetails TypeScript interface at src/types/productDetails.d.ts",
+  "version": "1.0.0",
+  "homepage": "https://dlinrt.eu",
+  "sections": {
+    "basicInfo": {
+      "description": "Core product identification and status",
+      "fields": {
+        "productName": { "type": "string", "required": true, "description": "Commercial product name" },
+        "version": { "type": "string", "required": false, "description": "Current software version", "aidrtMapping": "model_basic_information.version_number" },
+        "company": { "type": "string", "required": true, "description": "Manufacturer / vendor name", "aidrtMapping": "model_basic_information.developers" },
+        "category": { "type": "string", "required": true, "description": "Primary product category", "allowedValues": ["Auto-Contouring","Clinical Prediction","Image Enhancement","Image Synthesis","Performance Monitor","Platform","Reconstruction","Registration","Tracking","Treatment Planning"], "aidrtMapping": "model_basic_information.model_scope_summary" },
+        "secondaryCategories": { "type": "string[]", "required": false, "description": "Additional categories the product belongs to" },
+        "developmentStage": { "type": "string", "required": false, "description": "Product maturity level", "allowedValues": ["certified","pipeline","research","discontinued"] },
+        "usesAI": { "type": "boolean", "required": false, "description": "Whether the product itself uses AI/DL technology" },
+        "partOf": { "type": "object", "required": false, "description": "Parent product/system this product belongs to", "properties": { "name": "string", "version": "string", "productUrl": "string", "relationship": "string" } }
+      }
+    },
+    "clinicalApplication": {
+      "description": "Intended clinical use and scope",
+      "fields": {
+        "description": { "type": "string", "required": true, "description": "Product description / intended use summary", "aidrtMapping": "model_basic_information.intended_use" },
+        "suggestedUse": { "type": "string", "required": false, "description": "Recommended clinical workflow placement" },
+        "subspeciality": { "type": "string", "required": false, "description": "Clinical subspeciality focus" },
+        "modality": { "type": "string | string[]", "required": false, "description": "Supported imaging modalities (CT, MRI, PET, etc.)", "aidrtMapping": "training_data.imaging_modality" },
+        "anatomy": { "type": "string[]", "required": false, "description": "Target anatomical regions", "aidrtMapping": "model_basic_information.model_scope_anatomical_site" },
+        "diseaseTargeted": { "type": "string[]", "required": false, "description": "Specific diseases or conditions targeted" }
+      }
+    },
+    "keyFeatures": {
+      "description": "Product capabilities",
+      "fields": {
+        "keyFeatures": { "type": "string[]", "required": false, "description": "List of key product features and capabilities" },
+        "supportedStructures": { "type": "array", "required": false, "description": "Anatomical structures supported (for Auto-Contouring products)", "aidrtMapping": "model_basic_information.model_scope_structures" },
+        "dosePredictionModels": { "type": "array", "required": false, "description": "Dose prediction models (for Treatment Planning products)" },
+        "integratedModules": { "type": "array", "required": false, "description": "Sub-modules integrated into this product (for Platform products)" }
+      }
+    },
+    "technicalSpecs": {
+      "description": "Technical input/output and deployment information",
+      "fields": {
+        "population": { "type": "string", "required": false, "description": "Target patient population" },
+        "input": { "type": "string[]", "required": false, "description": "Expected input data types", "aidrtMapping": "technical_specifications.model_inputs" },
+        "inputFormat": { "type": "string[]", "required": false, "description": "Supported input file formats", "aidrtMapping": "technical_specifications.input_format" },
+        "output": { "type": "string[]", "required": false, "description": "Output data types", "aidrtMapping": "technical_specifications.model_outputs" },
+        "outputFormat": { "type": "string[]", "required": false, "description": "Supported output file formats", "aidrtMapping": "technical_specifications.output_format" },
+        "integration": { "type": "string[]", "required": false, "description": "Compatible treatment planning systems / platforms", "aidrtMapping": "technical_specifications.pipeline" },
+        "deployment": { "type": "string[]", "required": false, "description": "Deployment options (cloud, on-premise, hybrid)" },
+        "processingTime": { "type": "string", "required": false, "description": "Typical processing time" }
+      }
+    },
+    "performance": {
+      "description": "Evidence, limitations, and clinical validation",
+      "fields": {
+        "clinicalEvidence": { "type": "string", "required": false, "description": "Summary of clinical evidence" },
+        "evidence": { "type": "array", "required": false, "description": "Structured evidence entries with type, description, and link" },
+        "limitations": { "type": "string[]", "required": false, "description": "Known limitations and constraints", "aidrtMapping": "model_basic_information.observed_limitations" },
+        "evidenceRigor": { "type": "string", "required": false, "description": "Evidence methodology robustness level", "allowedValues": ["E0","E1","E2","E3"] },
+        "evidenceRigorNotes": { "type": "string", "required": false, "description": "Free-text notes on evidence rigor classification" },
+        "clinicalImpact": { "type": "string", "required": false, "description": "Demonstrated clinical outcome level", "allowedValues": ["I0","I1","I2","I3","I4","I5"] },
+        "clinicalImpactNotes": { "type": "string", "required": false, "description": "Free-text notes on clinical impact classification" }
+      }
+    },
+    "studyQuality": {
+      "description": "Study design quality sub-attributes (van Leeuwen 2025, Pham 2023)",
+      "fields": {
+        "evidenceVendorIndependent": { "type": "boolean", "required": false, "description": "At least one study independent of the vendor" },
+        "evidenceMultiCenter": { "type": "boolean", "required": false, "description": "Evidence from 3+ clinical sites" },
+        "evidenceMultiNational": { "type": "boolean", "required": false, "description": "Data from multiple countries" },
+        "evidenceProspective": { "type": "boolean", "required": false, "description": "At least one prospective study design" },
+        "evidenceExternalValidation": { "type": "boolean", "required": false, "description": "Validated on an external dataset" }
+      }
+    },
+    "regulatory": {
+      "description": "Regulatory clearances and certifications",
+      "fields": {
+        "ce": { "type": "object", "required": false, "description": "CE marking status and details", "aidrtMapping": "model_basic_information.clearance_type" },
+        "fda": { "type": "object | string", "required": false, "description": "FDA clearance status and details", "aidrtMapping": "model_basic_information.clearance_type" },
+        "tga": { "type": "object", "required": false, "description": "Australian TGA approval status" },
+        "tfda": { "type": "object", "required": false, "description": "Taiwan TFDA approval status" },
+        "intendedUseStatement": { "type": "string", "required": false, "description": "Official regulatory intended use statement", "aidrtMapping": "model_basic_information.intended_use" }
+      }
+    },
+    "trainingData": {
+      "description": "Training dataset transparency metadata",
+      "fields": {
+        "description": { "type": "string", "required": false, "description": "Training data description", "aidrtMapping": "training_data.training_description" },
+        "datasetSize": { "type": "string", "required": false, "description": "Number of training samples", "aidrtMapping": "training_data.training_size" },
+        "datasetSources": { "type": "string[]", "required": false, "description": "Data sources (institutions, databases)", "aidrtMapping": "training_data.training_origin" },
+        "demographics": { "type": "string", "required": false, "description": "Patient demographics summary", "aidrtMapping": "training_data.age" },
+        "scannerModels": { "type": "string[]", "required": false, "description": "Scanner models used in training data", "aidrtMapping": "training_data.scanner_model" },
+        "institutions": { "type": "number", "required": false, "description": "Number of contributing institutions" },
+        "countries": { "type": "number", "required": false, "description": "Number of contributing countries" },
+        "publicDatasets": { "type": "string[]", "required": false, "description": "Public datasets used (e.g. TCIA, LCTSC)" },
+        "disclosureLevel": { "type": "string", "required": false, "description": "How much training data info is disclosed", "allowedValues": ["full","partial","minimal","none"] },
+        "source": { "type": "string", "required": false, "description": "Source of training data information" },
+        "sourceUrl": { "type": "string", "required": false, "description": "URL to training data source" }
+      }
+    },
+    "evaluationData": {
+      "description": "Clinical evaluation dataset metadata",
+      "fields": {
+        "description": { "type": "string", "required": false, "description": "Evaluation data description", "aidrtMapping": "evaluation_data.evaluation_description" },
+        "datasetSize": { "type": "string", "required": false, "description": "Number of evaluation samples", "aidrtMapping": "evaluation_data.evaluation_size" },
+        "sites": { "type": "number", "required": false, "description": "Number of evaluation sites" },
+        "countries": { "type": "number", "required": false, "description": "Number of evaluation countries" },
+        "demographics": { "type": "string", "required": false, "description": "Evaluation cohort demographics" },
+        "studyDesign": { "type": "string", "required": false, "description": "Study design type", "aidrtMapping": "evaluation_data.evaluation_frame" },
+        "primaryEndpoint": { "type": "string", "required": false, "description": "Primary evaluation endpoint" },
+        "results": { "type": "string", "required": false, "description": "Key evaluation results" },
+        "source": { "type": "string", "required": false, "description": "Source of evaluation information" },
+        "sourceUrl": { "type": "string", "required": false, "description": "URL to evaluation source" }
+      }
+    },
+    "safetyCorrectiveActions": {
+      "description": "Field safety corrective actions and recalls (DLinRT-only, no AID-RT equivalent)",
+      "fields": {
+        "type": { "type": "string", "required": true, "description": "Action type", "allowedValues": ["recall","FSCA","advisory","software-update"] },
+        "date": { "type": "string", "required": true, "description": "Date of the action (ISO 8601)" },
+        "description": { "type": "string", "required": true, "description": "Description of the safety issue" },
+        "authority": { "type": "string", "required": true, "description": "Regulatory authority (e.g. FDA, TGA)" },
+        "status": { "type": "string", "required": false, "allowedValues": ["open","closed","terminated"] },
+        "sourceUrl": { "type": "string", "required": false, "description": "URL to the official notice" }
+      }
+    },
+    "contact": {
+      "description": "Company and product URLs",
+      "fields": {
+        "companyUrl": { "type": "string", "required": false, "description": "Company website URL" },
+        "productUrl": { "type": "string", "required": false, "description": "Product page URL" },
+        "contactEmail": { "type": "string", "required": false, "description": "Support contact email" }
+      }
+    },
+    "quality": {
+      "description": "Data quality and revision tracking",
+      "fields": {
+        "lastRevised": { "type": "string", "required": false, "description": "Date of last DLinRT revision (ISO 8601)" },
+        "companyRevisionDate": { "type": "string", "required": false, "description": "Date company last revised their data" },
+        "source": { "type": "string", "required": false, "description": "Primary data source for this entry" }
+      }
+    },
+    "guidelines": {
+      "description": "Compliance with clinical/technical guidelines",
+      "fields": {
+        "guidelines": { "type": "array", "required": false, "description": "Guidelines followed", "itemProperties": { "name": "string (required)", "compliance": "'full' | 'partial' | 'planned'", "version": "string", "reference": "string", "url": "string" } }
+      }
+    },
+    "market": {
+      "description": "Market availability and pricing (DLinRT-only)",
+      "fields": {
+        "onMarketSince": { "type": "string", "required": false, "description": "Year/date product became available" },
+        "availability": { "type": "string", "required": false, "description": "Geographic or market availability" },
+        "pricing": { "type": "object | string", "required": false, "description": "Pricing model information" }
+      }
+    }
+  }
+}

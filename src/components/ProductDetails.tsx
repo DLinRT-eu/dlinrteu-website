@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle } from "lucide-react";
+import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle, ArrowRightLeft } from "lucide-react";
 import type { ProductDetails as ProductDetailsType } from "@/types/productDetails";
 import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
@@ -69,6 +69,15 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       toast.success(`Model card exported to PDF for ${product.name}`);
     }).catch(() => {
       toast.error("Failed to export model card to PDF");
+    });
+  };
+
+  const handleExportAidrt = () => {
+    import("@/utils/modelCard").then(({ exportProductToAidrtJSON }) => {
+      exportProductToAidrtJSON(product);
+      toast.success(`AID-RT model card exported for ${product.name}`);
+    }).catch(() => {
+      toast.error("Failed to export AID-RT model card");
     });
   };
 
@@ -184,6 +193,30 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                 <FileText className="h-4 w-4" />
                 Export to JSON
               </Button>
+              
+              <div className="border-t border-border pt-3 mt-1">
+                <p className="text-xs text-muted-foreground mb-2">AID-RT Standard Format</p>
+                <Button
+                  onClick={handleExportAidrt}
+                  className="w-full flex items-center justify-center gap-2"
+                  variant="outline"
+                >
+                  <ArrowRightLeft className="h-4 w-4" />
+                  Export AID-RT JSON
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Converts to the{" "}
+                  <a
+                    href="https://doi.org/10.1016/j.phro.2026.100940"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-primary hover:text-primary/80"
+                  >
+                    AID-RT model card standard
+                  </a>
+                  . Unmapped fields are set to null.
+                </p>
+              </div>
             </div>
           </div>
           
