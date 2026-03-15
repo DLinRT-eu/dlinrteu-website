@@ -67,7 +67,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
 
 },
-    version: "1.1.2",
+    version: "1.2",
     releaseDate: "2025-11-06",
     evidenceRigor: "E0",
     clinicalImpact: "I1",
