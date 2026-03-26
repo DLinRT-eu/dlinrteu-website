@@ -1,0 +1,66 @@
+
+name: Deploy to Custom Domain
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Check product revision dates
+        run: node scripts/update-revisions.mjs --check
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Copy 404.html for SPA routing
+        run: cp ./dist/index.html ./dist/404.html
+      - name: Create CNAME file
+        run: echo "dlinrt.eu" > ./dist/CNAME
+      - name: Create .nojekyll file
+        run: touch ./dist/.nojekyll
+      - name: Ensure _headers is properly copied
+        run: |
+          if [ -f ./public/_headers ]; then
+            cp ./public/_headers ./dist/_headers
+            echo "_headers file copied successfully"
+          else
+            echo "Warning: _headers file not found in public directory"
+            exit 1
+          fi
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

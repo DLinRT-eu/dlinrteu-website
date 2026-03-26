@@ -1,0 +1,230 @@
+
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, ShieldCheck, ShieldAlert, AlertTriangle } from "lucide-react";
+import { ProductDetails } from "@/types/productDetails";
+import { getModalityColor } from "@/utils/chartColors";
+import { getKeyFeatures } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
+import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
+import { isInvestigationalProduct } from "@/utils/productFilters";
+
+interface ProductCardProps {
+  id?: string;
+  name: string;
+  company: string;
+  description: string;
+  features?: string[];
+  keyFeatures?: string[];
+  category: string;
+  certification?: string;
+  logoUrl?: string;
+  anatomicalLocation?: string[];
+  modality?: string | string[];
+  website?: string;
+  companyUrl?: string;
+  productUrl?: string;
+  regulatory?: ProductDetails['regulatory'];
+  isSelectable?: boolean;
+  isSelected?: boolean;
+  onSelectionChange?: (product: ProductDetails, selected: boolean) => void;
+}
+
+const ProductCard = ({ 
+  id, 
+  name, 
+  company, 
+  description, 
+  features, 
+  keyFeatures,
+  category, 
+  certification,
+  logoUrl = "/placeholder.svg",
+  anatomicalLocation,
+  modality,
+  website,
+  companyUrl,
+  productUrl,
+  regulatory,
+  isSelectable = false,
+  isSelected = false,
+  onSelectionChange
+}: ProductCardProps) => {
+  const navigate = useNavigate();
+
+  // Get the unified key features using the utility function
+  const displayFeatures = getKeyFeatures({ features, keyFeatures } as ProductDetails);
+
+  const handleCardClick = () => {
+    if (!isSelectable) {
+      navigate(`/product/${id}`);
+    }
+  };
+
+  const handleSelectionChange = (checked: boolean) => {
+    if (onSelectionChange && id) {
+      // Get the full product details from data service instead of creating incomplete object
+      import("@/services/DataService").then(({ default: dataService }) => {
+        const fullProduct = dataService.getProductById(id);
+        if (fullProduct) {
+          onSelectionChange(fullProduct, checked);
+        }
+      });
+    }
+  };
+
+  const formatModality = (modality: string | string[] | undefined): string => {
+    if (!modality) return "Unknown";
+    return Array.isArray(modality) ? modality.join(", ") : modality;
+  };
+
+  const getModalityBadgeStyle = (): string => {
+    return `border-transparent text-white`;
+  };
+
+  const renderModalityBadges = (modality: string | string[] | undefined) => {
+    if (!modality) return null;
+    
+    const modalities = Array.isArray(modality) ? modality : [modality];
+    
+    return modalities.map((singleModality, index) => (
+      <Badge 
+        key={index}
+        className={`text-xs mr-2 ${getModalityBadgeStyle()}`}
+        style={{ backgroundColor: getModalityColor(singleModality.trim()) }}
+      >
+        {singleModality.trim()}
+      </Badge>
+    ));
+  };
+
+  const renderCertificationBadge = () => {
+    // Build a ProductDetails-like object for the utility function
+    const productForTags: Partial<ProductDetails> = {
+      id,
+      name,
+      company,
+      description,
+      features,
+      keyFeatures,
+      category,
+      certification,
+      modality,
+      regulatory
+    };
+    
+    // Check if product is investigational/pending
+    const isInvestigational = certification?.toLowerCase().includes('pending') ||
+                              certification?.toLowerCase().includes('investigation');
+    
+    if (isInvestigational) {
+      return (
+        <Badge 
+          variant="warning" 
+          className="text-xs bg-amber-100 text-amber-800 border-amber-300 flex items-center gap-1 mr-2"
+        >
+          <AlertTriangle className="h-3 w-3" />
+          Investigation Use
+        </Badge>
+      );
+    }
+    
+    const tags = getStandardizedCertificationTags(productForTags as ProductDetails);
+    const isMDRExempt = tags.includes('MDR exempt') || 
+                        certification?.toLowerCase().includes('exempt');
+    
+    if (isMDRExempt) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-amber-50 text-amber-700 border-amber-300 flex items-center gap-1 mr-2"
+        >
+          <ShieldAlert className="h-3 w-3" />
+          MDR Exempt
+        </Badge>
+      );
+    }
+    
+    const hasCE = tags.some(t => t.includes('CE'));
+    const hasFDA = tags.some(t => t.includes('FDA'));
+    
+    if (hasCE || hasFDA) {
+      return (
+        <Badge 
+          variant="outline" 
+          className="text-xs bg-green-50 text-green-700 border-green-300 flex items-center gap-1 mr-2"
+        >
+          <ShieldCheck className="h-3 w-3" />
+          {hasCE && hasFDA ? 'CE/FDA' : hasCE ? 'CE' : 'FDA'}
+        </Badge>
+      );
+    }
+    
+    return null;
+  };
+
+  return (
+    <Card 
+      className={`h-full hover:shadow-lg transition-shadow ${!isSelectable ? 'cursor-pointer' : ''} ${isSelected ? 'ring-2 ring-primary' : ''}`}
+      onClick={handleCardClick}
+    >
+      <CardHeader className="pb-3 px-4 sm:px-6">
+        <div className="flex items-start justify-between gap-3">
+          {isSelectable && (
+            <div className="pt-1">
+              <Checkbox
+                checked={isSelected}
+                onCheckedChange={handleSelectionChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          )}
+          <div className="flex items-center space-x-3 flex-1 min-w-0">
+            <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 border">
+              <img 
+                src={logoUrl} 
+                alt={`${company} logo`} 
+                className="w-12 h-12 object-contain"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder.svg";
+                }}
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <CardTitle className="text-lg leading-tight truncate">{name}</CardTitle>
+              <p className="text-sm text-gray-600 truncate">{company}</p>
+            </div>
+          </div>
+          <Badge variant="secondary" className="text-xs flex-shrink-0">
+            {category}
+          </Badge>
+        </div>
+      </CardHeader>
+
+      <CardContent className="py-0 px-4 sm:px-6">
+        <p className="text-sm text-gray-700 mb-4 line-clamp-3">{description}</p>
+        {displayFeatures && displayFeatures.length > 0 && (
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-gray-800">Key Features:</h4>
+            <ul className="list-disc list-inside text-sm text-gray-600">
+              {displayFeatures.slice(0, 3).map((feature, index) => (
+                <li key={index} className="line-clamp-1">{feature}</li>
+              ))}
+              {displayFeatures.length > 3 && (
+                <li className="line-clamp-1">And more...</li>
+              )}
+            </ul>
+          </div>
+        )}
+        <div className="flex items-center flex-wrap gap-1 mt-2 mb-4">
+          {renderCertificationBadge()}
+          {modality && renderModalityBadges(modality)}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default ProductCard;

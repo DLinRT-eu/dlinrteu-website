@@ -1,0 +1,77 @@
+import { ProductDetails } from "@/types/productDetails";
+
+export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
+  {
+    id: "medlever-workflow-management",
+    name: "Radiation Oncology Work Management",
+    company: "MedLever, Inc.",
+    companyUrl: "https://medlever.com/",
+    productUrl: "https://medlever.com/",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/medlever.ts",
+    description: "AI-powered workflow orchestration platform built from the ground up with data integrity and workflow alignment at its core. Unifies clinical and financial pathways to coordinate simulation, planning, treatment, and QA across all roles and modalities while eliminating fragmented workflows.",
+    features: [
+      "Workflow orchestration across all modalities",
+      "Documentation automation",
+      "Interoperability across disparate systems",
+      "Real-time analytics & visibility"
+    ],
+    category: "Platform",
+    certification: "Non-Regulated",
+    logoUrl: "/logos/medlever.jpg",
+    website: "https://medlever.com/",
+    anatomicalLocation: ["Multi-site"],
+    modality: ["CT", "MRI", "PET", "Multi-modality"],
+    subspeciality: "Radiation Oncology",
+    diseaseTargeted: ["Multiple Cancer Types"],
+    keyFeatures: [
+      "Workflow orchestration: Coordinate simulation, planning, treatment, and QA across all roles and modalities with unified task management",
+      "Documentation automation: Streamline reporting, reduce clicks, and eliminate redundant data entry across the entire care pathway",
+      "AI workflow optimization: AI acts as a true partner to spot workflow gaps, ensure timely task completion, and improve accuracy",
+      "Patient safety enhancement: Ensure treatment verifications and QA happen on time with workflow tracking and automated alerts"
+    ],
+    technicalSpecifications: {
+      population: "Cancer patients receiving radiation therapy",
+      input: ["Clinical data", "Treatment plans", "Scheduling data", "Financial data", "QA metrics", "Staff assignments"],
+      inputFormat: ["DICOM", "HL7", "FHIR", "System APIs"],
+      output: ["Workflow schedules", "Documentation reports", "Analytics dashboards", "Billing data", "QA reports"],
+      outputFormat: ["DICOM-RTSTRUCT", "HL7 messages", "PDF reports", "API responses", "Dashboard analytics"]
+    },
+    technology: {
+      integration: [
+        "ARIA (Varian)",
+        "MOSAIQ (Elekta)",
+        "Epic EMR",
+        "Oncology Information Systems (OIS)",
+        "Electronic Medical Records (EMR)",
+        "Billing systems",
+        "QA systems"
+      ],
+      deployment: ["Cloud-based", "On-premise"],
+      triggerForAnalysis: "Integrated within clinical workflow",
+      processingTime: "Real-time workflow management"
+    },
+    regulatory: {
+      fda: {
+        status: "Non-Device-MDDS (Exempt)",
+        type: "MDDS Exempt",
+        notes: "Per FDA's 2022 guidance on Medical Device Data Systems, workflow management software that transfers, stores, and displays clinical data without diagnostic modification is classified as Non-Device-MDDS and exempt from 510(k) requirements."
+      },
+      intendedUseStatement: "A vendor-independent workflow automation and documentation solution designed to coordinate the full patient care cycle (simulation, planning, treatment, and QA) in radiation oncology. The platform simplifies clinical and administrative activities, automates document generation, and provides real-time visibility through bidirectional synchronization with Oncology Information Systems (OIS)."
+    },
+    market: {
+      onMarketSince: "2024",
+      distributionChannels: ["Direct sales"]
+    },
+    usesAI: false,
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Non-Device-MDDS. Workflow management tool. No clinical outcome publications.",
+    clinicalImpactNotes: "QA/monitoring tool for workflow orchestration and documentation in radiation oncology.",
+    releaseDate: "2024-01-01",
+    lastUpdated: "2026-02-23",
+    lastRevised: "2026-03-08",
+    companyRevisionDate: "2025-11-02",
+    source: "Company provided information. Regulatory classification based on FDA 2022 MDDS guidance.",
+    clinicalEvidence: "Non-Device-MDDS workflow management platform for radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."
+  }
+];

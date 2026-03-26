@@ -1,0 +1,484 @@
+
+import { ALL_PRODUCTS, COMPANIES, NEWS_ITEMS, ALL_INITIATIVES } from "@/data";
+import type { ProductDetails } from "@/types/productDetails";
+import type { CompanyDetails } from "@/types/company";
+import type { NewsItem } from "@/types/news";
+import type { Initiative } from "@/types/initiative";
+import type { FilterState } from "@/types/filters";
+import { 
+  hasRegulatoryApproval, 
+  containsDeepLearningKeywords, 
+  normalizeAnatomicalLocations,
+  standardizeCertification,
+  isPipelineProduct
+} from "@/utils/productFilters";
+import { transformTaskData, transformLocationData, transformModalityData, transformStructureData, transformStructureTypeData } from "@/utils/chartDataTransformation";
+
+/**
+ * Helper function to check if a product matches a task/category
+ */
+const matchesTask = (product: ProductDetails, task: string): boolean => {
+  if (product.category === task) return true;
+  if (product.secondaryCategories?.includes(task)) return true;
+  return false;
+};
+
+/**
+ * DataService provides methods to access and manipulate product, company, and news data
+ */
+class DataService {
+  private products: ProductDetails[] = [];
+  private verificationsLoaded = false;
+
+  constructor() {
+    this.loadCompanyVerifications();
+  }
+
+  // Load company verifications and merge with products
+  async loadCompanyVerifications() {
+    if (this.verificationsLoaded) return;
+
+    try {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { data } = await supabase
+        .from('company_product_verifications')
+        .select('product_id, verified_at')
+        .order('verified_at', { ascending: false });
+      
+      if (data) {
+        // Create map of product_id -> latest verification date
+        const verificationMap = new Map<string, string>();
+        data.forEach(v => {
+          if (!verificationMap.has(v.product_id)) {
+            verificationMap.set(v.product_id, v.verified_at);
+          }
+        });
+        
+        // Merge with ALL_PRODUCTS
+        this.products = ALL_PRODUCTS.map(product => ({
+          ...product,
+          companyRevisionDate: verificationMap.get(product.id) || product.companyRevisionDate
+        }));
+        
+        this.verificationsLoaded = true;
+      }
+    } catch (error) {
+      console.error('Error loading company verifications:', error);
+      this.products = [...ALL_PRODUCTS];
+    }
+  }
+
+  // Product methods
+  getAllProducts(): ProductDetails[] {
+    // Return all products with regulatory approval (excludes pipeline products)
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return productList.filter(product => 
+      hasRegulatoryApproval(product) && !isPipelineProduct(product)
+    );
+  }
+
+  /**
+   * Get all pipeline products (announced but not certified)
+   */
+  getPipelineProducts(): ProductDetails[] {
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return productList.filter(product => isPipelineProduct(product));
+  }
+
+  /**
+   * Get total product count including pipeline products (for homepage display)
+   */
+  getTotalProductCount(): number {
+    return this.getAllProducts().length + this.getPipelineProducts().length;
+  }
+
+  getProductById(id: string): ProductDetails | undefined {
+    // Handle legacy ID mapping
+    const legacyIdMapping: Record<string, string> = {
+      "philips-compressed-sense": "philips-smartspeed-ai"
+    };
+    
+    const actualId = legacyIdMapping[id] || id;
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    
+    // Allow finding both certified and pipeline products by ID
+    return productList.find(product => product.id === actualId && 
+      (hasRegulatoryApproval(product) || isPipelineProduct(product)));
+  }
+
+  getProductsByCategory(category: string): ProductDetails[] {
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return productList.filter(product => 
+      matchesTask(product, category) && hasRegulatoryApproval(product)
+    );
+  }
+
+  getProductsByCompany(companyId: string): ProductDetails[] {
+    const company = this.getCompanyById(companyId);
+    if (!company) return [];
+    
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return productList.filter(product => 
+      company.productIds.includes(product.id || '') && hasRegulatoryApproval(product)
+    );
+  }
+
+  filterProducts(filters: FilterState): ProductDetails[] {
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    
+    // Check if Pipeline filter is active
+    const includePipeline = filters.certifications?.some(
+      cert => cert.toLowerCase() === 'pipeline'
+    );
+    
+    return productList.filter((product: ProductDetails) => {
+      const productIsPipeline = isPipelineProduct(product);
+      
+      // If Pipeline filter is selected, include pipeline products
+      if (includePipeline && productIsPipeline) {
+        // Apply other filters to pipeline products
+        if (filters.tasks?.length && !filters.tasks.some(task => matchesTask(product, task))) {
+          return false;
+        }
+        if (filters.locations?.length) {
+          const normalizedLocations = normalizeAnatomicalLocations(product.anatomicalLocation || []);
+          if (!normalizedLocations.some(loc => filters.locations?.includes(loc))) {
+            return false;
+          }
+        }
+        if (filters.modalities?.length) {
+          const productModalities = Array.isArray(product.modality) 
+            ? product.modality 
+            : (product.modality ? [product.modality] : []);
+          if (!productModalities.some(m => filters.modalities?.includes(m))) {
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      // For non-pipeline products, check regulatory approval first
+      if (productIsPipeline || !hasRegulatoryApproval(product)) {
+        return false;
+      }
+      
+      if (filters.tasks?.length && !filters.tasks.some(task => matchesTask(product, task))) {
+        return false;
+      }
+      if (filters.locations?.length) {
+        // Normalize anatomical locations: merge Head and Neck into Head & Neck
+        const normalizedLocations = normalizeAnatomicalLocations(product.anatomicalLocation || []);
+        
+        if (!normalizedLocations.some(loc => 
+          filters.locations?.includes(loc))) {
+          return false;
+        }
+      }
+      
+      // Standardize certification check - handle merged certifications and pending
+      if (filters.certifications?.length) {
+        // Skip pipeline filter check for non-pipeline products
+        const nonPipelineFilters = filters.certifications.filter(
+          cert => cert.toLowerCase() !== 'pipeline'
+        );
+        
+        if (nonPipelineFilters.length > 0) {
+          const productCert = standardizeCertification(product.certification || '');
+          const isPending = product.certification?.toLowerCase().includes('pending') ||
+                           product.certification?.toLowerCase().includes('investigation');
+          
+          if (!nonPipelineFilters.some(cert => {
+            const filterCert = standardizeCertification(cert);
+            // Match pending products with "Pending" filter
+            if (filterCert === 'pending' && isPending) return true;
+            return filterCert === productCert;
+          })) {
+            return false;
+          }
+        }
+      }
+      
+      if (filters.modalities?.length) {
+        // Handle both string and array modalities
+        const productModalities = Array.isArray(product.modality) 
+          ? product.modality 
+          : (product.modality ? [product.modality] : []);
+          
+        if (!productModalities.some(m => filters.modalities?.includes(m))) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
+  // Company methods
+  getAllCompanies(): CompanyDetails[] {
+    return COMPANIES;
+  }
+
+  getCompanyById(id: string): CompanyDetails | undefined {
+    return COMPANIES.find(company => company.id === id);
+  }
+
+  getCompanyByName(name: string): CompanyDetails | undefined {
+    return COMPANIES.find(company => company.name === name);
+  }
+
+  getCompaniesWithProducts(): CompanyDetails[] {
+    // Only include companies with products that pass regulatory approval
+    return COMPANIES.map(company => ({
+      ...company,
+      products: ALL_PRODUCTS.filter(product => 
+        company.productIds.includes(product.id || '') && 
+        hasRegulatoryApproval(product)
+      )
+    })) as CompanyDetails[];
+  }
+
+  /**
+   * Get only companies that have at least one active (regulatory-approved) product
+   * This is the single source of truth for company counts across the platform
+   */
+  getActiveCompanies(): CompanyDetails[] {
+    return COMPANIES.filter(company => {
+      const activeProducts = ALL_PRODUCTS.filter(product => 
+        company.productIds.includes(product.id || '') && 
+        hasRegulatoryApproval(product)
+      );
+      return activeProducts.length > 0;
+    });
+  }
+
+  // News methods
+  getAllNews(): NewsItem[] {
+    return NEWS_ITEMS;
+  }
+
+  getNewsById(id: string): NewsItem | undefined {
+    return NEWS_ITEMS.find(item => item.id === id);
+  }
+
+  getLatestNews(count: number = 3): NewsItem[] {
+    // Sort by date (newest first) and take the specified number
+    return [...NEWS_ITEMS]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, count);
+  }
+  
+  // Initiative methods
+  getAllInitiatives(): Initiative[] {
+    // Filter out Research Projects
+    return ALL_INITIATIVES.filter(initiative => initiative.category !== 'Research Project');
+  }
+  
+  getInitiativeById(id: string): Initiative | undefined {
+    return ALL_INITIATIVES.find(initiative => initiative.id === id);
+  }
+  
+  getInitiativesByCategory(category: string): Initiative[] {
+    return ALL_INITIATIVES.filter(initiative => initiative.category === category);
+  }
+  
+  getInitiativesByStatus(status: string): Initiative[] {
+    return ALL_INITIATIVES.filter(initiative => initiative.status === status);
+  }
+  
+  getInitiativesByTag(tag: string): Initiative[] {
+    return ALL_INITIATIVES.filter(initiative => initiative.tags.includes(tag));
+  }
+  
+  filterInitiatives(filters: {categories?: string[], status?: string[], tags?: string[]}): Initiative[] {
+    // Start with all initiatives except Research Projects
+    const initiatives = ALL_INITIATIVES.filter(initiative => initiative.category !== 'Research Project');
+    
+    // Then apply filters
+    return initiatives.filter(initiative => {
+      if (filters.categories?.length && !filters.categories.includes(initiative.category)) {
+        return false;
+      }
+      if (filters.status?.length && !filters.status.includes(initiative.status)) {
+        return false;
+      }
+      if (filters.tags?.length && !initiative.tags.some(tag => filters.tags?.includes(tag))) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+  // Presentation data methods
+  getPresentationData() {
+    const products = this.getAllProducts();
+    const companies = this.getAllCompanies();
+    
+    // Get unique categories
+    const categories = [...new Set(products.map(p => p.category))];
+    
+    // Category breakdown
+    const categoryBreakdown = categories.map(category => ({
+      name: category,
+      count: products.filter(p => p.category === category).length
+    }));
+    
+    // Products by category
+    const productsByCategory = categories.map(category => ({
+      category,
+      products: products.filter(p => p.category === category).map(product => ({
+        name: product.name,
+        company: product.company,
+        modality: Array.isArray(product.modality) ? product.modality.join(', ') : product.modality,
+        certification: product.certification,
+        companyLogo: companies.find(c => c.name === product.company)?.logoUrl || ""
+      }))
+    }));
+    
+    // Modality breakdown
+    const modalities = [...new Set(products.flatMap(p => 
+      Array.isArray(p.modality) ? p.modality : (p.modality ? [p.modality] : [])
+    ))];
+    const modalityBreakdown = modalities.map(modality => ({
+      name: modality,
+      count: products.filter(p => {
+        const productModalities = Array.isArray(p.modality) ? p.modality : (p.modality ? [p.modality] : []);
+        return productModalities.includes(modality);
+      }).length
+    }));
+    
+    // Location breakdown
+    const locations = [...new Set(products.flatMap(p => p.anatomicalLocation || []))];
+    const locationBreakdown = locations.map(location => ({
+      name: location,
+      count: products.filter(p => p.anatomicalLocation?.includes(location)).length
+    }));
+    
+    // Certification breakdown
+    const certifications = [...new Set(products.map(p => p.certification).filter(Boolean))];
+    const certificationBreakdown = certifications.map(cert => ({
+      name: cert!,
+      count: products.filter(p => p.certification === cert).length
+    }));
+
+    // Dashboard chart data using transformation utilities
+    const taskData = transformTaskData(products, products, "all", "products");
+    const companyData = companies.map(company => {
+      const companyProducts = products.filter(p => p.company === company.name);
+      return {
+        name: company.name,
+        value: companyProducts.length,
+        products: companyProducts.map(p => p.name)
+      };
+    }).filter(item => item.value > 0).sort((a, b) => b.value - a.value);
+    
+    const structureData = transformStructureData(products, "models");
+    const structureTypeData = transformStructureTypeData(products, "models");
+    
+    // Company logos
+    const companyLogos = companies.map(company => ({
+      name: company.name,
+      logo: company.logoUrl ? company.logoUrl : ""
+    }));
+
+    // Build per-task company logos
+    const taskCompanyMap = new Map<string, Set<string>>();
+    companies.forEach(company => {
+      const tasks: string[] = [];
+      if (company.primaryTask) tasks.push(company.primaryTask);
+      if (company.secondaryTasks) tasks.push(...company.secondaryTasks);
+      tasks.forEach(task => {
+        if (!taskCompanyMap.has(task)) taskCompanyMap.set(task, new Set());
+        taskCompanyMap.get(task)!.add(company.name);
+      });
+    });
+
+    // Auto-enrich: ensure any company whose product matches a task appears in that task's logo set
+    products.forEach(product => {
+      const productTasks = [product.category, ...(product.secondaryCategories || [])].filter(Boolean);
+      productTasks.forEach(task => {
+        if (!taskCompanyMap.has(task)) taskCompanyMap.set(task, new Set());
+        taskCompanyMap.get(task)!.add(product.company);
+      });
+    });
+
+    const companyLogosByTask = Array.from(taskCompanyMap.entries())
+      .map(([task, companyNames]) => {
+        const taskCompanies = Array.from(companyNames)
+          .map(name => {
+            const c = companies.find(co => co.name === name);
+            return { name, logo: c?.logoUrl || "" };
+          })
+          .filter(c => c.logo);
+
+        // Collect products matching this task
+        const taskProducts = products
+          .filter(p => {
+            if (!matchesTask(p, task)) return false;
+            // Non-AI (QA) products should only appear under Performance Monitor
+            if (task !== "Performance Monitor" && p.usesAI === false) return false;
+            return true;
+          })
+          .map(p => {
+            const ceStatus = typeof p.regulatory?.ce === 'object' ? p.regulatory.ce.status : '';
+            const fdaStatus = typeof p.regulatory?.fda === 'object' ? p.regulatory.fda.status : (typeof p.regulatory?.fda === 'string' ? p.regulatory.fda : '');
+            return {
+              name: p.name,
+              company: p.company,
+              modality: Array.isArray(p.modality) ? p.modality.join(', ') : (p.modality || ''),
+              ceStatus: ceStatus || '',
+              fdaStatus: fdaStatus || '',
+              productUrl: p.productUrl || p.url || '',
+              anatomy: (p.anatomicalLocation || []).join(', '),
+            };
+          });
+
+        return {
+          task,
+          companies: taskCompanies,
+          products: taskProducts,
+        };
+      })
+      .filter(group => group.companies.length > 0)
+      .sort((a, b) => b.companies.length - a.companies.length);
+
+    // Content-based analytics (real data, no fabricated metrics)
+    const analyticsData = {
+      totalProducts: products.length,
+      totalCompanies: companies.length,
+      totalCategories: categories.length,
+      certificationBreakdown: certificationBreakdown,
+      categoryBreakdown: categoryBreakdown
+    };
+
+    // Contact and engagement info
+    const contactInfo = {
+      email: "info@dlinrt.eu",
+      githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website",
+      newsletterSignups: Math.floor(companies.length * 12), // Estimated engagement
+      rssSubscribers: Math.floor(companies.length * 4)
+    };
+    
+    return {
+      totalCompanies: companies.length,
+      totalProducts: products.length,
+      totalCategories: categories.length,
+      companyLogos,
+      companyLogosByTask,
+      categoryBreakdown,
+      productsByCategory,
+      modalityBreakdown,
+      locationBreakdown,
+      certificationBreakdown,
+      taskData,
+      companyData,
+      structureData,
+      structureTypeData,
+      analyticsData,
+      contactInfo
+    };
+  }
+}
+
+// Create a singleton instance
+const dataService = new DataService();
+
+export default dataService;

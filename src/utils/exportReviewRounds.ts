@@ -1,0 +1,277 @@
+import { supabase } from "@/integrations/supabase/client";
+import { ALL_PRODUCTS } from "@/data";
+import { exportToExcelSimple } from './excelExport';
+
+export interface AssignmentExportData {
+  roundName: string;
+  roundNumber: number;
+  productId: string;
+  productName: string;
+  productCategory: string;
+  productCompany: string;
+  reviewerName: string;
+  reviewerEmail: string;
+  matchScore: number;
+  status: string;
+  priority: string;
+  assignedDate: string;
+  deadline: string | null;
+}
+
+/**
+ * Fetches all assignment data for a specific review round
+ */
+export async function fetchRoundAssignments(roundId: string): Promise<AssignmentExportData[]> {
+  // Get round details
+  const { data: round, error: roundError } = await supabase
+    .from('review_rounds')
+    .select('name, round_number')
+    .eq('id', roundId)
+    .single();
+
+  if (roundError) throw roundError;
+
+  // Get all product reviews for this round
+  const { data: reviews, error: reviewsError } = await supabase
+    .from('product_reviews')
+    .select(`
+      product_id,
+      assigned_to,
+      status,
+      priority,
+      deadline,
+      assigned_at,
+      profiles!product_reviews_assigned_to_fkey(first_name, last_name, email)
+    `)
+    .eq('review_round_id', roundId);
+
+  if (reviewsError) throw reviewsError;
+
+  // Get assignment history to find match scores
+  const { data: history, error: historyError } = await supabase
+    .from('assignment_history')
+    .select('product_id, assigned_to')
+    .eq('review_round_id', roundId)
+    .eq('change_type', 'initial');
+
+  if (historyError) throw historyError;
+
+  // Build the export data
+  const exportData: AssignmentExportData[] = reviews.map((review: any) => {
+    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
+    const reviewer = review.profiles;
+    
+    return {
+      roundName: round.name,
+      roundNumber: round.round_number,
+      productId: review.product_id,
+      productName: product?.name || 'Unknown Product',
+      productCategory: product?.category || 'Unknown',
+      productCompany: product?.company || 'Unknown',
+      reviewerName: reviewer ? `${reviewer.first_name} ${reviewer.last_name}` : 'Unassigned',
+      reviewerEmail: reviewer?.email || '',
+      matchScore: 0, // We don't store match scores, but can be enhanced
+      status: review.status,
+      priority: review.priority,
+      assignedDate: review.assigned_at ? new Date(review.assigned_at).toLocaleDateString() : '',
+      deadline: review.deadline ? new Date(review.deadline).toLocaleDateString() : null
+    };
+  });
+
+  return exportData;
+}
+
+/**
+ * Fetches assignments for selected review rounds
+ */
+export async function fetchSelectedRoundAssignments(roundIds: string[]): Promise<AssignmentExportData[]> {
+  if (roundIds.length === 0) {
+    throw new Error('No rounds selected');
+  }
+
+  // Get selected rounds
+  const { data: rounds, error: roundsError } = await supabase
+    .from('review_rounds')
+    .select('id, name, round_number')
+    .in('id', roundIds);
+
+  if (roundsError) throw roundsError;
+
+  // Get product reviews for selected rounds
+  const { data: reviews, error: reviewsError } = await supabase
+    .from('product_reviews')
+    .select(`
+      product_id,
+      assigned_to,
+      status,
+      priority,
+      deadline,
+      assigned_at,
+      review_round_id,
+      profiles!product_reviews_assigned_to_fkey(first_name, last_name, email)
+    `)
+    .in('review_round_id', roundIds);
+
+  if (reviewsError) throw reviewsError;
+
+  // Build the export data
+  const exportData: AssignmentExportData[] = reviews.map((review: any) => {
+    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
+    const reviewer = review.profiles;
+    const round = rounds.find(r => r.id === review.review_round_id);
+    
+    return {
+      roundName: round?.name || 'Unknown Round',
+      roundNumber: round?.round_number || 0,
+      productId: review.product_id,
+      productName: product?.name || 'Unknown Product',
+      productCategory: product?.category || 'Unknown',
+      productCompany: product?.company || 'Unknown',
+      reviewerName: reviewer ? `${reviewer.first_name} ${reviewer.last_name}` : 'Unassigned',
+      reviewerEmail: reviewer?.email || '',
+      matchScore: 0,
+      status: review.status,
+      priority: review.priority,
+      assignedDate: review.assigned_at ? new Date(review.assigned_at).toLocaleDateString() : '',
+      deadline: review.deadline ? new Date(review.deadline).toLocaleDateString() : null
+    };
+  });
+
+  return exportData;
+}
+
+/**
+ * Fetches all assignments across all review rounds using admin RPC to bypass RLS
+ */
+export async function fetchAllRoundAssignments(): Promise<AssignmentExportData[]> {
+  // Use RPC function to bypass RLS
+  const { data: result, error } = await supabase.rpc('get_all_round_assignments_admin');
+
+  if (error) throw error;
+
+  const response = result as { success: boolean; data: any[]; error?: string };
+  
+  if (!response.success) {
+    throw new Error(response.error || 'Failed to fetch assignments');
+  }
+
+  // Build the export data from RPC result
+  const exportData: AssignmentExportData[] = response.data.map((item: any) => {
+    const product = ALL_PRODUCTS.find(p => p.id === item.product_id);
+    
+    return {
+      roundName: item.round_name,
+      roundNumber: item.round_number,
+      productId: item.product_id,
+      productName: product?.name || 'Unknown Product',
+      productCategory: product?.category || 'Unknown',
+      productCompany: product?.company || 'Unknown',
+      reviewerName: item.reviewer_first_name && item.reviewer_last_name
+        ? `${item.reviewer_first_name} ${item.reviewer_last_name}`
+        : 'Unassigned',
+      reviewerEmail: item.reviewer_email || '',
+      matchScore: 0,
+      status: item.status,
+      priority: item.priority,
+      assignedDate: item.assigned_at ? new Date(item.assigned_at).toLocaleDateString() : '',
+      deadline: item.deadline ? new Date(item.deadline).toLocaleDateString() : null
+    };
+  });
+
+  return exportData;
+}
+
+/**
+ * Exports assignment data to CSV format
+ */
+export function exportToCSV(data: AssignmentExportData[], filename: string = 'review-assignments.csv') {
+  if (data.length === 0) {
+    throw new Error('No data to export');
+  }
+
+  // Create CSV headers
+  const headers = [
+    'Round Name',
+    'Round Number',
+    'Product ID',
+    'Product Name',
+    'Category',
+    'Company',
+    'Reviewer Name',
+    'Reviewer Email',
+    'Match Score',
+    'Status',
+    'Priority',
+    'Assigned Date',
+    'Deadline'
+  ];
+
+  // Create CSV rows
+  const rows = data.map(item => [
+    item.roundName,
+    item.roundNumber,
+    item.productId,
+    item.productName,
+    item.productCategory,
+    item.productCompany,
+    item.reviewerName,
+    item.reviewerEmail,
+    item.matchScore,
+    item.status,
+    item.priority,
+    item.assignedDate,
+    item.deadline || 'N/A'
+  ]);
+
+  // Combine headers and rows
+  const csvContent = [
+    headers.join(','),
+    ...rows.map(row => row.map(cell => {
+      // Escape quotes and wrap in quotes if contains comma
+      const cellStr = String(cell);
+      if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
+        return `"${cellStr.replace(/"/g, '""')}"`;
+      }
+      return cellStr;
+    }).join(','))
+  ].join('\n');
+
+  // Create and download file
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+/**
+ * Exports assignment data to Excel format
+ */
+export async function exportToExcel(data: AssignmentExportData[], filename: string = 'review-assignments.xlsx') {
+  if (data.length === 0) {
+    throw new Error('No data to export');
+  }
+
+  // Prepare data for Excel
+  const worksheetData = data.map(item => ({
+    'Round Name': item.roundName,
+    'Round Number': item.roundNumber,
+    'Product ID': item.productId,
+    'Product Name': item.productName,
+    'Category': item.productCategory,
+    'Company': item.productCompany,
+    'Reviewer Name': item.reviewerName,
+    'Reviewer Email': item.reviewerEmail,
+    'Match Score': item.matchScore,
+    'Status': item.status,
+    'Priority': item.priority,
+    'Assigned Date': item.assignedDate,
+    'Deadline': item.deadline || 'N/A'
+  }));
+
+  await exportToExcelSimple(worksheetData, filename, 'Assignments');
+}

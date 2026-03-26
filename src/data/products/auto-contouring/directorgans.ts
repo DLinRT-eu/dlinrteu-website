@@ -1,0 +1,157 @@
+
+import { ProductDetails } from "@/types/productDetails";
+
+// Structure data retrieved on 2024-04-29, updated 2026-01-02 with accurate regulatory info
+export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
+  {
+    id: "directorgans",
+    name: "DirectORGANS",
+    company: "Siemens Healthineers",
+    companyUrl: "https://www.siemens-healthineers.com/",
+    productUrl: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/directorgans.ts",
+    description: "World's first CT simulator-integrated auto-contouring solution. DirectORGANS uses optimized reconstruction and deep learning to generate organ-at-risk contours directly during CT image acquisition, eliminating the need for separate contouring workstations. Available on SOMATOM go.Sim and SOMATOM go.Open Pro.",
+    category: "Auto-Contouring",
+    certification: "CE",
+    logoUrl: "/logos/siemens.png",
+    website: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
+    anatomicalLocation: ["Brain", "Head & Neck", "Breast", "Thorax", "Abdomen", "Pelvis"],
+    modality: ["CT"],
+    subspeciality: "Radiation Oncology",
+    diseaseTargeted: ["Multiple Cancer Types"],
+    keyFeatures: [
+      "World's first CT simulator-integrated auto-contouring",
+      "Deep learning with optimized image reconstruction",
+      "Contours generated during CT acquisition workflow",
+      "No separate contouring workstation required",
+      "Standardized input optimization for consistent results",
+      "Available for brain, head & neck, breast, lung, abdomen, and prostate",
+      "Advanced packages for cardiac substructures and lung substructures"
+    ],
+    technicalSpecifications: {
+      population: "Adult patients",
+      input: ["CT (SOMATOM go.Sim, SOMATOM go.Open Pro)"],
+      inputFormat: ["DICOM"],
+      output: ["Structure sets"],
+      outputFormat: ["DICOM-RTSTRUCT"]
+    },
+    technology: {
+      integration: ["Native CT simulator integration", "TPS integration via DICOM-RTSTRUCT"],
+      deployment: ["CT Simulator Integrated (SOMATOM go.Sim, go.Open Pro)"],
+      triggerForAnalysis: "Automatic during CT acquisition",
+      processingTime: "Part of CT reconstruction workflow"
+    },
+    regulatory: {
+      ce: {
+        status: "Certified",
+        class: "IIb",
+        type: "Medical Device (CT Simulator Feature)",
+        regulation: "MDR (EU 2017/745)"
+      },
+      fda: {
+        status: "510(k) Cleared",
+        class: "II",
+        clearanceNumber: "K233650, K250822",
+        productCode: "JAK",
+        regulationNumber: "21 CFR 892.1750",
+        decisionDate: "2024-03-26",
+        notes: "DirectORGANS is cleared as an integrated software feature within the SOMATOM go. Platform (go.Sim and go.Open Pro CT simulators). K233650 cleared VB10 software (2024-03-26). K250822 cleared VB20 software (2025-07-03). Not a standalone software product."
+      },
+      intendedUseStatement: "DirectORGANS is intended for automatic segmentation of organs at risk during CT simulation for radiation therapy planning. It operates as an integrated feature of compatible SOMATOM CT simulators."
+    },
+    market: {
+      onMarketSince: "2021",
+      distributionChannels: ["Direct sales", "Partnerships"]
+    },
+    version: "VA30+",
+    releaseDate: "2023-05-25",
+    lastUpdated: "2026-01-26",
+    supportedStructures: [
+      // Brain
+      "Brain: Brain",
+      "Brain: Brainstem",
+      "Brain: Eye L",
+      "Brain: Eye R",
+      "Brain: Lens L",
+      "Brain: Lens R",
+      "Brain: Optic Chiasm",
+      "Brain: Optic Nerve L",
+      "Brain: Optic Nerve R",
+      "Brain: Pituitary",
+
+      // Head & Neck
+      "Head & Neck: Brainstem",
+      "Head & Neck: Parotid L",
+      "Head & Neck: Parotid R",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Mandible",
+      "Head & Neck: Eye L",
+      "Head & Neck: Eye R",
+      "Head & Neck: Optic Chiasm",
+      "Head & Neck: Optic Nerve L",
+      "Head & Neck: Optic Nerve R",
+      "Head & Neck: Submandibular Gland L",
+      "Head & Neck: Submandibular Gland R",
+      "Head & Neck: Cochlea L",
+      "Head & Neck: Cochlea R",
+      "Head & Neck: Larynx",
+
+      // Breast
+      "Breast: Breast L",
+      "Breast: Breast R",
+      "Breast: Heart",
+      "Breast: Lung L",
+      "Breast: Lung R",
+
+      // Thorax
+      "Thorax: Heart",
+      "Thorax: Lung L",
+      "Thorax: Lung R",
+      "Thorax: Esophagus",
+      "Thorax: Spinal Cord",
+      // Thorax - Cardiac Substructures (advanced)
+      "Thorax: Left Ventricle",
+      "Thorax: Right Ventricle",
+      "Thorax: Left Atrium",
+      "Thorax: Right Atrium",
+      "Thorax: LAD Coronary Artery",
+      // Thorax - Lung Substructures (advanced)
+      "Thorax: Trachea",
+      "Thorax: Bronchus L",
+      "Thorax: Bronchus R",
+
+      // Abdomen
+      "Abdomen: Liver",
+      "Abdomen: Kidney L",
+      "Abdomen: Kidney R",
+      "Abdomen: Spleen",
+      "Abdomen: Stomach",
+      "Abdomen: Bowel",
+
+      // Pelvis
+      "Pelvis: Bladder",
+      "Pelvis: Rectum",
+      "Pelvis: Femoral Head L",
+      "Pelvis: Femoral Head R",
+      "Pelvis: Prostate"
+    ],
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8) - independent dosimetric validation of DirectORGANS for prostate RT planning at Gazi University. FDA validation (K233650, K250822).",
+    clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: true,
+    evidence: [
+      {
+        type: "Independent Peer-reviewed Publication",
+        description: "Çatlı Dinç et al. 2025: Dosimetric impacts of DirectORGANS deep learning autocontouring for prostate cancer RT planning. Gazi University, vendor-independent.",
+        link: "https://doi.org/10.1186/s12894-025-01875-8"
+      }
+    ],
+    lastRevised: "2026-02-26",
+    source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
+  }
+];

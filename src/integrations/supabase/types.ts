@@ -1,0 +1,2406 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "13.0.5"
+  }
+  public: {
+    Tables: {
+      admin_audit_log: {
+        Row: {
+          action_type: string
+          admin_user_id: string | null
+          created_at: string
+          details: Json | null
+          id: string
+          ip_address: string | null
+          performed_by: string
+          performed_by_email: string
+          target_user_email: string | null
+          target_user_id: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          action_type: string
+          admin_user_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          performed_by: string
+          performed_by_email: string
+          target_user_email?: string | null
+          target_user_id?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          action_type?: string
+          admin_user_id?: string | null
+          created_at?: string
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          performed_by?: string
+          performed_by_email?: string
+          target_user_email?: string | null
+          target_user_id?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      analytics_daily: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          total_visits: number
+          unique_visitors: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          total_visits?: number
+          unique_visitors?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          total_visits?: number
+          unique_visitors?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      analytics_page_visits: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          path: string
+          title: string | null
+          total_duration: number
+          updated_at: string
+          visit_count: number
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          path: string
+          title?: string | null
+          total_duration?: number
+          updated_at?: string
+          visit_count?: number
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          path?: string
+          title?: string | null
+          total_duration?: number
+          updated_at?: string
+          visit_count?: number
+        }
+        Relationships: []
+      }
+      analytics_visitors: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
+      assignment_history: {
+        Row: {
+          assigned_to: string | null
+          change_type: string
+          changed_by: string
+          created_at: string
+          id: string
+          previous_assignee: string | null
+          product_id: string
+          reason: string | null
+          review_round_id: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          change_type: string
+          changed_by: string
+          created_at?: string
+          id?: string
+          previous_assignee?: string | null
+          product_id: string
+          reason?: string | null
+          review_round_id: string
+        }
+        Update: {
+          assigned_to?: string | null
+          change_type?: string
+          changed_by?: string
+          created_at?: string
+          id?: string
+          previous_assignee?: string | null
+          product_id?: string
+          reason?: string | null
+          review_round_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignment_history_review_round_id_fkey"
+            columns: ["review_round_id"]
+            isOneToOne: false
+            referencedRelation: "review_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      certification_reminder_logs: {
+        Row: {
+          companies: string[]
+          emails_failed: number
+          emails_sent: number
+          id: string
+          message_body: string
+          recipients: Json
+          sent_at: string
+          sent_by: string
+          subject: string
+        }
+        Insert: {
+          companies?: string[]
+          emails_failed?: number
+          emails_sent?: number
+          id?: string
+          message_body: string
+          recipients?: Json
+          sent_at?: string
+          sent_by: string
+          subject: string
+        }
+        Update: {
+          companies?: string[]
+          emails_failed?: number
+          emails_sent?: number
+          id?: string
+          message_body?: string
+          recipients?: Json
+          sent_at?: string
+          sent_by?: string
+          subject?: string
+        }
+        Relationships: []
+      }
+      changelog_entries: {
+        Row: {
+          author: string | null
+          auto_generated: boolean | null
+          category: string
+          created_at: string | null
+          created_by: string | null
+          date: string
+          description: string
+          details: string | null
+          entry_id: string
+          github_data: Json | null
+          id: string
+          published_at: string | null
+          status: string
+          title: string
+          updated_at: string | null
+          version: string
+        }
+        Insert: {
+          author?: string | null
+          auto_generated?: boolean | null
+          category: string
+          created_at?: string | null
+          created_by?: string | null
+          date: string
+          description: string
+          details?: string | null
+          entry_id: string
+          github_data?: Json | null
+          id?: string
+          published_at?: string | null
+          status?: string
+          title: string
+          updated_at?: string | null
+          version: string
+        }
+        Update: {
+          author?: string | null
+          auto_generated?: boolean | null
+          category?: string
+          created_at?: string | null
+          created_by?: string | null
+          date?: string
+          description?: string
+          details?: string | null
+          entry_id?: string
+          github_data?: Json | null
+          id?: string
+          published_at?: string | null
+          status?: string
+          title?: string
+          updated_at?: string | null
+          version?: string
+        }
+        Relationships: []
+      }
+      changelog_links: {
+        Row: {
+          changelog_entry_id: string | null
+          created_at: string | null
+          id: string
+          text: string
+          url: string
+        }
+        Insert: {
+          changelog_entry_id?: string | null
+          created_at?: string | null
+          id?: string
+          text: string
+          url: string
+        }
+        Update: {
+          changelog_entry_id?: string | null
+          created_at?: string | null
+          id?: string
+          text?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "changelog_links_changelog_entry_id_fkey"
+            columns: ["changelog_entry_id"]
+            isOneToOne: false
+            referencedRelation: "changelog_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      company_product_verifications: {
+        Row: {
+          company_id: string
+          content_hash: string | null
+          created_at: string | null
+          id: string
+          product_id: string
+          product_last_revised: string | null
+          supporting_documents: Json | null
+          updated_at: string | null
+          verification_notes: string | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          company_id: string
+          content_hash?: string | null
+          created_at?: string | null
+          id?: string
+          product_id: string
+          product_last_revised?: string | null
+          supporting_documents?: Json | null
+          updated_at?: string | null
+          verification_notes?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          company_id?: string
+          content_hash?: string | null
+          created_at?: string | null
+          id?: string
+          product_id?: string
+          product_last_revised?: string | null
+          supporting_documents?: Json | null
+          updated_at?: string | null
+          verification_notes?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      company_representatives: {
+        Row: {
+          company_id: string | null
+          company_name: string
+          created_at: string | null
+          id: string
+          position: string | null
+          user_id: string
+          verified: boolean | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          company_id?: string | null
+          company_name: string
+          created_at?: string | null
+          id?: string
+          position?: string | null
+          user_id: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          company_id?: string | null
+          company_name?: string
+          created_at?: string | null
+          id?: string
+          position?: string | null
+          user_id?: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_team_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      company_revisions: {
+        Row: {
+          changes_summary: string | null
+          company_id: string
+          created_at: string | null
+          id: string
+          priority: string | null
+          product_id: string
+          reviewer_feedback: string | null
+          revised_by: string
+          revision_date: string
+          verification_status: string | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          changes_summary?: string | null
+          company_id: string
+          created_at?: string | null
+          id?: string
+          priority?: string | null
+          product_id: string
+          reviewer_feedback?: string | null
+          revised_by: string
+          revision_date: string
+          verification_status?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          changes_summary?: string | null
+          company_id?: string
+          created_at?: string | null
+          id?: string
+          priority?: string | null
+          product_id?: string
+          reviewer_feedback?: string | null
+          revised_by?: string
+          revision_date?: string
+          verification_status?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      consent_audit_log: {
+        Row: {
+          action: string
+          consent_version: string
+          created_at: string
+          id: string
+          ip_hash: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          consent_version: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          consent_version?: string
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string
+          subject: string
+          submission_method: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string
+          subject: string
+          submission_method?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string
+          subject?: string
+          submission_method?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      github_file_checks: {
+        Row: {
+          check_result: Json | null
+          checked_at: string | null
+          created_at: string | null
+          file_changed: boolean | null
+          file_url: string
+          id: string
+          last_modified: string | null
+          review_id: string | null
+          triggered_revision: boolean | null
+        }
+        Insert: {
+          check_result?: Json | null
+          checked_at?: string | null
+          created_at?: string | null
+          file_changed?: boolean | null
+          file_url: string
+          id?: string
+          last_modified?: string | null
+          review_id?: string | null
+          triggered_revision?: boolean | null
+        }
+        Update: {
+          check_result?: Json | null
+          checked_at?: string | null
+          created_at?: string | null
+          file_changed?: boolean | null
+          file_url?: string
+          id?: string
+          last_modified?: string | null
+          review_id?: string | null
+          triggered_revision?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "github_file_checks_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "product_reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "github_file_checks_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mfa_activity_log: {
+        Row: {
+          action: string
+          created_at: string | null
+          factor_type: string
+          id: string
+          ip_hash: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          factor_type: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          factor_type?: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      mfa_backup_codes: {
+        Row: {
+          code_hash: string
+          created_at: string | null
+          id: string
+          used: boolean | null
+          used_at: string | null
+          user_id: string
+        }
+        Insert: {
+          code_hash: string
+          created_at?: string | null
+          id?: string
+          used?: boolean | null
+          used_at?: string | null
+          user_id: string
+        }
+        Update: {
+          code_hash?: string
+          created_at?: string | null
+          id?: string
+          used?: boolean | null
+          used_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          consent_given: boolean
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          unsubscribed_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          consent_given?: boolean
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          consent_given?: boolean
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          link: string | null
+          message: string
+          read: boolean | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          link?: string | null
+          message: string
+          read?: boolean | null
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          link?: string | null
+          message?: string
+          read?: boolean | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      product_edit_drafts: {
+        Row: {
+          changed_fields: string[]
+          created_at: string
+          created_by: string
+          draft_data: Json
+          edit_summary: string | null
+          github_pr_url: string | null
+          github_synced_at: string | null
+          id: string
+          product_id: string
+          review_feedback: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          changed_fields?: string[]
+          created_at?: string
+          created_by: string
+          draft_data: Json
+          edit_summary?: string | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
+          id?: string
+          product_id: string
+          review_feedback?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          changed_fields?: string[]
+          created_at?: string
+          created_by?: string
+          draft_data?: Json
+          edit_summary?: string | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
+          id?: string
+          product_id?: string
+          review_feedback?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      product_feedback: {
+        Row: {
+          company_name: string | null
+          created_at: string
+          details: string
+          id: string
+          product_name: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          submission_type: string
+          submitter_email: string
+          submitter_name: string
+          supporting_url: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string
+          details: string
+          id?: string
+          product_name: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          submission_type: string
+          submitter_email: string
+          submitter_name: string
+          supporting_url?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string
+          details?: string
+          id?: string
+          product_name?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          submission_type?: string
+          submitter_email?: string
+          submitter_name?: string
+          supporting_url?: string | null
+        }
+        Relationships: []
+      }
+      product_reviews: {
+        Row: {
+          assigned_at: string | null
+          assigned_to: string | null
+          auto_revision_triggered: boolean | null
+          company_reviewed_at: string | null
+          company_reviewed_by: string | null
+          completed_at: string | null
+          created_at: string | null
+          deadline: string | null
+          github_file_url: string | null
+          github_last_modified: string | null
+          id: string
+          last_activity_at: string | null
+          last_reminder_sent_at: string | null
+          notes: string | null
+          priority: string | null
+          product_id: string
+          review_round_id: string | null
+          review_score: number | null
+          started_at: string | null
+          status: string | null
+          time_spent_minutes: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_at?: string | null
+          assigned_to?: string | null
+          auto_revision_triggered?: boolean | null
+          company_reviewed_at?: string | null
+          company_reviewed_by?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          deadline?: string | null
+          github_file_url?: string | null
+          github_last_modified?: string | null
+          id?: string
+          last_activity_at?: string | null
+          last_reminder_sent_at?: string | null
+          notes?: string | null
+          priority?: string | null
+          product_id: string
+          review_round_id?: string | null
+          review_score?: number | null
+          started_at?: string | null
+          status?: string | null
+          time_spent_minutes?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_at?: string | null
+          assigned_to?: string | null
+          auto_revision_triggered?: boolean | null
+          company_reviewed_at?: string | null
+          company_reviewed_by?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          deadline?: string | null
+          github_file_url?: string | null
+          github_last_modified?: string | null
+          id?: string
+          last_activity_at?: string | null
+          last_reminder_sent_at?: string | null
+          notes?: string | null
+          priority?: string | null
+          product_id?: string
+          review_round_id?: string | null
+          review_score?: number | null
+          started_at?: string | null
+          status?: string | null
+          time_spent_minutes?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_reviews_review_round_id_fkey"
+            columns: ["review_round_id"]
+            isOneToOne: false
+            referencedRelation: "review_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_revision_dates: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_revised_at: string
+          last_revised_by: string | null
+          notes: string | null
+          product_id: string
+          revision_source: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_revised_at?: string
+          last_revised_by?: string | null
+          notes?: string | null
+          product_id: string
+          revision_source?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_revised_at?: string
+          last_revised_by?: string | null
+          notes?: string | null
+          product_id?: string
+          revision_source?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      profile_document_access_log: {
+        Row: {
+          access_reason: string
+          accessed_at: string | null
+          accessed_by: string
+          document_id: string
+          id: string
+          ip_hash: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          access_reason: string
+          accessed_at?: string | null
+          accessed_by: string
+          document_id: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          access_reason?: string
+          accessed_at?: string | null
+          accessed_by?: string
+          document_id?: string
+          id?: string
+          ip_hash?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_document_access_log_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "profile_documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profile_documents: {
+        Row: {
+          description: string | null
+          document_type: Database["public"]["Enums"]["profile_document_type"]
+          file_name: string
+          file_size: number
+          file_url: string
+          id: string
+          mime_type: string
+          updated_at: string | null
+          uploaded_at: string | null
+          user_id: string
+          verification_notes: string | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          description?: string | null
+          document_type: Database["public"]["Enums"]["profile_document_type"]
+          file_name: string
+          file_size: number
+          file_url: string
+          id?: string
+          mime_type: string
+          updated_at?: string | null
+          uploaded_at?: string | null
+          user_id: string
+          verification_notes?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          description?: string | null
+          document_type?: Database["public"]["Enums"]["profile_document_type"]
+          file_name?: string
+          file_size?: number
+          file_url?: string
+          id?: string
+          mime_type?: string
+          updated_at?: string | null
+          uploaded_at?: string | null
+          user_id?: string
+          verification_notes?: string | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          approval_status: string | null
+          approved_at: string | null
+          approved_by: string | null
+          bio: string | null
+          created_at: string | null
+          data_processing_consent_given: boolean
+          data_processing_consent_timestamp: string | null
+          data_processing_consent_version: string | null
+          data_processing_consent_withdrawn: boolean
+          data_processing_consent_withdrawn_at: string | null
+          display_order: number | null
+          email: string
+          first_name: string
+          id: string
+          institution: string | null
+          is_core_team: boolean | null
+          last_name: string
+          linkedin_url: string | null
+          mfa_backup_codes_generated_at: string | null
+          mfa_enabled: boolean | null
+          mfa_enrolled_at: string | null
+          notification_preferences: Json | null
+          profile_image_url: string | null
+          public_display: boolean | null
+          specialization: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          approval_status?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          bio?: string | null
+          created_at?: string | null
+          data_processing_consent_given?: boolean
+          data_processing_consent_timestamp?: string | null
+          data_processing_consent_version?: string | null
+          data_processing_consent_withdrawn?: boolean
+          data_processing_consent_withdrawn_at?: string | null
+          display_order?: number | null
+          email: string
+          first_name: string
+          id: string
+          institution?: string | null
+          is_core_team?: boolean | null
+          last_name: string
+          linkedin_url?: string | null
+          mfa_backup_codes_generated_at?: string | null
+          mfa_enabled?: boolean | null
+          mfa_enrolled_at?: string | null
+          notification_preferences?: Json | null
+          profile_image_url?: string | null
+          public_display?: boolean | null
+          specialization?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          approval_status?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          bio?: string | null
+          created_at?: string | null
+          data_processing_consent_given?: boolean
+          data_processing_consent_timestamp?: string | null
+          data_processing_consent_version?: string | null
+          data_processing_consent_withdrawn?: boolean
+          data_processing_consent_withdrawn_at?: string | null
+          display_order?: number | null
+          email?: string
+          first_name?: string
+          id?: string
+          institution?: string | null
+          is_core_team?: boolean | null
+          last_name?: string
+          linkedin_url?: string | null
+          mfa_backup_codes_generated_at?: string | null
+          mfa_enabled?: boolean | null
+          mfa_enrolled_at?: string | null
+          notification_preferences?: Json | null
+          profile_image_url?: string | null
+          public_display?: boolean | null
+          specialization?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      reminder_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: Json
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      review_checklist_items: {
+        Row: {
+          checked: boolean | null
+          checked_at: string | null
+          checked_by: string | null
+          id: string
+          item_category: string
+          item_name: string
+          notes: string | null
+          review_id: string | null
+        }
+        Insert: {
+          checked?: boolean | null
+          checked_at?: string | null
+          checked_by?: string | null
+          id?: string
+          item_category: string
+          item_name: string
+          notes?: string | null
+          review_id?: string | null
+        }
+        Update: {
+          checked?: boolean | null
+          checked_at?: string | null
+          checked_by?: string | null
+          id?: string
+          item_category?: string
+          item_name?: string
+          notes?: string | null
+          review_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_checklist_items_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "product_reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "review_checklist_items_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      review_comments: {
+        Row: {
+          comment: string
+          comment_type: string | null
+          created_at: string | null
+          id: string
+          review_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          comment: string
+          comment_type?: string | null
+          created_at?: string | null
+          id?: string
+          review_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          comment?: string
+          comment_type?: string | null
+          created_at?: string | null
+          id?: string
+          review_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_comments_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "product_reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "review_comments_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews_with_github_tracking"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      review_round_stats: {
+        Row: {
+          completed_count: number | null
+          id: string
+          in_progress_count: number | null
+          pending_count: number | null
+          round_id: string | null
+          total_assignments: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          completed_count?: number | null
+          id?: string
+          in_progress_count?: number | null
+          pending_count?: number | null
+          round_id?: string | null
+          total_assignments?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          completed_count?: number | null
+          id?: string
+          in_progress_count?: number | null
+          pending_count?: number | null
+          round_id?: string | null
+          total_assignments?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_round_stats_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: true
+            referencedRelation: "review_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      review_rounds: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          default_deadline: string | null
+          description: string | null
+          end_date: string | null
+          id: string
+          name: string
+          round_number: number
+          start_date: string
+          status: string
+          task: string | null
+          total_assignments: number | null
+          total_products: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          default_deadline?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          name: string
+          round_number: number
+          start_date: string
+          status?: string
+          task?: string | null
+          total_assignments?: number | null
+          total_products?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          default_deadline?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          name?: string
+          round_number?: number
+          start_date?: string
+          status?: string
+          task?: string | null
+          total_assignments?: number | null
+          total_products?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      reviewer_expertise: {
+        Row: {
+          category: string | null
+          company_id: string | null
+          created_at: string | null
+          id: string
+          notes: string | null
+          preference_type: string
+          priority: number | null
+          product_id: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          company_id?: string | null
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          preference_type?: string
+          priority?: number | null
+          product_id?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          company_id?: string | null
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          preference_type?: string
+          priority?: number | null
+          product_id?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reviewer_invitations: {
+        Row: {
+          accepted_at: string | null
+          accepted_by: string | null
+          created_at: string | null
+          email: string
+          expertise_preferences: Json | null
+          expires_at: string | null
+          id: string
+          invited_at: string | null
+          invited_by: string | null
+          status: string | null
+          token: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string | null
+          email: string
+          expertise_preferences?: Json | null
+          expires_at?: string | null
+          id?: string
+          invited_at?: string | null
+          invited_by?: string | null
+          status?: string | null
+          token: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string | null
+          email?: string
+          expertise_preferences?: Json | null
+          expires_at?: string | null
+          id?: string
+          invited_at?: string | null
+          invited_by?: string | null
+          status?: string | null
+          token?: string
+        }
+        Relationships: []
+      }
+      role_change_log: {
+        Row: {
+          action: string
+          id: string
+          performed_at: string
+          performed_by: string
+          reason: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          action: string
+          id?: string
+          performed_at?: string
+          performed_by: string
+          reason?: string | null
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          action?: string
+          id?: string
+          performed_at?: string
+          performed_by?: string
+          reason?: string | null
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      role_requests: {
+        Row: {
+          company_id: string | null
+          created_at: string
+          id: string
+          justification: string
+          requested_role: Database["public"]["Enums"]["app_role"]
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          justification: string
+          requested_role: Database["public"]["Enums"]["app_role"]
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string | null
+          created_at?: string
+          id?: string
+          justification?: string
+          requested_role?: Database["public"]["Enums"]["app_role"]
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          created_at: string
+          details: Json | null
+          event_type: string
+          id: string
+          ip_hash: string | null
+          notes: string | null
+          resolved_at: string | null
+          severity: string
+          url: string | null
+          user_agent_hash: string | null
+        }
+        Insert: {
+          created_at?: string
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          notes?: string | null
+          resolved_at?: string | null
+          severity?: string
+          url?: string | null
+          user_agent_hash?: string | null
+        }
+        Update: {
+          created_at?: string
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          notes?: string | null
+          resolved_at?: string | null
+          severity?: string
+          url?: string | null
+          user_agent_hash?: string | null
+        }
+        Relationships: []
+      }
+      user_products: {
+        Row: {
+          adoption_date: string | null
+          company_id: string
+          contact_preference: string | null
+          created_at: string | null
+          department: string | null
+          experience_notes: string | null
+          id: string
+          institution: string | null
+          product_id: string
+          relationship_status: string
+          relationship_status_other: string | null
+          updated_at: string | null
+          use_case: string | null
+          user_id: string
+          willing_to_share_experience: boolean | null
+        }
+        Insert: {
+          adoption_date?: string | null
+          company_id: string
+          contact_preference?: string | null
+          created_at?: string | null
+          department?: string | null
+          experience_notes?: string | null
+          id?: string
+          institution?: string | null
+          product_id: string
+          relationship_status?: string
+          relationship_status_other?: string | null
+          updated_at?: string | null
+          use_case?: string | null
+          user_id: string
+          willing_to_share_experience?: boolean | null
+        }
+        Update: {
+          adoption_date?: string | null
+          company_id?: string
+          contact_preference?: string | null
+          created_at?: string | null
+          department?: string | null
+          experience_notes?: string | null
+          id?: string
+          institution?: string | null
+          product_id?: string
+          relationship_status?: string
+          relationship_status_other?: string | null
+          updated_at?: string | null
+          use_case?: string | null
+          user_id?: string
+          willing_to_share_experience?: boolean | null
+        }
+        Relationships: []
+      }
+      user_registration_notifications: {
+        Row: {
+          created_at: string | null
+          email: string
+          failure_reason: string | null
+          id: string
+          notification_sent_at: string | null
+          notification_status: string | null
+          user_id: string
+          verified: boolean | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          failure_reason?: string | null
+          id?: string
+          notification_sent_at?: string | null
+          notification_status?: string | null
+          user_id: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          failure_reason?: string | null
+          id?: string
+          notification_sent_at?: string | null
+          notification_status?: string | null
+          user_id?: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          granted_at: string | null
+          granted_by: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          granted_at?: string | null
+          granted_by?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      analytics_public: {
+        Row: {
+          month: string | null
+          total_entries: number | null
+          total_unique_visitors: number | null
+          total_visits: number | null
+        }
+        Relationships: []
+      }
+      analytics_summary: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          total_visits: number | null
+          unique_visitors: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      company_products: {
+        Row: {
+          company_id: string | null
+          company_name: string | null
+          product_id: string | null
+          user_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_company_representatives_profiles"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_team_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      public_team_members: {
+        Row: {
+          bio: string | null
+          display_order: number | null
+          first_name: string | null
+          id: string | null
+          institution: string | null
+          last_name: string | null
+          linkedin_url: string | null
+          profile_image_url: string | null
+          role: Database["public"]["Enums"]["app_role"] | null
+          specialization: string | null
+        }
+        Insert: {
+          bio?: string | null
+          display_order?: number | null
+          first_name?: string | null
+          id?: string | null
+          institution?: string | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          profile_image_url?: string | null
+          role?: never
+          specialization?: string | null
+        }
+        Update: {
+          bio?: string | null
+          display_order?: number | null
+          first_name?: string | null
+          id?: string | null
+          institution?: string | null
+          last_name?: string | null
+          linkedin_url?: string | null
+          profile_image_url?: string | null
+          role?: never
+          specialization?: string | null
+        }
+        Relationships: []
+      }
+      reviews_with_github_tracking: {
+        Row: {
+          assigned_at: string | null
+          assigned_to: string | null
+          auto_revision_triggered: boolean | null
+          check_count: number | null
+          github_file_url: string | null
+          github_last_modified: string | null
+          id: string | null
+          last_check_at: string | null
+          product_id: string | null
+          reviewer_email: string | null
+          reviewer_name: string | null
+          status: string | null
+        }
+        Relationships: []
+      }
+      user_product_experiences: {
+        Row: {
+          adoption_date: string | null
+          company_id: string | null
+          contact_preference: string | null
+          department: string | null
+          email: string | null
+          experience_notes: string | null
+          first_name: string | null
+          id: string | null
+          institution: string | null
+          last_name: string | null
+          linkedin_url: string | null
+          product_id: string | null
+          relationship_status: string | null
+          relationship_status_other: string | null
+          specialization: string | null
+          use_case: string | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
+    }
+    Functions: {
+      admin_health_check: { Args: never; Returns: Json }
+      approve_role_request: { Args: { p_request_id: string }; Returns: Json }
+      batch_check_github_files: { Args: never; Returns: Json }
+      can_access_company: {
+        Args: { _company_id: string; _user_id: string }
+        Returns: boolean
+      }
+      can_assign_company_role: {
+        Args: { p_user_id: string }
+        Returns: {
+          can_assign: boolean
+          reason: string
+        }[]
+      }
+      can_manage_reviews: { Args: { user_id_param: string }; Returns: boolean }
+      can_represent_company: {
+        Args: { p_company_id: string; p_user_id: string }
+        Returns: boolean
+      }
+      can_user_adopt_product: { Args: { p_user_id: string }; Returns: boolean }
+      can_view_security_data: {
+        Args: { user_id_param: string }
+        Returns: boolean
+      }
+      certify_product:
+        | {
+            Args: {
+              p_company_id: string
+              p_notes?: string
+              p_product_id: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_company_id: string
+              p_notes?: string
+              p_product_id: string
+              p_product_last_revised?: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_company_id: string
+              p_content_hash?: string
+              p_notes?: string
+              p_product_id: string
+              p_product_last_revised?: string
+            }
+            Returns: Json
+          }
+      check_github_file_modified: {
+        Args: {
+          current_file_modified: string
+          github_file_url: string
+          review_id: string
+        }
+        Returns: Json
+      }
+      cleanup_old_analytics_data: { Args: never; Returns: undefined }
+      cleanup_old_contact_submissions: { Args: never; Returns: number }
+      cleanup_old_security_events: { Args: never; Returns: number }
+      clone_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_new_name: string
+          p_source_round_id: string
+          p_start_date?: string
+        }
+        Returns: Json
+      }
+      complete_review_secure: {
+        Args: { completion_notes?: string; review_id: string }
+        Returns: Json
+      }
+      create_company_revision: {
+        Args: {
+          p_changes_summary: string
+          p_company_id: string
+          p_product_id: string
+          p_revision_date?: string
+        }
+        Returns: Json
+      }
+      create_notification: {
+        Args: {
+          p_link?: string
+          p_message: string
+          p_title: string
+          p_type?: string
+          p_user_id: string
+        }
+        Returns: string
+      }
+      create_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_name: string
+          p_round_number: number
+          p_start_date?: string
+        }
+        Returns: Json
+      }
+      debug_reviewer_access: { Args: { reviewer_id: string }; Returns: Json }
+      delete_product_review_admin: {
+        Args: { review_id: string }
+        Returns: boolean
+      }
+      delete_review_round_admin: {
+        Args: { round_id_param: string }
+        Returns: Json
+      }
+      expire_old_invitations: { Args: never; Returns: undefined }
+      get_active_rounds_for_reviewer: {
+        Args: never
+        Returns: {
+          assignment_count: number
+          default_deadline: string
+          has_assignments: boolean
+          id: string
+          name: string
+          round_number: number
+          status: string
+        }[]
+      }
+      get_all_round_assignments_admin: { Args: never; Returns: Json }
+      get_all_user_roles: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"][]
+      }
+      get_analytics_daily: {
+        Args: { end_date?: string; start_date?: string }
+        Returns: {
+          created_at: string
+          date: string
+          id: string
+          total_visits: number
+          unique_visitors: number
+          updated_at: string
+        }[]
+      }
+      get_analytics_page_visits: {
+        Args: { end_date?: string; start_date?: string }
+        Returns: {
+          created_at: string
+          date: string
+          id: string
+          path: string
+          title: string
+          total_duration: number
+          updated_at: string
+          visit_count: number
+        }[]
+      }
+      get_audit_logs_admin: {
+        Args: never
+        Returns: {
+          action_type: string
+          admin_email: string
+          admin_user_id: string
+          created_at: string
+          details: Json
+          id: string
+          target_email: string
+          target_user_id: string
+        }[]
+      }
+      get_highest_role: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
+      get_my_company_revisions: {
+        Args: never
+        Returns: {
+          changes_summary: string
+          company_id: string
+          created_at: string
+          id: string
+          product_id: string
+          revision_date: string
+          verification_status: string
+        }[]
+      }
+      get_my_reviews_secure: {
+        Args: never
+        Returns: {
+          assigned_at: string
+          completed_at: string
+          id: string
+          product_id: string
+          review_round_id: string
+          round_name: string
+          status: string
+        }[]
+      }
+      get_pending_revisions_count_for_reviewer: { Args: never; Returns: number }
+      get_pending_role_requests_admin: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          justification: string
+          last_name: string
+          requested_role: Database["public"]["Enums"]["app_role"]
+          status: string
+          user_id: string
+        }[]
+      }
+      get_product_reviews_admin_secure: {
+        Args: never
+        Returns: {
+          assigned_to: string
+          completed_at: string
+          created_at: string
+          deadline: string
+          id: string
+          last_activity_at: string
+          notes: string
+          priority: string
+          product_id: string
+          review_round_id: string
+          reviewer_email: string
+          reviewer_first_name: string
+          reviewer_last_name: string
+          started_at: string
+          status: string
+        }[]
+      }
+      get_product_revisions_for_reviewer: {
+        Args: { p_product_id: string }
+        Returns: {
+          changes_summary: string
+          company_id: string
+          created_at: string
+          id: string
+          priority: string
+          product_id: string
+          reviewer_feedback: string
+          revised_by: string
+          revised_by_email: string
+          revised_by_name: string
+          revision_date: string
+          verification_status: string
+          verified_at: string
+          verified_by: string
+        }[]
+      }
+      get_registration_notifications_admin: {
+        Args: never
+        Returns: {
+          approval_status: string
+          created_at: string
+          email: string
+          failure_reason: string
+          first_name: string
+          id: string
+          institution: string
+          last_name: string
+          notification_status: string
+          user_id: string
+          verified: boolean
+          verified_at: string
+          verified_by: string
+        }[]
+      }
+      get_reminder_settings: { Args: never; Returns: Json }
+      get_review_round_details_admin: {
+        Args: { p_round_id: string }
+        Returns: Json
+      }
+      get_review_rounds_admin: {
+        Args: never
+        Returns: {
+          created_at: string
+          created_by: string
+          default_deadline: string
+          description: string
+          end_date: string
+          id: string
+          name: string
+          round_number: number
+          start_date: string
+          status: string
+          total_assignments: number
+          total_products: number
+          updated_at: string
+        }[]
+      }
+      get_reviewer_stats_admin: { Args: never; Returns: Json }
+      get_reviewers_with_expertise_admin: {
+        Args: never
+        Returns: {
+          current_workload: number
+          email: string
+          expertise: Json
+          first_name: string
+          last_name: string
+          user_id: string
+        }[]
+      }
+      get_reviewers_with_workload_admin: {
+        Args: never
+        Returns: {
+          completed: number
+          email: string
+          first_name: string
+          in_progress: number
+          last_name: string
+          pending: number
+          reviewer_id: string
+          total_assigned: number
+        }[]
+      }
+      get_reviews_needing_reminders:
+        | {
+            Args: never
+            Returns: {
+              days_until_deadline: number
+              deadline: string
+              last_reminder_sent_at: string
+              product_id: string
+              review_id: string
+              reviewer_email: string
+              reviewer_first_name: string
+              reviewer_id: string
+              reviewer_last_name: string
+              round_name: string
+              status: string
+            }[]
+          }
+        | {
+            Args: { p_min_interval_hours?: number; p_threshold_days?: number }
+            Returns: {
+              days_until_deadline: number
+              deadline: string
+              last_reminder_sent_at: string
+              product_id: string
+              review_id: string
+              reviewer_email: string
+              reviewer_first_name: string
+              reviewer_id: string
+              reviewer_last_name: string
+              round_name: string
+              status: string
+            }[]
+          }
+      get_security_events_admin: {
+        Args: { last_n_days?: number }
+        Returns: {
+          created_at: string
+          details: Json
+          event_type: string
+          id: string
+          ip_hash: string
+          notes: string
+          resolved_at: string
+          severity: string
+          url: string
+        }[]
+      }
+      get_user_role_secure: {
+        Args: { user_id_param: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
+      get_users_with_roles: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          first_name: string
+          institution: string
+          last_name: string
+          roles: string[]
+          user_id: string
+        }[]
+      }
+      get_users_with_roles_admin_only: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          first_name: string
+          institution: string
+          last_name: string
+          roles: string[]
+          user_id: string
+        }[]
+      }
+      grant_role_admin: {
+        Args: {
+          p_granted_by?: string
+          p_role: Database["public"]["Enums"]["app_role"]
+          p_target_user_id: string
+        }
+        Returns: Json
+      }
+      has_any_role: {
+        Args: {
+          roles_param: Database["public"]["Enums"]["app_role"][]
+          user_id_param: string
+        }
+        Returns: boolean
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      hash_ip: { Args: { ip_address: string }; Returns: string }
+      initialize_super_admins: { Args: never; Returns: undefined }
+      is_admin: { Args: never; Returns: boolean }
+      is_admin_secure: { Args: never; Returns: boolean }
+      is_institutional_email: { Args: { email: string }; Returns: boolean }
+      log_admin_action:
+        | {
+            Args: {
+              p_action_type: string
+              p_details?: Json
+              p_target_user_email?: string
+              p_target_user_id?: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              p_action_type: string
+              p_details?: Json
+              p_target_user_id: string
+            }
+            Returns: string
+          }
+      mark_reminder_sent: { Args: { p_review_ids: string[] }; Returns: number }
+      quick_assign_products:
+        | {
+            Args: {
+              p_deadline?: string
+              p_product_ids: string[]
+              p_reviewer_id: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_product_ids: string[]
+              p_reviewer_ids: string[]
+              p_round_id: string
+            }
+            Returns: number
+          }
+      reassign_product_review_admin: {
+        Args: {
+          p_new_reviewer_id: string
+          p_reason?: string
+          p_review_id: string
+        }
+        Returns: Json
+      }
+      reject_role_request: { Args: { p_request_id: string }; Returns: Json }
+      remove_product_review_admin: {
+        Args: { p_reason?: string; p_review_id: string }
+        Returns: Json
+      }
+      resolve_security_event_admin: {
+        Args: { p_event_id: string; p_notes?: string }
+        Returns: Json
+      }
+      revoke_role_admin: {
+        Args: {
+          p_role: Database["public"]["Enums"]["app_role"]
+          p_target_user_id: string
+        }
+        Returns: Json
+      }
+      schedule_analytics_cleanup: { Args: never; Returns: undefined }
+      send_pending_registration_notifications: {
+        Args: never
+        Returns: {
+          email: string
+          status: string
+          user_id: string
+        }[]
+      }
+      start_review_round_atomic:
+        | { Args: { p_assignments: Json; p_round_id: string }; Returns: Json }
+        | {
+            Args: {
+              p_product_ids: string[]
+              p_reviewer_ids: string[]
+              p_round_id: string
+            }
+            Returns: Json
+          }
+      start_review_secure: { Args: { review_id: string }; Returns: Json }
+      update_product_review_admin: {
+        Args: {
+          p_deadline?: string
+          p_notes?: string
+          p_priority?: string
+          p_review_id: string
+          p_status?: string
+        }
+        Returns: Json
+      }
+      update_reminder_settings: {
+        Args: {
+          p_enabled?: boolean
+          p_min_interval_hours?: number
+          p_threshold_days?: number
+        }
+        Returns: Json
+      }
+      update_review_round_admin: {
+        Args: {
+          p_default_deadline?: string
+          p_description?: string
+          p_end_date?: string
+          p_name?: string
+          p_round_id: string
+          p_start_date?: string
+          p_status?: string
+        }
+        Returns: Json
+      }
+      update_round_status_admin: {
+        Args: { p_round_id: string; p_status: string }
+        Returns: Json
+      }
+      verify_user_registration: {
+        Args: { p_user_id: string; p_verified?: boolean }
+        Returns: boolean
+      }
+    }
+    Enums: {
+      app_role: "admin" | "reviewer" | "company"
+      profile_document_type:
+        | "cv_resume"
+        | "certification"
+        | "publication"
+        | "identification"
+        | "company_verification"
+        | "other"
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {
+      app_role: ["admin", "reviewer", "company"],
+      profile_document_type: [
+        "cv_resume",
+        "certification",
+        "publication",
+        "identification",
+        "company_verification",
+        "other",
+      ],
+    },
+  },
+} as const

@@ -1,0 +1,167 @@
+
+export interface Product {
+  id?: string;
+  name: string;
+  company: string;
+  description: string;
+  features?: string[];
+  category: string;
+  certification?: string;
+  logoUrl?: string;  // Changed from required to optional
+  companyUrl?: string;
+  productUrl?: string;
+  githubUrl?: string;  // New field for GitHub repository URL
+  anatomicalLocation?: string[];
+  modality?: string | string[];
+  subspeciality?: string;
+  diseaseTargeted?: string[];
+  releaseDate?: string;
+  version?: string;
+  price?: number;
+  website?: string;
+  supportEmail?: string;
+  trainingRequired?: boolean;
+  compatibleSystems?: string[];
+  userRating?: number;
+  lastUpdated?: string;
+  lastRevised?: string;
+  clinicalEvidence?: string;
+  // Updating supported structures to match ProductDetails definition
+  supportedStructures?: string[] | Array<{
+    name: string;
+    type: string;
+    accuracy?: string;
+    validationDataset?: string;
+  }>;
+  // Adding properties needed by exportProducts.ts
+  useCases?: string[];
+  keyFeatures?: string[];
+  technicalSpecifications?: {
+    population?: string;
+    input?: string[];
+    inputFormat?: string[];
+    output?: string[];
+    outputFormat?: string[];
+  };
+  technology?: {
+    integration?: string[];
+    deployment?: string[];
+    triggerForAnalysis?: string;
+    processingTime?: string;
+  };
+  regulatory?: {
+    ce?: {
+      status: string;
+      class?: string;
+      type?: string;
+      notifiedBody?: string;
+      certificateNumber?: string;
+      regulation?: string;
+    };
+    fda?: {
+      status: string;
+      class?: string;
+      clearanceNumber?: string;
+      regulationNumber?: string;
+      productCode?: string;
+      type?: string;
+    } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
+    tfda?: {
+      status: string;
+      class?: string;
+      approvalNumber?: string;
+      decisionDate?: string;
+      notes?: string;
+    };
+    intendedUseStatement?: string;
+  };
+  market?: {
+    onMarketSince?: string;
+    distributionChannels?: string[];
+  };
+  pricing?: {
+    model?: string[];
+    basedOn?: string[];
+  } | string;
+  // Updating evidence to match ProductDetails definition
+  evidence?: string[] | Array<{
+    type: string;
+    description: string;
+    link: string;
+  }>;
+  limitations?: string[];
+  
+  // New field for company revision date
+  companyRevisionDate?: string;
+  
+  // New field for guidelines followed
+  guidelines?: Array<{
+    name: string;
+    version?: string;
+    reference?: string;
+    url?: string;
+    compliance?: 'full' | 'partial' | 'planned';
+  }>;
+  
+  // New field for OEM/developer relationships
+  developedBy?: {
+    company: string;           // Company name that developed the product
+    companyUrl?: string;       // Website URL of the developer
+    relationship?: string;     // Type of relationship (e.g., "Technology Partner", "OEM", "White-label")
+  };
+  
+  // New field for products that are part of larger systems
+  partOf?: {
+    name: string;              // Parent product/system name
+    version?: string;          // Minimum version required
+    productUrl?: string;       // URL to parent product info
+    relationship?: string;     // e.g., "Module", "Feature", "Add-on", "Component"
+  };
+
+  // Training dataset metadata (transparency reporting)
+  trainingData?: {
+    description?: string;
+    datasetSize?: string;
+    datasetSources?: string[];
+    demographics?: string;
+    scannerModels?: string[];
+    institutions?: number;
+    countries?: number;
+    publicDatasets?: string[];
+    disclosureLevel?: 'full' | 'partial' | 'minimal' | 'none';
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Clinical evaluation dataset metadata
+  evaluationData?: {
+    description?: string;
+    datasetSize?: string;
+    sites?: number;
+    countries?: number;
+    demographics?: string;
+    studyDesign?: string;
+    primaryEndpoint?: string;
+    results?: string;
+    source?: string;
+    sourceUrl?: string;
+  };
+
+  // Field Safety Corrective Actions / Recalls
+  safetyCorrectiveActions?: Array<{
+    type: 'recall' | 'FSCA' | 'advisory' | 'software-update';
+    classification?: string;
+    identifier?: string;
+    date: string;
+    status?: 'open' | 'closed' | 'terminated';
+    description: string;
+    affectedVersions?: string[];
+    action?: string;
+    authority: string;
+    sourceUrl?: string;
+  }>;
+}

@@ -1,0 +1,228 @@
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRoles } from '@/contexts/RoleContext';
+import { FileText, AlertCircle, RefreshCw } from 'lucide-react';
+import { format } from 'date-fns';
+import { Button } from '@/components/ui/button';
+
+interface AuditLog {
+  id: string;
+  action_type: string;
+  admin_email: string;
+  admin_user_id: string;
+  target_email: string | null;
+  target_user_id: string | null;
+  details: any;
+  created_at: string;
+}
+
+export function AuditLogViewer() {
+  const [logs, setLogs] = useState<AuditLog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin } = useRoles();
+
+  useEffect(() => {
+    // Wait for auth to be fully loaded before fetching
+    if (!authLoading && user && isAdmin) {
+      fetchAuditLogs();
+    } else if (!authLoading && (!user || !isAdmin)) {
+      setLoading(false);
+      setError('Admin access required to view audit logs');
+    }
+  }, [authLoading, user, isAdmin]);
+
+  const fetchAuditLogs = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      // Verify user is authenticated before querying
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        setError('Not authenticated. Please log in again.');
+        setLoading(false);
+        return;
+      }
+
+      const { data, error: queryError } = await supabase
+        .rpc('get_audit_logs_admin');
+
+      if (queryError) {
+        console.error('Error fetching audit logs:', queryError);
+        
+        // Provide specific error messages
+        let errorMessage = 'Failed to load audit logs';
+        if (queryError.code === '42501') {
+          errorMessage = 'Permission denied. Admin access required.';
+        } else if (queryError.message) {
+          errorMessage = queryError.message;
+        }
+        
+        setError(errorMessage);
+        toast({
+          title: 'Error',
+          description: errorMessage,
+          variant: 'destructive',
+        });
+      } else {
+        setLogs(data || []);
+        setError(null);
+      }
+    } catch (error: any) {
+      console.error('Unexpected error fetching audit logs:', error);
+      const errorMessage = `Unexpected error: ${error.message || 'Unknown error'}`;
+      setError(errorMessage);
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getActionBadgeVariant = (actionType: string) => {
+    if (actionType.includes('deleted')) return 'destructive';
+    if (actionType.includes('granted')) return 'default';
+    if (actionType.includes('revoked')) return 'secondary';
+    return 'outline';
+  };
+
+  const formatActionType = (actionType: string) => {
+    return actionType
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  if (loading || authLoading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            Audit Log
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center py-8">
+            <LoadingSpinner />
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            Audit Log
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-8">
+            <AlertCircle className="h-12 w-12 mx-auto mb-4 text-destructive opacity-50" />
+            <p className="text-destructive mb-4">{error}</p>
+            {user && isAdmin && (
+              <Button onClick={fetchAuditLogs} variant="outline" size="sm">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Retry
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Audit Log
+            </CardTitle>
+            <CardDescription>
+              Complete history of administrative actions (last 100 entries)
+            </CardDescription>
+          </div>
+          <Button onClick={fetchAuditLogs} variant="outline" size="sm">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent>
+        {logs.length === 0 ? (
+          <div className="text-center py-8 text-muted-foreground">
+            <AlertCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p className="font-medium mb-2">No audit log entries found</p>
+            <p className="text-sm">
+              Audit logs will appear here when administrative actions are performed
+              (e.g., granting roles, deleting users)
+            </p>
+          </div>
+        ) : (
+          <ScrollArea className="h-[600px]">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Date & Time</TableHead>
+                  <TableHead>Action</TableHead>
+                  <TableHead>Performed By</TableHead>
+                  <TableHead>Target User</TableHead>
+                  <TableHead>Details</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {logs.map((log) => (
+                  <TableRow key={log.id}>
+                    <TableCell className="font-mono text-sm">
+                      {format(new Date(log.created_at), 'MMM dd, yyyy HH:mm:ss')}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={getActionBadgeVariant(log.action_type)}>
+                        {formatActionType(log.action_type)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {log.admin_email}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {log.target_email || '-'}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground max-w-md truncate">
+                      {log.details?.target_user_name && (
+                        <span className="font-medium">{log.details.target_user_name}</span>
+                      )}
+                      {log.details?.reason && (
+                        <span className="ml-2">({log.details.reason})</span>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </ScrollArea>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

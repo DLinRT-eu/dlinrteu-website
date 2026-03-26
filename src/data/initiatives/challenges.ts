@@ -1,0 +1,201 @@
+
+import { Initiative } from "@/types/initiative";
+
+export const CHALLENGE_INITIATIVES: Initiative[] = [
+  {
+    id: "panther",
+    name: "PANTHER Challenge",
+    category: "Grand Challenge",
+    description: "Pancreatic tumor segmentation in therapeutic and diagnostic MRI.",
+    website: "https://panther.grand-challenge.org/",
+    organization: "Radboud University Medical Center/ MICCAI Society",
+    startDate: "2025-04-15",
+    status: "Active",
+    tags: ["Pancreatic Cancer", "MRI", "Segmentation", "Radiation Therapy"],
+    features: ["3D MRI datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
+    dataAccess: "Available on Zenodo",
+    resultsUrl: "https://panther.grand-challenge.org/evaluation/open-development-phase/leaderboard/",
+    participationInfo: "Open to academic and commercial participants worldwide",
+  },
+  {
+    id: "hecktor",
+    name: "HECKTOR Challenge",
+    category: "Grand Challenge",
+    description: "HEad and neCK TumOR segmentation and outcome prediction challenge, now in its 5th edition (2025). Focuses on automatic segmentation, diagnosis, and prognosis of head and neck tumors in PET/CT images.",
+    website: "https://hecktor25.grand-challenge.org/",
+    organization: "HES-SO Valais / University Hospital of Zürich",
+    startDate: "2020-01-01",
+    status: "Active",
+    tags: ["Head and Neck Cancer", "PET/CT", "Segmentation", "Multi-Modal", "Outcome Prediction"],
+    features: ["3D PET/CT datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
+    dataAccess: "Available after registration",
+    resultsUrl: "https://hecktor25.grand-challenge.org/test-leaderboard/",
+    participationInfo: "Open to academic and commercial participants worldwide",
+    relatedPublications: [
+      {
+        title: "Overview of the HECKTOR Challenge at MICCAI 2020",
+        url: "https://doi.org/10.1007/978-3-030-67194-5_45",
+        authors: "V. Andrearczyk et al.",
+        year: "2020"
+      }
+    ]
+  },
+  {
+    id: "synthrad-2023",
+    name: "SynthRAD2023",
+    category: "Grand Challenge",
+    description: "Challenge on MR-to-CT synthesis for radiotherapy planning, focused on generating synthetic CT images from MRI for radiation therapy planning.",
+    website: "https://synthrad2023.grand-challenge.org/",
+    organization: "MICCAI Society",
+    startDate: "2023-01-15",
+    endDate: "2023-09-30",
+    status: "Completed",
+    tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
+    features: ["Multi-institutional dataset", "Various anatomical sites", "Standardized evaluation framework"],
+    dataAccess: "Available after registration",
+    resultsUrl: "https://synthrad2023.grand-challenge.org/evaluation/results/",
+    participationInfo: "Open to academic and commercial participants worldwide"
+  },
+  {
+    id: "synthrad-2025",
+    name: "SynthRAD2025",
+    category: "Grand Challenge",
+    description: "Running challenge on advanced MR-to-CT synthesis for radiotherapy planning, building on the success of SynthRAD 2023.",
+    website: "https://synthrad2025.grand-challenge.org/",
+    organization: "MICCAI/ESTRO",
+    startDate: "2025-03-01",
+    status: "Active",
+    tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
+    features: ["Enhanced dataset", "Multiple anatomical regions", "Advanced evaluation metrics"],
+    participationInfo: "Currently ongoing"
+  },
+  {
+    id: "trackrad-2025",
+    name: "TrackRAD2025",
+    category: "Grand Challenge",
+    description: "Running challenge on tracking from 2D-cine MRI-Linac",
+    website: "https://trackrad2025.grand-challenge.org/",
+    organization: "MICCAI/ESTRO",
+    startDate: "2025-03-15",
+    status: "Active",
+    tags: ["MRI", "Radiation Therapy"],
+    features: ["2D-cine", "Multiple anatomical regions", "Advanced evaluation metrics"],
+    participationInfo: "Currently ongoing"
+  },
+  {
+    id: "autortp",
+    name: "AUTO-RTP",
+    category: "Grand Challenge",
+    description: "Automatic treatment planning challenge for prostate, focusing on generating high-quality treatment plans automatically.",
+    website: "https://auto-rtp.grand-challenge.org/",
+    organization: "ESTRO",
+    startDate: "2023-05-01",
+    endDate: "2024-01-01",
+    status: "Active",
+    tags: ["Prostate Cancer", "Treatment Planning", "Optimization", "Dose Prediction"],
+    features: ["Clinical CT datasets", "Structure sets", "Evaluation based on clinical metrics"],
+    dataAccess: "Available for research purposes",
+    resultsUrl: "https://auto-rtp.grand-challenge.org/evaluation/always-open/leaderboard/",
+    participationInfo: "Was open to academic and commercial participants"
+  },
+  {
+    id: "structseg",
+    name: "StructSeg Challenge",
+    category: "Grand Challenge",
+    description: "Automatic structure segmentation challenge focusing on organs at risk and target delineation in radiotherapy.",
+    website: "https://structseg2019.grand-challenge.org/",
+    organization: "Chinese Academy of Medical Sciences",
+    startDate: "2019-06-01",
+    endDate: "2019-10-30",
+    status: "Completed",
+    tags: ["Segmentation", "Organs at Risk", "Target Volumes", "Thoracic CT", "Head and Neck CT"],
+    features: ["Thoracic CT datasets", "Head and neck CT datasets", "Expert annotations"],
+    dataAccess: "Available upon request",
+    resultsUrl: "https://structseg2019.grand-challenge.org/evaluation/results/",
+    participationInfo: "Was open to all participants"
+  },
+  {
+    id: "aapm-thoracic",
+    name: "AAPM Thoracic Auto-Segmentation Challenge",
+    category: "Grand Challenge",
+    description: "Challenge for automatic segmentation of organs at risk in thoracic CT for radiotherapy planning. Associated dataset available on TCIA (AAPM-RT-MAC).",
+    website: "https://www.aapm.org/GrandChallenge/SegTHOR/",
+    organization: "American Association of Physicists in Medicine",
+    startDate: "2017-01-01",
+    endDate: "2017-07-30",
+    status: "Completed",
+    tags: ["Thoracic CT", "Auto-Segmentation", "Organs at Risk", "Radiation Therapy"],
+    features: ["Thoracic CT scans", "Expert contours", "Standardized evaluation metrics"],
+    dataAccess: "Available for research purposes",
+    participationInfo: "Was open to all participants"
+  },
+  {
+    id: "hnts-mrg-2024",
+    name: "HNTS-MRG 2024",
+    category: "Grand Challenge",
+    description: "Head and Neck Tumor Segmentation for MR-Guided Applications challenge at MICCAI 2024, focusing on gross tumor volume and metastatic lymph node segmentation in MRI for adaptive radiotherapy.",
+    website: "https://hntsmrg24.grand-challenge.org/",
+    organization: "MICCAI Society",
+    startDate: "2024-03-01",
+    endDate: "2024-10-06",
+    status: "Completed",
+    tags: ["Head and Neck Cancer", "MRI", "Segmentation", "Adaptive Radiotherapy", "GTV", "Lymph Nodes"],
+    features: [
+      "Pre-treatment and mid-treatment MRI",
+      "GTV and metastatic lymph node annotations",
+      "Two tasks: pre-RT and mid-RT segmentation"
+    ],
+    dataAccess: "Available after registration",
+    resultsUrl: "https://hntsmrg24.grand-challenge.org/",
+    participationInfo: "Challenge completed, data available for post-challenge research"
+  },
+  {
+    id: "aapm-gdp-hmm",
+    name: "AAPM GDP-HMM 2025",
+    category: "Grand Challenge",
+    description: "Generalizable Dose Prediction for Heterogeneous Multi-Cohort and Multi-Site Radiotherapy Planning. Focuses on developing dose prediction models that generalize across institutions and treatment protocols.",
+    website: "https://www.aapm.org/GrandChallenge/GDP-HMM/",
+    organization: "American Association of Physicists in Medicine",
+    startDate: "2025-01-01",
+    status: "Active",
+    tags: ["Dose Prediction", "Treatment Planning", "Multi-Site", "Radiation Therapy"],
+    features: ["Multi-site datasets", "Heterogeneous treatment protocols", "Generalizability evaluation"],
+    participationInfo: "Open to academic and commercial participants worldwide"
+  },
+  {
+    id: "aapm-match",
+    name: "AAPM MATCH",
+    category: "Grand Challenge",
+    description: "MArkerless lung Target Tracking CHallenge. Evaluates markerless tumor tracking algorithms during radiotherapy delivery using kV imaging sequences.",
+    website: "https://www.aapm.org/GrandChallenge/MATCH/",
+    organization: "American Association of Physicists in Medicine",
+    startDate: "2019-01-01",
+    endDate: "2021-12-31",
+    status: "Completed",
+    tags: ["Lung Cancer", "Tracking", "Real-Time", "Radiation Therapy", "kV Imaging"],
+    features: ["kV imaging sequences", "Ground truth tumor positions", "Real-time tracking evaluation"],
+    participationInfo: "Challenge completed",
+    relatedPublications: [
+      {
+        title: "Results of the AAPM MATCH challenge",
+        url: "https://doi.org/10.1002/mp.15418",
+        authors: "P. Mao et al.",
+        year: "2021"
+      }
+    ]
+  },
+  {
+    id: "icassp-3dcbct-2024",
+    name: "ICASSP 3D CBCT Challenge 2024",
+    category: "Grand Challenge",
+    description: "Deep learning challenge for low-dose 3D cone-beam CT reconstruction. CBCT is fundamental to image-guided and adaptive radiotherapy workflows.",
+    website: "https://sites.google.com/view/icassp2024-spgc-3dcbct/home",
+    organization: "IEEE / ICASSP Signal Processing Grand Challenges",
+    startDate: "2024-01-01",
+    endDate: "2024-04-30",
+    status: "Completed",
+    tags: ["CBCT", "Image Reconstruction", "Deep Learning", "Radiation Therapy", "Low-Dose"],
+    features: ["Low-dose CBCT projections", "Reference high-quality reconstructions", "Standardized image quality metrics"],
+    participationInfo: "Challenge completed"
+  }
+];

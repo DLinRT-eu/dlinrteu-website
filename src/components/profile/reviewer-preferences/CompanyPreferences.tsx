@@ -1,0 +1,148 @@
+import { useMemo } from "react";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { X, PackagePlus } from "lucide-react";
+import { CompanySelectionTable } from "./CompanySelectionTable";
+import { COMPANIES } from "@/data";
+import { ALL_PRODUCTS } from "@/data";
+import { toast } from "sonner";
+
+interface CompanyPreference {
+  company_id: string;
+  priority: number;
+}
+
+interface CompanyPreferencesProps {
+  preferences: CompanyPreference[];
+  onAdd: (companyId: string) => void;
+  onRemove: (companyId: string) => void;
+  onPriorityChange: (companyId: string, priority: number) => void;
+  onBulkAddProducts: (productIds: string[], priority: number) => Promise<void>;
+}
+
+export function CompanyPreferences({
+  preferences,
+  onAdd,
+  onRemove,
+  onPriorityChange,
+  onBulkAddProducts,
+}: CompanyPreferencesProps) {
+  const selectedCompanyIds = preferences.map(p => p.company_id);
+
+  const companyMap = useMemo(() => {
+    const map = new Map();
+    COMPANIES.forEach(company => {
+      map.set(company.id, company);
+    });
+    return map;
+  }, []);
+
+  const handleSelectAllProducts = async (companyId: string, priority: number) => {
+    const company = companyMap.get(companyId);
+    if (!company) return;
+
+    // Get all products for this company
+    const companyProducts = ALL_PRODUCTS.filter(p => 
+      p.company.toLowerCase().replace(/\s+/g, '-') === companyId
+    );
+
+    if (companyProducts.length === 0) {
+      toast.error('No products found for this company');
+      return;
+    }
+
+    const productIds = companyProducts.map(p => p.id).filter(Boolean) as string[];
+    
+    try {
+      await onBulkAddProducts(productIds, priority);
+      toast.success(`Added ${productIds.length} products from ${company.name}`);
+    } catch (error) {
+      console.error('Error adding products:', error);
+      toast.error('Failed to add products');
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Browse and Add Companies */}
+      <div className="space-y-3">
+        <Label>Browse and Add Companies</Label>
+        <CompanySelectionTable
+          companies={COMPANIES}
+          selectedIds={selectedCompanyIds}
+          onAdd={onAdd}
+        />
+      </div>
+
+      {/* Current Preferences */}
+      {preferences.length > 0 && (
+        <div className="space-y-4">
+          <Label>Your Company Expertise</Label>
+          {preferences.map((item) => {
+            const company = companyMap.get(item.company_id);
+            return (
+              <div key={item.company_id} className="space-y-2 p-4 border rounded-lg bg-card">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary">
+                      {company?.name || item.company_id}
+                    </Badge>
+                    <span className="text-sm text-muted-foreground">
+                      Priority: {item.priority}
+                    </span>
+                  </div>
+                  <div className="flex gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleSelectAllProducts(item.company_id, item.priority)}
+                      title="Add all products from this company"
+                    >
+                      <PackagePlus className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => onRemove(item.company_id)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                {company?.productIds && (
+                  <p className="text-xs text-muted-foreground">
+                    {company.productIds.length} products in catalog
+                  </p>
+                )}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>Lower = More familiar</span>
+                    <span>Higher = Less experience</span>
+                  </div>
+                  <Slider
+                    value={[item.priority]}
+                    onValueChange={([value]) => onPriorityChange(item.company_id, value)}
+                    min={1}
+                    max={10}
+                    step={1}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {preferences.length === 0 && (
+        <div className="text-center py-8 text-muted-foreground">
+          <p className="text-sm">
+            No companies selected yet. Search and add companies you have experience with.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}

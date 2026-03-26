@@ -1,0 +1,62 @@
+import { ProductDetails } from "@/types/productDetails";
+import { CompanyDetails } from "@/types/company";
+import { NewsItem } from "@/types/news";
+import { Initiative } from "@/types/initiative";
+import { NEWS_ITEMS } from "./news";
+import { COMPANIES } from "./companies/index";
+import { AUTO_CONTOURING_PRODUCTS } from "./products/auto-contouring/index";
+import { IMAGE_SYNTHESIS_PRODUCTS } from "./products/image-synthesis/index";
+import { REGISTRATION_PRODUCTS } from "./products/registration/index";
+import { PLATFORM_PRODUCTS } from "./products/platform/index";
+import { TREATMENT_PLANNING_PRODUCTS } from "./products/treatment-planning";
+import { CLINICAL_PREDICTION_PRODUCTS } from "./products/clinical-prediction";
+import { RECONSTRUCTION_PRODUCTS } from "./products/reconstruction";
+import { IMAGE_ENHANCEMENT_PRODUCTS } from "./products/image-enhancement";
+import { PERFORMANCE_MONITOR_PRODUCTS } from "./products/performance-monitor";
+import { TRACKING_PRODUCTS } from "./products/tracking";
+import { PIPELINE_PRODUCTS } from "./products/pipeline";
+import { 
+  ALL_INITIATIVES, 
+  CHALLENGE_INITIATIVES, 
+  DATASET_INITIATIVES,
+  MODEL_ZOO_INITIATIVES
+} from "./initiatives";
+
+// Combine all products (including pipeline products)
+export const ALL_PRODUCTS: ProductDetails[] = [
+  ...AUTO_CONTOURING_PRODUCTS,
+  ...IMAGE_SYNTHESIS_PRODUCTS,
+  ...REGISTRATION_PRODUCTS,
+  ...PLATFORM_PRODUCTS,
+  ...TREATMENT_PLANNING_PRODUCTS,
+  ...CLINICAL_PREDICTION_PRODUCTS,
+  ...RECONSTRUCTION_PRODUCTS,
+  ...IMAGE_ENHANCEMENT_PRODUCTS,
+  ...PERFORMANCE_MONITOR_PRODUCTS,
+  ...TRACKING_PRODUCTS,
+  ...PIPELINE_PRODUCTS
+];
+
+// Export everything
+export {
+  NEWS_ITEMS,
+  COMPANIES,
+  AUTO_CONTOURING_PRODUCTS,
+  IMAGE_SYNTHESIS_PRODUCTS,
+  REGISTRATION_PRODUCTS,
+  PLATFORM_PRODUCTS,
+  TREATMENT_PLANNING_PRODUCTS,
+  CLINICAL_PREDICTION_PRODUCTS,
+  RECONSTRUCTION_PRODUCTS,
+  IMAGE_ENHANCEMENT_PRODUCTS,
+  PERFORMANCE_MONITOR_PRODUCTS,
+  TRACKING_PRODUCTS,
+  PIPELINE_PRODUCTS,
+  ALL_INITIATIVES,
+  CHALLENGE_INITIATIVES, 
+  DATASET_INITIATIVES,
+  MODEL_ZOO_INITIATIVES
+};
+
+// Type exports
+export type { NewsItem, CompanyDetails, Initiative };

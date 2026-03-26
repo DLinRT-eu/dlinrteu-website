@@ -1,0 +1,90 @@
+
+import { ProductDetails } from "@/types/productDetails";
+
+export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
+  {
+    id: "philips-mrcat-brain",
+    name: "MRCAT Brain",
+    company: "Philips",
+    companyUrl: "https://www.philips.com/",
+    productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-brain.ts",
+    description: "AI-powered MR-only simulation solution that generates synthetic CT images from MR scans for radiation therapy planning of brain tumors, avoiding the need for a separate CT scan and improving workflow efficiency.",
+    features: [
+      "MR-only planning",
+      "Synthetic CT generation",
+      "Deep learning algorithms",
+      "Automatic CT conversion",
+      "Integrated workflow"
+    ],
+    category: "Image Synthesis",
+    certification: "CE Mark, FDA Cleared",
+    logoUrl: "/logos/philips.png",
+    website: "https://www.philips.ie/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
+    anatomicalLocation: ["Brain"],
+    modality: "MRI",
+    subspeciality: "Radiation Oncology",
+    diseaseTargeted: ["Brain Cancer", "Brain Tumors"],
+    keyFeatures: [
+      "AI-powered MR-only simulation",
+      "Synthetic CT generation from MR scans",
+      "Deep learning algorithms for image conversion",
+      "Eliminates need for separate CT scan",
+      "Seamless workflow integration"
+    ],
+    technicalSpecifications: {
+      population: "Adult and pediatric patients",
+      input: ["MRI scans"],
+      inputFormat: ["DICOM"],
+      output: ["Synthetic CT images"],
+      outputFormat: ["DICOM"]
+    },
+    technology: {
+      integration: ["Pinnacle TPS", "PACS systems"],
+      deployment: ["On-premises"],
+      triggerForAnalysis: "Within treatment planning workflow",
+      processingTime: "Minutes per volume"
+    },
+    regulatory: {
+      ce: {
+        status: "Approved",
+        class: "IIa",
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)"
+      },
+      fda: {
+        status: "510(k) Cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K193109",
+        productCode: "MUJ",
+        decisionDate: "2020",
+        notes: "AI-powered application for primary and metastatic brain tumors."
+      },
+      intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of brain tumors."
+    },
+    market: {
+      onMarketSince: "2020",
+      distributionChannels: ["Direct sales", "Partnerships"]
+    },
+    version: "1.0",
+    releaseDate: "2020-01-20",
+    lastUpdated: "2026-03-08",
+    lastRevised: "2026-03-08",
+    source: "Company website",
+    clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
+    evidence: [
+      {
+        type: "Clinical Validation",
+        description: "Aljaafari et al. Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning. Tech Innov Patient Support Radiat Oncol 2025;35:100328. 93 patients, 572 CBCT registrations. PTV dose differences <0.4%, positioning within ±1mm/±1°.",
+        link: "https://doi.org/10.1016/j.tipsro.2025.100328"
+      }
+    ],
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Largest MRCAT Brain validation study to date.",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025).",
+    evidenceVendorIndependent: true,
+    evidenceExternalValidation: true
+  }
+];

@@ -1,0 +1,260 @@
+
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Clock, ArrowRight, Info, ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import SearchHeader from "@/components/SearchHeader";
+import ProductGrid from "@/components/ProductGrid";
+import FilterBar from "@/components/FilterBar";
+import type { FilterState } from "@/types/filters";
+import SEO from "@/components/SEO";
+import { toast } from "sonner";
+import dataService from "@/services/DataService";
+import Footer from "@/components/Footer";
+import ActiveFilterChips from "@/components/filters/ActiveFilterChips";
+import ProductFeedbackBanner from "@/components/ProductFeedbackBanner";
+
+const Products = () => {
+  const [filtersActive, setFiltersActive] = useState(false);
+  const [currentFilters, setCurrentFilters] = useState<FilterState>({
+    tasks: [],
+    locations: [],
+    certifications: [],
+    modalities: [],
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [advancedSearch, setAdvancedSearch] = useState(false);
+  const location = useLocation();
+
+  // Get all products and pipeline products
+  const allProducts = dataService.getAllProducts();
+  const pipelineProducts = dataService.getPipelineProducts();
+  const totalProductCount = allProducts.length;
+  const totalWithPipeline = dataService.getTotalProductCount();
+
+  // Check URL parameters for initial filters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const taskParam = urlParams.get('task');
+    const modalityParam = urlParams.get('modality');
+    const anatomyParam = urlParams.get('anatomy');
+    const certificationParam = urlParams.get('certification');
+    
+    const newFilters = { ...currentFilters };
+    let hasAppliedFilters = false;
+    
+    // Check and apply task filter
+    if (taskParam) {
+      newFilters.tasks = [taskParam];
+      hasAppliedFilters = true;
+      
+      // Dispatch an event to notify filter components about the change
+      const event = new CustomEvent('setTaskFilter', { 
+        detail: { task: taskParam }
+      });
+      window.dispatchEvent(event);
+      
+      toast.info(`Showing ${taskParam} products`);
+    }
+    
+    // Check and apply modality filter
+    if (modalityParam) {
+      newFilters.modalities = [modalityParam];
+      hasAppliedFilters = true;
+      
+      // Dispatch an event
+      const event = new CustomEvent('setModalityFilter', { 
+        detail: { modality: modalityParam }
+      });
+      window.dispatchEvent(event);
+      
+      if (!taskParam) toast.info(`Showing ${modalityParam} products`);
+    }
+    
+    // Check and apply anatomy filter
+    if (anatomyParam) {
+      newFilters.locations = [anatomyParam];
+      hasAppliedFilters = true;
+      
+      // Dispatch an event
+      const event = new CustomEvent('setAnatomyFilter', { 
+        detail: { anatomy: anatomyParam }
+      });
+      window.dispatchEvent(event);
+      
+      if (!taskParam && !modalityParam) toast.info(`Showing ${anatomyParam} products`);
+    }
+    
+    // Check and apply certification filter
+    if (certificationParam) {
+      newFilters.certifications = [certificationParam];
+      hasAppliedFilters = true;
+      
+      // Dispatch an event
+      const event = new CustomEvent('setCertificationFilter', { 
+        detail: { certification: certificationParam }
+      });
+      window.dispatchEvent(event);
+      
+      if (!taskParam && !modalityParam && !anatomyParam) 
+        toast.info(`Showing products with ${certificationParam}`);
+    }
+    
+    if (hasAppliedFilters) {
+      setCurrentFilters(newFilters);
+      setFiltersActive(true);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    // Check if preview is loaded
+    const timer = setTimeout(() => {
+      console.log("Page loaded and rendered");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI Radiotherapy Products",
+    "description": "Search and explore deep learning products in Radiotherapy, including auto-contouring, image synthesis, and treatment planning tools",
+    "url": "https://dlinrt.eu/products",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Deep Learning in Radiotherapy",
+      "url": "https://dlinrt.eu"
+    }
+  };
+
+  const handleResetFilters = () => {
+    const event = new CustomEvent('resetFilters');
+    window.dispatchEvent(event);
+    setFiltersActive(false);
+    setCurrentFilters({
+      tasks: [],
+      locations: [],
+      certifications: [],
+      modalities: [],
+    });
+    setSearchQuery("");
+    toast.success("Filters have been reset");
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const handleAdvancedSearchToggle = (enabled: boolean) => {
+    setAdvancedSearch(enabled);
+  };
+
+  const handleFilterUpdate = (newFilters: FilterState) => {
+    setCurrentFilters(newFilters);
+    setFiltersActive(
+      Object.values(newFilters).some(filterArray => filterArray.length > 0)
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      <SEO
+        title="AI Products Database - Deep Learning Solutions for Radiotherapy & Oncology"
+        description="Browse our comprehensive AI products database for radiotherapy. Compare deep learning solutions for auto-contouring, treatment planning, and clinical prediction tools."
+        canonical="https://dlinrt.eu/products"
+        structuredData={structuredData}
+      />
+      <SearchHeader 
+        onSearch={handleSearch} 
+        onAdvancedSearchToggle={handleAdvancedSearchToggle}
+        products={allProducts}
+      />
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+        {/* Inclusion Criteria */}
+        <Collapsible className="mb-6">
+          <CollapsibleTrigger className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#00A6D6] transition-colors group cursor-pointer">
+            <Info className="h-4 w-4" />
+            <span>Inclusion criteria</span>
+            <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-3">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-gray-700 space-y-2">
+              <p><strong>Included:</strong> Products that use AI/Deep Learning (neural networks) for their core clinical function in radiotherapy, OR QA/monitoring tools whose intended use explicitly references AI-generated outputs.</p>
+              <p><strong>Excluded:</strong> Classical image processing tools (e.g. deformable registration, contour propagation without neural networks), general QA tools without explicit AI references in intended use, and products lacking sufficient public documentation.</p>
+              <p className="text-gray-500">
+                Missing a product?{' '}
+                <Link to="/support#product-feedback" className="text-[#00A6D6] hover:underline">
+                  Let us know
+                </Link>
+              </p>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-semibold text-gray-900">
+            Featured Products
+            <span className="ml-2 text-sm font-normal text-gray-500">
+              ({totalProductCount} certified{pipelineProducts.length > 0 ? ` + ${pipelineProducts.length} in pipeline` : ''})
+            </span>
+          </h2>
+          <button 
+            onClick={handleResetFilters}
+            className="text-sm text-gray-500 hover:text-[#00A6D6] transition-colors cursor-pointer"
+          >
+            {filtersActive || searchQuery ? 'Reset filters' : 'Showing all products'}
+          </button>
+        </div>
+        
+        <FilterBar 
+          onFiltersChange={setFiltersActive}
+          onFilterUpdate={handleFilterUpdate}
+        />
+        
+        {filtersActive && (
+          <ActiveFilterChips 
+            filters={currentFilters}
+            onRemoveFilter={(filterType, value) => {
+              const newFilters = { ...currentFilters };
+              newFilters[filterType] = newFilters[filterType].filter(v => v !== value);
+              handleFilterUpdate(newFilters);
+            }}
+            onClearAll={handleResetFilters}
+            className="mb-6"
+          />
+        )}
+        
+        {/* Pipeline Products Link */}
+        {pipelineProducts.length > 0 && (
+          <Link to="/products/pipeline" className="block mb-6">
+            <div className="p-4 bg-violet-50 rounded-lg border border-violet-200 hover:border-violet-400 transition-colors">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-violet-600" />
+                  <span className="text-lg font-semibold text-violet-900">
+                    Products in Pipeline ({pipelineProducts.length})
+                  </span>
+                </div>
+                <ArrowRight className="h-5 w-5 text-violet-600" />
+              </div>
+              <p className="text-sm text-violet-700 mt-1 ml-7">
+                Announced products not yet certified (CE/FDA). Click to view all.
+              </p>
+            </div>
+          </Link>
+        )}
+        
+        <ProductGrid 
+          filters={currentFilters} 
+          searchQuery={searchQuery}
+          advancedSearch={advancedSearch}
+        />
+        
+        <ProductFeedbackBanner className="mt-8" />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Products;

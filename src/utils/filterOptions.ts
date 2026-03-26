@@ -1,0 +1,200 @@
+
+import { Product } from "@/types/product";
+import { ProductDetails } from "@/types/productDetails";
+import { ALL_PRODUCTS } from "@/data";
+import { MODALITY_TAGS, ANATOMY_TAGS, COMBINED_CERTIFICATION_TAGS } from "@/config/tags";
+import dataService from "@/services/DataService";
+
+export const getAllOptions = (field: keyof Product): string[] => {
+  switch (field) {
+    case 'category': {
+      const categories = [...new Set(ALL_PRODUCTS.map(p => p.category))];
+      
+      // Define the preferred order of categories
+      const preferredOrder = [
+        "Reconstruction",
+        "Image Enhancement",
+        "Image Synthesis",
+        "Auto-Contouring",
+        "Tracking",
+        "Treatment Planning",
+        "Clinical Prediction",
+        "Registration",
+        "Performance Monitor",
+        "Platform"
+      ];
+      
+      // Sort categories according to preferred order
+      return categories.sort((a, b) => {
+        const indexA = preferredOrder.indexOf(a);
+        const indexB = preferredOrder.indexOf(b);
+        
+        // If both categories are in the preferred order list
+        if (indexA >= 0 && indexB >= 0) {
+          return indexA - indexB;
+        }
+        // If only a is in the preferred order list
+        if (indexA >= 0) {
+          return -1;
+        }
+        // If only b is in the preferred order list
+        if (indexB >= 0) {
+          return 1;
+        }
+        // If neither is in the list, sort alphabetically
+        return a.localeCompare(b);
+      });
+    }
+    case 'anatomicalLocation': {
+      // Get only the anatomical locations that are actually used in products
+      const usedLocations = new Set<string>();
+      
+      ALL_PRODUCTS.forEach(product => {
+        // Handle both anatomicalLocation and anatomy fields for consistency
+        const locations = product.anatomicalLocation || product.anatomy || [];
+        
+        if (locations && Array.isArray(locations)) {
+          locations.forEach(location => {
+            // Process locations based on our standard tags
+            if (ANATOMY_TAGS.includes(location)) {
+              usedLocations.add(location);
+            } else if (location === "Head" || location === "Neck") {
+              usedLocations.add("Head & Neck");
+            }
+          });
+        }
+      });
+      
+      return Array.from(usedLocations).sort();
+    }
+    case 'company':
+      return [...new Set(ALL_PRODUCTS.map(p => p.company))].sort();
+    case 'certification': {
+      // Get all unique standardized certifications used in products
+      const usedCertifications = new Set<string>();
+      
+      ALL_PRODUCTS.forEach(product => {
+        // Check for pipeline products
+        if (product.developmentStage === 'pipeline' || 
+            product.certification?.toLowerCase() === 'pipeline') {
+          usedCertifications.add("Pipeline");
+          return;
+        }
+        
+        if (product.certification) {
+          const cert = product.certification.toLowerCase().trim();
+          // Standardize the certification values for display
+          if (cert.includes('ce') && cert.includes('fda')) {
+            usedCertifications.add("CE & FDA");
+          } else if (cert.includes('ce')) {
+            usedCertifications.add("CE");
+          } else if (cert.includes('fda')) {
+            usedCertifications.add("FDA");
+          } else if (cert === 'mdr exempt') {
+            usedCertifications.add("MDR exempt");
+          } else if (cert === 'nmpa') {
+            usedCertifications.add("NMPA");
+          } else if (cert.includes('pending') || cert.includes('investigation')) {
+            usedCertifications.add("Pending");
+          }
+        }
+      });
+      
+      return Array.from(usedCertifications).sort();
+    }
+    case 'modality': {
+      // Get only the modalities that are actually used in products
+      const usedModalities = new Set<string>();
+      
+      ALL_PRODUCTS.forEach(product => {
+        const modalitiesArray = Array.isArray(product.modality) 
+          ? product.modality 
+          : (product.modality ? [product.modality] : []);
+          
+        modalitiesArray.forEach(modality => {
+          if (MODALITY_TAGS.includes(modality)) {
+            usedModalities.add(modality);
+          }
+        });
+      });
+      
+      return Array.from(usedModalities).sort();
+    }
+    default:
+      return [];
+  }
+};
+
+/**
+ * Get filter options specifically for pipeline products
+ */
+export const getPipelineFilterOptions = (field: keyof ProductDetails): string[] => {
+  const pipelineProducts = dataService.getPipelineProducts();
+  
+  switch (field) {
+    case 'category': {
+      const categories = new Set<string>();
+      pipelineProducts.forEach(product => {
+        categories.add(product.category);
+        if (product.secondaryCategories) {
+          product.secondaryCategories.forEach(cat => categories.add(cat));
+        }
+      });
+      
+      // Define the preferred order of categories
+      const preferredOrder = [
+        "Reconstruction",
+        "Image Enhancement",
+        "Image Synthesis",
+        "Auto-Contouring",
+        "Tracking",
+        "Treatment Planning",
+        "Clinical Prediction",
+        "Registration",
+        "Performance Monitor",
+        "Platform"
+      ];
+      
+      return Array.from(categories).sort((a, b) => {
+        const indexA = preferredOrder.indexOf(a);
+        const indexB = preferredOrder.indexOf(b);
+        if (indexA >= 0 && indexB >= 0) return indexA - indexB;
+        if (indexA >= 0) return -1;
+        if (indexB >= 0) return 1;
+        return a.localeCompare(b);
+      });
+    }
+    case 'anatomicalLocation': {
+      const usedLocations = new Set<string>();
+      pipelineProducts.forEach(product => {
+        const locations = product.anatomicalLocation || product.anatomy || [];
+        if (locations && Array.isArray(locations)) {
+          locations.forEach(location => {
+            if (ANATOMY_TAGS.includes(location)) {
+              usedLocations.add(location);
+            } else if (location === "Head" || location === "Neck") {
+              usedLocations.add("Head & Neck");
+            }
+          });
+        }
+      });
+      return Array.from(usedLocations).sort();
+    }
+    case 'modality': {
+      const usedModalities = new Set<string>();
+      pipelineProducts.forEach(product => {
+        const modalitiesArray = Array.isArray(product.modality) 
+          ? product.modality 
+          : (product.modality ? [product.modality] : []);
+        modalitiesArray.forEach(modality => {
+          if (MODALITY_TAGS.includes(modality)) {
+            usedModalities.add(modality);
+          }
+        });
+      });
+      return Array.from(usedModalities).sort();
+    }
+    default:
+      return [];
+  }
+};
