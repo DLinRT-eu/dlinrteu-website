@@ -133,14 +133,52 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
       distributionChannels: ["Direct sales", "Hospital partnerships"]
     },
-    evidenceRigor: "E0",
+    evidence: [
+      {
+        type: "journal",
+        title: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy",
+        journal: "Physics and Imaging in Radiation Oncology",
+        doi: "10.1016/j.phro.2026.100935",
+        url: "https://doi.org/10.1016/j.phro.2026.100935",
+        year: 2026
+      },
+      {
+        type: "conference",
+        title: "The impact of AI-driven templates in brachytherapy practice",
+        conference: "ESTRO 2025",
+        notes: "Abstract Book p. 283",
+        year: 2025
+      },
+      {
+        type: "conference",
+        title: "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool",
+        conference: "ESTRO 2025",
+        notes: "Abstract Book p. 2558",
+        year: 2025
+      },
+      {
+        type: "conference",
+        title: "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection",
+        conference: "ESTRO 2025",
+        notes: "Abstract Book p. 2569",
+        year: 2025
+      },
+      {
+        type: "conference",
+        title: "Explainable AI for deep learning-based markerless lung tumor tracking",
+        conference: "ESTRO 2025",
+        notes: "Abstract Book p. 3246",
+        year: 2025
+      }
+    ],
+    evidenceRigor: "E1",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Not certified. Investigation use only. Internal studies (Doolan 2024) only - not independently peer-reviewed.",
-    clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only.",
+    evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus four ESTRO 2025 conference abstracts. Single-center/vendor-associated studies; not independently validated across multiple sites.",
+    clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2026-02-23",
-    source: "Company website, internal clinical study (Jan 2024). Note: Abdomen structures require source verification."
+    lastRevised: "2026-03-27",
+    source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2025 abstracts. Note: Abdomen structures require source verification."
   }
 ];
