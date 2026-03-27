@@ -136,39 +136,28 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "journal",
-        title: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy",
-        journal: "Physics and Imaging in Radiation Oncology",
-        doi: "10.1016/j.phro.2026.100935",
-        url: "https://doi.org/10.1016/j.phro.2026.100935",
-        year: 2026
+        description: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy. Physics and Imaging in Radiation Oncology (2026).",
+        link: "https://doi.org/10.1016/j.phro.2026.100935"
       },
       {
         type: "conference",
-        title: "The impact of AI-driven templates in brachytherapy practice",
-        conference: "ESTRO 2025",
-        notes: "Abstract Book p. 283",
-        year: 2025
+        description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283.",
+        link: ""
       },
       {
         type: "conference",
-        title: "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool",
-        conference: "ESTRO 2025",
-        notes: "Abstract Book p. 2558",
-        year: 2025
+        description: "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool. ESTRO 2025 Abstract Book p. 2558.",
+        link: ""
       },
       {
         type: "conference",
-        title: "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection",
-        conference: "ESTRO 2025",
-        notes: "Abstract Book p. 2569",
-        year: 2025
+        description: "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection. ESTRO 2025 Abstract Book p. 2569.",
+        link: ""
       },
       {
         type: "conference",
-        title: "Explainable AI for deep learning-based markerless lung tumor tracking",
-        conference: "ESTRO 2025",
-        notes: "Abstract Book p. 3246",
-        year: 2025
+        description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246.",
+        link: ""
       }
     ],
     evidenceRigor: "E1",
