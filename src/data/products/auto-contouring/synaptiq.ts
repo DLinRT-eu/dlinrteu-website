@@ -107,7 +107,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     ],
     technicalSpecifications: {
       population: "Adult patients",
-      input: ["CT"],
+      input: ["CT", "MRI", "PET/CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
       outputFormat: ["DICOM-RTSTRUCT"]
