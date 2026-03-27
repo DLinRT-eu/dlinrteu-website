@@ -1,37 +1,50 @@
 
 
-# Clean Up Sensitive Personal Information from Codebase
+# Update Synaptiq Mediq RT: Multi-Modality & Evidence
 
-## Problem
+## Changes
 
-The file `docs/REVIEWER_SETUP.sql` contains **8 real personal email addresses** of reviewers (Gmail, NHS, MD Anderson, Outlook, InPictura accounts) along with their full names. This is a GDPR violation — personal contact information of individuals should not be in a public repository.
+### 1. Update modality and technical specs
 
-All other email addresses found are either:
-- **Organizational/role emails** (`info@dlinrt.eu`, `noreply@dlinrt.eu`) — fine to keep
-- **Team member @dlinrt.eu emails** on the About page — intentionally public, fine
-- **Company support emails** (`RPA_Info@mdanderson.org`) — public business contacts, fine
-- **Placeholder examples** (`user@example.com`) — fine
-- **Auth/password handling code** — functional code, not stored credentials
+**Current**: `modality: ["CT"]`, `input: ["CT"]`
 
-## Plan
+**New**:
+- `modality: ["CT", "MRI", "PET/CT"]` — segmentation supported on CT and MRI; registration supported for MRI, PET/CT, and CT
+- `input: ["CT", "MRI", "PET/CT"]`
+- Update `description` to mention multi-modality registration (MRI, PET/CT, CT) and segmentation on CT and MRI
+- Add key feature: "Image registration for MRI, PET/CT, and CT modalities"
 
-### 1. Delete `docs/REVIEWER_SETUP.sql`
+### 2. Add secondary category
 
-This file contains:
-- 8 personal emails: `bryanthebeemang@gmail.com`, `usman.lula@uhb.nhs.uk`, `amithjkamath@outlook.com`, `mark.gooding@inpictura.com`, `adam.miovecz@gmail.com`, `mjaponc@gmail.com`, `kawahid@mdanderson.org`, `matthew.jones@uhcw.nhs.uk`
-- Full names linked to those emails
-- SQL queries referencing `auth.users` table patterns
+Add `secondaryCategories: ["Registration"]` since image registration is a distinct capability beyond auto-contouring.
 
-**Action**: Delete the entire file. It was a one-time setup script that has already been executed. The data is in the database; the script serves no ongoing purpose and poses a privacy risk.
+### 3. Update evidence classification to E1
 
-### 2. No other files need changes
+The PHIRO journal paper (doi:10.1016/j.phro.2026.100935) is a **peer-reviewed journal publication**. Combined with the ESTRO 2025 conference abstracts, this constitutes published evidence — but it appears to be a single study (likely vendor-associated), not multi-center/multi-national independent validation.
 
-- `src/pages/About.tsx` — team member emails are all `@dlinrt.eu` organizational addresses, intentionally displayed on the public About page
-- `SECURITY.md` / `CODE_OF_CONDUCT.md` — contain `m.maspero@umcutrecht.nl` and `info@dlinrt.eu` as designated security/conduct contacts (intentional, required)
-- Edge functions — contain only functional auth code, no hardcoded credentials
-- `.env` / `client.ts` — Supabase anon key is a publishable key (not a secret)
+**Rating**: **E1** (peer-reviewed publication, limited independence)
+- E0 → E1 upgrade justified by the PHIRO paper
+- Not E2: would require multiple independent studies or clear vendor-independent design
+- Clinical impact remains **I0** (no demonstrated clinical outcome change yet; the paper is a comparative technical analysis)
 
-### Reminder
+### 4. Add structured evidence entries
 
-After this cleanup, the git history reset (orphan branch rebase) you plan to do outside Lovable will ensure these emails are also purged from commit history.
+Add `evidence` array with:
+1. PHIRO paper — type: "journal", with DOI link
+2. Four ESTRO 2025 abstracts — type: "conference", with page references
+
+### 5. File changes
+
+**Single file**: `src/data/products/auto-contouring/synaptiq.ts`
+
+- `modality`: `["CT"]` → `["CT", "MRI", "PET/CT"]`
+- `technicalSpecifications.input`: `["CT"]` → `["CT", "MRI", "PET/CT"]`
+- `description`: add mention of multi-modality registration and segmentation capabilities
+- `secondaryCategories`: add `["Registration"]`
+- `keyFeatures`: add registration and multi-modality segmentation entries
+- `evidence`: add structured array with the 5 publications
+- `evidenceRigor`: `"E0"` → `"E1"`
+- `evidenceRigorNotes`: update to reference the PHIRO paper and ESTRO abstracts
+- `lastRevised`: update to `"2026-03-27"`
+- `source`: update to include PHIRO and ESTRO references
 
