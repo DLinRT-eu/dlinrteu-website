@@ -142,32 +142,42 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       {
         type: "conference",
         description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283.",
-        link: ""
+        link: "https://doi.org/10.1016/S0167-8140(25)03323-7"
       },
       {
         type: "conference",
         description: "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool. ESTRO 2025 Abstract Book p. 2558.",
-        link: ""
+        link: "https://doi.org/10.1016/S0167-8140(25)03323-7"
       },
       {
         type: "conference",
         description: "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection. ESTRO 2025 Abstract Book p. 2569.",
-        link: ""
+        link: "https://doi.org/10.1016/S0167-8140(25)03273-6"
       },
       {
         type: "conference",
         description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246.",
-        link: ""
+        link: "https://doi.org/10.1016/S0167-8140(25)00719-4"
+      },
+      {
+        type: "conference",
+        description: "Clinical Evaluation of a Deep Learning Model for Assessing OAR Delineation in Head and Neck Oncology. ESTRO 2024.",
+        link: "https://doi.org/10.1016/S0167-8140(24)03098-6"
+      },
+      {
+        type: "conference",
+        description: "Clinical evaluation of autosegmentation using AI with manual segmentation of breast tissue. ESTRO 2023.",
+        link: "https://doi.org/10.1016/S0167-8140(23)66556-9"
       }
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus four ESTRO 2025 conference abstracts. Single-center/vendor-associated studies; not independently validated across multiple sites.",
+    evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
     clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
     lastRevised: "2026-03-27",
-    source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2025 abstracts. Note: Abdomen structures require source verification."
+    source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts. Note: Abdomen structures require source verification."
   }
 ];
