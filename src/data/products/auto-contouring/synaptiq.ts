@@ -24,6 +24,8 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Adaptive learning according to user's individual technique",
       "Active Contouring - GTV delineation from single slice input",
       "AI-based interactive contour revisions",
+      "Auto-segmentation on CT and MRI modalities",
+      "Image registration for MRI, PET/CT, and CT modalities",
       "Multi-vendor and multi-modality integration",
       "Cloud-based data storage and visualization"
     ],
