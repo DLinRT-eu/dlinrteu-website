@@ -121,6 +121,14 @@ const MobileNav = () => {
                 <LayoutDashboard className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">Admin Overview</span>
               </Link>
+              <Link to="/admin/registrations" onClick={handleLinkClick} className={linkClass}>
+                <Users className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Registrations</span>
+              </Link>
+              <Link to="/admin/certifications" onClick={handleLinkClick} className={linkClass}>
+                <BadgeCheck className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Certifications</span>
+              </Link>
               <Link to="/admin/companies" onClick={handleLinkClick} className={linkClass}>
                 <Building2 className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">Companies</span>
@@ -132,6 +140,10 @@ const MobileNav = () => {
               <Link to="/admin/users" onClick={handleLinkClick} className={linkClass}>
                 <Users className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">User Management</span>
+              </Link>
+              <Link to="/admin/newsletter" onClick={handleLinkClick} className={linkClass}>
+                <Newspaper className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Newsletter</span>
               </Link>
             </>
           )}
