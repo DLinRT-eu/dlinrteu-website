@@ -45,19 +45,24 @@ const Header = () => {
           {isAdmin && (
             <>
               <Link to="/admin" className="px-3 py-2 hover:text-white/90 text-sm">Admin</Link>
+              <Link to="/admin/registrations" className="px-3 py-2 hover:text-white/90 text-sm">Registrations</Link>
+              <Link to="/admin/certifications" className="px-3 py-2 hover:text-white/90 text-sm">Certifications</Link>
               <Link to="/admin/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
               <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
             </>
           )}
           {isReviewer && !isAdmin && (
             <>
-              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
               <Link to="/reviewer/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">My Assignments</Link>
+              <Link to="/reviewer/due-reviews" className="px-3 py-2 hover:text-white/90 text-sm">Due Reviews</Link>
+              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
             </>
           )}
           {isCompany && !isAdmin && !isReviewer && (
             <>
               <Link to="/company/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
+              <Link to="/company/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
+              <Link to="/company/certification" className="px-3 py-2 hover:text-white/90 text-sm">Certification</Link>
               <Link to="/company/overview" className="px-3 py-2 hover:text-white/90 text-sm">Overview</Link>
             </>
           )}

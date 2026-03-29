@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck } from 'lucide-react';
+import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from './ui/sheet';
 import { Badge } from './ui/badge';
