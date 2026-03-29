@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck } from 'lucide-react';
+import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from './ui/sheet';
 import { Badge } from './ui/badge';
@@ -121,6 +121,14 @@ const MobileNav = () => {
                 <LayoutDashboard className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">Admin Overview</span>
               </Link>
+              <Link to="/admin/registrations" onClick={handleLinkClick} className={linkClass}>
+                <Users className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Registrations</span>
+              </Link>
+              <Link to="/admin/certifications" onClick={handleLinkClick} className={linkClass}>
+                <BadgeCheck className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Certifications</span>
+              </Link>
               <Link to="/admin/companies" onClick={handleLinkClick} className={linkClass}>
                 <Building2 className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">Companies</span>
@@ -132,6 +140,10 @@ const MobileNav = () => {
               <Link to="/admin/users" onClick={handleLinkClick} className={linkClass}>
                 <Users className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">User Management</span>
+              </Link>
+              <Link to="/admin/newsletter" onClick={handleLinkClick} className={linkClass}>
+                <Newspaper className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">Newsletter</span>
               </Link>
             </>
           )}
@@ -168,6 +180,10 @@ const MobileNav = () => {
               <Link to="/company/overview" onClick={handleLinkClick} className={linkClass}>
                 <Building2 className="w-5 h-5 mr-3 text-primary" />
                 <span className="font-medium">Overview</span>
+              </Link>
+              <Link to="/company/products" onClick={handleLinkClick} className={linkClass}>
+                <Package className="w-5 h-5 mr-3 text-primary" />
+                <span className="font-medium">My Products</span>
               </Link>
               <Link to="/company/certification" onClick={handleLinkClick} className={linkClass}>
                 <BadgeCheck className="w-5 h-5 mr-3 text-primary" />

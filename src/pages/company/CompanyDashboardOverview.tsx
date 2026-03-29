@@ -304,6 +304,16 @@ export default function CompanyDashboardOverview() {
       }
 
       toast.success(`${product.name} has been certified successfully`);
+
+      // Send certification notification email
+      try {
+        await supabase.functions.invoke('notify-certification-complete', {
+          body: { productId: selectedProductId, productName: product.name, companyName: product.company },
+        });
+      } catch (notifyError) {
+        console.error('Error sending certification notification:', notifyError);
+      }
+
       setCertifyDialogOpen(false);
       setSelectedProductId('');
       fetchDashboardData();
