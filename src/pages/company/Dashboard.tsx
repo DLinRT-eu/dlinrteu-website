@@ -197,6 +197,16 @@ export default function CompanyDashboard() {
         title: 'Success',
         description: `${product.name} has been certified. The verification badge will now appear on the product page.`,
       });
+
+      // Send certification notification email
+      try {
+        await supabase.functions.invoke('notify-certification-complete', {
+          body: { productId: selectedProduct, productName: product.name, companyName: product.company },
+        });
+      } catch (notifyError) {
+        console.error('Error sending certification notification:', notifyError);
+      }
+
       setCertifyDialogOpen(false);
       setSelectedProduct('');
       setCertificationDate(new Date());
