@@ -1,96 +1,73 @@
 
 
-# Improve Post-Login Navigation & Add Certification Completion Notification
+# Admin Notification Digest & Role Verification Email Notifications
 
 ## Problem
 
-1. **Navigation confusion after login**: All roles land on `/dashboard-home` which shows a flat grid of quick actions. For admins with 12+ actions, it's overwhelming. For company/reviewer users, the most important actions aren't visually prioritized. The desktop Header nav is also sparse for role users (collapsed into "More" dropdown).
-
-2. **No notification when certification is verified**: When a company representative certifies a product, there's no email confirmation sent to them or to admins.
+1. **No notification digest**: Admins have no way to receive a periodic (daily/weekly) summary of unread notifications by email, making it easy to miss pending actions.
+2. **Missing email on role approval (AdminOverview)**: The `AdminOverview.tsx` page approves/rejects roles directly but does NOT call `notify-role-request-outcome` — only `RoleRequestManager.tsx` does. This means some role approvals send no email.
 
 ## Plan
 
-### Task 1: Improve Dashboard_Authenticated layout with role-priority sections
+### Task 1: Add notification email on role approval in AdminOverview
 
-**File**: `src/pages/Dashboard_Authenticated.tsx`
+**File**: `src/pages/admin/AdminOverview.tsx`
 
-- Reorganize the quick actions grid into **prioritized sections** per role instead of one flat list:
-  - **Admin**: Show a "Priority Actions" row at top with the 3-4 most common admin tasks (Registrations, Review Rounds, Certification Management, Companies) as larger highlighted cards. Remaining admin actions go in a collapsible "All Admin Tools" section.
-  - **Reviewer**: Show "Your Reviews" section first with Assigned Reviews, Due Reviews as primary cards. Then secondary actions.
-  - **Company**: Show "Certification & Products" section first with Certify Product, My Products, Submit Revision as primary. Then secondary.
-  - **Regular user** (no role): Show Products, Companies, Analytics, News as primary.
-- Add a "Role-specific" banner/callout at the top that summarizes pending work (already partially done via `PendingStatsWidget`, but make stats cards link directly to their action pages).
+After the role approval succeeds (~line 209), add a call to `notify-role-request-outcome` with the user's email, name, and role — matching the pattern already used in `RoleRequestManager.tsx`. Same for rejection (~line 226).
 
-### Task 2: Improve Header desktop nav for role users
+This requires fetching the user's profile (email, first_name) before the approval. The current code only has `userId` and `requestedRole`. Add a profile lookup before the notification call.
 
-**File**: `src/components/Header.tsx`
+### Task 2: Create notification digest edge function
 
-- Add Certifications link for admin nav (`/admin/certifications`)
-- Add Company Products link for company nav (`/company/products`)
-- Add Certification link for company nav (`/company/certification`)
-- For reviewer, add Due Reviews link (`/reviewer/due-reviews`)
+**New file**: `supabase/functions/send-notification-digest/index.ts`
 
-### Task 3: Improve MobileNav with missing role links
-
-**File**: `src/components/MobileNav.tsx`
-
-- Admin section: add Certifications, Registrations, Newsletter links
-- Reviewer section: add a link to Reviewer Guide
-- Company section: add My Products link (`/company/products`)
-
-### Task 4: Make role dashboard route role-aware
-
-**File**: `src/utils/roleDashboardUtils.ts`
-
-Currently all roles go to `/dashboard-home`. Keep this, but no change needed here — the dashboard itself will be reorganized.
-
-### Task 5: Create certification completion notification edge function
-
-**New file**: `supabase/functions/notify-certification-complete/index.ts`
-
-- Triggered from client code after a successful `certify_product` RPC call
-- Sends email to the company representative confirming their product certification was recorded
-- Sends email to admins (info@dlinrt.eu) notifying them a new certification was submitted
-- Respects `notification_preferences` for the company user
-- Uses Resend via `npm:resend@4.0.0`, dynamic CORS, standard edge function pattern
-- HTML template with product name, company name, certification date, green checkmark branding
+- Accepts a `frequency` parameter (`daily` or `weekly`)
+- Queries `notifications` table for unread notifications per user within the time window
+- Groups by user, respects `notification_preferences` (checks `email` global toggle)
+- Sends a summary email via Resend with count per category and links to the notifications page
+- Uses the standard CORS + service-role auth pattern
+- HTML template: branded summary with notification counts by type
 
 **Config**: Add to `supabase/config.toml`:
 ```
-[functions.notify-certification-complete]
+[functions.send-notification-digest]
 verify_jwt = true
 ```
 
-### Task 6: Wire certification notification into certify flows
+### Task 3: Add admin digest settings UI
 
-**Files**:
-- `src/pages/company/Dashboard.tsx` (~line 196, after successful certification)
-- `src/pages/company/CompanyDashboardOverview.tsx` (~line 306, after successful certification)
+**New file**: `src/components/admin/NotificationDigestControls.tsx`
 
-After the `certify_product` RPC succeeds, invoke:
-```typescript
-await supabase.functions.invoke('notify-certification-complete', {
-  body: { productId, productName, companyName }
-});
-```
+- Similar pattern to `DeadlineReminderControls`
+- Settings: enabled toggle, frequency selector (daily/weekly), manual trigger button
+- Stores settings in `reminder_settings` table with key `notification_digest`
+- Place this component in `AdminOverview.tsx` next to the existing DeadlineReminderControls
 
-### Task 7: Update RoleQuickActions on profile page
+### Task 4: Add user-facing digest preference
 
-**File**: `src/components/profile/RoleQuickActions.tsx`
+**File**: `src/components/notifications/NotificationPreferences.tsx`
 
-- Ensure consistency with the updated Dashboard_Authenticated quick actions ordering
+- Add a new section "Email Digest" below global toggles
+- Options: Off / Daily / Weekly
+- Stored in `notification_preferences.digest_frequency` field
+- Only visible when email channel is enabled
+
+### Task 5: Schedule the digest via cron (documentation note)
+
+The digest function can be triggered manually by admins or scheduled via pg_cron (daily at 8:00 AM CET, weekly on Mondays). The cron setup requires an SQL insert (not a migration).
 
 ## Technical Details
 
-- Edge function uses existing Resend + CORS pattern from other notification functions
-- No database migration needed — uses existing `company_product_verifications` table
-- Notification respects `notification_preferences.status_updates` category
-- Edge function validates JWT and fetches user profile for personalization
+- Edge function follows existing patterns: Resend, dynamic CORS, service-role auth
+- Digest respects per-user `notification_preferences.email` and new `digest_frequency` field
+- No new database tables needed — uses existing `notifications`, `reminder_settings`, and `profiles` tables
+- AdminOverview role approval fix is a straightforward addition of the existing `notify-role-request-outcome` invocation
 
 ## Scope
 
-- 5 existing files modified
-- 1 new edge function created
+- 2 existing files modified (`AdminOverview.tsx`, `NotificationPreferences.tsx`)
+- 1 new component (`NotificationDigestControls.tsx`)
+- 1 new edge function (`send-notification-digest`)
 - 1 config.toml entry added
 - No schema changes
 
