@@ -19,6 +19,7 @@ interface CategoryPreference {
 interface NotificationPrefs {
   email: boolean;
   in_app: boolean;
+  digest_frequency: 'off' | 'daily' | 'weekly';
   categories: {
     review_assignments: CategoryPreference;
     review_deadlines: CategoryPreference;
