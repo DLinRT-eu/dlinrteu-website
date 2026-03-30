@@ -83,6 +83,7 @@ export default function NotificationPreferences() {
       setPrefs({
         email: (stored.email as boolean) ?? true,
         in_app: (stored.in_app as boolean) ?? true,
+        digest_frequency: (stored.digest_frequency as 'off' | 'daily' | 'weekly') ?? 'off',
         categories: {
           ...DEFAULT_PREFS.categories,
           ...((stored.categories as Record<string, CategoryPreference>) ?? {}),
