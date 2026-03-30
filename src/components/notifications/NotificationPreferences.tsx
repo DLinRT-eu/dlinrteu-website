@@ -198,6 +198,39 @@ export default function NotificationPreferences() {
         </CardContent>
       </Card>
 
+      {/* Email Digest Preference */}
+      {prefs.email && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="h-5 w-5" />
+              Email Digest
+            </CardTitle>
+            <CardDescription>
+              Receive a periodic summary of your unread notifications by email.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-3">
+              <Label className="font-medium min-w-[100px]">Frequency</Label>
+              <Select
+                value={prefs.digest_frequency}
+                onValueChange={(v) => setPrefs(prev => ({ ...prev, digest_frequency: v as 'off' | 'daily' | 'weekly' }))}
+              >
+                <SelectTrigger className="w-[160px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="off">Off</SelectItem>
+                  <SelectItem value="daily">Daily</SelectItem>
+                  <SelectItem value="weekly">Weekly</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Per-Category Toggles */}
       <Card>
         <CardHeader>

@@ -604,6 +604,9 @@ export default function AdminOverview() {
           {/* Deadline Reminder Controls */}
           <DeadlineReminderControls />
 
+          {/* Notification Digest Controls */}
+          <NotificationDigestControls />
+
           {/* Pending Role Requests */}
           <Card>
             <CardHeader>
