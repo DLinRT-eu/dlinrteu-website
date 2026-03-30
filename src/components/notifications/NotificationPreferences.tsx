@@ -33,6 +33,7 @@ interface NotificationPrefs {
 const DEFAULT_PREFS: NotificationPrefs = {
   email: true,
   in_app: true,
+  digest_frequency: 'off',
   categories: {
     review_assignments: { email: true, in_app: true },
     review_deadlines: { email: true, in_app: true },
