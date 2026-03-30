@@ -5,7 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Save, Bell, Mail, Monitor } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Loader2, Save, Bell, Mail, Monitor, Clock } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -18,6 +19,7 @@ interface CategoryPreference {
 interface NotificationPrefs {
   email: boolean;
   in_app: boolean;
+  digest_frequency: 'off' | 'daily' | 'weekly';
   categories: {
     review_assignments: CategoryPreference;
     review_deadlines: CategoryPreference;
@@ -31,6 +33,7 @@ interface NotificationPrefs {
 const DEFAULT_PREFS: NotificationPrefs = {
   email: true,
   in_app: true,
+  digest_frequency: 'off',
   categories: {
     review_assignments: { email: true, in_app: true },
     review_deadlines: { email: true, in_app: true },
@@ -80,6 +83,7 @@ export default function NotificationPreferences() {
       setPrefs({
         email: (stored.email as boolean) ?? true,
         in_app: (stored.in_app as boolean) ?? true,
+        digest_frequency: (stored.digest_frequency as 'off' | 'daily' | 'weekly') ?? 'off',
         categories: {
           ...DEFAULT_PREFS.categories,
           ...((stored.categories as Record<string, CategoryPreference>) ?? {}),
@@ -193,6 +197,39 @@ export default function NotificationPreferences() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Email Digest Preference */}
+      {prefs.email && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Clock className="h-5 w-5" />
+              Email Digest
+            </CardTitle>
+            <CardDescription>
+              Receive a periodic summary of your unread notifications by email.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-3">
+              <Label className="font-medium min-w-[100px]">Frequency</Label>
+              <Select
+                value={prefs.digest_frequency}
+                onValueChange={(v) => setPrefs(prev => ({ ...prev, digest_frequency: v as 'off' | 'daily' | 'weekly' }))}
+              >
+                <SelectTrigger className="w-[160px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="off">Off</SelectItem>
+                  <SelectItem value="daily">Daily</SelectItem>
+                  <SelectItem value="weekly">Weekly</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Per-Category Toggles */}
       <Card>

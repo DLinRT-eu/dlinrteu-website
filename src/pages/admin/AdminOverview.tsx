@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import DeadlineReminderControls from '@/components/admin/DeadlineReminderControls';
+import NotificationDigestControls from '@/components/admin/NotificationDigestControls';
 
 interface PendingRoleRequest {
   id: string;
@@ -208,6 +209,20 @@ export default function AdminOverview() {
 
       toast.success('Role approved successfully');
       fetchAllData();
+
+      // Send notification email (fire-and-forget)
+      const request = roleRequests.find(r => r.id === requestId);
+      if (request) {
+        supabase.functions.invoke('notify-role-request-outcome', {
+          body: {
+            userId: request.user_id,
+            email: request.profiles.email,
+            firstName: request.profiles.first_name,
+            role: requestedRole,
+            approved: true,
+          },
+        }).catch(err => console.error('Failed to send role approval email:', err));
+      }
     } catch (error) {
       console.error('Error approving role:', error);
       toast.error('Failed to approve role');
@@ -216,6 +231,9 @@ export default function AdminOverview() {
 
   const handleRejectRole = async (requestId: string) => {
     try {
+      // Get request details before rejecting
+      const request = roleRequests.find(r => r.id === requestId);
+
       const { error } = await supabase
         .from('role_requests')
         .update({ status: 'rejected' })
@@ -225,6 +243,19 @@ export default function AdminOverview() {
 
       toast.success('Role request rejected');
       fetchAllData();
+
+      // Send notification email (fire-and-forget)
+      if (request) {
+        supabase.functions.invoke('notify-role-request-outcome', {
+          body: {
+            userId: request.user_id,
+            email: request.profiles.email,
+            firstName: request.profiles.first_name,
+            role: request.requested_role,
+            approved: false,
+          },
+        }).catch(err => console.error('Failed to send role rejection email:', err));
+      }
     } catch (error) {
       console.error('Error rejecting role:', error);
       toast.error('Failed to reject role');
@@ -572,6 +603,9 @@ export default function AdminOverview() {
 
           {/* Deadline Reminder Controls */}
           <DeadlineReminderControls />
+
+          {/* Notification Digest Controls */}
+          <NotificationDigestControls />
 
           {/* Pending Role Requests */}
           <Card>
