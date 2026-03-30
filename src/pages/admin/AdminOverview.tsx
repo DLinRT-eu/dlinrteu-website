@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import DeadlineReminderControls from '@/components/admin/DeadlineReminderControls';
+import NotificationDigestControls from '@/components/admin/NotificationDigestControls';
 
 interface PendingRoleRequest {
   id: string;
