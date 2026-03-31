@@ -77,7 +77,7 @@ serve(async (req) => {
     const corsHeaders2 = getCorsHeaders(origin2);
     console.error('Error in log-document-access:', error);
     return new Response(
-      JSON.stringify({ success: false, error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ success: false, error: 'Internal server error' }),
       { headers: { ...corsHeaders2, 'Content-Type': 'application/json' }, status: 400 }
     );
   }
