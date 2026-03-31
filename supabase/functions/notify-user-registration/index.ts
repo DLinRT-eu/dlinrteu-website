@@ -203,8 +203,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.error("Error in notify-user-registration function:", error.message);
     return new Response(
       JSON.stringify({ 
-        error: "Failed to send registration notification",
-        details: error.message
+        error: "Internal server error"
       }),
       {
         status: 500,
