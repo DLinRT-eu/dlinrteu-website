@@ -133,6 +133,48 @@ export default function Presentation() {
             </Card>
           </div>
 
+          <Card className="mb-8">
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                <div>
+                  <CardTitle>ESTRO 2026 Flyers</CardTitle>
+                  <CardDescription>Downloadable flyers for the ESTRO 2026 conference</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col items-center p-4 rounded-lg border bg-card">
+                  <FileText className="h-8 w-8 text-primary mb-2" />
+                  <h4 className="font-medium text-foreground mb-1">Community Flyer</h4>
+                  <p className="text-xs text-muted-foreground text-center mb-3">
+                    For clinicians & medical physicists — search, compare, and share experience with AI tools in radiotherapy.
+                  </p>
+                  <Button asChild variant="outline" size="sm">
+                    <a href="/flyers/DLinRT_Community_ESTRO2026.pdf" download>
+                      <Download className="h-4 w-4 mr-2" />
+                      Download PDF
+                    </a>
+                  </Button>
+                </div>
+                <div className="flex flex-col items-center p-4 rounded-lg border bg-card">
+                  <Building2 className="h-8 w-8 text-primary mb-2" />
+                  <h4 className="font-medium text-foreground mb-1">Companies Flyer</h4>
+                  <p className="text-xs text-muted-foreground text-center mb-3">
+                    For industry & manufacturers — claim your products, get verified, and reach clinicians worldwide.
+                  </p>
+                  <Button asChild variant="outline" size="sm">
+                    <a href="/flyers/DLinRT_Companies_ESTRO2026.pdf" download>
+                      <Download className="h-4 w-4 mr-2" />
+                      Download PDF
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <Card className="border-2 hover:border-primary/50 transition-colors">
               <CardHeader>
