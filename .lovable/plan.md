@@ -1,31 +1,56 @@
 
 
-# Fix Remaining Error Message Leakage in Edge Functions
+# Add ESTRO 2026 Flyers to Presentation Page
 
-## Problem
+## Overview
 
-The `edge_fn_error_leak` finding was marked as fixed, but **6 additional edge functions** still return raw `error.message` to clients in their outer catch blocks. This leaks internal library details (Deno runtime errors, Supabase client errors, Resend API errors).
+Generate two A5 PDF flyers (community + companies) and add a download section to the Presentation page. Contact info updated to `info@dlinrt.eu`. Stats aligned with live platform data.
 
-All other 7 ignored findings are genuinely resolved or correctly ignored.
+## Changes
 
-## Files to Fix
+### 1. Generate PDF flyers via script
 
-| File | Line | Current | Fix |
-|------|------|---------|-----|
-| `supabase/functions/notify-user-registration/index.ts` | ~207 | `details: error.message` | Remove `details` field, return generic message |
-| `supabase/functions/send-certification-reminder/index.ts` | ~232 | `error: error.message` | `error: 'Internal server error'` |
-| `supabase/functions/auto-generate-monthly-changelog/index.ts` | ~456 | `error: error.message` | `error: 'Internal server error'` |
-| `supabase/functions/admin-cleanup-duplicate-reviews/index.ts` | ~225 | `error.message` | `error: 'Internal server error'` |
-| `supabase/functions/backfill-changelog-history/index.ts` | ~476 | `error.message` | `error: 'Internal server error'` |
-| `supabase/functions/log-document-access/index.ts` | ~80 | `error.message` | `error: 'Internal server error'` |
+Create a Python script that generates two A5 PDF flyers using reportlab, matching the layout and branding from the uploaded HTML files:
 
-## What Stays
+- **Community flyer** (`public/flyers/DLinRT_Community_ESTRO2026.pdf`): For clinicians and medical physicists — search/filter, compare tools, share experience. Stats from DataService (products, companies, certifications, free access).
+- **Companies flyer** (`public/flyers/DLinRT_Companies_ESTRO2026.pdf`): For industry — company rep role, verified badge, regulatory detail, global reach. 4-step certification process.
 
-Each function keeps `console.error(...)` with the full error for server-side debugging. Only the client-facing response changes to a generic message.
+Key content changes from uploaded HTML:
+- Footer/CTA contact: `info@dlinrt.eu` (not personal email)
+- Remove personal name from footer — use "DLinRT.eu Project Team"
+- Stats: use approximate current values from platform (70+ products, 35+ companies) since PDFs are static
+- Categories list aligned with actual site categories: Auto-Contouring, Treatment Planning, Image Synthesis, Image Enhancement, Registration, Clinical Prediction, Tracking, Reconstruction, Performance Monitor, Platform
 
-## Scope
+Brand: `#00A6D6` (brand blue), `#0f172a` (slate), Inter font, same visual structure as the HTML.
 
-- 6 edge function files edited (outer catch block only)
-- No logic changes, no new files, no schema changes
-- Update the `edge_fn_error_leak` finding's ignore_reason to reflect the expanded fix
+### 2. Add flyers section to Presentation.tsx
+
+Insert a new section between the two main action cards and the slide previews:
+
+```
+ESTRO 2026 Flyers
+├── Community Flyer card (preview icon, description, Download PDF button)
+└── Companies Flyer card (preview icon, description, Download PDF button)
+```
+
+Each card has:
+- FileText icon with title and subtitle
+- Brief description of the flyer audience
+- Download button linking to `public/flyers/DLinRT_*.pdf`
+
+### Files
+
+| Action | File |
+|--------|------|
+| Create | `/tmp/generate_flyers.py` (build script) |
+| Create | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
+| Create | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
+| Edit | `src/pages/Presentation.tsx` — add flyers section |
+
+### Technical Details
+
+- PDFs generated with reportlab (A5 portrait, 148x210mm)
+- Static files in `public/flyers/` — no runtime generation needed
+- Download via `<a href="/flyers/..." download>` wrapped in Button
+- QA: convert PDF pages to images and inspect before delivering
 
