@@ -1,56 +1,52 @@
 
 
-# Add ESTRO 2026 Flyers to Presentation Page
+# Fix ESTRO 2026 Flyers — Layout, Branding & Content
 
-## Overview
+## Problems Identified
 
-Generate two A5 PDF flyers (community + companies) and add a download section to the Presentation page. Contact info updated to `info@dlinrt.eu`. Stats aligned with live platform data.
+1. **Overlapping text**: "PRODUCT CATEGORIES" heading overlaps with bullet points
+2. **Page not filled**: Large empty space at the bottom of both flyers
+3. **No logo**: The DLinRT.eu logo (`public/LogoDLinRT.eu.png`) is not included
+4. **Website URL not prominent**: `dlinrt.eu` should be clearly visible as a CTA
+5. **Too much text**: Descriptions are verbose compared to the HTML reference designs
 
-## Changes
+## Approach
 
-### 1. Generate PDF flyers via script
+Regenerate both PDFs using the HTML reference layouts as the design target. The HTML versions (visible in the parsed screenshots) are clean, well-spaced, and fill the page properly. Key changes:
 
-Create a Python script that generates two A5 PDF flyers using reportlab, matching the layout and branding from the uploaded HTML files:
+### Both flyers
+- Add **DLinRT.eu logo** (from `public/LogoDLinRT.eu.png`) in the header area
+- Make **dlinrt.eu** prominently visible in the CTA section
+- Use proper section spacing to **fill the full A5 page** — no empty bottom half
+- Reduce text to short, punchy phrases
+- Fix font rendering to avoid overlap
+- Contact: `info[at]dlinrt.eu` (no personal emails)
+- Footer: "DLinRT.eu Project Team" (no personal names)
 
-- **Community flyer** (`public/flyers/DLinRT_Community_ESTRO2026.pdf`): For clinicians and medical physicists — search/filter, compare tools, share experience. Stats from DataService (products, companies, certifications, free access).
-- **Companies flyer** (`public/flyers/DLinRT_Companies_ESTRO2026.pdf`): For industry — company rep role, verified badge, regulatory detail, global reach. 4-step certification process.
+### Community flyer specifics
+- Tighter category list (use 2-column grid layout, shorter labels)
+- Shorten the 3-step descriptions to one line each
+- Remove the long italic paragraph — replace with a concise bold callout
 
-Key content changes from uploaded HTML:
-- Footer/CTA contact: `info@dlinrt.eu` (not personal email)
-- Remove personal name from footer — use "DLinRT.eu Project Team"
-- Stats: use approximate current values from platform (70+ products, 35+ companies) since PDFs are static
-- Categories list aligned with actual site categories: Auto-Contouring, Treatment Planning, Image Synthesis, Image Enhancement, Registration, Clinical Prediction, Tracking, Reconstruction, Performance Monitor, Platform
+### Companies flyer specifics
+- Shorten the "WHAT IS DLINRT.EU?" paragraph significantly
+- Keep the 2x2 feature grid (Company Rep Role, Verified Badge, Regulatory Detail, Global Reach) but with shorter text
+- Keep the 4-step certification process
+- Tighter spacing between sections
 
-Brand: `#00A6D6` (brand blue), `#0f172a` (slate), Inter font, same visual structure as the HTML.
-
-### 2. Add flyers section to Presentation.tsx
-
-Insert a new section between the two main action cards and the slide previews:
-
-```
-ESTRO 2026 Flyers
-├── Community Flyer card (preview icon, description, Download PDF button)
-└── Companies Flyer card (preview icon, description, Download PDF button)
-```
-
-Each card has:
-- FileText icon with title and subtitle
-- Brief description of the flyer audience
-- Download button linking to `public/flyers/DLinRT_*.pdf`
-
-### Files
+## Files
 
 | Action | File |
 |--------|------|
-| Create | `/tmp/generate_flyers.py` (build script) |
-| Create | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
-| Create | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
-| Edit | `src/pages/Presentation.tsx` — add flyers section |
+| Create | `/tmp/generate_flyers_v2.py` |
+| Overwrite | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
+| Overwrite | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
 
-### Technical Details
+## Technical Details
 
-- PDFs generated with reportlab (A5 portrait, 148x210mm)
-- Static files in `public/flyers/` — no runtime generation needed
-- Download via `<a href="/flyers/..." download>` wrapped in Button
-- QA: convert PDF pages to images and inspect before delivering
+- reportlab with A5 pagesize (148mm x 210mm)
+- Logo loaded from `public/LogoDLinRT.eu.png` via `reportlab.lib.utils.ImageReader`
+- Careful Y-coordinate tracking to prevent overlap — each section calculates its height before placing the next
+- Brand colors: `#00A6D6` (teal), `#0f172a` (dark slate), light grey backgrounds for stat boxes
+- QA: convert to images and inspect every element for overlap/clipping before delivering
 
