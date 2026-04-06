@@ -6,6 +6,7 @@ const getAllowedOrigin = (req: Request) => {
   const origin = req.headers.get('origin') || '';
   const allowedOrigins = [
     'https://dlinrt.eu',
+    'https://www.dlinrt.eu',
     'https://lovable.dev',
     /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
   ];
