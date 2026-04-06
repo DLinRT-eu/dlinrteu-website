@@ -1,59 +1,56 @@
 
 
-# Regenerate ESTRO 2026 Flyers & Assess New GE Product
+# Revise Flyers, Fix CORS Gaps, Verify Notifications & Settings
 
-## Summary
+## 1. Regenerate Flyers with Correct Brand Color
 
-Three changes: (1) regenerate both PDF flyers to match the HTML reference designs exactly, (2) update the community flyer content, and (3) assess MIM LesionID Pro as a potential new product.
+**Problem**: Flyers currently use `#2AA5A5` (teal) but the website uses `#00A6D6` everywhere — header (`bg-[#00A6D6]`), buttons, checkboxes, chart fills, filter icons, category cards. The flyers must match.
 
-## 1. Flyer Fixes
+**Fix**: Regenerate both PDFs with:
+- Primary accent: `#00A6D6` (website brand blue) instead of `#2AA5A5`
+- Dark text: `#1a1a2e` (unchanged)
+- Logo embedded from `public/LogoDLinRT.eu.png`
+- All other content unchanged from current version
 
-### Color
-The HTML references use **#2AA5A5** (teal) for the ".eu" in "DLinRT.eu" and stat numbers, with **#1a1a2e** (dark slate) for body text and "DLinRT" portion. The current PDFs used #00A6D6 which is close but I'll match the exact teal from the HTML. The logo from `public/LogoDLinRT.eu.png` will be embedded.
+**Files**:
+- Create `/tmp/generate_flyers_v6.py`
+- Overwrite `public/flyers/DLinRT_Community_ESTRO2026.pdf`
+- Overwrite `public/flyers/DLinRT_Companies_ESTRO2026.pdf`
 
-### Capitalization
-All references must use **DLinRT** (capital D, L, R, T) consistently — never "DLINRT" or "Dlinrt".
+## 2. Fix CORS Gaps in 4 Edge Functions
 
-### Community flyer content changes
-- Replace step 3 "Share experience" with **"Explore dashboards"** — describe the analytics dashboards and product detail pages
-- Add mention of detailed product pages with regulatory info, evidence, training data
-- Remove any reference to user comments or community feedback features
-- Contact: `info[at]dlinrt.eu` (no personal email)
-- Footer: "DLinRT.eu Project Team" (no personal name)
-- Categories: use actual site categories (Auto-Contouring, Treatment Planning, Image Synthesis, Image Enhancement, Registration, Clinical Prediction, Tracking, Reconstruction, Performance Monitor, Platform)
+Four functions have incomplete CORS support:
 
-### Companies flyer content changes
-- Contact: `info[at]dlinrt.eu` (no personal email)
-- Footer: "DLinRT.eu Project Team" (no personal name)
-- Keep all other content as-is from the HTML reference
+| Function | Issue |
+|----------|-------|
+| `delete-account` | Missing `.lovable.app` wildcard |
+| `admin-delete-user` | Missing `.lovable.app` wildcard |
+| `store-backup-code` | Missing `www.dlinrt.eu` |
+| `verify-backup-code` | Missing `www.dlinrt.eu` |
 
-### Layout
-Match the HTML reference layouts closely: header with "DLinRT.eu" + "ESTRO 2026", horizontal rule, sections filling the full A5 page, proper spacing, no overlap, no large empty gaps.
+**Fix**: Update the `getCorsHeaders` function in each to use the standard pattern with both `www.dlinrt.eu` in the allowlist and `.lovable.app` wildcard check.
 
-## 2. New Product Assessment: MIM LesionID Pro
+## 3. Verify www.dlinrt.eu Support
 
-**MIM LesionID Pro** (FDA 510(k) cleared Jan 2026, by MIM Software / distributed by GE HealthCare) is an AI-powered **theranostics** tool for whole-body tumor burden analysis on PSMA PET/CT and SPECT/CT. It automates lesion segmentation and calculates total tumor volume (TTV) and SUVmean for radiopharmaceutical therapy planning and response monitoring.
+Already confirmed working:
+- `vite.config.ts` `allowedHosts` includes `www.dlinrt.eu`
+- All 20 edge functions include `https://www.dlinrt.eu` in CORS lists
+- Custom domain setup is a hosting/DNS concern outside the codebase (A record + www subdomain pointing to Lovable IP)
 
-**Assessment**: This product is **not a direct fit** for DLinRT.eu's scope. It targets nuclear medicine/theranostics workflows, not radiotherapy planning (contouring, dose, planning, image enhancement). While it uses Contour ProtégéAI+ internally, the product itself is for tumor burden quantification, not RT treatment. **Recommendation: do not add** unless the platform scope explicitly expands to theranostics.
+No code changes needed for this beyond the 4 CORS fixes above.
 
-No other new untracked FDA-cleared RT AI products were found in the search. Therapanacea ART-Plan+ (K253091, Dec 2025) and Radformation AutoContour V4 (K242729, Dec 2024) are already up to date in the database.
+## 4. Test Notifications, Email Settings & Post-Login Flow
 
-## Files
+After the above changes, use the browser to:
+- Log in as admin and verify dashboard navigation works
+- Check notification preferences page loads and saves correctly
+- Verify the notification digest controls are accessible
+- Confirm the email settings (digest frequency selector) functions properly
 
-| Action | File |
-|--------|------|
-| Create | `/tmp/generate_flyers_v4.py` |
-| Overwrite | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
-| Overwrite | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
+## Scope
 
-No changes to `Presentation.tsx` — the download links are already correct.
-
-## Technical Details
-
-- reportlab A5 (148×210mm), matching the HTML reference layout
-- Logo from `public/LogoDLinRT.eu.png` embedded in header
-- Brand teal (#2AA5A5) for accent elements, dark slate for text
-- Proper Y-coordinate tracking to prevent overlap
-- Full-page fill with balanced spacing
-- QA: convert to images and inspect every element before delivering
+- 1 new script (`/tmp/generate_flyers_v6.py`)
+- 2 PDF files overwritten
+- 4 edge function files edited (CORS fix only)
+- Browser testing of post-login flows
 
