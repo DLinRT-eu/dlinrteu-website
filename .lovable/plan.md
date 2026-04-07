@@ -1,44 +1,52 @@
 
 
-# Update ESTRO 2026 Flyers — Brand Color #5090D0
+# Redesign ESTRO 2026 Flyers — Larger Fonts, Better Fill, Visual Appeal
 
-## Problem
+## Problems
 
-The flyers currently use `#00A6D6` (cyan-teal) which doesn't match the logo. The logo's actual color is closer to **#5090D0** (steel blue). The user wants the flyers to use `#5090D0` and complementary colors for a polished look.
+1. **Font sizes too small** — body text ~8-9pt, headings ~10pt on an A5 page feel tiny
+2. **CTA box wastes ~30% of page** — massive dark rounded rectangle with just "dlinrt.eu" and email
+3. **Sparse middle sections** — bullet points and category grid don't fill the space; large gaps between elements
+4. **Overall feel is flat** — no visual hierarchy, no icons or decorative elements beyond small dots
 
-### Current issues visible in flyer QA
-1. **Wrong brand color** — should be `#5090D0`
-2. **Font rendering issues** — some words appear to have ligature/kerning problems (e.g. "Compare", "Explore", "Detailed Profiles" look slightly garbled)
-3. **CTA section too empty** — large dark box at the bottom with just "dlinrt.eu" and one line of text; wastes space
-4. **"dlinrt.eu" in CTA not prominent enough** — should be larger and bolder
+## Design Changes
 
-## Changes
+### Layout overhaul (both flyers)
 
-### Regenerate both PDFs with `/tmp/generate_flyers_v8.py`
+**Header** (top ~22%): Keep gradient `#5090D0` → `#3A70B0` with logo + "DLinRT.eu" title. Increase title to **28pt**, subtitle to **13pt**. Add "ESTRO 2026" badge.
 
-**Color palette**:
-- Primary accent: `#5090D0` (logo blue) — headers, stat numbers, section headings, step circles
-- Header background: gradient from `#5090D0` to `#3A70B0` (darker complement)
-- Dark text: `#1a1a2e` (unchanged)
-- Stat box backgrounds: `#5090D0` at 10% opacity (`#EBF1F8`)
-- CTA background: `#5090D0` (was dark slate)
+**Stats bar** (below header, ~12%): Three stat boxes with numbers at **32pt bold** (was ~24pt) and labels at **11pt**. Use `#EBF1F8` background with rounded corners.
 
-**Layout improvements**:
-- Use reportlab `Paragraph` with proper styles instead of raw `drawString` to fix font rendering/kerning issues
-- Make CTA section tighter with larger "dlinrt.eu" text and better vertical centering
-- Ensure proper word spacing in feature headings
+**Main content** (~50%): 
+- Section headings at **14pt bold** (was ~10pt) with `#5090D0` accent bar
+- Feature titles at **12pt bold** (was ~9pt), descriptions at **10pt** (was ~8pt)
+- Increase vertical spacing between items for readability
+- Categories in a compact 2-column grid at **10pt**
 
-**Content** — unchanged from current version (same sections, same text, same stats)
+**CTA footer** (bottom ~16%, was ~30%): Shrink dramatically. Use a slim `#5090D0` band with:
+- "dlinrt.eu" at **22pt bold white**
+- "info@dlinrt.eu" at **10pt** below
+- "DLinRT.eu Project Team" small footer line
 
-### Files
+### Color palette (unchanged from approved)
+- Primary: `#5090D0`, gradient to `#3A70B0`
+- Stat backgrounds: `#EBF1F8`
+- Dark text: `#1a1a2e`
+- CTA background: `#5090D0`
+
+### Typography
+- Use Liberation Sans TTF (already proven to fix kerning)
+- All text via reportlab `Paragraph` objects for proper rendering
+- Minimum body text: **10pt**, minimum heading: **12pt**
+
+## Files
 
 | Action | File |
 |--------|------|
-| Create | `/tmp/generate_flyers_v8.py` |
+| Create | `/tmp/generate_flyers_v9.py` |
 | Overwrite | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
 | Overwrite | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
 
-### QA
-
-Convert both PDFs to images, inspect for overlap, color accuracy, font rendering, and page fill before delivering.
+## QA
+Convert both PDFs to images, verify font sizes are readable, page is well-filled with no large empty gaps, and no text overlap.
 
