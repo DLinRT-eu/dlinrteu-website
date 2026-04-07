@@ -1,56 +1,44 @@
 
 
-# Revise Flyers, Fix CORS Gaps, Verify Notifications & Settings
+# Update ESTRO 2026 Flyers — Brand Color #5090D0
 
-## 1. Regenerate Flyers with Correct Brand Color
+## Problem
 
-**Problem**: Flyers currently use `#2AA5A5` (teal) but the website uses `#00A6D6` everywhere — header (`bg-[#00A6D6]`), buttons, checkboxes, chart fills, filter icons, category cards. The flyers must match.
+The flyers currently use `#00A6D6` (cyan-teal) which doesn't match the logo. The logo's actual color is closer to **#5090D0** (steel blue). The user wants the flyers to use `#5090D0` and complementary colors for a polished look.
 
-**Fix**: Regenerate both PDFs with:
-- Primary accent: `#00A6D6` (website brand blue) instead of `#2AA5A5`
+### Current issues visible in flyer QA
+1. **Wrong brand color** — should be `#5090D0`
+2. **Font rendering issues** — some words appear to have ligature/kerning problems (e.g. "Compare", "Explore", "Detailed Profiles" look slightly garbled)
+3. **CTA section too empty** — large dark box at the bottom with just "dlinrt.eu" and one line of text; wastes space
+4. **"dlinrt.eu" in CTA not prominent enough** — should be larger and bolder
+
+## Changes
+
+### Regenerate both PDFs with `/tmp/generate_flyers_v8.py`
+
+**Color palette**:
+- Primary accent: `#5090D0` (logo blue) — headers, stat numbers, section headings, step circles
+- Header background: gradient from `#5090D0` to `#3A70B0` (darker complement)
 - Dark text: `#1a1a2e` (unchanged)
-- Logo embedded from `public/LogoDLinRT.eu.png`
-- All other content unchanged from current version
+- Stat box backgrounds: `#5090D0` at 10% opacity (`#EBF1F8`)
+- CTA background: `#5090D0` (was dark slate)
 
-**Files**:
-- Create `/tmp/generate_flyers_v6.py`
-- Overwrite `public/flyers/DLinRT_Community_ESTRO2026.pdf`
-- Overwrite `public/flyers/DLinRT_Companies_ESTRO2026.pdf`
+**Layout improvements**:
+- Use reportlab `Paragraph` with proper styles instead of raw `drawString` to fix font rendering/kerning issues
+- Make CTA section tighter with larger "dlinrt.eu" text and better vertical centering
+- Ensure proper word spacing in feature headings
 
-## 2. Fix CORS Gaps in 4 Edge Functions
+**Content** — unchanged from current version (same sections, same text, same stats)
 
-Four functions have incomplete CORS support:
+### Files
 
-| Function | Issue |
-|----------|-------|
-| `delete-account` | Missing `.lovable.app` wildcard |
-| `admin-delete-user` | Missing `.lovable.app` wildcard |
-| `store-backup-code` | Missing `www.dlinrt.eu` |
-| `verify-backup-code` | Missing `www.dlinrt.eu` |
+| Action | File |
+|--------|------|
+| Create | `/tmp/generate_flyers_v8.py` |
+| Overwrite | `public/flyers/DLinRT_Community_ESTRO2026.pdf` |
+| Overwrite | `public/flyers/DLinRT_Companies_ESTRO2026.pdf` |
 
-**Fix**: Update the `getCorsHeaders` function in each to use the standard pattern with both `www.dlinrt.eu` in the allowlist and `.lovable.app` wildcard check.
+### QA
 
-## 3. Verify www.dlinrt.eu Support
-
-Already confirmed working:
-- `vite.config.ts` `allowedHosts` includes `www.dlinrt.eu`
-- All 20 edge functions include `https://www.dlinrt.eu` in CORS lists
-- Custom domain setup is a hosting/DNS concern outside the codebase (A record + www subdomain pointing to Lovable IP)
-
-No code changes needed for this beyond the 4 CORS fixes above.
-
-## 4. Test Notifications, Email Settings & Post-Login Flow
-
-After the above changes, use the browser to:
-- Log in as admin and verify dashboard navigation works
-- Check notification preferences page loads and saves correctly
-- Verify the notification digest controls are accessible
-- Confirm the email settings (digest frequency selector) functions properly
-
-## Scope
-
-- 1 new script (`/tmp/generate_flyers_v6.py`)
-- 2 PDF files overwritten
-- 4 edge function files edited (CORS fix only)
-- Browser testing of post-login flows
+Convert both PDFs to images, inspect for overlap, color accuracy, font rendering, and page fill before delivering.
 
