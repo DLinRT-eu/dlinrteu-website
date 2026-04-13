@@ -121,7 +121,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "Part of GE AIR Recon DL platform clearances (K193282, K213717)"
+        notes: "Part of GE AIR Recon DL platform clearances (K193282, K213717, K252379)"
       },
       intendedUseStatement: "Intended for use in enhancing MR image quality through noise reduction and detail enhancement to support clinical interpretation."
     },
@@ -140,8 +140,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastUpdated: "2026-04-13",
+    lastRevised: "2026-04-13",
     source: "FDA 510(k) database and company website",
     evidence: [
       {
@@ -158,6 +158,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Lee et al. AIR Recon DL for MR enterography evaluation",
         link: "https://doi.org/10.1002/jmri.28239",
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K252379 received December 23, 2025 - expanded clearance for AIR Recon DL platform",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252379.pdf",
       },
     ],
     limitations: [
