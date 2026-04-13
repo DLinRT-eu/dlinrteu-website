@@ -152,12 +152,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510(k) Cleared",
         class: "Class II",
-        clearanceNumber: "K193282, K213717",
+        clearanceNumber: "K193282, K213717, K252379",
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH",
         type: "510(k)",
         decisionDate: "2020-04-10",
-        notes: "K193282 initial clearance (Apr 2020). K213717 expanded indications (Dec 2021)."
+        notes: "K193282 initial clearance (Apr 2020). K213717 expanded indications (Dec 2021). K252379 expanded clearance (Dec 2025)."
       },
       intendedUseStatement: "Intended for use in MR image reconstruction to enhance signal-to-noise ratio and/or reduce scan time while maintaining diagnostic image quality."
     },
@@ -205,11 +205,16 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance K193282 (initial) and K213717 (expanded)",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
+      },
+      {
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K252379 received December 23, 2025 - expanded clearance for AIR Recon DL",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252379.pdf"
       }
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastUpdated: "2026-04-13",
+    lastRevised: "2026-04-13",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }
