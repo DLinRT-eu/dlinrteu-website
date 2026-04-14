@@ -1,29 +1,22 @@
 
 
-# Update GE AIR Recon DL with New FDA Clearance K252379
+## Fix: Remove `review_comments` from Supabase Realtime Publication
 
-## Findings Summary
+### Problem
+The `review_comments` table is published to `supabase_realtime`, but Supabase's `realtime.messages` table has no RLS policies. This means any authenticated user could subscribe to Realtime channels and receive live review comment updates for reviews they are not assigned to.
 
-After checking all recent FDA QKB (Radiotherapy) clearances and GE Healthcare products:
+### Key Finding
+No client code actually subscribes to `review_comments` via Realtime. The only Realtime subscription in the app is in `NotificationBell.tsx` for the `notifications` table (which is not even published). So removing `review_comments` from the publication has zero functional impact.
 
-- **GE AIR Recon DL** has a new 510(k) clearance **K252379** (December 23, 2025) that is not yet tracked in the codebase. Both the Reconstruction and Image Enhancement entries need updating.
-- All other radiotherapy products in the database are already current with their latest clearances (TAIMedImg DeepMets K250427, OncoStudio K242994, AI-Rad Companion RT K242745, MR Contour DL K242925, Contour ProtégéAI+ K250035, Manteia K250780, etc.).
-- GE's True Definition DL (CT bone/lung), CleaRecon DL (interventional CBCT), and Clarify DL (SPECT/CT) are outside the radiotherapy scope.
+### Plan
 
-## Changes
+**Single migration** to remove `review_comments` from the Realtime publication:
 
-### 1. `src/data/products/reconstruction/ge-healthcare.ts` — AIR Recon DL
+```sql
+ALTER PUBLICATION supabase_realtime DROP TABLE public.review_comments;
+```
 
-- Add K252379 to the `clearanceNumber` field: `"K193282, K213717, K252379"`
-- Update `fda.notes` to include: "K252379 expanded clearance (Dec 2025)"
-- Add K252379 evidence entry
-- Update `lastUpdated` and `lastRevised` to `"2026-04-13"`
+This eliminates the attack surface entirely. The `realtime` schema is Supabase-reserved and cannot have RLS policies added via migrations, so removing the table from the publication is the correct and complete fix.
 
-### 2. `src/data/products/image-enhancement/ge-healthcare.ts` — AIR Recon DL Enhancement Mode
-
-- Update `fda.notes` to reference K252379 as part of the broader AIR Recon DL platform clearances
-- Add K252379 evidence entry
-- Update `lastUpdated` and `lastRevised` to `"2026-04-13"`
-
-No new products to add. No other certification updates needed — the database is current.
+After applying the migration, the `supabase_lov` finding `realtime_messages_no_rls` will be marked as fixed.
 
