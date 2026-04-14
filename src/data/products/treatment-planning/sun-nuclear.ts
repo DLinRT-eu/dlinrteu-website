@@ -4,7 +4,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
   {
     id: "plan-ai",
     name: "Plan AI",
-    company: "Sun Nuclear",
+    company: "Sun Nuclear (Mirion Medical)",
     companyUrl: "https://www.sunnuclear.com/",
     productUrl: "https://www.sunnuclear.com/products/plan-ai",
     githubUrl:

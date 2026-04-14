@@ -4,7 +4,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
   {
     id: "radformation-clearcheck",
     name: "ClearCheck",
-    company: "Radformation",
+    company: "RadFormation",
     companyUrl: "https://radformation.com",
     productUrl: "https://radformation.com/clearcheck/clearcheck",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/radformation.ts",

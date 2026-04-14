@@ -11,7 +11,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     description: "AI-powered auto-contouring solution proven in practice with over 4M contours in treatments for 80K patients, supporting CT and MRI across Head & Neck, Thorax, Abdomen, and Pelvis with comprehensive OAR and lymph node coverage.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
-    logoUrl: "/logos/Oncosoft.png",
+    logoUrl: "/logos/oncosoft.png",
     website: "https://www.oncosoft.io/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT", "MRI"],
