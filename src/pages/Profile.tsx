@@ -386,6 +386,9 @@ export default function Profile() {
             </CardContent>
           </Card>
 
+          {/* Change Login Email */}
+          {profile?.email && <ChangeEmailSection currentEmail={profile.email} />}
+
           {/* Role Selector - for users with multiple roles */}
           <RoleSelector />
 
