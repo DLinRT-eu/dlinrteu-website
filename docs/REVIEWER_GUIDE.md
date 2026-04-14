@@ -385,10 +385,10 @@ Anyone can report a missing product or incorrect information without an account.
 
 ## 5. Reviewing Products
 
-DLinRT.eu supports two methods for reviewing and updating products (see also [§4](#4-how-to-provide-feedback-on-products) for a quick overview of all feedback channels):
+This section covers the detailed editing workflow. For a quick overview of all feedback channels, see [§4](#4-how-to-provide-feedback-on-products).
 
-1. **Visual Editing** (Recommended) - In-browser editing with auto-save and approval workflow
-2. **Direct GitHub Editing** - Traditional file editing for developers
+1. **Visual Editing** (Recommended) – In-browser editing with auto-save and approval workflow
+2. **Direct GitHub Editing** – Traditional file editing for developers
 
 ### Method 1: Visual Editing (Recommended)
 
@@ -435,31 +435,11 @@ Different fields have different editing experiences:
 
 #### Evidence Level Classification (Dual-Axis System)
 
-Every product should have an evidence classification using the dual-axis framework:
+Every product should have an evidence classification using the dual-axis framework: **Evidence Rigor** (E0–E3) and **Clinical Impact** (I0–I5), plus optional study-quality sub-attributes.
 
-**Evidence Rigor (E0-E3)**:
+> For the full criteria tables and academic references, see the [Product Review Guide – Evidence Level Classification](review/GUIDE.md#evidence-level-classification).
 
-| Level | Name | When to Use |
-|-------|------|-------------|
-| E0 | No Peer-Reviewed Evidence | Vendor materials, regulatory submissions only |
-| E1 | Preliminary Evidence | Single-center, small cohorts, pilot studies |
-| E2 | Validated Evidence | Multi-center (3+ sites), large prospective cohorts |
-| E3 | Systematic Evidence | Systematic reviews, meta-analyses, RCTs |
-
-**Clinical Impact (I0-I5)**:
-
-| Level | Name | When to Use |
-|-------|------|-------------|
-| I0 | None Demonstrated | Feasibility only, no benefit shown |
-| I1 | Quality Assurance | QA tools, monitoring, consistency checks |
-| I2 | Workflow | Time savings, variability reduction, dose reduction |
-| I3 | Decision | Changes in treatment management or plan selection |
-| I4 | Outcome | Toxicity reduction, survival, patient outcomes |
-| I5 | Societal | Cost-effectiveness, access to care |
-
-**Study Quality Sub-Attributes** (optional booleans): `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`.
-
-**The Evidence & Limitations card is now always visible** on every product page to encourage setting this important classification.
+**The Evidence & Limitations card is always visible** on every product page to encourage setting this important classification.
 
 #### Saving and Submitting
 
@@ -752,5 +732,5 @@ Welcome to the reviewer community!
 
 ---
 
-*Last Updated: 2026-01-28*
-*Version: 1.2*
+*Last Updated: 2025-07-14*
+*Version: 1.3*

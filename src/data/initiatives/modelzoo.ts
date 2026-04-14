@@ -77,5 +77,32 @@ export const MODEL_ZOO_INITIATIVES: Initiative[] = [
     ],
     dataAccess: "Freely available on GitHub",
     participationInfo: "Open source under Apache 2.0 license; early-stage but actively growing"
+  },
+  {
+    id: "totalsegmentator",
+    name: "TotalSegmentator",
+    category: "Model Zoo",
+    description: "A collection of 30+ nnU-Net-based segmentation models covering 100+ anatomical structures on CT and MR images, including head and neck OARs, body structures, brain structures, muscles, and vessels. Widely used in radiotherapy research for automatic contouring.",
+    website: "https://github.com/wasserth/TotalSegmentator",
+    organization: "University Hospital Basel",
+    status: "Active",
+    tags: ["Segmentation", "CT", "MRI", "nnU-Net", "Organs at Risk", "Open Source", "Anatomy"],
+    features: [
+      "117 main classes on CT, 50 on MR",
+      "30+ specialized subtask models",
+      "Head and neck glands, muscles, and vessels",
+      "Python API and CLI",
+      "Web application and 3D Slicer extension"
+    ],
+    dataAccess: "Open weights (Apache 2.0); some tasks require free academic license",
+    participationInfo: "Open source; model contributions welcome",
+    relatedPublications: [
+      {
+        title: "TotalSegmentator: Robust Segmentation of 104 Anatomic Structures in CT Images",
+        url: "https://doi.org/10.1148/ryai.230024",
+        authors: "J. Wasserthal et al.",
+        year: "2023"
+      }
+    ]
   }
 ];

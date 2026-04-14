@@ -14,7 +14,7 @@ Quick reference for reviewing and managing products on DLinRT.eu.
 1. Open product in web interface
 2. Click **"Edit"** button in header
 3. Modify fields using inline editors and dropdowns
-4. Set evidence level (always visible now!)
+4. Set evidence classification (E0–E3 rigor + I0–I5 impact)
 5. Click **"Submit"** to send for admin approval
 6. Approved edits sync to GitHub automatically
 
@@ -42,12 +42,12 @@ The visual editor provides specialized editors for different field types:
 | Category | Single-select dropdown |
 | Modality, Anatomy | Multi-select with chips |
 | Regulatory | Full CE/FDA/TGA editor |
-| Evidence | Evidence links with level classification |
+| Evidence | Dual-axis classification (E0–E3 / I0–I5) |
 | Structures | OAR/GTV/Elective classification |
 
 ### Evidence Level Classification
 
-Every product should have an evidence level (0-6). The **Evidence & Limitations** section is now always visible on product pages to ensure this is set.
+Every product should have an evidence classification using the **dual-axis system**: Evidence Rigor (E0–E3) and Clinical Impact (I0–I5). The **Evidence & Limitations** section is always visible on product pages to ensure this is set. See the [Review Guide](./GUIDE.md#evidence-level-classification) for full criteria.
 
 ## Product Features
 

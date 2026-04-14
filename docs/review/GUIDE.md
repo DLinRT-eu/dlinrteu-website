@@ -30,10 +30,10 @@ DLinRT.eu supports two methods for reviewing products:
    - Use specialized editors for complex fields (regulatory, evidence, structures)
    - Changes auto-save every 30 seconds
 
-3. **Set Evidence Level**
-   - Every product should have an evidence level (0-6)
+3. **Set Evidence Classification**
+   - Assign evidence rigor (E0–E3) and clinical impact (I0–I5) using the [dual-axis system](#evidence-level-classification)
    - The Evidence & Limitations section is always visible
-   - Select level from dropdown and add justification notes
+   - Select levels from dropdowns and add justification notes
 
 4. **Submit for Review**
    - Click "Submit" in EditToolbar

@@ -197,5 +197,52 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     tags: ["CBCT", "Image Reconstruction", "Deep Learning", "Radiation Therapy", "Low-Dose"],
     features: ["Low-dose CBCT projections", "Reference high-quality reconstructions", "Standardized image quality metrics"],
     participationInfo: "Challenge completed"
+  },
+  {
+    id: "doserad-2026",
+    name: "DoseRAD2026",
+    category: "Grand Challenge",
+    description: "Real-time photon and proton dose calculation on CT and MRI. Benchmarks fast AI-based 3D dose engines against Monte Carlo simulations across four tasks: photon/CT, photon/MRI, proton/CT, and proton/MRI.",
+    website: "https://doserad2026.grand-challenge.org/",
+    organization: "LMU University Hospital Munich",
+    startDate: "2026-04-01",
+    status: "Active",
+    tags: ["Dose Calculation", "Photon Therapy", "Proton Therapy", "CT", "MRI", "Monte Carlo", "Real-Time", "Radiation Therapy"],
+    features: [
+      "Four tasks: photon and proton dose on CT and MRI",
+      "Benchmarking against Monte Carlo ground truth",
+      "Clinically relevant beam parameters (MLC apertures, pencil beams)",
+      "Supports adaptive and MRI-guided RT workflows"
+    ],
+    participationInfo: "Open to all participants"
+  },
+  {
+    id: "segrap-2023",
+    name: "SegRap2023",
+    category: "Grand Challenge",
+    description: "Segmentation of 45 organs-at-risk and gross tumor volumes (GTVnx, GTVnd) for nasopharyngeal carcinoma radiotherapy planning. 200 patients with dual CT (no-contrast and contrast-enhanced).",
+    website: "https://segrap2023.grand-challenge.org/",
+    organization: "University of Electronic Science and Technology of China / MICCAI",
+    startDate: "2023-04-15",
+    endDate: "2023-10-08",
+    status: "Completed",
+    tags: ["Head and Neck Cancer", "CT", "Segmentation", "Organs at Risk", "GTV", "Radiation Therapy"],
+    features: [
+      "45 OAR classes",
+      "GTV segmentation (GTVnx + GTVnd)",
+      "Dual CT input (no-contrast + contrast-enhanced)",
+      "200 patients"
+    ],
+    dataAccess: "Training data freely available on Google Drive",
+    resultsUrl: "https://segrap2023.grand-challenge.org/final-ranking/",
+    participationInfo: "Challenge completed; dataset available for research",
+    relatedPublications: [
+      {
+        title: "SegRap2023: A Benchmark of Organs-at-Risk and Gross Tumor Volume Segmentation for Radiotherapy Planning of Nasopharyngeal Carcinoma",
+        url: "https://www.sciencedirect.com/science/article/pii/S1361841524003748",
+        authors: "X. Luo et al.",
+        year: "2025"
+      }
+    ]
   }
 ];

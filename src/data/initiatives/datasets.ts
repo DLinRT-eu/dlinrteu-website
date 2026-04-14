@@ -208,5 +208,32 @@ export const DATASET_INITIATIVES: Initiative[] = [
     dataAccess: "Open access via Nature Scientific Data",
     participationInfo: "Open to all researchers"
   },
+  {
+    id: "project-imaging-x",
+    name: "Project Imaging-X",
+    category: "Open Dataset",
+    description: "Curated survey of 1000+ open-access medical imaging datasets organized by modality, anatomy, dimension, and task type — a comprehensive directory for quick dataset discovery in medical AI research.",
+    website: "https://github.com/uni-medical/Project-Imaging-X",
+    organization: "Shanghai AI Laboratory / Monash University",
+    status: "Active",
+    tags: ["Medical Imaging", "Dataset Survey", "Multi-Modal", "CT", "MRI", "PET", "Ultrasound", "Segmentation", "Open Access", "Foundation Models"],
+    features: [
+      "1000+ curated open-access datasets",
+      "Covers 2D, 3D, and video modalities",
+      "Systematic taxonomy by anatomy, modality, and task",
+      "Includes dataset discovery skill for integration",
+      "MIT licensed"
+    ],
+    dataAccess: "Publicly available on GitHub",
+    participationInfo: "Open to all researchers; contributions and corrections welcome",
+    relatedPublications: [
+      {
+        title: "Project Imaging-X: A Survey of 1000+ Open-Access Medical Imaging Datasets for Foundation Model Development",
+        url: "https://arxiv.org/abs/2603.27460",
+        authors: "Project Imaging-X Contributors",
+        year: "2025"
+      }
+    ]
+  },
 ];
 

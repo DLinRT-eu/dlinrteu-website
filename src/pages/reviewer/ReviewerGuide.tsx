@@ -118,7 +118,11 @@ export default function ReviewerGuide() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-purple-600 mt-1">•</span>
-                    <span>Monitor GitHub repositories for product changes</span>
+                    <span>Classify evidence levels using the dual-axis framework (E0–E3 rigor, I0–I5 impact)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-purple-600 mt-1">•</span>
+                    <span>Check data transparency (training data, evaluation data) and safety corrective actions</span>
                   </li>
                 </ul>
               </div>
@@ -306,11 +310,21 @@ export default function ReviewerGuide() {
                   <Shield className="h-5 w-5 text-purple-500" />
                   Expertise Preferences
                 </h4>
-                <p className="text-sm text-muted-foreground">
-                  Set your expertise areas and preferences to receive relevant review assignments. 
-                  You can specify product categories, companies, or specific technologies you're most 
-                  qualified to review.
+                <p className="text-sm text-muted-foreground mb-3">
+                  Configure your expertise across three dimensions so the assignment algorithm
+                  can match you with the most relevant products:
                 </p>
+                <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside mb-3">
+                  <li><strong>Task Categories</strong> — e.g. Auto-Contouring, Treatment Planning (priority 1–10)</li>
+                  <li><strong>Companies</strong> — vendors you have experience with (priority 1–10)</li>
+                  <li><strong>Products</strong> — specific products you know well (priority 1–10, with optional notes)</li>
+                </ul>
+                <Button asChild size="sm" variant="outline">
+                  <Link to="/reviewer/preferences">
+                    <Shield className="h-4 w-4 mr-2" />
+                    Manage Preferences
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -350,10 +364,12 @@ export default function ReviewerGuide() {
                   </div>
                 </div>
                 <div className="flex-grow">
-                  <h4 className="font-semibold mb-2">Start Review</h4>
+                  <h4 className="font-semibold mb-2">Open the Visual Editor</h4>
                   <p className="text-sm text-muted-foreground">
-                    Click "Start Review" to begin. Review the product information, technical specifications, 
-                    regulatory status, and supporting documentation.
+                    Navigate to the product page and click <strong>"Edit"</strong> in the header.
+                    The page enters edit mode with the EditToolbar at the bottom. Use inline editors,
+                    dropdowns, and specialised editors to modify fields. Changes auto-save as a draft
+                    every 30 seconds.
                   </p>
                 </div>
               </div>
@@ -366,11 +382,18 @@ export default function ReviewerGuide() {
                   </div>
                 </div>
                 <div className="flex-grow">
-                  <h4 className="font-semibold mb-2">Complete Checklist</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Work through the review checklist, verifying each aspect of the product entry. 
-                    Add notes and flag any issues or missing information.
+                  <h4 className="font-semibold mb-2">Verify Key Fields</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Work through the product entry, checking each area:
                   </p>
+                  <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                    <li>Product name, version, company, and category</li>
+                    <li>Regulatory status (CE, FDA, TGA, TFDA)</li>
+                    <li>Evidence classification — assign <strong>E0–E3</strong> rigor and <strong>I0–I5</strong> impact</li>
+                    <li>Data transparency — training data details and evaluation/validation data</li>
+                    <li>Safety corrective actions — check FDA Recalls, BfArM, MHRA, EUDAMED</li>
+                    <li>Supported modalities, anatomical structures, and features</li>
+                  </ul>
                 </div>
               </div>
 
@@ -604,16 +627,25 @@ export default function ReviewerGuide() {
               <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
                 <h4 className="font-semibold mb-2">Be Thorough and Objective</h4>
                 <p className="text-sm text-muted-foreground">
-                  Verify all information against official sources. Check regulatory databases, company 
-                  websites, and GitHub repositories for accuracy.
+                  Verify all information against official sources — regulatory databases (FDA, BfArM, MHRA, EUDAMED),
+                  company websites, and peer-reviewed publications. Do not copy marketing materials verbatim.
                 </p>
               </div>
 
               <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                <h4 className="font-semibold mb-2">Provide Constructive Feedback</h4>
+                <h4 className="font-semibold mb-2">Always Set Evidence Levels</h4>
                 <p className="text-sm text-muted-foreground">
-                  Focus on improvements rather than criticism. Suggest specific changes to enhance 
-                  product entries.
+                  Every product should have an evidence classification: assign <strong>E0–E3</strong> for
+                  evidence rigor and <strong>I0–I5</strong> for clinical impact. Add justification notes
+                  and cite the supporting publications.
+                </p>
+              </div>
+
+              <div className="bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-4">
+                <h4 className="font-semibold mb-2">Cite Your Sources</h4>
+                <p className="text-sm text-muted-foreground">
+                  Add references (DOIs, URLs) for any information you add or change so other reviewers
+                  can verify it. Include links to clinical publications, validation studies, and regulatory filings.
                 </p>
               </div>
 
@@ -621,7 +653,7 @@ export default function ReviewerGuide() {
                 <h4 className="font-semibold mb-2">Meet Deadlines</h4>
                 <p className="text-sm text-muted-foreground">
                   Complete reviews within the assigned timeframe. If you need more time, communicate 
-                  with administrators early.
+                  with administrators early at <strong>info@dlinrt.eu</strong>.
                 </p>
               </div>
 
@@ -629,7 +661,7 @@ export default function ReviewerGuide() {
                 <h4 className="font-semibold mb-2">Stay Updated</h4>
                 <p className="text-sm text-muted-foreground">
                   Keep informed about changes in regulations, standards, and best practices in 
-                  radiotherapy AI/ML products.
+                  radiotherapy AI/ML products. Update your expertise preferences as you gain experience.
                 </p>
               </div>
             </CardContent>
@@ -646,15 +678,28 @@ export default function ReviewerGuide() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-2">
                 If you have questions or need assistance with the review process, our support team is here to help.
               </p>
-              <div className="flex gap-3">
+              <p className="text-sm text-muted-foreground mb-4">
+                Email us directly at <strong>info@dlinrt.eu</strong> for non-urgent matters, or open a
+                GitHub issue for technical problems.
+              </p>
+              <div className="flex flex-wrap gap-3">
                 <Button asChild variant="outline">
                   <Link to="/support">Contact Support</Link>
                 </Button>
                 <Button asChild variant="outline">
                   <Link to="/reviewer/dashboard">Go to Dashboard</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <a
+                    href="https://github.com/DLinRT-eu/dlinrteu-website/issues/new"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Report an Issue
+                  </a>
                 </Button>
               </div>
             </CardContent>
