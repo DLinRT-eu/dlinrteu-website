@@ -9,9 +9,10 @@ This guide will help you understand your role as a reviewer and how to use the p
 1. [Getting Started](#1-getting-started)
 2. [Setting Up Your Preferences](#2-setting-up-your-preferences)
 3. [Understanding Assignments](#3-understanding-assignments)
-4. [Reviewing Products](#4-reviewing-products)
-5. [Managing Your Workload](#5-managing-your-workload)
-6. [Best Practices](#6-best-practices)
+4. [How to Provide Feedback on Products](#4-how-to-provide-feedback-on-products)
+5. [Reviewing Products](#5-reviewing-products)
+6. [Managing Your Workload](#6-managing-your-workload)
+7. [Best Practices](#7-best-practices)
 
 ---
 
@@ -312,9 +313,79 @@ These controls are available in the reviewer dashboard for each assigned product
 
 ---
 
-## 4. Reviewing Products
+## 4. How to Provide Feedback on Products
 
-DLinRT.eu supports two methods for reviewing and updating products:
+DLinRT.eu offers several ways to report missing or incorrect product information — choose whichever fits your situation best.
+
+### Method A: Visual Editor (Recommended for Reviewers)
+
+The fastest way for logged-in reviewers to fix product data directly on the site.
+
+1. **Log in** to your DLinRT account (requires reviewer, admin, or company role)
+2. **Navigate** to the product page you want to update
+3. **Click "Edit"** in the product header — the page enters edit mode and an EditToolbar appears at the bottom
+4. **Modify fields** using inline editors, dropdowns, and specialised editors (regulatory, evidence, structures)
+5. Changes **auto-save as a draft** every 30 seconds and persist across sessions
+6. When ready, click **"Submit"** in the EditToolbar and write a short edit summary
+7. An admin reviews and approves or rejects the edit — approved changes **automatically sync to GitHub as a pull request**
+
+> **Tip:** See [§5 — Reviewing Products](#5-reviewing-products) for the full field-editing reference.
+
+### Method B: Open a GitHub Issue
+
+Ideal when you want to report a problem but prefer not to edit the data yourself.
+
+1. Go to <https://github.com/DLinRT-eu/dlinrteu-website/issues/new>
+2. Give the issue a descriptive title (e.g., *"Incorrect CE status for ProductX"*)
+3. In the description, include:
+   - The **product name** and **company**
+   - What is **wrong or missing**
+   - A **source or reference** supporting the correction (URL, DOI, regulatory database link)
+4. Submit the issue — a maintainer will triage and address it
+
+No DLinRT account is needed; a GitHub account is sufficient.
+
+### Method C: Submit a GitHub Pull Request
+
+For developers or contributors comfortable with code.
+
+1. **Fork** the repository: <https://github.com/DLinRT-eu/dlinrteu-website>
+2. **Clone** your fork and create a feature branch
+3. **Edit** the relevant TypeScript product file in `src/data/products/[category]/`
+4. **Commit** with a clear message describing the change and its rationale
+5. **Open a pull request** against the `main` branch with:
+   - A summary of what changed and why
+   - References or sources supporting the update
+6. At least **two reviewers** will verify technical details before merging
+
+For the full contribution workflow (writing standards, conflict-of-interest disclosure, review process) see [`CONTRIBUTING.md`](../CONTRIBUTING.md).
+
+### Method D: Public Feedback Form (No Login Required)
+
+Anyone can report a missing product or incorrect information without an account.
+
+1. Go to <https://dlinrt.eu/support#product-feedback>
+2. Select the type of feedback:
+   - *"A product is missing from the catalogue"*
+   - *"Missing or incorrect information on an existing product"*
+3. Fill in the required fields: product name, details (min. 10 characters), your name, and email
+4. Optionally add the company name and a supporting URL
+5. Click **Submit** — the feedback is sent to the DLinRT team for review
+
+### Quick Comparison
+
+| Method | Login Required? | Best For |
+|--------|----------------|----------|
+| Visual Editor | Yes (DLinRT account) | Reviewers fixing data directly |
+| GitHub Issue | GitHub account | Reporting a problem without editing |
+| GitHub Pull Request | GitHub account | Developers making code-level changes |
+| Public Feedback Form | No | Anyone spotting an error or missing product |
+
+---
+
+## 5. Reviewing Products
+
+DLinRT.eu supports two methods for reviewing and updating products (see also [§4](#4-how-to-provide-feedback-on-products) for a quick overview of all feedback channels):
 
 1. **Visual Editing** (Recommended) - In-browser editing with auto-save and approval workflow
 2. **Direct GitHub Editing** - Traditional file editing for developers
@@ -463,7 +534,7 @@ For developers and those who prefer traditional version control:
 
 ---
 
-## 5. Managing Your Workload
+## 6. Managing Your Workload
 
 ### Understanding Your Capacity
 
@@ -527,7 +598,7 @@ If you'll be unavailable for extended period:
 
 ---
 
-## 6. Best Practices
+## 7. Best Practices
 
 ### Setting Preferences
 

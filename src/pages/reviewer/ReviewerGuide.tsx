@@ -15,7 +15,10 @@ import {
   Eye,
   MessageSquare,
   Award,
-  BookOpen
+  BookOpen,
+  Github,
+  ExternalLink,
+  Send
 } from 'lucide-react';
 
 export default function ReviewerGuide() {
@@ -66,6 +69,9 @@ export default function ReviewerGuide() {
               </Button>
               <Button variant="outline" asChild className="justify-start">
                 <a href="#review-workflow"><GitBranch className="h-4 w-4 mr-2" />Review Workflow</a>
+              </Button>
+              <Button variant="outline" asChild className="justify-start">
+                <a href="#providing-feedback"><Send className="h-4 w-4 mr-2" />Providing Feedback</a>
               </Button>
               <Button variant="outline" asChild className="justify-start">
                 <a href="#best-practices"><CheckCircle2 className="h-4 w-4 mr-2" />Best Practices</a>
@@ -378,10 +384,206 @@ export default function ReviewerGuide() {
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Submit Feedback</h4>
                   <p className="text-sm text-muted-foreground">
-                    Provide comprehensive feedback with recommendations for improvements. 
-                    Submit your completed review for admin processing.
+                    Write an edit summary describing your changes and click "Submit for Review".
+                    An admin will approve or reject the edit. Approved changes automatically sync 
+                    to GitHub as a pull request.
                   </p>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* How to Provide Feedback */}
+        <section id="providing-feedback" className="mb-12 scroll-mt-20">
+          <h2 className="text-3xl font-bold mb-6">How to Provide Feedback on Products</h2>
+          <p className="text-muted-foreground mb-6">
+            Spotted an error or a missing product? Choose the feedback method that fits your situation.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            {/* Visual Editor */}
+            <Card className="border-purple-500/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Eye className="h-5 w-5 text-purple-500" />
+                  Visual Editor
+                </CardTitle>
+                <CardDescription>
+                  <span className="inline-flex items-center rounded-full bg-purple-100 dark:bg-purple-900/30 px-2.5 py-0.5 text-xs font-medium text-purple-800 dark:text-purple-300">
+                    Requires DLinRT login
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  The recommended method for reviewers. Edit product data directly on the site 
+                  with auto-saving drafts and admin approval.
+                </p>
+                <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                  <li>Navigate to the product page</li>
+                  <li>Click <strong>"Edit"</strong> in the header</li>
+                  <li>Modify fields using inline editors</li>
+                  <li>Click <strong>"Submit"</strong> with an edit summary</li>
+                </ol>
+                <p className="text-xs text-muted-foreground italic">
+                  Approved edits automatically sync to GitHub as a pull request.
+                </p>
+                <Button asChild size="sm" variant="outline" className="w-full">
+                  <Link to="/products">
+                    <Eye className="h-4 w-4 mr-2" />
+                    Browse Products
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* GitHub Issue */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Github className="h-5 w-5" />
+                  GitHub Issue
+                </CardTitle>
+                <CardDescription>
+                  <span className="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:text-gray-300">
+                    GitHub account only
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  Report a problem without editing data yourself. Describe what is wrong or 
+                  missing and include a source or reference.
+                </p>
+                <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                  <li>Open a new issue on the repository</li>
+                  <li>Give it a descriptive title</li>
+                  <li>Include the product name, the error, and a supporting link</li>
+                </ol>
+                <Button asChild size="sm" variant="outline" className="w-full">
+                  <a
+                    href="https://github.com/DLinRT-eu/dlinrteu-website/issues/new"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="h-4 w-4 mr-2" />
+                    Open GitHub Issue
+                    <ExternalLink className="h-3 w-3 ml-1" />
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* GitHub Pull Request */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <GitBranch className="h-5 w-5" />
+                  GitHub Pull Request
+                </CardTitle>
+                <CardDescription>
+                  <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:text-blue-300">
+                    For developers
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  Fork the repository, edit the TypeScript product file in{' '}
+                  <code className="text-xs">src/data/products/[category]/</code>, and open a pull 
+                  request. At least two reviewers verify changes before merging.
+                </p>
+                <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                  <li>Fork and clone the repository</li>
+                  <li>Edit the product file and commit</li>
+                  <li>Open a PR with a summary and sources</li>
+                </ol>
+                <Button asChild size="sm" variant="outline" className="w-full">
+                  <a
+                    href="https://github.com/DLinRT-eu/dlinrteu-website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GitBranch className="h-4 w-4 mr-2" />
+                    View Repository
+                    <ExternalLink className="h-3 w-3 ml-1" />
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Public Feedback Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <MessageSquare className="h-5 w-5" />
+                  Public Feedback Form
+                </CardTitle>
+                <CardDescription>
+                  <span className="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:text-green-300">
+                    No login required
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  Anyone can report a missing product or incorrect information via the support page. 
+                  No account needed — just fill in the form.
+                </p>
+                <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
+                  <li>Choose "missing product" or "incorrect info"</li>
+                  <li>Enter the product name and details</li>
+                  <li>Add your name, email, and (optionally) a supporting URL</li>
+                </ol>
+                <Button asChild size="sm" variant="outline" className="w-full">
+                  <Link to="/support#product-feedback">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Go to Feedback Form
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Comparison Table */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Quick Comparison</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-2 pr-4 font-semibold">Method</th>
+                      <th className="text-left py-2 pr-4 font-semibold">Login Required?</th>
+                      <th className="text-left py-2 font-semibold">Best For</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-muted-foreground">
+                    <tr className="border-b">
+                      <td className="py-2 pr-4">Visual Editor</td>
+                      <td className="py-2 pr-4">DLinRT account</td>
+                      <td className="py-2">Reviewers fixing data directly</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 pr-4">GitHub Issue</td>
+                      <td className="py-2 pr-4">GitHub account</td>
+                      <td className="py-2">Reporting a problem without editing</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 pr-4">GitHub Pull Request</td>
+                      <td className="py-2 pr-4">GitHub account</td>
+                      <td className="py-2">Developers making code-level changes</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4">Public Feedback Form</td>
+                      <td className="py-2 pr-4">None</td>
+                      <td className="py-2">Anyone spotting an error or missing product</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </CardContent>
           </Card>

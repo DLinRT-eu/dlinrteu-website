@@ -64,3 +64,16 @@ Track multiple versions through separate entries with `version` and `releaseDate
 - **Admins**: See [Admin Guide](../ADMIN_GUIDE.md) (includes Edit Approvals)
 - **Reviewers**: See [Reviewer Guide](../REVIEWER_GUIDE.md) (includes Visual Editing)
 - **Issues**: Open an issue on GitHub
+
+## Providing Feedback on Products
+
+There are several ways to report missing or incorrect product information:
+
+| Method | Login Required? | Best For |
+|--------|----------------|----------|
+| **Visual Editor** — Log in, open a product, click "Edit", modify fields, and submit for admin approval. | DLinRT account | Reviewers fixing data directly |
+| **GitHub Issue** — Open an issue at [dlinrteu-website/issues](https://github.com/DLinRT-eu/dlinrteu-website/issues/new) describing the problem and a supporting reference. | GitHub account | Reporting a problem without editing |
+| **GitHub Pull Request** — Fork the repo, edit the product file in `src/data/products/[category]/`, and open a PR. See [CONTRIBUTING.md](../CONTRIBUTING.md). | GitHub account | Developers making code-level changes |
+| **Public Feedback Form** — Go to [dlinrt.eu/support](https://dlinrt.eu/support#product-feedback) and fill in the form. | None | Anyone spotting an error or missing product |
+
+For full details see the [Reviewer Guide § How to Provide Feedback](../REVIEWER_GUIDE.md#4-how-to-provide-feedback-on-products).

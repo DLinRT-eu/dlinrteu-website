@@ -5,12 +5,13 @@ This guide covers all aspects of working with products on DLinRT.eu, including r
 ## Table of Contents
 
 1. [Reviewing Products](#reviewing-products)
-2. [Adding New Products](#adding-new-products)
-3. [Product Categories](#product-categories)
-4. [Multi-Category Products](#multi-category-products)
-5. [Product Versioning](#product-versioning)
-6. [Field Requirements](#field-requirements)
-7. [Example Templates](#example-templates)
+2. [Providing Feedback](#providing-feedback)
+3. [Adding New Products](#adding-new-products)
+4. [Product Categories](#product-categories)
+5. [Multi-Category Products](#multi-category-products)
+6. [Product Versioning](#product-versioning)
+7. [Field Requirements](#field-requirements)
+8. [Example Templates](#example-templates)
 
 ## Reviewing Products
 
@@ -48,6 +49,16 @@ For developers who prefer traditional version control:
 2. **Edit product files** in `src/data/products/[category]/`
 3. **Create pull request** with your changes
 4. **Maintainers review** and merge
+
+## Providing Feedback
+
+Beyond the editing methods above, there are additional ways to report missing or incorrect information:
+
+- **Open a GitHub Issue** — Describe the problem at <https://github.com/DLinRT-eu/dlinrteu-website/issues/new>. Include the product name, what is wrong, and a supporting reference.
+- **Public Feedback Form** — No login needed. Go to <https://dlinrt.eu/support#product-feedback>, select "missing product" or "incorrect info", and fill in the details.
+- **Submit a Pull Request** — Fork the repository, edit the product TypeScript file in `src/data/products/[category]/`, and open a PR. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for writing standards and the review process.
+
+For the complete guide to all feedback methods (including the visual editor), see the [Reviewer Guide § How to Provide Feedback](../REVIEWER_GUIDE.md#4-how-to-provide-feedback-on-products).
 
 ## Adding New Products
 
