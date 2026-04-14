@@ -24,6 +24,7 @@ import { ConsentManagement } from '@/components/profile/ConsentManagement';
 import { RoleQuickActions } from '@/components/profile/RoleQuickActions';
 import { ReviewerProfileSummary } from '@/components/profile/ReviewerProfileSummary';
 import { CompanyProfileSummary } from '@/components/profile/CompanyProfileSummary';
+import { ChangeEmailSection } from '@/components/profile/ChangeEmailSection';
 import { User, Mail, Building2, Briefcase, Shield, AlertCircle, RefreshCw } from 'lucide-react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -384,6 +385,9 @@ export default function Profile() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Change Login Email */}
+          {profile?.email && <ChangeEmailSection currentEmail={profile.email} />}
 
           {/* Role Selector - for users with multiple roles */}
           <RoleSelector />

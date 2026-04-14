@@ -62,6 +62,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(currentSession);
         setUser(currentSession?.user ?? null);
         
+        // Sync profile email when user updates their auth email
+        if (event === 'USER_UPDATED' && currentSession?.user?.email) {
+          supabase
+            .from('profiles')
+            .update({ email: currentSession.user.email })
+            .eq('id', currentSession.user.id)
+            .then(({ error }) => {
+              if (error) console.warn('[Auth] Failed to sync profile email:', error);
+              else console.log('[Auth] Profile email synced');
+            });
+        }
+
         // Add small delay to ensure session context is fully established
         if (currentSession?.user) {
           setTimeout(() => {
