@@ -1,22 +1,40 @@
 
 
-## Fix: Remove `review_comments` from Supabase Realtime Publication
+## Add Email Change Functionality to Profile Page
 
 ### Problem
-The `review_comments` table is published to `supabase_realtime`, but Supabase's `realtime.messages` table has no RLS policies. This means any authenticated user could subscribe to Realtime channels and receive live review comment updates for reviews they are not assigned to.
+Users cannot change their login email address from within the app. The email is displayed as read-only in the "Account Status" card on the Profile page.
 
-### Key Finding
-No client code actually subscribes to `review_comments` via Realtime. The only Realtime subscription in the app is in `NotificationBell.tsx` for the `notifications` table (which is not even published). So removing `review_comments` from the publication has zero functional impact.
+### Approach
 
-### Plan
+Supabase provides `supabase.auth.updateUser({ email: newEmail })` which sends a confirmation link to both the old and new email addresses. The change is only applied after confirmation.
 
-**Single migration** to remove `review_comments` from the Realtime publication:
+### Implementation
 
-```sql
-ALTER PUBLICATION supabase_realtime DROP TABLE public.review_comments;
-```
+**1. Create `ChangeEmailSection.tsx` component** (`src/components/profile/ChangeEmailSection.tsx`)
 
-This eliminates the attack surface entirely. The `realtime` schema is Supabase-reserved and cannot have RLS policies added via migrations, so removing the table from the publication is the correct and complete fix.
+A new card component placed in the Profile page that:
+- Shows the current email (read-only)
+- Has an "Change Email" button that reveals an input field
+- Validates the new email format using a simple regex
+- Calls `supabase.auth.updateUser({ email: newEmail })` on submit
+- Shows a success toast explaining that confirmation emails were sent to both old and new addresses
+- Handles errors (invalid email, rate limiting, same email)
 
-After applying the migration, the `supabase_lov` finding `realtime_messages_no_rls` will be marked as fixed.
+**2. Update `Profile.tsx`**
+
+- Import and add `<ChangeEmailSection />` in the profile page, placed after the "Account Status" card and before the "Profile Information" card
+- Pass the current user email as a prop
+
+### Technical Details
+
+- No database migration needed — Supabase Auth handles email changes natively
+- The `profiles.email` column will be auto-updated by the existing `handle_new_user` trigger or via the auth state change listener
+- After the user confirms both emails, the `onAuthStateChange` event fires and the profile syncs automatically
+- The `updateUser` call requires the user to be authenticated (already guaranteed by the Profile page)
+
+### Security
+- Email validation on both client-side (format check) and server-side (Supabase validates)
+- Supabase sends confirmation to both old and new emails to prevent account hijacking
+- Rate limiting is handled by Supabase Auth
 
