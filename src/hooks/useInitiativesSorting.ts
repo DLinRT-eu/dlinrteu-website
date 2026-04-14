@@ -103,6 +103,12 @@ export const useInitiativesSorting = (filteredInitiatives: Initiative[]) => {
     );
   }, [sortedInitiatives]);
 
+  const llmPlatforms = useMemo(() => {
+    return sortedInitiatives.filter(
+      (initiative) => initiative.category === 'LLM Inference Platform'
+    );
+  }, [sortedInitiatives]);
+
   return {
     sortBy,
     ascending,
@@ -110,6 +116,7 @@ export const useInitiativesSorting = (filteredInitiatives: Initiative[]) => {
     challenges,
     datasets,
     modelZoos,
+    llmPlatforms,
     handleSortChange,
     handleDirectionChange
   };
