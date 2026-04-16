@@ -1,8 +1,32 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.8";
-import { Resend } from "npm:resend@4.0.0";
+// Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
+function createResend(apiKey: string | undefined) {
+  return {
+    emails: {
+      async send(payload: Record<string, unknown>) {
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey ?? ""}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const text = await res.text();
+        let data: any = null;
+        try { data = text ? JSON.parse(text) : null; } catch { data = { raw: text }; }
+        if (!res.ok) {
+          const errMsg = (data && (data.message || data.error)) || `Resend HTTP ${res.status}`;
+          throw new Error(typeof errMsg === "string" ? errMsg : JSON.stringify(errMsg));
+        }
+        return { data, error: null };
+      },
+    },
+  };
+}
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 
 const ALLOWED_ORIGINS = [
   "https://dlinrt.eu",
