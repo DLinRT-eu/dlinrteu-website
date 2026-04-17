@@ -110,8 +110,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       source: "FDA 510(k) summary (K232923) and published literature",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
-    lastUpdated: "2026-03-24",
-    lastRevised: "2026-03-24",
-    source: "FDA 510(k) K232923 summary, Varian official website, published literature"
+    lastUpdated: "2026-04-17",
+    lastRevised: "2026-04-17",
+    source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement"
   }
 ];
