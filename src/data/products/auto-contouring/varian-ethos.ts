@@ -61,7 +61,7 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
         productCode: "IYE",
         regulationNumber: "21 CFR 892.5050",
         decisionDate: "2024-04-30",
-        notes: "K232923 (Ethos Treatment Management 3.0 / Ethos Treatment Planning 2.0, Apr 2024). Prior AI Segmentation standalone clearances: K211881 (Sep 2021), K203469 (Dec 2020). HyperSight imaging clearance: K233466 (Feb 2024)."
+        notes: "K232923 (Ethos Treatment Management 3.0 / Ethos Treatment Planning 2.0, Apr 2024). Prior AI Segmentation standalone clearances: K211881 (Sep 2021), K203469 (Dec 2020). HyperSight imaging clearance: K233466 (Feb 2024). Ethos 2.0 Therapy System received additional FDA 510(k) clearance announced Feb 18, 2026 (specific K-number not yet public in FDA database at time of audit)."
       },
       intendedUseStatement: "Ethos Treatment Management is indicated for use in managing and monitoring radiation therapy treatment plans and sessions; Ethos Treatment Planning is indicated for use in generating and modifying radiation therapy treatment plans. Includes AI segmentation deep learning algorithms for contouring with additional anatomical site support."
     },
@@ -110,8 +110,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       source: "FDA 510(k) summary (K232923) and published literature",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
-    lastUpdated: "2026-03-24",
-    lastRevised: "2026-03-24",
-    source: "FDA 510(k) K232923 summary, Varian official website, published literature"
+    lastUpdated: "2026-04-17",
+    lastRevised: "2026-04-17",
+    source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement"
   }
 ];
