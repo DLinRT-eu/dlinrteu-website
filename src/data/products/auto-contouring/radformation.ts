@@ -339,11 +339,11 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K242729",
+        clearanceNumber: "K260509",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2024-12-20",
-        notes: "AutoContour V4. Previous clearances: K230685 (V3, 2023), K220598 (V2), K200323 (V1). Also distributes Limbus Contour (K241837) after acquisition in April 2024."
+        decisionDate: "2026-03-19",
+        notes: "AutoContour V5 (Special 510(k), 30-day review). Previous clearances: K242729 (V4, 2024-12-20), K230685 (V3, 2023), K220598 (V2), K200323 (V1). Also distributes Limbus Contour (K241837) after acquisition in April 2024."
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -377,10 +377,10 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    version: "4.0",
-    releaseDate: "2025-01-15",
-    lastUpdated: "2025-12-01",
-    lastRevised: "2026-02-26",
-    source: "FDA 510(k) database (K242729), company official sources"
+    version: "5.0",
+    releaseDate: "2026-03-19",
+    lastUpdated: "2026-04-17",
+    lastRevised: "2026-04-17",
+    source: "FDA 510(k) database (K260509, cleared 2026-03-19), company official sources"
   }
 ];

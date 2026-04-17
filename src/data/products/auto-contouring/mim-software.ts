@@ -44,10 +44,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
         status: "510(k) Cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K250035",
+        clearanceNumber: "K253270",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2025-02-03"
+        decisionDate: "2026-03-27",
+        notes: "Contour ProtégéAI+ Traditional 510(k) cleared 2026-03-27. Previous clearances: K250035 (2025-02-03), K213976 (Contour ProtégéAI), K210632."
       },
       intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
     },
@@ -81,11 +82,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    version: "1.3.2",
-    releaseDate: "2023-10-15",
-    lastUpdated: "2025-12-11",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K250035), company official sources",
+    version: "2.0",
+    releaseDate: "2026-03-27",
+    lastUpdated: "2026-04-17",
+    lastRevised: "2026-04-17",
+    source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
       "Head & Neck: BrachialPlex_L",
