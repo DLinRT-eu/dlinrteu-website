@@ -1,64 +1,34 @@
 
 
-## Plan: Full Regulatory Audit + Fix Edge Function Build Errors
+## Plan: Resolve 3 Supabase security findings
 
-### Part A — Fix build errors (do first, unblocks deploys)
+### Finding 1 — `mfa_activity_log` missing INSERT policy → **Mark as fixed (already by design)**
 
-**A1. `npm:resend@4.0.0` resolution failures (8 functions)**
+Inspection shows all writes happen exclusively in edge functions (`verify-backup-code`, etc.) using the service-role client, which bypasses RLS. A previous migration (`20260406081945_…sql`) already documented this with a `COMMENT ON TABLE` explaining the intentional omission. The scanner can't see that intent.
 
-Affected: `notify-role-request-outcome`, `notify-user-approval`, `send-contact-email`, `send-deadline-reminders`, `send-notification-digest`, `submit-product-feedback`, `subscribe-newsletter`, plus newsletter/admin variants.
+Action: call `security--manage_security_finding` → `mark_as_fixed` with explanation pointing to the service-role write path + existing table comment. No schema change needed.
 
-Cause: Deno edge runtime cannot resolve the npm Resend SDK in this build (lockfile / nodeModulesDir). Per workspace standard (`infrastructure/edge-function-standards-v4-standardization`) we use `npm:resend@4.0.0`, but the recommended Lovable pattern for Resend is to call the **connector gateway via `fetch`** — no SDK import required. This avoids the npm resolution issue entirely while keeping the same RESEND_API_KEY env var.
+### Finding 2 — `certification_reminder_logs` missing INSERT policy → **Mark as fixed (already by design)**
 
-Fix: Replace `import { Resend } from "npm:resend@4.0.0"` and `resend.emails.send({...})` calls with a small `sendEmail()` helper that POSTs to `https://connector-gateway.lovable.dev/resend/emails` using `LOVABLE_API_KEY` + `RESEND_API_KEY`. Apply identical pattern to all 8 functions.
+Same pattern: only writer is `send-certification-reminder/index.ts` line 236, using `adminClient` (service-role). Admins reading via dashboard works through the existing SELECT policy. No authenticated-user code path inserts here.
 
-**A2. `auth.getClaims()` TS error in `notify-certification-complete`**
+Action: `mark_as_fixed` with explanation. No schema change.
 
-`getClaims()` is not on the typed Supabase client. Replace with `anonClient.auth.getUser(token)` which returns `{ data: { user } }` — then read `user.id`. Same auth guarantee, type-safe.
+### Finding 3 — `user_roles` privilege-escalation risk → **Mark as fixed (verified, no bypass paths)**
 
-### Part B — Full regulatory audit of all active products
+Searched all edge functions for `user_roles` writes:
+- `delete-account` and `admin-delete-user` only **DELETE** (admin-gated and self-scoped respectively).
+- No `.insert(` or `.upsert(` calls into `user_roles` exist anywhere in `supabase/functions/`.
+- No SECURITY DEFINER function in the schema inserts roles either.
+- All role grants flow through the client → RLS `is_admin_secure()` check.
 
-I'll iterate through every product file in `src/data/products/<category>/` (~100+ products across 11 categories) and verify against authoritative sources.
+Action: `mark_as_fixed` with explanation listing the audit results.
 
-**B1. Inventory pass** — list every product with: id, company, current FDA clearance #, current CE status, `lastRevised` date. Build a working spreadsheet in `/tmp/`.
+### Why no migrations
 
-**B2. FDA verification** — for each product with an FDA entry, check the FDA 510(k) database for:
-- Whether a newer K-number supersedes the listed one (vendor often updates clearance every 1–3 years)
-- Confirm decision date, product code (QKB for radiotherapy AI, LNH, QIH, etc.)
-- Flag products where clearance appears withdrawn or company acquired
+Adding a permissive INSERT policy to `mfa_activity_log` or `certification_reminder_logs` for `authenticated` users would actually **weaken** security — any logged-in user could forge log entries. The current "service-role-only writes, RLS blocks everyone else" pattern is correct. The findings are scanner false positives that need to be acknowledged.
 
-**B3. CE verification** — for each CE-marked product, verify:
-- MDR 2017/745 vs MDD legacy status
-- Risk class (IIa / IIb)
-- Current notified body where listed
-- Note: CE database (EUDAMED) is incomplete — rely on vendor sites + FDA cross-reference
+### Files touched
 
-**B4. New products discovery** — scan three sources:
-- FDA AI/ML-enabled medical devices list (last update ~Mar 2026) filtered to product code QKB + adjacent radiotherapy codes (LNH, IZL, MUJ)
-- Recent CE MDR approvals 2025–2026 from major vendors not already covered
-- ESTRO / ASTRO 2025/2026 vendor announcements
-
-For each new candidate, apply inclusion policy (`policy/product-inclusion-criteria` memory): must use AI/DL, must have explicit AI reference in intended use, must have public documentation.
-
-**B5. Apply updates** — for each verified change:
-- Update `regulatory.fda.clearanceNumber`, `decisionDate`, `notes` (preserve history in notes)
-- Update `regulatory.ce` class/regulation if changed
-- Update `lastRevised` and `source` 
-- For new products: create new `.ts` file in correct category folder, register in category `index.ts`
-- For superseded/withdrawn: archive per existing convention (move to `archived/`, update `archived/README.md`)
-
-**B6. Changelog** — insert one summary entry into `changelog_entries` DB table documenting the audit scope, # products updated, # added, # archived.
-
-### Execution approach
-
-This is a multi-step research task. I'll work in batches by category (auto-contouring first as the largest, ~30 products), report findings per batch, and commit edits incrementally so you can review progress. Estimated 4–6 batched iterations.
-
-### Files touched (estimate)
-
-- ~8 edge function `index.ts` files (Part A)
-- ~100 product `.ts` files audited; ~15–25 expected to need updates
-- 3–8 new product files added
-- 0–5 files moved to `archived/`
-- 1 new changelog DB row
-- `archived/README.md` updated if anything is moved
+None. Three `security--manage_security_finding` calls only.
 
