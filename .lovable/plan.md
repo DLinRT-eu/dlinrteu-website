@@ -1,34 +1,65 @@
 
 
-## Plan: Resolve 3 Supabase security findings
+## Plan: Audit & retrieve missing logos (company + product)
 
-### Finding 1 — `mfa_activity_log` missing INSERT policy → **Mark as fixed (already by design)**
+### Findings
 
-Inspection shows all writes happen exclusively in edge functions (`verify-backup-code`, etc.) using the service-role client, which bypasses RLS. A previous migration (`20260406081945_…sql`) already documented this with a `COMMENT ON TABLE` explaining the intentional omission. The scanner can't see that intent.
+**A. Missing logo FILES (referenced but not in `public/logos/`)**
+None of these resolve. All `logoUrl:` references in companies map to existing files. ✅
 
-Action: call `security--manage_security_finding` → `mark_as_fixed` with explanation pointing to the service-role write path + existing table comment. No schema change needed.
+**B. Companies with NO entry in `src/data/companies/` but with active products**
+These ship products on the site but the company never appears in `getActiveCompanies()` and on `/companies`:
+1. **Varian (Siemens Healthineers)** — logo exists: `varian.jpg`
+2. **ViewRay** — logo exists: `Viewray.png`
+3. **RefleXion Medical** — logo exists: `Reflexion.png`
+4. **Leo Cancer Care** — logo exists: `LeoCancerCare.jpg`
+5. **Quanta Computer Inc.** — no logo, just added by April audit
+6. **Inpictura** — no logo (lowercase + leading-space `company: "Inpictura"`, looks like an example/placeholder — needs verification)
 
-### Finding 2 — `certification_reminder_logs` missing INSERT policy → **Mark as fixed (already by design)**
+**C. Companies with INCONSISTENT names across products** (will silently split company on detail pages)
+- "Manteia" vs "Manteia Technologies" — pick one
+- "Radformation" vs "RadFormation" — pick one (company entry uses "RadFormation")
+- "Quanta Computer Inc." vs "Quanta Computer, Inc." — pick one
 
-Same pattern: only writer is `send-certification-reminder/index.ts` line 236, using `adminClient` (service-role). Admins reading via dashboard works through the existing SELECT policy. No authenticated-user code path inserts here.
+**D. Products using placeholder logos**
+- `quanta-computer.ts` → `logoUrl: "/logos/placeholder.svg"` (placeholder)
+- One product uses `logoUrl: "/placeholder.svg"` (root, not even in /logos/) — needs locating & fixing
 
-Action: `mark_as_fixed` with explanation. No schema change.
+**E. Logo files present but UNUSED** (orphans — keep but worth noting)
+- `dlinrt-org.png` (likely site branding, OK)
+- `logo-blue-therapanacea-new.png` (newer Therapanacea logo not wired up)
+- `oncosoft.png` exists twice (case duplicate `Oncosoft.png` / `oncosoft.png` — confirm filesystem)
+- `sun-nuclear.png` referenced by a product but the company entry uses `SunNuclear.png` (case mismatch — fragile on case-sensitive hosts)
 
-### Finding 3 — `user_roles` privilege-escalation risk → **Mark as fixed (verified, no bypass paths)**
+### Retrieval plan (for your evaluation)
 
-Searched all edge functions for `user_roles` writes:
-- `delete-account` and `admin-delete-user` only **DELETE** (admin-gated and self-scoped respectively).
-- No `.insert(` or `.upsert(` calls into `user_roles` exist anywhere in `supabase/functions/`.
-- No SECURITY DEFINER function in the schema inserts roles either.
-- All role grants flow through the client → RLS `is_admin_secure()` check.
+For each truly-missing logo, I'll fetch the official one from the vendor site (favicon/press kit/PNG from header), save to `public/logos/`, and wire it into the company entry. Proposed sources:
 
-Action: `mark_as_fixed` with explanation listing the audit results.
+| Company | Source | Filename |
+|---|---|---|
+| Varian | varian.com press kit / `varian.jpg` already exists | reuse `varian.jpg`, add company entry |
+| ViewRay | viewray.com (now MRIdian/dissolved — use Wayback) | reuse `Viewray.png` |
+| RefleXion Medical | reflexion.com press | reuse `Reflexion.png` |
+| Leo Cancer Care | leocancercare.com | reuse `LeoCancerCare.jpg` |
+| Quanta Computer | quantacloudtech.com | new `quanta-computer.png` |
+| Inpictura | TBD — needs your call: real company or stub to delete? | — |
 
-### Why no migrations
+### Actions I'll take after approval
 
-Adding a permissive INSERT policy to `mfa_activity_log` or `certification_reminder_logs` for `authenticated` users would actually **weaken** security — any logged-in user could forge log entries. The current "service-role-only writes, RLS blocks everyone else" pattern is correct. The findings are scanner false positives that need to be acknowledged.
+1. **Add 5 missing company entries** to the appropriate file in `src/data/companies/` (radiotherapy-equipment.ts for Varian/ViewRay/RefleXion/Leo, specialized-solutions.ts for Quanta), each linked to existing `productIds` and existing logo files.
+2. **Retrieve 1 new logo** (Quanta Computer) via fetch from quantacloudtech.com and save as `public/logos/quanta-computer.png`; update the product's `logoUrl`.
+3. **Fix the placeholder** in `quanta-computer.ts` (`/logos/placeholder.svg` → new logo).
+4. **Locate & fix** the `/placeholder.svg` (root path) reference and replace with correct vendor logo.
+5. **Normalize company name strings** in product files: choose canonical "Manteia", "Radformation", "Quanta Computer Inc." and rewrite mismatches.
+6. **Investigate "Inpictura"** entry — report back with what product it's attached to so you can decide keep/delete.
+7. **Report back** a single summary table: company → logo source URL → file saved → wired in (✓/✗) for your sign-off before any commit to `main` style data.
 
-### Files touched
+### Files touched (estimate)
 
-None. Three `security--manage_security_finding` calls only.
+- 2 company files (`radiotherapy-equipment.ts`, `specialized-solutions.ts`) — add ~5 entries
+- 1 new logo: `public/logos/quanta-computer.png`
+- 1 product file: `quanta-computer.ts` (logoUrl)
+- 2–4 product files for company-name normalization
+- 1 product file containing `/placeholder.svg` (TBD which)
+- No DB changes, no migrations
 
