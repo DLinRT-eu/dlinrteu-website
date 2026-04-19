@@ -114,7 +114,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     id: "quanta-computer",
     name: "Quanta Computer Inc.",
     description: "Taiwanese technology company developing AI-powered medical imaging solutions, including the QOCA® image Smart RT Contouring System for organ-at-risk delineation in radiotherapy planning.",
-    website: "https://www.quantacloudtech.com/",
+    website: "https://www.quantatw.com/quanta/english/default.aspx",
     productIds: ["quanta-qoca-image-smart-rt"],
     category: "Specialized Solutions",
     logoUrl: "/logos/quanta-computer.png",
