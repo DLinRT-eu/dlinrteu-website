@@ -64,4 +64,18 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "logoUrl": "/logos/Brainlab.jpg",
     "primaryTask": "Auto-Contouring"
   },
+  {
+    "id": "varian",
+    "name": "Varian (Siemens Healthineers)",
+    "description": "Global leader in radiotherapy solutions including treatment delivery systems, AI-assisted adaptive therapy (Ethos), oncology software, and patient quality assurance tools. Part of Siemens Healthineers since 2021.",
+    "website": "https://www.varian.com/",
+    "productIds": [
+      "varian-ethos-ai-segmentation",
+      "varian-mobius3d"
+    ],
+    "category": "Radiotherapy Equipment",
+    "logoUrl": "/logos/varian.jpg",
+    "primaryTask": "Auto-Contouring",
+    "secondaryTasks": ["Performance Monitor", "Treatment Planning"]
+  },
 ];
