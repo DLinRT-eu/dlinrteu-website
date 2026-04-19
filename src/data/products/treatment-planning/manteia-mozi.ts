@@ -4,7 +4,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
   {
     id: "manteia-mozi",
     name: "MOZI TPS",
-    company: "Manteia Technologies",
+    company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
     productUrl: "https://www.manteiamedical.com/mozi",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",

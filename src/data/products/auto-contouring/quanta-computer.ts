@@ -16,7 +16,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     ],
     category: "Auto-Contouring",
     certification: "FDA",
-    logoUrl: "/logos/placeholder.svg",
+    logoUrl: "/logos/quanta-computer.png",
     website: "https://www.quantacloudtech.com/qoca-image",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT"],
