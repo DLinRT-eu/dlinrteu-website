@@ -167,6 +167,29 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // Persist validated submission (best-effort; uses service role, bypasses RLS).
+    // RLS on contact_submissions stays deny-all for anon/authenticated clients.
+    let submissionId: string | null = null;
+    if (supabaseAdmin) {
+      const { data: inserted, error: insertError } = await supabaseAdmin
+        .from("contact_submissions")
+        .insert({
+          name,
+          email,
+          subject,
+          message,
+          status: "received",
+          submission_method: "edge_function",
+        })
+        .select("id")
+        .single();
+      if (insertError) {
+        console.error("contact_submissions insert failed:", insertError.message);
+      } else {
+        submissionId = inserted?.id ?? null;
+      }
+    }
+
     // Send email via Resend with escaped content to prevent HTML injection
     const emailResponse = await resend.emails.send({
       from: "DLinRT.eu Contact Form <noreply@dlinrt.eu>",
