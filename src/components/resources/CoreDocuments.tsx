@@ -164,6 +164,13 @@ const CoreDocuments = () => {
           url: "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2025",
           type: "Safety Report",
           reference: "[17]"
+        },
+        {
+          title: "WHO – AI readiness in EU health systems (2026)",
+          description: "WHO assessment of AI readiness in EU health systems, based on the 2024–2025 survey on AI for health care in the WHO European Region",
+          url: "https://www.who.int/europe/publications/i/item/WHO-EURO-2026-12707-52481-81471",
+          type: "WHO Report",
+          reference: "[18]"
         }
       ]
     }
@@ -249,7 +256,7 @@ const CoreDocuments = () => {
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <p className="text-sm text-muted-foreground">
-            <strong>Note:</strong> Reference numbers [1] through [17] correspond to the footnote-style citations in the regulatory guidance. 
+            <strong>Note:</strong> Reference numbers [1] through [18] correspond to the footnote-style citations in the regulatory guidance. 
             These documents represent the core starting points for understanding regulatory requirements for AI in medical devices.
           </p>
         </CardContent>
