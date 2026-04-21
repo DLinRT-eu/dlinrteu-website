@@ -298,6 +298,20 @@ const ResourceLinks = () => {
       category: "Ethics Guidelines"
     },
     {
+      title: "WHO – AI is reshaping health systems: state of readiness across the EU (2026)",
+      description: "WHO focused assessment of AI readiness in EU health systems, drawing on the 2024–2025 survey on AI for health care in the WHO European Region — context for AI Act implementation.",
+      url: "https://www.who.int/europe/publications/i/item/WHO-EURO-2026-12707-52481-81471",
+      icon: BookOpen,
+      category: "Ethics Guidelines"
+    },
+    {
+      title: "WHO – AI readiness across the WHO European Region (2025)",
+      description: "First WHO assessment of AI integration across the whole WHO European Region (53 countries) based on the 2024–2025 survey on AI for health care.",
+      url: "https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028",
+      icon: BookOpen,
+      category: "Ethics Guidelines"
+    },
+    {
       title: "Horizon Europe - Digital Health Programme",
       description: "EU research and innovation programme funding digital health and AI projects",
       url: "https://ec.europa.eu/info/research-and-innovation/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en",
