@@ -256,7 +256,7 @@ const CoreDocuments = () => {
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <p className="text-sm text-muted-foreground">
-            <strong>Note:</strong> Reference numbers [1] through [17] correspond to the footnote-style citations in the regulatory guidance. 
+            <strong>Note:</strong> Reference numbers [1] through [18] correspond to the footnote-style citations in the regulatory guidance. 
             These documents represent the core starting points for understanding regulatory requirements for AI in medical devices.
           </p>
         </CardContent>
