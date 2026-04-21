@@ -1,4 +1,14 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+
+// Service-role Supabase client for server-side inserts (bypasses RLS by design;
+// RLS on contact_submissions remains deny-all for anon/authenticated clients).
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const supabaseAdmin = SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } })
+  : null;
+
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
