@@ -29,11 +29,17 @@ export function setCookie(name: string, value: string, options: CookieOptions = 
     }
   }
 
+  // NOTE: HttpOnly is intentionally NOT set on these cookies — it is impossible
+  // for any cookie written via document.cookie. The consent banner and analytics
+  // dedup logic require JS read access. No session/auth token is stored in a
+  // cookie (Supabase auth uses localStorage). Cookies are hardened with
+  // Secure (always in production) + SameSite=Strict to mitigate XSS/CSRF risk.
+  const isDev = import.meta.env.DEV;
   const defaults: CookieOptions = {
     expires: 365,
     path: '/',
-    secure: window.location.protocol === 'https:',
-    sameSite: 'lax'
+    secure: !isDev,
+    sameSite: 'strict'
   };
 
   const opts = { ...defaults, ...options };
@@ -89,8 +95,11 @@ export function setCookieConsent(consent: Omit<CookieConsent, 'timestamp' | 'ver
     version: CONSENT_VERSION
   };
   
-  // Consent cookie is always allowed (necessary for legal compliance)
-  document.cookie = `${CONSENT_COOKIE_NAME}=${encodeURIComponent(JSON.stringify(consentData))}; expires=${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; samesite=lax${window.location.protocol === 'https:' ? '; secure' : ''}`;
+  // Consent cookie is always allowed (necessary for legal compliance).
+  // Hardened with SameSite=Strict + Secure (in production). HttpOnly is N/A
+  // because the consent banner must read this from JS on every page load.
+  const isDev = import.meta.env.DEV;
+  document.cookie = `${CONSENT_COOKIE_NAME}=${encodeURIComponent(JSON.stringify(consentData))}; expires=${new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; samesite=strict${!isDev ? '; secure' : ''}`;
 }
 
 /**
