@@ -1,4 +1,14 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+
+// Service-role Supabase client for server-side inserts (bypasses RLS by design;
+// RLS on contact_submissions remains deny-all for anon/authenticated clients).
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+const supabaseAdmin = SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } })
+  : null;
+
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
@@ -155,6 +165,29 @@ const handler = async (req: Request): Promise<Response> => {
           headers: { "Content-Type": "application/json", ...corsHeaders } 
         }
       );
+    }
+
+    // Persist validated submission (best-effort; uses service role, bypasses RLS).
+    // RLS on contact_submissions stays deny-all for anon/authenticated clients.
+    let submissionId: string | null = null;
+    if (supabaseAdmin) {
+      const { data: inserted, error: insertError } = await supabaseAdmin
+        .from("contact_submissions")
+        .insert({
+          name,
+          email,
+          subject,
+          message,
+          status: "received",
+          submission_method: "edge_function",
+        })
+        .select("id")
+        .single();
+      if (insertError) {
+        console.error("contact_submissions insert failed:", insertError.message);
+      } else {
+        submissionId = inserted?.id ?? null;
+      }
     }
 
     // Send email via Resend with escaped content to prevent HTML injection
