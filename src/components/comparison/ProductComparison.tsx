@@ -325,38 +325,42 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[95vw] max-h-[90vh] overflow-hidden" aria-describedby="comparison-description">
-        <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
-            <span>Product Comparison</span>
-            <div id="comparison-description" className="sr-only">
-              Compare selected products side by side with export options
-            </div>
-            <div className="flex items-center gap-2">
-              {activeTab === 'general' && (
-                <>
-                  <select
-                    value={exportFormat}
-                    onChange={(e) => setExportFormat(e.target.value as 'excel' | 'csv' | 'pdf')}
-                    className="px-3 py-1 border rounded text-sm"
-                  >
-                    <option value="excel">Excel</option>
-                    <option value="csv">CSV</option>
-                    <option value="pdf">PDF</option>
-                  </select>
-                  <Button
-                    onClick={handleExportComparison}
-                    size="sm"
-                    className="flex items-center gap-2"
-                    disabled={isExporting}
-                  >
-                    <Download className="h-4 w-4" />
-                    {isExporting ? 'Exporting...' : 'Export Report'}
-                  </Button>
-                </>
-              )}
-            </div>
-          </DialogTitle>
+        <DialogHeader className="pr-10">
+          <DialogTitle>Product Comparison</DialogTitle>
+          <div id="comparison-description" className="sr-only">
+            Compare selected products side by side with export options
+          </div>
         </DialogHeader>
+
+        <div className="sticky top-0 z-10 bg-background flex flex-wrap items-center justify-between gap-2 pr-10 py-2 border-b">
+          {activeTab === 'general' ? (
+            <>
+              <span className="text-sm text-muted-foreground">Export comparison as:</span>
+              <div className="flex items-center gap-2">
+                <select
+                  value={exportFormat}
+                  onChange={(e) => setExportFormat(e.target.value as 'excel' | 'csv' | 'pdf')}
+                  className="px-3 py-1 border rounded text-sm bg-background"
+                >
+                  <option value="excel">Excel</option>
+                  <option value="csv">CSV</option>
+                  <option value="pdf">PDF</option>
+                </select>
+                <Button
+                  onClick={handleExportComparison}
+                  size="sm"
+                  className="flex items-center gap-2"
+                  disabled={isExporting}
+                >
+                  <Download className="h-4 w-4" />
+                  {isExporting ? 'Exporting...' : 'Export Report'}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <span className="text-sm text-muted-foreground">Structure comparison view — export not available on this tab</span>
+          )}
+        </div>
         
         {hasStructures ? (
           <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as typeof activeTab)} className="flex-1">
