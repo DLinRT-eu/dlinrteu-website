@@ -393,7 +393,7 @@ function pictogramRow(doc, y, items) {
 }
 
 function processStrip(doc, y, steps) {
-  const H = 96;
+  const H = 118;
   doc.roundedRect(MARGIN, y, PAGE_W - MARGIN * 2, H, 8).fill(BG_TINT);
   doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(11).text("How verification works", MARGIN + 14, y + 10);
 
@@ -661,9 +661,9 @@ async function buildCommunityFlyer() {
     doc,
     y,
     "Why create a free account?",
-    "Save comparisons, follow products, and receive optional update notifications. Your account is also the entry point if you later want to record clinical experience with a tool you use.",
+    "Create a free account to record clinical experience with tools you use and contribute to the community knowledge base — helping peers across Europe make better-informed choices.",
     PRIMARY_DARK,
-    ["FREE", "NO ADS", "OPEN-SOURCE RUBRIC"]
+    ["FREE", "PEER-REVIEWED", "OPEN-SOURCE RUBRIC"]
   );
 
   y = quoteBand(doc, y, [
