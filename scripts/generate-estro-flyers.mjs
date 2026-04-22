@@ -248,8 +248,16 @@ function drawIcon(doc, name, x, y, size = 60) {
         .lineTo(cx + s * 0.18, y + s * 0.82)
         .lineTo(cx + s * 0.12, y + s * 0.55)
         .stroke();
-      // star
-      doc.fontSize(10).font("BodyBold").fillColor(PRIMARY_DEEP).text("★", cx - 4, y + s * 0.36);
+      // star burst (drawn lines)
+      doc.lineWidth(1.6).strokeColor(PRIMARY_DEEP);
+      const sx = cx, sy = y + s * 0.42;
+      for (let k = 0; k < 8; k++) {
+        const ang = (k * Math.PI) / 4;
+        doc
+          .moveTo(sx, sy)
+          .lineTo(sx + Math.cos(ang) * s * 0.07, sy + Math.sin(ang) * s * 0.07)
+          .stroke();
+      }
       break;
     }
     case "megaphone": {
