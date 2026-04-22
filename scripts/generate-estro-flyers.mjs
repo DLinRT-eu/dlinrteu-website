@@ -393,7 +393,7 @@ function pictogramRow(doc, y, items) {
 }
 
 function processStrip(doc, y, steps) {
-  const H = 118;
+  const H = 110;
   doc.roundedRect(MARGIN, y, PAGE_W - MARGIN * 2, H, 8).fill(BG_TINT);
   doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(11).text("How verification works", MARGIN + 14, y + 10);
 
@@ -609,7 +609,7 @@ async function buildCompaniesFlyer() {
 
   y = quoteBand(doc, y, [
     "Already used by clinicians and researchers across Europe and beyond.",
-    "Join the catalogue manufacturers are using to keep their public AI product information current and verified.",
+    "Join the catalogue to keep your AI product information current and verified.",
   ]);
 
   footerBand(doc, qrBottom, "Scan to register — it's free.", "dlinrt.eu/auth?role=company");
