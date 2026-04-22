@@ -476,10 +476,11 @@ function calloutBand(doc, y, tagline, sub) {
   return y + H + 12;
 }
 
-function infoBox(doc, y, title, body, accent = PRIMARY_DARK) {
-  const H = 78;
+function infoBox(doc, y, title, body, accent = PRIMARY_DARK, extras = []) {
+  const baseH = 78;
+  const extraH = extras.length ? 36 : 0;
+  const H = baseH + extraH;
   doc.roundedRect(MARGIN, y, PAGE_W - MARGIN * 2, H, 8).fill(BG_SOFT);
-  // left accent stripe
   doc.rect(MARGIN, y, 4, H).fill(accent);
   doc
     .fillColor(accent)
@@ -494,6 +495,32 @@ function infoBox(doc, y, title, body, accent = PRIMARY_DARK) {
       width: PAGE_W - MARGIN * 2 - 32,
       lineGap: 2,
     });
+  if (extras.length) {
+    let px = MARGIN + 16;
+    const py = y + baseH + 6;
+    for (const e of extras) {
+      px = pill(doc, px, py, e, PRIMARY_DARK);
+    }
+  }
+  return y + H + 12;
+}
+
+function quoteBand(doc, y, lines) {
+  const H = 70;
+  doc.roundedRect(MARGIN, y, PAGE_W - MARGIN * 2, H, 8).fill(BG_TINT);
+  doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(40).text("\u201C", MARGIN + 14, y + 4);
+  doc
+    .fillColor(ACCENT)
+    .font("BodyBold")
+    .fontSize(11)
+    .text(lines[0], MARGIN + 50, y + 14, { width: PAGE_W - MARGIN * 2 - 64, lineGap: 2 });
+  if (lines[1]) {
+    doc
+      .fillColor(MUTED)
+      .font("Body")
+      .fontSize(9.5)
+      .text(lines[1], MARGIN + 50, y + 40, { width: PAGE_W - MARGIN * 2 - 64, lineGap: 2 });
+  }
   return y + H + 12;
 }
 
