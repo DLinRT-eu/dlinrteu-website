@@ -154,7 +154,7 @@ function footer(doc, qrBuffer, qrLabel, qrUrl) {
     .fillColor(MUTED)
     .fontSize(8)
     .text(
-      "© DLinRT.eu — content licensed CC BY 4.0. Educational use only; not clinically validated.",
+      "© DLinRT.eu · CC BY 4.0 · Educational use only.",
       40,
       fy + 50,
       { width: 280 }
