@@ -16,6 +16,13 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = path.resolve(__dirname, "..", "public", "flyers");
+const FONT_REG = path.resolve(__dirname, "assets", "Inter-Regular.ttf");
+const FONT_BOLD = path.resolve(__dirname, "assets", "Inter-Bold.ttf");
+
+function registerFonts(doc) {
+  doc.registerFont("Body", FONT_REG);
+  doc.registerFont("BodyBold", FONT_BOLD);
+}
 
 // Brand
 const PRIMARY = "#5090D0";
