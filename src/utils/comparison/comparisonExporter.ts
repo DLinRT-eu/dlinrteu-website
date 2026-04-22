@@ -1,6 +1,7 @@
 import { ProductDetails } from "@/types/productDetails";
 import { exportToExcelMultiSheet } from "../excelExport";
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { parseAndGroupStructures, formatGroupedStructuresForPDF } from '@/utils/structureGrouping';
 
 export interface ComparisonRow {
@@ -89,340 +90,185 @@ export const exportComparisonToCSV = (products: ProductDetails[], comparisonData
   }
 };
 
+const isURL = (text: string): boolean => {
+  if (!text) return false;
+  const t = text.trim();
+  return t.startsWith('http://') || t.startsWith('https://') || /^www\./.test(t);
+};
+
+const normalizeUrl = (text: string): string => {
+  let url = text.trim();
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url.replace(/^www\./, '');
+  }
+  return url;
+};
+
+/**
+ * Render a side-by-side comparison table for the given product slice using autoTable.
+ */
+const renderComparisonTable = (
+  doc: jsPDF,
+  productsSlice: ProductDetails[],
+  comparisonData: ComparisonRow[],
+  productOffset: number,
+  startY: number
+): number => {
+  const head = [[
+    'Field',
+    ...productsSlice.map(p => `${p.name}\n${p.company || ''}`),
+  ]];
+
+  const body = comparisonData.map(row => {
+    const cells: string[] = [row.field];
+    productsSlice.forEach((product, i) => {
+      const realIndex = productOffset + i;
+      let value = row[`product_${realIndex}`] || 'N/A';
+
+      // Special structure handling
+      if (row.field === 'Supported Structures' && value !== 'N/A') {
+        const isAlreadyFormatted = typeof value === 'string' && value.includes(':');
+        if (!isAlreadyFormatted && product?.supportedStructures && Array.isArray(product.supportedStructures)) {
+          const { groups, ungrouped } = parseAndGroupStructures(product.supportedStructures);
+          value = formatGroupedStructuresForPDF(groups, ungrouped);
+        }
+      }
+      cells.push(String(value));
+    });
+    return cells;
+  });
+
+  // Column widths: field column fixed, product columns split remaining width
+  const pageWidth = doc.internal.pageSize.width;
+  const margin = 12;
+  const contentWidth = pageWidth - margin * 2;
+  const fieldColWidth = 38;
+  const productColWidth = (contentWidth - fieldColWidth) / productsSlice.length;
+
+  const columnStyles: Record<number, any> = {
+    0: { cellWidth: fieldColWidth, fontStyle: 'bold', fillColor: [245, 245, 248] },
+  };
+  productsSlice.forEach((_, i) => {
+    columnStyles[i + 1] = { cellWidth: productColWidth };
+  });
+
+  autoTable(doc, {
+    head,
+    body,
+    startY,
+    margin: { left: margin, right: margin },
+    styles: {
+      fontSize: 7.5,
+      cellPadding: 2,
+      overflow: 'linebreak',
+      valign: 'top',
+    },
+    headStyles: {
+      fillColor: [41, 76, 128],
+      textColor: 255,
+      fontSize: 8,
+      halign: 'center',
+    },
+    alternateRowStyles: { fillColor: [250, 250, 252] },
+    columnStyles,
+    didDrawCell: (data) => {
+      // Add clickable links for URL cells (Website / Product URL rows)
+      if (data.section !== 'body') return;
+      const fieldName = comparisonData[data.row.index]?.field;
+      if (fieldName !== 'Website' && fieldName !== 'Product URL') return;
+      if (data.column.index === 0) return;
+      const raw = String(data.cell.raw ?? '').trim();
+      if (!raw || raw === 'N/A' || !isURL(raw)) return;
+      try {
+        doc.link(data.cell.x, data.cell.y, data.cell.width, data.cell.height, {
+          url: normalizeUrl(raw),
+        });
+      } catch {
+        /* no-op */
+      }
+    },
+  });
+
+  return (doc as any).lastAutoTable.finalY as number;
+};
+
 export const exportComparisonToPDF = async (products: ProductDetails[], comparisonData: ComparisonRow[]) => {
   try {
     const doc = new jsPDF('landscape', 'mm', 'a4');
     const pageWidth = doc.internal.pageSize.width;
     const pageHeight = doc.internal.pageSize.height;
-    const margin = 15;
-    const contentWidth = pageWidth - (margin * 2);
-    
-    let yPosition = margin;
-    
-    // Helper function to check if we need a new page
-    const checkPageBreak = (requiredHeight: number) => {
-      if (yPosition + requiredHeight > pageHeight - margin) {
-        doc.addPage();
-        yPosition = margin;
-        return true;
-      }
-      return false;
-    };
+    const margin = 12;
 
-    // Helper function to detect if text is a URL
-    const isURL = (text: string): boolean => {
-      try {
-        new URL(text);
-        return true;
-      } catch {
-        return text.startsWith('http://') || text.startsWith('https://') || text.startsWith('www.');
-      }
-    };
-
-    // Helper function to wrap text and return lines with URL handling
-    const wrapText = (text: string, maxWidth: number): { lines: string[], isUrl: boolean[], originalUrl?: string } => {
-      const words = text.split(' ');
-      const lines: string[] = [];
-      const isUrl: boolean[] = [];
-      let currentLine = '';
-      
-      for (const word of words) {
-        // Check if this word is a URL that needs special handling
-        if (isURL(word) && doc.getTextWidth(word) > maxWidth) {
-          // Handle long URLs by breaking them at logical points
-          if (currentLine) {
-            lines.push(currentLine);
-            isUrl.push(false);
-            currentLine = '';
-          }
-          
-          // Split URL at logical breakpoints
-          const urlParts = splitUrlLogically(word, maxWidth);
-          urlParts.forEach((part, index) => {
-            lines.push(part);
-            isUrl.push(true);
-          });
-        } else {
-          const testLine = currentLine ? `${currentLine} ${word}` : word;
-          const lineWidth = doc.getTextWidth(testLine);
-          
-          if (lineWidth <= maxWidth) {
-            currentLine = testLine;
-          } else {
-            if (currentLine) {
-              lines.push(currentLine);
-              isUrl.push(isURL(currentLine));
-              currentLine = word;
-            } else {
-              // Word is too long, split it
-              if (isURL(word)) {
-                const urlParts = splitUrlLogically(word, maxWidth);
-                urlParts.forEach((part, index) => {
-                  lines.push(part);
-                  isUrl.push(true);
-                });
-              } else {
-                lines.push(word);
-                isUrl.push(false);
-              }
-            }
-          }
-        }
-      }
-      
-      if (currentLine) {
-        lines.push(currentLine);
-        isUrl.push(isURL(currentLine));
-      }
-      
-      return { lines, isUrl, originalUrl: text.trim() };
-    };
-
-    // Helper function to split URLs at logical breakpoints
-    const splitUrlLogically = (url: string, maxWidth: number): string[] => {
-      const parts: string[] = [];
-      let remaining = url;
-      
-      while (remaining.length > 0 && doc.getTextWidth(remaining) > maxWidth) {
-        let bestBreakpoint = -1;
-        let testLength = remaining.length;
-        
-        // Try to find the longest substring that fits
-        while (testLength > 0 && doc.getTextWidth(remaining.substring(0, testLength)) > maxWidth) {
-          testLength--;
-        }
-        
-        if (testLength === 0) {
-          // Fallback: take at least some characters
-          testLength = Math.max(1, Math.floor(remaining.length / 2));
-        }
-        
-        // Look for logical breakpoints within the fitting length
-        const fittingPart = remaining.substring(0, testLength);
-        const breakChars = ['/', '?', '&', '=', '-', '.', ':'];
-        
-        for (let i = fittingPart.length - 1; i >= Math.floor(testLength * 0.7); i--) {
-          if (breakChars.includes(fittingPart[i])) {
-            bestBreakpoint = i + 1; // Break after the character
-            break;
-          }
-        }
-        
-        // If no good breakpoint found, use the fitting length
-        const breakAt = bestBreakpoint > 0 ? bestBreakpoint : testLength;
-        const part = remaining.substring(0, breakAt);
-        
-        parts.push(part);
-        remaining = remaining.substring(breakAt);
-      }
-      
-      // Add any remaining part
-      if (remaining.length > 0) {
-        parts.push(remaining);
-      }
-      
-      return parts;
-    };
-
-    // Helper function to add clickable link
-    const addClickableLink = (text: string, x: number, y: number, width: number, height: number) => {
-      let url = text.trim();
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        url = 'https://' + url.replace(/^www\./, '');
-      }
-      try {
-        doc.link(x, y - height + 1, width, height, { url });
-      } catch (error) {
-        console.warn('Could not create link:', error);
-      }
-    };
-    
-    // Helper function to load company logos
-    const addLogo = async (logoUrl: string, x: number, y: number, width: number, height: number) => {
-      try {
-        const response = await fetch(logoUrl);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        
-        return new Promise<void>((resolve) => {
-          reader.onload = () => {
-            try {
-              doc.addImage(reader.result as string, 'JPEG', x, y, width, height);
-            } catch (error) {
-              console.warn('Could not add logo:', error);
-            }
-            resolve();
-          };
-          reader.onerror = () => resolve();
-          reader.readAsDataURL(blob);
-        });
-      } catch (error) {
-        console.warn('Could not load logo:', error);
-      }
-    };
-    
     // Title
-    doc.setFontSize(20);
+    doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
-    doc.text('Product Comparison Report', margin, yPosition);
-    yPosition += 10;
-    
+    doc.text('Product Comparison Report', margin, margin + 5);
+
     // Subtitle
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Comparing ${products.length} products`, margin, yPosition);
-    yPosition += 15;
-    
-    // Calculate proper column width ensuring all columns fit (max 5 products)
-    const maxProducts = Math.min(products.length, 5);
-    const fieldColumnWidth = 45; // Fixed width for field column
-    const availableWidth = contentWidth - fieldColumnWidth; // No gap needed
-    const productColumnWidth = availableWidth / maxProducts;
-    
-    // Product headers with logos
-    const headerStartX = margin + fieldColumnWidth;
-    
     doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text(
+      `Comparing ${products.length} product${products.length === 1 ? '' : 's'}  •  Generated ${new Date().toLocaleDateString()}`,
+      margin,
+      margin + 11
+    );
+
+    // Product summary block (one line per product)
+    let yPosition = margin + 17;
+    doc.setFontSize(9);
     doc.setFont('helvetica', 'bold');
-    
-    for (let i = 0; i < products.length; i++) {
-      const product = products[i];
-      const currentX = headerStartX + (i * productColumnWidth);
-      
-      // Add logo if available - ensure it fits within column bounds
-      if (product.company) {
-        const logoUrl = `/logos/${product.company.toLowerCase().replace(/\s+/g, '-')}.png`;
-        try {
-          // Scale logo based on column width and ensure it fits
-          const logoSize = Math.min(12, productColumnWidth * 0.3);
-          const centeredLogoX = currentX + (productColumnWidth / 2) - (logoSize / 2);
-          
-          await addLogo(logoUrl, centeredLogoX, yPosition - 5, logoSize, logoSize * 0.7);
-        } catch (error) {
-          // Logo loading failed, continue without logo
-        }
-      }
-      
-      // Product name with text wrapping - centered in column
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      const productNameWrapped = wrapText(product.name, productColumnWidth - 4);
-      productNameWrapped.lines.forEach((line, lineIndex) => {
-        const textWidth = doc.getTextWidth(line);
-        const centeredX = currentX + (productColumnWidth / 2) - (textWidth / 2);
-        doc.text(line, centeredX, yPosition + 8 + (lineIndex * 3));
-      });
-      
-      // Company name - centered in column
-      doc.setFontSize(7);
-      doc.setFont('helvetica', 'normal');
-      const companyNameWrapped = wrapText(product.company, productColumnWidth - 4);
-      const companyStartY = yPosition + 8 + (productNameWrapped.lines.length * 3) + 2;
-      companyNameWrapped.lines.forEach((line, lineIndex) => {
-        const textWidth = doc.getTextWidth(line);
-        const centeredX = currentX + (productColumnWidth / 2) - (textWidth / 2);
-        doc.text(line, centeredX, companyStartY + (lineIndex * 2.5));
-      });
-    }
-    
-    yPosition += Math.max(30, 8 + (3 * 3) + 8); // Increased spacing for better layout
-    
-    // Table content
-    doc.setFontSize(8);
-    
-    comparisonData.forEach((row) => {
-      // Calculate max height needed for this row
-      let maxRowHeight = 4;
-      
-      // Check field name height
-      doc.setFont('helvetica', 'bold');
-      const fieldWrapped = wrapText(row.field, fieldColumnWidth - 2);
-      maxRowHeight = Math.max(maxRowHeight, fieldWrapped.lines.length * 3);
-      
-      // Check product values height
-      doc.setFont('helvetica', 'normal');
-      for (let i = 0; i < products.length; i++) {
-        const value = row[`product_${i}`] || 'N/A';
-        const valueWrapped = wrapText(String(value), productColumnWidth - 2);
-        maxRowHeight = Math.max(maxRowHeight, valueWrapped.lines.length * 3);
-      }
-      
-      checkPageBreak(maxRowHeight + 4); // Added more spacing
-      
-      // Field name
-      doc.setFont('helvetica', 'bold');
-      fieldWrapped.lines.forEach((line, lineIndex) => {
-        doc.text(line, margin, yPosition + (lineIndex * 3));
-      });
-      
-      // Values for each product
-      doc.setFont('helvetica', 'normal');
-      
-      for (let i = 0; i < products.length; i++) {
-        let value = row[`product_${i}`] || 'N/A';
-        const currentX = headerStartX + (i * productColumnWidth);
-        
-        // Ensure we don't go beyond page boundaries
-        if (currentX + productColumnWidth > pageWidth - margin) {
-          continue; // Skip if it would overflow
-        }
-        
-        // Special handling for supported structures
-        if (row.field === 'Supported Structures' && value !== 'N/A') {
-          // Check if value is already formatted (contains model names with colons)
-          const isAlreadyFormatted = typeof value === 'string' && value.includes(':');
-          
-          if (!isAlreadyFormatted) {
-            // Only re-process if the value isn't already formatted
-            const product = products[i];
-            if (product?.supportedStructures && Array.isArray(product.supportedStructures)) {
-              const { groups, ungrouped } = parseAndGroupStructures(product.supportedStructures);
-              value = formatGroupedStructuresForPDF(groups, ungrouped);
-            }
-          }
-        }
-        
-        const valueWrapped = wrapText(String(value), productColumnWidth - 2);
-        valueWrapped.lines.forEach((line, lineIndex) => {
-          const lineY = yPosition + (lineIndex * 3);
-          
-          // Add clickable link if it's a URL - use original URL for all segments
-          if (valueWrapped.isUrl[lineIndex]) {
-            doc.setTextColor(0, 0, 255); // Blue color for URLs
-            doc.text(line, currentX, lineY);
-            const lineWidth = doc.getTextWidth(line);
-            // Use the original full URL for the link, not just the segment
-            const linkUrl = valueWrapped.originalUrl || line;
-            addClickableLink(linkUrl, currentX, lineY, lineWidth, 3);
-            doc.setTextColor(0, 0, 0); // Reset to black
-          } else {
-            doc.text(line, currentX, lineY);
-          }
-        });
-      }
-      
-      yPosition += maxRowHeight + 4; // Increased spacing between rows
-      
-      // Add separator line every 5 rows with more spacing
-      if (comparisonData.indexOf(row) % 5 === 4) {
-        doc.setDrawColor(200, 200, 200);
-        doc.line(margin, yPosition + 2, pageWidth - margin, yPosition + 2);
-        yPosition += 6; // More space after separator
-      }
+    doc.text('Products in this report:', margin, yPosition);
+    yPosition += 4;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    products.forEach((p, idx) => {
+      const summary = [
+        `${idx + 1}. ${p.name}`,
+        p.company,
+        p.version ? `v${p.version}` : null,
+        p.certification,
+      ].filter(Boolean).join(' • ');
+      doc.text(summary, margin + 2, yPosition);
+      yPosition += 4;
     });
-    
-    // Footer
+    yPosition += 3;
+
+    // Split products into chunks of max 3 for readability on landscape A4
+    const CHUNK_SIZE = 3;
+    if (products.length <= CHUNK_SIZE) {
+      renderComparisonTable(doc, products, comparisonData, 0, yPosition);
+    } else {
+      let currentY = yPosition;
+      for (let i = 0; i < products.length; i += CHUNK_SIZE) {
+        const slice = products.slice(i, i + CHUNK_SIZE);
+        if (i > 0) {
+          doc.addPage();
+          currentY = margin;
+          doc.setFontSize(11);
+          doc.setFont('helvetica', 'bold');
+          doc.text(
+            `Product Comparison — Group ${Math.floor(i / CHUNK_SIZE) + 1} of ${Math.ceil(products.length / CHUNK_SIZE)}`,
+            margin,
+            currentY + 5
+          );
+          currentY += 10;
+        }
+        currentY = renderComparisonTable(doc, slice, comparisonData, i, currentY);
+      }
+    }
+
+    // Footer with page numbers
     const totalPages = doc.internal.pages.length - 1;
     for (let i = 1; i <= totalPages; i++) {
       doc.setPage(i);
       doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin - 20, pageHeight - 10);
-      doc.text('DLinRT.eu Product Comparison', margin, pageHeight - 10);
-      doc.text(`Generated: ${new Date().toLocaleDateString()}`, margin, pageHeight - 5);
+      doc.setTextColor(120, 120, 120);
+      doc.text('DLinRT.eu Product Comparison', margin, pageHeight - 6);
+      doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin - 20, pageHeight - 6);
+      doc.setTextColor(0, 0, 0);
     }
-    
-    // Save the PDF
+
     const fileName = createSafeFileName(`Product_Comparison_${products.map(p => p.name).join('_vs_')}`, 'pdf');
     doc.save(fileName);
   } catch (error) {

@@ -318,9 +318,13 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
   const comparisonData = createComparisonData();
   const columns = createColumns();
 
+  // Force min-width so columns don't squeeze; allow horizontal scroll
+  const tableMinWidth = 200 + products.length * 240;
+  const tableWrapperStyle = { minWidth: `${tableMinWidth}px` };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden" aria-describedby="comparison-description">
+      <DialogContent className="max-w-[95vw] max-h-[90vh] overflow-hidden" aria-describedby="comparison-description">
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <span>Product Comparison</span>
@@ -346,7 +350,7 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
                     disabled={isExporting}
                   >
                     <Download className="h-4 w-4" />
-                    {isExporting ? 'Exporting...' : 'Export'}
+                    {isExporting ? 'Exporting...' : 'Export Report'}
                   </Button>
                 </>
               )}
@@ -365,28 +369,34 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
             </TabsList>
             
             <TabsContent value="general" className="mt-0">
-              <div className="overflow-auto max-h-[60vh]">
-                <DataTable
-                  columns={columns}
-                  data={comparisonData}
-                  defaultSort={[]}
-                />
+              <div className="overflow-x-auto overflow-y-auto max-h-[60vh] max-w-full">
+                <div style={tableWrapperStyle}>
+                  <DataTable
+                    columns={columns}
+                    data={comparisonData}
+                    defaultSort={[]}
+                  />
+                </div>
               </div>
             </TabsContent>
             
             <TabsContent value="structures" className="mt-0">
-              <div className="max-h-[60vh] overflow-auto">
-                <StructureComparisonTable products={products} />
+              <div className="overflow-x-auto overflow-y-auto max-h-[60vh] max-w-full">
+                <div style={tableWrapperStyle}>
+                  <StructureComparisonTable products={products} />
+                </div>
               </div>
             </TabsContent>
           </Tabs>
         ) : (
-          <div className="overflow-auto max-h-[70vh]">
-            <DataTable
-              columns={columns}
-              data={comparisonData}
-              defaultSort={[]}
-            />
+          <div className="overflow-x-auto overflow-y-auto max-h-[70vh] max-w-full">
+            <div style={tableWrapperStyle}>
+              <DataTable
+                columns={columns}
+                data={comparisonData}
+                defaultSort={[]}
+              />
+            </div>
           </div>
         )}
         
@@ -394,6 +404,7 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
           <p className="text-sm text-muted-foreground">
             Comparing {products.length} products
             {hasStructures && activeTab === 'structures' && ' • Structure comparison view'}
+            {activeTab === 'general' && ' • Export as Excel, CSV, or PDF report'}
           </p>
           <Button variant="outline" onClick={onClose}>
             Close
