@@ -152,7 +152,7 @@ export const transformStructureData = (
   return Object.entries(structureCounts)
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value)
-    .slice(0, 15); // Take top 15 structures for readability
+    .slice(0, 12); // Top 12 structures for slide readability
 };
 
 /**
@@ -166,7 +166,9 @@ export const transformStructureTypeData = (
     return [];
   }
 
-  return filteredProducts.map(product => {
+  const acProducts = filteredProducts.filter(p => matchesTask(p, "Auto-Contouring"));
+
+  return acProducts.map(product => {
     // Convert complex structures to strings for counting
     const structureList: string[] = [];
     if (product.supportedStructures) {
@@ -188,6 +190,7 @@ export const transformStructureTypeData = (
       ...counts
     };
   })
+  .filter(r => r.total > 0)
   .sort((a, b) => b.total - a.total); // Sort by total number of structures
 };
 

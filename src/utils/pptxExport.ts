@@ -1006,48 +1006,95 @@ export class PptxExporter {
   private addStructureAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
     if (this.addChartImageSlide(slide, data.chartImages?.structure, "Auto-Contouring: Supported Structures")) return;
-    
+
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     slide.addText("Auto-Contouring: Supported Structures", {
-      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 0.7,
       fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    const topStructures = data.structureData.slice(0, 15);
+
+    const structures = data.structureData || [];
+    if (structures.length === 0) {
+      slide.addText("No supported-structure data available.", {
+        x: this.layout.margin.left, y: 3, w: contentWidth, h: 1,
+        fontSize: 18, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+      });
+      return;
+    }
+
+    const topStructures = structures.slice(0, 12);
+    slide.addText(`Top ${topStructures.length} of ${structures.length} structures across Auto-Contouring products`, {
+      x: this.layout.margin.left, y: 0.95, w: contentWidth, h: 0.4,
+      fontSize: 14, color: this.brandColors.secondary, italic: true, fontFace: "Arial"
+    });
+
     const chartData = [{
-      name: "Structures Supported",
+      name: "Products supporting structure",
       labels: topStructures.map(item => item.name),
       values: topStructures.map(item => item.value)
     }];
     slide.addChart("bar", chartData, {
-      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      x: this.layout.margin.left, y: 1.5, w: contentWidth, h: 5.3,
+      barDir: "bar",
       showTitle: false, showLegend: false, showValue: true,
-      chartColors: [this.brandColors.primaryLight]
+      chartColors: [this.brandColors.primaryLight],
+      catAxisLabelFontSize: 10,
+      valAxisLabelFontSize: 10,
     });
   }
 
   private addStructureTypeAnalysisSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
     if (this.addChartImageSlide(slide, data.chartImages?.structureType, "Auto-Contouring: Structure Type Distribution")) return;
-    
+
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
     slide.addText("Auto-Contouring: Structure Type Distribution", {
-      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 0.7,
       fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });
-    const totalOARs = data.structureTypeData.reduce((sum, item) => sum + item.OARs, 0);
-    const totalTargets = data.structureTypeData.reduce((sum, item) => sum + item.Targets, 0);
-    const totalElective = data.structureTypeData.reduce((sum, item) => sum + item.Elective, 0);
-    const chartData = [{
-      name: "Structure Types",
-      labels: ["OARs", "Targets", "Elective"],
-      values: [totalOARs, totalTargets, totalElective]
-    }];
-    slide.addChart("pie", chartData, {
-      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
-      showTitle: false, showLegend: true, legendPos: "r",
-      chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B"]
+
+    const rows = data.structureTypeData || [];
+    const totalOARs = rows.reduce((sum, item) => sum + item.OARs, 0);
+    const totalTargets = rows.reduce((sum, item) => sum + item.Targets, 0);
+    const totalElective = rows.reduce((sum, item) => sum + item.Elective, 0);
+
+    if (rows.length === 0 || (totalOARs + totalTargets + totalElective) === 0) {
+      slide.addText("No structure-type data available.", {
+        x: this.layout.margin.left, y: 3, w: contentWidth, h: 1,
+        fontSize: 18, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+      });
+      return;
+    }
+
+    slide.addText(
+      `${totalOARs} OARs · ${totalTargets} Targets · ${totalElective} Elective across ${rows.length} products`,
+      {
+        x: this.layout.margin.left, y: 0.95, w: contentWidth, h: 0.4,
+        fontSize: 14, color: this.brandColors.secondary, italic: true, fontFace: "Arial"
+      }
+    );
+
+    // Cap to top 15 products to keep x-axis readable
+    const topRows = rows.slice(0, 15);
+    const labels = topRows.map(r => r.productName);
+    const stackedData = [
+      { name: "OARs", labels, values: topRows.map(r => r.OARs) },
+      { name: "Targets", labels, values: topRows.map(r => r.Targets) },
+      { name: "Elective", labels, values: topRows.map(r => r.Elective) },
+    ];
+
+    slide.addChart("bar", stackedData, {
+      x: this.layout.margin.left, y: 1.5, w: contentWidth, h: 5.3,
+      barDir: "col",
+      barGrouping: "stacked",
+      showTitle: false,
+      showLegend: true, legendPos: "b",
+      chartColors: ["#3b82f6", "#ef4444", "#8b5cf6"],
+      catAxisLabelFontSize: 9,
+      catAxisLabelRotate: -35,
+      valAxisLabelFontSize: 10,
     });
   }
 

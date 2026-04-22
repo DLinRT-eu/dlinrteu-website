@@ -370,8 +370,8 @@ class DataService {
       };
     }).filter(item => item.value > 0).sort((a, b) => b.value - a.value);
     
-    const structureData = transformStructureData(products, "models");
-    const structureTypeData = transformStructureTypeData(products, "models");
+    const structureData = transformStructureData(products, "Auto-Contouring");
+    const structureTypeData = transformStructureTypeData(products, "Auto-Contouring");
     
     // Company logos
     const companyLogos = companies.map(company => ({
