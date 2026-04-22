@@ -647,8 +647,8 @@ export class PptxExporter {
       console.warn('Failed to add chart:', error);
     }
     
-    // Add table with details - better positioned
-    const totalProducts = data.totalProducts || validCategoryData.reduce((sum, item) => sum + item.count, 0);
+    // Add table with details - use sum of valid categories so percentages add to 100%
+    const totalProducts = validCategoryData.reduce((sum, item) => sum + item.count, 0);
     const tableData = [
       [
         { text: "Category", options: { bold: true, fontSize: 14 } },
@@ -1052,15 +1052,49 @@ export class PptxExporter {
   }
 
   private addCertificationChartSlide(data: PresentationData) {
-    if (!data.chartImages?.certification) return;
     const slide = this.pptx.addSlide();
-    this.addChartImageSlide(slide, data.chartImages.certification, "Regulatory Certification Distribution");
+    if (this.addChartImageSlide(slide, data.chartImages?.certification, "Regulatory Certification Distribution")) return;
+
+    const contentWidth = this.getContentWidth();
+    slide.background = { color: this.brandColors.background };
+    slide.addText("Regulatory Certification Distribution", {
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
+    });
+
+    const certData = (data.certificationBreakdown || []).filter(c => c && c.name && c.count > 0);
+    if (certData.length === 0) {
+      slide.addText("Certification chart unavailable", {
+        x: this.layout.margin.left, y: 3, w: contentWidth, h: 1,
+        fontSize: 18, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+      });
+      return;
+    }
+    slide.addChart("bar", [{
+      name: "Certifications",
+      labels: certData.map(c => c.name),
+      values: certData.map(c => c.count),
+    }], {
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
+      chartColors: [this.brandColors.primaryLight]
+    });
   }
 
   private addEvidenceImpactSlide(data: PresentationData) {
-    if (!data.chartImages?.evidenceImpact) return;
     const slide = this.pptx.addSlide();
-    this.addChartImageSlide(slide, data.chartImages.evidenceImpact, "Evidence Rigor vs Clinical Impact");
+    if (this.addChartImageSlide(slide, data.chartImages?.evidenceImpact, "Evidence Rigor vs Clinical Impact")) return;
+
+    const contentWidth = this.getContentWidth();
+    slide.background = { color: this.brandColors.background };
+    slide.addText("Evidence Rigor vs Clinical Impact", {
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
+    });
+    slide.addText("Detailed evidence-impact matrix is available on the live dashboard. Chart unavailable in this export.", {
+      x: this.layout.margin.left, y: 3, w: contentWidth, h: 1.5,
+      fontSize: 16, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+    });
   }
 
    private addContactEngagementSlide(data: PresentationData) {
@@ -1292,14 +1326,12 @@ export class PptxExporter {
         throw new Error('No presentation data provided');
       }
 
-      // Section 1: Introduction (async for image loading)
+      // Section 1: Intro
       await this.addTitleSlide();
       this.addMissionVisionSlide();
       this.addOverviewSlide(data);
-      await this.addCompanyLogosSlide(data);
-      await this.addCompanyLogosByTaskSlides(data);
-      
-      // Section 2: Analytics & Charts
+
+      // Section 2: Analytics & Charts (front-loaded for narrative flow)
       this.addCategoryBreakdownSlide(data);
       this.addTaskDistributionSlide(data);
       this.addCompanyDistributionSlide(data);
@@ -1309,8 +1341,12 @@ export class PptxExporter {
       this.addEvidenceImpactSlide(data);
       this.addStructureAnalysisSlide(data);
       this.addStructureTypeAnalysisSlide(data);
-      
-      // Section 3: Engagement & Closing
+
+      // Section 3: Per-task deep dive
+      await this.addCompanyLogosSlide(data);
+      await this.addCompanyLogosByTaskSlides(data);
+
+      // Section 4: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
       this.addContactEngagementSlide(data);
       this.addGovernanceSlide();
