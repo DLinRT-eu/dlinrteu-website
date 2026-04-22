@@ -152,7 +152,7 @@ export const transformStructureData = (
   return Object.entries(structureCounts)
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value)
-    .slice(0, 15); // Take top 15 structures for readability
+    .slice(0, 12); // Top 12 structures for slide readability
 };
 
 /**
