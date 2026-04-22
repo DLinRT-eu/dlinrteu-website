@@ -39,26 +39,20 @@ export default function Presentation() {
     navigate("/presentation/demo");
   };
 
-  const pptxSlidePreviewData = [
-    { title: "Title Slide", description: "DLinRT.eu branding and introduction", icon: FileText },
-    { title: "Mission & Vision", description: "Platform purpose and strategic direction", icon: Globe },
-    { title: "Platform Overview", description: `${presentationData.totalCompanies} companies, ${presentationData.totalProducts} products`, icon: BarChart3 },
-    { title: "Partner Companies", description: `Grid of ${presentationData.companyLogos.length} company logos`, icon: Building2 },
-    { title: "AI Solution Categories", description: "Category breakdown pie chart", icon: Package },
-    { title: "Task Distribution", description: "Products by clinical task", icon: BarChart3 },
-    { title: "Company Distribution", description: "Top companies by product count", icon: Building2 },
-    { title: "Location Coverage", description: "Anatomical locations analysis", icon: Globe },
-    { title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", icon: BarChart3 },
-    { title: "Certification", description: "Regulatory certification breakdown", icon: FileText },
-    { title: "Evidence & Impact", description: "E/I scoring scatter chart", icon: BarChart3 },
-    { title: "Structure Analysis", description: "Auto-contouring structures supported", icon: Package },
-    { title: "Structure Types", description: "OARs, Targets, Elective distribution", icon: BarChart3 },
-    { title: "Product Details", description: "Per-category product grids", icon: Package },
-    { title: "Platform Analytics", description: `${presentationData.totalProducts} products tracked`, icon: BarChart3 },
-    { title: "Get Involved", description: "Contact and community engagement", icon: Users },
-    { title: "Governance & Values", description: "Core values and principles", icon: FileText },
-    { title: "Disclaimer", description: "CC BY 4.0 licensing and attribution", icon: FileText },
-  ];
+  const pptxSlidePlan = getPptxSlidePlan(presentationData);
+  const sectionOrder: Array<'Intro' | 'Analytics' | 'Deep Dive' | 'Closing'> = ['Intro', 'Analytics', 'Deep Dive', 'Closing'];
+  const sectionIcons: Record<string, typeof FileText> = {
+    Intro: FileText,
+    Analytics: BarChart3,
+    'Deep Dive': Package,
+    Closing: Users,
+  };
+  const slidesBySection = sectionOrder.map(section => ({
+    section,
+    slides: pptxSlidePlan
+      .map((slide, index) => ({ ...slide, number: index + 1 }))
+      .filter(s => s.section === section),
+  }));
 
   const liveDemoSlidePreviewData = [
     { title: "Welcome", description: "Platform introduction with stats", icon: PresentationIcon },
