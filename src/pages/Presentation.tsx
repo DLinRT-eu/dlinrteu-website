@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Download, FileText, Users, Package, BarChart3, Building2, Globe, Presentation as PresentationIcon, Play, MonitorPlay } from "lucide-react";
-import { exportToPptx } from "@/utils/pptxExport";
+import { exportToPptx, getPptxSlidePlan } from "@/utils/pptxExport";
 import dataService from "@/services/DataService";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
