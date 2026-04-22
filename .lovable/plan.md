@@ -1,47 +1,95 @@
 
 
-## Plan: Tone down flyer promises + fix overlapping text
+## Plan: Fix slide 27 + sync the PowerPoint preview with the real export
 
-Two narrow fixes to `scripts/generate-estro-flyers.mjs`. No new app features, no DB changes, no Presentation page changes.
+### Root cause
 
-### 1. Remove unbuilt features from flyer copy
+`src/utils/pptxExport.ts` generates a much larger deck than the 18-item preview in `src/pages/Presentation.tsx` shows, because `addCompanyLogosByTaskSlides()` emits **two-or-more slides per task** (one logo grid + one or more product tables). With ~11 tasks and Auto-Contouring spanning multiple table pages, the actual export is ~40–45 slides — not 18. As a result:
 
-The current flyer text implies "save comparisons", "follow products", and "update notifications" already exist. Those features aren't built yet, so revise the relevant copy to only mention what the platform actually does today:
+- Slide numbers shown in the UI preview don't match the exported file (slide 27 in the export is roughly the "AI Solution Categories" pie chart, but the preview labels slide 5 as that — so users opening the file see wrong content where they expected something else).
+- The preview is missing entries for: every per-task logo slide, every per-task product table slide (and their multi-page splits), and the category/breakdown ordering after them.
 
-- **Community flyer** — replace any "save / follow / get notified" phrasing with neutral, currently-true wording:
-  - Account benefit line becomes: *"Create a free account to record clinical experience with tools you use and contribute to the community knowledge base."*
-  - Drop bullet/pictogram captions referring to saving comparisons, following products, or notifications.
-  - Keep the existing pictograms for **Search & filter**, **Compare side-by-side**, **Inspect evidence**, **Track regulatory** — all already shipped.
-- **Companies flyer** — no feature claims to remove; only verify nothing references "follow" / "notifications" in any caption.
+The slide content itself (`addCategoryBreakdownSlide`) renders correctly — the bug is preview/order mismatch, not chart data.
 
-### 2. Fix overlapping text in PDF layout
+### Fix
 
-Inspect both flyers (convert with `pdftoppm -jpeg -r 150` and view each page) and identify where text intersects boxes. Likely culprits based on the current layout:
-- Pictogram captions wrapping into the next column because the per-column width is too tight for the caption font size.
-- The callout band tagline running over its rounded background when the supporting sentence wraps to a second line.
-- Footer CTA text overlapping the QR code area.
+#### 1. Build the preview from the real export plan, not a hand-written list
 
-Fixes inside `scripts/generate-estro-flyers.mjs`:
-- Reduce caption font size by 1pt and add `width:` clamp + `lineGap` so `doc.text` wraps inside its own column.
-- Increase the callout band's height (and top padding) to accommodate a 2-line tagline; compute height from measured text instead of a fixed value.
-- Reserve a fixed right-side QR slot in the footer (e.g. 90pt) and clamp the CTA text width to `bandWidth - qrSlot - gap`.
-- Re-check the eligibility / info box: clamp inner text width to box width minus 2× inner padding.
-- Keep all colors, fonts (Roboto), pictograms, and section order unchanged.
+Refactor so a single source of truth describes the deck. In `src/utils/pptxExport.ts`, add an exported helper:
 
-### 3. Regenerate + QA
+```ts
+export function getPptxSlidePlan(data: PresentationData): Array<{
+  title: string; description: string; section: string;
+}>
+```
 
-- Run `node scripts/generate-estro-flyers.mjs` to rewrite both PDFs in `public/flyers/`.
-- Convert each PDF to JPG and visually inspect for: any text crossing a box edge, captions overflowing column, footer overlap, and remaining mentions of save/follow/notify. Iterate until clean.
+It returns the exact, ordered list of slides that `generatePresentation` will emit, including:
+- Per-task logo slide (`"<Task> Companies"`)
+- Per-task product table slide(s) with `(p/N)` page suffix when products > 12
+
+`Presentation.tsx` then calls `getPptxSlidePlan(presentationData)` instead of the hard-coded `pptxSlidePreviewData` array. Every slide chip shows the real title and number, so slide 27 in the UI is slide 27 in the file.
+
+#### 2. Verify all referenced slide builders actually run and are complete
+
+Audit each builder called from `generatePresentation` (lines 1289–1326) against its preview entry. Confirmed gaps to address:
+
+- **Mission & Vision**: text only mentions Mission + Vision; preview says "strategic direction" — keep as is, fine.
+- **AI Solution Categories** (the slide the user flagged): runs `addCategoryBreakdownSlide`. Confirm `data.categoryBreakdown` is populated (it is — derived from `getAllProducts().map(p => p.category)`). Add a guard so any category with `count === 0` is filtered out *before* the percentage calculation (`Math.round(item.count / totalProducts * 100)` currently uses `data.totalProducts` rather than the sum of valid categories — use the validated total to avoid percentages that don't add to 100%).
+- **Structure Analysis / Structure Type slides**: builders exist but only render when `chartImages` is provided. Add a fallback message or native chart so the slide isn't blank when chart capture fails. Same for `Certification` and `Evidence & Impact` slides (currently `if (!data.chartImages?.x) return;` silently skips them — making the deck shorter than the preview promises). Replace early returns with a fallback "chart unavailable" placeholder *or* drop the slide from the plan when the image is missing (and reflect that in `getPptxSlidePlan`).
+- **Per-task table slides**: confirm `anatomy`, `ceStatus`, `fdaStatus` columns render real values (already wired in `DataService.getPresentationData` lines 421–431) — no change needed.
+- **Footer**: `addSlideFooter` runs over `(this.pptx as any)._slides`. Keep as is but assert `allSlides.length > 0` and log a warning if zero (defensive).
+
+#### 3. Reorder for narrative flow
+
+Current order puts all per-task logo+table slides (~30 slides) *before* the Category Breakdown / Task Distribution charts, which is why the user only reaches "AI Solution Categories" at slide 27. Reorder to:
+
+```text
+1.  Title
+2.  Mission & Vision
+3.  Platform Overview
+4.  AI Solution Categories          ← chart up front
+5.  Task Distribution
+6.  Company Distribution
+7.  Location Coverage
+8.  Imaging Modalities
+9.  Certification
+10. Evidence & Impact
+11. Structure Analysis
+12. Structure Types
+13. Partner Companies (logo wall)
+14… Per-task deep-dive: <Task> Companies + <Task> Products (1/N) …
+N-2. Platform Content Summary
+N-1. Get Involved
+N.   Governance & Values
+N+1. Disclaimer
+```
+
+This makes slide 27 sit inside the per-task deep-dive section (predictable) and means the high-level analytics show up in the first 12 slides where conference audiences look.
+
+#### 4. Update `Presentation.tsx`
+
+- Replace `pptxSlidePreviewData` with `getPptxSlidePlan(presentationData)`.
+- Update the card title from `"PowerPoint Slides (18 slides)"` to `"PowerPoint Slides ({plan.length} slides)"` so the count is dynamic.
+- Group the chips by `section` (Intro / Analytics / Per-task deep dive / Closing) with small headings, so a 40-slide list is still scannable.
+- Live-demo preview list (`liveDemoSlidePreviewData`) is already accurate against `LiveDemoMode.tsx` (12 slides) — leave untouched.
+
+#### 5. QA
+
+- Run the export in preview, open the .pptx, and verify:
+  - Total slide count matches the UI preview count.
+  - Slide 27 shows what the UI chip #27 says.
+  - Category percentages sum to 100%.
+  - No silently-skipped slides (Certification, Evidence & Impact, Structure charts always present, with a placeholder if no chart image was captured).
+  - Footer appears on every slide.
 
 ### Files touched
 
-- `scripts/generate-estro-flyers.mjs` — copy edits + width/height clamps.
-- `public/flyers/DLinRT_Companies_ESTRO2026.pdf` — regenerated.
-- `public/flyers/DLinRT_Community_ESTRO2026.pdf` — regenerated.
+- `src/utils/pptxExport.ts` — add `getPptxSlidePlan`, reorder `generatePresentation`, fix percentage divisor in `addCategoryBreakdownSlide`, add fallbacks in `addCertificationChartSlide` / `addEvidenceImpactSlide` / `addStructureAnalysisSlide` / `addStructureTypeAnalysisSlide`.
+- `src/pages/Presentation.tsx` — consume `getPptxSlidePlan`, render grouped chips, dynamic count.
 
 ### Out of scope
 
-- Building save-comparisons, follow-products, or product-update notification features (deferred).
-- Changes to `src/pages/Presentation.tsx` card copy (already neutral).
-- Layout rework beyond the overflow fixes.
+- Live demo mode (already correct).
+- Chart styling/colors, branding, or layout rework beyond the percentage-divisor and fallback fixes.
+- Changes to `DataService.getPresentationData` data shape.
 
