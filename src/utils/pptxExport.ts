@@ -647,8 +647,8 @@ export class PptxExporter {
       console.warn('Failed to add chart:', error);
     }
     
-    // Add table with details - better positioned
-    const totalProducts = data.totalProducts || validCategoryData.reduce((sum, item) => sum + item.count, 0);
+    // Add table with details - use sum of valid categories so percentages add to 100%
+    const totalProducts = validCategoryData.reduce((sum, item) => sum + item.count, 0);
     const tableData = [
       [
         { text: "Category", options: { bold: true, fontSize: 14 } },
@@ -1052,15 +1052,49 @@ export class PptxExporter {
   }
 
   private addCertificationChartSlide(data: PresentationData) {
-    if (!data.chartImages?.certification) return;
     const slide = this.pptx.addSlide();
-    this.addChartImageSlide(slide, data.chartImages.certification, "Regulatory Certification Distribution");
+    if (this.addChartImageSlide(slide, data.chartImages?.certification, "Regulatory Certification Distribution")) return;
+
+    const contentWidth = this.getContentWidth();
+    slide.background = { color: this.brandColors.background };
+    slide.addText("Regulatory Certification Distribution", {
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
+    });
+
+    const certData = (data.certificationBreakdown || []).filter(c => c && c.name && c.count > 0);
+    if (certData.length === 0) {
+      slide.addText("Certification chart unavailable", {
+        x: this.layout.margin.left, y: 3, w: contentWidth, h: 1,
+        fontSize: 18, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+      });
+      return;
+    }
+    slide.addChart("bar", [{
+      name: "Certifications",
+      labels: certData.map(c => c.name),
+      values: certData.map(c => c.count),
+    }], {
+      x: this.layout.margin.left, y: 1.6, w: contentWidth, h: 5.2,
+      showTitle: false, showLegend: false, showValue: true,
+      chartColors: [this.brandColors.primaryLight]
+    });
   }
 
   private addEvidenceImpactSlide(data: PresentationData) {
-    if (!data.chartImages?.evidenceImpact) return;
     const slide = this.pptx.addSlide();
-    this.addChartImageSlide(slide, data.chartImages.evidenceImpact, "Evidence Rigor vs Clinical Impact");
+    if (this.addChartImageSlide(slide, data.chartImages?.evidenceImpact, "Evidence Rigor vs Clinical Impact")) return;
+
+    const contentWidth = this.getContentWidth();
+    slide.background = { color: this.brandColors.background };
+    slide.addText("Evidence Rigor vs Clinical Impact", {
+      x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
+      fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
+    });
+    slide.addText("Detailed evidence-impact matrix is available on the live dashboard. Chart unavailable in this export.", {
+      x: this.layout.margin.left, y: 3, w: contentWidth, h: 1.5,
+      fontSize: 16, color: this.brandColors.secondary, align: "center", fontFace: "Arial"
+    });
   }
 
    private addContactEngagementSlide(data: PresentationData) {
@@ -1292,14 +1326,12 @@ export class PptxExporter {
         throw new Error('No presentation data provided');
       }
 
-      // Section 1: Introduction (async for image loading)
+      // Section 1: Intro
       await this.addTitleSlide();
       this.addMissionVisionSlide();
       this.addOverviewSlide(data);
-      await this.addCompanyLogosSlide(data);
-      await this.addCompanyLogosByTaskSlides(data);
-      
-      // Section 2: Analytics & Charts
+
+      // Section 2: Analytics & Charts (front-loaded for narrative flow)
       this.addCategoryBreakdownSlide(data);
       this.addTaskDistributionSlide(data);
       this.addCompanyDistributionSlide(data);
@@ -1309,8 +1341,12 @@ export class PptxExporter {
       this.addEvidenceImpactSlide(data);
       this.addStructureAnalysisSlide(data);
       this.addStructureTypeAnalysisSlide(data);
-      
-      // Section 3: Engagement & Closing
+
+      // Section 3: Per-task deep dive
+      await this.addCompanyLogosSlide(data);
+      await this.addCompanyLogosByTaskSlides(data);
+
+      // Section 4: Engagement & Closing
       this.addAnalyticsOverviewSlide(data);
       this.addContactEngagementSlide(data);
       this.addGovernanceSlide();
@@ -1363,3 +1399,68 @@ export const exportToPptx = async (preCapturedChartImages?: Record<string, strin
     throw new Error(`Export failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 };
+
+export interface PptxSlidePlanItem {
+  title: string;
+  description: string;
+  section: 'Intro' | 'Analytics' | 'Deep Dive' | 'Closing';
+}
+
+/**
+ * Returns the exact ordered list of slides that generatePresentation() will emit.
+ * Used by the UI preview so chip numbers match the exported file.
+ */
+export function getPptxSlidePlan(data: Partial<PresentationData> | undefined | null): PptxSlidePlanItem[] {
+  const plan: PptxSlidePlanItem[] = [];
+  const totalCompanies = data?.totalCompanies ?? 0;
+  const totalProducts = data?.totalProducts ?? 0;
+  const companyLogos = data?.companyLogos ?? [];
+
+  // Intro
+  plan.push({ title: "Title Slide", description: "DLinRT.eu branding and introduction", section: "Intro" });
+  plan.push({ title: "Mission & Vision", description: "Platform purpose and direction", section: "Intro" });
+  plan.push({ title: "Platform Overview", description: `${totalCompanies} companies, ${totalProducts} products`, section: "Intro" });
+
+  // Analytics
+  plan.push({ title: "AI Solution Categories", description: "Category breakdown pie chart + table", section: "Analytics" });
+  plan.push({ title: "Task Distribution", description: "Products by clinical task", section: "Analytics" });
+  plan.push({ title: "Company Distribution", description: "Top companies by product count", section: "Analytics" });
+  plan.push({ title: "Location Coverage", description: "Anatomical locations analysis", section: "Analytics" });
+  plan.push({ title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", section: "Analytics" });
+  plan.push({ title: "Certification", description: "Regulatory certification breakdown", section: "Analytics" });
+  plan.push({ title: "Evidence & Impact", description: "E/I scoring matrix", section: "Analytics" });
+  plan.push({ title: "Structure Analysis", description: "Auto-contouring structures supported", section: "Analytics" });
+  plan.push({ title: "Structure Types", description: "OARs, Targets, Elective distribution", section: "Analytics" });
+
+  // Deep Dive
+  plan.push({ title: "Partner Companies", description: `Logo wall of ${companyLogos.length} companies`, section: "Deep Dive" });
+  const tasks = data?.companyLogosByTask ?? [];
+  for (const group of tasks) {
+    plan.push({
+      title: `${group.task} Companies`,
+      description: `${group.companies?.length ?? 0} companies in this task`,
+      section: "Deep Dive",
+    });
+    const products = group.products ?? [];
+    if (products.length > 0) {
+      const rowsPerSlide = 12;
+      const pages = Math.ceil(products.length / rowsPerSlide);
+      for (let p = 0; p < pages; p++) {
+        const suffix = pages > 1 ? ` (${p + 1}/${pages})` : '';
+        plan.push({
+          title: `${group.task} — Products${suffix}`,
+          description: `${products.length} products`,
+          section: "Deep Dive",
+        });
+      }
+    }
+  }
+
+  // Closing
+  plan.push({ title: "Platform Analytics", description: `${totalProducts} products tracked`, section: "Closing" });
+  plan.push({ title: "Get Involved", description: "Contact and community engagement", section: "Closing" });
+  plan.push({ title: "Governance & Values", description: "Core values and principles", section: "Closing" });
+  plan.push({ title: "Disclaimer", description: "CC BY 4.0 licensing and attribution", section: "Closing" });
+
+  return plan;
+}

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Download, FileText, Users, Package, BarChart3, Building2, Globe, Presentation as PresentationIcon, Play, MonitorPlay } from "lucide-react";
-import { exportToPptx } from "@/utils/pptxExport";
+import { exportToPptx, getPptxSlidePlan } from "@/utils/pptxExport";
 import dataService from "@/services/DataService";
 import SEO from "@/components/SEO";
 import { toast } from "sonner";
@@ -39,26 +39,20 @@ export default function Presentation() {
     navigate("/presentation/demo");
   };
 
-  const pptxSlidePreviewData = [
-    { title: "Title Slide", description: "DLinRT.eu branding and introduction", icon: FileText },
-    { title: "Mission & Vision", description: "Platform purpose and strategic direction", icon: Globe },
-    { title: "Platform Overview", description: `${presentationData.totalCompanies} companies, ${presentationData.totalProducts} products`, icon: BarChart3 },
-    { title: "Partner Companies", description: `Grid of ${presentationData.companyLogos.length} company logos`, icon: Building2 },
-    { title: "AI Solution Categories", description: "Category breakdown pie chart", icon: Package },
-    { title: "Task Distribution", description: "Products by clinical task", icon: BarChart3 },
-    { title: "Company Distribution", description: "Top companies by product count", icon: Building2 },
-    { title: "Location Coverage", description: "Anatomical locations analysis", icon: Globe },
-    { title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", icon: BarChart3 },
-    { title: "Certification", description: "Regulatory certification breakdown", icon: FileText },
-    { title: "Evidence & Impact", description: "E/I scoring scatter chart", icon: BarChart3 },
-    { title: "Structure Analysis", description: "Auto-contouring structures supported", icon: Package },
-    { title: "Structure Types", description: "OARs, Targets, Elective distribution", icon: BarChart3 },
-    { title: "Product Details", description: "Per-category product grids", icon: Package },
-    { title: "Platform Analytics", description: `${presentationData.totalProducts} products tracked`, icon: BarChart3 },
-    { title: "Get Involved", description: "Contact and community engagement", icon: Users },
-    { title: "Governance & Values", description: "Core values and principles", icon: FileText },
-    { title: "Disclaimer", description: "CC BY 4.0 licensing and attribution", icon: FileText },
-  ];
+  const pptxSlidePlan = getPptxSlidePlan(presentationData);
+  const sectionOrder: Array<'Intro' | 'Analytics' | 'Deep Dive' | 'Closing'> = ['Intro', 'Analytics', 'Deep Dive', 'Closing'];
+  const sectionIcons: Record<string, typeof FileText> = {
+    Intro: FileText,
+    Analytics: BarChart3,
+    'Deep Dive': Package,
+    Closing: Users,
+  };
+  const slidesBySection = sectionOrder.map(section => ({
+    section,
+    slides: pptxSlidePlan
+      .map((slide, index) => ({ ...slide, number: index + 1 }))
+      .filter(s => s.section === section),
+  }));
 
   const liveDemoSlidePreviewData = [
     { title: "Welcome", description: "Platform introduction with stats", icon: PresentationIcon },
@@ -261,34 +255,44 @@ export default function Presentation() {
               <div className="flex items-center gap-2">
                 <Download className="h-5 w-5 text-primary" />
                 <div>
-                  <CardTitle>PowerPoint Slides ({pptxSlidePreviewData.length} slides)</CardTitle>
+                  <CardTitle>PowerPoint Slides ({pptxSlidePlan.length} slides)</CardTitle>
                   <CardDescription>
-                    Complete slides with all dashboard charts and analytics
+                    Complete slides with all dashboard charts and analytics — slide numbers below match the exported file
                   </CardDescription>
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
-                {pptxSlidePreviewData.map((slide, index) => {
-                  const IconComponent = slide.icon;
-                  return (
-                    <div 
-                      key={index}
-                      className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                      title={slide.description}
-                    >
-                      <Badge variant="secondary" className="mb-1 text-xs">
-                        {index + 1}
-                      </Badge>
-                      <IconComponent className="h-4 w-4 text-primary mb-1" />
-                      <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
-                        {slide.title}
-                      </h4>
+            <CardContent className="space-y-6">
+              {slidesBySection.map(({ section, slides }) => {
+                if (slides.length === 0) return null;
+                const SectionIcon = sectionIcons[section];
+                return (
+                  <div key={section}>
+                    <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <SectionIcon className="h-4 w-4 text-primary" />
+                      {section}
+                      <span className="text-xs font-normal text-muted-foreground">({slides.length})</span>
+                    </h3>
+                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
+                      {slides.map(slide => (
+                        <div
+                          key={slide.number}
+                          className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                          title={slide.description}
+                        >
+                          <Badge variant="secondary" className="mb-1 text-xs">
+                            {slide.number}
+                          </Badge>
+                          <SectionIcon className="h-4 w-4 text-primary mb-1" />
+                          <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
+                            {slide.title}
+                          </h4>
+                        </div>
+                      ))}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </CardContent>
           </Card>
 
