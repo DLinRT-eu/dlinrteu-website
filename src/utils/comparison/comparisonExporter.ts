@@ -90,7 +90,6 @@ export const exportComparisonToCSV = (products: ProductDetails[], comparisonData
   }
 };
 
-export const exportComparisonToPDF = async (products: ProductDetails[], comparisonData: ComparisonRow[]) => {
 const isURL = (text: string): boolean => {
   if (!text) return false;
   const t = text.trim();
