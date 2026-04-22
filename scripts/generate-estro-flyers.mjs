@@ -47,19 +47,19 @@ async function qrPng(text) {
 function header(doc, subtitle) {
   // Top brand bar
   doc.rect(0, 0, doc.page.width, 70).fill(PRIMARY);
-  doc.fillColor("white").font("Helvetica-Bold").fontSize(26).text("DLinRT.eu", 40, 22);
+  doc.fillColor("white").font("BodyBold").fontSize(26).text("DLinRT.eu", 40, 22);
   doc
-    .font("Helvetica")
+    .font("Body")
     .fontSize(11)
     .fillColor("white")
     .text("Deep Learning in Radiotherapy", 40, 50);
   doc
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(12)
     .fillColor("white")
     .text(subtitle, 0, 30, { align: "right", width: doc.page.width - 40 });
   doc
-    .font("Helvetica")
+    .font("Body")
     .fontSize(10)
     .fillColor("white")
     .text("ESTRO 2026 · Vienna", 0, 48, { align: "right", width: doc.page.width - 40 });
@@ -68,7 +68,7 @@ function header(doc, subtitle) {
 function pill(doc, x, y, label, fill, color = "white") {
   const padX = 8;
   const padY = 4;
-  doc.font("Helvetica-Bold").fontSize(9);
+  doc.font("BodyBold").fontSize(9);
   const w = doc.widthOfString(label) + padX * 2;
   const h = 16;
   doc.roundedRect(x, y, w, h, 8).fill(fill);
@@ -77,7 +77,7 @@ function pill(doc, x, y, label, fill, color = "white") {
 }
 
 function sectionTitle(doc, text, y) {
-  doc.fillColor(PRIMARY_DARK).font("Helvetica-Bold").fontSize(14).text(text, 40, y);
+  doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(14).text(text, 40, y);
   doc
     .moveTo(40, y + 18)
     .lineTo(doc.page.width - 40, y + 18)
@@ -93,7 +93,7 @@ function bullet(doc, text, y, opts = {}) {
   doc.circle(x, y + 5, 2.2).fill(PRIMARY);
   doc
     .fillColor(ACCENT)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(10.5)
     .text(text, x + 10, y, { width, lineGap: 2 });
   return doc.y + 4;
@@ -104,8 +104,8 @@ function boldBullet(doc, bold, rest, y, opts = {}) {
   const width = opts.width ?? doc.page.width - x - 40;
   doc.circle(x, y + 5, 2.2).fill(PRIMARY);
   doc.fillColor(ACCENT).fontSize(10.5);
-  doc.font("Helvetica-Bold").text(bold, x + 10, y, { continued: true, width });
-  doc.font("Helvetica").text(" " + rest, { width });
+  doc.font("BodyBold").text(bold, x + 10, y, { continued: true, width });
+  doc.font("Body").text(" " + rest, { width });
   return doc.y + 4;
 }
 
@@ -125,24 +125,24 @@ function footer(doc, qrBuffer, qrLabel, qrUrl) {
   doc.image(qrBuffer, qrX, qrY, { width: qrSize, height: qrSize });
   doc
     .fillColor(MUTED)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(8)
     .text(qrLabel, qrX - 130, qrY + 18, { width: 125, align: "right" });
   doc
     .fillColor(MUTED)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(8)
     .text(qrUrl, qrX - 130, qrY + 32, { width: 125, align: "right" });
 
   // Left footer text
   doc
     .fillColor(ACCENT)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(10)
     .text("dlinrt.eu", 40, fy + 14);
   doc
     .fillColor(MUTED)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(8.5)
     .text(
       "Independent · Vendor-neutral · Non-profit · Community-driven",
@@ -175,13 +175,13 @@ async function buildCompaniesFlyer() {
   let y = 90;
   doc
     .fillColor(ACCENT)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(22)
     .text("Claim your products. Get verified.", 40, y, { width: 380 });
   y = doc.y + 4;
   doc
     .fillColor(PRIMARY_DARK)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(12)
     .text("Independent. Vendor-neutral. Not pay-to-verify.", 40, y, { width: 380 });
   y = doc.y + 8;
@@ -197,21 +197,21 @@ async function buildCompaniesFlyer() {
   doc.image(qrTop, doc.page.width - 110, 86, { width: 70, height: 70 });
   doc
     .fillColor(MUTED)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(7.5)
     .text("Visit dlinrt.eu", doc.page.width - 110, 158, { width: 70, align: "center" });
 
   // Intro
-  doc.fillColor(ACCENT).font("Helvetica").fontSize(10.5);
+  doc.fillColor(ACCENT).font("Body").fontSize(10.5);
   doc.text(
     "DLinRT.eu is the ",
     40,
     y,
     { continued: true, width: doc.page.width - 80, lineGap: 2 }
   );
-  doc.font("Helvetica-Bold").fillColor(PRIMARY_DARK).text("independent European platform", { continued: true });
+  doc.font("BodyBold").fillColor(PRIMARY_DARK).text("independent European platform", { continued: true });
   doc
-    .font("Helvetica")
+    .font("Body")
     .fillColor(ACCENT)
     .text(
       " cataloguing AI / deep-learning products used in radiotherapy. We are non-profit, vendor-neutral, and never charge vendors for inclusion or verification.",
@@ -246,12 +246,12 @@ async function buildCompaniesFlyer() {
   doc.roundedRect(40, boxY, doc.page.width - 80, 78, 6).fill(BG_SOFT);
   doc
     .fillColor(PRIMARY_DARK)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(11)
     .text("Eligibility & cost", 50, boxY + 8);
   doc
     .fillColor(ACCENT)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(9.5)
     .text(
       "Eligible: any official representative of the manufacturer (regulatory, product, marketing, or technical lead). One verified rep per company; additional reps can be added after approval.",
@@ -261,7 +261,7 @@ async function buildCompaniesFlyer() {
     );
   doc
     .fillColor(SUCCESS)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(10)
     .text("Free of charge — no fees, ever. No paid tiers, no sponsored placement.", 50, boxY + 60, {
       width: doc.page.width - 100,
@@ -287,13 +287,13 @@ async function buildCommunityFlyer() {
   let y = 90;
   doc
     .fillColor(ACCENT)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(22)
     .text("Find, compare & evaluate AI in radiotherapy.", 40, y, { width: 380 });
   y = doc.y + 4;
   doc
     .fillColor(PRIMARY_DARK)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(12)
     .text("Independent. Vendor-neutral. Not pay-to-verify.", 40, y, { width: 380 });
   y = doc.y + 8;
@@ -307,15 +307,15 @@ async function buildCommunityFlyer() {
   doc.image(qrTop, doc.page.width - 110, 86, { width: 70, height: 70 });
   doc
     .fillColor(MUTED)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(7.5)
     .text("Visit dlinrt.eu", doc.page.width - 110, 158, { width: 70, align: "center" });
 
-  doc.fillColor(ACCENT).font("Helvetica").fontSize(10.5);
+  doc.fillColor(ACCENT).font("Body").fontSize(10.5);
   doc.text("DLinRT.eu is the ", 40, y, { continued: true, width: doc.page.width - 80, lineGap: 2 });
-  doc.font("Helvetica-Bold").fillColor(PRIMARY_DARK).text("independent European platform", { continued: true });
+  doc.font("BodyBold").fillColor(PRIMARY_DARK).text("independent European platform", { continued: true });
   doc
-    .font("Helvetica")
+    .font("Body")
     .fillColor(ACCENT)
     .text(
       " cataloguing AI / deep-learning products used across the radiotherapy workflow — from auto-contouring to treatment planning, image enhancement, and QA.",
@@ -342,14 +342,14 @@ async function buildCommunityFlyer() {
   doc.roundedRect(40, boxY, doc.page.width - 80, 64, 6).fill(BG_SOFT);
   doc
     .fillColor(PRIMARY_DARK)
-    .font("Helvetica-Bold")
+    .font("BodyBold")
     .fontSize(11)
     .text("Used by clinicians and researchers across Europe and beyond.", 50, boxY + 10, {
       width: doc.page.width - 100,
     });
   doc
     .fillColor(ACCENT)
-    .font("Helvetica")
+    .font("Body")
     .fontSize(9.5)
     .text(
       "Create a free account to save comparisons, follow products, and receive update notifications. Your account is also the entry point if you later want to record clinical experience with a tool you use.",
