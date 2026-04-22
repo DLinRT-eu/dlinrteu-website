@@ -1399,3 +1399,68 @@ export const exportToPptx = async (preCapturedChartImages?: Record<string, strin
     throw new Error(`Export failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 };
+
+export interface PptxSlidePlanItem {
+  title: string;
+  description: string;
+  section: 'Intro' | 'Analytics' | 'Deep Dive' | 'Closing';
+}
+
+/**
+ * Returns the exact ordered list of slides that generatePresentation() will emit.
+ * Used by the UI preview so chip numbers match the exported file.
+ */
+export function getPptxSlidePlan(data: Partial<PresentationData> | undefined | null): PptxSlidePlanItem[] {
+  const plan: PptxSlidePlanItem[] = [];
+  const totalCompanies = data?.totalCompanies ?? 0;
+  const totalProducts = data?.totalProducts ?? 0;
+  const companyLogos = data?.companyLogos ?? [];
+
+  // Intro
+  plan.push({ title: "Title Slide", description: "DLinRT.eu branding and introduction", section: "Intro" });
+  plan.push({ title: "Mission & Vision", description: "Platform purpose and direction", section: "Intro" });
+  plan.push({ title: "Platform Overview", description: `${totalCompanies} companies, ${totalProducts} products`, section: "Intro" });
+
+  // Analytics
+  plan.push({ title: "AI Solution Categories", description: "Category breakdown pie chart + table", section: "Analytics" });
+  plan.push({ title: "Task Distribution", description: "Products by clinical task", section: "Analytics" });
+  plan.push({ title: "Company Distribution", description: "Top companies by product count", section: "Analytics" });
+  plan.push({ title: "Location Coverage", description: "Anatomical locations analysis", section: "Analytics" });
+  plan.push({ title: "Imaging Modalities", description: "CT, MRI, PET, etc. coverage", section: "Analytics" });
+  plan.push({ title: "Certification", description: "Regulatory certification breakdown", section: "Analytics" });
+  plan.push({ title: "Evidence & Impact", description: "E/I scoring matrix", section: "Analytics" });
+  plan.push({ title: "Structure Analysis", description: "Auto-contouring structures supported", section: "Analytics" });
+  plan.push({ title: "Structure Types", description: "OARs, Targets, Elective distribution", section: "Analytics" });
+
+  // Deep Dive
+  plan.push({ title: "Partner Companies", description: `Logo wall of ${companyLogos.length} companies`, section: "Deep Dive" });
+  const tasks = data?.companyLogosByTask ?? [];
+  for (const group of tasks) {
+    plan.push({
+      title: `${group.task} Companies`,
+      description: `${group.companies?.length ?? 0} companies in this task`,
+      section: "Deep Dive",
+    });
+    const products = group.products ?? [];
+    if (products.length > 0) {
+      const rowsPerSlide = 12;
+      const pages = Math.ceil(products.length / rowsPerSlide);
+      for (let p = 0; p < pages; p++) {
+        const suffix = pages > 1 ? ` (${p + 1}/${pages})` : '';
+        plan.push({
+          title: `${group.task} — Products${suffix}`,
+          description: `${products.length} products`,
+          section: "Deep Dive",
+        });
+      }
+    }
+  }
+
+  // Closing
+  plan.push({ title: "Platform Analytics", description: `${totalProducts} products tracked`, section: "Closing" });
+  plan.push({ title: "Get Involved", description: "Contact and community engagement", section: "Closing" });
+  plan.push({ title: "Governance & Values", description: "Core values and principles", section: "Closing" });
+  plan.push({ title: "Disclaimer", description: "CC BY 4.0 licensing and attribution", section: "Closing" });
+
+  return plan;
+}
