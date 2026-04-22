@@ -255,34 +255,44 @@ export default function Presentation() {
               <div className="flex items-center gap-2">
                 <Download className="h-5 w-5 text-primary" />
                 <div>
-                  <CardTitle>PowerPoint Slides ({pptxSlidePreviewData.length} slides)</CardTitle>
+                  <CardTitle>PowerPoint Slides ({pptxSlidePlan.length} slides)</CardTitle>
                   <CardDescription>
-                    Complete slides with all dashboard charts and analytics
+                    Complete slides with all dashboard charts and analytics — slide numbers below match the exported file
                   </CardDescription>
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
-                {pptxSlidePreviewData.map((slide, index) => {
-                  const IconComponent = slide.icon;
-                  return (
-                    <div 
-                      key={index}
-                      className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                      title={slide.description}
-                    >
-                      <Badge variant="secondary" className="mb-1 text-xs">
-                        {index + 1}
-                      </Badge>
-                      <IconComponent className="h-4 w-4 text-primary mb-1" />
-                      <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
-                        {slide.title}
-                      </h4>
+            <CardContent className="space-y-6">
+              {slidesBySection.map(({ section, slides }) => {
+                if (slides.length === 0) return null;
+                const SectionIcon = sectionIcons[section];
+                return (
+                  <div key={section}>
+                    <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                      <SectionIcon className="h-4 w-4 text-primary" />
+                      {section}
+                      <span className="text-xs font-normal text-muted-foreground">({slides.length})</span>
+                    </h3>
+                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
+                      {slides.map(slide => (
+                        <div
+                          key={slide.number}
+                          className="flex flex-col items-center p-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                          title={slide.description}
+                        >
+                          <Badge variant="secondary" className="mb-1 text-xs">
+                            {slide.number}
+                          </Badge>
+                          <SectionIcon className="h-4 w-4 text-primary mb-1" />
+                          <h4 className="text-[10px] font-medium text-foreground text-center leading-tight">
+                            {slide.title}
+                          </h4>
+                        </div>
+                      ))}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </CardContent>
           </Card>
 
