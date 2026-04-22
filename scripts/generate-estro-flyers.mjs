@@ -603,8 +603,14 @@ async function buildCompaniesFlyer() {
     y,
     "Who can register?",
     "Any official representative of the manufacturer — regulatory, product, marketing, or technical lead. One verified rep per company; additional reps can be added after approval. You represent your company, not DLinRT.eu.",
-    PRIMARY_DARK
+    PRIMARY_DARK,
+    ["NO FEES", "NO PAID PLACEMENT", "NO SPONSORED RANKINGS"]
   );
+
+  y = quoteBand(doc, y, [
+    "Already used by clinicians and researchers across Europe and beyond.",
+    "Join the catalogue manufacturers are using to keep their public AI product information current and verified.",
+  ]);
 
   footerBand(doc, qrBottom, "Scan to register — it's free.", "dlinrt.eu/auth?role=company");
   doc.end();
