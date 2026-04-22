@@ -149,7 +149,7 @@ export default function Presentation() {
                   <FileText className="h-8 w-8 text-primary mb-2" />
                   <h4 className="font-medium text-foreground mb-1">Community Flyer</h4>
                   <p className="text-xs text-muted-foreground text-center mb-3">
-                    For clinicians & medical physicists — search, compare, and share experience with AI tools in radiotherapy.
+                    For clinicians & medical physicists — search, compare, and explore independent information on AI tools in radiotherapy.
                   </p>
                   <Button asChild variant="outline" size="sm">
                     <a href="/flyers/DLinRT_Community_ESTRO2026.pdf" download>
@@ -162,7 +162,7 @@ export default function Presentation() {
                   <Building2 className="h-8 w-8 text-primary mb-2" />
                   <h4 className="font-medium text-foreground mb-1">Companies Flyer</h4>
                   <p className="text-xs text-muted-foreground text-center mb-3">
-                    For industry & manufacturers — claim your products, get verified, and reach clinicians worldwide.
+                    For industry & manufacturers — claim your products and apply for free, independent verification.
                   </p>
                   <Button asChild variant="outline" size="sm">
                     <a href="/flyers/DLinRT_Companies_ESTRO2026.pdf" download>
