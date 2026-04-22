@@ -164,6 +164,7 @@ function footer(doc, qrBuffer, qrLabel, qrUrl) {
 async function buildCompaniesFlyer() {
   const out = path.join(OUT_DIR, "DLinRT_Companies_ESTRO2026.pdf");
   const doc = new PDFDocument({ size: "A4", margin: 40 });
+  registerFonts(doc);
   doc.pipe(fs.createWriteStream(out));
 
   const qrTop = await qrPng(SITE_URL);
@@ -277,6 +278,7 @@ async function buildCompaniesFlyer() {
 async function buildCommunityFlyer() {
   const out = path.join(OUT_DIR, "DLinRT_Community_ESTRO2026.pdf");
   const doc = new PDFDocument({ size: "A4", margin: 40 });
+  registerFonts(doc);
   doc.pipe(fs.createWriteStream(out));
 
   const qrTop = await qrPng(SITE_URL);
