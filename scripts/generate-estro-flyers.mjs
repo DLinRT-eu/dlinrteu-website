@@ -662,8 +662,14 @@ async function buildCommunityFlyer() {
     y,
     "Why create a free account?",
     "Save comparisons, follow products, and receive optional update notifications. Your account is also the entry point if you later want to record clinical experience with a tool you use.",
-    PRIMARY_DARK
+    PRIMARY_DARK,
+    ["FREE", "NO ADS", "OPEN-SOURCE RUBRIC"]
   );
+
+  y = quoteBand(doc, y, [
+    "One place to evaluate AI tools across the whole radiotherapy workflow.",
+    "From auto-contouring to treatment planning, image enhancement and QA — vendor-neutral, peer-reviewed.",
+  ]);
 
   footerBand(doc, qrBottom, "Scan to create a free account.", "dlinrt.eu/auth");
   doc.end();
