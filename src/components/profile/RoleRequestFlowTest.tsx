@@ -165,7 +165,7 @@ export function RoleRequestFlowTest() {
   const renderIcon = (status: StepStatus) => {
     switch (status) {
       case 'running': return <Loader2 className="h-4 w-4 animate-spin text-primary" />;
-      case 'pass': return <CheckCircle2 className="h-4 w-4 text-green-600" />;
+      case 'pass': return <CheckCircle2 className="h-4 w-4 text-primary" />;
       case 'fail': return <XCircle className="h-4 w-4 text-destructive" />;
       case 'skipped': return <Info className="h-4 w-4 text-muted-foreground" />;
       default: return <Circle className="h-4 w-4 text-muted-foreground" />;
