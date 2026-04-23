@@ -6,7 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Bell, Send, Loader2, Clock } from 'lucide-react';
+import { Bell, Send, Loader2, Clock, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface DigestSettings {
@@ -14,15 +14,53 @@ interface DigestSettings {
   frequency: 'daily' | 'weekly';
 }
 
+interface RoleDigestState {
+  last_sent_at?: string;
+  pending_count?: number;
+  emails_sent?: number;
+  skipped?: boolean;
+}
+
 export default function NotificationDigestControls() {
   const [settings, setSettings] = useState<DigestSettings>({ enabled: false, frequency: 'daily' });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [sending, setSending] = useState(false);
+  const [roleDigest, setRoleDigest] = useState<RoleDigestState | null>(null);
+  const [sendingRoleDigest, setSendingRoleDigest] = useState(false);
 
   useEffect(() => {
     fetchSettings();
+    fetchRoleDigestState();
   }, []);
+
+  const fetchRoleDigestState = async () => {
+    const { data } = await supabase
+      .from('reminder_settings')
+      .select('setting_value')
+      .eq('setting_key', 'role_request_digest_last_sent')
+      .maybeSingle();
+    if (data?.setting_value) setRoleDigest(data.setting_value as any);
+  };
+
+  const handleSendRoleDigest = async () => {
+    setSendingRoleDigest(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-role-request-digest', { body: {} });
+      if (error) throw error;
+      if (data?.skipped) {
+        toast.info(data?.reason === 'no pending requests' ? 'No pending role requests — nothing to send.' : `Skipped: ${data?.reason ?? 'no recipients'}`);
+      } else {
+        toast.success(`Role-request digest sent: ${data?.emailsSent ?? 0} email${data?.emailsSent === 1 ? '' : 's'} delivered for ${data?.pendingCount ?? 0} pending request${data?.pendingCount === 1 ? '' : 's'}.`);
+      }
+      await fetchRoleDigestState();
+    } catch (e: any) {
+      console.error('Role-request digest error:', e);
+      toast.error(e?.message ?? 'Failed to send role-request digest');
+    } finally {
+      setSendingRoleDigest(false);
+    }
+  };
 
   const fetchSettings = async () => {
     try {
@@ -160,6 +198,30 @@ export default function NotificationDigestControls() {
           Only users who have enabled email digest in their notification preferences will receive the summary.
           Schedule via pg_cron for automatic delivery.
         </p>
+
+        <div className="border-t pt-4 mt-2 space-y-3">
+          <div className="flex items-center gap-2">
+            <UserPlus className="h-4 w-4 text-muted-foreground" />
+            <h3 className="font-medium text-sm">Pending role-request digest</h3>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Sent automatically each morning (08:00 UTC) to all admins who have not opted out of registration updates,
+            but only on days where at least one role request is still pending.
+          </p>
+          {roleDigest?.last_sent_at && (
+            <p className="text-xs text-muted-foreground">
+              Last run: {new Date(roleDigest.last_sent_at).toLocaleString()}
+              {' · '}
+              {roleDigest.skipped
+                ? 'no pending requests (skipped)'
+                : `${roleDigest.emails_sent ?? 0} email${roleDigest.emails_sent === 1 ? '' : 's'} for ${roleDigest.pending_count ?? 0} pending`}
+            </p>
+          )}
+          <Button onClick={handleSendRoleDigest} disabled={sendingRoleDigest} size="sm" variant="outline">
+            {sendingRoleDigest ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Send className="h-4 w-4 mr-1" />}
+            Send role-request digest now
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
