@@ -198,6 +198,30 @@ export default function NotificationDigestControls() {
           Only users who have enabled email digest in their notification preferences will receive the summary.
           Schedule via pg_cron for automatic delivery.
         </p>
+
+        <div className="border-t pt-4 mt-2 space-y-3">
+          <div className="flex items-center gap-2">
+            <UserPlus className="h-4 w-4 text-muted-foreground" />
+            <h3 className="font-medium text-sm">Pending role-request digest</h3>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Sent automatically each morning (08:00 UTC) to all admins who have not opted out of registration updates,
+            but only on days where at least one role request is still pending.
+          </p>
+          {roleDigest?.last_sent_at && (
+            <p className="text-xs text-muted-foreground">
+              Last run: {new Date(roleDigest.last_sent_at).toLocaleString()}
+              {' · '}
+              {roleDigest.skipped
+                ? 'no pending requests (skipped)'
+                : `${roleDigest.emails_sent ?? 0} email${roleDigest.emails_sent === 1 ? '' : 's'} for ${roleDigest.pending_count ?? 0} pending`}
+            </p>
+          )}
+          <Button onClick={handleSendRoleDigest} disabled={sendingRoleDigest} size="sm" variant="outline">
+            {sendingRoleDigest ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Send className="h-4 w-4 mr-1" />}
+            Send role-request digest now
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
