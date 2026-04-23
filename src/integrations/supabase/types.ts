@@ -1794,6 +1794,10 @@ export type Database = {
         Args: { completion_notes?: string; review_id: string }
         Returns: Json
       }
+      count_pending_role_requests_for_user: {
+        Args: { _user_id: string }
+        Returns: number
+      }
       create_company_revision: {
         Args: {
           p_changes_summary: string
