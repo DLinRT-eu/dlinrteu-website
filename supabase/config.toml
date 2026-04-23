@@ -70,5 +70,8 @@ verify_jwt = true
 [functions.send-notification-digest]
 verify_jwt = false  # Validates auth in code, allows both admin JWT and service role
 
+[functions.send-role-request-digest]
+verify_jwt = false  # Validates auth in code, allows admin JWT or service role (cron)
+
 [functions.submit-product-feedback]
 verify_jwt = false  # Public feedback form, rate-limited

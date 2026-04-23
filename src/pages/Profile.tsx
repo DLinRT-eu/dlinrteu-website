@@ -16,6 +16,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import { useToast } from '@/hooks/use-toast';
 import RoleRequestForm from '@/components/profile/RoleRequestForm';
 import { RoleRequestHistory } from '@/components/profile/RoleRequestHistory';
+import { RoleRequestFlowTest } from '@/components/profile/RoleRequestFlowTest';
 import { RoleSelector } from '@/components/profile/RoleSelector';
 import { MFASettings } from '@/components/profile/MFASettings';
 import { DataExport } from '@/components/profile/DataExport';
@@ -488,6 +489,7 @@ export default function Profile() {
           {/* Role Request Section - Show for all users (can request additional roles) */}
           <RoleRequestForm onRequestSubmitted={() => setRefreshKey(prev => prev + 1)} />
           <RoleRequestHistory key={refreshKey} />
+          <RoleRequestFlowTest />
 
           {/* Danger Zone */}
           <DeleteAccount />
