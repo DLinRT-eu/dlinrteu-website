@@ -6,7 +6,8 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Bell, Send, Loader2, Clock, UserPlus } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Bell, Send, Loader2, Clock, UserPlus, CheckCircle2, XCircle, AlertTriangle, SkipForward } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface DigestSettings {
@@ -18,7 +19,12 @@ interface RoleDigestState {
   last_sent_at?: string;
   pending_count?: number;
   emails_sent?: number;
+  recipient_count?: number;
   skipped?: boolean;
+  reason?: string;
+  status?: 'success' | 'failure' | 'partial';
+  error_message?: string | null;
+  send_errors?: Array<{ email: string; error: string }> | null;
 }
 
 export default function NotificationDigestControls() {
@@ -208,14 +214,56 @@ export default function NotificationDigestControls() {
             Sent automatically each morning (08:00 UTC) to all admins who have not opted out of registration updates,
             but only on days where at least one role request is still pending.
           </p>
-          {roleDigest?.last_sent_at && (
-            <p className="text-xs text-muted-foreground">
-              Last run: {new Date(roleDigest.last_sent_at).toLocaleString()}
-              {' · '}
-              {roleDigest.skipped
-                ? 'no pending requests (skipped)'
-                : `${roleDigest.emails_sent ?? 0} email${roleDigest.emails_sent === 1 ? '' : 's'} for ${roleDigest.pending_count ?? 0} pending`}
-            </p>
+          {roleDigest?.last_sent_at ? (
+            (() => {
+              const status = roleDigest.status ?? (roleDigest.skipped ? 'success' : 'success');
+              const isFailure = status === 'failure';
+              const isPartial = status === 'partial';
+              const isSkipped = !!roleDigest.skipped;
+              const badgeVariant = isFailure ? 'destructive' : isPartial ? 'warning' : isSkipped ? 'secondary' : 'success';
+              const Icon = isFailure ? XCircle : isPartial ? AlertTriangle : isSkipped ? SkipForward : CheckCircle2;
+              const label = isFailure ? 'Failure' : isPartial ? 'Partial' : isSkipped ? 'Skipped' : 'Success';
+              const detail = isSkipped
+                ? (roleDigest.reason ?? 'no pending requests')
+                : `${roleDigest.emails_sent ?? 0}/${roleDigest.recipient_count ?? roleDigest.emails_sent ?? 0} email${(roleDigest.recipient_count ?? roleDigest.emails_sent) === 1 ? '' : 's'} sent · ${roleDigest.pending_count ?? 0} pending`;
+              return (
+                <div className="rounded-md border bg-muted/30 p-3 space-y-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Badge variant={badgeVariant as any} className="gap-1">
+                      <Icon className="h-3 w-3" />
+                      {label}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(roleDigest.last_sent_at).toLocaleString()}
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{detail}</p>
+                  {roleDigest.error_message && (
+                    <Alert variant="destructive" className="py-2">
+                      <AlertDescription className="text-xs break-words">
+                        {roleDigest.error_message}
+                      </AlertDescription>
+                    </Alert>
+                  )}
+                  {roleDigest.send_errors && roleDigest.send_errors.length > 0 && (
+                    <details className="text-xs">
+                      <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
+                        Per-recipient errors ({roleDigest.send_errors.length})
+                      </summary>
+                      <ul className="mt-1 space-y-1 pl-4 list-disc">
+                        {roleDigest.send_errors.map((e, i) => (
+                          <li key={i} className="break-words">
+                            <span className="font-mono">{e.email}</span>: {e.error}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              );
+            })()
+          ) : (
+            <p className="text-xs text-muted-foreground italic">No runs recorded yet.</p>
           )}
           <Button onClick={handleSendRoleDigest} disabled={sendingRoleDigest} size="sm" variant="outline">
             {sendingRoleDigest ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Send className="h-4 w-4 mr-1" />}
