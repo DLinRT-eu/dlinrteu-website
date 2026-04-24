@@ -252,21 +252,26 @@ const handler = async (req: Request): Promise<Response> => {
       }
     }
 
-    // Persist last-sent metadata
-    await supabase.from("reminder_settings").upsert({
-      setting_key: "role_request_digest_last_sent",
-      setting_value: {
-        last_sent_at: new Date().toISOString(),
-        pending_count: N,
-        emails_sent: emailsSent,
-        recipient_count: recipients.length,
-        skipped: false,
-      } as any,
-      updated_at: new Date().toISOString(),
-    }, { onConflict: "setting_key" });
+    // Persist last-run metadata
+    const allFailed = recipients.length > 0 && emailsSent === 0;
+    const partial = sendErrors.length > 0 && emailsSent > 0;
+    const runStatus = allFailed ? "failure" : partial ? "partial" : "success";
+    const errorMessage = sendErrors.length > 0
+      ? `${sendErrors.length} of ${recipients.length} email${recipients.length === 1 ? "" : "s"} failed: ${sendErrors[0].error}`
+      : null;
+
+    await recordRun({
+      status: runStatus,
+      pending_count: N,
+      emails_sent: emailsSent,
+      recipient_count: recipients.length,
+      skipped: false,
+      error_message: errorMessage,
+      send_errors: sendErrors.length > 0 ? sendErrors : null,
+    });
 
     return new Response(JSON.stringify({
-      success: true,
+      success: !allFailed,
       pendingCount: N,
       emailsSent,
       recipientCount: recipients.length,
@@ -275,7 +280,9 @@ const handler = async (req: Request): Promise<Response> => {
     }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
   } catch (error: any) {
     console.error("send-role-request-digest error:", error);
-    return new Response(JSON.stringify({ success: false, error: error?.message ?? "Internal error" }), {
+    const message = error?.message ?? "Internal error";
+    await recordRun({ status: "failure", error_message: message, skipped: false });
+    return new Response(JSON.stringify({ success: false, error: message }), {
       status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
