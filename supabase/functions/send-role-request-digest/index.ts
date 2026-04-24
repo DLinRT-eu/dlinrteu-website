@@ -146,6 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
     const adminIds = Array.from(new Set((adminRows ?? []).map(r => r.user_id)));
 
     if (adminIds.length === 0) {
+      await recordRun({ status: "success", pending_count: pending.length, emails_sent: 0, skipped: true, reason: "no admins" });
       return new Response(JSON.stringify({ success: true, skipped: true, reason: "no admins" }), {
         status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
       });
