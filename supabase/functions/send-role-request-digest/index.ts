@@ -96,8 +96,21 @@ const handler = async (req: Request): Promise<Response> => {
     }
   }
 
+  const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+  const recordRun = async (value: Record<string, unknown>) => {
+    try {
+      await supabase.from("reminder_settings").upsert({
+        setting_key: "role_request_digest_last_sent",
+        setting_value: { last_sent_at: new Date().toISOString(), ...value } as any,
+        updated_at: new Date().toISOString(),
+      }, { onConflict: "setting_key" });
+    } catch (e) {
+      console.error("Failed to record digest run:", e);
+    }
+  };
+
   try {
-    const supabase = createClient(supabaseUrl, serviceRoleKey);
 
     // 1. Pending role requests
     const { data: pending, error: pendingError } = await supabase
