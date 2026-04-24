@@ -123,12 +123,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (!pending || pending.length === 0) {
       console.log("send-role-request-digest: no pending requests, skipping send");
-      // record last-checked timestamp
-      await supabase.from("reminder_settings").upsert({
-        setting_key: "role_request_digest_last_sent",
-        setting_value: { last_sent_at: new Date().toISOString(), pending_count: 0, emails_sent: 0, skipped: true } as any,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: "setting_key" });
+      await recordRun({ status: "success", pending_count: 0, emails_sent: 0, skipped: true, reason: "no pending requests" });
       return new Response(JSON.stringify({
         success: true, skipped: true, reason: "no pending requests", pendingCount: 0,
       }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
