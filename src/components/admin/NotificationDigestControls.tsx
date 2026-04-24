@@ -6,7 +6,8 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Bell, Send, Loader2, Clock, UserPlus } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Bell, Send, Loader2, Clock, UserPlus, CheckCircle2, XCircle, AlertTriangle, SkipForward } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface DigestSettings {
@@ -18,7 +19,12 @@ interface RoleDigestState {
   last_sent_at?: string;
   pending_count?: number;
   emails_sent?: number;
+  recipient_count?: number;
   skipped?: boolean;
+  reason?: string;
+  status?: 'success' | 'failure' | 'partial';
+  error_message?: string | null;
+  send_errors?: Array<{ email: string; error: string }> | null;
 }
 
 export default function NotificationDigestControls() {
