@@ -164,6 +164,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     if (recipients.length === 0) {
+      await recordRun({ status: "success", pending_count: pending.length, emails_sent: 0, skipped: true, reason: "all admins opted out" });
       return new Response(JSON.stringify({
         success: true, skipped: true, reason: "all admins opted out", pendingCount: pending.length,
       }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
