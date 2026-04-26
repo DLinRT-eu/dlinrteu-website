@@ -53,6 +53,42 @@ interface NotificationRequest {
   rejectionReason?: string;
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_ROLES = new Set(['admin', 'reviewer', 'company']);
+
+const escapeHtml = (s: string): string =>
+  s.replace(/&/g, '&amp;')
+   .replace(/</g, '&lt;')
+   .replace(/>/g, '&gt;')
+   .replace(/"/g, '&quot;')
+   .replace(/'/g, '&#39;');
+
+function validatePayload(body: unknown):
+  | { ok: true; data: NotificationRequest }
+  | { ok: false; error: string } {
+  if (!body || typeof body !== 'object') return { ok: false, error: 'Invalid request body' };
+  const b = body as Record<string, unknown>;
+
+  const userId = typeof b.userId === 'string' ? b.userId.trim() : '';
+  const email = typeof b.email === 'string' ? b.email.trim() : '';
+  const firstName = typeof b.firstName === 'string' ? b.firstName.trim() : '';
+  const role = typeof b.role === 'string' ? b.role.trim().toLowerCase() : '';
+  const approved = typeof b.approved === 'boolean' ? b.approved : null;
+  const rejectionReason = typeof b.rejectionReason === 'string' ? b.rejectionReason.trim() : undefined;
+
+  if (!UUID_RE.test(userId)) return { ok: false, error: 'Invalid userId' };
+  if (!EMAIL_RE.test(email) || email.length > 255) return { ok: false, error: 'Invalid email' };
+  if (firstName.length === 0 || firstName.length > 100) return { ok: false, error: 'Invalid firstName (1-100 chars)' };
+  if (!ALLOWED_ROLES.has(role)) return { ok: false, error: 'Invalid role' };
+  if (approved === null) return { ok: false, error: 'approved must be boolean' };
+  if (rejectionReason !== undefined && rejectionReason.length > 1000) {
+    return { ok: false, error: 'rejectionReason exceeds 1000 chars' };
+  }
+
+  return { ok: true, data: { userId, email, firstName, role, approved, rejectionReason } };
+}
+
 const getRoleDescription = (role: string): string => {
   switch (role) {
     case 'admin': return 'Administrator access with full system management capabilities';
@@ -127,7 +163,28 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { userId, email, firstName, role, approved, rejectionReason }: NotificationRequest = await req.json();
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid JSON body' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const parsed = validatePayload(rawBody);
+    if (!parsed.ok) {
+      return new Response(
+        JSON.stringify({ success: false, error: parsed.error }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    const { userId, email, firstName, role, approved, rejectionReason } = parsed.data;
+
+    // Escaped versions for safe HTML interpolation
+    const safeFirstName = escapeHtml(firstName);
+    const safeRejectionReason = rejectionReason ? escapeHtml(rejectionReason) : undefined;
 
     console.log(`Processing role request ${approved ? 'approval' : 'rejection'} for:`, email, 'role:', role);
 
@@ -171,7 +228,7 @@ const handler = async (req: Request): Promise<Response> => {
               <h1 style="color: white; margin: 0; font-size: 28px;">🎉 Role Request Approved</h1>
             </div>
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-              <p style="font-size: 16px; margin-top: 0;">Hello ${firstName},</p>
+              <p style="font-size: 16px; margin-top: 0;">Hello ${safeFirstName},</p>
               <p style="font-size: 16px;">Great news! Your request for the <strong style="color: #667eea;">${roleDisplay}</strong> role has been <strong style="color: #10b981;">approved</strong>.</p>
               <div style="background: white; padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #667eea;">
                 <h2 style="margin-top: 0; color: #667eea; font-size: 18px;">${roleDisplay} Role</h2>
@@ -203,10 +260,10 @@ const handler = async (req: Request): Promise<Response> => {
               <h1 style="color: white; margin: 0; font-size: 28px;">Role Request Update</h1>
             </div>
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-              <p style="font-size: 16px; margin-top: 0;">Hello ${firstName},</p>
+              <p style="font-size: 16px; margin-top: 0;">Hello ${safeFirstName},</p>
               <p style="font-size: 16px;">We have reviewed your request for the <strong>${roleDisplay}</strong> role on DLinRT.eu.</p>
               <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #fecaca;">
-                <p style="margin: 0; color: #991b1b;">Unfortunately, your request was not approved at this time.${rejectionReason ? `<br><br><strong>Reason:</strong> ${rejectionReason}` : ''}</p>
+                <p style="margin: 0; color: #991b1b;">Unfortunately, your request was not approved at this time.${safeRejectionReason ? `<br><br><strong>Reason:</strong> ${safeRejectionReason}` : ''}</p>
               </div>
               <div style="background: white; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #e5e7eb;">
                 <h3 style="margin-top: 0; color: #374151; font-size: 16px;">What can you do?</h3>

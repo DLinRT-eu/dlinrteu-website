@@ -91,11 +91,24 @@ Deno.serve(async (req) => {
     }
 
     // Parse request body
-    const { draft_id } = await req.json();
-
-    if (!draft_id) {
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
       return new Response(
-        JSON.stringify({ success: false, error: 'draft_id is required' }),
+        JSON.stringify({ success: false, error: 'Invalid JSON body' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const draft_id = (body && typeof body === 'object')
+      ? (body as Record<string, unknown>).draft_id
+      : undefined;
+
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (typeof draft_id !== 'string' || !UUID_RE.test(draft_id)) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'draft_id must be a valid UUID' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
