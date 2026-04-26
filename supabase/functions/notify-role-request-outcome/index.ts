@@ -163,7 +163,28 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { userId, email, firstName, role, approved, rejectionReason }: NotificationRequest = await req.json();
+    let rawBody: unknown;
+    try {
+      rawBody = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Invalid JSON body' }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const parsed = validatePayload(rawBody);
+    if (!parsed.ok) {
+      return new Response(
+        JSON.stringify({ success: false, error: parsed.error }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    const { userId, email, firstName, role, approved, rejectionReason } = parsed.data;
+
+    // Escaped versions for safe HTML interpolation
+    const safeFirstName = escapeHtml(firstName);
+    const safeRejectionReason = rejectionReason ? escapeHtml(rejectionReason) : undefined;
 
     console.log(`Processing role request ${approved ? 'approval' : 'rejection'} for:`, email, 'role:', role);
 
