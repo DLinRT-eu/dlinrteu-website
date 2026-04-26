@@ -263,7 +263,7 @@ const handler = async (req: Request): Promise<Response> => {
               <p style="font-size: 16px; margin-top: 0;">Hello ${safeFirstName},</p>
               <p style="font-size: 16px;">We have reviewed your request for the <strong>${roleDisplay}</strong> role on DLinRT.eu.</p>
               <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #fecaca;">
-                <p style="margin: 0; color: #991b1b;">Unfortunately, your request was not approved at this time.${rejectionReason ? `<br><br><strong>Reason:</strong> ${rejectionReason}` : ''}</p>
+                <p style="margin: 0; color: #991b1b;">Unfortunately, your request was not approved at this time.${safeRejectionReason ? `<br><br><strong>Reason:</strong> ${safeRejectionReason}` : ''}</p>
               </div>
               <div style="background: white; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #e5e7eb;">
                 <h3 style="margin-top: 0; color: #374151; font-size: 16px;">What can you do?</h3>
