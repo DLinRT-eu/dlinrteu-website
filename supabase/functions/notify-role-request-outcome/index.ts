@@ -53,6 +53,42 @@ interface NotificationRequest {
   rejectionReason?: string;
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_ROLES = new Set(['admin', 'reviewer', 'company']);
+
+const escapeHtml = (s: string): string =>
+  s.replace(/&/g, '&amp;')
+   .replace(/</g, '&lt;')
+   .replace(/>/g, '&gt;')
+   .replace(/"/g, '&quot;')
+   .replace(/'/g, '&#39;');
+
+function validatePayload(body: unknown):
+  | { ok: true; data: NotificationRequest }
+  | { ok: false; error: string } {
+  if (!body || typeof body !== 'object') return { ok: false, error: 'Invalid request body' };
+  const b = body as Record<string, unknown>;
+
+  const userId = typeof b.userId === 'string' ? b.userId.trim() : '';
+  const email = typeof b.email === 'string' ? b.email.trim() : '';
+  const firstName = typeof b.firstName === 'string' ? b.firstName.trim() : '';
+  const role = typeof b.role === 'string' ? b.role.trim().toLowerCase() : '';
+  const approved = typeof b.approved === 'boolean' ? b.approved : null;
+  const rejectionReason = typeof b.rejectionReason === 'string' ? b.rejectionReason.trim() : undefined;
+
+  if (!UUID_RE.test(userId)) return { ok: false, error: 'Invalid userId' };
+  if (!EMAIL_RE.test(email) || email.length > 255) return { ok: false, error: 'Invalid email' };
+  if (firstName.length === 0 || firstName.length > 100) return { ok: false, error: 'Invalid firstName (1-100 chars)' };
+  if (!ALLOWED_ROLES.has(role)) return { ok: false, error: 'Invalid role' };
+  if (approved === null) return { ok: false, error: 'approved must be boolean' };
+  if (rejectionReason !== undefined && rejectionReason.length > 1000) {
+    return { ok: false, error: 'rejectionReason exceeds 1000 chars' };
+  }
+
+  return { ok: true, data: { userId, email, firstName, role, approved, rejectionReason } };
+}
+
 const getRoleDescription = (role: string): string => {
   switch (role) {
     case 'admin': return 'Administrator access with full system management capabilities';
