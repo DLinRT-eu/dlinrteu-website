@@ -240,26 +240,49 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`User registration notification sent successfully for user ${userId}, email ID: ${emailResponse.data?.id}`);
 
+    // Write back to user_registration_notifications so the table reflects actual send status
+    try {
+      const admin = createClient(supabaseUrl, serviceRoleKey!);
+      await admin
+        .from("user_registration_notifications")
+        .update({ notification_sent_at: new Date().toISOString(), failure_reason: null })
+        .eq("user_id", userId);
+    } catch (writeErr) {
+      console.error("Failed to update user_registration_notifications:", writeErr);
+    }
+
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "Registration notification sent",
-        emailId: emailResponse.data?.id
+        emailId: emailResponse.data?.id,
       }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
   } catch (error: any) {
     console.error("Error in notify-user-registration function:", error.message);
+
+    // Best-effort write of failure_reason
+    if (parsedUserId && serviceRoleKey) {
+      try {
+        const admin = createClient(supabaseUrl, serviceRoleKey);
+        await admin
+          .from("user_registration_notifications")
+          .update({ failure_reason: String(error?.message ?? error).slice(0, 500) })
+          .eq("user_id", parsedUserId);
+      } catch (_) {
+        // swallow
+      }
+    }
+
     return new Response(
-      JSON.stringify({ 
-        error: "Internal server error"
-      }),
+      JSON.stringify({ error: "Internal server error" }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
   }
