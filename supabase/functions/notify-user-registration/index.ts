@@ -125,14 +125,7 @@ const handler = async (req: Request): Promise<Response> => {
       .map((k) => `Bearer ${k}`);
 
     if (!authHeader || !validBearers.includes(authHeader)) {
-      const headerPrefix = authHeader ? authHeader.slice(0, 20) + "..." : "(none)";
-      const expectedPrefixes = validBearers.map((b) => b.slice(0, 20) + "...");
-      console.error("Unauthorized request to notify-user-registration", {
-        got: headerPrefix,
-        expected: expectedPrefixes,
-        haveServiceRoleKey: !!serviceRoleKey,
-        haveAnonKey: !!anonKey,
-      });
+      console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
         { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
