@@ -112,10 +112,14 @@ const handler = async (req: Request): Promise<Response> => {
   let parsedUserId: string | null = null;
 
   try {
-    // Verify the request is from Supabase (check for service role key)
+    // Verify the request bearer is one of: service role key, or the project anon key
+    // (the anon key is the bearer used by other internal cron jobs in this project,
+    // and verify_jwt is disabled for this function so we authorize in code).
     const authHeader = req.headers.get("authorization");
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+    const validBearers = [serviceRoleKey, anonKey].filter(Boolean).map((k) => `Bearer ${k}`);
 
-    if (!authHeader || !serviceRoleKey || authHeader !== `Bearer ${serviceRoleKey}`) {
+    if (!authHeader || !validBearers.includes(authHeader)) {
       console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
