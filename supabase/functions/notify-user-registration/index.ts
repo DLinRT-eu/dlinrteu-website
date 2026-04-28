@@ -93,24 +93,33 @@ interface UserRegistrationData {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Only allow POST requests
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   if (req.method !== "POST") {
     return new Response(
       JSON.stringify({ error: "Method not allowed" }),
-      { status: 405, headers: { "Content-Type": "application/json" } }
+      { status: 405, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
+
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  let parsedUserId: string | null = null;
 
   try {
     // Verify the request is from Supabase (check for service role key)
     const authHeader = req.headers.get("authorization");
-    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    
+
     if (!authHeader || !serviceRoleKey || authHeader !== `Bearer ${serviceRoleKey}`) {
       console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
