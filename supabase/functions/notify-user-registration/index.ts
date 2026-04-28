@@ -123,6 +123,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    const { userId, email, firstName, lastName, createdAt }: UserRegistrationData = await req.json();
     parsedUserId = userId;
 
     // Check if email is institutional (but don't block non-institutional)
