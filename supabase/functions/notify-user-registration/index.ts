@@ -112,12 +112,17 @@ const handler = async (req: Request): Promise<Response> => {
   let parsedUserId: string | null = null;
 
   try {
-    // Verify the request bearer is one of: service role key, or the project anon key
-    // (the anon key is the bearer used by other internal cron jobs in this project,
-    // and verify_jwt is disabled for this function so we authorize in code).
+    // Verify the request bearer matches one of the project's known keys.
+    // Accept: new-style service role / publishable keys from env, plus the
+    // legacy JWT-format anon key embedded in cron jobs across this project.
     const authHeader = req.headers.get("authorization");
     const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
-    const validBearers = [serviceRoleKey, anonKey].filter(Boolean).map((k) => `Bearer ${k}`);
+    const publishableKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY");
+    const LEGACY_ANON_JWT =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zeWZ4eXh6anlvd3dhc2d0dXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTgxNzgsImV4cCI6MjA2Mzc3NDE3OH0.3a-Q2TUNuB0vbWUoC0Q_Tg_HUAWZ1nH4UhSs95uz1o8";
+    const validBearers = [serviceRoleKey, anonKey, publishableKey, LEGACY_ANON_JWT]
+      .filter(Boolean)
+      .map((k) => `Bearer ${k}`);
 
     if (!authHeader || !validBearers.includes(authHeader)) {
       const headerPrefix = authHeader ? authHeader.slice(0, 20) + "..." : "(none)";
