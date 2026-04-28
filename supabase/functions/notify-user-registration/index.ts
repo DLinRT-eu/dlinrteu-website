@@ -1,4 +1,22 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+
+const ALLOWED_ORIGINS = [
+  "https://dlinrt.eu",
+  "https://www.dlinrt.eu",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
+function getCorsHeaders(origin: string | null): HeadersInit {
+  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith(".lovable.app"));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
+
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
