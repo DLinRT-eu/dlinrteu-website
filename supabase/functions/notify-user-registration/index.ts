@@ -1,4 +1,22 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+
+const ALLOWED_ORIGINS = [
+  "https://dlinrt.eu",
+  "https://www.dlinrt.eu",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
+function getCorsHeaders(origin: string | null): HeadersInit {
+  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith(".lovable.app"));
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
+
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
@@ -75,28 +93,47 @@ interface UserRegistrationData {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  // Only allow POST requests
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   if (req.method !== "POST") {
     return new Response(
       JSON.stringify({ error: "Method not allowed" }),
-      { status: 405, headers: { "Content-Type": "application/json" } }
+      { status: 405, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  let parsedUserId: string | null = null;
+
   try {
-    // Verify the request is from Supabase (check for service role key)
+    // Verify the request bearer matches one of the project's known keys.
+    // Accept: new-style service role / publishable keys from env, plus the
+    // legacy JWT-format anon key embedded in cron jobs across this project.
     const authHeader = req.headers.get("authorization");
-    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    
-    if (!authHeader || !serviceRoleKey || authHeader !== `Bearer ${serviceRoleKey}`) {
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+    const publishableKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY");
+    const LEGACY_ANON_JWT =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zeWZ4eXh6anlvd3dhc2d0dXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTgxNzgsImV4cCI6MjA2Mzc3NDE3OH0.3a-Q2TUNuB0vbWUoC0Q_Tg_HUAWZ1nH4UhSs95uz1o8";
+    const validBearers = [serviceRoleKey, anonKey, publishableKey, LEGACY_ANON_JWT]
+      .filter(Boolean)
+      .map((k) => `Bearer ${k}`);
+
+    if (!authHeader || !validBearers.includes(authHeader)) {
       console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
     const { userId, email, firstName, lastName, createdAt }: UserRegistrationData = await req.json();
+    parsedUserId = userId;
 
     // Check if email is institutional (but don't block non-institutional)
     const isInstitutional = isInstitutionalEmail(email);
@@ -212,26 +249,49 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`User registration notification sent successfully for user ${userId}, email ID: ${emailResponse.data?.id}`);
 
+    // Write back to user_registration_notifications so the table reflects actual send status
+    try {
+      const admin = createClient(supabaseUrl, serviceRoleKey!);
+      await admin
+        .from("user_registration_notifications")
+        .update({ notification_sent_at: new Date().toISOString(), failure_reason: null })
+        .eq("user_id", userId);
+    } catch (writeErr) {
+      console.error("Failed to update user_registration_notifications:", writeErr);
+    }
+
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "Registration notification sent",
-        emailId: emailResponse.data?.id
+        emailId: emailResponse.data?.id,
       }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
   } catch (error: any) {
     console.error("Error in notify-user-registration function:", error.message);
+
+    // Best-effort write of failure_reason
+    if (parsedUserId && serviceRoleKey) {
+      try {
+        const admin = createClient(supabaseUrl, serviceRoleKey);
+        await admin
+          .from("user_registration_notifications")
+          .update({ failure_reason: String(error?.message ?? error).slice(0, 500) })
+          .eq("user_id", parsedUserId);
+      } catch (_) {
+        // swallow
+      }
+    }
+
     return new Response(
-      JSON.stringify({ 
-        error: "Internal server error"
-      }),
+      JSON.stringify({ error: "Internal server error" }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
   }

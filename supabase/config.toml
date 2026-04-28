@@ -55,6 +55,9 @@ verify_jwt = true
 [functions.notify-user-approval]
 verify_jwt = false  # Called by admin actions with service role
 
+[functions.notify-user-registration]
+verify_jwt = false  # Called by DB trigger via pg_net with service role
+
 [functions.notify-role-request-outcome]
 verify_jwt = false  # Called by admin actions with service role
 
