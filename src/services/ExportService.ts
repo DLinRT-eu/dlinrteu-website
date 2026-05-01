@@ -9,8 +9,9 @@ import { exportBulkProductsToExcel } from "@/utils/modelCard/exporters/bulkExcel
 import { exportBulkProductsToPDF } from "@/utils/modelCard/exporters/bulkPdfExporter";
 import { exportBulkProductsToJSON } from "@/utils/modelCard/exporters/bulkJsonExporter";
 import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview } from "@/utils/fhir";
+import { exportHTADossier } from "@/utils/htaExport";
 
-export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir";
+export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
 
 interface ExportOptions {
@@ -70,6 +71,9 @@ class ExportService {
         } else {
           downloadFHIRBundle(products, companies);
         }
+        break;
+      case "hta":
+        await exportHTADossier(products);
         break;
       default:
         throw new Error(`Unsupported export format: ${format}`);

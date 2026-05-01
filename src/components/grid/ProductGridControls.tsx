@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Download, FileText, FileSpreadsheet, FileJson } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, FileJson, Scale } from "lucide-react";
 import { Product } from "@/types/product";
 import SortControls, { SortOption } from "./SortControls";
 import { ProductDetails } from "@/types/productDetails";
@@ -139,6 +139,10 @@ const ProductGridControls = ({
                   <FileJson className="w-4 h-4 mr-2" />
                   Export as JSON
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('hta', false)}>
+                  <Scale className="w-4 h-4 mr-2" />
+                  Export as HTA dossier (.xlsx)
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
               </>
             )}
@@ -156,6 +160,10 @@ const ProductGridControls = ({
             <DropdownMenuItem onClick={() => handleExport('json', true)}>
               <FileJson className="w-4 h-4 mr-2" />
               Export All as JSON
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('hta', true)}>
+              <Scale className="w-4 h-4 mr-2" />
+              Export All as HTA dossier (.xlsx)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

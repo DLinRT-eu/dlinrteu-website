@@ -11,7 +11,8 @@ import {
   CheckSquare, 
   FileText, 
   Library,
-  AlertTriangle
+  AlertTriangle,
+  Scale
 } from 'lucide-react';
 
 interface IndexItem {
@@ -27,6 +28,7 @@ const indexItems: IndexItem[] = [
   { id: 'regulatory-overview', label: 'Regulatory overview', icon: Shield },
   { id: 'regulatory-landscape', label: 'Regulatory landscape', icon: Globe },
   { id: 'standards-guidelines', label: 'Standards & guidelines', icon: FileCheck },
+  { id: 'hta-guidance', label: 'HTA guidance', icon: Scale },
   { id: 'compliance-checklist', label: 'Compliance checklist', icon: CheckSquare },
   { id: 'core-documents', label: 'Core documents', icon: FileText },
   { id: 'resources-library', label: 'Resources library', icon: Library },

@@ -202,6 +202,55 @@ const RegulatoryLandscape = () => {
         </CardContent>
       </Card>
 
+      {/* EU: HTA Regulation */}
+      <Card className="lg:col-span-2 border-primary/30">
+        <CardHeader>
+          <div className="flex items-center gap-2 flex-wrap">
+            <CardTitle className="text-xl font-semibold text-foreground">
+              EU: Health Technology Assessment Regulation (HTAR)
+            </CardTitle>
+            <Badge variant="secondary">EU 2021/2282</Badge>
+            <Badge variant="outline">In application: 12 Jan 2025</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            The HTA Regulation introduces <strong>Joint Clinical Assessments (JCA)</strong> and <strong>Joint Scientific Consultations (JSC)</strong> at EU level, coordinated by the Member State Coordination Group on HTA. Scope started with oncology medicines and ATMPs in 2025; <strong>medical devices and IVDs</strong> (including AI/SaMD used in radiotherapy) follow a staged scope. JCAs use the <strong>PICO framework</strong> (Population, Intervention, Comparator, Outcomes) and the EUnetHTA 21 methodology. HTAR is complementary to MDR/AI Act: regulatory approval is necessary but not sufficient for reimbursement and adoption decisions made by national HTA bodies.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://health.ec.europa.eu/health-technology-assessment/overview_en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>EC HTA Overview</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a
+              href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2282"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Regulation 2021/2282 (EUR-Lex)</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a
+              href="https://www.eunethta.eu/eunethta-21/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>EUnetHTA 21 Deliverables</span>
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* General-Purpose AI Governance */}
       <Card className="bg-primary/5 border-primary/20 lg:col-span-2">
         <CardHeader>

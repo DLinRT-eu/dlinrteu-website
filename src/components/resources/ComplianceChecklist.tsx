@@ -43,6 +43,11 @@ const ComplianceChecklist = () => {
       title: "Regulatory submission & notified body / FDA engagement",
       description: "For EU: prepare CE technical file and liaise with a notified body (if required by class). For US: prepare a marketing submission/510(k)/PMA as appropriate and consider early Q-submission / pre-submission engagement with FDA.",
       details: "Prepare and submit appropriate regulatory documentation and engage with relevant regulatory bodies early in the process."
+    },
+    {
+      title: "Plan for HTA & market access",
+      description: "Define the PICO (Population, Intervention, Comparator, Outcomes) for your AI tool, identify the relevant comparator (e.g., manual contouring, conventional planning), and align clinical evidence with EU HTAR (2021/2282) Joint Clinical Assessment requirements. Consider real-world evidence, organisational impact and budget impact for national HTA bodies.",
+      details: "Engage early with HTA bodies via Joint Scientific Consultations, follow EUnetHTA 21 methodology, and ensure your evidence package addresses clinical effectiveness, safety, ethical/legal and organisational dimensions beyond regulatory clearance."
     }
   ];
 
