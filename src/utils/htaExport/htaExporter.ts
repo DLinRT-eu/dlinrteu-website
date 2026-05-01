@@ -176,7 +176,7 @@ function buildORG(products: ProductDetails[]): ExcelSheet {
 
 function buildLEG(products: ProductDetails[]): ExcelSheet {
   return {
-    name: "LEG — Legal/regulatory",
+    name: "LEG — Legal & regulatory",
     data: products.map((p) => ({
       "Product": p.name ?? "",
       "CE": ceStatus(p),

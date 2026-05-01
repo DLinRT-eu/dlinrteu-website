@@ -6,6 +6,16 @@
  */
 import ExcelJS from 'exceljs';
 
+/**
+ * Sanitize a worksheet name for ExcelJS / Excel compatibility.
+ * Excel forbids: * ? : \ / [ ] and limits names to 31 characters.
+ */
+function sanitizeSheetName(name: string): string {
+  const cleaned = (name || '').replace(/[\*\?:\\\/\[\]]/g, '-').trim();
+  const truncated = cleaned.slice(0, 31);
+  return truncated || 'Sheet';
+}
+
 export interface ExcelSheet {
   name: string;
   data: Record<string, any>[];
@@ -26,7 +36,7 @@ export async function createExcelWorkbook(sheets: ExcelSheet[]): Promise<Blob> {
   workbook.created = new Date();
   
   for (const sheet of sheets) {
-    const worksheet = workbook.addWorksheet(sheet.name);
+    const worksheet = workbook.addWorksheet(sanitizeSheetName(sheet.name));
     
     if (sheet.data.length === 0) continue;
     
@@ -82,7 +92,7 @@ export async function createExcelWorkbookAoa(sheets: ExcelSheetAoa[]): Promise<B
   workbook.created = new Date();
   
   for (const sheet of sheets) {
-    const worksheet = workbook.addWorksheet(sheet.name);
+    const worksheet = workbook.addWorksheet(sanitizeSheetName(sheet.name));
     
     // Add all rows
     sheet.data.forEach((row, rowIndex) => {
