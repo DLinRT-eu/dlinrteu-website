@@ -28,6 +28,36 @@ const ResourceLinks = () => {
       category: "EU Database"
     },
 
+    // EU HTA
+    {
+      title: "EU Health Technology Assessment — Overview",
+      description: "European Commission overview of the HTA framework, JCA and JSC procedures, scope and timelines",
+      url: "https://health.ec.europa.eu/health-technology-assessment/overview_en",
+      icon: Award,
+      category: "EU HTA"
+    },
+    {
+      title: "Regulation (EU) 2021/2282 on HTA",
+      description: "Official text establishing Joint Clinical Assessments and Joint Scientific Consultations at EU level",
+      url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2282",
+      icon: FileText,
+      category: "EU HTA"
+    },
+    {
+      title: "EUnetHTA 21 — Methodological deliverables",
+      description: "PICO framework, evidence submission templates and methodological guidance for joint assessments",
+      url: "https://www.eunethta.eu/eunethta-21/",
+      icon: BookOpen,
+      category: "EU HTA"
+    },
+    {
+      title: "Member State Coordination Group on HTA",
+      description: "Governance body coordinating JCAs/JSCs and adopting methodological and procedural guidance under HTAR",
+      url: "https://health.ec.europa.eu/health-technology-assessment/coordination-group_en",
+      icon: Users,
+      category: "EU HTA"
+    },
+
     // UK Regulation
     {
       title: "MHRA - Software and AI as Medical Devices",
