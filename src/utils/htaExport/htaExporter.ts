@@ -8,7 +8,7 @@
  * NOTE: This is informational and NOT a substitute for an official HTA dossier.
  */
 import { ProductDetails } from "@/types/productDetails";
-import { createExcelWorkbook, downloadExcelBlob, type ExcelSheet } from "@/utils/excelExport";
+import { createExcelWorkbook, downloadBlob, type ExcelSheet } from "@/utils/excelExport";
 import { EVIDENCE_RIGOR_EXPLAIN, CLINICAL_IMPACT_EXPLAIN } from "@/data/hta-mapping";
 
 const stringify = (v: unknown): string => {
@@ -227,7 +227,7 @@ export async function exportHTADossier(products: ProductDetails[]): Promise<void
     products.length === 1
       ? `dlinrt-hta-dossier-${safeFile(products[0].name ?? "product")}.xlsx`
       : `dlinrt-hta-dossier-${products.length}-products.xlsx`;
-  downloadExcelBlob(blob, filename);
+  downloadBlob(blob, filename);
 }
 
 export const exportSingleHTADossier = (product: ProductDetails) => exportHTADossier([product]);
