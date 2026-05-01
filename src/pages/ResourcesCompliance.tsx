@@ -144,6 +144,68 @@ const ResourcesCompliance = () => {
             <StandardsGuidelines />
           </section>
 
+          {/* HTA Guidance */}
+          <section id="hta-guidance" className="mb-16 scroll-mt-20">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              HTA guidance for AI in radiotherapy
+            </h2>
+            <h3 className="text-xl text-muted-foreground mb-8">
+              Preparing for Joint Clinical Assessment under EU HTAR (2021/2282)
+            </h3>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              Health Technology Assessment (HTA) bodies evaluate AI tools across more dimensions than regulators do.
+              Beyond CE/FDA clearance, an HTA dossier must answer questions about <strong>clinical effectiveness</strong>,
+              <strong> safety</strong>, <strong>organisational impact</strong>, <strong>ethical/legal aspects</strong> and
+              <strong> costs</strong>. The EU HTA Regulation (HTAR, 2021/2282) introduced the
+              {' '}<strong>Joint Clinical Assessment (JCA)</strong> at EU level — staged scope covers oncology medicines
+              and ATMPs from January 2025, with medical devices (including AI/SaMD) following.
+            </p>
+
+            <div className="bg-card border border-border rounded-lg p-6 mb-6">
+              <h4 className="text-lg font-semibold text-foreground mb-4">How DLinRT fields map to EUnetHTA Core Model domains</h4>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border text-left">
+                      <th className="py-2 pr-4 font-semibold">Domain</th>
+                      <th className="py-2 pr-4 font-semibold">DLinRT fields</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    <tr><td className="py-2 pr-4 font-mono text-xs">CUR</td><td className="py-2 pr-4">Intended use, target indication, anatomy, modality, clinical task</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">TEC</td><td className="py-2 pr-4">Key features, technical specs, AI/model details, dose prediction models</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">EFF</td><td className="py-2 pr-4">Evidence rigor (E0–E3), clinical impact (I0–I5), evaluation dataset, study quality</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">SAF</td><td className="py-2 pr-4">Supported structures (with status flags), limitations, safety/corrective actions</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">ETH</td><td className="py-2 pr-4">Training data sources, demographics, public datasets, disclosure level</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">ORG</td><td className="py-2 pr-4">Deployment model, integration, market presence</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">LEG</td><td className="py-2 pr-4">CE / FDA / TGA / TFDA status, MDR class, intended use statement, guidelines</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs text-muted-foreground">ECO</td><td className="py-2 pr-4 text-muted-foreground">Not collected — combine with vendor quotations and local cost data</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="flex flex-wrap gap-3 mt-6">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 underline"
+                >
+                  Download an HTA dossier from the Products page →
+                </Link>
+                <span className="text-muted-foreground">|</span>
+                <a
+                  href="#resources-library"
+                  className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 underline"
+                >
+                  Browse HTA resources below
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg p-4 text-sm text-amber-900 dark:text-amber-200">
+              <strong>Note:</strong> DLinRT does not collect pricing or budget-impact data. The HTA dossier export is
+              informational only and does not substitute for an official JCA submission or national HTA dossier.
+            </div>
+          </section>
+
           {/* Practical Compliance Checklist */}
           <section id="compliance-checklist" className="mb-16 scroll-mt-20">
             <h2 className="text-3xl font-bold text-foreground mb-4">
