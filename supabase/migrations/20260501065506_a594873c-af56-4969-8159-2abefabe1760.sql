@@ -1,0 +1,1 @@
+REVOKE SELECT ON public.user_product_experiences FROM anon;
