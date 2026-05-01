@@ -6,6 +6,16 @@
  */
 import ExcelJS from 'exceljs';
 
+/**
+ * Sanitize a worksheet name for ExcelJS / Excel compatibility.
+ * Excel forbids: * ? : \ / [ ] and limits names to 31 characters.
+ */
+function sanitizeSheetName(name: string): string {
+  const cleaned = (name || '').replace(/[\*\?:\\\/\[\]]/g, '-').trim();
+  const truncated = cleaned.slice(0, 31);
+  return truncated || 'Sheet';
+}
+
 export interface ExcelSheet {
   name: string;
   data: Record<string, any>[];
