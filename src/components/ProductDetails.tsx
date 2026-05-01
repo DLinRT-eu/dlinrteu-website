@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle, ArrowRightLeft } from "lucide-react";
+import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle, ArrowRightLeft, Scale } from "lucide-react";
 import type { ProductDetails as ProductDetailsType } from "@/types/productDetails";
 import ProductHeaderInfo from "./product/ProductHeaderInfo";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
@@ -215,6 +215,39 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                     AID-RT model card standard
                   </a>
                   . Unmapped fields are set to null.
+                </p>
+              </div>
+
+              <div className="border-t border-border pt-3 mt-1">
+                <p className="text-xs text-muted-foreground mb-2">Health Technology Assessment</p>
+                <Button
+                  onClick={async () => {
+                    try {
+                      const { exportSingleHTADossier } = await import("@/utils/htaExport");
+                      await exportSingleHTADossier(product);
+                      toast.success(`HTA dossier exported for ${product.name}`);
+                    } catch (e) {
+                      console.error(e);
+                      toast.error("Failed to export HTA dossier");
+                    }
+                  }}
+                  className="w-full flex items-center justify-center gap-2"
+                  variant="outline"
+                >
+                  <Scale className="h-4 w-4" />
+                  Export HTA dossier (.xlsx)
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Excel workbook structured along the EUnetHTA Core Model domains (CUR, TEC, EFF, SAF, ETH, ORG, LEG) — useful as a starting point for a Joint Clinical Assessment under{" "}
+                  <a
+                    href="https://health.ec.europa.eu/health-technology-assessment/overview_en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-primary hover:text-primary/80"
+                  >
+                    EU HTAR (2021/2282)
+                  </a>
+                  . Informational only.
                 </p>
               </div>
             </div>
