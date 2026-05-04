@@ -28,6 +28,7 @@ import { GE_MR_CONTOUR_DL_PRODUCTS } from "./ge-mr-contour-dl";
 import { MEDMIND_PRODUCTS } from "./medmind";
 import { VARIAN_ETHOS_PRODUCTS } from "./varian-ethos";
 import { QUANTA_COMPUTER_PRODUCTS } from "./quanta-computer";
+import { MEDCOM_PRODUCTS } from "./medcom";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -57,5 +58,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...GE_MR_CONTOUR_DL_PRODUCTS,
   ...MEDMIND_PRODUCTS,
   ...VARIAN_ETHOS_PRODUCTS,
-  ...QUANTA_COMPUTER_PRODUCTS
+  ...QUANTA_COMPUTER_PRODUCTS,
+  ...MEDCOM_PRODUCTS
 ];
