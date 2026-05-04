@@ -404,12 +404,14 @@ export type Database = {
           changes_summary: string | null
           company_id: string
           created_at: string | null
+          field_updates: Json | null
           id: string
           priority: string | null
           product_id: string
           reviewer_feedback: string | null
           revised_by: string
           revision_date: string
+          submission_type: string
           verification_status: string | null
           verified_at: string | null
           verified_by: string | null
@@ -418,12 +420,14 @@ export type Database = {
           changes_summary?: string | null
           company_id: string
           created_at?: string | null
+          field_updates?: Json | null
           id?: string
           priority?: string | null
           product_id: string
           reviewer_feedback?: string | null
           revised_by: string
           revision_date: string
+          submission_type?: string
           verification_status?: string | null
           verified_at?: string | null
           verified_by?: string | null
@@ -432,12 +436,14 @@ export type Database = {
           changes_summary?: string | null
           company_id?: string
           created_at?: string | null
+          field_updates?: Json | null
           id?: string
           priority?: string | null
           product_id?: string
           reviewer_feedback?: string | null
           revised_by?: string
           revision_date?: string
+          submission_type?: string
           verification_status?: string | null
           verified_at?: string | null
           verified_by?: string | null
@@ -1798,15 +1804,27 @@ export type Database = {
         Args: { _user_id: string }
         Returns: number
       }
-      create_company_revision: {
-        Args: {
-          p_changes_summary: string
-          p_company_id: string
-          p_product_id: string
-          p_revision_date?: string
-        }
-        Returns: Json
-      }
+      create_company_revision:
+        | {
+            Args: {
+              p_changes_summary: string
+              p_company_id: string
+              p_product_id: string
+              p_revision_date?: string
+            }
+            Returns: Json
+          }
+        | {
+            Args: {
+              p_changes_summary: string
+              p_company_id: string
+              p_field_updates?: Json
+              p_product_id: string
+              p_revision_date?: string
+              p_submission_type?: string
+            }
+            Returns: Json
+          }
       create_notification: {
         Args: {
           p_link?: string

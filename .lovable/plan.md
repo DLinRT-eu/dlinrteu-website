@@ -1,38 +1,65 @@
-## Confirmation
-- MedCom and ProSoma are **not** currently in the catalogue (no matches in `src/data/`).
-- The MedCom logo is **not** present in `public/logos/` (no `medcom*` file exists). It will need to be added.
+## Goal
+Two related improvements:
+1. A structured **Company Certification Submission** workflow so MedCom (and any company rep) can submit precise field updates (version, FDA status, notified body, evidence links) for a product — going beyond the current free-text "Submit Revision" flow.
+2. Allow admins to **add products to an already-active review round** (currently only Complete / Archive / Clone / Delete exist on the round actions menu).
 
-## Plan
+## Part 1 — Structured Certification Submission
 
-### 1. Add company logo
-- Download MedCom logo from `https://www.medcom-online.de/wp-content/uploads/2023/08/MedCom-Medical-software-solutions-logo-Defult.png` to `public/logos/medcom.png`.
+### Database
+Extend `company_revisions` rather than introducing a new table (keeps the existing reviewer/admin approval pipeline, RLS, notifications, dashboards intact):
 
-### 2. Register the company
-File: `src/data/companies/auto-contouring.ts` — append a new entry:
-- `id: "medcom"`, `name: "MedCom"`, website `https://www.medcom-online.de/`, logo `/logos/medcom.png`, `productIds: ["medcom-prosoma-dart"]`, primaryTask Auto-Contouring.
+- Add nullable JSONB column `field_updates` to `company_revisions` to hold a structured payload like:
+  ```json
+  {
+    "version": "...",
+    "releaseDate": "...",
+    "regulatory": {
+      "ce": { "status": "...", "class": "...", "notifiedBody": "..." },
+      "fda": { "status": "...", "clearanceNumber": "...", "decisionDate": "..." }
+    },
+    "evidence": [ { "type": "...", "description": "...", "link": "..." } ]
+  }
+  ```
+- Add nullable `submission_type` text (default `'free_text'`, allowed: `'free_text' | 'structured'`).
+- Update RPC `create_company_revision` to accept optional `p_field_updates jsonb` and `p_submission_type text` parameters; signature stays backward-compatible.
 
-### 3. Create the product file
-New file: `src/data/products/auto-contouring/medcom.ts` exporting `MEDCOM_PRODUCTS: ProductDetails[]` with one product:
-- `id: "medcom-prosoma-dart"`, name `"ProSoma Dart AI Segmentation Engine"`, company `"MedCom"`.
-- URLs: `companyUrl` https://www.medcom-online.de/, `productUrl` https://www.medcom-online.de/products/radiation-oncology/prosoma/, githubUrl pointing to the new file.
-- Category `"Auto-Contouring"`.
-- Anatomical locations: Head & Neck, Prostate, Breast.
-- Modality: CT (primary RT planning modality on which ProSoma Dart operates).
-- Description summarising the fully-automatic anatomical contouring engine, available as configurable H&N, Prostate, and Mamma modules; integrates via DICOM transfer or interactive trigger from ProSoma frontend; GPU-accelerated or CPU-only.
-- Key features: modular per-region deployment, DICOM/RT integration, GPU acceleration, runs alongside ProSoma RT toolkit.
-- Technical specs: input CT/DICOM, output Structure sets/DICOM-RTSTRUCT.
-- Technology: integration with ProSoma; deployment local; trigger manual or DICOM-routed.
-- Regulatory:
-  - CE: Class IIa, MDD 93/42/EEC legacy device under MDR 2017/745 Article 120(3c) — status "CE Marked".
-  - FDA: status `"Not specified"` with note that no FDA clearance is publicly documented.
-- Evidence: `evidenceRigor: "E0"`, `clinicalImpact: "I0"` with note "No peer-reviewed validation studies identified at time of listing — pending verification" (matches existing convention for products lacking published evidence).
-- Structure status: mark structures as `(unverified)` per project nomenclature rule until vendor confirms.
-- `usesAI: true`, `companyRevisionDate` left default.
+No schema changes required for products themselves — applied updates still flow through the reviewer/admin approval (and ultimately the GitHub PR pipeline) the same way as today.
 
-### 4. Wire into the index
-Edit `src/data/products/auto-contouring/index.ts`:
-- Import `MEDCOM_PRODUCTS` and spread it into `AUTO_CONTOURING_PRODUCTS`.
+### UI
+- New component `CertificationSubmissionDialog.tsx` (under `src/components/company/`) used from the Company Dashboard alongside the existing "Submit Revision" button. Sections:
+  - Product selector (limited to the rep's company products).
+  - **Versioning**: version, release date.
+  - **Regulatory**: CE status / class / notified body, FDA status / clearance number / decision date.
+  - **Evidence links** (repeatable rows: type, description, URL — Zod-validated URL).
+  - Optional free-text "additional notes".
+- Submitting calls the updated `create_company_revision` RPC with `submission_type='structured'` and the full JSON payload, plus a generated `changes_summary` line summarising the touched fields.
+- Reviewer/admin approval surfaces (`RevisionApprovalManager`, admin Dashboard) get a small extension to render the structured diff (key/value table of submitted fields) when `submission_type='structured'`, instead of only the free-text summary.
 
-### 5. Notes / caveats surfaced to user
-- FDA status, evidence/publications, version, and on-market year are not publicly documented; entered conservatively (E0/I0, FDA "Not specified"). The product page will show the "(unverified)" markers and can be upgraded once MedCom confirms via the certification workflow.
-- Logo URL above is the documented MedCom default; if the download fails, fall back to a screenshot from the homepage or leave logo blank.
+### Notifications
+Reuses the existing reviewer-notification pipeline triggered by `company_revisions` inserts — no new edge function needed.
+
+## Part 2 — Add Products to an Active Review Round
+
+### Backend
+Reuse the existing `bulkAssignProducts(roundId, productIds, deadline, proposedAssignments?)` in `src/utils/reviewRoundUtils.ts`. It already inserts into `product_reviews` with `review_round_id = roundId`. No new RPC needed; admin RLS on `product_reviews` already permits the insert.
+
+### UI
+- Extend `src/components/admin/review-rounds/RoundActionsMenu.tsx`:
+  - Add a new menu item **"Add Products…"** (visible when `round.status` is `'active'` or `'draft'`).
+  - Opens a new dialog `AddProductsToRoundDialog.tsx` (new file in same folder).
+- The dialog provides:
+  - A searchable, filterable (by category/company) product list, sourced from `ALL_PRODUCTS`, **excluding** products already assigned to this round (query `product_reviews` by `review_round_id`).
+  - Multi-select checkboxes; running count of selected products.
+  - A reviewer assignment block reusing `calculateProposedAssignments` + `ReviewerSelectionDialog` patterns already in the codebase (Balanced / Random / Expertise-first), with optional deadline override defaulting to the round's `default_deadline`.
+  - Submit button calls `bulkAssignProducts(round.id, selectedIds, deadline, proposedAssignments)`.
+- After success, refresh the parent round details (`onUpdate()` already exists), update `review_rounds.total_products` / `total_assignments` via the existing trigger or a follow-up `update` (check existing trigger before writing manual update — likely already maintained by the assignment trigger).
+
+### Edge cases
+- Prevent double-assigning a product within the same round (filter the candidate list against existing `review_round_id` rows).
+- Show a friendly empty state if every product is already in the round.
+- Disable the action for `completed`/`archived` rounds.
+
+## Out of scope
+- No design / branding changes.
+- No public product page changes; certified updates still propagate through the existing reviewer → admin → GitHub PR pipeline.
+- No new email templates; reuses the established notify-reviewer / certification flows.
