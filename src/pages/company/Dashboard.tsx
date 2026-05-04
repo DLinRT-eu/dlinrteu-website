@@ -17,7 +17,8 @@ import { format } from 'date-fns';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle } from 'lucide-react';
+import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle, FileCheck } from 'lucide-react';
+import { StructuredCertificationDialog } from '@/components/company/StructuredCertificationDialog';
 import { Link } from 'react-router-dom';
 import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
@@ -34,6 +35,8 @@ interface CompanyRevision {
   verified_by?: string | null;
   verified_at?: string | null;
   created_at: string;
+  field_updates?: unknown;
+  submission_type?: string | null;
 }
 
 interface CompanyUser {
@@ -54,6 +57,7 @@ export default function CompanyDashboard() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [certifyDialogOpen, setCertifyDialogOpen] = useState(false);
+  const [structuredDialogOpen, setStructuredDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [changesSummary, setChangesSummary] = useState('');
   const [certificationDate, setCertificationDate] = useState<Date>(new Date());
@@ -334,7 +338,17 @@ export default function CompanyDashboard() {
                 : 'Manage your product revisions and certifications'}
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <Button variant="outline" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
+              <FileCheck className="h-4 w-4" />
+              Structured Submission
+            </Button>
+            <StructuredCertificationDialog
+              open={structuredDialogOpen}
+              onOpenChange={setStructuredDialogOpen}
+              companyProducts={companyProducts}
+              onSubmitted={fetchRevisions}
+            />
             <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="outline" className="gap-2">
@@ -559,6 +573,14 @@ export default function CompanyDashboard() {
                                 {revision.changes_summary}
                               </p>
                             </div>
+                            {revision.submission_type === 'structured' && revision.field_updates && (
+                              <div className="rounded border bg-muted/40 p-3">
+                                <Label className="text-xs font-semibold uppercase">Structured fields</Label>
+                                <pre className="text-xs mt-1 whitespace-pre-wrap break-words">
+                                  {JSON.stringify(revision.field_updates, null, 2)}
+                                </pre>
+                              </div>
+                            )}
                             {revision.verified_at && (
                               <div className="text-xs text-muted-foreground">
                                 Verified on {new Date(revision.verified_at).toLocaleDateString()}

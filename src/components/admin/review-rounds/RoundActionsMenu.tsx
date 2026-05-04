@@ -19,11 +19,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2 } from "lucide-react";
+import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus } from "lucide-react";
 import { toast } from "sonner";
 import { updateRoundStatusAdmin, cloneReviewRoundAdmin } from "@/utils/reviewRoundUtils";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { supabase } from "@/integrations/supabase/client";
+import { AddProductsToRoundDialog } from "./AddProductsToRoundDialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,6 +44,7 @@ interface RoundActionsMenuProps {
 export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const [showCloneDialog, setShowCloneDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showAddProductsDialog, setShowAddProductsDialog] = useState(false);
   const [cloning, setCloning] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [cloneData, setCloneData] = useState({
@@ -147,6 +149,13 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           <DropdownMenuLabel>Round Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           
+          {(round.status === 'active' || round.status === 'draft') && (
+            <DropdownMenuItem onClick={() => setShowAddProductsDialog(true)}>
+              <PackagePlus className="h-4 w-4 mr-2" />
+              Add Products…
+            </DropdownMenuItem>
+          )}
+
           {round.status === 'active' && (
             <DropdownMenuItem onClick={handleCompleteRound}>
               <CheckCircle2 className="h-4 w-4 mr-2" />
@@ -275,6 +284,13 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <AddProductsToRoundDialog
+        open={showAddProductsDialog}
+        onOpenChange={setShowAddProductsDialog}
+        round={round}
+        onUpdate={onUpdate}
+      />
     </>
   );
 }

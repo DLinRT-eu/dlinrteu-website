@@ -35,6 +35,8 @@ interface CompanyRevision {
   reviewer_feedback: string | null;
   priority: string;
   created_at: string;
+  field_updates?: unknown;
+  submission_type?: string | null;
   profiles?: SubmitterProfile;
 }
 
@@ -671,6 +673,17 @@ export default function RevisionApprovalManager() {
                     </pre>
                   </div>
                 </div>
+
+                {viewingRevision.submission_type === 'structured' && viewingRevision.field_updates && (
+                  <div>
+                    <Label className="text-sm font-medium text-muted-foreground">Structured Field Updates</Label>
+                    <div className="mt-2 p-4 bg-muted rounded-lg">
+                      <pre className="text-xs whitespace-pre-wrap font-mono">
+                        {JSON.stringify(viewingRevision.field_updates, null, 2)}
+                      </pre>
+                    </div>
+                  </div>
+                )}
 
                 {/* Current Status */}
                 <div>
