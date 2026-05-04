@@ -169,4 +169,14 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "logoUrl": "/logos/oncosoft.png",
     "primaryTask": "Auto-Contouring"
   },
+  {
+    "id": "medcom",
+    "name": "MedCom",
+    "description": "German medical software company providing the ProSoma RT toolkit including the Dart AI segmentation engine.",
+    "website": "https://www.medcom-online.de/",
+    "productIds": ["medcom-prosoma-dart"],
+    "category": "Auto-Contouring",
+    "logoUrl": "/logos/medcom.png",
+    "primaryTask": "Auto-Contouring"
+  },
 ];
