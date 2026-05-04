@@ -17,7 +17,8 @@ import { format } from 'date-fns';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle } from 'lucide-react';
+import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle, FileCheck } from 'lucide-react';
+import { StructuredCertificationDialog } from '@/components/company/StructuredCertificationDialog';
 import { Link } from 'react-router-dom';
 import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
@@ -54,6 +55,7 @@ export default function CompanyDashboard() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [certifyDialogOpen, setCertifyDialogOpen] = useState(false);
+  const [structuredDialogOpen, setStructuredDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [changesSummary, setChangesSummary] = useState('');
   const [certificationDate, setCertificationDate] = useState<Date>(new Date());
@@ -334,7 +336,17 @@ export default function CompanyDashboard() {
                 : 'Manage your product revisions and certifications'}
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <Button variant="outline" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
+              <FileCheck className="h-4 w-4" />
+              Structured Submission
+            </Button>
+            <StructuredCertificationDialog
+              open={structuredDialogOpen}
+              onOpenChange={setStructuredDialogOpen}
+              companyProducts={companyProducts}
+              onSubmitted={fetchRevisions}
+            />
             <Dialog open={certifyDialogOpen} onOpenChange={setCertifyDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="outline" className="gap-2">
