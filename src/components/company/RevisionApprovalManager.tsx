@@ -35,7 +35,7 @@ interface CompanyRevision {
   reviewer_feedback: string | null;
   priority: string;
   created_at: string;
-  field_updates?: Record<string, unknown> | null;
+  field_updates?: unknown;
   submission_type?: string | null;
   profiles?: SubmitterProfile;
 }

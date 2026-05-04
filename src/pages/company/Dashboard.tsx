@@ -35,7 +35,7 @@ interface CompanyRevision {
   verified_by?: string | null;
   verified_at?: string | null;
   created_at: string;
-  field_updates?: Record<string, unknown> | null;
+  field_updates?: unknown;
   submission_type?: string | null;
 }
 
