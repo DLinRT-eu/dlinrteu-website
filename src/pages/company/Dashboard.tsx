@@ -35,6 +35,8 @@ interface CompanyRevision {
   verified_by?: string | null;
   verified_at?: string | null;
   created_at: string;
+  field_updates?: Record<string, unknown> | null;
+  submission_type?: string | null;
 }
 
 interface CompanyUser {
@@ -571,6 +573,14 @@ export default function CompanyDashboard() {
                                 {revision.changes_summary}
                               </p>
                             </div>
+                            {revision.submission_type === 'structured' && revision.field_updates && (
+                              <div className="rounded border bg-muted/40 p-3">
+                                <Label className="text-xs font-semibold uppercase">Structured fields</Label>
+                                <pre className="text-xs mt-1 whitespace-pre-wrap break-words">
+                                  {JSON.stringify(revision.field_updates, null, 2)}
+                                </pre>
+                              </div>
+                            )}
                             {revision.verified_at && (
                               <div className="text-xs text-muted-foreground">
                                 Verified on {new Date(revision.verified_at).toLocaleDateString()}
