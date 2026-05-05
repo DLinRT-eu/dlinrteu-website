@@ -298,7 +298,7 @@ export default function CompanyDashboard() {
     fetchRevisions();
   };
 
-
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'approved':
         return <CheckCircle2 className="h-4 w-4 text-green-500" />;
