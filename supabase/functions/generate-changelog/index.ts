@@ -284,30 +284,70 @@ function generateMonthlySummaries(commitsByMonth: Map<string, GitHubCommit[]>): 
 }
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req.headers.get('origin'));
+
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Require admin JWT
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ success: false, error: 'Unauthorized' }), {
+        status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const anonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const userClient = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const token = authHeader.replace('Bearer ', '');
+    const { data: userData, error: userError } = await userClient.auth.getUser(token);
+    if (userError || !userData?.user) {
+      return new Response(JSON.stringify({ success: false, error: 'Unauthorized' }), {
+        status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    const adminClient = createClient(supabaseUrl, serviceKey);
+    const { data: roles } = await adminClient
+      .from('user_roles').select('role')
+      .eq('user_id', userData.user.id).eq('role', 'admin');
+    if (!roles || roles.length === 0) {
+      return new Response(JSON.stringify({ success: false, error: 'Admin access required' }), {
+        status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const { owner, repo, since } = await req.json();
 
     if (!owner || !repo) {
       throw new Error('Repository owner and name are required');
     }
 
+    if (owner !== ALLOWED_OWNER || !ALLOWED_REPOS.has(String(repo))) {
+      return new Response(JSON.stringify({ success: false, error: 'Repository not allowed' }), {
+        status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     console.log(`Fetching commits from ${owner}/${repo} since ${since || 'beginning'}`);
 
     let apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`;
     if (since) {
-      apiUrl += `&since=${since}`;
+      apiUrl += `&since=${encodeURIComponent(String(since))}`;
     }
 
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'Lovable-Changelog-Generator',
-      },
-    });
+    const ghToken = Deno.env.get('GITHUB_TOKEN');
+    const ghHeaders: Record<string, string> = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'Lovable-Changelog-Generator',
+    };
+    if (ghToken) ghHeaders['Authorization'] = `Bearer ${ghToken}`;
+
+    const response = await fetch(apiUrl, { headers: ghHeaders });
 
     if (!response.ok) {
       const errorText = await response.text();
