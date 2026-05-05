@@ -356,20 +356,13 @@ export default function CompanyDashboard() {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="default" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
-                    <FileCheck className="h-4 w-4" />
-                    Structured Submission
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Submit specific fields (version, CE/FDA, evidence links) — recommended.</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <StructuredCertificationDialog
-              open={structuredDialogOpen}
-              onOpenChange={setStructuredDialogOpen}
+            <Button variant="default" className="gap-2" onClick={() => setSubmitOpen(true)}>
+              <FileEdit className="h-4 w-4" />
+              Submit Update
+            </Button>
+            <UnifiedSubmissionDialog
+              open={submitOpen}
+              onOpenChange={setSubmitOpen}
               companyProducts={companyProducts}
               onSubmitted={fetchRevisions}
             />
@@ -444,63 +437,7 @@ export default function CompanyDashboard() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
-            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-              <DialogTrigger asChild>
-                <Button className="gap-2">
-                  <FileEdit className="h-4 w-4" />
-                  Submit Revision
-                </Button>
-              </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Submit Product Revision</DialogTitle>
-                <DialogDescription>
-                  Submit changes for review and verification
-                </DialogDescription>
-              </DialogHeader>
-              <div className="space-y-4 py-4">
-                <div className="space-y-2">
-                  <Label>Product</Label>
-                  <select
-                    className="w-full rounded-md border border-input bg-background px-3 py-2"
-                    value={selectedProduct}
-                    onChange={(e) => setSelectedProduct(e.target.value)}
-                  >
-                    <option value="">Select a product</option>
-                    {companyProducts.length === 0 ? (
-                      <option disabled>No products assigned to your company</option>
-                    ) : (
-                      companyProducts.map(product => (
-                        <option key={product.id} value={product.id}>
-                          {product.name}
-                        </option>
-                      ))
-                    )}
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Changes Summary</Label>
-                  <Textarea
-                    placeholder="Describe the changes made to the product information..."
-                    value={changesSummary}
-                    onChange={(e) => setChangesSummary(e.target.value)}
-                    rows={6}
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setDialogOpen(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={handleSubmitRevision}>
-                  Submit for Review
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-            </Dialog>
           </div>
-        </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
