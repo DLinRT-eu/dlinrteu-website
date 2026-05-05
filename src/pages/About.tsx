@@ -7,7 +7,7 @@ import MissionVisionSection from "@/components/about/MissionVisionSection";
 import CoreValuesSection from "@/components/about/CoreValuesSection";
 import TeamSection from "@/components/about/TeamSection";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Eye, Building2, User } from "lucide-react";
+import { Shield, Eye, Building2, User, BarChart3 } from "lucide-react";
 
 const TEAM_MEMBERS = [
   {
@@ -252,6 +252,32 @@ const About = () => {
       </section>
 
       <TeamSection teamMembers={shuffledTeamMembers} />
+
+      {/* Financial Transparency */}
+      <section className="py-12 px-4 bg-muted/20">
+        <div className="container mx-auto max-w-4xl">
+          <Card>
+            <CardHeader>
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Financial Transparency</CardTitle>
+              <CardDescription>
+                We publish an annual overview of donations received and how they are spent.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link
+                to="/transparency"
+                className="text-primary hover:underline font-medium"
+              >
+                View the annual financial overview →
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

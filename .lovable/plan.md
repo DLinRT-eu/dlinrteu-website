@@ -1,63 +1,58 @@
-# Security Lint Triage: GraphQL Exposure & SECURITY DEFINER Functions
+## Goal
 
-## Context
+Keep the existing GoFundMe link in Support (no payments integration). Add a new public **Financial Transparency** page that publishes an annual overview of income and expenses, linked from the About page. Structure it so it's easy to update each year once you provide the Excel file with the cost details.
 
-Supabase linter raised 102 warnings across three rules:
-- **0026** — anon can see object in GraphQL schema (1 finding)
-- **0027** — authenticated can see object in GraphQL schema (~17 findings)
-- **0029** — authenticated can EXECUTE a SECURITY DEFINER function (~80 findings)
+## Scope
 
-These are **discoverability** warnings, not RLS bypass findings. Every flagged table is already protected by row-level security, and every flagged RPC checks the caller's role internally. The risk is schema introspection and the ability to *call* RPCs (which then return nothing for non-authorized users).
+- No payment provider, no checkout, no Stripe/Paddle.
+- Page is public, read-only, statically rendered from a typed data file.
+- Initial content uses placeholders + the income side we already know (donations via GoFundMe). Costs will be filled in once you share the Excel.
 
-## Audit Result
+## Deliverables
 
-After querying `information_schema` and `pg_proc`:
+1. **New route** `/transparency` (page: `src/pages/Transparency.tsx`)
+  - Hero: short statement on why we publish this (non-profit, community-funded, full transparency).
+  - Year selector (tabs) — starts with 2025, easy to add 2026, etc.
+  - Per-year sections:
+    - Summary cards: Total income, Total expenses, Net balance, Carry-over.
+    - **Income table**: source, date, gross amount, net amount, notes (e.g. GoFundMe fees).
+    - **Expenses table**: category, description, date, amount, notes.
+    - **Breakdown chart**: simple Recharts pie/bar of expenses by category.
+  - "Last updated" timestamp + link to GoFundMe campaign for ongoing donations.
+  - SEO + structured data (`Dataset` / `Report`).
+2. **Typed data layer** `src/data/financials/`
+  - `types.ts` — `FinancialYear`, `IncomeEntry`, `ExpenseEntry`, `ExpenseCategory`.
+  - `2025.ts` — initial year file with placeholders; income pre-seeded with GoFundMe row(s) you can edit, expenses left empty pending the Excel.
+  - `index.ts` — array export of all years, sorted desc.
+  - When you send the Excel later, I'll write a small one-shot script to convert it into `2025.ts` (or whatever year) entries — no manual retyping.
+3. **About page link**
+  - Add a clearly visible "Financial Transparency" link/card in `src/pages/About.tsx` pointing to `/transparency`.
+4. **Routing**
+  - Register `/transparency` in `src/App.tsx` (lazy-loaded, public).
+5. **Keep GoFundMe**
+  - No changes to `Support.tsx` donate button.
+  - Add a small "Support us on GoFundMe" CTA at the bottom of the Transparency page that reuses the same URL.
+6. &nbsp;
+7. Within the scope
 
-**Tables/views still SELECT-able by `authenticated`** (all have RLS):
-- Intentional API surface used by the React app: `profiles`, `user_roles`, `notifications`, `product_reviews`, `product_edit_drafts`, `product_revision_dates`, `assignment_history`, `changelog_entries`, `changelog_links`, `company_product_verifications`, `company_representatives`, `company_revisions`, `consent_audit_log`, `reviewer_expertise`, `role_requests`, `user_products`, `user_product_experiences`
-- **No anon SELECT** is granted on any public table (the lone 0026 finding appears stale).
+- Admin form to keep track of costs/income,no DB table — annual updates are committed to the data files (low frequency, fits your workflow) and via the form.
+- No automatic Excel parsing in the app at runtime; conversion happens once at build/author time.
 
-**SECURITY DEFINER functions executable by `authenticated`** (~50):
-- All are RPCs the frontend or other RPCs depend on (`get_my_reviews_secure`, `complete_review_secure`, `approve_role_request`, `certify_product`, `create_company_revision`, `has_role`, `is_admin`, etc.).
-- A handful are trigger-only or cron-only and do **not** need authenticated EXECUTE: `auto_grant_dlinrt_reviewer_role`, `batch_check_github_files`, `check_company_rep_limit`, `check_company_role_before_product_adoption`, `check_products_before_company_role`, `check_role_compatibility`, `cleanup_old_analytics_data`, `cleanup_old_contact_submissions`, `cleanup_old_security_events`, `cleanup_unused_backup_codes`, `debug_reviewer_access`, `enforce_backup_code_quota`, `expire_old_invitations` — these are already not granted to authenticated (good).
+## Technical notes
 
-## Plan
+- Stack: React + Tailwind + shadcn/ui Tabs, Card, Table; Recharts for the breakdown.
+- Currency formatting via `Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR' })`.
+- File layout:
+  ```text
+  src/
+    pages/Transparency.tsx
+    data/financials/
+      types.ts
+      2025.ts
+      index.ts
+  ```
+- Categories suggestion (you can edit): Hosting & Infrastructure, Domain & Email, Software/Tooling, Conferences & Outreach, Legal/Admin, Other.
 
-### 1. Migration — tighten only what is safe to revoke
+## Next step after approval
 
-Re-confirm/lock down trigger- and cron-only functions (idempotent `REVOKE`s) so the linter sees no executable surface for them:
-
-```sql
-REVOKE EXECUTE ON FUNCTION
-  public.auto_grant_dlinrt_reviewer_role(),
-  public.check_company_rep_limit(),
-  public.check_company_role_before_product_adoption(),
-  public.check_products_before_company_role(),
-  public.check_role_compatibility(),
-  public.cleanup_old_analytics_data(),
-  public.cleanup_old_contact_submissions(),
-  public.cleanup_old_security_events(),
-  public.expire_old_invitations(),
-  public.debug_reviewer_access(uuid)
-FROM PUBLIC, anon, authenticated;
-```
-
-No frontend or RPC code calls these, so revoking is safe.
-
-### 2. Mark remaining linter findings as accepted
-
-For the table-exposure (0027) findings on `profiles`, `user_roles`, `notifications`, `product_reviews`, etc., and for the SECURITY DEFINER RPCs the app actually uses, mark them `ignore` via `security--manage_security_finding` with the reason: *RLS-protected and required for the app's authenticated UX; revoking SELECT/EXECUTE would break the application.*
-
-Mark stale 0026 (`SUPA_pg_graphql_anon_table_exposed`) as `mark_as_fixed` — verified no anon SELECT is granted.
-
-### 3. Update security memory
-
-Document the accepted risk:
-- Authenticated users can introspect the public GraphQL schema; this is intentional because the app uses PostgREST/GraphQL with RLS as the real boundary.
-- Internal trigger/cron SECURITY DEFINER functions are revoked from PUBLIC/anon/authenticated.
-- Any **new** SECURITY DEFINER function must default to `REVOKE EXECUTE FROM PUBLIC` and only grant to `authenticated` when the frontend actually calls it as an RPC.
-
-## Out of scope
-
-- No RLS policy changes (existing policies already enforce per-user/role access).
-- No edge function or frontend changes — purely DB grants + finding triage.
+I implement the page + data scaffolding with placeholder/empty cost data. When you upload the Excel, I'll parse it and populate `2025.ts`.
