@@ -238,13 +238,13 @@ const handler = async (req: Request): Promise<Response> => {
         return `
           <div style="background: ${urgency.bgColor}; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid ${urgency.color};">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-weight: 600; color: #374151;">${review.product_id}</span>
+              <span style="font-weight: 600; color: #374151;">${escapeHtml(review.product_id)}</span>
               <span style="background: ${urgency.color}; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600;">${urgency.label}</span>
             </div>
             <div style="color: #6b7280; font-size: 14px;">
               <div>📆 Deadline: ${deadlineDate}</div>
-              ${review.round_name ? `<div>📋 Round: ${review.round_name}</div>` : ''}
-              <div>📊 Status: ${review.status === 'pending' ? 'Not Started' : 'In Progress'}</div>
+              ${review.round_name ? `<div>📋 Round: ${escapeHtml(review.round_name)}</div>` : ''}
+              <div>📊 Status: ${escapeHtml(review.status === 'pending' ? 'Not Started' : 'In Progress')}</div>
             </div>
           </div>
         `;
@@ -259,7 +259,7 @@ const handler = async (req: Request): Promise<Response> => {
               <h1 style="color: white; margin: 0; font-size: 28px;">${overdueCount > 0 ? '⚠️ Review Deadline Alert' : '📅 Deadline Reminder'}</h1>
             </div>
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-              <p style="font-size: 16px; margin-top: 0;">Hello ${reviewer.reviewer_first_name} ${reviewer.reviewer_last_name},</p>
+              <p style="font-size: 16px; margin-top: 0;">Hello ${escapeHtml(reviewer.reviewer_first_name)} ${escapeHtml(reviewer.reviewer_last_name)},</p>
               <p style="font-size: 16px;">This is a reminder about your upcoming and overdue review assignments:</p>
               <div style="display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap;">
                 ${overdueCount > 0 ? `<div style="background: #fef2f2; padding: 12px 20px; border-radius: 8px; text-align: center; flex: 1; min-width: 100px;"><div style="font-size: 24px; font-weight: bold; color: #dc2626;">${overdueCount}</div><div style="font-size: 12px; color: #991b1b;">Overdue</div></div>` : ''}
