@@ -19,7 +19,7 @@ import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle, FileCheck, Trash2, MessageSquareWarning } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { StructuredCertificationDialog } from '@/components/company/StructuredCertificationDialog';
+import { UnifiedSubmissionDialog } from '@/components/company/UnifiedSubmissionDialog';
 import { Link } from 'react-router-dom';
 import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
