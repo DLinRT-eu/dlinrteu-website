@@ -144,8 +144,8 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
-    source: "FDA 510(k) database (K241490), company official sources"
+    lastUpdated: "2026-05-05",
+    lastRevised: "2026-05-05",
+    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources"
   }
 ];
