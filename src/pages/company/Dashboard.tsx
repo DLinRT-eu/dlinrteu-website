@@ -17,7 +17,8 @@ import { format } from 'date-fns';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
-import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle, FileCheck } from 'lucide-react';
+import { Building2, FileEdit, Clock, CheckCircle2, XCircle, BadgeCheck, Calendar as CalendarIcon, AlertCircle, FileCheck, Trash2, MessageSquareWarning } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { StructuredCertificationDialog } from '@/components/company/StructuredCertificationDialog';
 import { Link } from 'react-router-dom';
 import { ALL_PRODUCTS } from '@/data';
@@ -280,6 +281,23 @@ export default function CompanyDashboard() {
     }
   };
 
+  const handleWithdrawRevision = async (revisionId: string) => {
+    if (!user) return;
+    if (!window.confirm('Withdraw this pending revision? This cannot be undone.')) return;
+    const { error } = await supabase
+      .from('company_revisions')
+      .delete()
+      .eq('id', revisionId)
+      .eq('revised_by', user.id)
+      .eq('verification_status', 'pending');
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      return;
+    }
+    toast({ title: 'Withdrawn', description: 'Pending revision removed.' });
+    fetchRevisions();
+  };
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'approved':
@@ -339,10 +357,17 @@ export default function CompanyDashboard() {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            <Button variant="outline" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
-              <FileCheck className="h-4 w-4" />
-              Structured Submission
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="default" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
+                    <FileCheck className="h-4 w-4" />
+                    Structured Submission
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Submit specific fields (version, CE/FDA, evidence links) — recommended.</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <StructuredCertificationDialog
               open={structuredDialogOpen}
               onOpenChange={setStructuredDialogOpen}
@@ -581,9 +606,23 @@ export default function CompanyDashboard() {
                                 </pre>
                               </div>
                             )}
+                            {(revision as any).reviewer_feedback && (
+                              <div className="rounded border-l-2 border-orange-500 bg-orange-500/5 p-3">
+                                <Label className="text-xs font-semibold flex items-center gap-1"><MessageSquareWarning className="h-3 w-3" />Reviewer Feedback</Label>
+                                <p className="text-xs mt-1 whitespace-pre-wrap">{(revision as any).reviewer_feedback}</p>
+                              </div>
+                            )}
                             {revision.verified_at && (
                               <div className="text-xs text-muted-foreground">
                                 Verified on {new Date(revision.verified_at).toLocaleDateString()}
+                              </div>
+                            )}
+                            {revision.verification_status === 'pending' && (
+                              <div className="pt-2">
+                                <Button size="sm" variant="ghost" className="gap-2 text-destructive hover:text-destructive" onClick={() => handleWithdrawRevision(revision.id)}>
+                                  <Trash2 className="h-3 w-3" />
+                                  Withdraw
+                                </Button>
                               </div>
                             )}
                           </div>
