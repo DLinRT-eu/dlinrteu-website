@@ -56,9 +56,8 @@ export default function CompanyDashboard() {
   const { toast } = useToast();
   const [revisions, setRevisions] = useState<CompanyRevision[]>([]);
   const [loading, setLoading] = useState(true);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [submitOpen, setSubmitOpen] = useState(false);
   const [certifyDialogOpen, setCertifyDialogOpen] = useState(false);
-  const [structuredDialogOpen, setStructuredDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [changesSummary, setChangesSummary] = useState('');
   const [certificationDate, setCertificationDate] = useState<Date>(new Date());
