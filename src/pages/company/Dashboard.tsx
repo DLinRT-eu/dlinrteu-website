@@ -303,6 +303,8 @@ export default function CompanyDashboard() {
         return <CheckCircle2 className="h-4 w-4 text-green-500" />;
       case 'rejected':
         return <XCircle className="h-4 w-4 text-red-500" />;
+      case 'withdrawn':
+        return <Trash2 className="h-4 w-4 text-muted-foreground" />;
       default:
         return <Clock className="h-4 w-4 text-yellow-500" />;
     }
@@ -312,6 +314,7 @@ export default function CompanyDashboard() {
     switch (status) {
       case 'approved': return 'default';
       case 'rejected': return 'destructive';
+      case 'withdrawn': return 'outline';
       default: return 'secondary';
     }
   };
@@ -329,6 +332,7 @@ export default function CompanyDashboard() {
   const pendingRevisions = revisions.filter(r => r.verification_status === 'pending');
   const approvedRevisions = revisions.filter(r => r.verification_status === 'approved');
   const rejectedRevisions = revisions.filter(r => r.verification_status === 'rejected');
+  const withdrawnRevisions = revisions.filter(r => r.verification_status === 'withdrawn');
 
   return (
     <PageLayout>
