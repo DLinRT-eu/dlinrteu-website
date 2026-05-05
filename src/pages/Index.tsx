@@ -134,11 +134,13 @@ const Index = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-        <TaskTaxonomy 
-          categories={categoryCounts} 
-          onCategoryClick={handleCategoryClick}
-          filterType="task"
-        />
+        <Suspense fallback={<div style={{ minHeight: 300 }} />}>
+          <TaskTaxonomy 
+            categories={categoryCounts} 
+            onCategoryClick={handleCategoryClick}
+            filterType="task"
+          />
+        </Suspense>
       </div>
 
       {/* Mailing List Signup Section */}
@@ -155,7 +157,9 @@ const Index = () => {
               </div>
               <div className="flex justify-center">
                 <div className="w-full max-w-md">
-                  <MailingListSignup />
+                  <Suspense fallback={<div style={{ minHeight: 80 }} />}>
+                    <MailingListSignup />
+                  </Suspense>
                 </div>
               </div>
             </div>
