@@ -138,7 +138,7 @@ const handler = async (req: Request): Promise<Response> => {
         await resend.emails.send({
           from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
           to: [profile.email],
-          subject: `Product Certification Confirmed: ${safeProductName}`,
+          subject: `Product Certification Confirmed: ${productName}`,
           html: `
             <!DOCTYPE html>
             <html>
@@ -214,7 +214,7 @@ const handler = async (req: Request): Promise<Response> => {
       await resend.emails.send({
         from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
         to: ["info@dlinrt.eu"],
-        subject: `New Product Certification: ${safeProductName} (${safeCompanyName})`,
+        subject: `New Product Certification: ${productName} (${companyName})`,
         html: `
           <!DOCTYPE html>
           <html>
