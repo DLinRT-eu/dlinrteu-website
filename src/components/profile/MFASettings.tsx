@@ -236,9 +236,10 @@ export const MFASettings = () => {
         
         codes.push(code);
         
-        // Store code in database via service role edge function (hashing happens server-side)
+        // Store via edge function (hashed server-side). Reset prior unused codes
+        // on the first call to prevent accumulation that could slow verification.
         const { error } = await supabase.functions.invoke('store-backup-code', {
-          body: { user_id: userId, code }
+          body: { user_id: userId, code, reset: i === 0 }
         });
         
         if (error) {

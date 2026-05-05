@@ -1786,6 +1786,10 @@ export type Database = {
       cleanup_old_analytics_data: { Args: never; Returns: undefined }
       cleanup_old_contact_submissions: { Args: never; Returns: number }
       cleanup_old_security_events: { Args: never; Returns: number }
+      cleanup_unused_backup_codes: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
       clone_review_round_admin: {
         Args: {
           p_default_deadline?: string
