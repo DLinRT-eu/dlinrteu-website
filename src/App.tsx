@@ -31,6 +31,7 @@ const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Companies = lazy(() => import("./pages/Companies"));
 const News = lazy(() => import("./pages/News"));
 const Support = lazy(() => import("./pages/Support"));
+const Transparency = lazy(() => import("./pages/Transparency"));
 const NewsDetail = lazy(() => import("./pages/NewsDetail"));
 const Products = lazy(() => import("./pages/Products"));
 const Pipeline = lazy(() => import("./pages/Pipeline"));
@@ -139,6 +140,7 @@ const App = () => (
                 <Route path="companies" element={<Companies />} />
                 <Route path="news" element={<News />} />
                 <Route path="support" element={<Support />} />
+                <Route path="transparency" element={<Transparency />} />
                 <Route path="news/:id" element={<NewsDetail />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="dashboard-home" element={
