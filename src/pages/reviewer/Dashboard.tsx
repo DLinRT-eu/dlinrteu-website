@@ -118,17 +118,16 @@ export default function ReviewerDashboard() {
 
       if (!rpcError && rpcData) {
         console.log('[Dashboard] ✅ RPC successful:', rpcData.length, 'reviews');
-        // Map RPC data to full ReviewAssignment structure with defaults
-        const mappedReviews: ReviewAssignment[] = rpcData.map(r => ({
+        const mappedReviews: ReviewAssignment[] = rpcData.map((r: any) => ({
           id: r.id,
           product_id: r.product_id,
           status: r.status as ReviewAssignment['status'],
-          priority: 'medium' as ReviewAssignment['priority'],
-          deadline: null,
+          priority: (r.priority ?? 'medium') as ReviewAssignment['priority'],
+          deadline: r.deadline ?? null,
           assigned_at: r.assigned_at,
-          started_at: null,
+          started_at: r.started_at ?? null,
           completed_at: r.completed_at,
-          notes: null,
+          notes: r.notes ?? null,
           review_round_id: r.review_round_id
         }));
         setReviews(mappedReviews);
