@@ -1,51 +1,27 @@
-## Goal
+# Fix: GraphQL Schema Exposure to Authenticated Users
 
-Replace the two separate buttons on the Company Dashboard ("Structured Submission" and "Submit Revision") with a single **"Submit Update"** button that opens one unified dialog with two tabs — **Structured** (recommended) and **Free Text** — plus inline guidance helping the company rep choose.
+## Finding
+Supabase linter flags ~14 public tables visible in the pg_graphql schema to signed-in users (lint 0027). Each table where `authenticated` has `SELECT` is auto-introspected by `pg_graphql` and exposed at `/graphql/v1`.
 
-## Current State
+## Why not the suggested per-table revoke
+Supabase's recommended fix is to revoke `SELECT` on each table from `authenticated`. In this project that would break the app — PostgREST/REST (used everywhere via `supabase-js`) runs as the same `authenticated` role and relies on `SELECT` + RLS for every table the UI queries (profiles, notifications, user_roles, company_revisions, product_reviews, etc.). RLS already constrains row visibility correctly; the linter's concern is GraphQL-specific schema introspection.
 
-`src/pages/company/Dashboard.tsx` exposes two parallel entry points:
-- `StructuredCertificationDialog` (gated by `structuredDialogOpen`) — submits version, CE/FDA, evidence links, etc.
-- A free-text `Dialog` (gated by `dialogOpen`) — calls `create_company_revision` RPC with product + change description.
+## Approach
+The codebase doesn't use GraphQL anywhere (no `/graphql/v1` calls, no `pg_graphql` RPCs in `src/` or `supabase/functions/`). The clean fix is to disable the GraphQL endpoint at the schema level for `anon` and `authenticated`, while leaving REST untouched.
 
-Both write to `company_revisions` and refresh via `fetchRevisions()`. They duplicate trigger UI and confuse reps about which to use.
+## Migration
+```sql
+-- Revoke access to pg_graphql endpoints (no-op for REST)
+REVOKE USAGE ON SCHEMA graphql_public FROM anon, authenticated;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA graphql_public FROM anon, authenticated;
+REVOKE USAGE ON SCHEMA graphql FROM anon, authenticated;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA graphql FROM anon, authenticated;
+-- Service role retains access for any future admin tooling.
+```
 
-## Plan
+## Then
+- Mark the `SUPA_pg_graphql_authenticated_table_exposed` finding fixed with this rationale.
+- Update security memory: "GraphQL endpoint disabled for anon/authenticated; REST + RLS is the sole data-access path."
+- If GraphQL is ever needed, re-grant `USAGE` on `graphql_public` and revisit per-table SELECT grants.
 
-### 1. New component `src/components/company/UnifiedSubmissionDialog.tsx`
-
-- Props: `open`, `onOpenChange`, `products`, `onSubmitted`.
-- Layout: shadcn `Dialog` containing a top guidance banner + shadcn `Tabs` with two tabs:
-  - **Structured (recommended)** — embeds the existing form body extracted from `StructuredCertificationDialog` (version, regulatory status, evidence URLs, notified body, etc.). Badge: "Faster review · Powers verified badge".
-  - **Free text** — product selector + change description textarea (current free-text flow). Badge: "Use for unstructured updates".
-- Guidance banner (always visible above tabs): one-line "Choose Structured for product facts (version, CE/FDA, evidence). Use Free text only for narrative changes that don't fit a field."
-- Per-tab helper text under the tab header reinforcing when to pick each option.
-- Submit button is rendered per tab and reuses the existing submit handlers.
-
-### 2. Refactor `StructuredCertificationDialog`
-
-- Extract its inner form into an exported `StructuredCertificationForm` (no Dialog wrapper, accepts `onSubmitted` + `onCancel`).
-- Keep the existing `StructuredCertificationDialog` as a thin wrapper around the form for backward compatibility (in case it is used elsewhere — verify and remove imports if not).
-
-### 3. Update `src/pages/company/Dashboard.tsx`
-
-- Remove `structuredDialogOpen` + `dialogOpen` state and both old `Dialog`/trigger blocks (lines ~360–502 area).
-- Replace with a single primary button **"Submit Update"** + `UnifiedSubmissionDialog` controlled by one `submitOpen` state.
-- Keep `handleSubmitRevision` logic but move/reuse it inside the free-text tab (passed via the form or kept in dashboard with a callback prop). Simplest: move both submit handlers into the new dialog component, passing `products` and `onSubmitted={fetchRevisions}`.
-- Keep the separate "Certify Product" dialog as-is (different workflow) — out of scope.
-
-### 4. UX details
-
-- Default open tab: **Structured**.
-- After successful submission in either tab, close dialog, toast, and call `onSubmitted`.
-- Both tabs share the same product selector at the top so switching tabs preserves the chosen product.
-- Empty product list → show inline message "No products assigned to your company yet."
-
-### 5. Verification
-
-- Manual: open dashboard as a company rep, confirm single "Submit Update" button, both tabs work and write to `company_revisions`, lists refresh, withdraw still works.
-- Grep for any other consumers of `StructuredCertificationDialog` to ensure none break.
-
-## Out of Scope
-
-- Certify Product dialog, withdraw flow, RPC changes, admin/reviewer side, GitHub PR sync.
+No frontend code changes required.
