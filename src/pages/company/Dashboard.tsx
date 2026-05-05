@@ -282,10 +282,10 @@ export default function CompanyDashboard() {
 
   const handleWithdrawRevision = async (revisionId: string) => {
     if (!user) return;
-    if (!window.confirm('Withdraw this pending revision? This cannot be undone.')) return;
+    if (!window.confirm('Withdraw this pending submission? It will be kept in your history as withdrawn.')) return;
     const { error } = await supabase
       .from('company_revisions')
-      .delete()
+      .update({ verification_status: 'withdrawn' })
       .eq('id', revisionId)
       .eq('revised_by', user.id)
       .eq('verification_status', 'pending');
@@ -293,7 +293,7 @@ export default function CompanyDashboard() {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
       return;
     }
-    toast({ title: 'Withdrawn', description: 'Pending revision removed.' });
+    toast({ title: 'Withdrawn', description: 'Submission marked as withdrawn.' });
     fetchRevisions();
   };
 
@@ -303,6 +303,8 @@ export default function CompanyDashboard() {
         return <CheckCircle2 className="h-4 w-4 text-green-500" />;
       case 'rejected':
         return <XCircle className="h-4 w-4 text-red-500" />;
+      case 'withdrawn':
+        return <Trash2 className="h-4 w-4 text-muted-foreground" />;
       default:
         return <Clock className="h-4 w-4 text-yellow-500" />;
     }
@@ -312,6 +314,7 @@ export default function CompanyDashboard() {
     switch (status) {
       case 'approved': return 'default';
       case 'rejected': return 'destructive';
+      case 'withdrawn': return 'outline';
       default: return 'secondary';
     }
   };
@@ -329,6 +332,7 @@ export default function CompanyDashboard() {
   const pendingRevisions = revisions.filter(r => r.verification_status === 'pending');
   const approvedRevisions = revisions.filter(r => r.verification_status === 'approved');
   const rejectedRevisions = revisions.filter(r => r.verification_status === 'rejected');
+  const withdrawnRevisions = revisions.filter(r => r.verification_status === 'withdrawn');
 
   return (
     <PageLayout>
@@ -476,19 +480,27 @@ export default function CompanyDashboard() {
           </Card>
         </div>
 
-        {/* Revisions List */}
+        {/* Submission History */}
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold">Submission History</h2>
+          <p className="text-sm text-muted-foreground">
+            Track your pending, approved, rejected, and withdrawn product updates with submission and decision dates.
+          </p>
+        </div>
         <Tabs defaultValue="all">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="all">All ({revisions.length})</TabsTrigger>
             <TabsTrigger value="pending">Pending ({pendingRevisions.length})</TabsTrigger>
             <TabsTrigger value="approved">Approved ({approvedRevisions.length})</TabsTrigger>
             <TabsTrigger value="rejected">Rejected ({rejectedRevisions.length})</TabsTrigger>
+            <TabsTrigger value="withdrawn">Withdrawn ({withdrawnRevisions.length})</TabsTrigger>
           </TabsList>
 
-          {['all', 'pending', 'approved', 'rejected'].map(tab => {
-            const tabRevisions = tab === 'all' ? revisions : 
+          {['all', 'pending', 'approved', 'rejected', 'withdrawn'].map(tab => {
+            const tabRevisions = tab === 'all' ? revisions :
               tab === 'pending' ? pendingRevisions :
-              tab === 'approved' ? approvedRevisions : rejectedRevisions;
+              tab === 'approved' ? approvedRevisions :
+              tab === 'rejected' ? rejectedRevisions : withdrawnRevisions;
 
             return (
               <TabsContent key={tab} value={tab} className="space-y-4 mt-6">
