@@ -98,6 +98,10 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeProductName = escapeHtml(productName);
+    const safeCompanyName = escapeHtml(companyName);
+
     console.log(`Processing certification notification for product: ${productName}, company: ${companyName}`);
 
     // Use service role client for profile lookup
