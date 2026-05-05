@@ -136,8 +136,12 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
       availability: "CE markets only"
     },
-    lastUpdated: "2026-01-27",
-    lastRevised: "2026-01-27",
-    source: "Company website and regulatory filings"
+    lastUpdated: "2026-05-05",
+    lastRevised: "2026-05-05",
+    source: "Company website and regulatory filings",
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "No peer-reviewed validation studies identified for SyMRI Spine at time of listing.",
+    clinicalImpact: "I0",
+    clinicalImpactNotes: "No clinical outcome data identified. Diagnostic spine imaging use case; not RT-specific."
   }
 ];
