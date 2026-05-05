@@ -81,7 +81,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       },
       tga: {
         status: "Approved",
-        notes: "MR Models approved February 2025"
+        notes: "MR Models approved February 2025. Latest CT/MR module approvals extended through 2026 (Australia TGA & New Zealand Medsafe)."
       },
       intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
     },
