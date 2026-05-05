@@ -200,6 +200,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const siteUrl = "https://dlinrt.eu";
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     let emailsSent = 0;
     let emailsFailed = 0;
     let emailsSkipped = 0;
