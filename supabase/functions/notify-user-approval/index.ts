@@ -110,6 +110,10 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { userId, email, firstName, lastName, approved, rejectionReason }: NotificationRequest = await req.json();
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeFirst = escapeHtml(firstName);
+    const safeLast = escapeHtml(lastName);
+    const safeReason = rejectionReason ? escapeHtml(rejectionReason) : '';
 
     console.log(`Processing ${approved ? 'approval' : 'rejection'} notification for:`, email);
 
