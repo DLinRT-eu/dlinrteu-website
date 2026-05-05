@@ -118,7 +118,11 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const { firstName, lastName, email, consentGiven }: NewsletterSubscriptionRequest = await req.json();
-    
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeFirst = escapeHtml(firstName);
+    const safeLast = escapeHtml(lastName);
+    const safeEmail = escapeHtml(email);
+
     console.log("Received newsletter subscription from:", email);
 
     // Validate required fields and email format
