@@ -606,9 +606,23 @@ export default function CompanyDashboard() {
                                 </pre>
                               </div>
                             )}
+                            {(revision as any).reviewer_feedback && (
+                              <div className="rounded border-l-2 border-orange-500 bg-orange-500/5 p-3">
+                                <Label className="text-xs font-semibold flex items-center gap-1"><MessageSquareWarning className="h-3 w-3" />Reviewer Feedback</Label>
+                                <p className="text-xs mt-1 whitespace-pre-wrap">{(revision as any).reviewer_feedback}</p>
+                              </div>
+                            )}
                             {revision.verified_at && (
                               <div className="text-xs text-muted-foreground">
                                 Verified on {new Date(revision.verified_at).toLocaleDateString()}
+                              </div>
+                            )}
+                            {revision.verification_status === 'pending' && (
+                              <div className="pt-2">
+                                <Button size="sm" variant="ghost" className="gap-2 text-destructive hover:text-destructive" onClick={() => handleWithdrawRevision(revision.id)}>
+                                  <Trash2 className="h-3 w-3" />
+                                  Withdraw
+                                </Button>
                               </div>
                             )}
                           </div>
