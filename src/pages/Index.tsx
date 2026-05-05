@@ -1,17 +1,19 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import IntroSection from "@/components/IntroSection";
-import NewsSection from "@/components/NewsSection";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import TaskTaxonomy from "@/components/TaskTaxonomy";
 import { getAllOptions } from "@/utils/filterOptions";
 import { matchesTask } from "@/utils/modelCounting";
 import dataService from "@/services/DataService";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import MailingListSignup from "@/components/MailingListSignup";
 import Footer from "@/components/Footer";
+
+// Defer below-the-fold sections to reduce LCP element render delay
+const NewsSection = lazy(() => import("@/components/NewsSection"));
+const TaskTaxonomy = lazy(() => import("@/components/TaskTaxonomy"));
+const MailingListSignup = lazy(() => import("@/components/MailingListSignup"));
 import QuickAccessSection from "@/components/homepage/QuickAccessSection";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
