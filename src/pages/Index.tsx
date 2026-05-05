@@ -246,7 +246,9 @@ const Index = () => {
         </div>
       </div>
 
-      <NewsSection />
+      <Suspense fallback={<div style={{ minHeight: 200 }} />}>
+        <NewsSection />
+      </Suspense>
       
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <Footer />
