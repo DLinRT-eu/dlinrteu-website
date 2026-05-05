@@ -161,7 +161,7 @@ const handler = async (req: Request): Promise<Response> => {
             
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
               <p style="font-size: 16px; margin-top: 0;">
-                Dear ${firstName} ${lastName},
+                Dear ${safeFirst} ${safeLast},
               </p>
               
               <p style="font-size: 16px;">
@@ -214,7 +214,7 @@ const handler = async (req: Request): Promise<Response> => {
             
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
               <p style="font-size: 16px; margin-top: 0;">
-                Dear ${firstName} ${lastName},
+                Dear ${safeFirst} ${safeLast},
               </p>
               
               <p style="font-size: 16px;">
@@ -224,7 +224,7 @@ const handler = async (req: Request): Promise<Response> => {
               <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #f59e0b;">
                 <p style="margin: 0; color: #92400e;">
                   Unfortunately, we were unable to approve your registration at this time.
-                  ${rejectionReason ? `<br><br><strong>Reason:</strong> ${rejectionReason}` : ''}
+                  ${rejectionReason ? `<br><br><strong>Reason:</strong> ${safeReason}` : ''}
                 </p>
               </div>
 
