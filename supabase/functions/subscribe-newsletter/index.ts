@@ -117,7 +117,23 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const { firstName, lastName, email, consentGiven }: NewsletterSubscriptionRequest = await req.json();
+    const rawBody = await req.text();
+    if (rawBody.length > 5000) {
+      return new Response(
+        JSON.stringify({ error: "Payload too large" }),
+        { status: 413, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    let parsedBody: NewsletterSubscriptionRequest;
+    try {
+      parsedBody = JSON.parse(rawBody);
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid JSON" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    const { firstName, lastName, email, consentGiven } = parsedBody;
     const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     const safeFirst = escapeHtml(firstName);
     const safeLast = escapeHtml(lastName);

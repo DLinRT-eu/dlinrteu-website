@@ -122,7 +122,7 @@ serve(async (req) => {
       ? `<h3 style="color: #1e3a8a; margin: 20px 0 10px;">Your Expertise Areas</h3>
          <ul style="padding-left: 20px;">
            ${expertisePreferences.sort((a, b) => a.priority - b.priority).map(exp => `
-             <li style="margin: 5px 0;"><strong>${exp.category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</strong>${exp.priority <= 3 ? ' (Primary)' : exp.priority <= 6 ? ' (Secondary)' : ''}</li>
+             <li style="margin: 5px 0;"><strong>${String(exp.category ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</strong>${exp.priority <= 3 ? ' (Primary)' : exp.priority <= 6 ? ' (Secondary)' : ''}</li>
            `).join('')}
          </ul>` : '';
 
