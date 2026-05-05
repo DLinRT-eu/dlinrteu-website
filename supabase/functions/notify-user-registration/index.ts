@@ -112,19 +112,13 @@ const handler = async (req: Request): Promise<Response> => {
   let parsedUserId: string | null = null;
 
   try {
-    // Verify the request bearer matches one of the project's known keys.
-    // Accept: new-style service role / publishable keys from env, plus the
-    // legacy JWT-format anon key embedded in cron jobs across this project.
+    // Only accept the service role key. This function is invoked by the DB
+    // trigger via pg_net using the service role and must not be callable by
+    // end users with the public anon/publishable keys.
     const authHeader = req.headers.get("authorization");
-    const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
-    const publishableKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY");
-    const LEGACY_ANON_JWT =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zeWZ4eXh6anlvd3dhc2d0dXJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTgxNzgsImV4cCI6MjA2Mzc3NDE3OH0.3a-Q2TUNuB0vbWUoC0Q_Tg_HUAWZ1nH4UhSs95uz1o8";
-    const validBearers = [serviceRoleKey, anonKey, publishableKey, LEGACY_ANON_JWT]
-      .filter(Boolean)
-      .map((k) => `Bearer ${k}`);
+    const expectedBearer = serviceRoleKey ? `Bearer ${serviceRoleKey}` : null;
 
-    if (!authHeader || !validBearers.includes(authHeader)) {
+    if (!expectedBearer || !authHeader || authHeader !== expectedBearer) {
       console.error("Unauthorized request to notify-user-registration");
       return new Response(
         JSON.stringify({ error: "Unauthorized" }),

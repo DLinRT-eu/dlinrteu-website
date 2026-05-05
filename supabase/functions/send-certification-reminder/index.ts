@@ -54,10 +54,19 @@ The certification portal is now open and we kindly invite you to review your com
 
 Your participation helps maintain the quality and reliability of our platform for the entire radiotherapy community.`;
 
+function escapeHtml(s: unknown): string {
+  return String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function bodyToHtml(plainText: string): string {
   return plainText
     .split(/\n\n+/)
-    .map((para) => `<p style="font-size: 15px; color: #374151; margin: 0 0 16px;">${para.trim().replace(/\n/g, "<br/>")}</p>`)
+    .map((para) => `<p style="font-size: 15px; color: #374151; margin: 0 0 16px;">${escapeHtml(para.trim()).replace(/\n/g, "<br/>")}</p>`)
     .join("\n");
 }
 
@@ -77,7 +86,7 @@ function buildHtml(bodyHtml: string, firstName: string, lastName: string): strin
           <p style="color: #bbf7d0; margin: 8px 0 0; font-size: 14px;">We Need Your Input</p>
         </div>
         <div style="background: #f9fafb; padding: 32px 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-          <p style="font-size: 16px; margin-top: 0; color: #111827;">Dear <strong>${firstName} ${lastName}</strong>,</p>
+          <p style="font-size: 16px; margin-top: 0; color: #111827;">Dear <strong>${escapeHtml(firstName)} ${escapeHtml(lastName)}</strong>,</p>
           ${bodyHtml}
           <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px 24px; margin: 24px 0;">
             <p style="font-weight: 600; color: #15803d; margin: 0 0 12px; font-size: 15px;">We kindly ask you to:</p>

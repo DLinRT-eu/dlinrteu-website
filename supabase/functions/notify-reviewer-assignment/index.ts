@@ -52,6 +52,17 @@ interface NotificationRequest {
   productNames: string[];
 }
 
+function escapeHtml(unsafe: unknown): string {
+  return String(unsafe ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 const handler = async (req: Request): Promise<Response> => {
   const origin = req.headers.get("origin");
   const corsHeaders = getCorsHeaders(origin);
@@ -61,12 +72,58 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+
+    // Authenticate: service role OR admin user JWT
+    const authHeader = req.headers.get("Authorization");
+    const expectedServiceBearer = `Bearer ${supabaseKey}`;
+    const isServiceRole = !!authHeader && authHeader === expectedServiceBearer;
+
+    if (!isServiceRole) {
+      if (!authHeader?.startsWith("Bearer ")) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+      const userClient = createClient(supabaseUrl, supabaseAnonKey, {
+        global: { headers: { Authorization: authHeader } },
+      });
+      const token = authHeader.replace("Bearer ", "");
+      const { data: userData, error: userError } = await userClient.auth.getUser(token);
+      if (userError || !userData?.user) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+      const adminClient = createClient(supabaseUrl, supabaseKey);
+      const { data: roles } = await adminClient
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userData.user.id)
+        .eq("role", "admin");
+      if (!roles || roles.length === 0) {
+        return new Response(JSON.stringify({ error: "Admin access required" }), {
+          status: 403,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+    }
+
     const { reviewerId, roundName, assignmentCount, deadline, productNames }: NotificationRequest = await req.json();
+
+    if (typeof reviewerId !== "string" || !UUID_RE.test(reviewerId)) {
+      return new Response(JSON.stringify({ error: "Invalid reviewerId" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     console.log("Processing notification for reviewer:", reviewerId);
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // Get reviewer details including notification preferences
@@ -105,13 +162,16 @@ const handler = async (req: Request): Promise<Response> => {
         })
       : "No deadline set";
 
-    const displayProducts = productNames.slice(0, 5);
-    const hasMore = productNames.length > 5;
+    const displayProducts = (Array.isArray(productNames) ? productNames : []).slice(0, 5);
+    const hasMore = (Array.isArray(productNames) ? productNames.length : 0) > 5;
+    const safeRoundName = escapeHtml(roundName);
+    const safeFirst = escapeHtml(profile.first_name);
+    const safeLast = escapeHtml(profile.last_name);
 
     const emailResponse = await resend.emails.send({
       from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
       to: [profile.email],
-      subject: `New Review Assignment: ${roundName}`,
+      subject: `New Review Assignment: ${String(roundName ?? "").slice(0, 200)}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -127,12 +187,12 @@ const handler = async (req: Request): Promise<Response> => {
             
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
               <p style="font-size: 16px; margin-top: 0;">
-                Hello ${profile.first_name} ${profile.last_name},
+                Hello ${safeFirst} ${safeLast},
               </p>
               
               <p style="font-size: 16px;">
                 You have been assigned <strong style="color: #667eea;">${assignmentCount} product${assignmentCount !== 1 ? 's' : ''}</strong> 
-                to review as part of <strong>${roundName}</strong>.
+                to review as part of <strong>${safeRoundName}</strong>.
               </p>
 
               <div style="background: white; padding: 20px; border-radius: 8px; margin: 25px 0; border: 2px solid #667eea;">
@@ -141,7 +201,7 @@ const handler = async (req: Request): Promise<Response> => {
                 <table style="width: 100%; border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Round:</td>
-                    <td style="padding: 8px 0; text-align: right; font-weight: 600;">${roundName}</td>
+                    <td style="padding: 8px 0; text-align: right; font-weight: 600;">${safeRoundName}</td>
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Products:</td>
@@ -149,7 +209,7 @@ const handler = async (req: Request): Promise<Response> => {
                   </tr>
                   <tr>
                     <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Deadline:</td>
-                    <td style="padding: 8px 0; text-align: right; font-weight: 600; ${!deadline ? 'color: #9ca3af;' : ''}">${deadlineText}</td>
+                    <td style="padding: 8px 0; text-align: right; font-weight: 600; ${!deadline ? 'color: #9ca3af;' : ''}">${escapeHtml(deadlineText)}</td>
                   </tr>
                 </table>
               </div>
@@ -158,7 +218,7 @@ const handler = async (req: Request): Promise<Response> => {
               <div style="background: white; padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid #e5e7eb;">
                 <h3 style="margin-top: 0; color: #374151; font-size: 16px;">Products to Review:</h3>
                 <ul style="margin: 10px 0; padding-left: 20px;">
-                  ${displayProducts.map(name => `<li style="margin: 5px 0;">${name}</li>`).join('')}
+                  ${displayProducts.map(name => `<li style="margin: 5px 0;">${escapeHtml(name)}</li>`).join('')}
                   ${hasMore ? `<li style="margin: 5px 0; color: #6b7280; font-style: italic;">...and ${productNames.length - 5} more</li>` : ''}
                 </ul>
               </div>

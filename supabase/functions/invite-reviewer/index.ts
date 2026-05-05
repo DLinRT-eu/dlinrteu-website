@@ -126,6 +126,12 @@ serve(async (req) => {
            `).join('')}
          </ul>` : '';
 
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeFirstName = firstName ? escapeHtml(firstName) : '';
+    const safeMessage = message ? escapeHtml(message) : '';
+    const safeInstitution = institution ? escapeHtml(institution) : '';
+    const safeUserEmail = escapeHtml(user.email);
+
     const emailHtml = `
       <!DOCTYPE html>
       <html>
@@ -137,11 +143,11 @@ serve(async (req) => {
         </div>
         <div style="background: white; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 10px 10px;">
           <h2 style="color: #1e3a8a; margin-top: 0;">You're Invited to Join as a Reviewer</h2>
-          <p>Hello${firstName ? ` ${firstName}` : ''},</p>
+          <p>Hello${safeFirstName ? ` ${safeFirstName}` : ''},</p>
           <p>You have been invited to join <strong>DLinRT.eu</strong> as a product reviewer.</p>
-          ${message ? `<div style="background: #f3f4f6; border-left: 4px solid #667eea; padding: 15px; margin: 20px 0;"><p style="margin: 0; font-style: italic;">${message}</p></div>` : ''}
+          ${safeMessage ? `<div style="background: #f3f4f6; border-left: 4px solid #667eea; padding: 15px; margin: 20px 0;"><p style="margin: 0; font-style: italic;">${safeMessage}</p></div>` : ''}
           ${expertiseList}
-          ${institution ? `<p style="margin: 20px 0;"><strong>Institution:</strong> ${institution}</p>` : ''}
+          ${safeInstitution ? `<p style="margin: 20px 0;"><strong>Institution:</strong> ${safeInstitution}</p>` : ''}
           <div style="margin: 30px 0; text-align: center;">
             <a href="${registrationUrl}" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Accept Invitation & Register</a>
           </div>
@@ -150,7 +156,7 @@ serve(async (req) => {
           </div>
           <p style="margin-top: 30px; color: #6b7280; font-size: 14px;">Questions? Contact <a href="mailto:info@dlinrt.eu" style="color: #667eea;">info@dlinrt.eu</a></p>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
-          <p style="color: #9ca3af; font-size: 12px; margin: 0;">This invitation was sent by ${user.email}.</p>
+          <p style="color: #9ca3af; font-size: 12px; margin: 0;">This invitation was sent by ${safeUserEmail}.</p>
         </div>
       </body>
       </html>

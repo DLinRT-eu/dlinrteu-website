@@ -118,7 +118,11 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const { firstName, lastName, email, consentGiven }: NewsletterSubscriptionRequest = await req.json();
-    
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeFirst = escapeHtml(firstName);
+    const safeLast = escapeHtml(lastName);
+    const safeEmail = escapeHtml(email);
+
     console.log("Received newsletter subscription from:", email);
 
     // Validate required fields and email format
@@ -198,7 +202,7 @@ const handler = async (req: Request): Promise<Response> => {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-            Welcome to DLinRT Newsletter, ${firstName}!
+            Welcome to DLinRT Newsletter, ${safeFirst}!
           </h2>
           
           <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -245,8 +249,8 @@ const handler = async (req: Request): Promise<Response> => {
           
           <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #374151; margin-top: 0;">Subscriber Details</h3>
-            <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Name:</strong> ${safeFirst} ${safeLast}</p>
+            <p><strong>Email:</strong> ${safeEmail}</p>
             <p><strong>Subscribed at:</strong> ${new Date().toLocaleString()}</p>
             <p><strong>Consent given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
           </div>

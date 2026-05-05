@@ -98,7 +98,11 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    console.log(`Processing certification notification for product: ${productName}, company: ${companyName}`);
+    const escapeHtml = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    const safeProductName = escapeHtml(productName);
+    const safeCompanyName = escapeHtml(companyName);
+
+    console.log(`Processing certification notification for product: ${safeProductName}, company: ${safeCompanyName}`);
 
     // Use service role client for profile lookup
     const serviceClient = createClient(supabaseUrl, supabaseServiceKey);
@@ -150,7 +154,7 @@ const handler = async (req: Request): Promise<Response> => {
                 
                 <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
                   <p style="font-size: 16px; margin-top: 0;">
-                    Hello ${profile.first_name} ${profile.last_name},
+                    Hello ${escapeHtml(profile.first_name)} ${escapeHtml(profile.last_name)},
                   </p>
                   
                   <p style="font-size: 16px;">
@@ -164,11 +168,11 @@ const handler = async (req: Request): Promise<Response> => {
                     <table style="width: 100%; border-collapse: collapse;">
                       <tr>
                         <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Product:</td>
-                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${productName}</td>
+                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${safeProductName}</td>
                       </tr>
                       <tr>
                         <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Company:</td>
-                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${companyName}</td>
+                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${safeCompanyName}</td>
                       </tr>
                       <tr>
                         <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Date:</td>
@@ -176,7 +180,7 @@ const handler = async (req: Request): Promise<Response> => {
                       </tr>
                       <tr>
                         <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Certified by:</td>
-                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${profile.first_name} ${profile.last_name}</td>
+                        <td style="padding: 8px 0; text-align: right; font-weight: 600;">${escapeHtml(profile.first_name)} ${escapeHtml(profile.last_name)}</td>
                       </tr>
                     </table>
                   </div>
@@ -232,15 +236,15 @@ const handler = async (req: Request): Promise<Response> => {
                   <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Product:</td>
-                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${productName}</td>
+                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${safeProductName}</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Company:</td>
-                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${companyName}</td>
+                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${safeCompanyName}</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Certified by:</td>
-                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${profile.first_name} ${profile.last_name}</td>
+                      <td style="padding: 8px 0; text-align: right; font-weight: 600;">${escapeHtml(profile.first_name)} ${escapeHtml(profile.last_name)}</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Date:</td>

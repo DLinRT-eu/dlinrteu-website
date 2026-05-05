@@ -123,9 +123,12 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Rate limiting based on client fingerprint
-    if (!checkRateLimit(eventData.client_fingerprint)) {
-      console.warn(`Rate limit exceeded for client: ${eventData.client_fingerprint}`);
+    // Rate limiting based on server-extracted IP (not the attacker-controlled fingerprint)
+    const clientIp = (req.headers.get('x-forwarded-for')?.split(',')[0].trim())
+      || req.headers.get('x-real-ip')
+      || 'unknown';
+    if (!checkRateLimit(`ip:${clientIp}`)) {
+      console.warn(`Rate limit exceeded for IP: ${clientIp}`);
       return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
         status: 429,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

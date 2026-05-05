@@ -319,10 +319,16 @@ ${typedDraft.edit_summary ? `### Summary\n${typedDraft.edit_summary}` : ''}
 });
 
 function resolveFilePath(product: Record<string, unknown>): string {
-  const category = String(product.category || '').toLowerCase().replace(/\s+/g, '-');
+  const category = String(product.category || '').toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
   const company = String(product.company || '').toLowerCase()
     .replace(/\s+/g, '-')
     .replace(/[^a-z0-9-]/g, '');
+
+  if (!category || !company) {
+    throw new Error('Invalid category or company in draft data');
+  }
 
   // Special cases for single-file categories
   if (category === 'clinical-prediction' || category === 'clinical-decision-support') {
@@ -333,7 +339,11 @@ function resolveFilePath(product: Record<string, unknown>): string {
   }
 
   // Standard category/company structure
-  return `src/data/products/${category}/${company}.ts`;
+  const path = `src/data/products/${category}/${company}.ts`;
+  if (!path.startsWith('src/data/products/')) {
+    throw new Error('Resolved file path is outside products directory');
+  }
+  return path;
 }
 
 function generateProductCode(product: Record<string, unknown>): string {
