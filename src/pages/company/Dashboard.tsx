@@ -357,10 +357,17 @@ export default function CompanyDashboard() {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            <Button variant="outline" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
-              <FileCheck className="h-4 w-4" />
-              Structured Submission
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="default" className="gap-2" onClick={() => setStructuredDialogOpen(true)}>
+                    <FileCheck className="h-4 w-4" />
+                    Structured Submission
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Submit specific fields (version, CE/FDA, evidence links) — recommended.</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <StructuredCertificationDialog
               open={structuredDialogOpen}
               onOpenChange={setStructuredDialogOpen}
