@@ -1919,10 +1919,15 @@ export type Database = {
           changes_summary: string
           company_id: string
           created_at: string
+          field_updates: Json
           id: string
+          priority: string
           product_id: string
+          reviewer_feedback: string
           revision_date: string
+          submission_type: string
           verification_status: string
+          verified_at: string
         }[]
       }
       get_my_reviews_secure: {
