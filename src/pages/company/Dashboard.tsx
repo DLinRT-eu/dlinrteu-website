@@ -281,7 +281,24 @@ export default function CompanyDashboard() {
     }
   };
 
-  const getStatusIcon = (status: string) => {
+  const handleWithdrawRevision = async (revisionId: string) => {
+    if (!user) return;
+    if (!window.confirm('Withdraw this pending revision? This cannot be undone.')) return;
+    const { error } = await supabase
+      .from('company_revisions')
+      .delete()
+      .eq('id', revisionId)
+      .eq('revised_by', user.id)
+      .eq('verification_status', 'pending');
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      return;
+    }
+    toast({ title: 'Withdrawn', description: 'Pending revision removed.' });
+    fetchRevisions();
+  };
+
+
     switch (status) {
       case 'approved':
         return <CheckCircle2 className="h-4 w-4 text-green-500" />;
