@@ -166,7 +166,7 @@ const handler = async (req: Request): Promise<Response> => {
               <p style="color: rgba(255,255,255,0.8); margin: 8px 0 0; font-size: 14px;">${frequency.charAt(0).toUpperCase() + frequency.slice(1)} summary</p>
             </div>
             <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb; border-top: none;">
-              <p style="font-size: 16px; margin-top: 0;">Hello ${profile.first_name},</p>
+              <p style="font-size: 16px; margin-top: 0;">Hello ${String(profile.first_name ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;")},</p>
               <p style="font-size: 16px;">You have <strong>${userNotifs.length}</strong> unread notification${userNotifs.length > 1 ? 's' : ''} from the ${periodLabel}:</p>
               <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e5e7eb; margin: 20px 0;">
                 <thead><tr style="background: #f3f4f6;"><th style="padding:10px 12px; text-align:left;">Category</th><th style="padding:10px 12px; text-align:center;">Count</th></tr></thead>
