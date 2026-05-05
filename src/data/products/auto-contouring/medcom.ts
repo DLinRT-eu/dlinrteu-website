@@ -71,5 +71,8 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
+    lastUpdated: "2026-05-05",
+    lastRevised: "2026-05-05",
+    source: "Vendor product page (MedCom ProSoma)."
   },
 ];
