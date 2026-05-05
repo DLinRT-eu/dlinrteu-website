@@ -1,17 +1,19 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import IntroSection from "@/components/IntroSection";
-import NewsSection from "@/components/NewsSection";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import TaskTaxonomy from "@/components/TaskTaxonomy";
 import { getAllOptions } from "@/utils/filterOptions";
 import { matchesTask } from "@/utils/modelCounting";
 import dataService from "@/services/DataService";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import MailingListSignup from "@/components/MailingListSignup";
 import Footer from "@/components/Footer";
+
+// Defer below-the-fold sections to reduce LCP element render delay
+const NewsSection = lazy(() => import("@/components/NewsSection"));
+const TaskTaxonomy = lazy(() => import("@/components/TaskTaxonomy"));
+const MailingListSignup = lazy(() => import("@/components/MailingListSignup"));
 import QuickAccessSection from "@/components/homepage/QuickAccessSection";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -132,11 +134,13 @@ const Index = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-        <TaskTaxonomy 
-          categories={categoryCounts} 
-          onCategoryClick={handleCategoryClick}
-          filterType="task"
-        />
+        <Suspense fallback={<div style={{ minHeight: 300 }} />}>
+          <TaskTaxonomy 
+            categories={categoryCounts} 
+            onCategoryClick={handleCategoryClick}
+            filterType="task"
+          />
+        </Suspense>
       </div>
 
       {/* Mailing List Signup Section */}
@@ -153,7 +157,9 @@ const Index = () => {
               </div>
               <div className="flex justify-center">
                 <div className="w-full max-w-md">
-                  <MailingListSignup />
+                  <Suspense fallback={<div style={{ minHeight: 80 }} />}>
+                    <MailingListSignup />
+                  </Suspense>
                 </div>
               </div>
             </div>
@@ -240,7 +246,9 @@ const Index = () => {
         </div>
       </div>
 
-      <NewsSection />
+      <Suspense fallback={<div style={{ minHeight: 200 }} />}>
+        <NewsSection />
+      </Suspense>
       
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         <Footer />
