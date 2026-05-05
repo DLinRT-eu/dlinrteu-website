@@ -282,10 +282,10 @@ export default function CompanyDashboard() {
 
   const handleWithdrawRevision = async (revisionId: string) => {
     if (!user) return;
-    if (!window.confirm('Withdraw this pending revision? This cannot be undone.')) return;
+    if (!window.confirm('Withdraw this pending submission? It will be kept in your history as withdrawn.')) return;
     const { error } = await supabase
       .from('company_revisions')
-      .delete()
+      .update({ verification_status: 'withdrawn' })
       .eq('id', revisionId)
       .eq('revised_by', user.id)
       .eq('verification_status', 'pending');
@@ -293,7 +293,7 @@ export default function CompanyDashboard() {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
       return;
     }
-    toast({ title: 'Withdrawn', description: 'Pending revision removed.' });
+    toast({ title: 'Withdrawn', description: 'Submission marked as withdrawn.' });
     fetchRevisions();
   };
 
