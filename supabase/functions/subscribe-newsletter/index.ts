@@ -249,8 +249,8 @@ const handler = async (req: Request): Promise<Response> => {
           
           <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #374151; margin-top: 0;">Subscriber Details</h3>
-            <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Name:</strong> ${safeFirst} ${safeLast}</p>
+            <p><strong>Email:</strong> ${safeEmail}</p>
             <p><strong>Subscribed at:</strong> ${new Date().toLocaleString()}</p>
             <p><strong>Consent given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
           </div>
