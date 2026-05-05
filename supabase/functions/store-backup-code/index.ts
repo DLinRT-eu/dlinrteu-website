@@ -72,13 +72,40 @@ serve(async (req) => {
     // Extract user_id from authenticated user, not from request body
     const user_id = user.id;
 
-    const { code } = await req.json();
+    const { code, reset } = await req.json();
 
     if (!code) {
       return new Response(
         JSON.stringify({ error: 'Missing backup code' }),
         { 
           status: 400,
+          headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // If reset flag set, clear all prior unused codes for this user before insert.
+    // Prevents accumulation/abuse that would slow down bcrypt verification.
+    if (reset === true) {
+      await supabaseClient
+        .from('mfa_backup_codes')
+        .delete()
+        .eq('user_id', user_id)
+        .eq('used', false);
+    }
+
+    // Enforce per-user quota (max 16 unused codes) defensively in code as well as via DB trigger
+    const { count: unusedCount } = await supabaseClient
+      .from('mfa_backup_codes')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', user_id)
+      .eq('used', false);
+
+    if ((unusedCount ?? 0) >= 16) {
+      return new Response(
+        JSON.stringify({ error: 'Backup code quota exceeded' }),
+        {
+          status: 429,
           headers: { ...corsHeaders(req), 'Content-Type': 'application/json' }
         }
       );
