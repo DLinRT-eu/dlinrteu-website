@@ -104,8 +104,29 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Processing certification notification for product: ${safeProductName}, company: ${safeCompanyName}`);
 
-    // Use service role client for profile lookup
+    // Use service role client for verification + profile lookup
     const serviceClient = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Verify a recent certification record exists for this (product, user)
+    // This prevents arbitrary users from triggering fake certification emails.
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    const { data: verification, error: verificationError } = await serviceClient
+      .from("company_product_verifications")
+      .select("id, company_id, product_id, verified_by, verified_at")
+      .eq("product_id", productId)
+      .eq("verified_by", userId)
+      .gte("verified_at", fiveMinutesAgo)
+      .order("verified_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (verificationError || !verification) {
+      console.warn("No recent verification record found for user", userId, "product", productId);
+      return new Response(JSON.stringify({ error: "No matching certification record found" }), {
+        status: 403,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     // Get the certifying user's profile
     const { data: profile, error: profileError } = await serviceClient
