@@ -267,7 +267,7 @@ export default function CompanyDashboard() {
         title: 'Success',
         description: 'Revision submitted for verification',
       });
-      setDialogOpen(false);
+      // dialog handled by UnifiedSubmissionDialog now
       setSelectedProduct('');
       setChangesSummary('');
       fetchRevisions();
