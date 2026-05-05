@@ -1935,10 +1935,14 @@ export type Database = {
         Returns: {
           assigned_at: string
           completed_at: string
+          deadline: string
           id: string
+          notes: string
+          priority: string
           product_id: string
           review_round_id: string
           round_name: string
+          started_at: string
           status: string
         }[]
       }
