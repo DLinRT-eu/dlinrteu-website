@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { z } from 'zod';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,24 +23,30 @@ interface EvidenceLink {
   link: string;
 }
 
-interface Props {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  companyProducts: CompanyProduct[];
-  onSubmitted: () => void;
-}
-
 const evidenceSchema = z.object({
   type: z.string().trim().min(1).max(80),
   description: z.string().trim().max(300).optional().or(z.literal('')),
   link: z.string().trim().url({ message: 'Must be a valid URL' }).max(500),
 });
 
-export function StructuredCertificationDialog({ open, onOpenChange, companyProducts, onSubmitted }: Props) {
+interface FormProps {
+  companyProducts: CompanyProduct[];
+  productId: string;
+  onProductChange: (id: string) => void;
+  onSubmitted: () => void;
+  onCancel: () => void;
+}
+
+export function StructuredCertificationForm({
+  companyProducts,
+  productId,
+  onProductChange,
+  onSubmitted,
+  onCancel,
+}: FormProps) {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
 
-  const [productId, setProductId] = useState('');
   const [version, setVersion] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
   const [ceStatus, setCeStatus] = useState('');
@@ -53,7 +59,7 @@ export function StructuredCertificationDialog({ open, onOpenChange, companyProdu
   const [notes, setNotes] = useState('');
 
   const reset = () => {
-    setProductId(''); setVersion(''); setReleaseDate('');
+    setVersion(''); setReleaseDate('');
     setCeStatus(''); setCeClass(''); setNotifiedBody('');
     setFdaStatus(''); setFdaClearance(''); setFdaDate('');
     setEvidence([{ type: '', description: '', link: '' }]);
@@ -132,7 +138,6 @@ export function StructuredCertificationDialog({ open, onOpenChange, companyProdu
       }
       toast({ title: 'Submitted', description: 'Structured certification submitted for review' });
       reset();
-      onOpenChange(false);
       onSubmitted();
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Unknown error';
@@ -142,6 +147,122 @@ export function StructuredCertificationDialog({ open, onOpenChange, companyProdu
     }
   };
 
+  return (
+    <div className="space-y-5 py-2">
+      <div className="space-y-2">
+        <Label>Product</Label>
+        <select
+          className="w-full rounded-md border border-input bg-background px-3 py-2"
+          value={productId}
+          onChange={(e) => onProductChange(e.target.value)}
+        >
+          <option value="">Select a product</option>
+          {companyProducts.length === 0 ? (
+            <option disabled>No products assigned to your company</option>
+          ) : (
+            companyProducts.map(p => (
+              <option key={p.id} value={p.id}>{p.name}</option>
+            ))
+          )}
+        </select>
+      </div>
+
+      <Card>
+        <CardContent className="pt-4 space-y-3">
+          <div className="text-sm font-semibold">Versioning</div>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <Label>Version</Label>
+              <Input value={version} onChange={(e) => setVersion(e.target.value)} placeholder="e.g. 4.2.1" maxLength={50} />
+            </div>
+            <div className="space-y-1">
+              <Label>Release date</Label>
+              <Input type="date" value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="pt-4 space-y-3">
+          <div className="text-sm font-semibold">CE Marking</div>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="space-y-1">
+              <Label>Status</Label>
+              <Input value={ceStatus} onChange={(e) => setCeStatus(e.target.value)} placeholder="e.g. CE Marked" maxLength={80} />
+            </div>
+            <div className="space-y-1">
+              <Label>Class</Label>
+              <Input value={ceClass} onChange={(e) => setCeClass(e.target.value)} placeholder="e.g. Class IIa" maxLength={40} />
+            </div>
+            <div className="space-y-1">
+              <Label>Notified body</Label>
+              <Input value={notifiedBody} onChange={(e) => setNotifiedBody(e.target.value)} placeholder="e.g. TÜV SÜD (0123)" maxLength={120} />
+            </div>
+          </div>
+          <div className="text-sm font-semibold pt-2">FDA Clearance</div>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="space-y-1">
+              <Label>Status</Label>
+              <Input value={fdaStatus} onChange={(e) => setFdaStatus(e.target.value)} placeholder="e.g. 510(k) cleared" maxLength={80} />
+            </div>
+            <div className="space-y-1">
+              <Label>Clearance #</Label>
+              <Input value={fdaClearance} onChange={(e) => setFdaClearance(e.target.value)} placeholder="K-number" maxLength={40} />
+            </div>
+            <div className="space-y-1">
+              <Label>Decision date</Label>
+              <Input type="date" value={fdaDate} onChange={(e) => setFdaDate(e.target.value)} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="pt-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-semibold">Evidence Links</div>
+            <Button type="button" variant="outline" size="sm" onClick={() => setEvidence(prev => [...prev, { type: '', description: '', link: '' }])}>
+              <Plus className="h-3 w-3 mr-1" /> Add
+            </Button>
+          </div>
+          {evidence.map((e, i) => (
+            <div key={i} className="grid grid-cols-12 gap-2 items-start">
+              <Input className="col-span-3" value={e.type} onChange={(ev) => updateEvidence(i, 'type', ev.target.value)} placeholder="Type (e.g. Peer-reviewed)" maxLength={80} />
+              <Input className="col-span-4" value={e.description} onChange={(ev) => updateEvidence(i, 'description', ev.target.value)} placeholder="Short description" maxLength={300} />
+              <Input className="col-span-4" value={e.link} onChange={(ev) => updateEvidence(i, 'link', ev.target.value)} placeholder="https://..." maxLength={500} />
+              <Button type="button" variant="ghost" size="icon" className="col-span-1" onClick={() => setEvidence(prev => prev.filter((_, idx) => idx !== i))} disabled={evidence.length === 1}>
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      <div className="space-y-2">
+        <Label>Additional notes (optional)</Label>
+        <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} maxLength={2000} placeholder="Any context for the reviewer" />
+      </div>
+
+      <div className="flex justify-end gap-2 pt-2">
+        <Button variant="outline" onClick={onCancel} disabled={submitting}>Cancel</Button>
+        <Button onClick={handleSubmit} disabled={submitting}>
+          {submitting ? 'Submitting…' : 'Submit for Review'}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+interface DialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  companyProducts: CompanyProduct[];
+  onSubmitted: () => void;
+}
+
+export function StructuredCertificationDialog({ open, onOpenChange, companyProducts, onSubmitted }: DialogProps) {
+  const [productId, setProductId] = useState('');
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -154,106 +275,13 @@ export function StructuredCertificationDialog({ open, onOpenChange, companyProdu
             Submit version, regulatory and evidence information for one of your products. Reviewers will validate before publication.
           </DialogDescription>
         </DialogHeader>
-
-        <div className="space-y-5 py-2">
-          <div className="space-y-2">
-            <Label>Product</Label>
-            <select
-              className="w-full rounded-md border border-input bg-background px-3 py-2"
-              value={productId}
-              onChange={(e) => setProductId(e.target.value)}
-            >
-              <option value="">Select a product</option>
-              {companyProducts.map(p => (
-                <option key={p.id} value={p.id}>{p.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <Card>
-            <CardContent className="pt-4 space-y-3">
-              <div className="text-sm font-semibold">Versioning</div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <Label>Version</Label>
-                  <Input value={version} onChange={(e) => setVersion(e.target.value)} placeholder="e.g. 4.2.1" maxLength={50} />
-                </div>
-                <div className="space-y-1">
-                  <Label>Release date</Label>
-                  <Input type="date" value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-4 space-y-3">
-              <div className="text-sm font-semibold">CE Marking</div>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <Label>Status</Label>
-                  <Input value={ceStatus} onChange={(e) => setCeStatus(e.target.value)} placeholder="e.g. CE Marked" maxLength={80} />
-                </div>
-                <div className="space-y-1">
-                  <Label>Class</Label>
-                  <Input value={ceClass} onChange={(e) => setCeClass(e.target.value)} placeholder="e.g. Class IIa" maxLength={40} />
-                </div>
-                <div className="space-y-1">
-                  <Label>Notified body</Label>
-                  <Input value={notifiedBody} onChange={(e) => setNotifiedBody(e.target.value)} placeholder="e.g. TÜV SÜD (0123)" maxLength={120} />
-                </div>
-              </div>
-              <div className="text-sm font-semibold pt-2">FDA Clearance</div>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <Label>Status</Label>
-                  <Input value={fdaStatus} onChange={(e) => setFdaStatus(e.target.value)} placeholder="e.g. 510(k) cleared" maxLength={80} />
-                </div>
-                <div className="space-y-1">
-                  <Label>Clearance #</Label>
-                  <Input value={fdaClearance} onChange={(e) => setFdaClearance(e.target.value)} placeholder="K-number" maxLength={40} />
-                </div>
-                <div className="space-y-1">
-                  <Label>Decision date</Label>
-                  <Input type="date" value={fdaDate} onChange={(e) => setFdaDate(e.target.value)} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="text-sm font-semibold">Evidence Links</div>
-                <Button type="button" variant="outline" size="sm" onClick={() => setEvidence(prev => [...prev, { type: '', description: '', link: '' }])}>
-                  <Plus className="h-3 w-3 mr-1" /> Add
-                </Button>
-              </div>
-              {evidence.map((e, i) => (
-                <div key={i} className="grid grid-cols-12 gap-2 items-start">
-                  <Input className="col-span-3" value={e.type} onChange={(ev) => updateEvidence(i, 'type', ev.target.value)} placeholder="Type (e.g. Peer-reviewed)" maxLength={80} />
-                  <Input className="col-span-4" value={e.description} onChange={(ev) => updateEvidence(i, 'description', ev.target.value)} placeholder="Short description" maxLength={300} />
-                  <Input className="col-span-4" value={e.link} onChange={(ev) => updateEvidence(i, 'link', ev.target.value)} placeholder="https://..." maxLength={500} />
-                  <Button type="button" variant="ghost" size="icon" className="col-span-1" onClick={() => setEvidence(prev => prev.filter((_, idx) => idx !== i))} disabled={evidence.length === 1}>
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          <div className="space-y-2">
-            <Label>Additional notes (optional)</Label>
-            <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} maxLength={2000} placeholder="Any context for the reviewer" />
-          </div>
-        </div>
-
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>Cancel</Button>
-          <Button onClick={handleSubmit} disabled={submitting}>
-            {submitting ? 'Submitting…' : 'Submit for Review'}
-          </Button>
-        </DialogFooter>
+        <StructuredCertificationForm
+          companyProducts={companyProducts}
+          productId={productId}
+          onProductChange={setProductId}
+          onSubmitted={() => { onOpenChange(false); onSubmitted(); }}
+          onCancel={() => onOpenChange(false)}
+        />
       </DialogContent>
     </Dialog>
   );
