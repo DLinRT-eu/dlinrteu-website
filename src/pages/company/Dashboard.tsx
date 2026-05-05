@@ -480,19 +480,27 @@ export default function CompanyDashboard() {
           </Card>
         </div>
 
-        {/* Revisions List */}
+        {/* Submission History */}
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold">Submission History</h2>
+          <p className="text-sm text-muted-foreground">
+            Track your pending, approved, rejected, and withdrawn product updates with submission and decision dates.
+          </p>
+        </div>
         <Tabs defaultValue="all">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="all">All ({revisions.length})</TabsTrigger>
             <TabsTrigger value="pending">Pending ({pendingRevisions.length})</TabsTrigger>
             <TabsTrigger value="approved">Approved ({approvedRevisions.length})</TabsTrigger>
             <TabsTrigger value="rejected">Rejected ({rejectedRevisions.length})</TabsTrigger>
+            <TabsTrigger value="withdrawn">Withdrawn ({withdrawnRevisions.length})</TabsTrigger>
           </TabsList>
 
-          {['all', 'pending', 'approved', 'rejected'].map(tab => {
-            const tabRevisions = tab === 'all' ? revisions : 
+          {['all', 'pending', 'approved', 'rejected', 'withdrawn'].map(tab => {
+            const tabRevisions = tab === 'all' ? revisions :
               tab === 'pending' ? pendingRevisions :
-              tab === 'approved' ? approvedRevisions : rejectedRevisions;
+              tab === 'approved' ? approvedRevisions :
+              tab === 'rejected' ? rejectedRevisions : withdrawnRevisions;
 
             return (
               <TabsContent key={tab} value={tab} className="space-y-4 mt-6">
