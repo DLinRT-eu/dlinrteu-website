@@ -79,6 +79,8 @@ import {
 import { exportReviewRoundsToPDF } from "@/utils/reviewRoundsPdfExporter";
 import { ReviewRoundsCalendar } from "@/components/admin/review-rounds/ReviewRoundsCalendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { Search } from "lucide-react";
 
 export default function ReviewRounds() {
   const navigate = useNavigate();
@@ -108,6 +110,8 @@ export default function ReviewRounds() {
     reviewsToDelete: number;
     totalReviews: number;
   } | null>(null);
+  const [showArchived, setShowArchived] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
   const [formData, setFormData] = useState({
     name: '',
@@ -429,10 +433,11 @@ export default function ReviewRounds() {
   };
 
   const handleSelectAll = () => {
-    if (selectedRounds.size === rounds.length) {
+    const ids = visibleRounds.map(r => r.id);
+    if (ids.every(id => selectedRounds.has(id)) && ids.length > 0) {
       setSelectedRounds(new Set());
     } else {
-      setSelectedRounds(new Set(rounds.map(r => r.id)));
+      setSelectedRounds(new Set(ids));
     }
   };
 
@@ -468,6 +473,19 @@ export default function ReviewRounds() {
       </div>
     );
   }
+
+  const archivedCount = rounds.filter(r => r.status === 'archived').length;
+  const q = searchQuery.trim().toLowerCase();
+  const visibleRounds = rounds.filter(r => {
+    if (!showArchived && r.status === 'archived') return false;
+    if (!q) return true;
+    return (
+      r.name.toLowerCase().includes(q) ||
+      (r.description?.toLowerCase().includes(q) ?? false) ||
+      `#${r.round_number}`.includes(q) ||
+      String(r.round_number) === q
+    );
+  });
 
   return (
     <div className="container mx-auto py-8 space-y-6">
@@ -684,10 +702,37 @@ export default function ReviewRounds() {
           {/* Rounds Table */}
           <Card>
             <CardHeader>
-              <CardTitle>All Review Rounds</CardTitle>
-              <CardDescription>
-                View and manage all review rounds
-              </CardDescription>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <CardTitle>Review Rounds</CardTitle>
+                  <CardDescription>
+                    {showArchived
+                      ? 'Showing all rounds including archived'
+                      : 'Showing active rounds (archived hidden)'}
+                  </CardDescription>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                  <div className="relative">
+                    <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Search rounds..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-8 w-full sm:w-64"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      id="show-archived"
+                      checked={showArchived}
+                      onCheckedChange={setShowArchived}
+                    />
+                    <Label htmlFor="show-archived" className="text-sm whitespace-nowrap cursor-pointer">
+                      Show archived ({archivedCount})
+                    </Label>
+                  </div>
+                </div>
+              </div>
             </CardHeader>
             {selectedRounds.size > 0 && (
               <RoundsBulkActionsMenu
@@ -697,17 +742,25 @@ export default function ReviewRounds() {
               />
             )}
             <CardContent>
-          {rounds.length === 0 ? (
+          {visibleRounds.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>No review rounds created yet</p>
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => setShowCreateDialog(true)}
-              >
-                Create your first round
-              </Button>
+              <p>
+                {rounds.length === 0
+                  ? 'No review rounds created yet'
+                  : searchQuery
+                    ? 'No rounds match your search'
+                    : 'No active rounds. Toggle "Show archived" to view archived rounds.'}
+              </p>
+              {rounds.length === 0 && (
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() => setShowCreateDialog(true)}
+                >
+                  Create your first round
+                </Button>
+              )}
             </div>
           ) : (
             <Table>
@@ -715,7 +768,7 @@ export default function ReviewRounds() {
                 <TableRow>
                   <TableHead className="w-12">
                     <Checkbox
-                      checked={rounds.length > 0 && selectedRounds.size === rounds.length}
+                      checked={visibleRounds.length > 0 && visibleRounds.every(r => selectedRounds.has(r.id))}
                       onCheckedChange={handleSelectAll}
                       aria-label="Select all rounds"
                     />
@@ -732,7 +785,7 @@ export default function ReviewRounds() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rounds.map((round) => (
+                {visibleRounds.map((round) => (
                   <TableRow key={round.id}>
                     <TableCell>
                       <Checkbox
@@ -813,7 +866,7 @@ export default function ReviewRounds() {
         </TabsContent>
 
         <TabsContent value="calendar">
-          <ReviewRoundsCalendar rounds={rounds} />
+          <ReviewRoundsCalendar rounds={showArchived ? rounds : rounds.filter(r => r.status !== 'archived')} />
         </TabsContent>
       </Tabs>
 
