@@ -86,9 +86,8 @@ export function AppSidebar() {
       : pathname === url || pathname.startsWith(url + "/");
 
   const renderGroup = (label: string, items: Item[]) => {
-    const expanded = items.some((i) => isActive(i.url));
     return (
-      <SidebarGroup defaultOpen={expanded}>
+      <SidebarGroup>
         {!collapsed && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
         <SidebarGroupContent>
           <SidebarMenu>
