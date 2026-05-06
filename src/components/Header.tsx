@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Building2, Newspaper, Eye, Shield, LayoutDashboard, BookOpen, Activity, FlaskConical, Lightbulb, Calendar, LogOut, User as UserIcon, Info } from 'lucide-react';
+import { Package, Building2, Newspaper, Eye, Shield, LayoutDashboard, BookOpen, Activity, FlaskConical, Lightbulb, Calendar, LogOut, User as UserIcon, Info, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Avatar, AvatarFallback } from './ui/avatar';
@@ -11,12 +12,20 @@ import { useRoles } from '@/contexts/RoleContext';
 import { useToast } from '@/hooks/use-toast';
 import NotificationBell from './notifications/NotificationBell';
 import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
+import { CommandPalette, useCommandPalette } from './CommandPalette';
 
 const Header = () => {
   const { user, profile, signOut } = useAuth();
   const { roles, activeRole, setActiveRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { open: paletteOpen, setOpen: setPaletteOpen } = useCommandPalette();
+
+  useEffect(() => {
+    const handler = () => setPaletteOpen(true);
+    window.addEventListener('open-command-palette', handler);
+    return () => window.removeEventListener('open-command-palette', handler);
+  }, [setPaletteOpen]);
   
   const isRegularUser = !activeRole || roles.length === 0;
   const canSwitchRoles = roles.length > 1;
@@ -31,6 +40,7 @@ const Header = () => {
   };
 
   return (
+    <>
     <header className="bg-[#00A6D6] text-white py-3 px-4 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         <Link to="/" className="text-sm md:text-base lg:text-lg font-bold hover:text-white/90">
@@ -97,6 +107,17 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setPaletteOpen(true)}
+            className="h-8 gap-1.5 text-xs"
+            aria-label="Open search (Ctrl/Cmd + K)"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span className="hidden lg:inline">Search</span>
+            <kbd className="hidden lg:inline px-1.5 py-0.5 text-[10px] font-mono bg-white/20 rounded">⌘K</kbd>
+          </Button>
           {user && canSwitchRoles && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -199,6 +220,8 @@ const Header = () => {
         </div>
       </div>
     </header>
+    <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
+    </>
   );
 };
 
