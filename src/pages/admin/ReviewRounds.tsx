@@ -110,6 +110,8 @@ export default function ReviewRounds() {
     reviewsToDelete: number;
     totalReviews: number;
   } | null>(null);
+  const [showArchived, setShowArchived] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
   const [formData, setFormData] = useState({
     name: '',
