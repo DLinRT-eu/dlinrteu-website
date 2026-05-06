@@ -9,10 +9,17 @@ const ALLOWED_ORIGINS = [
 ];
 
 function getCorsHeaders(origin: string | null): Record<string, string> {
-  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'));
+  const isAllowed = origin && (
+    ALLOWED_ORIGINS.includes(origin) ||
+    origin.endsWith('.lovable.app') ||
+    origin.endsWith('.lovableproject.com')
+  );
   return {
     'Access-Control-Allow-Origin': isAllowed ? origin : ALLOWED_ORIGINS[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin',
   };
 }
 

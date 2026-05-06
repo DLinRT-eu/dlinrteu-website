@@ -1,54 +1,35 @@
-# Phases 2–4 Rollout
+# Fix: Newsletter admin page appears empty
 
-Findings from exploration changed the scope slightly — applying the Minimal Intervention rule:
+## Diagnosis
+- DB query confirms **101 active subscribers** exist in `newsletter_subscribers` (no data loss).
+- Edge-function logs for `admin-newsletter-management` show only `OPTIONS | 200` requests in the last hour — the actual `POST` never reaches the function.
+- The function's `getCorsHeaders` returns only `Access-Control-Allow-Origin` and `Access-Control-Allow-Headers`, and only allows `dlinrt.eu`, `www.dlinrt.eu`, `localhost`, and `*.lovable.app`.
+- The current preview is served from `*.lovableproject.com`, which is **not** in the allowlist, and the preflight is missing `Access-Control-Allow-Methods`. Browsers therefore block the POST and the page silently renders empty.
 
-- **Reviewer Dashboard** already uses Tabs (All / Pending / In Progress / Completed) — no refactor needed.
-- **Company Dashboard Overview** already uses Tabs (Overview / Products / Recent Updates / Team) — no refactor needed.
-- **Homepage** already has `QuickAccessSection` and `Products` already has `ActiveFilterChips` — no rebuild needed.
-- **AdminOverview** (817 lines) is sectioned but flat; restructuring into tabs is risky and largely cosmetic. Skipping to honor Minimal Intervention.
+## Fix
+Edit `supabase/functions/admin-newsletter-management/index.ts` only — update `getCorsHeaders`:
 
-So the meaningful remaining work is **Phase 3 (Command Palette + ⌘K)**, which delivers cross-cutting value for both public and authenticated users.
+```ts
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const isAllowed = origin && (
+    ALLOWED_ORIGINS.includes(origin) ||
+    origin.endsWith('.lovable.app') ||
+    origin.endsWith('.lovableproject.com')
+  );
+  return {
+    'Access-Control-Allow-Origin': isAllowed ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Max-Age': '86400',
+    'Vary': 'Origin',
+  };
+}
+```
 
----
-
-## Phase 3 — Global Command Palette (⌘K / Ctrl-K)
-
-**New file**: `src/components/CommandPalette.tsx`
-- `CommandDialog` (shadcn) with `CommandInput`, grouped results.
-- Static groups: Navigate (Products, Companies, Compare, Initiatives, News, Changelog, Resources, Transparency, Analytics, About, Support).
-- Conditional groups based on `useAuth` + `useRoles`:
-  - My account (when signed in): Dashboard, Profile, Notifications, My products.
-  - Admin (when `hasAdminRole`): Overview, Registrations, Review rounds, Edit approvals, Certifications, Security.
-  - Reviewer (when `hasReviewerRole`): Assigned reviews, Due reviews, Preferences.
-  - Company (when `hasCompanyRole`): Overview, Products, Certify.
-- Live results when query non-empty:
-  - Top 8 products from `dataService.getAllProducts()` matched by name/company/category → `/product/:id`.
-  - Top 6 companies → `/companies?selected=…`.
-- Exports `useCommandPalette()` hook that owns `open` state and binds ⌘K / Ctrl-K globally.
-
-**Wiring in `src/components/Header.tsx`**:
-- Call `useCommandPalette()`, render `<CommandPalette open={open} onOpenChange={setOpen} />`.
-- Add a small "Search ⌘K" button visible on `md+` next to the role switcher chip; on mobile, append a Search item to the existing `MobileNav` sheet that opens the palette.
-
-No changes to routes, data, or other pages. Pure additive.
-
----
-
-## Phase 2 / Phase 4 — Skipped with rationale
-
-| Item | Reason |
-|------|--------|
-| AdminOverview tabs refactor | Would touch ~800 lines of stable code for cosmetic gain; violates Minimal Intervention. |
-| Reviewer/Company tabs refactor | Already implemented. |
-| Homepage quick-actions | `QuickAccessSection` already provides this. |
-| Sticky filter chips on Products | `ActiveFilterChips` already present. |
-
-If you still want the AdminOverview tab grouping, say so explicitly and I'll do it as an isolated follow-up.
-
----
+That's the only change needed. After redeploy (automatic), the admin page will load all 101 subscribers normally.
 
 ## Files touched
+- `supabase/functions/admin-newsletter-management/index.ts` (CORS only)
 
-- create `src/components/CommandPalette.tsx`
-- edit `src/components/Header.tsx` (add palette mount + trigger button)
-- edit `src/components/MobileNav.tsx` (add "Search" item that opens palette)
+## Note on console warnings
+The `DialogContent` accessibility warnings in the console come from the Command Palette dialog (no `DialogTitle`). Cosmetic, unrelated to the empty newsletter, but I can wrap a `VisuallyHidden` title in a follow-up if you want.
