@@ -866,7 +866,7 @@ export default function ReviewRounds() {
         </TabsContent>
 
         <TabsContent value="calendar">
-          <ReviewRoundsCalendar rounds={rounds} />
+          <ReviewRoundsCalendar rounds={showArchived ? rounds : rounds.filter(r => r.status !== 'archived')} />
         </TabsContent>
       </Tabs>
 
