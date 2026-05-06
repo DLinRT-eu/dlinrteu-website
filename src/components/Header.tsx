@@ -106,6 +106,17 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setPaletteOpen(true)}
+            className="h-8 gap-1.5 text-xs"
+            aria-label="Open search (Ctrl/Cmd + K)"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span className="hidden lg:inline">Search</span>
+            <kbd className="hidden lg:inline px-1.5 py-0.5 text-[10px] font-mono bg-white/20 rounded">⌘K</kbd>
+          </Button>
           {user && canSwitchRoles && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
