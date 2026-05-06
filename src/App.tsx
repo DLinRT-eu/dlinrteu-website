@@ -10,6 +10,7 @@ import { ProductEditProvider } from "@/components/product-editor";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import Header from "./components/Header";
+import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
 
 const ConditionalHeader = () => {
   const { pathname } = useLocation();
