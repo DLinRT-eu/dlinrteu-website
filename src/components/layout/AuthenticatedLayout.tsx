@@ -1,25 +1,44 @@
 import { ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRoles } from "@/contexts/RoleContext";
 
 interface Props {
   children: ReactNode;
 }
 
+const AUTH_PREFIXES = [
+  "/dashboard-home",
+  "/profile",
+  "/my-products",
+  "/notifications",
+  "/notification-settings",
+  "/admin",
+  "/reviewer",
+  "/company",
+  "/review",
+];
+
+function isAuthenticatedPath(pathname: string) {
+  // /review/:id is a public-ish review page, but /review root and /reviewer/* are authenticated
+  if (pathname === "/review" || pathname.startsWith("/review/")) return true;
+  return AUTH_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
+}
+
 /**
  * Wraps authenticated pages with a collapsible role-aware sidebar.
- * The public Header remains mounted at the App level — this layout
- * adds an in-page strip with the SidebarTrigger so users can collapse
- * the sidebar without losing access.
- *
- * For unauthenticated visitors, renders children unchanged so public
- * routes that occasionally land on protected paths are not impacted.
+ * Public pages render unchanged.
  */
 export function AuthenticatedLayout({ children }: Props) {
   const { user } = useAuth();
+  const { roles } = useRoles();
+  const { pathname } = useLocation();
 
-  if (!user) {
+  const shouldWrap = user && roles.length > 0 && isAuthenticatedPath(pathname);
+
+  if (!shouldWrap) {
     return <>{children}</>;
   }
 
