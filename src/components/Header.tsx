@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Building2, Newspaper, Eye, Shield, LayoutDashboard, BookOpen, Activity, FlaskConical, Lightbulb, Calendar, LogOut, User as UserIcon, Info } from 'lucide-react';
+import { Package, Building2, Newspaper, Eye, Shield, LayoutDashboard, BookOpen, Activity, FlaskConical, Lightbulb, Calendar, LogOut, User as UserIcon, Info, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
 import { Avatar, AvatarFallback } from './ui/avatar';
@@ -11,12 +12,20 @@ import { useRoles } from '@/contexts/RoleContext';
 import { useToast } from '@/hooks/use-toast';
 import NotificationBell from './notifications/NotificationBell';
 import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
+import { CommandPalette, useCommandPalette } from './CommandPalette';
 
 const Header = () => {
   const { user, profile, signOut } = useAuth();
   const { roles, activeRole, setActiveRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { open: paletteOpen, setOpen: setPaletteOpen } = useCommandPalette();
+
+  useEffect(() => {
+    const handler = () => setPaletteOpen(true);
+    window.addEventListener('open-command-palette', handler);
+    return () => window.removeEventListener('open-command-palette', handler);
+  }, [setPaletteOpen]);
   
   const isRegularUser = !activeRole || roles.length === 0;
   const canSwitchRoles = roles.length > 1;
