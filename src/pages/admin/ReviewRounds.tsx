@@ -433,10 +433,11 @@ export default function ReviewRounds() {
   };
 
   const handleSelectAll = () => {
-    if (selectedRounds.size === rounds.length) {
+    const ids = visibleRounds.map(r => r.id);
+    if (ids.every(id => selectedRounds.has(id)) && ids.length > 0) {
       setSelectedRounds(new Set());
     } else {
-      setSelectedRounds(new Set(rounds.map(r => r.id)));
+      setSelectedRounds(new Set(ids));
     }
   };
 
