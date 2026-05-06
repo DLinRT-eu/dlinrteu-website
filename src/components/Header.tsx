@@ -40,6 +40,7 @@ const Header = () => {
   };
 
   return (
+    <>
     <header className="bg-[#00A6D6] text-white py-3 px-4 sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         <Link to="/" className="text-sm md:text-base lg:text-lg font-bold hover:text-white/90">
