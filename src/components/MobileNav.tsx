@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck, Mail } from 'lucide-react';
+import { Package, Building2, Newspaper, Users, LifeBuoy, LayoutDashboard, Menu, X, Beaker, Info, BookOpen, Shield, User as UserIcon, LogOut, Eye, FileCheck, Settings, CalendarClock, BadgeCheck, ClipboardCheck, Mail, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from './ui/sheet';
 import { Badge } from './ui/badge';
@@ -113,6 +113,14 @@ const MobileNav = () => {
         )}
         
         <nav className="flex flex-col py-2 overflow-y-auto max-h-[calc(100vh-200px)]">
+          <button
+            onClick={() => { setIsOpen(false); window.dispatchEvent(new Event('open-command-palette')); }}
+            className={`${linkClass} w-full text-left`}
+          >
+            <Search className="w-5 h-5 mr-3 text-primary" />
+            <span className="font-medium">Search…</span>
+            <kbd className="ml-auto text-[10px] font-mono bg-muted px-1.5 py-0.5 rounded">⌘K</kbd>
+          </button>
           {/* Role-specific links */}
           {isAdmin && (
             <>
