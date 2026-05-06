@@ -473,6 +473,19 @@ export default function ReviewRounds() {
     );
   }
 
+  const archivedCount = rounds.filter(r => r.status === 'archived').length;
+  const q = searchQuery.trim().toLowerCase();
+  const visibleRounds = rounds.filter(r => {
+    if (!showArchived && r.status === 'archived') return false;
+    if (!q) return true;
+    return (
+      r.name.toLowerCase().includes(q) ||
+      (r.description?.toLowerCase().includes(q) ?? false) ||
+      `#${r.round_number}`.includes(q) ||
+      String(r.round_number) === q
+    );
+  });
+
   return (
     <div className="container mx-auto py-8 space-y-6">
       <div className="flex justify-between items-center">
