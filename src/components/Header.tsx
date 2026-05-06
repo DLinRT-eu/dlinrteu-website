@@ -219,6 +219,8 @@ const Header = () => {
         </div>
       </div>
     </header>
+    <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
+    </>
   );
 };
 
