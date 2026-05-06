@@ -37,17 +37,24 @@ const COLORS = {
 /**
  * Main function to export review rounds with audit logs to PDF
  */
-export async function exportReviewRoundsToPDF() {
+export async function exportReviewRoundsToPDF(options?: { roundIds?: string[] }) {
   const doc = new jsPDF();
   let yPosition = 20;
 
   try {
     // Fetch all data
-    const [rounds, auditLogs, assignmentHistory] = await Promise.all([
+    let [rounds, auditLogs, assignmentHistory] = await Promise.all([
       fetchReviewRounds(),
       fetchAuditLogs(),
       fetchAssignmentHistory()
     ]);
+
+    // Filter rounds if a specific subset was requested
+    if (options?.roundIds) {
+      const idSet = new Set(options.roundIds);
+      rounds = rounds.filter(r => idSet.has(r.id));
+      assignmentHistory = assignmentHistory.filter(a => idSet.has(a.review_round_id));
+    }
 
     // Cover Page
     yPosition = addCoverPage(doc, rounds);

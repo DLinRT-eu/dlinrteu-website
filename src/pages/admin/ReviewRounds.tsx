@@ -73,10 +73,20 @@ import { RoundsBulkActionsMenu } from "@/components/admin/review-rounds/RoundsBu
 import { Checkbox } from "@/components/ui/checkbox";
 import { 
   fetchAllRoundAssignments, 
+  fetchSelectedRoundAssignments,
   exportToCSV, 
   exportToExcel 
 } from "@/utils/exportReviewRounds";
 import { exportReviewRoundsToPDF } from "@/utils/reviewRoundsPdfExporter";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 import { ReviewRoundsCalendar } from "@/components/admin/review-rounds/ReviewRoundsCalendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
@@ -320,15 +330,35 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportCSV = async () => {
+  const getExportRoundIds = (includeArchived: boolean): string[] => {
+    return rounds
+      .filter(r => {
+        if (!includeArchived && r.status === 'archived') return false;
+        if (!searchQuery) return true;
+        const q = searchQuery.toLowerCase();
+        return (
+          r.name.toLowerCase().includes(q) ||
+          `#${r.round_number}`.includes(q)
+        );
+      })
+      .map(r => r.id);
+  };
+
+  const handleExportCSV = async (includeArchived = false) => {
     setExporting(true);
     try {
-      const data = await fetchAllRoundAssignments();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export');
+        return;
+      }
+      const data = await fetchSelectedRoundAssignments(ids);
       if (data.length === 0) {
         toast.error('No assignments to export');
         return;
       }
-      exportToCSV(data, `review-assignments-${new Date().toISOString().split('T')[0]}.csv`);
+      const suffix = includeArchived ? 'all' : 'visible';
+      exportToCSV(data, `review-assignments-${suffix}-${new Date().toISOString().split('T')[0]}.csv`);
       toast.success('CSV exported successfully');
     } catch (error) {
       console.error('Error exporting CSV:', error);
@@ -338,15 +368,21 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportExcel = async () => {
+  const handleExportExcel = async (includeArchived = false) => {
     setExporting(true);
     try {
-      const data = await fetchAllRoundAssignments();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export');
+        return;
+      }
+      const data = await fetchSelectedRoundAssignments(ids);
       if (data.length === 0) {
         toast.error('No assignments to export');
         return;
       }
-      exportToExcel(data, `review-assignments-${new Date().toISOString().split('T')[0]}.xlsx`);
+      const suffix = includeArchived ? 'all' : 'visible';
+      exportToExcel(data, `review-assignments-${suffix}-${new Date().toISOString().split('T')[0]}.xlsx`);
       toast.success('Excel file exported successfully');
     } catch (error) {
       console.error('Error exporting Excel:', error);
@@ -356,11 +392,16 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportPDF = async () => {
+  const handleExportPDF = async (includeArchived = false) => {
     setExporting(true);
     const toastId = toast.loading('Generating PDF report...');
     try {
-      const result = await exportReviewRoundsToPDF();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export', { id: toastId });
+        return;
+      }
+      const result = await exportReviewRoundsToPDF({ roundIds: ids });
       toast.success(`PDF exported: ${result.filename}`, { id: toastId });
     } catch (error) {
       console.error('Error exporting PDF:', error);
@@ -510,42 +551,37 @@ export default function ReviewRounds() {
             )}
             Cleanup Duplicates
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportCSV}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <Download className="h-4 w-4 mr-2" />
-            )}
-            Export CSV
-          </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportExcel}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <FileSpreadsheet className="h-4 w-4 mr-2" />
-            )}
-            Export Excel
-          </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportPDF}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <FileText className="h-4 w-4 mr-2" />
-            )}
-            Export PDF
-          </Button>
+          {[
+            { label: 'CSV', icon: Download, handler: handleExportCSV },
+            { label: 'Excel', icon: FileSpreadsheet, handler: handleExportExcel },
+            { label: 'PDF', icon: FileText, handler: handleExportPDF },
+          ].map(({ label, icon: Icon, handler }) => (
+            <DropdownMenu key={label}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  disabled={exporting || rounds.length === 0}
+                >
+                  {exporting ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Icon className="h-4 w-4 mr-2" />
+                  )}
+                  Export {label}
+                  <ChevronDown className="h-4 w-4 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Scope</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => handler(false)}>
+                  Visible rounds only
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handler(true)}>
+                  Include archived rounds
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ))}
           <Button onClick={() => setShowCreateDialog(true)}>
             <Plus className="h-4 w-4 mr-2" />
             Create New Round
