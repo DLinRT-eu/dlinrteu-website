@@ -551,42 +551,37 @@ export default function ReviewRounds() {
             )}
             Cleanup Duplicates
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportCSV}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <Download className="h-4 w-4 mr-2" />
-            )}
-            Export CSV
-          </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportExcel}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <FileSpreadsheet className="h-4 w-4 mr-2" />
-            )}
-            Export Excel
-          </Button>
-          <Button 
-            variant="outline" 
-            onClick={handleExportPDF}
-            disabled={exporting || rounds.length === 0}
-          >
-            {exporting ? (
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <FileText className="h-4 w-4 mr-2" />
-            )}
-            Export PDF
-          </Button>
+          {[
+            { label: 'CSV', icon: Download, handler: handleExportCSV },
+            { label: 'Excel', icon: FileSpreadsheet, handler: handleExportExcel },
+            { label: 'PDF', icon: FileText, handler: handleExportPDF },
+          ].map(({ label, icon: Icon, handler }) => (
+            <DropdownMenu key={label}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  disabled={exporting || rounds.length === 0}
+                >
+                  {exporting ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Icon className="h-4 w-4 mr-2" />
+                  )}
+                  Export {label}
+                  <ChevronDown className="h-4 w-4 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Scope</DropdownMenuLabel>
+                <DropdownMenuItem onClick={() => handler(false)}>
+                  Visible rounds only
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handler(true)}>
+                  Include archived rounds
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ))}
           <Button onClick={() => setShowCreateDialog(true)}>
             <Plus className="h-4 w-4 mr-2" />
             Create New Round
