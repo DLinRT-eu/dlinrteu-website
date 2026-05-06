@@ -330,15 +330,35 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportCSV = async () => {
+  const getExportRoundIds = (includeArchived: boolean): string[] => {
+    return rounds
+      .filter(r => {
+        if (!includeArchived && r.status === 'archived') return false;
+        if (!searchQuery) return true;
+        const q = searchQuery.toLowerCase();
+        return (
+          r.name.toLowerCase().includes(q) ||
+          `#${r.round_number}`.includes(q)
+        );
+      })
+      .map(r => r.id);
+  };
+
+  const handleExportCSV = async (includeArchived = false) => {
     setExporting(true);
     try {
-      const data = await fetchAllRoundAssignments();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export');
+        return;
+      }
+      const data = await fetchSelectedRoundAssignments(ids);
       if (data.length === 0) {
         toast.error('No assignments to export');
         return;
       }
-      exportToCSV(data, `review-assignments-${new Date().toISOString().split('T')[0]}.csv`);
+      const suffix = includeArchived ? 'all' : 'visible';
+      exportToCSV(data, `review-assignments-${suffix}-${new Date().toISOString().split('T')[0]}.csv`);
       toast.success('CSV exported successfully');
     } catch (error) {
       console.error('Error exporting CSV:', error);
@@ -348,15 +368,21 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportExcel = async () => {
+  const handleExportExcel = async (includeArchived = false) => {
     setExporting(true);
     try {
-      const data = await fetchAllRoundAssignments();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export');
+        return;
+      }
+      const data = await fetchSelectedRoundAssignments(ids);
       if (data.length === 0) {
         toast.error('No assignments to export');
         return;
       }
-      exportToExcel(data, `review-assignments-${new Date().toISOString().split('T')[0]}.xlsx`);
+      const suffix = includeArchived ? 'all' : 'visible';
+      exportToExcel(data, `review-assignments-${suffix}-${new Date().toISOString().split('T')[0]}.xlsx`);
       toast.success('Excel file exported successfully');
     } catch (error) {
       console.error('Error exporting Excel:', error);
@@ -366,11 +392,16 @@ export default function ReviewRounds() {
     }
   };
 
-  const handleExportPDF = async () => {
+  const handleExportPDF = async (includeArchived = false) => {
     setExporting(true);
     const toastId = toast.loading('Generating PDF report...');
     try {
-      const result = await exportReviewRoundsToPDF();
+      const ids = getExportRoundIds(includeArchived);
+      if (ids.length === 0) {
+        toast.error('No rounds to export', { id: toastId });
+        return;
+      }
+      const result = await exportReviewRoundsToPDF({ roundIds: ids });
       toast.success(`PDF exported: ${result.filename}`, { id: toastId });
     } catch (error) {
       console.error('Error exporting PDF:', error);
