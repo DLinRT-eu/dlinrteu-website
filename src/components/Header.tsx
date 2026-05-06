@@ -97,6 +97,32 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center gap-2">
+          {user && canSwitchRoles && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" size="sm" className="h-8 gap-1.5">
+                  <Shield className="h-3.5 w-3.5" />
+                  <span className="text-xs font-medium">
+                    {activeRole ? activeRole.charAt(0).toUpperCase() + activeRole.slice(1) : 'Select role'}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">SWITCH ROLE</div>
+                {roles.map(role => (
+                  <DropdownMenuItem
+                    key={role}
+                    onClick={() => handleRoleSwitch(role)}
+                    className={activeRole === role ? 'bg-accent font-medium' : ''}
+                  >
+                    <Shield className="h-4 w-4 mr-2" />
+                    {role.charAt(0).toUpperCase() + role.slice(1)}
+                    {activeRole === role && ' ✓'}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
           {user && <NotificationBell />}
           {user ? (
             <DropdownMenu>

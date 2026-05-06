@@ -10,6 +10,7 @@ import { ProductEditProvider } from "@/components/product-editor";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import Header from "./components/Header";
+import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
 
 const ConditionalHeader = () => {
   const { pathname } = useLocation();
@@ -120,6 +121,7 @@ const App = () => (
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
               </div>
             }>
+              <AuthenticatedLayout>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="products" element={<Products />} />
@@ -355,6 +357,7 @@ const App = () => (
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              </AuthenticatedLayout>
               </Suspense>
             </BrowserRouter>
           </TooltipProvider>
