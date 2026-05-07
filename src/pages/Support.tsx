@@ -12,10 +12,6 @@ const Support = () => {
     window.open('https://github.com/DLinRT-eu/dlinrteu-website/issues/new', '_blank', 'noopener,noreferrer');
   };
 
-  const handleDonate = () => {
-    window.open('https://gofund.me/f775f8ba', '_blank', 'noopener,noreferrer');
-  };
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
