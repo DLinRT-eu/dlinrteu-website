@@ -1,4 +1,3 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
 export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
@@ -9,14 +8,15 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://synaptiq.io/",
     productUrl: "https://synaptiq.io/product/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
-    description: "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. Currently in clinical testing phase (Investigation use only - not yet CE/FDA certified). Features unique Active Contouring technology and adaptive learning for personalized contouring.",
+    description:
+      "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. Currently in clinical testing phase (Investigation use only - not yet CE/FDA certified). Features unique Active Contouring technology and adaptive learning for personalized contouring.",
     category: "Auto-Contouring",
     secondaryCategories: ["Registration"],
     certification: "Pending",
     logoUrl: "/logos/synaptiq.png",
     website: "https://synaptiq.io/product/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brachytherapy"],
-    modality: ["CT", "MRI", "PET/CT"],
+    modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: [
@@ -27,7 +27,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Auto-segmentation on CT and MRI modalities",
       "Image registration for MRI, PET/CT, and CT modalities",
       "Multi-vendor and multi-modality integration",
-      "Cloud-based data storage and visualization"
+      "Cloud-based data storage and visualization",
     ],
     supportedStructures: [
       // Breast (Doolan 2024 internal study)
@@ -41,7 +41,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Breast: Breast_R",
       "Breast: Esophagus",
       "Thorax: SpinalCanal",
-      
+
       // Head & Neck (Doolan 2024 internal study)
       "Head & Neck: Brain",
       "Head & Neck: Brainstem",
@@ -65,7 +65,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Head & Neck: Larynx",
       "Head & Neck: Trachea",
       "Head & Neck: SpinalCord",
-      
+
       // Thorax (Doolan 2024 internal study)
       "Thorax: Lung_L",
       "Thorax: Lung_R",
@@ -73,7 +73,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Thorax: Liver",
       "Thorax: Esophagus",
       "Thorax: SpinalCanal",
-      
+
       // Abdomen - SOURCE UNVERIFIED: Original source unknown
       "Abdomen: Liver (unverified)",
       "Abdomen: Kidney (L) (unverified)",
@@ -87,7 +87,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Abdomen: Spinal Cord (unverified)",
       "Abdomen: Adrenal Gland (L) (unverified)",
       "Abdomen: Adrenal Gland (R) (unverified)",
-      
+
       // Pelvis (Doolan 2024 internal study)
       "Pelvis: Bag_Bowel",
       "Pelvis: Bowels",
@@ -99,85 +99,95 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Pelvis: Prostate",
       "Pelvis: Penile Bulb",
       "Pelvis: Seminal Vesicles",
-      ],
+    ],
     limitations: [
       "Investigation use only - not approved for clinical use",
       "Requires verification by qualified radiation oncologist",
-      "Performance may vary based on image quality"
+      "Performance may vary based on image quality",
     ],
     technicalSpecifications: {
       population: "Adult patients",
-      input: ["CT", "MRI", "PET/CT"],
+      input: ["CT", "MRI"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
-      outputFormat: ["DICOM-RTSTRUCT"]
+      outputFormat: ["DICOM-RTSTRUCT"],
     },
     technology: {
       integration: ["Multi-vendor TPS integration", "PACS integration"],
       deployment: ["Cloud-based", "Desktop (Windows 7+, MacOS 10.14+)"],
       triggerForAnalysis: "Manual or automated",
-      processingTime: "Seconds to minutes per case"
+      processingTime: "Seconds to minutes per case",
     },
     regulatory: {
       ce: {
         status: "Not yet certified - Investigation use only",
         class: "IIa",
-        type: "Medical Device"
+        type: "Medical Device",
       },
       fda: {
-        status: "Not yet cleared - Investigation use only"
+        status: "Not yet cleared - Investigation use only",
       },
-      intendedUseStatement: "For investigation use only. Automatic segmentation of organs at risk in radiation therapy planning. Not approved for clinical use."
+      intendedUseStatement:
+        "For investigation use only. Automatic segmentation of organs at risk in radiation therapy planning. Not approved for clinical use.",
     },
     market: {
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
-      distributionChannels: ["Direct sales", "Hospital partnerships"]
+      distributionChannels: ["Direct sales", "Hospital partnerships"],
     },
     evidence: [
       {
         type: "journal",
-        description: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy. Physics and Imaging in Radiation Oncology (2026).",
-        link: "https://doi.org/10.1016/j.phro.2026.100935"
+        description:
+          "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy. Physics and Imaging in Radiation Oncology (2026).",
+        link: "https://doi.org/10.1016/j.phro.2026.100935",
       },
       {
         type: "conference",
         description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283.",
-        link: "https://doi.org/10.1016/S0167-8140(25)03323-7"
+        link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
       },
       {
         type: "conference",
-        description: "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool. ESTRO 2025 Abstract Book p. 2558.",
-        link: "https://doi.org/10.1016/S0167-8140(25)03323-7"
+        description:
+          "Enhanced Efficiency in GTV Delineation: Evaluating AI 'Active Contouring' Tool. ESTRO 2025 Abstract Book p. 2558.",
+        link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
       },
       {
         type: "conference",
-        description: "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection. ESTRO 2025 Abstract Book p. 2569.",
-        link: "https://doi.org/10.1016/S0167-8140(25)03273-6"
+        description:
+          "Future liver remnant meets the future of medicine: AI integration in liver metastases assessment and treatment selection. ESTRO 2025 Abstract Book p. 2569.",
+        link: "https://doi.org/10.1016/S0167-8140(25)03273-6",
       },
       {
         type: "conference",
-        description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246.",
-        link: "https://doi.org/10.1016/S0167-8140(25)00719-4"
+        description:
+          "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246.",
+        link: "https://doi.org/10.1016/S0167-8140(25)00719-4",
       },
       {
         type: "conference",
-        description: "Clinical Evaluation of a Deep Learning Model for Assessing OAR Delineation in Head and Neck Oncology. ESTRO 2024.",
-        link: "https://doi.org/10.1016/S0167-8140(24)03098-6"
+        description:
+          "Clinical Evaluation of a Deep Learning Model for Assessing OAR Delineation in Head and Neck Oncology. ESTRO 2024.",
+        link: "https://doi.org/10.1016/S0167-8140(24)03098-6",
       },
       {
         type: "conference",
-        description: "Clinical evaluation of autosegmentation using AI with manual segmentation of breast tissue. ESTRO 2023.",
-        link: "https://doi.org/10.1016/S0167-8140(23)66556-9"
-      }
+        description:
+          "Clinical evaluation of autosegmentation using AI with manual segmentation of breast tissue. ESTRO 2023.",
+        link: "https://doi.org/10.1016/S0167-8140(23)66556-9",
+      },
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
-    clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
+    evidenceRigorNotes:
+      "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
+    clinicalImpactNotes:
+      "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
     lastRevised: "2026-03-27",
-    source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts. Note: Abdomen structures require source verification."
-  }
+    source:
+      "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts. Note: Abdomen structures require source verification.",
+  },
 ];
