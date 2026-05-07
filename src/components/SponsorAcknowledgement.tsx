@@ -18,7 +18,7 @@ const SponsorAcknowledgement = ({ variant = "compact" }: Props) => {
           aria-label="UMC Utrecht website"
         >
           <img
-            src="/logos/umc-utrecht.svg"
+            src="/logos/umc-utrecht.png"
             alt="UMC Utrecht"
             className="h-16 w-auto"
             loading="lazy"
