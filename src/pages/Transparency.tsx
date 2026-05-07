@@ -258,8 +258,8 @@ const Transparency = () => {
           <p className="text-muted-foreground max-w-3xl">
             DLinRT.eu is a community-driven, non-commercial initiative. To keep our
             funding accountable, we publish an annual overview of income and
-            expenses. Donations come primarily through our GoFundMe campaign and are
-            used to cover hosting, domains, and outreach costs.
+            expenses. Operational costs are currently covered by UMC Utrecht,
+            allowing us to keep this resource free and openly accessible.
           </p>
         </header>
 
