@@ -17,24 +17,24 @@ function getCorsHeaders(origin: string | null): HeadersInit {
   };
 }
 
-// Rate limiting for security event logging
+// Per-user rate limiting (keyed by authenticated user id, not spoofable headers)
 const rateLimitStore = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
-const RATE_LIMIT_MAX_EVENTS = 10; // Max 10 security events per minute per client
+const RATE_LIMIT_MAX_EVENTS = 30; // Max 30 security events per minute per user
 
-const checkRateLimit = (clientFingerprint: string): boolean => {
+const checkRateLimit = (key: string): boolean => {
   const now = Date.now();
-  const current = rateLimitStore.get(clientFingerprint);
-  
+  const current = rateLimitStore.get(key);
+
   if (!current || now - current.timestamp > RATE_LIMIT_WINDOW) {
-    rateLimitStore.set(clientFingerprint, { count: 1, timestamp: now });
+    rateLimitStore.set(key, { count: 1, timestamp: now });
     return true;
   }
-  
+
   if (current.count >= RATE_LIMIT_MAX_EVENTS) {
     return false;
   }
-  
+
   current.count++;
   return true;
 };
@@ -51,8 +51,7 @@ interface SecurityEventData {
 Deno.serve(async (req) => {
   const origin = req.headers.get("origin");
   const corsHeaders = getCorsHeaders(origin);
-  
-  // Handle CORS preflight requests
+
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -65,6 +64,39 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Require authenticated user — closes anonymous flooding vector.
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const userClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: claimsError } = await userClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims?.sub) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    const userId = claimsData.claims.sub as string;
+
+    // Per-user rate limit (cannot be spoofed; tied to verified JWT)
+    if (!checkRateLimit(`user:${userId}`)) {
+      return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
@@ -80,7 +112,6 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Validate required fields
     const validEventTypes = ['form_submission_failed', 'unusual_activity', 'rate_limit_exceeded', 'suspicious_request', 'repeated_failures', 'bot_detection', 'malicious_payload', 'authentication_failure'];
     const validSeverities = ['low', 'medium', 'high', 'critical'];
 
@@ -115,7 +146,6 @@ Deno.serve(async (req) => {
     if (eventData.user_agent && eventData.user_agent.length > 500) {
       eventData.user_agent = eventData.user_agent.substring(0, 500);
     }
-    // Limit details object size
     if (eventData.details) {
       const detailsStr = JSON.stringify(eventData.details);
       if (detailsStr.length > 5000) {
@@ -123,28 +153,14 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Rate limiting based on server-extracted IP (not the attacker-controlled fingerprint)
-    const clientIp = (req.headers.get('x-forwarded-for')?.split(',')[0].trim())
-      || req.headers.get('x-real-ip')
-      || 'unknown';
-    if (!checkRateLimit(`ip:${clientIp}`)) {
-      console.warn(`Rate limit exceeded for IP: ${clientIp}`);
-      return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), {
-        status: 429,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // Hash the client fingerprint for privacy
-    const { data: hashedFingerprint } = await supabase.rpc('hash_ip', { 
-      ip_address: eventData.client_fingerprint 
+    // Hash the (now authenticated) user id for storage — avoids storing raw uid in events table
+    const { data: hashedFingerprint } = await supabase.rpc('hash_ip', {
+      ip_address: userId
     });
 
-    // Hash user agent for privacy (keep only first 50 chars)
-    const userAgentHash = eventData.user_agent ? 
+    const userAgentHash = eventData.user_agent ?
       btoa(eventData.user_agent.substring(0, 50)).substring(0, 20) : null;
 
-    // Insert security event
     const { error } = await supabase
       .from('security_events')
       .insert({
@@ -164,7 +180,6 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Log critical events for immediate attention
     if (eventData.severity === 'critical') {
       console.error(`CRITICAL SECURITY EVENT: ${eventData.event_type}`, {
         fingerprint: hashedFingerprint,
