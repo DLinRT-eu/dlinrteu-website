@@ -1,7 +1,8 @@
 import type { FinancialYear } from "./types";
 import year2025 from "./2025";
+import year2026 from "./2026";
 
-export const FINANCIAL_YEARS: FinancialYear[] = [year2025].sort(
+export const FINANCIAL_YEARS: FinancialYear[] = [year2025, year2026].sort(
   (a, b) => b.year - a.year,
 );
 
