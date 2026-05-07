@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Github, Heart } from 'lucide-react';
+import { Github } from 'lucide-react';
 import MailingListSignup from '@/components/MailingListSignup';
 import ProductFeedbackForm from '@/components/ProductFeedbackForm';
 import SEO from '@/components/SEO';
@@ -10,10 +10,6 @@ import Footer from "@/components/Footer";
 const Support = () => {
   const handleGitHubIssue = () => {
     window.open('https://github.com/DLinRT-eu/dlinrteu-website/issues/new', '_blank', 'noopener,noreferrer');
-  };
-
-  const handleDonate = () => {
-    window.open('https://gofund.me/f775f8ba', '_blank', 'noopener,noreferrer');
   };
 
   const structuredData = {
@@ -41,18 +37,10 @@ const Support = () => {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-4 py-4">
+        <div className="flex justify-center py-4">
           <Button onClick={handleGitHubIssue} variant="outline" className="flex items-center gap-2">
             <Github className="h-5 w-5" />
             Submit an Issue on GitHub
-          </Button>
-          
-          <Button 
-            onClick={handleDonate} 
-            className="bg-[#FF6F2F] hover:bg-[#FF5A1F] text-white flex items-center gap-2"
-          >
-            <Heart className="h-5 w-5" />
-            Donate on GoFundMe
           </Button>
         </div>
 
