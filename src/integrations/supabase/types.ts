@@ -405,6 +405,8 @@ export type Database = {
           company_id: string
           created_at: string | null
           field_updates: Json | null
+          github_pr_url: string | null
+          github_synced_at: string | null
           id: string
           priority: string | null
           product_id: string
@@ -421,6 +423,8 @@ export type Database = {
           company_id: string
           created_at?: string | null
           field_updates?: Json | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
           id?: string
           priority?: string | null
           product_id: string
@@ -437,6 +441,8 @@ export type Database = {
           company_id?: string
           created_at?: string | null
           field_updates?: Json | null
+          github_pr_url?: string | null
+          github_synced_at?: string | null
           id?: string
           priority?: string | null
           product_id?: string

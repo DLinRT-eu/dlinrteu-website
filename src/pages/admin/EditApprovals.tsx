@@ -143,14 +143,27 @@ export default function EditApprovals() {
 
       if (error) throw error;
 
-      toast({
-        title: reviewAction === 'approve' ? 'Edit Approved' : 'Edit Rejected',
-        description: reviewAction === 'approve' 
-          ? 'The edit has been approved. It can now be synced to GitHub.'
-          : 'The edit has been rejected. The author will be notified.'
-      });
-
+      const draftIdToSync = selectedDraft.id;
       setReviewDialogOpen(false);
+
+      if (reviewAction === 'approve') {
+        toast({
+          title: 'Edit Approved',
+          description: 'Creating GitHub pull request…'
+        });
+        // Auto-trigger PR creation. Failures are surfaced but draft remains 'approved' for manual retry.
+        try {
+          await syncToGitHub(draftIdToSync);
+        } catch (e) {
+          // syncToGitHub already toasts on failure
+        }
+      } else {
+        toast({
+          title: 'Edit Rejected',
+          description: 'The author will be notified.'
+        });
+      }
+
       fetchDrafts();
     } catch (error: any) {
       console.error('Error submitting review:', error);
@@ -261,6 +274,16 @@ export default function EditApprovals() {
             Review and approve product edits submitted by reviewers and company representatives
           </p>
         </div>
+
+        <Card className="mb-6 border-amber-300 bg-amber-50 dark:bg-amber-950/20">
+          <CardContent className="py-4 text-sm text-amber-900 dark:text-amber-100">
+            <strong>How approvals reach the live site:</strong> Approving an edit
+            automatically opens a GitHub pull request against the product data
+            files. The change becomes visible on dlinrt.eu only after the PR is
+            <em> reviewed and merged</em> on GitHub and the site redeploys. Use
+            the "View PR" link on each approved draft to track its status.
+          </CardContent>
+        </Card>
 
         <Tabs defaultValue="pending" className="space-y-4">
           <TabsList>
