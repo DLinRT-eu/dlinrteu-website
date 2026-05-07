@@ -246,13 +246,129 @@ export default function RevisionApprovalManager() {
         description: error.message,
         variant: 'destructive',
       });
+      return;
+    }
+
+    if (actionType === 'approve') {
+      await applyRevisionToGitHub(selectedRevision);
     } else {
       toast({
-        title: 'Success',
-        description: `Revision ${actionType === 'approve' ? 'approved' : 'rejected'} successfully`,
+        title: 'Rejected',
+        description: 'Revision rejected. The submitter will be notified.',
       });
-      setDialogOpen(false);
-      fetchRevisions();
+    }
+
+    setDialogOpen(false);
+    fetchRevisions();
+  };
+
+  /**
+   * Bridge an approved company_revisions row to the GitHub PR pipeline.
+   * For structured submissions: merge field_updates onto the current product,
+   * create a product_edit_drafts row in 'approved' status, then invoke the
+   * existing apply-product-edit edge function which opens the PR.
+   * For free-text submissions: only notify - admin must open a manual draft.
+   */
+  const applyRevisionToGitHub = async (revision: CompanyRevision) => {
+    if (revision.submission_type !== 'structured' || !revision.field_updates) {
+      toast({
+        title: 'Approved (manual follow-up needed)',
+        description:
+          'Free-text revisions cannot be auto-applied. Open the product in the Visual Editor to translate this request into a structured edit.',
+      });
+      return;
+    }
+
+    const product = ALL_PRODUCTS.find(p => p.id === revision.product_id);
+    if (!product) {
+      toast({
+        title: 'Approved, but PR not created',
+        description: `Product "${revision.product_id}" was not found in the dataset.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Deep-merge field_updates onto current product
+    const updates = revision.field_updates as Record<string, unknown>;
+    const mergedDraft: Record<string, unknown> = JSON.parse(JSON.stringify(product));
+    const changedFields: string[] = [];
+    for (const [key, value] of Object.entries(updates)) {
+      if (value && typeof value === 'object' && !Array.isArray(value) &&
+          mergedDraft[key] && typeof mergedDraft[key] === 'object' && !Array.isArray(mergedDraft[key])) {
+        mergedDraft[key] = { ...(mergedDraft[key] as object), ...(value as object) };
+      } else {
+        mergedDraft[key] = value;
+      }
+      changedFields.push(key);
+    }
+
+    try {
+      // Create an approved draft so the existing edge function can pick it up
+      const { data: draft, error: draftErr } = await supabase
+        .from('product_edit_drafts')
+        .insert({
+          product_id: revision.product_id,
+          created_by: user!.id,
+          draft_data: mergedDraft as never,
+          changed_fields: changedFields,
+          edit_summary:
+            revision.changes_summary || `Company revision ${revision.id}`,
+          status: 'approved',
+          reviewed_by: user!.id,
+          reviewed_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+
+      if (draftErr || !draft) throw draftErr ?? new Error('Failed to create draft');
+
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+
+      const response = await fetch(
+        `https://msyfxyxzjyowwasgturs.supabase.co/functions/v1/apply-product-edit`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ draft_id: draft.id }),
+        }
+      );
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'PR creation failed');
+      }
+
+      // Link PR back to the revision
+      await supabase
+        .from('company_revisions')
+        .update({
+          github_pr_url: result.pr_url,
+          github_synced_at: new Date().toISOString(),
+        })
+        .eq('id', revision.id);
+
+      toast({
+        title: 'Approved & PR opened',
+        description: (
+          <span>
+            Pull request created.{' '}
+            <a href={result.pr_url} target="_blank" rel="noopener noreferrer" className="underline">
+              View PR
+            </a>
+          </span>
+        ),
+      });
+    } catch (e: any) {
+      console.error('applyRevisionToGitHub failed:', e);
+      toast({
+        title: 'Approved, but PR failed',
+        description: e.message ?? 'Could not create GitHub pull request. Open the Visual Editor to retry.',
+        variant: 'destructive',
+      });
     }
   };
 
