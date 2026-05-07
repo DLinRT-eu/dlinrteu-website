@@ -1,78 +1,44 @@
 ## Goal
 
-Resolve the 100 Supabase linter findings by (a) tightening table/view exposure to `anon`/`authenticated` where the object is only ever touched server-side, and (b) revoking `EXECUTE` from `authenticated` on SECURITY DEFINER functions that are only used by triggers, cron, or service-role admin paths. Keep every legitimate client query and RPC working.
+1. Acknowledge **UMC Utrecht** as the sponsor covering DLinRT.eu running costs on the **About** page (with logo + thank-you).
+2. Mirror the acknowledgement on the **Transparency** page and populate it with the real cost ledger from the uploaded spreadsheet.
 
-## Constraints
+## Cost data summary (from `overview_costs_DLinRT.eu_upToMay.xlsx`)
 
-- Most flagged tables (`profiles`, `notifications`, `user_roles`, `product_reviews`, `product_edit_drafts`, `company_revisions`, `reviewer_expertise`, `user_products`, `consent_audit_log`, `role_requests`, `assignment_history`, `changelog_entries`, `changelog_links`, `product_revision_dates`, `company_representatives`, `company_product_verifications`, `user_product_experiences` view) are read directly from the client through PostgREST. RLS already restricts rows. Revoking SELECT from `authenticated` would break the app.
-- Many flagged DEFINER functions are RPCs the client calls by name. Revoking EXECUTE from `authenticated` would break them.
-- Leaked-password protection is a Supabase Auth toggle, not code — out of scope for migration.
+Total expenses to date: **€631.14**, fully covered by UMC Utrecht (sponsor contribution €631.14 → net €0).
 
-## Approach
+Breakdown:
+- 2025 (Apr–Dec): 16 entries — Lovable subscriptions/top-ups + 1 IONOS domain charge → **€406.56**
+- 2026 (Jan–May): 3 charges (Lovable Jan €198.13, Lovable Mar €26.45, May pending) → **€224.58**
+- Single income line per year: "UMC Utrecht — operational sponsorship" matching expenses (net result = €0).
 
-Three buckets:
+## Changes
 
-### Bucket A — Safe to lock down (revoke from anon/authenticated)
+### 1. Logo asset
+- Add `public/logos/umc-utrecht.svg` (download official UMC Utrecht logo — will fetch from their public brand page; if unavailable in default mode I will ask for the file).
 
-Server-only objects with no client-side `from('…').select()` or `.rpc('…')` callers:
+### 2. Financial data
+- **`src/data/financials/2025.ts`** — replace placeholder with the 16 real expense entries (Lovable / IONOS, category `Software & Tooling` and `Domain & Email`) and one income line: `UMC Utrecht — operational sponsorship` (€406.56 net & gross). `lastUpdated: 2026-05-07`.
+- **`src/data/financials/2026.ts`** (new) — 2026 expenses (Jan + Mar Lovable charges; May placeholder noted) + matching UMCU income line (€224.58). `carryOver: 0`.
+- **`src/data/financials/index.ts`** — register `year2026` alongside `year2025`.
 
-Tables/views to revoke `SELECT FROM authenticated, anon` on:
-- `analytics_summary` (view) — only consumed by service role; admin reads go through `get_analytics_*` RPCs.
-- Any object currently still granting `anon` SELECT that is not a public landing-page resource.
+### 3. Reusable acknowledgement component
+- **`src/components/SponsorAcknowledgement.tsx`** (new) — small card with UMC Utrecht logo, thank-you copy, and link to https://www.umcutrecht.nl. Two variants via prop: `compact` (About) and `full` (Transparency, mentions covering operational costs).
 
-DEFINER functions to revoke `EXECUTE FROM authenticated, anon` (trigger-only / cron / service-role only):
-- `auto_grant_dlinrt_reviewer_role`, `check_company_rep_limit`, `check_company_role_before_product_adoption`, `check_products_before_company_role`, `check_role_compatibility`, `enforce_backup_code_quota`, `cleanup_old_analytics_data`, `cleanup_old_contact_submissions`, `cleanup_old_security_events`, `cleanup_unused_backup_codes`, `expire_old_invitations`, `batch_check_github_files`, `check_github_file_modified`, `get_reviews_needing_reminders` (both overloads), `admin_health_check`.
+### 4. About page
+- **`src/pages/About.tsx`** — insert `<SponsorAcknowledgement variant="compact" />` in a new section between `TeamSection` and `Financial Transparency`, titled "With support from".
 
-These either fire from triggers (which run as table owner regardless of EXECUTE grants) or from edge functions using the service role key (which bypasses grants).
+### 5. Transparency page
+- **`src/pages/Transparency.tsx`** — insert `<SponsorAcknowledgement variant="full" />` near the top of `<main>` (under the header paragraph), explaining that UMC Utrecht currently underwrites all hosting/tooling costs. The existing per-year tables will then reflect the matching income/expense entries automatically (net result €0, closing balance €0).
 
-### Bucket B — Keep accessible, mark linter findings as ignored with rationale
+## Technical notes
 
-These DEFINER functions and tables MUST remain callable/queryable by `authenticated` because the React app invokes them directly. They are safe because:
-- Tables: RLS policies are already in place and were verified earlier.
-- Functions: each one performs its own `auth.uid()` + `has_role()` checks before acting.
+- No schema changes; reuse existing `IncomeEntry` / `ExpenseEntry` model.
+- Categories used: `Software & Tooling` (Lovable), `Domain & Email` (IONOS).
+- Sponsor income is recorded as a single annual aggregate line with notes listing the covered services.
+- Logo file referenced with `/logos/umc-utrecht.svg`; alt text: "UMC Utrecht".
+- No DB / edge-function changes.
 
-We will use `manage_security_finding` to ignore each remaining lint with a one-line rationale ("RLS-protected; client reads via PostgREST" or "DEFINER RPC, performs in-body role check"), and update `mem://security/database-security-posture` so future scans don't re-raise them.
+## Open question
 
-Examples kept as-is: `has_role`, `is_admin_secure`, `can_represent_company`, `can_access_company`, `get_my_reviews_secure`, `get_my_company_revisions`, `create_company_revision`, `complete_review_secure`, `certify_product`, `create_notification`, `approve_role_request`, all `get_*_admin*` RPCs (admin pages), `get_analytics_*` (admin pages), etc.
-
-### Bucket C — Out of scope
-
-- Lint #100 (Leaked Password Protection): toggle in Supabase Auth dashboard — document in plan output, can't fix via migration.
-
-## Migration
-
-One migration file revoking the Bucket A grants:
-
-```sql
--- Bucket A: server-only views
-revoke select on public.analytics_summary from anon, authenticated;
-
--- Bucket A: trigger / cron / service-role-only DEFINER functions
-revoke execute on function public.auto_grant_dlinrt_reviewer_role()                from anon, authenticated;
-revoke execute on function public.check_company_rep_limit()                        from anon, authenticated;
-revoke execute on function public.check_company_role_before_product_adoption()     from anon, authenticated;
-revoke execute on function public.check_products_before_company_role()             from anon, authenticated;
-revoke execute on function public.check_role_compatibility()                       from anon, authenticated;
-revoke execute on function public.enforce_backup_code_quota()                      from anon, authenticated;
-revoke execute on function public.cleanup_old_analytics_data()                     from anon, authenticated;
-revoke execute on function public.cleanup_old_contact_submissions()                from anon, authenticated;
-revoke execute on function public.cleanup_old_security_events()                    from anon, authenticated;
-revoke execute on function public.cleanup_unused_backup_codes(uuid)                from anon, authenticated;
-revoke execute on function public.expire_old_invitations()                         from anon, authenticated;
-revoke execute on function public.batch_check_github_files()                       from anon, authenticated;
-revoke execute on function public.check_github_file_modified(uuid, text, timestamptz) from anon, authenticated;
-revoke execute on function public.get_reviews_needing_reminders()                  from anon, authenticated;
-revoke execute on function public.get_reviews_needing_reminders(integer, integer)  from anon, authenticated;
-revoke execute on function public.admin_health_check()                             from anon, authenticated;
-```
-
-## Post-migration steps
-
-1. Re-run `supabase--linter` — expect ~16 fewer findings.
-2. For the remaining ~83 findings (Buckets B + C), call `security--manage_security_finding` with `operation: "ignore"` and a per-finding rationale.
-3. Update `mem://security/database-security-posture` with: "Bucket A revocations applied; remaining DEFINER/PostgREST exposures intentional with RLS + in-function role checks."
-4. Tell the user to enable **Leaked Password Protection** at: `https://supabase.com/dashboard/project/msyfxyxzjyowwasgturs/auth/providers`.
-
-## Risk
-
-Low. Bucket A revocations target only triggers/cron/service-role paths. If any admin page silently depends on one (e.g., a manual "run cleanup" button), the corresponding RPC will return permission denied — easy to spot and reversed by a one-line GRANT.
+Do you have a preferred UMC Utrecht logo file to use? If yes, please attach it; otherwise I will use the official SVG from the UMCU brand portal.
