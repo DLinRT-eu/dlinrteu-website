@@ -72,6 +72,10 @@ export const useSecurityMonitoring = () => {
 
       const clientInfo = getClientInfo();
 
+      // Only log to backend if user is authenticated (function requires JWT).
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+
       await supabase.functions.invoke('track-security-event', {
         body: {
           event_type: event.type,
