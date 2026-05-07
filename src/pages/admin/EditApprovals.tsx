@@ -275,6 +275,16 @@ export default function EditApprovals() {
           </p>
         </div>
 
+        <Card className="mb-6 border-amber-300 bg-amber-50 dark:bg-amber-950/20">
+          <CardContent className="py-4 text-sm text-amber-900 dark:text-amber-100">
+            <strong>How approvals reach the live site:</strong> Approving an edit
+            automatically opens a GitHub pull request against the product data
+            files. The change becomes visible on dlinrt.eu only after the PR is
+            <em> reviewed and merged</em> on GitHub and the site redeploys. Use
+            the "View PR" link on each approved draft to track its status.
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="pending" className="space-y-4">
           <TabsList>
             <TabsTrigger value="pending" className="gap-2">
