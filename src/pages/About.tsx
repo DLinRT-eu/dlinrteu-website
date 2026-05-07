@@ -137,6 +137,43 @@ const About = () => {
       <MissionVisionSection />
       <CoreValuesSection />
 
+      <TeamSection teamMembers={shuffledTeamMembers} />
+
+      {/* Sponsor Acknowledgement */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+            With support from
+          </h2>
+          <SponsorAcknowledgement variant="compact" />
+        </div>
+      </section>
+
+      {/* Financial Transparency */}
+      <section className="py-12 px-4 bg-muted/20">
+        <div className="container mx-auto max-w-4xl">
+          <Card>
+            <CardHeader>
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle>Financial Transparency</CardTitle>
+              <CardDescription>
+                We publish an annual overview of donations received and how they are spent.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link
+                to="/transparency"
+                className="text-primary hover:underline font-medium"
+              >
+                View the annual financial overview →
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* What Happens After You Log In Section */}
       <section className="py-16 px-4 bg-gradient-to-br from-background to-primary/5">
         <div className="container mx-auto max-w-6xl">
@@ -249,43 +286,6 @@ const About = () => {
               Learn more about roles and permissions →
             </a>
           </div>
-        </div>
-      </section>
-
-      <TeamSection teamMembers={shuffledTeamMembers} />
-
-      {/* Sponsor Acknowledgement */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
-            With support from
-          </h2>
-          <SponsorAcknowledgement variant="compact" />
-        </div>
-      </section>
-
-      {/* Financial Transparency */}
-      <section className="py-12 px-4 bg-muted/20">
-        <div className="container mx-auto max-w-4xl">
-          <Card>
-            <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                <BarChart3 className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle>Financial Transparency</CardTitle>
-              <CardDescription>
-                We publish an annual overview of donations received and how they are spent.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link
-                to="/transparency"
-                className="text-primary hover:underline font-medium"
-              >
-                View the annual financial overview →
-              </Link>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
