@@ -21,7 +21,7 @@ verify_jwt = false  # Public page tracking (anonymous)
 
 # Security-sensitive endpoints - require authentication
 [functions.track-security-event]
-verify_jwt = false  # Validates auth in code, allows both authenticated and service role
+verify_jwt = false  # JWT validated in code via getClaims(); requires authenticated user
 
 [functions.verify-backup-code]
 verify_jwt = false  # Validates JWT in code for MFA flow
