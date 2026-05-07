@@ -8,6 +8,7 @@ import CoreValuesSection from "@/components/about/CoreValuesSection";
 import TeamSection from "@/components/about/TeamSection";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Eye, Building2, User, BarChart3 } from "lucide-react";
+import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
 
 const TEAM_MEMBERS = [
   {
@@ -252,6 +253,16 @@ const About = () => {
       </section>
 
       <TeamSection teamMembers={shuffledTeamMembers} />
+
+      {/* Sponsor Acknowledgement */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+            With support from
+          </h2>
+          <SponsorAcknowledgement variant="compact" />
+        </div>
+      </section>
 
       {/* Financial Transparency */}
       <section className="py-12 px-4 bg-muted/20">

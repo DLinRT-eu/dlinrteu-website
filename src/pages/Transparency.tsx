@@ -13,6 +13,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Heart, ExternalLink } from "lucide-react";
+import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
 import {
   PieChart,
   Pie,
@@ -262,6 +263,8 @@ const Transparency = () => {
             used to cover hosting, domains, and outreach costs.
           </p>
         </header>
+
+        <SponsorAcknowledgement variant="full" />
 
         {years.length > 1 ? (
           <Tabs value={active} onValueChange={setActive}>
