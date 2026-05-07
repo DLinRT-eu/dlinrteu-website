@@ -286,27 +286,6 @@ const Transparency = () => {
           <p className="text-muted-foreground">No financial reports published yet.</p>
         )}
 
-        <Card className="bg-muted/30">
-          <CardContent className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6">
-            <div>
-              <h2 className="text-lg font-semibold">Support DLinRT.eu</h2>
-              <p className="text-sm text-muted-foreground">
-                Contributions are processed through GoFundMe. All proceeds are
-                reflected in the report above.
-              </p>
-            </div>
-            <Button
-              onClick={() =>
-                window.open("https://gofund.me/f775f8ba", "_blank", "noopener,noreferrer")
-              }
-              className="bg-[#FF6F2F] hover:bg-[#FF5A1F] text-white flex items-center gap-2"
-            >
-              <Heart className="h-4 w-4" />
-              Donate on GoFundMe
-              <ExternalLink className="h-4 w-4" />
-            </Button>
-          </CardContent>
-        </Card>
       </main>
       <Footer />
     </div>
