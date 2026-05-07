@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Github, Heart } from 'lucide-react';
+import { Github } from 'lucide-react';
 import MailingListSignup from '@/components/MailingListSignup';
 import ProductFeedbackForm from '@/components/ProductFeedbackForm';
 import SEO from '@/components/SEO';
