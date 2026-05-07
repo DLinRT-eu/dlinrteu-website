@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Heart, ExternalLink } from "lucide-react";
 import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
 import {
   PieChart,
