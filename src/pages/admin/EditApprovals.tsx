@@ -143,14 +143,27 @@ export default function EditApprovals() {
 
       if (error) throw error;
 
-      toast({
-        title: reviewAction === 'approve' ? 'Edit Approved' : 'Edit Rejected',
-        description: reviewAction === 'approve' 
-          ? 'The edit has been approved. It can now be synced to GitHub.'
-          : 'The edit has been rejected. The author will be notified.'
-      });
-
+      const draftIdToSync = selectedDraft.id;
       setReviewDialogOpen(false);
+
+      if (reviewAction === 'approve') {
+        toast({
+          title: 'Edit Approved',
+          description: 'Creating GitHub pull request…'
+        });
+        // Auto-trigger PR creation. Failures are surfaced but draft remains 'approved' for manual retry.
+        try {
+          await syncToGitHub(draftIdToSync);
+        } catch (e) {
+          // syncToGitHub already toasts on failure
+        }
+      } else {
+        toast({
+          title: 'Edit Rejected',
+          description: 'The author will be notified.'
+        });
+      }
+
       fetchDrafts();
     } catch (error: any) {
       console.error('Error submitting review:', error);
