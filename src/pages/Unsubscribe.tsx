@@ -30,6 +30,16 @@ type FormValues = z.infer<typeof formSchema>;
 const Unsubscribe = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [confirmedFromLink, setConfirmedFromLink] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const status = searchParams.get("status");
+    if (status === "success") {
+      setIsSuccess(true);
+      setConfirmedFromLink(true);
+    }
+  }, [searchParams]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
