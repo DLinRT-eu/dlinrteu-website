@@ -638,6 +638,7 @@ export type Database = {
           first_name: string
           id: string
           last_name: string
+          last_unsubscribe_request_at: string | null
           unsubscribed_at: string | null
           updated_at: string
         }
@@ -648,6 +649,7 @@ export type Database = {
           first_name: string
           id?: string
           last_name: string
+          last_unsubscribe_request_at?: string | null
           unsubscribed_at?: string | null
           updated_at?: string
         }
@@ -658,6 +660,7 @@ export type Database = {
           first_name?: string
           id?: string
           last_name?: string
+          last_unsubscribe_request_at?: string | null
           unsubscribed_at?: string | null
           updated_at?: string
         }
