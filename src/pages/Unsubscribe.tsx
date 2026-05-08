@@ -101,7 +101,7 @@ const Unsubscribe = () => {
             </div>
             <CardTitle className="text-2xl">Unsubscribe from Newsletter</CardTitle>
             <CardDescription>
-              Enter your email address to unsubscribe from the DLinRT newsletter.
+              Enter your email address. We'll send you a confirmation link to complete the unsubscribe.
             </CardDescription>
           </CardHeader>
           
@@ -110,10 +110,12 @@ const Unsubscribe = () => {
               <div className="text-center py-6">
                 <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">
-                  Unsubscribed Successfully
+                  {confirmedFromLink ? "Unsubscribed Successfully" : "Check your inbox"}
                 </h3>
                 <p className="text-muted-foreground text-sm mb-6">
-                  You will no longer receive newsletter emails from DLinRT.
+                  {confirmedFromLink
+                    ? "You will no longer receive newsletter emails from DLinRT."
+                    : "If this email is subscribed, we've sent a confirmation link. Click it to complete your unsubscribe. The link expires in 3 days."}
                 </p>
                 <div className="space-y-3">
                   <Button 
