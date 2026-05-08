@@ -69,7 +69,7 @@ const CompareStructures = () => {
   return (
     <>
       <SEO
-        title="Structure Comparison | Compare Auto-Contouring Structures"
+        title="Structure Comparison"
         description="Compare anatomical structures supported by different auto-contouring products. Find unique and common structures across vendors."
       />
 

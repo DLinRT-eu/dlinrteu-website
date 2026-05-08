@@ -144,8 +144,8 @@ const Changelog = () => {
 
   return (
     <PageLayout
-      title="Changelog - Platform Updates & Release Notes"
-      description="Track all DLinRT platform updates, new features, improvements, and bug fixes. Stay informed about the latest changes to our radiotherapy AI database."
+      title="Changelog"
+      description="Track DLinRT platform updates, new features, improvements, and bug fixes."
       canonical="https://dlinrt.eu/changelog"
     >
       <div className="container max-w-6xl mx-auto py-8 px-4">

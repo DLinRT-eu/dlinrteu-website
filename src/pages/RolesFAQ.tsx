@@ -8,8 +8,8 @@ import { ArrowLeft, Mail } from 'lucide-react';
 export default function RolesFAQ() {
   return (
     <PageLayout
-      title="Roles FAQ | DLinRT"
-      description="Frequently asked questions about user roles and permissions on DLinRT"
+      title="Roles FAQ"
+      description="Frequently asked questions about user roles and permissions on DLinRT.eu."
       canonical="https://dlinrt.eu/roles/faq"
     >
       <div className="container max-w-4xl py-12">
