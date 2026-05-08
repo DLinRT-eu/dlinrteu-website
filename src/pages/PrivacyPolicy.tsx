@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 const PrivacyPolicy = () => (
   <div className="min-h-screen bg-white">
     <SEO
-      title="Privacy Policy - Data Protection & GDPR Compliance - DLinRT.eu"
-      description="Comprehensive privacy policy detailing how DLinRT.eu handles personal data, protects user privacy, and ensures GDPR compliance for our deep learning radiotherapy platform."
+      title="Privacy Policy"
+      description="How DLinRT.eu handles personal data, protects user privacy, and ensures GDPR compliance."
       canonical="https://dlinrt.eu/privacy-policy"
     />
     <main className="max-w-3xl mx-auto px-4 py-8">
