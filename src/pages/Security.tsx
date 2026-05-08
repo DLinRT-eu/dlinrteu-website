@@ -63,8 +63,8 @@ const Security = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Security & Certifications - SSL, GDPR, Data Protection | DLinRT.eu"
-        description="Comprehensive security measures, SSL/TLS certificates, GDPR compliance, and data protection standards for DLinRT.eu. Learn about our EU-hosted infrastructure and security monitoring."
+        title="Security & Compliance"
+        description="SSL/TLS, GDPR compliance, EU-hosted infrastructure, and security monitoring practices for DLinRT.eu."
         canonical="/security"
       />
       
