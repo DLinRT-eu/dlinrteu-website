@@ -1,0 +1,1 @@
+ALTER TABLE public.newsletter_subscribers ADD COLUMN IF NOT EXISTS last_unsubscribe_request_at timestamptz;
