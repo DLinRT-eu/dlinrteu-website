@@ -7,7 +7,7 @@ import { Users, Search, Building2, Shield, ArrowRight, HelpCircle, FileText, Boo
 export default function Roles() {
   return (
     <PageLayout
-      title="User Roles | DLinRT"
+      title="User Roles"
       description="Explore user roles on DLinRT.eu. Learn how to become a reviewer, company representative, or contributor to advance deep learning adoption in radiotherapy."
       canonical="https://dlinrt.eu/roles"
     >
