@@ -159,7 +159,7 @@ const About = () => {
               </div>
               <CardTitle>Financial Transparency</CardTitle>
               <CardDescription>
-                We publish an annual overview of donations received and how they are spent.
+                We publish an annual overview of income and expenses, including the support provided by UMC Utrecht.
               </CardDescription>
             </CardHeader>
             <CardContent>
