@@ -127,8 +127,8 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="About DLinRT.eu - Mission, Team & Vision for AI in Radiotherapy"
-        description="Learn about our mission to advance deep learning in radiotherapy. Meet the expert team accelerating AI adoption in radiation oncology through open collaboration."
+        title="About - Mission, Team & Supporters"
+        description="Learn about DLinRT.eu, the team behind the catalogue, our supporter UMC Utrecht, and how user roles work on the platform."
         canonical="https://dlinrt.eu/about"
         structuredData={structuredData}
       />
