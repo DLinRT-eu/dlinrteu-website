@@ -26,8 +26,8 @@ const News = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Latest News & Updates - Deep Learning in Radiotherapy Developments"
-        description="Stay informed with the latest developments, product releases, research breakthroughs, and industry announcements in AI-powered radiotherapy and medical imaging technology."
+        title="Latest News & Updates"
+        description="Stay informed with the latest product releases, research, and announcements in deep learning for radiotherapy and medical imaging."
         canonical="https://dlinrt.eu/news"
         structuredData={structuredData}
       />
