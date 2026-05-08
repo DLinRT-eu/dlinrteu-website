@@ -81,6 +81,7 @@ async function signToken(email: string): Promise<string> {
 }
 
 async function verifyToken(token: string): Promise<{ email: string } | null> {
+  if (!TOKEN_SECRET) return null;
   const parts = token.split(".");
   if (parts.length !== 2) return null;
   const [payloadB64, sigB64] = parts;
@@ -146,6 +147,13 @@ const handler = async (req: Request): Promise<Response> => {
 
   // GET /functions/v1/unsubscribe-newsletter?token=... → confirm and unsubscribe, then redirect
   if (req.method === "GET") {
+    if (!TOKEN_SECRET) {
+      console.error("UNSUBSCRIBE_TOKEN_SECRET is not configured; refusing GET verification");
+      return new Response(JSON.stringify({ error: "Service not configured" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
     const url = new URL(req.url);
     const token = url.searchParams.get("token") ?? "";
     const verified = token ? await verifyToken(token) : null;
