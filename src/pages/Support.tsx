@@ -23,8 +23,8 @@ const Support = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Support Center & Contact - Get Help with DLinRT Deep Learning Platform"
-        description="Get help with the DLinRT platform. Contact our support team, submit feedback, report issues, or learn how to contribute to our radiotherapy AI community."
+        title="Support & Contact"
+        description="Contact the DLinRT team, report issues on GitHub, suggest products, or join our mailing list for updates on AI in radiotherapy."
         canonical="https://dlinrt.eu/support"
         structuredData={structuredData}
       />
