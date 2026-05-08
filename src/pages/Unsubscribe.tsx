@@ -120,7 +120,7 @@ const Unsubscribe = () => {
                 <div className="space-y-3">
                   <Button 
                     variant="outline" 
-                    onClick={() => setIsSuccess(false)}
+                    onClick={() => { setIsSuccess(false); setConfirmedFromLink(false); }}
                     className="w-full"
                   >
                     Unsubscribe another email
