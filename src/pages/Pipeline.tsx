@@ -70,8 +70,8 @@ const Pipeline = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Products in Pipeline - Upcoming AI Solutions for Radiotherapy"
-        description="Track upcoming AI products for radiotherapy that have been announced but not yet certified. Browse deep learning solutions in development."
+        title="Products in Pipeline"
+        description="Track upcoming AI products for radiotherapy that have been announced but are not yet certified. Browse deep learning solutions in development."
         canonical="https://dlinrt.eu/products/pipeline"
         structuredData={structuredData}
       />
