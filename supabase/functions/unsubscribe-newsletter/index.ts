@@ -81,6 +81,7 @@ async function signToken(email: string): Promise<string> {
 }
 
 async function verifyToken(token: string): Promise<{ email: string } | null> {
+  if (!TOKEN_SECRET) return null;
   const parts = token.split(".");
   if (parts.length !== 2) return null;
   const [payloadB64, sigB64] = parts;
