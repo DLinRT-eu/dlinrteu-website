@@ -175,53 +175,6 @@ export default function Auth() {
     setMfaError(null);
   };
 
-  const handleMFAVerify = async (code: string, isBackupCode: boolean) => {
-    setMfaError(null);
-    setLoading(true);
-    
-    try {
-      if (isBackupCode) {
-        // Call edge function for backup code verification
-        const { data, error } = await supabase.functions.invoke('verify-backup-code', {
-          body: { code }
-        });
-        
-        if (error || !data?.success) {
-          throw new Error(data?.error || 'Invalid backup code');
-        }
-      } else {
-        // Standard TOTP verification
-        const { data: factors } = await supabase.auth.mfa.listFactors();
-        const factor = factors?.totp?.find(f => f.status === 'verified');
-        
-        if (!factor) {
-          throw new Error('No verified MFA factor found');
-        }
-        
-        const { data: challenge, error: challengeError } = await supabase.auth.mfa.challenge({ 
-          factorId: factor.id 
-        });
-        
-        if (challengeError) throw challengeError;
-        
-        const { error: verifyError } = await supabase.auth.mfa.verify({
-          factorId: factor.id,
-          challengeId: challenge.id,
-          code
-        });
-        
-        if (verifyError) throw verifyError;
-      }
-      
-      // MFA verified, navigate to dashboard
-      navigate('/dashboard-home');
-    } catch (error: any) {
-      setMfaError(error.message || 'Verification failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
