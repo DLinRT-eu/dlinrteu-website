@@ -54,7 +54,7 @@ const signupSchema = z.object({
 
 export default function Auth() {
   const navigate = useNavigate();
-  const { user, loading: authLoading, signIn, signUp } = useAuth();
+  const { user, loading: authLoading, signIn, signUp, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -81,12 +81,22 @@ export default function Auth() {
   const [dataProcessingConsent, setDataProcessingConsent] = useState(false);
   const [requestedRoles, setRequestedRoles] = useState<('reviewer' | 'company')[]>([]);
 
-  // Redirect if already authenticated
+  // Detect existing AAL1 session that requires MFA elevation
+  // (e.g. tab refresh during MFA, or direct navigation to /auth?mfa=required)
   useEffect(() => {
-    if (user && !authLoading) {
-      console.log('[Auth Page] User authenticated, redirecting to dashboard');
-      navigate('/dashboard-home');
-    }
+    if (!user || authLoading) return;
+    let cancelled = false;
+    (async () => {
+      const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+      if (cancelled) return;
+      if (data?.currentLevel === 'aal1' && data?.nextLevel === 'aal2') {
+        setShowMFAVerification(true);
+      } else {
+        // Already AAL2 or no MFA — redirect to dashboard
+        navigate('/dashboard-home');
+      }
+    })();
+    return () => { cancelled = true; };
   }, [user, authLoading, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -130,51 +140,39 @@ export default function Auth() {
     }
   };
 
-  const handleMFAVerify = async (code: string, isBackupCode: boolean) => {
+  const handleMFAVerify = async (code: string) => {
     setMfaError(null);
     setLoading(true);
-    
+
     try {
-      if (isBackupCode) {
-        // Call edge function for backup code verification
-        const { data, error } = await supabase.functions.invoke('verify-backup-code', {
-          body: { code }
-        });
-        
-        if (error || !data?.success) {
-          throw new Error(data?.error || 'Invalid backup code');
-        }
-      } else {
-        // Standard TOTP verification
-        const { data: factors } = await supabase.auth.mfa.listFactors();
-        const factor = factors?.totp?.find(f => f.status === 'verified');
-        
-        if (!factor) {
-          throw new Error('No verified MFA factor found');
-        }
-        
-        const { data: challenge, error: challengeError } = await supabase.auth.mfa.challenge({ 
-          factorId: factor.id 
-        });
-        
-        if (challengeError) throw challengeError;
-        
-        const { error: verifyError } = await supabase.auth.mfa.verify({
-          factorId: factor.id,
-          challengeId: challenge.id,
-          code
-        });
-        
-        if (verifyError) throw verifyError;
-      }
-      
-      // MFA verified, navigate to dashboard
+      const { data: factors } = await supabase.auth.mfa.listFactors();
+      const factor = factors?.totp?.find((f) => f.status === 'verified');
+      if (!factor) throw new Error('No verified MFA factor found');
+
+      const { data: challenge, error: challengeError } = await supabase.auth.mfa.challenge({
+        factorId: factor.id,
+      });
+      if (challengeError) throw challengeError;
+
+      const { error: verifyError } = await supabase.auth.mfa.verify({
+        factorId: factor.id,
+        challengeId: challenge.id,
+        code,
+      });
+      if (verifyError) throw verifyError;
+
       navigate('/dashboard-home');
     } catch (error: any) {
-      setMfaError(error.message || 'Verification failed');
+      setMfaError(error?.message || 'Verification failed');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleMFACancel = async () => {
+    await signOut();
+    setShowMFAVerification(false);
+    setMfaError(null);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -267,6 +265,7 @@ export default function Auth() {
             {showMFAVerification ? (
               <MFAVerification 
                 onVerify={handleMFAVerify}
+                onCancel={handleMFACancel}
                 loading={loading}
                 error={mfaError || undefined}
               />
