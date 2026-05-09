@@ -141,15 +141,15 @@ export default function ResetPassword() {
 
   const handleSubmit = async (values: ResetPasswordFormValues) => {
     setError('');
-    setRateLimitError('');
+    setUiCooldownMsg('');
 
-    // Check rate limit
-    if (!checkRateLimit()) {
+    // Check local UI cooldown (not a security measure — see note above)
+    if (!checkUiCooldown()) {
       return;
     }
 
-    // Record this attempt
-    recordAttempt();
+    // Record this attempt for UI convenience
+    recordUiAttempt();
 
     // Use explicit production URL for password reset
     const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
