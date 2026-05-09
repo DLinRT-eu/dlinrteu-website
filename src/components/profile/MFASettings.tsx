@@ -22,6 +22,24 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 
+const NUM_BACKUP_CODES = 10;
+
+const generateLocalBackupCodes = (): string[] => {
+  const codes: string[] = [];
+  for (let i = 0; i < NUM_BACKUP_CODES; i++) {
+    const array = new Uint8Array(8);
+    crypto.getRandomValues(array);
+    const code = Array.from(array)
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('')
+      .toUpperCase()
+      .match(/.{1,4}/g)
+      ?.join('-') || '';
+    codes.push(code);
+  }
+  return codes;
+};
+
 export const MFASettings = () => {
   const [mfaEnabled, setMfaEnabled] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -35,7 +53,8 @@ export const MFASettings = () => {
   const [factorId, setFactorId] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [backupCodes, setBackupCodes] = useState<string[]>([]);
-  const [password, setPassword] = useState('');
+  const [enrollVerified, setEnrollVerified] = useState(false);
+  const [unenrollTotp, setUnenrollTotp] = useState('');
   const { toast } = useToast();
 
   useEffect(() => {
@@ -62,32 +81,26 @@ export const MFASettings = () => {
   const startEnrollment = async () => {
     setEnrolling(true);
     try {
-      // Check for and remove any existing unverified factors
+      // Remove any existing unverified factors first
       const { data: existingFactors } = await supabase.auth.mfa.listFactors();
-      const unverifiedFactor = existingFactors?.totp?.find(f => f.status === 'unverified');
-      
+      const unverifiedFactor = existingFactors?.totp?.find((f) => f.status === 'unverified');
       if (unverifiedFactor) {
         await supabase.auth.mfa.unenroll({ factorId: unverifiedFactor.id });
       }
-      
-      // Now enroll with a friendly name
+
       const { data, error } = await supabase.auth.mfa.enroll({
         factorType: 'totp',
         friendlyName: 'DLinRT Authenticator',
       });
-
       if (error) throw error;
 
       setQrCode(data.totp.qr_code);
       setSecret(data.totp.secret);
       setFactorId(data.id);
+      setBackupCodes([]);
+      setEnrollVerified(false);
+      setVerificationCode('');
       setShowEnrollDialog(true);
-      
-      // Generate backup codes with user ID
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        await generateBackupCodes(user.id);
-      }
     } catch (error: any) {
       toast({
         title: 'Enrollment Failed',
@@ -119,10 +132,17 @@ export const MFASettings = () => {
         challengeId: challenge.data.id,
         code: verificationCode,
       });
-
       if (verify.error) throw verify.error;
 
-      // Update profile
+      // Now that TOTP is verified, generate and persist backup codes (batched)
+      const codes = generateLocalBackupCodes();
+      const { error: storeError } = await supabase.functions.invoke('store-backup-code', {
+        body: { codes, reset: true },
+      });
+      if (storeError) throw storeError;
+      setBackupCodes(codes);
+
+      // Update profile flags
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         await supabase
@@ -135,14 +155,12 @@ export const MFASettings = () => {
           .eq('id', user.id);
       }
 
+      setEnrollVerified(true);
+      setMfaEnabled(true);
       toast({
         title: 'MFA Enabled',
-        description: 'Two-factor authentication is now active on your account',
+        description: 'Save your backup codes in a safe place before closing this dialog.',
       });
-
-      setMfaEnabled(true);
-      setShowEnrollDialog(false);
-      setVerificationCode('');
     } catch (error: any) {
       toast({
         title: 'Verification Failed',
@@ -154,15 +172,35 @@ export const MFASettings = () => {
     }
   };
 
+  // Cleanup pending (unverified) enrollment if user closes dialog early
+  const handleEnrollDialogChange = async (open: boolean) => {
+    if (!open && !enrollVerified && factorId) {
+      try {
+        await supabase.auth.mfa.unenroll({ factorId });
+      } catch (e) {
+        console.error('Failed to clean up unverified factor:', e);
+      }
+      setFactorId('');
+    }
+    if (!open) {
+      setVerificationCode('');
+      setBackupCodes([]);
+      setQrCode('');
+      setSecret('');
+    }
+    setShowEnrollDialog(open);
+  };
+
   const startUnenrollment = () => {
+    setUnenrollTotp('');
     setShowUnenrollDialog(true);
   };
 
   const confirmUnenrollment = async () => {
-    if (!password) {
+    if (unenrollTotp.length !== 6) {
       toast({
-        title: 'Password Required',
-        description: 'Please enter your password to disable MFA',
+        title: 'Code Required',
+        description: 'Enter the 6-digit code from your authenticator app',
         variant: 'destructive',
       });
       return;
@@ -171,18 +209,22 @@ export const MFASettings = () => {
     setUnenrolling(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user?.email) throw new Error('User not found');
+      if (!user) throw new Error('User not found');
 
-      // Re-authenticate user
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: user.email,
-        password,
+      // Require a fresh TOTP code against the existing factor before unenrolling.
+      // This proves AAL2 / current device possession, not just password knowledge.
+      const challenge = await supabase.auth.mfa.challenge({ factorId });
+      if (challenge.error) throw challenge.error;
+
+      const verify = await supabase.auth.mfa.verify({
+        factorId,
+        challengeId: challenge.data.id,
+        code: unenrollTotp,
       });
+      if (verify.error) throw new Error('Invalid verification code');
 
-      if (signInError) throw new Error('Invalid password');
-
-      const { error } = await supabase.auth.mfa.unenroll({ factorId });
-      if (error) throw error;
+      const { error: unenrollError } = await supabase.auth.mfa.unenroll({ factorId });
+      if (unenrollError) throw unenrollError;
 
       // Delete all backup codes for this user
       await supabase
@@ -207,7 +249,7 @@ export const MFASettings = () => {
 
       setMfaEnabled(false);
       setShowUnenrollDialog(false);
-      setPassword('');
+      setUnenrollTotp('');
     } catch (error: any) {
       toast({
         title: 'Unenrollment Failed',
@@ -216,45 +258,6 @@ export const MFASettings = () => {
       });
     } finally {
       setUnenrolling(false);
-    }
-  };
-
-  const generateBackupCodes = async (userId: string) => {
-    const codes: string[] = [];
-    
-    try {
-      // Generate 10 cryptographically secure backup codes
-      for (let i = 0; i < 10; i++) {
-        const array = new Uint8Array(8);
-        crypto.getRandomValues(array);
-        const code = Array.from(array)
-          .map(b => b.toString(16).padStart(2, '0'))
-          .join('')
-          .toUpperCase()
-          .match(/.{1,4}/g)
-          ?.join('-') || '';
-        
-        codes.push(code);
-        
-        // Store via edge function (hashed server-side). Reset prior unused codes
-        // on the first call to prevent accumulation that could slow verification.
-        const { error } = await supabase.functions.invoke('store-backup-code', {
-          body: { user_id: userId, code, reset: i === 0 }
-        });
-        
-        if (error) {
-          console.error('Error storing backup code:', error);
-        }
-      }
-      
-      setBackupCodes(codes);
-    } catch (error) {
-      console.error('Error generating backup codes:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to generate backup codes',
-        variant: 'destructive',
-      });
     }
   };
 
@@ -271,10 +274,7 @@ export const MFASettings = () => {
 
   const copySecret = () => {
     navigator.clipboard.writeText(secret);
-    toast({
-      title: 'Copied',
-      description: 'Secret key copied to clipboard',
-    });
+    toast({ title: 'Copied', description: 'Secret key copied to clipboard' });
   };
 
   if (loading) {
@@ -340,81 +340,95 @@ export const MFASettings = () => {
       </Card>
 
       {/* Enrollment Dialog */}
-      <Dialog open={showEnrollDialog} onOpenChange={setShowEnrollDialog}>
+      <Dialog open={showEnrollDialog} onOpenChange={handleEnrollDialogChange}>
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Set Up Two-Factor Authentication</DialogTitle>
             <DialogDescription>
-              Scan the QR code with your authenticator app, then enter the verification
-              code to complete setup.
+              {enrollVerified
+                ? 'Save these backup codes in a safe place. They will not be shown again.'
+                : 'Scan the QR code with your authenticator app, then enter the verification code to complete setup.'}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
-            {/* QR Code */}
-            <div className="flex justify-center p-4 bg-background border rounded-lg">
-              <QRCodeSVG value={qrCode} size={200} />
-            </div>
-
-            {/* Manual Entry */}
-            <div className="space-y-2">
-              <Label className="text-xs">Can't scan? Enter this key manually:</Label>
-              <div className="flex gap-2">
-                <Input value={secret} readOnly className="font-mono text-xs" />
-                <Button size="icon" variant="outline" onClick={copySecret}>
-                  <Copy className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Backup Codes */}
-            {backupCodes.length > 0 && (
-              <div className="space-y-2">
-                <Label>Backup Codes (Save these in a safe place)</Label>
-                <div className="grid grid-cols-2 gap-2 p-3 bg-muted rounded-lg font-mono text-sm">
-                  {backupCodes.map((code, i) => (
-                    <div key={i}>{code}</div>
-                  ))}
+            {!enrollVerified ? (
+              <>
+                {/* QR Code */}
+                <div className="flex justify-center p-4 bg-background border rounded-lg">
+                  <QRCodeSVG value={qrCode} size={200} />
                 </div>
+
+                {/* Manual Entry */}
+                <div className="space-y-2">
+                  <Label className="text-xs">Can't scan? Enter this key manually:</Label>
+                  <div className="flex gap-2">
+                    <Input value={secret} readOnly className="font-mono text-xs" />
+                    <Button size="icon" variant="outline" onClick={copySecret}>
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Verification */}
+                <div className="space-y-2">
+                  <Label>Enter the 6-digit code from your app</Label>
+                  <div className="flex justify-center">
+                    <InputOTP
+                      maxLength={6}
+                      value={verificationCode}
+                      onChange={setVerificationCode}
+                    >
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
+                  </div>
+                </div>
+
                 <Button
-                  onClick={downloadBackupCodes}
-                  variant="outline"
-                  size="sm"
+                  onClick={verifyEnrollment}
+                  disabled={verifying || verificationCode.length !== 6}
                   className="w-full"
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download Backup Codes
+                  {verifying ? 'Verifying...' : 'Verify and Enable MFA'}
                 </Button>
-              </div>
+              </>
+            ) : (
+              <>
+                <Alert>
+                  <AlertDescription>
+                    Each backup code can be used once if you lose access to your
+                    authenticator. Store them somewhere safe — they will not be shown
+                    again.
+                  </AlertDescription>
+                </Alert>
+                <div className="space-y-2">
+                  <Label>Backup Codes</Label>
+                  <div className="grid grid-cols-2 gap-2 p-3 bg-muted rounded-lg font-mono text-sm">
+                    {backupCodes.map((code, i) => (
+                      <div key={i}>{code}</div>
+                    ))}
+                  </div>
+                  <Button
+                    onClick={downloadBackupCodes}
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download Backup Codes
+                  </Button>
+                </div>
+                <Button onClick={() => handleEnrollDialogChange(false)} className="w-full">
+                  I've saved my codes
+                </Button>
+              </>
             )}
-
-            {/* Verification */}
-            <div className="space-y-2">
-              <Label>Enter the 6-digit code from your app</Label>
-              <div className="flex justify-center">
-                <InputOTP
-                  maxLength={6}
-                  value={verificationCode}
-                  onChange={setVerificationCode}
-                >
-                  <InputOTPGroup>
-                    <InputOTPSlot index={0} />
-                    <InputOTPSlot index={1} />
-                    <InputOTPSlot index={2} />
-                    <InputOTPSlot index={3} />
-                    <InputOTPSlot index={4} />
-                    <InputOTPSlot index={5} />
-                  </InputOTPGroup>
-                </InputOTP>
-              </div>
-            </div>
-
-            <Button
-              onClick={verifyEnrollment}
-              disabled={verifying || verificationCode.length !== 6}
-              className="w-full"
-            >
-              Verify and Enable MFA
-            </Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -425,7 +439,7 @@ export const MFASettings = () => {
           <DialogHeader>
             <DialogTitle>Disable Two-Factor Authentication</DialogTitle>
             <DialogDescription>
-              Enter your password to confirm disabling MFA on your account.
+              Enter a current code from your authenticator app to confirm.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
@@ -435,13 +449,19 @@ export const MFASettings = () => {
               </AlertDescription>
             </Alert>
             <div className="space-y-2">
-              <Label>Password</Label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-              />
+              <Label>Authenticator code</Label>
+              <div className="flex justify-center">
+                <InputOTP maxLength={6} value={unenrollTotp} onChange={setUnenrollTotp}>
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </div>
             </div>
             <div className="flex gap-2">
               <Button
@@ -454,10 +474,10 @@ export const MFASettings = () => {
               <Button
                 onClick={confirmUnenrollment}
                 variant="destructive"
-                disabled={unenrolling || !password}
+                disabled={unenrolling || unenrollTotp.length !== 6}
                 className="flex-1"
               >
-                Disable MFA
+                {unenrolling ? 'Disabling...' : 'Disable MFA'}
               </Button>
             </div>
           </div>
