@@ -32,12 +32,15 @@ const resetPasswordSchema = z.object({
 
 type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
-// Rate limiting configuration
-const RATE_LIMIT_KEY = 'password_reset_attempts';
-const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
-const MAX_ATTEMPTS = 3;
+// UI convenience: local attempt tracking to reduce accidental duplicate submissions.
+// This is NOT a security measure — it is trivially bypassed (clear localStorage,
+// incognito mode, different browser). Actual rate limiting is enforced server-side
+// by Supabase Auth on the resetPasswordForEmail endpoint.
+const UI_ATTEMPT_KEY = 'password_reset_attempts';
+const UI_ATTEMPT_WINDOW = 15 * 60 * 1000; // 15 minutes
+const UI_MAX_ATTEMPTS = 3;
 
-interface RateLimitData {
+interface AttemptData {
   attempts: number;
   timestamp: number;
 }
@@ -45,7 +48,7 @@ interface RateLimitData {
 export default function ResetPassword() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
-  const [rateLimitError, setRateLimitError] = useState('');
+  const [uiCooldownMsg, setUiCooldownMsg] = useState('');
   const [remainingTime, setRemainingTime] = useState(0);
   const navigate = useNavigate();
 
@@ -56,59 +59,59 @@ export default function ResetPassword() {
     },
   });
 
-  // Check rate limit on component mount and set up timer
+  // Check local attempt tracking on mount and keep timer updated
   useEffect(() => {
-    checkRateLimit();
-    
+    checkUiCooldown();
+
     const interval = setInterval(() => {
-      const data = getRateLimitData();
-      if (data && isRateLimited(data)) {
-        const timeLeft = Math.ceil((data.timestamp + RATE_LIMIT_WINDOW - Date.now()) / 1000);
+      const data = getAttemptData();
+      if (data && isInCooldown(data)) {
+        const timeLeft = Math.ceil((data.timestamp + UI_ATTEMPT_WINDOW - Date.now()) / 1000);
         setRemainingTime(timeLeft);
       } else {
         setRemainingTime(0);
-        setRateLimitError('');
+        setUiCooldownMsg('');
       }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const getRateLimitData = (): RateLimitData | null => {
+  const getAttemptData = (): AttemptData | null => {
     try {
-      const data = localStorage.getItem(RATE_LIMIT_KEY);
+      const data = localStorage.getItem(UI_ATTEMPT_KEY);
       return data ? JSON.parse(data) : null;
     } catch {
       return null;
     }
   };
 
-  const setRateLimitData = (data: RateLimitData) => {
+  const setAttemptData = (data: AttemptData) => {
     try {
-      localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(data));
+      localStorage.setItem(UI_ATTEMPT_KEY, JSON.stringify(data));
     } catch {
       // Silent fail if localStorage is unavailable
     }
   };
 
-  const isRateLimited = (data: RateLimitData): boolean => {
+  const isInCooldown = (data: AttemptData): boolean => {
     const now = Date.now();
     const timeSinceFirstAttempt = now - data.timestamp;
-    
-    if (timeSinceFirstAttempt > RATE_LIMIT_WINDOW) {
+
+    if (timeSinceFirstAttempt > UI_ATTEMPT_WINDOW) {
       // Reset if window has passed
       return false;
     }
-    
-    return data.attempts >= MAX_ATTEMPTS;
+
+    return data.attempts >= UI_MAX_ATTEMPTS;
   };
 
-  const checkRateLimit = () => {
-    const data = getRateLimitData();
-    if (data && isRateLimited(data)) {
-      const timeLeft = Math.ceil((data.timestamp + RATE_LIMIT_WINDOW - Date.now()) / 1000);
+  const checkUiCooldown = () => {
+    const data = getAttemptData();
+    if (data && isInCooldown(data)) {
+      const timeLeft = Math.ceil((data.timestamp + UI_ATTEMPT_WINDOW - Date.now()) / 1000);
       setRemainingTime(timeLeft);
-      setRateLimitError(
+      setUiCooldownMsg(
         `Too many password reset attempts. Please try again in ${Math.ceil(timeLeft / 60)} minutes.`
       );
       return false;
@@ -116,37 +119,37 @@ export default function ResetPassword() {
     return true;
   };
 
-  const recordAttempt = () => {
-    const data = getRateLimitData();
+  const recordUiAttempt = () => {
+    const data = getAttemptData();
     const now = Date.now();
 
     if (data) {
       const timeSinceFirstAttempt = now - data.timestamp;
-      
-      if (timeSinceFirstAttempt > RATE_LIMIT_WINDOW) {
+
+      if (timeSinceFirstAttempt > UI_ATTEMPT_WINDOW) {
         // Reset if window has passed
-        setRateLimitData({ attempts: 1, timestamp: now });
+        setAttemptData({ attempts: 1, timestamp: now });
       } else {
         // Increment attempts within window
-        setRateLimitData({ attempts: data.attempts + 1, timestamp: data.timestamp });
+        setAttemptData({ attempts: data.attempts + 1, timestamp: data.timestamp });
       }
     } else {
       // First attempt
-      setRateLimitData({ attempts: 1, timestamp: now });
+      setAttemptData({ attempts: 1, timestamp: now });
     }
   };
 
   const handleSubmit = async (values: ResetPasswordFormValues) => {
     setError('');
-    setRateLimitError('');
+    setUiCooldownMsg('');
 
-    // Check rate limit
-    if (!checkRateLimit()) {
+    // Check local UI cooldown (not a security measure — see note above)
+    if (!checkUiCooldown()) {
       return;
     }
 
-    // Record this attempt
-    recordAttempt();
+    // Record this attempt for UI convenience
+    recordUiAttempt();
 
     // Use explicit production URL for password reset
     const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
@@ -204,11 +207,11 @@ export default function ResetPassword() {
                     </Alert>
                   )}
 
-                  {rateLimitError && (
+                  {uiCooldownMsg && (
                     <Alert variant="destructive">
                       <AlertTriangle className="h-4 w-4" />
                       <AlertDescription>
-                        {rateLimitError}
+                        {uiCooldownMsg}
                         {remainingTime > 0 && (
                           <span className="block mt-1 text-sm">
                             Time remaining: {Math.floor(remainingTime / 60)}:{(remainingTime % 60).toString().padStart(2, '0')}
