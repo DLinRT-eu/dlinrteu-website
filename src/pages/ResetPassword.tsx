@@ -207,11 +207,11 @@ export default function ResetPassword() {
                     </Alert>
                   )}
 
-                  {rateLimitError && (
+                  {uiCooldownMsg && (
                     <Alert variant="destructive">
                       <AlertTriangle className="h-4 w-4" />
                       <AlertDescription>
-                        {rateLimitError}
+                        {uiCooldownMsg}
                         {remainingTime > 0 && (
                           <span className="block mt-1 text-sm">
                             Time remaining: {Math.floor(remainingTime / 60)}:{(remainingTime % 60).toString().padStart(2, '0')}
