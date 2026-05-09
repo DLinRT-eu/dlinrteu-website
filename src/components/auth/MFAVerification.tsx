@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Shield, AlertCircle } from 'lucide-react';
 import {
@@ -12,23 +11,18 @@ import {
 } from '@/components/ui/input-otp';
 
 interface MFAVerificationProps {
-  onVerify: (code: string, isBackupCode: boolean) => Promise<void>;
+  onVerify: (code: string) => Promise<void>;
+  onCancel?: () => void;
   loading?: boolean;
   error?: string;
 }
 
-export const MFAVerification = ({ onVerify, loading, error }: MFAVerificationProps) => {
+export const MFAVerification = ({ onVerify, onCancel, loading, error }: MFAVerificationProps) => {
   const [code, setCode] = useState('');
-  const [useBackupCode, setUseBackupCode] = useState(false);
-  const [backupCode, setBackupCode] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (useBackupCode) {
-      await onVerify(backupCode, true);
-    } else {
-      await onVerify(code, false);
-    }
+    await onVerify(code);
   };
 
   return (
@@ -51,85 +45,49 @@ export const MFAVerification = ({ onVerify, loading, error }: MFAVerificationPro
             </Alert>
           )}
 
-          {!useBackupCode ? (
-            <>
-              <div className="space-y-2">
-                <Label>Verification Code</Label>
-                <div className="flex justify-center">
-                  <InputOTP
-                    maxLength={6}
-                    value={code}
-                    onChange={setCode}
-                  >
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                </div>
-              </div>
+          <div className="space-y-2">
+            <Label>Verification Code</Label>
+            <div className="flex justify-center">
+              <InputOTP maxLength={6} value={code} onChange={setCode}>
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+          </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loading || code.length !== 6}
-              >
-                {loading ? 'Verifying...' : 'Verify'}
-              </Button>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={loading || code.length !== 6}
+          >
+            {loading ? 'Verifying...' : 'Verify'}
+          </Button>
 
-              <div className="text-center">
-                <Button
-                  type="button"
-                  variant="link"
-                  onClick={() => setUseBackupCode(true)}
-                  className="text-sm"
-                >
-                  Use backup code instead
-                </Button>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="space-y-2">
-                <Label>Backup Code</Label>
-                <Input
-                  type="text"
-                  value={backupCode}
-                  onChange={(e) => setBackupCode(e.target.value.toUpperCase())}
-                  placeholder="Enter backup code"
-                  className="font-mono"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loading || !backupCode}
-              >
-                {loading ? 'Verifying...' : 'Verify Backup Code'}
-              </Button>
-
-              <div className="text-center">
-                <Button
-                  type="button"
-                  variant="link"
-                  onClick={() => setUseBackupCode(false)}
-                  className="text-sm"
-                >
-                  Use authenticator code instead
-                </Button>
-              </div>
-            </>
+          {onCancel && (
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full"
+              onClick={onCancel}
+              disabled={loading}
+            >
+              Cancel and sign out
+            </Button>
           )}
 
           <Alert>
             <AlertDescription className="text-xs">
-              If you've lost access to your authenticator app and backup codes,
-              please contact support.
+              Lost access to your authenticator app? Contact support at{' '}
+              <a href="mailto:m.maspero@umcutrecht.nl" className="underline">
+                m.maspero@umcutrecht.nl
+              </a>{' '}
+              to recover your account.
             </AlertDescription>
           </Alert>
         </form>

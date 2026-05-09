@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
+import { supabase } from '@/integrations/supabase/client';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 
@@ -24,12 +26,42 @@ export const ProtectedRoute = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (loading || rolesLoading) {
+  // AAL2 enforcement: if the user has MFA enrolled but has only an AAL1
+  // session, force them through the MFA verification screen at /auth.
+  // 'pending' means we're still checking; 'ok' means access granted; 'mfa' means redirect.
+  const [aalState, setAalState] = useState<'pending' | 'ok' | 'mfa'>('pending');
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!user) {
+      setAalState('ok');
+      return;
+    }
+    (async () => {
+      try {
+        const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+        if (cancelled) return;
+        if (data?.currentLevel === 'aal1' && data?.nextLevel === 'aal2') {
+          setAalState('mfa');
+        } else {
+          setAalState('ok');
+        }
+      } catch {
+        if (!cancelled) setAalState('ok');
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [user]);
+
+  if (loading || rolesLoading || (requireAuth && user && aalState === 'pending')) {
     return <div className="flex items-center justify-center min-h-screen"><LoadingSpinner /></div>;
   }
 
   if (!requireAuth) return <>{children}</>;
   if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
+  if (aalState === 'mfa' && location.pathname !== '/auth') {
+    return <Navigate to="/auth?mfa=required" state={{ from: location }} replace />;
+  }
   if (requiresRoleSelection && location.pathname !== '/role-selection') {
     return <Navigate to="/role-selection" state={{ from: location }} replace />;
   }
