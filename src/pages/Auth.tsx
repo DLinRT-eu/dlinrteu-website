@@ -265,6 +265,7 @@ export default function Auth() {
             {showMFAVerification ? (
               <MFAVerification 
                 onVerify={handleMFAVerify}
+                onCancel={handleMFACancel}
                 loading={loading}
                 error={mfaError || undefined}
               />
