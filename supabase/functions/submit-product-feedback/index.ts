@@ -142,6 +142,24 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
+    // URL scheme validation - only allow http(s) to prevent javascript:/data: URIs
+    if (supporting_url) {
+      try {
+        const parsed = new URL(supporting_url);
+        if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+          return new Response(JSON.stringify({ error: "supporting_url must use http or https" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          });
+        }
+      } catch {
+        return new Response(JSON.stringify({ error: "supporting_url is not a valid URL" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+    }
+
     // Insert via service role
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL")!,
