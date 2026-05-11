@@ -33,17 +33,11 @@ const Index = () => {
     }
   }, [user, loading, navigate]);
 
-  // Show loading while checking auth state
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  // If user is present, don't render content (will redirect)
-  if (user) {
+  // If an authenticated user is present, don't render content (will redirect).
+  // While auth state is still resolving we render the public landing page so
+  // unauthenticated visitors (and crawlers) get a fast LCP — auth resolution
+  // must not block first paint of the public page.
+  if (!loading && user) {
     return null;
   }
 
