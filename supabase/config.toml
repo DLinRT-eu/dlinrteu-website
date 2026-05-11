@@ -75,3 +75,6 @@ verify_jwt = false  # Validates auth in code, allows admin JWT or service role (
 
 [functions.submit-product-feedback]
 verify_jwt = false  # Public feedback form, rate-limited
+
+[functions.resend-webhook]
+verify_jwt = false  # Public webhook from Resend; verified via Svix signature when RESEND_WEBHOOK_SECRET set
