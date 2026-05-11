@@ -390,13 +390,23 @@ export const MFASettings = () => {
                   your authenticator app each time you sign in.
                 </AlertDescription>
               </Alert>
-              <Button
-                onClick={startUnenrollment}
-                variant="destructive"
-                disabled={unenrolling}
-              >
-                Disable MFA
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  onClick={startRegenerate}
+                  variant="outline"
+                  disabled={unenrolling || regenerating}
+                >
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Regenerate backup codes
+                </Button>
+                <Button
+                  onClick={startUnenrollment}
+                  variant="destructive"
+                  disabled={unenrolling}
+                >
+                  Disable MFA
+                </Button>
+              </div>
             </>
           ) : (
             <>
