@@ -286,6 +286,70 @@ export const MFASettings = () => {
     toast({ title: 'Copied', description: 'Secret key copied to clipboard' });
   };
 
+  const copyAllBackupCodes = async () => {
+    try {
+      await navigator.clipboard.writeText(backupCodes.join('\n'));
+      setCodesCopied(true);
+      toast({ title: 'Copied', description: 'All backup codes copied to clipboard' });
+    } catch {
+      toast({ title: 'Copy failed', description: 'Please copy manually', variant: 'destructive' });
+    }
+  };
+
+  const startRegenerate = () => {
+    setRegenTotp('');
+    setShowRegenDialog(true);
+  };
+
+  const confirmRegenerate = async () => {
+    if (regenTotp.length !== 6) return;
+    setRegenerating(true);
+    try {
+      const challenge = await supabase.auth.mfa.challenge({ factorId });
+      if (challenge.error) throw challenge.error;
+      const verify = await supabase.auth.mfa.verify({
+        factorId,
+        challengeId: challenge.data.id,
+        code: regenTotp,
+      });
+      if (verify.error) throw new Error('Invalid verification code');
+
+      const codes = generateLocalBackupCodes();
+      const { error: storeError } = await supabase.functions.invoke('store-backup-code', {
+        body: { codes, reset: true },
+      });
+      if (storeError) throw storeError;
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase
+          .from('profiles')
+          .update({ mfa_backup_codes_generated_at: new Date().toISOString() })
+          .eq('id', user.id);
+      }
+
+      setBackupCodes(codes);
+      setEnrollVerified(true);
+      setSavedConfirmed(false);
+      setCodesCopied(false);
+      setShowRegenDialog(false);
+      setRegenTotp('');
+      setShowEnrollDialog(true);
+      toast({
+        title: 'New backup codes generated',
+        description: 'Previous codes are now invalid. Save the new ones immediately.',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Regeneration failed',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setRegenerating(false);
+    }
+  };
+
   if (loading) {
     return <div className="text-center py-4">Loading MFA settings...</div>;
   }
