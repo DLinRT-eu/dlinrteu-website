@@ -193,6 +193,9 @@ export const MFASettings = () => {
       setBackupCodes([]);
       setQrCode('');
       setSecret('');
+      setSavedConfirmed(false);
+      setCodesCopied(false);
+      setEnrollVerified(false);
     }
     setShowEnrollDialog(open);
   };
