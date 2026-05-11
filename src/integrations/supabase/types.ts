@@ -522,6 +522,51 @@ export type Database = {
         }
         Relationships: []
       }
+      email_send_log: {
+        Row: {
+          bounce_subtype: string | null
+          bounce_type: string | null
+          created_at: string
+          error: string | null
+          function_name: string | null
+          id: string
+          raw_event: Json | null
+          recipient: string
+          resend_id: string | null
+          status: string
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          bounce_subtype?: string | null
+          bounce_type?: string | null
+          created_at?: string
+          error?: string | null
+          function_name?: string | null
+          id?: string
+          raw_event?: Json | null
+          recipient: string
+          resend_id?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bounce_subtype?: string | null
+          bounce_type?: string | null
+          created_at?: string
+          error?: string | null
+          function_name?: string | null
+          id?: string
+          raw_event?: Json | null
+          recipient?: string
+          resend_id?: string | null
+          status?: string
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       github_file_checks: {
         Row: {
           check_result: Json | null
