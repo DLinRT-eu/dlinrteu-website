@@ -49,12 +49,17 @@ export const MFASettings = () => {
   const [unenrolling, setUnenrolling] = useState(false);
   const [showEnrollDialog, setShowEnrollDialog] = useState(false);
   const [showUnenrollDialog, setShowUnenrollDialog] = useState(false);
+  const [showRegenDialog, setShowRegenDialog] = useState(false);
+  const [regenTotp, setRegenTotp] = useState('');
+  const [regenerating, setRegenerating] = useState(false);
   const [qrCode, setQrCode] = useState('');
   const [secret, setSecret] = useState('');
   const [factorId, setFactorId] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [backupCodes, setBackupCodes] = useState<string[]>([]);
   const [enrollVerified, setEnrollVerified] = useState(false);
+  const [savedConfirmed, setSavedConfirmed] = useState(false);
+  const [codesCopied, setCodesCopied] = useState(false);
   const [unenrollTotp, setUnenrollTotp] = useState('');
   const { toast } = useToast();
 
