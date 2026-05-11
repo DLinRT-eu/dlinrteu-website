@@ -483,33 +483,69 @@ export const MFASettings = () => {
               </>
             ) : (
               <>
-                <Alert>
+                <Alert variant="destructive">
+                  <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
-                    Each backup code can be used once if you lose access to your
-                    authenticator. Store them somewhere safe — they will not be shown
-                    again.
+                    <strong>These codes will be shown only once.</strong> Each code works a
+                    single time if you lose your authenticator. Store them in a password
+                    manager or print them — once you close this dialog they cannot be
+                    retrieved. To get a new set, use "Regenerate backup codes" (this
+                    invalidates the old ones).
                   </AlertDescription>
                 </Alert>
                 <div className="space-y-2">
-                  <Label>Backup Codes</Label>
-                  <div className="grid grid-cols-2 gap-2 p-3 bg-muted rounded-lg font-mono text-sm">
+                  <div className="flex items-center justify-between">
+                    <Label>Your backup codes</Label>
+                    <span className="text-xs text-muted-foreground">
+                      {backupCodes.length} codes
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 p-3 bg-muted rounded-lg font-mono text-sm select-all">
                     {backupCodes.map((code, i) => (
                       <div key={i}>{code}</div>
                     ))}
                   </div>
-                  <Button
-                    onClick={downloadBackupCodes}
-                    variant="outline"
-                    size="sm"
-                    className="w-full"
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download Backup Codes
-                  </Button>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button
+                      onClick={copyAllBackupCodes}
+                      variant="outline"
+                      size="sm"
+                    >
+                      {codesCopied ? (
+                        <><Check className="h-4 w-4 mr-2" />Copied</>
+                      ) : (
+                        <><Copy className="h-4 w-4 mr-2" />Copy all</>
+                      )}
+                    </Button>
+                    <Button
+                      onClick={downloadBackupCodes}
+                      variant="outline"
+                      size="sm"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download .txt
+                    </Button>
+                  </div>
                 </div>
-                <Button onClick={() => handleEnrollDialogChange(false)} className="w-full">
-                  I've saved my codes
+                <div className="flex items-start gap-2 p-3 border rounded-lg">
+                  <Checkbox
+                    id="saved-confirm"
+                    checked={savedConfirmed}
+                    onCheckedChange={(c) => setSavedConfirmed(c === true)}
+                  />
+                  <Label htmlFor="saved-confirm" className="text-sm font-normal leading-tight cursor-pointer">
+                    I have saved these backup codes in a secure location and understand
+                    they will not be shown again.
+                  </Label>
+                </div>
+                <Button
+                  onClick={() => handleEnrollDialogChange(false)}
+                  disabled={!savedConfirmed}
+                  className="w-full"
+                >
+                  Done — close and continue
                 </Button>
+
               </>
             )}
           </div>
