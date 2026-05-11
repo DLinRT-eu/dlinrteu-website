@@ -602,6 +602,59 @@ export const MFASettings = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Regenerate Backup Codes Dialog */}
+      <Dialog open={showRegenDialog} onOpenChange={setShowRegenDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Regenerate backup codes</DialogTitle>
+            <DialogDescription>
+              Confirm with a code from your authenticator app. This will invalidate all
+              existing backup codes and issue a new set.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <Alert>
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription>
+                Any previously saved backup codes will stop working immediately.
+              </AlertDescription>
+            </Alert>
+            <div className="space-y-2">
+              <Label>Authenticator code</Label>
+              <div className="flex justify-center">
+                <InputOTP maxLength={6} value={regenTotp} onChange={setRegenTotp}>
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setShowRegenDialog(false)}
+                variant="outline"
+                className="flex-1"
+                disabled={regenerating}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={confirmRegenerate}
+                disabled={regenerating || regenTotp.length !== 6}
+                className="flex-1"
+              >
+                {regenerating ? 'Generating...' : 'Generate new codes'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
