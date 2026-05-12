@@ -111,6 +111,14 @@ export function generateMedicalDeviceSchema(product: ProductDetails): MedicalDev
     });
   }
 
+  if (product.implementationBurden) {
+    additionalProps.push({
+      "@type": "PropertyValue",
+      name: "Implementation Burden",
+      value: product.implementationBurden,
+    });
+  }
+
   // Anatomy
   const anatomy = product.anatomicalLocation || product.anatomy;
   if (anatomy && anatomy.length > 0) {
