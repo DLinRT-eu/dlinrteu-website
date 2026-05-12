@@ -126,11 +126,12 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         <CardTitle className="flex items-center justify-between flex-wrap gap-2">
           <span>Evidence & Limitations</span>
           <div className="flex items-center gap-2 flex-wrap">
-            {/* Show dual-axis badges if available */}
-            {hasDualAxis && (
-              <EvidenceImpactBadges 
-                evidenceRigor={evidenceRigor as EvidenceRigorCode} 
+            {hasTriAxis && (
+              <EvidenceImpactBadges
+                evidenceRigor={evidenceRigor as EvidenceRigorCode}
                 clinicalImpact={clinicalImpact as ClinicalImpactCode}
+                implementationBurden={implementationBurden as ImplementationBurdenCode}
+                showReadinessSignal={!!(evidenceRigor && clinicalImpact && implementationBurden)}
                 size="md"
               />
             )}
@@ -138,8 +139,8 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Dual-Axis Classification */}
-        {(hasDualAxis || showEditor) && (
+        {/* Tri-Axis Classification */}
+        {(hasTriAxis || showEditor) && (
           <div className="p-4 bg-muted/50 rounded-lg border space-y-4">
             <h4 className="font-medium text-sm">Evidence Classification</h4>
             
