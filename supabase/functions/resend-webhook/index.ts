@@ -36,7 +36,7 @@ interface ResendEvent {
 
 // Minimal Svix signature verification (HMAC-SHA256, base64).
 async function verifySvix(req: Request, body: string): Promise<boolean> {
-  if (!WEBHOOK_SECRET) return true; // verification disabled
+  if (!WEBHOOK_SECRET) return false; // fail closed when secret not configured
   const id = req.headers.get("svix-id");
   const timestamp = req.headers.get("svix-timestamp");
   const signatureHeader = req.headers.get("svix-signature");
@@ -88,6 +88,14 @@ serve(async (req) => {
   }
 
   try {
+    if (!WEBHOOK_SECRET) {
+      console.error("resend-webhook: RESEND_WEBHOOK_SECRET not configured — rejecting request");
+      return new Response(JSON.stringify({ error: "Service not configured" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const body = await req.text();
     const ok = await verifySvix(req, body);
     if (!ok) {
