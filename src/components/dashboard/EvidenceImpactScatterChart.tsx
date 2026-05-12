@@ -47,17 +47,8 @@ interface CellProduct {
   impactNotes: string;
   burden?: string;
   burdenLabel?: string;
+  burdenNotes?: string;
 }
-
-// Z ring color (HSL hex). Lower Z = greener.
-const Z_RING_COLOR: Record<string, string> = {
-  Z0: '#16a34a',
-  Z1: '#0d9488',
-  Z2: '#ca8a04',
-  Z3: '#ea580c',
-  Z4: '#dc2626',
-  Z5: '#9f1239',
-};
 
 type CellMap = Record<string, CellProduct[]>;
 
