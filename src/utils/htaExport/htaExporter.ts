@@ -260,6 +260,7 @@ export async function exportHTADossier(products: ProductDetails[]): Promise<void
     buildETH(products),
     buildORG(products),
     buildLEG(products),
+    buildIMP(products),
     buildReadme(),
   ];
   const blob = await createExcelWorkbook(sheets);
