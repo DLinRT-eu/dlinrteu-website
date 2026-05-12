@@ -1,5 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
+import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 
 /**
  * Escapes a value for CSV format according to RFC 4180:
@@ -51,6 +52,12 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     "Release Date", "Version", "Website", "Company URL", "Product URL", "GitHub URL",
     "Clinical Evidence", "Evidence", "Limitations",
     "Evidence Rigor", "Evidence Rigor Notes", "Clinical Impact", "Clinical Impact Notes",
+    "Implementation Burden", "Implementation Burden Notes", "Readiness Signal",
+    "Burden: Commissioning Required", "Burden: Local Validation Required",
+    "Burden: Workflow Redesign", "Burden: Integration Complexity",
+    "Burden: Human Factors Testing", "Burden: Economic Case Required",
+    "Burden: Subgroup Validation Gaps", "Burden: Post-Market Monitoring Plan",
+    "Burden: Unresolved Safety Signal",
     "Evidence Vendor Independent", "Evidence Multi-Center", "Evidence Multi-National",
     "Evidence Prospective", "Evidence External Validation",
     "Guidelines",
@@ -166,6 +173,20 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.evidenceRigorNotes),
     escapeValueForCsv(product.clinicalImpact),
     escapeValueForCsv(product.clinicalImpactNotes),
+    escapeValueForCsv(product.implementationBurden),
+    escapeValueForCsv(product.implementationBurdenNotes),
+    escapeValueForCsv(
+      computeReadinessSignal(product.evidenceRigor, product.clinicalImpact, product.implementationBurden).label
+    ),
+    escapeValueForCsv(product.burdenFactors?.commissioningRequired),
+    escapeValueForCsv(product.burdenFactors?.localValidationRequired),
+    escapeValueForCsv(product.burdenFactors?.workflowRedesign),
+    escapeValueForCsv(product.burdenFactors?.integrationComplexity),
+    escapeValueForCsv(product.burdenFactors?.humanFactorsTesting),
+    escapeValueForCsv(product.burdenFactors?.economicCaseRequired),
+    escapeValueForCsv(product.burdenFactors?.subgroupValidationGaps),
+    escapeValueForCsv(product.burdenFactors?.postMarketMonitoringPlan),
+    escapeValueForCsv(product.burdenFactors?.unresolvedSafetySignal),
     escapeValueForCsv(product.evidenceVendorIndependent),
     escapeValueForCsv(product.evidenceMultiCenter),
     escapeValueForCsv(product.evidenceMultiNational),

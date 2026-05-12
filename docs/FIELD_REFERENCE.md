@@ -380,3 +380,23 @@ Product pages include structured `MedicalDevice` markup with:
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
 **Last Updated**: March 8, 2026
+
+## Implementation & Assurance Burden (Z-axis)
+
+Third axis of the E/I/Z evidence-assurance model (Lula & Kamath, 2026). Lower Z = lower residual effort = higher adoption readiness.
+
+| Field | Type | Description |
+|---|---|---|
+| `implementationBurden` | `"Z0"\|"Z1"\|"Z2"\|"Z3"\|"Z4"\|"Z5"` | Residual implementation/assurance burden. See `src/data/evidence-impact-levels.ts` for the full Z0–Z5 rubric (Table 2C of the proposal). |
+| `implementationBurdenNotes` | string | Free-text notes explaining the Z assignment. |
+| `burdenFactors.commissioningRequired` | boolean | Local commissioning still required before clinical use. |
+| `burdenFactors.localValidationRequired` | boolean | Local validation cohort needed. |
+| `burdenFactors.workflowRedesign` | boolean | Workflow redesign required for safe deployment. |
+| `burdenFactors.integrationComplexity` | `"low"\|"medium"\|"high"` | TPS/OIS/PACS integration complexity. |
+| `burdenFactors.humanFactorsTesting` | boolean | Human-factors testing outstanding. |
+| `burdenFactors.economicCaseRequired` | boolean | Local economic/resource case required. |
+| `burdenFactors.subgroupValidationGaps` | boolean | Subgroup or atypical-anatomy gaps remain. |
+| `burdenFactors.postMarketMonitoringPlan` | boolean | Post-market monitoring plan in place. |
+| `burdenFactors.unresolvedSafetySignal` | boolean | Unresolved FSCA/recall/advisory — forces Z5 / blocked signal. |
+
+**Composite Readiness Signal** (computed, not stored): derived from E/I/Z via `computeReadinessSignal()`. Returns one of `adoption-grade`, `deploy-with-monitoring`, `conditional`, `pilot-only`, `not-adoption-ready`, `blocked`, `not-assessed`.

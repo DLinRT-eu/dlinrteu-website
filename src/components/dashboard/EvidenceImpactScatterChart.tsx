@@ -44,7 +44,19 @@ interface CellProduct {
   impactLabel: string;
   rigorNotes: string;
   impactNotes: string;
+  burden?: string;
+  burdenLabel?: string;
 }
+
+// Z ring color (HSL hex). Lower Z = greener.
+const Z_RING_COLOR: Record<string, string> = {
+  Z0: '#16a34a',
+  Z1: '#0d9488',
+  Z2: '#ca8a04',
+  Z3: '#ea580c',
+  Z4: '#dc2626',
+  Z5: '#9f1239',
+};
 
 type CellMap = Record<string, CellProduct[]>;
 
@@ -71,6 +83,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         impactLabel: `${p.clinicalImpact} – ${IMPACT_LEVELS.find(i => i.key === p.clinicalImpact)?.name ?? ''}`,
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
+        burden: p.implementationBurden,
+        burdenLabel: p.implementationBurden ? `${p.implementationBurden} – Implementation burden` : undefined,
       });
       if (!catSet.has(p.category)) catSet.set(p.category, color);
       count++;
@@ -155,8 +169,13 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                             <Tooltip key={i}>
                               <TooltipTrigger asChild>
                                 <span
-                                  className={`${dotSize} rounded-full inline-block cursor-pointer ring-1 ring-black/10 hover:scale-125 transition-transform`}
-                                  style={{ backgroundColor: prod.color }}
+                                  className={`${dotSize} rounded-full inline-block cursor-pointer hover:scale-125 transition-transform`}
+                                  style={{
+                                    backgroundColor: prod.color,
+                                    boxShadow: prod.burden
+                                      ? `0 0 0 1.5px ${Z_RING_COLOR[prod.burden] ?? 'rgba(0,0,0,0.1)'}`
+                                      : '0 0 0 1px rgba(0,0,0,0.1)',
+                                  }}
                                 />
                               </TooltipTrigger>
                               <TooltipContent side="top" className="max-w-xs text-sm">
@@ -166,6 +185,9 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                   <p><span className="font-medium">Task:</span> <span style={{ color: prod.color }}>{prod.category}</span></p>
                                   <p><span className="font-medium">Rigor:</span> {prod.rigorLabel}</p>
                                   <p><span className="font-medium">Impact:</span> {prod.impactLabel}</p>
+                                  {prod.burdenLabel && (
+                                    <p><span className="font-medium">Burden:</span> {prod.burdenLabel}</p>
+                                  )}
                                 </div>
                                 {(prod.rigorNotes || prod.impactNotes) && (
                                   <div className="mt-1.5 pt-1.5 border-t border-border text-[11px] text-muted-foreground">
@@ -195,8 +217,17 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
             </span>
           ))}
         </div>
+        <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 justify-center text-[11px] text-muted-foreground">
+          <span className="font-medium">Ring = Z burden:</span>
+          {(['Z0','Z1','Z2','Z3','Z4','Z5'] as const).map(z => (
+            <span key={z} className="inline-flex items-center gap-1">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-muted" style={{ boxShadow: `0 0 0 1.5px ${Z_RING_COLOR[z]}` }} />
+              {z}
+            </span>
+          ))}
+        </div>
         <p className="mt-2 text-sm text-muted-foreground text-center">
-          Each dot is a product, colored by task. Hover for details.
+          Each dot is a product, fill = task, ring = implementation/assurance burden (Z0 green → Z5 red). Hover for details.
         </p>
       </CardContent>
     </Card>

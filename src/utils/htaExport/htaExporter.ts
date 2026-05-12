@@ -10,6 +10,14 @@
 import { ProductDetails } from "@/types/productDetails";
 import { createExcelWorkbook, downloadBlob, type ExcelSheet } from "@/utils/excelExport";
 import { EVIDENCE_RIGOR_EXPLAIN, CLINICAL_IMPACT_EXPLAIN } from "@/data/hta-mapping";
+import {
+  IMPLEMENTATION_BURDEN_LEVELS,
+  computeReadinessSignal,
+} from "@/data/evidence-impact-levels";
+
+const BURDEN_EXPLAIN: Record<string, string> = Object.fromEntries(
+  IMPLEMENTATION_BURDEN_LEVELS.map((l) => [l.level, `${l.name} — ${l.readinessConsequence}`])
+);
 
 const stringify = (v: unknown): string => {
   if (v === null || v === undefined) return "";
@@ -190,6 +198,37 @@ function buildLEG(products: ProductDetails[]): ExcelSheet {
   };
 }
 
+function buildIMP(products: ProductDetails[]): ExcelSheet {
+  return {
+    name: "IMP — Implementation & assurance",
+    data: products.map((p) => {
+      const burden = (p as any).implementationBurden as string | undefined;
+      const factors: any = (p as any).burdenFactors ?? {};
+      const signal = computeReadinessSignal(
+        (p as any).evidenceRigor,
+        (p as any).clinicalImpact,
+        burden as any,
+      );
+      return {
+        "Product": p.name ?? "",
+        "Implementation burden (Z0–Z5)": burden ?? "",
+        "Burden — meaning": burden ? BURDEN_EXPLAIN[burden] ?? "" : "",
+        "Burden notes": stringify((p as any).implementationBurdenNotes),
+        "Readiness signal (composite)": signal.label,
+        "Commissioning required": factors.commissioningRequired ? "Yes" : "No",
+        "Local validation required": factors.localValidationRequired ? "Yes" : "No",
+        "Workflow redesign": factors.workflowRedesign ? "Yes" : "No",
+        "Integration complexity": stringify(factors.integrationComplexity),
+        "Human-factors testing": factors.humanFactorsTesting ? "Yes" : "No",
+        "Economic case required": factors.economicCaseRequired ? "Yes" : "No",
+        "Subgroup validation gaps": factors.subgroupValidationGaps ? "Yes" : "No",
+        "Post-market monitoring plan": factors.postMarketMonitoringPlan ? "Yes" : "No",
+        "Unresolved safety signal": factors.unresolvedSafetySignal ? "Yes" : "No",
+      };
+    }),
+  };
+}
+
 function buildReadme(): ExcelSheet {
   return {
     name: "Readme",
@@ -198,6 +237,7 @@ function buildReadme(): ExcelSheet {
       { Field: "Regulation", Value: "EU Regulation 2021/2282 on Health Technology Assessment (HTAR), in application since 12 January 2025 for oncology medicines and ATMPs; medical devices (incl. AI/SaMD) follow staged scope." },
       { Field: "Methodology", Value: "EUnetHTA 21 deliverables — see https://www.eunethta.eu/eunethta-21" },
       { Field: "Effectiveness scoring", Value: "Evidence rigor (E0–E3) × Clinical impact (I0–I5), see https://dlinrt.eu/resources-compliance#evidence-levels" },
+      { Field: "Implementation/assurance burden", Value: "Z0–Z5 (lower is better) per Lula & Kamath (2026); composite Readiness Signal derived from E/I/Z. See IMP sheet." },
       { Field: "Out of scope (ECO)", Value: "DLinRT does not collect pricing, budget impact or cost-effectiveness data. Combine this export with vendor quotations and local cost data." },
       { Field: "Disclaimer", Value: "This export is informational only. It does NOT constitute a JCA submission and is not a substitute for an official HTA dossier or regulatory filing." },
       { Field: "Source", Value: "https://dlinrt.eu" },
@@ -220,6 +260,7 @@ export async function exportHTADossier(products: ProductDetails[]): Promise<void
     buildETH(products),
     buildORG(products),
     buildLEG(products),
+    buildIMP(products),
     buildReadme(),
   ];
   const blob = await createExcelWorkbook(sheets);
