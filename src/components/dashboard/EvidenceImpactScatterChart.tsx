@@ -217,8 +217,17 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
             </span>
           ))}
         </div>
+        <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 justify-center text-[11px] text-muted-foreground">
+          <span className="font-medium">Ring = Z burden:</span>
+          {(['Z0','Z1','Z2','Z3','Z4','Z5'] as const).map(z => (
+            <span key={z} className="inline-flex items-center gap-1">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-muted" style={{ boxShadow: `0 0 0 1.5px ${Z_RING_COLOR[z]}` }} />
+              {z}
+            </span>
+          ))}
+        </div>
         <p className="mt-2 text-sm text-muted-foreground text-center">
-          Each dot is a product, colored by task. Hover for details.
+          Each dot is a product, fill = task, ring = implementation/assurance burden (Z0 green → Z5 red). Hover for details.
         </p>
       </CardContent>
     </Card>
