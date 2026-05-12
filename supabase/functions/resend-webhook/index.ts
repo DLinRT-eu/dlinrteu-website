@@ -88,6 +88,14 @@ serve(async (req) => {
   }
 
   try {
+    if (!WEBHOOK_SECRET) {
+      console.error("resend-webhook: RESEND_WEBHOOK_SECRET not configured — rejecting request");
+      return new Response(JSON.stringify({ error: "Service not configured" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const body = await req.text();
     const ok = await verifySvix(req, body);
     if (!ok) {
