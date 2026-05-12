@@ -68,7 +68,8 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     status: "Active",
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Enhanced dataset", "Multiple anatomical regions", "Advanced evaluation metrics"],
-    participationInfo: "Currently ongoing"
+    participationInfo: "Currently ongoing",
+    logoUrl: "/logos/synthrad.svg"
   },
   {
     id: "trackrad-2025",
