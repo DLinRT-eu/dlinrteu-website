@@ -9,6 +9,8 @@ import {
   ArrowLeft,
   FlaskConical,
   Target,
+  Wrench,
+  ShieldCheck,
   BookOpen,
   AlertTriangle,
   CheckCircle,
@@ -17,9 +19,11 @@ import {
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
+  IMPLEMENTATION_BURDEN_LEVELS,
   EVIDENCE_IMPACT_REFERENCE,
   getEvidenceRigorColor,
   getClinicalImpactColor,
+  getImplementationBurdenColor,
 } from "@/data/evidence-impact-levels";
 import EvidenceImpactBadges from "@/components/product/EvidenceImpactBadges";
 import EvidenceImpactMatrix from "@/components/resources/EvidenceImpactMatrix";
@@ -170,6 +174,64 @@ const EvidenceImpactGuide = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Z-Axis: Implementation & Assurance Burden */}
+        <Card className="mb-8 border-primary/30">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Wrench className="h-5 w-5 text-primary" />
+              Implementation &amp; Assurance Burden (Z0-Z5)
+              <Badge variant="outline" className="ml-2 text-[10px]">New — third axis</Badge>
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Following Lula &amp; Kamath (2026), the dual E/I matrix is extended with a third axis: residual
+              implementation and assurance burden. <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>
+              {" "}High Z constrains the public readiness signal even when E and I appear favourable.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-3">
+              {IMPLEMENTATION_BURDEN_LEVELS.map((level) => (
+                <div key={level.level} className="p-3 rounded-lg border bg-muted/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Badge className={getImplementationBurdenColor(level.level)}>
+                      {level.level}
+                    </Badge>
+                    <span className="font-medium text-sm">{level.name}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-1">{level.description}</p>
+                  <p className="text-xs">
+                    <span className="font-medium">Readiness:</span>{" "}
+                    <span className="text-muted-foreground">{level.readinessConsequence}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
+              <div className="flex items-center gap-2 mb-2">
+                <ShieldCheck className="h-4 w-4 text-primary" />
+                <span className="font-medium text-sm">Composite Readiness Signal</span>
+              </div>
+              <p className="text-xs text-muted-foreground mb-2">
+                The user-facing badge is computed from all three axes:
+              </p>
+              <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
+                <li><strong>Adoption-grade</strong> — Z0 with E≥E2 and I≥I2.</li>
+                <li><strong>Deploy with monitoring</strong> — Z1, or Z2 with E≥E2 and I≥I2.</li>
+                <li><strong>Conditional</strong> — Z2 with weaker E or I.</li>
+                <li><strong>Pilot only</strong> — Z3 (structured pilot or sandbox).</li>
+                <li><strong>Not adoption-ready</strong> — Z4.</li>
+                <li><strong>Blocked</strong> — Z5 (horizon scanning only).</li>
+              </ul>
+              <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
+                Adapted from Bellini et al. (2023) third translational-effort axis; readiness consequences from
+                Table 2C of the DLinRT.eu Evidence Matrix proposal (Lula &amp; Kamath, 2026).
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
 
         {/* Example Classifications */}
         <Card className="mb-8">

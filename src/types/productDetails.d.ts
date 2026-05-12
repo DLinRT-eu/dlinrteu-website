@@ -89,6 +89,22 @@ export interface ProductDetails extends Product {
   evidenceRigorNotes?: string;
   clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
   clinicalImpactNotes?: string;
+
+  // Implementation & Assurance Burden axis (Z) — Lula & Kamath 2026 three-axis E/I/Z model.
+  // Lower Z = lower residual effort = higher adoption readiness.
+  implementationBurden?: "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
+  implementationBurdenNotes?: string;
+  burdenFactors?: {
+    commissioningRequired?: boolean;
+    localValidationRequired?: boolean;
+    workflowRedesign?: boolean;
+    integrationComplexity?: "low" | "medium" | "high";
+    humanFactorsTesting?: boolean;
+    economicCaseRequired?: boolean;
+    subgroupValidationGaps?: boolean;
+    postMarketMonitoringPlan?: boolean;
+    unresolvedSafetySignal?: boolean;
+  };
   
   // Study quality sub-attributes (van Leeuwen 2025, Pham 2023)
   evidenceVendorIndependent?: boolean;  // At least one study independent of vendor

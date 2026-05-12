@@ -10,8 +10,10 @@ import { EditableField, useProductEdit, EvidenceEditor } from "@/components/prod
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
+  IMPLEMENTATION_BURDEN_LEVELS,
   EvidenceRigorCode,
   ClinicalImpactCode,
+  ImplementationBurdenCode,
 } from "@/data/evidence-impact-levels";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -30,6 +32,11 @@ const CLINICAL_IMPACT_OPTIONS = CLINICAL_IMPACT_LEVELS.map(level => ({
   label: `${level.level} - ${level.name}`
 }));
 
+const IMPLEMENTATION_BURDEN_OPTIONS = IMPLEMENTATION_BURDEN_LEVELS.map(level => ({
+  value: level.level,
+  label: `${level.level} - ${level.name}`
+}));
+
 const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps) => {
   const { isEditMode, editedProduct, updateField, canEdit } = useProductEdit();
   const [evidenceExpanded, setEvidenceExpanded] = useState(false);
@@ -38,21 +45,25 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
   const showEditor = isEditMode && canEdit;
   
-  const { 
-    evidence, 
+  const {
+    evidence,
     limitations,
     evidenceRigor,
     evidenceRigorNotes,
     clinicalImpact,
-    clinicalImpactNotes 
+    clinicalImpactNotes,
+    implementationBurden,
+    implementationBurdenNotes,
   } = displayProduct;
-  
+
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
   const hasLimitations = limitations && limitations.length > 0;
   const hasDualAxis = !!(evidenceRigor || clinicalImpact);
-  
-  if (!showEditor && !hasEvidence && !hasLimitations && !hasDualAxis) {
+  const hasBurden = !!implementationBurden;
+  const hasTriAxis = hasDualAxis || hasBurden;
+
+  if (!showEditor && !hasEvidence && !hasLimitations && !hasTriAxis) {
     return null;
   }
 
@@ -115,11 +126,12 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         <CardTitle className="flex items-center justify-between flex-wrap gap-2">
           <span>Evidence & Limitations</span>
           <div className="flex items-center gap-2 flex-wrap">
-            {/* Show dual-axis badges if available */}
-            {hasDualAxis && (
-              <EvidenceImpactBadges 
-                evidenceRigor={evidenceRigor as EvidenceRigorCode} 
+            {hasTriAxis && (
+              <EvidenceImpactBadges
+                evidenceRigor={evidenceRigor as EvidenceRigorCode}
                 clinicalImpact={clinicalImpact as ClinicalImpactCode}
+                implementationBurden={implementationBurden as ImplementationBurdenCode}
+                showReadinessSignal={!!(evidenceRigor && clinicalImpact && implementationBurden)}
                 size="md"
               />
             )}
@@ -127,8 +139,8 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Dual-Axis Classification */}
-        {(hasDualAxis || showEditor) && (
+        {/* Tri-Axis Classification */}
+        {(hasTriAxis || showEditor) && (
           <div className="p-4 bg-muted/50 rounded-lg border space-y-4">
             <h4 className="font-medium text-sm">Evidence Classification</h4>
             
@@ -212,6 +224,48 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
               >
                 {clinicalImpactNotes && (
                   <p className="text-sm text-muted-foreground">{clinicalImpactNotes}</p>
+                )}
+              </EditableField>
+            </div>
+
+            {/* Implementation Burden (Z-axis) */}
+            <div className="space-y-2">
+              {showEditor ? (
+                <>
+                  <Label className="text-sm font-medium">Implementation Burden (Z0-Z5)</Label>
+                  <Select
+                    value={implementationBurden || ''}
+                    onValueChange={(v) => updateField('implementationBurden', v || undefined)}
+                  >
+                    <SelectTrigger className="bg-background w-full">
+                      <SelectValue placeholder="Select implementation burden" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      {IMPLEMENTATION_BURDEN_OPTIONS.map(opt => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </>
+              ) : implementationBurden && (
+                <div className="text-sm">
+                  <span className="font-medium">Implementation Burden:</span>{" "}
+                  <span className="text-muted-foreground">
+                    {IMPLEMENTATION_BURDEN_OPTIONS.find(o => o.value === implementationBurden)?.label}
+                  </span>
+                </div>
+              )}
+
+              <EditableField
+                fieldPath="implementationBurdenNotes"
+                value={implementationBurdenNotes}
+                type="textarea"
+                placeholder="Notes about residual implementation/assurance burden"
+              >
+                {implementationBurdenNotes && (
+                  <p className="text-sm text-muted-foreground">{implementationBurdenNotes}</p>
                 )}
               </EditableField>
             </div>

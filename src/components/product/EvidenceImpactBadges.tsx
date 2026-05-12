@@ -12,15 +12,22 @@ import {
   getClinicalImpactLevel,
   getEvidenceRigorColor,
   getClinicalImpactColor,
+  getImplementationBurdenLevel,
+  getImplementationBurdenColor,
+  getReadinessSignalColor,
+  computeReadinessSignal,
   EvidenceRigorCode,
   ClinicalImpactCode,
+  ImplementationBurdenCode,
 } from "@/data/evidence-impact-levels";
-import { FlaskConical, Target, ExternalLink } from "lucide-react";
+import { FlaskConical, Target, Wrench, ShieldCheck, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface EvidenceImpactBadgesProps {
   evidenceRigor?: EvidenceRigorCode;
   clinicalImpact?: ClinicalImpactCode;
+  implementationBurden?: ImplementationBurdenCode;
+  showReadinessSignal?: boolean;
   showTooltip?: boolean;
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -30,6 +37,8 @@ interface EvidenceImpactBadgesProps {
 const EvidenceImpactBadges = ({
   evidenceRigor,
   clinicalImpact,
+  implementationBurden,
+  showReadinessSignal = false,
   showTooltip = true,
   size = "md",
   className = "",
@@ -37,8 +46,9 @@ const EvidenceImpactBadges = ({
 }: EvidenceImpactBadgesProps) => {
   const rigorLevel = evidenceRigor ? getEvidenceRigorLevel(evidenceRigor) : null;
   const impactLevel = clinicalImpact ? getClinicalImpactLevel(clinicalImpact) : null;
+  const burdenLevel = implementationBurden ? getImplementationBurdenLevel(implementationBurden) : null;
 
-  if (!rigorLevel && !impactLevel) {
+  if (!rigorLevel && !impactLevel && !burdenLevel) {
     return null;
   }
 
@@ -153,10 +163,88 @@ const EvidenceImpactBadges = ({
     );
   };
 
+  const renderBurdenBadge = () => {
+    if (!burdenLevel) return null;
+    const badge = (
+      <Badge
+        variant="outline"
+        className={`${getImplementationBurdenColor(implementationBurden!)} ${sizeClasses[size]} font-medium border ${className}`}
+      >
+        <Wrench className={`${iconSize} ${iconMargin}`} />
+        {implementationBurden} {burdenLevel.name}
+      </Badge>
+    );
+    if (!showTooltip) return badge;
+    return (
+      <TooltipProvider key="burden">
+        <Tooltip>
+          <TooltipTrigger asChild>{badge}</TooltipTrigger>
+          <TooltipContent side="top" className="max-w-sm p-4">
+            <div className="space-y-2">
+              <div className="font-semibold text-sm flex items-center gap-2">
+                <Wrench className="h-4 w-4" />
+                {implementationBurden}: {burdenLevel.name}
+              </div>
+              <p className="text-xs text-muted-foreground">{burdenLevel.description}</p>
+              <div className="pt-2 border-t">
+                <div className="text-xs font-medium mb-1">Readiness consequence:</div>
+                <p className="text-xs text-muted-foreground">{burdenLevel.readinessConsequence}</p>
+              </div>
+              <Link
+                to="/evidence-impact-guide"
+                className="flex items-center gap-1 text-xs text-blue-600 hover:underline pt-1"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink className="h-3 w-3" />
+                View methodology
+              </Link>
+            </div>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  };
+
+  const renderReadinessSignal = () => {
+    if (!showReadinessSignal) return null;
+    const signal = computeReadinessSignal(evidenceRigor, clinicalImpact, implementationBurden);
+    const badge = (
+      <Badge
+        variant="outline"
+        className={`${getReadinessSignalColor(signal.color)} ${sizeClasses[size]} font-semibold border ${className}`}
+      >
+        <ShieldCheck className={`${iconSize} ${iconMargin}`} />
+        {signal.label}
+      </Badge>
+    );
+    if (!showTooltip) return badge;
+    return (
+      <TooltipProvider key="readiness">
+        <Tooltip>
+          <TooltipTrigger asChild>{badge}</TooltipTrigger>
+          <TooltipContent side="top" className="max-w-sm p-4">
+            <div className="space-y-2">
+              <div className="font-semibold text-sm flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4" />
+                Readiness signal: {signal.label}
+              </div>
+              <p className="text-xs text-muted-foreground">{signal.description}</p>
+              <p className="text-[11px] text-muted-foreground pt-1 border-t">
+                Composite of Evidence Rigor (E), Clinical Impact (I) and Implementation Burden (Z).
+              </p>
+            </div>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  };
+
   return (
     <div className={containerClass}>
       {renderRigorBadge()}
       {renderImpactBadge()}
+      {renderBurdenBadge()}
+      {renderReadinessSignal()}
     </div>
   );
 };
