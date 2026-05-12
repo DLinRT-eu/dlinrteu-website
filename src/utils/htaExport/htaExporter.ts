@@ -198,6 +198,37 @@ function buildLEG(products: ProductDetails[]): ExcelSheet {
   };
 }
 
+function buildIMP(products: ProductDetails[]): ExcelSheet {
+  return {
+    name: "IMP — Implementation & assurance",
+    data: products.map((p) => {
+      const burden = (p as any).implementationBurden as string | undefined;
+      const factors: any = (p as any).burdenFactors ?? {};
+      const signal = computeReadinessSignal(
+        (p as any).evidenceRigor,
+        (p as any).clinicalImpact,
+        burden as any,
+      );
+      return {
+        "Product": p.name ?? "",
+        "Implementation burden (Z0–Z5)": burden ?? "",
+        "Burden — meaning": burden ? BURDEN_EXPLAIN[burden] ?? "" : "",
+        "Burden notes": stringify((p as any).implementationBurdenNotes),
+        "Readiness signal (composite)": signal.label,
+        "Commissioning required": factors.commissioningRequired ? "Yes" : "No",
+        "Local validation required": factors.localValidationRequired ? "Yes" : "No",
+        "Workflow redesign": factors.workflowRedesign ? "Yes" : "No",
+        "Integration complexity": stringify(factors.integrationComplexity),
+        "Human-factors testing": factors.humanFactorsTesting ? "Yes" : "No",
+        "Economic case required": factors.economicCaseRequired ? "Yes" : "No",
+        "Subgroup validation gaps": factors.subgroupValidationGaps ? "Yes" : "No",
+        "Post-market monitoring plan": factors.postMarketMonitoringPlan ? "Yes" : "No",
+        "Unresolved safety signal": factors.unresolvedSafetySignal ? "Yes" : "No",
+      };
+    }),
+  };
+}
+
 function buildReadme(): ExcelSheet {
   return {
     name: "Readme",
