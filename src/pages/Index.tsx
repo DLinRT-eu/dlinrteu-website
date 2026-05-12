@@ -119,8 +119,8 @@ const Index = () => {
       
       {/* Quick Access Section */}
       <QuickAccessSection 
-        productCount={products.length}
-        companyCount={companies.length}
+        productCount={productCount}
+        companyCount={companyCount}
         aiProductCount={aiCount}
         nonAIProductCount={nonAICount}
       />
