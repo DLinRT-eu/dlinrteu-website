@@ -10,6 +10,14 @@
 import { ProductDetails } from "@/types/productDetails";
 import { createExcelWorkbook, downloadBlob, type ExcelSheet } from "@/utils/excelExport";
 import { EVIDENCE_RIGOR_EXPLAIN, CLINICAL_IMPACT_EXPLAIN } from "@/data/hta-mapping";
+import {
+  IMPLEMENTATION_BURDEN_LEVELS,
+  computeReadinessSignal,
+} from "@/data/evidence-impact-levels";
+
+const BURDEN_EXPLAIN: Record<string, string> = Object.fromEntries(
+  IMPLEMENTATION_BURDEN_LEVELS.map((l) => [l.level, `${l.name} — ${l.readinessConsequence}`])
+);
 
 const stringify = (v: unknown): string => {
   if (v === null || v === undefined) return "";
