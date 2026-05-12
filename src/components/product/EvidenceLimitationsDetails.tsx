@@ -227,6 +227,48 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 )}
               </EditableField>
             </div>
+
+            {/* Implementation Burden (Z-axis) */}
+            <div className="space-y-2">
+              {showEditor ? (
+                <>
+                  <Label className="text-sm font-medium">Implementation Burden (Z0-Z5)</Label>
+                  <Select
+                    value={implementationBurden || ''}
+                    onValueChange={(v) => updateField('implementationBurden', v || undefined)}
+                  >
+                    <SelectTrigger className="bg-background w-full">
+                      <SelectValue placeholder="Select implementation burden" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background z-50">
+                      {IMPLEMENTATION_BURDEN_OPTIONS.map(opt => (
+                        <SelectItem key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </>
+              ) : implementationBurden && (
+                <div className="text-sm">
+                  <span className="font-medium">Implementation Burden:</span>{" "}
+                  <span className="text-muted-foreground">
+                    {IMPLEMENTATION_BURDEN_OPTIONS.find(o => o.value === implementationBurden)?.label}
+                  </span>
+                </div>
+              )}
+
+              <EditableField
+                fieldPath="implementationBurdenNotes"
+                value={implementationBurdenNotes}
+                type="textarea"
+                placeholder="Notes about residual implementation/assurance burden"
+              >
+                {implementationBurdenNotes && (
+                  <p className="text-sm text-muted-foreground">{implementationBurdenNotes}</p>
+                )}
+              </EditableField>
+            </div>
           </div>
         )}
 
