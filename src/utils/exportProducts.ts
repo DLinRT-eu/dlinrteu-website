@@ -1,5 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
+import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 
 /**
  * Escapes a value for CSV format according to RFC 4180:
