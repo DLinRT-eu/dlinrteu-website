@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
+import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
@@ -46,17 +47,8 @@ interface CellProduct {
   impactNotes: string;
   burden?: string;
   burdenLabel?: string;
+  burdenNotes?: string;
 }
-
-// Z ring color (HSL hex). Lower Z = greener.
-const Z_RING_COLOR: Record<string, string> = {
-  Z0: '#16a34a',
-  Z1: '#0d9488',
-  Z2: '#ca8a04',
-  Z3: '#ea580c',
-  Z4: '#dc2626',
-  Z5: '#9f1239',
-};
 
 type CellMap = Record<string, CellProduct[]>;
 
@@ -84,7 +76,10 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
         burden: p.implementationBurden,
-        burdenLabel: p.implementationBurden ? `${p.implementationBurden} – Implementation burden` : undefined,
+        burdenLabel: p.implementationBurden
+          ? `${p.implementationBurden} – ${IMPLEMENTATION_BURDEN_LEVELS.find(b => b.level === p.implementationBurden)?.name ?? 'Implementation burden'}`
+          : undefined,
+        burdenNotes: p.implementationBurdenNotes ?? '',
       });
       if (!catSet.has(p.category)) catSet.set(p.category, color);
       count++;
@@ -172,9 +167,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                   className={`${dotSize} rounded-full inline-block cursor-pointer hover:scale-125 transition-transform`}
                                   style={{
                                     backgroundColor: prod.color,
-                                    boxShadow: prod.burden
-                                      ? `0 0 0 1.5px ${Z_RING_COLOR[prod.burden] ?? 'rgba(0,0,0,0.1)'}`
-                                      : '0 0 0 1px rgba(0,0,0,0.1)',
+                                    boxShadow: '0 0 0 1px rgba(0,0,0,0.1)',
                                   }}
                                 />
                               </TooltipTrigger>
@@ -189,10 +182,11 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                     <p><span className="font-medium">Burden:</span> {prod.burdenLabel}</p>
                                   )}
                                 </div>
-                                {(prod.rigorNotes || prod.impactNotes) && (
+                                {(prod.rigorNotes || prod.impactNotes || prod.burdenNotes) && (
                                   <div className="mt-1.5 pt-1.5 border-t border-border text-[11px] text-muted-foreground">
                                     {prod.rigorNotes && <p className="line-clamp-2">{prod.rigorNotes}</p>}
                                     {prod.impactNotes && <p className="line-clamp-2 mt-0.5">{prod.impactNotes}</p>}
+                                    {prod.burdenNotes && <p className="line-clamp-2 mt-0.5">{prod.burdenNotes}</p>}
                                   </div>
                                 )}
                               </TooltipContent>
@@ -217,17 +211,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
             </span>
           ))}
         </div>
-        <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 justify-center text-[11px] text-muted-foreground">
-          <span className="font-medium">Ring = Z burden:</span>
-          {(['Z0','Z1','Z2','Z3','Z4','Z5'] as const).map(z => (
-            <span key={z} className="inline-flex items-center gap-1">
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-muted" style={{ boxShadow: `0 0 0 1.5px ${Z_RING_COLOR[z]}` }} />
-              {z}
-            </span>
-          ))}
-        </div>
-        <p className="mt-2 text-sm text-muted-foreground text-center">
-          Each dot is a product, fill = task, ring = implementation/assurance burden (Z0 green → Z5 red). Hover for details.
+        <p className="mt-3 text-sm text-muted-foreground text-center">
+          Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
         </p>
       </CardContent>
     </Card>

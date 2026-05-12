@@ -76,6 +76,8 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Kim et al. Eur Radiol 2020. Validation in pediatric, coronary CTA, liver imaging. Included in AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling dose reduction with preserved diagnostic quality.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

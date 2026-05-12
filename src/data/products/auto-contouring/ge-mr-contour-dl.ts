@@ -64,6 +64,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "No independent peer-reviewed publications identified. Evidence based on FDA clearance documentation. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "Provides automated MRI-based contouring within GE imaging ecosystem. No published outcome data.",
+    implementationBurden: "Z3",
+    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     lastUpdated: "2026-02-26",
     lastRevised: "2026-02-26",
     source: "FDA 510(k) database (K242925). Entry needs further research and verification."

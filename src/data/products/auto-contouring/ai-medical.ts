@@ -67,6 +67,8 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Vendor references Medical Physics Journal 2023 and ESTRO 2022 abstract, but specific DOIs not found in PubMed search (2026-02-26). Downgraded from E2 to E1 as peer-reviewed publications cannot be verified.",
     clinicalImpactNotes: "Vendor-reported clinical evidence for lesion tracking workflow. No independently verifiable clinical impact data.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

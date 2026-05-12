@@ -95,6 +95,8 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "11+ PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries), HARMONY study (npj Digital Medicine 2025, 7 clinics, 4 countries), Podobnik et al. Sci Rep 2025 (3-system H&N comparison), Tang et al. Clin Transl Radiat Oncol 2025 (breast target volumes), Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes), Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Doolan et al. Front Oncol 2023 (5-system comparison, 80 patients). Ng et al. Information 2025 systematic review of commercial DL auto-segmentation. PubMed verified 2026-03-08.",
     clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
+    implementationBurden: "Z1",
+    implementationBurdenNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

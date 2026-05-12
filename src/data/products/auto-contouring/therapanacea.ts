@@ -290,6 +290,8 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Upgraded to E3: Prospective blinded evaluation (Gregoire et al. 2020), multi-center 5-system comparison (Doolan et al. 2023), multinational 7-system comparison (Kim et al. 2024), H&N DECT evaluation (Lê et al. 2024). Meets E3 criteria: multi-center, multi-national, vendor-independent, prospective, externally validated.",
     clinicalImpactNotes: "Blinded prospective study shows clinical acceptability and significant contouring time savings across multiple anatomical sites.",
+    implementationBurden: "Z1",
+    implementationBurdenNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

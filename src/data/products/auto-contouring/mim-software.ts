@@ -60,6 +60,8 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multi-center H&N validation (Front Oncol 2024). Fan et al. JACMP 2025 (4-system comparison including MIM ProtegeAI, 111 abdominal patients). Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Multiple independent multi-system comparison studies demonstrate comparable accuracy for H&N and abdominal contouring with workflow integration benefits.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,

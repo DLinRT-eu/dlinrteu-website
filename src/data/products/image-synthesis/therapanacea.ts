@@ -81,5 +81,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "No vendor-independent clinical validation studies identified for MR-Box synthetic CT generation. Evidence limited to vendor publications.",
     clinicalImpact: "I0",
     clinicalImpactNotes: "No independent clinical outcome data available yet."
+    implementationBurden: "Z3",
+    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   }
 ];

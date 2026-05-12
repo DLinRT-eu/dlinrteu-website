@@ -65,6 +65,8 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "FDA 510(k) software verification and validation. Limited public peer-reviewed clinical evidence at time of inclusion.",
     clinicalImpactNotes: "Time-saving for OAR contouring; awaiting independent multi-center clinical validation.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
