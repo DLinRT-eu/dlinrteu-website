@@ -390,6 +390,19 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
     });
   }
 
+  if (product.implementationBurden) {
+    properties.push({
+      type: {
+        coding: [{
+          system: DLINRT_PROPERTIES_SYSTEM,
+          code: "implementation-burden",
+          display: "Implementation & Assurance Burden Level"
+        }]
+      },
+      valueString: [product.implementationBurden]
+    });
+  }
+
   // Study quality booleans
   const studyQualityAttrs: Array<{ key: keyof ProductDetails; code: string; display: string }> = [
     { key: "evidenceVendorIndependent", code: "evidence-vendor-independent", display: "Vendor-Independent Evidence" },
