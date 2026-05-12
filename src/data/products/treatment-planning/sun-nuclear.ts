@@ -84,6 +84,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Appenzoller et al. Med Phys 2012 (Oncospace foundation, 5000+ plans, Johns Hopkins). KBP for 10 cancer sites (PMID:39486482, 2024). Multicenter AI-driven RT planning (PMC12827991, 2025). PubMed verified 2026-02-27.",
     clinicalImpactNotes: "Workflow improvement through AI-powered DVH predictions enabling data-driven planning objectives.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,

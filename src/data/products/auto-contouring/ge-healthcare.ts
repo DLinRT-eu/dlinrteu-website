@@ -66,6 +66,8 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA validation K230082 with 302 retrospective CT exams (2552 contours) from 9 global sites. Kim et al. Phys Eng Sci Med 2024 independent 7-system comparison (doi:10.1007/s13246-024-01434-9).",
     clinicalImpactNotes: "Large multi-site FDA validation dataset demonstrates consistent geometric accuracy across global clinical sites. Independent comparative evaluation available.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

@@ -67,6 +67,8 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Non-Device-MDDS. Workflow management tool. No clinical outcome publications.",
     clinicalImpactNotes: "QA/monitoring tool for workflow orchestration and documentation in radiation oncology.",
+    implementationBurden: "Z4",
+    implementationBurdenNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
     releaseDate: "2024-01-01",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-03-08",

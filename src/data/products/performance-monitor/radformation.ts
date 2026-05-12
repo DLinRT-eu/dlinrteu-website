@@ -66,6 +66,8 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "Published TG-275 compliance automation studies. Simiele et al. Front Oncol 2025 (ClearCheck in total marrow lymphoid irradiation workflow). PubMed verified 2026-03-08.",
     clinicalImpactNotes: "QA/monitoring tool for automated plan checking and structure validation.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

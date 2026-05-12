@@ -84,6 +84,8 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020) with multiple clinical sites. Additional clinical implementation studies support dosimetric equivalence.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric equivalence to CT-based planning for pelvic RT (MR-OPERA study).",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceExternalValidation: true

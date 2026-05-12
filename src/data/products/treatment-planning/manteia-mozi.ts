@@ -68,6 +68,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA K223724 validation (18 patients end-to-end, 187 patients auto-contouring). Limited independent publications. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "Workflow improvement through AI-driven planning optimization and Monte Carlo dose calculation. PubMed searched 2026-02-26.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

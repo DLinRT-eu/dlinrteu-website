@@ -71,6 +71,8 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I4",
     evidenceRigorNotes: "148 PubMed results for 'RapidPlan AND radiotherapy'. Netherton et al. JCO GO 2023 demonstrates improved RT quality in LMICs. Kavuma et al. ecancermedicalscience 2025 (KBP feasibility in LMICs). Lloyd et al. Med Dosim 2026 (externally validated KBP model for high-grade glioma with RTQA). Multiple independent multi-center studies. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Extensive multi-institutional validation across prostate, breast, H&N, lung, esophageal, and brain cancers.",
+    implementationBurden: "Z1",
+    implementationBurdenNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

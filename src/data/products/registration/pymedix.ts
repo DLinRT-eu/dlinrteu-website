@@ -68,6 +68,8 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA K233572 validation. Limited independent peer-reviewed publications.",
     clinicalImpactNotes: "Workflow improvement through AI-powered multi-modal image registration.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

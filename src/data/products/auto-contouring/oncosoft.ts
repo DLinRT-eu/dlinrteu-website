@@ -300,6 +300,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent peer-reviewed studies: Hoshina et al. Cureus 2025 (geometric accuracy, prostate, 15 patients), Kawaguchi et al. Cureus 2025 (dosimetric comparison, prostate), Choi et al. Cancers 2024 (1200 Korean patients, multi-site comparative), Miura et al. Cureus 2026 (lung SBRT lobe segmentation). Over 4M contours for 80K patients in clinical practice. PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Multiple peer-reviewed geometric and dosimetric accuracy assessments across prostate, lung, H&N, thorax, abdomen, pelvis.",
+    implementationBurden: "Z1",
+    implementationBurdenNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

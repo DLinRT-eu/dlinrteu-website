@@ -84,6 +84,8 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Largest MRCAT Brain validation study to date.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025).",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceExternalValidation: true
   }

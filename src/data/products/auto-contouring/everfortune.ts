@@ -94,6 +94,8 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I0",
     evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
+    implementationBurden: "Z3",
+    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     lastRevised: "2026-02-23",
     guidelines: [
       {
@@ -341,6 +343,8 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Liu et al. 2023 hippocampal avoidance WBRT (pubmed/36773828). Cardiac substructures study (pubmed/37585426). Single-center studies on specific applications.",
     clinicalImpactNotes: "Single-center studies demonstrate clinical utility for specific applications (hippocampal avoidance, cardiac substructures).",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

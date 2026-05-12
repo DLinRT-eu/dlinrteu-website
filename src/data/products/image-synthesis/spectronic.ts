@@ -96,6 +96,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020, 7 centers, 3 countries). Lerner et al. 2021 provides independent brain validation. Strong vendor-independent evidence base.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric accuracy within clinical tolerance across multiple anatomical sites (MR-OPERA, Lerner et al.).",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

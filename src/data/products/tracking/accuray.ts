@@ -71,6 +71,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony fiducial tracking on Radixact X9 (2025). PMID:40600108 lung motion management case report (2025). Okada et al. Cureus 2025 liver tumor tracking. Lo Conte et al. Cureus 2025 prostate SBRT toxicity outcomes. PubMed verified 2026-03-08.",
     clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

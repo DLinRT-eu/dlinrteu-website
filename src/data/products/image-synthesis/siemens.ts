@@ -65,5 +65,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated in clinical studies for brain and pelvic synthetic CT generation."
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   }
 ];

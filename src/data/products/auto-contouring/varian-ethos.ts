@@ -73,6 +73,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I3",
     evidenceRigorNotes: "FDA validation: AI segmentation models validated using DICE metrics, contours required minor or no adjustments in 80% of cases. Multiple vendor-independent publications on Ethos adaptive workflow. Huynh et al. Adv Radiat Oncol 2023. Byrne et al. Front Oncol 2023 (head and neck feasibility). Moazzezi et al. J Appl Clin Med Phys 2021. Prospective clinical trial NCT06116019 ongoing.",
     clinicalImpactNotes: "AI segmentation enables online adaptive radiotherapy, allowing daily re-contouring and plan adaptation at the treatment console. Demonstrated dosimetric benefits in prostate, head & neck, and other sites.",
+    implementationBurden: "Z2",
+    implementationBurdenNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,

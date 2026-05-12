@@ -80,6 +80,8 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     evidenceRigorNotes: "Platform product (2025). No independent peer-reviewed publications. Evidence through integrated component clearances. Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08.",
     clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions. Marengo CIMS case study reports 25% reduction in treatment planning times.",
+    implementationBurden: "Z3",
+    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
