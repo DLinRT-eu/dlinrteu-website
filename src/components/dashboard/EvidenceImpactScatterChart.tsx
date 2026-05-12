@@ -76,7 +76,10 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
         burden: p.implementationBurden,
-        burdenLabel: p.implementationBurden ? `${p.implementationBurden} – Implementation burden` : undefined,
+        burdenLabel: p.implementationBurden
+          ? `${p.implementationBurden} – ${IMPLEMENTATION_BURDEN_LEVELS.find(b => b.level === p.implementationBurden)?.name ?? 'Implementation burden'}`
+          : undefined,
+        burdenNotes: p.implementationBurdenNotes ?? '',
       });
       if (!catSet.has(p.category)) catSet.set(p.category, color);
       count++;
