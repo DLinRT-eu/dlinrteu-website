@@ -54,7 +54,8 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     features: ["Multi-institutional dataset", "Various anatomical sites", "Standardized evaluation framework"],
     dataAccess: "Available after registration",
     resultsUrl: "https://synthrad2023.grand-challenge.org/evaluation/results/",
-    participationInfo: "Open to academic and commercial participants worldwide"
+    participationInfo: "Open to academic and commercial participants worldwide",
+    logoUrl: "/logos/synthrad.svg"
   },
   {
     id: "synthrad-2025",
