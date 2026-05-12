@@ -36,5 +36,31 @@ export default defineConfig(({ mode }) => ({
     commonjsOptions: {
       include: [/node_modules/],
     },
+    rollupOptions: {
+      output: {
+        // Split heavy vendor libs into separate chunks so the homepage doesn't
+        // ship code it never uses (Recharts, Radix, framer-motion, Supabase).
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('/recharts/') || id.includes('/d3-') || id.includes('/victory-vendor/')) {
+            return 'vendor-charts';
+          }
+          if (id.includes('@radix-ui/')) return 'vendor-radix';
+          if (id.includes('framer-motion')) return 'vendor-motion';
+          if (id.includes('@supabase/')) return 'vendor-supabase';
+          if (id.includes('@tanstack/')) return 'vendor-tanstack';
+          if (id.includes('lucide-react')) return 'vendor-icons';
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('/react-router') ||
+            id.includes('/scheduler/')
+          ) {
+            return 'vendor-react';
+          }
+          return undefined;
+        },
+      },
+    },
   },
 }));
