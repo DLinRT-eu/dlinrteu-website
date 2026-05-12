@@ -182,10 +182,11 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                     <p><span className="font-medium">Burden:</span> {prod.burdenLabel}</p>
                                   )}
                                 </div>
-                                {(prod.rigorNotes || prod.impactNotes) && (
+                                {(prod.rigorNotes || prod.impactNotes || prod.burdenNotes) && (
                                   <div className="mt-1.5 pt-1.5 border-t border-border text-[11px] text-muted-foreground">
                                     {prod.rigorNotes && <p className="line-clamp-2">{prod.rigorNotes}</p>}
                                     {prod.impactNotes && <p className="line-clamp-2 mt-0.5">{prod.impactNotes}</p>}
+                                    {prod.burdenNotes && <p className="line-clamp-2 mt-0.5">{prod.burdenNotes}</p>}
                                   </div>
                                 )}
                               </TooltipContent>
