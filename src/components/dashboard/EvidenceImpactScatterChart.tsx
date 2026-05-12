@@ -167,9 +167,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                   className={`${dotSize} rounded-full inline-block cursor-pointer hover:scale-125 transition-transform`}
                                   style={{
                                     backgroundColor: prod.color,
-                                    boxShadow: prod.burden
-                                      ? `0 0 0 1.5px ${Z_RING_COLOR[prod.burden] ?? 'rgba(0,0,0,0.1)'}`
-                                      : '0 0 0 1px rgba(0,0,0,0.1)',
+                                    boxShadow: '0 0 0 1px rgba(0,0,0,0.1)',
                                   }}
                                 />
                               </TooltipTrigger>
