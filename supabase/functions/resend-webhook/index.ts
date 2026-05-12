@@ -36,7 +36,7 @@ interface ResendEvent {
 
 // Minimal Svix signature verification (HMAC-SHA256, base64).
 async function verifySvix(req: Request, body: string): Promise<boolean> {
-  if (!WEBHOOK_SECRET) return true; // verification disabled
+  if (!WEBHOOK_SECRET) return false; // fail closed when secret not configured
   const id = req.headers.get("svix-id");
   const timestamp = req.headers.get("svix-timestamp");
   const signatureHeader = req.headers.get("svix-signature");
