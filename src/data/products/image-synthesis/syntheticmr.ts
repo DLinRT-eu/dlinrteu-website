@@ -75,7 +75,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E1",
     evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
     clinicalImpact: "I0",
-    clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology."
+    clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology.",
     implementationBurden: "Z2",
     implementationBurdenNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   },
@@ -144,7 +144,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     evidenceRigorNotes: "No peer-reviewed validation studies identified for SyMRI Spine at time of listing.",
     clinicalImpact: "I0",
-    clinicalImpactNotes: "No clinical outcome data identified. Diagnostic spine imaging use case; not RT-specific."
+    clinicalImpactNotes: "No clinical outcome data identified. Diagnostic spine imaging use case; not RT-specific.",
     implementationBurden: "Z3",
     implementationBurdenNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   }
