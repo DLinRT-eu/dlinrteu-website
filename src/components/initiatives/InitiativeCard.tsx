@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -15,8 +15,12 @@ const InitiativeCard = ({
   website,
   organization,
   status,
-  tags
+  tags,
+  logoUrl
 }: InitiativeCardProps) => {
+  const [logoFailed, setLogoFailed] = useState(false);
+  const showLogo = Boolean(logoUrl) && !logoFailed;
+
   // Determine badge color based on status
   const getBadgeColor = () => {
     switch (status) {
@@ -34,13 +38,26 @@ const InitiativeCard = ({
   return (
     <Card className="h-full flex flex-col">
       <CardHeader>
-        <div className="flex justify-between items-start">
-          <CardTitle className="text-xl text-[#1A1F2C]">{name}</CardTitle>
+        <div className="flex justify-between items-start gap-3">
+          <div className="flex items-start gap-3 min-w-0">
+            {showLogo && (
+              <div className="flex-shrink-0 w-10 h-10 rounded border border-gray-200 bg-white p-1 flex items-center justify-center">
+                <img
+                  src={logoUrl}
+                  alt={`${name} logo`}
+                  loading="lazy"
+                  className="max-w-full max-h-full object-contain"
+                  onError={() => setLogoFailed(true)}
+                />
+              </div>
+            )}
+            <CardTitle className="text-xl text-[#1A1F2C]">{name}</CardTitle>
+          </div>
           <Badge variant="outline" className={getBadgeColor()}>
             {status}
           </Badge>
         </div>
-        <CardDescription className="text-gray-600">
+        <CardDescription className="text-gray-600 mt-2">
           {organization}
         </CardDescription>
       </CardHeader>
