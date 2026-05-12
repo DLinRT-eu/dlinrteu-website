@@ -10,8 +10,10 @@ import { EditableField, useProductEdit, EvidenceEditor } from "@/components/prod
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
+  IMPLEMENTATION_BURDEN_LEVELS,
   EvidenceRigorCode,
   ClinicalImpactCode,
+  ImplementationBurdenCode,
 } from "@/data/evidence-impact-levels";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -26,6 +28,11 @@ const EVIDENCE_RIGOR_OPTIONS = EVIDENCE_RIGOR_LEVELS.map(level => ({
 }));
 
 const CLINICAL_IMPACT_OPTIONS = CLINICAL_IMPACT_LEVELS.map(level => ({
+  value: level.level,
+  label: `${level.level} - ${level.name}`
+}));
+
+const IMPLEMENTATION_BURDEN_OPTIONS = IMPLEMENTATION_BURDEN_LEVELS.map(level => ({
   value: level.level,
   label: `${level.level} - ${level.name}`
 }));
