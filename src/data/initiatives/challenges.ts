@@ -15,6 +15,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     dataAccess: "Available on Zenodo",
     resultsUrl: "https://panther.grand-challenge.org/evaluation/open-development-phase/leaderboard/",
     participationInfo: "Open to academic and commercial participants worldwide",
+    logoUrl: "/logos/panther-2025.jpeg",
   },
   {
     id: "hecktor",
@@ -56,6 +57,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     dataAccess: "Available after registration",
     resultsUrl: "https://synthrad2023.grand-challenge.org/evaluation/results/",
     participationInfo: "Open to academic and commercial participants worldwide",
+    logoUrl: "/logos/synthrad-2023.jpeg",
   },
   {
     id: "synthrad-2025",
@@ -70,6 +72,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Enhanced dataset", "Multiple anatomical regions", "Advanced evaluation metrics"],
     participationInfo: "Currently ongoing",
+    logoUrl: "/logos/synthrad-2025.jpeg",
   },
   {
     id: "trackrad-2025",
@@ -238,6 +241,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Supports adaptive and MRI-guided RT workflows",
     ],
     participationInfo: "Open to all participants",
+    logoUrl: "/logos/doserad-2026.png",
   },
   {
     id: "cobra-2026",
@@ -246,7 +250,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     description:
       "Cone-Beam CT Reconstruction for Radiation Therapy. Advances reconstruction algorithms that transform raw CBCT projection data into high-quality volumetric images comparable to fan-beam planning CT, enabling CBCT-only adaptive radiotherapy workflows.",
     website: "https://cobra2026.grand-challenge.org/",
-    organization: "Medical University of Vienna, UMC Utrecht, LMU Munich, Université de Lyon (multi-institutional)",
+    organization: "MIDL",
     startDate: "2026-06-30",
     endDate: "2027-03-10",
     status: "Upcoming",
