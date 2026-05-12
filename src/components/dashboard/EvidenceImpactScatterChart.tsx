@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
+import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
