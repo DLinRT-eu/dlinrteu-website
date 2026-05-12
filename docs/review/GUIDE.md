@@ -314,3 +314,16 @@ In addition to the E0-E3 level, products can be tagged with study quality sub-at
 ---
 
 *Last Updated: March 8, 2026*
+
+## Z-axis review checklist (Implementation & Assurance Burden)
+
+Reviewers must assign `implementationBurden` (Z0–Z5) alongside E and I. Use the rubric in the [Evidence/Impact Guide](https://dlinrt.eu/evidence-impact-guide). Quick floors:
+
+- **Unresolved safety signal / FSCA open** → Z5 (blocked)
+- **Missing governance, cybersecurity or post-market monitoring** → Z4
+- **Significant TPS/OIS/PACS integration or human-factors gaps** → Z3
+- **Local validation, workflow redesign, or economic case needed** → Z2
+- **Minor commissioning, training or workflow confirmation** → Z1
+- **Documentation, validation, integration, QA and governance complete** → Z0
+
+A product can only be marked **Adoption-grade** when E≥E2, I≥I2 AND Z=Z0. High Z constrains the public Readiness Signal even when E and I are strong.
