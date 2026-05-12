@@ -9,6 +9,8 @@ import {
   ArrowLeft,
   FlaskConical,
   Target,
+  Wrench,
+  ShieldCheck,
   BookOpen,
   AlertTriangle,
   CheckCircle,
@@ -17,9 +19,11 @@ import {
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
+  IMPLEMENTATION_BURDEN_LEVELS,
   EVIDENCE_IMPACT_REFERENCE,
   getEvidenceRigorColor,
   getClinicalImpactColor,
+  getImplementationBurdenColor,
 } from "@/data/evidence-impact-levels";
 import EvidenceImpactBadges from "@/components/product/EvidenceImpactBadges";
 import EvidenceImpactMatrix from "@/components/resources/EvidenceImpactMatrix";
