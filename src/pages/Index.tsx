@@ -1,11 +1,8 @@
 
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import IntroSection from "@/components/IntroSection";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
-import { getAllOptions } from "@/utils/filterOptions";
-import { matchesTask } from "@/utils/modelCounting";
-import dataService from "@/services/DataService";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
@@ -20,11 +17,27 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrowRight, BarChart3, Building2, FileText, Package } from "lucide-react";
-import { countProductsByAI } from "@/utils/aiClassification";
+
+interface HomepageStats {
+  productCount: number;
+  companyCount: number;
+  aiCount: number;
+  nonAICount: number;
+  categoryCounts: { name: string; count: number }[];
+}
+
+const EMPTY_STATS: HomepageStats = {
+  productCount: 0,
+  companyCount: 0,
+  aiCount: 0,
+  nonAICount: 0,
+  categoryCounts: [],
+};
 
 const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const [stats, setStats] = useState<HomepageStats>(EMPTY_STATS);
 
   // Use useEffect for redirect to avoid race conditions during logout
   useEffect(() => {
@@ -32,6 +45,42 @@ const Index = () => {
       navigate('/dashboard-home', { replace: true });
     }
   }, [user, loading, navigate]);
+
+  // Defer the heavy product-data import until after first paint so the
+  // homepage chunk stays small and TTI/LCP improve. Counts hydrate in
+  // shortly after — preserves prior UX without blocking initial render.
+  useEffect(() => {
+    if (user) return;
+    let cancelled = false;
+    (async () => {
+      const [{ default: dataService }, { getAllOptions }, { matchesTask }, { countProductsByAI }] =
+        await Promise.all([
+          import("@/services/DataService"),
+          import("@/utils/filterOptions"),
+          import("@/utils/modelCounting"),
+          import("@/utils/aiClassification"),
+        ]);
+      if (cancelled) return;
+      const products = dataService.getAllProducts();
+      const companies = dataService.getActiveCompanies();
+      const categories = getAllOptions('category');
+      const { aiCount, nonAICount } = countProductsByAI(products);
+      const categoryCounts = categories.map((category) => ({
+        name: category,
+        count: products.filter((p) => matchesTask(p, category)).length,
+      }));
+      setStats({
+        productCount: products.length,
+        companyCount: companies.length,
+        aiCount,
+        nonAICount,
+        categoryCounts,
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   // If an authenticated user is present, don't render content (will redirect).
   // While auth state is still resolving we render the public landing page so
@@ -41,10 +90,7 @@ const Index = () => {
     return null;
   }
 
-  const products = dataService.getAllProducts();
-  const companies = dataService.getActiveCompanies();
-  const categories = getAllOptions('category');
-  const { aiCount, nonAICount } = countProductsByAI(products);
+  const { productCount, companyCount, aiCount, nonAICount, categoryCounts } = stats;
 
   const handleCategoryClick = (category: string) => {
     navigate(`/products?task=${encodeURIComponent(category)}`);
@@ -58,11 +104,6 @@ const Index = () => {
     "logo": "https://dlinrt.eu/logo.png",
     "description": "Search and explore deep learning products in Radiotherapy"
   };
-
-  const categoryCounts = categories.map(category => ({
-    name: category,
-    count: products.filter(p => matchesTask(p, category)).length
-  }));
 
   // Public landing page
   return (
