@@ -164,6 +164,158 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   }
 ];
 
+// ==================== IMPLEMENTATION BURDEN AXIS (Z) ====================
+// Third axis (Lula & Kamath, 2026): residual implementation & assurance burden.
+// Lower Z = lower residual effort = higher adoption readiness.
+// Inspired by Bellini et al. (2023) third translational-effort axis, adapted for RT AI.
+
+export type ImplementationBurdenCode = "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
+
+export interface ImplementationBurdenLevel {
+  level: ImplementationBurdenCode;
+  name: string;
+  description: string;
+  readinessConsequence: string;
+  color: string;
+}
+
+export const IMPLEMENTATION_BURDEN_LEVELS: ImplementationBurdenLevel[] = [
+  {
+    level: "Z0",
+    name: "Minimal residual effort",
+    description: "Core documentation, validation, integration, QA and governance are complete for the intended use.",
+    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
+    color: "green",
+  },
+  {
+    level: "Z1",
+    name: "Limited local assurance",
+    description: "Minor local commissioning, user training, documentation checks or workflow confirmation remain.",
+    readinessConsequence: "Deploy with local sign-off and monitoring.",
+    color: "teal",
+  },
+  {
+    level: "Z2",
+    name: "Moderate implementation effort",
+    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks are needed.",
+    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
+    color: "yellow",
+  },
+  {
+    level: "Z3",
+    name: "High implementation burden",
+    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence is required.",
+    readinessConsequence: "Restrict to structured pilot or sandbox.",
+    color: "orange",
+  },
+  {
+    level: "Z4",
+    name: "Major assurance burden",
+    description: "Material uncertainty around safety, fairness, monitoring, change control, cost, generalisability or post-market surveillance.",
+    readinessConsequence: "Do not present as adoption-ready.",
+    color: "red",
+  },
+  {
+    level: "Z5",
+    name: "Critical unresolved burden",
+    description: "Unclear integration, high residual risk, missing governance, cybersecurity, regulatory or clinical-safety assurance.",
+    readinessConsequence: "Block adoption-grade export; horizon scanning only.",
+    color: "rose",
+  },
+];
+
+// ==================== READINESS SIGNAL (composite E/I/Z) ====================
+
+export type ReadinessSignal =
+  | "adoption-grade"
+  | "deploy-with-monitoring"
+  | "conditional"
+  | "pilot-only"
+  | "not-adoption-ready"
+  | "blocked"
+  | "not-assessed";
+
+export interface ReadinessSignalDescriptor {
+  signal: ReadinessSignal;
+  label: string;
+  description: string;
+  color: string; // tailwind palette key
+}
+
+const READINESS_DESCRIPTORS: Record<ReadinessSignal, ReadinessSignalDescriptor> = {
+  "adoption-grade": {
+    signal: "adoption-grade",
+    label: "Adoption-grade",
+    description: "Strong evidence and impact with controlled residual burden.",
+    color: "green",
+  },
+  "deploy-with-monitoring": {
+    signal: "deploy-with-monitoring",
+    label: "Deploy with monitoring",
+    description: "Acceptable for deployment alongside local sign-off and post-market monitoring.",
+    color: "teal",
+  },
+  conditional: {
+    signal: "conditional",
+    label: "Conditional",
+    description: "Deploy conditionally or as evidence-generation pilot.",
+    color: "yellow",
+  },
+  "pilot-only": {
+    signal: "pilot-only",
+    label: "Pilot only",
+    description: "Restrict to structured pilot or sandbox.",
+    color: "orange",
+  },
+  "not-adoption-ready": {
+    signal: "not-adoption-ready",
+    label: "Not adoption-ready",
+    description: "Material uncertainty remains; do not present as adoption-ready.",
+    color: "red",
+  },
+  blocked: {
+    signal: "blocked",
+    label: "Blocked",
+    description: "Critical unresolved burden; horizon scanning only.",
+    color: "rose",
+  },
+  "not-assessed": {
+    signal: "not-assessed",
+    label: "Not assessed",
+    description: "Three-axis appraisal not yet completed for this product.",
+    color: "gray",
+  },
+};
+
+const E_RANK: Record<EvidenceRigorCode, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
+const I_RANK: Record<ClinicalImpactCode, number> = { I0: 0, I1: 1, I2: 2, I3: 3, I4: 4, I5: 5 };
+
+export const computeReadinessSignal = (
+  evidenceRigor?: EvidenceRigorCode,
+  clinicalImpact?: ClinicalImpactCode,
+  implementationBurden?: ImplementationBurdenCode,
+): ReadinessSignalDescriptor => {
+  if (!evidenceRigor || !clinicalImpact || !implementationBurden) {
+    return READINESS_DESCRIPTORS["not-assessed"];
+  }
+  if (implementationBurden === "Z5") return READINESS_DESCRIPTORS.blocked;
+  if (implementationBurden === "Z4") return READINESS_DESCRIPTORS["not-adoption-ready"];
+  if (implementationBurden === "Z3") return READINESS_DESCRIPTORS["pilot-only"];
+
+  const e = E_RANK[evidenceRigor];
+  const i = I_RANK[clinicalImpact];
+
+  if (implementationBurden === "Z0" && e >= 2 && i >= 2) {
+    return READINESS_DESCRIPTORS["adoption-grade"];
+  }
+  if (implementationBurden === "Z1" || (implementationBurden === "Z0" && (e < 2 || i < 2))) {
+    return READINESS_DESCRIPTORS["deploy-with-monitoring"];
+  }
+  // Z2
+  if (e >= 2 && i >= 2) return READINESS_DESCRIPTORS["deploy-with-monitoring"];
+  return READINESS_DESCRIPTORS.conditional;
+};
+
 // ==================== HELPER FUNCTIONS ====================
 
 export const getEvidenceRigorLevel = (level: string): EvidenceRigorLevel | undefined => {
