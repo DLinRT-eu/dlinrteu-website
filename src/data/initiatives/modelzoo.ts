@@ -38,7 +38,8 @@ export const MODEL_ZOO_INITIATIVES: Initiative[] = [
       "PyTorch-based implementations"
     ],
     dataAccess: "Freely available for research and development",
-    participationInfo: "Open to all researchers and developers"
+    participationInfo: "Open to all researchers and developers",
+    logoUrl: "/logos/monai.svg"
   },
   {
     id: "nvidia-clara-medical",
