@@ -160,7 +160,9 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       supportedStructures: supportedStructures,
       limitations: formatArray(product.limitations),
       evidence: evidenceText,
-      evidenceLevel: product.evidenceRigor ? `${product.evidenceRigor}/${product.clinicalImpact || 'N/A'}` : "N/A",
+      evidenceLevel: product.evidenceRigor
+        ? `${product.evidenceRigor}/${product.clinicalImpact || 'N/A'}${product.implementationBurden ? `/${product.implementationBurden}` : ''}`
+        : "N/A",
       evidenceLevelNotes: product.evidenceRigorNotes || product.clinicalImpactNotes || "N/A",
       dosePredictionModels: doseModelsText,
     },
