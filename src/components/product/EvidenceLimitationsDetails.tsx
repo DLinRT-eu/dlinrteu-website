@@ -45,21 +45,25 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
   const showEditor = isEditMode && canEdit;
   
-  const { 
-    evidence, 
+  const {
+    evidence,
     limitations,
     evidenceRigor,
     evidenceRigorNotes,
     clinicalImpact,
-    clinicalImpactNotes 
+    clinicalImpactNotes,
+    implementationBurden,
+    implementationBurdenNotes,
   } = displayProduct;
-  
+
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
   const hasLimitations = limitations && limitations.length > 0;
   const hasDualAxis = !!(evidenceRigor || clinicalImpact);
-  
-  if (!showEditor && !hasEvidence && !hasLimitations && !hasDualAxis) {
+  const hasBurden = !!implementationBurden;
+  const hasTriAxis = hasDualAxis || hasBurden;
+
+  if (!showEditor && !hasEvidence && !hasLimitations && !hasTriAxis) {
     return null;
   }
 
