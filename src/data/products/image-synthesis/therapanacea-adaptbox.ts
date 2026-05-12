@@ -96,7 +96,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     evidenceRigorNotes: "No vendor-independent clinical validation studies identified for AdaptBox augmented CBCT generation. Evidence limited to vendor publications.",
     clinicalImpact: "I0",
-    clinicalImpactNotes: "No independent clinical outcome data available yet."
+    clinicalImpactNotes: "No independent clinical outcome data available yet.",
     implementationBurden: "Z3",
     implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   }
