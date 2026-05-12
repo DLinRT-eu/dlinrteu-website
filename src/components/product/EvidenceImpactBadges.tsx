@@ -12,15 +12,22 @@ import {
   getClinicalImpactLevel,
   getEvidenceRigorColor,
   getClinicalImpactColor,
+  getImplementationBurdenLevel,
+  getImplementationBurdenColor,
+  getReadinessSignalColor,
+  computeReadinessSignal,
   EvidenceRigorCode,
   ClinicalImpactCode,
+  ImplementationBurdenCode,
 } from "@/data/evidence-impact-levels";
-import { FlaskConical, Target, ExternalLink } from "lucide-react";
+import { FlaskConical, Target, Wrench, ShieldCheck, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface EvidenceImpactBadgesProps {
   evidenceRigor?: EvidenceRigorCode;
   clinicalImpact?: ClinicalImpactCode;
+  implementationBurden?: ImplementationBurdenCode;
+  showReadinessSignal?: boolean;
   showTooltip?: boolean;
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -30,6 +37,8 @@ interface EvidenceImpactBadgesProps {
 const EvidenceImpactBadges = ({
   evidenceRigor,
   clinicalImpact,
+  implementationBurden,
+  showReadinessSignal = false,
   showTooltip = true,
   size = "md",
   className = "",
@@ -37,8 +46,9 @@ const EvidenceImpactBadges = ({
 }: EvidenceImpactBadgesProps) => {
   const rigorLevel = evidenceRigor ? getEvidenceRigorLevel(evidenceRigor) : null;
   const impactLevel = clinicalImpact ? getClinicalImpactLevel(clinicalImpact) : null;
+  const burdenLevel = implementationBurden ? getImplementationBurdenLevel(implementationBurden) : null;
 
-  if (!rigorLevel && !impactLevel) {
+  if (!rigorLevel && !impactLevel && !burdenLevel) {
     return null;
   }
 
