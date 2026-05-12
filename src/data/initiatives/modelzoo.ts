@@ -39,7 +39,7 @@ export const MODEL_ZOO_INITIATIVES: Initiative[] = [
     ],
     dataAccess: "Freely available for research and development",
     participationInfo: "Open to all researchers and developers",
-    logoUrl: "/logos/monai.svg"
+    logoUrl: "/logos/monai.png"
   },
   {
     id: "nvidia-clara-medical",
