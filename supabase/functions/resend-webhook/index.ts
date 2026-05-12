@@ -60,10 +60,23 @@ async function verifySvix(req: Request, body: string): Promise<boolean> {
   );
   const toSign = new TextEncoder().encode(`${id}.${timestamp}.${body}`);
   const sig = await crypto.subtle.sign("HMAC", key, toSign);
-  const expected = btoa(String.fromCharCode(...new Uint8Array(sig)));
-  return signatureHeader
-    .split(" ")
-    .some((part) => part.split(",")[1] === expected);
+  const expectedBytes = new Uint8Array(sig);
+  return signatureHeader.split(" ").some((part) => {
+    const received = part.split(",")[1];
+    if (!received) return false;
+    let receivedBytes: Uint8Array;
+    try {
+      const bin = atob(received);
+      receivedBytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) receivedBytes[i] = bin.charCodeAt(i);
+    } catch {
+      return false;
+    }
+    if (receivedBytes.length !== expectedBytes.length) return false;
+    let r = 0;
+    for (let i = 0; i < expectedBytes.length; i++) r |= expectedBytes[i] ^ receivedBytes[i];
+    return r === 0;
+  });
 }
 
 function statusFromType(type: string): string {
