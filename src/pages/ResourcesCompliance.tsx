@@ -96,11 +96,12 @@ const ResourcesCompliance = () => {
               Evaluating scientific evidence for radiotherapy AI
             </h3>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              We classify products using a dual-axis system adapted from van Leeuwen et al. (2021, updated 2025), 
-              separating <strong>evidence rigor</strong> (E0–E3) from <strong>clinical impact</strong> (I0–I5). 
-              The clinical impact axis is cross-referenced with the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991). 
-              Each product is further assessed on five granular study quality sub-attributes — vendor independence, 
-              multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
+              We classify products using a tri-axial system: <strong>evidence rigor</strong> (E0–E3) and
+              <strong> clinical impact</strong> (I0–I5) — adapted from van Leeuwen et al. (2021, updated 2025),
+              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991) —
+              extended with an internally proposed third axis, <strong>implementation &amp; assurance burden</strong> (Z0–Z5),
+              that captures residual deployment effort. Each product is further assessed on five granular study quality sub-attributes —
+              vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
               As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Implementation &amp; Assurance Burden (Z0–Z5)</strong> — 

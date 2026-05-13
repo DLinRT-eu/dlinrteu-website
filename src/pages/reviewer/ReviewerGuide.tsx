@@ -118,7 +118,7 @@ export default function ReviewerGuide() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-purple-600 mt-1">•</span>
-                    <span>Classify evidence levels using the dual-axis framework (E0–E3 rigor, I0–I5 impact)</span>
+                    <span>Classify evidence levels using the tri-axial framework (E0–E3 rigor, I0–I5 impact, Z0–Z5 implementation burden)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-purple-600 mt-1">•</span>

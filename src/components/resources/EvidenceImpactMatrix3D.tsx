@@ -12,7 +12,8 @@ import type { ProductDetails } from "@/types/productDetails";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { RotateCw, RefreshCw, Eye, X } from "lucide-react";
+import { RotateCw, RefreshCw, Eye, X, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /**
  * Real interactive WebGL 3D plot of the Evidence × Impact × Implementation-Burden matrix.
@@ -47,11 +48,19 @@ const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
 const IMPACT = CLINICAL_IMPACT_LEVELS;        // I0..I5
 const BURDEN = IMPLEMENTATION_BURDEN_LEVELS;  // Z0..Z5
 
+interface BucketProduct {
+  id: string;
+  name: string;
+  company?: string;
+  category?: string;
+}
+
 interface Bucket {
   rigor: string;
   impact: string;
   burden: string;
   count: number;
+  products: BucketProduct[];
 }
 
 // ---------- Bars ----------
@@ -378,9 +387,19 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
       const z = p.implementationBurden;
       if (!e || !i || !z) continue;
       const key = `${e}-${i}-${z}`;
+      const prod: BucketProduct = {
+        id: p.id,
+        name: p.name,
+        company: p.company,
+        category: p.category,
+      };
       const existing = map.get(key);
-      if (existing) existing.count += 1;
-      else map.set(key, { rigor: e, impact: i, burden: z, count: 1 });
+      if (existing) {
+        existing.count += 1;
+        existing.products.push(prod);
+      } else {
+        map.set(key, { rigor: e, impact: i, burden: z, count: 1, products: [prod] });
+      }
     }
     return Array.from(map.values());
   }, [products]);
@@ -517,8 +536,48 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                   </div>
                 )}
                 <div className="pt-2 border-t">
-                  <span className="text-muted-foreground">Products in this bucket:</span>{" "}
-                  <span className="font-semibold text-primary">{detail.count}</span>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-muted-foreground">
+                      Products{" "}
+                      <span className="font-semibold text-primary">({detail.count})</span>
+                    </span>
+                    {selected && (
+                      <button
+                        onClick={() => setSelected(null)}
+                        className="text-[10px] text-muted-foreground hover:text-foreground underline"
+                      >
+                        clear
+                      </button>
+                    )}
+                  </div>
+                  {selected ? (
+                    <ul className="max-h-64 overflow-auto pr-1 space-y-1.5">
+                      {detail.products.map((prod) => (
+                        <li key={prod.id}>
+                          <Link
+                            to={`/products/${prod.id}`}
+                            className="group block rounded-md border border-transparent hover:border-border hover:bg-muted/50 px-2 py-1.5 transition-colors"
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <span className="font-medium text-foreground group-hover:text-primary line-clamp-2">
+                                {prod.name}
+                              </span>
+                              <ExternalLink className="h-3 w-3 mt-0.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100" />
+                            </div>
+                            {(prod.company || prod.category) && (
+                              <div className="text-[10px] text-muted-foreground mt-0.5">
+                                {[prod.company, prod.category].filter(Boolean).join(" · ")}
+                              </div>
+                            )}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-[11px] text-muted-foreground italic">
+                      Click the bar to list products in this bucket.
+                    </p>
+                  )}
                 </div>
               </div>
             ) : (

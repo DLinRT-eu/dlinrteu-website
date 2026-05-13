@@ -433,9 +433,9 @@ Different fields have different editing experiences:
 | URL | Website, Product URL | URL input with validation |
 | Complex | Regulatory, Evidence, Guidelines | Specialized full-screen editors |
 
-#### Evidence Level Classification (Dual-Axis System)
+#### Evidence Level Classification (Tri-Axial System)
 
-Every product should have an evidence classification using the dual-axis framework: **Evidence Rigor** (E0–E3) and **Clinical Impact** (I0–I5), plus optional study-quality sub-attributes.
+Every product should have an evidence classification using the tri-axial framework: **Evidence Rigor** (E0–E3), **Clinical Impact** (I0–I5), and **Implementation &amp; Assurance Burden** (Z0–Z5), plus optional study-quality sub-attributes for the rigor axis.
 
 > For the full criteria tables and academic references, see the [Product Review Guide – Evidence Level Classification](review/GUIDE.md#evidence-level-classification).
 

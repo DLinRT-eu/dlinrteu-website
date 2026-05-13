@@ -31,7 +31,7 @@ DLinRT.eu supports two methods for reviewing products:
    - Changes auto-save every 30 seconds
 
 3. **Set Evidence Classification**
-   - Assign evidence rigor (E0–E3) and clinical impact (I0–I5) using the [dual-axis system](#evidence-level-classification)
+   - Assign evidence rigor (E0–E3), clinical impact (I0–I5), and implementation burden (Z0–Z5) using the [tri-axial system](#evidence-level-classification)
    - The Evidence & Limitations section is always visible
    - Select levels from dropdowns and add justification notes
 
@@ -262,7 +262,7 @@ All examples include:
 
 ## Evidence Level Classification
 
-Every product should have an evidence level assigned. The classification uses a **dual-axis system** separating Evidence Rigor (E0-E3) from Clinical Impact (I0-I5), adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8). The Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203).
+Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Clinical Impact (I0–I5), with a third axis for Implementation &amp; Assurance Burden (Z0–Z5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The Z axis is an internally proposed DLinRT extension — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
 
 ### Evidence Rigor (E0-E3)
 

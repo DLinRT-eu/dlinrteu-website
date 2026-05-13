@@ -33,8 +33,8 @@ const EvidenceImpactGuide = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Dual-Axis Evidence Classification"
-        description="A methodology separating evidence rigor from clinical impact for evaluating radiotherapy AI products"
+        title="Tri-Axial Evidence & Readiness Classification"
+        description="A tri-axial methodology separating evidence rigor (E), clinical impact (I), and implementation burden (Z) for evaluating radiotherapy AI products"
         canonical="https://dlinrt.eu/evidence-impact-guide"
       />
       
@@ -47,14 +47,17 @@ const EvidenceImpactGuide = () => {
               Back to Resources
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+          <h1 className="text-3xl font-bold mb-2 flex items-center gap-3 flex-wrap">
             <FlaskConical className="h-8 w-8 text-primary" />
             <span>×</span>
             <Target className="h-8 w-8 text-primary" />
-            Dual-Axis Evidence Classification
+            <span>×</span>
+            <Wrench className="h-8 w-8 text-primary" />
+            Tri-Axial Evidence &amp; Readiness Classification
           </h1>
           <p className="text-lg text-muted-foreground">
-            Separating evidence rigor from clinical impact for more nuanced product evaluation
+            Separating evidence rigor (E), clinical impact (I), and implementation burden (Z)
+            for nuanced product evaluation
           </p>
         </div>
 
@@ -63,36 +66,46 @@ const EvidenceImpactGuide = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
               <Lightbulb className="h-5 w-5" />
-              Why Two Axes?
+              Why Three Axes?
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
-              Traditional single-scale evidence hierarchies conflate two distinct concepts: 
-              <strong> how robust the evidence is</strong> and <strong>what clinical benefit it demonstrates</strong>.
+              Traditional single-scale evidence hierarchies conflate three distinct concepts:
+              <strong> how robust the evidence is</strong>, <strong>what clinical benefit it demonstrates</strong>,
+              and <strong>how much residual effort adoption still requires</strong>.
             </p>
             
-            <div className="grid md:grid-cols-2 gap-4 mt-4">
+            <div className="grid md:grid-cols-3 gap-4 mt-4">
               <div className="p-4 bg-background rounded-lg border">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange-500" />
-                  The Problem: Example 1
+                  Rigor without impact
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  An AI that predicts the patient's favorite color with 99.8% accuracy, 
-                  backed by rigorous peer-reviewed RCTs. On a single scale, this would be 
-                  "Level 1" (technical) despite having the <em>highest possible methodological rigor</em>.
+                  An AI predicting the patient's favorite color with 99.8% accuracy, backed by RCTs.
+                  On a single scale this looks "Level 1" despite having the
+                  <em> highest possible methodological rigor</em>.
                 </p>
               </div>
               <div className="p-4 bg-background rounded-lg border">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange-500" />
-                  The Problem: Example 2
+                  Impact without rigor
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  A device guaranteed to save lives but with no publications yet. 
-                  On a single scale, this would be "Level 0" (no evidence) despite 
-                  having <em>high potential clinical impact</em>.
+                  A device claimed to save lives but with no publications yet. On a single scale this looks
+                  "Level 0" despite having <em>high potential clinical impact</em>.
+                </p>
+              </div>
+              <div className="p-4 bg-background rounded-lg border">
+                <h4 className="font-medium mb-2 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-orange-500" />
+                  Strong evidence, not deployable
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  A multi-centre validated tool that requires heavy commissioning, vendor-specific QA, or
+                  custom integration. Strong E and I, but a <em>high implementation burden</em> blocks routine adoption.
                 </p>
               </div>
             </div>
@@ -100,13 +113,14 @@ const EvidenceImpactGuide = () => {
             <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 mt-4">
               <h4 className="font-medium mb-2 flex items-center gap-2 text-green-800 dark:text-green-200">
                 <CheckCircle className="h-4 w-4" />
-                The Solution: Two Axes
+                The Solution: Three Axes
               </h4>
               <p className="text-sm text-green-900 dark:text-green-100">
-                By separating <strong>Evidence Rigor</strong> (E0-E3) from <strong>Clinical Impact</strong> (I0-I5), 
-                we can properly represent both dimensions. The favorite-color AI becomes E3/I0 
-                (rigorous but no clinical value), while the life-saving device is E0/I4 
-                (high claimed impact, needs evidence). Both ratings convey meaningful information.
+                By separating <strong>Evidence Rigor</strong> (E0–E3), <strong>Clinical Impact</strong> (I0–I5),
+                and <strong>Implementation &amp; Assurance Burden</strong> (Z0–Z5), each dimension is rated
+                independently and combined into a composite readiness signal. The favorite-color AI becomes
+                E3/I0/Z0 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
+                E0/I4/Z3 (claimed impact, evidence and integration both pending).
               </p>
             </div>
           </CardContent>
@@ -181,12 +195,12 @@ const EvidenceImpactGuide = () => {
             <CardTitle className="flex items-center gap-2">
               <Wrench className="h-5 w-5 text-primary" />
               Implementation &amp; Assurance Burden (Z0-Z5)
-              <Badge variant="outline" className="ml-2 text-[10px]">New — third axis</Badge>
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              The dual E/I matrix is extended with a third axis: residual implementation and assurance burden
-              (an internally proposed DLinRT extension). <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>
-              {" "}High Z constrains the public readiness signal even when E and I appear favourable.
+              The third axis captures residual implementation and assurance burden after evidence (E) and
+              clinical impact (I) have been assigned (an internally proposed DLinRT extension).{" "}
+              <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>{" "}
+              High Z constrains the public readiness signal even when E and I appear favourable.
             </p>
           </CardHeader>
           <CardContent>
@@ -251,42 +265,42 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z1" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Multi-center validation showing workflow time savings</td>
+                    <td className="py-3 text-muted-foreground">Multi-center validation, light QA needed at deployment</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">QA/Monitoring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" implementationBurden="Z0" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Well-validated tool that monitors AI accuracy and ensures safe operation</td>
+                    <td className="py-3 text-muted-foreground">Well-validated, plug-in monitoring with negligible burden</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z2" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Large studies showing time savings and reduced variability</td>
+                    <td className="py-3 text-muted-foreground">Strong evidence but commissioning &amp; site-specific QA required</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" implementationBurden="Z3" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Single-center workflow validation</td>
+                    <td className="py-3 text-muted-foreground">Single-center workflow validation; structured pilot only</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" implementationBurden="Z4" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Vendor claims only, no demonstrated benefit</td>
+                    <td className="py-3 text-muted-foreground">Vendor claims only, integration effort unknown</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" implementationBurden="Z0" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>
