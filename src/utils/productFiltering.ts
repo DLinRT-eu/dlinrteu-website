@@ -20,7 +20,11 @@ export const filterProducts = (
     if (selectedLocation !== "all") {
       // Handle both anatomicalLocation and anatomy fields for consistency
       const anatomyList = product.anatomicalLocation || product.anatomy || [];
-      if (!anatomyList.includes(selectedLocation)) {
+      const matches =
+        selectedLocation === 'Head & Neck'
+          ? anatomyList.some(a => a === 'Head' || a === 'Neck' || a === 'Head & Neck')
+          : anatomyList.includes(selectedLocation);
+      if (!matches) {
         return false;
       }
     }
