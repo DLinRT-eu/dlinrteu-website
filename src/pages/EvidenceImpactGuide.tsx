@@ -195,12 +195,12 @@ const EvidenceImpactGuide = () => {
             <CardTitle className="flex items-center gap-2">
               <Wrench className="h-5 w-5 text-primary" />
               Implementation &amp; Assurance Burden (Z0-Z5)
-              <Badge variant="outline" className="ml-2 text-[10px]">New — third axis</Badge>
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              The dual E/I matrix is extended with a third axis: residual implementation and assurance burden
-              (an internally proposed DLinRT extension). <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>
-              {" "}High Z constrains the public readiness signal even when E and I appear favourable.
+              The third axis captures residual implementation and assurance burden after evidence (E) and
+              clinical impact (I) have been assigned (an internally proposed DLinRT extension).{" "}
+              <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>{" "}
+              High Z constrains the public readiness signal even when E and I appear favourable.
             </p>
           </CardHeader>
           <CardContent>
