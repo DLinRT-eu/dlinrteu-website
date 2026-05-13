@@ -165,9 +165,9 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
 ];
 
 // ==================== IMPLEMENTATION BURDEN AXIS (Z) ====================
-// Third axis (Lula & Kamath, 2026): residual implementation & assurance burden.
-// Lower Z = lower residual effort = higher adoption readiness.
-// Inspired by Bellini et al. (2023) third translational-effort axis, adapted for RT AI.
+// Third axis (internally proposed DLinRT extension): residual implementation
+// & assurance burden. Lower Z = lower residual effort = higher adoption
+// readiness.
 
 export type ImplementationBurdenCode = "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
 
