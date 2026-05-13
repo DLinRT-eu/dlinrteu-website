@@ -475,6 +475,46 @@ const EvidenceImpactGuide = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Extended methodology bibliography */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Extended methodology bibliography</CardTitle>
+            <p className="text-sm text-muted-foreground mt-2">
+              Grouped references underpinning the dual-axis (E / I) and implementation-burden (Z) framework.
+              Each entry links to the canonical DOI or publisher source.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-8">
+            {METHODOLOGY_REFERENCES.map((group) => (
+              <section key={group.id} id={`refs-${group.id}`} className="scroll-mt-20">
+                <h3 className="font-semibold text-base">{group.title}</h3>
+                <p className="text-xs text-muted-foreground mt-1 mb-3">{group.description}</p>
+                <ol className="space-y-2 list-decimal pl-5 marker:text-muted-foreground">
+                  {group.references.map((ref, i) => (
+                    <li key={i} className="text-sm leading-relaxed">
+                      <span>{ref.citation}</span>
+                      {ref.notes && (
+                        <span className="block text-xs text-muted-foreground mt-0.5">{ref.notes}</span>
+                      )}
+                      {ref.url && (
+                        <a
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-1"
+                        >
+                          {ref.doi ? `DOI: ${ref.doi}` : "Source"}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
