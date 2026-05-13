@@ -265,42 +265,42 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z1" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Multi-center validation showing workflow time savings</td>
+                    <td className="py-3 text-muted-foreground">Multi-center validation, light QA needed at deployment</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">QA/Monitoring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" implementationBurden="Z0" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Well-validated tool that monitors AI accuracy and ensures safe operation</td>
+                    <td className="py-3 text-muted-foreground">Well-validated, plug-in monitoring with negligible burden</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z2" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Large studies showing time savings and reduced variability</td>
+                    <td className="py-3 text-muted-foreground">Strong evidence but commissioning &amp; site-specific QA required</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" implementationBurden="Z3" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Single-center workflow validation</td>
+                    <td className="py-3 text-muted-foreground">Single-center workflow validation; structured pilot only</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" implementationBurden="Z4" size="sm" showTooltip={false} />
                     </td>
-                    <td className="py-3 text-muted-foreground">Vendor claims only, no demonstrated benefit</td>
+                    <td className="py-3 text-muted-foreground">Vendor claims only, integration effort unknown</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" implementationBurden="Z0" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>
