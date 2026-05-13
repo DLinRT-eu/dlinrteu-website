@@ -277,7 +277,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
         y={p.y}
         textAnchor="middle"
         className="fill-foreground"
-        fontSize={11}
+        fontSize={13}
         fontWeight={600}
       >
         {imp.level}
@@ -294,7 +294,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
         y={p.y + 4}
         textAnchor="end"
         className="fill-foreground"
-        fontSize={11}
+        fontSize={13}
         fontWeight={600}
       >
         {rg.level}
