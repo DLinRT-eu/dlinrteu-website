@@ -33,8 +33,8 @@ const EvidenceImpactGuide = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="Dual-Axis Evidence Classification"
-        description="A methodology separating evidence rigor from clinical impact for evaluating radiotherapy AI products"
+        title="Tri-Axial Evidence & Readiness Classification"
+        description="A tri-axial methodology separating evidence rigor (E), clinical impact (I), and implementation burden (Z) for evaluating radiotherapy AI products"
         canonical="https://dlinrt.eu/evidence-impact-guide"
       />
       
@@ -47,14 +47,17 @@ const EvidenceImpactGuide = () => {
               Back to Resources
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+          <h1 className="text-3xl font-bold mb-2 flex items-center gap-3 flex-wrap">
             <FlaskConical className="h-8 w-8 text-primary" />
             <span>×</span>
             <Target className="h-8 w-8 text-primary" />
-            Dual-Axis Evidence Classification
+            <span>×</span>
+            <Wrench className="h-8 w-8 text-primary" />
+            Tri-Axial Evidence &amp; Readiness Classification
           </h1>
           <p className="text-lg text-muted-foreground">
-            Separating evidence rigor from clinical impact for more nuanced product evaluation
+            Separating evidence rigor (E), clinical impact (I), and implementation burden (Z)
+            for nuanced product evaluation
           </p>
         </div>
 
