@@ -387,9 +387,19 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
       const z = p.implementationBurden;
       if (!e || !i || !z) continue;
       const key = `${e}-${i}-${z}`;
+      const prod: BucketProduct = {
+        id: p.id,
+        name: p.name,
+        company: p.company,
+        category: p.category,
+      };
       const existing = map.get(key);
-      if (existing) existing.count += 1;
-      else map.set(key, { rigor: e, impact: i, burden: z, count: 1 });
+      if (existing) {
+        existing.count += 1;
+        existing.products.push(prod);
+      } else {
+        map.set(key, { rigor: e, impact: i, burden: z, count: 1, products: [prod] });
+      }
     }
     return Array.from(map.values());
   }, [products]);
