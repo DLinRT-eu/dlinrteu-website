@@ -1,4 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useState, useEffect, Suspense } from "react";
+import { Canvas, useFrame, ThreeEvent } from "@react-three/fiber";
+import { OrbitControls, Text, Html, PerspectiveCamera } from "@react-three/drei";
+import * as THREE from "three";
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
@@ -6,49 +9,43 @@ import {
 } from "@/data/evidence-impact-levels";
 import dataService from "@/services/DataService";
 import type { ProductDetails } from "@/types/productDetails";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { RotateCw, RefreshCw, Eye, X } from "lucide-react";
 
 /**
- * Isometric 3D view of the Evidence × Impact × Implementation-Burden matrix.
+ * Real interactive WebGL 3D plot of the Evidence × Impact × Implementation-Burden matrix.
  *
- * Axes:
- *  - X (depth, →↗) : Clinical Impact      I0…I5
- *  - Y (depth, →↖) : Evidence Rigor       E0…E3
- *  - Z (vertical)  : Implementation Burden Z0…Z5  (stacked bars)
+ * Axes (3D world):
+ *  - X : Clinical Impact      I0 → I5
+ *  - Y : Implementation Burden Z0 → Z5  (vertical, height of bars also encodes count)
+ *  - Z : Evidence Rigor       E0 → E3
  *
- * Each (E,I,Z) bucket with ≥1 product is drawn as one isometric cube whose
- * height encodes the product count. Empty cells render as a flat floor tile.
+ * Each (E, I, Z) bucket with ≥1 product → one box.
+ *  - footprint  : 0.8 × 0.8 cell units
+ *  - height     : sqrt(count) (compresses outliers); minimum visible height
+ *  - color      : burden-tier palette
+ *  - hover      : emissive glow + HTML tooltip
+ *  - click      : pin selection in the side panel
  */
 
 interface EvidenceImpactMatrix3DProps {
   products?: ProductDetails[];
 }
 
-// Burden tier hex palette (matches green→rose ramp used elsewhere).
 const Z_COLORS: Record<string, string> = {
-  Z0: "#16a34a", // green-600
-  Z1: "#0d9488", // teal-600
-  Z2: "#eab308", // yellow-500
-  Z3: "#f97316", // orange-500
-  Z4: "#ef4444", // red-500
-  Z5: "#e11d48", // rose-600
+  Z0: "#16a34a",
+  Z1: "#0d9488",
+  Z2: "#eab308",
+  Z3: "#f97316",
+  Z4: "#ef4444",
+  Z5: "#e11d48",
 };
 
-// Geometry constants (SVG units).
-const TILE = 70;                       // base tile side in iso world units
-const COS30 = Math.cos(Math.PI / 6);   // ≈ 0.866
-const SIN30 = Math.sin(Math.PI / 6);   // 0.5
-const UNIT_HEIGHT = 22;                // pixel height per product count
-const MIN_BAR = 14;                    // min bar height when count = 1
-
-const RIGOR = EVIDENCE_RIGOR_LEVELS;                 // E0..E3
-const IMPACT = CLINICAL_IMPACT_LEVELS;               // I0..I5
-const BURDEN = IMPLEMENTATION_BURDEN_LEVELS;         // Z0..Z5
+const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
+const IMPACT = CLINICAL_IMPACT_LEVELS;        // I0..I5
+const BURDEN = IMPLEMENTATION_BURDEN_LEVELS;  // Z0..Z5
 
 interface Bucket {
   rigor: string;
@@ -57,14 +54,322 @@ interface Bucket {
   count: number;
 }
 
-const project = (gx: number, gy: number, gz: number) => ({
-  x: (gx - gy) * TILE * COS30,
-  y: (gx + gy) * TILE * SIN30 - gz,
-});
+// ---------- Bars ----------
+interface BarProps {
+  bucket: Bucket;
+  x: number;
+  z: number;
+  yBase: number;
+  height: number;
+  color: string;
+  selected: boolean;
+  onHover: (b: Bucket | null, screenPos?: { x: number; y: number }) => void;
+  onSelect: (b: Bucket) => void;
+}
 
+const Bar: React.FC<BarProps> = ({ bucket, x, z, yBase, height, color, selected, onHover, onSelect }) => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+
+  const baseColor = useMemo(() => new THREE.Color(color), [color]);
+  const emissive = hovered || selected ? baseColor.clone().multiplyScalar(0.55) : new THREE.Color("#000000");
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={[x, yBase + height / 2, z]}
+      castShadow
+      receiveShadow
+      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
+        e.stopPropagation();
+        setHovered(true);
+        document.body.style.cursor = "pointer";
+        onHover(bucket);
+      }}
+      onPointerOut={(e: ThreeEvent<PointerEvent>) => {
+        e.stopPropagation();
+        setHovered(false);
+        document.body.style.cursor = "auto";
+        onHover(null);
+      }}
+      onClick={(e: ThreeEvent<MouseEvent>) => {
+        e.stopPropagation();
+        onSelect(bucket);
+      }}
+    >
+      <boxGeometry args={[0.78, height, 0.78]} />
+      <meshStandardMaterial
+        color={baseColor}
+        emissive={emissive}
+        roughness={0.4}
+        metalness={0.15}
+        transparent
+        opacity={selected || hovered ? 1 : 0.92}
+      />
+    </mesh>
+  );
+};
+
+// ---------- Floor + grid ----------
+const Floor: React.FC<{ cols: number; rows: number }> = ({ cols, rows }) => {
+  const w = cols + 0.4;
+  const d = rows + 0.4;
+  return (
+    <group position={[(cols - 1) / 2, 0, (rows - 1) / 2]}>
+      {/* Base plane */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <planeGeometry args={[w, d]} />
+        <meshStandardMaterial color="#f1f5f9" roughness={0.95} metalness={0} />
+      </mesh>
+      {/* Cell grid */}
+      <gridHelper
+        args={[Math.max(w, d), Math.max(cols, rows), "#94a3b8", "#cbd5e1"]}
+        position={[0, 0.001, 0]}
+      />
+    </group>
+  );
+};
+
+// ---------- Axis labels ----------
+const AxisLabels: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
+  cols,
+  rows,
+  zHeight,
+}) => {
+  const labelColor = "#1a1a2e";
+  return (
+    <group>
+      {/* X axis: Impact (front edge, z = -0.7) */}
+      {IMPACT.map((imp, i) => (
+        <Text
+          key={`ix-${imp.level}`}
+          position={[i, 0.02, -0.9]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          fontSize={0.32}
+          color={labelColor}
+          anchorX="center"
+          anchorY="middle"
+          fontWeight={700}
+        >
+          {imp.level}
+        </Text>
+      ))}
+      <Text
+        position={[(cols - 1) / 2, 0.02, -1.6]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        fontSize={0.28}
+        color={labelColor}
+        anchorX="center"
+        anchorY="middle"
+      >
+        Clinical Impact (I) →
+      </Text>
+
+      {/* Z axis: Rigor (left edge, x = -0.9) */}
+      {RIGOR.map((r, i) => (
+        <Text
+          key={`rz-${r.level}`}
+          position={[-0.9, 0.02, i]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          fontSize={0.32}
+          color={labelColor}
+          anchorX="center"
+          anchorY="middle"
+          fontWeight={700}
+        >
+          {r.level}
+        </Text>
+      ))}
+      <Text
+        position={[-1.7, 0.02, (rows - 1) / 2]}
+        rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
+        fontSize={0.28}
+        color={labelColor}
+        anchorX="center"
+        anchorY="middle"
+      >
+        Evidence Rigor (E) →
+      </Text>
+
+      {/* Y axis: Burden ruler (back-left corner) */}
+      {BURDEN.map((z, i) => {
+        const y = (i + 0.5) * (zHeight / BURDEN.length);
+        return (
+          <group key={`zy-${z.level}`}>
+            <mesh position={[-0.9, y, rows - 1]}>
+              <boxGeometry args={[0.32, zHeight / BURDEN.length - 0.05, 0.05]} />
+              <meshStandardMaterial color={Z_COLORS[z.level]} roughness={0.5} />
+            </mesh>
+            <Text
+              position={[-1.4, y, rows - 1]}
+              fontSize={0.26}
+              color={labelColor}
+              anchorX="center"
+              anchorY="middle"
+              fontWeight={700}
+            >
+              {z.level}
+            </Text>
+          </group>
+        );
+      })}
+      <Text
+        position={[-2.0, zHeight / 2, rows - 1]}
+        rotation={[0, 0, Math.PI / 2]}
+        fontSize={0.28}
+        color={labelColor}
+        anchorX="center"
+        anchorY="middle"
+      >
+        Implementation Burden (Z) ↑
+      </Text>
+    </group>
+  );
+};
+
+// ---------- Auto-rotate driver ----------
+const AutoRotate: React.FC<{ controlsRef: React.MutableRefObject<any>; enabled: boolean }> = ({
+  controlsRef,
+  enabled,
+}) => {
+  useFrame(() => {
+    if (controlsRef.current) {
+      controlsRef.current.autoRotate = enabled;
+      controlsRef.current.autoRotateSpeed = 0.8;
+      controlsRef.current.update();
+    }
+  });
+  return null;
+};
+
+// ---------- Scene ----------
+interface SceneProps {
+  buckets: Bucket[];
+  showEmpty: boolean;
+  selected: Bucket | null;
+  onHover: (b: Bucket | null) => void;
+  onSelect: (b: Bucket) => void;
+  controlsRef: React.MutableRefObject<any>;
+  autoRotate: boolean;
+}
+
+const Scene: React.FC<SceneProps> = ({
+  buckets,
+  showEmpty,
+  selected,
+  onHover,
+  onSelect,
+  controlsRef,
+  autoRotate,
+}) => {
+  const cols = IMPACT.length;       // 6
+  const rows = RIGOR.length;        // 4
+  const zCount = BURDEN.length;     // 6
+  const zSlot = 1.1;                // vertical units per Z slot
+  const zHeight = zCount * zSlot;
+
+  const maxCount = Math.max(1, ...buckets.map((b) => b.count));
+  const heightFor = (count: number) => {
+    // sqrt scaling so a single big cell doesn't crush the rest.
+    const norm = Math.sqrt(count) / Math.sqrt(maxCount);
+    return Math.max(0.18, norm * (zSlot - 0.15));
+  };
+
+  const renderedBars = useMemo(() => {
+    const out: React.ReactNode[] = [];
+    const byKey = new Map(buckets.map((b) => [`${b.rigor}-${b.impact}-${b.burden}`, b]));
+    for (let r = 0; r < rows; r++) {
+      for (let i = 0; i < cols; i++) {
+        for (let z = 0; z < zCount; z++) {
+          const rigor = RIGOR[r].level;
+          const impact = IMPACT[i].level;
+          const burden = BURDEN[z].level;
+          const key = `${rigor}-${impact}-${burden}`;
+          const bucket = byKey.get(key);
+          const yBase = z * zSlot;
+          if (bucket) {
+            const isSel =
+              selected !== null &&
+              selected.rigor === rigor &&
+              selected.impact === impact &&
+              selected.burden === burden;
+            out.push(
+              <Bar
+                key={key}
+                bucket={bucket}
+                x={i}
+                z={r}
+                yBase={yBase}
+                height={heightFor(bucket.count)}
+                color={Z_COLORS[burden]}
+                selected={isSel}
+                onHover={onHover}
+                onSelect={onSelect}
+              />
+            );
+          } else if (showEmpty) {
+            out.push(
+              <mesh key={`empty-${key}`} position={[i, yBase + 0.04, r]}>
+                <boxGeometry args={[0.78, 0.04, 0.78]} />
+                <meshStandardMaterial
+                  color={Z_COLORS[burden]}
+                  transparent
+                  opacity={0.18}
+                  roughness={0.9}
+                />
+              </mesh>
+            );
+          }
+        }
+      }
+    }
+    return out;
+  }, [buckets, showEmpty, selected, maxCount]);
+
+  return (
+    <>
+      <ambientLight intensity={0.7} />
+      <directionalLight
+        position={[8, 14, 8]}
+        intensity={0.9}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+      />
+      <directionalLight position={[-6, 8, -4]} intensity={0.35} />
+
+      <Floor cols={cols} rows={rows} />
+      <AxisLabels cols={cols} rows={rows} zHeight={zHeight} />
+
+      {renderedBars}
+
+      <PerspectiveCamera makeDefault position={[cols * 1.4, zHeight * 1.6, rows * 2.4]} fov={42} />
+      <OrbitControls
+        ref={controlsRef}
+        target={[(cols - 1) / 2, zHeight / 3, (rows - 1) / 2]}
+        enablePan
+        enableZoom
+        enableRotate
+        minDistance={6}
+        maxDistance={28}
+        maxPolarAngle={Math.PI / 2.05}
+      />
+      <AutoRotate controlsRef={controlsRef} enabled={autoRotate} />
+    </>
+  );
+};
+
+// ---------- Main exported component ----------
 const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ products }) => {
-  // Aggregate product counts by (E, I, Z).
-  const buckets = useMemo<Map<string, Bucket>>(() => {
+  const isMobile = useIsMobile();
+  const controlsRef = useRef<any>(null);
+  const [hovered, setHovered] = useState<Bucket | null>(null);
+  const [selected, setSelected] = useState<Bucket | null>(null);
+  const [showEmpty, setShowEmpty] = useState(false);
+  const [autoRotate, setAutoRotate] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
+
+  const buckets = useMemo<Bucket[]>(() => {
     const map = new Map<string, Bucket>();
     const source = products ?? dataService.getAllProducts();
     for (const p of source) {
@@ -77,315 +382,175 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
       if (existing) existing.count += 1;
       else map.set(key, { rigor: e, impact: i, burden: z, count: 1 });
     }
-    return map;
+    return Array.from(map.values());
   }, [products]);
 
-  const totalClassified = useMemo(
-    () => Array.from(buckets.values()).reduce((s, b) => s + b.count, 0),
-    [buckets]
-  );
+  const totalClassified = useMemo(() => buckets.reduce((s, b) => s + b.count, 0), [buckets]);
 
-  // Bounds for viewBox.
-  const cols = IMPACT.length;
-  const rows = RIGOR.length;
-  const corners = [
-    project(0, 0, 0),
-    project(cols, 0, 0),
-    project(0, rows, 0),
-    project(cols, rows, 0),
-  ];
-  // Account for tallest possible stack (all 6 burden levels at max count).
-  const maxCount = Math.max(1, ...Array.from(buckets.values()).map((b) => b.count));
-  const maxStackHeight = BURDEN.length * (maxCount * UNIT_HEIGHT + 4);
-  const minX = Math.min(...corners.map((c) => c.x)) - TILE;
-  const maxX = Math.max(...corners.map((c) => c.x)) + TILE;
-  const minY = Math.min(...corners.map((c) => c.y)) - maxStackHeight - TILE;
-  const maxY = Math.max(...corners.map((c) => c.y)) + TILE;
-  const vbW = maxX - minX;
-  const vbH = maxY - minY;
+  // When products change, drop stale selection.
+  useEffect(() => {
+    setSelected(null);
+    setHovered(null);
+  }, [products]);
 
-  // Build draw list: floor tiles first, then cubes (back-to-front for painters' algorithm).
-  type DrawItem =
-    | { kind: "tile"; gx: number; gy: number; rigor: string; impact: string; total: number }
-    | { kind: "cube"; gx: number; gy: number; gzBase: number; height: number; bucket: Bucket };
+  const resetView = () => setResetKey((k) => k + 1);
 
-  const items: DrawItem[] = [];
-
-  for (let ri = 0; ri < rows; ri++) {
-    for (let ci = 0; ci < cols; ci++) {
-      const rigor = RIGOR[ri].level;
-      const impact = IMPACT[ci].level;
-      let total = 0;
-      for (const b of buckets.values()) {
-        if (b.rigor === rigor && b.impact === impact) total += b.count;
+  const detail = selected ?? hovered;
+  const detailMeta = detail
+    ? {
+        rigor: RIGOR.find((r) => r.level === detail.rigor),
+        impact: IMPACT.find((i) => i.level === detail.impact),
+        burden: BURDEN.find((b) => b.level === detail.burden),
       }
-      items.push({ kind: "tile", gx: ci, gy: ri, rigor, impact, total });
-
-      // Stack cubes Z0 (bottom) → Z5 (top).
-      let gzCursor = 0;
-      for (const z of BURDEN) {
-        const key = `${rigor}-${impact}-${z.level}`;
-        const b = buckets.get(key);
-        if (!b) continue;
-        const h = Math.max(MIN_BAR, b.count * UNIT_HEIGHT);
-        items.push({
-          kind: "cube",
-          gx: ci,
-          gy: ri,
-          gzBase: gzCursor,
-          height: h,
-          bucket: b,
-        });
-        gzCursor += h + 2;
-      }
-    }
-  }
-
-  // Sort: tiles first (already in order), cubes by depth (back to front).
-  // Back-most cell has smallest gx + gy. Higher z drawn last within a column.
-  const cubes = items.filter((i) => i.kind === "cube") as Extract<DrawItem, { kind: "cube" }>[];
-  const tiles = items.filter((i) => i.kind === "tile") as Extract<DrawItem, { kind: "tile" }>[];
-  // Tiles: paint farthest first.
-  tiles.sort((a, b) => a.gx + a.gy - (b.gx + b.gy));
-  cubes.sort((a, b) => {
-    const d = a.gx + a.gy - (b.gx + b.gy);
-    if (d !== 0) return d;
-    return a.gzBase - b.gzBase;
-  });
-
-  // Helpers to draw an isometric cube at grid (gx, gy), base z = gzBase, height h.
-  const renderCube = (
-    gx: number,
-    gy: number,
-    gzBase: number,
-    h: number,
-    color: string,
-    key: string,
-    bucket: Bucket
-  ) => {
-    // 8 corners of a unit-tile-footprint cuboid.
-    const bf = project(gx, gy, gzBase);              // back/far bottom (origin corner)
-    const br = project(gx + 1, gy, gzBase);          // bottom right (towards +X)
-    const bl = project(gx, gy + 1, gzBase);          // bottom left (towards +Y)
-    const bn = project(gx + 1, gy + 1, gzBase);      // bottom near
-    const tf = project(gx, gy, gzBase + h);
-    const tr = project(gx + 1, gy, gzBase + h);
-    const tl = project(gx, gy + 1, gzBase + h);
-    const tn = project(gx + 1, gy + 1, gzBase + h);
-
-    const top = `${tf.x},${tf.y} ${tr.x},${tr.y} ${tn.x},${tn.y} ${tl.x},${tl.y}`;
-    const right = `${br.x},${br.y} ${bn.x},${bn.y} ${tn.x},${tn.y} ${tr.x},${tr.y}`;
-    const left = `${bl.x},${bl.y} ${bn.x},${bn.y} ${tn.x},${tn.y} ${tl.x},${tl.y}`;
-
-    const burdenMeta = BURDEN.find((z) => z.level === bucket.burden);
-    const rigorMeta = RIGOR.find((r) => r.level === bucket.rigor);
-    const impactMeta = IMPACT.find((i) => i.level === bucket.impact);
-
-    return (
-      <TooltipProvider key={key} delayDuration={100}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <g className="cursor-pointer transition-opacity hover:opacity-80">
-              {/* Right (darker) */}
-              <polygon points={right} fill={color} fillOpacity={0.55} stroke={color} strokeWidth={0.5} />
-              {/* Left (medium) */}
-              <polygon points={left} fill={color} fillOpacity={0.75} stroke={color} strokeWidth={0.5} />
-              {/* Top (lightest) */}
-              <polygon points={top} fill={color} fillOpacity={0.95} stroke="#ffffff" strokeWidth={0.6} />
-            </g>
-          </TooltipTrigger>
-          <TooltipContent side="top" className="max-w-xs">
-            <div className="space-y-1">
-              <div className="font-medium text-sm">
-                {bucket.rigor} / {bucket.impact} / {bucket.burden}
-              </div>
-              <div className="text-xs">
-                <span className="text-muted-foreground">Products:</span>{" "}
-                <span className="font-semibold">{bucket.count}</span>
-              </div>
-              {rigorMeta && (
-                <div className="text-xs">
-                  <span className="text-muted-foreground">Rigor:</span> {rigorMeta.name}
-                </div>
-              )}
-              {impactMeta && (
-                <div className="text-xs">
-                  <span className="text-muted-foreground">Impact:</span> {impactMeta.name}
-                </div>
-              )}
-              {burdenMeta && (
-                <div className="text-xs pt-1 border-t">
-                  <span className="text-muted-foreground">Burden:</span> {burdenMeta.name}
-                  <div className="text-[11px] text-muted-foreground italic mt-0.5">
-                    {burdenMeta.readinessConsequence}
-                  </div>
-                </div>
-              )}
-            </div>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-  };
-
-  const renderTile = (
-    gx: number,
-    gy: number,
-    rigor: string,
-    impact: string,
-    total: number,
-    key: string
-  ) => {
-    const a = project(gx, gy, 0);
-    const b = project(gx + 1, gy, 0);
-    const c = project(gx + 1, gy + 1, 0);
-    const d = project(gx, gy + 1, 0);
-    const points = `${a.x},${a.y} ${b.x},${b.y} ${c.x},${c.y} ${d.x},${d.y}`;
-    return (
-      <TooltipProvider key={key} delayDuration={150}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <polygon
-              points={points}
-              fill="hsl(var(--muted))"
-              fillOpacity={total > 0 ? 0.35 : 0.15}
-              stroke="hsl(var(--border))"
-              strokeWidth={0.6}
-              className="cursor-pointer"
-            />
-          </TooltipTrigger>
-          <TooltipContent side="top">
-            <div className="text-xs">
-              <span className="font-medium">
-                {rigor} / {impact}
-              </span>{" "}
-              — {total} product{total === 1 ? "" : "s"}
-            </div>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-  };
-
-  // Axis labels at the back edges.
-  const impactLabels = IMPACT.map((imp, i) => {
-    const p = project(i + 0.5, -0.4, 0);
-    return (
-      <text
-        key={`il-${imp.level}`}
-        x={p.x}
-        y={p.y}
-        textAnchor="middle"
-        className="fill-foreground"
-        fontSize={13}
-        fontWeight={600}
-      >
-        {imp.level}
-      </text>
-    );
-  });
-
-  const rigorLabels = RIGOR.map((rg, i) => {
-    const p = project(-0.4, i + 0.5, 0);
-    return (
-      <text
-        key={`rl-${rg.level}`}
-        x={p.x}
-        y={p.y + 4}
-        textAnchor="end"
-        className="fill-foreground"
-        fontSize={13}
-        fontWeight={600}
-      >
-        {rg.level}
-      </text>
-    );
-  });
-
-  // Z-axis ruler at far back-left corner.
-  const zRuler = BURDEN.map((z, idx) => {
-    const yOffset = idx * 22 + 12;
-    const p = project(0, rows + 0.1, yOffset);
-    return (
-      <g key={`zr-${z.level}`}>
-        <rect
-          x={p.x - 26}
-          y={p.y - 7}
-          width={20}
-          height={12}
-          rx={2}
-          fill={Z_COLORS[z.level]}
-          fillOpacity={0.85}
-        />
-        <text
-          x={p.x - 16}
-          y={p.y + 2}
-          textAnchor="middle"
-          fontSize={9}
-          fontWeight={700}
-          fill="#ffffff"
-        >
-          {z.level}
-        </text>
-      </g>
-    );
-  });
+    : null;
 
   return (
     <div className="w-full">
-      <div className="overflow-x-auto w-full">
-        <svg
-          viewBox={`${minX} ${minY} ${vbW} ${vbH}`}
-          className="w-full h-auto block mx-auto"
-          style={{ minHeight: 520, maxHeight: 760 }}
-          preserveAspectRatio="xMidYMid meet"
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <Button variant="outline" size="sm" onClick={resetView} className="h-8 text-xs">
+            <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+            Reset view
+          </Button>
+          <Toggle
+            pressed={autoRotate}
+            onPressedChange={setAutoRotate}
+            size="sm"
+            variant="outline"
+            className="h-8 text-xs"
+            aria-label="Auto-rotate"
+          >
+            <RotateCw className="h-3.5 w-3.5 mr-1.5" />
+            Auto-rotate
+          </Toggle>
+          <Toggle
+            pressed={showEmpty}
+            onPressedChange={setShowEmpty}
+            size="sm"
+            variant="outline"
+            className="h-8 text-xs"
+            aria-label="Show empty cells"
+          >
+            <Eye className="h-3.5 w-3.5 mr-1.5" />
+            Empty cells
+          </Toggle>
+        </div>
+        <div className="text-xs text-muted-foreground">
+          Drag to rotate · scroll to zoom · right-drag to pan
+        </div>
+      </div>
+
+      {/* Canvas + side panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-3">
+        <div
+          className="relative w-full rounded-lg border bg-gradient-to-b from-background to-muted/30 overflow-hidden"
+          style={{ minHeight: isMobile ? 440 : 620 }}
         >
-          {/* Floor tiles */}
-          {tiles.map((t) =>
-            renderTile(t.gx, t.gy, t.rigor, t.impact, t.total, `t-${t.rigor}-${t.impact}`)
-          )}
-          {/* Axis labels */}
-          {impactLabels}
-          {rigorLabels}
-          {/* Z ruler swatches */}
-          {zRuler}
-          {/* Cubes */}
-          {cubes.map((c) =>
-            renderCube(
-              c.gx,
-              c.gy,
-              c.gzBase,
-              c.height,
-              Z_COLORS[c.bucket.burden],
-              `c-${c.bucket.rigor}-${c.bucket.impact}-${c.bucket.burden}`,
-              c.bucket
-            )
-          )}
-        </svg>
-      </div>
+          <Canvas
+            key={resetKey}
+            shadows
+            dpr={isMobile ? [1, 1.5] : [1, 2]}
+            gl={{ antialias: true, alpha: true }}
+            style={{ width: "100%", height: "100%", minHeight: isMobile ? 440 : 620 }}
+          >
+            <Suspense fallback={null}>
+              <Scene
+                buckets={buckets}
+                showEmpty={showEmpty}
+                selected={selected}
+                onHover={setHovered}
+                onSelect={setSelected}
+                controlsRef={controlsRef}
+                autoRotate={autoRotate}
+              />
+            </Suspense>
+          </Canvas>
 
-      {/* Legend */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-        <span className="font-medium text-foreground">Burden (Z) ramp:</span>
-        {BURDEN.map((z) => (
-          <span key={z.level} className="inline-flex items-center gap-1.5">
-            <span
-              className="inline-block w-3 h-3 rounded-sm"
-              style={{ backgroundColor: Z_COLORS[z.level] }}
-            />
-            <span>
-              {z.level} — {z.name}
-            </span>
-          </span>
-        ))}
-      </div>
+          {/* Floating hover/selected pill in canvas corner (always visible) */}
+          {detail && detailMeta && (
+            <div className="absolute top-3 left-3 max-w-[280px] rounded-md border bg-background/95 backdrop-blur px-3 py-2 shadow-md text-xs">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-semibold">
+                  {detail.rigor} / {detail.impact} / {detail.burden}
+                </span>
+                {selected && (
+                  <button
+                    onClick={() => setSelected(null)}
+                    className="text-muted-foreground hover:text-foreground"
+                    aria-label="Clear selection"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                )}
+              </div>
+              <div className="mt-1">
+                <span className="text-muted-foreground">Products:</span>{" "}
+                <span className="font-semibold text-primary">{detail.count}</span>
+              </div>
+            </div>
+          )}
+        </div>
 
-      <p className="mt-3 text-xs text-muted-foreground">
-        Bar height encodes product count at each (Evidence rigor, Clinical impact, Implementation burden) bucket.
-        Stacks read bottom-up Z0 → Z5. {totalClassified} product
-        {totalClassified === 1 ? "" : "s"} with all three axes classified are shown; products missing any axis are excluded.
-        Hover any cube for details.
-      </p>
+        {/* Side panel */}
+        <aside className="rounded-lg border bg-card p-3 text-xs space-y-3">
+          <div>
+            <div className="font-semibold text-sm mb-1">
+              {detail ? "Bucket details" : "Burden axis (Z)"}
+            </div>
+            {detail && detailMeta ? (
+              <div className="space-y-2">
+                <div className="text-muted-foreground">
+                  <span className="font-medium text-foreground">Rigor:</span> {detailMeta.rigor?.name}
+                </div>
+                <div className="text-muted-foreground">
+                  <span className="font-medium text-foreground">Impact:</span>{" "}
+                  {detailMeta.impact?.name}
+                </div>
+                <div className="text-muted-foreground">
+                  <span className="font-medium text-foreground">Burden:</span>{" "}
+                  {detailMeta.burden?.name}
+                </div>
+                {detailMeta.burden && (
+                  <div className="pt-2 border-t text-muted-foreground italic">
+                    {detailMeta.burden.readinessConsequence}
+                  </div>
+                )}
+                <div className="pt-2 border-t">
+                  <span className="text-muted-foreground">Products in this bucket:</span>{" "}
+                  <span className="font-semibold text-primary">{detail.count}</span>
+                </div>
+              </div>
+            ) : (
+              <p className="text-muted-foreground">
+                Hover or click a bar for details. Bar height encodes product count
+                (square-root scaled).
+              </p>
+            )}
+          </div>
+
+          <div className="pt-2 border-t">
+            <div className="font-semibold mb-1.5">Burden palette</div>
+            <ul className="space-y-1">
+              {BURDEN.map((z) => (
+                <li key={z.level} className="flex items-center gap-2">
+                  <span
+                    className="inline-block w-3 h-3 rounded-sm flex-shrink-0"
+                    style={{ backgroundColor: Z_COLORS[z.level] }}
+                  />
+                  <span className="font-medium">{z.level}</span>
+                  <span className="text-muted-foreground truncate">{z.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="pt-2 border-t text-muted-foreground">
+            {totalClassified} product{totalClassified === 1 ? "" : "s"} with all three axes
+            classified are shown. Products missing any axis are excluded.
+          </div>
+        </aside>
+      </div>
     </div>
   );
 };
