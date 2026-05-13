@@ -4,7 +4,7 @@ import {
   CLINICAL_IMPACT_LEVELS,
   IMPLEMENTATION_BURDEN_LEVELS,
 } from "@/data/evidence-impact-levels";
-import { dataService } from "@/services/DataService";
+import dataService from "@/services/DataService";
 import {
   Tooltip,
   TooltipContent,
