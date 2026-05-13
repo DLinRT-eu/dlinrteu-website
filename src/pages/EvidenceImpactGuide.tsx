@@ -21,6 +21,7 @@ import {
   CLINICAL_IMPACT_LEVELS,
   IMPLEMENTATION_BURDEN_LEVELS,
   EVIDENCE_IMPACT_REFERENCE,
+  METHODOLOGY_REFERENCES,
   getEvidenceRigorColor,
   getClinicalImpactColor,
   getImplementationBurdenColor,
