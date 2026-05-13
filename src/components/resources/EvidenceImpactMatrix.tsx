@@ -83,16 +83,47 @@ const EvidenceImpactMatrix = ({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <FlaskConical className="h-5 w-5 text-primary" />
-            <span>×</span>
-            <Target className="h-5 w-5 text-primary" />
-          </div>
-          Evidence-Impact Matrix
-        </CardTitle>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <FlaskConical className="h-5 w-5 text-primary" />
+              <span>×</span>
+              <Target className="h-5 w-5 text-primary" />
+              {view === "3d" && (
+                <>
+                  <span>×</span>
+                  <Box className="h-5 w-5 text-primary" />
+                </>
+              )}
+            </div>
+            Evidence-Impact Matrix
+            {view === "3d" && (
+              <span className="text-xs font-normal text-muted-foreground ml-1">
+                + Implementation Burden (Z)
+              </span>
+            )}
+          </CardTitle>
+          <ToggleGroup
+            type="single"
+            size="sm"
+            value={view}
+            onValueChange={(v) => v && setView(v as "2d" | "3d")}
+            className="border rounded-md"
+          >
+            <ToggleGroupItem value="2d" aria-label="2D view" className="text-xs px-3">
+              2D
+            </ToggleGroupItem>
+            <ToggleGroupItem value="3d" aria-label="3D view" className="text-xs px-3">
+              3D
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </div>
       </CardHeader>
       <CardContent>
+        {view === "3d" ? (
+          <EvidenceImpactMatrix3D />
+        ) : (
+        <>
         {/* Matrix Grid */}
         <div className="overflow-x-auto">
           <div className="min-w-[600px]">
