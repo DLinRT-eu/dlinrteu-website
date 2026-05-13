@@ -418,11 +418,11 @@ const Scene: React.FC<SceneProps> = ({
       <directionalLight position={[-6, 8, -4]} intensity={0.35} />
 
       <Floor cols={cols} rows={rows} />
-      <AxisLabels cols={cols} rows={rows} zHeight={zHeight} />
+      <Axes cols={cols} rows={rows} zHeight={zHeight} />
 
       {renderedBars}
 
-      <PerspectiveCamera makeDefault position={[cols * 1.4, zHeight * 1.6, rows * 2.4]} fov={42} />
+      <PerspectiveCamera makeDefault position={[cols * 1.7, zHeight * 1.1, rows * 2.6]} fov={40} />
       <OrbitControls
         ref={controlsRef}
         target={[(cols - 1) / 2, zHeight / 3, (rows - 1) / 2]}
