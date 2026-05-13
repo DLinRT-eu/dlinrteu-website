@@ -225,8 +225,7 @@ const EvidenceImpactGuide = () => {
                 <li><strong>Blocked</strong> — Z5 (horizon scanning only).</li>
               </ul>
               <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
-                Adapted from Bellini et al. (2023) third translational-effort axis; readiness consequences from
-                Table 2C of the DLinRT.eu Evidence Matrix proposal (Lula &amp; Kamath, 2026).
+                Internally proposed DLinRT extension; readiness consequences derived from the DLinRT.eu Evidence Matrix proposal.
               </p>
             </div>
           </CardContent>
