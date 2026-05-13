@@ -536,10 +536,49 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                   </div>
                 )}
                 <div className="pt-2 border-t">
-                  <span className="text-muted-foreground">Products in this bucket:</span>{" "}
-                  <span className="font-semibold text-primary">{detail.count}</span>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-muted-foreground">
+                      Products{" "}
+                      <span className="font-semibold text-primary">({detail.count})</span>
+                    </span>
+                    {selected && (
+                      <button
+                        onClick={() => setSelected(null)}
+                        className="text-[10px] text-muted-foreground hover:text-foreground underline"
+                      >
+                        clear
+                      </button>
+                    )}
+                  </div>
+                  {selected ? (
+                    <ul className="max-h-64 overflow-auto pr-1 space-y-1.5">
+                      {detail.products.map((prod) => (
+                        <li key={prod.id}>
+                          <Link
+                            to={`/products/${prod.id}`}
+                            className="group block rounded-md border border-transparent hover:border-border hover:bg-muted/50 px-2 py-1.5 transition-colors"
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <span className="font-medium text-foreground group-hover:text-primary line-clamp-2">
+                                {prod.name}
+                              </span>
+                              <ExternalLink className="h-3 w-3 mt-0.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100" />
+                            </div>
+                            {(prod.company || prod.category) && (
+                              <div className="text-[10px] text-muted-foreground mt-0.5">
+                                {[prod.company, prod.category].filter(Boolean).join(" · ")}
+                              </div>
+                            )}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-[11px] text-muted-foreground italic">
+                      Click the bar to list products in this bucket.
+                    </p>
+                  )}
                 </div>
-              </div>
             ) : (
               <p className="text-muted-foreground">
                 Hover or click a bar for details. Bar height encodes product count
