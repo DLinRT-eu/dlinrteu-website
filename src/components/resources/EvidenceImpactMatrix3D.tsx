@@ -5,6 +5,7 @@ import {
   IMPLEMENTATION_BURDEN_LEVELS,
 } from "@/data/evidence-impact-levels";
 import dataService from "@/services/DataService";
+import type { ProductDetails } from "@/types/productDetails";
 import {
   Tooltip,
   TooltipContent,
@@ -24,6 +25,10 @@ import {
  * height encodes the product count. Empty cells render as a flat floor tile.
  */
 
+interface EvidenceImpactMatrix3DProps {
+  products?: ProductDetails[];
+}
+
 // Burden tier hex palette (matches green→rose ramp used elsewhere).
 const Z_COLORS: Record<string, string> = {
   Z0: "#16a34a", // green-600
@@ -35,11 +40,11 @@ const Z_COLORS: Record<string, string> = {
 };
 
 // Geometry constants (SVG units).
-const TILE = 44;                       // base tile side in iso world units
+const TILE = 70;                       // base tile side in iso world units
 const COS30 = Math.cos(Math.PI / 6);   // ≈ 0.866
 const SIN30 = Math.sin(Math.PI / 6);   // 0.5
-const UNIT_HEIGHT = 14;                // pixel height per product count
-const MIN_BAR = 10;                    // min bar height when count = 1
+const UNIT_HEIGHT = 22;                // pixel height per product count
+const MIN_BAR = 14;                    // min bar height when count = 1
 
 const RIGOR = EVIDENCE_RIGOR_LEVELS;                 // E0..E3
 const IMPACT = CLINICAL_IMPACT_LEVELS;               // I0..I5
