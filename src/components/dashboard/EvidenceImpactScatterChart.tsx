@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getTaskColor } from '@/utils/chartColors';
@@ -12,6 +12,8 @@ import {
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
 import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import EvidenceImpactMatrix3D from "@/components/resources/EvidenceImpactMatrix3D";
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
