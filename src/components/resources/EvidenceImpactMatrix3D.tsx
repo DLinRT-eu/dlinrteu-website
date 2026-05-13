@@ -218,11 +218,10 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
 
   return (
     <group>
-      {/* === E axis (Evidence rigor) — front edge, runs along X === */}
+      {/* === I axis (Clinical impact) — front edge, runs along X (length = cols) === */}
       <AxisLine from={[leftX, 0, frontZ]} to={[rightX, 0, frontZ]} />
-      {RIGOR.map((r, i) => (
-        <group key={`e-${r.level}`}>
-          {/* tick */}
+      {IMPACT.map((imp, i) => (
+        <group key={`i-${imp.level}`}>
           <mesh position={[i, 0, frontZ + 0.08]}>
             <boxGeometry args={[0.04, 0.04, 0.12]} />
             <meshBasicMaterial color={labelColor} />
@@ -233,7 +232,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
             rotation={[-Math.PI / 2, 0, 0]}
             fontWeight={700}
           >
-            {r.level}
+            {imp.level}
           </Text>
         </group>
       ))}
@@ -243,24 +242,24 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
         rotation={[-Math.PI / 2, 0, 0]}
         fontSize={0.34}
       >
-        Evidence rigour (E-axis) →
+        Clinical impact (I-axis) →
       </Text>
 
-      {/* === I axis (Clinical impact) — right edge, runs along Z === */}
+      {/* === E axis (Evidence rigour) — right edge, runs along Z (length = rows) === */}
       <AxisLine from={[rightX, 0, frontZ]} to={[rightX, 0, backZ]} />
-      {IMPACT.map((imp, i) => (
-        <group key={`i-${imp.level}`}>
-          <mesh position={[rightX + 0.08, 0, rows - 1 - i]}>
+      {RIGOR.map((r, i) => (
+        <group key={`e-${r.level}`}>
+          <mesh position={[rightX + 0.08, 0, i]}>
             <boxGeometry args={[0.12, 0.04, 0.04]} />
             <meshBasicMaterial color={labelColor} />
           </mesh>
           <Text
             {...tickProps}
-            position={[rightX + 0.5, 0.01, rows - 1 - i]}
+            position={[rightX + 0.5, 0.01, i]}
             rotation={[-Math.PI / 2, 0, 0]}
             fontWeight={700}
           >
-            {imp.level}
+            {r.level}
           </Text>
         </group>
       ))}
@@ -270,7 +269,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
         rotation={[-Math.PI / 2, 0, Math.PI / 2]}
         fontSize={0.34}
       >
-        Clinical impact (I-axis) →
+        Evidence rigour (E-axis) →
       </Text>
 
       {/* === Z axis (Implementation burden) — vertical at back-right corner === */}
