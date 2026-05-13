@@ -1,32 +1,39 @@
-## Goal
+## Plan: Fix Supabase Data API Grants
 
-Make the 3D Evidence × Impact × Burden plot in `src/components/resources/EvidenceImpactMatrix3D.tsx` look closer to the reference figure: three clean axis lines along the bottom-front and back-left corner with tick labels and an axis title on each, viewed from a standard isometric-front angle so all three axis legends are simultaneously readable. Keep the existing colored bars (no continuous surface).
+### Problem
+Supabase is changing default behavior: after Oct 30, tables in the `public` schema will no longer implicitly expose Data API access. The `authenticated` role must hold explicit base table privileges (`SELECT`, `INSERT`, etc.) before PostgREST will even evaluate RLS policies. 
 
-## Changes (single file: `EvidenceImpactMatrix3D.tsx`)
+I audited the project's ACLs. **~15 tables** are missing required `authenticated` grants while their RLS policies would otherwise allow access. This will cause `42501` errors when the change takes effect.
 
-### 1. New `Axes` component (replaces current `AxisLabels` placement)
-Render three explicit axis lines as thin `<mesh>` boxes (or `<Line>` from drei) in dark slate (`#1a1a2e`):
+### Solution
+A single migration that:
 
-- **E axis (Evidence Rigor)** — runs along the front-left edge in the X/Z plane. Place tick labels `E-1, E0, E1, E2, E3` flat on the floor under each row. Title `Evidence rigour (E-axis) →` rotated to follow the axis direction.
-- **I axis (Clinical Impact)** — runs along the front-right edge. Tick labels `I-1, I0, I1, I2, I3, I4, I5` under each column. Title `Clinical impact (I-axis) →`.
-- **Z axis (Implementation burden)** — vertical, anchored at the back-right corner where E and I meet. Tick labels `Z0 low … Z5 high` to the right of the axis. Title `Implementation effort / assurance burden (Z-axis) ↑` rotated +90° around Z.
+1. **Adds explicit `GRANT` statements** for every table that the frontend accesses via `supabase-js`, matching what the existing RLS policies already allow:
+   - `review_checklist_items` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+   - `review_comments` — missing `SELECT`, `INSERT`
+   - `review_rounds` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+   - `review_round_stats` — missing `SELECT`
+   - `profile_documents` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+   - `profile_document_access_log` — missing `SELECT`
+   - `assignment_history` — missing `UPDATE`, `DELETE`
+   - `product_feedback` — missing `SELECT`
+   - `reminder_settings` — missing `SELECT`
+   - `github_file_checks` — missing `SELECT`
+   - `certification_reminder_logs` — missing `SELECT`
+   - `reviewer_invitations` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+   - `role_change_log` — missing `SELECT`
 
-All three titles styled like the reference (small caps-ish weight, dark slate). Use existing `Text` from `@react-three/drei` with `outlineWidth={0.01}` `outlineColor="#ffffff"` for legibility.
+2. **Adds `GRANT SELECT` to `anon`** on tables with public-read RLS policies (e.g. `changelog_entries`, `changelog_links`) so unauthenticated visitors can read them.
 
-### 2. Cleaner floor / no continuous surface
-- Remove the gray plane fill; keep only a subtle grid (`gridHelper`) in light slate (`#e2e8f0`) so the bars sit on a neutral lattice. No continuous color surface.
-- Drop the per-Z-slot color ruler bars on the side (we now have a real Z axis).
+3. **Ensures `service_role` retains full access** on every table (already mostly true, but we will make it explicit and future-proof).
 
-### 3. Default camera orientation
-- Set `PerspectiveCamera` position to roughly `[cols * 1.6, zHeight * 1.2, rows * 2.0]` and `target` slightly above floor center so the front-left (E) and front-right (I) axes are both unobstructed and the Z axis rises clearly on the back-right — matching the reference's three-quarter view.
-- Keep `OrbitControls` interactive but persist this orientation on Reset view.
+4. **Verifies default privileges** are configured for any *future* tables created by `postgres` or `supabase_admin` in the `public` schema, so this issue does not recur.
 
-### 4. Minor polish
-- Bars: keep current colored boxes and hover/select behavior unchanged.
-- Add faint axis tick marks (small dark cubes) at each integer to reinforce the figure look.
-- Remove the now-redundant secondary axis title that previously floated above the Z color ruler.
+### What will NOT change
+- Edge-function-only tables (`analytics_*`, `contact_submissions`, `mfa_*`, `newsletter_subscribers`, `security_events`) remain service_role-only.
+- No RLS policies are modified.
+- No table data is changed.
+- The migration is additive only (GRANTs), zero risk of data loss.
 
-## Out of scope
-- No continuous surface / iso-surface plot.
-- No data-model or product-link changes.
-- No edits outside `EvidenceImpactMatrix3D.tsx`.
+### After the migration
+I will run a verification query to confirm every actively-used table has the correct `authenticated` and `anon` base privileges.
