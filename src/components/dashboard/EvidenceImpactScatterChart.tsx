@@ -239,6 +239,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         <p className="mt-3 text-sm text-muted-foreground text-center">
           Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
         </p>
+        </>
+        )}
       </CardContent>
     </Card>
   );
