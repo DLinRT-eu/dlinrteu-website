@@ -95,12 +95,17 @@ const ResourcesCompliance = () => {
             <h3 className="text-xl text-muted-foreground mb-8">
               Evaluating scientific evidence for radiotherapy AI
             </h3>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-muted-foreground mb-4 leading-relaxed">
               We classify products using a dual-axis system adapted from van Leeuwen et al. (2021, updated 2025), 
               separating <strong>evidence rigor</strong> (E0–E3) from <strong>clinical impact</strong> (I0–I5). 
-              The clinical impact axis is cross-referenced with the Fryback & Thornbury hierarchy of diagnostic efficacy (1991). 
+              The clinical impact axis is cross-referenced with the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991). 
               Each product is further assessed on five granular study quality sub-attributes — vendor independence, 
               multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
+            </p>
+            <p className="text-muted-foreground mb-8 leading-relaxed">
+              As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Implementation &amp; Assurance Burden (Z0–Z5)</strong> — 
+              capturing the residual effort required for clinical adoption (commissioning, local validation, workflow redesign, monitoring, governance).
+              Lower Z indicates higher readiness. Toggle the visualisation below between <strong>2D</strong> (Rigor × Impact) and <strong>3D</strong> (Rigor × Impact × Burden) to explore the full E/I/Z framework.
             </p>
             
             {/* Pyramid Visualization */}
