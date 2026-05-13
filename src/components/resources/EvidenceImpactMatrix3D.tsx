@@ -333,11 +333,11 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
 
   return (
     <div className="w-full">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto w-full">
         <svg
           viewBox={`${minX} ${minY} ${vbW} ${vbH}`}
-          className="w-full h-auto"
-          style={{ minHeight: 420, maxHeight: 560 }}
+          className="w-full h-auto block mx-auto"
+          style={{ minHeight: 520, maxHeight: 760 }}
           preserveAspectRatio="xMidYMid meet"
         >
           {/* Floor tiles */}
