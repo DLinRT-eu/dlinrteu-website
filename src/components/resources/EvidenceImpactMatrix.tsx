@@ -284,6 +284,8 @@ const EvidenceImpactMatrix = ({
           I0 indicates no benefit demonstrated yet; I1 recognizes QA tools that ensure safe AI use. 
           Hover over cells for details.
         </p>
+        </>
+        )}
       </CardContent>
     </Card>
   );
