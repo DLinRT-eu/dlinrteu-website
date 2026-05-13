@@ -48,11 +48,19 @@ const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
 const IMPACT = CLINICAL_IMPACT_LEVELS;        // I0..I5
 const BURDEN = IMPLEMENTATION_BURDEN_LEVELS;  // Z0..Z5
 
+interface BucketProduct {
+  id: string;
+  name: string;
+  company?: string;
+  category?: string;
+}
+
 interface Bucket {
   rigor: string;
   impact: string;
   burden: string;
   count: number;
+  products: BucketProduct[];
 }
 
 // ---------- Bars ----------
