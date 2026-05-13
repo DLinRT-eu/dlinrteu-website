@@ -57,6 +57,7 @@ type CellMap = Record<string, CellProduct[]>;
 const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({ filteredProducts }) => {
   const { chartRef, exportToPng } = useChartExport('chart-evidence-impact');
   const isMobile = useIsMobile();
+  const [view, setView] = useState<"2d" | "3d">("2d");
 
   const { cellMap, totalCount, categories } = useMemo(() => {
     const map: CellMap = {};
