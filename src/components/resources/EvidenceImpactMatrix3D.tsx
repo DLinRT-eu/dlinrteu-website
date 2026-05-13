@@ -62,11 +62,11 @@ const project = (gx: number, gy: number, gz: number) => ({
   y: (gx + gy) * TILE * SIN30 - gz,
 });
 
-const EvidenceImpactMatrix3D: React.FC = () => {
+const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ products }) => {
   // Aggregate product counts by (E, I, Z).
   const buckets = useMemo<Map<string, Bucket>>(() => {
     const map = new Map<string, Bucket>();
-    const products = dataService.getAllProducts();
+    const source = products ?? dataService.getAllProducts();
     for (const p of products) {
       const e = p.evidenceRigor;
       const i = p.clinicalImpact;
