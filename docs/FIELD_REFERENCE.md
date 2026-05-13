@@ -136,7 +136,7 @@ Products are classified using a **dual-axis framework** separating Evidence Rigo
 | `evidenceRigor` | ➖ | Evidence rigor level | `"E0"`, `"E1"`, `"E2"`, `"E3"` | Assign based on strongest published evidence methodology |
 | `clinicalImpact` | ➖ | Clinical impact level | `"I0"`, `"I1"`, `"I2"`, `"I3"`, `"I4"`, `"I5"` | I2 = workflow/dose/image quality; I3 = treatment decision changes |
 | `evidenceLevelNotes` | ➖ | Justification for classification | Free text | Cite key supporting publications |
-| `evidence[].level` | ➖ | Per-study classification | Same dual-axis values | Optional per-study detail |
+| `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Clinical impact (I) and implementation burden (Z) remain product-level only. |
 
 **Key References**:
 - van Leeuwen KG, et al. *Eur Radiol.* 2021;31(6):3797-3804. [DOI](https://doi.org/10.1007/s00330-021-07892-z)
@@ -282,7 +282,7 @@ When using the in-browser visual editor, fields use specialized editor component
 ## Quick Checklist for Reviewers
 
 1. Confirm **core identity** fields (name, company, description, category).
-2. **Set evidence classification** (E0-E3 rigor + I0-I5 impact) — prominently displayed.
+2. **Set evidence classification** (E0–E3 rigor + I0–I5 impact + Z0–Z5 implementation burden) — prominently displayed.
 3. Validate **modality, anatomy, supportedStructures** against current evidence.
 4. Update **versioning and dates** even if no other change is required.
 5. Verify **regulatory** claims with certificates or official databases (CE, FDA, TGA, TFDA).
