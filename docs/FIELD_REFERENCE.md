@@ -383,7 +383,7 @@ Need more context or a new field? Open an issue referencing this document and in
 
 ## Implementation & Assurance Burden (Z-axis)
 
-Third axis of the E/I/Z evidence-assurance model (Lula & Kamath, 2026). Lower Z = lower residual effort = higher adoption readiness.
+Third axis of the E/I/Z evidence-assurance model (internally proposed DLinRT extension). Lower Z = lower residual effort = higher adoption readiness.
 
 | Field | Type | Description |
 |---|---|---|

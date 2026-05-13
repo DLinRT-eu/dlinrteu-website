@@ -237,7 +237,7 @@ function buildReadme(): ExcelSheet {
       { Field: "Regulation", Value: "EU Regulation 2021/2282 on Health Technology Assessment (HTAR), in application since 12 January 2025 for oncology medicines and ATMPs; medical devices (incl. AI/SaMD) follow staged scope." },
       { Field: "Methodology", Value: "EUnetHTA 21 deliverables — see https://www.eunethta.eu/eunethta-21" },
       { Field: "Effectiveness scoring", Value: "Evidence rigor (E0–E3) × Clinical impact (I0–I5), see https://dlinrt.eu/resources-compliance#evidence-levels" },
-      { Field: "Implementation/assurance burden", Value: "Z0–Z5 (lower is better) per Lula & Kamath (2026); composite Readiness Signal derived from E/I/Z. See IMP sheet." },
+      { Field: "Implementation/assurance burden", Value: "Z0–Z5 (lower is better) — DLinRT-proposed third axis; composite Readiness Signal derived from E/I/Z. See IMP sheet." },
       { Field: "Out of scope (ECO)", Value: "DLinRT does not collect pricing, budget impact or cost-effectiveness data. Combine this export with vendor quotations and local cost data." },
       { Field: "Disclaimer", Value: "This export is informational only. It does NOT constitute a JCA submission and is not a substitute for an official HTA dossier or regulatory filing." },
       { Field: "Source", Value: "https://dlinrt.eu" },

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   EVIDENCE_RIGOR_LEVELS,
@@ -13,8 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { FlaskConical, Target, ArrowRight, ArrowDown } from "lucide-react";
+import { FlaskConical, Target, ArrowRight, ArrowDown, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import EvidenceImpactMatrix3D from "./EvidenceImpactMatrix3D";
 
 interface EvidenceImpactMatrixProps {
   interactive?: boolean;
@@ -27,6 +29,8 @@ const EvidenceImpactMatrix = ({
   showLabels = true,
   className = ""
 }: EvidenceImpactMatrixProps) => {
+  const [view, setView] = useState<"2d" | "3d">("2d");
+
   // Reverse rigor levels so E3 is at top
   const rigorLevels = [...EVIDENCE_RIGOR_LEVELS].reverse();
   const impactLevels = CLINICAL_IMPACT_LEVELS;
@@ -79,16 +83,47 @@ const EvidenceImpactMatrix = ({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <div className="flex items-center gap-2">
-            <FlaskConical className="h-5 w-5 text-primary" />
-            <span>×</span>
-            <Target className="h-5 w-5 text-primary" />
-          </div>
-          Evidence-Impact Matrix
-        </CardTitle>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <CardTitle className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <FlaskConical className="h-5 w-5 text-primary" />
+              <span>×</span>
+              <Target className="h-5 w-5 text-primary" />
+              {view === "3d" && (
+                <>
+                  <span>×</span>
+                  <Box className="h-5 w-5 text-primary" />
+                </>
+              )}
+            </div>
+            Evidence-Impact Matrix
+            {view === "3d" && (
+              <span className="text-xs font-normal text-muted-foreground ml-1">
+                + Implementation Burden (Z)
+              </span>
+            )}
+          </CardTitle>
+          <ToggleGroup
+            type="single"
+            size="sm"
+            value={view}
+            onValueChange={(v) => v && setView(v as "2d" | "3d")}
+            className="border rounded-md"
+          >
+            <ToggleGroupItem value="2d" aria-label="2D view" className="text-xs px-3">
+              2D
+            </ToggleGroupItem>
+            <ToggleGroupItem value="3d" aria-label="3D view" className="text-xs px-3">
+              3D
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </div>
       </CardHeader>
       <CardContent>
+        {view === "3d" ? (
+          <EvidenceImpactMatrix3D />
+        ) : (
+        <>
         {/* Matrix Grid */}
         <div className="overflow-x-auto">
           <div className="min-w-[600px]">
@@ -249,6 +284,8 @@ const EvidenceImpactMatrix = ({
           I0 indicates no benefit demonstrated yet; I1 recognizes QA tools that ensure safe AI use. 
           Hover over cells for details.
         </p>
+        </>
+        )}
       </CardContent>
     </Card>
   );
