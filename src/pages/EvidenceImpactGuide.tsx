@@ -66,36 +66,46 @@ const EvidenceImpactGuide = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
               <Lightbulb className="h-5 w-5" />
-              Why Two Axes?
+              Why Three Axes?
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
-              Traditional single-scale evidence hierarchies conflate two distinct concepts: 
-              <strong> how robust the evidence is</strong> and <strong>what clinical benefit it demonstrates</strong>.
+              Traditional single-scale evidence hierarchies conflate three distinct concepts:
+              <strong> how robust the evidence is</strong>, <strong>what clinical benefit it demonstrates</strong>,
+              and <strong>how much residual effort adoption still requires</strong>.
             </p>
             
-            <div className="grid md:grid-cols-2 gap-4 mt-4">
+            <div className="grid md:grid-cols-3 gap-4 mt-4">
               <div className="p-4 bg-background rounded-lg border">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange-500" />
-                  The Problem: Example 1
+                  Rigor without impact
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  An AI that predicts the patient's favorite color with 99.8% accuracy, 
-                  backed by rigorous peer-reviewed RCTs. On a single scale, this would be 
-                  "Level 1" (technical) despite having the <em>highest possible methodological rigor</em>.
+                  An AI predicting the patient's favorite color with 99.8% accuracy, backed by RCTs.
+                  On a single scale this looks "Level 1" despite having the
+                  <em> highest possible methodological rigor</em>.
                 </p>
               </div>
               <div className="p-4 bg-background rounded-lg border">
                 <h4 className="font-medium mb-2 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-orange-500" />
-                  The Problem: Example 2
+                  Impact without rigor
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  A device guaranteed to save lives but with no publications yet. 
-                  On a single scale, this would be "Level 0" (no evidence) despite 
-                  having <em>high potential clinical impact</em>.
+                  A device claimed to save lives but with no publications yet. On a single scale this looks
+                  "Level 0" despite having <em>high potential clinical impact</em>.
+                </p>
+              </div>
+              <div className="p-4 bg-background rounded-lg border">
+                <h4 className="font-medium mb-2 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-orange-500" />
+                  Strong evidence, not deployable
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  A multi-centre validated tool that requires heavy commissioning, vendor-specific QA, or
+                  custom integration. Strong E and I, but a <em>high implementation burden</em> blocks routine adoption.
                 </p>
               </div>
             </div>
@@ -103,13 +113,14 @@ const EvidenceImpactGuide = () => {
             <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 mt-4">
               <h4 className="font-medium mb-2 flex items-center gap-2 text-green-800 dark:text-green-200">
                 <CheckCircle className="h-4 w-4" />
-                The Solution: Two Axes
+                The Solution: Three Axes
               </h4>
               <p className="text-sm text-green-900 dark:text-green-100">
-                By separating <strong>Evidence Rigor</strong> (E0-E3) from <strong>Clinical Impact</strong> (I0-I5), 
-                we can properly represent both dimensions. The favorite-color AI becomes E3/I0 
-                (rigorous but no clinical value), while the life-saving device is E0/I4 
-                (high claimed impact, needs evidence). Both ratings convey meaningful information.
+                By separating <strong>Evidence Rigor</strong> (E0–E3), <strong>Clinical Impact</strong> (I0–I5),
+                and <strong>Implementation &amp; Assurance Burden</strong> (Z0–Z5), each dimension is rated
+                independently and combined into a composite readiness signal. The favorite-color AI becomes
+                E3/I0/Z0 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
+                E0/I4/Z3 (claimed impact, evidence and integration both pending).
               </p>
             </div>
           </CardContent>
