@@ -1,0 +1,31 @@
+# DLinRT.eu — Deep Learning in Radiotherapy
+
+> A peer-reviewed catalogue of AI and deep-learning products used in radiotherapy. Independent reference for clinicians, researchers, and vendors covering auto-contouring, treatment planning, image synthesis, registration, reconstruction, performance monitoring, and more.
+
+DLinRT.eu tracks commercially available and pipeline AI/DL products for radiotherapy with structured metadata: regulatory status (CE/FDA/TGA/TFDA), evidence rigor (E0–E3) and clinical impact (I0–I5), training/evaluation data transparency, supported anatomies and structures, modality, and manufacturer information. Reviews follow a published rubric; companies can certify their listings.
+
+## Pages
+
+- [Home](/): Overview and entry point to the catalogue.
+- [Products](/products): Browse all commercially available AI/DL radiotherapy products.
+- [Pipeline products](/products/pipeline): Pre-market and pipeline AI/DL products.
+- [Companies](/companies): Vendors and manufacturers offering AI/DL solutions.
+- [Initiatives](/initiatives): Grand challenges, open datasets, and model zoos.
+- [Compare structures](/compare/structures): Matrix comparison of supported anatomical structures across vendors.
+- [News](/news): Updates on products, regulations, and the field.
+- [Dashboard](/dashboard): Aggregate analytics and visualisations of the catalogue.
+- [Timeline](/timeline): Historical evolution of products and approvals.
+- [Changelog](/changelog): Recent additions and changes to the catalogue.
+- [Transparency](/transparency): Methodology and editorial transparency.
+- [Resources & Compliance](/resources-compliance): Guidelines, references, and compliance resources.
+- [Evidence & Impact guide](/evidence-impact-guide): Methodology for evidence rigor and clinical impact classification.
+- [About](/about): Mission, team, and governance.
+- [Support](/support): Donate or support the project.
+- [Roles](/roles): Reviewer, company, and admin role overview.
+- [Roles FAQ](/roles/faq): Frequently asked questions about contributor roles.
+
+## Optional
+
+- [Privacy policy](/privacy-policy): GDPR data handling.
+- [Terms of use](/terms-of-use): Usage terms.
+- [Security](/security): Security policy and reporting.
