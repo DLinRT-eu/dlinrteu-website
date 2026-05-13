@@ -12,7 +12,8 @@ import type { ProductDetails } from "@/types/productDetails";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { RotateCw, RefreshCw, Eye, X } from "lucide-react";
+import { RotateCw, RefreshCw, Eye, X, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /**
  * Real interactive WebGL 3D plot of the Evidence × Impact × Implementation-Burden matrix.
