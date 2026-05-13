@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   EVIDENCE_RIGOR_LEVELS,
@@ -13,8 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { FlaskConical, Target, ArrowRight, ArrowDown } from "lucide-react";
+import { FlaskConical, Target, ArrowRight, ArrowDown, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import EvidenceImpactMatrix3D from "./EvidenceImpactMatrix3D";
 
 interface EvidenceImpactMatrixProps {
   interactive?: boolean;
