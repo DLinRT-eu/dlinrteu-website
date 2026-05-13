@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { getTaskColor } from '@/utils/chartColors';
@@ -12,6 +12,8 @@ import {
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
 import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import EvidenceImpactMatrix3D from "@/components/resources/EvidenceImpactMatrix3D";
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
@@ -55,6 +57,7 @@ type CellMap = Record<string, CellProduct[]>;
 const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({ filteredProducts }) => {
   const { chartRef, exportToPng } = useChartExport('chart-evidence-impact');
   const isMobile = useIsMobile();
+  const [view, setView] = useState<"2d" | "3d">("2d");
 
   const { cellMap, totalCount, categories } = useMemo(() => {
     const map: CellMap = {};
@@ -108,14 +111,36 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
   return (
     <Card className="w-full col-span-full">
       <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <CardTitle className="text-lg md:text-2xl">
-            Evidence Rigor vs Clinical Impact ({totalCount} products)
+            Evidence Rigor vs Clinical Impact{view === "3d" ? " × Burden" : ""} ({totalCount} products)
           </CardTitle>
-          <ChartExportButton onExport={() => exportToPng('evidence-impact')} />
+          <div className="flex items-center gap-2">
+            <ToggleGroup
+              type="single"
+              size="sm"
+              value={view}
+              onValueChange={(v) => v && setView(v as "2d" | "3d")}
+              className="border rounded-md"
+            >
+              <ToggleGroupItem value="2d" aria-label="2D view" className="text-xs px-3">
+                2D
+              </ToggleGroupItem>
+              <ToggleGroupItem value="3d" aria-label="3D view" className="text-xs px-3">
+                3D
+              </ToggleGroupItem>
+            </ToggleGroup>
+            {view === "2d" && (
+              <ChartExportButton onExport={() => exportToPng('evidence-impact')} />
+            )}
+          </div>
         </div>
       </CardHeader>
       <CardContent>
+        {view === "3d" ? (
+          <EvidenceImpactMatrix3D products={filteredProducts} />
+        ) : (
+        <>
         <div id="chart-evidence-impact" ref={chartRef} className="overflow-x-auto">
           <div className="min-w-[640px]">
             {/* Column headers */}
@@ -214,6 +239,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         <p className="mt-3 text-sm text-muted-foreground text-center">
           Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
         </p>
+        </>
+        )}
       </CardContent>
     </Card>
   );
