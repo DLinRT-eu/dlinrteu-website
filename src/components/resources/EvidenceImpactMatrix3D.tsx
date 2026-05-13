@@ -154,118 +154,154 @@ const Bar: React.FC<BarProps> = ({ bucket, x, z, yBase, height, color, selected,
   );
 };
 
-// ---------- Floor + grid ----------
+// ---------- Floor (subtle grid only) ----------
 const Floor: React.FC<{ cols: number; rows: number }> = ({ cols, rows }) => {
-  const w = cols + 0.4;
-  const d = rows + 0.4;
+  const size = Math.max(cols, rows);
   return (
     <group position={[(cols - 1) / 2, 0, (rows - 1) / 2]}>
-      {/* Base plane */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-        <planeGeometry args={[w, d]} />
-        <meshStandardMaterial color="#f1f5f9" roughness={0.95} metalness={0} />
-      </mesh>
-      {/* Cell grid */}
       <gridHelper
-        args={[Math.max(w, d), Math.max(cols, rows), "#94a3b8", "#cbd5e1"]}
-        position={[0, 0.001, 0]}
+        args={[size, size, "#cbd5e1", "#e2e8f0"]}
+        position={[0, 0, 0]}
       />
     </group>
   );
 };
 
-// ---------- Axis labels ----------
-const AxisLabels: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
+// ---------- Axes (E, I, Z) drawn like the reference figure ----------
+// Layout convention:
+//   X = Evidence rigor (E)   — front-left edge along the floor
+//   Z = Clinical impact (I)  — front-right edge along the floor
+//   Y = Implementation burden (Z) — vertical, back-right corner
+const AxisLine: React.FC<{
+  from: [number, number, number];
+  to: [number, number, number];
+  color?: string;
+}> = ({ from, to, color = "#1a1a2e" }) => {
+  const a = new THREE.Vector3(...from);
+  const b = new THREE.Vector3(...to);
+  const mid = a.clone().add(b).multiplyScalar(0.5);
+  const dir = b.clone().sub(a);
+  const len = dir.length();
+  const quat = new THREE.Quaternion().setFromUnitVectors(
+    new THREE.Vector3(0, 1, 0),
+    dir.clone().normalize()
+  );
+  return (
+    <mesh position={mid.toArray()} quaternion={quat}>
+      <cylinderGeometry args={[0.025, 0.025, len, 8]} />
+      <meshBasicMaterial color={color} />
+    </mesh>
+  );
+};
+
+const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
   cols,
   rows,
   zHeight,
 }) => {
   const labelColor = "#1a1a2e";
+  // The "front" of the scene is z = rows - 1 (closest to camera).
+  // The "back-right" corner where the Z axis stands is (cols - 1, 0, -0.5).
+  const frontZ = rows - 0.5;          // E axis line sits here (front)
+  const rightX = cols - 0.5;          // I axis line sits here (right)
+  const backZ = -0.5;
+  const leftX = -0.5;
+
+  const tickProps = {
+    fontSize: 0.3,
+    color: labelColor,
+    anchorX: "center" as const,
+    anchorY: "middle" as const,
+    outlineWidth: 0.012,
+    outlineColor: "#ffffff",
+  };
+
   return (
     <group>
-      {/* X axis: Impact (front edge, z = -0.7) */}
-      {IMPACT.map((imp, i) => (
-        <Text
-          key={`ix-${imp.level}`}
-          position={[i, 0.02, -0.9]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          fontSize={0.32}
-          color={labelColor}
-          anchorX="center"
-          anchorY="middle"
-          fontWeight={700}
-        >
-          {imp.level}
-        </Text>
-      ))}
-      <Text
-        position={[(cols - 1) / 2, 0.02, -1.6]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        fontSize={0.28}
-        color={labelColor}
-        anchorX="center"
-        anchorY="middle"
-      >
-        Clinical Impact (I) →
-      </Text>
-
-      {/* Z axis: Rigor (left edge, x = -0.9) */}
+      {/* === E axis (Evidence rigor) — front edge, runs along X === */}
+      <AxisLine from={[leftX, 0, frontZ]} to={[rightX, 0, frontZ]} />
       {RIGOR.map((r, i) => (
-        <Text
-          key={`rz-${r.level}`}
-          position={[-0.9, 0.02, i]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          fontSize={0.32}
-          color={labelColor}
-          anchorX="center"
-          anchorY="middle"
-          fontWeight={700}
-        >
-          {r.level}
-        </Text>
+        <group key={`e-${r.level}`}>
+          {/* tick */}
+          <mesh position={[i, 0, frontZ + 0.08]}>
+            <boxGeometry args={[0.04, 0.04, 0.12]} />
+            <meshBasicMaterial color={labelColor} />
+          </mesh>
+          <Text
+            {...tickProps}
+            position={[i, 0.01, frontZ + 0.45]}
+            rotation={[-Math.PI / 2, 0, 0]}
+            fontWeight={700}
+          >
+            {r.level}
+          </Text>
+        </group>
       ))}
       <Text
-        position={[-1.7, 0.02, (rows - 1) / 2]}
-        rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
-        fontSize={0.28}
-        color={labelColor}
-        anchorX="center"
-        anchorY="middle"
+        {...tickProps}
+        position={[(cols - 1) / 2, 0.01, frontZ + 1.15]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        fontSize={0.34}
       >
-        Evidence Rigor (E) →
+        Evidence rigour (E-axis) →
       </Text>
 
-      {/* Y axis: Burden ruler (back-left corner) */}
+      {/* === I axis (Clinical impact) — right edge, runs along Z === */}
+      <AxisLine from={[rightX, 0, frontZ]} to={[rightX, 0, backZ]} />
+      {IMPACT.map((imp, i) => (
+        <group key={`i-${imp.level}`}>
+          <mesh position={[rightX + 0.08, 0, rows - 1 - i]}>
+            <boxGeometry args={[0.12, 0.04, 0.04]} />
+            <meshBasicMaterial color={labelColor} />
+          </mesh>
+          <Text
+            {...tickProps}
+            position={[rightX + 0.5, 0.01, rows - 1 - i]}
+            rotation={[-Math.PI / 2, 0, 0]}
+            fontWeight={700}
+          >
+            {imp.level}
+          </Text>
+        </group>
+      ))}
+      <Text
+        {...tickProps}
+        position={[rightX + 1.25, 0.01, (rows - 1) / 2]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+        fontSize={0.34}
+      >
+        Clinical impact (I-axis) →
+      </Text>
+
+      {/* === Z axis (Implementation burden) — vertical at back-right corner === */}
+      <AxisLine from={[rightX, 0, backZ]} to={[rightX, zHeight, backZ]} />
       {BURDEN.map((z, i) => {
         const y = (i + 0.5) * (zHeight / BURDEN.length);
+        const labelText =
+          i === 0 ? `${z.level} low` : i === BURDEN.length - 1 ? `${z.level} high` : z.level;
         return (
-          <group key={`zy-${z.level}`}>
-            <mesh position={[-0.9, y, rows - 1]}>
-              <boxGeometry args={[0.32, zHeight / BURDEN.length - 0.05, 0.05]} />
-              <meshStandardMaterial color={Z_COLORS[z.level]} roughness={0.5} />
+          <group key={`z-${z.level}`}>
+            <mesh position={[rightX + 0.08, y, backZ]}>
+              <boxGeometry args={[0.12, 0.04, 0.04]} />
+              <meshBasicMaterial color={labelColor} />
             </mesh>
             <Text
-              position={[-1.4, y, rows - 1]}
-              fontSize={0.26}
-              color={labelColor}
-              anchorX="center"
-              anchorY="middle"
+              {...tickProps}
+              position={[rightX + 0.55, y, backZ]}
               fontWeight={700}
             >
-              {z.level}
+              {labelText}
             </Text>
           </group>
         );
       })}
       <Text
-        position={[-2.0, zHeight / 2, rows - 1]}
+        {...tickProps}
+        position={[rightX + 1.5, zHeight / 2, backZ]}
         rotation={[0, 0, Math.PI / 2]}
-        fontSize={0.28}
-        color={labelColor}
-        anchorX="center"
-        anchorY="middle"
+        fontSize={0.34}
       >
-        Implementation Burden (Z) ↑
+        Implementation effort / assurance burden (Z-axis) ↑
       </Text>
     </group>
   );
