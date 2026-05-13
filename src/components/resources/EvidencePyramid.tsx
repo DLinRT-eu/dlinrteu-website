@@ -6,7 +6,7 @@ import EvidenceImpactMatrix from "./EvidenceImpactMatrix";
 const EvidencePyramid = () => {
   return (
     <div className="w-full">
-      {/* Show only the dual-axis matrix */}
+      {/* Show only the tri-axial evidence matrix */}
       <EvidenceImpactMatrix interactive showLabels />
 
       {/* Link to full guide */}
