@@ -97,9 +97,9 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 | `limitations` | ➖ | Known caveats. | Array of strings. | Highlight vendor-declared or publication-based limitations. |
 | `guidelines` | ➖ | Professional guidelines adhered to. | Array of `{ name, version, reference, url, compliance }`. | Use `compliance`: `full`, `partial`, `planned`. |
 
-## Evidence Level Classification (Dual-Axis System)
+## Evidence Level Classification (Tri-Axial System)
 
-Products are classified using a **dual-axis framework** separating Evidence Rigor (E0-E3) from Clinical Impact (I0-I5), adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8). The Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203).
+Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Implementation &amp; Assurance Burden (Z0–Z5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The Z axis is an internally proposed DLinRT extension capturing residual implementation and assurance burden — see the [§Implementation & Assurance Burden](#implementation--assurance-burden-z0-z5) section below.
 
 ### Evidence Rigor (E0-E3)
 
