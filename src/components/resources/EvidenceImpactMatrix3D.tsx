@@ -81,41 +81,76 @@ const Bar: React.FC<BarProps> = ({ bucket, x, z, yBase, height, color, selected,
   const [hovered, setHovered] = useState(false);
 
   const baseColor = useMemo(() => new THREE.Color(color), [color]);
-  const emissive = hovered || selected ? baseColor.clone().multiplyScalar(0.55) : new THREE.Color("#000000");
+  const isHighlighted = hovered || selected;
+  const emissive = isHighlighted ? baseColor.clone().multiplyScalar(0.9) : new THREE.Color("#000000");
+  const scale = hovered ? 1.08 : 1;
 
   return (
-    <mesh
-      ref={meshRef}
-      position={[x, yBase + height / 2, z]}
-      castShadow
-      receiveShadow
-      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
-        e.stopPropagation();
-        setHovered(true);
-        document.body.style.cursor = "pointer";
-        onHover(bucket);
-      }}
-      onPointerOut={(e: ThreeEvent<PointerEvent>) => {
-        e.stopPropagation();
-        setHovered(false);
-        document.body.style.cursor = "auto";
-        onHover(null);
-      }}
-      onClick={(e: ThreeEvent<MouseEvent>) => {
-        e.stopPropagation();
-        onSelect(bucket);
-      }}
-    >
-      <boxGeometry args={[0.78, height, 0.78]} />
-      <meshStandardMaterial
-        color={baseColor}
-        emissive={emissive}
-        roughness={0.4}
-        metalness={0.15}
-        transparent
-        opacity={selected || hovered ? 1 : 0.92}
-      />
-    </mesh>
+    <group position={[x, yBase + height / 2, z]}>
+      <mesh
+        ref={meshRef}
+        scale={[scale, 1, scale]}
+        castShadow
+        receiveShadow
+        onPointerOver={(e: ThreeEvent<PointerEvent>) => {
+          e.stopPropagation();
+          setHovered(true);
+          document.body.style.cursor = "pointer";
+          onHover(bucket);
+        }}
+        onPointerOut={(e: ThreeEvent<PointerEvent>) => {
+          e.stopPropagation();
+          setHovered(false);
+          document.body.style.cursor = "auto";
+          onHover(null);
+        }}
+        onClick={(e: ThreeEvent<MouseEvent>) => {
+          e.stopPropagation();
+          onSelect(bucket);
+        }}
+      >
+        <boxGeometry args={[0.78, height, 0.78]} />
+        <meshStandardMaterial
+          color={baseColor}
+          emissive={emissive}
+          emissiveIntensity={isHighlighted ? 0.6 : 0}
+          roughness={0.4}
+          metalness={0.15}
+        />
+      </mesh>
+
+      {/* Selected outline */}
+      {selected && (
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[0.86, height + 0.04, 0.86]} />
+          <meshBasicMaterial color="#1a1a2e" wireframe />
+        </mesh>
+      )}
+
+      {/* Floating tooltip on hover, pinned label on select */}
+      {(hovered || selected) && (
+        <Html
+          position={[0, height / 2 + 0.25, 0]}
+          center
+          distanceFactor={10}
+          zIndexRange={[100, 0]}
+          style={{ pointerEvents: "none" }}
+        >
+          <div
+            className="rounded-md bg-background/95 backdrop-blur border shadow-lg px-2.5 py-1.5 text-[11px] whitespace-nowrap"
+            style={{ borderColor: color }}
+          >
+            <div className="font-bold">
+              {bucket.rigor} · {bucket.impact} · {bucket.burden}
+            </div>
+            <div className="text-muted-foreground">
+              {bucket.count} product{bucket.count === 1 ? "" : "s"}
+              {!selected && " · click to list"}
+            </div>
+          </div>
+        </Html>
+      )}
+    </group>
   );
 };
 
