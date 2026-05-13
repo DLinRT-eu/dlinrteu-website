@@ -184,8 +184,8 @@ const EvidenceImpactGuide = () => {
               <Badge variant="outline" className="ml-2 text-[10px]">New — third axis</Badge>
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              Following Lula &amp; Kamath (2026), the dual E/I matrix is extended with a third axis: residual
-              implementation and assurance burden. <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>
+              The dual E/I matrix is extended with a third axis: residual implementation and assurance burden
+              (an internally proposed DLinRT extension). <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>
               {" "}High Z constrains the public readiness signal even when E and I appear favourable.
             </p>
           </CardHeader>
