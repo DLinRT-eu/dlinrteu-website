@@ -441,11 +441,16 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
 
   const totalClassified = useMemo(() => buckets.reduce((s, b) => s + b.count, 0), [buckets]);
 
-  // When products change, drop stale selection.
+  // When the product set actually changes (not just a new array reference from the parent),
+  // drop stale selection. Use a stable signature so clicks aren't wiped by re-renders.
+  const productSig = useMemo(
+    () => (products ?? []).map((p) => p.id).sort().join("|"),
+    [products]
+  );
   useEffect(() => {
     setSelected(null);
     setHovered(null);
-  }, [products]);
+  }, [productSig]);
 
   const resetView = () => setResetKey((k) => k + 1);
 
@@ -590,7 +595,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                       {detail.products.map((prod) => (
                         <li key={prod.id}>
                           <Link
-                            to={`/products/${prod.id}`}
+                            to={`/product/${prod.id}`}
                             className="group block rounded-md border border-transparent hover:border-border hover:bg-muted/50 px-2 py-1.5 transition-colors"
                           >
                             <div className="flex items-start justify-between gap-2">
