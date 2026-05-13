@@ -1,46 +1,60 @@
 ## Goal
 
-Show vendor/initiative logos on initiative cards (Challenges, Datasets, Model Zoos), starting with SynthRAD and MONAI. The logo should be shown only when available, no placeholders!
+Extend the existing Evidence-Impact Matrix with a 2D ↔ 3D toggle. The 3D view adds the **Z axis = Implementation & Assurance Burden (Z0–Z5)** that already exists in `src/data/evidence-impact-levels.ts` (`IMPLEMENTATION_BURDEN_LEVELS`). 2D remains the default.
 
-## Current state
+Also remove the "Lula & Kamath (2026)" attribution everywhere it appears and reframe the third axis as an internal DLinRT proposal.
 
-- `Initiative.logoUrl?: string` already exists in `src/types/initiative.d.ts`.
-- Only one initiative currently uses it (`mhub-ai` in `modelzoo.ts`), and even that one is **not rendered** — `InitiativeCard.tsx` doesn't read `logoUrl` at all.
-- Logos for products/companies are stored under `public/logos/` and referenced as `/logos/<name>.svg|png`.
+---
 
-## Plan
+## Visualization choice (investigation result)
 
-### 1. Render `logoUrl` in `InitiativeCard.tsx`
+Three options were considered:
 
-In the `CardHeader`, show the logo to the left of the title when `logoUrl` is set; fall back to title-only layout when missing. Style consistent with `CompanyCard` / `ProductCard`:
+| Option | Pros | Cons |
+|---|---|---|
+| **SVG isometric 3D bars** (chosen) | Zero new deps, sharp on any DPI, easy tooltip integration, matches the existing minimal aesthetic, predictable layout | Limited to one fixed camera angle |
+| react-three-fiber WebGL | Full rotation, lighting | Adds three + r3f bundle (~500KB), overkill for a 6×4×6 grid |
+| Plotly Surface/Bar3D | Scientific feel, built-in axes | ~1MB dep, theming clashes with shadcn/Tailwind tokens |
 
-- Square thumbnail (~40×40), `object-contain`, white background, subtle border, rounded.
-- `loading="lazy"`, `alt={`${name} logo`}`.
-- Graceful fallback if image fails to load (hide on `onError`).
+**Decision: SVG isometric grid of 3D bars.** Each (E, I) cell becomes a column of up to 6 stacked translucent cubes — one per Z level — colored by burden tier (green→rose). Bar height = product count at that (E, I, Z) bucket; empty Z slots are omitted. A small camera-angle slider can rotate the projection (cosmetic only, recomputed mathematically — no canvas).
 
-### 2. Add logo files
+This keeps the look consistent with the rest of the site, is fully responsive, and keeps tooltips/hover working through normal SVG events.
 
-Drop SVG/PNG files under `public/logos/`:
+---
 
-- `public/logos/synthrad.svg` (or `.png`) — used by SynthRAD2023 + SynthRAD2025.
-- `public/logos/monai.svg` — used by MONAI Model Zoo.
-- (Optional) other initiatives that have a recognizable logo: Grand Challenge, AAPM challenges, TCIA, etc. — defer until user provides assets.
+## Changes
 
-### 3. Wire `logoUrl` into the data files
+### 1. `src/components/resources/EvidenceImpactMatrix.tsx`
+- Add a `view` state: `"2d" | "3d"`, default `"2d"`.
+- Add a small `Tabs` (or `ToggleGroup`) header control: **2D | 3D**.
+- Keep current 2D grid exactly as it is when `view === "2d"`.
+- When `view === "3d"`, render a new sub-component `<EvidenceImpactMatrix3D />`.
 
-- `src/data/initiatives/challenges.ts`: add `logoUrl: "/logos/synthrad.svg"` to both SynthRAD2023 and SynthRAD2025 entries.
-- `src/data/initiatives/modelzoo.ts`: add `logoUrl: "/logos/monai.svg"` to the MONAI Model Zoo entry.
+### 2. New file `src/components/resources/EvidenceImpactMatrix3D.tsx`
+- Pure SVG isometric projection (`viewBox` based, responsive).
+- Axes: X = Impact (I0…I5), Y = Rigor (E0…E3), Z = Burden (Z0…Z5).
+- For each (E, I) cell, draw a stack of cubes — one face per Z level present, colored using burden palette from `IMPLEMENTATION_BURDEN_LEVELS`.
+- Aggregate product counts from `getAllProducts()` (DataService) by `(evidenceRigor, clinicalImpact, implementationBurden)` to size bars; cells with 0 products render as a flat translucent floor tile.
+- Tooltips on each cube via `TooltipProvider` showing E/I/Z labels, count, and readiness consequence.
+- Legend: burden color ramp Z0→Z5 + "bar height = product count".
 
-## Open question
+### 3. `src/pages/ResourcesCompliance.tsx` (and/or `EvidenceImpactGuide.tsx`)
+- Add a paragraph in the Evidence-Impact section noting that the framework is a **three-axis E/I/Z model** (Rigor × Impact × Implementation Burden), with a one-line description of Z and a pointer to the new 3D view.
+- Remove all references to "Lula & Kamath (2026)" and "Bellini et al. (2023)" attributions; rephrase as "an internally proposed DLinRT extension".
 
-I don't have the actual SynthRAD and MONAI logo files. Two options:
+### 4. Attribution cleanup (search + replace)
+Files touched:
+- `src/pages/EvidenceImpactGuide.tsx` (lines 187, 228–229)
+- `src/data/evidence-impact-levels.ts` (lines 168–170, comment only)
+- `src/types/productDetails.d.ts` (line 93, comment only)
+- `src/utils/htaExport/htaExporter.ts` (line 240)
+- `docs/FIELD_REFERENCE.md` (line 386)
 
-- **A.** You upload `synthrad.svg` and `monai.svg` (preferred — official artwork, correct licensing).
-- **B.** I download them from the official sites (synthrad2023.grand-challenge.org, monai.io) — quick but check trademark/attribution before publishing.
+Wording becomes e.g. *"Third axis of the DLinRT-proposed E/I/Z evidence-assurance model."*
 
-After you confirm, I'll implement steps 1–3 in one pass.
+---
 
 ## Out of scope
-
-- Restyling cards beyond inserting the logo slot.
-- Backfilling logos for every initiative — only SynthRAD + MONAI now; the field is ready for future additions.
+- No changes to product data fields or RLS.
+- No new dependencies.
+- 2D matrix behavior, layout, and styling stay identical (default view).
