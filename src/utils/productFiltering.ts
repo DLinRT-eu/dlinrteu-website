@@ -59,6 +59,9 @@ export const filterProductsByLocation = (
   return products.filter(p => {
     // Handle both anatomicalLocation and anatomy fields for consistency
     const anatomyList = p.anatomicalLocation || p.anatomy || [];
+    if (location === 'Head & Neck') {
+      return anatomyList.some(a => a === 'Head' || a === 'Neck' || a === 'Head & Neck');
+    }
     return anatomyList.includes(location);
   });
 };
