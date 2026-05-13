@@ -29,6 +29,8 @@ const EvidenceImpactMatrix = ({
   showLabels = true,
   className = ""
 }: EvidenceImpactMatrixProps) => {
+  const [view, setView] = useState<"2d" | "3d">("2d");
+
   // Reverse rigor levels so E3 is at top
   const rigorLevels = [...EVIDENCE_RIGOR_LEVELS].reverse();
   const impactLevels = CLINICAL_IMPACT_LEVELS;
