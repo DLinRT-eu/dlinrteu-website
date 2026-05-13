@@ -67,7 +67,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
   const buckets = useMemo<Map<string, Bucket>>(() => {
     const map = new Map<string, Bucket>();
     const source = products ?? dataService.getAllProducts();
-    for (const p of products) {
+    for (const p of source) {
       const e = p.evidenceRigor;
       const i = p.clinicalImpact;
       const z = p.implementationBurden;
@@ -78,7 +78,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
       else map.set(key, { rigor: e, impact: i, burden: z, count: 1 });
     }
     return map;
-  }, []);
+  }, [products]);
 
   const totalClassified = useMemo(
     () => Array.from(buckets.values()).reduce((s, b) => s + b.count, 0),
