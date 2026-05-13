@@ -1,21 +1,24 @@
-import sanitizeHtml from 'sanitize-html';
 /**
  * Chart Data Validation and Sanitization Utilities
  * Provides security measures for chart components to prevent XSS and data injection attacks
  */
 
 /**
- * Sanitizes a string by removing potentially dangerous characters and limiting length
+ * Sanitizes a string by removing potentially dangerous characters and limiting length.
+ * Chart labels are rendered as SVG text nodes, so stripping tag delimiters and control
+ * characters is sufficient. We intentionally do NOT HTML-entity-encode characters like
+ * `&`, otherwise labels such as "Head & Neck" render as "Head &amp; Neck".
  */
 export const sanitizeString = (input: string, maxLength: number = 100): string => {
   if (typeof input !== 'string') {
     return '';
   }
 
-  // Use sanitize-html to remove all unsafe HTML tags and attributes
-  let sanitized = sanitizeHtml(input, { allowedTags: [], allowedAttributes: {} }).trim();
+  const sanitized = input
+    .replace(/[<>]/g, '')
+    .replace(/[\u0000-\u001F\u007F]/g, '')
+    .trim();
 
-  // Limit length to prevent extremely long strings
   return sanitized.length > maxLength ? sanitized.substring(0, maxLength) + '...' : sanitized;
 };
 

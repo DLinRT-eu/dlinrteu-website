@@ -1,39 +1,65 @@
-## Plan: Fix Supabase Data API Grants
+## Problem
 
-### Problem
-Supabase is changing default behavior: after Oct 30, tables in the `public` schema will no longer implicitly expose Data API access. The `authenticated` role must hold explicit base table privileges (`SELECT`, `INSERT`, etc.) before PostgREST will even evaluate RLS policies. 
+On the Dashboard, the Anatomy "Head & Neck" entry shows two bugs:
 
-I audited the project's ACLs. **~15 tables** are missing required `authenticated` grants while their RLS policies would otherwise allow access. This will cause `42501` errors when the change takes effect.
+1. **Label shows `Head &amp; Neck`** in the pie chart segment label, legend, tooltip, and the "filtered by location" header. The `&` is double-escaped.
+2. **Selecting "Head & Neck" empties every other chart** (Tasks, Modality, Company, Certification, Evidence/Impact). All counts drop to zero.
 
-### Solution
-A single migration that:
+## Root cause
 
-1. **Adds explicit `GRANT` statements** for every table that the frontend accesses via `supabase-js`, matching what the existing RLS policies already allow:
-   - `review_checklist_items` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
-   - `review_comments` — missing `SELECT`, `INSERT`
-   - `review_rounds` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
-   - `review_round_stats` — missing `SELECT`
-   - `profile_documents` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
-   - `profile_document_access_log` — missing `SELECT`
-   - `assignment_history` — missing `UPDATE`, `DELETE`
-   - `product_feedback` — missing `SELECT`
-   - `reminder_settings` — missing `SELECT`
-   - `github_file_checks` — missing `SELECT`
-   - `certification_reminder_logs` — missing `SELECT`
-   - `reviewer_invitations` — missing `SELECT`, `INSERT`, `UPDATE`, `DELETE`
-   - `role_change_log` — missing `SELECT`
+### Bug 1 — `&` rendered as `&amp;`
+`src/utils/chartDataValidation.ts` runs every chart label through `sanitize-html` with `allowedTags: []`. That library HTML-encodes special characters in text nodes, so `"Head & Neck"` becomes the literal string `"Head &amp; Neck"`. Recharts then renders that string as plain text in SVG, so the user sees `Head &amp; Neck`. The same encoding leaks into `validateFilterValue`, so the selected-location string used downstream also becomes `"Head &amp; Neck"`.
 
-2. **Adds `GRANT SELECT` to `anon`** on tables with public-read RLS policies (e.g. `changelog_entries`, `changelog_links`) so unauthenticated visitors can read them.
+### Bug 2 — empty downstream charts when filtering by "Head & Neck"
+The pie aggregates products by merging `Head` and `Neck` anatomy entries into a synthetic bucket called `Head & Neck` (see `src/utils/filterOptions.ts` and `src/utils/productFilters.ts`). However, `src/utils/productFiltering.ts#filterProducts` does a literal `anatomyList.includes(selectedLocation)`. No product has `Head & Neck` in its anatomy array — they have `Head` and/or `Neck` — so the filter returns an empty product set and every other chart receives no data.
 
-3. **Ensures `service_role` retains full access** on every table (already mostly true, but we will make it explicit and future-proof).
+## Fix
 
-4. **Verifies default privileges** are configured for any *future* tables created by `postgres` or `supabase_admin` in the `public` schema, so this issue does not recur.
+Scope: presentation/data-transformation only. No product data, no schema, no API changes.
 
-### What will NOT change
-- Edge-function-only tables (`analytics_*`, `contact_submissions`, `mfa_*`, `newsletter_subscribers`, `security_events`) remain service_role-only.
-- No RLS policies are modified.
-- No table data is changed.
-- The migration is additive only (GRANTs), zero risk of data loss.
+### 1. Stop HTML-encoding plain text labels
+File: `src/utils/chartDataValidation.ts`
 
-### After the migration
-I will run a verification query to confirm every actively-used table has the correct `authenticated` and `anon` base privileges.
+- Replace the `sanitize-html` call inside `sanitizeString` with a lightweight sanitizer that strips angle brackets and control characters but does not entity-encode `&`, `'`, `"`. Something like:
+
+  ```ts
+  const sanitized = input
+    .replace(/[<>]/g, '')         // drop tag delimiters
+    .replace(/[\u0000-\u001F\u007F]/g, '') // drop control chars
+    .trim();
+  ```
+
+  This still blocks tag injection (Recharts renders chart labels as SVG text nodes, so removing `<`/`>` is sufficient — there is no HTML parsing path here). Length cap and `+ '...'` truncation behavior stay unchanged.
+- Remove the now-unused `sanitize-html` import in this file. Leave the dependency in place (other files may use it).
+
+### 2. Make "Head & Neck" filter match `Head` or `Neck` products
+File: `src/utils/productFiltering.ts`
+
+- In `filterProducts`, special-case the merged bucket: when `selectedLocation === 'Head & Neck'`, match products whose `anatomicalLocation`/`anatomy` contains `Head` **or** `Neck` **or** `Head & Neck`. Keep the existing `includes` path for every other location.
+
+  ```ts
+  if (selectedLocation !== "all") {
+    const anatomyList = product.anatomicalLocation || product.anatomy || [];
+    const matches =
+      selectedLocation === 'Head & Neck'
+        ? anatomyList.some(a => a === 'Head' || a === 'Neck' || a === 'Head & Neck')
+        : anatomyList.includes(selectedLocation);
+    if (!matches) return false;
+  }
+  ```
+
+- Apply the same adjustment in `filterProductsByLocation` for consistency with other call sites.
+
+## Verification
+
+- Reload `/dashboard`.
+- Confirm the pie label, legend, and tooltip read `Head & Neck` (no `&amp;`).
+- Click the `Head & Neck` slice; confirm the Tasks, Modality, Company, Certification, and Evidence/Impact charts populate with the head-and-neck subset instead of going to zero.
+- Click another anatomy (e.g. `Brain`) to confirm no regression.
+- Spot-check the Auto-Contouring structures charts when the Auto-Contouring task is also selected.
+
+## Out of scope
+
+- Renaming `Head & Neck` to a hyphenated form, or changing how products tag anatomy.
+- Changes to the 3D Evidence/Impact matrix or the methodology bibliography.
+- Any backend / RLS / migration work.
