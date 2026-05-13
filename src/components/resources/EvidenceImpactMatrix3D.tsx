@@ -595,7 +595,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                       {detail.products.map((prod) => (
                         <li key={prod.id}>
                           <Link
-                            to={`/products/${prod.id}`}
+                            to={`/product/${prod.id}`}
                             className="group block rounded-md border border-transparent hover:border-border hover:bg-muted/50 px-2 py-1.5 transition-colors"
                           >
                             <div className="flex items-start justify-between gap-2">
