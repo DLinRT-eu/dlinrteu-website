@@ -90,7 +90,7 @@ export interface ProductDetails extends Product {
   clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
   clinicalImpactNotes?: string;
 
-  // Implementation & Assurance Burden axis (Z) — Lula & Kamath 2026 three-axis E/I/Z model.
+  // Implementation & Assurance Burden axis (Z) — internally proposed DLinRT extension to the E/I matrix.
   // Lower Z = lower residual effort = higher adoption readiness.
   implementationBurden?: "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
   implementationBurdenNotes?: string;
