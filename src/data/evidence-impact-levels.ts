@@ -425,3 +425,311 @@ export const EVIDENCE_IMPACT_REFERENCE = {
     notes: "Original 6-level hierarchical model of diagnostic efficacy, used as foundation for the clinical impact axis."
   }
 };
+
+// ==================== EXTENDED METHODOLOGY BIBLIOGRAPHY ====================
+// Grouped references underpinning the dual-axis (E / I) and implementation-burden
+// (Z) framework. Kept separate from EVIDENCE_IMPACT_REFERENCE so the core
+// citations remain stable while this catalogue can grow.
+
+export interface MethodologyReference {
+  citation: string;
+  doi?: string;
+  url?: string;
+  notes?: string;
+}
+
+export interface MethodologyReferenceGroup {
+  id: string;
+  title: string;
+  description: string;
+  references: MethodologyReference[];
+}
+
+const _doi = (id: string) => `https://doi.org/${id}`;
+
+export const METHODOLOGY_REFERENCES: MethodologyReferenceGroup[] = [
+  {
+    id: "evidence-hierarchies",
+    title: "Evidence hierarchies & rigor (E-axis)",
+    description:
+      "Foundational and updated hierarchies of evidence informing the E0–E3 rigor axis, including AI-aware revisions of the classical pyramid.",
+    references: [
+      {
+        citation:
+          "Murad MH, Asi N, Alsawas M, Alahdab F. New evidence pyramid. Evid Based Med. 2016;21(4):125-127.",
+        doi: "10.1136/ebmed-2016-110401",
+        url: _doi("10.1136/ebmed-2016-110401"),
+        notes: "Modernised evidence pyramid with systematic reviews as a lens.",
+      },
+      {
+        citation:
+          "Bellini V, Ori E, Coccolini F, Bignami E. Evidence pyramid and artificial intelligence: a metamorphosis of clinical research. Discov Health Syst. 2023;2:40.",
+        doi: "10.1007/s44250-023-00050-w",
+        url: _doi("10.1007/s44250-023-00050-w"),
+        notes: "Motivates separating assurance burden (Z-axis) from evidence rigor.",
+      },
+      {
+        citation:
+          "El Oakley RM, et al. Redefining the Hierarchy of Evidence in Medicine in the Era of Next Generation Clinical Trials and Real World Evidence. J Best Available Evid Med. 2025;1(2):25-29.",
+        doi: "10.63720/v1i2005",
+        url: _doi("10.63720/v1i2005"),
+        notes: "Next-generation hierarchy integrating RWE and adaptive trials.",
+      },
+      {
+        citation:
+          "Silberman J, et al. Rigorous and rapid evidence assessment in digital health with the evidence DEFINED framework. npj Digit Med. 2023;6:101.",
+        doi: "10.1038/s41746-023-00836-5",
+        url: _doi("10.1038/s41746-023-00836-5"),
+        notes: "Rapid appraisal framework feeding the E-axis sub-attributes.",
+      },
+      {
+        citation:
+          "Rosenthal JT, Beecy A, Sabuncu MR. Rethinking clinical trials for medical AI with dynamic deployments of adaptive systems. npj Digit Med. 2025;8:252.",
+        doi: "10.1038/s41746-025-01674-3",
+        url: _doi("10.1038/s41746-025-01674-3"),
+      },
+      {
+        citation:
+          "You JG, et al. Clinical trials informed framework for real world clinical implementation and deployment of AI applications. npj Digit Med. 2025;8:107.",
+        doi: "10.1038/s41746-025-01506-4",
+        url: _doi("10.1038/s41746-025-01506-4"),
+      },
+    ],
+  },
+  {
+    id: "clinical-impact",
+    title: "Clinical impact & outcomes (I-axis)",
+    description:
+      "Frameworks shaping the I-axis levels (technical → diagnostic → patient outcome → societal impact).",
+    references: [
+      {
+        citation:
+          "Jacob C, et al. AI for IMPACTS Framework for Evaluating the Long-Term Real-World Impacts of AI-Powered Clinician Tools. J Med Internet Res. 2025;27:e67485.",
+        doi: "10.2196/67485",
+        url: _doi("10.2196/67485"),
+        notes: "Long-horizon real-world impact dimensions for the I4–I5 tiers.",
+      },
+      {
+        citation:
+          "Antonissen N, et al. Artificial intelligence in radiology: 173 commercially available products and their scientific evidence. Eur Radiol. 2026;36:526-536.",
+        doi: "10.1007/s00330-025-11830-8",
+        url: _doi("10.1007/s00330-025-11830-8"),
+      },
+      {
+        citation:
+          "van Leeuwen KG, et al. Artificial intelligence in radiology: 100 commercially available products and their scientific evidence. Eur Radiol. 2021;31:3797-3804.",
+        doi: "10.1007/s00330-021-07892-z",
+        url: _doi("10.1007/s00330-021-07892-z"),
+      },
+      {
+        citation:
+          "Pham N, et al. Critical appraisal of AI-enabled imaging tools using the levels of evidence system. AJNR Am J Neuroradiol. 2023;44(5):E21-E28.",
+        doi: "10.3174/ajnr.A7850",
+        url: _doi("10.3174/ajnr.A7850"),
+      },
+    ],
+  },
+  {
+    id: "ai-reporting-guidelines",
+    title: "AI reporting & quality guidelines",
+    description:
+      "Reporting and risk-of-bias instruments used to score the E-axis study-quality sub-attributes.",
+    references: [
+      {
+        citation:
+          "Tejani AS, et al. Checklist for Artificial Intelligence in Medical Imaging (CLAIM): 2024 Update. Radiol Artif Intell. 2024;6(4):e240300.",
+        doi: "10.1148/ryai.240300",
+        url: _doi("10.1148/ryai.240300"),
+      },
+      {
+        citation:
+          "Collins GS, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. BMJ. 2024;385:e078378.",
+        doi: "10.1136/bmj-2023-078378",
+        url: _doi("10.1136/bmj-2023-078378"),
+      },
+      {
+        citation:
+          "Moons KGM, et al. PROBAST+AI: an updated quality, risk of bias, and applicability assessment tool for prediction models using regression or AI methods. BMJ. 2025;388:e082505.",
+        doi: "10.1136/bmj-2024-082505",
+        url: _doi("10.1136/bmj-2024-082505"),
+      },
+      {
+        citation:
+          "Sounderajah V, et al. The STARD-AI reporting guideline for diagnostic accuracy studies using artificial intelligence. Nat Med. 2025;31:3283-3289.",
+        doi: "10.1038/s41591-025-03953-8",
+        url: _doi("10.1038/s41591-025-03953-8"),
+      },
+      {
+        citation:
+          "Cruz Rivera S, et al. Guidelines for clinical trial protocols for interventions involving AI: the SPIRIT-AI extension. Nat Med. 2020;26:1351-1363.",
+        doi: "10.1038/s41591-020-1037-7",
+        url: _doi("10.1038/s41591-020-1037-7"),
+      },
+      {
+        citation:
+          "Liu X, et al. Reporting guidelines for clinical trial reports for interventions involving AI: the CONSORT-AI extension. Nat Med. 2020;26:1364-1374.",
+        doi: "10.1038/s41591-020-1034-x",
+        url: _doi("10.1038/s41591-020-1034-x"),
+      },
+      {
+        citation:
+          "Vasey B, et al. Reporting guideline for the early-stage clinical evaluation of decision support systems driven by AI: DECIDE-AI. Nat Med. 2022;28:924-933.",
+        doi: "10.1038/s41591-022-01772-9",
+        url: _doi("10.1038/s41591-022-01772-9"),
+      },
+      {
+        citation:
+          "Lekadir K, et al. FUTURE-AI: international consensus guideline for trustworthy and deployable AI in healthcare. BMJ. 2025;388:e081554.",
+        doi: "10.1136/bmj-2024-081554",
+        url: _doi("10.1136/bmj-2024-081554"),
+      },
+    ],
+  },
+  {
+    id: "trl-assurance",
+    title: "Technology readiness & assurance burden (Z-axis)",
+    description:
+      "TRL, ESL and assurance-burden literature underpinning the Z0–Z5 implementation-effort axis.",
+    references: [
+      {
+        citation:
+          "Lavin A, et al. Technology readiness levels for machine learning systems. Nat Commun. 2022;13:6039.",
+        doi: "10.1038/s41467-022-33128-9",
+        url: _doi("10.1038/s41467-022-33128-9"),
+      },
+      {
+        citation:
+          "Jones S. Enhancing Technology Readiness Assessment: the Engineering Severity Level Methodology and the TRL+ Classification. IEEE Open J Syst Eng. 2024;2:50-61.",
+        doi: "10.1109/OJSE.2024.3354777",
+        url: _doi("10.1109/OJSE.2024.3354777"),
+      },
+      {
+        citation:
+          "Koo J-I, Jeong S-J. Improved Technology Readiness Assessment Framework for System-of-Systems from a System Integration Perspective. IEEE Access. 2024;12:23827-23853.",
+        doi: "10.1109/ACCESS.2024.3362229",
+        url: _doi("10.1109/ACCESS.2024.3362229"),
+      },
+      {
+        citation:
+          "Hart SN, Day PL, Garcia CA. Streamlining medical software development with CARE lifecycle and CARE agent: an AI-driven TRL assessment tool. BMC Med Inform Decis Mak. 2025;25:254.",
+        doi: "10.1186/s12911-025-03099-0",
+        url: _doi("10.1186/s12911-025-03099-0"),
+      },
+      {
+        citation:
+          "Muhammad AE, Yow K-C. Risk-Based AI Assurance Framework. Information. 2026;17(3):263.",
+        doi: "10.3390/info17030263",
+        url: _doi("10.3390/info17030263"),
+      },
+      {
+        citation:
+          "Boshuijzen-van Burken C, Spruit S, Geijsen T, Fillerup L. A values-based approach to designing military autonomous systems. Ethics Inf Technol. 2024;26:56.",
+        doi: "10.1007/s10676-024-09789-z",
+        url: _doi("10.1007/s10676-024-09789-z"),
+        notes: "Cross-domain framing for assurance burden in safety-critical AI.",
+      },
+    ],
+  },
+  {
+    id: "regulatory",
+    title: "Regulatory & governance frameworks",
+    description:
+      "Regulator and HTA documents that anchor the Z-axis to real-world deployment requirements.",
+    references: [
+      {
+        citation:
+          "World Health Organization. Regulatory considerations on artificial intelligence for health. Geneva: WHO; 2023.",
+        url: "https://www.who.int/publications/i/item/9789240078871",
+      },
+      {
+        citation:
+          "International Medical Device Regulators Forum. Good Machine Learning Practice for Medical Device Development: Guiding Principles. IMDRF/AIML WG/N88 FINAL:2025.",
+        url: "https://www.imdrf.org/documents",
+      },
+      {
+        citation:
+          "FDA, Health Canada, MHRA. Transparency for Machine Learning-Enabled Medical Devices: Guiding Principles. 2024.",
+        url: "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles",
+      },
+      {
+        citation:
+          "FDA. Marketing Submission Recommendations for a Predetermined Change Control Plan for AI-Enabled Device Software Functions. 2025.",
+        url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents",
+      },
+      {
+        citation:
+          "Artificial Intelligence Board & MDCG. Interplay between the MDR/IVDR and the AI Act. AIB 2025-1/MDCG 2025-6. Brussels: European Commission; 2025.",
+        url: "https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en",
+      },
+      {
+        citation:
+          "National Institute for Health and Care Excellence. Evidence standards framework for digital health technologies. ECD7. London: NICE; 2022.",
+        url: "https://www.nice.org.uk/corporate/ecd7",
+      },
+    ],
+  },
+  {
+    id: "radiotherapy-specific",
+    title: "Radiotherapy-specific guidance",
+    description:
+      "Discipline-specific guidelines that inform how the framework is applied to radiotherapy AI products.",
+    references: [
+      {
+        citation:
+          "Hurkmans C, et al. A joint ESTRO and AAPM guideline for development, clinical validation and reporting of AI models in radiation therapy. Radiother Oncol. 2024;197:110345.",
+        doi: "10.1016/j.radonc.2024.110345",
+        url: _doi("10.1016/j.radonc.2024.110345"),
+      },
+      {
+        citation:
+          "Barragán-Montero AM, et al. AID-RT: Standardising Artificial Intelligence Documentation in RadioTherapy with a domain-specific model card. Phys Imaging Radiat Oncol. 2026;38:100940.",
+        doi: "10.1016/j.phro.2026.100940",
+        url: _doi("10.1016/j.phro.2026.100940"),
+      },
+      {
+        citation:
+          "Mackay K, et al. Royal College of Radiologists guidance statements on the use of auto-contouring in radiotherapy. Clin Oncol. 2026;50:104004.",
+        doi: "10.1016/j.clon.2025.104004",
+        url: _doi("10.1016/j.clon.2025.104004"),
+      },
+      {
+        citation:
+          "Royal College of Radiologists. Auto-contouring in radiotherapy. London: RCR; 2024.",
+        url: "https://www.rcr.ac.uk/our-services/all-our-publications/clinical-oncology-publications/",
+      },
+      {
+        citation:
+          "Poel R, Rüfenacht E, Scheib S, et al. A comprehensive multifaceted technical evaluation framework for implementation of auto-segmentation models in radiotherapy. Commun Med. 2025.",
+        doi: "10.1038/s43856-025-01048-6",
+        url: _doi("10.1038/s43856-025-01048-6"),
+      },
+      {
+        citation:
+          "NICE. Artificial intelligence (AI) technologies to aid contouring for radiotherapy treatment planning: early value assessment. HTG695. London: NICE; 2023 (updated 2025).",
+        url: "https://www.nice.org.uk/guidance/htg695",
+      },
+      {
+        citation:
+          "Huq MS, et al. The report of Task Group 100 of the AAPM: application of risk analysis methods to radiation therapy quality management. Med Phys. 2016;43(7):4209-4262.",
+        doi: "10.1118/1.4947547",
+        url: _doi("10.1118/1.4947547"),
+      },
+    ],
+  },
+  {
+    id: "platform",
+    title: "DLinRT.eu framework documentation",
+    description: "Internal concept and reference documents for the DLinRT.eu HTA support platform.",
+    references: [
+      {
+        citation:
+          "Lula U. DLinRT.eu HTA Support Platform Concept Paper v0.1: Transforming DLinRT.eu into an International HTA Support Platform for Radiotherapy AI. Unpublished internal concept paper; 2026.",
+      },
+      {
+        citation:
+          "DLinRT.eu. Resources & compliance: evidence level classification. 2026.",
+        url: "https://dlinrt.eu/resources-compliance",
+      },
+    ],
+  },
+];
