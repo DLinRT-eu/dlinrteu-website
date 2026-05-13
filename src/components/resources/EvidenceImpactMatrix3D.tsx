@@ -580,6 +580,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                   )}
                 </div>
               </div>
+            ) : (
               <p className="text-muted-foreground">
                 Hover or click a bar for details. Bar height encodes product count
                 (square-root scaled).
