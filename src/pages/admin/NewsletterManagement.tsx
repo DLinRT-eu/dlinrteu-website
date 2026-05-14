@@ -100,6 +100,10 @@ export default function NewsletterManagement() {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [subscriberToDelete, setSubscriberToDelete] = useState<NewsletterSubscriber | null>(null);
 
+  // Recovery audit state (counts only — no PII)
+  const [recoveryCounts, setRecoveryCounts] = useState<Record<string, number | string> | null>(null);
+  const [recoveryLoading, setRecoveryLoading] = useState(false);
+
   // Add form state
   const [newEmail, setNewEmail] = useState('');
   const [newFirstName, setNewFirstName] = useState('');
@@ -298,6 +302,20 @@ export default function NewsletterManagement() {
     });
   };
 
+  const runRecoveryAudit = async () => {
+    setRecoveryLoading(true);
+    try {
+      const { data, error } = await supabase.rpc('count_potential_newsletter_recoveries');
+      if (error) throw error;
+      setRecoveryCounts((data as Record<string, number | string>) || null);
+    } catch (err) {
+      console.error('Recovery audit error:', err);
+      toast.error('Failed to run recovery audit');
+    } finally {
+      setRecoveryLoading(false);
+    }
+  };
+
   return (
     <>
       <SEO 
@@ -394,6 +412,43 @@ export default function NewsletterManagement() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Recovery audit (counts only — no PII leaves the database) */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Subscriber recovery audit</CardTitle>
+              <CardDescription>
+                Compares the current mailing list against other tables that contain emails.
+                Returns counts only — no names or email addresses are shown or stored client-side.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button variant="outline" size="sm" onClick={runRecoveryAudit} disabled={recoveryLoading}>
+                <RefreshCcw className="h-4 w-4 mr-2" />
+                {recoveryLoading ? 'Checking…' : 'Run audit'}
+              </Button>
+              {recoveryCounts && (
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                    {Object.entries(recoveryCounts)
+                      .filter(([k]) => k !== 'note')
+                      .map(([k, v]) => (
+                        <div key={k} className="rounded-md border p-2">
+                          <div className="text-muted-foreground text-xs">{k.replace(/_/g, ' ')}</div>
+                          <div className="text-xl font-semibold">{String(v)}</div>
+                        </div>
+                      ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    GDPR note: account/processing consent is <strong>not</strong> the same as marketing
+                    consent (Art. 6(1)(a)). Emails from other tables cannot be auto-imported. To restore
+                    lost subscribers, use the <em>Import</em> button with an external CSV/XLSX backup that
+                    already carries explicit newsletter consent, or run a re-opt-in campaign.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           {/* Filters */}
           <Card>

@@ -1862,6 +1862,7 @@ export type Database = {
         Args: { _user_id: string }
         Returns: number
       }
+      count_potential_newsletter_recoveries: { Args: never; Returns: Json }
       create_company_revision:
         | {
             Args: {
