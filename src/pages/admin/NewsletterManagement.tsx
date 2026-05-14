@@ -413,6 +413,43 @@ export default function NewsletterManagement() {
             </Card>
           </div>
 
+          {/* Recovery audit (counts only — no PII leaves the database) */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Subscriber recovery audit</CardTitle>
+              <CardDescription>
+                Compares the current mailing list against other tables that contain emails.
+                Returns counts only — no names or email addresses are shown or stored client-side.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button variant="outline" size="sm" onClick={runRecoveryAudit} disabled={recoveryLoading}>
+                <RefreshCcw className="h-4 w-4 mr-2" />
+                {recoveryLoading ? 'Checking…' : 'Run audit'}
+              </Button>
+              {recoveryCounts && (
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+                    {Object.entries(recoveryCounts)
+                      .filter(([k]) => k !== 'note')
+                      .map(([k, v]) => (
+                        <div key={k} className="rounded-md border p-2">
+                          <div className="text-muted-foreground text-xs">{k.replace(/_/g, ' ')}</div>
+                          <div className="text-xl font-semibold">{String(v)}</div>
+                        </div>
+                      ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    GDPR note: account/processing consent is <strong>not</strong> the same as marketing
+                    consent (Art. 6(1)(a)). Emails from other tables cannot be auto-imported. To restore
+                    lost subscribers, use the <em>Import</em> button with an external CSV/XLSX backup that
+                    already carries explicit newsletter consent, or run a re-opt-in campaign.
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Filters */}
           <Card>
             <CardContent className="pt-6">
