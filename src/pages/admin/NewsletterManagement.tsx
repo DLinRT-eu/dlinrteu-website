@@ -100,6 +100,10 @@ export default function NewsletterManagement() {
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [subscriberToDelete, setSubscriberToDelete] = useState<NewsletterSubscriber | null>(null);
 
+  // Recovery audit state (counts only — no PII)
+  const [recoveryCounts, setRecoveryCounts] = useState<Record<string, number | string> | null>(null);
+  const [recoveryLoading, setRecoveryLoading] = useState(false);
+
   // Add form state
   const [newEmail, setNewEmail] = useState('');
   const [newFirstName, setNewFirstName] = useState('');
