@@ -76,7 +76,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     market: {
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Hospital partnerships", "Enterprise healthcare solutions"],
-      notes: "Early adopters disclosed by GE include Marengo CIMS and the University of Debrecen (Hungary), the latter expanding iRT to its full radiation oncology department and adding the theranostics workflow (ESTRO 2026)."
+      availability: "Early adopters disclosed by GE include Marengo CIMS and the University of Debrecen (Hungary), the latter expanding iRT to its full radiation oncology department and adding the theranostics workflow (ESTRO 2026)."
     },
     evidenceRigor: "E0",
     clinicalImpact: "I2",
