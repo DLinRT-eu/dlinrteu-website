@@ -20,7 +20,14 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     modality: "MRI",
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Prostate Cancer", "Brain Tumors", "Head and Neck Cancer"],
-    keyFeatures: ["Deep learning algorithms", "Clinical workflow integration", "High anatomical accuracy", "Synthetic CT generation", "Auto-segmentation capabilities"],
+    keyFeatures: [
+      "Deep learning algorithms",
+      "Clinical workflow integration",
+      "High anatomical accuracy",
+      "Synthetic CT generation",
+      "Auto-segmentation capabilities",
+      "Brain, head & neck and pelvis sites supported in the GE iRT MR Direct MR-only workflow (ESTRO 2026)"
+    ],
     supportedStructures: [
       "Brain: Brain",
       "Brain: Brainstem",
@@ -47,7 +54,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["TPS integration", "PACS integration"],
+      integration: ["TPS integration", "PACS integration", "GE iRT MR Direct workflow (with MR Contour DL)"],
       deployment: ["Cloud-based", "On-premises"],
       triggerForAnalysis: "Automatic or manual",
       processingTime: "Minutes per patient"
@@ -77,9 +84,9 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
 },
     version: "3.2",
     releaseDate: "2023-07-10",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
-    source: "FDA 510(k) database and company website",
+    lastUpdated: "2026-05-14",
+    lastRevised: "2026-05-14",
+    source: "FDA 510(k) database and company website. GE HealthCare ESTRO 2026 press release (12 May 2026) describes MRI Planner (Spectronic Medical, a GE HealthCare company) as the synthetic-CT engine of the iRT MR Direct MR-only workflow across brain, head & neck and pelvis.",
     evidence: [
       {
         type: "Multicenter Study",

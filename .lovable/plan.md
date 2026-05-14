@@ -1,40 +1,50 @@
-## Findings — Newsletter "lost subscribers" investigation
+## ESTRO 2026 announcement triage
 
-I searched every table in the database for email addresses that could plausibly be merged back into `newsletter_subscribers`. No counts shared in chat — only aggregates.
+ESTRO 2026 runs 15–19 May in Stockholm. I checked the web for vendor press releases relevant to products already in the catalogue.
 
-### Current state
-- `newsletter_subscribers`: 101 rows, all active, all with `consent_given = true`. No "soft-deleted" or unsubscribed rows hiding extra people.
-- `contact_submissions`: empty.
-- `email_send_log`: empty (so no historical recipients to recover from there).
-- `reviewer_invitations`: empty.
-- `user_product_experiences`: 1 email, no newsletter consent flag.
-- `user_registration_notifications`: 22 system-generated admin notifications — these are operational, not opt-ins.
-- `profiles`: 22 users. Only 5 have `data_processing_consent_given = true`, and 4 of those are not already in `newsletter_subscribers`.
+### What I found
 
-### GDPR assessment (important)
-None of the other tables carry **newsletter/marketing consent**. `profiles.data_processing_consent_given` is account-processing consent (Art. 6(1)(b)), which is **not** the same as Art. 6(1)(a) consent for marketing emails. Auto-merging any of these into `newsletter_subscribers` would be an unlawful re-purposing of personal data and would violate the consent text shown on the signup form ("I agree to join the DLinRT mailing list…").
+**GE HealthCare (press release, 12 May 2026)** — confirmed via FT/BusinessWire/gehealthcare.com. Showcases at booth C10:59:
+- **iRT** (already in catalogue: `platform/ge-healthcare.ts`) — new "iRT MR Direct" workflow bundling iRT + MR Contour DL + Spectronic MRI Planner. New early adopter: University of Debrecen. New customer evidence: InstaPlan study (iRT + RayStation), simulation-to-plan reduced from 7 days to 7 minutes (n=20).
+- **iRT for Theranostics** — new, "Technology in development. Not for sale. Not cleared." → candidate for `pipeline` category.
+- **MIM LesionID Pro**, **MIM Contour ProtégéAI+** (already: `auto-contouring/mim-software.ts`), **MIM SurePlan MRT** — MIM updates highlighted.
+- **MR Contour DL** (already: `auto-contouring/ge-mr-contour-dl.ts`) — re-emphasised, head & neck + pelvis OARs.
+- **MRI Planner / Spectronic** (already: `image-synthesis/spectronic.ts`) — re-emphasised; expanded sites (brain, head & neck, pelvis).
+- bk3000/bkFusion/bkActiv/PVA — image-guided interventions, **out of scope** (not RT planning/delivery AI).
 
-**Conclusion: there is no in-database source from which subscribers can be lawfully recovered.** The data was not silently dropped to another table — it simply is not present in the Supabase project anymore.
+**TheraPanacea (press release, 16 April 2026)** — 16 abstracts accepted at ESTRO 2026, partners include Gustave Roussy, Institut Curie, Centre Léon Bérard, CHU Nîmes, Penn Medicine. No new product launches; reinforces evidence base for existing Annotate / Adapt / Plan products (`auto-contouring/therapanacea.ts` and related).
 
-### Recommended path forward
-The only compliant way to restore the lost subscribers is to re-import them from an out-of-band backup (CSV/XLSX export taken before the migration, Mailchimp/Resend audience export, etc.). The admin tool already supports this:
-
-- `src/components/admin/NewsletterImportDialog.tsx` → `admin-newsletter-management` edge function (`bulk-import` action), gated by an explicit "I confirm consent" checkbox.
+**Philips** — I could not locate a Philips ESTRO 2026 press release explicitly mentioning a "4D MRI for RT" product. Closest finds:
+- Titanion ultra-high-gradient MRI (11 May 2026) — research / whole-body biomarkers, not RT-specific.
+- ASTRO 2025 announcement of BlueSeal RT 1.5T 70cm + SmartSpeed Precise + Rembra RT / Areta RT (Sept 2025). Rembra/Areta RT include 4D-CT capabilities; BlueSeal RT is the RT MRI platform.
+- Could you share the link or product name you saw? Otherwise I'll proceed without a Philips-specific update.
 
 ### Plan
 
-1. **Add a one-shot reconciliation utility on the admin Newsletter page** (no PII in code, no new tables):
-   - A button "Check for recoverable contacts" that calls a new admin-only RPC `count_potential_newsletter_recoveries()` returning **only counts** (e.g. `{ profiles_with_consent_not_subscribed: 4 }`) — no names, no emails ever returned to the client or hard-coded.
-   - A short on-screen GDPR notice making clear that those profiles have *account* consent only and **cannot be auto-imported**; they must be re-invited to opt in.
+1. **Add a news entry** `src/data/news/estro-2026-announcements.ts` summarising vendor activity at ESTRO 2026 (GE HealthCare, TheraPanacea, Philips if confirmed), neutral tone per design-neutrality rule (no celebratory badges). Register in `src/data/news.ts`.
 
-2. **Add an "Invite to subscribe" admin action** that triggers `subscribe-newsletter`-style double opt-in emails to a chosen group (admin selects from a server-side list, never exposed in source). The recipient must click the confirmation to be added — preserving lawful consent. Emails are read server-side via the edge function; the frontend only sees aggregate success counts.
+2. **Update `platform/ge-healthcare.ts` (iRT)**:
+   - Add evidence entry: InstaPlan / RayStation 7-day→7-min study (n=20) with link to GE press release.
+   - Add Debrecen University as deployment reference in `market` notes.
+   - Mention MR Direct bundle in `keyFeatures` / `technology.integration` (links iRT ↔ MR Contour DL ↔ Spectronic MRI Planner).
+   - Bump `lastRevised` to 2026-05-14, add ESTRO 2026 press release to `source`.
 
-3. **Document in `docs/ADMIN_GUIDE.md`** the recovery procedure: restore from external backup via the existing CSV import dialog, with the consent checkbox.
+3. **Add new pipeline product** `src/data/products/pipeline/ge-irt-theranostics.ts` for **iRT for Theranostics** (explicitly "in development, not cleared"). Register in `pipeline/index.ts`. Category: Platform; tags: theranostics workflow orchestration.
 
-4. **No code, comments, commits or migration files will contain any first name, last name, or email address.** All PII stays inside the database and is handled exclusively by the existing edge functions using the service role key.
+4. **Light updates to**:
+   - `auto-contouring/ge-mr-contour-dl.ts` — confirm head & neck + pelvis coverage in `anatomicalLocation` / `keyFeatures`; add ESTRO 2026 press release to `source`; bump `lastRevised`.
+   - `image-synthesis/spectronic.ts` (MRIplanner) — confirm brain / H&N / pelvis sites; add MR Direct integration note; bump `lastRevised`.
+   - `auto-contouring/mim-software.ts` (Contour ProtégéAI+) — add ESTRO 2026 reference to `source`; bump `lastRevised`. (No product spec change — already documented as zero-click AI contouring.)
 
-### Out of scope
-- Bulk copying emails from `profiles` / `user_product_experiences` / `user_registration_notifications` into `newsletter_subscribers`. Rejected on GDPR grounds (no marketing consent on those records).
-- Restoring subscribers from server logs or analytics tables (no PII stored there).
+5. **TheraPanacea** — no product changes (no new product/clearance announced). Optionally cite the 16-abstract press release in the news entry only; do not inject into individual product `evidence[]` until concrete abstract DOIs are published post-congress.
 
-If you have an external backup file (CSV/XLSX) of the lost subscribers, the cleanest path is to drop it into the existing **Admin → Newsletter → Import** dialog — no code changes needed at all.
+6. **Out of scope** (per project rules):
+   - MIM LesionID Pro / SurePlan MRT — nuclear medicine / theranostics dosimetry, not radiotherapy AI per inclusion criteria. Will skip unless you want them tracked.
+   - bk3000 / bkFusion / bkActiv / PVA — interventional ultrasound, not RT.
+   - Philips Titanion — diagnostic MRI, not RT-specific.
+
+### Questions before I implement
+
+1. Do you have the Philips ESTRO 2026 link / product name (the "4D MRI for RT")? Without it I'll skip Philips updates.
+2. Should I add **iRT for Theranostics** to the pipeline category despite theranostics being adjacent to (not strictly) radiotherapy AI? It is workflow orchestration that includes RT-style planning, so I'd lean yes.
+3. Should I include MIM LesionID Pro / SurePlan MRT (theranostics dosimetry) — currently excluded by the radiotherapy-only inclusion rule?

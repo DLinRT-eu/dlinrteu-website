@@ -22,7 +22,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
       "MRI-based auto-segmentation",
       "37+ organ structures supported",
       "Integrated with GE MRI systems",
-      "Part of GE iRT platform ecosystem"
+      "Part of GE iRT platform ecosystem",
+      "Component of the iRT MR Direct MR-only workflow (ESTRO 2026), with Spectronic MRI Planner for synthetic CT"
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -66,8 +67,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "Provides automated MRI-based contouring within GE imaging ecosystem. No published outcome data.",
     implementationBurden: "Z3",
     implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastUpdated: "2026-02-26",
-    lastRevised: "2026-02-26",
-    source: "FDA 510(k) database (K242925). Entry needs further research and verification."
+    lastUpdated: "2026-05-14",
+    lastRevised: "2026-05-14",
+    source: "FDA 510(k) database (K242925). GE HealthCare ESTRO 2026 press release (12 May 2026) confirms head & neck and pelvis OAR coverage and bundling within the iRT MR Direct workflow."
   }
 ];
