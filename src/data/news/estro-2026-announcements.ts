@@ -5,7 +5,7 @@ export const estro2026Announcements: NewsItem = {
   date: "2026-05-14",
   title: "ESTRO 2026: Vendor Announcements and Catalogue Updates",
   summary:
-    "Round-up of AI-relevant announcements ahead of ESTRO 2026 (Stockholm, 15–19 May) from GE HealthCare, TheraPanacea, MIM Software and Spectronic Medical, with the corresponding DLinRT.eu catalogue updates.",
+    "Round-up of AI-relevant announcements ahead of ESTRO 2026 (Stockholm, 15–19 May) from GE HealthCare, TheraPanacea, MIM Software, Spectronic Medical, Philips and RaySearch, with the corresponding DLinRT.eu catalogue updates and a brief note on announced non-AI innovations.",
   content: `
 ESTRO 2026 takes place in Stockholm from 15 to 19 May 2026. Several vendors have published pre-congress announcements relevant to AI in radiotherapy. Below is a neutral summary of the items that affect products already tracked in the DLinRT.eu catalogue, along with the corresponding entry updates.
 
