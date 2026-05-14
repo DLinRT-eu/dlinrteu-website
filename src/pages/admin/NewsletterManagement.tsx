@@ -302,6 +302,20 @@ export default function NewsletterManagement() {
     });
   };
 
+  const runRecoveryAudit = async () => {
+    setRecoveryLoading(true);
+    try {
+      const { data, error } = await supabase.rpc('count_potential_newsletter_recoveries');
+      if (error) throw error;
+      setRecoveryCounts((data as Record<string, number | string>) || null);
+    } catch (err) {
+      console.error('Recovery audit error:', err);
+      toast.error('Failed to run recovery audit');
+    } finally {
+      setRecoveryLoading(false);
+    }
+  };
+
   return (
     <>
       <SEO 
