@@ -31,6 +31,23 @@ Philips has [pre-announced the global introduction of 4D MR-RT](https://www.link
 
 Other recent Philips items: the [Titanion ultra-high-gradient MRI](https://www.philips.com/a-w/about/news/archive/standard/news/press/2026/philips-titanion-mr-expands-ultra-high-gradient-mri-beyond-anatomical-and-functional-imaging-toward-whole-body-quantitative-biomarkers.html) (11 May 2026, diagnostic — not RT-specific) and the ASTRO 2025 launch of BlueSeal RT 1.5T 70cm with SmartSpeed Precise plus the Rembra RT and Areta RT CT platforms (which include 4D-CT capabilities).
 
+## RaySearch Laboratories
+
+RaySearch [announced via LinkedIn](https://www.linkedin.com/posts/raysearch-laboratories_estro2026-c14-raysearch-activity-7460349093698138112-u-RD) that the upcoming **RayStation** release will close the last remaining gap in its **Deep Learning Segmentation (DLS)** CT portfolio with a **Female Pelvis** model. The vendor reports a full CT body coverage of 231 structures, with 192 ROIs contoured in 59 seconds in their demonstration. The Female Pelvis model is explicitly flagged as "investigational, not CE-marked or FDA-cleared, and not available for clinical use." RaySearch will be at booth C14:45.
+
+The DLinRT.eu [RayStation Deep Learning Segmentation entry](/product/raysearch-raystation) will be updated once the release is publicly available and the Female Pelvis structures are documented; until then the model is tracked here as a pre-announcement only and is not added to the supported-structures list.
+
+---
+
+## Announced non-AI innovations (informational only)
+
+The following items were announced for ESTRO 2026 but fall outside the DLinRT.eu inclusion criteria (AI/deep-learning for radiotherapy). They are listed here for completeness and are **not** added to the catalogue.
+
+- **Philips — 4D MR-RT** (global introduction, 16 May, booth C13:61). The teaser does not currently describe an AI/DL component; if the formal launch confirms one, a catalogue entry will follow.
+- **GE HealthCare — bk3000 / bkFusion / bkActiv / Prostate Volume Assist** (interventional ultrasound for prostate biopsy/brachytherapy guidance) — outside the radiotherapy planning/delivery AI scope.
+- **MIM Software — LesionID Pro and SurePlan MRT** — theranostics dosimetry / nuclear medicine, outside the radiotherapy scope.
+- **Philips — Titanion** ultra-high-gradient MRI (11 May 2026) — diagnostic imaging, not RT-specific.
+
 ---
 
 If you spot another ESTRO 2026 announcement that should trigger a catalogue update, please [contact us](/support).
