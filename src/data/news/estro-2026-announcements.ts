@@ -27,7 +27,9 @@ TheraPanacea announced [16 accepted abstracts](https://www.therapanacea.eu/our-s
 
 ## Philips
 
-We have not been able to confirm a Philips ESTRO 2026 press release describing a "4D MRI for RT" product. The closest recent Philips items are the [Titanion ultra-high-gradient MRI](https://www.philips.com/a-w/about/news/archive/standard/news/press/2026/philips-titanion-mr-expands-ultra-high-gradient-mri-beyond-anatomical-and-functional-imaging-toward-whole-body-quantitative-biomarkers.html) (11 May 2026, diagnostic — not RT-specific) and the ASTRO 2025 launch of BlueSeal RT 1.5T 70cm with SmartSpeed Precise plus the Rembra RT and Areta RT CT platforms (which include 4D-CT capabilities). We will revisit the Philips entries as soon as a confirmed ESTRO 2026 reference is available.
+Philips has [pre-announced the global introduction of 4D MR-RT](https://www.linkedin.com/posts/sallywjlin_join-us-for-the-global-introduction-of-philips-ugcPost-7460615611283472384-f_zs) at ESTRO 2026 (live introduction Saturday 16 May, 10:10 CET, booth C13:61). At the time of writing, the public teaser does not disclose technical specifications, regulatory status, or whether the offering includes an AI/DL component. Per the catalogue's AI-in-radiotherapy inclusion criteria, no product entry is created yet; we will revisit Philips' MR-RT entries (Ingenia MR-RT auto-contouring, MRCAT brain/head & neck/pelvis) once a formal Philips press release or product page is published.
+
+Other recent Philips items: the [Titanion ultra-high-gradient MRI](https://www.philips.com/a-w/about/news/archive/standard/news/press/2026/philips-titanion-mr-expands-ultra-high-gradient-mri-beyond-anatomical-and-functional-imaging-toward-whole-body-quantitative-biomarkers.html) (11 May 2026, diagnostic — not RT-specific) and the ASTRO 2025 launch of BlueSeal RT 1.5T 70cm with SmartSpeed Precise plus the Rembra RT and Areta RT CT platforms (which include 4D-CT capabilities).
 
 ---
 
