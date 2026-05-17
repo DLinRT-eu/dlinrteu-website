@@ -383,12 +383,12 @@ Need more context or a new field? Open an issue referencing this document and in
 
 ## Implementation & Assurance Burden (Z-axis)
 
-Third axis of the E/I/Z evidence-assurance model (internally proposed DLinRT extension). Lower Z = lower residual effort = higher adoption readiness.
+Third axis of the E/I/R evidence-readiness model (DLinRT extension). Higher R = lower residual effort = closer to adoption-ready. Note: peer-review, funding independence, and COI are captured via the study-quality sub-attributes (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceProspective`, `evidenceExternalValidation`) — not collapsed into E.
 
 | Field | Type | Description |
 |---|---|---|
-| `implementationBurden` | `"Z0"\|"Z1"\|"Z2"\|"Z3"\|"Z4"\|"Z5"` | Residual implementation/assurance burden. See `src/data/evidence-impact-levels.ts` for the full Z0–Z5 rubric (Table 2C of the proposal). |
-| `implementationBurdenNotes` | string | Free-text notes explaining the Z assignment. |
+| `adoptionReadiness` | `"R0"\|"R1"\|"R2"\|"R3"\|"R4"\|"R5"` | Adoption readiness for the intended use. See `src/data/evidence-impact-levels.ts` for the full R0–R5 rubric. Missing national/international guidelines delay (not block) adoption — flagged via R. |
+| `adoptionReadinessNotes` | string | Free-text notes explaining the R assignment. |
 | `burdenFactors.commissioningRequired` | boolean | Local commissioning still required before clinical use. |
 | `burdenFactors.localValidationRequired` | boolean | Local validation cohort needed. |
 | `burdenFactors.workflowRedesign` | boolean | Workflow redesign required for safe deployment. |
@@ -397,6 +397,6 @@ Third axis of the E/I/Z evidence-assurance model (internally proposed DLinRT ext
 | `burdenFactors.economicCaseRequired` | boolean | Local economic/resource case required. |
 | `burdenFactors.subgroupValidationGaps` | boolean | Subgroup or atypical-anatomy gaps remain. |
 | `burdenFactors.postMarketMonitoringPlan` | boolean | Post-market monitoring plan in place. |
-| `burdenFactors.unresolvedSafetySignal` | boolean | Unresolved FSCA/recall/advisory — forces Z5 / blocked signal. |
+| `burdenFactors.unresolvedSafetySignal` | boolean | Unresolved FSCA/recall/advisory — forces R0 / blocked signal. |
 
 **Composite Readiness Signal** (computed, not stored): derived from E/I/Z via `computeReadinessSignal()`. Returns one of `adoption-grade`, `deploy-with-monitoring`, `conditional`, `pilot-only`, `not-adoption-ready`, `blocked`, `not-assessed`.
