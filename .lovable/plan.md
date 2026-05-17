@@ -1,46 +1,58 @@
-## Update: Accuray at ESTRO 2026 (news round-up)
+## Evidence Classification — Revised Plan (resumed)
 
-Edit `src/data/news/estro-2026-announcements.ts` to add an **Accuray** section between RaySearch and United Imaging, keeping with the DLinRT.eu inclusion criterion (AI/DL component for radiotherapy must be explicit).
+Colleague approvals received; resolving the three open questions and adding one new scope item (stakeholders).
 
-### What Accuray announced for ESTRO 2026 (booth, ESTRO Stage talks, press)
+### Decisions locked in
 
-From the public material (accuray.com/estro, accuray.com/estro-stage, Sept 2025 Stellar launch PR, and ESTRO26 press coverage):
+1. **Axis rename confirmed**: `Z (Implementation Burden)` → `R (Adoption Readiness)`, levels `R0–R5` where higher = more ready. Rationale to surface in tooltip + guide: missing national/international guidelines delay (not block) adoption — R flags that gap.
+2. **I1 rename confirmed**: `I1 = "Technical Performance"` (Fryback & Thornbury L1). Code `I1` and color unchanged.
+3. **Stakeholder views — phased**: ship Reviewer (default) + New-vendor/Gap-analysis now; defer Existing-vendor and Clinic/Decision-maker views to a post-ESTRO iteration.
+4. **NEW — Stakeholders explainer**: add a "Who DLinRT.eu helps & how" section tying each stakeholder to concrete site uses (HTA framing for clinics/payers). Lives on `/about` and is linked from `/evidence-impact-guide`.
 
-- **Accuray Stellar™ solution** — a configuration of the Radixact® Treatment Delivery System, marketed under "Make ARTwork — Adapt with Confidence." Bundle of imaging + adaptive tools. US market first; ESTRO 2026 is the European showcase.
-- **Radixact® / Accuray Helix™** — helical radiotherapy delivery hardware, "advanced options" promoted at ESTRO26.
-- **Synchrony®** — real-time motion tracking & correction. Already tracked in the DLinRT.eu catalogue as AI-based (patient-specific AI motion model).
-- **PreciseART®** — offline adaptive replanning workflow.
-- **Adapt LTE™ powered by Accuray Cenos™** — retrospective evaluation of previously delivered Precision plans against original objectives, for training / post-treatment analysis. US-only, "Learn, Trial, Evaluate."
-- **ClearRT®** — helical kVCT imaging for IGRT/adaptive.
-- **ESTRO Stage session (Mon 18 May, 10:15)** — "AI in radiotherapy: clinical performance, legal framework, ethics" (symposium content, not a product launch).
+### Scope (6 changes, unchanged from frozen plan + 1 new)
 
-### AI/DL scope assessment
+1. **Invert Z → Adoption Readiness (R0–R5)**
+   - Rename `ImplementationBurdenCode` → `AdoptionReadinessCode` in `src/data/evidence-impact-levels.ts` and `src/types/productDetails.d.ts`.
+   - Reverse level array; rewrite descriptions in "ready for adoption" voice; preserve color ramp (rose→green now monotonic with R).
+   - Update `computeReadinessSignal()` so higher R contributes positively.
+   - Rename product fields: `implementationBurden` → `adoptionReadiness`, `implementationBurdenNotes` → `adoptionReadinessNotes`.
+   - Mechanical codemod across `src/data/products/**/*.ts`: `Z0→R5, Z1→R4, Z2→R3, Z3→R2, Z4→R1, Z5→R0`.
+   - Update consumers: `hta-mapping.ts`, `aidrtMapping.ts`, `deviceDefinition.ts` (FHIR), `exportProducts.ts`.
 
-| Item | AI/DL component explicit in public material? | Action |
-|---|---|---|
-| Synchrony | Yes (patient-specific AI motion model) | Refresh existing entry with ESTRO 2026 reference |
-| Stellar (Radixact configuration) | No — described as a "solution / tool set"; AI not isolated | Mention in news but **do not** add catalogue entry; flag for revision once vendor confirms an AI/DL component |
-| Radixact / Helix | No — delivery hardware | Out of scope per inclusion criteria |
-| PreciseART | No — adaptive workflow, AI role not disclosed | Flag for revision |
-| Adapt LTE / Cenos | No — retrospective evaluation tool; AI role not disclosed | Flag for revision |
-| ClearRT | No — kVCT imaging hardware | Out of scope |
-| ESTRO Stage AI talk | Educational session, no product | Mention only |
+2. **Fix 3D matrix coloring** — `EvidenceImpactMatrix3D.tsx`: composite score `(E_rank/3 + I_rank/5 + R_rank/5)/3` through a single sequential ramp. Eliminates the I0 green artifact.
 
-### News-file change (single section to add)
+3. **Rename I1 → "Technical Performance"** in `evidence-impact-levels.ts` (code/color stable; example list reviewed).
 
-A short Accuray subsection that:
-1. Notes the ESTRO 2026 presence (booth, "Make ARTwork" theme, ESTRO Stage AI session reference).
-2. Confirms **Synchrony** as the only Accuray product at the booth with an explicitly disclosed AI/DL component for radiotherapy; links to the existing catalogue entry; refreshes its `lastUpdated`/`lastRevised` and adds an ESTRO 2026 source line in `accuray.ts`.
-3. Explicitly states that **Stellar, PreciseART, Adapt LTE / Cenos, ClearRT, Radixact, Helix** are tracked here as platform/workflow announcements only — catalogue entries will be created (or existing ones revised) once Accuray publishes documentation describing any AI/DL model, training data and intended use inside these products. Per the [product inclusion criteria](/about), they are not added to the catalogue today.
-4. Cites: accuray.com/estro, accuray.com/estro-stage, Accuray investor PR (26 Sep 2025) for Stellar, ESTRO26 press coverage.
+4. **Strength-of-evidence caveat** — document in `EvidenceImpactGuide.tsx` and `docs/review/GUIDE.md` that peer-review, funding independence, and COI are captured via existing study-quality sub-attributes (`vendorIndependent`, `multiCenter`, `prospective`, `externalValidation`), not collapsed into E.
+
+5. **Stakeholder views — phase 1**
+   - `StakeholderView` enum in `EvidenceImpactScatterChart.tsx` with two presets:
+     - **Reviewer** (default): current cell grid.
+     - **New vendor / Gap analysis**: per-task density heatmap; entry threshold = median (E,I,R) of products in the same task; tooltip "to be competitive in <task>, target ≥E2 ∧ ≥I2 ∧ ≥R3".
+   - Re-uses existing `cellMap`; medians computed in a `useMemo` keyed on `filteredProducts`.
+   - Existing-vendor and Clinic views stubbed behind a "Coming after ESTRO" toggle (no logic yet).
+
+6. **"Who DLinRT.eu helps & how" section (NEW)**
+   - New component `src/components/about/StakeholderUseCases.tsx`, rendered on `/about` and cross-linked from `/evidence-impact-guide`.
+   - Four cards (Clinician / HTA-Payer / Vendor / Researcher) each with: typical question → which DLinRT.eu view answers it → suggested E/I/R thresholds.
+   - HTA card explicitly frames R as the "guideline gap" signal raised by the reviewer.
+
+7. **Docs, changelog, memory**
+   - Update `docs/review/GUIDE.md`, `docs/FIELD_REFERENCE.md`, `docs/ADMIN_GUIDE.md`.
+   - Add changelog entry "Evidence Classification v2: Adoption Readiness, stakeholder views".
+   - Update memory files: `mem://features/evidence-impact-matrix-dashboard`, `mem://data-quality/evidence-classification-logic`.
 
 ### Files touched
 
-- `src/data/news/estro-2026-announcements.ts` — add Accuray section.
-- `src/data/products/tracking/accuray.ts` — append "Accuray ESTRO 2026 booth presence" to the `source` field; bump `lastUpdated` / `lastRevised` to today.
+`src/data/evidence-impact-levels.ts`, `src/types/productDetails.d.ts`, `src/data/products/**/*.ts` (codemod), `src/data/hta-mapping.ts`, `src/utils/modelCard/aidrtMapping.ts`, `src/utils/fhir/transformers/deviceDefinition.ts`, `src/utils/exportProducts.ts`, `src/components/dashboard/EvidenceImpactScatterChart.tsx`, `src/components/resources/EvidenceImpactMatrix3D.tsx`, `src/components/resources/EvidencePyramid.tsx`, `src/components/product/EvidenceImpactBadges.tsx`, `src/pages/EvidenceImpactGuide.tsx`, `src/pages/About.tsx`, `src/components/about/StakeholderUseCases.tsx` (new), plus stragglers via grep on `implementationBurden|Z[0-5]|"QA"`.
 
-No type, schema, or UI changes. No new product files. No newsletter dispatch.
+### Risks / regressions
 
-### Open question (non-blocking)
+- Mechanical Z→R codemod must be exhaustive; CI grep-guard for `implementationBurden` and `\bZ[0-5]\b` in product data after migration.
+- Existing exports (FHIR, AID-RT, CSV) shift field name — bump exporter version string.
+- Color ramp inversion in 3D view may surprise returning users; flag in changelog.
 
-Should I also add a one-line "watchlist" bullet listing Stellar / Adapt LTE / PreciseART as **pending vendor clarification** at the bottom of the Accuray section, so reviewers can see what we are explicitly waiting on? Default: yes.
+### Out of scope (phase 2, post-ESTRO)
+
+- Existing-vendor view (highlight + arrows to nearest higher-(E,I,R) peer via `priorVersions`).
+- Clinic/Decision-maker view (default filter ≥E2 ∧ ≥I2 ∧ ≥R3 + version trajectory tooltip).
