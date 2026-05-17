@@ -230,7 +230,7 @@ const EvidenceImpactBadges = ({
               </div>
               <p className="text-xs text-muted-foreground">{signal.description}</p>
               <p className="text-[11px] text-muted-foreground pt-1 border-t">
-                Composite of Evidence Rigor (E), Clinical Impact (I) and Implementation Burden (Z).
+                Composite of Evidence Rigor (E), Clinical Impact (I) and Adoption Readiness (R).
               </p>
             </div>
           </TooltipContent>

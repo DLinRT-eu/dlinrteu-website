@@ -228,17 +228,17 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
               </EditableField>
             </div>
 
-            {/* Implementation Burden (Z-axis) */}
+            {/* Adoption Readiness (R-axis) */}
             <div className="space-y-2">
               {showEditor ? (
                 <>
-                  <Label className="text-sm font-medium">Implementation Burden (Z0-Z5)</Label>
+                  <Label className="text-sm font-medium">Adoption Readiness (R0-R5)</Label>
                   <Select
                     value={adoptionReadiness || ''}
                     onValueChange={(v) => updateField('adoptionReadiness', v || undefined)}
                   >
                     <SelectTrigger className="bg-background w-full">
-                      <SelectValue placeholder="Select implementation burden" />
+                      <SelectValue placeholder="Select adoption readiness" />
                     </SelectTrigger>
                     <SelectContent className="bg-background z-50">
                       {ADOPTION_READINESS_OPTIONS.map(opt => (
@@ -251,7 +251,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 </>
               ) : adoptionReadiness && (
                 <div className="text-sm">
-                  <span className="font-medium">Implementation Burden:</span>{" "}
+                  <span className="font-medium">Adoption Readiness:</span>{" "}
                   <span className="text-muted-foreground">
                     {ADOPTION_READINESS_OPTIONS.find(o => o.value === adoptionReadiness)?.label}
                   </span>
@@ -262,7 +262,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 fieldPath="adoptionReadinessNotes"
                 value={adoptionReadinessNotes}
                 type="textarea"
-                placeholder="Notes about residual implementation/assurance burden"
+                placeholder="Notes about adoption readiness (residual effort to reach intended use)"
               >
                 {adoptionReadinessNotes && (
                   <p className="text-sm text-muted-foreground">{adoptionReadinessNotes}</p>
