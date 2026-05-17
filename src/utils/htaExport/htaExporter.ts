@@ -11,12 +11,12 @@ import { ProductDetails } from "@/types/productDetails";
 import { createExcelWorkbook, downloadBlob, type ExcelSheet } from "@/utils/excelExport";
 import { EVIDENCE_RIGOR_EXPLAIN, CLINICAL_IMPACT_EXPLAIN } from "@/data/hta-mapping";
 import {
-  IMPLEMENTATION_BURDEN_LEVELS,
+  ADOPTION_READINESS_LEVELS,
   computeReadinessSignal,
 } from "@/data/evidence-impact-levels";
 
 const BURDEN_EXPLAIN: Record<string, string> = Object.fromEntries(
-  IMPLEMENTATION_BURDEN_LEVELS.map((l) => [l.level, `${l.name} — ${l.readinessConsequence}`])
+  ADOPTION_READINESS_LEVELS.map((l) => [l.level, `${l.name} — ${l.readinessConsequence}`])
 );
 
 const stringify = (v: unknown): string => {
@@ -202,7 +202,7 @@ function buildIMP(products: ProductDetails[]): ExcelSheet {
   return {
     name: "IMP — Implementation & assurance",
     data: products.map((p) => {
-      const burden = (p as any).implementationBurden as string | undefined;
+      const burden = (p as any).adoptionReadiness as string | undefined;
       const factors: any = (p as any).burdenFactors ?? {};
       const signal = computeReadinessSignal(
         (p as any).evidenceRigor,
@@ -213,7 +213,7 @@ function buildIMP(products: ProductDetails[]): ExcelSheet {
         "Product": p.name ?? "",
         "Implementation burden (Z0–Z5)": burden ?? "",
         "Burden — meaning": burden ? BURDEN_EXPLAIN[burden] ?? "" : "",
-        "Burden notes": stringify((p as any).implementationBurdenNotes),
+        "Burden notes": stringify((p as any).adoptionReadinessNotes),
         "Readiness signal (composite)": signal.label,
         "Commissioning required": factors.commissioningRequired ? "Yes" : "No",
         "Local validation required": factors.localValidationRequired ? "Yes" : "No",

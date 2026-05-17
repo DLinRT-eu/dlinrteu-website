@@ -315,15 +315,17 @@ In addition to the E0-E3 level, products can be tagged with study quality sub-at
 
 *Last Updated: March 8, 2026*
 
-## Z-axis review checklist (Implementation & Assurance Burden)
+## R-axis review checklist (Adoption Readiness)
 
-Reviewers must assign `implementationBurden` (Z0–Z5) alongside E and I. Use the rubric in the [Evidence/Impact Guide](https://dlinrt.eu/evidence-impact-guide). Quick floors:
+Reviewers must assign `adoptionReadiness` (R0–R5) alongside E and I. Use the rubric in the [Evidence/Impact Guide](https://dlinrt.eu/evidence-impact-guide). Higher R = closer to adoption. Quick floors:
 
-- **Unresolved safety signal / FSCA open** → Z5 (blocked)
-- **Missing governance, cybersecurity or post-market monitoring** → Z4
-- **Significant TPS/OIS/PACS integration or human-factors gaps** → Z3
-- **Local validation, workflow redesign, or economic case needed** → Z2
-- **Minor commissioning, training or workflow confirmation** → Z1
-- **Documentation, validation, integration, QA and governance complete** → Z0
+- **Unresolved safety signal / FSCA open** → R0 (blocked)
+- **Missing governance, cybersecurity or post-market monitoring** → R1
+- **Significant TPS/OIS/PACS integration or human-factors gaps** → R2 (pilot only)
+- **Local validation, workflow redesign, missing national/international guidelines, or economic case needed** → R3 (conditional)
+- **Minor commissioning, training or workflow confirmation** → R4 (deploy with monitoring)
+- **Documentation, validation, integration, QA and governance complete, aligned with guidelines** → R5 (adoption-ready)
 
-A product can only be marked **Adoption-grade** when E≥E2, I≥I2 AND Z=Z0. High Z constrains the public Readiness Signal even when E and I are strong.
+A product can only be marked **Adoption-grade** when E≥E2, I≥I2 AND R=R5. Low R constrains the public Readiness Signal even when E and I are strong.
+
+**Strength of evidence note.** Peer-review status, funding independence, and conflict-of-interest are not collapsed into E. They are captured via the study-quality sub-attributes (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`) so reviewers can score rigor methodologically while keeping these signals visible.

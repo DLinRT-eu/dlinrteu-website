@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
-import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
+import { ADOPTION_READINESS_LEVELS } from '@/data/evidence-impact-levels';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import EvidenceImpactMatrix3D from "@/components/resources/EvidenceImpactMatrix3D";
 
@@ -31,7 +31,7 @@ const RIGOR_LEVELS = [
 
 const IMPACT_LEVELS = [
   { key: 'I0', label: 'I0', name: 'None Demo.' },
-  { key: 'I1', label: 'I1', name: 'QA' },
+  { key: 'I1', label: 'I1', name: 'Tech. Perf.' },
   { key: 'I2', label: 'I2', name: 'Workflow' },
   { key: 'I3', label: 'I3', name: 'Decision' },
   { key: 'I4', label: 'I4', name: 'Outcome' },
@@ -78,11 +78,11 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         impactLabel: `${p.clinicalImpact} – ${IMPACT_LEVELS.find(i => i.key === p.clinicalImpact)?.name ?? ''}`,
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
-        burden: p.implementationBurden,
-        burdenLabel: p.implementationBurden
-          ? `${p.implementationBurden} – ${IMPLEMENTATION_BURDEN_LEVELS.find(b => b.level === p.implementationBurden)?.name ?? 'Implementation burden'}`
+        burden: p.adoptionReadiness,
+        burdenLabel: p.adoptionReadiness
+          ? `${p.adoptionReadiness} – ${ADOPTION_READINESS_LEVELS.find(b => b.level === p.adoptionReadiness)?.name ?? 'Implementation burden'}`
           : undefined,
-        burdenNotes: p.implementationBurdenNotes ?? '',
+        burdenNotes: p.adoptionReadinessNotes ?? '',
       });
       if (!catSet.has(p.category)) catSet.set(p.category, color);
       count++;

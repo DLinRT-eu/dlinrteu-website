@@ -73,8 +73,8 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024).",
     clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
-    implementationBurden: "Z4",
-    implementationBurdenNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
+    adoptionReadiness: "R1",
+    adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
     lastUpdated: "2026-02-23",
     lastRevised: "2026-03-08",
     source: "Automatically retrieved and revised"

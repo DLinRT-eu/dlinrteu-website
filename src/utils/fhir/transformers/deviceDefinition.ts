@@ -390,7 +390,7 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
     });
   }
 
-  if (product.implementationBurden) {
+  if (product.adoptionReadiness) {
     properties.push({
       type: {
         coding: [{
@@ -399,7 +399,7 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
           display: "Implementation & Assurance Burden Level"
         }]
       },
-      valueString: [product.implementationBurden]
+      valueString: [product.adoptionReadiness]
     });
   }
 

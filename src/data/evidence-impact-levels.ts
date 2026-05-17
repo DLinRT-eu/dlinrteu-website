@@ -99,8 +99,8 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   },
   {
     level: "I1",
-    name: "Quality Assurance",
-    description: "Enables monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe operation. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
+    name: "Technical Performance",
+    description: "Enables technical performance monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe and correct operation. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
     rtExamples: [
       "QA tools validating AI contour accuracy",
       "Performance monitoring dashboards",
@@ -164,65 +164,74 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   }
 ];
 
-// ==================== IMPLEMENTATION BURDEN AXIS (Z) ====================
-// Third axis (internally proposed DLinRT extension): residual implementation
-// & assurance burden. Lower Z = lower residual effort = higher adoption
-// readiness.
+// ==================== ADOPTION READINESS AXIS (R) ====================
+// Third axis (DLinRT extension): adoption readiness for the intended use.
+// Higher R = lower residual effort = closer to adoption. Missing national or
+// international guidelines delay (not block) adoption — R surfaces that gap.
 
-export type ImplementationBurdenCode = "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
+export type AdoptionReadinessCode = "R0" | "R1" | "R2" | "R3" | "R4" | "R5";
 
-export interface ImplementationBurdenLevel {
-  level: ImplementationBurdenCode;
+export interface AdoptionReadinessLevel {
+  level: AdoptionReadinessCode;
   name: string;
   description: string;
   readinessConsequence: string;
   color: string;
 }
 
-export const IMPLEMENTATION_BURDEN_LEVELS: ImplementationBurdenLevel[] = [
+export const ADOPTION_READINESS_LEVELS: AdoptionReadinessLevel[] = [
   {
-    level: "Z0",
-    name: "Minimal residual effort",
-    description: "Core documentation, validation, integration, QA and governance are complete for the intended use.",
-    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
-    color: "green",
+    level: "R0",
+    name: "Not adoption-ready",
+    description: "Critical unresolved gaps: governance, cybersecurity, regulatory or clinical-safety assurance missing; integration unclear.",
+    readinessConsequence: "Horizon scanning only; block adoption-grade export.",
+    color: "rose",
   },
   {
-    level: "Z1",
-    name: "Limited local assurance",
+    level: "R1",
+    name: "Major gaps to address",
+    description: "Material uncertainty around safety, fairness, monitoring, change control, generalisability or post-market surveillance.",
+    readinessConsequence: "Do not present as adoption-ready.",
+    color: "red",
+  },
+  {
+    level: "R2",
+    name: "Pilot-ready",
+    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence still required.",
+    readinessConsequence: "Restrict to structured pilot or sandbox.",
+    color: "orange",
+  },
+  {
+    level: "R3",
+    name: "Conditionally ready",
+    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks remain. Missing national/international guidelines may delay adoption.",
+    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
+    color: "yellow",
+  },
+  {
+    level: "R4",
+    name: "Ready with local assurance",
     description: "Minor local commissioning, user training, documentation checks or workflow confirmation remain.",
     readinessConsequence: "Deploy with local sign-off and monitoring.",
     color: "teal",
   },
   {
-    level: "Z2",
-    name: "Moderate implementation effort",
-    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks are needed.",
-    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
-    color: "yellow",
-  },
-  {
-    level: "Z3",
-    name: "High implementation burden",
-    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence is required.",
-    readinessConsequence: "Restrict to structured pilot or sandbox.",
-    color: "orange",
-  },
-  {
-    level: "Z4",
-    name: "Major assurance burden",
-    description: "Material uncertainty around safety, fairness, monitoring, change control, cost, generalisability or post-market surveillance.",
-    readinessConsequence: "Do not present as adoption-ready.",
-    color: "red",
-  },
-  {
-    level: "Z5",
-    name: "Critical unresolved burden",
-    description: "Unclear integration, high residual risk, missing governance, cybersecurity, regulatory or clinical-safety assurance.",
-    readinessConsequence: "Block adoption-grade export; horizon scanning only.",
-    color: "rose",
+    level: "R5",
+    name: "Adoption-ready",
+    description: "Core documentation, validation, integration, QA and governance complete for the intended use; aligned with available guidelines.",
+    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
+    color: "green",
   },
 ];
+
+// Deprecated aliases — kept temporarily for backward compatibility with any
+// external consumers of the symbol names. New code should use the R* names.
+/** @deprecated Use AdoptionReadinessCode */
+export type ImplementationBurdenCode = AdoptionReadinessCode;
+/** @deprecated Use AdoptionReadinessLevel */
+export type ImplementationBurdenLevel = AdoptionReadinessLevel;
+/** @deprecated Use ADOPTION_READINESS_LEVELS */
+export const IMPLEMENTATION_BURDEN_LEVELS = ADOPTION_READINESS_LEVELS;
 
 // ==================== READINESS SIGNAL (composite E/I/Z) ====================
 
@@ -293,25 +302,25 @@ const I_RANK: Record<ClinicalImpactCode, number> = { I0: 0, I1: 1, I2: 2, I3: 3,
 export const computeReadinessSignal = (
   evidenceRigor?: EvidenceRigorCode,
   clinicalImpact?: ClinicalImpactCode,
-  implementationBurden?: ImplementationBurdenCode,
+  adoptionReadiness?: AdoptionReadinessCode,
 ): ReadinessSignalDescriptor => {
-  if (!evidenceRigor || !clinicalImpact || !implementationBurden) {
+  if (!evidenceRigor || !clinicalImpact || !adoptionReadiness) {
     return READINESS_DESCRIPTORS["not-assessed"];
   }
-  if (implementationBurden === "Z5") return READINESS_DESCRIPTORS.blocked;
-  if (implementationBurden === "Z4") return READINESS_DESCRIPTORS["not-adoption-ready"];
-  if (implementationBurden === "Z3") return READINESS_DESCRIPTORS["pilot-only"];
+  if (adoptionReadiness === "R0") return READINESS_DESCRIPTORS.blocked;
+  if (adoptionReadiness === "R1") return READINESS_DESCRIPTORS["not-adoption-ready"];
+  if (adoptionReadiness === "R2") return READINESS_DESCRIPTORS["pilot-only"];
 
   const e = E_RANK[evidenceRigor];
   const i = I_RANK[clinicalImpact];
 
-  if (implementationBurden === "Z0" && e >= 2 && i >= 2) {
+  if (adoptionReadiness === "R5" && e >= 2 && i >= 2) {
     return READINESS_DESCRIPTORS["adoption-grade"];
   }
-  if (implementationBurden === "Z1" || (implementationBurden === "Z0" && (e < 2 || i < 2))) {
+  if (adoptionReadiness === "R4" || (adoptionReadiness === "R5" && (e < 2 || i < 2))) {
     return READINESS_DESCRIPTORS["deploy-with-monitoring"];
   }
-  // Z2
+  // R3
   if (e >= 2 && i >= 2) return READINESS_DESCRIPTORS["deploy-with-monitoring"];
   return READINESS_DESCRIPTORS.conditional;
 };
@@ -356,13 +365,13 @@ export const getClinicalImpactColor = (level: string): string => {
   return colorMap[impactLevel.color] || colorMap.slate;
 };
 
-export const getImplementationBurdenLevel = (level: string): ImplementationBurdenLevel | undefined => {
-  return IMPLEMENTATION_BURDEN_LEVELS.find(l => l.level === level);
+export const getAdoptionReadinessLevel = (level: string): AdoptionReadinessLevel | undefined => {
+  return ADOPTION_READINESS_LEVELS.find(l => l.level === level);
 };
 
-export const getImplementationBurdenColor = (level: string): string => {
-  const z = getImplementationBurdenLevel(level);
-  if (!z) return "bg-gray-100 text-gray-700 border-gray-300";
+export const getAdoptionReadinessColor = (level: string): string => {
+  const r = getAdoptionReadinessLevel(level);
+  if (!r) return "bg-gray-100 text-gray-700 border-gray-300";
   const colorMap: Record<string, string> = {
     green: "bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
     teal: "bg-teal-100 text-teal-700 border-teal-300 dark:bg-teal-900/30 dark:text-teal-300 dark:border-teal-700",
@@ -371,8 +380,13 @@ export const getImplementationBurdenColor = (level: string): string => {
     red: "bg-red-100 text-red-700 border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
     rose: "bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-700",
   };
-  return colorMap[z.color] || colorMap.green;
+  return colorMap[r.color] || colorMap.green;
 };
+
+/** @deprecated Use getAdoptionReadinessLevel */
+export const getImplementationBurdenLevel = getAdoptionReadinessLevel;
+/** @deprecated Use getAdoptionReadinessColor */
+export const getImplementationBurdenColor = getAdoptionReadinessColor;
 
 export const getReadinessSignalColor = (color: string): string => {
   const colorMap: Record<string, string> = {

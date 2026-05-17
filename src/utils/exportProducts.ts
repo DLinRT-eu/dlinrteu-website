@@ -173,10 +173,10 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.evidenceRigorNotes),
     escapeValueForCsv(product.clinicalImpact),
     escapeValueForCsv(product.clinicalImpactNotes),
-    escapeValueForCsv(product.implementationBurden),
-    escapeValueForCsv(product.implementationBurdenNotes),
+    escapeValueForCsv(product.adoptionReadiness),
+    escapeValueForCsv(product.adoptionReadinessNotes),
     escapeValueForCsv(
-      computeReadinessSignal(product.evidenceRigor, product.clinicalImpact, product.implementationBurden).label
+      computeReadinessSignal(product.evidenceRigor, product.clinicalImpact, product.adoptionReadiness).label
     ),
     escapeValueForCsv(product.burdenFactors?.commissioningRequired),
     escapeValueForCsv(product.burdenFactors?.localValidationRequired),

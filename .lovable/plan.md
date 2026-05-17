@@ -1,6 +1,6 @@
-## Evidence Classification — Revised Plan (resumed)
+## Evidence Classification — Revised Plan (in progress)
 
-Colleague approvals received; resolving the three open questions and adding one new scope item (stakeholders).
+**Progress (2026-05-17):** Steps 1, 3 and partial 4 + 7 implemented. Steps 2 (composite 3D coloring) implemented. Steps 5 (stakeholder views) and 6 (StakeholderUseCases on /about) pending — call out before doing.
 
 ### Decisions locked in
 
