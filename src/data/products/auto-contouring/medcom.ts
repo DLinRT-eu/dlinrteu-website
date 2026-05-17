@@ -66,8 +66,8 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes:
       "No peer-reviewed validation studies identified at time of listing. Pending vendor verification and literature confirmation.",
     clinicalImpactNotes: "No published clinical impact data identified at time of listing.",
-    implementationBurden: "Z3",
-    implementationBurdenNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,

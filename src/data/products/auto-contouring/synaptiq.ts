@@ -183,8 +183,8 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
     clinicalImpactNotes:
       "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
-    implementationBurden: "Z2",
-    implementationBurdenNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",

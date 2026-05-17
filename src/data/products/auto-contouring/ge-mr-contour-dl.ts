@@ -65,8 +65,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I1",
     evidenceRigorNotes: "No independent peer-reviewed publications identified. Evidence based on FDA clearance documentation. PubMed searched 2026-02-26.",
     clinicalImpactNotes: "Provides automated MRI-based contouring within GE imaging ecosystem. No published outcome data.",
-    implementationBurden: "Z3",
-    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     lastUpdated: "2026-05-14",
     lastRevised: "2026-05-14",
     source: "FDA 510(k) database (K242925). GE HealthCare ESTRO 2026 press release (12 May 2026) confirms head & neck and pelvis OAR coverage and bundling within the iRT MR Direct workflow."

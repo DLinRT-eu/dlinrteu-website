@@ -77,7 +77,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Vendor-published clinical studies. No vendor-independent validation studies specific to MRCAT Head and Neck identified yet. Earwong et al. 2025 covers DL-based synthetic CT for H&N but product not confirmed.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated in vendor studies: comparable treatment planning accuracy to CT-based workflows.",
-    implementationBurden: "Z3",
-    implementationBurdenNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   }
 ];
