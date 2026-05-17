@@ -106,8 +106,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony.",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
-    source: "FDA 510(k) database (K182687), Accuray official website"
+    lastUpdated: "2026-05-17",
+    lastRevised: "2026-05-17",
+    source: "FDA 510(k) database (K182687), Accuray official website, Accuray ESTRO 2026 booth presence"
   }
 ];

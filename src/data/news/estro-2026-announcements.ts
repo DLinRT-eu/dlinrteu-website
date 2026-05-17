@@ -29,6 +29,14 @@ RaySearch [announced via LinkedIn](https://www.linkedin.com/posts/raysearch-labo
 
 The DLinRT.eu [RayStation Deep Learning Segmentation entry](/product/raysearch-raystation) will be updated once the release is publicly available and the Female Pelvis structures are documented; until then the model is tracked here as a pre-announcement only and is not added to the supported-structures list.
 
+## Accuray
+
+Accuray's [ESTRO 2026 booth presence](https://www.accuray.com/estro/) (booth, theme "Make ARTwork — Adapt with Confidence") centres on its helical delivery and adaptive portfolio, complemented by an [ESTRO Stage session](https://www.accuray.com/estro-stage/) on Monday 18 May at 10:15 dedicated to AI in radiotherapy (clinical performance, legal framework and ethics — an educational session, not a product launch). The European showcase follows the September 2025 [US launch of the Accuray Stellar™ solution](https://investors.accuray.com/news-releases/news-release-details/accuray-launches-all-one-radiotherapy-solution-advanced), a configuration of the Radixact® Treatment Delivery System bundling ClearRT® helical kVCT imaging, PreciseART® offline adaptation, an online-adaptive-ready interface, and Adapt LTE™ powered by Accuray Cenos™ for retrospective plan evaluation.
+
+For the DLinRT.eu catalogue, the only Accuray product at the booth with an explicitly disclosed AI/DL component for radiotherapy remains **[Synchrony®](/product/accuray-synchrony)** — its patient-specific AI motion model for real-time tracking and correction. The entry has been refreshed with an ESTRO 2026 reference.
+
+The other items on the booth — **Accuray Stellar**, **Radixact**, **Accuray Helix**, **PreciseART**, **Adapt LTE / Cenos**, **ClearRT** — are announced here as platform, hardware or workflow components. Their public material does not currently isolate an AI/DL model, training data or intended use for radiotherapy, so per the [product inclusion criteria](/about) they are not added to the catalogue today. We are explicitly watchlisting **Stellar**, **PreciseART** and **Adapt LTE / Cenos**: catalogue entries will be created (or these announcements revised) as soon as Accuray publishes documentation describing the AI/DL component, training data and intended use inside these products.
+
 ## United Imaging
 
 United Imaging published an [ESTRO 2026 microsite](https://estro-united-imaging-healthcare-europe.framer.ai/) marking the European debut of its uRT® radiotherapy portfolio at booth C16:41, with a portfolio reveal on Friday 15 May 19:18–19:25 CEST. The vendor describes an "AI-driven software ecosystem" integrated across the workflow.
