@@ -195,13 +195,14 @@ const EvidenceImpactGuide = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Wrench className="h-5 w-5 text-primary" />
-              Implementation &amp; Assurance Burden (R5-R0)
+              Adoption Readiness (R0–R5)
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              The third axis captures residual implementation and assurance burden after evidence (E) and
-              clinical impact (I) have been assigned (an internally proposed DLinRT extension).{" "}
-              <strong>Lower Z = lower residual effort = higher adoption readiness.</strong>{" "}
-              High Z constrains the public readiness signal even when E and I appear favourable.
+              The third axis captures how close a product is to clinical adoption for its intended use,
+              after evidence (E) and clinical impact (I) have been assigned (a DLinRT extension).{" "}
+              <strong>Higher R = lower residual effort = closer to adoption-ready.</strong>{" "}
+              Missing national or international guidelines do not block adoption but delay it, and R surfaces that gap.
+              Low R constrains the public readiness signal even when E and I appear favourable.
             </p>
           </CardHeader>
           <CardContent>
