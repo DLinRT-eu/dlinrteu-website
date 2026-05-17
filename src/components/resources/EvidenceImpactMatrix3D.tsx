@@ -396,7 +396,7 @@ const Scene: React.FC<SceneProps> = ({
                 z={r}
                 yBase={yBase}
                 height={heightFor(bucket.count)}
-                color={Z_COLORS[burden]}
+                color={compositeColor(rigor, impact, burden)}
                 selected={isSel}
                 onHover={onHover}
                 onSelect={onSelect}
@@ -407,7 +407,7 @@ const Scene: React.FC<SceneProps> = ({
               <mesh key={`empty-${key}`} position={[i, yBase + 0.04, r]}>
                 <boxGeometry args={[0.78, 0.04, 0.78]} />
                 <meshStandardMaterial
-                  color={Z_COLORS[burden]}
+                  color={compositeColor(rigor, impact, burden)}
                   transparent
                   opacity={0.18}
                   roughness={0.9}
@@ -686,7 +686,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                 <li key={z.level} className="flex items-center gap-2">
                   <span
                     className="inline-block w-3 h-3 rounded-sm flex-shrink-0"
-                    style={{ backgroundColor: Z_COLORS[z.level] }}
+                    style={{ backgroundColor: R_COLORS[z.level] }}
                   />
                   <span className="font-medium">{z.level}</span>
                   <span className="text-muted-foreground truncate">{z.name}</span>
