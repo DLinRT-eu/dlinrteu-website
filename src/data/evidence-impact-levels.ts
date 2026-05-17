@@ -302,25 +302,25 @@ const I_RANK: Record<ClinicalImpactCode, number> = { I0: 0, I1: 1, I2: 2, I3: 3,
 export const computeReadinessSignal = (
   evidenceRigor?: EvidenceRigorCode,
   clinicalImpact?: ClinicalImpactCode,
-  implementationBurden?: ImplementationBurdenCode,
+  adoptionReadiness?: AdoptionReadinessCode,
 ): ReadinessSignalDescriptor => {
-  if (!evidenceRigor || !clinicalImpact || !implementationBurden) {
+  if (!evidenceRigor || !clinicalImpact || !adoptionReadiness) {
     return READINESS_DESCRIPTORS["not-assessed"];
   }
-  if (implementationBurden === "Z5") return READINESS_DESCRIPTORS.blocked;
-  if (implementationBurden === "Z4") return READINESS_DESCRIPTORS["not-adoption-ready"];
-  if (implementationBurden === "Z3") return READINESS_DESCRIPTORS["pilot-only"];
+  if (adoptionReadiness === "R0") return READINESS_DESCRIPTORS.blocked;
+  if (adoptionReadiness === "R1") return READINESS_DESCRIPTORS["not-adoption-ready"];
+  if (adoptionReadiness === "R2") return READINESS_DESCRIPTORS["pilot-only"];
 
   const e = E_RANK[evidenceRigor];
   const i = I_RANK[clinicalImpact];
 
-  if (implementationBurden === "Z0" && e >= 2 && i >= 2) {
+  if (adoptionReadiness === "R5" && e >= 2 && i >= 2) {
     return READINESS_DESCRIPTORS["adoption-grade"];
   }
-  if (implementationBurden === "Z1" || (implementationBurden === "Z0" && (e < 2 || i < 2))) {
+  if (adoptionReadiness === "R4" || (adoptionReadiness === "R5" && (e < 2 || i < 2))) {
     return READINESS_DESCRIPTORS["deploy-with-monitoring"];
   }
-  // Z2
+  // R3
   if (e >= 2 && i >= 2) return READINESS_DESCRIPTORS["deploy-with-monitoring"];
   return READINESS_DESCRIPTORS.conditional;
 };
@@ -365,13 +365,13 @@ export const getClinicalImpactColor = (level: string): string => {
   return colorMap[impactLevel.color] || colorMap.slate;
 };
 
-export const getImplementationBurdenLevel = (level: string): ImplementationBurdenLevel | undefined => {
-  return IMPLEMENTATION_BURDEN_LEVELS.find(l => l.level === level);
+export const getAdoptionReadinessLevel = (level: string): AdoptionReadinessLevel | undefined => {
+  return ADOPTION_READINESS_LEVELS.find(l => l.level === level);
 };
 
-export const getImplementationBurdenColor = (level: string): string => {
-  const z = getImplementationBurdenLevel(level);
-  if (!z) return "bg-gray-100 text-gray-700 border-gray-300";
+export const getAdoptionReadinessColor = (level: string): string => {
+  const r = getAdoptionReadinessLevel(level);
+  if (!r) return "bg-gray-100 text-gray-700 border-gray-300";
   const colorMap: Record<string, string> = {
     green: "bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
     teal: "bg-teal-100 text-teal-700 border-teal-300 dark:bg-teal-900/30 dark:text-teal-300 dark:border-teal-700",
@@ -380,8 +380,13 @@ export const getImplementationBurdenColor = (level: string): string => {
     red: "bg-red-100 text-red-700 border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
     rose: "bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-700",
   };
-  return colorMap[z.color] || colorMap.green;
+  return colorMap[r.color] || colorMap.green;
 };
+
+/** @deprecated Use getAdoptionReadinessLevel */
+export const getImplementationBurdenLevel = getAdoptionReadinessLevel;
+/** @deprecated Use getAdoptionReadinessColor */
+export const getImplementationBurdenColor = getAdoptionReadinessColor;
 
 export const getReadinessSignalColor = (color: string): string => {
   const colorMap: Record<string, string> = {
