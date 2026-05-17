@@ -111,11 +111,11 @@ export function generateMedicalDeviceSchema(product: ProductDetails): MedicalDev
     });
   }
 
-  if (product.implementationBurden) {
+  if (product.adoptionReadiness) {
     additionalProps.push({
       "@type": "PropertyValue",
       name: "Implementation Burden",
-      value: product.implementationBurden,
+      value: product.adoptionReadiness,
     });
   }
 

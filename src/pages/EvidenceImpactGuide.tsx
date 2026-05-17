@@ -19,12 +19,12 @@ import {
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
-  IMPLEMENTATION_BURDEN_LEVELS,
+  ADOPTION_READINESS_LEVELS,
   EVIDENCE_IMPACT_REFERENCE,
   METHODOLOGY_REFERENCES,
   getEvidenceRigorColor,
   getClinicalImpactColor,
-  getImplementationBurdenColor,
+  getAdoptionReadinessColor,
 } from "@/data/evidence-impact-levels";
 import EvidenceImpactBadges from "@/components/product/EvidenceImpactBadges";
 import EvidenceImpactMatrix from "@/components/resources/EvidenceImpactMatrix";
@@ -206,10 +206,10 @@ const EvidenceImpactGuide = () => {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-3">
-              {IMPLEMENTATION_BURDEN_LEVELS.map((level) => (
+              {ADOPTION_READINESS_LEVELS.map((level) => (
                 <div key={level.level} className="p-3 rounded-lg border bg-muted/30">
                   <div className="flex items-center gap-2 mb-1">
-                    <Badge className={getImplementationBurdenColor(level.level)}>
+                    <Badge className={getAdoptionReadinessColor(level.level)}>
                       {level.level}
                     </Badge>
                     <span className="font-medium text-sm">{level.name}</span>
@@ -266,42 +266,42 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="Z1" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Multi-center validation, light QA needed at deployment</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">QA/Monitoring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" implementationBurden="Z0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" adoptionReadiness="Z0" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Well-validated, plug-in monitoring with negligible burden</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" implementationBurden="Z2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="Z2" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Strong evidence but commissioning &amp; site-specific QA required</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" implementationBurden="Z3" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" adoptionReadiness="Z3" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Single-center workflow validation; structured pilot only</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" implementationBurden="Z4" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" adoptionReadiness="Z4" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Vendor claims only, integration effort unknown</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" implementationBurden="Z0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" adoptionReadiness="Z0" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>

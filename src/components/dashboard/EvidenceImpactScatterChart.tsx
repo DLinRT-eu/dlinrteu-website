@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
-import { IMPLEMENTATION_BURDEN_LEVELS } from '@/data/evidence-impact-levels';
+import { ADOPTION_READINESS_LEVELS } from '@/data/evidence-impact-levels';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import EvidenceImpactMatrix3D from "@/components/resources/EvidenceImpactMatrix3D";
 
@@ -78,11 +78,11 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         impactLabel: `${p.clinicalImpact} – ${IMPACT_LEVELS.find(i => i.key === p.clinicalImpact)?.name ?? ''}`,
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
-        burden: p.implementationBurden,
-        burdenLabel: p.implementationBurden
-          ? `${p.implementationBurden} – ${IMPLEMENTATION_BURDEN_LEVELS.find(b => b.level === p.implementationBurden)?.name ?? 'Implementation burden'}`
+        burden: p.adoptionReadiness,
+        burdenLabel: p.adoptionReadiness
+          ? `${p.adoptionReadiness} – ${ADOPTION_READINESS_LEVELS.find(b => b.level === p.adoptionReadiness)?.name ?? 'Implementation burden'}`
           : undefined,
-        burdenNotes: p.implementationBurdenNotes ?? '',
+        burdenNotes: p.adoptionReadinessNotes ?? '',
       });
       if (!catSet.has(p.category)) catSet.set(p.category, color);
       count++;

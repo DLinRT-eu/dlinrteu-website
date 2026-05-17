@@ -5,7 +5,7 @@ import * as THREE from "three";
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
-  IMPLEMENTATION_BURDEN_LEVELS,
+  ADOPTION_READINESS_LEVELS,
 } from "@/data/evidence-impact-levels";
 import dataService from "@/services/DataService";
 import type { ProductDetails } from "@/types/productDetails";
@@ -46,7 +46,7 @@ const Z_COLORS: Record<string, string> = {
 
 const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
 const IMPACT = CLINICAL_IMPACT_LEVELS;        // I0..I5
-const BURDEN = IMPLEMENTATION_BURDEN_LEVELS;  // Z0..Z5
+const BURDEN = ADOPTION_READINESS_LEVELS;  // Z0..Z5
 
 interface BucketProduct {
   id: string;
@@ -454,7 +454,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
     for (const p of source) {
       const e = p.evidenceRigor;
       const i = p.clinicalImpact;
-      const z = p.implementationBurden;
+      const z = p.adoptionReadiness;
       if (!e || !i || !z) continue;
       const key = `${e}-${i}-${z}`;
       const prod: BucketProduct = {

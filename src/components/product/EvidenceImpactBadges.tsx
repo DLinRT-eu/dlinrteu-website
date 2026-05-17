@@ -12,13 +12,13 @@ import {
   getClinicalImpactLevel,
   getEvidenceRigorColor,
   getClinicalImpactColor,
-  getImplementationBurdenLevel,
-  getImplementationBurdenColor,
+  getAdoptionReadinessLevel,
+  getAdoptionReadinessColor,
   getReadinessSignalColor,
   computeReadinessSignal,
   EvidenceRigorCode,
   ClinicalImpactCode,
-  ImplementationBurdenCode,
+  AdoptionReadinessCode,
 } from "@/data/evidence-impact-levels";
 import { FlaskConical, Target, Wrench, ShieldCheck, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ import { Link } from "react-router-dom";
 interface EvidenceImpactBadgesProps {
   evidenceRigor?: EvidenceRigorCode;
   clinicalImpact?: ClinicalImpactCode;
-  implementationBurden?: ImplementationBurdenCode;
+  adoptionReadiness?: AdoptionReadinessCode;
   showReadinessSignal?: boolean;
   showTooltip?: boolean;
   size?: "sm" | "md" | "lg";
@@ -37,7 +37,7 @@ interface EvidenceImpactBadgesProps {
 const EvidenceImpactBadges = ({
   evidenceRigor,
   clinicalImpact,
-  implementationBurden,
+  adoptionReadiness,
   showReadinessSignal = false,
   showTooltip = true,
   size = "md",
@@ -46,7 +46,7 @@ const EvidenceImpactBadges = ({
 }: EvidenceImpactBadgesProps) => {
   const rigorLevel = evidenceRigor ? getEvidenceRigorLevel(evidenceRigor) : null;
   const impactLevel = clinicalImpact ? getClinicalImpactLevel(clinicalImpact) : null;
-  const burdenLevel = implementationBurden ? getImplementationBurdenLevel(implementationBurden) : null;
+  const burdenLevel = adoptionReadiness ? getAdoptionReadinessLevel(adoptionReadiness) : null;
 
   if (!rigorLevel && !impactLevel && !burdenLevel) {
     return null;
@@ -168,10 +168,10 @@ const EvidenceImpactBadges = ({
     const badge = (
       <Badge
         variant="outline"
-        className={`${getImplementationBurdenColor(implementationBurden!)} ${sizeClasses[size]} font-medium border ${className}`}
+        className={`${getAdoptionReadinessColor(adoptionReadiness!)} ${sizeClasses[size]} font-medium border ${className}`}
       >
         <Wrench className={`${iconSize} ${iconMargin}`} />
-        {implementationBurden} {burdenLevel.name}
+        {adoptionReadiness} {burdenLevel.name}
       </Badge>
     );
     if (!showTooltip) return badge;
@@ -183,7 +183,7 @@ const EvidenceImpactBadges = ({
             <div className="space-y-2">
               <div className="font-semibold text-sm flex items-center gap-2">
                 <Wrench className="h-4 w-4" />
-                {implementationBurden}: {burdenLevel.name}
+                {adoptionReadiness}: {burdenLevel.name}
               </div>
               <p className="text-xs text-muted-foreground">{burdenLevel.description}</p>
               <div className="pt-2 border-t">
@@ -207,7 +207,7 @@ const EvidenceImpactBadges = ({
 
   const renderReadinessSignal = () => {
     if (!showReadinessSignal) return null;
-    const signal = computeReadinessSignal(evidenceRigor, clinicalImpact, implementationBurden);
+    const signal = computeReadinessSignal(evidenceRigor, clinicalImpact, adoptionReadiness);
     const badge = (
       <Badge
         variant="outline"

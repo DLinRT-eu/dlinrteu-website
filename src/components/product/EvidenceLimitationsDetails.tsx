@@ -10,10 +10,10 @@ import { EditableField, useProductEdit, EvidenceEditor } from "@/components/prod
 import {
   EVIDENCE_RIGOR_LEVELS,
   CLINICAL_IMPACT_LEVELS,
-  IMPLEMENTATION_BURDEN_LEVELS,
+  ADOPTION_READINESS_LEVELS,
   EvidenceRigorCode,
   ClinicalImpactCode,
-  ImplementationBurdenCode,
+  AdoptionReadinessCode,
 } from "@/data/evidence-impact-levels";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -32,7 +32,7 @@ const CLINICAL_IMPACT_OPTIONS = CLINICAL_IMPACT_LEVELS.map(level => ({
   label: `${level.level} - ${level.name}`
 }));
 
-const IMPLEMENTATION_BURDEN_OPTIONS = IMPLEMENTATION_BURDEN_LEVELS.map(level => ({
+const ADOPTION_READINESS_OPTIONS = ADOPTION_READINESS_LEVELS.map(level => ({
   value: level.level,
   label: `${level.level} - ${level.name}`
 }));
@@ -52,15 +52,15 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
     evidenceRigorNotes,
     clinicalImpact,
     clinicalImpactNotes,
-    implementationBurden,
-    implementationBurdenNotes,
+    adoptionReadiness,
+    adoptionReadinessNotes,
   } = displayProduct;
 
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
   const hasLimitations = limitations && limitations.length > 0;
   const hasDualAxis = !!(evidenceRigor || clinicalImpact);
-  const hasBurden = !!implementationBurden;
+  const hasBurden = !!adoptionReadiness;
   const hasTriAxis = hasDualAxis || hasBurden;
 
   if (!showEditor && !hasEvidence && !hasLimitations && !hasTriAxis) {
@@ -130,8 +130,8 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
               <EvidenceImpactBadges
                 evidenceRigor={evidenceRigor as EvidenceRigorCode}
                 clinicalImpact={clinicalImpact as ClinicalImpactCode}
-                implementationBurden={implementationBurden as ImplementationBurdenCode}
-                showReadinessSignal={!!(evidenceRigor && clinicalImpact && implementationBurden)}
+                adoptionReadiness={adoptionReadiness as AdoptionReadinessCode}
+                showReadinessSignal={!!(evidenceRigor && clinicalImpact && adoptionReadiness)}
                 size="md"
               />
             )}
@@ -234,14 +234,14 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 <>
                   <Label className="text-sm font-medium">Implementation Burden (Z0-Z5)</Label>
                   <Select
-                    value={implementationBurden || ''}
-                    onValueChange={(v) => updateField('implementationBurden', v || undefined)}
+                    value={adoptionReadiness || ''}
+                    onValueChange={(v) => updateField('adoptionReadiness', v || undefined)}
                   >
                     <SelectTrigger className="bg-background w-full">
                       <SelectValue placeholder="Select implementation burden" />
                     </SelectTrigger>
                     <SelectContent className="bg-background z-50">
-                      {IMPLEMENTATION_BURDEN_OPTIONS.map(opt => (
+                      {ADOPTION_READINESS_OPTIONS.map(opt => (
                         <SelectItem key={opt.value} value={opt.value}>
                           {opt.label}
                         </SelectItem>
@@ -249,23 +249,23 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                     </SelectContent>
                   </Select>
                 </>
-              ) : implementationBurden && (
+              ) : adoptionReadiness && (
                 <div className="text-sm">
                   <span className="font-medium">Implementation Burden:</span>{" "}
                   <span className="text-muted-foreground">
-                    {IMPLEMENTATION_BURDEN_OPTIONS.find(o => o.value === implementationBurden)?.label}
+                    {ADOPTION_READINESS_OPTIONS.find(o => o.value === adoptionReadiness)?.label}
                   </span>
                 </div>
               )}
 
               <EditableField
-                fieldPath="implementationBurdenNotes"
-                value={implementationBurdenNotes}
+                fieldPath="adoptionReadinessNotes"
+                value={adoptionReadinessNotes}
                 type="textarea"
                 placeholder="Notes about residual implementation/assurance burden"
               >
-                {implementationBurdenNotes && (
-                  <p className="text-sm text-muted-foreground">{implementationBurdenNotes}</p>
+                {adoptionReadinessNotes && (
+                  <p className="text-sm text-muted-foreground">{adoptionReadinessNotes}</p>
                 )}
               </EditableField>
             </div>
