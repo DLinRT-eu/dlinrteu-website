@@ -164,65 +164,74 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   }
 ];
 
-// ==================== IMPLEMENTATION BURDEN AXIS (Z) ====================
-// Third axis (internally proposed DLinRT extension): residual implementation
-// & assurance burden. Lower Z = lower residual effort = higher adoption
-// readiness.
+// ==================== ADOPTION READINESS AXIS (R) ====================
+// Third axis (DLinRT extension): adoption readiness for the intended use.
+// Higher R = lower residual effort = closer to adoption. Missing national or
+// international guidelines delay (not block) adoption — R surfaces that gap.
 
-export type ImplementationBurdenCode = "Z0" | "Z1" | "Z2" | "Z3" | "Z4" | "Z5";
+export type AdoptionReadinessCode = "R0" | "R1" | "R2" | "R3" | "R4" | "R5";
 
-export interface ImplementationBurdenLevel {
-  level: ImplementationBurdenCode;
+export interface AdoptionReadinessLevel {
+  level: AdoptionReadinessCode;
   name: string;
   description: string;
   readinessConsequence: string;
   color: string;
 }
 
-export const IMPLEMENTATION_BURDEN_LEVELS: ImplementationBurdenLevel[] = [
+export const ADOPTION_READINESS_LEVELS: AdoptionReadinessLevel[] = [
   {
-    level: "Z0",
-    name: "Minimal residual effort",
-    description: "Core documentation, validation, integration, QA and governance are complete for the intended use.",
-    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
-    color: "green",
+    level: "R0",
+    name: "Not adoption-ready",
+    description: "Critical unresolved gaps: governance, cybersecurity, regulatory or clinical-safety assurance missing; integration unclear.",
+    readinessConsequence: "Horizon scanning only; block adoption-grade export.",
+    color: "rose",
   },
   {
-    level: "Z1",
-    name: "Limited local assurance",
+    level: "R1",
+    name: "Major gaps to address",
+    description: "Material uncertainty around safety, fairness, monitoring, change control, generalisability or post-market surveillance.",
+    readinessConsequence: "Do not present as adoption-ready.",
+    color: "red",
+  },
+  {
+    level: "R2",
+    name: "Pilot-ready",
+    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence still required.",
+    readinessConsequence: "Restrict to structured pilot or sandbox.",
+    color: "orange",
+  },
+  {
+    level: "R3",
+    name: "Conditionally ready",
+    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks remain. Missing national/international guidelines may delay adoption.",
+    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
+    color: "yellow",
+  },
+  {
+    level: "R4",
+    name: "Ready with local assurance",
     description: "Minor local commissioning, user training, documentation checks or workflow confirmation remain.",
     readinessConsequence: "Deploy with local sign-off and monitoring.",
     color: "teal",
   },
   {
-    level: "Z2",
-    name: "Moderate implementation effort",
-    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks are needed.",
-    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
-    color: "yellow",
-  },
-  {
-    level: "Z3",
-    name: "High implementation burden",
-    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence is required.",
-    readinessConsequence: "Restrict to structured pilot or sandbox.",
-    color: "orange",
-  },
-  {
-    level: "Z4",
-    name: "Major assurance burden",
-    description: "Material uncertainty around safety, fairness, monitoring, change control, cost, generalisability or post-market surveillance.",
-    readinessConsequence: "Do not present as adoption-ready.",
-    color: "red",
-  },
-  {
-    level: "Z5",
-    name: "Critical unresolved burden",
-    description: "Unclear integration, high residual risk, missing governance, cybersecurity, regulatory or clinical-safety assurance.",
-    readinessConsequence: "Block adoption-grade export; horizon scanning only.",
-    color: "rose",
+    level: "R5",
+    name: "Adoption-ready",
+    description: "Core documentation, validation, integration, QA and governance complete for the intended use; aligned with available guidelines.",
+    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
+    color: "green",
   },
 ];
+
+// Deprecated aliases — kept temporarily for backward compatibility with any
+// external consumers of the symbol names. New code should use the R* names.
+/** @deprecated Use AdoptionReadinessCode */
+export type ImplementationBurdenCode = AdoptionReadinessCode;
+/** @deprecated Use AdoptionReadinessLevel */
+export type ImplementationBurdenLevel = AdoptionReadinessLevel;
+/** @deprecated Use ADOPTION_READINESS_LEVELS */
+export const IMPLEMENTATION_BURDEN_LEVELS = ADOPTION_READINESS_LEVELS;
 
 // ==================== READINESS SIGNAL (composite E/I/Z) ====================
 
