@@ -99,8 +99,8 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   },
   {
     level: "I1",
-    name: "Quality Assurance",
-    description: "Enables monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe operation. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
+    name: "Technical Performance",
+    description: "Enables technical performance monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe and correct operation. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
     rtExamples: [
       "QA tools validating AI contour accuracy",
       "Performance monitoring dashboards",

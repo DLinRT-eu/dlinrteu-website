@@ -31,7 +31,7 @@ const RIGOR_LEVELS = [
 
 const IMPACT_LEVELS = [
   { key: 'I0', label: 'I0', name: 'None Demo.' },
-  { key: 'I1', label: 'I1', name: 'QA' },
+  { key: 'I1', label: 'I1', name: 'Tech. Perf.' },
   { key: 'I2', label: 'I2', name: 'Workflow' },
   { key: 'I3', label: 'I3', name: 'Decision' },
   { key: 'I4', label: 'I4', name: 'Outcome' },

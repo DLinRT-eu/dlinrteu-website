@@ -83,7 +83,7 @@ export const EVIDENCE_RIGOR_EXPLAIN: Record<string, string> = {
 
 export const CLINICAL_IMPACT_EXPLAIN: Record<string, string> = {
   I0: "Technical performance only (no clinical outcome demonstrated).",
-  I1: "Diagnostic / contour accuracy demonstrated.",
+  I1: "Technical performance only (no clinical outcome demonstrated).",
   I2: "Diagnostic thinking impact (changes clinician decisions).",
   I3: "Therapeutic impact (changes treatment plan).",
   I4: "Patient outcome impact (clinical benefit demonstrated).",
