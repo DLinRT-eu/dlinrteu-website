@@ -35,18 +35,34 @@ interface EvidenceImpactMatrix3DProps {
   products?: ProductDetails[];
 }
 
-const Z_COLORS: Record<string, string> = {
-  Z0: "#16a34a",
-  Z1: "#0d9488",
-  Z2: "#eab308",
-  Z3: "#f97316",
-  Z4: "#ef4444",
-  Z5: "#e11d48",
+// Per-axis readiness palette (R0 low → R5 high readiness; rose → green).
+const R_COLORS: Record<string, string> = {
+  R0: "#e11d48",
+  R1: "#ef4444",
+  R2: "#f97316",
+  R3: "#eab308",
+  R4: "#0d9488",
+  R5: "#16a34a",
+};
+
+// Composite (E,I,R) → single sequential ramp so the bar color reflects all
+// three axes, not just R. Score in [0,1].
+const E_RANK_M: Record<string, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
+const I_RANK_M: Record<string, number> = { I0: 0, I1: 1, I2: 2, I3: 3, I4: 4, I5: 5 };
+const R_RANK_M: Record<string, number> = { R0: 0, R1: 1, R2: 2, R3: 3, R4: 4, R5: 5 };
+
+// Sequential rose → green ramp (low to high composite readiness/impact/rigor).
+const RAMP = ["#e11d48", "#ef4444", "#f97316", "#eab308", "#0d9488", "#16a34a"];
+
+const compositeColor = (rigor: string, impact: string, burden: string): string => {
+  const score = ((E_RANK_M[rigor] ?? 0) / 3 + (I_RANK_M[impact] ?? 0) / 5 + (R_RANK_M[burden] ?? 0) / 5) / 3;
+  const idx = Math.min(RAMP.length - 1, Math.max(0, Math.round(score * (RAMP.length - 1))));
+  return RAMP[idx];
 };
 
 const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
 const IMPACT = CLINICAL_IMPACT_LEVELS;        // I0..I5
-const BURDEN = ADOPTION_READINESS_LEVELS;  // Z0..Z5
+const BURDEN = ADOPTION_READINESS_LEVELS;     // R0..R5
 
 interface BucketProduct {
   id: string;
