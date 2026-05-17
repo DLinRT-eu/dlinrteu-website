@@ -118,10 +118,10 @@ const EvidenceImpactGuide = () => {
               </h4>
               <p className="text-sm text-green-900 dark:text-green-100">
                 By separating <strong>Evidence Rigor</strong> (E0–E3), <strong>Clinical Impact</strong> (I0–I5),
-                and <strong>Implementation &amp; Assurance Burden</strong> (Z0–Z5), each dimension is rated
+                and <strong>Implementation &amp; Assurance Burden</strong> (R5–R0), each dimension is rated
                 independently and combined into a composite readiness signal. The favorite-color AI becomes
-                E3/I0/Z0 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
-                E0/I4/Z3 (claimed impact, evidence and integration both pending).
+                E3/I0/R5 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
+                E0/I4/R2 (claimed impact, evidence and integration both pending).
               </p>
             </div>
           </CardContent>
@@ -195,7 +195,7 @@ const EvidenceImpactGuide = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Wrench className="h-5 w-5 text-primary" />
-              Implementation &amp; Assurance Burden (Z0-Z5)
+              Implementation &amp; Assurance Burden (R5-R0)
             </CardTitle>
             <p className="text-sm text-muted-foreground">
               The third axis captures residual implementation and assurance burden after evidence (E) and
@@ -232,12 +232,12 @@ const EvidenceImpactGuide = () => {
                 The user-facing badge is computed from all three axes:
               </p>
               <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
-                <li><strong>Adoption-grade</strong> — Z0 with E≥E2 and I≥I2.</li>
-                <li><strong>Deploy with monitoring</strong> — Z1, or Z2 with E≥E2 and I≥I2.</li>
-                <li><strong>Conditional</strong> — Z2 with weaker E or I.</li>
-                <li><strong>Pilot only</strong> — Z3 (structured pilot or sandbox).</li>
-                <li><strong>Not adoption-ready</strong> — Z4.</li>
-                <li><strong>Blocked</strong> — Z5 (horizon scanning only).</li>
+                <li><strong>Adoption-grade</strong> — R5 with E≥E2 and I≥I2.</li>
+                <li><strong>Deploy with monitoring</strong> — R4, or R3 with E≥E2 and I≥I2.</li>
+                <li><strong>Conditional</strong> — R3 with weaker E or I.</li>
+                <li><strong>Pilot only</strong> — R2 (structured pilot or sandbox).</li>
+                <li><strong>Not adoption-ready</strong> — R1.</li>
+                <li><strong>Blocked</strong> — R0 (horizon scanning only).</li>
               </ul>
               <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
                 Internally proposed DLinRT extension; readiness consequences derived from the DLinRT.eu Evidence Matrix proposal.
@@ -266,42 +266,42 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="Z1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="R4" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Multi-center validation, light QA needed at deployment</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">QA/Monitoring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" adoptionReadiness="Z0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" adoptionReadiness="R5" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Well-validated, plug-in monitoring with negligible burden</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="Z2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="R3" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Strong evidence but commissioning &amp; site-specific QA required</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" adoptionReadiness="Z3" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" adoptionReadiness="R2" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Single-center workflow validation; structured pilot only</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" adoptionReadiness="Z4" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" adoptionReadiness="R1" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Vendor claims only, integration effort unknown</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" adoptionReadiness="Z0" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" adoptionReadiness="R5" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>
