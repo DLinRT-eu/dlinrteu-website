@@ -60,6 +60,13 @@ const EvidenceImpactGuide = () => {
             Separating evidence rigor (E), clinical impact (I), and implementation burden (Z)
             for nuanced product evaluation
           </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            See{" "}
+            <Link to="/about#stakeholders" className="text-primary hover:underline">
+              who DLinRT.eu helps & how
+            </Link>{" "}
+            for stakeholder-specific use cases and thresholds.
+          </p>
         </div>
 
         {/* Why Two Axes Card */}
