@@ -23,6 +23,7 @@ interface IndexItem {
 }
 
 const indexItems: IndexItem[] = [
+  { id: 'stakeholders', label: 'Who we help', icon: Users },
   { id: 'classification-taxonomy', label: 'Classification taxonomy', icon: GitBranch },
   { id: 'clinical-tasks', label: 'Clinical tasks glossary', icon: BookOpen },
   { id: 'evidence-levels', label: 'Evidence levels', icon: BarChart3 },
