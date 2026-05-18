@@ -13,6 +13,7 @@ import CoreDocuments from '@/components/resources/CoreDocuments';
 import ResourceLinks from '@/components/resources/ResourceLinks';
 import DisclaimerBox from '@/components/resources/DisclaimerBox';
 import PageIndex from '@/components/resources/PageIndex';
+import StakeholderUseCases from '@/components/about/StakeholderUseCases';
 
 const ResourcesCompliance = () => {
   return (
@@ -44,6 +45,11 @@ const ResourcesCompliance = () => {
 
           {/* Quick Navigation Index */}
           <PageIndex />
+
+          {/* Who DLinRT.eu helps & how */}
+          <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
+            <StakeholderUseCases />
+          </div>
 
           {/* Platform Scope Note */}
           <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700">
