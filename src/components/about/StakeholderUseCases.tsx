@@ -56,7 +56,7 @@ const USE_CASES: UseCase[] = [
 
 const StakeholderUseCases = () => {
   return (
-    <section className="py-16 px-4 bg-muted/20">
+    <section id="stakeholders" className="py-16 px-4 bg-muted/20 scroll-mt-20">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Who DLinRT.eu Helps & How</h2>
