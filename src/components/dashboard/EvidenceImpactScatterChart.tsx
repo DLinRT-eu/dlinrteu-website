@@ -58,30 +58,6 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
   const { chartRef, exportToPng } = useChartExport('chart-evidence-impact');
   const isMobile = useIsMobile();
   const [view, setView] = useState<"2d" | "3d">("2d");
-  const [stakeholder, setStakeholder] = useState<"reviewer" | "vendor" | "existing-vendor" | "clinic">("reviewer");
-
-  // Per-task medians of (E,I,R) ranks — used by the New-vendor / Gap-analysis preset.
-  const taskMedians = useMemo(() => {
-    if (stakeholder !== "vendor") return {} as Record<string, { e: number; i: number; r: number; n: number }>;
-    const groups: Record<string, { e: number[]; i: number[]; r: number[] }> = {};
-    const R_RANK: Record<string, number> = { R0: 0, R1: 1, R2: 2, R3: 3, R4: 4, R5: 5 };
-    for (const p of filteredProducts) {
-      if (!p.evidenceRigor || !p.clinicalImpact) continue;
-      const g = (groups[p.category] ||= { e: [], i: [], r: [] });
-      g.e.push(RIGOR_MAP[p.evidenceRigor] ?? 0);
-      g.i.push(IMPACT_MAP[p.clinicalImpact] ?? 0);
-      if (p.adoptionReadiness) g.r.push(R_RANK[p.adoptionReadiness] ?? 0);
-    }
-    const median = (arr: number[]) => {
-      if (!arr.length) return 0;
-      const s = [...arr].sort((a, b) => a - b);
-      const m = Math.floor(s.length / 2);
-      return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-    };
-    return Object.fromEntries(
-      Object.entries(groups).map(([k, v]) => [k, { e: median(v.e), i: median(v.i), r: median(v.r), n: v.e.length }])
-    );
-  }, [stakeholder, filteredProducts]);
 
   const { cellMap, totalCount, categories } = useMemo(() => {
     const map: CellMap = {};
