@@ -137,9 +137,29 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       <CardHeader className="pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <CardTitle className="text-lg md:text-2xl">
-            Evidence Rigor vs Clinical Impact{view === "3d" ? " × Burden" : ""} ({totalCount} products)
+            Evidence Rigor vs Clinical Impact{view === "3d" ? " × Readiness" : ""} ({totalCount} products)
           </CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <ToggleGroup
+              type="single"
+              size="sm"
+              value={stakeholder}
+              onValueChange={(v) => v && setStakeholder(v as typeof stakeholder)}
+              className="border rounded-md"
+            >
+              <ToggleGroupItem value="reviewer" aria-label="Reviewer view" className="text-xs px-3">
+                Reviewer
+              </ToggleGroupItem>
+              <ToggleGroupItem value="vendor" aria-label="New vendor / Gap analysis" className="text-xs px-3">
+                New vendor
+              </ToggleGroupItem>
+              <ToggleGroupItem value="existing-vendor" aria-label="Existing vendor" disabled className="text-xs px-3 opacity-60">
+                Existing vendor*
+              </ToggleGroupItem>
+              <ToggleGroupItem value="clinic" aria-label="Clinic / Decision-maker" disabled className="text-xs px-3 opacity-60">
+                Clinic*
+              </ToggleGroupItem>
+            </ToggleGroup>
             <ToggleGroup
               type="single"
               size="sm"
@@ -159,6 +179,21 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
             )}
           </div>
         </div>
+        {stakeholder === "vendor" && view === "2d" && (
+          <div className="mt-2 text-xs text-muted-foreground bg-muted/40 border border-border rounded p-2">
+            <strong className="text-foreground">Gap analysis:</strong> per-task medians shown below. To be competitive in a task, target ≥ task median on each of E, I, R — and aim for ≥E2 ∧ ≥I2 ∧ ≥R3 to enter the field.
+            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
+              {Object.entries(taskMedians).map(([cat, m]) => (
+                <span key={cat}>
+                  <span className="font-medium">{cat}</span> (n={m.n}): E{Math.round(m.e)} · I{Math.round(m.i)} · R{Math.round(m.r)}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        {(stakeholder === "existing-vendor" || stakeholder === "clinic") && (
+          <p className="mt-2 text-xs text-muted-foreground italic">* Coming after ESTRO 2026.</p>
+        )}
       </CardHeader>
       <CardContent>
         {view === "3d" ? (
