@@ -6,6 +6,7 @@ import BlackPaperSection from "@/components/about/BlackPaperSection";
 import MissionVisionSection from "@/components/about/MissionVisionSection";
 import CoreValuesSection from "@/components/about/CoreValuesSection";
 import TeamSection from "@/components/about/TeamSection";
+import StakeholderUseCases from "@/components/about/StakeholderUseCases";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Eye, Building2, User, BarChart3 } from "lucide-react";
 import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
@@ -135,6 +136,7 @@ const About = () => {
 
       <BlackPaperSection />
       <MissionVisionSection />
+      <StakeholderUseCases />
       <CoreValuesSection />
 
       <TeamSection teamMembers={shuffledTeamMembers} />
