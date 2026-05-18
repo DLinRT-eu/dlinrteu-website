@@ -1,6 +1,6 @@
 ## Evidence Classification — Revised Plan (in progress)
 
-**Progress (2026-05-17):** Steps 1, 3 and partial 4 + 7 implemented. Steps 2 (composite 3D coloring) implemented. Steps 5 (stakeholder views) and 6 (StakeholderUseCases on /about) pending — call out before doing.
+**Progress (2026-05-18):** All steps 1–7 implemented. Step 5 (stakeholder views — Reviewer + New-vendor presets, Existing-vendor + Clinic stubbed as "Coming after ESTRO") and Step 6 (StakeholderUseCases on `/about#stakeholders`, linked from `/evidence-impact-guide`) shipped.
 
 ### Decisions locked in
 
