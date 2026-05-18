@@ -136,6 +136,7 @@ const About = () => {
 
       <BlackPaperSection />
       <MissionVisionSection />
+      <StakeholderUseCases />
       <CoreValuesSection />
 
       <TeamSection teamMembers={shuffledTeamMembers} />
