@@ -12,7 +12,8 @@ import {
   FileText, 
   Library,
   AlertTriangle,
-  Scale
+  Scale,
+  Users
 } from 'lucide-react';
 
 interface IndexItem {
