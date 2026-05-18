@@ -13,6 +13,7 @@ import CoreDocuments from '@/components/resources/CoreDocuments';
 import ResourceLinks from '@/components/resources/ResourceLinks';
 import DisclaimerBox from '@/components/resources/DisclaimerBox';
 import PageIndex from '@/components/resources/PageIndex';
+import StakeholderUseCases from '@/components/about/StakeholderUseCases';
 
 const ResourcesCompliance = () => {
   return (
