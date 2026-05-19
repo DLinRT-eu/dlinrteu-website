@@ -14,6 +14,9 @@ interface SupportedStructuresProps {
     accuracy?: string;
     validationDataset?: string;
   }>;
+  /** Render an explicit "structure list unavailable" card when the vendor has
+   *  not published a verified list. */
+  unavailable?: boolean;
 }
 
 interface StructureGroup {
@@ -30,7 +33,23 @@ interface StructureInfo {
   isInvestigational: boolean;
 }
 
-const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures }) => {
+const UnavailableStructuresCard: React.FC = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>Supported Structures</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p className="text-sm text-muted-foreground">
+        The vendor has not published a verified list of supported structures for
+        this product. The structure list is therefore <strong>unavailable</strong> in
+        the DLinRT.eu catalogue. All AI-generated contours require qualified clinician
+        review prior to clinical use.
+      </p>
+    </CardContent>
+  </Card>
+);
+
+const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable }) => {
   const { isEditMode, editedProduct, canEdit } = useProductEdit();
   
   // Use edited structures when in edit mode
@@ -53,6 +72,9 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures })
   }
 
   if (!displayStructures || displayStructures.length === 0) {
+    if (unavailable) {
+      return <UnavailableStructuresCard />;
+    }
     return null;
   }
 

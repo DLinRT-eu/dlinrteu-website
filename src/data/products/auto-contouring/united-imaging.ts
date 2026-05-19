@@ -69,14 +69,16 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     // Supported structures are not enumerated publicly by the vendor at this time.
     // Per editorial decision, the structure list is intentionally omitted until a
-    // verified DICOM-conformant list is published.
+    // verified DICOM-conformant list is published. The UI renders an explicit
+    // "structure list unavailable" card via structuresUnavailable below.
     supportedStructures: [],
+    structuresUnavailable: true,
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation of the integrated auto-contouring module identified. Vendor press materials only.",
+      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation identified. Vendor has not published a model card, training-data description or a standalone intended-use document for the integrated auto-contouring module; only system-level press materials are available.",
     clinicalImpactNotes:
-      "Vendor reports up to ~90% reduction in contouring time and supports ~15-minute online adaptive workflow; no independent clinical impact evidence identified yet.",
+      "Vendor reports up to ~90% reduction in contouring time and supports a ~15-minute online adaptive workflow; no independent clinical impact evidence identified yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
       "Derived from E0 + CE (system-level): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended before clinical adoption.",
@@ -84,7 +86,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "Announced as part of the uRT radiotherapy portfolio at ESTRO 2026; integrated AI contouring is described as a component of the CE-marked uRT-linac 506c system.",
     limitations: [
       "Integrated component of the uRT ecosystem; not marketed as a standalone product",
-      "Supported structure list not publicly enumerated by the vendor",
+      "Supported structure list not publicly enumerated by the vendor — labelled as unavailable in the DLinRT.eu catalogue",
+      "No model card, training-data description or standalone intended-use document has been published by the vendor",
       "All AI-generated contours require qualified clinician review prior to clinical use",
       "Performance claims are vendor-reported and not yet independently validated"
     ],

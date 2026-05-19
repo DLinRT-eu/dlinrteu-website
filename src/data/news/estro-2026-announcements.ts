@@ -43,6 +43,14 @@ United Imaging published an [ESTRO 2026 microsite](https://estro-united-imaging-
 
 The single AI/DL-specific component disclosed in the public material is the **Deep Learning Full-FOV reconstruction** on the **uCT 610 Sim** (87 cm ultra-wide-bore CT simulator, listed as "under development; not for sale or clinical use, not yet available in Europe"). Other portfolio items announced for ESTRO 2026 — uRT®-linac 506c, uLinac HalosTx, uMR® Omega 3T MR simulator, uMI® Panorama PET/CT simulator — are hardware platforms; their public announcements do not currently isolate an AI/DL component for radiotherapy and therefore fall outside the DLinRT.eu inclusion criteria. A catalogue entry for the uCT 610 Sim DL reconstruction (and any other uRT® AI software) will be created once vendor documentation describing the model, training data and intended use is published.
 
+## Post-ESTRO catalogue updates (19 May 2026)
+
+After the congress closed, the following entries were added or revised:
+
+- **United Imaging uCT 610 Sim — Deep Learning Full-FOV Reconstruction**: added to the [pipeline products hub](/products/pipeline) as a pre-market entry (E0 / I0 / R0), reflecting the vendor disclosure of an AI/DL component while the product remains "under development; not for sale or clinical use."
+- **United Imaging uRT Auto-Contouring** and **uRT Auto-Planning**: kept in the catalogue as integrated components of the CE-marked uRT-linac 506c. Notes and limitations tightened to make explicit that no model card, training-data description or standalone intended-use document has yet been published. The auto-contouring supported-structures section is now rendered as **"structure list unavailable"** rather than blank, since the vendor has not published a verified DICOM-conformant list.
+- **RaySearch RayStation Deep Learning Segmentation**: the announced **Female Pelvis** model is reflected by adding the disclosed ROIs (Uterus, Ovary_L, Ovary_R, Vagina) to the supported-structures list with the \`(investigational)\` suffix, per our [structure status marking](/resources-compliance) convention. Evidence Rigor / Clinical Impact / Adoption Readiness scores are unchanged.
+
 ---
 
 If you spot another ESTRO 2026 announcement that should trigger a catalogue update, please [contact us](/support).

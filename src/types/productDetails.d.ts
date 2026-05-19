@@ -16,6 +16,9 @@ export interface ProductDetails extends Product {
     accuracy?: string;
     validationDataset?: string;
   }>;
+  /** Set true when the vendor has not published a verified list of supported structures.
+   *  Triggers an explicit "structure list unavailable" card instead of a blank section. */
+  structuresUnavailable?: boolean;
   technicalSpecifications?: {
     population?: string;
     input?: string[];

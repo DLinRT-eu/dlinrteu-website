@@ -131,8 +131,11 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <TechnicalSpecificationsDetails product={product} />
           <TechnologyDetails product={product} />
           
-          {product.category === "Auto-Contouring" && product.supportedStructures && (
-            <SupportedStructures structures={product.supportedStructures} />
+          {product.category === "Auto-Contouring" && (
+            <SupportedStructures
+              structures={product.supportedStructures}
+              unavailable={product.structuresUnavailable}
+            />
           )}
           
           {product.category === "Treatment Planning" && product.dosePredictionModels && (
