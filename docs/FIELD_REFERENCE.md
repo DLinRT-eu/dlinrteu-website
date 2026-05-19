@@ -99,7 +99,7 @@ This document explains every field used in DLinRT.eu product entries. Use it whe
 
 ## Evidence Level Classification (Tri-Axial System)
 
-Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Implementation &amp; Assurance Burden (Z0–Z5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The Z axis is an internally proposed DLinRT extension capturing residual implementation and assurance burden — see the [§Implementation & Assurance Burden](#implementation--assurance-burden-z0-z5) section below.
+Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension capturing how close a product is to clinical adoption (higher R = closer to ready) — see the [§Adoption Readiness](#implementation--assurance-burden-z-axis) section below.
 
 ### Evidence Rigor (E0-E3)
 
