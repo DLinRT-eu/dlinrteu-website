@@ -282,7 +282,7 @@ When using the in-browser visual editor, fields use specialized editor component
 ## Quick Checklist for Reviewers
 
 1. Confirm **core identity** fields (name, company, description, category).
-2. **Set evidence classification** (E0–E3 rigor + I0–I5 impact + Z0–Z5 implementation burden) — prominently displayed.
+2. **Set evidence classification** (E0–E3 rigor + I0–I5 impact + R0–R5 adoption readiness) — prominently displayed.
 3. Validate **modality, anatomy, supportedStructures** against current evidence.
 4. Update **versioning and dates** even if no other change is required.
 5. Verify **regulatory** claims with certificates or official databases (CE, FDA, TGA, TFDA).
