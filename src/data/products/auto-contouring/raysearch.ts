@@ -57,7 +57,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations. PubMed verified 2026-02-26. ESTRO 2026: RaySearch announced a Female Pelvis DLS model for the upcoming RayStation release, explicitly flagged as investigational, not CE-marked or FDA-cleared, and not for clinical use — listed in supportedStructures with the (investigational) suffix and not factored into scoring.",
     clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -68,9 +68,9 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     version: "12.0",
     releaseDate: "2023-12-01",
-    lastUpdated: "2025-12-11",
-    lastRevised: "2026-02-23",
-    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024",
+    lastUpdated: "2026-05-19",
+    lastRevised: "2026-05-19",
+    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [
       {
