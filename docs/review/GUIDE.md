@@ -262,7 +262,7 @@ All examples include:
 
 ## Evidence Level Classification
 
-Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Clinical Impact (I0–I5), with a third axis for Implementation &amp; Assurance Burden (Z0–Z5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The Z axis is an internally proposed DLinRT extension — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
+Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Clinical Impact (I0–I5), with a third axis for Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension (higher R = closer to clinical adoption) — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
 
 ### Evidence Rigor (E0-E3)
 
