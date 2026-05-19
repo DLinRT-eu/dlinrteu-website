@@ -14,7 +14,7 @@ Quick reference for reviewing and managing products on DLinRT.eu.
 1. Open product in web interface
 2. Click **"Edit"** button in header
 3. Modify fields using inline editors and dropdowns
-4. Set evidence classification (E0–E3 rigor + I0–I5 impact + Z0–Z5 implementation burden)
+4. Set evidence classification (E0–E3 rigor + I0–I5 impact + R0–R5 adoption readiness)
 5. Click **"Submit"** to send for admin approval
 6. Approved edits sync to GitHub automatically
 
