@@ -31,7 +31,7 @@ DLinRT.eu supports two methods for reviewing products:
    - Changes auto-save every 30 seconds
 
 3. **Set Evidence Classification**
-   - Assign evidence rigor (E0–E3), clinical impact (I0–I5), and implementation burden (Z0–Z5) using the [tri-axial system](#evidence-level-classification)
+   - Assign evidence rigor (E0–E3), clinical impact (I0–I5), and adoption readiness (R0–R5) using the [tri-axial system](#evidence-level-classification)
    - The Evidence & Limitations section is always visible
    - Select levels from dropdowns and add justification notes
 
