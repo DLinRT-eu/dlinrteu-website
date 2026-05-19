@@ -46,11 +46,6 @@ const ResourcesCompliance = () => {
           {/* Quick Navigation Index */}
           <PageIndex />
 
-          {/* Who DLinRT.eu helps & how */}
-          <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
-            <StakeholderUseCases />
-          </div>
-
           {/* Platform Scope Note */}
           <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700">
             <p>
@@ -62,6 +57,12 @@ const ResourcesCompliance = () => {
               </Link>.
             </p>
           </div>
+
+          {/* Who DLinRT.eu helps & how */}
+          <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
+            <StakeholderUseCases />
+          </div>
+
 
           {/* Classification Taxonomy Section */}
           <section id="classification-taxonomy" className="mb-16 scroll-mt-20">
@@ -105,14 +106,14 @@ const ResourcesCompliance = () => {
               We classify products using a tri-axial system: <strong>evidence rigor</strong> (E0–E3) and
               <strong> clinical impact</strong> (I0–I5) — adapted from van Leeuwen et al. (2021, updated 2025),
               with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991) —
-              extended with an internally proposed third axis, <strong>implementation &amp; assurance burden</strong> (Z0–Z5),
-              that captures residual deployment effort. Each product is further assessed on five granular study quality sub-attributes —
+              extended with an internally proposed third axis, <strong>adoption readiness</strong> (R0–R5),
+              that captures how close a product is to clinical deployment. Each product is further assessed on five granular study quality sub-attributes —
               vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Implementation &amp; Assurance Burden (Z0–Z5)</strong> — 
-              capturing the residual effort required for clinical adoption (commissioning, local validation, workflow redesign, monitoring, governance).
-              Lower Z indicates higher readiness. Toggle the visualisation below between <strong>2D</strong> (Rigor × Impact) and <strong>3D</strong> (Rigor × Impact × Burden) to explore the full E/I/Z framework.
+              As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Adoption Readiness (R0–R5)</strong> — 
+              capturing how ready a product is for clinical adoption (commissioning, local validation, workflow redesign, monitoring, governance, and the presence of national/international guidelines).
+              Higher R indicates higher readiness; missing guidelines delay (but do not block) adoption. Toggle the visualisation below between <strong>2D</strong> (Rigor × Impact) and <strong>3D</strong> (Rigor × Impact × Readiness) to explore the full E/I/R framework.
             </p>
             
             {/* Pyramid Visualization */}

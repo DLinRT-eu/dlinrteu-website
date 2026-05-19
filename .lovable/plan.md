@@ -1,21 +1,52 @@
+## Goal
+
+Refine the "Who we help" section on Resources & Compliance, reorder the page so the scope/inclusion callout precedes it, and align terminology + docs.
+
 ## Changes
 
-### 1. Remove stakeholder switch from Dashboard evidence chart
-File: `src/components/dashboard/EvidenceImpactScatterChart.tsx`
-- Remove the `stakeholder` state, the `ToggleGroup` UI, the `taskMedians` memo, and the vendor gap-analysis callout.
-- Restore the chart to its single default view (reviewer view), keeping the updated "Readiness" terminology.
-- Revert the title to plain "Evidence × Impact" (no per-stakeholder framing).
+### 1. `src/pages/ResourcesCompliance.tsx` — reorder
 
-### 2. Add stakeholders section to Resources & Compliance (at the top)
-File: `src/pages/ResourcesCompliance.tsx`
-- Import the existing `StakeholderUseCases` component from `src/components/about/StakeholderUseCases.tsx` and render it right after the hero, before `PageIndex` (or as the first content section).
-- Add a `"stakeholders"` entry at the top of `PageIndex` (`src/components/resources/PageIndex.tsx`) so the quick-nav links to it.
-- Keep the same anchor `id="stakeholders"` so cross-page links from `EvidenceImpactGuide` continue working — but since the section now lives on two pages, update the guide link to point to `/resources-compliance#stakeholders` (canonical location) and keep About as a secondary location, OR keep both. Default: keep both pages, link from the guide to `/resources-compliance#stakeholders` since that's the more discoverable home for it.
+Swap the order so the **Platform scope** blue callout (inclusion criteria) sits **above** the `StakeholderUseCases` block, immediately after `<PageIndex />`. No content change to either block beyond ordering and spacing tweaks.
 
-### 3. (Optional) Keep or remove from About
-- Default: keep `StakeholderUseCases` on the About page too (no removal requested). If the user wants it removed from About, that's a one-line change in `src/pages/About.tsx`.
+### 2. `src/components/about/StakeholderUseCases.tsx` — strengthen the Vendor/Company entry
 
-## Notes
-- Reusing the existing `StakeholderUseCases` component — no duplication.
-- No data-model or product-file changes.
-- Anchor IDs must be unique per page; same `id` on two different pages is fine.
+The existing "Vendor" card only frames vendors as benchmarkers. Rewrite that card so it covers the **two** value propositions DLinRT offers companies:
+
+- **Visibility** — DLinRT is often the first access point for clinicians and researchers looking up a product.
+- **Certified information** — through the Company Certification programme, vendors can have manufacturer-verified data displayed with the green/amber badge.
+- (Keep) Benchmarking against per-task medians.
+
+Proposed copy (single card, renamed "Vendor / Company"):
+
+- audience: `"Vendor / Company"`
+- description: `"Manufacturers and solution providers who want their product information accurately represented and discoverable."`
+- question: `"How do clinicians and researchers find and evaluate my product — and is the information they see correct?"`
+- view: `"Company page + Certification programme + Evidence/Impact scatter"`
+- viewLink: `/companies`
+- thresholds: `"Claim your company profile to certify product data (green/amber badge). Benchmark against per-task medians (≥E2 ∧ ≥I2 ∧ ≥R3 to be competitive)."`
+- extra: `"DLinRT is often the first access point users have to your product — accurate, certified information improves trust and adoption signal."`
+
+Icon: keep `Factory` (or switch to `Building2`) — will keep `Factory` to minimise churn.
+
+### 3. Terminology consistency
+
+Across the touched files use the canonical term **"Vendor / Company"** (matches existing `companyCertification` and `Companies` page nomenclature). Specifically:
+
+- Update the `StakeholderUseCases` card label and the dashboard view toggle preset name reference in any inline comment.
+- Verify the "Adoption Readiness (R0–R5)" wording is used (not Burden/Z) — the Platform scope block does not mention it, but the Evidence section's prose in `ResourcesCompliance.tsx` still says **"Implementation & Assurance Burden (Z0–Z5)"** and **"Rigor × Impact × Burden"**. Update those two paragraphs to **"Adoption Readiness (R0–R5)"** and **"Rigor × Impact × Readiness"** to stay consistent with the rest of the app (per the v2 rollout).
+
+### 4. Docs
+
+- **README.md** — if a "Who we help / audiences" or stakeholders blurb exists, ensure Vendor/Company line mentions visibility + certification. If absent, add a short one-liner under the project overview.
+- **docs/FIELD_REFERENCE.md** — confirm the audience/stakeholder terminology and Adoption Readiness (R0–R5) label are used; touch only if Burden/Z terms remain.
+- **docs/review/GUIDE.md** — same check: ensure R0–R5 / Adoption Readiness terminology only.
+
+No data-model, product-file, or backend changes. No design system / token changes.
+
+&nbsp;
+
+About page StakeholderUseCases placement make consistent to what is placed about the vendors as well.
+
+## Out of scope
+
+- New icons, new sections, copy beyond the Vendor/Company card.

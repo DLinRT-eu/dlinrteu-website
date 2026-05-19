@@ -9,6 +9,15 @@
 
 > **Note**: The website is currently under development. We welcome contributions to verify and improve the product information accuracy.
 
+## Who DLinRT.eu helps
+
+- **Clinicians** — radiation oncologists, medical physicists, and RTTs evaluating whether a product is safe and mature enough for their patients.
+- **HTA / Payers** — assessors and procurement teams identifying evidence and guideline gaps that delay adoption.
+- **Vendors / Companies** — manufacturers seeking visibility and the option to display certified, manufacturer-verified product information; DLinRT is often the first access point users have to a product.
+- **Researchers** — academics and clinical scientists planning validation or comparative studies.
+
+See [Resources & Compliance → Who we help](https://dlinrt.eu/resources-compliance#stakeholders) for the per-audience views and suggested thresholds.
+
 ## Documentation
 
 - **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review assignment, security monitoring
