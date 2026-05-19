@@ -69,9 +69,9 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation of the integrated auto-planning module identified. Vendor press materials only.",
+      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation identified. Vendor has not published a model card, training-data description or standalone intended-use document for the integrated auto-planning / Monte Carlo dose calculation module; only system-level press materials are available.",
     clinicalImpactNotes:
-      "Vendor reports ~15-minute online adaptive workflow on the uCT-ART system; no independent clinical impact evidence identified yet.",
+      "Vendor reports a ~15-minute online adaptive workflow on the uCT-ART system; no independent clinical impact evidence identified yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
       "Derived from E0 + CE (system-level): high implementation burden — limited independent evidence; structured pilot, dosimetric/end-to-end validation and human-factors testing recommended before clinical adoption.",
@@ -79,6 +79,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "Announced as part of the uRT radiotherapy portfolio at ESTRO 2026; auto-planning and Monte Carlo dose calculation described as native AI components of the CE-marked uRT-linac 506c.",
     limitations: [
       "Integrated component of the uRT ecosystem; not marketed as a standalone TPS",
+      "No model card, training-data description or standalone intended-use document has been published by the vendor",
       "Performance and adaptive-workflow timing claims are vendor-reported and not yet independently validated",
       "All AI-generated plans require qualified medical-physics and clinician review prior to clinical use"
     ],
