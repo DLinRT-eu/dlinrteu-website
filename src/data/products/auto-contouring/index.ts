@@ -29,6 +29,7 @@ import { MEDMIND_PRODUCTS } from "./medmind";
 import { VARIAN_ETHOS_PRODUCTS } from "./varian-ethos";
 import { QUANTA_COMPUTER_PRODUCTS } from "./quanta-computer";
 import { MEDCOM_PRODUCTS } from "./medcom";
+import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -59,5 +60,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...MEDMIND_PRODUCTS,
   ...VARIAN_ETHOS_PRODUCTS,
   ...QUANTA_COMPUTER_PRODUCTS,
-  ...MEDCOM_PRODUCTS
+  ...MEDCOM_PRODUCTS,
+  ...UNITED_IMAGING_PRODUCTS
 ];
