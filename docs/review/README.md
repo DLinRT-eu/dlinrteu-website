@@ -42,12 +42,12 @@ The visual editor provides specialized editors for different field types:
 | Category | Single-select dropdown |
 | Modality, Anatomy | Multi-select with chips |
 | Regulatory | Full CE/FDA/TGA editor |
-| Evidence | Tri-axial classification (E0–E3 / I0–I5 / Z0–Z5) |
+| Evidence | Tri-axial classification (E0–E3 / I0–I5 / R0–R5) |
 | Structures | OAR/GTV/Elective classification |
 
 ### Evidence Level Classification
 
-Every product should have an evidence classification using the **tri-axial system**: Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Implementation &amp; Assurance Burden (Z0–Z5). The **Evidence & Limitations** section is always visible on product pages to ensure this is set. See the [Review Guide](./GUIDE.md#evidence-level-classification) for full criteria.
+Every product should have an evidence classification using the **tri-axial system**: Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Adoption Readiness (R0–R5). The **Evidence & Limitations** section is always visible on product pages to ensure this is set. See the [Review Guide](./GUIDE.md#evidence-level-classification) for full criteria.
 
 ## Product Features
 
