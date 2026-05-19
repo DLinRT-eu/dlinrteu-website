@@ -69,14 +69,16 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     // Supported structures are not enumerated publicly by the vendor at this time.
     // Per editorial decision, the structure list is intentionally omitted until a
-    // verified DICOM-conformant list is published.
+    // verified DICOM-conformant list is published. The UI renders an explicit
+    // "structure list unavailable" card via structuresUnavailable below.
     supportedStructures: [],
+    structuresUnavailable: true,
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation of the integrated auto-contouring module identified. Vendor press materials only.",
+      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation identified. Vendor has not published a model card, training-data description or a standalone intended-use document for the integrated auto-contouring module; only system-level press materials are available.",
     clinicalImpactNotes:
-      "Vendor reports up to ~90% reduction in contouring time and supports ~15-minute online adaptive workflow; no independent clinical impact evidence identified yet.",
+      "Vendor reports up to ~90% reduction in contouring time and supports a ~15-minute online adaptive workflow; no independent clinical impact evidence identified yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
       "Derived from E0 + CE (system-level): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended before clinical adoption.",
