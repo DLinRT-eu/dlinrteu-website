@@ -155,6 +155,13 @@ Users can export their data via Profile → Data Export:
 - `isTrackingAllowed()` gate on all tracking operations
 - `clearTrackingIds()` for consent withdrawal
 
+### Cookie Threat Model
+
+- **No auth tokens or PII are stored in cookies.** Supabase session tokens live in `localStorage` (per the Supabase JS SDK); cookies only hold the GDPR consent record, an anonymous random visitor UUID, and UI state (sidebar).
+- **All client-written cookies use `SameSite=Strict` (or `Lax` for UI state) and `Secure` in production**, mitigating CSRF and network exposure.
+- **`HttpOnly` is not applicable** to cookies set via `document.cookie` — the flag can only be set by a server response header. The consent banner and analytics dedup logic require JS read access by design, so JS-readable cookies here are expected and not a vulnerability.
+
+
 ---
 
 ## Security Checklist
