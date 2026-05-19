@@ -1,55 +1,56 @@
+# Post-ESTRO 2026 Catalogue Audit Plan
 
-## Goal
+## Scope
 
-Now that ESTRO 2026 is over, sweep vendor announcements against our inclusion criteria (AI/DL component for radiotherapy, with disclosed model / training data / intended use) and update the catalogue. Fix the United Imaging structure-list rendering so missing data is labelled, not blank.
+107 product files across 10 categories. A blind file-by-file rewrite is neither useful nor safe — most entries are unchanged by ESTRO. The audit will be **announcement-driven**: only entries with a verifiable ESTRO 2026 vendor disclosure (or that we know are stale) get touched. Everything else gets a documented "no change required" sign-off in the recap, not a date bump.
 
-## Inclusion-criteria sweep — what qualifies vs. doesn't
+## Method
 
-Cross-checked against the ESTRO 2026 news roundup (`src/data/news/estro-2026-announcements.ts`) and vendor public material.
+For each vendor with a booth or press release at ESTRO 2026 (Stockholm, 15–19 May), check:
+1. New AI/DL product or pipeline disclosure → add entry (respecting inclusion criteria: must isolate AI/DL component, training data and intended use).
+2. New regulatory milestone (CE/FDA/TGA/TFDA) → update `regulatory.*`, refresh `lastRevised`.
+3. New peer-reviewed evidence or external validation study → update `evidence[]`, possibly recalibrate `evidenceRigor` / `clinicalImpact`.
+4. New supported structures / modalities / versions → update fields, suffix with `(investigational)` or `(unverified)` per the structure status convention.
+5. Withdrawn / superseded products → mark via `priorVersions` / `supersededBy`.
 
-**Qualifies — add now:**
+Out of scope: hardware-only platforms, classical-processing-only tools, redesigns, score recalibration without new evidence.
 
-1. **United Imaging — uCT 610 Sim Deep Learning Full-FOV reconstruction** (Reconstruction, **pipeline**). Vendor explicitly discloses a DL reconstruction component on the 87 cm wide-bore CT simulator; labelled "under development; not for sale or clinical use." Goes into `src/data/products/pipeline/` (Tier-2 pre-market), not the main reconstruction list. E0 / I0 / R0 (pre-market).
+## Vendors to sweep (priority order)
 
-2. **RaySearch — RayStation DLS Female Pelvis model** as an **investigational structure addition** to the existing `raysearch-raystation` entry (no new product file). Vendor announced it for the next RayStation release, explicitly "investigational, not CE-marked or FDA-cleared." Add the disclosed Female Pelvis ROIs to `supportedStructures` with the `(investigational)` suffix per our nomenclature standard, plus a short note in `evidenceRigorNotes` / `clinicalEvidence` referencing the ESTRO 2026 announcement. Do **not** bump E/I/R scores.
+**Tier 1 — known ESTRO 2026 activity already partially processed**
+- GE HealthCare (iRT, MR Contour DL, MRI Planner, MIM Contour ProtégéAI+, iRT for Theranostics pipeline) — verify all five entries reflect the 12 May press release; check for any post-congress addenda.
+- TheraPanacea — 16 accepted abstracts; harvest stable DOIs now that the congress is over and append to `evidence[]` on Annotate/ART-Plan/etc.
+- RaySearch — DLS Female Pelvis (already added as investigational); confirm full-CT-body 231-structure / 192-ROI / 59-sec demo is reflected in `keyFeatures` or `evidenceRigorNotes`; check RayStation 2024B release notes.
+- United Imaging — already processed (auto-contouring, auto-planning, uCT 610 Sim pipeline); spot-check for any post-congress clarifications.
+- Spectronic Medical (MRI Planner) — verify ESTRO reference.
+- Accuray Synchrony — already refreshed; verify watchlist items (Stellar, PreciseART, Adapt LTE/Cenos) remain excluded with rationale.
 
-**Does not qualify — log only, no catalogue entry:**
+**Tier 2 — sweep for ESTRO booth disclosures**
+Varian/Siemens Healthineers (Ethos, AI-Rad Companion Organs RT), Elekta (already covered via partners), Philips (auto-contouring, MRCAT), Brainlab (Elements), MIM Software, Mirada (DLCExpert), Limbus AI, MVision AI, Radformation, Manteia, Carina Medical, Coreline Soft, Vysioner, Wisdom Tech, DirectORGANS, Oncosoft, Taiwan Medical Imaging, Hura Imaging, AI Medical, EverFortune, MedMind, Quanta Computer, MedCom, Synaptiq, Sun Nuclear, MD Anderson — for each, check official news / press / LinkedIn for an ESTRO 2026 item and only edit if found.
 
-- GE HealthCare *iRT MR Direct* — bundled workflow over already-tracked components (iRT, MR Contour DL, Spectronic MRI Planner). Refresh ESTRO 2026 reference on those entries only (already done in prior pass — verify, no new product).
-- GE *iRT for Theranostics* — already in pipeline hub (verify present).
-- TheraPanacea — 16 ESTRO abstracts, no new products; evidence refresh deferred until DOIs land.
-- Accuray *Stellar / PreciseART / Adapt LTE / Cenos / ClearRT / Helix / Radixact* — no isolated AI/DL component disclosed; remain watchlisted in the news entry, not catalogued. **Synchrony** already refreshed.
-- United Imaging *uRT-linac 506c, uLinac HalosTx, uMR Omega, uMI Panorama* — hardware platforms, no isolated AI/DL component for radiotherapy. Excluded per inclusion criteria.
+**Tier 3 — known-stale entries**
+Five products still carry 2023-era `lastRevised` values (per `grep` survey): identify them, verify vendor pages, refresh either with current info or mark archived. Will be listed explicitly in the recap.
 
-**Re-examine the two United Imaging entries added earlier this session** (`uRT Auto-Contouring`, `uRT Auto-Planning`): the ESTRO news entry concluded United Imaging had **not** yet published model/training-data/intended-use documentation for these, which is borderline against our inclusion criteria. Plan: keep them (the vendor press release does describe them as AI components of the CE-marked uRT-linac 506c, which clears the minimum bar) but tighten the `limitations` and `evidenceRigorNotes` to explicitly state that no model card, training-data description or independent intended-use document has been published, and link them as integrated components of the system rather than standalone products.
+## Deliverables
 
-## United Imaging structure-list handling
+1. **Per-vendor diff list** — file paths and one-line summary of each change.
+2. **Catalogue updates appended** to `src/data/news/estro-2026-announcements.ts` under a new "Full post-ESTRO audit (Tier 1/2/3)" section, replacing the existing short "Post-ESTRO catalogue updates" block.
+3. **No design / schema / RLS / edge-function / docs changes** unless a vendor-specific field is genuinely missing from `ProductDetails` (none expected).
+4. **Score recalibration only where new peer-reviewed evidence justifies it**, per the dual-axis rubric in `docs/review/GUIDE.md`. No bulk re-scoring.
 
-`SupportedStructures.tsx` currently renders `null` when `supportedStructures` is empty/undefined, so the uRT Auto-Contouring page shows nothing where the structures card would be. Change:
+## What I will NOT do
 
-- Update `src/components/product/SupportedStructures.tsx` so that for `Auto-Contouring` products with no published structure list, instead of returning `null`, render a small fallback card titled **"Supported Structures"** with body text: *"The vendor has not published a verified list of supported structures for this product. The structure list is therefore unavailable in the catalogue."* (plus a short note that contours still require clinician review).
-- To pass the signal without a breaking schema change, add an optional `structuresUnavailable?: boolean` field to `ProductDetails` (in `src/types/productDetails.d.ts`) and pass it down from `ProductDetails.tsx` into `SupportedStructures`. Set `structuresUnavailable: true` on `united-urt-auto-contouring`. Leave other products unchanged (default behaviour remains `null`).
-- Do **not** invent or guess structure names for United Imaging.
+- Bump `lastRevised` on entries with no real change.
+- Invent supported structures, training-data descriptions, or evidence links.
+- Add hardware platforms, monitoring tools without AI, or watchlist items lacking model documentation.
+- Refactor UI, components, or the design system.
 
-## Files to touch
+## Open question for you
 
-Create:
-- `src/data/products/pipeline/united-imaging-uct610-sim.ts` (or extend existing pipeline file if one exists for UI) and register in `src/data/products/pipeline/index.ts`.
+The audit is bounded by what vendors have published. Three options for the web-research depth:
 
-Edit:
-- `src/data/products/auto-contouring/raysearch.ts` — append Female Pelvis ROIs with `(investigational)` suffix under a clearly labelled model/region group, refresh `evidenceRigorNotes` and `lastRevised`.
-- `src/data/products/auto-contouring/united-imaging.ts` — add `structuresUnavailable: true`, tighten `limitations` / `evidenceRigorNotes`.
-- `src/data/products/treatment-planning/united-imaging.ts` — tighten `limitations` / `evidenceRigorNotes` (no structure list applies here).
-- `src/types/productDetails.d.ts` (or `.ts`) — add optional `structuresUnavailable?: boolean`.
-- `src/components/product/SupportedStructures.tsx` — render the "unavailable" fallback card when category is Auto-Contouring and the flag is set or array is empty for that product.
-- `src/components/ProductDetails.tsx` — forward the `structuresUnavailable` prop / pass full product context.
+- **A. Light** — rely only on press releases already linked from `estro-2026-announcements.ts` plus vendor product pages. Fast, conservative, ~5–10 product edits expected.
+- **B. Medium (recommended)** — also search each Tier-1/Tier-2 vendor's newsroom and LinkedIn for an ESTRO 2026 post; harvest TheraPanacea DOIs from the post-congress proceedings. ~15–30 product edits expected.
+- **C. Deep** — additionally crawl the ESTRO 2026 abstract book / e-poster site for new external-validation studies on any catalogued product and update `evidence[]` + scores accordingly. Largest scope, may need several iterations.
 
-Docs:
-- Append a short bullet to `src/data/news/estro-2026-announcements.ts` noting the catalogue updates (uCT 610 Sim pipeline entry, RaySearch Female Pelvis investigational ROIs) so the news article stays the source of truth for what changed.
-
-## Out of scope
-
-- No design-system changes, no new pages, no backend / RLS changes.
-- No score recalibration for existing products beyond the United Imaging note tightening.
-- No new vendors beyond those already covered in the ESTRO news roundup.
-- No structure-name invention for any United Imaging product.
+Tell me A / B / C (or a custom scope) and I'll execute on approval.
