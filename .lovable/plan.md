@@ -1,56 +1,42 @@
-# Post-ESTRO 2026 Catalogue Audit Plan
+# Cookie Security Audit
 
-## Scope
+## Finding: cookies readable in JS is expected here, not a vulnerability
 
-107 product files across 10 categories. A blind file-by-file rewrite is neither useful nor safe — most entries are unchanged by ESTRO. The audit will be **announcement-driven**: only entries with a verifiable ESTRO 2026 vendor disclosure (or that we know are stale) get touched. Everything else gets a documented "no change required" sign-off in the recap, not a date bump.
+The cookies set by the site are intentionally JS-readable. They cannot be made `HttpOnly` from the browser — that flag can only be set by a server in a `Set-Cookie` response header, and this app writes cookies from the client via `document.cookie`.
 
-## Method
+### Inventory of cookies set by the app
 
-For each vendor with a booth or press release at ESTRO 2026 (Stockholm, 15–19 May), check:
-1. New AI/DL product or pipeline disclosure → add entry (respecting inclusion criteria: must isolate AI/DL component, training data and intended use).
-2. New regulatory milestone (CE/FDA/TGA/TFDA) → update `regulatory.*`, refresh `lastRevised`.
-3. New peer-reviewed evidence or external validation study → update `evidence[]`, possibly recalibrate `evidenceRigor` / `clinicalImpact`.
-4. New supported structures / modalities / versions → update fields, suffix with `(investigational)` or `(unverified)` per the structure status convention.
-5. Withdrawn / superseded products → mark via `priorVersions` / `supersededBy`.
+| Cookie | Set by | Purpose | Sensitive? |
+|---|---|---|---|
+| `dlinrt-cookie-consent` | `src/utils/cookieUtils.ts` | GDPR consent record | No |
+| `dlinrt-visitor-id` | analytics tracker | Anonymous dedup of unique visitors | No (random UUID, no PII) |
+| `sidebar:state` | `src/components/ui/sidebar.tsx` | UI preference | No |
+| `dlinrt-session-id` | analytics | Stored in `sessionStorage`, not a cookie | n/a |
 
-Out of scope: hardware-only platforms, classical-processing-only tools, redesigns, score recalibration without new evidence.
+### Auth tokens are NOT in cookies
 
-## Vendors to sweep (priority order)
+Supabase auth (`src/integrations/supabase/client.ts`) uses `localStorage` with `storageKey: 'dlinrt-auth-token'`. So there is no session/JWT cookie that an XSS payload could steal via `document.cookie` — the real session token sits in localStorage and is equally JS-readable by design (Supabase JS SDK requires it).
 
-**Tier 1 — known ESTRO 2026 activity already partially processed**
-- GE HealthCare (iRT, MR Contour DL, MRI Planner, MIM Contour ProtégéAI+, iRT for Theranostics pipeline) — verify all five entries reflect the 12 May press release; check for any post-congress addenda.
-- TheraPanacea — 16 accepted abstracts; harvest stable DOIs now that the congress is over and append to `evidence[]` on Annotate/ART-Plan/etc.
-- RaySearch — DLS Female Pelvis (already added as investigational); confirm full-CT-body 231-structure / 192-ROI / 59-sec demo is reflected in `keyFeatures` or `evidenceRigorNotes`; check RayStation 2024B release notes.
-- United Imaging — already processed (auto-contouring, auto-planning, uCT 610 Sim pipeline); spot-check for any post-congress clarifications.
-- Spectronic Medical (MRI Planner) — verify ESTRO reference.
-- Accuray Synchrony — already refreshed; verify watchlist items (Stellar, PreciseART, Adapt LTE/Cenos) remain excluded with rationale.
+The banner and analytics dedup logic both need to read these cookies from JS on every page load, so `HttpOnly` would break them even if it were settable.
 
-**Tier 2 — sweep for ESTRO booth disclosures**
-Varian/Siemens Healthineers (Ethos, AI-Rad Companion Organs RT), Elekta (already covered via partners), Philips (auto-contouring, MRCAT), Brainlab (Elements), MIM Software, Mirada (DLCExpert), Limbus AI, MVision AI, Radformation, Manteia, Carina Medical, Coreline Soft, Vysioner, Wisdom Tech, DirectORGANS, Oncosoft, Taiwan Medical Imaging, Hura Imaging, AI Medical, EverFortune, MedMind, Quanta Computer, MedCom, Synaptiq, Sun Nuclear, MD Anderson — for each, check official news / press / LinkedIn for an ESTRO 2026 item and only edit if found.
+### Current hardening already in place
 
-**Tier 3 — known-stale entries**
-Five products still carry 2023-era `lastRevised` values (per `grep` survey): identify them, verify vendor pages, refresh either with current info or mark archived. Will be listed explicitly in the recap.
+`cookieUtils.ts` sets `SameSite=Strict` and `Secure` (in production) on every cookie it writes, plus signed CSP headers in `public/_headers`. That is the correct mitigation set for client-written cookies.
 
-## Deliverables
+## Gaps worth fixing (small)
 
-1. **Per-vendor diff list** — file paths and one-line summary of each change.
-2. **Catalogue updates appended** to `src/data/news/estro-2026-announcements.ts` under a new "Full post-ESTRO audit (Tier 1/2/3)" section, replacing the existing short "Post-ESTRO catalogue updates" block.
-3. **No design / schema / RLS / edge-function / docs changes** unless a vendor-specific field is genuinely missing from `ProductDetails` (none expected).
-4. **Score recalibration only where new peer-reviewed evidence justifies it**, per the dual-axis rubric in `docs/review/GUIDE.md`. No bulk re-scoring.
+1. **`sidebar:state` cookie is not hardened.** `src/components/ui/sidebar.tsx:85` writes it without `Secure` or `SameSite`. Low risk (UI preference) but trivial to harden — add `secure; samesite=lax`.
+2. **No documented threat model for cookies.** Add a short comment in `cookieUtils.ts` (already partially there) and one line in `SECURITY.md` so future reviewers don't re-flag this.
 
-## What I will NOT do
+## Things NOT to do
 
-- Bump `lastRevised` on entries with no real change.
-- Invent supported structures, training-data descriptions, or evidence links.
-- Add hardware platforms, monitoring tools without AI, or watchlist items lacking model documentation.
-- Refactor UI, components, or the design system.
+- Do not try to set `HttpOnly` from JS — silently ignored by browsers.
+- Do not move the Supabase auth token into a cookie to "fix" this. Switching Supabase auth to cookie storage requires SSR/edge middleware this app doesn't have, and would introduce CSRF surface that doesn't currently exist.
+- Do not remove the analytics/consent cookies — they are required for the consent flow itself.
 
-## Open question for you
+## Proposed change set (if you approve)
 
-The audit is bounded by what vendors have published. Three options for the web-research depth:
+- `src/components/ui/sidebar.tsx`: append `; secure; samesite=lax` to the sidebar cookie write.
+- `SECURITY.md`: add a 3-line "Cookie threat model" subsection stating that no auth/PII is stored in cookies, all client cookies use SameSite=Strict+Secure, and HttpOnly is N/A for client-written cookies.
 
-- **A. Light** — rely only on press releases already linked from `estro-2026-announcements.ts` plus vendor product pages. Fast, conservative, ~5–10 product edits expected.
-- **B. Medium (recommended)** — also search each Tier-1/Tier-2 vendor's newsroom and LinkedIn for an ESTRO 2026 post; harvest TheraPanacea DOIs from the post-congress proceedings. ~15–30 product edits expected.
-- **C. Deep** — additionally crawl the ESTRO 2026 abstract book / e-poster site for new external-validation studies on any catalogued product and update `evidence[]` + scores accordingly. Largest scope, may need several iterations.
-
-Tell me A / B / C (or a custom scope) and I'll execute on approval.
+No data-model, RLS, or auth changes. No UX change.
