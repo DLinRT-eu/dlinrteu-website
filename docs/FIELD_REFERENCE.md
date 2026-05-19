@@ -381,7 +381,7 @@ Need more context or a new field? Open an issue referencing this document and in
 
 **Last Updated**: March 8, 2026
 
-## Implementation & Assurance Burden (Z-axis)
+## Adoption Readiness (R-axis)
 
 Third axis of the E/I/R evidence-readiness model (DLinRT extension). Higher R = lower residual effort = closer to adoption-ready. Note: peer-review, funding independence, and COI are captured via the study-quality sub-attributes (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceProspective`, `evidenceExternalValidation`) — not collapsed into E.
 
