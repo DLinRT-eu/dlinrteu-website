@@ -42,6 +42,12 @@ async function verifySvix(req: Request, body: string): Promise<boolean> {
   const signatureHeader = req.headers.get("svix-signature");
   if (!id || !timestamp || !signatureHeader) return false;
 
+  // Replay protection: reject messages with timestamps outside ±5 minutes
+  const ts = parseInt(timestamp, 10);
+  if (!Number.isFinite(ts)) return false;
+  const ageSeconds = Math.abs(Date.now() / 1000 - ts);
+  if (ageSeconds > 300) return false;
+
   const secretB64 = WEBHOOK_SECRET.startsWith("whsec_")
     ? WEBHOOK_SECRET.slice(6)
     : WEBHOOK_SECRET;
