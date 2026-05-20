@@ -528,14 +528,68 @@ export default function ReviewRoundDetails() {
                           </TableCell>
                           <TableCell>{getStatusBadge(assignment.status)}</TableCell>
                           <TableCell>
-                            {assignment.deadline ? (
-                              <div className={isOverdue ? 'text-destructive font-medium' : ''}>
-                                {format(new Date(assignment.deadline), 'MMM d, yyyy')}
-                                {isOverdue && ' (Overdue)'}
-                              </div>
-                            ) : (
-                              '-'
-                            )}
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className={cn(
+                                    "h-8 px-2 font-normal justify-start gap-2",
+                                    isOverdue && "text-destructive font-medium",
+                                    !assignment.deadline && "text-muted-foreground"
+                                  )}
+                                >
+                                  <CalendarIcon className="h-3.5 w-3.5" />
+                                  {assignment.deadline ? (
+                                    <>
+                                      {format(new Date(assignment.deadline), 'MMM d, yyyy')}
+                                      {isOverdue && ' (Overdue)'}
+                                    </>
+                                  ) : (
+                                    'Set deadline'
+                                  )}
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
+                                  mode="single"
+                                  selected={assignment.deadline ? new Date(assignment.deadline) : undefined}
+                                  onSelect={async (date) => {
+                                    if (!date) return;
+                                    const iso = format(date, 'yyyy-MM-dd');
+                                    const result = await updateProductReviewAdmin(assignment.id, { deadline: iso });
+                                    if (result.success) {
+                                      toast.success('Deadline updated');
+                                      fetchRoundDetails();
+                                    } else {
+                                      toast.error(result.error || 'Failed to update deadline');
+                                    }
+                                  }}
+                                  initialFocus
+                                  className={cn("p-3 pointer-events-auto")}
+                                />
+                                {assignment.deadline && (
+                                  <div className="p-2 border-t">
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="w-full"
+                                      onClick={async () => {
+                                        const result = await updateProductReviewAdmin(assignment.id, { deadline: undefined });
+                                        if (result.success) {
+                                          toast.success('Deadline cleared');
+                                          fetchRoundDetails();
+                                        } else {
+                                          toast.error(result.error || 'Failed to clear deadline');
+                                        }
+                                      }}
+                                    >
+                                      Clear deadline
+                                    </Button>
+                                  </div>
+                                )}
+                              </PopoverContent>
+                            </Popover>
                           </TableCell>
                           <TableCell>
                             {format(new Date(assignment.assigned_at), 'MMM d, yyyy HH:mm')}
