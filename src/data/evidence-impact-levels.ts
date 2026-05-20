@@ -18,52 +18,50 @@ export interface EvidenceRigorLevel {
 export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
   {
     level: "E0",
-    name: "No Peer-Reviewed Evidence",
-    description: "No peer-reviewed publications available. Only vendor materials, marketing claims, or regulatory submission data.",
+    name: "Descriptive / no peer-reviewed evidence",
+    description: "Evidence limited to vendor materials, demonstrations, marketing claims or internal data without peer review. Horizon-scanning only; not adoption-grade.",
     criteria: [
-      "Vendor white papers only",
-      "Marketing materials",
-      "FDA 510(k) summary without publications",
-      "CE marking documentation only"
+      "Vendor white papers, brochures or marketing claims",
+      "FDA 510(k) summary or CE technical file without peer-reviewed publication",
+      "Internal benchmarks not independently reported",
+      "No peer-reviewed study meeting CLAIM 2024 or equivalent identified"
     ],
     color: "gray"
   },
   {
     level: "E1",
-    name: "Preliminary Evidence",
-    description: "Single-center studies, small sample sizes, or pilot investigations. Early-stage validation.",
+    name: "Exploratory or single-centre technical validation",
+    description: "At least one peer-reviewed retrospective, phantom, in-silico, pre-clinical or single-centre study showing technical feasibility or accuracy. Early signal; limited generalisability.",
     criteria: [
-      "Single institution studies",
-      "Sample size < 100 patients",
-      "Retrospective design only",
-      "Pilot or feasibility studies",
-      "Conference abstracts without full paper"
+      "Single-centre retrospective study",
+      "Phantom, in-silico or pre-clinical evaluation",
+      "Reported per relevant CLAIM / STARD-AI items",
+      "No independent external or multi-centre validation yet"
     ],
     color: "blue"
   },
   {
     level: "E2",
-    name: "Validated Evidence",
-    description: "Multi-center studies, large prospective cohorts, or robust retrospective studies with external validation.",
+    name: "External, independent or multi-centre validation",
+    description: "Performance validated on external data, by independent groups and/or in multi-centre settings using defined reference standards. Validation-grade signal, suitable for focused deployment with contextual safeguards.",
     criteria: [
-      "Multi-center studies (3+ sites)",
-      "Sample size > 200 patients",
-      "Prospective study design",
-      "External validation cohort",
-      "Independent replication"
+      "≥1 external or multi-centre study in the target indication",
+      "Reported per CLAIM + STARD-AI or TRIPOD+AI + PROBAST+AI",
+      "Low-to-moderate risk of bias",
+      "Vendor-independent evaluation when possible",
+      "Clearly defined reference standards"
     ],
     color: "green"
   },
   {
     level: "E3",
-    name: "Systematic Evidence",
-    description: "Systematic reviews, meta-analyses, or randomized controlled trials. Highest methodological rigor.",
+    name: "Prospective / comparative or decision-grade synthesis",
+    description: "Prospective, pragmatic or comparative real-world studies, or systematic reviews / meta-analyses of robust studies, demonstrating performance in clinical use. Adoption-grade evidence subject to I and R.",
     criteria: [
-      "Systematic reviews",
-      "Meta-analyses",
-      "Randomized controlled trials",
-      "Phase III clinical trials",
-      "Cochrane-style reviews"
+      "Prospective, pragmatic or comparative real-world study",
+      "Or systematic review / meta-analysis of robust studies",
+      "Aligned with DECIDE-AI, SPIRIT-AI and/or CONSORT-AI",
+      "Demonstrates performance in clinical use, not only in silico"
     ],
     color: "purple"
   }
@@ -87,77 +85,79 @@ export interface ClinicalImpactLevel {
 export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   {
     level: "I0",
-    name: "None Demonstrated",
-    description: "No clinical, workflow, or quality benefit demonstrated beyond feasibility. Product works, but no patient-facing value shown. No equivalent in the Fryback & Thornbury hierarchy.",
+    name: "Feasibility only",
+    description: "Studies demonstrate that the method runs or produces plausible outputs, without any predefined clinical, workflow or service endpoint. No equivalent in the Fryback & Thornbury hierarchy.",
     rtExamples: [
-      "Technical feasibility studies only",
-      "Proof-of-concept without clinical validation",
-      "Computational benchmarks without patient context",
-      "Product works but no impact studies conducted"
+      "Runtime / output-plausibility demonstration",
+      "Proof-of-concept without prespecified endpoint",
+      "Usability pilots without clinical metrics",
+      "Computational benchmarks without patient context"
     ],
     color: "slate"
   },
   {
     level: "I1",
-    name: "Technical Performance",
-    description: "Enables technical performance monitoring, measurement, or quality assurance that indirectly supports patient care. Does not directly affect treatment but ensures safe and correct operation. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
+    name: "Technical, analytical or geometric validation",
+    description: "Predefined technical, analytical or geometric endpoints (DSC, Hausdorff, sensitivity/specificity, image-quality metrics, reader-study accuracy) without demonstrated downstream effect on workflow, decisions or outcomes. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
     rtExamples: [
-      "QA tools validating AI contour accuracy",
-      "Performance monitoring dashboards",
-      "Automated consistency checks",
-      "Measurement devices ensuring correct operation"
+      "Dice / Hausdorff vs. reference contours",
+      "Sensitivity / specificity vs. ground truth",
+      "Image-quality metrics (PSNR, SSIM, NIQE)",
+      "Reader-study accuracy",
+      "Automated QA / consistency checks on AI outputs"
     ],
     color: "blue",
     frybackThornburyLevel: "Level 1: Technical Efficacy"
   },
   {
     level: "I2",
-    name: "Workflow",
-    description: "Time savings, efficiency gains, or reduction in variability within clinical workflow. Corresponds to Fryback & Thornbury Level 2 (Diagnostic Accuracy Efficacy), adapted for therapeutic AI tasks.",
+    name: "Workflow or pathway-level effects",
+    description: "Evidence of impact on workflow or pathway-level processes — review/edit time, planning timeliness, throughput or staff workload — measured prospectively or in audited routine practice. Corresponds to Fryback & Thornbury Level 2 (Diagnostic Accuracy Efficacy), adapted for therapeutic AI tasks.",
     rtExamples: [
-      "Contouring time reduction",
-      "Inter-observer variability reduction",
-      "Treatment planning efficiency",
-      "Review/approval time savings"
+      "Contour review / edit time",
+      "Treatment-planning timeliness",
+      "Throughput and staff workload",
+      "Alert rate / inter-observer variability reduction"
     ],
     color: "teal",
     frybackThornburyLevel: "Level 2: Diagnostic Accuracy Efficacy"
   },
   {
     level: "I3",
-    name: "Decision",
-    description: "Changes in treatment management or clinical decision-making based on the AI output. Corresponds to Fryback & Thornbury Level 3 (Diagnostic Thinking Efficacy).",
+    name: "Clinical decision or pathway",
+    description: "Evidence that the tool changes clinical decisions, plans or delivered treatments in a way that is plausibly beneficial and safe (e.g. adaptive-RT triggers, escalation/de-escalation, replanning). Corresponds to Fryback & Thornbury Level 3 (Diagnostic Thinking Efficacy).",
     rtExamples: [
-      "Dose modification rates",
-      "Treatment intent changes",
-      "Plan selection influence",
-      "Adaptive treatment decisions"
+      "Change in treatment plans or intent",
+      "Adaptive-RT replan triggers",
+      "Escalation / de-escalation decisions",
+      "Plan-selection influence in audited practice"
     ],
     color: "orange",
     frybackThornburyLevel: "Level 3: Diagnostic Thinking Efficacy"
   },
   {
     level: "I4",
-    name: "Outcome",
-    description: "Patient health outcomes including survival, toxicity reduction, or quality of life improvements. Corresponds to Fryback & Thornbury Levels 4–5 (Therapeutic + Patient Outcome Efficacy).",
+    name: "Patient, service or resource outcomes",
+    description: "Demonstrated impact on patient outcomes (toxicity, local control, survival, QoL) and/or service outcomes (waiting times, cancellations, resource use). Corresponds to Fryback & Thornbury Levels 4–5 (Therapeutic + Patient Outcome Efficacy).",
     rtExamples: [
       "Reduced radiation toxicity",
-      "Improved tumor control probability",
-      "Survival analysis",
-      "Patient-reported outcomes"
+      "Improved tumour control or survival",
+      "Patient-reported outcomes",
+      "Reduced waiting times / cancellations",
+      "Resource / capacity savings"
     ],
     color: "purple",
     frybackThornburyLevel: "Levels 4–5: Therapeutic + Patient Outcome Efficacy"
   },
   {
     level: "I5",
-    name: "Societal",
-    description: "Health economics, cost-effectiveness, access to care, or population-level impact. Corresponds to Fryback & Thornbury Level 6 (Societal Efficacy).",
+    name: "System-level or societal value",
+    description: "Sustained, scalable benefit at network, regional or national level — equity, access, workforce sustainability, system efficiency, cost-effectiveness. Corresponds to Fryback & Thornbury Level 6 (Societal Efficacy).",
     rtExamples: [
-      "Cost per QALY analysis",
-      "Reduced treatment delays",
-      "Access improvement in LMICs",
-      "Health economic modeling"
+      "Regional / national benchmarking",
+      "Workforce sustainability and capacity",
+      "Equity and access improvements",
+      "Cost per QALY / health-economic modelling"
     ],
     color: "rose",
     frybackThornburyLevel: "Level 6: Societal Efficacy"
@@ -182,44 +182,44 @@ export interface AdoptionReadinessLevel {
 export const ADOPTION_READINESS_LEVELS: AdoptionReadinessLevel[] = [
   {
     level: "R0",
-    name: "Not adoption-ready",
-    description: "Critical unresolved gaps: governance, cybersecurity, regulatory or clinical-safety assurance missing; integration unclear.",
-    readinessConsequence: "Horizon scanning only; block adoption-grade export.",
+    name: "Unspecified / no implementation evidence",
+    description: "Commissioning, local validation, QA, monitoring and governance are not described or not yet performed.",
+    readinessConsequence: "Horizon scanning or research sandbox only; cannot support adoption-grade use regardless of E and I.",
     color: "rose",
   },
   {
     level: "R1",
-    name: "Major gaps to address",
-    description: "Material uncertainty around safety, fairness, monitoring, change control, generalisability or post-market surveillance.",
-    readinessConsequence: "Do not present as adoption-ready.",
+    name: "Minimal implementation readiness",
+    description: "Informal or single-site commissioning and basic QA performed, but coverage of subgroups, atypical anatomy, safety monitoring or governance is limited.",
+    readinessConsequence: "Tightly controlled, exploratory deployment with strong local oversight; not adoption-grade.",
     color: "red",
   },
   {
     level: "R2",
-    name: "Pilot-ready",
-    description: "Significant TPS/OIS/PACS/data-pipeline work, human-factors testing, safety case or staffing evidence still required.",
-    readinessConsequence: "Restrict to structured pilot or sandbox.",
+    name: "Basic implementation readiness",
+    description: "Structured single-site commissioning, documented clinical acceptability, review/edit-time data and initial monitoring logs available; scope or duration still limited (RCR- / COMMUTE-style).",
+    readinessConsequence: "Conditional pilot deployment; requires local appraisal and targeted evidence generation.",
     color: "orange",
   },
   {
     level: "R3",
-    name: "Conditionally ready",
-    description: "Local validation, interface testing, workflow redesign, economic/resource case or subgroup checks remain. Missing national/international guidelines may delay adoption.",
-    readinessConsequence: "Conditional deployment or evidence-generation pilot.",
+    name: "Enhanced implementation readiness",
+    description: "Multi-site or multi-context commissioning, predefined acceptance criteria, subgroup and atypical-anatomy analyses, defined monitoring processes and incident management (COMMUTE, AI for IMPACTS, CARE, MLTRL).",
+    readinessConsequence: "Strong deployment signal within studied contexts; residual burden is moderate and clearly specified.",
     color: "yellow",
   },
   {
     level: "R4",
-    name: "Ready with local assurance",
-    description: "Minor local commissioning, user training, documentation checks or workflow confirmation remain.",
-    readinessConsequence: "Deploy with local sign-off and monitoring.",
+    name: "High implementation readiness",
+    description: "Extensive multi-centre or regional deployment with robust QA, TG-100 / RBAAF-informed risk management, governance, FSCA / recall tracking and periodic re-evaluation aligned with national guidance.",
+    readinessConsequence: "Adoption-grade readiness with low residual implementation burden in comparable settings.",
     color: "teal",
   },
   {
     level: "R5",
-    name: "Adoption-ready",
-    description: "Core documentation, validation, integration, QA and governance complete for the intended use; aligned with available guidelines.",
-    readinessConsequence: "May support adoption-grade badge if E and I are strong.",
+    name: "Mature implementation ecosystem",
+    description: "Long-term, large-scale deployment across diverse settings with AI Act / MDR / IVDR-aligned post-market surveillance, continuous monitoring, routine evidence generation and updating, and mature system-level governance.",
+    readinessConsequence: "System-level readiness; residual burden is minimal and mainly relates to local context, not the technology.",
     color: "green",
   },
 ];
