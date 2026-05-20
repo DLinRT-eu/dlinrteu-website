@@ -232,7 +232,7 @@ const YearReport = ({ year }: { year: FinancialYear }) => {
 };
 
 const Transparency = () => {
-  const years = FINANCIAL_YEARS;
+  const { years } = useFinancialYears();
   const [active, setActive] = useState(String(years[0]?.year ?? new Date().getFullYear()));
 
   const structuredData = {
