@@ -39,13 +39,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K183202",
         regulationNumber: "21 CFR 892.1750",
@@ -104,7 +104,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Vendor white papers and multiple published studies report improved image quality and low-contrast detectability with deep learning image reconstruction, with dose reduction feasibility depending on protocol and clinical indication.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
@@ -146,13 +146,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K193282, K213717, K252379",
         regulationNumber: "21 CFR 892.1000",

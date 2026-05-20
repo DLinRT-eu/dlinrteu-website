@@ -48,12 +48,12 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "II"
       },
       intendedUseStatement: "ClearCheck is intended for automated treatment plan checking, structure validation, and documentation to support quality assurance in radiotherapy workflows."
@@ -81,7 +81,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "Radformation official website, PubMed"
   }
 ];

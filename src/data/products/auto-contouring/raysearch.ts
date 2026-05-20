@@ -36,13 +36,13 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K240398",
@@ -69,7 +69,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     version: "12.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-19",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

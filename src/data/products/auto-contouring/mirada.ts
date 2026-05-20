@@ -34,13 +34,13 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked (Historical - Product Discontinued)",
+        status: "withdrawn",
         class: "Class IIa",
         type: "MDD",
         regulation: "MDD 93/42/EEC"
       },
       fda: {
-        status: "510(k) Cleared (Historical - Product Discontinued)",
+        status: "withdrawn",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K181572",
@@ -76,7 +76,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     version: "2.2",
     releaseDate: "2023-05-20",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Historical records - product discontinued"
   }
 ];

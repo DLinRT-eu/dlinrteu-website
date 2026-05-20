@@ -40,13 +40,13 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K220264",
@@ -96,7 +96,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -181,13 +181,13 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k) with PCCP",
         clearanceNumber: "K251306",

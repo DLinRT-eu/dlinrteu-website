@@ -42,13 +42,13 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K231572",
@@ -85,7 +85,7 @@ export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Brain lesion tracking only; other anatomical sites not currently supported",
       "Performance may vary with non-standard MRI sequences or protocols"
     ],
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K231572), company official sources"
   }
 ];

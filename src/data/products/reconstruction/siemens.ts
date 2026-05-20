@@ -40,13 +40,13 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K213693, K232322, K250436, K251822",
         regulationNumber: "21 CFR 892.1000",
@@ -108,7 +108,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database and company website"
   }
 ];

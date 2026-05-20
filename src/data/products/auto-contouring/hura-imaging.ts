@@ -77,13 +77,13 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K202928",
@@ -113,7 +113,7 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
     version: "2.5",
     releaseDate: "2023-05-20",
     lastUpdated: "2024-01-15",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K202928), company official sources"
   }
 ];

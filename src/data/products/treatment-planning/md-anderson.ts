@@ -44,13 +44,13 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Not Available",
+        status: "not_applicable",
         class: "N/A",
         type: "Medical Device",
         notes: "CE marking not obtained. Available primarily for US market and global academic access."
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K222728",
@@ -111,6 +111,6 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
   },
 ];

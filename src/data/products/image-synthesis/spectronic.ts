@@ -61,13 +61,13 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K211841",
@@ -85,7 +85,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     version: "3.2",
     releaseDate: "2023-07-10",
     lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-14",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database and company website. GE HealthCare ESTRO 2026 press release (12 May 2026) describes MRI Planner (Spectronic Medical, a GE HealthCare company) as the synthetic-CT engine of the iRT MR Direct MR-only workflow across brain, head & neck and pelvis.",
     evidence: [
       {

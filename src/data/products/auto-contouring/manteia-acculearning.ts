@@ -9,7 +9,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   productUrl: "https://www.manteiatech.com/acculearning",
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia-acculearning.ts",
   description: "Localized deep learning platform for clinics to build/train custom AI models for radiation therapy using institutional data.",
-  category: "Model Training",
+  category: "Platform",
   certification: "For research use. Clinical deployment requires separate validation",
   logoUrl: "/logos/manteia.png",
   website: "https://www.manteiamedical.com/acculearning",
@@ -38,7 +38,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   },
   regulatory: {
     ce: {
-      status: "Certified",
+      status: "cleared",
       class: "I",
       type: "Software Development Environment"
     },
@@ -63,7 +63,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   ],
   version: "N/D",
   releaseDate: "2017-01-01",
-  lastRevised: "2025-12-01",
+  lastRevised: "2026-05-20",
   lastUpdated: "2025-08-11",
   source: "Automatically retrieved"
 }

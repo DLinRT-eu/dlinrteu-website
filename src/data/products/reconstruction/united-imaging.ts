@@ -41,13 +41,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         notes: "Cleared as part of United Imaging CT system clearances (e.g., K241166 for uCT 550). AI reconstruction is integrated feature."
@@ -65,7 +65,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database and company website"
 
   },
@@ -106,13 +106,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         notes: "Cleared as part of United Imaging MR system clearances. AI reconstruction is integrated feature."
@@ -174,13 +174,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         notes: "Cleared as part of United Imaging PET/CT and PET/MR system clearances. AI reconstruction is integrated feature."

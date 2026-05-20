@@ -41,13 +41,13 @@ const rawProduct: ProductDetails = {
   },
   regulatory: {
     ce: {
-      status: "Certified",
+      status: "cleared",
       class: "IIa",
       type: "MDR",
       regulation: "MDR 2017/745"
     },
     fda: {
-      status: "510(k) Cleared",
+      status: "510k_cleared",
       class: "Class II",
       type: "510(k)",
       clearanceNumber: "K200714",
@@ -65,7 +65,7 @@ const rawProduct: ProductDetails = {
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-02-23",
-  lastRevised: "2026-02-23",
+  lastRevised: "2026-05-20",
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",

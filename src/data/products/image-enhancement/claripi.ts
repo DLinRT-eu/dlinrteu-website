@@ -39,13 +39,13 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDD"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K183460",
@@ -85,7 +85,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Multiple peer-reviewed publications in European Radiology, Radiology, and SPIE demonstrating efficacy in various clinical applications",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K183460, K212074) and company website"
   }
 ];

@@ -636,13 +636,13 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K260509",
@@ -688,7 +688,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     version: "2.7",
     releaseDate: "2026-03-19",
     lastUpdated: "2026-04-21",
-    lastRevised: "2026-04-21",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), company official sources, vendor product page (AutoContour v2.7) accessed 2026-04-21"
   }
 ];

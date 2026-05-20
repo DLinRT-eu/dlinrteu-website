@@ -38,13 +38,13 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K212116",
@@ -73,7 +73,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     version: "2.5",
     releaseDate: "2023-10-05",
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
     evidence: [
       {

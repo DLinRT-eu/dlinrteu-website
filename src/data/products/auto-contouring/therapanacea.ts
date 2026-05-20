@@ -41,14 +41,14 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K253091",
@@ -314,7 +314,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.phro.2024.100654"
       }
     ],
-    lastRevised: "2026-03-23",
+    lastRevised: "2026-05-20",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822, K202700)"
   }
 ];

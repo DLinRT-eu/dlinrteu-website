@@ -48,12 +48,12 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         productCode: "IYE",
@@ -90,7 +90,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Varian official website"
   }
 ];

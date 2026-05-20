@@ -274,13 +274,13 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     // Regulatory Information
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K242994",
@@ -337,7 +337,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     version: "2024",
     releaseDate: "2024-01-01",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }

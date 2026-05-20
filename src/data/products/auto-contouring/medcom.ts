@@ -45,13 +45,13 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIa",
         type: "MDD",
         regulation: "Directive 93/42/EEC (legacy device under MDR 2017/745 Article 120(3c))",
       },
       fda: {
-        status: "Not specified",
+        status: "not_applicable",
         notes: "No FDA clearance publicly documented for the ProSoma Dart AI Segmentation Engine at the time of listing.",
       },
       intendedUseStatement:
@@ -74,7 +74,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-05",
+    lastRevised: "2026-05-20",
     source: "Vendor product page (MedCom ProSoma)."
   },
 ];

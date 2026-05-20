@@ -18,6 +18,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     ],
     category: "Performance Monitor",
     usesAI: false,
+    monitorsAIProducts: true,
     certification: "MDR Exempt",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/verify/",
@@ -47,13 +48,13 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "MDR Exempt",
+        status: "not_applicable",
         class: "N/A",
         type: "Software Tool",
         notes: "Visualization and comparison tool - not a diagnostic device"
       },
       fda: {
-        status: "Not applicable",
+        status: "not_applicable",
         class: "N/A",
         notes: "Non-diagnostic visualization tool for comparing contours. Does not make clinical decisions."
       },
@@ -73,7 +74,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "MVision AI official website, regulatory classification based on product function"
   }
 ];

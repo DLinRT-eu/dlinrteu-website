@@ -109,7 +109,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745",
@@ -162,7 +162,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     evidence: [
       {
         type: "Company Press Release",

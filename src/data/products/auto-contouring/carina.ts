@@ -34,13 +34,13 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K212274",
@@ -220,7 +220,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Uterus (investigational)",
       "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-05-05",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",

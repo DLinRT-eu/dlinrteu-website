@@ -42,12 +42,12 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         productCode: "LNH",
@@ -83,7 +83,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Philips product documentation (2019)"
   }
 ];

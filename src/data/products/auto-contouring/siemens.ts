@@ -42,13 +42,13 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "II",
         clearanceNumber: "K242745",
         productCode: "QKB",
@@ -311,7 +311,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Vertebrae: S4",
       "Vertebrae: S5"
     ],
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
