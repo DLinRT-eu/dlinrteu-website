@@ -6,6 +6,7 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     name: "Elements AI Tumor Segmentation",
     company: "Brainlab",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     description: "Deep learning module for semi-automatic segmentation of cranial tumors including metastases, meningiomas, gliomas, cranial/paraspinal nerve tumors, and glioneuronal tumors from 3D Contrast-Enhanced T1 MR images.",
     certification: "CE & FDA",
     logoUrl: "/logos/Brainlab.jpg",

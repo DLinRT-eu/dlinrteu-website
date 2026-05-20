@@ -11,6 +11,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-mr-contour-dl.ts",
     description: "AI-powered auto-segmentation solution for MRI-based radiation therapy planning, providing automated organ-at-risk contouring for head & neck and pelvic anatomies.",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     certification: "CE & FDA",
     logoUrl: "/logos/ge_healthcare.png",
     website: "https://www.gehealthcare.com/",
