@@ -568,26 +568,6 @@ export default function ReviewRoundDetails() {
                                   initialFocus
                                   className={cn("p-3 pointer-events-auto")}
                                 />
-                                {assignment.deadline && (
-                                  <div className="p-2 border-t">
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      className="w-full"
-                                      onClick={async () => {
-                                        const result = await updateProductReviewAdmin(assignment.id, { deadline: undefined });
-                                        if (result.success) {
-                                          toast.success('Deadline cleared');
-                                          fetchRoundDetails();
-                                        } else {
-                                          toast.error(result.error || 'Failed to clear deadline');
-                                        }
-                                      }}
-                                    >
-                                      Clear deadline
-                                    </Button>
-                                  </div>
-                                )}
                               </PopoverContent>
                             </Popover>
                           </TableCell>
