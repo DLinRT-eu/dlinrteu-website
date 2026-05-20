@@ -3,6 +3,7 @@ import { THERAPANACEA_PIPELINE_PRODUCTS } from "./therapanacea";
 import { MEDLEVER_PIPELINE_PRODUCTS } from "./medlever";
 import { GE_HEALTHCARE_PIPELINE_PRODUCTS } from "./ge-healthcare";
 import { UNITED_IMAGING_PIPELINE_PRODUCTS } from "./united-imaging";
+import { SYNAPTIQ_PIPELINE_PRODUCTS } from "./synaptiq";
 
 // Combine all pipeline products
 export const PIPELINE_PRODUCTS: ProductDetails[] = [
@@ -10,6 +11,7 @@ export const PIPELINE_PRODUCTS: ProductDetails[] = [
   ...MEDLEVER_PIPELINE_PRODUCTS,
   ...GE_HEALTHCARE_PIPELINE_PRODUCTS,
   ...UNITED_IMAGING_PIPELINE_PRODUCTS,
+  ...SYNAPTIQ_PIPELINE_PRODUCTS,
 ];
 
 export {
@@ -17,4 +19,5 @@ export {
   MEDLEVER_PIPELINE_PRODUCTS,
   GE_HEALTHCARE_PIPELINE_PRODUCTS,
   UNITED_IMAGING_PIPELINE_PRODUCTS,
+  SYNAPTIQ_PIPELINE_PRODUCTS,
 };
