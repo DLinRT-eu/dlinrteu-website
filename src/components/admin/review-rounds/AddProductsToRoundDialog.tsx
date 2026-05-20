@@ -272,6 +272,7 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
                   <SelectItem value="balanced">Balanced (workload + expertise)</SelectItem>
                   <SelectItem value="expertise-first">Expertise first</SelectItem>
                   <SelectItem value="random">Random</SelectItem>
+                  <SelectItem value="manual">Assign all to a specific reviewer</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -279,6 +280,23 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
               <Label>Deadline (optional)</Label>
               <Input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
             </div>
+            {algorithm === "manual" && (
+              <div className="space-y-1 md:col-span-2">
+                <Label>Reviewer</Label>
+                <Select value={manualReviewerId} onValueChange={setManualReviewerId}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={reviewers.length === 0 ? "No reviewers available" : "Select a reviewer"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {reviewers.map((r) => (
+                      <SelectItem key={r.id} value={r.id}>
+                        {r.first_name} {r.last_name} ({r.email})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
         </div>
 
