@@ -1,73 +1,61 @@
+# Admin-managed financial entries
 
-## Goals
+Today, financial data lives in static TypeScript files (`src/data/financials/2025.ts`, `2026.ts`) and is rendered on `/transparency`. Admins cannot add or remove entries without a code change. This plan adds a small admin UI backed by Supabase so admins can manage income and expenses directly.
 
-1. Let admins change the **deadline of a whole review round** and have that change cascade to every assigned product in that round.
-2. Let admins **add new products to a round and assign them to a chosen reviewer** (not only via balanced / expertise / random auto-assignment).
+## What admins will get
 
-Both actions live in the existing `ReviewRoundDetails` page / `RoundActionsMenu`. No changes to data model, only one new DB function.
+A new page **/admin/financials** (linked from the admin overview) with two tabs: **Expenses** and **Income**.
 
----
+Each tab shows a table of entries with:
+- Year filter (defaults to current year)
+- "Add entry" button opening a dialog
+- Inline delete (trash icon) with confirmation
+- Inline edit (pencil) reopening the same dialog
 
-## 1. Change deadline for the whole round
+**Expense dialog fields**: date, category (dropdown from existing `ExpenseCategory` union), description, amount (EUR), notes (optional).
 
-### UX
-- In `RoundActionsMenu` (top-right of `/admin/review-rounds/:id`), add a new item **"Set / Change Deadline…"** (calendar icon), above "Add Products…".
-- Opens a dialog: shadcn `Popover` + `Calendar` date picker, pre-filled with `round.default_deadline`.
-- Checkbox: **"Apply this deadline to all assigned products in this round"** (checked by default).
-- "Save" → update round + (optionally) propagate to all `product_reviews` rows of that round.
-- Toast: e.g. `Deadline updated. 12 product assignments updated.`
-- Page refreshes via existing `onUpdate` so the assignments table shows new deadlines.
+**Income dialog fields**: date, source, gross (EUR), net (EUR), notes (optional).
 
-### Backend
-Create one SECURITY DEFINER RPC `update_round_deadline_admin(p_round_id uuid, p_deadline date, p_propagate boolean)`:
-- Verifies caller has `admin` role via `has_role()`.
-- `UPDATE review_rounds SET default_deadline = p_deadline, updated_at = now() WHERE id = p_round_id`.
-- If `p_propagate`: `UPDATE product_reviews SET deadline = p_deadline WHERE review_round_id = p_round_id`.
-- Returns `{ success, updated_assignments }`.
+Validation via `react-hook-form` + `zod`. Toasts on success/error via `useToast`.
 
-(We add a dedicated RPC instead of reusing `update_review_round_admin` because that one only updates the round row; the cascade to `product_reviews` is the whole point.)
+## What the public sees
 
-### Frontend wiring
-- New helper in `src/utils/reviewRoundUtils.ts`: `updateRoundDeadlineAdmin(roundId, deadline, propagate)` calling the RPC above.
-- New component `src/components/admin/review-rounds/EditRoundDeadlineDialog.tsx` (Popover + Calendar pattern from `shadcn-datepicker`, `pointer-events-auto`).
-- `RoundActionsMenu` opens that dialog; on success calls `onUpdate()`.
+`/transparency` keeps the exact same layout. The page will merge:
+1. Static entries from `src/data/financials/*` (kept as historical seed).
+2. DB entries from the new tables.
 
----
+Merging happens in a new hook `useFinancialYears()` that returns the same `FinancialYear[]` shape as `FINANCIAL_YEARS` today, so `summarizeYear`, charts, and tables continue to work unchanged. Entries are grouped by year, sorted by date.
 
-## 2. Add products to a round and assign them to a specific reviewer
+To avoid double-counting once an entry is migrated to the DB, the static 2025/2026 arrays stay as-is for now; new entries go to the DB. If the admin wants to remove a static entry, the plan is to first move it to the DB, then delete it from the static file (a follow-up task — not part of this change).
 
-### UX (in existing `AddProductsToRoundDialog`)
-- Add a fourth value to the "Assignment algorithm" select: **"Assign all to a specific reviewer"**.
-- When selected, reveal a second select underneath listing all reviewers (label = `First Last (email)`). This list is fetched once when the dialog opens (re-use the same `user_roles` + `profiles` join already used in `ReviewRoundDetails.fetchReviewers`, factored into a small helper or inlined).
-- "Add N products" button stays disabled until a reviewer is picked in this mode.
+## Technical details
 
-### Behaviour
-- When `algorithm === 'manual'` (new value), skip `calculateProposedAssignments` and build:
-  ```ts
-  const proposed = ids.map(id => ({ product_id: id, assigned_to: chosenReviewerId, match_score: 0 }));
-  ```
-  then call existing `bulkAssignProducts(round.id, ids, deadline || undefined, proposed)` — no DB or RPC changes needed.
-- The deadline field in the dialog continues to default to `round.default_deadline`.
+**New tables** (migration):
+- `financial_expenses`: `id uuid pk`, `entry_date date not null`, `category text not null`, `description text not null`, `amount numeric(12,2) not null`, `currency text default 'EUR'`, `notes text`, `created_by uuid`, `created_at timestamptz default now()`, `updated_at timestamptz default now()`.
+- `financial_income`: `id uuid pk`, `entry_date date not null`, `source text not null`, `gross numeric(12,2) not null`, `net numeric(12,2) not null`, `currency text default 'EUR'`, `notes text`, `created_by uuid`, `created_at timestamptz default now()`, `updated_at timestamptz default now()`.
 
-### Types
-- Extend `AssignmentAlgorithm` in `reviewRoundUtils.ts` to `'balanced' | 'random' | 'expertise-first' | 'manual'`. Routing in `calculateProposedAssignments` is bypassed for `'manual'` at the dialog level, so the dispatcher doesn't need a new branch (but add a defensive throw if it ever reaches it).
+**RLS**:
+- `SELECT`: public (anon + authenticated) — financial transparency is already public on the site.
+- `INSERT/UPDATE/DELETE`: `has_role(auth.uid(), 'admin'::app_role)` only.
+- Explicit `Deny anonymous` for write commands is implicit (no policy = denied).
 
----
+**New files**:
+- `supabase/migrations/<ts>_financial_entries.sql` — tables + RLS + `updated_at` trigger.
+- `src/hooks/useFinancialEntries.ts` — fetch + mutate DB rows.
+- `src/hooks/useFinancialYears.ts` — merges static + DB rows into `FinancialYear[]`.
+- `src/pages/admin/FinancialsAdmin.tsx` — tabs, tables, dialogs.
+- `src/components/admin/financials/ExpenseFormDialog.tsx`
+- `src/components/admin/financials/IncomeFormDialog.tsx`
 
-## Files touched
+**Edited files**:
+- `src/pages/Transparency.tsx` — swap `FINANCIAL_YEARS` import for `useFinancialYears()` hook output.
+- `src/App.tsx` — register `/admin/financials` route under the admin guard.
+- `src/pages/admin/AdminOverview.tsx` — add a card/link to the new page.
 
-- `supabase/migrations/<new>.sql` — new `update_round_deadline_admin` function.
-- `src/utils/reviewRoundUtils.ts` — add `updateRoundDeadlineAdmin`, extend `AssignmentAlgorithm` type.
-- `src/components/admin/review-rounds/EditRoundDeadlineDialog.tsx` — new.
-- `src/components/admin/review-rounds/RoundActionsMenu.tsx` — new menu item + dialog wiring.
-- `src/components/admin/review-rounds/AddProductsToRoundDialog.tsx` — add "manual" algorithm option, reviewer selector, manual-mode branch in `handleSubmit`.
-
-No changes to `ReviewRoundDetails.tsx` apart from the automatic refresh it already triggers via `onUpdate`.
-
----
+No changes to `src/data/financials/*` files, no changes to chart/table presentation, no auth or RLS changes outside the two new tables.
 
 ## Out of scope
 
-- No change to per-row inline deadline picker (already shipped).
-- No notification emails on deadline change (can be added later if desired).
-- No editing of round name/description in this pass.
+- Editing the static 2025/2026 entries from the UI (kept read-only for now).
+- CSV import/export of entries.
+- Multi-currency support (locked to EUR, matching current behaviour).

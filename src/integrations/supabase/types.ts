@@ -567,6 +567,84 @@ export type Database = {
         }
         Relationships: []
       }
+      financial_expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          description: string
+          entry_date: string
+          id: string
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description: string
+          entry_date: string
+          id?: string
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string
+          entry_date?: string
+          id?: string
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      financial_income: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          currency: string
+          entry_date: string
+          gross: number
+          id: string
+          net: number
+          notes: string | null
+          source: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          entry_date: string
+          gross: number
+          id?: string
+          net: number
+          notes?: string | null
+          source: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          entry_date?: string
+          gross?: number
+          id?: string
+          net?: number
+          notes?: string | null
+          source?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       github_file_checks: {
         Row: {
           check_result: Json | null

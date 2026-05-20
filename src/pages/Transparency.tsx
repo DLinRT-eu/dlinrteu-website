@@ -22,11 +22,11 @@ import {
   Legend,
 } from "recharts";
 import {
-  FINANCIAL_YEARS,
   formatEUR,
   summarizeYear,
   type FinancialYear,
 } from "@/data/financials";
+import { useFinancialYears } from "@/hooks/useFinancialYears";
 
 const CATEGORY_COLORS = [
   "#5090D0",
@@ -232,7 +232,7 @@ const YearReport = ({ year }: { year: FinancialYear }) => {
 };
 
 const Transparency = () => {
-  const years = FINANCIAL_YEARS;
+  const { years } = useFinancialYears();
   const [active, setActive] = useState(String(years[0]?.year ?? new Date().getFullYear()));
 
   const structuredData = {

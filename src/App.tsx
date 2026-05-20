@@ -67,6 +67,7 @@ const CompareStructures = lazy(() => import("./pages/CompareStructures"));
 
 // Admin Pages
 const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
+const FinancialsAdmin = lazy(() => import("./pages/admin/FinancialsAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
 const ReviewAssignment = lazy(() => import("./pages/admin/ReviewAssignment"));
@@ -293,6 +294,11 @@ const App = () => (
                 <Route path="/admin/guide" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <AdminGuide />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/financials" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <FinancialsAdmin />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/newsletter" element={
