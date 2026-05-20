@@ -2337,6 +2337,10 @@ export type Database = {
         }
         Returns: Json
       }
+      update_round_deadline_admin: {
+        Args: { p_deadline: string; p_propagate?: boolean; p_round_id: string }
+        Returns: Json
+      }
       update_round_status_admin: {
         Args: { p_round_id: string; p_status: string }
         Returns: Json
