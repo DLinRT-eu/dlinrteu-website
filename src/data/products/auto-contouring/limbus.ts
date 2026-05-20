@@ -59,14 +59,14 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIa",
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "TÜV SÜD (Notified Body 0123)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K241837",
@@ -127,7 +127,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-02-26",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K241837), company official sources"
   }
 ];

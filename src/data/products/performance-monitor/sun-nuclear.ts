@@ -48,12 +48,12 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "II"
       },
       intendedUseStatement: "SunCHECK Patient is intended for patient-specific quality assurance including structure validation, plan verification, and pre-treatment quality checks in radiotherapy."
@@ -74,7 +74,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Sun Nuclear official website"
   }
 ];

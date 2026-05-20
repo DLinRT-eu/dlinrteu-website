@@ -11,6 +11,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/medmind.ts",
     description: "Deep learning auto-contouring platform supporting 120+ OARs and CTV delineation across multiple cancer types. Deployed in 360+ hospitals with NMPA Class III and FDA 510(k) clearance.",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     certification: "FDA/NMPA",
     website: "https://www.medicalmind.cn/en.html",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Breast", "Abdomen", "Pelvis"],
@@ -51,7 +52,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K213155",
@@ -100,7 +101,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidenceMultiNational: false,
     lastUpdated: "2026-02-26",
-    lastRevised: "2026-02-26",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690)."
   }
 ];

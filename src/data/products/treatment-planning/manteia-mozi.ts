@@ -42,13 +42,13 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K223724",
@@ -76,7 +76,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K223724), manufacturer official website",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [

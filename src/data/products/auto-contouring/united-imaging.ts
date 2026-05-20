@@ -48,7 +48,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
@@ -56,7 +56,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
           "CE marking covers the uRT-linac 506c system (ESTRO 2026). The auto-contouring module is an integrated component of that system rather than a separately marketed device."
       },
       fda: {
-        status: "Not cleared in US (per ESTRO 2026 European debut)",
+        status: "not_approved",
         class: "Unknown",
         type: "Unknown"
       },
@@ -105,7 +105,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-19",
+    lastRevised: "2026-05-20",
     source: "Vendor press release (ESTRO 2026) and company website"
   }
 ];

@@ -11,6 +11,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-mr-contour-dl.ts",
     description: "AI-powered auto-segmentation solution for MRI-based radiation therapy planning, providing automated organ-at-risk contouring for head & neck and pelvic anatomies.",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     certification: "CE & FDA",
     logoUrl: "/logos/ge_healthcare.png",
     website: "https://www.gehealthcare.com/",
@@ -40,13 +41,13 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K242925",
@@ -68,7 +69,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-14",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K242925). GE HealthCare ESTRO 2026 press release (12 May 2026) confirms head & neck and pelvis OAR coverage and bundling within the iRT MR Direct workflow."
   }
 ];

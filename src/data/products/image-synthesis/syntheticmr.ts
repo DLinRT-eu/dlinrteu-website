@@ -45,14 +45,14 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
         notes: "CE-marked June 2024"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K242745, K233733",
         productCode: "LNH",
@@ -70,7 +70,7 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     version: "15",
     releaseDate: "2024-12-06",
     lastUpdated: "2025-12-01",
-    lastRevised: "2026-01-27",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K242745, K233733) and company website",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
@@ -122,13 +122,13 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "Pending Approval",
+        status: "pending",
         notes: "510(k) submitted November 2020, not yet cleared"
       },
       intendedUseStatement: "SyMRI Spine is intended for post-processing of spine MR images to generate synthetic contrasts and quantitative tissue maps to support clinical diagnosis."

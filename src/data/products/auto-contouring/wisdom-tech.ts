@@ -125,10 +125,10 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Not certified"
+        status: "not_applicable"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K232928",
@@ -152,7 +152,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2024-04-17",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Company official sources - NMPA (China) certified"
   }
 ];

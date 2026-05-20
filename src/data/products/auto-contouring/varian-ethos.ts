@@ -10,6 +10,7 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.varian.com/ethos",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-ethos.ts",
     description: "AI-driven auto-segmentation integrated into the Ethos adaptive radiotherapy system. Uses deep learning algorithms for contouring organs at risk and target volumes, enabling online adaptive radiotherapy workflows with AI-generated contours available in minutes at the treatment console.",
+    structuresUnavailable: true,
     features: [
       "Deep learning-based auto-segmentation",
       "Online adaptive radiotherapy workflow",
@@ -49,12 +50,12 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K232923",
@@ -113,7 +114,7 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
     lastUpdated: "2026-04-17",
-    lastRevised: "2026-04-17",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement"
   }
 ];

@@ -120,12 +120,12 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Not yet certified - Investigation use only",
+        status: "under_review",
         class: "IIa",
         type: "Medical Device",
       },
       fda: {
-        status: "Not yet cleared - Investigation use only",
+        status: "pending",
       },
       intendedUseStatement:
         "For investigation use only. Automatic segmentation of organs at risk in radiation therapy planning. Not approved for clinical use.",
@@ -188,7 +188,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2026-03-27",
+    lastRevised: "2026-05-20",
     source:
       "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts. Note: Abdomen structures require source verification.",
   },

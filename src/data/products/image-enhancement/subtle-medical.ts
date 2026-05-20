@@ -42,13 +42,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K191688, K223623",
@@ -87,7 +87,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
@@ -130,13 +130,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K182336, K211964",
@@ -213,12 +213,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Pending",
+        status: "under_review",
         class: "IIa",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K240290",
@@ -283,12 +283,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Pending",
+        status: "under_review",
         class: "IIa",
         type: "Medical Device"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K243250",

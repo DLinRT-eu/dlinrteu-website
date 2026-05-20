@@ -6,6 +6,7 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     name: "Elements AI Tumor Segmentation",
     company: "Brainlab",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     description: "Deep learning module for semi-automatic segmentation of cranial tumors including metastases, meningiomas, gliomas, cranial/paraspinal nerve tumors, and glioneuronal tumors from 3D Contrast-Enhanced T1 MR images.",
     certification: "CE & FDA",
     logoUrl: "/logos/Brainlab.jpg",
@@ -35,13 +36,13 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K250440",
@@ -92,7 +93,7 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K250440)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   },
@@ -206,13 +207,13 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     ],
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K243633",

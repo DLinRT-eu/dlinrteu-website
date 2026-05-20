@@ -47,7 +47,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745",
@@ -55,7 +55,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         notes: "Not available in all markets yet"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K253091",
@@ -91,7 +91,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-03-23",
-    lastRevised: "2026-03-23",
+    lastRevised: "2026-05-20",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)",
     evidenceRigor: "E0",
     evidenceRigorNotes: "No vendor-independent clinical validation studies identified for AdaptBox augmented CBCT generation. Evidence limited to vendor publications.",

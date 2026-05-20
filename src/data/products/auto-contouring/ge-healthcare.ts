@@ -40,13 +40,13 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked",
+        status: "cleared",
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K230082",
@@ -74,7 +74,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2024-01-20",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K230082, K242925), company official sources",
     clinicalEvidence: "FDA 510(k) validation studies using 2552 contours from 302 unique patients across 9 global sites",
     evidence: [

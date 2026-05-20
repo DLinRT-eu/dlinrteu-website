@@ -47,13 +47,13 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         decisionDate: "2026-01-16",
@@ -90,7 +90,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }

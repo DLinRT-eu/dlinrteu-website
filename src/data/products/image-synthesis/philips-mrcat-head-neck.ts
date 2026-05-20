@@ -47,13 +47,13 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         productCode: "LLZ",
@@ -70,7 +70,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     version: "1.5",
     releaseDate: "2022-10-20",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "Company website",
     clinicalEvidence: "Clinical studies demonstrate comparable treatment planning accuracy to CT-based workflows for head and neck radiation therapy",
     evidenceRigor: "E0",

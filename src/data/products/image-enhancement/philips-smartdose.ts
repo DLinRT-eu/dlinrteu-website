@@ -42,13 +42,13 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K203020",
@@ -77,7 +77,7 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "Company website, peer-reviewed publications",
     evidence: [
       {

@@ -43,13 +43,13 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIb",
         type: "Medical Device (CT Simulator Feature)",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "II",
         clearanceNumber: "K233650, K250822",
         productCode: "JAK",
@@ -153,7 +153,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s12894-025-01875-8"
       }
     ],
-    lastRevised: "2026-02-26",
+    lastRevised: "2026-05-20",
     source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
   }
 ];

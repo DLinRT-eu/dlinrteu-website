@@ -11,6 +11,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mirada.ts",
     description: "Deep learning-based auto-contouring software for radiation oncology providing consistent and rapid contouring of normal tissues.",
     category: "Auto-Contouring",
+    structuresUnavailable: true,
     certification: "CE & FDA",
     logoUrl: "/logos/mirada-medical.png",
     website: "https://mirada-medical.com/product/mirada-dlcexpert-ai-autocontouring/",
@@ -34,13 +35,13 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "CE Marked (Historical - Product Discontinued)",
+        status: "withdrawn",
         class: "Class IIa",
         type: "MDD",
         regulation: "MDD 93/42/EEC"
       },
       fda: {
-        status: "510(k) Cleared (Historical - Product Discontinued)",
+        status: "withdrawn",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K181572",
@@ -76,7 +77,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     version: "2.2",
     releaseDate: "2023-05-20",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-20",
     source: "Historical records - product discontinued"
   }
 ];

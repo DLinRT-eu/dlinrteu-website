@@ -24,6 +24,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     ],
     category: "Performance Monitor",
     usesAI: false,
+    monitorsAIProducts: ["Auto-Contouring outputs"],
     certification: "MDR exempt",
     logoUrl: "/logos/ptw.jpg",
     website: "https://www.ptwdosimetry.com/en/products/aiqualis",
@@ -52,12 +53,12 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "MDR exempt",
+        status: "not_applicable",
         class: "N/A",
         type: "Software Tool"
       },
       fda: {
-        status: "Not applicable",
+        status: "not_applicable",
         class: "N/A"
       },
       intendedUseStatement: "AIQUALIS is intended for the monitoring of the amount and locations of editing of automatically generated contours taking place in clinical practice within the radiotherapy workflow. It is intended for the trained user to be able to audit the contouring process in the clinic, enabling them to feedback to the manufacturer of any automatic contouring product areas for improvement and to ensure that clinical teams are adhering to institutional contouring practices. This device is intended to allow the review of practice at a departmental or institutional level. It is not intended to be used to determine the correctness of contouring, or to assess, review or influence the treatment of any individual patient. The device is not intended for long-term data storage or archival purposes. This device is not an automatic contouring product. It does not generate any contours."
@@ -76,7 +77,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "Automatically retrieved and revised"
   }
 ];

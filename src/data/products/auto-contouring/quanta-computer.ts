@@ -9,6 +9,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.qoca.net/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/quanta-computer.ts",
     description: "AI-powered post-processing software that automatically delineates organs at risk on planning CT scans for radiation therapy. Designed to reduce contouring time and inter-observer variability in radiation oncology workflows.",
+    structuresUnavailable: true,
     features: [
       "Deep learning-based organ-at-risk segmentation",
       "Planning CT input",
@@ -42,11 +43,11 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Not specified",
+        status: "not_applicable",
         notes: "CE status not publicly confirmed at time of inclusion"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K231855",
@@ -95,7 +96,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K231855"
     },
     lastUpdated: "2026-04-17",
-    lastRevised: "2026-04-17",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database K231855, Quanta Computer corporate website"
   }
 ];

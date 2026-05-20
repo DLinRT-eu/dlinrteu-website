@@ -43,13 +43,13 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K233572",
@@ -78,7 +78,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     releaseDate: "2023-08-15",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K233572), company website"
   }
 ];

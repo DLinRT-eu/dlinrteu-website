@@ -40,13 +40,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K181862",
         regulationNumber: "21 CFR 892.1750",
@@ -96,7 +96,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database and company website"
   },
   {
@@ -137,13 +137,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K192574",
         regulationNumber: "21 CFR 892.1000",
@@ -225,13 +225,13 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa", 
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K243335",
         regulationNumber: "21 CFR 892.1000",

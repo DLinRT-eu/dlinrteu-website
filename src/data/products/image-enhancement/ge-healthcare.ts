@@ -35,13 +35,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K230082",
         regulationNumber: "21 CFR 892.2050",
@@ -74,7 +74,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database"
   },
   {
@@ -114,13 +114,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Approved",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         notes: "Part of GE AIR Recon DL platform clearances (K193282, K213717, K252379)"

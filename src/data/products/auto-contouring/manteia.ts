@@ -34,13 +34,13 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Certified",
+        status: "cleared",
         class: "IIa",
         type: "MDR",
         regulation: "MDR 2017/745"
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K250780",
@@ -252,7 +252,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    lastRevised: "2026-03-23",
+    lastRevised: "2026-05-20",
     source: "FDA 510(k) database (K250780, K221706, K191928), company official sources",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
