@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
+import { updateProductReviewAdmin } from "@/utils/reviewRoundUtils";
 import { ALL_PRODUCTS } from "@/data";
 import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
 import { AssignmentActionsMenu } from "@/components/admin/review-rounds/AssignmentActionsMenu";
@@ -25,6 +26,10 @@ import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMen
 import { Checkbox } from "@/components/ui/checkbox";
 import SortableHeader from "@/components/revision/table/SortableHeader";
 import { RoundExportButton } from "@/components/admin/review-rounds/RoundExportButton";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface AssignmentHistoryRecord {
   id: string;
