@@ -24,7 +24,7 @@ export const PTW_PRODUCTS: ProductDetails[] = [
     ],
     category: "Performance Monitor",
     usesAI: false,
-    monitorsAIProducts: true,
+    monitorsAIProducts: ["Auto-Contouring outputs"],
     certification: "MDR exempt",
     logoUrl: "/logos/ptw.jpg",
     website: "https://www.ptwdosimetry.com/en/products/aiqualis",

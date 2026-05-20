@@ -18,7 +18,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     ],
     category: "Performance Monitor",
     usesAI: false,
-    monitorsAIProducts: true,
+    monitorsAIProducts: ["Auto-Contouring outputs"],
     certification: "MDR Exempt",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/verify/",

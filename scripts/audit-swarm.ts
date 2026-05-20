@@ -94,8 +94,8 @@ for (const p of allProducts) {
   // Inclusion
   const usesAI = (p as any).usesAI;
   const monitorsAI = (p as any).monitorsAIProducts;
-  if (usesAI === false && monitorsAI !== true)
-    add(id, "Inclusion", "usesAI", "error", "usesAI=false but monitorsAIProducts not true — fails AI/DL inclusion gate", "Set monitorsAIProducts:true or remove");
+  if (usesAI === false && !(Array.isArray(monitorsAI) && monitorsAI.length > 0))
+    add(id, "Inclusion", "usesAI", "error", "usesAI=false but monitorsAIProducts not populated — fails AI/DL inclusion gate", "Set monitorsAIProducts to a non-empty string[] or remove");
 
   // Regulatory
   const reg = (p as any).regulatory ?? {};

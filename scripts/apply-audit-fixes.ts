@@ -145,10 +145,10 @@ for (const file of walk(ROOT)) {
     if (src !== before) structFixes++;
   }
 
-  // monitorsAIProducts
+  // monitorsAIProducts (string[])
   for (const id of ids) {
     if (MONITOR_IDS.has(id) && !/monitorsAIProducts\s*:/.test(src)) {
-      src = src.replace(/(usesAI\s*:\s*false\s*,)/, `$1\n    monitorsAIProducts: true,`);
+      src = src.replace(/(usesAI\s*:\s*false\s*,)/, `$1\n    monitorsAIProducts: ["Auto-Contouring outputs"],`);
       monitorFixes++;
     }
   }
