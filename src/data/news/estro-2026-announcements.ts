@@ -52,6 +52,19 @@ Neutrality caveats apply to all CE-marked entries above: they are integrated com
 
 Other portfolio items announced for ESTRO 2026 — **uRT®-linac 506c**, **uLinac HalosTx**, **uMR® Omega 3T MR simulator**, **uMI® Panorama PET/CT simulator** — are hardware platforms; their public announcements do not currently isolate an AI/DL component for radiotherapy and therefore fall outside the DLinRT.eu inclusion criteria.
 
+## Synaptiq
+
+At the Synaptiq booth, the team communicated that **Mediq RT** has received **CE certification (Class IIa)**, explicitly including the **Active Contouring GTV delineation** feature. They also indicated that a **4D CT** capability is currently offered as an option inside a **research module** of Mediq RT and is **not** part of the CE-cleared scope.
+
+Catalogue updates:
+
+- **[Synaptiq Mediq RT](/product/synaptiq-mediq-rt)** — regulatory status updated from "under review" to **CE-cleared (Class IIa)**, with the intended use extended to cover GTV delineation in addition to organs at risk. Description, limitations and \`source\` fields carry an explicit verification caveat.
+- **[Synaptiq Mediq RT — 4D CT (Research Module)](/products/pipeline)** — added to the [pipeline products hub](/products/pipeline) as a new pre-market entry (E0 / I0 / R0) reflecting the research-module status.
+
+Neutrality caveat: the information above is sourced from a vendor booth communication, not a vendor press release or notified-body publication. The CE-clearance details (certificate number, notified body, EUDAMED UDI-DI) have not yet been independently verified. Entries will be updated as soon as an authoritative public source is available.
+
+
+
 ## Post-ESTRO catalogue updates (19 May 2026)
 
 After the congress closed, the following entries were added or revised:
