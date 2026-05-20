@@ -47,6 +47,8 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [algorithm, setAlgorithm] = useState<AssignmentAlgorithm>("balanced");
   const [deadline, setDeadline] = useState<string>(round.default_deadline ?? "");
+  const [reviewers, setReviewers] = useState<Array<{ id: string; first_name: string; last_name: string; email: string }>>([]);
+  const [manualReviewerId, setManualReviewerId] = useState<string>("");
 
   useEffect(() => {
     if (!open) return;
@@ -54,8 +56,33 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
     setSearch("");
     setCategoryFilter("all");
     setDeadline(round.default_deadline ?? "");
+    setManualReviewerId("");
     loadExisting();
+    loadReviewers();
   }, [open, round.id]);
+
+  const loadReviewers = async () => {
+    try {
+      const { data: roles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("user_id")
+        .eq("role", "reviewer");
+      if (rolesError) throw rolesError;
+      const ids = (roles ?? []).map((r) => r.user_id);
+      if (ids.length === 0) {
+        setReviewers([]);
+        return;
+      }
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("id, first_name, last_name, email")
+        .in("id", ids);
+      if (profilesError) throw profilesError;
+      setReviewers((profiles ?? []) as any);
+    } catch (err) {
+      console.error("Failed to load reviewers:", err);
+    }
+  };
 
   const loadExisting = async () => {
     setLoading(true);
