@@ -307,22 +307,21 @@ export const computeReadinessSignal = (
   if (!evidenceRigor || !clinicalImpact || !adoptionReadiness) {
     return READINESS_DESCRIPTORS["not-assessed"];
   }
-  if (adoptionReadiness === "R0") return READINESS_DESCRIPTORS.blocked;
-  if (adoptionReadiness === "R1") return READINESS_DESCRIPTORS["not-adoption-ready"];
-  if (adoptionReadiness === "R2") return READINESS_DESCRIPTORS["pilot-only"];
-
   const e = E_RANK[evidenceRigor];
   const i = I_RANK[clinicalImpact];
+  const strong = e >= 2 && i >= 2;
 
-  if (adoptionReadiness === "R5" && e >= 2 && i >= 2) {
-    return READINESS_DESCRIPTORS["adoption-grade"];
+  if (adoptionReadiness === "R0") return READINESS_DESCRIPTORS.blocked;
+  if (adoptionReadiness === "R1") return READINESS_DESCRIPTORS["pilot-only"];
+  if (adoptionReadiness === "R2") return READINESS_DESCRIPTORS.conditional;
+  if (adoptionReadiness === "R3") {
+    return strong ? READINESS_DESCRIPTORS["deploy-with-monitoring"] : READINESS_DESCRIPTORS.conditional;
   }
-  if (adoptionReadiness === "R4" || (adoptionReadiness === "R5" && (e < 2 || i < 2))) {
-    return READINESS_DESCRIPTORS["deploy-with-monitoring"];
+  if (adoptionReadiness === "R4") {
+    return strong ? READINESS_DESCRIPTORS["adoption-grade"] : READINESS_DESCRIPTORS["deploy-with-monitoring"];
   }
-  // R3
-  if (e >= 2 && i >= 2) return READINESS_DESCRIPTORS["deploy-with-monitoring"];
-  return READINESS_DESCRIPTORS.conditional;
+  // R5
+  return strong ? READINESS_DESCRIPTORS["adoption-grade"] : READINESS_DESCRIPTORS["deploy-with-monitoring"];
 };
 
 // ==================== HELPER FUNCTIONS ====================
