@@ -1,77 +1,37 @@
-## Execute the Product Audit Swarm — Full Sweep + Implementation Plan
+## Verdict
 
-Full sweep across all 90 active product files (~107 ProductDetails entries) using the `product-audit-swarm` skill. Output is report-only (no `.ts` edits this round), plus a phased execution plan for the follow-up edit waves.
+**Do not add ZAP Surgical / ZAP-X / ZAP-Axon as an active DLinRT.eu product** at this time. Based on vendor and press sources reviewed today (2026-05-20), the system fails the project's AI/DL inclusion gate (`mem://constraints/ai-dl-technology-threshold`).
 
-### Why this needs to be staged
+## Evidence collected
 
-One turn cannot:
-- Read 90 TS files in full + 50+ docs/memories + 90+ PubMed queries.
-- Synthesise 90 per-product Markdown blocks + two CSVs.
-- Stay within reasonable web-search and runtime budgets.
+Sources consulted (search date 2026-05-20):
 
-So the sweep runs in **6 category waves**, each self-contained, with intermediate artefacts merged at the end.
+1. https://zapsurgical.com/zap-axon/ — official product page. Lists: fusion, contouring, planning & optimization, evaluation, approval. The only named algorithm is a **"Krylov quadratic optimizer"** (classical numerical optimization, not ML/DL). No mention of AI, deep learning, neural networks, or learned auto-contouring.
+2. https://zapsurgical.com/news/zap-unveils-the-zap-axon-radiosurgery-planning-system/ — March 2025 launch release. Same feature set; no AI claims.
+3. https://www.businesswire.com/news/home/20251111492537/en/ — Nov 2025 FDA 510(k) + CE clearance announcement. Same Krylov optimizer pitch.
+4. https://www.medicaleconomics.com/view/zap-surgical-systems-gains-fda-ce-clearance-for-ai-ready-brain-radiosurgery-planning-platform — headline calls it **"AI-ready"** (forward-looking marketing). Direct quote from Alex Maslowski, PhD, VP Software at ZAP Surgical: *"As the first system in its field built entirely on modern web technologies, Axon is uniquely positioned to rapidly integrate and fully harness the power of AI."* — future tense, no shipped AI component.
+5. https://www.itnonline.com/content/radiosurgery-planning-system-receives-fda-510k%C2%A0ce-clearance — mirrors the press release; no AI features described.
 
-### Wave breakdown (by category folder under `src/data/products/`)
+## Why this fails the inclusion gate
 
-```text
-Wave 1  Auto-Contouring          ~22 files   heaviest (structures + evidence)
-Wave 2  Treatment Planning       ~7  files   evidence-heavy (dose prediction)
-Wave 3  Image Synthesis +         ~12 files   transparency-heavy
-        Image Enhancement +
-        Reconstruction
-Wave 4  Registration + Tracking  ~6  files
-Wave 5  Clinical Prediction +    ~15 files   evidence-heavy
-        Performance Monitor
-Wave 6  Platform + Pipeline +    ~28 files   varied; cross-check intensive
-        residual (companies xref)
-```
+Per `mem://constraints/ai-dl-technology-threshold`, DLinRT.eu requires shipped ML/DL technology; classical image processing and classical optimization are explicitly excluded. ZAP-Axon's current public technical claim is a Krylov quadratic optimizer — a deterministic numerical method, not learned. Vendor framing is explicitly "AI-ready", which is exactly the marketing pattern the threshold policy was written to filter out.
 
-Wave membership is finalised by running `bash /tmp/enumerate_products.sh <category>` at the start of each wave.
+The director's claim ("there is AI") is not corroborated by any current public source for any cleared ZAP product. It may refer to a roadmap item, a research collaboration, or a future module — none of which qualify under our inclusion policy until shipped and identifiable.
 
-### Per-wave procedure (per the skill)
+## Proposed actions (no source files edited in this plan)
 
-1. **Bootstrap once per wave**: cache `docs/FIELD_REFERENCE.md`, `docs/review/GUIDE.md`, `src/data/evidence-impact-levels.ts`, and the skill references.
-2. **Enumerate** the wave's worklist.
-3. **Per product**, run the 8 roles per `references/roles.md`:
-   - Parallel batch: Identity, Inclusion, Regulatory, Technical, Structures, Transparency.
-   - Then: 1 timeboxed PubMed query for Evidence (skipped when `evidenceRigor === 'E0'` and `lastRevised` < 90 days).
-   - Cross-check uses the in-memory registry built in step 1.
-4. **Compile** Markdown block + CSV rows per `references/output-format.md`.
-5. **Append** to wave artefacts:
-   - `/mnt/documents/product-audit-2026-05-20-wave<N>.md`
-   - `/mnt/documents/product-audit-2026-05-20-wave<N>.csv`
-   - `/mnt/documents/product-audit-2026-05-20-wave<N>-rescoring.csv`
+1. **Reply to the director** with a short note citing the Maslowski quote and asking for a specific, citable AI component (module name, model card, paper, 510(k) summary section, or vendor white paper). Template included below.
+2. **Add a Pipeline watch entry** at `src/data/products/pipeline/zap-axon.ts` only **after** the director (or vendor) provides a concrete AI module name. Until then, no entry — Pipeline is for identified pre-market AI products, not for "vendor says AI is coming".
+3. **Log the audit decision**: append a one-line note to `/mnt/documents/product-audit-2026-05-20-zap-surgical.md` recording the sources, the date, and the "excluded — fails AI/DL gate" verdict so a future reviewer doesn't re-litigate it.
+4. **Re-review trigger**: if ZAP publishes (a) an AI auto-contouring module, (b) a learned dose prediction model, or (c) a 510(k)/CE clearance that names an ML component, re-open the assessment and create a proper product entry under the appropriate category (likely Auto-Contouring and/or Treatment Planning).
 
-### Final merge (after wave 6)
+## Draft message to the director
 
-A short Python script concatenates the six wave artefacts into the three canonical files referenced by the skill:
-- `product-audit-2026-05-20.md`
-- `product-audit-2026-05-20.csv`
-- `product-audit-2026-05-20-rescoring.csv`
+> Thanks for flagging ZAP. I checked the public sources (vendor site, March 2025 launch release, Nov 2025 FDA/CE clearance release, Medical Economics coverage). The only algorithm ZAP currently names in ZAP-Axon is a Krylov quadratic optimizer, which is classical numerical optimization — not ML/DL. ZAP's own VP of Software, Alex Maslowski, describes Axon as *"uniquely positioned to rapidly integrate … AI"* (future tense), and the press headline calls it "AI-ready". Under DLinRT.eu's inclusion policy we list shipped AI/DL products, not roadmap items, so I have not added ZAP. If you have a specific cleared AI module name, model card, paper, or vendor document, send it over and I will re-assess.
 
-Plus a top-level summary block: total files, total findings by severity, count of proposed score changes, and a per-category breakdown table.
+## Out of scope for this plan
 
-### Deliverables this turn
-
-This planning turn does **not** start wave 1 (plan mode forbids edits and large execution). The next turn (build mode) starts at Wave 1.
-
-After the user approves this plan, each subsequent build-mode turn executes **one wave** and surfaces its three artefacts via `<presentation-artifact>`. The user can then say "continue" to proceed to the next wave. This keeps each turn within budget and lets the user spot-check before committing to the next wave.
-
-### Implementation plan for the follow-up edit passes (out of scope this round)
-
-Once all six waves are complete and the merged report is reviewed, edits land in **6 PRs**, one per wave, each scoped to a single category. Each PR:
-
-1. Applies the `error`-severity fixes from that wave's CSV (broken URLs, regulatory mismatches, structure-naming violations, inclusion violations).
-2. Applies the `warn`-severity fixes the user confirms (E/I/R re-scoring, `keyPapers` additions, DICOM nomenclature normalisation, transparency-schema gaps).
-3. Bumps `lastRevised` on every product in that wave.
-4. Adds a `changelog_entries` row summarising the wave.
-5. Opens a review round in `/admin/review-rounds` with that wave's products and a 4-week deadline (reusing the round infrastructure from the prior plan).
-
-The user has already approved this 4-wave reviewer-round structure in an earlier turn; this audit just makes it 6 waves and gives each round a concrete findings worklist.
-
-### Out of scope
-
-- Editing any `.ts` product files this round.
-- Re-running the evidence rubric definitions.
-- Company-only audit.
-- In-app feature work.
+- No edits to `src/data/products/**`.
+- No changes to companies registry.
+- No new edge functions, UI changes, or migrations.
+- The full Phase A/B mechanical fix work from the prior audit is unaffected.
