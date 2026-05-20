@@ -293,6 +293,14 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
         </AlertDialogContent>
       </AlertDialog>
 
+      <EditRoundDeadlineDialog
+        open={showDeadlineDialog}
+        onOpenChange={setShowDeadlineDialog}
+        round={round}
+        onUpdate={onUpdate}
+      />
+
+
       <AddProductsToRoundDialog
         open={showAddProductsDialog}
         onOpenChange={setShowAddProductsDialog}
