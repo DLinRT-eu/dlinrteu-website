@@ -148,9 +148,16 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
       toast.error("Select at least one product");
       return;
     }
+    if (algorithm === "manual" && !manualReviewerId) {
+      toast.error("Select a reviewer to assign these products to");
+      return;
+    }
     setSubmitting(true);
     try {
-      const proposed = await calculateProposedAssignments(ids, undefined, algorithm);
+      const proposed =
+        algorithm === "manual"
+          ? ids.map((id) => ({ product_id: id, assigned_to: manualReviewerId, match_score: 0 }))
+          : await calculateProposedAssignments(ids, undefined, algorithm);
       const result = await bulkAssignProducts(
         round.id,
         ids,
