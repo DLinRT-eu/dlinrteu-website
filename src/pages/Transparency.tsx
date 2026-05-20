@@ -22,11 +22,11 @@ import {
   Legend,
 } from "recharts";
 import {
-  FINANCIAL_YEARS,
   formatEUR,
   summarizeYear,
   type FinancialYear,
 } from "@/data/financials";
+import { useFinancialYears } from "@/hooks/useFinancialYears";
 
 const CATEGORY_COLORS = [
   "#5090D0",
