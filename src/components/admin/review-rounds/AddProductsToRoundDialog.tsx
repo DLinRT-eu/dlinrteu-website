@@ -47,6 +47,8 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [algorithm, setAlgorithm] = useState<AssignmentAlgorithm>("balanced");
   const [deadline, setDeadline] = useState<string>(round.default_deadline ?? "");
+  const [reviewers, setReviewers] = useState<Array<{ id: string; first_name: string; last_name: string; email: string }>>([]);
+  const [manualReviewerId, setManualReviewerId] = useState<string>("");
 
   useEffect(() => {
     if (!open) return;
@@ -54,8 +56,33 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
     setSearch("");
     setCategoryFilter("all");
     setDeadline(round.default_deadline ?? "");
+    setManualReviewerId("");
     loadExisting();
+    loadReviewers();
   }, [open, round.id]);
+
+  const loadReviewers = async () => {
+    try {
+      const { data: roles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("user_id")
+        .eq("role", "reviewer");
+      if (rolesError) throw rolesError;
+      const ids = (roles ?? []).map((r) => r.user_id);
+      if (ids.length === 0) {
+        setReviewers([]);
+        return;
+      }
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("id, first_name, last_name, email")
+        .in("id", ids);
+      if (profilesError) throw profilesError;
+      setReviewers((profiles ?? []) as any);
+    } catch (err) {
+      console.error("Failed to load reviewers:", err);
+    }
+  };
 
   const loadExisting = async () => {
     setLoading(true);
@@ -121,9 +148,16 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
       toast.error("Select at least one product");
       return;
     }
+    if (algorithm === "manual" && !manualReviewerId) {
+      toast.error("Select a reviewer to assign these products to");
+      return;
+    }
     setSubmitting(true);
     try {
-      const proposed = await calculateProposedAssignments(ids, undefined, algorithm);
+      const proposed =
+        algorithm === "manual"
+          ? ids.map((id) => ({ product_id: id, assigned_to: manualReviewerId, match_score: 0 }))
+          : await calculateProposedAssignments(ids, undefined, algorithm);
       const result = await bulkAssignProducts(
         round.id,
         ids,
@@ -238,6 +272,7 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
                   <SelectItem value="balanced">Balanced (workload + expertise)</SelectItem>
                   <SelectItem value="expertise-first">Expertise first</SelectItem>
                   <SelectItem value="random">Random</SelectItem>
+                  <SelectItem value="manual">Assign all to a specific reviewer</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -245,6 +280,23 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
               <Label>Deadline (optional)</Label>
               <Input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
             </div>
+            {algorithm === "manual" && (
+              <div className="space-y-1 md:col-span-2">
+                <Label>Reviewer</Label>
+                <Select value={manualReviewerId} onValueChange={setManualReviewerId}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={reviewers.length === 0 ? "No reviewers available" : "Select a reviewer"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {reviewers.map((r) => (
+                      <SelectItem key={r.id} value={r.id}>
+                        {r.first_name} {r.last_name} ({r.email})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
         </div>
 
@@ -252,7 +304,7 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={submitting || selected.size === 0}>
+          <Button onClick={handleSubmit} disabled={submitting || selected.size === 0 || (algorithm === "manual" && !manualReviewerId)}>
             {submitting ? (<><Loader2 className="h-4 w-4 mr-2 animate-spin" />Adding…</>) : `Add ${selected.size} product${selected.size === 1 ? "" : "s"}`}
           </Button>
         </DialogFooter>

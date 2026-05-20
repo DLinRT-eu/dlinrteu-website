@@ -1,56 +1,73 @@
-## Audit result
 
-The site already uses a three-axis model (E0–E3, I0–I5, R0–R5) that **matches the proposal in spirit**. The proposal calls its third axis **Z** ("Implementation Readiness, higher = better") — semantically the same direction as our `R` axis (higher = more adoption-ready). However several **definitions and labels drift** from what the document proposes, and two guardrail tiers (E(-1), I(-1)) are missing. Author names from the document are **not present anywhere on the site** — nothing to remove.
+## Goals
 
-### Concrete mismatches found
+1. Let admins change the **deadline of a whole review round** and have that change cascade to every assigned product in that round.
+2. Let admins **add new products to a round and assign them to a chosen reviewer** (not only via balanced / expertise / random auto-assignment).
 
-| Axis | Site today | Proposal v1.1 | Action |
-|---|---|---|---|
-| E3 | "Systematic Evidence" – SR / meta-analysis / RCT only | "Prospective or comparative implementation evidence / decision-grade synthesis" – also includes prospective, pragmatic, comparative real-world studies | Broaden description + criteria |
-| E2 | "Validated Evidence" – multi-center, prospective, external validation | "External, independent or multicenter validation" – emphasises independence + TRIPOD+AI/PROBAST+AI | Add independence + reporting standards |
-| E1 | "Preliminary Evidence" – sample < 100, retrospective | "Exploratory or single-center technical validation" – retrospective, phantom, in-silico, pre-clinical, single-center | Reword to include phantom / in-silico / pre-clinical |
-| E0 | "No Peer-Reviewed Evidence" | "Descriptive only / no peer-reviewed evidence" | Minor tightening |
-| I1 | "Technical Performance" – examples skewed to QA dashboards | "Technical, analytical or geometric validation" – DSC, Hausdorff, sensitivity/specificity, reader-study accuracy | Re-anchor on geometric / analytical metrics; keep QA dashboards as a secondary example |
-| I4 | "Outcome" – patient outcomes only | "Patient, service or resource outcomes" – also service throughput, waiting times, cost | Add service / resource outcome examples |
-| I5 | "Societal" – cost-effectiveness focus | "System-level or societal value" – equity, workforce sustainability, regional/national scale | Broaden |
-| R (Z) axis labels | Friendly labels ("Pilot-ready", "Conditionally ready"…) | "Minimal / Basic / Enhanced / High / Mature implementation readiness" | Adopt readiness-oriented labels + descriptions; keep direction (higher = better) |
-| Guardrails | none | E(-1) and I(-1) "Unassigned / insufficient documentation" | Add as optional tiers, used by reviewers to block scoring when documentation is too thin |
+Both actions live in the existing `ReviewRoundDetails` page / `RoundActionsMenu`. No changes to data model, only one new DB function.
 
-### Decision needed (default if no input)
+---
 
-1. **Rename R → Z**? The proposal uses **Z**. Default: **keep `R`** to avoid a churn-wide rename across products, exports, FHIR, HTA, schemaOrg, model cards, dashboards. Re-label in copy as "Implementation Readiness (R, higher = better)" so wording matches the proposal's intent.
-2. **Add E(-1) / I(-1)** as optional reviewer-only "unassigned" sentinels? Default: **yes**, but kept out of the public matrix plots (only shown as an info banner: "Documentation insufficient for scoring").
-3. **Attribution**: Reference the v1.1 proposal generically as "DLinRT.eu internal methodology proposal v1.1 (2026)" — **no personal names**.
+## 1. Change deadline for the whole round
 
-## Plan
+### UX
+- In `RoundActionsMenu` (top-right of `/admin/review-rounds/:id`), add a new item **"Set / Change Deadline…"** (calendar icon), above "Add Products…".
+- Opens a dialog: shadcn `Popover` + `Calendar` date picker, pre-filled with `round.default_deadline`.
+- Checkbox: **"Apply this deadline to all assigned products in this round"** (checked by default).
+- "Save" → update round + (optionally) propagate to all `product_reviews` rows of that round.
+- Toast: e.g. `Deadline updated. 12 product assignments updated.`
+- Page refreshes via existing `onUpdate` so the assignments table shows new deadlines.
 
-### 1. Update level definitions (`src/data/evidence-impact-levels.ts`)
-- Rewrite `name`, `description`, `criteria` / `rtExamples` / `readinessConsequence` for each level to match v1.1 wording.
-- Add `unassigned: true` sentinels `E(-1)` and `I(-1)` (new optional codes `"E-1"`, `"I-1"`) with a guardrail flag; excluded from scatter/matrix plots.
-- Update `READINESS_DESCRIPTORS` thresholds so the composite signal matches the v1.1 narrative (Z0 → blocked, Z1 → pilot-only, Z2 → conditional, Z3 → deploy-with-monitoring iff E≥2 & I≥2, Z4 → deploy-with-monitoring or adoption-grade, Z5 → adoption-grade iff E≥2 & I≥2).
-- Add reference entry for the proposal **without author names**.
+### Backend
+Create one SECURITY DEFINER RPC `update_round_deadline_admin(p_round_id uuid, p_deadline date, p_propagate boolean)`:
+- Verifies caller has `admin` role via `has_role()`.
+- `UPDATE review_rounds SET default_deadline = p_deadline, updated_at = now() WHERE id = p_round_id`.
+- If `p_propagate`: `UPDATE product_reviews SET deadline = p_deadline WHERE review_round_id = p_round_id`.
+- Returns `{ success, updated_assignments }`.
 
-### 2. Sync UI copy / plots
-- `src/pages/EvidenceImpactGuide.tsx`: hero text, "Why three axes" panel, per-axis cards, worked-example sidebar.
-- `src/components/resources/EvidenceLevelTable.tsx`: pulls from the data file – auto-updates; verify column labels.
-- `src/components/resources/EvidenceImpactMatrix3D.tsx` and `EvidenceImpactMatrix.tsx`: axis legends, tooltip strings.
-- `src/components/dashboard/EvidenceImpactScatterChart.tsx`: tooltip + legend wording.
-- `src/components/product/EvidenceImpactBadges.tsx`: tooltip blurbs (driven by data file – verify).
-- `src/components/product/EvidenceLimitationsDetails.tsx`: any hard-coded label.
-- `src/pages/ResourcesCompliance.tsx`: intro paragraph for the evidence section.
+(We add a dedicated RPC instead of reusing `update_review_round_admin` because that one only updates the round row; the cascade to `product_reviews` is the whole point.)
 
-### 3. Keep downstream exports consistent
-- `src/utils/htaExport/htaExporter.ts`, `src/utils/exportProducts.ts`, `src/utils/comparison/comparisonExporter.ts`, `src/utils/fhir/transformers/deviceDefinition.ts`, `src/utils/schemaOrg/medicalDeviceSchema.ts`, `src/utils/modelCard/aidrtMapping.ts`: pick up new labels via the data module; only string template tweaks where labels are hard-coded.
+### Frontend wiring
+- New helper in `src/utils/reviewRoundUtils.ts`: `updateRoundDeadlineAdmin(roundId, deadline, propagate)` calling the RPC above.
+- New component `src/components/admin/review-rounds/EditRoundDeadlineDialog.tsx` (Popover + Calendar pattern from `shadcn-datepicker`, `pointer-events-auto`).
+- `RoundActionsMenu` opens that dialog; on success calls `onUpdate()`.
 
-### 4. Memory + docs
-- Update `mem://features/evidence-impact-matrix-dashboard` and `mem://data-quality/evidence-classification-logic` to record the v1.1 alignment.
-- Add a short note in `docs/review/GUIDE.md` pointing reviewers to the new wording and the E(-1)/I(-1) guardrails.
+---
 
-### 5. No data changes to products
-Existing product `evidenceRigor` / `clinicalImpact` / `adoptionReadiness` codes remain valid (the level codes are unchanged). Only labels, descriptions, and the composite-signal mapping change.
+## 2. Add products to a round and assign them to a specific reviewer
 
-### Out of scope
-- Renaming the `adoptionReadiness` field to `implementationReadiness` across the schema and all product files (large, low value — handled by copy alone).
-- Re-scoring any individual product.
+### UX (in existing `AddProductsToRoundDialog`)
+- Add a fourth value to the "Assignment algorithm" select: **"Assign all to a specific reviewer"**.
+- When selected, reveal a second select underneath listing all reviewers (label = `First Last (email)`). This list is fetched once when the dialog opens (re-use the same `user_roles` + `profiles` join already used in `ReviewRoundDetails.fetchReviewers`, factored into a small helper or inlined).
+- "Add N products" button stays disabled until a reviewer is picked in this mode.
 
-Please confirm the three decisions above (or accept defaults) and I will implement.
+### Behaviour
+- When `algorithm === 'manual'` (new value), skip `calculateProposedAssignments` and build:
+  ```ts
+  const proposed = ids.map(id => ({ product_id: id, assigned_to: chosenReviewerId, match_score: 0 }));
+  ```
+  then call existing `bulkAssignProducts(round.id, ids, deadline || undefined, proposed)` — no DB or RPC changes needed.
+- The deadline field in the dialog continues to default to `round.default_deadline`.
+
+### Types
+- Extend `AssignmentAlgorithm` in `reviewRoundUtils.ts` to `'balanced' | 'random' | 'expertise-first' | 'manual'`. Routing in `calculateProposedAssignments` is bypassed for `'manual'` at the dialog level, so the dispatcher doesn't need a new branch (but add a defensive throw if it ever reaches it).
+
+---
+
+## Files touched
+
+- `supabase/migrations/<new>.sql` — new `update_round_deadline_admin` function.
+- `src/utils/reviewRoundUtils.ts` — add `updateRoundDeadlineAdmin`, extend `AssignmentAlgorithm` type.
+- `src/components/admin/review-rounds/EditRoundDeadlineDialog.tsx` — new.
+- `src/components/admin/review-rounds/RoundActionsMenu.tsx` — new menu item + dialog wiring.
+- `src/components/admin/review-rounds/AddProductsToRoundDialog.tsx` — add "manual" algorithm option, reviewer selector, manual-mode branch in `handleSubmit`.
+
+No changes to `ReviewRoundDetails.tsx` apart from the automatic refresh it already triggers via `onUpdate`.
+
+---
+
+## Out of scope
+
+- No change to per-row inline deadline picker (already shipped).
+- No notification emails on deadline change (can be added later if desired).
+- No editing of round name/description in this pass.

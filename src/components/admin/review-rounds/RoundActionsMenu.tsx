@@ -19,12 +19,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus } from "lucide-react";
+import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus, CalendarClock } from "lucide-react";
 import { toast } from "sonner";
 import { updateRoundStatusAdmin, cloneReviewRoundAdmin } from "@/utils/reviewRoundUtils";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { supabase } from "@/integrations/supabase/client";
 import { AddProductsToRoundDialog } from "./AddProductsToRoundDialog";
+import { EditRoundDeadlineDialog } from "./EditRoundDeadlineDialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,6 +46,7 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const [showCloneDialog, setShowCloneDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showAddProductsDialog, setShowAddProductsDialog] = useState(false);
+  const [showDeadlineDialog, setShowDeadlineDialog] = useState(false);
   const [cloning, setCloning] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [cloneData, setCloneData] = useState({
@@ -150,10 +152,16 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           <DropdownMenuSeparator />
           
           {(round.status === 'active' || round.status === 'draft') && (
-            <DropdownMenuItem onClick={() => setShowAddProductsDialog(true)}>
-              <PackagePlus className="h-4 w-4 mr-2" />
-              Add Products…
-            </DropdownMenuItem>
+            <>
+              <DropdownMenuItem onClick={() => setShowDeadlineDialog(true)}>
+                <CalendarClock className="h-4 w-4 mr-2" />
+                Set / Change Deadline…
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowAddProductsDialog(true)}>
+                <PackagePlus className="h-4 w-4 mr-2" />
+                Add Products…
+              </DropdownMenuItem>
+            </>
           )}
 
           {round.status === 'active' && (
@@ -284,6 +292,14 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <EditRoundDeadlineDialog
+        open={showDeadlineDialog}
+        onOpenChange={setShowDeadlineDialog}
+        round={round}
+        onUpdate={onUpdate}
+      />
+
 
       <AddProductsToRoundDialog
         open={showAddProductsDialog}
