@@ -1,89 +1,70 @@
-## Part 1 — Revise United Imaging in `src/data/news/estro-2026-announcements.ts`
+## Skill: `product-audit-swarm`
 
-The current "United Imaging" pre-congress section (lines 40–44) states that the *only* AI/DL-specific component disclosed is the uCT 610 Sim Deep Learning Full-FOV reconstruction, and that other portfolio items "do not currently isolate an AI/DL component."
+Agent-side workflow skill (no app code shipped) authored at `.agents/skills/product-audit-swarm/` and activated via `skills--apply_draft`. It directs me to run a coordinated multi-agent audit of every `ProductDetails` entry in `src/data/products/<category>/`, aligned to `docs/FIELD_REFERENCE.md`, `docs/review/GUIDE.md`, the inclusion policy (AI/DL for radiotherapy), and the dual-axis evidence rubric in `src/data/evidence-impact-levels.ts`.
 
-This is now inconsistent with the catalogue, which already includes three United Imaging entries with AI/DL components:
+### Trigger
 
-- `united-urt-auto-contouring` — Auto-Contouring, CE-marked (component of uRT-linac 506c)
-- `united-urt-auto-planning` — Treatment Planning + GPU Monte Carlo, CE-marked (component of uRT-linac 506c)
-- `united-uct610-sim-dl-recon-pipeline` — pipeline (pre-market)
-- Existing `united-ucs-ai` (CBCT enhancement, CE) already in catalogue from earlier
+Fires on requests like "audit the products", "run the product swarm", "compile a product review report", "re-score evidence for all products", "check products for inconsistencies".
 
-### Edits
+### Swarm shape
 
-Rewrite the United Imaging pre-congress section to:
+Each pass spawns specialised sub-agent roles. They run independently per product, then a Compiler merges their findings into one per-product report.
 
-1. Keep the booth + microsite reference and the "AI-driven software ecosystem" framing.
-2. List the AI/DL components now tracked in the catalogue:
-   - **uRT Auto-Contouring** (CE, integrated in uRT-linac 506c; structure list unavailable)
-   - **uRT Auto-Planning** + GPU Monte Carlo dose calculation (CE, powering the ~15-min uCT-ART online adaptive workflow)
-   - **uCS-AI** (existing CBCT enhancement entry, CE)
-   - **uCT 610 Sim — Deep Learning Full-FOV Reconstruction** (pipeline, "under development; not for sale or clinical use")
-3. Keep the neutrality caveats: integrated components of the system-level CE marking, no model card / training-data / standalone intended-use documents published; performance claims are vendor-reported and not independently validated.
-4. Keep the hardware-only items (uRT-linac 506c, uLinac HalosTx, uMR Omega, uMI Panorama) explicitly excluded per inclusion criteria.
-5. Update the "Post-ESTRO catalogue updates" bullet for United Imaging to also reference the auto-contouring and auto-planning entries (already present today, just acknowledged).
+| Role | Inputs | Checks |
+| --- | --- | --- |
+| **Identity** | id, name, company, category, secondaryCategories, logoUrl, productUrl | slug matches `company-product`, no duplicate ids, logo file exists in `public/logos/`, URL resolves, category ∈ allowed enum |
+| **Inclusion** | description, features, usesAI, category | Confirms AI/DL component for radiotherapy per `mem://policy/product-inclusion-criteria` and `mem://constraints/ai-dl-technology-threshold`; flags classical-processing-only or generic QA |
+| **Regulatory** | regulatory.{ce,fda,tga,tfda}, certification, intendedUseStatement | Status enum valid, class/clearance number present when cleared, `certification` summary matches `regulatory.*`, decision dates plausible |
+| **Technical** | technicalSpecifications, technology, modality, anatomicalLocation, diseaseTargeted | DICOM nomenclature (RTSTRUCT/RTPLAN/RTDOSE), modality array form, integration names spelled consistently |
+| **Structures** | supportedStructures, structuresUnavailable | Enforce `Region: Structure Name` per `mem://data/structure-naming-convention-v3`; `(investigational)`/`(unverified)` suffixes per `mem://data-quality/structure-status-marking`; empty list ⇒ `structuresUnavailable: true` |
+| **Evidence** | evidenceRigor, clinicalImpact, adoptionReadiness, *Notes, evidence[], keyPapers[], clinicalEvidence | Re-score against `EVIDENCE_RIGOR_LEVELS` and `CLINICAL_IMPACT_LEVELS`; verify study-quality sub-attrs (`vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`); targeted PubMed/DOI lookup via `websearch--web_search`; record search date |
+| **Transparency** | trainingData, evaluationData, safetyCorrectiveActions, dosePredictionModels, limitations, source | Per `mem://data/transparency-and-safety-schema`; flag missing model-card / training-data when E ≥ E1 |
+| **Cross-check** | All product files + `src/data/companies/*` | Company name matches an active company entry; archived companies/products not referenced from live entries; duplicate ids across categories; broken `partOf` / `priorVersions` / `supersededBy` refs |
+| **Compiler** | Outputs from all roles above | Merges into one per-product Markdown block with severity-tagged findings + suggested edits |
 
-### Revision-date check
+### Workflow
 
-All four United Imaging product files carry `lastRevised: "2026-05-19"` (or `2026-03-08` for `uCS-AI`). Using `src/utils/revisionUtils.ts` (`needsRevision` = >180 days):
+1. **Bootstrap** — read `docs/FIELD_REFERENCE.md`, `docs/review/GUIDE.md`, `src/data/evidence-impact-levels.ts`, and the inclusion-policy memories once per session. Cache the rubric.
+2. **Enumerate** — `rg -l "^export const " src/data/products` (excluding `archived/` and `examples/`) to build the worklist. Optionally accept a filter argument: a category folder or product id.
+3. **Per product**, run roles in parallel where independent (Identity, Inclusion, Regulatory, Technical, Structures, Transparency can run together; Evidence runs after a PubMed/DOI query; Cross-check uses the cached registry).
+4. **Compile** a Markdown block per product with sections: *Summary*, *Field findings* (table: field, severity `info|warn|error`, observation, suggested fix), *Re-scoring proposal* `(E,I,R)` with notes, *Sources consulted*.
+5. **Aggregate** — write three artefacts to `/mnt/documents/`:
+   - `product-audit-<YYYY-MM-DD>.md` — full per-product report
+   - `product-audit-<YYYY-MM-DD>.csv` — flat row per finding for the worklist (id, role, severity, field, observation, suggested fix)
+   - `product-audit-<YYYY-MM-DD>-rescoring.csv` — id, current E/I/R, proposed E/I/R, rationale
+6. **Hand-off** — surface the artefacts to the user with `<presentation-artifact>` tags. Do NOT auto-edit product files. Edits are applied in a separate, confirmed pass (one PR per category wave) per the *Minimal Intervention* memory.
 
-- `united-urt-auto-contouring` — fresh, no revision needed
-- `united-urt-auto-planning` — fresh, no revision needed
-- `united-uct610-sim-dl-recon-pipeline` — fresh, no revision needed
-- `united-ucs-ai` — ~73 days since last revision → not yet due, but flag for the next sweep
+### Severity rubric
 
-No `lastRevised` bumps are needed for the news edit (per the minimal-intervention policy).
+- **error** — invalid enum, broken URL, duplicate id, archived-company reference, AI/DL inclusion violation, regulatory status inconsistent with `certification`.
+- **warn** — missing recommended field for the assigned `(E,I,R)` (e.g. `keyPapers` empty at E ≥ E1), `lastRevised` > 180 days, DICOM nomenclature drift.
+- **info** — neutral observations and re-scoring suggestions where current scores are defensible.
 
----
+### Composability
 
-## Part 2 — Full re-review of all 107 products against the updated dual-axis rubric
+Pulls in the **AI Gateway for Scripts** skill (`knowledge://skill/ai-gateway`) for the Evidence role's optional LLM-assisted abstract summarisation when re-scoring large papers. Falls back to direct `websearch--web_search` and `code--fetch_website` if the gateway is unavailable.
 
-The dual-axis rubric in `src/data/evidence-impact-levels.ts` (Evidence Rigor E0–E3, Clinical Impact I0–I5, Adoption Readiness R0–R4, plus study-quality sub-attributes: `vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`) is now the canonical scoring system. Many existing entries were scored against an earlier rubric and need a structured pass.
+### Files in the draft
 
-### Scope
-
-All 107 products under `src/data/products/<category>/`, excluding `archived/` and `examples/`. Pipeline entries stay E0/I0/R0 unless new evidence appears.
-
-### Methodology (apply per product)
-
-1. Re-read `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes`, `clinicalEvidence`, `evidence[]`, `keyPapers[]`.
-2. Re-score against the current rubric:
-   - **Evidence Rigor (E0–E3)** using `EVIDENCE_RIGOR_LEVELS` criteria.
-   - **Clinical Impact (I0–I5)** using `CLINICAL_IMPACT_LEVELS` (technical → workflow → clinical-process → patient-outcome → health-system).
-   - **Adoption Readiness (R0–R4)** derived from (E, I, regulatory status).
-3. Fill in the study-quality sub-attributes (`vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`) wherever evidence exists; these power the Evidence Impact Matrix dashboard.
-4. Update `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes` with the current rationale (1–3 sentences each, citing the strongest paper if any).
-5. Bump `lastRevised` (and `lastUpdated` only if the underlying content actually changed) per `docs/review/GUIDE.md`.
-6. Where peer-reviewed evidence is missing, do a targeted PubMed / vendor-site check (timeboxed) before defaulting to E0; record the search date in the notes.
-
-### Batching strategy
-
-Group by category to amortise reviewer context-switching:
-
-```text
-Wave 1 (largest, most published):     Auto-Contouring, Treatment Planning
-Wave 2 (high-impact AI literature):   Image Synthesis, Image Enhancement, Reconstruction
-Wave 3 (workflow + monitoring):       Registration, Tracking, Performance Monitor, Platform
-Wave 4 (smaller, specialised):        Clinical Prediction, Pipeline (verify still pre-market)
+```
+.agents/skills/product-audit-swarm/
+├── SKILL.md                            # navigation, triggers, workflow overview, severity rubric
+├── references/
+│   ├── roles.md                        # per-role inputs/checks/output schema (full table above expanded)
+│   ├── scoring-rubric.md               # condensed E/I/R cheatsheet + study-quality sub-attrs
+│   ├── inclusion-policy.md             # AI/DL-for-RT inclusion gates, exclusions, edge cases
+│   └── output-format.md                # exact Markdown + CSV schemas the Compiler must emit
+└── scripts/
+    └── enumerate_products.sh           # rg-based worklist generator with --category filter
 ```
 
-Each wave ends with a short summary entry in `news/` (or as part of a quarterly changelog) describing the scoring deltas — no per-product news posts.
+### Out of scope
 
-### Tooling / supporting work
+- Company-only audits (user excluded).
+- Auto-applying edits to product `.ts` files.
+- Any in-app feature, edge function, or DB table.
+- Editing the rubric itself.
 
-- Extend `scripts/update-revisions.mjs` (or add a new `scripts/audit-evidence-scores.mjs`) to print, per product: current `(E, I, R)`, days since `lastRevised`, presence of `keyPapers`, and missing sub-attributes. This gives a worklist.
-- Add a one-off CSV export of the worklist (e.g. `/tmp/evidence-audit.csv`) so reviewers can claim products in `ReviewAssignment` admin UI without re-deriving the list.
-- Reuse the existing reviewer-round workflow (`/admin/review-rounds`) — create one round per wave, deadline 4 weeks out, assigned to the active reviewer pool.
+### Hand-off
 
-### Out of scope for this plan
-
-- Editing the rubric definitions themselves (`src/data/evidence-impact-levels.ts`).
-- Re-running the matrix dashboard logic — it already reads the new fields.
-- Changes to UI components.
-
-### Deliverables
-
-- News edit committed (Part 1).
-- Audit script + CSV worklist.
-- Four review rounds created in the admin UI, one per wave, with the worklist split across reviewers.
-- A short "Evidence rubric re-review — Wave N complete" changelog entry after each wave closes.
+After writing the four Markdown files and the script, call `skills--apply_draft` with `path: ".agents/skills/product-audit-swarm"` to activate.
