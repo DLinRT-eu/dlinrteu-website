@@ -304,7 +304,7 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={submitting || selected.size === 0}>
+          <Button onClick={handleSubmit} disabled={submitting || selected.size === 0 || (algorithm === "manual" && !manualReviewerId)}>
             {submitting ? (<><Loader2 className="h-4 w-4 mr-2 animate-spin" />Adding…</>) : `Add ${selected.size} product${selected.size === 1 ? "" : "s"}`}
           </Button>
         </DialogFooter>
