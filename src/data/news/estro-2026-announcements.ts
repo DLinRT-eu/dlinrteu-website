@@ -39,9 +39,18 @@ The other items on the booth — **Accuray Stellar**, **Radixact**, **Accuray He
 
 ## United Imaging
 
-United Imaging published an [ESTRO 2026 microsite](https://estro-united-imaging-healthcare-europe.framer.ai/) marking the European debut of its uRT® radiotherapy portfolio at booth C16:41, with a portfolio reveal on Friday 15 May 19:18–19:25 CEST. The vendor describes an "AI-driven software ecosystem" integrated across the workflow.
+United Imaging published an [ESTRO 2026 microsite](https://estro-united-imaging-healthcare-europe.framer.ai/) and a [portfolio press release](https://www.prnewswire.com/news-releases/united-imaging-unveils-its-full-radiotherapy-portfolio-at-estro-2026-highlighting-the-ce-marked-urt-linac-506c-302773402.html) marking the European debut of its uRT® radiotherapy portfolio at booth C16:41, with a portfolio reveal on Friday 15 May 19:18–19:25 CEST. The vendor describes an "AI-driven software ecosystem" integrated across imaging, contouring, planning and QA.
 
-The single AI/DL-specific component disclosed in the public material is the **Deep Learning Full-FOV reconstruction** on the **uCT 610 Sim** (87 cm ultra-wide-bore CT simulator, listed as "under development; not for sale or clinical use, not yet available in Europe"). Other portfolio items announced for ESTRO 2026 — uRT®-linac 506c, uLinac HalosTx, uMR® Omega 3T MR simulator, uMI® Panorama PET/CT simulator — are hardware platforms; their public announcements do not currently isolate an AI/DL component for radiotherapy and therefore fall outside the DLinRT.eu inclusion criteria. A catalogue entry for the uCT 610 Sim DL reconstruction (and any other uRT® AI software) will be created once vendor documentation describing the model, training data and intended use is published.
+AI/DL components now tracked in the catalogue:
+
+- **[uRT Auto-Contouring](/product/united-urt-auto-contouring)** — deep-learning segmentation of whole-body OARs and multiple tumour sites, integrated in the uRT-linac 506c and the uCT-ART online adaptive workflow. CE-marked as a component of the uRT-linac 506c (system-level IIb under MDR). The supported-structures section is rendered as **"structure list unavailable"** because the vendor has not published a verified DICOM-conformant list.
+- **[uRT Auto-Planning](/product/united-urt-auto-planning)** — AI-driven auto-planning with GPU-accelerated Monte Carlo dose calculation, powering the ~15-minute uCT-ART online adaptive workflow. CE-marked as a component of the uRT-linac 506c.
+- **[uCS-AI](/product/united-ucs-ai)** — existing CE-marked deep-learning CBCT enhancement entry, refreshed with the ESTRO 2026 reference.
+- **[uCT 610 Sim — Deep Learning Full-FOV Reconstruction](/products/pipeline)** — added to the pipeline products hub. Explicitly labelled by the vendor as "under development; not for sale or clinical use, not yet available in Europe."
+
+Neutrality caveats apply to all CE-marked entries above: they are integrated components of the system-level uRT-linac 506c CE marking rather than separately marketed devices; no model card, training-data description or standalone intended-use document has been published; and all performance and adaptive-workflow timing claims (e.g. ~90% contouring time reduction, ~15-minute online adaptive workflow) are vendor-reported and not yet independently validated. All AI-generated contours and plans require qualified clinician and medical-physics review prior to clinical use.
+
+Other portfolio items announced for ESTRO 2026 — **uRT®-linac 506c**, **uLinac HalosTx**, **uMR® Omega 3T MR simulator**, **uMI® Panorama PET/CT simulator** — are hardware platforms; their public announcements do not currently isolate an AI/DL component for radiotherapy and therefore fall outside the DLinRT.eu inclusion criteria.
 
 ## Post-ESTRO catalogue updates (19 May 2026)
 
