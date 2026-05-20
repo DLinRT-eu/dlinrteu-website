@@ -9,10 +9,10 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     productUrl: "https://synaptiq.io/product/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
     description:
-      "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. Currently in clinical testing phase (Investigation use only - not yet CE/FDA certified). Features unique Active Contouring technology and adaptive learning for personalized contouring.",
+      "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. CE-certified (reported by vendor at the ESTRO 2026 booth), including the Active Contouring GTV delineation feature; pending verification against the EUDAMED listing. Features unique Active Contouring technology and adaptive learning for personalized contouring.",
     category: "Auto-Contouring",
     secondaryCategories: ["Registration"],
-    certification: "Pending",
+    certification: "CE",
     logoUrl: "/logos/synaptiq.png",
     website: "https://synaptiq.io/product/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brachytherapy"],
