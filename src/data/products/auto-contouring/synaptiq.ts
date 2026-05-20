@@ -101,7 +101,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Pelvis: Seminal Vesicles",
     ],
     limitations: [
-      "Investigation use only - not approved for clinical use",
+      "CE clearance details reported via vendor booth communication at ESTRO 2026; awaiting verification against EUDAMED listing or vendor press release",
       "Requires verification by qualified radiation oncologist",
       "Performance may vary based on image quality",
     ],
@@ -120,15 +120,17 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "under_review",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
+        notes:
+          "CE clearance reported by vendor at the ESTRO 2026 booth (Stockholm, 15–19 May 2026), including the Active Contouring GTV delineation feature. Pending independent verification against the EUDAMED listing.",
       },
       fda: {
         status: "pending",
       },
       intendedUseStatement:
-        "For investigation use only. Automatic segmentation of organs at risk in radiation therapy planning. Not approved for clinical use.",
+        "Automatic segmentation of organs at risk and GTV in radiation therapy planning on CT and MRI. CE-cleared scope per vendor booth communication at ESTRO 2026; pending EUDAMED / press-release verification. All AI-generated contours require review by a qualified radiation oncologist prior to clinical use.",
     },
     market: {
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
