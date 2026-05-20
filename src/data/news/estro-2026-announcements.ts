@@ -5,7 +5,7 @@ export const estro2026Announcements: NewsItem = {
   date: "2026-05-14",
   title: "ESTRO 2026: Vendor Announcements and Catalogue Updates",
   summary:
-    "Round-up of AI/DL-relevant announcements ahead of ESTRO 2026 (Stockholm, 15–19 May) from GE HealthCare, TheraPanacea, MIM Software, Spectronic Medical, RaySearch and United Imaging, with the corresponding DLinRT.eu catalogue updates.",
+    "Round-up of AI/DL-relevant announcements ahead of ESTRO 2026 (Stockholm, 15–19 May) from GE HealthCare, TheraPanacea, MIM Software, Spectronic Medical, RaySearch, United Imaging and Synaptiq, with the corresponding DLinRT.eu catalogue updates.",
   content: `
 ESTRO 2026 takes place in Stockholm from 15 to 19 May 2026. Several vendors have published pre-congress announcements relevant to AI in radiotherapy. Below is a neutral summary of the items that affect products already tracked in the DLinRT.eu catalogue, along with the corresponding entry updates. Per the [product inclusion criteria](/about), only announcements with a clear AI/deep-learning component for radiotherapy are listed.
 
@@ -52,6 +52,19 @@ Neutrality caveats apply to all CE-marked entries above: they are integrated com
 
 Other portfolio items announced for ESTRO 2026 — **uRT®-linac 506c**, **uLinac HalosTx**, **uMR® Omega 3T MR simulator**, **uMI® Panorama PET/CT simulator** — are hardware platforms; their public announcements do not currently isolate an AI/DL component for radiotherapy and therefore fall outside the DLinRT.eu inclusion criteria.
 
+## Synaptiq
+
+At the Synaptiq booth, the team communicated that **Mediq RT** has received **CE certification (Class IIa)**, explicitly including the **Active Contouring GTV delineation** feature. They also indicated that a **4D CT** capability is currently offered as an option inside a **research module** of Mediq RT and is **not** part of the CE-cleared scope.
+
+Catalogue updates:
+
+- **[Synaptiq Mediq RT](/product/synaptiq-mediq-rt)** — regulatory status updated from "under review" to **CE-cleared (Class IIa)**, with the intended use extended to cover GTV delineation in addition to organs at risk. Description, limitations and \`source\` fields carry an explicit verification caveat.
+- **[Synaptiq Mediq RT — 4D CT (Research Module)](/products/pipeline)** — added to the [pipeline products hub](/products/pipeline) as a new pre-market entry (E0 / I0 / R0) reflecting the research-module status.
+
+Neutrality caveat: the information above is sourced from a vendor booth communication, not a vendor press release or notified-body publication. The CE-clearance details (certificate number, notified body, EUDAMED UDI-DI) have not yet been independently verified. Entries will be updated as soon as an authoritative public source is available.
+
+
+
 ## Post-ESTRO catalogue updates (19 May 2026)
 
 After the congress closed, the following entries were added or revised:
@@ -65,7 +78,7 @@ After the congress closed, the following entries were added or revised:
 A full sweep of the 107 catalogued products was performed after the congress closed. The audit was announcement-driven: each Tier-1 and Tier-2 vendor's official newsroom and ESTRO 2026 booth communication was reviewed against the [product inclusion criteria](/about), and entries were only edited where a vendor publicly disclosed a new AI/DL component, regulatory milestone, version, or supported-structure change.
 
 - **Tier 1 (GE HealthCare, TheraPanacea, RaySearch, United Imaging, Spectronic Medical, Accuray)**: changes captured above. TheraPanacea's 16 accepted abstracts will be folded into the relevant product evidence lists once stable DOIs are published in the post-congress proceedings.
-- **Tier 2 (Varian, Siemens Healthineers, Philips, Brainlab, MIM Software, Mirada, Limbus AI, MVision AI, Radformation, Manteia, Carina Medical, Coreline Soft, Vysioner, Wisdom Tech, DirectORGANS, Oncosoft, Taiwan Medical Imaging, Hura Imaging, AI Medical, EverFortune, MedMind, Quanta Computer, MedCom, Synaptiq, Sun Nuclear, MD Anderson)**: no verifiable new AI/DL product, clearance or model-card disclosure tied specifically to ESTRO 2026 was identified. Existing entries remain accurate; \`lastRevised\` dates have been left unchanged per our [minimal-intervention](/about) policy (no edit, no date bump).
+- **Tier 2 (Varian, Siemens Healthineers, Philips, Brainlab, MIM Software, Mirada, Limbus AI, MVision AI, Radformation, Manteia, Carina Medical, Coreline Soft, Vysioner, Wisdom Tech, DirectORGANS, Oncosoft, Taiwan Medical Imaging, Hura Imaging, AI Medical, EverFortune, MedMind, Quanta Computer, MedCom, Sun Nuclear, MD Anderson)**: no verifiable new AI/DL product, clearance or model-card disclosure tied specifically to ESTRO 2026 was identified. **Synaptiq** is covered separately above following a vendor booth communication. Existing entries remain accurate; \`lastRevised\` dates have been left unchanged per our [minimal-intervention](/about) policy (no edit, no date bump).
 - **Hardware platforms and watchlist items** (uRT-linac 506c, uLinac HalosTx, uMR Omega, uMI Panorama, Accuray Stellar, PreciseART, Adapt LTE/Cenos): remain excluded pending vendor documentation that isolates an AI/DL component, training data and intended use.
 
 ---

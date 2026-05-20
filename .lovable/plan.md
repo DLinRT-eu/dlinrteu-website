@@ -1,37 +1,69 @@
-## Verdict
+## Goal
 
-**Do not add ZAP Surgical / ZAP-X / ZAP-Axon as an active DLinRT.eu product** at this time. Based on vendor and press sources reviewed today (2026-05-20), the system fails the project's AI/DL inclusion gate (`mem://constraints/ai-dl-technology-threshold`).
+Reflect what the Synaptiq team communicated at their ESTRO 2026 booth in three places:
+1. The ESTRO 2026 news item (Tier-2 section + a new Synaptiq sub-section).
+2. The active Synaptiq Mediq RT product entry (regulatory status flip to CE-cleared, including GTV).
+3. A new pipeline entry for the Synaptiq 4D CT capability (research module, no public documentation yet).
 
-## Evidence collected
+All edits stay within `src/data/products/**` and `src/data/news/estro-2026-announcements.ts`. No UI, schema or DB changes.
 
-Sources consulted (search date 2026-05-20):
+## Source caveat (please confirm)
 
-1. https://zapsurgical.com/zap-axon/ — official product page. Lists: fusion, contouring, planning & optimization, evaluation, approval. The only named algorithm is a **"Krylov quadratic optimizer"** (classical numerical optimization, not ML/DL). No mention of AI, deep learning, neural networks, or learned auto-contouring.
-2. https://zapsurgical.com/news/zap-unveils-the-zap-axon-radiosurgery-planning-system/ — March 2025 launch release. Same feature set; no AI claims.
-3. https://www.businesswire.com/news/home/20251111492537/en/ — Nov 2025 FDA 510(k) + CE clearance announcement. Same Krylov optimizer pitch.
-4. https://www.medicaleconomics.com/view/zap-surgical-systems-gains-fda-ce-clearance-for-ai-ready-brain-radiosurgery-planning-platform — headline calls it **"AI-ready"** (forward-looking marketing). Direct quote from Alex Maslowski, PhD, VP Software at ZAP Surgical: *"As the first system in its field built entirely on modern web technologies, Axon is uniquely positioned to rapidly integrate and fully harness the power of AI."* — future tense, no shipped AI component.
-5. https://www.itnonline.com/content/radiosurgery-planning-system-receives-fda-510k%C2%A0ce-clearance — mirrors the press release; no AI features described.
+The information comes from a verbal booth conversation, not a vendor press release, model card or notified-body posting. Under the [product inclusion criteria](mem://policy/product-inclusion-criteria) and Minimal-Intervention policy, I will:
+- cite the source as "Vendor communication at Synaptiq booth, ESTRO 2026 (Stockholm, 15–19 May 2026)",
+- keep evidence/impact/readiness scores unchanged (booth info does not move E/I/R), and
+- add a clear caveat on the news entry and on the product `source` / `limitations` fields that the CE-clearance details have not yet been independently verified against the EUDAMED listing or a vendor press release.
 
-## Why this fails the inclusion gate
+If you have a CE certificate number, notified body, EUDAMED UDI-DI or a vendor press release URL, send it over and I will swap the placeholder source for the verifiable citation.
 
-Per `mem://constraints/ai-dl-technology-threshold`, DLinRT.eu requires shipped ML/DL technology; classical image processing and classical optimization are explicitly excluded. ZAP-Axon's current public technical claim is a Krylov quadratic optimizer — a deterministic numerical method, not learned. Vendor framing is explicitly "AI-ready", which is exactly the marketing pattern the threshold policy was written to filter out.
+## Edits
 
-The director's claim ("there is AI") is not corroborated by any current public source for any cleared ZAP product. It may refer to a roadmap item, a research collaboration, or a future module — none of which qualify under our inclusion policy until shipped and identifiable.
+### 1. `src/data/products/auto-contouring/synaptiq.ts` (Mediq RT)
 
-## Proposed actions (no source files edited in this plan)
+- `certification`: `"Pending"` → `"CE"`.
+- `description`: drop the "Currently in clinical testing phase (Investigation use only - not yet CE/FDA certified)" sentence; replace with a sentence stating CE clearance per booth communication at ESTRO 2026, including the GTV delineation feature.
+- `regulatory.ce.status`: `"under_review"` → `"cleared"`. Keep `class: "IIa"`, `type: "Medical Device"`. Add `notes: "CE clearance reported by vendor at the ESTRO 2026 booth, including GTV delineation. Pending independent verification against EUDAMED."`.
+- `regulatory.intendedUseStatement`: drop "For investigation use only … Not approved for clinical use" and replace with a neutral CE-cleared statement covering OAR + GTV auto-segmentation in radiotherapy planning, qualified by the booth-communication caveat.
+- `limitations`: remove "Investigation use only — not approved for clinical use"; add "CE clearance details reported via vendor booth communication at ESTRO 2026; awaiting verification against EUDAMED listing or vendor press release."
+- `lastRevised`: `"2026-05-20"` → today's date (kept at 2026-05-20 since that is today).
+- `source`: append "Vendor communication at Synaptiq booth, ESTRO 2026 (Stockholm, 15–19 May 2026): CE clearance reported, including for the Active Contouring GTV delineation feature."
+- No changes to `supportedStructures`, `evidence`, `evidenceRigor`, `clinicalImpact`, `adoptionReadiness`, or scores.
 
-1. **Reply to the director** with a short note citing the Maslowski quote and asking for a specific, citable AI component (module name, model card, paper, 510(k) summary section, or vendor white paper). Template included below.
-2. **Add a Pipeline watch entry** at `src/data/products/pipeline/zap-axon.ts` only **after** the director (or vendor) provides a concrete AI module name. Until then, no entry — Pipeline is for identified pre-market AI products, not for "vendor says AI is coming".
-3. **Log the audit decision**: append a one-line note to `/mnt/documents/product-audit-2026-05-20-zap-surgical.md` recording the sources, the date, and the "excluded — fails AI/DL gate" verdict so a future reviewer doesn't re-litigate it.
-4. **Re-review trigger**: if ZAP publishes (a) an AI auto-contouring module, (b) a learned dose prediction model, or (c) a 510(k)/CE clearance that names an ML component, re-open the assessment and create a proper product entry under the appropriate category (likely Auto-Contouring and/or Treatment Planning).
+### 2. New pipeline product `src/data/products/pipeline/synaptiq.ts`
 
-## Draft message to the director
+A single `SYNAPTIQ_PIPELINE_PRODUCTS` entry mirroring the shape of `pipeline/united-imaging.ts`:
 
-> Thanks for flagging ZAP. I checked the public sources (vendor site, March 2025 launch release, Nov 2025 FDA/CE clearance release, Medical Economics coverage). The only algorithm ZAP currently names in ZAP-Axon is a Krylov quadratic optimizer, which is classical numerical optimization — not ML/DL. ZAP's own VP of Software, Alex Maslowski, describes Axon as *"uniquely positioned to rapidly integrate … AI"* (future tense), and the press headline calls it "AI-ready". Under DLinRT.eu's inclusion policy we list shipped AI/DL products, not roadmap items, so I have not added ZAP. If you have a specific cleared AI module name, model card, paper, or vendor document, send it over and I will re-assess.
+- `id`: `"synaptiq-mediq-rt-4dct-pipeline"`
+- `name`: `"Mediq RT — 4D CT (Research Module)"`
+- `company`: `"Synaptiq"`, `companyUrl`, `productUrl` from existing entry.
+- `category`: `"Auto-Contouring"`; `secondaryCategories`: `["Tracking"]` (4D CT supports motion-management workflows; conservative classification, please confirm if you prefer otherwise).
+- `certification`: `"Pipeline"`; `developmentStage`: `"pipeline"`.
+- `usesAI: true`.
+- `description`: explains that 4D CT auto-contouring is offered as an option inside a research module of Mediq RT, not for clinical use, per booth communication at ESTRO 2026.
+- `keyFeatures`: research-module 4D CT auto-contouring; phase-resolved structure propagation; investigational-only.
+- `limitations`: research module only; not CE/FDA cleared; no public model card or independent validation.
+- E0 / I0 / R0 with the standard pre-market notes.
+- `source`: same booth-communication citation as above.
+- `lastRevised: "2026-05-20"`.
 
-## Out of scope for this plan
+Then update `src/data/products/pipeline/index.ts` to import and spread `SYNAPTIQ_PIPELINE_PRODUCTS`.
 
-- No edits to `src/data/products/**`.
-- No changes to companies registry.
-- No new edge functions, UI changes, or migrations.
-- The full Phase A/B mechanical fix work from the prior audit is unaffected.
+### 3. `src/data/news/estro-2026-announcements.ts`
+
+- In the `## TheraPanacea`/`## RaySearch`/`## Accuray`/`## United Imaging` block ordering, insert a new `## Synaptiq` section (placed between Accuray and United Imaging for alphabetical-ish grouping, or at the end of the vendor-specific sections — please confirm placement preference; I will default to placing it after United Imaging if no preference is given). Content:
+  - One paragraph: at the Synaptiq booth, the team communicated that Mediq RT has received CE certification, explicitly including the Active Contouring GTV delineation feature. The 4D CT capability is offered as an option inside a research module and is not part of the CE-cleared scope.
+  - Catalogue update bullets:
+    - `[Synaptiq Mediq RT](/product/synaptiq-mediq-rt)` — regulatory status updated from "under review" to CE-cleared (IIa), including GTV delineation; awaiting EUDAMED / press-release verification.
+    - `[Synaptiq Mediq RT — 4D CT (Research Module)](/products/pipeline)` — added as a new pipeline entry (E0 / I0 / R0) reflecting the research-module status.
+  - Neutrality caveat: information sourced from booth communication, not a vendor press release; entries will be updated once an authoritative source is available.
+
+- In the **Tier 2** bullet at the bottom of "Full post-ESTRO audit", remove "Synaptiq" from the list of vendors with no new disclosure (since they now have one).
+
+- Update the news entry's `summary` to add Synaptiq alongside the other vendors mentioned. `date` left at `2026-05-14` to preserve URL/SEO; post-congress addendum carries 2026-05-20.
+
+## Out of scope
+
+- No edits to `src/data/companies/**` (Synaptiq is already listed).
+- No changes to `evidenceRigor` / `clinicalImpact` / `adoptionReadiness` for the active entry.
+- No new structures, no new modality, no schema or migration work.
+- No edge-function or UI changes.

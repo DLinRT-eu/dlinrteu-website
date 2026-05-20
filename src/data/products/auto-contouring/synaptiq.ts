@@ -9,10 +9,10 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     productUrl: "https://synaptiq.io/product/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
     description:
-      "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. Currently in clinical testing phase (Investigation use only - not yet CE/FDA certified). Features unique Active Contouring technology and adaptive learning for personalized contouring.",
+      "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. CE-certified (reported by vendor at the ESTRO 2026 booth), including the Active Contouring GTV delineation feature; pending verification against the EUDAMED listing. Features unique Active Contouring technology and adaptive learning for personalized contouring.",
     category: "Auto-Contouring",
     secondaryCategories: ["Registration"],
-    certification: "Pending",
+    certification: "CE",
     logoUrl: "/logos/synaptiq.png",
     website: "https://synaptiq.io/product/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Brachytherapy"],
@@ -101,7 +101,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Pelvis: Seminal Vesicles",
     ],
     limitations: [
-      "Investigation use only - not approved for clinical use",
+      "CE clearance details reported via vendor booth communication at ESTRO 2026; awaiting verification against EUDAMED listing or vendor press release",
       "Requires verification by qualified radiation oncologist",
       "Performance may vary based on image quality",
     ],
@@ -120,15 +120,17 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "under_review",
+        status: "cleared",
         class: "IIa",
         type: "Medical Device",
+        notes:
+          "CE clearance reported by vendor at the ESTRO 2026 booth (Stockholm, 15–19 May 2026), including the Active Contouring GTV delineation feature. Pending independent verification against the EUDAMED listing.",
       },
       fda: {
         status: "pending",
       },
       intendedUseStatement:
-        "For investigation use only. Automatic segmentation of organs at risk in radiation therapy planning. Not approved for clinical use.",
+        "Automatic segmentation of organs at risk and GTV in radiation therapy planning on CT and MRI. CE-cleared scope per vendor booth communication at ESTRO 2026; pending EUDAMED / press-release verification. All AI-generated contours require review by a qualified radiation oncologist prior to clinical use.",
     },
     market: {
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
@@ -190,6 +192,6 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2024-03-05",
     lastRevised: "2026-05-20",
     source:
-      "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts. Note: Abdomen structures require source verification.",
+      "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, and vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature. Note: Abdomen structures require source verification; CE clearance details pending verification against EUDAMED listing or vendor press release.",
   },
 ];
