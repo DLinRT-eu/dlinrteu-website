@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { ALL_PRODUCTS } from "@/data";
 
-export type AssignmentAlgorithm = 'balanced' | 'random' | 'expertise-first';
+export type AssignmentAlgorithm = 'balanced' | 'random' | 'expertise-first' | 'manual';
 
 // Type for RPC responses
 export interface RPCResponse {
@@ -753,4 +753,20 @@ export async function updateRoundStatus(roundId: string, status: string) {
     .eq('id', roundId);
 
   if (error) throw error;
+}
+
+// Update round deadline (and optionally cascade to all product assignments)
+export async function updateRoundDeadlineAdmin(
+  roundId: string,
+  deadline: string,
+  propagate: boolean = true
+): Promise<RPCResponse> {
+  const { data, error } = await supabase.rpc('update_round_deadline_admin', {
+    p_round_id: roundId,
+    p_deadline: deadline,
+    p_propagate: propagate,
+  });
+
+  if (error) throw error;
+  return data as RPCResponse;
 }
