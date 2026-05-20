@@ -1,42 +1,56 @@
-# Cookie Security Audit
+## Audit result
 
-## Finding: cookies readable in JS is expected here, not a vulnerability
+The site already uses a three-axis model (E0–E3, I0–I5, R0–R5) that **matches the proposal in spirit**. The proposal calls its third axis **Z** ("Implementation Readiness, higher = better") — semantically the same direction as our `R` axis (higher = more adoption-ready). However several **definitions and labels drift** from what the document proposes, and two guardrail tiers (E(-1), I(-1)) are missing. Author names from the document are **not present anywhere on the site** — nothing to remove.
 
-The cookies set by the site are intentionally JS-readable. They cannot be made `HttpOnly` from the browser — that flag can only be set by a server in a `Set-Cookie` response header, and this app writes cookies from the client via `document.cookie`.
+### Concrete mismatches found
 
-### Inventory of cookies set by the app
-
-| Cookie | Set by | Purpose | Sensitive? |
+| Axis | Site today | Proposal v1.1 | Action |
 |---|---|---|---|
-| `dlinrt-cookie-consent` | `src/utils/cookieUtils.ts` | GDPR consent record | No |
-| `dlinrt-visitor-id` | analytics tracker | Anonymous dedup of unique visitors | No (random UUID, no PII) |
-| `sidebar:state` | `src/components/ui/sidebar.tsx` | UI preference | No |
-| `dlinrt-session-id` | analytics | Stored in `sessionStorage`, not a cookie | n/a |
+| E3 | "Systematic Evidence" – SR / meta-analysis / RCT only | "Prospective or comparative implementation evidence / decision-grade synthesis" – also includes prospective, pragmatic, comparative real-world studies | Broaden description + criteria |
+| E2 | "Validated Evidence" – multi-center, prospective, external validation | "External, independent or multicenter validation" – emphasises independence + TRIPOD+AI/PROBAST+AI | Add independence + reporting standards |
+| E1 | "Preliminary Evidence" – sample < 100, retrospective | "Exploratory or single-center technical validation" – retrospective, phantom, in-silico, pre-clinical, single-center | Reword to include phantom / in-silico / pre-clinical |
+| E0 | "No Peer-Reviewed Evidence" | "Descriptive only / no peer-reviewed evidence" | Minor tightening |
+| I1 | "Technical Performance" – examples skewed to QA dashboards | "Technical, analytical or geometric validation" – DSC, Hausdorff, sensitivity/specificity, reader-study accuracy | Re-anchor on geometric / analytical metrics; keep QA dashboards as a secondary example |
+| I4 | "Outcome" – patient outcomes only | "Patient, service or resource outcomes" – also service throughput, waiting times, cost | Add service / resource outcome examples |
+| I5 | "Societal" – cost-effectiveness focus | "System-level or societal value" – equity, workforce sustainability, regional/national scale | Broaden |
+| R (Z) axis labels | Friendly labels ("Pilot-ready", "Conditionally ready"…) | "Minimal / Basic / Enhanced / High / Mature implementation readiness" | Adopt readiness-oriented labels + descriptions; keep direction (higher = better) |
+| Guardrails | none | E(-1) and I(-1) "Unassigned / insufficient documentation" | Add as optional tiers, used by reviewers to block scoring when documentation is too thin |
 
-### Auth tokens are NOT in cookies
+### Decision needed (default if no input)
 
-Supabase auth (`src/integrations/supabase/client.ts`) uses `localStorage` with `storageKey: 'dlinrt-auth-token'`. So there is no session/JWT cookie that an XSS payload could steal via `document.cookie` — the real session token sits in localStorage and is equally JS-readable by design (Supabase JS SDK requires it).
+1. **Rename R → Z**? The proposal uses **Z**. Default: **keep `R`** to avoid a churn-wide rename across products, exports, FHIR, HTA, schemaOrg, model cards, dashboards. Re-label in copy as "Implementation Readiness (R, higher = better)" so wording matches the proposal's intent.
+2. **Add E(-1) / I(-1)** as optional reviewer-only "unassigned" sentinels? Default: **yes**, but kept out of the public matrix plots (only shown as an info banner: "Documentation insufficient for scoring").
+3. **Attribution**: Reference the v1.1 proposal generically as "DLinRT.eu internal methodology proposal v1.1 (2026)" — **no personal names**.
 
-The banner and analytics dedup logic both need to read these cookies from JS on every page load, so `HttpOnly` would break them even if it were settable.
+## Plan
 
-### Current hardening already in place
+### 1. Update level definitions (`src/data/evidence-impact-levels.ts`)
+- Rewrite `name`, `description`, `criteria` / `rtExamples` / `readinessConsequence` for each level to match v1.1 wording.
+- Add `unassigned: true` sentinels `E(-1)` and `I(-1)` (new optional codes `"E-1"`, `"I-1"`) with a guardrail flag; excluded from scatter/matrix plots.
+- Update `READINESS_DESCRIPTORS` thresholds so the composite signal matches the v1.1 narrative (Z0 → blocked, Z1 → pilot-only, Z2 → conditional, Z3 → deploy-with-monitoring iff E≥2 & I≥2, Z4 → deploy-with-monitoring or adoption-grade, Z5 → adoption-grade iff E≥2 & I≥2).
+- Add reference entry for the proposal **without author names**.
 
-`cookieUtils.ts` sets `SameSite=Strict` and `Secure` (in production) on every cookie it writes, plus signed CSP headers in `public/_headers`. That is the correct mitigation set for client-written cookies.
+### 2. Sync UI copy / plots
+- `src/pages/EvidenceImpactGuide.tsx`: hero text, "Why three axes" panel, per-axis cards, worked-example sidebar.
+- `src/components/resources/EvidenceLevelTable.tsx`: pulls from the data file – auto-updates; verify column labels.
+- `src/components/resources/EvidenceImpactMatrix3D.tsx` and `EvidenceImpactMatrix.tsx`: axis legends, tooltip strings.
+- `src/components/dashboard/EvidenceImpactScatterChart.tsx`: tooltip + legend wording.
+- `src/components/product/EvidenceImpactBadges.tsx`: tooltip blurbs (driven by data file – verify).
+- `src/components/product/EvidenceLimitationsDetails.tsx`: any hard-coded label.
+- `src/pages/ResourcesCompliance.tsx`: intro paragraph for the evidence section.
 
-## Gaps worth fixing (small)
+### 3. Keep downstream exports consistent
+- `src/utils/htaExport/htaExporter.ts`, `src/utils/exportProducts.ts`, `src/utils/comparison/comparisonExporter.ts`, `src/utils/fhir/transformers/deviceDefinition.ts`, `src/utils/schemaOrg/medicalDeviceSchema.ts`, `src/utils/modelCard/aidrtMapping.ts`: pick up new labels via the data module; only string template tweaks where labels are hard-coded.
 
-1. **`sidebar:state` cookie is not hardened.** `src/components/ui/sidebar.tsx:85` writes it without `Secure` or `SameSite`. Low risk (UI preference) but trivial to harden — add `secure; samesite=lax`.
-2. **No documented threat model for cookies.** Add a short comment in `cookieUtils.ts` (already partially there) and one line in `SECURITY.md` so future reviewers don't re-flag this.
+### 4. Memory + docs
+- Update `mem://features/evidence-impact-matrix-dashboard` and `mem://data-quality/evidence-classification-logic` to record the v1.1 alignment.
+- Add a short note in `docs/review/GUIDE.md` pointing reviewers to the new wording and the E(-1)/I(-1) guardrails.
 
-## Things NOT to do
+### 5. No data changes to products
+Existing product `evidenceRigor` / `clinicalImpact` / `adoptionReadiness` codes remain valid (the level codes are unchanged). Only labels, descriptions, and the composite-signal mapping change.
 
-- Do not try to set `HttpOnly` from JS — silently ignored by browsers.
-- Do not move the Supabase auth token into a cookie to "fix" this. Switching Supabase auth to cookie storage requires SSR/edge middleware this app doesn't have, and would introduce CSRF surface that doesn't currently exist.
-- Do not remove the analytics/consent cookies — they are required for the consent flow itself.
+### Out of scope
+- Renaming the `adoptionReadiness` field to `implementationReadiness` across the schema and all product files (large, low value — handled by copy alone).
+- Re-scoring any individual product.
 
-## Proposed change set (if you approve)
-
-- `src/components/ui/sidebar.tsx`: append `; secure; samesite=lax` to the sidebar cookie write.
-- `SECURITY.md`: add a 3-line "Cookie threat model" subsection stating that no auth/PII is stored in cookies, all client cookies use SameSite=Strict+Secure, and HttpOnly is N/A for client-written cookies.
-
-No data-model, RLS, or auth changes. No UX change.
+Please confirm the three decisions above (or accept defaults) and I will implement.
