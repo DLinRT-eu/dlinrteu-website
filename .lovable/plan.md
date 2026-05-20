@@ -1,61 +1,89 @@
-# Admin-managed financial entries
+## Part 1 — Revise United Imaging in `src/data/news/estro-2026-announcements.ts`
 
-Today, financial data lives in static TypeScript files (`src/data/financials/2025.ts`, `2026.ts`) and is rendered on `/transparency`. Admins cannot add or remove entries without a code change. This plan adds a small admin UI backed by Supabase so admins can manage income and expenses directly.
+The current "United Imaging" pre-congress section (lines 40–44) states that the *only* AI/DL-specific component disclosed is the uCT 610 Sim Deep Learning Full-FOV reconstruction, and that other portfolio items "do not currently isolate an AI/DL component."
 
-## What admins will get
+This is now inconsistent with the catalogue, which already includes three United Imaging entries with AI/DL components:
 
-A new page **/admin/financials** (linked from the admin overview) with two tabs: **Expenses** and **Income**.
+- `united-urt-auto-contouring` — Auto-Contouring, CE-marked (component of uRT-linac 506c)
+- `united-urt-auto-planning` — Treatment Planning + GPU Monte Carlo, CE-marked (component of uRT-linac 506c)
+- `united-uct610-sim-dl-recon-pipeline` — pipeline (pre-market)
+- Existing `united-ucs-ai` (CBCT enhancement, CE) already in catalogue from earlier
 
-Each tab shows a table of entries with:
-- Year filter (defaults to current year)
-- "Add entry" button opening a dialog
-- Inline delete (trash icon) with confirmation
-- Inline edit (pencil) reopening the same dialog
+### Edits
 
-**Expense dialog fields**: date, category (dropdown from existing `ExpenseCategory` union), description, amount (EUR), notes (optional).
+Rewrite the United Imaging pre-congress section to:
 
-**Income dialog fields**: date, source, gross (EUR), net (EUR), notes (optional).
+1. Keep the booth + microsite reference and the "AI-driven software ecosystem" framing.
+2. List the AI/DL components now tracked in the catalogue:
+   - **uRT Auto-Contouring** (CE, integrated in uRT-linac 506c; structure list unavailable)
+   - **uRT Auto-Planning** + GPU Monte Carlo dose calculation (CE, powering the ~15-min uCT-ART online adaptive workflow)
+   - **uCS-AI** (existing CBCT enhancement entry, CE)
+   - **uCT 610 Sim — Deep Learning Full-FOV Reconstruction** (pipeline, "under development; not for sale or clinical use")
+3. Keep the neutrality caveats: integrated components of the system-level CE marking, no model card / training-data / standalone intended-use documents published; performance claims are vendor-reported and not independently validated.
+4. Keep the hardware-only items (uRT-linac 506c, uLinac HalosTx, uMR Omega, uMI Panorama) explicitly excluded per inclusion criteria.
+5. Update the "Post-ESTRO catalogue updates" bullet for United Imaging to also reference the auto-contouring and auto-planning entries (already present today, just acknowledged).
 
-Validation via `react-hook-form` + `zod`. Toasts on success/error via `useToast`.
+### Revision-date check
 
-## What the public sees
+All four United Imaging product files carry `lastRevised: "2026-05-19"` (or `2026-03-08` for `uCS-AI`). Using `src/utils/revisionUtils.ts` (`needsRevision` = >180 days):
 
-`/transparency` keeps the exact same layout. The page will merge:
-1. Static entries from `src/data/financials/*` (kept as historical seed).
-2. DB entries from the new tables.
+- `united-urt-auto-contouring` — fresh, no revision needed
+- `united-urt-auto-planning` — fresh, no revision needed
+- `united-uct610-sim-dl-recon-pipeline` — fresh, no revision needed
+- `united-ucs-ai` — ~73 days since last revision → not yet due, but flag for the next sweep
 
-Merging happens in a new hook `useFinancialYears()` that returns the same `FinancialYear[]` shape as `FINANCIAL_YEARS` today, so `summarizeYear`, charts, and tables continue to work unchanged. Entries are grouped by year, sorted by date.
+No `lastRevised` bumps are needed for the news edit (per the minimal-intervention policy).
 
-To avoid double-counting once an entry is migrated to the DB, the static 2025/2026 arrays stay as-is for now; new entries go to the DB. If the admin wants to remove a static entry, the plan is to first move it to the DB, then delete it from the static file (a follow-up task — not part of this change).
+---
 
-## Technical details
+## Part 2 — Full re-review of all 107 products against the updated dual-axis rubric
 
-**New tables** (migration):
-- `financial_expenses`: `id uuid pk`, `entry_date date not null`, `category text not null`, `description text not null`, `amount numeric(12,2) not null`, `currency text default 'EUR'`, `notes text`, `created_by uuid`, `created_at timestamptz default now()`, `updated_at timestamptz default now()`.
-- `financial_income`: `id uuid pk`, `entry_date date not null`, `source text not null`, `gross numeric(12,2) not null`, `net numeric(12,2) not null`, `currency text default 'EUR'`, `notes text`, `created_by uuid`, `created_at timestamptz default now()`, `updated_at timestamptz default now()`.
+The dual-axis rubric in `src/data/evidence-impact-levels.ts` (Evidence Rigor E0–E3, Clinical Impact I0–I5, Adoption Readiness R0–R4, plus study-quality sub-attributes: `vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`) is now the canonical scoring system. Many existing entries were scored against an earlier rubric and need a structured pass.
 
-**RLS**:
-- `SELECT`: public (anon + authenticated) — financial transparency is already public on the site.
-- `INSERT/UPDATE/DELETE`: `has_role(auth.uid(), 'admin'::app_role)` only.
-- Explicit `Deny anonymous` for write commands is implicit (no policy = denied).
+### Scope
 
-**New files**:
-- `supabase/migrations/<ts>_financial_entries.sql` — tables + RLS + `updated_at` trigger.
-- `src/hooks/useFinancialEntries.ts` — fetch + mutate DB rows.
-- `src/hooks/useFinancialYears.ts` — merges static + DB rows into `FinancialYear[]`.
-- `src/pages/admin/FinancialsAdmin.tsx` — tabs, tables, dialogs.
-- `src/components/admin/financials/ExpenseFormDialog.tsx`
-- `src/components/admin/financials/IncomeFormDialog.tsx`
+All 107 products under `src/data/products/<category>/`, excluding `archived/` and `examples/`. Pipeline entries stay E0/I0/R0 unless new evidence appears.
 
-**Edited files**:
-- `src/pages/Transparency.tsx` — swap `FINANCIAL_YEARS` import for `useFinancialYears()` hook output.
-- `src/App.tsx` — register `/admin/financials` route under the admin guard.
-- `src/pages/admin/AdminOverview.tsx` — add a card/link to the new page.
+### Methodology (apply per product)
 
-No changes to `src/data/financials/*` files, no changes to chart/table presentation, no auth or RLS changes outside the two new tables.
+1. Re-read `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes`, `clinicalEvidence`, `evidence[]`, `keyPapers[]`.
+2. Re-score against the current rubric:
+   - **Evidence Rigor (E0–E3)** using `EVIDENCE_RIGOR_LEVELS` criteria.
+   - **Clinical Impact (I0–I5)** using `CLINICAL_IMPACT_LEVELS` (technical → workflow → clinical-process → patient-outcome → health-system).
+   - **Adoption Readiness (R0–R4)** derived from (E, I, regulatory status).
+3. Fill in the study-quality sub-attributes (`vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`) wherever evidence exists; these power the Evidence Impact Matrix dashboard.
+4. Update `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes` with the current rationale (1–3 sentences each, citing the strongest paper if any).
+5. Bump `lastRevised` (and `lastUpdated` only if the underlying content actually changed) per `docs/review/GUIDE.md`.
+6. Where peer-reviewed evidence is missing, do a targeted PubMed / vendor-site check (timeboxed) before defaulting to E0; record the search date in the notes.
 
-## Out of scope
+### Batching strategy
 
-- Editing the static 2025/2026 entries from the UI (kept read-only for now).
-- CSV import/export of entries.
-- Multi-currency support (locked to EUR, matching current behaviour).
+Group by category to amortise reviewer context-switching:
+
+```text
+Wave 1 (largest, most published):     Auto-Contouring, Treatment Planning
+Wave 2 (high-impact AI literature):   Image Synthesis, Image Enhancement, Reconstruction
+Wave 3 (workflow + monitoring):       Registration, Tracking, Performance Monitor, Platform
+Wave 4 (smaller, specialised):        Clinical Prediction, Pipeline (verify still pre-market)
+```
+
+Each wave ends with a short summary entry in `news/` (or as part of a quarterly changelog) describing the scoring deltas — no per-product news posts.
+
+### Tooling / supporting work
+
+- Extend `scripts/update-revisions.mjs` (or add a new `scripts/audit-evidence-scores.mjs`) to print, per product: current `(E, I, R)`, days since `lastRevised`, presence of `keyPapers`, and missing sub-attributes. This gives a worklist.
+- Add a one-off CSV export of the worklist (e.g. `/tmp/evidence-audit.csv`) so reviewers can claim products in `ReviewAssignment` admin UI without re-deriving the list.
+- Reuse the existing reviewer-round workflow (`/admin/review-rounds`) — create one round per wave, deadline 4 weeks out, assigned to the active reviewer pool.
+
+### Out of scope for this plan
+
+- Editing the rubric definitions themselves (`src/data/evidence-impact-levels.ts`).
+- Re-running the matrix dashboard logic — it already reads the new fields.
+- Changes to UI components.
+
+### Deliverables
+
+- News edit committed (Part 1).
+- Audit script + CSV worklist.
+- Four review rounds created in the admin UI, one per wave, with the worklist split across reviewers.
+- A short "Evidence rubric re-review — Wave N complete" changelog entry after each wave closes.
