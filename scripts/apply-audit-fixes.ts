@@ -134,15 +134,15 @@ for (const file of walk(ROOT)) {
 
   // structuresUnavailable
   for (const id of ids) {
-    if (STRUCT_UNAVAILABLE_IDS.has(id) && !/structuresUnavailable\s*:/.test(src)) {
-      // Insert structuresUnavailable: true near supportedStructures or before features
-      if (/supportedStructures\s*:\s*\[\s*\]/.test(src)) {
-        src = src.replace(/(supportedStructures\s*:\s*\[\s*\],?)/, `$1\n    structuresUnavailable: true,`);
-      } else if (/features\s*:/.test(src)) {
-        src = src.replace(/(\s*)(features\s*:)/, `$1structuresUnavailable: true,$1$2`);
-      }
-      structFixes++;
+    if (!STRUCT_UNAVAILABLE_IDS.has(id)) continue;
+    if (/structuresUnavailable\s*:/.test(src)) continue;
+    const before = src;
+    if (/supportedStructures\s*:\s*\[\s*\]/.test(src)) {
+      src = src.replace(/(supportedStructures\s*:\s*\[\s*\],?)/, `$1\n    structuresUnavailable: true,`);
+    } else if (/category\s*:\s*"Auto-Contouring"\s*,/.test(src)) {
+      src = src.replace(/(category\s*:\s*"Auto-Contouring"\s*,)/, `$1\n    structuresUnavailable: true,`);
     }
+    if (src !== before) structFixes++;
   }
 
   // monitorsAIProducts
