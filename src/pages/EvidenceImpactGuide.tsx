@@ -240,15 +240,15 @@ const EvidenceImpactGuide = () => {
                 The user-facing badge is computed from all three axes:
               </p>
               <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
-                <li><strong>Adoption-grade</strong> — R5 with E≥E2 and I≥I2.</li>
-                <li><strong>Deploy with monitoring</strong> — R4, or R3 with E≥E2 and I≥I2.</li>
-                <li><strong>Conditional</strong> — R3 with weaker E or I.</li>
-                <li><strong>Pilot only</strong> — R2 (structured pilot or sandbox).</li>
-                <li><strong>Not adoption-ready</strong> — R1.</li>
-                <li><strong>Blocked</strong> — R0 (horizon scanning only).</li>
+                <li><strong>Adoption-grade</strong> — R4 or R5 with E≥E2 and I≥I2.</li>
+                <li><strong>Deploy with monitoring</strong> — R4/R5 with weaker E or I, or R3 with E≥E2 and I≥I2.</li>
+                <li><strong>Conditional</strong> — R2, or R3 with weaker E or I (conditional pilot or evidence-generation deployment).</li>
+                <li><strong>Pilot only</strong> — R1 (tightly controlled, exploratory use).</li>
+                <li><strong>Blocked</strong> — R0 (horizon scanning only; cannot support adoption-grade use regardless of E and I).</li>
+                <li><strong>Not assessed</strong> — any axis unassigned (insufficient documentation; guardrail equivalent to E(-1) / I(-1) / R(-1)).</li>
               </ul>
               <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
-                Internally proposed DLinRT extension; readiness consequences derived from the DLinRT.eu Evidence Matrix proposal.
+                Aligned with the DLinRT.eu Evidence Matrix proposal v1.1 (2026).
               </p>
             </div>
           </CardContent>

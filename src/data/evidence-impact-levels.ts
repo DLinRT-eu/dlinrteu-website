@@ -736,7 +736,9 @@ export const METHODOLOGY_REFERENCES: MethodologyReferenceGroup[] = [
     references: [
       {
         citation:
-          "Lula U. DLinRT.eu HTA Support Platform Concept Paper v0.1: Transforming DLinRT.eu into an International HTA Support Platform for Radiotherapy AI. Unpublished internal concept paper; 2026.",
+          "DLinRT.eu. Evidence Matrix proposal v1.1: tri-axial E/I/R appraisal framework for radiotherapy AI. Internal methodology document; 2026.",
+        notes:
+          "Source for the E0–E3 / I0–I5 / R0–R5 level definitions, level-assignment rules and composite readiness signal used on the public site.",
       },
       {
         citation:
