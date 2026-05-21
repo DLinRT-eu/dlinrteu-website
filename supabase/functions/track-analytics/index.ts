@@ -103,14 +103,19 @@ Deno.serve(async (req) => {
     return jsonResponse({ error: "Invalid JSON" }, 400, corsHeaders);
   }
 
+  // Shared input validators
+  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  const isNonNegInt = (v: unknown): v is number =>
+    typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 1_000_000_000;
+
   try {
     if (body.action === "record_unique_visitor") {
       const { date, visitorId } = body;
       if (!date || !visitorId || typeof date !== 'string' || typeof visitorId !== 'string') {
         return jsonResponse({ error: "Missing or invalid fields" }, 400, corsHeaders);
       }
-      if (date.length > 50 || visitorId.length > 200) { // Reasonable limits
-        return jsonResponse({ error: "Field values too long" }, 400, corsHeaders);
+      if (!DATE_RE.test(date) || visitorId.length > 200 || visitorId.length < 1) {
+        return jsonResponse({ error: "Invalid field values" }, 400, corsHeaders);
       }
 
       // Hash visitor ID for privacy
@@ -144,6 +149,28 @@ Deno.serve(async (req) => {
       const { date, data } = body;
       if (!date || !data || typeof date !== 'string' || typeof data !== 'object') {
         return jsonResponse({ error: "Missing or invalid fields" }, 400, corsHeaders);
+      }
+      if (!DATE_RE.test(date)) {
+        return jsonResponse({ error: "Invalid date format" }, 400, corsHeaders);
+      }
+      if (!isNonNegInt((data as any).totalVisits) || !isNonNegInt((data as any).uniqueVisitors)) {
+        return jsonResponse({ error: "Invalid visit counts" }, 400, corsHeaders);
+      }
+      const pageVisits = (data as any).pageVisits;
+      if (pageVisits && typeof pageVisits === 'object') {
+        const entries = Object.entries(pageVisits);
+        if (entries.length > 5000) {
+          return jsonResponse({ error: "Too many page visit entries" }, 400, corsHeaders);
+        }
+        for (const [path, v] of entries) {
+          if (typeof path !== 'string' || path.length > 2048) {
+            return jsonResponse({ error: "Invalid page path" }, 400, corsHeaders);
+          }
+          const pv = v as any;
+          if (!pv || !isNonNegInt(pv.count) || !isNonNegInt(pv.totalDuration)) {
+            return jsonResponse({ error: "Invalid page visit values" }, 400, corsHeaders);
+          }
+        }
       }
 
       const { error: dailyErr } = await supabase
