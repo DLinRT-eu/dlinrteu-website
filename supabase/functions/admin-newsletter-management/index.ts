@@ -85,7 +85,14 @@ serve(async (req) => {
       const offset = (page - 1) * limit;
 
       let query = supabaseAdmin.from('newsletter_subscribers').select('*', { count: 'exact' });
-      if (search) query = query.or(`email.ilike.%${search}%,first_name.ilike.%${search}%,last_name.ilike.%${search}%`);
+      if (search) {
+        // Sanitize: only allow alphanumeric, space, @, _, -, and basic accented chars.
+        // Strips PostgREST filter syntax characters (, . ( ) : * etc.) to prevent filter injection.
+        const safeSearch = String(search).replace(/[^a-zA-Z0-9 @_\-\u00C0-\u017F]/g, '').slice(0, 100);
+        if (safeSearch) {
+          query = query.or(`email.ilike.%${safeSearch}%,first_name.ilike.%${safeSearch}%,last_name.ilike.%${safeSearch}%`);
+        }
+      }
       if (status === 'active') query = query.is('unsubscribed_at', null);
       else if (status === 'unsubscribed') query = query.not('unsubscribed_at', 'is', null);
       query = query.order('created_at', { ascending: false }).range(offset, offset + limit - 1);
