@@ -314,7 +314,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.phro.2024.100654"
       }
     ],
-    lastRevised: "2026-05-20",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822, K202700)"
+    lastRevised: "2026-05-22",
+    source: "Therapanacea official website (therapanacea.eu/our-products/annotate/, therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822, K202700). Structure list verified against vendor public enumeration on 2026-05-22 (191 entries vs vendor headline '200+ OARs and lymph nodes'); residual delta is naming aliasing (Encephalon=Brain, Hypophyse=Pituitary, Medullar canal=Spinal Canal, Mouth=Oral Cavity)."
   }
 ];
