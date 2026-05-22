@@ -252,13 +252,14 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-22",
     source: "FDA 510(k) database (K250780, K221706, K191928), company official sources",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",
       "Lower performance for pediatric patients",
-      "Requires manual verification and editing in complex anatomical regions"
+      "Requires manual verification and editing in complex anatomical regions",
+      "Vendor advertises 300+ OARs and 1200+ tumor target templates; only the subset publicly documented and cited in 510(k) submissions (K250780, K221706, K191928) is enumerated here. The full atlas is not published on the vendor website."
     ]
   }
 ];

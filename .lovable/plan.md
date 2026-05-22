@@ -1,34 +1,45 @@
 ## Goal
-Audit the `supportedStructures` list of every auto-contouring product against what the vendor publicly advertises on their website (and, where useful, FDA 510(k) summaries / CE documentation). Report mismatches per company — missing structures, extra/unsupported structures, naming drift from DICOM-RT / TG-263 nomenclature, and region-grouping inconsistencies.
+Revise `supportedStructures` for the three vendors flagged as under-listed: **Therapanacea (Annotate)**, **Manteia (AccuContour)**, **Wisdom Tech (DeepContour)**.
 
-No product `.ts` files will be edited in this pass — the deliverable is a report, per the Minimal Intervention policy and the product-audit-swarm skill (separate, user-confirmed edit pass afterwards).
+## Findings on source availability
 
-## Scope
-All active products under `src/data/products/auto-contouring/` (~30 vendors), excluding archived. Each product's `supportedStructures` array (and `*-structures.ts` sidecar where applicable: GE, Limbus, MVision, RaySearch) is compared to the vendor's public source of truth.
+| Vendor | Public enumerated list? | Action plan |
+|---|---|---|
+| **Therapanacea** | ✅ Yes — therapanacea.eu/our-products/annotate enumerates Head & Neck, Female Thorax/Breast, Male Thorax, SBRT Lung, Pelvis Male, Pelvis Female, plus heart sub-structures, with explicit OARs and LNs and guideline references | Full rewrite of `supportedStructures` from vendor page |
+| **Manteia** | ❌ No — site only states "300+ OARs, 1200+ targets" with no enumerated list. FDA 510(k) summaries (e.g. K223539 AccuContour) typically list a sample only | Add `structuresUnavailable: true` and trim list to a curated "representative" subset, OR keep current 142 with a note. Recommended: keep current list, add a comment + `clinicalEvidenceLimitations`-style note that the full atlas (300 OARs / 1200 targets per vendor) is not publicly enumerated |
+| **Wisdom Tech** | ❌ No — site only says "120+ OARs and 16+ tumor targets". FDA K232928 summary may help but typically does not enumerate. | Same approach: keep current 78, add a documented note that vendor advertises 120+ but only the K232928-validated subset is publicly known |
 
-## Method (per vendor)
-1. Load the in-repo structure list + `productUrl` / `website` / `source` fields.
-2. Fetch the vendor's structure list from: product page, datasheet/PDF, FDA 510(k) summary (when linked), CE technical brief.
-   - Tool: `code--fetch_website` for HTML pages; `websearch--web_search` for datasheets/510(k) PDFs when the product page lacks a list.
-3. Normalize both lists (case, separators, L/R suffix, region prefix) and diff:
-   - **Missing in repo**: structure advertised by vendor but absent here.
-   - **Extra in repo**: structure listed here but not found on vendor source (possible stale data or unverifiable).
-   - **Naming drift**: present in both but not in `Region: Structure Name` / TG-263 form.
-   - **Region mismatch**: vendor groups differently (e.g. Thorax vs H&N).
-4. Skip vendors where the website does not publish a structure list (mark "unverifiable — vendor does not publish list"). Several already carry `structuresUnavailable: true` (e.g. United Imaging) — those are confirmed unverifiable, no diff needed.
+## Implementation
 
-## Deliverables
-Written to `/mnt/documents/`:
-- `structure-list-audit-2026-05-22.md` — one section per vendor with: Source URL consulted, counts (repo vs vendor), Missing list, Extra list, Naming/region notes, Confidence (high/medium/low based on source quality).
-- `structure-list-audit-2026-05-22.csv` — one row per finding (`product_id, finding_type, structure, vendor_source_url, severity`).
-- Summary table at top: vendors with discrepancies vs vendors fully aligned vs unverifiable.
+### 1. Therapanacea — full rewrite (`src/data/products/auto-contouring/therapanacea.ts`)
+Replace `supportedStructures` with the vendor-enumerated list, normalised to the project's `Region: Structure Name` convention with `_L` / `_R` suffixes and AAPM TG-263-style naming where possible. Expected new count: ~190–210 structures across:
+- Head & Neck OARs + LNs (cervical lymph nodes IA–VIIB L/R, ~45 entries)
+- Female Thorax / Breast OARs + LNs (~45)
+- Male Thorax OARs (~35, dedup with female where shared)
+- Heart sub-structures (apical / anterior / inferior / lateral / septal LV, atria L/R, coronary arteries, ~15)
+- SBRT Lung OARs (~16)
+- Pelvis Male OARs + ROI (~18)
+- Pelvis Female OARs + LNs (~25, incl. gyneco LNs and CTVt/CTVn entries)
 
-Surfaced via `<presentation-artifact>` tags. No code changes.
+Update `source` to cite the vendor page directly, bump `lastRevised`, leave evidence scores untouched.
 
-## Caveats
-- Vendors frequently publish structure lists only in sales PDFs or under NDA. Where no public list exists, the entry is marked unverifiable rather than flagged as wrong.
-- Naming differences are reported as `info`-level only when the clinical meaning is identical (e.g. `Parotid_L` vs `Left Parotid`); flagged as `warn` when they break the project's `Region: Structure Name` convention.
-- FDA 510(k) summaries are treated as authoritative when more recent than the vendor page.
-- This audit will take multiple fetch/search rounds; expect ~3–5 minutes of tool calls.
+### 2. Manteia (`manteia.ts`)
+- Keep existing 142-entry list (it's not wrong, just incomplete).
+- Append a short note in `limitations[]`: "Vendor advertises 300+ OARs and 1200+ targets; only the publicly documented and 510(k)-cited subset is enumerated here."
+- Bump `lastRevised`.
 
-Confirm and I'll run it. If you want a narrower scope (e.g. only CE-cleared vendors, or only the top 10 most-used), say so before approval.
+### 3. Wisdom Tech (`wisdom-tech.ts`)
+- Same pattern as Manteia: keep current 78 entries, add limitation note: "Vendor advertises 120+ OARs and 16+ tumor targets; only structures publicly documented or covered by FDA 510(k) K232928 are enumerated here."
+- Bump `lastRevised`.
+
+## What this changes / does not change
+
+- No regulatory, evidence, or scoring fields touched.
+- No UI changes — `supportedStructures` rendering already handles lists of arbitrary length.
+- Therapanacea structure count rises from 111 → ~200, closing the discrepancy with their public site.
+- Manteia / Wisdom remain visibly under-listed, with a documented reason on the product page (limitation copy), removing the silent gap.
+
+## Out of scope
+- The over-listed vendors (Limbus, MVision, Carina, Coreline, Philips) — different problem (dedupe/scope) and not requested in this turn.
+
+Confirm and I'll execute. If you'd rather wait on Manteia/Wisdom until we have a direct vendor-supplied list (e.g. via the certification outreach flow), say so and I'll only revise Therapanacea.

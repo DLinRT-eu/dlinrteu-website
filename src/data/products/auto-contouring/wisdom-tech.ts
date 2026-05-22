@@ -152,7 +152,10 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2024-04-17",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
-    source: "Company official sources - NMPA (China) certified"
+    lastRevised: "2026-05-22",
+    source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
+    limitations: [
+      "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."
+    ]
   }
 ];
