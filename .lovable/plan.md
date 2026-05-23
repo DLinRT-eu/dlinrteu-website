@@ -1,45 +1,56 @@
 ## Goal
-Revise `supportedStructures` for the three vendors flagged as under-listed: **Therapanacea (Annotate)**, **Manteia (AccuContour)**, **Wisdom Tech (DeepContour)**.
 
-## Findings on source availability
+Refresh `lastRevised` to `2026-05-23` for products in low-risk categories whose date is older than 50 days, after a quick sanity check that nothing material has changed.
 
-| Vendor | Public enumerated list? | Action plan |
-|---|---|---|
-| **Therapanacea** | ✅ Yes — therapanacea.eu/our-products/annotate enumerates Head & Neck, Female Thorax/Breast, Male Thorax, SBRT Lung, Pelvis Male, Pelvis Female, plus heart sub-structures, with explicit OARs and LNs and guideline references | Full rewrite of `supportedStructures` from vendor page |
-| **Manteia** | ❌ No — site only states "300+ OARs, 1200+ targets" with no enumerated list. FDA 510(k) summaries (e.g. K223539 AccuContour) typically list a sample only | Add `structuresUnavailable: true` and trim list to a curated "representative" subset, OR keep current 142 with a note. Recommended: keep current list, add a comment + `clinicalEvidenceLimitations`-style note that the full atlas (300 OARs / 1200 targets per vendor) is not publicly enumerated |
-| **Wisdom Tech** | ❌ No — site only says "120+ OARs and 16+ tumor targets". FDA K232928 summary may help but typically does not enumerate. | Same approach: keep current 78, add a documented note that vendor advertises 120+ but only the K232928-validated subset is publicly known |
+## Categories in scope (low-risk — bump)
 
-## Implementation
+These categories rarely change between releases (regulatory cleared, no structure-list churn, no recent vendor news):
 
-### 1. Therapanacea — full rewrite (`src/data/products/auto-contouring/therapanacea.ts`)
-Replace `supportedStructures` with the vendor-enumerated list, normalised to the project's `Region: Structure Name` convention with `_L` / `_R` suffixes and AAPM TG-263-style naming where possible. Expected new count: ~190–210 structures across:
-- Head & Neck OARs + LNs (cervical lymph nodes IA–VIIB L/R, ~45 entries)
-- Female Thorax / Breast OARs + LNs (~45)
-- Male Thorax OARs (~35, dedup with female where shared)
-- Heart sub-structures (apical / anterior / inferior / lateral / septal LV, atria L/R, coronary arteries, ~15)
-- SBRT Lung OARs (~16)
-- Pelvis Male OARs + ROI (~18)
-- Pelvis Female OARs + LNs (~25, incl. gyneco LNs and CTVt/CTVn entries)
+**image-enhancement** (3) — `src/data/products/image-enhancement/subtle-medical.ts`
+- `subtle-pet` (2026-03-08)
+- `aimify` (2026-03-08)
+- `subtle-hd` (2026-03-08)
 
-Update `source` to cite the vendor page directly, bump `lastRevised`, leave evidence scores untouched.
+**reconstruction** (3)
+- `canon-aice-mr` (2026-03-08) — `canon.ts`
+- `united-uaifi-umr` (2026-03-08) — `united-imaging.ts`
+- `united-hd-tof` (2026-03-08) — `united-imaging.ts`
 
-### 2. Manteia (`manteia.ts`)
-- Keep existing 142-entry list (it's not wrong, just incomplete).
-- Append a short note in `limitations[]`: "Vendor advertises 300+ OARs and 1200+ targets; only the publicly documented and 510(k)-cited subset is enumerated here."
-- Bump `lastRevised`.
+**pipeline** (5) — pre-market, no public changes since March
+- `medlever-assistant-pipeline`, `medlever-copilot-pipeline` — `medlever.ts`
+- `therapanacea-smartplan-pipeline`, `therapanacea-tumorbox-pipeline`, `therapanacea-brachybox-pipeline` — `therapanacea.ts`
 
-### 3. Wisdom Tech (`wisdom-tech.ts`)
-- Same pattern as Manteia: keep current 78 entries, add limitation note: "Vendor advertises 120+ OARs and 16+ tumor targets; only structures publicly documented or covered by FDA 510(k) K232928 are enumerated here."
-- Bump `lastRevised`.
+Total: **11 products** across 5 files.
 
-## What this changes / does not change
+## Categories out of scope (skip)
 
-- No regulatory, evidence, or scoring fields touched.
-- No UI changes — `supportedStructures` rendering already handles lists of arbitrary length.
-- Therapanacea structure count rises from 111 → ~200, closing the discrepancy with their public site.
-- Manteia / Wisdom remain visibly under-listed, with a documented reason on the product page (limitation copy), removing the silent gap.
+- **auto-contouring** (`taimedimg-deepmets`) — high-risk per recent structure-list audits; skip.
+- **archived** (11) — products no longer active; bumping `lastRevised` would be misleading.
+- **examples** (5) — docs/template files; should not be touched.
+
+## Per-product sanity check (before bumping)
+
+For each of the 11 products I'll quickly confirm in the file:
+1. `regulatory.ce` / `regulatory.fda` status looks current (no `pending` that should be cleared, no obviously stale clearance date).
+2. `productUrl` / `companyUrl` look intact.
+3. No `limitations[]` entry says "needs vendor confirmation".
+
+If any product fails the check, it's left unchanged and reported back instead of bumped.
+
+## Edits
+
+For each passing product, change only the single line:
+```ts
+lastRevised: "2026-03-08",   // → "2026-05-23"
+```
+No other field, no formatting changes, no companyRevisionDate touch (that's vendor-driven).
 
 ## Out of scope
-- The over-listed vendors (Limbus, MVision, Carina, Coreline, Philips) — different problem (dedupe/scope) and not requested in this turn.
 
-Confirm and I'll execute. If you'd rather wait on Manteia/Wisdom until we have a direct vendor-supplied list (e.g. via the certification outreach flow), say so and I'll only revise Therapanacea.
+- No DB writes to `product_revision_dates` (user picked file-only as the date source).
+- No content rewrites, no structure-list edits, no evidence re-scoring.
+- No changelog entry (this is maintenance hygiene, not a substantive update).
+
+## Deliverable
+
+Updated `lastRevised` in up to 5 files: `subtle-medical.ts`, `canon.ts`, `united-imaging.ts`, `medlever.ts`, `therapanacea.ts` (pipeline). Final reply summarises which products were bumped vs. flagged.
