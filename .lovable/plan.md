@@ -1,56 +1,37 @@
 ## Goal
 
-Refresh `lastRevised` to `2026-05-23` for products in low-risk categories whose date is older than 50 days, after a quick sanity check that nothing material has changed.
+Refresh `lastRevised` to `2026-05-23` for auto-contouring products whose date is older than 50 days, without touching `supportedStructures` or any other field.
 
-## Categories in scope (low-risk — bump)
+## In scope (3 products)
 
-These categories rarely change between releases (regulatory cleared, no structure-list churn, no recent vendor news):
+| File | Product (id at line) | Current `lastRevised` |
+|---|---|---|
+| `src/data/products/auto-contouring/brainlab.ts` | second product (line 274) | 2026-02-26 |
+| `src/data/products/auto-contouring/everfortune.ts` | second product (line 353) | 2026-02-23 |
+| `src/data/products/auto-contouring/taiwan-medical-imaging.ts` | sole product (line 92) | 2026-02-23 |
 
-**image-enhancement** (3) — `src/data/products/image-enhancement/subtle-medical.ts`
-- `subtle-pet` (2026-03-08)
-- `aimify` (2026-03-08)
-- `subtle-hd` (2026-03-08)
+The other `lastRevised` values in `brainlab.ts` and `everfortune.ts` are already `2026-05-20` and stay untouched.
 
-**reconstruction** (3)
-- `canon-aice-mr` (2026-03-08) — `canon.ts`
-- `united-uaifi-umr` (2026-03-08) — `united-imaging.ts`
-- `united-hd-tof` (2026-03-08) — `united-imaging.ts`
+## Sanity check (already done)
 
-**pipeline** (5) — pre-market, no public changes since March
-- `medlever-assistant-pipeline`, `medlever-copilot-pipeline` — `medlever.ts`
-- `therapanacea-smartplan-pipeline`, `therapanacea-tumorbox-pipeline`, `therapanacea-brachybox-pipeline` — `therapanacea.ts`
-
-Total: **11 products** across 5 files.
-
-## Categories out of scope (skip)
-
-- **auto-contouring** (`taimedimg-deepmets`) — high-risk per recent structure-list audits; skip.
-- **archived** (11) — products no longer active; bumping `lastRevised` would be misleading.
-- **examples** (5) — docs/template files; should not be touched.
-
-## Per-product sanity check (before bumping)
-
-For each of the 11 products I'll quickly confirm in the file:
-1. `regulatory.ce` / `regulatory.fda` status looks current (no `pending` that should be cleared, no obviously stale clearance date).
-2. `productUrl` / `companyUrl` look intact.
-3. No `limitations[]` entry says "needs vendor confirmation".
-
-If any product fails the check, it's left unchanged and reported back instead of bumped.
+For each of the 3 entries: regulatory CE/FDA cleared with clearance numbers, `productUrl`/`companyUrl` intact, no `pending` statuses or "needs vendor confirmation" markers.
 
 ## Edits
 
-For each passing product, change only the single line:
+Targeted line-level change only:
 ```ts
-lastRevised: "2026-03-08",   // → "2026-05-23"
+lastRevised: "2026-02-26"  →  "2026-05-23"   // brainlab.ts line 274
+lastRevised: "2026-02-23"  →  "2026-05-23"   // everfortune.ts line 353
+lastRevised: "2026-02-23"  →  "2026-05-23"   // taiwan-medical-imaging.ts line 92
 ```
-No other field, no formatting changes, no companyRevisionDate touch (that's vendor-driven).
 
-## Out of scope
+## Explicitly out of scope
 
-- No DB writes to `product_revision_dates` (user picked file-only as the date source).
-- No content rewrites, no structure-list edits, no evidence re-scoring.
-- No changelog entry (this is maintenance hygiene, not a substantive update).
+- `supportedStructures` arrays — not touched in any of the 3 files.
+- All other fields (regulatory, evidence, limitations, etc.).
+- `companyRevisionDate`, DB `product_revision_dates`, changelog entries.
+- Other auto-contouring files already at ≥ 2026-05-20.
 
 ## Deliverable
 
-Updated `lastRevised` in up to 5 files: `subtle-medical.ts`, `canon.ts`, `united-imaging.ts`, `medlever.ts`, `therapanacea.ts` (pipeline). Final reply summarises which products were bumped vs. flagged.
+3 files with a single-line `lastRevised` bump each; final reply confirms which were bumped.
