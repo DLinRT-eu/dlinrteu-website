@@ -3,6 +3,16 @@ import { CompanyDetails } from "@/types/company";
 
 export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   {
+    "id": "neuralrad",
+    "name": "NeuralRad",
+    "description": "Pre-market developer of AI-powered brain stereotactic radiosurgery tools, including automated metastasis detection, segmentation and multi-course tracking.",
+    "website": "https://www.neuralrad.com/",
+    "productIds": ["neuralrad-brain-pipeline"],
+    "category": "Auto-Contouring",
+    "logoUrl": "/placeholder.svg",
+    "primaryTask": "Auto-Contouring"
+  },
+  {
     "id": "ai-medical",
     "name": "AI Medical",
     "description": "Developers of AI-powered solutions for medical imaging and radiation oncology.",
