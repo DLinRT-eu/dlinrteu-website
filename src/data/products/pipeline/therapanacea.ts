@@ -37,7 +37,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     usesAI: true,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "Company website - listed as 'Coming Soon'"
   },
   {
@@ -76,7 +76,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     usesAI: true,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "Company website - listed as 'Coming Soon'"
   },
   {
@@ -115,7 +115,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     usesAI: true,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "Company website - listed as 'Coming Soon'"
   }
 ];

@@ -170,7 +170,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "FDA 510(k) database (K182336, K211964) and company website"
   },
   {
@@ -240,7 +240,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release"
   },
   {
@@ -310,7 +310,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-03-08",
+    lastRevised: "2026-05-23",
     source: "FDA 510(k) database (K243250) and company website"
   }
 ];
