@@ -350,7 +350,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-02-23",
+    lastRevised: "2026-05-23",
     guidelines: [
       {
         name: "AAPM TG-263",
