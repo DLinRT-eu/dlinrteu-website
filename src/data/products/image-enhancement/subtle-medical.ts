@@ -169,7 +169,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
-    supersededBy: { id: "subtle-hd-pet", name: "SubtleHD(PET)" },
+    supersededBy: "subtle-hd-pet",
     lastUpdated: "2026-05-27",
     lastRevised: "2026-05-27",
     source: "FDA 510(k) database (K182336, K211964) and company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
@@ -240,7 +240,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    priorVersions: [{ id: "subtle-pet", name: "SubtlePET" }],
+    priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
     clinicalEvidence: "FDA 510(k) clearance based on validation across a broad range of accelerated low-count PET acquisitions; independent literature pending.",
     lastUpdated: "2026-05-27",
     lastRevised: "2026-05-27",
