@@ -22,12 +22,17 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000"  // Alternative local port
 ];
 
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  return ALLOWED_ORIGINS.includes(origin) || /^https:\/\/[a-z0-9-]+\.lovable\.app$/.test(origin) || /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/.test(origin);
+}
+
 function getCorsHeaders(origin: string | null): HeadersInit {
-  const allowedOrigin = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'))
-    ? origin : ALLOWED_ORIGINS[0];
+  const allowedOrigin = isAllowedOrigin(origin) ? origin! : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Vary': 'Origin',
   };
 }
 
@@ -86,7 +91,12 @@ Deno.serve(async (req) => {
     return jsonResponse({ error: "Method not allowed" }, 405, corsHeaders);
   }
 
-  // Rate limiting by IP
+  // Enforce strict origin allowlist to mitigate cross-origin spoofing of analytics writes
+  if (!isAllowedOrigin(origin)) {
+    return jsonResponse({ error: "Forbidden origin" }, 403, corsHeaders);
+  }
+
+  // Rate limiting by IP (best-effort; IP is spoofable but combined with origin gating reduces abuse)
   const clientIp = req.headers.get("x-forwarded-for") || "unknown";
   if (!checkRateLimit(clientIp)) {
     return jsonResponse({ error: "Rate limit exceeded" }, 429, corsHeaders);
