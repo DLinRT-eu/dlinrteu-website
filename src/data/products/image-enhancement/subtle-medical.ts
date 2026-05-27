@@ -169,9 +169,82 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-23",
-    source: "FDA 510(k) database (K182336, K211964) and company website"
+    supersededBy: { id: "subtle-hd-pet", name: "SubtleHD(PET)" },
+    lastUpdated: "2026-05-27",
+    lastRevised: "2026-05-27",
+    source: "FDA 510(k) database (K182336, K211964) and company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
+  },
+  {
+    id: "subtle-hd-pet",
+    name: "SubtleHD(PET)",
+    company: "Subtle Medical",
+    category: "Image Enhancement",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    description: "Next-generation AI-powered PET image enhancement and acceleration software. Supports all FDA-approved radiotracers (including theranostic agents beyond 18F-FDG), enables up to 75% faster PET imaging on existing PET/CT and PET/MR scanners, leverages anatomical CT data to improve reconstruction quality, and provides adjustable denoising and improved SUVmax quantitative accuracy.",
+    features: ["Deep learning enhancement", "PET acceleration", "All FDA-approved radiotracers", "Adjustable denoising", "CT-guided reconstruction"],
+    certification: "FDA Cleared",
+    logoUrl: "/logos/SubtleMedical.jpg",
+    companyUrl: "https://subtlemedical.com/",
+    productUrl: "https://subtlemedical.com/",
+    anatomicalLocation: ["Whole body"],
+    modality: "PET",
+    diseaseTargeted: ["Cancer", "Theranostics", "Neurological disorders", "Cardiovascular disease"],
+    releaseDate: "2026-05-27",
+    version: "1.0",
+    keyFeatures: [
+      "Next-generation deep learning PET enhancement architecture",
+      "Up to 75% faster PET imaging on existing scanners",
+      "Compatible with all FDA-approved radiotracers including theranostic agents",
+      "Adjustable denoising level to radiologist preference",
+      "Leverages anatomical CT data for improved PET reconstruction",
+      "Improved SUVmax quantitative accuracy",
+      "Supports PET/CT and PET/MR systems"
+    ],
+    technicalSpecifications: {
+      population: "Adult and pediatric",
+      input: ["DICOM PET images", "Anatomical CT"],
+      inputFormat: ["DICOM"],
+      output: ["Enhanced PET images"],
+      outputFormat: ["DICOM"]
+    },
+    technology: {
+      integration: ["PACS", "Scanner workstations"],
+      deployment: ["Cloud-based", "On-premise option"],
+      triggerForAnalysis: "Automated workflow",
+      processingTime: "<60 seconds per study"
+    },
+    regulatory: {
+      ce: {
+        status: "under_review",
+        class: "IIa",
+        type: "Medical Device"
+      },
+      fda: {
+        status: "510k_cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "Pending FDA database publication",
+        regulationNumber: "21 CFR 892.1200",
+        productCode: "KPS",
+        decisionDate: "2026-05-27"
+      },
+      intendedUseStatement: "SubtleHD(PET) is an AI-powered image processing software intended for enhancement of PET images acquired with FDA-approved radiotracers, supporting noise reduction, image acceleration, and improved quantitative accuracy on PET/CT and PET/MR systems."
+    },
+    market: {
+      onMarketSince: "2026",
+      distributionChannels: ["Direct sales", "Distribution partners"]
+    },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA 510(k) clearance announced 2026-05-27. No independent peer-reviewed publications yet.",
+    clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    priorVersions: [{ id: "subtle-pet", name: "SubtlePET" }],
+    clinicalEvidence: "FDA 510(k) clearance based on validation across a broad range of accelerated low-count PET acquisitions; independent literature pending.",
+    lastUpdated: "2026-05-27",
+    lastRevised: "2026-05-27",
+    source: "PRNewswire 2026-05-27; Diagnostic Imaging 2026-05-27; FDA 510(k) K-number pending public database publication."
   },
   {
     id: "aimify",
