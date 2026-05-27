@@ -22,12 +22,17 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3000"  // Alternative local port
 ];
 
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  return ALLOWED_ORIGINS.includes(origin) || /^https:\/\/[a-z0-9-]+\.lovable\.app$/.test(origin) || /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/.test(origin);
+}
+
 function getCorsHeaders(origin: string | null): HeadersInit {
-  const allowedOrigin = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith('.lovable.app'))
-    ? origin : ALLOWED_ORIGINS[0];
+  const allowedOrigin = isAllowedOrigin(origin) ? origin! : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Vary': 'Origin',
   };
 }
 
