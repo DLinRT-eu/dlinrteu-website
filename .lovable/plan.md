@@ -1,37 +1,35 @@
-## Goal
+## Overlap with SubtlePET — verified
 
-Refresh `lastRevised` to `2026-05-23` for auto-contouring products whose date is older than 50 days, without touching `supportedStructures` or any other field.
-
-## In scope (3 products)
-
-| File | Product (id at line) | Current `lastRevised` |
+| Aspect | SubtlePET (K182336/K211964, 2018) | SubtleHD(PET) (2026-05-27) |
 |---|---|---|
-| `src/data/products/auto-contouring/brainlab.ts` | second product (line 274) | 2026-02-26 |
-| `src/data/products/auto-contouring/everfortune.ts` | second product (line 353) | 2026-02-23 |
-| `src/data/products/auto-contouring/taiwan-medical-imaging.ts` | sole product (line 92) | 2026-02-23 |
+| Function | PET enhancement / acceleration | PET enhancement / acceleration |
+| Speedup | 4× faster, 75% dose reduction | Up to 75% faster |
+| Tracers | Fixed list (FDG, amyloid, 18F-DOPA, DCFPyL, Ga-68 Dotatate, Ga-68 PSMA) | All FDA-approved radiotracers incl. theranostics |
+| Architecture | Original DL model | New SOTA AI model |
+| Extras | — | Adjustable denoising, CT-anatomy-guided reconstruction, improved SUVmax quantitation, PET/CT + PET/MR |
 
-The other `lastRevised` values in `brainlab.ts` and `everfortune.ts` are already `2026-05-20` and stay untouched.
-
-## Sanity check (already done)
-
-For each of the 3 entries: regulatory CE/FDA cleared with clearance numbers, `productUrl`/`companyUrl` intact, no `pending` statuses or "needs vendor confirmation" markers.
+**Conclusion:** Functional overlap is large, but SubtleHD(PET) is the explicit next-generation successor. Per the project's versioning schema, both stay listed and are linked via `priorVersions` / `supersededBy` (SubtlePET still deployed on existing scanners worldwide).
 
 ## Edits
 
-Targeted line-level change only:
-```ts
-lastRevised: "2026-02-26"  →  "2026-05-23"   // brainlab.ts line 274
-lastRevised: "2026-02-23"  →  "2026-05-23"   // everfortune.ts line 353
-lastRevised: "2026-02-23"  →  "2026-05-23"   // taiwan-medical-imaging.ts line 92
-```
+1. **`src/data/products/image-enhancement/subtle-medical.ts`** — add new product `subtle-hd-pet`:
+   - Category: Image Enhancement, modality PET, anatomy Whole body
+   - Disease targets: Cancer, Theranostics, Neurological, Cardiovascular
+   - Key features: up to 75% faster PET; all FDA-approved radiotracers (incl. theranostic agents); adjustable denoising level; CT-anatomy-guided reconstruction; improved SUVmax quantitation; PET/CT + PET/MR compatibility
+   - Regulatory: FDA `510k_cleared`, decisionDate `2026-05-27`, clearanceNumber `"Pending FDA database publication"`; CE `under_review`
+   - `priorVersions: [{ id: "subtle-pet", name: "SubtlePET" }]`
+   - `evidenceRigor: "E0"`, `clinicalImpact: "I0"`, `adoptionReadiness: "R2"` (just cleared, no independent literature)
+   - `source`: PRNewswire 2026-05-27, Diagnostic Imaging 2026-05-27
 
-## Explicitly out of scope
+2. **Same file — update `subtle-pet`**:
+   - Add `supersededBy: { id: "subtle-hd-pet", name: "SubtleHD(PET)" }`
+   - Bump `lastUpdated` and `lastRevised` to `2026-05-27`
+   - Append note to `source` indicating successor
 
-- `supportedStructures` arrays — not touched in any of the 3 files.
-- All other fields (regulatory, evidence, limitations, etc.).
-- `companyRevisionDate`, DB `product_revision_dates`, changelog entries.
-- Other auto-contouring files already at ≥ 2026-05-20.
+3. **No index changes** — `SUBTLE_MEDICAL_PRODUCTS` array auto-propagates to `IMAGE_ENHANCEMENT_PRODUCTS` → `ALL_PRODUCTS`.
 
-## Deliverable
+4. **Verify** the new entry appears in Image Enhancement category and PET modality filter via a grep on `ALL_PRODUCTS`.
 
-3 files with a single-line `lastRevised` bump each; final reply confirms which were bumped.
+## Open item
+
+FDA 510(k) K-number not yet in the public database (clearance announced today). Will be filled in once FDA publishes the entry.
