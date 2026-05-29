@@ -48,13 +48,12 @@ const Header = () => {
           Deep Learning in Radiotherapy
         </Link>
         
-        <div className="flex items-center gap-1 md:hidden ml-auto">
+        <div className="flex items-center gap-1 ml-auto md:hidden">
           <ThemeToggle />
-          <MobileNav />
         </div>
-        <div className="lg:hidden hidden md:flex items-center ml-auto">
-          {/* spacer for md+ where desktop toolbar already shows toggle */}
-        </div>
+        <MobileNav />
+
+        
 
         
         {/* Desktop Navigation - Role-Based */}
