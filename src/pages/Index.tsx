@@ -75,6 +75,26 @@ const Index = () => {
         </p>
       </section>
 
+      {/* Tasks across the patient workflow */}
+      {taskCounts.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              Tasks Across the Patient Workflow
+            </h2>
+            <p className="mt-2 text-slate-600">
+              Explore deep-learning solutions grouped by their role in the radiotherapy pathway.
+            </p>
+          </div>
+          <TaskTaxonomy
+            categories={taskCounts}
+            onCategoryClick={(name) => navigate(`/products?task=${encodeURIComponent(name)}`)}
+            filterType="task"
+          />
+        </section>
+      )}
+
+
       {/* Mailing list */}
       <div className="bg-gradient-to-b from-white to-slate-50 py-12">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
