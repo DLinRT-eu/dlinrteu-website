@@ -3,7 +3,6 @@ import { Search, Sparkles, ShieldCheck, Globe2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 interface Planet {
-  name: string;
   gradient: string;
   /** position on the ellipse in degrees (0 = right, 90 = bottom) */
   angle: number;
@@ -12,13 +11,13 @@ interface Planet {
 }
 
 const PLANETS: Planet[] = [
-  { name: "RaySearch",      gradient: "from-sky-400 to-indigo-500",    angle: -115, ring: 1 },
-  { name: "Varian",         gradient: "from-cyan-400 to-blue-600",     angle: -45,  ring: 1 },
-  { name: "Mirada Medical", gradient: "from-teal-400 to-cyan-600",     angle: 20,   ring: 1 },
-  { name: "MVision AI",     gradient: "from-violet-400 to-purple-600", angle: 70,   ring: 1 },
-  { name: "Limbus AI",      gradient: "from-blue-400 to-sky-600",      angle: 105,  ring: 0 },
-  { name: "Elekta",         gradient: "from-indigo-400 to-blue-600",   angle: 165,  ring: 0 },
-  { name: "C-RAD",          gradient: "from-orange-400 to-rose-500",   angle: -150, ring: 0 },
+  { gradient: "from-sky-400 to-indigo-500",    angle: -115, ring: 1 },
+  { gradient: "from-cyan-400 to-blue-600",     angle: -45,  ring: 1 },
+  { gradient: "from-teal-400 to-cyan-600",     angle: 20,   ring: 1 },
+  { gradient: "from-violet-400 to-purple-600", angle: 70,   ring: 1 },
+  { gradient: "from-blue-400 to-sky-600",      angle: 105,  ring: 0 },
+  { gradient: "from-indigo-400 to-blue-600",   angle: 165,  ring: 0 },
+  { gradient: "from-orange-400 to-rose-500",   angle: -150, ring: 0 },
 ];
 
 const CATEGORY_TAGS = [
@@ -292,7 +291,7 @@ const OrbitHero = () => {
             const delay = (Math.abs(p.angle) % 7) * 0.25;
             return (
               <div
-                key={p.name}
+                key={p.angle}
                 className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-default"
                 style={{
                   left: `${left}%`,
@@ -300,19 +299,14 @@ const OrbitHero = () => {
                   animation: `orbit-float 6s ease-in-out ${delay}s infinite`,
                 }}
               >
-                <div className="flex items-center gap-2.5 rounded-full bg-white/90 backdrop-blur-md pl-1.5 pr-4 py-1.5 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.18)] ring-1 ring-slate-200/70 transition-all duration-300 group-hover:shadow-[0_12px_30px_-8px_rgba(80,144,208,0.45)] group-hover:-translate-y-0.5 group-hover:ring-sky-300">
-                  <span
-                    className={`relative h-9 w-9 rounded-full bg-gradient-to-br ${p.gradient} shadow-inner`}
-                    aria-hidden="true"
-                  >
-                    <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
-                    <span className="absolute top-1 left-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
-                    <span className="absolute -inset-1 rounded-full ring-1 ring-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </span>
-                  <span className="text-sm font-medium text-slate-800 whitespace-nowrap">
-                    {p.name}
-                  </span>
-                </div>
+                <span
+                  className={`relative block h-9 w-9 rounded-full bg-gradient-to-br ${p.gradient} shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]`}
+                  aria-hidden="true"
+                >
+                  <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
+                  <span className="absolute top-1 left-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
+                  <span className="absolute -inset-1 rounded-full ring-1 ring-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </span>
               </div>
             );
           })}
