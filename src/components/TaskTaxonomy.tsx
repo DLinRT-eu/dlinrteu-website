@@ -142,15 +142,15 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
           variant="outline"
           size="lg"
           onClick={() => onCategoryClick(category.name)}
-          className={`flex flex-col h-auto p-4 ${color} hover:bg-[#00A6D6]/10 border border-gray-200 rounded-lg w-full transition-all duration-200 hover:shadow-md`}
+          className={`flex flex-col h-auto p-4 ${color} text-slate-900 hover:bg-[#00A6D6]/10 border border-gray-200 rounded-lg w-full transition-all duration-200 hover:shadow-md`}
         >
           <Icon className="h-8 w-8 mb-2 text-[#00A6D6]" />
           <span className="text-sm font-medium">{category.name}</span>
-          <Badge variant="secondary" className="mt-1 bg-white">
+          <Badge variant="secondary" className="mt-1 bg-white text-slate-900">
             {category.count}
           </Badge>
         </Button>
-        <p className="text-xs text-gray-600 mt-2 text-center px-1">
+        <p className="text-xs text-slate-700 dark:text-slate-300 mt-2 text-center px-1">
           {description}
         </p>
       </div>
@@ -158,8 +158,9 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
   };
 
   return (
-    <div className="mb-10 p-5 bg-white rounded-lg border border-gray-100 shadow-sm">
-      <h2 className="font-medium text-lg text-gray-800 mb-4">{getTaxonomyTitle()}</h2>
+    <div className="mb-10 p-5 bg-card rounded-lg border border-border shadow-sm">
+      <h2 className="font-medium text-lg text-foreground mb-4">{getTaxonomyTitle()}</h2>
+
       
       {/* First row of categories */}
       <div className="mb-10">
