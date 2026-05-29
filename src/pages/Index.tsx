@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import OrbitHero from "@/components/homepage/OrbitHero";
 import StatsRow from "@/components/homepage/StatsRow";
 import FeatureCards from "@/components/homepage/FeatureCards";
+import TaskTaxonomy from "@/components/TaskTaxonomy";
 import { useAuth } from "@/contexts/AuthContext";
 
 const NewsSection = lazy(() => import("@/components/NewsSection"));
