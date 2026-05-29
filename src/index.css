@@ -113,3 +113,129 @@
     min-width: 44px;
   }
 }
+
+/* ============================================================
+   Dark Mode Retrofit
+   Maps the commonly hardcoded utilities used throughout the
+   app to dark-mode-aware values so the entire site adopts a
+   cohesive premium dark theme without per-component refactors.
+   ============================================================ */
+@layer utilities {
+  /* Smooth theme transition for major surfaces */
+  html,
+  body,
+  header,
+  footer,
+  section,
+  main,
+  aside,
+  nav,
+  [class*="bg-white"],
+  [class*="bg-slate-"],
+  [class*="bg-gray-"],
+  [class*="text-slate-"],
+  [class*="text-gray-"],
+  [class*="border-slate-"],
+  [class*="border-gray-"] {
+    transition: background-color 280ms ease, color 220ms ease,
+      border-color 220ms ease, box-shadow 220ms ease;
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* --- Surfaces: white / gray / slate backgrounds --- */
+.dark .bg-white { background-color: hsl(var(--card)) !important; }
+.dark .bg-white\/90 { background-color: hsl(var(--card) / 0.85) !important; }
+.dark .bg-white\/80 { background-color: hsl(var(--card) / 0.75) !important; }
+.dark .bg-white\/70 { background-color: hsl(var(--card) / 0.65) !important; }
+.dark .bg-white\/60 { background-color: hsl(var(--card) / 0.55) !important; }
+.dark .bg-white\/50 { background-color: hsl(var(--card) / 0.45) !important; }
+.dark .bg-white\/40 { background-color: hsl(var(--card) / 0.35) !important; }
+.dark .bg-white\/30 { background-color: hsl(var(--card) / 0.25) !important; }
+.dark .bg-white\/20 { background-color: hsl(var(--card) / 0.18) !important; }
+
+.dark .bg-gray-50,
+.dark .bg-slate-50 { background-color: hsl(var(--muted)) !important; }
+.dark .bg-gray-100,
+.dark .bg-slate-100 { background-color: hsl(var(--muted)) !important; }
+.dark .bg-slate-50\/60 { background-color: hsl(var(--muted) / 0.55) !important; }
+.dark .bg-slate-50\/70 { background-color: hsl(var(--muted) / 0.65) !important; }
+
+/* --- Text colors --- */
+.dark .text-slate-900,
+.dark .text-gray-900,
+.dark .text-slate-800,
+.dark .text-gray-800 { color: hsl(210 30% 94%) !important; }
+.dark .text-slate-700,
+.dark .text-gray-700 { color: hsl(214 20% 82%) !important; }
+.dark .text-slate-600,
+.dark .text-gray-600 { color: hsl(215 16% 72%) !important; }
+.dark .text-slate-500,
+.dark .text-gray-500 { color: hsl(215 14% 62%) !important; }
+.dark .text-slate-400,
+.dark .text-gray-400 { color: hsl(215 12% 52%) !important; }
+.dark .text-slate-300,
+.dark .text-gray-300 { color: hsl(215 14% 42%) !important; }
+
+/* --- Borders / rings / dividers --- */
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-200\/80,
+.dark .border-gray-100,
+.dark .border-gray-200 { border-color: hsl(var(--border)) !important; }
+
+.dark .ring-slate-200,
+.dark .ring-slate-200\/80,
+.dark .ring-gray-200 { --tw-ring-color: hsl(var(--border)) !important; }
+
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: hsl(var(--border)) !important;
+}
+
+/* --- Gradient stops referencing white --- */
+.dark .from-white { --tw-gradient-from: hsl(var(--background)) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: hsl(var(--background) / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; }
+.dark .to-white { --tw-gradient-to: hsl(var(--background)) var(--tw-gradient-to-position) !important; }
+.dark .via-white { --tw-gradient-via-position: ; --tw-gradient-via: hsl(var(--background)) !important; }
+
+/* --- Header brand bar: keep cohesive, drop saturated cyan on dark --- */
+.dark header.bg-\[\#00A6D6\] {
+  background-color: hsl(222 40% 10%) !important;
+  box-shadow: 0 1px 0 hsl(var(--border)), 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Footer subtle lift --- */
+.dark footer.bg-gray-50 {
+  background-color: hsl(222 40% 7%) !important;
+  border-top-color: hsl(var(--border)) !important;
+}
+
+/* --- Inputs: ensure contrast for hardcoded white search/input wrappers --- */
+.dark input.bg-white,
+.dark textarea.bg-white,
+.dark select.bg-white {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* --- Hover states using slate-50 etc. --- */
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-gray-50:hover { background-color: hsl(var(--muted)) !important; }
+.dark .hover\:bg-white:hover { background-color: hsl(var(--card)) !important; }
+
+/* --- Shadow softening on dark (the slate-based shadows are nearly invisible; add a ring instead) --- */
+.dark .shadow-sm,
+.dark .shadow,
+.dark .shadow-md,
+.dark .shadow-lg,
+.dark .shadow-xl {
+  box-shadow: 0 1px 0 hsl(var(--border)),
+    0 10px 30px -15px rgba(0, 0, 0, 0.6) !important;
+}
