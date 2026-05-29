@@ -21,14 +21,14 @@ const PLANETS: Planet[] = [
 ];
 
 const CATEGORY_TAGS = [
-  "Auto-contouring",
-  "Treatment planning",
-  "Image synthesis",
+  "Auto-Contouring",
+  "Treatment Planning",
+  "Image Synthesis",
   "Reconstruction",
-  "QA monitoring",
+  "Performance Monitor",
 ];
 
-const QUICK_SUGGESTIONS = ["Auto-contouring", "MRI synthesis", "Dose prediction", "QA monitoring"];
+const QUICK_SUGGESTIONS = ["Auto-Contouring", "Image Synthesis", "Clinical Prediction", "Performance Monitor"];
 
 const OrbitHero = () => {
   const navigate = useNavigate();
