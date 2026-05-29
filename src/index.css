@@ -168,17 +168,36 @@
 .dark .text-slate-900,
 .dark .text-gray-900,
 .dark .text-slate-800,
-.dark .text-gray-800 { color: hsl(210 30% 94%) !important; }
+.dark .text-gray-800 { color: hsl(210 30% 96%) !important; }
 .dark .text-slate-700,
-.dark .text-gray-700 { color: hsl(214 20% 82%) !important; }
+.dark .text-gray-700 { color: hsl(214 22% 88%) !important; }
 .dark .text-slate-600,
-.dark .text-gray-600 { color: hsl(215 16% 72%) !important; }
+.dark .text-gray-600 { color: hsl(215 18% 80%) !important; }
 .dark .text-slate-500,
-.dark .text-gray-500 { color: hsl(215 14% 62%) !important; }
+.dark .text-gray-500 { color: hsl(215 16% 74%) !important; }
 .dark .text-slate-400,
-.dark .text-gray-400 { color: hsl(215 12% 52%) !important; }
+.dark .text-gray-400 { color: hsl(215 16% 68%) !important; }
 .dark .text-slate-300,
-.dark .text-gray-300 { color: hsl(215 14% 42%) !important; }
+.dark .text-gray-300 { color: hsl(215 18% 72%) !important; }
+
+/* --- Pastel surfaces (bg-*-100) — remap so foreground text stays legible in dark --- */
+.dark .bg-blue-100    { background-color: hsl(217 35% 18%) !important; }
+.dark .bg-yellow-100  { background-color: hsl(45 28% 18%) !important; }
+.dark .bg-green-100   { background-color: hsl(142 25% 16%) !important; }
+.dark .bg-purple-100  { background-color: hsl(270 25% 18%) !important; }
+.dark .bg-pink-100    { background-color: hsl(330 22% 18%) !important; }
+.dark .bg-orange-100  { background-color: hsl(25 30% 18%) !important; }
+.dark .bg-indigo-100  { background-color: hsl(235 28% 20%) !important; }
+.dark .bg-emerald-100 { background-color: hsl(160 25% 15%) !important; }
+.dark .bg-violet-100  { background-color: hsl(258 28% 19%) !important; }
+.dark .bg-cyan-100    { background-color: hsl(190 30% 16%) !important; }
+.dark .bg-red-100     { background-color: hsl(0 28% 18%) !important; }
+.dark .bg-amber-100   { background-color: hsl(38 30% 18%) !important; }
+.dark .bg-sky-100     { background-color: hsl(200 32% 18%) !important; }
+.dark .bg-teal-100    { background-color: hsl(175 28% 15%) !important; }
+.dark .bg-rose-100    { background-color: hsl(345 25% 18%) !important; }
+.dark .bg-lime-100    { background-color: hsl(85 22% 16%) !important; }
+.dark .bg-fuchsia-100 { background-color: hsl(290 25% 18%) !important; }
 
 /* --- Borders / rings / dividers --- */
 .dark .border-slate-100,
