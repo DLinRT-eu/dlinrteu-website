@@ -3,7 +3,6 @@ import { Search, Sparkles, ShieldCheck, Globe2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 interface Planet {
-  name: string;
   gradient: string;
   /** position on the ellipse in degrees (0 = right, 90 = bottom) */
   angle: number;
