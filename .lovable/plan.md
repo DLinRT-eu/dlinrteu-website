@@ -1,35 +1,45 @@
-## Overlap with SubtlePET — verified
+## Problem
 
-| Aspect | SubtlePET (K182336/K211964, 2018) | SubtleHD(PET) (2026-05-27) |
-|---|---|---|
-| Function | PET enhancement / acceleration | PET enhancement / acceleration |
-| Speedup | 4× faster, 75% dose reduction | Up to 75% faster |
-| Tracers | Fixed list (FDG, amyloid, 18F-DOPA, DCFPyL, Ga-68 Dotatate, Ga-68 PSMA) | All FDA-approved radiotracers incl. theranostics |
-| Architecture | Original DL model | New SOTA AI model |
-| Extras | — | Adjustable denoising, CT-anatomy-guided reconstruction, improved SUVmax quantitation, PET/CT + PET/MR |
+On the homepage (`OrbitHero`), the "Try:" suggestion chips and the category tag rail link to `/products?task=<label>`. The Products page applies that param as a `tasks` filter, but it only matches when the value exactly equals a real product category (as returned by `getAllOptions('category')`). The current labels use casing/wording that no product actually has, so several chips return empty results:
 
-**Conclusion:** Functional overlap is large, but SubtleHD(PET) is the explicit next-generation successor. Per the project's versioning schema, both stay listed and are linked via `priorVersions` / `supersededBy` (SubtlePET still deployed on existing scanners worldwide).
+- `Auto-contouring` → real value is `Auto-Contouring`
+- `Treatment planning` → `Treatment Planning`
+- `Image synthesis` → `Image Synthesis`
+- `MRI synthesis` → not a category at all (should be `Image Synthesis`)
+- `Dose prediction` → not a category (closest real one is `Clinical Prediction`)
+- `QA monitoring` → real value is `Performance Monitor`
+- `Reconstruction` ✓ already correct
 
-## Edits
+## Fix
 
-1. **`src/data/products/image-enhancement/subtle-medical.ts`** — add new product `subtle-hd-pet`:
-   - Category: Image Enhancement, modality PET, anatomy Whole body
-   - Disease targets: Cancer, Theranostics, Neurological, Cardiovascular
-   - Key features: up to 75% faster PET; all FDA-approved radiotracers (incl. theranostic agents); adjustable denoising level; CT-anatomy-guided reconstruction; improved SUVmax quantitation; PET/CT + PET/MR compatibility
-   - Regulatory: FDA `510k_cleared`, decisionDate `2026-05-27`, clearanceNumber `"Pending FDA database publication"`; CE `under_review`
-   - `priorVersions: [{ id: "subtle-pet", name: "SubtlePET" }]`
-   - `evidenceRigor: "E0"`, `clinicalImpact: "I0"`, `adoptionReadiness: "R2"` (just cleared, no independent literature)
-   - `source`: PRNewswire 2026-05-27, Diagnostic Imaging 2026-05-27
+Edit only `src/components/homepage/OrbitHero.tsx`:
 
-2. **Same file — update `subtle-pet`**:
-   - Add `supersededBy: { id: "subtle-hd-pet", name: "SubtleHD(PET)" }`
-   - Bump `lastUpdated` and `lastRevised` to `2026-05-27`
-   - Append note to `source` indicating successor
+1. Update `CATEGORY_TAGS` to use the exact category strings already produced by `getAllOptions('category')`:
+   ```ts
+   const CATEGORY_TAGS = [
+     "Auto-Contouring",
+     "Treatment Planning",
+     "Image Synthesis",
+     "Reconstruction",
+     "Performance Monitor",
+   ];
+   ```
 
-3. **No index changes** — `SUBTLE_MEDICAL_PRODUCTS` array auto-propagates to `IMAGE_ENHANCEMENT_PRODUCTS` → `ALL_PRODUCTS`.
+2. Update `QUICK_SUGGESTIONS` similarly, keeping the same intent but mapping to real categories:
+   ```ts
+   const QUICK_SUGGESTIONS = [
+     "Auto-Contouring",
+     "Image Synthesis",
+     "Clinical Prediction",
+     "Performance Monitor",
+   ];
+   ```
 
-4. **Verify** the new entry appears in Image Enhancement category and PET modality filter via a grep on `ALL_PRODUCTS`.
+3. Keep visible chip labels identical to the category names (no separate display/value mapping needed) so behavior stays transparent and the Products page's existing URL-param handler activates the matching filter.
 
-## Open item
+No other files change. The Products page's existing `task` URL-param handling and `FilterBar`/`useFilters` logic are already correct and reused as-is.
 
-FDA 510(k) K-number not yet in the public database (clearance announced today). Will be filled in once FDA publishes the entry.
+## Out of scope
+
+- No changes to filter logic, routing, or styling.
+- No changes to the orbit visualization, dark mode, or any other section.
