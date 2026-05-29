@@ -11,13 +11,13 @@ interface Planet {
 }
 
 const PLANETS: Planet[] = [
-  { name: "RaySearch",      gradient: "from-sky-400 to-indigo-500",    angle: -115, ring: 1 },
-  { name: "Varian",         gradient: "from-cyan-400 to-blue-600",     angle: -45,  ring: 1 },
-  { name: "Mirada Medical", gradient: "from-teal-400 to-cyan-600",     angle: 20,   ring: 1 },
-  { name: "MVision AI",     gradient: "from-violet-400 to-purple-600", angle: 70,   ring: 1 },
-  { name: "Limbus AI",      gradient: "from-blue-400 to-sky-600",      angle: 105,  ring: 0 },
-  { name: "Elekta",         gradient: "from-indigo-400 to-blue-600",   angle: 165,  ring: 0 },
-  { name: "C-RAD",          gradient: "from-orange-400 to-rose-500",   angle: -150, ring: 0 },
+  { gradient: "from-sky-400 to-indigo-500",    angle: -115, ring: 1 },
+  { gradient: "from-cyan-400 to-blue-600",     angle: -45,  ring: 1 },
+  { gradient: "from-teal-400 to-cyan-600",     angle: 20,   ring: 1 },
+  { gradient: "from-violet-400 to-purple-600", angle: 70,   ring: 1 },
+  { gradient: "from-blue-400 to-sky-600",      angle: 105,  ring: 0 },
+  { gradient: "from-indigo-400 to-blue-600",   angle: 165,  ring: 0 },
+  { gradient: "from-orange-400 to-rose-500",   angle: -150, ring: 0 },
 ];
 
 const CATEGORY_TAGS = [
