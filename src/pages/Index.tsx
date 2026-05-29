@@ -15,6 +15,7 @@ const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({ productCount: 0, companyCount: 0 });
+  const [taskCounts, setTaskCounts] = useState<{ name: string; count: number }[]>([]);
 
   useEffect(() => {
     if (user && !loading) navigate('/dashboard-home', { replace: true });
@@ -26,10 +27,16 @@ const Index = () => {
     (async () => {
       const { default: dataService } = await import("@/services/DataService");
       if (cancelled) return;
+      const products = dataService.getAllProducts();
       setStats({
-        productCount: dataService.getAllProducts().length,
+        productCount: products.length,
         companyCount: dataService.getActiveCompanies().length,
       });
+      const counts = new Map<string, number>();
+      products.forEach(p => {
+        if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+      });
+      setTaskCounts(Array.from(counts, ([name, count]) => ({ name, count })));
     })();
     return () => { cancelled = true; };
   }, [user]);
