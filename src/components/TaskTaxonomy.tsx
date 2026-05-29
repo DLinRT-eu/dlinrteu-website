@@ -150,7 +150,7 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
             {category.count}
           </Badge>
         </Button>
-        <p className="text-xs text-slate-700 dark:text-slate-300 mt-2 text-center px-1">
+        <p className="text-xs text-slate-700 mt-2 text-center px-1">
           {description}
         </p>
       </div>
