@@ -291,7 +291,7 @@ const OrbitHero = () => {
             const delay = (Math.abs(p.angle) % 7) * 0.25;
             return (
               <div
-                key={p.name}
+                key={p.angle}
                 className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-default"
                 style={{
                   left: `${left}%`,
@@ -299,19 +299,14 @@ const OrbitHero = () => {
                   animation: `orbit-float 6s ease-in-out ${delay}s infinite`,
                 }}
               >
-                <div className="flex items-center gap-2.5 rounded-full bg-white/90 backdrop-blur-md pl-1.5 pr-4 py-1.5 shadow-[0_8px_24px_-8px_rgba(15,23,42,0.18)] ring-1 ring-slate-200/70 transition-all duration-300 group-hover:shadow-[0_12px_30px_-8px_rgba(80,144,208,0.45)] group-hover:-translate-y-0.5 group-hover:ring-sky-300">
-                  <span
-                    className={`relative h-9 w-9 rounded-full bg-gradient-to-br ${p.gradient} shadow-inner`}
-                    aria-hidden="true"
-                  >
-                    <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
-                    <span className="absolute top-1 left-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
-                    <span className="absolute -inset-1 rounded-full ring-1 ring-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </span>
-                  <span className="text-sm font-medium text-slate-800 whitespace-nowrap">
-                    {p.name}
-                  </span>
-                </div>
+                <span
+                  className={`relative block h-9 w-9 rounded-full bg-gradient-to-br ${p.gradient} shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]`}
+                  aria-hidden="true"
+                >
+                  <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
+                  <span className="absolute top-1 left-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
+                  <span className="absolute -inset-1 rounded-full ring-1 ring-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </span>
               </div>
             );
           })}
