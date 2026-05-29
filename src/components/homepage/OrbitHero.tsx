@@ -151,7 +151,7 @@ const OrbitHero = () => {
         </div>
 
         {/* ── Orbit visualization ─────────────────────────────────────── */}
-        <div className="relative mx-auto mt-12 md:mt-16 aspect-[16/10] max-w-5xl">
+        <div className="relative mx-auto mt-12 md:mt-16 aspect-[16/10] max-w-5xl" style={{ containerType: "size" }}>
           <svg
             className="absolute inset-0 w-full h-full"
             viewBox="0 0 1000 600"
