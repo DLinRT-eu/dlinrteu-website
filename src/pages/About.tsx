@@ -134,6 +134,51 @@ const About = () => {
         structuredData={structuredData}
       />
 
+      {/* Platform Overview (moved from homepage) */}
+      <section className="py-16 px-4 bg-gradient-to-b from-white to-slate-50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+            About the Platform
+          </h2>
+          <div className="prose prose-lg max-w-none text-slate-700 leading-relaxed">
+            <p>
+              DLinRT.eu is a dedicated resource for{" "}
+              <Link to="/products" className="text-[#5090D0] hover:underline">commercial deep learning (DL) solutions</Link>{" "}
+              in radiation oncology, focused on the European market and beyond. The platform supports the integration of
+              DL technologies into routine clinical practice in radiotherapy.
+            </p>
+            <p>
+              We <Link to="/products" className="text-[#5090D0] hover:underline">catalogue and evaluate DL products</Link>{" "}
+              across the radiotherapy workflow — from image reconstruction and enhancement to auto-contouring, treatment
+              planning, and clinical prediction. We also include <strong>Performance Monitor tools</strong> that help
+              quality-assure AI-based products, even if they don't use AI themselves. Each product entry includes
+              technical specifications, regulatory status, clinical evidence, and market availability. Our{" "}
+              <Link to="/dashboard" className="text-[#5090D0] hover:underline">analytics dashboard</Link> delivers
+              quantitative insights into how deep learning solutions are distributed across categories and market
+              segments, while our <Link to="/companies" className="text-[#5090D0] hover:underline">companies directory</Link>{" "}
+              highlights the vendors pioneering DL integration in radiotherapy.
+            </p>
+            <p>
+              Beyond product cataloguing, our{" "}
+              <Link to="/resources-compliance" className="text-[#5090D0] hover:underline">Resources & Compliance section</Link>{" "}
+              provides essential regulatory guidance, practical compliance checklists, and standards documentation to
+              support the safe deployment of deep learning solutions in clinical radiotherapy workflows.
+            </p>
+            <p>
+              Whether you're a medical physicist seeking{" "}
+              <Link to="/products?task=Auto-contouring" className="text-[#5090D0] hover:underline">auto-contouring tools</Link>,
+              a radiation oncologist exploring{" "}
+              <Link to="/products?task=Treatment%20Planning" className="text-[#5090D0] hover:underline">treatment planning solutions</Link>,
+              or a healthcare administrator reviewing new technologies, DLinRT.eu provides clear, up-to-date information
+              to support informed decision-making. Stay informed via our{" "}
+              <Link to="/news" className="text-[#5090D0] hover:underline">news section</Link> or reach out through our{" "}
+              <Link to="/support" className="text-[#5090D0] hover:underline">support center</Link>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       <BlackPaperSection />
       <MissionVisionSection />
       <StakeholderUseCases />
