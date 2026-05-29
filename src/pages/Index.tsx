@@ -53,7 +53,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Deep Learning Products Database for Radiotherapy"
         description="Discover commercial deep learning solutions for radiotherapy. Browse AI products for auto-contouring, treatment planning, and imaging with regulatory data and clinical evidence."
@@ -67,9 +67,9 @@ const Index = () => {
 
       {/* Short value line + link to About */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 pb-12 text-center">
-        <p className="text-slate-600">
+        <p className="text-muted-foreground">
           Built for clinicians, researchers, physicists, and industry leaders advancing the future of radiotherapy.{" "}
-          <Link to="/about" className="text-sky-600 hover:text-sky-700 font-medium">
+          <Link to="/about" className="text-primary hover:text-primary/80 font-medium">
             Learn more about DLinRT.eu →
           </Link>
         </p>
@@ -78,14 +78,6 @@ const Index = () => {
       {/* Tasks across the patient workflow */}
       {taskCounts.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-              Tasks Across the Patient Workflow
-            </h2>
-            <p className="mt-2 text-slate-600">
-              Explore deep-learning solutions grouped by their role in the radiotherapy pathway.
-            </p>
-          </div>
           <TaskTaxonomy
             categories={taskCounts}
             onCategoryClick={(name) => navigate(`/products?task=${encodeURIComponent(name)}`)}
@@ -94,15 +86,14 @@ const Index = () => {
         </section>
       )}
 
-
       {/* Mailing list */}
-      <div className="bg-gradient-to-b from-white to-slate-50 py-12">
+      <div className="bg-muted/30 py-12">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.12)] p-8 md:p-10">
+          <div className="bg-card border border-border rounded-2xl shadow-[0_10px_40px_-20px_rgba(15,23,42,0.12)] p-8 md:p-10">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">Stay in the loop</h2>
-                <p className="text-slate-600 text-sm">
+                <h2 className="text-2xl font-bold text-foreground mb-2">Stay in the loop</h2>
+                <p className="text-muted-foreground text-sm">
                   Get updates on new products, releases, and community news — straight to your inbox.
                 </p>
               </div>
@@ -115,6 +106,7 @@ const Index = () => {
           </div>
         </div>
       </div>
+
 
       <Suspense fallback={<div style={{ minHeight: 200 }} />}>
         <NewsSection />
