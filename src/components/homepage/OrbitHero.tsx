@@ -281,26 +281,24 @@ const OrbitHero = () => {
             </div>
           </div>
 
-          {/* Planets */}
+          {/* Planets — slowly orbiting around the center */}
           {PLANETS.map((p) => {
-            const rx = p.ring === 0 ? 32 : 46;
-            const ry = p.ring === 0 ? 20 : 32;
-            const rad = (p.angle * Math.PI) / 180;
-            const left = 50 + rx * Math.cos(rad);
-            const top  = 50 + ry * Math.sin(rad);
-            const delay = (Math.abs(p.angle) % 7) * 0.25;
+            const isOuter = p.ring === 1;
+            const duration = isOuter ? 140 : 110; // seconds, slow & elegant
+            // negative delay positions planet at its starting angle on the shared keyframe
+            const norm = ((p.angle % 360) + 360) % 360;
+            const delay = -(norm / 360) * duration;
             return (
               <div
                 key={p.angle}
-                className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-default"
+                className="absolute left-1/2 top-1/2 group cursor-default"
                 style={{
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  animation: `orbit-float 6s ease-in-out ${delay}s infinite`,
+                  animation: `${isOuter ? "orbit-outer" : "orbit-inner"} ${duration}s linear ${delay}s infinite`,
+                  willChange: "transform",
                 }}
               >
                 <span
-                  className={`relative block h-9 w-9 rounded-full bg-gradient-to-br ${p.gradient} shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]`}
+                  className={`relative block h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br ${p.gradient} shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]`}
                   aria-hidden="true"
                 >
                   <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
@@ -328,10 +326,21 @@ const OrbitHero = () => {
       </div>
 
       <style>{`
-        @keyframes orbit-float {
-          0%,100% { transform: translate(-50%, -50%) translateY(0); }
-          50%     { transform: translate(-50%, -50%) translateY(-6px); }
-        }
+        ${(() => {
+          const build = (name: string, rx: number, ry: number) => {
+            const steps = 60;
+            let css = `@keyframes ${name}{`;
+            for (let i = 0; i <= steps; i++) {
+              const f = i / steps;
+              const a = f * 2 * Math.PI;
+              const tx = rx * Math.cos(a);
+              const ty = ry * Math.sin(a);
+              css += `${(f * 100).toFixed(3)}%{transform:translate(${tx.toFixed(2)}cqw, ${ty.toFixed(2)}cqh);}`;
+            }
+            return css + "}";
+          };
+          return build("orbit-outer", 46, 32) + build("orbit-inner", 32, 20);
+        })()}
         @keyframes corePulse {
           0%   { transform: scale(1);   opacity: 0.6; }
           100% { transform: scale(2.2); opacity: 0;   }
@@ -347,6 +356,7 @@ const OrbitHero = () => {
         .radar-sweep { animation: radar 12s linear infinite; }
         @media (prefers-reduced-motion: reduce) {
           .orbit-spin-slow,.orbit-spin-rev,.radar-sweep { animation: none; }
+          [style*="orbit-outer"],[style*="orbit-inner"] { animation: none !important; }
         }
       `}</style>
     </section>
