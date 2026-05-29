@@ -1,29 +1,49 @@
-## Issues
+## Recommendation
 
-1. The preview is still in dark mode because the previous session wrote `'dark'` to `localStorage['dlinrt-theme']` (before light became the default). The hook still honors that stored value, so the user is stuck in dark.
-2. On mobile (current viewport 411px), the `ThemeToggle` is hidden because it sits inside a `hidden md:flex` container in `Header.tsx`. The mobile `Sheet` nav doesn't include it either.
+Yes — bring it back. The current homepage flow (hero → stats → 3 feature cards → one-line value statement → mailing list → news) is actually quite sparse below the fold, and the task taxonomy gives visitors a concrete, browsable entry point per workflow step. Placing it just before "Stay in the loop" works well: feature cards introduce the *what*, the taxonomy gives the *how to start exploring*, then the newsletter becomes a natural next CTA.
 
-## Fix
+## Implementation
 
-### `src/hooks/useTheme.ts`
-Bump the storage key to invalidate any previously persisted `'dark'` value so everyone restarts on light, then opts in fresh:
+Reuse the existing `src/components/TaskTaxonomy.tsx` (no changes to that file — its colors, icons, and click handler are already correct).
 
-```ts
-const KEY = 'dlinrt-theme-v2';
-```
+### `src/pages/Index.tsx`
 
-`getInitial()` already returns `'light'` unless the new key holds `'dark'`, so this single change forces a one-time reset and preserves all future toggles.
+1. Import `TaskTaxonomy` and (lazily) compute category counts from `dataService.getAllProducts()` alongside the existing stats fetch — extend the existing `useEffect` so we only load `DataService` once. Store the counts in state:
+   ```ts
+   const [taskCounts, setTaskCounts] = useState<{ name: string; count: number }[]>([]);
+   ```
+   Inside the same async block:
+   ```ts
+   const counts = new Map<string, number>();
+   dataService.getAllProducts().forEach(p => {
+     if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+   });
+   setTaskCounts(Array.from(counts, ([name, count]) => ({ name, count })));
+   ```
 
-### `src/components/Header.tsx`
-Pull `ThemeToggle` out of the desktop-only `hidden md:flex` container so it is rendered at all breakpoints. Place it just before the mobile menu trigger area inside the existing flex row, e.g.:
+2. Render a new section between the "Built for clinicians…" value line and the mailing-list card:
+   ```tsx
+   <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+     <div className="text-center mb-8">
+       <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+         Tasks Across the Patient Workflow
+       </h2>
+       <p className="mt-2 text-slate-600">
+         Explore deep-learning solutions grouped by their role in the radiotherapy pathway.
+       </p>
+     </div>
+     <TaskTaxonomy
+       categories={taskCounts}
+       onCategoryClick={(name) => navigate(`/products?task=${encodeURIComponent(name)}`)}
+       filterType="task"
+     />
+   </section>
+   ```
+   Add `useNavigate` import (already used elsewhere in the project).
 
-```tsx
-<div className="flex items-center gap-2">
-  <ThemeToggle />
-  <MobileNav />
-</div>
-```
+3. Don't render the section while `taskCounts` is empty (keeps the homepage clean on the initial paint and during the redirect for logged-in users).
 
-…or simply render `<ThemeToggle />` alongside `MobileNav` with `className="ml-auto"` so it sits between the brand link and the menu button on small screens. The existing desktop placement of the toggle in the `hidden md:flex` toolbar is removed to avoid duplicates.
+### Out of scope
 
-No other files change. No styling overhaul, no behavior change beyond visibility + storage-key bump.
+- No changes to `TaskTaxonomy.tsx`, the Products page, or the URL-param handling.
+- No changes to dark mode, theme toggle, or hero.

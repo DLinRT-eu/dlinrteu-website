@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import OrbitHero from "@/components/homepage/OrbitHero";
 import StatsRow from "@/components/homepage/StatsRow";
 import FeatureCards from "@/components/homepage/FeatureCards";
+import TaskTaxonomy from "@/components/TaskTaxonomy";
 import { useAuth } from "@/contexts/AuthContext";
 
 const NewsSection = lazy(() => import("@/components/NewsSection"));
@@ -14,6 +15,7 @@ const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({ productCount: 0, companyCount: 0 });
+  const [taskCounts, setTaskCounts] = useState<{ name: string; count: number }[]>([]);
 
   useEffect(() => {
     if (user && !loading) navigate('/dashboard-home', { replace: true });
@@ -25,10 +27,16 @@ const Index = () => {
     (async () => {
       const { default: dataService } = await import("@/services/DataService");
       if (cancelled) return;
+      const products = dataService.getAllProducts();
       setStats({
-        productCount: dataService.getAllProducts().length,
+        productCount: products.length,
         companyCount: dataService.getActiveCompanies().length,
       });
+      const counts = new Map<string, number>();
+      products.forEach(p => {
+        if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+      });
+      setTaskCounts(Array.from(counts, ([name, count]) => ({ name, count })));
     })();
     return () => { cancelled = true; };
   }, [user]);
@@ -66,6 +74,26 @@ const Index = () => {
           </Link>
         </p>
       </section>
+
+      {/* Tasks across the patient workflow */}
+      {taskCounts.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              Tasks Across the Patient Workflow
+            </h2>
+            <p className="mt-2 text-slate-600">
+              Explore deep-learning solutions grouped by their role in the radiotherapy pathway.
+            </p>
+          </div>
+          <TaskTaxonomy
+            categories={taskCounts}
+            onCategoryClick={(name) => navigate(`/products?task=${encodeURIComponent(name)}`)}
+            filterType="task"
+          />
+        </section>
+      )}
+
 
       {/* Mailing list */}
       <div className="bg-gradient-to-b from-white to-slate-50 py-12">
