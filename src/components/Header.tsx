@@ -13,6 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import NotificationBell from './notifications/NotificationBell';
 import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
 import { CommandPalette, useCommandPalette } from './CommandPalette';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const { user, profile, signOut } = useAuth();
@@ -107,6 +108,8 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
+
           <Button
             variant="secondary"
             size="sm"
