@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 
 type Theme = 'light' | 'dark';
-const KEY = 'dlinrt-theme';
+const KEY = 'dlinrt-theme-v2';
 
 function getInitial(): Theme {
   if (typeof window === 'undefined') return 'light';

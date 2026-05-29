@@ -48,7 +48,13 @@ const Header = () => {
           Deep Learning in Radiotherapy
         </Link>
         
+        <div className="flex items-center gap-1 ml-auto md:hidden">
+          <ThemeToggle />
+        </div>
         <MobileNav />
+
+        
+
         
         {/* Desktop Navigation - Role-Based */}
         <nav className="hidden lg:flex items-center space-x-2">
