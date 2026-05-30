@@ -117,7 +117,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging MR system clearances. AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in MRI image reconstruction to reduce acquisition time or increase image quality."
+      intendedUseStatement: "The uMR 680 system [with uAIFI] is indicated for use as a magnetic resonance diagnostic device (MRDD) that produces sagittal, transverse, coronal, and oblique cross sectional images, and spectroscopic images, and that display internal anatomical structure and/or function of the head, body and extremities. The system utilizes uAIFI Technology (including DeepRecon) to provide AI-enhanced image reconstruction for improved SNR and resolution. (Source: FDA 510(k) K222755 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
