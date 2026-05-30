@@ -283,11 +283,11 @@ const OrbitHero = () => {
               <span className="absolute inset-0 rounded-full ring-1 ring-sky-300/50 animate-[corePulse_3s_ease-out_infinite]" />
               <span className="absolute inset-0 rounded-full ring-1 ring-sky-300/30 animate-[corePulse_3s_ease-out_1s_infinite]" />
               <div className="absolute inset-0 rounded-full bg-sky-300/40 blur-2xl scale-150" aria-hidden="true" />
-              <div className="relative flex items-center justify-center h-24 w-24 md:h-32 md:w-32 rounded-full bg-white overflow-hidden shadow-[0_20px_50px_-15px_rgba(80,144,208,0.6)] ring-1 ring-sky-200/80">
+              <div className="relative flex items-center justify-center h-36 w-36 md:h-48 md:w-48 rounded-2xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(80,144,208,0.6)]">
                 <img
                   src="/LogoDLinRT.eu.png"
                   alt="DLinRT.eu"
-                  className="h-full w-full object-contain p-3"
+                  className="h-full w-full object-contain rounded-2xl"
                 />
               </div>
               {/* tiny meta label */}
