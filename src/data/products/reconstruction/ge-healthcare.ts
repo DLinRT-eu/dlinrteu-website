@@ -53,7 +53,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2019-04-12"
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose compared to conventional reconstruction techniques."
+      intendedUseStatement: "The Deep Learning Image Reconstruction option is a deep learning based reconstruction method intended to produce cross-sectional images of the head and whole body by computer reconstruction of X-ray transmission data taken at different angles and planes, including Axial, Helical (Volumetric), and Cardiac acquisitions, for all ages. Deep Learning Image Reconstruction can be used for head, whole body, cardiac, and vascular CT applications. (Source: FDA 510(k) K183202 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
