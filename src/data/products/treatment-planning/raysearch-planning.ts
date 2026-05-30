@@ -91,7 +91,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-04-04",
         notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A, RayStation 2024A SP3, RayPlan 2024A SP3"
       },
-      intendedUseStatement: "For radiation therapy treatment planning and dose calculation."
+      intendedUseStatement: "\"RayStation is a software system for radiation therapy and medical oncology. Based on user input, RayStation proposes treatment plans. After a proposed treatment plan is reviewed and approved by authorized intended users, RayStation may also be used to administer treatments.\" (Source: FDA 510(k) K240398 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2018",
