@@ -74,7 +74,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database"
   },
   {
@@ -145,7 +145,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
     lastUpdated: "2026-04-13",
-    lastRevised: "2026-04-13",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     evidence: [
       {

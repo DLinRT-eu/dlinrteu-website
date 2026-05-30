@@ -96,7 +96,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website"
   },
   {
@@ -182,7 +182,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
@@ -285,7 +285,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
     lastUpdated: "2026-03-08", 
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }
 ];

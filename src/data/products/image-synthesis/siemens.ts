@@ -59,7 +59,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     version: "VB80",
     releaseDate: "2024-09-20",
     lastUpdated: "2026-03-24",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Company website",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",
