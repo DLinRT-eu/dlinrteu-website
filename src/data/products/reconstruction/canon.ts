@@ -239,7 +239,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2025-01-07"
       },
-      intendedUseStatement: "Intended for use in MR image reconstruction to enhance spatial resolution and image quality while maintaining diagnostic confidence."
+      intendedUseStatement: "The Vantage Galan 3T, MRT-3020, V10.0 with AiCE Reconstruction Processing Unit for MR is a 3 Tesla MRI system designed to produce detailed cross-sectional images of the head or body. It incorporates AI-based deep learning reconstruction technology (PIQE and AiCE) to enhance image resolution and reduce noise while maintaining scan efficiency. (Source: FDA 510(k) K243335 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2025",
