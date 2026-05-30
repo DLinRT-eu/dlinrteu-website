@@ -235,19 +235,20 @@ const OrbitHero = () => {
               />
             </g>
 
-            {/* traveling satellites along the orbits */}
-            <circle r="3.5" fill="#5090D0">
+            {/* traveling satellites along the orbits — taxonomy colors */}
+            <circle r="3.5" fill={TASK_COLORS["Auto-Contouring"]}>
               <animateMotion dur="18s" repeatCount="indefinite"
                 path="M 960 300 A 460 180 0 1 1 40 300 A 460 180 0 1 1 960 300" />
             </circle>
-            <circle r="2.5" fill="#22d3ee">
+            <circle r="2.5" fill={TASK_COLORS["Image Synthesis"]}>
               <animateMotion dur="14s" repeatCount="indefinite" begin="-6s"
                 path="M 820 300 A 320 120 0 1 0 180 300 A 320 120 0 1 0 820 300" />
             </circle>
-            <circle r="2" fill="#a78bfa">
+            <circle r="2" fill={TASK_COLORS["Reconstruction"]}>
               <animateMotion dur="22s" repeatCount="indefinite" begin="-3s"
                 path="M 960 300 A 460 180 0 1 1 40 300 A 460 180 0 1 1 960 300" />
             </circle>
+
 
             {/* twinkling background stars */}
             <g fill="#5090D0">
