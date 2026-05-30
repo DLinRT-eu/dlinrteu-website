@@ -1,0 +1,200 @@
+January 28, 2026
+Ever Fortune.AI, Co., Ltd.
+Ti-Hao Wang
+Chief Technology Officer
+8F., No.360, Sec. 1, Jingmao Rd., Beitun Dist.
+Taichung City, 406040
+Taiwan
+Re: K251306
+Trade/Device Name: Seg Pro V3 (RT-300)
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Medical Image Management And Processing System
+Regulatory Class: Class II
+Product Code: QKB
+Dated: December 29, 2025
+Received: December 29, 2025
+Dear Ti-Hao Wang:
+We have reviewed your section 510(k) premarket notification of intent to market the device referenced above
+and have determined the device is substantially equivalent (for the indications for use stated in the enclosure)
+to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the enactment
+date of the Medical Device Amendments, or to devices that have been reclassified in accordance with the
+provisions of the Federal Food, Drug, and Cosmetic Act (the Act) that do not require approval of a premarket
+approval application (PMA). You may, therefore, market the device, subject to the general controls
+provisions of the Act. Although this letter refers to your product as a device, please be aware that some
+cleared products may instead be combination products. The 510(k) Premarket Notification Database
+available at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+FDA's substantial equivalence determination also included the review and clearance of your Predetermined
+Change Control Plan (PCCP). Under section 515C(b)(1) of the Act, a new premarket notification is not
+required for a change to a device cleared under section 510(k) of the Act, if such change is consistent with an
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.08.02
+
+K251306 - Ti-Hao Wang
+
+Page
+
+2
+
+established PCCP granted pursuant to section 515C(b)(2) of the Act. Under 21 CFR 807.81(a)(3), a new
+premarket notification is required if there is a major change or modification in the intended use of a device,
+or if there is a change or modification in a device that could significantly affect the safety or effectiveness of
+the device, e.g., a significant change or modification in design, material, chemical composition, energy
+source, or manufacturing process. Accordingly, if deviations from the established PCCP result in a major
+change or modification in the intended use of the device, or result in a change or modification in the device
+that could significantly affect the safety or effectiveness of the device, then a new premarket notification
+would be required consistent with section 515C(b)(1) of the Act and 21 CFR 807.81(a)(3). Failure to submit
+such a premarket submission would constitute adulteration and misbranding under sections 501(f)(1)(B) and
+502(o) of the Act, respectively.
+Additional information about changes that may require a new premarket notification are provided in the FDA
+guidance documents entitled "Deciding When to Submit a 510(k) for a Change to an Existing Device"
+(https://www.fda.gov/media/99812/download) and "Deciding When to Submit a 510(k) for a Software
+Change to an Existing Device" (https://www.fda.gov/media/99785/download).
+Your device is also subject to, among other requirements, the Quality System (QS) regulation (21 CFR Part
+820), which includes, but is not limited to, 21 CFR 820.30, Design controls; 21 CFR 820.90, Nonconforming
+product; and 21 CFR 820.100, Corrective and preventive action. Please note that regardless of whether a
+change requires premarket review, the QS regulation requires device manufacturers to review and approve
+changes to device design and production (21 CFR 820.30 and 21 CFR 820.70) and document changes and
+approvals in the device master record (21 CFR 820.181).
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+801); medical device reporting (reporting of medical device-related adverse events) (21 CFR Part 803) for
+devices or postmarketing safety reporting (21 CFR Part 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR Part 4, Subpart
+A) for combination products; and, if applicable, the electronic product radiation control provisions (Sections
+531-542 of the Act); 21 CFR Parts 1000-1050.
+All medical devices, including Class I and unclassified devices and combination product device constituent
+parts are required to be in compliance with the final Unique Device Identification System rule ("UDI Rule").
+The UDI Rule requires, among other things, that a device bear a unique device identifier (UDI) on its label
+and package (21 CFR 801.20(a)) unless an exception or alternative applies (21 CFR 801.20(b)) and that the
+dates on the device label be formatted in accordance with 21 CFR 801.18. The UDI Rule (21 CFR
+830.300(a) and 830.320(b)) also requires that certain information be submitted to the Global Unique Device
+Identification Database (GUDID) (21 CFR Part 830 Subpart E). For additional information on these
+requirements, please see the UDI System webpage at https://www.fda.gov/medical-devices/device-advicecomprehensive-regulatory-assistance/unique-device-identification-system-udi-system.
+
+K251306 - Ti-Hao Wang
+
+Page
+
+3
+
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+
+Lora D. Weidner, Ph.D.
+Assistant Director
+Radiation Therapy Team
+DHT8C: Division of Radiological
+Imaging and Radiation Therapy Devices
+OHT8: Office of Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+Page 8 of 55
+
+Seg Pro V3
+
+I
+
+D Over-The-Counter Use (21 CFR 801 Subpart C)
+applicable).
+Please select the types of uses (select one or both, as
+Z Prescription Use (Part 21 CFR 801 Subpart D)
+review as the primary interpretation.
+the normal organs on DICOM images. Clinicians must not use the software generated output alone without
+Seg Pro V3 is an adjunct tool and is not intended to replace a clinician's judgment and manual contouring o
+
+1
+
+to detect lesions.
+system to review and edit results generated. Seg Pro V3 is not intended to be used for decision making or
+planning systems. Seg Pro V3 must be used in conjunction with a DICOM-compliant treatment planning
+The contours are generated by deep-learning algorithms and then transferred to radiation therapy treatment
+Pro V3 is intended to be used on adult patients only.
+radiation therapy treatment planning by providing initial contours of organs at risk on DICOM images. Seg
+not limited to, radiation oncologists, medical physicists, and dosimetrists, during their clinical workflows of
+Seg Pro V3 is a software device intended to assist trained radiation oncology professionals, including, but
+
+[
+
+Please provide your Indications for Use below.
+
+Seg Pro V3 (RT-300)
+Please provide the device trade name(s).
+
+I
+
+textbox will be left blank for original applications/submissions.
+I K251306
+Please type in the marketing application/submission number, if it is known. This
+
+Indications for Use
+
+K251306
+​510(k) Summary​
+​1.
+
+​General Information
+
+​510(k) Sponsor​
+​Address​
+
+​Applicant​
+
+​Ever Fortune.AI Co., Ltd.​
+​8F., No.360, Sec. 1, Jingmao Rd.,​
+​Beitun Dist.,​
+​Taichung City 406040,​
+​Taiwan​
+​Joseph Chang​
+
+​Contact Information​
+
+​886-04-23213838 #216
+​joseph.chang@everfortune.ai
+
+​Correspondence Person​
+
+​Ti-Hao Wang​
+
+​Contact Information​
+
+​886-04-23213838 #168
+
+​thothwang@gmail.com
+​Date Prepared​
+
+​2.
+
+​Proposed Device
+
+​Proprietary Name​
+​Common Name​
+​Classification Name​
+​Regulation Number​
+​Product Code​
+​Regulatory Class​
+

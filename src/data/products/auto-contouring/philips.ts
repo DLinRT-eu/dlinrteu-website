@@ -55,7 +55,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         decisionDate: "2015",
         notes: "Cleared as part of Philips Ingenia MR-RT system. MRCAT Prostate + Auto-Contouring is a clinical application running on the cleared MR-RT platform. First MR-only radiotherapy solution."
       },
-      intendedUseStatement: "For use in treatment planning for radiation therapy."
+      intendedUseStatement: "As a plug-in clinical application to Ingenia MR-RT, MRCAT Prostate + Auto-Contouring provides attenuation maps and automated, MR-based contours of prostate and organs at risk in as little as 20 minutes – all in a repeatable 'one-click' workflow. (Source: Philips MRCAT Prostate + Auto-Contouring product page, https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application, accessed 2026-05-30. No verbatim FDA IFU publicly available — cleared as part of the Philips Ingenia MR-RT system platform.)"
     },
     market: {
       onMarketSince: "2015",
@@ -83,7 +83,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Philips product documentation (2019)"
   }
 ];

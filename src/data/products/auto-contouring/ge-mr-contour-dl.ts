@@ -56,7 +56,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-04-01",
         notes: "Previous clearance: K213717. Standalone MRI-based auto-contouring component also integrated into GE iRT platform."
       },
-      intendedUseStatement: "For use in radiation therapy planning to assist in the delineation of organs at risk from MRI images."
+      intendedUseStatement: "MR Contour DL generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be used by trained medical professionals. It is intended to aid in radiation therapy planning by generating initial contours to accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for each organ at risk and correct the contours/labels as needed. MR Contour DL is intended to be used with images acquired on MR scanners, in adult patients. (Source: FDA 510(k) K242925 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -69,7 +69,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K242925). GE HealthCare ESTRO 2026 press release (12 May 2026) confirms head & neck and pelvis OAR coverage and bundling within the iRT MR Direct workflow."
   }
 ];

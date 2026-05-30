@@ -61,7 +61,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "Unknown"
       },
       intendedUseStatement:
-        "Intended to assist clinicians in delineating organs-at-risk and target volumes for radiotherapy planning as part of the uRT radiotherapy ecosystem; clinician review and approval of all contours is required."
+        "uRT-linac 506c offers a more precise, efficient, and patient friendly radiotherapy. The entire workflow of radiotherapy, including simulation, contouring, plan, treatment and QA, can be developed or modified online to facilitate individualized precision radiotherapy. (Source: United Imaging uRT-linac 506c product page, https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c, accessed 2026-05-30. No verbatim standalone IFU publicly available for the uRT Auto-Contouring module — described as part of the uRT-linac ecosystem.)"
     },
     market: {
       onMarketSince: "2026",
@@ -105,7 +105,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Vendor press release (ESTRO 2026) and company website"
   }
 ];

@@ -42,7 +42,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
       class: "I",
       type: "Software Development Environment"
     },
-    intendedUseStatement: "For research use; clinical deployment requires separate validation."
+    intendedUseStatement: "AccuLearning is a deep learning–powered platform built for localized, small-sample training in radiation oncology. Designed to help clinics build customized AI models with their own data, it enables smarter, site-specific adaptation and integration across the Manteia ecosystem. (Source: Manteia AccuLearning product page, https://www.manteiatech.com/acculearning, accessed 2026-05-30. No verbatim regulatory IFU available — research-use platform.)"
   },
   market: {
     onMarketSince: "2017",
@@ -63,7 +63,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   ],
   version: "N/D",
   releaseDate: "2017-01-01",
-  lastRevised: "2026-05-20",
+  lastRevised: "2026-05-30",
   lastUpdated: "2025-08-11",
   source: "Automatically retrieved"
 }

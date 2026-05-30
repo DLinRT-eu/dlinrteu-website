@@ -651,7 +651,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         decisionDate: "2026-03-19",
         notes: "Commercially branded as AutoContour v2.7 (unified AutoContour + Limbus Contour platform). FDA clearance K260509 (Special 510(k), 30-day review). Previous clearances: K242729 (V4, 2024-12-20), K230685 (V3, 2023), K220598 (V2), K200323 (V1). Also distributes Limbus Contour (K241837) after acquisition in April 2024."
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+      intendedUseStatement: "AutoContour is intended to assist radiation treatment planners in contouring and reviewing structures within medical images in preparation for radiation therapy treatment planning. (Source: FDA 510(k) K260509 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2017",
@@ -688,7 +688,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     version: "2.7",
     releaseDate: "2026-03-19",
     lastUpdated: "2026-04-21",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), company official sources, vendor product page (AutoContour v2.7) accessed 2026-04-21"
   }
 ];

@@ -289,7 +289,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-02-24",
         notes: "Cleared as OncoStudio (OS-01). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242994.pdf"
       },
-      intendedUseStatement: "AI-powered automatic organ and target volume contouring for radiotherapy treatment planning"
+      intendedUseStatement: "OncoStudio provides deep-learning-based automatic contouring to organs at risk in DICOM-RT format from CT images. This software could be used as an initial contouring for the clinicians to be confirmed by the radiation oncology department for treatment planning or other professions where a segmented mask of organs is needed. Deep learning contouring from Head & Neck, Thorax, Abdomen, and Pelvis; Generates DICOM-RT structure of contoured objects; Manual Contouring; Receive, transmit, store, retrieve, display, and process medical images and DICOM objects. (Source: FDA 510(k) K242994 Summary, accessed 2026-05-30)"
     },
     // Market Information
     market: {
@@ -337,7 +337,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     version: "2024",
     releaseDate: "2024-01-01",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }

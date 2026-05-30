@@ -130,7 +130,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
         status: "pending",
       },
       intendedUseStatement:
-        "Automatic segmentation of organs at risk and GTV in radiation therapy planning on CT and MRI. CE-cleared scope per vendor booth communication at ESTRO 2026; pending EUDAMED / press-release verification. All AI-generated contours require review by a qualified radiation oncologist prior to clinical use.",
+        "Mediq RT is the contouring software we develop to help doctors identify and delineate cancerous tumors. Moreover, the app will enable them to communicate efficiently with their colleagues involved in the process of radiation treatment planning. (Source: Synaptiq product page, https://synaptiq.io/product/, accessed 2026-05-30. No verbatim regulatory IFU publicly available — CE-marked only.)",
     },
     market: {
       onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
@@ -190,7 +190,7 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2023-08-20",
     lastUpdated: "2024-03-05",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source:
       "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, and vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature. Note: Abdomen structures require source verification; CE clearance details pending verification against EUDAMED listing or vendor press release.",
   },

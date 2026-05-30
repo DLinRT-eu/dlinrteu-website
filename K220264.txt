@@ -1,0 +1,365 @@
+Ever Fortune.AI Co., Ltd.
+℅ Ti-Hao Wang, MD
+Chief Technology Officer
+Rm. D, 8F. No. 573, Sec. 2 Taiwan Blvd., West Dist.
+Taichung City, 403020
+Taiwan
+
+April 28, 2022
+
+Re: K220264
+Trade/Device Name: EFAI RTSuite CT HN-Segmentation System
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Medical Image Management And Processing System
+Regulatory Class: Class II
+Product Code: QKB
+Dated: January 28, 2022
+Received: January 31, 2022
+Dear Ti-Hao Wang:
+We have reviewed your Section 510(k) premarket notification of intent to market the device referenced
+above and have determined the device is substantially equivalent (for the indications for use stated in the
+enclosure) to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the
+enactment date of the Medical Device Amendments, or to devices that have been reclassified in accordance
+with the provisions of the Federal Food, Drug, and Cosmetic Act (Act) that do not require approval of a
+premarket approval application (PMA). You may, therefore, market the device, subject to the general
+controls provisions of the Act. Although this letter refers to your product as a device, please be aware that
+some cleared products may instead be combination products. The 510(k) Premarket Notification Database
+located at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.04.32
+
+K220264 - Ti-Hao Wang
+
+Page 2
+
+801); medical device reporting (reporting of medical device-related adverse events) (21 CFR 803) for
+devices or postmarketing safety reporting (21 CFR 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR 4, Subpart A) for
+combination products; and, if applicable, the electronic product radiation control provisions (Sections 531542 of the Act); 21 CFR 1000-1050.
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR Part
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+
+Julie Sullivan -S
+Julie Sullivan, PhD
+Assistant Director
+Division of Radiological Health
+OHT7: Office of In Vitro Diagnostics
+and Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+K220264
+
+EFAI HNSeg Traditional 510(k)
+
+K220264
+
+Section 5. 510(k) Summary
+1. General Information
+510(k) Sponsor
+Address
+
+Applicant
+Contact Information
+Correspondence Person
+Contact Information
+Date Prepared
+
+Ever Fortune.AI Co., Ltd.
+Rm. D, 8F. No. 573, Sec. 2 Taiwan Blvd.
+West Dist.
+Taichung City 403020
+TAIWAN
+Joseph Chang
+886-04-23213838 #216
+joseph.chang@everfortune.ai
+Ti-Hao Wang, MD
+886-04-23213838 #168
+tihao.wang@everfortune.ai
+January 29, 2022
+
+2. Proposed Device
+Proprietary Name
+Common Name
+Classification Name
+Regulation Number
+Regulation Name
+Product Code
+Regulatory Class
+
+EFAI RTSuite CT HN-Segmentation System v1.0
+EFAI HNSeg v1.0
+Picture Archiving and Communications System
+21 CFR 892.2050
+Medical Image Management and Processing System
+QKB
+II
+
+3. Predicate Device
+Proprietary Name
+Premarket Notification
+Classification Name
+Regulation Number
+Regulation Name
+Product Code
+Regulatory Class
+
+EFAI HNSeg Traditional 510(k)
+
+AccuContour
+K191928
+Picture Archiving and Communications System
+21 CFR 892.2050
+Medical Image Management and Processing System
+QKB
+II
+
+Page 1 of 5
+
+K220264
+
+4. Device Description
+EFAI RTSuite CT HN-Segmentation System, herein referred to as EFAI HNSeg, is a standalone
+software that is designed to be used by trained radiation oncology professionals to automatically
+delineate head-and-neck organs-at-risk (OARs) on CT images. This auto-contouring of OARs is
+intended to facilitate radiation therapy workflows.
+The device receives CT images in DICOM format as input and automatically generates the
+contours of OARs, which are stored in DICOM format and in RTSTRUCT modality. The device
+does not offer a user interface and must be used in conjunction with a DICOM-compliant treatment
+planning system to review and edit results. Once data is routed to EFAI HNSeg, the data will be
+processed and no user interaction is required, nor provided.
+The deployment environment is recommended to be in a local network with an existing hospitalgrade IT system in place. EFAI HNSeg should be installed on a specialized server supporting deep
+learning processing. The configurations are only being operated by the manufacturer:
+● Local network setting of input and output destinations;
+● Presentation of labels and their color;
+● Processed image management and output (RTSTRUCT) file management.
+5. Intended Use
+EFAI HNSeg is a software device intended to assist trained radiation oncology professionals,
+including, but not limited to, radiation oncologists, medical physicists, and dosimetrists, during
+their clinical workflows of radiation therapy treatment planning by providing initial contours of
+organs at risk in the head and neck region on non-contrast CT images. EFAI HNSeg is intended
+to be used on adult patients only.
+The contours are generated by deep-learning algorithms and then transferred to radiation therapy
+treatment planning systems. EFAI HNSeg must be used in conjunction with a DICOM-compliant
+treatment planning system to review and edit results generated. EFAI HNSeg is not intended to be
+used for decision making or to detect lesions.
+EFAI HNSeg is an adjunct tool and is not intended to replace a clinician's judgment and manual
+contouring of the normal organs on CT. Clinicians must not use the software generated output
+alone without review as the primary interpretation.
+6. Comparison of Technological Characteristics with Predicate Device
+Table below provides a comparison of the intended use and key technological features of EFAI
+HNSeg with that of the Primary Predicate, AccuContour™ (K191928).
+
+EFAI HNSeg Traditional 510(k)
+
+Page 2 of 5
+
+K220264
+
+Table - Comparison with the Predicate Device.
+Company
+Device Name
+510k Number
+Regulation No.
+Classification
+Product Code
+
+Ever Fortune.AI Co., Ltd. (EFAI)
+EFAI HNSeg
+Pending
+21CFR 892.2050
+II
+QKB
+EFAI HNSeg is a software device
+intended to assist trained radiation
+oncology professionals, including,
+but not limited to, radiation
+oncologists, medical physicists,
+and dosimetrists, during their
+clinical workflows of radiation
+therapy treatment planning by
+providing initial contours of organs
+at risk in the head and neck region
+on non-contrast CT images. EFAI
+HNSeg is intended to be used on
+adult patients only.
+
+Xiamen Manteia Technology LTD.
+AccuContour™
+K191928
+21CFR 892.2050
+II
+QKB
+It is used by radiation oncology
+department to register
+multimodality images and segment
+(non-contrast) CT images, to
+generate needed information for
+treatment planning, treatment
+evaluation and treatment adaptation.
+
+The product has two image process
+functions:
+(1) Deep learning contouring: it can
+automatically contour the organ-atrisk, including head and neck,
+thorax, abdomen and pelvis (for
+The contours are generated by both male and female),
+deep-learning algorithms and then (2) Automatic Registration, and
+transferred to radiation therapy (3) Manual Contour.
+Intended Use/Indication treatment planning systems. EFAI
+for Use
+HNSeg must be used in conjunction It also has the following general
+with
+a
+DICOM-compliant functions:
+treatment planning system to (1) Receive, add/edit/delete,
+review and edit results generated. transmit, input/export, medical
+EFAI HNSeg is not intended to be images and DICOM data;
+used for decision making or to (2) Patient management;
+detect lesions.
+(3) Review of processed images;
+(4) Open and save of files.
+EFAI HNSeg is an adjunct tool and
+is not intended to replace a
+clinician's judgment and manual
+contouring of the normal organs on
+CT. Clinicians must not use the
+software generated output alone
+without review as the primary
+interpretation.
+Segmentation
+(Contouring)
+Technology
+Operating System
+
+Deep learning
+
+Deep learning
+
+Linux Ubuntu 20.04
+
+Microsoft Windows
+
+EFAI HNSeg Traditional 510(k)
+
+Page 3 of 5
+
+K220264
+
+User Population
+
+Supported Modalities
+Image Input
+Compatible Scanner
+Models
+Localization and
+Definition of Objects
+(ROI)
+Compatible
+Treatment Planning
+System
+
+Automated
+Workflow
+
+User Interface
+
+Trained medical professionals
+including, but not limited to,
+radiation oncologists, medical
+physicists, and dosimetrists.
+Non-contrast CT
+Complies with DICOM standard
+No Limitation on scanner model
+DICOM 3.0 compliance required.
+Organ-at risk of head and neck
+region
+No Limitation on TPS model,
+DICOM compliance required.
+EFAI HNSeg automatically
+processes input image data and
+sends the results as DICOM-RT
+Structure Sets to a userconfigurable
+target node.
+No
+
+It is used by radiation oncology
+department.
+Segmentation Features: NonContrast CT
+Registration Features: CT, MRI,
+PET
+Complies with DICOM standard
+No Limitation on scanner model
+DICOM 3.0 compliance
+required.
+Organ-at-risk, including head and
+neck, thorax, abdomen and pelvis
+(for both male and female)
+No Limitation on TPS model,
+DICOM 3.0 compliance required.
+
+AccuContour automatically
+processes input image data
+
+Yes
+
+The proposed device, EFAI HNSeg, is substantially equivalent to the claimed predicate,
+AccuContour™ (K191928).
+7. Performance Data
+Performance of the EFAI HNSeg v1.0 has been evaluated and verified in accordance with software
+specifications and applicable performance standards through software verification and validation
+testing. Additionally, the software validation activities were performed in accordance with IEC
+62304:2006/A1:2016 - Medical device software – Software life cycle processes, in addition to the
+FDA Guidance documents, “Guidance for the Content of Premarket Submissions for Software
+Contained in Medical Devices”(2005) and the recently published “Content of Premarket
+submissions for Devices Software Functions (11-04-2021), and “Content of Premarket Submission
+for Management of Cybersecurity in Medical Devices.”
+To establish the contour performance of EFAI HNSeg, a non-inferiority standalone performance
+test was performed. This non-inferiority test compared the mean Dice coefficient of the
+automatically generated head and neck OAR contours for EFAI HNSeg against that of the
+predicate device, AccuContour™. The results demonstrate that the EFAI HNSeg device was noninferior to the predicate by at least a non-inferiority limit of 0.1 Dice, which was the largest
+EFAI HNSeg Traditional 510(k)
+
+Page 4 of 5
+
+K220264
+
+difference that is clinically acceptable based on previous studies, and thus we conclude that
+equivalence has been demonstrated.
+8. Conclusion
+Based on the information submitted in this premarket notification, and based on the indications for
+use, technological characteristics, and performance testing, the EFAI HNSeg v1.0 raises no new
+questions of safety and effectiveness and is substantially equivalent to the predicate device in terms
+of safety, effectiveness, and performance.
+
+EFAI HNSeg Traditional 510(k)
+
+Page 5 of 5
+
+

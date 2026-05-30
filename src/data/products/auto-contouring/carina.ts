@@ -46,7 +46,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K212274",
         decisionDate: "2022-04-01"
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk and target volumes in radiation therapy planning."
+      intendedUseStatement: "INTContour provides a machine learning-based approach for the automatic segmentation of structures including treatment targets and organs at risk to support the radiation therapy treatment planning process. INTContour is intended as an initial method to segment and contour study series; therefore, this software must be used in conjunction with an appropriate software to edit the segmentation results if necessary. It is not intended to replace a thorough review by qualified medical professionals. INTContour is developed for use by dosimetrists, medical physicists, and radiation oncologists. The currently supported anatomical regions for automatic segmentation are head and neck, thorax, abdomen, and male pelvis. (Source: FDA 510(k) K212274 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
@@ -220,7 +220,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Uterus (investigational)",
       "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",

@@ -75,7 +75,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         decisionDate: "2024-11-15",
         notes: "Previous clearance: K230575 (2023). Now distributed by Radformation (acquired April 30, 2024)."
       },
-      intendedUseStatement: "For use in radiation therapy planning to assist in the delineation of organs at risk."
+      intendedUseStatement: "Limbus Contour is a software-only medical device intended for use by trained radiation oncologists, dosimetrists and physicists to derive optimal contours for input to radiation treatment planning. Supported image modalities are Computed Tomography and Magnetic Resonance. The Limbus Contour Software assists in the following scenarios: Operates in conjunction with radiation treatment planning systems or DICOM viewing systems to load, save, and display medical images and contours for treatment evaluation and treatment planning; Creation, transformation, and modification of contours for applications including, but not limited to: transferring contours to radiotherapy treatment planning systems, aiding adaptive therapy and archiving contours for patient follow-up; Localization and definition of healthy anatomical structures. Limbus Contour is not intended for use with digital mammography. (Source: FDA 510(k) K241837 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
@@ -127,7 +127,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2024-03-10",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K241837), company official sources"
   }
 ];

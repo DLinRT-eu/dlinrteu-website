@@ -61,7 +61,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         status: "TGA Cleared",
         notes: "Cleared for Australian market"
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+      intendedUseStatement: "ART-Plan+'s indicated target population is cancer patients for whom radiotherapy treatment has been prescribed. In this population, any patient for whom relevant modality imaging data is available. ART-Plan+ includes several modules: SmartPlan which allows automatic generation of radiotherapy treatment plan that the users import into their own Treatment Planning System (TPS) for the dose calculation, review and approval (available for supported prescriptions for prostate only); Annotate which allows automatic generation of contours for organs at risk, lymph nodes and tumors, based on medical practices, on medical images such as CT and MR images; AdaptBox which allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast/Thorax, Pelvis (male). ART-Plan+ is not intended to be used for patients less than 18 years of age. The indicated users are trained medical professionals including, but not limited to, radiotherapists, radiation oncologists, medical physicists, dosimetrists, and medical professionals involved in the radiation therapy process. The indicated use environments include, but are not limited to, hospitals, clinics and any health facility offering radiation therapy. (Source: FDA 510(k) K253091 Summary [ART-Plan+, which includes the Annotate module], accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -314,7 +314,7 @@ export const THERAPANACEA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.phro.2024.100654"
       }
     ],
-    lastRevised: "2026-05-22",
+    lastRevised: "2026-05-30",
     source: "Therapanacea official website (therapanacea.eu/our-products/annotate/, therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822, K202700). Structure list verified against vendor public enumeration on 2026-05-22 (191 entries vs vendor headline '200+ OARs and lymph nodes'); residual delta is naming aliasing (Encephalon=Brain, Hypophyse=Pituitary, Medullar canal=Spinal Canal, Mouth=Oral Cavity)."
   }
 ];
