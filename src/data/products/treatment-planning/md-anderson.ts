@@ -59,7 +59,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         decisionDate: "2023-01-20"
       },
       intendedUseStatement:
-        "For use in radiation therapy planning to assist in automated contouring and treatment plan creation for cervix, breast, head and neck, and brain cancer cases.",
+        "\"The Radiation Planning Assistant (RPA) is used to plan radiotherapy treatments for patients with cancers of the head and neck, cervix, breast, and metastases to the brain. The RPA is used to plan external beam irradiation with photon beams using CT images. The RPA is used to create contours and treatment plans that the user imports into their own Treatment Planning System (TPS) for review, editing, and re-calculation of the dose.\" (Source: FDA 510(k) K222728 Summary, accessed 2026-05-30)",
     },
     market: {
       onMarketSince: "2020",
@@ -111,6 +111,6 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
   },
 ];

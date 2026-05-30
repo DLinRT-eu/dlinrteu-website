@@ -56,7 +56,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ",
         decisionDate: "2023-07-10"
       },
-      intendedUseStatement: "MOZI TPS is intended for use in radiation therapy treatment planning, including dose calculation and plan optimization."
+      intendedUseStatement: "\"The MOZI Treatment Planning System (MOZI TPS) is used to plan radiotherapy treatments with malignant or benign diseases. MOZI TPS is used to plan external beam irradiation with photon beams.\" (Source: FDA 510(k) K223724 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2023",
@@ -76,7 +76,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K223724), manufacturer official website",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [

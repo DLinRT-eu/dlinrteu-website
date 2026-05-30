@@ -57,7 +57,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
         productCode: "LLZ",
         decisionDate: "2024-03-06"
       },
-      intendedUseStatement: "For automated registration of medical images in radiation therapy planning workflows."
+      intendedUseStatement: "\"Autofuse is a software package that provides physicians a means for comparison of medical data including imaging data that is DICOM compliant. It allows the display, annotation, volume operation, volume rendering, registration and fusion of medical images as an aid during use by diagnostic radiology, oncology, radiation therapy planning, and other medical specialties.\" (Source: FDA 510(k) K233572 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
@@ -78,7 +78,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     version: "2.1",
     releaseDate: "2023-08-15",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K233572), company website"
   }
 ];

@@ -61,7 +61,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         status: "TGA Cleared",
         notes: "Cleared for Australian market as part of ART-Plan+ platform"
       },
-      intendedUseStatement: "For multi-modal visualization and rigid- and deformable registration of anatomical and functional images."
+      intendedUseStatement: "\"ART-Plan+'s indicated target population is cancer patients for whom radiotherapy treatment has been prescribed. It includes several modules: SmartPlan which allows automatic generation of radiotherapy treatment plan... and AdaptBox which allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making.\" (Source: FDA 510(k) K253091 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -87,7 +87,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)"
   }
 ];

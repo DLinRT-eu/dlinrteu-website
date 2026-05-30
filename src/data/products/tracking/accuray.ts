@@ -60,7 +60,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
         decisionDate: "2018-11-23",
         notes: "Synchrony Motion Tracking and Compensation Feature for Radixact Treatment Delivery System"
       },
-      intendedUseStatement: "Intended for real-time motion tracking and synchronization during radiation therapy delivery to correct tumor motion and enable precise treatment delivery."
+      intendedUseStatement: "\"The Motion Tracking and Compensation Feature is an option within the indications for use of the Radixact Treatment Delivery System. The Radixact Treatment Delivery System is indicated for the delivery of radiation therapy, stereotactic radiotherapy or stereotactic radiosurgery to tumors or other targeted tissues anywhere in the body under the direction of a licensed medical practitioner.\" (Source: FDA 510(k) K182687 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
@@ -107,7 +107,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony.",
     lastUpdated: "2026-05-17",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K182687), Accuray official website, Accuray ESTRO 2026 booth presence"
   }
 ];

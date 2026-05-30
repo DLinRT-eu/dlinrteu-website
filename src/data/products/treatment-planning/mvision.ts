@@ -58,7 +58,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
         notes: "First MVision AI submission under therapeutic dose-calculation product code MUJ."
       },
       intendedUseStatement:
-        "AI-powered software for predicting patient-specific 3D dose distributions to assist clinicians during radiation therapy plan creation."
+        "\"Dose+ is a software-only medical device intended for use by qualified, trained radiation therapy professionals... The device is intended for male patients with localized prostate cancer or prostate cancer with pelvic lymph node involvement who are undergoing external beam radiation therapy treatment. The software uses machine learning-based algorithms to automatically produce 3D dose distributions from patient-specific anatomical geometry and target dose prescription.\" (Source: FDA 510(k) K250064 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2025",
@@ -100,7 +100,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-05-23",
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",
