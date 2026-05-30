@@ -49,7 +49,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-04-04",
         notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A"
       },
-      intendedUseStatement: "For use in treatment planning for radiation therapy."
+      intendedUseStatement: "RayStation is a software system for radiation therapy and medical oncology. Based on user input, RayStation proposes treatment plans. After a proposed treatment plan is reviewed and approved by authorized intended users, RayStation may also be used to administer treatments. The system functionality can be configured based on user needs. (Source: FDA 510(k) K240398 Summary [RayStation, which includes Deep Learning Segmentation], accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2018",
@@ -69,7 +69,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     version: "12.0",
     releaseDate: "2023-12-01",
     lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

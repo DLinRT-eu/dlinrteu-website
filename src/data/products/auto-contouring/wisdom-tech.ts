@@ -137,7 +137,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
         decisionDate: "2024-05-07",
         notes: "Cleared as DeepContour (V1.0). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf"
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+      intendedUseStatement: "DeepContour is a deep learning based medical imaging software that allows trained healthcare professionals to use DeepContour as a tool to automatically process CT images. In addition, DeepContour is suitable for the following conditions: 1) Creation of contours using deep-learning algorithms, support quantitative analysis, organ HU distribution statistics, transfer contour files to TPS, and create management archives for patients; 2) Analyze the anatomical structure at different anatomical positions; 3) Rigid and elastic registration based on CT; 4) 3D reconstruction, editing and other visual tools based on organ contours. (Source: FDA 510(k) K232928 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2024",
@@ -152,7 +152,7 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2024-04-17",
     lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-22",
+    lastRevised: "2026-05-30",
     source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
     limitations: [
       "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."

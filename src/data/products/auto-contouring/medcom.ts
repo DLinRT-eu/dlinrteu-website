@@ -55,7 +55,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
         notes: "No FDA clearance publicly documented for the ProSoma Dart AI Segmentation Engine at the time of listing.",
       },
       intendedUseStatement:
-        "Automatic delineation of anatomical risk and target regions for external beam radiotherapy planning, as part of the ProSoma RT toolkit.",
+        "PROSOMA® DART is the new module in the ProSoma® family of toolkits which enables the fully automatic anatomical contouring using a state of the art Segmentation algorithm. (Source: MedCom ProSoma DART product page, https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/, accessed 2026-05-30. No verbatim regulatory IFU publicly available — CE legacy device under MDR Article 120(3c).)",
     },
     market: {
       distributionChannels: ["Direct sales"],
@@ -74,7 +74,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Vendor product page (MedCom ProSoma)."
   },
 ];
