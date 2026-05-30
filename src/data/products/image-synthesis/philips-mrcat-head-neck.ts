@@ -60,7 +60,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         decisionDate: "2022-10",
         notes: "AI-enabled MR-only head and neck radiotherapy application. Enables MR as sole imaging modality for RT planning of soft tissue tumors in head and neck."
       },
-      intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of head and neck cancers."
+      intendedUseStatement: "MRCAT Head and Neck is indicated for radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region. (Source: FDA 510(k) K214081 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
