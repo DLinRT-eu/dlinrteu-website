@@ -111,7 +111,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
     evidence: [
       {

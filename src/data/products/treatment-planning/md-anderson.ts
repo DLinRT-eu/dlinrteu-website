@@ -111,6 +111,6 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
   },
 ];
