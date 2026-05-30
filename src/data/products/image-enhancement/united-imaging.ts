@@ -51,7 +51,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "uCS-AI is cleared as an integrated feature of United Imaging uRT radiotherapy systems. No standalone 510(k) clearance exists for uCS-AI as a separate device."
       },
-      intendedUseStatement: "uCS-AI is intended for enhancing cone-beam CT images acquired on United Imaging radiotherapy systems to improve image quality and reduce artifacts for radiotherapy planning and verification workflows."
+      intendedUseStatement: "uCS-AI (United Compressed Sensing-AI) reconstruction algorithm enables the generation of high-quality CBCT images in a very short time with a low dose to support treatment planning and Image-Guided Radiation Therapy (IGRT). The uRT-linac 506c is an integrated CT-linac system designed to provide high-quality diagnostic CT for IGRT and radiotherapy treatment. (Source: United Imaging uRT-linac 506c product page, global.united-imaging.com, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
