@@ -54,7 +54,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
         decisionDate: "2016-09-19"
       },
       intendedUseStatement:
-        "The AlgoMedica PixelShine System is intended for networking, communication, processing and enhancement of CT images in DICOM format. It is specifically indicated for assisting professional radiologists and specialists in reaching their own diagnosis. The device processing is not effective for lesion, mass or abnormalities of sizes less than 3.0 mm. The AlgoMedica PixelShine is not intended for use with or for diagnostic interpretation of mammography images."
+        "The AlgoMedica PixelShine System is intended for networking, communication, processing and enhancement of CT images in DICOM format. It is specifically indicated for assisting professional radiologists and specialists in reaching their own diagnosis. The device processing is not effective for lesion, mass or abnormalities of sizes less than 3.0 mm. The AlgoMedica PixelShine is not intended for use with or for diagnostic interpretation of mammography images. (Source: FDA 510(k) K161625 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019-05"
@@ -88,7 +88,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company provided information"
   }
 ];

@@ -64,7 +64,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-12-23",
         notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025). Prior clearance: K242822 (v3.0.0, Feb 2025). Not available in all markets yet."
       },
-      intendedUseStatement: "For automatic segmentation of male pelvic structures in CBCT images for adaptive radiation therapy planning."
+      intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). (Source: FDA 510(k) K253091 Summary, accessed 2026-05-30)"
     },
     supportedStructures: [
       "Pelvis (Male): Anal Canal",
@@ -91,7 +91,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)",
     evidenceRigor: "E0",
     evidenceRigorNotes: "No vendor-independent clinical validation studies identified for AdaptBox augmented CBCT generation. Evidence limited to vendor publications.",

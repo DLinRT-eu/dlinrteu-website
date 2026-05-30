@@ -59,7 +59,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
         decisionDate: "2026-01-16",
         notes: "Cleared as part of Elekta Evo CT-Linac system. K-number not yet published in FDA database as of Feb 2026. Available as upgrade for existing Elekta linacs."
       },
-      intendedUseStatement: "Intended for enhancing CBCT medical images to improve quality through AI-based reconstruction to support radiotherapy treatment planning and verification."
+      intendedUseStatement: "Iris high-definition, AI-enhanced imaging swiftly enhances image quality, precisely visualizing target areas for every fraction to expedite workflow and evolve the clinical practice. Iris is a component of Elekta medical linear accelerators and is intended to provide high-definition cone-beam CT (CBCT) images for target visualization and patient positioning during radiation therapy. (Source: Elekta Versa HD product brochure, elekta.com, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -90,7 +90,7 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }

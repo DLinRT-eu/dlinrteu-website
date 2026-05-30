@@ -53,7 +53,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2019-04-12"
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose compared to conventional reconstruction techniques."
+      intendedUseStatement: "The Deep Learning Image Reconstruction option is a deep learning based reconstruction method intended to produce cross-sectional images of the head and whole body by computer reconstruction of X-ray transmission data taken at different angles and planes, including Axial, Helical (Volumetric), and Cardiac acquisitions, for all ages. Deep Learning Image Reconstruction can be used for head, whole body, cardiac, and vascular CT applications. (Source: FDA 510(k) K183202 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
@@ -104,7 +104,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Vendor white papers and multiple published studies report improved image quality and low-contrast detectability with deep learning image reconstruction, with dose reduction feasibility depending on protocol and clinical indication.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   },
@@ -161,7 +161,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         decisionDate: "2020-04-10",
         notes: "K193282 initial clearance (Apr 2020). K213717 expanded indications (Dec 2021). K252379 expanded clearance (Dec 2025)."
       },
-      intendedUseStatement: "Intended for use in MR image reconstruction to enhance signal-to-noise ratio and/or reduce scan time while maintaining diagnostic image quality."
+      intendedUseStatement: "AIR Recon DL is a deep-learning-based reconstruction technique that processes raw data to improve signal-to-noise ratio (SNR) and image sharpness, enabling shorter scan times. It is indicated for use as a diagnostic imaging device to produce axial, sagittal, coronal, and oblique images, spectroscopic images, parametric maps, and/or spectra, dynamic images of the structures and/or functions of the entire body. (Source: FDA 510(k) K193282 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -218,7 +218,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
     lastUpdated: "2026-04-13",
-    lastRevised: "2026-04-13",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
   }

@@ -56,7 +56,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         decisionDate: "2019-07-03",
         notes: "Cleared as syngo.CT Dual Energy. Part of Siemens syngo.via platform."
       },
-      intendedUseStatement: "Intended for enhancing dual-energy CT image quality and material discrimination to support clinical interpretation."
+      intendedUseStatement: "syngo.CT Dual Energy is designed to operate with CT images based on two different X-ray spectra. The various materials of an anatomical region of interest have different attenuation coefficients, which depend on the used energy. These differences provide information on the chemical composition of the scanned body materials; syngo.CT Dual Energy combines images acquired with low and high energy spectra to visualize this information. (Source: FDA 510(k) K191468 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -76,7 +76,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection and characterization compared to conventional dual-energy processing",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Company website"
   }
 ];

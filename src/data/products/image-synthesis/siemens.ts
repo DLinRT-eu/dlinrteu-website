@@ -50,7 +50,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         decisionDate: "2024-04-26",
         notes: "K232799 (Apr 2024). Prior clearances: K220783 (Sep 2022), K211379 (Jul 2021), K201444 (Aug 2020)"
       },
-      intendedUseStatement: "For creating synthetic CT datasets from MR images to be used in radiation therapy planning."
+      intendedUseStatement: "syngo.via RT Image Suite is a 3D and 4D image visualization, multi-modality manipulation and contouring tool that helps the preparation of treatments such as, but not limited to those performed with radiation (for example, Brachytherapy, Particle Therapy, External Beam Radiation Therapy). The software combines tools for generation of a synthetic CT based on multiple pre-defined MR acquisitions. (Source: FDA 510(k) K232799 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2015",
@@ -59,7 +59,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     version: "VB80",
     releaseDate: "2024-09-20",
     lastUpdated: "2026-03-24",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Company website",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",

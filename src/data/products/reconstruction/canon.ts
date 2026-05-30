@@ -55,7 +55,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         decisionDate: "2019-01-15",
         notes: "K181862 is the 510(k) clearance for the Aquilion ONE / GENESIS Edition CT system. AiCE is the deep learning reconstruction option within this system."
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to enhance image quality and/or reduce radiation dose while maintaining diagnostic confidence."
+      intendedUseStatement: "The Advanced intelligent Clear-IQ Engine (AiCE) is a deep-learning-based reconstruction method intended to produce cross-sectional images of the head and body by computer reconstruction of x-ray transmission data taken at different angles and planes, including axial, helical, and dynamic scanning. AiCE is designed to generate CT images with lower image noise and improved low-contrast detectability. (Source: FDA 510(k) K181862 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
@@ -96,7 +96,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website"
   },
   {
@@ -182,7 +182,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
@@ -239,7 +239,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2025-01-07"
       },
-      intendedUseStatement: "Intended for use in MR image reconstruction to enhance spatial resolution and image quality while maintaining diagnostic confidence."
+      intendedUseStatement: "The Vantage Galan 3T, MRT-3020, V10.0 with AiCE Reconstruction Processing Unit for MR is a 3 Tesla MRI system designed to produce detailed cross-sectional images of the head or body. It incorporates AI-based deep learning reconstruction technology (PIQE and AiCE) to enhance image resolution and reduce noise while maintaining scan efficiency. (Source: FDA 510(k) K243335 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2025",
@@ -285,7 +285,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
     lastUpdated: "2026-03-08", 
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }
 ];

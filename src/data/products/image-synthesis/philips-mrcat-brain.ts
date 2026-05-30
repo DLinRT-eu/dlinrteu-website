@@ -61,7 +61,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         decisionDate: "2020",
         notes: "AI-powered application for primary and metastatic brain tumors."
       },
-      intendedUseStatement: "For generating synthetic CT images from MR scans for radiation therapy planning of brain tumors."
+      intendedUseStatement: "MRCAT Brain is indicated for radiotherapy treatment planning for primary and metastatic brain tumor patients. (Source: FDA 510(k) K193109 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -70,7 +70,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2020-01-20",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Company website",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [

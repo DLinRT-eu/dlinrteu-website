@@ -52,7 +52,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging CT system clearances (e.g., K241166 for uCT 550). AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to reduce radiation dose and improve image quality compared to conventional reconstruction techniques."
+      intendedUseStatement: "Deep Recon is a data driven image reconstruction method based on deep learning technology. It is intended to produce cross-sectional images by computer reconstruction of X-ray transmission data taken at different angles and planes, including Axial, Helical, and Cardiac acquisition. Deep Recon is designed to generate CT images with lower image noise, and improved low contrast detectability, and it can reduce the dose required for diagnostic CT imaging. (Source: FDA 510(k) K193073 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -65,7 +65,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website"
 
   },
@@ -117,7 +117,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging MR system clearances. AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in MRI image reconstruction to reduce acquisition time or increase image quality."
+      intendedUseStatement: "The uMR 680 system [with uAIFI] is indicated for use as a magnetic resonance diagnostic device (MRDD) that produces sagittal, transverse, coronal, and oblique cross sectional images, and spectroscopic images, and that display internal anatomical structure and/or function of the head, body and extremities. The system utilizes uAIFI Technology (including DeepRecon) to provide AI-enhanced image reconstruction for improved SNR and resolution. (Source: FDA 510(k) K222755 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -131,7 +131,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
@@ -185,7 +185,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging PET/CT and PET/MR system clearances. AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in PET image reconstruction to enhance image quality and/or reduce acquisition time or injected dose."
+      intendedUseStatement: "The uPMR 790 system combines magnetic resonance diagnostic devices (MRDD) and Positron Emission Tomography (PET) scanners that provide registration and fusion of high resolution physiologic and anatomic information, acquired simultaneously and iso-centrically. The PET provides distribution information of PET radiopharmaceuticals within the human body to assist healthcare providers in assessing the metabolic and physiological functions. HD TOF reconstruction is a deep-learning enhanced PET reconstruction module for this system. (Source: FDA 510(k) K183014 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
@@ -219,7 +219,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "United Imaging describes HD TOF (time-of-flight) capability as part of its PET technology stack; quantitative improvements and scan-time/dose tradeoffs depend on local protocol and system configuration.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-23",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 

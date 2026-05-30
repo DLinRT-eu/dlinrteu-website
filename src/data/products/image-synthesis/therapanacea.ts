@@ -60,7 +60,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
         status: "TGA Cleared",
         notes: "Cleared for Australian market as part of ART-Plan+ platform"
       },
-      intendedUseStatement: "For generating synthetic CT datasets from MR images for radiation therapy planning."
+      intendedUseStatement: "The Annotate module allows generation of pseudo-CTs from MRI images. Users are able to visualize, evaluate and modify the HU values of the associated structures on the pseudo-CT. ART-Plan offers deep-learning based synthetic CT-generation from MR images for the following localizations: pelvis male, Brain. (Source: FDA 510(k) K234068 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -75,7 +75,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)",
     evidenceRigor: "E0",
     evidenceRigorNotes: "No vendor-independent clinical validation studies identified for MR-Box synthetic CT generation. Evidence limited to vendor publications.",

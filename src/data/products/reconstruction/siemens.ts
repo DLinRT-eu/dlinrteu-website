@@ -55,7 +55,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         decisionDate: "2022-02-25",
         notes: "Initial clearance K213693 (Feb 2022). K250436 for MAGNETOM Flow.Ace/Plus (June 2025). K251822 for MAGNETOM Free.Max/Free.Star (Nov 2025)."
       },
-      intendedUseStatement: "Intended for use in MRI image reconstruction to accelerate scan times and enhance image quality while maintaining diagnostic utility."
+      intendedUseStatement: "The MAGNETOM system is indicated for use as a magnetic resonance diagnostic device (MRDD) that produces transverse, sagittal, coronal and oblique cross sectional images. The system includes Deep Resolve, a deep learning-based image reconstruction technology (Deep Resolve Swift Brain and Deep Resolve Boost) intended to reduce acquisition time and improve image quality by denoising and enhancing sharpness. (Source: FDA 510(k) K213693 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2020",
@@ -108,7 +108,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website"
   }
 ];

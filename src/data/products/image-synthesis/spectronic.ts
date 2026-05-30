@@ -75,7 +75,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ",
         decisionDate: "2022-08-25"
       },
-      intendedUseStatement: "For generating synthetic CT and structure sets from MRI for radiation therapy planning."
+      intendedUseStatement: "MRI Planner is indicated for radiotherapy planning of adult patients for primary and metastatic cancers in the brain and head-neck regions, as well as soft tissue cancers in the pelvic region. (Source: FDA 510(k) K211841 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
@@ -85,7 +85,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     version: "3.2",
     releaseDate: "2023-07-10",
     lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database and company website. GE HealthCare ESTRO 2026 press release (12 May 2026) describes MRI Planner (Spectronic Medical, a GE HealthCare company) as the synthetic-CT engine of the iRT MR Direct MR-only workflow across brain, head & neck and pelvis.",
     evidence: [
       {
