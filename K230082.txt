@@ -1,0 +1,907 @@
+GE Medical Systems, LLC
+℅ Niki Mavrodieva
+Regulatory Affairs Leader
+3000 N. Grandview Blvd.
+WAUKESHA WI 53188
+
+May 4, 2023
+
+Re: K230082
+Trade/Device Name: Auto Segmentation
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Medical image management and processing system
+Regulatory Class: Class II
+Product Code: QKB
+Dated: April 7, 2023
+Received: April 7, 2023
+Dear Niki Mavrodieva:
+We have reviewed your Section 510(k) premarket notification of intent to market the device referenced
+above and have determined the device is substantially equivalent (for the indications for use stated in the
+enclosure) to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the
+enactment date of the Medical Device Amendments, or to devices that have been reclassified in accordance
+with the provisions of the Federal Food, Drug, and Cosmetic Act (Act) that do not require approval of a
+premarket approval application (PMA). You may, therefore, market the device, subject to the general
+controls provisions of the Act. Although this letter refers to your product as a device, please be aware that
+some cleared products may instead be combination products. The 510(k) Premarket Notification Database
+located at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+801); medical device reporting (reporting of medical device-related adverse events) (21 CFR 803) for
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.06.01
+
+K230082 - Niki Mavrodieva
+
+Page 2
+
+devices or postmarketing safety reporting (21 CFR 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR 4, Subpart A) for
+combination products; and, if applicable, the electronic product radiation control provisions (Sections 531542 of the Act); 21 CFR 1000-1050.
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR Part
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+Digitally signed by
+Lora D.
+Lora D. Weidner -S
+2023.05.04
+Weidner -S Date:
+13:08:39 -04'00'
+
+Lora D. Weidner, Ph.D.
+Assistant Director
+DHT8C: Division of Radiological Imaging
+and Radiation Therapy Devices
+OHT8: Office of Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+DEPARTMENT OF HEALTH AND HUMAN SERVICES
+Food and Drug Administration
+
+Form Approved: OMB No. 0910-0120
+Expiration Date: 06/30/2023
+
+Indications for Use
+
+See PRA Statement below.
+
+510(k) Number (if known)
+
+K230082
+
+Device Name
+
+Auto Segmentation
+Indications for Use (Describe)
+
+Auto Segmentation generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be
+used by dosimetrists, medical physicists, and radiation oncologists as initial contours to accelerate workflow for radiation
+therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for
+each organ at risk and correct the contours/labels as needed. Auto Segmentation may be used with images acquired on CT
+scanners, in adult patients.
+
+Type of Use (Select one or both, as applicable)
+Prescription Use (Part 21 CFR 801 Subpart D)
+
+Over-The-Counter Use (21 CFR 801 Subpart C)
+
+CONTINUE ON A SEPARATE PAGE IF NEEDED.
+This section applies only to requirements of the Paperwork Reduction Act of 1995.
+*DO NOT SEND YOUR COMPLETED FORM TO THE PRA STAFF EMAIL ADDRESS BELOW.*
+The burden time for this collection of information is estimated to average 79 hours per response, including the
+time to review instructions, search existing data sources, gather and maintain the data needed and complete
+and review the collection of information. Send comments regarding this burden estimate or any other aspect
+of this information collection, including suggestions for reducing this burden, to:
+Department of Health and Human Services
+Food and Drug Administration
+Office of Chief Information Officer
+Paperwork Reduction Act (PRA) Staff
+PRAStaff@fda.hhs.gov
+“An agency may not conduct or sponsor, and a person is not required to respond to, a collection of
+information unless it displays a currently valid OMB number.”
+FORM FDA 3881 (6/20)
+
+Page 1 of 1
+
+PSC Publishing Services (301) 443-6740
+
+EF
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+K230082
+
+510(k) SUMMARY
+
+This 510(k) summary of Safety and Effectiveness information is submitted in accordance with the
+requirement of 21 CFR Part 807.92:
+Date:
+
+January 06, 2023
+
+Submitter:
+
+GE Medical Systems, LLC
+3000 North Grandview Blvd
+Waukesha, WI 53188
+
+Primary Contact:
+
+Niki Mavrodieva
+Regulatory Affairs Leader
+GE Healthcare
+Phone: +1 (902) 302-3913
+Email: nikolina.mavrodieva@ge.com
+
+Secondary Contacts:
+
+Camille Vidal
+Senior Director Regulatory Affairs
+GE Healthcare
+Phone: +1 (240) 280-5356
+Email: camille.vidal@ge.com
+
+Subject Device Name:
+Device Classification
+Regulation Number:
+
+Auto Segmentation
+Class II
+21 CFR 892.2050 Medical image management and processing system
+
+Product Code:
+
+QKB
+
+Predicate Device Information
+Device Name:
+
+AccuContour
+
+Manufacturer:
+
+Xiamen Manteia Technology LTD.
+
+510(k) Number:
+
+K191928
+
+Regulation Number:
+
+21 CFR 892.2050 Medical image management and processing system
+
+Product Code:
+
+QKB
+
+Reference Devices Information
+Device Name:
+
+AdvantageSim MD With CT Atlas-Based Contouring and Re-Planning Options
+
+Manufacturer:
+
+GE Hungary KFT
+
+510(k) Number:
+
+K132045
+
+Regulation Number:
+
+21 CFR 892.5840 Radiation therapy simulation system
+
+Product Code:
+
+KPQ
+
+5-1
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+Device Description
+Auto Segmentation is a post-processing software designed to automatically generate contours of organ(s)
+at risk (OARs) from Computed Tomography (CT) images in the form of a DICOM Radiotherapy Structure
+Set (RTSS) series. The application is intended as a workflow tool for initial segmentation of OARs to
+streamline the process of organ at risk delineation. The output of the Auto Segmentation is intended to
+be used by radiotherapy (RT) practitioners after review and editing, if necessary, and confirming the
+accuracy of the contours for use in radiation therapy planning.
+Auto Segmentation uses deep learning algorithms to generate organ at risk contours for the head and
+neck, thorax, abdomen and pelvis regions from CT images across 40 organ(s) or organ subregion(s). The
+automatically generated organ at risk contours are networked to predefined DICOM destination(s), such
+as review workstations supporting RTSS format, for review and editing, as needed.
+The organ at risk contours generated with the Auto Segmentation application are designed to improve
+the contouring workflow by automatically creating contours for review by the intended users. The
+application is compatible with CT DICOM images with single energy acquisition modes and may be used
+with both GE and non-GE CT scanner acquired images (contrast and non-contrast), in adult patients.
+Intended Use
+Auto Segmentation is intended to be used as a workflow tool for initial anatomy segmentation of organs
+at risk on CT images as an aid in radiation therapy planning after user confirmation.
+Indications for Use
+Auto Segmentation generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk
+which can be used by dosimetrists, medical physicists, and radiation oncologists as initial contours to
+accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the
+processed output contours and user-defined labels for each organ at risk and correct the contours/labels
+as needed. Auto Segmentation may be used with images acquired on CT scanners, in adult patients.
+Technology:
+The proposed device, Auto Segmentation, employs similar fundamental scientific technology as its
+predicate device.
+Comparisons
+The Auto Segmentation software is substantially equivalent to the predicate device, AccuContour
+(K191928). The proposed device is based on the same fundamental technology as the predicate device
+using deep learning algorithms for organ at risk segmentation. The proposed device is intended for
+automatic segmentation only, while the predicate has manual contouring, registration, and other general
+capabilities. The table below summarizes the substantive feature/technological similarities and
+differences between the predicate device and the proposed device:
+
+5-2
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+Specification
+
+Predicate Device
+AccuContour (K191928)
+
+Indications for Use
+
+It is used by radiation oncology
+department to register
+multimodality images and segment
+(non-contrast) CT images, to
+generate needed information for
+treatment planning, treatment
+evaluation and treatment
+adaptation.
+
+Contra-indications
+
+None
+
+Same
+
+Patient Population
+
+Adults only
+
+Same
+
+Algorithm
+
+Deep Learning
+
+Same
+
+Compatible Modality
+
+Non-contrast CT images
+
+CT (contrast and non-contrast) images
+
+OAR Segmentation
+Anatomic Regions
+
+Head & Neck
+Thorax
+Abdomen
+Pelvis
+Automated
+
+Same
+
+User Interface
+
+Basic result preview of automatic
+segmentation results. Manual
+segmentation is possible.
+Configuration menu.
+
+Automated execution of the software with no user
+interaction, other than configuration settings.
+Generated contours are automatically transmitted
+to review workstation(s) supporting RTSS objects
+for review and editing, as needed.
+
+Compatible Scanner
+Models
+
+No Limitation on scanner model,
+DICOM 3.0 compliance required
+
+Same
+
+Deployment Platform
+
+Cloud and server-based
+deployment
+
+Server-based deployment
+
+Workflow
+
+Proposed Device
+Auto Segmentation
+Auto Segmentation generates a Radiotherapy
+Structure Set (RTSS) DICOM with segmented
+organs at risk which can be used by dosimetrists,
+medical physicists, and radiation oncologists as
+initial contours to accelerate workflow for
+radiation therapy planning. It is the responsibility
+of the user to verify the processed output contours
+and user-defined labels for each organ at risk and
+correct the contours/labels as needed. Auto
+Segmentation may be used with images acquired
+on CT scanners, in adult patients.
+
+Same
+
+5-3
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+Determination of Substantial Equivalence
+Summary of Non-Clinical Testing
+Auto Segmentation has successfully completed the design control testing per GE Healthcare’s quality
+system. It was designed under the Quality System Regulations of 21CFR 820 and ISO 13485. No new
+questions of safety and effectiveness and no unexpected test results were observed.
+The following quality assurance measures have been applied to the development of the system:
+•
+•
+•
+•
+•
+•
+•
+•
+
+Requirement Definition
+Risk Analysis and Control
+Technical Design Reviews
+Formal Design Reviews
+Software Development Lifecycle
+Safety Testing (Verification)
+Performance Testing (Verification, Validation)
+Software Release
+
+Auto Segmentation has been successfully verified. The testing and results did not raise any new issues of
+safety and effectiveness. Software documentation provided is for a “Major” Level of Concern.
+The Auto Segmentation algorithms were developed and trained using a dataset of 911 different CT exams
+from several clinical sites from multiple countries. The original development and training data was used
+for radiotherapy planning, and so is representative of typical clinical practice for the subject device.
+Performance testing to evaluate the device's performance in segmenting organs-at-risk was performed
+using a database of 302 retrospective CT radiation therapy planning exams, from multiple clinical sites in
+North America, Asia, and Europe, that is representative of the clinical scenarios where Auto Segmentation
+is intended to be used. This bench testing dataset was segregated, completely independent and not used
+in any stage of algorithm development, including training.
+The data was acquired using a variety of CT scanners and scanner protocols from different manufacturers.
+The demographic distribution of the dataset consists of:
+-
+
+Gender: 87 Female, 160 Male, 55 Unknown
+Age: Adult (18 – 89 years old)
+Ethnicity: Dataset was collected from 9 global sources, including USA, EU, and Asia.
+
+Note: due to anonymization, gender, age, and ethnicity information is not available for all exams.
+Ground truth annotations were established following RTOG and DAHANCA clinical guidelines manually by
+three independent, qualified radiotherapy practitioners. The annotation process was designed to reflect
+segmentation practices following international clinical guidelines.
+The evaluation used the DICE similarity coefficient (DSC) as a primary metric to compare 2552 Auto
+Segmentation generated contours to ground truth contours, and evaluate performance against predefined acceptance DICE values on a per organ basis. These 2552 contours were generated from the 302
+unique patient exams in the bench testing dataset.
+5-4
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+The acceptance criteria were defined individually for each organ as the target quantitative performance
+requirement that the segmentation model must reach in order to establish the performance for that
+specific organ. Acceptance criteria were established from:
+-
+
+Published performance metrics from deep-learning based or atlas-based FDA cleared products;
+Estimation of expected performance based on organ specific characteristics and clinical
+justification, where a DICE value for deep-learning or atlas-based FDA cleared devices was not
+accessible.
+
+The Auto Segmentation device performance results are shown in Table 1. The following is a summary of
+the overall performance evaluation:
+Table 1: Summary of Auto Segmentation performance
+Auto Segmentation
+OAR
+
+(subject device)
+
+Acceptance Criteria
+
+Dice Mean
+
+Lower CI95
+
+Type
+
+Dice Mean
+
+Adrenal Left
+
+78.68%
+
+76.63%
+
+Estimated
+
+68.0%
+
+Adrenal Right
+
+72.48%
+
+69.78%
+
+Estimated
+
+68.0%
+
+Bladder
+
+81.50%
+
+78.33%
+
+Deep learning
+
+80.0%
+
+Body
+
+99.50%
+
+99.38%
+
+Atlas-based
+
+98.1%
+
+Brainstem
+
+87.69%
+
+87.15%
+
+Deep learning
+
+88.4%
+
+Chiasma
+
+43.81%
+
+41.03%
+
+Atlas-based
+
+11.7%
+
+Esophagus
+
+81.69%
+
+80.38%
+
+Atlas-based
+
+45.8%
+
+Eye Left
+
+91.32%
+
+89.77%
+
+Deep learning
+
+90.1%
+
+Eye Right
+
+90.25%
+
+88.23%
+
+Deep learning
+
+89.9%
+
+Femur Left
+
+97.65%
+
+97.18%
+
+Atlas-based
+
+71.6%
+
+Femur Right
+
+97.92%
+
+97.78%
+
+Atlas-based
+
+70.8%
+
+Kidney Left
+
+92.53%
+
+90.30%
+
+Deep learning
+
+86.8%
+
+Kidney Right
+
+94.82%
+
+93.48%
+
+Deep learning
+
+85.6%
+
+Lacrimal Gland Left
+
+59.79%
+
+57.65%
+
+Deep learning
+
+50.0%
+
+Lacrimal Gland Right
+
+58.09%
+
+55.81%
+
+Deep learning
+
+50.0%
+
+Lens Left
+
+76.86%
+
+74.80%
+
+Deep learning
+
+73.3%
+
+Lens Right
+
+79.09%
+
+77.40%
+
+Deep learning
+
+75.6%
+
+Liver
+
+94.28%
+
+92.27%
+
+Deep learning
+
+91.1%
+
+Lung Left
+
+97.70%
+
+97.38%
+
+Deep learning
+
+97.4%
+
+Lung Right
+
+97.99%
+
+97.81%
+
+Deep learning
+
+97.8%
+
+Mandible
+
+92.70%
+
+92.36%
+
+Deep learning
+
+94.0%
+
+5-5
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+Auto Segmentation
+OAR
+
+(subject device)
+
+Acceptance Criteria
+
+Dice Mean
+
+Lower CI95
+
+Type
+
+Dice Mean
+
+Optic Nerve Left
+
+79.22%
+
+77.99%
+
+Deep learning
+
+71.1%
+
+Optic Nerve Right
+
+80.20%
+
+78.94%
+
+Deep learning
+
+71.2%
+
+Oral Cavity
+
+87.43%
+
+86.20%
+
+Deep learning
+
+91.0%
+
+Pancreas
+
+80.34%
+
+78.50%
+
+Estimated
+
+73.0%
+
+Parotid Left
+
+84.35%
+
+83.27%
+
+Deep learning
+
+65.0%
+
+Parotid Right
+
+85.55%
+
+84.48%
+
+Deep learning
+
+65.0%
+
+Proximal Bronchial Tree
+(PBtree)
+
+84.94%
+
+83.71%
+
+54.8%
+Atlas-based
+
+68.72%
+
+68.0%
+
+Inferior PCM (Pharyngeal
+Constrictor Muscle)
+
+70.51%
+
+Middle PCM
+
+67.09%
+
+65.21%
+
+Estimated
+
+68.0%
+
+Superior PCM
+
+59.57%
+
+57.85%
+
+Estimated
+
+50.0%
+
+Pericardium
+
+93.58%
+
+92.00%
+
+Atlas-based
+
+84.4%
+
+Pituitary
+
+75.62%
+
+74.12%
+
+Deep learning
+
+78.0%
+
+Prostate
+
+79.67%
+
+77.60%
+
+Atlas-based
+
+52.1%
+
+Spinal Cord
+
+88.55%
+
+87.43%
+
+Deep learning
+
+87.0%
+
+Submandibular Left
+
+86.85%
+
+85.95%
+
+Deep learning
+
+77.0%
+
+Submandibular Right
+
+85.70%
+
+84.79%
+
+Deep learning
+
+78.0%
+
+Thyroid
+
+85.37%
+
+84.27%
+
+Deep learning
+
+83.0%
+
+Trachea
+
+91.02%
+
+90.47%
+
+Atlas-based
+
+69.2%
+
+Whole Brain
+
+98.53%
+
+98.46%
+
+Estimated
+
+93.0%
+
+Estimated
+
+Note: in "Type" column above, Deep learning means similar device using deep learning technology, while
+Atlas-based means similar devices using Atlas-based technology. Estimated means acceptance criteria were
+estimated based on organ specific characteristics and clinical justification.
+
+The subject device performance was superior for all organs with atlas-based predicates.
+The evaluation of the Dice mean for the Auto Segmentation algorithms demonstrates that the algorithm
+performance is in line with the performance of the predicate, as well as state of the art, recently cleared
+similar automated contouring devices.
+A subgroup analysis found that the algorithms’ performance is consistent across multiple CT system
+vendors, pixel spacing, slice distance, gender, and geographical subgroups. Known limitations are
+described in the user documentation.
+The results of the algorithm testing demonstrate that Auto Segmentation performs as expected.
+
+5-6
+
+GE Healthcare
+510(k) Premarket Notification Submission – Auto Segmentation
+Summary of Clinical Testing
+A qualitative preference study evaluation comparing to a Likert scale was conducted using a database of
+sample clinical CT images to demonstrate that the contours generated by the Auto Segmentation
+application are adequate for radiotherapy planning use. Each contour used in the evaluation was
+generated using the Auto Segmentation application, and reviewed by three qualified radiotherapy
+practitioners, who provided an assessment of the adequacy of the subject device generated contours.
+The evaluators completed their assessments independently and were blinded to the results of the other
+evaluators’ assessments. The results of the algorithm clinical testing shows that the Auto Segmentation
+generated organ contours are adequate for use in radiotherapy planning.
+
+Substantial Equivalence Conclusion
+Auto Segmentation and the predicate have substantially equivalent indications for use, and represent
+equivalent technological characteristics, including the use of deep learning algorithms.
+Auto Segmentation was developed under GE Healthcare’s quality system. Design verification and
+validation, along with bench testing and the clinical reader study provided in this submission demonstrate
+that the Auto Segmentation software is substantially equivalent and, hence, as safe and effective as the
+legally marketed predicate device. GE Healthcare’s quality system design, verification, and risk
+management processes did not identify any unexpected results or new questions of safety and
+effectiveness.
+GE Healthcare believes that Auto Segmentation is substantially equivalent to the predicate device and,
+hence, is safe and effective for its intended use.
+
+5-7
+
+

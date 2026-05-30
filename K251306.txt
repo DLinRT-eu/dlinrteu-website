@@ -1,0 +1,2340 @@
+January 28, 2026
+Ever Fortune.AI, Co., Ltd.
+Ti-Hao Wang
+Chief Technology Officer
+8F., No.360, Sec. 1, Jingmao Rd., Beitun Dist.
+Taichung City, 406040
+Taiwan
+Re: K251306
+Trade/Device Name: Seg Pro V3 (RT-300)
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Medical Image Management And Processing System
+Regulatory Class: Class II
+Product Code: QKB
+Dated: December 29, 2025
+Received: December 29, 2025
+Dear Ti-Hao Wang:
+We have reviewed your section 510(k) premarket notification of intent to market the device referenced above
+and have determined the device is substantially equivalent (for the indications for use stated in the enclosure)
+to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the enactment
+date of the Medical Device Amendments, or to devices that have been reclassified in accordance with the
+provisions of the Federal Food, Drug, and Cosmetic Act (the Act) that do not require approval of a premarket
+approval application (PMA). You may, therefore, market the device, subject to the general controls
+provisions of the Act. Although this letter refers to your product as a device, please be aware that some
+cleared products may instead be combination products. The 510(k) Premarket Notification Database
+available at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+FDA's substantial equivalence determination also included the review and clearance of your Predetermined
+Change Control Plan (PCCP). Under section 515C(b)(1) of the Act, a new premarket notification is not
+required for a change to a device cleared under section 510(k) of the Act, if such change is consistent with an
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.08.02
+
+K251306 - Ti-Hao Wang
+
+Page
+
+2
+
+established PCCP granted pursuant to section 515C(b)(2) of the Act. Under 21 CFR 807.81(a)(3), a new
+premarket notification is required if there is a major change or modification in the intended use of a device,
+or if there is a change or modification in a device that could significantly affect the safety or effectiveness of
+the device, e.g., a significant change or modification in design, material, chemical composition, energy
+source, or manufacturing process. Accordingly, if deviations from the established PCCP result in a major
+change or modification in the intended use of the device, or result in a change or modification in the device
+that could significantly affect the safety or effectiveness of the device, then a new premarket notification
+would be required consistent with section 515C(b)(1) of the Act and 21 CFR 807.81(a)(3). Failure to submit
+such a premarket submission would constitute adulteration and misbranding under sections 501(f)(1)(B) and
+502(o) of the Act, respectively.
+Additional information about changes that may require a new premarket notification are provided in the FDA
+guidance documents entitled "Deciding When to Submit a 510(k) for a Change to an Existing Device"
+(https://www.fda.gov/media/99812/download) and "Deciding When to Submit a 510(k) for a Software
+Change to an Existing Device" (https://www.fda.gov/media/99785/download).
+Your device is also subject to, among other requirements, the Quality System (QS) regulation (21 CFR Part
+820), which includes, but is not limited to, 21 CFR 820.30, Design controls; 21 CFR 820.90, Nonconforming
+product; and 21 CFR 820.100, Corrective and preventive action. Please note that regardless of whether a
+change requires premarket review, the QS regulation requires device manufacturers to review and approve
+changes to device design and production (21 CFR 820.30 and 21 CFR 820.70) and document changes and
+approvals in the device master record (21 CFR 820.181).
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+801); medical device reporting (reporting of medical device-related adverse events) (21 CFR Part 803) for
+devices or postmarketing safety reporting (21 CFR Part 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR Part 4, Subpart
+A) for combination products; and, if applicable, the electronic product radiation control provisions (Sections
+531-542 of the Act); 21 CFR Parts 1000-1050.
+All medical devices, including Class I and unclassified devices and combination product device constituent
+parts are required to be in compliance with the final Unique Device Identification System rule ("UDI Rule").
+The UDI Rule requires, among other things, that a device bear a unique device identifier (UDI) on its label
+and package (21 CFR 801.20(a)) unless an exception or alternative applies (21 CFR 801.20(b)) and that the
+dates on the device label be formatted in accordance with 21 CFR 801.18. The UDI Rule (21 CFR
+830.300(a) and 830.320(b)) also requires that certain information be submitted to the Global Unique Device
+Identification Database (GUDID) (21 CFR Part 830 Subpart E). For additional information on these
+requirements, please see the UDI System webpage at https://www.fda.gov/medical-devices/device-advicecomprehensive-regulatory-assistance/unique-device-identification-system-udi-system.
+
+K251306 - Ti-Hao Wang
+
+Page
+
+3
+
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+
+Lora D. Weidner, Ph.D.
+Assistant Director
+Radiation Therapy Team
+DHT8C: Division of Radiological
+Imaging and Radiation Therapy Devices
+OHT8: Office of Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+Page 8 of 55
+
+Seg Pro V3
+
+I
+
+D Over-The-Counter Use (21 CFR 801 Subpart C)
+applicable).
+Please select the types of uses (select one or both, as
+Z Prescription Use (Part 21 CFR 801 Subpart D)
+review as the primary interpretation.
+the normal organs on DICOM images. Clinicians must not use the software generated output alone without
+Seg Pro V3 is an adjunct tool and is not intended to replace a clinician's judgment and manual contouring o
+
+1
+
+to detect lesions.
+system to review and edit results generated. Seg Pro V3 is not intended to be used for decision making or
+planning systems. Seg Pro V3 must be used in conjunction with a DICOM-compliant treatment planning
+The contours are generated by deep-learning algorithms and then transferred to radiation therapy treatment
+Pro V3 is intended to be used on adult patients only.
+radiation therapy treatment planning by providing initial contours of organs at risk on DICOM images. Seg
+not limited to, radiation oncologists, medical physicists, and dosimetrists, during their clinical workflows of
+Seg Pro V3 is a software device intended to assist trained radiation oncology professionals, including, but
+
+[
+
+Please provide your Indications for Use below.
+
+Seg Pro V3 (RT-300)
+Please provide the device trade name(s).
+
+I
+
+textbox will be left blank for original applications/submissions.
+I K251306
+Please type in the marketing application/submission number, if it is known. This
+
+Indications for Use
+
+K251306
+​510(k) Summary​
+​1.
+
+​General Information
+
+​510(k) Sponsor​
+​Address​
+
+​Applicant​
+
+​Ever Fortune.AI Co., Ltd.​
+​8F., No.360, Sec. 1, Jingmao Rd.,​
+​Beitun Dist.,​
+​Taichung City 406040,​
+​Taiwan​
+​Joseph Chang​
+
+​Contact Information​
+
+​886-04-23213838 #216
+​joseph.chang@everfortune.ai
+
+​Correspondence Person​
+
+​Ti-Hao Wang​
+
+​Contact Information​
+
+​886-04-23213838 #168
+
+​thothwang@gmail.com
+​Date Prepared​
+
+​2.
+
+​Proposed Device
+
+​Proprietary Name​
+​Common Name​
+​Classification Name​
+​Regulation Number​
+​Product Code​
+​Regulatory Class​
+
+​3.
+
+​tihao.wang@everfortune.ai​
+​January 28, 2026​
+
+​Seg Pro V3 (RT-300)​
+​Seg Pro V3​
+​Radiological Image Processing Software For Radiation Therapy​
+​21 CFR 892.2050​
+​QKB​
+​II​
+
+​Predicate Device
+
+​Proprietary Name​
+​Premarket Notification​
+
+​EFAI RTSUITE CT HCAP-Segmentation System​
+​K231928​
+
+​Classification Name​
+​Regulation Number​
+​Product Code​
+​Regulatory Class​
+
+​Radiological Image Processing Software For Radiation Therapy​
+​21 CFR 892.2050​
+​QKB​
+​II​
+
+​4.
+
+​Reference Device
+
+​Proprietary Name​
+​Premarket Notification​
+
+​AutoContour RADAC V4​
+​K242729​
+
+​Classification Name​
+​Regulation Number​
+​Product Code​
+​Regulatory Class​
+
+​Radiological Image Processing Software For Radiation Therapy​
+​21 CFR 892.2050​
+​QKB​
+​II​
+
+​5.​
+
+​Device Description​
+
+​The​​proposed​​device,​​Seg​​Pro​​V3,​​is​​a​​standalone​​software​​that​​is​​designed​​to​​be​​used​​by​​trained​
+​radiation​ ​oncology​ ​professionals​ ​to​ ​automatically​ ​delineate​ ​(segment/contour)​ ​organs-at-risk​
+​(OARs)​ ​on​ ​DICOM​ ​images.​ ​This​ ​auto-contouring​ ​of​ ​OARs​ ​is​ ​intended​ ​to​ ​facilitate​ ​radiation​
+​therapy workflows.​
+​The​​device​​receives​​images​​in​​DICOM​​format​​as​​input​​and​​automatically​​generates​​the​​contours​
+​of​​OARs,​​which​​are​​stored​​in​​DICOM​​format​​and​​in​​RTSTRUCT​​modality.​​The​​device​​must​​be​
+​used​ ​in​ ​conjunction​ ​with​ ​a​ ​DICOM-compliant​ ​treatment​ ​planning​ ​system​ ​(TPS)​ ​to​​review​​and​
+​edit​​results.​​Once​​data​​is​​routed​​to​​Seg​​Pro​​V3,​​the​​data​​will​​be​​processed​​and​​no​​user​​interaction​
+​is required, nor provided.​
+​The​ ​deployment​ ​environment​ ​is​ ​recommended​ ​to​ ​be​ ​in​ ​a​ ​local​ ​network​ ​with​ ​an​ ​existing​
+​hospital-grade​ ​IT​ ​system​ ​in​ ​place.​ ​Seg​ ​Pro​ ​V3​ ​should​ ​be​ ​installed​ ​on​ ​a​ ​specialized​ ​server​
+​supporting​ ​deep​ ​learning​ ​processing.​ ​The​ ​configurations​ ​are​ ​only​ ​being​ ​operated​ ​by​ ​the​
+​manufacturer.​
+​●​ ​Local network setting of input and output destinations.​
+​●​ ​Presentation of labels and their color.​
+​●​ ​Processed image management and output (RTSTRUCT) file management.​
+
+​6.​
+
+​Intended Use / Indications for Use​
+
+​Seg​ ​Pro​ ​V3​ ​is​ ​a​ ​software​ ​device​ ​intended​ ​to​ ​assist​ ​trained​ ​radiation​ ​oncology​ ​professionals,​
+​including,​ ​but​ ​not​ ​limited​ ​to,​​radiation​​oncologists,​​medical​​physicists,​​and​​dosimetrists,​​during​
+​their​​clinical​​workflows​​of​​radiation​​therapy​​treatment​​planning​​by​​providing​​initial​​contours​​of​
+​organs at risk on DICOM images. Seg Pro V3 is intended to be used on adult patients only.​
+​The​​contours​​are​​generated​​by​​deep-learning​​algorithms​​and​​then​​transferred​​to​​radiation​​therapy​
+​treatment​​planning​​systems.​​Seg​​Pro​​V3​​must​​be​​used​​in​​conjunction​​with​​a​​DICOM-compliant​
+​treatment​​planning​​system​​to​​review​​and​​edit​​results​​generated.​​Seg​​Pro​​V3​​is​​not​​intended​​to​​be​
+​used for decision making or to detect lesions.​
+​Seg​ ​Pro​ ​V3​ ​is​ ​an​ ​adjunct​​tool​​and​​is​​not​​intended​​to​​replace​​a​​clinician's​​judgment​​and​​manual​
+​contouring​ ​of​ ​the​ ​normal​ ​organs​ ​on​ ​DICOM​ ​images.​ ​Clinicians​ ​must​ ​not​ ​use​ ​the​ ​software​
+​generated output alone without review as the primary interpretation.​
+
+​Seg Pro V3 Traditional 510(k)​
+​1​
+
+​7.​
+
+​Comparison of Technological Characteristics with Predicate Device​
+
+​A reference device, AutoContour RADAC V4 (K242729), is included in this submission to support the evaluation of additional​
+​technological characteristics relevant to the subject device, such as MR image segmentation and multi-modality input handling. The​
+​reference device performs automatic contouring on CT and MR images using DICOM-compliant data and machine learning​
+​algorithms. The reference device is not cited to establish substantial equivalence in intended use. A comparative analysis is provided​
+​in the following section.​
+​Feature/​
+​Function​
+
+​Proposed Device​
+
+​Predicate Device​
+
+​Reference Device​
+
+​Comparison​
+
+​Company​
+
+​Ever Fortune.AI Co., Ltd.​
+​(EFAI)​
+
+​Ever Fortune.AI Co., Ltd.​
+​(EFAI)​
+
+​Radformation, Inc.​
+
+​N/A​
+
+​Device Name​
+
+​Seg Pro V3​
+
+​EFAI HCAPSeg​
+
+​AutoContour RADAC V4​
+
+​N/A​
+
+​510k Number​
+
+​K251306​
+
+​K231928​
+
+​K242729​
+
+​N/A​
+
+​Regulation No.​
+
+​21 CFR 892.2050​
+
+​21 CFR 892.2050​
+
+​21 CFR 892.2050​
+
+​Identical​
+
+​Classification​
+
+​II​
+
+​II​
+
+​II​
+
+​Identical​
+
+​Product Code​
+
+​QKB​
+
+​QKB​
+
+​QKB​
+
+​Identical​
+
+​Intended​
+​Use/Indication​
+​for Use​
+
+​Seg​ ​Pro​ ​V3​ ​is​ ​a​ ​software​
+​device​ ​intended​ ​to​ ​assist​
+​trained​ ​radiation​ ​oncology​
+​professionals,​ ​including,​ ​but​
+​not​ ​limited​ ​to,​ ​radiation​
+​oncologists,​
+​medical​
+​physicists,​ ​and​ ​dosimetrists,​
+​during​
+​their​
+​clinical​
+​workflows​ ​of​ ​radiation​
+​therapy​ ​treatment​ ​planning​
+​by​ ​providing​ ​initial​​contours​
+​of​ ​organs​ ​at​​risk​​on​​DICOM​
+
+​EFAI​ ​HCAPSeg​ ​is​ ​a​
+​software​ ​device​ ​intended​ ​to​
+​assist​ ​trained​ ​radiation​
+​oncology​
+​professionals,​
+​including,​ ​but​​not​​limited​​to,​
+​radiation​
+​oncologists,​
+​medical​ ​physicists,​ ​and​
+​dosimetrists,​ ​during​ ​their​
+​clinical​
+​workflows​
+​of​
+​radiation​ ​therapy​ ​treatment​
+​planning​ ​by​​providing​​initial​
+​contours​​of​​organs​​at​​risk​​on​
+
+​AutoContour​ ​is​ ​intended​ ​to​
+​assist​ ​radiation​ ​treatment​
+​planners​ ​in​ ​contouring​ ​and​
+​reviewing​ ​structures​ ​within​
+​medical​
+​images​
+​in​
+​preparation​ ​for​ ​radiation​
+​therapy treatment planning.​
+
+​The​ ​proposed​ ​and​ ​predicate​
+​devices​ ​share​ ​the​ ​same​
+​intended​ ​use:​ ​assisting​
+​trained​ ​radiation​ ​oncology​
+​professionals​ ​in​ ​generating​
+​initial​ ​contours​ ​of​ ​organs​ ​at​
+​risk​ ​(OARs)​ ​for​ ​radiation​
+​therapy​ ​planning.​ ​While​ ​the​
+​proposed​ ​device​ ​supports​
+​both​​CT​​and​​MR​​images​​and​
+​the​​predicate​​device​​supports​
+​only​ ​CT,​ ​this​ ​difference​ ​in​
+
+​Seg Pro V3 Traditional 510(k)​
+​2​
+
+​Segmentation​
+​(Contouring)​
+​Technology​
+​Operating System​
+
+​images.​ ​Seg​ ​Pro​ ​V3​ ​is​
+​intended​ ​to​ ​be​ ​used​​on​​adult​
+​patients only.​
+​The​ ​contours​ ​are​ ​generated​
+​by​ ​deep-learning​ ​algorithms​
+​and​ ​then​ ​transferred​ ​to​
+​radiation​ ​therapy​ ​treatment​
+​planning​ ​systems.​ ​Seg​ ​Pro​
+​V3​ ​must​ ​be​ ​used​ ​in​
+​conjunction​
+​with​
+​a​
+​DICOM-compliant​​treatment​
+​planning​ ​system​ ​to​ ​review​
+​and​ ​edit​ ​results​ ​generated.​
+​Seg​​Pro​​V3​​is​​not​​intended​​to​
+​be​ ​used​ ​for​ ​decision​​making​
+​or to detect lesions.​
+​Seg​​Pro​​V3​​is​​an​​adjunct​​tool​
+​and​​is​​not​​intended​​to​​replace​
+​a​ ​clinician's​ ​judgment​ ​and​
+​manual​ ​contouring​ ​of​ ​the​
+​normal​ ​organs​ ​on​ ​DICOM​
+​images.​ ​Clinicians​ ​must​ ​not​
+​use​ ​the​ ​software​ ​generated​
+​output​ ​alone​ ​without​ ​review​
+​as the primary interpretation.​
+
+​non-contrast​ ​CT​ ​images.​
+​EFAI​ ​HCAPSeg​ ​is​ ​intended​
+​to​ ​be​ ​used​ ​on​ ​adult​ ​patients​
+​only.​
+​The​ ​contours​ ​are​ ​generated​
+​by​ ​deep-learning​ ​algorithms​
+​and​ ​then​ ​transferred​ ​to​
+​radiation​ ​therapy​ ​treatment​
+​planning​ ​systems.​ ​EFAI​
+​HCAPSeg​ ​must​ ​be​ ​used​ ​in​
+​conjunction​
+​with​
+​a​
+​DICOM-compliant​​treatment​
+​planning​ ​system​ ​to​ ​review​
+​and​ ​edit​ ​results​ ​generated.​
+​EFAI​ ​HCAPSeg​ ​is​ ​not​
+​intended​ ​to​ ​be​ ​used​ ​for​
+​decision​ ​making​ ​or​​to​​detect​
+​lesions.​
+​EFAI​ ​HCAPSeg​ ​is​ ​an​
+​adjunct​ ​tool​ ​and​ ​is​ ​not​
+​intended​ ​to​ ​replace​ ​a​
+​clinician's​ ​judgment​ ​and​
+​manual​ ​contouring​ ​of​ ​the​
+​normal​ ​organs​ ​on​ ​CT.​
+​Clinicians​ ​must​ ​not​ ​use​ ​the​
+​software​ ​generated​ ​output​
+​alone​ ​without​ ​review​ ​as​ ​the​
+​primary interpretation.​
+
+​Deep learning​
+
+​Deep learning​
+
+​Linux Ubuntu 22.04.5 LTS​
+
+​Linux Ubuntu 20.04​
+
+​Seg Pro V3 Traditional 510(k)​
+​3​
+
+​imaging​ ​modality​ ​does​ ​not​
+​alter​​the​​intended​​use​​or​​raise​
+​new​ ​questions​ ​of​ ​safety​ ​or​
+​effectiveness.​ ​The​ ​reference​
+​device​​is​​not​​included​​in​​this​
+​comparison,​ ​as​​it​​is​​not​​used​
+​to​ ​establish​ ​substantial​
+​equivalence in intended use.​
+
+​Deep learning​
+
+​Identical​
+
+​Windows​
+​based​
+​.NET​
+​front-end​ ​application​ ​that​ ​The​ ​proposed​ ​and​ ​predicate​
+​also​ ​serves​ ​as​ ​agent​ ​devices are Linux-based​
+​Uploader​
+​supporting​
+
+​Microsoft​ ​Windows​ ​10​
+​(64-bit)​ ​and​ ​Microsoft​
+​Windows Server 2016.​
+​Cloud-based​ ​Server​ ​based​
+​automatic​
+​contouring​
+​application​ ​compatible​ ​with​
+​Linux.​
+​Windows​
+​python-based​
+​automatic​
+​contouring​
+​application​
+​supporting​
+​Microsoft​ ​Windows​ ​10​
+​(64-bit)​ ​and​ ​Microsoft​
+​Windows Server 2016.​
+
+​User population​
+
+​Supported​
+​Modalities​
+
+​Trained​
+​medical​
+​professionals​ ​including,​ ​but​
+​not​ ​limited​ ​to,​ ​radiation​
+​oncologists,​
+​medical​
+​physicists, and dosimetrists.​
+
+​CT or MR​
+
+​Trained​
+​medical​
+​professionals​ ​including,​ ​but​
+​not​ ​limited​ ​to,​ ​radiation​ ​Radiation treatment planners​
+​oncologists,​
+​medical​
+​physicists, and dosimetrists.​
+
+​CT​ ​or​ ​MR​ ​input​ ​for​
+​contouring​
+​or​
+​registration/fusion.​ ​PET/CT​
+​input​ ​for​ ​registration/fusion​
+​only.​ ​DICOM​ ​RTSTRUCT​
+​for output​
+
+​CT​
+
+​CT​ ​models​ ​include​ ​166​ ​CT​​models​​include​​80​​OARs​ ​CT or MR input for​
+​organs-at-risk​​(OARs)​​across​ ​across​ ​the​ ​head-and-neck,​ ​contouring of anatomical​
+​Seg Pro V3 Traditional 510(k)​
+​4​
+
+​All​ ​devices​ ​are​ ​intended​ ​for​
+​use​ ​by​ ​trained​ ​radiation​
+​therapy​ ​professionals.​ ​User​
+​groups​ ​are​ ​functionally​
+​equivalent.​
+​The​
+​proposed​
+​device​
+​supports​ ​both​ ​CT​ ​and​ ​MR​
+​images,​ ​while​ ​the​ ​predicate​
+​device​​supports​​only​​CT.​​The​
+​reference​
+​device​
+​also​
+​supports​ ​CT​ ​and​ ​MR​ ​for​
+​contouring​ ​and​ ​fusion.​ ​The​
+​proposed​ ​device​ ​aligns​ ​with​
+​the​
+​performance​
+​of​
+​commercially​
+​available​
+​products​ ​on​ ​the​ ​market,​
+​specifically​
+​Reference​
+​Devices.​
+​Both the proposed and​
+​predicate devices cover the​
+
+​Number of OARs​ ​the​ ​head-and-neck,​ ​chest,​ ​chest,​
+​head/neck, chest, and​
+​and​ ​regions: Head and Neck,​
+​and Anatomy​
+​and​
+​abdomen-and-pelvis​ ​abdomen-and-pelvis regions.​ ​Thorax, Abdomen and Pelvis​ ​abdomen/pelvis regions. The​
+​Covered​
+​regions.​
+​proposed device includes a​
+​greater number of OARs and​
+​supports MR-based models,​
+​MRI​ ​models​ ​include​ ​16​
+​which is consistent with​
+​OARs​ ​in​ ​the​ ​head​ ​and​ ​male​
+​pelvis regions.​
+​reference device capabilities.​
+​CT Models:​
+​CT Models:​
+​●​ ​Head-and-Neck (53)​
+​●​ ​Head-and-Neck (53)​
+​●​ ​Chest (69)​
+​●​ ​Chest (13)​
+​●​ ​Abdomen-and-Pelvis​
+​●​ ​Abdomen-and-Pelvis​
+​(44)​
+​(14)​
+​MRI Models:​
+​●​ ​Head (11)​
+​●​ ​Pelvis male (5)​
+​**​ ​Each​ ​OAR​ ​is​ ​assigned​ ​to​ ​a​ ​single​
+​anatomical​ ​region​ ​based​ ​on​ ​the​
+​top-down order from head to pelvis.​
+
+​**​ ​Each​ ​OAR​ ​is​ ​assigned​ ​to​ ​a​ ​single​
+​anatomical​ ​region​ ​based​ ​on​ ​the​
+​top-down order from head to pelvis.​
+
+​Compatible​
+​Treatment Planning​
+​System​
+
+​No Limitation on TPS​
+​model,​
+​ ICOM 3.0 compliance​
+D
+​required.​
+
+​Automated​
+​Workflow​
+
+​Seg​ ​Pro​ ​V3​ ​automatically​
+​processes​ ​input​ ​image​ ​data​
+​and​ ​sends​ ​the​ ​results​ ​as​
+​DICOM-RT​​Structure​​Sets​​to​
+​a​ ​user-configurable​ ​target​
+​node.​
+
+​No Limitation on TPS​
+​model,​
+​ ICOM 3.0 compliance​
+D
+​required​
+​EFAI​
+​HCAPSeg​
+​automatically​
+​processes​
+​input​ ​image​ ​data​ ​and​ ​sends​
+​the​ ​results​ ​as​ ​DICOM-RT​
+​Structure​
+​Sets​
+​to​ ​a​
+​user-configurable​
+​target​
+​node.​
+
+​User Interface​
+
+​No​
+
+​No​
+
+​No Limitation​
+
+​Automatically​​contour,​​allow​
+​the​ ​user​ ​to​ ​review​ ​and​ ​All​
+​devices​
+​support​
+​modify,​
+​generate​ ​automatic​ ​contouring​ ​with​
+​DICOM-compliant​ ​structure​ ​DICOM-RT output.​
+​set data.​
+
+​Yes​
+
+​Seg Pro V3 Traditional 510(k)​
+​5​
+
+​Identical​
+
+​The proposed and predicate​
+​devices have no user​
+​interface.​
+
+​8.​
+
+​Performance Data​
+
+​Performance​ ​of​ ​the​ ​Seg​ ​Pro​ ​V3​ ​has​ ​been​ ​evaluated​ ​and​ ​verified​ ​in​ ​accordance​ ​with​ ​software​
+​specifications​​and​​applicable​​performance​​standards​​through​​software​​verification​​and​​validation​
+​testing.​ ​Additionally,​ ​the​ ​software​ ​validation​ ​activities​​were​​performed​​in​​accordance​​with​​IEC​
+​62304:2006/A1:2016​ ​-​ ​Medical​ ​device​ ​software​ ​–​ ​Software​ ​life​ ​cycle​ ​processes,​​in​​addition​​to​
+​the​ ​FDA​ ​Guidance​ ​documents,​ ​“Guidance​ ​for​ ​the​ ​Content​ ​of​ ​Premarket​ ​Submissions​ ​for​
+​Software​ ​Contained​ ​in​ ​Medical​ ​Devices”(2005)​ ​and​ ​the​ ​recently​ ​published​ ​“Content​ ​of​
+​Premarket​​submissions​​for​​Devices​​Software​​Functions​​(11-04-2021),​​and​​“Content​​of​​Premarket​
+​Submission for Management of Cybersecurity in Medical Devices.”​
+​Clinical​ ​validation​ ​was​ ​conducted​ ​by​ ​independent​ ​clinical​ ​users​ ​representative​ ​of​ ​the​ ​intended​
+​end-user​ ​population.​ ​The​ ​results​ ​demonstrated​ ​that​ ​Seg​ ​Pro​ ​V3​ ​operates​ ​as​ ​intended​ ​within​ ​a​
+​clinical​​workflow​​and​​supports​​its​​intended​​use​​as​​an​​adjunct​​tool​​for​​radiation​​therapy​​treatment​
+​planning.​
+​In​ ​addition,​ ​a​ ​standalone​ ​performance​ ​evaluation​ ​was​ ​conducted​ ​to​ ​assess​ ​the​ ​Organ-at-Risk​
+​(OAR)​​contouring​​capabilities​​of​​Seg​​Pro​​V3.​​The​​observed​​results​​indicated​​that​​Seg​​Pro​​V3​​by​
+​itself,​ ​in​ ​the​ ​absence​ ​of​ ​any​ ​interaction​ ​with​ ​a​ ​clinician,​ ​can​ ​contour​ ​developed​ ​OARs​ ​with​
+​satisfactory results.​
+​The​ ​dataset​ ​comprised​ ​175​ ​cases​ ​consecutively​ ​collected​ ​from​ ​the​ ​Cancer​ ​Imaging​ ​Archive​
+​(TCIA)​ ​datasets,​ ​all​ ​meeting​ ​the​ ​predefined​ ​inclusion​ ​criteria.​ ​All​ ​data​ ​used​ ​during​ ​the​
+​standalone​ ​performance​ ​evaluation​ ​were​ ​acquired​ ​independently​ ​from​ ​product​ ​development​
+​training and internal testing.​
+​The​ ​study​ ​population​ ​contained​ ​28.0%​ ​females,​ ​60.6%​ ​males,​ ​and​ ​11.4%​ ​with​ ​unspecified​
+​gender.​ ​The​ ​mean​ ​age​ ​was​ ​55.5​ ​years​ ​old​ ​with​ ​standard​ ​deviation​​(SD)​​of​​12.0​​years​​old.​​The​
+​acquired​ ​data​ ​encompasses​ ​imaging​ ​manufacturers​ ​such​ ​as​ ​GE​ ​(44.0%),​ ​Siemens​ ​(46.4%),​
+​Philips​ ​(10.9%),​ ​and​ ​Others​ ​(1.7%).​ ​Race​ ​and​ ​ethnic​ ​distribution​ ​within​ ​the​ ​study​​data​​patient​
+​population​ ​was​​unavailable.​​The​​dataset​​included​​a​​diverse​​range​​of​​cancer​​types,​​such​​as​​brain​
+​tumors,​ ​head-and-neck,​ ​pancreatic,​ ​colorectal,​ ​lung,​ ​breast,​ ​bladder,​ ​prostate,​ ​stomach,​
+​gynecologic​ ​cancers,​ ​sarcomas,​ ​and​ ​metastatic​ ​tumors​ ​of​ ​various​ ​origins.​ ​Tumor​ ​locations​​and​
+​cancer stages varied widely across cases.​
+​Each​ ​OAR​ ​contour​ ​used​ ​as​ ​ground​ ​truth​ ​(GT)​ ​was​ ​independently​ ​generated​ ​by​ ​three​
+​board-certified​ ​radiation​ ​oncologists.​ ​The​ ​acceptance​ ​criteria​ ​were​ ​defined​ ​as​ ​statistical​
+​superiority​​of​​the​​mean​​Dice​​Similarity​​Coefficient​​(DSC)​​over​​the​​predefined​​thresholds​​of​​0.80,​
+​0.65, and 0.50 for large-, medium-, and small-volume structures, respectively.​
+​The​ ​overall​ ​performance​ ​demonstrated​ ​a​ ​mean​ ​DSC​ ​of​ ​0.85.​ ​Superiority​ ​testing​ ​indicated​ ​that​
+​Seg​​Pro​​V3​​met​​the​​primary​​endpoint,​​defined​​as​​the​​lower​​bound​​of​​the​​95%​​confidence​​interval​
+​(CI)​​for​​the​​mean​​DSC​​exceeding​​the​​corresponding​​reference​​standard​​threshold.​​The​​observed​
+​mean​ ​DSC​ ​values​ ​of​ ​0.90,​ ​0.86,​ ​and​ ​0.73​ ​for​ ​large-,​ ​medium-,​ ​and​ ​small-volume​ ​structures,​
+​respectively.​​Additionally,​​the​​overall​​median​​95%​​Hausdorff​​Distance​​(HD)​​was​​2.62​​mm,​​with​
+​corresponding​ ​medians​ ​of​ ​3.01​ ​mm,​ ​2.57​ ​mm,​ ​and​ ​2.27​ ​mm​ ​for​ ​large-,​ ​medium-,​ ​and​
+​small-volume structures, respectively.​
+​Seg Pro V3 Traditional 510(k)​
+​6​
+
+​Performance​ ​across​ ​subgroups​ ​such​ ​as​ ​gender,​​age​​group,​​imaging​​manufacturer,​​imaging​​slice​
+​thickness,​ ​MR​ ​sequence​ ​type,​ ​MR​ ​magnetic​ ​field​ ​strength,​ ​and​ ​suboptimal​ ​image​ ​quality​
+​conditions​ ​was​ ​further​ ​assessed​ ​to​ ​support​ ​the​ ​consistency​ ​and​ ​reliability​​of​​Seg​​Pro​​V3​​under​
+​diverse clinical and imaging protocols.​
+​Lastly,​ ​the​ ​DSC​ ​performance​ ​of​ ​individual​ ​OARs,​ ​along​ ​with​ ​the​ ​target​ ​performance​ ​(pass​
+​criteria) for each OAR, are shown in the following tables.​
+​Pass​
+​Number​
+​Criteria​ ​of Cases​
+
+​Mean​
+​DSC​
+
+​Lower​
+​SD of​
+​Bound 95%​
+​Mean DSC​
+​CI​
+​0.02​
+​0.909​
+
+​CT OAR​
+
+​Size​
+
+​Bone_Pelvic​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.92​
+
+​Bone_Pelvic_L​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.91​
+
+​0.02​
+
+​0.898​
+
+​Bone_Pelvic_R​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.91​
+
+​0.03​
+
+​0.904​
+
+​Bowel​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.89​
+
+​0.02​
+
+​0.881​
+
+​Bowel_Large​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.87​
+
+​0.04​
+
+​0.860​
+
+​Bowel_Small​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.85​
+
+​0.03​
+
+​0.841​
+
+​Chestwall​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.87​
+
+​0.03​
+
+​0.856​
+
+​Chestwall_L​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.86​
+
+​0.03​
+
+​0.851​
+
+​Chestwall_R​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.87​
+
+​0.03​
+
+​0.860​
+
+​Clavicle_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.08​
+
+​0.824​
+
+​Clavicle_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.06​
+
+​0.828​
+
+​Femur_L​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.91​
+
+​0.04​
+
+​0.898​
+
+​Femur_R​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.92​
+
+​0.04​
+
+​0.903​
+
+​GI_Tract​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.92​
+
+​0.02​
+
+​0.913​
+
+​Glnd_Adrenal_L​
+
+​Small​
+
+​0.50​
+
+​34​
+
+​0.71​
+
+​0.08​
+
+​0.687​
+
+​Glnd_Adrenal_R​
+
+​Small​
+
+​0.50​
+
+​34​
+
+​0.73​
+
+​0.09​
+
+​0.695​
+
+​Gluteus​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.91​
+
+​0.02​
+
+​0.907​
+
+​Gluteus_Max_L​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.89​
+
+​0.03​
+
+​0.885​
+
+​Gluteus_Max_R​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.90​
+
+​0.03​
+
+​0.893​
+
+​Gluteus_Med_L​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.89​
+
+​0.03​
+
+​0.883​
+
+​Gluteus_Med_R​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.90​
+
+​0.02​
+
+​0.889​
+
+​Gluteus_Min_L​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.87​
+
+​0.03​
+
+​0.864​
+
+​Gluteus_Min_R​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.88​
+
+​0.03​
+
+​0.867​
+
+​Humerus_L​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.90​
+
+​0.18​
+
+​0.833​
+
+​Humerus_R​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.92​
+
+​0.08​
+
+​0.893​
+
+​Iliopsoas_L​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.92​
+
+​0.02​
+
+​0.914​
+
+​Iliopsoas_R​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.93​
+
+​0.02​
+
+​0.923​
+
+​Seg Pro V3 Traditional 510(k)​
+​7​
+
+​Lung_LLL​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.91​
+
+​0.07​
+
+​0.879​
+
+​Lung_LUL​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.90​
+
+​0.03​
+
+​0.893​
+
+​Lung_RLL​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.92​
+
+​0.02​
+
+​0.911​
+
+​Lung_RML​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.88​
+
+​0.04​
+
+​0.867​
+
+​Lung_RUL​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.91​
+
+​0.03​
+
+​0.903​
+
+​Lungs​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.96​
+
+​0.02​
+
+​0.955​
+
+​Rib01_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.09​
+
+​0.841​
+
+​Rib01_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.89​
+
+​0.06​
+
+​0.869​
+
+​Rib02_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.88​
+
+​0.08​
+
+​0.848​
+
+​Rib02_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.08​
+
+​0.836​
+
+​Rib03_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.89​
+
+​0.06​
+
+​0.866​
+
+​Rib03_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.08​
+
+​0.829​
+
+​Rib04_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.08​
+
+​0.835​
+
+​Rib04_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.06​
+
+​0.826​
+
+​Rib05_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.06​
+
+​0.845​
+
+​Rib05_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.89​
+
+​0.05​
+
+​0.870​
+
+​Rib06_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.05​
+
+​0.856​
+
+​Rib06_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.05​
+
+​0.845​
+
+​Rib07_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.05​
+
+​0.840​
+
+​Rib07_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.06​
+
+​0.834​
+
+​Rib08_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.05​
+
+​0.840​
+
+​Rib08_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.83​
+
+​0.11​
+
+​0.791​
+
+​Rib09_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.05​
+
+​0.846​
+
+​Rib09_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.07​
+
+​0.832​
+
+​Rib10_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.05​
+
+​0.848​
+
+​Rib10_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.84​
+
+​0.04​
+
+​0.827​
+
+​Rib11_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.84​
+
+​0.06​
+
+​0.817​
+
+​Rib11_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.82​
+
+​0.05​
+
+​0.804​
+
+​Rib12_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.07​
+
+​0.831​
+
+​Rib12_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.09​
+
+​0.841​
+
+​Ribs​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.89​
+
+​0.08​
+
+​0.865​
+
+​Ribs_L​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.89​
+
+​0.17​
+
+​0.826​
+
+​Ribs_R​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.89​
+
+​0.07​
+
+​0.866​
+
+​Sacrum​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.91​
+
+​0.03​
+
+​0.896​
+
+​Scapula_L​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.82​
+
+​0.05​
+
+​0.800​
+
+​Seg Pro V3 Traditional 510(k)​
+​8​
+
+​Scapula_R​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.80​
+
+​0.04​
+
+​0.789​
+
+​Sternum​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.03​
+
+​0.843​
+
+​VB_L​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.92​
+
+​0.04​
+
+​0.905​
+
+​VB_L1​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.87​
+
+​0.05​
+
+​0.850​
+
+​VB_L2​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.88​
+
+​0.05​
+
+​0.866​
+
+​VB_L3​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.85​
+
+​0.06​
+
+​0.827​
+
+​VB_L4​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.86​
+
+​0.05​
+
+​0.844​
+
+​VB_L5​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.86​
+
+​0.05​
+
+​0.844​
+
+​VB_LS​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.89​
+
+​0.04​
+
+​0.880​
+
+​VB_S​
+
+​Medium​
+
+​0.65​
+
+​34​
+
+​0.86​
+
+​0.03​
+
+​0.849​
+
+​VB_S1​
+
+​Large​
+
+​0.80​
+
+​34​
+
+​0.85​
+
+​0.05​
+
+​0.830​
+
+​VB_T​
+
+​Large​
+
+​0.80​
+
+​32​
+
+​0.93​
+
+​0.03​
+
+​0.923​
+
+​VB_T01​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.84​
+
+​0.08​
+
+​0.810​
+
+​VB_T02​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.06​
+
+​0.836​
+
+​VB_T03​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.05​
+
+​0.834​
+
+​VB_T04​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.04​
+
+​0.846​
+
+​VB_T05​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.04​
+
+​0.848​
+
+​VB_T06​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.84​
+
+​0.05​
+
+​0.827​
+
+​VB_T07​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.05​
+
+​0.834​
+
+​VB_T08​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.06​
+
+​0.836​
+
+​VB_T09​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.86​
+
+​0.04​
+
+​0.845​
+
+​VB_T10​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.87​
+
+​0.04​
+
+​0.855​
+
+​VB_T11​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.83​
+
+​0.04​
+
+​0.812​
+
+​VB_T12​
+
+​Medium​
+
+​0.65​
+
+​32​
+
+​0.85​
+
+​0.12​
+
+​0.807​
+
+​SD, standard deviation. CI, confidence interval.​
+
+​Pass​
+​Number​
+​Criteria​ ​of Cases​
+
+​Mean​
+​DSC​
+
+​Lower​
+​SD of​
+​Bound 95%​
+​Mean DSC​
+​CI​
+​0.05​
+​0.892​
+
+​MR OAR​
+
+​Size​
+
+​Bladder​
+
+​Large​
+
+​0.80​
+
+​36​
+
+​0.91​
+
+​Brainstem​
+
+​Medium​
+
+​0.65​
+
+​76​
+
+​0.90​
+
+​0.04​
+
+​0.893​
+
+​Eye_L​
+
+​Medium​
+
+​0.65​
+
+​76​
+
+​0.91​
+
+​0.04​
+
+​0.904​
+
+​Eye_R​
+
+​Medium​
+
+​0.65​
+
+​76​
+
+​0.91​
+
+​0.05​
+
+​0.894​
+
+​Hippocampus_L​
+
+​Medium​
+
+​0.65​
+
+​76​
+
+​0.77​
+
+​0.09​
+
+​0.746​
+
+​Hippocampus_R​
+
+​Medium​
+
+​0.65​
+
+​76​
+
+​0.77​
+
+​0.09​
+
+​0.751​
+
+​Seg Pro V3 Traditional 510(k)​
+​9​
+
+​Lens_L​
+
+​Small​
+
+​0.50​
+
+​75​
+
+​0.74​
+
+​0.22​
+
+​0.689​
+
+​Lens_R​
+
+​Small​
+
+​0.50​
+
+​75​
+
+​0.74​
+
+​0.25​
+
+​0.677​
+
+​OpticChiasm​
+
+​Small​
+
+​0.50​
+
+​76​
+
+​0.72​
+
+​0.16​
+
+​0.682​
+
+​OpticNrv_L​
+
+​Small​
+
+​0.50​
+
+​76​
+
+​0.73​
+
+​0.20​
+
+​0.683​
+
+​OpticNrv_R​
+
+​Small​
+
+​0.50​
+
+​76​
+
+​0.73​
+
+​0.17​
+
+​0.688​
+
+​PenileBulb​
+
+​Small​
+
+​0.50​
+
+​30​
+
+​0.76​
+
+​0.27​
+
+​0.654​
+
+​Pituitary​
+
+​Small​
+
+​0.50​
+
+​75​
+
+​0.72​
+
+​0.29​
+
+​0.651​
+
+​Prostate​
+
+​Medium​
+
+​0.65​
+
+​36​
+
+​0.89​
+
+​0.04​
+
+​0.876​
+
+​Rectum​
+
+​Medium​
+
+​0.65​
+
+​36​
+
+​0.85​
+
+​0.11​
+
+​0.814​
+
+​SeminalVes​
+
+​Medium​
+
+​0.65​
+
+​31​
+
+​0.76​
+
+​0.20​
+
+​0.684​
+
+​SD, standard deviation. CI, confidence interval.​
+
+​In​ ​conclusion,​ ​the​ ​results​ ​demonstrate​ ​that​ ​the​​Seg​​Pro​​V3​​device​​is​​substantially​​equivalent​​to​
+​the​ ​predicate​ ​device​ ​in​ ​terms​ ​of​ ​safety​ ​and​ ​effectiveness,​ ​and​ ​that​ ​Seg​ ​Pro​ ​V3​ ​demonstrates​
+​consistent and reliable performance under clinical conditions for its intended use.​
+​Seg​ ​Pro​ ​V3​ ​has​ ​been​​designed,​​verified​​and​​validated​​in​​compliance​​with​​21​​CFR,​​Part​​820.30​
+​requirements​​and​​to​​meet​​the​​requirements​​associated​​with​​ISO​​14971:2019​​Medical​​devices​​—​
+​Application of risk management to medical devices.​
+
+​9.​
+
+​Substantial Equivalence​
+
+​The​​indications​​for​​use​​statement​​for​​the​​subject​​device​​is​​substantially​​equivalent​​to​​that​​of​​the​
+​predicate​ ​device,​ ​EFAI​ ​HCAPSeg.​ ​Both​ ​devices​​assist​​trained​​radiation​​oncology​​professionals​
+​by​ ​providing​ ​initial​ ​contours​ ​of​ ​organs​ ​at​ ​risk​ ​(OARs)​ ​to​ ​support​ ​radiation​ ​therapy​ ​treatment​
+​planning.​ ​They​ ​are​ ​intended​ ​for​ ​use​ ​on​ ​adult​ ​patients,​ ​must​ ​be​ ​used​​with​​a​​DICOM-compliant​
+​treatment planning system, and are not intended for clinical decision-making or lesion detection.​
+​The​​subject​​and​​predicate​​devices​​share​​the​​same​​core​​technical​​characteristics,​​including​​the​​use​
+​of​ ​deep​ ​learning​ ​algorithms​ ​to​ ​generate​ ​contours​ ​of​ ​OARs​ ​from​ ​DICOM​ ​images,​ ​automatic​
+​output​ ​of​ ​DICOM-RT​ ​structure​ ​sets,​ ​and​ ​integration​ ​into​ ​clinical​ ​workflows​ ​without​ ​a​ ​user​
+​interface.​ ​Both​ ​devices​ ​are​ ​designed​ ​to​ ​operate​ ​fully​ ​automatically​ ​and​ ​require​ ​use​ ​with​ ​a​
+​DICOM-compliant treatment planning system.​
+​The​ ​subject​ ​device​ ​also​ ​supports​ ​MR​ ​images​ ​in​ ​addition​ ​to​ ​CT.​ ​However,​ ​both​ ​modalities​ ​are​
+​DICOM​ ​images​ ​processed​ ​using​ ​the​ ​same​​contouring​​architecture,​​and​​this​​difference​​does​​not​
+​alter​ ​the​ ​intended​ ​use​ ​or​ ​impact​ ​clinical​ ​workflow.​ ​The​ ​OARs​ ​identified​ ​by​ ​both​ ​devices​ ​are​
+​associated​ ​with​​the​​same​​anatomical​​regions​​commonly​​used​​in​​radiation​​therapy​​planning,​​and​
+​the​​outputs​​are​​intended​​to​​support​​similar​​clinical​​applications.​​Thus,​​the​​proposed​​device​​does​
+​not​ ​raise​ ​new​ ​questions​ ​of​ ​safety​ ​or​ ​effectiveness,​ ​as​ ​the​ ​risks​ ​and​ ​technology​ ​used​ ​by​ ​both​
+​devices are the same and are mitigated similarly.​
+
+​Seg Pro V3 Traditional 510(k)​
+​10​
+
+​10.​
+
+​Predetermined Change Control Plan​
+
+​This​​Predetermined​​Change​​Control​​Plan​​(PCCP)​​includes​​a​​planned​​modification​​to​​the​​Seg​​Pro​
+​V3​ ​system​ ​involving​ ​the​ ​re-training​ ​of​ ​the​ ​deep​ ​learning​ ​model​ ​using​ ​newly​ ​acquired​ ​clinical​
+​data​ ​to​ ​improve​ ​performance​ ​in​ ​auto-contouring​ ​organs​ ​at​ ​risk​ ​(OARs).​ ​This​ ​modification​ ​is​
+​limited​ ​to​ ​a​ ​controlled​ ​model-weight​ ​update​ ​through​ ​re-training​ ​using​ ​clinically​ ​verified​
+​Real-World​​Data​​(RWD),​​without​​any​​changes​​to​​the​​model​​architecture,​​inference​​pipeline,​​pre-​
+​or​ ​post-processing,​ ​or​ ​any​ ​other​ ​device​ ​functions.​ ​Re-training​ ​may​ ​be​ ​initiated​ ​only​ ​when​
+​predefined​ ​PCCP​ ​triggers​ ​are​ ​met,​ ​including​ ​documented​ ​performance​ ​degradation​ ​associated​
+​with real-world distribution shifts and the availability of qualified clinical data.​
+​In​ ​accordance​ ​with​ ​the​ ​PCCP-defined​ ​change​ ​control​ ​process,​ ​the​​updated​​model​​will​​undergo​
+​re-execution​ ​of​ ​software​ ​verification​ ​and​ ​performance​ ​validation​ ​activities.​ ​These​ ​activities​
+​follow​​the​​predefined​​testing​​procedures​​and​​acceptance​​criteria​​specified​​in​​the​​PCCP​​to​​ensure​
+​that​ ​all​ ​permitted​ ​modifications​ ​are​ ​assessed​ ​in​ ​a​ ​consistent,​ ​objective,​ ​and​ ​risk-appropriate​
+​manner,​ ​and​ ​that​ ​the​ ​re-trained​ ​model​ ​continues​ ​to​ ​meet​​the​​safety​​and​​effectiveness​​profile​​of​
+​the cleared device.​
+​The​ ​PCCP​ ​does​ ​not​ ​introduce​ ​any​ ​new​ ​risks​ ​and​ ​all​ ​permitted​ ​modifications​ ​are​ ​limited​ ​to​
+​controlled​ ​model-weight​ ​updates,​ ​which​ ​are​ ​managed​ ​through​ ​predefined​​testing​​procedures​​to​
+​mitigate potential risks such as performance shift, overfitting, or unintended bias.​
+​A​ ​summary​ ​of​ ​the​ ​permitted​ ​modification​ ​category,​ ​associated​ ​scenarios,​ ​and​ ​operational​
+​controls defined in this PCCP is provided in the table below:​
+​Modification​
+
+​Model weight updates via retraining on representative real-world​
+​datasets intended to correct performance degradation at local or global​
+​scales.​
+
+​Testing Method​
+
+​Predefined verification and validation using prospectively collected​
+​real-world data and the Golden dataset, including quantitative​
+​performance metrics (e.g., DSC), subgroup analyses, and​
+​post-deployment clinical monitoring with predefined acceptance criteria​
+​and rollback controls.​
+
+​Device Update​
+​Procedure​
+
+​Re-trained models are deployed via controlled global and constrained​
+​local strategies, guided by predefined triggers, verification and​
+​validation criteria. This process is supported by rigorous data​
+​management, including the regulated expansion and retirement of​
+​real-world and Golden test datasets, ensuring continued safety,​
+​effectiveness, and substantial equivalence.​
+​Controlled user notification via established communication procedures,​
+​including advance release notices, version documentation updates, and​
+​standardized rollback notifications, in accordance with the PCCP.​
+
+​Seg Pro V3 Traditional 510(k)​
+​11​
+
+​11.​
+
+​Conclusion​
+
+​Based​ ​on​ ​the​​information​​submitted​​in​​this​​premarket​​notification,​​and​​based​​on​​the​​indications​
+​for​ ​use,​ ​technological​ ​characteristics,​ ​and​ ​performance​ ​testing,​ ​the​ ​Seg​ ​Pro​ ​V3​ ​raises​ ​no​ ​new​
+​questions​ ​of​ ​safety​ ​and​ ​effectiveness​ ​and​ ​is​ ​substantially​ ​equivalent​ ​to​ ​the​ ​predicate​ ​device​ ​in​
+​terms of safety and effectiveness.​
+
+​Seg Pro V3 Traditional 510(k)​
+​12​
+
+

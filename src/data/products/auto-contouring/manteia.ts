@@ -49,7 +49,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         decisionDate: "2025-12-05",
         notes: "K250780 (ARTAssistant branding, Dec 2025). Prior clearances: K221706 (2023), K191928 (2020)"
       },
-      intendedUseStatement: "For assistance in the delineation of organs at risk and target volumes in radiation therapy planning."
+      intendedUseStatement: "The primary function of ARTAssistant is to facilitate image processing with image registration and synthetic CT (sCT) generation in adaptive radiation therapy. This enables users to meticulously design ART plans based on the processed images. (Source: FDA 510(k) K250780 Summary, accessed 2026-05-30. Note: K250780 covers the ARTAssistant module within the AccuContour product family.)"
     },
     market: {
       onMarketSince: "2021",
@@ -252,7 +252,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    lastRevised: "2026-05-22",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K250780, K221706, K191928), company official sources",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

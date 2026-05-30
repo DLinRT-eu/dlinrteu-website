@@ -83,7 +83,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         status: "Approved",
         notes: "MR Models approved February 2025. Latest CT/MR module approvals extended through 2026 (Australia TGA & New Zealand Medsafe)."
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk and lymph node regions in radiation therapy planning."
+      intendedUseStatement: "Contour+ (MVision AI Segmentation) is a software system for image analysis algorithms to be used in radiation therapy treatment planning workflows. The system includes processing tools for automatic contouring of CT and MR images using machine learning based algorithms. The produced segmentation templates for regions of interest must be transferred to appropriate image visualization systems as an initial template for a medical professional to visualize, review, modify and approve prior to further use in clinical workflows. The system creates initial contours of pre-defined structures of common anatomical sites, i.e., Head and Neck, Brain, Breast, Lung and Abdomen, Male Pelvis, and Female Pelvis. Contour+ (MVision AI Segmentation) is not intended to detect lesions or tumors. The device is not intended for use with real-time adaptive planning workflows. (Source: FDA 510(k) K241490 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2019",
@@ -147,7 +147,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     version: "1.3.1",
     releaseDate: "2025-10-27",
     lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources"
   }
 ];

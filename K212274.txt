@@ -1,0 +1,535 @@
+April 8, 2022
+Carina Medical LLC
+℅ Xue Feng
+Chief Executive Officer
+1233 Litchfield Ln
+Lexington, KY 40513
+
+Re: K212274
+Trade/Device Name: INT Contour
+Regulation Number: 21 CFR 892.5050
+Regulation Name: Medical Charged-Particle Radiation Therapy System
+Regulatory Class: Class II
+Product Code: MUJ, QKB
+Dated: July 20, 2021
+Received: July 20, 2021
+Dear Xue Feng:
+We have reviewed your Section 510(k) premarket notification of intent to market the device referenced
+above and have determined the device is substantially equivalent (for the indications for use stated in the
+enclosure) to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the
+enactment date of the Medical Device Amendments, or to devices that have been reclassified in accordance
+with the provisions of the Federal Food, Drug, and Cosmetic Act (Act) that do not require approval of a
+premarket approval application (PMA). You may, therefore, market the device, subject to the general
+controls provisions of the Act. Although this letter refers to your product as a device, please be aware that
+some cleared products may instead be combination products. The 510(k) Premarket Notification Database
+located at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+801 and Part 809); medical device reporting (reporting of medical device-related adverse events) (21 CFR
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.04.32
+
+K212274 - Xue Feng
+
+Page 2
+
+803) for devices or postmarketing safety reporting (21 CFR 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR 4, Subpart A) for
+combination products; and, if applicable, the electronic product radiation control provisions (Sections 531542 of the Act); 21 CFR 1000-1050.
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR Part
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+
+Julie Sullivan -S
+Julie Sullivan, Ph.D.
+Assistant Director
+Nuclear Medicine and Radiation Therapy
+Division of Radiological Health
+OHT7: Office of In Vitro Diagnostics and Radiological
+Health
+Office of Product Evaluation and Quality
+Center For Devices and Radiological Health
+Enclosure
+
+DEPARTMENT OF HEALTH AND HUMAN SERVICES
+Food and Drug Administration
+
+Indications for Use
+
+Form Approved: OMB No. 0910-0120
+Expiration Date: 06/30/2023
+See PRA Statement below.
+
+510(k) Number (if known)
+K212274
+Device Name
+INTContour
+
+Indications for Use (Describe)
+INTContour provides a machine learning-based approach for the automatic segmentation of structures including treatment
+targets and organs at risk to support the radiation therapy treatment planning process. INTContour is intended as an initial
+method to segment and contour study series; therefore, this software must be used in conjunction with an appropriate
+software to edit the segmentation results if necessary. It is not intended to replace a thorough review by qualified medical
+professionals. INTContour is developed for use by dosimetrists, medical physicists, and radiation oncologists. The
+currently supported anatomical regions for automatic segmentation are head and neck, thorax, abdomen, and male pelvis.
+
+Type of Use (Select one or both, as applicable)
+X Prescription Use (Part 21 CFR 801 Subpart D)
+
+E Over-The-Counter Use (21 CFR 801 Subpart C)
+
+CONTINUE ON A SEPARATE PAGE IF NEEDED.
+This section applies only to requirements of the Paperwork Reduction Act of 1995.
+*DO NOT SEND YOUR COMPLETED FORM TO THE PRA STAFF EMAIL ADDRESS BELOW.*
+The burden time for this collection of information is estimated to average 79 hours per response, including the
+time to review instructions, search existing data sources, gather and maintain the data needed and complete
+and review the collection of information. Send comments regarding this burden estimate or any other aspect
+of this information collection, including suggestions for reducing this burden, to:
+Department of Health and Human Services
+Food and Drug Administration
+Office of Chief Information Officer
+Paperwork Reduction Act (PRA) Staff
+PRAStaff@fda.hhs.gov
+"An agency may not conduct or sponsor, and a person is not required to respond to, a collection of
+information unless it displays a currently valid OMB number."
+FORM FDA 3881 (6120)
+
+Page 1 of 1
+
+PSC Publishing Serces (SO) 443-6740
+
+EE
+
+K212274
+
+Innovative and Intelligent
+
+Summary 510(k)
+
+1. Applicant:
+Carina Medical LLC
+1233 Lichfield Ln
+Lexington, KY, 40513
+USA
+Contact Name: Xue Feng – Chief Executive Officer
+Phone: 434-284-1073
+Fax: 855-615-2856
+E-mail: xfeng@carinaai.com
+
+2. Device:
+Trade Name: INTContour
+Common Name: Intelligent Organ Contouring System
+Model Number: v1.0
+Product Code: MUJ
+Regulation Description: Medical charged-particle radiation therapy system
+Regulation Number: 21 CFR 892.5050
+Device Class: II
+
+3. Predicate Devices:
+Trade Name: Smart Segmentation – Knowledge Based Contouring
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+Manufacturer: Varian Medical Systems, Inc.
+Address: 3100 Hansen Way, Palo Alto, CA, 94303
+Regulation Number: 21 CFR 892.5050
+Regulation Name: Medical charged-particle radiation therapy system
+Device Class: II
+Product Code: MUJ
+510(k) Number: K141248
+510(k) Clearance Date: 09/05/2014
+
+4. Reference Device:
+Trade Name: AccuContour
+Manufacturer: Xiamen Manteia Technology LTD.
+Address: 1903, B Tower, Zijin Plaza, No.1811 Huandao East Road, Xiamen, China
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Picture archiving and communications system
+Device Class: II
+Product Code: QKB
+510(k) Number: K191928
+510(k) Clearance Date: 02/28/2020
+
+5. Device Description
+INTContour is a software-only product that uses a machine learning-based approach to perform
+automatic segmentation of structures in medical images, coupled with tools for visualizing the
+segmentation results. A library of previously contoured expert cases serves as inputs to train the
+machine learning algorithms, specifically, convolutional neural networks (CNNs), to perform
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+automatic segmentation. The results of the automatic segmentation will be stored in the DICOM
+Radiotherapy Structure Set (RTSTRUCT) format, which can be sent to desired destinations via
+the DICOM protocol.
+
+INTContour is intended to be used by dosimetrists, medical physicists, and radiation
+oncologists, and serves as an initial method to segment and contour study series. It must be
+used in conjunction with appropriate software to edit the segmentation results if necessary. The
+currently supported anatomical regions for automatic segmentation are head and neck, thorax,
+abdomen, and male pelvis. The supported structures for each region are shown below in
+section 10.
+
+INTContour software is intended to be deployed within a hospital’s private network on a
+workstation with an advanced graphics processing unit (GPU) and runs as a service. A webbased interface is used to access the service and manage the transfer of data, automatic
+segmentation, and visualization.
+
+6. Intended Use Statement
+INTContour provides a machine learning-based approach for automatic segmentation of
+structures including treatment targets and organs at risk to support the radiation therapy
+treatment planning process.
+
+7. Indications for Use Statement
+INTContour provides a machine learning-based approach for the automatic segmentation of
+structures including treatment targets and organs at risk to support the radiation therapy
+treatment planning process. INTContour is intended as an initial method to segment and
+contour study series; therefore, this software must be used in conjunction with an appropriate
+software to edit the segmentation results if necessary. It is not intended to replace a thorough
+review by qualified medical professionals. INTContour is developed for use by dosimetrists,
+medical physicists, and radiation oncologists. The currently supported anatomical regions for
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+automatic segmentation are head and neck, thorax, abdomen, and male pelvis. The supported
+structures for each region are shown below in Section 10.
+
+8. Summary of Technological Characteristics Comparison
+Table 1 shows the similarities and differences between the technological characteristics of the
+two products. The key difference is the detailed implementation of the automated segmentation
+algorithms. Testing demonstrates that the differences do not raise new questions of safety or
+effectiveness.
+
+Table 1. Summary of Technological Characteristic Comparison
+Topic
+
+Predicate Device
+
+Subject Device
+
+Physical
+
+Software package that operates on
+
+Software package that operates on a
+
+Characteristics
+
+off-the-shelf hardware
+
+virtual machine within the off-the-shelf
+hardware
+
+Computer
+
+PC Compatible
+
+Same
+
+Operating
+
+Windows
+
+Ubuntu (18.04 & 20.04)
+
+System
+DICOM Standard The software processes DICOM
+Compliance
+
+Same
+
+compliant image data, including
+RTSTRUCT
+
+Modalities
+
+CT & MRI
+
+Same
+
+User Interface
+
+The software is designed for use on a The software is designed for use on a
+radiotherapy workstation with a native radiotherapy workstation with a web-
+
+Segmentation
+
+user interface.
+
+based user interface
+
+Organs at risk and target volumes
+
+Same
+
+Structures
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+Overall
+
+Model-based approach using a library Same
+
+Segmentation
+
+of expert contours
+
+Method
+Detailed
+
+Smart Segmentation – knowledge-
+
+INTContour used a machine learning-
+
+Implementation based contouring used an atlas-based based method to train CNNs from
+of Segmentation method to deform expert contours to
+Algorithm
+
+expert contours to perform
+
+the target images to generate contours segmentation on the target images to
+generate contours
+
+Support of
+
+Yes
+
+No
+
+Yes
+
+No
+
+Manual Editing
+Provide Expert
+Case Library to
+Users
+
+9. Performance Data
+The safety and performance of INTContour has been evaluated and verified in accordance with
+software specifications and applicable performance standards through software verification and
+validation testing. Non-clinical verification and validation test results, including model
+performance and software usability, established that the device meets its design requirements
+and intended use, that it is as safe and as effective as the predicate devices, and that no new
+issues of safety and effectiveness were raised.
+
+Testing data was acquired from multiple sources than the training data that covers head and
+neck, thorax, abdomen, and male pelvis regions. The cases were selected from patients who
+went through radiation treatment with age 18 – 76, both male and female and various types of
+cancers. Ground truth was performed by at least two trained personnel including dosimetrist,
+medical physicist and/or radiation oncologist to minimize human bias in segmentation.
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+Further, during the development, potential hazards were controlled by a risk management plan
+including risk analysis, risk mitigation, verification and validation.
+
+10. Results
+The Dice metric and 95% Hausdorff Distance (HD95) were calculated for each organ. Statistical
+analysis on the test data was performed by comparing the calculated metrics of INTContour
+against the predicate/reference device. Dice metric was used for large organs and HD95 was
+used for small organs to define the acceptance criteria due to the large variations on Dice metric
+on small organs. By comparing the lower bound (Dice) or upper bound (HD95) of the
+performance differences between INTContour and the predicate/reference device with the
+threshold values, all organs have passed the acceptance criteria and demonstrated the noninferiority against the predicate/reference device.
+The table below shows the list of all supported organs:
+Head and Neck
+
+Thorax
+
+Brainstem
+
+Pituitary
+
+SpinalCanal
+
+Spleen
+
+Bladder
+
+OpticChiasm
+
+InnerEar_L
+
+Lung_R
+
+Kidney_R
+
+Femur_Head_L
+
+Bone_Mandible
+
+InnerEar_R
+
+Lung_L
+
+Kidney_L
+
+Femur_Head_R
+
+OpticNrv_L
+
+Lens_L
+
+Heart
+
+Gallbladder
+
+PenileBulb
+
+OpticNrv_R
+
+Lens_R
+
+Esophagus
+
+Esophagus
+
+Prostate
+
+Parotid_L
+
+Lobe_Temporal_L
+
+Trachea
+
+Liver
+
+SeminalVesicle
+
+Parotid_R
+
+Lobe_Temporal_R
+
+BronchialTree
+
+Stomach
+
+Rectum
+
+Glnd_Submand_L
+
+Larynx
+
+SpinalCord
+
+A_Aorta
+
+Glnd_Submand_R
+
+Cavity_Oral
+
+V_Venacava_I
+
+Eye_L
+
+Pharynx
+
+PortalVein
+
+info@carinaai.com
+
++1 434-284-1073
+
+Abdomen
+
+Male Pelvis
+
+https://www.carinaai.com/
+
+Innovative and Intelligent
+
+Eye_R
+
+Brain
+
+Pancreas
+
+MidEar_L
+
+Cochlea_L
+
+AdrenalGland_R
+
+MidEar_R
+
+Cochlea_R
+
+AdrenalGland_L
+
+Joint_TM_L
+
+Glnd_Lacrimal_L
+
+SplenicVein
+
+Joint_TM_R
+
+Glnd_Lacrimal_R
+
+BrachialPlex_L
+
+BrachialPlex_R
+
+11. Substantial Equivalence Conclusion
+INTContour is an automatic segmentation software to support the radiation treatment planning
+process which has similar intended use and indications for use statement as the predicate
+device. The two devices have similar technological characteristics: both algorithms rely on a
+library of expert contours and use model-based approach to generate contours on new images.
+This 510(k) submission includes information on the INTContour technological characteristics, as
+well as performance data and verification and validation activities demonstrating that
+INTContour is as safe and effective as the predicate, and does not raise different questions of
+safety and effectiveness.
+
+info@carinaai.com
+
++1 434-284-1073
+
+https://www.carinaai.com/
+
+

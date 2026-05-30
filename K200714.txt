@@ -1,0 +1,1244 @@
+September 17, 2020
+Coreline Soft Co., Ltd
+Hye Yi Park
+Deputy General Manager/Strategic Business Dept.
+4, 5F (Yeonnam-dong) 49,
+World Cup buk-ro-6-gil,
+Mapo-gu, Seoul, Republic of Korea
+Re: K200714
+Trade/Device Name: AVIEW
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Picture archiving and communications system
+Regulatory Class: Class II
+Product Code: LLZ, JAK
+Dear Hye Yi Park:
+The Food and Drug Administration (FDA) is sending this letter to notify you of an administrative change
+related to your previous substantial equivalence (SE) determination letter dated August 26, 2020.
+Specifically, FDA is updating this SE Letter for a typographical error in the trade name as an administrative
+correction.
+Please note that the 510(k) submission was not re-reviewed. For questions regarding this letter please contact
+Thalia T. Mills, OHT7: Office of In Vitro Diagnostics and Radiological Health, 301-796-6641,
+thalia.mills@fda.hhs.gov.
+Sincerely,
+For
+Thalia T. Mills, Ph.D.
+Director
+Division of Radiological Health
+OHT7: Office of In Vitro Diagnostics
+and Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.04.18
+
+August 26, 2020
+Coreline Soft Co., Ltd
+Hyeyi Park
+Deputy General Manager/Strategic Business Dept.
+4, 5F (Yeonnam-dong)
+49 World Cup buk-ro-6-gil
+Mapo-gu, Seoul 03991
+REPUBLIC OF KOREA
+Re: K200714
+Trade/Device Name: AVIEW 2.0
+Regulation Number: 21 CFR 892.2050
+Regulation Name: Picture archiving and communications system
+Regulatory Class: Class II
+Product Code: LLZ, JAK
+Dated: July 17, 2020
+Received: July 20, 2020
+Dear Hyeyi Park:
+We have reviewed your Section 510(k) premarket notification of intent to market the device referenced
+above and have determined the device is substantially equivalent (for the indications for use stated in the
+enclosure) to legally marketed predicate devices marketed in interstate commerce prior to May 28, 1976, the
+enactment date of the Medical Device Amendments, or to devices that have been reclassified in accordance
+with the provisions of the Federal Food, Drug, and Cosmetic Act (Act) that do not require approval of a
+premarket approval application (PMA). You may, therefore, market the device, subject to the general
+controls provisions of the Act. Although this letter refers to your product as a device, please be aware that
+some cleared products may instead be combination products. The 510(k) Premarket Notification Database
+located at https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm identifies combination
+product submissions. The general controls provisions of the Act include requirements for annual registration,
+listing of devices, good manufacturing practice, labeling, and prohibitions against misbranding and
+adulteration. Please note: CDRH does not evaluate information related to contract liability warranties. We
+remind you, however, that device labeling must be truthful and not misleading.
+If your device is classified (see above) into either class II (Special Controls) or class III (PMA), it may be
+subject to additional controls. Existing major regulations affecting your device can be found in the Code of
+Federal Regulations, Title 21, Parts 800 to 898. In addition, FDA may publish further announcements
+concerning your device in the Federal Register.
+Please be advised that FDA's issuance of a substantial equivalence determination does not mean that FDA
+has made a determination that your device complies with other requirements of the Act or any Federal
+statutes and regulations administered by other Federal agencies. You must comply with all the Act's
+U.S. Food & Drug Administration
+10903 New Hampshire Avenue
+Silver Spring, MD 20993
+www.fda.gov
+
+Doc ID# 04017.04.17
+
+K200714 - Hyeyi Park
+
+Page 2
+
+requirements, including, but not limited to: registration and listing (21 CFR Part 807); labeling (21 CFR Part
+801); medical device reporting (reporting of medical device-related adverse events) (21 CFR 803) for
+devices or postmarketing safety reporting (21 CFR 4, Subpart B) for combination products (see
+https://www.fda.gov/combination-products/guidance-regulatory-information/postmarketing-safety-reportingcombination-products); good manufacturing practice requirements as set forth in the quality systems (QS)
+regulation (21 CFR Part 820) for devices or current good manufacturing practices (21 CFR 4, Subpart A) for
+combination products; and, if applicable, the electronic product radiation control provisions (Sections 531542 of the Act); 21 CFR 1000-1050.
+Also, please note the regulation entitled, "Misbranding by reference to premarket notification" (21 CFR Part
+807.97). For questions regarding the reporting of adverse events under the MDR regulation (21 CFR Part
+803), please go to https://www.fda.gov/medical-devices/medical-device-safety/medical-device-reportingmdr-how-report-medical-device-problems.
+For comprehensive regulatory information about medical devices and radiation-emitting products, including
+information about labeling regulations, please see Device Advice (https://www.fda.gov/medicaldevices/device-advice-comprehensive-regulatory-assistance) and CDRH Learn
+(https://www.fda.gov/training-and-continuing-education/cdrh-learn). Additionally, you may contact the
+Division of Industry and Consumer Education (DICE) to ask a question about a specific regulatory topic. See
+the DICE website (https://www.fda.gov/medical-devices/device-advice-comprehensive-regulatoryassistance/contact-us-division-industry-and-consumer-education-dice) for more information or contact DICE
+by email (DICE@fda.hhs.gov) or phone (1-800-638-2041 or 301-796-7100).
+Sincerely,
+For
+Thalia T. Mills, Ph.D.
+Director
+Division of Radiological Health
+OHT7: Office of In Vitro Diagnostics
+and Radiological Health
+Office of Product Evaluation and Quality
+Center for Devices and Radiological Health
+Enclosure
+
+DEPARTMENT OF HEALTH AND HUMAN SERVICES
+Food and Drug Administration
+
+Form Approved: OMB No. 0910-0120
+Expiration Date: 06/30/2020
+
+Indications for Use
+
+See PRA Statement below.
+
+510(k) Number (if known)
+
+K200714
+Device Name
+
+AVIEW
+
+Indications for Use (Describe)
+
+AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used to
+support the physician quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue images by
+providing image segmentation of sub-structures in lung, lobe, airways and cardiac, registration of inspiration and
+expiration which could analyze quantitative information such as air trapping volume, air trapped index, and inspiration/
+expiration ratio. And also, volumetric and structure analysis, density evaluation and reporting tools. AVIEW is also used
+to store, transfer, inquire and display CT data set on premise and as cloud environment as well to allow users to connect
+by various environment such as mobile devices and chrome browser. Characterizing nodules in the lung in a single study,
+or over the time course of several thoracic studies. Characterizations include nodule type, location of the nodule and
+measurements such as size (major axis, minor axis), estimated effective diameter from the volume of the nodule, volume
+of the nodule, Mean HU(the average value of the CT pixel inside the nodule in HU), Minimum HU, Max HU, mass(mass
+calculated from the CT pixel value), and volumetric measures(Solid major; length of the longest diameter measured in 3D
+for solid portion of the nodule, Solid 2nd Major: The length of the longest diameter of the solid part, measured in sections
+perpendicular to the Major axis of the solid portion of the nodule), VDT (Volume doubling time), and Lung-RADS
+(classification proposed to aid with findings). The system automatically performs the measurement, allowing lung nodules
+and measurements to be displayed and, integrate with FDA certified Mevis CAD (Computer aided detection) (K043617).
+It also provides CAC analysis by segmentation of four main artery (right coronary artery, left main coronary, left anterior
+descending and left circumflex artery then extracts calcium on coronary artery to provide Agatston score, volume score
+and mass score by whole and each segmented artery type. Based on the score, provides CAC risk based on age and
+gender.
+
+Type of Use (Select one or both, as applicable)
+Prescription Use (Part 21 CFR 801 Subpart D)
+
+Over-The-Counter Use (21 CFR 801 Subpart C)
+
+CONTINUE ON A SEPARATE PAGE IF NEEDED.
+This section applies only to requirements of the Paperwork Reduction Act of 1995.
+*DO NOT SEND YOUR COMPLETED FORM TO THE PRA STAFF EMAIL ADDRESS BELOW.*
+The burden time for this collection of information is estimated to average 79 hours per response, including the
+time to review instructions, search existing data sources, gather and maintain the data needed and complete
+and review the collection of information. Send comments regarding this burden estimate or any other aspect
+of this information collection, including suggestions for reducing this burden, to:
+Department of Health and Human Services
+Food and Drug Administration
+Office of Chief Information Officer
+Paperwork Reduction Act (PRA) Staff
+PRAStaff@fda.hhs.gov
+“An agency may not conduct or sponsor, and a person is not required to respond to, a collection of
+information unless it displays a currently valid OMB number.”
+FORM FDA 3881 (7/17)
+
+Page 1 of 1
+
+PSC Publishing Services (301) 443-6740
+
+EF
+
+K200714
+
+510(k) Summary
+
+1 SUBMITTER
+Coreline Soft Co., Ltd.
+4,5F (Yeonnam-dong), 49 World Cup buk-ro 6-gil, Mapo-gu, Seoul, 03991, Republic of Korea.
+Phone: 82.2.517.7321
+Fax: 82.2.571.7324
+Contact Person: hyeyi. Park
+Date Prepared: 03.13.2020
+
+2 DEVICE
+Name of Device: AVIEW
+Common or Usual Name: Image Processing Software
+Classification Name: System, image processing, radiological (21CFR 892.2050)
+Regulatory Class: II
+Product Code: LLZ, JAK
+
+3 PREDICATE DEVICE
+AVIEW by Coraline Soft Co., Ltd. (K171199)
+Name of Device: AVIEW
+Common or Usual Name: Image Processing Software
+Classification Name: System, image processing, radiological (21CFR 892.2050)
+Regulatory Class: II
+Product Code: LLZ
+This predicate has not been subject to a design-related recall
+
+4 REFERENCE DEVICE
+Imbio CT Lung Density Analysis Software by Imbio LLC (K141069)
+Name of Device: Imbio CT Lung Density Analysis Software
+Common or Usual Name: Software Accessory to a Computed Tomography Device
+Classification Name: System, X-ray tomography, Computed (21CFR 892.1750)
+Regulatory Class: II
+Product Code: JAK
+
+1
+
+AVIEW LCS by Coraline Soft Co., Ltd. (K193220)
+Name of Device: AVIEW LCS
+Common or Usual Name: Image Processing Software
+Classification Name: System, image processing, radiological (21CFR 892.2050)
+Regulatory Class: II
+Product Code: LLZ, JAK
+AI-Rad Companion (Cardiovascular) by Siemens Medical Solutions USA, Inc. (K183268)
+Name of Device: AI-Rad Companion (Cardiovascular)
+Common or Usual Name: AI-Rad Companion (Cardiovascular)
+Classification Name: Computed tomography x-ray system (21CFR 892.1750)
+Regulatory Class: II
+Product Code: JAK, LLZ
+Calcium Scoring by Siemens Medical Solutions, Inc. (K990426)
+Name of Device: Calcium Scoring
+Common or Usual Name: Calcium Scoring
+Classification Name: System, X-ray tomography, Computed (21CFR 892.1750)
+Regulatory Class: II
+Product Code: JAK
+This reference device has not been subject to a design-related recall
+
+5 DEVICEW DESCRIPTION
+The AVIEW is a software product which can be installed on a PC. It shows images taken with the interface
+from various storage devices using DICOM 3.0 which is the digital image and communication standard in
+medicine. It also offers functions such as reading, manipulation, analyzing, post-processing, saving and
+sending images by using the software tools. And is intended for use as diagnostic patient imaging which is
+intended for the review and analysis of CT scanning. Provides following features as semi-automatic nodule
+management, maximal plane measure, 3D measures and columetric measures, automatic nodule detection by
+integration with 3rd party CAD. Also provides Brocks model which calculated the malignancy score based on
+numerical or Boolean inputs. Follow up support with automated nodule matching and automatically categorize
+Lung-RADS score which is a quality assurance tool designed to standardize lung cancer screening CT
+reporting and management recommendations that is based on type, size, size change and other findings that is
+reported. It also automatically analyzes coronary artery calcification which support user to detect
+cardiovascular disease in early stage and reduce the burden of medical.
+•
+
+•
+
+Fully automatic pre-processing
+•
+Fully automatic lung/lobe segmentation using deep-learning algorithms.
+•
+Fully automatic airway segmentation using deep-learning algorithms.
+•
+Fully automatic INSP/EXP registration (non-rigid elastic) algorithm.
+COPD analysis
+2
+
+LAA analysis (LAA-950HU for INSP, LAA-856HU for EXP)
+LAA size analysis (D-Slope)
+•
+The world-first true 3D analysis of LAA cluster sizes.
+•
+Precise airway wall thickness measurement
+•
+Robust measurement using IBHB (Integral-Based Half-BAND) method.
+•
+Precise AWT-Pi10 calculation from 10 samples per each branch
+•
+Air-trapping analysis using INSP/EXP registration
+•
+PRM analysis using INSP/EXP registration (Not available in US)
+•
+Unique pulmonary vessel analysis method (Lobar-pealing method)
+Easy and comprehensive UI
+•
+Multiple database management
+•
+Comprehensive dynamic bull’s eye chart and tables.
+•
+Web-based access to analysis results, including 3D rendering (Thin-client technology)
+•
+PDF report generation
+Interoperability
+•
+DICOM 3.0 COMPLIANT: C-STORE, C-FIND, C-MOVE and C-ECHO
+•
+Resulting images and report can be transferred to PACS through DICOM connection
+Thin client service
+•
+Connected from anywhere, anyplace, anytime.
+•
+Supports mobile view through various mobile devices served by iOS and Android.
+•
+Compatible with Chrome browser
+Research-support
+•
+1000+ feature values are exporting for radiomics research.
+•
+All the segmentation masks are stored in open format (such as Analyze or NifTi)
+Easy processing management
+•
+Rule-based automatic processing server (APS)
+•
+Scaling
+Nodule Management
+• Adding nodule by segmentation or by lines.
+• Semi-automatic nodule measurement (segmentation)
+• Maximal plane measure, 3D measure and volumetric measure.
+• Automatic large vessel removal.
+• Provides various features calculated per each nodule.
+• Fully supporting Lung-RADS workflow: US Lung-RADS and KR Lung-RADS.
+• Nodule malignancy score (PANCAN model calculation.)
+• Importing from CAD results.
+Follow-up
+• Automatic retrieving the past data
+• Follow-up support with nodule matching and comparison
+• Automatic calculation of VDT (volume doubling time)
+Lungs, Lobes and Airway segmentation
+•
+Better segmentation of lungs, lobes and airway based on deep-learning algorithms.
+Automatic nodule detection (CADe)
+•
+Seamless integration with Mevis Visia (FDA 510(k) Cleared)
+Coronary Artery Calcification
+•
+Extracts calcium coronary artery and provide Agatston Score, Volume Score and Mass score.
+•
+Automatically segments calcium area of coronary artery based on deep learning
+•
+•
+
+•
+
+•
+
+•
+
+•
+
+•
+
+•
+
+•
+
+•
+•
+•
+
+3
+
+Segments and provides overlay of four main artery (right coronary artery, left main coronary, left anteriordescending, and left circumflex artery) and myocardium
+•
+Provides CAC risk based on age and gender.
+• Report
+•
+PDF report generation
+•
+It saves or sends the pdf report and captured images in DICOM files.
+•
+Reports are generated using the results of all nodules detected so far (Lung RADS)
+• Save Result
+• It saves the results in internal format
+•
+
+6 INDICATIONS FOR USE
+AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used
+to support the physician quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue
+images by providing image segmentation of sub-structures in lung, lobe, airways and cardiac, registration of
+inspiration and expiration which could analyze quantitative information such as air trapping volume, air trapped
+index, and inspiration/expiration ratio. And also, volumetric and structure analysis, density evaluation and reporting
+tools. AVIEW is also used to store, transfer, inquire and display CT data set on premise and as cloud environment as
+well to allow users to connect by various environment such as mobile devices and chrome browser. Characterizing
+nodules in the lung in a single study, or over the time course of several thoracic studies. Characterizations include
+nodule type, location of the nodule and measurements such as size (major axis, minor axis), estimated effective
+diameter from the volume of the nodule, volume of the nodule, Mean HU(the average value of the CT pixel inside the
+nodule in HU), Minimum HU, Max HU, mass(mass calculated from the CT pixel value), and volumetric
+measures(Solid major; length of the longest diameter measured in 3D for solid portion of the nodule, Solid 2nd Major:
+The length of the longest diameter of the solid part, measured in sections perpendicular to the Major axis of the solid
+portion of the nodule), VDT (Volume doubling time), and Lung-RADS (classification proposed to aid with findings).
+The system automatically performs the measurement, allowing lung nodules and measurements to be displayed and,
+integrate with FDA certified Mevis CAD (Computer aided detection) (K043617). It also provides CAC analysis by
+segmentation of four main artery (right coronary artery, left main coronary, left anterior descending and left
+circumflex artery then extracts calcium on coronary artery to provide Agatston score, volume score and mass score by
+whole and each segmented artery type. Based on the score, provides CAC risk based on age and gender.
+
+7 COMPARISION OF TECHNOLOGICAL CHARACTERISTICS WITH
+THE PREDICATE DEVICE
+AVIEW has the same intended use and the principle of operation and has similar features to the predicate
+devices. AVIEW (K171199)
+There might be slight differences in features and menu, but these differences between the predicate device and
+the proposed device are not so significant since they do not raise any new or potential safety risks to the user
+or patient and questions of safety or effectiveness. Based on the results of software validation and verification
+tests, we conclude that the proposed device is substantially equivalent to the predicate devices.
+Characteristic
+
+Subject Device
+
+Device Name
+
+AVIEW 2.0
+
+Classification
+Name
+
+System, image
+Processing Radiological
+
+Primary Predicate
+Device
+AVIEW
+System, image
+Processing
+Radiological
+
+Reference Device
+
+Reference Device
+
+Reference Device
+
+Reference Device
+
+Imbio CT Lung
+Density Analysis
+Software
+Computed Tomography
+x-ray system
+
+AVIEW LCS
+
+AI-Rad
+Companion
+(Cardiovascular)
+Computed
+Tomography x-ray
+system
+
+Calcium Scoring
+
+System, image
+Processing
+Radiological
+
+Computed
+Tomography x-ray
+system
+4
+
+Regulatory
+Number
+
+21 CFR 892.2050
+
+21 CFR 892.2050
+
+21 CFR 892.1750
+
+21 CFR 892.2050
+
+21 CFR 892.1750
+
+21 CFR 892.1750
+
+Product Code
+Review Panel
+
+LLZ, JAK
+Radiology
+
+LLZ
+Radiology
+
+JAK
+Radiology
+
+LLZ, JAK
+Radiology
+
+JAK
+Radiology
+
+JAK
+Radiology
+
+K171199
+
+K141069
+
+K193220
+
+K183268
+
+K990426
+
+510k Number
+
+AVIEW 2.0
+
+AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used to support the physician
+quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue images by providing image segmentation of sub-structures in
+lung, lobe, airways and cardiac, registration of inspiration and expiration which could analyze air trapping on lung, volumetric and structure analysis,
+density evaluation and reporting tools. AVIEW is also used to store, transfer, inquire and display CT data set on premise and as cloud environment as
+well to allow users to connect by various environment such as mobile devices and chrome browser. Characterizing nodules in the lung in a single study,
+or over the time course of several thoracic studies. Characterizations include nodule type, location of the nodule and measurements such as size (major
+axis, minor axis), estimated effective diameter from the volume of the nodule, volume of the nodule, Mean HU(the average value of the CT pixel inside
+the nodule in HU), Minimum HU, Max HU, mass(mass calculated from the CT pixel value), and volumetric measures(Solid major; length of the longest
+diameter measured in 3D for solid portion of the nodule, Solid 2nd Major: The length of the longest diameter of the solid part, measured in sections
+perpendicular to the Major axis of the solid portion of the nodule), VDT (Volume doubling time), and Lung-RADS (classification proposed to aid with
+findings). The system automatically performs the measurement, allowing lung nodules and measurements to be displayed and, integrate with FDA
+certified Mevis CAD (Computer aided detection) (K043617). It also provides CAC analysis by segmentation of four main artery (right coronary artery,
+left main coronary, left anterior descending and left circumflex artery then extracts calcium on coronary artery to provide Agatston score, volume score
+and mass score by whole and each segmented artery type. Based on the score, provides CAC risk based on age and gender.
+AVIEW
+AVEIW provides CT values for pulmonary tissue from CT thoracic datasets. This software can be used to support the physician quantitatively in the
+diagnosis, followup evaluation and documentation of CT lung tissue images by providing image segmentation of sub-structures in the left and right lung
+(e.g., the five lobes and airway), volumetric and structural analysis, density evaluations and reporting tools. AVIEW is also used to store, transfer, inquire
+and display CT data sets. AVEIW is not meant for primary image Interpretation in mammography.
+Imbio CT Lung Density Analysis Software
+The Imbio CT Lung Density Analysis Software provides reproducible CT values for pulmonary tissue, which is essential for providing quantitative
+support for diagnosis follow up examinations. The Imbio CT Lung Density Analysis Software can be used to support the physician in the diagnosis and
+documentation of pulmonary tissue images (e.g., abnormalities) from CT thoracic datasets. Three-D segmentation and isolation of sub-compartments,
+volumetric analysis, density evaluation, and reporting tools are provided.
+AVEIW LCS
+
+Indications for
+use
+
+AVIEW LCS is intended for the review and analysis and reporting of thoracic CT images for the purpose of characterizing nodules in the lung in a single
+study, or over the time course of several thoracic studies. Characterizations include nodule type, location of the nodule and measurements such as size
+(major axis, minor axis), estimated effective diameter from the volume of the nodule, the volume of the nodule, Mean HU(the average value of the CT
+pixel inside the nodule in HU), Minimum HU, Max HU, mass(mass calculated from the CT pixel value), and volumetric measures (Solid Major, length
+of the longest diameter measured in 3D for a solid portion of the nodule. Solid 2 nd Major: The length of the longest diameter of the solid part, measured
+in sections perpendicular to the Major axis of the solid portion of the nodule), VDT(Volume doubling time), and Lung-RADS (classification proposed
+to aid with findings). The system automatically performs the measurement, allowing lung nodules and measurements to be displayed and, also integrate
+with FDA certified Mevis CAD (Computer-aided detection) (K043617)
+AI-Rad Companion (Cardiovascular)
+AI-Rad Companion (Cardiovascular) is processing software that provides quantitative and qualitative analysis from previously acquired Computed
+Tomography DICOM images to support radiologists and physicians from emergency medicine, specialty care, urgent care, and general practice in the
+evaluation and assessment of cardiovascular disease.
+It provides the following functionality:
+ Segmentation and volume measurement of the heart
+ Quantification of the total calcium volume in the coronary arteries
+ Segmentation of the aorta
+ Measurement of maximum diameters of the aorta at typical landmarks
+ Threshold-based highlighting of enlarged diameters
+The software has been validated for non-cardiac chest CT data with filtered backprojection reconstruction from Siemens Helathineers, GE Healthcare,
+Philips, and Toshiba/Canon, Additionally, the calcium detection feature has been validated on non-cardiac chest CT data with iterative reconstruction
+form Siemens Healthineers.
+Only DICOM images of adult patients are considered to be valid input.
+Calcium Scoring
+From user specified sets of CT cardiac images, Calcium Scoring can be used to;
+ Allow the user to interactively indicate regions of detected calcification
+ To allow the user to allocate each detected region to one of several coronary arteries
+ To estimate algorithmically a score for the amount of detected calcification in each allocated artery
+ To prepare reports including reports including calcium score data, Imagery, ECG traces, Comparison of scroe to cited literature and additional
+relevant information.
+The calcium-scoring package is a diagnostic tool that can be used to evaluate the calcified plaques in the coronary arteries, which is a risk factor for
+coronary artery disease. Calcium scoring may be used to monitor the progression or regression overtime of the amount or volume of calcium in the
+coronary arteries, which may be related to the prognosis of a cardiac attack.
+
+Platform
+User Interface
+
+IBM-compatible PC or
+PC network
+
+IBM-compatible PC
+or PC network
+
+IBM-compatible PC or
+PC network
+
+IBM-compatible PC or
+PC network
+
+IBM-compatible PC
+or PC network
+
+IBM-compatible PC
+or PC network
+
+Monitor,
+
+Monitor,
+
+Monitor,
+
+Monitor,
+
+Monitor,
+
+Monitor,
+
+Mouse,
+
+Mouse,
+
+Mouse,
+
+Mouse,
+
+Mouse,
+
+Mouse,
+
+5
+
+Keyboard
+
+Keyboard
+Images
+can
+be
+scanned,
+loaded
+from card readers, or
+imported from a
+radiographic
+imaging device
+DICOM
+Ruler (line and 3D),
+Tapeline
+(curve,
+poly and3D), Angle
+(3-point, 4point, and
+3D), pixel
+values, area of ROI
+(rectangle,
+circle,
+ellipse), volume
+
+Image Input
+Sources
+
+Images can be scanned,
+loaded
+from
+card
+readers, or imported
+from a radiographic
+imaging device
+
+Image format
+
+DICOM
+
+Image
+Measurement
+Tools
+
+Ruler (line and 3D),
+Tapeline (curve, poly
+and3D), Angle (3-point,
+4point, and 3D), pixel
+values, area of ROI
+(rectangle,
+circle,
+ellipse), volume
+
+Image viewing
+
+Axial, sagittal, and
+coronal image, oblique
+slice, cube view
+
+Axial, sagittal, and
+coronal
+image,
+oblique slice, cube
+view
+
+Image
+manipulation
+
+Panning,
+rotating,
+zooming, windowing,
+inverting,
+Coloring,
+Oblique, Note (text
+overlay), Coloring
+
+Panning,
+rotating,
+zooming,
+windowing,
+inverting, Coloring,
+Oblique, Note (text
+overlay), Coloring
+
+Keyboard
+
+Keyboard
+Images can be
+scanned, loaded from
+card readers, or
+imported from a
+radiographic imaging
+device
+DICOM
+
+Keyboard
+Images can be
+scanned, loaded
+from card readers, or
+imported from a
+radiographic
+imaging device
+DICOM
+
+Keyboard
+Images can be
+scanned, loaded
+from card readers, or
+imported from a
+radiographic
+imaging device
+DICOM
+
+-
+
+Ruler (line and 3D),
+Tapeline (curve, poly
+and3D), Angle (3point, 4point, and 3D),
+pixel values, area of
+ROI (rectangle, circle,
+ellipse), volume
+
+-
+
+-
+
+-
+
+Axial, sagittal, and
+coronal image, oblique
+slice, cube view
+
+-
+
+-
+
+-
+
+Panning,
+rotating,
+zooming, windowing,
+Coloring,
+Oblique,
+Note (text
+overlay), Coloring
+
+-
+
+-
+
+Images can be scanned,
+loaded from card
+readers, or imported
+from a radiographic
+imaging device
+DICOM
+
+AVIEW 2.0
+The AVIEW is a software product which can be installed on a PC. It shows images taken with the interface from various storage devices using DICOM
+3.0 which is the digital image and communication standard in medicine. It also offers functions such as reading, manipulation, analyzing, post-processing,
+saving and sending images by using the software tools. And is intended for use as diagnostic patient imaging which is intended for the review and analysis
+of CT scanning. Provides following features as semi-automatic nodule management, maximal plane measure, 3D measures and volumetric measures,
+automatic nodule detection by integration with 3 rd party CAD. Also provides Brocks model which calculated the malignancy score based on numerical
+or Boolean inputs. Follow up support with automated nodule matching and automatically categorize Lung-RADS score which is a quality assurance tool
+designed to standardize lung cancer screening CT reporting and management recommendations that is based on type, size, size change and other findings
+that is reported. It also automatically analyzes coronary artery calcification which support user to detect cardiovascular disease in early stage and reduce
+the burden of medical.
+AVIEW
+The AVIEW is a software product which can be installed on a PC. It shows images taken with the interface from various storage devices using DICOM
+3.0 which is the digital image and communication standard in medicine. It also offers functions such as reading. Manipulation, analyzing, post-processing,
+saving and sending images by using the software tools.
+Imbio CT Lung Density Analysis Software
+
+General
+Description
+
+The Imbio CT Lung Density Analysis Software (Imbio LDA) IS A SET OF IMAGE POST-PROCESSING ALGORITHMS THAT PERFORM IAMGE
+SEGMENTATION, REGISTRATION, THRESHOLDING, AND CLASSIFICATION ON ct images of juman lungs.
+The algorithms within the Imbio CT Lung Density Analysis Software are combined into a single command-line or through scripting. The Imbio CT Lung
+Density Analysis Software program performs segmentation, then registration, then thresholding and classification. The program reads in DICOM
+datasets, processes the data, then writes output DICOM files to a specified directory.
+The Imbio CT Lung Density Analysis Software is a command-line software application that analyzed DICOM CT Lung images datasets and generated
+reports and DICOM output that show the lungs segmented and overlaid with colorpcodings representing the results of its thresholding and classification
+rules. It has simple file management functions for input and output, and separate modules that implement the CT image-processing algorithms. Imbio
+CT Lung Density Analysis Software does not interface directly with any CT or data collection equipment; instead the software imports data files
+previously generated by such equipment.
+AVIEW LCS
+AVIEW LCS is intended for use as diagnostic patient imaging which is intended for the review and analysis of thoracic CT images. Provides following
+features as semi-automatic nodule measurement (segmentation), maximal plane measure, 3D measure and volumetric measures, automatic nodules
+detection by integration with 3rd party CAD. Also provide cancer risk based on PANCAN risk model which calculated the malignancy score based on
+numerical or Boolean inputs. Follow up support with automated nodule matching and automatically categorize Lung-RADS score which is a quality
+assurance tool designed to standardize lung cancer screening CT reporting and management recommendations that is based on type, size, size change
+and other findings that is reported.
+AI-Rad Companion (Cardiovascular)
+In general, AI-Rad Companion (Cardiovascular) is a software only image post-processing application that uses deep learning algorithms to post-process
+CT data of the thorax. As an update to the previously cleared devices, the following modifications have been made;
+1) Modified indication for Use Statement
+2) Support of software AI-Rad Companion CT VA10A
+a) heart segmentation including measurement (modified)
+b) calcium detection based on deep learning algorithm (modified)
+c) Aorta segmentation (modified)
+
+6
+
+d) AHA landmarks for labeling and diameter measurement of the aorta, including threshold-based aorta diameter classification (modified)
+3) subject device claims list
+The subject device AI-Rad Companion (Cardiovascular) is an image processing software that utilizes deep learning algorithms to provide quantitative
+and qualitative analysis from previously acquired Computed Tomography DICOM image to support radilogists and physicians from emergency medicine,
+specialty care, urgent care, and general practice in the evaluation and assessment of disease of the thorax. The subject devcei support the following device
+specific functionality.
+
+Segmentation and volume measurement of heart
+
+Identification and measurement of volume with high Hounsfield values- related to coronary calcification
+
+Segmentation of the aorta determination of 9 Landmarks.
+
+Computation of cross-sectional MPRs at the 9 landmarks and their maximum diameter
+
+Measurement of maximum diameters of the aorta at typical landmakrs.
+Threshold-based classification of diameters into different categories
+Calcium Scoring
+
+DICOM
+
+Calcium Scoring is a software package running on the 3Dvirtuoso workstation that allows the user to mark regions of detected calcification in CT cardiac
+images, to assign each region to a coronary artery, and to calculate the Agatston score and other information from the identified pixels. Film and paper
+reports of the results can also be prepared. Calcium Scoring is also a cost-effective alternative to Electron Beam CT (EBCT), since it produces calcium
+scores that correlated to the EBCT’s gold standard, but at a much lower cost.
+This receives DICOM This
+receives Retrieve image data This receives DICOM Retrieve image data Retrieve image data
+data from CT by DICOM data from over the network via data from CT by over the network via over the network via
+DICOM communication CT by DICOM DICOM
+DICOM
+DICOM
+DICOM
+Conducts DICOM data communication
+communication
+communication
+with Conducts DICOM
+Conducts DICOM data
+PACS. It also imports data communication
+communication with
+DICOM file directly, with PACS. It also
+PACS. It also imports
+saves by using export imports DICOM file
+DICOM file directly,
+function.
+directly, saves by
+saves by using export
+using
+export
+function.
+function.
+Fully automatic lungs,
+lobes
+and
+airways
+segmentation
+using
+Semi-automatic
+deep-learning
+segmentation
+of
+algorithms
+lungs, lobes and
+airways.
+Semi-automatic
+segmentation of lungs,
+lobes and airways.
+Visualization of multiplanar
+reconstructed
+(MPR) images and 3D
+rendered images, with
+color-defined
+Hounsfield Unit (HU)
+ranges.
+
+Lung Analysis
+Functions
+
+Calculation of LAA
+(Lower
+Attenuation
+Area) index with HU
+density
+histogram.
+Volume measurements
+and percentile index
+Calculation of LAA
+cluster size distribution
+with D-slope
+Graphical visualization
+of
+the
+above
+quantification results for
+reporting
+
+Visualization
+of
+multi-planar
+reconstructed (MPR)
+images and 3D
+rendered
+images,
+with color-defined
+Hounsfield
+Unit
+(HU) ranges.
+Calculation of LAA
+(Lower Attenuation
+Area) index with HU
+density histogram.
+Volume
+measurements and
+percentile index
+Calculation of LAA
+cluster
+size
+distribution with Dslope
+Graphical
+visualization of the
+above quantification
+results for reporting
+
+-
+
+-
+
+-
+
+-
+
+Export of quantification
+results to CSV tables
+
+Export
+of
+quantification results
+to CSV tables
+
+-
+
+Visualization of LAA%
+for each of 5 lobes
+
+Visualization
+of
+LAA% for each of 5
+lobes
+
+-
+
+Measurements of the
+airway branches, such
+as, lumen area and wall
+area
+
+Measurements of the
+airway branches,
+such as, lumen area
+and wall area
+
+7
+
+Lung
+Cancer
+Screening
+
+Analyzes Air Trapping
+Index by registration of
+inspiration
+and
+expiration data. Could
+compare both IN/EX
+after the registration
+
+-
+
+Fully
+automatic
+INSP/EXP registration
+(non-rigid
+elastic)
+algorithm.
+
+-
+
+Fully
+automatic
+lung/lobe segmentation
+using
+deep-learning
+algorithms
+Automatic calculation of
+measurements for each
+segmented nodule
+ Size of the Major axis
+and Minor axis(mm)
+ Diameter of Major
+(3D), 2nd Major
+(3D),
+Major(2D),
+Minor(2D) (mm)
+ Volume(mm³)
+ Max, Min, Mean HU
+of the nodule((HU)
+Cancer probability (%)
+Comparison
+and
+matching
+automatic
+calculations
+between
+each follow-up scan and
+the baseline scan
+ Doubling time in
+days
+ Indicated the change
+of the size
+Auto generate LungRADS
+Loading multiple studies
+Workflow
+ Detect and Segment
+ Comparison
+and
+Matching
+ Results
+Option to integrate with
+3rd party CAD which
+automatically detects the
+nodules and generate
+report
+Supporting Low-dose
+CT
+Reporting results
+The results include the
+following;
+
+Lung-RADS
+
+PANCAN
+risk
+calculator
+
+Auto detect nodule
+location by lobe
+
+-
+
+Imbio
+provides
+segmentation of lung
+and
+automatied
+registration
+of
+inspiration
+and
+expiration image part to
+classify the analysis by
+thresholding the CT
+data.
+It also provides an
+interctive visualliztion
+of the registered pairs to
+analyze
+low-density
+cluster (air trap) and
+airway analysis.
+Uses advanced image
+processing techniques
+to spatially “register”
+two CT image of the
+lungs.
+-
+
+same
+
+-
+
+-
+
+same
+
+-
+
+-
+
+-
+
+-
+
+Same
+
+-
+
+-
+
+Same
+
+-
+
+-
+
+Same
+
+-
+
+-
+
+Same
+
+Same
+
+8
+
+Cardiac (CAC)
+
+Extracting Calcium on
+Coronary Artery and
+provides Agatston score,
+volume score and mass
+score.
+
+-
+
+-
+
+-
+
+Automatically segments
+calcium area of coronary
+artery based on deep
+learning.
+
+Extracting Calcium
+on Coronary Artery
+and
+provides
+Agatston score and
+volume score
+
+evaluation
+and
+documentation
+of
+calcified coronary
+lesions, calculation
+of the Agatston
+equivalent
+score
+
+Calcium Detection
+deep learning-based
+algorithm
+
+8 PERFORMANCE DATA
+8.1 Nonclinical Performance Testing
+This Medical device is not new; therefore, a clinical study was not considered necessary prior to release.
+Additionally, there was no clinical testing required to support the medical device as the indications for use is
+equivalent to the predicate device. The substantial equivalence of the device is supported by the non-clinical
+testing
+
+8.2 Software Verification and Validation
+Verification, validation and testing activities were conducted to establish the performance, functionality and
+reliability characteristics of the modified devices. The device passed all of the tests based on pre-determined
+Pass/Fail criteria.
+- Unit Test
+Conducting Unit Test using Google C++ Unit Test Framework on major software components identified by
+software development team. List of Unit Test includes Functional test condition for software component unit,
+Performance test condition, and part of algorithm analysis for image processing algorithm.
+
+-
+
+System Test
+In accordance with the document ‘integration Test Cases’ discussed in advanced by software development team
+and test team, test is conducted by installing software to hardware with recommended system specification.
+Despite Test case recognized in advance was not in existence. New software error discovered by ‘Exploratory
+Test’ conducted by test team will be registered and managed as new test case after discussion between
+development team and test team.
+Discovered software error will be classified into 3 categories as severity and managed.
+✓ Major defects, which are impacting the product’s intended use and no workaround is available.
+✓ Moderate defects, which are typically related to user-interface or general quality of product, while
+workaround is available.
+✓ Minor defects, which aren’t impacting the product’s intended use. Not significant.
+Success standard of System Test is not finding ‘Major’, ‘Moderate’ defect.
+
+-
+
+Performance Test
+• Auto Lung & Lobe Segmentation
+• Airway Segmentation
+• Nodule Matching Experiment Using Lung Registration
+• Validation on DVF Size Optimization with Sub-sampling
+• Semi-automatic Nodule Segmentation
+9
+
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+Brock Model (ask PANCAN) Calculation
+VDT Calculation
+Lung RADS Calculation
+Validation LAA Analysis
+Validation LAA Size Analysis
+Size analysis algorithm of LAA clusters
+Lung Registration
+Reliability Test for Airway wall Measurement
+CAC Performance
+Air Trapping Analysis
+
+9 CONCLUSIONS
+The new device and predicate device are substantially equivalent in the areas of technical characteristics,
+general functions, application, and intended use. The new device does not introduce a fundamentally new
+scientific technology, and the nonclinical tests demonstrate that the device is safe and effective. Therefore, it
+is our opinion that the AVIEW described in this submission is substantially equivalent to the predicate device.
+
+10
+
+
