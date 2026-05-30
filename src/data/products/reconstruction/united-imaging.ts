@@ -52,7 +52,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging CT system clearances (e.g., K241166 for uCT 550). AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to reduce radiation dose and improve image quality compared to conventional reconstruction techniques."
+      intendedUseStatement: "Deep Recon is a data driven image reconstruction method based on deep learning technology. It is intended to produce cross-sectional images by computer reconstruction of X-ray transmission data taken at different angles and planes, including Axial, Helical, and Cardiac acquisition. Deep Recon is designed to generate CT images with lower image noise, and improved low contrast detectability, and it can reduce the dose required for diagnostic CT imaging. (Source: FDA 510(k) K193073 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
