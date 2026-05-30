@@ -185,7 +185,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Cleared as part of United Imaging PET/CT and PET/MR system clearances. AI reconstruction is integrated feature."
       },
-      intendedUseStatement: "Intended for use in PET image reconstruction to enhance image quality and/or reduce acquisition time or injected dose."
+      intendedUseStatement: "The uPMR 790 system combines magnetic resonance diagnostic devices (MRDD) and Positron Emission Tomography (PET) scanners that provide registration and fusion of high resolution physiologic and anatomic information, acquired simultaneously and iso-centrically. The PET provides distribution information of PET radiopharmaceuticals within the human body to assist healthcare providers in assessing the metabolic and physiological functions. HD TOF reconstruction is a deep-learning enhanced PET reconstruction module for this system. (Source: FDA 510(k) K183014 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
