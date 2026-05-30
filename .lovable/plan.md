@@ -1,67 +1,72 @@
-# Revise `intendedUseStatement` to verbatim vendor declarations
-
 ## Goal
 
-For every active product whose `intendedUseStatement` is missing or a generic stub (e.g. "For automatic segmentation of organs at risk in radiation therapy planning."), replace it with the vendor's own declared intended use — verbatim, quoted, with the source cited.
+Bring `OrbitHero` into visual lockstep with the task taxonomy used across the catalogue, swap the center text pill for the real DLinRT.eu logo, and publish a news entry crediting Mustafa Kadhim for the suggestion.
 
-## Scope
+## 1. Taxonomy-aligned colors in `src/components/homepage/OrbitHero.tsx`
 
-Audit identified **~49 candidates** across active product files:
+Single source of truth: `TASK_COLORS` from `src/utils/chartColors.ts`. These solid hex values render identically in light and dark mode, so no theme branching is needed.
 
-- **~41 products** with generic stub statements (length < 120 chars, e.g. boilerplate "For automatic segmentation…", "For use in treatment planning…", "For radiation therapy treatment planning and dose calculation.").
-- **~8 pipeline products** missing the field entirely (`pipeline/ge-healthcare.ts`, `pipeline/medlever.ts` ×2, `pipeline/synaptiq.ts`, `pipeline/therapanacea.ts` ×3, `pipeline/united-imaging.ts`).
-- Out of scope: products already carrying a substantial vendor-derived statement (≥ ~120 chars and product-specific), archived products, and `examples/` stubs.
+**Legend dots (category tag rail at the bottom)** — currently every chip uses the same `from-sky-400 to-violet-400` gradient dot. Replace with a per-category solid swatch driven by `getTaskColor(t)`:
 
-## Source hierarchy (per user)
+```text
+[●] Auto-Contouring      → #3B82F6
+[●] Treatment Planning   → #EC4899
+[●] Image Synthesis      → #10B981
+[●] Reconstruction       → #A855F7
+[●] Performance Monitor  → #6B7280
+```
 
-1. **Regulatory filings first** — FDA 510(k) Summary "Indications for Use", CE IFU/Declaration of Conformity, TGA/TFDA equivalents.
-2. **Vendor product page** if no public regulatory text is accessible.
-3. **Pre-market / pipeline products** — vendor disclosure (press release, ESTRO booth communication, product website "Coming soon"). Mark explicitly as developmental.
-4. If neither is accessible → leave the existing text but flag in audit notes; do **not** invent.
+Each dot becomes an inline-styled `span` with `backgroundColor` from `TASK_COLORS`. Hover keeps the existing sky-700 text/ring accent.
 
-## Format (per user)
+**Orbiting blobs (planets)** — replace the arbitrary tailwind gradient strings with the taxonomy palette. Each planet is bound to one task so the visual matches what users see on product cards:
 
-- Verbatim quote inside double quotes inside the string, e.g.:
-  ```ts
-  intendedUseStatement: "\"<verbatim vendor wording>\" (Source: FDA 510(k) K232799 Summary)."
-  ```
-- Append a short parenthetical source citation: 510(k) number, CE IFU section, or URL with retrieval date for vendor pages.
-- Update the product's existing `source` field if the new citation adds a reference not yet listed.
-- Where the vendor wording exceeds ~2 sentences, quote the operative indications-for-use sentence(s) only; do not paraphrase.
+```text
+Outer ring  Auto-Contouring      #3B82F6
+Outer ring  Treatment Planning   #EC4899
+Outer ring  Image Synthesis      #10B981
+Outer ring  Performance Monitor  #6B7280
+Inner ring  Reconstruction       #A855F7
+Inner ring  Clinical Prediction  #F97316
+Inner ring  Registration         #6366F1
+```
 
-## Execution plan — waves
+The `Planet` type changes from a tailwind `gradient` string to a `task: keyof typeof TASK_COLORS` (resolved through `getTaskColor`). The blob renders as a radial gradient built from that single hex (lighter top-left highlight → solid color), preserving the current glossy look. The shine, hover scale, and ring overlay stay identical.
 
-Because this touches ~49 product files across 8+ category folders and each lookup requires a web/regulatory search, ship as sequential category waves. Each wave = one user-confirmed PR-sized batch.
+**Traveling SVG satellites** also switch from `#5090D0 / #22d3ee / #a78bfa` to three taxonomy colors (`#3B82F6`, `#10B981`, `#A855F7`) so the moving dots feel like the same family.
 
-1. **Wave 1 — Pipeline** (8 products, missing field). Verbatim from vendor press releases / product pages already cited in `source`. Lowest risk: most have explicit "not for clinical use" disclaimers to quote.
-2. **Wave 2 — Auto-Contouring** (largest cluster of generic stubs). Prioritise products with FDA 510(k) clearance numbers already in `regulatory.fda.clearanceNumber` — fetch the Summary from accessdata.fda.gov.
-3. **Wave 3 — Image Synthesis + Reconstruction + Image Enhancement**.
-4. **Wave 4 — Treatment Planning + Registration + Tracking**.
-5. **Wave 5 — Performance Monitor + Clinical Prediction + Platform**.
+Brand accent (`#5090D0`) used for the underline, ring strokes, glows, halo, and core remains untouched — the steel-blue identity stays, only the planets and legend dots become taxonomy-colored.
 
-Each wave will:
-- Use `acp_subagent--spawn_agent` in parallel (one agent per ~5 products) to fetch FDA 510(k) Summaries (preferred) or vendor product pages and return the verbatim "Indications for Use" / "Intended Purpose" text + source URL.
-- Apply edits via `code--line_replace` per file.
-- Update `lastRevised` on each touched product (consistent with project convention).
-- Produce a per-wave summary listing: product id, old text, new text, source URL.
+## 2. Center logo
 
-## Technical details
+Replace the gradient text pill that currently reads "DLinRT.eu" with the actual logo at `/LogoDLinRT.eu.png`, keeping:
 
-- Field lives on `ProductDetails.regulatory.intendedUseStatement` (string). No schema change needed.
-- Edits are data-only under `src/data/products/**`; no UI, type, or runtime code is touched.
-- Build remains green: field is already optional / free-text.
-- "Minimal Intervention" memory respected: only `intendedUseStatement`, `lastRevised`, and (when adding a new citation) `source` are modified per product.
+- the rounded pill shape (`rounded-full`),
+- the soft sky glow halo + pulse rings around it,
+- the "The hub" meta caption below.
 
-## What this plan does NOT do
+Implementation: a `rounded-full` white container with the same shadow/ring as today, holding `<img src="/LogoDLinRT.eu.png" alt="DLinRT.eu" />` sized to roughly match the current pill footprint (≈ 56–64 px tall, auto width capped). The image is set to `object-contain` so the wordmark doesn't distort, and the container gets `overflow-hidden` so the rounded edges clip the logo.
 
-- Does not regenerate or auto-edit the entire product catalogue.
-- Does not re-score evidence (E/I/R) — separate workflow.
-- Does not touch products whose current statement is already substantive and clearly vendor-derived.
-- Does not invent text when the vendor source is inaccessible — those products are listed in the wave report for manual follow-up.
+No other content (search, headline, chips, category rail) changes.
 
-## Deliverable for approval
+## 3. News item: stylistic upgrade announcement
 
-On approval, I will start with **Wave 1 (Pipeline, 8 products)** and return:
-- The edited files,
-- A short table of `id | source | verbatim quote` for your review,
-before proceeding to Wave 2.
+Create `src/data/news/orbit-hero-style-refresh.ts` and register it in `src/data/news.ts` at the top of `NEWS_ITEMS`.
+
+Content outline (matching existing news shape — id, date `2026-05-30`, title, summary, markdown content):
+
+- Title: "Homepage Refresh: Taxonomy-Consistent Orbit and New DLinRT.eu Hub Logo"
+- Summary: one sentence about the orbit + legend now sharing the catalogue's task colors and the centerpiece switching to the real logo.
+- Body sections:
+  - What changed (legend dots, orbiting blobs, central logo).
+  - Why it matters — same color a user sees on a "Auto-Contouring" product card is the same color orbiting the hub and labelling the category chip, reinforcing the taxonomy across the site.
+  - Acknowledgement: "Many thanks to **Mustafa Kadhim** for suggesting this stylistic upgrade." (spelling verified against the About page entry).
+
+## Verification
+
+- Build passes (auto).
+- Visual check on `/`: hero shows 7 differently colored orbiting blobs, 5 legend dots each matching their category color, central DLinRT.eu logo inside the rounded pill with halo intact.
+- News page `/news` lists the new entry first; detail page renders the markdown body and credits Mustafa Kadhim.
+
+## Out of scope
+
+No dark-mode work (homepage hero is light-only today), no changes to `TASK_COLORS`, no edits elsewhere in the app.
