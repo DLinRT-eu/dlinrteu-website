@@ -75,7 +75,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ",
         decisionDate: "2022-08-25"
       },
-      intendedUseStatement: "For generating synthetic CT and structure sets from MRI for radiation therapy planning."
+      intendedUseStatement: "MRI Planner is indicated for radiotherapy planning of adult patients for primary and metastatic cancers in the brain and head-neck regions, as well as soft tissue cancers in the pelvic region. (Source: FDA 510(k) K211841 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
