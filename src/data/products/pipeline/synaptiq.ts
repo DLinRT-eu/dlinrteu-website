@@ -53,8 +53,12 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
       "No model card, training-data description or independent validation published",
       "Information sourced from vendor booth communication; pending verification against vendor press release or product documentation",
     ],
+    regulatory: {
+      intendedUseStatement:
+        "\"4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope.\" Research use only; not for clinical use. (Source: Synaptiq booth communication, ESTRO 2026, Stockholm, 15–19 May 2026.)",
+    },
     lastUpdated: "2026-05-20",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source:
       "Vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026): 4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope.",
   },
