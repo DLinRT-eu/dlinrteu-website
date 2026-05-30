@@ -54,7 +54,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         regulationNumber: "21 CFR 892.2050",
         notes: "CT Auto Segmentation. MR Contour DL cleared separately as K242925 (April 2025)"
       },
-      intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+      intendedUseStatement: "Auto Segmentation generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be used by dosimetrists, medical physicists, and radiation oncologists as initial contours to accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for each organ at risk and correct the contours/labels as needed. Auto Segmentation may be used with images acquired on CT scanners, in adult patients. (Source: FDA 510(k) K230082 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2018",
@@ -74,7 +74,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2024-01-20",
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K230082, K242925), company official sources",
     clinicalEvidence: "FDA 510(k) validation studies using 2552 contours from 302 unique patients across 9 global sites",
     evidence: [

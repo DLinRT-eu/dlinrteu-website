@@ -56,7 +56,7 @@ const rawProduct: ProductDetails = {
       decisionDate: "2020-09-17",
       notes: "Cleared as AVIEW platform. RT ACS is the radiation therapy auto-contouring module. URL: https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
     },
-    intendedUseStatement: "For automatic segmentation of organs at risk in radiation therapy planning."
+    intendedUseStatement: "AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used to support the physician quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue images by providing image segmentation of sub-structures in lung, lobe, airways and cardiac, registration of inspiration and expiration which could analyze quantitative information such as air trapping volume, air trapped index, and inspiration/expiration ratio; volumetric and structure analysis, density evaluation and reporting tools. AVIEW is also used to store, transfer, inquire and display CT data set on premise and as cloud environment. (Source: FDA 510(k) K200714 Summary, accessed 2026-05-30. Note: K200714 is the base AVIEW platform clearance; the Aview RT ACS application runs on this cleared platform.)"
   },
   market: {
     onMarketSince: "2019",
@@ -65,7 +65,7 @@ const rawProduct: ProductDetails = {
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-02-23",
-  lastRevised: "2026-05-20",
+  lastRevised: "2026-05-30",
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",

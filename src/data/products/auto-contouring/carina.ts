@@ -220,7 +220,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Uterus (investigational)",
       "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-05-30",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",
