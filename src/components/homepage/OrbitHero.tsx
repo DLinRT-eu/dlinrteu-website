@@ -339,7 +339,10 @@ const OrbitHero = () => {
               onClick={() => goToTask(t)}
               className="group inline-flex items-center gap-1.5 rounded-full bg-white/70 backdrop-blur px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-slate-200/80 hover:text-sky-700 hover:ring-sky-300 hover:bg-white transition"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-sky-400 to-violet-400 group-hover:from-sky-500 group-hover:to-violet-500" />
+              <span
+                className="h-2 w-2 rounded-full ring-1 ring-white/60 transition-transform group-hover:scale-125"
+                style={{ backgroundColor: getTaskColor(t) }}
+              />
               {t}
             </button>
           ))}
