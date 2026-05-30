@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Search, Sparkles, ShieldCheck, Globe2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { TASK_COLORS, getTaskColor } from "@/utils/chartColors";
 
 interface Planet {
-  gradient: string;
+  task: keyof typeof TASK_COLORS;
   /** position on the ellipse in degrees (0 = right, 90 = bottom) */
   angle: number;
   /** which ring: 0 inner, 1 outer */
@@ -11,13 +12,13 @@ interface Planet {
 }
 
 const PLANETS: Planet[] = [
-  { gradient: "from-sky-400 to-indigo-500",    angle: -115, ring: 1 },
-  { gradient: "from-cyan-400 to-blue-600",     angle: -45,  ring: 1 },
-  { gradient: "from-teal-400 to-cyan-600",     angle: 20,   ring: 1 },
-  { gradient: "from-violet-400 to-purple-600", angle: 70,   ring: 1 },
-  { gradient: "from-blue-400 to-sky-600",      angle: 105,  ring: 0 },
-  { gradient: "from-indigo-400 to-blue-600",   angle: 165,  ring: 0 },
-  { gradient: "from-orange-400 to-rose-500",   angle: -150, ring: 0 },
+  { task: "Auto-Contouring",     angle: -115, ring: 1 },
+  { task: "Treatment Planning",  angle: -45,  ring: 1 },
+  { task: "Image Synthesis",     angle: 20,   ring: 1 },
+  { task: "Performance Monitor", angle: 70,   ring: 1 },
+  { task: "Reconstruction",      angle: 105,  ring: 0 },
+  { task: "Registration",        angle: 165,  ring: 0 },
+  { task: "Clinical Prediction", angle: -150, ring: 0 },
 ];
 
 const CATEGORY_TAGS = [
@@ -29,6 +30,17 @@ const CATEGORY_TAGS = [
 ];
 
 const QUICK_SUGGESTIONS = ["Auto-Contouring", "Image Synthesis", "Clinical Prediction", "Performance Monitor"];
+
+/** Mix a hex color toward white by amount 0..1, returning an rgb() string. */
+const lighten = (hex: string, amount: number): string => {
+  const h = hex.replace("#", "");
+  const n = parseInt(h, 16);
+  const r = (n >> 16) & 255;
+  const g = (n >> 8) & 255;
+  const b = n & 255;
+  const mix = (c: number) => Math.round(c + (255 - c) * amount);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+};
 
 const OrbitHero = () => {
   const navigate = useNavigate();
