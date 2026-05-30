@@ -52,8 +52,12 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
       "No regulatory clearance disclosed (CE, FDA, or other)",
       "No model card, training-data description or independent validation published",
     ],
+    regulatory: {
+      intendedUseStatement:
+        "\"Under development; not for sale or clinical use, not yet available in Europe.\" (Source: United Imaging ESTRO 2026 microsite, https://estro-united-imaging-healthcare-europe.framer.ai/, retrieved 19 May 2026.)",
+    },
     lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-19",
+    lastRevised: "2026-05-30",
     source:
       "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'",
   },

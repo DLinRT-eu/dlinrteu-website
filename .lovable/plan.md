@@ -1,57 +1,67 @@
-## Dark Mode Contrast Audit
+# Revise `intendedUseStatement` to verbatim vendor declarations
 
-### Problems found
+## Goal
 
-1. **TaskTaxonomy pastel buttons unreadable in dark mode.** Cards use hardcoded pastels (`bg-blue-100`, `bg-yellow-100`, `bg-purple-100`, …) that are NOT remapped by the dark retrofit. The button label uses `text-slate-900`, which the retrofit forces to near-white (`hsl(210 30% 94%)`) in dark mode → light text on light pastel = invisible. The inner `Badge` (`bg-white text-slate-900`) works because `bg-white` is remapped to `--card`, but the surrounding button background isn't.
+For every active product whose `intendedUseStatement` is missing or a generic stub (e.g. "For automatic segmentation of organs at risk in radiation therapy planning."), replace it with the vendor's own declared intended use — verbatim, quoted, with the source cited.
 
-2. **`text-slate-300` / `text-slate-400` mapped too dim.** Retrofit maps them to `hsl(215 14% 42%)` and `hsl(215 12% 52%)` — used for dividers, "Try:" labels, micro captions in `OrbitHero` and TaskTaxonomy description — all fail WCAG against the dark background.
+## Scope
 
-3. **`text-slate-500` / `text-slate-600`** also borderline against `--background` (5% lightness). Should sit closer to `--muted-foreground` (65%).
+Audit identified **~49 candidates** across active product files:
 
-4. **`text-slate-700`** maps to 82% — fine, but TaskTaxonomy's per-card description (`text-slate-700 dark:text-slate-300`) is double-targeted; the `dark:text-slate-300` wins and drops to 42% → unreadable.
+- **~41 products** with generic stub statements (length < 120 chars, e.g. boilerplate "For automatic segmentation…", "For use in treatment planning…", "For radiation therapy treatment planning and dose calculation.").
+- **~8 pipeline products** missing the field entirely (`pipeline/ge-healthcare.ts`, `pipeline/medlever.ts` ×2, `pipeline/synaptiq.ts`, `pipeline/therapanacea.ts` ×3, `pipeline/united-imaging.ts`).
+- Out of scope: products already carrying a substantial vendor-derived statement (≥ ~120 chars and product-specific), archived products, and `examples/` stubs.
 
-5. **Pastel surfaces elsewhere** (e.g. `bg-blue-100`, `bg-emerald-100`, badges across the app) aren't remapped at all in `.dark`.
+## Source hierarchy (per user)
 
-### Fix plan
+1. **Regulatory filings first** — FDA 510(k) Summary "Indications for Use", CE IFU/Declaration of Conformity, TGA/TFDA equivalents.
+2. **Vendor product page** if no public regulatory text is accessible.
+3. **Pre-market / pipeline products** — vendor disclosure (press release, ESTRO booth communication, product website "Coming soon"). Mark explicitly as developmental.
+4. If neither is accessible → leave the existing text but flag in audit notes; do **not** invent.
 
-**A. `src/index.css` — strengthen the dark retrofit (no per-component refactor).**
+## Format (per user)
 
-- Raise mapped lightness of dim text utilities:
-  - `text-slate-300/gray-300` → `hsl(215 18% 70%)` (was 42%)
-  - `text-slate-400/gray-400` → `hsl(215 16% 65%)` (was 52%)
-  - `text-slate-500/gray-500` → `hsl(215 15% 72%)` (was 62%)
-  - `text-slate-600/gray-600` → `hsl(215 16% 80%)` (was 72%)
-  - Keep `slate-700/800/900` as-is.
-- Add dark overrides for hardcoded pastel surfaces so foreground text remains legible. Map every `bg-{color}-100` used in the catalog (blue, yellow, green, purple, pink, orange, indigo, emerald, violet, cyan, gray) to a tinted dark surface using `--muted` plus a low-alpha accent of the original hue, e.g.:
-  ```css
-  .dark .bg-blue-100   { background-color: hsl(217 35% 18%) !important; }
-  .dark .bg-yellow-100 { background-color: hsl(45 30% 18%) !important; }
-  /* …same for green/purple/pink/orange/indigo/emerald/violet/cyan/gray */
+- Verbatim quote inside double quotes inside the string, e.g.:
+  ```ts
+  intendedUseStatement: "\"<verbatim vendor wording>\" (Source: FDA 510(k) K232799 Summary)."
   ```
-  Lightness ~16–20%, saturation kept low so the existing `text-slate-900` (remapped to near-white) reaches AA contrast.
-- Soften the connector line in TaskTaxonomy: under `.dark`, replace `from-blue-300 via-[#00A6D6] to-blue-300` visibility by leaving it as-is (it already shows on dark) — no change needed.
+- Append a short parenthetical source citation: 510(k) number, CE IFU section, or URL with retrieval date for vendor pages.
+- Update the product's existing `source` field if the new citation adds a reference not yet listed.
+- Where the vendor wording exceeds ~2 sentences, quote the operative indications-for-use sentence(s) only; do not paraphrase.
 
-**B. `src/components/TaskTaxonomy.tsx` — minimal local fix.**
+## Execution plan — waves
 
-- Per-card description: remove the conflicting `dark:text-slate-300` and rely on a single `text-muted-foreground` (or keep `text-slate-700`, which the retrofit handles correctly). Single line change.
-- Inner `Badge` already uses `bg-white text-slate-900` — works via retrofit; no change.
-- Button border `border-gray-200` already remapped to `--border`; no change.
+Because this touches ~49 product files across 8+ category folders and each lookup requires a web/regulatory search, ship as sequential category waves. Each wave = one user-confirmed PR-sized batch.
 
-**C. Spot fixes in homepage components (optional, only if A still leaves issues).**
+1. **Wave 1 — Pipeline** (8 products, missing field). Verbatim from vendor press releases / product pages already cited in `source`. Lowest risk: most have explicit "not for clinical use" disclaimers to quote.
+2. **Wave 2 — Auto-Contouring** (largest cluster of generic stubs). Prioritise products with FDA 510(k) clearance numbers already in `regulatory.fda.clearanceNumber` — fetch the Summary from accessdata.fda.gov.
+3. **Wave 3 — Image Synthesis + Reconstruction + Image Enhancement**.
+4. **Wave 4 — Treatment Planning + Registration + Tracking**.
+5. **Wave 5 — Performance Monitor + Clinical Prediction + Platform**.
 
-- `OrbitHero` "Try:" label (`text-slate-400`) and small badges (`text-slate-500`) will be lifted by change A; no edit required.
-- `Footer` (`text-gray-500/600`) lifted by change A; no edit required.
-- `StatsRow` and `FeatureCards` already use slate-600/700/900, all in the safe range after A.
+Each wave will:
+- Use `acp_subagent--spawn_agent` in parallel (one agent per ~5 products) to fetch FDA 510(k) Summaries (preferred) or vendor product pages and return the verbatim "Indications for Use" / "Intended Purpose" text + source URL.
+- Apply edits via `code--line_replace` per file.
+- Update `lastRevised` on each touched product (consistent with project convention).
+- Produce a per-wave summary listing: product id, old text, new text, source URL.
 
-### Out of scope
+## Technical details
 
-- No restructuring of homepage layout or copy.
-- No changes to light mode tokens or component APIs.
-- No new dependencies; all edits stay in `src/index.css` (primary) and one className tweak in `TaskTaxonomy.tsx`.
+- Field lives on `ProductDetails.regulatory.intendedUseStatement` (string). No schema change needed.
+- Edits are data-only under `src/data/products/**`; no UI, type, or runtime code is touched.
+- Build remains green: field is already optional / free-text.
+- "Minimal Intervention" memory respected: only `intendedUseStatement`, `lastRevised`, and (when adding a new citation) `source` are modified per product.
 
-### Verification
+## What this plan does NOT do
 
-After edits, switch the preview to dark mode and visually confirm:
-- All ten TaskTaxonomy category buttons show legible label + badge + description.
-- Hero subtext, "Try:" chips, stat sub-labels, and footer links are clearly readable.
-- Light mode is unchanged (all overrides are scoped under `.dark`).
+- Does not regenerate or auto-edit the entire product catalogue.
+- Does not re-score evidence (E/I/R) — separate workflow.
+- Does not touch products whose current statement is already substantive and clearly vendor-derived.
+- Does not invent text when the vendor source is inaccessible — those products are listed in the wave report for manual follow-up.
+
+## Deliverable for approval
+
+On approval, I will start with **Wave 1 (Pipeline, 8 products)** and return:
+- The edited files,
+- A short table of `id | source | verbatim quote` for your review,
+before proceeding to Wave 2.
