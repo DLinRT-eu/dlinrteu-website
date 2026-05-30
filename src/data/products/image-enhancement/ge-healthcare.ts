@@ -125,7 +125,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         notes: "Part of GE AIR Recon DL platform clearances (K193282, K213717, K252379)"
       },
-      intendedUseStatement: "Intended for use in enhancing MR image quality through noise reduction and detail enhancement to support clinical interpretation."
+      intendedUseStatement: "AIR Recon DL is a deep learning based reconstruction technique that is available for use on GE Healthcare 1.5T, 3.0T, and 7.0T MR systems. AIR Recon DL reduces noise and ringing (truncation artifacts) in MR images, which can be used to reduce scan time and improve image quality. AIR Recon DL is intended for use with all anatomies, and for patients of all ages. Depending on the anatomy of interest being imaged, contrast agents may be used. (Source: FDA 510(k) K213717 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2021",
