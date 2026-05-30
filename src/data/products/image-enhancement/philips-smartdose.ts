@@ -57,7 +57,7 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
         decisionDate: "2021-01-25",
         notes: "Part of Philips CT platform clearances. SmartDose is an integrated low-dose enhancement feature."
       },
-      intendedUseStatement: "Intended for use in enhancing low-dose CT images to reduce noise and improve diagnostic confidence without altering the underlying anatomical information."
+      intendedUseStatement: "The Spectral CT is a Computed Tomography X-Ray System intended to produce cross-sectional images of the body by computer reconstruction of x-ray transmission data taken at different angles and planes. This information may be used by a trained healthcare professional as a diagnostic tool for the visualization and analysis of anatomical and pathological structures in patients of all ages, and to be used for diagnostic imaging in radiology, interventional radiology, and cardiology as part of treatment preparation and radiation therapy planning. (Source: FDA 510(k) K203020 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
