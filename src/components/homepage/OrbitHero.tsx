@@ -276,16 +276,19 @@ const OrbitHero = () => {
             <div className="text-[10px] text-slate-400 font-mono">regulatory data tracked</div>
           </div>
 
-          {/* Central DLinRT.eu node */}
+          {/* Central DLinRT.eu logo */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
             <div className="relative">
               {/* pulse rings */}
               <span className="absolute inset-0 rounded-full ring-1 ring-sky-300/50 animate-[corePulse_3s_ease-out_infinite]" />
               <span className="absolute inset-0 rounded-full ring-1 ring-sky-300/30 animate-[corePulse_3s_ease-out_1s_infinite]" />
               <div className="absolute inset-0 rounded-full bg-sky-300/40 blur-2xl scale-150" aria-hidden="true" />
-              <div className="relative px-8 py-5 rounded-full bg-gradient-to-br from-[#5090D0] to-[#3b6fa8] text-white font-bold text-2xl md:text-3xl shadow-[0_20px_50px_-15px_rgba(80,144,208,0.6)] ring-1 ring-white/40">
-                <span className="absolute inset-x-4 top-1 h-1/3 rounded-full bg-white/20 blur-sm" />
-                DLinRT.eu
+              <div className="relative flex items-center justify-center h-24 w-24 md:h-32 md:w-32 rounded-full bg-white overflow-hidden shadow-[0_20px_50px_-15px_rgba(80,144,208,0.6)] ring-1 ring-sky-200/80">
+                <img
+                  src="/LogoDLinRT.eu.png"
+                  alt="DLinRT.eu"
+                  className="h-full w-full object-contain p-3"
+                />
               </div>
               {/* tiny meta label */}
               <div className="mt-3 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-slate-400">
@@ -294,13 +297,15 @@ const OrbitHero = () => {
             </div>
           </div>
 
-          {/* Planets — slowly orbiting around the center */}
+          {/* Planets — slowly orbiting around the center, colored by taxonomy task */}
           {PLANETS.map((p) => {
             const isOuter = p.ring === 1;
             const duration = isOuter ? 140 : 110; // seconds, slow & elegant
             // negative delay positions planet at its starting angle on the shared keyframe
             const norm = ((p.angle % 360) + 360) % 360;
             const delay = -(norm / 360) * duration;
+            const color = getTaskColor(p.task);
+            const highlight = lighten(color, 0.55);
             return (
               <div
                 key={p.angle}
@@ -309,12 +314,14 @@ const OrbitHero = () => {
                   animation: `${isOuter ? "orbit-outer" : "orbit-inner"} ${duration}s linear ${delay}s infinite`,
                   willChange: "transform",
                 }}
+                title={p.task}
               >
                 <span
-                  className={`relative block h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br ${p.gradient} shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]`}
+                  className="relative block h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_4px_14px_-4px_rgba(15,23,42,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_24px_-6px_rgba(80,144,208,0.5)]"
+                  style={{ background: `radial-gradient(circle at 30% 30%, ${highlight}, ${color} 70%)` }}
                   aria-hidden="true"
                 >
-                  <span className="absolute inset-0 rounded-full bg-white/30 mix-blend-overlay" />
+                  <span className="absolute inset-0 rounded-full bg-white/20 mix-blend-overlay" />
                   <span className="absolute top-1 left-1.5 h-2.5 w-2.5 rounded-full bg-white/80 blur-[1px]" />
                   <span className="absolute -inset-1 rounded-full ring-1 ring-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </span>
@@ -322,6 +329,7 @@ const OrbitHero = () => {
             );
           })}
         </div>
+
 
         {/* Category tag rail */}
         <div className="mt-2 flex flex-wrap justify-center gap-2">
