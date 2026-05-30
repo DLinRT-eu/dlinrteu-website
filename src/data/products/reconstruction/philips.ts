@@ -53,7 +53,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
         productCode: "JAK",
         decisionDate: "2022-01-14"
       },
-      intendedUseStatement: "Intended for use in CT image reconstruction to provide diagnostic quality images with reduced radiation dose."
+      intendedUseStatement: "The Precise Image is a reconstruction software application for a Computed Tomography X-Ray System intended to produce images of the head and body by computer reconstruction of x-ray transmission data taken at different angles and planes. Precise Image uses an Artificial Intelligence powered reconstruction algorithm that is designed for low radiation dose, provides low noise, and improves low contrast detectability. (Source: FDA 510(k) K210760 Summary, accessed 2026-05-30)"
     },
     market: {
       onMarketSince: "2022",
