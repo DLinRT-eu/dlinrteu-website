@@ -15,7 +15,7 @@ The orbiting scene now presents a cleaner central hub — the DLinRT.eu logo sit
 
 ## 🙏 Acknowledgement
 
-Many thanks to **Mustafa Kadhim** for the re-design suggestion. Community feedback is what keeps the catalogue sharp — please keep it coming via our [Contact page](/contact).
+Many thanks to **Mustafa Kadhim** — admin and reviewer on the DLinRT.eu team — for driving the re-design. This refresh is a direct result of his ongoing work supporting the website.
 
 ## 🔍 Second-Round Review in Progress
 
