@@ -72,6 +72,17 @@ const hasActualCEApproval = (product: ProductDetails): boolean => {
 };
 
 /**
+ * Checks if a product has clearance from a recognized non-CE/FDA regulatory authority.
+ * Keep in sync with the certification tag list in src/config/tags.ts.
+ */
+const hasOtherRecognizedAuthorityApproval = (product: ProductDetails): boolean => {
+  const cert = (product.certification || '').toLowerCase();
+  if (!cert) return false;
+  const authorities = ['nmpa', 'tga', 'tfda', 'pmda', 'mfds', 'health canada', 'anvisa', 'mhra', 'ukca'];
+  return authorities.some(a => cert.includes(a));
+};
+
+/**
  * Checks if a product has CE or FDA regulatory approval
  * @param includeInvestigational - If true, also returns true for pending/investigational products
  */
@@ -84,11 +95,14 @@ export const hasRegulatoryApproval = (product: ProductDetails, includeInvestigat
                 
   // Check for MDR exempt status (case-insensitive)
   const hasMDRExempt = product.certification?.toLowerCase() === 'mdr exempt';
-  
+
+  // Check for other recognized regulatory authorities (NMPA, TGA, PMDA, MFDS, Health Canada, ANVISA, MHRA, UKCA, TFDA)
+  const hasOther = hasOtherRecognizedAuthorityApproval(product);
+
   // Check for investigational status if enabled
   const isInvestigational = includeInvestigational && isInvestigationalProduct(product);
-  
-  return hasFDA || hasCE || hasMDRExempt || isInvestigational;
+
+  return hasFDA || hasCE || hasMDRExempt || hasOther || isInvestigational;
 };
 
 /**
