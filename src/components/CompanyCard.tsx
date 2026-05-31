@@ -8,6 +8,7 @@ import { ProductDetails } from '@/types/productDetails';
 import ProductCard from './ProductCard';
 
 interface CompanyCardProps {
+  id?: string;
   name: string;
   description: string;
   website?: string;
@@ -17,7 +18,7 @@ interface CompanyCardProps {
   secondaryTasks?: string[];
 }
 
-const CompanyCard = ({ name, description, website, logoUrl, products, primaryTask, secondaryTasks }: CompanyCardProps) => {
+const CompanyCard = ({ id, name, description, website, logoUrl, products, primaryTask, secondaryTasks }: CompanyCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded(!expanded);
@@ -42,8 +43,14 @@ const CompanyCard = ({ name, description, website, logoUrl, products, primaryTas
             
             {/* Company Info */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-xl font-bold">{name}</h3>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                {id ? (
+                  <Link to={`/products/company/${id}`} className="text-xl font-bold hover:text-[#00A6D6] transition-colors">
+                    {name}
+                  </Link>
+                ) : (
+                  <h3 className="text-xl font-bold">{name}</h3>
+                )}
                 {website && (
                   <a 
                     href={website}
@@ -53,6 +60,14 @@ const CompanyCard = ({ name, description, website, logoUrl, products, primaryTas
                   >
                     <ExternalLink className="h-4 w-4" />
                   </a>
+                )}
+                {id && (
+                  <Link
+                    to={`/products/company/${id}`}
+                    className="ml-auto text-xs text-[#00A6D6] hover:underline inline-flex items-center gap-1"
+                  >
+                    View all products <ArrowRight className="h-3 w-3" />
+                  </Link>
                 )}
               </div>
               <p className="text-gray-600 text-sm">{description}</p>

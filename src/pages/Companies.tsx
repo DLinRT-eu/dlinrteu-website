@@ -286,6 +286,7 @@ const Companies = () => {
             {sortedCompanies.map((company) => (
               <CompanyCard 
                 key={company.id} 
+                id={company.id}
                 name={company.name}
                 website={company.website}
                 logoUrl={company.logoUrl}
