@@ -35,7 +35,7 @@ const StatsRow = ({ productCount, companyCount }: StatsRowProps) => {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-8 -mt-2 md:-mt-4">
+    <section className="max-w-7xl mx-auto px-4 md:px-8 pt-6 md:pt-8">
       <div className="grid grid-cols-1 md:grid-cols-3 rounded-2xl bg-white border border-slate-200/80 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.15)] divide-y md:divide-y-0 md:divide-x divide-slate-100">
         {stats.map((s) => (
           <Link
