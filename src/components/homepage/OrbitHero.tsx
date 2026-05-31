@@ -137,7 +137,7 @@ const OrbitHero = () => {
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
               <Input
-                placeholder="Search 79+ products, companies, or features..."
+                placeholder="Search products, companies, or features..."
                 className="pl-12 pr-28 h-14 rounded-full bg-white border-slate-200 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.18)] focus-visible:ring-sky-400"
                 onChange={(e) => handleSearch(e.target.value)}
               />
