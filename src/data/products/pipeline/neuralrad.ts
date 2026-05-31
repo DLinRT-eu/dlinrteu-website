@@ -20,7 +20,7 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Clinical Prediction"],
     certification: "Pipeline",
     developmentStage: "pipeline",
-    logoUrl: "/placeholder.svg",
+    logoUrl: "/logos/NeuralRadLogo.png",
     website: "https://www.neuralrad.com/",
     anatomicalLocation: ["Brain"],
     modality: ["MRI"],
