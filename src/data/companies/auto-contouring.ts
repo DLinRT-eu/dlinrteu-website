@@ -164,7 +164,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "Wisdom Tech",
     "description": "Chinese company specializing in AI solutions for radiation oncology.",
     "website": "http://www.wisdomtech.com.cn/",
-    "productIds": ["wisdom-deep-contour"],
+    "productIds": ["wisdom-deep-contour", "wisdom-deep-plan"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/wisdom-tech.png",
     "primaryTask": "Auto-Contouring"
