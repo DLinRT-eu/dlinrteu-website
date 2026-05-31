@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Clock, ArrowRight, Info, ChevronDown } from "lucide-react";
+import { Clock, ArrowRight, Info, ChevronDown, Building } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import SearchHeader from "@/components/SearchHeader";
 import ProductGrid from "@/components/ProductGrid";
@@ -223,6 +223,52 @@ const Products = () => {
             className="mb-6"
           />
         )}
+
+        {/* Matching companies suggestion strip */}
+        {searchQuery.trim().length >= 2 && (() => {
+          const q = searchQuery.trim().toLowerCase();
+          const matches = dataService.getActiveCompanies()
+            .filter(c => c.name.toLowerCase().includes(q))
+            .map(c => ({
+              ...c,
+              productCount: dataService.getProductsByCompany(c.id).length,
+            }))
+            .filter(c => c.productCount > 0)
+            .slice(0, 6);
+          if (matches.length === 0) return null;
+          return (
+            <div className="mb-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+              <div className="flex items-center gap-2 mb-3 text-sky-900">
+                <Building className="h-4 w-4" />
+                <span className="text-sm font-semibold">
+                  Matching {matches.length === 1 ? 'company' : 'companies'} — view all products on one page
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {matches.map(c => (
+                  <Link
+                    key={c.id}
+                    to={`/products/company/${c.id}`}
+                    className="inline-flex items-center gap-2 px-3 py-2 bg-white border border-sky-200 rounded-md hover:border-sky-400 hover:shadow-sm transition-all text-sm"
+                  >
+                    {c.logoUrl && (
+                      <img
+                        src={c.logoUrl}
+                        alt=""
+                        className="h-5 w-5 object-contain"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    )}
+                    <span className="font-medium text-gray-900">{c.name}</span>
+                    <span className="text-xs text-gray-500">({c.productCount})</span>
+                    <ArrowRight className="h-3 w-3 text-sky-600" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+        
         
         {/* Pipeline Products Link */}
         {pipelineProducts.length > 0 && (
