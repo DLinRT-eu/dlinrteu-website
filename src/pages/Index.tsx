@@ -61,8 +61,8 @@ const Index = () => {
         structuredData={structuredData}
       />
 
-      <OrbitHero />
       <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} />
+      <OrbitHero />
       <FeatureCards />
 
       {/* Short value line + link to About */}
