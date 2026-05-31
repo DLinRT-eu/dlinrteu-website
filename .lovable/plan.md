@@ -1,42 +1,42 @@
-## Goal
+## Add DeepPlan (Wisdom Tech) to the catalogue
 
-When a user searches a company name in `/products`, surface a dedicated landing page that gathers every product from that company in one place — instead of (or in addition to) the filtered grid.
+DeepPlan is Wisdom Tech's AI-assisted Treatment Planning System. It qualifies for inclusion: AI-based auto-delineation, DeepOPT inverse optimization, Monte Carlo dose engine, GPU acceleration. Source: http://www.wisdom-tech.online/view-15.html.
 
-## What to build
+### Files
 
-### 1. New public route: `/products/company/:companyId`
-New page `src/pages/CompanyProducts.tsx` (lazy-loaded in `src/App.tsx`).
+1. **Create** `src/data/products/treatment-planning/wisdom-tech.ts`
+   - Export `WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[]`
+   - Single entry `wisdom-deep-plan`:
+     - name: "DeepPlan", company: "Wisdom Tech"
+     - companyUrl, productUrl, githubUrl pointing to this new file
+     - category: "Treatment Planning"
+     - secondaryCategories: ["Auto-Contouring"] (vendor highlights AI auto-delineation inside DeepPlan)
+     - modality: ["CT", "MR", "PET/CT"]
+     - anatomicalLocation: Whole Body (generic — TPS, no body-site restriction documented)
+     - subspeciality: "Radiation Oncology"
+     - diseaseTargeted: ["Multiple Cancer Types"]
+     - keyFeatures: AI auto-delineation, image registration/fusion (CT/MR/PET-CT), Monte Carlo dose calc (photons, electrons, protons, heavy ions, neutrons), DeepOPT inverse + multi-objective optimization, GPU-accelerated (<10 s / 50 iterations), DICOM plan import, scripting/templates, multi-plan comparison, client + cloud deployment
+     - technicalSpecifications: input CT/MR/PET-CT (DICOM), output RTPlan/RTDose (DICOM-RTPLAN, DICOM-RTDOSE)
+     - technology: TPS deployment (on-premises + cloud client), manual trigger, processing time seconds–minutes
+     - regulatory.ce: not_applicable; regulatory.fda: not_applicable (no FDA 510(k) found for DeepPlan — only DeepContour K232928 is on file); certification: "NMPA (China)" with note that FDA status is unverified
+     - intendedUseStatement: paraphrased from vendor page with source attribution
+     - market.onMarketSince: "2024" (best estimate from vendor); distributionChannels: ["Direct sales (China)"]
+     - evidenceRigor: "E0", clinicalImpact: "I0", adoptionReadiness: "R3" with notes ("No peer-reviewed publications found. PubMed searched 2026-05-31. NMPA-cleared vendor TPS; structured pilot and external validation needed before clinical adoption.")
+     - version: "1.0", releaseDate undefined, lastUpdated/lastRevised: "2026-05-31"
+     - source: vendor product page URL
+     - limitations: vendor advertises broad multi-particle support (protons, heavy ions, neutrons); independent validation per particle modality not published. Regulatory status outside China not confirmed.
 
-Content:
-- Header: company logo, name, website link, short description, certification badge (reuse existing `CompanyCard` building blocks).
-- Stats strip: total products, categories covered, CE / FDA counts (reuse logic from `Companies.tsx` `prepareExportData`).
-- Product list: reuse `ProductGrid` (or a simpler reuse of the product card used on `/products`) fed with `dataService.getProductsByCompany(companyId)`. Group by category with section headings.
-- Secondary actions: "Back to all products", link to `/companies` and to the company's profile/certification page if available.
-- SEO via `<SEO>` with canonical `https://dlinrt.eu/products/company/<id>` and an `Organization` + `ItemList` JSON-LD.
-- `<Footer />` and `<ProductFeedbackBanner />` at bottom, matching the rest of the site.
+2. **Edit** `src/data/products/treatment-planning/index.ts`
+   - Import `WISDOM_TECH_PLANNING_PRODUCTS` and spread into `TREATMENT_PLANNING_PRODUCTS`.
 
-### 2. Surface the page from product search
-In `src/pages/Products.tsx`:
-- When the user types a query that matches one or more company names (case-insensitive, on `company.name`), render a small "Matching companies" suggestion strip above the product grid. Each chip links to `/products/company/<id>` with the logo + name + product count.
-- Keep existing search/filter behavior unchanged — the strip is additive, not a redirect, so users who want the cross-company filtered grid still get it.
+3. **Edit** `src/data/companies/auto-contouring.ts`
+   - Append `"wisdom-deep-plan"` to the Wisdom Tech `productIds` array.
+   - (Wisdom Tech is currently classified under auto-contouring company file. Leaving the file location unchanged to honor Minimal Intervention; it will appear in Treatment Planning via product category routing.)
 
-### 3. Cross-links
-- In `CompanyCard` (used on `/companies`), make the company name/logo also link to `/products/company/<id>` so the new page is discoverable from the Companies directory too.
+### Open question
 
-## Technical notes
+DeepPlan has no public FDA/CE clearance. Two options:
+- **A (default in this plan):** list as NMPA-only, `pipeline=false` (NMPA counts as regulatory approval, matching how DeepContour is treated).
+- **B:** mark as pipeline product (Tier 2) until FDA/CE evidence appears.
 
-- No DB or schema changes. Pure frontend, uses existing `dataService` helpers (`getCompanyById`, `getProductsByCompany`, `getActiveCompanies`).
-- Route is public (not behind `ProtectedRoute`).
-- Reuse, don't duplicate: pull the product card rendering from whatever `ProductGrid` already uses; pull stats math from `Companies.tsx`.
-- Handle unknown `companyId` → render a NotFound-style block with a link back to `/products`.
-- Respect `Minimal Intervention`: no changes to filters, sorting, or other pages beyond the additions above.
-
-## Out of scope
-
-- No changes to the authenticated `/company/*` dashboard.
-- No new data fields on products or companies.
-- No design system / token changes.
-
-## Open question
-
-Should the search box on `/products` *also* auto-redirect to the company page when there is exactly one company match and zero product-name matches? Default in this plan: **no**, only show the suggestion chip. Let me know if you'd prefer auto-redirect.
+Confirm A or B before I build.
