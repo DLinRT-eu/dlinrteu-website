@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Package, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Package, ChevronDown, ChevronUp, ExternalLink, ArrowRight } from 'lucide-react';
 import { ProductDetails } from '@/types/productDetails';
 import ProductCard from './ProductCard';
 
