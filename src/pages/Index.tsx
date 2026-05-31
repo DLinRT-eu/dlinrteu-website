@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import OrbitHero from "@/components/homepage/OrbitHero";
+import SearchHero from "@/components/homepage/SearchHero";
 import StatsRow from "@/components/homepage/StatsRow";
 import FeatureCards from "@/components/homepage/FeatureCards";
 import TaskTaxonomy from "@/components/TaskTaxonomy";
@@ -56,11 +57,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Deep Learning Products Database for Radiotherapy"
-        description="Discover commercial deep learning solutions for radiotherapy. Browse AI products for auto-contouring, treatment planning, and imaging with regulatory data and clinical evidence."
+        description="Discover commercial deep learning solutions for radiotherapy. Browse AI/DL products for auto-contouring, treatment planning, and imaging with regulatory data and clinical evidence."
         canonical="https://dlinrt.eu/"
         structuredData={structuredData}
       />
 
+      <SearchHero />
       <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} />
       <OrbitHero />
       <FeatureCards />

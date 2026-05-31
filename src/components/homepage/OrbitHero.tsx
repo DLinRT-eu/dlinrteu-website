@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Search, Sparkles, ShieldCheck, Globe2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Sparkles, ShieldCheck, Globe2 } from "lucide-react";
 import { TASK_COLORS, getTaskColor } from "@/utils/chartColors";
 
 interface Planet {
@@ -29,8 +28,6 @@ const CATEGORY_TAGS = [
   "Performance Monitor",
 ];
 
-const QUICK_SUGGESTIONS = ["Auto-Contouring", "Image Synthesis", "Clinical Prediction", "Performance Monitor"];
-
 /** Mix a hex color toward white by amount 0..1, returning an rgb() string. */
 const lighten = (hex: string, amount: number): string => {
   const h = hex.replace("#", "");
@@ -44,10 +41,6 @@ const lighten = (hex: string, amount: number): string => {
 
 const OrbitHero = () => {
   const navigate = useNavigate();
-
-  const handleSearch = (q: string) => {
-    if (q.trim()) navigate(`/products?search=${encodeURIComponent(q.trim())}`);
-  };
 
   const goToTask = (tag: string) => navigate(`/products?task=${encodeURIComponent(tag)}`);
 
@@ -130,36 +123,6 @@ const OrbitHero = () => {
           <p className="mt-5 text-lg md:text-xl text-slate-600">
             Find deep-learning-based solutions and QA monitoring tools for radiotherapy available for the European market.
           </p>
-
-          {/* Search */}
-          <div className="relative mt-8 max-w-2xl mx-auto">
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-sky-200/60 via-cyan-200/60 to-violet-200/60 blur-md opacity-70" />
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-              <Input
-                placeholder="Search products, companies, or features..."
-                className="pl-12 pr-28 h-14 rounded-full bg-white border-slate-200 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.18)] focus-visible:ring-sky-400"
-                onChange={(e) => handleSearch(e.target.value)}
-              />
-              <kbd className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-mono text-slate-500">
-                ⌘K
-              </kbd>
-            </div>
-          </div>
-
-          {/* Quick suggestions */}
-          <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
-            <span className="text-slate-400">Try:</span>
-            {QUICK_SUGGESTIONS.map((s) => (
-              <button
-                key={s}
-                onClick={() => goToTask(s)}
-                className="rounded-full border border-slate-200 bg-white/70 px-2.5 py-1 text-slate-600 hover:border-sky-300 hover:text-sky-700 hover:bg-white transition-colors"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* ── Orbit visualization ─────────────────────────────────────── */}
