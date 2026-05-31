@@ -9,7 +9,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.neuralrad.com/",
     "productIds": ["neuralrad-brain-pipeline"],
     "category": "Auto-Contouring",
-    "logoUrl": "/placeholder.svg",
+    "logoUrl": "/logos/NeuralRadLogo.png",
     "primaryTask": "Auto-Contouring"
   },
   {
