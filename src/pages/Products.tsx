@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Clock, ArrowRight, Info, ChevronDown } from "lucide-react";
+import { Clock, ArrowRight, Info, ChevronDown, Building } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import SearchHeader from "@/components/SearchHeader";
 import ProductGrid from "@/components/ProductGrid";
