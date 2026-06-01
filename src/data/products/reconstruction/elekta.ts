@@ -51,7 +51,7 @@ export const IRISEvo: ProductDetails = {
   modality: ["CBCT"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts",
   companyUrl: "https://www.elekta.com/",
-  productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
+  productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all",
   regulatory: {
     ce: {
       type: "Medical Device",
@@ -122,3 +122,5 @@ export const IRISEvo: ProductDetails = {
   evidenceVendorIndependent: false,
   evidenceExternalValidation: false
 };
+
+export const ELEKTA_PRODUCTS: ProductDetails[] = [IRISEvo];
