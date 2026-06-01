@@ -225,6 +225,25 @@ export default function EditApprovals() {
       setSyncingId(null);
     }
   };
+  const promoteToPending = async (draftId: string) => {
+    try {
+      const { error } = await supabase
+        .from('product_edit_drafts')
+        .update({
+          status: 'pending_review',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', draftId)
+        .eq('status', 'draft');
+      if (error) throw error;
+      toast({ title: 'Moved to Pending Review', description: 'The draft is now awaiting approval.' });
+      fetchDrafts();
+    } catch (error: any) {
+      console.error('Error promoting draft:', error);
+      toast({ title: 'Error', description: error.message || 'Failed to promote draft', variant: 'destructive' });
+    }
+  };
+
 
   const getOriginalProduct = (productId: string): ProductDetails | undefined => {
     return ALL_PRODUCTS.find(p => p.id === productId);
