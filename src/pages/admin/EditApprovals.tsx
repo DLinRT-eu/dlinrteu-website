@@ -374,6 +374,9 @@ export default function EditApprovals() {
                   originalProduct={getOriginalProduct(draft.product_id)}
                   onApprove={draft.status === 'pending_review' ? () => handleReviewAction(draft, 'approve') : undefined}
                   onReject={draft.status === 'pending_review' ? () => handleReviewAction(draft, 'reject') : undefined}
+                  onPromote={draft.status === 'draft' ? () => promoteToPending(draft.id) : undefined}
+                  onSyncToGitHub={draft.status === 'approved' && !draft.github_pr_url ? () => syncToGitHub(draft.id) : undefined}
+                  syncingId={syncingId}
                   getStatusBadge={getStatusBadge}
                 />
               ))
