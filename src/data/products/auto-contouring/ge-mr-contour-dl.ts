@@ -62,14 +62,43 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "GE Healthcare enterprise solutions"]
     },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "MR Contour DL 510(k) K242925 (GE Healthcare), cleared 2025-04-01.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf"
+      },
+      {
+        type: "FDA 510(k) Premarket Notification",
+        description: "FDA 510(k) database listing for K242925 (MR Contour DL).",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K242925"
+      },
+      {
+        type: "Press Release",
+        description: "GE HealthCare ESTRO 2025 press release introducing AI-enabled radiation oncology solutions including MR Contour DL within the iRT platform.",
+        link: "https://investor.gehealthcare.com/news-releases/news-release-details/estro-2025-congress-ge-healthcare-expand-its-radiation-oncology"
+      },
+      {
+        type: "Press Release",
+        description: "GE HealthCare ASTRO 2025 announcement on the Intelligent Radiation Therapy (iRT) workflow integrating MR Contour DL with RayStation.",
+        link: "https://www.businesswire.com/news/home/20250925074542/en/GE-HealthCare-debuts-AI-supported-solution-designed-to-improve-and-shorten-the-radiation-therapy-workflow-at-ASTRO-2025"
+      }
+    ],
+    limitations: [
+      "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
+      "Recently cleared (FDA K242925, April 2025) — limited published clinical-experience data",
+      "Contour quality dependent on input MR sequence, scanner vendor and acquisition protocol",
+      "User verification and editing of output contours required per FDA labelling",
+      "Vendor does not publicly publish a numeric version for this module"
+    ],
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "No independent peer-reviewed publications identified. Evidence based on FDA clearance documentation. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "Provides automated MRI-based contouring within GE imaging ecosystem. No published outcome data.",
+    evidenceRigorNotes: "FDA K242925 clearance documentation only. No independent peer-reviewed publications identified (web-searched 2026-06-01).",
+    clinicalImpactNotes: "Provides automated MRI-based OAR contouring within GE imaging ecosystem and the iRT MR Direct workflow. No published outcome data.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K242925). GE HealthCare ESTRO 2026 press release (12 May 2026) confirms head & neck and pelvis OAR coverage and bundling within the iRT MR Direct workflow."
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module."
   }
 ];
