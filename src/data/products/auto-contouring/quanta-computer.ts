@@ -95,8 +95,9 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       source: "FDA 510(k) K231855",
       sourceUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K231855"
     },
-    lastUpdated: "2026-04-17",
-    lastRevised: "2026-05-20",
-    source: "FDA 510(k) database K231855, Quanta Computer corporate website"
+    releaseDate: "2024-02-13",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2026-06-01)"
   }
 ];

@@ -99,14 +99,15 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-05-23",
-    lastRevised: "2026-05-30",
+    releaseDate: "2025-09-04",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",
       "No independent peer-reviewed publications identified at time of listing"
     ],
     source:
-      "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page."
+      "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page. releaseDate proxied from FDA K250064 decision date (2026-06-01)."
   }
 ];

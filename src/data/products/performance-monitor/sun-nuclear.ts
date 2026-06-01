@@ -73,8 +73,9 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
-    source: "Sun Nuclear official website"
+    releaseDate: "2017-10-25",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "Sun Nuclear official website; releaseDate proxied from FDA K170307 SunCHECK decision date (2026-06-01)"
   }
 ];

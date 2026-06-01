@@ -120,9 +120,10 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Synchrony® is unique and takes data from an individual patient, builds a patient-specific model, which is optimized for that patient. The technology has been used clinically on the CyberKnife® System for nearly 25 years and was later extended to the Radixact® Treatment Delivery System. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony®.",
+    releaseDate: "2018-11-23",
     lastUpdated: "2026-06-01",
     lastRevised: "2026-06-01",
-    source: "FDA 510(k) database (K182687), Accuray® official website, Accuray® ESTRO 2026 booth presence"
+    source: "FDA 510(k) database (K182687), Accuray® official website, Accuray® ESTRO 2026 booth presence; releaseDate proxied from FDA K182687 decision date (2026-06-01)"
 
   }
 ];
