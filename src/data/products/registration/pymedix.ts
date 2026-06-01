@@ -66,8 +66,8 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K233572 validation. Limited independent peer-reviewed publications.",
-    clinicalImpactNotes: "Workflow improvement through AI-powered multi-modal image registration.",
+    evidenceRigorNotes: "FDA K233572 validation. No independent peer-reviewed clinical accuracy publications identified (web-searched 2026-06-01). Note: PyMedix explicitly markets Autofuse as 'machine perception, not deep learning' — flagged for inclusion review against the AI/DL inclusion gate.",
+    clinicalImpactNotes: "Workflow improvement through automated multi-modal image registration; no published outcome data.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -75,10 +75,28 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "Autofuse 510(k) K233572 (Pymedix), cleared 2024-03-06.",
+        link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/LLZ/K233572"
+      },
+      {
+        type: "Vendor White Paper",
+        description: "Pymedix Autofuse Brochure (2019) — describes the fully automatic 3D deformable image registration approach.",
+        link: "https://pymedix.com/wp-content/uploads/2019/04/Pymedix-Autofuse-Brochure-2019.pdf"
+      }
+    ],
+    limitations: [
+      "No independent peer-reviewed clinical accuracy or workflow study identified",
+      "Vendor describes the algorithm as 'machine perception' rather than deep learning — AI/DL inclusion to be reviewed",
+      "No published multi-center or multi-national validation",
+      "Limited public information on installed base and clinical adoption"
+    ],
     version: "2.1",
     releaseDate: "2023-08-15",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K233572), company website"
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K233572), company website. Version 2.1 retained from prior revision — vendor does not publicly publish a numeric version."
   }
 ];
