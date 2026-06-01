@@ -28,7 +28,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["Native integration with MIM Software", "TPS integration"],
+      integration: ["Native integration with MIM Software (requires MIM 7.4.5 or later)", "TPS integration"],
       deployment: ["On-premises"],
       triggerForAnalysis: "Within clinical workflow",
       processingTime: "Minutes per case"
