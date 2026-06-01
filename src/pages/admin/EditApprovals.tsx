@@ -257,6 +257,8 @@ export default function EditApprovals() {
     } finally {
       setTestingAccess(false);
     }
+  };
+
   const promoteToPending = async (draftId: string) => {
     try {
       const { error } = await supabase
