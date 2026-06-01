@@ -214,11 +214,7 @@ export default function EditApprovals() {
           </span>
         ),
       });
-      });
 
-      
-
-  
       fetchDrafts();
     } catch (error: any) {
       console.error('Error syncing to GitHub:', error);
