@@ -11,6 +11,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/medmind.ts",
     description: "Deep learning auto-contouring platform supporting 120+ OARs and CTV delineation across multiple cancer types. Deployed in 360+ hospitals with NMPA Class III and FDA 510(k) clearance.",
     category: "Auto-Contouring",
+    logoUrl: "/logos/medmind.png",
     structuresUnavailable: true,
     certification: "FDA/NMPA",
     website: "https://www.medicalmind.cn/en.html",
