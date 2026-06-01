@@ -65,6 +65,8 @@ export default function EditApprovals() {
   const [reviewFeedback, setReviewFeedback] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [syncingId, setSyncingId] = useState<string | null>(null);
+  const [testingAccess, setTestingAccess] = useState(false);
+  const [accessResult, setAccessResult] = useState<any | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
