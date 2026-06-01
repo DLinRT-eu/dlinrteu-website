@@ -3,16 +3,17 @@ import { ProductDetails } from "@/types/productDetails";
 export const ACCURAY_PRODUCTS: ProductDetails[] = [
   {
     id: "accuray-synchrony",
-    name: "Synchrony",
-    company: "Accuray",
+    name: "Synchrony®",
+    company: "Accuray®",
     category: "Tracking",
-    description: "Accuray has provided a solution called Synchrony, that allows tumor motion to be corrected during radiation therapy delivery. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life. Uses patient-specific AI model building for motion prediction.",
+    description: "Accuray® has provided a solution called Synchrony®, that allows tumor motion to be corrected during radiation therapy delivery. Synchrony® has been available on the CyberKnife® System for nearly 25 years (since the early 2000s) and is also available on the Radixact® Treatment Delivery System. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life. Uses patient-specific AI model building for motion prediction.",
     usesAI: true,
     features: [
       "Real-time motion synchronization",
       "Patient-specific AI model building",
       "Automatic model relearning",
-      "Motion uncertainty monitoring"
+      "Motion uncertainty monitoring",
+      "Available on CyberKnife® and Radixact® systems"
     ],
     certification: "CE & FDA",
     logoUrl: "/logos/accuray.png",
@@ -25,6 +26,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     keyFeatures: [
       "Patient-specific AI model that builds and optimizes for individual patients",
       "Real-time motion synchronization during radiation therapy delivery",
+      "Available on the CyberKnife® System for nearly 25 years, with respiratory, fiducial and spine tracking modes",
+      "Also integrated with the Radixact® Treatment Delivery System for helical tomotherapy",
       "Automatic validity monitoring of AI model throughout treatment",
       "Autonomous relearning and improvement during treatment without user interaction",
       "Enables reduced treatment margins and minimized dose to normal tissue",
@@ -38,11 +41,12 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       outputFormat: ["System-specific", "Treatment delivery commands"]
     },
     technology: {
-      integration: ["CyberKnife System", "Radixact Treatment Delivery System"],
+      integration: ["CyberKnife® System", "Radixact® Treatment Delivery System"],
       deployment: ["System-integrated"],
       triggerForAnalysis: "Real-time during treatment delivery",
       processingTime: "Real-time processing with <100ms latency"
     },
+
     regulatory: {
       ce: {
         status: "cleared",
@@ -58,18 +62,18 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
         regulationNumber: "21 CFR 892.5050",
         productCode: "IYE",
         decisionDate: "2018-11-23",
-        notes: "Synchrony Motion Tracking and Compensation Feature for Radixact Treatment Delivery System"
+        notes: "Synchrony® Motion Tracking and Compensation Feature for Radixact® Treatment Delivery System"
       },
-      intendedUseStatement: "\"The Motion Tracking and Compensation Feature is an option within the indications for use of the Radixact Treatment Delivery System. The Radixact Treatment Delivery System is indicated for the delivery of radiation therapy, stereotactic radiotherapy or stereotactic radiosurgery to tumors or other targeted tissues anywhere in the body under the direction of a licensed medical practitioner.\" (Source: FDA 510(k) K182687 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "\"The Motion Tracking and Compensation Feature is an option within the indications for use of the Radixact Treatment Delivery System. The Radixact Treatment Delivery System is indicated for the delivery of radiation therapy, stereotactic radiotherapy or stereotactic radiosurgery to tumors or other targeted tissues anywhere in the body under the direction of a licensed medical practitioner.\" (Source: FDA 510(k) K182687 Summary, accessed 2026-05-30). Synchrony® is additionally available on the CyberKnife® System, where real-time respiratory, fiducial and spine tracking have been cleared under prior CyberKnife® System clearances and used clinically for nearly 25 years."
     },
     market: {
-      onMarketSince: "2019",
-      distributionChannels: ["Integrated with Accuray systems"],
+      onMarketSince: "2019 (Radixact®); ~2001 on CyberKnife® System",
+      distributionChannels: ["Integrated with Accuray® systems"],
 
 },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony fiducial tracking on Radixact X9 (2025). PMID:40600108 lung motion management case report (2025). Okada et al. Cureus 2025 liver tumor tracking. Lo Conte et al. Cureus 2025 prostate SBRT toxicity outcomes. PubMed verified 2026-03-08.",
+    evidenceRigorNotes: "Pepin et al. JACMP 2020. PMID:40486323 prostate SBRT with Synchrony® fiducial tracking on Radixact® X9 (2025). PMID:40600108 lung motion management case report (2025). Okada et al. Cureus 2025 liver tumor tracking. Lo Conte et al. Cureus 2025 prostate SBRT toxicity outcomes. Long-standing CyberKnife® Synchrony® literature (Seppenwoolde et al. IJROBP 2007; Hoogeman et al. IJROBP 2009) provides ~25-year clinical evidence base. PubMed verified 2026-03-08.",
     clinicalImpactNotes: "Workflow improvement through real-time motion compensation enabling reduced treatment margins and minimized normal tissue dose. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -86,28 +90,39 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Prostate SBRT with Synchrony-based fiducial tracking on Radixact X9. PMID:40486323, Cureus 2025",
+        description: "Prostate SBRT with Synchrony®-based fiducial tracking on Radixact® X9. PMID:40486323, Cureus 2025",
         link: "https://pubmed.ncbi.nlm.nih.gov/40486323/"
       },
       {
         type: "Case Report",
-        description: "Real-time motion management for small lung target with large tumor motion using Radixact Synchrony. PMID:40600108, 2025",
+        description: "Real-time motion management for small lung target with large tumor motion using Radixact® Synchrony®. PMID:40600108, 2025",
         link: "https://pubmed.ncbi.nlm.nih.gov/40600108/"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Okada et al. Liver tumor motion-tracking assessment with Synchrony on Radixact. Cureus 2025",
+        description: "Okada et al. Liver tumor motion-tracking assessment with Synchrony® on Radixact®. Cureus 2025",
         link: "https://doi.org/10.7759/cureus.81598"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Lo Conte et al. Prostate SBRT toxicity outcomes with Synchrony motion tracking. Cureus 2025",
+        description: "Lo Conte et al. Prostate SBRT toxicity outcomes with Synchrony® motion tracking. Cureus 2025",
         link: "https://doi.org/10.7759/cureus.85083"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Seppenwoolde et al. Accuracy of tumor motion compensation algorithm from a robotic respiratory tracking system (CyberKnife® Synchrony®). IJROBP 2007",
+        link: "https://doi.org/10.1016/j.ijrobp.2007.01.024"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Hoogeman et al. Clinical accuracy of the respiratory tumor tracking system of the CyberKnife®: assessment by analysis of log files. IJROBP 2009",
+        link: "https://doi.org/10.1016/j.ijrobp.2008.09.011"
       }
     ],
-    clinicalEvidence: "Synchrony is unique and takes data from an individual patient, builds a patient's specific model, which is optimized for that patient. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony.",
-    lastUpdated: "2026-05-17",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K182687), Accuray official website, Accuray ESTRO 2026 booth presence"
+    clinicalEvidence: "Synchrony® is unique and takes data from an individual patient, builds a patient-specific model, which is optimized for that patient. The technology has been used clinically on the CyberKnife® System for nearly 25 years and was later extended to the Radixact® Treatment Delivery System. Clinical studies demonstrate significant reduction in treatment margins and improved dose distribution to normal tissue. Lo Conte et al. 2025 reports clinical toxicity outcomes for prostate SBRT with Synchrony®.",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K182687), Accuray® official website, Accuray® ESTRO 2026 booth presence"
+
   }
 ];

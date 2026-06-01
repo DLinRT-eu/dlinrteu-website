@@ -16,9 +16,10 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "accuray",
-    "name": "Accuray",
-    "description": "Developer of radiotherapy systems with AI-enhanced imaging capabilities.",
+    "name": "Accuray®",
+    "description": "Developer of radiotherapy systems (including the CyberKnife® System and Radixact® Treatment Delivery System) with AI-enhanced imaging and motion-tracking capabilities such as Synchrony®.",
     "website": "https://www.accuray.com/",
+
     "productIds": [
       "accuray-synchrony",
       
