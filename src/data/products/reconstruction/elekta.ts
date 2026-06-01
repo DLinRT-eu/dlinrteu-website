@@ -16,8 +16,8 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Pelvis"],
     modality: ["CBCT"],
     diseaseTargeted: ["Cancer"],
-    releaseDate: "2022-06-01",
-    version: "2.0",
+    releaseDate: "2024-05-14",
+    version: "1.0",
     partOf: {
       name: "Elekta Evo CT-Linac",
       productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
