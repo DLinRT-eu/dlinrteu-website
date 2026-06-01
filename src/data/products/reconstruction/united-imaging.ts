@@ -58,15 +58,44 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Integrated in CT systems"],
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed publications. Cleared as integrated system feature. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Liao S. et al. Fast and low-dose medical imaging generation empowered by hybrid deep-learning and iterative reconstruction. Cell Rep Med 2023;4(7):101119. (United Imaging-affiliated authors; covers DL+iterative recon technology underlying uAIFI.)",
+        link: "https://doi.org/10.1016/j.xcrm.2023.101119"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "Deep Recon 510(k) K193073 (Shanghai United Imaging Healthcare), cleared 2020-07-06.",
+        link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/JAK/K193073"
+      },
+      {
+        type: "Product Information",
+        description: "uAIFI Technology product page (United Imaging).",
+        link: "https://global.united-imaging.com/en/product-service/products/mr/uaifi-technology"
+      }
+    ],
+    limitations: [
+      "Available peer-reviewed publication has vendor-affiliated authorship; no fully independent multi-center validation identified",
+      "Performance tied to United Imaging uCT hardware and proprietary acquisition pipeline",
+      "Dose-reduction claims require local protocol validation",
+      "No published radiotherapy-planning-specific validation"
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA K193073 (Deep Recon) clearance plus Liao et al. Cell Rep Med 2023 — peer-reviewed, vendor-affiliated. No independent multi-center publication identified (web-searched 2026-06-01).",
+    clinicalImpactNotes: "Technical efficacy demonstrated in vendor-affiliated peer-reviewed work (lower noise, dose-reduction potential). No independent clinical-outcome data.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website"
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K193073), peer-reviewed literature, company website."
 
   },
   {
