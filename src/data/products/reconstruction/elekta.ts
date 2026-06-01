@@ -122,3 +122,5 @@ export const IRISEvo: ProductDetails = {
   evidenceVendorIndependent: false,
   evidenceExternalValidation: false
 };
+
+export const ELEKTA_PRODUCTS: ProductDetails[] = [IRISEvo];
