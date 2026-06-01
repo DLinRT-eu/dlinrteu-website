@@ -1,82 +1,51 @@
-## Audit findings
+## Goal
 
-I traced the full path: editor → `product_edit_drafts` row → admin approval → `apply-product-edit` edge function → GitHub PR. Three real defects block drafts from reaching production.
+Update changelog and guides to reflect the recent changes from this session:
 
-### 1. GitHub token is missing permissions (root cause)
+1. Edit Approvals workflow fix — drafts could not progress past `draft` to `pending_review`/`approved`/`applied`. Resolved with a "Promote to pending review" path and corrected status transitions in `apply-product-edit`.
+2. New "Test GitHub access" admin tool (button + edge function `test-github-access`) that verifies the `GITHUB_TOKEN` PAT has the right scopes and write access before approvals are synced.
+3. LinkedIn social link added to the footer (https://www.linkedin.com/company/dlinrt-eu/).
+4. New MedMind auto-contouring product added.
 
-`apply-product-edit` edge-function logs (just now) show:
+## Files to update
 
-```
-Failed to create branch: {"message":"Resource not accessible by personal access token","status":"403"}
-```
+### `docs/ADMIN_GUIDE.md` — Section 9 (Product Edit Approvals)
 
-The branch-create call (`POST /repos/.../git/refs`) is rejected. The current `GITHUB_TOKEN` PAT does not have `contents: write` on `DLinRT-eu/dlinrteu-website`. So every approved draft fails at the very first GitHub call, draft stays at `approved`, no PR is ever opened, and nothing reaches main → no deploy.
+- Update the **Draft Status Lifecycle** description to clarify the promote step (draft → pending_review is admin-or-author triggered, not implicit).
+- Add a new subsection **"Test GitHub access"** under *GitHub Integration* documenting:
+  - Where the button lives (top of `/admin/edit-approvals`).
+  - What it checks: repo read, branch read, write probe (create+delete throwaway branch), token-scoped permissions.
+  - What to do on failure: rotate the PAT with `contents: read & write` and `pull_requests: read & write` scopes, update the `GITHUB_TOKEN` secret in Supabase, retest.
+- Note the recovery path for stuck drafts ("Promote to pending review" action).
 
-This is a credential issue, not a code bug. It must be fixed in Supabase secrets — the code is doing the right call.
+### `docs/README.md` (docs index)
 
-### 2. `submitForReview` race in `ProductEditContext.tsx` (line 247-277)
+- Add a one-line bullet under admin features for the GitHub access health check.
 
-When a reviewer clicks "Submit for review" before a draft has been auto-saved:
+### Changelog entry (DB-stored via `changelog_entries`)
 
-```ts
-if (!user || !currentDraft) {
-  await saveDraft(summary);     // setState only — does not return the new id
-}
-const draftId = currentDraft?.id;   // still undefined here
-if (draftId) { ... }                // skipped silently
-```
+Changelog lives in the database, not a file. Add a new entry through `/admin/changelog` (or via a Supabase migration insert) for June 2026 covering:
 
-Result: row never moves from `draft` → `pending_review`, no toast error, user thinks nothing happened. This is exactly the "stuck in draft" symptom. `saveDraft` needs to return the persisted draft so the follow-up update has an id.
+- Fixed: Product edit approvals could get stuck in `draft`; drafts now reliably progress through `pending_review` → `approved` → `applied`.
+- Added: "Test GitHub access" admin diagnostic for verifying the `GITHUB_TOKEN` PAT before sync.
+- Added: LinkedIn link in the site footer.
+- Added: MedMind to the Auto-Contouring catalogue.
 
-### 3. No admin recovery path for rows stuck at `draft`
+I will create this via a SQL migration so it is reproducible (preferred) rather than requiring a manual UI entry.
 
-`EditApprovals.tsx` only renders Approve/Reject for `pending_review`. The "All Drafts" tab lists `draft` rows but exposes no action, so an admin can't unblock them. We need a "Promote to Pending Review" action on `draft` rows.
+### `README.md` (root)
 
-`approved`-but-no-PR rows already have a "Retry sync" button (line 335) — that part is fine and will start working again once defect 1 is fixed.
+No change needed — README documents how to add products and links to guides; nothing here is invalidated by the session's changes.
 
-## Fix
+### `SECURITY.md` / `docs/FIELD_REFERENCE.md` / review guides
 
-### A. GitHub token (config — requires user)
-
-Rotate `GITHUB_TOKEN` in Supabase Edge Function secrets to a token that has, on the `DLinRT-eu/dlinrteu-website` repo:
-
-- `contents: write` (create branch + commit file)
-- `pull_requests: write` (open PR)
-- `metadata: read` (default)
-
-Recommended: a fine-grained PAT scoped to that single repo, or a GitHub App installation token. Classic PAT with `repo` scope also works but is broader.
-
-I'll add a short doc note in `docs/ADMIN_GUIDE.md` listing the required scopes so future rotations don't repeat this.
-
-### B. Code: fix `submitForReview` race
-
-In `src/components/product-editor/ProductEditContext.tsx`:
-
-- Change `saveDraft` to return the persisted `EditDraft` (or its id) instead of relying on React state.
-- In `submitForReview`, when there's no `currentDraft`, use the id returned from `saveDraft(summary)` directly to perform the status update — no dependence on `currentDraft` state in the same tick.
-- Show an explicit error toast if both paths fail to produce an id (so future regressions are visible).
-
-### C. Code: admin promotion action for stuck drafts
-
-In `src/pages/admin/EditApprovals.tsx`:
-
-- Add a `promoteToPending(draftId)` handler that updates `status` to `pending_review` and bumps `updated_at`.
-- In `DraftCard`, when `draft.status === 'draft'`, show a "Move to pending review" button (admin-only context — this page is already admin-gated).
-- Refresh the list after promotion so it appears in the Pending tab.
-
-### D. Code: harden `apply-product-edit` error surface
-
-Minor: when the GitHub call fails, include the GitHub status code and message in the JSON error returned to the admin UI (currently swallowed to a generic "Failed to access GitHub repository"). This makes the next misconfiguration self-diagnosing without log diving.
+No change needed — nothing about evidence rubric, fields, or security posture changed.
 
 ## Out of scope
 
-- No DB schema change. RLS, GRANTs, and the `product_edit_drafts` shape are correct.
-- No change to `generateProductCode` / `resolveFilePath` — those produced files are fine and already round-tripped through GitHub when the token worked.
-- Not touching the rejected/applied flows.
+- No code changes. Documentation and changelog only.
+- Not touching the reviewer guide, field reference, or examples.
 
-## Verification
+## Question
 
-1. After token rotation: re-run "Retry sync" on an existing `approved` draft — expect a PR URL.
-2. New end-to-end: editor → Save → Submit for review → admin Approve → PR opened → merge → site updates.
-3. Manually flip a row to `draft` in DB; confirm the new "Move to pending review" button works in the All Drafts tab.
-4. `bunx tsc --noEmit -p tsconfig.app.json` clean.
+Want me to also write a short "How approvals flow" diagram (ASCII) into ADMIN_GUIDE Section 9, or keep the update minimal?
