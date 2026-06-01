@@ -532,6 +532,12 @@ function DraftCard({ draft, originalProduct, onApprove, onReject, onPromote, onS
               Sync to GitHub
             </Button>
           )}
+          {onPromote && (
+            <Button variant="default" size="sm" onClick={onPromote}>
+              <Clock className="h-4 w-4 mr-2" />
+              Move to Pending Review
+            </Button>
+          )}
           {onApprove && (
             <Button variant="default" size="sm" className="bg-green-600 hover:bg-green-700" onClick={onApprove}>
               <CheckCircle className="h-4 w-4 mr-2" />
