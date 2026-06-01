@@ -214,7 +214,38 @@ export default function EditApprovals() {
           </span>
         ),
       });
+  const testGithubAccess = async () => {
+    setTestingAccess(true);
+    setAccessResult(null);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+      const res = await fetch(
+        `https://msyfxyxzjyowwasgturs.supabase.co/functions/v1/test-github-access`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+        }
+      );
+      const result = await res.json();
+      setAccessResult(result);
+      if (result.ok) {
+        toast({ title: 'GitHub access OK', description: 'Token can create branches on the repo.' });
+      } else {
+        toast({ title: 'GitHub access failed', description: result.error || 'See details below.', variant: 'destructive' });
+      }
+    } catch (error: any) {
+      setAccessResult({ ok: false, error: error.message || 'Request failed' });
+      toast({ title: 'Test failed', description: error.message || 'Request failed', variant: 'destructive' });
+    } finally {
+      setTestingAccess(false);
+    }
+  };
 
+  
       fetchDrafts();
     } catch (error: any) {
       console.error('Error syncing to GitHub:', error);
