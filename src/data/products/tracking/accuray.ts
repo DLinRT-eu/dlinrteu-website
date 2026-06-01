@@ -3,16 +3,17 @@ import { ProductDetails } from "@/types/productDetails";
 export const ACCURAY_PRODUCTS: ProductDetails[] = [
   {
     id: "accuray-synchrony",
-    name: "Synchrony",
-    company: "Accuray",
+    name: "Synchrony®",
+    company: "Accuray®",
     category: "Tracking",
-    description: "Accuray has provided a solution called Synchrony, that allows tumor motion to be corrected during radiation therapy delivery. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life. Uses patient-specific AI model building for motion prediction.",
+    description: "Accuray® has provided a solution called Synchrony®, that allows tumor motion to be corrected during radiation therapy delivery. Synchrony® has been available on the CyberKnife® System for nearly 25 years (since the early 2000s) and is also available on the Radixact® Treatment Delivery System. This real-time motion synchronization enables precise treatment delivery that helps clinicians to reduce treatment margins, minimize dose to normal tissue and improve patients' quality of life. Uses patient-specific AI model building for motion prediction.",
     usesAI: true,
     features: [
       "Real-time motion synchronization",
       "Patient-specific AI model building",
       "Automatic model relearning",
-      "Motion uncertainty monitoring"
+      "Motion uncertainty monitoring",
+      "Available on CyberKnife® and Radixact® systems"
     ],
     certification: "CE & FDA",
     logoUrl: "/logos/accuray.png",
@@ -25,6 +26,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     keyFeatures: [
       "Patient-specific AI model that builds and optimizes for individual patients",
       "Real-time motion synchronization during radiation therapy delivery",
+      "Available on the CyberKnife® System for nearly 25 years, with respiratory, fiducial and spine tracking modes",
+      "Also integrated with the Radixact® Treatment Delivery System for helical tomotherapy",
       "Automatic validity monitoring of AI model throughout treatment",
       "Autonomous relearning and improvement during treatment without user interaction",
       "Enables reduced treatment margins and minimized dose to normal tissue",
@@ -38,11 +41,12 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       outputFormat: ["System-specific", "Treatment delivery commands"]
     },
     technology: {
-      integration: ["CyberKnife System", "Radixact Treatment Delivery System"],
+      integration: ["CyberKnife® System", "Radixact® Treatment Delivery System"],
       deployment: ["System-integrated"],
       triggerForAnalysis: "Real-time during treatment delivery",
       processingTime: "Real-time processing with <100ms latency"
     },
+
     regulatory: {
       ce: {
         status: "cleared",
