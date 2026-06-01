@@ -1,44 +1,21 @@
-# Accuray Trademark + Synchrony® on CyberKnife® Update
+## Update MIM Contour ProtégéAI+ product entry
 
-## 1. Expand Synchrony® product entry
+Edit `src/data/products/auto-contouring/mim-software.ts`:
 
-File: `src/data/products/tracking/accuray.ts`
+**Version & compatibility**
+- `version`: `"2.0"` → `"1.4.0"`
+- Add MIM platform compatibility: append `"Requires MIM 7.4.5 or later"` to `technology.integration` and mention in `description` or `keyFeatures`.
 
-- Rename `name` to `Synchrony®`.
-- Update `description` to explicitly cover both delivery platforms: clarify that Synchrony® has been available on the CyberKnife® System for nearly 25 years and is also available on the Radixact® Treatment Delivery System.
-- Add CyberKnife®-era context to `keyFeatures` (e.g. ~25-year clinical history on CyberKnife®; real-time respiratory/fiducial/lung tracking modes; spine tracking).
-- Add CyberKnife®-relevant integration entries to `technology.integration` (already present) and extend `market.onMarketSince` note to mention CyberKnife® availability since ~2001.
-- Extend `regulatory.intendedUseStatement` with a second sentence covering Synchrony® on CyberKnife® System (FDA cleared under prior CyberKnife® clearances).
-- Add 1–2 CyberKnife®-specific publications to `evidence[]` (well-known motion tracking literature) and update `evidenceRigorNotes` / `clinicalEvidence` accordingly.
-- Bump `lastRevised` to today.
+**supportedStructures** — replace entire array with the user-supplied list, stripping the literal word "New" from any entries (e.g. `Thorax CT: A_Aorta_Asc`, `Thorax CT: A_LAD`, `Thorax CT: Chestwall_L/R`, `Thorax CT: Rib`). New groups added:
+- **Female Pelvis CT**: Bag_Bowel, Bladder, Bowel, CaudaEquina, Colon_Sigmoid, Femur_Head_L, Femur_Head_R, LN_Pelvics, Rectum, SacralPlex, Sacrum, UteroCervix
+- **Abdomen CT**: add CaudaEquina (already has the rest)
+- **Head & Neck**: remove duplicate `Bone_Mandible` (typo in source), keep one
+- **Thorax CT**: add A_Aorta_Asc, A_LAD, Chestwall_L, Chestwall_R, Rib
+- Pelvis CT: drop `Sacrum`? No — user list keeps Sacrum, remove no entries. Reconcile against existing list and use the user list as source of truth.
+- Drop "Head & Neck: LN_Neck_VIB_*" etc. if not in new list (current file has none, OK).
 
-## 2. Apply ® to Accuray marks across the site
+**Metadata**
+- `lastUpdated` / `lastRevised`: bump to today (2026-06-01).
+- `source`: note "Structure list updated 2026-06-01 per vendor; v1.4.0 requires MIM 7.4.5+."
 
-Targets: `Accuray`, `Synchrony`, `Radixact`, `CyberKnife` → `Accuray®`, `Synchrony®`, `Radixact®`, `CyberKnife®`.
-
-Scope (text/data only, no logic changes):
-- `src/data/products/**` — any file mentioning these names (descriptions, features, evidence notes, integration arrays, regulatory notes).
-- `src/data/companies/**` — Accuray company entry description.
-- `src/data/news/**` and `src/data/changelog.ts` — references in news/changelog bodies.
-- `src/pages/**` and `src/components/**` — only hard-coded copy strings mentioning these names (none expected in business logic; identifiers like `accuray-synchrony` and CSS classes are left untouched).
-
-Exclusions (do NOT modify):
-- Product/company `id` fields, file paths, URLs, image alt text used for asset lookups, GitHub URLs, regulatory `clearanceNumber`, FDA product codes.
-- `logoUrl`, `website`, `productUrl`, `companyUrl` strings.
-- Variable names, exported constants (e.g. `ACCURAY_PRODUCTS`), imports.
-- Source citation strings inside `regulatory.intendedUseStatement` where the exact FDA wording is quoted — keep the verbatim FDA quote unchanged, only adjust surrounding DLinRT prose.
-
-## 3. Discovery method
-
-Run a ripgrep for each of the four brand names across `src/` and methodically update only user-visible string literals. Skip occurrences already followed by `®`.
-
-## 4. Verification
-
-- `bunx tsc --noEmit` passes.
-- Spot-check Synchrony® product page and Accuray company page in preview to confirm ® renders correctly.
-- Confirm catalogue total still shows 80 products and Synchrony® card displays the expanded description.
-
-## Technical notes
-
-- ® character (U+00AE) used directly (no HTML entity) — consistent with existing UTF-8 source files.
-- No schema, route, filter, or counting logic changes. Pure content/data edit per the Minimal Intervention rule.
+No schema, route, filter, counting, or evidence/regulatory changes.
