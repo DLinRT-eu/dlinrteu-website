@@ -107,6 +107,7 @@ export const getCompanyIdByName = (companyName: string): string => {
     'RaySearch': 'raysearch',
     'RaySearch Laboratories': 'raysearch',
     'Accuray': 'accuray',
+    'Accuray®': 'accuray',
     'ViewRay': 'viewray',
     'PTW': 'ptw-dosimetry',
     'MedLever, Inc.': 'medlever',
