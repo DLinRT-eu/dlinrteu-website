@@ -84,8 +84,9 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Multiple peer-reviewed publications in European Radiology, Radiology, and SPIE demonstrating efficacy in various clinical applications",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
-    source: "FDA 510(k) database (K183460, K212074) and company website"
+    releaseDate: "2019-03-29",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K183460, K212074) and company website; releaseDate proxied from FDA K183460 decision date (2026-06-01)"
   }
 ];

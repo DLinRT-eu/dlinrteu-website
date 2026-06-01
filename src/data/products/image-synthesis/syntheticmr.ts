@@ -138,9 +138,10 @@ export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners"],
       availability: "CE markets only"
     },
-    lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-05",
-    source: "Company website and regulatory filings",
+    releaseDate: "2024-03-26",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "Company website and regulatory filings; releaseDate proxied from FDA K233733 decision date (2026-06-01)",
     evidenceRigor: "E0",
     evidenceRigorNotes: "No peer-reviewed validation studies identified for SyMRI Spine at time of listing.",
     clinicalImpact: "I0",

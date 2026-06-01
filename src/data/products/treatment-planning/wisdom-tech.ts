@@ -59,8 +59,9 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales (China)"]
     },
     version: "1.0",
-    lastUpdated: "2026-05-31",
-    lastRevised: "2026-05-31",
+    releaseDate: "2022-12-03",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes: "No peer-reviewed publications located. PubMed searched 2026-05-31.",

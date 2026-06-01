@@ -83,7 +83,9 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-05-30",
-    source: "Philips product documentation (2019)"
+    releaseDate: "2016-03-31",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016) announcing first commercial MR-only solution for prostate treatment planning with FDA clearance (2026-06-01)"
   }
 ];

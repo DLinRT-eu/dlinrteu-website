@@ -92,9 +92,10 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
-    source: "FDA 510(k) database (K250440)",
+    releaseDate: "2025-06-17",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K250440); releaseDate proxied from FDA decision date (2026-06-01)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   },
   {
@@ -270,9 +271,10 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s00066-019-01463-4"
       }
     ],
-    lastUpdated: "2026-02-26",
-    lastRevised: "2026-05-23",
-    source: "FDA 510(k) database (K243633), Podobnik et al. Sci Rep 2025 (doi:10.1038/s41598-025-18598-3)",
+    releaseDate: "2025-06-13",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K243633), Podobnik et al. Sci Rep 2025 (doi:10.1038/s41598-025-18598-3); releaseDate proxied from FDA decision date (2026-06-01)",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts"
   }
 ];

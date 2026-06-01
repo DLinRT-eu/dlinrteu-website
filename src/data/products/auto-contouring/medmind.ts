@@ -100,8 +100,9 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceVendorIndependent: false,
     evidenceExternalValidation: true,
     evidenceMultiNational: false,
-    lastUpdated: "2026-02-26",
-    lastRevised: "2026-05-20",
-    source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690)."
+    releaseDate: "2022-03-25",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];
