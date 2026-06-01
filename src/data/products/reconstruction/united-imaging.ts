@@ -58,15 +58,44 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Integrated in CT systems"],
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed publications. Cleared as integrated system feature. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Liao S. et al. Fast and low-dose medical imaging generation empowered by hybrid deep-learning and iterative reconstruction. Cell Rep Med 2023;4(7):101119. (United Imaging-affiliated authors; covers DL+iterative recon technology underlying uAIFI.)",
+        link: "https://doi.org/10.1016/j.xcrm.2023.101119"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "Deep Recon 510(k) K193073 (Shanghai United Imaging Healthcare), cleared 2020-07-06.",
+        link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/JAK/K193073"
+      },
+      {
+        type: "Product Information",
+        description: "uAIFI Technology product page (United Imaging).",
+        link: "https://global.united-imaging.com/en/product-service/products/mr/uaifi-technology"
+      }
+    ],
+    limitations: [
+      "Available peer-reviewed publication has vendor-affiliated authorship; no fully independent multi-center validation identified",
+      "Performance tied to United Imaging uCT hardware and proprietary acquisition pipeline",
+      "Dose-reduction claims require local protocol validation",
+      "No published radiotherapy-planning-specific validation"
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA K193073 (Deep Recon) clearance plus Liao et al. Cell Rep Med 2023 — peer-reviewed, vendor-affiliated. No independent multi-center publication identified (web-searched 2026-06-01).",
+    clinicalImpactNotes: "Technical efficacy demonstrated in vendor-affiliated peer-reviewed work (lower noise, dose-reduction potential). No independent clinical-outcome data.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website"
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K193073), peer-reviewed literature, company website."
 
   },
   {
@@ -124,15 +153,49 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated in MRI systems"],
 
 },
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "uMR 680 510(k) K222755 (Shanghai United Imaging Intelligence), cleared 2023-02-16 — clears the uMR 680 with uAIFI Technology (including DeepRecon) for AI-enhanced MR reconstruction.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K222755.pdf"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "Deep Recon 510(k) K193073 (Shanghai United Imaging Healthcare), cleared 2020-07-06 — predicate for the MR DeepRecon component of uAIFI.",
+        link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/JAK/K193073"
+      },
+      {
+        type: "Product Information",
+        description: "uAIFI Technology product page (United Imaging) — describes DeepRecon, EasySense and related uMR components.",
+        link: "https://eu.united-imaging.com/en/product-service/products/mr/uaifi-technology"
+      },
+      {
+        type: "Product Information",
+        description: "uMR 680: uAIFI DeepRecon + EasySense product page (United Imaging).",
+        link: "https://global.united-imaging.com/en/product-service/products/mr/umr-680"
+      }
+    ],
+    limitations: [
+      "No independent peer-reviewed validation identified for uAIFI on uMR (web-searched 2026-06-01)",
+      "Clinical performance data is largely vendor-sourced (white papers, product pages, regulatory submissions)",
+      "Performance tied to specific uMR scanner generation and pulse-sequence configuration",
+      "No radiotherapy-planning-specific validation published"
+    ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed publications found. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "FDA K222755 (uMR 680 with uAIFI) and predicate K193073 (DeepRecon). No independent peer-reviewed publication identified (web-searched 2026-06-01).",
+    clinicalImpactNotes: "No independently demonstrated clinical impact. Vendor describes SNR/resolution gains and acquisition-time reduction in product materials.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K222755, K193073), United Imaging product pages.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },

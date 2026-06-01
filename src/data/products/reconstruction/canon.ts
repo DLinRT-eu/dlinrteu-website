@@ -159,31 +159,52 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Peer-reviewed Publication",
+        description: "Akai H. et al. Acceleration of knee MRI using a combination of compressed sensing and commercially available deep learning reconstruction (Canon AiCE). BMC Med Imaging 2023;23:5.",
+        link: "https://doi.org/10.1186/s12880-023-00962-2"
+      },
+      {
+        type: "Vendor White Paper",
+        description: "Do H.P., Berkeley D. AiCE Interpretable Model with Robust and Generalized Performance: Beyond Brain and Knee MRI (Canon Medical Systems USA).",
+        link: "https://us.medical.canon/download/mr-wp-aice-dlr-summary-beyond-brain-and-knee-mri"
+      },
+      {
+        type: "Case Study",
+        description: "McDonald M.A. (UCSD). High-Resolution Spine MRI with AiCE Deep Learning Reconstruction — Canon Medical case study.",
+        link: "https://us.medical.canon/download/mr-cs-ucsd-spine-aice"
+      },
+      {
         type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for AiCE MR",
+        description: "FDA 510(k) K192574 clearance documentation for AiCE MR.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K192574.pdf"
       },
       {
         type: "Product Information",
-        description: "Official Canon AiCE MR product page",
+        description: "Official Canon AiCE MR product page.",
         link: "https://global.medical.canon/products/magnetic-resonance/aice"
       }
     ],
-    evidenceRigor: "E1",
+    limitations: [
+      "Independent peer-reviewed validation limited to single-center, single-anatomy studies (e.g. knee)",
+      "No multi-center prospective trial published",
+      "Performance varies by pulse sequence and anatomy",
+      "Not specifically validated for radiotherapy planning workflow"
+    ],
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K192574 validation. Limited independent publications for MR application. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in MRI scan time. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01.",
+    clinicalImpactNotes: "Workflow improvement through up to ~50% reduction in MRI scan time with maintained or improved image quality (Akai 2023; vendor materials).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
   {
