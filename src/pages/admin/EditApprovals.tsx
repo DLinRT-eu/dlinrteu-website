@@ -225,6 +225,25 @@ export default function EditApprovals() {
       setSyncingId(null);
     }
   };
+  const promoteToPending = async (draftId: string) => {
+    try {
+      const { error } = await supabase
+        .from('product_edit_drafts')
+        .update({
+          status: 'pending_review',
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', draftId)
+        .eq('status', 'draft');
+      if (error) throw error;
+      toast({ title: 'Moved to Pending Review', description: 'The draft is now awaiting approval.' });
+      fetchDrafts();
+    } catch (error: any) {
+      console.error('Error promoting draft:', error);
+      toast({ title: 'Error', description: error.message || 'Failed to promote draft', variant: 'destructive' });
+    }
+  };
+
 
   const getOriginalProduct = (productId: string): ProductDetails | undefined => {
     return ALL_PRODUCTS.find(p => p.id === productId);
@@ -355,6 +374,9 @@ export default function EditApprovals() {
                   originalProduct={getOriginalProduct(draft.product_id)}
                   onApprove={draft.status === 'pending_review' ? () => handleReviewAction(draft, 'approve') : undefined}
                   onReject={draft.status === 'pending_review' ? () => handleReviewAction(draft, 'reject') : undefined}
+                  onPromote={draft.status === 'draft' ? () => promoteToPending(draft.id) : undefined}
+                  onSyncToGitHub={draft.status === 'approved' && !draft.github_pr_url ? () => syncToGitHub(draft.id) : undefined}
+                  syncingId={syncingId}
                   getStatusBadge={getStatusBadge}
                 />
               ))
@@ -429,12 +451,13 @@ interface DraftCardProps {
   originalProduct?: ProductDetails;
   onApprove?: () => void;
   onReject?: () => void;
+  onPromote?: () => void;
   onSyncToGitHub?: () => void;
   syncingId?: string | null;
   getStatusBadge: (status: string) => React.ReactNode;
 }
 
-function DraftCard({ draft, originalProduct, onApprove, onReject, onSyncToGitHub, syncingId, getStatusBadge }: DraftCardProps) {
+function DraftCard({ draft, originalProduct, onApprove, onReject, onPromote, onSyncToGitHub, syncingId, getStatusBadge }: DraftCardProps) {
   const [showDiff, setShowDiff] = useState(false);
 
   return (
@@ -507,6 +530,12 @@ function DraftCard({ draft, originalProduct, onApprove, onReject, onSyncToGitHub
                 <Github className="h-4 w-4 mr-2" />
               )}
               Sync to GitHub
+            </Button>
+          )}
+          {onPromote && (
+            <Button variant="default" size="sm" onClick={onPromote}>
+              <Clock className="h-4 w-4 mr-2" />
+              Move to Pending Review
             </Button>
           )}
           {onApprove && (

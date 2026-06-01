@@ -38,7 +38,7 @@ interface ProductEditContextType {
   enableEditMode: (product: ProductDetails) => void;
   disableEditMode: () => void;
   updateField: (fieldPath: string, value: any) => void;
-  saveDraft: (summary?: string) => Promise<void>;
+  saveDraft: (summary?: string) => Promise<string | null>;
   discardChanges: () => void;
   submitForReview: (summary: string) => Promise<void>;
   loadExistingDraft: (productId: string) => Promise<void>;
@@ -177,8 +177,8 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
     setChangedFields(newChangedFields);
   }, [editedProduct, originalProduct]);
   
-  const saveDraft = useCallback(async (summary?: string) => {
-    if (!user || !editedProduct || !originalProduct) return;
+  const saveDraft = useCallback(async (summary?: string): Promise<string | null> => {
+    if (!user || !editedProduct || !originalProduct) return null;
     
     setIsSaving(true);
     try {
@@ -204,6 +204,11 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
           .eq('id', currentDraft.id);
           
         if (error) throw error;
+        toast({
+          title: "Draft Saved",
+          description: "Your changes have been saved as a draft."
+        });
+        return currentDraft.id;
       } else {
         // Create new draft
         const { data, error } = await supabase
@@ -218,13 +223,14 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
             ...data,
             draft_data: data.draft_data as unknown as ProductDetails
           } as ProductEditDraft);
+          toast({
+            title: "Draft Saved",
+            description: "Your changes have been saved as a draft."
+          });
+          return data.id as string;
         }
+        return null;
       }
-      
-      toast({
-        title: "Draft Saved",
-        description: "Your changes have been saved as a draft."
-      });
     } catch (error: any) {
       console.error('Error saving draft:', error);
       toast({
@@ -232,10 +238,12 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
         description: error.message || "Failed to save draft.",
         variant: "destructive"
       });
+      return null;
     } finally {
       setIsSaving(false);
     }
   }, [user, editedProduct, originalProduct, changedFields, currentDraft]);
+
   
   const discardChanges = useCallback(() => {
     if (originalProduct) {
@@ -245,36 +253,44 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
   }, [originalProduct]);
   
   const submitForReview = useCallback(async (summary: string) => {
-    if (!user || !currentDraft) {
-      // Save first if no draft exists
-      await saveDraft(summary);
-    }
+    if (!user) return;
     
     setIsSaving(true);
     try {
-      const draftId = currentDraft?.id;
-      
-      if (draftId) {
-        const { error } = await supabase
-          .from('product_edit_drafts')
-          .update({
-            status: 'pending_review',
-            edit_summary: summary,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', draftId);
-          
-        if (error) throw error;
-        
-        setCurrentDraft(prev => prev ? { ...prev, status: 'pending_review', edit_summary: summary } : null);
-        
-        toast({
-          title: "Submitted for Review",
-          description: "Your changes have been submitted for admin review."
-        });
-        
-        disableEditMode();
+      // Ensure a persisted draft exists; capture id directly to avoid state-race.
+      let draftId = currentDraft?.id ?? null;
+      if (!draftId) {
+        draftId = await saveDraft(summary);
       }
+      
+      if (!draftId) {
+        toast({
+          title: "Could not submit",
+          description: "Draft could not be saved. Please try Save Draft first.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      const { error } = await supabase
+        .from('product_edit_drafts')
+        .update({
+          status: 'pending_review',
+          edit_summary: summary,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', draftId);
+        
+      if (error) throw error;
+      
+      setCurrentDraft(prev => prev ? { ...prev, status: 'pending_review', edit_summary: summary } : null);
+      
+      toast({
+        title: "Submitted for Review",
+        description: "Your changes have been submitted for admin review."
+      });
+      
+      disableEditMode();
     } catch (error: any) {
       console.error('Error submitting for review:', error);
       toast({
@@ -286,6 +302,7 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
       setIsSaving(false);
     }
   }, [user, currentDraft, saveDraft, disableEditMode]);
+
   
   const loadExistingDraft = useCallback(async (productId: string) => {
     if (!user) return;
