@@ -108,6 +108,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     website: "https://www.medicalmind.cn/en.html",
     productIds: ["medmind-rt-mind-ai"],
     category: "Specialized Solutions",
+    logoUrl: "/logos/medmind.png",
     primaryTask: "Auto-Contouring"
   },
   {
