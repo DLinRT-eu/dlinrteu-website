@@ -177,8 +177,8 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
     setChangedFields(newChangedFields);
   }, [editedProduct, originalProduct]);
   
-  const saveDraft = useCallback(async (summary?: string) => {
-    if (!user || !editedProduct || !originalProduct) return;
+  const saveDraft = useCallback(async (summary?: string): Promise<string | null> => {
+    if (!user || !editedProduct || !originalProduct) return null;
     
     setIsSaving(true);
     try {
@@ -204,6 +204,11 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
           .eq('id', currentDraft.id);
           
         if (error) throw error;
+        toast({
+          title: "Draft Saved",
+          description: "Your changes have been saved as a draft."
+        });
+        return currentDraft.id;
       } else {
         // Create new draft
         const { data, error } = await supabase
@@ -218,13 +223,14 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
             ...data,
             draft_data: data.draft_data as unknown as ProductDetails
           } as ProductEditDraft);
+          toast({
+            title: "Draft Saved",
+            description: "Your changes have been saved as a draft."
+          });
+          return data.id as string;
         }
+        return null;
       }
-      
-      toast({
-        title: "Draft Saved",
-        description: "Your changes have been saved as a draft."
-      });
     } catch (error: any) {
       console.error('Error saving draft:', error);
       toast({
@@ -232,10 +238,12 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
         description: error.message || "Failed to save draft.",
         variant: "destructive"
       });
+      return null;
     } finally {
       setIsSaving(false);
     }
   }, [user, editedProduct, originalProduct, changedFields, currentDraft]);
+
   
   const discardChanges = useCallback(() => {
     if (originalProduct) {
