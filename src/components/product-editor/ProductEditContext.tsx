@@ -38,7 +38,7 @@ interface ProductEditContextType {
   enableEditMode: (product: ProductDetails) => void;
   disableEditMode: () => void;
   updateField: (fieldPath: string, value: any) => void;
-  saveDraft: (summary?: string) => Promise<void>;
+  saveDraft: (summary?: string) => Promise<string | null>;
   discardChanges: () => void;
   submitForReview: (summary: string) => Promise<void>;
   loadExistingDraft: (productId: string) => Promise<void>;
