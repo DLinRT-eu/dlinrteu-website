@@ -392,10 +392,12 @@ Review and approve product edits submitted by reviewers and company representati
 | Status | Description |
 |--------|-------------|
 | `draft` | Work in progress, auto-saved every 30 seconds |
-| `pending_review` | Submitted by author, awaiting admin review |
+| `pending_review` | Submitted by author (or promoted by admin), awaiting review |
 | `approved` | Ready to sync to GitHub |
 | `rejected` | Returned to author with feedback |
 | `applied` | Synced to GitHub as pull request |
+
+> **Stuck draft recovery**: If an author saved a draft but never submitted it, admins can use the **"Promote to pending review"** action on the Edit Approvals page to move it forward without waiting on the original author.
 
 ### Review Workflow
 
@@ -417,6 +419,22 @@ When you click "Sync to GitHub" on an approved edit:
 5. PR link is displayed for review
 
 **Requirement**: `GITHUB_TOKEN` must be configured in Supabase Edge Functions secrets.
+
+### Test GitHub Access (Health Check)
+
+A **"Test GitHub access"** button at the top of `/admin/edit-approvals` runs the `test-github-access` edge function to verify the configured `GITHUB_TOKEN` PAT before approvals are synced.
+
+The check runs four probes against `DLinRT-eu/dlinrteu-website`:
+1. **Repo read** — confirms the token can see the repository.
+2. **Branch read** — fetches the `main` ref.
+3. **Write probe** — creates and immediately deletes a throwaway branch to confirm write access.
+4. **Token-scoped permissions** — reports `admin`, `push`, `pull`, `maintain`, `triage` flags returned by GitHub.
+
+**If the check fails**:
+1. Generate a new fine-grained PAT scoped to the `DLinRT-eu/dlinrteu-website` repo with permissions `Contents: Read & write` and `Pull requests: Read & write`.
+2. Update the `GITHUB_TOKEN` secret in Supabase → Edge Functions → Secrets.
+3. Re-run "Test GitHub access" until all four checks pass before approving edits.
+
 
 ### Alternative: Direct GitHub Editing
 
