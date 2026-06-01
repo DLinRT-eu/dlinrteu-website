@@ -19,7 +19,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["AI-based segmentation", "Integration with MIM platform", "Multiple modality support"],
+    keyFeatures: ["AI-based segmentation", "Integration with MIM platform (requires MIM 7.4.5 or later)", "Multiple modality support"],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "MRI"],
