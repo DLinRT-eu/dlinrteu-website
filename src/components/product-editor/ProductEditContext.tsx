@@ -253,36 +253,44 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
   }, [originalProduct]);
   
   const submitForReview = useCallback(async (summary: string) => {
-    if (!user || !currentDraft) {
-      // Save first if no draft exists
-      await saveDraft(summary);
-    }
+    if (!user) return;
     
     setIsSaving(true);
     try {
-      const draftId = currentDraft?.id;
-      
-      if (draftId) {
-        const { error } = await supabase
-          .from('product_edit_drafts')
-          .update({
-            status: 'pending_review',
-            edit_summary: summary,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', draftId);
-          
-        if (error) throw error;
-        
-        setCurrentDraft(prev => prev ? { ...prev, status: 'pending_review', edit_summary: summary } : null);
-        
-        toast({
-          title: "Submitted for Review",
-          description: "Your changes have been submitted for admin review."
-        });
-        
-        disableEditMode();
+      // Ensure a persisted draft exists; capture id directly to avoid state-race.
+      let draftId = currentDraft?.id ?? null;
+      if (!draftId) {
+        draftId = await saveDraft(summary);
       }
+      
+      if (!draftId) {
+        toast({
+          title: "Could not submit",
+          description: "Draft could not be saved. Please try Save Draft first.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      const { error } = await supabase
+        .from('product_edit_drafts')
+        .update({
+          status: 'pending_review',
+          edit_summary: summary,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', draftId);
+        
+      if (error) throw error;
+      
+      setCurrentDraft(prev => prev ? { ...prev, status: 'pending_review', edit_summary: summary } : null);
+      
+      toast({
+        title: "Submitted for Review",
+        description: "Your changes have been submitted for admin review."
+      });
+      
+      disableEditMode();
     } catch (error: any) {
       console.error('Error submitting for review:', error);
       toast({
@@ -294,6 +302,7 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
       setIsSaving(false);
     }
   }, [user, currentDraft, saveDraft, disableEditMode]);
+
   
   const loadExistingDraft = useCallback(async (productId: string) => {
     if (!user) return;
