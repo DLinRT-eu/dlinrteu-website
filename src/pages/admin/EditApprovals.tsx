@@ -451,12 +451,13 @@ interface DraftCardProps {
   originalProduct?: ProductDetails;
   onApprove?: () => void;
   onReject?: () => void;
+  onPromote?: () => void;
   onSyncToGitHub?: () => void;
   syncingId?: string | null;
   getStatusBadge: (status: string) => React.ReactNode;
 }
 
-function DraftCard({ draft, originalProduct, onApprove, onReject, onSyncToGitHub, syncingId, getStatusBadge }: DraftCardProps) {
+function DraftCard({ draft, originalProduct, onApprove, onReject, onPromote, onSyncToGitHub, syncingId, getStatusBadge }: DraftCardProps) {
   const [showDiff, setShowDiff] = useState(false);
 
   return (
