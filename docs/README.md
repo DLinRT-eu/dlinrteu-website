@@ -29,7 +29,7 @@ Complete guide for platform administrators covering:
 - **Review Rounds** - Creating and managing structured review cycles
 - **Reviewer Assignment** - Manual and automatic product assignments
 - **Company Management** - Representatives, verifications, and certifications
-- **Product Edit Approvals** - Reviewing and approving visual edits
+- **Product Edit Approvals** - Reviewing and approving visual edits, with a built-in GitHub access health check
 - **Security Monitoring** - Audit logs and security events
 - **Changelog Management** - Release notes and dual-repository backfill
 - **Registration Review** - Approving new user registrations
