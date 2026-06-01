@@ -65,6 +65,8 @@ export default function EditApprovals() {
   const [reviewFeedback, setReviewFeedback] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [syncingId, setSyncingId] = useState<string | null>(null);
+  const [testingAccess, setTestingAccess] = useState(false);
+  const [accessResult, setAccessResult] = useState<any | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -225,6 +227,38 @@ export default function EditApprovals() {
       setSyncingId(null);
     }
   };
+
+  const testGithubAccess = async () => {
+    setTestingAccess(true);
+    setAccessResult(null);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
+      const res = await fetch(
+        `https://msyfxyxzjyowwasgturs.supabase.co/functions/v1/test-github-access`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+        }
+      );
+      const result = await res.json();
+      setAccessResult(result);
+      if (result.ok) {
+        toast({ title: 'GitHub access OK', description: 'Token can create branches on the repo.' });
+      } else {
+        toast({ title: 'GitHub access failed', description: result.error || 'See details below.', variant: 'destructive' });
+      }
+    } catch (error: any) {
+      setAccessResult({ ok: false, error: error.message || 'Request failed' });
+      toast({ title: 'Test failed', description: error.message || 'Request failed', variant: 'destructive' });
+    } finally {
+      setTestingAccess(false);
+    }
+  };
+
   const promoteToPending = async (draftId: string) => {
     try {
       const { error } = await supabase
@@ -303,6 +337,77 @@ export default function EditApprovals() {
             the "View PR" link on each approved draft to track its status.
           </CardContent>
         </Card>
+
+        <Card className="mb-6">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Github className="h-4 w-4" />
+              GitHub access health check
+            </CardTitle>
+            <CardDescription>
+              Verify that GITHUB_TOKEN can create branches on DLinRT-eu/dlinrteu-website before approving edits.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <Button onClick={testGithubAccess} disabled={testingAccess} size="sm">
+              {testingAccess ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Github className="h-4 w-4 mr-2" />}
+              Test GitHub access
+            </Button>
+
+            {accessResult && (
+              <div className={cn(
+                "rounded-md border p-3 text-sm space-y-2",
+                accessResult.ok
+                  ? "border-green-300 bg-green-50 text-green-900 dark:bg-green-950/20 dark:text-green-100"
+                  : "border-red-300 bg-red-50 text-red-900 dark:bg-red-950/20 dark:text-red-100"
+              )}>
+                {accessResult.ok ? (
+                  <p><strong>All checks passed.</strong> Token has write access on {accessResult.repo}.</p>
+                ) : (
+                  <>
+                    <p><strong>Access check failed.</strong> {accessResult.error || 'See details below.'}</p>
+                    {accessResult.checks && (
+                      <ul className="list-disc pl-5 text-xs space-y-1">
+                        <li>Repo read: {accessResult.checks.repoRead?.ok ? 'OK' : 'failed'}</li>
+                        <li>Branch read (main): {accessResult.checks.branchRead?.ok ? 'OK' : 'failed'}</li>
+                        <li>
+                          Branch write probe: {accessResult.checks.branchWrite?.ok ? 'OK' : `failed (HTTP ${accessResult.checks.branchWrite?.status ?? '—'})`}
+                        </li>
+                        {accessResult.checks.permissions && (
+                          <li>
+                            Token-scoped permissions: push={String(accessResult.checks.permissions.push ?? false)}, admin={String(accessResult.checks.permissions.admin ?? false)}, pull={String(accessResult.checks.permissions.pull ?? false)}
+                          </li>
+                        )}
+                      </ul>
+                    )}
+                    {accessResult.checks?.branchWrite?.detail && (
+                      <pre className="text-xs bg-background/60 rounded p-2 overflow-x-auto">{accessResult.checks.branchWrite.detail}</pre>
+                    )}
+                    <div className="text-xs space-y-1 pt-2 border-t border-current/20">
+                      <p className="font-semibold">How to fix</p>
+                      <ol className="list-decimal pl-5 space-y-1">
+                        <li>Open GitHub → Settings → Developer settings → <em>Fine-grained personal access tokens</em>.</li>
+                        <li>Create or edit a token scoped only to <code>DLinRT-eu/dlinrteu-website</code>.</li>
+                        <li>
+                          Under <em>Repository permissions</em>, set:
+                          <ul className="list-disc pl-5">
+                            <li><strong>Contents</strong>: Read and write</li>
+                            <li><strong>Pull requests</strong>: Read and write</li>
+                            <li><strong>Metadata</strong>: Read-only (default)</li>
+                          </ul>
+                        </li>
+                        <li>If the repo belongs to the DLinRT-eu organization, an org admin must approve the fine-grained token request.</li>
+                        <li>Copy the new token and update the <code>GITHUB_TOKEN</code> secret in Supabase → Edge Functions → Secrets.</li>
+                        <li>Run this test again. A classic PAT with the <code>repo</code> scope also works but grants broader access.</li>
+                      </ol>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
 
         <Tabs defaultValue="pending" className="space-y-4">
           <TabsList>
