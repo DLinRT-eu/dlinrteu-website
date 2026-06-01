@@ -163,9 +163,12 @@ Deno.serve(async (req) => {
 
     if (!mainBranchRes.ok) {
       const error = await mainBranchRes.text();
-      console.error('Failed to get main branch:', error);
+      console.error('Failed to get main branch:', mainBranchRes.status, error);
       return new Response(
-        JSON.stringify({ success: false, error: 'Failed to access GitHub repository' }),
+        JSON.stringify({
+          success: false,
+          error: `GitHub ${mainBranchRes.status}: failed to read main branch. Check GITHUB_TOKEN scopes (needs contents:read on ${owner}/${repo}). Detail: ${error.slice(0, 300)}`,
+        }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -192,9 +195,12 @@ Deno.serve(async (req) => {
 
     if (!createBranchRes.ok) {
       const error = await createBranchRes.text();
-      console.error('Failed to create branch:', error);
+      console.error('Failed to create branch:', createBranchRes.status, error);
       return new Response(
-        JSON.stringify({ success: false, error: 'Failed to create GitHub branch' }),
+        JSON.stringify({
+          success: false,
+          error: `GitHub ${createBranchRes.status}: failed to create branch. The token likely lacks contents:write on ${owner}/${repo}. Detail: ${error.slice(0, 300)}`,
+        }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
