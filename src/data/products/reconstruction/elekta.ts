@@ -67,20 +67,42 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Vendor White Paper",
+        description: "Elekta — Go further with Versa HD: upgrade to Iris high-definition, AI-enhanced CBCT imaging (product brochure).",
+        link: "https://www.elekta.com/products/radiation-therapy/versa-hd/go-further/Go%20further%20with%20Versa%20HD.PDF"
+      },
+      {
         type: "Product Information",
-        description: "Official Elekta Evo product page",
-        link: "https://www.elekta.com/products/radiation-therapy/elekta-evo/"
+        description: "Elekta — Novel AI-enhanced imaging will expand access to adaptive radiation therapy (Focus article).",
+        link: "https://www.elekta.com/focus/novel-ai-enhanced-imaging-will-expand-access-to-adaptive-radiation-therapy/"
       },
       {
         type: "Press Release",
-        description: "Elekta receives FDA 510(k) clearance for Elekta Evo linear accelerator",
+        description: "Elekta launches AI-powered, adaptive CT-Linac (Elekta Evo with Iris AI-enhanced CBCT) — ITN, May 2024.",
+        link: "https://www.itnonline.com/content/elekta-launches-ai-powered-adaptive-ct-linac-next-level-cancer-care"
+      },
+      {
+        type: "Press Release",
+        description: "Elekta receives FDA 510(k) clearance for Elekta Evo linear accelerator.",
         link: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/"
+      },
+      {
+        type: "Product Information",
+        description: "Official Elekta Evo product page.",
+        link: "https://www.elekta.com/products/radiation-therapy/elekta-evo/"
       }
+    ],
+    limitations: [
+      "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
+      "Recently launched product (Elekta Evo, May 2024); FDA cleared January 2026",
+      "Validation evidence is currently limited to vendor brochures and press releases",
+      "Performance tied to Elekta Evo / Versa HD platform; results may vary across linac generations and protocols",
+      "Vendor does not publicly publish a numeric version; provisional 1.0 used"
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications. Press release only.",
-    clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance.",
+    evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01).",
+    clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance and adaptive workflows (vendor materials).",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -88,10 +110,10 @@ export const ELEKTA_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    clinicalEvidence: "Clinical studies showing improved target delineation accuracy and reduced inter-observer variability with Iris-enhanced CBCT images. Enhanced image quality with reduced scatter artifacts and improved soft tissue contrast for daily image guidance.",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website; Elekta press release; FDA 510(k) clearance announcement",
+    clinicalEvidence: "Vendor materials describe improved target delineation and image quality with Iris-enhanced CBCT; no independent peer-reviewed validation available yet.",
+    lastUpdated: "2026-06-01",
+    lastRevised: "2026-06-01",
+    source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026). Version not publicly published; provisional 1.0.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts"
   }
 ];
