@@ -84,6 +84,19 @@ class ExportService {
       case "hta":
         await exportHTADossier(products, filename);
         break;
+      case "bundle":
+        await downloadProductsBundle(products, {
+          filename,
+          companies: options.companies,
+        });
+        break;
+      case "aidrt":
+        if (products.length === 1) {
+          exportProductToAidrtJSON(products[0]);
+        } else {
+          exportBulkProductsToAidrt(products, filename);
+        }
+        break;
       default:
         throw new Error(`Unsupported export format: ${format}`);
     }
