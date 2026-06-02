@@ -207,6 +207,14 @@ const ProductGridControls = ({
               <Scale className="w-4 h-4 mr-2" />
               HTA dossier (Excel)
             </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('aidrt', true)}>
+              <FileCode className="w-4 h-4 mr-2" />
+              AID-RT model cards
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('bundle', true)}>
+              <Package className="w-4 h-4 mr-2" />
+              Full bundle (ZIP)
+            </DropdownMenuItem>
 
           </DropdownMenuContent>
         </DropdownMenu>
