@@ -147,14 +147,22 @@ export default function InviteCompanyRepDialog({
             />
           </div>
           <div>
-            <Label htmlFor="invite-message">Personal message (optional)</Label>
+            <Label htmlFor="invite-message">Email message</Label>
             <Textarea
               id="invite-message"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={3}
-              maxLength={500}
+              onChange={(e) => {
+                messageEditedRef.current = true;
+                setMessage(e.target.value);
+              }}
+              rows={10}
+              maxLength={3000}
+              className="font-mono text-sm"
             />
+            <p className="text-xs text-muted-foreground mt-1">
+              Editable template. Line breaks are preserved. The signature block, accept-invitation
+              button and expiry notice are appended automatically.
+            </p>
           </div>
         </div>
         <DialogFooter>
