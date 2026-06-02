@@ -1,37 +1,8 @@
 
 import { ProductDetails } from "@/types/productDetails";
 import { computeReadinessSignal } from "@/data/evidence-impact-levels";
+import { escapeCsvValue as escapeValueForCsv } from "@/utils/csv";
 
-/**
- * Escapes a value for CSV format according to RFC 4180:
- * - Wraps values with commas in quotes
- * - Escapes quotes by doubling them
- * - Handles arrays by joining with semicolons instead of commas
- */
-const escapeValueForCsv = (value: any): string => {
-  if (value === undefined || value === null) {
-    return "";
-  }
-
-  // Convert to string if not already
-  let stringValue = String(value);
-  
-  // For arrays, join with semicolons to avoid CSV column confusion
-  if (Array.isArray(value)) {
-    stringValue = value.map(item => String(item).trim()).join("; ");
-  }
-
-  // Check if the value needs to be quoted (contains commas, quotes, or newlines)
-  const needsQuoting = /[",\n\r]/.test(stringValue);
-  
-  // If it contains quotes, escape them by doubling them
-  if (stringValue.includes('"')) {
-    stringValue = stringValue.replace(/"/g, '""');
-  }
-  
-  // Return the properly formatted value
-  return needsQuoting ? `"${stringValue}"` : stringValue;
-};
 
 export const exportProductsToCSV = (products: ProductDetails[]) => {
   // Define comprehensive headers for all product data
