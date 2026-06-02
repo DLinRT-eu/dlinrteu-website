@@ -1142,6 +1142,19 @@ export default function CompanyManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {inviteCompany && (
+        <InviteCompanyRepDialog
+          open={inviteDialogOpen}
+          onOpenChange={(o) => {
+            setInviteDialogOpen(o);
+            if (!o) setInviteCompany(null);
+          }}
+          companyId={inviteCompany.id}
+          companyName={inviteCompany.name}
+          onSent={fetchRepresentatives}
+        />
+      )}
     </PageLayout>
   );
 }
