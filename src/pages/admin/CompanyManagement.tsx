@@ -17,8 +17,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield, ClipboardList } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield, ClipboardList, Mail } from 'lucide-react';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
+import InviteCompanyRepDialog from '@/components/admin/InviteCompanyRepDialog';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -61,6 +62,8 @@ export default function CompanyManagement() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedReps, setSelectedReps] = useState<Set<string>>(new Set());
   const [processingBulk, setProcessingBulk] = useState(false);
+  const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
+  const [inviteCompany, setInviteCompany] = useState<{ id: string; name: string } | null>(null);
 
   useEffect(() => {
     fetchRepresentatives();
