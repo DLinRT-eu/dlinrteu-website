@@ -58,7 +58,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Deep Learning Products Database for Radiotherapy"
-        description="Discover commercial deep learning solutions for radiotherapy. Browse AI/DL products for auto-contouring, treatment planning, and imaging with regulatory data and clinical evidence."
+        description="Catalogue of AI and deep learning products for radiotherapy: auto-contouring, treatment planning, imaging, with regulatory data and evidence."
         canonical="https://dlinrt.eu/"
         structuredData={structuredData}
       />
