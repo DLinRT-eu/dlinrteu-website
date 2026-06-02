@@ -28,6 +28,8 @@ const buildDefaultMessage = (firstName: string) =>
 
 Thank you very much for contributing to the accuracy of this initiative. We hope the radiotherapy community will benefit greatly from our platform, bringing users, clinical teams, and vendors one step closer together in our shared mission to improve patient care.
 
+Information about the company review process can be found at: https://dlinrt.eu/company/guide
+
 Best regards,`;
 
 export default function InviteCompanyRepDialog({
