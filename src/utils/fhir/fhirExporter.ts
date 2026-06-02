@@ -92,8 +92,10 @@ export function downloadFHIRBundleWithReport(
   const link = document.createElement('a');
   
   const timestamp = new Date().toISOString().split('T')[0];
+  const baseName = options?.filename ?? `dlinrt-fhir-export-${timestamp}`;
   link.href = url;
-  link.download = `dlinrt-fhir-export-${timestamp}.json`;
+  link.download = baseName.endsWith('.json') ? baseName : `${baseName}.json`;
+
   document.body.appendChild(link);
   link.click();
   
