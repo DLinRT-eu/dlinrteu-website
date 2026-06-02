@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +23,13 @@ interface InviteCompanyRepDialogProps {
   onSent?: () => void;
 }
 
+const buildDefaultMessage = (firstName: string) =>
+  `Dear ${firstName?.trim() ? firstName.trim() : '[First Name]'},
+
+Thank you very much for contributing to the accuracy of this initiative. We hope the radiotherapy community will benefit greatly from our platform, bringing users, clinical teams, and vendors one step closer together in our shared mission to improve patient care.
+
+Best regards,`;
+
 export default function InviteCompanyRepDialog({
   open,
   onOpenChange,
@@ -34,15 +41,24 @@ export default function InviteCompanyRepDialog({
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(() => buildDefaultMessage(''));
   const [sending, setSending] = useState(false);
+  const messageEditedRef = useRef(false);
+
+  // Keep the default template in sync with the first name until the admin edits it manually.
+  useEffect(() => {
+    if (!messageEditedRef.current) {
+      setMessage(buildDefaultMessage(firstName));
+    }
+  }, [firstName]);
 
   const reset = () => {
     setEmail('');
     setFirstName('');
     setLastName('');
     setPosition('');
-    setMessage('');
+    messageEditedRef.current = false;
+    setMessage(buildDefaultMessage(''));
   };
 
   const handleSubmit = async () => {
@@ -131,14 +147,22 @@ export default function InviteCompanyRepDialog({
             />
           </div>
           <div>
-            <Label htmlFor="invite-message">Personal message (optional)</Label>
+            <Label htmlFor="invite-message">Email message</Label>
             <Textarea
               id="invite-message"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={3}
-              maxLength={500}
+              onChange={(e) => {
+                messageEditedRef.current = true;
+                setMessage(e.target.value);
+              }}
+              rows={10}
+              maxLength={3000}
+              className="font-mono text-sm"
             />
+            <p className="text-xs text-muted-foreground mt-1">
+              Editable template. Line breaks are preserved. The signature block, accept-invitation
+              button and expiry notice are appended automatically.
+            </p>
           </div>
         </div>
         <DialogFooter>
