@@ -6,7 +6,7 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
-import { Download, FileText, FileSpreadsheet, FileJson } from 'lucide-react';
+import { Download, FileText, FileSpreadsheet, FileJson, FileCode } from 'lucide-react';
 import ExportService, { ExportFormat, ExportType } from '@/services/ExportService';
 import { useToast } from '@/hooks/use-toast';
 
