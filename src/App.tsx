@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ComponentType } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +9,7 @@ import { RoleProvider } from "@/contexts/RoleContext";
 import { ProductEditProvider } from "@/components/product-editor";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ApprovalGate } from "@/components/auth/ApprovalGate";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 import Header from "./components/Header";
 import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
 
@@ -18,85 +19,105 @@ const ConditionalHeader = () => {
   return <Header />;
 };
 
+const isDynamicImportError = (error: unknown) =>
+  error instanceof TypeError &&
+  error.message.includes("Failed to fetch dynamically imported module");
+
+const lazyPage = <T extends ComponentType<any>>(loader: () => Promise<{ default: T }>) =>
+  lazy(async () => {
+    try {
+      return await loader();
+    } catch (error) {
+      if (isDynamicImportError(error) && !sessionStorage.getItem("lazy-route-reloaded")) {
+        sessionStorage.setItem("lazy-route-reloaded", "true");
+        window.location.reload();
+        return new Promise<{ default: T }>(() => undefined);
+      }
+
+      sessionStorage.removeItem("lazy-route-reloaded");
+      throw error;
+    }
+  });
+
 // Lazy-loaded page components for code splitting
-const Index = lazy(() => import("./pages/Index"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const About = lazy(() => import("./pages/About"));
-const Security = lazy(() => import("./pages/Security"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword"));
-const UpdatePassword = lazy(() => import("./pages/UpdatePassword"));
-const Presentation = lazy(() => import("./pages/Presentation"));
-const LiveDemoMode = lazy(() => import("./components/presentation/LiveDemoMode").then(m => ({ default: m.LiveDemoMode })));
-const SecurityMonitoring = lazy(() => import("./pages/SecurityMonitoring"));
-const ProductDetails = lazy(() => import("./pages/ProductDetails"));
-const Companies = lazy(() => import("./pages/Companies"));
-const News = lazy(() => import("./pages/News"));
-const Support = lazy(() => import("./pages/Support"));
-const Transparency = lazy(() => import("./pages/Transparency"));
-const NewsDetail = lazy(() => import("./pages/NewsDetail"));
-const Products = lazy(() => import("./pages/Products"));
-const Pipeline = lazy(() => import("./pages/Pipeline"));
-const CompanyProducts = lazy(() => import("./pages/CompanyProducts"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Dashboard_Authenticated = lazy(() => import("./pages/Dashboard_Authenticated"));
-const Timeline = lazy(() => import("./pages/Timeline"));
-const Initiatives = lazy(() => import("./pages/Initiatives"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
-const ReviewDashboard = lazy(() => import("./pages/ReviewDashboard"));
-const ProductReview = lazy(() => import("./pages/ProductReview"));
-const ResourcesCompliance = lazy(() => import("./pages/ResourcesCompliance"));
-const Profile = lazy(() => import("./pages/Profile"));
-const MyProducts = lazy(() => import("./pages/MyProducts"));
-const RoleSelection = lazy(() => import("./pages/RoleSelection"));
-const ProductExperiences = lazy(() => import("./pages/ProductExperiences"));
-const Auth = lazy(() => import("./pages/Auth"));
-const Changelog = lazy(() => import("./pages/Changelog"));
-const Roles = lazy(() => import("./pages/Roles"));
-const RolesFAQ = lazy(() => import("./pages/RolesFAQ"));
-const NotificationHistory = lazy(() => import("./pages/NotificationHistory"));
-const NotificationSettings = lazy(() => import("./pages/NotificationSettings"));
-const EvidenceImpactGuide = lazy(() => import("./pages/EvidenceImpactGuide"));
-const ChangelogGenerator = lazy(() => import("./pages/admin/ChangelogGenerator"));
-const CompanyManagement = lazy(() => import("./pages/admin/CompanyManagement"));
-const CompanyMappingValidator = lazy(() => import("./pages/admin/CompanyMappingValidator"));
-const UserProductAdoptions = lazy(() => import("./pages/admin/UserProductAdoptions"));
-const CertificationManagement = lazy(() => import("./pages/admin/CertificationManagement"));
-const NewsletterManagement = lazy(() => import("./pages/admin/NewsletterManagement"));
-const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
-const CompareStructures = lazy(() => import("./pages/CompareStructures"));
+const Index = lazyPage(() => import("./pages/Index"));
+const NotFound = lazyPage(() => import("./pages/NotFound"));
+const About = lazyPage(() => import("./pages/About"));
+const Security = lazyPage(() => import("./pages/Security"));
+const ResetPassword = lazyPage(() => import("./pages/ResetPassword"));
+const UpdatePassword = lazyPage(() => import("./pages/UpdatePassword"));
+const Presentation = lazyPage(() => import("./pages/Presentation"));
+const LiveDemoMode = lazyPage(() => import("./components/presentation/LiveDemoMode").then(m => ({ default: m.LiveDemoMode })));
+const SecurityMonitoring = lazyPage(() => import("./pages/SecurityMonitoring"));
+const ProductDetails = lazyPage(() => import("./pages/ProductDetails"));
+const Companies = lazyPage(() => import("./pages/Companies"));
+const News = lazyPage(() => import("./pages/News"));
+const Support = lazyPage(() => import("./pages/Support"));
+const Transparency = lazyPage(() => import("./pages/Transparency"));
+const NewsDetail = lazyPage(() => import("./pages/NewsDetail"));
+const Products = lazyPage(() => import("./pages/Products"));
+const Pipeline = lazyPage(() => import("./pages/Pipeline"));
+const CompanyProducts = lazyPage(() => import("./pages/CompanyProducts"));
+const Dashboard = lazyPage(() => import("./pages/Dashboard"));
+const Dashboard_Authenticated = lazyPage(() => import("./pages/Dashboard_Authenticated"));
+const Timeline = lazyPage(() => import("./pages/Timeline"));
+const Initiatives = lazyPage(() => import("./pages/Initiatives"));
+const PrivacyPolicy = lazyPage(() => import("./pages/PrivacyPolicy"));
+const TermsOfUse = lazyPage(() => import("./pages/TermsOfUse"));
+const ReviewDashboard = lazyPage(() => import("./pages/ReviewDashboard"));
+const ProductReview = lazyPage(() => import("./pages/ProductReview"));
+const ResourcesCompliance = lazyPage(() => import("./pages/ResourcesCompliance"));
+const Profile = lazyPage(() => import("./pages/Profile"));
+const MyProducts = lazyPage(() => import("./pages/MyProducts"));
+const RoleSelection = lazyPage(() => import("./pages/RoleSelection"));
+const ProductExperiences = lazyPage(() => import("./pages/ProductExperiences"));
+const Auth = lazyPage(() => import("./pages/Auth"));
+const Changelog = lazyPage(() => import("./pages/Changelog"));
+const Roles = lazyPage(() => import("./pages/Roles"));
+const RolesFAQ = lazyPage(() => import("./pages/RolesFAQ"));
+const NotificationHistory = lazyPage(() => import("./pages/NotificationHistory"));
+const NotificationSettings = lazyPage(() => import("./pages/NotificationSettings"));
+const EvidenceImpactGuide = lazyPage(() => import("./pages/EvidenceImpactGuide"));
+const ChangelogGenerator = lazyPage(() => import("./pages/admin/ChangelogGenerator"));
+const CompanyManagement = lazyPage(() => import("./pages/admin/CompanyManagement"));
+const CompanyMappingValidator = lazyPage(() => import("./pages/admin/CompanyMappingValidator"));
+const UserProductAdoptions = lazyPage(() => import("./pages/admin/UserProductAdoptions"));
+const CertificationManagement = lazyPage(() => import("./pages/admin/CertificationManagement"));
+const NewsletterManagement = lazyPage(() => import("./pages/admin/NewsletterManagement"));
+const Unsubscribe = lazyPage(() => import("./pages/Unsubscribe"));
+const CompareStructures = lazyPage(() => import("./pages/CompareStructures"));
 
 // Admin Pages
-const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
-const FinancialsAdmin = lazy(() => import("./pages/admin/FinancialsAdmin"));
-const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
-const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
-const ReviewAssignment = lazy(() => import("./pages/admin/ReviewAssignment"));
-const PRManagement = lazy(() => import("./pages/admin/PRManagement"));
-const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard"));
-const UserRegistrationReview = lazy(() => import("./pages/admin/UserRegistrationReview"));
-const ChangelogAdmin = lazy(() => import("./pages/admin/ChangelogAdmin"));
-const EditApprovals = lazy(() => import("./pages/admin/EditApprovals"));
+const AdminOverview = lazyPage(() => import("./pages/admin/AdminOverview"));
+const FinancialsAdmin = lazyPage(() => import("./pages/admin/FinancialsAdmin"));
+const AdminDashboard = lazyPage(() => import("./pages/admin/Dashboard"));
+const UserManagement = lazyPage(() => import("./pages/admin/UserManagement"));
+const ReviewAssignment = lazyPage(() => import("./pages/admin/ReviewAssignment"));
+const PRManagement = lazyPage(() => import("./pages/admin/PRManagement"));
+const SecurityDashboard = lazyPage(() => import("./pages/admin/SecurityDashboard"));
+const UserRegistrationReview = lazyPage(() => import("./pages/admin/UserRegistrationReview"));
+const ChangelogAdmin = lazyPage(() => import("./pages/admin/ChangelogAdmin"));
+const EditApprovals = lazyPage(() => import("./pages/admin/EditApprovals"));
 
 // Company Pages
-const CompanyDashboard = lazy(() => import("./pages/company/Dashboard"));
-const CompanyDashboardOverview = lazy(() => import("./pages/company/CompanyDashboardOverview"));
-const CompanyProductsManager = lazy(() => import("./pages/company/ProductsManager"));
-const CompanyGuide = lazy(() => import("./pages/company/CompanyGuide"));
-const CompanyCertification = lazy(() => import("./pages/company/CompanyCertification"));
+const CompanyDashboard = lazyPage(() => import("./pages/company/Dashboard"));
+const CompanyDashboardOverview = lazyPage(() => import("./pages/company/CompanyDashboardOverview"));
+const CompanyProductsManager = lazyPage(() => import("./pages/company/ProductsManager"));
+const CompanyGuide = lazyPage(() => import("./pages/company/CompanyGuide"));
+const CompanyCertification = lazyPage(() => import("./pages/company/CompanyCertification"));
 
 // Reviewer Pages
-const ReviewerDashboard = lazy(() => import("./pages/reviewer/Dashboard"));
-const ReviewerGuide = lazy(() => import("./pages/reviewer/ReviewerGuide"));
-const ReviewerPreferences = lazy(() => import("./pages/reviewer/Preferences"));
-const DueReviews = lazy(() => import("./pages/reviewer/DueReviews"));
+const ReviewerDashboard = lazyPage(() => import("./pages/reviewer/Dashboard"));
+const ReviewerGuide = lazyPage(() => import("./pages/reviewer/ReviewerGuide"));
+const ReviewerPreferences = lazyPage(() => import("./pages/reviewer/Preferences"));
+const DueReviews = lazyPage(() => import("./pages/reviewer/DueReviews"));
 
 // Admin Guide
-const AdminGuide = lazy(() => import("./pages/admin/AdminGuide"));
+const AdminGuide = lazyPage(() => import("./pages/admin/AdminGuide"));
 
 // Admin Review Pages
-const ReviewRounds = lazy(() => import("./pages/admin/ReviewRounds"));
-const ReviewRoundDetails = lazy(() => import("./pages/admin/ReviewRoundDetails"));
+const ReviewRounds = lazyPage(() => import("./pages/admin/ReviewRounds"));
+const ReviewRoundDetails = lazyPage(() => import("./pages/admin/ReviewRoundDetails"));
 
 // Create a client
 const queryClient = new QueryClient({
