@@ -41,6 +41,8 @@ const ProductGridControls = ({
   const [isExporting, setIsExporting] = useState(false);
   const { toast } = useToast();
 
+  const HEAVY_THRESHOLD = 50;
+
   const handleExport = async (format: ExportFormat, exportAll: boolean) => {
     const dataToExport = exportAll 
       ? dataService.getAllProducts() 
@@ -55,12 +57,24 @@ const ProductGridControls = ({
       return;
     }
 
+    // Warn before generating heavy exports (PDF / HTA workbook) on large sets
+    if (
+      (format === "pdf" || format === "hta") &&
+      dataToExport.length > HEAVY_THRESHOLD
+    ) {
+      const proceed = window.confirm(
+        `You are about to export ${dataToExport.length} products as ${format.toUpperCase()}. ` +
+          `This can take 30+ seconds and produce a large file. Continue?`
+      );
+      if (!proceed) return;
+    }
+
     setIsExporting(true);
     
     try {
       await ExportService.exportProducts(dataToExport as ProductDetails[], format, {
         filename: exportAll ? 'dlinrt-all-products' : 'dlinrt-filtered-products',
-        companies: format === 'fhir' ? COMPANIES : undefined,
+        companies: format === 'fhir' || format === 'bundle' ? COMPANIES : undefined,
       });
 
       
