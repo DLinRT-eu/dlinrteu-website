@@ -134,6 +134,12 @@ class ExportService {
       case "json":
         this.downloadJSON(exportData, filename);
         break;
+      case "excel":
+        await exportInitiativesToExcel(initiatives, filename);
+        break;
+      case "jsonld":
+        exportInitiativesToJsonLd(initiatives, filename);
+        break;
       default:
         throw new Error(`Format ${format} not supported for initiatives export`);
     }
