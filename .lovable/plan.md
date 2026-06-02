@@ -1,67 +1,69 @@
-## Goal
+# Admin-Initiated Company Representative Invitations
 
-Correct the Philips SmartSpeed entry and split it into two distinct products that match Philips' actual product portfolio.
+Mirror the existing reviewer-invitation pattern so an admin can invite someone directly from the company management page. The invitee gets an email, sets a password, and lands already linked to the right company with the `company` role assigned — no manual approval step afterward.
 
-## Findings
+## User flow
 
-- Philips' product page is titled **"MR SmartSpeed"** (the original Compressed SENSE AI accelerator), FDA-cleared in 2022 (K213583 / press release Jul 2022).
-- **"SmartSpeed Precise"** is a **separate, newer product** ("Dual AI" — combines SmartSpeed AI denoiser with Precise Image-style anti-ringing for MR), FDA-cleared **June 2025 via K251397** and announced Jul 2, 2025.
-- The current entry `philips-smartspeed` in `src/data/products/reconstruction/philips.ts` mixes the two: it uses the SmartSpeed name + 2021 release date, but cites K251397 (which actually covers SmartSpeed Precise) and quotes the SmartSpeed Precise IFU.
+1. Admin opens `/admin/companies`, picks a company, clicks **Invite Representative**.
+2. Dialog collects: email (required), first name, last name, position, optional personal message.
+3. Backend creates a pending invitation row with a signed token and emails the invitee.
+4. Invitee clicks the link → `/accept-company-invite?token=...` → sets password → account is created.
+5. On signup completion, the backend:
+   - Creates the `auth.users` + `profiles` row (auto-approved, since admin vouched).
+   - Inserts `user_roles` row with role `company`.
+   - Inserts verified `company_representatives` row linked to the target company.
+   - Marks invitation `accepted`.
+6. User is logged in and lands on `/company/dashboard`.
 
-## Changes (single file: `src/data/products/reconstruction/philips.ts`)
+## Database changes
 
-### 1. Rename existing entry → MR SmartSpeed (original)
+New table `company_invitations` (migration), modeled on `reviewer_invitations`:
 
-- `id`: keep `philips-smartspeed` (preserve URLs/links)
-- `name`: `"MR SmartSpeed"`
-- `description`: scope to original Compressed SENSE AI (no "Dual AI" / no Precise Image denoiser)
-- `regulatory.fda`: replace K251397 with **K213583** (decisionDate 2022-05-16) — original SmartSpeed AI clearance
-- `intendedUseStatement`: replace SmartSpeed Precise IFU with the SmartSpeed AI text (sourced from K213583 / Philips 2022 press release)
-- `releaseDate`: keep 2022 (commercial launch year)
-- `version`: drop "3.2" (was Precise-era); use original SmartSpeed version or remove
-- `evidence`: keep publications that genuinely refer to original SmartSpeed AI (Bonn cardiac case study, Fransen et al. systematic review, knee MRI prospective studies PMID:40428199, PMID:40240275 — verify each refers to SmartSpeed AI not Precise)
-- `lastRevised`: 2026-06-02
-- `source`: update accordingly
+- `id`, `email`, `token` (unique), `company_id`, `company_name`
+- `first_name`, `last_name`, `position`, `message`
+- `invited_by` (uuid → admin), `status` (`pending|accepted|expired|revoked`)
+- `expires_at` (default `now() + 14 days`), `accepted_at`, `created_at`
+- GRANTs + RLS: admins full access; anon `SELECT` only via security-definer RPC `get_company_invitation_by_token(token)` so the accept page can fetch without exposing the table.
 
-### 2. Add new entry → SmartSpeed Precise
+## Edge functions
 
-New product object appended to `PHILIPS_PRODUCTS`:
+1. **`invite-company-representative`** (admin-only)
+   - Validates admin via JWT + `user_roles`.
+   - Rejects if email is already a verified rep for that company.
+   - Upserts pending invitation, sends Resend email using existing CORS allowlist + `resend@4.0.0`.
+   - Email links to `${SITE_URL}/accept-company-invite?token=...`.
 
-- `id`: `"philips-smartspeed-precise"`
-- `name`: `"SmartSpeed Precise"`
-- `company`: `"Philips"`
-- `category`: `"Reconstruction"`
-- `productUrl`: `https://www.usa.philips.com/healthcare/technology/smartspeed-precise`
-- `description`: Dual AI MR reconstruction combining SmartSpeed AI denoiser + Precise Image anti-ringing/sharpening for 2D Cartesian acquisitions
-- `modality`: `"MRI"`
-- `anatomicalLocation`: `["Whole body"]`
-- `regulatory.fda`: K251397, decisionDate 2025-06-04, productCode LNH
-- `regulatory.ce`: cleared, IIa, MDR
-- `intendedUseStatement`: the full SmartSpeed Precise IFU currently mis-attached to the existing entry
-- `keyFeatures`: dual-AI, increased SNR, anti-ringing, higher acceleration factors, replaces SmartSpeed AI + Precise Image for 2D Cartesian
-- `releaseDate`: `"2025-07-02"` (FDA announcement)
-- `evidence`:
-  - FDA 510(k) K251397 summary
-  - Philips press release Feb 26, 2025 + Jul 2, 2025
-  - Pediatric brain MRI deep-learning study (Eur Radiol 2026, doi 10.1007/s00330-026-12482-y) — verify it specifically tests Precise; otherwise mark as related/contextual
-  - AJNR 2025 review on DL MRI acceleration as contextual
-- `evidenceRigor`: **E1** (regulatory + early publication; insufficient independent multi-center yet) — `evidenceRigorNotes` to flag publication search date 2026-06-02
-- `clinicalImpact`: **I1** (newly cleared; limited published outcomes)
-- `adoptionReadiness`: **R2** with note that local validation strongly recommended given recency
-- Standard study-quality flags all `false` until publications confirm
-- `lastUpdated` / `lastRevised`: `2026-06-02`
-- `githubUrl`: same path as MR SmartSpeed entry
+2. **`accept-company-invitation`** (public, token-gated)
+   - Input: `token`, `password`, optional name overrides.
+   - Looks up invitation via service role; ensures pending + not expired.
+   - Creates user via `auth.admin.createUser({ email_confirm: true })`.
+   - Inserts `profiles` (approval_status = `approved`, approved_by = admin who invited).
+   - Inserts `user_roles` (`company`) + verified `company_representatives` row.
+   - Marks invitation `accepted`, returns a session (sign-in via password) for auto-login.
 
-### 3. No changes needed elsewhere
+## Frontend changes
 
-- `reconstruction/index.ts` automatically picks up new entry via `...PHILIPS_PRODUCTS`.
-- `philips-smartspeed` id is preserved → no broken links, no company-product mapping update required.
-- `scripts/company-product-mapping.ps1` already lists `philips-smartspeed`; **add** `philips-smartspeed-precise` to the Philips array (one-line edit) for completeness.
+- `src/pages/admin/CompanyManagement.tsx`: add per-company **Invite Representative** action opening a new `InviteCompanyRepDialog` component.
+- New `src/components/admin/InviteCompanyRepDialog.tsx`: form + `supabase.functions.invoke('invite-company-representative')`.
+- New `src/pages/AcceptCompanyInvite.tsx`: token validation, password form, calls `accept-company-invitation`, then `supabase.auth.signInWithPassword`, then routes to `/company/dashboard`.
+- Add route in `src/App.tsx` (public, no `ProtectedRoute`).
+- Optional admin list panel showing pending invitations per company with resend / revoke.
 
-## Verification
+## Notifications & emails
 
-After build: confirm both products render on /products, that the FHIR/CSV exports include both, and that the existing slug `/products/philips-smartspeed` still resolves.
+- Reuse Resend pattern from `invite-reviewer`.
+- Subject: "You've been invited to manage {company} on DLinRT.eu".
+- Body: who invited, company name, optional message, CTA button, 14-day expiry note.
+- Respect `profiles.notification_preferences` is N/A (recipient has no profile yet).
 
-## Within the scope
+## Security
 
-- Re-verifying every cited publication abstract; flagged as a follow-up if any of the four PubMed IDs turn out to describe SmartSpeed Precise rather than the original SmartSpeed AI — in that case I'll move them to the Precise entry.
+- Token is a `crypto.randomUUID()` stored server-side; never reused after acceptance.
+- Accept endpoint enforces: pending status, not expired, password ≥ 8 chars.
+- Admin endpoint enforces admin role via service-role JWT check.
+- RLS denies anon direct table access; only the RPC by-token exposes minimal fields (company name, inviter name, expiry) for the accept page UI.
+
+## Out of scope
+
+- Bulk CSV invites (can follow later).
+- Multi-company representatives (current model supports one company per rep row; admin can still send multiple invites).
