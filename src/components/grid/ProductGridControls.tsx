@@ -125,7 +125,7 @@ const ProductGridControls = ({
               {isExporting ? 'Exporting...' : 'Export'}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-64">
             {hasActiveFilters && (
               <>
                 <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
@@ -133,42 +133,59 @@ const ProductGridControls = ({
                 </div>
                 <DropdownMenuItem onClick={() => handleExport('csv', false)}>
                   <FileText className="w-4 h-4 mr-2" />
-                  Export as CSV
+                  CSV
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('excel', false)}>
                   <FileSpreadsheet className="w-4 h-4 mr-2" />
-                  Export as Excel
+                  Excel
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('json', false)}>
                   <FileJson className="w-4 h-4 mr-2" />
-                  Export as JSON
+                  JSON
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('pdf', false)}>
+                  <FileType className="w-4 h-4 mr-2" />
+                  PDF report
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('fhir', false)}>
+                  <Network className="w-4 h-4 mr-2" />
+                  FHIR R4 bundle
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('hta', false)}>
                   <Scale className="w-4 h-4 mr-2" />
-                  Export as HTA dossier (.xlsx)
+                  HTA dossier (Excel)
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
               </>
             )}
             <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
-              All Products ({allProductsCount})
+              All products ({allProductsCount})
             </div>
             <DropdownMenuItem onClick={() => handleExport('csv', true)}>
               <FileText className="w-4 h-4 mr-2" />
-              Export All as CSV
+              CSV
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport('excel', true)}>
               <FileSpreadsheet className="w-4 h-4 mr-2" />
-              Export All as Excel
+              Excel
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport('json', true)}>
               <FileJson className="w-4 h-4 mr-2" />
-              Export All as JSON
+              JSON
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('pdf', true)}>
+              <FileType className="w-4 h-4 mr-2" />
+              PDF report
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('fhir', true)}>
+              <Network className="w-4 h-4 mr-2" />
+              FHIR R4 bundle
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport('hta', true)}>
               <Scale className="w-4 h-4 mr-2" />
-              Export All as HTA dossier (.xlsx)
+              HTA dossier (Excel)
             </DropdownMenuItem>
+
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
