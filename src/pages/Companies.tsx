@@ -26,7 +26,7 @@ import {
 import Footer from '@/components/Footer';
 import ProductFeedbackBanner from '@/components/ProductFeedbackBanner';
 import { useToast } from '@/hooks/use-toast';
-import { exportCompaniesToExcel, exportCompaniesToPDF, exportCompaniesToJSON, CompanyExportData } from '@/utils/companyExport';
+import { exportCompaniesToExcel, exportCompaniesToPDF, exportCompaniesToJSON, exportCompaniesToFHIR, CompanyExportData } from '@/utils/companyExport';
 
 const TASK_CATEGORIES = [
   'Auto-Contouring',
@@ -155,22 +155,31 @@ const Companies = () => {
     });
   };
 
-  const handleExport = async (format: 'excel' | 'pdf' | 'json') => {
+  const handleExport = async (format: 'excel' | 'pdf' | 'json' | 'fhir') => {
     setIsExporting(true);
     try {
-      const exportData = prepareExportData(sortedCompanies);
-      
-      if (format === 'excel') {
-        exportCompaniesToExcel(exportData);
-      } else if (format === 'pdf') {
-        exportCompaniesToPDF(exportData);
-      } else if (format === 'json') {
-        exportCompaniesToJSON(exportData);
+      if (format === 'fhir') {
+        // FHIR export uses raw company + product data, not the flattened view
+        const fhirCompanies = sortedCompanies.map(({ products, productCount, ...c }) => c);
+        const fhirProducts = sortedCompanies.flatMap(c => c.products);
+        exportCompaniesToFHIR(fhirProducts, fhirCompanies, {
+          includeOrganizations: true,
+          filename: 'dlinrt-companies-fhir',
+        });
+      } else {
+        const exportData = prepareExportData(sortedCompanies);
+        if (format === 'excel') {
+          exportCompaniesToExcel(exportData);
+        } else if (format === 'pdf') {
+          exportCompaniesToPDF(exportData);
+        } else if (format === 'json') {
+          exportCompaniesToJSON(exportData);
+        }
       }
 
       toast({
         title: 'Export successful',
-        description: `Downloaded ${sortedCompanies.length} companies with their products as ${format.toUpperCase()}.`,
+        description: `Downloaded ${sortedCompanies.length} companies as ${format.toUpperCase()}.`,
       });
     } catch (error) {
       console.error('Export error:', error);
@@ -183,6 +192,7 @@ const Companies = () => {
       setIsExporting(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -260,6 +270,11 @@ const Companies = () => {
                 <Code className="h-4 w-4 mr-2" />
                 Export to JSON
               </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('fhir')}>
+                <Code className="h-4 w-4 mr-2" />
+                Export to FHIR R4
+              </DropdownMenuItem>
+
             </DropdownMenuContent>
           </DropdownMenu>
           {/* Logos only toggle */}
