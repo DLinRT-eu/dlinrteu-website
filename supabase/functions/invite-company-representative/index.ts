@@ -165,8 +165,15 @@ serve(async (req) => {
     const acceptUrl = `${SITE_URL}/accept-company-invite?token=${encodeURIComponent(invitationToken)}`;
     const safeFirstName = firstName ? escapeHtml(firstName) : '';
     const safeCompany = escapeHtml(companyName);
-    const safeMessage = message ? escapeHtml(message) : '';
     const safeInviter = escapeHtml(user.email ?? 'A DLinRT.eu admin');
+
+    // Render the admin-authored message as the email body, preserving line breaks.
+    // Fall back to the original boilerplate when no custom message was provided.
+    const bodyHtml = message && message.trim().length > 0
+      ? `<div style="white-space:pre-wrap;font-size:15px;color:#1a1a2e;line-height:1.6;">${escapeHtml(message)}</div>`
+      : `<p>Hello${safeFirstName ? ` ${safeFirstName}` : ''},</p>
+         <p>${safeInviter} has invited you to join <strong>DLinRT.eu</strong> as the official company representative for <strong>${safeCompany}</strong>.</p>
+         <p>As a representative you will be able to certify product information, submit revisions, and manage your company's catalogue listings.</p>`;
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
@@ -177,10 +184,7 @@ serve(async (req) => {
   </div>
   <div style="background:#ffffff;padding:28px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
     <h2 style="color:#1a1a2e;margin-top:0;">You're invited to manage ${safeCompany}</h2>
-    <p>Hello${safeFirstName ? ` ${safeFirstName}` : ''},</p>
-    <p>${safeInviter} has invited you to join <strong>DLinRT.eu</strong> as the official company representative for <strong>${safeCompany}</strong>.</p>
-    <p>As a representative you will be able to certify product information, submit revisions, and manage your company's catalogue listings.</p>
-    ${safeMessage ? `<div style="background:#f3f4f6;border-left:4px solid #5090D0;padding:14px;margin:18px 0;"><p style="margin:0;font-style:italic;">${safeMessage}</p></div>` : ''}
+    ${bodyHtml}
     <div style="margin:28px 0;text-align:center;">
       <a href="${acceptUrl}" style="display:inline-block;background:#5090D0;color:#ffffff;padding:14px 28px;text-decoration:none;border-radius:6px;font-weight:600;">Accept invitation &amp; set password</a>
     </div>
