@@ -201,7 +201,7 @@ Products can be exported in FHIR R4 format for hospital system integration.
 
 - **Format**: FHIR R4 Bundle with DeviceDefinition resource
 - **Terminology**: SNOMED CT, DICOM, ICD-10 mappings
-- **Location**: Product detail page → Export → FHIR
+- **Location**: Product detail page → Export → FHIR, or Products list → Export → FHIR R4 bundle
 
 ### FHIR Readiness Score
 
@@ -211,6 +211,27 @@ Products can be exported in FHIR R4 format for hospital system integration.
 | 3 | Good | Most mappings present |
 | 1-2 | Fair | Partial mappings |
 | 0 | Limited | No standard mappings |
+
+---
+
+## 📤 Data Exports
+
+The catalogue and initiatives index can be exported in multiple formats:
+
+| Surface | Formats |
+|---------|---------|
+| Products list (filtered or full) | CSV, JSON, Excel, PDF report, FHIR R4 bundle, HTA dossier (Excel), AID-RT model cards, Full bundle (ZIP) |
+| Single product | CSV, JSON, Excel, PDF, FHIR, AID-RT |
+| Companies | Excel, JSON, PDF, FHIR R4 bundle |
+| Initiatives | CSV, JSON, Excel, schema.org JSON-LD |
+
+The CSV column dictionary is published at [`/schemas/dlinrt-csv-fields.md`](../public/schemas/dlinrt-csv-fields.md).
+The full bundle (ZIP) ships with a `manifest.json` and `README.md` describing schema version, generation timestamp, license, and disclaimer.
+
+> HTA dossiers and AID-RT cards are **informational** only — not a substitute for an official HTA dossier or a manufacturer-validated model card.
+
+---
+
 
 ---
 
