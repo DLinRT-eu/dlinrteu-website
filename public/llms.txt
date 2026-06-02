@@ -29,3 +29,19 @@ DLinRT.eu tracks commercially available and pipeline AI/DL products for radiothe
 - [Privacy policy](/privacy-policy): GDPR data handling.
 - [Terms of use](/terms-of-use): Usage terms.
 - [Security](/security): Security policy and reporting.
+
+## Data exports
+
+The catalogue exports in multiple machine-readable formats from the products page:
+
+- **CSV** — RFC 4180 catalogue export (~110 columns). Field dictionary: [/schemas/dlinrt-csv-fields.md](/schemas/dlinrt-csv-fields.md).
+- **JSON** — Raw `ProductDetails` records. Schema: [/schemas/dlinrt-model-card-schema.json](/schemas/dlinrt-model-card-schema.json).
+- **Excel** — Multi-sheet workbook for spreadsheet analysis.
+- **PDF report** — Human-readable bulk model card report.
+- **FHIR R4 bundle** — HL7 FHIR Device + Organization resources for healthcare interoperability.
+- **HTA dossier** — EUnetHTA Core Model Excel workbook (informational, not an official dossier).
+- **AID-RT model cards** — JSON aligned with the AID-RT model card schema for radiotherapy AI.
+- **Full bundle (ZIP)** — CSV + JSON + FHIR + manifest + README in a single archive.
+
+Initiatives can be exported as CSV, JSON, Excel, and schema.org JSON-LD.
+
