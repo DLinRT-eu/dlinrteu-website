@@ -70,11 +70,18 @@ const ExportButton = ({
     }
   };
 
-  const exportFormats = [
+  const baseFormats = [
     { format: 'csv' as ExportFormat, label: 'CSV', icon: FileText },
     { format: 'excel' as ExportFormat, label: 'Excel', icon: FileSpreadsheet },
-    { format: 'json' as ExportFormat, label: 'JSON', icon: FileJson }
+    { format: 'json' as ExportFormat, label: 'JSON', icon: FileJson },
   ];
+  const exportFormats =
+    type === 'initiatives'
+      ? [
+          ...baseFormats,
+          { format: 'jsonld' as ExportFormat, label: 'JSON-LD (schema.org)', icon: FileCode },
+        ]
+      : baseFormats;
 
   return (
     <DropdownMenu>
