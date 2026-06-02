@@ -183,7 +183,7 @@ const OrbitHero = () => {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               CE · FDA · TGA
             </div>
-            <div className="text-[10px] text-slate-400 font-mono">regulatory data tracked</div>
+            <div className="text-[10px] text-slate-600 font-mono">regulatory data tracked</div>
           </div>
 
           {/* Central DLinRT.eu logo */}
@@ -202,7 +202,7 @@ const OrbitHero = () => {
                 />
               </div>
               {/* tiny meta label */}
-              <div className="mt-3 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-slate-400">
+              <div className="mt-3 text-center text-[10px] font-mono uppercase tracking-[0.18em] text-slate-600">
                 The hub
               </div>
             </div>
