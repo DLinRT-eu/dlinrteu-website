@@ -95,7 +95,8 @@ class DataService {
   getProductById(id: string): ProductDetails | undefined {
     // Handle legacy ID mapping
     const legacyIdMapping: Record<string, string> = {
-      "philips-compressed-sense": "philips-smartspeed-ai"
+      "philips-compressed-sense": "philips-smartspeed",
+      "philips-smartspeed-ai": "philips-smartspeed"
     };
     
     const actualId = legacyIdMapping[id] || id;
