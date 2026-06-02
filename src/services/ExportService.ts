@@ -11,9 +11,16 @@ import { exportBulkProductsToJSON } from "@/utils/modelCard/exporters/bulkJsonEx
 import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview } from "@/utils/fhir";
 import { exportHTADossier } from "@/utils/htaExport";
 import { objectsToCsv } from "@/utils/csv";
+import { downloadProductsBundle } from "@/utils/exportBundle";
+import { exportBulkProductsToAidrt } from "@/utils/modelCard/exporters/bulkAidrtExporter";
+import { exportProductToAidrtJSON } from "@/utils/modelCard/aidrtExporter";
+import {
+  exportInitiativesToExcel,
+  exportInitiativesToJsonLd,
+} from "@/utils/initiativesExport";
 
 
-export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta";
+export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta" | "bundle" | "aidrt" | "jsonld";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
 
 interface ExportOptions {
