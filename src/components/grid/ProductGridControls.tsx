@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network, Package, FileCode } from "lucide-react";
 import { Product } from "@/types/product";
 import SortControls, { SortOption } from "./SortControls";
 import { ProductDetails } from "@/types/productDetails";
