@@ -26,7 +26,9 @@ const isDynamicImportError = (error: unknown) =>
 const lazyPage = <T extends ComponentType<any>>(loader: () => Promise<{ default: T }>) =>
   lazy(async () => {
     try {
-      return await loader();
+      const page = await loader();
+      sessionStorage.removeItem("lazy-route-reloaded");
+      return page;
     } catch (error) {
       if (isDynamicImportError(error) && !sessionStorage.getItem("lazy-route-reloaded")) {
         sessionStorage.setItem("lazy-route-reloaded", "true");
@@ -139,12 +141,13 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <ConditionalHeader />
-            <Suspense fallback={
-              <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-              </div>
-            }>
-              <AuthenticatedLayout>
+              <ErrorBoundary>
+                <Suspense fallback={
+                  <div className="flex items-center justify-center min-h-screen">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                  </div>
+                }>
+                  <AuthenticatedLayout>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="products" element={<Products />} />
@@ -386,8 +389,9 @@ const App = () => (
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              </AuthenticatedLayout>
-              </Suspense>
+                  </AuthenticatedLayout>
+                </Suspense>
+              </ErrorBoundary>
             </BrowserRouter>
           </TooltipProvider>
         </ProductEditProvider>
