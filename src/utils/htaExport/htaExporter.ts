@@ -51,7 +51,7 @@ function buildOverview(products: ProductDetails[]): ExcelSheet {
       "Category": p.category ?? "",
       "CE": ceStatus(p),
       "FDA": fdaStatus(p),
-      "Intended use": stringify((p as any).intendedUse ?? p.description),
+      "Intended use": stringify((p as any).regulatory?.intendedUseStatement ?? p.description),
       "Product URL": (p as any).productUrl ?? p.website ?? "",
     })),
   };
@@ -63,13 +63,14 @@ function buildCUR(products: ProductDetails[]): ExcelSheet {
     data: products.map((p) => ({
       "Product": p.name ?? "",
       "Indication / disease": stringify((p as any).diseaseTargeted),
-      "Target anatomy": stringify(p.anatomy),
+      "Target anatomy": stringify((p as any).anatomicalLocation ?? (p as any).anatomy),
       "Modality": stringify(p.modality),
       "Clinical task": p.category ?? "",
-      "Intended use statement": stringify((p as any).intendedUse),
+      "Intended use statement": stringify((p as any).regulatory?.intendedUseStatement),
     })),
   };
 }
+
 
 function buildTEC(products: ProductDetails[]): ExcelSheet {
   return {
