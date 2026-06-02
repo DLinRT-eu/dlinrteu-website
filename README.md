@@ -89,7 +89,7 @@ For complete examples, refer to the example templates in `src/data/products/exam
 ## Key Features
 
 - **Product Database**: Comprehensive catalog of AI/ML products in radiotherapy
-- **Multi-Role System**: User, Reviewer, Company Representative, Admin roles
+- **Multi-Role System**: User, Reviewer, Company Representative, Admin roles. Company representatives can be onboarded either by **admin email invitation** (immediate verification) or by **self-service role request** (admin-reviewed)
 - **Company Certifications**: Verified product certifications from manufacturers
 - **Review System**: Structured product review with assignment workflows
 - **Training Data Transparency**: Dataset size, demographics, disclosure level tracking per product

@@ -130,25 +130,124 @@ export default function CompanyGuide() {
         {/* Registration & Authentication Workflow */}
         <section id="registration" className="mb-12 scroll-mt-20">
           <h2 className="text-3xl font-bold mb-6">Registration & Authentication Workflow</h2>
-          
+
+          <Card className="mb-6 border-green-500/30">
+            <CardHeader>
+              <CardTitle>Two Ways to Become a Verified Representative</CardTitle>
+              <CardDescription>
+                You can either be invited directly by a platform administrator (fastest), or sign up and request the role yourself.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-lg border border-green-500/30 bg-green-50/50 dark:bg-green-950/20">
+                  <p className="font-semibold mb-1 flex items-center gap-2">
+                    <Mail className="h-4 w-4 text-green-600" />
+                    Path A — Admin Invitation (Recommended)
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    An admin sends you an email invitation tied to your company. You set a password and are
+                    immediately verified — no waiting on a separate approval queue.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg border bg-muted/30">
+                  <p className="font-semibold mb-1 flex items-center gap-2">
+                    <UserCheck className="h-4 w-4 text-primary" />
+                    Path B — Self-Service Request
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Create an account, then request the Company Representative role from your profile. An admin
+                    will review your request within 1-3 business days.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Path A — Invitation */}
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle>Step-by-Step Registration Process</CardTitle>
-              <CardDescription>Follow these steps to become a verified company representative</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="h-5 w-5 text-green-600" />
+                Path A — Admin Invitation (Recommended)
+              </CardTitle>
+              <CardDescription>The fastest way to onboard — no separate verification step required.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Step 1 */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">
-                    1
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">1</div>
+                </div>
+                <div className="flex-grow">
+                  <h4 className="font-semibold mb-2">Request an Invitation</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Contact the DLinRT team (or your company's existing admin contact) and ask to be invited as a
+                    representative for your company. Provide your professional email and your role/position.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">2</div>
+                </div>
+                <div className="flex-grow">
+                  <h4 className="font-semibold mb-2">Receive the Invitation Email</h4>
+                  <p className="text-sm text-muted-foreground">
+                    You'll get an email from DLinRT with a secure invitation link. The link is valid for
+                    <strong> 14 days</strong>. If it expires, ask the admin to send a new one.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">3</div>
+                </div>
+                <div className="flex-grow">
+                  <h4 className="font-semibold mb-2">Set Your Password</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Click the link, choose a password (minimum 8 characters), and submit. Your account is created,
+                    automatically approved, and assigned the Company Representative role for the specified company.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">4</div>
+                </div>
+                <div className="flex-grow">
+                  <h4 className="font-semibold mb-2">You're In</h4>
+                  <p className="text-sm text-muted-foreground">
+                    You're logged in directly and redirected to your{' '}
+                    <Link to="/company/dashboard" className="text-primary underline">company dashboard</Link>. No
+                    additional verification step is needed.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Path B — Self-Service */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <UserCheck className="h-5 w-5 text-primary" />
+                Path B — Self-Service Role Request
+              </CardTitle>
+              <CardDescription>Use this if you weren't invited directly by an admin.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">1</div>
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Create a DLinRT Account</h4>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Visit the DLinRT website and sign up for an account using your professional email address. 
-                    You'll receive a verification email to confirm your account.
+                    Sign up using your professional email address. You'll receive a verification email to confirm
+                    your account.
                   </p>
                   <Button asChild size="sm" variant="outline">
                     <Link to="/auth">
@@ -159,43 +258,33 @@ export default function CompanyGuide() {
                 </div>
               </div>
 
-              {/* Step 2 */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">
-                    2
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">2</div>
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Navigate to Your Profile</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    After logging in, click on your profile icon in the header and select "Profile" from the dropdown menu.
+                  <p className="text-sm text-muted-foreground">
+                    After logging in, click your profile icon in the header and select "Profile".
                   </p>
                 </div>
               </div>
 
-              {/* Step 3 */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">
-                    3
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">3</div>
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Request Company Representative Role</h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Scroll to the "Request Additional Role" section on your profile page. Select "Company Representative" 
-                    from the role options.
+                  <p className="text-sm text-muted-foreground">
+                    Scroll to "Request Additional Role" and select "Company Representative".
                   </p>
                 </div>
               </div>
 
-              {/* Step 4 */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">
-                    4
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">4</div>
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Provide Verification Details</h4>
@@ -204,48 +293,44 @@ export default function CompanyGuide() {
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
-                      <Mail className="h-4 w-4 mt-1 text-green-500" />
+                      <Mail className="h-4 w-4 mt-1 text-primary" />
                       <span><strong>Company Email:</strong> Use your official company email address</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Building2 className="h-4 w-4 mt-1 text-green-500" />
+                      <Building2 className="h-4 w-4 mt-1 text-primary" />
                       <span><strong>Company Name:</strong> Exact name of your company</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <UserCheck className="h-4 w-4 mt-1 text-green-500" />
+                      <UserCheck className="h-4 w-4 mt-1 text-primary" />
                       <span><strong>Position/Title:</strong> Your role within the company</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Linkedin className="h-4 w-4 mt-1 text-green-500" />
+                      <Linkedin className="h-4 w-4 mt-1 text-primary" />
                       <span><strong>LinkedIn Profile:</strong> Optional but recommended for verification</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <FileText className="h-4 w-4 mt-1 text-green-500" />
+                      <FileText className="h-4 w-4 mt-1 text-primary" />
                       <span><strong>Justification:</strong> Brief explanation of your need for this role</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              {/* Step 5 */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white font-bold">
-                    5
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">5</div>
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-semibold mb-2">Wait for Admin Verification</h4>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Platform administrators will review your request and verify your company affiliation. This typically 
-                    takes 1-3 business days. You'll receive a notification once your request is approved or if additional 
-                    information is needed.
+                    Admins will review your request and verify your company affiliation. You'll receive a
+                    notification once your request is approved or if additional information is needed.
                   </p>
                   <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
                     <p className="text-xs text-muted-foreground">
                       <Clock className="h-3 w-3 inline mr-1" />
-                      <strong>Verification typically takes 1-3 business days.</strong> Ensure all information is accurate 
-                      to avoid delays.
+                      <strong>Verification typically takes 1-3 business days.</strong> Ensure all information is
+                      accurate to avoid delays.
                     </p>
                   </div>
                 </div>
@@ -253,41 +338,74 @@ export default function CompanyGuide() {
             </CardContent>
           </Card>
 
-          {/* Authentication Workflow Diagram */}
+          {/* Workflow Diagram */}
           <Card>
             <CardHeader>
               <CardTitle>Workflow Diagram</CardTitle>
-              <CardDescription>Visual representation of the registration and authentication process</CardDescription>
+              <CardDescription>Both paths lead to the same verified representative role</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="bg-muted/30 rounded-lg p-6">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                      <UserCheck className="h-8 w-8 text-primary" />
+              <div className="bg-muted/30 rounded-lg p-6 space-y-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 mb-3">
+                    Path A — Invitation
+                  </p>
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
+                        <Mail className="h-8 w-8 text-green-600" />
+                      </div>
+                      <p className="font-semibold text-sm">Admin Sends Invite</p>
                     </div>
-                    <p className="font-semibold text-sm">Create Account</p>
+                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
+                        <UserCheck className="h-8 w-8 text-green-600" />
+                      </div>
+                      <p className="font-semibold text-sm">Set Password</p>
+                    </div>
+                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
+                        <CheckCircle2 className="h-8 w-8 text-green-600" />
+                      </div>
+                      <p className="font-semibold text-sm">Access Granted</p>
+                    </div>
                   </div>
-                  <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                      <FileText className="h-8 w-8 text-primary" />
+                </div>
+
+                <div className="pt-4 border-t">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-primary mb-3">
+                    Path B — Self-Service
+                  </p>
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                        <UserCheck className="h-8 w-8 text-primary" />
+                      </div>
+                      <p className="font-semibold text-sm">Create Account</p>
                     </div>
-                    <p className="font-semibold text-sm">Request Role</p>
-                  </div>
-                  <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-2">
-                      <Clock className="h-8 w-8 text-amber-600" />
+                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                        <FileText className="h-8 w-8 text-primary" />
+                      </div>
+                      <p className="font-semibold text-sm">Request Role</p>
                     </div>
-                    <p className="font-semibold text-sm">Admin Review</p>
-                  </div>
-                  <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
-                      <CheckCircle2 className="h-8 w-8 text-green-600" />
+                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-2">
+                        <Clock className="h-8 w-8 text-amber-600" />
+                      </div>
+                      <p className="font-semibold text-sm">Admin Review</p>
                     </div>
-                    <p className="font-semibold text-sm">Access Granted</p>
+                    <ArrowRight className="h-6 w-6 text-muted-foreground rotate-90 md:rotate-0" />
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
+                        <CheckCircle2 className="h-8 w-8 text-green-600" />
+                      </div>
+                      <p className="font-semibold text-sm">Access Granted</p>
+                    </div>
                   </div>
                 </div>
               </div>

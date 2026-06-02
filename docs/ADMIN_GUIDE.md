@@ -146,7 +146,30 @@ The Company Management page has **four tabs**:
 
 All tabs support **search, sorting, and export** (CSV/Excel).
 
-### Verifying Company Representatives
+### Onboarding Company Representatives
+
+There are **two ways** a user becomes a verified company representative:
+
+#### Path A — Admin Invitation (Recommended)
+
+Admins can invite a representative directly from `/admin/companies` — the invitee skips the Pending Verifications queue entirely.
+
+1. Open the **All Companies** tab and find the target company.
+2. Click **"Invite by Email"** on the company row.
+3. Fill in the invitee's email, first name, last name, position, and an optional personal message.
+4. The system sends a secure invitation email (via Resend) with a link to `/accept-company-invite?token=...`.
+5. The invitee clicks the link, sets a password (minimum 8 characters), and is automatically:
+   - Created in `auth.users`
+   - Given an approved `profiles` record
+   - Assigned the `company` role in `user_roles`
+   - Inserted as a verified record in `company_representatives` for the target company
+   - Logged in and redirected to `/company/dashboard`
+
+**Invitation lifecycle**: `pending` → `accepted` / `expired` / `revoked`. Links expire **14 days** after sending. To revoke or resend, re-invite the same email — pending invitations are replaced.
+
+#### Path B — Self-Service (Pending Verifications Queue)
+
+When users sign up on their own and request the Company Representative role from their profile, admins approve them here:
 
 1. Go to "Pending Verifications" tab
 2. Review user's company claim
