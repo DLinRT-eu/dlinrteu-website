@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Download, FileText, FileSpreadsheet, FileJson, Scale } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network } from "lucide-react";
 import { Product } from "@/types/product";
 import SortControls, { SortOption } from "./SortControls";
 import { ProductDetails } from "@/types/productDetails";
@@ -16,6 +16,8 @@ import ExportService, { ExportFormat } from "@/services/ExportService";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import dataService from "@/services/DataService";
+import { COMPANIES } from "@/data/companies";
+
 
 interface ProductGridControlsProps {
   itemsPerPage: number;
@@ -57,8 +59,10 @@ const ProductGridControls = ({
     
     try {
       await ExportService.exportProducts(dataToExport as ProductDetails[], format, {
-        filename: exportAll ? 'all-products' : 'filtered-products'
+        filename: exportAll ? 'dlinrt-all-products' : 'dlinrt-filtered-products',
+        companies: format === 'fhir' ? COMPANIES : undefined,
       });
+
       
       toast({
         title: "Export successful",
