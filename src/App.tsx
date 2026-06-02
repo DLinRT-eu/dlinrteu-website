@@ -48,6 +48,7 @@ const About = lazyPage(() => import("./pages/About"));
 const Security = lazyPage(() => import("./pages/Security"));
 const ResetPassword = lazyPage(() => import("./pages/ResetPassword"));
 const UpdatePassword = lazyPage(() => import("./pages/UpdatePassword"));
+const AcceptCompanyInvite = lazyPage(() => import("./pages/AcceptCompanyInvite"));
 const Presentation = lazyPage(() => import("./pages/Presentation"));
 const LiveDemoMode = lazyPage(() => import("./components/presentation/LiveDemoMode").then(m => ({ default: m.LiveDemoMode })));
 const SecurityMonitoring = lazyPage(() => import("./pages/SecurityMonitoring"));
@@ -162,6 +163,7 @@ const App = () => (
                 <Route path="security" element={<Security />} />
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="update-password" element={<UpdatePassword />} />
+                <Route path="accept-company-invite" element={<AcceptCompanyInvite />} />
                 <Route path="export-presentation" element={<Navigate to="/presentation" replace />} />
                 <Route path="presentation" element={<Presentation />} />
                 <Route path="presentation/demo" element={<LiveDemoMode />} />
