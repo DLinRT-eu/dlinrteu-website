@@ -10,6 +10,8 @@ import { exportBulkProductsToPDF } from "@/utils/modelCard/exporters/bulkPdfExpo
 import { exportBulkProductsToJSON } from "@/utils/modelCard/exporters/bulkJsonExporter";
 import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview } from "@/utils/fhir";
 import { exportHTADossier } from "@/utils/htaExport";
+import { objectsToCsv } from "@/utils/csv";
+
 
 export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
@@ -118,24 +120,11 @@ class ExportService {
   }
 
   /**
-   * Generic CSV export helper
+   * Generic CSV export helper (RFC 4180 compliant)
    */
   private exportToCSV(data: any[], filename: string): void {
     if (data.length === 0) return;
-    
-    const headers = Object.keys(data[0]);
-    const csvContent = [
-      headers.join(','),
-      ...data.map(row => 
-        headers.map(header => {
-          const value = row[header];
-          return typeof value === 'string' && value.includes(',') 
-            ? `"${value.replace(/"/g, '""')}"` 
-            : value;
-        }).join(',')
-      )
-    ].join('\n');
-
+    const csvContent = objectsToCsv(data as Record<string, unknown>[]);
     this.downloadFile(csvContent, `${filename}.csv`, 'text/csv');
   }
 
@@ -146,6 +135,7 @@ class ExportService {
     const jsonContent = JSON.stringify(data, null, 2);
     this.downloadFile(jsonContent, `${filename}.json`, 'application/json');
   }
+
 
   /**
    * Generic file download helper
