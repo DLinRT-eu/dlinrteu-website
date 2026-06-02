@@ -67,18 +67,19 @@ class ExportService {
       case "fhir":
         const companies = options.companies || [];
         if (options.includeWarningsReport) {
-          downloadFHIRBundleWithReport(products, companies);
+          downloadFHIRBundleWithReport(products, companies, { filename });
         } else {
-          downloadFHIRBundle(products, companies);
+          downloadFHIRBundle(products, companies, { filename });
         }
         break;
       case "hta":
-        await exportHTADossier(products);
+        await exportHTADossier(products, filename);
         break;
       default:
         throw new Error(`Unsupported export format: ${format}`);
     }
   }
+
 
   /**
    * Export initiatives in various formats
