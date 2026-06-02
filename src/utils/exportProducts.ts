@@ -4,8 +4,11 @@ import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 import { escapeCsvValue as escapeValueForCsv } from "@/utils/csv";
 
 
-export const exportProductsToCSV = (products: ProductDetails[]) => {
-  // Define comprehensive headers for all product data
+/**
+ * Build the products CSV as a string (no download).
+ * Useful for bundling into ZIPs or further processing.
+ */
+export const buildProductsCsv = (products: ProductDetails[]): string => {
   const headers = [
     "ID", "Name", "Company", "Category", "Secondary Categories", "Description", "Features",
     "Subspeciality", "Modality", "Anatomical Location", "Disease Targeted", 
