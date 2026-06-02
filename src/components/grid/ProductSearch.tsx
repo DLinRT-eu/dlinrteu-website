@@ -46,8 +46,9 @@ export const useProductSearch = ({ products, searchQuery, advancedSearch }: Prod
           product.company,
           product.description,
           product.category,
-          product.regulatory?.fda?.clearanceNumber,
-          product.regulatory?.ce?.certificateNumber
+          typeof product.regulatory?.fda === 'object' ? product.regulatory.fda.clearanceNumber : undefined,
+          typeof product.regulatory?.ce === 'object' ? (product.regulatory.ce as any).certificateNumber : undefined
+
         ];
 
         const basicFieldsMatch = basicFields.some(field => searchInValue(field));
