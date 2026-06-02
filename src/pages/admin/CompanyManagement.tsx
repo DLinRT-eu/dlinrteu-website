@@ -17,8 +17,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
-import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield, ClipboardList } from 'lucide-react';
+import { Building2, UserPlus, UserCheck, UserX, Search, AlertCircle, ArrowUpDown, ArrowUp, ArrowDown, Download, FileSpreadsheet, FileText, RefreshCcw, Shield, ClipboardList, Mail } from 'lucide-react';
 import RevisionApprovalManager from '@/components/company/RevisionApprovalManager';
+import InviteCompanyRepDialog from '@/components/admin/InviteCompanyRepDialog';
 import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { COMPANIES } from '@/data';
@@ -61,6 +62,8 @@ export default function CompanyManagement() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedReps, setSelectedReps] = useState<Set<string>>(new Set());
   const [processingBulk, setProcessingBulk] = useState(false);
+  const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
+  const [inviteCompany, setInviteCompany] = useState<{ id: string; name: string } | null>(null);
 
   useEffect(() => {
     fetchRepresentatives();
@@ -743,6 +746,17 @@ export default function CompanyManagement() {
                           <UserPlus className="h-4 w-4 mr-2" />
                           Assign User
                         </Button>
+                        <Button
+                          size="sm"
+                          disabled={verifiedCount >= 5}
+                          onClick={() => {
+                            setInviteCompany({ id: company.id, name: company.name });
+                            setInviteDialogOpen(true);
+                          }}
+                        >
+                          <Mail className="h-4 w-4 mr-2" />
+                          Invite by Email
+                        </Button>
                       </div>
                     </div>
                   </CardHeader>
@@ -1128,6 +1142,19 @@ export default function CompanyManagement() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {inviteCompany && (
+        <InviteCompanyRepDialog
+          open={inviteDialogOpen}
+          onOpenChange={(o) => {
+            setInviteDialogOpen(o);
+            if (!o) setInviteCompany(null);
+          }}
+          companyId={inviteCompany.id}
+          companyName={inviteCompany.name}
+          onSent={fetchRepresentatives}
+        />
+      )}
     </PageLayout>
   );
 }
