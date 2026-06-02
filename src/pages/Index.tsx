@@ -58,7 +58,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Deep Learning Products Database for Radiotherapy"
-        description="Discover commercial deep learning solutions for radiotherapy. Browse AI/DL products for auto-contouring, treatment planning, and imaging with regulatory data and clinical evidence."
+        description="Catalogue of AI and deep learning products for radiotherapy: auto-contouring, treatment planning, imaging, with regulatory data and evidence."
         canonical="https://dlinrt.eu/"
         structuredData={structuredData}
       />
@@ -81,7 +81,8 @@ const Index = () => {
 
       {/* Tasks across the patient workflow */}
       {taskCounts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-12" aria-labelledby="task-taxonomy-heading">
+          <h2 id="task-taxonomy-heading" className="sr-only">Tasks across the radiotherapy workflow</h2>
           <TaskTaxonomy
             categories={taskCounts}
             onCategoryClick={(name) => navigate(`/products?task=${encodeURIComponent(name)}`)}

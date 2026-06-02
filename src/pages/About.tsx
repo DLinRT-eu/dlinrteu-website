@@ -137,9 +137,9 @@ const About = () => {
       {/* Platform Overview (moved from homepage) */}
       <section className="py-16 px-4 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
-            About the Platform
-          </h2>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+            About DLinRT.eu
+          </h1>
           <div className="prose prose-lg max-w-none text-slate-700 leading-relaxed">
             <p>
               DLinRT.eu is a dedicated resource for{" "}

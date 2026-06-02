@@ -243,6 +243,7 @@ const Companies = () => {
             variant="outline"
             size="icon"
             onClick={toggleSortDirection}
+            aria-label={sortAscending ? "Sort companies Z to A" : "Sort companies A to Z"}
             title={sortAscending ? "Sort Z-A" : "Sort A-Z"}
             className="h-10 w-10"
           >

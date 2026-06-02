@@ -167,6 +167,7 @@ const DebouncedSearchWithSuggestions = ({
         <Input
           ref={inputRef}
           type="text"
+          aria-label={placeholder || 'Search'}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
