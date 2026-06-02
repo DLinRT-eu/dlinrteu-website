@@ -250,7 +250,10 @@ function buildReadme(): ExcelSheet {
 const safeFile = (s: string) =>
   s.replace(/[^a-z0-9-_]+/gi, "-").replace(/-+/g, "-").toLowerCase();
 
-export async function exportHTADossier(products: ProductDetails[]): Promise<void> {
+export async function exportHTADossier(
+  products: ProductDetails[],
+  filenameOverride?: string,
+): Promise<void> {
   if (!products.length) throw new Error("No products to export");
   const sheets: ExcelSheet[] = [
     buildOverview(products),
@@ -265,11 +268,13 @@ export async function exportHTADossier(products: ProductDetails[]): Promise<void
     buildReadme(),
   ];
   const blob = await createExcelWorkbook(sheets);
-  const filename =
-    products.length === 1
-      ? `dlinrt-hta-dossier-${safeFile(products[0].name ?? "product")}.xlsx`
-      : `dlinrt-hta-dossier-${products.length}-products.xlsx`;
-  downloadBlob(blob, filename);
+  const baseName = filenameOverride
+    ? safeFile(filenameOverride)
+    : products.length === 1
+      ? `dlinrt-hta-dossier-${safeFile(products[0].name ?? "product")}`
+      : `dlinrt-hta-dossier-${products.length}-products`;
+  downloadBlob(blob, `${baseName}.xlsx`);
 }
 
 export const exportSingleHTADossier = (product: ProductDetails) => exportHTADossier([product]);
+
