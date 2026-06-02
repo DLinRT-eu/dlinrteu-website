@@ -204,13 +204,14 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.source)
   ]);
 
-  // Join rows with newlines and create CSV content
-  const csvContent = [
+  return [
     headers.join(","),
     ...data.map(row => row.join(","))
   ].join("\n");
+};
 
-  // Create a Blob and trigger download
+export const exportProductsToCSV = (products: ProductDetails[]): void => {
+  const csvContent = buildProductsCsv(products);
   try {
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
@@ -221,7 +222,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(url); // Clean up
+    window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error("Error generating CSV file:", error);
   }
