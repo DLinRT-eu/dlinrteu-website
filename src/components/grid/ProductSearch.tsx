@@ -39,12 +39,15 @@ export const useProductSearch = ({ products, searchQuery, advancedSearch }: Prod
       };
 
       if (!advancedSearch) {
-        // Basic search: only search in main fields
+        // Basic search: main identifying fields plus model-sheet identifiers
         const basicFields = [
           product.name,
+          product.id,
           product.company,
           product.description,
-          product.category
+          product.category,
+          product.regulatory?.fda?.clearanceNumber,
+          product.regulatory?.ce?.certificateNumber
         ];
 
         const basicFieldsMatch = basicFields.some(field => searchInValue(field));
