@@ -746,6 +746,17 @@ export default function CompanyManagement() {
                           <UserPlus className="h-4 w-4 mr-2" />
                           Assign User
                         </Button>
+                        <Button
+                          size="sm"
+                          disabled={verifiedCount >= 5}
+                          onClick={() => {
+                            setInviteCompany({ id: company.id, name: company.name });
+                            setInviteDialogOpen(true);
+                          }}
+                        >
+                          <Mail className="h-4 w-4 mr-2" />
+                          Invite by Email
+                        </Button>
                       </div>
                     </div>
                   </CardHeader>
