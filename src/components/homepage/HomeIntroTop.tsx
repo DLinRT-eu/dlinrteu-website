@@ -11,10 +11,10 @@ const HomeIntroTop = () => {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             Independent catalogue · Updated weekly
-            <span className="mx-1 text-slate-300">|</span>
+            <span className="mx-1 text-slate-500" aria-hidden="true">|</span>
             <ShieldCheck className="h-3.5 w-3.5 text-sky-600" />
             Peer-reviewed
-            <span className="mx-1 text-slate-300">|</span>
+            <span className="mx-1 text-slate-500" aria-hidden="true">|</span>
             <Globe2 className="h-3.5 w-3.5 text-sky-600" />
             European focus
           </div>
