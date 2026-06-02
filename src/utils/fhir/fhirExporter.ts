@@ -35,9 +35,9 @@ export function exportToFHIR(
 export function downloadFHIRBundle(
   products: ProductDetails[],
   companies: CompanyDetails[],
-  options?: FHIRExportOptions
+  options?: FHIRExportOptions & { filename?: string }
 ): void {
-  const { prettyPrint = true, ...restOptions } = options || {};
+  const { prettyPrint = true, filename, ...restOptions } = options || {};
   
   const result = exportToFHIR(products, companies, restOptions);
   
@@ -55,14 +55,16 @@ export function downloadFHIRBundle(
   const link = document.createElement('a');
   
   const timestamp = new Date().toISOString().split('T')[0];
+  const baseName = filename ?? `dlinrt-fhir-export-${timestamp}`;
   link.href = url;
-  link.download = `dlinrt-fhir-export-${timestamp}.json`;
+  link.download = baseName.endsWith('.json') ? baseName : `${baseName}.json`;
   document.body.appendChild(link);
   link.click();
   
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
+
 
 /**
  * Download a FHIR Bundle with detailed warnings report
@@ -90,8 +92,10 @@ export function downloadFHIRBundleWithReport(
   const link = document.createElement('a');
   
   const timestamp = new Date().toISOString().split('T')[0];
+  const baseName = options?.filename ?? `dlinrt-fhir-export-${timestamp}`;
   link.href = url;
-  link.download = `dlinrt-fhir-export-${timestamp}.json`;
+  link.download = baseName.endsWith('.json') ? baseName : `${baseName}.json`;
+
   document.body.appendChild(link);
   link.click();
   
