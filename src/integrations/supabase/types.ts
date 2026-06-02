@@ -306,6 +306,63 @@ export type Database = {
           },
         ]
       }
+      company_invitations: {
+        Row: {
+          accepted_at: string | null
+          accepted_user_id: string | null
+          company_id: string
+          company_name: string
+          created_at: string
+          email: string
+          expires_at: string
+          first_name: string | null
+          id: string
+          invited_by: string
+          last_name: string | null
+          message: string | null
+          rep_position: string | null
+          status: string
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_user_id?: string | null
+          company_id: string
+          company_name: string
+          created_at?: string
+          email: string
+          expires_at?: string
+          first_name?: string | null
+          id?: string
+          invited_by: string
+          last_name?: string | null
+          message?: string | null
+          rep_position?: string | null
+          status?: string
+          token: string
+          updated_at?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_user_id?: string | null
+          company_id?: string
+          company_name?: string
+          created_at?: string
+          email?: string
+          expires_at?: string
+          first_name?: string | null
+          id?: string
+          invited_by?: string
+          last_name?: string | null
+          message?: string | null
+          rep_position?: string | null
+          status?: string
+          token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       company_product_verifications: {
         Row: {
           company_id: string
@@ -2044,6 +2101,20 @@ export type Database = {
           id: string
           target_email: string
           target_user_id: string
+        }[]
+      }
+      get_company_invitation_by_token: {
+        Args: { _token: string }
+        Returns: {
+          company_id: string
+          company_name: string
+          email: string
+          expires_at: string
+          first_name: string
+          last_name: string
+          message: string
+          rep_position: string
+          status: string
         }[]
       }
       get_highest_role: {
