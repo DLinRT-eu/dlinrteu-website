@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network, Package, FileCode } from "lucide-react";
 import { Product } from "@/types/product";
 import SortControls, { SortOption } from "./SortControls";
 import { ProductDetails } from "@/types/productDetails";
@@ -41,6 +41,8 @@ const ProductGridControls = ({
   const [isExporting, setIsExporting] = useState(false);
   const { toast } = useToast();
 
+  const HEAVY_THRESHOLD = 50;
+
   const handleExport = async (format: ExportFormat, exportAll: boolean) => {
     const dataToExport = exportAll 
       ? dataService.getAllProducts() 
@@ -55,12 +57,24 @@ const ProductGridControls = ({
       return;
     }
 
+    // Warn before generating heavy exports (PDF / HTA workbook) on large sets
+    if (
+      (format === "pdf" || format === "hta") &&
+      dataToExport.length > HEAVY_THRESHOLD
+    ) {
+      const proceed = window.confirm(
+        `You are about to export ${dataToExport.length} products as ${format.toUpperCase()}. ` +
+          `This can take 30+ seconds and produce a large file. Continue?`
+      );
+      if (!proceed) return;
+    }
+
     setIsExporting(true);
     
     try {
       await ExportService.exportProducts(dataToExport as ProductDetails[], format, {
         filename: exportAll ? 'dlinrt-all-products' : 'dlinrt-filtered-products',
-        companies: format === 'fhir' ? COMPANIES : undefined,
+        companies: format === 'fhir' || format === 'bundle' ? COMPANIES : undefined,
       });
 
       
@@ -155,6 +169,14 @@ const ProductGridControls = ({
                   <Scale className="w-4 h-4 mr-2" />
                   HTA dossier (Excel)
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('aidrt', false)}>
+                  <FileCode className="w-4 h-4 mr-2" />
+                  AID-RT model cards
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('bundle', false)}>
+                  <Package className="w-4 h-4 mr-2" />
+                  Full bundle (ZIP)
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
               </>
             )}
@@ -184,6 +206,14 @@ const ProductGridControls = ({
             <DropdownMenuItem onClick={() => handleExport('hta', true)}>
               <Scale className="w-4 h-4 mr-2" />
               HTA dossier (Excel)
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('aidrt', true)}>
+              <FileCode className="w-4 h-4 mr-2" />
+              AID-RT model cards
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('bundle', true)}>
+              <Package className="w-4 h-4 mr-2" />
+              Full bundle (ZIP)
             </DropdownMenuItem>
 
           </DropdownMenuContent>

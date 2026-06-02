@@ -11,9 +11,16 @@ import { exportBulkProductsToJSON } from "@/utils/modelCard/exporters/bulkJsonEx
 import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview } from "@/utils/fhir";
 import { exportHTADossier } from "@/utils/htaExport";
 import { objectsToCsv } from "@/utils/csv";
+import { downloadProductsBundle } from "@/utils/exportBundle";
+import { exportBulkProductsToAidrt } from "@/utils/modelCard/exporters/bulkAidrtExporter";
+import { exportProductToAidrtJSON } from "@/utils/modelCard/aidrtExporter";
+import {
+  exportInitiativesToExcel,
+  exportInitiativesToJsonLd,
+} from "@/utils/initiativesExport";
 
 
-export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta";
+export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta" | "bundle" | "aidrt" | "jsonld";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
 
 interface ExportOptions {
@@ -77,6 +84,19 @@ class ExportService {
       case "hta":
         await exportHTADossier(products, filename);
         break;
+      case "bundle":
+        await downloadProductsBundle(products, {
+          filename,
+          companies: options.companies,
+        });
+        break;
+      case "aidrt":
+        if (products.length === 1) {
+          exportProductToAidrtJSON(products[0]);
+        } else {
+          exportBulkProductsToAidrt(products, filename);
+        }
+        break;
       default:
         throw new Error(`Unsupported export format: ${format}`);
     }
@@ -113,6 +133,12 @@ class ExportService {
         break;
       case "json":
         this.downloadJSON(exportData, filename);
+        break;
+      case "excel":
+        await exportInitiativesToExcel(initiatives, filename);
+        break;
+      case "jsonld":
+        exportInitiativesToJsonLd(initiatives, filename);
         break;
       default:
         throw new Error(`Format ${format} not supported for initiatives export`);

@@ -6,7 +6,7 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
-import { Download, FileText, FileSpreadsheet, FileJson } from 'lucide-react';
+import { Download, FileText, FileSpreadsheet, FileJson, FileCode } from 'lucide-react';
 import ExportService, { ExportFormat, ExportType } from '@/services/ExportService';
 import { useToast } from '@/hooks/use-toast';
 
@@ -70,11 +70,18 @@ const ExportButton = ({
     }
   };
 
-  const exportFormats = [
+  const baseFormats = [
     { format: 'csv' as ExportFormat, label: 'CSV', icon: FileText },
     { format: 'excel' as ExportFormat, label: 'Excel', icon: FileSpreadsheet },
-    { format: 'json' as ExportFormat, label: 'JSON', icon: FileJson }
+    { format: 'json' as ExportFormat, label: 'JSON', icon: FileJson },
   ];
+  const exportFormats =
+    type === 'initiatives'
+      ? [
+          ...baseFormats,
+          { format: 'jsonld' as ExportFormat, label: 'JSON-LD (schema.org)', icon: FileCode },
+        ]
+      : baseFormats;
 
   return (
     <DropdownMenu>

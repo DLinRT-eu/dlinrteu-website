@@ -4,8 +4,11 @@ import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 import { escapeCsvValue as escapeValueForCsv } from "@/utils/csv";
 
 
-export const exportProductsToCSV = (products: ProductDetails[]) => {
-  // Define comprehensive headers for all product data
+/**
+ * Build the products CSV as a string (no download).
+ * Useful for bundling into ZIPs or further processing.
+ */
+export const buildProductsCsv = (products: ProductDetails[]): string => {
   const headers = [
     "ID", "Name", "Company", "Category", "Secondary Categories", "Description", "Features",
     "Subspeciality", "Modality", "Anatomical Location", "Disease Targeted", 
@@ -201,13 +204,14 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     escapeValueForCsv(product.source)
   ]);
 
-  // Join rows with newlines and create CSV content
-  const csvContent = [
+  return [
     headers.join(","),
     ...data.map(row => row.join(","))
   ].join("\n");
+};
 
-  // Create a Blob and trigger download
+export const exportProductsToCSV = (products: ProductDetails[]): void => {
+  const csvContent = buildProductsCsv(products);
   try {
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
@@ -218,7 +222,7 @@ export const exportProductsToCSV = (products: ProductDetails[]) => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    window.URL.revokeObjectURL(url); // Clean up
+    window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error("Error generating CSV file:", error);
   }
