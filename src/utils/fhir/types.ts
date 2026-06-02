@@ -295,7 +295,10 @@ export interface FHIRExportOptions {
   baseUrl?: string;
   /** Include only products that have complete terminology mappings */
   strictMode?: boolean;
+  /** Override the downloaded filename (without extension) */
+  filename?: string;
 }
+
 
 // ============================================================================
 // Validation Types
