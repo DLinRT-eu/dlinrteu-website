@@ -78,3 +78,9 @@ verify_jwt = false  # Public feedback form, rate-limited
 
 [functions.resend-webhook]
 verify_jwt = false  # Public webhook from Resend; verified via Svix signature when RESEND_WEBHOOK_SECRET set
+
+[functions.invite-company-representative]
+verify_jwt = true
+
+[functions.accept-company-invitation]
+verify_jwt = false  # Public; validates one-time token in code
