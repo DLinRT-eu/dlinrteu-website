@@ -130,15 +130,33 @@ export async function validateCompanyMappings(
   const ADMIN_OVERSIGHT_COMPANY_NAME = 'ADMIN_OVERSIGHT';
   const ADMIN_OVERSIGHT_COMPANY_ID = 'admin_all_companies';
   
-  const productCompanies = new Set(products.map(p => p.company));
+  const productCompanyIds = new Set(products.map(p => getCompanyIdByName(p.company)));
   representatives?.forEach(rep => {
     // Skip admin oversight representatives - they can certify all companies
-    if (rep.company_name === ADMIN_OVERSIGHT_COMPANY_NAME || 
+    if (rep.company_name === ADMIN_OVERSIGHT_COMPANY_NAME ||
         rep.company_id === ADMIN_OVERSIGHT_COMPANY_ID) {
       return;
     }
-    
-    if (!productCompanies.has(rep.company_name)) {
+
+    const repCanonicalId = rep.company_id || getCompanyIdByName(rep.company_name);
+    if (!productCompanyIds.has(repCanonicalId)) {
+      issues.push({
+        type: 'orphaned_representative',
+        severity: 'low',
+        companyName: rep.company_name,
+        expectedCompanyId: rep.company_id || 'unknown',
+        actualCompanyId: rep.company_id || undefined,
+        representativeCount: 1,
+        representatives: [{
+          id: rep.id,
+          email: (rep.profiles as any)?.email || 'Unknown',
+          verified: rep.verified || false,
+        }],
+        description: `Representative exists for "${rep.company_name}" but no products found in catalog for this company.`,
+      });
+    }
+  });
+
       issues.push({
         type: 'orphaned_representative',
         severity: 'low',
