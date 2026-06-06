@@ -10,7 +10,6 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.varian.com/ethos",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-ethos.ts",
     description: "AI-driven auto-segmentation integrated into the Ethos adaptive radiotherapy system. Uses deep learning algorithms for contouring organs at risk and target volumes, enabling online adaptive radiotherapy workflows with AI-generated contours available in minutes at the treatment console.",
-    structuresUnavailable: true,
     features: [
       "Deep learning-based auto-segmentation",
       "Online adaptive radiotherapy workflow",
@@ -34,6 +33,63 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       "Integrated treatment planning with AI-generated contours",
       "Direct CBCT dose calculation support",
       "Guided adaptive workflow with AI-assisted decision making"
+    ],
+    supportedStructures: [
+      // Source: Finnegan et al. JACMP 2025 (doi:10.1002/acm2.70067, Figure 1 / Table S1).
+      // 45 unique OARs evaluated; the subset reproduced in the article text is listed below
+      // with the (unverified) suffix per the structure-status convention. Pending company
+      // representative confirmation of the full Ethos 2.0 model card structure set.
+
+      // Pelvis
+      "Pelvis: Bladder (unverified)",
+      "Pelvis: Rectum (unverified)",
+      "Pelvis: Femur_Head_L (unverified)",
+      "Pelvis: Femur_Head_R (unverified)",
+      "Pelvis: Bowel_Small (unverified)",
+      "Pelvis: Colon_Sigmoid (unverified)",
+      "Pelvis: Bowel_Bag (unverified)",
+
+      // Abdomen
+      "Abdomen: Liver (unverified)",
+      "Abdomen: Kidney_L (unverified)",
+      "Abdomen: Kidney_R (unverified)",
+      "Abdomen: Stomach (unverified)",
+      "Abdomen: Duodenum (unverified)",
+      "Abdomen: Pancreas (unverified)",
+      "Abdomen: Spleen (unverified)",
+
+      // Thorax
+      "Thorax: Lung_L (unverified)",
+      "Thorax: Lung_R (unverified)",
+      "Thorax: Heart (unverified)",
+      "Thorax: Esophagus (unverified)",
+      "Thorax: Trachea (unverified)",
+      "Thorax: SpinalCord (unverified)",
+      "Thorax: Bronchial_Tree (unverified)",
+      "Thorax: Chestwall (unverified)",
+      "Thorax: Breast_L (unverified)",
+      "Thorax: Breast_R (unverified)",
+      "Thorax: Carina (unverified)",
+
+      // Head & Neck
+      "Head & Neck: Brain (unverified)",
+      "Head & Neck: Brainstem (unverified)",
+      "Head & Neck: Bone_Mandible (unverified)",
+      "Head & Neck: Glnd_Thyroid (unverified)",
+      "Head & Neck: Parotid_L (unverified)",
+      "Head & Neck: Parotid_R (unverified)",
+      "Head & Neck: Glnd_Submand_L (unverified)",
+      "Head & Neck: Glnd_Submand_R (unverified)",
+      "Head & Neck: OpticNrv_L (unverified)",
+      "Head & Neck: OpticNrv_R (unverified)",
+      "Head & Neck: OpticChiasm (unverified)",
+      "Head & Neck: Cochlea_L (unverified)",
+      "Head & Neck: Cochlea_R (unverified)",
+      "Head & Neck: Larynx (unverified)",
+      "Head & Neck: Musc_Constrict (unverified)",
+
+      // External
+      "External: Body (unverified)"
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -93,6 +149,11 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s13014-025-02697-6"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Finnegan RN, Quinn A, Horsley P, et al. Geometric and dosimetric evaluation of a commercial AI auto-contouring tool on multiple anatomical sites in CT scans. J Appl Clin Med Phys 2025;26:e70067 — first published assessment of Ethos 2.0 AI auto-contouring across 223 patients and 45 unique structures (pelvis, abdomen, thorax, head & neck).",
+        link: "https://doi.org/10.1002/acm2.70067"
+      },
+      {
         type: "Clinical Trial",
         description: "NCT06116019 — Online Adaptive Radiotherapy Using Ethos (prospective, ongoing)",
         link: "https://clinicaltrials.gov/study/NCT06116019"
@@ -114,8 +175,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
     releaseDate: "2024-04-30",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
-    source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement; releaseDate proxied from FDA decision date (2026-06-01)"
+    lastUpdated: "2026-06-06",
+    lastRevised: "2026-06-06",
+    source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
   }
 ];

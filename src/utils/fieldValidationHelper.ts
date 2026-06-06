@@ -10,6 +10,16 @@ export interface FieldValidationRule {
   alternativeFields?: string[];
 }
 
+// Helper: detect pre-market / pipeline ("Release Pending") products. Version and
+// release-date fields are not yet known for these, so we suppress the related
+// validation warnings instead of flagging them as missing required data.
+export function isPipelineProduct(product: ProductDetails): boolean {
+  return (
+    (product as any).developmentStage === 'pipeline' ||
+    String(product.certification ?? '').toLowerCase() === 'pipeline'
+  );
+}
+
 // Helper function to check if any of the alternative fields have values
 export function hasAnyFieldValue(product: ProductDetails, fields: string[]): boolean {
   return fields.some(field => {
@@ -53,14 +63,14 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
   },
   {
     fieldName: 'Version',
-    checkFunction: (product) => Boolean(product.version),
+    checkFunction: (product) => isPipelineProduct(product) || Boolean(product.version),
     severity: 'high',
     successMessage: 'Version is specified',
     failureMessage: 'Version is missing (required field)'
   },
   {
     fieldName: 'Release Date',
-    checkFunction: (product) => Boolean(product.releaseDate),
+    checkFunction: (product) => isPipelineProduct(product) || Boolean(product.releaseDate),
     severity: 'high',
     successMessage: 'Release Date is specified',
     failureMessage: 'Release Date is missing (required field)'
