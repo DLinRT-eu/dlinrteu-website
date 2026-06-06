@@ -135,8 +135,8 @@ export default function CompanyManagement() {
 
       // Check limit
       const verifiedCount = getVerifiedCount(selectedCompanyId);
-      if (verifiedCount >= 5) {
-        toast.error('Company already has 5 verified representatives (maximum)');
+      if (verifiedCount >= 10) {
+        toast.error('Company already has 10 verified representatives (maximum)');
         return;
       }
 
