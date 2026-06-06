@@ -175,8 +175,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
     releaseDate: "2024-04-30",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
-    source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement; releaseDate proxied from FDA decision date (2026-06-01)"
+    lastUpdated: "2026-06-06",
+    lastRevised: "2026-06-06",
+    source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
   }
 ];
