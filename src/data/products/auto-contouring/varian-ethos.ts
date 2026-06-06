@@ -149,6 +149,11 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s13014-025-02697-6"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Finnegan RN, Quinn A, Horsley P, et al. Geometric and dosimetric evaluation of a commercial AI auto-contouring tool on multiple anatomical sites in CT scans. J Appl Clin Med Phys 2025;26:e70067 — first published assessment of Ethos 2.0 AI auto-contouring across 223 patients and 45 unique structures (pelvis, abdomen, thorax, head & neck).",
+        link: "https://doi.org/10.1002/acm2.70067"
+      },
+      {
         type: "Clinical Trial",
         description: "NCT06116019 — Online Adaptive Radiotherapy Using Ethos (prospective, ongoing)",
         link: "https://clinicaltrials.gov/study/NCT06116019"
