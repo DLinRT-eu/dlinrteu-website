@@ -152,7 +152,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Sending email to:", profile.email);
 
-    const dashboardUrl = `${supabaseUrl.replace('.supabase.co', '')}/review`;
+    const dashboardUrl = "https://dlinrt.eu/reviewer/dashboard";
 
     const deadlineText = deadline 
       ? new Date(deadline).toLocaleDateString('en-US', { 
