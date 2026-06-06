@@ -69,6 +69,18 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Breast: Ventricle_L",
       "Breast: Ventricle_R",
 
+      // Breast — Elective Lymph Node levels (vendor-reported additional ELN
+      // structures, ESTRO 2026 booth communication; marked (unverified) pending
+      // company representative confirmation against the released model card).
+      "Breast: CTVn_L1 (unverified)",
+      "Breast: CTVn_L2 (unverified)",
+      "Breast: CTVn_L3 (unverified)",
+      "Breast: CTVn_L4 (unverified)",
+      "Breast: CTVn_IMN (unverified)",
+      "Breast: CTVn_Interpectoral (unverified)",
+      "Breast: CTVn_Supraclav (unverified)",
+
+
       // Head & Neck (Doolan 2024 internal study + Reviewer research)
       "Head & Neck: A_Carotid_L",
       "Head & Neck: A_Carotid_R",
