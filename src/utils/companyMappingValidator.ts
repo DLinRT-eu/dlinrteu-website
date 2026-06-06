@@ -157,22 +157,6 @@ export async function validateCompanyMappings(
     }
   });
 
-      issues.push({
-        type: 'orphaned_representative',
-        severity: 'low',
-        companyName: rep.company_name,
-        expectedCompanyId: rep.company_id || 'unknown',
-        actualCompanyId: rep.company_id || undefined,
-        representativeCount: 1,
-        representatives: [{
-          id: rep.id,
-          email: (rep.profiles as any)?.email || 'Unknown',
-          verified: rep.verified || false,
-        }],
-        description: `Representative exists for "${rep.company_name}" but no products found in catalog for this company.`,
-      });
-    }
-  });
 
   // Calculate summary
   const summary = {
