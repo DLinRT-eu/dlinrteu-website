@@ -119,7 +119,7 @@ export default function CompanyGuide() {
                   Important Limits
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  Each company can have a maximum of <strong>5 verified representatives</strong> to ensure 
+                  Each company can have a maximum of <strong>10 verified representatives</strong> to ensure 
                   proper governance and accountability. Representatives must be verified by platform administrators.
                 </p>
               </div>
