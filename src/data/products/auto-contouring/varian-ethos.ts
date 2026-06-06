@@ -10,7 +10,6 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.varian.com/ethos",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-ethos.ts",
     description: "AI-driven auto-segmentation integrated into the Ethos adaptive radiotherapy system. Uses deep learning algorithms for contouring organs at risk and target volumes, enabling online adaptive radiotherapy workflows with AI-generated contours available in minutes at the treatment console.",
-    structuresUnavailable: true,
     features: [
       "Deep learning-based auto-segmentation",
       "Online adaptive radiotherapy workflow",
