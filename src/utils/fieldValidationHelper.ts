@@ -63,14 +63,14 @@ export const VALIDATION_RULES: FieldValidationRule[] = [
   },
   {
     fieldName: 'Version',
-    checkFunction: (product) => Boolean(product.version),
+    checkFunction: (product) => isPipelineProduct(product) || Boolean(product.version),
     severity: 'high',
     successMessage: 'Version is specified',
     failureMessage: 'Version is missing (required field)'
   },
   {
     fieldName: 'Release Date',
-    checkFunction: (product) => Boolean(product.releaseDate),
+    checkFunction: (product) => isPipelineProduct(product) || Boolean(product.releaseDate),
     severity: 'high',
     successMessage: 'Release Date is specified',
     failureMessage: 'Release Date is missing (required field)'
