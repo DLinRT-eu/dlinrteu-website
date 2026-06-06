@@ -130,15 +130,16 @@ export async function validateCompanyMappings(
   const ADMIN_OVERSIGHT_COMPANY_NAME = 'ADMIN_OVERSIGHT';
   const ADMIN_OVERSIGHT_COMPANY_ID = 'admin_all_companies';
   
-  const productCompanies = new Set(products.map(p => p.company));
+  const productCompanyIds = new Set(products.map(p => getCompanyIdByName(p.company)));
   representatives?.forEach(rep => {
     // Skip admin oversight representatives - they can certify all companies
-    if (rep.company_name === ADMIN_OVERSIGHT_COMPANY_NAME || 
+    if (rep.company_name === ADMIN_OVERSIGHT_COMPANY_NAME ||
         rep.company_id === ADMIN_OVERSIGHT_COMPANY_ID) {
       return;
     }
-    
-    if (!productCompanies.has(rep.company_name)) {
+
+    const repCanonicalId = rep.company_id || getCompanyIdByName(rep.company_name);
+    if (!productCompanyIds.has(repCanonicalId)) {
       issues.push({
         type: 'orphaned_representative',
         severity: 'low',
@@ -155,6 +156,7 @@ export async function validateCompanyMappings(
       });
     }
   });
+
 
   // Calculate summary
   const summary = {
