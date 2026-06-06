@@ -1,30 +1,36 @@
-Update all public and internal documentation that describes how company representatives are onboarded so both the new invitation-based flow and the legacy self-service flow are correctly documented.
+## Bug
 
-## What changed
-- A new admin-initiated invitation workflow was built: admins can invite a company representative directly from `/admin/companies` via email. The invitee clicks the link, sets a password, and is automatically registered as a verified company representative for that company.
-- The legacy workflow remains available: any user can sign up, then request the Company Representative role from their profile and wait for admin approval.
+In `supabase/functions/notify-reviewer-assignment/index.ts` (line 155), the dashboard CTA is built from the Supabase project URL:
 
-## Files to update
+```ts
+const dashboardUrl = `${supabaseUrl.replace('.supabase.co', '')}/review`;
+```
 
-### 1. `src/pages/company/CompanyGuide.tsx`
-- Rewrite the "Registration & Authentication Workflow" section (currently lines 131-295) to present two distinct paths.
-- **Path A — Invitation (Recommended)**: Admin sends invite → email arrives → click link → set password → auto-verified and logged into `/company/dashboard`.
-- **Path B — Self-Service**: Create account → go to Profile → request Company Representative role → provide verification details → wait for admin review (1-3 business days).
-- Update the workflow diagram to show both paths branching to "Access Granted".
-- Keep all existing detail about verification fields, limits (max 5 reps), and waiting times.
+That produces `https://msyfxyxzjyowwasgturs/review` (only the `.supabase.co` suffix is stripped — `https://` and the project ref remain), which is not a real host. So the "Go to Review Dashboard" button in the assignment email is broken.
 
-### 2. `docs/ADMIN_GUIDE.md`
-- In section 4 "Company Management", add a new subsection "Inviting Company Representatives" that documents:
-  - Where the invite button lives (All Companies tab, per-company row).
-  - What data is collected (email, first name, last name, position, optional message).
-  - The invite lifecycle: pending → accepted / expired / revoked.
-  - The 14-day expiry on invitation links.
-  - What happens on acceptance: auth user created, profile auto-approved, `company` role assigned, verified rep record created.
-- Update the "Verifying Company Representatives" subsection to clarify that it now covers the self-service path, while invitations bypass the Pending Verifications queue.
+Additionally, `/review` is the admin review-rounds dashboard. The recipient is a reviewer, so the link should point to the reviewer dashboard (`/reviewer/dashboard`).
 
-### 3. `README.md`
-- In the "Multi-Role System" / "Company Certifications" bullet, add a brief note that company reps can be onboarded either by admin invitation or by self-service role request.
+## Audit of similar link patterns in other edge functions
 
-## Not in scope
-- No code changes to invitation logic, edge functions, or UI.
-- No database migrations.
+I scanned every function in `supabase/functions/` for URL construction. Results:
+
+- `notify-reviewer-assignment` — BROKEN (described above).
+- All other notification/email functions hardcode `https://dlinrt.eu` (e.g. `notify-user-approval`, `notify-user-registration`, `notify-role-request-outcome`, `send-notification-digest`, `send-deadline-reminders`, `send-certification-reminder`, `subscribe-newsletter`, `unsubscribe-newsletter`) — OK.
+- `invite-reviewer` and `invite-company-representative` use `SITE_URL` env var with `https://dlinrt.eu` fallback — OK.
+- No other occurrence of `supabaseUrl.replace(...)` or similar broken patterns exists.
+
+## Fix
+
+In `supabase/functions/notify-reviewer-assignment/index.ts`:
+
+1. Replace the broken `dashboardUrl` line with a hardcoded site URL consistent with sibling functions:
+   ```ts
+   const siteUrl = "https://dlinrt.eu";
+   const dashboardUrl = `${siteUrl}/reviewer/dashboard`;
+   ```
+2. No other files need changes — the audit confirmed all other email links are well-formed.
+
+## Out of scope
+
+- Centralising the site URL into a shared constant or env var (would touch ~10 functions for no functional gain right now).
+- Email template visual changes.
