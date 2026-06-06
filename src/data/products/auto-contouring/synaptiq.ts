@@ -131,6 +131,43 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
       "Head & Neck: Glottis",
       "Head & Neck: VB_C",
 
+      // Head & Neck — Elective Lymph Node levels per Grégoire et al. consensus
+      // (Radiother Oncol 2014/2019; vendor-reported support, ESTRO 2026 booth).
+      // Marked (unverified) pending company representative confirmation.
+      "Head & Neck: CTVn_Ia (unverified)",
+      "Head & Neck: CTVn_Ib_L (unverified)",
+      "Head & Neck: CTVn_Ib_R (unverified)",
+      "Head & Neck: CTVn_II_L (unverified)",
+      "Head & Neck: CTVn_II_R (unverified)",
+      "Head & Neck: CTVn_III_L (unverified)",
+      "Head & Neck: CTVn_III_R (unverified)",
+      "Head & Neck: CTVn_IVa_L (unverified)",
+      "Head & Neck: CTVn_IVa_R (unverified)",
+      "Head & Neck: CTVn_IVb_L (unverified)",
+      "Head & Neck: CTVn_IVb_R (unverified)",
+      "Head & Neck: CTVn_Va_L (unverified)",
+      "Head & Neck: CTVn_Va_R (unverified)",
+      "Head & Neck: CTVn_Vb_L (unverified)",
+      "Head & Neck: CTVn_Vb_R (unverified)",
+      "Head & Neck: CTVn_Vc_L (unverified)",
+      "Head & Neck: CTVn_Vc_R (unverified)",
+      "Head & Neck: CTVn_VIa (unverified)",
+      "Head & Neck: CTVn_VIb (unverified)",
+      "Head & Neck: CTVn_VIIa_L (unverified)",
+      "Head & Neck: CTVn_VIIa_R (unverified)",
+      "Head & Neck: CTVn_VIIb_L (unverified)",
+      "Head & Neck: CTVn_VIIb_R (unverified)",
+      "Head & Neck: CTVn_VIII_L (unverified)",
+      "Head & Neck: CTVn_VIII_R (unverified)",
+      "Head & Neck: CTVn_IX_L (unverified)",
+      "Head & Neck: CTVn_IX_R (unverified)",
+      "Head & Neck: CTVn_Xa_L (unverified)",
+      "Head & Neck: CTVn_Xa_R (unverified)",
+      "Head & Neck: CTVn_Xb_L (unverified)",
+      "Head & Neck: CTVn_Xb_R (unverified)",
+      "Head & Neck: CTVn_Retropharyngeal (unverified)",
+
+
       // Thorax (Doolan 2024 internal study + Reviewer research)
       "Thorax: A_Aorta",
       "Thorax: A_Carotid_L",
