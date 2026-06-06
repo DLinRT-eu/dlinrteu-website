@@ -34,6 +34,63 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       "Direct CBCT dose calculation support",
       "Guided adaptive workflow with AI-assisted decision making"
     ],
+    supportedStructures: [
+      // Source: Finnegan et al. JACMP 2025 (doi:10.1002/acm2.70067, Figure 1 / Table S1).
+      // 45 unique OARs evaluated; the subset reproduced in the article text is listed below
+      // with the (unverified) suffix per the structure-status convention. Pending company
+      // representative confirmation of the full Ethos 2.0 model card structure set.
+
+      // Pelvis
+      "Pelvis: Bladder (unverified)",
+      "Pelvis: Rectum (unverified)",
+      "Pelvis: Femur_Head_L (unverified)",
+      "Pelvis: Femur_Head_R (unverified)",
+      "Pelvis: Bowel_Small (unverified)",
+      "Pelvis: Colon_Sigmoid (unverified)",
+      "Pelvis: Bowel_Bag (unverified)",
+
+      // Abdomen
+      "Abdomen: Liver (unverified)",
+      "Abdomen: Kidney_L (unverified)",
+      "Abdomen: Kidney_R (unverified)",
+      "Abdomen: Stomach (unverified)",
+      "Abdomen: Duodenum (unverified)",
+      "Abdomen: Pancreas (unverified)",
+      "Abdomen: Spleen (unverified)",
+
+      // Thorax
+      "Thorax: Lung_L (unverified)",
+      "Thorax: Lung_R (unverified)",
+      "Thorax: Heart (unverified)",
+      "Thorax: Esophagus (unverified)",
+      "Thorax: Trachea (unverified)",
+      "Thorax: SpinalCord (unverified)",
+      "Thorax: Bronchial_Tree (unverified)",
+      "Thorax: Chestwall (unverified)",
+      "Thorax: Breast_L (unverified)",
+      "Thorax: Breast_R (unverified)",
+      "Thorax: Carina (unverified)",
+
+      // Head & Neck
+      "Head & Neck: Brain (unverified)",
+      "Head & Neck: Brainstem (unverified)",
+      "Head & Neck: Bone_Mandible (unverified)",
+      "Head & Neck: Glnd_Thyroid (unverified)",
+      "Head & Neck: Parotid_L (unverified)",
+      "Head & Neck: Parotid_R (unverified)",
+      "Head & Neck: Glnd_Submand_L (unverified)",
+      "Head & Neck: Glnd_Submand_R (unverified)",
+      "Head & Neck: OpticNrv_L (unverified)",
+      "Head & Neck: OpticNrv_R (unverified)",
+      "Head & Neck: OpticChiasm (unverified)",
+      "Head & Neck: Cochlea_L (unverified)",
+      "Head & Neck: Cochlea_R (unverified)",
+      "Head & Neck: Larynx (unverified)",
+      "Head & Neck: Musc_Constrict (unverified)",
+
+      // External
+      "External: Body (unverified)"
+    ],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CBCT", "CT"],
