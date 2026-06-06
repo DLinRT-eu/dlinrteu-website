@@ -356,8 +356,8 @@ export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     version: "2.0",
     releaseDate: "2023-08-20",
-    lastUpdated: "2024-03-05",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-06",
+    lastRevised: "2026-06-06",
     source:
       "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, and vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature. Note: Abdomen structures require source verification; CE clearance details pending verification against EUDAMED listing or vendor press release.",
   },
