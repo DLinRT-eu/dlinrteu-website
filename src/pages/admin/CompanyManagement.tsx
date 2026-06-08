@@ -622,7 +622,7 @@ export default function CompanyManagement() {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              Each company can have a maximum of 5 verified representatives.
+              Each company can have a maximum of 10 verified representatives.
               Representatives must be verified to certify products.
               Admins can certify any company's products without being a representative.
             </AlertDescription>
