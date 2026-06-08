@@ -1,9 +1,42 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/layout/PageLayout';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { ArrowLeft, Mail } from 'lucide-react';
+
+const FAQ_ITEMS: { q: string; a: string }[] = [
+  { q: 'How do I request a role?', a: 'Sign up, go to your Profile page, find the Request New Role section, choose Reviewer or Company, provide justification, and submit for admin review. Company role may require verification documents.' },
+  { q: 'Can I have multiple roles?', a: 'Yes, with limits. User+Reviewer and User+Company are allowed. Reviewer and Company roles are incompatible to prevent conflicts of interest.' },
+  { q: "Why can't I use my Gmail/personal email?", a: 'Institutional emails (.edu, .ac.uk, .org, .gov, etc.) are required to verify affiliation and ensure trustworthy contributions.' },
+  { q: 'How long does account approval take?', a: 'Account approval is typically completed within a few business days after registration.' },
+  { q: 'Can I be both a Reviewer and Company Representative?', a: 'No. These roles are mutually exclusive to avoid conflicts of interest in product reviews.' },
+  { q: 'Can users review products?', a: 'Regular users can share adoption experiences. Formal product reviews are restricted to approved Reviewers.' },
+  { q: 'How long does role approval take?', a: 'Role requests are reviewed by administrators, typically within a few business days.' },
+  { q: 'What if my role request is denied?', a: 'You will be notified with a reason. You can address the feedback and submit a new request.' },
+  { q: 'What can I do as a User?', a: 'Users can browse the catalogue, track adopted products, share experiences, and request additional roles.' },
+  { q: 'Who can see my product adoptions?', a: 'Visibility depends on your sharing settings. Anonymous adoptions are aggregated only; identifiable details are limited to authorized roles.' },
+  { q: 'Why should I share my experience?', a: 'Sharing helps the community evaluate real-world performance and supports peer-reviewed evidence.' },
+  { q: 'What are the responsibilities of a Reviewer?', a: 'Reviewers assess product information for accuracy, completeness, and evidence quality following the DLinRT.eu review guide.' },
+  { q: 'How are reviews assigned?', a: 'Administrators assign reviews based on reviewer preferences, expertise, and workload.' },
+  { q: "What if I can't complete a review on time?", a: 'Contact the administrators as soon as possible to request a deadline extension or reassignment.' },
+  { q: 'How do companies benefit from the platform?', a: 'Companies get verified visibility, structured product pages, certification badges, and direct communication channels.' },
+  { q: 'Can I see which users adopted our products?', a: 'Company representatives see aggregated adoption metrics; individual user details are only shared when the user opts in.' },
+  { q: 'How do I update product information?', a: 'Company representatives can submit edits via the visual editor or through GitHub pull requests, subject to admin approval.' },
+  { q: 'How do I switch between role-based views?', a: 'Use the role switcher in the authenticated navigation to move between your available role dashboards.' },
+  { q: 'Can I access the public site while logged in?', a: 'Yes, all public pages remain accessible while authenticated.' },
+];
+
+const FAQ_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 export default function RolesFAQ() {
   return (
@@ -12,6 +45,9 @@ export default function RolesFAQ() {
       description="Frequently asked questions about user roles and permissions on DLinRT.eu."
       canonical="https://dlinrt.eu/roles/faq"
     >
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(FAQ_JSONLD)}</script>
+      </Helmet>
       <div className="container max-w-4xl py-12">
         <div className="mb-8">
           <Button asChild variant="ghost" className="mb-4">

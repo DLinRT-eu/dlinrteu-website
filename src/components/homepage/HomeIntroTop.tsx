@@ -50,6 +50,7 @@ const HomeIntroTop = () => {
                 </defs>
               </svg>
             </span>
+            : Product Catalogue
           </h1>
           <p className="mt-5 text-lg md:text-xl text-slate-600">
             Find deep-learning-based solutions and QA monitoring tools for radiotherapy available for the European market, and beyond.
