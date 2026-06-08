@@ -340,6 +340,11 @@ const App = () => (
                     <EditApprovals />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/representatives-bulk-email" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <BulkRepresentativeEmail />
+                  </ProtectedRoute>
+                } />
                 
                 {/* Reviewer Routes */}
                 <Route path="/reviewer/dashboard" element={
