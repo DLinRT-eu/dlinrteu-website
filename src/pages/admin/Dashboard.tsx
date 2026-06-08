@@ -25,7 +25,8 @@ import {
   RefreshCw,
   UserCheck,
   Package,
-  FileEdit
+  FileEdit,
+  Mail
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
