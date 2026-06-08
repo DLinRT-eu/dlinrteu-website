@@ -189,7 +189,7 @@ export default function Roles() {
                   Go to Profile → Request Role → Select Company → Provide company name and verification details
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Requires admin verification of company affiliation. Max 5 representatives per company.
+                  Requires admin verification of company affiliation. Max 10 representatives per company.
                 </p>
                 <Button asChild size="sm" variant="outline" className="mt-2 gap-2">
                   <Link to="/company/guide">
