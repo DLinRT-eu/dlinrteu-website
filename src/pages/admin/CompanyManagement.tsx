@@ -516,14 +516,22 @@ export default function CompanyManagement() {
       title="Company Management"
       description="Manage company representatives and verify certification permissions"
     >
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
         <h1 className="text-3xl font-bold">Company Management</h1>
-        <Button variant="outline" asChild>
-          <a href="/admin/company-mapping-validator">
-            <Shield className="mr-2 h-4 w-4" />
-            Validate Mappings
-          </a>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <a href="/admin/representatives-bulk-email">
+              <Mail className="mr-2 h-4 w-4" />
+              Email all representatives
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a href="/admin/company-mapping-validator">
+              <Shield className="mr-2 h-4 w-4" />
+              Validate Mappings
+            </a>
+          </Button>
+        </div>
       </div>
       
       <Tabs defaultValue={defaultTab} className="space-y-6">
