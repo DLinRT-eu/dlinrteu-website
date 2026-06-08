@@ -56,6 +56,72 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_bulk_email_log: {
+        Row: {
+          body_markdown: string
+          created_at: string
+          failure_count: number
+          id: string
+          recipient_count: number
+          recipients: Json
+          sent_by: string | null
+          subject: string
+          success_count: number
+        }
+        Insert: {
+          body_markdown: string
+          created_at?: string
+          failure_count?: number
+          id?: string
+          recipient_count?: number
+          recipients?: Json
+          sent_by?: string | null
+          subject: string
+          success_count?: number
+        }
+        Update: {
+          body_markdown?: string
+          created_at?: string
+          failure_count?: number
+          id?: string
+          recipient_count?: number
+          recipients?: Json
+          sent_by?: string | null
+          subject?: string
+          success_count?: number
+        }
+        Relationships: []
+      }
+      admin_email_templates: {
+        Row: {
+          body_markdown: string
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          body_markdown: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          body_markdown?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       analytics_daily: {
         Row: {
           created_at: string
