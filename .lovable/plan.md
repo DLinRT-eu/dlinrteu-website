@@ -1,25 +1,82 @@
-## Goal
-On `/admin/companies`, ensure (a) all companies — including pipeline-only ones — are listed, and (b) up to 10 representatives per company is the consistent limit everywhere it's surfaced.
+# Bulk Email to Company Representatives
 
-## Findings
-- **Pipeline companies already included.** `src/pages/admin/CompanyManagement.tsx` iterates over `COMPANIES` from `@/data`, which is the union of all category company files. Pipeline-only vendors (Therapanacea, MedLever, Neuralrad, etc.) already live in those files, so they show up in both the Overview and All Companies tabs. No data wiring change needed.
-- **10-rep limit partially applied.** The hard checks in `CompanyManagement.tsx` (`handleAssignUser`) and `CompanyGuide.tsx` already say 10. But several user-facing strings still say "5":
-  - `src/pages/admin/CompanyManagement.tsx`
-    - L625: description "maximum of 5 verified representatives"
-    - L734–735: badge `{verifiedCount}/5 verified` and variant threshold `>= 5`
-    - L740, L751: invite/assign buttons disabled at `>= 5`
-  - `src/pages/About.tsx` L298: "Max 5 representatives per company"
-  - `src/pages/Roles.tsx` L192: "Max 5 representatives per company."
+Add an admin-only tool to compose and send an email to many (or all) verified company representatives in one action, with personalization tokens, a live HTML preview, and an automatic link to each representative's company catalogue page.
 
-## Changes
-1. **`src/pages/admin/CompanyManagement.tsx`** — replace every remaining `5` rep-limit reference with `10`:
-   - Description text on the All Companies tab → "maximum of 10 verified representatives".
-   - Badge label → `{verifiedCount}/10 verified`, badge variant threshold → `>= 10`.
-   - Both invite/assign button `disabled` checks → `>= 10`.
-2. **`src/pages/About.tsx`** L298 → "Max 10 representatives per company".
-3. **`src/pages/Roles.tsx`** L192 → "Max 10 representatives per company."
+## Where it lives
+
+New admin page **`/admin/representatives-bulk-email`** linked from:
+- `src/pages/admin/Dashboard.tsx` (new card "Bulk email representatives")
+- `src/pages/admin/CompanyManagement.tsx` (header button "Email all representatives")
+
+Existing per-rep invite flow (`invite-company-representative`) is untouched.
+
+## UI (single page, two columns)
+
+Left — Composer
+- **Recipient selector**
+  - Mode: All verified reps / Filter by company (multi-select) / Filter by certification status / Pick individually from a searchable table
+  - Live recipient count + dedupe by email
+  - Excludes unsubscribed / suppressed emails (checks `suppressed_emails`)
+- **Subject** input (supports tokens)
+- **Message body** — rich textarea (markdown-style: paragraphs, bold, links, bullet lists) with a "Insert token" dropdown
+- **Personalization tokens** (substituted server-side per recipient):
+  - `{{first_name}}`, `{{last_name}}`, `{{full_name}}`
+  - `{{company_name}}`
+  - `{{company_url}}` → `https://dlinrt.eu/company/{companyId}` (rendered as a styled button "View {{company_name}} on DLinRT.eu" appended automatically + available as inline token)
+  - `{{rep_position}}`, `{{sender_name}}`, `{{today}}`
+- **Template management**
+  - Save / load / delete named templates (new table `admin_email_templates`)
+  - Ships with 2 starter templates: "Certification reminder", "Quarterly update"
+- **Send controls**: "Send test to me", "Send to N recipients" (confirm dialog showing count)
+
+Right — Live preview
+- Renders the branded DLinRT email layout (same header/footer style as `invite-company-representative`) with tokens substituted using the **first recipient** as sample (or admin-selected sample)
+- Tabs: Desktop / Mobile width preview
+- Shows resolved subject, From line, and the auto-appended company CTA button + link
+
+## Backend
+
+### New table `admin_email_templates`
+Columns: `id uuid pk`, `name text unique`, `subject text`, `body_markdown text`, `created_by uuid`, `created_at`, `updated_at`.
+RLS: admin-only (read/write/delete) via `has_role(auth.uid(),'admin')`. Grants to `authenticated` + `service_role`.
+
+### New table `admin_bulk_email_log`
+Columns: `id`, `sent_by uuid`, `subject`, `body_markdown`, `recipient_count int`, `success_count int`, `failure_count int`, `created_at`. RLS: admin-only read.
+
+### New edge function `send-bulk-representative-email`
+- Verifies caller has `admin` role (same pattern as `invite-company-representative`)
+- Input: `{ subject, bodyMarkdown, recipientFilter | recipientIds[], testEmail? }`
+- Resolves recipients from `company_representatives` joined with profile (first/last name, position) and `COMPANIES` data on the client-supplied companyId → companyName
+- Skips addresses in `suppressed_emails`
+- For each recipient: substitutes tokens, renders the branded HTML (shared template matching the existing invite email styling), appends the "View {company} on DLinRT.eu" CTA button linking to `https://dlinrt.eu/company/{companyId}`
+- Sends via Resend (`npm:resend@4.0.0`) with rate limiting (batch of 10, small delay) to stay within Resend's throughput
+- Writes one row to `admin_bulk_email_log` summarizing the run
+- Standard CORS allowlist + generic outer catch (per project edge function standards)
+
+### Unsubscribe / compliance
+- Each email includes a plain-text footer "You receive this as a verified DLinRT.eu company representative." — no marketing content (transactional/admin operational use only). No new unsubscribe flow; reps can manage notifications from their profile.
+
+## Files
+
+New:
+- `src/pages/admin/BulkRepresentativeEmail.tsx`
+- `src/components/admin/bulk-email/RecipientPicker.tsx`
+- `src/components/admin/bulk-email/EmailComposer.tsx`
+- `src/components/admin/bulk-email/EmailPreview.tsx`
+- `src/components/admin/bulk-email/TemplateManager.tsx`
+- `src/utils/email/tokenSubstitution.ts` (shared: also used client-side for preview)
+- `src/utils/email/brandedEmailTemplate.ts` (mirrors HTML shell used by edge function for accurate preview)
+- `supabase/functions/send-bulk-representative-email/index.ts`
+- Migration: create `admin_email_templates`, `admin_bulk_email_log`, RLS, grants, seed two starter templates
+
+Edited:
+- `src/App.tsx` — add route `/admin/representatives-bulk-email` inside admin guard
+- `src/pages/admin/Dashboard.tsx` — add navigation card
+- `src/pages/admin/CompanyManagement.tsx` — add header button
 
 ## Out of scope
-- No DB schema / RLS changes (there's no DB-side cap on rep count; the limit is enforced in app code).
-- No changes to the companies data files; pipeline companies are already part of `COMPANIES`.
-- No layout / styling changes.
+
+- No changes to per-company invite limits or existing invite flow
+- No marketing / newsletter functionality (newsletter system stays separate)
+- No scheduling (immediate send only in v1)
+- No attachments

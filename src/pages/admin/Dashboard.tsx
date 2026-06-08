@@ -25,7 +25,8 @@ import {
   RefreshCw,
   UserCheck,
   Package,
-  FileEdit
+  FileEdit,
+  Mail
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -482,6 +483,12 @@ export default function AdminDashboard() {
               <Link to="/admin/edit-approvals">
                 <FileEdit className="h-5 w-5" />
                 <span>Edit Approvals</span>
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-auto py-4 flex-col gap-2">
+              <Link to="/admin/representatives-bulk-email">
+                <Mail className="h-5 w-5" />
+                <span>Bulk Email Reps</span>
               </Link>
             </Button>
             </div>

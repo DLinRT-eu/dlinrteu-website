@@ -101,6 +101,7 @@ const SecurityDashboard = lazyPage(() => import("./pages/admin/SecurityDashboard
 const UserRegistrationReview = lazyPage(() => import("./pages/admin/UserRegistrationReview"));
 const ChangelogAdmin = lazyPage(() => import("./pages/admin/ChangelogAdmin"));
 const EditApprovals = lazyPage(() => import("./pages/admin/EditApprovals"));
+const BulkRepresentativeEmail = lazyPage(() => import("./pages/admin/BulkRepresentativeEmail"));
 
 // Company Pages
 const CompanyDashboard = lazyPage(() => import("./pages/company/Dashboard"));
@@ -337,6 +338,11 @@ const App = () => (
                 <Route path="/admin/edit-approvals" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <EditApprovals />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/representatives-bulk-email" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <BulkRepresentativeEmail />
                   </ProtectedRoute>
                 } />
                 
