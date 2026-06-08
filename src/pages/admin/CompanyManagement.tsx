@@ -622,7 +622,7 @@ export default function CompanyManagement() {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              Each company can have a maximum of 5 verified representatives.
+              Each company can have a maximum of 10 verified representatives.
               Representatives must be verified to certify products.
               Admins can certify any company's products without being a representative.
             </AlertDescription>
@@ -731,13 +731,13 @@ export default function CompanyManagement() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant={verifiedCount >= 5 ? 'default' : 'secondary'}>
-                          {verifiedCount}/5 verified
+                        <Badge variant={verifiedCount >= 10 ? 'default' : 'secondary'}>
+                          {verifiedCount}/10 verified
                         </Badge>
                         <Button
                           size="sm"
                           variant="outline"
-                          disabled={verifiedCount >= 5}
+                          disabled={verifiedCount >= 10}
                           onClick={() => {
                             setSelectedCompanyId(company.id);
                             setAssignDialogOpen(true);
@@ -748,7 +748,7 @@ export default function CompanyManagement() {
                         </Button>
                         <Button
                           size="sm"
-                          disabled={verifiedCount >= 5}
+                          disabled={verifiedCount >= 10}
                           onClick={() => {
                             setInviteCompany({ id: company.id, name: company.name });
                             setInviteDialogOpen(true);
