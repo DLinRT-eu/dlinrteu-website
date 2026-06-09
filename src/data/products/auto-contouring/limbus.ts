@@ -131,8 +131,8 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/app16115681"
       }
     ],
-    lastUpdated: "2024-03-10",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-09",
+    lastRevised: "2026-06-09",
     source: "FDA 510(k) database (K241837), company official sources"
   }
 ];

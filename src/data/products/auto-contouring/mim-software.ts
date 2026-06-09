@@ -91,8 +91,8 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.4.0",
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-09",
+    lastRevised: "2026-06-09",
     source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
