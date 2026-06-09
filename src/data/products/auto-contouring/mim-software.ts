@@ -82,6 +82,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Bayley et al. Comparison of two auto-contouring systems for H&N OARs to institutional reference standard. Appl Sci 2026;16(11):5681",
+        link: "https://doi.org/10.3390/app16115681"
       }
     ],
     version: "1.4.0",
