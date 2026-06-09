@@ -82,12 +82,17 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Bayley et al. Comparison of two auto-contouring systems for H&N OARs to institutional reference standard. Appl Sci 2026;16(11):5681",
+        link: "https://doi.org/10.3390/app16115681"
       }
     ],
     version: "1.4.0",
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-09",
+    lastRevised: "2026-06-09",
     source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
