@@ -92,6 +92,12 @@ export interface Product {
     type: string;
     description: string;
     link: string;
+    level?: string;
+    authors?: string;
+    year?: string | number;
+    title?: string;
+    journal?: string;
+    doi?: string;
   }>;
   limitations?: string[];
   

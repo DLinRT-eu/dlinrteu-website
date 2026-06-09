@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
-import { FileText, XCircle, ChevronDown, ChevronUp } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { XCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
+import EvidenceCitation from "./EvidenceCitation";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 import {
   EVIDENCE_RIGOR_LEVELS,
@@ -67,58 +67,11 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
     return null;
   }
 
-  // Helper function to format DOI links
-  const formatDOI = (doi: string) => {
-    const cleanDoi = doi.trim();
-    const doiUrl = cleanDoi.startsWith("https://doi.org/") 
-      ? cleanDoi
-      : `https://doi.org/${cleanDoi.replace(/^doi:/, '')}`;
-    
-    return (
-      <a 
-        href={doiUrl} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 text-primary hover:underline"
-      >
-        <FileText className="h-4 w-4" />
-        {cleanDoi.replace(/^https:\/\/doi\.org\//, '').replace(/^doi:/, '')}
-      </a>
-    );
-  };
-
-  // Helper function to render evidence items (handles both string and object formats)
-  const renderEvidenceItem = (item: string | { type: string; description: string; link: string }, index: number) => {
-    if (typeof item === 'string') {
-      // Handle legacy DOI string format
-      return (
-        <div key={index} className="pl-2 py-1 border-l-2 border-primary/20">
-          {formatDOI(item)}
-        </div>
-      );
-    } else {
-      // Handle new object format
-      return (
-        <div key={index} className="pl-2 py-2 border-l-2 border-primary/20 space-y-1">
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-xs">
-              {item.type}
-            </Badge>
-          </div>
-          <p className="text-sm text-muted-foreground">{item.description}</p>
-          <a 
-            href={item.link} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-primary hover:underline text-sm"
-          >
-            <FileText className="h-4 w-4" />
-            View Evidence
-          </a>
-        </div>
-      );
-    }
-  };
+  // Render a single evidence item using the uniform citation component
+  const renderEvidenceItem = (
+    item: string | { type: string; description: string; link: string },
+    index: number
+  ) => <EvidenceCitation key={index} item={item} />;
 
   return (
     <Card>
