@@ -44,6 +44,11 @@ interface EvidenceItem {
   description: string;
   link: string;
   level?: string;
+  authors?: string;
+  year?: string;
+  title?: string;
+  journal?: string;
+  doi?: string;
 }
 
 export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: EvidenceEditorProps) {
@@ -206,7 +211,7 @@ export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: Evide
                     <Input
                       value={item.link || ''}
                       onChange={(e) => handleUpdateEvidence(index, 'link', e.target.value)}
-                      placeholder="https://..."
+                      placeholder="https://doi.org/..."
                       className="bg-background flex-1"
                     />
                     {item.link && (
@@ -220,6 +225,59 @@ export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: Evide
                         </a>
                       </Button>
                     )}
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Structured citation (optional — overrides parsing of the description)
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <Label className="text-xs">Authors</Label>
+                      <Input
+                        value={item.authors || ''}
+                        onChange={(e) => handleUpdateEvidence(index, 'authors', e.target.value)}
+                        placeholder="Smith et al"
+                        className="bg-background"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Year</Label>
+                      <Input
+                        value={item.year || ''}
+                        onChange={(e) => handleUpdateEvidence(index, 'year', e.target.value)}
+                        placeholder="2025"
+                        className="bg-background"
+                      />
+                    </div>
+                    <div className="space-y-1 col-span-2">
+                      <Label className="text-xs">Title</Label>
+                      <Input
+                        value={item.title || ''}
+                        onChange={(e) => handleUpdateEvidence(index, 'title', e.target.value)}
+                        placeholder="Article title"
+                        className="bg-background"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Journal</Label>
+                      <Input
+                        value={item.journal || ''}
+                        onChange={(e) => handleUpdateEvidence(index, 'journal', e.target.value)}
+                        placeholder="Phys Med Biol"
+                        className="bg-background"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label className="text-xs">DOI</Label>
+                      <Input
+                        value={item.doi || ''}
+                        onChange={(e) => handleUpdateEvidence(index, 'doi', e.target.value)}
+                        placeholder="10.xxxx/yyyy"
+                        className="bg-background"
+                      />
+                    </div>
                   </div>
                 </div>
               </CollapsibleContent>
