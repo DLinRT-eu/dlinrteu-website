@@ -14,6 +14,7 @@ import NotificationBell from './notifications/NotificationBell';
 import { getRoleDashboardRoute } from '@/utils/roleDashboardUtils';
 import { CommandPalette, useCommandPalette } from './CommandPalette';
 import ThemeToggle from './ThemeToggle';
+import FontSizeControl from './common/FontSizeControl';
 
 const Header = () => {
   const { user, profile, signOut } = useAuth();
@@ -49,6 +50,7 @@ const Header = () => {
         </Link>
         
         <div className="flex items-center gap-1 ml-auto md:hidden">
+          <FontSizeControl />
           <ThemeToggle />
         </div>
         <MobileNav />
@@ -114,6 +116,7 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center gap-2">
+          <FontSizeControl />
           <ThemeToggle />
 
           <Button
