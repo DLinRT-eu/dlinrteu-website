@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
-import { FileText, XCircle, ChevronDown, ChevronUp } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { XCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
