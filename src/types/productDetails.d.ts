@@ -84,6 +84,13 @@ export interface ProductDetails extends Product {
     type: string;
     description: string;
     link: string;
+    level?: string;
+    // Optional structured citation fields (preferred over parsing `description`)
+    authors?: string;
+    year?: string | number;
+    title?: string;
+    journal?: string;
+    doi?: string;
   }>;
   limitations?: string[];
   
