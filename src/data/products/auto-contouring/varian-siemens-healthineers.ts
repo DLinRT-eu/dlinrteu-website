@@ -7,38 +7,41 @@ export const EthosAISegmentation: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales"]
   },
+  partOf: {
+    name: "Ethos radiotherapy system",
+    productUrl: "https://www.varian.com/ethos",
+    relationship: "Module"
+  },
   source: "FDA 510(k) K232923 summary, Varian official website, published literature, Ethos 2.0 Feb 2026 announcement; releaseDate proxied from FDA decision date (2026-06-01)",
   company: "Varian (Siemens Healthineers)",
   logoUrl: "/logos/varian.jpg",
-  website: "https://www.varian.com/ethos",
+  version: "v2.0",
+  website: "https://cancercare.siemens-healthineers.com/en-gb/products/adaptive-therapy/ethos",
   category: "Auto-Contouring",
   evidence: [
     {
       link: "https://doi.org/10.1016/j.tipsro.2023.100216",
-      type: "Peer-reviewed Publication",
-      description: "Byrne et al. Feasibility of Ethos generated treatment plans for head and neck cancer patients. Tech Innov Patient Support Radiat Oncol 2023"
+      type: "Peer-Reviewed Publication",
+      level: "1t",
+      description: "El-qmache and McLellan 2023. Investigating the feasibility of using Ethos generated treatment plans for head and neck cancer patients. Technical Innovations and Patient Support in Radiation Oncology 2023;27:100216"
     },
     {
       link: "https://doi.org/10.1186/s13014-025-02697-6",
-      type: "Peer-reviewed Publication",
-      description: "AI-driven online adaptive radiotherapy in prostate cancer treatment. Radiat Oncol 2025"
+      type: "Peer-Reviewed Publication",
+      level: "1c",
+      description: "Preziosi et al. 2025 AI-driven online adaptive radiotherapy in prostate cancer treatment. Radiation Oncology; 2025:20(116)"
     },
     {
       link: "https://clinicaltrials.gov/study/NCT06116019",
-      type: "Clinical Trial",
-      description: "NCT06116019 — Online Adaptive Radiotherapy Using Ethos (prospective, ongoing)"
+      type: "Clinical Study",
+      level: "0",
+      description: "NCT06116019 — Online Adaptive Radiotherapy Using a Novel Linear Accelerator (prospective, ongoing)"
     },
     {
-      link: "https://doi.org/10.3389/fonc.2024.1507806",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Prunaretty et al.  2024: Clinical feasibility of Ethos auto-segmentation for adaptive whole-breast cancer treatment. Frontiers in Oncology 2024;14"
-    },
-    {
-      link: "https://doi.org/10.1002/acm2.70067",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Finnegan et al. 2025: Geometric and dosimetric evaluation of a commercial AI auto-contouring tool on multiple anatomical sites in CT scans. Journal of Applied Clinical Medical Physics 2025;"
+      link: "https://varian.widen.net/s/rvsrgl8pbc/ethos_casestudy_icon_rad10950_october2021",
+      type: "Case Study",
+      level: "1c",
+      description: "\"Australia’s largest dedicated provider of cancer care pioneers daily adaptive therapy for prostate patients - Icon Group\""
     }
   ],
   features: [
@@ -48,7 +51,7 @@ export const EthosAISegmentation: ProductDetails = {
     "Multiple anatomical site support (head & neck, pelvis, thorax, abdomen, breast)",
     "Integrated into Ethos treatment management and planning"
   ],
-  modality: ["CBCT", "CT"],
+  modality: ["CBCT"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-ethos.ts",
   companyUrl: "https://www.varian.com",
   productUrl: "https://www.varian.com/ethos",
@@ -121,13 +124,6 @@ export const EthosAISegmentation: ProductDetails = {
   evidenceMultiCenter: true,
   evidenceProspective: true,
   secondaryCategories: ["Treatment Planning"],
-  supportedStructures: [
-    "Breast: Breast L",
-    "Breast: Breast R",
-    "Breast: Heart",
-    "Breast: Lung L",
-    "Breast: Lung R"
-  ],
   evidenceMultiNational: false,
   structuresUnavailable: true,
   adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
