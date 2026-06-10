@@ -1,33 +1,38 @@
-## Objective
-Consolidate the FDA 510(k) artefacts that are cluttering the repository root into the existing `public/fda_pdfs/` folder, so the codebase is browsable again without changing any served URL.
+## Goal
+Bring `src/data/products/auto-contouring/synaptiq.ts` (Mediq RT) into compliance with `docs/FIELD_REFERENCE.md`. The general `description` currently carries detailed Mediq Viewer / Agent / Server hardware specs, which the field reference does not permit there.
 
-## Current state
-- **Repo root (clutter, 16 files):** `K161625.pdf`, `K161625_summary.pdf`, `K191468.pdf`, `K191468_summary.pdf`, `K193282.pdf`, `K200714.pdf`, `K200714.txt`, `K200714_head.txt`, `K203020.pdf`, `K203020_summary.pdf`, `K212274.pdf`, `K212274.txt`, `K212274_head.txt`, `K213717.pdf`, `K213717_summary.pdf`, `K220264.pdf`, `K220264.txt`, `K220264_head.txt`, `K230082.pdf`, `K230082.txt`, `K230082_head.txt`, `K251306.pdf`, `K251306.txt`, `K251306_head.txt`, `K253091.pdf`.
-- **Canonical location (already exists):** `public/fda_pdfs/` holds 12 PDFs and is served at `/fda_pdfs/<file>` by Vite.
-- **Code references:** a project-wide search for `K[0-9]{6}` and `fda_pdfs` across `src/`, `supabase/`, `scripts/`, `docs/`, and Markdown returns **zero hits**. The root-level files are completely orphaned, and the served PDFs in `public/fda_pdfs/` are not linked from the React app either.
+## Field-reference findings
+- `description` — narrative product summary only; not the place for hardware tables.
+- `technology.deployment` — **enum only**: `on_prem`, `cloud`, `hybrid`. Current values (`"Cloud-based (SaaS)"`, `"Desktop (Windows 10+/MacOS 10+)"`, `"Mobile/tablet (iPad Pro 2021+)"`, etc.) are non-compliant.
+- `technology.integration` — array of integrated systems (TPS/PACS), not hardware.
+- `technology.processingTime` — free text, latency only.
+- `compatibleSystems` — "TPS/OS/hardware compatibility. Array of systems." → correct home for OS / GPU / RAM / network requirements.
+- No dedicated `systemRequirements` field exists; do **not** invent one.
 
-## Plan
+## Changes to `src/data/products/auto-contouring/synaptiq.ts`
 
-### 1. Move every root-level K-file into `public/fda_pdfs/`
-Single `mv` per file (using shell `mv`, since these are binary assets, not code). Targets:
-- All 8 main `Kxxxxxx.pdf` files at root → `public/fda_pdfs/`
-- All 6 `Kxxxxxx.txt` raw extracts → `public/fda_pdfs/`
-- All 5 `Kxxxxxx_summary.pdf` companions → `public/fda_pdfs/`
-- All 6 `Kxxxxxx_head.txt` companions → `public/fda_pdfs/`
+1. **`description`** — revert to the concise product narrative (capabilities, modalities, CE status, Active Contouring, adaptive learning). Remove the entire "System requirements (vendor): Mediq Viewer … ≥1 Gbps network link." block.
 
-For the two filenames that already exist in `public/fda_pdfs/` (`K193282.pdf`, `K253091.pdf`), the root copies are 418-byte placeholders while the public copies are the real assets — the root placeholders will be **deleted** (`rm`) rather than overwriting the good files.
+2. **`technology.deployment`** — replace the 4 free-text strings with the allowed enum values only:
+   ```
+   deployment: ["cloud", "on_prem"]
+   ```
+   (SaaS → `cloud`; self-hosted hospital install → `on_prem`. Desktop/tablet are client access methods, not deployment models, and move to `compatibleSystems`.)
 
-### 2. Verify no URL break
-Re-run `rg "K[0-9]{6}|fda_pdfs"` across the codebase after the move. Expected: still zero hits → nothing to rewrite, nothing breaks. Files newly placed under `public/fda_pdfs/` become available at `/fda_pdfs/<file>` (a superset of what was reachable before, since the root files weren't served at all by Vite).
+3. **Add `compatibleSystems`** as an array of concise hardware/OS compatibility strings, one per component, preserving every vendor spec verbatim in substance:
+   - `"Mediq Viewer (client): Windows 10+ / macOS 10+ with latest Chrome, Edge or Safari; ≥4 GB RAM; 2-core CPU ≥2 GHz; ≥20 GB disk; ≥50 Mbps network"`
+   - `"Mediq Viewer (tablet): iPad Pro 2021 or equivalent"`
+   - `"Mediq Agent: Ubuntu 22.04+ workstation/VM; ≥2 GB RAM; 2-core CPU ≥2 GHz; ≥25 GB disk; continuous uptime"`
+   - `"Mediq Server (on-prem only): Ubuntu 22.04; ≥16 GB RAM; 8-core CPU ≥3.8 GHz; ≥512 GB disk; dedicated NVIDIA GPU ≥20 GB VRAM; ≥1 Gbps network"`
 
-### 3. Leave `public/fda_pdfs/` as-is
-No renaming of the folder, no introduction of a new `public/fda/510k/` subtree — that would invalidate the 12 existing canonical URLs and contradict the no-broken-link requirement.
+4. **`source`** — leave the "vendor-provided System Requirements documentation (2026-06-10)" citation intact; it now justifies `compatibleSystems` instead of the description.
 
-## Out of scope
-- Migrating any of these PDFs to the Lovable CDN (`lovable-assets`). They are public reference documents that may be linked from external sources by URL; switching to CDN URLs would constitute a URL break.
-- Wiring the PDFs into the UI (none of them are surfaced today; adding links is a separate feature request).
-- Touching `K200714_head.txt`-style helper files' content.
+5. **`lastUpdated`** — bump to `2026-06-10` (already set).
 
-## Technical details
-- Files touched: 25 root-level binaries moved / 2 deleted. No source code modified.
-- Post-move state: repo root no longer contains any `K*.pdf` or `K*.txt`; `public/fda_pdfs/` grows from 12 → ~33 files, all reachable at stable `/fda_pdfs/<name>` URLs.
+## Not changed
+- Structures list, evidence, regulatory, limitations, evidenceRigor/clinicalImpact/adoptionReadiness — out of scope.
+- No other product files, no schema/type changes, no UI changes.
+
+## Validation
+- `rg "deployment" src/types/productDetails*` to confirm the `deployment` field accepts a string array (no TS enum to break).
+- Confirm `compatibleSystems` exists on `ProductDetails` before writing; if absent, fall back to placing the four lines in `limitations` prefixed with `"System requirement: …"` (still compliant, since limitations accept free strings). Plan currently assumes the field exists per FIELD_REFERENCE line 236.
