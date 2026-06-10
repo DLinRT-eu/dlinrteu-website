@@ -13,13 +13,6 @@ export const MRCATPelvis: ProductDetails = {
   version: "Current",
   website: "https://www.philips.ie/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
   category: "Image Synthesis",
-  evidence: [
-    {
-      link: "https://doi.org/10.1016/j.ijrobp.2020.07.027",
-      type: "Multicenter Study",
-      description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of Magnetic Resonance Imaging-Only Prostate Treatment Planning Using Synthetic Computed Tomography Images. Int J Radiat Oncol Biol Phys 2020;108(5):1265-1275."
-    }
-  ],
   features: [
     "MR-only planning",
     "Synthetic CT generation",

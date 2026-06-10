@@ -6,37 +6,50 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     name: "MR-Box",
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu",
-    productUrl: "https://www.therapanacea.eu/our-products/",
-    description: "Generate an AI-based pseudo-CT from MR images in just one click to avoid registration errors and accelerate planning workflow and adaptation. Part of the ART-Plan+ platform.",
-    features: ["MR-only simulation", "Synthetic CT generation", "Clinical workflow integration", "One-click processing"],
+    productUrl: "https://www.therapanacea.eu/our-products/mr-box/",
+    description: "AI-powered software module within the ART-Plan+ platform for generating MR-based pseudo-CT (synthetic CT) images with co-registered organs-at-risk (OAR) delineations from standard MR images, supporting MR-only radiotherapy workflows and reducing physical CT demand.",
+    features: [
+      "AI-based MR-to-pseudo-CT (synthetic CT) generation in one click",
+      "Organs-at-risk (OAR) automatic delineation directly on MRI images",
+      "Tissue electron density generation for direct dose calculation from pseudo-CTs",
+      "Multi-modal registration avoidance to eliminate spatial alignment errors",
+      "Seamless DICOM export of synthetic CTs and RT-structures to major TPS and PACS systems"
+    ],
     category: "Image Synthesis",
-    certification: "CE, FDA & TGA",
+    certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea.ts",
-    website: "https://www.therapanacea.eu/our-products/",
-    anatomicalLocation: ["Pelvis", "Brain", "Head & Neck"],
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
+    website: "https://www.therapanacea.eu/our-products/mr-box/",
+    anatomicalLocation: ["Pelvis", "Brain", "Abdomen"],
     modality: ["MRI"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Prostate Cancer", "Brain Tumors", "Head and Neck Cancer"],
+    diseaseTargeted: ["Prostate Cancer", "Brain Tumors", "Abdominal Tumors"],
     keyFeatures: [
-      "AI-based pseudo-CT generation",
-      "One-click processing",
-      "Eliminates registration errors",
-      "Accelerates planning workflow",
-      "MR-only radiotherapy support"
+      "AI-based MR-to-pseudo-CT generation",
+      "One-click pseudo-CT workflow minimizing planning delays",
+      "Organs-at-risk delineation on standard MR sequences",
+      "Reduces reliance on multi-modal MR-CT registration and associated errors",
+      "Provides reliable electron density values supporting MR-only radiotherapy planning"
     ],
     technicalSpecifications: {
-      population: "Adult patients",
-      input: ["MRI"],
+      population: "Adult patients undergoing radiotherapy",
+      input: ["Standard MR Sequences (T1, T2, TrueFisp)"],
       inputFormat: ["DICOM"],
-      output: ["Synthetic CT (pseudo-CT)"],
+      output: ["Pseudo-CT (synthetic CT) DICOM", "RT-Structure Set (RTSS)"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["TPS integration", "PACS integration"],
-      deployment: ["On-premises", "Cloud-based"],
-      triggerForAnalysis: "Automatic within workflow",
-      processingTime: "Minutes per dataset"
+      integration: [
+        "ART-Plan+ workflow and Annotate module integration",
+        "DICOM export to major Treatment Planning Systems (TPS)",
+        "Works alongside SmartFuse and SmartPlan modules"
+      ],
+      deployment: [
+        "Web-based clinical platform",
+        "On-premises clinical server or cloud deployment options based on institutional infrastructure"
+      ],
+      triggerForAnalysis: "User-initiated one-click workflow; batch/workflow integration within ART-Plan+",
+      processingTime: "Under 2-3 minutes for pseudo-CT generation and OAR delineation under optimal conditions"
     },
     regulatory: {
       ce: {
@@ -54,34 +67,34 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ, QKB, LLZ",
         regulationNumber: "21 CFR 892.5050",
         decisionDate: "2025-12-23",
-        notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025). Prior clearances: K242822 (v3.0.0, Feb 2025)"
+        notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025) is the latest platform clearance. K234068 (v2.2.0, April 2024) directly details MR-Box synthetic CT generation for male pelvis and brain. K242822 (v3.0.0, Feb 2025) is a platform-wide update."
       },
       tga: {
         status: "TGA Cleared",
-        notes: "Cleared for Australian market as part of ART-Plan+ platform"
+        notes: "Therapanacea publicly states ART-Plan is TGA cleared as part of the overall platform registration; independent ARTG records were not verified in this review."
       },
-      intendedUseStatement: "The Annotate module allows generation of pseudo-CTs from MRI images. Users are able to visualize, evaluate and modify the HU values of the associated structures on the pseudo-CT. ART-Plan offers deep-learning based synthetic CT-generation from MR images for the following localizations: pelvis male, Brain. (Source: FDA 510(k) K234068 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "The Annotate module allows generation of pseudo-CTs from MRI images. Users are able to visualize, evaluate and modify the HU values of the associated structures on the pseudo-CT. ART-Plan offers deep-learning based synthetic CT-generation from MR images for the following localizations: pelvis male, Brain. (Source: FDA 510(k) K234068 Summary)"
     },
     market: {
-      onMarketSince: "2022",
-      distributionChannels: ["Direct sales"],
+      onMarketSince: "2021",
+      distributionChannels: ["Direct sales"]
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.2",
+      version: "3.2.0 (Public Technical Info) / 3.1.0 (FDA Cleared)",
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    version: "3.1.2",
-    releaseDate: "2025-01-01",
-    lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-30",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)",
-    evidenceRigor: "E0",
-    evidenceRigorNotes: "No vendor-independent clinical validation studies identified for MR-Box synthetic CT generation. Evidence limited to vendor publications.",
-    clinicalImpact: "I0",
-    clinicalImpactNotes: "No independent clinical outcome data available yet.",
+    version: "3.2.0",
+    releaseDate: "2021",
+    lastUpdated: "2026-06-10",
+    lastRevised: "2026-06-10",
+    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091",
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054)",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadinessNotes: "CE-marked Class IIb and FDA 510(k) cleared commercial product. High implementation safeguards are necessary: deployment requires extensive local commissioning, MR sequence compatibility checks, MR scanner QA program, synthetic CT dose validation, and manual expert verification of all synthetic scans and structures before clinical use."
   }
 ];
