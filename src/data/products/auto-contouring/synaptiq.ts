@@ -76,13 +76,18 @@ export const MediqRT: ProductDetails = {
       "Mediq RT is a software as a medical device intended to assist radiation oncologists and medical physicists during contouring of 3D CT images of patients with an indication for radiotherapy. The software offers AI-based auto-segmentation of organs-at-risk (OARs) and clinical target volumes (CTVs), designed to streamline the contouring workflow by enabling interactive review, editing, and approval by qualified users prior to export to treatment planning systems. Mediq RT is capable of delineating regions of interest for all important anatomical sites, including head and neck, thorax, abdomen, and pelvis, and can support other target volumes as defined in clinical practice.\n\nIntended Medical Indication: Mediq RT automatically segments organs-at-risk (OARs) and clinical target volumes (CTVs) using CT scans for radiotherapy treatment planning. It assists radiation oncologists and medical physicists in contouring, reviewing, and editing these regions of interest. The software is designed for a broad spectrum of malignancies, where precise radiation delivery is essential to maximize tumor control and minimize damage to surrounding healthy tissues. (Source: vendor-provided intended purpose statement, 2026-06-10.)",
   },
   technology: {
-    deployment: ["Cloud-based", "Desktop (Windows 7+, MacOS 10.14+)"],
+    deployment: [
+      "Cloud-based (SaaS)",
+      "Self-hosted (on-premises)",
+      "Desktop (Windows 10+/MacOS 10+)",
+      "Mobile/tablet (iPad Pro 2021+)",
+    ],
     integration: ["Multi-vendor TPS integration", "PACS integration"],
     processingTime: "Seconds to minutes per case",
     triggerForAnalysis: "Manual or automated",
   },
   description:
-    "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. CE-certified (reported by vendor at the ESTRO 2026 booth), including the Active Contouring GTV delineation feature; pending verification against the EUDAMED listing. Features unique Active Contouring technology and adaptive learning for personalized contouring.",
+    "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. CE-certified (reported by vendor at the ESTRO 2026 booth), including the Active Contouring GTV delineation feature; pending verification against the EUDAMED listing. Features unique Active Contouring technology and adaptive learning for personalized contouring. System requirements (vendor): Mediq Viewer — web client on Windows 10/MacOS 10+ with latest Chrome/Edge/Safari, ≥4 GB RAM, 2-core ≥2 GHz CPU, ≥20 GB disk and a ≥50 Mbps connection (tablet use recommended on iPad Pro 2021 or equivalent); Mediq Agent — Ubuntu 22.04+ workstation/VM with ≥2 GB RAM, 2-core ≥2 GHz CPU, ≥25 GB disk and continuous uptime for clinical pipeline integration; Mediq Server (self-hosted only) — Ubuntu 22.04 workstation with ≥16 GB RAM, 8-core ≥3.8 GHz CPU, ≥512 GB disk, dedicated NVIDIA GPU with ≥20 GB VRAM and a ≥1 Gbps network link.",
   keyFeatures: [
     "92.5% average time saving in contouring workflow",
     "Adaptive learning according to user's individual technique",
