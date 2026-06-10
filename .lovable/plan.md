@@ -1,46 +1,29 @@
-## Goal
-Render every Clinical Evidence entry in a uniform citation format — **Authors (Year). Title. *Journal*. DOI** — across all product pages, without requiring a bulk rewrite of the ~hundreds of existing entries.
+## Objective
+Update the Mediq RT product entry (`src/data/products/auto-contouring/synaptiq.ts`) with the detailed regulatory and clinical information provided by the vendor.
 
-## Approach
-Display-only normalization with an optional structured upgrade path. No data migration required.
+## Changes
 
-1. **New util `src/lib/formatCitation.ts`**
-   - Input: an evidence item (`string | { type, description, link, ... }`) plus optional new structured fields `authors`, `year`, `title`, `journal`, `doi`.
-   - If structured fields are present, use them directly.
-   - Otherwise parse the legacy `description` string with tolerant regexes:
-     - **Authors**: text up to the first `. ` (e.g. `Bayley et al`, `Fan et al`).
-     - **Year**: 4-digit 19xx/20xx token, prefer the one adjacent to a journal/volume (`Journal 2025;…` or `(2025)`).
-     - **Journal + vol/issue/pages**: substring after the title sentence, before the year/semicolon block.
-     - **Title**: middle sentence(s) between authors and journal.
-     - **DOI**: derived from `link` (strip `https://doi.org/` / `doi:` prefixes).
-   - Return `{ authors, year, title, journal, locator, doi, doiUrl, raw }`. Any missing field falls back gracefully (e.g. show raw description if parsing fails).
+### 1. Version
+- Change `version` from `"2.0"` to `"1.6"`.
 
-2. **Citation component `src/components/product/EvidenceCitation.tsx`**
-   - Renders one entry in a single consistent layout:
-     ```text
-     [Type badge]  [Level badge if present]
-     Authors (Year). Title. *Journal* vol(issue):pages.
-     doi.org/<DOI>   ↗
-     ```
-   - Italic journal, monospace DOI link, `FileText` icon, hover underline. Falls back to the current "View Evidence" link when no DOI / unparseable.
-   - Keeps the existing left border accent for visual continuity.
+### 2. Intended Use Statement
+- Replace the existing short `regulatory.intendedUseStatement` with the full vendor-provided text, verbatim.
 
-3. **Wire into `EvidenceLimitationsDetails.tsx`**
-   - Replace `renderEvidenceItem` body with `<EvidenceCitation item={item} />`. Keep the existing top-3 + collapsible "show more" behavior untouched.
+### 3. CE Marking
+- Update `regulatory.ce.notes` to reflect verified CE clearance effective **2025-06-01** (removing the "pending verification" language).
+- Keep `status: "cleared"` and `class: "IIa"`.
 
-4. **Optional structured fields (forward-looking, no migration)**
-   - Extend the evidence item type to allow optional `authors?`, `year?`, `title?`, `journal?`, `doi?`. Existing entries continue to validate.
-   - Add matching optional inputs in `EvidenceEditor.tsx` (collapsed under an "Structured citation (optional)" subsection) so new/edited entries can be authored cleanly. `description` remains the source of truth when structured fields are empty.
+### 4. Conditions Targeted
+- Update `diseaseTargeted` array with the full list of applicable malignancies: brain tumours, head and neck tumours, thoracic tumours (lung, oesophageal, breast), abdominal tumours (pancreatic, stomach), pelvic tumours (bladder, prostate, cervical, uterine), and metastatic tumours.
 
-5. **Tests**
-   - Add a small `formatCitation.test.ts` covering ~5 representative legacy strings (with/without volume/issue, missing year, plain DOI string, structured override) to lock the parser behavior.
+### 5. Exclusion Criteria
+- Update `limitations` array to include the vendor-declared exclusion criteria: large metal implants / motion artefacts, paediatric patients, poor-quality imaging, and highly individualised contouring cases.
+- Retain any factually relevant existing limitations (e.g. "Requires verification by qualified radiation oncologist") after de-duplication.
 
-## Out of scope
-- Bulk rewriting existing product `description` strings into structured fields.
-- Changes to evidence rigor/impact badges, limitations, or the editor's non-citation fields.
-- Backend / DB schema changes (evidence lives in TS data files).
+### 6. Metadata
+- Update `lastUpdated` to `"2026-06-10"` to reflect this revision.
 
-## Files
-- New: `src/lib/formatCitation.ts`, `src/lib/formatCitation.test.ts`, `src/components/product/EvidenceCitation.tsx`
-- Edit: `src/components/product/EvidenceLimitationsDetails.tsx`, `src/components/product-editor/FieldEditors/EvidenceEditor.tsx`
-- Edit: evidence item type declaration (in `src/types/productDetails.d.ts` or wherever the evidence array is typed) to add the 5 optional structured fields.
+## Out of Scope
+- The pipeline product (`synaptiq-mediq-rt-4dct-pipeline`) will not be touched.
+- No new fields will be added; all data maps to existing `ProductDetails` properties (`diseaseTargeted`, `limitations`, `regulatory.intendedUseStatement`, `regulatory.ce`).
+- No UI or backend code changes.

@@ -43,7 +43,7 @@ relationship: "Extension",
 usesAI: true,
 regulatory: {
 intendedUseStatement:
-""Technology in development. Not for sale. Not cleared or approved by the U.S. FDA or any global regulator for commercial availability." (Source: GE HealthCare ESTRO 2026 press release, 12 May 2026.)",
+"\"Technology in development. Not for sale. Not cleared or approved by the U.S. FDA or any global regulator for commercial availability.\" (Source: GE HealthCare ESTRO 2026 press release, 12 May 2026.)",
 },
 lastUpdated: "2026-05-14",
 lastRevised: "2026-06-10",

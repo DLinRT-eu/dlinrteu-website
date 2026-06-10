@@ -51,3 +51,5 @@ export const TumorBox: ProductDetails = {
   developmentStage: "pipeline",
   anatomicalLocation: ["Multi-site"]
 };
+
+export const THERAPANACEA_PRODUCTS: ProductDetails[] = [TumorBox];

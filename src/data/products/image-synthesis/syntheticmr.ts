@@ -85,3 +85,5 @@ export const SyMRINeuro: ProductDetails = {
     outputFormat: ["DICOM"]
   }
 };
+
+export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [SyMRINeuro];

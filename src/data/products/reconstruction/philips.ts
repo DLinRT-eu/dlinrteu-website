@@ -99,3 +99,5 @@ export const PreciseImage: ProductDetails = {
   evidenceVendorIndependent: true,
   evidenceExternalValidation: true
 };
+
+export const PHILIPS_PRODUCTS: ProductDetails[] = [PreciseImage];
