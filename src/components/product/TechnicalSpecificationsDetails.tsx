@@ -94,6 +94,26 @@ const TechnicalSpecificationsDetails = ({ product }: TechnicalSpecificationsProp
             </EditableField>
           </div>
         </div>
+
+        <div>
+          <p className="text-sm font-medium">Compatible Systems / Hardware Requirements:</p>
+          <EditableField
+            fieldPath="compatibleSystems"
+            value={displayProduct.compatibleSystems || []}
+            type="array"
+            placeholder="Add system or hardware requirement"
+          >
+            {displayProduct.compatibleSystems && displayProduct.compatibleSystems.length > 0 ? (
+              <ul className="list-disc pl-5 text-muted-foreground space-y-1 mt-1">
+                {displayProduct.compatibleSystems.map((item, i) => (
+                  <li key={i} className="text-sm">{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-muted-foreground">-</p>
+            )}
+          </EditableField>
+        </div>
       </CardContent>
     </Card>
   );
