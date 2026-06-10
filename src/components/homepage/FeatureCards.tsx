@@ -44,7 +44,7 @@ const FeatureCards = () => {
             <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${f.tint} flex items-center justify-center mb-5`}>
               <f.icon className="h-6 w-6" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900">{f.title}</h3>
+            <h2 className="text-lg font-semibold text-slate-900">{f.title}</h2>
             <p className="mt-2 text-sm text-slate-600 leading-relaxed">{f.description}</p>
             <div className="mt-5 inline-flex items-center text-sm font-medium text-sky-600 group-hover:text-sky-700">
               {f.cta}
