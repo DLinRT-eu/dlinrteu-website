@@ -50,7 +50,7 @@ export const SegProV3RT300: ProductDetails = {
   ],
   modality: ["CT", "MRI"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/everfortune.ts",
-  companyUrl: "https://www.everfortuneai.com.tw/en/",
+  companyUrl: "https://www.everfortuneai.com.tw/en/medical-ai/",
   guidelines: [
     {
       url: "https://www.aapm.org/pubs/reports/detail.asp?docid=171",
@@ -107,7 +107,7 @@ export const SegProV3RT300: ProductDetails = {
   ],
   releaseDate: "2026-01-28",
   certification: "CE & FDA",
-  evidenceRigor: "E0",
+  evidenceRigor: "E1",
   priorVersions: [
     {
       name: "RT Suite v1 (HCAP-Segmentation)",
@@ -117,22 +117,22 @@ export const SegProV3RT300: ProductDetails = {
     }
   ],
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I0",
+  clinicalImpact: "I2",
   diseaseTargeted: [
     "Head and Neck Cancer",
     "Thoracic Cancer",
     "Abdominal Cancer",
     "Pelvic Cancer"
   ],
-  adoptionReadiness: "R2",
+  adoptionReadiness: "R3",
   anatomicalLocation: [
     "Head & Neck",
     "Thorax",
     "Abdomen",
     "Pelvis"
   ],
-  evidenceRigorNotes: "No evidence provided. ",
-  clinicalImpactNotes: "No evidence provided.",
+  evidenceRigorNotes: "Liu et al. 2023 hippocampal avoidance WBRT (pubmed/36773828). Cardiac substructures study (pubmed/37585426). Single-center studies on specific applications.",
+  clinicalImpactNotes: "Single-center studies demonstrate clinical utility for specific applications (hippocampal avoidance, cardiac substructures).",
   evidenceMultiCenter: false,
   evidenceProspective: false,
   supportedStructures: [
