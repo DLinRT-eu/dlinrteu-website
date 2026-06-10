@@ -81,6 +81,7 @@ const RolesFAQ = lazyPage(() => import("./pages/RolesFAQ"));
 const NotificationHistory = lazyPage(() => import("./pages/NotificationHistory"));
 const NotificationSettings = lazyPage(() => import("./pages/NotificationSettings"));
 const EvidenceImpactGuide = lazyPage(() => import("./pages/EvidenceImpactGuide"));
+const AiAutoContouringComparison = lazyPage(() => import("./pages/guides/AiAutoContouringComparison"));
 const ChangelogGenerator = lazyPage(() => import("./pages/admin/ChangelogGenerator"));
 const CompanyManagement = lazyPage(() => import("./pages/admin/CompanyManagement"));
 const CompanyMappingValidator = lazyPage(() => import("./pages/admin/CompanyMappingValidator"));
@@ -188,6 +189,7 @@ const App = () => (
                 <Route path="resources-compliance" element={<ResourcesCompliance />} />
                 <Route path="resources" element={<Navigate to="/resources-compliance" replace />} />
                 <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
+                <Route path="guides/ai-auto-contouring-comparison" element={<AiAutoContouringComparison />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
                 <Route path="auth" element={<Auth />} />
