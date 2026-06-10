@@ -1,38 +1,61 @@
-## Goal
-Bring `src/data/products/auto-contouring/synaptiq.ts` (Mediq RT) into compliance with `docs/FIELD_REFERENCE.md`. The general `description` currently carries detailed Mediq Viewer / Agent / Server hardware specs, which the field reference does not permit there.
+## New Page: AI Auto-Contouring Comparison Guide
 
-## Field-reference findings
-- `description` — narrative product summary only; not the place for hardware tables.
-- `technology.deployment` — **enum only**: `on_prem`, `cloud`, `hybrid`. Current values (`"Cloud-based (SaaS)"`, `"Desktop (Windows 10+/MacOS 10+)"`, `"Mobile/tablet (iPad Pro 2021+)"`, etc.) are non-compliant.
-- `technology.integration` — array of integrated systems (TPS/PACS), not hardware.
-- `technology.processingTime` — free text, latency only.
-- `compatibleSystems` — "TPS/OS/hardware compatibility. Array of systems." → correct home for OS / GPU / RAM / network requirements.
-- No dedicated `systemRequirements` field exists; do **not** invent one.
+**Route:** `/guides/ai-auto-contouring-comparison`
+**File:** `src/pages/guides/AiAutoContouringComparison.tsx` (+ route in `src/App.tsx`)
+**Target keyword:** "AI auto-contouring comparison" (long-tail, low competition, high-intent for clinical/medical-physics audience)
 
-## Changes to `src/data/products/auto-contouring/synaptiq.ts`
+### SEO setup
+- `<title>`: "AI Auto-Contouring Tools Compared (2026) | DLinRT.eu" (<60 chars)
+- `<meta description>`: "Compare CE/FDA-cleared AI auto-contouring software for radiotherapy: vendors, supported structures, evidence rigor, and regulatory status." (<160)
+- Canonical: `/guides/ai-auto-contouring-comparison`
+- Single H1, semantic H2/H3 hierarchy
+- JSON-LD: `Article` + `FAQPage` schema
+- Add entry to `public/sitemap.xml`
+- Internal links to `/products` (auto-contouring filter), `/compare/structures`, `/evidence-impact-guide`, individual product pages
 
-1. **`description`** — revert to the concise product narrative (capabilities, modalities, CE status, Active Contouring, adaptive learning). Remove the entire "System requirements (vendor): Mediq Viewer … ≥1 Gbps network link." block.
+### Page outline
 
-2. **`technology.deployment`** — replace the 4 free-text strings with the allowed enum values only:
-   ```
-   deployment: ["cloud", "on_prem"]
-   ```
-   (SaaS → `cloud`; self-hosted hospital install → `on_prem`. Desktop/tablet are client access methods, not deployment models, and move to `compatibleSystems`.)
+1. **H1 — AI Auto-Contouring Tools for Radiotherapy: 2026 Comparison Guide**
+2. **Intro (2-3 paragraphs)** — what auto-contouring is, why AI matters in RT, what this guide covers. Link to live catalogue.
+3. **H2 — How we evaluate auto-contouring tools**
+   - Regulatory approval gate (CE, FDA, MDR-exempt, NMPA, TGA, etc.)
+   - Dual-axis evidence: Rigor E0–E3 + Clinical Impact I0–I5 (link to guide)
+   - Supported anatomical structures (DICOM "Region: Structure" naming)
+   - Deployment (cloud vs on-prem), integration (DICOM-RTSTRUCT)
+4. **H2 — Comparison table of leading AI auto-contouring tools**
+   - Columns: Product · Vendor · Regions · Regulatory · Evidence rigor · Deployment
+   - Pulled dynamically from `src/data/products/auto-contouring/` (filtered by `hasRegulatoryApproval`)
+   - Each row links to product detail page
+5. **H2 — Key capabilities to compare**
+   - H3: Structure coverage (OAR vs target, CT vs MR vs CBCT)
+   - H3: Evidence quality (vendor-independent, multi-center, prospective)
+   - H3: Workflow integration (TPS, OIS, DICOM)
+   - H3: Regulatory & quality (CE-MDR class, FDA 510(k), post-market surveillance)
+6. **H2 — Choosing the right tool for your clinic** — short decision framing (head & neck vs pelvis vs thorax; research vs production; cloud constraints).
+7. **H2 — Frequently asked questions** (rendered as accordion + emitted as `FAQPage` JSON-LD)
+8. **Footer CTA** — "Browse all auto-contouring products" → `/products?category=Auto-Contouring`
 
-3. **Add `compatibleSystems`** as an array of concise hardware/OS compatibility strings, one per component, preserving every vendor spec verbatim in substance:
-   - `"Mediq Viewer (client): Windows 10+ / macOS 10+ with latest Chrome, Edge or Safari; ≥4 GB RAM; 2-core CPU ≥2 GHz; ≥20 GB disk; ≥50 Mbps network"`
-   - `"Mediq Viewer (tablet): iPad Pro 2021 or equivalent"`
-   - `"Mediq Agent: Ubuntu 22.04+ workstation/VM; ≥2 GB RAM; 2-core CPU ≥2 GHz; ≥25 GB disk; continuous uptime"`
-   - `"Mediq Server (on-prem only): Ubuntu 22.04; ≥16 GB RAM; 8-core CPU ≥3.8 GHz; ≥512 GB disk; dedicated NVIDIA GPU ≥20 GB VRAM; ≥1 Gbps network"`
+### FAQ (search-intent driven)
 
-4. **`source`** — leave the "vendor-provided System Requirements documentation (2026-06-10)" citation intact; it now justifies `compatibleSystems` instead of the description.
+1. What is AI auto-contouring in radiotherapy?
+2. Are AI auto-contouring tools FDA-cleared or CE-marked?
+3. How accurate are AI-generated contours compared with manual delineation?
+4. Which anatomical structures can AI auto-contouring tools segment?
+5. Can AI auto-contouring be used clinically without human review?
+6. What's the difference between atlas-based and deep-learning auto-contouring?
+7. How do I compare evidence quality across vendors?
+8. Does AI auto-contouring work on MR and CBCT, or only CT?
 
-5. **`lastUpdated`** — bump to `2026-06-10` (already set).
+### Technical implementation notes
 
-## Not changed
-- Structures list, evidence, regulatory, limitations, evidenceRigor/clinicalImpact/adoptionReadiness — out of scope.
-- No other product files, no schema/type changes, no UI changes.
+- Use existing `PageLayout` + `SEO` components for head tags + structured data
+- Reuse `Accordion` from `src/components/ui/accordion` for FAQ
+- Pull product rows via existing data import (e.g. `import { autoContouringProducts } from '@/data/products/auto-contouring'`) and filter to `hasRegulatoryApproval === true`
+- Apply daily-stable random sort (per project memory) if listing >table size
+- Add lazy route in `src/App.tsx` and a `<Route path="guides/ai-auto-contouring-comparison" …>`
+- Add `<url>` entry to `public/sitemap.xml`
+- After build, mark the Semrush SEO finding fixed via `seo_chat--update_findings`
 
-## Validation
-- `rg "deployment" src/types/productDetails*` to confirm the `deployment` field accepts a string array (no TS enum to break).
-- Confirm `compatibleSystems` exists on `ProductDetails` before writing; if absent, fall back to placing the four lines in `limitations` prefixed with `"System requirement: …"` (still compliant, since limitations accept free strings). Plan currently assumes the field exists per FIELD_REFERENCE line 236.
+### Out of scope (ask if wanted)
+- Other category guides (image synthesis, treatment planning) — would follow same pattern
+- Interactive filter UI on the guide itself (catalogue page already covers that)
