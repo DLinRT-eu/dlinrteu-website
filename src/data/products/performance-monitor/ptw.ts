@@ -82,3 +82,5 @@ export const AIQUALIS: ProductDetails = {
     outputFormat: ["CSV", "Dashboard"]
   }
 };
+
+export const PTW_PRODUCTS: ProductDetails[] = [AIQUALIS];

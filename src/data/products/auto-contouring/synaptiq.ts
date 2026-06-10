@@ -191,3 +191,5 @@ export const MediqRT: ProductDetails = {
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [MediqRT];
