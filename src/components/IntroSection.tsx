@@ -116,7 +116,7 @@ const IntroSection = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Deep Learning in Radiotherapy
             </h1>
-            <p className="text-xl text-gray-100 mb-8">
+            <p className="text-xl text-white mb-8 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
               Find deep learning-based solutions and QA monitoring tools for radiotherapy available for the European market.
             </p>
             <div className="relative max-w-2xl mx-auto">
