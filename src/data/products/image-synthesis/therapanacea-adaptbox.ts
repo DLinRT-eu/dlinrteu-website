@@ -8,42 +8,61 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.therapanacea.eu/",
     productUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
-    description: "AI-powered software that provides one-click augmented CBCT images with organs-at-risk delineations for improved and more efficient adaptive radiotherapy workflow. Part of the ART-Plan+ platform.",
+    description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, daily cumulative dose tracking, and assisted off-line replanning decision support.",
     features: [
-      "AI-based augmented daily CBCT images generation",
-      "Dose calculation on augmented CBCT images",
-      "Daily dose tracking",
-      "Replanning decision support",
-      "Compatible with all TPS and Linac providers"
+      "AI-based synthetic/augmented CT generation from daily CBCT images",
+      "Organs-at-risk (OAR) delineation on augmented CBCT / synthetic CT images",
+      "Dose computation on reference planning CT and synthetic/augmented CBCT images",
+      "Daily dose tracking and comparison of daily cumulative dose/volume metrics",
+      "Assisted CBCT-based off-line adaptation and replanning decision support",
+      "Vendor-reported workflow integration compatible with all TPS and Linac providers"
     ],
     category: "Image Synthesis",
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
     website: "https://www.therapanacea.eu/our-products/adaptbox/",
-    anatomicalLocation: ["Pelvis"],
+    anatomicalLocation: ["Head & Neck", "Breast", "Thorax", "Pelvis"],
     modality: ["CBCT"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Prostate Cancer"],
+    diseaseTargeted: ["Head and Neck Cancer", "Breast Cancer", "Thoracic Cancers", "Prostate Cancer"],
     keyFeatures: [
-      "AI-based augmented daily CBCT images generation",
-      "Dose calculation on augmented CBCT images for daily dose tracking",
-      "Tracking daily delivered dose",
-      "Replanning decision support",
-      "Compatible with all TPS and Linac providers"
+      "Generation of synthetic/augmented CT (sCT) images from daily CBCT",
+      "Dose computation on synthetic/augmented CT images for daily dose tracking",
+      "Automatic OAR contouring on generated augmented CBCT/synthetic CT images",
+      "Propagation of target contours from planning CT using registration tools within ART-Plan+",
+      "Comparison of planning and daily dose/volume metrics to support replanning decisions",
+      "Assisted off-line adaptive radiotherapy workflow"
     ],
     technicalSpecifications: {
-      population: "Adult male patients",
-      input: ["CBCT scans"],
-      inputFormat: ["DICOM"],
-      output: ["Augmented CBCT images", "Structure sets"],
-      outputFormat: ["DICOM", "DICOM-RTSTRUCT"]
+      population: "Adult cancer patients. FDA-cleared AdaptBox-supported anatomies include Head & Neck, Breast/Thorax, and Pelvis (male).",
+      input: [
+        "CBCT scans",
+        "Planning CT images",
+        "RT Structure Sets",
+        "RT Plan data"
+      ],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTPLAN"],
+      output: [
+        "Synthetic/augmented CT images generated from CBCT",
+        "Structure sets (OAR contours)",
+        "Dose computation results",
+        "Cumulative dose/volume metrics",
+        "Replanning decision-support reports"
+      ],
+      outputFormat: ["DICOM", "DICOM-RTSTRUCT", "DICOM-RTDOSE"]
     },
     technology: {
-      integration: ["TPS integration", "PACS integration", "All Linac providers"],
-      deployment: ["On-premises", "Cloud-based"],
-      triggerForAnalysis: "Automatic or manual",
-      processingTime: "Under 2 minutes per case"
+      integration: [
+        "DICOM-based workflow integration",
+        "TPS/PACS workflow integration",
+        "ART-Plan+ ecosystem integration (Annotations and SmartFuse modules)",
+        "Vendor-reported compatibility with all TPS and Linac providers"
+      ],
+      deployment: ["On-premises", "Cloud-based"
+      ],
+      triggerForAnalysis: "Manual or automated batch workflow; exact automation and protocol configuration should be confirmed with the vendor",
+      processingTime: "Processing time varies by anatomy, hardware, and workflow load. Automatic contouring and sCT generation typically take 2–3 minutes under optimal conditions; manual review and QA by clinical staff are required before clinical action."
     },
     regulatory: {
       ce: {
@@ -52,7 +71,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)",
-        notes: "Not available in all markets yet"
+        notes: "Therapanacea states that ART-Plan is CE-marked Class IIb under GMED 0459. All modules may not be commercially available in all regional markets."
       },
       fda: {
         status: "510k_cleared",
@@ -62,11 +81,14 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ, QKB, LLZ",
         regulationNumber: "21 CFR 892.5050",
         decisionDate: "2025-12-23",
-        notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025). Prior clearance: K242822 (v3.0.0, Feb 2025). Not available in all markets yet."
+        notes: "FDA clearance K253091 clears ART-Plan+ v3.1.0 including the AdaptBox module. AdaptBox allows synthetic CT generation from CBCT, dose computation, and off-line adaptive decision-making for Head & Neck, Breast/Thorax, and Pelvis (male). Prior relevant FDA clearances include K242822 (v3.0.0, Feb 2025) and K234068 (v2.2.0, Apr 2024)."
       },
-      intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). (Source: FDA 510(k) K253091 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
     supportedStructures: [
+      "FDA-cleared AdaptBox anatomy: Head & Neck",
+      "FDA-cleared AdaptBox anatomy: Breast / Thorax",
+      "FDA-cleared AdaptBox anatomy: Pelvis (male)",
       "Pelvis (Male): Anal Canal",
       "Pelvis (Male): Bladder",
       "Pelvis (Male): Femoral Head (L)",
@@ -79,25 +101,25 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     ],
     market: {
       onMarketSince: "2023",
-      distributionChannels: ["Direct sales", "Distribution partners"],
-      availability: "Not available in all markets yet"
+      distributionChannels: ["Direct sales through vendor", "Distribution partners"],
+      availability: "Not available in all markets. Module availability varies by country and regional regulatory status."
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.2",
+      version: "3.2.0",
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    version: "3.1.2",
+    version: "3.2.0",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-30",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)",
-    evidenceRigor: "E0",
-    evidenceRigorNotes: "No vendor-independent clinical validation studies identified for AdaptBox augmented CBCT generation. Evidence limited to vendor publications.",
-    clinicalImpact: "I0",
-    clinicalImpactNotes: "No independent clinical outcome data available yet.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    lastUpdated: "2026-06-10",
+    lastRevised: "2026-06-10",
+    source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026; Frontiers in Oncology 2026).",
+    evidenceRigor: "E2",
+    evidenceRigorNotes: "Upgraded from E0 to E2. Independent peer-reviewed clinical validation in Cancers (June 2026) verified cumulative dose reconstruction over 800 fractions without direct manufacturer co-authorship. Supported in parallel by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026).",
+    clinicalImpact: "I1",
+    clinicalImpactNotes: "Upgraded from I0 to I1. Evidence supports daily dose reconstruction accuracy and effective offline cumulative tracking of OAR deviation, supporting clinical replanning decisions. High-level evidence regarding long-term clinical outcome benefits, toxicity reduction, or randomized disease control is not yet available.",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k). The presence of both technical sCT validation and independent clinical workflow tracking supports integration. However, because image synthetic and calculation processes are sensitive to bad CBCT quality, standard local commissioning, intensive initial QA, and independent physical/clinical review of contours remain recommended."
   }
 ];
