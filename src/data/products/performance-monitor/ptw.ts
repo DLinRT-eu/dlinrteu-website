@@ -57,6 +57,11 @@ export const AIQUALIS: ProductDetails = {
   ],
   lastRevised: "2026-05-20",
   lastUpdated: "2026-02-23",
+  limitations: [
+    "Not intended to determine correctness of contouring or to assess/review/influence treatment of an individual patient",
+    "Outputs depend on the quality/consistency of the compared contours and local workflow practices",
+    "Designed for monitoring and feedback; does not generate contours or replace clinical review processes"
+  ],
   releaseDate: "2025-11-06",
   certification: "MDR exempt",
   evidenceRigor: "E0",
@@ -65,7 +70,7 @@ export const AIQUALIS: ProductDetails = {
   diseaseTargeted: ["Cancer"],
   adoptionReadiness: "R1",
   anatomicalLocation: ["Multiple"],
-  evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024).",
+  evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024). Poster from RCR Global AI conference: https://www.ptwdosimetry.com/fileadmin/user_upload/Downloads/Papers/DETECTING_AUTOMATION_BIAS_Doolan.pdf. ",
   monitorsAIProducts: ["Auto-Contouring outputs"],
   clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
   adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
