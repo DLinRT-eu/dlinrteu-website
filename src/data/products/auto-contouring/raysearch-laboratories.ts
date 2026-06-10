@@ -290,7 +290,7 @@ export const DeepLearningSegmentation: ProductDetails = {
   adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
     input: ["CT"],
-    output: ["Structure sets", "Treatment plans"],
+    output: ["Structure sets"],
     population: "Adult patients",
     inputFormat: ["DICOM"],
     outputFormat: ["DICOM-RTSTRUCT"]
