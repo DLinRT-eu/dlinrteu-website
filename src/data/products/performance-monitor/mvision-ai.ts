@@ -40,7 +40,7 @@ export const Verify: ProductDetails = {
   },
   technology: {
     deployment: ["Cloud-based", "On-premises"],
-    integration: ["TPS integration", "PACS integration", "LINAC connectivity"],
+    integration: ["TPS integration", "PACS integration"],
     processingTime: "Minutes per patient",
     triggerForAnalysis: "Automatic after treatment delivery"
   },
@@ -54,9 +54,6 @@ export const Verify: ProductDetails = {
   ],
   lastRevised: "2026-05-30",
   lastUpdated: "2026-02-23",
-  limitations: [
-    "Assistive QA/assessment tool: does not generate contours and does not replace clinical review or guideline-based contouring decisions"
-  ],
   releaseDate: "2023-08-15",
   certification: "MDR Exempt",
   evidenceRigor: "E0",
