@@ -17,13 +17,11 @@ export const DeepLearningSegmentation: ProductDetails = {
     {
       link: "https://doi.org/10.3389/fonc.2023.1213068",
       type: "Peer-reviewed Publication",
-      level: "1c",
       description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients"
     },
     {
       link: "https://doi.org/10.1080/0284186X.2023.2270152",
       type: "Peer-reviewed Publication",
-      level: "1c",
       description: "Breast/thorax validation study in Acta Oncologica"
     },
     {
@@ -48,6 +46,7 @@ export const DeepLearningSegmentation: ProductDetails = {
       class: "Class II",
       notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A",
       status: "510k_cleared",
+      productCode: "MUJ",
       decisionDate: "2025-04-04",
       clearanceNumber: "K240398"
     },
@@ -294,7 +293,7 @@ export const DeepLearningSegmentation: ProductDetails = {
   adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
     input: ["CT"],
-    output: ["Structure sets", "Treatment plans"],
+    output: ["Structure sets"],
     population: "Adult patients",
     inputFormat: ["DICOM"],
     outputFormat: ["DICOM-RTSTRUCT"]
