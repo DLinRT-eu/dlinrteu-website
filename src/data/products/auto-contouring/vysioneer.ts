@@ -7,7 +7,7 @@ export const Vbrain: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Partnerships"]
   },
-  source: "FDA 510(k) database (K203235), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
+  source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
   company: "Vysioneer",
   logoUrl: "/logos/vysioner.png",
   version: "2.5",
@@ -76,11 +76,16 @@ export const Vbrain: ProductDetails = {
   diseaseTargeted: ["Brain Tumors", "Metastases", "Acoustic Neuroma"],
   adoptionReadiness: "R3",
   anatomicalLocation: ["Brain"],
-  evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al., IJROBP 2021. Single-center retrospective studies.",
+  evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al.",
   clinicalImpactNotes: "Demonstrates improved contouring accuracy and efficiency for brain metastases in single-center settings.",
   evidenceMultiCenter: false,
   evidenceProspective: false,
-  supportedStructures: ["Brain: Brain Metastases", "Brain: Meningioma", "Brain: Acoustic Neuroma"],
+  supportedStructures: [
+    "Brain: Acoustic Neuroma",
+    "Brain: Brain Metastases",
+    "Brain: Meningioma",
+    "Brain: Acoustic Neuroma"
+  ],
   evidenceMultiNational: false,
   adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
