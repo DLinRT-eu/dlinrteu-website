@@ -1,152 +1,79 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
-export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [
-  {
-    id: "syntheticmr-neuro",
-    name: "SyMRI Neuro",
-    company: "SyntheticMR",
-    companyUrl: "https://syntheticmr.com/",
-    productUrl: "https://syntheticmr.com/products/symri-neuro/",
-    description: "Deep learning-powered MR image synthesis solution that generates multiple contrasts from a single MRI scan.",
-    features: [
-      "MR image synthesis",
-      "Multiple contrasts from single scan",
-      "Synthetic CT generation",
-      "Quantitative tissue mapping"
-    ],
-    category: "Image Synthesis",
-    certification: "CE & FDA",
-    logoUrl: "/logos/syntheticMRI.png",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/syntheticmr.ts",
-    website: "https://syntheticmr.com/products/symri-neuro/",
-    anatomicalLocation: ["Brain"],
-    modality: "MRI",
-    subspeciality: "Neuroradiology",
-    diseaseTargeted: ["Brain Tumors", "Multiple Sclerosis", "Neurodegenerative Disorders"],
-    keyFeatures: [
-      "Deep learning-based synthetic contrast generation",
-      "Quantitative tissue mapping (T1, T2, PD)",
-      "Reduced scan time",
-      "Streamlined workflow"
-    ],
-    technicalSpecifications: {
-      population: "Adult and pediatric patients",
-      input: ["Single MRI sequence"],
-      inputFormat: ["DICOM"],
-      output: ["Multiple synthetic contrasts"],
-      outputFormat: ["DICOM"]
-    },
-    technology: {
-      integration: ["PACS integration", "Vendor-neutral platforms"],
-      deployment: ["Cloud-based", "On-premises"],
-      triggerForAnalysis: "Automatic after acquisition",
-      processingTime: "Minutes per dataset"
-    },
-    regulatory: {
-      ce: {
-        status: "cleared",
-        class: "IIa",
-        type: "Medical Device",
-        regulation: "MDR (EU 2017/745)",
-        notes: "CE-marked June 2024"
-      },
-      fda: {
-        status: "510k_cleared",
-        class: "Class II",
-        clearanceNumber: "K242745, K233733",
-        productCode: "LNH",
-        regulationNumber: "21 CFR 892.1000",
-        type: "510(k)",
-        decisionDate: "2024-12-06",
-        notes: "K242745 (Dec 2024) for SyMRI 15; K233733 (Mar 2024) for previous version"
-      },
-      intendedUseStatement: "SyMRI is intended as a post-processing software for MR images. It provides synthetic MR images and quantitative tissue maps (T1, T2, PD) from a single MR acquisition to support clinical diagnosis."
-    },
-    market: {
-      onMarketSince: "2023",
-      distributionChannels: ["Direct sales", "Distribution partners"]
-    },
-    version: "15",
-    releaseDate: "2024-12-06",
-    lastUpdated: "2025-12-01",
-    lastRevised: "2026-05-20",
-    source: "FDA 510(k) database (K242745, K233733) and company website",
-    evidenceRigor: "E1",
-    evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
-    clinicalImpact: "I0",
-    clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+export const SyMRINeuro: ProductDetails = {
+  id: "syntheticmr-neuro",
+  name: "SyMRI Neuro",
+  market: {
+    onMarketSince: "2023",
+    distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  {
-    id: "syntheticmr-spine",
-    name: "SyMRI Spine",
-    company: "SyntheticMR",
-    companyUrl: "https://syntheticmr.com/",
-    productUrl: "https://syntheticmr.com/products/symri-spine/",
-    description: "MR image synthesis solution for spine imaging that generates multiple contrasts and quantitative tissue maps from a single MRI scan.",
-    features: [
-      "Synthetic MR contrasts for spine",
-      "Quantitative tissue mapping",
-      "Single scan workflow",
-      "Compatible with SyMRI platform"
-    ],
-    category: "Image Synthesis",
-    certification: "CE",
-    logoUrl: "/logos/syntheticMRI.png",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/syntheticmr.ts",
-    website: "https://syntheticmr.com/products/symri-spine/",
-    anatomicalLocation: ["Spine"],
-    modality: "MRI",
-    subspeciality: "Musculoskeletal Radiology",
-    diseaseTargeted: ["Degenerative Disc Disease", "Spinal Stenosis", "Spinal Tumors"],
-    keyFeatures: [
-      "Synthetic MR contrasts for spine imaging",
-      "Quantitative tissue mapping (T1, T2, PD)",
-      "Single scan workflow",
-      "Compatible with SyMRI platform"
-    ],
-    technicalSpecifications: {
-      population: "Adult patients",
-      input: ["Single MRI sequence"],
-      inputFormat: ["DICOM"],
-      output: ["Multiple synthetic contrasts", "Quantitative maps"],
-      outputFormat: ["DICOM"]
+  source: "FDA 510(k) database (K233733) and company website",
+  company: "SyntheticMR",
+  logoUrl: "/logos/syntheticMRI.png",
+  version: "15",
+  website: "https://syntheticmr.com/products/symri-neuro/",
+  category: "Image Synthesis",
+  features: [
+    "MR image synthesis",
+    "Multiple contrasts from single scan",
+    "Synthetic CT generation",
+    "Quantitative tissue mapping"
+  ],
+  modality: "MRI",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/syntheticmr.ts",
+  companyUrl: "https://syntheticmr.com/",
+  productUrl: "https://syntheticmr.com/products/symri-neuro/",
+  regulatory: {
+    ce: {
+      type: "Medical Device",
+      class: "IIa",
+      notes: "CE-marked June 2024",
+      status: "cleared",
+      regulation: "MDR (EU 2017/745)"
     },
-    technology: {
-      integration: ["PACS integration", "Vendor-neutral platforms"],
-      deployment: ["Cloud-based", "On-premises"],
-      triggerForAnalysis: "Automatic after acquisition",
-      processingTime: "Minutes per dataset"
+    fda: {
+      type: "510(k)",
+      class: "Class II",
+      notes: "K242745 (Dec 2024) for SyMRI 15; K233733 (Mar 2024) for previous version",
+      status: "510k_cleared",
+      productCode: "LNH",
+      decisionDate: "2024-12-06",
+      clearanceNumber: "K233733",
+      regulationNumber: "21 CFR 892.1000"
     },
-    regulatory: {
-      ce: {
-        status: "cleared",
-        class: "IIa",
-        type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
-      },
-      fda: {
-        status: "pending",
-        notes: "510(k) submitted November 2020, not yet cleared"
-      },
-      intendedUseStatement: "SyMRI Spine is intended for post-processing of spine MR images to generate synthetic contrasts and quantitative tissue maps to support clinical diagnosis."
-    },
-    market: {
-      onMarketSince: "2020",
-      distributionChannels: ["Direct sales", "Distribution partners"],
-      availability: "CE markets only"
-    },
-    releaseDate: "2024-03-26",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
-    source: "Company website and regulatory filings; releaseDate proxied from FDA K233733 decision date (2026-06-01)",
-    evidenceRigor: "E0",
-    evidenceRigorNotes: "No peer-reviewed validation studies identified for SyMRI Spine at time of listing.",
-    clinicalImpact: "I0",
-    clinicalImpactNotes: "No clinical outcome data identified. Diagnostic spine imaging use case; not RT-specific.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    intendedUseStatement: "SyMRI is intended as a post-processing software for MR images. It provides synthetic MR images and quantitative tissue maps (T1, T2, PD) from a single MR acquisition to support clinical diagnosis."
+  },
+  technology: {
+    deployment: ["Cloud-based", "On-premises"],
+    integration: ["PACS integration", "Vendor-neutral platforms"],
+    processingTime: "Minutes per dataset",
+    triggerForAnalysis: "Automatic after acquisition"
+  },
+  description: "Deep learning-powered MR image synthesis solution that generates multiple contrasts from a single MRI scan.",
+  keyFeatures: [
+    "Deep learning-based synthetic contrast generation",
+    "Quantitative tissue mapping (T1, T2, PD)",
+    "Reduced scan time",
+    "Streamlined workflow"
+  ],
+  lastRevised: "2026-05-20",
+  lastUpdated: "2025-12-01",
+  releaseDate: "2024-12-06",
+  certification: "CE & FDA",
+  evidenceRigor: "E1",
+  subspeciality: "Neuroradiology",
+  clinicalImpact: "I0",
+  diseaseTargeted: ["Brain Tumors", "Multiple Sclerosis", "Neurodegenerative Disorders"],
+  adoptionReadiness: "R3",
+  anatomicalLocation: ["Brain"],
+  evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
+  clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology.",
+  adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+  technicalSpecifications: {
+    input: ["Single MRI sequence"],
+    output: ["Multiple synthetic contrasts"],
+    population: "Adult and pediatric patients",
+    inputFormat: ["DICOM"],
+    outputFormat: ["DICOM"]
   }
-];
+};
