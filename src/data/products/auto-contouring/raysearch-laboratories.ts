@@ -62,6 +62,9 @@ export const DeepLearningSegmentation: ProductDetails = {
   keyFeatures: ["Deep learning algorithms", "Within TPS"],
   lastRevised: "2026-05-30",
   lastUpdated: "2026-05-19",
+  limitations: [
+    "Model performance depends on imaging protocol/site-specific contouring conventions and may vary across institutions"
+  ],
   releaseDate: "2023-12-01",
   certification: "CE & FDA",
   evidenceRigor: "E2",
