@@ -14,50 +14,6 @@ export const AIQUALIS: ProductDetails = {
   version: "1.2",
   website: "https://www.ptwdosimetry.com/en/products/aiqualis",
   category: "Performance Monitor",
-  evidence: [
-    {
-      link: "https://doi.org/10.1016/j.phro.2020.10.001",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Preliminary clinical investigation using the spatial analysis method used in the product"
-    },
-    {
-      link: "https://doi.org/10.1016/j.phro.2022.04.008",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Preliminary clinical investigation using the spatial analysis method used in the product"
-    },
-    {
-      link: "https://doi.org/10.1016/j.phro.2026.100981",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Technical investigation relating to product configuration"
-    },
-    {
-      link: "https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2476/",
-      type: "Conference Abstract",
-      level: "1t",
-      description: "Deployment example of monitoring in clinical practice, investigating clinical workflow changes resulting from auto-contouring"
-    },
-    {
-      link: "https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2499/",
-      type: "Conference Abstract",
-      level: "1t",
-      description: "Deployment example of monitoring in clinical practice, investigating performance of autocontouring retrospectively over a 5+ year period"
-    },
-    {
-      link: "https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2525/",
-      type: "Conference Abstract",
-      level: "1t",
-      description: "Deployment example of monitoring in clinical practice, investigating changes in autocontouring with vendor version upgrades"
-    },
-    {
-      link: "https://doi.org/10.1016/j.phro.2023.100436",
-      type: "Peer-Reviewed Publication",
-      level: "1t",
-      description: "Technical investigation to develop a validation dataset to prove the accuracy of measurements used within the product"
-    }
-  ],
   features: [
     "AI contour monitoring",
     "3D spatial analysis",
@@ -79,7 +35,7 @@ export const AIQUALIS: ProductDetails = {
       class: "N/A",
       status: "not_applicable"
     },
-    intendedUseStatement: "AIQUALIS is intended for the monitoring of the amount and locations of editing of automatically generated contours taking place in clinical practice within the radiotherapy workflow. It is intended for the trained user to be able to audit the contouring process in the clinic, enabling them to feedback to the manufacturer of any automatic contouring product areas for improvement and to ensure that clinical teams are adhering to institutional contouring practices. This device is intended to allow the review of practice at a departmental or institutional level. It is not intended to be used to determine the correctness of contouring, or to assess, review or influence the treatment of any individual patient. The device is not intended for long-term data storage or archival purposes. This device is not an automatic contouring product. It does not generate any contours."
+    intendedUseStatement: "AIQUALIS is intended for the monitoring of the amount and locations of editing of automatically generated contours taking place in clinical practice within the radiotherapy workflow. It is intended for the user to be able to audit the contouring process in the clinic, enabling them to feedback to the manufacturer of any automatic contouring product areas for improvement and to ensure that clinical teams are adhering to institutional contouring practices. This device is intended to allow the review of practice at a departmental or institutional level. It is not intended to be used to determine the correctness of contouring, or to assess, review or influence the treatment of any individual patient. The device is not intended for long-term data storage or archival purposes. This device is not an automatic contouring product. It does not generate any contours."
   },
   technology: {
     deployment: ["On-premises"],
@@ -103,11 +59,11 @@ export const AIQUALIS: ProductDetails = {
   lastUpdated: "2026-02-23",
   releaseDate: "2025-11-06",
   certification: "MDR exempt",
-  evidenceRigor: "E1",
+  evidenceRigor: "E0",
   subspeciality: "Medical Physics",
-  clinicalImpact: "I2",
+  clinicalImpact: "I1",
   diseaseTargeted: ["Cancer"],
-  adoptionReadiness: "R3",
+  adoptionReadiness: "R1",
   anatomicalLocation: ["Multiple"],
   evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024).",
   monitorsAIProducts: ["Auto-Contouring outputs"],
