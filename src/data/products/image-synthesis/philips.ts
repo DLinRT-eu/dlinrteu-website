@@ -67,8 +67,8 @@ export const MRCATPelvis: ProductDetails = {
   clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy",
   adoptionReadiness: "R3",
   anatomicalLocation: ["Pelvis"],
-  evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020) with multiple clinical sites. Additional clinical implementation studies support dosimetric equivalence.",
-  clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric equivalence to CT-based planning for pelvic RT (MR-OPERA study).",
+  evidenceRigorNotes: "Philips white paper ",
+  clinicalImpactNotes: "Philips white paper",
   evidenceMultiCenter: true,
   adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
