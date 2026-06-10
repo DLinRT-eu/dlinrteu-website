@@ -76,11 +76,16 @@ export const Vbrain: ProductDetails = {
   diseaseTargeted: ["Brain Tumors", "Metastases", "Acoustic Neuroma"],
   adoptionReadiness: "R3",
   anatomicalLocation: ["Brain"],
-  evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al., IJROBP 2021. Single-center retrospective studies.",
+  evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al.",
   clinicalImpactNotes: "Demonstrates improved contouring accuracy and efficiency for brain metastases in single-center settings.",
   evidenceMultiCenter: false,
   evidenceProspective: false,
-  supportedStructures: ["Brain: Brain Metastases", "Brain: Meningioma", "Brain: Acoustic Neuroma"],
+  supportedStructures: [
+    "Brain: Acoustic Neuroma",
+    "Brain: Brain Metastases",
+    "Brain: Meningioma",
+    "Brain: Acoustic Neuroma"
+  ],
   evidenceMultiNational: false,
   adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
