@@ -10,7 +10,7 @@ export const MediqRT: ProductDetails = {
   source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, and vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature. CE clearance details pending verification against EUDAMED listing or vendor press release.",
   company: "Synaptiq",
   logoUrl: "/logos/synaptiq.png",
-  version: "2.0",
+  version: "1.6",
   website: "https://synaptiq.io/product/",
   category: "Auto-Contouring",
   evidence: [
@@ -58,13 +58,13 @@ export const MediqRT: ProductDetails = {
     ce: {
       type: "Medical Device",
       class: "IIa",
-      notes: "CE clearance reported by vendor at the ESTRO 2026 booth (Stockholm, 15–19 May 2026), including the Active Contouring GTV delineation feature. Pending independent verification against the EUDAMED listing.",
+      notes: "CE marked since 2025-06-01 under MDR as a Class IIa medical device software. Scope includes AI-based auto-segmentation of OARs and CTVs on CT and the Active Contouring GTV delineation feature.",
       status: "cleared"
     },
     fda: {
       status: "pending"
     },
-    intendedUseStatement: "Mediq RT is the contouring software we develop to help doctors identify and delineate cancerous tumors. Moreover, the app will enable them to communicate efficiently with their colleagues involved in the process of radiation treatment planning. (Source: Synaptiq product page, https://synaptiq.io/product/, accessed 2026-05-30. No verbatim regulatory IFU publicly available — CE-marked only.)"
+    intendedUseStatement: "Mediq RT is a software as a medical device intended to assist radiation oncologists and medical physicists during contouring of 3D CT images of patients with an indication for radiotherapy. The software offers AI-based auto-segmentation of organs-at-risk (OARs) and clinical target volumes (CTVs), designed to streamline the contouring workflow by enabling interactive review, editing, and approval by qualified users prior to export to treatment planning systems. Mediq RT is capable of delineating regions of interest for all important anatomical sites, including head and neck, thorax, abdomen, and pelvis, and can support other target volumes as defined in clinical practice.\n\nIntended Medical Indication: Mediq RT automatically segments organs-at-risk (OARs) and clinical target volumes (CTVs) using CT scans for radiotherapy treatment planning. It assists radiation oncologists and medical physicists in contouring, reviewing, and editing these regions of interest. The software is designed for a broad spectrum of malignancies, where precise radiation delivery is essential to maximize tumor control and minimize damage to surrounding healthy tissues. (Source: vendor-provided intended purpose statement, 2026-06-10.)"
   },
   technology: {
     deployment: [
@@ -87,9 +87,12 @@ export const MediqRT: ProductDetails = {
     "Cloud-based data storage and visualization"
   ],
   lastRevised: "2026-05-30",
-  lastUpdated: "2024-03-05",
+  lastUpdated: "2026-06-10",
   limitations: [
-    "CE clearance details reported via vendor booth communication at ESTRO 2026; awaiting verification against EUDAMED listing or vendor press release",
+    "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
+    "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",
+    "Exclusion: patients with poor-quality imaging (motion artefacts, insufficient contrast, etc.) may not be suitable for automated contouring",
+    "Exclusion: cases requiring highly individualised contouring based on unique anatomical or clinical considerations may be beyond the software's current capabilities",
     "Requires verification by qualified radiation oncologist",
     "Performance may vary based on image quality"
   ],
@@ -98,7 +101,14 @@ export const MediqRT: ProductDetails = {
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I0",
-  diseaseTargeted: ["Multiple Cancer Types"],
+  diseaseTargeted: [
+    "Brain tumours (glioblastoma, astrocytoma, etc.)",
+    "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",
+    "Thoracic tumours (breast, lung, oesophageal cancers, etc.)",
+    "Abdominal tumours (pancreatic, stomach cancers, etc.)",
+    "Pelvic tumours (bladder, prostate, cervical, uterine cancers, etc.)",
+    "Metastatic tumours (bone metastases, brain metastases, etc.)"
+  ],
   adoptionReadiness: "R3",
   anatomicalLocation: [
     "Head & Neck",
