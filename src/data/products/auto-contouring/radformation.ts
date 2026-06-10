@@ -1,17 +1,16 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
 export const RADFORMATION_PRODUCTS: ProductDetails[] = [
   {
     id: "radformation-autocontour",
     name: "AutoContour",
-    company: "RadFormation",
+    company: "Radformation",
     companyUrl: "https://www.radformation.com/",
     productUrl: "https://www.radformation.com/autocontour/autocontour",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/radformation.ts",
     description: "Unified AI-driven contouring platform (AutoContour + Limbus Contour) delivering fast, guideline-based contouring across CT, MR, and CBCT, with seamless Eclipse and DICOM-compatible TPS integration.",
     category: "Auto-Contouring",
-    certification: "CE & FDA",
+    certification: "CE MDR & FDA 510(k)",
     logoUrl: "/logos/radformation.svg",
     website: "https://www.radformation.com/autocontour/autocontour",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Pelvis", "Breast"],
@@ -629,10 +628,10 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["Eclipse (read/write)", "TPS integration (DICOM)", "Cloud API", "ESAPI"],
-      deployment: ["Cloud-based", "On-premises"],
-      triggerForAnalysis: "Manual upload or automated",
-      processingTime: "Minutes per case"
+      integration: ["Eclipse (ESAPI)", "DICOM-compatible TPS import/export", "Local Windows client/agent", "Cloud-based automatic contouring service"],
+      deployment: ["Cloud-based automatic contouring service with local Windows client/agent"],
+      triggerForAnalysis: "Manual load/upload or automated local-agent monitoring",
+      processingTime: "Review-ready contours in seconds-to-minutes"
     },
     regulatory: {
       ce: {
@@ -649,30 +648,35 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
         decisionDate: "2026-03-19",
-        notes: "Commercially branded as AutoContour v2.7 (unified AutoContour + Limbus Contour platform). FDA clearance K260509 (Special 510(k), 30-day review). Previous clearances: K242729 (V4, 2024-12-20), K230685 (V3, 2023), K220598 (V2), K200323 (V1). Also distributes Limbus Contour (K241837) after acquisition in April 2024."
+        notes: "Commercially branded as AutoContour v2.7 (unified AutoContour + Limbus Contour platform). FDA database lists K260509 for AutoContour (RADAC V5) as a Special 510(k), product code QKB, decision date 2026-03-19. FDA summary describes CT or MR DICOM input and 420 CT-based plus 62 MR-based machine-learning contouring models; the public product page markets 480 AI-trained models across CT, MR, and CBCT. Previous AutoContour clearances include K242729 (V4, 2024-12-09), K230685 (V3, 2023-04-14), K220598 (V2, 2022-08-24), and K200323 (original, 2020-10-30). Limbus Contour (K241837) is used as a reference device after the Limbus AI acquisition announced April 30, 2024."
       },
-      intendedUseStatement: "AutoContour is intended to assist radiation treatment planners in contouring and reviewing structures within medical images in preparation for radiation therapy treatment planning. (Source: FDA 510(k) K260509 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "AutoContour is intended to assist radiation treatment planners in contouring and reviewing structures within medical images in preparation for radiation therapy treatment planning. (Source: FDA 510(k) K260509 Summary; FDA database page last updated 2026-06-08)"
     },
     market: {
-      onMarketSince: "2017",
-      distributionChannels: ["Direct sales", "Cloud platform", "Includes Limbus AI (acquired April 30, 2024)"]
+      onMarketSince: "2020",
+      distributionChannels: ["Direct sales", "Integrated cloud contouring service", "Includes Limbus AI (acquisition announced April 30, 2024)"]
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Fan et al. JACMP 2025 (4-system comparison including Radformation, 111 patients). Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). PubMed verified 2026-02-26.",
-    clinicalImpactNotes: "Multi-center study demonstrates comparable accuracy and workflow time savings alongside other leading AI contouring systems.",
+    evidenceRigorNotes: "E2: Peer-reviewed external validation includes Doolan et al. 2023 (single-center 5-vendor comparison, 80 patients), Goddard et al. 2024 (3-vendor physician-scored evaluation with implementation across a five-facility health system), Kim et al. 2024 (7-system quantitative comparison, 42 cases), and Fan et al. 2025 (4-vendor abdominal OAR outlier analysis, 111 cases). Evidence is retrospective/vendor-independent; no prospective outcome study was identified.",
+    clinicalImpactNotes: "I2: Peer-reviewed studies support contour quality, physician acceptability, and workflow time savings, but also show anatomy/guideline-dependent failure modes requiring expert review and local QA. No prospective evidence of improved tumor control, toxicity, or survival was identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E2 + CE MDR Class IIa + FDA 510(k): moderate implementation effort — local validation, interface testing, structure nomenclature mapping, and ongoing contour QA required before clinical use.",
     evidenceVendorIndependent: true,
-    evidenceMultiCenter: true,
+    evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Doolan et al. Multi-center comparison of 5 AI auto-contouring systems on 80 patients. Front Oncol 2023;13:1213068",
+        description: "Doolan et al. Single-center comparison of 5 commercial AI auto-contouring systems on 80 patients. Front Oncol 2023;13:1213068",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Goddard et al. Physician-scored evaluation of 3 commercial AI autocontouring systems including Radformation and implementation decision across a five-facility health system. Radiat Oncol 2024;19:69",
+        link: "https://doi.org/10.1186/s13014-024-02451-4"
       },
       {
         type: "Peer-reviewed Publication",
@@ -688,7 +692,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     version: "2.7",
     releaseDate: "2026-03-19",
     lastUpdated: "2026-04-21",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K260509, cleared 2026-03-19), company official sources, vendor product page (AutoContour v2.7) accessed 2026-04-21"
+    lastRevised: "2026-06-10",
+    source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Fan 2025), accessed 2026-06-10"
   }
 ];
