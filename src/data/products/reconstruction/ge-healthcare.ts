@@ -4,45 +4,57 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-truefidelity-pro",
-    name: "TrueFidelity Pro",
-    company: "GE Healthcare",
+    name: "TrueFidelity CT",
+    company: "GE HealthCare",
     category: "Reconstruction",
-    description: "Deep learning-based CT image reconstruction technology that improves image quality while reducing radiation dose.",
-    features: ["AI-powered", "Low-dose CT", "Deep learning reconstruction"],
-    certification: "FDA Cleared",
-    logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com",
-    productUrl: "https://www.gehealthcare.com/products/computed-tomography/revolution/truefidelity",
+    productUrl: "https://www.gehealthcare.com/en-us/products/computed-tomography/applications/true-fidelity",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts",
+    description: "Deep learning-based CT image reconstruction technology that produces TrueFidelity CT images from CT projection data, improving image quality and supporting lower-dose CT protocols when locally validated.",
+    features: [
+      "Deep learning reconstruction",
+      "CT image quality improvement",
+      "Dose-optimization support"
+    ],
+    certification: "FDA 510(k) Cleared",
+    logoUrl: "/logos/ge_healthcare.png",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
-    diseaseTargeted: ["Cancer", "Cardiovascular disease", "Traumatic injuries"],
+    diseaseTargeted: [
+      "Not disease-specific",
+      "General diagnostic imaging"
+    ],
     releaseDate: "2019-04-12",
-    version: "2.1",
+    version: "Not publicly disclosed",
     keyFeatures: [
-      "Deep learning-based image reconstruction",
-      "Improved low-contrast detectability",
-      "Enhanced spatial resolution",
-      "Reduced image noise and artifacts"
+      "Deep neural network-based CT image reconstruction",
+      "Improved image noise texture compared with conventional reconstruction approaches",
+      "Supports head, whole body, cardiac, and vascular CT applications",
+      "Designed for routine clinical reconstruction workflows on compatible GE CT systems"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
-      input: ["Raw CT projection data"],
-      inputFormat: ["GE proprietary format"],
-      output: ["Reconstructed CT images"],
+      input: ["CT X-ray transmission/projection data"],
+      inputFormat: ["GE proprietary raw CT data"],
+      output: ["TrueFidelity CT reconstructed images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["Revolution CT scanners", "Revolution Apex platform"],
-      deployment: ["On-scanner", "Edge computing"],
-      triggerForAnalysis: "Automatic post-acquisition",
-      processingTime: "<60 seconds for standard dataset"
+      integration: [
+        "Revolution CT",
+        "Revolution Apex",
+        "Compatible GE CT platforms"
+      ],
+      deployment: ["On-scanner reconstruction"],
+      triggerForAnalysis: "Automatic during CT reconstruction workflow",
+      processingTime: "Designed for routine clinical reconstruction speed; exact processing time is not publicly specified"
     },
     regulatory: {
       ce: {
-        status: "cleared",
-        class: "IIa",
+        status: "not_publicly_verified",
+        class: "Not publicly verified",
         type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
+        regulation: "EU CE/MDR status could not be confirmed from a public certificate or declaration of conformity during this review"
       },
       fda: {
         status: "510k_cleared",
@@ -53,18 +65,22 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "510(k)",
         decisionDate: "2019-04-12"
       },
-      intendedUseStatement: "The Deep Learning Image Reconstruction option is a deep learning based reconstruction method intended to produce cross-sectional images of the head and whole body by computer reconstruction of X-ray transmission data taken at different angles and planes, including Axial, Helical (Volumetric), and Cardiac acquisitions, for all ages. Deep Learning Image Reconstruction can be used for head, whole body, cardiac, and vascular CT applications. (Source: FDA 510(k) K183202 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "The Deep Learning Image Reconstruction option is a deep learning-based reconstruction method intended to produce cross-sectional images of the head and whole body by computer reconstruction of X-ray transmission data taken at different angles and planes, including axial, helical/volumetric, and cardiac acquisitions, for all ages. It can be used for head, whole body, cardiac, and vascular CT applications. (Source: FDA 510(k) K183202 Summary, accessed 2026-06-10)"
     },
     market: {
       onMarketSince: "2019",
-      distributionChannels: ["Direct sales", "Integrated in new CT systems"],
+      distributionChannels: [
+        "Direct sales",
+        "Integrated in compatible GE CT systems",
+        "Upgrade for compatible systems"
+      ]
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Greffier et al. Diagn Interv Imaging 2020; Shim et al. J Imaging 2025 independent comparative study vs Precise Image. Impact on CT radiomic features (PMC12618174, 2025). PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through enhanced low-contrast detectability at reduced dose, improving CT protocol efficiency.",
+    evidenceRigorNotes: "Independent phantom, clinical, radiomics, and review literature supports image-quality and dose-optimization claims. The previously listed Greffier DOI was incorrect; the relevant TrueFidelity phantom study is Greffier et al., European Radiology 2020, DOI 10.1007/s00330-020-06724-w. Evidence remains strongest for diagnostic CT image quality rather than radiotherapy-specific endpoints.",
+    clinicalImpactNotes: "Potential clinical impact is workflow and protocol optimization through improved image quality and dose-reduction feasibility. Site-specific validation is required before changing clinical CT protocols or using reconstructed images in quantitative/radiomics workflows.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from FDA 510(k) clearance and independent published evaluations: moderate implementation effort with local commissioning, protocol optimization, image-quality review, and quantitative workflow validation required.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -72,84 +88,118 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
+        type: "FDA 510(k) Database Entry",
+        description: "FDA 510(k) clearance K183202 for Deep Learning Image Reconstruction; decision date 2019-04-12; regulation 21 CFR 892.1750; product code JAK.",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K183202"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) Summary K183202 for Deep Learning Image Reconstruction / TrueFidelity CT Images.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183202.pdf"
+      },
+      {
+        type: "Official Product Page",
+        description: "GE HealthCare TrueFidelity CT product page describing TrueFidelity CT Images and Deep Learning Image Reconstruction.",
+        link: "https://www.gehealthcare.com/en-us/products/computed-tomography/applications/true-fidelity"
+      },
+      {
+        type: "Technical White Paper",
+        description: "GE HealthCare TrueFidelity technical white paper describing DLIR design, training, deployment, and early performance evidence.",
+        link: "https://www.gehealthcare.com/static/truefidelity/images/whitepaper-download/TrueFidelity%20WP_vFinal.pdf"
+      },
+      {
         type: "Peer-reviewed Publication",
-        description: "Greffier et al. Diagnostic and Interventional Imaging 2020 - phantom and clinical evaluation",
-        link: "https://doi.org/10.1016/j.diii.2019.10.007"
+        description: "Greffier et al. Image quality and dose reduction opportunity of deep learning image reconstruction algorithm for CT: a phantom study. European Radiology 2020.",
+        link: "https://doi.org/10.1007/s00330-020-06724-w"
       },
       {
         type: "Independent Comparative Study",
-        description: "Shim et al. 2025: Quantitative evaluation comparing Philips Precise Image and GE TrueFidelity for low-dose CT. J Imaging 2025;11(9):317",
+        description: "Shim et al. Quantitative evaluation of low-dose CT image quality using deep learning reconstruction: Philips Precise Image vs GE TrueFidelity. Journal of Imaging 2025;11(9):317.",
         link: "https://doi.org/10.3390/jimaging11090317"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Impact of deep learning based reconstruction algorithms on CT radiomic features of carotid plaques. PMC 2025",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12618174/"
+        description: "Wang et al. Impact of deep learning based reconstruction algorithms on CT radiomic features of carotid plaques. Journal of Applied Clinical Medical Physics 2025.",
+        link: "https://doi.org/10.1002/acm2.70346"
       },
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for TrueFidelity",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183202.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Svalkvist et al. Evaluation of deep-learning image reconstruction for chest CT images. Journal of Applied Clinical Medical Physics 2023.",
+        link: "https://doi.org/10.1002/acm2.13871"
       },
       {
-        type: "Technical White Paper",
-        description: "GE TrueFidelity technical white paper (DLIR method + performance/clinical rationale)",
-        link: "https://www.gehealthcare.com/static/truefidelity/images/whitepaper-download/TrueFidelity%20WP_vFinal.pdf"
+        type: "Peer-reviewed Review",
+        description: "Koetzier et al. Deep Learning Image Reconstruction for CT. Radiology 2023.",
+        link: "https://doi.org/10.1148/radiol.221257"
       }
     ],
     limitations: [
-      "Performance depends on scanner hardware, acquisition protocol, and reconstruction settings",
-      "Not intended as a diagnostic device; intended to support clinical interpretation by improving image quality",
-      "Dose reduction claims vary by use case and should be validated within site-specific clinical workflows",
+      "Performance depends on scanner hardware, acquisition protocol, reconstruction strength, anatomy, and clinical task",
+      "Dose reduction should not be assumed from the algorithm alone and should be validated within site-specific clinical workflows",
+      "Quantitative imaging and radiomics features may change with reconstruction algorithm and strength; local validation is required before quantitative use",
+      "Public CE/MDR certificate details were not identified during this review"
     ],
-    clinicalEvidence: "Vendor white papers and multiple published studies report improved image quality and low-contrast detectability with deep learning image reconstruction, with dose reduction feasibility depending on protocol and clinical indication.",
+    clinicalEvidence: "FDA documentation and peer-reviewed studies support improved CT image quality and dose-optimization feasibility for compatible GE CT systems. Evidence is strongest for diagnostic CT image reconstruction; radiotherapy-specific use cases require local validation.",
     lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
+    lastRevised: "2026-06-10",
+    source: "FDA 510(k) database, GE HealthCare product documentation, and peer-reviewed literature"
   },
   {
     id: "ge-air-recon-dl",
-    name: "GE AIR Recon DL",
-    company: "GE Healthcare",
+    name: "AIR Recon DL",
+    company: "GE HealthCare",
     category: "Reconstruction",
-    description: "Deep learning MR image reconstruction technology that improves signal-to-noise ratio and reduces scan times.",
-    features: ["Deep learning-based", "Faster scanning", "MRI modality"],
-    certification: "FDA Cleared",
-    logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com",
-    productUrl: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
+    productUrl: "https://www.gehealthcare.com/en/products/magnetic-resonance-imaging/applications/air-recon-dl",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts",
+    description: "Deep learning-based MR image reconstruction technology that processes raw MR data to reduce noise and ringing artifacts, improve image sharpness, and support shorter MRI scan times on compatible GE MR systems.",
+    features: [
+      "Deep learning reconstruction",
+      "MRI scan-time reduction support",
+      "Noise and ringing artifact reduction"
+    ],
+    certification: "FDA 510(k) Cleared",
+    logoUrl: "/logos/ge_healthcare.png",
     anatomicalLocation: ["Whole body"],
     modality: ["MRI"],
-    diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Abdominal pathologies"],
+    diseaseTargeted: [
+      "Not disease-specific",
+      "General diagnostic imaging"
+    ],
     releaseDate: "2020-04-10",
-    version: "3.0",
+    version: "Not publicly disclosed",
     keyFeatures: [
-      "Deep learning-based MR image reconstruction",
-      "Up to 50% reduction in scan time",
-      "Up to 30% improvement in signal-to-noise ratio",
-      "Compatible with 2D and 3D acquisitions",
-      "Works with all contrasts and orientations"
+      "Deep learning-based MR image reconstruction from raw MR data",
+      "Noise and ringing/truncation artifact reduction",
+      "Improved signal-to-noise ratio and image sharpness",
+      "Vendor-reported scan-time reduction of up to 50% depending on protocol and clinical use case",
+      "FDA-cleared use across all anatomies and patients of all ages on compatible GE 1.5T, 3.0T, and 7.0T MR systems"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
       input: ["Raw MR k-space data"],
-      inputFormat: ["GE proprietary format"],
+      inputFormat: ["GE proprietary raw MR data"],
       output: ["Reconstructed MR images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["SIGNA MR systems", "Edison Platform"],
+      integration: [
+        "GE HealthCare 1.5T MR systems",
+        "GE HealthCare 3.0T MR systems",
+        "GE HealthCare 7.0T MR systems",
+        "SIGNA MR platforms"
+      ],
       deployment: ["On-scanner reconstruction"],
-      triggerForAnalysis: "Automatic during acquisition",
-      processingTime: "Near real-time"
+      triggerForAnalysis: "Automatic during MR reconstruction workflow",
+      processingTime: "Near real-time/on-console reconstruction; exact processing time depends on sequence, scanner, and reconstruction configuration"
     },
     regulatory: {
       ce: {
         status: "cleared",
-        class: "IIa",
+        class: "Class IIa",
         type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
+        regulation: "MDR (EU 2017/745)",
+        notes: "CE marked for 3T systems (as of 2021 launch page). Regional disclaimers indicate that expanded features (like 3D and PROPELLER) are FDA-cleared in the USA, but may not be CE marked or available for sale in all regions as of the review date."
       },
       fda: {
         status: "510k_cleared",
@@ -158,22 +208,24 @@ export const GE_PRODUCTS: ProductDetails[] = [
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH",
         type: "510(k)",
-        decisionDate: "2020-04-10",
-        notes: "K193282 initial clearance (Apr 2020). K213717 expanded indications (Dec 2021). K252379 expanded clearance (Dec 2025)."
+        decisionDate: "2020-04-10; 2022-06-08; 2025-12-23",
+        notes: "K193282 is the initial FDA clearance for SIGNA Premier including the AIR Recon DL feature. K213717 expanded AIR Recon DL compatibility to PROPELLER and selected 3D Cartesian acquisitions. K252379 added a deep-learning phase-correction enhancement for applications that create and combine multiple intermediate images, such as diffusion-weighted imaging."
       },
-      intendedUseStatement: "AIR Recon DL is a deep-learning-based reconstruction technique that processes raw data to improve signal-to-noise ratio (SNR) and image sharpness, enabling shorter scan times. It is indicated for use as a diagnostic imaging device to produce axial, sagittal, coronal, and oblique images, spectroscopic images, parametric maps, and/or spectra, dynamic images of the structures and/or functions of the entire body. (Source: FDA 510(k) K193282 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "AIR Recon DL is a deep learning-based reconstruction technique available for use on GE HealthCare 1.5T, 3.0T, and 7.0T MR systems. AIR Recon DL reduces noise and ringing/truncation artifacts in MR images, which can be used to reduce scan time and improve image quality. AIR Recon DL is intended for use with all anatomies and for patients of all ages. Depending on the anatomy of interest being imaged, contrast agents may be used. (Source: FDA 510(k) K252379 Summary, accessed 2026-06-10)"
     },
     market: {
       onMarketSince: "2020",
-      distributionChannels: ["Integrated in new MR systems", "Upgrade for compatible systems"],
+      distributionChannels: [
+        "Integrated in compatible GE MR systems",
+        "Upgrade/software option for compatible systems"
+      ]
     },
-    
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "30+ peer-reviewed publications across 11+ PubMed-indexed studies specifically mentioning AIR Recon DL. Key studies: Gorodezky et al. Diagnostics 2026 (cardiac MRI, 50 adults), Shaikh et al. Eur Spine J 2025 (spine 1.5T), Zucker et al. Pediatr Radiol 2025 (pediatric abdomen), Yoon et al. Insights Imaging 2024 (liver MRI). PubMed verified 2026-02-26.",
-    clinicalImpactNotes: "Workflow improvement through up to 50% reduction in scan time with maintained diagnostic quality across neuro, MSK, body, cardiac, and pediatric applications.",
+    evidenceRigorNotes: "Multiple independent peer-reviewed studies and FDA summaries support improved SNR, image sharpness, and/or scan-time reduction feasibility across neuro, spine, liver, cardiac, and pediatric/body MRI applications. Evidence includes regulatory performance testing, clinical reader evaluations, and external clinical studies. Note: Several reviews cite a 2025 Radiology Advances paper as 'Bash et al.', but the primary first author is Lyo S.K. et al.",
+    clinicalImpactNotes: "Workflow impact is mainly shorter MRI acquisition times and improved image quality while maintaining diagnostic quality. Clinical benefit depends on protocol design, anatomy, scanner platform, sequence type, and local validation.",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
+    adoptionReadinessNotes: "Derived from FDA 510(k) clearance, broad product availability, and mature peer-reviewed evidence. Local commissioning, sequence-specific optimization, radiologist review, and quantitative workflow validation remain necessary.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -181,45 +233,80 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
+        type: "FDA 510(k) Database Entry",
+        description: "FDA 510(k) clearance K193282 for SIGNA Premier including AIR Recon DL feature; decision date 2020-04-10.",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K193282"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "K193282 FDA summary describing AIR Recon DL as a deep learning-based MR reconstruction feature and summarizing nonclinical and clinical testing.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
+      },
+      {
+        type: "FDA 510(k) Database Entry",
+        description: "FDA 510(k) clearance K213717 for AIR Recon DL; decision date 2022-06-08; expansion to PROPELLER and selected 3D Cartesian acquisitions.",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K213717"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "K213717 FDA summary for AIR Recon DL expanded compatibility with PROPELLER and selected 3D Cartesian acquisitions.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "K252379 FDA summary for AIR Recon DL modification adding deep-learning phase correction; decision date 2025-12-23.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252379.pdf"
+      },
+      {
+        type: "Official Product Page",
+        description: "GE HealthCare AIR Recon DL product page describing deep learning MR reconstruction and vendor-reported scan-time reduction of up to 50%.",
+        link: "https://www.gehealthcare.com/en/products/magnetic-resonance-imaging/applications/air-recon-dl"
+      },
+      {
         type: "Peer-reviewed Publication",
-        description: "Gorodezky et al. Impact of Deep Learning-Based Reconstruction on Cardiac Tissue Characterization (50 adults). Diagnostics 2026;16(2):348",
+        description: "Gorodezky et al. Impact of Deep Learning-Based Reconstruction on the Accuracy and Precision of Cardiac Tissue Characterization. Diagnostics 2026;16(2):348.",
         link: "https://doi.org/10.3390/diagnostics16020348"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Shaikh et al. Application of deep learning to routine 2D T2 FLEX spine imaging at 1.5T. Eur Spine J 2025",
+        description: "Shaikh et al. Application and assessment of deep learning to routine 2D T2 FLEX spine imaging at 1.5T. European Spine Journal 2025.",
         link: "https://doi.org/10.1007/s00586-025-09305-x"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Zucker et al. Deep learning reconstruction for improving image quality of pediatric abdomen MRI. Pediatr Radiol 2025;55(10):2037-2046",
+        description: "Zucker et al. Deep learning reconstruction for improving image quality of pediatric abdomen MRI using a 3D T1 fast spoiled gradient echo acquisition. Pediatric Radiology 2025;55:2037-2046.",
         link: "https://doi.org/10.1007/s00247-025-06313-3"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Yoon et al. Comparison of image quality and lesion conspicuity in gadoxetic acid-enhanced liver MRI. Insights Imaging 2024;15(1):257",
+        description: "Yoon et al. Comparison of image quality and lesion conspicuity between conventional and deep learning reconstruction in gadoxetic acid-enhanced liver MRI. Insights into Imaging 2024;15:257.",
         link: "https://doi.org/10.1186/s13244-024-01825-2"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Bash et al. Deep learning MRI halves scan time across routine neuroradiologic examinations. Radiology Advances 2025",
+        description: "Lyo S.K. et al. Deep learning MRI halves scan time and preserves image quality across routine neuroradiologic examinations. Radiology Advances 2025.",
         link: "https://doi.org/10.1093/radadv/umaf029"
       },
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance K193282 (initial) and K213717 (expanded)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf"
+        type: "Technical/Algorithm Paper",
+        description: "Lebel. Performance characterization of a novel deep learning-based MR image reconstruction pipeline. arXiv 2020.",
+        link: "https://arxiv.org/abs/2008.06559"
       },
       {
-        type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K252379 received December 23, 2025 - expanded clearance for AIR Recon DL",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252379.pdf"
+        type: "Peer-reviewed Review",
+        description: "Kiryu et al. Clinical Impact of Deep Learning Reconstruction in MRI. RadioGraphics 2023.",
+        link: "https://doi.org/10.1148/rg.220133"
       }
     ],
-    clinicalEvidence: "Over 30 peer-reviewed publications demonstrating improved image quality and/or reduced scan times across various clinical applications",
+    limitations: [
+      "Performance depends on MR scanner platform, coil configuration, acquisition sequence, anatomy, and reconstruction strength",
+      "Vendor-reported scan-time reduction should be locally validated for each clinical protocol before routine use",
+      "Quantitative MRI applications may require sequence-specific validation after reconstruction changes",
+      "Public CE/MDR cert for expanded configurations (PROPELLER/3D) was not verified as of this review; European availability may be restricted by region"
+    ],
+    clinicalEvidence: "FDA summaries and independent peer-reviewed studies support improved MR image quality and scan-time reduction feasibility across multiple anatomies and clinical applications. Clinical implementation should include local optimization and validation for each protocol and scanner configuration.",
     lastUpdated: "2026-04-13",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database and company website",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts"
+    lastRevised: "2026-06-10",
+    source: "FDA 510(k) database, GE HealthCare product documentation, and peer-reviewed literature"
   }
 ];
