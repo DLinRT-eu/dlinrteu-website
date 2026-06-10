@@ -50,7 +50,7 @@ export const SegProV3RT300: ProductDetails = {
   ],
   modality: ["CT", "MRI"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/everfortune.ts",
-  companyUrl: "https://www.everfortuneai.com.tw/en/",
+  companyUrl: "https://www.everfortuneai.com.tw/en/medical-ai/",
   guidelines: [
     {
       url: "https://www.aapm.org/pubs/reports/detail.asp?docid=171",
