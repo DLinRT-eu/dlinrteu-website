@@ -11,7 +11,7 @@ export const SegProV3RT300: ProductDetails = {
   company: "Ever Fortune AI",
   logoUrl: "/logos/ever-fortune.png",
   version: "3.0",
-  website: "https://www.everfortuneai.com.tw/en/",
+  website: "https://www.everfortuneai.com.tw/en/medical-ai/",
   category: "Auto-Contouring",
   evidence: [
     {
