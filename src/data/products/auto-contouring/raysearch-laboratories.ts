@@ -25,6 +25,7 @@ export const DeepLearningSegmentation: ProductDetails = {
       description: "Breast/thorax validation study in Acta Oncologica"
     },
     {
+      link: "https://doi.org/10.1016/j.radonc.2016.10.009",
       type: "Peer-reviewed Publication",
       description: "Early deep learning segmentation validation"
     }
@@ -45,6 +46,7 @@ export const DeepLearningSegmentation: ProductDetails = {
       class: "Class II",
       notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A",
       status: "510k_cleared",
+      productCode: "MUJ",
       decisionDate: "2025-04-04",
       clearanceNumber: "K240398"
     },
