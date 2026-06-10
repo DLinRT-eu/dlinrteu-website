@@ -7,12 +7,20 @@ export const SyMRINeuro: ProductDetails = {
     onMarketSince: "2023",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K233733) and company website",
+  source: "FDA 510(k) database (K242745, K233733) and company website",
   company: "SyntheticMR",
   logoUrl: "/logos/syntheticMRI.png",
   version: "15",
   website: "https://syntheticmr.com/products/symri-neuro/",
   category: "Image Synthesis",
+  evidence: [
+    {
+      link: "https://doi.org/10.3174/ajnr.A8631",
+      type: "Peer-Reviewed Publication",
+      level: "3",
+      description: "Prospective multicenter multireader study comparing 3D synthetic vs conventional brain MRI using SyMRI 15 (AJNR 2025)."
+    }
+  ],
   features: [
     "MR image synthesis",
     "Multiple contrasts from single scan",
@@ -38,7 +46,7 @@ export const SyMRINeuro: ProductDetails = {
       status: "510k_cleared",
       productCode: "LNH",
       decisionDate: "2024-12-06",
-      clearanceNumber: "K233733",
+      clearanceNumber: "K242745, K233733",
       regulationNumber: "21 CFR 892.1000"
     },
     intendedUseStatement: "SyMRI is intended as a post-processing software for MR images. It provides synthetic MR images and quantitative tissue maps (T1, T2, PD) from a single MR acquisition to support clinical diagnosis."
@@ -60,9 +68,9 @@ export const SyMRINeuro: ProductDetails = {
   lastUpdated: "2025-12-01",
   releaseDate: "2024-12-06",
   certification: "CE & FDA",
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   subspeciality: "Neuroradiology",
-  clinicalImpact: "I0",
+  clinicalImpact: "I2",
   diseaseTargeted: ["Brain Tumors", "Multiple Sclerosis", "Neurodegenerative Disorders"],
   adoptionReadiness: "R3",
   anatomicalLocation: ["Brain"],
