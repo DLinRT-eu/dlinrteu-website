@@ -46,6 +46,7 @@ export const DeepLearningSegmentation: ProductDetails = {
       class: "Class II",
       notes: "Covers RayStation 2023B, RayPlan 2023B, RayStation 2024A, RayPlan 2024A",
       status: "510k_cleared",
+      productCode: "MUJ",
       decisionDate: "2025-04-04",
       clearanceNumber: "K240398"
     },
