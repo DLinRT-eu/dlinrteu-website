@@ -36,7 +36,7 @@ export const MRCATPelvis: ProductDetails = {
       class: "Class II",
       notes: "Part of Philips MR-RT platform. Extended MR-only workflow to broader pelvic applications.",
       status: "510k_cleared",
-      productCode: "LLZ",
+      productCode: "MUJ",
       decisionDate: "2019-05",
       clearanceNumber: "K182888"
     },
