@@ -6,22 +6,22 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     id: "manteia-accucontour",
     name: "AccuContour",
     company: "Manteia",
-    companyUrl: "https://www.manteiatech.com/",
-    productUrl: "https://www.manteiatech.com/accucontour",
+    companyUrl: "https://www.manteiamedical.com/",
+    productUrl: "https://www.manteiamedical.com/accucontour",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia.ts",
-    description: "AI solution for rapid and accurate auto-contouring in radiation therapy planning, supporting comprehensive OAR and target volume segmentation across all major anatomical regions.",
+    description: "AI-assisted auto-contouring and image-processing software for radiation therapy workflows, supporting CT-based segmentation of OARs and selected target templates, with registration, plan review, and dose-evaluation functions depending on configuration.",
     category: "Auto-Contouring",
-    certification: "CE & FDA",
+    certification: "FDA 510(k); CE not independently verified",
     logoUrl: "/logos/manteia.png",
-    website: "https://www.manteiatech.com/",
+    website: "https://www.manteiamedical.com/",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration", "NRG guideline support", "Target volume contouring"],
+    keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration", "Guideline-based contouring support", "Target and OAR contouring"],
     technicalSpecifications: {
-      population: "Adult patients",
-      input: ["CT"],
+      population: "Patients selected for radiation therapy; pediatric performance requires local validation",
+      input: ["Non-contrast CT", "Synthetic CT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
       outputFormat: ["DICOM-RTSTRUCT"]
@@ -30,34 +30,34 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       integration: ["TPS integration", "PACS integration"],
       deployment: ["Cloud-based", "On-premises"],
       triggerForAnalysis: "Manual or automated",
-      processingTime: "2-3 minutes per case"
+      processingTime: "~1 minute per case (site- and ROI-dependent)"
     },
     regulatory: {
       ce: {
-        status: "cleared",
-        class: "IIa",
-        type: "MDR",
-        regulation: "MDR 2017/745"
+        status: "not_independently_verified",
+        class: "Not independently verified",
+        type: "Not independently verified",
+        regulation: "No public EU MDR certificate or EUDAMED record located during audit"
       },
       fda: {
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K250780",
+        clearanceNumber: "K251351",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2025-12-05",
-        notes: "K250780 (ARTAssistant branding, Dec 2025). Prior clearances: K221706 (2023), K191928 (2020)"
+        decisionDate: "2026-01-23",
+        notes: "K251351 cleared AccuContour 4.0 (Jan 2026). Prior AccuContour clearances: K221706 (Mar 2023), K191928 (Feb 2020). K250780 is a separate ARTAssistant clearance."
       },
-      intendedUseStatement: "The primary function of ARTAssistant is to facilitate image processing with image registration and synthetic CT (sCT) generation in adaptive radiation therapy. This enables users to meticulously design ART plans based on the processed images. (Source: FDA 510(k) K250780 Summary, accessed 2026-05-30. Note: K250780 covers the ARTAssistant module within the AccuContour product family.)"
+      intendedUseStatement: "AccuContour 4.0 is used by the radiation oncology department to segment CT images and generate information needed for treatment planning, treatment evaluation, and treatment adaption. (Source: FDA 510(k) K251351 Summary, accessed 2026-06-11.)"
     },
     market: {
-      onMarketSince: "2021",
+      onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"],
     },
-    version: "3.0",
-    releaseDate: "2025-09-15",
-    lastUpdated: "2026-03-23",
+    version: "4.0",
+    releaseDate: "2026-01-23",
+    lastUpdated: "2026-06-11",
     supportedStructures: [
       // H&N Structures and elective nodes
       "Head & Neck: Eye_L",
@@ -214,52 +214,44 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: CTV Cervix",
       "Pelvis: CTV Para-aortic Nodes"
     ],
-    evidenceRigor: "E3",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Upgraded to E3: 5 independent peer-reviewed publications including npj Digital Medicine 2025 multi-centre evaluation across 7 countries, Sci Reports 2025 psychometric study, JACMP 2025 multi-site geometric/dosimetric evaluation, Phys Eng Sci Med 2024 7-system comparison, Front Oncol 2024 multi-center H&N validation. Meets E3 criteria: multi-center, multi-national, vendor-independent, externally validated.",
-    clinicalImpactNotes: "Multi-center validation studies across multiple countries demonstrate consistent accuracy for H&N and other anatomical sites. Multiple independent comparisons available.",
-    adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
+    evidenceRigorNotes: "Corrected to E2: direct AccuContour evidence includes retrospective peer-reviewed validation/comparison studies, including single-institution H&N validation and NPC contouring comparisons. The previously cited npj Digital Medicine 2025, Scientific Reports 2025, JACMP 2025, and Phys Eng Sci Med 2024 evidence primarily evaluates other vendors/tools and should not support an AccuContour E3 assignment. No prospective clinical-outcome study or independent multicentre AccuContour deployment study was identified.",
+    clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement.",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): peer-reviewed retrospective evidence and U.S. regulatory clearance are present, but public CE evidence was not independently verified and local commissioning, model acceptance testing, governance, and user training remain required.",
     evidenceVendorIndependent: true,
-    evidenceMultiCenter: true,
-    evidenceMultiNational: true,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI. Frontiers in Oncology 2024.",
+        description: "Single-institution H&N validation comparing AccuContour and MIM ProtegeAI for 22 OARs in 40 CT cases. Frontiers in Oncology 2024.",
         link: "https://doi.org/10.3389/fonc.2024.1375096"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Multi-centre evaluation of deep learning CT autosegmentation of H&N for radiotherapy. npj Digital Medicine 2025.",
-        link: "https://doi.org/10.1038/s41746-025-01624-z"
+        description: "Evaluation of atlas-based and AccuContour deep-learning auto-contouring for nasopharyngeal carcinoma OARs. Frontiers in Oncology 2022.",
+        link: "https://doi.org/10.3389/fonc.2022.833816"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Geometric, dosimetric and psychometric evaluation of three commercial AI solutions for OAR auto-segmentation in H&N RT. Scientific Reports 2025.",
-        link: "https://doi.org/10.1038/s41598-025-18598-3"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Geometric and dosimetric evaluation of a commercial AI auto-contouring tool on multiple anatomical sites. JACMP 2025.",
-        link: "https://doi.org/10.1002/acm2.70067"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Investigation on performance of multiple AI-based auto-contouring systems in OAR delineation. Phys Eng Sci Med 2024.",
-        link: "https://doi.org/10.1007/s13246-024-01434-9"
+        description: "Comparison of four commercial deep-learning contouring models, including AccuContour, for nasopharyngeal carcinoma structures and GTV. Scientific Reports 2026.",
+        link: "https://doi.org/10.1038/s41598-025-33567-6"
       }
     ],
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K250780, K221706, K191928), company official sources",
+    lastRevised: "2026-06-11",
+    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",
-      "Lower performance for pediatric patients",
+      "Pediatric performance was not established in the reviewed direct AccuContour clinical validation studies",
       "Requires manual verification and editing in complex anatomical regions",
-      "Vendor advertises 300+ OARs and 1200+ tumor target templates; only the subset publicly documented and cited in 510(k) submissions (K250780, K221706, K191928) is enumerated here. The full atlas is not published on the vendor website."
+      "Vendor advertises >300 OARs, >20 tumor targets, and use in >1200 worldwide centers; the complete model atlas and per-structure validation matrix are not publicly enumerated on the vendor page.",
+      "Public EU MDR/CE certificate details were not located during this audit.",
+      "K251351 compatible contouring input is non-contrast CT DICOM 3.0, including original CT and synthetic CT; contrast-enhanced or unusual imaging workflows require local validation."
     ]
   }
 ];
