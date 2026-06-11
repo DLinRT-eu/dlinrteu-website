@@ -41,7 +41,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     regulatory: {
       ce: {
         status: "cleared",
-        class: "Not publicly disclosed",
+        class: "Class IIb",
         type: "CE Mark",
         regulation: "Not publicly disclosed"
       },
@@ -107,7 +107,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     limitations: [
       "Requires user review, correction and confirmation before clinical use",
       "Public documentation emphasizes Edison HealthLink and qualified GE HealthCare CT-scanner workflow integration; local interoperability testing is required",
-      "CE class and MDR certificate details were not publicly available in the open sources reviewed",
+      "MDR certificate details were not publicly available in the open sources reviewed",
       "No peer-reviewed, product-specific independent clinical impact study was identified in this audit"
     ]
   }
