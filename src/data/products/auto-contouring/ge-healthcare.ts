@@ -6,20 +6,20 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-auto-segmentation",
     name: "Auto Segmentation",
-    company: "GE Healthcare",
+    company: "GE HealthCare",
     companyUrl: "https://www.gehealthcare.com/",
-    productUrl: "https://www.gehealthcare.com/products/advanced-visualization/advanced-visualization/auto-segmentation",
+    productUrl: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
-    description: "Integrated auto-segmentation solution within the GE Healthcare ecosystem, providing efficient and accurate organ delineation for radiation therapy planning.",
+    description: "Deep learning CT auto-segmentation application on Edison HealthLink that generates DICOM Radiotherapy Structure Sets (RTSS) with organs-at-risk contours for radiation therapy planning review and editing.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/ge_healthcare.png",
-    website: "https://www.gehealthcare.com/products/advanced-visualization/advanced-visualization/auto-segmentation",
-    anatomicalLocation: ["Brain","Head & Neck", "Thorax", "Abdomen", "Pelvis"],
+    website: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
+    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["Integrated platform", "Workflow efficiency", "Multiple anatomical sites"],
+    diseaseTargeted: ["Adult radiotherapy planning across multiple cancer types"],
+    keyFeatures: ["Deep learning OAR segmentation", "DICOM RTSS output", "Edison HealthLink workflow integration", "Head/neck, thorax, abdomen and pelvis OARs"],
     guidelines: [
       { name: "RTOG", compliance: "partial" },
       { name: "DAHANCA", compliance: "partial" }
@@ -33,17 +33,17 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
-      integration: ["Native integration with GE systems"],
-      deployment: ["On-premises"],
-      triggerForAnalysis: "Within clinical workflow",
-      processingTime: "Minutes per case"
+      integration: ["Edison HealthLink integration", "DICOM RTSS export to compatible review workstations"],
+      deployment: ["Server-based deployment on Edison HealthLink"],
+      triggerForAnalysis: "Automated within configured clinical workflow",
+      processingTime: "Not publicly specified"
     },
     regulatory: {
       ce: {
         status: "cleared",
         class: "Class IIb",
-        type: "MDR",
-        regulation: "MDR 2017/745"
+        type: "CE Mark",
+        regulation: "Not publicly disclosed"
       },
       fda: {
         status: "510k_cleared",
@@ -52,52 +52,63 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K230082",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        notes: "CT Auto Segmentation. MR Contour DL cleared separately as K242925 (April 2025)"
+        notes: "CT Auto Segmentation. MR Contour DL cleared separately as K242925 (decision date April 1, 2025)."
       },
-      intendedUseStatement: "Auto Segmentation generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be used by dosimetrists, medical physicists, and radiation oncologists as initial contours to accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for each organ at risk and correct the contours/labels as needed. Auto Segmentation may be used with images acquired on CT scanners, in adult patients. (Source: FDA 510(k) K230082 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "Auto Segmentation is intended to be used as a workflow tool for initial anatomy segmentation of organs at risk on CT images as an aid in radiation therapy planning after user confirmation. It generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be used by dosimetrists, medical physicists, and radiation oncologists as initial contours to accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for each organ at risk and correct the contours/labels as needed. Auto Segmentation may be used with images acquired on CT scanners, in adult patients. (Source: FDA 510(k) K230082 Summary, accessed 2026-06-11)"
     },
     market: {
-      onMarketSince: "2018",
+      onMarketSince: "2023",
       distributionChannels: ["Direct sales"]
     },
-    version: "4.0",
-    releaseDate: "2023-03-10",
+    version: "1.0+",
+    releaseDate: "2023-05-12",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA validation K230082 with 302 retrospective CT exams (2552 contours) from 9 global sites. Kim et al. Phys Eng Sci Med 2024 independent 7-system comparison (doi:10.1007/s13246-024-01434-9).",
-    clinicalImpactNotes: "Large multi-site FDA validation dataset demonstrates consistent geometric accuracy across global clinical sites. Independent comparative evaluation available.",
+    evidenceRigorNotes: "E2: FDA 510(k) K230082 includes retrospective multi-site validation with 302 adult CT radiotherapy-planning exams and 2552 generated contours from an independent test set; ground truth annotations followed RTOG/DAHANCA and were reviewed by qualified radiotherapy practitioners. No peer-reviewed product-specific independent validation was identified in this audit.",
+    clinicalImpactNotes: "Supports workflow acceleration for initial OAR contour generation and standardization, with required user review/editing. Evidence is geometric and qualitative; no prospective clinical outcome or time-and-motion publication specific to GE Auto Segmentation was identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    adoptionReadinessNotes: "Derived from E2 + CE Mark + FDA 510(k): moderate implementation effort — local validation, DICOM interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2024-01-20",
-    lastRevised: "2026-05-30",
-    source: "FDA 510(k) database (K230082, K242925), company official sources",
-    clinicalEvidence: "FDA 510(k) validation studies using 2552 contours from 302 unique patients across 9 global sites",
+    lastUpdated: "2026-06-11",
+    lastRevised: "2026-06-11",
+    source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.",
+    clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [
       {
         type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K230082 received April 7, 2023 - Class II device under 21 CFR 892.2050",
+        description: "FDA 510(k) clearance K230082 decision date May 4, 2023 - Class II device under 21 CFR 892.2050, product code QKB",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
       },
       {
-        type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K242925 received February 27, 2025 - Class II device under 21 CFR 892.2050",
+        type: "Related Regulatory Clearance",
+        description: "FDA 510(k) clearance K242925 decision date April 1, 2025 for MR Contour DL - related MR-based product using Auto Segmentation (K230082) as predicate",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
       },
       {
-        type: "Independent Peer-reviewed Publication",
-        description: "Kim et al. Investigation on performance of multiple AI-based auto-contouring systems (7-system comparison, 42 cases). Phys Eng Sci Med 2024.",
-        link: "https://doi.org/10.1007/s13246-024-01434-9",
+        type: "Manufacturer Product Documentation",
+        description: "Official GE HealthCare Auto Segmentation product page describing CT OAR auto-contouring for radiation therapy planning and RTSS review workflow",
+        link: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
+      },
+      {
+        type: "Interoperability Documentation",
+        description: "GE HealthCare DICOM conformance statement for Auto Segmentation on Edison HealthLink, documenting CT input and RT Structure Set output",
+        link: "https://www.gehealthcare.com/-/jssmedia/documents/us-global/products/interoperability/dicom/computed-tomography/gehc-dicom-conformance_dlautosegmentation_doc2719402_rev3",
+      },
+      {
+        type: "Market Availability",
+        description: "GE HealthCare ESTRO 2023 announcement confirming Auto Segmentation as recently FDA 510(k) cleared and CE Marked",
+        link: "https://www.itnonline.com/content/ge-healthcare-introduces-innovations-improve-radiation-therapy-efficiency-and-precision",
       },
     ],
     limitations: [
-      "Deployment options are limited to on-premises",
-      "Tight vendor locking within the GE ecosystem",
-      "Requires manual verification and editing in complex anatomical regions"
+      "Requires user review, correction and confirmation before clinical use",
+      "Public documentation emphasizes Edison HealthLink and qualified GE HealthCare CT-scanner workflow integration; local interoperability testing is required",
+      "MDR certificate details were not publicly available in the open sources reviewed",
+      "No peer-reviewed, product-specific independent clinical impact study was identified in this audit"
     ]
   }
 ];
