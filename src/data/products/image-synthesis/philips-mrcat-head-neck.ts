@@ -18,7 +18,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
       "Integrated workflow"
     ],
     category: "Image Synthesis",
-    certification: "CE Mark, FDA Cleared",
+    certification: "FDA 510(k) Cleared (confirmed 2022-04-05); CE Mark (not publicly verified)",
     logoUrl: "/logos/philips.png",
     website: "https://www.philips.ie/healthcare/solutions/magnetic-resonance/therapy-systems/mr-rt",
     anatomicalLocation: ["Head", "Neck"],
@@ -33,32 +33,33 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
       "Reduced patient burden with single imaging session"
     ],
     technicalSpecifications: {
-      population: "Adult patients",
-      input: ["MRI scans"],
+      population: "Patients with soft tissue tumors in the head and neck region",
+      input: ["3D T1W mDIXON MRI scans"],
       inputFormat: ["DICOM"],
       output: ["Synthetic CT images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["Pinnacle TPS", "PACS systems"],
+      integration: ["Ingenia MR-RT platform", "Pinnacle TPS", "Compatible TPS via DICOM export", "PACS systems"],
       deployment: ["On-premises"],
-      triggerForAnalysis: "Within treatment planning workflow",
-      processingTime: "Minutes per volume"
+      triggerForAnalysis: "After dedicated MRCAT mDIXON MR acquisition on the MR console",
+      processingTime: "mDIXON acquisition < 3 minutes"
     },
     regulatory: {
       ce: {
         status: "cleared",
         class: "IIa",
         type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
+        regulation: "EU MDR (2017/745)",
+        note: "Not publicly disclosed"
       },
       fda: {
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        productCode: "LLZ",
-        decisionDate: "2022-10",
-        notes: "AI-enabled MR-only head and neck radiotherapy application. Enables MR as sole imaging modality for RT planning of soft tissue tumors in head and neck."
+        productCode: "MUJ",
+        decisionDate: "2022-04-05",
+        notes: "FDA K214081; AI-enabled MR-only radiotherapy application for soft tissue tumors in head and neck. Traditional 510(k) substantial equivalence decision."
       },
       intendedUseStatement: "MRCAT Head and Neck is indicated for radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region. (Source: FDA 510(k) K214081 Summary, accessed 2026-05-30)"
     },
@@ -67,16 +68,16 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Partnerships"],
 
 },
-    version: "1.5",
+    version: "2.0",
     releaseDate: "2022-10-20",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website",
-    clinicalEvidence: "Clinical studies demonstrate comparable treatment planning accuracy to CT-based workflows for head and neck radiation therapy",
-    evidenceRigor: "E0",
-    evidenceRigorNotes: "Vendor-published clinical studies. No vendor-independent validation studies specific to MRCAT Head and Neck identified yet. Earwong et al. 2025 covers DL-based synthetic CT for H&N but product not confirmed.",
-    clinicalImpact: "I1",
-    clinicalImpactNotes: "Technical efficacy demonstrated in vendor studies: comparable treatment planning accuracy to CT-based workflows.",
+    lastUpdated: "2026-06-11",
+    lastRevised: "2026-06-11",
+    source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study",
+    clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Upgraded from E0 to E1: First peer-reviewed independent retrospective clinical workflow and dosimetric validation study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751). Evidence remains limited by single-center retrospective design and modest cohort size (n=10 for H&N subset); no prospective multicenter outcome study identified.",
+    clinicalImpact: "I2",
+    clinicalImpactNotes: "Workflow-level clinical utility demonstrated — enables MR-only radiotherapy planning and reduces CT-MR registration burden for eligible head-and-neck soft tissue tumor workflows. Peer-reviewed retrospective evidence supports dosimetric accuracy feasibility but not improved tumor control, toxicity, or survival outcomes.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   }
