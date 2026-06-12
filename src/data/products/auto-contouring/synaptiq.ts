@@ -4,9 +4,12 @@ export const MediqRT: ProductDetails = {
   id: "synaptiq-mediq-rt",
   name: "Mediq RT",
   market: {
-    onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
+    onMarketSince: "2021",
     distributionChannels: ["Direct sales", "Hospital partnerships"],
   },
+  developmentStage: "certified",
+  clinicalEvidence:
+    "In use across 12+ Romanian clinics since 2021 (EBRD-backed pilot deployment). Peer-reviewed comparative analysis of cardiac substructure contouring published in Physics and Imaging in Radiation Oncology (2026, doi:10.1016/j.phro.2026.100935) plus six ESTRO conference abstracts (2023–2025). Evidence remains predominantly single-center and vendor-associated.",
   source:
     "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature, and vendor-provided System Requirements documentation (2026-06-10). CE clearance details pending verification against EUDAMED listing or vendor press release.",
   company: "Synaptiq",
@@ -63,20 +66,22 @@ export const MediqRT: ProductDetails = {
   productUrl: "https://synaptiq.io/product/",
   regulatory: {
     ce: {
-      type: "Medical Device",
+      type: "MDR",
       class: "IIa",
+      regulation: "MDR 2017/745",
       notes:
         "CE marked since 2025-06-01 under MDR as a Class IIa medical device software. Scope includes AI-based auto-segmentation of OARs and CTVs on CT and the Active Contouring GTV delineation feature.",
       status: "cleared",
     },
     fda: {
-      status: "pending",
+      status: "not_approved",
+      notes: "Not submitted; CE-only product.",
     },
     intendedUseStatement:
       "Mediq RT is a software as a medical device intended to assist radiation oncologists and medical physicists during contouring of 3D CT images of patients with an indication for radiotherapy. The software offers AI-based auto-segmentation of organs-at-risk (OARs) and clinical target volumes (CTVs), designed to streamline the contouring workflow by enabling interactive review, editing, and approval by qualified users prior to export to treatment planning systems. Mediq RT is capable of delineating regions of interest for all important anatomical sites, including head and neck, thorax, abdomen, and pelvis, and can support other target volumes as defined in clinical practice.\n\nIntended Medical Indication: Mediq RT automatically segments organs-at-risk (OARs) and clinical target volumes (CTVs) using CT scans for radiotherapy treatment planning. It assists radiation oncologists and medical physicists in contouring, reviewing, and editing these regions of interest. The software is designed for a broad spectrum of malignancies, where precise radiation delivery is essential to maximize tumor control and minimize damage to surrounding healthy tissues. (Source: vendor-provided intended purpose statement, 2026-06-10.)",
   },
   technology: {
-    deployment: ["cloud", "on_prem"],
+    deployment: ["Cloud-based", "On-premises"],
     integration: ["Multi-vendor TPS integration", "PACS integration"],
     processingTime: "Seconds to minutes per case",
     triggerForAnalysis: "Manual or automated",
@@ -90,7 +95,7 @@ export const MediqRT: ProductDetails = {
   description:
     "AI-powered solution for radiation therapy planning with advanced auto-contouring capabilities. Supports auto-segmentation on CT and MRI, and multi-modality image registration for CT, MRI, and PET/CT. CE-certified (reported by vendor at the ESTRO 2026 booth), including the Active Contouring GTV delineation feature; pending verification against the EUDAMED listing. Features unique Active Contouring technology and adaptive learning for personalized contouring.",
   keyFeatures: [
-    "92.5% average time saving in contouring workflow",
+    "Reported time savings in contouring workflow (vendor-cited)",
     "Adaptive learning according to user's individual technique",
     "Active Contouring - GTV delineation from single slice input",
     "AI-based interactive contour revisions",
@@ -110,10 +115,15 @@ export const MediqRT: ProductDetails = {
     "Performance may vary based on image quality",
   ],
   releaseDate: "2026-05-01",
-  certification: "CE",
+  certification: "CE Class IIa (MDR)",
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I1",
+  evidenceVendorIndependent: false,
+  evidenceMultiCenter: false,
+  evidenceMultiNational: false,
+  evidenceProspective: false,
+  evidenceExternalValidation: false,
   diseaseTargeted: [
     "Brain tumours (glioblastoma, astrocytoma, etc.)",
     "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",
@@ -371,7 +381,7 @@ export const MediqRT: ProductDetails = {
     "Pelvis: LN_Presacral",
   ],
   adoptionReadinessNotes:
-    "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    "Derived from E1 + CE Class IIa: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
     input: ["CT", "MRI"],
     output: ["Structure sets"],

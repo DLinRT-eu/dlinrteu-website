@@ -51,7 +51,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device",
         regulation: "EU MDR (2017/745)",
-        note: "Not publicly disclosed"
+        notes: "Not publicly disclosed"
       },
       fda: {
         status: "510k_cleared",
