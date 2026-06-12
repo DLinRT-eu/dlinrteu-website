@@ -133,22 +133,80 @@ export const BRAINLAB_PRODUCTS: ProductDetails[] = [
       deployment: ["On-premise Brainlab Elements", "Optional Art-Plan cloud gateway for extracranial workflows"]
     },
     supportedStructures: [
-      // FDA-cleared segmentation workflow categories
-      "RT Elements segmentation workflows: Cranial",
-      "RT Elements segmentation workflows: Basal Ganglia",
-      "RT Elements segmentation workflows: Head & Neck",
-      "RT Elements segmentation workflows: Pelvic",
-      "RT Elements segmentation workflows: Spine",
-      "RT Elements segmentation workflows: Thoracic & Spine",
-      "RT Elements segmentation workflows: Extracranial",
+      // Cranial
+      "Brain: Brain",
+      "Brain: Brainstem",
+      "Brain: Eye L",
+      "Brain: Eye R",
+      "Brain: Lens L",
+      "Brain: Lens R",
+      "Brain: Optic Chiasm",
+      "Brain: Optic Nerve L",
+      "Brain: Optic Nerve R",
+      "Brain: Pituitary",
+      "Brain: Cochlea L",
+      "Brain: Cochlea R",
+      "Brain: Hippocampus L",
+      "Brain: Hippocampus R",
+      "Brain: Temporal Lobe L",
+      "Brain: Temporal Lobe R",
+      "Brain: Cerebellum",
 
-      // Publicly described cranial segmentation scope
-      "Cranial: >100 cranial anatomical structures via Brainlab Anatomical Mapping / Segmentation Cranial",
-      "Brain: Cranial tumor objects on contrast-enhanced T1-weighted MRI via ML-based tumor segmentation",
-      "Brain: Supported cranial tumor categories include metastases, meningiomas, gliomas, cranial and paraspinal nerve tumors, and glioneuronal and neuronal tumors",
+      // Basal Ganglia
+      "Brain: Caudate L",
+      "Brain: Caudate R",
+      "Brain: Putamen L",
+      "Brain: Putamen R",
+      "Brain: Globus Pallidus L",
+      "Brain: Globus Pallidus R",
+      "Brain: Thalamus L",
+      "Brain: Thalamus R",
 
-      // Extracranial integration
-      "Extracranial: Lymph nodes and >150 organs at risk via optional TheraPanacea Art-Plan integration"
+      // Head and Neck
+      "Head & Neck: Brainstem",
+      "Head & Neck: Parotid L",
+      "Head & Neck: Parotid R",
+      "Head & Neck: Submandibular Gland L",
+      "Head & Neck: Submandibular Gland R",
+      "Head & Neck: Mandible",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Larynx",
+      "Head & Neck: Oral Cavity",
+      "Head & Neck: Pharyngeal Constrictor",
+      "Head & Neck: Thyroid",
+      "Head & Neck: Esophagus",
+      "Head & Neck: Cochlea L",
+      "Head & Neck: Cochlea R",
+
+      // Pelvic
+      "Pelvis: Bladder",
+      "Pelvis: Rectum",
+      "Pelvis: Femoral Head L",
+      "Pelvis: Femoral Head R",
+      "Pelvis: Prostate",
+      "Pelvis: Seminal Vesicle",
+      "Pelvis: Penile Bulb",
+      "Pelvis: Bowel Bag",
+
+      // Spine
+      "Spine: Spinal Cord",
+      "Spine: Spinal Canal",
+      "Spine: Vertebral Body",
+      "Spine: Kidney L",
+      "Spine: Kidney R",
+
+      // Thoracic and Spine
+      "Thorax: Heart",
+      "Thorax: Lung L",
+      "Thorax: Lung R",
+      "Thorax: Esophagus",
+      "Thorax: Spinal Cord",
+      "Thorax: Liver",
+      "Thorax: Kidney L",
+      "Thorax: Kidney R",
+
+      // Extracranial (via TheraPanacea Art-Plan integration)
+      "Extracranial: Full body OARs (via TheraPanacea integration) (unverified)"
     ],
     regulatory: {
       ce: {
