@@ -34,10 +34,10 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "not_independently_verified",
-        class: "Not independently verified",
-        type: "Not independently verified",
-        regulation: "No public EU MDR certificate or EUDAMED record located during audit"
+        status: "cleared",
+        class: "IIa",
+        type: "MDR",
+        regulation: "MDR 2017/745"
       },
       fda: {
         status: "510k_cleared",
