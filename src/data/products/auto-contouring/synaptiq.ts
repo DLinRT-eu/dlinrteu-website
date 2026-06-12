@@ -361,3 +361,5 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const SYNAPTIQ_PRODUCTS: ProductDetails[] = [MediqRT];
