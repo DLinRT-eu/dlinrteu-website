@@ -381,7 +381,7 @@ export const MediqRT: ProductDetails = {
     "Pelvis: LN_Presacral",
   ],
   adoptionReadinessNotes:
-    "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    "Derived from E1 + CE Class IIa: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   technicalSpecifications: {
     input: ["CT", "MRI"],
     output: ["Structure sets"],
