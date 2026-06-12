@@ -1,50 +1,29 @@
 ## Goal
 
-Bring the two recently revised Synaptiq entries in line with peer products and `docs/FIELD_REFERENCE.md`. Data-only edits — no UI or schema changes.
+Promote the existing "Verified by Company" certification badge in `ProductHeaderInfo.tsx` from a small inline pill (currently sitting next to the Revised date) into a clearly visible, hard-to-miss badge on certified products. No new data, no new tables — the certification source (`company_product_verifications`) and outdated-detection logic stay exactly as today.
 
-## Files
+## Scope
 
-- `src/data/products/auto-contouring/synaptiq.ts` (Mediq RT)
-- `src/data/products/pipeline/synaptiq.ts` (Mediq RT — 4D CT Research Module)
+One file: `src/components/product/ProductHeaderInfo.tsx`.
 
-## Drift found vs. peers
+## Changes
 
-### Mediq RT (auto-contouring)
-
-| # | Field | Current | Peer convention / FIELD_REFERENCE | Fix |
-|---|---|---|---|---|
-| 1 | `technology.deployment` | `["cloud", "on_prem"]` | `["Cloud-based", "On-premises"]` (Manteia, Quanta, AI-Medical, Vysioneer…) | Rename values |
-| 2 | `regulatory.ce.type` | `"Medical Device"` | `"MDR"` (Limbus, peers) | Change to `"MDR"` |
-| 3 | `regulatory.ce.regulation` | missing | `"MDR 2017/745"` (Limbus) | Add |
-| 4 | `regulatory.ce.notifiedBody` | missing | Listed where known | Add `"Not publicly disclosed"` placeholder (kept short) or omit — match Limbus pattern (omit if unknown) |
-| 5 | `regulatory.fda.status` | `"pending"` | Enum: `510k_cleared`, `de_novo`, `not_approved`, `under_review` | Change to `"not_approved"` with `notes: "Not submitted; CE-only product"` |
-| 6 | `certification` summary | `"CE"` | `"CE Class IIa"` style (Limbus: `"CE & FDA"`) | Change to `"CE Class IIa (MDR)"` to mirror peers |
-| 7 | `market.onMarketSince` | `"2021 (testing in 12+ Romanian clinics, EBRD-backed)"` | `YYYY` or `YYYY-MM` per FIELD_REFERENCE | Set to `"2021"`; move pilot context into `clinicalEvidence` |
-| 8 | `keyFeatures` | Contains marketing claim `"92.5% average time saving in contouring workflow"` | Peers avoid uncited marketing numbers in keyFeatures | Replace with neutral phrasing: `"Reported time savings in contouring workflow (vendor-cited)"` |
-| 9 | Study quality booleans | absent | Peers at E1+ set them explicitly | Add `evidenceVendorIndependent: false`, `evidenceMultiCenter: false`, `evidenceMultiNational: false`, `evidenceProspective: false`, `evidenceExternalValidation: false` (justified by vendor-associated single-center evidence per existing `evidenceRigorNotes`) |
-| 10 | `developmentStage` | absent | Live products typically set `"certified"` | Add `developmentStage: "certified"` |
-| 11 | `adoptionReadinessNotes` | References "FDA 510(k)" although product is CE-only | Inconsistent with regulatory block | Update to: "Derived from E1 + CE Class IIa: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption." |
-
-### Mediq RT 4D CT (pipeline)
-
-Already well-aligned with other pipeline entries. One small drift:
-
-| # | Field | Current | Convention | Fix |
-|---|---|---|---|---|
-| 1 | `certification` | `"Pipeline"` ✓ | matches peers | keep |
-| 2 | `modality` | `["CT"]` ✓ | matches peers | keep |
-| 3 | `regulatory.ce` / `fda` | absent | Most pipeline entries omit; some include `status: "not_applicable"` | Leave as-is (consistent with most pipeline peers) |
-| 4 | `usesAI: true` | present | Optional; harmless | keep |
-
-No code changes needed for the pipeline file beyond confirmation.
+1. **Lift the "valid" certification badge out of the inline badge row** and render it as a dedicated, larger element directly under the product description (above the Revised/badge row). Style:
+   - Pill with `bg-success/10` background, `border border-success`, `text-success-foreground`, padding `px-3 py-1.5`, rounded-full.
+   - `BadgeCheck` icon at `h-4 w-4` (larger than current `h-3 w-3`).
+   - Label: **"Verified by Company"** in `text-sm font-semibold`, plus a smaller secondary line "Certified YYYY-MM-DD" in `text-xs`.
+   - Keep the existing tooltip with notes.
+2. **Keep the "outdated" badge** inline in its current row (it's a warning, not something to elevate). Unchanged behavior.
+3. **No changes** to:
+   - Verification fetch logic / hash comparison
+   - Outdated detection
+   - Edit mode behavior
+   - Other badges (Revised, etc.)
 
 ## Out of scope
 
-- No edits to other products.
-- No UI/component changes.
-- No new fields, no schema changes.
-- Will not add `guidelines`, `trainingData`, or `evaluationData` until the vendor publishes verifiable info — adding them empty would mislead.
+- Product cards/grid (`Products.tsx`, grid components) — request says "in the product information", interpreted as the product details page header.
+- New DB columns, edge functions, or RLS changes.
+- Restyling unrelated badges.
 
-## Verification
-
-After edits: run `npm run lint` / typecheck via the automatic build; load `/products/synaptiq-mediq-rt` and `/products/synaptiq-mediq-rt-4dct-pipeline` in the preview to confirm sections render and CE block shows the new MDR fields.
+If you want the badge to also appear on product cards in the catalogue grid, say so and I'll add it as a follow-up.
