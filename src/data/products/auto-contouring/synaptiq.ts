@@ -104,8 +104,8 @@ export const MediqRT: ProductDetails = {
     "Multi-vendor and multi-modality integration",
     "Cloud-based data storage and visualization",
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-06-10",
+  lastRevised: "2026-06-12",
+  lastUpdated: "2026-06-12",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
     "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",
