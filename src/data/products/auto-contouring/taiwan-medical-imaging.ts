@@ -2,9 +2,9 @@ import { ProductDetails } from "@/types/productDetails";
 
 const BRAIN_METASTASES_STRUCTURES = [
   {
-    name: "Brain_GTV",
+    name: "GTV_BrainMet",
     type: "GTV" as const,
-    description: "Gross Tumor Volume for brain metastases"
+    description: "Gross Tumor Volume contour for brain metastases (TG-263 compliant name)"
   }
 ];
 
@@ -16,9 +16,9 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.taimedimg.tw/",
     productUrl: "https://www.taimedimg.tw/en/samd/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/taiwan-medical-imaging.ts",
-    description: "Intelligent assistant specialized in interpreting brain MRI images with advanced segmentation capabilities and longitudinal follow-up of GTV for brain metastases treatment planning.",
+    description: "AI software that provides initial GTV contours for known brain metastases on axial contrast-enhanced T1-weighted brain MRI. Automatic outputs are intended as initial contours and require review and finalization by a trained medical professional before use in treatment planning.",
     category: "Auto-Contouring",
-    certification: "Taiwan's Food and Drug Administration (TFDA) approval for SaMD, FDA 510(k)" ,
+    certification: "TFDA SaMD (2022), FDA 510(k) K250427; regional registrations reported (e.g., Vietnam)",
     logoUrl: "/logos/Taiwan_MedImag.svg",
     website: "https://www.taimedimg.tw/en/samd/",
     anatomicalLocation: ["Brain"],
@@ -42,17 +42,17 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     technicalSpecifications: {
-      population: "Adult patients with brain metastases. Intended for lesions with diameter >= 10mm on contrast-enhanced T1-weighted MRI.",
-      input: ["MRI T1+Gd (Gadolinium contrast-enhanced)"],
+      population: "Adult patients with known (imaging-diagnosed) brain metastases. FDA-cleared use limited to lesions with diameter >= 10 mm on axial contrast-enhanced T1-weighted MRI; excludes certain cases (e.g., prior craniotomy) per FDA summary.",
+      input: ["Axial contrast-enhanced T1-weighted brain MRI (T1WI+C)"],
       inputFormat: ["DICOM"],
-      output: ["Structure sets"],
+      output: ["Initial GTV contours / Structure sets"],
       outputFormat: ["DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["TPS integration", "PACS integration", "RESTful API"],
-      deployment: ["On-premise", "Cloud-based"],
+      deployment: ["On-premise", "Cloud-based", "Federated/on-premise data-node deployment"],
       triggerForAnalysis: "Automatic on image import or manual trigger",
-      processingTime: "-"
+      processingTime: "Within minutes per MRI examination"
     },
     regulatory: {
       ce: {
@@ -67,9 +67,9 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
         productCode: "QKB, QIH",
         regulationNumber: "21 CFR 892.2050",
         decisionDate: "2025-05-28",
-        notes: "Cleared for automatic detection and segmentation of brain metastases on contrast-enhanced T1-weighted MRI images. Device provides contour output for radiation therapy planning."
+        notes: "Cleared to provide initial object/GTV contours on axial contrast-enhanced T1-weighted brain MR images for adult patients with known imaging-diagnosed brain metastases (lesion diameter >= 10 mm). Outputs are intended as initial contours that require review and finalization by a trained medical professional."
       },
-      intendedUseStatement: "DeepMets is a software-only device intended to be used for automatic detection, delineation, and longitudinal tracking of brain metastases on contrast-enhanced T1-weighted MRI images. The software provides contour output compatible with radiation therapy treatment planning systems."
+      intendedUseStatement: "TAIMedImg DeepMets is a software-only device intended to assist trained medical professionals by providing initial object/GTV contours on axial T1-weighted contrast-enhanced brain MR images to accelerate radiation therapy treatment planning for adult patients with known imaging-diagnosed brain metastases with lesion diameter >= 10 mm. It is an adjunctive tool; all automatic outputs must be reviewed and finalized by a trained medical professional."
     },
     market: {
       onMarketSince: "2022",
@@ -77,20 +77,20 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     version: "-",
     releaseDate: "2022-09-01",
-    evidenceRigor: "E1",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA validation K250427 only. No peer-reviewed publications found. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "FDA validation data available but no independent clinical evidence published. PubMed searched 2026-02-26.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) K250427 plus peer-reviewed external validation (Akdemir et al., J Neuro-Oncology) reporting lesion-wise sensitivity ~52%, PPV 78%, mean DSC ≈0.60 and substantial revision rates for many cases.",
+    clinicalImpactNotes: "Technical feasibility demonstrated; external validation shows variable performance (lower sensitivity for small lesions) and high revision rates, indicating limited clinical impact without prospective outcome data.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-23",
+    evidenceExternalValidation: true,
+    lastUpdated: "2026-06-12",
+    lastRevised: "2026-06-12",
     companyRevisionDate: "",
-    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Taiwan Medical Imaging official website"
+    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports"
   }
 ];
