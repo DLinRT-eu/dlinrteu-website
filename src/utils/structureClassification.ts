@@ -65,9 +65,12 @@ export function cleanStructureName(structure: string): string {
 export function classifyStructure(structure: string): { isTarget: boolean; isElective: boolean } {
   // Determine structure types with pattern matching on the FULL string
   // Target pattern - looking for CTV, GTV, PTV, and lesion references
-  // Note: CTVn / CTV_n / CTV_LN (nodal CTVs) are excluded here and handled as Elective below.
+  // Note: nodal CTVs (CTVn, CTVn_*, CTV_n, CTV_n_*, CTV_LN, CTV_LN_*) are excluded
+  // here and handled as Elective below. The negative lookahead omits the trailing
+  // word boundary so that suffixes like "_L1_L" (underscore is a word char) still
+  // disqualify the match from Target.
   const isTarget = (
-    /\b(CTV(?![nN]|[_\-\s][nN]\b|[_\-\s]LN\b)|GTV|PTV|Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
+    /\b(CTV(?!n|[_\-\s]n|[_\-\s]LN)|GTV|PTV|Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
     /\blesion[s]?\b|\blesional\b/i.test(structure)
   );
 
@@ -75,8 +78,8 @@ export function classifyStructure(structure: string): { isTarget: boolean; isEle
   // Note: CTV and PTV are now classified as Targets, not Elective.
   // Exception: nodal CTVs (CTVn, CTV_n, CTV_LN) are Elective lymph-node volumes.
   const isElective = (
-    // Nodal CTV variants — explicitly elective
-    /\bCTVn\b|\bCTV[_\-\s][nN]\b|\bCTV[_\-\s]LN\b/i.test(structure) ||
+    // Nodal CTV variants — explicitly elective (e.g. CTVn, CTVn_L1_L, CTV_n_L, CTV_LN_neck)
+    /\bCTVn\b|\bCTVn[_\-\s]|\bCTV[_\-\s]n(?:[_\-\s]|\b)|\bCTV[_\-\s]LN(?:[_\-\s]|\b)/i.test(structure) ||
 
     // Check for elective volumes (excluding CTV/PTV which are now Targets)
     /\bElective\b/i.test(structure) ||
