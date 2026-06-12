@@ -1,61 +1,50 @@
-## New Page: AI Auto-Contouring Comparison Guide
+## Goal
 
-**Route:** `/guides/ai-auto-contouring-comparison`
-**File:** `src/pages/guides/AiAutoContouringComparison.tsx` (+ route in `src/App.tsx`)
-**Target keyword:** "AI auto-contouring comparison" (long-tail, low competition, high-intent for clinical/medical-physics audience)
+Bring the two recently revised Synaptiq entries in line with peer products and `docs/FIELD_REFERENCE.md`. Data-only edits — no UI or schema changes.
 
-### SEO setup
-- `<title>`: "AI Auto-Contouring Tools Compared (2026) | DLinRT.eu" (<60 chars)
-- `<meta description>`: "Compare CE/FDA-cleared AI auto-contouring software for radiotherapy: vendors, supported structures, evidence rigor, and regulatory status." (<160)
-- Canonical: `/guides/ai-auto-contouring-comparison`
-- Single H1, semantic H2/H3 hierarchy
-- JSON-LD: `Article` + `FAQPage` schema
-- Add entry to `public/sitemap.xml`
-- Internal links to `/products` (auto-contouring filter), `/compare/structures`, `/evidence-impact-guide`, individual product pages
+## Files
 
-### Page outline
+- `src/data/products/auto-contouring/synaptiq.ts` (Mediq RT)
+- `src/data/products/pipeline/synaptiq.ts` (Mediq RT — 4D CT Research Module)
 
-1. **H1 — AI Auto-Contouring Tools for Radiotherapy: 2026 Comparison Guide**
-2. **Intro (2-3 paragraphs)** — what auto-contouring is, why AI matters in RT, what this guide covers. Link to live catalogue.
-3. **H2 — How we evaluate auto-contouring tools**
-   - Regulatory approval gate (CE, FDA, MDR-exempt, NMPA, TGA, etc.)
-   - Dual-axis evidence: Rigor E0–E3 + Clinical Impact I0–I5 (link to guide)
-   - Supported anatomical structures (DICOM "Region: Structure" naming)
-   - Deployment (cloud vs on-prem), integration (DICOM-RTSTRUCT)
-4. **H2 — Comparison table of leading AI auto-contouring tools**
-   - Columns: Product · Vendor · Regions · Regulatory · Evidence rigor · Deployment
-   - Pulled dynamically from `src/data/products/auto-contouring/` (filtered by `hasRegulatoryApproval`)
-   - Each row links to product detail page
-5. **H2 — Key capabilities to compare**
-   - H3: Structure coverage (OAR vs target, CT vs MR vs CBCT)
-   - H3: Evidence quality (vendor-independent, multi-center, prospective)
-   - H3: Workflow integration (TPS, OIS, DICOM)
-   - H3: Regulatory & quality (CE-MDR class, FDA 510(k), post-market surveillance)
-6. **H2 — Choosing the right tool for your clinic** — short decision framing (head & neck vs pelvis vs thorax; research vs production; cloud constraints).
-7. **H2 — Frequently asked questions** (rendered as accordion + emitted as `FAQPage` JSON-LD)
-8. **Footer CTA** — "Browse all auto-contouring products" → `/products?category=Auto-Contouring`
+## Drift found vs. peers
 
-### FAQ (search-intent driven)
+### Mediq RT (auto-contouring)
 
-1. What is AI auto-contouring in radiotherapy?
-2. Are AI auto-contouring tools FDA-cleared or CE-marked?
-3. How accurate are AI-generated contours compared with manual delineation?
-4. Which anatomical structures can AI auto-contouring tools segment?
-5. Can AI auto-contouring be used clinically without human review?
-6. What's the difference between atlas-based and deep-learning auto-contouring?
-7. How do I compare evidence quality across vendors?
-8. Does AI auto-contouring work on MR and CBCT, or only CT?
+| # | Field | Current | Peer convention / FIELD_REFERENCE | Fix |
+|---|---|---|---|---|
+| 1 | `technology.deployment` | `["cloud", "on_prem"]` | `["Cloud-based", "On-premises"]` (Manteia, Quanta, AI-Medical, Vysioneer…) | Rename values |
+| 2 | `regulatory.ce.type` | `"Medical Device"` | `"MDR"` (Limbus, peers) | Change to `"MDR"` |
+| 3 | `regulatory.ce.regulation` | missing | `"MDR 2017/745"` (Limbus) | Add |
+| 4 | `regulatory.ce.notifiedBody` | missing | Listed where known | Add `"Not publicly disclosed"` placeholder (kept short) or omit — match Limbus pattern (omit if unknown) |
+| 5 | `regulatory.fda.status` | `"pending"` | Enum: `510k_cleared`, `de_novo`, `not_approved`, `under_review` | Change to `"not_approved"` with `notes: "Not submitted; CE-only product"` |
+| 6 | `certification` summary | `"CE"` | `"CE Class IIa"` style (Limbus: `"CE & FDA"`) | Change to `"CE Class IIa (MDR)"` to mirror peers |
+| 7 | `market.onMarketSince` | `"2021 (testing in 12+ Romanian clinics, EBRD-backed)"` | `YYYY` or `YYYY-MM` per FIELD_REFERENCE | Set to `"2021"`; move pilot context into `clinicalEvidence` |
+| 8 | `keyFeatures` | Contains marketing claim `"92.5% average time saving in contouring workflow"` | Peers avoid uncited marketing numbers in keyFeatures | Replace with neutral phrasing: `"Reported time savings in contouring workflow (vendor-cited)"` |
+| 9 | Study quality booleans | absent | Peers at E1+ set them explicitly | Add `evidenceVendorIndependent: false`, `evidenceMultiCenter: false`, `evidenceMultiNational: false`, `evidenceProspective: false`, `evidenceExternalValidation: false` (justified by vendor-associated single-center evidence per existing `evidenceRigorNotes`) |
+| 10 | `developmentStage` | absent | Live products typically set `"certified"` | Add `developmentStage: "certified"` |
+| 11 | `adoptionReadinessNotes` | References "FDA 510(k)" although product is CE-only | Inconsistent with regulatory block | Update to: "Derived from E1 + CE Class IIa: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption." |
 
-### Technical implementation notes
+### Mediq RT 4D CT (pipeline)
 
-- Use existing `PageLayout` + `SEO` components for head tags + structured data
-- Reuse `Accordion` from `src/components/ui/accordion` for FAQ
-- Pull product rows via existing data import (e.g. `import { autoContouringProducts } from '@/data/products/auto-contouring'`) and filter to `hasRegulatoryApproval === true`
-- Apply daily-stable random sort (per project memory) if listing >table size
-- Add lazy route in `src/App.tsx` and a `<Route path="guides/ai-auto-contouring-comparison" …>`
-- Add `<url>` entry to `public/sitemap.xml`
-- After build, mark the Semrush SEO finding fixed via `seo_chat--update_findings`
+Already well-aligned with other pipeline entries. One small drift:
 
-### Out of scope (ask if wanted)
-- Other category guides (image synthesis, treatment planning) — would follow same pattern
-- Interactive filter UI on the guide itself (catalogue page already covers that)
+| # | Field | Current | Convention | Fix |
+|---|---|---|---|---|
+| 1 | `certification` | `"Pipeline"` ✓ | matches peers | keep |
+| 2 | `modality` | `["CT"]` ✓ | matches peers | keep |
+| 3 | `regulatory.ce` / `fda` | absent | Most pipeline entries omit; some include `status: "not_applicable"` | Leave as-is (consistent with most pipeline peers) |
+| 4 | `usesAI: true` | present | Optional; harmless | keep |
+
+No code changes needed for the pipeline file beyond confirmation.
+
+## Out of scope
+
+- No edits to other products.
+- No UI/component changes.
+- No new fields, no schema changes.
+- Will not add `guidelines`, `trainingData`, or `evaluationData` until the vendor publishes verifiable info — adding them empty would mislead.
+
+## Verification
+
+After edits: run `npm run lint` / typecheck via the automatic build; load `/products/synaptiq-mediq-rt` and `/products/synaptiq-mediq-rt-4dct-pipeline` in the preview to confirm sections render and CE block shows the new MDR fields.

@@ -4,9 +4,12 @@ export const MediqRT: ProductDetails = {
   id: "synaptiq-mediq-rt",
   name: "Mediq RT",
   market: {
-    onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
+    onMarketSince: "2021",
     distributionChannels: ["Direct sales", "Hospital partnerships"],
   },
+  developmentStage: "certified",
+  clinicalEvidence:
+    "In use across 12+ Romanian clinics since 2021 (EBRD-backed pilot deployment). Peer-reviewed comparative analysis of cardiac substructure contouring published in Physics and Imaging in Radiation Oncology (2026, doi:10.1016/j.phro.2026.100935) plus six ESTRO conference abstracts (2023–2025). Evidence remains predominantly single-center and vendor-associated.",
   source:
     "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature, and vendor-provided System Requirements documentation (2026-06-10). CE clearance details pending verification against EUDAMED listing or vendor press release.",
   company: "Synaptiq",
