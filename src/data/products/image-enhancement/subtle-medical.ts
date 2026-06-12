@@ -385,5 +385,75 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-03-08",
     lastRevised: "2026-05-23",
     source: "FDA 510(k) database (K243250) and company website"
+  },
+  {
+    id: "subtle-hd-ct",
+    name: "SubtleHD(CT)",
+    company: "Subtle Medical",
+    category: "Image Enhancement",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    description: "AI-powered CT image enhancement software that reduces noise and improves low-contrast detectability across CT scanner generations, integrating into existing clinical workflows.",
+    features: ["Deep learning enhancement", "CT specific", "Noise reduction", "Low contrast detectability"],
+    certification: "FDA Cleared",
+    logoUrl: "/logos/SubtleMedical.jpg",
+    companyUrl: "https://subtlemedical.com/",
+    productUrl: "https://subtlemedical.com/",
+    anatomicalLocation: ["Whole body"],
+    modality: "CT",
+    diseaseTargeted: ["General diagnostic imaging", "Oncology"],
+    releaseDate: "2026-06-10",
+    version: "1.0",
+    keyFeatures: [
+      "Deep learning CT image enhancement",
+      "Noise reduction across CT scanner generations",
+      "Improved low-contrast detectability",
+      "Compatible with older and newer CT systems",
+      "Seamless integration into existing workflows",
+      "Vendor-neutral compatibility"
+    ],
+    technicalSpecifications: {
+      population: "Adult and pediatric",
+      input: ["DICOM CT images"],
+      inputFormat: ["DICOM"],
+      output: ["Enhanced CT images"],
+      outputFormat: ["DICOM"]
+    },
+    technology: {
+      integration: ["PACS", "Scanner workstations"],
+      deployment: ["Cloud-based", "On-premise"],
+      triggerForAnalysis: "Automated workflow",
+      processingTime: "<60 seconds per study"
+    },
+    regulatory: {
+      ce: {
+        status: "under_review",
+        class: "IIa",
+        type: "Medical Device"
+      },
+      fda: {
+        status: "510k_cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K254120",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "QIH",
+        decisionDate: "2026-05"
+      },
+      intendedUseStatement: "SubtleHD(CT) is an AI-powered image processing software intended for image enhancement of CT images. It can be used for noise reduction and to improve low-contrast detectability across a range of CT scanner generations."
+    },
+    market: {
+      onMarketSince: "2026",
+      distributionChannels: ["Direct sales", "Distribution partners"]
+    },
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "FDA 510(k) clearance K254120 announced 2026-06-10. No independent peer-reviewed publications yet.",
+    clinicalImpactNotes: "Manufacturer-reported improvements in noise reduction and low-contrast detectability. No independently demonstrated clinical impact yet.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
+    lastUpdated: "2026-06-12",
+    lastRevised: "2026-06-12",
+    source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120."
   }
 ];
