@@ -21,7 +21,7 @@ These products do not meet the platform's criteria:
 | Deep Learning Image Processing for CT | GE Healthcare | Unverified - no specific FDA clearance number, functionality covered by TrueFidelity Pro (K183202) |
 | MRIdian A3i | ViewRay | Uses deformable registration, not AI/DL (FDA K162393, K181989) |
 | AATMA | Elekta | Valid FDA K212218 but insufficient public documentation |
-| QOCA Smart RT | Quanta Computer | Valid FDA K231855 but insufficient public documentation |
+
 | Mobius3D | Varian (Siemens Healthineers) | No explicit AI reference in intended use statement |
 | ClearCheck | Radformation | No explicit AI reference in intended use statement |
 | SunCHECK Patient | Sun Nuclear (Mirion Medical) | No explicit AI reference in intended use statement |
