@@ -11,8 +11,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     evaluationData: {
         results: "Not publicly disclosed",
         primaryEndpoint: "Not specified",
-        source: "Bird et al. Radiother Oncol 2024 (DOI: 10.1016/j.radonc.2023.110052)",
-        description: "Multi-site dosimetric validation across pelvis, brain, and head & neck cancers demonstrating the feasibility of MRI-only planning. The MR-OPERA study included 170 prostate patients at 4 centers.",
+        source: "Bird et al. Radiother Oncol 2024 (DOI: 10.1016/j.radonc.2023.110052); Persson et al. MR-OPERA, Int J Radiat Oncol Biol Phys 2017",
+        description: "Bird et al. (Radiother Oncol 2024) reported multi-site dosimetric validation of deep learning MRI-only synthetic-CT for pelvis, brain and head & neck cancers. Earlier MR-OPERA (Persson et al. 2017) provided multicenter/multivendor validation of MRI-only prostate planning in 170 patients across 4 centers.",
         studyDesign: "Retrospective multi-center validation",
         sourceUrl: "https://doi.org/10.1016/j.radonc.2023.110052"
     },
