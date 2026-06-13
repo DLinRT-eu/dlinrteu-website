@@ -14,14 +14,12 @@ import ContactInformation from "./product/ContactInformation";
 import SupportedStructures from "./product/SupportedStructures";
 import DosePredictionModels from "./product/DosePredictionModels";
 import ProductRevisionStatus from "./ProductRevisionStatus";
-import EvidenceLimitationsDetails from "./product/EvidenceLimitationsDetails";
+import CategoryEvidenceSection from "./product/CategoryEvidenceSection";
 import GuidelinesDetails from "./product/GuidelinesDetails";
 import UserRelationships from "./product/UserRelationships";
 import IntegratedModulesDetails from "./product/IntegratedModulesDetails";
 import PartOfDetails from "./product/PartOfDetails";
 import FHIRExportSection from "./product/FHIRExportSection";
-import TrainingDataDetails from "./product/TrainingDataDetails";
-import EvaluationDataDetails from "./product/EvaluationDataDetails";
 import SafetyCorrectiveActionsDetails from "./product/SafetyCorrectiveActionsDetails";
 import { toast } from "sonner";
 import Footer from "./Footer";
@@ -142,10 +140,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <DosePredictionModels models={product.dosePredictionModels} />
           )}
           
-          <TrainingDataDetails product={product} />
-          <EvaluationDataDetails product={product} />
+          <CategoryEvidenceSection product={product} />
           <SafetyCorrectiveActionsDetails product={product} />
-          <EvidenceLimitationsDetails product={product} />
           <GuidelinesDetails product={product} />
           <RegulatoryInformationDetails product={product} />
           <MarketPricingDetails product={product} />

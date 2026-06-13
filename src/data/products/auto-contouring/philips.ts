@@ -5,20 +5,63 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-prostate-auto-contouring",
-    trainingData: {
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
-        demographics: "Adult patients",
-        description: "Model-based adaptive auto-contouring trained for adult prostate cancer patients. Training details for this legacy clinical application are not publicly disclosed.",
-        disclosureLevel: "minimal",
-        source: "FDA 510(k) summary K150965"
-    },
-    evaluationData: {
-        primaryEndpoint: "Average distance (geometric accuracy)",
-        source: "FDA 510(k) summary (Philips Ingenia MR-RT system)",
-        results: "Average distance < 1.5mm",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
-        description: "Software validation associated with the MRCAT Prostate + Auto-Contouring application. The technology provides automated MR-based contours of the prostate and organs at risk with a geometric accuracy of average distance < 1.5mm.",
-        studyDesign: "Software V&V (FDA 510(k))"
+    secondaryCategories: ["Image Synthesis"],
+    usesAI: true,
+    // Per-category evidence: MRCAT (synthetic CT) uses a model-based bulk-density
+    // method (atlas/Bayesian) — not deep learning. The auto-contouring module is
+    // the AI/ML component bundled in the same product.
+    categoryEvidence: {
+      "Image Synthesis": {
+        usesAI: false,
+        notes:
+          "MRCAT generates synthetic CT from MR using a model-based (atlas/Bayesian) bulk-density assignment approach. It is not a deep-learning method, so DLinRT's E/I/R rubric does not apply to this component.",
+        trainingData: {
+          disclosureLevel: "minimal",
+          description:
+            "Model-based MR-to-CT bulk-density assignment for the male pelvis. Algorithm parameters were tuned on a Philips internal cohort; not a learned (DL) model.",
+          source: "FDA 510(k) summary K150965; Köhler et al., Philips white paper (2015)",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+          demographics: "Adult male prostate cancer patients",
+        },
+        evaluationData: {
+          studyDesign: "Software V&V (FDA 510(k))",
+          primaryEndpoint: "Synthetic-CT dosimetric accuracy vs planning CT",
+          results:
+            "Dose differences within clinically acceptable tolerances reported in FDA submission; no peer-reviewed DL-component validation (n/a — not a DL model).",
+          description:
+            "Validation of the MRCAT synthetic-CT generator as part of the Ingenia MR-RT 510(k) submission.",
+          source: "FDA 510(k) summary K150965",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+        },
+      },
+      "Auto-Contouring": {
+        usesAI: true,
+        notes:
+          "The auto-contouring module is the AI/ML component of MRCAT Prostate + Auto-Contouring; evidence below relates to this module only.",
+        trainingData: {
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+          demographics: "Adult male prostate cancer patients",
+          description:
+            "Model-based adaptive auto-contouring trained for adult prostate anatomy. Training details for this legacy clinical application are not publicly disclosed.",
+          disclosureLevel: "minimal",
+          source: "FDA 510(k) summary K150965",
+        },
+        evaluationData: {
+          primaryEndpoint: "Average distance (geometric accuracy)",
+          source: "FDA 510(k) summary (Philips Ingenia MR-RT system)",
+          results: "Average distance < 1.5 mm vs reference contours",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+          description:
+            "Software V&V of the auto-contouring module of MRCAT Prostate + Auto-Contouring. Provides automated MR-based contours of prostate and organs at risk with average distance < 1.5 mm vs reference.",
+          studyDesign: "Software V&V (FDA 510(k))",
+        },
+        evidenceRigor: "E0",
+        evidenceRigorNotes:
+          "Legacy product. No auto-contouring-specific peer-reviewed publications found. PubMed searched 2026-02-26.",
+        clinicalImpact: "I0",
+        clinicalImpactNotes:
+          "No published clinical impact data for the auto-contouring functionality specifically.",
+      },
     },
     name: "MRCAT Prostate + Auto-Contouring",
     company: "Philips",
