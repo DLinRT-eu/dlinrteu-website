@@ -143,10 +143,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <DosePredictionModels models={product.dosePredictionModels} />
           )}
           
-          <TrainingDataDetails product={product} />
-          <EvaluationDataDetails product={product} />
+          <CategoryEvidenceSection product={product} />
           <SafetyCorrectiveActionsDetails product={product} />
-          <EvidenceLimitationsDetails product={product} />
           <GuidelinesDetails product={product} />
           <RegulatoryInformationDetails product={product} />
           <MarketPricingDetails product={product} />
