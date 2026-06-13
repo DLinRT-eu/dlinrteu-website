@@ -4,6 +4,23 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-brain",
+    trainingData: {
+        source: "FDA 510(k) summary K193109",
+        demographics: "Adult and pediatric patients",
+        disclosureLevel: "minimal",
+        description: "AI-powered application generating synthetic CT images from MR scans using deep learning algorithms. Training details are not explicitly disclosed in the provided technical documentation beyond the use of deep learning for image conversion.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193109.pdf"
+    },
+    evaluationData: {
+        results: "PTV dose differences <0.4%, positioning within ±1mm/±1°",
+        source: "Aljaafari et al. Tech Innov Patient Support Radiat Oncol 2025;35:100328",
+        datasetSize: "93 patients, 572 CBCT registrations",
+        studyDesign: "Single-center retrospective clinical validation",
+        primaryEndpoint: "PTV dose differences and CBCT registration positioning accuracy",
+        sourceUrl: "https://doi.org/10.1016/j.tipsro.2025.100328",
+        description: "Clinical validation of a commercial synthetic-CT solution for brain MRI-only radiotherapy. The study found PTV dose differences <0.4% and positioning accuracy within ±1mm/±1°.",
+        sites: 1
+    },
     name: "MRCAT Brain",
     company: "Philips",
     companyUrl: "https://www.philips.com/",
@@ -69,8 +86,8 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2020-01-20",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [

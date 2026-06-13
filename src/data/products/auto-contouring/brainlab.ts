@@ -2,6 +2,21 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails = {
   id: "brainlab-elements-rt-seg",
+  trainingData: {
+      description: "The training data supports atlas-based cranial anatomical segmentation and ML-based cranial tumor segmentation on contrast-enhanced T1-weighted MRI. Specific dataset sizes or demographics are not disclosed in the provided documentation beyond the adult-only validation for the cranial AI tumor segmentation feature.",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243633.pdf",
+      datasetSources: ["Contrast-enhanced T1-weighted MRI (cranial tumor)"],
+      disclosureLevel: "minimal",
+      source: "FDA 510(k) summary K243633"
+  },
+  evaluationData: {
+      results: "Not publicly disclosed",
+      source: "FDA 510(k) summary K243633",
+      primaryEndpoint: "AI/ML performance testing for cranial tumor segmentation",
+      studyDesign: "Software V&V (FDA 510(k))",
+      description: "FDA 510(k) K243633 provides verification and validation of Brainlab Elements 7.0 (Contouring 5.0) with AI/ML performance testing specifically for cranial tumor segmentation. Legacy evidence from Wittenstein et al. (2019) evaluated nine extracranial OARs in 24 patients using Anatomical Mapping Release 1.0.",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243633.pdf"
+  },
   name: "Brainlab Elements Contouring 5.0 (APM / Elements Segmentation)",
   market: {
     onMarketSince: "2025"
@@ -79,8 +94,8 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Anomaly detection support for segmentation quality review",
     "Optional TheraPanacea Art-Plan interface for extracranial OAR and lymph-node segmentation"
   ],
-  lastRevised: "2026-06-11",
-  lastUpdated: "2026-06-11",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "APM 1.1 minimum requirements include 12 CPU cores and 24 GB RAM",
     "Cranial tumor segmentation support requires a GPU with at least 8 GB vRAM, compatible driver/CUDA support, and CUDA compute capability >5.2",

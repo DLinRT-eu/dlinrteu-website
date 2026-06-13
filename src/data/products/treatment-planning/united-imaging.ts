@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-urt-auto-planning",
+    trainingData: {
+        description: "Not publicly disclosed. The vendor has not published a model card or training-data description for the integrated auto-planning module.",
+        sourceUrl: "https://eu.united-imaging.com/en/product-service/products/rt",
+        source: "Vendor press release (ESTRO 2026) and company website",
+        disclosureLevel: "none"
+    },
+    evaluationData: {
+        results: "Adaptive plans completed in approximately 15 minutes.",
+        source: "United Imaging Press Release (ESTRO 2026) via PR Newswire",
+        primaryEndpoint: "Time savings",
+        studyDesign: "Vendor-reported performance claims",
+        sourceUrl: "https://www.prnewswire.com/news-releases/united-imaging-unveils-its-full-radiotherapy-portfolio-at-estro-2026-highlighting-the-ce-marked-urt-linac-506c-302773402.html",
+        description: "Vendor reports an online adaptive workflow (uCT-ART) that completes adaptive plans in approximately 15 minutes using AI auto-planning and GPU-accelerated Monte Carlo dose calculation."
+    },
     name: "uRT Auto-Planning",
     company: "United Imaging",
     category: "Treatment Planning",
@@ -96,8 +110,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         link: "https://eu.united-imaging.com/en/product-service/products/rt"
       }
     ],
-    lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-20",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Vendor press release (ESTRO 2026) and company website"
   }
 ];

@@ -4,6 +4,24 @@ import { ProductDetails } from "@/types/productDetails";
 export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-dual-energy-optimizer",
+    trainingData: {
+        description: "Training involves dual-energy CT datasets for AI-based image optimization, including material decomposition and beam hardening artifact reduction.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191468.pdf",
+        demographics: "Adult and pediatric populations",
+        disclosureLevel: "minimal",
+        scannerModels: ["Siemens CT scanners"],
+        countries: 1,
+        datasetSources: ["Siemens Healthineers internal clinical data"],
+        source: "FDA 510(k) summary K191468"
+    },
+    evaluationData: {
+        studyDesign: "Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191468.pdf",
+        description: "Software validation and verification for syngo.CT Dual Energy as part of the syngo.via platform clearance. Clinical studies demonstrated improved lesion detection and characterization compared to conventional dual-energy processing.",
+        results: "Not publicly disclosed",
+        source: "FDA 510(k) summary K191468",
+        primaryEndpoint: "Not specified"
+    },
     name: "Dual Energy Optimizer AI",
     company: "Siemens Healthineers",
     category: "Image Enhancement",
@@ -75,8 +93,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies demonstrating improved lesion detection and characterization compared to conventional dual-energy processing",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website"
   }
 ];

@@ -5,6 +5,21 @@ import { RAYSTATION_SUPPORTED_STRUCTURES } from "./raysearch-structures";
 export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
   {
     id: "raysearch-raystation",
+    trainingData: {
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K240398",
+        demographics: "Adult patients",
+        description: "Deep Learning Segmentation (DLS) models trained for multi-organ contouring including Brain, Head & Neck, Thorax, Abdomen, and Pelvis.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K240398.pdf"
+    },
+    evaluationData: {
+        source: "Doolan et al. Front. Oncol. 2023 (DOI: 10.3389/fonc.2023.1213068)",
+        description: "Multi-center comparison of 5 AI systems (80 patients) and a dedicated breast/thorax validation study. Vendor demo at ESTRO 2026 reported contouring 192 ROIs across the full CT body in 59 seconds.",
+        sourceUrl: "https://doi.org/10.3389/fonc.2023.1213068",
+        studyDesign: "Retrospective multi-center comparative study",
+        results: "192 ROIs contoured in 59 seconds reported in vendor demonstration.",
+        primaryEndpoint: "Not specified"
+    },
     name: "Deep Learning Segmentation",
     company: "RaySearch Laboratories",
     companyUrl: "https://www.raysearchlabs.com/",
@@ -68,8 +83,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     version: "12.0",
     releaseDate: "2023-12-01",
-    lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const PreciseImage: ProductDetails = {
   id: "philips-precise-image",
+  trainingData: {
+      description: "An Artificial Intelligence powered reconstruction algorithm designed for low radiation dose and noise reduction. Developed by Philips and cleared via the FDA 510(k) pathway.",
+      disclosureLevel: "minimal",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K210760.pdf",
+      source: "FDA 510(k) summary K210760"
+  },
+  evaluationData: {
+      sourceUrl: "https://doi.org/10.3390/jimaging11090317",
+      primaryEndpoint: "Image quality, low contrast detectability, and noise level",
+      description: "Clinical studies evaluate image quality, noise reduction, and lesion detectability. Greffier et al. (2025) specifically assessed the impact on solid lung lesion detection in chest CT, while other studies compared performance against GE TrueFidelity and Philips iDose4 at reduced dose levels (up to 80% reduction).",
+      results: "Claims up to 80% radiation dose reduction compared to standard reconstruction while improving low contrast detectability.",
+      source: "Shim et al. J Imaging 2025 (doi:10.3390/jimaging11090317)",
+      studyDesign: "Retrospective and prospective comparative evaluations (including Software V&V FDA 510(k))"
+  },
   name: "Precise Image",
   market: {
     onMarketSince: "2022",
@@ -74,8 +88,8 @@ export const PreciseImage: ProductDetails = {
     "Processes both sparse-view and low-energy acquisitions",
     "Enhanced image clarity and reduced noise"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-03-08",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2022-02-01",
   certification: "CE Mark",
   evidenceRigor: "E2",

@@ -3,6 +3,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
   {
     id: "plan-ai",
+    trainingData: {
+        description: "Machine learning models developed using 5,000+ clinically delivered treatment plans from Johns Hopkins University across multiple anatomical sites.",
+        datasetSize: "5,000+ plans",
+        institutions: 1,
+        disclosureLevel: "partial",
+        source: "FDA 510(k) summary K242748",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf"
+    },
+    evaluationData: {
+        description: "FDA 510(k) validation and multicenter study (PMC12827991, 2025) demonstrating the versatility of AI-driven automated planning across 10 cancer sites using a foundation of 5,000+ plans.",
+        primaryEndpoint: "Not specified",
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf",
+        source: "FDA 510(k) summary K242748",
+        studyDesign: "Retrospective multi-center (FDA V&V)"
+    },
     name: "Plan AI",
     company: "Sun Nuclear (Mirion Medical)",
     companyUrl: "https://www.sunnuclear.com/",
@@ -91,8 +107,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website",
     clinicalEvidence: "FDA 510(k) validation studies using 5,000+ treatment plans from Johns Hopkins University",
     evidence: [

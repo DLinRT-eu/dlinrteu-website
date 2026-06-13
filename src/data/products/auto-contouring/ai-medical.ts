@@ -2,6 +2,22 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const Jazz: ProductDetails = {
   id: "ai-medical-jazz",
+  trainingData: {
+      source: "FDA 510(k) summary K231572",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K231572.pdf",
+      disclosureLevel: "minimal"
+  },
+  evaluationData: {
+      description: "Blinded three-center study evaluating MS lesion detection and reading time. Jazz identified significantly more new lesions (63 vs 24) and slowly expanding lesions (95 vs 0) compared to standard clinical reports, with an average reading time of 2min33s.",
+      sites: 3,
+      datasetSize: "117 MRI scans",
+      studyDesign: "Retrospective multi-center blinded study",
+      source: "Fedrau et al. Neuroradiology 2024 (DOI: 10.1007/s00234-024-03293-3)",
+      sourceUrl: "https://doi.org/10.1007/s00234-024-03293-3",
+      countries: 3,
+      primaryEndpoint: "Number of lesions described and reading time",
+      results: "Jazz detected 63 new lesions vs 24 in standard reports; average reading time 2min33s per case."
+  },
   name: "Jazz",
   market: {
     onMarketSince: "2020",
@@ -61,8 +77,8 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-05-20",
-  lastUpdated: "2024-04-29",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",

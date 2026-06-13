@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
   {
     id: "wisdom-deep-contour",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
+        source: "FDA 510(k) summary K232928",
+        description: "Deep learning based medical imaging software for automatic contour segmentation. Training details are not publicly disclosed in the regulatory summary.",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
+        primaryEndpoint: "Not specified",
+        source: "FDA 510(k) summary K232928",
+        description: "Software verification and validation conducted as part of the FDA 510(k) process for automated CT image processing and contour creation across multiple anatomical regions (Brain, Head & Neck, Thorax, Abdomen, and Pelvis).",
+        studyDesign: "Software V&V (FDA 510(k))"
+    },
     name: "DeepContour",
     company: "Wisdom Tech",
     companyUrl: "http://www.wisdom-tech.online/",
@@ -151,8 +165,8 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     version: "2.0",
     releaseDate: "2024-04-17",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
     limitations: [
       "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."

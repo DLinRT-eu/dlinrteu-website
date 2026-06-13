@@ -3,6 +3,23 @@ import { ProductDetails } from "@/types/productDetails";
 export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
   {
     id: "mr-box-synthetic",
+    trainingData: {
+        scannerModels: ["0.35T MRI"],
+        institutions: 8,
+        datasetSources: ["8 global institutions"],
+        description: "Pelvic MR images (TrueFisp 0.35T) and brain mappings from multiple global institutions were used for validation and training as part of the software development and platform clearances.",
+        disclosureLevel: "partial",
+        source: "FDA 510(k) summary K234068",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K234068.pdf"
+    },
+    evaluationData: {
+        studyDesign: "International retrospective multi-centric study",
+        source: "DOI 10.3389/fonc.2023.1245054",
+        sourceUrl: "https://doi.org/10.3389/fonc.2023.1245054",
+        results: "Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms.",
+        primaryEndpoint: "Gamma passing rates and dose deviations",
+        description: "Retrospective multi-centric study across 8 global institutions for pelvic and brain mappings. Demonstrated excellent dosimetric equivalence with mean global gamma passing rates >96% (1mm/1mm) and target volume dose deviations within 1%."
+    },
     name: "MR-Box",
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu",
@@ -87,8 +104,8 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-06-10",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054)",

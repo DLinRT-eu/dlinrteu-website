@@ -4,6 +4,23 @@ import { ProductDetails } from "@/types/productDetails";
 export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-ai-rad-companion",
+    trainingData: {
+        disclosureLevel: "partial",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242745.pdf",
+        source: "FDA 510(k) summary K242745",
+        description: "The deep learning algorithms are trained to segment over 203 predefined CT structures including lymph nodes and various organs-at-risk across head & neck, thorax, abdomen, and pelvis regions.",
+        scannerModels: ["Siemens Healthineers scanners (for MR)"],
+        datasetSize: "579 cases",
+        countries: 5
+    },
+    evaluationData: {
+        primaryEndpoint: "Dice similarity coefficient",
+        description: "Multi-center evaluation across five continents (579 CT cases) showing high geometric accuracy. An independent study reported time-saving efficiency of 67-84%.",
+        results: "Mean Dice coefficients: H&N 76.1%, Thorax 76.9%, Abdomen 87.3%, Pelvis 85.7%.",
+        source: "FDA 510(k) summary K242745",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242745.pdf",
+        studyDesign: "Retrospective multi-continental clinical validation"
+    },
     name: "AI-Rad Companion Organs RT",
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com/",
@@ -102,7 +119,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Performance validated on 579 CT cases across North America, South America, Asia, Australia, and Europe. Ground truth annotations established following RTOG and clinical guidelines. Mean Dice coefficients: Head & Neck 76.1%, Thorax 76.9%, Abdomen 87.3%, Pelvis 85.7%.",
     version: "VA60A",
     releaseDate: "2025-03-27",
-    lastUpdated: "2025-03-27",
+    lastUpdated: "2026-06-13",
     supportedStructures: [
       // Head & Neck OARs (per FDA K242745)
       "Head & Neck: Brain",
@@ -311,7 +328,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Vertebrae: S4",
       "Vertebrae: S5"
     ],
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }

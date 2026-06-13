@@ -2,6 +2,19 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const SyMRINeuro: ProductDetails = {
   id: "syntheticmr-neuro",
+  trainingData: {
+      disclosureLevel: "minimal",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242745.pdf",
+      source: "FDA 510(k) summary K242745"
+  },
+  evaluationData: {
+      primaryEndpoint: "Comparison of synthetic vs conventional brain MRI",
+      source: "AJNR 2025 (DOI: 10.3174/ajnr.A8631)",
+      studyDesign: "Prospective multicenter multireader study",
+      results: "Not publicly disclosed",
+      sourceUrl: "https://doi.org/10.3174/ajnr.A8631",
+      description: "Prospective multicenter multireader study comparing 3D synthetic vs conventional brain MRI using SyMRI 15."
+  },
   name: "SyMRI Neuro",
   market: {
     onMarketSince: "2023",
@@ -64,8 +77,8 @@ export const SyMRINeuro: ProductDetails = {
     "Reduced scan time",
     "Streamlined workflow"
   ],
-  lastRevised: "2026-05-20",
-  lastUpdated: "2025-12-01",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2024-12-06",
   certification: "CE & FDA",
   evidenceRigor: "E2",

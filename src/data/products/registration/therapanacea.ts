@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
+    trainingData: {
+        source: "FDA 510(k) summary K253091",
+        disclosureLevel: "minimal",
+        description: "The registration algorithm is part of the ART-Plan+ platform, cleared via FDA 510(k). Training details regarding specific datasets and demographics are not publicly disclosed in the available documentation.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Sub-voxel registration accuracy",
+        description: "Software validation performed as part of the FDA 510(k) clearance process for the ART-Plan+ platform (v3.1.0 and v3.0.0). The registration module provides AI-powered rigid and deformable image fusion with sub-voxel registration accuracy.",
+        source: "FDA 510(k) summary K253091",
+        studyDesign: "Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+    },
     name: "SmartFuse",
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu/",
@@ -86,8 +100,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-03-23",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)"
   }
 ];

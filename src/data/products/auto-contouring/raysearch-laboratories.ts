@@ -2,6 +2,19 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const DeepLearningSegmentation: ProductDetails = {
   id: "raysearch-raystation",
+  trainingData: {
+      disclosureLevel: "minimal",
+      source: "FDA 510(k) summary K240398",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K240398.pdf"
+  },
+  evaluationData: {
+      results: "192 ROIs contoured in 59 seconds",
+      primaryEndpoint: "Not specified",
+      source: "Doolan et al. Front Oncol 2023 (DOI: 10.3389/fonc.2023.1213068)",
+      studyDesign: "Retrospective multi-center comparative study",
+      description: "Multi-center comparative study of 5 AI systems on 80 patients and dedicated validation for breast/thorax. Vendor reports full CT body coverage of 231 structures with 192 ROIs contoured in 59 seconds.",
+      sourceUrl: "https://doi.org/10.3389/fonc.2023.1213068"
+  },
   name: "Deep Learning Segmentation",
   market: {
     onMarketSince: "2018",
@@ -60,8 +73,8 @@ export const DeepLearningSegmentation: ProductDetails = {
   },
   description: "Advanced treatment planning system with machine learning-based auto-segmentation for rapid and consistent contouring.",
   keyFeatures: ["Deep learning algorithms", "Within TPS"],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-05-19",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "Model performance depends on imaging protocol/site-specific contouring conventions and may vary across institutions"
   ],

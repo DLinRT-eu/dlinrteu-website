@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const AiCECT: ProductDetails = {
   id: "canon-aice-ct",
+  trainingData: {
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf",
+      description: "The Advanced intelligent Clear-IQ Engine (AiCE) is a Deep Convolutional Neural Network reconstruction method trained to produce cross-sectional images with lower noise and improved detectability from raw CT projection data.",
+      source: "FDA 510(k) summary K181862",
+      disclosureLevel: "minimal"
+  },
+  evaluationData: {
+      primaryEndpoint: "Not specified",
+      source: "Scientific Reports 2023 (DOI: 10.1038/s41598-023-42775-x)",
+      results: "Up to 82% dose reduction potential with enhanced low-contrast detectability.",
+      description: "Validation of deep learning-based CT image reconstruction (AiCE) for treatment planning, assessing dose calculation and image quality across head, chest, and pelvic regions.",
+      sourceUrl: "https://doi.org/10.1038/s41598-023-42775-x",
+      studyDesign: "Retrospective validation / Multi-phantom evaluation"
+  },
   name: "AiCE CT",
   market: {
     onMarketSince: "2019",
@@ -75,8 +89,8 @@ export const AiCECT: ProductDetails = {
     "Enhanced low-contrast detectability",
     "Reduced image noise while preserving natural texture"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-03-08",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2019-01-15",
   certification: "FDA Cleared",
   evidenceRigor: "E2",

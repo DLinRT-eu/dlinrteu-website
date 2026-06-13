@@ -4,6 +4,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-aice-ct",
+    trainingData: {
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K181862",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf",
+        demographics: "Adult and pediatric",
+        description: "Deep Convolutional Neural Network trained to produce cross-sectional images with lower noise and improved low-contrast detectability from raw CT projection data."
+    },
+    evaluationData: {
+        primaryEndpoint: "Dose reduction potential",
+        source: "Higaki et al. Eur Radiol 2020 (DOI: 10.1007/s00330-019-06523-0)",
+        results: "Up to 82% dose reduction potential with maintained image quality.",
+        sourceUrl: "https://doi.org/10.1007/s00330-019-06523-0",
+        description: "Multi-phantom and clinical studies demonstrating up to 82% dose reduction potential and improved image quality. Higaki et al. (2020) conducted a multi-phantom evaluation of the reconstruction performance.",
+        studyDesign: "Multi-phantom and retrospective clinical validation (FDA 510(k))"
+    },
     name: "AiCE CT",
     company: "Canon Medical Systems",
     category: "Reconstruction",
@@ -95,12 +110,27 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website"
   },
   {
     id: "canon-aice-mr",
+    trainingData: {
+        demographics: "Adult and pediatric (intended population)",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K192574.pdf",
+        source: "FDA 510(k) summary K192574",
+        disclosureLevel: "partial",
+        description: "AiCE MR utilizes a Deep Convolutional Neural Network (DCNN) trained to remove Gaussian distributed noise. Training datasets are created by adding Gaussian noise of different amplitudes to high-SNR images acquired with a large number of averages to learn a model representing thermal noise."
+    },
+    evaluationData: {
+        sourceUrl: "https://doi.org/10.1186/s12880-023-00962-2",
+        description: "Independent single-center retrospective study (Akai et al. 2023) demonstrated that the combination of compressed sensing and AiCE MR reconstruction allows for accelerated knee MRI while maintaining or improving image quality, supporting up to a 50% reduction in scan time.",
+        studyDesign: "Single-center retrospective validation",
+        primaryEndpoint: "Scan time reduction and image quality maintenance",
+        source: "Akai H. et al. BMC Med Imaging 2023 (DOI: 10.1186/s12880-023-00962-2)",
+        results: "Up to 50% reduction in scan time with maintained or improved image quality."
+    },
     name: "AiCE MR",
     company: "Canon Medical Systems",
     category: "Reconstruction",
@@ -202,13 +232,26 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
   {
     id: "canon-piqe",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243335.pdf",
+        source: "FDA 510(k) summary K243335",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        studyDesign: "Retrospective clinical evaluation and phantom-based performance comparison",
+        results: "Improved spatial resolution and low-contrast detectability compared to standard DL reconstruction.",
+        description: "Peer-reviewed studies and phantom evaluations demonstrate improved spatial resolution, image sharpness, and low-contrast detectability. Clinical evaluation for pancreatic ductal adenocarcinoma showed improved image quality with a 1024 matrix.",
+        sourceUrl: "https://doi.org/10.1016/j.ejrad.2025.111953",
+        primaryEndpoint: "Not specified",
+        source: "Nagayama et al. European Journal of Radiology 2025"
+    },
     name: "PIQE (Precise IQ Engine)",
     company: "Canon Medical Systems",
     category: "Reconstruction", 
@@ -305,8 +348,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
-    lastUpdated: "2026-03-08", 
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13", 
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }
 ];

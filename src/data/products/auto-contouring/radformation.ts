@@ -3,6 +3,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const RADFORMATION_PRODUCTS: ProductDetails[] = [
   {
     id: "radformation-autocontour",
+    trainingData: {
+        description: "The system utilizes 480 AI-trained models (420 CT-based and 62 MR-based machine-learning contouring models) covering brain, head & neck, thorax, abdomen, pelvis, and breast. It incorporates technology from the Limbus AI acquisition.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf26/K260509.pdf",
+        source: "FDA 510(k) summary K260509",
+        scannerModels: ["CT", "MRI", "CBCT"],
+        disclosureLevel: "minimal",
+        datasetSources: ["CT DICOM images", "MR DICOM images"]
+    },
+    evaluationData: {
+        description: "Evaluation includes a physician-scored evaluation across a five-facility health system (Goddard et al. 2024), a 5-vendor comparison on 80 patients (Doolan et al. 2023), and a 4-vendor abdominal OAR outlier analysis on 111 patients (Fan et al. 2025). Studies support contour quality and workflow time savings but note anatomy-dependent failure modes.",
+        sourceUrl: "https://doi.org/10.1186/s13014-024-02451-4",
+        studyDesign: "Retrospective multi-center (Goddard et al. 2024) and single-center retrospective validation (Doolan et al. 2023)",
+        results: "Review-ready contours delivered in seconds-to-minutes.",
+        source: "Goddard et al. Radiat Oncol 2024 (DOI: 10.1186/s13014-024-02451-4)",
+        primaryEndpoint: "Not specified"
+    },
     name: "AutoContour",
     company: "Radformation",
     companyUrl: "https://www.radformation.com/",
@@ -691,8 +707,8 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     ],
     version: "2.7",
     releaseDate: "2026-03-19",
-    lastUpdated: "2026-04-21",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Fan 2025), accessed 2026-06-10"
   }
 ];

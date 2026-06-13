@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
   {
     id: "oncosoft-oncostudio",
+    trainingData: {
+        disclosureLevel: "partial",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242994.pdf",
+        datasetSize: "80,000 patients",
+        source: "FDA 510(k) summary K242994",
+        description: "AI-powered solution with over 4 million contours processed for 80,000 patients in clinical practice, supporting CT and MRI for multiple anatomical regions."
+    },
+    evaluationData: {
+        primaryEndpoint: "Not specified",
+        studyDesign: "Multi-center retrospective comparative analysis and dosimetric validation studies",
+        description: "Retrospective comparative analysis of OncoStudio vs ProtegeAI for automated organ segmentation in 1200 patients across multiple anatomical sites, alongside specific geometric and dosimetric validation studies for prostate and lung SBRT.",
+        sourceUrl: "https://doi.org/10.3390/cancers16213670",
+        source: "Choi et al. Cancers 2024 (DOI: 10.3390/cancers16213670)",
+        results: "Proven in clinical practice with over 4M contours processed for 80,000+ patients."
+    },
     name: "OncoStudio",
     company: "Oncosoft",
     companyUrl: "https://www.oncosoft.io/",
@@ -336,8 +351,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     ],
     version: "2024",
     releaseDate: "2024-01-01",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }

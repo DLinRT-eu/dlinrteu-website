@@ -5,6 +5,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
   {
     id: "directorgans",
+    trainingData: {
+        description: "DirectORGANS is a deep learning auto-contouring solution integrated into Siemens SOMATOM CT simulators, using optimized reconstruction and deep learning.",
+        scannerModels: ["SOMATOM go.Sim", "SOMATOM go.Open Pro"],
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233650.pdf",
+        demographics: "Adult patients",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K233650"
+    },
+    evaluationData: {
+        studyDesign: "Independent Peer-reviewed Publication",
+        results: "Independent dosimetric validation confirms clinical usability for prostate RT planning.",
+        source: "Çatlı Dinç et al. BMC Urol 2025 (DOI: 10.1186/s12894-025-01875-8)",
+        description: "Independent dosimetric validation of DirectORGANS deep learning autocontouring for prostate cancer RT planning at Gazi University. The study assessed the clinical usability and dosimetric impacts of the generated contours.",
+        primaryEndpoint: "Not specified",
+        sourceUrl: "https://doi.org/10.1186/s12894-025-01875-8"
+    },
     name: "DirectORGANS",
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com/",
@@ -65,7 +81,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     },
     version: "VA30+",
     releaseDate: "2023-05-25",
-    lastUpdated: "2026-01-26",
+    lastUpdated: "2026-06-13",
     supportedStructures: [
       // Brain
       "Brain: Brain",
@@ -153,7 +169,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s12894-025-01875-8"
       }
     ],
-    lastRevised: "2026-05-20",
+    lastRevised: "2026-06-13",
     source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
   }
 ];

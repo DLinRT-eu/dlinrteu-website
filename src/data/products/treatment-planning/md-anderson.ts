@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
   {
     id: "rpa-radiation-planning-assistant",
+    trainingData: {
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K222728.pdf",
+        source: "FDA 510(k) summary K222728",
+        description: "The training dataset includes data used to develop automated contouring and planning models for cervix, breast, head and neck, and brain cancers, as part of the clinical validation required for FDA clearance.",
+        demographics: "Adult cancer patients"
+    },
+    evaluationData: {
+        studyDesign: "Retrospective multi-center and prospective validation",
+        sourceUrl: "https://doi.org/10.1200/GO.22.00431",
+        source: "Netherton et al. JCO Global Oncology 2023 (DOI: 10.1200/GO.22.00431)",
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        description: "Multiple studies demonstrate improved radiotherapy quality and clinical efficacy, particularly aimed at increasing access in resource-limited settings. Evidence includes multi-institutional validation across prostate, breast, head and neck, lung, esophageal, and brain cancers."
+    },
     name: "Radiation Planning Assistant (RPA)",
     company: "MD Anderson Cancer Center",
     companyUrl: "https://www.mdanderson.org/",
@@ -110,7 +125,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://rpa.mdanderson.org/publications"
       }
     ],
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
   },
 ];

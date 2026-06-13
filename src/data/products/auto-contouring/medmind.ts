@@ -4,6 +4,23 @@ import { ProductDetails } from "@/types/productDetails";
 export const MEDMIND_PRODUCTS: ProductDetails[] = [
   {
     id: "medmind-rt-mind-ai",
+    trainingData: {
+        source: "FDA 510(k) summary K213155",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213155.pdf",
+        disclosureLevel: "minimal",
+        scannerModels: ["CT"],
+        demographics: "Adult patients",
+        description: "Deep learning model for auto-segmentation of 120+ OARs and CTVs across multiple cancer types including Nasopharyngeal, Lung, Breast, and Pelvic cancers."
+    },
+    evaluationData: {
+        results: "DSC 0.88 for cervical cancer CTV and 96-100% clinically viable scores for rectal cancer.",
+        description: "Multicenter validation of cervical cancer CTV auto-segmentation across 6 centers and 9 oncologists achieved a DSC of 0.88 and passed the Turing test. Rectal cancer CTV/GTV studies reported DSCs of 0.85-0.87 with 96-100% clinically viable scores.",
+        primaryEndpoint: "DICE similarity coefficient (DSC)",
+        studyDesign: "Multicenter Blinded Randomized Controlled Validation",
+        sites: 6,
+        source: "FDA 510(k) summary K213155",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213155.pdf"
+    },
     name: "RT-Mind-AI",
     company: "MedMind Technology Co., Ltd.",
     companyUrl: "https://www.medicalmind.cn/en.html",
@@ -102,8 +119,8 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidenceMultiNational: false,
     releaseDate: "2022-03-25",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];

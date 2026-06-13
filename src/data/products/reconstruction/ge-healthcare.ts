@@ -3,6 +3,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-air-recon-dl",
+    trainingData: {
+        description: "The model is trained on a large dataset of raw MR k-space data to learn how to reduce noise and ringing/truncation artifacts during reconstruction.",
+        demographics: "Adult and pediatric patients",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf",
+        scannerModels: ["GE HealthCare 1.5T MR systems", "GE HealthCare 3.0T MR systems", "GE HealthCare 7.0T MR systems"],
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K193282"
+    },
+    evaluationData: {
+        primaryEndpoint: "SNR, image sharpness, and scan-time reduction",
+        studyDesign: "Retrospective multi-center and Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252379.pdf",
+        description: "Multiple studies and FDA summaries demonstrate improved SNR, image sharpness, and scan-time reductions of up to 50%. Research across neuro, spine, liver, and cardiac applications confirms maintenance of diagnostic quality with reduced noise and artifacts.",
+        results: "Vendor-reported scan-time reduction of up to 50% depending on protocol and clinical use case.",
+        source: "FDA 510(k) summary K252379"
+    },
     name: "AIR Recon DL",
     company: "GE HealthCare",
     category: "Reconstruction",
@@ -179,8 +195,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Radiotherapy-specific use cases such as MR simulation, synthetic CT workflows, target/OAR delineation support, or quantitative adaptive workflows require local validation"
     ],
     clinicalEvidence: "FDA summaries and independent peer-reviewed studies support improved MR image quality and scan-time reduction feasibility across multiple anatomies and clinical applications. Clinical implementation should include local optimization and validation for each protocol and scanner configuration.",
-    lastUpdated: "2026-04-13",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database, GE HealthCare product documentation, CE-marking statements, and peer-reviewed literature"
   }
 ];

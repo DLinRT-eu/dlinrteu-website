@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-adaptbox",
+    trainingData: {
+        description: "The model supports synthetic CT generation and dose computation for Head & Neck, Breast/Thorax, and Pelvis (male) anatomies.",
+        demographics: "Adult cancer patients (18+ years of age).",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+        source: "FDA 510(k) summary K253091",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        description: "Independent validation of cumulative dose reconstruction over 800 fractions and multi-center dosimetric studies support daily dose tracking and OAR deviation monitoring for offline replanning decisions. Processing time for sCT generation is typically 2–3 minutes.",
+        studyDesign: "Independent peer-reviewed clinical validation and multi-center retrospective study",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        source: "FDA 510(k) summary K253091"
+    },
     name: "AdaptBox",
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu/",
@@ -112,8 +127,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-06-10",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026; Frontiers in Oncology 2026).",
     evidenceRigor: "E2",
     evidenceRigorNotes: "Upgraded from E0 to E2. Independent peer-reviewed clinical validation in Cancers (June 2026) verified cumulative dose reconstruction over 800 fractions without direct manufacturer co-authorship. Supported in parallel by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026).",

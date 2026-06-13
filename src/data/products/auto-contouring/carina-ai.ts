@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const INTContour: ProductDetails = {
   id: "carina-intcontour",
+  trainingData: {
+      source: "FDA 510(k) summary K212274",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212274.pdf",
+      description: "The system uses a machine learning-based approach for the automatic segmentation of structures in the head and neck, thorax, abdomen, and male pelvis regions.",
+      disclosureLevel: "minimal"
+  },
+  evaluationData: {
+      results: "Not publicly disclosed",
+      primaryEndpoint: "Clinical acceptability and geometric accuracy",
+      studyDesign: "Retrospective evaluation",
+      description: "Validation study including quantitative and subjective evaluation (clinical acceptability). Reported geometric accuracy and workflow time savings.",
+      sourceUrl: "https://doi.org/10.1002/mp.15525",
+      source: "Medical Physics Journal 2023 (DOI: 10.1002/mp.15525)"
+  },
   name: "INTContour",
   market: {
     onMarketSince: "2021",
@@ -79,8 +93,8 @@ export const INTContour: ProductDetails = {
     "Multi-modality support",
     "Target volume contouring"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-01-21",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2025-06-10",
   certification: "CE & FDA",
   evidenceRigor: "E1",

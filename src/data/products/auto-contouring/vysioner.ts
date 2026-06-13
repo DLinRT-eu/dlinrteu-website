@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const VYSIONER_PRODUCTS: ProductDetails[] = [
   {
     id: "vysioner-vbrain",
+    trainingData: {
+        source: "FDA 510(k) summary K212116",
+        disclosureLevel: "minimal",
+        demographics: "Adult patients",
+        description: "Deep learning neural networks trained for contouring organs at risk and tumors in the brain using axial T1 contrast-enhanced MRI images.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212116.pdf"
+    },
+    evaluationData: {
+        source: "Wang et al., Radiat Oncol 2023 (DOI: 10.1186/s13014-023-02246-z)",
+        results: "Not publicly disclosed",
+        studyDesign: "Single-center retrospective study",
+        sourceUrl: "https://doi.org/10.1186/s13014-023-02246-z",
+        primaryEndpoint: "Not specified",
+        description: "Retrospective assessment for SRS treatment of brain metastases showed improved contouring accuracy and efficiency. A separate evaluation in IJROBP 2021 focused on deep learning brain metastases auto-segmentation."
+    },
     name: "Vbrain",
     company: "Vysioneer",
     companyUrl: "https://www.vysioneer.com/",
@@ -72,8 +87,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "2.5",
     releaseDate: "2023-10-05",
-    lastUpdated: "2024-03-10",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
     evidence: [
       {

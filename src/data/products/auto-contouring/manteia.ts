@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const MANTEIA_PRODUCTS: ProductDetails[] = [
   {
     id: "manteia-accucontour",
+    trainingData: {
+        description: "AI-powered segmentation model for CT-based radiotherapy workflows. Training details such as datasets and demographics are not explicitly disclosed in the product's regulatory or marketing summaries.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251351.pdf",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K251351"
+    },
+    evaluationData: {
+        sourceUrl: "https://doi.org/10.3389/fonc.2024.1375096",
+        studyDesign: "Single-institution retrospective comparison",
+        description: "Retrospective comparison of AccuContour against MIM ProtegeAI for 22 H&N OARs and evaluation for Nasopharyngeal Carcinoma structures. Evidence indicates strong geometric agreement with clinical contours, though manual review/editing is required.",
+        source: "Frontiers in Oncology 2024 (DOI: 10.3389/fonc.2024.1375096)",
+        primaryEndpoint: "Not specified",
+        results: "Not publicly disclosed"
+    },
     name: "AccuContour",
     company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
@@ -57,7 +71,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2026-01-23",
-    lastUpdated: "2026-06-11",
+    lastUpdated: "2026-06-13",
     supportedStructures: [
       // H&N Structures and elective nodes
       "Head & Neck: Eye_L",
@@ -242,7 +256,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1038/s41598-025-33567-6"
       }
     ],
-    lastRevised: "2026-06-11",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

@@ -3,6 +3,19 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-precision-dl",
+    trainingData: {
+        source: "FDA 510(k) database",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        description: "FDA 510(k) validation (K230082) for a deep learning-based PET image enhancement tool designed to improve image quality through noise reduction.",
+        source: "FDA 510(k) summary K230082",
+        studyDesign: "Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf"
+    },
     name: "Precision DL",
     company: "GE Healthcare",
     category: "Image Enhancement",
@@ -73,12 +86,25 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database"
   },
   {
     id: "ge-air-recon-dl-enhancement",
+    trainingData: {
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf",
+        source: "FDA 510(k) database and company website"
+    },
+    evaluationData: {
+        studyDesign: "Software V&V (FDA 510(k)) and retrospective studies",
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf",
+        description: "Reader studies and clinical evaluations (e.g., MR enterography and prostate MRI) demonstrating improved signal-to-noise ratio without blurring and enhanced spatial resolution compared to standard MR images.",
+        source: "FDA 510(k) summary K213717",
+        primaryEndpoint: "Not specified"
+    },
     name: "AIR Recon DL Enhancement Mode",
     company: "GE Healthcare",
     category: "Image Enhancement",
@@ -144,8 +170,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Reader studies showing improved diagnostic confidence and lesion conspicuity compared to standard MR images",
-    lastUpdated: "2026-04-13",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website",
     evidence: [
       {

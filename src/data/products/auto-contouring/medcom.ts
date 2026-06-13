@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const MEDCOM_PRODUCTS: ProductDetails[] = [
   {
     id: "medcom-prosoma-dart",
+    trainingData: {
+        sourceUrl: "https://www.medcom-online.de/products/radiation-oncology/prosoma/",
+        description: "Not publicly disclosed. Training information for the ProSoma Dart AI Segmentation engine is not provided in publicly available technical documentation.",
+        source: "Vendor product page (MedCom ProSoma)",
+        disclosureLevel: "none"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        source: "Vendor product page (MedCom ProSoma)",
+        studyDesign: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        description: "No peer-reviewed validation studies or clinical impact data identified at time of listing. Evidence rigor is rated E0 pending literature confirmation.",
+        sourceUrl: "https://www.medcom-online.de/products/radiation-oncology/prosoma/"
+    },
     name: "ProSoma Dart AI Segmentation Engine",
     company: "MedCom",
     companyUrl: "https://www.medcom-online.de/",
@@ -73,8 +87,8 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Vendor product page (MedCom ProSoma)."
   },
 ];

@@ -2,6 +2,21 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const SegProV3RT300: ProductDetails = {
   id: "everfortune-seg-pro-v3",
+  trainingData: {
+      disclosureLevel: "minimal",
+      description: "Deep-learning algorithms trained for auto-segmentation of 182 organs across Head & Neck, Thorax, Abdomen, and Pelvis regions. The system includes a Predetermined Change Control Plan (PCCP) for model re-training.",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf",
+      source: "FDA 510(k) summary K251306",
+      scannerModels: ["CT", "MRI"]
+  },
+  evaluationData: {
+      studyDesign: "Software V&V (FDA 510(k))",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf",
+      description: "Studies evaluated AI-assisted pipelines for hippocampal avoidance whole brain radiotherapy and the association of radiation dose to cardiac substructures with ischaemic events. Implementation at CMUH verified 102 structures.",
+      results: "Not publicly disclosed",
+      source: "FDA 510(k) summary K251306",
+      primaryEndpoint: "Not specified"
+  },
   name: "Seg Pro V3 (RT-300)",
   market: {
     onMarketSince: "2026",
@@ -97,8 +112,8 @@ export const SegProV3RT300: ProductDetails = {
     "Adaptive AI - model updates without re-submission",
     "Fast auto-contouring workflow"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-02-03",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "Assistive software only: outputs must be reviewed, edited, and approved by qualified clinicians before clinical use",
     "Intended for adult patients",

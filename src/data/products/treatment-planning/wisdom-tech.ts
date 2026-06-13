@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
   {
     id: "wisdom-deep-plan",
+    trainingData: {
+        sourceUrl: "http://www.wisdom-tech.online/view-15.html",
+        description: "The system utilizes deep-learning for auto-delineation and DeepOPT for inverse/multi-objective optimization. Specific training dataset details are not disclosed.",
+        disclosureLevel: "minimal",
+        source: "Vendor official product page (http://www.wisdom-tech.online/view-15.html)"
+    },
+    evaluationData: {
+        sourceUrl: "http://www.wisdom-tech.online/view-15.html",
+        description: "No peer-reviewed publications or clinical validation studies were located for DeepPlan. Evaluation data is limited to technical performance claims such as GPU-accelerated optimization taking less than 10 seconds for 50 iterations.",
+        results: "Not publicly disclosed",
+        source: "Vendor official product page (http://www.wisdom-tech.online/view-15.html)",
+        primaryEndpoint: "Not specified",
+        studyDesign: "Not publicly disclosed"
+    },
     name: "DeepPlan",
     company: "Wisdom Tech",
     companyUrl: "http://www.wisdom-tech.online/",
@@ -60,8 +74,8 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2022-12-03",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes: "No peer-reviewed publications located. PubMed searched 2026-05-31.",

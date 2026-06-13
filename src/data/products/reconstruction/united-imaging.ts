@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-uai-vision-recon",
+    trainingData: {
+        description: "Deep neural network reconstruction trained on CT data, integrated into uCT scanners and the uCloud platform.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193073.pdf",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K193073"
+    },
+    evaluationData: {
+        sourceUrl: "https://doi.org/10.1016/j.xcrm.2023.101119",
+        studyDesign: "Retrospective (vendor-affiliated publication) and Software V&V (FDA 510(k))",
+        source: "Liao S. et al. Cell Rep Med 2023 (DOI: 10.1016/j.xcrm.2023.101119)",
+        primaryEndpoint: "Not specified",
+        results: "Not publicly disclosed",
+        description: "Retrospective analysis of a hybrid deep-learning and iterative reconstruction technology (underlying uAIFI) showing potential for fast and low-dose medical imaging. Regulatory V&V via FDA 510(k) K193073 demonstrates lower image noise and improved low contrast detectability."
+    },
     name: "uAIFI",
     company: "United Imaging",
     category: "Reconstruction",
@@ -93,13 +107,26 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K193073), peer-reviewed literature, company website."
 
   },
   {
     id: "united-uaifi-umr",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K222755.pdf",
+        source: "FDA 510(k) summary K222755",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        primaryEndpoint: "SNR and resolution",
+        description: "Software V&V and clinical images used for FDA 510(k) clearance (K222755) to demonstrate AI-enhanced image reconstruction for improved SNR and resolution. Vendor materials describe SNR/resolution gains and acquisition-time reduction.",
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K222755",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K222755.pdf"
+    },
     name: "uAIFI on uMR",
     company: "United Imaging",
     category: "Reconstruction",
@@ -193,14 +220,27 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K222755, K193073), United Imaging product pages.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },
   {
     id: "united-hd-tof",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183014.pdf",
+        source: "FDA 510(k) summary K183014",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K183014",
+        results: "Not publicly disclosed",
+        description: "United Imaging describes HD TOF as an AI-powered PET reconstruction technology for its uPMR 790 and uMI systems designed to enhance resolution and quantitative accuracy. The system is described as providing registration and fusion of high-resolution physiologic and anatomic info.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183014.pdf",
+        primaryEndpoint: "Not specified"
+    },
     name: "HD TOF 2.0",
     company: "United Imaging",
     category: "Reconstruction",
@@ -281,8 +321,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "United Imaging describes HD TOF (time-of-flight) capability as part of its PET technology stack; quantitative improvements and scan-time/dose tradeoffs depend on local protocol and system configuration.",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 

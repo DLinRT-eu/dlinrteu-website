@@ -4,6 +4,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
   {
     id: "everfortune-rt-suite",
+    trainingData: {
+        source: "FDA 510(k) summary K251306",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf",
+        institutions: 1,
+        disclosureLevel: "minimal",
+        countries: 1,
+        description: "Deep-learning algorithms for multi-region organ-at-risk segmentation. The product features a Predetermined Change Control Plan (PCCP) allowing for adaptive AI model updates under predetermined protocols."
+    },
+    evaluationData: {
+        description: "Clinical implementation at CMUH and research studies (Liu et al. 2023) demonstrate utility in hippocampal avoidance WBRT and cardiac substructures. It is the first radiotherapy software (QKB) cleared with a Predetermined Change Control Plan (PCCP).",
+        studyDesign: "Software V&V (FDA 510(k)) and single-center retrospective studies",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf",
+        primaryEndpoint: "Not specified",
+        source: "FDA 510(k) summary K251306",
+        results: "Not publicly disclosed"
+    },
     name: "RT Suite v1 (HCAP-Segmentation)",
     company: "Ever Fortune AI",
     companyUrl: "https://www.everfortuneai.com.tw/en/",
@@ -62,7 +78,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2022-04-28",
-    lastUpdated: "2026-02-03",
+    lastUpdated: "2026-06-13",
     supersededBy: "everfortune-seg-pro-v3",
     supportedStructures: [
       // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
@@ -96,7 +112,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-05-30",
+    lastRevised: "2026-06-13",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -137,6 +153,21 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "everfortune-seg-pro-v3",
+    trainingData: {
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K251306",
+        description: "Multi-region deep learning models for Head & Neck, Thorax, Abdomen, and Pelvis. Authorized under the first FDA Predetermined Change Control Plan (PCCP) for radiotherapy software, allowing adaptive model updates.",
+        scannerModels: ["CT", "MRI"],
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf"
+    },
+    evaluationData: {
+        description: "Evaluated via single-center studies for specific applications including hippocampal avoidance WHOLE brain radiotherapy and cardiac substructures dose association. The product claims to significantly reduce contouring time.",
+        sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/36773828/",
+        primaryEndpoint: "Not specified",
+        studyDesign: "Single-center retrospective studies and Software V&V (FDA 510(k))",
+        source: "Liu et al. 2023 (PubMed: 36773828) and Cardiac substructures study (PubMed: 37585426)",
+        results: "Not publicly disclosed"
+    },
     name: "Seg Pro V3 (RT-300)",
     company: "Ever Fortune AI",
     companyUrl: "https://www.everfortuneai.com.tw/en/",
@@ -207,7 +238,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-02-03",
+    lastUpdated: "2026-06-13",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -350,7 +381,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-05-30",
+    lastRevised: "2026-06-13",
     guidelines: [
       {
         name: "AAPM TG-263",

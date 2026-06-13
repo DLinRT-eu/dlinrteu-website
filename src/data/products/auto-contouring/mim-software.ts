@@ -5,6 +5,23 @@ import { ProductDetails } from "@/types/productDetails";
 export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
   {
     id: "mim-contour-protegeai",
+    trainingData: {
+        description: "The product uses machine-learning algorithms to create contours across a variety of CT and MR anatomical locations, including Brain, Head & Neck, Thorax, Abdomen, and Pelvis for adult patients.",
+        scannerModels: ["CT", "MRI"],
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253270.pdf",
+        countries: 1,
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K253270"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        source: "Fan et al. Evaluation of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        studyDesign: "Retrospective multi-center comparison",
+        primaryEndpoint: "Not specified",
+        sourceUrl: "https://doi.org/10.1002/acm2.70010",
+        description: "Evaluation of 4 commercial DL autosegmentation software for 111 abdominal patients. Additional multi-center H&N validation comparing AccuContour and ProtegeAI.",
+        sites: 4
+    },
     name: "Contour ProtégéAI+",
     company: "MIM Software",
     companyUrl: "https://www.mimsoftware.com/",
@@ -91,8 +108,8 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.4.0",
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-06-09",
-    lastRevised: "2026-06-09",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",

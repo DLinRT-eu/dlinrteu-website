@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-pelvis",
+    trainingData: {
+        disclosureLevel: "minimal",
+        description: "AI-based MR-only simulation platform using proprietary algorithms to generate synthetic CT images from MR scans. Training details are not explicitly disclosed in the regulatory documentation.",
+        source: "FDA 510(k) summary K182888",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf"
+    },
+    evaluationData: {
+        source: "Persson et al. Int J Radiat Oncol Biol Phys 2020 (DOI: 10.1016/j.ijrobp.2020.07.027)",
+        sourceUrl: "https://doi.org/10.1016/j.ijrobp.2020.07.027",
+        studyDesign: "Multicenter/multivendor validation study",
+        primaryEndpoint: "Dosimetric equivalence to CT-based planning",
+        description: "A multicenter/multivendor validation (MR-OPERA) involving multiple clinical sites, demonstrating dosimetric equivalence to CT-based planning for pelvic radiation therapy using synthetic CT images.",
+        results: "Dosimetric equivalence demonstrated in a multicenter/multivendor setting."
+    },
     name: "MRCAT Pelvis",
     company: "Philips",
     companyUrl: "https://www.philips.com/",
@@ -69,8 +83,8 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     },
     version: "Current",
     releaseDate: "2018",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website",
     clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy",
     evidence: [

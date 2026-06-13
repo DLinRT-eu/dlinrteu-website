@@ -4,6 +4,22 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-mr-contour-dl",
+    trainingData: {
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
+        source: "FDA 510(k) summary K242925",
+        scannerModels: ["GE MRI systems"],
+        demographics: "Adult patients",
+        description: "The training dataset consists of MRI images of adult patients for the segmentation of over 37 organ structures in the head, neck, and pelvic regions."
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        description: "FDA 510(k) summary for MR Contour DL (K242925) providing automated organ-at-risk contouring for head & neck and pelvic anatomies to accelerate radiation therapy planning workflows.",
+        studyDesign: "Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
+        source: "FDA 510(k) summary K242925"
+    },
     name: "MR Contour DL",
     company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
@@ -98,8 +114,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module. releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];

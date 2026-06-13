@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const MediqRT: ProductDetails = {
   id: "synaptiq-mediq-rt",
+  trainingData: {
+      disclosureLevel: "minimal",
+      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935",
+      description: "Model supports auto-segmentation of OARs, CTVs, and GTVs on CT and MRI modalities across head and neck, thorax, abdomen, and pelvis.",
+      source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026)"
+  },
+  evaluationData: {
+      studyDesign: "Retrospective multi-center (testing in 12+ Romanian clinics)",
+      description: "Comparative analysis and clinical evaluation of AI auto-segmentation for cardiac substructures, head and neck OARs, and breast tissue. Key features report a \"92.5% average time saving in contouring workflow\".",
+      source: "Fedrau et al. Physics and Imaging in Radiation Oncology (2026) (DOI: 10.1016/j.phro.2026.100935)",
+      results: "92.5% average time saving in contouring workflow",
+      primaryEndpoint: "Not specified",
+      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935"
+  },
   name: "Mediq RT",
   market: {
     onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
@@ -85,8 +99,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Multi-vendor and multi-modality integration",
     "Cloud-based data storage and visualization"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-06-10",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
     "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",
