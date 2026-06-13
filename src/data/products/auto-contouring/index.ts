@@ -5,7 +5,6 @@ import { MVISION_PRODUCTS } from "./mvision";
 import { MIRADA_PRODUCTS } from "./mirada";
 import { RAYSEARCH_PRODUCTS } from "./raysearch";
 import { THERAPANACEA_PRODUCTS } from "./therapanacea";
-import { PHILIPS_PRODUCTS } from "./philips";
 import { AI_MEDICAL_PRODUCTS } from "./ai-medical";
 import { CARINA_PRODUCTS } from "./carina";
 import { CORELINE_PRODUCTS } from "./coreline";
@@ -37,7 +36,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...MIRADA_PRODUCTS,
   ...RAYSEARCH_PRODUCTS,
   ...THERAPANACEA_PRODUCTS,
-  ...PHILIPS_PRODUCTS,
   ...AI_MEDICAL_PRODUCTS,
   ...CARINA_PRODUCTS,
   ...CORELINE_PRODUCTS,
