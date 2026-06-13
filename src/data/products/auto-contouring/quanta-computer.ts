@@ -9,7 +9,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     productUrl: "https://www.qoca.net/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/quanta-computer.ts",
     description: "AI-powered post-processing software that automatically delineates organs at risk on planning CT scans for radiation therapy. Designed to reduce contouring time and inter-observer variability in radiation oncology workflows.",
-    structuresUnavailable: true,
+    version: "1.0 (ZSWR901)",
     features: [
       "Deep learning-based organ-at-risk segmentation",
       "Planning CT input",
@@ -19,7 +19,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     certification: "FDA",
     logoUrl: "/logos/quanta-computer.png",
     website: "https://www.qoca.net/",
-    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
+    anatomicalLocation: ["Head & Neck", "Pelvis"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
@@ -27,6 +27,31 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       "Automatic OAR contouring on CT for radiotherapy planning",
       "Deep learning segmentation models",
       "DICOM-RTSTRUCT export"
+    ],
+    supportedStructures: [
+      "Head & Neck: Brain Stem",
+      "Head & Neck: Mandible",
+      "Head & Neck: Pharyngeal Constrictor Muscle",
+      "Head & Neck: Spinal Cord",
+      "Head & Neck: Thyroid",
+      "Head & Neck: Eye R",
+      "Head & Neck: Eye L",
+      "Head & Neck: Lens R",
+      "Head & Neck: Lens L",
+      "Head & Neck: Optic Nerve L",
+      "Head & Neck: Optic Nerve R",
+      "Head & Neck: Parotid L",
+      "Head & Neck: Parotid R",
+      "Head & Neck: Esophagus",
+      "Pelvis: Anorectum",
+      "Pelvis: Bladder",
+      "Pelvis: Bowel Bag",
+      "Pelvis: Lumbar Spine L5",
+      "Pelvis: Bilateral Seminal Vesicles",
+      "Pelvis: Iliac R",
+      "Pelvis: Iliac L",
+      "Pelvis: Proximal Femur L",
+      "Pelvis: Proximal Femur R"
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -37,14 +62,14 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     technology: {
       integration: ["TPS via DICOM-RTSTRUCT"],
-      deployment: ["On-premises", "Cloud"],
+      deployment: ["On-premises"],
       triggerForAnalysis: "Manual or workflow-driven on planning CT",
       processingTime: "Minutes per case"
     },
     regulatory: {
       ce: {
         status: "not_applicable",
-        notes: "CE status not publicly confirmed at time of inclusion"
+        notes: "CE marking not pursued / not publicly listed at time of inclusion."
       },
       fda: {
         status: "510k_cleared",
@@ -75,7 +100,8 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "FDA 510(k)",
+        type: "Regulatory",
+        level: "1t",
         description: "K231855 — QOCA® image Smart RT Contouring System, cleared 2024-02-13",
         link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K231855"
       }
@@ -96,8 +122,8 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K231855"
     },
     releaseDate: "2024-02-13",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
-    source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2026-06-01)"
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
+    source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2024-02-13)"
   }
 ];
