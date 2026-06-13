@@ -225,7 +225,8 @@ Products can have safety-related corrective actions tracked from regulatory data
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `usesAI` | ➖ | Indicates if product uses AI/DL technology. | Boolean. | Set `false` for traditional QA tools that don't use AI. |
-| `monitorsAIProducts` | ➖ | For Performance Monitor: AI products it monitors/validates. | Array of product names or categories. | List specific AI products or generic categories like "Auto-Contouring outputs". |
+| `monitorsAIProducts` | ➖ | For Performance Monitor: AI products it monitors/validates. | Array of product names or categories. | List specific AI products or generic categories like "Auto-Contouring outputs". A `usesAI: false` product is **included in the catalogue** only when its `intendedUseStatement` (or equivalent labeling) explicitly references AI/DL-generated outputs (e.g., AI contours, AI plans). General QA/monitoring tools without such references stay excluded. |
+
 | `integratedModules` | ➖ | For Platform products: included modules/components. | Array of `{ name, description, category, productUrl, keyFeatures }`. | Document each integrated module separately. |
 | `partOf` | ➖ | Indicates product is part of a larger system. | Object with `name`, `version`, `productUrl`, `relationship`. | Use for modules that require parent platform. |
 
