@@ -18,6 +18,37 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         primaryEndpoint: "Not specified",
         source: "FDA 510(k) summary K253091"
     },
+    categoryEvidence: {
+      "Image Synthesis": {
+        usesAI: true,
+        notes: "AdaptBox sCT generation from CBCT is the FDA-cleared image-synthesis component (K253091). Validated dosimetrically via Prunaretty et al. Cancers 2026 and a multi-center Frontiers in Oncology 2026 study.",
+        evaluationData: {
+          studyDesign: "Independent peer-reviewed cumulative-dose reconstruction (800 fractions) + multi-center dosimetric study",
+          primaryEndpoint: "Dosimetric accuracy of sCT-based dose reconstruction vs planning CT",
+          results: "Cumulative dose reconstruction across 800 fractions consistent with planning CT (Prunaretty 2026); multi-center dosimetric agreement reported (Frontiers in Oncology 2026).",
+          description: "Synthetic-CT validation of the AdaptBox CBCT→sCT pipeline for H&N, Breast/Thorax and male Pelvis.",
+          source: "Prunaretty et al. Cancers 2026; Frontiers in Oncology 2026; FDA 510(k) K253091",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+        },
+        evidenceRigor: "E2",
+        clinicalImpact: "I1",
+      },
+      "Auto-Contouring": {
+        usesAI: true,
+        notes: "OAR auto-contouring on augmented CBCT/sCT is bundled in AdaptBox; target contours are propagated from planning CT via registration. No standalone peer-reviewed validation of the OAR contouring module on synthetic CBCT located.",
+        evaluationData: {
+          studyDesign: "Software V&V (FDA 510(k)); no standalone peer-reviewed contouring validation located",
+          primaryEndpoint: "Geometric accuracy of OAR contours on augmented CBCT (not publicly disclosed)",
+          results: "Not publicly disclosed",
+          description: "OAR contouring validation is bundled into the K253091 submission for the offline adaptive workflow; module-specific peer-reviewed evidence is not yet available.",
+          source: "FDA 510(k) K253091",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+        },
+        evidenceRigor: "E0",
+        evidenceRigorNotes: "No peer-reviewed publication located specifically for the OAR contouring module. PubMed searched 2026-06-13.",
+        clinicalImpact: "I0",
+      },
+    },
     name: "AdaptBox",
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu/",
