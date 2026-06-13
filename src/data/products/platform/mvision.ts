@@ -185,8 +185,8 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         clinicalImpact: "I1",
       },
     },
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-20",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     evidence: [
       {
         type: "Company Press Release",
