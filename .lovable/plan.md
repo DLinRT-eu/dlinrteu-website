@@ -1,58 +1,49 @@
-# Audit & Fix Recently Merged Product PRs
 
-## Scope
+## Audit — QOCA® image Smart RT Contouring System (`quanta-qoca-image-smart-rt`)
 
-48 PRs merged between 2026-05-13 and 2026-06-13 touched **25 product files** across `src/data/products/`. Most were `[Visual Edit]` PRs (auto-applied via the visual editor) plus ~10 hand-authored edits. Auditing the resulting *files* (not the diffs) ensures any drift, partial fixes, or schema regressions are caught regardless of which PR introduced them.
+The latest PR added/updated `src/data/products/auto-contouring/quanta-computer.ts`. Compared against `docs/FIELD_REFERENCE.md`, the project schema, and sibling auto-contouring entries, the following issues need correction.
 
-## Standard reference
+### Findings
 
-Each touched product is checked against four pillars from project memory + docs:
+**Errors (must fix)**
 
-1. **Field schema** — `docs/FIELD_REFERENCE.md`: required fields present, enums valid, URLs live, `lastRevised` recent, `githubUrl` correct, `usesAI`/`monitorsAIProducts` set correctly per category.
-2. **Structure naming** — `mem://data/structure-naming-convention-v3`: every entry uses `Region: Structure Name`; `CTVn*` → Elective; `(investigational)` / `(unverified)` suffixes preserved; DICOM nomenclature respected.
-3. **Evidence classification** — `docs/review/GUIDE.md` dual-axis (E0–E3 / I0–I5) with study-quality attributes (`vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`); `keyPapers` populated when E ≥ E1; DOIs/links resolve and actually concern the product (several merged PRs explicitly flagged wrong DOIs).
-4. **Regulatory & inclusion gate** — `hasRegulatoryApproval` true only for recognized authorities (CE/FDA/MDR-exempt/NMPA/TGA/TFDA/PMDA/MFDS/Health Canada/ANVISA/MHRA/UKCA); AI/DL threshold (no classical/general QA misclassified as AI); `certification` summary matches `regulatory.*`.
+1. **Orphan duplicate file** — `src/data/products/auto-contouring/quanta-computer-inc.ts` defines the same `id` (`quanta-qoca-image-smart-rt`) as a single `export const QOCAimageSmartRTContouringSystem`. It is **not** imported by `auto-contouring/index.ts` and violates the project pattern (one `*_PRODUCTS: ProductDetails[]` array per file). It also drifts from the active record (different `evidence.type`, `deployment`, `version`, `source`). → **Delete the file.**
 
-## Method
+2. **`source` field has the wrong proxy date** — currently reads `"...releaseDate proxied from FDA decision date (2026-06-01)"`. `2026-06-01` is the `lastUpdated` value, not the FDA decision. Should read `(2024-02-13)` to match `releaseDate` and `regulatory.fda.decisionDate`.
 
-Run the bundled **product-audit-swarm** skill scoped to the 25 touched files. Per product, execute the 8 roles (Identity, Inclusion, Regulatory, Technical, Structures, Transparency, Evidence, Cross-check), severity-tagged (error/warn/info).
+3. **`version` missing** — `version` is marked required in `FIELD_REFERENCE.md`. The FDA 510(k) lists the model designation `ZSWR901`; use `version: "1.0 (ZSWR901)"` (or `"1.0"`) to satisfy the schema.
 
-### Files in scope (25)
+**Warnings (recommended)**
 
-```
-auto-contouring/    ai-medical, brainlab, carina-ai, ever-fortune-ai, ge-healthcare,
-                    manteia, medmind-technology-co-ltd, oncosoft, radformation,
-                    raysearch-laboratories, synaptiq, taiwan-medical-imaging,
-                    therapanacea, varian-siemens-healthineers, vysioneer
-image-synthesis/    philips, philips-mrcat-head-neck, syntheticmr
-performance-monitor/ mvision-ai, ptw
-reconstruction/     canon-medical-systems, elekta, philips
-platform/           manteia
-pipeline/           ge-healthcare
-```
+4. **`technology.deployment: ["On-premises", "Cloud"]`** — vendor sources and FDA summary only substantiate on-prem deployment; `Cloud` is unsupported. Drop `"Cloud"` unless a vendor citation is added. (The orphan file correctly listed on-prem only.)
 
-## Deliverables
+5. **`supportedStructures` dropped in favour of `structuresUnavailable: true`** — the orphan file enumerated 24 H&N + Pelvis structures in the canonical `"Region: Structure Name"` form (per project nomenclature rule). Restore that list and remove `structuresUnavailable: true` so the product matches the auto-contouring standard and powers the structure-comparison matrix.
 
-Written to `/mnt/documents/` and surfaced via `<presentation-artifact>`:
+6. **`regulatory.ce.status: "not_applicable"` paired with notes "CE status not publicly confirmed"** is contradictory. Either:
+   - keep `not_applicable` and rephrase the note to "CE marking not pursued / not publicly listed", or
+   - change status to `under_review` if pursuit is known.
 
-1. `pr-audit-2026-06-13.md` — per-product findings (8 sections each, severity-tagged).
-2. `pr-audit-2026-06-13.csv` — one row per finding for triage.
-3. `pr-audit-2026-06-13-rescoring.csv` — current vs. proposed E/I/R with rationale.
+7. **`evidence[0].type: "FDA 510(k)"`** is non-standard. Sibling entries use one of the rubric-aligned types (e.g. `"Regulatory"` or `"Internal Validation"` with `level: "1t"`). Align with the evidence taxonomy used elsewhere.
 
-## Fixes
+**Info**
 
-After the report, apply corrective edits in batches **grouped by category** (one logical change set per category folder) to keep diffs reviewable and respect the Minimal Intervention policy:
+8. **Archived stub** `src/data/products/archived/qoca.ts` (id `qoca-smart-rt`) describes the same product under a different id and is still exported by `archived/index.ts`. Since the product is now live with richer data, the archived entry should be removed (or its README note updated) to avoid duplicate catalogue records. Flagging for confirmation rather than auto-removing per Minimal Intervention.
 
-- **Errors first** — invalid enums, broken/wrong DOIs (already flagged in merged PRs like #75, #79, #84), missing required fields, regulatory↔certification mismatches, AI/DL inclusion violations.
-- **Warns next** — `Region: Structure Name` reformat, CTVn → Elective reclassification, missing `keyPapers` at E ≥ E1, stale `lastRevised`.
-- **Info** — re-scoring suggestions surfaced for your approval before applying (rescoring CSV).
+9. **Dates** — bump `lastUpdated` / `lastRevised` to today (2026-06-13) once the above fixes land.
 
-No structural refactors, no UI changes, no edits outside the 25 files unless an error there points to a shared util (in which case it's called out separately for confirmation).
+### Planned edits (build mode)
 
-## Out of scope
+- `src/data/products/auto-contouring/quanta-computer.ts`
+  - Add `version: "1.0 (ZSWR901)"`
+  - Fix `source` decision-date string → `(2024-02-13)`
+  - `technology.deployment` → `["On-premises"]`
+  - Replace `structuresUnavailable: true` with the full `supportedStructures` array from the orphan file (24 items, `Region: Structure Name` form)
+  - Rewrite `regulatory.ce.notes` for consistency with `not_applicable`
+  - Change `evidence[0].type` to `"Regulatory"` and add `level: "1t"`
+  - Bump `lastUpdated` / `lastRevised` to `2026-06-13`
+- Delete `src/data/products/auto-contouring/quanta-computer-inc.ts` (orphan).
+- **Open question for the user:** also retire the archived `qoca-smart-rt` stub (Finding #8)?
 
-- Visual-editor approval pipeline behavior
-- Company files, news, changelog
-- Products *not* touched by a merged PR in the window
+### Out of scope
 
-Approve to switch to build mode and run the audit + apply fixes.
+No changes to the `ProductDetails` type, the auto-contouring index, the company record, or unrelated products.
