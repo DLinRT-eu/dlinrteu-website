@@ -192,3 +192,6 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
   evidenceVendorIndependent: true,
   evidenceExternalValidation: true
 };
+
+export const BRAINLAB_PRODUCTS: ProductDetails[] = [BrainlabElementsContouring50APMElementsSegmentation];
+
