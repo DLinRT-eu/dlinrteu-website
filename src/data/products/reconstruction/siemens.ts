@@ -4,6 +4,19 @@ import { ProductDetails } from "@/types/productDetails";
 export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-deep-resolve",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213693.pdf",
+        source: "FDA 510(k) summary K213693",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        primaryEndpoint: "Image quality and scan time reduction",
+        source: "Wilpert et al. Invest Radiol 2025 (DOI: 10.1097/RLI.0000000000001158)",
+        studyDesign: "Retrospective multi-center multi-national studies and Software V&V (FDA 510(k))",
+        results: "Up to 70% scan acceleration with maintained diagnostic quality.",
+        description: "Retrospective studies show 50-70% scan time reduction while maintaining or improving image quality across neuro, MSK, and whole-body applications. Bash et al. demonstrated scan times could be halved across routine neuroradiologic examinations.",
+        sourceUrl: "https://doi.org/10.1097/RLI.0000000000001158"
+    },
     name: "Deep Resolve",
     company: "Siemens Healthineers",
     category: "Reconstruction",
@@ -107,8 +120,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website"
   }
 ];

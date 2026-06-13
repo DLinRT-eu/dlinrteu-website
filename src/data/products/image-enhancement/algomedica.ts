@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
   {
     id: "algomedica-pixelshine",
+    trainingData: {
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf",
+        description: "The training data details for the PixelShine deep-learning CT denoising algorithm are not publicly disclosed in the regulatory or clinical documentation provided.",
+        source: "FDA 510(k) summary K161625"
+    },
+    evaluationData: {
+        studyDesign: "Independent Retrospective Evaluation",
+        description: "Independent study by Steuwe et al. (2022) evaluated the influence of PixelShine deep learning noise reduction on CT values, image noise, and kidney/ureter stone characterization. The product is also supported by clinical case studies and FDA 510(k) software verification.",
+        source: "Steuwe et al. Diagnostics 2022 (DOI: 10.3390/diagnostics12071627)",
+        results: "Not publicly disclosed",
+        primaryEndpoint: "CT values, image noise and stone characterization",
+        sourceUrl: "https://doi.org/10.3390/diagnostics12071627"
+    },
     name: "PixelShine",
     company: "AlgoMedica",
     category: "Image Enhancement",
@@ -87,8 +101,8 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company provided information"
   }
 ];

@@ -11,6 +11,22 @@ const BRAIN_METASTASES_STRUCTURES = [
 export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "taimedimg-deepmets",
+    trainingData: {
+        source: "FDA 510(k) summary K250427",
+        scannerModels: ["MRI"],
+        disclosureLevel: "minimal",
+        description: "The model is trained to provide GTV contours for known brain metastases on axial contrast-enhanced T1-weighted brain MRI (T1WI+C). FDA clearance is specifically for lesions with diameter >= 10 mm.",
+        demographics: "Adult patients with known (imaging-diagnosed) brain metastases.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf"
+    },
+    evaluationData: {
+        results: "Mean DSC ≈0.60, lesion-wise sensitivity ~52%, and PPV 78%.",
+        source: "Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5)",
+        studyDesign: "Software V&V (FDA 510(k)) and peer-reviewed external validation",
+        primaryEndpoint: "DICE similarity coefficient (DSC)",
+        sourceUrl: "https://doi.org/10.1007/s11060-025-05294-5",
+        description: "External validation shows variable performance with lesion-wise sensitivity ~52%, PPV 78%, and mean DSC ≈0.60, with substantial revision rates reported for many cases. Use is limited to lesions with diameter >= 10 mm."
+    },
     name: "TAIMedImg DeepMets",
     company: "Taiwan Medical Imaging Co.",
     companyUrl: "https://www.taimedimg.tw/",
@@ -88,8 +104,8 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-12",
-    lastRevised: "2026-06-12",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     companyRevisionDate: "",
     source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports"
   }

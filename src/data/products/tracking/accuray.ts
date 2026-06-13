@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const ACCURAY_PRODUCTS: ProductDetails[] = [
   {
     id: "accuray-synchrony",
+    trainingData: {
+        source: "FDA 510(k) summary K182687",
+        disclosureLevel: "minimal",
+        description: "Synchrony uses a patient-specific, treatment-session-specific AI motion model. This represents individualized motion modeling and prediction trained specifically for the individual patient during the treatment session rather than a population-trained deep-learning model.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182687.pdf"
+    },
+    evaluationData: {
+        source: "Ferris et al. Evaluation of Radixact Motion Synchrony for 3D respiratory motion: modeling accuracy and dosimetric fidelity. JACMP 2020 (DOI: 10.1002/acm2.12978)",
+        results: "Overall residual respiratory latency on the order of ±10 ms",
+        sourceUrl: "https://doi.org/10.1002/acm2.12978",
+        description: "Evaluations on Radixact and CyberKnife systems demonstrate technical feasibility and modeling accuracy for 3D respiratory motion, reporting residual respiratory latency on the order of ±10 ms. Clinical studies indicate successful tracking for liver and prostate SBRT with excellent toxicity outcomes.",
+        primaryEndpoint: "Modeling accuracy and dosimetric fidelity",
+        studyDesign: "Retrospective case-series and technical validation studies"
+    },
     name: "Synchrony®",
     company: "Accuray®",
     category: "Tracking",
@@ -153,8 +167,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "The clinical and technical utility of Synchrony® has a highly established evidence base on the CyberKnife® System (extending nearly 25 years since 2002) and a growing clinical peer-reviewed record on the Radixact® Treatment Delivery System (since its launch in 2019). Clinical studies demonstrate accurate real-time tracking, low residual latencies (±10 ms), and reduced treatment-margins. Recent clinical studies (Acharya et al. 2025, Okada et al. 2025, Lo Conte et al. 2025) demonstrate feasibility and excellent toxicity outcomes in liver tumor tracking and prostate SBRT.",
     releaseDate: "2018-11-23",
-    lastUpdated: "2026-06-10",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database entries K182687; Accuray® official product documentation and AI-guided radiotherapy chronicles; technical whitepapers; integrated peer-reviewed research (JACMP 2020, Medical Physics 2020, Cureus 2025). Reviewed 2026-06-10."
   }
 ];

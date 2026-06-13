@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
   {
     id: "mvision-dose-plus",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250064.pdf",
+        disclosureLevel: "minimal",
+        description: "The software uses machine learning-based algorithms to produce 3D dose distributions from patient-specific anatomical geometry and target dose prescriptions for external beam radiation therapy.",
+        source: "FDA 510(k) summary K250064",
+        demographics: "Adult male patients with localized prostate cancer or pelvic lymph node involvement"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250064.pdf",
+        source: "FDA 510(k) summary K250064",
+        primaryEndpoint: "Not specified",
+        description: "Software V&V conducted for FDA 510(k) clearance supporting machine learning-based 3D dose distribution generation for localized prostate cancer and pelvic lymph node involvement. Initial clinical validation focused on prostate and pelvic lymph nodes.",
+        studyDesign: "Software V&V (FDA 510(k))"
+    },
     name: "Dose+",
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
@@ -100,8 +115,8 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-09-04",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",

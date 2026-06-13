@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const MRCATPelvis: ProductDetails = {
   id: "philips-mrcat-pelvis",
+  trainingData: {
+      source: "FDA 510(k) summary K182888",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf",
+      disclosureLevel: "minimal",
+      description: "The product utilizes proprietary AI-based algorithms for MR-only simulation and synthetic CT generation in the pelvic region. training specifics are not detailed in the public documentation."
+  },
+  evaluationData: {
+      description: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy. The software is indicated for radiotherapy treatment planning of soft tissue cancers in the pelvic region.",
+      studyDesign: "Software V&V (FDA 510(k))",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf",
+      results: "Not publicly disclosed",
+      primaryEndpoint: "Dosimetric equivalence to CT-based planning",
+      source: "FDA 510(k) summary K182888"
+  },
   name: "MRCAT Pelvis",
   market: {
     onMarketSince: "2018",
@@ -56,8 +70,8 @@ export const MRCATPelvis: ProductDetails = {
     "Streamlined radiation therapy planning",
     "Superior soft tissue contrast"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-03-08",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2018",
   certification: "CE Mark, FDA Cleared",
   evidenceRigor: "E1",

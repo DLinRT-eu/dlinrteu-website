@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const MIRADA_PRODUCTS: ProductDetails[] = [
   {
     id: "mirada-dlc",
+    trainingData: {
+        description: "Not publicly disclosed in the available documentation. The product utilizes deep learning algorithms for CT-based auto-contouring.",
+        source: "FDA 510(k) summary K181572",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181572.pdf",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        sourceUrl: "https://doi.org/10.3389/fonc.2023.1213068",
+        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients. The study demonstrated comparable contouring accuracy across systems.",
+        primaryEndpoint: "Not specified",
+        source: "Doolan et al. 2023 (DOI: 10.3389/fonc.2023.1213068)",
+        results: "Demonstrated comparable contouring accuracy in a multi-center study.",
+        studyDesign: "Retrospective multi-center comparison"
+    },
     name: "DLC Expert",
     company: "Mirada Medical",
     companyUrl: "https://mirada-medical.com/radiation-oncology/",
@@ -76,8 +90,8 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     ],
     version: "2.2",
     releaseDate: "2023-05-20",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Historical records - product discontinued"
   }
 ];

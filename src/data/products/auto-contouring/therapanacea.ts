@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const TumorBox: ProductDetails = {
   id: "therapanacea-tumorbox-pipeline",
+  trainingData: {
+      disclosureLevel: "minimal",
+      source: "FDA 510(k) summary K253091",
+      description: "Not publicly disclosed. Product is a deep learning module for tumor segmentation (GTV/CTV/PTV).",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+  },
+  evaluationData: {
+      primaryEndpoint: "Not specified",
+      source: "FDA 510(k) summary K253091",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+      description: "Software validation and verification for FDA 510(k) clearance as an AI tumor-segmentation module for ART-Plan+.",
+      results: "Not publicly disclosed",
+      studyDesign: "Software V&V (FDA 510(k))"
+  },
   name: "TumorBox",
   partOf: {
     name: "ART-Plan+",
@@ -42,8 +56,8 @@ export const TumorBox: ProductDetails = {
     "Multi-modality image fusion support",
     "Adaptive re-contouring for ART workflows"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2026-03-08",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2025-12-23",
   certification: "510(k) K253091",
   subspeciality: "Radiation Oncology",

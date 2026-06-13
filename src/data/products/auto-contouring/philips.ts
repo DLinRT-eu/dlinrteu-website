@@ -5,6 +5,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-prostate-auto-contouring",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+        demographics: "Adult patients",
+        description: "Model-based adaptive auto-contouring trained for adult prostate cancer patients. Training details for this legacy clinical application are not publicly disclosed.",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K150965"
+    },
+    evaluationData: {
+        primaryEndpoint: "Average distance (geometric accuracy)",
+        source: "FDA 510(k) summary (Philips Ingenia MR-RT system)",
+        results: "Average distance < 1.5mm",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+        description: "Software validation associated with the MRCAT Prostate + Auto-Contouring application. The technology provides automated MR-based contours of the prostate and organs at risk with a geometric accuracy of average distance < 1.5mm.",
+        studyDesign: "Software V&V (FDA 510(k))"
+    },
     name: "MRCAT Prostate + Auto-Contouring",
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
@@ -84,8 +99,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2016-03-31",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016) announcing first commercial MR-only solution for prostate treatment planning with FDA clearance (2026-06-01)"
   }
 ];

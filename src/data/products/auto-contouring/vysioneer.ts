@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const Vbrain: ProductDetails = {
   id: "vysioner-vbrain",
+  trainingData: {
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203235.pdf",
+      disclosureLevel: "minimal",
+      source: "FDA 510(k) summary K203235",
+      scannerModels: ["MRI"]
+  },
+  evaluationData: {
+      studyDesign: "Single-center retrospective",
+      source: "Wang et al. Radiat Oncol 2023 (10.1186/s13014-023-02246-z)",
+      sourceUrl: "https://doi.org/10.1186/s13014-023-02246-z",
+      primaryEndpoint: "Not specified",
+      description: "Evaluation of VBrain for stratified SRS assessment and deep learning brain metastases auto-segmentation. Clinical impact notes indicate improved contouring accuracy and efficiency for brain metastases.",
+      results: "Not publicly disclosed"
+  },
   name: "Vbrain",
   market: {
     onMarketSince: "2020",
@@ -60,8 +74,8 @@ export const Vbrain: ProductDetails = {
     "Fast processing",
     "Multiple tumor support"
   ],
-  lastRevised: "2026-05-30",
-  lastUpdated: "2024-03-10",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "Limited to brain tumor segmentation only",
     "Performance varies with MRI sequence quality",

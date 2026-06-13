@@ -4,6 +4,19 @@ import { ProductDetails } from "@/types/productDetails";
 export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "hura-dvtarget",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K202928"
+    },
+    evaluationData: {
+        primaryEndpoint: "Not specified",
+        source: "FDA 510(k) summary K202928",
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
+        description: "Software V&V conducted for FDA 510(k) clearance (K202928) for automatic delineation of organs-at-risk (OARs) from CT images.",
+        studyDesign: "Software V&V (FDA 510(k))"
+    },
     name: "DV.TARGET",
     company: "Hura Imaging",
     companyUrl: "https://huraimaging.com",
@@ -112,8 +125,8 @@ export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     version: "2.5",
     releaseDate: "2023-05-20",
-    lastUpdated: "2024-01-15",
-    lastRevised: "2026-05-20",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K202928), company official sources"
   }
 ];

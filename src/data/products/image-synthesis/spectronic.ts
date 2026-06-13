@@ -3,6 +3,19 @@ import { ProductDetails } from "@/types/productDetails";
 export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
   {
     id: "spectronic-mriplanner",
+    trainingData: {
+        source: "FDA 510(k) summary K211841",
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K211841.pdf"
+    },
+    evaluationData: {
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        source: "Bird et al. Radiother Oncol 2024 (DOI: 10.1016/j.radonc.2023.110052)",
+        description: "Multi-site dosimetric validation across pelvis, brain, and head & neck cancers demonstrating the feasibility of MRI-only planning. The MR-OPERA study included 170 prostate patients at 4 centers.",
+        studyDesign: "Retrospective multi-center validation",
+        sourceUrl: "https://doi.org/10.1016/j.radonc.2023.110052"
+    },
     name: "MRI Planner",
     company: "Spectronic Medical (a GE HealthCare company)",
     companyUrl: "https://medical.spectronic.se/",
@@ -82,8 +95,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     },
     version: "Not publicly verified",
     releaseDate: "Not publicly verified",
-    lastUpdated: "2026-06-10",
-    lastRevised: "2026-06-10",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and FDA K211841 Summary; Spectronic Medical company website; GE HealthCare ESTRO 2026 press release. GE HealthCare describes iRT MR Direct as a dedicated MR-only workflow that can include iRT, MR Contour DL and/or MRI Planner by Spectronic Medical. MRI Planner is described as a deep learning application for generating synthetic CT images from standard MR imaging sequences of the brain, head & neck and pelvis for MRI-only radiotherapy planning. MR Contour DL is the GE HealthCare-developed OAR contouring component and should not be conflated with MRI Planner's FDA-cleared prostate healthy-structure contouring.",
     evidence: [
       {

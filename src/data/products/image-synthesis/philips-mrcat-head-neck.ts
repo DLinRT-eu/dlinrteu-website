@@ -4,6 +4,18 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-head-and-neck",
+    trainingData: {
+        source: "FDA 510(k) summary K214081",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K214081.pdf",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        results: "Median dosimetric deviations of 0.4 ± 0.7% (target volumes) and 0.4 ± 0.9% (OARs) vs planning CT.",
+        description: "Retrospective clinical workflow study in 10 head-and-neck patients reporting median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT.",
+        primaryEndpoint: "Dosimetric deviations",
+        studyDesign: "Single-center retrospective clinical workflow and dosimetric validation study",
+        source: "Buschmann et al. 2026, Z Med Phys (PubMed PMID 39956751)"
+    },
     name: "MRCAT Head and Neck",
     company: "Philips",
     companyUrl: "https://www.philips.com/",
@@ -70,8 +82,8 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
 },
     version: "2.0",
     releaseDate: "2022-10-20",
-    lastUpdated: "2026-06-11",
-    lastRevised: "2026-06-11",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study",
     clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
     evidenceRigor: "E1",

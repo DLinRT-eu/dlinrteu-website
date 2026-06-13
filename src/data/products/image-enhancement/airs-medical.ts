@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
   {
     id: "airs-swiftmr",
+    trainingData: {
+        source: "FDA 510(k) summary K230854",
+        disclosureLevel: "minimal",
+        description: "Deep learning-based MRI enhancement software for noise reduction and sharpening across various anatomical locations.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230854.pdf"
+    },
+    evaluationData: {
+        studyDesign: "Multi-reader retrospective study",
+        description: "Multi-reader study and clinical white paper evaluating 184 MR exam pairs across 12 anatomical locations with 18 radiologists. 93.7% of cases were preferred or rated equivalent to standard scans.",
+        results: "93.7% of cases were preferred or rated as equivalent to standard scans.",
+        source: "AIRS Medical clinical white paper",
+        primaryEndpoint: "Diagnostic equivalence / preference rate",
+        sourceUrl: "https://airsmed.com/en/clinical-white-paper/"
+    },
     name: "SwiftMR",
     company: "AIRS Medical",
     category: "Image Enhancement",
@@ -93,8 +107,8 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-20",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website"
   }
 ];

@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const CLARIPI_PRODUCTS: ProductDetails[] = [
   {
     id: "claripi-clarict-ai",
+    trainingData: {
+        description: "The product uses a patented Clarity Engine with a deep Convolutional Neural Network (CNN) for selective noise removal.",
+        source: "FDA 510(k) summary K183460",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        studyDesign: "Retrospective peer-reviewed publication validation",
+        sourceUrl: "https://doi.org/10.1007/s00330-020-07081-4",
+        source: "Kim et al. Deep learning CT denoising validation in European Radiology 2020",
+        results: "Not publicly disclosed",
+        primaryEndpoint: "Not specified",
+        description: "Validation studies in pediatric abdominal CT, coronary CTA, and liver imaging, including a study by Kim et al. in European Radiology (2020) demonstrating deep learning CT denoising efficacy."
+    },
     name: "ClariCT.AI",
     company: "ClariPi",
     category: "Image Enhancement",
@@ -85,8 +99,8 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Multiple peer-reviewed publications in European Radiology, Radiology, and SPIE demonstrating efficacy in various clinical applications",
     releaseDate: "2019-03-29",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K183460, K212074) and company website; releaseDate proxied from FDA K183460 decision date (2026-06-01)"
   }
 ];

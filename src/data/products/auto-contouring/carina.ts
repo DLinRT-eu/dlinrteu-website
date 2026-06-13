@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const CARINA_PRODUCTS: ProductDetails[] = [
   {
     id: "carina-intcontour",
+    trainingData: {
+        source: "FDA 510(k) summary K212274",
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212274.pdf",
+        description: "Not publicly disclosed. Training data supports segmentation for head and neck, thorax, abdomen, and male pelvis regions."
+    },
+    evaluationData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K212274.pdf",
+        description: "Reported geometric accuracy and workflow time savings for OAR and target segmentation. Processing time is noted at 3-5 minutes per case.",
+        results: "Not publicly disclosed",
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K212274",
+        primaryEndpoint: "Not specified"
+    },
     name: "INTContour",
     company: "Carina AI",
     companyUrl: "https://www.carinaai.com/",
@@ -54,7 +68,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2025-06-10",
-    lastUpdated: "2026-01-21",
+    lastUpdated: "2026-06-13",
     supportedStructures: [
       // ========================================
       // HEAD & NECK MODEL - Approved Structures
@@ -220,7 +234,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Uterus (investigational)",
       "Female Pelvis: Rectum (investigational)"
     ],
-    lastRevised: "2026-05-30",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",

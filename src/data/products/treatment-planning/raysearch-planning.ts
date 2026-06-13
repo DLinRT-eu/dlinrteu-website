@@ -11,6 +11,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
   {
     id: "raysearch-raystation-planning",
+    trainingData: {
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K240398",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K240398.pdf",
+        description: "Models are trained for specific anatomical sites (Brain, Breast, Head & Neck, Lung, Prostate, Rectum) and techniques (VMAT, IMRT, SMLC, and Proton PBS) based on clinical treatment plans."
+    },
+    evaluationData: {
+        primaryEndpoint: "Not specified",
+        sourceUrl: "https://doi.org/10.1016/j.ejmp.2024.103419",
+        description: "The system uses deep learning dose prediction for various sites including prostate, where predicted doses are used as input for mimicking optimization. Studies (e.g., Eriksson et al. 2024; Radiation Oncology 2024) and the RaySearch catalogue demonstrate clinical acceptability and workflow acceleration across VMAT, IMRT, and Proton PBS techniques.",
+        results: "Processing time of seconds for dose prediction and minutes for optimization.",
+        source: "Eriksson et al. Phys Med 2024 (DOI: 10.1016/j.ejmp.2024.103419)",
+        studyDesign: "Software V&V (FDA 510(k)) and Retrospective studies"
+    },
     name: "RayStation Deep Learning Dose Prediction",
     company: "RaySearch Laboratories",
     companyUrl: "https://www.raysearchlabs.com/",
@@ -110,8 +124,8 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
     evidence: [
       {

@@ -5,6 +5,19 @@ import { LIMBUS_ALL_STRUCTURES } from "./limbus-structures";
 export const LIMBUS_PRODUCTS: ProductDetails[] = [
   {
     id: "limbus-contour",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K241837.pdf",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K241837"
+    },
+    evaluationData: {
+        sourceUrl: "https://doi.org/10.1093/bjr/tqae077",
+        studyDesign: "Multi-center retrospective and clinical evaluation",
+        description: "Multi-center, multi-national study (Canada & UK) evaluating prostate and lymph node contouring; the software demonstrated meaningful time savings of 13-26 minutes per case.",
+        primaryEndpoint: "Time savings",
+        source: "Starke et al. BJR 2024 (DOI: 10.1093/bjr/tqae077)",
+        results: "13-26 minutes time savings for prostate and lymph node contouring."
+    },
     name: "Limbus Contour",
     company: "Limbus AI",
     companyUrl: "https://limbus.ai/",
@@ -131,8 +144,8 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/app16115681"
       }
     ],
-    lastUpdated: "2026-06-09",
-    lastRevised: "2026-06-09",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K241837), company official sources"
   }
 ];

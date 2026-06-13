@@ -4,6 +4,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-ucs-ai",
+    trainingData: {
+        source: "Company website",
+        disclosureLevel: "minimal",
+        demographics: "Adult and pediatric",
+        sourceUrl: "https://www.united-imaging.com/en/products/radiationtherapy",
+        description: "The algorithm is integrated into United Imaging's uRT radiotherapy systems for CBCT enhancement."
+    },
+    evaluationData: {
+        primaryEndpoint: "Target visualization and contouring variability",
+        sourceUrl: "https://www.united-imaging.com/en/products/radiationtherapy",
+        description: "Clinical evaluations reported by the manufacturer indicate improved target visualization and reduced contouring variability compared to conventional CBCT.",
+        studyDesign: "Clinical evaluation (Manufacturer internal)",
+        results: "Not publicly disclosed",
+        source: "Company website"
+    },
     name: "uCS-AI",
     company: "United Imaging",
     category: "Image Enhancement",
@@ -64,8 +79,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website"
 
   }

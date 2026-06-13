@@ -5,6 +5,21 @@ import { MVISION_ALL_STRUCTURES } from "./mvision-structures";
 export const MVISION_PRODUCTS: ProductDetails[] = [
   {
     id: "mvision-ai-contouring",
+    trainingData: {
+        countries: 7,
+        source: "FDA 510(k) summary K241490",
+        disclosureLevel: "minimal",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K241490.pdf",
+        description: "The system uses deep learning algorithms for automatic contouring of CT and MR images. Training involves machine learning based algorithms to delineate 300+ structures including OARs and lymph node regions across Head & Neck, Thorax, Abdomen, and Pelvis sites."
+    },
+    evaluationData: {
+        primaryEndpoint: "Geometric and dosimetric accuracy (e.g., DSC)",
+        source: "Pang et al. NPJ Digit Med 2025 (DOI: 10.1038/s41746-025-01624-z)",
+        description: "Pang et al. (NPJ Digit Med 2025) performed a multicentre evaluation of deep learning CT autosegmentation of Head & Neck organs across 9 clinics in 7 countries. Another study on gastric MALT lymphoma reported DSC ranges of 0.92-0.99.",
+        sourceUrl: "https://doi.org/10.1038/s41746-025-01624-z",
+        studyDesign: "Multicentre retrospective evaluation (9 clinics, 7 countries)",
+        results: "DSC 0.92-0.99 for gastric MALT lymphoma segmentation."
+    },
     name: "Contour+",
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
@@ -146,8 +161,8 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-05-05",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources"
   }
 ];

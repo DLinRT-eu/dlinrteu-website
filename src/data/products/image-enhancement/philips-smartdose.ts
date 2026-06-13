@@ -4,6 +4,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-smartdose-ct-enhancement",
+    trainingData: {
+        description: "The model is a deep learning-based CT image enhancement solution trained to reduce noise and improve contrast-to-noise ratio in ultra-low-dose CT images across whole-body anatomical locations.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203020.pdf",
+        source: "FDA 510(k) summary K203020",
+        demographics: "Adult and pediatric",
+        disclosureLevel: "minimal"
+    },
+    evaluationData: {
+        primaryEndpoint: "Diagnostic equivalence",
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203020.pdf",
+        studyDesign: "Software V&V (FDA 510(k))",
+        description: "Validation for FDA 510(k) clearance K203020 and a feasibility study on radiation dose reduction using AI-based spectral reconstruction for CT. clinicalEvidence suggests diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions.",
+        source: "FDA 510(k) summary K203020"
+    },
     name: "SmartDose CT Enhancement",
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
@@ -76,8 +91,8 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website, peer-reviewed publications",
     evidence: [
       {

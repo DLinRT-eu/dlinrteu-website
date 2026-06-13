@@ -2,6 +2,20 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const IRISEvo: ProductDetails = {
   id: "elekta-iris",
+  trainingData: {
+      description: "Deep learning reconstruction module for CBCT imaging. Training details regarding dataset size, demographics, or specific institutions are not provided in available vendor documentation.",
+      disclosureLevel: "minimal",
+      source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026)",
+      sourceUrl: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/"
+  },
+  evaluationData: {
+      primaryEndpoint: "Not specified",
+      studyDesign: "Software V&V (FDA 510(k))",
+      description: "Vendor materials describe Iris as an AI-enhanced CBCT imaging module that provides high-definition images for target visualization and patient positioning, with processing times under 30 seconds.",
+      sourceUrl: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/",
+      source: "FDA 510(k) summary (Jan 2026)",
+      results: "Not publicly disclosed"
+  },
   name: "IRIS Evo",
   market: {
     onMarketSince: "2022",
@@ -89,8 +103,8 @@ export const IRISEvo: ProductDetails = {
     "Seamless integration with Elekta linacs",
     "Available as upgrade for existing Elekta linacs"
   ],
-  lastRevised: "2026-06-01",
-  lastUpdated: "2026-06-01",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   limitations: [
     "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
     "Recently launched product (Elekta Evo, May 2024); FDA cleared January 2026",

@@ -2,6 +2,22 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const RTMindAI: ProductDetails = {
   id: "medmind-rt-mind-ai",
+  trainingData: {
+      countries: 1,
+      disclosureLevel: "minimal",
+      description: "Deep learning-based auto-contouring platform supporting 120+ OARs and CTV delineation across multiple anatomical sites. The system is deployed in over 360 hospitals.",
+      source: "FDA 510(k) summary K213155",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213155.pdf"
+  },
+  evaluationData: {
+      results: "Cervical CTV DSC 0.88; 96-100% clinically viable scores for rectal CTV/GTV delineation.",
+      sites: 6,
+      sourceUrl: "https://doi.org/10.3389/fonc.2021.702270",
+      source: "Frontiers in Oncology 2021 (DOI: 10.3389/fonc.2021.702270)",
+      studyDesign: "Multicenter Blinded Randomized Controlled Validation",
+      primaryEndpoint: "DICE similarity coefficient (DSC)",
+      description: "Cervical cancer CTV auto-segmentation validated across 6 centers with 9 oncologists, and rectal cancer CTV/GTV validation showing 96-100% clinically viable scores. Contours achieved a DSC of 0.88 for cervical CTV and 0.85-0.87 for rectal CTV/GTV."
+  },
   name: "RT-Mind-AI",
   market: {
     availability: "China (primary), international",
@@ -68,8 +84,8 @@ export const RTMindAI: ProductDetails = {
     "FDA 510(k) cleared",
     "Support for multiple anatomical sites"
   ],
-  lastRevised: "2026-06-01",
-  lastUpdated: "2026-06-01",
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
   releaseDate: "2022-03-25",
   certification: "FDA/NMPA",
   evidenceRigor: "E2",

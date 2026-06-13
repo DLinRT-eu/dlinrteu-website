@@ -3,6 +3,21 @@ import { ProductDetails } from "@/types/productDetails";
 export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
   {
     id: "manteia-mozi",
+    trainingData: {
+        description: "The MOZI TPS uses deep learning-driven plan optimization and auto-planning models validated on standard protocols.",
+        disclosureLevel: "minimal",
+        source: "FDA 510(k) summary K223724",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf"
+    },
+    evaluationData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
+        primaryEndpoint: "Not specified",
+        description: "Validation included end-to-end testing (simulation CT, registration, contouring, and dose calculation) for 18 patients and auto-contouring validation for 187 patients across several anatomies.",
+        source: "FDA 510(k) summary K223724",
+        results: "Not publicly disclosed",
+        datasetSize: "205 patients (187 for auto-contouring, 18 for end-to-end testing)",
+        studyDesign: "Software V&V (FDA 510(k))"
+    },
     name: "MOZI TPS",
     company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
@@ -75,8 +90,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K223724), manufacturer official website",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [

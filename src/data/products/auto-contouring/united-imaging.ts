@@ -3,6 +3,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-urt-auto-contouring",
+    trainingData: {
+        disclosureLevel: "none",
+        description: "Not publicly disclosed. The vendor has not published a model card or training-data description for the integrated auto-contouring module.",
+        sourceUrl: "https://eu.united-imaging.com/en/product-service/products/rt",
+        source: "Vendor press release (ESTRO 2026) and company website"
+    },
+    evaluationData: {
+        sourceUrl: "https://www.prnewswire.com/news-releases/united-imaging-unveils-its-full-radiotherapy-portfolio-at-estro-2026-highlighting-the-ce-marked-urt-linac-506c-302773402.html",
+        description: "Vendor reports that the integrated AI module provides expert-level segmentation of OARs and tumor sites in seconds, claiming up to a ~90% reduction in contouring time.",
+        studyDesign: "Vendor-reported performance claims",
+        results: "Up to ~90% reduction in contouring time (vendor claim)",
+        primaryEndpoint: "Time savings (contouring time reduction)",
+        source: "United Imaging ESTRO 2026 Press Release"
+    },
     name: "uRT Auto-Contouring",
     company: "United Imaging",
     category: "Auto-Contouring",
@@ -104,8 +118,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         link: "https://eu.united-imaging.com/en/product-service/products/rt"
       }
     ],
-    lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Vendor press release (ESTRO 2026) and company website"
   }
 ];

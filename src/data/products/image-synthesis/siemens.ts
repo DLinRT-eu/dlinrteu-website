@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-syngo-ct",
+    trainingData: {
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232799.pdf",
+        disclosureLevel: "minimal",
+        description: "The software uses multiple pre-defined MR acquisitions to generate synthetic CT images for adult patients. Training involves datasets for specific anatomical regions including Brain and Pelvis.",
+        source: "FDA 510(k) summary K232799"
+    },
+    evaluationData: {
+        studyDesign: "Software V&V (FDA 510(k)) and single-center clinical validations",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232799.pdf",
+        source: "FDA 510(k) summary K232799",
+        description: "Synthetic CT generation for brain and pelvic cancer patients, demonstrating technical efficacy and clinical utility for radiotherapy planning. Peer-reviewed literature (e.g., Aljaafari et al. 2025) and single-center validations support its use.",
+        results: "Technical efficacy demonstrated for brain and pelvic synthetic CT generation.",
+        primaryEndpoint: "Not specified"
+    },
     name: "syngo.via RT Image Suite",
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com",
@@ -58,8 +72,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     version: "VB80",
     releaseDate: "2024-09-20",
-    lastUpdated: "2026-03-24",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "Company website",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",

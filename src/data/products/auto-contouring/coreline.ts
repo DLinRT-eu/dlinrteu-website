@@ -4,6 +4,20 @@ import { standardizeProduct } from "@/utils/productDataUtils";
 // Define the standardized product data first
 const rawProduct: ProductDetails = {
   id: "coreline-aview-rt-acs",
+  trainingData: {
+      disclosureLevel: "minimal",
+      source: "FDA 510(k) summary K200714",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf",
+      scannerModels: ["CT"]
+  },
+  evaluationData: {
+      primaryEndpoint: "Not specified",
+      source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.01.001)",
+      results: "Not publicly disclosed",
+      studyDesign: "Retrospective large-scale clinical implementation study",
+      sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.01.001",
+      description: "Independent evaluation of breast RT planning across 2,000 cases and validation of automated segmentation for target volumes in postoperative breast cancer."
+  },
   name: "Aview RT ACS",
   company: "Coreline Soft Co",
   companyUrl: "https://www.corelinesoft.com/en/",
@@ -64,8 +78,8 @@ const rawProduct: ProductDetails = {
   },
   version: "4.0",
   releaseDate: "2025-08-20",
-  lastUpdated: "2026-02-23",
-  lastRevised: "2026-05-30",
+  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-13",
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",

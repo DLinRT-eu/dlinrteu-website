@@ -4,6 +4,20 @@ import { ProductDetails } from "@/types/productDetails";
 export const PYMEDIX_PRODUCTS: ProductDetails[] = [
   {
     id: "pymedix-registration",
+    trainingData: {
+        source: "FDA 510(k) summary K233572",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
+        disclosureLevel: "minimal",
+        description: "Not publicly disclosed. Training information is not specified in the regulatory summary or vendor white paper."
+    },
+    evaluationData: {
+        primaryEndpoint: "Not specified",
+        description: "Software validation and verification for FDA 510(k) clearance K233572 for multi-modal registration and fusion of DICOM medical images. Vendor brochures describes the tool as a fully automatic 3D deformable image registration approach.",
+        results: "Not publicly disclosed",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K233572"
+    },
     name: "Autofuse",
     company: "PyMedix",
     companyUrl: "https://pymedix.com/",
@@ -95,8 +109,8 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     ],
     version: "2.1",
     releaseDate: "2023-08-15",
-    lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K233572), company website. Version 2.1 retained from prior revision — vendor does not publicly publish a numeric version."
   }
 ];
