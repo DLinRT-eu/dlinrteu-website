@@ -221,6 +221,26 @@ export interface ProductDetails extends Product {
     sourceUrl?: string;
   };
 
+  // Per-category evidence overrides for multi-category products.
+  // Keys are category names from `category` / `secondaryCategories[]`
+  // (e.g. "Image Synthesis", "Auto-Contouring"). Each block overrides the
+  // top-level fields when displaying that category's evidence/training/
+  // evaluation. Top-level values remain the default / aggregate.
+  categoryEvidence?: Partial<Record<string, {
+    usesAI?: boolean;
+    trainingData?: ProductDetails['trainingData'];
+    evaluationData?: ProductDetails['evaluationData'];
+    evidence?: ProductDetails['evidence'];
+    limitations?: string[];
+    evidenceRigor?: ProductDetails['evidenceRigor'];
+    evidenceRigorNotes?: string;
+    clinicalImpact?: ProductDetails['clinicalImpact'];
+    clinicalImpactNotes?: string;
+    adoptionReadiness?: ProductDetails['adoptionReadiness'];
+    adoptionReadinessNotes?: string;
+    notes?: string;
+  }>>;
+
   // Field Safety Corrective Actions / Recalls
   safetyCorrectiveActions?: Array<{
     type: 'recall' | 'FSCA' | 'advisory' | 'software-update';
