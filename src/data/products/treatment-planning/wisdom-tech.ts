@@ -17,6 +17,28 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
         primaryEndpoint: "Not specified",
         studyDesign: "Not publicly disclosed"
     },
+    categoryEvidence: {
+      "Treatment Planning": {
+        usesAI: true,
+        notes: "DeepPlan's DeepOPT optimisation is the AI/ML component for treatment planning. NMPA-cleared in China; no peer-reviewed validation located.",
+        evidenceRigor: "E0",
+        clinicalImpact: "I0",
+      },
+      "Auto-Contouring": {
+        usesAI: true,
+        notes: "Auto-delineation in DeepPlan is delivered by the vendor's sister product DeepContour (FDA K232928). Module-specific evidence sits with DeepContour rather than DeepPlan.",
+        evaluationData: {
+          studyDesign: "Software V&V (FDA 510(k) K232928 for DeepContour)",
+          primaryEndpoint: "Not publicly disclosed",
+          results: "Not publicly disclosed",
+          description: "Auto-contouring inside DeepPlan reuses the DeepContour engine (FDA K232928). No DeepPlan-specific contouring validation publication located.",
+          source: "FDA 510(k) K232928 (DeepContour)",
+          sourceUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K232928",
+        },
+        evidenceRigor: "E0",
+        clinicalImpact: "I0",
+      },
+    },
     name: "DeepPlan",
     company: "Wisdom Tech",
     companyUrl: "http://www.wisdom-tech.online/",

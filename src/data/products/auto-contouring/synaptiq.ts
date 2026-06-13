@@ -16,6 +16,29 @@ export const MediqRT: ProductDetails = {
       primaryEndpoint: "Not specified",
       sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935"
   },
+  categoryEvidence: {
+    "Auto-Contouring": {
+      usesAI: true,
+      notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy.",
+      evidenceRigor: "E1",
+      clinicalImpact: "I1",
+    },
+    "Registration": {
+      usesAI: true,
+      notes: "Mediq RT advertises multi-modality registration for CT/MRI/PET-CT, but no peer-reviewed validation of the registration component specifically was located.",
+      evaluationData: {
+        studyDesign: "Not publicly disclosed (registration module)",
+        primaryEndpoint: "Registration accuracy (not reported)",
+        results: "Not publicly disclosed",
+        description: "Multi-modality image registration is listed as a feature of Mediq RT but no standalone validation publication has been located for this module.",
+        source: "Vendor product page",
+        sourceUrl: "https://synaptiq.io/product/",
+      },
+      evidenceRigor: "E0",
+      evidenceRigorNotes: "No peer-reviewed publication located for the registration module. PubMed searched 2026-06-13.",
+      clinicalImpact: "I0",
+    },
+  },
   name: "Mediq RT",
   market: {
     onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",

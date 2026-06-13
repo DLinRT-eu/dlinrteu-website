@@ -174,9 +174,42 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       source: "FDA 510(k) summary (K232923) and published literature",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232923.pdf"
     },
+    categoryEvidence: {
+      "Auto-Contouring": {
+        usesAI: true,
+        notes: "Ethos AI Segmentation is the deep-learning OAR contouring module of the Ethos adaptive workflow. Strongest evidence: Finnegan et al. JACMP 2025 (223 patients, 45 structures across 4 sites).",
+        evaluationData: {
+          studyDesign: "Independent geometric/dosimetric evaluation across multiple anatomical sites",
+          primaryEndpoint: "DICE, surface DSC, and dosimetric impact across 45 structures",
+          results: "Finnegan 2025: clinically acceptable contours across pelvis/abdomen/thorax/H&N in 223 patients; FDA 510(k): 80% of contours required minor or no edits.",
+          description: "Auto-contouring-specific evidence centred on Finnegan et al. JACMP 2025 (multi-site, 45 structures) and the K232923 FDA validation.",
+          source: "Finnegan et al. J Appl Clin Med Phys 2025; FDA 510(k) K232923",
+          sourceUrl: "https://doi.org/10.1002/acm2.70067",
+        },
+        evidenceRigor: "E2",
+        clinicalImpact: "I2",
+        clinicalImpactNotes: "Geometric + dosimetric efficacy across multiple sites; enables daily online adaptation at the console.",
+      },
+      "Treatment Planning": {
+        usesAI: true,
+        notes: "Ethos Treatment Planning consumes the AI-generated contours to produce daily adapted plans within a 15-minute workflow. Planning-specific evidence: Byrne H&N feasibility (TIPSRO 2023), Preziosi prostate adaptive workflow (Radiat Oncol 2025), Icon case study and ongoing NCT06116019.",
+        evaluationData: {
+          studyDesign: "Feasibility, observational and ongoing prospective evidence",
+          primaryEndpoint: "Plan quality and on-line adaptive feasibility",
+          results: "Byrne 2023: Ethos-generated H&N plans deemed clinically acceptable; Preziosi 2025: dosimetric advantage of daily adapted prostate plans; NCT06116019 ongoing.",
+          description: "Planning-arm evidence is feasibility-level and accumulating toward outcome data via NCT06116019.",
+          source: "Byrne et al. TIPSRO 2023; Preziosi et al. Radiat Oncol 2025; NCT06116019",
+          sourceUrl: "https://doi.org/10.1016/j.tipsro.2023.100216",
+        },
+        evidenceRigor: "E2",
+        evidenceRigorNotes: "Multiple vendor-independent feasibility publications plus an ongoing prospective trial; no outcome data yet.",
+        clinicalImpact: "I2",
+        clinicalImpactNotes: "Demonstrated dosimetric benefits of online adaptation in prostate, H&N and other sites; outcome data pending.",
+      },
+    },
     releaseDate: "2024-04-30",
-    lastUpdated: "2026-06-06",
-    lastRevised: "2026-06-06",
+    lastUpdated: "2026-06-13",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
   }
 ];
