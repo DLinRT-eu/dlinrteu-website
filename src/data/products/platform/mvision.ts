@@ -161,6 +161,30 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
+    categoryEvidence: {
+      "Platform": {
+        usesAI: true,
+        notes: "Aggregate platform: integrates Contour+, Image+, Adapt+ and Dose+ modules under a single CE-marked (IIa) workspace. Platform-level evidence is regulatory (CE IIa, Oct 2025) + Dose+ FDA K250064.",
+      },
+      "Image Synthesis": {
+        usesAI: true,
+        notes: "Image+ module — brain MR T1 sCT, pelvis MR T2 sCT, CBCT→sCT, and VNC from contrast-enhanced CT. Validation is internal/vendor-reported; no peer-reviewed module-specific publication located.",
+        evidenceRigor: "E0",
+        clinicalImpact: "I0",
+      },
+      "Registration": {
+        usesAI: true,
+        notes: "Adapt+ module — rigid, conventional and deep-learning deformable registration for contour propagation. No standalone peer-reviewed validation located.",
+        evidenceRigor: "E0",
+        clinicalImpact: "I0",
+      },
+      "Treatment Planning": {
+        usesAI: true,
+        notes: "Dose+ module — patient-specific 3D dose prediction, FDA-cleared via K250064. Evidence currently vendor-reported; outcome-level validation pending.",
+        evidenceRigor: "E1",
+        clinicalImpact: "I1",
+      },
+    },
     lastUpdated: "2026-02-23",
     lastRevised: "2026-05-20",
     evidence: [
