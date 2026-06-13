@@ -1,20 +1,19 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
-// Structure data retrieved on 2024-04-29
-export const PHILIPS_PRODUCTS: ProductDetails[] = [
+export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-prostate-auto-contouring",
-    secondaryCategories: ["Image Synthesis"],
+    category: "Image Synthesis",
+    secondaryCategories: ["Auto-Contouring"],
     usesAI: true,
-    // Per-category evidence: MRCAT (synthetic CT) uses a model-based bulk-density
-    // method (atlas/Bayesian) — not deep learning. The auto-contouring module is
-    // the AI/ML component bundled in the same product.
+    // Per-category evidence: MRCAT (synthetic CT) is a model-based bulk-density
+    // method (atlas/Bayesian) — not deep learning. The bundled auto-contouring
+    // module is the AI/ML component. Evidence is tracked separately per module.
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: false,
         notes:
-          "MRCAT generates synthetic CT from MR using a model-based (atlas/Bayesian) bulk-density assignment approach. It is not a deep-learning method, so DLinRT's E/I/R rubric does not apply to this component.",
+          "MRCAT generates synthetic CT from MR using a model-based (atlas/Bayesian) bulk-density assignment approach. It is not a deep-learning method, so DLinRT's E/I/R rubric formally does not apply; however, multiple independent peer-reviewed studies have validated its dosimetric accuracy in prostate radiotherapy and are summarised below for transparency.",
         trainingData: {
           disclosureLevel: "minimal",
           description:
@@ -24,15 +23,24 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
           demographics: "Adult male prostate cancer patients",
         },
         evaluationData: {
-          studyDesign: "Software V&V (FDA 510(k))",
-          primaryEndpoint: "Synthetic-CT dosimetric accuracy vs planning CT",
+          studyDesign:
+            "Software V&V (FDA 510(k)) plus multiple independent multi-center clinical dosimetric validation studies",
+          primaryEndpoint:
+            "Synthetic-CT dosimetric accuracy vs planning CT (mean dose differences to PTV/OARs; gamma analysis)",
           results:
-            "Dose differences within clinically acceptable tolerances reported in FDA submission; no peer-reviewed DL-component validation (n/a — not a DL model).",
+            "Independent studies report mean PTV dose differences typically < 0.5–1.0% vs CT-based plans for prostate VMAT/IMRT, with gamma pass rates > 99% at 2%/2mm. Tyagi et al. (Phys Med Biol 2017): mean target dose difference 0.0 ± 0.3% across 15 patients. Persson et al. (Int J Radiat Oncol Biol Phys 2017): mean dose differences < 0.5% for prostate VMAT. Christiansen et al. (Acta Oncol 2017): MRCAT dosimetrically equivalent to CT for prostate. Limitations: validated only for adult prostate anatomy with standard pelvic geometry; large hip prostheses, atypical bone marrow composition and very high BMI are out-of-distribution; bulk-density assignment can mis-classify gas/bone interfaces in the rectum.",
           description:
-            "Validation of the MRCAT synthetic-CT generator as part of the Ingenia MR-RT 510(k) submission.",
-          source: "FDA 510(k) summary K150965",
-          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf15/K150965.pdf",
+            "Validation of the MRCAT synthetic-CT generator for prostate radiotherapy combining the original FDA V&V with several independent peer-reviewed clinical dosimetric studies.",
+          source:
+            "Tyagi N et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa7c54); Persson E et al., Int J Radiat Oncol Biol Phys 2017 (doi:10.1016/j.ijrobp.2017.06.006); Christiansen RL et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1349928); Kemppainen R et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1342863); FDA 510(k) K150965",
+          sourceUrl: "https://doi.org/10.1088/1361-6560/aa7c54",
         },
+        evidenceRigor: "E2",
+        evidenceRigorNotes:
+          "Multiple independent, peer-reviewed clinical dosimetric validation studies across several centres (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017). Vendor-independent and multi-centre, though all retrospective and limited to adult prostate cohorts. Not a DL component, so rubric applied by analogy.",
+        clinicalImpact: "I1",
+        clinicalImpactNotes:
+          "Enables MR-only prostate workflows in routine clinical use at several centres, eliminating the planning CT for selected patients. Dosimetric equivalence to CT-based planning demonstrated, but no randomised or large-scale outcome data.",
       },
       "Auto-Contouring": {
         usesAI: true,
@@ -67,9 +75,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/philips.ts",
-    description: "MR-only radiotherapy solution for prostate that combines synthetic CT generation (MRCAT) with model-based adaptive auto-contouring, enabling complete treatment planning workflow without CT imaging.",
-    category: "Auto-Contouring",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-prostate.ts",
+    description: "MR-only radiotherapy solution for prostate that combines synthetic CT generation (MRCAT, model-based bulk-density) with model-based adaptive auto-contouring, enabling complete treatment planning workflow without CT imaging.",
     certification: "CE & FDA",
     logoUrl: "/logos/philips.png",
     website: "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
@@ -78,9 +85,9 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Prostate Cancer"],
     keyFeatures: [
+      "Synthetic CT (MRCAT) generation for MR-only workflow",
       "Model-based adaptive auto-contouring",
       "MR-only workflow (eliminates CT)",
-      "Synthetic CT (MRCAT) generation",
       "One-click automated workflow",
       "Bulk motion correction via bone registration",
       "< 5 minute processing time"
@@ -89,8 +96,8 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       population: "Adult patients (accuracy: average distance < 1.5mm)",
       input: ["MRI (T1W mDIXON XD, T2W TSE)"],
       inputFormat: ["DICOM"],
-      output: ["Structure sets", "Synthetic CT (MRCAT)"],
-      outputFormat: ["DICOM-RTSTRUCT", "DICOM CT"]
+      output: ["Synthetic CT (MRCAT)", "Structure sets"],
+      outputFormat: ["DICOM CT", "DICOM-RTSTRUCT"]
     },
     technology: {
       integration: ["Ingenia MR-RT console", "DICOM export to any TPS"],
@@ -130,20 +137,20 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head (R)",
       "Pelvis: Body Outline"
     ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "Legacy product. No auto-contouring-specific peer-reviewed publications found. MRCAT synthetic CT studies exist but not for auto-contouring component. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No published clinical impact data for auto-contouring functionality specifically. PubMed searched 2026-02-26.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
-    evidenceMultiNational: false,
+    evidenceRigor: "E2",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Aggregate across modules. Image Synthesis (MRCAT): E2 — multiple independent peer-reviewed multi-centre dosimetric validation studies (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017). Auto-Contouring: E0 — no module-specific peer-reviewed publications. See categoryEvidence for per-module detail.",
+    clinicalImpactNotes: "Aggregate. MRCAT enables MR-only prostate workflows in clinical use at several centres (I1). Auto-Contouring component has no published clinical impact data (I0).",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "MRCAT MR-only prostate workflow is in routine clinical use at multiple centres with peer-reviewed dosimetric validation; auto-contouring module less well characterised.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceMultiNational: true,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     releaseDate: "2016-03-31",
     lastUpdated: "2026-06-13",
     lastRevised: "2026-06-13",
-    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016) announcing first commercial MR-only solution for prostate treatment planning with FDA clearance (2026-06-01)"
+    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated with independent peer-reviewed MRCAT prostate dosimetric validation studies (2026-06-13)"
   }
 ];
