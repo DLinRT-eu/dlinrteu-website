@@ -96,3 +96,6 @@ export const Jazz: ProductDetails = {
   evidenceVendorIndependent: false,
   evidenceExternalValidation: false
 };
+
+export const AI_MEDICAL_PRODUCTS: ProductDetails[] = [Jazz];
+
