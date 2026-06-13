@@ -261,8 +261,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
       population: "Adult patients requiring radiotherapy treatment planning",
       input: ["DICOM CT images", "DICOM MRI images"],
       inputFormat: ["DICOM"],
-      output: ["Automated contours", "DICOM RT Structure Set"],
-      outputFormat: ["DICOM RT-SS"]
+      output: ["Automated contours", "DICOM-RTSTRUCT"],
+      outputFormat: ["DICOM-RTSTRUCT"]
     },
     // Technology Integration
     technology: {
