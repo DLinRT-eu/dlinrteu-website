@@ -63,6 +63,7 @@ export const PHILIPS_PRODUCTS: ProductDetails[] = [
           "No published clinical impact data for the auto-contouring functionality specifically.",
       },
     },
+    name: "MRCAT Prostate + Auto-Contouring",
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
