@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import { PHILIPS_MRCAT_BRAIN_PRODUCTS } from "./philips-mrcat-brain";
 import { PHILIPS_MRCAT_PELVIS_PRODUCTS } from "./philips-mrcat-pelvis";
 import { PHILIPS_MRCAT_HEAD_NECK_PRODUCTS } from "./philips-mrcat-head-neck";
+import { PHILIPS_MRCAT_PROSTATE_PRODUCTS } from "./philips-mrcat-prostate";
 import { SIEMENS_PRODUCTS } from "./siemens";
 import { SPECTRONIC_PRODUCTS } from "./spectronic";
 import { SYNTHETICMR_PRODUCTS } from "./syntheticmr";
