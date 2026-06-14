@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+// @ts-expect-error -- plain .mjs script without types
 import { generateNewsJson } from "./scripts/generate-news-json.mjs";
 
 // Regenerates public/news.json from src/data/news.ts so the RSS edge function
