@@ -118,7 +118,7 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
         <div className="w-24 h-24 rounded-md overflow-hidden bg-background border border-border">
           <img 
             src={logoSrc} 
-            alt={displayProduct.name} 
+            alt={`${displayProduct.company} ${displayProduct.name} product logo`} 
             className="w-full h-full object-contain p-2"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
