@@ -23,7 +23,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     company: "GE HealthCare",
     category: "Reconstruction",
     companyUrl: "https://www.gehealthcare.com",
-    productUrl: "https://www.gehealthcare.com/en/products/magnetic-resonance-imaging/applications/air-recon-dl",
+    productUrl: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts",
     description: "Deep learning-based MR image reconstruction technology that processes raw MR data to reduce noise and ringing/truncation artifacts, improve image sharpness, and support shorter MRI scan times on compatible GE MR systems.",
     features: [
@@ -42,12 +42,13 @@ export const GE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2020-04-10",
     version: "Not publicly disclosed",
     keyFeatures: [
-      "Deep learning-based MR image reconstruction from raw MR data",
+      "Deep learning-based MR image reconstruction from raw MR k-space data",
       "Noise and ringing/truncation artifact reduction",
       "Improved signal-to-noise ratio and image sharpness",
       "Vendor-reported scan-time reduction of up to 50% depending on protocol and clinical use case",
       "FDA-cleared use across all anatomies and patients of all ages on compatible GE 1.5T, 3.0T, and 7.0T MR systems",
-      "FDA-cleared AIR Recon DL with Phase Correction enhancement for selected applications that create and combine multiple intermediate images, such as diffusion-weighted imaging"
+      "FDA-cleared AIR Recon DL with Phase Correction enhancement for selected applications that create and combine multiple intermediate images, such as diffusion-weighted imaging",
+      "Compatible with PROPELLER motion-insensitive sequences and 3D Cartesian acquisitions"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
@@ -72,7 +73,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         status: "ce_marked",
         class: "Not publicly verified",
         type: "Medical Device",
-        regulation: "Public GE HealthCare material states AIR Recon DL was CE marked for 3T systems as of 2021. A public CE/MDR certificate, device class, and complete configuration scope were not identified during this review.",
+        regulation: "Public GE HealthCare material states AIR Recon DL was CE marked for 3T systems as of 2021. CE Mark for 7T was pending at time of FDA clearance for that platform. A public CE/MDR certificate, device class, and complete configuration scope were not identified during this review.",
         notes: "Regional disclaimers indicate that expanded features such as 3D, PROPELLER, Phase Correction, and other newer sequence-specific options may not be CE marked or available for sale in all regions."
       },
       fda: {
@@ -83,16 +84,17 @@ export const GE_PRODUCTS: ProductDetails[] = [
         productCode: "LNH",
         type: "510(k)",
         decisionDate: "2020-04-10; 2022-06-08; 2025-12-23",
-        notes: "K193282 is the initial FDA clearance for SIGNA Premier including the AIR Recon DL feature. K213717 expanded AIR Recon DL compatibility to PROPELLER and selected 3D Cartesian acquisitions. K252379 added AIR Recon DL with Phase Correction, including a deep-learning phase-correction enhancement for applications that create and combine multiple intermediate images, such as diffusion-weighted imaging."
+        notes: "K193282 (product codes LNH, LNI, MOS) is the initial FDA clearance for SIGNA Premier including the AIR Recon DL feature. K213717 expanded AIR Recon DL compatibility to PROPELLER and selected 3D Cartesian acquisitions. K252379 (product code LNH) added AIR Recon DL with Phase Correction, including a deep-learning phase-correction enhancement for applications that create and combine multiple intermediate images, such as diffusion-weighted imaging."
       },
-      intendedUseStatement: "AIR Recon DL is a deep learning-based reconstruction technique available for use on GE HealthCare 1.5T, 3.0T, and 7.0T MR systems. AIR Recon DL reduces noise and ringing/truncation artifacts in MR images, which can be used to reduce scan time and improve image quality. AIR Recon DL is intended for use with all anatomies and for patients of all ages. Depending on the anatomy of interest being imaged, contrast agents may be used. (Source: FDA 510(k) K252379 Summary, accessed 2026-06-10)"
+      intendedUseStatement: "AIR Recon DL is a deep learning based reconstruction technique that is available for use on GE HealthCare 1.5T, 3.0T, and 7.0T MR systems. AIR Recon DL reduces noise and ringing (truncation artifacts) in MR images, which can be used to reduce scan time and improve image quality. AIR Recon DL is intended for use with all anatomies and for patients of all ages. Depending on the anatomy of interest being imaged, contrast agents may be used. (Source: FDA 510(k) K252379 Summary, accessed 2026-06-14)"
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: [
         "Integrated in compatible GE MR systems",
         "Upgrade/software option for compatible systems"
-      ]
+      ],
+      deploymentScale: "At least 3.5 million patients scanned globally as of September 2022; available on the vast majority of GE HealthCare 1.5T, 3.0T, and 7.0T SIGNA MRI systems via MR 30 software platform"
     },
     evidenceRigor: "E3",
     clinicalImpact: "I2",
@@ -108,7 +110,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "FDA 510(k) Database Entry",
-        description: "FDA 510(k) clearance K193282 for SIGNA Premier including AIR Recon DL feature; decision date 2020-04-10.",
+        description: "FDA 510(k) clearance K193282 for SIGNA Premier including AIR Recon DL feature; decision date 2020-04-10; product codes LNH, LNI, MOS.",
         link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K193282"
       },
       {
@@ -139,7 +141,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
       {
         type: "Official Product Page",
         description: "GE HealthCare AIR Recon DL product page describing deep learning MR reconstruction and vendor-reported scan-time reduction of up to 50%.",
-        link: "https://www.gehealthcare.com/en/products/magnetic-resonance-imaging/applications/air-recon-dl"
+        link: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl"
       },
       {
         type: "Official CE/Market Availability Statement",
@@ -191,12 +193,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Performance depends on MR scanner platform, coil configuration, acquisition sequence, anatomy, and reconstruction strength",
       "Vendor-reported scan-time reduction should be locally validated for each clinical protocol before routine use",
       "Quantitative MRI applications may require sequence-specific validation after reconstruction changes, especially for diffusion/ADC and radiomics workflows",
-      "Public CE/MDR certificate and device-class details were not verified as of this review; European availability and configuration scope may be restricted by region",
+      "CE Mark confirmed for 3T configurations; CE Mark for 7T was pending at time of initial 7T FDA clearance; public MDR certificate and device-class details were not verified as of this review",
       "Radiotherapy-specific use cases such as MR simulation, synthetic CT workflows, target/OAR delineation support, or quantitative adaptive workflows require local validation"
     ],
     clinicalEvidence: "FDA summaries and independent peer-reviewed studies support improved MR image quality and scan-time reduction feasibility across multiple anatomies and clinical applications. Clinical implementation should include local optimization and validation for each protocol and scanner configuration.",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "FDA 510(k) database, GE HealthCare product documentation, CE-marking statements, and peer-reviewed literature"
   }
 ];
