@@ -1,4 +1,3 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
 export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
@@ -30,15 +29,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     anatomicalLocation: ["Brain", "Body"],
     modality: "MRI",
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Cancer"],
-    releaseDate: "2019-08-19",
+    releaseDate: "2019-09-16",
     version: "2.3.x",
     keyFeatures: [
       "Deep learning MRI enhancement",
-      "Enables 2-4x faster scanning",
+      "Enables up to 80% faster scanning",
       "Improves SNR and image sharpness",
       "Works with multiple contrasts",
       "Vendor-neutral compatibility",
-      "Supports all body parts MRI"
+      "Supports all body parts MRI",
+      "Integration with Siemens MAGNETOM scanners via Open Recon"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
@@ -73,12 +73,14 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2019",
-      distributionChannels: ["Direct sales", "Distribution partners"]
+      distributionChannels: ["Direct sales", "Distribution partners"],
+      deploymentScale: "1,000+ scanners deployed worldwide as of 2025",
+      recognitions: ["TIME World's Top HealthTech Companies 2025", "CB Insights GenAI 50", "CB Insights Top AI 100"]
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
     evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SubtleMR. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling 2-4x faster scanning.",
+    clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling up to 80% faster scanning.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -99,8 +101,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
@@ -113,7 +115,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         description: "Deep learning-based PET image enhancement trained to perform noise reduction and increase image sharpness across multiple radiotracers."
     },
     evaluationData: {
-        description: "Vendor-independent validation study (Katsari et al. 2021) and multi-tracer validation (Liang et al. 2023) demonstrating \"diagnostic equivalence between standard dose and low-dose/fast-scan protocols\" with SubtlePET enhancement.",
+        description: "Vendor-independent validation study (Katsari et al. 2021) and multi-tracer validation (Liang et al. 2023) demonstrating diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement.",
         sourceUrl: "https://doi.org/10.1007/s00259-021-05478-x",
         primaryEndpoint: "Diagnostic equivalence",
         studyDesign: "Low-dose PET validation study (vendor-independent)",
@@ -141,7 +143,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Improved signal-to-noise ratio",
       "Enhanced lesion detectability",
       "Compatible with all major PET/CT scanners",
-      "Supports FDG, amyloid, 18F-DOPA, 18F-DCFPyL, Ga-68 Dotatate, Ga-68 PSMA radiotracers"
+      "FDA cleared for FDG and amyloid; CE marked for additional tracers (18F-DOPA, 18F-DCFPyL, Ga-68 Dotatate, Ga-68 PSMA, 18F-Choline, 18F-Fluciclovine)"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
@@ -168,8 +170,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K182336, K211964",
-        regulationNumber: "21 CFR 892.1200",
-        productCode: "KPS, LLZ",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "LLZ",
         decisionDate: "2021-09-28"
       },
       intendedUseStatement: "SubtlePET is an image processing software that can be used for image enhancement in PET images. It can be used for noise reduction and increasing image sharpness for PET images acquired using FDG, amyloid, 18F-DOPA, 18F-DCFPyL, Ga-68 Dotatate, and Ga-68 PSMA radiotracers."
@@ -198,8 +200,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "FDA 510(k) database (K182336, K211964) and company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
@@ -215,7 +217,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         primaryEndpoint: "Not specified",
         results: "Not publicly disclosed",
         description: "FDA 510(k) validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
-        source: "FDA 510(k) summary K-number pending (announced 2026-05-27)"
+        source: "FDA 510(k) — K-number pending public database publication (cleared 2026-05-27)"
     },
     name: "SubtleHD(PET)",
     company: "Subtle Medical",
@@ -283,8 +285,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
     clinicalEvidence: "FDA 510(k) clearance based on validation across a broad range of accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "PRNewswire 2026-05-27; Diagnostic Imaging 2026-05-27; FDA 510(k) K-number pending public database publication."
   },
   {
@@ -367,8 +369,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release"
   },
   {
@@ -392,7 +394,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     company: "Subtle Medical",
     category: "Image Enhancement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
-    description: "AI-powered general-purpose MRI enhancement software for noise reduction and image sharpness improvement across all body parts.",
+    description: "AI-powered general-purpose MRI enhancement software for noise reduction and image sharpness improvement across all body parts. Part of the Subtle-ELITE suite alongside SubtleSYNTH and SubtleALIGN.",
     features: ["Deep learning enhancement", "Noise reduction", "All body parts", "Image sharpness"],
     certification: "FDA Cleared",
     logoUrl: "/logos/SubtleMedical.jpg",
@@ -409,6 +411,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Supports all body parts MRI",
       "Vendor-neutral compatibility",
       "General-purpose MRI enhancement",
+      "Up to 80% scan time reduction in certain sequences (as part of Subtle-ELITE suite)",
       "Improved diagnostic image quality"
     ],
     technicalSpecifications: {
@@ -452,8 +455,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "FDA 510(k) database (K243250) and company website"
   },
   {
@@ -535,8 +538,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-14",
+    lastRevised: "2026-06-14",
     source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120."
   }
 ];
