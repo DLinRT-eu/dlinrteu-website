@@ -404,12 +404,12 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy",
+        description: "Liu et al. AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy (PubMed 36773828). Direct evaluation including EFAI contours.",
         link: "https://pubmed.ncbi.nlm.nih.gov/36773828/"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Association of radiation dose to cardiac substructures with major ischaemic events following breast cancer radiotherapy",
+        type: "indirect",
+        description: "Cardiac substructures dosimetric outcomes following breast RT (PubMed 37585426). Indirect: clinical outcomes study that may have used EFAI contours; does not validate Seg Pro segmentation accuracy.",
         link: "https://pubmed.ncbi.nlm.nih.gov/37585426/"
       },
       {

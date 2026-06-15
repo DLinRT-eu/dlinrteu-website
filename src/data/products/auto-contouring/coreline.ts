@@ -181,8 +181,8 @@ const rawProduct: ProductDetails = {
       link: "https://pubmed.ncbi.nlm.nih.gov/39308634/"
     },
     {
-      type: "Regulatory Clearance",
-      description: "FDA 510(k) clearance K200714 - AVIEW platform RT auto-contouring module",
+      type: "indirect",
+      description: "FDA 510(k) clearance K200714 - AVIEW base pulmonary platform. Indirect: Aview RT ACS runs on this cleared platform but K200714 itself does not validate the RT auto-contouring module.",
       link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
     }
   ],

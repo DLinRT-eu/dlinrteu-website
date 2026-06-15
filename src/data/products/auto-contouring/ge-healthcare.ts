@@ -102,8 +102,8 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
       },
       {
-        type: "Related Regulatory Clearance",
-        description: "FDA 510(k) clearance K242925 decision date April 1, 2025 for MR Contour DL - related MR-based product using Auto Segmentation (K230082) as predicate",
+        type: "indirect",
+        description: "FDA 510(k) clearance K242925 (April 1, 2025) for MR Contour DL — separate MR-based GE product that uses Auto Segmentation (K230082) as predicate. Indirect: does not directly evaluate the CT Auto Segmentation module documented here.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
       },
       {

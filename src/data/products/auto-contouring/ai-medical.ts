@@ -32,7 +32,7 @@ export const Jazz: ProductDetails = {
   evidence: [
     {
       doi: "10.1007/s00234-024-03293-3",
-      link: "10.1007/s00234-024-03293-3",
+      link: "https://doi.org/10.1007/s00234-024-03293-3",
       type: "Clinical Study",
       year: "2024",
       title: "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software",

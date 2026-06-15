@@ -93,13 +93,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Stratified SRS assessment of VBrain for brain metastases",
+        description: "Wang et al. Stratified assessment of VBrain auto-segmentation for SRS of brain metastases. Radiat Oncol 2023.",
         link: "https://doi.org/10.1186/s13014-023-02246-z"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Deep learning brain metastases auto-segmentation evaluation",
-        link: "https://doi.org/10.1016/j.ijrobp.2021.03.060"
       }
     ],
     limitations: [

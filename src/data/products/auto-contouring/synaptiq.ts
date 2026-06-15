@@ -65,9 +65,9 @@ export const MediqRT: ProductDetails = {
       description: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy. Physics and Imaging in Radiation Oncology (2026)."
     },
     {
-      link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
+      link: "https://www.estro.org/Congresses/ESTRO-2025",
       type: "conference",
-      description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283."
+      description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283 (abstract DOI pending verification; placeholder DOI removed to avoid misattribution)."
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
@@ -81,8 +81,8 @@ export const MediqRT: ProductDetails = {
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(25)00719-4",
-      type: "conference",
-      description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246."
+      type: "indirect",
+      description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246. Indirect: tracking module rather than Mediq RT contouring."
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(24)03098-6",
