@@ -213,6 +213,13 @@ const App = () => (
                     </ApprovalGate>
                   </ProtectedRoute>
                 } />
+                <Route path="/my-submissions" element={
+                  <ProtectedRoute requireAuth={true}>
+                    <ApprovalGate>
+                      <MySubmissions />
+                    </ApprovalGate>
+                  </ProtectedRoute>
+                } />
                 <Route path="/role-selection" element={
                   <ProtectedRoute requireAuth={true}>
                     <ApprovalGate>
