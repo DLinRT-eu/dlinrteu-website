@@ -48,6 +48,7 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [showAddProductsDialog, setShowAddProductsDialog] = useState(false);
   const [showDeadlineDialog, setShowDeadlineDialog] = useState(false);
+  const [showShuffleDialog, setShowShuffleDialog] = useState(false);
   const [cloning, setCloning] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [cloneData, setCloneData] = useState({
