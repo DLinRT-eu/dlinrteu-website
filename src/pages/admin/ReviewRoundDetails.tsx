@@ -88,6 +88,7 @@ export default function ReviewRoundDetails() {
   const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
+  const [showReminderDialog, setShowReminderDialog] = useState(false);
   
   // Sorting state for assignments table
   const [assignmentSort, setAssignmentSort] = useState<{
