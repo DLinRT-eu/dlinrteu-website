@@ -24,15 +24,15 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         },
         evaluationData: {
           studyDesign:
-            "Software V&V (FDA 510(k)) plus multiple independent multi-center clinical dosimetric validation studies",
+            "Software V&V (FDA 510(k)) plus multiple independent multi-center clinical dosimetric validation studies and vendor V&V disclosed in the Philips IFU appendix (2 hospitals)",
           primaryEndpoint:
-            "Synthetic-CT dosimetric accuracy vs planning CT (mean dose differences to PTV/OARs; gamma analysis)",
+            "Synthetic-CT dosimetric accuracy vs planning CT (mean dose differences to PTV/OARs; gamma analysis 3%/3 mm)",
           results:
-            "Independent studies report mean PTV dose differences typically < 0.5–1.0% vs CT-based plans for prostate VMAT/IMRT, with gamma pass rates > 99% at 2%/2mm. Tyagi et al. (Phys Med Biol 2017): mean target dose difference 0.0 ± 0.3% across 15 patients. Persson et al. (Int J Radiat Oncol Biol Phys 2017): mean dose differences < 0.5% for prostate VMAT. Christiansen et al. (Acta Oncol 2017): MRCAT dosimetrically equivalent to CT for prostate. Limitations: validated only for adult prostate anatomy with standard pelvic geometry; large hip prostheses, atypical bone marrow composition and very high BMI are out-of-distribution; bulk-density assignment can mis-classify gas/bone interfaces in the rectum.",
+            "Independent studies report mean PTV dose differences typically < 0.5–1.0% vs CT-based plans for prostate VMAT/IMRT, with gamma pass rates > 99% at 2%/2mm. Tyagi et al. (Phys Med Biol 2017): mean target dose difference 0.0 ± 0.3% across 15 patients. Persson et al. (Int J Radiat Oncol Biol Phys 2017): mean dose differences < 0.5% for prostate VMAT. Christiansen et al. (Acta Oncol 2017): MRCAT dosimetrically equivalent to CT for prostate. Vendor V&V (Philips Ingenia MR-RT IFU RTgo 5.12 appendix, Tables 15–17, pp. 136–138, RTgo 3.0): 2 hospitals × 62 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.23 ± 0.22% (min/max −0.87/+0.92%); 3%/3 mm gamma pass 100.0 ± 0.01% (median gamma 0.10 ± 0.03). Positioning study: 1 hospital × 9 patients (DRR multi-observer). Limitations: validated only for adult prostate anatomy with standard pelvic geometry; large hip prostheses, atypical bone marrow composition and very high BMI are out-of-distribution; bulk-density assignment can mis-classify gas/bone interfaces in the rectum.",
           description:
-            "Validation of the MRCAT synthetic-CT generator for prostate radiotherapy combining the original FDA V&V with several independent peer-reviewed clinical dosimetric studies.",
+            "Validation of the MRCAT synthetic-CT generator for prostate radiotherapy combining the original FDA V&V, several independent peer-reviewed clinical dosimetric studies, and the vendor V&V disclosed in the Philips IFU appendix (2 hospitals × 62 patients).",
           source:
-            "Tyagi N et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa7c54); Persson E et al., Int J Radiat Oncol Biol Phys 2017 (doi:10.1016/j.ijrobp.2017.06.006); Christiansen RL et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1349928); Kemppainen R et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1342863); FDA 510(k) K150965",
+            "Tyagi N et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa7c54); Persson E et al., Int J Radiat Oncol Biol Phys 2017 (doi:10.1016/j.ijrobp.2017.06.006); Christiansen RL et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1349928); Kemppainen R et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1342863); FDA 510(k) K150965; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
           sourceUrl: "https://doi.org/10.1088/1361-6560/aa7c54",
         },
         evidenceRigor: "E2",

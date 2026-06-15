@@ -1,64 +1,65 @@
-## Finding first — important caveat
+## What the appendix actually discloses (pp. 134–138)
 
-The Philips document you linked is the **Ingenia MR-RT Instructions for Use (RTgo 5.12, doc 3000 113 93922/781, 2024-06)**. I parsed all 4,467 lines.
+Vendor verification & validation (V&V), with data "obtained from clinical partner sites":
 
-It does **not** disclose:
-- number of training or validation patients
-- number of centers / institutions
-- algorithm performance numbers (HU MAE, dose differences, gamma pass rates)
+| Metric | Prostate | Pelvis | Brain | Head & Neck |
+|---|---|---|---|---|
+| Evaluated RTgo version | 3.0 | 4.1 | 4.0 | 5.0 |
+| **Hospitals contributing data (dose)** | **2** | **4** | **3** | **6** |
+| **Patients across all hospitals (dose)** | **62** | **103** | **138** | **85** |
+| (D_MRCAT − D_CT)/D_CT to PTV — Mean ± SD [%] | −0.23 ± 0.22 | −0.31 ± 0.51 | −0.02 ± 0.24 | 0.02 ± 0.27 |
+| Min / Max [%] | −0.87 / +0.92 | −1.71 / +0.46 | +0.97 / +0.82 | +0.82 / +0.97 |
+| Primary gamma criterion | 3%/3 mm | 3%/3 mm | 2%/2 mm | 2%/2 mm |
+| Median gamma | 0.10 (0.03) | 0.15 (0.09) | 0.07 (0.03) | 0.09 (0.02) |
+| % voxels passing gamma | 100 (0.01) | 99.9 (0.64) | 99.9 (0.22) | 99.7 (0.50) |
+| Additional 1%/1 mm gamma — % voxels passing | – | – | 99.0 (2.2) | 97.9 (2.3) |
+| Body-outline matching applied? | No | No | No | Yes |
+| Positioning study — hospitals / patients | 1 / 9 | 1 / 11 | 2 / 138 | 6 / 85 |
+| Setup vehicle | DRR | DRR | DRR + CBCT | DRR + CBCT |
 
-Those numbers live in Philips white papers and peer-reviewed studies (already cited in our `categoryEvidence.evaluationData`), not in this IFU. I will not invent them.
+(Source: Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781, 2024-06, "Performance overview of MRCAT", Tables 14–17, pp. 134–138.)
 
-It **does** disclose, per MRCAT variant, official **indications**, **patient selection criteria / contraindications**, and **operational limitations**. These are exactly the kind of vendor-authoritative limitations we should mirror into each product's `limitations` and `intendedUseStatement`, with the IFU as a public source.
+## Impact on evidence levels (per DLinRT rubric)
 
-## Suggested modifications (per product)
+This is **vendor V&V data**, not independent peer-reviewed evidence, so it does not by itself promote `evidenceRigor`. But it materially improves transparency and changes several attribute flags.
 
-For all four files (`philips-mrcat-brain.ts`, `philips-mrcat-head-neck.ts`, `philips-mrcat-pelvis.ts`, `philips-mrcat-prostate.ts`):
+| Product | Current E / I / R | Proposed E / I / R | Rationale |
+|---|---|---|---|
+| MRCAT Brain | E1 / I1 / R3 | **E1 / I1 / R3 (unchanged); flip `evidenceMultiCenter` → true** | IFU now discloses 3 hospitals × 138 patients vendor V&V. Rigor remains E1: independent peer-reviewed study (Aljaafari 2025) is still single-centre; vendor V&V adds multi-centre quantitative results but isn't independent. |
+| MRCAT Head & Neck | E1 / I2 / R2 | **E1 / I2 / R2 (unchanged); flip `evidenceMultiCenter` → true; bump `adoptionReadiness` to R3** | IFU discloses 6 hospitals × 85 patients vendor V&V with stringent 1%/1 mm gamma. Combined with Buschmann 2026 peer-reviewed evidence, this justifies R3 (moderate effort) rather than R2. Rigor stays E1 (peer-reviewed evidence is still single-centre n=10). |
+| MRCAT Pelvis | E1 / I1 / R3 | **E1 / I1 / R3 (unchanged); keep `evidenceMultiCenter: true`** | Already E1 with MR-OPERA. IFU adds vendor V&V (4 hospitals × 103 patients) — strengthens transparency but doesn't change rubric placement. |
+| MRCAT Prostate (Image-Synthesis category) | E2 / I1 (categoryEvidence) | **E2 / I1 (unchanged)** | Already E2 from multiple independent peer-reviewed studies. IFU vendor V&V (2 hospitals × 62 patients) is consistent with and complements those results. No score change; quantitative numbers added for transparency. |
 
-1. Add/refresh `regulatory.intendedUseStatement` with the verbatim IFU indication line, citing the IFU URL + retrieval date (2026-06-15, publicly accessible — no `sourceAccess` needed).
-2. Add an explicit `limitations` field (or extend `evaluationData.results` where `limitations` is not in the schema) with the IFU's patient-selection exclusions and operational notices. Update `source` / `lastRevised` accordingly.
+No `clinicalImpact` changes — these are technical V&V results, not clinical outcomes.
 
-Specifics drawn from the IFU:
+## File-by-file edits
 
-**MRCAT Brain** (IFU p.10–11)
-- Indication: "radiotherapy treatment planning for primary and metastatic brain tumor patients".
-- Exclusions: large metal objects in imaging volume; cancer other than brain tumors; bone anomalies/diseases in the head area.
-- Operational: continuous HU values; foreign objects (e.g. tracheal tube, CVC) may not be visualized; not usable with restricted dB/dt or restricted gradient slew rate; do not post-process MRCAT images.
+For each of the four files, in the existing `evaluationData` (and `categoryEvidence["Image Synthesis"].evaluationData` for Prostate), append a sentence summarising vendor V&V cohort size, sites, dose-difference numbers, and gamma pass rates, with explicit IFU citation. Add or set the multi-centre attribute flags. Bump `lastRevised` to 2026-06-15.
 
-**MRCAT Head and Neck** (IFU p.10–11)
-- Indication: "radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region".
-- Exclusions: large metal objects (e.g. metal prosthesis); cancer other than H&N soft-tissue cancer; bone anomalies/diseases in the H&N area; body diameter at shoulder/chest >60 cm L-R or >34 cm A-P within the planning FOV.
-- Operational: continuous HU values; foreign material (bolus, mouthpiece) may not be visualized; same dB/dt and post-processing restrictions as Brain.
+**MRCAT Brain (`philips-mrcat-brain.ts`)**
+- Extend `evaluationData.results` and `evaluationData.description` with: "Vendor V&V (Philips IFU RTgo 5.12 appendix): 3 hospitals × 138 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.02 ± 0.24%; primary 2%/2 mm gamma pass rate 99.9 ± 0.22%; additional 1%/1 mm pass 99.0 ± 2.2%."
+- Add `evidenceMultiCenter: true` and a short note on the rigor field.
+- Append IFU URL + retrieval date to `source`.
 
-**MRCAT Pelvis** (IFU p.10–11)
-- Indication: "radiotherapy treatment planning of soft tissue cancers in the pelvic region".
-- Exclusions: large metal objects (hip prosthesis etc.); cancer other than pelvic soft-tissue cancer; bone anomalies/diseases in the pelvic area; body diameter in pelvis >50 cm L-R or >30 cm A-P within FOV.
-- Operational: continuous HU; signal-void volumes inside the body other than compact bone are interpreted as water/fat (HU water or fat) → potential mis-categorization of rectal gas / foreign material; generate MRCAT Pelvis **before** any contrast agent administration; dB/dt / gradient slew rate and post-processing restrictions as above.
+**MRCAT Head & Neck (`philips-mrcat-head-neck.ts`)**
+- Extend `evaluationData.results`/`description` with: "Vendor V&V (Philips IFU appendix): 6 hospitals × 85 patients; mean PTV dose difference 0.02 ± 0.27%; 2%/2 mm gamma pass 99.7 ± 0.50%; stricter 1%/1 mm pass 97.9 ± 2.3% (body-outline matched)."
+- Add `evidenceMultiCenter: true`; raise `adoptionReadiness` from R2 → R3 with updated `adoptionReadinessNotes`.
+- Append IFU citation to `source`.
 
-**MRCAT Prostate** (IFU p.10–11)
-- Indication: "radiotherapy treatment planning for prostate cancer patients", suitable up to the L3 vertebra including pelvic lymph node anatomies with margins.
-- Exclusions: large metal objects (e.g. hip prosthesis); cancer other than prostate cancer; bone anomalies/diseases in the pelvic area; body diameter in pelvis >50 cm L-R or >30 cm A-P within FOV.
-- Operational: **discrete (bulk) HU values** assigned — may not be suitable for soft-tissue dose evaluation in the very low-dose region; same signal-void, pre-contrast timing, dB/dt, and no-post-processing restrictions as Pelvis.
+**MRCAT Pelvis (`philips-mrcat-pelvis.ts`)**
+- Extend `evaluationData.results`/`description` with: "Vendor V&V (Philips IFU appendix): 4 hospitals × 103 patients; mean PTV dose difference −0.31 ± 0.51% (range −1.71 to +0.46%); 3%/3 mm gamma pass 99.9 ± 0.64%."
+- Keep `evidenceMultiCenter: true` (already set).
+- Append IFU citation to `source`.
 
-Common (all four):
-- General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight >250 kg.
+**MRCAT Prostate (`philips-mrcat-prostate.ts`)**
+- Extend `categoryEvidence["Image Synthesis"].evaluationData.results` and `.description` with: "Vendor V&V (Philips IFU RTgo 5.12 appendix): 2 hospitals × 62 patients; mean PTV dose difference −0.23 ± 0.22% (range −0.87 to +0.92%); 3%/3 mm gamma pass 100.0 ± 0.01%."
+- No flag changes (already multi-center, multi-national, vendor-independent).
+- Append IFU citation to `categoryEvidence` `source` and top-level `source`.
 
-## Source disclosure block to attach to each updated field
+## What I will not change
 
-```text
-Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12,
-3000 113 93922/781 (2024-06), pp. 10–11 (indications, patient selection) and
-pp. 63, 68 (MRCAT limitations).
-URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed
-Retrieved: 2026-06-15. Publicly accessible.
-```
+- `trainingData` cohorts — the IFU appendix is a **validation** cohort from "clinical partner sites", not a training cohort. Philips still does not disclose the training set composition for any MRCAT variant.
+- `evidenceRigor` for any product — vendor V&V does not satisfy DLinRT's vendor-independent requirement for E ≥ E2 by itself. Prostate already had E2 from independent peer-reviewed studies.
+- `clinicalImpact` — V&V results are technical, not clinical outcomes.
 
-## What I will NOT change
-
-- `trainingData` / `evaluationData.results` numerical fields — the IFU does not back them. Existing values (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017, FDA 510(k) K150965) stay.
-- `categoryEvidence.*.evidenceRigor` / `clinicalImpact` — unchanged; the IFU is not a clinical study.
-- Auto-contouring evaluation (Prostate variant) — IFU contains no auto-contouring performance numbers.
-
-## Next step
-
-If you approve, I'll switch to build mode and apply the four file edits + bump `lastRevised: 2026-06-15` and append the IFU citation to `source`. Let me know if you'd rather I also open a tracker note that the training/center/performance disclosures are still missing from public Philips materials so we can chase a white paper.
+If you approve, I'll switch to build mode and apply the four file edits with the above edits and bump `lastRevised`.

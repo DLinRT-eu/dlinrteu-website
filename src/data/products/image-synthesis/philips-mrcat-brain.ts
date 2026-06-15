@@ -12,14 +12,14 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193109.pdf"
     },
     evaluationData: {
-        results: "PTV dose differences <0.4%, positioning within ±1mm/±1°",
-        source: "Aljaafari et al. Tech Innov Patient Support Radiat Oncol 2025;35:100328",
-        datasetSize: "93 patients, 572 CBCT registrations",
-        studyDesign: "Single-center retrospective clinical validation",
-        primaryEndpoint: "PTV dose differences and CBCT registration positioning accuracy",
+        results: "Independent: PTV dose differences <0.4%, positioning within ±1mm/±1° (Aljaafari et al. 2025, single-center, 93 patients, 572 CBCT registrations). Vendor V&V (Philips Ingenia MR-RT IFU RTgo 5.12 appendix, Tables 15–17, pp. 136–138): 3 hospitals × 138 patients (RTgo 4.0); mean (D_MRCAT−D_CT)/D_CT to PTV = −0.02 ± 0.24% (min/max +0.97/+0.82%); primary 2%/2 mm gamma pass rate 99.9 ± 0.22%, median gamma 0.07 ± 0.03; stricter 1%/1 mm gamma pass 99.0 ± 2.2%, median 0.12 ± 0.06. Positioning study: 2 hospitals × 138 patients (DRR and CBCT correlation-function evaluation).",
+        source: "Aljaafari et al. Tech Innov Patient Support Radiat Oncol 2025;35:100328; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
+        datasetSize: "Independent: 93 patients, 572 CBCT registrations (Aljaafari 2025). Vendor V&V: 138 patients across 3 hospitals (dose) and 2 hospitals (positioning).",
+        studyDesign: "Single-center retrospective clinical validation (Aljaafari 2025) complemented by multi-center vendor V&V (Philips IFU appendix, 3 hospitals)",
+        primaryEndpoint: "PTV dose differences, gamma analysis (2%/2 mm and 1%/1 mm), and CBCT registration positioning accuracy",
         sourceUrl: "https://doi.org/10.1016/j.tipsro.2025.100328",
-        description: "Clinical validation of a commercial synthetic-CT solution for brain MRI-only radiotherapy. The study found PTV dose differences <0.4% and positioning accuracy within ±1mm/±1°.",
-        sites: 1
+        description: "Independent single-center clinical validation (Aljaafari et al. 2025, 93 patients, PTV dose differences <0.4%, positioning ±1mm/±1°) plus vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0): 3 hospitals × 138 patients with mean PTV dose difference −0.02 ± 0.24% and 99.9% voxels passing 2%/2 mm gamma.",
+        sites: 3
     },
     name: "MRCAT Brain",
     company: "Philips",
@@ -105,12 +105,13 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Largest MRCAT Brain validation study to date.",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance.",
     clinicalImpact: "I1",
-    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025).",
+    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
     evidenceExternalValidation: true
   }
 ];
