@@ -66,20 +66,14 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         notifiedBody: "GMED (Notified Body 0459)"
       },
       fda: {
-        status: "510k_cleared",
-        class: "Class II",
-        type: "510(k)",
-        clearanceNumber: "K253091",
-        productCode: "MUJ, QKB, LLZ",
-        regulationNumber: "21 CFR 892.5050",
-        decisionDate: "2025-12-23",
-        notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025). Prior clearances: K242822 (v3.0.0, Feb 2025)"
+        status: "not_applicable",
+        notes: "No SmartFuse-specific FDA 510(k) clearance located as of 2026-06-15. FDA K253091 (ART-Plan+ v3.1.0) was previously associated with SmartFuse here, but its indications cover SmartPlan, Annotate/TumorBox, and AdaptBox modules only — SmartFuse is not named in K253091."
       },
       tga: {
         status: "TGA Cleared",
-        notes: "Cleared for Australian market as part of ART-Plan+ platform"
+        notes: "Cleared for Australian market (manufacturer-reported)"
       },
-      intendedUseStatement: "\"ART-Plan+'s indicated target population is cancer patients for whom radiotherapy treatment has been prescribed. It includes several modules: SmartPlan which allows automatic generation of radiotherapy treatment plan... and AdaptBox which allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making.\" (Source: FDA 510(k) K253091 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15.)"
     },
     market: {
       onMarketSince: "2020",
