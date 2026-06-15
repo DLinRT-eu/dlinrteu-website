@@ -154,8 +154,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/diagnostics16020348"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Shaikh et al. Application and assessment of deep learning to routine 2D T2 FLEX spine imaging at 1.5T. European Spine Journal 2025.",
+        type: "Indirect — product name not in abstract",
+        description: "Shaikh et al. Application and assessment of deep learning to routine 2D T2 FLEX spine imaging at 1.5T. European Spine Journal 2025. NOTE: 'FLEX' implies GE hardware but the abstract does not name AIR Recon DL; relabelled indirect on 2026-06-15.",
         link: "https://doi.org/10.1007/s00586-025-09305-x"
       },
       {
@@ -184,8 +184,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1148/rg.220133"
       },
       {
-        type: "Peer-reviewed Systematic Review",
-        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: a systematic review. European Radiology 2025.",
+        type: "Indirect-comparative Systematic Review",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: a systematic review. European Radiology 2025. NOTE: multi-product survey from RSNA 2023 / ECR 2024 exhibitors; not a primary AIR Recon DL study (relabelled indirect-comparative 2026-06-15).",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       }
     ],
@@ -197,8 +197,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Radiotherapy-specific use cases such as MR simulation, synthetic CT workflows, target/OAR delineation support, or quantitative adaptive workflows require local validation"
     ],
     clinicalEvidence: "FDA summaries and independent peer-reviewed studies support improved MR image quality and scan-time reduction feasibility across multiple anatomies and clinical applications. Clinical implementation should include local optimization and validation for each protocol and scanner configuration.",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database, GE HealthCare product documentation, CE-marking statements, and peer-reviewed literature"
   }
 ];

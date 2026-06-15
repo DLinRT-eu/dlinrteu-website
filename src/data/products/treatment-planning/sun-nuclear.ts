@@ -12,12 +12,12 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf"
     },
     evaluationData: {
-        description: "FDA 510(k) validation and multicenter study (PMC12827991, 2025) demonstrating the versatility of AI-driven automated planning across 10 cancer sites using a foundation of 5,000+ plans.",
+        description: "FDA 510(k) software verification & validation only. No product-specific peer-reviewed clinical evaluation of Plan AI / Oncospace has been located; previous citations to Appenzoller 2012 (foundational DVH-prediction methodology) and Chung 2024 / Yu 2025 (other KBP/auto-planning products) do not directly evaluate Plan AI and were removed 2026-06-15.",
         primaryEndpoint: "Not specified",
         results: "Not publicly disclosed",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf",
         source: "FDA 510(k) summary K242748",
-        studyDesign: "Retrospective multi-center (FDA V&V)"
+        studyDesign: "Software V&V (FDA 510(k)) only"
     },
     name: "Plan AI",
     company: "Sun Nuclear (Mirion Medical)",
@@ -96,36 +96,31 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Appenzoller et al. Med Phys 2012 (Oncospace foundation, 5000+ plans, Johns Hopkins). KBP for 10 cancer sites (PMID:39486482, 2024). Multicenter AI-driven RT planning (PMC12827991, 2025). PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through AI-powered DVH predictions enabling data-driven planning objectives.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Downgraded 2026-06-15 from E2 to E1 after citation verification: (1) Appenzoller 2012 'Predicting dose-volume histograms for organs-at-risk' (Med Phys) had a hallucinated DOI (10.1118/1.4752212 resolves to an unrelated CBCT paper) and is in any case a foundational DVH-prediction methodology paper predating Plan AI/Oncospace by >10 years — removed. (2) Chung et al. PMID:39486482 (KBP for 10 cancer sites) is an MD Anderson RPA-ecosystem paper and does not evaluate Plan AI — reclassified as indirect-comparative below. (3) Yu et al. PMC12827991 explicitly evaluates United Imaging uTPS, not Plan AI — removed and re-attributed to uRT Auto-Planning. Remaining evidence is FDA regulatory only.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through AI-powered DVH predictions. No product-specific independent clinical impact data located.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate-to-high implementation effort — limited independent evidence; local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: true,
+    evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website",
-    clinicalEvidence: "FDA 510(k) validation studies using 5,000+ treatment plans from Johns Hopkins University",
+    clinicalEvidence: "FDA 510(k) software V&V; no product-specific independent peer-reviewed clinical evaluation of Plan AI located as of 2026-06-15.",
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Appenzoller et al. Predicting dose-volume histograms for organs-at-risk. Med Phys 2012 (Oncospace foundation)",
-        link: "https://doi.org/10.1118/1.4752212"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Knowledge-based planning for fully automated RT treatment planning of 10 cancer sites. PMID:39486482, 2024",
+        type: "Indirect-comparative",
+        description: "Chung et al. Knowledge-based planning for fully automated radiation therapy treatment planning of 10 different cancer sites. PMID:39486482, 2024. NOTE: This MD Anderson RPA-ecosystem KBP paper does not name Plan AI / Oncospace; retained here only as adjacent KBP-methodology context.",
         link: "https://pubmed.ncbi.nlm.nih.gov/39486482/"
       },
       {
-        type: "Multicenter Study",
-        description: "Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types. PMC12827991, 2025",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12827991/"
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K242748 received April 11, 2025 (Plan AI current clearance)",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf",
       },
       {
         type: "Regulatory Clearance",

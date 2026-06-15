@@ -11,12 +11,12 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf"
     },
     evaluationData: {
-        source: "Persson et al. Int J Radiat Oncol Biol Phys 2020 (DOI: 10.1016/j.ijrobp.2020.07.027); Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
-        sourceUrl: "https://doi.org/10.1016/j.ijrobp.2020.07.027",
-        studyDesign: "Independent multicenter/multivendor validation (MR-OPERA) plus multi-center vendor V&V (Philips IFU appendix, 4 hospitals)",
+        source: "Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
+        sourceUrl: "https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
+        studyDesign: "Vendor V&V disclosed in Philips IFU appendix (4 hospitals)",
         primaryEndpoint: "Dosimetric equivalence to CT-based planning; gamma analysis (3%/3 mm)",
-        description: "Independent multicenter/multivendor MR-OPERA validation (Persson et al. 2020) demonstrating dosimetric equivalence to CT-based planning, complemented by vendor V&V disclosed in the Philips IFU appendix (RTgo 4.1): 4 hospitals × 103 patients, mean PTV dose difference −0.31 ± 0.51%, 99.9% voxels passing 3%/3 mm gamma.",
-        results: "Independent: dosimetric equivalence to CT in multicenter/multivendor MR-OPERA setting (Persson et al. 2020). Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.31 ± 0.51% (min/max −1.71/+0.46%); 3%/3 mm gamma pass 99.9 ± 0.64% (median gamma 0.15 ± 0.09). Positioning study: 1 hospital × 11 patients.",
+        description: "Vendor V&V disclosed in the Philips IFU appendix (RTgo 4.1): 4 hospitals × 103 patients, mean PTV dose difference −0.31 ± 0.51%, 99.9% voxels passing 3%/3 mm gamma. NOTE: previous citation to Persson et al. MR-OPERA (Int J Radiat Oncol Biol Phys 2020;108:1265-1275) removed on 2026-06-15 — MR-OPERA validates the Spectronic MRiPlanner atlas-based synthetic CT (not Philips MRCAT) and therefore is not direct evidence for MRCAT Pelvis.",
+        results: "Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.31 ± 0.51% (min/max −1.71/+0.46%); 3%/3 mm gamma pass 99.9 ± 0.64% (median gamma 0.15 ± 0.09). Positioning study: 1 hospital × 11 patients.",
         sites: 4
     },
     name: "MRCAT Pelvis",
@@ -95,22 +95,16 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-15",
     lastRevised: "2026-06-15",
     source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
-    clinicalEvidence: "Clinical validation studies demonstrate dosimetric equivalence to CT-based planning for pelvic radiation therapy",
-    evidence: [
-      {
-        type: "Multicenter Study",
-        description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of Magnetic Resonance Imaging-Only Prostate Treatment Planning Using Synthetic Computed Tomography Images. Int J Radiat Oncol Biol Phys 2020;108(5):1265-1275.",
-        link: "https://doi.org/10.1016/j.ijrobp.2020.07.027"
-      }
-    ],
-    evidenceRigor: "E1",
-    evidenceRigorNotes: "MR-OPERA multicenter/multivendor validation (Persson et al. 2020) with multiple clinical sites. Additional clinical implementation studies support dosimetric equivalence.",
+    clinicalEvidence: "Vendor V&V across 4 hospitals (Philips IFU appendix) demonstrates dosimetric equivalence to CT-based planning for pelvic radiation therapy. No directly-attributable independent peer-reviewed MRCAT Pelvis study is currently cited after 2026-06-15 citation audit.",
+    evidence: [],
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "Downgraded from E1 to E0 on 2026-06-15: previous citation to Persson et al. MR-OPERA 2020 removed because MR-OPERA validates the Spectronic MRiPlanner atlas-based synthetic CT, not Philips MRCAT. Remaining evidence is vendor V&V disclosed in the Philips IFU appendix (4 hospitals × 103 patients).",
     clinicalImpact: "I1",
-    clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric equivalence to CT-based planning for pelvic RT (MR-OPERA study).",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    clinicalImpactNotes: "Vendor V&V demonstrates dosimetric equivalence to CT-based planning for pelvic RT; no independently-attributable clinical-impact publication currently cited for MRCAT Pelvis specifically.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): moderate-to-high implementation effort — independent peer-reviewed validation pending; local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: true,
-    evidenceExternalValidation: true
+    evidenceExternalValidation: false
   }
 ];
