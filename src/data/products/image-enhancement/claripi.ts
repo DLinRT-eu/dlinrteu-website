@@ -76,31 +76,26 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
-        type: "Peer-reviewed publication",
-        description: "Validation studies in pediatric abdominal CT, coronary CTA, and liver imaging",
-        link: "https://pubmed.ncbi.nlm.nih.gov/?term=ClariCT"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Kim et al. Deep learning CT denoising validation in European Radiology 2020",
-        link: "https://doi.org/10.1007/s00330-020-07081-4"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance K183460 for ClariCT.AI - Class II, 21 CFR 892.2050, Product Code LLZ. Additional clearance K212074 (2021) for AI Marketplace integration.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf"
       }
     ],
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Kim et al. Eur Radiol 2020. Validation in pediatric, coronary CTA, liver imaging. Included in AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through CT denoising enabling dose reduction with preserved diagnostic quality.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) K183460 + K212074. A previously cited Kim et al. Eur Radiol 2020 paper (doi:10.1007/s00330-020-07081-4) was removed on 2026-06-15: the DOI resolves to an unrelated PET/CT lactation study, not CT denoising. A PubMed search-URL entry was also removed (not a citation). No ClariCT.AI-specific peer-reviewed publication confirmed at this time. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through CT denoising enabling dose reduction; no independently confirmed clinical impact study identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    clinicalEvidence: "Multiple peer-reviewed publications in European Radiology, Radiology, and SPIE demonstrating efficacy in various clinical applications",
+    clinicalEvidence: "FDA 510(k) clearances (K183460, K212074). ClariCT.AI-specific peer-reviewed clinical outcome studies require verification before re-citation.",
     releaseDate: "2019-03-29",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K183460, K212074) and company website; releaseDate proxied from FDA K183460 decision date (2026-06-01)"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K183460, K212074) and company website"
   }
 ];
