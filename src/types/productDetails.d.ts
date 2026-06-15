@@ -55,8 +55,13 @@ export interface ProductDetails extends Product {
         clearanceNumber?: string;
         decisionDate?: string;
         notes?: string;
+        description?: string;
       }>;
     } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
     tga?: {
       status: string;
       notes?: string;
@@ -75,6 +80,7 @@ export interface ProductDetails extends Product {
     distributionChannels?: string[];
     availability?: string;
     deploymentScale?: string;
+    recognitions?: string | string[];
   };
   pricing?: {
     model?: string[];
