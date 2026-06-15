@@ -285,9 +285,21 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
       
       setCurrentDraft(prev => prev ? { ...prev, status: 'pending_review', edit_summary: summary } : null);
       
+      // Fire-and-log notification (confirmation email to submitter + admin alerts)
+      const productName = originalProduct?.name || originalProduct?.id || 'product';
+      const fieldCount = changedFields.length;
+      try {
+        const { error: notifyErr } = await supabase.functions.invoke('notify-edit-submitted', {
+          body: { draftId },
+        });
+        if (notifyErr) console.error('notify-edit-submitted failed:', notifyErr);
+      } catch (e) {
+        console.error('notify-edit-submitted invoke error:', e);
+      }
+      
       toast({
-        title: "Submitted for Review",
-        description: "Your changes have been submitted for admin review."
+        title: "Submitted for review ✓",
+        description: `${fieldCount} change${fieldCount !== 1 ? 's' : ''} to "${productName}" sent to admins. A confirmation has been emailed to you. Track status under My Submissions.`,
       });
       
       disableEditMode();
