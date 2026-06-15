@@ -316,6 +316,13 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
         round={round}
         onUpdate={onUpdate}
       />
+
+      <ShuffleAssignmentsDialog
+        open={showShuffleDialog}
+        onOpenChange={setShowShuffleDialog}
+        round={round}
+        onUpdate={onUpdate}
+      />
     </>
   );
 }
