@@ -179,6 +179,8 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
   };
 
   const allVisibleSelected = candidates.length > 0 && candidates.every((c) => selected.has(c.id));
+  const totalMatching = allMatching.length;
+  const allMatchingSelected = totalMatching > 0 && allMatching.every((c) => selected.has(c.id));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -217,13 +219,30 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
             </Select>
           </div>
 
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between text-sm gap-2 flex-wrap">
             <div className="text-muted-foreground">
-              {loading ? "Loading…" : `${candidates.length} available · ${selected.size} selected`}
+              {loading
+                ? "Loading…"
+                : `${totalMatching} match${totalMatching === 1 ? "" : "es"}${totalMatching > candidates.length ? ` (showing first ${candidates.length})` : ""} · ${selected.size} selected`}
             </div>
-            <Button variant="ghost" size="sm" onClick={toggleAllVisible} disabled={candidates.length === 0}>
-              {allVisibleSelected ? "Clear visible" : "Select visible"}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={selectAllMatching}
+                disabled={totalMatching === 0 || allMatchingSelected}
+              >
+                Select all matching ({totalMatching})
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearSelection}
+                disabled={selected.size === 0}
+              >
+                Clear selection
+              </Button>
+            </div>
           </div>
 
           <ScrollArea className="flex-1 border rounded-md">
