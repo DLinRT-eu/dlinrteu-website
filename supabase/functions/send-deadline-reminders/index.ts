@@ -130,6 +130,7 @@ const handler = async (req: Request): Promise<Response> => {
     let thresholdDays: number | undefined;
     let minIntervalHours: number | undefined;
     let forceRun = false;
+    let reviewIdsFilter: string[] | undefined;
     
     if (req.method === "POST") {
       try {
@@ -137,7 +138,10 @@ const handler = async (req: Request): Promise<Response> => {
         thresholdDays = body.threshold_days;
         minIntervalHours = body.min_interval_hours;
         forceRun = body.force === true;
-        console.log("Request params:", { thresholdDays, minIntervalHours, forceRun });
+        if (Array.isArray(body.review_ids) && body.review_ids.length > 0) {
+          reviewIdsFilter = body.review_ids.filter((id: unknown) => typeof id === "string");
+        }
+        console.log("Request params:", { thresholdDays, minIntervalHours, forceRun, reviewIdsCount: reviewIdsFilter?.length });
       } catch {
         // No body or invalid JSON, use defaults
       }
@@ -177,11 +181,24 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    console.log(`Found ${reviews.length} reviews needing reminders`);
+    // Optional filter to a specific set of review assignment IDs (per-round reminder)
+    let filteredReviews = reviews as ReviewReminder[];
+    if (reviewIdsFilter && reviewIdsFilter.length > 0) {
+      const allow = new Set(reviewIdsFilter);
+      filteredReviews = filteredReviews.filter((r) => allow.has(r.review_id));
+      console.log(`Filtered to ${filteredReviews.length} of ${reviews.length} reviews by review_ids`);
+      if (filteredReviews.length === 0) {
+        return new Response(JSON.stringify({ success: true, message: "No matching reviews to remind", sent: 0 }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+    }
+
+    console.log(`Found ${filteredReviews.length} reviews needing reminders`);
 
     // Group reviews by reviewer
     const reviewsByReviewer = new Map<string, ReviewReminder[]>();
-    for (const review of reviews as ReviewReminder[]) {
+    for (const review of filteredReviews) {
       const existing = reviewsByReviewer.get(review.reviewer_id) || [];
       existing.push(review);
       reviewsByReviewer.set(review.reviewer_id, existing);
@@ -314,7 +331,7 @@ const handler = async (req: Request): Promise<Response> => {
     const summary = {
       success: true,
       message: `Deadline reminder process completed`,
-      reviewsProcessed: reviews.length,
+      reviewsProcessed: filteredReviews.length,
       reviewersNotified: reviewsByReviewer.size,
       emailsSent,
       emailsFailed,

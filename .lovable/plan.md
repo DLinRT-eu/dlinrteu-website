@@ -1,53 +1,94 @@
-## Goal
+## Goals
 
-Merge Federico's open PR #111 (Philips SmartSpeed AI) into the catalogue under the **Reconstruction** category instead of Image Enhancement, and clean up duplicate product entries — most importantly the double TumorBox listing.
+Three related improvements to the admin review workflow:
 
-## 1. Merge PR #111 and recategorize SmartSpeed AI to Reconstruction
+1. **Shuffle assignments in draft rounds** — re-run the assignment algorithm on an existing round.
+2. **True "Select all" + bulk add to round** — make `AddProductsToRoundDialog` select across all filters, not just visible.
+3. **In-round reviewer reminder** — move the mail reminder into a round, with a preview of recipients and selectable list.
+4. **Edit approvals in admin pending items** — surface pending product edit drafts on `/admin` overview with quick actions.
 
-PR #111 adds one new product (Philips SmartSpeed AI) at `src/data/products/image-enhancement/philips.ts`. SmartSpeed AI is an MR k-space reconstruction product, so it belongs in `reconstruction/`, not `image-enhancement/`.
+---
 
-- Take the full SmartSpeed product object from the PR.
-- Change its `category` from `"Image Enhancement"` to `"Reconstruction"`.
-- Update its `githubUrl` to point at `src/data/products/reconstruction/philips.ts`.
-- Append it to the existing `PHILIPS_PRODUCTS` array in `src/data/products/reconstruction/philips.ts` (which currently contains only "Precise Image"). No new index wiring needed — `reconstruction/index.ts` already imports `PHILIPS_PRODUCTS`.
-- Do **not** create `src/data/products/image-enhancement/philips.ts`. The image-enhancement index is not touched.
-- After applying the change, close PR #111 with a note that it was merged manually under Reconstruction.
+## 1. Shuffle / re-balance assignments (draft rounds)
 
-## 2. Fix the active TumorBox duplicate
+**File:** `src/components/admin/review-rounds/RoundActionsMenu.tsx`
 
-The TumorBox entry exists in two imported files with the same `id` (`therapanacea-tumorbox-pipeline`):
-- `src/data/products/auto-contouring/therapanacea.ts` — current canonical version (FDA K253091, lastRevised 2026-06-13, `developmentStage: "pipeline"`).
-- `src/data/products/pipeline/therapanacea.ts` — older stub TumorBox entry.
+- Add new menu item `Shuffle Assignments…` shown only when `round.status === 'draft'`.
+- Open a new `ShuffleAssignmentsDialog` component.
 
-Action: remove the TumorBox object from `src/data/products/pipeline/therapanacea.ts`, keeping only SmartPlan and BrachyBox in `THERAPANACEA_PIPELINE_PRODUCTS`. The auto-contouring copy stays as the single source of truth.
+**New file:** `src/components/admin/review-rounds/ShuffleAssignmentsDialog.tsx`
 
-## 3. Remove orphan duplicate files
+- Loads current assignments for the round (`product_reviews` where `review_round_id = round.id`).
+- Algorithm picker: `balanced | expertise-first | random | manual` (same as `AddProductsToRoundDialog`).
+- Reuses `calculateProposedAssignments(productIds, undefined, algorithm)` from `reviewRoundUtils`.
+- Shows a preview table: product → proposed reviewer (with delta vs current assignee).
+- On confirm, calls existing `reassign_product_review_admin` RPC per row (already in `reviewRoundUtils.reassignProductReviewAdmin`) inside a Promise.all batch with reason `"Bulk shuffle (<algorithm>)"`.
+- Refreshes round details.
 
-A scan for duplicate product IDs surfaced nine additional pairs. In each case, only one file is actually imported by the category `index.ts`; the other is an orphan left over from a prior rename. The orphans are not rendered today, but they collide on `id` and confuse search/grep. Delete the orphans:
+No DB schema change needed — uses existing RPCs.
 
-| Delete (orphan)                                          | Kept (imported)                              |
-| -------------------------------------------------------- | -------------------------------------------- |
-| `src/data/products/auto-contouring/carina-ai.ts`         | `auto-contouring/carina.ts`                  |
-| `src/data/products/auto-contouring/ever-fortune-ai.ts`   | `auto-contouring/everfortune.ts`             |
-| `src/data/products/auto-contouring/medmind-technology-co-ltd.ts` | `auto-contouring/medmind.ts`         |
-| `src/data/products/auto-contouring/raysearch-laboratories.ts` | `auto-contouring/raysearch.ts`          |
-| `src/data/products/auto-contouring/varian-siemens-healthineers.ts` | `auto-contouring/varian-ethos.ts`     |
-| `src/data/products/auto-contouring/vysioneer.ts` (typo dup) | `auto-contouring/vysioner.ts`             |
-| `src/data/products/image-synthesis/philips.ts`           | `image-synthesis/philips-mrcat-pelvis.ts` (and sibling MRCAT files) |
-| `src/data/products/platform/manteia.ts`                  | `auto-contouring/manteia-acculearning.ts`    |
-| `src/data/products/reconstruction/canon-medical-systems.ts` | `reconstruction/canon.ts`                 |
+---
 
-No index files need editing — the orphans are not imported anywhere.
+## 2. True "Select all" in AddProductsToRoundDialog
 
-## Out of scope
+**File:** `src/components/admin/review-rounds/AddProductsToRoundDialog.tsx`
 
-- No changes to evidence, regulatory, or limitations content of any product beyond the category/githubUrl tweak on SmartSpeed AI.
-- No restructuring of the pipeline page or auto-contouring page UI.
-- Archived products under `src/data/products/archived/` are left alone (they're intentionally excluded from `ALL_PRODUCTS`).
+- Current button reads "Select visible / Clear visible" and the candidate list is capped at 500 with filters applied.
+- Replace with two buttons:
+  - **Select all matching** — selects all candidates matching current search + category filter (drop the 500 cap for selection; keep the cap only for rendered rows with a "showing first 500 of N" hint).
+  - **Clear selection** — clears `selected`.
+- Keep per-row checkboxes. Show selection count and total candidate count.
 
-## Files touched
+---
 
-- edit `src/data/products/reconstruction/philips.ts` (append SmartSpeed AI entry)
-- edit `src/data/products/pipeline/therapanacea.ts` (remove TumorBox entry)
-- delete the nine orphan files listed above
-- close PR #111 on GitHub with a merge-note comment
+## 3. In-round reviewer reminder with recipient preview
+
+**File:** `src/pages/admin/ReviewRoundDetails.tsx`
+
+- Add a `Send Reminders…` button in the round header next to `RoundExportButton`, visible when `round.status === 'active'` and there are non-completed assignments.
+
+**New file:** `src/components/admin/review-rounds/SendRoundReminderDialog.tsx`
+
+- Derives the recipient set from the current `assignments` prop: group by `assigned_to`, keep only reviewers with at least one `pending` / `in_progress` assignment. Include reviewer name, email, count of pending items, earliest deadline, overdue flag.
+- Renders a checkbox list with search, "Select all", "Clear", and an indeterminate header checkbox — same pattern as `CertificationReminderDialog`.
+- Footer button: `Send to N reviewer(s)`; disabled when 0 selected.
+- On submit, invoke `send-deadline-reminders` with `{ force: true, review_ids: [...] }` listing only the assignment IDs belonging to selected reviewers in this round.
+
+**Edge function:** `supabase/functions/send-deadline-reminders/index.ts`
+
+- Extend body schema to accept optional `review_ids: string[]`. When provided, after `get_reviews_needing_reminders` (called with `force_run` semantics — `min_interval_hours: 0`), filter the returned list to those whose `review_id` is in the supplied set. This keeps backwards compatibility with the global scheduler and the existing admin "Force Send All" button.
+- Still respects per-user `notification_preferences.review_deadlines.email = false` (current behavior).
+- No DB / RPC changes.
+
+The existing global `DeadlineReminderControls` on `/admin` stays as-is (cron / global manual trigger). The new dialog is the per-round, recipient-curated path.
+
+---
+
+## 4. Pending edit approvals on admin overview
+
+**File:** `src/pages/admin/AdminOverview.tsx`
+
+- Add state `pendingEditDrafts` and fetch on mount:
+  ```ts
+  supabase
+    .from('product_edit_drafts')
+    .select('id, product_id, status, submitted_at, created_at, user_id')
+    .eq('status', 'pending_review')
+    .order('submitted_at', { ascending: false })
+    .limit(10);
+  ```
+- Add to `totalPending` calculation.
+- Add a new Quick Stats card: "Pending Edit Approvals" with count.
+- Add a new section card "Pending Edit Approvals (N)" below "Pending Company Revisions":
+  - Table: Product, Submitted by (resolve from `profiles`), Submitted at, Action → `Review →` button navigating to `/admin/edit-approvals`.
+  - Header "View All" button → `/admin/edit-approvals`.
+
+No backend change — `/admin/edit-approvals` route and page already exist.
+
+---
+
+## Technical notes
+
+- All changes are admin-only UI; auth is already handled by `ApprovalGate` + `useRoles`.
+- Reusing existing RPCs (`reassign_product_review_admin`, `get_reviews_needing_reminders`, `mark_reminder_sent`) means no migrations.
+- Single edge-function change (`send-deadline-reminders`) is additive and backwards compatible.
