@@ -60,7 +60,7 @@ interface PendingEditDraft {
   product_id: string;
   created_by: string;
   status: string;
-  submitted_at: string | null;
+  updated_at: string;
   created_at: string;
   submitter_name?: string;
   submitter_email?: string;
