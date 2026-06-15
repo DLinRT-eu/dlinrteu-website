@@ -85,12 +85,12 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K242822 validation as part of ART-Plan+ platform. Limited independent publications for registration module specifically.",
-    clinicalImpactNotes: "Workflow improvement through AI-powered rigid and deformable image fusion with real-time contour deformation.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse.",
+    clinicalImpactNotes: "Manufacturer-claimed workflow improvement through AI-powered rigid and deformable image fusion; no independently confirmed clinical impact study identified.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -98,8 +98,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Therapanacea official website (therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15)"
   }
 ];
