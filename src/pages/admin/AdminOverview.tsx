@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail, ExternalLink, GitPullRequest } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail, ExternalLink, GitPullRequest, Edit3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
