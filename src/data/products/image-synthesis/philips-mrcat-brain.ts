@@ -104,6 +104,11 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.tipsro.2025.100328"
       },
       {
+        type: "Clinical Validation",
+        description: "Emin S, Rossi E, Myrvold Rooth E, Dorniok T, Hedman M, Gagliardi G, Villegas F. Clinical implementation of a commercial synthetic computed tomography solution for radiotherapy treatment of glioblastoma. Phys Imaging Radiat Oncol 2024;30:100589. Direct clinical implementation evaluation of MRCAT Brain for glioblastoma radiotherapy.",
+        link: "https://doi.org/10.1016/j.phro.2024.100589"
+      },
+      {
         type: "Indirect-Comparative",
         description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MRCAT Brain commissioning; not a direct MRCAT evaluation.",
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
