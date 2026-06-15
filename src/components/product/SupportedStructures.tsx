@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
 import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
 import { useProductEdit, StructuresEditor } from "@/components/product-editor";
+import SourceProvenanceChip from "./SourceProvenanceChip";
+import type { ProductDetails } from "@/types/productDetails";
 
 interface SupportedStructuresProps {
   structures?: string[] | Array<{
@@ -17,6 +19,8 @@ interface SupportedStructuresProps {
   /** Render an explicit "structure list unavailable" card when the vendor has
    *  not published a verified list. */
   unavailable?: boolean;
+  /** Disclose whether the structures list is public, regulatory, or vendor-provided. */
+  provenance?: ProductDetails["structuresProvenance"];
 }
 
 interface StructureGroup {
