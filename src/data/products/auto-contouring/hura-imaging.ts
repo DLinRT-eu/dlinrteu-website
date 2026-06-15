@@ -1,132 +1,143 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
-export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [
-  {
-    id: "hura-dvtarget",
-    trainingData: {
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
-        disclosureLevel: "minimal",
-        source: "FDA 510(k) summary K202928"
+export const DVTARGET: ProductDetails = {
+  id: "hura-dvtarget",
+  name: "DV.TARGET",
+  market: {
+    onMarketSince: "2020",
+    distributionChannels: ["Direct sales", "Distribution partners"]
+  },
+  source: "FDA 510(k) database (K202928), company official sources",
+  company: "Hura Imaging",
+  logoUrl: "/logos/huraimaging.png",
+  version: "2.5",
+  website: "http://www.huraimaging.com/dvtarget/",
+  category: "Auto-Contouring",
+  modality: ["CT", "MRI"],
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
+  companyUrl: "https://huraimaging.com",
+  productUrl: "http://www.huraimaging.com/dvtarget/",
+  regulatory: {
+    ce: {
+      type: "MDR",
+      class: "IIa",
+      status: "cleared",
+      regulation: "MDR 2017/745"
     },
-    evaluationData: {
-        primaryEndpoint: "Not specified",
-        source: "FDA 510(k) summary K202928",
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
-        description: "Software V&V conducted for FDA 510(k) clearance (K202928) for automatic delineation of organs-at-risk (OARs) from CT images.",
-        studyDesign: "Software V&V (FDA 510(k))"
+    fda: {
+      type: "510(k)",
+      class: "Class II",
+      notes: "Cleared under company name DeepVoxel, Inc. (dba Hura Imaging)",
+      status: "510k_cleared",
+      productCode: "QKB",
+      decisionDate: "2021-04-02",
+      clearanceNumber: "K202928",
+      regulationNumber: "21 CFR 892.2050"
     },
-    name: "DV.TARGET",
-    company: "Hura Imaging",
-    companyUrl: "https://huraimaging.com",
-    productUrl: "http://www.huraimaging.com/dvtarget/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
-    description: "AI-powered auto-contouring solution for radiotherapy planning with advanced deep learning segmentation.",
-    category: "Auto-Contouring",
-    certification: "CE & FDA",
-    logoUrl: "/logos/huraimaging.png",
-    website: "http://www.huraimaging.com/dvtarget/",
-    anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Breast", "Pelvis"],
-    modality: ["CT", "MRI"],
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: [
-      "Fully automated organ and target volume segmentation",
-      "Adaptive algorithms for challenging cases",
-      "Seamless integration with treatment planning systems",
-      "Rapid processing with high accuracy",
-      "User-friendly interface with manual correction tools"
-    ],
-    supportedStructures: [
-      "Brain: Brain",
-      "Brain: Brainstem",
-      "Brain: Eye L",
-      "Brain: Eye R",
-      "Brain: Lens L",
-      "Brain: Lens R",
-      "Brain: Optic Chiasm",
-      "Brain: Optic Nerve L",
-      "Brain: Optic Nerve R",
-      "Brain: Pituitary",
-      
-      "Head & Neck: Larynx",
-      "Head & Neck: Mandible",
-      "Head & Neck: Parotid L",
-      "Head & Neck: Parotid R",
-      "Head & Neck: Spinal Cord",
-      "Head & Neck: Submandibular Gland L",
-      "Head & Neck: Submandibular Gland R",
-      
-      "Thorax: Esophagus",
-      "Thorax: Heart",
-      "Thorax: Lung L",
-      "Thorax: Lung R",
-      "Thorax: Spinal Cord",
-      
-      "Breast: Breast L",
-      "Breast: Breast R",
-      "Breast: Heart",
-      "Breast: Lung L",
-      "Breast: Lung R",
-      
-      "Pelvis: Bladder",
-      "Pelvis: Femoral Head L",
-      "Pelvis: Femoral Head R",
-      "Pelvis: Prostate",
-      "Pelvis: Rectum"
-    ],
-    technicalSpecifications: {
-      population: "Adult patients",
-      input: ["CT", "MRI"],
-      inputFormat: ["DICOM"],
-      output: ["Structure sets"],
-      outputFormat: ["DICOM-RTSTRUCT"]
-    },
-    technology: {
-      integration: ["PACS", "Treatment Planning Systems"],
-      deployment: ["On-premises", "Cloud-based"],
-      triggerForAnalysis: "Manual or automated workflow",
-      processingTime: "Minutes per patient"
-    },
-    regulatory: {
-      ce: {
-        status: "cleared",
-        class: "IIa",
-        type: "MDR",
-        regulation: "MDR 2017/745"
-      },
-      fda: {
-        status: "510k_cleared",
-        class: "Class II",
-        type: "510(k)",
-        clearanceNumber: "K202928",
-        productCode: "QKB",
-        regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2021-04-02",
-        notes: "Cleared under company name DeepVoxel, Inc. (dba Hura Imaging)"
-      },
-      intendedUseStatement: "DV.Target is a software application that enables the routing of DICOM-compliant data (CT Images) to automatic image processing workflows, using machine learning-based algorithms to automatically delineate organs-at-risk (OARs). Contours generated by DV.Target may be used as an input to clinical workflows for treatment planning in radiation therapy."
-    },
-    market: {
-      onMarketSince: "2020",
-      distributionChannels: ["Direct sales", "Distribution partners"],
-    },
-    limitations: [
-      "Only intended for normal organ contouring; not validated for tumor or clinical target volume (CTV) contouring",
-      "FDA clearance is for CT images only; MRI use may not be FDA-cleared",
-      "Contours are intended as input to clinical workflows and require physician review before use in treatment planning",
-      "Performance may vary based on image quality and patient anatomy"
-    ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-02-26.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    version: "2.5",
-    releaseDate: "2023-05-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K202928), company official sources"
+    intendedUseStatement: "DV.Target is a software application that enables the routing of DICOM-compliant data (CT Images) to automatic image processing workflows, using machine learning-based algorithms to automatically delineate organs-at-risk (OARs). Contours generated by DV.Target may be used as an input to clinical workflows for treatment planning in radiation therapy."
+  },
+  technology: {
+    deployment: ["On-premises", "Cloud-based"],
+    integration: ["PACS", "Treatment Planning Systems"],
+    processingTime: "Minutes per patient",
+    triggerForAnalysis: "Manual or automated workflow"
+  },
+  description: "AI-powered auto-contouring solution for radiotherapy planning with advanced deep learning segmentation.",
+  keyFeatures: [
+    "Adaptive algorithms for challenging cases",
+    "Seamless integration with treatment planning systems",
+    "Rapid processing with high accuracy",
+    "User-friendly interface with manual correction tools",
+    "Fully automated organ segmentation"
+  ],
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
+  limitations: [
+    "Only intended for normal organ contouring; not validated for tumor or clinical target volume (CTV) contouring",
+    "FDA clearance is for CT images only; MRI use may not be FDA-cleared",
+    "Contours are intended as input to clinical workflows and require physician review before use in treatment planning",
+    "Performance may vary based on image quality and patient anatomy"
+  ],
+  releaseDate: "2023-05-20",
+  trainingData: {
+    source: "FDA 510(k) summary K202928",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
+    disclosureLevel: "minimal"
+  },
+  certification: "CE & FDA",
+  evidenceRigor: "E0",
+  clinicalImpact: "I0",
+  evaluationData: {
+    source: "FDA 510(k) summary K202928",
+    results: "Not publicly disclosed",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K202928.pdf",
+    description: "Software V&V conducted for FDA 510(k) clearance (K202928) for automatic delineation of organs-at-risk (OARs) from CT images.",
+    studyDesign: "Software V&V (FDA 510(k))",
+    primaryEndpoint: "Not specified"
+  },
+  diseaseTargeted: ["Multiple Cancer Types"],
+  adoptionReadiness: "R2",
+  anatomicalLocation: [
+    "Brain",
+    "Head & Neck",
+    "Thorax",
+    "Breast",
+    "Pelvis"
+  ],
+  evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-02-26.",
+  clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-06-14.",
+  supportedStructures: [
+    "Brain: Brain",
+    "Brain: Brainstem",
+    "Brain: Eye L",
+    "Brain: Eye R",
+    "Brain: Lens L",
+    "Brain: Lens R",
+    "Brain: Optic Chiasm",
+    "Brain: Optic Nerve L",
+    "Brain: Optic Nerve R",
+    "Brain: Pituitary",
+    "Head & Neck: Larynx",
+    "Head & Neck: Mandible",
+    "Head & Neck: Parotid L",
+    "Head & Neck: Parotid R",
+    "Head & Neck: Spinal Cord",
+    "Head & Neck: Submandibular Gland L",
+    "Head & Neck: Submandibular Gland R",
+    "Thorax: Esophagus",
+    "Thorax: Heart",
+    "Thorax: Lung L",
+    "Thorax: Lung R",
+    "Thorax: Spinal Cord",
+    "Breast: Breast L",
+    "Breast: Breast R",
+    "Breast: Heart",
+    "Breast: Lung L",
+    "Breast: Lung R",
+    "Pelvis: Bladder",
+    "Pelvis: Femoral Head L",
+    "Pelvis: Femoral Head R",
+    "Pelvis: Prostate",
+    "Pelvis: Rectum",
+    "Pelvis: Kidney L",
+    "Pelvis: Kidney R",
+    "Pelvis: Gallbladder",
+    "Pelvis: Rectum",
+    "Abdomen: Liver",
+    "Abdomen: Pancreas",
+    "Abdomen: Small Bowel (majority)",
+    "Abdomen: Large Bowel (majority)",
+    "Abdomen: Stomach",
+    "Pelvis: Large Bowel (terminal end)",
+    "Pelvis: Small Bowel (terminal end)",
+    "Abdomen: Duodenum"
+  ],
+  adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+  technicalSpecifications: {
+    input: ["CT", "MRI"],
+    output: ["Structure sets"],
+    population: "Adult patients",
+    inputFormat: ["DICOM"],
+    outputFormat: ["DICOM-RTSTRUCT"]
   }
-];
+};
