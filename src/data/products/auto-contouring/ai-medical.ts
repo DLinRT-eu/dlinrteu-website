@@ -32,7 +32,7 @@ export const Jazz: ProductDetails = {
   evidence: [
     {
       doi: "10.1007/s00234-024-03293-3",
-      link: "10.1007/s00234-024-03293-3",
+      link: "https://doi.org/10.1007/s00234-024-03293-3",
       type: "Clinical Study",
       year: "2024",
       title: "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software",
@@ -77,8 +77,8 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",

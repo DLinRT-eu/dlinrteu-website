@@ -71,7 +71,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2026-01-23",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     supportedStructures: [
       // H&N Structures and elective nodes
       "Head & Neck: Eye_L",
@@ -241,22 +241,22 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Single-institution H&N validation comparing AccuContour and MIM ProtegeAI for 22 OARs in 40 CT cases. Frontiers in Oncology 2024.",
+        type: "Multi-vendor Comparative Study",
+        description: "Johnson C et al. Single-institution H&N validation comparing AccuContour and MIM ProtegeAI for 22 OARs in 40 CT cases. Front Oncol 2024;14:1375096. AccuContour directly evaluated alongside MIM ProtegeAI (verified in Methods).",
         link: "https://doi.org/10.3389/fonc.2024.1375096"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Evaluation of atlas-based and AccuContour deep-learning auto-contouring for nasopharyngeal carcinoma OARs. Frontiers in Oncology 2022.",
+        description: "Wang et al. Evaluation of atlas-based and AccuContour deep-learning auto-contouring for nasopharyngeal carcinoma OARs. Front Oncol 2022;12:833816. Direct evaluation of AccuContour.",
         link: "https://doi.org/10.3389/fonc.2022.833816"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Comparison of four commercial deep-learning contouring models, including AccuContour, for nasopharyngeal carcinoma structures and GTV. Scientific Reports 2026.",
+        type: "Multi-vendor Comparative Study",
+        description: "Yan et al. Comparison of four commercial deep-learning contouring models, including AccuContour, for nasopharyngeal carcinoma structures and GTV. Sci Rep 2026. AccuContour is one of four evaluated commercial models (verified in Methods).",
         link: "https://doi.org/10.1038/s41598-025-33567-6"
       }
     ],
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

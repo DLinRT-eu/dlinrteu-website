@@ -41,8 +41,8 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     },
     {
       link: "https://doi.org/10.1007/s00066-019-01463-4",
-      type: "Independent Peer-reviewed Publication",
-      description: "Wittenstein et al. 2019: Retrospective pilot evaluation of Brainlab Anatomical Mapping Release 1.0 for 9 extracranial OARs in 24 patients; useful as legacy independent evidence but not full validation of current Contouring 5.0/APM."
+      type: "indirect",
+      description: "Wittenstein et al. Strahlenther Onkol 2019: Retrospective pilot evaluation of Brainlab Anatomical Mapping Release 1.0 (legacy version) for 9 extracranial OARs in 24 patients. Indirect for current Contouring 5.0/APM."
     },
     {
       link: "https://www.therapanacea.eu/brainlab-therapanacea-collaboration/",
@@ -94,8 +94,8 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Anomaly detection support for segmentation quality review",
     "Optional TheraPanacea Art-Plan interface for extracranial OAR and lymph-node segmentation"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   limitations: [
     "APM 1.1 minimum requirements include 12 CPU cores and 24 GB RAM",
     "Cranial tumor segmentation support requires a GPU with at least 8 GB vRAM, compatible driver/CUDA support, and CUDA compute capability >5.2",

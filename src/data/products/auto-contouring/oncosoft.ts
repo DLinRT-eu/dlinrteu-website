@@ -324,8 +324,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Choi et al. Automated Organ Segmentation for Radiation Therapy: A Comparative Analysis of AI-Based Tools (OncoStudio vs ProtegeAI) in 1200 Korean Cancer Patients. Cancers 2024;16(21):3670",
+        type: "Multi-vendor Comparative Study",
+        description: "Choi et al. Automated Organ Segmentation for Radiation Therapy: A Comparative Analysis of AI-Based Tools (OncoStudio vs ProtegeAI) in 1200 Korean Cancer Patients. Cancers 2024;16(21):3670. Direct head-to-head comparison of OncoStudio and MIM ProtegeAI (verified in Methods).",
         link: "https://doi.org/10.3390/cancers16213670"
       },
       {
@@ -351,8 +351,8 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     ],
     version: "2024",
     releaseDate: "2024-01-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }
