@@ -204,12 +204,17 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
   };
 
   const handleSend = async () => {
+    if (selectedIds.size === 0) {
+      toast.error('Select at least one recipient');
+      return;
+    }
     setSending(true);
     try {
       const { data, error } = await supabase.functions.invoke('send-certification-reminder', {
         body: {
           customSubject: subject !== DEFAULT_SUBJECT ? subject : undefined,
           customBody: body !== DEFAULT_BODY ? body : undefined,
+          recipientRepIds: Array.from(selectedIds),
         },
       });
 
