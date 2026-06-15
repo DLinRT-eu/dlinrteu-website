@@ -116,13 +116,8 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         certificateNumber: "Certified October 21, 2025"
       },
       fda: {
-        status: "510(k) Cleared (Dose+ module - K250064, Sept 4, 2025)",
-        class: "Class II",
-        type: "510(k)",
-        clearanceNumber: "K250064",
-        regulationNumber: "21 CFR 892.5050",
-        productCode: "MUJ",
-        decisionDate: "2025-09-04"
+        status: "not_applicable",
+        notes: "No FDA 510(k) clearance for the Workspace+ platform itself as of 2026-06-15. The Dose+ module has its own FDA K250064 clearance (see treatment-planning Dose+ entry); that module-level clearance was previously listed here as platform evidence and was removed on 2026-06-15 to avoid implying platform-level FDA clearance."
       },
       intendedUseStatement: "AI-powered solution that automates radiotherapy workflows from imaging to treatment planning. Unifies AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single vendor-neutral, cloud-native platform to support clinicians in standardizing, reviewing, and adapting the course of treatment while enabling faster and more informed decision-making."
     },
