@@ -166,6 +166,13 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
             </>
           )}
 
+          {round.status === 'draft' && (
+            <DropdownMenuItem onClick={() => setShowShuffleDialog(true)}>
+              <Shuffle className="h-4 w-4 mr-2" />
+              Shuffle Assignments…
+            </DropdownMenuItem>
+          )}
+
           {round.status === 'active' && (
             <DropdownMenuItem onClick={handleCompleteRound}>
               <CheckCircle2 className="h-4 w-4 mr-2" />
