@@ -1,48 +1,64 @@
-# Plan: Visual Editor submission feedback + history
+## Finding first — important caveat
 
-Reviewer reported that submitting edits via the in-browser Visual Editor gives no confirmation or audit trail. Two gaps to close:
+The Philips document you linked is the **Ingenia MR-RT Instructions for Use (RTgo 5.12, doc 3000 113 93922/781, 2024-06)**. I parsed all 4,467 lines.
 
-1. Editors don't get a clear "this was sent" signal or a place to see what they previously submitted.
-2. Reviewers/admins have no consolidated view of Visual Editor submissions per product.
+It does **not** disclose:
+- number of training or validation patients
+- number of centers / institutions
+- algorithm performance numbers (HU MAE, dose differences, gamma pass rates)
 
-## 1. Confirm + log on submit (editor side)
+Those numbers live in Philips white papers and peer-reviewed studies (already cited in our `categoryEvidence.evaluationData`), not in this IFU. I will not invent them.
 
-In `ProductEditContext.submitForReview` (`src/components/product-editor/ProductEditContext.tsx`):
-- After flipping the draft to `pending_review`, show a richer success toast: product name, number of changed fields, summary, "View your submissions" action linking to the new history page.
-- Fire a new edge function `notify-edit-submitted` that:
-  - Emails the submitting user a confirmation (Resend, `noreply@dlinrt.eu`) listing product, changed fields, summary, draft id, submitted-at — respects `profiles.notification_preferences`.
-  - Notifies admins/reviewers per existing notification-preference logic (reuse `notifications` table insert + optional digest path, same pattern as `notify-reviewer-assignment`).
-- No new DB tables needed — `product_edit_drafts` already stores summary, changed_fields, status, timestamps. Use it as the source of truth.
+It **does** disclose, per MRCAT variant, official **indications**, **patient selection criteria / contraindications**, and **operational limitations**. These are exactly the kind of vendor-authoritative limitations we should mirror into each product's `limitations` and `intendedUseStatement`, with the IFU as a public source.
 
-## 2. "My submissions" page for editors
+## Suggested modifications (per product)
 
-New route `/my-submissions` (linked from profile menu and from the success toast):
-- Lists the current user's `product_edit_drafts` ordered by `updated_at desc`.
-- Columns: product, status badge (draft / pending review / approved / rejected / applied), changed-fields count, summary, submitted-at, reviewer feedback (if any).
-- Row expands to show diff via the existing `DiffViewer` component.
-- RLS: existing "users can read their own drafts" policy already covers this.
+For all four files (`philips-mrcat-brain.ts`, `philips-mrcat-head-neck.ts`, `philips-mrcat-pelvis.ts`, `philips-mrcat-prostate.ts`):
 
-## 3. Visual edit history on the reviewer side
+1. Add/refresh `regulatory.intendedUseStatement` with the verbatim IFU indication line, citing the IFU URL + retrieval date (2026-06-15, publicly accessible — no `sourceAccess` needed).
+2. Add an explicit `limitations` field (or extend `evaluationData.results` where `limitations` is not in the schema) with the IFU's patient-selection exclusions and operational notices. Update `source` / `lastRevised` accordingly.
 
-Two surfaces:
+Specifics drawn from the IFU:
 
-a. **Per-product tab in `ProductReview.tsx`** — add a "Visual Edits" tab next to "Company Revisions". New component `VisualEditHistory.tsx` queries `product_edit_drafts` for that product (all statuses, all submitters) via a new security-definer RPC `get_product_edit_drafts_for_reviewer(p_product_id)` (mirrors existing `get_product_revisions_for_reviewer`). Shows submitter name, status, changed fields, summary, timestamps, expandable diff, and quick links to approve/reject in the existing `EditApprovals` admin page.
+**MRCAT Brain** (IFU p.10–11)
+- Indication: "radiotherapy treatment planning for primary and metastatic brain tumor patients".
+- Exclusions: large metal objects in imaging volume; cancer other than brain tumors; bone anomalies/diseases in the head area.
+- Operational: continuous HU values; foreign objects (e.g. tracheal tube, CVC) may not be visualized; not usable with restricted dB/dt or restricted gradient slew rate; do not post-process MRCAT images.
 
-b. **Pending-items integration** — already done in a prior pass on `AdminOverview`; cross-link from the new history component to `/admin/edit-approvals?draft=<id>` so a reviewer can jump straight to the approval action.
+**MRCAT Head and Neck** (IFU p.10–11)
+- Indication: "radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region".
+- Exclusions: large metal objects (e.g. metal prosthesis); cancer other than H&N soft-tissue cancer; bone anomalies/diseases in the H&N area; body diameter at shoulder/chest >60 cm L-R or >34 cm A-P within the planning FOV.
+- Operational: continuous HU values; foreign material (bolus, mouthpiece) may not be visualized; same dB/dt and post-processing restrictions as Brain.
 
-## 4. Minor
+**MRCAT Pelvis** (IFU p.10–11)
+- Indication: "radiotherapy treatment planning of soft tissue cancers in the pelvic region".
+- Exclusions: large metal objects (hip prosthesis etc.); cancer other than pelvic soft-tissue cancer; bone anomalies/diseases in the pelvic area; body diameter in pelvis >50 cm L-R or >30 cm A-P within FOV.
+- Operational: continuous HU; signal-void volumes inside the body other than compact bone are interpreted as water/fat (HU water or fat) → potential mis-categorization of rectal gas / foreign material; generate MRCAT Pelvis **before** any contrast agent administration; dB/dt / gradient slew rate and post-processing restrictions as above.
 
-- Add submitter `display_name`/email to the RPC return shape (join `profiles`), same pattern as `get_product_revisions_for_reviewer`.
-- Add a "Submissions" link in the user dropdown (`UserMenu` / profile area) for any user with at least one draft.
+**MRCAT Prostate** (IFU p.10–11)
+- Indication: "radiotherapy treatment planning for prostate cancer patients", suitable up to the L3 vertebra including pelvic lymph node anatomies with margins.
+- Exclusions: large metal objects (e.g. hip prosthesis); cancer other than prostate cancer; bone anomalies/diseases in the pelvic area; body diameter in pelvis >50 cm L-R or >30 cm A-P within FOV.
+- Operational: **discrete (bulk) HU values** assigned — may not be suitable for soft-tissue dose evaluation in the very low-dose region; same signal-void, pre-contrast timing, dB/dt, and no-post-processing restrictions as Pelvis.
 
-## Technical notes
+Common (all four):
+- General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight >250 kg.
 
-- New edge function: `supabase/functions/notify-edit-submitted/index.ts` — Resend, dynamic CORS allowlist, checks `notification_preferences.product_edits` before sending; inserts a row in `notifications` for in-app bell.
-- New RPC migration: `get_product_edit_drafts_for_reviewer(uuid)` returning drafts + submitter profile fields; `SECURITY DEFINER`, restricted to `has_role(auth.uid(),'reviewer') OR has_role(auth.uid(),'admin')`.
-- No schema changes to `product_edit_drafts`.
-- Files touched (new): `notify-edit-submitted/index.ts`, `src/pages/MySubmissions.tsx`, `src/components/reviewer/VisualEditHistory.tsx`. Edited: `ProductEditContext.tsx`, `ProductReview.tsx`, `App.tsx` (route), user menu component, one migration for the RPC.
+## Source disclosure block to attach to each updated field
 
-## Open questions
+```text
+Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12,
+3000 113 93922/781 (2024-06), pp. 10–11 (indications, patient selection) and
+pp. 63, 68 (MRCAT limitations).
+URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed
+Retrieved: 2026-06-15. Publicly accessible.
+```
 
-1. For the admin/reviewer notification on submit: in-app bell only, or also email? Default proposal: in-app + respect each reviewer's `notification_preferences.product_edits` for email.
-2. Should "My submissions" also surface drafts that are still in `draft` status (auto-saved but never submitted), or only items the user explicitly sent? Default proposal: show both, with the status badge making it clear.
+## What I will NOT change
+
+- `trainingData` / `evaluationData.results` numerical fields — the IFU does not back them. Existing values (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017, FDA 510(k) K150965) stay.
+- `categoryEvidence.*.evidenceRigor` / `clinicalImpact` — unchanged; the IFU is not a clinical study.
+- Auto-contouring evaluation (Prostate variant) — IFU contains no auto-contouring performance numbers.
+
+## Next step
+
+If you approve, I'll switch to build mode and apply the four file edits + bump `lastRevised: 2026-06-15` and append the IFU citation to `source`. Let me know if you'd rather I also open a tracker note that the training/center/performance disclosures are still missing from public Philips materials so we can chase a white paper.
