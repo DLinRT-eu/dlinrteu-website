@@ -296,7 +296,9 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
             placeholder="Add intended use statement"
           >
             <p className="text-muted-foreground text-sm">
-              {displayProduct.regulatory?.intendedUseStatement || "N/A"}
+              {displayProduct.regulatory?.intendedUseStatement
+                ? <AutoLinkText text={displayProduct.regulatory.intendedUseStatement} />
+                : "N/A"}
             </p>
           </EditableField>
         </div>

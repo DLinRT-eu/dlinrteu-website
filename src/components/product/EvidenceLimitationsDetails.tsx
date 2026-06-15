@@ -135,7 +135,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about evidence rigor"
               >
                 {evidenceRigorNotes && (
-                  <p className="text-sm text-muted-foreground">{evidenceRigorNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={evidenceRigorNotes} /></p>
                 )}
               </EditableField>
             </div>
@@ -177,7 +177,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about clinical impact"
               >
                 {clinicalImpactNotes && (
-                  <p className="text-sm text-muted-foreground">{clinicalImpactNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={clinicalImpactNotes} /></p>
                 )}
               </EditableField>
             </div>
@@ -219,7 +219,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about adoption readiness (residual effort to reach intended use)"
               >
                 {adoptionReadinessNotes && (
-                  <p className="text-sm text-muted-foreground">{adoptionReadinessNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={adoptionReadinessNotes} /></p>
                 )}
               </EditableField>
             </div>
