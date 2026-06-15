@@ -161,19 +161,19 @@ export default function AdminOverview() {
       // Fetch pending edit drafts
       const { data: drafts } = await supabase
         .from('product_edit_drafts')
-        .select('id, product_id, user_id, status, submitted_at, created_at')
+        .select('id, product_id, created_by, status, submitted_at, created_at')
         .eq('status', 'pending_review')
         .order('submitted_at', { ascending: false, nullsFirst: false })
         .limit(10);
       if (drafts && drafts.length > 0) {
-        const draftUserIds = Array.from(new Set(drafts.map(d => d.user_id)));
+        const draftUserIds = Array.from(new Set(drafts.map(d => d.created_by)));
         const { data: draftProfiles } = await supabase
           .from('profiles')
           .select('id, first_name, last_name, email')
           .in('id', draftUserIds);
         const profileMap = new Map((draftProfiles || []).map(p => [p.id, p]));
         setPendingEditDrafts(drafts.map(d => {
-          const p = profileMap.get(d.user_id) as any;
+          const p = profileMap.get(d.created_by) as any;
           return {
             ...d,
             submitter_name: p ? `${p.first_name ?? ''} ${p.last_name ?? ''}`.trim() : undefined,
