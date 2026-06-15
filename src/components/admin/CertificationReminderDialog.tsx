@@ -258,7 +258,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
               Recipients
               {!loadingRecipients && (
                 <Badge variant="secondary" className="ml-1.5 text-xs px-1.5 py-0 h-4">
-                  {recipients.length}
+                  {selectedIds.size}/{recipients.length}
                 </Badge>
               )}
             </TabsTrigger>
