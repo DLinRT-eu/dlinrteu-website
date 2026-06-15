@@ -73,6 +73,8 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
 
   const [recipients, setRecipients] = useState<Recipient[]>([]);
   const [loadingRecipients, setLoadingRecipients] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [search, setSearch] = useState('');
 
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
@@ -85,6 +87,48 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
     loadRecipients();
     loadLogs();
   }, [open]);
+
+  const filteredRecipients = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return recipients;
+    return recipients.filter((r) => {
+      const name = `${r.profiles?.first_name ?? ''} ${r.profiles?.last_name ?? ''}`.toLowerCase();
+      return (
+        name.includes(q) ||
+        (r.profiles?.email ?? '').toLowerCase().includes(q) ||
+        r.company_name.toLowerCase().includes(q)
+      );
+    });
+  }, [recipients, search]);
+
+  const allFilteredSelected =
+    filteredRecipients.length > 0 && filteredRecipients.every((r) => selectedIds.has(r.id));
+  const someFilteredSelected =
+    !allFilteredSelected && filteredRecipients.some((r) => selectedIds.has(r.id));
+
+  const toggleOne = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAllFiltered = () => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (allFilteredSelected) {
+        filteredRecipients.forEach((r) => next.delete(r.id));
+      } else {
+        filteredRecipients.forEach((r) => next.add(r.id));
+      }
+      return next;
+    });
+  };
+
+  const clearSelection = () => setSelectedIds(new Set());
+  const selectAll = () => setSelectedIds(new Set(recipients.map((r) => r.id)));
 
   const loadRecipients = async () => {
     setLoadingRecipients(true);
