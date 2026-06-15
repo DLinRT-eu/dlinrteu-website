@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
 import EvidenceCitation from "./EvidenceCitation";
+import AutoLinkText from "@/components/ui/AutoLinkText";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 import {
   EVIDENCE_RIGOR_LEVELS,
@@ -239,7 +240,9 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 {limitations!.map((item, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <XCircle className="h-4 w-4 mt-1 text-amber-500 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
+                    <span className="text-muted-foreground">
+                      <AutoLinkText text={item} />
+                    </span>
                   </li>
                 ))}
               </ul>
