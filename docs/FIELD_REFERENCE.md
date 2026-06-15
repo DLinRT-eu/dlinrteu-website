@@ -2,7 +2,28 @@
 
 This document explains every field used in DLinRT.eu product entries. Use it when reviewing or contributing product data to ensure consistent interpretation of each item.
 
+## Source Disclosure Policy (applies to every factual field)
+
+Every product field that asserts a fact — training data, evaluation data, supported structures, evidence, regulatory status, dose models, safety actions — **must be traceable to a disclosed source**. This rule binds humans, reviewers, and AI agents equally.
+
+- **Public sources are preferred**: peer-reviewed papers (DOI), FDA 510(k) summaries, CE summaries of safety, vendor public web pages, GitHub repositories.
+- **Non-public sources must be explicitly disclosed** (vendor email, NDA briefing, conference handout, login-gated portal) **and carry a retrieval date** in `YYYY-MM-DD` format.
+- Per-task / per-category evidence may legitimately have different sources and evidence levels (see `categoryEvidence`).
+
+Mechanism: any block carrying `source` / `sourceUrl` (currently `trainingData`, `evaluationData`, plus the dedicated `structuresProvenance` block) also accepts:
+
+| Field | Allowed Values | Notes |
+| --- | --- | --- |
+| `sourceAccess` | `public` \| `regulatory` \| `vendor-provided` \| `restricted` | Default-treated as `public` only when `sourceUrl` resolves. |
+| `sourceRetrievedOn` | `YYYY-MM-DD` | **Required** when `sourceAccess !== "public"`. |
+
+The UI surfaces non-public sources via a "Vendor-provided · retrieved YYYY-MM-DD" chip next to the affected section. Example: Synaptiq Mediq RT discloses the supported-structures list as vendor-provided (retrieved 2026-06-13).
+
 ## How to Read This Guide
+
+- **Field Name**: JSON / TypeScript key used in `ProductDetails`.
+- **Required?**: Whether the field must be present for every product.
+- **Purpose**: Why the field exists and how it is used.
 
 - **Field Name**: JSON / TypeScript key used in `ProductDetails`.
 - **Required?**: Whether the field must be present for every product.
