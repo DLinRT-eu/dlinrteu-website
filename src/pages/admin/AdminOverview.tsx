@@ -300,7 +300,7 @@ export default function AdminOverview() {
     }
   };
 
-  const totalPending = roleRequests.length + unassignedReviews.length + pendingRevisions.length;
+  const totalPending = roleRequests.length + unassignedReviews.length + pendingRevisions.length + pendingEditDrafts.length;
   const urgentCount = unassignedReviews.filter(r => r.priority === 'high').length;
 
   return (
