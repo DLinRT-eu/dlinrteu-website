@@ -197,8 +197,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Radiotherapy-specific use cases such as MR simulation, synthetic CT workflows, target/OAR delineation support, or quantitative adaptive workflows require local validation"
     ],
     clinicalEvidence: "FDA summaries and independent peer-reviewed studies support improved MR image quality and scan-time reduction feasibility across multiple anatomies and clinical applications. Clinical implementation should include local optimization and validation for each protocol and scanner configuration.",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database, GE HealthCare product documentation, CE-marking statements, and peer-reviewed literature"
   }
 ];

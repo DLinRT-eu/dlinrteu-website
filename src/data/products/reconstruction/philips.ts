@@ -260,8 +260,8 @@ export const SmartSpeed: ProductDetails = {
     clinicalEvidence:
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
     supersededBy: "philips-smartspeed-precise",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source:
       "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature."
   };
