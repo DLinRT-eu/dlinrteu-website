@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import {
   Dialog,
@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Mail,
   Loader2,
@@ -21,6 +22,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Building2,
+  Search,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -71,6 +73,8 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
 
   const [recipients, setRecipients] = useState<Recipient[]>([]);
   const [loadingRecipients, setLoadingRecipients] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [search, setSearch] = useState('');
 
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loadingLogs, setLoadingLogs] = useState(false);
@@ -83,6 +87,48 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
     loadRecipients();
     loadLogs();
   }, [open]);
+
+  const filteredRecipients = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return recipients;
+    return recipients.filter((r) => {
+      const name = `${r.profiles?.first_name ?? ''} ${r.profiles?.last_name ?? ''}`.toLowerCase();
+      return (
+        name.includes(q) ||
+        (r.profiles?.email ?? '').toLowerCase().includes(q) ||
+        r.company_name.toLowerCase().includes(q)
+      );
+    });
+  }, [recipients, search]);
+
+  const allFilteredSelected =
+    filteredRecipients.length > 0 && filteredRecipients.every((r) => selectedIds.has(r.id));
+  const someFilteredSelected =
+    !allFilteredSelected && filteredRecipients.some((r) => selectedIds.has(r.id));
+
+  const toggleOne = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAllFiltered = () => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (allFilteredSelected) {
+        filteredRecipients.forEach((r) => next.delete(r.id));
+      } else {
+        filteredRecipients.forEach((r) => next.add(r.id));
+      }
+      return next;
+    });
+  };
+
+  const clearSelection = () => setSelectedIds(new Set());
+  const selectAll = () => setSelectedIds(new Set(recipients.map((r) => r.id)));
 
   const loadRecipients = async () => {
     setLoadingRecipients(true);
@@ -125,12 +171,12 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
         return !repRoles.includes('admin');
       });
 
-      setRecipients(
-        filtered.map((rep: any) => ({
-          ...rep,
-          roles: roleMap.get(rep.user_id) || [],
-        }))
-      );
+      const loaded = filtered.map((rep: any) => ({
+        ...rep,
+        roles: roleMap.get(rep.user_id) || [],
+      }));
+      setRecipients(loaded);
+      setSelectedIds(new Set(loaded.map((r: Recipient) => r.id)));
     } catch (err: any) {
       console.error('Failed to load recipients:', err);
       toast.error('Could not load recipient list');
@@ -158,12 +204,17 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
   };
 
   const handleSend = async () => {
+    if (selectedIds.size === 0) {
+      toast.error('Select at least one recipient');
+      return;
+    }
     setSending(true);
     try {
       const { data, error } = await supabase.functions.invoke('send-certification-reminder', {
         body: {
           customSubject: subject !== DEFAULT_SUBJECT ? subject : undefined,
           customBody: body !== DEFAULT_BODY ? body : undefined,
+          recipientRepIds: Array.from(selectedIds),
         },
       });
 
@@ -207,7 +258,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
               Recipients
               {!loadingRecipients && (
                 <Badge variant="secondary" className="ml-1.5 text-xs px-1.5 py-0 h-4">
-                  {recipients.length}
+                  {selectedIds.size}/{recipients.length}
                 </Badge>
               )}
             </TabsTrigger>
@@ -261,38 +312,95 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
                 <p className="text-sm">No eligible recipients found</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                {recipients.map((rep) => (
-                  <div
-                    key={rep.id}
-                    className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 gap-3"
-                  >
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium truncate">
-                        {rep.profiles?.first_name} {rep.profiles?.last_name}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {rep.profiles?.email}
-                      </p>
+              <div className="space-y-3">
+                {/* Bulk actions toolbar */}
+                <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 -mx-1 px-1 pb-2 border-b border-border space-y-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Search by name, email, or company…"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="pl-9 h-9"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="cert-select-all-filtered"
+                        checked={allFilteredSelected ? true : someFilteredSelected ? 'indeterminate' : false}
+                        onCheckedChange={toggleAllFiltered}
+                        aria-label="Select all visible recipients"
+                      />
+                      <Label htmlFor="cert-select-all-filtered" className="text-xs text-muted-foreground cursor-pointer">
+                        {allFilteredSelected ? 'Deselect' : 'Select'} all visible ({filteredRecipients.length})
+                      </Label>
                     </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Building2 className="h-3 w-3" />
-                        <span>{rep.company_name}</span>
-                      </div>
-                      {rep.roles.map((role) => (
-                        <Badge
-                          key={role}
-                          variant={role === 'company' ? 'default' : 'secondary'}
-                          className="text-xs px-1.5 py-0 h-5 capitalize"
-                        >
-                          {role}
-                        </Badge>
-                      ))}
+                    <div className="flex items-center gap-1">
+                      <Button type="button" variant="ghost" size="sm" className="h-7 text-xs" onClick={selectAll}>
+                        Select all
+                      </Button>
+                      <Button type="button" variant="ghost" size="sm" className="h-7 text-xs" onClick={clearSelection}>
+                        Clear
+                      </Button>
                     </div>
                   </div>
-                ))}
+                  <p className="text-xs text-muted-foreground">
+                    {selectedIds.size} of {recipients.length} recipients selected
+                  </p>
+                </div>
+
+                {/* Recipient rows */}
+                <div className="space-y-2">
+                  {filteredRecipients.length === 0 ? (
+                    <p className="text-sm text-muted-foreground text-center py-6">No recipients match your search.</p>
+                  ) : (
+                    filteredRecipients.map((rep) => {
+                      const checked = selectedIds.has(rep.id);
+                      return (
+                        <label
+                          key={rep.id}
+                          className={`flex items-center justify-between rounded-lg border bg-card px-4 py-3 gap-3 cursor-pointer transition-colors ${
+                            checked ? 'border-primary/50 bg-primary/5' : 'border-border hover:bg-muted/30'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={() => toggleOne(rep.id)}
+                              aria-label={`Select ${rep.profiles?.email}`}
+                            />
+                            <div className="min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {rep.profiles?.first_name} {rep.profiles?.last_name}
+                              </p>
+                              <p className="text-xs text-muted-foreground truncate">
+                                {rep.profiles?.email}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                              <Building2 className="h-3 w-3" />
+                              <span>{rep.company_name}</span>
+                            </div>
+                            {rep.roles.map((role) => (
+                              <Badge
+                                key={role}
+                                variant={role === 'company' ? 'default' : 'secondary'}
+                                className="text-xs px-1.5 py-0 h-5 capitalize"
+                              >
+                                {role}
+                              </Badge>
+                            ))}
+                          </div>
+                        </label>
+                      );
+                    })
+                  )}
+                </div>
               </div>
             )}
           </TabsContent>
@@ -365,7 +473,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={sending}>
             Cancel
           </Button>
-          <Button onClick={handleSend} disabled={sending || recipients.length === 0}>
+          <Button onClick={handleSend} disabled={sending || selectedIds.size === 0}>
             {sending ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -374,7 +482,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
             ) : (
               <>
                 <Mail className="h-4 w-4 mr-2" />
-                Send to {loadingRecipients ? '…' : recipients.length} recipient{recipients.length !== 1 ? 's' : ''} →
+                Send to {loadingRecipients ? '…' : selectedIds.size} recipient{selectedIds.size !== 1 ? 's' : ''} →
               </>
             )}
           </Button>
