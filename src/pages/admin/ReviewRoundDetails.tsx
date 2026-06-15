@@ -26,6 +26,7 @@ import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMen
 import { Checkbox } from "@/components/ui/checkbox";
 import SortableHeader from "@/components/revision/table/SortableHeader";
 import { RoundExportButton } from "@/components/admin/review-rounds/RoundExportButton";
+import { SendRoundReminderDialog } from "@/components/admin/review-rounds/SendRoundReminderDialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
