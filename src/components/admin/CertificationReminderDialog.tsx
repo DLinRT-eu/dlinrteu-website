@@ -473,7 +473,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={sending}>
             Cancel
           </Button>
-          <Button onClick={handleSend} disabled={sending || recipients.length === 0}>
+          <Button onClick={handleSend} disabled={sending || selectedIds.size === 0}>
             {sending ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -482,7 +482,7 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
             ) : (
               <>
                 <Mail className="h-4 w-4 mr-2" />
-                Send to {loadingRecipients ? '…' : recipients.length} recipient{recipients.length !== 1 ? 's' : ''} →
+                Send to {loadingRecipients ? '…' : selectedIds.size} recipient{selectedIds.size !== 1 ? 's' : ''} →
               </>
             )}
           </Button>
