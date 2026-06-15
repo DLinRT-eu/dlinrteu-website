@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ShieldAlert, ExternalLink } from 'lucide-react';
 import type { ProductDetails } from '@/types/productDetails';
+import AutoLinkText from '@/components/ui/AutoLinkText';
 
 interface SafetyCorrectiveActionsDetailsProps {
   product: ProductDetails;
@@ -53,12 +54,12 @@ export default function SafetyCorrectiveActionsDetails({ product }: SafetyCorrec
               </span>
             </div>
 
-            <p className="text-sm">{action.description}</p>
+            <p className="text-sm"><AutoLinkText text={action.description} /></p>
 
             {action.action && (
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Action Taken</p>
-                <p className="text-sm">{action.action}</p>
+                <p className="text-sm"><AutoLinkText text={action.action} /></p>
               </div>
             )}
 
