@@ -312,37 +312,96 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
                 <p className="text-sm">No eligible recipients found</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                {recipients.map((rep) => (
-                  <div
-                    key={rep.id}
-                    className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 gap-3"
-                  >
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium truncate">
-                        {rep.profiles?.first_name} {rep.profiles?.last_name}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {rep.profiles?.email}
-                      </p>
+              <div className="space-y-3">
+                {/* Bulk actions toolbar */}
+                <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 -mx-1 px-1 pb-2 border-b border-border space-y-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Search by name, email, or company…"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="pl-9 h-9"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="cert-select-all-filtered"
+                        checked={allFilteredSelected ? true : someFilteredSelected ? 'indeterminate' : false}
+                        onCheckedChange={toggleAllFiltered}
+                        aria-label="Select all visible recipients"
+                      />
+                      <Label htmlFor="cert-select-all-filtered" className="text-xs text-muted-foreground cursor-pointer">
+                        {allFilteredSelected ? 'Deselect' : 'Select'} all visible ({filteredRecipients.length})
+                      </Label>
                     </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Building2 className="h-3 w-3" />
-                        <span>{rep.company_name}</span>
-                      </div>
-                      {rep.roles.map((role) => (
-                        <Badge
-                          key={role}
-                          variant={role === 'company' ? 'default' : 'secondary'}
-                          className="text-xs px-1.5 py-0 h-5 capitalize"
-                        >
-                          {role}
-                        </Badge>
-                      ))}
+                    <div className="flex items-center gap-1">
+                      <Button type="button" variant="ghost" size="sm" className="h-7 text-xs" onClick={selectAll}>
+                        Select all
+                      </Button>
+                      <Button type="button" variant="ghost" size="sm" className="h-7 text-xs" onClick={clearSelection}>
+                        Clear
+                      </Button>
                     </div>
                   </div>
+                  <p className="text-xs text-muted-foreground">
+                    {selectedIds.size} of {recipients.length} recipients selected
+                  </p>
+                </div>
+
+                {/* Recipient rows */}
+                <div className="space-y-2">
+                  {filteredRecipients.length === 0 ? (
+                    <p className="text-sm text-muted-foreground text-center py-6">No recipients match your search.</p>
+                  ) : (
+                    filteredRecipients.map((rep) => {
+                      const checked = selectedIds.has(rep.id);
+                      return (
+                        <label
+                          key={rep.id}
+                          className={`flex items-center justify-between rounded-lg border bg-card px-4 py-3 gap-3 cursor-pointer transition-colors ${
+                            checked ? 'border-primary/50 bg-primary/5' : 'border-border hover:bg-muted/30'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <Checkbox
+                              checked={checked}
+                              onCheckedChange={() => toggleOne(rep.id)}
+                              aria-label={`Select ${rep.profiles?.email}`}
+                            />
+                            <div className="min-w-0">
+                              <p className="text-sm font-medium truncate">
+                                {rep.profiles?.first_name} {rep.profiles?.last_name}
+                              </p>
+                              <p className="text-xs text-muted-foreground truncate">
+                                {rep.profiles?.email}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                              <Building2 className="h-3 w-3" />
+                              <span>{rep.company_name}</span>
+                            </div>
+                            {rep.roles.map((role) => (
+                              <Badge
+                                key={role}
+                                variant={role === 'company' ? 'default' : 'secondary'}
+                                className="text-xs px-1.5 py-0 h-5 capitalize"
+                              >
+                                {role}
+                              </Badge>
+                            ))}
+                          </div>
+                        </label>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
                 ))}
               </div>
             )}
