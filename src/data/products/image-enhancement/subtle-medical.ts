@@ -10,11 +10,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evaluationData: {
         results: "Not publicly disclosed",
-        sourceUrl: "https://doi.org/10.1016/j.jacr.2021.07.024",
-        source: "Andre et al. JACR 2021 (DOI: 10.1016/j.jacr.2021.07.024)",
-        studyDesign: "Retrospective multi-reader study",
+        sourceUrl: "https://doi.org/10.1007/s00330-025-11423-5",
+        source: "Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SubtleMR)",
+        studyDesign: "Software V&V (FDA 510(k)) + indirect-comparative systematic review",
         primaryEndpoint: "Diagnostic equivalence",
-        description: "Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols (JACR 2021) and a systematic review of commercial AI for MRI acceleration (Eur Radiol 2025)."
+        description: "FDA 510(k) software V&V (K191688, K223623). Indirect-comparative evidence from Fransen et al. Eur Radiol 2025 systematic review, which lists SubtleMR among 14 commercial MRI-acceleration products with peer-reviewed noise-reduction articles."
     },
     name: "SubtleMR",
     company: "Subtle Medical",
@@ -77,12 +77,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       deploymentScale: "1,000+ scanners deployed worldwide as of 2025",
       recognitions: ["TIME World's Top HealthTech Companies 2025", "CB Insights GenAI 50", "CB Insights Top AI 100"]
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SubtleMR. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling up to 80% faster scanning.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) clearances K191688, K223623. Fransen et al. Eur Radiol 2025 systematic review names SubtleMR (indirect-comparative). A previously cited Andre et al. JACR 2021 paper (doi:10.1016/j.jacr.2021.07.024) was removed on 2026-06-15: the cited DOI could not be verified to name SubtleMR. Candidate SubtleMR-specific papers (Bash et al. AJNR 2021 doi:10.3174/ajnr.A7358; Bash et al. Clin Neuroradiol 2022 doi:10.1007/s00062-021-01121-2) require source verification before inclusion. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed up to 80% faster scanning. Independent clinical-impact data limited to indirect-comparative systematic review.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -90,19 +90,19 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Andre et al. Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols. JACR 2021",
-        link: "https://doi.org/10.1016/j.jacr.2021.07.024"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K191688 (2019) and K223623 (2023) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
       },
       {
-        type: "Systematic Review",
-        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746",
+        type: "Systematic Review (indirect-comparative)",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736–4746. Names SubtleMR among 14 products reviewed.",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       }
     ],
-    clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    clinicalEvidence: "FDA clearance + indirect-comparative systematic review (Fransen 2025) naming SubtleMR. Direct primary-evidence DOIs require re-verification before re-citation.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
@@ -115,12 +115,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         description: "Deep learning-based PET image enhancement trained to perform noise reduction and increase image sharpness across multiple radiotracers."
     },
     evaluationData: {
-        description: "Vendor-independent validation study (Katsari et al. 2021) and multi-tracer validation (Liang et al. 2023) demonstrating diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement.",
-        sourceUrl: "https://doi.org/10.1007/s00259-021-05478-x",
-        primaryEndpoint: "Diagnostic equivalence",
-        studyDesign: "Low-dose PET validation study (vendor-independent)",
-        source: "Katsari et al. Eur J Nucl Med 2021 (DOI: 10.1007/s00259-021-05478-x)",
-        results: "Enables up to 4x faster scans or 75% dose reduction while maintaining diagnostic quality."
+        description: "FDA 510(k) software V&V (K182336, K211964). No SubtlePET-specific peer-reviewed clinical outcome study confirmed at this time.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
+        primaryEndpoint: "Not specified",
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K182336",
+        results: "Vendor-claimed up to 4x faster scans or 75% dose reduction; not independently confirmed."
     },
     name: "SubtlePET",
     company: "Subtle Medical",
@@ -180,28 +180,28 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation (vendor-independent). Liang et al. 2023 multi-tracer validation. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through PET enhancement enabling 4x faster scans or 75% dose reduction.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) clearances K182336 and K211964. A previously cited Katsari et al. Eur J Nucl Med 2021 paper (doi:10.1007/s00259-021-05478-x) was removed on 2026-06-15: the paper trains custom DLE models on GE scanners and does not name or evaluate SubtlePET. No confirmed SubtlePET-specific peer-reviewed publication identified. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement (4x faster scans / 75% dose reduction); no independently confirmed clinical impact study identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Katsari et al. Low-dose PET validation study (vendor-independent). Eur J Nucl Med 2021",
-        link: "https://doi.org/10.1007/s00259-021-05478-x"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K182336 (2018) and K211964 (2021) for SubtlePET — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf"
       }
     ],
-    clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
+    clinicalEvidence: "FDA clearances only; SubtlePET-specific peer-reviewed clinical outcome studies require verification before re-citation.",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K182336, K211964) and company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
@@ -216,8 +216,9 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         studyDesign: "Software V&V (FDA 510(k))",
         primaryEndpoint: "Not specified",
         results: "Not publicly disclosed",
-        description: "FDA 510(k) validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
-        source: "FDA 510(k) — K-number pending public database publication (cleared 2026-05-27)"
+        description: "FDA 510(k) K254013 validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
+        source: "FDA 510(k) K254013 (cleared 2026-05-14)",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
     },
     name: "SubtleHD(PET)",
     company: "Subtle Medical",
@@ -266,10 +267,10 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "Pending FDA database publication",
+        clearanceNumber: "K254013",
         regulationNumber: "21 CFR 892.1200",
         productCode: "KPS",
-        decisionDate: "2026-05-27"
+        decisionDate: "2026-05-14"
       },
       intendedUseStatement: "SubtleHD(PET) is an AI-powered image processing software intended for enhancement of PET images acquired with FDA-approved radiotracers, supporting noise reduction, image acceleration, and improved quantitative accuracy on PET/CT and PET/MR systems."
     },
@@ -279,15 +280,27 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA 510(k) clearance announced 2026-05-27. No independent peer-reviewed publications yet.",
+    evidenceRigorNotes: "FDA 510(k) K254013 cleared 2026-05-14 (announced 2026-05-27). No independent peer-reviewed publications yet.",
     clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
-    clinicalEvidence: "FDA 510(k) clearance based on validation across a broad range of accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
-    source: "PRNewswire 2026-05-27; Diagnostic Imaging 2026-05-27; FDA 510(k) K-number pending public database publication."
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance K254013 for SubtleHD-PET (1.x), cleared 2026-05-14.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
+      },
+      {
+        type: "Press Release",
+        description: "PRNewswire 2026-05-27 announcement naming SubtleHD(PET) FDA clearance.",
+        link: "https://subtlemedical.com/"
+      }
+    ],
+    clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
   {
     id: "aimify",

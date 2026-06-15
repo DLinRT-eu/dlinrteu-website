@@ -85,18 +85,8 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Yoo et al. Prospective comparison showing 32.3% average acquisition time saving vs. standard protocol with no degradation in image quality or diagnostic performance. Eur Radiol. 2023;33(12):8656-8668.",
-        link: "https://doi.org/10.1007/s00330-023-09679-2"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Lee et al. Prospective, multi-reader, multi-vendor study demonstrating 41% average scan time reduction with no degradation in image quality or diagnostic performance. Sci Rep. 2023;13:17264. PMID: 37828048.",
-        link: "https://doi.org/10.1038/s41598-023-44471-8"
-      },
-      {
-        type: "Systematic Review",
-        description: "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol. 2025;35(8):4736-4746.",
+        type: "Systematic Review (indirect-comparative)",
+        description: "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736–4746. SwiftMR is one of 14 products reviewed; covers SwiftMR-specific noise-reduction publications.",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       },
       {
@@ -117,18 +107,18 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Yoo et al. Eur Radiol 2023;33(12):8656-8668 prospective study (32.3% scan time reduction). Lee et al. Sci Rep 2023;13:17264 prospective multi-reader multi-vendor study (41% scan time reduction). Fransen et al. Eur Radiol 2025 systematic review. Clinical white paper: 184 exams, 18 radiologists, 6 subspecialties. Major update July 2025. OEM DL clearance April 2026. PubMed verified 2026-06-14.",
-    clinicalImpactNotes: "Workflow improvement through enhanced MRI quality enabling up to 50% faster scan times. Deployed in 20+ countries with over 2 million scans performed as of 2025.",
+    evidenceRigorNotes: "FDA 510(k) K230854 + OEM-DL expansion (Apr 2026). Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SwiftMR among 14 products with peer-reviewed noise-reduction articles). Clinical white paper: 184 exams, 18 radiologists. Two previously cited DOIs (Yoo et al. 10.1007/s00330-023-09679-2; Lee et al. 10.1038/s41598-023-44471-8) were removed on 2026-06-15: both return DOI-Not-Found and could not be verified to specific SwiftMR papers without a confirmed alternative DOI. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Workflow improvement supported by vendor white paper and indirect-comparative systematic review; primary prospective SwiftMR scan-time studies pending DOI verification before re-citation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
-    evidenceProspective: true,
+    evidenceProspective: false,
     evidenceExternalValidation: false,
-    clinicalEvidence: "Clinical studies showing improved diagnostic confidence and efficiency when interpreting enhanced images, with prospective data confirming 32–41% scan time reduction without quality degradation.",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR. Direct primary-evidence DOIs require re-verification before re-citation.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database, company website, PubMed"
   }
 ];
