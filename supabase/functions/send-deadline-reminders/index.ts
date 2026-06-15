@@ -181,11 +181,24 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    console.log(`Found ${reviews.length} reviews needing reminders`);
+    // Optional filter to a specific set of review assignment IDs (per-round reminder)
+    let filteredReviews = reviews as ReviewReminder[];
+    if (reviewIdsFilter && reviewIdsFilter.length > 0) {
+      const allow = new Set(reviewIdsFilter);
+      filteredReviews = filteredReviews.filter((r) => allow.has(r.review_id));
+      console.log(`Filtered to ${filteredReviews.length} of ${reviews.length} reviews by review_ids`);
+      if (filteredReviews.length === 0) {
+        return new Response(JSON.stringify({ success: true, message: "No matching reviews to remind", sent: 0 }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+    }
+
+    console.log(`Found ${filteredReviews.length} reviews needing reminders`);
 
     // Group reviews by reviewer
     const reviewsByReviewer = new Map<string, ReviewReminder[]>();
-    for (const review of reviews as ReviewReminder[]) {
+    for (const review of filteredReviews) {
       const existing = reviewsByReviewer.get(review.reviewer_id) || [];
       existing.push(review);
       reviewsByReviewer.set(review.reviewer_id, existing);
