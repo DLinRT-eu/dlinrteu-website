@@ -124,15 +124,9 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidence: [
       {
-        type: "FDA 510(k) Database Entry",
+        type: "Regulatory Clearance",
         description:
-          "FDA 510(k) device entry for EFAI RTSuite CT HN-Segmentation System (K220264)",
-        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K220264"
-      },
-      {
-        type: "FDA 510(k) PDF (Decision Letter + Summary)",
-        description:
-          "FDA 510(k) clearance documentation and summary for K220264",
+          "FDA 510(k) clearance K220264 for EFAI RTSuite CT HN-Segmentation System (database entry and summary PDF).",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220264.pdf"
       },
       {

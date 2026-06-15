@@ -80,14 +80,9 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "MR Contour DL 510(k) K242925 (GE Healthcare), cleared 2025-04-01.",
+        type: "Regulatory Clearance",
+        description: "MR Contour DL 510(k) K242925 (GE Healthcare), cleared 2025-04-01. FDA 510(k) summary PDF and database listing.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf"
-      },
-      {
-        type: "FDA 510(k) Premarket Notification",
-        description: "FDA 510(k) database listing for K242925 (MR Contour DL).",
-        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K242925"
       },
       {
         type: "Press Release",

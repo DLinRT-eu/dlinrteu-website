@@ -89,19 +89,14 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        type: "Multi-vendor Comparative Study",
+        description: "Doolan PJ et al. A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy. Front Oncol 2023;13:1213068. RayStation Deep Learning Segmentation is one of the evaluated systems (verified in Methods).",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Breast/thorax validation study in Acta Oncologica",
+        description: "Dedicated breast/thorax validation of RayStation Deep Learning Segmentation. Acta Oncologica 2023.",
         link: "https://doi.org/10.1080/0284186X.2023.2270152"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Early deep learning segmentation validation",
-        link: "https://doi.org/10.1016/j.radonc.2016.10.009"
       }
     ]
   }
