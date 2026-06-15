@@ -77,12 +77,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       deploymentScale: "1,000+ scanners deployed worldwide as of 2025",
       recognitions: ["TIME World's Top HealthTech Companies 2025", "CB Insights GenAI 50", "CB Insights Top AI 100"]
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Andre et al. JACR 2021 multi-reader study. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI acceleration covering SubtleMR. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through MRI enhancement enabling up to 80% faster scanning.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) clearances K191688, K223623. Fransen et al. Eur Radiol 2025 systematic review names SubtleMR (indirect-comparative). A previously cited Andre et al. JACR 2021 paper (doi:10.1016/j.jacr.2021.07.024) was removed on 2026-06-15: the cited DOI could not be verified to name SubtleMR. Candidate SubtleMR-specific papers (Bash et al. AJNR 2021 doi:10.3174/ajnr.A7358; Bash et al. Clin Neuroradiol 2022 doi:10.1007/s00062-021-01121-2) require source verification before inclusion. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed up to 80% faster scanning. Independent clinical-impact data limited to indirect-comparative systematic review.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -90,19 +90,19 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Andre et al. Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols. JACR 2021",
-        link: "https://doi.org/10.1016/j.jacr.2021.07.024"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K191688 (2019) and K223623 (2023) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
       },
       {
-        type: "Systematic Review",
-        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746",
+        type: "Systematic Review (indirect-comparative)",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736–4746. Names SubtleMR among 14 products reviewed.",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       }
     ],
-    clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard acquisition and accelerated protocols with SubtleMR enhancement",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    clinicalEvidence: "FDA clearance + indirect-comparative systematic review (Fransen 2025) naming SubtleMR. Direct primary-evidence DOIs require re-verification before re-citation.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K191688, K223623) and company website"
   },
   {
