@@ -161,10 +161,14 @@ const handler = async (req: Request): Promise<Response> => {
 
   let customSubject: string | undefined;
   let customBody: string | undefined;
+  let recipientRepIds: string[] | undefined;
   try {
     const body = await req.json();
     customSubject = body?.customSubject || undefined;
     customBody = body?.customBody || undefined;
+    if (Array.isArray(body?.recipientRepIds) && body.recipientRepIds.length > 0) {
+      recipientRepIds = body.recipientRepIds.filter((x: unknown) => typeof x === "string");
+    }
   } catch {
     // no body or invalid JSON
   }
