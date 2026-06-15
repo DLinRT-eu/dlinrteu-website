@@ -146,11 +146,11 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2025-10-21",
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "CE Mark IIa (Oct 2025). FDA K250064 for Dose+ module. Evidence primarily through individual module publications.",
-    clinicalImpactNotes: "Workflow improvement through unified AI platform integrating contouring, dose prediction, image synthesis, and registration.",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Platform-level evidence: CE Mark Class IIa (Oct 21, 2025) for Workspace+. Two previously cited Dose+ references (PR + FDA K250064) were removed on 2026-06-15: they evaluate the Dose+ module, not the Workspace+ platform, and were misleading at the platform level.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through unified AI platform integration; no platform-level independent clinical impact study identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E1 + CE: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -159,7 +159,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     categoryEvidence: {
       "Platform": {
         usesAI: true,
-        notes: "Aggregate platform: integrates Contour+, Image+, Adapt+ and Dose+ modules under a single CE-marked (IIa) workspace. Platform-level evidence is regulatory (CE IIa, Oct 2025) + Dose+ FDA K250064.",
+        notes: "Aggregate platform: integrates Contour+, Image+, Adapt+ and Dose+ modules under a single CE-marked (IIa) workspace. Platform-level evidence is regulatory (CE IIa, Oct 2025) only.",
       },
       "Image Synthesis": {
         usesAI: true,
@@ -175,28 +175,18 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       "Treatment Planning": {
         usesAI: true,
-        notes: "Dose+ module — patient-specific 3D dose prediction, FDA-cleared via K250064. Evidence currently vendor-reported; outcome-level validation pending.",
+        notes: "Dose+ module — patient-specific 3D dose prediction; tracked under the Dose+ product entry with its own FDA K250064 clearance (Sept 4, 2025). Not aggregated into the platform's regulatory evidence here.",
         evidenceRigor: "E1",
         clinicalImpact: "I1",
       },
     },
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     evidence: [
       {
         type: "Company Press Release",
         description: "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025)",
         link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
-      },
-      {
-        type: "Company Press Release",
-        description: "Dose+ FDA 510(k) clearance announcement",
-        link: "https://mvision.ai/mvision-ais-dose-receives-fda-510k-clearance-for-clinical-use-in-the-united-states/"
-      },
-      {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for Dose+ (K250064)",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250064.pdf"
       }
     ],
     limitations: [
@@ -204,7 +194,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Module availability may vary by country/market and regulatory status",
       "Performance depends on input image quality, acquisition protocols, and site-specific workflows",
     ],
-    source: "FDA 510(k) database (K250064), company website",
-    clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. One of the first truly cloud-native, vendor-neutral solutions to unify AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation in a single platform. Designed for clinical efficiency and interoperability with seamless integration into hospital PACS, treatment planning systems, and oncology information systems. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025. Dose+ received FDA 510(k) clearance (K250064) on September 4, 2025."
+    source: "MVision AI company press releases (CE Mark Oct 2025). Dose+ module FDA K250064 tracked separately under the Dose+ product entry.",
+    clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. Cloud-native, vendor-neutral platform unifying AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025."
   }
 ];
