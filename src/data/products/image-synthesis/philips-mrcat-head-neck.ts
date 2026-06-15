@@ -94,10 +94,13 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15",
     clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Upgraded from E0 to E1: First peer-reviewed independent retrospective clinical workflow and dosimetric validation study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751). Evidence remains limited by single-center retrospective design and modest cohort size (n=10 for H&N subset); no prospective multicenter outcome study identified.",
+    evidenceRigorNotes: "Independent peer-reviewed retrospective clinical workflow and dosimetric validation study (Buschmann et al. 2026, Z Med Phys, PMID 39956751, single-center, n=10). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 5.0, 6 hospitals × 85 patients): mean PTV dose difference 0.02 ± 0.27%, 99.7% voxels passing 2%/2 mm gamma and 97.9% passing the stricter 1%/1 mm criterion (body-outline matched). Vendor V&V does not by itself promote E (not vendor-independent), but materially extends multi-center technical evidence.",
     clinicalImpact: "I2",
     clinicalImpactNotes: "Workflow-level clinical utility demonstrated — enables MR-only radiotherapy planning and reduces CT-MR registration burden for eligible head-and-neck soft tissue tumor workflows. Peer-reviewed retrospective evidence supports dosimetric accuracy feasibility but not improved tumor control, toxicity, or survival outcomes.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "Raised from R2 to R3 (2026-06-15): vendor V&V across 6 hospitals × 85 patients disclosed in the Philips IFU appendix, combined with peer-reviewed validation (Buschmann 2026), supports moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
+    evidenceExternalValidation: true,
   }
 ];
