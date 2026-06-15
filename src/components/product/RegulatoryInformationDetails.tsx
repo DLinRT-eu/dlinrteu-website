@@ -6,6 +6,7 @@ import { CheckCircle, XCircle, AlertTriangle, Info, HelpCircle } from "lucide-re
 import { getStandardizedCertificationTags, parseFDAInfo, parseCEInfo, formatFDAInfo, formatCEInfo } from "@/utils/regulatoryUtils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { EditableField, useProductEdit, RegulatoryEditor } from "@/components/product-editor";
+import AutoLinkText from "@/components/ui/AutoLinkText";
 
 interface RegulatoryInformationProps {
   product: ProductDetails;
