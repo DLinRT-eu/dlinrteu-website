@@ -16,7 +16,7 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
         results: "Not publicly disclosed",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203020.pdf",
         studyDesign: "Software V&V (FDA 510(k))",
-        description: "Validation for FDA 510(k) clearance K203020 and a feasibility study on radiation dose reduction using AI-based spectral reconstruction for CT. clinicalEvidence suggests diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions.",
+        description: "Validation for FDA 510(k) clearance K203020. No SmartDose-specific peer-reviewed clinical outcome literature was identified.",
         source: "FDA 510(k) summary K203020"
     },
     name: "SmartDose CT Enhancement",
