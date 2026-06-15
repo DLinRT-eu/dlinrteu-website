@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Database, Globe, Users, ExternalLink } from 'lucide-react';
 import type { ProductDetails } from '@/types/productDetails';
+import SourceProvenanceChip from './SourceProvenanceChip';
 
 interface TrainingDataDetailsProps {
   product: ProductDetails;
@@ -106,12 +107,19 @@ export default function TrainingDataDetails({ product }: TrainingDataDetailsProp
           </div>
         )}
 
-        {data.sourceUrl && (
-          <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
-            <ExternalLink className="h-3 w-3" /> View source
-          </a>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {data.sourceUrl && (
+            <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-primary hover:underline">
+              <ExternalLink className="h-3 w-3" /> View source
+            </a>
+          )}
+          <SourceProvenanceChip
+            access={data.sourceAccess}
+            retrievedOn={data.sourceRetrievedOn}
+            source={data.source}
+          />
+        </div>
       </CardContent>
     </Card>
   );
