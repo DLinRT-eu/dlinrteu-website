@@ -80,9 +80,9 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
 
 },
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA validation K203020. Feasibility study on AI-based spectral reconstruction dose reduction (CVIR Oncol 2025). PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "Workflow improvement through low-dose CT enhancement enabling diagnostic quality at reduced radiation.",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA validation K203020. No SmartDose-specific peer-reviewed publications identified. A 2025 CVIR Oncol study previously cited evaluates a different Philips product (Spectral Precise Image) and was removed on 2026-06-15 per evidence-verification sweep. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through low-dose CT enhancement; no independent clinical impact studies identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -90,20 +90,15 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    clinicalEvidence: "Clinical studies showing diagnostic equivalence between enhanced low-dose images and standard-dose acquisitions",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Company website, peer-reviewed publications",
+    clinicalEvidence: "FDA 510(k) clearance K203020. No SmartDose-specific peer-reviewed clinical outcome studies identified as of 2026-06-15.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K203020) and company website",
     evidence: [
       {
         type: "Regulatory Clearance",
         description: "FDA 510(k) clearance K203020 received January 25, 2021 - Class II device under 21 CFR 892.1750",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203020.pdf",
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Feasibility of radiation dose reduction with AI-based spectral reconstruction for CT. CVIR Oncology 2025.",
-        link: "https://doi.org/10.1007/s44343-025-00021-3"
       },
     ],
   }
