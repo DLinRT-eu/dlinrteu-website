@@ -231,9 +231,9 @@ export const SmartSpeed: ProductDetails = {
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213583.pdf"
       },
       {
-        type: "Systematic Review",
+        type: "Indirect-comparative Systematic Review",
         description:
-          "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol. 2025;35:4736-4746.",
+          "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol. 2025;35:4736-4746. NOTE: surveys all commercial MRI AI acceleration products from RSNA 2023 / ECR 2024 exhibitors; SmartSpeed is one of several products covered and is not the primary subject of the study (relabelled indirect-comparative 2026-06-15).",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       },
       {

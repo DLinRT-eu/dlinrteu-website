@@ -12,12 +12,12 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         description: "Deep Convolutional Neural Network trained to produce cross-sectional images with lower noise and improved low-contrast detectability from raw CT projection data."
     },
     evaluationData: {
-        primaryEndpoint: "Dose reduction potential",
-        source: "Higaki et al. Eur Radiol 2020 (DOI: 10.1007/s00330-019-06523-0)",
-        results: "Up to 82% dose reduction potential with maintained image quality.",
-        sourceUrl: "https://doi.org/10.1007/s00330-019-06523-0",
-        description: "Multi-phantom and clinical studies demonstrating up to 82% dose reduction potential and improved image quality. Higaki et al. (2020) conducted a multi-phantom evaluation of the reconstruction performance.",
-        studyDesign: "Multi-phantom and retrospective clinical validation (FDA 510(k))"
+        primaryEndpoint: "Dose reduction potential and image-quality non-inferiority",
+        source: "FDA 510(k) summary K181862 (Software V&V)",
+        results: "FDA V&V supports non-inferior image quality at reduced dose; vendor claims up to 82% dose reduction potential. No fully verified independent multi-phantom dose-reduction publication retained after 2026-06-15 citation audit.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf",
+        description: "Software V&V from the FDA 510(k) submission. Previous citations to Higaki et al. Eur Radiol 2020 (DOI 10.1007/s00330-019-06523-0) and Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) were removed on 2026-06-15: the Higaki DOI does not resolve in the DOI System and the Yasui paper's abstract does not name AiCE or Canon equipment, so neither can be confirmed as direct AiCE CT evidence.",
+        studyDesign: "Software V&V (FDA 510(k))"
     },
     name: "AiCE CT",
     company: "Canon Medical Systems",
@@ -76,31 +76,21 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Higaki et al. Eur Radiol 2020 multi-phantom study. Tatsugami et al. Radiology 2019 coronary CTA. Sci Reports 2023 RT dose calc. Fransen et al. Eur Radiol 2025 systematic review of commercial AI for MRI/CT. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through dose reduction (up to 82%) with maintained image quality, enabling more efficient CT protocols.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "Downgraded from E2 to E1 on 2026-06-15 after citation verification: Higaki et al. Eur Radiol 2020 (DOI 10.1007/s00330-019-06523-0) does not resolve in the DOI System and was removed; Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) abstract does not name AiCE or Canon equipment and was removed pending independent confirmation. Remaining evidence is the FDA 510(k) clearance and the Canon product page.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through dose reduction (up to 82%) with maintained image quality. Independent peer-reviewed corroboration not currently cited.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate-to-high implementation effort — limited independent evidence currently cited; local phantom and clinical validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: true,
+    evidenceExternalValidation: false,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Higaki et al. Multi-phantom evaluation of deep learning CT reconstruction in European Radiology 2020",
-        link: "https://doi.org/10.1007/s00330-019-06523-0"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Validation of deep learning-based CT image reconstruction for treatment planning. Scientific Reports 2023",
-        link: "https://doi.org/10.1038/s41598-023-42775-x"
-      },
-      {
         type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for AiCE CT",
+        description: "FDA 510(k) clearance documentation for AiCE CT (K181862, Aquilion ONE / GENESIS Edition).",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf"
       },
       {
@@ -109,9 +99,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
       }
     ],
-    clinicalEvidence: "Multiple clinical studies demonstrating excellent image quality at ultra-low-dose settings across various clinical applications",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    clinicalEvidence: "FDA 510(k) software V&V supports the AiCE CT clearance; no peer-reviewed independent clinical evaluation is currently cited after 2026-06-15 citation audit.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database and company website"
   },
   {
