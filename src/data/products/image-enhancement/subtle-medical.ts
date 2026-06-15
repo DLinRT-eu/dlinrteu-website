@@ -180,28 +180,28 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Katsari et al. Eur J Nucl Med 2021 low-dose PET validation (vendor-independent). Liang et al. 2023 multi-tracer validation. PubMed verified 2026-02-27.",
-    clinicalImpactNotes: "Workflow improvement through PET enhancement enabling 4x faster scans or 75% dose reduction.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "FDA 510(k) clearances K182336 and K211964. A previously cited Katsari et al. Eur J Nucl Med 2021 paper (doi:10.1007/s00259-021-05478-x) was removed on 2026-06-15: the paper trains custom DLE models on GE scanners and does not name or evaluate SubtlePET. No confirmed SubtlePET-specific peer-reviewed publication identified. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement (4x faster scans / 75% dose reduction); no independently confirmed clinical impact study identified.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Katsari et al. Low-dose PET validation study (vendor-independent). Eur J Nucl Med 2021",
-        link: "https://doi.org/10.1007/s00259-021-05478-x"
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K182336 (2018) and K211964 (2021) for SubtlePET — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf"
       }
     ],
-    clinicalEvidence: "Multiple peer-reviewed studies showing diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement",
+    clinicalEvidence: "FDA clearances only; SubtlePET-specific peer-reviewed clinical outcome studies require verification before re-citation.",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K182336, K211964) and company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
