@@ -91,8 +91,8 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.",
     clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [

@@ -77,8 +77,8 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",

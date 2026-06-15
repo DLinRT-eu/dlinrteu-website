@@ -78,7 +78,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2022-04-28",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     supersededBy: "everfortune-seg-pro-v3",
     supportedStructures: [
       // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
@@ -112,7 +112,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -232,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -375,7 +375,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     guidelines: [
       {
         name: "AAPM TG-263",

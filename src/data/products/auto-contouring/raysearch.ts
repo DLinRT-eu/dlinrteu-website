@@ -83,8 +83,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     version: "12.0",
     releaseDate: "2023-12-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

@@ -87,8 +87,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "2.5",
     releaseDate: "2023-10-05",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
     evidence: [
       {

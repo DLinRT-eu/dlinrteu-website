@@ -130,8 +130,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Multi-vendor and multi-modality integration",
     "Cloud-based data storage and visualization"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
     "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",

@@ -71,7 +71,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2026-01-23",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     supportedStructures: [
       // H&N Structures and elective nodes
       "Head & Neck: Eye_L",
@@ -256,7 +256,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1038/s41598-025-33567-6"
       }
     ],
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

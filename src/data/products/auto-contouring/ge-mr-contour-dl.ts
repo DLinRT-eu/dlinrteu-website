@@ -109,8 +109,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module. releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];

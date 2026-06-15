@@ -78,8 +78,8 @@ const rawProduct: ProductDetails = {
   },
   version: "4.0",
   releaseDate: "2025-08-20",
-  lastUpdated: "2026-06-13",
-  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-15",
+  lastRevised: "2026-06-15",
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",
