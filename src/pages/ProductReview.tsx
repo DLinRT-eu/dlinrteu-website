@@ -143,6 +143,10 @@ const ProductReview = () => {
           <ProductRevisionHistory productId={id!} />
         </TabsContent>
 
+        <TabsContent value="visual-edits">
+          <VisualEditHistory productId={id!} />
+        </TabsContent>
+
         <TabsContent value="details">
           <ProductDetails product={product} />
         </TabsContent>
