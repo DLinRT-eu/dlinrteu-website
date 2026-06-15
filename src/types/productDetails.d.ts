@@ -51,6 +51,11 @@ export interface ProductDetails extends Product {
       type?: string;
       decisionDate?: string;
       notes?: string;
+      additionalClearances?: Array<{
+        clearanceNumber?: string;
+        decisionDate?: string;
+        notes?: string;
+      }>;
     } | string; // Backward compatibility
     tga?: {
       status: string;
@@ -69,6 +74,7 @@ export interface ProductDetails extends Product {
     onMarketSince?: string;
     distributionChannels?: string[];
     availability?: string;
+    deploymentScale?: string;
   };
   pricing?: {
     model?: string[];
