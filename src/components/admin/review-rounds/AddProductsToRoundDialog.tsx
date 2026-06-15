@@ -130,18 +130,15 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
     });
   };
 
-  const toggleAllVisible = () => {
+  const selectAllMatching = () => {
     setSelected((prev) => {
       const next = new Set(prev);
-      const allSelected = candidates.every((c) => next.has(c.id));
-      if (allSelected) {
-        candidates.forEach((c) => next.delete(c.id));
-      } else {
-        candidates.forEach((c) => next.add(c.id));
-      }
+      allMatching.forEach((c) => next.add(c.id));
       return next;
     });
   };
+
+  const clearSelection = () => setSelected(new Set());
 
   const handleSubmit = async () => {
     const ids = Array.from(selected);
