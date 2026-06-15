@@ -10,11 +10,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evaluationData: {
         results: "Not publicly disclosed",
-        sourceUrl: "https://doi.org/10.1016/j.jacr.2021.07.024",
-        source: "Andre et al. JACR 2021 (DOI: 10.1016/j.jacr.2021.07.024)",
-        studyDesign: "Retrospective multi-reader study",
+        sourceUrl: "https://doi.org/10.1007/s00330-025-11423-5",
+        source: "Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SubtleMR)",
+        studyDesign: "Software V&V (FDA 510(k)) + indirect-comparative systematic review",
         primaryEndpoint: "Diagnostic equivalence",
-        description: "Multi-reader study demonstrating diagnostic equivalence with accelerated MRI protocols (JACR 2021) and a systematic review of commercial AI for MRI acceleration (Eur Radiol 2025)."
+        description: "FDA 510(k) software V&V (K191688, K223623). Indirect-comparative evidence from Fransen et al. Eur Radiol 2025 systematic review, which lists SubtleMR among 14 commercial MRI-acceleration products with peer-reviewed noise-reduction articles."
     },
     name: "SubtleMR",
     company: "Subtle Medical",
