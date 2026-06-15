@@ -130,6 +130,7 @@ const handler = async (req: Request): Promise<Response> => {
     let thresholdDays: number | undefined;
     let minIntervalHours: number | undefined;
     let forceRun = false;
+    let reviewIdsFilter: string[] | undefined;
     
     if (req.method === "POST") {
       try {
@@ -137,7 +138,10 @@ const handler = async (req: Request): Promise<Response> => {
         thresholdDays = body.threshold_days;
         minIntervalHours = body.min_interval_hours;
         forceRun = body.force === true;
-        console.log("Request params:", { thresholdDays, minIntervalHours, forceRun });
+        if (Array.isArray(body.review_ids) && body.review_ids.length > 0) {
+          reviewIdsFilter = body.review_ids.filter((id: unknown) => typeof id === "string");
+        }
+        console.log("Request params:", { thresholdDays, minIntervalHours, forceRun, reviewIdsCount: reviewIdsFilter?.length });
       } catch {
         // No body or invalid JSON, use defaults
       }
