@@ -216,8 +216,9 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         studyDesign: "Software V&V (FDA 510(k))",
         primaryEndpoint: "Not specified",
         results: "Not publicly disclosed",
-        description: "FDA 510(k) validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
-        source: "FDA 510(k) — K-number pending public database publication (cleared 2026-05-27)"
+        description: "FDA 510(k) K254013 validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
+        source: "FDA 510(k) K254013 (cleared 2026-05-14)",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
     },
     name: "SubtleHD(PET)",
     company: "Subtle Medical",
