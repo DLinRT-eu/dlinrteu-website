@@ -313,7 +313,7 @@ export function ProductEditProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsSaving(false);
     }
-  }, [user, currentDraft, saveDraft, disableEditMode]);
+  }, [user, currentDraft, saveDraft, disableEditMode, originalProduct, changedFields]);
 
   
   const loadExistingDraft = useCallback(async (productId: string) => {
