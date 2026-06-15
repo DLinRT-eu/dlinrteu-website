@@ -685,30 +685,30 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Doolan et al. Single-center comparison of 5 commercial AI auto-contouring systems on 80 patients. Front Oncol 2023;13:1213068",
+        type: "Multi-vendor Comparative Study",
+        description: "Doolan et al. Single-center comparison of 5 commercial AI auto-contouring systems (Mirada, MVision, Radformation [Rad], RayStation, TheraPanacea) on 80 patients. Front Oncol 2023;13:1213068. Radformation explicitly included — direct comparative evidence (verified 2026-06-15).",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Goddard et al. Physician-scored evaluation of 3 commercial AI autocontouring systems including Radformation and implementation decision across a five-facility health system. Radiat Oncol 2024;19:69",
+        type: "Multi-vendor Comparative Study",
+        description: "Goddard et al. Physician-scored evaluation of 3 commercial AI autocontouring solutions (MIM-ProtégéAI+, Radformation-AutoContour [RAD], Siemens-DirectORGANS) across a five-facility health system. Radiat Oncol 2024;19:69. Radformation explicitly included — direct comparative (verified 2026-06-15).",
         link: "https://doi.org/10.1186/s13014-024-02451-4"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        type: "Multi-vendor Comparative Study",
+        description: "Lin/Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software (Limbus AI, MIM Contour ProtégéAI, Radformation AutoContour, Siemens syngo.via) for abdominal OARs (111 patients). JACMP 2025;26(4):e70010. Radformation explicitly included — direct comparative.",
         link: "https://doi.org/10.1002/acm2.70010"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        type: "Multi-vendor Comparative Study",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems including RadFormation (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140. Radformation explicitly included — direct comparative.",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
     version: "2.7",
     releaseDate: "2026-03-19",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Fan 2025), accessed 2026-06-10"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15)."
   }
 ];

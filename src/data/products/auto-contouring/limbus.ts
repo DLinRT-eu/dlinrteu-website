@@ -114,8 +114,8 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/curroncol32060321"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        type: "Multi-vendor Comparative Study",
+        description: "Lin/Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software (Limbus AI, MIM, Radformation, Siemens syngo.via) for abdominal OARs (111 patients). JACMP 2025;26(4):e70010. Limbus explicitly included — direct comparative (verified 2026-06-15).",
         link: "https://doi.org/10.1002/acm2.70010"
       },
       {
@@ -130,22 +130,22 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Starke et al. Clinical evaluation for prostate and nodes RT (multi-institution, Canada & UK, 13-26 min time savings). BJR 2024",
+        description: "Starke et al. Clinical evaluation of the efficacy of limbus AI software to augment contouring for prostate and nodes RT. BJR 2024 (DOI 10.1093/bjr/tqae077). Direct single-product evaluation of Limbus (verified 2026-06-15).",
         link: "https://doi.org/10.1093/bjr/tqae077"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        type: "Multi-vendor Comparative Study",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems including Limbus AI v1.5 and v1.6 (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140. Limbus explicitly included — direct comparative.",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Bayley et al. Comparison of two auto-contouring systems for H&N OARs to institutional reference standard. Appl Sci 2026;16(11):5681",
+        type: "Multi-vendor Comparative Study",
+        description: "Bayley et al. Comparison of MIM Contour ProtégéAI v4.0.0 and Radformation/Limbus AI v1.7.0 for H&N OARs vs institutional reference. Appl Sci 2026;16(11):5681. Limbus explicitly included — direct comparative.",
         link: "https://doi.org/10.3390/app16115681"
       }
     ],
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K241837), company official sources"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K241837), company official sources. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include Limbus per Methods."
   }
 ];

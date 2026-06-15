@@ -83,15 +83,15 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Multi-center comparison of 5 AI auto-contouring systems on 80 patients",
+        type: "Multi-vendor Comparative Study",
+        description: "Doolan et al. Clinical evaluation of 5 commercial AI contouring systems (Mirada [Mir], MVision, Radformation, RayStation, TheraPanacea) on 80 patients (breast/H&N/lung/prostate). Mirada explicitly included and benchmarked — direct evidence for this product. Front Oncol 2023;13:1213068.",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
       }
     ],
     version: "2.2",
     releaseDate: "2023-05-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Historical records - product discontinued"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Historical records - product discontinued; citation re-verified 2026-06-15 (Doolan 2023 directly evaluates Mirada per its Methods)."
   }
 ];
