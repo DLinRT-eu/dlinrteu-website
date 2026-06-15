@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -23,10 +24,21 @@ interface InviteCompanyRepDialogProps {
   onSent?: () => void;
 }
 
-const buildDefaultMessage = (firstName: string) =>
+const buildInviteMessage = (firstName: string) =>
   `Dear ${firstName?.trim() ? firstName.trim() : '[First Name]'},
 
 Thank you very much for contributing to the accuracy of this initiative. We hope the radiotherapy community will benefit greatly from our platform, bringing users, clinical teams, and vendors one step closer together in our shared mission to improve patient care.
+
+Information about the company review process can be found at: https://dlinrt.eu/company/guide
+
+Best regards,`;
+
+const buildForceMessage = (firstName: string, companyName: string) =>
+  `Dear ${firstName?.trim() ? firstName.trim() : '[First Name]'},
+
+A DLinRT.eu administrator has created a company representative account for you on behalf of ${companyName}. You are now registered and linked to this company.
+
+To activate your account, please click the button below to set your password. After that you can sign in, certify product information, submit revisions, and manage your company's catalogue listings.
 
 Information about the company review process can be found at: https://dlinrt.eu/company/guide
 
@@ -43,24 +55,30 @@ export default function InviteCompanyRepDialog({
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [position, setPosition] = useState('');
-  const [message, setMessage] = useState(() => buildDefaultMessage(''));
+  const [forceRegister, setForceRegister] = useState(false);
+  const [message, setMessage] = useState(() => buildInviteMessage(''));
   const [sending, setSending] = useState(false);
   const messageEditedRef = useRef(false);
 
-  // Keep the default template in sync with the first name until the admin edits it manually.
+  // Keep the default template in sync with first name + mode until the admin edits it manually.
   useEffect(() => {
     if (!messageEditedRef.current) {
-      setMessage(buildDefaultMessage(firstName));
+      setMessage(
+        forceRegister
+          ? buildForceMessage(firstName, companyName)
+          : buildInviteMessage(firstName)
+      );
     }
-  }, [firstName]);
+  }, [firstName, forceRegister, companyName]);
 
   const reset = () => {
     setEmail('');
     setFirstName('');
     setLastName('');
     setPosition('');
+    setForceRegister(false);
     messageEditedRef.current = false;
-    setMessage(buildDefaultMessage(''));
+    setMessage(buildInviteMessage(''));
   };
 
   const handleSubmit = async () => {
@@ -81,13 +99,18 @@ export default function InviteCompanyRepDialog({
             lastName: lastName.trim() || undefined,
             position: position.trim() || undefined,
             message: message.trim() || undefined,
+            forceRegister,
           },
         }
       );
       if (error) throw error;
       if ((data as any)?.error) throw new Error((data as any).error);
 
-      toast.success(`Invitation sent to ${email}`);
+      toast.success(
+        forceRegister
+          ? `Account created — password-setup email sent to ${email}`
+          : `Invitation sent to ${email}`
+      );
       reset();
       onOpenChange(false);
       onSent?.();
@@ -148,6 +171,33 @@ export default function InviteCompanyRepDialog({
               placeholder="e.g. Product Manager"
             />
           </div>
+          <div className="flex items-start gap-2 rounded-md border bg-muted/40 p-3">
+            <Checkbox
+              id="invite-force"
+              checked={forceRegister}
+              onCheckedChange={(v) => {
+                const next = v === true;
+                setForceRegister(next);
+                // Reset the message to the matching template unless admin already edited it.
+                if (!messageEditedRef.current) {
+                  setMessage(
+                    next
+                      ? buildForceMessage(firstName, companyName)
+                      : buildInviteMessage(firstName)
+                  );
+                }
+              }}
+            />
+            <div className="space-y-1">
+              <Label htmlFor="invite-force" className="cursor-pointer">
+                Register the representative now and send a password-setup email
+              </Label>
+              <p className="text-xs text-muted-foreground">
+                Creates the account immediately and links it to {companyName}. The recipient
+                receives a Set-Password email instead of an invitation link.
+              </p>
+            </div>
+          </div>
           <div>
             <Label htmlFor="invite-message">Email message</Label>
             <Textarea
@@ -162,8 +212,9 @@ export default function InviteCompanyRepDialog({
               className="font-mono text-sm"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              Editable template. Line breaks are preserved. The signature block, accept-invitation
-              button and expiry notice are appended automatically.
+              Editable template. Line breaks are preserved. The signature block,
+              {forceRegister ? ' Set-Password button' : ' accept-invitation button'} and expiry
+              notice are appended automatically.
             </p>
           </div>
         </div>
@@ -173,7 +224,11 @@ export default function InviteCompanyRepDialog({
           </Button>
           <Button onClick={handleSubmit} disabled={sending}>
             <Mail className="h-4 w-4 mr-2" />
-            {sending ? 'Sending...' : 'Send invitation'}
+            {sending
+              ? 'Sending...'
+              : forceRegister
+                ? 'Register & send password email'
+                : 'Send invitation'}
           </Button>
         </DialogFooter>
       </DialogContent>

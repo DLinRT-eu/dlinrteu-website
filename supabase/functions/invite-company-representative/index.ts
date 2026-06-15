@@ -39,6 +39,7 @@ interface InvitePayload {
   lastName?: string;
   position?: string;
   message?: string;
+  forceRegister?: boolean;
 }
 
 serve(async (req) => {
@@ -82,7 +83,16 @@ serve(async (req) => {
     }
 
     const payload: InvitePayload = await req.json();
-    const { email, companyId, companyName, firstName, lastName, position, message } = payload;
+    const {
+      email,
+      companyId,
+      companyName,
+      firstName,
+      lastName,
+      position,
+      message,
+      forceRegister,
+    } = payload;
 
     if (!email || !companyId || !companyName) {
       return new Response(
