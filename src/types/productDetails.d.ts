@@ -51,7 +51,23 @@ export interface ProductDetails extends Product {
       type?: string;
       decisionDate?: string;
       notes?: string;
+      additionalClearances?: Array<{
+        clearanceNumber?: string;
+        decisionDate?: string;
+        date?: string;
+        notes?: string;
+        description?: string;
+        sourceUrl?: string;
+      }>;
     } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
+    tga?: {
+      status: string;
+      notes?: string;
+    };
     tga?: {
       status: string;
       notes?: string;
@@ -69,6 +85,8 @@ export interface ProductDetails extends Product {
     onMarketSince?: string;
     distributionChannels?: string[];
     availability?: string;
+    deploymentScale?: string;
+    recognitions?: string | string[];
   };
   pricing?: {
     model?: string[];

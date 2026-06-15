@@ -45,49 +45,6 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     source: "Company website - listed as 'Coming Soon'"
   },
   {
-    id: "therapanacea-tumorbox-pipeline",
-    name: "TumorBox",
-    company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-    description: "AI-powered tumor segmentation module for the ART-Plan+ platform. Provides automated delineation of tumor volumes (GTV, CTV, PTV) using advanced deep learning algorithms.",
-    features: [
-      "Automatic tumor segmentation",
-      "GTV/CTV/PTV delineation",
-      "Multi-modality support",
-      "Adaptive contouring"
-    ],
-    category: "Auto-Contouring",
-    certification: "Pipeline",
-    developmentStage: "pipeline",
-    logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/",
-    anatomicalLocation: ["Multi-site"],
-    modality: ["CT", "MRI", "PET"],
-    subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: [
-      "Automatic GTV delineation using deep learning",
-      "CTV and PTV expansion algorithms",
-      "Multi-modality image fusion support",
-      "Adaptive re-contouring for ART workflows"
-    ],
-    partOf: {
-      name: "ART-Plan+",
-      productUrl: "https://www.therapanacea.eu/our-products/",
-      relationship: "Module"
-    },
-    usesAI: true,
-    regulatory: {
-      intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 23 May 2026.)",
-    },
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website - listed as 'Coming Soon'"
-  },
-  {
     id: "therapanacea-brachybox-pipeline",
     name: "BrachyBox",
     company: "Therapanacea",
