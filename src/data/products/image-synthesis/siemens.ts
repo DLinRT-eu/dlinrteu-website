@@ -72,11 +72,18 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     version: "VB80",
     releaseDate: "2024-09-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Company website",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
+    evidence: [
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark dataset and acceptance levels for MR-only RT commissioning; not a direct syngo.via evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
+      }
+    ],
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature (e.g., Aljaafari et al. 2025 review). Single-center validations available.",
+    evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature; single-center validations available. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated in clinical studies for brain and pelvic synthetic CT generation.",
     adoptionReadiness: "R3",

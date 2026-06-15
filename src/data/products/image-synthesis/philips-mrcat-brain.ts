@@ -102,10 +102,15 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         type: "Clinical Validation",
         description: "Aljaafari et al. Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning. Tech Innov Patient Support Radiat Oncol 2025;35:100328. 93 patients, 572 CBCT registrations. PTV dose differences <0.4%, positioning within ±1mm/±1°.",
         link: "https://doi.org/10.1016/j.tipsro.2025.100328"
+      },
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MRCAT Brain commissioning; not a direct MRCAT evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance.",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results.",
     adoptionReadiness: "R3",

@@ -11,12 +11,12 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf"
     },
     evaluationData: {
-        source: "Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
-        sourceUrl: "https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
-        studyDesign: "Vendor V&V disclosed in Philips IFU appendix (4 hospitals)",
+        source: "Maspero et al. Phys Imaging Radiat Oncol 2018;7:58–64 (DOI 10.1016/j.phro.2018.09.002); Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15); indirect-comparative: Cusumano, Maspero et al. Radiother Oncol 2026 MESCAL (DOI 10.1016/j.radonc.2026.111530)",
+        sourceUrl: "https://doi.org/10.1016/j.phro.2018.09.002",
+        studyDesign: "Independent peer-reviewed feasibility study (Maspero 2018, rectum) + vendor V&V disclosed in Philips IFU appendix (4 hospitals)",
         primaryEndpoint: "Dosimetric equivalence to CT-based planning; gamma analysis (3%/3 mm)",
-        description: "Vendor V&V disclosed in the Philips IFU appendix (RTgo 4.1): 4 hospitals × 103 patients, mean PTV dose difference −0.31 ± 0.51%, 99.9% voxels passing 3%/3 mm gamma. NOTE: previous citation to Persson et al. MR-OPERA (Int J Radiat Oncol Biol Phys 2020;108:1265-1275) removed on 2026-06-15 — MR-OPERA validates the Spectronic MRiPlanner atlas-based synthetic CT (not Philips MRCAT) and therefore is not direct evidence for MRCAT Pelvis.",
-        results: "Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.31 ± 0.51% (min/max −1.71/+0.46%); 3%/3 mm gamma pass 99.9 ± 0.64% (median gamma 0.15 ± 0.09). Positioning study: 1 hospital × 11 patients.",
+        description: "Independent: Maspero et al. (Phys Imaging Radiat Oncol 2018, DOI 10.1016/j.phro.2018.09.002) demonstrated feasibility of MR-only rectum radiotherapy using the commercial Philips MRCAT pelvis synthetic CT generator (direct evaluation of MRCAT). Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients, mean PTV dose difference −0.31 ± 0.51%, 99.9% voxels passing 3%/3 mm gamma. Indirect-comparative context: Cusumano, Maspero et al. Radiother Oncol 2026 MESCAL initiative (DOI 10.1016/j.radonc.2026.111530) provides community benchmark dataset and acceptance levels for MR-only RT commissioning. NOTE: previous citation to Persson et al. MR-OPERA removed on 2026-06-15 — MR-OPERA validates the Spectronic MRiPlanner atlas-based synthetic CT (not Philips MRCAT) and therefore is not direct evidence for MRCAT Pelvis.",
+        results: "Independent (Maspero 2018, rectum, n=12): MR-only dosimetric agreement with CT-based planning within clinically acceptable tolerances for rectal cancer VMAT. Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.31 ± 0.51% (min/max −1.71/+0.46%); 3%/3 mm gamma pass 99.9 ± 0.64% (median gamma 0.15 ± 0.09). Positioning study: 1 hospital × 11 patients.",
         sites: 4
     },
     name: "MRCAT Pelvis",
@@ -95,16 +95,27 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-15",
     lastRevised: "2026-06-15",
     source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
-    clinicalEvidence: "Vendor V&V across 4 hospitals (Philips IFU appendix) demonstrates dosimetric equivalence to CT-based planning for pelvic radiation therapy. No directly-attributable independent peer-reviewed MRCAT Pelvis study is currently cited after 2026-06-15 citation audit.",
-    evidence: [],
-    evidenceRigor: "E0",
-    evidenceRigorNotes: "Downgraded from E1 to E0 on 2026-06-15: previous citation to Persson et al. MR-OPERA 2020 removed because MR-OPERA validates the Spectronic MRiPlanner atlas-based synthetic CT, not Philips MRCAT. Remaining evidence is vendor V&V disclosed in the Philips IFU appendix (4 hospitals × 103 patients).",
+    clinicalEvidence: "Independent feasibility study by Maspero et al. (Phys Imaging Radiat Oncol 2018, DOI 10.1016/j.phro.2018.09.002) directly evaluating the commercial Philips MRCAT pelvis synthetic CT generator for MR-only rectum radiotherapy, complemented by vendor V&V across 4 hospitals (Philips IFU appendix).",
+    evidence: [
+      {
+        type: "Clinical Validation",
+        description: "Maspero M et al. Feasibility of magnetic resonance imaging-only rectum radiotherapy with a commercial synthetic computed tomography generation solution. Phys Imaging Radiat Oncol 2018;7:58–64. Direct evaluation of Philips MRCAT pelvis for rectal cancer MR-only RT.",
+        link: "https://doi.org/10.1016/j.phro.2018.09.002"
+      },
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MRCAT Pelvis commissioning; not a direct MRCAT evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
+      }
+    ],
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "Restored to E1 on 2026-06-15 after adding Maspero et al. 2018 (Phys Imaging Radiat Oncol, DOI 10.1016/j.phro.2018.09.002), an independent peer-reviewed feasibility study that directly evaluates Philips MRCAT pelvis for MR-only rectal cancer RT. Cusumano/Maspero MESCAL 2026 (Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) kept as indirect-comparative community benchmark. Vendor V&V across 4 hospitals × 103 patients in the Philips IFU appendix complements but does not by itself promote E.",
     clinicalImpact: "I1",
-    clinicalImpactNotes: "Vendor V&V demonstrates dosimetric equivalence to CT-based planning for pelvic RT; no independently-attributable clinical-impact publication currently cited for MRCAT Pelvis specifically.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): moderate-to-high implementation effort — independent peer-reviewed validation pending; local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    clinicalImpactNotes: "Independent feasibility evidence (Maspero 2018, rectum) plus vendor V&V across 4 hospitals demonstrate dosimetric equivalence to CT-based planning for pelvic RT; no outcome-level data.",
+    adoptionReadiness: "R3",
+    adoptionReadinessNotes: "Raised from R2 to R3 (2026-06-15) after addition of Maspero 2018 direct MRCAT pelvis evaluation. Moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
-    evidenceExternalValidation: false
+    evidenceExternalValidation: true
   }
 ];
