@@ -19,13 +19,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus, CalendarClock } from "lucide-react";
+import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus, CalendarClock, Shuffle } from "lucide-react";
 import { toast } from "sonner";
 import { updateRoundStatusAdmin, cloneReviewRoundAdmin } from "@/utils/reviewRoundUtils";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { supabase } from "@/integrations/supabase/client";
 import { AddProductsToRoundDialog } from "./AddProductsToRoundDialog";
 import { EditRoundDeadlineDialog } from "./EditRoundDeadlineDialog";
+import { ShuffleAssignmentsDialog } from "./ShuffleAssignmentsDialog";
 import {
   AlertDialog,
   AlertDialogAction,
