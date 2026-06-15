@@ -402,8 +402,6 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
                   )}
                 </div>
               </div>
-                ))}
-              </div>
             )}
           </TabsContent>
 
