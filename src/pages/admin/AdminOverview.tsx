@@ -161,9 +161,9 @@ export default function AdminOverview() {
       // Fetch pending edit drafts
       const { data: drafts } = await supabase
         .from('product_edit_drafts')
-        .select('id, product_id, created_by, status, submitted_at, created_at')
+        .select('id, product_id, created_by, status, updated_at, created_at')
         .eq('status', 'pending_review')
-        .order('submitted_at', { ascending: false, nullsFirst: false })
+        .order('updated_at', { ascending: false })
         .limit(10);
       if (drafts && drafts.length > 0) {
         const draftUserIds = Array.from(new Set(drafts.map(d => d.created_by)));
