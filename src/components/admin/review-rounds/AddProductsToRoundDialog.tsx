@@ -107,7 +107,7 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
     return Array.from(set).sort();
   }, []);
 
-  const candidates = useMemo(() => {
+  const allMatching = useMemo(() => {
     const q = search.trim().toLowerCase();
     return ALL_PRODUCTS.filter((p) => !existingIds.has(p.id))
       .filter((p) => categoryFilter === "all" || p.category === categoryFilter)
@@ -116,9 +116,10 @@ export function AddProductsToRoundDialog({ open, onOpenChange, round, onUpdate }
         p.name.toLowerCase().includes(q) ||
         p.company.toLowerCase().includes(q) ||
         p.id.toLowerCase().includes(q)
-      )
-      .slice(0, 500);
+      );
   }, [search, categoryFilter, existingIds]);
+
+  const candidates = useMemo(() => allMatching.slice(0, 500), [allMatching]);
 
   const toggle = (id: string) => {
     setSelected((prev) => {
