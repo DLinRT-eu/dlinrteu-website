@@ -6,7 +6,8 @@ export const MediqRT: ProductDetails = {
       disclosureLevel: "minimal",
       sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935",
       description: "Model supports auto-segmentation of OARs, CTVs, and GTVs on CT and MRI modalities across head and neck, thorax, abdomen, and pelvis.",
-      source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026)"
+      source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026)",
+      sourceAccess: "public",
   },
   evaluationData: {
       studyDesign: "Retrospective multi-center (testing in 12+ Romanian clinics)",
@@ -14,7 +15,14 @@ export const MediqRT: ProductDetails = {
       source: "Fedrau et al. Physics and Imaging in Radiation Oncology (2026) (DOI: 10.1016/j.phro.2026.100935)",
       results: "92.5% average time saving in contouring workflow",
       primaryEndpoint: "Not specified",
-      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935"
+      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935",
+      sourceAccess: "public",
+  },
+  structuresProvenance: {
+      source: "Vendor disclosure (Synaptiq) via direct communication to DLinRT.eu maintainers. The full supported-structures list is not published on the vendor public website at the retrieval date.",
+      sourceAccess: "vendor-provided",
+      sourceRetrievedOn: "2026-06-13",
+      notes: "Disclosed per the DLinRT.eu source-disclosure policy: non-public sources must carry a retrieval date.",
   },
   categoryEvidence: {
     "Auto-Contouring": {
