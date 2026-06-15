@@ -143,7 +143,7 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
             type="textarea"
             placeholder="Product description"
           >
-            <p className="text-muted-foreground">{displayProduct.description}</p>
+            <p className="text-muted-foreground"><AutoLinkText text={displayProduct.description} /></p>
           </EditableField>
           
           {/* Company Verification Badge - Valid (prominent) */}

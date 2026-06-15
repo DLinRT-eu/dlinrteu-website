@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Database, Globe, Users, ExternalLink } from 'lucide-react';
 import type { ProductDetails } from '@/types/productDetails';
 import SourceProvenanceChip from './SourceProvenanceChip';
+import AutoLinkText from '@/components/ui/AutoLinkText';
 
 interface TrainingDataDetailsProps {
   product: ProductDetails;
@@ -40,7 +41,7 @@ export default function TrainingDataDetails({ product }: TrainingDataDetailsProp
         {data.description && (
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">Description</p>
-            <p className="text-sm">{data.description}</p>
+            <p className="text-sm"><AutoLinkText text={data.description} /></p>
           </div>
         )}
 
@@ -70,7 +71,7 @@ export default function TrainingDataDetails({ product }: TrainingDataDetailsProp
             <p className="text-sm font-medium text-muted-foreground mb-1">
               <Users className="h-4 w-4 inline mr-1" />Demographics
             </p>
-            <p className="text-sm">{data.demographics}</p>
+            <p className="text-sm"><AutoLinkText text={data.demographics} /></p>
           </div>
         )}
 
