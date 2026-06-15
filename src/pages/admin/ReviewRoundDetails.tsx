@@ -332,9 +332,22 @@ export default function ReviewRoundDetails() {
         <Badge variant={round.status === 'active' ? 'default' : 'secondary'}>
           {round.status}
         </Badge>
+        {round.status === 'active' && assignments.some(a => a.status !== 'completed') && (
+          <Button variant="outline" onClick={() => setShowReminderDialog(true)}>
+            <Mail className="h-4 w-4 mr-2" />
+            Send Reminders…
+          </Button>
+        )}
         <RoundExportButton round={round} assignments={assignments} history={history} />
         <RoundActionsMenu round={round} onUpdate={fetchRoundDetails} />
       </div>
+
+      <SendRoundReminderDialog
+        open={showReminderDialog}
+        onOpenChange={setShowReminderDialog}
+        roundName={round.name}
+        assignments={assignments}
+      />
 
       {/* Progress Bar */}
       {assignments.length > 0 && (
