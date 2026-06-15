@@ -54,10 +54,16 @@ export interface ProductDetails extends Product {
       additionalClearances?: Array<{
         clearanceNumber?: string;
         decisionDate?: string;
+        date?: string;
         notes?: string;
         description?: string;
+        sourceUrl?: string;
       }>;
     } | string; // Backward compatibility
+    tga?: {
+      status: string;
+      notes?: string;
+    };
     tga?: {
       status: string;
       notes?: string;
