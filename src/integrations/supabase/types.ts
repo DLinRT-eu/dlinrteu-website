@@ -2235,6 +2235,26 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_product_edit_drafts_for_reviewer: {
+        Args: { p_product_id: string }
+        Returns: {
+          changed_fields: string[]
+          created_at: string
+          created_by: string
+          edit_summary: string
+          github_pr_url: string
+          github_synced_at: string
+          id: string
+          product_id: string
+          review_feedback: string
+          reviewed_at: string
+          reviewed_by: string
+          status: string
+          submitter_email: string
+          submitter_name: string
+          updated_at: string
+        }[]
+      }
       get_product_reviews_admin_secure: {
         Args: never
         Returns: {
