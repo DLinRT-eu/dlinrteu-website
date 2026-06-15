@@ -171,12 +171,12 @@ export function CertificationReminderDialog({ open, onOpenChange, onSent }: Prop
         return !repRoles.includes('admin');
       });
 
-      setRecipients(
-        filtered.map((rep: any) => ({
-          ...rep,
-          roles: roleMap.get(rep.user_id) || [],
-        }))
-      );
+      const loaded = filtered.map((rep: any) => ({
+        ...rep,
+        roles: roleMap.get(rep.user_id) || [],
+      }));
+      setRecipients(loaded);
+      setSelectedIds(new Set(loaded.map((r: Recipient) => r.id)));
     } catch (err: any) {
       console.error('Failed to load recipients:', err);
       toast.error('Could not load recipient list');
