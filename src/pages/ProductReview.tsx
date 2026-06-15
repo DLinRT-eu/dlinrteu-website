@@ -7,6 +7,7 @@ import { GitHubUrlCard } from '@/components/revision/GitHubUrlCard';
 import { useCompanyData } from '@/hooks/useCompanyData';
 import ProductDetails from '@/components/ProductDetails';
 import ProductRevisionHistory from '@/components/reviewer/ProductRevisionHistory';
+import VisualEditHistory from '@/components/reviewer/VisualEditHistory';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Clipboard, HelpCircle, FileText, Pencil } from 'lucide-react';
