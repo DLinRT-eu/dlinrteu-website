@@ -1,65 +1,64 @@
-## What the appendix actually discloses (pp. 134–138)
+## Goal
 
-Vendor verification & validation (V&V), with data "obtained from clinical partner sites":
+Sweep every active product's `evidence[]`, `keyPapers[]`, `trainingData.source(Url)`, `evaluationData.source(Url)`, and free-text `clinicalEvidence` / `evidenceRigorNotes` / `clinicalImpactNotes` to confirm every cited reference **directly evaluates the specific product at hand**. Flag and remove/relabel any reference that:
 
-| Metric | Prostate | Pelvis | Brain | Head & Neck |
-|---|---|---|---|---|
-| Evaluated RTgo version | 3.0 | 4.1 | 4.0 | 5.0 |
-| **Hospitals contributing data (dose)** | **2** | **4** | **3** | **6** |
-| **Patients across all hospitals (dose)** | **62** | **103** | **138** | **85** |
-| (D_MRCAT − D_CT)/D_CT to PTV — Mean ± SD [%] | −0.23 ± 0.22 | −0.31 ± 0.51 | −0.02 ± 0.24 | 0.02 ± 0.27 |
-| Min / Max [%] | −0.87 / +0.92 | −1.71 / +0.46 | +0.97 / +0.82 | +0.82 / +0.97 |
-| Primary gamma criterion | 3%/3 mm | 3%/3 mm | 2%/2 mm | 2%/2 mm |
-| Median gamma | 0.10 (0.03) | 0.15 (0.09) | 0.07 (0.03) | 0.09 (0.02) |
-| % voxels passing gamma | 100 (0.01) | 99.9 (0.64) | 99.9 (0.22) | 99.7 (0.50) |
-| Additional 1%/1 mm gamma — % voxels passing | – | – | 99.0 (2.2) | 97.9 (2.3) |
-| Body-outline matching applied? | No | No | No | Yes |
-| Positioning study — hospitals / patients | 1 / 9 | 1 / 11 | 2 / 138 | 6 / 85 |
-| Setup vehicle | DRR | DRR | DRR + CBCT | DRR + CBCT |
+- evaluates a *different* product in the same category (e.g. MR-OPERA cited under Philips MRCAT — MR-OPERA studied a different sCT pipeline),
+- is a generic methodology / category review,
+- cannot be verified against an accessible abstract,
+- is a hallucinated DOI / title / author combination.
 
-(Source: Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781, 2024-06, "Performance overview of MRCAT", Tables 14–17, pp. 134–138.)
+No invented replacements. If a product loses its only direct reference, its `evidenceRigor` is re-scored accordingly (typically down to E0/E1 with explicit notes).
 
-## Impact on evidence levels (per DLinRT rubric)
+## Scope
 
-This is **vendor V&V data**, not independent peer-reviewed evidence, so it does not by itself promote `evidenceRigor`. But it materially improves transparency and changes several attribute flags.
+All ~91 active products under `src/data/products/**` (exclude `archived/`, `examples/`, `pipeline/` unless flagged in prior wave). Per-category waves to keep PRs small:
 
-| Product | Current E / I / R | Proposed E / I / R | Rationale |
-|---|---|---|---|
-| MRCAT Brain | E1 / I1 / R3 | **E1 / I1 / R3 (unchanged); flip `evidenceMultiCenter` → true** | IFU now discloses 3 hospitals × 138 patients vendor V&V. Rigor remains E1: independent peer-reviewed study (Aljaafari 2025) is still single-centre; vendor V&V adds multi-centre quantitative results but isn't independent. |
-| MRCAT Head & Neck | E1 / I2 / R2 | **E1 / I2 / R2 (unchanged); flip `evidenceMultiCenter` → true; bump `adoptionReadiness` to R3** | IFU discloses 6 hospitals × 85 patients vendor V&V with stringent 1%/1 mm gamma. Combined with Buschmann 2026 peer-reviewed evidence, this justifies R3 (moderate effort) rather than R2. Rigor stays E1 (peer-reviewed evidence is still single-centre n=10). |
-| MRCAT Pelvis | E1 / I1 / R3 | **E1 / I1 / R3 (unchanged); keep `evidenceMultiCenter: true`** | Already E1 with MR-OPERA. IFU adds vendor V&V (4 hospitals × 103 patients) — strengthens transparency but doesn't change rubric placement. |
-| MRCAT Prostate (Image-Synthesis category) | E2 / I1 (categoryEvidence) | **E2 / I1 (unchanged)** | Already E2 from multiple independent peer-reviewed studies. IFU vendor V&V (2 hospitals × 62 patients) is consistent with and complements those results. No score change; quantitative numbers added for transparency. |
+1. Image Synthesis (start here — MRCAT issue lives here)
+2. Auto-Contouring
+3. Treatment Planning
+4. Registration, Reconstruction, Tracking, Image Enhancement
+5. Clinical Prediction, Performance Monitor, Platform
 
-No `clinicalImpact` changes — these are technical V&V results, not clinical outcomes.
+## Workflow per product
 
-## File-by-file edits
+1. **Extract citations**: enumerate every reference object in `evidence[]`, `keyPapers[]`, plus `source` / `sourceUrl` on `trainingData` and `evaluationData` (and per-category overrides in `categoryEvidence`).
+2. **Verify product specificity** for each citation:
+   - Resolve DOI / URL → fetch abstract via `websearch--web_search` + `code--fetch_website`.
+   - Decide: **direct** (paper names/uses this product or its model build), **indirect** (same category, different product/pipeline), **methodology** (generic technique paper), **unverifiable** (404, behind paywall with no abstract match), **hallucinated** (DOI does not resolve or metadata does not match cited title/authors).
+3. **Record outcome** per citation in a CSV row: `product_id, citation_index, type, title, doi/url, verdict, evidence_quote, action`.
+4. **Propose actions** (no edits yet):
+   - `keep` — direct reference, accurately labelled.
+   - `relabel` — keep but mark `level: "indirect"` / move to `limitations` or notes when it's a category-level reference (only if the product entry itself already framed it that way).
+   - `remove` — indirect, methodology, unverifiable, or hallucinated → remove from `evidence[]`/`keyPapers[]`.
+   - `rescore` — if removal changes the evidence base, propose new `evidenceRigor` / `clinicalImpact` with rationale.
+5. **No hallucinated replacements.** Do not add new papers in this sweep. If a product ends with zero direct evidence, that is reported truthfully.
 
-For each of the four files, in the existing `evaluationData` (and `categoryEvidence["Image Synthesis"].evaluationData` for Prostate), append a sentence summarising vendor V&V cohort size, sites, dose-difference numbers, and gamma pass rates, with explicit IFU citation. Add or set the multi-centre attribute flags. Bump `lastRevised` to 2026-06-15.
+## Deliverables (per wave)
 
-**MRCAT Brain (`philips-mrcat-brain.ts`)**
-- Extend `evaluationData.results` and `evaluationData.description` with: "Vendor V&V (Philips IFU RTgo 5.12 appendix): 3 hospitals × 138 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.02 ± 0.24%; primary 2%/2 mm gamma pass rate 99.9 ± 0.22%; additional 1%/1 mm pass 99.0 ± 2.2%."
-- Add `evidenceMultiCenter: true` and a short note on the rigor field.
-- Append IFU URL + retrieval date to `source`.
+Written to `/mnt/documents/`:
 
-**MRCAT Head & Neck (`philips-mrcat-head-neck.ts`)**
-- Extend `evaluationData.results`/`description` with: "Vendor V&V (Philips IFU appendix): 6 hospitals × 85 patients; mean PTV dose difference 0.02 ± 0.27%; 2%/2 mm gamma pass 99.7 ± 0.50%; stricter 1%/1 mm pass 97.9 ± 2.3% (body-outline matched)."
-- Add `evidenceMultiCenter: true`; raise `adoptionReadiness` from R2 → R3 with updated `adoptionReadinessNotes`.
-- Append IFU citation to `source`.
+- `evidence-verification-<DATE>-<wave>.md` — per-product report (citations table + verdicts + rescoring proposals).
+- `evidence-verification-<DATE>-<wave>.csv` — one row per citation with verdict + suggested action.
+- `evidence-verification-<DATE>-<wave>-rescoring.csv` — id, current E/I, proposed E/I, rationale.
 
-**MRCAT Pelvis (`philips-mrcat-pelvis.ts`)**
-- Extend `evaluationData.results`/`description` with: "Vendor V&V (Philips IFU appendix): 4 hospitals × 103 patients; mean PTV dose difference −0.31 ± 0.51% (range −1.71 to +0.46%); 3%/3 mm gamma pass 99.9 ± 0.64%."
-- Keep `evidenceMultiCenter: true` (already set).
-- Append IFU citation to `source`.
+## Implementation (build mode)
 
-**MRCAT Prostate (`philips-mrcat-prostate.ts`)**
-- Extend `categoryEvidence["Image Synthesis"].evaluationData.results` and `.description` with: "Vendor V&V (Philips IFU RTgo 5.12 appendix): 2 hospitals × 62 patients; mean PTV dose difference −0.23 ± 0.22% (range −0.87 to +0.92%); 3%/3 mm gamma pass 100.0 ± 0.01%."
-- No flag changes (already multi-center, multi-national, vendor-independent).
-- Append IFU citation to `categoryEvidence` `source` and top-level `source`.
+- New script `scripts/evidence-verification-sweep.ts` that:
+  - loads a category (reusing `scripts/audit-swarm.ts` loader pattern),
+  - emits a worklist of citations to a JSON file,
+  - prints a per-product summary;
+  the actual abstract lookup / verdict is then done by the agent using `websearch--web_search` + `code--fetch_website` and recorded back into the CSV. (LLM-in-the-loop, not auto-LLM, to avoid hallucinated verdicts.)
+- Edits to product `.ts` files happen **only in a follow-up confirmed pass**, one PR per category, after you sign off on the worklist — consistent with the Minimal Intervention policy.
 
-## What I will not change
+## Hard rules (anti-hallucination)
 
-- `trainingData` cohorts — the IFU appendix is a **validation** cohort from "clinical partner sites", not a training cohort. Philips still does not disclose the training set composition for any MRCAT variant.
-- `evidenceRigor` for any product — vendor V&V does not satisfy DLinRT's vendor-independent requirement for E ≥ E2 by itself. Prostate already had E2 from independent peer-reviewed studies.
-- `clinicalImpact` — V&V results are technical, not clinical outcomes.
+- Every `remove` verdict must cite the abstract URL + a quoted sentence proving the paper does not study this product.
+- Every `keep` verdict must cite the abstract URL + a quoted sentence naming the product or its model.
+- No citation is added in this sweep. Period.
+- No score is raised in this sweep; only lowered or held.
 
-If you approve, I'll switch to build mode and apply the four file edits with the above edits and bump `lastRevised`.
+## Open questions before I start
+
+1. **Wave 1 scope** — start with **Image Synthesis only** (4 MRCAT + sCT peers, ~10 products) as a pilot, then expand? Or run all 91 in one batch?
+2. **Treatment of "indirect but plausibly informative" papers** (e.g. a multi-vendor sCT benchmark that *includes* MRCAT alongside others) — `keep` with a `level: "indirect-comparative"` label, or `remove`?
+3. **Pipeline products** (`src/data/products/pipeline/`) — include or skip?
