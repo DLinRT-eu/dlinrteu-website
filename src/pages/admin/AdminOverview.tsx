@@ -837,6 +837,58 @@ export default function AdminOverview() {
             </CardContent>
           </Card>
 
+          {/* Pending Edit Approvals */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Edit3 className="h-5 w-5" />
+                    Pending Edit Approvals ({pendingEditDrafts.length})
+                  </CardTitle>
+                  <CardDescription>Product edits submitted for admin review</CardDescription>
+                </div>
+                <Button variant="outline" onClick={() => navigate('/admin/edit-approvals')}>
+                  View All
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {pendingEditDrafts.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">No pending edit approvals</p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Product</TableHead>
+                      <TableHead>Submitted by</TableHead>
+                      <TableHead>Updated</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {pendingEditDrafts.map((draft) => (
+                      <TableRow key={draft.id}>
+                        <TableCell className="font-mono text-xs">{draft.product_id}</TableCell>
+                        <TableCell>
+                          <div className="text-sm">{draft.submitter_name || '—'}</div>
+                          <div className="text-xs text-muted-foreground">{draft.submitter_email}</div>
+                        </TableCell>
+                        <TableCell>{new Date(draft.updated_at).toLocaleDateString()}</TableCell>
+                        <TableCell className="text-right">
+                          <Button size="sm" variant="outline" onClick={() => navigate('/admin/edit-approvals')}>
+                            Review →
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
+            </CardContent>
+          </Card>
+
+
           {/* Recent User Signups */}
           <Card>
             <CardHeader>
