@@ -267,10 +267,10 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "Pending FDA database publication",
+        clearanceNumber: "K254013",
         regulationNumber: "21 CFR 892.1200",
         productCode: "KPS",
-        decisionDate: "2026-05-27"
+        decisionDate: "2026-05-14"
       },
       intendedUseStatement: "SubtleHD(PET) is an AI-powered image processing software intended for enhancement of PET images acquired with FDA-approved radiotracers, supporting noise reduction, image acceleration, and improved quantitative accuracy on PET/CT and PET/MR systems."
     },
@@ -280,15 +280,27 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA 510(k) clearance announced 2026-05-27. No independent peer-reviewed publications yet.",
+    evidenceRigorNotes: "FDA 510(k) K254013 cleared 2026-05-14 (announced 2026-05-27). No independent peer-reviewed publications yet.",
     clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
-    clinicalEvidence: "FDA 510(k) clearance based on validation across a broad range of accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
-    source: "PRNewswire 2026-05-27; Diagnostic Imaging 2026-05-27; FDA 510(k) K-number pending public database publication."
+    evidence: [
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearance K254013 for SubtleHD-PET (1.x), cleared 2026-05-14.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
+      },
+      {
+        type: "Press Release",
+        description: "PRNewswire 2026-05-27 announcement naming SubtleHD(PET) FDA clearance.",
+        link: "https://subtlemedical.com/"
+      }
+    ],
+    clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
   {
     id: "aimify",
