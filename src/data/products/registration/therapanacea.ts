@@ -4,18 +4,22 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     trainingData: {
-        source: "FDA 510(k) summary K253091",
+        source: "Therapanacea product page (manufacturer)",
         disclosureLevel: "minimal",
-        description: "The registration algorithm is part of the ART-Plan+ platform, cleared via FDA 510(k). Training details regarding specific datasets and demographics are not publicly disclosed in the available documentation.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+        description: "AI-powered rigid and deformable image registration. Training dataset details are not publicly disclosed. Note: FDA 510(k) K253091 (ART-Plan+ v3.1.0) was previously cited here but does not name SmartFuse — corrected on 2026-06-15.",
+        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceAccess: "public",
+        sourceRetrievedOn: "2026-06-15"
     },
     evaluationData: {
         results: "Not publicly disclosed",
         primaryEndpoint: "Sub-voxel registration accuracy",
-        description: "Software validation performed as part of the FDA 510(k) clearance process for the ART-Plan+ platform (v3.1.0 and v3.0.0). The registration module provides AI-powered rigid and deformable image fusion with sub-voxel registration accuracy.",
-        source: "FDA 510(k) summary K253091",
-        studyDesign: "Software V&V (FDA 510(k))",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+        description: "Manufacturer claims sub-voxel registration accuracy for AI-powered rigid and deformable image fusion. No SmartFuse-specific peer-reviewed or regulatory evaluation document confirmed (CE Mark documentation not publicly indexed). FDA K253091 was previously cited here but verified on 2026-06-15 to cover the ART-Plan+ platform (SmartPlan, Annotate/TumorBox, AdaptBox modules) without naming SmartFuse.",
+        source: "Therapanacea product page (manufacturer)",
+        studyDesign: "Manufacturer specification",
+        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceAccess: "public",
+        sourceRetrievedOn: "2026-06-15"
     },
     name: "SmartFuse",
     company: "Therapanacea",
