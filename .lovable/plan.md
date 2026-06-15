@@ -1,94 +1,79 @@
-## Goals
+# Source disclosure policy + full product audit
 
-Three related improvements to the admin review workflow:
+Three threads: (1) make "every claim has a disclosed source" a first-class, enforced policy; (2) add a small pattern for vendor-provided, non-public information with a retrieval date; (3) run the product audit swarm and deliver a per-product worklist (no in-place edits in the same pass).
 
-1. **Shuffle assignments in draft rounds** — re-run the assignment algorithm on an existing round.
-2. **True "Select all" + bulk add to round** — make `AddProductsToRoundDialog` select across all filters, not just visible.
-3. **In-round reviewer reminder** — move the mail reminder into a round, with a preview of recipients and selectable list.
-4. **Edit approvals in admin pending items** — surface pending product edit drafts on `/admin` overview with quick actions.
+## 1. Source-disclosure policy (common ground)
 
----
+Single normative statement, mirrored everywhere it can influence behavior:
 
-## 1. Shuffle / re-balance assignments (draft rounds)
+- **Every product field that asserts a fact (training data, evaluation data, structures, evidence, regulatory, dose models, safety actions) must be traceable to a disclosed source.**
+- **Public sources are preferred** (peer-reviewed paper, DOI, FDA 510(k), CE summary of safety, vendor public web page, GitHub).
+- **If the source is not publicly accessible** (vendor email, NDA briefing, conference handout, login-gated portal), it must be marked as such and carry a **retrieval date** in `YYYY-MM-DD`.
+- Applies equally to: the website (UI badges + tooltips), human reviewers (review guide), and AI agents (audit swarm, edit-draft assistants, future automations).
 
-**File:** `src/components/admin/review-rounds/RoundActionsMenu.tsx`
+Where this gets written / surfaced:
 
-- Add new menu item `Shuffle Assignments…` shown only when `round.status === 'draft'`.
-- Open a new `ShuffleAssignmentsDialog` component.
+- `docs/FIELD_REFERENCE.md` — new top-level "Source disclosure" section, plus a row added to every `source` / `sourceUrl` row table referencing it.
+- `docs/review/GUIDE.md` — new "Sourcing rules" subsection; reviewers reject edits that add factual fields without a source.
+- `README.md` (Product addition guide) — short paragraph + link.
+- `knowledge://skill/product-audit-swarm/references/inclusion-policy.md` and `roles.md` — Transparency role gains a "missing/undisclosed source" error class.
+- New `mem://policy/source-disclosure` memory + Core index line so every future agent action enforces it by default.
 
-**New file:** `src/components/admin/review-rounds/ShuffleAssignmentsDialog.tsx`
+## 2. Vendor-provided / non-public source pattern
 
-- Loads current assignments for the round (`product_reviews` where `review_round_id = round.id`).
-- Algorithm picker: `balanced | expertise-first | random | manual` (same as `AddProductsToRoundDialog`).
-- Reuses `calculateProposedAssignments(productIds, undefined, algorithm)` from `reviewRoundUtils`.
-- Shows a preview table: product → proposed reviewer (with delta vs current assignee).
-- On confirm, calls existing `reassign_product_review_admin` RPC per row (already in `reviewRoundUtils.reassignProductReviewAdmin`) inside a Promise.all batch with reason `"Bulk shuffle (<algorithm>)"`.
-- Refreshes round details.
+Extend the existing `source` / `sourceUrl` convention with two optional, additive fields on any block that already has `source`:
 
-No DB schema change needed — uses existing RPCs.
+```
+source: "Vendor-provided (Synaptiq, email to maintainers)"
+sourceUrl: undefined                       // omitted because not public
+sourceAccess: "vendor-provided" | "public" | "regulatory" | "restricted"
+sourceRetrievedOn: "2026-06-13"            // YYYY-MM-DD, required when sourceAccess !== "public"
+```
 
----
+- Added to `ProductDetails` blocks that already carry `source`: `trainingData`, `evaluationData`, `supportedStructures[]` (new optional `provenance` sub-object), `keyPapers[]` (optional), `safetyCorrectiveActions[]`, and the top-level `evidence` entries.
+- Strictly additive — existing entries without these fields stay valid; the audit treats missing `sourceAccess` as `"public"` only if `sourceUrl` resolves.
+- UI: small "Vendor-provided · retrieved YYYY-MM-DD" chip on the product detail page next to the affected section, using existing tooltip primitives. No new design tokens.
 
-## 2. True "Select all" in AddProductsToRoundDialog
+### Apply to Synaptiq Mediq RT
 
-**File:** `src/components/admin/review-rounds/AddProductsToRoundDialog.tsx`
+- Locate the Synaptiq product (likely `src/data/products/auto-contouring/synaptiq.ts` or similar — confirm during build phase).
+- Mark its `supportedStructures` block with `sourceAccess: "vendor-provided"`, `sourceRetrievedOn: "2026-06-13"`, `source: "Vendor disclosure (Synaptiq), structures list not on public website as of retrieval date"`.
 
-- Current button reads "Select visible / Clear visible" and the candidate list is capped at 500 with filters applied.
-- Replace with two buttons:
-  - **Select all matching** — selects all candidates matching current search + category filter (drop the 500 cap for selection; keep the cap only for rendered rows with a "showing first 500 of N" hint).
-  - **Clear selection** — clears `selected`.
-- Keep per-row checkboxes. Show selection count and total candidate count.
+## 3. Full product audit swarm
 
----
+Run the bundled `product-audit-swarm` skill across all active products (~93 files, excluding `archived/` and `examples/`). Focus areas per user request:
 
-## 3. In-round reviewer reminder with recipient preview
+- Accuracy and completeness of `trainingData` and `evaluationData` (sizes, geography, modality, source disclosure).
+- Per-task evidence (use existing `categoryEvidence`; flag products where a secondary category lacks its own E/I/R when the rubric warrants it).
+- Regulatory ↔ certification consistency.
+- Structure nomenclature ("Region: Structure Name", status suffixes).
+- DICOM nomenclature drift.
+- New: every factual field has a disclosed source per §1; warn on missing `sourceAccess`/`sourceRetrievedOn` for non-public sources.
 
-**File:** `src/pages/admin/ReviewRoundDetails.tsx`
+Deliverables to `/mnt/documents/`:
 
-- Add a `Send Reminders…` button in the round header next to `RoundExportButton`, visible when `round.status === 'active'` and there are non-completed assignments.
+- `product-audit-2026-06-15.md` — per-product report, all eight role sections.
+- `product-audit-2026-06-15.csv` — one row per finding (id, field, severity, message).
+- `product-audit-2026-06-15-rescoring.csv` — id, task/category, current vs proposed E/I/R, rationale.
 
-**New file:** `src/components/admin/review-rounds/SendRoundReminderDialog.tsx`
+Surfaced via `<presentation-artifact>` tags. **No `.ts` product files edited in the audit pass** — per Minimal Intervention, a follow-up confirmed edit pass (ideally one PR per category wave) applies the fixes.
 
-- Derives the recipient set from the current `assignments` prop: group by `assigned_to`, keep only reviewers with at least one `pending` / `in_progress` assignment. Include reviewer name, email, count of pending items, earliest deadline, overdue flag.
-- Renders a checkbox list with search, "Select all", "Clear", and an indeterminate header checkbox — same pattern as `CertificationReminderDialog`.
-- Footer button: `Send to N reviewer(s)`; disabled when 0 selected.
-- On submit, invoke `send-deadline-reminders` with `{ force: true, review_ids: [...] }` listing only the assignment IDs belonging to selected reviewers in this round.
+## Order of execution
 
-**Edge function:** `supabase/functions/send-deadline-reminders/index.ts`
+1. Policy docs + memory + audit-swarm references updated (§1).
+2. Type addition + UI chip + Synaptiq Mediq RT edit (§2).
+3. Audit swarm run, artefacts delivered (§3).
 
-- Extend body schema to accept optional `review_ids: string[]`. When provided, after `get_reviews_needing_reminders` (called with `force_run` semantics — `min_interval_hours: 0`), filter the returned list to those whose `review_id` is in the supplied set. This keeps backwards compatibility with the global scheduler and the existing admin "Force Send All" button.
-- Still respects per-user `notification_preferences.review_deadlines.email = false` (current behavior).
-- No DB / RPC changes.
+## Technical details
 
-The existing global `DeadlineReminderControls` on `/admin` stays as-is (cron / global manual trigger). The new dialog is the per-round, recipient-curated path.
+- Type change in `src/types/productDetails.d.ts`: add optional `sourceAccess` and `sourceRetrievedOn` to the existing `source`-bearing interfaces; introduce a small `SourceProvenance` helper type to avoid repetition.
+- UI: extend the existing source-rendering helper (search for current `source` / `sourceUrl` rendering under product detail components) to render the provenance chip; no new components if an existing badge primitive fits.
+- Memory: `mem://policy/source-disclosure` (constraint type) + one Core line in `mem://index.md`.
+- Audit: run roles in parallel per product as the skill prescribes; cap PubMed/DOI lookups via `websearch--web_search` with a per-product timebox; record the retrieval date in each product's "Sources Consulted" section.
 
----
+## Open question before build
 
-## 4. Pending edit approvals on admin overview
+Two scope choices worth confirming so the audit doesn't have to re-run:
 
-**File:** `src/pages/admin/AdminOverview.tsx`
-
-- Add state `pendingEditDrafts` and fetch on mount:
-  ```ts
-  supabase
-    .from('product_edit_drafts')
-    .select('id, product_id, status, submitted_at, created_at, user_id')
-    .eq('status', 'pending_review')
-    .order('submitted_at', { ascending: false })
-    .limit(10);
-  ```
-- Add to `totalPending` calculation.
-- Add a new Quick Stats card: "Pending Edit Approvals" with count.
-- Add a new section card "Pending Edit Approvals (N)" below "Pending Company Revisions":
-  - Table: Product, Submitted by (resolve from `profiles`), Submitted at, Action → `Review →` button navigating to `/admin/edit-approvals`.
-  - Header "View All" button → `/admin/edit-approvals`.
-
-No backend change — `/admin/edit-approvals` route and page already exist.
-
----
-
-## Technical notes
-
-- All changes are admin-only UI; auth is already handled by `ApprovalGate` + `useRoles`.
-- Reusing existing RPCs (`reassign_product_review_admin`, `get_reviews_needing_reminders`, `mark_reminder_sent`) means no migrations.
-- Single edge-function change (`send-deadline-reminders`) is additive and backwards compatible.
+- Should the audit also re-score `categoryEvidence` per task where warranted, or only flag mismatches and leave re-scoring to a later pass?
+- For the vendor-provided chip in the UI: show it only on the product detail page, or also as a small marker on product cards in list views?
