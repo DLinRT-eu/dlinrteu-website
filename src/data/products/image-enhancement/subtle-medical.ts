@@ -115,12 +115,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         description: "Deep learning-based PET image enhancement trained to perform noise reduction and increase image sharpness across multiple radiotracers."
     },
     evaluationData: {
-        description: "Vendor-independent validation study (Katsari et al. 2021) and multi-tracer validation (Liang et al. 2023) demonstrating diagnostic equivalence between standard dose and low-dose/fast-scan protocols with SubtlePET enhancement.",
-        sourceUrl: "https://doi.org/10.1007/s00259-021-05478-x",
-        primaryEndpoint: "Diagnostic equivalence",
-        studyDesign: "Low-dose PET validation study (vendor-independent)",
-        source: "Katsari et al. Eur J Nucl Med 2021 (DOI: 10.1007/s00259-021-05478-x)",
-        results: "Enables up to 4x faster scans or 75% dose reduction while maintaining diagnostic quality."
+        description: "FDA 510(k) software V&V (K182336, K211964). No SubtlePET-specific peer-reviewed clinical outcome study confirmed at this time.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
+        primaryEndpoint: "Not specified",
+        studyDesign: "Software V&V (FDA 510(k))",
+        source: "FDA 510(k) summary K182336",
+        results: "Vendor-claimed up to 4x faster scans or 75% dose reduction; not independently confirmed."
     },
     name: "SubtlePET",
     company: "Subtle Medical",
