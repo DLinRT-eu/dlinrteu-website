@@ -331,7 +331,7 @@ const handler = async (req: Request): Promise<Response> => {
     const summary = {
       success: true,
       message: `Deadline reminder process completed`,
-      reviewsProcessed: reviews.length,
+      reviewsProcessed: filteredReviews.length,
       reviewersNotified: reviewsByReviewer.size,
       emailsSent,
       emailsFailed,
