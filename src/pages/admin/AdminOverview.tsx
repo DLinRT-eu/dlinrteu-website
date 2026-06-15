@@ -55,6 +55,17 @@ interface PendingRegistration {
   created_at: string;
 }
 
+interface PendingEditDraft {
+  id: string;
+  product_id: string;
+  user_id: string;
+  status: string;
+  submitted_at: string | null;
+  created_at: string;
+  submitter_name?: string;
+  submitter_email?: string;
+}
+
 export default function AdminOverview() {
   const { user } = useAuth();
   const { isAdmin } = useRoles();
@@ -65,6 +76,7 @@ export default function AdminOverview() {
   const [pendingRevisions, setPendingRevisions] = useState<PendingRevision[]>([]);
   const [recentUsers, setRecentUsers] = useState<RecentUser[]>([]);
   const [pendingRegistrations, setPendingRegistrations] = useState<PendingRegistration[]>([]);
+  const [pendingEditDrafts, setPendingEditDrafts] = useState<PendingEditDraft[]>([]);
 
   useEffect(() => {
     if (!isAdmin) {
