@@ -194,7 +194,10 @@ const handler = async (req: Request): Promise<Response> => {
     const userIds = reps.map((r: any) => r.user_id);
     const { data: adminRoles } = await adminClient.from("user_roles").select("user_id").in("user_id", userIds).eq("role", "admin");
     const adminUserIds = new Set((adminRoles || []).map((r: any) => r.user_id));
-    const targetReps = reps.filter((rep: any) => !adminUserIds.has(rep.user_id));
+    const allowedIdSet = recipientRepIds ? new Set(recipientRepIds) : null;
+    const targetReps = reps.filter((rep: any) =>
+      !adminUserIds.has(rep.user_id) && (!allowedIdSet || allowedIdSet.has(rep.id))
+    );
 
     console.log(`Found ${targetReps.length} eligible representatives`);
 
