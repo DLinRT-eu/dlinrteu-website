@@ -108,7 +108,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     contactEmail: "info@mvision.ai",
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "11+ PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries), HARMONY study (npj Digital Medicine 2025, 7 clinics, 4 countries), Podobnik et al. Sci Rep 2025 (3-system H&N comparison), Tang et al. Clin Transl Radiat Oncol 2025 (breast target volumes), Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes), Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Doolan et al. Front Oncol 2023 (5-system comparison, 80 patients). Ng et al. Information 2025 systematic review of commercial DL auto-segmentation. PubMed verified 2026-03-08.",
+    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison — verify MVision inclusion); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes); Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Ng et al. Information 2025 systematic review of commercial DL auto-segmentation includes MVision. Duplicate 'HARMONY study' entry (same DOI as Pang 2025) removed 2026-06-15. PubMed verified 2026-03-08; cross-vendor attribution re-checked 2026-06-15.",
     clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
@@ -120,17 +120,12 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Pang et al. Multicentre evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312",
+        description: "Pang et al. Multicentre evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312. Direct evaluation of MVision-class DL auto-segmentation.",
         link: "https://doi.org/10.1038/s41746-025-01624-z"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "HARMONY study: Multi-institutional evaluation of AI auto-segmentation for H&N (7 clinics, 4 countries). npj Digital Medicine 2025",
-        link: "https://doi.org/10.1038/s41746-025-01624-z"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Podobnik et al. Geometric, dosimetric and psychometric evaluation of 3 AI software for H&N OAR auto-segmentation. Sci Rep 2025;15(1):33396",
+        type: "Multi-vendor Comparative Study",
+        description: "Podobnik et al. Geometric, dosimetric and psychometric evaluation of 3 AI software for H&N OAR auto-segmentation. Sci Rep 2025;15(1):33396. Three-vendor H&N comparison — MVision inclusion verified by abstract metadata; relabeled as comparative 2026-06-15.",
         link: "https://doi.org/10.1038/s41598-025-18598-3"
       },
       {
@@ -139,8 +134,8 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s13014-024-02554-y"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Doolan et al. Clinical evaluation of 5 commercial AI contouring systems on 80 patients. Front Oncol 2023;13:1213068",
+        type: "Multi-vendor Comparative Study",
+        description: "Doolan et al. Clinical evaluation of 5 commercial AI contouring systems (Mirada, MVision [MV], Radformation, RayStation, TheraPanacea) on 80 patients. Front Oncol 2023;13:1213068. MVision explicitly named — direct comparative evidence.",
         link: "https://doi.org/10.3389/fonc.2023.1213068"
       },
       {
@@ -161,8 +156,8 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
   }
 ];
