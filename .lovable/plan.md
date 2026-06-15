@@ -1,64 +1,59 @@
-## Goal
+## 1. Extend `AutoLinkText` to more free-text fields
 
-Sweep every active product's `evidence[]`, `keyPapers[]`, `trainingData.source(Url)`, `evaluationData.source(Url)`, and free-text `clinicalEvidence` / `evidenceRigorNotes` / `clinicalImpactNotes` to confirm every cited reference **directly evaluates the specific product at hand**. Flag and remove/relabel any reference that:
+Wrap the existing `<AutoLinkText>` helper around every rendered free-text field that today shows raw URLs, so long links collapse to `host/short-path…` with the full URL on hover (native `title` tooltip).
 
-- evaluates a *different* product in the same category (e.g. MR-OPERA cited under Philips MRCAT — MR-OPERA studied a different sCT pipeline),
-- is a generic methodology / category review,
-- cannot be verified against an accessible abstract,
-- is a hallucinated DOI / title / author combination.
+Targets:
 
-No invented replacements. If a product loses its only direct reference, its `evidenceRigor` is re-scored accordingly (typically down to E0/E1 with explicit notes).
+- `src/components/product/EvidenceLimitationsDetails.tsx`
+  - `evidenceRigorNotes` (`<p>{evidenceRigorNotes}</p>` block)
+  - `clinicalImpactNotes`
+  - `adoptionReadinessNotes`
+- `src/components/product/RegulatoryInformationDetails.tsx`
+  - `regulatory.ln` (Intended Use Statement) — currently rendered as plain text fallback `"N/A"`. Wrap the value in `AutoLinkText` when present.
 
-## Scope
+Behavior change in edit mode — `EditableField` keeps using the raw textarea, except when a long url has been masked with short one, then it should be possible to revise both the shown and the underlying long link. Only the read-only `<p>` views get wrapped.
 
-All ~91 active products under `src/data/products/**` (exclude `archived/`, `examples/`, `pipeline/` unless flagged in prior wave). Per-category waves to keep PRs small:
+## 2. "Force register" option in the Invite Representative dialog
 
-1. Image Synthesis (start here — MRCAT issue lives here)
-2. Auto-Contouring
-3. Treatment Planning
-4. Registration, Reconstruction, Tracking, Image Enhancement
-5. Clinical Prediction, Performance Monitor, Platform
+### UI — `src/components/admin/InviteCompanyRepDialog.tsx`
 
-## Workflow per product
+- Add a `forceRegister` checkbox (shadcn `Checkbox` + `Label`) below the message field, labelled **"Register the representative now and send a password-setup email"** with a short helper line: *"Creates the account immediately and links it to {company}. The recipient gets a Set-Password email instead of an invitation link."*
+- When `forceRegister` is true, swap the default message template to a force-register variant (subject of message changes wording to "Your DLinRT.eu representative account has been created" + instructions about setting a password).
+- Pass `forceRegister: boolean` in the edge-function invoke body.
 
-1. **Extract citations**: enumerate every reference object in `evidence[]`, `keyPapers[]`, plus `source` / `sourceUrl` on `trainingData` and `evaluationData` (and per-category overrides in `categoryEvidence`).
-2. **Verify product specificity** for each citation:
-   - Resolve DOI / URL → fetch abstract via `websearch--web_search` + `code--fetch_website`.
-   - Decide: **direct** (paper names/uses this product or its model build), **indirect** (same category, different product/pipeline), **methodology** (generic technique paper), **unverifiable** (404, behind paywall with no abstract match), **hallucinated** (DOI does not resolve or metadata does not match cited title/authors).
-3. **Record outcome** per citation in a CSV row: `product_id, citation_index, type, title, doi/url, verdict, evidence_quote, action`.
-4. **Propose actions** (no edits yet):
-   - `keep` — direct reference, accurately labelled.
-   - `relabel` — keep but mark `level: "indirect"` / move to `limitations` or notes when it's a category-level reference (only if the product entry itself already framed it that way).
-   - `remove` — indirect, methodology, unverifiable, or hallucinated → remove from `evidence[]`/`keyPapers[]`.
-   - `rescore` — if removal changes the evidence base, propose new `evidenceRigor` / `clinicalImpact` with rationale.
-5. **No hallucinated replacements.** Do not add new papers in this sweep. If a product ends with zero direct evidence, that is reported truthfully.
+### Edge function — `supabase/functions/invite-company-representative/index.ts`
 
-## Deliverables (per wave)
+Add a `forceRegister` branch (still admin-gated, same CORS/auth):
 
-Written to `/mnt/documents/`:
+1. Look up an existing auth user by email; if not present, call `supabaseAdmin.auth.admin.createUser({ email, email_confirm: true, user_metadata: { first_name, last_name, invited_company_id, invited_company_name, force_invited: true } })`.
+2. Insert a `company_representatives` row (or reuse existing) linking that `user_id` to `companyId` with `company_name`, `position`, `verified: false` (or matching your existing schema defaults). Use upsert to be idempotent.
+3. Mark the `company_invitations` row `status = 'accepted'` (force-registration replaces the accept step) and store the new `user_id` if your column exists; otherwise just keep `status = 'pending'` and rely on rep row.
+4. Generate a password-setup link via `supabaseAdmin.auth.admin.generateLink({ type: 'recovery', email, options: { redirectTo:` ${SITE_URL}/auth/set-password `} })` and use the returned `action_link` as the email CTA.
+5. Render a different HTML body for the force-register email: header "Welcome to DLinRT.eu", body explains the account was created on their behalf for {company}, CTA button **"Set your password"** pointing to the recovery link, fallback paste-link, expiry note ("This password setup link expires in 24 hours per Supabase defaults"), and contact line.
+6. Subject becomes `Set your password for DLinRT.eu (${companyName} representative)`.
+7. Preserve current behavior when `forceRegister` is false — unchanged invite-token flow.
 
-- `evidence-verification-<DATE>-<wave>.md` — per-product report (citations table + verdicts + rescoring proposals).
-- `evidence-verification-<DATE>-<wave>.csv` — one row per citation with verdict + suggested action.
-- `evidence-verification-<DATE>-<wave>-rescoring.csv` — id, current E/I, proposed E/I, rationale.
+Error handling:
 
-## Implementation (build mode)
+- If `createUser` returns "already registered", continue with link generation against the existing user (still attach rep row + send Set-Password email). Surface a non-blocking note in the response.
+- If `generateLink` fails, return 500 with the message and do not send the email.
 
-- New script `scripts/evidence-verification-sweep.ts` that:
-  - loads a category (reusing `scripts/audit-swarm.ts` loader pattern),
-  - emits a worklist of citations to a JSON file,
-  - prints a per-product summary;
-  the actual abstract lookup / verdict is then done by the agent using `websearch--web_search` + `code--fetch_website` and recorded back into the CSV. (LLM-in-the-loop, not auto-LLM, to avoid hallucinated verdicts.)
-- Edits to product `.ts` files happen **only in a follow-up confirmed pass**, one PR per category, after you sign off on the worklist — consistent with the Minimal Intervention policy.
+### Schema check
 
-## Hard rules (anti-hallucination)
+No migration needed — `company_representatives` and `company_invitations` already exist (per `supabase-tables`). If `company_invitations` has a `force_registered` boolean column we'll set it; otherwise leave status logic as described. Will confirm with a quick read in build mode and add a tiny migration only if needed for an audit flag.
 
-- Every `remove` verdict must cite the abstract URL + a quoted sentence proving the paper does not study this product.
-- Every `keep` verdict must cite the abstract URL + a quoted sentence naming the product or its model.
-- No citation is added in this sweep. Period.
-- No score is raised in this sweep; only lowered or held.
+### Auth integration
 
-## Open questions before I start
+Set-Password link uses Supabase's built-in recovery flow. The existing `/auth/set-password` (or equivalent) page is already protected by Supabase session from the recovery token — will verify the route exists during build; if not, we route to `/auth?mode=recovery` which the project already handles.
 
-1. **Wave 1 scope** — start with **Image Synthesis only** (4 MRCAT + sCT peers, ~10 products) as a pilot, then expand? Or run all 91 in one batch?
-2. **Treatment of "indirect but plausibly informative" papers** (e.g. a multi-vendor sCT benchmark that *includes* MRCAT alongside others) — `keep` with a `level: "indirect-comparative"` label, or `remove`?
-3. **Pipeline products** (`src/data/products/pipeline/`) — include or skip?
+## 3. Out of scope
+
+- No changes to `accept-company-invitation` flow (regular invites unchanged).
+- No bulk-invite or CSV import.
+- No reformatting of unrelated UI; AutoLinkText is additive only.
+
+## Technical details
+
+- `AutoLinkText` already lives at `src/components/ui/AutoLinkText.tsx` — reuse, no API change.
+- Edge function continues using `resend@4.0.0` + the existing `getCorsHeaders` allowlist (per project edge-function memory).
+- Notification-preference check is not required here: admin-initiated representative onboarding is operational, not a category notification.
