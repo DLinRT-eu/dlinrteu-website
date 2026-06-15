@@ -78,17 +78,24 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         decisionDate: "2020",
         notes: "AI-powered application for primary and metastatic brain tumors."
       },
-      intendedUseStatement: "MRCAT Brain is indicated for radiotherapy treatment planning for primary and metastatic brain tumor patients. (Source: FDA 510(k) K193109 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "MRCAT Brain is indicated for radiotherapy treatment planning for primary and metastatic brain tumor patients. (Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12, 3000 113 93922/781, 2024-06, p.10; FDA 510(k) K193109 Summary. IFU URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed, retrieved 2026-06-15, publicly accessible.)"
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
+    limitations: [
+      "Patient selection (IFU): not suitable for patients with large metal objects within the imaging volume, cancers other than brain tumors, or bone anomalies/diseases in the head area.",
+      "General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight > 250 kg.",
+      "Operational: continuous HU values are assigned; foreign material or objects used during MR simulation (e.g. tracheal tube, central venous catheter) may not be visualized and can compromise dose calculation accuracy.",
+      "Operational: MRCAT must not be used with restricted dB/dt or with a gradient slew rate restricted below the MR system limit; MRCAT images must not be post-processed.",
+      "Source: Philips Ingenia MR-RT IFU, RTgo 5.12 (2024-06), pp. 10–11 and 63–68. URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed. Retrieved 2026-06-15."
+    ],
     version: "1.0",
     releaseDate: "2020-01-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Company website",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [
       {

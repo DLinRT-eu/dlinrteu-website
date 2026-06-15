@@ -73,18 +73,24 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         decisionDate: "2022-04-05",
         notes: "FDA K214081; AI-enabled MR-only radiotherapy application for soft tissue tumors in head and neck. Traditional 510(k) substantial equivalence decision."
       },
-      intendedUseStatement: "MRCAT Head and Neck is indicated for radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region. (Source: FDA 510(k) K214081 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "MRCAT Head and Neck is indicated for radiotherapy treatment planning for patients with soft tissue tumors in the Head and Neck region. (Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12, 3000 113 93922/781, 2024-06, p.10; FDA 510(k) K214081 Summary. IFU URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed, retrieved 2026-06-15, publicly accessible.)"
     },
     market: {
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Partnerships"],
-
 },
+    limitations: [
+      "Patient selection (IFU): not suitable for patients with large metal objects (e.g. metal prosthesis) in the imaging volume, cancers other than head-and-neck soft-tissue cancer, bone anomalies/diseases in the H&N area, or body diameter at shoulder/chest exceeding 60 cm (L-R) or 34 cm (A-P) within the planning FOV.",
+      "General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight > 250 kg.",
+      "Operational: continuous HU values are assigned; foreign material used during MR simulation (e.g. bolus, mouthpiece, tracheal tube, CVC) may not be visualized and can compromise dose calculation accuracy.",
+      "Operational: MRCAT must not be used with restricted dB/dt or with a gradient slew rate restricted below the MR system limit; MRCAT images must not be post-processed.",
+      "Source: Philips Ingenia MR-RT IFU, RTgo 5.12 (2024-06), pp. 10–11 and 63–68. URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed. Retrieved 2026-06-15."
+    ],
     version: "2.0",
     releaseDate: "2022-10-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15",
     clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Upgraded from E0 to E1: First peer-reviewed independent retrospective clinical workflow and dosimetric validation study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751). Evidence remains limited by single-center retrospective design and modest cohort size (n=10 for H&N subset); no prospective multicenter outcome study identified.",

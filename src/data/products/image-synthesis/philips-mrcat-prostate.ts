@@ -120,12 +120,21 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         decisionDate: "2015",
         notes: "Cleared as part of Philips Ingenia MR-RT system. MRCAT Prostate + Auto-Contouring is a clinical application running on the cleared MR-RT platform. First MR-only radiotherapy solution."
       },
-      intendedUseStatement: "As a plug-in clinical application to Ingenia MR-RT, MRCAT Prostate + Auto-Contouring provides attenuation maps and automated, MR-based contours of prostate and organs at risk in as little as 20 minutes – all in a repeatable 'one-click' workflow. (Source: Philips MRCAT Prostate + Auto-Contouring product page, https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application, accessed 2026-05-30. No verbatim FDA IFU publicly available — cleared as part of the Philips Ingenia MR-RT system platform.)"
+      intendedUseStatement: "MRCAT Prostate is indicated for radiotherapy treatment planning for prostate cancer patients; radiotherapy target volumes for patients with prostate cancer, including anatomies in the pelvic region and lymph nodes with margins, up to the L3 vertebra, are suitable for MR-only simulation with MRCAT Prostate. (Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12, 3000 113 93922/781, 2024-06, pp. 10–11. IFU URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed, retrieved 2026-06-15, publicly accessible.)"
     },
     market: {
       onMarketSince: "2015",
       distributionChannels: ["Direct sales"]
     },
+    limitations: [
+      "Patient selection (IFU): not suitable for patients with large metal objects (e.g. hip prosthesis) in the imaging volume, cancers other than prostate cancer, bone anomalies/diseases in the pelvic area, or body diameter in the pelvic area exceeding 50 cm (L-R) or 30 cm (A-P) within the planning FOV.",
+      "General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight > 250 kg.",
+      "Operational: MRCAT Prostate assigns discrete (bulk) HU values to tissue classes — images may not be suitable for soft-tissue dose evaluation in the very low-dose region.",
+      "Operational: signal-void volumes inside the body outline other than compact bone are interpreted as water-rich or fatty tissue, which can mis-categorize rectal gas, foreign material, or implants and locally affect dose calculation accuracy.",
+      "Operational: generate MRCAT Prostate images before any contrast agent is administered to the patient — otherwise the MRCAT post-processing step may fail.",
+      "Operational: MRCAT must not be used with restricted dB/dt or with a gradient slew rate restricted below the MR system limit; MRCAT images must not be post-processed.",
+      "Source: Philips Ingenia MR-RT IFU, RTgo 5.12 (2024-06), pp. 10–11 and 63–68. URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed. Retrieved 2026-06-15."
+    ],
     supportedStructures: [
       "Pelvis: Prostate (anatomical)",
       "Pelvis: Seminal Vesicles",
@@ -149,8 +158,8 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     releaseDate: "2016-03-31",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated with independent peer-reviewed MRCAT prostate dosimetric validation studies (2026-06-13)"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated with independent peer-reviewed MRCAT prostate dosimetric validation studies (2026-06-13); top-level limitations and intended-use refreshed from Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68, retrieved 2026-06-15"
   }
 ];
