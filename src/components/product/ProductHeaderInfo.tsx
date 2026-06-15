@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { EditableField, useProductEdit } from "@/components/product-editor";
+import AutoLinkText from "@/components/ui/AutoLinkText";
 
 interface ProductHeaderInfoProps {
   product: ProductDetails;
