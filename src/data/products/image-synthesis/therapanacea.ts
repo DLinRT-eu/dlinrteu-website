@@ -24,7 +24,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://www.therapanacea.eu",
     productUrl: "https://www.therapanacea.eu/our-products/mr-box/",
-    description: "AI-powered software module within the ART-Plan+ platform for generating MR-based pseudo-CT (synthetic CT) images with co-registered organs-at-risk (OAR) delineations from standard MR images, supporting MR-only radiotherapy workflows and reducing physical CT demand.",
+    description: "AI-powered software module within the ART-Plan+ platform for generating MR-based pseudo-CT (synthetic CT) images with co-registered organs-at-risk (OAR) delineations from standard MR images, supporting MR-only radiotherapy workflows and reducing physical CT demand. Naming caveat: 'MR-Box' is the Therapanacea commercial brand name; FDA 510(k) submissions (K234068, K242822, K253091) describe the same functionality as the Annotate module / pseudo-CT generation feature of ART-Plan and do not use the 'MR-Box' label.",
     features: [
       "AI-based MR-to-pseudo-CT (synthetic CT) generation in one click",
       "Organs-at-risk (OAR) automatic delineation directly on MRI images",
@@ -104,11 +104,23 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
+    evidence: [
+      {
+        type: "Multicenter Study",
+        description: "International retrospective multi-centric study across 8 institutions of pelvic (TrueFisp 0.35T) and brain MR pseudo-CT generation with ART-Plan/MR-Box. Frontiers in Oncology 2023.",
+        link: "https://doi.org/10.3389/fonc.2023.1245054"
+      },
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MR-Box commissioning; not a direct MR-Box evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
+      }
+    ],
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054)",
+    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",
     adoptionReadiness: "R2",

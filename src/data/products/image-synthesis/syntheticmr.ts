@@ -32,6 +32,11 @@ export const SyMRINeuro: ProductDetails = {
       type: "Peer-Reviewed Publication",
       level: "3",
       description: "Prospective multicenter multireader study comparing 3D synthetic vs conventional brain MRI using SyMRI 15 (AJNR 2025)."
+    },
+    {
+      link: "https://doi.org/10.1016/j.radonc.2026.111530",
+      type: "Indirect-Comparative",
+      description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark for MR-only RT commissioning; relevant to SyMRI synthetic-CT use in RT contexts but not a direct SyMRI evaluation."
     }
   ],
   features: [
@@ -77,8 +82,8 @@ export const SyMRINeuro: ProductDetails = {
     "Reduced scan time",
     "Streamlined workflow"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   releaseDate: "2024-12-06",
   certification: "CE & FDA",
   evidenceRigor: "E2",

@@ -141,7 +141,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Multicenter Study",
-        description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images. Int J Radiat Oncol Biol Phys 2017;99(3):692-700.",
+        description: "Persson et al. MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images. Int J Radiat Oncol Biol Phys 2017;99(3):692-700. Direct evaluation of the Spectronic MRiPlanner (formerly Statistical Decomposition Algorithm) synthetic CT for prostate MR-only RT in 170 patients across 4 centers. Verified 2026-06-15: this DOI/PMID resolves to the MR-OPERA paper which evaluates the Spectronic sCT product (not Philips MRCAT).",
         link: "https://doi.org/10.1016/j.ijrobp.2017.06.006"
       },
       {
@@ -158,10 +158,15 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         type: "Clinical Implementation",
         description: "Earwong et al. Clinical implementation of deep learning-based synthetic CT for MRI-only volumetric modulated arc therapy in head and neck and pelvic cancer patients. Radiat Oncol 2025;20:166.",
         link: "https://doi.org/10.1186/s13014-025-02744-2"
+      },
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark dataset and acceptance levels for MR-only RT commissioning; relevant to MRiPlanner commissioning but not a direct product evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Evidence includes FDA 510(k) clearance, CE-marked status reported by the company, MR-OPERA multicenter/multivendor prostate validation (170 prostate patients at 4 centers), independent brain validation (Lerner et al. 2021), multi-site dosimetric validation across pelvis, brain and head & neck (Bird et al. 2024), and clinical implementation evidence in H&N and pelvic VMAT workflows (Earwong et al. 2025). Evidence is strong for technical and dosimetric validation, but not outcome-level clinical benefit.",
+    evidenceRigorNotes: "Evidence includes FDA 510(k) clearance, CE-marked status reported by the company, MR-OPERA multicenter/multivendor prostate validation directly evaluating Spectronic MRiPlanner (Persson 2017, 170 prostate patients at 4 centers — DOI verified 2026-06-15 as the original MR-OPERA paper and confirmed to evaluate the Spectronic sCT product), independent brain validation (Lerner et al. 2021), multi-site dosimetric validation across pelvis, brain and head & neck (Bird et al. 2024), and clinical implementation evidence in H&N and pelvic VMAT workflows (Earwong et al. 2025). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Evidence is strong for technical and dosimetric validation, but not outcome-level clinical benefit.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric accuracy and workflow feasibility have been reported across prostate/pelvis, brain and head & neck synthetic-CT workflows. Published evidence supports MRI-only planning implementation and QA, but does not yet demonstrate improved patient outcomes.",
     adoptionReadiness: "R3",
