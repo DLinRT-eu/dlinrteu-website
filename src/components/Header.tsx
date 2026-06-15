@@ -207,6 +207,7 @@ const Header = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild><Link to="/profile">Profile</Link></DropdownMenuItem>
                 <DropdownMenuItem asChild><Link to="/my-products">My Products</Link></DropdownMenuItem>
+                <DropdownMenuItem asChild><Link to="/my-submissions">My Submissions</Link></DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/notifications" className="flex items-center justify-between w-full">
                     Notification History

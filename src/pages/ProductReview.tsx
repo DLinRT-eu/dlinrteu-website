@@ -7,6 +7,7 @@ import { GitHubUrlCard } from '@/components/revision/GitHubUrlCard';
 import { useCompanyData } from '@/hooks/useCompanyData';
 import ProductDetails from '@/components/ProductDetails';
 import ProductRevisionHistory from '@/components/reviewer/ProductRevisionHistory';
+import VisualEditHistory from '@/components/reviewer/VisualEditHistory';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Clipboard, HelpCircle, FileText, Pencil } from 'lucide-react';
@@ -100,6 +101,10 @@ const ProductReview = () => {
             <FileText className="h-4 w-4" />
             Company Revisions
           </TabsTrigger>
+          <TabsTrigger value="visual-edits" className="flex items-center gap-2">
+            <Pencil className="h-4 w-4" />
+            Visual Edits
+          </TabsTrigger>
           <TabsTrigger value="details">Product Details</TabsTrigger>
         </TabsList>
 
@@ -136,6 +141,10 @@ const ProductReview = () => {
 
         <TabsContent value="revisions">
           <ProductRevisionHistory productId={id!} />
+        </TabsContent>
+
+        <TabsContent value="visual-edits">
+          <VisualEditHistory productId={id!} />
         </TabsContent>
 
         <TabsContent value="details">
