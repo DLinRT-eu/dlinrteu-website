@@ -58,7 +58,7 @@ interface PendingRegistration {
 interface PendingEditDraft {
   id: string;
   product_id: string;
-  user_id: string;
+  created_by: string;
   status: string;
   submitted_at: string | null;
   created_at: string;
