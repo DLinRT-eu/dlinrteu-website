@@ -11,12 +11,12 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
         disclosureLevel: "minimal"
     },
     evaluationData: {
-        studyDesign: "Retrospective peer-reviewed publication validation",
-        sourceUrl: "https://doi.org/10.1007/s00330-020-07081-4",
-        source: "Kim et al. Deep learning CT denoising validation in European Radiology 2020",
+        studyDesign: "Software V&V (FDA 510(k))",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf",
+        source: "FDA 510(k) summary K183460",
         results: "Not publicly disclosed",
         primaryEndpoint: "Not specified",
-        description: "Validation studies in pediatric abdominal CT, coronary CTA, and liver imaging, including a study by Kim et al. in European Radiology (2020) demonstrating deep learning CT denoising efficacy."
+        description: "FDA 510(k) software validation for ClariCT.AI. No ClariCT.AI-specific peer-reviewed publication verified at this time."
     },
     name: "ClariCT.AI",
     company: "ClariPi",
