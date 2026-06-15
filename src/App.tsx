@@ -102,6 +102,7 @@ const SecurityDashboard = lazyPage(() => import("./pages/admin/SecurityDashboard
 const UserRegistrationReview = lazyPage(() => import("./pages/admin/UserRegistrationReview"));
 const ChangelogAdmin = lazyPage(() => import("./pages/admin/ChangelogAdmin"));
 const EditApprovals = lazyPage(() => import("./pages/admin/EditApprovals"));
+const MySubmissions = lazyPage(() => import("./pages/MySubmissions"));
 const BulkRepresentativeEmail = lazyPage(() => import("./pages/admin/BulkRepresentativeEmail"));
 
 // Company Pages
