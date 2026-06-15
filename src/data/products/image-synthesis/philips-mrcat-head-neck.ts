@@ -10,11 +10,12 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
         disclosureLevel: "minimal"
     },
     evaluationData: {
-        results: "Median dosimetric deviations of 0.4 ± 0.7% (target volumes) and 0.4 ± 0.9% (OARs) vs planning CT.",
-        description: "Retrospective clinical workflow study in 10 head-and-neck patients reporting median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT.",
-        primaryEndpoint: "Dosimetric deviations",
-        studyDesign: "Single-center retrospective clinical workflow and dosimetric validation study",
-        source: "Buschmann et al. 2026, Z Med Phys (PubMed PMID 39956751)"
+        results: "Independent: median dosimetric deviations 0.4 ± 0.7% (target volumes) and 0.4 ± 0.9% (OARs) vs planning CT in 10 H&N patients (Buschmann et al. 2026). Vendor V&V (Philips Ingenia MR-RT IFU RTgo 5.12 appendix, Tables 15–17, pp. 136–138, RTgo 5.0): 6 hospitals × 85 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = 0.02 ± 0.27% (min/max +0.82/+0.97%); primary 2%/2 mm gamma pass 99.7 ± 0.50% (median 0.09 ± 0.02, body-outline matched); stricter 1%/1 mm gamma pass 97.9 ± 2.3%. Positioning study: 6 hospitals × 85 patients via DRR and CBCT correlation-function evaluation.",
+        description: "Independent retrospective clinical workflow study in 10 H&N patients (Buschmann et al. 2026, Z Med Phys, PMID 39956751) combined with vendor V&V disclosed in the Philips IFU appendix (RTgo 5.0): 6 hospitals × 85 patients, mean PTV dose difference 0.02 ± 0.27%, 99.7% voxels passing 2%/2 mm gamma.",
+        primaryEndpoint: "Dosimetric deviations and gamma analysis (2%/2 mm and 1%/1 mm)",
+        studyDesign: "Single-center retrospective clinical workflow study (Buschmann 2026) complemented by multi-center vendor V&V (Philips IFU appendix, 6 hospitals)",
+        source: "Buschmann et al. 2026, Z Med Phys (PubMed PMID 39956751); Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
+        sites: 6
     },
     name: "MRCAT Head and Neck",
     company: "Philips",

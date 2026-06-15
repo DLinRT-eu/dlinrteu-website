@@ -11,12 +11,13 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182888.pdf"
     },
     evaluationData: {
-        source: "Persson et al. Int J Radiat Oncol Biol Phys 2020 (DOI: 10.1016/j.ijrobp.2020.07.027)",
+        source: "Persson et al. Int J Radiat Oncol Biol Phys 2020 (DOI: 10.1016/j.ijrobp.2020.07.027); Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
         sourceUrl: "https://doi.org/10.1016/j.ijrobp.2020.07.027",
-        studyDesign: "Multicenter/multivendor validation study",
-        primaryEndpoint: "Dosimetric equivalence to CT-based planning",
-        description: "A multicenter/multivendor validation (MR-OPERA) involving multiple clinical sites, demonstrating dosimetric equivalence to CT-based planning for pelvic radiation therapy using synthetic CT images.",
-        results: "Dosimetric equivalence demonstrated in a multicenter/multivendor setting."
+        studyDesign: "Independent multicenter/multivendor validation (MR-OPERA) plus multi-center vendor V&V (Philips IFU appendix, 4 hospitals)",
+        primaryEndpoint: "Dosimetric equivalence to CT-based planning; gamma analysis (3%/3 mm)",
+        description: "Independent multicenter/multivendor MR-OPERA validation (Persson et al. 2020) demonstrating dosimetric equivalence to CT-based planning, complemented by vendor V&V disclosed in the Philips IFU appendix (RTgo 4.1): 4 hospitals × 103 patients, mean PTV dose difference −0.31 ± 0.51%, 99.9% voxels passing 3%/3 mm gamma.",
+        results: "Independent: dosimetric equivalence to CT in multicenter/multivendor MR-OPERA setting (Persson et al. 2020). Vendor V&V (Philips IFU appendix, RTgo 4.1): 4 hospitals × 103 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.31 ± 0.51% (min/max −1.71/+0.46%); 3%/3 mm gamma pass 99.9 ± 0.64% (median gamma 0.15 ± 0.09). Positioning study: 1 hospital × 11 patients.",
+        sites: 4
     },
     name: "MRCAT Pelvis",
     company: "Philips",
