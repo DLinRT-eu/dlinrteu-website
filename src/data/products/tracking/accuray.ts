@@ -161,8 +161,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Hoogeman et al. Clinical accuracy of the respiratory tumor tracking system of the CyberKnife®: assessment by analysis of log files. IJROBP 2009",
-        link: "https://doi.org/10.1016/j.ijrobp.2008.09.011"
+        description: "Hoogeman et al. Clinical accuracy of the respiratory tumor tracking system of the CyberKnife®: assessment by analysis of log files. IJROBP 2009 (PMID 19362249)",
+        link: "https://doi.org/10.1016/j.ijrobp.2008.12.041"
       }
     ],
     clinicalEvidence: "The clinical and technical utility of Synchrony® has a highly established evidence base on the CyberKnife® System (extending nearly 25 years since 2002) and a growing clinical peer-reviewed record on the Radixact® Treatment Delivery System (since its launch in 2019). Clinical studies demonstrate accurate real-time tracking, low residual latencies (±10 ms), and reduced treatment-margins. Recent clinical studies (Acharya et al. 2025, Okada et al. 2025, Lo Conte et al. 2025) demonstrate feasibility and excellent toxicity outcomes in liver tumor tracking and prostate SBRT.",
