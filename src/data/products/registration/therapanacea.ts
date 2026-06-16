@@ -81,10 +81,18 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.2",
+      version: "3.2.0",
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
+    limitations: [
+      "Registered images and deformed contours must be reviewed and validated by an authorized user before clinical use",
+      "Deformable registration quality degrades with low-resolution, noisy, lossy-compressed, or artefact-laden input volumes",
+      "Adult patients only (ART-Plan+ is not intended for patients <18 years)",
+      "MR registration is only validated for supported sequences (Brain T1, Pelvis T2, Abdo/Pelvis TrueFISP)",
+      "Required DICOM tags must be present and correct; importing corrupted volumes or volumes with missing slices may cause failures or misalignment",
+      "Module availability varies by market"
+    ],
     evidenceRigor: "E0",
     clinicalImpact: "I1",
     evidenceRigorNotes: "CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse.",
