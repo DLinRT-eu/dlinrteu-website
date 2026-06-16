@@ -195,7 +195,7 @@ function addFooter(s, { darkBg = false } = {}) {
   COMPANIES.forEach((c, i) => {
     const r = Math.floor(i / cols), col = i % cols;
     const x = gridX + col * cellW, y = gridY + r * cellH;
-    const companyUrl = `${SITE_URL}/companies/${c.id || c.slug || encodeURIComponent(c.name)}`;
+    const companyUrl = `${SITE_URL}/products/company/${c.id}`;
     let placed = false;
     let logoPath = c.logoUrl ? path.join("public", c.logoUrl.replace(/^\//, "")) : null;
     if (logoPath && logoPath.endsWith(".svg")) {
