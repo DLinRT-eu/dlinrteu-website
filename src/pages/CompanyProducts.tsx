@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Building, ExternalLink, Package, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building, Clock, ExternalLink, Package, ShieldCheck } from "lucide-react";
 import dataService from "@/services/DataService";
 import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
@@ -16,6 +16,16 @@ const CompanyProducts = () => {
     () => (company ? dataService.getProductsByCompany(company.id) : []),
     [company]
   );
+  const pipelineProducts = useMemo(
+    () =>
+      company
+        ? dataService
+            .getPipelineProducts()
+            .filter((p) => company.productIds.includes(p.id || ""))
+        : [],
+    [company]
+  );
+
 
   const stats = useMemo(() => {
     const categories = Array.from(new Set(products.map((p) => p.category).filter(Boolean)));
