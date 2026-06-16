@@ -14,16 +14,6 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "secondaryTasks": ["Auto-Contouring"]
   },
   {
-    "id": "syntheticmr",
-    "name": "SyntheticMR",
-    "description": "Pioneering medical imaging technology company specializing in quantitative MRI and synthetic image generation.",
-    "website": "https://syntheticmr.com/",
-    "productIds": ["syntheticmr-neuro"],
-    "category": "Specialized Solutions",
-    "logoUrl": "/logos/syntheticMRI.png",
-    "primaryTask": "Image Synthesis"
-  },
-  {
     "id": "raysearch",
     "name": "RaySearch Laboratories",
     "description": "Developer of innovative software solutions for radiation therapy treatment planning.",
