@@ -1,4 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
+import { ADAPTBOX_PELVIS_MALE_CBCT } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -132,20 +133,14 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       },
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
-    supportedStructures: [
-      "FDA-cleared AdaptBox anatomy: Head & Neck",
-      "FDA-cleared AdaptBox anatomy: Breast / Thorax",
-      "FDA-cleared AdaptBox anatomy: Pelvis (male)",
-      "Pelvis (Male): Anal Canal",
-      "Pelvis (Male): Bladder",
-      "Pelvis (Male): Femoral Head (L)",
-      "Pelvis (Male): Femoral Head (R)",
-      "Pelvis (Male): Penile Bulb",
-      "Pelvis (Male): Prostate",
-      "Pelvis (Male): Rectum",
-      "Pelvis (Male): Seminal Vesicle",
-      "Pelvis (Male): Sigmoid"
-    ],
+    supportedStructures: ADAPTBOX_PELVIS_MALE_CBCT,
+    structuresProvenance: {
+      source: "Therapanacea AdaptBox product page; FDA 510(k) K253091",
+      sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+      sourceAccess: "public",
+      sourceRetrievedOn: "2026-06-16",
+      notes: "Single CBCT model (Pelvis Male) cleared today; H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level but the per-structure list is not publicly itemised."
+    },
     market: {
       onMarketSince: "2023",
       distributionChannels: ["Direct sales through vendor", "Distribution partners"],

@@ -1,4 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
+import { MRBOX_ALL_STRUCTURES } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -93,6 +94,17 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "The Annotate module allows generation of pseudo-CTs from MRI images. Users are able to visualize, evaluate and modify the HU values of the associated structures on the pseudo-CT. ART-Plan offers deep-learning based synthetic CT-generation from MR images for the following localizations: pelvis male, Brain. (Source: FDA 510(k) K234068 Summary)"
     },
     market: {
+      onMarketSince: "2021",
+      distributionChannels: ["Direct sales"]
+    },
+    supportedStructures: MRBOX_ALL_STRUCTURES,
+    structuresProvenance: {
+      source: "Therapanacea MR-Box product page; FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
+      sourceUrl: "https://www.therapanacea.eu/our-products/mr-box/",
+      sourceAccess: "public",
+      sourceRetrievedOn: "2026-06-16",
+      notes: "Three MR models, each prefixed in the structure list: Brain (MR T1); Pelvis Male (MR T2 Elekta MR-Linac); Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay)."
+    },
       onMarketSince: "2021",
       distributionChannels: ["Direct sales"]
     },
