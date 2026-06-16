@@ -141,3 +141,5 @@ export const DVTARGET: ProductDetails = {
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const HURA_IMAGING_PRODUCTS: ProductDetails[] = [DVTARGET];
