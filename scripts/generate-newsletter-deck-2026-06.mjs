@@ -12,6 +12,31 @@ import { execSync } from "node:child_process";
 import { ALL_PRODUCTS } from "../src/data/index.ts";
 import { COMPANIES } from "../src/data/companies/index.ts";
 
+// Read intrinsic image dimensions (PNG / JPEG) to preserve aspect ratio.
+function getImageSize(p) {
+  try {
+    const b = fs.readFileSync(p);
+    if (b[0] === 0x89 && b[1] === 0x50) {
+      // PNG: width/height at bytes 16-23 (big-endian uint32)
+      return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+    }
+    if (b[0] === 0xff && b[1] === 0xd8) {
+      // JPEG: scan SOF markers
+      let o = 2;
+      while (o < b.length) {
+        if (b[o] !== 0xff) break;
+        const marker = b[o + 1];
+        const len = b.readUInt16BE(o + 2);
+        if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+          return { h: b.readUInt16BE(o + 5), w: b.readUInt16BE(o + 7) };
+        }
+        o += 2 + len;
+      }
+    }
+  } catch {}
+  return null;
+}
+
 const OUT_DIR = "public/newsletters/2026-06";
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
