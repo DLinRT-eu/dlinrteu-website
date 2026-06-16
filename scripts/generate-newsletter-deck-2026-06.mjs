@@ -303,7 +303,7 @@ function addFooter(s, { darkBg = false } = {}) {
       url: SITE_URL + "/companies",
       body: [
         { text: "Manufacturers can now certify their product listings. ", options: { color: "CADCFC" } },
-        { text: "Synaptiq", options: { hyperlink: { url: SITE_URL + "/companies/synaptiq" }, color: "FFFFFF", bold: true } },
+        { text: "Synaptiq", options: { hyperlink: { url: SITE_URL + "/products/company/synaptiq" }, color: "FFFFFF", bold: true } },
         { text: " — first certified, two CE-marked products. Congratulations.", options: { color: "CADCFC" } },
       ],
     },
