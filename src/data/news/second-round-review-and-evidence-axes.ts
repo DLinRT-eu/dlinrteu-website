@@ -55,6 +55,10 @@ The first fully dedicated satellite event on radiotherapy at MICCAI takes place 
 
 👉 [MAIRT workshop](https://miart-workshop.github.io/)
 
+## 🗓️ Save the Date: DLinRT Workshop in Utrecht · March 2026
+
+We are happy to pre-announce that **DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026**. Dates and venue are being finalised — more information will follow (around September) on our website and at [dlinrt.org](https://dlinrt.org).
+
 ## 🏛️ UMC Utrecht Supports the Platform
 
 Through the **Radiotherapy Medical Physics Traineeship**, **UMC Utrecht** has agreed to cover the running costs of DLinRT.eu, safeguarding the **independence and continuity** of the initiative. A huge thank you to the **Radiotherapy Department** for this support.
