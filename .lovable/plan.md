@@ -1,84 +1,54 @@
-## Goal
+## Scope
 
-Bring the three Therapanacea auto-contouring entries (Annotate, AdaptBox, MR-Box) in line with the rest of the catalogue's `supportedStructures` syntax, keep the 7 Annotate CT models cleanly labelled, and re-audit the clinical evidence + displayed metadata.
+Three Therapanacea products: `therapanacea-annotate`, `therapanacea-adaptbox`, `mr-box-synthetic`. Also touch `therapanacea-structures.ts` (new structure arrays) and the related registration/pipeline/AdaptBox SmartFuse/SmartPlan files only if the evidence audit surfaces stale citations.
 
-## Problem today
+## 1. Evidence audit (verify + flag, no silent edits)
 
-- `Annotate`, `AdaptBox`, `MR-Box` use object form `{ name, type }` with `"Region: Structure Name"` labels. Every other auto-contouring vendor (MVision, Limbus, Manteia, GE, RaySearch, …) uses **plain strings** in the `"<Model>-<Modality>: TG263_Name"` form, kept in a dedicated `<vendor>-structures.ts` file. The Structure Comparison Tool and the Region/Modality chips therefore don't render Therapanacea consistently.
-- Annotate's 7 CT models are only delineated by inline `// === …` comments; they aren't structurally identifiable.
-- Some bilateral entries still use grouped `"(L/R)"` form, contrary to the v3 naming convention (one row per side).
+Run targeted PubMed/DOI lookups (`websearch--web_search` + `fetch_website`) for each product:
 
-## Plan
+- **Annotate** — re-verify DiTusa 2025 (DOI 10.4103/jmp.jmp_11_25) and Lê 2024 (DOI 10.1016/j.phro.2024.100654). Search for any 2025–2026 independent Annotate validations (H&N, breast LN, pelvis, SBRT lung, heart sub-structures). Check that all `guidelines[]` DOIs resolve.
+- **MR-Box** — re-verify Frontiers in Oncology 2023 (10.3389/fonc.2023.1245054) and MESCAL 2026 (10.1016/j.radonc.2026.111530). Search for newer brain/pelvis pseudo-CT evaluations.
+- **AdaptBox** — re-verify Prunaretty 2026 (10.3390/cancers18111826) and the Frontiers 2026 multi-centre paper. Look for OAR-contouring-on-CBCT studies.
+- **TumorBox** (pipeline) — confirm no published evidence yet.
+- **SmartFuse, SmartPlan, BrachyBox** (touched in previous turn) — spot-check that no peer-reviewed Therapanacea-named evidence is missing.
 
-### 1. New file `src/data/products/auto-contouring/therapanacea-structures.ts`
+Output: a per-product evidence-audit table embedded at the top of the final reply (status, missing/outdated citations, recommended additions, **lastRevised** bump only where new evidence is added). Apply additions only to fields that already exist on each product (`evidence[]`, `evidenceRigorNotes`, `clinicalImpactNotes`, `source`, `lastRevised`).
 
-Seven string arrays — one per Annotate CT model — plus combined exports:
+## 2. AdaptBox — structures + limitations
 
-- `ANNOTATE_HEAD_NECK_CT` — prefix `"Head & Neck-CT: …"` (OARs + Cervical LN levels)
-- `ANNOTATE_FEMALE_THORAX_BREAST_CT` — prefix `"Female Thorax/Breast-CT: …"`
-- `ANNOTATE_MALE_THORAX_CT` — prefix `"Male Thorax-CT: …"`
-- `ANNOTATE_HEART_SUBSTRUCTURES_CT` — prefix `"Heart Sub-Structures-CT: …"` (Duane 2017 / Lee 2017)
-- `ANNOTATE_SBRT_LUNG_CT` — prefix `"Lung SBRT-CT: …"`
-- `ANNOTATE_PELVIS_MALE_CT` — prefix `"Pelvis Male-CT: …"`
-- `ANNOTATE_PELVIS_FEMALE_CT` — prefix `"Pelvis Female-CT: …"`
-- `ANNOTATE_ALL_STRUCTURES` — concat of the seven
-- `ADAPTBOX_PELVIS_MALE_CBCT` — prefix `"Pelvis Male-CBCT: …"` (AdaptBox)
-- `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` — prefix `"<Model>-MR: …"` (MR-Box)
+Per FDA K253091, AdaptBox is cleared for Head & Neck, Breast/Thorax, and Pelvis (male). Currently only Pelvis Male CBCT is itemised.
 
-Within each array:
-- Split bilateral structures into separate `_L` / `_R` entries (drop `(L/R)`).
-- Use TG-263-style names where unambiguous (`Eye_L`, `Glnd_Lacrimal_R`, `OpticNrv_L`, `Bone_Mandible`, `SpinalCord`, `LN_Neck_II_L`, …); keep vendor-specific names where TG-263 has no equivalent (e.g. `LN_IMC_L`).
-- Tag lymph nodes with the `LN_` TG-263 prefix.
+- In `src/data/products/auto-contouring/therapanacea-structures.ts`, add two new exported arrays:
+  - `ADAPTBOX_HEAD_NECK_CBCT` — mirror the H&N OAR core set from `ANNOTATE_HEAD_NECK_CT` (OARs only, no LN levels), prefixed `Head & Neck (CBCT): …`.
+  - `ADAPTBOX_BREAST_THORAX_CBCT` — mirror the OAR core set from `ANNOTATE_FEMALE_THORAX_BREAST_CT` (OARs only, no elective LNs), prefixed `Breast/Thorax (CBCT): …`.
+  - Add a combined `ADAPTBOX_ALL_STRUCTURES = [...HN, ...BreastThorax, ...PelvisMale]`.
+  - Provenance note: items derived from the corresponding Annotate CT model lists per K253091 scope; itemised list not published per CBCT model on the AdaptBox page (mark `disclosureLevel: "partial"` in `structuresProvenance.notes`).
+- In `therapanacea-adaptbox.ts`: switch `supportedStructures` to `ADAPTBOX_ALL_STRUCTURES`; update `structuresProvenance.notes` accordingly; bump `lastRevised`.
+- Append the Annotate technical-page limitations (adult-only ≥ 18 y; image-quality / DICOM-tag dependencies; ≤ 240 slice / FOV 50 cm constraints; CBCT-specific FOV augmentation caveat; required vendor commissioning) to `limitations[]`. Source the strings verbatim from `https://www.therapanacea.eu/technical-information-2/` (fetched via `code--fetch_website`).
 
-### 2. Refactor `src/data/products/auto-contouring/therapanacea.ts`
+## 3. MR-Box — secondary category + limitations
 
-- Replace inline `supportedStructures` object array with `supportedStructures: ANNOTATE_ALL_STRUCTURES` import.
-- Keep `structuresProvenance`, `guidelines`, everything else.
-- Add a short `notes` line to `structuresProvenance` listing the 7 model prefixes so the UI badge documents them.
+- In `image-synthesis/therapanacea.ts`:
+  - Set `secondaryCategories: ["Auto-Contouring"]`.
+  - Ensure `categoryEvidence["Auto-Contouring"]` exists (FDA K234068 lists OAR delineation on pseudo-CT as part of MR-Box; no standalone peer-reviewed module validation → `E0`, `I0`).
+  - Append the same Annotate technical-page limitations adapted to MR (T1 brain / T2 pelvis Elekta / TrueFISP 0.35T ViewRay scanner constraints; sequence-specific commissioning; manual sCT review required) to `limitations[]`.
+  - Structures are already included via `MRBOX_ALL_STRUCTURES` per model — no change needed there, just confirm the page renders the model grouping (no data edit).
+  - Bump `lastRevised`.
 
-### 3. Refactor `src/data/products/image-synthesis/therapanacea-adaptbox.ts`
+## 4. Verification
 
-- Convert `supportedStructures` to `ADAPTBOX_PELVIS_MALE_CBCT` strings.
-- Keep AdaptBox CBCT-specific limitations and guideline refs.
-
-### 4. Refactor `src/data/products/image-synthesis/therapanacea.ts` (MR-Box)
-
-- Convert the 3 MR model arrays to `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` strings concatenated.
-- Keep `structuresProvenance`, `guidelines`, and `partOf`.
-
-### 5. Clinical evidence audit
-
-Run targeted PubMed / DOI searches (date-boxed, recorded in `lastRevised`) for:
-- "Therapanacea Annotate", "ART-Plan", "MR-Box synthetic CT", "AdaptBox CBCT"
-- Already-cited: DiTusa 2025 (JMP), Lê 2024 (Phys Imaging Radiat Oncol). Confirm DOIs resolve.
-- Search for additional 2024–2026 independent evaluations (e.g. synCT dose accuracy, breast/H&N geometric studies).
-
-For each new qualifying study: add to `evidence[]`, update `evidenceRigorNotes`/`clinicalImpactNotes`, bump `lastRevised`. If none found, record "PubMed re-verified YYYY-MM-DD; no new qualifying studies" in the notes.
-
-### 6. Displayed-information audit
-
-For Annotate / MR-Box / AdaptBox check and correct:
-- `regulatory.fda` — clearance numbers (K211539, K234068, K242822, K253091) and dates against the FDA 510(k) DB; align `intendedUseStatement` and `notes`.
-- `partOf` — all three point to `ART-Plan+` with consistent `version`/`relationship: "Module"`.
-- `companyUrl` / `productUrl` — confirm 200 OK, shorten in UI via existing `shortenUrl` helper (no data change required).
-- `lastUpdated` / `lastRevised` / `source` — synchronise to audit date.
-- `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceExternalValidation` flags — re-derive from the studies actually cited.
-- Confirm no leftover `(L/R)` grouped entries and no duplicate strings across model groups (duplicates *between* groups are allowed — same OAR can belong to several models — but never within one group).
-
-### 7. Verification
-
-- `npm run lint && npm run build` (auto-run by harness).
-- Drive Playwright against `/product/therapanacea-annotate`, `/product/mr-box-synthetic`, `/product/therapanacea-adaptbox` and the Structure Comparison page to screenshot the new layout and confirm the 7 model prefixes appear.
+- `code--exec npm run lint` (build runs automatically).
+- Playwright headless visit (one script, three screenshots) of `/product/therapanacea-annotate`, `/product/therapanacea-adaptbox`, `/product/mr-box-synthetic` to confirm structure lists, limitations, and (for MR-Box) the new secondary-category badge render. Screenshots under `/tmp/browser/therapanacea/`.
 
 ## Out of scope
 
-- Type / schema changes to `ProductDetails.supportedStructures` (the union already accepts `string[]`).
-- UI component changes — only data.
-- Other Therapanacea modules (SmartFuse, SmartPlan, BrachyBox, TumorBox).
+- No schema/type changes.
+- No UI component changes.
+- No edits to other Therapanacea modules unless the evidence audit surfaces a concrete missing citation; in that case, edit is limited to `evidence[]` + `lastRevised` only.
+- No GitHub PR automation triggered from this turn.
 
-## Files touched
+## Technical notes
 
-- `src/data/products/auto-contouring/therapanacea-structures.ts` (new)
-- `src/data/products/auto-contouring/therapanacea.ts`
-- `src/data/products/image-synthesis/therapanacea.ts`
-- `src/data/products/image-synthesis/therapanacea-adaptbox.ts`
+- All new structure entries follow the existing `"Region (Modality): TG-263_Name"` convention with `_L` / `_R` splits; no grouped "(L/R)".
+- Limitations strings will be quoted with attribution `(Source: Therapanacea technical information, accessed 2026-06-16)` in a single trailing bullet rather than inline per item, to keep the existing limitations style.
+- Evidence-audit table is delivered in chat only; product files only carry the resulting `evidence[]` additions.
