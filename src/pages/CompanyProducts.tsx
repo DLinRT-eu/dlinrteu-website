@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Building, ExternalLink, Package, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building, Clock, ExternalLink, Package, ShieldCheck } from "lucide-react";
 import dataService from "@/services/DataService";
 import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
@@ -16,6 +16,16 @@ const CompanyProducts = () => {
     () => (company ? dataService.getProductsByCompany(company.id) : []),
     [company]
   );
+  const pipelineProducts = useMemo(
+    () =>
+      company
+        ? dataService
+            .getPipelineProducts()
+            .filter((p) => company.productIds.includes(p.id || ""))
+        : [],
+    [company]
+  );
+
 
   const stats = useMemo(() => {
     const categories = Array.from(new Set(products.map((p) => p.category).filter(Boolean)));
@@ -197,6 +207,32 @@ const CompanyProducts = () => {
               </section>
             ))}
           </div>
+        )}
+
+        {pipelineProducts.length > 0 && (
+          <section className="mt-12">
+            <Link to="/products/pipeline" className="block mb-4">
+              <div className="p-4 bg-violet-50 rounded-lg border border-violet-200 hover:border-violet-400 transition-colors">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-violet-600" />
+                    <span className="text-lg font-semibold text-violet-900">
+                      {company.name} products in pipeline ({pipelineProducts.length})
+                    </span>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-violet-600" />
+                </div>
+                <p className="text-sm text-violet-700 mt-1 ml-7">
+                  Announced products not yet certified (CE/FDA). Click to browse the full pipeline catalogue.
+                </p>
+              </div>
+            </Link>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {pipelineProducts.map((product) => (
+                <ProductCard key={product.id} {...product} regulatory={product.regulatory} />
+              ))}
+            </div>
+          </section>
         )}
 
         <ProductFeedbackBanner className="mt-10" />
