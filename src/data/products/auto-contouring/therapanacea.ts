@@ -215,7 +215,7 @@ export const Annotate: ProductDetails = {
     sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-06-16",
-    notes: "CT models only. MRI models belong to MR-Box (id: mr-box-synthetic). Heart sub-structures (Duane 2017, Lee 2017) are included within the Thorax/Breast model."
+    notes: "CT models only — MRI models belong to MR-Box (id: mr-box-synthetic). Seven distinct CT models on the vendor page (anchors): Head & Neck (https://www.therapanacea.eu/our-products/annotate/#1658756812-1-23), Female Thorax / Breast (https://www.therapanacea.eu/our-products/annotate/#1658760957917-5-8), Male Thorax (https://www.therapanacea.eu/our-products/annotate/#1658760957917-5-8), Heart Sub-Structures (https://www.therapanacea.eu/our-products/annotate/#1658759523386-4-10), SBRT Lung (https://www.therapanacea.eu/our-products/annotate/#1658759893513-5-6), Pelvis Male (https://www.therapanacea.eu/our-products/annotate/#1658756871852-2-2), Pelvis Female (https://www.therapanacea.eu/our-products/annotate/#1658758391559-2-3)."
   },
   guidelines: [
     {
