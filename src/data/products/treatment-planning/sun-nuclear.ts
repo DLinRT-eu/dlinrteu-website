@@ -98,7 +98,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021-03-12",
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Downgraded 2026-06-15 from E2 to E1 after citation verification: (1) Appenzoller 2012 'Predicting dose-volume histograms for organs-at-risk' (Med Phys) had a hallucinated DOI (10.1118/1.4752212 resolves to an unrelated CBCT paper) and is in any case a foundational DVH-prediction methodology paper predating Plan AI/Oncospace by >10 years — removed. (2) Chung et al. PMID:39486482 (KBP for 10 cancer sites) is an MD Anderson RPA-ecosystem paper and does not evaluate Plan AI — reclassified as indirect-comparative below. (3) Yu et al. PMC12827991 explicitly evaluates United Imaging uTPS, not Plan AI — removed and re-attributed to uRT Auto-Planning. Remaining evidence is FDA regulatory only.",
+    evidenceRigorNotes: "Single paper introducing the tool. Validated at one centre outside of the training dataset: Shade et al 2026 https://doi.org/10.1016/j.adro.2026.102036",
     clinicalImpactNotes: "Vendor-claimed workflow improvement through AI-powered DVH predictions. No product-specific independent clinical impact data located.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate-to-high implementation effort — limited independent evidence; local validation, interface testing and workflow confirmation required before adoption.",
@@ -113,9 +113,9 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "FDA 510(k) software V&V; no product-specific independent peer-reviewed clinical evaluation of Plan AI located as of 2026-06-15.",
     evidence: [
       {
-        type: "Indirect-comparative",
-        description: "Chung et al. Knowledge-based planning for fully automated radiation therapy treatment planning of 10 different cancer sites. PMID:39486482, 2024. NOTE: This MD Anderson RPA-ecosystem KBP paper does not name Plan AI / Oncospace; retained here only as adjacent KBP-methodology context.",
-        link: "https://pubmed.ncbi.nlm.nih.gov/39486482/"
+        type: "Introductory",
+        description: "Shade at al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy.",
+        link: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
       },
       {
         type: "Regulatory Clearance",
