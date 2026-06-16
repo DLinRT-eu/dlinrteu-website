@@ -13,11 +13,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     evaluationData: {
         primaryEndpoint: "Dose reduction potential and image-quality non-inferiority",
-        source: "FDA 510(k) summary K181862 (Software V&V)",
-        results: "FDA V&V supports non-inferior image quality at reduced dose; vendor claims up to 82% dose reduction potential. No fully verified independent multi-phantom dose-reduction publication retained after 2026-06-15 citation audit.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K181862.pdf",
-        description: "Software V&V from the FDA 510(k) submission. Previous citations to Higaki et al. Eur Radiol 2020 (DOI 10.1007/s00330-019-06523-0) and Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) were removed on 2026-06-15: the Higaki DOI does not resolve in the DOI System and the Yasui paper's abstract does not name AiCE or Canon equipment, so neither can be confirmed as direct AiCE CT evidence.",
-        studyDesign: "Software V&V (FDA 510(k))"
+        source: "Singh R. et al. AJR 2020;214(3):566-573 (prospective multi-institutional); Yasui et al. Sci Rep 2023 (radiotherapy treatment planning phantom); Tamura et al. QIMS 2022 (low-dose abdominal CT); FDA 510(k) summary K181862",
+        results: "Singh AJR 2020 (prospective multi-institutional, 59 patients on Aquilion ONE): AiCE-reconstructed submillisievert chest/abdominopelvic CT showed acceptable image quality and lesion detection comparable to standard-dose IR. Yasui Sci Rep 2023 (Aquilion Exceed LB large-bore radiotherapy CT): AiCE provided stable CT values and reduced image noise at low doses, supporting use for treatment planning. Tamura QIMS 2022: AiCE allowed dose reduction in contrast-enhanced abdominal CT while maintaining image quality vs hybrid IR.",
+        sourceUrl: "https://doi.org/10.2214/AJR.19.21809",
+        description: "Independent peer-reviewed evidence includes a prospective multi-institutional AJR study (Singh 2020, AiCE on Aquilion ONE), a radiotherapy-specific phantom validation on a large-bore CT (Yasui Sci Rep 2023, full text names AiCE/Aquilion/Canon Medical — re-verified 2026-06-16), and a contrast-enhanced abdominal CT comparison (Tamura QIMS 2022). FDA 510(k) K181862 software V&V supports the clearance.",
+        studyDesign: "Prospective multi-institutional reader study (Singh AJR 2020) + phantom/clinical retrospective validations + FDA software V&V"
     },
     name: "AiCE CT",
     company: "Canon Medical Systems",
@@ -76,18 +76,33 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "Downgraded from E2 to E1 on 2026-06-15 after citation verification: Higaki et al. Eur Radiol 2020 (DOI 10.1007/s00330-019-06523-0) does not resolve in the DOI System and was removed; Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) abstract does not name AiCE or Canon equipment and was removed pending independent confirmation. Remaining evidence is the FDA 510(k) clearance and the Canon product page.",
-    clinicalImpactNotes: "Vendor-claimed workflow improvement through dose reduction (up to 82%) with maintained image quality. Independent peer-reviewed corroboration not currently cited.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Restored to E2 on 2026-06-16 after evidence re-verification. Three independent peer-reviewed studies confirmed as evaluating AiCE on Canon equipment: (1) Singh R. et al. AJR 2020;214(3):566-573 — prospective multi-institutional submillisievert chest/abdominopelvic CT on Aquilion ONE; (2) Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) — full text explicitly names AiCE, Aquilion and Canon Medical Systems (re-verified via Nature full-text fetch 2026-06-16; prior 2026-06-15 removal was based on abstract-only screening and is reversed); (3) Tamura et al. QIMS 2022 (DOI 10.21037/qims-21-1216) — AiCE vs hybrid IR for low-dose contrast-enhanced abdominal CT. Plus FDA K181862 clearance.",
+    clinicalImpactNotes: "Independent prospective multi-institutional and phantom evidence supports dose reduction (Singh AJR 2020; Tamura QIMS 2022) with maintained image quality, and applicability to radiotherapy treatment planning on large-bore CT (Yasui Sci Rep 2023).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate-to-high implementation effort — limited independent evidence currently cited; local phantom and clinical validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
-    evidenceProspective: false,
-    evidenceExternalValidation: false,
+    evidenceProspective: true,
+    evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Singh R, Digumarthy SR, Muse VV, Kambadakone AR, Blake MA, Tabari A, et al. Image Quality and Lesion Detection on Deep Learning Reconstruction and Iterative Reconstruction of Submillisievert Chest and Abdominal CT. AJR Am J Roentgenol 2020;214(3):566-573. Prospective multi-institutional study, 59 adult patients on Aquilion ONE; AiCE-reconstructed LDCT acceptable for routine chest and abdominopelvic imaging.",
+        link: "https://doi.org/10.2214/AJR.19.21809"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yasui K, Saito Y, Ito A, et al. Validation of deep learning-based CT image reconstruction for treatment planning. Sci Rep 2023;13:15413. Phantom study on Canon large-bore CT (Aquilion Exceed LB) with AiCE; stable CT values and reduced noise at low doses, supporting radiotherapy planning use. Full text explicitly names AiCE, Aquilion and Canon Medical Systems (verified 2026-06-16).",
+        link: "https://doi.org/10.1038/s41598-023-42775-x"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Tamura A, Mukaida E, Ota Y, et al. Deep learning reconstruction allows low-dose imaging while maintaining image quality: comparison of deep learning reconstruction and hybrid iterative reconstruction in contrast-enhanced abdominal CT. Quant Imaging Med Surg 2022;12(5):2977-2984. AiCE on Canon Aquilion ONE GENESIS Edition; full text confirms AiCE.",
+        link: "https://doi.org/10.21037/qims-21-1216"
+      },
       {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance documentation for AiCE CT (K181862, Aquilion ONE / GENESIS Edition).",
@@ -99,10 +114,10 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         link: "https://global.medical.canon/products/computed-tomography/aice_dlr"
       }
     ],
-    clinicalEvidence: "FDA 510(k) software V&V supports the AiCE CT clearance; no peer-reviewed independent clinical evaluation is currently cited after 2026-06-15 citation audit.",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database and company website"
+    clinicalEvidence: "Independent peer-reviewed validation across one prospective multi-institutional AJR study (Singh 2020), a radiotherapy-specific phantom study on Canon large-bore CT (Yasui Sci Rep 2023), and a contrast-enhanced abdominal CT comparison (Tamura QIMS 2022), in addition to FDA 510(k) clearance K181862.",
+    lastUpdated: "2026-06-16",
+    lastRevised: "2026-06-16",
+    source: "FDA 510(k) database (K181862), Canon product page, and peer-reviewed literature (Singh AJR 2020, Yasui Sci Rep 2023, Tamura QIMS 2022 — all verified 2026-06-16 via Crossref and full-text fetch)"
   },
   {
     id: "canon-aice-mr",
