@@ -412,7 +412,32 @@ Product pages include structured `MedicalDevice` markup with:
 
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: March 8, 2026
+**Last Updated**: June 16, 2026
+
+## Catalogue Inclusion Gate (`hasRegulatoryApproval`)
+
+A product is listed in the public catalogue only when it meets the regulatory-approval gate. This is enforced both by data conventions and by the inclusion helper used by category pages and exports.
+
+| Field | Type | Purpose | Allowed Values / Format |
+| --- | --- | --- | --- |
+| `hasRegulatoryApproval` | Boolean (derived/explicit) | Whether the product qualifies for the live catalogue. | `true` when one of: CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA disclosed in `certification` / `regulatory.*`. Otherwise `false` (route to pipeline). |
+
+Products that do not yet meet this gate live under `src/data/products/pipeline/` and surface only on the Pipeline hub (`/products/pipeline`). Reclassify when approval is documented.
+
+## Per-Category Evidence (`categoryEvidence`)
+
+Multi-category products may carry distinct training/evaluation evidence and E/I/R levels per category (e.g., Auto-Contouring vs Image Synthesis branches of the same suite). Use the `categoryEvidence` map to scope evidence to a category instead of overloading the top-level fields.
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| `categoryEvidence[<category>].usesAI` | Boolean | Whether the category-scoped pathway uses AI/DL. |
+| `categoryEvidence[<category>].trainingData` | Same shape as top-level `trainingData` | Category-scoped training data block. |
+| `categoryEvidence[<category>].evaluationData` | Same shape as top-level `evaluationData` | Category-scoped evaluation block. |
+| `categoryEvidence[<category>].evidenceRigor` / `clinicalImpact` / `adoptionReadiness` | E/I/R enums | Category-scoped E/I/R assignments. |
+| `categoryEvidence[<category>].evidence` | Evidence list | Category-scoped supporting publications. |
+
+When `categoryEvidence` is present, the matrix dashboard and category pages prefer the category-scoped values; the top-level fields remain the default for single-category products.
+
 
 ## Adoption Readiness (R-axis)
 
