@@ -336,6 +336,12 @@ export default function NewsletterManagement() {
               </p>
             </div>
             <div className="flex gap-2">
+              <Button asChild>
+                <a href="/admin/newsletter-broadcast">
+                  <Mail className="h-4 w-4 mr-2" />
+                  Compose & send broadcast
+                </a>
+              </Button>
               <Button variant="outline" onClick={() => fetchSubscribers()}>
                 <RefreshCcw className="h-4 w-4 mr-2" />
                 Refresh
