@@ -55,7 +55,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
       integration: ["ProSoma frontend", "DICOM router"],
       deployment: ["Local"],
       triggerForAnalysis: "Manual from ProSoma UI or automatic via DICOM transfer",
-      processingTime: "Minutes per case (GPU-accelerated)",
+      processingTime: "GPU (NVIDIA RTX 5090): ~4 min (H&N), ~25 s (Prostate), ~18 s (Mamma). CPU (Intel i9): 12–13 min (H&N), 4–6 min (Prostate), 5–7 min (Mamma). Source: vendor DART product page.",
     },
     regulatory: {
       ce: {
@@ -66,10 +66,10 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
       },
       fda: {
         status: "not_applicable",
-        notes: "No FDA clearance publicly documented for the ProSoma Dart AI Segmentation Engine at the time of listing.",
+        notes: "No FDA clearance publicly documented for the ProSoma DART AI Segmentation Engine at the time of listing.",
       },
       intendedUseStatement:
-        "PROSOMA® DART is the new module in the ProSoma® family of toolkits which enables the fully automatic anatomical contouring using a state of the art Segmentation algorithm. (Source: MedCom ProSoma DART product page, https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/, accessed 2026-05-30. No verbatim regulatory IFU publicly available — CE legacy device under MDR Article 120(3c).)",
+        "PROSOMA® DART is the new module in the ProSoma® family of toolkits which enables the fully automatic anatomical contouring using a state of the art Segmentation algorithm. (Source: MedCom ProSoma DART product page, https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/, accessed 2026-06-16. No verbatim regulatory IFU publicly available — CE legacy device under MDR Article 120(3c).)",
     },
     market: {
       distributionChannels: ["Direct sales"],
@@ -78,7 +78,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "No peer-reviewed validation studies identified at time of listing. Pending vendor verification and literature confirmation.",
+      "No peer-reviewed validation of the ProSoma DART deep-learning engine identified (search 2026-06-16: vendor page, PubMed, Google Scholar, Frontiers, PMC). Karagiannis 2021 (DOI 10.29011/2574-710X.100113) evaluates the predecessor ProSoma atlas-based (ABAS) module and is not evidence for the DL DART engine. Doolan 2023 (DOI 10.3389/fonc.2023.1213068) used ProSoma only as the manual-reference contouring platform.",
     clinicalImpactNotes: "No published clinical impact data identified at time of listing.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
@@ -87,8 +87,8 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Vendor product page (MedCom ProSoma)."
+    lastUpdated: "2026-06-16",
+    lastRevised: "2026-06-16",
+    source: "Vendor product page (MedCom ProSoma DART, accessed 2026-06-16; OAR counts and runtimes from vendor runtimes graphic)."
   },
 ];
