@@ -26,7 +26,6 @@ const AutoLinkText: React.FC<AutoLinkTextProps> = ({ text, maxLength = 48, class
     <span className={className}>
       {parts.map((part, i) => {
         if (i % 2 === 1) {
-          // Split trailing punctuation off so it doesn't become part of the link.
           const trailingMatch = part.match(TRAILING_PUNCT_RE);
           const trailing = trailingMatch ? trailingMatch[0] : "";
           const url = trailing ? part.slice(0, part.length - trailing.length) : part;
@@ -42,7 +41,7 @@ const AutoLinkText: React.FC<AutoLinkTextProps> = ({ text, maxLength = 48, class
                 title={url}
                 className="text-primary hover:underline break-all"
               >
-                {shorten(url, maxLength)}
+                {shortenUrl(url, maxLength)}
               </a>
               {trailing}
             </React.Fragment>
