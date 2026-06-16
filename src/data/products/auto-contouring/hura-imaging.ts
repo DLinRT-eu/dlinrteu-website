@@ -123,7 +123,6 @@ export const DVTARGET: ProductDetails = {
     "Pelvis: Kidney L",
     "Pelvis: Kidney R",
     "Pelvis: Gallbladder",
-    "Pelvis: Rectum",
     "Abdomen: Liver",
     "Abdomen: Pancreas",
     "Abdomen: Small Bowel (majority)",
