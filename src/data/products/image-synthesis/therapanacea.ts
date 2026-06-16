@@ -34,6 +34,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       "Seamless DICOM export of synthetic CTs and RT-structures to major TPS and PACS systems"
     ],
     category: "Image Synthesis",
+    secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
