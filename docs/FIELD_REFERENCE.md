@@ -47,12 +47,23 @@ The UI surfaces non-public sources via a "Vendor-provided · retrieved YYYY-MM-D
 
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
-| `website` or `productUrl` | ✅ | Landing page for the product. | `https://` URL. | Ensure link resolves and is current. |
+| `website` or `productUrl` | ✅ | Landing page for the product. | `https://` URL. | Ensure link resolves and is current. Long URLs are shortened in the UI to host + truncated path with `…`; the full URL is shown on hover and used as the link target. |
 | `companyUrl` | ➖ | Corporate site home page. | `https://` URL. | Provide when product and company sites differ. |
 | `supportEmail` / `contactEmail` | ➖ | Primary contact for inquiries. | Valid email. | Use vendor-provided generic address when possible. |
 | `contactPhone` | ➖ | Direct phone contact. | `+<country> <number>`. | Optional; include only if listed publicly. |
 | `githubUrl` | ➖ | Source code repository. | `https://github.com/...` | Only for open-source components. |
 | `developedBy` | ➖ | Tracks when a product is developed/manufactured by a different company than the seller. | Object with `company` (required), `companyUrl` (optional URL), `relationship` (optional string like "Technology Partner", "OEM", "White-label"). | Use when vendor partners with another company for product development. Verify partnership publicly disclosed. |
+
+### Data Source (top-level `source`)
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `source` | ➖ | Provenance string shown in the General Information card under "Data Source". | Free text. Multiple sources are separated by `; ` (semicolon + space). Embedded `http(s)://` URLs are recognized automatically. | Each `; `-separated segment renders on its own line in read mode. Validated http(s) URLs are auto-shortened to a clickable link with the full URL on hover. The edit-mode textarea keeps the raw, unshortened string so reviewers always see and edit full URLs. |
+
+### URL Display Behavior (read-mode)
+
+All free-text fields rendered through `<AutoLinkText>` apply the same rule: only validated `http://` or `https://` URLs are converted to anchors; bare domains, file paths, or `www.` without a scheme are rendered verbatim. Long URLs collapse to `host/truncated…` with the full URL exposed via the native `title` tooltip. Affected fields include: product `description`, `trainingData.description` / `demographics`, `evaluationData.description` / `demographics`, `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes`, `intendedUseStatement`, `safetyCorrectiveActions[].description` / `.action`, top-level `source`, and `website`/`productUrl`. Edit-mode inputs are never shortened.
+
 
 ## Classification & Clinical Scope
 
@@ -401,7 +412,32 @@ Product pages include structured `MedicalDevice` markup with:
 
 Need more context or a new field? Open an issue referencing this document and include the field name, purpose, and data format you intend to add.
 
-**Last Updated**: March 8, 2026
+**Last Updated**: June 16, 2026
+
+## Catalogue Inclusion Gate (`hasRegulatoryApproval`)
+
+A product is listed in the public catalogue only when it meets the regulatory-approval gate. This is enforced both by data conventions and by the inclusion helper used by category pages and exports.
+
+| Field | Type | Purpose | Allowed Values / Format |
+| --- | --- | --- | --- |
+| `hasRegulatoryApproval` | Boolean (derived/explicit) | Whether the product qualifies for the live catalogue. | `true` when one of: CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA disclosed in `certification` / `regulatory.*`. Otherwise `false` (route to pipeline). |
+
+Products that do not yet meet this gate live under `src/data/products/pipeline/` and surface only on the Pipeline hub (`/products/pipeline`). Reclassify when approval is documented.
+
+## Per-Category Evidence (`categoryEvidence`)
+
+Multi-category products may carry distinct training/evaluation evidence and E/I/R levels per category (e.g., Auto-Contouring vs Image Synthesis branches of the same suite). Use the `categoryEvidence` map to scope evidence to a category instead of overloading the top-level fields.
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| `categoryEvidence[<category>].usesAI` | Boolean | Whether the category-scoped pathway uses AI/DL. |
+| `categoryEvidence[<category>].trainingData` | Same shape as top-level `trainingData` | Category-scoped training data block. |
+| `categoryEvidence[<category>].evaluationData` | Same shape as top-level `evaluationData` | Category-scoped evaluation block. |
+| `categoryEvidence[<category>].evidenceRigor` / `clinicalImpact` / `adoptionReadiness` | E/I/R enums | Category-scoped E/I/R assignments. |
+| `categoryEvidence[<category>].evidence` | Evidence list | Category-scoped supporting publications. |
+
+When `categoryEvidence` is present, the matrix dashboard and category pages prefer the category-scoped values; the top-level fields remain the default for single-category products.
+
 
 ## Adoption Readiness (R-axis)
 

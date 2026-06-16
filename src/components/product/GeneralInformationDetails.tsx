@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductDetails } from "@/types/productDetails";
 import { ExternalLink } from "lucide-react";
 import { EditableField, useProductEdit } from "@/components/product-editor";
+import AutoLinkText from "@/components/ui/AutoLinkText";
 
 interface GeneralInformationProps {
   product: ProductDetails;
@@ -210,7 +211,17 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
               type="text"
               placeholder="Data source"
             >
-              <p className="text-muted-foreground">{formatField(sourceInfo)}</p>
+              <div className="text-muted-foreground space-y-1">
+                {String(sourceInfo)
+                  .split(/;\s*/)
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+                  .map((item, i) => (
+                    <div key={i}>
+                      <AutoLinkText text={item} />
+                    </div>
+                  ))}
+              </div>
             </EditableField>
           </div>
           
