@@ -35,14 +35,6 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    limitations: [
-      "Pre-market / 'Coming Soon': no Indications for Use published; not for clinical use",
-      "Dose engine must be validated by the user before any clinical use; only Monaco-Mosaiq, Eclipse-ARIA and RayStation are validated TPS/R&V targets",
-      "Ballistic configuration limited to 1 or 2 beams",
-      "Plan generation depends on structure-mapping configuration; ambiguous matches cause the task to fail",
-      "User must validate the generated RTPlan by computing RTDose in their own TPS",
-      "Adult patients only (ART-Plan+ is not intended for patients <18 years)"
-    ],
     usesAI: true,
     regulatory: {
       intendedUseStatement:
@@ -86,12 +78,6 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    limitations: [
-      "Pre-market / 'Coming Soon': no Indications for Use published; not for clinical use",
-      "Brachytherapy OAR contours and applicator reconstructions must be reviewed and validated by an authorized user before any planning use",
-      "Image-quality dependent; symmetric structures may require manual L/R verification",
-      "Adult patients only (ART-Plan+ is not intended for patients <18 years)"
-    ],
     usesAI: true,
     regulatory: {
       intendedUseStatement:

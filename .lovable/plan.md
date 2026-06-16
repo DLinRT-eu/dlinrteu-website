@@ -1,118 +1,84 @@
 ## Goal
 
-Fix the broken `supportedStructures` rendering on Therapanacea Annotate, restore MR-Box / AdaptBox structure lists from the vendor pages, propagate the official ART-Plan+ limitations to every Therapanacea product, and homogenize the "module of ART-Plan+" framing.
+Bring the three Therapanacea auto-contouring entries (Annotate, AdaptBox, MR-Box) in line with the rest of the catalogue's `supportedStructures` syntax, keep the 7 Annotate CT models cleanly labelled, and re-audit the clinical evidence + displayed metadata.
 
-All edits are confined to five product files plus a small `partOf` normalization. No schema, UI, or backend changes.
+## Problem today
 
----
+- `Annotate`, `AdaptBox`, `MR-Box` use object form `{ name, type }` with `"Region: Structure Name"` labels. Every other auto-contouring vendor (MVision, Limbus, Manteia, GE, RaySearch, …) uses **plain strings** in the `"<Model>-<Modality>: TG263_Name"` form, kept in a dedicated `<vendor>-structures.ts` file. The Structure Comparison Tool and the Region/Modality chips therefore don't render Therapanacea consistently.
+- Annotate's 7 CT models are only delineated by inline `// === …` comments; they aren't structurally identifiable.
+- Some bilateral entries still use grouped `"(L/R)"` form, contrary to the v3 naming convention (one row per side).
 
-## 1. `src/data/products/auto-contouring/therapanacea.ts` (Annotate)
+## Plan
 
-The current `Annotate` object lumps all CT models into one flat `supportedStructures` list with many duplicate names (e.g. `Esophagus`, `Heart`, `Brachial Plexus (L/R)` repeated), which is the "incorrect syntax" the user is seeing — the comparison view dedupes by name and the structures effectively disappear or collide.
+### 1. New file `src/data/products/auto-contouring/therapanacea-structures.ts`
 
-Rewrite `supportedStructures` to follow the project's mandatory `Region: Structure Name` convention so each of the seven CT models is preserved as a distinct group. Source: `https://www.therapanacea.eu/our-products/annotate/`.
+Seven string arrays — one per Annotate CT model — plus combined exports:
 
-The seven CT models become these prefixes (matching the user's list):
+- `ANNOTATE_HEAD_NECK_CT` — prefix `"Head & Neck-CT: …"` (OARs + Cervical LN levels)
+- `ANNOTATE_FEMALE_THORAX_BREAST_CT` — prefix `"Female Thorax/Breast-CT: …"`
+- `ANNOTATE_MALE_THORAX_CT` — prefix `"Male Thorax-CT: …"`
+- `ANNOTATE_HEART_SUBSTRUCTURES_CT` — prefix `"Heart Sub-Structures-CT: …"` (Duane 2017 / Lee 2017)
+- `ANNOTATE_SBRT_LUNG_CT` — prefix `"Lung SBRT-CT: …"`
+- `ANNOTATE_PELVIS_MALE_CT` — prefix `"Pelvis Male-CT: …"`
+- `ANNOTATE_PELVIS_FEMALE_CT` — prefix `"Pelvis Female-CT: …"`
+- `ANNOTATE_ALL_STRUCTURES` — concat of the seven
+- `ADAPTBOX_PELVIS_MALE_CBCT` — prefix `"Pelvis Male-CBCT: …"` (AdaptBox)
+- `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` — prefix `"<Model>-MR: …"` (MR-Box)
 
-1. `Head & Neck:` (OARs from Grégoire 2014 + cervical LN levels IA–VIIB)
-2. `Female Thorax / Breast:` (Offersen 2015 OARs + IMC / interpectoral / L1–L3 / supraclavicular LNs)
-3. `Male Thorax:` (Offersen-equivalent OARs, no breast structures, no IMC)
-4. `Heart Sub-Structures:` (Duane 2017 / Lee 2017 cardiac substructures: LAD, LMCA, circumflex, atria, ventricle segments, coronary sinus, pericardium, pulmonary arteries, ascending/thoracic aorta, vena cava sup./inf.)
-5. `SBRT Lung:` (UK SABR 2019 OARs)
-6. `Pelvis Male:` (Gay 2012 OARs + `CTVn Prostate` target)
-7. `Pelvis Female:` (Gay 2012 OARs + gynecological LNs + `CTVt Gyneco` target)
+Within each array:
+- Split bilateral structures into separate `_L` / `_R` entries (drop `(L/R)`).
+- Use TG-263-style names where unambiguous (`Eye_L`, `Glnd_Lacrimal_R`, `OpticNrv_L`, `Bone_Mandible`, `SpinalCord`, `LN_Neck_II_L`, …); keep vendor-specific names where TG-263 has no equivalent (e.g. `LN_IMC_L`).
+- Tag lymph nodes with the `LN_` TG-263 prefix.
 
-Each existing entry is reassigned to one (or more, if truly shared) of these regions; nothing is deleted. Anchor URLs per model are recorded in `structuresProvenance.notes`.
+### 2. Refactor `src/data/products/auto-contouring/therapanacea.ts`
 
-Additional fixes on the same object:
+- Replace inline `supportedStructures` object array with `supportedStructures: ANNOTATE_ALL_STRUCTURES` import.
+- Keep `structuresProvenance`, `guidelines`, everything else.
+- Add a short `notes` line to `structuresProvenance` listing the 7 model prefixes so the UI badge documents them.
 
-- Add `additionalClearances` entry for FDA **K211539** (already mentioned in notes) into `trainingData` / `evaluationData` description so the FDA-disclosed training-population caveats (adult-only, English-language sites, scanner-population restrictions from the 510(k) summary) are visible. Add a sentence to `trainingData.description` summarising the FDA-disclosed dataset framing (multi-institutional retrospective CT cohorts, adult patients, contours by board-certified clinicians) and keep `disclosureLevel: "partial"`.
-- Append the ART-Plan+-wide limitations (see §5) to `limitations`.
-- Normalize `partOf` to the shared shape from §4.
+### 3. Refactor `src/data/products/image-synthesis/therapanacea-adaptbox.ts`
 
-`TumorBox` (same file) is left as-is except for the §4 `partOf` normalization and §5 limitations append; the user only flagged the seven CT Annotate models.
+- Convert `supportedStructures` to `ADAPTBOX_PELVIS_MALE_CBCT` strings.
+- Keep AdaptBox CBCT-specific limitations and guideline refs.
 
----
+### 4. Refactor `src/data/products/image-synthesis/therapanacea.ts` (MR-Box)
 
-## 2. `src/data/products/image-synthesis/therapanacea.ts` (MR-Box)
+- Convert the 3 MR model arrays to `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` strings concatenated.
+- Keep `structuresProvenance`, `guidelines`, and `partOf`.
 
-Add a `supportedStructures` array (currently absent) covering the three MR models from `https://www.therapanacea.eu/our-products/mr-box/`, using `Region: Structure Name` form:
+### 5. Clinical evidence audit
 
-- `Brain T1:` Anterior Cerebellum, Chiasma, Cochlea (L/R), Cornea (L/R), Encephalon, Eye Lens (L/R), Hippocampus (L/R), Hypophyse, Hypothalamus (L/R), Lacrimal Gland (L/R), Medulla Oblongata, Midbrain, Optical Nerve (L/R), Pons, Posterior Cerebellum, Retina (L/R), Spinal Cord, VSCC (L/R). Guideline: EPTN consensus 2018.
-- `Pelvis T2 Elekta (Male):` Anal Canal, Bladder, Femoral Head (L/R), Pelvis (L/R), Penile Bulb, Prostate, Rectum, Sacrum, Seminal Vesicle. Guideline: ESTRO ACROP / Salembier 2018.
-- `Pelvis Male & Abdo TrueFISP:` Anal Canal, Femoral Head (L/R), Penile Bulb, Prostate, Rectum, Seminal Vesicle, Sigmoid Colon, Abdominal Aorta, Duodenum, Kidney (L/R), Large Bowel, Liver, Pancreas, Stomach, Vena Cava Inferior. Guidelines: RTOG Jabbour 2014, RTOG Kong 2011.
+Run targeted PubMed / DOI searches (date-boxed, recorded in `lastRevised`) for:
+- "Therapanacea Annotate", "ART-Plan", "MR-Box synthetic CT", "AdaptBox CBCT"
+- Already-cited: DiTusa 2025 (JMP), Lê 2024 (Phys Imaging Radiat Oncol). Confirm DOIs resolve.
+- Search for additional 2024–2026 independent evaluations (e.g. synCT dose accuracy, breast/H&N geometric studies).
 
-Add `structuresProvenance` pointing at the MR-Box page with the three anchor URLs in `notes`.
+For each new qualifying study: add to `evidence[]`, update `evidenceRigorNotes`/`clinicalImpactNotes`, bump `lastRevised`. If none found, record "PubMed re-verified YYYY-MM-DD; no new qualifying studies" in the notes.
 
-Append a `guidelines[]` block referencing EPTN 2018, ESTRO ACROP Salembier 2018, RTOG Jabbour 2014, RTOG Kong 2011 (DOIs already present in other product files where available).
+### 6. Displayed-information audit
 
-Append §5 limitations.
+For Annotate / MR-Box / AdaptBox check and correct:
+- `regulatory.fda` — clearance numbers (K211539, K234068, K242822, K253091) and dates against the FDA 510(k) DB; align `intendedUseStatement` and `notes`.
+- `partOf` — all three point to `ART-Plan+` with consistent `version`/`relationship: "Module"`.
+- `companyUrl` / `productUrl` — confirm 200 OK, shorten in UI via existing `shortenUrl` helper (no data change required).
+- `lastUpdated` / `lastRevised` / `source` — synchronise to audit date.
+- `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceExternalValidation` flags — re-derive from the studies actually cited.
+- Confirm no leftover `(L/R)` grouped entries and no duplicate strings across model groups (duplicates *between* groups are allowed — same OAR can belong to several models — but never within one group).
 
-Normalize `partOf` per §4.
+### 7. Verification
 
----
+- `npm run lint && npm run build` (auto-run by harness).
+- Drive Playwright against `/product/therapanacea-annotate`, `/product/mr-box-synthetic`, `/product/therapanacea-adaptbox` and the Structure Comparison page to screenshot the new layout and confirm the 7 model prefixes appear.
 
-## 3. `src/data/products/image-synthesis/therapanacea-adaptbox.ts` (AdaptBox)
+## Out of scope
 
-Replace the current mixed `supportedStructures` (which contains free-text headings like `"FDA-cleared AdaptBox anatomy: Head & Neck"`) with a clean list for the single `Pelvis (Male)` AI-contouring model documented at `https://www.therapanacea.eu/our-products/adaptbox/`:
+- Type / schema changes to `ProductDetails.supportedStructures` (the union already accepts `string[]`).
+- UI component changes — only data.
+- Other Therapanacea modules (SmartFuse, SmartPlan, BrachyBox, TumorBox).
 
-- `Pelvis Male:` Anal Canal, Bladder, Femoral Head (L/R), Penile Bulb, Prostate, Rectum, Seminal Vesicle, Sigmoid
+## Files touched
 
-(FDA-cleared anatomies H&N and Breast/Thorax remain documented under `regulatory.fda.notes` and `anatomicalLocation` — they are sCT-generation anatomies, not OAR-contouring models, per the vendor page.)
-
-Add `structuresProvenance` with the AdaptBox anchor URL.
-
-Append §5 limitations.
-
-Normalize `partOf` per §4.
-
----
-
-## 4. Homogenize "ART-Plan+ module" framing
-
-In every Therapanacea product (Annotate, TumorBox, MR-Box, AdaptBox, SmartFuse in `registration/therapanacea.ts`, and the two pipeline modules SmartPlan / BrachyBox in `pipeline/therapanacea.ts`) set:
-
-```ts
-partOf: {
-  name: "ART-Plan+",
-  version: "3.2.0",                                  // current public version per technical-information-2 page
-  productUrl: "https://www.therapanacea.eu/our-products/",
-  relationship: "Module"
-}
-```
-
-Pipeline modules use the same shape but keep `version` omitted (pre-market).
-
----
-
-## 5. Shared ART-Plan+ limitations (source: technical-information-2 page)
-
-Add the following abridged limitations to every Therapanacea product's `limitations[]` array (deduplicated against any product-specific items already present):
-
-- Contours generated by ART-Plan+ must be verified and validated by an authorized user before clinical use.
-- Image-quality dependent: low-resolution, noisy, lossy-compressed, or artefact-laden volumes (e.g. implants) can degrade contour quality.
-- Adult patients only; auto-contouring may be inappropriate for paediatric volumes.
-- Automatic contouring may fail or produce inappropriate contours when Patient Position (DICOM 0018,5100) or Patient Sex (0010,0040) tags are missing or incorrect, when the patient is not supine, for unusually high slice counts, or for post-surgical anatomy (e.g. prostatectomy).
-- Pelvic/abdominal auto-contouring may produce inappropriate contours on CT images of patients under 60 years.
-- H&N lymph nodes, lacrimal glands and pharyngeal constrictor muscles: best performance on contrast-enhanced CT; degraded on non-contrast or non-Siemens-Sensation-Open scanners, and on patients <50 or >79 years.
-- MR auto-contouring is only validated for the supported sequences/anatomies: Brain T1, Abdo TrueFISP, Pelvis T2, Pelvis TrueFISP. (MR-Box / Annotate-MRI)
-- CBCT-based synthetic CT (AdaptBox): augmented slices outside the native CBCT FOV are not reliable for contours or dose; quality of synCT must be reviewed before use.
-- Dose engine (SmartPlan / dose computation) must be validated by the user before clinical use; only Monaco-Mosaiq, Eclipse-ARIA and RayStation are validated TPS/R&V targets; ballistic configuration limited to 1–2 beams.
-- Only the latest RTPlan linked to a given RTSS is consumed.
-
-Product-specific subset: SmartFuse and MR-Box get the imaging / MR / synCT items; AdaptBox additionally gets the augmented-FOV item; SmartPlan/TumorBox/BrachyBox keep the planning-engine and pipeline caveats; Annotate keeps the auto-contouring caveats.
-
----
-
-## 6. Out of scope
-
-- No changes to `src/types/productDetails*`, UI components, or the comparison page.
-- No changes to evidence scoring (`evidenceRigor` / `clinicalImpact` / `adoptionReadiness`) — only descriptive fields are touched.
-- No changes to other vendors' products.
-- No changes to docs in `docs/`; the field-reference doc already covers the conventions used here.
-
----
-
-## Verification
-
-After edits, the project will be auto-rebuilt. Spot-check via Playwright on `/product/therapanacea-annotate`, `/product/mr-box-synthetic`, `/product/therapanacea-adaptbox`, and the comparison page that each of the 7/3/1 model groups is rendered without name collisions.
+- `src/data/products/auto-contouring/therapanacea-structures.ts` (new)
+- `src/data/products/auto-contouring/therapanacea.ts`
+- `src/data/products/image-synthesis/therapanacea.ts`
+- `src/data/products/image-synthesis/therapanacea-adaptbox.ts`

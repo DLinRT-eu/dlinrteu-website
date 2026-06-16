@@ -1,4 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
+import { MRBOX_ALL_STRUCTURES } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -96,108 +97,20 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2021",
       distributionChannels: ["Direct sales"]
     },
-    partOf: {
-      name: "ART-Plan+",
-      version: "3.2.0",
-      productUrl: "https://www.therapanacea.eu/our-products/",
-      relationship: "Module"
-    },
-    supportedStructures: [
-      // === MR MODEL 1 — BRAIN T1 (Guideline: EPTN consensus 2018) ===
-      // Vendor anchor: https://www.therapanacea.eu/our-products/mr-box/#1658821178-1-67
-      { name: "Brain T1: Anterior Cerebellum", type: "OAR" },
-      { name: "Brain T1: Chiasma", type: "OAR" },
-      { name: "Brain T1: Cochlea (L/R)", type: "OAR" },
-      { name: "Brain T1: Cornea (L/R)", type: "OAR" },
-      { name: "Brain T1: Encephalon", type: "OAR" },
-      { name: "Brain T1: Eye Lens (L/R)", type: "OAR" },
-      { name: "Brain T1: Hippocampus (L/R)", type: "OAR" },
-      { name: "Brain T1: Hypophyse", type: "OAR" },
-      { name: "Brain T1: Hypothalamus (L/R)", type: "OAR" },
-      { name: "Brain T1: Lacrimal Gland (L/R)", type: "OAR" },
-      { name: "Brain T1: Medulla Oblongata", type: "OAR" },
-      { name: "Brain T1: Midbrain", type: "OAR" },
-      { name: "Brain T1: Optical Nerve (L/R)", type: "OAR" },
-      { name: "Brain T1: Pons", type: "OAR" },
-      { name: "Brain T1: Posterior Cerebellum", type: "OAR" },
-      { name: "Brain T1: Retina (L/R)", type: "OAR" },
-      { name: "Brain T1: Spinal Cord", type: "OAR" },
-      { name: "Brain T1: VSCC (L/R)", type: "OAR" },
-      // === MR MODEL 2 — PELVIS T2 ELEKTA (MALE) (Guideline: ESTRO ACROP / Salembier 2018) ===
-      // Vendor anchor: https://www.therapanacea.eu/our-products/mr-box/#1658821178-2-40
-      { name: "Pelvis T2 Elekta (Male): Anal Canal", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Bladder", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Femoral Head (L/R)", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Pelvis (L/R)", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Penile Bulb", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Prostate", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Rectum", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Sacrum", type: "OAR" },
-      { name: "Pelvis T2 Elekta (Male): Seminal Vesicle", type: "OAR" },
-      // === MR MODEL 3 — PELVIS MALE & ABDO TRUEFISP (Guidelines: RTOG Jabbour 2014, RTOG Kong 2011) ===
-      // Vendor anchor: https://www.therapanacea.eu/our-products/mr-box/#1658827979245-2-6
-      { name: "Pelvis Male & Abdo TrueFISP: Anal Canal", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Femoral Head (L/R)", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Penile Bulb", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Prostate", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Rectum", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Seminal Vesicle", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Sigmoid Colon", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Abdominal Aorta", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Duodenum", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Kidney (L/R)", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Large Bowel", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Liver", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Pancreas", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Stomach", type: "OAR" },
-      { name: "Pelvis Male & Abdo TrueFISP: Vena Cava Inferior", type: "OAR" }
-    ],
+    supportedStructures: MRBOX_ALL_STRUCTURES,
     structuresProvenance: {
-      source: "Therapanacea MR-Box product page (therapanacea.eu/our-products/mr-box/)",
+      source: "Therapanacea MR-Box product page; FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
       sourceUrl: "https://www.therapanacea.eu/our-products/mr-box/",
       sourceAccess: "public",
       sourceRetrievedOn: "2026-06-16",
-      notes: "Three MR auto-contouring models: Brain T1 (anchor /#1658821178-1-67, EPTN 2018), Pelvis T2 Elekta Male (anchor /#1658821178-2-40, ESTRO ACROP Salembier 2018), Pelvis Male & Abdo TrueFISP (anchor /#1658827979245-2-6, RTOG Jabbour 2014 / Kong 2011)."
+      notes: "Three MR models, each prefixed in the structure list: Brain (MR T1); Pelvis Male (MR T2 Elekta MR-Linac); Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay)."
     },
-    guidelines: [
-      {
-        name: "EPTN consensus-based guideline for OAR tolerance doses in the brain",
-        version: "2018",
-        reference: "https://doi.org/10.1016/j.radonc.2017.11.014",
-        url: "https://doi.org/10.1016/j.radonc.2017.11.014",
-        compliance: "full"
-      },
-      {
-        name: "ESTRO ACROP – Salembier et al. – Male pelvis CTV/OAR delineation",
-        version: "2018",
-        reference: "https://doi.org/10.1016/j.radonc.2018.08.014",
-        url: "https://doi.org/10.1016/j.radonc.2018.08.014",
-        compliance: "full"
-      },
-      {
-        name: "RTOG – Jabbour et al. – Anorectal contouring atlas",
-        version: "2014",
-        reference: "https://doi.org/10.1016/j.prro.2013.11.009",
-        url: "https://doi.org/10.1016/j.prro.2013.11.009",
-        compliance: "full"
-      },
-      {
-        name: "RTOG – Kong et al. – Thoracic / abdominal OAR atlas",
-        version: "2011",
-        reference: "https://doi.org/10.1016/j.ijrobp.2010.07.1977",
-        url: "https://doi.org/10.1016/j.ijrobp.2010.07.1977",
-        compliance: "full"
-      }
-    ],
-    limitations: [
-      "MR auto-contouring is only validated for the supported sequences/anatomies: Brain T1, Pelvis T2 (Elekta), Pelvis Male & Abdominal TrueFISP",
-      "Contours and synthetic-CT generated by ART-Plan+ must be verified and validated by an authorized user before clinical use",
-      "Bad MR image quality (artefacts, motion, uncommon high slice thickness, lossy compression) can lead to incorrect synthetic CT or contours — review the synCT before any clinical action",
-      "Adult patients only; not intended for paediatric use",
-      "Automatic contouring may produce inappropriate contours when DICOM tags Patient Position (0018,5100) or Patient Sex (0010,0040) are missing/incorrect, when the patient is not supine, or for post-surgical anatomy (e.g. prostatectomy)",
-      "Symmetric structures may show right/left inversions and require manual verification",
-      "Module availability varies by market — not all MR models are commercially available in every country"
-    ],
+    partOf: {
+      name: "ART-Plan+",
+      version: "3.2.0 (Public Technical Info) / 3.1.0 (FDA Cleared)",
+      productUrl: "https://www.therapanacea.eu/our-products/",
+      relationship: "Module"
+    },
     version: "3.2.0",
     releaseDate: "2021",
     lastUpdated: "2026-06-15",
