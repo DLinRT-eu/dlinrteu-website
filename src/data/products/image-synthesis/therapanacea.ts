@@ -114,9 +114,32 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-06-16",
+    lastRevised: "2026-06-16",
     source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
+    categoryEvidence: {
+      "Image Synthesis": {
+        usesAI: true,
+        evidenceRigor: "E1",
+        evidenceRigorNotes: "Vendor-assisted peer-reviewed multi-centric study (Frontiers in Oncology 2023, DOI 10.3389/fonc.2023.1245054) across 8 institutions for pelvic TrueFISP and brain pseudo-CT generation.",
+        clinicalImpact: "I1",
+      },
+      "Auto-Contouring": {
+        usesAI: true,
+        notes: "OAR delineation on the generated pseudo-CT is part of the MR-Box module per FDA K234068. No standalone peer-reviewed validation of the OAR contouring sub-module on synthetic MR-derived CT located on PubMed (2026-06-16).",
+        evaluationData: {
+          studyDesign: "Software V&V (FDA 510(k)); no standalone peer-reviewed contouring validation located",
+          primaryEndpoint: "Geometric accuracy of OAR contours on MR-derived pseudo-CT (not publicly disclosed)",
+          results: "Not publicly disclosed",
+          description: "OAR contouring on MR pseudo-CT is bundled in the K234068 submission; module-specific peer-reviewed evidence is not yet available.",
+          source: "FDA 510(k) K234068",
+          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K234068.pdf",
+        },
+        evidenceRigor: "E0",
+        evidenceRigorNotes: "No peer-reviewed publication located specifically for the MR-Box OAR contouring sub-module. PubMed searched 2026-06-16.",
+        clinicalImpact: "I0",
+      },
+    },
     evidence: [
       {
         type: "Multicenter Study",
@@ -128,6 +151,15 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
         description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MR-Box commissioning; not a direct MR-Box evaluation.",
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
+    ],
+    limitations: [
+      "Indicated for adult patients only; ART-Plan+ is not intended for patients less than 18 years of age (FDA K234068 IFU).",
+      "Auto-contouring on MR images is only valid for sequences/anatomies supported by the module: Brain T1, Abdomen TrueFISP, Pelvis T2, Pelvis TrueFISP (Therapanacea Technical Information, 2026-06-16). MR sequences outside this scope may generate inappropriate contours.",
+      "Pelvis T2 model is validated for Elekta MR-Linac sequences; TrueFISP models are validated for 0.35 T ViewRay MR-Linac. Other scanners / sequences require local commissioning before clinical use.",
+      "Pseudo-CT and contours are produced from MR data that are not validated; the user must check the synthetic CT quality and review all contours before any treatment-planning action (Therapanacea Technical Information, 2026-06-16).",
+      "Bad MR image quality (artefacts, motion, atypical slice thickness) can lead to incorrect synthetic CT and dose calculation.",
+      "Importing data with missing required DICOM tags, incorrect Patient Position / Sex attributes, or corrupted volumes will cause import to fail or generate inappropriate output.",
+      "Dose engine must be validated locally by the user before clinical use."
     ],
     evidenceRigor: "E1",
     evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark.",
