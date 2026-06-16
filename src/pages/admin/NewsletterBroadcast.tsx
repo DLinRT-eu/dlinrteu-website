@@ -248,17 +248,35 @@ export default function NewsletterBroadcast() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Live preview</CardTitle>
-              <CardDescription>Rendered with the DLinRT.eu newsletter template.</CardDescription>
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <CardTitle>Live preview</CardTitle>
+                  <CardDescription>Rendered with the DLinRT.eu newsletter template.</CardDescription>
+                </div>
+                <div className="flex gap-1 rounded-md border p-1">
+                  <Button
+                    size="sm"
+                    variant={previewTheme === "light" ? "secondary" : "ghost"}
+                    onClick={() => setPreviewTheme("light")}
+                  >Light</Button>
+                  <Button
+                    size="sm"
+                    variant={previewTheme === "dark" ? "secondary" : "ghost"}
+                    onClick={() => setPreviewTheme("dark")}
+                  >Dark</Button>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               <iframe
                 title="newsletter preview"
                 srcDoc={previewHtml}
-                className="w-full h-[720px] rounded-md border bg-white"
+                className={`w-full h-[720px] rounded-md border ${previewTheme === "dark" ? "bg-[#0f0f23]" : "bg-white"}`}
+                style={{ colorScheme: previewTheme }}
               />
             </CardContent>
           </Card>
+
         </div>
 
         {/* Send controls */}
