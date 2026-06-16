@@ -87,19 +87,14 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "2.5",
     releaseDate: "2023-10-05",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Stratified SRS assessment of VBrain for brain metastases",
+        description: "Wang et al. Stratified assessment of VBrain auto-segmentation for SRS of brain metastases. Radiat Oncol 2023.",
         link: "https://doi.org/10.1186/s13014-023-02246-z"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Deep learning brain metastases auto-segmentation evaluation",
-        link: "https://doi.org/10.1016/j.ijrobp.2021.03.060"
       }
     ],
     limitations: [

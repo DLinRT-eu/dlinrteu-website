@@ -80,17 +80,17 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2026",
       distributionChannels: ["Integrated with uRT-linac 506c"]
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
     evidenceRigorNotes:
-      "European debut at ESTRO 2026 (Stockholm). No independent peer-reviewed validation identified. Vendor has not published a model card, training-data description or standalone intended-use document for the integrated auto-planning / Monte Carlo dose calculation module; only system-level press materials are available.",
+      "European debut at ESTRO 2026 (Stockholm). Yu et al. Nat Commun 2025 (PMC12827991) — a multicenter clinical evaluation of DL-based ATP — explicitly states 'Executable plans were generated in uTPS through inverse optimization … The prediction models … have been implemented in the ATP module of the uTPS' (Shanghai United Imaging Healthcare co-authors). Re-attributed from Sun Nuclear Plan AI on 2026-06-15 after citation verification. Other than this publication, vendor has not released a model card or standalone intended-use document for the integrated auto-planning module.",
     clinicalImpactNotes:
-      "Vendor reports a ~15-minute online adaptive workflow on the uCT-ART system; no independent clinical impact evidence identified yet.",
+      "Yu et al. 2025 reports clinically acceptable DL-driven auto-plans in uTPS across multiple sites; vendor additionally reports a ~15-minute online adaptive workflow on uCT-ART.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
-      "Derived from E0 + CE (system-level): high implementation burden — limited independent evidence; structured pilot, dosimetric/end-to-end validation and human-factors testing recommended before clinical adoption.",
+      "Derived from E1 + CE (system-level): high implementation burden — one independent multicenter publication; structured pilot, dosimetric/end-to-end validation and human-factors testing recommended before clinical adoption.",
     clinicalEvidence:
-      "Announced as part of the uRT radiotherapy portfolio at ESTRO 2026; auto-planning and Monte Carlo dose calculation described as native AI components of the CE-marked uRT-linac 506c.",
+      "One independent multicenter DL-ATP study in uTPS (Yu et al. Nat Commun 2025) plus ESTRO 2026 vendor announcement of the integrated uRT auto-planning and Monte Carlo dose calculation on the CE-marked uRT-linac 506c.",
     limitations: [
       "Integrated component of the uRT ecosystem; not marketed as a standalone TPS",
       "No model card, training-data description or standalone intended-use document has been published by the vendor",
@@ -98,6 +98,12 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "All AI-generated plans require qualified medical-physics and clinician review prior to clinical use"
     ],
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description:
+          "Yu et al. Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types using uTPS / ATP module. Nat Commun 2025 (PMC12827991). Re-attributed from Plan AI on 2026-06-15 after verification.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12827991/"
+      },
       {
         type: "Vendor Press Release",
         description:
@@ -110,8 +116,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         link: "https://eu.united-imaging.com/en/product-service/products/rt"
       }
     ],
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Vendor press release (ESTRO 2026) and company website"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Yu et al. Nat Commun 2025 (PMC12827991); vendor press release (ESTRO 2026) and company website"
   }
 ];

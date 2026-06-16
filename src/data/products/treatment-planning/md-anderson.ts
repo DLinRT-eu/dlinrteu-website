@@ -85,8 +85,8 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-01-01",
     evidenceRigor: "E3",
     clinicalImpact: "I4",
-    evidenceRigorNotes: "Netherton et al. JCO GO 2023 demonstrates improved RT quality in LMICs. Court et al. JCO GO 2024 (DOI: 10.1200/GO.23.00376) multi-institutional review (16 institutions, 6 countries, >90% plan acceptability). Kavuma et al. ecancermedicalscience 2025 (KBP feasibility in LMICs). Lloyd et al. Med Dosim 2026 (externally validated KBP model for high-grade glioma with RTQA). Multiple independent multi-center studies. First patient treated clinically in South Africa in 2024. PubMed verified 2026-06-14.",
-    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Actively deployed in South Africa since 2024. Validated across head and neck, cervical, breast, and brain cancers with >90% plan acceptability across 16 institutions in 6 countries.",
+    evidenceRigorNotes: "Netherton et al. JCO GO 2023 (direct) and Court et al. JCO GO 2024 (direct, 16 institutions / 6 countries, >90% plan acceptability) confirmed via abstract verification. Kavuma 2025 and Sackett 2025 RapidPlan papers re-evaluated 2026-06-15: Sackett 2025 evaluates Varian RapidPlan v15.6 in Eclipse and does not mention RPA — removed. Kavuma 2025 evaluates RapidPlan KBP in LMICs without RPA attribution — retained as indirect-comparative only. Lloyd 2026 remains pending full-text verification. First patient treated clinically in South Africa in 2024.",
+    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Actively deployed in South Africa since 2024. Validated across head and neck, cervical, breast, and brain cancers with >90% plan acceptability across 16 institutions in 6 countries (Court 2024).",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected. Clinical deployment ongoing in LMICs.",
     evidenceVendorIndependent: true,
@@ -106,19 +106,14 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1200/GO.23.00376"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Kavuma et al. Feasibility and impact of knowledge-based automated RT planning in LMICs. ecancermedicalscience 2025;19:1988",
+        type: "Indirect-comparative",
+        description: "Kavuma et al. Feasibility and impact of knowledge-based automated RT planning in LMICs (uses Varian RapidPlan in Eclipse — not RPA). ecancermedicalscience 2025;19:1988. Retained as adjacent KBP-in-LMIC context only.",
         link: "https://doi.org/10.3332/ecancer.2025.1988"
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Lloyd et al. Externally validated KBP model for ML-assisted RT of high-grade glioma (RTQA context). Med Dosim 2026",
+        description: "Lloyd et al. Externally validated KBP model for ML-assisted RT of high-grade glioma (RTQA context). Med Dosim 2026. Full-text product-name attribution pending manual verification.",
         link: "https://doi.org/10.1016/j.meddos.2025.12.001"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Sackett et al. Sharing a flexible urethral sparing SBRT prostate RapidPlan model with clinical implementation. Radiat Oncol 2025;21(1):12",
-        link: "https://doi.org/10.1186/s13014-025-02761-1"
       },
       {
         type: "Regulatory Clearance",
@@ -131,7 +126,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://rpa.mdanderson.org/publications"
       }
     ],
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
   },
 ];

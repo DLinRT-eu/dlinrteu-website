@@ -91,8 +91,8 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.",
     clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [
@@ -102,8 +102,8 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
       },
       {
-        type: "Related Regulatory Clearance",
-        description: "FDA 510(k) clearance K242925 decision date April 1, 2025 for MR Contour DL - related MR-based product using Auto Segmentation (K230082) as predicate",
+        type: "indirect",
+        description: "FDA 510(k) clearance K242925 (April 1, 2025) for MR Contour DL — separate MR-based GE product that uses Auto Segmentation (K230082) as predicate. Indirect: does not directly evaluate the CT Auto Segmentation module documented here.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf",
       },
       {

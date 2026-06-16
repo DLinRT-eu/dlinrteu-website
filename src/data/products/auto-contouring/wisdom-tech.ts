@@ -1,41 +1,82 @@
-
 import { ProductDetails } from "@/types/productDetails";
 
-export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
-  {
-    id: "wisdom-deep-contour",
-    trainingData: {
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
-        source: "FDA 510(k) summary K232928",
-        description: "Deep learning based medical imaging software for automatic contour segmentation. Training details are not publicly disclosed in the regulatory summary.",
-        disclosureLevel: "minimal"
+export const DeepContour: ProductDetails = {
+  id: "wisdom-deep-contour",
+  name: "DeepContour",
+  market: {
+    onMarketSince: "2024",
+    distributionChannels: ["Direct sales (China)"]
+  },
+  source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
+  company: "Wisdom Tech",
+  logoUrl: "/logos/wisdom-tech.png",
+  version: "2.0",
+  website: "http://www.wisdom-tech.online/view-16.html",
+  category: "Auto-Contouring",
+  modality: ["CT"],
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
+  companyUrl: "http://www.wisdom-tech.online/",
+  productUrl: "http://www.wisdom-tech.online/view-16.html",
+  regulatory: {
+    ce: {
+      status: "not_applicable"
     },
-    evaluationData: {
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
-        primaryEndpoint: "Not specified",
-        source: "FDA 510(k) summary K232928",
-        description: "Software verification and validation conducted as part of the FDA 510(k) process for automated CT image processing and contour creation across multiple anatomical regions (Brain, Head & Neck, Thorax, Abdomen, and Pelvis).",
-        studyDesign: "Software V&V (FDA 510(k))"
+    fda: {
+      type: "510(k)",
+      class: "Class II",
+      notes: "Cleared as DeepContour (V1.0). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
+      status: "510k_cleared",
+      productCode: "QKB",
+      decisionDate: "2024-05-07",
+      clearanceNumber: "K232928",
+      regulationNumber: "21 CFR 892.2050"
     },
-    name: "DeepContour",
-    company: "Wisdom Tech",
-    companyUrl: "http://www.wisdom-tech.online/",
-    productUrl: "http://www.wisdom-tech.online/view-16.html",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
-    description: "AI solution for automatic contour segmentation in radiation therapy planning.",
-    category: "Auto-Contouring",
-    certification: "NMPA (China), FDA 510(k)",
-    logoUrl: "/logos/wisdom-tech.png",
-    website: "http://www.wisdom-tech.online/view-16.html",
-    anatomicalLocation: ["Brain","Head & Neck", "Thorax", "Abdomen", "Pelvis"],
-    modality: ["CT"],
-    subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
-    supportedStructures: [
-
-    // Head & Neck
+    intendedUseStatement: "DeepContour is a deep learning based medical imaging software that allows trained healthcare professionals to use DeepContour as a tool to automatically process CT images. In addition, DeepContour is suitable for the following conditions: 1) Creation of contours using deep-learning algorithms, support quantitative analysis, organ HU distribution statistics, transfer contour files to TPS, and create management archives for patients; 2) Analyze the anatomical structure at different anatomical positions; 3) Rigid and elastic registration based on CT; 4) 3D reconstruction, editing and other visual tools based on organ contours. (Source: FDA 510(k) K232928 Summary, accessed 2026-05-30)"
+  },
+  technology: {
+    deployment: ["On-premises", "Cloud"],
+    integration: ["TPS integration", "PACS integration"],
+    processingTime: "Minutes per case",
+    triggerForAnalysis: "Manual or automated"
+  },
+  description: "AI solution for automatic contour segmentation in radiation therapy planning.",
+  keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
+  lastRevised: "2026-06-13",
+  lastUpdated: "2026-06-13",
+  limitations: [
+    "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."
+  ],
+  releaseDate: "2024-04-17",
+  trainingData: {
+    source: "FDA 510(k) summary K232928",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
+    description: "Deep learning based medical imaging software for automatic contour segmentation. Training details are not publicly disclosed in the regulatory summary.",
+    disclosureLevel: "minimal"
+  },
+  certification: "NMPA (China), FDA 510(k)",
+  evidenceRigor: "E0",
+  subspeciality: "Radiation Oncology",
+  clinicalImpact: "I0",
+  evaluationData: {
+    source: "FDA 510(k) summary K232928",
+    results: "Not publicly disclosed",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
+    description: "Software verification and validation conducted as part of the FDA 510(k) process for automated CT image processing and contour creation across multiple anatomical regions (Brain, Head & Neck, Thorax, Abdomen, and Pelvis).",
+    studyDesign: "Software V&V (FDA 510(k))",
+    primaryEndpoint: "Not specified"
+  },
+  diseaseTargeted: ["Multiple Cancer Types"],
+  adoptionReadiness: "R2",
+  anatomicalLocation: [
+    "Brain",
+    "Head & Neck",
+    "Thorax",
+    "Abdomen",
+    "Pelvis"
+  ],
+  evidenceRigorNotes: "FDA cleared (K232928) but no peer-reviewed publications found. PubMed searched 2026-06-15.",
+  clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-06-15.",
+  supportedStructures: [
     "Head & Neck: Brain",
     "Head & Neck: BrainStem",
     "Head & Neck: SpinalCord",
@@ -81,8 +122,6 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     "Head & Neck: PharyngealConstrictors_L",
     "Head & Neck: Hippocampus_L",
     "Head & Neck: Hippocampus_R",
-  
-    // Thorax
     "Thorax: Lung_L",
     "Thorax: Lung_R",
     "Thorax: Lung_All",
@@ -94,8 +133,6 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     "Thorax: Aorta",
     "Thorax: BrachialPlexus_L",
     "Thorax: BrachialPlexus_R",
-  
-    // Abdomen
     "Abdomen: Liver",
     "Abdomen: Kidney_L",
     "Abdomen: Kidney_R",
@@ -105,8 +142,6 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     "Abdomen: Stomach",
     "Abdomen: Sigmoid",
     "Abdomen: Spleen",
-  
-    // Pelvis
     "Pelvis: Bowelbag",
     "Pelvis: Bladder",
     "Pelvis: Rectum",
@@ -119,57 +154,14 @@ export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [
     "Pelvis: Prostate",
     "Pelvis: Ovid_L",
     "Pelvis: Ovid_R",
-  
-    // Whole Body
     "Whole Body: Body"
-    ],
-    
-    technicalSpecifications: {
-      population: "Adult patients",
-      input: ["CT"],
-      inputFormat: ["DICOM"],
-      output: ["Structure sets"],
-      outputFormat: ["DICOM-RTSTRUCT"]
-    },
-    technology: {
-      integration: ["TPS integration", "PACS integration"],
-      deployment: ["On-premises"],
-      triggerForAnalysis: "Manual or automated",
-      processingTime: "Minutes per case"
-    },
-    regulatory: {
-      ce: {
-        status: "not_applicable"
-      },
-      fda: {
-        status: "510k_cleared",
-        class: "Class II",
-        type: "510(k)",
-        clearanceNumber: "K232928",
-        productCode: "QKB",
-        regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2024-05-07",
-        notes: "Cleared as DeepContour (V1.0). URL: https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf"
-      },
-      intendedUseStatement: "DeepContour is a deep learning based medical imaging software that allows trained healthcare professionals to use DeepContour as a tool to automatically process CT images. In addition, DeepContour is suitable for the following conditions: 1) Creation of contours using deep-learning algorithms, support quantitative analysis, organ HU distribution statistics, transfer contour files to TPS, and create management archives for patients; 2) Analyze the anatomical structure at different anatomical positions; 3) Rigid and elastic registration based on CT; 4) 3D reconstruction, editing and other visual tools based on organ contours. (Source: FDA 510(k) K232928 Summary, accessed 2026-05-30)"
-    },
-    market: {
-      onMarketSince: "2024",
-      distributionChannels: ["Direct sales (China)"]
-    },
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA cleared (K232928) but no peer-reviewed publications found. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-02-26.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    version: "2.0",
-    releaseDate: "2024-04-17",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
-    limitations: [
-      "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."
-    ]
+  ],
+  adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+  technicalSpecifications: {
+    input: ["CT"],
+    output: ["Structure sets"],
+    population: "Adult patients",
+    inputFormat: ["DICOM"],
+    outputFormat: ["DICOM-RTSTRUCT"]
   }
-];
+};

@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
 import EvidenceCitation from "./EvidenceCitation";
+import AutoLinkText from "@/components/ui/AutoLinkText";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 import {
   EVIDENCE_RIGOR_LEVELS,
@@ -134,7 +135,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about evidence rigor"
               >
                 {evidenceRigorNotes && (
-                  <p className="text-sm text-muted-foreground">{evidenceRigorNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={evidenceRigorNotes} /></p>
                 )}
               </EditableField>
             </div>
@@ -176,7 +177,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about clinical impact"
               >
                 {clinicalImpactNotes && (
-                  <p className="text-sm text-muted-foreground">{clinicalImpactNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={clinicalImpactNotes} /></p>
                 )}
               </EditableField>
             </div>
@@ -218,7 +219,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 placeholder="Notes about adoption readiness (residual effort to reach intended use)"
               >
                 {adoptionReadinessNotes && (
-                  <p className="text-sm text-muted-foreground">{adoptionReadinessNotes}</p>
+                  <p className="text-sm text-muted-foreground"><AutoLinkText text={adoptionReadinessNotes} /></p>
                 )}
               </EditableField>
             </div>
@@ -239,7 +240,9 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 {limitations!.map((item, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <XCircle className="h-4 w-4 mt-1 text-amber-500 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
+                    <span className="text-muted-foreground">
+                      <AutoLinkText text={item} />
+                    </span>
                   </li>
                 ))}
               </ul>

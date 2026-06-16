@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Loader2, ArrowLeft, Clock, Users, Package, History } from "lucide-react";
+import { Loader2, ArrowLeft, Clock, Users, Package, History, Mail } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMen
 import { Checkbox } from "@/components/ui/checkbox";
 import SortableHeader from "@/components/revision/table/SortableHeader";
 import { RoundExportButton } from "@/components/admin/review-rounds/RoundExportButton";
+import { SendRoundReminderDialog } from "@/components/admin/review-rounds/SendRoundReminderDialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
@@ -87,6 +88,7 @@ export default function ReviewRoundDetails() {
   const [reviewers, setReviewers] = useState<Reviewer[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
+  const [showReminderDialog, setShowReminderDialog] = useState(false);
   
   // Sorting state for assignments table
   const [assignmentSort, setAssignmentSort] = useState<{
@@ -330,9 +332,22 @@ export default function ReviewRoundDetails() {
         <Badge variant={round.status === 'active' ? 'default' : 'secondary'}>
           {round.status}
         </Badge>
+        {round.status === 'active' && assignments.some(a => a.status !== 'completed') && (
+          <Button variant="outline" onClick={() => setShowReminderDialog(true)}>
+            <Mail className="h-4 w-4 mr-2" />
+            Send Reminders…
+          </Button>
+        )}
         <RoundExportButton round={round} assignments={assignments} history={history} />
         <RoundActionsMenu round={round} onUpdate={fetchRoundDetails} />
       </div>
+
+      <SendRoundReminderDialog
+        open={showReminderDialog}
+        onOpenChange={setShowReminderDialog}
+        roundName={round.name}
+        assignments={assignments}
+      />
 
       {/* Progress Bar */}
       {assignments.length > 0 && (

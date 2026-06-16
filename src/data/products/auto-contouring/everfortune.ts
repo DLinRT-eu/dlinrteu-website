@@ -78,7 +78,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2022-04-28",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     supersededBy: "everfortune-seg-pro-v3",
     supportedStructures: [
       // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
@@ -112,7 +112,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -124,15 +124,9 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidence: [
       {
-        type: "FDA 510(k) Database Entry",
+        type: "Regulatory Clearance",
         description:
-          "FDA 510(k) device entry for EFAI RTSuite CT HN-Segmentation System (K220264)",
-        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K220264"
-      },
-      {
-        type: "FDA 510(k) PDF (Decision Letter + Summary)",
-        description:
-          "FDA 510(k) clearance documentation and summary for K220264",
+          "FDA 510(k) clearance K220264 for EFAI RTSuite CT HN-Segmentation System (database entry and summary PDF).",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220264.pdf"
       },
       {
@@ -238,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -381,7 +375,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-06-15",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -404,12 +398,12 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy",
+        description: "Liu et al. AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy (PubMed 36773828). Direct evaluation including EFAI contours.",
         link: "https://pubmed.ncbi.nlm.nih.gov/36773828/"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Association of radiation dose to cardiac substructures with major ischaemic events following breast cancer radiotherapy",
+        type: "indirect",
+        description: "Cardiac substructures dosimetric outcomes following breast RT (PubMed 37585426). Indirect: clinical outcomes study that may have used EFAI contours; does not validate Seg Pro segmentation accuracy.",
         link: "https://pubmed.ncbi.nlm.nih.gov/37585426/"
       },
       {

@@ -231,9 +231,9 @@ export const SmartSpeed: ProductDetails = {
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213583.pdf"
       },
       {
-        type: "Systematic Review",
+        type: "Indirect-comparative Systematic Review",
         description:
-          "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol. 2025;35:4736-4746.",
+          "Fransen SJ, Roest C, Simonis FFJ, Yakar D, Kwee TC. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol. 2025;35:4736-4746. NOTE: surveys all commercial MRI AI acceleration products from RSNA 2023 / ECR 2024 exhibitors; SmartSpeed is one of several products covered and is not the primary subject of the study (relabelled indirect-comparative 2026-06-15).",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
       },
       {
@@ -260,8 +260,8 @@ export const SmartSpeed: ProductDetails = {
     clinicalEvidence:
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
     supersededBy: "philips-smartspeed-precise",
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source:
       "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature."
   };

@@ -40,49 +40,53 @@ For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATIO
 Products in DLinRT.eu support:
 
 - **Multiple Categories**: Products can belong to multiple categories using the `secondaryCategories` field
-- **Multiple Versions**: Different versions of the same product can be tracked with separate `version` and `releaseDate` fields
-- **Comprehensive Data**: Each product includes regulatory, technical, market, and evidence information
+- **Per-Category Evidence**: Use `categoryEvidence` to scope training/evaluation data and E/I/R levels per category for multi-category products
+- **Multiple Versions**: Different versions of the same product can be tracked with separate `version` and `releaseDate` fields, plus `priorVersions` / `supersededBy` for cross-linking
+- **Comprehensive Data**: Each product carries regulatory, technical, market, transparency (training/evaluation data), evidence (E/I/R), and safety-corrective-action information
+
+### Catalogue Inclusion Gate
+
+A product enters the live catalogue only when `hasRegulatoryApproval` resolves true — i.e. CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA. Products awaiting approval belong under `src/data/products/pipeline/`. DLinRT also restricts scope to AI/Deep Learning for radiotherapy — classical image processing and general QA tools are excluded unless their intended use explicitly targets AI-generated outputs.
+
+### Source Disclosure
+
+Every factual field must trace to a disclosed source. Use the top-level `source` field for the General Information card (multiple sources separated by `; `; embedded `http(s)` URLs are auto-linked and shortened in the UI with full-URL hover tooltips). Per-block sources (`trainingData.source*`, `evaluationData.source*`, `structuresProvenance`) accept `sourceAccess` (`public` / `regulatory` / `vendor-provided` / `restricted`) and require `sourceRetrievedOn` (`YYYY-MM-DD`) for non-public sources.
 
 ### Steps to Add a New Product
 
-1. **Determine the Appropriate Category**
-   - Products are organized by primary category in `src/data/products/` directory
-   - Use `secondaryCategories` field for products that span multiple categories
-   - See the [Review Guide](./docs/review/GUIDE.md) for current categories
+1. **Determine the appropriate category**
+   - Products are organized by primary category in `src/data/products/<category>/`
+   - Categories: `auto-contouring`, `clinical-prediction`, `image-enhancement`, `image-synthesis`, `performance-monitor`, `platform`, `reconstruction`, `registration`, `tracking`, `treatment-planning`
+   - Use `secondaryCategories` for products that span multiple categories; use `categoryEvidence` to scope evidence per category
 
-2. **Create or Update the Company-Specific File**
+2. **Create or update the company-specific file**
    - Each company has its own file in the appropriate category directory
    - If the company already exists, add your product to its file
-   - If it's a new company, create a new file named `company-name.ts`
+   - If it's a new company, create `company-name.ts`
    - Example: `src/data/products/auto-contouring/varian.ts`
 
-3. **Follow the Data Format**
-   - See [example templates](./src/data/products/examples) for properly formatted data
-   - Include `secondaryCategories` array for multi-category products
-   - Use separate entries for different product versions with distinct `version` and `releaseDate` fields
-   - Ensure all dates follow YYYY-MM-DD format
-   - Include regulatory information with proper structure
+3. **Follow the data format**
+   - See [example templates](./src/data/products/examples) and the [Field Reference](./docs/FIELD_REFERENCE.md) for properly formatted data
+   - Include `secondaryCategories` for multi-category products
+   - Use separate entries for major versions; cross-link via `priorVersions` / `supersededBy`
+   - All dates follow `YYYY-MM-DD`
+   - Include regulatory information (`regulatory.ce` / `.fda` / `.tga` / `.tfda` / etc.) and a one-line `certification` summary
+   - Set `usesAI` explicitly to `false` for non-AI tools (e.g. classical QA monitors); the default is `true`
+   - Assign Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Adoption Readiness (R0–R5) with `*Notes` justification
 
-4. **Multiple Versions Support**
-   - Create separate product entries for major version releases
-   - Use consistent `id` patterns (e.g., `product-v1`, `product-v2`)
-   - Track evolution through `version` and `releaseDate` fields
-   - Maintain backward compatibility in data structure
+4. **Update the category index** — add the export in the category `index.ts`
 
-5. **Update the Category Index**
-   - After adding the product, update the category index file to include your new products
-
-6. **Add the Company Logo**
-   - Place the company logo in the `/public/logos/` directory
-   - Use a consistent naming scheme: `company-name.png`
+5. **Add the company logo** to `/public/logos/` using a consistent `company-name.png` (or `.svg`) name
 
 ### Change Tracking & Dates
 
-- Update `lastUpdated` every time you edit any field in the product entry (structure, evidence, regulatory, etc.).
-- Refresh `lastRevised` only after a reviewer-level QA pass—the value feeds the `/review` listing table.
-- When in doubt, consult the [Field Reference](./docs/FIELD_REFERENCE.md) for per-field rules and allowed values.
+- Update `lastUpdated` every time you edit any field in the product entry
+- Refresh `lastRevised` only after a reviewer-level QA pass — it feeds the `/review` listing
+- Set `companyRevisionDate` when a vendor representative formally re-verifies the entry
+- When in doubt, consult the [Field Reference](./docs/FIELD_REFERENCE.md) for per-field rules and allowed values
 
-For complete examples, refer to the example templates in `src/data/products/examples/`.
+For complete examples, refer to `src/data/products/examples/`.
+
 
 ---
 

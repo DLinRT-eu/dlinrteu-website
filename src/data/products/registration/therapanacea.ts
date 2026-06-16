@@ -4,18 +4,22 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     trainingData: {
-        source: "FDA 510(k) summary K253091",
+        source: "Therapanacea product page (manufacturer)",
         disclosureLevel: "minimal",
-        description: "The registration algorithm is part of the ART-Plan+ platform, cleared via FDA 510(k). Training details regarding specific datasets and demographics are not publicly disclosed in the available documentation.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+        description: "AI-powered rigid and deformable image registration. Training dataset details are not publicly disclosed. Note: FDA 510(k) K253091 (ART-Plan+ v3.1.0) was previously cited here but does not name SmartFuse — corrected on 2026-06-15.",
+        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceAccess: "public",
+        sourceRetrievedOn: "2026-06-15"
     },
     evaluationData: {
         results: "Not publicly disclosed",
         primaryEndpoint: "Sub-voxel registration accuracy",
-        description: "Software validation performed as part of the FDA 510(k) clearance process for the ART-Plan+ platform (v3.1.0 and v3.0.0). The registration module provides AI-powered rigid and deformable image fusion with sub-voxel registration accuracy.",
-        source: "FDA 510(k) summary K253091",
-        studyDesign: "Software V&V (FDA 510(k))",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+        description: "Manufacturer claims sub-voxel registration accuracy for AI-powered rigid and deformable image fusion. No SmartFuse-specific peer-reviewed or regulatory evaluation document confirmed (CE Mark documentation not publicly indexed). FDA K253091 was previously cited here but verified on 2026-06-15 to cover the ART-Plan+ platform (SmartPlan, Annotate/TumorBox, AdaptBox modules) without naming SmartFuse.",
+        source: "Therapanacea product page (manufacturer)",
+        studyDesign: "Manufacturer specification",
+        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceAccess: "public",
+        sourceRetrievedOn: "2026-06-15"
     },
     name: "SmartFuse",
     company: "Therapanacea",
@@ -24,7 +28,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/therapanacea.ts",
     description: "AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. Part of the ART-Plan+ platform.",
     category: "Registration",
-    certification: "CE, FDA & TGA",
+    certification: "CE & TGA",
     logoUrl: "/logos/therapanacea.png",
     website: "https://www.therapanacea.eu/our-products/smartfuse/",
     anatomicalLocation: ["Whole body"],
@@ -62,20 +66,14 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         notifiedBody: "GMED (Notified Body 0459)"
       },
       fda: {
-        status: "510k_cleared",
-        class: "Class II",
-        type: "510(k)",
-        clearanceNumber: "K253091",
-        productCode: "MUJ, QKB, LLZ",
-        regulationNumber: "21 CFR 892.5050",
-        decisionDate: "2025-12-23",
-        notes: "K253091 (ART-Plan+ v3.1.0, Dec 2025). Prior clearances: K242822 (v3.0.0, Feb 2025)"
+        status: "not_applicable",
+        notes: "No SmartFuse-specific FDA 510(k) clearance located as of 2026-06-15. FDA K253091 (ART-Plan+ v3.1.0) was previously associated with SmartFuse here, but its indications cover SmartPlan, Annotate/TumorBox, and AdaptBox modules only — SmartFuse is not named in K253091."
       },
       tga: {
         status: "TGA Cleared",
-        notes: "Cleared for Australian market as part of ART-Plan+ platform"
+        notes: "Cleared for Australian market (manufacturer-reported)"
       },
-      intendedUseStatement: "\"ART-Plan+'s indicated target population is cancer patients for whom radiotherapy treatment has been prescribed. It includes several modules: SmartPlan which allows automatic generation of radiotherapy treatment plan... and AdaptBox which allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making.\" (Source: FDA 510(k) K253091 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15.)"
     },
     market: {
       onMarketSince: "2020",
@@ -87,12 +85,12 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://www.therapanacea.eu/our-products/",
       relationship: "Module"
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K242822 validation as part of ART-Plan+ platform. Limited independent publications for registration module specifically.",
-    clinicalImpactNotes: "Workflow improvement through AI-powered rigid and deformable image fusion with real-time contour deformation.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceRigor: "E0",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse.",
+    clinicalImpactNotes: "Manufacturer-claimed workflow improvement through AI-powered rigid and deformable image fusion; no independently confirmed clinical impact study identified.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -100,8 +98,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Therapanacea official website (therapanacea.eu/technical-information-2/), FDA 510(k) database (K253091, K242822)"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Therapanacea official website (therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15)"
   }
 ];

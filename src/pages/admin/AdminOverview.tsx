@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail, ExternalLink, GitPullRequest } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, Users, FileText, Building2, Shield, Gauge, Lock, ClipboardCheck, UserCheck, Calendar, Mail, ExternalLink, GitPullRequest, Edit3 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
@@ -55,6 +55,17 @@ interface PendingRegistration {
   created_at: string;
 }
 
+interface PendingEditDraft {
+  id: string;
+  product_id: string;
+  created_by: string;
+  status: string;
+  updated_at: string;
+  created_at: string;
+  submitter_name?: string;
+  submitter_email?: string;
+}
+
 export default function AdminOverview() {
   const { user } = useAuth();
   const { isAdmin } = useRoles();
@@ -65,6 +76,7 @@ export default function AdminOverview() {
   const [pendingRevisions, setPendingRevisions] = useState<PendingRevision[]>([]);
   const [recentUsers, setRecentUsers] = useState<RecentUser[]>([]);
   const [pendingRegistrations, setPendingRegistrations] = useState<PendingRegistration[]>([]);
+  const [pendingEditDrafts, setPendingEditDrafts] = useState<PendingEditDraft[]>([]);
 
   useEffect(() => {
     if (!isAdmin) {
@@ -145,6 +157,32 @@ export default function AdminOverview() {
         .neq('notification_status', 'rejected')
         .order('created_at', { ascending: false });
       setPendingRegistrations(registrations || []);
+
+      // Fetch pending edit drafts
+      const { data: drafts } = await supabase
+        .from('product_edit_drafts')
+        .select('id, product_id, created_by, status, updated_at, created_at')
+        .eq('status', 'pending_review')
+        .order('updated_at', { ascending: false })
+        .limit(10);
+      if (drafts && drafts.length > 0) {
+        const draftUserIds = Array.from(new Set(drafts.map(d => d.created_by)));
+        const { data: draftProfiles } = await supabase
+          .from('profiles')
+          .select('id, first_name, last_name, email')
+          .in('id', draftUserIds);
+        const profileMap = new Map((draftProfiles || []).map(p => [p.id, p]));
+        setPendingEditDrafts(drafts.map(d => {
+          const p = profileMap.get(d.created_by) as any;
+          return {
+            ...d,
+            submitter_name: p ? `${p.first_name ?? ''} ${p.last_name ?? ''}`.trim() : undefined,
+            submitter_email: p?.email,
+          };
+        }));
+      } else {
+        setPendingEditDrafts([]);
+      }
     } catch (error) {
       console.error('Error fetching admin data:', error);
       toast.error('Failed to load admin data');
@@ -262,7 +300,7 @@ export default function AdminOverview() {
     }
   };
 
-  const totalPending = roleRequests.length + unassignedReviews.length + pendingRevisions.length;
+  const totalPending = roleRequests.length + unassignedReviews.length + pendingRevisions.length + pendingEditDrafts.length;
   const urgentCount = unassignedReviews.filter(r => r.priority === 'high').length;
 
   return (
@@ -336,6 +374,17 @@ export default function AdminOverview() {
               <CardContent>
                 <div className="text-2xl font-bold">{pendingRegistrations.length}</div>
                 <p className="text-xs text-muted-foreground">Awaiting approval</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Pending Edit Approvals</CardTitle>
+                <Edit3 className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{pendingEditDrafts.length}</div>
+                <p className="text-xs text-muted-foreground">Product edits awaiting review</p>
               </CardContent>
             </Card>
           </div>
@@ -787,6 +836,58 @@ export default function AdminOverview() {
               )}
             </CardContent>
           </Card>
+
+          {/* Pending Edit Approvals */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Edit3 className="h-5 w-5" />
+                    Pending Edit Approvals ({pendingEditDrafts.length})
+                  </CardTitle>
+                  <CardDescription>Product edits submitted for admin review</CardDescription>
+                </div>
+                <Button variant="outline" onClick={() => navigate('/admin/edit-approvals')}>
+                  View All
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {pendingEditDrafts.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">No pending edit approvals</p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Product</TableHead>
+                      <TableHead>Submitted by</TableHead>
+                      <TableHead>Updated</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {pendingEditDrafts.map((draft) => (
+                      <TableRow key={draft.id}>
+                        <TableCell className="font-mono text-xs">{draft.product_id}</TableCell>
+                        <TableCell>
+                          <div className="text-sm">{draft.submitter_name || '—'}</div>
+                          <div className="text-xs text-muted-foreground">{draft.submitter_email}</div>
+                        </TableCell>
+                        <TableCell>{new Date(draft.updated_at).toLocaleDateString()}</TableCell>
+                        <TableCell className="text-right">
+                          <Button size="sm" variant="outline" onClick={() => navigate('/admin/edit-approvals')}>
+                            Review →
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
+            </CardContent>
+          </Card>
+
 
           {/* Recent User Signups */}
           <Card>

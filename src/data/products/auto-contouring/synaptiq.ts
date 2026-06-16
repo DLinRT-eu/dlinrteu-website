@@ -6,7 +6,8 @@ export const MediqRT: ProductDetails = {
       disclosureLevel: "minimal",
       sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935",
       description: "Model supports auto-segmentation of OARs, CTVs, and GTVs on CT and MRI modalities across head and neck, thorax, abdomen, and pelvis.",
-      source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026)"
+      source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026)",
+      sourceAccess: "public",
   },
   evaluationData: {
       studyDesign: "Retrospective multi-center (testing in 12+ Romanian clinics)",
@@ -14,7 +15,14 @@ export const MediqRT: ProductDetails = {
       source: "Fedrau et al. Physics and Imaging in Radiation Oncology (2026) (DOI: 10.1016/j.phro.2026.100935)",
       results: "92.5% average time saving in contouring workflow",
       primaryEndpoint: "Not specified",
-      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935"
+      sourceUrl: "https://doi.org/10.1016/j.phro.2026.100935",
+      sourceAccess: "public",
+  },
+  structuresProvenance: {
+      source: "Vendor disclosure (Synaptiq) via direct communication to DLinRT.eu maintainers. The full supported-structures list is not published on the vendor public website at the retrieval date.",
+      sourceAccess: "vendor-provided",
+      sourceRetrievedOn: "2026-06-13",
+      notes: "Disclosed per the DLinRT.eu source-disclosure policy: non-public sources must carry a retrieval date.",
   },
   categoryEvidence: {
     "Auto-Contouring": {
@@ -57,9 +65,9 @@ export const MediqRT: ProductDetails = {
       description: "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy. Physics and Imaging in Radiation Oncology (2026)."
     },
     {
-      link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
+      link: "https://www.estro.org/Congresses/ESTRO-2025",
       type: "conference",
-      description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283."
+      description: "The impact of AI-driven templates in brachytherapy practice. ESTRO 2025 Abstract Book p. 283 (abstract DOI pending verification; placeholder DOI removed to avoid misattribution)."
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(25)03323-7",
@@ -73,8 +81,8 @@ export const MediqRT: ProductDetails = {
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(25)00719-4",
-      type: "conference",
-      description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246."
+      type: "indirect",
+      description: "Explainable AI for deep learning-based markerless lung tumor tracking. ESTRO 2025 Abstract Book p. 3246. Indirect: tracking module rather than Mediq RT contouring."
     },
     {
       link: "https://doi.org/10.1016/S0167-8140(24)03098-6",
@@ -122,8 +130,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Multi-vendor and multi-modality integration",
     "Cloud-based data storage and visualization"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-06-15",
+  lastUpdated: "2026-06-15",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
     "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",

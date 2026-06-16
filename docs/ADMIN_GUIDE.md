@@ -165,7 +165,17 @@ Admins can invite a representative directly from `/admin/companies` — the invi
    - Inserted as a verified record in `company_representatives` for the target company
    - Logged in and redirected to `/company/dashboard`
 
+**Force Register option**: The invitation dialog includes a **"Force register representative"** checkbox. When ticked, the edge function `invite-company-representative` provisions the account immediately instead of sending a click-to-accept invitation:
+
+- Creates the `auth.users` record with `email_confirm: true` and metadata `force_invited: true` (or fetches the existing user if the email is already registered)
+- Upserts an approved `profiles` row, assigns the `company` role in `user_roles`, and writes a verified `company_representatives` entry for the target company
+- Generates a Supabase password-recovery link redirecting to `${SITE_URL}/update-password`
+- Sends a branded **welcome / set-up password** email (via Resend) instead of the standard invitation template
+
+Use Force Register when onboarding a known representative who should skip the accept-invite click (e.g., during a planned company rollout). The invitee still has to set their password via the emailed recovery link before signing in.
+
 **Invitation lifecycle**: `pending` → `accepted` / `expired` / `revoked`. Links expire **14 days** after sending. To revoke or resend, re-invite the same email — pending invitations are replaced.
+
 
 #### Path B — Self-Service (Pending Verifications Queue)
 

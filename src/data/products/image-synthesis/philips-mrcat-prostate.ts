@@ -24,20 +24,20 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         },
         evaluationData: {
           studyDesign:
-            "Software V&V (FDA 510(k)) plus multiple independent multi-center clinical dosimetric validation studies",
+            "Software V&V (FDA 510(k)) plus multiple independent multi-center clinical dosimetric validation studies and vendor V&V disclosed in the Philips IFU appendix (2 hospitals)",
           primaryEndpoint:
-            "Synthetic-CT dosimetric accuracy vs planning CT (mean dose differences to PTV/OARs; gamma analysis)",
+            "Synthetic-CT dosimetric accuracy vs planning CT (mean dose differences to PTV/OARs; gamma analysis 3%/3 mm)",
           results:
-            "Independent studies report mean PTV dose differences typically < 0.5–1.0% vs CT-based plans for prostate VMAT/IMRT, with gamma pass rates > 99% at 2%/2mm. Tyagi et al. (Phys Med Biol 2017): mean target dose difference 0.0 ± 0.3% across 15 patients. Persson et al. (Int J Radiat Oncol Biol Phys 2017): mean dose differences < 0.5% for prostate VMAT. Christiansen et al. (Acta Oncol 2017): MRCAT dosimetrically equivalent to CT for prostate. Limitations: validated only for adult prostate anatomy with standard pelvic geometry; large hip prostheses, atypical bone marrow composition and very high BMI are out-of-distribution; bulk-density assignment can mis-classify gas/bone interfaces in the rectum.",
+            "Independent studies report mean PTV dose differences typically < 0.5–1.0% vs CT-based plans for prostate VMAT/IMRT, with gamma pass rates > 99% at 2%/2mm. Tyagi et al. (Phys Med Biol 2017, DOI 10.1088/1361-6560/aa5452): mean target dose difference 0.0 ± 0.3% across 15 patients using Philips mDIXON. Christiansen et al. (Acta Oncol 2017): MRCAT dosimetrically equivalent to CT for prostate. Maspero et al. (Phys Med Biol 2017, DOI 10.1088/1361-6560/aa4fe7): quantification of confounding factors in MRI-based dose calculations for prostate IMRT using a commercial MR-to-CT (MRCAT) pipeline. Maspero et al. (Phys Med Biol 2017, DOI 10.1088/1361-6560/aa9677): feasibility of MR-only proton dose calculations for prostate using the same commercial pseudo-CT (MRCAT) generation method. Vendor V&V (Philips Ingenia MR-RT IFU RTgo 5.12 appendix, Tables 15–17, pp. 136–138, RTgo 3.0): 2 hospitals × 62 patients; mean (D_MRCAT−D_CT)/D_CT to PTV = −0.23 ± 0.22% (min/max −0.87/+0.92%); 3%/3 mm gamma pass 100.0 ± 0.01% (median gamma 0.10 ± 0.03). Positioning study: 1 hospital × 9 patients (DRR multi-observer). Indirect-comparative context: Cusumano, Maspero et al. Radiother Oncol 2026 (DOI 10.1016/j.radonc.2026.111530) — MESCAL initiative benchmark dataset and acceptance levels for MRI-only RT commissioning; relevant to MRCAT prostate workflows but not a direct MRCAT evaluation. NOTE: Persson et al. 2017 (MR-OPERA, IJROBP 99:692-700) was removed on 2026-06-15 — MR-OPERA validates Spectronic MRiPlanner, not Philips MRCAT. Limitations: validated only for adult prostate anatomy with standard pelvic geometry; large hip prostheses, atypical bone marrow composition and very high BMI are out-of-distribution; bulk-density assignment can mis-classify gas/bone interfaces in the rectum.",
           description:
-            "Validation of the MRCAT synthetic-CT generator for prostate radiotherapy combining the original FDA V&V with several independent peer-reviewed clinical dosimetric studies.",
+            "Validation of the MRCAT synthetic-CT generator for prostate radiotherapy combining the original FDA V&V, several independent peer-reviewed clinical dosimetric studies (Tyagi 2017, Christiansen 2017, Kemppainen 2017, Maspero 2017a/b for photon and proton MR-only prostate), and the vendor V&V disclosed in the Philips IFU appendix (2 hospitals × 62 patients).",
           source:
-            "Tyagi N et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa7c54); Persson E et al., Int J Radiat Oncol Biol Phys 2017 (doi:10.1016/j.ijrobp.2017.06.006); Christiansen RL et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1349928); Kemppainen R et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1342863); FDA 510(k) K150965",
-          sourceUrl: "https://doi.org/10.1088/1361-6560/aa7c54",
+            "Tyagi N et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa5452); Christiansen RL et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1349928); Kemppainen R et al., Acta Oncol 2017 (doi:10.1080/0284186X.2017.1342863); Maspero M et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa4fe7); Maspero M et al., Phys Med Biol 2017 (doi:10.1088/1361-6560/aa9677); Cusumano, Maspero et al., Radiother Oncol 2026 MESCAL (doi:10.1016/j.radonc.2026.111530, indirect-comparative); FDA 510(k) K150965; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
+          sourceUrl: "https://doi.org/10.1088/1361-6560/aa5452",
         },
         evidenceRigor: "E2",
         evidenceRigorNotes:
-          "Multiple independent, peer-reviewed clinical dosimetric validation studies across several centres (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017). Vendor-independent and multi-centre, though all retrospective and limited to adult prostate cohorts. Not a DL component, so rubric applied by analogy.",
+          "Multiple independent, peer-reviewed clinical dosimetric validation studies directly evaluating Philips MRCAT for prostate: Tyagi 2017, Christiansen 2017, Kemppainen 2017, Maspero 2017a (photon, DOI aa4fe7) and Maspero 2017b (proton, DOI aa9677). Vendor-independent and multi-centre, though all retrospective and limited to adult prostate cohorts. MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed because it evaluates Spectronic MRiPlanner, not Philips MRCAT. Not a DL component, so rubric applied by analogy.",
         clinicalImpact: "I1",
         clinicalImpactNotes:
           "Enables MR-only prostate workflows in routine clinical use at several centres, eliminating the planning CT for selected patients. Dosimetric equivalence to CT-based planning demonstrated, but no randomised or large-scale outcome data.",
@@ -120,12 +120,21 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         decisionDate: "2015",
         notes: "Cleared as part of Philips Ingenia MR-RT system. MRCAT Prostate + Auto-Contouring is a clinical application running on the cleared MR-RT platform. First MR-only radiotherapy solution."
       },
-      intendedUseStatement: "As a plug-in clinical application to Ingenia MR-RT, MRCAT Prostate + Auto-Contouring provides attenuation maps and automated, MR-based contours of prostate and organs at risk in as little as 20 minutes – all in a repeatable 'one-click' workflow. (Source: Philips MRCAT Prostate + Auto-Contouring product page, https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application, accessed 2026-05-30. No verbatim FDA IFU publicly available — cleared as part of the Philips Ingenia MR-RT system platform.)"
+      intendedUseStatement: "MRCAT Prostate is indicated for radiotherapy treatment planning for prostate cancer patients; radiotherapy target volumes for patients with prostate cancer, including anatomies in the pelvic region and lymph nodes with margins, up to the L3 vertebra, are suitable for MR-only simulation with MRCAT Prostate. (Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12, 3000 113 93922/781, 2024-06, pp. 10–11. IFU URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed, retrieved 2026-06-15, publicly accessible.)"
     },
     market: {
       onMarketSince: "2015",
       distributionChannels: ["Direct sales"]
     },
+    limitations: [
+      "Patient selection (IFU): not suitable for patients with large metal objects (e.g. hip prosthesis) in the imaging volume, cancers other than prostate cancer, bone anomalies/diseases in the pelvic area, or body diameter in the pelvic area exceeding 50 cm (L-R) or 30 cm (A-P) within the planning FOV.",
+      "General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight > 250 kg.",
+      "Operational: MRCAT Prostate assigns discrete (bulk) HU values to tissue classes — images may not be suitable for soft-tissue dose evaluation in the very low-dose region.",
+      "Operational: signal-void volumes inside the body outline other than compact bone are interpreted as water-rich or fatty tissue, which can mis-categorize rectal gas, foreign material, or implants and locally affect dose calculation accuracy.",
+      "Operational: generate MRCAT Prostate images before any contrast agent is administered to the patient — otherwise the MRCAT post-processing step may fail.",
+      "Operational: MRCAT must not be used with restricted dB/dt or with a gradient slew rate restricted below the MR system limit; MRCAT images must not be post-processed.",
+      "Source: Philips Ingenia MR-RT IFU, RTgo 5.12 (2024-06), pp. 10–11 and 63–68. URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed. Retrieved 2026-06-15."
+    ],
     supportedStructures: [
       "Pelvis: Prostate (anatomical)",
       "Pelvis: Seminal Vesicles",
@@ -139,18 +148,18 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Aggregate across modules. Image Synthesis (MRCAT): E2 — multiple independent peer-reviewed multi-centre dosimetric validation studies (Tyagi 2017, Persson 2017, Christiansen 2017, Kemppainen 2017). Auto-Contouring: E0 — no module-specific peer-reviewed publications. See categoryEvidence for per-module detail.",
+    evidenceRigorNotes: "Aggregate across modules. Image Synthesis (MRCAT): E2 — independent peer-reviewed dosimetric validation studies directly on MRCAT prostate (Tyagi 2017 DOI aa5452, Christiansen 2017, Kemppainen 2017, Maspero 2017 DOI aa4fe7 photon, Maspero 2017 DOI aa9677 proton). MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) included as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed 2026-06-15 — it validates Spectronic MRiPlanner, not Philips MRCAT. Auto-Contouring: E0 — no module-specific peer-reviewed publications. See categoryEvidence for per-module detail.",
     clinicalImpactNotes: "Aggregate. MRCAT enables MR-only prostate workflows in clinical use at several centres (I1). Auto-Contouring component has no published clinical impact data (I0).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "MRCAT MR-only prostate workflow is in routine clinical use at multiple centres with peer-reviewed dosimetric validation; auto-contouring module less well characterised.",
+    adoptionReadinessNotes: "MRCAT MR-only prostate workflow is in routine clinical use at multiple centres with peer-reviewed dosimetric validation (including photon and proton MR-only prostate, Maspero 2017a/b); auto-contouring module less well characterised.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     releaseDate: "2016-03-31",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated with independent peer-reviewed MRCAT prostate dosimetric validation studies (2026-06-13)"
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated 2026-06-15 with independent peer-reviewed MRCAT prostate dosimetric validation studies (Tyagi 2017, Christiansen 2017, Kemppainen 2017, Maspero 2017a photon DOI aa4fe7, Maspero 2017b proton DOI aa9677) and indirect-comparative MESCAL 2026 benchmark (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); top-level limitations and intended-use refreshed from Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68, retrieved 2026-06-15"
   }
 ];

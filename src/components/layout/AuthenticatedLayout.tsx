@@ -13,6 +13,7 @@ const AUTH_PREFIXES = [
   "/dashboard-home",
   "/profile",
   "/my-products",
+  "/my-submissions",
   "/notifications",
   "/notification-settings",
   "/admin",

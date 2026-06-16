@@ -4,6 +4,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { ProductDetails } from "@/types/productDetails";
 import { getProductGitHubUrl } from "@/utils/githubUrlHelper";
 import { EditableField, useProductEdit } from "@/components/product-editor";
+import { shortenUrl } from "@/lib/url";
 
 interface ContactInformationProps {
   product: ProductDetails;
@@ -33,9 +34,9 @@ const ContactInformation = ({ product }: ContactInformationProps) => {
             placeholder="Website URL"
           >
             {websiteUrl ? (
-              <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
-                {websiteUrl}
-                <ExternalLink className="h-4 w-4" />
+              <a href={websiteUrl} target="_blank" rel="noopener noreferrer" title={websiteUrl} className="text-primary hover:underline flex items-center gap-1 break-all">
+                {shortenUrl(websiteUrl, 48)}
+                <ExternalLink className="h-4 w-4 shrink-0" />
               </a>
             ) : (
               <p className="text-muted-foreground">N/A</p>

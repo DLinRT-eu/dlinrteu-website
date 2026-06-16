@@ -80,14 +80,9 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "MR Contour DL 510(k) K242925 (GE Healthcare), cleared 2025-04-01.",
+        type: "Regulatory Clearance",
+        description: "MR Contour DL 510(k) K242925 (GE Healthcare), cleared 2025-04-01. FDA 510(k) summary PDF and database listing.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242925.pdf"
-      },
-      {
-        type: "FDA 510(k) Premarket Notification",
-        description: "FDA 510(k) database listing for K242925 (MR Contour DL).",
-        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K242925"
       },
       {
         type: "Press Release",
@@ -114,8 +109,8 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module. releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];

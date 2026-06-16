@@ -96,8 +96,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.4103/jcrt.jcrt_769_23"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Kim et al. Investigation on performance of multiple AI-based auto-contouring systems (7 systems compared including AI-Rad Companion, 42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        type: "Multi-vendor Comparative Study",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems including Siemens AI-Rad Companion (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140. Siemens AI-Rad Companion explicitly included — direct comparative (verified 2026-06-15). NOTE: Lin/Fan JACMP 2025 (doi:10.1002/acm2.70010) evaluates 'Siemens syngo.via' specifically, which is the same auto-contouring engine packaged under different commercial names; that paper is also direct for this product.",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       },
       {
@@ -119,7 +119,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Performance validated on 579 CT cases across North America, South America, Asia, Australia, and Europe. Ground truth annotations established following RTOG and clinical guidelines. Mean Dice coefficients: Head & Neck 76.1%, Thorax 76.9%, Abdomen 87.3%, Pelvis 85.7%.",
     version: "VA60A",
     releaseDate: "2025-03-27",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-06-15",
     supportedStructures: [
       // Head & Neck OARs (per FDA K242745)
       "Head & Neck: Brain",

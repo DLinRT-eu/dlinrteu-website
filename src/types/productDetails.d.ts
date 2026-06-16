@@ -210,6 +210,15 @@ export interface ProductDetails extends Product {
     status?: 'approved' | 'investigational';
   }>;
 
+  /**
+   * Provenance of a sourced field. Use to disclose whether the underlying
+   * source is publicly accessible, and, when not, the date it was retrieved.
+   * Policy: every factual claim must be traceable to a disclosed source
+   * (public preferred). Non-public sources require `sourceRetrievedOn`.
+   * See docs/FIELD_REFERENCE.md → "Source disclosure policy".
+   */
+  // (re-used inline by the blocks below)
+
   // Training dataset metadata (transparency reporting)
   trainingData?: {
     description?: string;
@@ -223,6 +232,8 @@ export interface ProductDetails extends Product {
     disclosureLevel?: 'full' | 'partial' | 'minimal' | 'none';
     source?: string;
     sourceUrl?: string;
+    sourceAccess?: 'public' | 'regulatory' | 'vendor-provided' | 'restricted';
+    sourceRetrievedOn?: string; // YYYY-MM-DD, required when sourceAccess !== 'public'
   };
 
   // Clinical evaluation dataset metadata
@@ -237,7 +248,24 @@ export interface ProductDetails extends Product {
     results?: string;
     source?: string;
     sourceUrl?: string;
+    sourceAccess?: 'public' | 'regulatory' | 'vendor-provided' | 'restricted';
+    sourceRetrievedOn?: string;
   };
+
+  /**
+   * Provenance for the `supportedStructures` list. Use when the structures
+   * list is not publicly published by the vendor (e.g. vendor-provided in
+   * private correspondence). Surfaced as a small chip above the structures
+   * card so consumers know the disclosure level.
+   */
+  structuresProvenance?: {
+    source: string;
+    sourceUrl?: string;
+    sourceAccess: 'public' | 'regulatory' | 'vendor-provided' | 'restricted';
+    sourceRetrievedOn?: string; // YYYY-MM-DD, required when sourceAccess !== 'public'
+    notes?: string;
+  };
+
 
   // Per-category evidence overrides for multi-category products.
   // Keys are category names from `category` / `secondaryCategories[]`

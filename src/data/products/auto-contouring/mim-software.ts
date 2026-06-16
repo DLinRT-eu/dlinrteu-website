@@ -86,31 +86,31 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Multi-center H&N validation comparing AccuContour and ProtegeAI. Front Oncol 2024",
+        type: "Multi-vendor Comparative Study",
+        description: "Lin et al. Front Oncol 2024 (DOI 10.3389/fonc.2024.1375096): single-institution H&N evaluation of two DLAS — Manteia AccuContour and MIM ProtégéAI. MIM explicitly included — direct comparative (verified 2026-06-15).",
         link: "https://doi.org/10.3389/fonc.2024.1375096"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Fan et al. Evaluation of 4 commercial DL autosegmentation software for abdominal OARs (111 patients). JACMP 2025;26(4):e70010",
+        type: "Multi-vendor Comparative Study",
+        description: "Lin/Fan et al. Evaluation and failure analysis of 4 commercial DL autosegmentation software (Limbus AI, MIM Contour ProtégéAI, Radformation, Siemens syngo.via) for abdominal OARs (111 patients). JACMP 2025;26(4):e70010. MIM explicitly included.",
         link: "https://doi.org/10.1002/acm2.70010"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Kim et al. Performance of 7 AI-based auto-contouring systems (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140",
+        type: "Multi-vendor Comparative Study",
+        description: "Kim et al. Performance of 7 AI-based auto-contouring systems including MIM (42 cases). Phys Eng Sci Med 2024;47(3):1123-1140. MIM explicitly included.",
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Bayley et al. Comparison of two auto-contouring systems for H&N OARs to institutional reference standard. Appl Sci 2026;16(11):5681",
+        type: "Multi-vendor Comparative Study",
+        description: "Bayley et al. Comparison of MIM Contour ProtégéAI v4.0.0 and Radformation/Limbus AI v1.7.0 for H&N OARs vs institutional reference. Appl Sci 2026;16(11):5681. MIM explicitly included.",
         link: "https://doi.org/10.3390/app16115681"
       }
     ],
     version: "1.4.0",
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio.",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
       "Head & Neck: BrachialPlex_L",

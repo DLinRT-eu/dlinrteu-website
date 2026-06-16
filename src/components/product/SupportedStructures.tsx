@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
 import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
 import { useProductEdit, StructuresEditor } from "@/components/product-editor";
+import SourceProvenanceChip from "./SourceProvenanceChip";
+import type { ProductDetails } from "@/types/productDetails";
 
 interface SupportedStructuresProps {
   structures?: string[] | Array<{
@@ -17,6 +19,8 @@ interface SupportedStructuresProps {
   /** Render an explicit "structure list unavailable" card when the vendor has
    *  not published a verified list. */
   unavailable?: boolean;
+  /** Disclose whether the structures list is public, regulatory, or vendor-provided. */
+  provenance?: ProductDetails["structuresProvenance"];
 }
 
 interface StructureGroup {
@@ -49,7 +53,22 @@ const UnavailableStructuresCard: React.FC = () => (
   </Card>
 );
 
-const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable }) => {
+const ProvenanceBanner: React.FC<{ p: NonNullable<ProductDetails["structuresProvenance"]> }> = ({ p }) => (
+  <div className="flex flex-wrap items-center gap-2 mb-3">
+    <SourceProvenanceChip
+      access={p.sourceAccess}
+      retrievedOn={p.sourceRetrievedOn}
+      source={p.source}
+    />
+    {p.sourceUrl && (
+      <a href={p.sourceUrl} target="_blank" rel="noopener noreferrer"
+        className="text-xs text-primary hover:underline">View source</a>
+    )}
+    {p.notes && <span className="text-xs text-muted-foreground">{p.notes}</span>}
+  </div>
+);
+
+const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance }) => {
   const { isEditMode, editedProduct, canEdit } = useProductEdit();
   
   // Use edited structures when in edit mode
@@ -62,6 +81,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
   if (showEditor) {
     return (
       <div className="space-y-4">
+        {provenance && <ProvenanceBanner p={provenance} />}
         <StructuresEditor fieldPath="supportedStructures" />
         {/* Also show existing display below for reference */}
         {displayStructures && displayStructures.length > 0 && (
@@ -78,7 +98,12 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
     return null;
   }
 
-  return <StructuresDisplay structures={displayStructures} />;
+  return (
+    <div>
+      {provenance && <ProvenanceBanner p={provenance} />}
+      <StructuresDisplay structures={displayStructures} />
+    </div>
+  );
 };
 
 // Extracted display component

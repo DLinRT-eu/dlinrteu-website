@@ -103,8 +103,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s00330-024-10883-5"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Estler et al. Deep learning-accelerated image reconstruction in back pain MRI: reduction of acquisition time and improvement of image quality (60 patients). Radiol Med 2024;129(3):478-487",
+        type: "Indirect — product name not in abstract",
+        description: "Estler et al. Deep learning-accelerated image reconstruction in back pain MRI: reduction of acquisition time and improvement of image quality (60 patients). Radiol Med 2024;129(3):478-487. NOTE: abstract describes 'DL-based T2/T1 TSE' but does not name Deep Resolve; relabelled indirect on 2026-06-15 pending full-text confirmation.",
         link: "https://doi.org/10.1007/s11547-024-01787-x"
       },
       {
@@ -120,8 +120,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Clinical studies demonstrate 60% increase in patients scanned in under 20 minutes, equivalent diagnostic quality with significantly reduced scan times across neurological, MSK, and body imaging applications.",
     releaseDate: "2020-09-01",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
     source: "FDA 510(k) database and company website"
   }
 ];

@@ -133,6 +133,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <SupportedStructures
               structures={product.supportedStructures}
               unavailable={product.structuresUnavailable}
+              provenance={product.structuresProvenance}
             />
           )}
           

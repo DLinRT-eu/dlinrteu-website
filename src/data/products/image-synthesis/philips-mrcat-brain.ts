@@ -12,14 +12,14 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193109.pdf"
     },
     evaluationData: {
-        results: "PTV dose differences <0.4%, positioning within ±1mm/±1°",
-        source: "Aljaafari et al. Tech Innov Patient Support Radiat Oncol 2025;35:100328",
-        datasetSize: "93 patients, 572 CBCT registrations",
-        studyDesign: "Single-center retrospective clinical validation",
-        primaryEndpoint: "PTV dose differences and CBCT registration positioning accuracy",
+        results: "Independent: PTV dose differences <0.4%, positioning within ±1mm/±1° (Aljaafari et al. 2025, single-center, 93 patients, 572 CBCT registrations). Vendor V&V (Philips Ingenia MR-RT IFU RTgo 5.12 appendix, Tables 15–17, pp. 136–138): 3 hospitals × 138 patients (RTgo 4.0); mean (D_MRCAT−D_CT)/D_CT to PTV = −0.02 ± 0.24% (min/max +0.97/+0.82%); primary 2%/2 mm gamma pass rate 99.9 ± 0.22%, median gamma 0.07 ± 0.03; stricter 1%/1 mm gamma pass 99.0 ± 2.2%, median 0.12 ± 0.06. Positioning study: 2 hospitals × 138 patients (DRR and CBCT correlation-function evaluation).",
+        source: "Aljaafari et al. Tech Innov Patient Support Radiat Oncol 2025;35:100328; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), Performance overview of MRCAT, Tables 15–17, pp. 136–138 (publicly accessible, retrieved 2026-06-15)",
+        datasetSize: "Independent: 93 patients, 572 CBCT registrations (Aljaafari 2025). Vendor V&V: 138 patients across 3 hospitals (dose) and 2 hospitals (positioning).",
+        studyDesign: "Single-center retrospective clinical validation (Aljaafari 2025) complemented by multi-center vendor V&V (Philips IFU appendix, 3 hospitals)",
+        primaryEndpoint: "PTV dose differences, gamma analysis (2%/2 mm and 1%/1 mm), and CBCT registration positioning accuracy",
         sourceUrl: "https://doi.org/10.1016/j.tipsro.2025.100328",
-        description: "Clinical validation of a commercial synthetic-CT solution for brain MRI-only radiotherapy. The study found PTV dose differences <0.4% and positioning accuracy within ±1mm/±1°.",
-        sites: 1
+        description: "Independent single-center clinical validation (Aljaafari et al. 2025, 93 patients, PTV dose differences <0.4%, positioning ±1mm/±1°) plus vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0): 3 hospitals × 138 patients with mean PTV dose difference −0.02 ± 0.24% and 99.9% voxels passing 2%/2 mm gamma.",
+        sites: 3
     },
     name: "MRCAT Brain",
     company: "Philips",
@@ -78,32 +78,50 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         decisionDate: "2020",
         notes: "AI-powered application for primary and metastatic brain tumors."
       },
-      intendedUseStatement: "MRCAT Brain is indicated for radiotherapy treatment planning for primary and metastatic brain tumor patients. (Source: FDA 510(k) K193109 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "MRCAT Brain is indicated for radiotherapy treatment planning for primary and metastatic brain tumor patients. (Source: Philips Ingenia MR-RT Instructions for Use, Release RTgo 5.12, 3000 113 93922/781, 2024-06, p.10; FDA 510(k) K193109 Summary. IFU URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed, retrieved 2026-06-15, publicly accessible.)"
     },
     market: {
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"]
     },
+    limitations: [
+      "Patient selection (IFU): not suitable for patients with large metal objects within the imaging volume, cancers other than brain tumors, or bone anomalies/diseases in the head area.",
+      "General Ingenia MR-RT exclusions: MRI contraindications, MR contrast-agent contraindications, claustrophobia, inability to tolerate position/scan time, treatment position unsuitable for MRI, patient weight > 250 kg.",
+      "Operational: continuous HU values are assigned; foreign material or objects used during MR simulation (e.g. tracheal tube, central venous catheter) may not be visualized and can compromise dose calculation accuracy.",
+      "Operational: MRCAT must not be used with restricted dB/dt or with a gradient slew rate restricted below the MR system limit; MRCAT images must not be post-processed.",
+      "Source: Philips Ingenia MR-RT IFU, RTgo 5.12 (2024-06), pp. 10–11 and 63–68. URL: https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed. Retrieved 2026-06-15."
+    ],
     version: "1.0",
     releaseDate: "2020-01-20",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "Company website",
+    lastUpdated: "2026-06-15",
+    lastRevised: "2026-06-15",
+    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [
       {
         type: "Clinical Validation",
         description: "Aljaafari et al. Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning. Tech Innov Patient Support Radiat Oncol 2025;35:100328. 93 patients, 572 CBCT registrations. PTV dose differences <0.4%, positioning within ±1mm/±1°.",
         link: "https://doi.org/10.1016/j.tipsro.2025.100328"
+      },
+      {
+        type: "Clinical Validation",
+        description: "Emin S, Rossi E, Myrvold Rooth E, Dorniok T, Hedman M, Gagliardi G, Villegas F. Clinical implementation of a commercial synthetic computed tomography solution for radiotherapy treatment of glioblastoma. Phys Imaging Radiat Oncol 2024;30:100589. Direct clinical implementation evaluation of MRCAT Brain for glioblastoma radiotherapy.",
+        link: "https://doi.org/10.1016/j.phro.2024.100589"
+      },
+      {
+        type: "Indirect-Comparative",
+        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MRCAT Brain commissioning; not a direct MRCAT evaluation.",
+        link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Largest MRCAT Brain validation study to date.",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark.",
     clinicalImpact: "I1",
-    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025).",
+    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
+    evidenceMultiCenter: true,
     evidenceExternalValidation: true
   }
 ];
