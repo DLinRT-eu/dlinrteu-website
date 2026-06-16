@@ -26,7 +26,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     githubUrl:
       "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/sun-nuclear.ts",
     description:
-      "AI-powered treatment planning assistant that provides predictive, patient-specific insights on achievable dosimetric goals before planning begins. Uses machine learning models based on 5,000+ clinically delivered plans from Johns Hopkins University to drive continuous improvement in plan quality.",
+      "AI-powered treatment planning assistant that provides predictive, patient-specific insights on achievable dosimetric goals before planning begins. Uses machine learning models based on 5000+ clinically delivered plans from Johns Hopkins University to drive continuous improvement in plan quality.",
     features: [
       "AI-powered DVH predictions for OAR sparing",
       "Peer review with structured checklists",
