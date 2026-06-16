@@ -39,7 +39,7 @@ To keep our own time sustainable, we streamlined:
 - Company-representative registration and product revision flow.
 - Admin tooling for tasks, certifications, and outreach.
 
-We currently have **28 of 42 companies with assigned representatives** and are actively following up on the remaining ones.
+We currently have **28 of 41 companies with assigned representatives** and are actively following up on the remaining ones.
 
 ## 👋 New Reviewer: Welcome Szabolcs David
 
