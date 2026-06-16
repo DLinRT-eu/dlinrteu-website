@@ -98,12 +98,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
         source: "FDA 510(k) database and company website"
     },
     evaluationData: {
-        studyDesign: "Software V&V (FDA 510(k)) and retrospective studies",
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213717.pdf",
-        description: "Reader studies and clinical evaluations (e.g., MR enterography and prostate MRI) demonstrating improved signal-to-noise ratio without blurring and enhanced spatial resolution compared to standard MR images.",
-        source: "FDA 510(k) summary K213717",
-        primaryEndpoint: "Not specified"
+        studyDesign: "Software V&V (FDA 510(k)) plus independent retrospective clinical evaluations",
+        results: "Zerunian et al. La Radiologia Medica 2022 (liver MRI, GE SIGNA): AIR Recon DL improved quantitative and qualitative image quality vs standard reconstruction. Hu et al. Psychoradiology 2025 (brain MRI): assessed impact of AIR Recon DL on quantitative brain structure measurements, supporting use in neuroimaging.",
+        sourceUrl: "https://doi.org/10.1007/s11547-022-01539-9",
+        description: "Independent peer-reviewed evidence for AIR Recon DL on GE MR systems includes Zerunian et al. (liver MRI, 2022) and Hu et al. (brain volumetrics, 2025), in addition to FDA software V&V across three 510(k) clearances (K193282, K213717, K252379).",
+        source: "Zerunian et al. La Radiologia Medica 2022 (DOI 10.1007/s11547-022-01539-9); Hu et al. Psychoradiology 2025 (DOI 10.1093/psyrad/kkaf036); FDA 510(k) summaries K193282, K213717, K252379",
+        primaryEndpoint: "Image quality and quantitative measurement stability"
     },
     name: "AIR Recon DL Enhancement Mode",
     company: "GE Healthcare",
