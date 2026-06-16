@@ -105,9 +105,6 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       sourceRetrievedOn: "2026-06-16",
       notes: "Three MR models, each prefixed in the structure list: Brain (MR T1); Pelvis Male (MR T2 Elekta MR-Linac); Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay)."
     },
-      onMarketSince: "2021",
-      distributionChannels: ["Direct sales"]
-    },
     partOf: {
       name: "ART-Plan+",
       version: "3.2.0 (Public Technical Info) / 3.1.0 (FDA Cleared)",
