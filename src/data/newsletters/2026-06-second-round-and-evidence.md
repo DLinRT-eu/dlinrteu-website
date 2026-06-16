@@ -84,12 +84,38 @@ The **first fully dedicated satellite event on radiotherapy at MICCAI** takes pl
 
 ---
 
-## BLOCK 8 — 📎 Newsletter Pack
+## BLOCK 8 — 🟢 UMC Utrecht Supports DLinRT.eu
 
-A short companion deck with cumulative product timeline, primary-category pie chart, and company logo wall:
+Through the **Radiotherapy Medical Physics Traineeship**, **UMC Utrecht** has agreed to cover the running costs of DLinRT.eu — safeguarding the **independence and continuity** of the initiative.
+
+A huge thank you to the **Radiotherapy Department** for this support.
+
+---
+
+## BLOCK 9 — 🔵 Running Costs, in the Open
+
+We feel obliged to make our running costs publicly available. They are now published — and will be kept up to date — here:
+
+👉 https://dlinrt.eu/transparency
+
+---
+
+## BLOCK 10 — 🟣 Errare humanum est
+
+Even if we strive for accuracy and correctness, alongside all the AI tooling we still value human revision — and, as the Latins used to say, *errare humanum est*.
+
+For any imprecision or error, please do not hesitate to contact us and we will take action:
+
+👉 https://dlinrt.eu/support
+
+---
+
+## BLOCK 11 — 📎 Newsletter Pack
+
+A short companion deck with cumulative product timeline, primary-category pie chart, company logo wall, and a support & transparency closing slide:
 
 - PDF: https://dlinrt.eu/newsletters/2026-06/dlinrt-2026-06-update.pdf
-- Slide images: https://dlinrt.eu/newsletters/2026-06/slide-01.jpg … slide-05.jpg
+- Slide images: https://dlinrt.eu/newsletters/2026-06/slide-01.jpg … slide-06.jpg
 
 ---
 

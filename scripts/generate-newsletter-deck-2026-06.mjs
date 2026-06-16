@@ -125,12 +125,18 @@ const W = 13.333, H = 7.5;
   const logoW = cellW - pad * 2;
   const logoH = cellH - pad * 2 - 0.3; // reserve 0.3 for name
 
+  const SVG_CACHE = path.join(OUT_DIR, "_logo-cache");
   COMPANIES.forEach((c, i) => {
     const r = Math.floor(i / cols), col = i % cols;
     const x = gridX + col * cellW, y = gridY + r * cellH;
     let placed = false;
-    const logoPath = c.logoUrl ? path.join("public", c.logoUrl.replace(/^\//, "")) : null;
-    if (logoPath && fs.existsSync(logoPath) && !logoPath.endsWith(".svg")) {
+    let logoPath = c.logoUrl ? path.join("public", c.logoUrl.replace(/^\//, "")) : null;
+    if (logoPath && logoPath.endsWith(".svg")) {
+      const cached = path.join(SVG_CACHE, path.basename(logoPath).replace(/\.svg$/, ".png"));
+      if (fs.existsSync(cached)) logoPath = cached;
+      else logoPath = null;
+    }
+    if (logoPath && fs.existsSync(logoPath)) {
       try {
         s.addImage({ path: logoPath, x: x + pad, y: y + pad, w: logoW, h: logoH, sizing: { type: "contain", w: logoW, h: logoH } });
         placed = true;
@@ -146,7 +152,39 @@ const W = 13.333, H = 7.5;
   });
 }
 
-// ---------- Slide 5: What's next ----------
+// ---------- Slide 5: Support & Transparency ----------
+{
+  const s = pres.addSlide();
+  s.background = { color: BG };
+  s.addShape("rect", { x: 0, y: 0, w: 0.25, h: H, fill: { color: ACCENT }, line: { color: ACCENT } });
+  s.addText("Support & Transparency", { x: 0.7, y: 0.4, w: W - 1.4, h: 0.8, fontFace: FONT_H, fontSize: 32, bold: true, color: TEXT });
+
+  s.addText("UMC Utrecht backs the platform", {
+    x: 0.7, y: 1.4, w: W - 1.4, h: 0.5, fontFace: FONT_H, fontSize: 22, bold: true, color: ACCENT,
+  });
+  s.addText(
+    "Through the Radiotherapy Medical Physics Traineeship, UMC Utrecht has agreed to cover the running costs of DLinRT.eu — safeguarding the independence and continuity of the initiative. A huge thank you to the Radiotherapy Department for this support.",
+    { x: 0.7, y: 1.9, w: W - 1.4, h: 1.6, fontFace: FONT_B, fontSize: 18, color: TEXT, paraSpaceAfter: 6 }
+  );
+
+  s.addText("Running costs, in the open", {
+    x: 0.7, y: 3.7, w: W - 1.4, h: 0.5, fontFace: FONT_H, fontSize: 22, bold: true, color: ACCENT,
+  });
+  s.addText(
+    "We publish our running costs and will keep them up to date at dlinrt.eu/transparency.",
+    { x: 0.7, y: 4.2, w: W - 1.4, h: 0.8, fontFace: FONT_B, fontSize: 18, color: TEXT }
+  );
+
+  s.addText("Errare humanum est", {
+    x: 0.7, y: 5.3, w: W - 1.4, h: 0.5, fontFace: FONT_H, fontSize: 22, bold: true, italic: true, color: ACCENT,
+  });
+  s.addText(
+    "We strive for accuracy and, alongside the AI tooling, we still value human revision. If you spot an imprecision or error, please reach out — we will take action.",
+    { x: 0.7, y: 5.8, w: W - 1.4, h: 1.2, fontFace: FONT_B, fontSize: 18, color: TEXT }
+  );
+}
+
+// ---------- Slide 6: What's next ----------
 {
   const s = pres.addSlide();
   s.background = { color: TEXT };
@@ -175,6 +213,14 @@ try {
   execSync(`soffice --headless --convert-to pdf --outdir ${OUT_DIR} ${pptxPath}`, { stdio: "inherit" });
   const pdfPath = path.join(OUT_DIR, "dlinrt-2026-06-update.pdf");
   execSync(`pdftoppm -jpeg -r 120 ${pdfPath} ${path.join(OUT_DIR, "slide")}`, { stdio: "inherit" });
+  // Normalize to zero-padded slide-0N.jpg
+  fs.readdirSync(OUT_DIR)
+    .filter((f) => /^slide-\d+\.jpg$/.test(f))
+    .forEach((f) => {
+      const n = parseInt(f.match(/^slide-(\d+)\.jpg$/)[1], 10);
+      const padded = `slide-${String(n).padStart(2, "0")}.jpg`;
+      if (f !== padded) fs.renameSync(path.join(OUT_DIR, f), path.join(OUT_DIR, padded));
+    });
   console.log("Wrote PDF + slide-*.jpg in", OUT_DIR);
 } catch (e) {
   console.error("PDF/JPEG conversion failed:", e.message);
