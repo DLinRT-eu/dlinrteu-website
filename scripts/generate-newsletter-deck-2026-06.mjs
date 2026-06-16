@@ -38,18 +38,15 @@ function addFooter(s, { darkBg = false } = {}) {
   const fy = H - 0.38;
   const color = darkBg ? "CADCFC" : MUTED;
   const linkColor = darkBg ? "FFFFFF" : ACCENT;
-  // Logo + site link (left)
+  // Logo + site link (left) — keep aspect ratio (logo is ~3.46:1)
+  const logoH = 0.28, logoW = 0.28 * 3.46;
   if (fs.existsSync(LOGO_PATH)) {
     s.addImage({
-      path: LOGO_PATH, x: 0.3, y: fy - 0.02, w: 0.32, h: 0.32,
-      sizing: { type: "contain", w: 0.32, h: 0.32 },
+      path: LOGO_PATH, x: 0.3, y: fy + (0.3 - logoH) / 2, w: logoW, h: logoH,
+      sizing: { type: "contain", w: logoW, h: logoH },
       hyperlink: { url: SITE_URL, tooltip: "dlinrt.eu" },
     });
   }
-  s.addText(
-    [{ text: "dlinrt.eu", options: { hyperlink: { url: SITE_URL }, color: linkColor, bold: true } }],
-    { x: 0.68, y: fy, w: 2.0, h: 0.3, fontFace: FONT_B, fontSize: 11, valign: "middle" }
-  );
   // Date + CC-BY (centre)
   s.addText(
     [
@@ -72,7 +69,7 @@ function addFooter(s, { darkBg = false } = {}) {
 {
   const s = pres.addSlide();
   s.background = { color: TEXT };
-  s.addShape("rect", { x: 0, y: H - 0.18, w: W, h: 0.18, fill: { color: ACCENT }, line: { color: ACCENT } });
+  s.addShape("rect", { x: 0, y: H - 0.55, w: W, h: 0.03, fill: { color: ACCENT }, line: { color: ACCENT } });
   s.addText(
     [{ text: "DLinRT.eu", options: { hyperlink: { url: SITE_URL }, color: "FFFFFF" } }],
     { x: 0.6, y: 1.0, w: W - 1.2, h: 1.0, fontFace: FONT_H, fontSize: 60, bold: true }
@@ -291,6 +288,17 @@ function addFooter(s, { darkBg = false } = {}) {
 
   const items = [
     {
+      h: "Save the date · DLinRT workshop, Utrecht · March 2026",
+      url: "https://dlinrt.org",
+      body: [
+        { text: "DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026. Dates and venue are being finalised — details will follow around September on ", options: { color: "CADCFC" } },
+        { text: "dlinrt.eu", options: { hyperlink: { url: SITE_URL }, color: "FFFFFF", bold: true } },
+        { text: " and ", options: { color: "CADCFC" } },
+        { text: "dlinrt.org", options: { hyperlink: { url: "https://dlinrt.org" }, color: "FFFFFF", bold: true } },
+        { text: ".", options: { color: "CADCFC" } },
+      ],
+    },
+    {
       h: "Certification round opens",
       url: SITE_URL + "/companies",
       body: [
@@ -327,13 +335,13 @@ function addFooter(s, { darkBg = false } = {}) {
     },
   ];
   items.forEach((it, i) => {
-    const y = 1.5 + i * 1.25;
+    const y = 1.3 + i * 1.05;
     s.addText(
       [{ text: it.h, options: { hyperlink: { url: it.url }, color: ACCENT, bold: true } }],
-      { x: 0.7, y, w: W - 1.4, h: 0.45, fontFace: FONT_H, fontSize: 20 }
+      { x: 0.7, y, w: W - 1.4, h: 0.4, fontFace: FONT_H, fontSize: 18 }
     );
     s.addText(it.body, {
-      x: 0.7, y: y + 0.45, w: W - 1.4, h: 0.7, fontFace: FONT_B, fontSize: 15,
+      x: 0.7, y: y + 0.4, w: W - 1.4, h: 0.62, fontFace: FONT_B, fontSize: 13,
     });
   });
   addFooter(s, { darkBg: true });

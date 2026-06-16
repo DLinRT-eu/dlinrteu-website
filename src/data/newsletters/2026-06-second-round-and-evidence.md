@@ -84,6 +84,16 @@ The **first fully dedicated satellite event on radiotherapy at MICCAI** takes pl
 
 ---
 
+## BLOCK 7b — 🟣 Save the Date · DLinRT Workshop, Utrecht · March 2026
+
+We are happy to pre-announce that **DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026**.
+
+Dates and venue are being finalised — more information will follow (around September) on our website and at **dlinrt.org**.
+
+👉 https://dlinrt.eu  ·  https://dlinrt.org
+
+---
+
 ## BLOCK 8 — 🟢 UMC Utrecht Supports DLinRT.eu
 
 Through the **Radiotherapy Medical Physics Traineeship**, **UMC Utrecht** has agreed to cover the running costs of DLinRT.eu — safeguarding the **independence and continuity** of the initiative.
