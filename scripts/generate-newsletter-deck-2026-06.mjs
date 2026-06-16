@@ -288,6 +288,17 @@ function addFooter(s, { darkBg = false } = {}) {
 
   const items = [
     {
+      h: "Save the date · DLinRT workshop, Utrecht · March 2026",
+      url: "https://dlinrt.org",
+      body: [
+        { text: "DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026. Dates and venue are being finalised — details will follow around September on ", options: { color: "CADCFC" } },
+        { text: "dlinrt.eu", options: { hyperlink: { url: SITE_URL }, color: "FFFFFF", bold: true } },
+        { text: " and ", options: { color: "CADCFC" } },
+        { text: "dlinrt.org", options: { hyperlink: { url: "https://dlinrt.org" }, color: "FFFFFF", bold: true } },
+        { text: ".", options: { color: "CADCFC" } },
+      ],
+    },
+    {
       h: "Certification round opens",
       url: SITE_URL + "/companies",
       body: [
@@ -324,13 +335,13 @@ function addFooter(s, { darkBg = false } = {}) {
     },
   ];
   items.forEach((it, i) => {
-    const y = 1.5 + i * 1.25;
+    const y = 1.3 + i * 1.05;
     s.addText(
       [{ text: it.h, options: { hyperlink: { url: it.url }, color: ACCENT, bold: true } }],
-      { x: 0.7, y, w: W - 1.4, h: 0.45, fontFace: FONT_H, fontSize: 20 }
+      { x: 0.7, y, w: W - 1.4, h: 0.4, fontFace: FONT_H, fontSize: 18 }
     );
     s.addText(it.body, {
-      x: 0.7, y: y + 0.45, w: W - 1.4, h: 0.7, fontFace: FONT_B, fontSize: 15,
+      x: 0.7, y: y + 0.4, w: W - 1.4, h: 0.62, fontFace: FONT_B, fontSize: 13,
     });
   });
   addFooter(s, { darkBg: true });
