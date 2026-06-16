@@ -1,4 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
+import { ANNOTATE_ALL_STRUCTURES } from "./therapanacea-structures";
 
 export const Annotate: ProductDetails = {
   id: "therapanacea-annotate",
