@@ -38,18 +38,15 @@ function addFooter(s, { darkBg = false } = {}) {
   const fy = H - 0.38;
   const color = darkBg ? "CADCFC" : MUTED;
   const linkColor = darkBg ? "FFFFFF" : ACCENT;
-  // Logo + site link (left)
+  // Logo + site link (left) — keep aspect ratio (logo is ~3.46:1)
+  const logoH = 0.28, logoW = 0.28 * 3.46;
   if (fs.existsSync(LOGO_PATH)) {
     s.addImage({
-      path: LOGO_PATH, x: 0.3, y: fy - 0.02, w: 0.32, h: 0.32,
-      sizing: { type: "contain", w: 0.32, h: 0.32 },
+      path: LOGO_PATH, x: 0.3, y: fy + (0.3 - logoH) / 2, w: logoW, h: logoH,
+      sizing: { type: "contain", w: logoW, h: logoH },
       hyperlink: { url: SITE_URL, tooltip: "dlinrt.eu" },
     });
   }
-  s.addText(
-    [{ text: "dlinrt.eu", options: { hyperlink: { url: SITE_URL }, color: linkColor, bold: true } }],
-    { x: 0.68, y: fy, w: 2.0, h: 0.3, fontFace: FONT_B, fontSize: 11, valign: "middle" }
-  );
   // Date + CC-BY (centre)
   s.addText(
     [
