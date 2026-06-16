@@ -154,10 +154,10 @@ const W = 13.333, H = 7.5;
   s.addText("What's next", { x: 0.7, y: 0.4, w: W - 1.4, h: 0.8, fontFace: FONT_H, fontSize: 36, bold: true, color: "FFFFFF" });
 
   const items = [
-    { h: "🏅 Certification round opens", b: "Manufacturers can now certify their product listings. Synaptiq — first certified, two CE-marked products. Congratulations." },
-    { h: "📅 MAIRT @ MICCAI · Oct 1, 2026", b: "First fully dedicated radiotherapy satellite event at MICCAI, Strasbourg. miart-workshop.github.io" },
-    { h: "🔍 Next review round · Nov 1 → Dec 15, 2026", b: "We are looking for more reviewers — many hands make the workload lighter." },
-    { h: "👋 Welcome Szabolcs David", b: "New reviewer on board. Thanks to all 12 reviewers — full list on dlinrt.eu/about." },
+    { h: "Certification round opens", b: "Manufacturers can now certify their product listings. Synaptiq — first certified, two CE-marked products. Congratulations." },
+    { h: "MAIRT @ MICCAI · Oct 1, 2026", b: "First fully dedicated radiotherapy satellite event at MICCAI, Strasbourg. miart-workshop.github.io" },
+    { h: "Next review round · Nov 1 → Dec 15, 2026", b: "We are looking for more reviewers — many hands make the workload lighter." },
+    { h: "Welcome Szabolcs David", b: "New reviewer on board. Thanks to all 12 reviewers — full list on dlinrt.eu/about." },
   ];
   items.forEach((it, i) => {
     const y = 1.5 + i * 1.35;
