@@ -195,7 +195,7 @@ function addFooter(s, { darkBg = false } = {}) {
   COMPANIES.forEach((c, i) => {
     const r = Math.floor(i / cols), col = i % cols;
     const x = gridX + col * cellW, y = gridY + r * cellH;
-    const companyUrl = `${SITE_URL}/companies/${c.id || c.slug || encodeURIComponent(c.name)}`;
+    const companyUrl = `${SITE_URL}/products/company/${c.id}`;
     let placed = false;
     let logoPath = c.logoUrl ? path.join("public", c.logoUrl.replace(/^\//, "")) : null;
     if (logoPath && logoPath.endsWith(".svg")) {
@@ -303,7 +303,7 @@ function addFooter(s, { darkBg = false } = {}) {
       url: SITE_URL + "/companies",
       body: [
         { text: "Manufacturers can now certify their product listings. ", options: { color: "CADCFC" } },
-        { text: "Synaptiq", options: { hyperlink: { url: SITE_URL + "/companies/synaptiq" }, color: "FFFFFF", bold: true } },
+        { text: "Synaptiq", options: { hyperlink: { url: SITE_URL + "/products/company/synaptiq" }, color: "FFFFFF", bold: true } },
         { text: " — first certified, two CE-marked products. Congratulations.", options: { color: "CADCFC" } },
       ],
     },
