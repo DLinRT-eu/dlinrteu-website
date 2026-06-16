@@ -26,6 +26,7 @@ These products do not meet the platform's criteria:
 | ClearCheck | Radformation | No explicit AI reference in intended use statement |
 | SunCHECK Patient | Sun Nuclear (Mirion Medical) | No explicit AI reference in intended use statement |
 | Radiation Oncology Work Management | MedLever, Inc. | No explicit AI reference in intended use statement |
+| SyMRI Neuro | SyntheticMR | MDME quantitative relaxometry / model-based T1/T2/PD fitting; no AI/ML in vendor IFU or FDA 510(k) (K162943, K191036, K233733, K242745) |
 
 
 ## Restoration
@@ -35,4 +36,4 @@ To restore these products to the website:
 2. Update the category's `index.ts` to import and include the products
 3. Update `src/data/products/archived/index.ts` to remove the import
 
-Last updated: 2026-03-24
+Last updated: 2026-06-16
