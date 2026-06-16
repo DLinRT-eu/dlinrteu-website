@@ -13,7 +13,7 @@ export const DVTARGET: ProductDetails = {
   version: "2.5",
   website: "http://www.huraimaging.com/dvtarget/",
   category: "Auto-Contouring",
-  modality: ["CT", "MRI"],
+  modality: ["CT"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
   companyUrl: "https://huraimaging.com",
   productUrl: "http://www.huraimaging.com/dvtarget/",
