@@ -1,5 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
-import { ADAPTBOX_ALL_STRUCTURES } from "../auto-contouring/therapanacea-structures";
+import { ADAPTBOX_PELVIS_MALE_CBCT } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -133,13 +133,13 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       },
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
-    supportedStructures: ADAPTBOX_ALL_STRUCTURES,
+    supportedStructures: ADAPTBOX_PELVIS_MALE_CBCT,
     structuresProvenance: {
-      source: "Therapanacea AdaptBox product page; FDA 510(k) K253091; Annotate CT model OAR sets used as proxies for the H&N and Breast/Thorax CBCT models",
+      source: "Therapanacea AdaptBox product page",
       sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
       sourceAccess: "public",
       sourceRetrievedOn: "2026-06-16",
-      notes: "Three CBCT models cleared under K253091: Head & Neck, Breast/Thorax, Pelvis (male). Pelvis Male list is itemised on the AdaptBox product page; H&N and Breast/Thorax CBCT structure lists are not publicly itemised per model and are populated here from the corresponding Annotate CT OAR core sets (disclosure level: partial)."
+      notes: "Only the Pelvis (male) CBCT model is publicly itemised by the vendor (9 OARs). H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level (K253091) but per-structure lists are not publicly disclosed and are intentionally not enumerated here."
     },
     limitations: [
       "Indicated for adult patients only; ART-Plan+ is not intended for patients less than 18 years of age (FDA K253091 IFU).",

@@ -260,9 +260,10 @@ export const ANNOTATE_ALL_STRUCTURES: string[] = [
   ...ANNOTATE_PELVIS_FEMALE_CT,
 ];
 
-// ============ ADAPTBOX — CBCT MODELS (H&N, Breast/Thorax, Pelvis Male per FDA K253091) ============
-
-// Pelvis Male (CBCT) — itemised on Therapanacea product page
+// ============ ADAPTBOX — Pelvis Male (CBCT) ============
+// Single CBCT model itemised on the Therapanacea AdaptBox product page (9 structures).
+// H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level (K253091)
+// but per-structure lists are NOT publicly itemised by the vendor — do not invent them.
 export const ADAPTBOX_PELVIS_MALE_CBCT = [
   "Pelvis Male (CBCT): AnalCanal",
   "Pelvis Male (CBCT): Bladder",
@@ -273,53 +274,6 @@ export const ADAPTBOX_PELVIS_MALE_CBCT = [
   "Pelvis Male (CBCT): Rectum",
   "Pelvis Male (CBCT): SeminalVes",
   "Pelvis Male (CBCT): Sigmoid",
-];
-
-// Head & Neck (CBCT) — OAR core set derived from the Annotate H&N CT model per K253091 scope
-export const ADAPTBOX_HEAD_NECK_CBCT = [
-  "Head & Neck (CBCT): Brainstem",
-  "Head & Neck (CBCT): Cerebellum",
-  "Head & Neck (CBCT): Encephalon",
-  "Head & Neck (CBCT): Esophagus",
-  "Head & Neck (CBCT): Eye_L",
-  "Head & Neck (CBCT): Eye_R",
-  "Head & Neck (CBCT): Lens_L",
-  "Head & Neck (CBCT): Lens_R",
-  "Head & Neck (CBCT): Larynx",
-  "Head & Neck (CBCT): Bone_Mandible",
-  "Head & Neck (CBCT): SpinalCanal",
-  "Head & Neck (CBCT): Cavity_Oral",
-  "Head & Neck (CBCT): Parotid_L",
-  "Head & Neck (CBCT): Parotid_R",
-  "Head & Neck (CBCT): Glnd_Submand_L",
-  "Head & Neck (CBCT): Glnd_Submand_R",
-  "Head & Neck (CBCT): Glnd_Thyroid",
-  "Head & Neck (CBCT): Trachea",
-];
-
-// Breast / Thorax (CBCT) — OAR core set derived from the Annotate Thorax/Breast CT model per K253091 scope
-export const ADAPTBOX_BREAST_THORAX_CBCT = [
-  "Breast/Thorax (CBCT): Breast_L",
-  "Breast/Thorax (CBCT): Breast_R",
-  "Breast/Thorax (CBCT): ChestWall_L",
-  "Breast/Thorax (CBCT): ChestWall_R",
-  "Breast/Thorax (CBCT): Esophagus",
-  "Breast/Thorax (CBCT): Heart",
-  "Breast/Thorax (CBCT): HumeralHead_L",
-  "Breast/Thorax (CBCT): HumeralHead_R",
-  "Breast/Thorax (CBCT): Liver",
-  "Breast/Thorax (CBCT): Lung_L",
-  "Breast/Thorax (CBCT): Lung_R",
-  "Breast/Thorax (CBCT): SpinalCanal",
-  "Breast/Thorax (CBCT): SpinalCord",
-  "Breast/Thorax (CBCT): Glnd_Thyroid",
-  "Breast/Thorax (CBCT): Trachea",
-];
-
-export const ADAPTBOX_ALL_STRUCTURES: string[] = [
-  ...ADAPTBOX_HEAD_NECK_CBCT,
-  ...ADAPTBOX_BREAST_THORAX_CBCT,
-  ...ADAPTBOX_PELVIS_MALE_CBCT,
 ];
 
 // ============ MR-BOX — 3 MR MODELS ============
