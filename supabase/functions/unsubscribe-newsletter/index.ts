@@ -1,5 +1,18 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.8';
+import { getOrCreateAudienceId, markContactUnsubscribed } from "../_shared/resend-audience.ts";
+
+async function syncUnsubscribeToResend(email: string): Promise<void> {
+  const apiKey = Deno.env.get("RESEND_API_KEY");
+  if (!apiKey) return;
+  try {
+    const audienceId = await getOrCreateAudienceId(apiKey);
+    await markContactUnsubscribed(apiKey, audienceId, email);
+  } catch (e) {
+    console.warn("unsubscribe-newsletter: Resend audience sync failed", (e as Error).message);
+  }
+}
+
 
 // Allowed origins for security
 const ALLOWED_ORIGINS = [
@@ -181,6 +194,9 @@ const handler = async (req: Request): Promise<Response> => {
         })
         .eq('id', subscriber.id);
     }
+
+    // Mirror the unsubscribe to Resend (best-effort)
+    await syncUnsubscribeToResend(normalizedEmail);
 
     return Response.redirect(successUrl, 302);
   }

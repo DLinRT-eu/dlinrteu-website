@@ -136,6 +136,24 @@ serve(async (req) => {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
     const status = statusFromType(event.type);
 
+    // Handle contact lifecycle / hard bounces / complaints → mark Supabase row unsubscribed
+    const shouldUnsub =
+      event.type === "contact.unsubscribed" ||
+      event.type === "email.complained" ||
+      (event.type === "email.bounced" && (data.bounce?.type || "").toLowerCase().includes("hard"));
+    if (shouldUnsub) {
+      const contactEmail = (data as any)?.email
+        || (Array.isArray(data.to) ? data.to[0] : (data.to as string | undefined));
+      if (contactEmail) {
+        const { error: upErr } = await supabase
+          .from("newsletter_subscribers")
+          .update({ unsubscribed_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+          .eq("email", String(contactEmail).toLowerCase())
+          .is("unsubscribed_at", null);
+        if (upErr) console.error("newsletter_subscribers unsubscribe failed:", upErr);
+      }
+    }
+
     for (const recipient of recipientList) {
       const row = {
         recipient,

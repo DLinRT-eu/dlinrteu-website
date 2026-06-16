@@ -26,8 +26,26 @@ function createResend(apiKey: string | undefined) {
 }
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.8';
+import { getOrCreateAudienceId, upsertContact } from "../_shared/resend-audience.ts";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
+
+// Best-effort: push contact to the Resend audience. Never blocks signup.
+async function syncContactToResend(email: string, firstName: string, lastName: string): Promise<void> {
+  const apiKey = Deno.env.get("RESEND_API_KEY");
+  if (!apiKey) return;
+  try {
+    const audienceId = await getOrCreateAudienceId(apiKey);
+    await upsertContact(apiKey, audienceId, {
+      email: email.toLowerCase(),
+      first_name: firstName,
+      last_name: lastName,
+      unsubscribed: false,
+    });
+  } catch (e) {
+    console.warn("subscribe-newsletter: Resend audience sync failed", (e as Error).message);
+  }
+}
 
 // Allowed origins for security
 const ALLOWED_ORIGINS = [
@@ -210,6 +228,9 @@ const handler = async (req: Request): Promise<Response> => {
         throw new Error('Failed to subscribe to newsletter');
       }
     }
+
+    // Push to Resend audience (best-effort, non-blocking)
+    await syncContactToResend(email, firstName, lastName);
 
     // Send welcome email to subscriber
     const welcomeEmailResponse = await resend.emails.send({

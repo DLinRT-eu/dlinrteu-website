@@ -84,3 +84,10 @@ verify_jwt = true
 
 [functions.accept-company-invitation]
 verify_jwt = false  # Public; validates one-time token in code
+
+[functions.sync-newsletter-audience]
+verify_jwt = true
+
+[functions.send-newsletter-broadcast]
+verify_jwt = true
+
