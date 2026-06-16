@@ -165,3 +165,5 @@ export const DeepContour: ProductDetails = {
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const WISDOM_TECH_PRODUCTS: ProductDetails[] = [DeepContour];
