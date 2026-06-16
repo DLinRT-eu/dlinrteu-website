@@ -133,19 +133,24 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
     supportedStructures: [
-      "FDA-cleared AdaptBox anatomy: Head & Neck",
-      "FDA-cleared AdaptBox anatomy: Breast / Thorax",
-      "FDA-cleared AdaptBox anatomy: Pelvis (male)",
-      "Pelvis (Male): Anal Canal",
-      "Pelvis (Male): Bladder",
-      "Pelvis (Male): Femoral Head (L)",
-      "Pelvis (Male): Femoral Head (R)",
-      "Pelvis (Male): Penile Bulb",
-      "Pelvis (Male): Prostate",
-      "Pelvis (Male): Rectum",
-      "Pelvis (Male): Seminal Vesicle",
-      "Pelvis (Male): Sigmoid"
+      // Single AI auto-contouring model: Pelvis (Male)
+      // Vendor anchor: https://www.therapanacea.eu/our-products/adaptbox/#1658756812-1-231681998787574
+      { name: "Pelvis Male: Anal Canal", type: "OAR" },
+      { name: "Pelvis Male: Bladder", type: "OAR" },
+      { name: "Pelvis Male: Femoral Head (L/R)", type: "OAR" },
+      { name: "Pelvis Male: Penile Bulb", type: "OAR" },
+      { name: "Pelvis Male: Prostate", type: "OAR" },
+      { name: "Pelvis Male: Rectum", type: "OAR" },
+      { name: "Pelvis Male: Seminal Vesicle", type: "OAR" },
+      { name: "Pelvis Male: Sigmoid", type: "OAR" }
     ],
+    structuresProvenance: {
+      source: "Therapanacea AdaptBox product page (therapanacea.eu/our-products/adaptbox/)",
+      sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+      sourceAccess: "public",
+      sourceRetrievedOn: "2026-06-16",
+      notes: "AdaptBox exposes a single AI auto-contouring model (Pelvis Male). FDA-cleared sCT-generation anatomies (Head & Neck, Breast/Thorax) are not auto-contouring models and are documented under regulatory.fda.notes."
+    },
     market: {
       onMarketSince: "2023",
       distributionChannels: ["Direct sales through vendor", "Distribution partners"],
