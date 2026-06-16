@@ -1,23 +1,85 @@
-## Findings
+## Goals
 
-**1. "Failed to fetch dynamically imported module: Dashboard.tsx"** — Vite HMR transient triggered by the previous edits. The dev server now returns Dashboard.tsx with HTTP 200, and `npx tsc --noEmit` is clean. A hard browser reload (Cmd/Ctrl-Shift-R) clears the cached chunk. No code change required.
+1. Add two new team members to the About page.
+2. Draft (but do not publish) a news item summarising the 2nd-round review completion, evidence axis system, Synaptiq certification, new reviewer, more-reviewers call, and the MAIRT/MICCAI satellite event.
+3. Create a Mailchimp-ready newsletter draft (copy-paste friendly) in a new dedicated location.
+4. Generate a small shareable deck (PDF + slide images) covering: cumulative product timeline, pie chart of primary categories, and a single page of all company logos.
 
-**2. "Make sure all structures are considered in the auto-contouring plots"** — Already wired correctly. The dashboard pipes products through `matchesTask(p, "Auto-Contouring")` (`src/utils/commonFilters.ts:6-11`), which matches when the task appears in either `category` **or** `secondaryCategories`. Effects:
+## 1. About page — two new team placeholders
 
-- AdaptBox (primary "Image Synthesis", secondary "Auto-Contouring") → its 9 Pelvis-male CBCT structures are now included in both `transformStructureData` and `transformStructureTypeData`.
-- MR-Box (primary "Image Synthesis", secondary "Auto-Contouring") → its 40 MR structures (Brain T1 + Pelvis Male T2 Elekta + Pelvis/Abdomen TrueFISP) are now included.
-- Annotate's 7 CT models continue to contribute as before.
+Edit `src/pages/About.tsx`, appending to `TEAM_MEMBERS`:
 
-Note: the top-structures chart still applies `.slice(0, 12)` (`chartDataTransformation.ts:155`) for slide-readability — that's an intentional display cap, not a filter on which products are counted.
+- **Szabolcs David** — Reviewer — image `/people/placeholder.jpg` (placeholder, no portrait yet) — bio `https://www.amsterdamumc.org/en/research/researchers/szabolcs-david` — email `szabolcs.david@dlinrt.eu`.
+- **Usman Lula** — Reviewer — image `/people/placeholder.jpg` — bio `https://www.linkedin.com/in/usman-lula-a67636b/` — email `usman.lula@dlinrt.eu`.
 
-## Plan
+`TeamSection` already falls back to initials when the image fails to load, so no further UI change is needed.
 
-Just one tiny verification touch — no code changes needed:
+## 2. News item — DRAFT only (not published)
 
-1. Drive Playwright headless to `/dashboard` → switch the task filter to "Auto-Contouring", screenshot the structure-by-product and top-structures charts; confirm `MR-Box`, `AdaptBox`, and `Annotate` rows are all present in the per-product chart.
-2. Report back the screenshot evidence. If MR-Box/AdaptBox are NOT visible in the per-product chart, only then investigate further (would point to a separate `useFilters` issue, not to `matchesTask`).
+Create `src/data/news/second-round-review-and-evidence-axes.ts` exporting `secondRoundReviewAndEvidenceAxes` (id: `second-round-review-and-evidence-axes`, date: today 2026-06-16).
 
-## Out of scope
+**Do NOT** import it into `src/data/news.ts`, so it does not appear on the live site. A short header comment will mark it as a draft awaiting approval.
 
-- No edits to dashboard, chart, or filter code.
-- No changes to the `.slice(0, 12)` cap unless the user asks to lift it.
+Content sections (markdown):
+- 2nd-round review complete; accuracy improvements across the catalogue.
+- Headline feature: 3-axis evidence system (rigor E0–E3, impact I0–I5, study-quality attributes) now visible on every product.
+- Certification round officially opening for companies; **Synaptiq is the first certified company**, with two CE-marked products certified — congratulations.
+- Backbone updates: streamlined review rounds, company-representative registration & revision flow, admin tooling. 28/42 companies have assigned representatives; follow-ups in progress.
+- New reviewer welcome: **Szabolcs David**; thanks to the full 12-strong reviewer team (link to /about).
+- Call for more reviewers — next round **Nov 1 → Dec 15, 2026**.
+- Upcoming event: **MAIRT @ MICCAI**, Oct 1 2026, Strasbourg — https://miart-workshop.github.io/
+- Attachments: links to the generated deck PDF and slide images stored under `public/newsletters/2026-06/`.
+
+## 3. Mailchimp newsletter — copy-paste friendly
+
+New folder `src/data/newsletters/` (new content area for storing newsletter drafts going forward).
+
+Files:
+- `src/data/newsletters/README.md` — explains the folder's purpose, naming convention (`YYYY-MM-slug.md`), and how to paste into Mailchimp (use the "Paste from rich text" or code block per section).
+- `src/data/newsletters/2026-06-second-round-and-evidence.md` — the newsletter itself, structured as discrete copy-paste blocks following the project's color-coded update convention (Green = product updates, Violet = community/reviewers, Blue = platform/backbone, Amber = events/calls). Each block has a clear `## SUBJECT LINE`, `## PREHEADER`, `## BLOCK 1 — …` etc., with plain-text body and inline links, so an editor can drop each block straight into a Mailchimp content section. Includes references to the deck PDF and slide images.
+
+No runtime UI surfaces this folder; it is documentation/content storage.
+
+## 4. Shareable deck — PDF + per-slide images
+
+Generate once via a Node script, output committed to `public/newsletters/2026-06/` so the news item and newsletter can link to stable URLs.
+
+Slides (5):
+1. **Cover** — "DLinRT.eu — 2nd round complete · Evidence axes live" + date.
+2. **Cumulative product timeline** — line/area chart of cumulative product count over time, derived from product `releaseYear`/`launchDate` fields in `ALL_PRODUCTS`.
+3. **Primary category pie chart** — slice per primary `category` across `ALL_PRODUCTS`.
+4. **Company logos wall** — single page with every active company logo (from `getActiveCompanies()` / `COMPANIES`).
+5. **What's next** — certification round opening, MAIRT event, Nov–Dec reviewer round, call for reviewers.
+
+Generation approach (script under `scripts/generate-newsletter-deck-2026-06.mjs`):
+- Use `pptxgenjs` to build a 1920×1080 PPTX with the DLinRT palette (#5090D0 accent, #1a1a2e text).
+- Convert to PDF via LibreOffice headless, then to per-slide JPEGs via `pdftoppm`.
+- Outputs written to `public/newsletters/2026-06/`:
+  - `dlinrt-2026-06-update.pdf`
+  - `slide-01.jpg` … `slide-05.jpg`
+- QA pass: convert each slide to an image, visually verify no overflow / contrast issues, fix and re-run before final.
+
+The script is a one-off generator (not wired into the build); rerunning regenerates the outputs.
+
+## Technical notes
+
+- News item file is created but intentionally NOT exported from `src/data/news.ts`, keeping it out of the live feed until you approve publication.
+- Team images: both new members use a generic placeholder filename; `TeamSection` already shows initials on image error, so no missing-asset warning will be visible until real portraits are added.
+- Newsletter content respects the existing `newsletter-mailchimp-template` memory (table-based HTML works in Mailchimp; here we store plain markdown blocks that map 1-to-1 onto Mailchimp content sections, which is faster for copy-paste authoring).
+- No DB schema changes, no edge-function changes, no auth/routing changes.
+
+## Files to add/edit
+
+Edit:
+- `src/pages/About.tsx` — append two team members.
+
+Add:
+- `src/data/news/second-round-review-and-evidence-axes.ts` (draft, not exported).
+- `src/data/newsletters/README.md`.
+- `src/data/newsletters/2026-06-second-round-and-evidence.md`.
+- `scripts/generate-newsletter-deck-2026-06.mjs`.
+- `public/newsletters/2026-06/dlinrt-2026-06-update.pdf` + `slide-01.jpg`…`slide-05.jpg` (generated).
+
+## Open question
+
+Should the news item appear publicly once you've reviewed the draft, or stay file-only until a future "publish" pass? My plan keeps it unexported (draft-only) until you say otherwise.
