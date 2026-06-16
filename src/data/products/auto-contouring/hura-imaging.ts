@@ -134,7 +134,7 @@ export const DVTARGET: ProductDetails = {
   ],
   adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   technicalSpecifications: {
-    input: ["CT", "MRI"],
+    input: ["CT"],
     output: ["Structure sets"],
     population: "Adult patients",
     inputFormat: ["DICOM"],
