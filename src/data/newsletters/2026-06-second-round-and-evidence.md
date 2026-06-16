@@ -34,6 +34,8 @@ Every product now carries evidence on **three axes**:
 
 See the live Evidence Matrix: https://dlinrt.eu/dashboard
 
+![Evidence on three axes — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-03.jpg)
+
 ---
 
 ## BLOCK 3 — 🟢 Company Certification Round Opens · Synaptiq First Certified 🎉
