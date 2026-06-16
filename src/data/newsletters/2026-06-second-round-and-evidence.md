@@ -1,18 +1,19 @@
-# DLinRT.eu — June 2026 Update
+DLinRT.eu — June 2026 Update
 
-> Mailchimp-ready draft. Each `## BLOCK` maps to one Mailchimp content row — paste body as-is.
+Dear DLinRT.eu Community,
 
----
+Welcome to our June 2026 newsletter, following our second complete peer-review round across all products. We have a refreshed catalog, a new evidence system, the first certified company, a new reviewer, and MAIRT @ MICCAI.
+
+A short companion deck of this newsletter is available at: https://dlinrt.eu/newsletters/2026-06/dlinrt-2026-06-update.pdf
+
 
 ## SUBJECT LINE
 
-Second round complete · Evidence on 3 axes · Synaptiq certified
+[DLinRT.eu] June Newsletter
 
 ## PREHEADER
 
-A refreshed catalogue, a new evidence system, the first certified company, a new reviewer, and MAIRT @ MICCAI.
-
----
+Your six-monthly update featuring a refreshed catalogue, a new evidence system, the first certified company, a new reviewer, and MAIRT @ MICCAI.
 
 ## BLOCK 1 — 🟢 Second-Round Review Complete
 
@@ -22,9 +23,9 @@ Every product has been re-checked field by field, sources re-disclosed, and inco
 
 👉 Browse the refreshed catalogue: https://dlinrt.eu/products
 
----
+![Evidence on three axes — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-03.jpg)
 
-## BLOCK 2 — 🟢 New: 3-Axis Evidence System
+## BLOCK 2 — 🟢 New: 3-axis evidence system
 
 Every product now carries evidence on **three axes**:
 
@@ -33,12 +34,10 @@ Every product now carries evidence on **three axes**:
 - **Study Quality attributes** — vendor-independent, multi-centre, multi-national, prospective, externally validated.
 
 See the live Evidence Matrix: https://dlinrt.eu/dashboard
+Along with the full methodology explanation: https://dlinrt.eu/evidence-impact-guide
 
-![Evidence on three axes — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-03.jpg)
 
----
-
-## BLOCK 3 — 🟢 Company Certification Round Opens · Synaptiq First Certified 🎉
+## BLOCK 3 — 🟢 Company certification round opens · First company certified 🎉
 
 The official certification round for manufacturers is now open. Companies can certify their product information directly — look for the green **"Verified by Company"** badge on product pages.
 
@@ -46,7 +45,6 @@ The official certification round for manufacturers is now open. Companies can ce
 
 Companies: https://dlinrt.eu/companies
 
----
 
 ## BLOCK 4 — 🔵 Backbone Updates
 
@@ -56,13 +54,12 @@ To keep our own time sustainable, we streamlined:
 - Company-representative registration and product revision flow.
 - Admin tooling for tasks, certifications, and outreach.
 
-We currently have **28 of 42 companies** with assigned representatives, and are actively following up on the remaining ones.
+We currently have **27 of 41 companies** with assigned representatives, and are actively following up on the remaining ones.
 
 ![Catalogue backbone — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-04.jpg)
 
----
 
-## BLOCK 5 — 🟣 Welcome Szabolcs David · Thanks to All 12 Reviewers
+## BLOCK 5 — 🟣 Welcome Szabolcs · Thanks to all 12 reviewers
 
 A warm welcome to **Szabolcs David**, who joins the DLinRT.eu reviewer team.
 
@@ -70,23 +67,21 @@ Huge thanks to all **12 reviewers** keeping the catalogue trustworthy.
 
 Full team: https://dlinrt.eu/about
 
----
 
-## BLOCK 6 — 🟡 Call for Reviewers · Next Round Nov 1 → Dec 15, 2026
+## BLOCK 6 — 🟡 Call for Reviewers · Next round Nov 1 → Dec 15, 2026
 
 We are opening the next review round between **November 1 and December 15, 2026**. Many hands make the workload lighter — if you can spare a few hours, get in touch:
 
 https://dlinrt.eu/support
 
----
 
-## BLOCK 7 — 🟡 Upcoming Event: MAIRT @ MICCAI · Oct 1, Strasbourg
+## BLOCK 7 — 🟡 Upcoming event: MAIRT @ MICCAI · Oct 1, Strasbourg
 
 The **first fully dedicated satellite event on radiotherapy at MICCAI** takes place on **October 1, 2026 in Strasbourg**:
 
 👉 https://miart-workshop.github.io/
 
----
+
 
 ## BLOCK 7b — 🟣 Save the Date · DLinRT Workshop, Utrecht · March 2026
 
@@ -96,7 +91,7 @@ Dates and venue are being finalised — more information will follow (around Sep
 
 👉 https://dlinrt.eu  ·  https://dlinrt.org
 
----
+
 
 ## BLOCK 8 — 🟢 UMC Utrecht Supports DLinRT.eu
 
@@ -104,7 +99,7 @@ Through the **Radiotherapy Medical Physics Traineeship**, **UMC Utrecht** has ag
 
 A huge thank you to the **Radiotherapy Department** for this support.
 
----
+
 
 ## BLOCK 9 — 🔵 Running Costs, in the Open
 
@@ -112,7 +107,7 @@ We feel obliged to make our running costs publicly available. They are now publi
 
 👉 https://dlinrt.eu/transparency
 
----
+
 
 ## BLOCK 10 — 🟣 Errare humanum est
 
@@ -122,18 +117,8 @@ For any imprecision or error, please do not hesitate to contact us and we will t
 
 👉 https://dlinrt.eu/support
 
----
 
-## BLOCK 11 — 📎 Newsletter Pack
-
-A short companion deck with cumulative product timeline, primary-category pie chart, company logo wall, and a support & transparency closing slide:
-
-- PDF: https://dlinrt.eu/newsletters/2026-06/dlinrt-2026-06-update.pdf
-- Slide images: https://dlinrt.eu/newsletters/2026-06/slide-01.jpg … slide-06.jpg
-
----
-
-## FOOTER (Mailchimp default merge tags)
+## FOOTER 
 
 You're receiving this because you subscribed to DLinRT.eu updates.
 Unsubscribe: *|UNSUB|*  ·  View in browser: *|ARCHIVE|*
