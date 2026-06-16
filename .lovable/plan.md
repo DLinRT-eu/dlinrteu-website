@@ -1,54 +1,84 @@
+## Goal
+
+Bring the three Therapanacea auto-contouring entries (Annotate, AdaptBox, MR-Box) in line with the rest of the catalogue's `supportedStructures` syntax, keep the 7 Annotate CT models cleanly labelled, and re-audit the clinical evidence + displayed metadata.
+
+## Problem today
+
+- `Annotate`, `AdaptBox`, `MR-Box` use object form `{ name, type }` with `"Region: Structure Name"` labels. Every other auto-contouring vendor (MVision, Limbus, Manteia, GE, RaySearch, …) uses **plain strings** in the `"<Model>-<Modality>: TG263_Name"` form, kept in a dedicated `<vendor>-structures.ts` file. The Structure Comparison Tool and the Region/Modality chips therefore don't render Therapanacea consistently.
+- Annotate's 7 CT models are only delineated by inline `// === …` comments; they aren't structurally identifiable.
+- Some bilateral entries still use grouped `"(L/R)"` form, contrary to the v3 naming convention (one row per side).
+
 ## Plan
 
-### 1. Data Source field (General Information) — split + linkify
-File: `src/components/product/GeneralInformationDetails.tsx`
+### 1. New file `src/data/products/auto-contouring/therapanacea-structures.ts`
 
-- Replace the single `<p>{sourceInfo}</p>` rendering of `displayProduct.source` with a parsed list:
-  - Split the `source` string on `;` (the existing convention, e.g. MRCAT entry) into individual source items, trimmed.
-  - Render each item as its own line. Wrap each line in `<AutoLinkText text={item} />` so any embedded `http(s)://…` URL becomes a shortened, hoverable, clickable anchor (existing hardened behavior: scheme-validated, trailing punctuation stripped, `title` tooltip with full URL).
-- Edit mode untouched: `EditableField` continues to render its textarea with the raw string, so reviewers/admins still edit the full source text including full URLs.
+Seven string arrays — one per Annotate CT model — plus combined exports:
 
-### 2. Company Website — shorten long URLs
-File: `src/components/product/ContactInformation.tsx`
+- `ANNOTATE_HEAD_NECK_CT` — prefix `"Head & Neck-CT: …"` (OARs + Cervical LN levels)
+- `ANNOTATE_FEMALE_THORAX_BREAST_CT` — prefix `"Female Thorax/Breast-CT: …"`
+- `ANNOTATE_MALE_THORAX_CT` — prefix `"Male Thorax-CT: …"`
+- `ANNOTATE_HEART_SUBSTRUCTURES_CT` — prefix `"Heart Sub-Structures-CT: …"` (Duane 2017 / Lee 2017)
+- `ANNOTATE_SBRT_LUNG_CT` — prefix `"Lung SBRT-CT: …"`
+- `ANNOTATE_PELVIS_MALE_CT` — prefix `"Pelvis Male-CT: …"`
+- `ANNOTATE_PELVIS_FEMALE_CT` — prefix `"Pelvis Female-CT: …"`
+- `ANNOTATE_ALL_STRUCTURES` — concat of the seven
+- `ADAPTBOX_PELVIS_MALE_CBCT` — prefix `"Pelvis Male-CBCT: …"` (AdaptBox)
+- `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` — prefix `"<Model>-MR: …"` (MR-Box)
 
-- Keep `href={websiteUrl}` as the full URL (no behavior change to navigation).
-- Replace the visible label `{websiteUrl}` with a shortened label computed via the same `shorten()` helper logic used in `AutoLinkText` (host + truncated path with `…`, default max 48 chars).
-- Add `title={websiteUrl}` on the anchor so hover shows the full URL.
-- Keep `ExternalLink` icon. Add `break-all` to avoid layout breaks on edge cases.
-- Edit mode: `EditableField` already renders an input with the raw URL — unchanged.
+Within each array:
+- Split bilateral structures into separate `_L` / `_R` entries (drop `(L/R)`).
+- Use TG-263-style names where unambiguous (`Eye_L`, `Glnd_Lacrimal_R`, `OpticNrv_L`, `Bone_Mandible`, `SpinalCord`, `LN_Neck_II_L`, …); keep vendor-specific names where TG-263 has no equivalent (e.g. `LN_IMC_L`).
+- Tag lymph nodes with the `LN_` TG-263 prefix.
 
-To avoid duplicating logic, extract the existing `shorten()` + `isSafeHttpUrl()` from `AutoLinkText.tsx` into a small helper `src/lib/url.ts` and re-import from both `AutoLinkText.tsx` and `ContactInformation.tsx`. No behavior change for `AutoLinkText`.
+### 2. Refactor `src/data/products/auto-contouring/therapanacea.ts`
 
-### 3. Review/edit mode smoothness
-- Only the read-mode JSX inside `EditableField`'s children is changed. `EditableField` swaps to its own editor when `isEditMode` is on, so the new shortened/linkified rendering never interferes with editing.
-- For Data Source specifically: confirm the textarea editor receives the raw `displayProduct.source` (it already does via the `value` prop), and the split-on-`;` is purely presentational.
-- No changes to `ProductEditContext`, drafts, or save flow.
+- Replace inline `supportedStructures` object array with `supportedStructures: ANNOTATE_ALL_STRUCTURES` import.
+- Keep `structuresProvenance`, `guidelines`, everything else.
+- Add a short `notes` line to `structuresProvenance` listing the 7 model prefixes so the UI badge documents them.
 
-### 4. Documentation refresh
-Bring docs in line with current schema and UI without rewriting tone:
+### 3. Refactor `src/data/products/image-synthesis/therapanacea-adaptbox.ts`
 
-- `docs/FIELD_REFERENCE.md`:
-  - Update `source` description to document the `; `-separated convention and that embedded `http(s)` URLs are auto-linked in the UI.
-  - Add/confirm entries for fields that have landed since last update: `evidenceRigor` (E0–E3), `clinicalImpact` (I0–I5), `adoptionReadiness` (R0–R3), their `*Notes` siblings, `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`, `categoryEvidence`, `dosePredictionModels`, `monitorsAIProducts`, `usesAI`, `safetyCorrectiveActions`, `priorVersions`, `supersededBy`, `developedBy`, `companyRevisionDate`, `sourceAccess`, `sourceRetrievedOn`, `hasRegulatoryApproval`.
-  - Note URL-shortening / hover-tooltip behavior on free-text fields (description, trainingData/evaluationData descriptions, evidence notes, intendedUseStatement, safetyCorrectiveActions, website).
-- `docs/review/GUIDE.md`:
-  - Sync evidence rubric wording with the dual-axis E/I + R model and the study-quality sub-attributes already used in product files.
-  - Add the source-disclosure rule (`sourceAccess` + `sourceRetrievedOn` for non-public sources) per the project Core memory.
-  - Add the catalogue inclusion gate (`hasRegulatoryApproval` recognized authorities) and the AI/DL threshold (classical processing excluded).
-- `README.md`:
-  - Refresh the "Adding a product" section to point at the current category folder list and the up-to-date required fields.
-  - Link to `docs/FIELD_REFERENCE.md` and `docs/review/GUIDE.md` for full schema/rubric.
-- `docs/ADMIN_GUIDE.md`:
-  - Brief addition documenting the company-representative invitation flow including the new `forceRegister` option (auto-provisioned account + password setup email).
-- `docs/REVIEWER_GUIDE.md` / `docs/REVIEWER_ASSIGNMENT_GUIDE.md`:
-  - Light pass to align field names with current schema; no workflow changes.
+- Convert `supportedStructures` to `ADAPTBOX_PELVIS_MALE_CBCT` strings.
+- Keep AdaptBox CBCT-specific limitations and guideline refs.
 
-### Out of scope
-- No product-data edits.
-- No changes to `AutoLinkText` regex/validation semantics.
-- No backend, RLS, or edge-function changes.
-- No styling overhaul beyond the minimum needed for the shortened anchors.
+### 4. Refactor `src/data/products/image-synthesis/therapanacea.ts` (MR-Box)
 
-### Technical notes
-- New helper `src/lib/url.ts` exporting `shortenUrl(url, max=48)` and `isSafeHttpUrl(url)`; `AutoLinkText` re-imports them so its public behavior is identical.
-- Source splitter: `source.split(/;\s*/).map(s => s.trim()).filter(Boolean)`. If only one segment results, render as a single line (current behavior visually preserved).
+- Convert the 3 MR model arrays to `MRBOX_BRAIN_T1`, `MRBOX_PELVIS_T2_ELEKTA`, `MRBOX_PELVIS_ABDO_TRUEFISP` strings concatenated.
+- Keep `structuresProvenance`, `guidelines`, and `partOf`.
+
+### 5. Clinical evidence audit
+
+Run targeted PubMed / DOI searches (date-boxed, recorded in `lastRevised`) for:
+- "Therapanacea Annotate", "ART-Plan", "MR-Box synthetic CT", "AdaptBox CBCT"
+- Already-cited: DiTusa 2025 (JMP), Lê 2024 (Phys Imaging Radiat Oncol). Confirm DOIs resolve.
+- Search for additional 2024–2026 independent evaluations (e.g. synCT dose accuracy, breast/H&N geometric studies).
+
+For each new qualifying study: add to `evidence[]`, update `evidenceRigorNotes`/`clinicalImpactNotes`, bump `lastRevised`. If none found, record "PubMed re-verified YYYY-MM-DD; no new qualifying studies" in the notes.
+
+### 6. Displayed-information audit
+
+For Annotate / MR-Box / AdaptBox check and correct:
+- `regulatory.fda` — clearance numbers (K211539, K234068, K242822, K253091) and dates against the FDA 510(k) DB; align `intendedUseStatement` and `notes`.
+- `partOf` — all three point to `ART-Plan+` with consistent `version`/`relationship: "Module"`.
+- `companyUrl` / `productUrl` — confirm 200 OK, shorten in UI via existing `shortenUrl` helper (no data change required).
+- `lastUpdated` / `lastRevised` / `source` — synchronise to audit date.
+- `evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceExternalValidation` flags — re-derive from the studies actually cited.
+- Confirm no leftover `(L/R)` grouped entries and no duplicate strings across model groups (duplicates *between* groups are allowed — same OAR can belong to several models — but never within one group).
+
+### 7. Verification
+
+- `npm run lint && npm run build` (auto-run by harness).
+- Drive Playwright against `/product/therapanacea-annotate`, `/product/mr-box-synthetic`, `/product/therapanacea-adaptbox` and the Structure Comparison page to screenshot the new layout and confirm the 7 model prefixes appear.
+
+## Out of scope
+
+- Type / schema changes to `ProductDetails.supportedStructures` (the union already accepts `string[]`).
+- UI component changes — only data.
+- Other Therapanacea modules (SmartFuse, SmartPlan, BrachyBox, TumorBox).
+
+## Files touched
+
+- `src/data/products/auto-contouring/therapanacea-structures.ts` (new)
+- `src/data/products/auto-contouring/therapanacea.ts`
+- `src/data/products/image-synthesis/therapanacea.ts`
+- `src/data/products/image-synthesis/therapanacea-adaptbox.ts`
