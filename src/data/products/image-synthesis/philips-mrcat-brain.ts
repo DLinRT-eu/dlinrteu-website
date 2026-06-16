@@ -109,6 +109,11 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.phro.2024.100589"
       },
       {
+        type: "Clinical Validation",
+        description: "Yip TTY, Li Z, Li T, et al. Clinical validation of MR-generated synthetic CT by MRCAT for brain tumor radiotherapy. J Appl Clin Med Phys 2025;26(1). Independent clinical validation of MRCAT Brain synthetic CT for brain tumor radiotherapy planning.",
+        link: "https://doi.org/10.1002/acm2.14494"
+      },
+      {
         type: "Indirect-Comparative",
         description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MRCAT Brain commissioning; not a direct MRCAT evaluation.",
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
