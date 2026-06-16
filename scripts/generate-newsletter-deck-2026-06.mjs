@@ -213,6 +213,14 @@ try {
   execSync(`soffice --headless --convert-to pdf --outdir ${OUT_DIR} ${pptxPath}`, { stdio: "inherit" });
   const pdfPath = path.join(OUT_DIR, "dlinrt-2026-06-update.pdf");
   execSync(`pdftoppm -jpeg -r 120 ${pdfPath} ${path.join(OUT_DIR, "slide")}`, { stdio: "inherit" });
+  // Normalize to zero-padded slide-0N.jpg
+  fs.readdirSync(OUT_DIR)
+    .filter((f) => /^slide-\d+\.jpg$/.test(f))
+    .forEach((f) => {
+      const n = parseInt(f.match(/^slide-(\d+)\.jpg$/)[1], 10);
+      const padded = `slide-${String(n).padStart(2, "0")}.jpg`;
+      if (f !== padded) fs.renameSync(path.join(OUT_DIR, f), path.join(OUT_DIR, padded));
+    });
   console.log("Wrote PDF + slide-*.jpg in", OUT_DIR);
 } catch (e) {
   console.error("PDF/JPEG conversion failed:", e.message);
