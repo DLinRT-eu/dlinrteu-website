@@ -82,6 +82,7 @@ export const DVTARGET: ProductDetails = {
     "Head & Neck",
     "Thorax",
     "Breast",
+    "Abdomen",
     "Pelvis"
   ],
   evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-02-26.",
