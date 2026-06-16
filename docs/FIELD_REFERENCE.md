@@ -47,12 +47,23 @@ The UI surfaces non-public sources via a "Vendor-provided · retrieved YYYY-MM-D
 
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
-| `website` or `productUrl` | ✅ | Landing page for the product. | `https://` URL. | Ensure link resolves and is current. |
+| `website` or `productUrl` | ✅ | Landing page for the product. | `https://` URL. | Ensure link resolves and is current. Long URLs are shortened in the UI to host + truncated path with `…`; the full URL is shown on hover and used as the link target. |
 | `companyUrl` | ➖ | Corporate site home page. | `https://` URL. | Provide when product and company sites differ. |
 | `supportEmail` / `contactEmail` | ➖ | Primary contact for inquiries. | Valid email. | Use vendor-provided generic address when possible. |
 | `contactPhone` | ➖ | Direct phone contact. | `+<country> <number>`. | Optional; include only if listed publicly. |
 | `githubUrl` | ➖ | Source code repository. | `https://github.com/...` | Only for open-source components. |
 | `developedBy` | ➖ | Tracks when a product is developed/manufactured by a different company than the seller. | Object with `company` (required), `companyUrl` (optional URL), `relationship` (optional string like "Technology Partner", "OEM", "White-label"). | Use when vendor partners with another company for product development. Verify partnership publicly disclosed. |
+
+### Data Source (top-level `source`)
+
+| Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
+| --- | --- | --- | --- | --- |
+| `source` | ➖ | Provenance string shown in the General Information card under "Data Source". | Free text. Multiple sources are separated by `; ` (semicolon + space). Embedded `http(s)://` URLs are recognized automatically. | Each `; `-separated segment renders on its own line in read mode. Validated http(s) URLs are auto-shortened to a clickable link with the full URL on hover. The edit-mode textarea keeps the raw, unshortened string so reviewers always see and edit full URLs. |
+
+### URL Display Behavior (read-mode)
+
+All free-text fields rendered through `<AutoLinkText>` apply the same rule: only validated `http://` or `https://` URLs are converted to anchors; bare domains, file paths, or `www.` without a scheme are rendered verbatim. Long URLs collapse to `host/truncated…` with the full URL exposed via the native `title` tooltip. Affected fields include: product `description`, `trainingData.description` / `demographics`, `evaluationData.description` / `demographics`, `evidenceRigorNotes`, `clinicalImpactNotes`, `adoptionReadinessNotes`, `intendedUseStatement`, `safetyCorrectiveActions[].description` / `.action`, top-level `source`, and `website`/`productUrl`. Edit-mode inputs are never shortened.
+
 
 ## Classification & Clinical Scope
 
