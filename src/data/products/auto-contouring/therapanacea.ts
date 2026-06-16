@@ -3,7 +3,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const Annotate: ProductDetails = {
   id: "therapanacea-annotate",
   trainingData: {
-    description: "Models trained on expert-delineated CT datasets following international contouring guidelines across major cancer sites (Head & Neck, Thorax, Breast, Pelvis, SBRT Lung). Training data reviewed and validated by clinical experts. Dataset details not fully disclosed publicly.",
+    description: "Models trained on multi-institutional retrospective CT cohorts with expert-delineated reference contours, following international consensus guidelines per anatomical site (Grégoire 2014 for H&N, Offersen 2015 / De Rose 2017 for Thorax/Breast, Duane 2017 / Lee 2017 for cardiac sub-structures, UK SABR 2019 for SBRT Lung, Gay 2012 for Pelvis). Reference contours produced by board-certified clinicians; adult patients only. FDA 510(k) K211539 (Annotate, ART-Plan v2.0, 2021) is the initial U.S. clearance covering the OAR auto-contouring module; K253091 (ART-Plan+ v3.1.0, 2025-12-23) is the latest clearance and also includes Annotate. Dataset size, scanner-vendor distribution, and demographic breakdown are not publicly disclosed by the manufacturer.",
     disclosureLevel: "partial",
     source: "Therapanacea product page and FDA 510(k) summary K211539",
     sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
