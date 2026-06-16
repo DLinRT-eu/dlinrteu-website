@@ -229,9 +229,24 @@ function addFooter(s, { darkBg = false } = {}) {
     }
     if (logoPath && fs.existsSync(logoPath)) {
       try {
+        // Preserve intrinsic aspect ratio: compute fitted box centred in the cell.
+        const dim = getImageSize(logoPath);
+        let drawW = logoW, drawH = logoH, dx = x + pad, dy = y + pad;
+        if (dim && dim.w > 0 && dim.h > 0) {
+          const cellRatio = logoW / logoH;
+          const imgRatio = dim.w / dim.h;
+          if (imgRatio > cellRatio) {
+            drawW = logoW;
+            drawH = logoW / imgRatio;
+          } else {
+            drawH = logoH;
+            drawW = logoH * imgRatio;
+          }
+          dx = x + pad + (logoW - drawW) / 2;
+          dy = y + pad + (logoH - drawH) / 2;
+        }
         s.addImage({
-          path: logoPath, x: x + pad, y: y + pad, w: logoW, h: logoH,
-          sizing: { type: "contain", w: logoW, h: logoH },
+          path: logoPath, x: dx, y: dy, w: drawW, h: drawH,
           hyperlink: { url: companyUrl, tooltip: c.name },
         });
         placed = true;
