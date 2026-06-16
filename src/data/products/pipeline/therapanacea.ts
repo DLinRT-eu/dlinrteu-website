@@ -38,7 +38,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     usesAI: true,
     regulatory: {
       intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI treatment-planning module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 23 May 2026.)",
+        "\"Coming Soon.\" Pre-market AI treatment-planning module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 16 June 2026.)",
     },
     lastUpdated: "2026-03-08",
     lastRevised: "2026-05-30",
