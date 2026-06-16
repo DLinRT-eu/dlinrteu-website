@@ -82,6 +82,20 @@ const TEAM_MEMBERS = [
     bio: "https://amithjkamath.github.io/",
     email: "amith.kamath@dlinrt.eu",
   },
+  {
+    name: "Szabolcs David",
+    role: "Reviewer",
+    image: "/people/szabolcs-david.jpg",
+    bio: "https://www.amsterdamumc.org/en/research/researchers/szabolcs-david",
+    email: "szabolcs.david@dlinrt.eu",
+  },
+  {
+    name: "Usman Lula",
+    role: "Reviewer",
+    image: "/people/usman-lula.jpg",
+    bio: "https://www.linkedin.com/in/usman-lula-a67636b/",
+    email: "usman.lula@dlinrt.eu",
+  },
 ];
 
 // Fisher-Yates shuffle algorithm
