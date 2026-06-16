@@ -69,7 +69,7 @@ function addFooter(s, { darkBg = false } = {}) {
 {
   const s = pres.addSlide();
   s.background = { color: TEXT };
-  s.addShape("rect", { x: 0, y: H - 0.18, w: W, h: 0.18, fill: { color: ACCENT }, line: { color: ACCENT } });
+  s.addShape("rect", { x: 0, y: H - 0.55, w: W, h: 0.03, fill: { color: ACCENT }, line: { color: ACCENT } });
   s.addText(
     [{ text: "DLinRT.eu", options: { hyperlink: { url: SITE_URL }, color: "FFFFFF" } }],
     { x: 0.6, y: 1.0, w: W - 1.2, h: 1.0, fontFace: FONT_H, fontSize: 60, bold: true }
