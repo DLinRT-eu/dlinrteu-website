@@ -85,7 +85,7 @@ const TEAM_MEMBERS = [
   {
     name: "Szabolcs David",
     role: "Reviewer",
-    image: "/people/szabolcs-david.jpg",
+    image: "/people/Szabolcs.jpg",
     bio: "https://www.amsterdamumc.org/en/research/researchers/szabolcs-david",
     email: "szabolcs.david@dlinrt.eu",
   },
