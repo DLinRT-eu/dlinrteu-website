@@ -1,52 +1,80 @@
 ## Goal
 
-Make broadcasts sent from the admin composer look as polished as the Mailchimp `jun2026.html` reference — branded outer frame, real DLinRT logo, "View in browser" link, hero/inline imagery from the newsletter slide deck — while keeping the website palette (Steel Blue `#5090D0`, Dark Slate `#1a1a2e`) and our existing Markdown-driven workflow.
+Make the newsletter workflow split cleanly between the website (authoring + audience sync + test) and Resend (final broadcast send), with a continuously-synced audience.
 
-## Visual changes (template)
+## New flow
 
-Update `supabase/functions/_shared/newsletter-render.ts` and its client mirror `src/utils/email/newsletterRender.ts` to render:
+```text
+markdown draft (src/data/newsletters/*.md)
+   │
+   ├─ admin edits in /admin/newsletter-broadcast
+   │     ├─ Live preview (light/dark)            ← website
+   │     ├─ Send test  (single /emails call)     ← website
+   │     └─ "Push to Resend as draft" broadcast  ← website → Resend
+   │
+   └─ Resend dashboard › Broadcasts › "DLinRT newsletter <slug>"
+         ├─ Send test                            ← Resend
+         └─ Send to audience                     ← Resend (final send)
 
-1. **Outer canvas**: Steel Blue `#5090D0` background (replaces flat `#f1f5f9`), email content centered in a 660px white card with soft shadow — matches the Mailchimp "blue frame around white sheet" look but with our brand color.
-2. **Pre-header bar**: tiny centered "View this email in your browser" link (uses the unsubscribe/archive URL passed in).
-3. **Logo header**: replace the text-only header with the real `LogoDLinRT.eu.png` (linked from `https://dlinrt.eu/LogoDLinRT.eu.png` so email clients can load it), 130px wide, centered on white, with a thin Steel Blue divider underneath. Tagline "Deep Learning in Radiotherapy" stays beneath the logo in Dark Slate.
-4. **Section blocks**: keep the current per-`## BLOCK` card layout but refine:
-   - White background (instead of `#f8fafc`) with a 3px Steel Blue left border for accent.
-   - Heading in Dark Slate, 18px, bold.
-   - Bullet markers tinted Steel Blue.
-   - Links remain Steel Blue underlined.
-5. **Inline imagery**: render two full-width slide images from the June 2026 deck inside the body to add color, matching the Mailchimp version's imagery:
-   - After BLOCK 2 (Evidence System) → `https://dlinrt.eu/newsletters/2026-06/slide-03.jpg`
-   - After BLOCK 4 (Backbone Updates) → `https://dlinrt.eu/newsletters/2026-06/slide-04.jpg`
-   - Each wrapped in a link to the full PDF deck.
-   - Implementation: extend the Markdown parser so a line of the form `![alt](url)` inside a block (or a dedicated `## IMAGE` section) becomes a responsive `<img style="display:block;width:100%;height:auto;border-radius:6px;">`. Author simply drops the two image references into the existing markdown source.
-6. **CTA button**: keep the "Visit DLinRT.eu →" button but restyle as pill-shaped, Steel Blue, white text, with subtle shadow.
-7. **Footer**: white background, top divider, smaller muted text, social/contact line ("DLinRT.eu · Deep Learning in Radiotherapy · info@dlinrt.eu"), unsubscribe link.
-8. **Typography**: keep system font stack (Helvetica Neue / Arial fallback like Mailchimp). Body 15px / line-height 1.65. All inline styles only (email-safe).
+Audience sync (continuous):
+  subscribe-newsletter   → upsert contact to Resend         (already wired)
+  unsubscribe-newsletter → mark unsubscribed in Resend      (already wired)
+  sync-newsletter-audience → manual full reconcile (button) (already wired)
+  + scheduled daily cron full reconcile (new)
+```
 
-## Markdown changes (`src/data/newsletters/2026-06-second-round-and-evidence.md`)
+## Changes
 
-Add the two image references in-place so the upgraded renderer picks them up automatically:
+### 1. `supabase/functions/send-newsletter-broadcast/index.ts`
+- Keep the **test send** branch as-is (single `/emails` call to one recipient).
+- Remove the "actually send broadcast" path. The function now only:
+  - Creates / overwrites the broadcast in Resend (`createBroadcast`) and returns its `id` + a deep link `https://resend.com/broadcasts/<id>`.
+  - Never calls `sendBroadcast`. Final send happens inside Resend.
+- Audit log action becomes `newsletter_broadcast_drafted` only.
+- Ignore the old `send` flag if a client still sends it.
 
-- Insert after BLOCK 2 body:
-  `![Evidence on three axes — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-03.jpg)`
-- Insert after BLOCK 4 body:
-  `![Catalogue backbone — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-04.jpg)`
+### 2. `src/pages/admin/NewsletterBroadcast.tsx`
+- Replace the destructive "Send to all subscribers" button + confirm dialog with **"Push draft to Resend"** (no `SEND` typing required).
+- On success show: broadcast id, active subscriber count, and a "Open in Resend" link (`https://resend.com/broadcasts/<id>`) plus a one-line note: *"Send the final newsletter from the Resend dashboard."*
+- Keep the test-send card unchanged.
+- Add a small "Audience sync" note clarifying that subscribes/unsubscribes sync automatically and the manual button is a full reconcile.
 
-No other newsletter content changes.
+### 3. Continuous audience sync (verify + harden)
+- `subscribe-newsletter` already upserts to Resend; `unsubscribe-newsletter` already marks unsubscribed. Confirm both swallow Resend errors so they never block the user-facing op, and log failures to `admin_audit_log` for visibility.
+- Add a **daily scheduled reconcile**:
+  - New `supabase/functions/scheduled-newsletter-audience-sync/index.ts` — same logic as `sync-newsletter-audience` but auth-by-CRON-secret instead of admin JWT.
+  - Register in `supabase/config.toml` with `verify_jwt = false`.
+  - Trigger via `pg_cron` daily (SQL migration calling `net.http_post` with the function URL + `x-cron-secret` header read from Vault).
+  - Adds a `NEWSLETTER_CRON_SECRET` runtime secret (request via secrets tool during build).
+
+### 4. Docs
+- Update `src/data/newsletters/README.md` "How to use" section to describe the new flow:
+  1. Edit markdown.
+  2. Preview & send test on /admin/newsletter-broadcast.
+  3. Click "Push draft to Resend".
+  4. Open Resend, send test (optional) and final broadcast from there.
 
 ## What stays the same
 
-- `src/pages/admin/NewsletterBroadcast.tsx` composer, preview iframe, audience sync, test-send, broadcast send — all unchanged. The live preview will simply render the new look because it imports the client-side renderer.
-- Edge function entrypoints (`send-newsletter-broadcast`, `sync-newsletter-audience`) — unchanged.
-- Markdown format (`## SUBJECT LINE`, `## PREHEADER`, `## BLOCK N — …`) — unchanged, only adds optional inline `![]()` images and the renderer learns to handle them.
+- Markdown format, renderer (`newsletter-render.ts`), light/dark template, audience name "DLinRT.eu Subscribers", `resend-webhook` (still records sends/bounces/unsubscribes), all role gating.
 
 ## Files touched
 
-- `supabase/functions/_shared/newsletter-render.ts` — restyled HTML + image parsing
-- `src/utils/email/newsletterRender.ts` — kept in sync with the server renderer
-- `src/data/newsletters/2026-06-second-round-and-evidence.md` — two `![]()` image lines added
+- `supabase/functions/send-newsletter-broadcast/index.ts` — drop send-now path, return Resend deep link.
+- `src/pages/admin/NewsletterBroadcast.tsx` — relabel button, remove confirm dialog, show Resend link.
+- `supabase/functions/scheduled-newsletter-audience-sync/index.ts` — new, CRON-secret auth.
+- `supabase/config.toml` — register new function with `verify_jwt = false`.
+- `supabase/functions/subscribe-newsletter/index.ts`, `unsubscribe-newsletter/index.ts` — log Resend failures to `admin_audit_log` (no behavior change for the user).
+- New SQL migration — schedule daily `pg_cron` job calling the new function.
+- `src/data/newsletters/README.md` — updated steps.
+- One new secret: `NEWSLETTER_CRON_SECRET`.
 
 ## Verification
 
-- Open `/admin/newsletter-broadcast`, pick the June 2026 draft, confirm the live preview iframe shows the new branded frame, logo, both slide images, and Steel Blue accents.
-- Use "Send test to me" to validate rendering in Gmail/Outlook web.
+- Edit a draft, click "Send test" → arrives via Resend `/emails`.
+- Click "Push draft to Resend" → broadcast appears in Resend dashboard; website shows the broadcast id and "Open in Resend" link; nothing is sent yet.
+- In Resend dashboard, send test + final broadcast to the synced audience.
+- Subscribe a fresh email on dlinrt.eu → appears in Resend audience within seconds.
+- Unsubscribe via the email footer → next page load on the admin page shows the contact moved to unsubscribed and Supabase row updated.
+- Manual "Sync audience with Resend" still reconciles full lists.
+- Daily cron entry visible in `cron.job`; next run produces a `newsletter_audience_sync` row in `admin_audit_log`.
