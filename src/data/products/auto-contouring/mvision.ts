@@ -108,7 +108,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     contactEmail: "info@mvision.ai",
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison — verify MVision inclusion); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes); Kiljunen et al. Diagnostics 2020 (multicenter 30 patients, 6 clinics). Ng et al. Information 2025 systematic review of commercial DL auto-segmentation includes MVision. Duplicate 'HARMONY study' entry (same DOI as Pang 2025) removed 2026-06-15. PubMed verified 2026-03-08; cross-vendor attribution re-checked 2026-06-15.",
+    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison including MVision — direct comparative); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes comparison including MVision - direct copmarative); Kiljunen et al. Diagnostics 2020 (vendors introducing the tool (multicenter 30 patients, 6 clinics)). Ng et al. Information 2025 (systematic review of commercial DL auto-segmentation, including MVision).",
     clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
@@ -142,11 +142,6 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Kiljunen et al. Multicenter DL-based automated CT segmentation for prostate cancer (30 patients, 6 clinics). Diagnostics 2020;10(11):959",
         link: "https://doi.org/10.3390/diagnostics10110959"
-      },
-      {
-        type: "Peer-reviewed Publication",
-        description: "Performance evaluation in gastric MALT lymphoma segmentation (DSC 0.92-0.99). Rep Pract Oncol Radiother",
-        link: "https://doi.org/10.5603/rpor.104144"
       },
       {
         type: "Systematic Review",
