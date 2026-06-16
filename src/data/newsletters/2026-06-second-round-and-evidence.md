@@ -13,15 +13,15 @@ A short companion deck of this newsletter is available at: https://dlinrt.eu/new
 
 ## PREHEADER
 
-Your six-monthly update featuring a refreshed catalogue, a new evidence system, the first certified company, a new reviewer, and MAIRT @ MICCAI.
+Your six-monthly update featuring a refreshed catalog, a new evidence system, the first certified company, a new reviewer, and MAIRT @ MICCAI.
 
 ## BLOCK 1 — 🟢 Second-Round Review Complete
 
-**The full second-round review of the catalogue is done.**
+**The full second-round review of the catalog is done.**
 
 Every product has been re-checked field by field, sources re-disclosed, and inconsistencies cleaned up. Information accuracy across DLinRT.eu has taken a major step forward.
 
-👉 Browse the refreshed catalogue: https://dlinrt.eu/products
+👉 Browse the refreshed catalog: https://dlinrt.eu/products
 
 ![Evidence on three axes — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-03.jpg)
 
@@ -31,7 +31,7 @@ Every product now carries evidence on **three axes**:
 
 - **Evidence Rigor (E0–E3)** — methodological strength of supporting studies.
 - **Clinical Impact (I0–I5)** — how directly the evidence relates to clinical outcomes.
-- **Study Quality attributes** — vendor-independent, multi-centre, multi-national, prospective, externally validated.
+- **Study Quality attributes** — vendor-independent, multi-center, multi-national, prospective, externally validated.
 
 See the live Evidence Matrix: https://dlinrt.eu/dashboard
 Along with the full methodology explanation: https://dlinrt.eu/evidence-impact-guide
@@ -63,7 +63,7 @@ We currently have **27 of 41 companies** with assigned representatives, and are 
 
 A warm welcome to **Szabolcs David**, who joins the DLinRT.eu reviewer team.
 
-Huge thanks to all **12 reviewers** keeping the catalogue trustworthy.
+Huge thanks to all **12 reviewers** keeping the catalog trustworthy.
 
 Full team: https://dlinrt.eu/about
 
@@ -85,9 +85,9 @@ The **first fully dedicated satellite event on radiotherapy at MICCAI** takes pl
 
 ## BLOCK 7b — 🟣 Save the Date · DLinRT Workshop, Utrecht · March 2026
 
-We are happy to pre-announce that **DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026**.
+We are happy to pre-announce that **DLinRT.eu will support organizing a two-day international workshop in Utrecht around March 2026**.
 
-Dates and venue are being finalised — more information will follow (around September) on our website and at **dlinrt.org**.
+Dates and venue are being finalized — more information will follow (around September) on our website and at **dlinrt.org**.
 
 👉 https://dlinrt.eu  ·  https://dlinrt.org
 
@@ -111,9 +111,9 @@ We feel obliged to make our running costs publicly available. They are now publi
 
 ## BLOCK 10 — 🟣 Errare humanum est
 
-Even if we strive for accuracy and correctness, alongside all the AI tooling we still value human revision — and, as the Latins used to say, *errare humanum est*.
+Even if we strive for accuracy and correctness, alongside all the AI tooling, we still value human revision — and, as the Latins used to say, *errare humanum est*.
 
-For any imprecision or error, please do not hesitate to contact us and we will take action:
+For any imprecision or error, please do not hesitate to contact us, and we will take action:
 
 👉 https://dlinrt.eu/support
 
