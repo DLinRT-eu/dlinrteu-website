@@ -53,6 +53,7 @@ export default function NewsletterBroadcast() {
   const [preheader, setPreheader] = useState("");
   const [testEmail, setTestEmail] = useState("");
   const [confirmText, setConfirmText] = useState("");
+  const [previewTheme, setPreviewTheme] = useState<"light" | "dark">("light");
 
   const [syncing, setSyncing] = useState(false);
   const [syncCounts, setSyncCounts] = useState<SyncCounts | null>(null);
