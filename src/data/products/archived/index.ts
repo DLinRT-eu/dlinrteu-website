@@ -11,6 +11,7 @@ import { RADFORMATION_CLEARCHECK_ARCHIVED } from "./radformation-clearcheck";
 import { SUN_NUCLEAR_SUNCHECK_ARCHIVED } from "./sun-nuclear-suncheck";
 import { MEDLEVER_PLATFORM_ARCHIVED } from "./medlever-platform";
 import { AATMA_PRODUCTS } from "./aatma";
+import { SYNTHETICMR_SYMRI_ARCHIVED } from "./syntheticmr-symri";
 
 
 // NOT exported to main products - kept for reference only
@@ -24,5 +25,5 @@ export const ARCHIVED_PRODUCTS: ProductDetails[] = [
   ...SUN_NUCLEAR_SUNCHECK_ARCHIVED,
   ...MEDLEVER_PLATFORM_ARCHIVED,
   ...AATMA_PRODUCTS,
-  
+  ...SYNTHETICMR_SYMRI_ARCHIVED,
 ];

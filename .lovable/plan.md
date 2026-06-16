@@ -1,52 +1,34 @@
-# Evidence Refresh + Hallucination Audit — 7 Products
+## Goal
+Verify SyMRI's underlying technology and, if non-AI, exclude it from the live catalogue per the AI/DL inclusion gate.
 
-Scope (one file each, all under `src/data/products/`):
+## Verification (already completed)
+- SyMRI is a post-processing pipeline that fits T1/T2/PD relaxometry maps from a multi-dynamic multi-echo (MDME) acquisition and synthesizes contrasts from those maps — model-based parameter fitting, not deep learning.
+- FDA 510(k) summaries (K162943, K191036, K233733, K242745) and the SyMRI 11 User Manual describe it as quantitative post-processing; none reference AI/ML.
+- Liu et al. 2022 (Phys. Med. Biol., DOI 10.1088/1361-6560/ac46dd) proposes *adding* a DL network on top of synthetic MRI, implicitly confirming the native SyMRI engine is non-DL.
+- The product description currently calls it "Deep learning-powered" — this is incorrect and unsupported by the vendor IFU or 510(k).
 
-| Product | Likely file |
-|---|---|
-| Elekta IRIS EVO | `reconstruction/elekta.ts` |
-| Canon AiCE (CT) | `reconstruction/canon.ts` |
-| Canon AiCE (MR) | `reconstruction/canon.ts` (or sibling) |
-| Philips SmartDose CT Enhancement | `image-enhancement/philips-smartdose.ts` |
-| GE AIR Recon DL — Enhancement Mode | `image-enhancement/ge-healthcare.ts` |
-| Manteia AccuContour | `auto-contouring/manteia-acculearning.ts` / `manteia.ts` |
-| MIM Contour ProtégéAI+ | `auto-contouring/mim-software.ts` |
+Conclusion: SyMRI Neuro fails the catalogue inclusion gate (AI/DL technology threshold). Archive it.
 
-## Workflow per product
+## Changes
 
-1. **Read current state** — full file, capture existing `evidence[]`, `evidenceRigor(+Notes)`, `clinicalImpact(+Notes)`, `adoptionReadiness(+Notes)`, `evaluationData`, `evidenceVendorIndependent/MultiCenter/ExternalValidation`, `clinicalEvidence`, `source`, `lastRevised`.
-2. **Verify every existing citation** via Crossref (`api.crossref.org/works/{DOI}`) and PubMed/Europe PMC. For each entry check: DOI resolves, title matches, authors match, journal + year + volume/pages match, study is actually about *this* product (not a same-vendor sibling).
-   - Verified → keep, normalise to the standard citation shape (`type`, structured `authors/year/title/journal/locator/doi`, `link`).
-   - Unverifiable / mismatched → **remove** from the file and log to the audit report with reason (no DOI hit, wrong product, wrong year, fabricated authors, etc.).
-3. **Search for new evidence** (PubMed, Crossref, Europe PMC, Google Scholar via `websearch`) using product name + vendor + common synonyms. Capture peer-reviewed studies from ~2019 onward; include vendor-independent clinical validations, multi-centre studies, and meta-analyses.
-4. **Re-score E / I / R** per `docs/review/GUIDE.md` and `src/data/evidence-impact-levels.ts`, using the strongest verified evidence. Update study-quality flags (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceExternalValidation`) and write a one-paragraph rationale into each `*Notes` field naming the studies that justify the score.
-5. **Refresh `evaluationData`** only if a verified study changes datasetSize / sites / endpoint; otherwise leave intact (Minimal Intervention).
-6. **Bump** `lastRevised` and `lastUpdated` to today (`2026-06-16`) and append new sources to `source`.
+1. **Move** `src/data/products/image-synthesis/syntheticmr.ts` → `src/data/products/archived/syntheticmr-symri.ts`
+   - Rename exports: `SyMRINeuro` and `SYNTHETICMR_PRODUCTS` → `SYNTHETICMR_SYMRI_ARCHIVED`.
+   - Strip the inaccurate "Deep learning-powered" wording from `description`/`keyFeatures` and replace with a neutral note that the engine is MDME-based quantitative relaxometry, archived as non-AI.
 
-## Hallucination handling
+2. **Update** `src/data/products/image-synthesis/index.ts` — remove the `syntheticmr` import and its spread from the exported array.
 
-- Removed entries logged to `/mnt/documents/evidence-audit-2026-06-16.md` with: product id, removed entry verbatim, reason (DOI not found / title mismatch / wrong product / etc.), and the verification attempt (which DOI/Crossref/PubMed query failed).
-- A short summary block per product (kept → N, removed → N, added → N, score change Y/N) precedes the detail.
+3. **Update** `src/data/products/archived/index.ts` — import `SYNTHETICMR_SYMRI_ARCHIVED` and add to `ARCHIVED_PRODUCTS`.
 
-## Inclusion guard
+4. **Update** `src/data/products/archived/README.md`:
+   - Add a row: `SyMRI Neuro | SyntheticMR | MDME quantitative relaxometry / model-based fitting; no AI/ML in vendor IFU or FDA 510(k) (K162943, K191036, K233733, K242745)`.
+   - Bump "Last updated" date.
 
-The 4 reconstruction/enhancement products (IRIS EVO, AiCE CT, AiCE MR, SmartDose, AIR Recon DL) must remain AI/DL-based — if a citation describes a classical iterative-reconstruction or filter-based variant of the same brand, it is removed (per the AI/DL inclusion gate in core memory).
+5. **Check** `src/data/companies/specialized-solutions.ts` for any SyntheticMR product-count references that need adjusting (read-only confirmation; only edit if a hardcoded list exists).
 
-## Out of scope (Minimal Intervention)
+## Out of scope
+- No UI, schema, or type changes (Minimal Intervention).
+- No edits to other image-synthesis products.
+- No regeneration of the newsletter deck in this turn.
 
-- No edits to UI components, schema, types, or non-evidence product fields.
-- No changes to other products in the same files.
-- No rewriting of `trainingData` or regulatory blocks unless a verified source proves a current value is wrong (then logged as a separate finding, not silently changed).
-
-## Deliverables
-
-1. Edited `.ts` files for the 7 products (evidence array, scores, notes, flags, dates, source line).
-2. `/mnt/documents/evidence-audit-2026-06-16.md` — per-product kept/removed/added table, score deltas, list of search queries run, list of DOIs verified.
-3. Final chat summary listing per product: # citations before → after, score change (if any), and whether any hallucinations were removed.
-
-## Technical notes
-
-- Citation shape follows `src/lib/formatCitation.ts` (`RawEvidenceObject`): prefer structured `authors/year/title/journal/doi` plus `description` + `link`. DOI link form: `https://doi.org/<DOI>`.
-- Verification commands: `curl -s https://api.crossref.org/works/<DOI>` and Europe PMC `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=...&format=json`.
-- Use `websearch--web_search` with `site:pubmed.ncbi.nlm.nih.gov` and `site:doi.org` for discovery; never invent a DOI.
-- All edits via `code--line_replace` on the existing `evidence: [...]` blocks; no whole-file rewrites.
+## Deliverable
+SyMRI Neuro no longer appears in the live catalogue; entry preserved under `archived/` with documented reason and verification sources.

@@ -1,6 +1,11 @@
+// Archived 2026-06-16: SyMRI is a post-processing pipeline based on
+// multi-dynamic multi-echo (MDME) quantitative relaxometry and model-based
+// T1/T2/PD parameter fitting — not deep learning. Verified against FDA
+// 510(k) summaries K162943, K191036, K233733, K242745 and the SyMRI 11
+// User Manual; none reference AI/ML. Fails the AI/DL inclusion gate.
 import { ProductDetails } from "@/types/productDetails";
 
-export const SyMRINeuro: ProductDetails = {
+const SyMRINeuro: ProductDetails = {
   id: "syntheticmr-neuro",
   trainingData: {
       disclosureLevel: "minimal",
@@ -75,15 +80,15 @@ export const SyMRINeuro: ProductDetails = {
     processingTime: "Minutes per dataset",
     triggerForAnalysis: "Automatic after acquisition"
   },
-  description: "Deep learning-powered MR image synthesis solution that generates multiple contrasts from a single MRI scan.",
+  description: "MDME-based quantitative MR post-processing (T1/T2/PD relaxometry + synthetic contrast generation). Archived from the live catalogue: no deep-learning component in the vendor IFU or FDA 510(k); does not meet the AI/DL inclusion gate.",
   keyFeatures: [
-    "Deep learning-based synthetic contrast generation",
-    "Quantitative tissue mapping (T1, T2, PD)",
+    "Quantitative tissue mapping (T1, T2, PD) from MDME acquisition",
+    "Synthetic contrast generation via model-based fitting (non-AI)",
     "Reduced scan time",
     "Streamlined workflow"
   ],
-  lastRevised: "2026-06-15",
-  lastUpdated: "2026-06-15",
+  lastRevised: "2026-06-16",
+  lastUpdated: "2026-06-16",
   releaseDate: "2024-12-06",
   certification: "CE & FDA",
   evidenceRigor: "E2",
@@ -94,7 +99,8 @@ export const SyMRINeuro: ProductDetails = {
   anatomicalLocation: ["Brain"],
   evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
   clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology.",
-  adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+  adoptionReadinessNotes: "Archived: non-AI technology, excluded from live catalogue per inclusion gate.",
+  usesAI: false,
   technicalSpecifications: {
     input: ["Single MRI sequence"],
     output: ["Multiple synthetic contrasts"],
@@ -104,4 +110,5 @@ export const SyMRINeuro: ProductDetails = {
   }
 };
 
-export const SYNTHETICMR_PRODUCTS: ProductDetails[] = [SyMRINeuro];
+export const SYNTHETICMR_SYMRI_ARCHIVED: ProductDetails[] = [SyMRINeuro];
+
