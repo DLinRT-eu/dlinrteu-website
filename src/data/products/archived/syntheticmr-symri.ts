@@ -1,6 +1,11 @@
+// Archived 2026-06-16: SyMRI is a post-processing pipeline based on
+// multi-dynamic multi-echo (MDME) quantitative relaxometry and model-based
+// T1/T2/PD parameter fitting — not deep learning. Verified against FDA
+// 510(k) summaries K162943, K191036, K233733, K242745 and the SyMRI 11
+// User Manual; none reference AI/ML. Fails the AI/DL inclusion gate.
 import { ProductDetails } from "@/types/productDetails";
 
-export const SyMRINeuro: ProductDetails = {
+const SyMRINeuro: ProductDetails = {
   id: "syntheticmr-neuro",
   trainingData: {
       disclosureLevel: "minimal",
