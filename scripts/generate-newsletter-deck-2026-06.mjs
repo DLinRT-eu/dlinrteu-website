@@ -184,7 +184,7 @@ const W = 13.333, H = 7.5;
   );
 }
 
-// ---------- Slide 5: What's next ----------
+// ---------- Slide 6: What's next ----------
 {
   const s = pres.addSlide();
   s.background = { color: TEXT };
