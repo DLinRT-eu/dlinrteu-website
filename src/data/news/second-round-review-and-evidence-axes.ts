@@ -55,11 +55,23 @@ The first fully dedicated satellite event on radiotherapy at MICCAI takes place 
 
 👉 [MAIRT workshop](https://miart-workshop.github.io/)
 
+## 🏛️ UMC Utrecht Supports the Platform
+
+Through the **Radiotherapy Medical Physics Traineeship**, **UMC Utrecht** has agreed to cover the running costs of DLinRT.eu, safeguarding the **independence and continuity** of the initiative. A huge thank you to the **Radiotherapy Department** for this support.
+
+## 🔎 Running Costs, in the Open
+
+We feel obliged to make our running costs publicly available. They are now published — and will be kept up to date — at [dlinrt.eu/transparency](https://dlinrt.eu/transparency).
+
+## 🤝 Errare humanum est
+
+Even if we strive for accuracy and correctness, alongside all the AI tooling we still value human revision — and, as the Latins used to say, *errare humanum est*. For any imprecision or error, please do not hesitate to [contact us](https://dlinrt.eu/support) and we will take action.
+
 ## 📎 Newsletter Pack
 
-A short deck (cumulative product timeline · primary-category pie chart · company logo wall) is available alongside this update:
+A short deck (cumulative product timeline · primary-category pie chart · company logo wall · support & transparency) is available alongside this update:
 
 - [PDF deck](/newsletters/2026-06/dlinrt-2026-06-update.pdf)
-- Slide images: \`/newsletters/2026-06/slide-01.jpg\` … \`slide-05.jpg\`
+- Slide images: \`/newsletters/2026-06/slide-01.jpg\` … \`slide-06.jpg\`
 `,
 };
