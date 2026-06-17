@@ -158,7 +158,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           
           {/* Model Card Export Section */}
           <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Export Model Card</h3>
+            <h2 className="text-lg font-medium text-gray-900 mb-4">Export Model Card</h2>
             <div className="space-y-3">
               <Button
                 onClick={handleExportPDF}
@@ -259,7 +259,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <FHIRExportSection product={product} />
           {/* Add revision status component */}
           <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Revision Information</h3>
+            <h2 className="text-lg font-medium text-gray-900 mb-4">Revision Information</h2>
             <ProductRevisionStatus product={product} />
           </div>
         </div>
