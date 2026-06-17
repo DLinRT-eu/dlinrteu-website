@@ -37,10 +37,10 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         },
         evidenceRigor: "E2",
         evidenceRigorNotes:
-          "Multiple independent, peer-reviewed clinical dosimetric validation studies directly evaluating Philips MRCAT for prostate: Tyagi 2017, Christiansen 2017, Kemppainen 2017, Maspero 2017a (photon, DOI aa4fe7) and Maspero 2017b (proton, DOI aa9677). Vendor-independent and multi-centre, though all retrospective and limited to adult prostate cohorts. MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed because it evaluates Spectronic MRiPlanner, not Philips MRCAT. Not a DL component, so rubric applied by analogy.",
+          "Multiple independent, peer-reviewed clinical dosimetric validation studies directly evaluating Philips MRCAT for prostate: Tyagi 2017, Christiansen 2017, Kemppainen 2017, Maspero 2017a (photon, DOI aa4fe7) and Maspero 2017b (proton, DOI aa9677). Vendor-independent and multi-center, though all retrospective and limited to adult prostate cohorts. MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed because it evaluates Spectronic MRiPlanner, not Philips MRCAT. Not a DL component, so rubric applied by analogy.",
         clinicalImpact: "I1",
         clinicalImpactNotes:
-          "Enables MR-only prostate workflows in routine clinical use at several centres, eliminating the planning CT for selected patients. Dosimetric equivalence to CT-based planning demonstrated, but no randomised or large-scale outcome data.",
+          "Enables MR-only prostate workflows in routine clinical use at several centers, eliminating the planning CT for selected patients. Dosimetric equivalence to CT-based planning demonstrated, but no randomised or large-scale outcome data.",
       },
       "Auto-Contouring": {
         usesAI: true,
@@ -149,9 +149,9 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "I1",
     evidenceRigorNotes: "Aggregate across modules. Image Synthesis (MRCAT): E2 — independent peer-reviewed dosimetric validation studies directly on MRCAT prostate (Tyagi 2017 DOI aa5452, Christiansen 2017, Kemppainen 2017, Maspero 2017 DOI aa4fe7 photon, Maspero 2017 DOI aa9677 proton). MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) included as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed 2026-06-15 — it validates Spectronic MRiPlanner, not Philips MRCAT. Auto-Contouring: E0 — no module-specific peer-reviewed publications. See categoryEvidence for per-module detail.",
-    clinicalImpactNotes: "Aggregate. MRCAT enables MR-only prostate workflows in clinical use at several centres (I1). Auto-Contouring component has no published clinical impact data (I0).",
+    clinicalImpactNotes: "Aggregate. MRCAT enables MR-only prostate workflows in clinical use at several centers (I1). Auto-Contouring component has no published clinical impact data (I0).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "MRCAT MR-only prostate workflow is in routine clinical use at multiple centres with peer-reviewed dosimetric validation (including photon and proton MR-only prostate, Maspero 2017a/b); auto-contouring module less well characterised.",
+    adoptionReadinessNotes: "MRCAT MR-only prostate workflow is in routine clinical use at multiple centers with peer-reviewed dosimetric validation (including photon and proton MR-only prostate, Maspero 2017a/b); auto-contouring module less well characterised.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

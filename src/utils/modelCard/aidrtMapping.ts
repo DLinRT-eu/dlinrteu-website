@@ -134,7 +134,7 @@ export const aidrtOnlyFields = [
   "training_data.validation_data_partition",
   "training_data.weights_initialization",
   "training_data.epochs",
-  "training_data.optimiser",
+  "training_data.optimizer",
   "training_data.learning_rate",
   "training_data.train_and_validation_loss_curves",
   "training_data.model_choice_criteria",

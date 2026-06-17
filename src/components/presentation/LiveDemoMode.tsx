@@ -183,7 +183,7 @@ const createSlides = () => {
       subtitle: "Dual-axis scoring framework for AI products",
       description: "Evaluate clinical evidence and workflow impact",
       keyPoints: [
-        "Evidence levels: E0 (no data) → E3 (multi-centre RCTs)",
+        "Evidence levels: E0 (no data) → E3 (multi-center RCTs)",
         "Impact levels: I0 (no workflow change) → I5 (full automation)",
         "Systematic evaluation methodology",
         "Guidance for procurement decisions",

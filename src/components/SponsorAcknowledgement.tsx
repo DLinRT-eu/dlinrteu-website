@@ -30,7 +30,7 @@ const SponsorAcknowledgement = ({ variant = "compact" }: Props) => {
           </h3>
           <p className="text-sm text-muted-foreground">
             {isFull
-              ? "All operational costs of DLinRT.eu — hosting, domain, and development tooling — are currently covered by UMC Utrecht. Their support keeps this catalogue free, independent, and openly accessible to the radiotherapy community."
+              ? "All operational costs of DLinRT.eu — hosting, domain, and development tooling — are currently covered by UMC Utrecht. Their support keeps this catalog free, independent, and openly accessible to the radiotherapy community."
               : "UMC Utrecht generously covers the operational costs of DLinRT.eu, allowing us to keep this resource free and openly accessible."}
           </p>
           <a

@@ -238,7 +238,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",
-    evidenceRigorNotes: "Limited peer-reviewed validation (Medical Physics 2023; ESTRO 2022 abstract). Pending broader independent multi-centre evaluation.",
+    evidenceRigorNotes: "Limited peer-reviewed validation (Medical Physics 2023; ESTRO 2022 abstract). Pending broader independent multi-center evaluation.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Reported geometric accuracy and workflow time savings; no prospective clinical outcome data identified.",
     adoptionReadiness: "R3",

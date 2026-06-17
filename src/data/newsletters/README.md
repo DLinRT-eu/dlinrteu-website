@@ -13,7 +13,7 @@ Each newsletter is split into discrete blocks parsed by `supabase/functions/_sha
 - `## SUBJECT LINE` — email subject.
 - `## PREHEADER` — preview text.
 - `## BLOCK N — <label>` — one section block. Accent color is inferred from the leading emoji:
-  - 🟢 **Green** — product / catalogue updates
+  - 🟢 **Green** — product / catalog updates
   - 🟣 **Violet** — community / reviewers
   - 🔵 **Blue** — platform / backbone
   - 🟡 **Amber** — events / calls to action

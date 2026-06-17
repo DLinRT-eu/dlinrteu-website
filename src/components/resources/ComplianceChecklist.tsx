@@ -46,8 +46,8 @@ const ComplianceChecklist = () => {
     },
     {
       title: "Plan for HTA & market access",
-      description: "Define the PICO (Population, Intervention, Comparator, Outcomes) for your AI tool, identify the relevant comparator (e.g., manual contouring, conventional planning), and align clinical evidence with EU HTAR (2021/2282) Joint Clinical Assessment requirements. Consider real-world evidence, organisational impact and budget impact for national HTA bodies.",
-      details: "Engage early with HTA bodies via Joint Scientific Consultations, follow EUnetHTA 21 methodology, and ensure your evidence package addresses clinical effectiveness, safety, ethical/legal and organisational dimensions beyond regulatory clearance."
+      description: "Define the PICO (Population, Intervention, Comparator, Outcomes) for your AI tool, identify the relevant comparator (e.g., manual contouring, conventional planning), and align clinical evidence with EU HTAR (2021/2282) Joint Clinical Assessment requirements. Consider real-world evidence, organizational impact and budget impact for national HTA bodies.",
+      details: "Engage early with HTA bodies via Joint Scientific Consultations, follow EUnetHTA 21 methodology, and ensure your evidence package addresses clinical effectiveness, safety, ethical/legal and organizational dimensions beyond regulatory clearance."
     }
   ];
 

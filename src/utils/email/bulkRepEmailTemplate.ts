@@ -90,7 +90,7 @@ export const AVAILABLE_TOKENS: { token: string; description: string }[] = [
   { token: "{{last_name}}", description: "Representative's last name" },
   { token: "{{full_name}}", description: "Full name" },
   { token: "{{company_name}}", description: "Company name" },
-  { token: "{{company_url}}", description: "Link to the company's catalogue page" },
+  { token: "{{company_url}}", description: "Link to the company's catalog page" },
   { token: "{{rep_position}}", description: "Representative's position" },
   { token: "{{sender_name}}", description: "Your email (admin sending)" },
   { token: "{{today}}", description: "Today's date (YYYY-MM-DD)" },

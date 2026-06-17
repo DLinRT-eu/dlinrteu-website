@@ -6,7 +6,7 @@ import { ProductDetails } from "@/types/productDetails";
  * Last verified: 2026-01-23
  * 
  * Note: Model list based on publicly available information. 
- * Some models may require verification against latest catalogue.
+ * Some models may require verification against latest catalog.
  */
 export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
   {

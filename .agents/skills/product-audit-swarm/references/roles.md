@@ -29,7 +29,7 @@ Fields: `description`, `features`, `keyFeatures`, `usesAI`, `category`,
 Checks per `mem://policy/product-inclusion-criteria` and
 `mem://constraints/ai-dl-technology-threshold`:
 - An AI/DL component for radiotherapy is described in the product text.
-- Classical image processing only ⇒ `error` (does not belong in catalogue).
+- Classical image processing only ⇒ `error` (does not belong in catalog).
 - Generic QA without `monitorsAIProducts: true` ⇒ `error` unless
   `usesAI: true` is documented with the AI/DL component.
 - `usesAI` default is `true`; QA/monitoring tools must be explicit per
@@ -61,7 +61,7 @@ Checks:
   use `DICOM-RTSTRUCT`, `DICOM-RTPLAN`, `DICOM-RTDOSE` (not "DICOM RT
   Struct" etc.).
 - `modality` is an array; single values normalised to array form.
-- `technology.integration` entries spelled consistently with other catalogue
+- `technology.integration` entries spelled consistently with other catalog
   entries (Eclipse, RayStation, Pinnacle, Monaco, MIM, Velocity, ...).
 - `technology.processingTime` quotes the vendor figure, not internal tests.
 

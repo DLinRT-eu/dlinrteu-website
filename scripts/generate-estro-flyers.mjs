@@ -436,7 +436,7 @@ function processStrip(doc, y, steps) {
 function statsStrip(doc, y, stats) {
   const H = 96;
   doc.roundedRect(MARGIN, y, PAGE_W - MARGIN * 2, H, 8).fill(BG_TINT);
-  doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(11).text("The DLinRT.eu catalogue today", MARGIN + 14, y + 10);
+  doc.fillColor(PRIMARY_DARK).font("BodyBold").fontSize(11).text("The DLinRT.eu catalog today", MARGIN + 14, y + 10);
 
   const colW = (PAGE_W - MARGIN * 2) / stats.length;
   stats.forEach((s, i) => {
@@ -572,7 +572,7 @@ async function buildCompaniesFlyer() {
 
   heroBand(doc, {
     title: "Claim your products. Get verified.",
-    subhead: "The independent European catalogue of AI in radiotherapy — for manufacturers.",
+    subhead: "The independent European catalog of AI in radiotherapy — for manufacturers.",
     qr: qrTop,
   });
 
@@ -609,7 +609,7 @@ async function buildCompaniesFlyer() {
 
   y = quoteBand(doc, y, [
     "Already used by clinicians and researchers across Europe and beyond.",
-    "Join the catalogue to keep your AI product information current and verified.",
+    "Join the catalog to keep your AI product information current and verified.",
   ]);
 
   footerBand(doc, qrBottom, "Scan to register — it's free.", "dlinrt.eu/auth?role=company");
@@ -629,7 +629,7 @@ async function buildCommunityFlyer() {
 
   heroBand(doc, {
     title: "Find, compare & evaluate AI in radiotherapy.",
-    subhead: "The independent European catalogue — for clinicians, physicists & researchers.",
+    subhead: "The independent European catalog — for clinicians, physicists & researchers.",
     qr: qrTop,
   });
 
@@ -644,7 +644,7 @@ async function buildCommunityFlyer() {
   const { products, categories } = countProducts();
   const companies = countCompanies();
   y = statsStrip(doc, y, [
-    { value: `${products}+`, label: "AI products catalogued" },
+    { value: `${products}+`, label: "AI products catalogd" },
     { value: `${companies}+`, label: "Manufacturers listed" },
     { value: `${categories}`, label: "Workflow categories" },
     { value: "100%", label: "Free & independent" },

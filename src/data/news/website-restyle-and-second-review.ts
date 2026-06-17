@@ -19,6 +19,6 @@ Many thanks to **Mustafa Kadhim** — admin and reviewer on the DLinRT.eu team �
 
 ## 🔍 Second-Round Review in Progress
 
-Our internal full second-round review is currently underway for all products in the catalogue. By mid-June we will be online with the updated entries and will proactively reach out to companies via the certification workflow to verify the information.
+Our internal full second-round review is currently underway for all products in the catalog. By mid-June we will be online with the updated entries and will proactively reach out to companies via the certification workflow to verify the information.
 `,
 };

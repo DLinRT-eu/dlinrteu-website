@@ -9,11 +9,11 @@ export const secondRoundReviewAndEvidenceAxes: NewsItem = {
   date: "2026-06-16",
   title: "Second-Round Review Complete · 3-Axis Evidence System Live · Certification Round Opens",
   summary:
-    "We finished the full second-round review of the catalogue, surfaced a new 3-axis evidence system on every product, opened the official company certification round, welcomed a new reviewer, and lined up the MAIRT @ MICCAI satellite event.",
+    "We finished the full second-round review of the catalog, surfaced a new 3-axis evidence system on every product, opened the official company certification round, welcomed a new reviewer, and lined up the MAIRT @ MICCAI satellite event.",
   content: `
 ## 🔍 Second-Round Review Complete
 
-The full second-round review of every product in the catalogue is now complete. Hundreds of fields have been re-checked, sources re-disclosed, and inconsistencies cleaned up — accuracy across the database has taken a major step forward.
+The full second-round review of every product in the catalog is now complete. Hundreds of fields have been re-checked, sources re-disclosed, and inconsistencies cleaned up — accuracy across the database has taken a major step forward.
 
 ## 📊 Headline Feature: 3-Axis Evidence System
 
@@ -21,9 +21,9 @@ Every product now carries evidence ratings on three axes:
 
 - **Evidence Rigor (E0–E3)** — methodological strength of supporting studies.
 - **Clinical Impact (I0–I5)** — how directly the evidence speaks to clinical outcomes.
-- **Study Quality attributes** — vendor-independent, multi-centre, multi-national, prospective, externally validated.
+- **Study Quality attributes** — vendor-independent, multi-center, multi-national, prospective, externally validated.
 
-Browse the [Evidence Matrix dashboard](https://dlinrt.eu/dashboard) to see how the catalogue distributes across rigor and impact.
+Browse the [Evidence Matrix dashboard](https://dlinrt.eu/dashboard) to see how the catalog distributes across rigor and impact.
 
 ## 🏅 Company Certification Round Opens
 
@@ -43,7 +43,7 @@ We currently have **28 of 41 companies with assigned representatives** and are a
 
 ## 👋 New Reviewer: Welcome Szabolcs David
 
-A warm welcome to **Szabolcs David**, who joins the reviewer team. Huge thanks to all **12 reviewers** keeping the catalogue trustworthy — see the full list on the [About page](https://dlinrt.eu/about).
+A warm welcome to **Szabolcs David**, who joins the reviewer team. Huge thanks to all **12 reviewers** keeping the catalog trustworthy — see the full list on the [About page](https://dlinrt.eu/about).
 
 ## 📣 Call for Reviewers — Next Round Nov 1 → Dec 15, 2026
 
@@ -57,7 +57,7 @@ The first fully dedicated satellite event on radiotherapy at MICCAI takes place 
 
 ## 🗓️ Save the Date: DLinRT Workshop in Utrecht · March 2026
 
-We are happy to pre-announce that **DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026**. Dates and venue are being finalised — more information will follow (around September) on our website and at [dlinrt.org](https://dlinrt.org).
+We are happy to pre-announce that **DLinRT.eu will support the organization of a two-day international workshop in Utrecht around March 2026**. Dates and venue are being finalised — more information will follow (around September) on our website and at [dlinrt.org](https://dlinrt.org).
 
 ## 🏛️ UMC Utrecht Supports the Platform
 

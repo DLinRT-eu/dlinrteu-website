@@ -80,7 +80,7 @@ const SyMRINeuro: ProductDetails = {
     processingTime: "Minutes per dataset",
     triggerForAnalysis: "Automatic after acquisition"
   },
-  description: "MDME-based quantitative MR post-processing (T1/T2/PD relaxometry + synthetic contrast generation). Archived from the live catalogue: no deep-learning component in the vendor IFU or FDA 510(k); does not meet the AI/DL inclusion gate.",
+  description: "MDME-based quantitative MR post-processing (T1/T2/PD relaxometry + synthetic contrast generation). Archived from the live catalog: no deep-learning component in the vendor IFU or FDA 510(k); does not meet the AI/DL inclusion gate.",
   keyFeatures: [
     "Quantitative tissue mapping (T1, T2, PD) from MDME acquisition",
     "Synthetic contrast generation via model-based fitting (non-AI)",
@@ -99,7 +99,7 @@ const SyMRINeuro: ProductDetails = {
   anatomicalLocation: ["Brain"],
   evidenceRigorNotes: "Multiple peer-reviewed publications on SyMRI quantitative mapping, though primarily focused on diagnostic neuroradiology rather than radiotherapy applications.",
   clinicalImpactNotes: "No RT-specific clinical outcome data. Primary use case is diagnostic neuroradiology.",
-  adoptionReadinessNotes: "Archived: non-AI technology, excluded from live catalogue per inclusion gate.",
+  adoptionReadinessNotes: "Archived: non-AI technology, excluded from live catalog per inclusion gate.",
   usesAI: false,
   technicalSpecifications: {
     input: ["Single MRI sequence"],

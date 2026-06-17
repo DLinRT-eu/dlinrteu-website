@@ -43,8 +43,8 @@ function EvidenceImpactSummary() {
             <p className="text-xs font-semibold text-primary mb-2">Evidence Axis</p>
             <ul className="text-xs text-muted-foreground space-y-1">
               <li><span className="font-medium text-foreground">E0</span> — No published data</li>
-              <li><span className="font-medium text-foreground">E1</span> — Single-centre studies</li>
-              <li><span className="font-medium text-foreground">E2</span> — Multi-centre studies</li>
+              <li><span className="font-medium text-foreground">E1</span> — Single-center studies</li>
+              <li><span className="font-medium text-foreground">E2</span> — Multi-center studies</li>
               <li><span className="font-medium text-foreground">E3</span> — RCTs / systematic reviews</li>
             </ul>
           </div>

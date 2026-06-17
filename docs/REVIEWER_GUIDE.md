@@ -366,7 +366,7 @@ Anyone can report a missing product or incorrect information without an account.
 
 1. Go to <https://dlinrt.eu/support#product-feedback>
 2. Select the type of feedback:
-   - *"A product is missing from the catalogue"*
+   - *"A product is missing from the catalog"*
    - *"Missing or incorrect information on an existing product"*
 3. Fill in the required fields: product name, details (min. 10 characters), your name, and email
 4. Optionally add the company name and a supporting URL

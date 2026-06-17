@@ -94,12 +94,12 @@ const AiAutoContouringComparison = () => {
           <p>
             Auto-contouring is the delineation of organs at risk and target volumes on planning images.
             Deep-learning models now perform this task in seconds, with growing regulatory backing and a
-            rapidly maturing evidence base. DLinRT.eu catalogues every AI/DL product cleared for
+            rapidly maturing evidence base. DLinRT.eu catalogs every AI/DL product cleared for
             radiotherapy use; this guide summarises how to evaluate and compare them.
           </p>
           <p>
             All products referenced below are listed in the live{" "}
-            <Link to="/products" className="text-[#5090D0] underline">DLinRT product catalogue</Link>,
+            <Link to="/products" className="text-[#5090D0] underline">DLinRT product catalog</Link>,
             which is peer-reviewed and updated continuously.
           </p>
         </section>
@@ -109,7 +109,7 @@ const AiAutoContouringComparison = () => {
           <ul className="space-y-2 list-disc pl-6 text-slate-700">
             <li>
               <strong>Regulatory approval</strong> — CE (MDR), FDA 510(k), NMPA, TGA, TFDA, PMDA, MFDS,
-              Health Canada, ANVISA, or MHRA/UKCA clearance is required for catalogue inclusion.
+              Health Canada, ANVISA, or MHRA/UKCA clearance is required for catalog inclusion.
             </li>
             <li>
               <strong>Evidence quality</strong> — dual-axis scoring of Rigor (E0–E3) and Clinical Impact
@@ -214,7 +214,7 @@ const AiAutoContouringComparison = () => {
                 and thorax differ widely in vendor coverage and evidence depth.
               </li>
               <li>
-                For MR-Linac or online adaptive workflows, prioritise MR and CBCT support plus low
+                For MR-Linac or online adaptive workflows, prioritize MR and CBCT support plus low
                 inference latency.
               </li>
               <li>

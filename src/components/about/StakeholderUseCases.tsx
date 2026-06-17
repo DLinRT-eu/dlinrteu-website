@@ -48,7 +48,7 @@ const USE_CASES: UseCase[] = [
     icon: Microscope,
     audience: "Researcher",
     description: "Academics and clinical scientists planning validation or comparative studies.",
-    question: "Which products lack independent or multi-centre validation?",
+    question: "Which products lack independent or multi-center validation?",
     view: "Evidence Rigor filters + study-quality sub-attributes",
     viewLink: "/products",
     thresholds: "Filter E0–E1 with vendorIndependent=false to surface validation opportunities.",
@@ -62,7 +62,7 @@ const StakeholderUseCases = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Who DLinRT.eu Helps & How</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            The catalogue answers different questions for different stakeholders. Below are the four
+            The catalog answers different questions for different stakeholders. Below are the four
             primary audiences, the questions they bring, and the view that best answers them.
           </p>
           <p className="text-sm text-muted-foreground max-w-3xl mx-auto mt-2">

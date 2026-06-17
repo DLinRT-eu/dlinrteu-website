@@ -15,9 +15,9 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     evaluationData: {
         primaryEndpoint: "Geometric and dosimetric accuracy (e.g., DSC)",
         source: "Pang et al. NPJ Digit Med 2025 (DOI: 10.1038/s41746-025-01624-z)",
-        description: "Pang et al. (NPJ Digit Med 2025) performed a multicentre evaluation of deep learning CT autosegmentation of Head & Neck organs across 9 clinics in 7 countries. Another study on gastric MALT lymphoma reported DSC ranges of 0.92-0.99.",
+        description: "Pang et al. (NPJ Digit Med 2025) performed a multicenter evaluation of deep learning CT autosegmentation of Head & Neck organs across 9 clinics in 7 countries. Another study on gastric MALT lymphoma reported DSC ranges of 0.92-0.99.",
         sourceUrl: "https://doi.org/10.1038/s41746-025-01624-z",
-        studyDesign: "Multicentre retrospective evaluation (9 clinics, 7 countries)",
+        studyDesign: "Multicenter retrospective evaluation (9 clinics, 7 countries)",
         results: "DSC 0.92-0.99 for gastric MALT lymphoma segmentation."
     },
     name: "Contour+",
@@ -108,10 +108,10 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     contactEmail: "info@mvision.ai",
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicentre H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison including MVision — direct comparative); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes comparison including MVision - direct copmarative); Kiljunen et al. Diagnostics 2020 (vendors introducing the tool (multicenter 30 patients, 6 clinics)). Ng et al. Information 2025 (systematic review of commercial DL auto-segmentation, including MVision).",
-    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicentre validation shows auto-segmentation harmonizes contouring practices globally.",
+    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicenter H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison including MVision — direct comparative); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes comparison including MVision - direct copmarative); Kiljunen et al. Diagnostics 2020 (vendors introducing the tool (multicenter 30 patients, 6 clinics)). Ng et al. Information 2025 (systematic review of commercial DL auto-segmentation, including MVision).",
+    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicenter validation shows auto-segmentation harmonizes contouring practices globally.",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
+    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -120,7 +120,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Pang et al. Multicentre evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312. Direct evaluation of MVision-class DL auto-segmentation.",
+        description: "Pang et al. Multicenter evaluation of deep learning CT autosegmentation of H&N (9 clinics, 7 countries). NPJ Digit Med 2025;8(1):312. Direct evaluation of MVision-class DL auto-segmentation.",
         link: "https://doi.org/10.1038/s41746-025-01624-z"
       },
       {

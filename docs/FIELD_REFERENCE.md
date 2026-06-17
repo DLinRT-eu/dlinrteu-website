@@ -257,7 +257,7 @@ Products can have safety-related corrective actions tracked from regulatory data
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `usesAI` | ➖ | Indicates if product uses AI/DL technology. | Boolean. | Set `false` for traditional QA tools that don't use AI. |
-| `monitorsAIProducts` | ➖ | For Performance Monitor: AI products it monitors/validates. | Array of product names or categories. | List specific AI products or generic categories like "Auto-Contouring outputs". A `usesAI: false` product is **included in the catalogue** only when its `intendedUseStatement` (or equivalent labeling) explicitly references AI/DL-generated outputs (e.g., AI contours, AI plans). General QA/monitoring tools without such references stay excluded. |
+| `monitorsAIProducts` | ➖ | For Performance Monitor: AI products it monitors/validates. | Array of product names or categories. | List specific AI products or generic categories like "Auto-Contouring outputs". A `usesAI: false` product is **included in the catalog** only when its `intendedUseStatement` (or equivalent labeling) explicitly references AI/DL-generated outputs (e.g., AI contours, AI plans). General QA/monitoring tools without such references stay excluded. |
 
 | `integratedModules` | ➖ | For Platform products: included modules/components. | Array of `{ name, description, category, productUrl, keyFeatures }`. | Document each integrated module separately. |
 | `partOf` | ➖ | Indicates product is part of a larger system. | Object with `name`, `version`, `productUrl`, `relationship`. | Use for modules that require parent platform. |
@@ -414,13 +414,13 @@ Need more context or a new field? Open an issue referencing this document and in
 
 **Last Updated**: June 16, 2026
 
-## Catalogue Inclusion Gate (`hasRegulatoryApproval`)
+## Catalog Inclusion Gate (`hasRegulatoryApproval`)
 
-A product is listed in the public catalogue only when it meets the regulatory-approval gate. This is enforced both by data conventions and by the inclusion helper used by category pages and exports.
+A product is listed in the public catalog only when it meets the regulatory-approval gate. This is enforced both by data conventions and by the inclusion helper used by category pages and exports.
 
 | Field | Type | Purpose | Allowed Values / Format |
 | --- | --- | --- | --- |
-| `hasRegulatoryApproval` | Boolean (derived/explicit) | Whether the product qualifies for the live catalogue. | `true` when one of: CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA disclosed in `certification` / `regulatory.*`. Otherwise `false` (route to pipeline). |
+| `hasRegulatoryApproval` | Boolean (derived/explicit) | Whether the product qualifies for the live catalog. | `true` when one of: CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA disclosed in `certification` / `regulatory.*`. Otherwise `false` (route to pipeline). |
 
 Products that do not yet meet this gate live under `src/data/products/pipeline/` and surface only on the Pipeline hub (`/products/pipeline`). Reclassify when approval is documented.
 

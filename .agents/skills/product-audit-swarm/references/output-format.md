@@ -21,7 +21,7 @@ on them.
 | Role | Field | Severity | Observation | Suggested fix |
 | --- | --- | --- | --- | --- |
 | Identity | productUrl | error | 404 on HEAD request | Update to current vendor URL or mark archived |
-| Evidence | evidenceRigor | info | New multi-centre paper (DOI ...) supports E2 | Re-score to E2; update evidenceRigorNotes |
+| Evidence | evidenceRigor | info | New multi-center paper (DOI ...) supports E2 | Re-score to E2; update evidenceRigorNotes |
 | ... | ... | ... | ... | ... |
 
 #### Re-scoring proposal

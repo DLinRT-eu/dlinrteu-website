@@ -44,9 +44,9 @@ Products in DLinRT.eu support:
 - **Multiple Versions**: Different versions of the same product can be tracked with separate `version` and `releaseDate` fields, plus `priorVersions` / `supersededBy` for cross-linking
 - **Comprehensive Data**: Each product carries regulatory, technical, market, transparency (training/evaluation data), evidence (E/I/R), and safety-corrective-action information
 
-### Catalogue Inclusion Gate
+### Catalog Inclusion Gate
 
-A product enters the live catalogue only when `hasRegulatoryApproval` resolves true — i.e. CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA. Products awaiting approval belong under `src/data/products/pipeline/`. DLinRT also restricts scope to AI/Deep Learning for radiotherapy — classical image processing and general QA tools are excluded unless their intended use explicitly targets AI-generated outputs.
+A product enters the live catalog only when `hasRegulatoryApproval` resolves true — i.e. CE marked, FDA cleared, MDR-exempt with documented rationale, or approval/registration by NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA. Products awaiting approval belong under `src/data/products/pipeline/`. DLinRT also restricts scope to AI/Deep Learning for radiotherapy — classical image processing and general QA tools are excluded unless their intended use explicitly targets AI-generated outputs.
 
 ### Source Disclosure
 

@@ -12,7 +12,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evaluationData: {
         results: "Not publicly disclosed for the DART deep-learning module.",
         source: "Vendor product page (MedCom ProSoma DART); Karagiannis et al. 2021 (J Oncol Res Ther, DOI 10.29011/2574-710X.100113) evaluated the predecessor ProSoma atlas-based auto-segmentation (ABAS) module — not the DART deep-learning module — on 20 H&N patients across 39 ROIs.",
-        studyDesign: "Not publicly disclosed for DART. ABAS predecessor: single-centre retrospective, 100 atlas / 20 test H&N patients (Karagiannis 2021).",
+        studyDesign: "Not publicly disclosed for DART. ABAS predecessor: single-center retrospective, 100 atlas / 20 test H&N patients (Karagiannis 2021).",
         primaryEndpoint: "Not specified for DART. ABAS predecessor reported DICE, 95% Hausdorff distance, volume ratio, plus Turing test and time evaluation.",
         description: "No peer-reviewed validation of the ProSoma DART deep-learning segmentation module identified. Karagiannis 2021 evaluates the older atlas-based (ABAS) ProSoma module and does not constitute evidence for the DL DART engine. Doolan et al. 2023 (Front Oncol, DOI 10.3389/fonc.2023.1213068) used ProSoma v4.1 only as the manual-contouring reference platform for benchmarking other vendors. Evidence rigor remains E0 for the DART AI engine pending vendor- or independent peer-reviewed validation.",
         sourceUrl: "https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/"

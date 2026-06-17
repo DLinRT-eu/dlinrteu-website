@@ -4,7 +4,7 @@ Authoritative sources: `mem://policy/product-inclusion-criteria`,
 `mem://constraints/ai-dl-technology-threshold`, and the
 [`/about` page on dlinrt.eu](https://dlinrt.eu/about).
 
-A product belongs in the catalogue if **all** of the following hold:
+A product belongs in the catalog if **all** of the following hold:
 
 1. It uses machine learning / deep learning for at least one core function.
    Classical image processing (rule-based filters, atlas-only registration,
@@ -22,7 +22,7 @@ A product belongs in the catalogue if **all** of the following hold:
 - General radiology AI with no documented RT workflow integration.
 - Hardware platforms (linacs, MR-linacs, CT simulators, MR simulators,
   PET/CT simulators) whose public announcements do not isolate an AI/DL
-  component for RT. Watchlist them in news, do not create catalogue
+  component for RT. Watchlist them in news, do not create catalog
   entries.
 - Generic QA / monitoring tools that do not themselves use AI/DL **and**
   do not monitor AI products. QA tools that monitor AI products are
@@ -35,18 +35,18 @@ A product belongs in the catalogue if **all** of the following hold:
 ## Edge cases
 
 - **System-integrated AI** (e.g. auto-contouring built into a linac):
-  include as a catalogue entry tied to the system-level CE/FDA marking.
+  include as a catalog entry tied to the system-level CE/FDA marking.
   Flag in the Regulatory role that the marking is system-level, not
   standalone.
 - **Open-source models with no commercial vendor**: include only when a
-  named organisation maintains the model and there is a clear RT
+  named organization maintains the model and there is a clear RT
   indication.
 - **Research prototypes** without regulatory disclosure: route to the
-  Pipeline hub; never to the main catalogue.
+  Pipeline hub; never to the main catalog.
 
 ## Inclusion-role finding shape
 
-- `error` — classical-only product currently in the catalogue, or
+- `error` — classical-only product currently in the catalog, or
   hardware-only entry with no AI/DL component documented.
 - `warn` — AI/DL component plausible but not documented; ask for
   vendor model-card link before clearing.

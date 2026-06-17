@@ -15,7 +15,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   { q: 'Can users review products?', a: 'Regular users can share adoption experiences. Formal product reviews are restricted to approved Reviewers.' },
   { q: 'How long does role approval take?', a: 'Role requests are reviewed by administrators, typically within a few business days.' },
   { q: 'What if my role request is denied?', a: 'You will be notified with a reason. You can address the feedback and submit a new request.' },
-  { q: 'What can I do as a User?', a: 'Users can browse the catalogue, track adopted products, share experiences, and request additional roles.' },
+  { q: 'What can I do as a User?', a: 'Users can browse the catalog, track adopted products, share experiences, and request additional roles.' },
   { q: 'Who can see my product adoptions?', a: 'Visibility depends on your sharing settings. Anonymous adoptions are aggregated only; identifiable details are limited to authorized roles.' },
   { q: 'Why should I share my experience?', a: 'Sharing helps the community evaluate real-world performance and supports peer-reviewed evidence.' },
   { q: 'What are the responsibilities of a Reviewer?', a: 'Reviewers assess product information for accuracy, completeness, and evidence quality following the DLinRT.eu review guide.' },

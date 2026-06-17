@@ -72,7 +72,7 @@ const CompanyProducts = () => {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `${company.name} — Products`,
-    description: `All AI/Deep Learning radiotherapy products from ${company.name} catalogued on DLinRT.eu`,
+    description: `All AI/Deep Learning radiotherapy products from ${company.name} catalogd on DLinRT.eu`,
     url: canonical,
     numberOfItems: products.length,
     itemListElement: products.map((p, i) => ({
@@ -182,7 +182,7 @@ const CompanyProducts = () => {
         {products.length === 0 ? (
           <div className="text-center py-12 border rounded-lg bg-gray-50">
             <p className="text-muted-foreground">
-              No certified products are currently catalogued for this company.
+              No certified products are currently catalogd for this company.
             </p>
           </div>
         ) : (
@@ -223,7 +223,7 @@ const CompanyProducts = () => {
                   <ArrowRight className="h-5 w-5 text-violet-600" />
                 </div>
                 <p className="text-sm text-violet-700 mt-1 ml-7">
-                  Announced products not yet certified (CE/FDA). Click to browse the full pipeline catalogue.
+                  Announced products not yet certified (CE/FDA). Click to browse the full pipeline catalog.
                 </p>
               </div>
             </Link>

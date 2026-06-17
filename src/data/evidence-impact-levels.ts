@@ -30,22 +30,22 @@ export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
   },
   {
     level: "E1",
-    name: "Exploratory or single-centre technical validation",
-    description: "At least one peer-reviewed retrospective, phantom, in-silico, pre-clinical or single-centre study showing technical feasibility or accuracy. Early signal; limited generalisability.",
+    name: "Exploratory or single-center technical validation",
+    description: "At least one peer-reviewed retrospective, phantom, in-silico, pre-clinical or single-center study showing technical feasibility or accuracy. Early signal; limited generalisability.",
     criteria: [
-      "Single-centre retrospective study",
+      "Single-center retrospective study",
       "Phantom, in-silico or pre-clinical evaluation",
       "Reported per relevant CLAIM / STARD-AI items",
-      "No independent external or multi-centre validation yet"
+      "No independent external or multi-center validation yet"
     ],
     color: "blue"
   },
   {
     level: "E2",
-    name: "External, independent or multi-centre validation",
-    description: "Performance validated on external data, by independent groups and/or in multi-centre settings using defined reference standards. Validation-grade signal, suitable for focused deployment with contextual safeguards.",
+    name: "External, independent or multi-center validation",
+    description: "Performance validated on external data, by independent groups and/or in multi-center settings using defined reference standards. Validation-grade signal, suitable for focused deployment with contextual safeguards.",
     criteria: [
-      "≥1 external or multi-centre study in the target indication",
+      "≥1 external or multi-center study in the target indication",
       "Reported per CLAIM + STARD-AI or TRIPOD+AI + PROBAST+AI",
       "Low-to-moderate risk of bias",
       "Vendor-independent evaluation when possible",
@@ -157,7 +157,7 @@ export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
       "Regional / national benchmarking",
       "Workforce sustainability and capacity",
       "Equity and access improvements",
-      "Cost per QALY / health-economic modelling"
+      "Cost per QALY / health-economic modeling"
     ],
     color: "rose",
     frybackThornburyLevel: "Level 6: Societal Efficacy"
@@ -211,7 +211,7 @@ export const ADOPTION_READINESS_LEVELS: AdoptionReadinessLevel[] = [
   {
     level: "R4",
     name: "High implementation readiness",
-    description: "Extensive multi-centre or regional deployment with robust QA, TG-100 / RBAAF-informed risk management, governance, FSCA / recall tracking and periodic re-evaluation aligned with national guidance.",
+    description: "Extensive multi-center or regional deployment with robust QA, TG-100 / RBAAF-informed risk management, governance, FSCA / recall tracking and periodic re-evaluation aligned with national guidance.",
     readinessConsequence: "Adoption-grade readiness with low residual implementation burden in comparable settings.",
     color: "teal",
   },
@@ -442,7 +442,7 @@ export const EVIDENCE_IMPACT_REFERENCE = {
 // ==================== EXTENDED METHODOLOGY BIBLIOGRAPHY ====================
 // Grouped references underpinning the dual-axis (E / I) and implementation-burden
 // (Z) framework. Kept separate from EVIDENCE_IMPACT_REFERENCE so the core
-// citations remain stable while this catalogue can grow.
+// citations remain stable while this catalog can grow.
 
 export interface MethodologyReference {
   citation: string;

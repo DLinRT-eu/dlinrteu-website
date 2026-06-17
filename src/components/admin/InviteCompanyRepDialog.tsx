@@ -38,7 +38,7 @@ const buildForceMessage = (firstName: string, companyName: string) =>
 
 A DLinRT.eu administrator has created a company representative account for you on behalf of ${companyName}. You are now registered and linked to this company.
 
-To activate your account, please click the button below to set your password. After that you can sign in, certify product information, submit revisions, and manage your company's catalogue listings.
+To activate your account, please click the button below to set your password. After that you can sign in, certify product information, submit revisions, and manage your company's catalog listings.
 
 Information about the company review process can be found at: https://dlinrt.eu/company/guide
 
