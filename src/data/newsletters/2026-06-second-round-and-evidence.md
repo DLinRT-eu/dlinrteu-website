@@ -56,7 +56,7 @@ To keep our own time sustainable, we streamlined:
 
 We currently have **27 of 41 companies** with assigned representatives, and are actively following up on the remaining ones.
 
-![Catalogue backbone — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-04.jpg)
+![Catalog backbone — DLinRT.eu June 2026 deck](https://dlinrt.eu/newsletters/2026-06/slide-04.jpg)
 
 
 ## BLOCK 5 — 🟣 Welcome Szabolcs · Thanks to all 12 reviewers

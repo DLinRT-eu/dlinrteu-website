@@ -20,7 +20,7 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     categoryEvidence: {
       "Treatment Planning": {
         usesAI: true,
-        notes: "DeepPlan's DeepOPT optimisation is the AI/ML component for treatment planning. NMPA-cleared in China; no peer-reviewed validation located.",
+        notes: "DeepPlan's DeepOPT optimization is the AI/ML component for treatment planning. NMPA-cleared in China; no peer-reviewed validation located.",
         evidenceRigor: "E0",
         clinicalImpact: "I0",
       },

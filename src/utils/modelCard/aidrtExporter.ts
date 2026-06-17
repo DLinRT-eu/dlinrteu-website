@@ -189,7 +189,7 @@ export function convertToAidrt(product: ProductDetails): AidrtModelCard {
       validation_data_partition: "NA",
       weights_initialization: "NA",
       epochs: "NA",
-      optimiser: "NA",
+      optimizer: "NA",
       learning_rate: "NA",
       train_and_validation_loss_curves: "NA",
       model_choice_criteria: "NA",

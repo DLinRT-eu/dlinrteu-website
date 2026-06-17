@@ -173,7 +173,7 @@ function buildETH(products: ProductDetails[]): ExcelSheet {
 
 function buildORG(products: ProductDetails[]): ExcelSheet {
   return {
-    name: "ORG — Organisational",
+    name: "ORG — Organizational",
     data: products.map((p) => ({
       "Product": p.name ?? "",
       "Deployment": stringify((p as any).deployment),

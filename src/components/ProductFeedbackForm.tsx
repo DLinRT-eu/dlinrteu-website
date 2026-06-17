@@ -98,7 +98,7 @@ const ProductFeedbackForm = () => {
           <div className="flex items-center gap-2">
             <RadioGroupItem value="missing_product" id="missing_product" />
             <Label htmlFor="missing_product" className="font-normal cursor-pointer">
-              A product is missing from the catalogue
+              A product is missing from the catalog
             </Label>
           </div>
           <div className="flex items-center gap-2">

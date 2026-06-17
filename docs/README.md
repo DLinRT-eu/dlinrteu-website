@@ -216,7 +216,7 @@ Products can be exported in FHIR R4 format for hospital system integration.
 
 ## 📤 Data Exports
 
-The catalogue and initiatives index can be exported in multiple formats:
+The catalog and initiatives index can be exported in multiple formats:
 
 | Surface | Formats |
 |---------|---------|

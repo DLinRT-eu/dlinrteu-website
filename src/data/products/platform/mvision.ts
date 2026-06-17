@@ -69,12 +69,12 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       {
         name: "Dose+",
-        description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimisation for workflow efficiency and plan consistency.",
+        description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimization for workflow efficiency and plan consistency.",
         category: "Dose Prediction",
         productUrl: "https://mvision.ai/dose/",
         keyFeatures: [
           "Patient-specific 3D dose prediction",
-          "Supports VMAT planning optimisation workflows",
+          "Supports VMAT planning optimization workflows",
           "Provides achievable starting point for objective setting",
           "Improves planning efficiency and consistency",
           "Compatible with DICOM-compliant TPS via RTDose export"

@@ -230,7 +230,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Corrected to E2: direct AccuContour evidence includes retrospective peer-reviewed validation/comparison studies, including single-institution H&N validation and NPC contouring comparisons. The previously cited npj Digital Medicine 2025, Scientific Reports 2025, JACMP 2025, and Phys Eng Sci Med 2024 evidence primarily evaluates other vendors/tools and should not support an AccuContour E3 assignment. No prospective clinical-outcome study or independent multicentre AccuContour deployment study was identified.",
+    evidenceRigorNotes: "Corrected to E2: direct AccuContour evidence includes retrospective peer-reviewed validation/comparison studies, including single-institution H&N validation and NPC contouring comparisons. The previously cited npj Digital Medicine 2025, Scientific Reports 2025, JACMP 2025, and Phys Eng Sci Med 2024 evidence primarily evaluates other vendors/tools and should not support an AccuContour E3 assignment. No prospective clinical-outcome study or independent multicenter AccuContour deployment study was identified.",
     clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): peer-reviewed retrospective evidence and U.S. regulatory clearance are present, but public CE evidence was not independently verified and local commissioning, model acceptance testing, governance, and user training remain required.",

@@ -112,7 +112,7 @@ const EvidenceImpactGuide = () => {
                   Strong evidence, not deployable
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  A multi-centre validated tool that requires heavy commissioning, vendor-specific QA, or
+                  A multi-center validated tool that requires heavy commissioning, vendor-specific QA, or
                   custom integration. Strong E and I, but a <em>high implementation burden</em> blocks routine adoption.
                 </p>
               </div>

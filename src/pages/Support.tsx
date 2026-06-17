@@ -101,7 +101,7 @@ const Support = () => {
         <section id="product-feedback" className="bg-white rounded-lg p-8 shadow-sm scroll-mt-20">
           <h2 className="text-2xl font-semibold text-gray-900 mb-2">Report Missing or Incorrect Product Information</h2>
           <p className="text-gray-600 mb-6">
-            Know of a product that should be listed, or spotted an error? Help us improve the catalogue by submitting feedback below.
+            Know of a product that should be listed, or spotted an error? Help us improve the catalog by submitting feedback below.
           </p>
           <ProductFeedbackForm />
         </section>

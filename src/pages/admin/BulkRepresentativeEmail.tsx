@@ -410,7 +410,7 @@ export default function BulkRepresentativeEmail() {
                   />
                   <p className="text-xs text-muted-foreground">
                     Supports <code>**bold**</code>, <code>*italic*</code>, <code>[link](url)</code>, <code>- bullet lists</code>, and paragraphs.
-                    A button linking to the company catalogue page is automatically appended.
+                    A button linking to the company catalog page is automatically appended.
                   </p>
                 </div>
 
@@ -464,7 +464,7 @@ export default function BulkRepresentativeEmail() {
           </DialogHeader>
           <div className="space-y-2">
             <Label>Template name</Label>
-            <Input value={newTemplateName} onChange={(e) => setNewTemplateName(e.target.value)} placeholder="e.g. Q1 catalogue review" />
+            <Input value={newTemplateName} onChange={(e) => setNewTemplateName(e.target.value)} placeholder="e.g. Q1 catalog review" />
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setSaveOpen(false)}>Cancel</Button>
@@ -479,7 +479,7 @@ export default function BulkRepresentativeEmail() {
           <DialogHeader>
             <DialogTitle>Send to {recipients.length} representative{recipients.length === 1 ? '' : 's'}?</DialogTitle>
             <DialogDescription>
-              Each recipient will receive a personalised version of the email with a link to their company's catalogue page.
+              Each recipient will receive a personalised version of the email with a link to their company's catalog page.
               This action cannot be undone.
             </DialogDescription>
           </DialogHeader>

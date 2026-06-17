@@ -9,7 +9,7 @@
  *   SAF — Safety
  *   ECO — Costs & economic evaluation (out of scope for DLinRT)
  *   ETH — Ethical analysis (data, fairness)
- *   ORG — Organisational aspects
+ *   ORG — Organizational aspects
  *   SOC — Patient & social aspects
  *   LEG — Legal aspects (regulatory)
  */
@@ -30,7 +30,7 @@ export const HTA_DOMAINS: Record<HTADomainCode, HTADomainMeta> = {
   SAF: { code: "SAF", label: "Safety", description: "Known limitations, supported structures, safety/corrective actions." },
   ECO: { code: "ECO", label: "Costs & economic evaluation", description: "Pricing/cost data — not collected by DLinRT." },
   ETH: { code: "ETH", label: "Ethical aspects", description: "Training data provenance, demographics, fairness, transparency." },
-  ORG: { code: "ORG", label: "Organisational aspects", description: "Workflow integration, deployment model, infrastructure." },
+  ORG: { code: "ORG", label: "Organizational aspects", description: "Workflow integration, deployment model, infrastructure." },
   SOC: { code: "SOC", label: "Patient & social aspects", description: "Patient population, accessibility, equity considerations." },
   LEG: { code: "LEG", label: "Legal aspects", description: "Regulatory status (CE/FDA/TGA), MDR class, AI Act risk class." },
 };

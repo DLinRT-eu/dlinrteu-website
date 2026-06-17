@@ -182,7 +182,7 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
           studyDesign: "Independent geometric/dosimetric evaluation across multiple anatomical sites",
           primaryEndpoint: "DICE, surface DSC, and dosimetric impact across 45 structures",
           results: "Finnegan 2025: clinically acceptable contours across pelvis/abdomen/thorax/H&N in 223 patients; FDA 510(k): 80% of contours required minor or no edits.",
-          description: "Auto-contouring-specific evidence centred on Finnegan et al. JACMP 2025 (multi-site, 45 structures) and the K232923 FDA validation.",
+          description: "Auto-contouring-specific evidence centerd on Finnegan et al. JACMP 2025 (multi-site, 45 structures) and the K232923 FDA validation.",
           source: "Finnegan et al. J Appl Clin Med Phys 2025; FDA 510(k) K232923",
           sourceUrl: "https://doi.org/10.1002/acm2.70067",
         },

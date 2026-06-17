@@ -72,7 +72,7 @@ function addFooter(s, { darkBg = false } = {}) {
       hyperlink: { url: SITE_URL, tooltip: "dlinrt.eu" },
     });
   }
-  // Date + CC-BY (centre)
+  // Date + CC-BY (center)
   s.addText(
     [
       { text: TODAY + "  ·  ", options: { color } },
@@ -103,7 +103,7 @@ function addFooter(s, { darkBg = false } = {}) {
     x: 0.6, y: 2.2, w: W - 1.2, h: 1.4, fontFace: FONT_H, fontSize: 32, color: ACCENT, bold: true,
   });
   s.addText(
-    "June 2026 update — refreshed catalogue, new evidence system, first certified company, new reviewer, MAIRT @ MICCAI.",
+    "June 2026 update — refreshed catalog, new evidence system, first certified company, new reviewer, MAIRT @ MICCAI.",
     { x: 0.6, y: 4.0, w: W - 1.2, h: 1.4, fontFace: FONT_B, fontSize: 22, color: "CADCFC" }
   );
   addFooter(s, { darkBg: true });
@@ -114,7 +114,7 @@ function addFooter(s, { darkBg = false } = {}) {
   const s = pres.addSlide();
   s.background = { color: BG };
   s.addText(
-    [{ text: "Cumulative products in the catalogue", options: { hyperlink: { url: SITE_URL + "/products" }, color: TEXT } }],
+    [{ text: "Cumulative products in the catalog", options: { hyperlink: { url: SITE_URL + "/products" }, color: TEXT } }],
     { x: 0.6, y: 0.4, w: W - 1.2, h: 0.7, fontFace: FONT_H, fontSize: 30, bold: true }
   );
   s.addText("Based on declared product release dates · n = " + ALL_PRODUCTS.length + " products total", {
@@ -200,7 +200,7 @@ function addFooter(s, { darkBg = false } = {}) {
   const s = pres.addSlide();
   s.background = { color: BG };
   s.addText(
-    [{ text: "Companies in the DLinRT.eu catalogue", options: { hyperlink: { url: SITE_URL + "/companies" }, color: TEXT } }],
+    [{ text: "Companies in the DLinRT.eu catalog", options: { hyperlink: { url: SITE_URL + "/companies" }, color: TEXT } }],
     { x: 0.6, y: 0.3, w: W - 1.2, h: 0.6, fontFace: FONT_H, fontSize: 26, bold: true }
   );
   s.addText(COMPANIES.length + " active companies · click any logo to open its page", {
@@ -229,7 +229,7 @@ function addFooter(s, { darkBg = false } = {}) {
     }
     if (logoPath && fs.existsSync(logoPath)) {
       try {
-        // Preserve intrinsic aspect ratio: compute fitted box centred in the cell.
+        // Preserve intrinsic aspect ratio: compute fitted box centerd in the cell.
         const dim = getImageSize(logoPath);
         let drawW = logoW, drawH = logoH, dx = x + pad, dy = y + pad;
         if (dim && dim.w > 0 && dim.h > 0) {
@@ -298,7 +298,7 @@ function addFooter(s, { darkBg = false } = {}) {
   });
   s.addText(
     [
-      { text: "A warm welcome to Szabolcs David, who joins the reviewer team. Huge thanks to all 12 reviewers keeping the catalogue trustworthy — full list on the ", options: { color: TEXT } },
+      { text: "A warm welcome to Szabolcs David, who joins the reviewer team. Huge thanks to all 12 reviewers keeping the catalog trustworthy — full list on the ", options: { color: TEXT } },
       { text: "About page", options: { hyperlink: { url: SITE_URL + "/about" }, color: ACCENT, bold: true } },
       { text: ".", options: { color: TEXT } },
     ],
@@ -331,7 +331,7 @@ function addFooter(s, { darkBg = false } = {}) {
       h: "Save the date · DLinRT workshop, Utrecht · March 2026",
       url: "https://dlinrt.org",
       body: [
-        { text: "DLinRT.eu will support the organisation of a two-day international workshop in Utrecht around March 2026. Dates and venue are being finalised — details will follow around September on ", options: { color: "CADCFC" } },
+        { text: "DLinRT.eu will support the organization of a two-day international workshop in Utrecht around March 2026. Dates and venue are being finalised — details will follow around September on ", options: { color: "CADCFC" } },
         { text: "dlinrt.eu", options: { hyperlink: { url: SITE_URL }, color: "FFFFFF", bold: true } },
         { text: " and ", options: { color: "CADCFC" } },
         { text: "dlinrt.org", options: { hyperlink: { url: "https://dlinrt.org" }, color: "FFFFFF", bold: true } },
@@ -368,7 +368,7 @@ function addFooter(s, { darkBg = false } = {}) {
       h: "3-axis evidence system live",
       url: SITE_URL + "/dashboard",
       body: [
-        { text: "Browse the Evidence Matrix to see how the catalogue distributes across rigor (E0–E3) and impact (I0–I5): ", options: { color: "CADCFC" } },
+        { text: "Browse the Evidence Matrix to see how the catalog distributes across rigor (E0–E3) and impact (I0–I5): ", options: { color: "CADCFC" } },
         { text: "dlinrt.eu/dashboard", options: { hyperlink: { url: SITE_URL + "/dashboard" }, color: "FFFFFF", bold: true } },
         { text: ".", options: { color: "CADCFC" } },
       ],

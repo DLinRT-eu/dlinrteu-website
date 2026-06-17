@@ -10,7 +10,7 @@ const HomeIntroTop = () => {
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            Independent catalogue · Updated weekly
+            Independent catalog · Updated weekly
             <span className="mx-1 text-slate-500" aria-hidden="true">|</span>
             <ShieldCheck className="h-3.5 w-3.5 text-sky-600" />
             Peer-reviewed
@@ -50,7 +50,7 @@ const HomeIntroTop = () => {
                 </defs>
               </svg>
             </span>
-            : Product Catalogue
+            : Product Catalog
           </h1>
           <p className="mt-5 text-lg md:text-xl text-slate-600">
             Find deep-learning-based solutions and QA monitoring tools for radiotherapy available for the European market, and beyond.

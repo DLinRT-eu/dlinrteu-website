@@ -19,7 +19,7 @@ We are excited to introduce **Platform** as a dedicated product category in our 
 - **Image synthesis** for multi-modal imaging workflows
 - **Treatment planning** automation and decision support
 
-Examples of platform products now catalogued include:
+Examples of platform products now catalogd include:
 - **MVision AI Workspace+** - Comprehensive AI platform for radiotherapy workflows
 - **GE Healthcare IRT (Intelligent Radiation Therapy)** - Integrated AI solutions for treatment planning
 - **MedLever AI Platform** - Multi-task AI system for radiation oncology

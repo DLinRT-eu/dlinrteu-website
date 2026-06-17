@@ -196,7 +196,7 @@ const OrbitHero = () => {
               <div className="relative flex items-center justify-center h-36 w-36 md:h-48 md:w-48 drop-shadow-[0_20px_30px_rgba(80,144,208,0.45)]">
                 <img
                   src="/LogoDLinRT.eu.png"
-                  alt="DLinRT.eu — Catalogue of Deep Learning Products in Radiotherapy"
+                  alt="DLinRT.eu — Catalog of Deep Learning Products in Radiotherapy"
                   className="h-full w-full object-contain"
                   style={{ borderRadius: "18%" }}
                 />

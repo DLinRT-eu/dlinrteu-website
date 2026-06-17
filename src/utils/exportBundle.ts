@@ -32,12 +32,12 @@ export async function downloadProductsBundle(
     [
       {
         path: "products.csv",
-        description: "Catalogue export, RFC 4180 CSV with ~110 columns.",
+        description: "Catalog export, RFC 4180 CSV with ~110 columns.",
         schema: "public/schemas/dlinrt-csv-fields.md",
       },
       {
         path: "products.json",
-        description: "Catalogue export, raw JSON matching ProductDetails.",
+        description: "Catalog export, raw JSON matching ProductDetails.",
         schema: "public/schemas/dlinrt-model-card-schema.json",
       },
       {

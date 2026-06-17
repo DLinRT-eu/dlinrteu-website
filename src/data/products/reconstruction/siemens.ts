@@ -80,7 +80,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "10+ PubMed-indexed studies. Key: Hakim et al. AJNR 2025 (Deep Resolve Boost neuroradiology evaluation), Wilpert et al. Invest Radiol 2025 (3T brain, DL+acceleration), Ponsiglione et al. Eur Radiol 2024 (whole-body diffusion, 50 patients), Estler et al. Radiol Med 2024 (back pain MRI, 60 patients). PubMed verified 2026-02-26.",
     clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality across neuro, spine, MSK, and whole-body applications.",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected.",
+    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

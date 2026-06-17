@@ -100,7 +100,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "Announced as part of the uRT radiotherapy portfolio at ESTRO 2026; integrated AI contouring is described as a component of the CE-marked uRT-linac 506c system.",
     limitations: [
       "Integrated component of the uRT ecosystem; not marketed as a standalone product",
-      "Supported structure list not publicly enumerated by the vendor — labelled as unavailable in the DLinRT.eu catalogue",
+      "Supported structure list not publicly enumerated by the vendor — labelled as unavailable in the DLinRT.eu catalog",
       "No model card, training-data description or standalone intended-use document has been published by the vendor",
       "All AI-generated contours require qualified clinician review prior to clinical use",
       "Performance claims are vendor-reported and not yet independently validated"

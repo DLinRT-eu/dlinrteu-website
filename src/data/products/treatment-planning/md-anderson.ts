@@ -88,7 +88,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Netherton et al. JCO GO 2023 (direct) and Court et al. JCO GO 2024 (direct, 16 institutions / 6 countries, >90% plan acceptability) confirmed via abstract verification. Kavuma 2025 and Sackett 2025 RapidPlan papers re-evaluated 2026-06-15: Sackett 2025 evaluates Varian RapidPlan v15.6 in Eclipse and does not mention RPA — removed. Kavuma 2025 evaluates RapidPlan KBP in LMICs without RPA attribution — retained as indirect-comparative only. Lloyd 2026 remains pending full-text verification. First patient treated clinically in South Africa in 2024.",
     clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Actively deployed in South Africa since 2024. Validated across head and neck, cervical, breast, and brain cancers with >90% plan acceptability across 16 institutions in 6 countries (Court 2024).",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-centre evidence with regulatory clearance; minor local commissioning and user training expected. Clinical deployment ongoing in LMICs.",
+    adoptionReadinessNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected. Clinical deployment ongoing in LMICs.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,

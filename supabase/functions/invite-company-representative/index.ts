@@ -389,7 +389,7 @@ serve(async (req) => {
       ? `<div style="white-space:pre-wrap;font-size:15px;color:#1a1a2e;line-height:1.6;">${escapeHtml(message)}</div>`
       : `<p>Hello${safeFirstName ? ` ${safeFirstName}` : ''},</p>
          <p>${safeInviter} has invited you to join <strong>DLinRT.eu</strong> as the official company representative for <strong>${safeCompany}</strong>.</p>
-         <p>As a representative you will be able to certify product information, submit revisions, and manage your company's catalogue listings.</p>`;
+         <p>As a representative you will be able to certify product information, submit revisions, and manage your company's catalog listings.</p>`;
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>

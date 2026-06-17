@@ -46,7 +46,7 @@ const UnavailableStructuresCard: React.FC = () => (
       <p className="text-sm text-muted-foreground">
         The vendor has not published a verified list of supported structures for
         this product. The structure list is therefore <strong>unavailable</strong> in
-        the DLinRT.eu catalogue. All AI-generated contours require qualified clinician
+        the DLinRT.eu catalog. All AI-generated contours require qualified clinician
         review prior to clinical use.
       </p>
     </CardContent>

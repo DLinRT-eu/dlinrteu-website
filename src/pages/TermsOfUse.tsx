@@ -6,7 +6,7 @@ const TermsOfUse = () => (
   <div className="min-h-screen bg-white">
     <SEO
       title="Terms of Use"
-      description="Terms and conditions for using DLinRT.eu. Your rights, responsibilities, and legal disclaimers when accessing the catalogue."
+      description="Terms and conditions for using DLinRT.eu. Your rights, responsibilities, and legal disclaimers when accessing the catalog."
       canonical="https://dlinrt.eu/terms-of-use"
     />
     <main className="max-w-3xl mx-auto px-4 py-8">

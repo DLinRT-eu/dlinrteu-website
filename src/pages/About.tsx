@@ -143,7 +143,7 @@ const About = () => {
     <div className="min-h-screen bg-white">
       <SEO
         title="About - Mission, Team & Supporters"
-        description="Learn about DLinRT.eu, the team behind the catalogue, our supporter UMC Utrecht, and how user roles work on the platform."
+        description="Learn about DLinRT.eu, the team behind the catalog, our supporter UMC Utrecht, and how user roles work on the platform."
         canonical="https://dlinrt.eu/about"
         structuredData={structuredData}
       />
@@ -162,7 +162,7 @@ const About = () => {
               DL technologies into routine clinical practice in radiotherapy.
             </p>
             <p>
-              We <Link to="/products" className="text-[#5090D0] hover:underline">catalogue and evaluate DL products</Link>{" "}
+              We <Link to="/products" className="text-[#5090D0] hover:underline">catalog and evaluate DL products</Link>{" "}
               across the radiotherapy workflow — from image reconstruction and enhancement to auto-contouring, treatment
               planning, and clinical prediction. We also include <strong>Performance Monitor tools</strong> that help
               quality-assure AI-based products, even if they don't use AI themselves. Each product entry includes

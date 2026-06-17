@@ -248,7 +248,7 @@ const Transparency = () => {
     <div className="min-h-screen bg-white">
       <SEO
         title="Financial Transparency"
-        description="Annual income and expenses for DLinRT.eu. Operational costs are covered by UMC Utrecht so the catalogue stays free and openly accessible."
+        description="Annual income and expenses for DLinRT.eu. Operational costs are covered by UMC Utrecht so the catalog stays free and openly accessible."
         canonical="https://dlinrt.eu/transparency"
         structuredData={structuredData}
       />

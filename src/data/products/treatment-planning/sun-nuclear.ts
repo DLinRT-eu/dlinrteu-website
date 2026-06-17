@@ -98,7 +98,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021-03-12",
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Single paper introducing the tool. Validated at one centre outside of the training dataset: Shade et al 2026 https://doi.org/10.1016/j.adro.2026.102036",
+    evidenceRigorNotes: "Single paper introducing the tool. Validated at one center outside of the training dataset: Shade et al 2026 https://doi.org/10.1016/j.adro.2026.102036",
     clinicalImpactNotes: "Vendor-claimed workflow improvement through AI-powered DVH predictions. No product-specific independent clinical impact data located.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate-to-high implementation effort — limited independent evidence; local validation, interface testing and workflow confirmation required before adoption.",

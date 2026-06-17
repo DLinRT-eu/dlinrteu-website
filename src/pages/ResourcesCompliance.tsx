@@ -49,7 +49,7 @@ const ResourcesCompliance = () => {
           {/* Platform Scope Note */}
           <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700">
             <p>
-              <strong>Platform scope:</strong> DLinRT catalogues products that use AI/Deep Learning (neural networks) 
+              <strong>Platform scope:</strong> DLinRT catalogs products that use AI/Deep Learning (neural networks) 
               for core clinical functions in radiotherapy, including QA tools that explicitly reference AI-generated outputs. 
               See the full{' '}
               <Link to="/products" className="text-[#00A6D6] hover:underline font-medium">
@@ -168,7 +168,7 @@ const ResourcesCompliance = () => {
             <p className="text-muted-foreground mb-6 leading-relaxed">
               Health Technology Assessment (HTA) bodies evaluate AI tools across more dimensions than regulators do.
               Beyond CE/FDA clearance, an HTA dossier must answer questions about <strong>clinical effectiveness</strong>,
-              <strong> safety</strong>, <strong>organisational impact</strong>, <strong>ethical/legal aspects</strong> and
+              <strong> safety</strong>, <strong>organizational impact</strong>, <strong>ethical/legal aspects</strong> and
               <strong> costs</strong>. The EU HTA Regulation (HTAR, 2021/2282) introduced the
               {' '}<strong>Joint Clinical Assessment (JCA)</strong> at EU level — staged scope covers oncology medicines
               and ATMPs from January 2025, with medical devices (including AI/SaMD) following.

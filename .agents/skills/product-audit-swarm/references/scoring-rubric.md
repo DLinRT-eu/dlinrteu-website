@@ -8,8 +8,8 @@ quick lookup the Evidence role uses during a sweep — do not re-derive.
 | Level | One-liner |
 | --- | --- |
 | E0 | Vendor materials / regulatory submission only. No peer-reviewed study identified. |
-| E1 | At least one peer-reviewed single-centre, retrospective, phantom, in-silico or pre-clinical study. |
-| E2 | External, independent or multi-centre validation in the target indication. |
+| E1 | At least one peer-reviewed single-center, retrospective, phantom, in-silico or pre-clinical study. |
+| E2 | External, independent or multi-center validation in the target indication. |
 | E3 | Prospective, comparative real-world study, RCT, or systematic review/meta-analysis. |
 
 ## Clinical Impact (I0–I5)
@@ -40,10 +40,10 @@ Derived from `(E, I, regulatory)`:
 Per `mem://data-quality/evidence-study-quality-attributes`:
 
 - `vendorIndependent` — author affiliations exclude the vendor.
-- `multiCenter` — ≥2 distinct centres.
+- `multiCenter` — ≥2 distinct centers.
 - `multiNational` — ≥2 distinct countries.
 - `prospective` — protocol registered before data collection.
-- `externalValidation` — test set from a centre not used for training.
+- `externalValidation` — test set from a center not used for training.
 
 Set these per the strongest paper that supports the assigned Evidence Rigor.
 

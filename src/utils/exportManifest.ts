@@ -42,7 +42,7 @@ export const buildManifest = (
   generatedAt: new Date().toISOString(),
   source: "https://dlinrt.eu",
   license:
-    "Catalogue content © DLinRT.eu contributors. Provided for informational and research use; verify against the manufacturer's official documentation before clinical decisions.",
+    "Catalog content © DLinRT.eu contributors. Provided for informational and research use; verify against the manufacturer's official documentation before clinical decisions.",
   disclaimer:
     "DLinRT.eu is an independent, peer-reviewed reference. Regulatory clearance details, evidence ratings, and HTA mappings are informational and NOT a substitute for official regulatory or HTA documentation.",
   recordCount,
@@ -75,6 +75,6 @@ ${manifest.disclaimer}
 
 ## Citation
 
-Please cite as: "DLinRT.eu — Deep Learning in Radiotherapy catalogue, ${manifest.generatedAt.slice(0, 10)} (https://dlinrt.eu)".
+Please cite as: "DLinRT.eu — Deep Learning in Radiotherapy catalog, ${manifest.generatedAt.slice(0, 10)} (https://dlinrt.eu)".
 `;
 };
