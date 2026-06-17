@@ -112,7 +112,7 @@ serve(async (req) => {
       });
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${sendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           from: FROM, to: [recipient], reply_to: REPLY_TO,
           subject: `[TEST] ${subject}`, html,
@@ -135,7 +135,7 @@ serve(async (req) => {
     }
 
     // PUSH draft to Resend audience as a broadcast. Final send happens inside Resend.
-    const audienceId = await getOrCreateAudienceId(apiKey);
+    const audienceId = await getOrCreateAudienceId(audienceKey);
     const html = renderNewsletterHtml({
       subject,
       preheader,
@@ -143,7 +143,7 @@ serve(async (req) => {
       unsubscribeUrl: "{{{RESEND_UNSUBSCRIBE_URL}}}",
     });
 
-    const broadcast = await createBroadcast(apiKey, {
+    const broadcast = await createBroadcast(audienceKey, {
       audience_id: audienceId,
       from: FROM,
       reply_to: REPLY_TO,
