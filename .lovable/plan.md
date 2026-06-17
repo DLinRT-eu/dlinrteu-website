@@ -1,13 +1,32 @@
-The API key is stored and read in Supabase Edge Function secrets, not in frontend code. Resend is still involved because the key itself must be created in Resend with Full Access. The latest logs show the deployed function is still using a sending-only key for audience calls.
+## Problem
 
-Plan:
-1. Verify the `RESEND_AUDIENCE_API_KEY` Supabase secret was saved as a Resend Full Access key, and update it if needed.
-2. Update the remaining newsletter broadcast function to also use `RESEND_AUDIENCE_API_KEY` for audience/broadcast operations, not only `RESEND_API_KEY`.
-3. Add clearer runtime checks/error text so failures distinguish:
-   - missing Supabase secret
-   - sending-only Resend key
-   - other Resend API errors
-4. Deploy the affected Edge Functions and test the sync endpoint again.
-5. Re-check Edge Function logs to confirm `restricted_api_key` no longer appears.
+`ge-precision-dl` does not show on the GE Healthcare company page (`/company/ge-healthcare`).
 
-Technical note: `RESEND_API_KEY` can remain sending-only for plain transactional/test email sends, but any audience, contact, or broadcast operation must use a Full Access key exposed to Supabase as `RESEND_AUDIENCE_API_KEY`.
+Root cause: the company record's `productIds` array in `src/data/companies/medical-imaging.ts` (lines 10–18) does not include `"ge-precision-dl"`. `getProductsByCompany` in `src/services/DataService.ts` filters products via `company.productIds.includes(product.id)`, so the entry is silently excluded even though the product itself is valid, FDA-cleared, and renders fine at `/product/ge-precision-dl` and under the Image Enhancement filter.
+
+## Fix
+
+Add `"ge-precision-dl"` to the `GE Healthcare` `productIds` array in `src/data/companies/medical-imaging.ts`.
+
+Updated array (in alphabetical-ish grouping with existing entries preserved):
+
+```ts
+"productIds": [
+  "ge-auto-segmentation",
+  "ge-truefidelity-pro",
+  "ge-air-recon-dl",
+  "ge-air-recon-dl-enhancement",
+  "ge-dlip-ct",
+  "ge-healthcare-irt",
+  "ge-mr-contour-dl",
+  "ge-precision-dl"
+],
+```
+
+No other files need changes. The product file (`src/data/products/image-enhancement/ge-healthcare.ts`) is already correct.
+
+## Verification
+
+1. Reload `/company/ge-healthcare` — Precision DL should appear in the product list.
+2. `/product/ge-precision-dl` should keep working unchanged.
+3. Image Enhancement category and global `/products` view are unaffected.
