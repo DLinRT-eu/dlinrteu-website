@@ -29,6 +29,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     modality: ["PET/CT"],
     diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac conditions"],
     releaseDate: "2023-05-22",
+    version: "Not publicly disclosed",
     keyFeatures: [
       "Deep learning-based PET image enhancement",
       "Improved signal-to-noise ratio",
@@ -99,6 +100,9 @@ export const GE_PRODUCTS: ProductDetails[] = [
         description: "Maronnier et al. (2025). Deep learning-enhanced digital-BGO versus TOF PET/CT: comparative assessment of detection, quantitation, and overall image quality. EJNMMI Physics. 30 patients vs Discovery MI — academic-led (France), one GE co-author.",
         link: "https://doi.org/10.1186/s40658-025-00814-8"
       }
+    ],
+    limitations: [
+      "Tight vendor integration, can only be used with specific GE scanners",
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
