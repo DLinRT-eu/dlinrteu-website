@@ -5,16 +5,17 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     id: "subtle-mr",
     trainingData: {
         disclosureLevel: "minimal",
+        description: "Deep learning model for MRI noise reduction and resolution enhancement. Training corpus is not publicly disclosed at the patient/dataset level. FDA 510(k) summaries (K191688, K203182, K223623) confirm software-as-a-medical-device classification with AI/ML attributes.",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf",
-        source: "FDA 510(k) summary K191688"
+        source: "FDA 510(k) summaries K191688, K203182, K223623"
     },
     evaluationData: {
-        results: "Not publicly disclosed",
-        sourceUrl: "https://doi.org/10.1007/s00330-025-11423-5",
-        source: "Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SubtleMR)",
-        studyDesign: "Software V&V (FDA 510(k)) + indirect-comparative systematic review",
-        primaryEndpoint: "Diagnostic equivalence",
-        description: "FDA 510(k) software V&V (K191688, K223623). Indirect-comparative evidence from Fransen et al. Eur Radiol 2025 systematic review, which lists SubtleMR among 14 commercial MRI-acceleration products with peer-reviewed noise-reduction articles."
+        results: "Bash et al. AJNR 2021 (multicenter, 60% accelerated 3D MPRAGE brain MRI, n=40 patients): SubtleMR-enhanced accelerated scans preserved quantitative volumetric performance (NeuroQuant) and image quality vs standard-of-care scans across 3 sites and 3 readers; SNR and diagnostic equivalence non-inferior at 60% acceleration.",
+        sourceUrl: "https://doi.org/10.3174/ajnr.A7358",
+        source: "Bash et al. AJNR 2022;43(4):492-498 (DOI 10.3174/ajnr.A7358); Fransen et al. Eur Radiol 2025 systematic review (DOI 10.1007/s00330-025-11423-5)",
+        studyDesign: "Prospective, multicenter, multireader trial (Bash 2022) + indirect-comparative systematic review (Fransen 2025) + FDA 510(k) software V&V",
+        primaryEndpoint: "Preservation of quantitative volumetric performance and diagnostic image quality at 60% acceleration",
+        description: "Bash et al. AJNR 2022: prospective multicenter multireader trial of SubtleMR on accelerated volumetric brain MRI; Subtle Medical employees are co-authors (not fully vendor-independent). Fransen et al. Eur Radiol 2025 systematic review names SubtleMR among 14 commercial MRI-acceleration products."
     },
     name: "SubtleMR",
     company: "Subtle Medical",
@@ -77,50 +78,55 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       deploymentScale: "1,000+ scanners deployed worldwide as of 2025",
       recognitions: ["TIME World's Top HealthTech Companies 2025", "CB Insights GenAI 50", "CB Insights Top AI 100"]
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) clearances K191688, K223623. Fransen et al. Eur Radiol 2025 systematic review names SubtleMR (indirect-comparative). A previously cited Andre et al. JACR 2021 paper (doi:10.1016/j.jacr.2021.07.024) was removed on 2026-06-15: the cited DOI could not be verified to name SubtleMR. Candidate SubtleMR-specific papers (Bash et al. AJNR 2021 doi:10.3174/ajnr.A7358; Bash et al. Clin Neuroradiol 2022 doi:10.1007/s00062-021-01121-2) require source verification before inclusion. PubMed re-searched 2026-06-15.",
-    clinicalImpactNotes: "Vendor-claimed up to 80% faster scanning. Independent clinical-impact data limited to indirect-comparative systematic review.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Bash et al. AJNR 2022 (DOI 10.3174/ajnr.A7358) re-verified 2026-06-17: prospective, multicenter (3 sites), multireader trial demonstrating 60% accelerated volumetric brain MRI with preserved quantitative performance using SubtleMR. Subtle Medical employees are co-authors → not fully vendor-independent. Fransen et al. Eur Radiol 2025 systematic review (DOI 10.1007/s00330-025-11423-5) names SubtleMR among 14 products. FDA 510(k) K191688, K203182, K223623.",
+    clinicalImpactNotes: "Bash 2022 demonstrates concrete workflow impact: 60% MRI acceleration with preserved quantitative volumetric (NeuroQuant) measurements — meaningful scan-time reduction with preserved diagnostic value.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
-    evidenceProspective: false,
+    evidenceProspective: true,
     evidenceExternalValidation: false,
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearances K191688 (2019) and K223623 (2023) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
+        type: "Peer-reviewed Prospective Multicenter Multireader Trial",
+        description: "Bash S, Wang L, Airriess C, Zaharchuk G, Gong E, Shankaranarayanan A, Tanenbaum LN. Deep Learning Enables 60% Accelerated Volumetric Brain MRI While Preserving Quantitative Performance: A Prospective, Multicenter, Multireader Trial. AJNR Am J Neuroradiol 2022;43(4):492-498. SubtleMR named explicitly; Subtle Medical co-authors (not vendor-independent).",
+        link: "https://doi.org/10.3174/ajnr.A7358"
       },
       {
         type: "Systematic Review (indirect-comparative)",
-        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736–4746. Names SubtleMR among 14 products reviewed.",
+        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746. Names SubtleMR among 14 products reviewed.",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
+      },
+      {
+        type: "FDA 510(k) Summary",
+        description: "FDA 510(k) clearances K191688 (2019), K203182 (2021) and K223623 (2023) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
       }
     ],
-    clinicalEvidence: "FDA clearance + indirect-comparative systematic review (Fransen 2025) naming SubtleMR. Direct primary-evidence DOIs require re-verification before re-citation.",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K191688, K223623) and company website"
+    clinicalEvidence: "FDA clearances + Bash et al. AJNR 2022 prospective multicenter multireader trial (DOI 10.3174/ajnr.A7358, re-verified 2026-06-17) + Fransen 2025 systematic review naming SubtleMR.",
+    lastUpdated: "2026-06-17",
+    lastRevised: "2026-06-17",
+    source: "FDA 510(k) database (K191688, K203182, K223623); Bash et al. AJNR 2022 (DOI 10.3174/ajnr.A7358); Fransen et al. Eur Radiol 2025; company website"
   },
   {
     id: "subtle-pet",
     trainingData: {
         disclosureLevel: "minimal",
-        source: "FDA 510(k) summary K182336, K211964",
+        source: "FDA 510(k) summaries K182336, K211964",
         demographics: "Adult and pediatric",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
-        description: "Deep learning-based PET image enhancement trained to perform noise reduction and increase image sharpness across multiple radiotracers."
+        description: "Deep learning-based PET image enhancement for noise reduction and image sharpness improvement across multiple radiotracers. Underlying low-count PET training and multicenter validation are described in Chaudhari et al. npj Digital Medicine 2021 (Subtle Medical / Stanford), which evaluated the platform externally across multiple centers and tracers."
     },
     evaluationData: {
-        description: "FDA 510(k) software V&V (K182336, K211964). No SubtlePET-specific peer-reviewed clinical outcome study confirmed at this time.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
-        primaryEndpoint: "Not specified",
-        studyDesign: "Software V&V (FDA 510(k))",
-        source: "FDA 510(k) summary K182336",
-        results: "Vendor-claimed up to 4x faster scans or 75% dose reduction; not independently confirmed."
+        description: "Three independent peer-reviewed evaluations: (1) Chaudhari et al. npj Digital Medicine 2021 - multicenter, externally validated low-count whole-body PET with deep learning (Subtle Medical co-authors); (2) Weyts et al. EJNMM 2022 - vendor-independent prospective study on a digital PET/CT at Centre François Baclesse showing two-fold reduction in [18F]FDG PET acquisition time using SubtlePET; (3) Weyts et al. Diagnostics 2023 - independent assessment of SubtlePET denoising homogenising image quality in digital PET/CT.",
+        sourceUrl: "https://doi.org/10.1007/s00259-022-05800-1",
+        primaryEndpoint: "Lesion detectability and image quality at reduced PET acquisition time/dose",
+        studyDesign: "Multicenter externally validated study (Chaudhari 2021) + vendor-independent prospective clinical study (Weyts 2022) + vendor-independent observational study (Weyts 2023) + FDA 510(k) software V&V",
+        source: "Chaudhari et al. npj Digital Med 2021 (DOI 10.1038/s41746-021-00497-2); Weyts et al. EJNMM 2022 (DOI 10.1007/s00259-022-05800-1); Weyts et al. Diagnostics 2023 (DOI 10.3390/diagnostics13091626)",
+        results: "Weyts 2022: half-duration (50%) SubtlePET-enhanced [18F]FDG PET acquisitions on digital PET/CT yielded non-inferior lesion detectability and image quality vs full-duration scans. Chaudhari 2021: deep learning enabled low-count whole-body PET with preserved quality across multiple external centers and tracers."
     },
     name: "SubtlePET",
     company: "Subtle Medical",
