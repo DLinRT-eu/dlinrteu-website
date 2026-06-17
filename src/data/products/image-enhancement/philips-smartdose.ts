@@ -81,8 +81,8 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA validation K203020. No SmartDose-specific peer-reviewed publications identified. A 2025 CVIR Oncol study previously cited evaluates a different Philips product (Spectral Precise Image) and was removed on 2026-06-15 per evidence-verification sweep. PubMed re-searched 2026-06-15.",
-    clinicalImpactNotes: "Vendor-claimed workflow improvement through low-dose CT enhancement; no independent clinical impact studies identified.",
+    evidenceRigorNotes: "FDA validation K203020. No SmartDose-specific peer-reviewed publications identified. A 2025 CVIR Oncol study previously cited evaluates a different Philips product (Spectral Precise Image) and was removed on 2026-06-15 per evidence-verification sweep. PubMed/Google Scholar re-searched 2026-06-17: still no SmartDose-specific peer-reviewed publication confirmed; literature on Philips low-dose/DLR CT enhancement concentrates on the separate 'Precise Image' product family.",
+    clinicalImpactNotes: "Vendor-claimed workflow improvement through low-dose CT enhancement; no independent clinical impact studies identified as of 2026-06-17.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -90,9 +90,9 @@ export const PHILIPS_SMARTDOSE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    clinicalEvidence: "FDA 510(k) clearance K203020. No SmartDose-specific peer-reviewed clinical outcome studies identified as of 2026-06-15.",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    clinicalEvidence: "FDA 510(k) clearance K203020. No SmartDose-specific peer-reviewed clinical outcome studies identified as of 2026-06-17.",
+    lastUpdated: "2026-06-17",
+    lastRevised: "2026-06-17",
     source: "FDA 510(k) database (K203020) and company website",
     evidence: [
       {
