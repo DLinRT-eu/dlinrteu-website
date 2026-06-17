@@ -125,7 +125,11 @@ serve(async (req) => {
     }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     console.error("scheduled-newsletter-audience-sync error:", err);
-    return new Response(JSON.stringify({ error: (err as Error).message || "Internal error" }), {
+    const raw = (err as Error).message || "Internal error";
+    const message = raw.includes("restricted_api_key")
+      ? "Resend API key is restricted to sending only. Set RESEND_AUDIENCE_API_KEY to a Full Access Resend key (Resend dashboard → API Keys → Create API Key → Full access)."
+      : raw;
+    return new Response(JSON.stringify({ error: message }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
