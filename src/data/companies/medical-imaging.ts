@@ -8,13 +8,14 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "description": "Leading provider of medical imaging and information technologies.",
     "website": "https://www.gehealthcare.com",
     "productIds": [
-      "ge-auto-segmentation", 
-      "ge-truefidelity-pro", 
+      "ge-auto-segmentation",
+      "ge-truefidelity-pro",
       "ge-air-recon-dl",
-      "ge-dlip-ct",
       "ge-air-recon-dl-enhancement",
+      "ge-dlip-ct",
       "ge-healthcare-irt",
-      "ge-mr-contour-dl"
+      "ge-mr-contour-dl",
+      "ge-precision-dl"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/ge_healthcare.png",
