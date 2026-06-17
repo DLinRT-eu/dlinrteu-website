@@ -5,18 +5,20 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
   {
     id: "claripi-clarict-ai",
     trainingData: {
-        description: "The product uses a patented Clarity Engine with a deep Convolutional Neural Network (CNN) for selective noise removal.",
-        source: "FDA 510(k) summary K183460",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf",
-        disclosureLevel: "minimal"
+        description: "Image-based CT denoising using a U-Net CNN (contracting + expansive paths). Per Yeoh et al. Korean J Radiol 2021, training used >1,000,000 CT images covering ~2,100 combinations of scan/reconstruction conditions (varying kV, mAs, AEC, slice thickness, contrast, kernels) across 24 scanner models from 4 major vendors (GE, Siemens, Philips, Canon). Synthetic sinogram-based LDCT simulation generated paired LDCT/standard-dose training data; 80/20 train/validation split, with additional external validation in 4 independent clinical studies.",
+        datasetSize: ">1,000,000 CT images (~2,100 scan/recon condition combinations)",
+        scannerModels: ["24 scanner models across GE, Siemens, Philips, Canon"],
+        source: "Yeoh et al. Korean J Radiol 2021;22(11):1850 (Materials and Methods); FDA 510(k) K183460",
+        sourceUrl: "https://doi.org/10.3348/kjr.2021.0140",
+        disclosureLevel: "partial"
     },
     evaluationData: {
-        studyDesign: "Software V&V (FDA 510(k))",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf",
-        source: "FDA 510(k) summary K183460",
-        results: "Not publicly disclosed",
-        primaryEndpoint: "Not specified",
-        description: "FDA 510(k) software validation for ClariCT.AI. No ClariCT.AI-specific peer-reviewed publication verified at this time."
+        studyDesign: "Independent peer-reviewed clinical pilot (Yeoh 2021) + independent peer-reviewed phantom dose-reduction study (Chang 2022) + FDA 510(k) software V&V",
+        sourceUrl: "https://doi.org/10.1007/s00330-021-08199-9",
+        source: "Chang et al. Eur Radiol 2022;32:691 (DOI 10.1007/s00330-021-08199-9); Yeoh et al. Korean J Radiol 2021;22(11):1850 (DOI 10.3348/kjr.2021.0140)",
+        results: "Yeoh 2021 (52 patients, lumbar spine LDCT): denoised 50-mAs images had lower noise (36.4±7.0 HU) than 100-mAs (63.3±16.1 HU) and higher SNR (1.46 vs 0.99), with preserved/improved edge sharpness (p<0.001). Chang 2022 (phantom, multi-dose): dose-reduction potential 86% (81-88%), comparable to high-strength vendor-specific DLR (TrueFidelity, 87%) and superior to medium/low DLR strengths.",
+        primaryEndpoint: "Noise, SNR, edge rise distance (Yeoh); task-based detectability index and dose-reduction potential (Chang)",
+        description: "Two independent (non-vendor) peer-reviewed evaluations: a 52-patient retrospective clinical pilot on lumbar spine LDCT (Yeoh 2021) and a multi-dose phantom dose-reduction study (Chang 2022) comparing ClariCT.AI head-to-head against GE TrueFidelity DLR. Both name ClariCT.AI explicitly. Underlying FDA 510(k) software V&V (K183460) also applies."
     },
     name: "ClariCT.AI",
     company: "ClariPi",
@@ -76,26 +78,36 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
+        type: "Peer-reviewed Clinical Pilot (vendor-independent)",
+        description: "Yeoh H, Hong SH, Ahn C, Choi JY, Chae HD, Yoo HJ, Kim JH. Deep Learning Algorithm for Simultaneous Noise Reduction and Edge Sharpening in Low-Dose CT Images: A Pilot Study Using Lumbar Spine CT. Korean J Radiol 2021;22(11):1850-1857. 52 patients; names ClariCT.AI (ClariPI) explicitly in Methods.",
+        link: "https://doi.org/10.3348/kjr.2021.0140"
+      },
+      {
+        type: "Peer-reviewed Phantom Comparative Study (vendor-independent)",
+        description: "Chang W, Kim JH, Ahn C, Lee H, Kim HY, Cho J, Lee YJ, Kim YH. Dose reduction potential of vendor-agnostic deep learning model in comparison with deep learning-based image reconstruction algorithm on CT: a phantom study. Eur Radiol 2022;32:691-701. Compares ClariCT.AI head-to-head against GE TrueFidelity using task-based detectability index.",
+        link: "https://doi.org/10.1007/s00330-021-08199-9"
+      },
+      {
         type: "FDA 510(k) Summary",
         description: "FDA 510(k) clearance K183460 for ClariCT.AI - Class II, 21 CFR 892.2050, Product Code LLZ. Additional clearance K212074 (2021) for AI Marketplace integration.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183460.pdf"
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) K183460 + K212074. A previously cited Kim et al. Eur Radiol 2020 paper (doi:10.1007/s00330-020-07081-4) was removed on 2026-06-15: the DOI resolves to an unrelated PET/CT lactation study, not CT denoising. A PubMed search-URL entry was also removed (not a citation). No ClariCT.AI-specific peer-reviewed publication confirmed at this time. PubMed re-searched 2026-06-15.",
-    clinicalImpactNotes: "Vendor-claimed workflow improvement through CT denoising enabling dose reduction; no independently confirmed clinical impact study identified.",
+    evidenceRigorNotes: "Two independent vendor-independent peer-reviewed studies confirmed (re-verified 2026-06-17 by full-text DOI resolution) to name ClariCT.AI: Yeoh et al. Korean J Radiol 2021 (52-patient retrospective clinical pilot, lumbar spine LDCT) and Chang et al. Eur Radiol 2022 (phantom dose-reduction study head-to-head vs GE TrueFidelity). Both single-center, non-prospective. FDA 510(k) K183460 + K212074.",
+    clinicalImpactNotes: "Independent evidence supports meaningful image-quality improvement and dose-reduction potential (~86% phantom DRP, comparable to vendor-specific DLR). No prospective patient-outcome study identified; clinical impact remains workflow/dose-saving (I1).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    clinicalEvidence: "FDA 510(k) clearances (K183460, K212074). ClariCT.AI-specific peer-reviewed clinical outcome studies require verification before re-citation.",
+    evidenceExternalValidation: true,
+    clinicalEvidence: "FDA 510(k) K183460/K212074 plus two vendor-independent peer-reviewed studies (Yeoh 2021 Korean J Radiol; Chang 2022 Eur Radiol) confirmed via DOI resolution to explicitly name and evaluate ClariCT.AI.",
     releaseDate: "2019-03-29",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K183460, K212074) and company website"
+    lastUpdated: "2026-06-17",
+    lastRevised: "2026-06-17",
+    source: "FDA 510(k) database (K183460, K212074); Yeoh et al. KJR 2021 (DOI 10.3348/kjr.2021.0140); Chang et al. Eur Radiol 2022 (DOI 10.1007/s00330-021-08199-9); company website"
   }
 ];
