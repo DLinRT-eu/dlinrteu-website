@@ -5,28 +5,28 @@ export const GE_PRODUCTS: ProductDetails[] = [
     id: "ge-precision-dl",
     trainingData: {
         source: "FDA 510(k) database",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223212.pdf",
         disclosureLevel: "minimal"
     },
     evaluationData: {
         results: "Not publicly disclosed",
         primaryEndpoint: "Not specified",
-        description: "FDA 510(k) validation (K230082) for a deep learning-based PET image enhancement tool designed to improve image quality through noise reduction.",
-        source: "FDA 510(k) summary K230082",
+        description: "FDA 510(k) validation (K223212) for a deep learning-based PET/CT image enhancement tool designed to improve image quality, including enhancement in image Contrast Recovery (CR), Contrast to Noise Ratio (CNR), and quantitation accuracy.",
+        source: "FDA 510(k) summary K223212",
         studyDesign: "Software V&V (FDA 510(k))",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf"
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223212.pdf"
     },
     name: "Precision DL",
     company: "GE Healthcare",
     category: "Image Enhancement",
-    description: "Deep learning-based PET image enhancement that improves image quality and enables potential dose reduction while maintaining diagnostic confidence.",
+    description: "Precision DL is deep learning-based image processing, available on the Omni Legend PET/CT system, that enhances image quality in PET/CT scans, including improved contrast-to-noise ratio, contrast recovery, and quantitative accuracy.",
     certification: "FDA Cleared",
     logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com",
-    productUrl: "https://www.gehealthcare.com/products/molecular-imaging/pet-ct",
+    productUrl: "https://www.gehealthcare.com/en-us/products/molecular-imaging/pet-ct/omni-legend",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/ge-healthcare.ts",
     anatomicalLocation: ["Whole body"],
-    modality: ["PET", "PET/CT"],
+    modality: ["PET/CT"],
     diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac conditions"],
     releaseDate: "2023-05-22",
     keyFeatures: [
@@ -56,7 +56,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510k_cleared",
         class: "Class II",
-        clearanceNumber: "K230082",
+        clearanceNumber: "K223212",
         regulationNumber: "21 CFR 892.2050",
         productCode: "MYN",
         type: "510(k)",
@@ -70,25 +70,50 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance K230082 for Precision DL - Class II device",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K230082.pdf"
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearance K223212 for Precision DL - Class II device",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223212.pdf"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Mehranian et al. (2022). Deep learning–based time-of-flight (ToF) image enhancement of non-ToF PET scans. Eur J Nucl Med Mol Imaging 49(11):3740–3749. Foundational DLToF algorithm later commercialized as Precision DL — vendor-affiliated.",
+        link: "https://doi.org/10.1007/s00259-022-05824-7"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Mehranian et al. (2025). Deep learning-based time-of-flight (ToF) enhancement of non-ToF PET scans for different radiotracers. Eur J Nucl Med Mol Imaging 52(8):2968–2978. Extends Precision DL beyond FDG to PSMA/DOTATATE across an 11-site cohort — vendor-led.",
+        link: "https://doi.org/10.1007/s00259-025-07119-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Miwa et al. (2025). Effects of a deep learning-based image quality enhancement method on a digital-BGO PET/CT system for 18F-FDG whole-body examination. EJNMMI Physics 12. Phantom + 30 clinical scans — vendor-independent (Japan).",
+        link: "https://doi.org/10.1186/s40658-025-00742-7"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Dadgar et al. (2024). Assessing the deep learning based image quality enhancements for the BGO based GE omni legend PET/CT. EJNMMI Physics 11. NEMA IQ phantom study — vendor-independent (Belgium).",
+        link: "https://doi.org/10.1186/s40658-024-00688-2"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Maronnier et al. (2025). Deep learning-enhanced digital-BGO versus TOF PET/CT: comparative assessment of detection, quantitation, and overall image quality. EJNMMI Physics. 30 patients vs Discovery MI — academic-led (France), one GE co-author.",
+        link: "https://doi.org/10.1186/s40658-025-00814-8"
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA validation K230082. Limited independent peer-reviewed publications.",
-    clinicalImpactNotes: "Workflow improvement through enhanced PET image quality and potential dose reduction.",
+    evidenceRigorNotes: "Five peer-reviewed publications identified, three vendor-independent (Miwa 2025 Japan, Dadgar 2024 Belgium, Maronnier 2025 France) constituting external validation across three countries, plus a vendor-led 11-site multi-tracer training/validation cohort (Mehranian 2025). Caveat: each individual clinical validation of the Omni Legend/BGO product is single-center",
+    clinicalImpactNotes: "Workflow/diagnostic-accuracy improvement (F&T Level 2): contrast recovery, contrast-to-noise ratio, lesion detectability and quantitative accuracy (SUV) consistently reported across studies. No identified evidence of change in treatment management (I3) or patient outcomes (I4).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
-    evidenceMultiNational: false,
+    evidenceMultiNational: true,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database"
+    evidenceExternalValidation: true,
+    lastUpdated: "2026-06-17",
+    lastRevised: "2026-06-17",
+    source: "FDA 510(k) database, peer-review publications"
   },
   {
     id: "ge-air-recon-dl-enhancement",
