@@ -33,9 +33,10 @@ serve(async (req) => {
       });
     }
 
-    const apiKey = Deno.env.get("RESEND_API_KEY");
+    // Audience operations need Full Access; prefer dedicated key, fall back to RESEND_API_KEY.
+    const apiKey = Deno.env.get("RESEND_AUDIENCE_API_KEY") || Deno.env.get("RESEND_API_KEY");
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: "RESEND_API_KEY not configured" }), {
+      return new Response(JSON.stringify({ error: "RESEND_AUDIENCE_API_KEY (or RESEND_API_KEY) not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
