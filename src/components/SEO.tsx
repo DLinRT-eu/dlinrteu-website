@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 
 interface SEOProps {
   title: string;
@@ -12,32 +13,40 @@ interface SEOProps {
   noindex?: boolean;
 }
 
+const SITE_ORIGIN = 'https://dlinrt.eu';
+
 const SEO = ({
   title,
   description,
-  canonical = 'https://dlinrt.eu',
+  canonical,
   ogType = 'website',
-  ogImage = '/opengraph-image.png', // Using relative path
+  ogImage = '/opengraph-image.png',
   structuredData,
   noindex = false,
 }: SEOProps) => {
   const fullTitle = `${title} | DLinRT`;
-  
-  // Determine if we're in development or production
   const isDev = import.meta.env.DEV;
-  
-  // Adjust paths for development vs production
-  const resolvedOgImage = isDev ? ogImage : `https://dlinrt.eu${ogImage}`;
+
+  // Self-reference canonical/og:url to the current path when not provided.
+  let pathname = '/';
+  try {
+    // useLocation is available because SEO is always rendered inside the Router.
+    pathname = useLocation().pathname || '/';
+  } catch {
+    pathname = '/';
+  }
+  const resolvedCanonicalUrl = canonical ?? `${SITE_ORIGIN}${pathname}`;
+
+  const resolvedOgImage = isDev ? ogImage : `${SITE_ORIGIN}${ogImage}`;
   const resolvedCanonical = isDev && (() => {
     try {
-      const parsedUrl = new URL(canonical);
-      return parsedUrl.host === 'dlinrt.eu';
+      return new URL(resolvedCanonicalUrl).host === 'dlinrt.eu';
     } catch {
       return false;
     }
   })()
-    ? canonical.replace('https://dlinrt.eu', '') 
-    : canonical;
+    ? resolvedCanonicalUrl.replace(SITE_ORIGIN, '')
+    : resolvedCanonicalUrl;
 
   return (
     <Helmet>
@@ -45,14 +54,14 @@ const SEO = ({
       <meta name="description" content={description} />
       <link rel="canonical" href={resolvedCanonical} />
       {noindex && <meta name="robots" content="noindex" />}
-      
+
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={resolvedCanonical} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={resolvedOgImage} />
-      
+
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={resolvedCanonical} />
