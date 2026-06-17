@@ -28,13 +28,7 @@ const SEO = ({
   const isDev = import.meta.env.DEV;
 
   // Self-reference canonical/og:url to the current path when not provided.
-  let pathname = '/';
-  try {
-    // useLocation is available because SEO is always rendered inside the Router.
-    pathname = useLocation().pathname || '/';
-  } catch {
-    pathname = '/';
-  }
+  const pathname = useLocation().pathname || '/';
   const resolvedCanonicalUrl = canonical ?? `${SITE_ORIGIN}${pathname}`;
 
   const resolvedOgImage = isDev ? ogImage : `${SITE_ORIGIN}${ogImage}`;
