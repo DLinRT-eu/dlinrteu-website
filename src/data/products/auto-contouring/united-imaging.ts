@@ -154,3 +154,5 @@ export const uRTAutoContouring: ProductDetails = {
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [uRTAutoContouring];
