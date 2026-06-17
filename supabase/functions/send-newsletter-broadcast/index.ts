@@ -3,7 +3,6 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.8";
 import {
   getOrCreateAudienceId,
   createBroadcast,
-  sendBroadcast,
 } from "../_shared/resend-audience.ts";
 import {
   parseNewsletterMarkdown,
@@ -36,8 +35,7 @@ interface BroadcastRequest {
   subject?: string;
   preheader?: string;
   bodyMarkdown: string;
-  testRecipient?: string;     // if set → send only to this address (no broadcast)
-  send?: boolean;             // if false → create broadcast in Resend but do not send
+  testRecipient?: string;     // if set → single /emails test send
   name?: string;              // broadcast name (admin label)
 }
 
@@ -134,7 +132,7 @@ serve(async (req) => {
       });
     }
 
-    // Real broadcast via Resend audience
+    // PUSH draft to Resend audience as a broadcast. Final send happens inside Resend.
     const audienceId = await getOrCreateAudienceId(apiKey);
     const html = renderNewsletterHtml({
       subject,
@@ -153,11 +151,6 @@ serve(async (req) => {
       name: body.name || `DLinRT newsletter ${new Date().toISOString().slice(0, 10)}`,
     });
 
-    const send = body.send !== false; // default true
-    if (send) {
-      await sendBroadcast(apiKey, broadcast.id);
-    }
-
     // Count active subscribers for the audit detail
     const { count: activeCount } = await admin
       .from("newsletter_subscribers")
@@ -166,7 +159,7 @@ serve(async (req) => {
 
     await admin.from("admin_audit_log").insert({
       performed_by: user.id, performed_by_email: user.email || "unknown",
-      action_type: send ? "newsletter_broadcast_sent" : "newsletter_broadcast_drafted",
+      action_type: "newsletter_broadcast_drafted",
       details: {
         broadcast_id: broadcast.id, audience_id: audienceId,
         subject, active_subscribers: activeCount ?? null,
@@ -175,10 +168,11 @@ serve(async (req) => {
 
     return new Response(JSON.stringify({
       success: true,
-      mode: send ? "sent" : "drafted",
+      mode: "drafted",
       broadcastId: broadcast.id,
       audienceId,
       activeSubscribers: activeCount ?? null,
+      resendUrl: `https://resend.com/broadcasts/${broadcast.id}`,
     }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     console.error("send-newsletter-broadcast error:", err);
