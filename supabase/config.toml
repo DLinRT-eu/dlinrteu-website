@@ -91,3 +91,7 @@ verify_jwt = true
 [functions.send-newsletter-broadcast]
 verify_jwt = true
 
+[functions.scheduled-newsletter-audience-sync]
+verify_jwt = false  # Authenticated via x-cron-secret header, called by pg_cron
+
+

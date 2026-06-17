@@ -1,6 +1,6 @@
 # Newsletter Drafts
 
-This folder stores **Mailchimp-ready newsletter drafts** for DLinRT.eu.
+This folder stores **newsletter drafts** for DLinRT.eu, rendered by the DLinRT email template and broadcast via Resend.
 
 ## Naming convention
 
@@ -8,22 +8,28 @@ This folder stores **Mailchimp-ready newsletter drafts** for DLinRT.eu.
 
 ## Structure of each file
 
-Each newsletter is split into discrete copy-paste blocks aligned with Mailchimp content sections:
+Each newsletter is split into discrete blocks parsed by `supabase/functions/_shared/newsletter-render.ts`:
 
-- `## SUBJECT LINE` — paste into Mailchimp campaign subject.
-- `## PREHEADER` — paste into preview text.
-- `## BLOCK N — <label>` — one block per Mailchimp content row. Each block has a heading and a short body with inline links, following the project color-coded convention:
+- `## SUBJECT LINE` — email subject.
+- `## PREHEADER` — preview text.
+- `## BLOCK N — <label>` — one section block. Accent color is inferred from the leading emoji:
   - 🟢 **Green** — product / catalogue updates
   - 🟣 **Violet** — community / reviewers
   - 🔵 **Blue** — platform / backbone
   - 🟡 **Amber** — events / calls to action
 
-## How to use
+Inside blocks, `![alt](url)` becomes a responsive image and a lone `[Label](url)` line becomes a pill button.
 
-1. Open the relevant `.md` file.
-2. In Mailchimp, create a new campaign and paste the subject + preheader.
-3. For each block, add a Text content block in the template and paste the block body. Mailchimp preserves inline links and bold/italic from markdown rendered in the visual editor (use "Paste from rich text" if available).
-4. Attach assets from `public/newsletters/<period>/` (deck PDF, slide images, logos) as needed.
+## Workflow
+
+1. Edit / create the markdown file in this folder.
+2. Open `/admin/newsletter-broadcast` on the website.
+3. Pick the draft, tweak subject/preheader/body if needed, review the live preview.
+4. Click **Send test from website** to spot-check rendering in your inbox.
+5. Click **Push draft to Resend**. The broadcast appears in the Resend dashboard, no email is sent yet.
+6. Open the broadcast in Resend → send another test if you like, then **Send to audience** from Resend to ship the final newsletter.
+
+The Resend audience is kept in sync automatically (subscribes/unsubscribes mirror in real time, plus a daily cron reconcile). The "Force full reconcile now" button is only needed if you suspect drift.
 
 ## Why store these here
 

@@ -8,16 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
-  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { parseNewsletterMarkdown, renderNewsletterHtml } from "@/utils/email/newsletterRender";
-import { RefreshCcw, Send, FlaskConical, Mail } from "lucide-react";
+import { RefreshCcw, Upload, FlaskConical, Mail, ExternalLink } from "lucide-react";
 
 // Load every markdown draft in src/data/newsletters/ at build time
 const draftModules = import.meta.glob("/src/data/newsletters/*.md", {
@@ -52,15 +47,15 @@ export default function NewsletterBroadcast() {
   const [subject, setSubject] = useState("");
   const [preheader, setPreheader] = useState("");
   const [testEmail, setTestEmail] = useState("");
-  const [confirmText, setConfirmText] = useState("");
   const [previewTheme, setPreviewTheme] = useState<"light" | "dark">("light");
 
   const [syncing, setSyncing] = useState(false);
   const [syncCounts, setSyncCounts] = useState<SyncCounts | null>(null);
   const [activeSubscribers, setActiveSubscribers] = useState<number | null>(null);
   const [sendingTest, setSendingTest] = useState(false);
-  const [sendingBroadcast, setSendingBroadcast] = useState(false);
+  const [pushingDraft, setPushingDraft] = useState(false);
   const [lastBroadcastId, setLastBroadcastId] = useState<string | null>(null);
+  const [lastBroadcastUrl, setLastBroadcastUrl] = useState<string | null>(null);
 
   // Whenever the source draft changes, re-derive subject/preheader from it
   useEffect(() => {
@@ -143,26 +138,26 @@ export default function NewsletterBroadcast() {
     }
   }
 
-  async function sendBroadcastNow() {
-    setSendingBroadcast(true);
+  async function pushDraftToResend() {
+    setPushingDraft(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-newsletter-broadcast", {
         body: {
-          subject, preheader, bodyMarkdown: body, send: true,
+          subject, preheader, bodyMarkdown: body,
           name: `DLinRT newsletter ${selectedSlug}`,
         },
       });
       if (error) throw error;
-      if (!data?.success) throw new Error(data?.error || "Broadcast failed");
+      if (!data?.success) throw new Error(data?.error || "Push failed");
       setLastBroadcastId(data.broadcastId);
-      toast.success(`Broadcast sent (${data.activeSubscribers ?? "?"} active subscribers)`, {
-        description: `Resend broadcast id: ${data.broadcastId}`,
+      setLastBroadcastUrl(data.resendUrl ?? `https://resend.com/broadcasts/${data.broadcastId}`);
+      toast.success("Draft pushed to Resend", {
+        description: `Audience: ${data.activeSubscribers ?? "?"} active. Send the final broadcast from the Resend dashboard.`,
       });
     } catch (e) {
-      toast.error("Broadcast failed", { description: (e as Error).message });
+      toast.error("Push to Resend failed", { description: (e as Error).message });
     } finally {
-      setSendingBroadcast(false);
-      setConfirmText("");
+      setPushingDraft(false);
     }
   }
 
@@ -185,7 +180,8 @@ export default function NewsletterBroadcast() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2"><Mail className="h-5 w-5" /> Audience sync</CardTitle>
             <CardDescription>
-              Push subscribers to Resend and pull back any unsubscribes done from email footers.
+              New subscribes and unsubscribes mirror to Resend automatically, and a daily cron does a full reconcile.
+              Use the button below to force a reconcile right now.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -202,7 +198,7 @@ export default function NewsletterBroadcast() {
             </div>
             <Button onClick={runSync} disabled={syncing} variant="outline">
               <RefreshCcw className={`h-4 w-4 mr-2 ${syncing ? "animate-spin" : ""}`} />
-              {syncing ? "Syncing…" : "Sync audience with Resend"}
+              {syncing ? "Syncing…" : "Force full reconcile now"}
             </Button>
           </CardContent>
         </Card>
@@ -283,9 +279,10 @@ export default function NewsletterBroadcast() {
         {/* Send controls */}
         <Card>
           <CardHeader>
-            <CardTitle>Send</CardTitle>
+            <CardTitle>Test & push</CardTitle>
             <CardDescription>
-              Always send a test first. The broadcast goes to every active contact in the Resend audience.
+              Send a test from here or from Resend. The final broadcast is always sent from the Resend dashboard
+              after pushing the draft below.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -299,46 +296,40 @@ export default function NewsletterBroadcast() {
               </div>
               <Button onClick={sendTest} disabled={sendingTest} variant="secondary">
                 <FlaskConical className="h-4 w-4 mr-2" />
-                {sendingTest ? "Sending…" : "Send test"}
+                {sendingTest ? "Sending…" : "Send test from website"}
               </Button>
             </div>
 
             <div className="border-t pt-4 space-y-3">
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button disabled={sendingBroadcast} className="bg-[#5090D0] hover:bg-[#5090D0]/90">
-                    <Send className="h-4 w-4 mr-2" />
-                    {sendingBroadcast ? "Sending…" : "Send to all subscribers"}
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Send broadcast to every active subscriber?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This will create and send a Resend broadcast to ~{activeSubscribers ?? "?"} contacts.
-                      Type <strong>SEND</strong> to confirm.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <Input
-                    autoFocus value={confirmText} onChange={(e) => setConfirmText(e.target.value)}
-                    placeholder="Type SEND to confirm"
-                  />
-                  <AlertDialogFooter>
-                    <AlertDialogCancel onClick={() => setConfirmText("")}>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                      disabled={confirmText !== "SEND"}
-                      onClick={sendBroadcastNow}
-                    >
-                      Send now
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <Button
+                onClick={pushDraftToResend}
+                disabled={pushingDraft}
+                className="bg-[#5090D0] hover:bg-[#5090D0]/90"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                {pushingDraft ? "Pushing…" : "Push draft to Resend"}
+              </Button>
+              <p className="text-sm text-muted-foreground">
+                This creates the broadcast in Resend (audience: ~{activeSubscribers ?? "?"} active subscribers)
+                but does not send. Open it in Resend to send a test or the final newsletter.
+              </p>
 
               {lastBroadcastId && (
-                <p className="text-sm text-muted-foreground">
-                  Last broadcast id: <code>{lastBroadcastId}</code>
-                </p>
+                <div className="text-sm space-y-1">
+                  <p className="text-muted-foreground">
+                    Last pushed broadcast: <code>{lastBroadcastId}</code>
+                  </p>
+                  {lastBroadcastUrl && (
+                    <a
+                      href={lastBroadcastUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[#5090D0] hover:underline"
+                    >
+                      Open in Resend <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           </CardContent>
