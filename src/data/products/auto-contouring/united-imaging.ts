@@ -1,6 +1,6 @@
 import { ProductDetails } from "@/types/productDetails";
 
-export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [];
+
 
 
 export const uRTAutoContouring: ProductDetails = {
