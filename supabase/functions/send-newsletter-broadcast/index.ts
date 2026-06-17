@@ -49,8 +49,10 @@ serve(async (req) => {
   }
 
   try {
-    const apiKey = Deno.env.get("RESEND_API_KEY");
-    if (!apiKey) {
+    // Sending (test emails) can use the restricted key; audience/broadcast ops need Full Access.
+    const sendKey = Deno.env.get("RESEND_API_KEY");
+    const audienceKey = Deno.env.get("RESEND_AUDIENCE_API_KEY") || sendKey;
+    if (!sendKey) {
       return new Response(JSON.stringify({ error: "RESEND_API_KEY not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -110,7 +112,7 @@ serve(async (req) => {
       });
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${sendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           from: FROM, to: [recipient], reply_to: REPLY_TO,
           subject: `[TEST] ${subject}`, html,
@@ -133,7 +135,7 @@ serve(async (req) => {
     }
 
     // PUSH draft to Resend audience as a broadcast. Final send happens inside Resend.
-    const audienceId = await getOrCreateAudienceId(apiKey);
+    const audienceId = await getOrCreateAudienceId(audienceKey);
     const html = renderNewsletterHtml({
       subject,
       preheader,
@@ -141,7 +143,7 @@ serve(async (req) => {
       unsubscribeUrl: "{{{RESEND_UNSUBSCRIBE_URL}}}",
     });
 
-    const broadcast = await createBroadcast(apiKey, {
+    const broadcast = await createBroadcast(audienceKey, {
       audience_id: audienceId,
       from: FROM,
       reply_to: REPLY_TO,
@@ -176,7 +178,11 @@ serve(async (req) => {
     }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     console.error("send-newsletter-broadcast error:", err);
-    return new Response(JSON.stringify({ error: (err as Error).message || "Internal error" }), {
+    const raw = (err as Error).message || "Internal error";
+    const message = raw.includes("restricted_api_key")
+      ? "Resend API key is restricted to sending only. Set RESEND_AUDIENCE_API_KEY to a Full Access Resend key (Resend dashboard → API Keys → Create API Key → Full access)."
+      : raw;
+    return new Response(JSON.stringify({ error: message }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
