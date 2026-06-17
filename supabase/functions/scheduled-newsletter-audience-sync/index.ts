@@ -33,9 +33,10 @@ serve(async (req) => {
       });
     }
 
-    const apiKey = Deno.env.get("RESEND_API_KEY");
+    // Audience operations need Full Access; prefer dedicated key, fall back to RESEND_API_KEY.
+    const apiKey = Deno.env.get("RESEND_AUDIENCE_API_KEY") || Deno.env.get("RESEND_API_KEY");
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: "RESEND_API_KEY not configured" }), {
+      return new Response(JSON.stringify({ error: "RESEND_AUDIENCE_API_KEY (or RESEND_API_KEY) not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -124,7 +125,11 @@ serve(async (req) => {
     }), { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err) {
     console.error("scheduled-newsletter-audience-sync error:", err);
-    return new Response(JSON.stringify({ error: (err as Error).message || "Internal error" }), {
+    const raw = (err as Error).message || "Internal error";
+    const message = raw.includes("restricted_api_key")
+      ? "Resend API key is restricted to sending only. Set RESEND_AUDIENCE_API_KEY to a Full Access Resend key (Resend dashboard → API Keys → Create API Key → Full access)."
+      : raw;
+    return new Response(JSON.stringify({ error: message }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
