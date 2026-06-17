@@ -1,5 +1,8 @@
 import { ProductDetails } from "@/types/productDetails";
 
+
+
+
 export const uRTAutoContouring: ProductDetails = {
   id: "united-urt-auto-contouring",
   name: "uRT Auto-Contouring",
@@ -151,3 +154,5 @@ export const uRTAutoContouring: ProductDetails = {
     outputFormat: ["DICOM-RTSTRUCT"]
   }
 };
+
+export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [uRTAutoContouring];

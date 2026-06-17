@@ -74,13 +74,13 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed publications found. CE marked but limited external validation. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "No independent peer-reviewed publications naming uCS-AI specifically identified. CE marked but limited external validation. PubMed/Google Scholar re-searched 2026-06-17: indirect United Imaging uRT-linac case reports exist (e.g. nasopharyngeal carcinoma online-adaptive case report; SCLC case using fan-beam CT-guided adaptive RT) but do not specifically evaluate the uCS-AI CBCT reconstruction algorithm.",
+    clinicalImpactNotes: "No independently demonstrated clinical impact. PubMed re-searched 2026-06-17.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    clinicalEvidence: "Clinical evaluations showing improved target visualization and reduced contouring variability compared to conventional CBCT",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    clinicalEvidence: "Vendor-reported clinical evaluations only (improved target visualisation, reduced contouring variability vs conventional CBCT). No uCS-AI-specific peer-reviewed publication confirmed as of 2026-06-17.",
+    lastUpdated: "2026-06-17",
+    lastRevised: "2026-06-17",
     source: "Company website"
 
   }
