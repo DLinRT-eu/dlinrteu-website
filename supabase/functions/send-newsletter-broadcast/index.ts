@@ -49,8 +49,10 @@ serve(async (req) => {
   }
 
   try {
-    const apiKey = Deno.env.get("RESEND_API_KEY");
-    if (!apiKey) {
+    // Sending (test emails) can use the restricted key; audience/broadcast ops need Full Access.
+    const sendKey = Deno.env.get("RESEND_API_KEY");
+    const audienceKey = Deno.env.get("RESEND_AUDIENCE_API_KEY") || sendKey;
+    if (!sendKey) {
       return new Response(JSON.stringify({ error: "RESEND_API_KEY not configured" }), {
         status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
