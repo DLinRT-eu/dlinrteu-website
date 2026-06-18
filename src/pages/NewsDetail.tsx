@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ReactMarkdown from 'react-markdown';
 import dataService from '@/services/DataService';
@@ -59,7 +59,20 @@ const NewsDetail = () => {
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        <time className="text-sm text-blue-600 mb-2 block">{newsItem.date}</time>
+        <div className="flex items-center gap-4 mb-2">
+          <time className="text-sm text-blue-600">{newsItem.date}</time>
+          {newsItem.linkedinPostUrl && (
+            <a
+              href={newsItem.linkedinPostUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm text-[#0A66C2] hover:underline"
+            >
+              <Linkedin className="h-4 w-4" />
+              View LinkedIn post
+            </a>
+          )}
+        </div>
         <p className="text-gray-600 text-lg leading-relaxed mb-8">{newsItem.summary}</p>
         
         {newsItem.content && (

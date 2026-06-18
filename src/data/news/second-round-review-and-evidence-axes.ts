@@ -3,6 +3,7 @@ import { NewsItem } from "@/types/news";
 export const secondRoundReviewAndEvidenceAxes: NewsItem = {
   id: "second-round-review-and-evidence-axes",
   date: "2026-06-18",
+  linkedinPostUrl: "", // TODO: add URL once posted
   title: "Second-Round Review Complete · 3-Axis Evidence System Live · Certification Round Opens",
   summary:
     "We finished the full second-round review of the catalog, surfaced a new 3-axis evidence system on every product, opened the official company certification round, welcomed a new reviewer, and lined up the MIART @ MICCAI satellite event.",
