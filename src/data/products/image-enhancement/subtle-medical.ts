@@ -6,16 +6,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     trainingData: {
         disclosureLevel: "minimal",
         description: "Deep learning model for MRI noise reduction and resolution enhancement. Training corpus is not publicly disclosed at the patient/dataset level. FDA 510(k) summaries (K191688, K203182, K223623) confirm software-as-a-medical-device classification with AI/ML attributes.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf, https://www.accessdata.fda.gov/cdrh_docs/pdf20/K203182.pdf, https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223623.pdf",
         source: "FDA 510(k) summaries K191688, K203182, K223623"
     },
     evaluationData: {
-        results: "Bash et al. AJNR 2021 (multicenter, 60% accelerated 3D MPRAGE brain MRI, n=40 patients): SubtleMR-enhanced accelerated scans preserved quantitative volumetric performance (NeuroQuant) and image quality vs standard-of-care scans across 3 sites and 3 readers; SNR and diagnostic equivalence non-inferior at 60% acceleration.",
-        sourceUrl: "https://doi.org/10.3174/ajnr.A7358",
-        source: "Bash et al. AJNR 2022;43(4):492-498 (DOI 10.3174/ajnr.A7358); Fransen et al. Eur Radiol 2025 systematic review (DOI 10.1007/s00330-025-11423-5)",
+        results: "FDA acceptance criteria (K223623): SNR of a selected ROI improved by ≥5% on average after SubtleMR enhancement compared to original images, plus a visibility-of-small-structures rating, assessed using retrospective clinical data. Test methods were consistent across the clearance chain. Bash et al. AJNR 2021 (multicenter, 60% accelerated 3D MPRAGE brain MRI, n=40 patients): SubtleMR-enhanced accelerated scans preserved quantitative volumetric performance (NeuroQuant) and image quality vs standard-of-care scans across 3 sites and 3 readers; SNR and diagnostic equivalence non-inferior at 60% acceleration.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223623.pdf, https://doi.org/10.3174/ajnr.A7358",
+        source: "Bash et al. AJNR 2022;43(4):492-498 (DOI 10.3174/ajnr.A7358); FDA 510(k) summaries K191688, K203182, K223623; Fransen et al. Eur Radiol 2025 systematic review (DOI 10.1007/s00330-025-11423-5)",
         studyDesign: "Prospective, multicenter, multireader trial (Bash 2022) + indirect-comparative systematic review (Fransen 2025) + FDA 510(k) software V&V",
-        primaryEndpoint: "Preservation of quantitative volumetric performance and diagnostic image quality at 60% acceleration",
-        description: "Bash et al. AJNR 2022: prospective multicenter multireader trial of SubtleMR on accelerated volumetric brain MRI; Subtle Medical employees are co-authors (not fully vendor-independent). Fransen et al. Eur Radiol 2025 systematic review names SubtleMR among 14 commercial MRI-acceleration products."
+        primaryEndpoint: "Acquisition acceleration, SNR improvement; Diagnostics image quality rating",
+        description: "FDA 510(k) software verification and validation across three sequential clearances: K191688 (2019, original), K203182 (2021, v2.0.0), K223623 (2023, v2.3.x, current), each citing the prior as predicate. Bash et al. AJNR 2022: prospective multicenter multireader trial of SubtleMR on accelerated volumetric brain MRI; Subtle Medical employees are co-authors (not fully vendor-independent). Fransen et al. Eur Radiol 2025 systematic review names SubtleMR among 14 commercial MRI-acceleration products."
     },
     name: "SubtleMR",
     company: "Subtle Medical",
@@ -65,7 +65,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K191688, K223623",
+        clearanceNumber: "K191688, K203182, K223623",
         regulationNumber: "21 CFR 892.2050",
         productCode: "LLZ",
         decisionDate: "2023-05-11"
@@ -80,36 +80,67 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Bash et al. AJNR 2022 (DOI 10.3174/ajnr.A7358) re-verified 2026-06-17: prospective, multicenter (3 sites), multireader trial demonstrating 60% accelerated volumetric brain MRI with preserved quantitative performance using SubtleMR. Subtle Medical employees are co-authors → not fully vendor-independent. Fransen et al. Eur Radiol 2025 systematic review (DOI 10.1007/s00330-025-11423-5) names SubtleMR among 14 products. FDA 510(k) K191688, K203182, K223623.",
-    clinicalImpactNotes: "Bash 2022 demonstrates concrete workflow impact: 60% MRI acceleration with preserved quantitative volumetric (NeuroQuant) measurements — meaningful scan-time reduction with preserved diagnostic value.",
+    evidenceRigorNotes: "E2 (Validated Evidence): two prospective multicenter multireader trials (Bash 2021: 5 institutions/6 scanners, n=40, brain; Bash 2022: 4 institutions, n=61, spine) plus three further prospective single-center trials (Rudie 2022, UCSF, n=32, brain, vendor-led; Tang 2024, Shanghai, n=31, lumbar spine, vendor-led; Lemaire 2024, Caen, n=33, brain, fully vendor-independent). External validation comes from one fully independent, vendor-unaffiliated large-scale retrospective real-world study (Yang 2024, Mount Sinai, 10 scanners, n=7,346 examinations). The combination of multi-center prospective vendor-led trials, two independent single-center prospective studies (Lemaire 2024; partially Yang 2024 for the real-world arm), spanning three countries (US, China, France), meets the E2 bar (multi-center, large cohort, external validation); no single study is simultaneously fully independent and multi-center.",
+    clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): consistent finding across six studies (US, China, France) that 40-60% accelerated, DL-enhanced scans preserved or improved SNR, anatomic/lesion conspicuity, and diagnostic confidence relative to standard of care, with no loss of quantitative accuracy (volumetric concordance in Bash 2021; pathology detection in Tang 2024). Notably, Lemaire et al. 2024 — directly evaluating radiotherapy-relevant use (brain metastases/meningiomas, read by radiation oncologists as well as radiologists) — found lower lesion-detection sensitivity for radiotherapy readers (0.77) than radiologists (0.92), with missed lesions concentrated under 4mm diameter; this is a meaningful caveat specifically for RT target-delineation use cases, not just general diagnostic use. Yang 2024 confirms real-world workflow impact (reduced scan/room time) at scale, though effects vary by examination type. No evidence identified of changed treatment management (I3) or patient outcomes (I4).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k) clearance chain (K191688, K203182, K223623) + real-world deployment evidence (1,000+ scanners; Yang 2024 multi-site implementation): multi-site commissioning and clinical acceptability evidence exists, supporting R3 (enhanced implementation readiness). Not elevated to R4, as no documented TG-100/RBAAF-aligned risk management, formal incident-management framework, or national-guidance alignment was identified.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
-    evidenceMultiNational: false,
+    evidenceMultiNational: true,
     evidenceProspective: true,
-    evidenceExternalValidation: false,
+    evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Prospective Multicenter Multireader Trial",
-        description: "Bash S, Wang L, Airriess C, Zaharchuk G, Gong E, Shankaranarayanan A, Tanenbaum LN. Deep Learning Enables 60% Accelerated Volumetric Brain MRI While Preserving Quantitative Performance: A Prospective, Multicenter, Multireader Trial. AJNR Am J Neuroradiol 2022;43(4):492-498. SubtleMR named explicitly; Subtle Medical co-authors (not vendor-independent).",
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearances K191688 (2019, original), K203182 (2021, v2.0.0), K223623 (2023, v2.3.x, current) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Bash et al. (2021). Deep Learning Enables 60% Accelerated Volumetric Brain MRI. AJNR 42(12):2130-2137. Prospective, multicenter (5 institutions, 6 scanners), n=40; vendor-led (3/7 authors Subtle Medical).",
         link: "https://doi.org/10.3174/ajnr.A7358"
       },
       {
-        type: "Systematic Review (indirect-comparative)",
-        description: "Fransen et al. The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 2025;35:4736-4746. Names SubtleMR among 14 products reviewed.",
-        link: "https://doi.org/10.1007/s00330-025-11423-5"
+        type: "Peer-reviewed Publication",
+        description: "Rudie et al. (2022). Clinical Assessment of Deep Learning-based Super-Resolution for 3D Volumetric Brain MRI. Radiol Artif Intell 4(1):e210059. Prospective, single-center (UCSF), n=32; vendor-led (4/10 authors Subtle Medical).",
+        link: "https://doi.org/10.1148/ryai.210059"
       },
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearances K191688 (2019), K203182 (2021) and K223623 (2023) for SubtleMR — Class II, 21 CFR 892.2050, Product Code LLZ.",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K191688.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Bash et al. (2022). Deep Learning Image Processing Enables 40% Faster Spinal MR Scans. Clin Neuroradiol 32(1):197-203. Prospective, multicenter (4 institutions), n=61; vendor-led (1/6 authors Subtle Medical).",
+        link: "https://doi.org/10.1007/s00062-021-01121-2"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Tang et al. (2024). Deep learning reconstruction for lumbar spine MRI acceleration. Eur Radiol Exp 8(1):67. Prospective, single-center (Shanghai, China), n=31; vendor-led (1/8 authors Subtle Medical; 1/8 authors Siemens Healthineers, both COI-disclosed).",
+        link: "https://doi.org/10.1186/s41747-024-00470-0"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lemaire et al. (2024). Artificial intelligence solution to accelerate the acquisition of MRI images: impact on the therapeutic care in oncology in radiology and radiotherapy departments. Cancer Radiother 28(3):251-257. Prospective, n=33, brain metastases/meningiomas, France; evaluated by both radiologists and radiation oncologists. Specificity 1.0, sensitivity 0.92 (radiology) vs. 0.77 (radiotherapy). Fully vendor-independent (Centre François-Baclesse, Normandie Université).",
+        link: "https://doi.org/10.1016/j.canrad.2023.11.004"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yang, Finkelstein, Koo, Doshi (2024). Impact of Deep Learning Image Reconstruction Methods on MRI Throughput. Radiol Artif Intell 6(3):e230181. Retrospective, large multicenter health system (Mount Sinai), 10 scanners, n=7,346 examinations; fully vendor-independent.",
+        link: "https://doi.org/10.1148/ryai.230181"
+      },
+      {
+        type: "Systematic Review (indirect-comparative)",
+        description: "Fransen et al. (2025). The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 35:4736-4746. Names SubtleMR among 14 products reviewed.",
+        link: "https://doi.org/10.1007/s00330-025-11423-5"
       }
     ],
-    clinicalEvidence: "FDA clearances + Bash et al. AJNR 2022 prospective multicenter multireader trial (DOI 10.3174/ajnr.A7358, re-verified 2026-06-17) + Fransen 2025 systematic review naming SubtleMR.",
-    lastUpdated: "2026-06-17",
-    lastRevised: "2026-06-17",
-    source: "FDA 510(k) database (K191688, K203182, K223623); Bash et al. AJNR 2022 (DOI 10.3174/ajnr.A7358); Fransen et al. Eur Radiol 2025; company website"
+    limitations: [
+      "Independent (non-vendor-affiliated) clinical evidence exists (Lemaire 2024; Yang 2024) but most prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024) have at least one Subtle Medical co-author",
+      "For radiotherapy-relevant evaluation specifically (brain metastases/meningiomas read by radiation oncologists), lesion-detection sensitivity was lower (0.77) than for radiologists (0.92) in the same study (Lemaire 2024), with missed lesions concentrated under 4mm — relevant to target delineation use cases",
+      "Image-domain (DICOM-based) processing operates after scanner reconstruction, distinct from k-space-based vendor-native methods (e.g., AIR Recon DL); effects on scan/room time heterogeneous by examination type (Yang et al. 2024)",
+      "Cloud-based deployment option processes images off-site on manufacturer servers, which may have data-governance implications for some institutions",
+    ],
+    clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
+    lastUpdated: "2026-06-18",
+    lastRevised: "2026-06-18",
+    source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025)"
   },
   {
     id: "subtle-pet",
