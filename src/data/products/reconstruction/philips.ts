@@ -450,5 +450,116 @@ export const SmartSpeedPrecise: ProductDetails = {
       "FDA K251397 and Philips press release 2025-07-02."
   };
 
-export const PHILIPS_PRODUCTS: ProductDetails[] = [PreciseImage, SmartSpeed, SmartSpeedPrecise];
+export const PETCTAdaptiveReconstruction: ProductDetails = {
+  id: "philips-petct-adaptive-reconstruction",
+  name: "PET/CT Adaptive Reconstruction",
+  company: "Philips",
+  companyUrl: "https://www.philips.com/healthcare",
+  productUrl: "https://www.philips.com/healthcare/solutions/pet-ct",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
+  description:
+    "AI-based smart processing of PET data during reconstruction to reduce image noise and enhance image contrast, designed to improve PET/CT image quality. Implemented as look-up tables for automated selection of PET reconstruction parameters.",
+  features: [
+    "AI-driven PET reconstruction parameter selection",
+    "Noise reduction and contrast enhancement",
+    "Integrated PET/CT workflow",
+  ],
+  category: "Reconstruction",
+  certification: "FDA",
+  logoUrl: "/logos/philips.png",
+  website: "https://www.philips.com/a-w/about/artificial-intelligence/ai-enabled-solutions.html",
+  anatomicalLocation: ["Whole body"],
+  modality: ["PET", "PET/CT"],
+  diseaseTargeted: ["Cancer"],
+  keyFeatures: [
+    "Machine-learning-derived look-up tables for automated PET reconstruction parameter selection",
+    "Aims to reduce PET image noise and enhance contrast",
+    "Validated by nuclear medicine experts (per Philips)",
+    "Clinician retains ability to modify default PET reconstruction parameters",
+  ],
+  limitations: [
+    "Public Philips materials do not disclose a dedicated standalone FDA clearance for 'PET/CT Adaptive Reconstruction'; it is described as a feature within Philips PET/CT systems (e.g., Vereos PET/CT, K211764)",
+    "No independent peer-reviewed clinical evaluation specifically of this feature identified in public literature as of 2026-06-17",
+    "Training data details (dataset size, demographics, scanner mix) not publicly disclosed",
+  ],
+  trainingData: {
+    description:
+      "Per Philips, machine learning and neural network algorithms were used to develop look-up tables for automated selection of PET reconstruction parameters. Dataset size, demographics, and geographic distribution not publicly disclosed.",
+    source: "Philips 'AI-enabled solutions' page (accessed 2026-06-17)",
+    sourceUrl: "https://www.philips.com/a-w/about/artificial-intelligence/ai-enabled-solutions.html",
+    disclosureLevel: "minimal",
+  },
+  evaluationData: {
+    description:
+      "Per Philips, look-up tables for PET reconstruction parameter selection were validated by nuclear medicine experts evaluating the resulting images. No external peer-reviewed clinical study identified specifically for this feature.",
+    studyDesign: "Sponsor-run validation by nuclear medicine experts",
+    primaryEndpoint: "PET image quality (noise, contrast) per expert review",
+    results: "Philips reports improved image quality (reduced noise, enhanced contrast); independent quantitative results were not identified.",
+    source: "Philips 'AI-enabled solutions' page",
+    sourceUrl: "https://www.philips.com/a-w/about/artificial-intelligence/ai-enabled-solutions.html",
+  },
+  technicalSpecifications: {
+    population: "Per Philips PET/CT system indications",
+    input: ["PET raw / list-mode data"],
+    inputFormat: ["Proprietary Philips PET data"],
+    output: ["Reconstructed PET images"],
+    outputFormat: ["DICOM"],
+  },
+  technology: {
+    integration: ["Philips Vereos PET/CT", "Compatible Philips PET/CT systems"],
+    deployment: ["Integrated on Philips PET/CT consoles"],
+    triggerForAnalysis: "Automatic during PET reconstruction",
+    processingTime: "Not publicly disclosed",
+  },
+  regulatory: {
+    fda: {
+      status: "510k_cleared",
+      class: "Class II",
+      type: "510(k)",
+      clearanceNumber: "K211764",
+      productCode: "KPS",
+      regulationNumber: "21 CFR 892.1200",
+      decisionDate: "2021-08-06",
+      notes: "Feature within Philips Vereos PET/CT (K211764), which is listed by the FDA with AI/ML attributes. A dedicated standalone clearance with the trade name 'PET/CT Adaptive Reconstruction' was not identified in the public FDA database.",
+    },
+    intendedUseStatement:
+      "PET/CT Adaptive Reconstruction is an AI-based feature within Philips PET/CT systems intended to assist with PET image reconstruction by automating selection of reconstruction parameters to reduce noise and enhance contrast. Healthcare professionals remain in control and may modify the default reconstruction parameters. (Source: Philips 'AI-enabled solutions' page, accessed 2026-06-17)",
+  },
+  market: {
+    onMarketSince: "2021",
+    distributionChannels: ["Integrated in Philips PET/CT systems"],
+  },
+  evidenceRigor: "E0",
+  clinicalImpact: "I1",
+  evidenceRigorNotes:
+    "E0 (Vendor-validated only): no independent peer-reviewed clinical evaluation of this specific feature identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-internal review by nuclear medicine experts as described on the Philips AI-enabled solutions page.",
+  clinicalImpactNotes:
+    "I1 (Technical performance / image-quality claim, vendor-reported): Philips reports improved PET image noise and contrast; no independent evidence of changed treatment management (I3) or patient outcomes (I4).",
+  adoptionReadiness: "R3",
+  adoptionReadinessNotes:
+    "Derived from E0 + FDA-listed AI/ML attributes within Vereos PET/CT (K211764): moderate implementation effort — requires a compatible Philips PET/CT system; local validation of image quality and reconstruction settings recommended before adoption.",
+  evidenceVendorIndependent: false,
+  evidenceMultiCenter: false,
+  evidenceMultiNational: false,
+  evidenceProspective: false,
+  evidenceExternalValidation: false,
+  clinicalEvidence: "Vendor 'AI-enabled solutions' disclosure and FDA listing of Vereos PET/CT (K211764) with AI/ML attributes; no independent peer-reviewed clinical studies specific to this feature identified as of 2026-06-17.",
+  lastUpdated: "2026-06-17",
+  lastRevised: "2026-06-17",
+  source: "Philips 'AI-enabled solutions' page; FDA 510(k) Vereos PET/CT (K211764)",
+  evidence: [
+    {
+      type: "Regulatory Clearance",
+      description: "FDA 510(k) K211764 — Vereos PET/CT (Philips Medical Systems Nederland B.V.), decision August 6, 2021. FDA-listed with AI/ML attributes; encompasses the PET reconstruction feature set in which PET/CT Adaptive Reconstruction is described.",
+      link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/KPS/K211764",
+    },
+    {
+      type: "Vendor Documentation",
+      description: "Philips 'AI-enabled solutions' page (accessed 2026-06-17) — PET/CT Adaptive Reconstruction section describing machine-learning-derived look-up tables for PET reconstruction parameter selection and validation by nuclear medicine experts.",
+      link: "https://www.philips.com/a-w/about/artificial-intelligence/ai-enabled-solutions.html",
+    },
+  ],
+};
+
+export const PHILIPS_PRODUCTS: ProductDetails[] = [PreciseImage, SmartSpeed, SmartSpeedPrecise, PETCTAdaptiveReconstruction];
 
