@@ -42,6 +42,11 @@ const categoryInfo: Record<string, { icon: React.ElementType, description: strin
     description: "Real-time motion tracking and synchronization during treatment delivery", 
     color: "bg-emerald-100" 
   },
+  "Positioning": {
+    icon: LayoutGrid,
+    description: "AI-assisted patient positioning and setup for imaging and treatment",
+    color: "bg-teal-100"
+  },
   "Treatment Planning": { 
     icon: Brain, 
     description: "DL-assisted creation and optimization of radiation treatment plans", 
@@ -89,6 +94,7 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
     "Image Synthesis",
     "Auto-Contouring",
     "Tracking",
+    "Positioning",
     "Treatment Planning",
     "Clinical Prediction",
     "Registration",
