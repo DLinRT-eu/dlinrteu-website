@@ -58,6 +58,7 @@ export const TASK_COLORS: Record<string, string> = {
   'Clinical Prediction': '#F97316',   // Orange (from bg-orange-100)
   'Registration': '#6366F1',          // Indigo (from bg-indigo-100)
   'Performance Monitor': '#6B7280',   // Gray (from bg-gray-100)
+  'Positioning': '#14B8A6',           // Teal (from bg-teal-100)
   'Model Training': '#06B6D4',        // Cyan (from bg-cyan-100)
 };
 
