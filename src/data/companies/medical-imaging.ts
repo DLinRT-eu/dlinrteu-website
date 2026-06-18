@@ -34,8 +34,7 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "philips-mrcat-pelvis",
       "philips-precise-image",
       "philips-smartspeed",
-      "philips-smartspeed-precise",
-      "philips-smartdose-ct-enhancement"
+      "philips-smartspeed-precise"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/philips.png",
