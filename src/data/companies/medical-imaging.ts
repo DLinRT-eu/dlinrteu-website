@@ -34,12 +34,14 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "philips-mrcat-pelvis",
       "philips-precise-image",
       "philips-smartspeed",
-      "philips-smartspeed-precise"
+      "philips-smartspeed-precise",
+      "philips-petct-adaptive-reconstruction",
+      "philips-precise-position"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/philips.png",
     "primaryTask": "Image Synthesis",
-    "secondaryTasks": ["Reconstruction", "Auto-Contouring", "Image Enhancement"]
+    "secondaryTasks": ["Reconstruction", "Auto-Contouring", "Image Enhancement", "Positioning"]
   },
   {
     "id": "siemens-healthineers",
