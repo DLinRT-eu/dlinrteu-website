@@ -148,16 +148,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         disclosureLevel: "minimal",
         source: "FDA 510(k) summaries K182336, K211964",
         demographics: "Adult and pediatric",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf, https://www.accessdata.fda.gov/cdrh_docs/pdf21/K211964.pdf",
         description: "Deep learning-based PET image enhancement for noise reduction and image sharpness improvement across multiple radiotracers. Underlying low-count PET training and multicenter validation are described in Chaudhari et al. npj Digital Medicine 2021 (Subtle Medical / Stanford), which evaluated the platform externally across multiple centers and tracers."
     },
     evaluationData: {
-        description: "Three independent peer-reviewed evaluations: (1) Chaudhari et al. npj Digital Medicine 2021 - multicenter, externally validated low-count whole-body PET with deep learning (Subtle Medical co-authors); (2) Weyts et al. EJNMM 2022 - vendor-independent prospective study on a digital PET/CT at Centre François Baclesse showing two-fold reduction in [18F]FDG PET acquisition time using SubtlePET; (3) Weyts et al. Diagnostics 2023 - independent assessment of SubtlePET denoising homogenising image quality in digital PET/CT.",
-        sourceUrl: "https://doi.org/10.1007/s00259-022-05800-1",
+        description: "FDA 510(k) software V&V (K182336, K211964) plus nine peer-reviewed studies — one vendor-led multicenter trial with true external validation (Chaudhari 2021), and eight independent single- or multi-site studies (Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023) — spanning six countries and four radiotracers. See evidence array for full citations.",
+        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
         primaryEndpoint: "Lesion detectability and image quality at reduced PET acquisition time/dose",
-        studyDesign: "Multicenter externally validated study (Chaudhari 2021) + vendor-independent prospective clinical study (Weyts 2022) + vendor-independent observational study (Weyts 2023) + FDA 510(k) software V&V",
-        source: "Chaudhari et al. npj Digital Med 2021 (DOI 10.1038/s41746-021-00497-2); Weyts et al. EJNMM 2022 (DOI 10.1007/s00259-022-05800-1); Weyts et al. Diagnostics 2023 (DOI 10.3390/diagnostics13091626)",
-        results: "Weyts 2022: half-duration (50%) SubtlePET-enhanced [18F]FDG PET acquisitions on digital PET/CT yielded non-inferior lesion detectability and image quality vs full-duration scans. Chaudhari 2021: deep learning enabled low-count whole-body PET with preserved quality across multiple external centers and tracers."
+        studyDesign: "FDA 510(k) software V&V + multicenter externally-validated trial + eight independent prospective/retrospective single- and multi-site studies",
+        source: "FDA 510(k) summaries K182336, K211964; peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023)",
+        results: "Consistent across independent studies: AI-denoised reduced-count/reduced-dose PET is non-inferior or improved versus standard acquisition for image quality, lesion detectability, and SUV accuracy (e.g., Weyts 2022: non-inferior at half acquisition time, n=195; Chaudhari 2021: preserved quality across 3 external centers and tracer types, n=50)."
     },
     name: "SubtlePET",
     company: "Subtle Medical",
@@ -219,42 +219,78 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Three peer-reviewed publications re-verified 2026-06-17 that explicitly name and evaluate SubtlePET: Chaudhari et al. npj Digital Medicine 2021 (DOI 10.1038/s41746-021-00497-2, multicenter externally-validated low-count whole-body PET, Subtle Medical co-authors); Weyts et al. EJNMM 2022 (DOI 10.1007/s00259-022-05800-1, vendor-independent prospective digital PET/CT, Centre François Baclesse); Weyts et al. Diagnostics 2023 (DOI 10.3390/diagnostics13091626, vendor-independent extension). FDA 510(k) K182336 + K211964.",
-    clinicalImpactNotes: "Independent evidence supports concrete workflow impact: Weyts 2022 demonstrates two-fold reduction in [18F]FDG PET acquisition time on digital PET/CT with preserved lesion detectability; Chaudhari 2021 confirms generalisability across multiple external centers and tracers.",
+    evidenceRigorNotes: "E2 (Validated Evidence): nine peer-reviewed studies across six countries (US/Canada, France, Italy, Luxembourg, Poland) and multiple tracers (FDG, PSMA-11, FDOPA, amyloid). One multicenter prospective trial with true external validation is vendor-led (Chaudhari 2021: 3 institutions, n=50; 6 of 11 authors financially tied to Subtle Medical, including 2 cofounders/patent holders). Eight further studies are independent, spanning single- and multi-site designs, prospective and retrospective, n=30-282. The combination of multi-site, multinational, externally-validated evidence (vendor-led and independent together) clearly meets the E2 bar; this is the most extensive independent evidence base of any product reviewed in this series so far.",
+    clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): consistent finding across all nine studies that AI-denoised reduced-count/reduced-dose PET preserves or improves diagnostic image quality, lesion detectability, and SUV/quantitative accuracy versus standard acquisition, generalizing across scanner vendors and radiotracers. Zhang-Yin 2025 adds an occupational-safety dimension (reduced technologist radiation exposure). Katsari 2021 and Lacombe 2026 evaluate real-world/business-case deployment. Ciborowski 2023 explicitly assessed impact on clinical decisions, though specific decision-change findings were not verified in detail. No evidence confirmed of altered treatment management (I3) or patient outcomes (I4).",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + a documented real-world deployment framework (Katsari 2021's nine-stage business-case assessment): multi-site, multinational clinical acceptability evidence exists, supporting R3 (enhanced implementation readiness). Not elevated to R4, as no documented TG-100/RBAAF-aligned risk management, formal incident-management framework, or national-guidance alignment was identified across the available literature.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
-    evidenceMultiNational: false,
+    evidenceMultiNational: true,
     evidenceProspective: true,
     evidenceExternalValidation: true,
     evidence: [
       {
-        type: "Peer-reviewed Multicenter Externally Validated Study",
-        description: "Chaudhari AS, Mittra E, Davidzon GA, Gulaka P, Gandhi H, Brown A, Zhang T, Srinivas S, Gong E, Zaharchuk G, Jadvar H. Low-count whole-body PET with deep learning in a multicenter and externally validated study. NPJ Digit Med 2021;4:127. Names SubtlePET; Subtle Medical/Stanford co-authors (not fully vendor-independent).",
+        type: "Regulatory Clearance",
+        description: "FDA 510(k) clearances K182336 (2018) and K211964 (2021) for SubtlePET — Class II, 21 CFR 892.2050, Product Code LLZ.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Chaudhari et al. (2021). Low-count whole-body PET with deep learning in a multicenter and externally validated study. npj Digit Med 4:127. Prospective, 3 institutions (US/Canada), n=50, true external validation. Vendor-led (6/11 authors financially tied to Subtle Medical, incl. 2 cofounders).",
         link: "https://doi.org/10.1038/s41746-021-00497-2"
       },
       {
-        type: "Peer-reviewed Prospective Clinical Study (vendor-independent)",
-        description: "Weyts K, Lasnon C, Ciappuccini R, Lequesne J, Corroyer-Dulmont A, Quak E, Clarisse B, Roussel L, Bardet S, Jaudet C. Artificial intelligence-based PET denoising could allow a two-fold reduction in [18F]FDG PET acquisition time in digital PET/CT. Eur J Nucl Med Mol Imaging 2022;49(11):3750-3761. Names SubtlePET; vendor-independent.",
+        type: "Peer-reviewed Publication",
+        description: "Weyts et al. (2022). Artificial intelligence-based PET denoising could allow a two-fold reduction in [18F]FDG PET acquisition time in digital PET/CT. Eur J Nucl Med Mol Imaging 49(11):3750-3760. Prospective, single-center (Caen, France), n=195. Independent (vendor provided a 1-month free trial).",
         link: "https://doi.org/10.1007/s00259-022-05800-1"
       },
       {
-        type: "Peer-reviewed Observational Study (vendor-independent)",
-        description: "Weyts K, Quak E, Licaj I, Ciappuccini R, Lasnon C, Corroyer-Dulmont A, Foucras G, Bardet S, Jaudet C. Deep Learning Denoising Improves and Homogenizes Patient [18F]FDG PET Image Quality in Digital PET/CT. Diagnostics 2023;13(9):1626. Names SubtlePET; vendor-independent.",
+        type: "Peer-reviewed Publication",
+        description: "Weyts et al. (2023). Deep Learning Denoising Improves and Homogenizes Patient [18F]FDG PET Image Quality in Digital PET/CT. Diagnostics 13(9):1626. Same independent Caen group; extension study.",
         link: "https://doi.org/10.3390/diagnostics13091626"
       },
       {
-        type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearances K182336 (2018) and K211964 (2021) for SubtlePET — Class II, 21 CFR 892.2050, Product Code LLZ.",
-        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf"
+        type: "Peer-reviewed Publication",
+        description: "Bonardel et al. (2022). Clinical and phantom validation of a deep learning based denoising algorithm for F-18-FDG PET images from lower detection counting. EJNMMI Phys 9:36. Phantom + n=110, 2 independent French sites, 3 scanner models. Independent.",
+        link: "https://doi.org/10.1186/s40658-022-00465-z"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Katsari et al. (2021). Artificial intelligence for reduced dose 18F-FDG PET examinations: a real-world deployment through a standardized framework and business case assessment. EJNMMI Phys 8(1):25. Prospective, single-center (Italy), n=61. Independent.",
+        link: "https://doi.org/10.1186/s40658-021-00374-7"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Margail et al. (2023). Imaging quality of an artificial intelligence denoising algorithm: validation in 68Ga PSMA-11 PET for patients with biochemical recurrence of prostate cancer. EJNMMI Res 13:50. Retrospective, single-center (Clermont-Ferrand, France), n=30. Independent.",
+        link: "https://doi.org/10.1186/s13550-023-00999-y"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Zhang-Yin et al. (2025). Implantation of an Artificial Intelligence Denoising Algorithm Using SubtlePET with Various Radiotracers: 18F-FDG, 68Ga PSMA-11 and 18F-FDOPA, Impact on the Technologist Radiation Doses. J Imaging 11(7):234. Retrospective, single-center (Luxembourg), 3 tracers; unique occupational-dose angle. Independent.",
+        link: "https://doi.org/10.3390/jimaging11070234"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lacombe, Dufour, Lacoeuille et al. (2026). Clinical value of artificial intelligence in reducing PET image acquisition time: routine clinical validation using qualitative, quantitative, and radiomic analysis on a cohort of 282 patients. EJNMMI Phys 13:27. Phantom + n=282, 634 lesions, 5 readers, 2 tracers (FDG, PSMA-11). Independent (French academic).",
+        link: "https://doi.org/10.1186/s40658-026-00835-x"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Ciborowski et al. (2023). Performance of a deep learning enhancement method applied to PET images acquired with a reduced acquisition time. Nucl Med Rev 26:116-122. n=37, two software versions tested, clinical-decision impact assessed. Independence presumed (Polish academic authorship) but not directly confirmed.",
+        link: "https://doi.org/10.5603/nmr.94482"
       }
     ],
-    clinicalEvidence: "FDA clearances plus three independent peer-reviewed publications (Chaudhari 2021 npj Digital Medicine; Weyts 2022 EJNMM; Weyts 2023 Diagnostics) confirmed via DOI resolution to explicitly name and evaluate SubtlePET, demonstrating multicenter generalisability and ~50% PET acquisition-time reduction with preserved detectability.",
+    limitations: [
+      "The only fully multicenter, prospectively externally-validated trial (Chaudhari 2021) is vendor-led; full independence is distributed across eight smaller single- or dual-site studies rather than concentrated in one large independent trial",
+      "Independent study sample sizes are mostly modest (n=30-195), with one large independent cohort (Lacombe 2026, n=282)",
+      "No evidence confirmed of changed treatment management or patient outcomes despite broad image-quality and workflow evidence",
+      "Vendor-claimed performance (4x faster scans / 75% dose reduction) exceeds the more modest reductions typically replicated independently (twofold acquisition-time reduction in Weyts 2022; ~25-33% time/dose reduction in Zhang-Yin 2025; two-thirds dose in Katsari 2021)",
+    ],
+    clinicalEvidence: "Nine peer-reviewed studies (one vendor-led multicenter trial; eight independent single/multi-site studies) across six countries and four radiotracers, plus FDA 510(k) clearances K182336 and K211964.",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-06-17",
-    lastRevised: "2026-06-17",
-    source: "FDA 510(k) database (K182336, K211964); Chaudhari 2021 (DOI 10.1038/s41746-021-00497-2); Weyts 2022 (DOI 10.1007/s00259-022-05800-1); Weyts 2023 (DOI 10.3390/diagnostics13091626); company website. Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
+    lastUpdated: "2026-06-18",
+    lastRevised: "2026-06-18",
+    source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
     id: "subtle-hd-pet",
