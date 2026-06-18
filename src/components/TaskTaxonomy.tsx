@@ -94,6 +94,7 @@ const TaskTaxonomy = ({ categories, onCategoryClick, filterType = 'task' }: Task
     "Image Synthesis",
     "Auto-Contouring",
     "Tracking",
+    "Positioning",
     "Treatment Planning",
     "Clinical Prediction",
     "Registration",
