@@ -15,6 +15,7 @@ import { IMAGE_ENHANCEMENT_PRODUCTS } from "./products/image-enhancement";
 import { PERFORMANCE_MONITOR_PRODUCTS } from "./products/performance-monitor";
 import { TRACKING_PRODUCTS } from "./products/tracking";
 import { PIPELINE_PRODUCTS } from "./products/pipeline";
+import { POSITIONING_PRODUCTS } from "./products/positioning";
 import { 
   ALL_INITIATIVES, 
   CHALLENGE_INITIATIVES, 
