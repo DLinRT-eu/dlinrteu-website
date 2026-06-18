@@ -149,6 +149,7 @@ export const getPipelineFilterOptions = (field: keyof ProductDetails): string[] 
         "Image Synthesis",
         "Auto-Contouring",
         "Tracking",
+        "Positioning",
         "Treatment Planning",
         "Clinical Prediction",
         "Registration",
