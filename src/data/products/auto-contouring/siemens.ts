@@ -328,6 +328,12 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       "Vertebrae: S4",
       "Vertebrae: S5"
     ],
+    relatedProducts: [
+      {
+        id: "siemens-syngo-ct",
+        relationship: "Shares the DI2IN OAR contouring engine with syngo.via RT Image Suite (see Rayn et al. J Cancer Res Ther 2024; Lin/Fan JACMP 2025 which evaluates 'Siemens syngo.via' — the same underlying contouring algorithm packaged under a different commercial name)."
+      }
+    ],
     lastRevised: "2026-06-13",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"

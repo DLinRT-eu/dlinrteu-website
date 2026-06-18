@@ -2,6 +2,7 @@
 import { ProductDetails } from "@/types/productDetails";
 import { PHILIPS_PRODUCTS } from "./philips";
 import { GE_PRODUCTS } from "./ge-healthcare";
+import { GE_TRUEFIDELITY_PRODUCTS } from "./ge-truefidelity";
 import { SIEMENS_PRODUCTS } from "./siemens";
 import { CANON_PRODUCTS } from "./canon";
 import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
@@ -10,6 +11,7 @@ import { ELEKTA_PRODUCTS } from "./elekta";
 export const RECONSTRUCTION_PRODUCTS: ProductDetails[] = [
   ...PHILIPS_PRODUCTS,
   ...GE_PRODUCTS,
+  ...GE_TRUEFIDELITY_PRODUCTS,
   ...SIEMENS_PRODUCTS,
   ...CANON_PRODUCTS,
   ...UNITED_IMAGING_PRODUCTS,

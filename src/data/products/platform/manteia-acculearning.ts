@@ -7,7 +7,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   name: "AccuLearning",
   company: "Manteia",
   productUrl: "https://www.manteiatech.com/acculearning",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia-acculearning.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/manteia-acculearning.ts",
   description: "Localized deep learning platform for clinics to build/train custom AI models for radiation therapy using institutional data.",
   category: "Platform",
   certification: "For research use. Clinical deployment requires separate validation",
@@ -61,9 +61,19 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     "Rare structures: Brachytherapy applicators",
     "Institutional variants: LN levels"
   ],
+  relatedProducts: [
+    {
+      id: "manteia-accucontour",
+      relationship: "AccuContour is the primary deployment target for models trained in AccuLearning ('One-click deployment to AccuContour')."
+    },
+    {
+      id: "manteia-mozi",
+      relationship: "MOZI TPS is a secondary deployment target for models trained in AccuLearning ('One-click deployment to MOZI')."
+    }
+  ],
   version: "N/D",
   releaseDate: "2017-01-01",
-  lastRevised: "2026-05-30",
+  lastRevised: "2026-06-19",
   lastUpdated: "2025-08-11",
   source: "Automatically retrieved"
 }

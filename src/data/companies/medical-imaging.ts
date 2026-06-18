@@ -9,13 +9,13 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "website": "https://www.gehealthcare.com",
     "productIds": [
       "ge-auto-segmentation",
-      "ge-truefidelity-pro",
       "ge-air-recon-dl",
       "ge-air-recon-dl-enhancement",
       "ge-dlip-ct",
       "ge-healthcare-irt",
       "ge-mr-contour-dl",
-      "ge-precision-dl"
+      "ge-precision-dl",
+      "ge-truefidelity"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/ge_healthcare.png",
@@ -49,16 +49,15 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "description": "Pioneer in medical technology and digital health solutions.",
     "website": "https://www.siemens-healthineers.com",
     "productIds": [
-      "siemens-syngo-ct", 
-      "siemens-ai-rad-companion", 
+      "siemens-syngo-ct",
+      "siemens-ai-rad-companion",
       "directorgans",
-      "siemens-dual-energy-optimizer",
       "siemens-deep-resolve"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/siemens.png",
     "primaryTask": "Auto-Contouring",
-    "secondaryTasks": ["Image Synthesis", "Image Enhancement", "Reconstruction"]
+    "secondaryTasks": ["Image Synthesis", "Reconstruction"]
   },
   {
     "id": "canon-medical",
@@ -81,14 +80,17 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "description": "Global manufacturer of advanced medical imaging equipment with AI solutions.",
     "website": "https://www.united-imaging.com/",
     "productIds": [
-      "united-uai-vision-recon", 
+      "united-uai-vision-recon",
       "united-uaifi-umr",
-      "united-hd-tof"
+      "united-hd-tof",
+      "united-urt-auto-contouring",
+      "united-urt-auto-planning",
+      "united-uct610-sim-dl-recon-pipeline"
     ],
     "category": "Medical Imaging",
     "logoUrl": "/logos/unitedimaging.png",
     "primaryTask": "Reconstruction",
-    "secondaryTasks": ["Image Enhancement"]
+    "secondaryTasks": ["Image Enhancement", "Auto-Contouring", "Treatment Planning"]
   },
   {
     "id": "taiwan-medical-imaging",

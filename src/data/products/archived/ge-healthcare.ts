@@ -1,7 +1,8 @@
 import { ProductDetails } from "@/types/productDetails";
 
-// Archived: Unverified product - no specific FDA 510(k) clearance number
-// Functionality covered by TrueFidelity Pro (K183202) in Reconstruction category
+// Archived: ge-dlip-ct — "Deep Learning Image Processing for CT" had no verifiable standalone FDA 510(k).
+// TrueFidelity (K183202, Apr 2019) is the canonical GE CT DL reconstruction product and
+// is now catalogued at src/data/products/reconstruction/ge-truefidelity.ts (id: ge-truefidelity).
 export const GE_ARCHIVED_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-dlip-ct",

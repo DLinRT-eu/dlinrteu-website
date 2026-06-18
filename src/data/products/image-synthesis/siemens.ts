@@ -22,8 +22,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com",
     productUrl: "https://www.siemens-healthineers.com/magnetic-resonance-imaging/clinical-specialities/synthetic-ct",
-    description: "Advanced imaging solution for radiation therapy planning including synthetic CT generation from MR data.",
-    features: ["Synthetic CT generation", "Multimodality image registration", "Treatment planning"],
+    description: "Advanced imaging solution for radiation therapy planning. Provides synthetic CT generation from MR data, 3D/4D image visualization, multi-modality contouring, deformable image registration, and dual-energy integration within the syngo.via platform.",
+    features: ["Synthetic CT generation", "Auto-contouring support", "Deformable image registration", "4D CT analysis", "Dual-energy integration", "Multimodality image registration", "Treatment planning"],
     category: "Image Synthesis",
     certification: "CE & FDA",
     logoUrl: "/logos/siemens.png",
@@ -33,7 +33,15 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     modality: ["MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: ["MR-based synthetic CT", "Integrated workflow", "Automated processing"],
+    keyFeatures: [
+      "MR-based synthetic CT for brain and pelvis",
+      "AI-assisted auto-contouring via DI2IN engine (shared with AI-Rad Companion Organs RT)",
+      "Deformable image registration",
+      "4D CT visualization and analysis",
+      "Dual-energy CT integration",
+      "Integrated RT planning workflow",
+      "Automated processing"
+    ],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["MRI"],
@@ -80,6 +88,12 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         type: "Indirect-Comparative",
         description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark dataset and acceptance levels for MR-only RT commissioning; not a direct syngo.via evaluation.",
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
+      }
+    ],
+    relatedProducts: [
+      {
+        id: "siemens-ai-rad-companion",
+        relationship: "Shares the DI2IN OAR contouring engine with AI-Rad Companion Organs RT. Literature evaluating 'Siemens syngo.via' contouring (Lin/Fan JACMP 2025) directly applies to this product; Rayn et al. J Cancer Res Ther 2024 evaluates the same underlying algorithm under the AI-Rad Companion name."
       }
     ],
     evidenceRigor: "E1",

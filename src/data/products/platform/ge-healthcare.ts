@@ -69,12 +69,12 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        notes: "The iRT platform orchestrates multiple cleared clinical modules. Key component clearances include K230082 (Auto Segmentation, May 2023), K242925 (MR Contour DL, April 2025; previous: K213717), and integrates third-party cleared devices including MVision Contour+ (K241490) and MIM Contour ProtégéAI+."
+        notes: "The iRT platform does not hold a single umbrella 510(k). It orchestrates independently cleared clinical modules: K230082 (Auto Segmentation, May 2023), K242925 (MR Contour DL, April 2025; previous K213717), and third-party cleared devices MVision Contour+ (K241490) and MIM Contour ProtégéAI+. The platform layer itself (workflow management, scheduling, analytics) is cleared as an IIb MDR device in Europe; the US regulatory status of the orchestration layer is not separately disclosed."
       },
       intendedUseStatement: "A fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management. Designed to integrate AI-supported auto-segmentation, intelligent resource scheduling, analytics reporting, and vendor-neutral connectivity with hospital information systems (OIS, TPS, EMR, QA, PACS) to optimize radiation therapy delivery, reduce treatment delays, and improve departmental efficiency."
     },
     market: {
-      onMarketSince: "2025",
+      onMarketSince: "2023",
       distributionChannels: ["Direct sales", "Hospital partnerships", "Enterprise healthcare solutions"],
       availability: "Early adopters disclosed by GE include Marengo CIMS and the University of Debrecen (Hungary), the latter expanding iRT to its full radiation oncology department and adding the theranostics workflow (ESTRO 2026)."
     },
@@ -101,7 +101,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
         link: "https://www.gehealthcare.com/en-us/about/newsroom/press-releases/estro-2026-congress--ge-healthcare-to-spotlight-ai-enabled-solutions-to-advance-precision-care-across-radiation-therapy-and-image-guided-interventions"
       }
     ],
-    releaseDate: "2025-09-25",
+    releaseDate: "2023-05-12",
     lastUpdated: "2026-05-14",
     lastRevised: "2026-05-20",
     source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717. Marengo CIMS case study 2025. GE HealthCare ESTRO 2026 press release (12 May 2026).",

@@ -2,7 +2,6 @@
 import { ProductDetails } from "@/types/productDetails";
 
 import { GE_PRODUCTS } from "./ge-healthcare";
-import { SIEMENS_PRODUCTS } from "./siemens";
 import { AIRS_MEDICAL_PRODUCTS } from "./airs-medical";
 import { SUBTLE_MEDICAL_PRODUCTS } from "./subtle-medical";
 import { ALGOMEDICA_PRODUCTS } from "./algomedica";
@@ -22,7 +21,6 @@ import { CLARIPI_PRODUCTS } from "./claripi";
 // name: "uAIFI on uMR"). See GitHub issue for full investigation notes.
 export const IMAGE_ENHANCEMENT_PRODUCTS: ProductDetails[] = [
   ...GE_PRODUCTS,
-  ...SIEMENS_PRODUCTS,
   ...AIRS_MEDICAL_PRODUCTS,
   ...SUBTLE_MEDICAL_PRODUCTS,
   ...ALGOMEDICA_PRODUCTS,

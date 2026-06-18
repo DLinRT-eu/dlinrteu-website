@@ -256,7 +256,17 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1038/s41598-025-33567-6"
       }
     ],
-    lastRevised: "2026-06-15",
+    relatedProducts: [
+      {
+        id: "manteia-mozi",
+        relationship: "Sibling product — MOZI TPS includes built-in DL auto-contouring (same company ecosystem). AccuContour is for users who need standalone contouring without the full TPS."
+      },
+      {
+        id: "manteia-acculearning",
+        relationship: "AccuLearning is Manteia's custom model training platform; trained models can be deployed into AccuContour for site-specific OAR segmentation."
+      }
+    ],
+    lastRevised: "2026-06-19",
     source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

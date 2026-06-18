@@ -23,8 +23,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.manteiamedical.com/",
     productUrl: "https://www.manteiamedical.com/mozi",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
-    description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, and AI-driven planning optimization for radiation therapy.",
-    features: ["Monte Carlo dose engine", "GPU-powered computation", "AI-driven optimization", "Vendor independence"],
+    description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, AI-driven planning optimization, and built-in deep learning auto-contouring for radiation therapy (auto-contouring validated on 187 patients per FDA K223724).",
+    features: ["Monte Carlo dose engine", "GPU-powered computation", "AI-driven optimization", "Built-in auto-contouring", "Vendor independence"],
     category: "Treatment Planning",
     certification: "CE & FDA",
     logoUrl: "/logos/manteia.png",
@@ -37,6 +37,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       "Monte Carlo dose engine for high-precision dosing in complex cases",
       "GPU-powered lightning-fast processing for efficient planning",
       "Deep learning-driven plan optimization",
+      "Built-in DL auto-contouring (validated on 187 patients, FDA K223724)",
       "Full workflow automation from dose prediction to final plan",
       "Auto-planning models validated on standard protocols",
       "Customizable to clinical goals",
@@ -46,8 +47,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       population: "Adult patients",
       input: ["CT", "Structure sets", "Treatment plans"],
       inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
-      output: ["Treatment plans", "RT Dose", "Plan quality metrics"],
-      outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE", "PDF"]
+      output: ["Treatment plans", "RT Dose", "Structure sets", "Plan quality metrics"],
+      outputFormat: ["DICOM-RTPLAN", "DICOM-RTDOSE", "DICOM-RTSTRUCT", "PDF"]
     },
     technology: {
       integration: ["TPS integration", "Cloud API", "Linac integration"],
@@ -90,8 +91,18 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    relatedProducts: [
+      {
+        id: "manteia-accucontour",
+        relationship: "Sibling product — AccuContour is Manteia's standalone contouring workstation. MOZI TPS includes built-in contouring; AccuContour is for users who need a standalone contouring solution without the full TPS."
+      },
+      {
+        id: "manteia-acculearning",
+        relationship: "AccuLearning is Manteia's custom model training platform. Models trained in AccuLearning can be deployed into MOZI TPS for site-specific contouring and planning workflows."
+      }
+    ],
+    lastUpdated: "2026-06-19",
+    lastRevised: "2026-06-19",
     source: "FDA 510(k) database (K223724), manufacturer official website",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [

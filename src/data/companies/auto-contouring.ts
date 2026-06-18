@@ -47,7 +47,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "Ever Fortune AI",
     "description": "AI company developing advanced solutions for radiation therapy.",
     "website": "https://www.everfortune.ai/",
-    "productIds": ["everfortune-rt-suite"],
+    "productIds": ["everfortune-rt-suite", "everfortune-seg-pro-v3"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/ever-fortune.png",
     "primaryTask": "Auto-Contouring"
@@ -85,7 +85,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "category": "Auto-Contouring",
     "logoUrl": "/logos/manteia.png",
     "primaryTask": "Auto-Contouring",
-    "secondaryTasks": ["Treatment Planning"]
+    "secondaryTasks": ["Treatment Planning", "Platform"]
   },
   {
     "id": "mim-software",
@@ -112,7 +112,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "MVision AI",
     "description": "Pioneers in cloud-based auto-segmentation solutions for radiation therapy.",
     "website": "https://www.mvision.ai",
-    "productIds": ["mvision-ai-contouring", "mvision-verify", "mvision-ai-workspace-plus"],
+    "productIds": ["mvision-ai-contouring", "mvision-verify", "mvision-ai-workspace-plus", "mvision-dose-plus"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/mvision-ai.png",
     "primaryTask": "Auto-Contouring",
@@ -123,7 +123,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "RadFormation",
     "description": "Developers of quality assurance and automation tools for radiation oncology.",
     "website": "https://radformation.com/",
-    "productIds": ["radformation-autocontour"],
+    "productIds": ["radformation-autocontour", "radformation-clearcheck"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/radformation.svg",
     "primaryTask": "Auto-Contouring"
@@ -143,7 +143,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "Therapanacea",
     "description": "Innovators in AI solutions for radiation oncology and medical imaging.",
     "website": "https://www.therapanacea.eu",
-    "productIds": ["therapanacea-annotate", "therapanacea-adaptbox", "mr-box-synthetic", "therapanacea-smartfuse"],
+    "productIds": [
+      "therapanacea-annotate",
+      "therapanacea-adaptbox",
+      "mr-box-synthetic",
+      "therapanacea-smartfuse",
+      "therapanacea-tumorbox-pipeline",
+      "therapanacea-smartplan-pipeline",
+      "therapanacea-brachybox-pipeline"
+    ],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/therapanacea.png",
     "primaryTask": "Auto-Contouring",

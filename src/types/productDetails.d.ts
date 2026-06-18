@@ -287,6 +287,12 @@ export interface ProductDetails extends Product {
     notes?: string;
   }>>;
 
+  // Cross-references to related products in the catalog (by product ID)
+  relatedProducts?: Array<{
+    id: string;
+    relationship: string;
+  }>;
+
   // Field Safety Corrective Actions / Recalls
   safetyCorrectiveActions?: Array<{
     type: 'recall' | 'FSCA' | 'advisory' | 'software-update';
