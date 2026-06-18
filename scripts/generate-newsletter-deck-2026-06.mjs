@@ -5,10 +5,12 @@
 //   public/newsletters/2026-06/slide-01.jpg ... slide-NN.jpg
 //
 // Run with: bun scripts/generate-newsletter-deck-2026-06.mjs
-import pptxgen from "pptxgenjs";
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 import { execSync } from "node:child_process";
+const require = createRequire(import.meta.url);
+const pptxgen = require("pptxgenjs");
 import { ALL_PRODUCTS } from "../src/data/index.ts";
 import { COMPANIES } from "../src/data/companies/index.ts";
 
@@ -49,7 +51,19 @@ const FONT_B = "Calibri";
 
 const SITE_URL = "https://dlinrt.eu";
 const LINKEDIN_URL = "https://www.linkedin.com/company/dlinrt-eu/";
-const TODAY = "2026-06-16";
+const TODAY = "2026-06-18";
+
+// Derived counts (mirrors DataService logic used by the website)
+const isPipeline = (p) =>
+  p.developmentStage === "pipeline" ||
+  p.certification?.toLowerCase() === "pipeline" ||
+  p.certification?.toLowerCase() === "coming soon";
+const ACTIVE_PRODUCTS = ALL_PRODUCTS.filter(p => !isPipeline(p));
+const PIPELINE_PRODUCTS_LIST = ALL_PRODUCTS.filter(p => isPipeline(p));
+const TOTAL_PRODUCTS = ALL_PRODUCTS.length; // 87
+const TOTAL_COMPANIES = COMPANIES.filter(c =>
+  ALL_PRODUCTS.some(p => c.productIds.includes(p.id))
+).length; // 41 (includes MedLever pipeline-only)
 
 const LOGO_PATH = path.join(OUT_DIR, "_assets/dlinrt-logo.png");
 const LINKEDIN_PATH = path.join(OUT_DIR, "_assets/linkedin.png");
@@ -103,7 +117,7 @@ function addFooter(s, { darkBg = false } = {}) {
     x: 0.6, y: 2.2, w: W - 1.2, h: 1.4, fontFace: FONT_H, fontSize: 32, color: ACCENT, bold: true,
   });
   s.addText(
-    "June 2026 update — refreshed catalog, new evidence system, first certified company, new reviewer, MAIRT @ MICCAI.",
+    "June 2026 update — refreshed catalog, new evidence system, first certified company, new reviewer, MIART @ MICCAI.",
     { x: 0.6, y: 4.0, w: W - 1.2, h: 1.4, fontFace: FONT_B, fontSize: 22, color: "CADCFC" }
   );
   addFooter(s, { darkBg: true });
@@ -117,7 +131,7 @@ function addFooter(s, { darkBg = false } = {}) {
     [{ text: "Cumulative products in the catalog", options: { hyperlink: { url: SITE_URL + "/products" }, color: TEXT } }],
     { x: 0.6, y: 0.4, w: W - 1.2, h: 0.7, fontFace: FONT_H, fontSize: 30, bold: true }
   );
-  s.addText("Based on declared product release dates · n = " + ALL_PRODUCTS.length + " products total", {
+  s.addText("Based on declared product release dates · n = " + TOTAL_PRODUCTS + " products (" + ACTIVE_PRODUCTS.length + " active + " + PIPELINE_PRODUCTS_LIST.length + " pipeline)", {
     x: 0.6, y: 1.05, w: W - 1.2, h: 0.4, fontFace: FONT_B, fontSize: 14, color: MUTED,
   });
 
@@ -159,7 +173,7 @@ function addFooter(s, { darkBg = false } = {}) {
     [{ text: "Products by primary category", options: { hyperlink: { url: SITE_URL + "/products" }, color: TEXT } }],
     { x: 0.6, y: 0.4, w: W - 1.2, h: 0.7, fontFace: FONT_H, fontSize: 30, bold: true }
   );
-  s.addText("n = " + ALL_PRODUCTS.length + " products · primary category only · click a category to browse", {
+  s.addText("n = " + TOTAL_PRODUCTS + " products (" + ACTIVE_PRODUCTS.length + " active + " + PIPELINE_PRODUCTS_LIST.length + " pipeline) · primary category only · click a category to browse", {
     x: 0.6, y: 1.05, w: W - 1.2, h: 0.4, fontFace: FONT_B, fontSize: 14, color: MUTED,
   });
 
@@ -203,7 +217,7 @@ function addFooter(s, { darkBg = false } = {}) {
     [{ text: "Companies in the DLinRT.eu catalog", options: { hyperlink: { url: SITE_URL + "/companies" }, color: TEXT } }],
     { x: 0.6, y: 0.3, w: W - 1.2, h: 0.6, fontFace: FONT_H, fontSize: 26, bold: true }
   );
-  s.addText(COMPANIES.length + " active companies · click any logo to open its page", {
+  s.addText(TOTAL_COMPANIES + " companies · click any logo to open its page", {
     x: 0.6, y: 0.85, w: W - 1.2, h: 0.35, fontFace: FONT_B, fontSize: 13, color: MUTED,
   });
 
@@ -348,7 +362,7 @@ function addFooter(s, { darkBg = false } = {}) {
       ],
     },
     {
-      h: "MAIRT @ MICCAI · Oct 1, 2026",
+      h: "MIART @ MICCAI · Oct 1, 2026",
       url: "https://miart-workshop.github.io/",
       body: [
         { text: "First fully dedicated radiotherapy satellite event at MICCAI, Strasbourg. ", options: { color: "CADCFC" } },

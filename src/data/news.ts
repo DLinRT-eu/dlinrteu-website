@@ -9,8 +9,10 @@ import { december2025PlatformUpdate } from "./news/december-2025-platform-update
 import { companyCertificationLaunch } from "./news/company-certification-launch";
 import { estro2026Announcements } from "./news/estro-2026-announcements";
 import { websiteRestyleAndSecondReview } from "./news/website-restyle-and-second-review";
+import { secondRoundReviewAndEvidenceAxes } from "./news/second-round-review-and-evidence-axes";
 
 export const NEWS_ITEMS: NewsItem[] = [
+  secondRoundReviewAndEvidenceAxes,
   websiteRestyleAndSecondReview,
   estro2026Announcements,
   companyCertificationLaunch,

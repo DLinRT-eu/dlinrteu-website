@@ -30,12 +30,13 @@ const Index = () => {
       const { default: dataService } = await import("@/services/DataService");
       if (cancelled) return;
       const products = dataService.getAllProducts();
+      const pipelineProducts = dataService.getPipelineProducts();
       setStats({
-        productCount: products.length,
-        companyCount: dataService.getActiveCompanies().length,
+        productCount: products.length + pipelineProducts.length,
+        companyCount: dataService.getAllCompaniesWithProducts().length,
       });
       const counts = new Map<string, number>();
-      products.forEach(p => {
+      [...products, ...pipelineProducts].forEach(p => {
         if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
       });
       setTaskCounts(Array.from(counts, ([name, count]) => ({ name, count })));

@@ -50,9 +50,9 @@ const Companies = () => {
   const [logosOnly, setLogosOnly] = useState(false);
   const { toast } = useToast();
 
-  // Get companies and their products using centralized getActiveCompanies()
+  // Get companies and their products (includes pipeline-only companies)
   const companies = useMemo(() => {
-    return dataService.getActiveCompanies()
+    return dataService.getAllCompaniesWithProducts()
       .map(company => {
         const companyProducts = dataService.getProductsByCompany(company.id);
         return {

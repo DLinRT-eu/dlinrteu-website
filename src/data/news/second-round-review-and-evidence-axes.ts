@@ -1,15 +1,11 @@
-// DRAFT — not yet published.
-// This news item is intentionally NOT exported from src/data/news.ts so it
-// does not appear in the live news feed. Add it to NEWS_ITEMS when ready.
-
 import { NewsItem } from "@/types/news";
 
 export const secondRoundReviewAndEvidenceAxes: NewsItem = {
   id: "second-round-review-and-evidence-axes",
-  date: "2026-06-16",
+  date: "2026-06-18",
   title: "Second-Round Review Complete · 3-Axis Evidence System Live · Certification Round Opens",
   summary:
-    "We finished the full second-round review of the catalog, surfaced a new 3-axis evidence system on every product, opened the official company certification round, welcomed a new reviewer, and lined up the MAIRT @ MICCAI satellite event.",
+    "We finished the full second-round review of the catalog, surfaced a new 3-axis evidence system on every product, opened the official company certification round, welcomed a new reviewer, and lined up the MIART @ MICCAI satellite event.",
   content: `
 ## 🔍 Second-Round Review Complete
 
@@ -49,11 +45,11 @@ A warm welcome to **Szabolcs David**, who joins the reviewer team. Huge thanks t
 
 We are opening the next review round between **November 1 and December 15, 2026**. Many hands make the workload lighter — if you can spare a few hours, [get in touch](https://dlinrt.eu/support).
 
-## 📅 Upcoming Event: MAIRT @ MICCAI
+## 📅 Upcoming Event: MIART @ MICCAI
 
 The first fully dedicated satellite event on radiotherapy at MICCAI takes place on **October 1, 2026 in Strasbourg**:
 
-👉 [MAIRT workshop](https://miart-workshop.github.io/)
+👉 [MIART workshop](https://miart-workshop.github.io/)
 
 ## 🗓️ Save the Date: DLinRT Workshop in Utrecht · March 2026
 
