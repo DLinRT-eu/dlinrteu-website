@@ -147,39 +147,9 @@ const ProductHeaderInfo = ({ product }: ProductHeaderInfoProps) => {
             <p className="text-muted-foreground"><AutoLinkText text={displayProduct.description} /></p>
           </EditableField>
           
-          {/* Company Verification Badge - Valid (prominent) */}
-          {certificationStatus === 'valid' && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-success bg-success/10 px-4 py-2 shadow-sm">
-                    <BadgeCheck className="h-5 w-5 text-success" />
-                    <div className="flex flex-col leading-tight text-left">
-                      <span className="text-sm font-semibold text-success">
-                        Verified by Company
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        Certified {new Date(verificationData!.verified_at).toISOString().split('T')[0]}
-                      </span>
-                    </div>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
-                  <p className="font-semibold mb-1">Company Verified</p>
-                  <p className="text-xs text-muted-foreground">
-                    A verified representative of {displayProduct.company} has certified the accuracy of this product information.
-                  </p>
-                  {verificationData!.verification_notes && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {verificationData!.verification_notes}
-                    </p>
-                  )}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
-
           <div className="mt-2 flex items-center gap-2 flex-wrap">
+
+
 
 
             {/* Company Verification Badge - Outdated */}
