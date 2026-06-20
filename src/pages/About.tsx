@@ -10,6 +10,7 @@ import StakeholderUseCases from "@/components/about/StakeholderUseCases";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Eye, Building2, User, BarChart3 } from "lucide-react";
 import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
+import usmanLulaAsset from "/public/people/Usman_Lula.jpeg.asset.json";
 
 const TEAM_MEMBERS = [
   {
@@ -92,7 +93,7 @@ const TEAM_MEMBERS = [
   {
     name: "Usman Lula",
     role: "Reviewer",
-    image: "/people/Usman_Lula.jpeg",
+    image: usmanLulaAsset.url,
     bio: "https://www.linkedin.com/in/usman-lula-a67636b/",
     email: "usman.lula@dlinrt.eu",
   },
