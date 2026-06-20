@@ -147,9 +147,10 @@ export const DataExport = () => {
           <Alert>
             <FileJson className="h-4 w-4" />
             <AlertDescription>
-              Export includes: profile information, roles, role requests, MFA activity log, reviews, and revisions
+              Export includes: profile, roles, role requests, MFA activity, reviews, revisions, notifications, products you use, contact submissions, newsletter subscription, product feedback, consent history, security events, and email log.
             </AlertDescription>
           </Alert>
+
 
           <Button onClick={handleExport} disabled={loading}>
             <Download className="h-4 w-4 mr-2" />
