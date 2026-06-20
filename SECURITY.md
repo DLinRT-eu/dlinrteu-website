@@ -155,6 +155,12 @@ Users can export their data via Profile → Data Export:
 - `isTrackingAllowed()` gate on all tracking operations
 - `clearTrackingIds()` for consent withdrawal
 
+### Audit History
+
+GDPR penetration audits and follow-ups are archived in [`docs/audits/gdpr/`](./docs/audits/README.md). Most recent: Wave E follow-up 2026-06-20 (10/12 closed, 2 deferred items tracked).
+
+
+
 ### Cookie Threat Model
 
 - **No auth tokens or PII are stored in cookies.** Supabase session tokens live in `localStorage` (per the Supabase JS SDK); cookies only hold the GDPR consent record, an anonymous random visitor UUID, and UI state (sidebar).
