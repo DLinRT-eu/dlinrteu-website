@@ -11,7 +11,7 @@ const PrivacyPolicy = () => (
     />
     <main className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
-      <p className="mb-4"><strong>Last updated: June 20, 2026</strong></p>
+      <p className="mb-4"><strong>Last updated: June 22, 2026</strong></p>
 
       <div className="prose prose-gray max-w-none">
         <h2 className="text-xl font-semibold mt-6 mb-3">1. Controller</h2>
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => (
               <tr><td className="p-2 border">Products you use (user_products)</td><td className="p-2 border">Self-declared product adoption, experience notes</td><td className="p-2 border">Aggregate clinical-experience signals</td><td className="p-2 border">Consent (Art. 6(1)(a))</td><td className="p-2 border">Until you remove the entry or delete your account</td></tr>
               <tr><td className="p-2 border">Email send log</td><td className="p-2 border">Recipient address, subject, status, provider message id</td><td className="p-2 border">Deliverability monitoring, abuse handling</td><td className="p-2 border">Legitimate interest (Art. 6(1)(f))</td><td className="p-2 border">Auto-purged after 90 days</td></tr>
               <tr><td className="p-2 border">Consent audit log</td><td className="p-2 border">Action, consent version, timestamp, SHA-256-hashed IP</td><td className="p-2 border">Demonstrate proof of consent (Art. 7(1))</td><td className="p-2 border">Legal obligation (Art. 6(1)(c))</td><td className="p-2 border">Retained while consent is active; archived 3 years after withdrawal</td></tr>
-              <tr><td className="p-2 border">Donations</td><td className="p-2 border">Handled by Paddle as Merchant of Record. We receive aggregated metadata only (amount, country, anonymised reference)</td><td className="p-2 border">Process donations and meet tax/accounting obligations</td><td className="p-2 border">Legal obligation (Art. 6(1)(c))</td><td className="p-2 border">Per statutory accounting periods (typically 7–10 years for tax records held by Paddle)</td></tr>
+              
             </tbody>
           </table>
         </div>
@@ -82,8 +82,8 @@ const PrivacyPolicy = () => (
 
         <h2 className="text-xl font-semibold mt-6 mb-3">6. Sub-processors &amp; international transfers</h2>
         <p className="mb-4">
-          We use a limited number of sub-processors to host the site, deliver email, broadcast
-          the newsletter, and process donations. Transfers outside the EEA rely on the European
+          We use a limited number of sub-processors to host the site, deliver email, and broadcast
+          the newsletter. Transfers outside the EEA rely on the European
           Commission's Standard Contractual Clauses (SCCs).
         </p>
         <p className="mb-4">

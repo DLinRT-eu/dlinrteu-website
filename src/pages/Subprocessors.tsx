@@ -28,14 +28,6 @@ const SUBPROCESSORS: Row[] = [
     url: "https://resend.com/legal/privacy-policy",
   },
   {
-    name: "Paddle",
-    role: "Donation processing (Merchant of Record)",
-    data: "Donor name, billing email, country, donation amount, payment method metadata (no card numbers stored by DLinRT)",
-    location: "United Kingdom / United States",
-    safeguard: "Paddle acts as independent controller for payment & tax data; EU SCCs apply for transfers",
-    url: "https://www.paddle.com/legal/privacy",
-  },
-  {
     name: "GitHub (Microsoft)",
     role: "Source-code hosting and automated pull-request creation for approved product edits",
     data: "GitHub usernames of approved company representatives or reviewers; product-edit content (non-personal)",
@@ -62,11 +54,11 @@ const Subprocessors = () => (
     />
     <main className="max-w-5xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Sub-processors</h1>
-      <p className="text-sm text-gray-500 mb-6"><strong>Last updated: June 21, 2026</strong></p>
+      <p className="text-sm text-gray-500 mb-6"><strong>Last updated: June 22, 2026</strong></p>
 
       <p className="mb-6">
         DLinRT.eu uses a small number of carefully selected service providers ("sub-processors")
-        to operate the website, deliver email, accept donations, and publish reviewed content.
+        to operate the website, deliver email, and publish reviewed content.
         Each sub-processor is bound by a Data Processing Agreement (DPA) and processes personal
         data only on documented instructions. International transfers outside the EEA rely on
         the European Commission's Standard Contractual Clauses (SCCs).
