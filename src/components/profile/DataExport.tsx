@@ -80,67 +80,48 @@ export const DataExport = () => {
 
     setLoading(true);
     try {
-      // Fetch all user data
-      const [profileData, rolesData, roleRequestsData, mfaLogData, reviewsData, revisionsData] = await Promise.all([
-        supabase.from('profiles').select('*').eq('id', user.id).single(),
-        supabase.from('user_roles').select('*').eq('user_id', user.id),
-        supabase.from('role_requests').select('*').eq('user_id', user.id),
-        supabase.from('mfa_activity_log').select('*').eq('user_id', user.id),
-        supabase.from('product_reviews').select('*').eq('assigned_to', user.id),
-        supabase.from('company_revisions').select('*').eq('revised_by', user.id),
-      ]);
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData.session?.access_token;
+      if (!accessToken) throw new Error("No active session");
 
-      // GDPR: Sanitize MFA activity log - redact IP hashes and user agents
-      const mfaLogSanitized = mfaLogData.data?.map(log => ({
-        id: log.id,
-        user_id: log.user_id,
-        action: log.action,
-        factor_type: log.factor_type,
-        created_at: log.created_at,
-        // Redact tracking data for privacy
-        ip_hash: log.ip_hash ? '[REDACTED]' : null,
-        user_agent: log.user_agent ? '[REDACTED]' : null,
-      }));
-
-      const exportData = {
-        exported_at: new Date().toISOString(),
-        gdpr_notice: 'IP addresses and user agents have been redacted for privacy compliance.',
-        user: {
-          id: user.id,
-          email: user.email,
-          created_at: user.created_at,
+      const fnUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/gdpr-data-export`;
+      const res = await fetch(fnUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json",
         },
-        profile: profileData.data,
-        roles: rolesData.data,
-        role_requests: roleRequestsData.data,
-        mfa_activity_log: mfaLogSanitized,
-        reviews: reviewsData.data,
-        revisions: revisionsData.data,
-      };
+      });
 
-      // Create and download JSON file
-      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        throw new Error(errBody.error || `Export failed (${res.status})`);
+      }
+
+      const blob = await res.blob();
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `dlinrt-data-export-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `dlinrt-data-export-${new Date().toISOString().split("T")[0]}.json`;
       a.click();
       URL.revokeObjectURL(url);
 
       toast({
-        title: 'Export successful',
-        description: 'Your data has been downloaded',
+        title: "Export successful",
+        description: "Your full data export has been downloaded",
       });
     } catch (error: any) {
       toast({
-        title: 'Export failed',
+        title: "Export failed",
         description: error.message,
-        variant: 'destructive',
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleExport = () => {
     if (profile?.mfa_enabled) {
