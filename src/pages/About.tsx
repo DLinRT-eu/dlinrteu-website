@@ -23,7 +23,7 @@ const TEAM_MEMBERS = [
   {
     name: "Mustafa Kadhim",
     role: "Maintainer & Reviewer",
-    image: "/people/Musti_suite.png",
+    image: "/people/Musti_Kadhim.jpg",
     bio: "https://portal.research.lu.se/en/persons/mustafa-kadhim",
     email: "mustafa.kadhim@dlinrt.eu",
   },
