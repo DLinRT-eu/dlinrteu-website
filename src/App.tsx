@@ -194,6 +194,7 @@ const App = () => (
                 <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
                 <Route path="guides/ai-auto-contouring-comparison" element={<AiAutoContouringComparison />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="subprocessors" element={<Subprocessors />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
                 <Route path="auth" element={<Auth />} />
                 <Route path="changelog" element={<Changelog />} />
