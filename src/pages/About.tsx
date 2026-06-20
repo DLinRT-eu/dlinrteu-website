@@ -92,7 +92,7 @@ const TEAM_MEMBERS = [
   {
     name: "Usman Lula",
     role: "Reviewer",
-    image: "/people/usman-lula.jpg",
+    image: "/people/Usman_Lula.jpeg",
     bio: "https://www.linkedin.com/in/usman-lula-a67636b/",
     email: "usman.lula@dlinrt.eu",
   },
