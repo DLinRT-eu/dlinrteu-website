@@ -243,15 +243,48 @@ The full bundle (ZIP) ships with a `manifest.json` and `README.md` describing sc
 
 ---
 
+## 🗺️ Application Routes
+
+### Public
+
+`/products` · `/companies` · `/timeline` · `/initiatives` · `/resources-compliance` · `/changelog` · `/roles` · `/roles/faq` · `/support` · `/news` · `/about` · `/privacy-policy` · `/subprocessors` · `/terms-of-use` · `/security`
+
+### Admin
+
+`/admin` · `/admin/dashboard` · `/admin/users` · `/admin/reviews` · `/admin/review-rounds` · `/admin/review-rounds/:roundId` · `/admin/companies` · `/admin/security` · `/admin/registrations` · `/admin/changelog` · `/admin/changelog-generator` · `/admin/user-products` · `/admin/certifications` · `/admin/edit-approvals`
+
+### Reviewer
+
+`/reviewer/dashboard` · `/reviewer/preferences` · `/reviewer/due-reviews` · `/reviewer/guide`
+
+### Company
+
+`/company/dashboard` · `/company/overview` · `/company/products`
+
+### Authenticated user
+
+`/profile` · `/my-products` · `/role-selection` · `/notifications`
+
+---
+
+## 🛡️ Audits
+
+Compliance and security audits are stored under [`audits/`](./audits/README.md):
+
+- **GDPR** — see [`audits/gdpr/`](./audits/gdpr/) (initial 2026-06-20 + Wave E follow-up).
+
+---
+
 ## 📝 Contributing to Documentation
 
 When updating documentation:
 
-1. **Keep it current** - Update dates when making changes
-2. **Cross-reference** - Link related guides where helpful
-3. **Use examples** - Include code snippets and screenshots
-4. **Be consistent** - Follow existing formatting patterns
+1. **Keep it current** — update dates when making changes.
+2. **Single source of truth** — link to the canonical doc instead of duplicating content.
+3. **Cross-reference** — link related guides where helpful.
+4. **Be consistent** — follow existing formatting patterns.
 
 ---
 
-*Last Updated: February 2, 2026*
+*Last Updated: June 20, 2026*
+
