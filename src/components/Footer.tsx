@@ -26,6 +26,9 @@ const Footer = () => {
               <Link to="/privacy-policy" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
                 Privacy Policy
               </Link>
+              <Link to="/subprocessors" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
+                Sub-processors
+              </Link>
               <Link to="/terms-of-use" className="text-gray-600 hover:text-[#00A6D6] transition-colors duration-200">
                 Terms of Use
               </Link>

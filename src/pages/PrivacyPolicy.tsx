@@ -1,150 +1,138 @@
-
 import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy = () => (
   <div className="min-h-screen bg-white">
     <SEO
       title="Privacy Policy"
-      description="How DLinRT.eu handles personal data, protects user privacy, and ensures GDPR compliance."
+      description="How DLinRT.eu collects, processes, retains, and protects personal data, the sub-processors involved, and how to exercise GDPR rights."
       canonical="https://dlinrt.eu/privacy-policy"
     />
     <main className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-      <p className="mb-4">
-        <strong>Last updated: December 17, 2024</strong>
-      </p>
-      
+      <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
+      <p className="mb-4"><strong>Last updated: June 20, 2026</strong></p>
+
       <div className="prose prose-gray max-w-none">
-        <h2 className="text-xl font-semibold mt-6 mb-3">Overview</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">1. Controller</h2>
         <p className="mb-4">
-          This website (<strong>DLinRT.eu</strong>) is committed to protecting your privacy. By default, we do <strong>not</strong> collect, store, or process any personal data from visitors browsing our website. You can explore all content anonymously without providing any personal information.
-        </p>
-        <p className="mb-4">
-          Personal data is <strong>only</strong> collected when you explicitly provide it and consent to its collection through specific actions such as subscribing to our newsletter or contacting us through our contact form.
+          The data controller for personal data processed through this website is the
+          DLinRT.eu maintainer team. Contact: <a className="text-[#5090D0] hover:underline" href="mailto:info@dlinrt.eu">info@dlinrt.eu</a>.
+          For all rights requests, security reports, or privacy questions, please use this address.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">When We Collect Personal Data</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">2. Overview &amp; principles</h2>
         <p className="mb-4">
-          We collect personal information only in the following circumstances:
+          You can browse DLinRT.eu anonymously. Personal data is collected only when you
+          actively use a feature that requires it (e.g. creating an account, subscribing to the
+          newsletter, contacting us, submitting feedback, donating). We process the minimum
+          data needed, retain it only as long as necessary, and never sell it.
         </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-3">3. What we collect, why, and on what legal basis</h2>
+        <p className="mb-4">The table below describes every category of personal data we process under the GDPR (Art. 6, 9 N/A).</p>
+
+        <div className="overflow-x-auto not-prose mb-4">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-100 text-left">
+                <th className="p-2 border">Category</th>
+                <th className="p-2 border">Data</th>
+                <th className="p-2 border">Purpose</th>
+                <th className="p-2 border">Lawful basis</th>
+                <th className="p-2 border">Retention</th>
+              </tr>
+            </thead>
+            <tbody className="align-top">
+              <tr><td className="p-2 border">Account &amp; profile</td><td className="p-2 border">Email, name, organisation, role, optional profile fields, hashed password (managed by Supabase Auth)</td><td className="p-2 border">Create and operate your account, gate access to authenticated features</td><td className="p-2 border">Contract (Art. 6(1)(b))</td><td className="p-2 border">Until account deletion</td></tr>
+              <tr><td className="p-2 border">Roles &amp; permissions</td><td className="p-2 border">Role assignment (admin, reviewer, company), approval status, role-change history</td><td className="p-2 border">Authorise reviewer/company/admin workflows; audit trail</td><td className="p-2 border">Legitimate interest &amp; legal obligation (Art. 6(1)(f),(c))</td><td className="p-2 border">Until account deletion; audit log up to 2 years</td></tr>
+              <tr><td className="p-2 border">Multi-factor authentication</td><td className="p-2 border">TOTP factor metadata, bcrypt-hashed backup codes, MFA activity log (action, factor type, timestamp, SHA-256-hashed IP, user agent)</td><td className="p-2 border">Protect your account; investigate suspicious activity</td><td className="p-2 border">Legal obligation &amp; legitimate interest (Art. 6(1)(c),(f))</td><td className="p-2 border">Activity log auto-purged after 365 days</td></tr>
+              <tr><td className="p-2 border">Security events</td><td className="p-2 border">Event type, SHA-256-hashed IP, user agent, timestamp, user_id where applicable</td><td className="p-2 border">Detect abuse, brute force, anomalous access</td><td className="p-2 border">Legitimate interest (Art. 6(1)(f))</td><td className="p-2 border">Auto-purged after 180 days</td></tr>
+              <tr><td className="p-2 border">Analytics (consented)</td><td className="p-2 border">Page path, session timestamps, anonymous visitor token, basic device/browser; <strong>no third-party trackers</strong></td><td className="p-2 border">Understand which content is useful</td><td className="p-2 border">Consent (Art. 6(1)(a))</td><td className="p-2 border">Auto-purged after 365 days; consent withdrawable anytime</td></tr>
+              <tr><td className="p-2 border">Newsletter</td><td className="p-2 border">First name, last name, email, consent record, engagement (opens/clicks via Mailchimp)</td><td className="p-2 border">Send DLinRT updates you asked for</td><td className="p-2 border">Consent (Art. 6(1)(a))</td><td className="p-2 border">Until you unsubscribe; one-click unsubscribe link in every email</td></tr>
+              <tr><td className="p-2 border">Contact submissions</td><td className="p-2 border">Name, email, message, timestamp, status</td><td className="p-2 border">Respond to your inquiry</td><td className="p-2 border">Consent / pre-contractual steps (Art. 6(1)(a),(b))</td><td className="p-2 border">Up to 2 years after resolution, then auto-purged</td></tr>
+              <tr><td className="p-2 border">Product feedback</td><td className="p-2 border">Optional name, institutional email, product reference, feedback content</td><td className="p-2 border">Improve catalogue accuracy and forward feedback to reviewers</td><td className="p-2 border">Consent (Art. 6(1)(a))</td><td className="p-2 border">Until processed; aggregated for catalogue updates</td></tr>
+              <tr><td className="p-2 border">Reviewer / company representative workflow</td><td className="p-2 border">Assignment history, expertise, review comments, certification tasks, invitation tokens</td><td className="p-2 border">Operate peer-review and company-verification programs</td><td className="p-2 border">Contract / legitimate interest (Art. 6(1)(b),(f))</td><td className="p-2 border">Duration of role assignment</td></tr>
+              <tr><td className="p-2 border">Products you use (user_products)</td><td className="p-2 border">Self-declared product adoption, experience notes</td><td className="p-2 border">Aggregate clinical-experience signals</td><td className="p-2 border">Consent (Art. 6(1)(a))</td><td className="p-2 border">Until you remove the entry or delete your account</td></tr>
+              <tr><td className="p-2 border">Email send log</td><td className="p-2 border">Recipient address, subject, status, provider message id</td><td className="p-2 border">Deliverability monitoring, abuse handling</td><td className="p-2 border">Legitimate interest (Art. 6(1)(f))</td><td className="p-2 border">Auto-purged after 90 days</td></tr>
+              <tr><td className="p-2 border">Consent audit log</td><td className="p-2 border">Action, consent version, timestamp, SHA-256-hashed IP</td><td className="p-2 border">Demonstrate proof of consent (Art. 7(1))</td><td className="p-2 border">Legal obligation (Art. 6(1)(c))</td><td className="p-2 border">Retained while consent is active; archived 3 years after withdrawal</td></tr>
+              <tr><td className="p-2 border">Donations</td><td className="p-2 border">Handled by Paddle as Merchant of Record. We receive aggregated metadata only (amount, country, anonymised reference)</td><td className="p-2 border">Process donations and meet tax/accounting obligations</td><td className="p-2 border">Legal obligation (Art. 6(1)(c))</td><td className="p-2 border">Per statutory accounting periods (typically 7–10 years for tax records held by Paddle)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mb-4">
+          We never collect special-category data (Art. 9 GDPR) and the site is not directed at children under 16.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-3">4. IP address handling</h2>
+        <p className="mb-4">
+          We never store raw IP addresses. Where an IP is needed for security or rate-limiting,
+          it is hashed with SHA-256 before storage and cannot be reversed to identify you.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-3">5. Cookies &amp; tracking</h2>
+        <p className="mb-4">
+          Essential cookies (session, authentication, consent state) are set on first visit
+          and do not require consent. First-party analytics cookies are set <strong>only after
+          you grant consent</strong> via the cookie banner. We use <strong>no third-party
+          advertising or tracking cookies</strong>. You can change your choice anytime via
+          the "Cookie Settings" link in the footer.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-3">6. Sub-processors &amp; international transfers</h2>
+        <p className="mb-4">
+          We use a limited number of sub-processors to host the site, deliver email, broadcast
+          the newsletter, and process donations. Transfers outside the EEA rely on the European
+          Commission's Standard Contractual Clauses (SCCs).
+        </p>
+        <p className="mb-4">
+          The complete, up-to-date list (purpose, location, transfer safeguard) is published at{" "}
+          <Link to="/subprocessors" className="text-[#5090D0] hover:underline">dlinrt.eu/subprocessors</Link>.
+        </p>
+
+        <h2 className="text-xl font-semibold mt-6 mb-3">7. Your rights (GDPR Art. 15–22)</h2>
         <ul className="mb-4 ml-6 list-disc">
-          <li><strong>Newsletter Subscription:</strong> When you voluntarily subscribe to our newsletter by providing your first name, last name, email address, and explicit consent</li>
-          <li><strong>Contact Forms:</strong> When you use our contact form to send us a message, providing your name, email address, and message content</li>
+          <li><strong>Access &amp; portability:</strong> download a machine-readable JSON export of your data from <em>Profile → Data Export</em>.</li>
+          <li><strong>Rectification:</strong> edit your profile fields directly on the <em>Profile</em> page.</li>
+          <li><strong>Erasure ("right to be forgotten"):</strong> permanently delete your account and associated personal data from <em>Profile → Delete Account</em>. Free-text fields you submitted (contact messages, feedback) are also scrubbed of identifying email at the same time.</li>
+          <li><strong>Withdraw consent:</strong> unsubscribe from any newsletter via the link in each email, or disable analytics in <em>Cookie Settings</em>.</li>
+          <li><strong>Restriction &amp; objection:</strong> contact <a className="text-[#5090D0] hover:underline" href="mailto:info@dlinrt.eu">info@dlinrt.eu</a>.</li>
+          <li><strong>Complaint:</strong> you may lodge a complaint with your local EU data protection authority.</li>
         </ul>
         <p className="mb-4">
-          In all cases, data collection requires your explicit consent and voluntary action. We do not collect any personal data from passive website browsing.
+          We respond to verified rights requests within one month (Art. 12(3)).
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">What Data We Collect</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">8. Security</h2>
         <p className="mb-4">
-          When you explicitly consent to data collection, we may collect:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li>First name and last name</li>
-          <li>Email address</li>
-          <li>Message content (for contact form submissions)</li>
-          <li>Timestamp of submission</li>
-          <li>Consent records</li>
-        </ul>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">How We Use Your Data</h2>
-        <p className="mb-4">
-          Personal data collected with your consent is used exclusively for:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li>Sending newsletter updates about deep learning solutions in radiotherapy (newsletter subscribers only)</li>
-          <li>Responding to your inquiries and providing support (contact form submissions only)</li>
-          <li>Maintaining records of consent for compliance purposes</li>
-        </ul>
-        <p className="mb-4">
-          We do <strong>not</strong> share, sell, or transfer your personal data to third parties except as required by law.
+          We apply Row-Level Security on every personal-data table, TLS for all transport,
+          bcrypt for MFA backup codes, SHA-256 IP hashing, role-based access control,
+          and an append-only audit log for administrative actions. Vulnerability reports are
+          welcome at <a className="text-[#5090D0] hover:underline" href="mailto:info@dlinrt.eu">info@dlinrt.eu</a> — see also our{" "}
+          <Link to="/security" className="text-[#5090D0] hover:underline">Security page</Link>.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">Data Retention</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">9. Automated decision-making</h2>
         <p className="mb-4">
-          We retain your personal data only as long as necessary for the purposes outlined above:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li><strong>Newsletter subscriptions:</strong> Until you unsubscribe or request deletion</li>
-          <li><strong>Contact form submissions:</strong> For a reasonable period to respond to your inquiry, typically not exceeding 2 years</li>
-        </ul>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">Your Rights</h2>
-        <p className="mb-4">
-          You have the following rights regarding your personal data:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
-          <li><strong>Rectification:</strong> Request correction of inaccurate personal data</li>
-          <li><strong>Erasure:</strong> Request deletion of your personal data</li>
-          <li><strong>Unsubscribe:</strong> Unsubscribe from our newsletter at any time by contacting info@dlinrt.eu</li>
-          <li><strong>Withdraw consent:</strong> Withdraw your consent for data processing at any time</li>
-        </ul>
-        <p className="mb-4">
-          To exercise any of these rights, please contact us at info@dlinrt.eu.
+          We do not perform automated decision-making or profiling within the meaning of Art. 22 GDPR.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">Cookies and Analytics</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">10. Changes to this policy</h2>
         <p className="mb-4">
-          This website uses analytics cookies <strong>only with your explicit consent</strong>. When you consent to analytics cookies, we collect:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li>Anonymous visitor statistics (page views, session duration)</li>
-          <li>Popular pages and user navigation patterns</li>
-          <li>Basic browser and device information</li>
-        </ul>
-        <p className="mb-4">
-          <strong>Data retention:</strong> Analytics data is automatically deleted after 1 year.<br/>
-          <strong>Cookie duration:</strong> Analytics cookies expire after 2 years.<br/>
-          <strong>Third parties:</strong> No third-party analytics services are used - all data stays on your device or our secure servers.
-        </p>
-        <p className="mb-4">
-          Essential cookies (for basic website functionality) are used regardless of consent and do not track or profile users.
+          Material changes are reflected by updating the "Last updated" date above. Significant
+          changes affecting newsletter subscribers will be communicated by email.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">Third-Party Services</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">11. Contact</h2>
         <p className="mb-4">
-          We use minimal third-party services for essential functionality:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li><strong>Data storage & Newsletter:</strong> Supabase (EU-hosted) - All personal data including newsletter subscriptions is stored securely using industry-standard encryption within the European Union</li>
-          <li><strong>Email delivery:</strong> We use a secure, GDPR-compliant email service provider for newsletter delivery and contact form responses</li>
-        </ul>
-        <p className="mb-4">
-          All third-party services are bound by strict data protection agreements and GDPR compliance requirements. Data processing agreements are in place where required by law.
+          Privacy questions or rights requests: <a className="text-[#5090D0] hover:underline" href="mailto:info@dlinrt.eu">info@dlinrt.eu</a>.
         </p>
 
-        <h2 className="text-xl font-semibold mt-6 mb-3">GDPR Compliance</h2>
+        <h2 className="text-xl font-semibold mt-6 mb-3">Legal disclaimer</h2>
         <p className="mb-4">
-          This website is fully compliant with the General Data Protection Regulation (GDPR). We ensure:
-        </p>
-        <ul className="mb-4 ml-6 list-disc">
-          <li>Explicit consent is obtained before collecting any personal data</li>
-          <li>Clear information is provided about data collection and use</li>
-          <li>Users can easily exercise their rights regarding their personal data</li>
-          <li>Data is processed lawfully, fairly, and transparently</li>
-          <li>Personal data is kept secure and confidential</li>
-        </ul>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">Security</h2>
-        <p className="mb-4">
-          We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. This includes encryption, secure data transmission, and regular security assessments.
-        </p>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">Changes to This Policy</h2>
-        <p className="mb-4">
-          We may update this privacy policy from time to time to reflect changes in our practices or legal requirements. Any material changes will be clearly indicated by updating the "Last updated" date at the top of this policy.
-        </p>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">Contact Us</h2>
-        <p className="mb-4">
-          If you have any questions about this privacy policy, your personal data, or wish to exercise your rights, please contact us at info@dlinrt.eu.
-        </p>
-
-        <h2 className="text-xl font-semibold mt-6 mb-3">Legal Disclaimer</h2>
-        <p className="mb-4">
-          Content on this website is revised periodically, but the website and its maintainers do not assume any liability for possible incorrect information. All content is provided for informational purposes only. No copyright is infringed; if you believe your rights are affected, please contact us for prompt resolution.
+          Catalogue content is revised periodically; maintainers do not assume liability for
+          possible incorrect information. All content is provided for informational purposes only.
         </p>
       </div>
     </main>

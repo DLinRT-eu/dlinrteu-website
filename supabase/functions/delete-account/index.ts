@@ -184,6 +184,46 @@ serve(async (req) => {
       console.warn('Error deleting consent audit log:', consentError.message);
     }
 
+    // GDPR: scrub email-keyed PII in tables that are not foreign-keyed to auth.users.
+    // Replace the email with an irreversible deleted-marker so we keep aggregate
+    // counts (deliverability, abuse handling) without retaining identifying data.
+    try {
+      const enc = new TextEncoder();
+      const hashBuf = await crypto.subtle.digest("SHA-256", enc.encode(user.id));
+      const hashHex = Array.from(new Uint8Array(hashBuf))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("")
+        .slice(0, 16);
+      const scrubbed = `deleted-${hashHex}@redacted.local`;
+      const userEmail = user.email!;
+
+      // newsletter_subscribers — email-keyed
+      await adminClient
+        .from("newsletter_subscribers")
+        .update({ email: scrubbed, first_name: null, last_name: null })
+        .eq("email", userEmail);
+
+      // contact_submissions — keep status/timestamp, scrub PII
+      await adminClient
+        .from("contact_submissions")
+        .update({ email: scrubbed, name: "[deleted]", message: "[deleted]" })
+        .eq("email", userEmail);
+
+      // product_feedback — keep product reference & status, scrub identifying fields
+      await adminClient
+        .from("product_feedback")
+        .update({ submitter_email: scrubbed, submitter_name: null, details: "[deleted]" })
+        .eq("submitter_email", userEmail);
+
+      // email_send_log — keep delivery stats but scrub recipient
+      await adminClient
+        .from("email_send_log")
+        .update({ recipient: scrubbed })
+        .eq("recipient", userEmail);
+    } catch (scrubErr) {
+      console.warn("Email-keyed scrub failed (non-blocking):", (scrubErr as Error).message);
+    }
+
     // Finally, delete the user from auth.users using admin API
     const { error: deleteError } = await adminClient.auth.admin.deleteUser(user.id);
 

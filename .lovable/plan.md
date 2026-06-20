@@ -1,86 +1,71 @@
+## GDPR Remediation Plan
 
-# GDPR Penetration Audit Plan
+Based on the audit findings (`/mnt/documents/gdpr-audit-2026-06-20.md`), execute remediation in 4 waves. Each wave is independently shippable.
 
-A read-only audit (no code changes) covering the legal, technical, and operational GDPR posture of DLinRT.eu. Output will be a single report at `/mnt/documents/gdpr-audit-<date>.md` plus a CSV of findings, each tagged with severity (critical/high/medium/low/info) and the GDPR article(s) implicated.
+### Wave A — Legal & Transparency (High)
+Fix Art. 13/14 disclosure gaps. Pure content/UI, no DB.
 
-## Scope
+1. **Rewrite `src/pages/PrivacyPolicy.tsx`** with complete disclosures:
+   - All data categories actually collected: profile data, roles, MFA factors + activity log, security_events (hashed IP), analytics (consented), contact_submissions, newsletter_subscribers, product_feedback, user_products, consent_audit_log, email_send_log, donations metadata.
+   - Lawful basis per category (consent / contract / legitimate interest / legal obligation).
+   - Concrete retention periods (see Wave B values).
+   - Named sub-processors with role, location, transfer safeguard.
+   - Data subject rights with the exact UX path (`/profile` → Data Export, delete-account, unsubscribe link, info@dlinrt.eu).
+   - Update "Last updated" to 2026-06-20.
+2. **New page `src/pages/Subprocessors.tsx`** at `/subprocessors`, linked from PrivacyPolicy and Footer. Table: Supabase (EU, hosting+DB+auth), Resend (US, transactional email, SCCs), Mailchimp (US, newsletter broadcast, SCCs), Paddle (EU/US, donations MoR), GitHub (US, PR automation), Lovable (EU, build/preview), Cloudflare (if applicable, CDN).
+3. **Footer link** to `/subprocessors` next to Privacy Policy.
+4. Add route in `src/App.tsx`.
 
-In-scope: every place personal data is collected, stored, processed, transmitted, or exposed.
+### Wave B — Retention Automation (High)
+Auto-purge data with promised limits + scrub email on delete.
 
-- Public site & forms (contact, newsletter, feedback, donations)
-- Auth surface (signup, login, password reset, MFA, account delete)
-- Profiles, roles, reviewer/company representative flows
-- Supabase tables holding personal data (profiles, contact_submissions, newsletter_subscribers, user_products, product_feedback, security_events, analytics_*, mfa_*, role_*, consent_audit_log, email_send_log, etc.)
-- Edge functions handling PII / email dispatch
-- Cookies, analytics, third-party calls (Resend, Mailchimp, Paddle, GitHub, Supabase)
-- Headers / CSP / transport security
-- Legal pages (Privacy Policy, Terms, Cookie banner, Unsubscribe)
+5. **Edge function `gdpr-retention-purge`** (scheduled daily via pg_cron):
+   - `analytics_page_visits`, `analytics_visitors`, `analytics_daily`: delete > 365 days.
+   - `security_events`: delete > 180 days (keep aggregated counts if needed).
+   - `mfa_activity_log`: delete > 365 days.
+   - `email_send_log`: delete > 90 days.
+   - `contact_submissions` (status=resolved): delete > 730 days.
+   - `admin_audit_log`: delete > 730 days.
+   - `consent_audit_log`: keep (proof of consent — Art. 7(1)).
+   - Log purge counts to `admin_audit_log`.
+6. **Migration**: enable pg_cron + pg_net, schedule `gdpr-retention-purge` nightly at 03:00 UTC.
+7. **Patch `supabase/functions/delete-account/index.ts`**: after deleting auth.users, scrub email-keyed rows in `contact_submissions`, `newsletter_subscribers`, `product_feedback`, `email_send_log`, `suppressed_emails` (replace email with `deleted-<hash>@redacted.local`, null free-text fields). Wrap in transaction.
 
-Out-of-scope: product catalog data (non-personal), changes to fix findings (separate confirmed pass).
+### Wave C — Technical Hardening (High/Medium)
+8. **CORS hardening** in `send-contact-email` + `submit-product-feedback`:
+   - Move origin check to top of handler; return `403` before parsing body for non-allowlisted origins.
+   - Use shared `getCorsHeaders(origin)` from `_shared`.
+9. **Rate limiting (Postgres-backed)**:
+   - Migration: new table `public.rate_limit_buckets(key text, window_start timestamptz, count int, primary key(key, window_start))`; SECURITY DEFINER RPC `check_rate_limit(_key text, _max int, _window_seconds int) returns boolean`.
+   - Apply in: `subscribe-newsletter` (5/hour/IP-hash), `send-contact-email` (3/hour/IP-hash), `submit-product-feedback` (5/hour/IP-hash), `track-analytics` (60/min/IP-hash), `track-security-event` (30/min/IP-hash).
+10. **CSP & security headers** in `public/_headers`: tighten CSP (script-src self + Paddle/Mailchimp only), add `Permissions-Policy`, `Cross-Origin-Opener-Policy: same-origin`, `Referrer-Policy: strict-origin-when-cross-origin` (verify), `X-Content-Type-Options: nosniff`.
 
-## Methodology
+### Wave D — Subject Rights Completeness (Medium)
+11. **Verify `DataExport` covers all PII tables** — extend to include: `contact_submissions` (by email match), `newsletter_subscribers` (by email), `product_feedback` (by email), `user_products`, `notifications`, `consent_audit_log`, `security_events` (own user_id only), `role_requests`, `company_representatives`. Already partially done — add the missing ones.
+12. **Rectification UX**: confirm `/profile` allows editing all editable fields; document non-editable ones.
+13. **Add "Withdraw consent"** toggle on `/profile` for analytics + newsletter, writing to `consent_audit_log`.
+14. **Portability**: current JSON export satisfies; add CSV-per-table option in the same dialog.
 
-Eight parallel review tracks, each producing findings into one merged report.
+### Wave E — Verification (read-only)
+15. Re-run the audit Playwright probes against preview, regenerate `/mnt/documents/gdpr-audit-2026-06-20-followup.md` showing each finding closed with evidence (HTTP responses, before/after).
 
-### 1. Data inventory & lawful basis (Art. 5, 6, 13, 30)
-- Enumerate every table/column storing PII via `supabase--read_query` against `information_schema`.
-- Map each PII field → purpose → lawful basis → retention. Flag fields with no documented basis.
-- Cross-check against PrivacyPolicy.tsx wording.
+### Technical notes
+- All edge function changes follow project standards: `resend@4.0.0`, `getCorsHeaders`, generic outer catch, notification-preference check where applicable.
+- All new tables include `GRANT` + RLS in the same migration.
+- IP hashing rule preserved (SHA-256, never raw).
+- No changes to product data or product UI.
 
-### 2. RLS & access-control pen test (Art. 5(1)(f), 32)
-- Pull all policies via `security--get_table_schema` + `supabase--read_query` on `pg_policies`.
-- For every PII table, verify: no `USING(true)` on SELECT for anon; reviewer/admin reads gated by `has_role()`; service_role-only tables not granted to authenticated/anon.
-- Drive Playwright as an unauthenticated user + a low-priv authenticated user against the live preview, attempting `supabase-js` reads/writes on sensitive tables (profiles of other users, contact_submissions, newsletter_subscribers, security_events, mfa_*, user_products of others, product_edit_drafts of others, role_change_log). Record HTTP status + row count returned.
-- Test PostgREST horizontal access: `?user_id=eq.<other>` enumeration.
+### Order & dependencies
+- A, B, C, D can ship in parallel; E runs last.
+- Recommend shipping A first (lowest risk, highest visible compliance gain), then B (closes retention finding), then C (hardening), then D (rights), then E (verify).
 
-### 3. Edge function abuse testing (Art. 25, 32)
-- Enumerate all functions in `supabase/functions/`.
-- For each public function (subscribe-newsletter, send-contact-email, submit-product-feedback, unsubscribe-newsletter, track-analytics, track-security-event, log-document-access, rss-feed): call via `curl` with (a) no auth, (b) malformed payloads, (c) injection payloads, (d) rate-burst (50 requests) to detect missing rate limiting, (e) cross-origin from a non-allowlisted Origin to verify CORS.
-- For admin/reviewer functions: confirm they reject anon and non-privileged JWTs.
-- Check enumeration risk: does subscribe-newsletter / password-reset reveal account existence?
+### Deliverables
+- Updated PrivacyPolicy + new Subprocessors page
+- 1 new edge function + 1 patched edge function + 1 cron schedule
+- 2 patched edge functions for CORS + 5 patched for rate limiting
+- 1 migration (rate_limit_buckets + RPC) + 1 migration (cron)
+- Patched `public/_headers`
+- Extended `DataExport.tsx` + consent withdrawal UI
+- Follow-up audit report
 
-### 4. Authentication & account lifecycle (Art. 32)
-- Test signup → approval → login → password reset → MFA enroll → MFA backup codes → delete-account end-to-end via Playwright.
-- Verify generic auth errors (no user enumeration on sign-in, reset, signup).
-- Confirm delete-account actually purges PII from all tables (not just auth.users) — query post-deletion.
-- Inspect MFA backup code storage (hashed?), session token storage (localStorage exposure), password reset token reuse / expiry.
-
-### 5. Subject-rights coverage (Art. 15–22)
-- Verify mechanisms exist for: access (export), rectification (profile edit), erasure (delete-account), restriction, portability (machine-readable export), objection, withdraw consent.
-- Note any missing right and the UX path a user would have to take.
-
-### 6. Transport, headers, cookies (Art. 32)
-- Fetch site, inspect `public/_headers`: CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP/COEP/CORP.
-- Audit cookies set by the app: names, Secure, SameSite, HttpOnly limitations (documented), expiry, consent-gated.
-- Verify CookieConsent blocks analytics cookies before consent; test by clearing storage and inspecting network.
-- Check for third-party scripts loaded before consent (Mailchimp, Paddle, GitHub avatars, Google Fonts → IP leak).
-
-### 7. PII leakage surface
-- Grep client bundle / source for accidental PII in logs, error toasts, JSON-LD, sitemap.
-- Inspect open-graph + RSS feed for email leakage.
-- Inspect `security_events`, `admin_audit_log`, `email_send_log`, `mfa_activity_log` for unhashed IPs / emails contrary to memory rule (SHA-256 IP hashing).
-- Check newsletter unsubscribe link tokens for guessability and one-shot vs persistent.
-- Review `consent_audit_log` table contents for proof-of-consent completeness (Art. 7(1)).
-
-### 8. Third-party processors & international transfers (Art. 28, 44)
-- List sub-processors actually called from code (Resend US, Supabase EU/US?, Paddle, Mailchimp US, GitHub, Lovable).
-- Cross-check against PrivacyPolicy.tsx subprocessor list. Flag undisclosed transfers and missing SCC / adequacy mention.
-
-## Deliverables (read-only artefacts)
-
-1. `/mnt/documents/gdpr-audit-<YYYY-MM-DD>.md` — executive summary, posture rating, findings grouped by track, with reproduction steps, evidence (HTTP responses, screenshots under `/tmp/browser/gdpr/`), GDPR article, severity, recommended remediation.
-2. `/mnt/documents/gdpr-audit-<YYYY-MM-DD>.csv` — one row per finding (id, track, severity, article, table/function/page, title, evidence-ref, recommendation).
-3. Inline `<presentation-artifact>` links at the end of the chat reply.
-
-No product files, RLS policies, edge functions, or legal copy will be modified in this pass — remediation is a separate, user-confirmed task (likely one PR per track).
-
-## Constraints honored
-
-- Minimal Intervention (read-only).
-- IP hashing rule respected (we only verify, never log raw IPs).
-- Secrets handling: no env values echoed; auth flows tested with the pre-minted preview session only.
-- Playwright tests scoped to `/tmp/browser/gdpr/`.
-
-## Estimated effort
-
-~6–10 tool turns: 1 inventory, 2 RLS/Playwright, 2 edge-function fuzz, 1 auth lifecycle, 1 headers/cookies, 1 compile.
+Confirm to proceed, or tell me which waves to skip/reorder.

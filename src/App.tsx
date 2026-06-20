@@ -66,6 +66,7 @@ const Dashboard_Authenticated = lazyPage(() => import("./pages/Dashboard_Authent
 const Timeline = lazyPage(() => import("./pages/Timeline"));
 const Initiatives = lazyPage(() => import("./pages/Initiatives"));
 const PrivacyPolicy = lazyPage(() => import("./pages/PrivacyPolicy"));
+const Subprocessors = lazyPage(() => import("./pages/Subprocessors"));
 const TermsOfUse = lazyPage(() => import("./pages/TermsOfUse"));
 const ReviewDashboard = lazyPage(() => import("./pages/ReviewDashboard"));
 const ProductReview = lazyPage(() => import("./pages/ProductReview"));
@@ -193,6 +194,7 @@ const App = () => (
                 <Route path="evidence-impact-guide" element={<EvidenceImpactGuide />} />
                 <Route path="guides/ai-auto-contouring-comparison" element={<AiAutoContouringComparison />} />
                 <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="subprocessors" element={<Subprocessors />} />
                 <Route path="terms-of-use" element={<TermsOfUse />} />
                 <Route path="auth" element={<Auth />} />
                 <Route path="changelog" element={<Changelog />} />
