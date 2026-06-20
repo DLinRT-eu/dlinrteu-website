@@ -28,14 +28,6 @@ const SUBPROCESSORS: Row[] = [
     url: "https://resend.com/legal/privacy-policy",
   },
   {
-    name: "Mailchimp (Intuit)",
-    role: "Newsletter broadcast & audience management",
-    data: "Subscriber name, email address, subscription preferences, open/click engagement",
-    location: "United States",
-    safeguard: "EU SCCs; DPA via Intuit Mailchimp",
-    url: "https://mailchimp.com/legal/privacy/",
-  },
-  {
     name: "Paddle",
     role: "Donation processing (Merchant of Record)",
     data: "Donor name, billing email, country, donation amount, payment method metadata (no card numbers stored by DLinRT)",
@@ -70,7 +62,7 @@ const Subprocessors = () => (
     />
     <main className="max-w-5xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Sub-processors</h1>
-      <p className="text-sm text-gray-500 mb-6"><strong>Last updated: June 20, 2026</strong></p>
+      <p className="text-sm text-gray-500 mb-6"><strong>Last updated: June 21, 2026</strong></p>
 
       <p className="mb-6">
         DLinRT.eu uses a small number of carefully selected service providers ("sub-processors")

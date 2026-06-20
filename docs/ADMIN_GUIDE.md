@@ -553,5 +553,5 @@ If the mailing list looks smaller than expected after a database migration:
 2. Click **Run audit** in the *Subscriber recovery audit* card. This calls the SECURITY DEFINER RPC `count_potential_newsletter_recoveries()` and returns counts only — no PII is sent to the browser.
 3. The audit reports active/unsubscribed counts and how many emails exist in other tables (`profiles`, `contact_submissions`, `user_product_experiences`, `user_registration_notifications`).
 4. **Do not auto-import** these emails. Account/processing consent is not the same as marketing consent under GDPR Art. 6(1)(a).
-5. To restore subscribers, use the **Import** button with a CSV/XLSX export from your previous newsletter provider (Mailchimp, Resend audience, etc.) — those records already carry explicit newsletter consent. Tick the consent confirmation in the dialog.
+5. To restore subscribers, use the **Import** button with a CSV/XLSX export from your previous newsletter provider (e.g. a Resend audience export) — those records already carry explicit newsletter consent. Tick the consent confirmation in the dialog.
 6. For users who only have account-level consent, send a re-opt-in invitation through your normal marketing channel; do not pre-populate them.
