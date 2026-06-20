@@ -212,14 +212,14 @@ serve(async (req) => {
       // product_feedback — keep product reference & status, scrub identifying fields
       await adminClient
         .from("product_feedback")
-        .update({ email: scrubbed, name: null, feedback: "[deleted]" })
-        .eq("email", userEmail);
+        .update({ submitter_email: scrubbed, submitter_name: null, details: "[deleted]" })
+        .eq("submitter_email", userEmail);
 
       // email_send_log — keep delivery stats but scrub recipient
       await adminClient
         .from("email_send_log")
-        .update({ recipient_email: scrubbed })
-        .eq("recipient_email", userEmail);
+        .update({ recipient: scrubbed })
+        .eq("recipient", userEmail);
     } catch (scrubErr) {
       console.warn("Email-keyed scrub failed (non-blocking):", (scrubErr as Error).message);
     }
