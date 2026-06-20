@@ -27,7 +27,7 @@ See [Resources & Compliance → Who we help](https://dlinrt.eu/resources-complia
 - **[Security Policy](./SECURITY.md)** - Security features, GDPR compliance, and reporting vulnerabilities
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
 
-For complete documentation overview, see [DOCUMENTATION_LINKS.md](./DOCUMENTATION_LINKS.md)
+For the complete documentation index, see [docs/README.md](./docs/README.md).
 
 
 
