@@ -97,7 +97,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "ESTRO",
     startDate: "2023-05-01",
     endDate: "2024-01-01",
-    status: "Active",
+    status: "Completed",
     tags: ["Prostate Cancer", "Treatment Planning", "Optimization", "Dose Prediction"],
     features: ["Clinical CT datasets", "Structure sets", "Evaluation based on clinical metrics"],
     dataAccess: "Available for research purposes",
