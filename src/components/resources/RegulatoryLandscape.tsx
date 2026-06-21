@@ -79,12 +79,12 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: AI Act
             </CardTitle>
-            <Badge variant="outline">Key dates: Aug 2025, Aug 2026</Badge>
+            <Badge variant="outline">Key dates: Feb 2025, Dec 2027, Aug 2028 (pending formal adoption)</Badge>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). Phased compliance: prohibited AI practices (Feb 2025), high-risk obligations (Aug 2026). For regulated medical AI, additional obligations apply alongside MDR; see MDCG guidance.
+            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). Following the <strong>Digital Omnibus on AI</strong> political agreement (Council/Parliament/Commission, 7 May 2026), phased compliance is: prohibited AI practices (Feb 2025); standalone Annex III high-risk AI obligations deferred to <strong>2 December 2027</strong>; and Annex I high-risk AI embedded in regulated products (including medical devices — relevant to DLinRT) deferred to <strong>2 August 2028</strong>. These deferrals are pending formal adoption and Official Journal publication (expected before 2 Aug 2026). For regulated medical AI, AI Act obligations apply alongside MDR; see MDCG guidance.
           </p>
           <a 
             href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" 
