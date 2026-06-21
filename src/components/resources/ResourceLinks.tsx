@@ -372,13 +372,6 @@ const ResourceLinks = () => {
       category: "QA Guidelines"
     },
     {
-      title: "NCS Report 33: QA for AI Auto-Contouring",
-      description: "Netherlands Commission on Radiation Dosimetry guidance on AI-based auto-contouring QA (2023)",
-      url: "https://doi.org/10.25030/ncs-033",
-      icon: Shield,
-      category: "QA Guidelines"
-    },
-    {
       title: "ESTRO Consensus Guidelines",
       description: "Professional consensus statements on radiotherapy techniques and quality standards",
       url: "https://doi.org/10.1016/j.radonc.2024.110345",
