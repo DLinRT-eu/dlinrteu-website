@@ -241,8 +241,8 @@ const ResourceLinks = () => {
     // Radiotherapy Guidelines (NEW CATEGORY)
     {
       title: "ICRU Report 97: MRI-Guided Radiotherapy",
-      description: "Comprehensive guidance on MRI-guided radiation therapy techniques and applications (2023)",
-      url: "https://doi.org/10.1093/jicru/ndad010",
+      description: "Comprehensive guidance on MRI-guided radiation therapy techniques and applications (2022)",
+      url: "https://doi.org/10.1177/14736691221141950",
       icon: BookOpen,
       category: "Radiotherapy Guidelines"
     },
