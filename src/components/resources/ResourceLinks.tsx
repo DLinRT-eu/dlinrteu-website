@@ -147,7 +147,7 @@ const ResourceLinks = () => {
     {
       title: "EU AI Act High-Risk AI Requirements",
       description: "Detailed requirements for high-risk AI systems under the EU AI Act including medical devices",
-      url: "https://artificialintelligenceact.eu/high-risk-ai-systems/",
+      url: "https://artificialintelligenceact.eu/article/6/",
       icon: Shield,
       category: "AI/ML Guidelines"
     },
