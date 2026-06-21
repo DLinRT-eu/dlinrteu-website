@@ -35,7 +35,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     relatedPublications: [
       {
         title: "Overview of the HECKTOR Challenge at MICCAI 2020",
-        url: "https://doi.org/10.1007/978-3-030-67194-5_45",
+        url: "https://doi.org/10.1007/978-3-030-67194-5_1",
         authors: "V. Andrearczyk et al.",
         year: "2020",
       },
@@ -97,7 +97,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "ESTRO",
     startDate: "2023-05-01",
     endDate: "2024-01-01",
-    status: "Active",
+    status: "Completed",
     tags: ["Prostate Cancer", "Treatment Planning", "Optimization", "Dose Prediction"],
     features: ["Clinical CT datasets", "Structure sets", "Evaluation based on clinical metrics"],
     dataAccess: "Available for research purposes",
@@ -127,7 +127,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     category: "Grand Challenge",
     description:
       "Challenge for automatic segmentation of organs at risk in thoracic CT for radiotherapy planning. Associated dataset available on TCIA (AAPM-RT-MAC).",
-    website: "https://www.aapm.org/GrandChallenge/SegTHOR/",
+    website: "https://doi.org/10.1002/mp.13141",
     organization: "American Association of Physicists in Medicine",
     startDate: "2017-01-01",
     endDate: "2017-07-30",

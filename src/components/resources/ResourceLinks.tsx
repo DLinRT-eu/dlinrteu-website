@@ -46,14 +46,14 @@ const ResourceLinks = () => {
     {
       title: "EUnetHTA 21 — Methodological deliverables",
       description: "PICO framework, evidence submission templates and methodological guidance for joint assessments",
-      url: "https://www.eunethta.eu/eunethta-21/",
+      url: "https://www.eunethta.eu/jointhtawork/",
       icon: BookOpen,
       category: "EU HTA"
     },
     {
       title: "Member State Coordination Group on HTA",
       description: "Governance body coordinating JCAs/JSCs and adopting methodological and procedural guidance under HTAR",
-      url: "https://health.ec.europa.eu/health-technology-assessment/coordination-group_en",
+      url: "https://health.ec.europa.eu/health-technology-assessment/implementation-regulation-health-technology-assessment/member-state-coordination-group-hta-htacg_en",
       icon: Users,
       category: "EU HTA"
     },
@@ -147,7 +147,7 @@ const ResourceLinks = () => {
     {
       title: "EU AI Act High-Risk AI Requirements",
       description: "Detailed requirements for high-risk AI systems under the EU AI Act including medical devices",
-      url: "https://artificialintelligenceact.eu/high-risk-ai-systems/",
+      url: "https://artificialintelligenceact.eu/article/6/",
       icon: Shield,
       category: "AI/ML Guidelines"
     },
@@ -241,8 +241,8 @@ const ResourceLinks = () => {
     // Radiotherapy Guidelines (NEW CATEGORY)
     {
       title: "ICRU Report 97: MRI-Guided Radiotherapy",
-      description: "Comprehensive guidance on MRI-guided radiation therapy techniques and applications (2023)",
-      url: "https://doi.org/10.1093/jicru/ndad010",
+      description: "Comprehensive guidance on MRI-guided radiation therapy techniques and applications (2022)",
+      url: "https://doi.org/10.1177/14736691221141950",
       icon: BookOpen,
       category: "Radiotherapy Guidelines"
     },
@@ -314,7 +314,7 @@ const ResourceLinks = () => {
     {
       title: "RTOG Contouring Atlases",
       description: "NRG Oncology standardized contouring atlases for radiotherapy target delineation",
-      url: "https://www.nrgoncology.org/Resources/Atlases",
+      url: "https://www.nrgoncology.org/content-block-tag/contouring-atlases/",
       icon: BookOpen,
       category: "Data Standards"
     },
@@ -368,13 +368,6 @@ const ResourceLinks = () => {
       title: "IAEA Quality Assurance Guidelines",
       description: "Comprehensive quality assurance guidance for radiotherapy equipment and procedures",
       url: "https://www.iaea.org/resources/rpop/health-professionals/radiotherapy",
-      icon: Shield,
-      category: "QA Guidelines"
-    },
-    {
-      title: "NCS Report 33: QA for AI Auto-Contouring",
-      description: "Netherlands Commission on Radiation Dosimetry guidance on AI-based auto-contouring QA (2023)",
-      url: "https://doi.org/10.25030/ncs-033",
       icon: Shield,
       category: "QA Guidelines"
     },
