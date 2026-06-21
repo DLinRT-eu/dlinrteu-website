@@ -314,7 +314,7 @@ const ResourceLinks = () => {
     {
       title: "RTOG Contouring Atlases",
       description: "NRG Oncology standardized contouring atlases for radiotherapy target delineation",
-      url: "https://www.nrgoncology.org/Resources/Atlases",
+      url: "https://www.nrgoncology.org/content-block-tag/contouring-atlases/",
       icon: BookOpen,
       category: "Data Standards"
     },
