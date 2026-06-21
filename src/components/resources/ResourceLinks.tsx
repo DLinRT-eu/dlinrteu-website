@@ -46,14 +46,14 @@ const ResourceLinks = () => {
     {
       title: "EUnetHTA 21 — Methodological deliverables",
       description: "PICO framework, evidence submission templates and methodological guidance for joint assessments",
-      url: "https://www.eunethta.eu/eunethta-21/",
+      url: "https://www.eunethta.eu/jointhtawork/",
       icon: BookOpen,
       category: "EU HTA"
     },
     {
       title: "Member State Coordination Group on HTA",
       description: "Governance body coordinating JCAs/JSCs and adopting methodological and procedural guidance under HTAR",
-      url: "https://health.ec.europa.eu/health-technology-assessment/coordination-group_en",
+      url: "https://health.ec.europa.eu/health-technology-assessment/implementation-regulation-health-technology-assessment/member-state-coordination-group-hta-htacg_en",
       icon: Users,
       category: "EU HTA"
     },
