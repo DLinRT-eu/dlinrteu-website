@@ -35,7 +35,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     relatedPublications: [
       {
         title: "Overview of the HECKTOR Challenge at MICCAI 2020",
-        url: "https://doi.org/10.1007/978-3-030-67194-5_45",
+        url: "https://doi.org/10.1007/978-3-030-67194-5_1",
         authors: "V. Andrearczyk et al.",
         year: "2020",
       },
