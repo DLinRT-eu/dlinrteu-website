@@ -239,13 +239,13 @@ const RegulatoryLandscape = () => {
             </a>
             <span className="text-muted-foreground">|</span>
             <a
-              href="https://www.eunethta.eu/eunethta-21/"
+              href="https://www.eunethta.eu/jointhtawork/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>EUnetHTA 21 Deliverables</span>
+              <span>EUnetHTA Joint HTA Work</span>
             </a>
           </div>
         </CardContent>
