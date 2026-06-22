@@ -4,20 +4,20 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
   {
     id: "plan-ai",
     trainingData: {
-        description: "Machine learning models developed using 5,000+ clinically delivered treatment plans from Johns Hopkins University across multiple anatomical sites.",
+        description: "Machine learning models developed using 5,000+ clinically delivered treatment plans, primarily from Johns Hopkins University across multiple anatomical sites, with the abdomen model trained on data from two institutions. Feature and protocol distributions disclosed in Shade et al., Adv Radiat Oncol 2026 (https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/).",
         datasetSize: "5,000+ plans",
-        institutions: 1,
-        disclosureLevel: "partial",
-        source: "FDA 510(k) summary K242748",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf"
+        institutions: 2,
+        disclosureLevel: "full",
+        source: "FDA 510(k) summary K242748; Shade et al., Adv Radiat Oncol 2026",
+        sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
     },
     evaluationData: {
-        description: "FDA 510(k) software verification & validation only. No product-specific peer-reviewed clinical evaluation of Plan AI / Oncospace has been located; previous citations to Appenzoller 2012 (foundational DVH-prediction methodology) and Chung 2024 / Yu 2025 (other KBP/auto-planning products) do not directly evaluate Plan AI and were removed 2026-06-15.",
-        primaryEndpoint: "Not specified",
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf",
-        source: "FDA 510(k) summary K242748",
-        studyDesign: "Software V&V (FDA 510(k)) only"
+        description: "Retrospective external validation at Johns Hopkins: 72 re-planned cases across 4 anatomic regions, evaluating 51 OARs. Peer-reviewed in Shade et al., Adv Radiat Oncol 2026. Additional workflow-level external validations reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+        primaryEndpoint: "Non-inferiority of mean OAR dose vs. clinical plans; PTV coverage and conformity",
+        results: "Non-inferiority demonstrated for mean OAR dose across all 51 OARs evaluated; no significant decrease in PTV coverage or conformity.",
+        sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/",
+        source: "Shade et al., Adv Radiat Oncol 2026",
+        studyDesign: "Retrospective external validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
     },
     name: "Plan AI",
     company: "Sun Nuclear (Mirion Medical)",
@@ -36,7 +36,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       "Cloud-native SaaS platform",
     ],
     category: "Treatment Planning",
-    certification: "FDA 510(k) Cleared",
+    certification: "FDA 510(k) Cleared, CE Marked Class IIb",
     logoUrl: "/logos/SunNuclear.png",
     website: "https://www.sunnuclear.com/products/plan-ai",
     anatomicalLocation: ["Prostate", "Head and Neck", "Thoracic", "Abdomen", "Pelvis"],
@@ -83,9 +83,9 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         notes: "K242748 (Apr 2025). Prior clearances: K222803 (Feb 2023), K202284 (Mar 2021, original Oncospace clearance)"
       },
       ce: {
-        status: "not_applicable",
-        class: "N/A",
-        notes: "US market only. CE marking not obtained."
+        status: "ce_mark",
+        class: "Class IIb",
+        notes: "CE Marked, Class IIb. Notified body: BSI."
       },
       intendedUseStatement:
         "\"Oncospace is used to configure and review radiotherapy treatment plans for a patient with malignant or benign disease in the head and neck, thoracic, abdominal, and pelvic regions. It allows for set up of radiotherapy treatment protocols, association of a potential treatment plan with the protocol(s), submission of a dose prescription and achievable dosimetric goals to a treatment planning system, and review of the treatment plan.\" (Source: FDA 510(k) K242748 Summary, accessed 2026-05-30)",
@@ -96,26 +96,46 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "Single paper introducing the tool. Validated at one center outside of the training dataset: Shade et al 2026 https://doi.org/10.1016/j.adro.2026.102036",
-    clinicalImpactNotes: "Vendor-claimed workflow improvement through AI-powered DVH predictions. No product-specific independent clinical impact data located.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate-to-high implementation effort — limited independent evidence; local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Peer-reviewed external validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    clinicalImpactNotes: "Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website",
-    clinicalEvidence: "FDA 510(k) software V&V; no product-specific independent peer-reviewed clinical evaluation of Plan AI located as of 2026-06-15.",
+    evidenceExternalValidation: true,
+    lastUpdated: "2026-06-22",
+    lastRevised: "2026-06-22",
+    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22)",
+    clinicalEvidence: "Peer-reviewed external validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {
-        type: "Introductory",
-        description: "Shade at al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy.",
+        type: "Peer-reviewed Validation",
+        description: "Shade et al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy. Adv Radiat Oncol 2026.",
         link: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
+      },
+      {
+        type: "Validation",
+        description: "ESTRO 2025 poster — Personalized radiotherapy planning tool with AI-guided optimization for patients with head and neck cancer (external validation).",
+        link: "https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2724/"
+      },
+      {
+        type: "Validation",
+        description: "AAPM 2025 oral presentation — Personalized and automated head & neck radiotherapy planning with AI-guided optimization (external validation).",
+        link: "https://aapm.confex.com/aapm/2025am/meetingapp.cgi/Paper/15133"
+      },
+      {
+        type: "Validation",
+        description: "AAPM 2024 poster — Performance of a knowledge-based planning software on static IMRT head and neck plans.",
+        link: "https://aapm.confex.com/aapm/2024am/meetingapp.cgi/Paper/11902"
+      },
+      {
+        type: "Validation",
+        description: "ICCR 2024 conference paper — AI-guided unattended plan generation (external validation).",
+        link: "https://www.iccr2024.org/papers/523444.pdf"
       },
       {
         type: "Regulatory Clearance",
@@ -139,10 +159,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       },
     ],
     limitations: [
-      "Available in the United States only",
       "Cloud connectivity required",
       "Requires DICOM-compliant TPS integration",
-      "CE marking not available (not for sale in EU)",
     ],
   },
 ];
