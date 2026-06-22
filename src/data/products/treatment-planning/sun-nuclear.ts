@@ -36,7 +36,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       "Cloud-native SaaS platform",
     ],
     category: "Treatment Planning",
-    certification: "FDA 510(k) Cleared",
+    certification: "FDA 510(k) Cleared, CE Marked Class IIb",
     logoUrl: "/logos/SunNuclear.png",
     website: "https://www.sunnuclear.com/products/plan-ai",
     anatomicalLocation: ["Prostate", "Head and Neck", "Thoracic", "Abdomen", "Pelvis"],
