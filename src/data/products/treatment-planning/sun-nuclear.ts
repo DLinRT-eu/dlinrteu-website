@@ -40,7 +40,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/SunNuclear.png",
     website: "https://www.sunnuclear.com/products/plan-ai",
     anatomicalLocation: ["Prostate", "Head and Neck", "Thoracic", "Abdomen", "Pelvis"],
-    modality: ["Treatment Planning System Data"],
+    modality: ["CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: [
       "Prostate Cancer",
@@ -60,10 +60,10 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population:
         "Cancer patients undergoing radiation therapy for prostate, head and neck, thoracic, abdominal, and pelvic tumors",
-      input: ["DICOM CT Images", "DICOM RT Structure Sets"],
-      inputFormat: ["DICOM CT", "DICOM RT Structure Set"],
-      output: ["DVH Predictions", "Best Achievable Objectives", "Plan Quality Metrics", "Peer Review Reports"],
-      outputFormat: ["Dosimetric Parameters", "TPS-compatible Objectives"],
+      input: ["CT images", "Structure sets"],
+      inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
+      output: ["DVH predictions", "Best Achievable objectives", "Plan quality metrics", "Peer review reports"],
+      outputFormat: ["Dosimetric parameters", "TPS-compatible objectives"],
     },
     technology: {
       integration: ["Treatment Planning Systems", "Cloud API", "TPS Interface Scripts"],
@@ -85,6 +85,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "ce_mark",
         class: "Class IIb",
+        type: "Medical Device",
         notes: "CE Marked, Class IIb. Notified body: BSI."
       },
       intendedUseStatement:
