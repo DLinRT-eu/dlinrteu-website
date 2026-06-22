@@ -1,30 +1,49 @@
-# Remove Paddle references
+## Plan: Update Plan AI (Sun Nuclear) per vendor feedback
 
-Verified: there is no Paddle SDK, checkout overlay, edge function, or secret in the codebase. Paddle survives only in privacy/sub-processor copy, historical audits, and project memory.
+Single file edit: `src/data/products/treatment-planning/sun-nuclear.ts`
 
-## Changes
+### 1. Regulatory
+- `ce.status`: `"ce_mark"`, `ce.class`: `"Class IIb"`, `ce.notes`: `"CE Marked, Class IIb. Notified body: BSI."`
+- `certification`: `"FDA 510(k) Cleared, CE Marked Class IIb"`
 
-### 1. `src/pages/Subprocessors.tsx`
-- Remove the entire **Paddle** entry from the `SUBPROCESSORS` array.
-- Bump "Last updated" date.
+### 2. Training data
+- `institutions: 2` (Hopkins + external site for abdomen model per Shade et al.)
+- `disclosureLevel: "full"` (Shade et al. discloses feature/protocol distributions)
+- Keep FDA summary as primary `source`; add Shade et al. URL as supplementary note in `description`.
 
-### 2. `src/pages/PrivacyPolicy.tsx`
-- Remove the **Donations** row from the "What we collect" table (Paddle as Merchant of Record).
-- In section 6 (Sub-processors & international transfers), drop "and process donations" from the intro sentence so it reads: "…to host the site, deliver email, and broadcast the newsletter."
-- Bump "Last updated" date.
+### 3. Evaluation data
+Rewrite to reflect Shade et al. 2026 (Adv Radiat Oncol):
+- `studyDesign`: "Retrospective external validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
+- `primaryEndpoint`: "Non-inferiority of mean OAR dose vs. clinical plans; PTV coverage and conformity"
+- `results`: "Non-inferiority demonstrated for mean OAR dose across all 51 OARs evaluated; no significant decrease in PTV coverage or conformity."
+- `source`: "Shade et al., Adv Radiat Oncol 2026"
+- `sourceUrl`: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
 
-### 3. Historical GDPR audits (`docs/audits/gdpr/2026-06-20-initial.md` & `…-followup.md`)
-- Extend the existing post-audit addendum to also note: "Paddle was removed as a sub-processor; donations are no longer processed on-site."
-- CSV left as-is (immutable historical record).
+### 4. Evidence entries (add 4 new, keep existing)
+Add as `type: "Validation"`:
+- ESTRO 2025 poster — H&N personalized planning external validation — https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2724/
+- AAPM 2025 oral — Personalized & automated H&N planning with AI-guided optimization — https://aapm.confex.com/aapm/2025am/meetingapp.cgi/Paper/15133
+- AAPM 2024 poster — Knowledge-based planning on static IMRT H&N plans — https://aapm.confex.com/aapm/2024am/meetingapp.cgi/Paper/11902
+- ICCR 2024 paper — AI-guided unattended plan generation (external validation) — https://www.iccr2024.org/papers/523444.pdf
 
-### 4. Memory cleanup
-- Delete `mem://features/donation-system-paddle`.
-- Update `mem://index.md`: remove the "Paddle Donations" line under Memories.
+Reclassify existing Shade et al. entry from `"Introductory"` to `"Peer-reviewed Validation"`.
 
-### 5. Verification
-Re-run `rg -li paddle .` — only the two historical audit `.md` files (with extended addendum) and the `.csv` should remain.
+### 5. Evidence axes
+- `evidenceRigor: "E2"` (peer-reviewed + multiple external validations)
+- `clinicalImpact: "I2"` (workflow-level external validation; per user)
+- `evidenceExternalValidation: true`
+- `evidenceMultiCenter: true`
+- `adoptionReadiness: "R2"` with updated notes
+- Update `evidenceRigorNotes` and `clinicalImpactNotes` accordingly
 
-## Out of scope
-- No route changes. `/donate → /support` redirect already exists in `src/App.tsx` and stays (harmless backstop for old links).
-- No edge-function or secret changes (none exist for Paddle).
-- The `/support` page is not touched unless you want donation copy removed there too — say the word and I'll fold it in.
+### 6. Limitations
+Remove:
+- `"Available in the United States only"`
+- `"CE marking not available (not for sale in EU)"`
+
+Keep cloud + DICOM TPS items. (Per vendor: now sold in EU where CE required.)
+
+### 7. Bookkeeping
+- `lastUpdated`/`lastRevised`: `"2026-06-22"`
+- `source`: append `", Sun Nuclear company representative (verified 2026-06-22)"`
+- `clinicalEvidence`: rewrite to reference Shade et al. + 4 conference validations.

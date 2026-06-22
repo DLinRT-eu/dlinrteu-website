@@ -4,20 +4,20 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
   {
     id: "plan-ai",
     trainingData: {
-        description: "Machine learning models developed using 5,000+ clinically delivered treatment plans from Johns Hopkins University across multiple anatomical sites.",
+        description: "Machine learning models developed using 5,000+ clinically delivered treatment plans, primarily from Johns Hopkins University across multiple anatomical sites, with the abdomen model trained on data from two institutions. Feature and protocol distributions disclosed in Shade et al., Adv Radiat Oncol 2026 (https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/).",
         datasetSize: "5,000+ plans",
-        institutions: 1,
-        disclosureLevel: "partial",
-        source: "FDA 510(k) summary K242748",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf"
+        institutions: 2,
+        disclosureLevel: "full",
+        source: "FDA 510(k) summary K242748; Shade et al., Adv Radiat Oncol 2026",
+        sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
     },
     evaluationData: {
-        description: "FDA 510(k) software verification & validation only. No product-specific peer-reviewed clinical evaluation of Plan AI / Oncospace has been located; previous citations to Appenzoller 2012 (foundational DVH-prediction methodology) and Chung 2024 / Yu 2025 (other KBP/auto-planning products) do not directly evaluate Plan AI and were removed 2026-06-15.",
-        primaryEndpoint: "Not specified",
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242748.pdf",
-        source: "FDA 510(k) summary K242748",
-        studyDesign: "Software V&V (FDA 510(k)) only"
+        description: "Retrospective external validation at Johns Hopkins: 72 re-planned cases across 4 anatomic regions, evaluating 51 OARs. Peer-reviewed in Shade et al., Adv Radiat Oncol 2026. Additional workflow-level external validations reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+        primaryEndpoint: "Non-inferiority of mean OAR dose vs. clinical plans; PTV coverage and conformity",
+        results: "Non-inferiority demonstrated for mean OAR dose across all 51 OARs evaluated; no significant decrease in PTV coverage or conformity.",
+        sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/",
+        source: "Shade et al., Adv Radiat Oncol 2026",
+        studyDesign: "Retrospective external validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
     },
     name: "Plan AI",
     company: "Sun Nuclear (Mirion Medical)",
