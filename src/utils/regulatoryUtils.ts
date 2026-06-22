@@ -104,7 +104,7 @@ export function formatCEInfo(ce: ParsedCEInfo): string {
  * Helper to check if CE status indicates actual CE certification
  */
 function isCECertified(status: string): boolean {
-  const positiveStatuses = ['certified', 'approved', 'ce marked', 'cleared', 'ce mark'];
+  const positiveStatuses = ['certified', 'approved', 'ce marked', 'cleared', 'ce mark', 'ce_mark'];
   const negativeStatuses = ['not available', 'not specified', 'under review', 'research', 'not applicable', 'n/a', 'pending'];
   
   const lowerStatus = status.toLowerCase();
