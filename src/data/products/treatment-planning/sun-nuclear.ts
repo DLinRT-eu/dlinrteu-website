@@ -98,7 +98,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021-03-12",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Peer-reviewed external validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    evidenceRigorNotes: "Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     clinicalImpactNotes: "Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
@@ -110,7 +110,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-22",
     lastRevised: "2026-06-22",
     source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22)",
-    clinicalEvidence: "Peer-reviewed external validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    clinicalEvidence: "Peer-reviewed internal validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {
         type: "Peer-reviewed Validation",
