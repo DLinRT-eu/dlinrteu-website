@@ -96,26 +96,46 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "Single paper introducing the tool. Validated at one center outside of the training dataset: Shade et al 2026 https://doi.org/10.1016/j.adro.2026.102036",
-    clinicalImpactNotes: "Vendor-claimed workflow improvement through AI-powered DVH predictions. No product-specific independent clinical impact data located.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate-to-high implementation effort — limited independent evidence; local validation, interface testing and workflow confirmation required before adoption.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Peer-reviewed external validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    clinicalImpactNotes: "Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: false,
+    evidenceMultiCenter: true,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: false,
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website",
-    clinicalEvidence: "FDA 510(k) software V&V; no product-specific independent peer-reviewed clinical evaluation of Plan AI located as of 2026-06-15.",
+    evidenceExternalValidation: true,
+    lastUpdated: "2026-06-22",
+    lastRevised: "2026-06-22",
+    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22)",
+    clinicalEvidence: "Peer-reviewed external validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {
-        type: "Introductory",
-        description: "Shade at al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy.",
+        type: "Peer-reviewed Validation",
+        description: "Shade et al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy. Adv Radiat Oncol 2026.",
         link: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
+      },
+      {
+        type: "Validation",
+        description: "ESTRO 2025 poster — Personalized radiotherapy planning tool with AI-guided optimization for patients with head and neck cancer (external validation).",
+        link: "https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2724/"
+      },
+      {
+        type: "Validation",
+        description: "AAPM 2025 oral presentation — Personalized and automated head & neck radiotherapy planning with AI-guided optimization (external validation).",
+        link: "https://aapm.confex.com/aapm/2025am/meetingapp.cgi/Paper/15133"
+      },
+      {
+        type: "Validation",
+        description: "AAPM 2024 poster — Performance of a knowledge-based planning software on static IMRT head and neck plans.",
+        link: "https://aapm.confex.com/aapm/2024am/meetingapp.cgi/Paper/11902"
+      },
+      {
+        type: "Validation",
+        description: "ICCR 2024 conference paper — AI-guided unattended plan generation (external validation).",
+        link: "https://www.iccr2024.org/papers/523444.pdf"
       },
       {
         type: "Regulatory Clearance",
@@ -139,10 +159,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       },
     ],
     limitations: [
-      "Available in the United States only",
       "Cloud connectivity required",
       "Requires DICOM-compliant TPS integration",
-      "CE marking not available (not for sale in EU)",
     ],
   },
 ];
