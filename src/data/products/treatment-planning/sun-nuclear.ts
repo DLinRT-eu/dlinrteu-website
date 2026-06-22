@@ -86,7 +86,8 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         status: "ce_mark",
         class: "Class IIb",
         type: "Medical Device",
-        notes: "CE Marked, Class IIb. Notified body: BSI."
+        notifiedBody: "BSI",
+        notes: "CE Marked, Class IIb."
       },
       intendedUseStatement:
         "\"Oncospace is used to configure and review radiotherapy treatment plans for a patient with malignant or benign disease in the head and neck, thoracic, abdominal, and pelvic regions. It allows for set up of radiotherapy treatment protocols, association of a potential treatment plan with the protocol(s), submission of a dose prescription and achievable dosimetric goals to a treatment planning system, and review of the treatment plan.\" (Source: FDA 510(k) K242748 Summary, accessed 2026-05-30)",
