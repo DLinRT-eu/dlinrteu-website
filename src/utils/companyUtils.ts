@@ -84,41 +84,73 @@ export async function certifyProduct(
   return data as unknown as RPCResponse;
 }
 
+import { COMPANIES } from "@/data/companies";
+
+// Legacy aliases — kept so older product strings still resolve to the canonical
+// catalog id even when the display name in COMPANIES has since changed.
+const LEGACY_NAME_TO_ID: Record<string, string> = {
+  'Philips': 'philips-healthcare',
+  'GE Healthcare': 'ge-healthcare',
+  'Siemens Healthineers': 'siemens-healthineers',
+  'Canon Medical Systems': 'canon-medical',
+  'United Imaging': 'united-imaging',
+  'Taiwan Medical Imaging Co.': 'taiwan-medical-imaging',
+  'AlgoMedica': 'algomedica',
+  'Varian': 'varian',
+  'Elekta': 'elekta',
+  'Brainlab': 'brainlab',
+  'RaySearch': 'raysearch',
+  'RaySearch Laboratories': 'raysearch',
+  'Accuray': 'accuray',
+  'Accuray®': 'accuray',
+  'ViewRay': 'viewray',
+  'PTW': 'ptw-dosimetry',
+  'MedLever, Inc.': 'medlever',
+  'Coreline Soft Co': 'coreline-soft',
+  'Ever Fortune AI': 'everfortune-ai',
+  'MD Anderson Cancer Center': 'md-anderson',
+};
+
+// Memoized exact + case-insensitive lookups built from the live COMPANIES catalog.
+let _catalogIndex: { exact: Map<string, string>; ci: Map<string, string> } | null = null;
+const getCatalogIndex = () => {
+  if (_catalogIndex) return _catalogIndex;
+  const exact = new Map<string, string>();
+  const ci = new Map<string, string>();
+  for (const c of COMPANIES) {
+    if (!c?.id || !c?.name) continue;
+    exact.set(c.name, c.id);
+    ci.set(c.name.trim().toLowerCase(), c.id);
+  }
+  _catalogIndex = { exact, ci };
+  return _catalogIndex;
+};
+
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
 /**
- * Get company ID from company name by looking up in COMPANIES data
- * This ensures we use the correct standardized company ID (e.g., "philips-healthcare" for "Philips")
+ * Resolve a company display name to its catalog id.
+ * Priority: COMPANIES exact → COMPANIES case-insensitive → legacy alias → safe slug fallback.
  */
 export const getCompanyIdByName = (companyName: string): string => {
-  // Import COMPANIES data dynamically to avoid circular dependencies
-  // For now, use a simple conversion as fallback
-  // The proper IDs are: philips-healthcare, ge-healthcare, siemens-healthineers, etc.
-  
-  const nameToIdMap: Record<string, string> = {
-    'Philips': 'philips-healthcare',
-    'GE Healthcare': 'ge-healthcare',
-    'Siemens Healthineers': 'siemens-healthineers',
-    'Canon Medical Systems': 'canon-medical',
-    'United Imaging': 'united-imaging',
-    'Taiwan Medical Imaging Co.': 'taiwan-medical-imaging',
-    'AlgoMedica': 'algomedica',
-    'Varian': 'varian',
-    'Elekta': 'elekta',
-    'Brainlab': 'brainlab',
-    'RaySearch': 'raysearch',
-    'RaySearch Laboratories': 'raysearch',
-    'Accuray': 'accuray',
-    'Accuray®': 'accuray',
-    'ViewRay': 'viewray',
-    'PTW': 'ptw-dosimetry',
-    'MedLever, Inc.': 'medlever',
-    'Coreline Soft Co': 'coreline-soft',
-    'Ever Fortune AI': 'everfortune-ai',
-    'MD Anderson Cancer Center': 'md-anderson',
-  };
-  
-  // Return mapped ID or fallback to lowercase-hyphenated version
-  return nameToIdMap[companyName] || companyName.toLowerCase().replace(/\s+/g, '-');
+  if (!companyName) return '';
+  const { exact, ci } = getCatalogIndex();
+
+  const hit = exact.get(companyName) ?? ci.get(companyName.trim().toLowerCase());
+  if (hit) return hit;
+
+  if (LEGACY_NAME_TO_ID[companyName]) return LEGACY_NAME_TO_ID[companyName];
+
+  const fallback = slugify(companyName);
+  if (import.meta.env?.DEV) {
+    console.warn(
+      `[getCompanyIdByName] No catalog match for "${companyName}", falling back to "${fallback}"`
+    );
+  }
+  return fallback;
 };
+
 
 /**
  * Extract unique companies from product catalog
