@@ -1,49 +1,52 @@
-## Plan: Update Plan AI (Sun Nuclear) per vendor feedback
+## What's going wrong
 
-Single file edit: `src/data/products/treatment-planning/sun-nuclear.ts`
+When Shaden tries to certify **Plan AI** (Sun Nuclear), the `certify_product` RPC is called with the wrong `p_company_id`:
 
-### 1. Regulatory
-- `ce.status`: `"ce_mark"`, `ce.class`: `"Class IIb"`, `ce.notes`: `"CE Marked, Class IIb. Notified body: BSI."`
-- `certification`: `"FDA 510(k) Cleared, CE Marked Class IIb"`
+- Product field: `company: "Sun Nuclear (Mirion Medical)"`
+- `getCompanyIdByName()` in `src/utils/companyUtils.ts` has no entry for that string, so it falls back to `name.toLowerCase().replace(/\s+/g, '-')` → **`sun-nuclear-(mirion-medical)`**
+- The real company id in `src/data/companies/radiotherapy-equipment.ts` is **`sun-nuclear`**
 
-### 2. Training data
-- `institutions: 2` (Hopkins + external site for abdomen model per Shade et al.)
-- `disclosureLevel: "full"` (Shade et al. discloses feature/protocol distributions)
-- Keep FDA summary as primary `source`; add Shade et al. URL as supplementary note in `description`.
+The RPC then can't find a matching company / assignment for the rep, throws, and the toast shows "Failed to certify product". The same bug breaks every flow that calls `getCompanyIdByName` for any company whose display name contains parentheses, punctuation, or symbols. Currently affected:
 
-### 3. Evaluation data
-Rewrite to reflect Shade et al. 2026 (Adv Radiat Oncol):
-- `studyDesign`: "Retrospective external validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
-- `primaryEndpoint`: "Non-inferiority of mean OAR dose vs. clinical plans; PTV coverage and conformity"
-- `results`: "Non-inferiority demonstrated for mean OAR dose across all 51 OARs evaluated; no significant decrease in PTV coverage or conformity."
-- `source`: "Shade et al., Adv Radiat Oncol 2026"
-- `sourceUrl`: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
+- `Sun Nuclear (Mirion Medical)` → should be `sun-nuclear`
+- `Varian (Siemens Healthineers)` → should be `varian` (or `varian-siemens-healthineers` depending on catalog)
+- `Accuray®`, `MedLever, Inc.`, `Taiwan Medical Imaging Co.`, `Coreline Soft Co`, etc. — all produce mangled IDs via fallback (some happen to be in the hardcoded map, most are not).
 
-### 4. Evidence entries (add 4 new, keep existing)
-Add as `type: "Validation"`:
-- ESTRO 2025 poster — H&N personalized planning external validation — https://user-swndwmf.cld.bz/ESTRO-2025-Abstract-Book/2724/
-- AAPM 2025 oral — Personalized & automated H&N planning with AI-guided optimization — https://aapm.confex.com/aapm/2025am/meetingapp.cgi/Paper/15133
-- AAPM 2024 poster — Knowledge-based planning on static IMRT H&N plans — https://aapm.confex.com/aapm/2024am/meetingapp.cgi/Paper/11902
-- ICCR 2024 paper — AI-guided unattended plan generation (external validation) — https://www.iccr2024.org/papers/523444.pdf
+This impacts:
+1. `CompanyDashboardOverview.tsx` → certify + suggest-revision
+2. `company/Dashboard.tsx` → certify
+3. `companyUtils.createCompanyRevision` → revisions
+4. `UnifiedSubmissionDialog` (structured + free-text) → reviewer queue
+5. `extractCompaniesFromProducts` → counts shown on Companies page
 
-Reclassify existing Shade et al. entry from `"Introductory"` to `"Peer-reviewed Validation"`.
+## Fix
 
-### 5. Evidence axes
-- `evidenceRigor: "E2"` (peer-reviewed + multiple external validations)
-- `clinicalImpact: "I2"` (workflow-level external validation; per user)
-- `evidenceExternalValidation: true`
-- `evidenceMultiCenter: true`
-- `adoptionReadiness: "R2"` with updated notes
-- Update `evidenceRigorNotes` and `clinicalImpactNotes` accordingly
+Make `getCompanyIdByName()` resolve against the actual `COMPANIES` catalog instead of a hand-maintained map.
 
-### 6. Limitations
-Remove:
-- `"Available in the United States only"`
-- `"CE marking not available (not for sale in EU)"`
+### Changes (frontend only, no DB / RLS changes)
 
-Keep cloud + DICOM TPS items. (Per vendor: now sold in EU where CE required.)
+1. **`src/utils/companyUtils.ts`**
+   - Import `COMPANIES` from `src/data/companies`.
+   - Build a name→id lookup once (memoized) keyed by the exact `name` field.
+   - `getCompanyIdByName(name)`:
+     1. Exact match in catalog → return its `id`.
+     2. Case-insensitive / trimmed match → return its `id`.
+     3. Keep the existing hardcoded `nameToIdMap` as a final fallback for legacy aliases (e.g. `"Philips"` → `philips-healthcare`, `"RaySearch"` → `raysearch`).
+     4. Last-resort slug fallback: `name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')` (strips parens/punctuation cleanly).
+   - Add a `dev`-only `console.warn` when the slug fallback is used, so future mismatches surface in logs instead of silently breaking certification.
 
-### 7. Bookkeeping
-- `lastUpdated`/`lastRevised`: `"2026-06-22"`
-- `source`: append `", Sun Nuclear company representative (verified 2026-06-22)"`
-- `clinicalEvidence`: rewrite to reference Shade et al. + 4 conference validations.
+2. **Sanity-check** that no caller depends on the previous mangled output. Search confirms callers only feed the result back to RPCs that expect a real catalog id, so the corrected resolution is strictly better.
+
+3. **Verification pass for company-rep + reviewer workflows** (read-only, no edits unless an issue is found):
+   - Certify product (CompanyDashboardOverview, company/Dashboard)
+   - Suggest revision (free-text)
+   - Structured certification submission (`UnifiedSubmissionDialog`)
+   - Reviewer queue picks them up via `product_revisions` / `product_edit_drafts`
+   - Confirm `notify-certification-complete` still receives the correct `companyName` (uses `product.company` string, unaffected)
+
+No backend migration is needed — the bug is purely in the client-side ID resolver.
+
+## Out of scope
+
+- Renaming companies, splitting Varian/Sun Nuclear into parent-company entries, or changing the catalog schema.
+- Reviewer-side UI changes (the workflow itself is sound; the failure was upstream at submission time).
