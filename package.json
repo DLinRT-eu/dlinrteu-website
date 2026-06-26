@@ -103,7 +103,7 @@
   },
   "overrides": {
     "uuid": "^11.1.0",
-    "glob": "^10.4.5",
+    "glob": "^13.0.6",
     "minimatch": "^9.0.5",
     "tmp": "^0.2.7",
     "brace-expansion": "^2.0.1"
