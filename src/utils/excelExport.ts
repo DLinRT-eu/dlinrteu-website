@@ -1,8 +1,9 @@
 /**
  * Centralized Excel Export Utility using ExcelJS
  * 
- * This replaces the vulnerable xlsx package with exceljs which has
- * no known security vulnerabilities.
+ * ExcelJS is pinned to 4.4.0 (the latest stable release). Transitive
+ * vulnerabilities in its dependency tree are remediated via npm/bun
+ * overrides in package.json.
  */
 import ExcelJS from 'exceljs';
 
