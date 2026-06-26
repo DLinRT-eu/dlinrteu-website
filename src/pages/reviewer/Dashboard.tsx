@@ -414,6 +414,7 @@ export default function ReviewerDashboard() {
 
   return (
     <PageLayout>
+      <SEO title="My Reviews" description="Manage your assigned product reviews on DLinRT." noindex />
       <div className="container max-w-7xl py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
