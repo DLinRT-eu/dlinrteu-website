@@ -25,6 +25,8 @@ import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { getCompanyIdByName } from '@/utils/companyUtils';
+import CompanyOnboardingChecklist from '@/components/company/CompanyOnboardingChecklist';
+import { BookOpen, LayoutDashboard, Package, Bell } from 'lucide-react';
 
 interface CompanyRevision {
   id: string;
