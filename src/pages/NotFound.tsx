@@ -17,9 +17,10 @@ const NotFound = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <SEO
-        title="404 Page Not Found - Deep Learning in Radiotherapy Platform"
+        title="Page Not Found"
         description="Sorry, the page you're looking for doesn't exist or has been moved. Return to our homepage to explore AI solutions for radiotherapy and radiation oncology research."
         canonical="/404"
+        noindex
       />
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
