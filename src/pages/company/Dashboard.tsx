@@ -27,6 +27,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { getCompanyIdByName } from '@/utils/companyUtils';
 import CompanyOnboardingChecklist from '@/components/company/CompanyOnboardingChecklist';
 import { BookOpen, LayoutDashboard, Package, Bell } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 interface CompanyRevision {
   id: string;
