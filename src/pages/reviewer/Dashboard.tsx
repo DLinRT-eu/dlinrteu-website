@@ -19,6 +19,7 @@ import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
 import ReviewStatusControl from '@/components/reviewer/ReviewStatusControl';
 import { useToast } from '@/hooks/use-toast';
 import { ALL_PRODUCTS } from '@/data';
+import SEO from '@/components/SEO';
 
 const getProductName = (productId: string): string => {
   const product = ALL_PRODUCTS.find(p => p.id === productId);
@@ -414,6 +415,7 @@ export default function ReviewerDashboard() {
 
   return (
     <PageLayout>
+      <SEO title="My Reviews" description="Manage your assigned product reviews on DLinRT." noindex />
       <div className="container max-w-7xl py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>

@@ -27,6 +27,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { getCompanyIdByName } from '@/utils/companyUtils';
 import CompanyOnboardingChecklist from '@/components/company/CompanyOnboardingChecklist';
 import { BookOpen, LayoutDashboard, Package, Bell } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 interface CompanyRevision {
   id: string;
@@ -338,6 +339,7 @@ export default function CompanyDashboard() {
 
   return (
     <PageLayout>
+      <SEO title="Company Dashboard" description="Manage your company products, certifications, and revision submissions on DLinRT." noindex />
       <div className="container max-w-7xl py-8">
         {companyUser?.company_name === 'ADMIN_OVERSIGHT' && (
           <Alert className="mb-6">
