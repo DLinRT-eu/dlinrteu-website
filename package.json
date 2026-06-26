@@ -106,7 +106,8 @@
     "glob": "^13.0.6",
     "minimatch": "^9.0.5",
     "tmp": "^0.2.7",
-    "brace-expansion": "^2.0.1"
+    "brace-expansion": "^2.0.1",
+    "mdast-util-to-hast": "^13.2.1"
   }
 }
 
