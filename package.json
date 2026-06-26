@@ -100,5 +100,13 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.19"
+  },
+  "overrides": {
+    "uuid": "^11.1.0",
+    "glob": "^13.0.6",
+    "minimatch": "^9.0.5",
+    "tmp": "^0.2.7",
+    "brace-expansion": "^2.0.1"
   }
 }
+
