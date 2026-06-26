@@ -19,6 +19,7 @@ import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
 import ReviewStatusControl from '@/components/reviewer/ReviewStatusControl';
 import { useToast } from '@/hooks/use-toast';
 import { ALL_PRODUCTS } from '@/data';
+import SEO from '@/components/SEO';
 
 const getProductName = (productId: string): string => {
   const product = ALL_PRODUCTS.find(p => p.id === productId);
