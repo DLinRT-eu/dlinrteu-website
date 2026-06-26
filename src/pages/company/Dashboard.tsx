@@ -338,6 +338,7 @@ export default function CompanyDashboard() {
 
   return (
     <PageLayout>
+      <SEO title="Company Dashboard" description="Manage your company products, certifications, and revision submissions on DLinRT." noindex />
       <div className="container max-w-7xl py-8">
         {companyUser?.company_name === 'ADMIN_OVERSIGHT' && (
           <Alert className="mb-6">
