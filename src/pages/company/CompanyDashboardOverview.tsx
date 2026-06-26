@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+
+
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -90,6 +92,9 @@ interface Representative {
 }
 
 export default function CompanyDashboardOverview() {
+  useEffect(() => {
+    try { localStorage.setItem('company_overview_visited', 'true'); } catch {}
+  }, []);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<CompanyStats>({

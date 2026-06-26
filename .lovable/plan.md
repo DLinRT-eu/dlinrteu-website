@@ -1,52 +1,50 @@
-## What's going wrong
+## Goal
+Reduce confusion right after registration for **company representatives** and **reviewers**, and make the key links (guide, preferences, dashboard tabs) findable in one glance.
 
-When Shaden tries to certify **Plan AI** (Sun Nuclear), the `certify_product` RPC is called with the wrong `p_company_id`:
+## Current gaps
+- **ApprovalGate "approved"** silently renders the page — once approved, a user with no prior session is dropped wherever the redirect sent them, with no "here's what to do next" cue.
+- **Reviewer dashboard** has `OnboardingChecklist` (good), but Preferences / Guide / Due Reviews links are split between the checklist and the header — easy to miss after dismiss.
+- **Company dashboard (`/company/dashboard`)** has *no* onboarding equivalent. New company reps land on a stats/revisions screen with no guidance on: (1) read the Company Guide, (2) verify your company assignment, (3) certify your first product, (4) check the Overview page.
+- "Company Guide" and "Reviewer Guide" routes exist but are not surfaced on the dashboards beyond a single small button.
 
-- Product field: `company: "Sun Nuclear (Mirion Medical)"`
-- `getCompanyIdByName()` in `src/utils/companyUtils.ts` has no entry for that string, so it falls back to `name.toLowerCase().replace(/\s+/g, '-')` → **`sun-nuclear-(mirion-medical)`**
-- The real company id in `src/data/companies/radiotherapy-equipment.ts` is **`sun-nuclear`**
+## Changes (scoped, presentation-only)
 
-The RPC then can't find a matching company / assignment for the rep, throws, and the toast shows "Failed to certify product". The same bug breaks every flow that calls `getCompanyIdByName` for any company whose display name contains parentheses, punctuation, or symbols. Currently affected:
+### 1. New: `src/components/company/CompanyOnboardingChecklist.tsx`
+Mirror of `OnboardingChecklist.tsx`, 3 steps, dismissible via `localStorage` key `company_onboarding_dismissed`:
+1. **Read the Company Guide** — link `/company/guide`, completion tracked via `localStorage` flag `company_guide_read` (set on guide page mount, same pattern as reviewer).
+2. **Review your company assignment & products** — link `/company/overview`. Completed when `companyProducts.length > 0` and overview visited (localStorage `company_overview_visited`).
+3. **Certify your first product or submit an update** — completed when `revisions.length > 0` OR any certified product exists for this rep (use existing `revisions` array).
 
-- `Sun Nuclear (Mirion Medical)` → should be `sun-nuclear`
-- `Varian (Siemens Healthineers)` → should be `varian` (or `varian-siemens-healthineers` depending on catalog)
-- `Accuray®`, `MedLever, Inc.`, `Taiwan Medical Imaging Co.`, `Coreline Soft Co`, etc. — all produce mangled IDs via fallback (some happen to be in the hardcoded map, most are not).
+Render at top of `src/pages/company/Dashboard.tsx` only when not all steps complete and not dismissed (same pattern as reviewer). Pass `companyProducts` and `revisions` as props so it doesn't re-query.
 
-This impacts:
-1. `CompanyDashboardOverview.tsx` → certify + suggest-revision
-2. `company/Dashboard.tsx` → certify
-3. `companyUtils.createCompanyRevision` → revisions
-4. `UnifiedSubmissionDialog` (structured + free-text) → reviewer queue
-5. `extractCompaniesFromProducts` → counts shown on Companies page
+### 2. `src/pages/company/CompanyGuide.tsx` and `src/pages/reviewer/ReviewerGuide.tsx`
+Add `useEffect(() => localStorage.setItem('company_guide_read'|'reviewer_guide_read','true'), [])` on mount so the checklist step auto-completes. (Reviewer guide already has this for the reviewer checklist — verify and add if missing.)
 
-## Fix
+### 3. `src/pages/company/Dashboard.tsx` — Quick Links bar
+Below the header (above the stats grid), add a compact `QuickLinks` row of `Button variant="outline" size="sm"` links with icons:
+- Company Guide (`/company/guide`)
+- Overview & Certification Progress (`/company/overview`)
+- My Products (`/company/products`)
+- Notification Settings (`/settings/notifications`)
 
-Make `getCompanyIdByName()` resolve against the actual `COMPANIES` catalog instead of a hand-maintained map.
+### 4. `src/pages/reviewer/Dashboard.tsx` — Quick Links bar
+Same pattern, below header:
+- Reviewer Guide (`/reviewer/guide`)
+- Preferences (`/reviewer/preferences`)
+- Due Reviews (`/reviewer/due-reviews`)
+- Notification Settings (`/settings/notifications`)
 
-### Changes (frontend only, no DB / RLS changes)
+(The existing header buttons stay; the bar is the persistent "useful links" surface that survives onboarding dismissal.)
 
-1. **`src/utils/companyUtils.ts`**
-   - Import `COMPANIES` from `src/data/companies`.
-   - Build a name→id lookup once (memoized) keyed by the exact `name` field.
-   - `getCompanyIdByName(name)`:
-     1. Exact match in catalog → return its `id`.
-     2. Case-insensitive / trimmed match → return its `id`.
-     3. Keep the existing hardcoded `nameToIdMap` as a final fallback for legacy aliases (e.g. `"Philips"` → `philips-healthcare`, `"RaySearch"` → `raysearch`).
-     4. Last-resort slug fallback: `name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')` (strips parens/punctuation cleanly).
-   - Add a `dev`-only `console.warn` when the slug fallback is used, so future mismatches surface in logs instead of silently breaking certification.
-
-2. **Sanity-check** that no caller depends on the previous mangled output. Search confirms callers only feed the result back to RPCs that expect a real catalog id, so the corrected resolution is strictly better.
-
-3. **Verification pass for company-rep + reviewer workflows** (read-only, no edits unless an issue is found):
-   - Certify product (CompanyDashboardOverview, company/Dashboard)
-   - Suggest revision (free-text)
-   - Structured certification submission (`UnifiedSubmissionDialog`)
-   - Reviewer queue picks them up via `product_revisions` / `product_edit_drafts`
-   - Confirm `notify-certification-complete` still receives the correct `companyName` (uses `product.company` string, unaffected)
-
-No backend migration is needed — the bug is purely in the client-side ID resolver.
+### 5. `src/components/auth/ApprovalGate.tsx` — post-approval hand-off
+For the "pending" alert, add a short bullet list of what happens next ("You'll receive an email when approved; then visit your role dashboard"). No behavior change for `approved` state (it just renders children) — guidance for approved users is handled by the new checklists/quick-links above.
 
 ## Out of scope
+- No backend, RPC, RLS, or schema changes.
+- No changes to certification logic (separate fix already shipped).
+- No redesign of existing dashboards beyond the additions above.
 
-- Renaming companies, splitting Varian/Sun Nuclear into parent-company entries, or changing the catalog schema.
-- Reviewer-side UI changes (the workflow itself is sound; the failure was upstream at submission time).
+## Verification
+- New company rep flow: register → approved → `/company/dashboard` shows checklist + quick links; visiting `/company/guide` marks step 1 done; certifying marks step 3 done; dismissible.
+- Reviewer flow: quick-links bar visible whether or not checklist is dismissed.
+- Build + lint clean, no console errors on either dashboard.

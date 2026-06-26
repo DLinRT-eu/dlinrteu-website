@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,9 @@ import {
 } from 'lucide-react';
 
 export default function CompanyGuide() {
+  useEffect(() => {
+    localStorage.setItem('company_guide_read', 'true');
+  }, []);
   return (
     <PageLayout
       title="Company Representative Guide | DLinRT"

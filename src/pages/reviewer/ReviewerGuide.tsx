@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -22,6 +23,9 @@ import {
 } from 'lucide-react';
 
 export default function ReviewerGuide() {
+  useEffect(() => {
+    localStorage.setItem('reviewer_guide_read', 'true');
+  }, []);
   return (
     <PageLayout
       title="Reviewer Guide | DLinRT"

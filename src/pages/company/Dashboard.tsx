@@ -25,6 +25,8 @@ import { ALL_PRODUCTS } from '@/data';
 import { cn } from '@/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { getCompanyIdByName } from '@/utils/companyUtils';
+import CompanyOnboardingChecklist from '@/components/company/CompanyOnboardingChecklist';
+import { BookOpen, LayoutDashboard, Package, Bell } from 'lucide-react';
 
 interface CompanyRevision {
   id: string;
@@ -444,7 +446,36 @@ export default function CompanyDashboard() {
           </div>
         </div>
 
+        {/* Quick Links — always-visible useful shortcuts */}
+        {companyUser?.company_name !== 'ADMIN_OVERSIGHT' && (
+          <div className="mb-6 flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link to="/company/guide"><BookOpen className="mr-2 h-3.5 w-3.5" />Company Guide</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/company/overview"><LayoutDashboard className="mr-2 h-3.5 w-3.5" />Overview & Certification</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/company/products"><Package className="mr-2 h-3.5 w-3.5" />My Products</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/notification-settings"><Bell className="mr-2 h-3.5 w-3.5" />Notification Settings</Link>
+            </Button>
+          </div>
+        )}
+
+        {/* Onboarding Checklist */}
+        {companyUser?.company_name !== 'ADMIN_OVERSIGHT' && (
+          <div className="mb-8">
+            <CompanyOnboardingChecklist
+              hasProducts={companyProducts.length > 0}
+              hasActivity={revisions.length > 0}
+            />
+          </div>
+        )}
+
         {/* Stats */}
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card>
             <CardHeader className="pb-3">

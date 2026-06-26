@@ -433,10 +433,27 @@ export default function ReviewerDashboard() {
           </div>
         </div>
 
+        {/* Quick Links — always-visible useful shortcuts */}
+        <div className="mb-6 flex flex-wrap gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link to="/reviewer/guide"><BookOpen className="mr-2 h-3.5 w-3.5" />Reviewer Guide</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/reviewer/preferences"><FileEdit className="mr-2 h-3.5 w-3.5" />Preferences</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/reviewer/due-reviews"><Clock className="mr-2 h-3.5 w-3.5" />Due Reviews</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/notification-settings"><AlertCircle className="mr-2 h-3.5 w-3.5" />Notification Settings</Link>
+          </Button>
+        </div>
+
         {/* Onboarding Checklist */}
         <div className="mb-8">
           <OnboardingChecklist />
         </div>
+
 
         {/* Active Review Rounds */}
         {rounds.length > 0 && (

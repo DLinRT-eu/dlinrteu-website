@@ -89,13 +89,18 @@ export function ApprovalGate({ children }: ApprovalGateProps) {
           <Clock className="h-4 w-4" />
           <AlertTitle>Awaiting Approval</AlertTitle>
           <AlertDescription>
-            Your registration is currently under review by our administrators. 
+            Your registration is currently under review by our administrators.
             You will receive access once your account has been approved.
             <br /><br />
-            <strong>Email:</strong> {profile.email}
-            <br />
-            This typically takes 1-2 business days. If you have questions, contact info@dlinrt.eu.
+            <strong>What happens next:</strong>
+            <ul className="list-disc pl-5 mt-2 space-y-1 text-sm">
+              <li>An administrator reviews your request (typically 1-2 business days).</li>
+              <li>You'll receive an email at <strong>{profile.email}</strong> once approved or if more information is needed.</li>
+              <li>After approval, sign in again and your role dashboard (Reviewer or Company) will guide you through next steps.</li>
+              <li>Questions? Contact <a href="mailto:info@dlinrt.eu" className="underline">info@dlinrt.eu</a>.</li>
+            </ul>
           </AlertDescription>
+
           <Button 
             variant="outline" 
             onClick={signOut}
