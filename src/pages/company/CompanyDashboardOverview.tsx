@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react';
+
+// Mark overview as visited for the company onboarding checklist
+if (typeof window !== 'undefined') {
+  try { localStorage.setItem('company_overview_visited', 'true'); } catch {}
+}
+
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
