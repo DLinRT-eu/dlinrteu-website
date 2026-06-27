@@ -47,6 +47,7 @@ const signupSchema = z.object({
     message: 'You must consent to data processing to create an account'
   }),
   requestedRoles: z.array(z.enum(['reviewer', 'company'])).optional().default([]),
+  newsletterOptIn: z.boolean().optional().default(false),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -80,6 +81,7 @@ export default function Auth() {
   const [lastName, setLastName] = useState('');
   const [dataProcessingConsent, setDataProcessingConsent] = useState(false);
   const [requestedRoles, setRequestedRoles] = useState<('reviewer' | 'company')[]>([]);
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
 
   // Detect existing AAL1 session that requires MFA elevation
   // (e.g. tab refresh during MFA, or direct navigation to /auth?mfa=required)
@@ -190,6 +192,7 @@ export default function Auth() {
         lastName: lastName.trim(),
         dataProcessingConsent,
         requestedRoles,
+        newsletterOptIn,
       });
       
       // Check if email is institutional and show warning if not
@@ -224,6 +227,22 @@ export default function Auth() {
         setError(signUpError.message || 'Failed to create account');
         setWarning(null); // Clear warning if there's an error
       } else {
+        // Best-effort newsletter subscription (only if user explicitly opted in).
+        // GDPR Art. 6(1)(a): marketing consent is separate from account consent.
+        if (validation.newsletterOptIn) {
+          try {
+            await supabase.functions.invoke('subscribe-newsletter', {
+              body: {
+                email: validation.email,
+                firstName: validation.firstName,
+                lastName: validation.lastName,
+                consentGiven: true,
+              },
+            });
+          } catch (newsletterErr) {
+            console.warn('Newsletter subscription failed (non-blocking):', newsletterErr);
+          }
+        }
         setSuccessMessage('Account created! Please check your email to verify your account.');
         // Clear form
         setSignupEmail('');
@@ -233,6 +252,7 @@ export default function Auth() {
         setLastName('');
         setDataProcessingConsent(false);
         setRequestedRoles([]);
+        setNewsletterOptIn(false);
       }
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -576,7 +596,26 @@ export default function Auth() {
                       </Alert>
                     )}
                   </div>
-                  
+
+                  {/* Newsletter opt-in (separate, unchecked by default — GDPR Art. 6(1)(a)) */}
+                  <div className="flex items-start space-x-3 rounded-lg border p-4">
+                    <Checkbox
+                      id="newsletter-optin"
+                      checked={newsletterOptIn}
+                      onCheckedChange={(checked) => setNewsletterOptIn(checked === true)}
+                      disabled={loading}
+                    />
+                    <div className="space-y-1 leading-tight flex-1">
+                      <label htmlFor="newsletter-optin" className="text-sm font-medium cursor-pointer">
+                        Subscribe to the DLinRT newsletter <span className="text-muted-foreground font-normal">(optional)</span>
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Occasional updates on new products, evidence reviews, and platform changes.
+                        You can unsubscribe at any time from any email or your profile settings.
+                      </p>
+                    </div>
+                  </div>
+
                   <Button type="submit" className="w-full" disabled={loading || !dataProcessingConsent}>
                     {loading ? 'Creating account...' : 'Create Account'}
                   </Button>
