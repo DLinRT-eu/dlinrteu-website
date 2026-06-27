@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 
 // Resend webhook receiver. Configure in Resend dashboard:
 //   URL: https://<project-ref>.functions.supabase.co/resend-webhook

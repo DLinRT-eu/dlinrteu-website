@@ -25,7 +25,7 @@ function createResend(apiKey: string | undefined) {
   };
 }
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 

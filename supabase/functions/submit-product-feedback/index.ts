@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.8";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {

@@ -25,7 +25,7 @@ function createResend(apiKey: string | undefined) {
   };
 }
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 
@@ -90,7 +90,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
     
-    const { createClient: createAuthClient } = await import("https://esm.sh/@supabase/supabase-js@2.39.3");
+    const { createClient: createAuthClient } = await import("https://esm.sh/@supabase/supabase-js@2.108.2");
     const supabase = createAuthClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } }
     });
