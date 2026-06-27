@@ -1,9 +1,11 @@
 /**
  * Centralized Excel Export Utility using ExcelJS
- * 
- * ExcelJS is pinned to 4.4.0 (the latest stable release). Transitive
- * vulnerabilities in its dependency tree are remediated via npm/bun
- * overrides in package.json.
+ *
+ * ExcelJS is pinned to ^4.4.0 (the latest stable release). Transitive
+ * vulnerabilities in its dependency tree (minimatch ReDoS, brace-expansion
+ * zero-step sequence) are remediated via npm/bun overrides in package.json:
+ *   - minimatch: ^9.0.9
+ *   - brace-expansion: ^2.1.1
  */
 import ExcelJS from 'exceljs';
 
