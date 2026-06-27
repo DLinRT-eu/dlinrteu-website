@@ -25,7 +25,7 @@ function createResend(apiKey: string | undefined) {
   };
 }
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.8';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { getOrCreateAudienceId, upsertContact } from "../_shared/resend-audience.ts";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
