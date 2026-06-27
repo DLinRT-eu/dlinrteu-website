@@ -4,7 +4,7 @@
 // Runs with service-role privileges. Idempotent; safe to re-run.
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 import { getCorsHeaders } from "../_shared/cors.ts";
 
 interface PurgeResult {
@@ -49,10 +49,9 @@ serve(async (req) => {
         global: { headers: { Authorization: authHeader } },
         auth: { autoRefreshToken: false, persistSession: false },
       });
-      const token = authHeader.replace("Bearer ", "");
-      const { data: claimsData, error: claimsError } = await userClient.auth.getClaims(token);
-      const userId = claimsData?.claims?.sub;
-      if (claimsError || !userId) {
+      const { data: userData, error: userError } = await userClient.auth.getUser();
+      const userId = userData?.user?.id;
+      if (userError || !userId) {
         return new Response(
           JSON.stringify({ ok: false, error: "Unauthorized" }),
           { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } },
