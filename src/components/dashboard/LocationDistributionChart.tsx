@@ -5,7 +5,7 @@ import {
   ChartContainer, 
   ChartTooltipContent
 } from "@/components/ui/chart";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Text } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Text, PieLabelRenderProps } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { CircleCheckIcon } from 'lucide-react';
@@ -62,11 +62,13 @@ const LocationDistributionChart: React.FC<LocationDistributionChartProps> = ({
   };
 
   // Custom label formatter for pie chart based on device
-  const renderCustomizedLabel = ({ name, percent }: { name: string; percent: number }) => {
-    if (isMobile && name.length > 6) {
-      return `${(percent * 100).toFixed(0)}%`;
+  const renderCustomizedLabel = ({ name, percent }: PieLabelRenderProps) => {
+    const labelName = typeof name === 'string' ? name : String(name ?? '');
+    const safePercent = percent ?? 0;
+    if (isMobile && labelName.length > 6) {
+      return `${(safePercent * 100).toFixed(0)}%`;
     }
-    return `${name} (${(percent * 100).toFixed(0)}%)`;
+    return `${labelName} (${(safePercent * 100).toFixed(0)}%)`;
   };
 
   const pieRadius = isMobile ? 70 : 100;
