@@ -26,6 +26,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 import SortableHeader from '@/components/revision/table/SortableHeader';
+import SEO from '@/components/SEO';
 
 interface Notification {
   id: string;
