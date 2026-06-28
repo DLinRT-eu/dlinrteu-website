@@ -26,6 +26,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 import SortableHeader from '@/components/revision/table/SortableHeader';
+import SEO from '@/components/SEO';
 
 interface Notification {
   id: string;
@@ -210,6 +211,12 @@ export default function NotificationHistory() {
   }
 
   return (
+    <>
+      <SEO
+        title="Notification History"
+        description="Review your past DLinRT notifications, filter by type, and manage read status."
+        noindex
+      />
     <div className="container mx-auto py-8 space-y-6">
       <div className="flex items-center justify-between">
         <div>
@@ -403,5 +410,6 @@ export default function NotificationHistory() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

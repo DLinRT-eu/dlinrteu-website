@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import PageLayout from '@/components/layout/PageLayout';
+import SEO from '@/components/SEO';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
 import { 
@@ -367,6 +368,11 @@ export default function Dashboard_Authenticated() {
 
   return (
     <PageLayout>
+      <SEO
+        title="My Dashboard"
+        description="Your personalized DLinRT workspace: reviews, submissions, certifications, and account activity."
+        noindex
+      />
       <div className="container max-w-7xl py-8">
         {/* Hero Section */}
         <div className="mb-8">

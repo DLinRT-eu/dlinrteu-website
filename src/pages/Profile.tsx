@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/layout/PageLayout';
+import SEO from '@/components/SEO';
 import { useToast } from '@/hooks/use-toast';
 import RoleRequestForm from '@/components/profile/RoleRequestForm';
 import { RoleRequestHistory } from '@/components/profile/RoleRequestHistory';
@@ -273,6 +274,11 @@ export default function Profile() {
 
   return (
     <PageLayout>
+      <SEO
+        title="My Profile"
+        description="Manage your DLinRT account, roles, notification preferences, and security settings."
+        noindex
+      />
       <div className="container max-w-4xl py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
