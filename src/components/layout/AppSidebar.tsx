@@ -20,6 +20,7 @@ import {
   Bell,
   User as UserIcon,
   Home,
+  Inbox,
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,24 +33,35 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { Badge } from "@/components/ui/badge";
 import { useRoles } from "@/contexts/RoleContext";
+import { usePendingCounts } from "@/hooks/usePendingCounts";
 
-type Item = { title: string; url: string; icon: any };
+type Item = { title: string; url: string; icon: any; badgeKey?: BadgeKey };
+type BadgeKey =
+  | "adminRegistrations"
+  | "adminActiveReviews"
+  | "adminPendingRevisions"
+  | "reviewerAssigned"
+  | "reviewerDueWeek"
+  | "companyPendingRevisions";
 
 const personalItems: Item[] = [
   { title: "Dashboard", url: "/dashboard-home", icon: Home },
   { title: "Profile", url: "/profile", icon: UserIcon },
   { title: "My Products", url: "/my-products", icon: Package },
+  { title: "My Submissions", url: "/my-submissions", icon: Inbox },
   { title: "Notifications", url: "/notifications", icon: Bell },
+  { title: "Notification Settings", url: "/notification-settings", icon: Settings },
 ];
 
 const adminItems: Item[] = [
   { title: "Admin Overview", url: "/admin", icon: LayoutDashboard },
-  { title: "Registrations", url: "/admin/registrations", icon: UserCheck },
+  { title: "Registrations", url: "/admin/registrations", icon: UserCheck, badgeKey: "adminRegistrations" },
   { title: "Review Rounds", url: "/admin/review-rounds", icon: RefreshCw },
-  { title: "Review Assignments", url: "/admin/reviews", icon: FileCheck },
+  { title: "Review Assignments", url: "/admin/reviews", icon: FileCheck, badgeKey: "adminActiveReviews" },
   { title: "Edit Approvals", url: "/admin/edit-approvals", icon: ClipboardCheck },
-  { title: "Companies", url: "/admin/companies", icon: Building2 },
+  { title: "Companies", url: "/admin/companies", icon: Building2, badgeKey: "adminPendingRevisions" },
   { title: "Certifications", url: "/admin/certifications", icon: BadgeCheck },
   { title: "Users", url: "/admin/users", icon: Users },
   { title: "Newsletter", url: "/admin/newsletter", icon: Mail },
@@ -60,15 +72,15 @@ const adminItems: Item[] = [
 
 const reviewerItems: Item[] = [
   { title: "Review Dashboard", url: "/review", icon: Eye },
-  { title: "Assigned Reviews", url: "/reviewer/dashboard", icon: ClipboardCheck },
-  { title: "Due Reviews", url: "/reviewer/due-reviews", icon: CalendarClock },
+  { title: "Assigned Reviews", url: "/reviewer/dashboard", icon: ClipboardCheck, badgeKey: "reviewerAssigned" },
+  { title: "Due Reviews", url: "/reviewer/due-reviews", icon: CalendarClock, badgeKey: "reviewerDueWeek" },
   { title: "Expertise Preferences", url: "/reviewer/preferences", icon: Settings },
   { title: "Reviewer Guide", url: "/reviewer/guide", icon: BookOpen },
 ];
 
 const companyItems: Item[] = [
   { title: "Company Overview", url: "/company/overview", icon: Building2 },
-  { title: "Submit Revision", url: "/company/dashboard", icon: FileText },
+  { title: "Submit Revision", url: "/company/dashboard", icon: FileText, badgeKey: "companyPendingRevisions" },
   { title: "My Products", url: "/company/products", icon: Package },
   { title: "Certify Product", url: "/company/certification", icon: BadgeCheck },
   { title: "Company Guide", url: "/company/guide", icon: BookOpen },
@@ -79,6 +91,7 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const { pathname } = useLocation();
   const { hasAdminRole, hasReviewerRole, hasCompanyRole, activeRole } = useRoles();
+  const counts = usePendingCounts();
 
   const isActive = (url: string) =>
     url === "/admin" || url === "/review"
@@ -91,16 +104,36 @@ export function AppSidebar() {
         {!collapsed && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
         <SidebarGroupContent>
           <SidebarMenu>
-            {items.map((item) => (
-              <SidebarMenuItem key={item.url}>
-                <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
-                  <NavLink to={item.url} className="flex items-center gap-2">
-                    <item.icon className="h-4 w-4 shrink-0" />
-                    {!collapsed && <span className="truncate">{item.title}</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {items.map((item) => {
+              const active = isActive(item.url);
+              const badge = item.badgeKey ? (counts[item.badgeKey] as number) : 0;
+              return (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={active}
+                    tooltip={item.title + (badge > 0 ? ` (${badge})` : "")}
+                    className={active ? "font-semibold" : ""}
+                  >
+                    <NavLink to={item.url} aria-current={active ? "page" : undefined} className="flex items-center gap-2">
+                      <item.icon className="h-4 w-4 shrink-0" />
+                      {!collapsed && <span className="truncate flex-1">{item.title}</span>}
+                      {!collapsed && badge > 0 && (
+                        <Badge variant="secondary" className="h-5 px-1.5 text-[10px]">
+                          {badge}
+                        </Badge>
+                      )}
+                      {collapsed && badge > 0 && (
+                        <span
+                          className="absolute right-1 top-1 h-2 w-2 rounded-full bg-destructive"
+                          aria-hidden
+                        />
+                      )}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
