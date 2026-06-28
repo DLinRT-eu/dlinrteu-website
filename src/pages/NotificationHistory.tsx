@@ -210,6 +210,12 @@ export default function NotificationHistory() {
   }
 
   return (
+    <>
+      <SEO
+        title="Notification History"
+        description="Review your past DLinRT notifications, filter by type, and manage read status."
+        noindex
+      />
     <div className="container mx-auto py-8 space-y-6">
       <div className="flex items-center justify-between">
         <div>
