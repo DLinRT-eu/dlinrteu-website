@@ -2,11 +2,17 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Settings } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import SEO from '@/components/SEO';
 import NotificationPreferences from '@/components/notifications/NotificationPreferences';
 
 export default function NotificationSettings() {
   return (
     <PageLayout>
+      <SEO
+        title="Notification Settings"
+        description="Configure email and in-app notification preferences for your DLinRT account."
+        noindex
+      />
       <div className="container max-w-3xl py-8 space-y-6">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" asChild>
