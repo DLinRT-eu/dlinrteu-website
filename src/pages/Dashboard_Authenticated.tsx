@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import PageLayout from '@/components/layout/PageLayout';
+import SEO from '@/components/SEO';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
 import { 
