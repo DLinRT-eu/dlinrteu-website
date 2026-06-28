@@ -367,6 +367,11 @@ export default function Dashboard_Authenticated() {
 
   return (
     <PageLayout>
+      <SEO
+        title="My Dashboard"
+        description="Your personalized DLinRT workspace: reviews, submissions, certifications, and account activity."
+        noindex
+      />
       <div className="container max-w-7xl py-8">
         {/* Hero Section */}
         <div className="mb-8">
