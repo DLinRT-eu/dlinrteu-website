@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
 import PageLayout from '@/components/layout/PageLayout';
+import SEO from '@/components/SEO';
 import { useToast } from '@/hooks/use-toast';
 import RoleRequestForm from '@/components/profile/RoleRequestForm';
 import { RoleRequestHistory } from '@/components/profile/RoleRequestHistory';
