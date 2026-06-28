@@ -11,6 +11,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import SEO from '@/components/SEO';
 import { PendingStatsWidget } from '@/components/dashboard/PendingStatsWidget';
 import { useGitHubPRCount } from '@/hooks/useGitHubPRCount';
+import { usePendingCounts } from '@/hooks/usePendingCounts';
 import { 
   Users, 
   FileCheck, 
@@ -100,6 +101,7 @@ export default function Dashboard_Authenticated() {
   const { user, profile } = useAuth();
   const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
   const { data: prData } = useGitHubPRCount(isAdmin);
+  const counts = usePendingCounts();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllAdmin, setShowAllAdmin] = useState(false);
