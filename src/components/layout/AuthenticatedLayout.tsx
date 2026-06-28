@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRoles } from "@/contexts/RoleContext";
+import { AuthenticatedStatusBar } from "./AuthenticatedStatusBar";
 
 interface Props {
   children: ReactNode;
@@ -48,10 +49,11 @@ export function AuthenticatedLayout({ children }: Props) {
       <div className="flex w-full min-h-[calc(100vh-3.5rem)]">
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <div className="h-10 flex items-center border-b bg-background/60 backdrop-blur-sm px-2 sticky top-14 z-30">
+          <div className="flex items-center border-b bg-background/60 backdrop-blur-sm px-2 sticky top-14 z-30 min-h-10">
             <SidebarTrigger />
             <span className="ml-2 text-xs text-muted-foreground">Workspace</span>
           </div>
+          <AuthenticatedStatusBar />
           <div className="flex-1 min-w-0">{children}</div>
         </div>
       </div>
