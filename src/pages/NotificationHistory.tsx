@@ -409,5 +409,6 @@ export default function NotificationHistory() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }
