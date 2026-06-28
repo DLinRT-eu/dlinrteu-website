@@ -126,7 +126,8 @@ export default function Dashboard_Authenticated() {
       description: 'Approve pending user registrations',
       icon: UserCheck,
       link: '/admin/registrations',
-      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100'
+      color: 'bg-amber-50 text-amber-600 hover:bg-amber-100',
+      badge: counts.adminRegistrations,
     },
     {
       title: 'Review Rounds',
@@ -147,7 +148,8 @@ export default function Dashboard_Authenticated() {
       description: 'Review company-submitted revisions',
       icon: Building2,
       link: '/admin/companies',
-      color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      color: 'bg-green-50 text-green-600 hover:bg-green-100',
+      badge: counts.adminPendingRevisions,
     },
   ];
 
@@ -218,14 +220,16 @@ export default function Dashboard_Authenticated() {
       description: 'View your assigned product reviews',
       icon: ClipboardCheck,
       link: '/reviewer/dashboard',
-      color: 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+      color: 'bg-blue-50 text-blue-600 hover:bg-blue-100',
+      badge: counts.reviewerAssigned,
     },
     {
       title: 'Due Reviews',
       description: 'Reviews approaching deadline',
       icon: CalendarClock,
       link: '/reviewer/due-reviews',
-      color: 'bg-orange-50 text-orange-600 hover:bg-orange-100'
+      color: 'bg-orange-50 text-orange-600 hover:bg-orange-100',
+      badge: counts.reviewerDueWeek,
     },
     {
       title: 'Review Dashboard',
@@ -274,7 +278,8 @@ export default function Dashboard_Authenticated() {
       description: 'Submit product revision for review',
       icon: FileCheck,
       link: '/company/dashboard',
-      color: 'bg-green-50 text-green-600 hover:bg-green-100'
+      color: 'bg-green-50 text-green-600 hover:bg-green-100',
+      badge: counts.companyPendingRevisions,
     },
   ];
 
