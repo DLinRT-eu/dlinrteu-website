@@ -273,6 +273,11 @@ export default function Profile() {
 
   return (
     <PageLayout>
+      <SEO
+        title="My Profile"
+        description="Manage your DLinRT account, roles, notification preferences, and security settings."
+        noindex
+      />
       <div className="container max-w-4xl py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
