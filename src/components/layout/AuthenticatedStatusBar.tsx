@@ -24,9 +24,10 @@ import { usePendingCounts } from '@/hooks/usePendingCounts';
  * pending-task chips that link straight to the work.
  */
 export function AuthenticatedStatusBar() {
-  const { profile } = useAuth();
-  const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
+  const { user, profile } = useAuth();
+  const { activeRole, isAdmin, isReviewer, isCompany, roles } = useRoles();
   const counts = usePendingCounts();
+
   const [mfaEnabled, setMfaEnabled] = useState<boolean | null>(null);
 
   useEffect(() => {
