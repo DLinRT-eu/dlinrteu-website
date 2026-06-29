@@ -41,6 +41,8 @@ import {
   BookOpen
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
+import { RegularUserOnboardingChecklist } from '@/components/onboarding/RegularUserOnboardingChecklist';
+
 
 interface QuickAction {
   title: string;
