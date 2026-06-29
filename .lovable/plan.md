@@ -1,66 +1,48 @@
-## Goal
-Finish the three open items from the prior UX audit:
+## Problem
 
-1. Slim the desktop (lg+) top nav for signed-in role holders.
-2. Make `AuthenticatedStatusBar` visible on every page when the user is signed in.
-3. Show a regular-user onboarding checklist on `/dashboard-home` for signed-in users with no role.
+The shadcn `Sidebar` renders as `fixed inset-y-0` (full viewport height), so on workspace routes (`/dashboard-home`, `/admin/*`, `/reviewer/*`, `/company/*`, etc.) it overlaps the globally-mounted `AuthenticatedStatusBar`, which sits full-width directly below the header. The bar's left portion is hidden behind the sidebar panel, and its sticky stacking competes with the `SidebarTrigger` strip (also `sticky top-14`).
 
-Mobile nav (`MobileNav.tsx`) is out of scope for #1.
+## Fix
 
----
+Stop rendering the status bar full-width across the sidebar. Render it inside the right column of `AuthenticatedLayout` for workspace routes, and keep the global mount for non-workspace routes only.
 
-## 1. Top nav cleanup (lg+) — `src/components/Header.tsx`
+### 1. `src/App.tsx` — make the global mount conditional
 
-For signed-in users **with at least one role** (admin / reviewer / company), the blue top nav on `lg+` will show only:
+Replace the unconditional `<AuthenticatedStatusBar />` in `ConditionalHeader` with a guard that skips workspace paths (the same `isAuthenticatedPath` rule already used by `AuthenticatedLayout`):
 
+- Extract or duplicate the `AUTH_PREFIXES` check into a small helper (e.g. `isWorkspacePath(pathname)`).
+- In `ConditionalHeader`, render `<AuthenticatedStatusBar />` only when `!isWorkspacePath(pathname)`. Public pages (e.g. `/`, `/products`, `/about`) keep the bar below the header exactly as today.
+
+### 2. `src/components/layout/AuthenticatedLayout.tsx` — render the bar inside the right column
+
+In the workspace shell, mount the status bar inside the right column, immediately under the `SidebarTrigger` strip, so it sits in the flex column to the right of the fixed sidebar and never gets covered:
+
+```tsx
+<div className="flex-1 flex flex-col min-w-0">
+  <div className="flex items-center border-b ... sticky top-14 z-30 min-h-10">
+    <SidebarTrigger />
+    <span className="ml-2 text-xs text-muted-foreground">Workspace</span>
+  </div>
+  <AuthenticatedStatusBar />   {/* new */}
+  <div className="flex-1 min-w-0">{children}</div>
+</div>
 ```
-Products · News · Resources & Compliance · Research & Initiatives · About · Support  |  Workspace
-```
 
-- Delete the three role-specific link blocks (`isAdmin && (...)`, `isReviewer && !isAdmin && (...)`, `isCompany && !isAdmin && !isReviewer && (...)`).
-- Delete the `<DropdownNavItem label="More" ... />` block — its items become first-class links.
-- Add a single **`Workspace`** link (icon: `LayoutDashboard`) that routes to `getRoleDashboardRoute(activeRole)` (falls back to `/dashboard-home`). It's the only role-aware element left in the top nav; everything else lives in the sidebar.
-- Regular users (no role) keep today's link set unchanged.
-- Mobile (`MobileNav`) is untouched.
+Re-import `AuthenticatedStatusBar` (the existing comment-only line becomes a real import).
 
-## 2. Always-visible status bar
+### 3. `src/components/layout/AuthenticatedStatusBar.tsx` — no API change
 
-- Move the `<AuthenticatedStatusBar />` render out of `AuthenticatedLayout.tsx`.
-- Mount it once in `src/App.tsx` immediately below `<Header />`, wrapped in a small `SignedInOnly` guard that reads `useAuth()` and returns `null` when `!user`. This guarantees it appears on every route — public marketing pages included — when signed in, and disappears on sign-out.
-- Remove the duplicate render inside `AuthenticatedLayout` so it doesn't double up inside the workspace shell.
-- Keep the existing component API (`AuthenticatedStatusBar` already handles "no role" gracefully via `usePendingCounts` — verify in a follow-up read; if it requires roles, add an early `return null` when `roles.length === 0 && !pendingApproval` so it stays quiet for brand-new users).
-- Make the bar `sticky top-14 z-30` so it sits under the header on every page; the workspace shell's existing `sticky top-14` SidebarTrigger strip moves to `top-[calc(3.5rem+var(--status-bar-h))]` only if visual overlap appears — otherwise leave both `sticky` and stacked naturally.
+The component already early-returns when there's no signal, so it stays quiet on workspace routes for brand-new users. No edits required beyond confirming it renders correctly inside a narrower flex column (it already uses `flex-wrap`).
 
-## 3. Regular-user onboarding checklist
+## Out of scope
 
-New component `src/components/onboarding/RegularUserOnboardingChecklist.tsx`:
-
-- Rendered only inside `src/pages/Dashboard_Authenticated.tsx`, at the top, when **`user && roles.length === 0`**.
-- Dismissible: persistence via `localStorage` key `dlinrt.onboarding.regular.dismissed.v1`; also auto-hides once every item is done.
-- Steps (each a row with check icon + CTA button):
-  1. **Complete your profile** — link to `/profile`. Done when `profile.first_name && profile.last_name`.
-  2. **Request a role** (Reviewer or Company representative) — link to `/role-selection` (or `/profile` if that route doesn't exist; verified during build).
-  3. **Set notification preferences** — link to `/notification-settings`. Done when the user has visited / saved once (track via a `profile.notification_preferences != null` check; otherwise just mark visited via localStorage).
-  4. **Opt in to the newsletter** (GDPR-compliant explicit consent) — link to `/profile` newsletter section, or a one-click subscribe button that calls the existing `subscribe-newsletter` edge function with the user's email.
-  5. **Explore the catalogue** — link to `/products`.
-- Visual: shadcn `Card` + checklist rows with `CheckCircle2` (done) / `Circle` (todo) icons, brand accent `#5090D0` for the active step, "Dismiss" ghost button in the header.
-- No backend schema changes. All "done" detection is read-only against existing `profile` fields + localStorage.
-
----
-
-## Files touched
-
-- `src/components/Header.tsx` — slim lg+ nav, add `Workspace` link.
-- `src/App.tsx` — mount `AuthenticatedStatusBar` globally under `<Header />`.
-- `src/components/layout/AuthenticatedLayout.tsx` — remove duplicate status bar render.
-- `src/components/layout/AuthenticatedStatusBar.tsx` — add `return null` when there is nothing useful to show for a brand-new user (no role, no approval pending, no tasks).
-- `src/components/onboarding/RegularUserOnboardingChecklist.tsx` — new.
-- `src/pages/Dashboard_Authenticated.tsx` — render the checklist for `roles.length === 0`.
+- Mobile nav, header layout, sidebar internals.
+- The status bar's content, chips, or signal logic.
+- Public-page rendering of the bar (unchanged).
 
 ## Verification
 
-- Build/typecheck passes.
-- Visit `/` signed-out → no status bar, no checklist, full top nav.
-- Sign in as a regular user (no role) → status bar visible on `/`, `/products`, `/dashboard-home`; checklist visible on `/dashboard-home` only; top nav unchanged for regular users.
-- Sign in as admin/reviewer/company → status bar visible everywhere; top nav on lg+ shows only public links + `Workspace`; sidebar still carries role-specific items inside the workspace shell.
-- Dismiss checklist → it stays dismissed across reloads.
+- Sign in as admin on `/admin/registrations`: status bar appears inside the workspace column, fully visible to the right of the sidebar; no overlap when sidebar is expanded or collapsed.
+- Same user on `/products` (public route): status bar still appears full-width below the header.
+- Signed-out on any route: no status bar.
+- Toggle the sidebar collapse/expand: status bar reflows with the column, SidebarTrigger strip and status bar stack cleanly (both already `border-b`).
