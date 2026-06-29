@@ -53,7 +53,7 @@ export function AuthenticatedLayout({ children }: Props) {
             <SidebarTrigger />
             <span className="ml-2 text-xs text-muted-foreground">Workspace</span>
           </div>
-          <AuthenticatedStatusBar />
+          {/* AuthenticatedStatusBar is mounted globally in App.tsx */}
           <div className="flex-1 min-w-0">{children}</div>
         </div>
       </div>
