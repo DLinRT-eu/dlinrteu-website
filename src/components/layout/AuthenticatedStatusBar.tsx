@@ -24,9 +24,10 @@ import { usePendingCounts } from '@/hooks/usePendingCounts';
  * pending-task chips that link straight to the work.
  */
 export function AuthenticatedStatusBar() {
-  const { profile } = useAuth();
-  const { activeRole, isAdmin, isReviewer, isCompany } = useRoles();
+  const { user, profile } = useAuth();
+  const { activeRole, isAdmin, isReviewer, isCompany, roles } = useRoles();
   const counts = usePendingCounts();
+
   const [mfaEnabled, setMfaEnabled] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -69,6 +70,12 @@ export function AuthenticatedStatusBar() {
       : tone === 'warn'
         ? 'bg-amber-100 text-amber-800 border-amber-300 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-200 dark:border-amber-700'
         : 'bg-secondary text-secondary-foreground border-border hover:bg-secondary/80';
+
+  // Hide entirely if there's nothing useful to show (e.g. signed-out, or brand-new user with no role/approval/tasks).
+  if (!user) return null;
+  const hasSignal = !!activeRole || !!approval || mfaEnabled === false || chips.length > 0 || roles.length > 0;
+  if (!hasSignal) return null;
+
 
   return (
     <div className="border-b bg-muted/40 px-3 py-1.5 flex items-center gap-2 flex-wrap text-xs">

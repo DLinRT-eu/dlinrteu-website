@@ -60,60 +60,37 @@ const Header = () => {
         
         {/* Desktop Navigation - Role-Based */}
         <nav className="hidden lg:flex items-center space-x-2">
-          {/* Role-specific links */}
-          {isAdmin && (
+          {isRegularUser ? (
             <>
-              <Link to="/admin" className="px-3 py-2 hover:text-white/90 text-sm">Admin</Link>
-              <Link to="/admin/registrations" className="px-3 py-2 hover:text-white/90 text-sm">Registrations</Link>
-              <Link to="/admin/certifications" className="px-3 py-2 hover:text-white/90 text-sm">Certifications</Link>
-              <Link to="/admin/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
-              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
-            </>
-          )}
-          {isReviewer && !isAdmin && (
-            <>
-              <Link to="/reviewer/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">My Assignments</Link>
-              <Link to="/reviewer/due-reviews" className="px-3 py-2 hover:text-white/90 text-sm">Due Reviews</Link>
-              <Link to="/review" className="px-3 py-2 hover:text-white/90 text-sm">Reviews</Link>
-            </>
-          )}
-          {isCompany && !isAdmin && !isReviewer && (
-            <>
-              <Link to="/company/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
-              <Link to="/company/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
-              <Link to="/company/certification" className="px-3 py-2 hover:text-white/90 text-sm">Certification</Link>
-              <Link to="/company/overview" className="px-3 py-2 hover:text-white/90 text-sm">Overview</Link>
-            </>
-          )}
-          {/* Common links for all users */}
-          <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
-          {isRegularUser && (
-            <>
+              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
               <Link to="/companies" className="px-3 py-2 hover:text-white/90 text-sm">Companies</Link>
               <Link to="/dashboard" className="px-3 py-2 hover:text-white/90 text-sm">Dashboard</Link>
               <Link to="/news" className="px-3 py-2 hover:text-white/90 text-sm">News</Link>
               <Link to="/resources-compliance" className="px-3 py-2 hover:text-white/90 text-sm">Resources & Compliance</Link>
               <Link to="/initiatives" className="px-3 py-2 hover:text-white/90 text-sm">Research & Initiatives</Link>
-            </>
-          )}
-          {!isRegularUser && (
-            <DropdownNavItem label="More" items={[
-              { to: '/companies', label: 'Companies' },
-              { to: '/dashboard', label: 'Analytics' },
-              { to: '/news', label: 'News' },
-              { to: '/resources-compliance', label: 'Resources & Compliance' },
-              { to: '/initiatives', label: 'Research & Initiatives' },
-              { to: '/about', label: 'About' },
-              { to: '/support', label: 'Support & Contact' },
-            ]} />
-          )}
-          {isRegularUser && (
-            <>
               <Link to="/about" className="px-3 py-2 hover:text-white/90 text-sm">About</Link>
               <Link to="/support" className="px-3 py-2 hover:text-white/90 text-sm">Support & Contact</Link>
             </>
+          ) : (
+            <>
+              {/* Public links only - role-specific items live in the workspace sidebar */}
+              <Link to="/products" className="px-3 py-2 hover:text-white/90 text-sm">Products</Link>
+              <Link to="/news" className="px-3 py-2 hover:text-white/90 text-sm">News</Link>
+              <Link to="/resources-compliance" className="px-3 py-2 hover:text-white/90 text-sm">Resources & Compliance</Link>
+              <Link to="/initiatives" className="px-3 py-2 hover:text-white/90 text-sm">Research & Initiatives</Link>
+              <Link to="/about" className="px-3 py-2 hover:text-white/90 text-sm">About</Link>
+              <Link to="/support" className="px-3 py-2 hover:text-white/90 text-sm">Support</Link>
+              <Link
+                to={getRoleDashboardRoute(activeRole) || '/dashboard-home'}
+                className="px-3 py-2 hover:text-white/90 text-sm font-medium inline-flex items-center gap-1.5 border-l border-white/20 ml-1 pl-4"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Workspace
+              </Link>
+            </>
           )}
         </nav>
+
         
         <div className="hidden md:flex items-center gap-2">
           <FontSizeControl />

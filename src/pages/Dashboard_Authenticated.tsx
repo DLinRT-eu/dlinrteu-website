@@ -41,6 +41,8 @@ import {
   BookOpen
 } from 'lucide-react';
 import NewsSection from '@/components/NewsSection';
+import { RegularUserOnboardingChecklist } from '@/components/onboarding/RegularUserOnboardingChecklist';
+
 
 interface QuickAction {
   title: string;
@@ -390,6 +392,10 @@ export default function Dashboard_Authenticated() {
             {getRoleDescription()}
           </p>
         </div>
+
+        {/* Onboarding checklist for users with no role */}
+        {isRegularUser && <RegularUserOnboardingChecklist />}
+
 
         {/* Search Bar */}
         <div className="mb-8">
