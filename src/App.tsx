@@ -12,12 +12,19 @@ import { ApprovalGate } from "@/components/auth/ApprovalGate";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import Header from "./components/Header";
 import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
+import { AuthenticatedStatusBar } from "./components/layout/AuthenticatedStatusBar";
 
 const ConditionalHeader = () => {
   const { pathname } = useLocation();
   if (pathname === "/presentation/demo") return null;
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <AuthenticatedStatusBar />
+    </>
+  );
 };
+
 
 const isDynamicImportError = (error: unknown) =>
   error instanceof TypeError &&
