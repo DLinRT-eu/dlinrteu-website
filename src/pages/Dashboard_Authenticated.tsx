@@ -393,6 +393,10 @@ export default function Dashboard_Authenticated() {
           </p>
         </div>
 
+        {/* Onboarding checklist for users with no role */}
+        {isRegularUser && <RegularUserOnboardingChecklist />}
+
+
         {/* Search Bar */}
         <div className="mb-8">
           <form
