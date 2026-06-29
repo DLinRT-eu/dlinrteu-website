@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRoles } from "@/contexts/RoleContext";
-// AuthenticatedStatusBar is now mounted globally in App.tsx
+import { AuthenticatedStatusBar } from "./AuthenticatedStatusBar";
 
 interface Props {
   children: ReactNode;
