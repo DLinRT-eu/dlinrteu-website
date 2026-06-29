@@ -4,7 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRoles } from "@/contexts/RoleContext";
-// AuthenticatedStatusBar is now mounted globally in App.tsx
+import { AuthenticatedStatusBar } from "./AuthenticatedStatusBar";
 
 interface Props {
   children: ReactNode;
@@ -53,7 +53,7 @@ export function AuthenticatedLayout({ children }: Props) {
             <SidebarTrigger />
             <span className="ml-2 text-xs text-muted-foreground">Workspace</span>
           </div>
-          {/* AuthenticatedStatusBar is mounted globally in App.tsx */}
+          <AuthenticatedStatusBar />
           <div className="flex-1 min-w-0">{children}</div>
         </div>
       </div>

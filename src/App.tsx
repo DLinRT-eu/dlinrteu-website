@@ -14,13 +14,33 @@ import Header from "./components/Header";
 import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
 import { AuthenticatedStatusBar } from "./components/layout/AuthenticatedStatusBar";
 
+const WORKSPACE_PREFIXES = [
+  "/dashboard-home",
+  "/profile",
+  "/my-products",
+  "/my-submissions",
+  "/notifications",
+  "/notification-settings",
+  "/admin",
+  "/reviewer",
+  "/company",
+  "/review",
+];
+
+const isWorkspacePath = (pathname: string) => {
+  if (pathname === "/review" || pathname.startsWith("/review/")) return true;
+  return WORKSPACE_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
+};
+
 const ConditionalHeader = () => {
   const { pathname } = useLocation();
   if (pathname === "/presentation/demo") return null;
   return (
     <>
       <Header />
-      <AuthenticatedStatusBar />
+      {/* Workspace routes render the status bar inside AuthenticatedLayout's right column
+          to avoid overlap with the fixed sidebar. */}
+      {!isWorkspacePath(pathname) && <AuthenticatedStatusBar />}
     </>
   );
 };
