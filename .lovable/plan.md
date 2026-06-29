@@ -1,33 +1,66 @@
 ## Goal
-Refresh the EU AI Act content on `/resources-compliance` to reflect today's news: the Council of the EU formally approved the Digital Omnibus AI Act amendments (following Parliament's 16 June 2026 approval), confirming the postponed high‑risk deadlines and introducing several substantive changes that are directly relevant to medical AI / radiotherapy products in the DLinRT catalogue.
+Finish the three open items from the prior UX audit:
 
-Sources cross‑checked:
-- Morgan Lewis LawFlash, 24 June 2026 — Parliament approval 16 June 2026, deferred Annex III to 2 Dec 2027, Annex I to 2 Aug 2028.
-- Gibson Dunn client alert, 27 May 2026 — Omnibus agreement, formal adoption expected before 2 Aug 2026.
-- Sidley / Hogan Lovells — 7 May 2026 provisional agreement details.
-- Better Regulation — Texts Adopted (16 June 2026) of COM(2025) 836 final.
-- User‑provided Council summary (29 June 2026).
+1. Slim the desktop (lg+) top nav for signed-in role holders.
+2. Make `AuthenticatedStatusBar` visible on every page when the user is signed in.
+3. Show a regular-user onboarding checklist on `/dashboard-home` for signed-in users with no role.
 
-## Scope of edits (presentation only)
+Mobile nav (`MobileNav.tsx`) is out of scope for #1.
 
-File: `src/components/resources/RegulatoryLandscape.tsx`
+---
 
-1. **AI Act card (lines ~75–99)** — rewrite the headline badge and paragraph:
-   - Badge: change "(pending formal adoption)" to "(Digital Omnibus, Council‑approved Jun 2026)".
-   - Paragraph: state that the Digital Omnibus on AI amendments were approved by the European Parliament on 16 June 2026 and by the Council on 29 June 2026, pending publication in the OJ. Keep the existing deferred dates (Annex III → 2 Dec 2027; Annex I incl. medical devices → 2 Aug 2028) and add the new milestones:
-     - 2 Aug 2027 — deadline for national AI regulatory sandboxes.
-     - 2 Dec 2026 — end of grace period for transparency on AI‑generated content (Art. 50) and entry into force of the new prohibition on non‑consensual sexual/intimate content and CSAM generation.
-   - Add a short sentence noting the AI Office's clarified competence over GPAI‑based systems where model and system share a provider, with carve‑outs for law enforcement, border, judicial and financial supervisors.
-   - Add one sentence flagging the Annex I "sectoral interplay" clarification: where MDR (and similar sectoral laws) already impose AI‑specific requirements equivalent to the AI Act, the Act's direct application is limited; the Commission must issue guidance to minimise compliance burden for Annex I operators — directly relevant to medical AI / radiotherapy SaMD.
+## 1. Top nav cleanup (lg+) — `src/components/Header.tsx`
 
-2. **Interplay: MDR + AI Act card (lines ~101–125)** — append one sentence noting that the Digital Omnibus narrows direct AI Act applicability where MDR already covers equivalent requirements, and that Commission guidance to minimise duplicate compliance is mandated. Keep the existing MDCG link.
+For signed-in users **with at least one role** (admin / reviewer / company), the blue top nav on `lg+` will show only:
 
-3. **Add a small "What changed (Jun 2026)" bullet list** inside the AI Act card under the paragraph, summarising the four items above (deferred dates, new prohibitions, sandbox deadline, sectoral interplay) for quick scanability. Use the existing `Badge` / list styling already present on the page — no new components, no new dependencies.
+```
+Products · News · Resources & Compliance · Research & Initiatives · About · Support  |  Workspace
+```
 
-4. **Add one authoritative reference link** next to the existing EUR‑Lex link, pointing to the Texts Adopted of the Digital Omnibus on AI (`https://www.europarl.europa.eu/doceo/document/TA-10-2026-0234_EN.html` if available, otherwise the Better Regulation / Commission proposal page COM(2025) 836).
+- Delete the three role-specific link blocks (`isAdmin && (...)`, `isReviewer && !isAdmin && (...)`, `isCompany && !isAdmin && !isReviewer && (...)`).
+- Delete the `<DropdownNavItem label="More" ... />` block — its items become first-class links.
+- Add a single **`Workspace`** link (icon: `LayoutDashboard`) that routes to `getRoleDashboardRoute(activeRole)` (falls back to `/dashboard-home`). It's the only role-aware element left in the top nav; everything else lives in the sidebar.
+- Regular users (no role) keep today's link set unchanged.
+- Mobile (`MobileNav`) is untouched.
 
-No other sections, no logic changes, no schema/data changes. Out of scope: PurposeSection.tsx and StandardsGuidelines.tsx — their AI Act mentions remain accurate at this level of detail.
+## 2. Always-visible status bar
+
+- Move the `<AuthenticatedStatusBar />` render out of `AuthenticatedLayout.tsx`.
+- Mount it once in `src/App.tsx` immediately below `<Header />`, wrapped in a small `SignedInOnly` guard that reads `useAuth()` and returns `null` when `!user`. This guarantees it appears on every route — public marketing pages included — when signed in, and disappears on sign-out.
+- Remove the duplicate render inside `AuthenticatedLayout` so it doesn't double up inside the workspace shell.
+- Keep the existing component API (`AuthenticatedStatusBar` already handles "no role" gracefully via `usePendingCounts` — verify in a follow-up read; if it requires roles, add an early `return null` when `roles.length === 0 && !pendingApproval` so it stays quiet for brand-new users).
+- Make the bar `sticky top-14 z-30` so it sits under the header on every page; the workspace shell's existing `sticky top-14` SidebarTrigger strip moves to `top-[calc(3.5rem+var(--status-bar-h))]` only if visual overlap appears — otherwise leave both `sticky` and stacked naturally.
+
+## 3. Regular-user onboarding checklist
+
+New component `src/components/onboarding/RegularUserOnboardingChecklist.tsx`:
+
+- Rendered only inside `src/pages/Dashboard_Authenticated.tsx`, at the top, when **`user && roles.length === 0`**.
+- Dismissible: persistence via `localStorage` key `dlinrt.onboarding.regular.dismissed.v1`; also auto-hides once every item is done.
+- Steps (each a row with check icon + CTA button):
+  1. **Complete your profile** — link to `/profile`. Done when `profile.first_name && profile.last_name`.
+  2. **Request a role** (Reviewer or Company representative) — link to `/role-selection` (or `/profile` if that route doesn't exist; verified during build).
+  3. **Set notification preferences** — link to `/notification-settings`. Done when the user has visited / saved once (track via a `profile.notification_preferences != null` check; otherwise just mark visited via localStorage).
+  4. **Opt in to the newsletter** (GDPR-compliant explicit consent) — link to `/profile` newsletter section, or a one-click subscribe button that calls the existing `subscribe-newsletter` edge function with the user's email.
+  5. **Explore the catalogue** — link to `/products`.
+- Visual: shadcn `Card` + checklist rows with `CheckCircle2` (done) / `Circle` (todo) icons, brand accent `#5090D0` for the active step, "Dismiss" ghost button in the header.
+- No backend schema changes. All "done" detection is read-only against existing `profile` fields + localStorage.
+
+---
+
+## Files touched
+
+- `src/components/Header.tsx` — slim lg+ nav, add `Workspace` link.
+- `src/App.tsx` — mount `AuthenticatedStatusBar` globally under `<Header />`.
+- `src/components/layout/AuthenticatedLayout.tsx` — remove duplicate status bar render.
+- `src/components/layout/AuthenticatedStatusBar.tsx` — add `return null` when there is nothing useful to show for a brand-new user (no role, no approval pending, no tasks).
+- `src/components/onboarding/RegularUserOnboardingChecklist.tsx` — new.
+- `src/pages/Dashboard_Authenticated.tsx` — render the checklist for `roles.length === 0`.
 
 ## Verification
-- Build passes typecheck.
-- Visually inspect `/resources-compliance` AI Act card and the Interplay card.
+
+- Build/typecheck passes.
+- Visit `/` signed-out → no status bar, no checklist, full top nav.
+- Sign in as a regular user (no role) → status bar visible on `/`, `/products`, `/dashboard-home`; checklist visible on `/dashboard-home` only; top nav unchanged for regular users.
+- Sign in as admin/reviewer/company → status bar visible everywhere; top nav on lg+ shows only public links + `Workspace`; sidebar still carries role-specific items inside the workspace shell.
+- Dismiss checklist → it stays dismissed across reloads.
