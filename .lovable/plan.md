@@ -1,94 +1,33 @@
+## Goal
+Refresh the EU AI Act content on `/resources-compliance` to reflect today's news: the Council of the EU formally approved the Digital Omnibus AI Act amendments (following Parliament's 16 June 2026 approval), confirming the postponed high‑risk deadlines and introducing several substantive changes that are directly relevant to medical AI / radiotherapy products in the DLinRT catalogue.
 
-# Authenticated UX Audit — Findings & Proposed Improvements
+Sources cross‑checked:
+- Morgan Lewis LawFlash, 24 June 2026 — Parliament approval 16 June 2026, deferred Annex III to 2 Dec 2027, Annex I to 2 Aug 2028.
+- Gibson Dunn client alert, 27 May 2026 — Omnibus agreement, formal adoption expected before 2 Aug 2026.
+- Sidley / Hogan Lovells — 7 May 2026 provisional agreement details.
+- Better Regulation — Texts Adopted (16 June 2026) of COM(2025) 836 final.
+- User‑provided Council summary (29 June 2026).
 
-Scope: post-login experience for the four user types (regular, company, reviewer, admin). Public pages stay out of scope unless they directly affect sign-in/find-info friction.
+## Scope of edits (presentation only)
 
-## What works today
-- Role-aware top nav + collapsible sidebar (`Header.tsx`, `AppSidebar.tsx`).
-- Unified `/dashboard-home` per role with Priority Actions + collapsible "All tools" (admin).
-- `ApprovalGate`, `ProtectedRoute`, MFA enforcement, role switcher in header.
-- Newsletter opt-in added to signup; Quick Links on company dashboard.
+File: `src/components/resources/RegulatoryLandscape.tsx`
 
-## Pain points found
-1. **Duplicate navigation surfaces.** Top nav, sidebar, and dashboard cards all expose the same admin/reviewer/company links — three sources of truth → cognitive load and inconsistent labels (e.g. "Reviews" vs "Review Dashboard" vs "Assigned Reviews").
-2. **No persistent status strip.** A logged-in user can't tell at a glance: approval state, active role, pending tasks count, MFA status. `PendingStatsWidget` only shows on `/dashboard-home`.
-3. **Search is hidden after login.** ⌘K palette exists but is unlabeled on mobile; dashboard search only searches products. No global jump-to (people, companies, reviews, settings).
-4. **Onboarding for new accounts is thin.** After sign-up the user lands on an empty profile; no "next 3 steps" card for regular users (reviewers/companies have a checklist, regular users don't). Role-request flow is buried in Profile.
-5. **Company/Reviewer dashboards split overlapping concepts.** "Submit Revision" lives under `/company/dashboard`, "My Products" under `/company/products`, "Certify Product" under `/company/certification` — three near-identical entry points without contextual cross-links.
-6. **Admin dashboard density.** 4 primary + 8 secondary cards + general row → 17 tiles. No counts on most tiles → user clicks to discover work.
-7. **Notifications discoverability.** Bell shows count, but there's no inline filter (mentions vs digests vs system) and the unread badge resets behavior is not obvious.
-8. **Mobile.** Sidebar is hidden behind `SidebarTrigger`; on small viewports the role-switcher dropdown and search button collapse into icons with no labels.
-9. **"Where do I find X?" friction.** Items like "My Submissions", "Notification settings", "Role request" are only in the avatar dropdown, never surfaced in sidebar or dashboard.
-10. **Status flags missing on cards.** Dashboard action cards show counts inconsistently (PRs yes, pending reviews no, expiring certifications no).
+1. **AI Act card (lines ~75–99)** — rewrite the headline badge and paragraph:
+   - Badge: change "(pending formal adoption)" to "(Digital Omnibus, Council‑approved Jun 2026)".
+   - Paragraph: state that the Digital Omnibus on AI amendments were approved by the European Parliament on 16 June 2026 and by the Council on 29 June 2026, pending publication in the OJ. Keep the existing deferred dates (Annex III → 2 Dec 2027; Annex I incl. medical devices → 2 Aug 2028) and add the new milestones:
+     - 2 Aug 2027 — deadline for national AI regulatory sandboxes.
+     - 2 Dec 2026 — end of grace period for transparency on AI‑generated content (Art. 50) and entry into force of the new prohibition on non‑consensual sexual/intimate content and CSAM generation.
+   - Add a short sentence noting the AI Office's clarified competence over GPAI‑based systems where model and system share a provider, with carve‑outs for law enforcement, border, judicial and financial supervisors.
+   - Add one sentence flagging the Annex I "sectoral interplay" clarification: where MDR (and similar sectoral laws) already impose AI‑specific requirements equivalent to the AI Act, the Act's direct application is limited; the Commission must issue guidance to minimise compliance burden for Annex I operators — directly relevant to medical AI / radiotherapy SaMD.
 
-## Proposed changes (frontend only, minimal-intervention)
+2. **Interplay: MDR + AI Act card (lines ~101–125)** — append one sentence noting that the Digital Omnibus narrows direct AI Act applicability where MDR already covers equivalent requirements, and that Commission guidance to minimise duplicate compliance is mandated. Keep the existing MDCG link.
 
-### A. Unified status bar (new, small)
-- Add `AuthenticatedStatusBar` above the workspace sub-header (in `AuthenticatedLayout.tsx`).
-- Shows: avatar + name, active role chip with switcher, approval state pill (Approved / Pending), MFA pill (Enabled / Add MFA), and 2-3 contextual count chips (e.g. "3 reviews due", "1 certification expiring", "2 edits pending").
-- Chips are links to the relevant page → 1-click access to work that needs attention.
+3. **Add a small "What changed (Jun 2026)" bullet list** inside the AI Act card under the paragraph, summarising the four items above (deferred dates, new prohibitions, sandbox deadline, sectoral interplay) for quick scanability. Use the existing `Badge` / list styling already present on the page — no new components, no new dependencies.
 
-### B. Consolidate counts on dashboard cards
-- Extend `useReviewData`, `useCompanyData`, registrations query so each `PrimaryActionCard` can display a badge (matches the existing `badge` prop on `QuickAction`).
-- Admin: registrations pending, edits pending, certifications expiring, PRs (already there).
-- Reviewer: assigned, due-this-week, overdue.
-- Company: products without certification, drafts in review, expiring certificates.
+4. **Add one authoritative reference link** next to the existing EUR‑Lex link, pointing to the Texts Adopted of the Digital Omnibus on AI (`https://www.europarl.europa.eu/doceo/document/TA-10-2026-0234_EN.html` if available, otherwise the Better Regulation / Commission proposal page COM(2025) 836).
 
-### C. Sidebar polish
-- Group items by frequency, not by role section count. Within each role group, show a "Pinned" subgroup (top 3 actions) and an "All …" collapsed group.
-- Add badges on sidebar items mirroring (B). Surface "My Submissions" and "Notification settings" in Personal group.
-- On mobile, auto-collapse sidebar but expose a fixed "Tasks" FAB linking to `/dashboard-home#tasks`.
+No other sections, no logic changes, no schema/data changes. Out of scope: PurposeSection.tsx and StandardsGuidelines.tsx — their AI Act mentions remain accurate at this level of detail.
 
-### D. Global command palette upgrades
-- Make ⌘K button visible on mobile (icon already there; add label inside sheet header).
-- Add result groups: Pages, People (admins/reviewers/companies), Products, Settings, Quick actions ("Switch role to…", "Request reviewer role", "Open notification settings").
-- Keep existing keyboard shortcut; add an inline hint on `/dashboard-home` search bar ("Press ⌘K to search everything").
-
-### E. First-run / regular-user onboarding card
-- Reuse `CompanyOnboardingChecklist` pattern; create `RegularUserChecklist` shown on `/dashboard-home` until dismissed:
-  1. Complete profile (name, affiliation)
-  2. Enable MFA
-  3. Subscribe to newsletter (if not opted in)
-  4. (Optional) Request reviewer/company role
-- Persist dismissal in `profile.preferences` (already JSONB).
-
-### F. Reduce duplication between top nav and sidebar
-- For authenticated users with a sidebar visible (lg+), collapse the role-specific nav links in `Header.tsx` into a single "Workspace" link → keeps public links (Products, News, Resources, About) front-and-center, removes the three-way duplication.
-- Avatar dropdown stays the same (account-scoped items only).
-
-### G. Notifications
-- On `NotificationBell` popover, add tabs (All / Mentions / System) and "Mark all read" already present; surface "Open settings" link in popover footer.
-- Add a "snooze" affordance on long-running alerts (frontend only — persist via existing preferences).
-
-### H. Page-level "Where to next" footer
-- Small contextual block at the bottom of each authenticated page suggesting the 2 most relevant next steps based on the current page (e.g. on `/company/certification` → "Submit a revision" + "View my products"). Pure presentational, derived from a small per-page map.
-
-### I. Accessibility / clarity tweaks
-- Active state on sidebar items needs higher contrast (currently relies on shadcn default).
-- Add `aria-current="page"` on active NavLinks (some are missing).
-- Ensure all icon-only buttons in `Header.tsx` have `aria-label` (search button OK, role switcher OK, font/theme need check).
-
-## What we will NOT do in this pass
-- No backend/RLS changes, no schema migrations.
-- No copy rewrites of long-form guides.
-- No new pages beyond the small checklist component.
-- No redesign of public marketing pages.
-
-## Suggested rollout order
-1. (B) Counts on dashboard cards + (A) status bar — biggest visible win.
-2. (C) Sidebar grouping + badges.
-3. (F) De-duplicate top nav for authed users on lg+.
-4. (D) Command palette upgrade.
-5. (E) Regular-user checklist.
-6. (G), (H), (I) polish.
-
-## Technical notes
-- All changes live under `src/components/layout/*`, `src/components/dashboard/*`, `src/components/notifications/*`, `src/components/CommandPalette.tsx`, `src/pages/Dashboard_Authenticated.tsx`, `src/components/Header.tsx`.
-- New data hooks: `usePendingCounts(role)` aggregating reviewer/company/admin pending work, memoized; reuse existing `PendingStatsWidget` queries.
-- No new dependencies.
-- Respect Minimal Intervention: no behavior changes to existing flows, only additive UI + nav reordering.
-
-## Open questions before I build
-- OK to collapse the role-specific links from the top nav into "Workspace" when the sidebar is present? (item F — most opinionated change)
-- Status bar: keep it always visible, or only on `/dashboard-home` and pages with pending work?
-- Should the regular-user checklist auto-dismiss after all items are done, or stay collapsible?
+## Verification
+- Build passes typecheck.
+- Visually inspect `/resources-compliance` AI Act card and the Interplay card.

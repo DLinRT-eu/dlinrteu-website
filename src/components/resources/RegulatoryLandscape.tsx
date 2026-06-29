@@ -75,26 +75,48 @@ const RegulatoryLandscape = () => {
       {/* EU: AI Act Section */}
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: AI Act
             </CardTitle>
-            <Badge variant="outline">Key dates: Feb 2025, Dec 2027, Aug 2028 (pending formal adoption)</Badge>
+            <Badge variant="outline">Digital Omnibus — Council-approved 29 Jun 2026</Badge>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). Following the <strong>Digital Omnibus on AI</strong> political agreement (Council/Parliament/Commission, 7 May 2026), phased compliance is: prohibited AI practices (Feb 2025); standalone Annex III high-risk AI obligations deferred to <strong>2 December 2027</strong>; and Annex I high-risk AI embedded in regulated products (including medical devices — relevant to DLinRT) deferred to <strong>2 August 2028</strong>. These deferrals are pending formal adoption and Official Journal publication (expected before 2 Aug 2026). For regulated medical AI, AI Act obligations apply alongside MDR; see MDCG guidance.
+            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). The <strong>Digital Omnibus on AI</strong> amendments (COM(2025) 836) were adopted by the European Parliament on <strong>16 June 2026</strong> and approved by the Council of the EU on <strong>29 June 2026</strong>, pending publication in the Official Journal. Prohibited AI practices have applied since Feb 2025; the high-risk obligations are deferred as follows for regulated medical AI relevant to DLinRT, and apply alongside MDR (see MDCG guidance).
           </p>
-          <a 
-            href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-          >
-            <ExternalLink className="h-4 w-4" />
-            <span>EU AI Act Official Text (Regulation 2024/1689)</span>
-          </a>
+          <div className="mb-4 rounded-md border border-border bg-muted/40 p-4">
+            <p className="text-sm font-semibold text-foreground mb-2">What changed (Jun 2026)</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+              <li><strong>New application dates:</strong> Annex III high-risk AI → <strong>2 Dec 2027</strong>; Annex I high-risk AI embedded in regulated products (incl. medical devices) → <strong>2 Aug 2028</strong>.</li>
+              <li><strong>2 Aug 2027</strong> — deadline for national competent authorities to establish AI regulatory sandboxes.</li>
+              <li><strong>2 Dec 2026</strong> — end of the grace period for transparency on AI-generated content (Art. 50); new prohibition enters into force on generation of non-consensual sexual/intimate content and CSAM (incl. nudifying real photos).</li>
+              <li><strong>Sectoral interplay (Annex I):</strong> where MDR and similar sectoral laws already impose AI-specific requirements equivalent to the AI Act, direct AI Act application is limited; the Commission must issue guidance to <em>minimise compliance burden</em> for Annex I operators — directly relevant to radiotherapy SaMD.</li>
+              <li><strong>AI Office competence clarified</strong> for systems built on a GPAI model by the same provider, with carve-outs preserving national authorities for law enforcement, border management, judicial authorities and financial supervisors.</li>
+              <li><strong>Machinery exemption:</strong> products covered by the Machinery Regulation (previously Annex I high-risk) are exempted from direct AI Act applicability; the Commission may add AI-related health & safety requirements under the Machinery Regulation instead.</li>
+            </ul>
+          </div>
+          <div className="flex flex-col gap-2">
+            <a
+              href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>EU AI Act Official Text (Regulation 2024/1689)</span>
+            </a>
+            <a
+              href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0836"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Digital Omnibus on AI — COM(2025) 836 (texts adopted 16 Jun 2026)</span>
+            </a>
+          </div>
         </CardContent>
       </Card>
 
@@ -110,11 +132,11 @@ const RegulatoryLandscape = () => {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            MDCG's FAQ (MDCG 2025-6) explains joint applicability, classification cues, and practical expectations for MDAI (Medical Device AI). Follow MDCG guidance for harmonised interpretation.
+            MDCG's FAQ (MDCG 2025-6) explains joint applicability, classification cues, and practical expectations for MDAI (Medical Device AI). Follow MDCG guidance for harmonised interpretation. Under the <strong>Digital Omnibus on AI</strong> (Council-approved 29 Jun 2026), the AI Act's direct application is narrowed where MDR already imposes equivalent AI-specific requirements, and the Commission is mandated to issue guidance that <em>minimises duplicate compliance</em> for Annex I operators such as medical-device manufacturers.
           </p>
-          <a 
-            href="https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en" 
-            target="_blank" 
+          <a
+            href="https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
           >
