@@ -4,7 +4,7 @@ export const GE_HEALTHCARE_PIPELINE_PRODUCTS: ProductDetails[] = [
 {
 id: "ge-irt-theranostics-pipeline",
 name: "iRT for Theranostics",
-company: "GE HealthCare",
+company: "GE Healthcare",
 companyUrl: "https://www.gehealthcare.com/",
 productUrl:
 "https://www.gehealthcare.com/en-us/about/newsroom/press-releases/estro-2026-congress--ge-healthcare-to-spotlight-ai-enabled-solutions-to-advance-precision-care-across-radiation-therapy-and-image-guided-interventions",
