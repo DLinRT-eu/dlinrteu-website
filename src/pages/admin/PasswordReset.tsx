@@ -47,8 +47,10 @@ type PendingAction = { user: ProfileRow; mode: 'email' | 'link' } | null;
 
 export default function AdminPasswordReset() {
   const { toast } = useToast();
-  const [query, setQuery] = useState('');
-  const [debounced, setDebounced] = useState('');
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get('q') ?? '';
+  const [query, setQuery] = useState(initialQuery);
+  const [debounced, setDebounced] = useState(initialQuery.trim());
   const [results, setResults] = useState<ProfileRow[]>([]);
   const [searching, setSearching] = useState(false);
   const [pending, setPending] = useState<PendingAction>(null);
