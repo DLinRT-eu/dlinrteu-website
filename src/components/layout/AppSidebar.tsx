@@ -21,6 +21,7 @@ import {
   User as UserIcon,
   Home,
   Inbox,
+  KeyRound,
 } from "lucide-react";
 import {
   Sidebar,
