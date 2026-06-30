@@ -20,7 +20,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
         source: "FDA 510(k) summary K252379"
     },
     name: "AIR Recon DL",
-    company: "GE HealthCare",
+    company: "GE Healthcare",
     category: "Reconstruction",
     companyUrl: "https://www.gehealthcare.com",
     productUrl: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
