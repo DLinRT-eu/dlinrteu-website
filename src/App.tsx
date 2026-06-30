@@ -125,6 +125,7 @@ const AdminOverview = lazyPage(() => import("./pages/admin/AdminOverview"));
 const FinancialsAdmin = lazyPage(() => import("./pages/admin/FinancialsAdmin"));
 const AdminDashboard = lazyPage(() => import("./pages/admin/Dashboard"));
 const UserManagement = lazyPage(() => import("./pages/admin/UserManagement"));
+const AdminPasswordReset = lazyPage(() => import("./pages/admin/PasswordReset"));
 const ReviewAssignment = lazyPage(() => import("./pages/admin/ReviewAssignment"));
 const PRManagement = lazyPage(() => import("./pages/admin/PRManagement"));
 const SecurityDashboard = lazyPage(() => import("./pages/admin/SecurityDashboard"));
@@ -293,6 +294,11 @@ const App = () => (
                 <Route path="/admin/users" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <UserManagement />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/password-reset" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminPasswordReset />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/reviews" element={
