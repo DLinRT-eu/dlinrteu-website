@@ -65,6 +65,7 @@ const adminItems: Item[] = [
   { title: "Companies", url: "/admin/companies", icon: Building2, badgeKey: "adminPendingRevisions" },
   { title: "Certifications", url: "/admin/certifications", icon: BadgeCheck },
   { title: "Users", url: "/admin/users", icon: Users },
+  { title: "Password Reset", url: "/admin/password-reset", icon: KeyRound },
   { title: "Newsletter", url: "/admin/newsletter", icon: Mail },
   { title: "Security", url: "/admin/security", icon: ShieldCheck },
   { title: "Changelog", url: "/admin/changelog", icon: Newspaper },
