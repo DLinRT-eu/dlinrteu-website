@@ -22,7 +22,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213155.pdf"
     },
     name: "RT-Mind-AI",
-    company: "MedMind Technology",
+    company: "MedMind Technology Co., Ltd.",
     companyUrl: "https://www.medicalmind.cn/en.html",
     productUrl: "http://www.medicalmind.cn/product.html",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/medmind.ts",
