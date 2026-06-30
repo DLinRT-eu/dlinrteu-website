@@ -20,7 +20,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         primaryEndpoint: "Not specified"
     },
     name: "AutoContour",
-    company: "Radformation",
+    company: "RadFormation",
     companyUrl: "https://www.radformation.com/",
     productUrl: "https://www.radformation.com/autocontour/autocontour",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/radformation.ts",
