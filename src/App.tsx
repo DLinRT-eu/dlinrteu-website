@@ -296,6 +296,11 @@ const App = () => (
                     <UserManagement />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/password-reset" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminPasswordReset />
+                  </ProtectedRoute>
+                } />
                 <Route path="/admin/reviews" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <ReviewAssignment />
