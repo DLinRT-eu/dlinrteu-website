@@ -20,7 +20,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
       results: "TrueFidelity-H non-inferior to ASIR-V 40% at full dose; rated superior at ultra-low dose for subjective noise and overall quality."
     },
     name: "TrueFidelity",
-    company: "GE HealthCare",
+    company: "GE Healthcare",
     category: "Reconstruction",
     description: "Deep learning CT reconstruction that processes raw sinogram data with a convolutional neural network to reduce image noise and improve low-contrast detectability. Available on Revolution and Revolution Apex CT systems at three reconstruction strength levels (Low, Medium, High).",
     features: [
