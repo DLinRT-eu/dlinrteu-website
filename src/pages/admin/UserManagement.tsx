@@ -736,12 +736,20 @@ export default function UserManagement() {
   return (
     <PageLayout>
       <div className="container max-w-7xl py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Shield className="h-8 w-8" />
-            User Management
-          </h1>
-          <p className="text-muted-foreground mt-2">Manage user roles and permissions</p>
+        <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <Shield className="h-8 w-8" />
+              User Management
+            </h1>
+            <p className="text-muted-foreground mt-2">Manage user roles and permissions</p>
+          </div>
+          <Button asChild variant="outline">
+            <Link to="/admin/password-reset">
+              <KeyRound className="h-4 w-4 mr-2" />
+              Password reset tool
+            </Link>
+          </Button>
         </div>
 
         <div className="space-y-6">
