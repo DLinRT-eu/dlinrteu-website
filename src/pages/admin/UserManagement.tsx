@@ -1027,6 +1027,17 @@ export default function UserManagement() {
                         </Dialog>
                         <Button
                           size="sm"
+                          variant="outline"
+                          asChild
+                          title="Send or generate a password reset link"
+                        >
+                          <Link to={`/admin/password-reset?q=${encodeURIComponent(userProfile.email)}`}>
+                            <KeyRound className="h-4 w-4 mr-2" />
+                            Reset password
+                          </Link>
+                        </Button>
+                        <Button
+                          size="sm"
                           variant="destructive"
                           onClick={() => openDeleteDialog(userProfile.id, userProfile.email, `${userProfile.first_name} ${userProfile.last_name}`)}
                           disabled={userProfile.id === user?.id}
