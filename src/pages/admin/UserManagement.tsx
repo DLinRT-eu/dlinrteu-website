@@ -17,7 +17,8 @@ import { RoleRequestManager } from '@/components/admin/RoleRequestManager';
 import { PermissionDiagnostics } from '@/components/admin/PermissionDiagnostics';
 
 import { useToast } from '@/hooks/use-toast';
-import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare, Download, FileSpreadsheet } from 'lucide-react';
+import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare, Download, FileSpreadsheet, KeyRound } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Checkbox } from '@/components/ui/checkbox';
 import { exportToCSV, exportToExcel, formatExportDate, type ExportUserData } from '@/utils/userExport';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
