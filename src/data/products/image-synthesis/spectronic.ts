@@ -57,7 +57,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
       },
     },
     name: "MRI Planner",
-    company: "Spectronic Medical (a GE HealthCare company)",
+    company: "Spectronic Medical",
     companyUrl: "https://medical.spectronic.se/",
     productUrl: "https://medical.spectronic.se/page-2/page6/index.html",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/spectronic.ts",
