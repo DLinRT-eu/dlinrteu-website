@@ -4,7 +4,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
   {
     id: "quanta-qoca-image-smart-rt",
     name: "QOCA® image Smart RT Contouring System",
-    company: "Quanta Computer Inc.",
+    company: "Quanta Computer",
     companyUrl: "https://www.quantatw.com/quanta/english/default.aspx",
     productUrl: "https://www.qoca.net/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/quanta-computer.ts",
