@@ -24,7 +24,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
         results: "2552 generated contours across multiple anatomical regions (Head/Neck, Thorax, Abdomen, Pelvis) reviewed by practitioners."
     },
     name: "Auto Segmentation",
-    company: "GE HealthCare",
+    company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
