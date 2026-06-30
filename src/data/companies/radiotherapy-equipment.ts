@@ -34,8 +34,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "description": "Leading provider of radiation therapy quality assurance systems and AI-powered treatment planning tools. Part of Mirion Medical since 2021.",
     "website": "https://www.sunnuclear.com/",
     "productIds": [
-      "plan-ai",
-      "sun-nuclear-suncheck-patient"
+      "plan-ai"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/SunNuclear.png",
