@@ -179,8 +179,9 @@ export const extractCompaniesFromProducts = (products: ProductDetails[]): Compan
 /**
  * Get all products for a specific company from the catalog
  */
-export const getCompanyProducts = (companyName: string, allProducts: ProductDetails[]): ProductDetails[] => {
-  return allProducts.filter(product => product.company === companyName);
+export const getCompanyProducts = (companyNameOrId: string, allProducts: ProductDetails[]): ProductDetails[] => {
+  const targetId = getCompanyIdByName(companyNameOrId);
+  return allProducts.filter(product => getCompanyIdByName(product.company) === targetId);
 };
 
 /**
