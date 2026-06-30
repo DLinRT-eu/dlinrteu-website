@@ -11,8 +11,8 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "ge-auto-segmentation",
       "ge-air-recon-dl",
       "ge-air-recon-dl-enhancement",
-      "ge-dlip-ct",
       "ge-healthcare-irt",
+      "ge-irt-theranostics-pipeline",
       "ge-mr-contour-dl",
       "ge-precision-dl",
       "ge-truefidelity"
