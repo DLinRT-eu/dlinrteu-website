@@ -17,7 +17,8 @@ import { RoleRequestManager } from '@/components/admin/RoleRequestManager';
 import { PermissionDiagnostics } from '@/components/admin/PermissionDiagnostics';
 
 import { useToast } from '@/hooks/use-toast';
-import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare, Download, FileSpreadsheet } from 'lucide-react';
+import { Shield, UserPlus, UserMinus, Search, ArrowUpDown, ArrowUp, ArrowDown, Filter, Trash2, CheckSquare, Download, FileSpreadsheet, KeyRound } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Checkbox } from '@/components/ui/checkbox';
 import { exportToCSV, exportToExcel, formatExportDate, type ExportUserData } from '@/utils/userExport';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -735,12 +736,20 @@ export default function UserManagement() {
   return (
     <PageLayout>
       <div className="container max-w-7xl py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Shield className="h-8 w-8" />
-            User Management
-          </h1>
-          <p className="text-muted-foreground mt-2">Manage user roles and permissions</p>
+        <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <Shield className="h-8 w-8" />
+              User Management
+            </h1>
+            <p className="text-muted-foreground mt-2">Manage user roles and permissions</p>
+          </div>
+          <Button asChild variant="outline">
+            <Link to="/admin/password-reset">
+              <KeyRound className="h-4 w-4 mr-2" />
+              Password reset tool
+            </Link>
+          </Button>
         </div>
 
         <div className="space-y-6">
@@ -1024,6 +1033,17 @@ export default function UserManagement() {
                           </DialogFooter>
                         </DialogContent>
                         </Dialog>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          asChild
+                          title="Send or generate a password reset link"
+                        >
+                          <Link to={`/admin/password-reset?q=${encodeURIComponent(userProfile.email)}`}>
+                            <KeyRound className="h-4 w-4 mr-2" />
+                            Reset password
+                          </Link>
+                        </Button>
                         <Button
                           size="sm"
                           variant="destructive"
