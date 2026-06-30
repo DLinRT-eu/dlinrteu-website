@@ -158,8 +158,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "secondaryTasks": ["Image Synthesis", "Registration"]
   },
   {
-    "id": "vysioner",
-    "name": "Vysioner",
+    "id": "vysioneer",
+    "name": "Vysioneer",
     "description": "Provider of AI-powered solutions for cancer care.",
     "website": "https://www.vysioneer.com/",
     "productIds": ["vysioner-vbrain"],
