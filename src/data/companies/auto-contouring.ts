@@ -123,7 +123,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "RadFormation",
     "description": "Developers of quality assurance and automation tools for radiation oncology.",
     "website": "https://radformation.com/",
-    "productIds": ["radformation-autocontour", "radformation-clearcheck"],
+    "productIds": ["radformation-autocontour"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/radformation.svg",
     "primaryTask": "Auto-Contouring"
@@ -133,7 +133,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "name": "Synaptiq",
     "description": "AI company developing solutions for medical imaging and radiation therapy.",
     "website": "https://synaptiq.io/",
-    "productIds": ["synaptiq-mediq-rt"],
+    "productIds": ["synaptiq-mediq-rt", "synaptiq-mediq-rt-4dct-pipeline"],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/synaptiq.png",
     "primaryTask": "Auto-Contouring"

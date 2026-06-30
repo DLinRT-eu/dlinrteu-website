@@ -1,71 +1,68 @@
-## Audit results — user ↔ company mapping for certifications
+# Audit: users ↔ companies ↔ products ↔ internal links
 
-### ✅ All 28 verified reps now resolve to ≥1 product
-With `getCompanyProducts` switched to canonical-id matching (previous fix) and `getCompanyIdByName`'s case-insensitive lookup, every rep id in `company_representatives` maps to products in the catalog:
+Ran a structural audit across `src/data/products/**`, `src/data/companies/**`, and the `company_representatives` table (28 verified reps). Below are the findings grouped by severity, with the fix I'd apply for each in a build-mode pass.
 
-| Rep id | Rep `company_name` | Products |
-|---|---|---|
-| accuray | Accuray® | 1 |
-| ai-medical | AI Medical | 1 |
-| brainlab | Brainlab | 1 |
-| canon-medical | Canon Medical Systems | 3 |
-| carina-ai | Carina AI | 1 |
-| claripi | ClariPi | 1 |
-| coreline-soft | Coreline Soft Co | 2 |
-| elekta | Elekta | 2 |
-| ge-healthcare | GE Healthcare (5 reps) | 8 (5 "GE Healthcare" + 3 "GE HealthCare" via case-insensitive) |
-| manteia | Manteia | 3 |
-| md-anderson | MD Anderson Cancer Center | 1 |
-| medlever | MedLever, Inc. | 4 |
-| mim-software | MIM Software (2 reps with @gehealthcare emails) | 1 |
-| mirada-medical | Mirada Medical | 1 |
-| mvision-ai | MVision AI | 4 |
-| neuralrad | NeuralRad | 1 |
-| philips-healthcare | Philips (2 reps) | 9 |
-| ptw-dosimetry | PTW (2 reps) | 1 |
-| pymedix | PyMedix | 1 |
-| radformation | RadFormation | 3 ("Radformation"+"RadFormation" case-insensitive) |
-| raysearch | RaySearch Laboratories (2 reps) | 2 |
-| siemens-healthineers | Siemens Healthineers (2 reps) | 4 |
-| subtle-medical | Subtle Medical | 6 |
-| sun-nuclear | Sun Nuclear (Mirion Medical) (2 reps) | 3 |
-| synaptiq | Synaptiq (2 reps) | 3 |
-| syntheticmr | SyntheticMR | 1 |
-| therapanacea | Therapanacea | 7 |
-| wisdom-tech | Wisdom Tech | 2 |
+## ✅ Reps → catalog (all resolve)
 
-### ⚠ Data-quality issues to clean up
+All 28 verified reps map to ≥1 product through `getCompanyIdByName` (case-insensitive + legacy aliases). No rep currently sees an empty certification list.
 
-These don't currently block any rep (none has a rep), but they leave the catalog with fragile slug fallbacks and inconsistent display names.
+One minor cleanup: rep `company_id = "syntheticmr"` has **no matching catalog entry** (only SyntheticMR's archived product `symri` exists). Lena Aredal will see an empty product list until either (a) a live SyntheticMR product is added, or (b) `symri` is un-archived. **Action:** flag, do not auto-fix — needs your input on whether SyntheticMR should be a live catalog entry.
 
-1. **Catalog typo**: `src/data/companies/auto-contouring.ts` has `id: "vysioner", name: "Vysioner"` but the product (`vysioneer-vbrain.ts` etc.) lists `company: "Vysioneer"`. Slug fallback makes them resolve to different ids (`vysioneer` vs `vysioner`) → product never appears on the Vysioner company page.
+## 🔴 Errors — broken internal references (5)
 
-2. **Casing drift `GE HealthCare` → `GE Healthcare`** in 3 product files (Spectronic, plus 2 GE files). Currently works via case-insensitive lookup but is inconsistent.
+`company.productIds` pointing to product IDs that don't exist anywhere in the catalog. These cause 404s from company pages.
 
-3. **`Spectronic Medical (a GE HealthCare company)`** product company string doesn't match the catalog entry `Spectronic Medical`. Slug fallback creates an orphan id `spectronic-medical-a-ge-healthcare-company`. Decision needed:
-   - (a) shorten to `Spectronic Medical` (matches catalog; keep parenthetical in description), **or**
-   - (b) reassign these products under GE Healthcare since the subsidiary was acquired.
 
-4. **`MedMind Technology Co., Ltd.`** product vs archived catalog `MedMind Technology` → slug mismatch.
+| Company            | Missing productId              | Likely fix                                                                                               |
+| ------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| radformation       | `radformation-clearcheck`      | Remove (no such product file; AutoContour exists as `radformation-autocontour`)                          |
+| ge-healthcare      | `ge-dlip-ct`                   | Remove (not in catalog; covered by `ge-truefidelity` etc.)                                               |
+| philips-healthcare | `philips-auto-contouring`      | Replace with `philips-mrcat-prostate-auto-contouring` (which exists but is unlinked — see orphans below) |
+| sun-nuclear        | `sun-nuclear-suncheck-patient` | Remove (no file)                                                                                         |
+| varian             | `varian-mobius3d`              | Remove from live `varian` entry (product is archived)                                                    |
 
-5. **`Quanta Computer Inc.`** product vs archived catalog `Quanta Computer` → slug mismatch.
 
-### ℹ No-rep companies (FYI, not a bug)
-AIRS Medical, AlgoMedica, Carina AI (rep exists), ClariPi (rep exists), Ever Fortune AI, Hura Imaging, Inpictura, Leo Cancer Care (archived), Limbus AI, MedCom, MedMind, Oncosoft, Quanta, RefleXion (archived), Spectronic, Taiwan Medical Imaging, United Imaging, Varian (Siemens), ViewRay (archived), Vysioneer. No outreach has been made for these yet.
+## 🟠 Orphans — products not linked from any company (3)
 
-### ℹ Cross-affiliation observed
-- `mallory.sherrill@gehealthcare.com` and `jay.obman@gehealthcare.com` are reps for **MIM Software** (GE acquired MIM). Intentional, no change.
+These show up on category pages but not on the company page.
 
-## Proposed fixes
 
-Item 1 (Vysioneer typo) is the only one that actively breaks a company page once a rep is added; items 2–5 are cosmetic. I'll apply items 1–2 unconditionally and need your decision on item 3.
+| Product                                  | Company       | Fix                                                                                      |
+| ---------------------------------------- | ------------- | ---------------------------------------------------------------------------------------- |
+| `philips-mrcat-prostate-auto-contouring` | Philips       | Add to `philips-healthcare.productIds` (replaces broken `philips-auto-contouring` above) |
+| `ge-irt-theranostics-pipeline`           | GE Healthcare | Add to `ge-healthcare.productIds`                                                        |
+| `synaptiq-mediq-rt-4dct-pipeline`        | Synaptiq      | Add to `synaptiq.productIds`                                                             |
 
-**Build-mode changes:**
-1. `src/data/companies/auto-contouring.ts` — rename `Vysioner` → `Vysioneer`, `id: "vysioner"` → `"vysioneer"`. Update `LEGACY_NAME_TO_ID` in `src/utils/companyUtils.ts` if needed.
-2. Normalize `company: "GE HealthCare"` → `"GE Healthcare"` in the 3 product files that drift.
-3. *Pending your decision* — for Spectronic Medical, MedMind, Quanta product strings.
 
-**No DB changes needed** — the only rep-affecting mismatch (Accuray ®) was already fixed in the prior turn.
+## 🟡 Warnings — company-name string drift (3)
 
-## Question for you
-For item 3 (Spectronic Medical product company string), pick (a) shorten to `"Spectronic Medical"` to match catalog, or (b) reassign products under `"GE Healthcare"`? I'll hold the plan until you confirm so I can apply items 1–5 in one pass.
+Products resolve via slug/case-insensitive fallback, but the strings drift from the canonical catalog name. Cosmetic but fragile.
+
+
+| Product                      | Current `company`    | Canonical                                      | Fix                                                                  |
+| ---------------------------- | -------------------- | ---------------------------------------------- | -------------------------------------------------------------------- |
+| `radformation-autocontour`   | "Radformation"       | "RadFormation"                                 | Normalize to "RadFormation"                                          |
+| `medmind-rt-mind-ai`         | "MedMind Technology" | catalog only has archived "MedMind Technology" | Decision: revive MedMind in live catalog, **or** archive the product |
+| `quanta-qoca-image-smart-rt` | "Quanta Computer"    | catalog only has archived "Quanta Computer"    | Same decision as MedMind                                             |
+
+
+## ✅ Clean
+
+- No duplicate product IDs.
+- No "wrong-company assignment" (where a `productIds` entry points to a product whose `company` field belongs to a different catalog entry).
+- All other reps resolve to the correct canonical id (post the prior Accuray® / GE HealthCare casing fixes).
+
+## Proposed build-mode pass
+
+I'd apply in one commit (no DB changes needed):
+
+1. **Remove broken refs** from `productIds` in `radformation`, `ge-healthcare`, `philips-healthcare`, `sun-nuclear`, and live `varian` (5 IDs).
+2. **Add 3 orphan IDs** to their respective company entries.
+3. **Normalize** `"Radformation"` → `"RadFormation"` in `src/data/products/auto-contouring/radformation.ts`.
+4. **Hold** on MedMind / Quanta / SyntheticMR pending your decision (revive in catalog vs. archive product).
+
+## Questions for you
+
+- **MedMind & Quanta**: revive the catalog entries (live) such that next to the vendors with live AI product in the catalog also the company entry.
+- **SyntheticMR**: same question — Lena (verified rep) currently sees no products.
+- **Varian (live)**: should `varian-mobius3d` be removed from the live company's `productIds`

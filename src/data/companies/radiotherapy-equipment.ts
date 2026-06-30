@@ -34,8 +34,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "description": "Leading provider of radiation therapy quality assurance systems and AI-powered treatment planning tools. Part of Mirion Medical since 2021.",
     "website": "https://www.sunnuclear.com/",
     "productIds": [
-      "plan-ai",
-      "sun-nuclear-suncheck-patient"
+      "plan-ai"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/SunNuclear.png",
@@ -71,8 +70,7 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "description": "Global leader in radiotherapy solutions including treatment delivery systems, AI-assisted adaptive therapy (Ethos), oncology software, and patient quality assurance tools. Part of Siemens Healthineers since 2021.",
     "website": "https://www.varian.com/",
     "productIds": [
-      "varian-ethos-ai-segmentation",
-      "varian-mobius3d"
+      "varian-ethos-ai-segmentation"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/varian.jpg",

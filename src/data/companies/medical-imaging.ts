@@ -11,8 +11,8 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
       "ge-auto-segmentation",
       "ge-air-recon-dl",
       "ge-air-recon-dl-enhancement",
-      "ge-dlip-ct",
       "ge-healthcare-irt",
+      "ge-irt-theranostics-pipeline",
       "ge-mr-contour-dl",
       "ge-precision-dl",
       "ge-truefidelity"
@@ -28,7 +28,7 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "description": "Global leader in health technology, offering comprehensive radiation oncology solutions.",
     "website": "https://www.philips.com/healthcare",
     "productIds": [
-      "philips-auto-contouring",
+      "philips-mrcat-prostate-auto-contouring",
       "philips-mrcat-head-and-neck",
       "philips-mrcat-brain",
       "philips-mrcat-pelvis",
