@@ -425,7 +425,7 @@ serve(async (req) => {
 
     if (sendError) {
       console.error('Resend error', sendError);
-      return new Response(JSON.stringify({ error: 'Failed to send invitation email' }), {
+      return new Response(JSON.stringify({ error: `Failed to send invitation email: ${(sendError as any)?.message ?? JSON.stringify(sendError)}` }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -437,7 +437,8 @@ serve(async (req) => {
     );
   } catch (err) {
     console.error('invite-company-representative error', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    const message = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: `Internal server error: ${message}` }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
