@@ -41,7 +41,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "name": "ClariPi",
     "description": "Korean AI medical imaging company specializing in CT image denoising and dose reduction solutions, founded in 2015 with roots at Seoul National University.",
     "website": "https://claripi.com/",
-    "productIds": ["claripi-clarict-ai"],
+    "productIds": ["claripi-clarict-ai", "claripi-clariace"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/claripi.jpg",
     "primaryTask": "Image Enhancement"

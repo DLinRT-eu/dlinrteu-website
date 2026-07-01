@@ -151,5 +151,83 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-18",
     lastRevised: "2026-06-18",
     source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
+  },
+  {
+    id: "claripi-clariace",
+    name: "ClariACE",
+    company: "ClariPi",
+    category: "Image Enhancement",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/blob/main/src/data/products/image-enhancement/claripi.ts",
+    description: "AI-powered iodine contrast enhancement solution for contrast-enhanced CT (CECT). Uses a pre-trained deep-learning model to selectively boost iodine contrast signal in CT images without amplifying noise, supporting reduced iodinated contrast agent dose while preserving diagnostic image quality.",
+    certification: "MFDS",
+    logoUrl: "/logos/claripi.jpg",
+    companyUrl: "https://claripi.com/",
+    productUrl: "https://claripi.com/clari-ace/",
+    anatomicalLocation: ["Chest", "Heart", "Abdomen", "Pelvis"],
+    modality: "CT",
+    diseaseTargeted: ["Contrast-enhanced imaging", "Cardiac imaging", "Oncology imaging"],
+    keyFeatures: [
+      "Selective iodine contrast enhancement",
+      "Supports reduction of iodinated contrast agent dose",
+      "Vendor-agnostic across CT scanners and contrast agents",
+      "User-adjustable contrast boost ratio",
+      "DICOM-compliant, integrates with PACS"
+    ],
+    technicalSpecifications: {
+      population: "Adult",
+      input: ["DICOM CECT images"],
+      inputFormat: ["DICOM"],
+      output: ["Contrast-enhanced CT images"],
+      outputFormat: ["DICOM"]
+    },
+    technology: {
+      integration: ["PACS"],
+      deployment: ["Standalone desktop", "Local virtualization"],
+      triggerForAnalysis: "Automated workflow",
+      processingTime: "Not publicly disclosed"
+    },
+    regulatory: {
+      ce: { status: "not_applicable" },
+      fda: { status: "not_applicable" },
+      intendedUseStatement: "ClariACE is intended to enhance the iodine contrast signal in contrast-enhanced CT (CECT) DICOM images to support clinical interpretation, including in cases with reduced iodinated contrast dose."
+    },
+    market: {
+      onMarketSince: "2021",
+      distributionChannels: ["Direct sales", "Distribution partners"]
+    },
+    evidence: [
+      {
+        type: "Regulatory Clearance",
+        description: "Korea MFDS approval displayed on the official product page (KoreaMFDS mark shown next to the ClariACE product heading).",
+        link: "https://claripi.com/clari-ace/"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Kim et al. (2024). Diagnostic Usefulness of Contrast Enhancement and Noise Reduction of Artificial Intelligence-based ClariACE in Delay Enhancement Imaging of Cardiac CT. J Korean Soc CT Technol 26(2):33. Single-center evaluation on cardiac CT delayed-phase imaging; vendor-affiliated context (Korean CT technologists' society journal, small cohort).",
+        link: "https://doi.org/10.31320/jksct.2024.26.2.33"
+      }
+    ],
+    limitations: [
+      "No FDA 510(k) or CE Mark identified in public regulatory databases at the time of listing; recognised regulatory status limited to Korea MFDS.",
+      "Public peer-reviewed evidence limited to a single small-cohort application study in cardiac CT delayed-phase imaging; no multicenter or prospective independent validation identified.",
+      "Training data provenance (dataset size, scanner mix, patient demographics) not publicly disclosed.",
+      "Quantitative contrast-dose-reduction magnitude achievable while preserving diagnostic performance is not publicly quantified."
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "E1 (Basic Evidence): recognised regulatory approval (Korea MFDS) plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed-phase, single centre, small cohort). No independent multicenter or prospective external validation identified.",
+    clinicalImpactNotes: "I1 (Image-quality endpoint): available evidence reports contrast enhancement and noise reduction metrics rather than diagnostic-accuracy or patient-outcome endpoints.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "R2 based on E1 + single recognised regulatory approval (MFDS): additional local validation and workflow testing required before adoption; broader multi-regional approvals and independent evidence would be needed to raise readiness.",
+    evidenceVendorIndependent: false,
+    evidenceMultiCenter: false,
+    evidenceMultiNational: false,
+    evidenceProspective: false,
+    evidenceExternalValidation: false,
+    clinicalEvidence: "Korea MFDS approval plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed enhancement, single centre, Korea).",
+    releaseDate: "2021",
+    lastUpdated: "2026-07-01",
+    lastRevised: "2026-07-01",
+    source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
   }
 ];
