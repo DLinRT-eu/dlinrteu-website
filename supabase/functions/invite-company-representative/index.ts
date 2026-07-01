@@ -243,7 +243,7 @@ serve(async (req) => {
 
       if (linkError || !linkData?.properties?.action_link) {
         console.error('generateLink error', linkError);
-        return new Response(JSON.stringify({ error: 'Failed to generate password-setup link.' }), {
+        return new Response(JSON.stringify({ error: `Failed to generate password-setup link: ${linkError?.message ?? 'no action_link returned'}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
