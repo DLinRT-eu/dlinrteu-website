@@ -42,7 +42,7 @@ const StructuresChart: React.FC<StructuresChartProps> = ({
       <CardContent>
         <div id="chart-structure" ref={chartRef}>
         <ResponsiveChartWrapper minHeight={isMobile ? "300px" : "400px"}>
-          <ChartContainer className="h-full" config={{}}>
+          <ChartContainer className="h-full w-full" config={{}}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
                 data={displayData}

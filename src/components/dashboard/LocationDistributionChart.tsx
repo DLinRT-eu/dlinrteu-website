@@ -5,7 +5,7 @@ import {
   ChartContainer, 
   ChartTooltipContent
 } from "@/components/ui/chart";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Text, PieLabelRenderProps } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, PieLabelRenderProps } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ResponsiveChartWrapper from './ResponsiveChartWrapper';
 import { CircleCheckIcon } from 'lucide-react';
@@ -124,8 +124,8 @@ const LocationDistributionChart: React.FC<LocationDistributionChartProps> = ({
       <CardContent>
         <div id="chart-location" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="350px">
-          <ChartContainer className="h-full" config={{}}>
-            <ResponsiveContainer>
+          <ChartContainer className="h-full w-full" config={{}}>
+            <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={validatedLocationData}

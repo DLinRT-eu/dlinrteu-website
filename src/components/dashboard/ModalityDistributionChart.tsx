@@ -108,7 +108,7 @@ const ModalityDistributionChart: React.FC<ModalityDistributionChartProps> = ({
       <CardContent>
         <div id="chart-modality" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="320px">
-          <ChartContainer className="h-full" config={{}}>
+          <ChartContainer className="h-full w-full" config={{}}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={validatedModalityData} margin={isMobile ? { top: 5, right: 10, left: 5, bottom: 70 } : { top: 5, right: 30, left: 10, bottom: 30 }}>
                 <XAxis 

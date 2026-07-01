@@ -140,7 +140,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         {view === "3d" ? (
           <EvidenceImpactMatrix3D products={filteredProducts} />
         ) : (
-        <>
+        <div>
         <div id="chart-evidence-impact" ref={chartRef} className="overflow-x-auto">
           <div className="min-w-[640px]">
             {/* Column headers */}
@@ -157,7 +157,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
             {/* Grid rows (E3 at top, E0 at bottom) */}
             <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px">
               {RIGOR_LEVELS.map(rig => (
-                <React.Fragment key={rig.key}>
+                <div key={rig.key} className="contents">
                   {/* Row label */}
                   <div className="flex items-center justify-end pr-2 min-h-[72px]">
                     <div>
@@ -221,7 +221,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                       </div>
                     );
                   })}
-                </React.Fragment>
+                </div>
               ))}
             </div>
           </div>
@@ -239,7 +239,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         <p className="mt-3 text-sm text-muted-foreground text-center">
           Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
         </p>
-        </>
+        </div>
         )}
       </CardContent>
     </Card>

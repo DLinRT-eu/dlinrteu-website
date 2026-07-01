@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useMemo, useState, Suspense, lazy } from 'react';
 import dataService from "@/services/DataService";
 import { getAllOptions } from "@/utils/filterOptions";
 import { useToast } from "@/hooks/use-toast";
@@ -32,11 +32,11 @@ const Dashboard = () => {
   const isMobile = useIsMobile();
   
   // Get all data needed for charts
-  const products = dataService.getAllProducts();
-  const companies = dataService.getAllCompanies();
-  const allTasks = getAllOptions('category');
-  const allLocations = getAllOptions('anatomicalLocation');
-  const allModalities = getAllOptions('modality');
+  const products = useMemo(() => dataService.getAllProducts(), []);
+  const companies = useMemo(() => dataService.getAllCompanies(), []);
+  const allTasks = useMemo(() => getAllOptions('category'), []);
+  const allLocations = useMemo(() => getAllOptions('anatomicalLocation'), []);
+  const allModalities = useMemo(() => getAllOptions('modality'), []);
   
   // Structured data for SEO
   const structuredData = {
