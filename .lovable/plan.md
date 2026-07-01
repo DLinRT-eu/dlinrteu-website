@@ -1,45 +1,46 @@
-## Problem
+## Scope fit
 
-Sending an invite to a company representative fails with the generic Supabase client error `Edge Function returned a non-2xx status code`. That message means the function replied with a 500, but the actual server-side reason is being swallowed by both sides:
+Both proposed products fit the platform:
 
-- The edge function catches errors and returns a hardcoded `{ error: 'Internal server error' }` / `'Failed to send invitation email'` etc., without the underlying message.
-- The client (`InviteCompanyRepDialog.tsx`) only surfaces `error.message` from `functions.invoke`, which is the generic supabase-js wrapper, not the JSON body the function returned.
+- **ClariCT-PET** — PET/CT image enhancement, radiotracer dose reduction, scan-time reduction. PET/CT is routinely used for RT target delineation, and the existing ClariCT.AI (diagnostic CT denoising) is already catalogued, so this is consistent with current inclusion practice.
+- **ClariACE** — CT contrast-media enhancement / contrast-dose reduction. Same inclusion logic as ClariCT.AI: AI-based image enhancement on CT used upstream of RT planning.
 
-So we can't see what actually broke. Recent activity likely to have regressed this: `@supabase/supabase-js` bump to 2.108.2 across all edge functions and RLS/grants tightening on `profiles` / `company_representatives` / `company_invitations` / `user_roles` from the recent security passes.
+Both are AI/DL products (neural-network denoising / enhancement), so they clear the AI-DL technology threshold. Inclusion is contingent on at least one recognised regulatory approval (CE, FDA, MDR-exempt, NMPA, TGA, TFDA, PMDA, MFDS, Health Canada, ANVISA, MHRA, or UKCA) per the catalog inclusion gate. I'll confirm this from public sources before adding each product; any product without confirmed approval will be held back and flagged to David rather than added speculatively.
 
-## Fix
+## Files to change
 
-### 1. Surface real errors on the client
+1. `src/data/products/image-enhancement/claripi.ts`
+   - Append two new `ProductDetails` entries: `claripi-clarict-pet` and `claripi-clariace`.
+   - Use the same structure as `claripi-clarict-ai` (regulatory, technicalSpecifications, technology, evidence, evidence rigor/impact, adoption readiness, source disclosure).
+   - Only fill fields that have a disclosed public source (ClariPi product pages, FDA 510(k) DB, CE/MDR listings, peer-reviewed papers). Unknown fields left empty rather than invented. Evidence rigor/impact set conservatively (likely E1/I1 or E0/I0 pending literature search) with notes explaining why.
 
-In `src/components/admin/InviteCompanyRepDialog.tsx`, when `functions.invoke` throws a `FunctionsHttpError`, read `error.context.response` and extract the JSON `error` field before toasting. Fall back to `error.message` otherwise. This gives us (and the admin) the real reason immediately.
+2. `src/data/products/image-enhancement/index.ts`
+   - Already imports `CLARIPI_PRODUCTS` as a spread array, so new entries surface automatically. Verify no per-id export is required.
 
-### 2. Return the real error from the edge function
+3. `src/data/companies/specialized-solutions.ts`
+   - Extend `productIds` on the `claripi` company from `["claripi-clarict-ai"]` to include the two new IDs.
 
-In `supabase/functions/invite-company-representative/index.ts`:
-- In the outer `catch`, include `err?.message` and `err?.stack` in the JSON response (safe — admin-only endpoint).
-- In each intermediate failure branch (`createUser`, `generateLink`, `resend.emails.send`, `profiles.upsert`, `user_roles.upsert`, `company_invitations.insert`), include the underlying error's `message` / `code` / `details` in both the log line and the JSON response.
-- Add a top-of-function log with `payload` (minus `message` body) so we can correlate.
+4. Company certification program
+   - The `claripi` company is already enrolled and David (ClariPi) is the verified representative for ClariCT.AI. Once the new products exist in the catalog, they automatically appear in his Company Dashboard under ClariPi and become eligible for the standard certification workflow (verify → sign-off → "Verified by Company" badge). No schema change needed — the workflow keys off `company` + user role.
 
-### 3. Probe the deployed function
+## Research to do before writing entries
 
-After redeploy, call the function via `supabase--curl_edge_functions` with a throwaway test email under both `forceRegister: false` and `forceRegister: true` to capture the concrete failure (Resend domain, RLS on `company_invitations`, `auth.admin.createUser` scope, etc.), then apply the targeted fix.
+For each of ClariCT-PET and ClariACE, gather from public sources:
 
-### 4. Apply the concrete fix
+- Regulatory status (FDA 510(k) number, CE class/MDR, MFDS, etc.) — required for inclusion.
+- Intended-use statement, modality, anatomical scope, deployment/integration.
+- Any peer-reviewed evidence (PubMed) to set `evidenceRigor` / `clinicalImpact` and populate the `evidence[]` array with real citations only — no fabricated papers (per project no-hallucination rule).
+- `trainingData` / `evaluationData` only if a source discloses them; otherwise omit and note `disclosureLevel`.
 
-Most likely candidates once the real error is visible:
-- Missing `service_role` GRANT on `company_invitations` / `company_representatives` after the recent security migrations → add via migration.
-- `Resend` domain / API key rejection → surface a clear "check RESEND_API_KEY / verified domain `dlinrt.eu`" toast.
-- `auth.admin.generateLink` returning no `action_link` because the auth redirect allowlist doesn't include `${SITE_URL}/update-password` → note in the toast.
+## Reply to David
 
-Only the diagnosis+error-plumbing changes in steps 1–2 are guaranteed; step 4 is decided from the response of step 3.
-
-## Files touched
-
-- `src/components/admin/InviteCompanyRepDialog.tsx` — richer error extraction.
-- `supabase/functions/invite-company-representative/index.ts` — propagate underlying error text and add logs.
-- Possibly a new migration under `supabase/migrations/` if grants/policies are the root cause (added only after step 3 confirms).
+After the entries are live, send a short reply pointing him to:
+- The two new product pages.
+- The standard company certification flow in his existing dashboard (no separate enrollment needed).
+- The Field Reference and Review Guide so he can propose additions / corrections directly via the visual editor.
 
 ## Out of scope
 
-- Unrelated `EvidenceImpactScatterChart` React.Fragment warning visible in console (Recharts v3 dev warning; not causing this failure).
-- No UI redesign of the invite dialog.
+- No changes to schema, routing, or UI.
+- No changes to ClariCT.AI's existing entry.
+- Any ClariPi product without a confirmed recognised regulatory approval will not be added; I'll flag it back to David instead.
