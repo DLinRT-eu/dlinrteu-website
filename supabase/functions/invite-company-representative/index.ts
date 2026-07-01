@@ -144,14 +144,14 @@ serve(async (req) => {
             userAlreadyExisted = true;
           } else {
             console.error('createUser said exists but listUsers returned no match', createError);
-            return new Response(JSON.stringify({ error: 'Account already exists but could not be located.' }), {
+            return new Response(JSON.stringify({ error: `Account already exists but could not be located: ${createError.message}` }), {
               status: 500,
               headers: { ...corsHeaders, 'Content-Type': 'application/json' },
             });
           }
         } else {
           console.error('forceRegister createUser error', createError);
-          return new Response(JSON.stringify({ error: 'Failed to create account.' }), {
+          return new Response(JSON.stringify({ error: `Failed to create account: ${createError.message}` }), {
             status: 500,
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           });
