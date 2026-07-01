@@ -156,9 +156,10 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
 
             {/* Grid rows (E3 at top, E0 at bottom) */}
             <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px">
-              {RIGOR_LEVELS.map(rig => [
+              {RIGOR_LEVELS.map(rig => (
+                <div key={rig.key} className="contents">
                   {/* Row label */}
-                  <div key={`${rig.key}-label`} className="flex items-center justify-end pr-2 min-h-[72px]">
+                  <div className="flex items-center justify-end pr-2 min-h-[72px]">
                     <div>
                       <div className="text-xs font-semibold text-foreground text-right">{rig.label}</div>
                       <div className="text-[10px] text-muted-foreground text-right">{rig.name}</div>
@@ -166,7 +167,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                   </div>
 
                   {/* Cells */}
-                  ...IMPACT_LEVELS.map(imp => {
+                  {IMPACT_LEVELS.map(imp => {
                     const key = `${rig.key}-${imp.key}`;
                     const products = cellMap[key] ?? [];
                     const hasProducts = products.length > 0;
@@ -219,8 +220,9 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                         </TooltipProvider>
                       </div>
                     );
-                  })
-                ])}
+                  })}
+                </div>
+              ))}
             </div>
           </div>
         </div>
