@@ -140,7 +140,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         {view === "3d" ? (
           <EvidenceImpactMatrix3D products={filteredProducts} />
         ) : (
-        <>
+        <div>
         <div id="chart-evidence-impact" ref={chartRef} className="overflow-x-auto">
           <div className="min-w-[640px]">
             {/* Column headers */}
@@ -156,10 +156,9 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
 
             {/* Grid rows (E3 at top, E0 at bottom) */}
             <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px">
-              {RIGOR_LEVELS.map(rig => (
-                <React.Fragment key={rig.key}>
+              {RIGOR_LEVELS.map(rig => [
                   {/* Row label */}
-                  <div className="flex items-center justify-end pr-2 min-h-[72px]">
+                  <div key={`${rig.key}-label`} className="flex items-center justify-end pr-2 min-h-[72px]">
                     <div>
                       <div className="text-xs font-semibold text-foreground text-right">{rig.label}</div>
                       <div className="text-[10px] text-muted-foreground text-right">{rig.name}</div>
@@ -167,7 +166,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                   </div>
 
                   {/* Cells */}
-                  {IMPACT_LEVELS.map(imp => {
+                  ...IMPACT_LEVELS.map(imp => {
                     const key = `${rig.key}-${imp.key}`;
                     const products = cellMap[key] ?? [];
                     const hasProducts = products.length > 0;
@@ -220,9 +219,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                         </TooltipProvider>
                       </div>
                     );
-                  })}
-                </React.Fragment>
-              ))}
+                  })
+                ])}
             </div>
           </div>
         </div>
@@ -239,7 +237,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         <p className="mt-3 text-sm text-muted-foreground text-center">
           Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
         </p>
-        </>
+        </div>
         )}
       </CardContent>
     </Card>

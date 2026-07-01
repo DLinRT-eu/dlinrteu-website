@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { cn } from "@/lib/utils";
-import { useChartResize } from "@/hooks/use-chart-resize";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileChartEnhancer from "@/components/charts/MobileChartEnhancer";
 
@@ -22,14 +21,12 @@ const ResponsiveChartWrapper: React.FC<ResponsiveChartWrapperProps> = ({
   description,
   exportHandler
 }) => {
-  const { containerRef, dimensions } = useChartResize();
   const isMobile = useIsMobile();
 
   const chartContent = (
     <div 
-      ref={containerRef}
       className={cn("w-full", className)}
-      style={{ minHeight, minWidth: '100px' }}
+      style={{ height: minHeight, minHeight, minWidth: '100px' }}
     >
       {children}
     </div>

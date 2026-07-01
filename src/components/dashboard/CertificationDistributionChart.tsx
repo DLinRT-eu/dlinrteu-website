@@ -89,8 +89,8 @@ const CertificationDistributionChart: React.FC<CertificationDistributionChartPro
       <CardContent>
         <div id="chart-certification" ref={chartRef}>
         <ResponsiveChartWrapper minHeight="350px">
-          <ChartContainer className="h-full" config={{}}>
-            <ResponsiveContainer>
+          <ChartContainer className="h-full w-full" config={{}}>
+            <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={validatedCertificationData}
