@@ -73,7 +73,13 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       { name: "RSL Prostate 3LVS", anatomicalSite: "Prostate", technique: "Photons (Triple Level)", intent: "Curative" },
       
       // Rectum
-      { name: "RSL Rectum", anatomicalSite: "Rectum", technique: "Photons (Standard)", intent: "Curative" }
+      { name: "RSL Rectum", anatomicalSite: "Rectum", technique: "Photons (Standard)", intent: "Curative" },
+
+      // New in RayStation v2026 (July 2026 release). Subject to regulatory clearance in some markets;
+      // not available for use or sale in USA/Canada per vendor. Exact catalogue names pending publication.
+      { name: "RSL Breast Locoregional (v2026)", anatomicalSite: "Breast", technique: "Photons (Locoregional)", intent: "Curative" },
+      { name: "RSL Lung Proton (v2026)", anatomicalSite: "Lung", technique: "Protons (PBS)", intent: "Curative" },
+      { name: "RSL Prostate (v2026)", anatomicalSite: "Prostate", technique: "Photons", intent: "Curative" }
     ],
     technicalSpecifications: {
       population: "Adult patients",
