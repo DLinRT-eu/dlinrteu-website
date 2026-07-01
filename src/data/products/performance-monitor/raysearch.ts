@@ -68,8 +68,8 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales"]
     },
     trainingData: {
-      disclosureLevel: "not_applicable",
-      description: "RayIntelligence is an analytics platform and does not itself train or run deep-learning models; it consumes and monitors outputs from AI products such as RayStation Deep Learning Segmentation."
+      disclosureLevel: "none",
+      description: "Not applicable — RayIntelligence is an analytics platform and does not itself train or run deep-learning models; it consumes and monitors outputs from AI products such as RayStation Deep Learning Segmentation."
     },
     evaluationData: {
       description: "No peer-reviewed clinical evaluation of RayIntelligence located as of 2026-07-01. Vendor materials describe deployments (e.g. CHUV Lausanne first order, 2021) and v2025/v2026 feature releases.",
