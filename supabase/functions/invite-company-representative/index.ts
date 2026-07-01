@@ -366,7 +366,7 @@ serve(async (req) => {
 
       if (insertError || !created) {
         console.error('Failed to create invitation', insertError);
-        return new Response(JSON.stringify({ error: 'Failed to create invitation' }), {
+        return new Response(JSON.stringify({ error: `Failed to create invitation: ${insertError?.message ?? 'unknown'}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
