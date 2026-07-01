@@ -291,7 +291,7 @@ serve(async (req) => {
 
       if (sendError) {
         console.error('Resend error (forceRegister)', sendError);
-        return new Response(JSON.stringify({ error: 'Account created, but failed to send password-setup email.' }), {
+        return new Response(JSON.stringify({ error: `Account created, but failed to send password-setup email: ${(sendError as any)?.message ?? JSON.stringify(sendError)}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
