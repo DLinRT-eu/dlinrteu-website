@@ -81,11 +81,11 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    version: "12.0",
+    version: "2026",
     releaseDate: "2023-12-01",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement",
+    lastUpdated: "2026-07-01",
+    lastRevised: "2026-07-01",
+    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [
       {
@@ -97,6 +97,11 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Dedicated breast/thorax validation of RayStation Deep Learning Segmentation. Acta Oncologica 2023.",
         link: "https://doi.org/10.1080/0284186X.2023.2270152"
+      },
+      {
+        type: "Vendor Release Notes",
+        description: "RayStation v2026 release page — machine learning innovations: >30 new DLS structures (bowel, female pelvic anatomies, prostate bed, bronchial tree, pediatric support). Vendor states v2026 is subject to regulatory clearance in some markets and is not available in USA/Canada.",
+        link: "https://www.raysearchlabs.com/raystation-v2026/"
       }
     ]
   }
