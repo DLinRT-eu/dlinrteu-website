@@ -168,7 +168,7 @@ serve(async (req) => {
       }
 
       // Ensure profile row (handle_new_user trigger may have created one)
-      await supabaseAdmin.from('profiles').upsert(
+      const { error: profileErr } = await supabaseAdmin.from('profiles').upsert(
         {
           id: userId,
           email: normalizedEmail,
@@ -180,11 +180,13 @@ serve(async (req) => {
         },
         { onConflict: 'id' }
       );
+      if (profileErr) console.error('profiles upsert error', profileErr);
 
       // Assign company role
-      await supabaseAdmin
+      const { error: roleErr } = await supabaseAdmin
         .from('user_roles')
         .upsert({ user_id: userId, role: 'company' }, { onConflict: 'user_id,role' });
+      if (roleErr) console.error('user_roles upsert error', roleErr);
 
       // Create verified company representative link (idempotent by user+company)
       const { data: existingRepRow } = await supabaseAdmin
@@ -211,7 +213,7 @@ serve(async (req) => {
 
       // Record an accepted invitation row for audit purposes
       const forceToken = crypto.randomUUID();
-      const { data: forceInvitation } = await supabaseAdmin
+      const { data: forceInvitation, error: forceInvErr } = await supabaseAdmin
         .from('company_invitations')
         .insert({
           email: normalizedEmail,
@@ -229,6 +231,7 @@ serve(async (req) => {
         })
         .select('id')
         .single();
+      if (forceInvErr) console.error('company_invitations insert (force) error', forceInvErr);
 
       // Generate a Set-Password (recovery) link
       const redirectTo = `${SITE_URL}/update-password`;
