@@ -1,8 +1,11 @@
 import { ProductDetails } from "@/types/productDetails";
 import { PTW_PRODUCTS } from "./ptw";
 import { MVISION_PERFORMANCE_PRODUCTS } from "./mvision";
+import { RAYSEARCH_PERFORMANCE_PRODUCTS } from "./raysearch";
 
 export const PERFORMANCE_MONITOR_PRODUCTS: ProductDetails[] = [
   ...PTW_PRODUCTS,
-  ...MVISION_PERFORMANCE_PRODUCTS
+  ...MVISION_PERFORMANCE_PRODUCTS,
+  ...RAYSEARCH_PERFORMANCE_PRODUCTS
 ];
+
