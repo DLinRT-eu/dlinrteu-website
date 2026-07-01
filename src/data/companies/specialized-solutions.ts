@@ -18,11 +18,11 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "name": "RaySearch Laboratories",
     "description": "Developer of innovative software solutions for radiation therapy treatment planning.",
     "website": "https://www.raysearchlabs.com",
-    "productIds": ["raysearch-raystation", "raysearch-raystation-planning"],
+    "productIds": ["raysearch-raystation", "raysearch-raystation-planning", "raysearch-rayintelligence"],
     "category": "Specialized Solutions",
     "logoUrl": "/logos/raystation.jpg",
     "primaryTask": "Treatment Planning",
-    "secondaryTasks": ["Auto-Contouring"]
+    "secondaryTasks": ["Auto-Contouring", "Performance Monitor"]
   },
   {
     "id": "airs-medical",
