@@ -1,54 +1,39 @@
-## Goal
+## Source verification
 
-Add RaySearch **RayIntelligence** to the catalogue as a **Performance Monitor** entry, aligned with the existing pattern used for PTW Aqualis and MVISION performance-monitor products, because RayIntelligence v2026 introduces explicit monitoring of AI outputs (Deep Learning Segmentation performance monitoring).
+Fetched https://www.raysearchlabs.com/raystation-v2026/ (2026-07-01). Confirmed:
+- **Machine learning innovations**: >30 new DLS structures (bowel, female pelvic anatomies, prostate bed, bronchial tree, pediatric support, etc.); 3 new DL planning models (breast locoregional, lung proton, prostate).
+- Vendor note: *"Subject to regulatory clearance in some markets. RayStation v2026 is not available for use or sale in the USA or Canada."* — so CE/FDA status of these new models is not confirmed by this page and no new K-number is announced.
+- No new peer-reviewed evidence linked from the release page.
 
-## Rationale & fit
+## Planned changes (data only, minimal intervention)
 
-RayIntelligence is an oncology analytics platform. Per project policy, Performance Monitor entries are included when they explicitly monitor AI-generated outputs. RayIntelligence v2026 qualifies:
-- "AI performance monitoring … RayIntelligence v2026 introduces Deep Learning Segmentation monitoring" (source: raysearchlabs.com/rayintelligence, retrieved 2026-07-01).
-- Additional non-AI-monitoring features (plan benchmarking, device utilization, expertise mapping) will be listed as features but the product's inclusion basis is the AI-monitoring capability.
+### 1. `src/data/products/auto-contouring/raysearch.ts` (DLS)
+- Bump `version` → `2026`, `releaseDate` → `2025-11` placeholder replaced by "RayStation v2026" note (keep 2023-12 for regulatory-cleared baseline; add v2026 to notes).
+- Update `lastUpdated` / `lastRevised` → `2026-07-01`.
+- Extend `evidenceRigorNotes` with a v2026 line: ">30 new DLS structures added in RayStation v2026 (bowel, female pelvic anatomies incl. previously-investigational uterus/ovaries/vagina, prostate bed, bronchial tree, pediatric support). Vendor states v2026 is subject to local regulatory clearance and not available in USA/Canada; new structures therefore listed as (unverified) pending confirmation of CE/FDA scope."
+- Append new structure entries to `RAYSTATION_SUPPORTED_STRUCTURES` in `raysearch-structures.ts` with the `(unverified)` suffix (per structure-status memory), covering the vendor-named additions only:
+  - Pelvis Female: Uterus, Ovary_L, Ovary_R, Vagina — **remove the `(investigational)` suffix** since v2026 has now released them (still `(unverified)` regulatory-wise).
+  - Pelvis Male: Prostate_Bed
+  - Abdomen: Bowel_Small, Bowel_Large (bowel structures)
+  - Thorax: Bronchial_Tree
+  - Pediatric: general "Pediatric support" flag added only in evidenceRigorNotes (no specific structure names disclosed by vendor — do not fabricate).
+- Add a new `evidence` entry citing the RaySearch v2026 release page.
+- Add `source` reference to the v2026 page.
 
-Classification:
-- `usesAI: false` (analytics tool; doesn't itself run DL models — matches PTW/MVISION performance-monitor precedent).
-- `monitorsAIProducts: ["RaySearch Deep Learning Segmentation (RayStation)", "Auto-Contouring outputs"]`.
-- Category: `Performance Monitor`.
+### 2. `src/data/products/treatment-planning/raysearch-planning.ts` (DL Dose Prediction)
+- Bump `version` → `2026`, `lastUpdated`/`lastRevised` → `2026-07-01`.
+- Append 3 new models to `dosePredictionModels` (names inferred generically; keep neutral since exact catalogue names for v2026 aren't public yet — mark with `(v2026)` suffix to signal preliminary):
+  - `RSL Breast Locoregional (v2026)` — Breast, Photons (Locoregional), Curative
+  - `RSL Lung Proton (v2026)` — Lung, Protons (PBS), Curative
+  - `RSL Prostate (v2026)` — Prostate, Photons, Curative
+- Update `evidenceRigorNotes` to mention v2026 additions and vendor's regulatory caveat.
+- Add v2026 release page to `evidence` list and `source`.
+- Add to `limitations`: "v2026 models subject to regulatory clearance in some markets; not available in USA/Canada per vendor."
 
-## Inclusion-gate caveat (needs confirmation before merge)
+### 3. No changes to evidence axes (E2/I2) or company records
+- Release page provides marketing info only — no new peer-reviewed studies. E/I/R levels unchanged.
 
-The project's inclusion gate requires CE / FDA / MDR-exempt / NMPA / etc. RaySearch press releases mark RayIntelligence with "®*" (subject to regulatory registration in some markets). RaySearch holds an EU MDR QMS certificate (CE 2862), but I have not confirmed whether RayIntelligence itself is CE-marked as a medical device, is MDR-exempt (analytics/decision-support outside MDR scope), or is still pending. Plan:
-1. Attempt to confirm CE/FDA status from RaySearch regulatory page and EUDAMED.
-2. If confirmed cleared or MDR-exempt → publish live.
-3. If pending only → publish under `/products/pipeline` (Tier 2) instead, per Pipeline Products Hub policy.
-
-## Files to add/modify
-
-1. **New product file** `src/data/products/performance-monitor/raysearch.ts`
-   - Full `ProductDetails` for `raysearch-rayintelligence` with:
-     - name, company "RaySearch Laboratories", `companyUrl`, `productUrl`, `githubUrl`
-     - description, keyFeatures (AI monitoring, plan benchmarking, device utilization, expertise mapping)
-     - `modality: ["Treatment Planning System Data"]`, `anatomicalLocation: ["Agnostic"]`
-     - `technicalSpecifications` (input: TPS/OIS/RIS data; output: dashboards/analytics)
-     - `technology`: cloud/on-prem integration with RayStation and RayCare
-     - `regulatory`: filled after confirmation (see caveat)
-     - `evidenceRigor: "E0"`, `clinicalImpact: "I0"`, `adoptionReadiness: "R1"` initially — no peer-reviewed evaluations located; upgrade later if evidence is found.
-     - `usesAI: false`, `monitorsAIProducts: [...]`
-     - `trainingData` / `evaluationData`: `disclosureLevel: "not_applicable"` (no model)
-     - `source`: raysearchlabs.com/rayintelligence + v2025/v2026 press releases, with `sourceRetrievedOn: 2026-07-01`.
-
-2. **`src/data/products/performance-monitor/index.ts`** — export `RAYSEARCH_PERFORMANCE_PRODUCTS`.
-
-3. **`src/data/companies/specialized-solutions.ts`** — append `raysearch-rayintelligence` to the RaySearch `productIds` array and add `"Performance Monitor"` to `secondaryTasks`.
-
-4. No changes to routing, task taxonomy, or shared UI — the Performance Monitor category and monitoring badges already exist.
-
-## Out of scope
-
-- No changes to existing RayStation / RayStation Planning entries.
-- No changes to design or shared components.
-- No auto-editing of other product files.
-
-## Verification after implementation
-
-- `tsgo` typecheck.
-- Confirm product appears on `/products?category=Performance Monitor` and on the RaySearch company page.
-- Confirm "Monitors AI Products" badge renders with the referenced items.
+## What I will NOT do
+- Not fabricate specific pediatric structure names or exact catalogue model IDs beyond what the release page states.
+- Not upgrade evidence rigor without a peer-reviewed source.
+- Not change regulatory certification fields (still CE & FDA per K240398 for prior versions).
