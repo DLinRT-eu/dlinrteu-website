@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { ProductDetails } from '@/types/productDetails';
 import { countTotalModels } from '@/utils/modelCounting';
 import { filterProducts } from '@/utils/productFiltering';
@@ -19,40 +19,55 @@ export const useChartData = (
   selectedModality: string,
   countingMode: 'models' | 'products' = 'models'
 ) => {
-  const [structureData, setStructureData] = useState<{name: string, value: number}[]>([]);
-  const [structureTypeData, setStructureTypeData] = useState<{
-    productName: string;
-    companyName: string;
-    OARs: number;
-    Targets: number;
-    Elective: number;
-    total: number;
-  }[]>([]);
-  
   // Apply all filters simultaneously
-  const filteredProducts = filterProducts(products, selectedTask, selectedLocation, selectedModality);
+  const filteredProducts = useMemo(
+    () => filterProducts(products, selectedTask, selectedLocation, selectedModality),
+    [products, selectedTask, selectedLocation, selectedModality]
+  );
 
   // Transform data for charts
-  const taskData = transformTaskData(products, filteredProducts, selectedTask, countingMode);
-  const totalModels = countTotalModels(filteredProducts, countingMode);
-  const locationData = transformLocationData(products, filteredProducts, selectedLocation, countingMode);
-  const totalLocations = locationData.reduce((sum, item) => sum + item.value, 0);
-  const modalityData = transformModalityData(products, filteredProducts, selectedModality, countingMode);
-  const totalModalities = modalityData.reduce((sum, item) => sum + item.value, 0);
-  const certificationData = transformCertificationData(products, filteredProducts, countingMode);
-  const totalCertified = certificationData.reduce((sum, item) => sum + item.value, 0);
+  const taskData = useMemo(
+    () => transformTaskData(products, filteredProducts, selectedTask, countingMode),
+    [products, filteredProducts, selectedTask, countingMode]
+  );
+  const totalModels = useMemo(
+    () => countTotalModels(filteredProducts, countingMode),
+    [filteredProducts, countingMode]
+  );
+  const locationData = useMemo(
+    () => transformLocationData(products, filteredProducts, selectedLocation, countingMode),
+    [products, filteredProducts, selectedLocation, countingMode]
+  );
+  const totalLocations = useMemo(
+    () => locationData.reduce((sum, item) => sum + item.value, 0),
+    [locationData]
+  );
+  const modalityData = useMemo(
+    () => transformModalityData(products, filteredProducts, selectedModality, countingMode),
+    [products, filteredProducts, selectedModality, countingMode]
+  );
+  const totalModalities = useMemo(
+    () => modalityData.reduce((sum, item) => sum + item.value, 0),
+    [modalityData]
+  );
+  const certificationData = useMemo(
+    () => transformCertificationData(products, filteredProducts, countingMode),
+    [products, filteredProducts, countingMode]
+  );
+  const totalCertified = useMemo(
+    () => certificationData.reduce((sum, item) => sum + item.value, 0),
+    [certificationData]
+  );
 
-  // Update structure data when task changes
-  useEffect(() => {
-    const newStructureData = transformStructureData(filteredProducts, selectedTask);
-    setStructureData(newStructureData);
-  }, [selectedTask, selectedLocation, selectedModality, filteredProducts]);
+  const structureData = useMemo(
+    () => transformStructureData(filteredProducts, selectedTask),
+    [filteredProducts, selectedTask]
+  );
 
-  // Update structure type data when task changes
-  useEffect(() => {
-    const newStructureTypeData = transformStructureTypeData(filteredProducts, selectedTask);
-    setStructureTypeData(newStructureTypeData);
-  }, [filteredProducts, selectedTask]);
+  const structureTypeData = useMemo(
+    () => transformStructureTypeData(filteredProducts, selectedTask),
+    [filteredProducts, selectedTask]
+  );
 
   return {
     taskData,
