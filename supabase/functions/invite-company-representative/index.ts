@@ -144,14 +144,14 @@ serve(async (req) => {
             userAlreadyExisted = true;
           } else {
             console.error('createUser said exists but listUsers returned no match', createError);
-            return new Response(JSON.stringify({ error: 'Account already exists but could not be located.' }), {
+            return new Response(JSON.stringify({ error: `Account already exists but could not be located: ${createError.message}` }), {
               status: 500,
               headers: { ...corsHeaders, 'Content-Type': 'application/json' },
             });
           }
         } else {
           console.error('forceRegister createUser error', createError);
-          return new Response(JSON.stringify({ error: 'Failed to create account.' }), {
+          return new Response(JSON.stringify({ error: `Failed to create account: ${createError.message}` }), {
             status: 500,
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           });
@@ -168,7 +168,7 @@ serve(async (req) => {
       }
 
       // Ensure profile row (handle_new_user trigger may have created one)
-      await supabaseAdmin.from('profiles').upsert(
+      const { error: profileErr } = await supabaseAdmin.from('profiles').upsert(
         {
           id: userId,
           email: normalizedEmail,
@@ -180,11 +180,13 @@ serve(async (req) => {
         },
         { onConflict: 'id' }
       );
+      if (profileErr) console.error('profiles upsert error', profileErr);
 
       // Assign company role
-      await supabaseAdmin
+      const { error: roleErr } = await supabaseAdmin
         .from('user_roles')
         .upsert({ user_id: userId, role: 'company' }, { onConflict: 'user_id,role' });
+      if (roleErr) console.error('user_roles upsert error', roleErr);
 
       // Create verified company representative link (idempotent by user+company)
       const { data: existingRepRow } = await supabaseAdmin
@@ -211,7 +213,7 @@ serve(async (req) => {
 
       // Record an accepted invitation row for audit purposes
       const forceToken = crypto.randomUUID();
-      const { data: forceInvitation } = await supabaseAdmin
+      const { data: forceInvitation, error: forceInvErr } = await supabaseAdmin
         .from('company_invitations')
         .insert({
           email: normalizedEmail,
@@ -229,6 +231,7 @@ serve(async (req) => {
         })
         .select('id')
         .single();
+      if (forceInvErr) console.error('company_invitations insert (force) error', forceInvErr);
 
       // Generate a Set-Password (recovery) link
       const redirectTo = `${SITE_URL}/update-password`;
@@ -240,7 +243,7 @@ serve(async (req) => {
 
       if (linkError || !linkData?.properties?.action_link) {
         console.error('generateLink error', linkError);
-        return new Response(JSON.stringify({ error: 'Failed to generate password-setup link.' }), {
+        return new Response(JSON.stringify({ error: `Failed to generate password-setup link: ${linkError?.message ?? 'no action_link returned'}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
@@ -288,7 +291,7 @@ serve(async (req) => {
 
       if (sendError) {
         console.error('Resend error (forceRegister)', sendError);
-        return new Response(JSON.stringify({ error: 'Account created, but failed to send password-setup email.' }), {
+        return new Response(JSON.stringify({ error: `Account created, but failed to send password-setup email: ${(sendError as any)?.message ?? JSON.stringify(sendError)}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
@@ -363,7 +366,7 @@ serve(async (req) => {
 
       if (insertError || !created) {
         console.error('Failed to create invitation', insertError);
-        return new Response(JSON.stringify({ error: 'Failed to create invitation' }), {
+        return new Response(JSON.stringify({ error: `Failed to create invitation: ${insertError?.message ?? 'unknown'}` }), {
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
@@ -422,7 +425,7 @@ serve(async (req) => {
 
     if (sendError) {
       console.error('Resend error', sendError);
-      return new Response(JSON.stringify({ error: 'Failed to send invitation email' }), {
+      return new Response(JSON.stringify({ error: `Failed to send invitation email: ${(sendError as any)?.message ?? JSON.stringify(sendError)}` }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -434,7 +437,8 @@ serve(async (req) => {
     );
   } catch (err) {
     console.error('invite-company-representative error', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    const message = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: `Internal server error: ${message}` }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

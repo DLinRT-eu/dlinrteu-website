@@ -103,7 +103,23 @@ export default function InviteCompanyRepDialog({
           },
         }
       );
-      if (error) throw error;
+      if (error) {
+        // supabase-js wraps non-2xx responses; extract the real server error body
+        let serverMsg = '';
+        try {
+          const resp = (error as any)?.context?.response;
+          if (resp && typeof resp.text === 'function') {
+            const text = await resp.text();
+            try {
+              const j = JSON.parse(text);
+              serverMsg = j?.error || j?.message || text;
+            } catch {
+              serverMsg = text;
+            }
+          }
+        } catch {}
+        throw new Error(serverMsg || error.message || 'Failed to send invitation');
+      }
       if ((data as any)?.error) throw new Error((data as any).error);
 
       toast.success(
