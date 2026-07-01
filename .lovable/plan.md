@@ -1,38 +1,27 @@
-## Goal
-Resolve the MedMind & Quanta company-name drift so their live products surface correctly on company pages and in rep dashboards, without breaking the archived catalog entries.
+# Dashboard chart rendering fix
 
-## Current state
-- **Live catalog** (`src/data/companies/specialized-solutions.ts`) already contains live entries:
-  - `medmind-technology` → "MedMind Technology Co., Ltd." → `productIds: ["medmind-rt-mind-ai"]`
-  - `quanta-computer` → "Quanta Computer Inc." → `productIds: ["quanta-qoca-image-smart-rt"]`
-- **Archived catalog** (`src/data/companies/archived/medmind-technology.ts`, `quanta-computer.ts`) has duplicate IDs with older names and (for Quanta) a stale `productIds: ["qoca-smart-rt"]` that doesn't exist.
-- **Product files**:
-  - `medmind-rt-mind-ai` → `company: "MedMind Technology"`
-  - `quanta-qoca-image-smart-rt` → `company: "Quanta Computer"`
+## Root cause
 
-The strings differ from the canonical live names ("MedMind Technology Co., Ltd." / "Quanta Computer Inc."), which is the drift flagged in the audit.
+The dashboard bars, pies, and cells render empty (axes/legends show, no data glyphs). Screenshot confirms it: "AI Models by Task (107 total)" shows the Y-axis but no bars; Location and Certification pies render only legends; Company bars are empty.
 
-## Decision
-Keep both vendors **live** (they each have a current, regulator-cleared product) and remove the duplicate archived catalog entries that now conflict with the live ones.
+`package.json` currently pins **`recharts ^3.8.1`**, but every chart in the app is written against the **Recharts v2** API (v3 has breaking changes to `Bar`/`Pie`/`Cell` children semantics, default styling, and several removed props — hence bars render at zero width even with valid data). The recent "Upgraded critical dependencies" work pulled recharts across a major version.
 
-## Changes
+Symptoms in console also show `Invalid prop supplied to React.Fragment` from Recharts internals when the tagger injects `data-lov-id` — another v3 change (v3 wraps `Cell` in a `Fragment` differently).
 
-1. **Normalize product `company` strings to match the canonical live catalog names**
-   - `src/data/products/auto-contouring/medmind.ts`: `company: "MedMind Technology"` → `"MedMind Technology Co., Ltd."`
-   - `src/data/products/auto-contouring/quanta-computer.ts`: `company: "Quanta Computer"` → `"Quanta Computer Inc."`
+## Fix
 
-2. **Remove duplicate archived company entries** (they collide on `id` with the live ones and the archived Quanta entry points at a non-existent product `qoca-smart-rt`)
-   - Delete `src/data/companies/archived/medmind-technology.ts`
-   - Delete `src/data/companies/archived/quanta-computer.ts`
-   - Drop their exports from `src/data/companies/archived/index.ts`
-   - Note the removals in `src/data/companies/archived/README.md`
+1. Downgrade `recharts` to the last known-working v2 line: `^2.15.0` in `package.json`.
+2. Reinstall dependencies so the lockfile picks up v2.
+3. Reload the dashboard and verify:
+   - Task bar chart shows colored bars
+   - Location pie shows colored slices
+   - Modality bar chart shows bars
+   - Company horizontal bar chart shows bars
+   - Certification pie renders
+   - `RevisionChart`, `StructureTypeDistributionChart`, `StructuresChart` also render bars
 
-3. **Leave `productIds` on the live catalog entries unchanged** — they already point at the correct product IDs (`medmind-rt-mind-ai`, `quanta-qoca-image-smart-rt`).
+No other code changes needed — the existing chart components, `chartColors.ts`, and `chartDataValidation.ts` are already correct for v2.
 
 ## Out of scope
-- No DB changes. Reps tied to these companies resolve via `getCompanyIdByName` and will continue to match after the string normalization.
-- Plan AI / Accuray / SyntheticMR / Varian items from the earlier audit are not touched here.
 
-## Verification
-- Visit `/company/medmind-technology` and `/company/quanta-computer` in the preview — each should list its one live product.
-- Confirm no TS errors after removing the archived files (only `archived/index.ts` references them).
+Migrating the codebase to Recharts v3 (would require touching ~15 chart components and retesting every dashboard/analytics view). We can revisit that as a separate effort if desired.
