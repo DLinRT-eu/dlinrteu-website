@@ -221,13 +221,22 @@ export const RAYSTATION_SUPPORTED_STRUCTURES: string[] = [
   "Vertebrae: L5",
   "Vertebrae: L6",
 
-  // Female Pelvis model — announced for the upcoming RayStation release at ESTRO 2026.
-  // Explicitly flagged by RaySearch as investigational, not CE-marked or FDA-cleared,
-  // and not available for clinical use. ROIs marked with the (investigational) suffix.
-  "Female Pelvis: Uterus (investigational)",
-  "Female Pelvis: Ovary_L (investigational)",
-  "Female Pelvis: Ovary_R (investigational)",
-  "Female Pelvis: Vagina (investigational)"
+  // Female Pelvis model — released in RayStation v2026 (previously investigational at ESTRO 2026).
+  // Vendor states v2026 is subject to regulatory clearance in some markets and is not available
+  // for use or sale in the USA or Canada; structures listed with the (unverified) suffix pending
+  // confirmation of CE/FDA scope for these specific ROIs.
+  "Pelvis Female: Uterus (unverified)",
+  "Pelvis Female: Ovary_L (unverified)",
+  "Pelvis Female: Ovary_R (unverified)",
+  "Pelvis Female: Vagina (unverified)",
+
+  // Additional structures announced in RayStation v2026 (>30 new DLS structures overall).
+  // Listed as (unverified) pending confirmation of regulatory scope per market.
+  "Pelvis Male: Prostate_Bed (unverified)",
+  "Abdomen: Bowel_Small (unverified)",
+  "Abdomen: Bowel_Large (unverified)",
+  "Thorax: Bronchial_Tree (unverified)"
+
 
 
 ];

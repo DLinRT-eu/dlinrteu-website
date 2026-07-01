@@ -73,7 +73,13 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       { name: "RSL Prostate 3LVS", anatomicalSite: "Prostate", technique: "Photons (Triple Level)", intent: "Curative" },
       
       // Rectum
-      { name: "RSL Rectum", anatomicalSite: "Rectum", technique: "Photons (Standard)", intent: "Curative" }
+      { name: "RSL Rectum", anatomicalSite: "Rectum", technique: "Photons (Standard)", intent: "Curative" },
+
+      // New in RayStation v2026 (July 2026 release). Subject to regulatory clearance in some markets;
+      // not available for use or sale in USA/Canada per vendor. Exact catalogue names pending publication.
+      { name: "RSL Breast Locoregional (v2026)", anatomicalSite: "Breast", technique: "Photons (Locoregional)", intent: "Curative" },
+      { name: "RSL Lung Proton (v2026)", anatomicalSite: "Lung", technique: "Protons (PBS)", intent: "Curative" },
+      { name: "RSL Prostate (v2026)", anatomicalSite: "Prostate", technique: "Photons", intent: "Curative" }
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -111,11 +117,11 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
-    version: "2025",
+    version: "2026",
     releaseDate: "2025-05-02",
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). RayStation v2025 with ECHO algorithm (MSK). PubMed verified 2026-03-08.",
+    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). RayStation v2025 with ECHO algorithm (MSK). PubMed verified 2026-03-08. RayStation v2026 (July 2026) adds three new deep learning planning models: breast locoregional, lung proton, and prostate. Vendor states v2026 is subject to regulatory clearance in some markets and is not available for use or sale in USA/Canada; v2026 models therefore not factored into evidence scoring.",
     clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction. ECHO algorithm integration further accelerates planning.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -124,9 +130,9 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website",
+    lastUpdated: "2026-07-01",
+    lastRevised: "2026-07-01",
+    source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website, RayStation v2026 release page",
     evidence: [
       {
         type: "Peer-reviewed Publication",
@@ -152,6 +158,11 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         type: "Product Release",
         description: "RayStation v2025 with ECHO algorithm (Memorial Sloan Kettering) for fast automated planning. Released May 2025.",
         link: "https://www.raysearchlabs.com/raystation-v2025/"
+      },
+      {
+        type: "Product Release",
+        description: "RayStation v2026 release page — introduces three new DL planning models (breast locoregional, lung proton, prostate). Subject to regulatory clearance in some markets; not available in USA/Canada.",
+        link: "https://www.raysearchlabs.com/raystation-v2026/"
       }
     ],
     limitations: [
@@ -159,7 +170,8 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
       "Model performance depends on input data quality and contouring consistency",
       "Models trained on specific patient populations and treatment protocols",
       "Dose mimicking optimization may require manual adjustment for complex cases",
-      "Available models and features vary by RayStation version and licensing"
+      "Available models and features vary by RayStation version and licensing",
+      "v2026 models are subject to regulatory clearance in some markets and are not available for use or sale in USA/Canada per vendor"
     ]
   }
 ];
