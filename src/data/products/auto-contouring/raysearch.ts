@@ -102,8 +102,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     version: "2026",
     releaseDate: "2023-12-01",
     lastUpdated: "2026-07-01",
-    lastRevised: "2026-07-01",
-    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue 2024, RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
+    lastRevised: "2026-07-02",
+    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf), RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [
       {
