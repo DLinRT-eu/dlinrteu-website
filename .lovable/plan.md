@@ -1,39 +1,44 @@
-## Source verification
+Update `src/data/products/auto-contouring/raysearch.ts` (RayStation Deep Learning Segmentation) using the vendor DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf) as the source.
 
-Fetched https://www.raysearchlabs.com/raystation-v2026/ (2026-07-01). Confirmed:
-- **Machine learning innovations**: >30 new DLS structures (bowel, female pelvic anatomies, prostate bed, bronchial tree, pediatric support, etc.); 3 new DL planning models (breast locoregional, lung proton, prostate).
-- Vendor note: *"Subject to regulatory clearance in some markets. RayStation v2026 is not available for use or sale in the USA or Canada."* — so CE/FDA status of these new models is not confirmed by this page and no new K-number is announced.
-- No new peer-reviewed evidence linked from the release page.
+## Changes
 
-## Planned changes (data only, minimal intervention)
+### 1. Add MRI input support
+The catalogue documents a dedicated **Male Pelvic MR** model (Anorectum, Bladder, Canal_Anal, PenileBulb, Prostate, Rectum, SeminalVes) intended for **T2 SE** sequences.
 
-### 1. `src/data/products/auto-contouring/raysearch.ts` (DLS)
-- Bump `version` → `2026`, `releaseDate` → `2025-11` placeholder replaced by "RayStation v2026" note (keep 2023-12 for regulatory-cleared baseline; add v2026 to notes).
-- Update `lastUpdated` / `lastRevised` → `2026-07-01`.
-- Extend `evidenceRigorNotes` with a v2026 line: ">30 new DLS structures added in RayStation v2026 (bowel, female pelvic anatomies incl. previously-investigational uterus/ovaries/vagina, prostate bed, bronchial tree, pediatric support). Vendor states v2026 is subject to local regulatory clearance and not available in USA/Canada; new structures therefore listed as (unverified) pending confirmation of CE/FDA scope."
-- Append new structure entries to `RAYSTATION_SUPPORTED_STRUCTURES` in `raysearch-structures.ts` with the `(unverified)` suffix (per structure-status memory), covering the vendor-named additions only:
-  - Pelvis Female: Uterus, Ovary_L, Ovary_R, Vagina — **remove the `(investigational)` suffix** since v2026 has now released them (still `(unverified)` regulatory-wise).
-  - Pelvis Male: Prostate_Bed
-  - Abdomen: Bowel_Small, Bowel_Large (bowel structures)
-  - Thorax: Bronchial_Tree
-  - Pediatric: general "Pediatric support" flag added only in evidenceRigorNotes (no specific structure names disclosed by vendor — do not fabricate).
-- Add a new `evidence` entry citing the RaySearch v2026 release page.
-- Add `source` reference to the v2026 page.
+- `technicalSpecifications.input`: `["CT", "MRI"]`
+- `technicalSpecifications.inputFormat`: keep `["DICOM"]` (already covers MR DICOM)
+- `modality`: `["CT", "MR"]`
+- `anatomicalLocation`: add `"Male Pelvis (MR)"` (leave existing entries)
+- Append a note in `evidenceRigorNotes` clarifying the MR model is limited to male pelvis on T2 SE sequences.
 
-### 2. `src/data/products/treatment-planning/raysearch-planning.ts` (DL Dose Prediction)
-- Bump `version` → `2026`, `lastUpdated`/`lastRevised` → `2026-07-01`.
-- Append 3 new models to `dosePredictionModels` (names inferred generically; keep neutral since exact catalogue names for v2026 aren't public yet — mark with `(v2026)` suffix to signal preliminary):
-  - `RSL Breast Locoregional (v2026)` — Breast, Photons (Locoregional), Curative
-  - `RSL Lung Proton (v2026)` — Lung, Protons (PBS), Curative
-  - `RSL Prostate (v2026)` — Prostate, Photons, Curative
-- Update `evidenceRigorNotes` to mention v2026 additions and vendor's regulatory caveat.
-- Add v2026 release page to `evidence` list and `source`.
-- Add to `limitations`: "v2026 models subject to regulatory clearance in some markets; not available in USA/Canada per vendor."
+### 2. Add `guidelines[]` field
+The catalogue includes an explicit "Contouring Guidelines" section mapping each ROI to peer-reviewed consensus references. Add the recurring published guidelines as `guidelines` entries with `compliance: 'partial'` (per catalogue footnote: "Internal contouring protocols were derived from published consensus guidelines, the model data sheet describes some modifications and specifications to certain ROIs"):
 
-### 3. No changes to evidence axes (E2/I2) or company records
-- Release page provides marketing info only — no new peer-reviewed studies. E/I/R levels unchanged.
+- Brouwer et al. 2015 — H&N OAR CT consensus (DAHANCA/EORTC/GORTEC/…)
+- Eekers et al. 2018 — Neuro-oncology OAR (EPTN)
+- Scoccianti et al. 2015 — Brain OAR consensus
+- Christianen et al. 2011 — H&N swallowing structures
+- Van de Water et al. 2009 — Submandibular gland
+- Kong et al. 2011 — Thoracic OAR (RTOG)
+- Feng et al. 2011 — Heart atlas
+- Duane et al. 2017 — Cardiac substructures
+- Vaugier et al. 2021 — Cardiac substructures/great vessels
+- Mir et al. 2020 — Global atlas / RTOG
+- Offersen et al. 2015 — ESTRO breast CTV/OAR
+- Nyholm et al. 2013 — MRI-only prostate (Anorectum)
+- Gay et al. 2012 — Pelvic normal tissue (RTOG)
+- Salembier et al. 2018 — ACROP anal cancer (MR pelvis)
+- Hall et al. 2008 — Brachial plexus (RTOG)
+- Freedman et al. 2020 — Lacrimal gland
 
-## What I will NOT do
-- Not fabricate specific pediatric structure names or exact catalogue model IDs beyond what the release page states.
-- Not upgrade evidence rigor without a peer-reviewed source.
-- Not change regulatory certification fields (still CE & FDA per K240398 for prior versions).
+Each entry: `{ name, reference, url (DOI when known), compliance: 'partial' }`.
+
+### 3. Bump revision metadata
+- `lastRevised`: `2026-07-02`
+- Add DLS Model Catalogue URL to `source` (if not already listed).
+- Append short line to `evidenceRigorNotes`: "Vendor DLS Model Catalogue maps ROIs to published consensus guidelines (Brouwer, Eekers, Scoccianti, Kong, Feng, Duane, Vaugier, Mir, Offersen, Nyholm, Gay, Salembier, Hall, Christianen, Van de Water, Freedman)."
+
+## Not changed
+- DL Dose Prediction (`raysearch-planning.ts`): the catalogue covers DLS only; no comparable public guideline mapping is published for the dose models, so no `guidelines[]` change there. Called out here to confirm the deliberate scope.
+- No score changes (E/I/R) — this is source enrichment, not new evidence.
+- No structure list changes.
