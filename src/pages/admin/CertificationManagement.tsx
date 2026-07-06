@@ -552,6 +552,17 @@ export default function CertificationManagement() {
                               </TableCell>
                               <TableCell className="text-right">
                                 <div className="flex items-center justify-end gap-2">
+                                  {item.hashStatus === 'mismatch' && (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => openOverrideDialog(item)}
+                                      title="Admin override: approve current content"
+                                    >
+                                      <ShieldCheck className="h-4 w-4 mr-1" />
+                                      Re-certify
+                                    </Button>
+                                  )}
                                   <Button
                                     variant="ghost"
                                     size="sm"
