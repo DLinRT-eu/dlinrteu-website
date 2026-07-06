@@ -236,6 +236,45 @@ export default function CertificationManagement() {
     setDetailDialogOpen(true);
   };
 
+  const openOverrideDialog = (item: ProductWithCertification) => {
+    const today = new Date().toISOString().split('T')[0];
+    setOverrideNote(`Admin override — hash mismatch approved on ${today}`);
+    setOverrideTarget(item);
+  };
+
+  const handleConfirmOverride = async () => {
+    if (!overrideTarget?.certificationRecord || !overrideTarget.currentHash) return;
+    setOverrideSubmitting(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      const priorNotes = overrideTarget.certificationRecord.verification_notes;
+      const combinedNotes = priorNotes
+        ? `${priorNotes}\n---\n${overrideNote}`
+        : overrideNote;
+
+      const { error } = await supabase
+        .from('company_product_verifications')
+        .update({
+          content_hash: overrideTarget.currentHash,
+          verified_at: new Date().toISOString(),
+          verified_by: user?.id ?? null,
+          verification_notes: combinedNotes,
+        })
+        .eq('id', overrideTarget.certificationRecord.id);
+
+      if (error) throw error;
+      toast.success(`Re-certified "${overrideTarget.product.name}"`);
+      setOverrideTarget(null);
+      setDetailDialogOpen(false);
+      await fetchCertifications();
+    } catch (err) {
+      console.error('Override failed:', err);
+      toast.error('Failed to re-certify product');
+    } finally {
+      setOverrideSubmitting(false);
+    }
+  };
+
   const fetchLastSent = async () => {
     const { data } = await supabase
       .from('certification_reminder_logs')
