@@ -600,6 +600,7 @@ export default function CertificationManagement() {
             certificationRecord={selectedProduct.certificationRecord}
             hashStatus={selectedProduct.hashStatus}
             currentHash={selectedProduct.currentHash}
+            onAdminOverride={() => openOverrideDialog(selectedProduct)}
           />
         )}
 
@@ -609,6 +610,36 @@ export default function CertificationManagement() {
           onOpenChange={setReminderDialogOpen}
           onSent={() => fetchLastSent()}
         />
+
+        {/* Admin Override Confirmation */}
+        <AlertDialog open={!!overrideTarget} onOpenChange={(o) => !o && setOverrideTarget(null)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Approve current content & re-certify</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will update the stored certification hash to the current content hash and
+                mark <strong>{overrideTarget?.product.name}</strong> as re-certified on behalf of{' '}
+                <strong>{overrideTarget?.product.company}</strong>. The action is recorded against
+                your admin account.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className="space-y-2">
+              <Label htmlFor="override-note">Note (appended to verification history)</Label>
+              <Textarea
+                id="override-note"
+                value={overrideNote}
+                onChange={(e) => setOverrideNote(e.target.value)}
+                rows={3}
+              />
+            </div>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={overrideSubmitting}>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleConfirmOverride} disabled={overrideSubmitting}>
+                {overrideSubmitting ? 'Re-certifying...' : 'Confirm re-certification'}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </PageLayout>
     </>
   );
