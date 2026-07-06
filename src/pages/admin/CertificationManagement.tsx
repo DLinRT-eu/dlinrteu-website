@@ -15,9 +15,21 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Clock } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Clock, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import { format, formatDistanceToNow } from 'date-fns';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
