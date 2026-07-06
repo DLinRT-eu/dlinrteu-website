@@ -15,9 +15,21 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Clock } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, ExternalLink, Building2, Info, Eye, Mail, Clock, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import { format, formatDistanceToNow } from 'date-fns';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/layout/PageLayout';
 import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
@@ -54,6 +66,9 @@ export default function CertificationManagement() {
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [reminderDialogOpen, setReminderDialogOpen] = useState(false);
   const [lastSentAt, setLastSentAt] = useState<string | null>(null);
+  const [overrideTarget, setOverrideTarget] = useState<ProductWithCertification | null>(null);
+  const [overrideNote, setOverrideNote] = useState('');
+  const [overrideSubmitting, setOverrideSubmitting] = useState(false);
 
   useEffect(() => {
     if (!isAdmin) {
@@ -219,6 +234,45 @@ export default function CertificationManagement() {
   const handleViewDetails = (item: ProductWithCertification) => {
     setSelectedProduct(item);
     setDetailDialogOpen(true);
+  };
+
+  const openOverrideDialog = (item: ProductWithCertification) => {
+    const today = new Date().toISOString().split('T')[0];
+    setOverrideNote(`Admin override — hash mismatch approved on ${today}`);
+    setOverrideTarget(item);
+  };
+
+  const handleConfirmOverride = async () => {
+    if (!overrideTarget?.certificationRecord || !overrideTarget.currentHash) return;
+    setOverrideSubmitting(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      const priorNotes = overrideTarget.certificationRecord.verification_notes;
+      const combinedNotes = priorNotes
+        ? `${priorNotes}\n---\n${overrideNote}`
+        : overrideNote;
+
+      const { error } = await supabase
+        .from('company_product_verifications')
+        .update({
+          content_hash: overrideTarget.currentHash,
+          verified_at: new Date().toISOString(),
+          verified_by: user?.id ?? null,
+          verification_notes: combinedNotes,
+        })
+        .eq('id', overrideTarget.certificationRecord.id);
+
+      if (error) throw error;
+      toast.success(`Re-certified "${overrideTarget.product.name}"`);
+      setOverrideTarget(null);
+      setDetailDialogOpen(false);
+      await fetchCertifications();
+    } catch (err) {
+      console.error('Override failed:', err);
+      toast.error('Failed to re-certify product');
+    } finally {
+      setOverrideSubmitting(false);
+    }
   };
 
   const fetchLastSent = async () => {
@@ -498,6 +552,17 @@ export default function CertificationManagement() {
                               </TableCell>
                               <TableCell className="text-right">
                                 <div className="flex items-center justify-end gap-2">
+                                  {item.hashStatus === 'mismatch' && (
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => openOverrideDialog(item)}
+                                      title="Admin override: approve current content"
+                                    >
+                                      <ShieldCheck className="h-4 w-4 mr-1" />
+                                      Re-certify
+                                    </Button>
+                                  )}
                                   <Button
                                     variant="ghost"
                                     size="sm"
@@ -535,6 +600,7 @@ export default function CertificationManagement() {
             certificationRecord={selectedProduct.certificationRecord}
             hashStatus={selectedProduct.hashStatus}
             currentHash={selectedProduct.currentHash}
+            onAdminOverride={() => openOverrideDialog(selectedProduct)}
           />
         )}
 
@@ -544,6 +610,36 @@ export default function CertificationManagement() {
           onOpenChange={setReminderDialogOpen}
           onSent={() => fetchLastSent()}
         />
+
+        {/* Admin Override Confirmation */}
+        <AlertDialog open={!!overrideTarget} onOpenChange={(o) => !o && setOverrideTarget(null)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Approve current content & re-certify</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will update the stored certification hash to the current content hash and
+                mark <strong>{overrideTarget?.product.name}</strong> as re-certified on behalf of{' '}
+                <strong>{overrideTarget?.product.company}</strong>. The action is recorded against
+                your admin account.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <div className="space-y-2">
+              <Label htmlFor="override-note">Note (appended to verification history)</Label>
+              <Textarea
+                id="override-note"
+                value={overrideNote}
+                onChange={(e) => setOverrideNote(e.target.value)}
+                rows={3}
+              />
+            </div>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={overrideSubmitting}>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleConfirmOverride} disabled={overrideSubmitting}>
+                {overrideSubmitting ? 'Re-certifying...' : 'Confirm re-certification'}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </PageLayout>
     </>
   );
