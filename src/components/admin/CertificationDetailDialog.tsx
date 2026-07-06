@@ -202,12 +202,20 @@ export function CertificationDetailDialog({
                         </div>
                       )}
                       {hashStatus === 'mismatch' && (
-                        <div className="flex items-start gap-2">
-                          <Badge variant="warning" className="mt-0.5">Mismatch</Badge>
-                          <p className="text-sm">
-                            The content hash does not match. The product content has been modified
-                            since certification. Re-certification is recommended.
-                          </p>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-2">
+                            <Badge variant="warning" className="mt-0.5">Mismatch</Badge>
+                            <p className="text-sm">
+                              The content hash does not match. The product content has been modified
+                              since certification. Re-certification is recommended.
+                            </p>
+                          </div>
+                          {onAdminOverride && (
+                            <Button size="sm" onClick={onAdminOverride}>
+                              <ShieldCheck className="h-4 w-4 mr-2" />
+                              Admin override: approve current content
+                            </Button>
+                          )}
                         </div>
                       )}
                     </div>
