@@ -9,7 +9,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Copy, ExternalLink, FileText, User, Calendar, Hash } from 'lucide-react';
+import { Copy, ExternalLink, FileText, User, Calendar, Hash, ShieldCheck } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 import type { ProductDetails } from '@/types/productDetails';
