@@ -25,6 +25,7 @@ interface CertificationDetailDialogProps {
   certificationRecord?: CertificationRecord;
   hashStatus: HashStatus;
   currentHash?: string;
+  onAdminOverride?: () => void;
 }
 
 export function CertificationDetailDialog({
@@ -34,6 +35,7 @@ export function CertificationDetailDialog({
   certificationRecord,
   hashStatus,
   currentHash,
+  onAdminOverride,
 }: CertificationDetailDialogProps) {
   const [copying, setCopying] = useState<'stored' | 'current' | null>(null);
 
