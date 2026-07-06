@@ -66,6 +66,9 @@ export default function CertificationManagement() {
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [reminderDialogOpen, setReminderDialogOpen] = useState(false);
   const [lastSentAt, setLastSentAt] = useState<string | null>(null);
+  const [overrideTarget, setOverrideTarget] = useState<ProductWithCertification | null>(null);
+  const [overrideNote, setOverrideNote] = useState('');
+  const [overrideSubmitting, setOverrideSubmitting] = useState(false);
 
   useEffect(() => {
     if (!isAdmin) {
