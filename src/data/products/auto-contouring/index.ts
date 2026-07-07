@@ -25,6 +25,7 @@ import { BRAINLAB_PRODUCTS } from "./brainlab";
 import { GE_MR_CONTOUR_DL_PRODUCTS } from "./ge-mr-contour-dl";
 import { MEDMIND_PRODUCTS } from "./medmind";
 import { VARIAN_ETHOS_PRODUCTS } from "./varian-ethos";
+import { VARIAN_ECLIPSE_PRODUCTS } from "./varian-eclipse";
 import { QUANTA_COMPUTER_PRODUCTS } from "./quanta-computer";
 import { MEDCOM_PRODUCTS } from "./medcom";
 import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
@@ -55,6 +56,7 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...GE_MR_CONTOUR_DL_PRODUCTS,
   ...MEDMIND_PRODUCTS,
   ...VARIAN_ETHOS_PRODUCTS,
+  ...VARIAN_ECLIPSE_PRODUCTS,
   ...QUANTA_COMPUTER_PRODUCTS,
   ...MEDCOM_PRODUCTS,
   ...UNITED_IMAGING_PRODUCTS
