@@ -70,7 +70,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "description": "Global leader in radiotherapy solutions including treatment delivery systems, AI-assisted adaptive therapy (Ethos), oncology software, and patient quality assurance tools. Part of Siemens Healthineers since 2021.",
     "website": "https://www.varian.com/",
     "productIds": [
-      "varian-ethos-ai-segmentation"
+      "varian-ethos-ai-segmentation",
+      "varian-eclipse-ai-contouring"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/varian.jpg",
