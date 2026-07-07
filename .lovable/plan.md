@@ -1,31 +1,63 @@
-## Goal
 
-Let admins clear a hash mismatch by re-certifying the current product content directly from the admin Certification Management page, without requiring the company representative to act.
+## Decision: Yes — create a separate product
 
-## Context
+Ethos AI Segmentation and AI Contouring for Eclipse share underlying deep-learning models but are distinct commercial products with different regulatory paths, deployment contexts, clinical workflows and release timelines. Cataloguing them separately matches how DLinRT treats other TPS-embedded vs adaptive-console versions (e.g. RayStation vs RayStation Online Adaptive; MVision Contour+ variants).
 
-- `src/pages/admin/CertificationManagement.tsx` lists all products with a `HashStatusBadge` (`valid` / `mismatch` / `legacy` / `never`) and a per-row Actions column.
-- `CertificationDetailDialog` shows stored vs. current hash and explains mismatches, but has no write action.
-- RLS on `company_product_verifications` already grants admins full manage rights (`Admins can manage all verifications`, `USING has_role(admin)`), so no schema or policy changes are needed.
-- Verification rows carry `content_hash`, `verified_at`, `verified_by`, `verification_notes`.
+## Inclusion check
 
-## UX
+- Deep-learning based autocontouring (Siemens/Varian marketing explicitly: "Deep learning-based autocontouring"). ✅ passes AI/DL threshold.
+- Regulatory: **CE marked** (announced 15 May 2026, ESTRO 2026 press release). US: the underlying "AI Segmentation" algorithm family has FDA 510(k)s K203469 (Apr 2021), K211881 (Sep 2021) and K232923 (Apr 2024) under Varian Medical Systems — those clearances cover the algorithm shipped in Ethos; whether the Eclipse-integrated packaging is separately 510(k)-cleared in the US is not yet publicly confirmed and will be flagged `(unverified)` pending confirmation.
+- ✅ Meets `hasRegulatoryApproval` inclusion gate via CE.
 
-1. In the Outdated tab / mismatch rows of the certifications table, add an inline "Approve & re-certify" button (shield-check icon) next to the existing view/open buttons. Only visible when `hashStatus === 'mismatch'` (and for admins — the page is already admin-only).
-2. In `CertificationDetailDialog`, when `hashStatus === 'mismatch'`, add an "Admin override: approve current content" button in the mismatch explanation block. Same action as the inline button.
-3. Both trigger a small confirmation dialog: "This will update the stored certification hash to the current content hash and mark the product as re-certified on behalf of {company}. Continue?" with an optional notes textarea (prefilled: "Admin override — hash mismatch approved on YYYY-MM-DD").
-4. On confirm: `UPDATE company_product_verifications` for that row setting `content_hash = currentHash`, `verified_at = now()`, `verified_by = auth.uid()`, and appending the note to `verification_notes` (preserve prior notes with a newline separator). Show a toast, close the dialog, and refetch certifications so the badge flips to Verified.
+## Why separate from Ethos AI Segmentation
 
-## Technical Details
+| Aspect | Ethos AI Segmentation | AI Contouring for Eclipse |
+|---|---|---|
+| Host system | Ethos treatment console (online adaptive) | Eclipse TPS (offline planning) |
+| Trigger | Automatic in daily adaptive workflow | Manual/scripted in planning session |
+| Input | CBCT (HyperSight) + planning CT | Planning CT (primary), MR where supported |
+| Regulatory milestone | FDA K232923 (2024) | CE mark 2026 |
+| Customer base | Ethos adopters | Broad Eclipse installed base |
+| Release date | 2020 (Ethos launch) / 2024 v2.0 | 2026 |
 
-- New helper in `CertificationManagement.tsx` (or a small `useAdminCertificationOverride` hook) doing the Supabase update using the existing client.
-- Reuse existing `AlertDialog` / `Dialog` primitives from shadcn for the confirmation step.
-- Pass an `onOverride` callback into `CertificationDetailDialog` so the dialog can trigger the same flow used by the row action, keeping a single code path.
-- No migrations, no edge functions, no new tables — purely UI + client-side update permitted by existing RLS.
-- Audit trail: the override is captured by `verified_by = admin user id` + note text; no additional logging table is needed. (Optional: also insert into `admin_audit_log` if we want a separate record — flag this as a follow-up, not part of this change unless requested.)
+Merging them would hide the 2026 CE milestone and mis-represent the deployment surface (Eclipse is by far the larger installed base).
 
-## Out of scope
+## What to build
 
-- Bulk override across many products.
-- Changes to how company reps certify their own products.
-- New notifications to companies when an admin overrides (can be added later if wanted).
+Create `src/data/products/auto-contouring/varian-eclipse.ts` exporting `VARIAN_ECLIPSE_PRODUCTS`, and register it in `src/data/products/auto-contouring/index.ts`.
+
+### Product skeleton (key fields)
+
+- `id`: `varian-eclipse-ai-contouring`
+- `name`: "AI Contouring for Eclipse"
+- `company`: "Varian (Siemens Healthineers)" — matches existing Ethos entry
+- `category`: "Auto-Contouring" (no secondary; Eclipse itself is not our product)
+- `certification`: "CE" (FDA left blank / `(unverified)` pending K-number confirmation)
+- `regulatory.ce`: status `cleared`, class `IIb`, source Siemens Healthineers press release 2026-05-15
+- `regulatory.fda`: `not_applicable`/unknown with note referencing K232923 as the underlying algorithm family, marked pending confirmation
+- `modality`: ["CT", "MRI"] pending confirmation of MR models
+- `anatomicalLocation`: pelvis, thorax, head & neck, abdomen, breast (mirror Ethos set), all suffixed `(unverified)` until Siemens publishes a model card
+- `technology.integration`: ["Eclipse Treatment Planning"]
+- `technology.deployment`: ["Integrated with Eclipse TPS", "On-premises"]
+- `technology.triggerForAnalysis`: "Manual / scripted (ESAPI)"
+- `evidenceRigor`: **E1** — vendor press release + shared algorithm lineage with Ethos publications, but no Eclipse-specific peer-reviewed evaluation yet
+- `clinicalImpact`: **I1** — efficiency/workflow claims from vendor only
+- `adoptionReadiness`: **R2** — CE-only, single-vendor evidence, requires local validation
+- Study quality flags: all `false` for now (no independent Eclipse-specific studies located)
+- `trainingData` / `evaluationData`: `disclosureLevel: "minimal"` with note that Siemens has not published a model card; reference the Ethos Finnegan 2025 paper as adjacent (shared algorithm) but not as evidence for this product
+- `source`: Siemens Healthineers press release (2026-05-15), Siemens autocontouring product page, FDA 510(k) K232923 (algorithm lineage only)
+- `lastUpdated` / `lastRevised`: today
+
+### Cross-links
+
+Add a short note in the existing `varian-ethos.ts` `notes`/`source` field pointing out the sibling Eclipse product, and vice-versa, so the shared-algorithm relationship is transparent without conflating the two entries.
+
+### Out of scope
+
+- No changes to Ethos entry's evidence axes or supportedStructures.
+- No new companies, categories, or schema fields.
+- No admin/UI work — this is a data-only addition.
+
+## Open item to confirm before/after publish
+
+FDA status of the Eclipse-integrated packaging (separate K-number vs coverage under K232923). Ask a Varian representative via the certification program; until confirmed, leave FDA fields empty with an `(unverified)` note.
