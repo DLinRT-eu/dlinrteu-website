@@ -59,7 +59,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "pending",
+        status: "under_review",
         notes: "CE-MDR submission in progress (vendor communication, 2025). Confirm before publishing."
       },
       fda: {

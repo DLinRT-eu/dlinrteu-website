@@ -221,7 +221,7 @@ export const SmartSpeed: ProductDetails = {
     },
     regulatory: {
       ce: {
-        status: "unknown",
+        status: "under_review",
         class: "Not confirmed",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
@@ -379,7 +379,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     },
     regulatory: {
       ce: {
-        status: "not_cleared",
+        status: "under_review",
         class: "Not applicable",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
