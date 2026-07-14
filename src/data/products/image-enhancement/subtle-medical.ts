@@ -391,7 +391,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
   {
-    id: "aimify",
+    id: "subtle-aimify",
     trainingData: {
         description: "Not publicly disclosed. Training involves deep learning models for gadolinium-based contrast agent enhancement in brain MRI.",
         disclosureLevel: "minimal",

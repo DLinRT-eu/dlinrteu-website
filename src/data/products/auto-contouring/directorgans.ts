@@ -4,7 +4,7 @@ import { ProductDetails } from "@/types/productDetails";
 // Structure data retrieved on 2024-04-29, updated 2026-01-02 with accurate regulatory info
 export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
   {
-    id: "directorgans",
+    id: "siemens-directorgans",
     trainingData: {
         description: "DirectORGANS is a deep learning auto-contouring solution integrated into Siemens SOMATOM CT simulators, using optimized reconstruction and deep learning.",
         scannerModels: ["SOMATOM go.Sim", "SOMATOM go.Open Pro"],
