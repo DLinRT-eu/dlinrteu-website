@@ -83,7 +83,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         notes: "K242748 (Apr 2025). Prior clearances: K222803 (Feb 2023), K202284 (Mar 2021, original Oncospace clearance)"
       },
       ce: {
-        status: "ce_mark",
+        status: "cleared",
         class: "Class IIb",
         type: "Medical Device",
         notifiedBody: "BSI",

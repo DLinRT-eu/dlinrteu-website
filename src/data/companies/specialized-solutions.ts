@@ -55,7 +55,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
       "subtle-mr", 
       "subtle-pet",
       "subtle-hd-pet",
-      "aimify",
+      "subtle-aimify",
       "subtle-hd",
       "subtle-hd-ct"
     ],

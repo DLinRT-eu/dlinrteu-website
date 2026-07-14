@@ -23,7 +23,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/verify/",
     anatomicalLocation: ["Multiple"],
-    modality: "RT Struct",
+    modality: ["RT Struct"],
     subspeciality: "Medical Physics",
     diseaseTargeted: ["Cancer"],
     keyFeatures: [

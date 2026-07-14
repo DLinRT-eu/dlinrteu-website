@@ -30,7 +30,7 @@ export const PreciseImage: ProductDetails = {
   logoUrl: "/logos/philips.png",
   website: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
   anatomicalLocation: ["Head", "Whole body", "Vascular"],
-  modality: "CT",
+  modality: ["CT"],
   diseaseTargeted: ["Cancer", "Pulmonary disease", "Cardiovascular disorders"],
   releaseDate: "2022-01-14",
   version: "Not publicly disclosed (initial 510(k) K210760, January 2022; extended via K232491 for CT 5300, May 2024)",
@@ -183,7 +183,7 @@ export const SmartSpeed: ProductDetails = {
     productUrl:
       "https://www.usa.philips.com/healthcare/technology/smartspeed-ai",
     anatomicalLocation: ["Whole body"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: [
       "Not disease-specific",
       "General diagnostic imaging",
@@ -221,7 +221,7 @@ export const SmartSpeed: ProductDetails = {
     },
     regulatory: {
       ce: {
-        status: "unknown",
+        status: "under_review",
         class: "Not confirmed",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
@@ -333,7 +333,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     productUrl:
       "https://www.philips.com/a-w/about/news/archive/standard/news/articles/2025/philips-advances-mri-speed-and-precision-with-fda-510k-clearance-of-smartspeed-precise-dual-ai-software.html",
     anatomicalLocation: ["Whole body"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: [
       "Not disease-specific",
       "General diagnostic imaging",
@@ -379,7 +379,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     },
     regulatory: {
       ce: {
-        status: "not_cleared",
+        status: "under_review",
         class: "Not applicable",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",

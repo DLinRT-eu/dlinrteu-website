@@ -70,7 +70,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "ce_marked",
+        status: "cleared",
         class: "Not publicly verified",
         type: "Medical Device",
         regulation: "Public GE HealthCare material states AIR Recon DL was CE marked for 3T systems as of 2021. CE Mark for 7T was pending at time of FDA clearance for that platform. A public CE/MDR certificate, device class, and complete configuration scope were not identified during this review.",

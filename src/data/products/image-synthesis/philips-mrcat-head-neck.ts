@@ -35,7 +35,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/philips.png",
     website: "https://www.usa.philips.com/healthcare/product/HCNMRF439/mrcat-head-and-neck-hcnmrf439-mr-rt-clinical-application",
     anatomicalLocation: ["Head", "Neck"],
-    modality: "MRI",
+    modality: ["MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Head and Neck Cancer", "Nasopharyngeal Cancer", "Laryngeal Cancer"],
     keyFeatures: [

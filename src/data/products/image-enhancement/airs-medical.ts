@@ -27,7 +27,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://airsmed.com/",
     productUrl: "https://airsmed.com/swiftmr/",
     anatomicalLocation: ["Whole body"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: ["Neurological disorders", "Spine pathologies", "Musculoskeletal conditions"],
     releaseDate: "2021-05-15",
     keyFeatures: [

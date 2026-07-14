@@ -27,7 +27,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.siemens-healthineers.com",
     productUrl: "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve",
     anatomicalLocation: ["Whole body", "Brain", "Spine", "MSK", "Abdomen", "Pelvis"],
-    modality: "MRI",
+    modality: ["MRI"],
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Oncology", "Cardiac"],
     keyFeatures: [
       "Up to 70% faster brain imaging with maintained diagnostic quality",

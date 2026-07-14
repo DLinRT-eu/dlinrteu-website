@@ -257,6 +257,7 @@ export const TumorBox: ProductDetails = {
     "Adaptive contouring"
   ],
   modality: ["CT", "MRI", "PET"],
+  structuresUnavailable: true,
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
   companyUrl: "https://www.therapanacea.eu/",
   productUrl: "https://www.therapanacea.eu/our-products/",

@@ -51,7 +51,7 @@ export const MEDICAL_IMAGING_COMPANIES: CompanyDetails[] = [
     "productIds": [
       "siemens-syngo-ct",
       "siemens-ai-rad-companion",
-      "directorgans",
+      "siemens-directorgans",
       "siemens-deep-resolve"
     ],
     "category": "Medical Imaging",
