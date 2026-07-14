@@ -1,21 +1,29 @@
-## Issue
-The Varian company entry in `src/data/companies/radiotherapy-equipment.ts` lists only `varian-ethos-ai-segmentation` in `productIds`. The newly added `varian-eclipse-ai-contouring` product exists in `src/data/products/auto-contouring/varian-eclipse.ts` and is wired into `AUTO_CONTOURING_PRODUCTS`, but is not linked to the company — so it doesn't appear on `/products/company/varian` or in company-scoped dashboard counts.
+# Product Audit Swarm — Quick Sweep
 
-## Fix
-Add `"varian-eclipse-ai-contouring"` to the `productIds` array of the `varian` entry in `src/data/companies/radiotherapy-equipment.ts` (lines 72–74).
+Run the static audit swarm across all active product categories to see if anything needs updating. No product `.ts` files will be edited in this pass — output is a worklist only, per the skill's Minimal Intervention policy.
 
-Result:
-```ts
-"productIds": [
-  "varian-ethos-ai-segmentation",
-  "varian-eclipse-ai-contouring"
-],
-```
+## Scope
 
-## Audit checks (post-edit)
-- Confirm no duplicate id in `AUTO_CONTOURING_PRODUCTS`.
-- Confirm `/products/company/varian` renders both products.
-- No other file references need updating: `ALL_PRODUCTS` picks up the product via the auto-contouring index; company-scoped views use `dataService.getProductsByCompany('varian')` which reads `productIds`.
+- All active categories under `src/data/products/` (excluding `archived/` and `examples/`).
+- Wave label: `quick-<YYYY-MM-DD>`.
+
+## Steps
+
+1. Enumerate the product worklist and print counts per category.
+2. Run `scripts/audit-swarm.ts` across every active category. This performs the static role checks (Identity, Inclusion, Regulatory, Technical, Structures, Evidence, Transparency, Cross-check) with no PubMed lookups.
+3. Emit three artefacts to `/mnt/documents/`:
+   - `product-audit-<DATE>-quick.md` — per-product findings
+   - `product-audit-<DATE>-quick.csv` — one row per finding
+   - `product-audit-<DATE>-quick-rescoring.csv` — placeholder rescoring rows
+4. Summarise: totals by severity, top offending products, categories with the most warnings, and any freshness (`lastRevised > 180 days`) hotspots.
+5. Recommend follow-up: whether a deep-review re-scoring pass is warranted, and which category to tackle first.
 
 ## Out of scope
-No changes to the product data itself, Ethos entry, or company description. Minimal-intervention fix.
+
+- No edits to product `.ts` files.
+- No PubMed/DOI re-scoring (deep review is a separate confirmed pass).
+- No company or non-product content.
+
+## Deliverables
+
+Three files under `/mnt/documents/` surfaced back to you, plus a short summary in chat with recommended next actions.
