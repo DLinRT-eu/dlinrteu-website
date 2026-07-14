@@ -39,7 +39,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/philips.png",
     website: "https://www.philips.ie/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
     anatomicalLocation: ["Brain"],
-    modality: "MRI",
+    modality: ["MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Brain Cancer", "Brain Tumors"],
     keyFeatures: [

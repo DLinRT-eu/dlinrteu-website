@@ -37,7 +37,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/philips.png",
     website: "https://www.philips.ie/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
     anatomicalLocation: ["Pelvis"],
-    modality: "MRI",
+    modality: ["MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Prostate Cancer", "Gynecological Cancers", "Rectal Cancer"],
     keyFeatures: [

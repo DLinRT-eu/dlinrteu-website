@@ -31,7 +31,7 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
       "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/algomedica.ts",
     contactEmail: "info@algomedica.com",
     anatomicalLocation: ["Whole body"],
-    modality: "CT",
+    modality: ["CT"],
     keyFeatures: [
       "Noise reduction while maintaining diagnostic detail",
       "Improved SNR and low-contrast detectability",

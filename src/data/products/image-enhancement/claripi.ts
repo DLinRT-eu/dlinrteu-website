@@ -30,7 +30,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://claripi.com/",
     productUrl: "https://claripi.com/clarict-ai/",
     anatomicalLocation: ["Head", "Chest", "Heart", "Abdomen", "Pelvis", "Spine"],
-    modality: "CT",
+    modality: ["CT"],
     diseaseTargeted: ["Cancer screening", "Cardiac imaging", "Pulmonary disorders", "Pediatric imaging"],
     version: "Not publicly confirmed as current. Two version identifiers found across sources: 1.1.0 (regulatory device database listing) and 1.2.3 (cited in Ahn & Kim, Diagnostics 2023). No source confirms which, if either, is the present version.",
     keyFeatures: [
@@ -164,7 +164,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://claripi.com/",
     productUrl: "https://claripi.com/clari-ace/",
     anatomicalLocation: ["Chest", "Heart", "Abdomen", "Pelvis"],
-    modality: "CT",
+    modality: ["CT"],
     diseaseTargeted: ["Contrast-enhanced imaging", "Cardiac imaging", "Oncology imaging"],
     keyFeatures: [
       "Selective iodine contrast enhancement",
