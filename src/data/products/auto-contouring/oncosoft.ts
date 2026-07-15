@@ -311,9 +311,9 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Partner distributors"]
     },
-    evidenceRigor: "E3",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent peer-reviewed studies: Hoshina et al. Cureus 2025 (geometric accuracy, prostate, 15 patients), Kawaguchi et al. Cureus 2025 (dosimetric comparison, prostate), Choi et al. Cancers 2024 (1200 Korean patients, multi-site comparative), Miura et al. Cureus 2026 (lung SBRT lobe segmentation). Over 4M contours for 80K patients in clinical practice. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Retrospective multi-institutional plus single-centre studies (Choi 2024, Hoshina 2025, Kawaguchi 2025/2026). No prospective/RCT/meta-analysis — downgraded from E3 to E2.",
     clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Multiple peer-reviewed geometric and dosimetric accuracy assessments across prostate, lung, H&N, thorax, abdomen, pelvis.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
@@ -352,7 +352,12 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     version: "2024",
     releaseDate: "2024-01-01",
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.3390/cancers16213670","title":"OncoStudio auto-contouring clinical evaluation","authors":"Choi Y et al.","journal":"Cancers","year":"2024"},
+    {"doi":"10.7759/cureus.94067","title":"OncoStudio dosimetric study","authors":"Hoshina R et al.","journal":"Cureus","year":"2025"},
+    {"doi":"10.7759/cureus.91810","title":"OncoStudio clinical workflow","authors":"Kawaguchi H et al.","journal":"Cureus","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }

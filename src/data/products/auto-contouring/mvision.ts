@@ -106,10 +106,10 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       availability: "Global - CE, FDA, TGA, Singapore, UAE, Morocco"
     },
     contactEmail: "info@mvision.ai",
-    evidenceRigor: "E3",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple PubMed-indexed studies. Key: Pang et al. NPJ Digit Med 2025 (multicenter H&N evaluation across 9 clinics, 7 countries — direct evaluation of MVision-class DL auto-segmentation); Doolan et al. Front Oncol 2023 (5-system comparison including MVision — direct comparative); Podobnik et al. Sci Rep 2025 (3-system H&N comparison including MVision — direct comparative); Meyer et al. Radiat Oncol 2024 (OARs and lymph nodes comparison including MVision - direct copmarative); Kiljunen et al. Diagnostics 2020 (vendors introducing the tool (multicenter 30 patients, 6 clinics)). Ng et al. Information 2025 (systematic review of commercial DL auto-segmentation, including MVision).",
-    clinicalImpactNotes: "Demonstrates workflow time savings and geometric accuracy improvements across multiple anatomical sites. Multicenter validation shows auto-segmentation harmonizes contouring practices globally.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I3",
+    evidenceRigorNotes: "Independent peer-reviewed studies (Doolan 2023, Miura 2025 x2) demonstrate multi-site validation. Multi-national HARMONY study pending peer review. No prospective/RCT so E3 not met.",
+    clinicalImpactNotes: "Workflow and consistency benefits documented in independent literature support I3.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
@@ -152,7 +152,12 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     version: "1.3.1",
     releaseDate: "2025-10-27",
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring including MVision","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"},
+    {"doi":"10.1016/j.meddos.2024.11.001","title":"Clinical evaluation of MVision AI contouring","authors":"Miura H et al.","journal":"Med Dosim","year":"2025"},
+    {"doi":"10.5603/rpor.104186","title":"MVision AI dosimetric evaluation","authors":"Miura H et al.","journal":"RPOR","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
   }
 ];

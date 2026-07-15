@@ -88,7 +88,11 @@ export const AviewRTACS: ProductDetails = {
     "Quality assurance tools",
     "Breast contouring support"
   ],
-  lastRevised: "2026-06-15",
+  keyPapers: [
+    {"doi":"10.3857/roj.2021.00234","title":"aview RT-ACS clinical validation","authors":"Byun HK et al.","journal":"Radiat Oncol J","year":"2021"},
+    {"doi":"10.3389/fonc.2020.626277","title":"Deep-learning auto-segmentation evaluation","authors":"Chung SY et al.","journal":"Front Oncol","year":"2020"}
+  ],
+  lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",
   releaseDate: "2025-08-20",
   trainingData: {
@@ -98,7 +102,7 @@ export const AviewRTACS: ProductDetails = {
     disclosureLevel: "minimal"
   },
   certification: "CE & FDA",
-  evidenceRigor: "E2",
+  evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I2",
   evaluationData: {

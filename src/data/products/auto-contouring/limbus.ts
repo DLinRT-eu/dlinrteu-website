@@ -96,10 +96,10 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2023-06-15",
-    evidenceRigor: "E3",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "15 PubMed-indexed studies. Key: Grossi et al. Curr Oncol 2025 (multicentric prostate VGRT), Fan et al. JACMP 2025 (4-system comparison, 111 patients, abdominal OARs), Fontaine et al. Phys Med 2025 (robustness evaluation across software versions), McLaughlin et al. 2025 (308 prostate patients, rectum dosimetric/toxicity), Kim et al. Phys Eng Sci Med 2024 (7-system comparison, 42 cases). Multiple independent multi-center multi-national validations. PubMed verified 2026-02-26.",
-    clinicalImpactNotes: "Demonstrates meaningful time savings (13-26 minutes) for prostate and lymph node contouring across institutions. Widely validated across breast, prostate, H&N, and lung.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I3",
+    evidenceRigorNotes: "Multiple independent multi-institutional peer-reviewed studies (Starke 2024, Radici 2022, Grossi 2025, Doolan 2023, Tabita 2025) support E2. No prospective/RCT evidence — insufficient for E3.",
+    clinicalImpactNotes: "Independent workflow-adoption and time-saving evidence (Radici 2022) plus consistency benefits supports I3.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
@@ -145,7 +145,13 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.1259/bjr.20230211","title":"Multi-institutional evaluation of Limbus auto-contouring for radiotherapy","authors":"Starke S et al.","journal":"BJR","year":"2024"},
+    {"doi":"10.3390/life12122088","title":"Workflow impact of Limbus AI auto-contouring","authors":"Radici L et al.","journal":"Life","year":"2022"},
+    {"doi":"10.3390/curroncol32020078","title":"Multicentric evaluation of Limbus contour","authors":"Grossi C et al.","journal":"Curr Oncol","year":"2025"},
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial deep-learning auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K241837), company official sources. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include Limbus per Methods."
   }
 ];

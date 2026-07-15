@@ -93,9 +93,9 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     },
     version: "-",
     releaseDate: "2022-09-01",
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) K250427 plus peer-reviewed external validation (Akdemir et al., J Neuro-Oncology) reporting lesion-wise sensitivity ~52%, PPV 78%, mean DSC ≈0.60 and substantial revision rates for many cases.",
+    evidenceRigorNotes: "FDA 510(k) K250427 performance summary plus one peer-reviewed external validation (Akdemir et al. 2025) showing variable performance. No further independent literature — E1.",
     clinicalImpactNotes: "Technical feasibility demonstrated; external validation shows variable performance (lower sensitivity for small lesions) and high revision rates, indicating limited clinical impact without prospective outcome data.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -105,7 +105,10 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    keyPapers: [
+    {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     companyRevisionDate: "",
     source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports"
   }

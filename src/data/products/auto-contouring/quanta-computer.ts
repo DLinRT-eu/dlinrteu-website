@@ -87,9 +87,9 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2024",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E1",
+    evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) software verification and validation. Limited public peer-reviewed clinical evidence at time of inclusion.",
+    evidenceRigorNotes: "No independent peer-reviewed studies identified as of 2026-07-14. FDA K231855 (Feb 2024) regulatory clearance only.",
     clinicalImpactNotes: "Time-saving for OAR contouring; awaiting independent multi-center clinical validation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -123,7 +123,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     releaseDate: "2024-02-13",
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2024-02-13)"
   }
 ];

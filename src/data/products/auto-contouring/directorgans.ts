@@ -153,7 +153,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8) - independent dosimetric validation of DirectORGANS for prostate RT planning at Gazi University. FDA validation (K233650, K250822).",
+    evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -169,7 +169,11 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s12894-025-01875-8"
       }
     ],
-    lastRevised: "2026-06-13",
+    keyPapers: [
+    {"doi":"10.1186/s12894-025-01875-8","title":"DirectORGANS pelvis dosimetric evaluation","journal":"BMC Urology","year":"2025"},
+    {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
   }
 ];

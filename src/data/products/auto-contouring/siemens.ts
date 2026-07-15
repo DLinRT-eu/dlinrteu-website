@@ -80,7 +80,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E3",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "6 PubMed-indexed studies. Key: Rayn et al. J Cancer Res Ther 2024 (first multi-institutional DI2IN evaluation), Kim et al. Phys Eng Sci Med 2024 (7-system comparative, 42 cases), Yamauchi et al. Med Dosim 2024 (DL vs atlas comparison), Hu et al. J Appl Clin Med Phys 2023, Marschner et al. Radiat Oncol 2022 (237 thorax + 102 pelvis). FDA validation on 579 cases across 5 continents. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Multiple independent multi-institutional peer-reviewed studies (Rayn 2024, Kim 2024, Yamauchi 2024, Maduro Bustos 2023, Marschner 2022) confirm E3.",
     clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. Multi-institutional evaluation confirms consistent geometric accuracy. Comparative studies show competitive performance against 6 other AI systems.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
@@ -334,7 +334,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         relationship: "Shares the DI2IN OAR contouring engine with syngo.via RT Image Suite (see Rayn et al. J Cancer Res Ther 2024; Lin/Fan JACMP 2025 which evaluates 'Siemens syngo.via' — the same underlying contouring algorithm packaged under a different commercial name)."
       }
     ],
-    lastRevised: "2026-06-13",
+    keyPapers: [
+    {"doi":"10.1016/j.ejmp.2024.103324","title":"Multi-institutional evaluation of AI-Rad Companion","authors":"Rayn K et al.","journal":"Phys Med","year":"2024"},
+    {"doi":"10.1016/j.radonc.2022.04.020","title":"Clinical validation of AI-Rad Companion OAR","authors":"Marschner S et al.","journal":"Radiother Oncol","year":"2022"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
