@@ -88,7 +88,6 @@ export const AviewRTACS: ProductDetails = {
     "Quality assurance tools",
     "Breast contouring support"
   ],
-  evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) but both from the same Yonsei research group. E2 tentative pending additional independent-site validation — downgraded to E1.",
   keyPapers: [
     {"doi":"10.3857/roj.2021.00234","title":"aview RT-ACS clinical validation","authors":"Byun HK et al.","journal":"Radiat Oncol J","year":"2021"},
     {"doi":"10.3389/fonc.2020.626277","title":"Deep-learning auto-segmentation evaluation","authors":"Chung SY et al.","journal":"Front Oncol","year":"2020"}
