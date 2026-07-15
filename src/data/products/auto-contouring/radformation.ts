@@ -674,7 +674,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "E2: Peer-reviewed external validation includes Doolan et al. 2023 (single-center 5-vendor comparison, 80 patients), Goddard et al. 2024 (3-vendor physician-scored evaluation with implementation across a five-facility health system), Kim et al. 2024 (7-system quantitative comparison, 42 cases), and Fan et al. 2025 (4-vendor abdominal OAR outlier analysis, 111 cases). Evidence is retrospective/vendor-independent; no prospective outcome study was identified.",
+    evidenceRigorNotes: "Independent multi-institutional evaluation (Goddard 2024, 5 facilities) plus Doolan 2023 and Fan 2025 support E2.",
     clinicalImpactNotes: "I2: Peer-reviewed studies support contour quality, physician acceptability, and workflow time savings, but also show anatomy/guideline-dependent failure modes requiring expert review and local QA. No prospective evidence of improved tumor control, toxicity, or survival was identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE MDR Class IIa + FDA 510(k): moderate implementation effort — local validation, interface testing, structure nomenclature mapping, and ongoing contour QA required before clinical use.",
@@ -708,7 +708,11 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     version: "2.7",
     releaseDate: "2026-03-19",
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.1186/s13014-024-02451-4","title":"Auto-contouring comparison across 5 facilities including Radformation","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024"},
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15)."
   }
 ];

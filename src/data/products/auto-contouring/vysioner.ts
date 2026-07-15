@@ -75,9 +75,9 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Partnerships"],
     },
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "I1",
     evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al., IJROBP 2021. Single-center retrospective studies.",
-    clinicalImpactNotes: "Demonstrates improved contouring accuracy and efficiency for brain metastases in single-center settings.",
+    clinicalImpactNotes: "Wang 2023 single-centre technical evaluation only; workflow/efficiency I2 claim not substantiated by independent evidence — downgraded to I1.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
@@ -88,7 +88,10 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     version: "2.5",
     releaseDate: "2023-10-05",
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.1186/s13014-023-02246-z","title":"vBrain auto-contouring for brain metastases","authors":"Wang J et al.","journal":"Radiat Oncol","year":"2023"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z)",
     evidence: [
       {

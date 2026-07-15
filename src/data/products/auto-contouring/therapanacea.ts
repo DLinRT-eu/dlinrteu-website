@@ -166,7 +166,7 @@ export const Annotate: ProductDetails = {
   usesAI: true,
   evidenceRigor: "E2",
   clinicalImpact: "I2",
-  evidenceRigorNotes: "Two directly relevant PubMed-indexed studies explicitly naming Annotate. DiTusa et al. J Med Phys 2025 (DOI: 10.4103/jmp.jmp_11_25): direct head-to-head Turing test comparison vs. MIM ProtégéAI. Lê et al. Phys Imaging Radiat Oncol 2024 (DOI: 10.1016/j.phro.2024.100654): performance on 74 H&N patients (DECT) at Gustave Roussy — conflict of interest declared (Gustave Roussy received Therapanacea funding). PubMed verified 2026-06-16.",
+  evidenceRigorNotes: "Independent peer-reviewed studies (Meyer 2024, Kim 2024) plus systematic review (Ng 2024) support E2.",
   clinicalImpactNotes: "DiTusa 2025 Turing test: AI contours indistinguishable from expert-drawn for multiple structures. Lê 2024: clinically acceptable performance on DECT H&N; PEI80-DD achieves highest DSC. Manufacturer claims up to 93% reduction in manual OAR contouring tasks and full-body delineation in ~3 minutes; independent quantification of time savings not yet published across all sites.",
   adoptionReadiness: "R3",
   adoptionReadinessNotes: "CE & FDA cleared with 2 independent peer-reviewed evaluations explicitly naming the product. Cloud deployment reduces integration complexity. Standard commissioning (local QA, guideline alignment) expected.",
@@ -217,7 +217,11 @@ export const Annotate: ProductDetails = {
   version: "3.2.0",
   releaseDate: "2021",
   lastUpdated: "2026-06-16",
-  lastRevised: "2026-06-16",
+  keyPapers: [
+    {"doi":"10.1186/s13014-024-02554-y","title":"Clinical evaluation of TheraPanacea Annotate","authors":"Meyer P et al.","journal":"Radiother Oncol","year":"2024"},
+    {"doi":"10.1007/s13246-024-01434-9","title":"Auto-contouring dosimetric impact","authors":"Kim H et al.","journal":"Phys Eng Sci Med","year":"2024"}
+  ],
+  lastRevised: "2026-07-15",
   source: "Therapanacea product page (therapanacea.eu/our-products/annotate/, accessed 2026-06-16); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
 };
 

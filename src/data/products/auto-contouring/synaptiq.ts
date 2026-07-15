@@ -43,7 +43,7 @@ export const MediqRT: ProductDetails = {
         sourceUrl: "https://synaptiq.io/product/",
       },
       evidenceRigor: "E0",
-      evidenceRigorNotes: "No peer-reviewed publication located for the registration module. PubMed searched 2026-06-13.",
+      evidenceRigorNotes: "One peer-reviewed publication (Fedrau 2026) plus ESTRO abstracts; no independent multi-centre evidence — E1.",
       clinicalImpact: "I0",
     },
   },
@@ -130,7 +130,10 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Multi-vendor and multi-modality integration",
     "Cloud-based data storage and visualization"
   ],
-  lastRevised: "2026-06-15",
+  keyPapers: [
+    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026"}
+  ],
+  lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",

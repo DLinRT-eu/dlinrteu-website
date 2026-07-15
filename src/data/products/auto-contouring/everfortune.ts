@@ -108,11 +108,11 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26.",
-    clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "No independent peer-reviewed literature identified as of 2026-07-14. FDA K251306 (Jan 2026) regulatory clearance only.",
+    clinicalImpactNotes: "No clinical impact data published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-06-15",
+    lastRevised: "2026-07-15",
     guidelines: [
       {
         name: "AAPM TG-263",

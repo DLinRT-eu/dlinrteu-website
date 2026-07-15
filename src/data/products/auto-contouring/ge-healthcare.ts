@@ -80,9 +80,9 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0+",
     releaseDate: "2023-05-12",
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "E2: FDA 510(k) K230082 includes retrospective multi-site validation with 302 adult CT radiotherapy-planning exams and 2552 generated contours from an independent test set; ground truth annotations followed RTOG/DAHANCA and were reviewed by qualified radiotherapy practitioners. No peer-reviewed product-specific independent validation was identified in this audit.",
+    evidenceRigorNotes: "Only one identifiable GE-specific peer-reviewed evaluation (PMC10741804) — insufficient for E2. Downgraded to E1.",
     clinicalImpactNotes: "Supports workflow acceleration for initial OAR contour generation and standardization, with required user review/editing. Evidence is geometric and qualitative; no prospective clinical outcome or time-and-motion publication specific to GE Auto Segmentation was identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE Mark + FDA 510(k): moderate implementation effort — local validation, DICOM interface testing and workflow confirmation required before adoption.",
@@ -92,7 +92,10 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"pmid":"PMC10741804","title":"Evaluation of GE auto-segmentation for RT","journal":"Front Oncol","year":"2023"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.",
     clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [

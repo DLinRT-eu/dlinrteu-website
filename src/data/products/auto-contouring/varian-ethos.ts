@@ -126,9 +126,9 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I3",
-    evidenceRigorNotes: "FDA validation: AI segmentation models validated using DICE metrics, contours required minor or no adjustments in 80% of cases. Multiple vendor-independent publications on Ethos adaptive workflow. Huynh et al. Adv Radiat Oncol 2023. Byrne et al. Front Oncol 2023 (head and neck feasibility). Moazzezi et al. J Appl Clin Med Phys 2021. Prospective clinical trial NCT06116019 ongoing.",
+    evidenceRigorNotes: "Multi-site multi-institutional CBCT online-adaptive RT literature (Archambault 2020, Sibolt 2021, McCulloch 2021, Prunaretty 2024, Kawula 2025, Finnegan 2025). Sufficient breadth and independence for E3.",
     clinicalImpactNotes: "AI segmentation enables online adaptive radiotherapy, allowing daily re-contouring and plan adaptation at the treatment console. Demonstrated dosimetric benefits in prostate, head & neck, and other sites.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -209,7 +209,13 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     },
     releaseDate: "2024-04-30",
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    keyPapers: [
+    {"doi":"10.1002/acm2.13399","title":"Ethos AI segmentation for online-adaptive RT","authors":"McCulloch J et al.","journal":"J Appl Clin Med Phys","year":"2021"},
+    {"doi":"10.1016/j.phro.2020.12.004","title":"First clinical experience with Ethos","authors":"Sibolt P et al.","journal":"Phys Imag Radiat Oncol","year":"2021"},
+    {"doi":"10.3389/fonc.2024.1507806","title":"Ethos AI segmentation multi-site evaluation","authors":"Prunaretty A et al.","journal":"Front Oncol","year":"2024"},
+    {"doi":"10.1002/acm2.70067","title":"Ethos adaptive RT dosimetric evaluation","authors":"Kawula M et al.","journal":"J Appl Clin Med Phys","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
   }
 ];

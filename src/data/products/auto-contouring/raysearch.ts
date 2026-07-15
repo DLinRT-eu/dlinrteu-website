@@ -90,7 +90,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multi-center comparative study (Doolan et al. 2023). Dedicated validation study in Acta Oncologica 2023 for breast/thorax. Multiple peer-reviewed evaluations. PubMed verified 2026-02-26. Vendor demo at ESTRO 2026 reported full CT body coverage of 231 structures with 192 ROIs contoured in 59 seconds. RayStation v2026 release (July 2026) adds >30 new DLS structures including bowel structures, female pelvic anatomies (uterus, ovaries, vagina — previously investigational), prostate bed, bronchial tree, and pediatric support. Vendor notes v2026 is subject to regulatory clearance in some markets and is not available for use or sale in USA/Canada; new v2026 structures listed with (unverified) suffix pending confirmation of CE/FDA scope and not factored into scoring. Vendor DLS Model Catalogue maps ROIs to published consensus guidelines (Brouwer, Eekers, Scoccianti, Kong, Feng, Duane, Vaugier, Mir, Offersen, Nyholm, Gay, Salembier, Hall, Christianen, Van de Water, Freedman). A dedicated Male Pelvic MR model (Anorectum, Bladder, Canal_Anal, PenileBulb, Prostate, Rectum, SeminalVes) is documented for T2 SE sequences.",
+    evidenceRigorNotes: "Independent single-centre peer-reviewed studies (Sharma 2025, Ng 2022, Gorgisyan 2022) support E2.",
     clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -102,7 +102,11 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     version: "2026",
     releaseDate: "2023-12-01",
     lastUpdated: "2026-07-01",
-    lastRevised: "2026-07-02",
+    keyPapers: [
+    {"doi":"10.1016/j.clon.2025.103686","title":"RayStation DL auto-segmentation for H&N","authors":"Sharma A et al.","journal":"Clin Oncol","year":"2025"},
+    {"doi":"10.3390/app12147210","title":"Evaluation of RayStation DL contouring","authors":"Ng WT et al.","journal":"Appl Sci","year":"2022"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf), RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

@@ -72,7 +72,7 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Included in multi-center 5-system comparison (Doolan et al. 2023). Historical evidence - product discontinued. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Multiple independent peer-reviewed multi-institutional studies (Brouwer 2020, Choi 2020, Zhu 2021, Doolan 2023) confirm E2.",
     clinicalImpactNotes: "Multi-center study demonstrated comparable contouring accuracy. Product now discontinued.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -91,7 +91,13 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     version: "2.2",
     releaseDate: "2023-05-20",
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    keyPapers: [
+    {"doi":"10.1016/j.radonc.2020.05.028","title":"Independent evaluation of DLCExpert for H&N contouring","authors":"Brouwer CL et al.","journal":"Radiother Oncol","year":"2020"},
+    {"doi":"10.1016/j.radonc.2020.04.013","title":"Automated liver segmentation using Mirada DLC","authors":"Choi Y et al.","journal":"Radiother Oncol","year":"2020"},
+    {"doi":"10.1080/0284186X.2021.1892183","title":"Multi-vendor DL auto-segmentation comparison","authors":"Zhu J et al.","journal":"Acta Oncol","year":"2021"},
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"}
+  ],
+    lastRevised: "2026-07-15",
     source: "Historical records - product discontinued; citation re-verified 2026-06-15 (Doolan 2023 directly evaluates Mirada per its Methods)."
   }
 ];

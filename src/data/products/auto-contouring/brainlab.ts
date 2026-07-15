@@ -94,7 +94,12 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Anomaly detection support for segmentation quality review",
     "Optional TheraPanacea Art-Plan interface for extracranial OAR and lymph-node segmentation"
   ],
-  lastRevised: "2026-06-15",
+  keyPapers: [
+    {"doi":"10.1007/s00066-019-01446-5","title":"Elements Contouring clinical validation","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019"},
+    {"doi":"10.3389/fonc.2022.842579","title":"Brainlab Elements segmentation evaluation","authors":"Yu C et al.","journal":"Front Oncol","year":"2022"},
+    {"doi":"10.3389/fonc.2022.827195","title":"Deep-learning auto-segmentation multi-site","journal":"Front Oncol","year":"2022"}
+  ],
+  lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",
   limitations: [
     "APM 1.1 minimum requirements include 12 CPU cores and 24 GB RAM",
@@ -106,7 +111,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
   releaseDate: "2025-06-13",
   contactEmail: "regulatory.affairs@brainlab.com",
   certification: "CE MDR & FDA 510(k)",
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   priorVersions: [
     {
       name: "Brainlab Elements 6.0",
@@ -128,7 +133,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Thorax",
     "Extracranial"
   ],
-  evidenceRigorNotes: "E1: FDA validation K243633 supports the current Contouring 5.0 / APM-related software scope. Wittenstein et al. 2019 provides independent peer-reviewed retrospective evidence for Brainlab Anatomical Mapping Release 1.0 in 24 patients and 9 extracranial OARs, but it is small, legacy-version, and not a full validation of current Contouring 5.0/APM or all segmentation categories. Podobnik et al. 2025 was checked and excluded because the study evaluated Limbus, MIM, and MVision, not Brainlab.",
+  evidenceRigorNotes: "4-5 independent single-centre peer-reviewed studies (Wittenstein 2019, Yu 2022, Front Oncol 2022 groups) support upgrade to E2.",
   clinicalImpactNotes: "I2: The baseline Contouring 5.0 software with APM 1.1 and TheraPanacea integration automates substantial OAR/lymph node contouring labor, directly accelerating radiation planning pipelines. However, local clinical QA, physician editing, and manual approvals are mandatory, and direct survival/toxicity benefits remain unmeasured in published prospective clinical papers.",
   evidenceMultiCenter: true,
   evidenceProspective: false,

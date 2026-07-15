@@ -107,9 +107,9 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s13014-024-02463-0"
       }
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple peer-reviewed multicenter blinded randomized controlled studies with vendor co-authorship. Cervical cancer CTV study involved 6 medical centers and 9 oncologists (doi:10.3389/fonc.2021.702270). Rectal cancer studies include multicenter validation with Turing tests. Studies are vendor-affiliated (MedMind employees as co-authors), not fully independent. PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "Zhu 2025 feasibility plus one multi-vendor comparison; sparse independent literature — downgraded from E2 to E1.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -120,7 +120,10 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     releaseDate: "2022-03-25",
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    keyPapers: [
+    {"doi":"10.1002/acm2.14350","title":"RT-Mind-AI feasibility evaluation","authors":"Zhu J et al.","journal":"J Appl Clin Med Phys","year":"2025"}
+  ],
+    lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01)."
   }
 ];
