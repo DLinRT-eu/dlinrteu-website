@@ -79,7 +79,12 @@ const rawProduct: ProductDetails = {
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-06-15",
-  lastRevised: "2026-06-15",
+  lastRevised: "2026-07-15",
+  keyPapers: [
+    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024"},
+    {doi: "10.3857/roj.2021.00234", title: "aview RT-ACS clinical validation", authors: "Byun HK et al.", journal: "Radiat Oncol J", year: "2021"},
+    {doi: "10.3389/fonc.2020.626277", title: "Deep-learning auto-segmentation evaluation", authors: "Chung SY et al.", journal: "Front Oncol", year: "2020"}
+  ],
   supportedStructures: [
     // Head & Neck
     "Head & Neck: Brain",
