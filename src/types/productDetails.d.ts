@@ -117,6 +117,15 @@ export interface ProductDetails extends Product {
   evidenceRigorNotes?: string;
   clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
   clinicalImpactNotes?: string;
+  keyPapers?: Array<{
+    doi?: string;
+    pmid?: string;
+    title?: string;
+    authors?: string;
+    journal?: string;
+    year?: string;
+    link?: string;
+  }>;
 
   // Adoption Readiness axis (R) — DLinRT extension to the E/I matrix.
   // Higher R = lower residual effort = higher adoption readiness.
