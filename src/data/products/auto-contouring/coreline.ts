@@ -165,9 +165,10 @@ const rawProduct: ProductDetails = {
     "Pelvis: SpinalCord",
     "Pelvis: Prostate"
   ],
-  evidenceRigor: "E2",
+  evidenceRigor: "E1",
   clinicalImpact: "I2",
-  evidenceRigorNotes: "Lee et al. IJROBP 2024 - large-scale (2000+ cases) breast RT implementation study. Kim et al. 2024 - breast target volume validation (PMID 39308634). Independent single-center studies.",
+  evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation.",
+
   clinicalImpactNotes: "Large-scale clinical implementation demonstrates workflow improvement for breast RT contouring.",
   evidenceVendorIndependent: true,
   evidenceMultiCenter: false,
