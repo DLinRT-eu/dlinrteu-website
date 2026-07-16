@@ -105,7 +105,7 @@ export function formatCEInfo(ce: ParsedCEInfo): string {
  */
 function isCECertified(status: string): boolean {
   const positiveStatuses = ['certified', 'approved', 'ce marked', 'cleared', 'ce mark', 'ce_mark'];
-  const negativeStatuses = ['not available', 'not specified', 'under review', 'research', 'not applicable', 'n/a', 'pending'];
+  const negativeStatuses = ['not available', 'not specified', 'under review', 'under_review', 'research', 'not applicable', 'n/a', 'pending'];
   
   const lowerStatus = status.toLowerCase();
   
@@ -123,7 +123,7 @@ function isCECertified(status: string): boolean {
  */
 function isFDACertified(status: string): boolean {
   const positiveStatuses = ['cleared', 'approved', '510(k)', 'pma'];
-  const negativeStatuses = ['not available', 'not specified', 'under review', 'research', 'not applicable', 'n/a', 'pending'];
+  const negativeStatuses = ['not available', 'not specified', 'under review', 'under_review', 'research', 'not applicable', 'n/a', 'pending'];
   
   const lowerStatus = status.toLowerCase();
   

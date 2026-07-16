@@ -192,6 +192,8 @@ const App = () => (
                 <Route path="about" element={<About />} />
                 <Route path="maintenance-team" element={<Navigate to="/about" replace />} />
                 <Route path="donate" element={<Navigate to="/support" replace />} />
+                <Route path="product/aimify" element={<Navigate to="/product/subtle-aimify" replace />} />
+                <Route path="product/directorgans" element={<Navigate to="/product/siemens-directorgans" replace />} />
                 <Route path="product/:id" element={<ProductDetails />} />
                 <Route path="security" element={<Security />} />
                 <Route path="reset-password" element={<ResetPassword />} />
