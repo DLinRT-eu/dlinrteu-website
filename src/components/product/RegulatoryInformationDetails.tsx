@@ -96,7 +96,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
     }
     
     // Check for "Under review" / pending status
-    const pendingStatuses = ['under review', 'pending', 'in progress'];
+    const pendingStatuses = ['under review', 'under_review', 'pending', 'in progress', 'in_progress'];
     const isPending = ceInfo.status && pendingStatuses.some(pend => 
       ceInfo.status!.toLowerCase().includes(pend)
     );
@@ -150,7 +150,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
     }
     
     // Check for "Under review" / pending status
-    const pendingStatuses = ['under review', 'pending', 'in progress'];
+    const pendingStatuses = ['under review', 'under_review', 'pending', 'in progress', 'in_progress'];
     const isPending = fdaInfo.status && pendingStatuses.some(pend => 
       fdaInfo.status.toLowerCase().includes(pend)
     );
