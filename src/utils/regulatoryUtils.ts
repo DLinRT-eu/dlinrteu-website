@@ -143,15 +143,25 @@ export function getStandardizedCertificationTags(product: ProductDetails): strin
   const fdaInfo = parseFDAInfo(product.regulatory?.fda);
   const ceInfo = parseCEInfo(product.regulatory?.ce);
   
-  // Check for exempt status FIRST - from either certification field or CE status
-  const isExempt = 
-    product.certification?.toLowerCase().includes('exempt') ||
+  // Check for FDA CDSS exemption FIRST (21st Century Cures §3060) — non-device pathway.
+  const isCDSSExempt =
+    product.certification?.toLowerCase().includes('cdss') ||
+    fdaInfo?.status?.toLowerCase().includes('cdss');
+
+  // Check for MDR exempt status - from either certification field or CE status
+  const isMDRExempt =
+    (product.certification?.toLowerCase().includes('exempt') && !isCDSSExempt) ||
     ceInfo?.status?.toLowerCase().includes('exempt');
-  
-  if (isExempt) {
+
+  if (isCDSSExempt) {
+    tags.push('FDA CDSS Exempt');
+  }
+
+  if (isMDRExempt) {
     tags.push('MDR Exempt');
-    // Don't add other CE tags if exempt
-  } else {
+  }
+
+  if (!isCDSSExempt && !isMDRExempt) {
     // FDA processing (only if not exempt)
     if (fdaInfo) {
       if (fdaInfo.clearanceNumber?.startsWith('K')) {
