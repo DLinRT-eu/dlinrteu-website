@@ -37,8 +37,9 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
   
   const certificationTags = getStandardizedCertificationTags(displayProduct);
+  const hasCDSSExempt = certificationTags.includes('FDA CDSS Exempt');
   const hasCE = certificationTags.some(tag => tag.startsWith('CE'));
-  const hasFDA = certificationTags.some(tag => tag.startsWith('FDA'));
+  const hasFDA = certificationTags.some(tag => tag.startsWith('FDA') && tag !== 'FDA CDSS Exempt');
   const hasMDRExempt = certificationTags.includes('MDR Exempt');
   
   const getTFDAStatus = () => {
