@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { NEWS_ITEMS } from "@/data/news";
+import type { NewsItem } from "@/types/news";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -30,6 +32,50 @@ const drafts = Object.entries(draftModules)
   }))
   .sort((a, b) => b.slug.localeCompare(a.slug));
 
+function newsItemToNewsletterMarkdown(item: NewsItem): string {
+  const url = `https://dlinrt.eu/news/${item.id}`;
+  const content = (item.content ?? item.summary ?? "").trim();
+  return `DLinRT.eu — ${item.title}
+
+## SUBJECT LINE
+
+[DLinRT.eu] ${item.title}
+
+## PREHEADER
+
+${item.summary}
+
+## BLOCK 1 — 📰 ${item.title}
+
+${content}
+
+👉 Read the full post: ${url}
+
+## BLOCK 2 — Stay in touch
+
+Questions or feedback? Reply to this email or reach us at info@dlinrt.eu.
+Browse the catalog: https://dlinrt.eu/products
+`;
+}
+
+const newsSources = [...NEWS_ITEMS]
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 10)
+  .map((item) => ({
+    key: `news:${item.id}`,
+    label: `${item.date} — ${item.title}`,
+    content: newsItemToNewsletterMarkdown(item),
+  }));
+
+const mdSources = drafts.map((d) => ({
+  key: `md:${d.slug}`,
+  label: d.slug,
+  content: d.content,
+}));
+
+const allSources = [...newsSources, ...mdSources];
+const defaultSource = allSources[0];
+
 interface SyncCounts {
   supabaseTotal: number;
   supabaseActive: number;
@@ -42,8 +88,8 @@ interface SyncCounts {
 
 export default function NewsletterBroadcast() {
   const { user } = useAuth();
-  const [selectedSlug, setSelectedSlug] = useState<string>(drafts[0]?.slug ?? "");
-  const [body, setBody] = useState<string>(drafts[0]?.content ?? "");
+  const [selectedSlug, setSelectedSlug] = useState<string>(defaultSource?.key ?? "");
+  const [body, setBody] = useState<string>(defaultSource?.content ?? "");
   const [subject, setSubject] = useState("");
   const [preheader, setPreheader] = useState("");
   const [testEmail, setTestEmail] = useState("");
@@ -79,12 +125,12 @@ export default function NewsletterBroadcast() {
     if (user?.email && !testEmail) setTestEmail(user.email);
   }, [user, testEmail]);
 
-  function handleSelectDraft(slug: string) {
-    const d = drafts.find((x) => x.slug === slug);
-    if (!d) return;
-    setSelectedSlug(slug);
-    setBody(d.content);
-    const parsed = parseNewsletterMarkdown(d.content);
+  function handleSelectDraft(key: string) {
+    const src = allSources.find((x) => x.key === key);
+    if (!src) return;
+    setSelectedSlug(key);
+    setBody(src.content);
+    const parsed = parseNewsletterMarkdown(src.content);
     setSubject(parsed.subject);
     setPreheader(parsed.preheader);
   }
@@ -215,16 +261,33 @@ export default function NewsletterBroadcast() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>Draft</Label>
+                <Label>Source</Label>
                 <Select value={selectedSlug} onValueChange={handleSelectDraft}>
-                  <SelectTrigger><SelectValue placeholder="Select a draft" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select a source" /></SelectTrigger>
                   <SelectContent>
-                    {drafts.map((d) => (
-                      <SelectItem key={d.slug} value={d.slug}>{d.slug}</SelectItem>
-                    ))}
+                    {newsSources.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel>From news posts</SelectLabel>
+                        {newsSources.map((s) => (
+                          <SelectItem key={s.key} value={s.key}>{s.label}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
+                    {mdSources.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel>From markdown drafts</SelectLabel>
+                        {mdSources.map((s) => (
+                          <SelectItem key={s.key} value={s.key}>{s.label}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground">
+                  News posts are converted to the newsletter template on the fly — edit subject, preheader and body before pushing.
+                </p>
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="subject">Subject</Label>
                 <Input id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
