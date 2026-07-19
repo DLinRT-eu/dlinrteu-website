@@ -37,8 +37,9 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
   const displayProduct = isEditMode && editedProduct ? editedProduct : product;
   
   const certificationTags = getStandardizedCertificationTags(displayProduct);
+  const hasCDSSExempt = certificationTags.includes('FDA CDSS Exempt');
   const hasCE = certificationTags.some(tag => tag.startsWith('CE'));
-  const hasFDA = certificationTags.some(tag => tag.startsWith('FDA'));
+  const hasFDA = certificationTags.some(tag => tag.startsWith('FDA') && tag !== 'FDA CDSS Exempt');
   const hasMDRExempt = certificationTags.includes('MDR Exempt');
   
   const getTFDAStatus = () => {
@@ -132,6 +133,18 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
         details: null
       };
     }
+
+    if (hasCDSSExempt) {
+      return {
+        label: "FDA CDSS Exempt",
+        icon: <AlertTriangle className="h-3 w-3" />,
+        variant: "warning" as const,
+        description:
+          "FDA Clinical Decision Support Software exemption (21st Century Cures §3060) — non-device pathway, not equivalent to 510(k)/De Novo clearance.",
+        details: fdaInfo
+      };
+    }
+    
     
     // Check for explicit "Not Available" or similar negative statuses
     const negativeStatuses = ['not available', 'not specified', 'not applicable', 'n/a'];

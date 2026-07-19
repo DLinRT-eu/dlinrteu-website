@@ -113,4 +113,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     logoUrl: "/logos/quanta-computer.png",
     primaryTask: "Auto-Contouring"
   },
+  {
+    id: "lumonus",
+    name: "Lumonus",
+    description: "Radiation-oncology AI company (Sydney, AU and New York, US) building an \"Oncology Intelligence Layer\" that automates consult, documentation, planning management and analytics using LLMs and machine learning. Marketed under an FDA Clinical Decision Support Software (CDSS) exemption pathway.",
+    website: "https://www.lumonus.com",
+    productIds: ["lumonus-ai"],
+    category: "Specialized Solutions",
+    logoUrl: "/placeholder.svg",
+    primaryTask: "Platform",
+    secondaryTasks: ["Performance Monitor", "Treatment Planning"]
+  },
 ];
