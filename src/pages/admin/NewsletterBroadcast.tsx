@@ -125,12 +125,12 @@ export default function NewsletterBroadcast() {
     if (user?.email && !testEmail) setTestEmail(user.email);
   }, [user, testEmail]);
 
-  function handleSelectDraft(slug: string) {
-    const d = drafts.find((x) => x.slug === slug);
-    if (!d) return;
-    setSelectedSlug(slug);
-    setBody(d.content);
-    const parsed = parseNewsletterMarkdown(d.content);
+  function handleSelectDraft(key: string) {
+    const src = allSources.find((x) => x.key === key);
+    if (!src) return;
+    setSelectedSlug(key);
+    setBody(src.content);
+    const parsed = parseNewsletterMarkdown(src.content);
     setSubject(parsed.subject);
     setPreheader(parsed.preheader);
   }
