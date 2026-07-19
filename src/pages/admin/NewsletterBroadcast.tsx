@@ -88,8 +88,8 @@ interface SyncCounts {
 
 export default function NewsletterBroadcast() {
   const { user } = useAuth();
-  const [selectedSlug, setSelectedSlug] = useState<string>(drafts[0]?.slug ?? "");
-  const [body, setBody] = useState<string>(drafts[0]?.content ?? "");
+  const [selectedSlug, setSelectedSlug] = useState<string>(defaultSource?.key ?? "");
+  const [body, setBody] = useState<string>(defaultSource?.content ?? "");
   const [subject, setSubject] = useState("");
   const [preheader, setPreheader] = useState("");
   const [testEmail, setTestEmail] = useState("");
