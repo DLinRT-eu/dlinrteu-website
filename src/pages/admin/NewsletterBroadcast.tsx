@@ -32,6 +32,50 @@ const drafts = Object.entries(draftModules)
   }))
   .sort((a, b) => b.slug.localeCompare(a.slug));
 
+function newsItemToNewsletterMarkdown(item: NewsItem): string {
+  const url = `https://dlinrt.eu/news/${item.id}`;
+  const content = (item.content ?? item.summary ?? "").trim();
+  return `DLinRT.eu — ${item.title}
+
+## SUBJECT LINE
+
+[DLinRT.eu] ${item.title}
+
+## PREHEADER
+
+${item.summary}
+
+## BLOCK 1 — 📰 ${item.title}
+
+${content}
+
+👉 Read the full post: ${url}
+
+## BLOCK 2 — Stay in touch
+
+Questions or feedback? Reply to this email or reach us at info@dlinrt.eu.
+Browse the catalog: https://dlinrt.eu/products
+`;
+}
+
+const newsSources = [...NEWS_ITEMS]
+  .sort((a, b) => (a.date < b.date ? 1 : -1))
+  .slice(0, 10)
+  .map((item) => ({
+    key: `news:${item.id}`,
+    label: `${item.date} — ${item.title}`,
+    content: newsItemToNewsletterMarkdown(item),
+  }));
+
+const mdSources = drafts.map((d) => ({
+  key: `md:${d.slug}`,
+  label: d.slug,
+  content: d.content,
+}));
+
+const allSources = [...newsSources, ...mdSources];
+const defaultSource = allSources[0];
+
 interface SyncCounts {
   supabaseTotal: number;
   supabaseActive: number;
