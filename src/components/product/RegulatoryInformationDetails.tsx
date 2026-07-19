@@ -133,6 +133,18 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
         details: null
       };
     }
+
+    if (hasCDSSExempt) {
+      return {
+        label: "FDA CDSS Exempt",
+        icon: <AlertTriangle className="h-3 w-3" />,
+        variant: "warning" as const,
+        description:
+          "FDA Clinical Decision Support Software exemption (21st Century Cures §3060) — non-device pathway, not equivalent to 510(k)/De Novo clearance.",
+        details: fdaInfo
+      };
+    }
+    
     
     // Check for explicit "Not Available" or similar negative statuses
     const negativeStatuses = ['not available', 'not specified', 'not applicable', 'n/a'];
