@@ -96,13 +96,23 @@ export const hasRegulatoryApproval = (product: ProductDetails, includeInvestigat
   // Check for MDR exempt status (case-insensitive)
   const hasMDRExempt = product.certification?.toLowerCase() === 'mdr exempt';
 
+  // Check for FDA Clinical Decision Support Software (CDSS) exemption — a formal non-device
+  // determination under 21st Century Cures §3060. Treated analogously to MDR exempt for
+  // inclusion purposes; disclosed clearly on the product page.
+  const hasCDSSExempt =
+    product.certification?.toLowerCase().includes('cdss exempt') ||
+    (typeof product.regulatory?.fda === 'object' &&
+      (product.regulatory?.fda as { status?: string })?.status?.toLowerCase().includes('cdss_exempt')) ||
+    (typeof product.regulatory?.fda === 'string' &&
+      product.regulatory.fda.toLowerCase().includes('cdss'));
+
   // Check for other recognized regulatory authorities (NMPA, TGA, PMDA, MFDS, Health Canada, ANVISA, MHRA, UKCA, TFDA)
   const hasOther = hasOtherRecognizedAuthorityApproval(product);
 
   // Check for investigational status if enabled
   const isInvestigational = includeInvestigational && isInvestigationalProduct(product);
 
-  return hasFDA || hasCE || hasMDRExempt || hasOther || isInvestigational;
+  return hasFDA || hasCE || hasMDRExempt || hasCDSSExempt || hasOther || isInvestigational;
 };
 
 /**
