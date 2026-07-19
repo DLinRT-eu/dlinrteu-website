@@ -261,16 +261,33 @@ export default function NewsletterBroadcast() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>Draft</Label>
+                <Label>Source</Label>
                 <Select value={selectedSlug} onValueChange={handleSelectDraft}>
-                  <SelectTrigger><SelectValue placeholder="Select a draft" /></SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select a source" /></SelectTrigger>
                   <SelectContent>
-                    {drafts.map((d) => (
-                      <SelectItem key={d.slug} value={d.slug}>{d.slug}</SelectItem>
-                    ))}
+                    {newsSources.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel>From news posts</SelectLabel>
+                        {newsSources.map((s) => (
+                          <SelectItem key={s.key} value={s.key}>{s.label}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
+                    {mdSources.length > 0 && (
+                      <SelectGroup>
+                        <SelectLabel>From markdown drafts</SelectLabel>
+                        {mdSources.map((s) => (
+                          <SelectItem key={s.key} value={s.key}>{s.label}</SelectItem>
+                        ))}
+                      </SelectGroup>
+                    )}
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground">
+                  News posts are converted to the newsletter template on the fly — edit subject, preheader and body before pushing.
+                </p>
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="subject">Subject</Label>
                 <Input id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
