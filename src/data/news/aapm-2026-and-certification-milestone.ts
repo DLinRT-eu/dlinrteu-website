@@ -5,7 +5,7 @@ export const aapm2026AndCertificationMilestone: NewsItem = {
   date: "2026-07-19",
   title: "AAPM 2026 Round-up and Company Certification Milestone",
   summary:
-    "AI-in-RT announcements from AAPM 2026 (Vancouver, 19–22 July) covering RaySearch, Sun Nuclear (Mirion), GE HealthCare/MIM Software and TheraPanacea, plus a milestone update on manufacturer-certified products (Accuray, Sun Nuclear, Carina Medical, Synaptiq).",
+    "AI-in-RT announcements from AAPM 2026 (Vancouver, 19–22 July) covering RaySearch, Sun Nuclear (Mirion), GE HealthCare/MIM Software and TheraPanacea, plus a milestone update on manufacturer-certified products (Accuray, Sun Nuclear, Carina Medical, Synaptiq) and the addition of Lumonus under the FDA CDSS-exempt pathway.",
   content: `
 The **68th AAPM Annual Meeting & Exhibition** runs in Vancouver from 19 to 22 July 2026, jointly with COMP. As with previous congress round-ups, only announcements with a clear AI/deep-learning component for radiotherapy are summarised here, per the [product inclusion criteria](/about). Items reported by vendors without a corresponding regulatory clearance, publication or product page are noted as attendance-only.
 
