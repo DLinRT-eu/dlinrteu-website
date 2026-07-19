@@ -1,38 +1,45 @@
+## Reconsider Lumonus for inclusion
 
-# Deep-Review Re-Scoring — Auto-Contouring Wave
+Rationale for revisiting: our catalog already includes AI-workflow / QA-of-AI style products (e.g. RaySearch **RayIntelligence** as a Performance Monitor tagged MDR-exempt; MVision Verify; PTW Aqualis). Lumonus AI sits in the same family — ML/LLM-based automation wrapped around the RT planning and follow-up workflow — and the FDA **Clinical Decision Support Software (CDSS) exemption** it holds is a formal regulatory determination (non-device under 21st Century Cures §3060), which is analogous to the "MDR-exempt" pathway we already accept.
 
-The audit flagged 59 products at E≥E1 without `keyPapers`. Per the audit-swarm skill's Minimal Intervention policy, this is a separate confirmed edit pass, done one category at a time. This plan covers the **auto-contouring** wave.
+Under that reading Lumonus meets the inclusion gate.
 
-## Scope
+## Proposed catalog entry
 
-Only products in `src/data/products/auto-contouring/` whose `evidenceRigor` is `E1` or higher AND `keyPapers` is missing/empty. Products at E0 (regulatory-only) are not in scope — no keyPapers expected there.
+- **New product file:** `src/data/products/platform/lumonus.ts`
+  - `id`: `lumonus-ai`
+  - `name`: Lumonus AI (Oncology Intelligence Layer)
+  - `category`: Platform (primary), with `secondaryCategories`: Performance Monitor, Treatment Planning
+  - `usesAI`: true (LLMs + ML), scoped to workflow/decision support
+  - `company`: Lumonus
+  - `modality`: N/A (workflow layer over EMR/OIS/TPS)
+  - Modules described: Consult, Document, Plan (dosimetry workspace + planning automation), Improve (analytics)
+  - `regulatory`: `us: { status: "cdss_exempt", type: "21st Century Cures §3060 CDSS exemption", notes: "Sigma module — non-device determination per Rook QS case study" }`; `ce: "not_marked"`; other authorities: none identified
+  - `evidenceRigor`: **E0** (no peer-reviewed validation identified)
+  - `clinicalImpact`: **I0**
+  - `evaluationData`: MSK collaboration announcement only, flagged as non-peer-reviewed
+  - `limitations`: workflow/LLM-oriented; not a validated DL clinical algorithm for a core RT function; FDA CDSS exemption is a non-device pathway, not a clearance
+  - `keyPapers`: empty (none available)
+  - Sources block: Lumonus website, Rook QS case study, MSK collaboration press release, Series B announcement — all with retrieval dates
+- **New company file:** `src/data/companies/specialized-solutions.ts` — append a `lumonus` entry (Sydney, AU + New York, US), `primaryTask: "Platform"`, `secondaryTasks: ["Performance Monitor", "Treatment Planning"]`, `productIds: ["lumonus-ai"]`.
+- **Regulatory utils:** extend `src/utils/regulatoryUtils.ts` if needed to render `cdss_exempt` with a distinct badge (label "FDA CDSS Exempt", styled like MDR-exempt).
+- **News item update:** amend `src/data/news/aapm-2026-and-certification-milestone.ts` — replace the "not included" decision with a short note that Lumonus has been added under the CDSS-exempt pathway, with the caveats above.
+- **Memory update:** append to `mem://policy/regulatory-approval-recognized-authorities` that FDA CDSS exemption (21st Century Cures §3060) is treated analogously to MDR-exempt, requiring public disclosure of the exemption source.
 
-## Steps
+## What this deliberately does not do
 
-1. **Filter worklist** — programmatically load each auto-contouring product, keep only those with `evidenceRigor ∈ {E1, E2, E3}` and empty/missing `keyPapers`. Print the list with current E/I/R.
-2. **Per product, deep-review**:
-   - PubMed search via `websearch--web_search` (queries: `"<product name>" auto-segmentation radiotherapy`, `"<company> <product>" deep learning contour`, plus vendor-specific variants).
-   - Rank hits by relevance (product-specific, ≥2020, peer-reviewed). Prefer external/multi-centre/prospective.
-   - Extract 3–5 citations with authors, year, journal, DOI/PMID, one-line finding.
-   - Re-score `evidenceRigor` and `clinicalImpact` against `docs/review/GUIDE.md` rubric using found study attributes (`vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`).
-   - Update `adoptionReadiness` from the new (E,I) + regulatory status.
-3. **Emit findings** to `/mnt/documents/deep-review-auto-contouring-<DATE>.md` + `.csv` (id, old E/I/R, new E/I/R, rationale, keyPapers count).
-4. **Present the worklist and proposed rescoring FIRST** in chat for your review before touching any `.ts` file.
-5. **After your go-ahead**, apply edits per product: add `keyPapers` array, update `evidenceRigor`/`clinicalImpact`/`adoptionReadiness` + notes, bump `lastRevised`.
-6. Re-run audit swarm to confirm 0 remaining keyPapers warnings in auto-contouring.
+- No claim of clinical validation — evidence stays E0/I0 until Lumonus publishes peer-reviewed studies.
+- No mapping into Auto-Contouring / Image Synthesis / Reconstruction, since no specific DL clinical algorithm is documented.
+- No AdaptCHECK, ART-Plan, or ProtégéAI+ 2.0 changes in this plan — those remain follow-ups.
 
-## Out of scope
+## Open decisions before I implement
 
-- Other categories (image-enhancement, reconstruction, etc.) — separate waves.
-- E0 products — no keyPapers requirement.
-- Any product data field other than evidence/scoring/lastRevised.
+1. **Primary category** — Platform (my recommendation, matches MVision Platform / RayIntelligence pattern) vs. Performance Monitor vs. Treatment Planning. Prefer Platform because it spans the full workflow.
+2. **Regulatory badge** — introduce a new `cdss_exempt` status (cleanest, distinct from MDR-exempt), or reuse the existing `mdr_exempt` label with a US-specific note (simpler, no schema change).
+3. **News item** — amend the just-published AAPM post (my recommendation), or leave it and add a small standalone note in a future update.
 
-## Deliverables
+If you confirm 1 = Platform, 2 = new `cdss_exempt` status, 3 = amend, I will proceed exactly as above once switched to build mode.
 
-- Deep-review report (`.md` + `.csv`) in `/mnt/documents/`.
-- One PR-equivalent edit pass covering the auto-contouring wave.
-- Audit re-run confirming resolution.
+&nbsp;
 
-## Notes on cost/time
-
-Each product needs ~2–4 web searches. With ~20–30 in-scope products expected, this is a substantial multi-turn pass. I'll batch searches in parallel where possible and pause after step 4 for your approval before writing to any product file.
+After revision, I confirm both 3 points affermative as suggested 
