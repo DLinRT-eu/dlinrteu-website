@@ -42,11 +42,19 @@ TheraPanacea [confirmed attendance](https://www.linkedin.com/posts/therapc_aapm2
 
 Varian/Siemens Healthineers, Elekta, Philips, Canon Medical, United Imaging, Accuray, Brainlab, Radformation, MVision AI, Limbus AI, Manteia, Carina Medical, Oncosoft, ClariPi, Subtle Medical, Vysioneer, Coreline Soft, Everfortune and PTW are confirmed on the [AAPM exhibitor list](https://site.aapm.org/annual-meeting/2026-annual-meeting/attendee/exhibits) but did not publish AI-RT product-level announcements tied specifically to AAPM 2026 at the time of writing. This round-up will be updated if congress-tied press releases, clearances or peer-reviewed publications appear during the meeting.
 
-## New company under review — Lumonus
+## New company added — Lumonus
 
-[Lumonus](https://www.lumonus.com) (Sydney, Australia; New York, USA) was reviewed as a candidate for inclusion. The **Lumonus AI** "Oncology Intelligence Layer" spans Consult, Document, Plan and Improve modules and uses LLMs and machine learning integrated with EMR/OIS/TPS. The company has publicly disclosed that it pursued and obtained an [FDA Clinical Decision Support Software exemption](https://rookqs.com/casestudies/lumonus) for its Sigma module — an explicit non-device pathway — and no CE mark, FDA 510(k)/De Novo clearance, or other recognised authority approval (MDR-exempt, NMPA, TGA, PMDA, MFDS, Health Canada, ANVISA, MHRA, UKCA) has been identified for any Lumonus module. A [research collaboration with Memorial Sloan Kettering](https://www.prnewswire.com/news-releases/lumonus-launches-strategic-collaboration-with-leading-global-cancer-center-to-advance-radiation-therapy-treatment-planning-302736516.html) (April 2026) has been announced but no peer-reviewed clinical validation is yet available.
+[Lumonus](https://www.lumonus.com) (Sydney, Australia; New York, USA) has been added to the catalog following review. The **Lumonus AI** "Oncology Intelligence Layer" spans Consult, Document, Plan (dosimetry workspace with planning automation and web-based plan review) and Improve (analytics) modules, using LLMs and machine learning integrated with EMR/OIS/TPS.
 
-**Decision:** Lumonus is **not included** in the catalog at this stage. The current offering is oriented toward workflow, documentation and analytics automation rather than a specific deep-learning clinical algorithm for a core RT function, and does not meet the [regulatory-approval inclusion gate](/about). The entry will be re-reviewed if Lumonus obtains a 510(k)/De Novo clearance, CE mark or equivalent recognised authority approval, or publishes peer-reviewed validation of a specific DL-based RT function.
+The company has publicly disclosed that it obtained an [FDA Clinical Decision Support Software (CDSS) exemption](https://rookqs.com/casestudies/lumonus) for its Sigma module — a formal non-device determination under 21st Century Cures §3060. DLinRT.eu treats this pathway analogously to the "MDR exempt" pathway already used for other AI-workflow / QA-of-AI entries (e.g. RaySearch RayIntelligence): it is a regulatory decision, publicly disclosed and sourced, rather than absence of regulatory review. The Lumonus product page renders a dedicated "FDA CDSS Exempt" badge to make the pathway explicit.
+
+The [Lumonus AI entry](/product/lumonus-ai) is listed with:
+
+- **Evidence Rigor E0 / Clinical Impact I0** — no peer-reviewed clinical validation identified. A [research collaboration with Memorial Sloan Kettering Cancer Center](https://www.prnewswire.com/news-releases/lumonus-launches-strategic-collaboration-with-leading-global-cancer-center-to-advance-radiation-therapy-treatment-planning-302736516.html) (April 2026) is noted but is not published validation.
+- Clear limitations that the FDA CDSS exemption is a non-device pathway, not a 510(k) or De Novo clearance, and that no CE marking or other recognised authority approval has been identified.
+- Scope disclosed as LLM/ML-based workflow, documentation, planning management and analytics — not a validated deep-learning dose engine, auto-contouring engine or image-synthesis engine.
+
+Evidence will be revised upward if Lumonus obtains a 510(k)/De Novo clearance, CE mark or equivalent recognised authority approval, or publishes peer-reviewed validation of a specific DL-based RT function.
 
 ---
 
