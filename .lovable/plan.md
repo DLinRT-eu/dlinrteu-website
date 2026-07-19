@@ -1,45 +1,37 @@
-## Reconsider Lumonus for inclusion
 
-Rationale for revisiting: our catalog already includes AI-workflow / QA-of-AI style products (e.g. RaySearch **RayIntelligence** as a Performance Monitor tagged MDR-exempt; MVision Verify; PTW Aqualis). Lumonus AI sits in the same family — ML/LLM-based automation wrapped around the RT planning and follow-up workflow — and the FDA **Clinical Decision Support Software (CDSS) exemption** it holds is a formal regulatory determination (non-device under 21st Century Cures §3060), which is analogous to the "MDR-exempt" pathway we already accept.
+## Problem
 
-Under that reading Lumonus meets the inclusion gate.
+`/admin/newsletter-broadcast` only lists markdown files under `src/data/newsletters/*.md` in its "Draft" dropdown. News items in `src/data/news/*.ts` (e.g. the AAPM 2026 round-up) are ignored, so every time a news post is published the admin has to re-type its content as a newsletter draft.
 
-## Proposed catalog entry
+## Goal
 
-- **New product file:** `src/data/products/platform/lumonus.ts`
-  - `id`: `lumonus-ai`
-  - `name`: Lumonus AI (Oncology Intelligence Layer)
-  - `category`: Platform (primary), with `secondaryCategories`: Performance Monitor, Treatment Planning
-  - `usesAI`: true (LLMs + ML), scoped to workflow/decision support
-  - `company`: Lumonus
-  - `modality`: N/A (workflow layer over EMR/OIS/TPS)
-  - Modules described: Consult, Document, Plan (dosimetry workspace + planning automation), Improve (analytics)
-  - `regulatory`: `us: { status: "cdss_exempt", type: "21st Century Cures §3060 CDSS exemption", notes: "Sigma module — non-device determination per Rook QS case study" }`; `ce: "not_marked"`; other authorities: none identified
-  - `evidenceRigor`: **E0** (no peer-reviewed validation identified)
-  - `clinicalImpact`: **I0**
-  - `evaluationData`: MSK collaboration announcement only, flagged as non-peer-reviewed
-  - `limitations`: workflow/LLM-oriented; not a validated DL clinical algorithm for a core RT function; FDA CDSS exemption is a non-device pathway, not a clearance
-  - `keyPapers`: empty (none available)
-  - Sources block: Lumonus website, Rook QS case study, MSK collaboration press release, Series B announcement — all with retrieval dates
-- **New company file:** `src/data/companies/specialized-solutions.ts` — append a `lumonus` entry (Sydney, AU + New York, US), `primaryTask: "Platform"`, `secondaryTasks: ["Performance Monitor", "Treatment Planning"]`, `productIds: ["lumonus-ai"]`.
-- **Regulatory utils:** extend `src/utils/regulatoryUtils.ts` if needed to render `cdss_exempt` with a distinct badge (label "FDA CDSS Exempt", styled like MDR-exempt).
-- **News item update:** amend `src/data/news/aapm-2026-and-certification-milestone.ts` — replace the "not included" decision with a short note that Lumonus has been added under the CDSS-exempt pathway, with the caveats above.
-- **Memory update:** append to `mem://policy/regulatory-approval-recognized-authorities` that FDA CDSS exemption (21st Century Cures §3060) is treated analogously to MDR-exempt, requiring public disclosure of the exemption source.
+The latest news items should appear as selectable sources in the composer, and picking one should auto-fill Subject, Preheader, and Body — ready to push to Resend without re-typing.
 
-## What this deliberately does not do
+## Changes
 
-- No claim of clinical validation — evidence stays E0/I0 until Lumonus publishes peer-reviewed studies.
-- No mapping into Auto-Contouring / Image Synthesis / Reconstruction, since no specific DL clinical algorithm is documented.
-- No AdaptCHECK, ART-Plan, or ProtégéAI+ 2.0 changes in this plan — those remain follow-ups.
+Only `src/pages/admin/NewsletterBroadcast.tsx` is edited. No data-layer, edge-function, or schema changes.
 
-## Open decisions before I implement
+1. Import `NEWS_ITEMS` from `@/data/news` and `NewsItem` from `@/types/news`.
+2. Build a second "News → newsletter" source list from `NEWS_ITEMS` (sorted newest-first, capped at ~10). Each entry converts a `NewsItem` into the markdown shape `parseNewsletterMarkdown` expects:
+   - `## SUBJECT LINE` → `[DLinRT.eu] ${item.title}`
+   - `## PREHEADER` → `item.summary`
+   - `## BLOCK 1 — 📰 ${item.title}` → `item.content` (markdown as-is), with a closing "Read the full post: https://dlinrt.eu/news/${item.id}" line and standard footer block.
+3. Change the "Draft" `<Select>` into a grouped list with two `SelectGroup`s:
+   - **From news posts** (newest first) — value prefixed `news:<id>`
+   - **From markdown drafts** (`src/data/newsletters/*.md`) — value prefixed `md:<slug>` (existing behavior)
+4. `handleSelectDraft` resolves the prefix, loads the corresponding markdown into `body`, and re-derives `subject` / `preheader` via the existing `parseNewsletterMarkdown` call (already wired).
+5. Default the initial selection to the newest news item when `NEWS_ITEMS` is non-empty; otherwise fall back to the newest markdown draft (preserves current behavior when no news exists).
+6. Small UI note under the Select: "News posts are converted to the newsletter template on the fly — edit before pushing." No other UI, styling, or send-path changes.
 
-1. **Primary category** — Platform (my recommendation, matches MVision Platform / RayIntelligence pattern) vs. Performance Monitor vs. Treatment Planning. Prefer Platform because it spans the full workflow.
-2. **Regulatory badge** — introduce a new `cdss_exempt` status (cleanest, distinct from MDR-exempt), or reuse the existing `mdr_exempt` label with a US-specific note (simpler, no schema change).
-3. **News item** — amend the just-published AAPM post (my recommendation), or leave it and add a small standalone note in a future update.
+## Technical notes
 
-If you confirm 1 = Platform, 2 = new `cdss_exempt` status, 3 = amend, I will proceed exactly as above once switched to build mode.
+- `parseNewsletterMarkdown` / `renderNewsletterHtml` are unchanged; the generated news-derived markdown just has to conform to the existing `## SUBJECT LINE` / `## PREHEADER` / `## BLOCK n — title` conventions already used by `src/data/newsletters/2026-06-second-round-and-evidence.md`.
+- The news → markdown conversion is a pure helper inside `NewsletterBroadcast.tsx` (no new files, no exports).
+- Subject/preheader remain editable in the form; body is a `Textarea`, so the admin can still tweak before pushing to Resend.
+- No changes to `send-newsletter-broadcast` edge function, DB, or Resend audience logic.
 
-&nbsp;
+## Out of scope
 
-After revision, I confirm both 3 points affermative as suggested 
+- Auto-publishing broadcasts when news is added (still requires an admin push).
+- Rich-text editing of news content.
+- Persisting the generated markdown back into `src/data/newsletters/`.
