@@ -1,37 +1,28 @@
+Create a new news article announcing DLinRT.eu's support for the AIinRT 2027 symposium, add it to the news registry, and regenerate the public JSON feed.
 
-## Problem
+## What to build
 
-`/admin/newsletter-broadcast` only lists markdown files under `src/data/newsletters/*.md` in its "Draft" dropdown. News items in `src/data/news/*.ts` (e.g. the AAPM 2026 round-up) are ignored, so every time a news post is published the admin has to re-type its content as a newsletter draft.
+1. **New news item file** — `src/data/news/aiinrt-2027-support.ts`
+   - `id`: `aiinrt-2027-support`
+   - `date`: `2026-07-21` (today's date)
+   - `title`: "DLinRT.eu supports AIinRT 2027"
+   - `summary`: one-sentence version of the announcement
+   - `content`: Markdown version of the provided text, with the emoji bullets converted to structured Markdown and the external link `https://www.aiinrt.org` added to "AIinRT.org"
 
-## Goal
+2. **Register the item** — `src/data/news.ts`
+   - Import `aiinrt2027Support` from `./news/aiinrt-2027-support`
+   - Insert it at the top of `NEWS_ITEMS` so it appears as the latest news article
 
-The latest news items should appear as selectable sources in the composer, and picking one should auto-fill Subject, Preheader, and Body — ready to push to Resend without re-typing.
+3. **Regenerate public feed** — run `node scripts/generate-news-json.mjs` so `public/news.json` stays in sync with `src/data/news.ts` (used by the RSS edge function)
 
-## Changes
+## Technical details
 
-Only `src/pages/admin/NewsletterBroadcast.tsx` is edited. No data-layer, edge-function, or schema changes.
+- The new file follows the existing `NewsItem` interface and the same export pattern as other news files.
+- No new dependencies or UI changes are required.
+- The existing `NewsSection` and `News` pages will automatically pick up the new item via `dataService.getAllNews()` / `dataService.getLatestNews(3)`.
 
-1. Import `NEWS_ITEMS` from `@/data/news` and `NewsItem` from `@/types/news`.
-2. Build a second "News → newsletter" source list from `NEWS_ITEMS` (sorted newest-first, capped at ~10). Each entry converts a `NewsItem` into the markdown shape `parseNewsletterMarkdown` expects:
-   - `## SUBJECT LINE` → `[DLinRT.eu] ${item.title}`
-   - `## PREHEADER` → `item.summary`
-   - `## BLOCK 1 — 📰 ${item.title}` → `item.content` (markdown as-is), with a closing "Read the full post: https://dlinrt.eu/news/${item.id}" line and standard footer block.
-3. Change the "Draft" `<Select>` into a grouped list with two `SelectGroup`s:
-   - **From news posts** (newest first) — value prefixed `news:<id>`
-   - **From markdown drafts** (`src/data/newsletters/*.md`) — value prefixed `md:<slug>` (existing behavior)
-4. `handleSelectDraft` resolves the prefix, loads the corresponding markdown into `body`, and re-derives `subject` / `preheader` via the existing `parseNewsletterMarkdown` call (already wired).
-5. Default the initial selection to the newest news item when `NEWS_ITEMS` is non-empty; otherwise fall back to the newest markdown draft (preserves current behavior when no news exists).
-6. Small UI note under the Select: "News posts are converted to the newsletter template on the fly — edit before pushing." No other UI, styling, or send-path changes.
+## Verification
 
-## Technical notes
-
-- `parseNewsletterMarkdown` / `renderNewsletterHtml` are unchanged; the generated news-derived markdown just has to conform to the existing `## SUBJECT LINE` / `## PREHEADER` / `## BLOCK n — title` conventions already used by `src/data/newsletters/2026-06-second-round-and-evidence.md`.
-- The news → markdown conversion is a pure helper inside `NewsletterBroadcast.tsx` (no new files, no exports).
-- Subject/preheader remain editable in the form; body is a `Textarea`, so the admin can still tweak before pushing to Resend.
-- No changes to `send-newsletter-broadcast` edge function, DB, or Resend audience logic.
-
-## Out of scope
-
-- Auto-publishing broadcasts when news is added (still requires an admin push).
-- Rich-text editing of news content.
-- Persisting the generated markdown back into `src/data/newsletters/`.
+- TypeScript build passes (`npm run build` or `npx tsc --noEmit`).
+- `public/news.json` contains the new item at index 0.
+- The news page (`/news`) and home-page Latest News section render the new card.

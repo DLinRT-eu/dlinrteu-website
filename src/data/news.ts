@@ -11,8 +11,10 @@ import { estro2026Announcements } from "./news/estro-2026-announcements";
 import { websiteRestyleAndSecondReview } from "./news/website-restyle-and-second-review";
 import { secondRoundReviewAndEvidenceAxes } from "./news/second-round-review-and-evidence-axes";
 import { aapm2026AndCertificationMilestone } from "./news/aapm-2026-and-certification-milestone";
+import { aiinrt2027Support } from "./news/aiinrt-2027-support";
 
 export const NEWS_ITEMS: NewsItem[] = [
+  aiinrt2027Support,
   aapm2026AndCertificationMilestone,
   secondRoundReviewAndEvidenceAxes,
   websiteRestyleAndSecondReview,
