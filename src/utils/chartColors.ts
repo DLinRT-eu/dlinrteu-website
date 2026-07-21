@@ -97,6 +97,7 @@ export const CERTIFICATION_COLORS: Record<string, string> = {
   'CE and FDA': '#8B5CF6',   // Purple - Combined
   'NMPA': '#F59E0B',         // Amber - China
   'MDR Exempt': '#06B6D4',   // Cyan - Exempt status
+  'FDA CDSS Exempt': '#F97316', // Orange - US non-device pathway
   'Other': '#6B7280',        // Gray - Other certifications
   'No Certification': '#EF4444', // Red - No certification
 };
