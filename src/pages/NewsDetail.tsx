@@ -79,6 +79,18 @@ const NewsDetail = () => {
           <div className="prose prose-blue max-w-none prose-headings:text-blue-700 prose-a:text-blue-600 prose-strong:text-blue-600">
             <ReactMarkdown
               allowedElements={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre', 'br', 'table', 'thead', 'tbody', 'tr', 'th', 'td']}
+              components={{
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
             >
               {newsItem.content}
             </ReactMarkdown>
