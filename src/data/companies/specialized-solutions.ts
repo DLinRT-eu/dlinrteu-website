@@ -120,7 +120,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     website: "https://www.lumonus.com",
     productIds: ["lumonus-ai"],
     category: "Specialized Solutions",
-    logoUrl: "/placeholder.svg",
+    logoUrl: "/logos/lumonus.jpeg",
     primaryTask: "Platform",
     secondaryTasks: ["Performance Monitor", "Treatment Planning"]
   },
