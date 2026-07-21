@@ -131,9 +131,25 @@ const ProductCard = ({
     }
     
     const tags = getStandardizedCertificationTags(productForTags as ProductDetails);
-    const isMDRExempt = tags.includes('MDR exempt') || 
-                        certification?.toLowerCase().includes('exempt');
-    
+    const isCDSSExempt = tags.includes('FDA CDSS Exempt') ||
+                         certification?.toLowerCase().includes('cdss');
+    const isMDRExempt = !isCDSSExempt && (
+                        tags.includes('MDR Exempt') ||
+                        tags.includes('MDR exempt') ||
+                        certification?.toLowerCase().includes('exempt'));
+
+    if (isCDSSExempt) {
+      return (
+        <Badge
+          variant="outline"
+          className="text-xs bg-amber-50 text-amber-700 border-amber-300 flex items-center gap-1 mr-2"
+        >
+          <ShieldAlert className="h-3 w-3" />
+          FDA CDSS Exempt
+        </Badge>
+      );
+    }
+
     if (isMDRExempt) {
       return (
         <Badge 
