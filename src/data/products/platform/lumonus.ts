@@ -23,7 +23,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     category: "Platform",
     secondaryCategories: ["Performance Monitor", "Treatment Planning"],
     certification: "FDA CDSS Exempt",
-    logoUrl: "/placeholder.svg",
+    logoUrl: "/logos/lumonus.jpeg",
     website: "https://www.lumonus.com/",
     anatomicalLocation: ["Multiple Sites"],
     modality: ["N/A"],
