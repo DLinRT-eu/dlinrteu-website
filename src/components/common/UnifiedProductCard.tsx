@@ -76,10 +76,26 @@ const UnifiedProductCard = ({
     }
     
     const tags = getStandardizedCertificationTags(product);
-    const isMDRExempt = tags.includes('MDR exempt') || 
+    const isCDSSExempt = tags.includes('FDA CDSS Exempt') ||
+                         product.certification?.toLowerCase().includes('cdss');
+    const isMDRExempt = !isCDSSExempt && (
+                        tags.includes('MDR Exempt') ||
+                        tags.includes('MDR exempt') ||
                         product.certification?.toLowerCase().includes('exempt') ||
-                        product.regulatory?.ce?.status?.toLowerCase().includes('exempt');
-    
+                        product.regulatory?.ce?.status?.toLowerCase().includes('exempt'));
+
+    if (isCDSSExempt) {
+      return (
+        <Badge
+          variant="outline"
+          className="text-xs bg-amber-50 text-amber-700 border-amber-300 flex items-center gap-1"
+        >
+          <ShieldAlert className="h-3 w-3" />
+          FDA CDSS Exempt
+        </Badge>
+      );
+    }
+
     if (isMDRExempt) {
       return (
         <Badge 
