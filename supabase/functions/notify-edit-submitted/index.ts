@@ -135,6 +135,7 @@ serve(async (req: Request) => {
       try {
         await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
+          reply_to: "info@dlinrt.eu",
           to: [submitter.email],
           subject: `Edit submitted for review: ${productId}`,
           html: `
@@ -202,6 +203,7 @@ serve(async (req: Request) => {
         try {
           await resend.emails.send({
             from: "DLinRT.eu <noreply@dlinrt.eu>",
+            reply_to: "info@dlinrt.eu",
             to: [ap.email],
             subject: `Product edit awaiting review: ${productId}`,
             html: `

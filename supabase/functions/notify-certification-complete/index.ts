@@ -158,6 +158,7 @@ const handler = async (req: Request): Promise<Response> => {
       try {
         await resend.emails.send({
           from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
+          reply_to: "info@dlinrt.eu",
           to: [profile.email],
           subject: `Product Certification Confirmed: ${productName}`,
           html: `
@@ -234,6 +235,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       await resend.emails.send({
         from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
+        reply_to: "info@dlinrt.eu",
         to: ["info@dlinrt.eu"],
         subject: `New Product Certification: ${productName} (${companyName})`,
         html: `
