@@ -232,6 +232,7 @@ const handler = async (req: Request): Promise<Response> => {
       try {
         const emailResponse = await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
+          reply_to: "info@dlinrt.eu",
           to: [email],
           cc: [INFO_EMAIL],
           subject: personalizedSubject,

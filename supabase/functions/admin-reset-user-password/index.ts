@@ -189,6 +189,7 @@ Deno.serve(async (req) => {
       const resend = new Resend(resendKey);
       const { error: sendError } = await resend.emails.send({
         from: 'DLinRT.eu <noreply@dlinrt.eu>',
+        reply_to: "info@dlinrt.eu",
         to: [targetEmail],
         subject: 'Reset your DLinRT.eu password',
         html: buildEmailHtml(resetUrl, targetName),

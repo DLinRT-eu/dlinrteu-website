@@ -187,6 +187,7 @@ const handler = async (req: Request): Promise<Response> => {
       try {
         await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
+          reply_to: "info@dlinrt.eu",
           to: [profile.email],
           subject: `DLinRT.eu — ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Notification Digest (${userNotifs.length} unread)`,
           html: htmlContent,

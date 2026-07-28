@@ -302,6 +302,7 @@ const handler = async (req: Request): Promise<Response> => {
       try {
         const emailResponse = await resend.emails.send({
           from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
+          reply_to: "info@dlinrt.eu",
           to: [reviewer.reviewer_email],
           subject,
           html: htmlContent,
