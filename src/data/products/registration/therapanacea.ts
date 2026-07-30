@@ -97,10 +97,18 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
+    limitations: [
+      "No SmartFuse-specific FDA 510(k) clearance; the module is not named in K253091",
+      "No module-specific peer-reviewed publication identified as of 2026-07-30",
+      "Vendor warning: fused images and any derived contours must be verified and validated by an authorised person before use",
+      "Vendor warning: results depend on input image quality; low-quality or artefact-laden volumes may cause misinterpretation of the anatomy",
+      "Vendor warning: importing data with missing, incorrect or non-compatible required DICOM tags will cause import failure or malfunction",
+      "Vendor warning: the platform is not for use on tablets or smartphones and is intended for screens of 17 inches and above"
+    ],
     version: "3.1.2",
     releaseDate: "2025-01-01",
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
-    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-07-30)"
+    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30). Multi-modal rigid and deformable registration of CT, MR, PET-CT, 4D-CT and synthetic-CT is listed in the published ART-Plan+ intended use."
   }
 ];

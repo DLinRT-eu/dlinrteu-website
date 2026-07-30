@@ -166,6 +166,10 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-01-01",
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
+    keyPapers: [
+      {"doi":"10.3390/cancers18111826","title":"Implementation of an AI-Driven Workflow for Daily Dose Reconstruction in Prostate Cancer Radiotherapy","authors":"Prunaretty J et al.","journal":"Cancers","year":"2026"},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026"}
+    ],
     source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530).",
     evidenceRigor: "E2",
     evidenceRigorNotes: "E2 retained 2026-06-15 after cross-check: Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826) verified as a prostate-specific AI-driven daily dose-reconstruction workflow study consistent with the AdaptBox pipeline; supported by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026). H&N and Breast/Thorax FDA-cleared anatomies have limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",

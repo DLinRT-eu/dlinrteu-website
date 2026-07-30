@@ -117,7 +117,11 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021",
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
-    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
+    keyPapers: [
+      {"doi":"10.3389/fonc.2023.1245054","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J et al.","journal":"Frontiers in Oncology","year":"2023"},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026"}
+    ],
+    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).",
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
