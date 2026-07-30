@@ -258,17 +258,24 @@ export const Annotate: ProductDetails = {
     "Independent multi-center time-savings studies not yet published for all anatomical sites",
     "Pelvic nodal structures added in v3.2.0 carry the vendor's '_Val' (Valentini 2016) suffix; no independent published evaluation of these new models yet",
     "Lê 2024 was conducted at an institution with an active Therapanacea research contract (declared conflict of interest)",
-    "DECT performance is reconstruction-kernel dependent — PEI80-DD achieves highest DSC; other kernels show lower performance (Lê 2024)"
+    "DECT performance is reconstruction-kernel dependent — PEI80-DD achieves highest DSC; other kernels show lower performance (Lê 2024)",
+    "Vendor warning: automatic contours are a proposal and must be verified and validated by one or more authorised persons before use",
+    "Vendor warning: contouring may be inappropriate for atypical anatomy, patients not positioned supine, incorrect Patient Position (0018,5100) or Patient's Sex (0010,0040) DICOM tags, organs modified or removed by surgery (e.g. prostatectomy), and symmetrical structures may be left/right inverted",
+    "Vendor warning: H&N lymph nodes, lacrimal glands and pharyngeal constrictor muscles perform better on contrast-enhanced CT and may be inappropriate on scanners other than Siemens Sensation Open or for patients below 50 or above 79 years",
+    "Vendor warning: pelvic and abdominal contours (including external contour) may be inappropriate for patients below 60 years",
+    "Vendor warning: volumes with missing slices between the second and second-to-last slice cannot be loaded into Annotate; 2D DICOM (e.g. scout) images cannot be processed"
   ],
   version: "3.2.0",
   releaseDate: "2021",
   lastUpdated: "2026-07-30",
   keyPapers: [
-    {"doi":"10.1186/s13014-024-02554-y","title":"Clinical evaluation of TheraPanacea Annotate","authors":"Meyer P et al.","journal":"Radiother Oncol","year":"2024"},
-    {"doi":"10.1007/s13246-024-01434-9","title":"Auto-contouring dosimetric impact","authors":"Kim H et al.","journal":"Phys Eng Sci Med","year":"2024"}
+    {"doi":"10.1186/s13014-024-02554-y","title":"Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas","authors":"Meyer P et al.","journal":"Radiation Oncology","year":"2024"},
+    {"doi":"10.1007/s13246-024-01434-9","title":"Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation","authors":"Kim H et al.","journal":"Physical and Engineering Sciences in Medicine","year":"2024"},
+    {"doi":"10.4103/jmp.jmp_11_25","title":"Evaluation of Two Commercial Artificial Intelligence Segmentation Systems for Radiation Therapy","authors":"DiTusa C et al.","journal":"Journal of Medical Physics","year":"2025"},
+    {"doi":"10.1016/j.phro.2024.100654","title":"Head and neck automatic multi-organ segmentation on Dual-Energy Computed Tomography","authors":"Lê AT et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2024"}
   ],
   lastRevised: "2026-07-30",
-  source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+  source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; therapanacea.com, accessed 2026-07-30); FDA 510(k) K253091 (decision 2025-12-23); DOIs verified against Crossref 2026-07-30."
 
 };
 
