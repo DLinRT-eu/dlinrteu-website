@@ -9,7 +9,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         description: "AI-powered rigid and deformable image registration. Training dataset details are not publicly disclosed. Note: FDA 510(k) K253091 (ART-Plan+ v3.1.0) was previously cited here but does not name SmartFuse — corrected on 2026-06-15.",
         sourceUrl: "https://therapanacea.com/products",
         sourceAccess: "public",
-        sourceRetrievedOn: "2026-06-15"
+        sourceRetrievedOn: "2026-07-30"
     },
     evaluationData: {
         results: "Not publicly disclosed",
@@ -19,7 +19,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         studyDesign: "Manufacturer specification",
         sourceUrl: "https://therapanacea.com/products",
         sourceAccess: "public",
-        sourceRetrievedOn: "2026-06-15"
+        sourceRetrievedOn: "2026-07-30"
     },
     name: "SmartFuse",
     company: "Therapanacea",
@@ -73,7 +73,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         status: "TGA Cleared",
         notes: "Cleared for Australian market (manufacturer-reported)"
       },
-      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.com/products, accessed 2026-06-15.)"
+      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.com/products, accessed 2026-07-30.)"
     },
     market: {
       onMarketSince: "2020",
@@ -98,8 +98,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-06-15)"
+    lastUpdated: "2026-07-30",
+    lastRevised: "2026-07-30",
+    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-07-30)"
   }
 ];
