@@ -100,11 +100,11 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     supportedStructures: MRBOX_ALL_STRUCTURES,
     structuresProvenance: {
-      source: "Therapanacea MR-Box product page; FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
+      source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026); FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-06-16",
-      notes: "Three MR models, each prefixed in the structure list: Brain (MR T1); Pelvis Male (MR T2 Elekta MR-Linac); Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay)."
+      sourceRetrievedOn: "2026-07-30",
+      notes: "Three MR models per brochure v3.2.0, each prefixed in the structure list: Brain (MR T1) 27 OARs; Pelvis Male (MR T2 Elekta MR-Linac) 11 OARs + 2 ROIs; Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay) 7 pelvis OARs + 9 abdomen OARs + 2 ROIs. Bilateral structures are split into _L/_R so totals match the vendor counts. The MR brachytherapy model is published separately as BrachyBox (id: therapanacea-brachybox)."
     },
     partOf: {
       name: "ART-Plan+",
@@ -114,8 +114,8 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-06-16",
-    lastRevised: "2026-06-16",
+    lastUpdated: "2026-07-30",
+    lastRevised: "2026-07-30",
     source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
     categoryEvidence: {
       "Image Synthesis": {
