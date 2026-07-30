@@ -7,7 +7,7 @@ export const Annotate: ProductDetails = {
     description: "Models trained on expert-delineated CT datasets following international contouring guidelines across major cancer sites (Head & Neck, Thorax, Breast, Pelvis, SBRT Lung). Training data reviewed and validated by clinical experts. Dataset details not fully disclosed publicly.",
     disclosureLevel: "partial",
     source: "Therapanacea product page and FDA 510(k) summary K211539",
-    sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
+    sourceUrl: "https://therapanacea.com/products",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-06-16"
   },
@@ -21,30 +21,32 @@ export const Annotate: ProductDetails = {
   },
   name: "Annotate",
   company: "Therapanacea",
-  companyUrl: "https://www.therapanacea.eu/",
-  productUrl: "https://www.therapanacea.eu/our-products/annotate/",
+  companyUrl: "https://therapanacea.com/",
+  productUrl: "https://therapanacea.com/products",
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
-  description: "AI-powered, CE-marked and FDA-cleared auto-contouring software providing zero-click, automatic delineation of more than 200 organs at risk (OARs) and lymph nodes for all major cancer sites (CT models: Head & Neck, Thorax, Breast, Pelvis, SBRT Lung). Delineates with the same accuracy as clinical experts in a matter of minutes. Cloud-based, GDPR-compliant, with seamless TPS integration and batch processing. MRI models are part of MR-Box (separate product).",
+  description: "AI-powered, CE-marked and FDA-cleared auto-contouring software providing zero-click, automatic delineation of organs at risk (OARs) and lymph nodes for all major cancer sites. The ART-Plan structure library v3.2.0 publishes four CT models: Head & Neck (46 OARs, 19 LNs), Thorax/Breast/Abdo including SBRT lung and heart sub-structures (73 OARs, 12 LNs), Pelvis Male (19 OARs, 15 LNs, 3 ROIs) and Pelvis Female (18 OARs, 20 LNs, 2 ROIs). Cloud-based, GDPR-compliant, with seamless TPS integration and batch processing. MRI models are part of MR-Box and BrachyBox (separate products).",
   category: "Auto-Contouring",
   certification: "CE & FDA",
   logoUrl: "/logos/therapanacea.png",
-  website: "https://www.therapanacea.eu/our-products/annotate/",
-  anatomicalLocation: ["Head & Neck", "Thorax", "Breast", "Pelvis", "Lung"],
+  website: "https://therapanacea.com/products",
+  anatomicalLocation: ["Head & Neck", "Thorax", "Breast", "Abdomen", "Pelvis", "Lung"],
   modality: ["CT"],
   subspeciality: "Radiation Oncology",
   diseaseTargeted: ["Multiple Cancer Types"],
   keyFeatures: [
-    "Zero-click automatic delineation of 200+ OARs and lymph nodes",
-    "Coverage of all major cancer sites: Head & Neck, Thorax/Breast, Pelvis (male/female), SBRT Lung",
-    "Follows international contouring guidelines (Grégoire 2014, ESTRO Offersen 2015, Gay 2012, UK SABR Consortium 2019)",
+    "Zero-click automatic delineation of OARs and lymph nodes across four CT models",
+    "Coverage of Head & Neck, Thorax/Breast/Abdo (incl. SBRT lung and heart sub-structures), Pelvis male and female",
+    "Follows international contouring guidelines (Grégoire 2014, DAHANCA 2020, EPTN Eekers 2021, Mir 2020, ESTRO Offersen 2015, Gay 2012, Valentini 2016, UK SABR Consortium 2019)",
+    "Rib-by-rib (1–12, bilateral) and cardiac sub-structure delineation in the thoracic model",
+    "Validated pelvic nodal and mesorectum models (Valentini 2016) added in v3.2.0",
     "Batch mode for background processing with direct export to TPS",
     "Plug and play DICOM integration with hospital systems",
     "GDPR-compliant cloud-based web application",
     "Up to 93% reduction in manual contouring tasks for OARs",
     "Full-body delineation in approximately 3 minutes",
-    "Exclusive lymph node models for CTVn",
-    "Continuously updated models with new structures"
+    "Exclusive lymph node models for CTVn"
   ],
+
   features: [
     "Automatic OAR contouring",
     "Lymph node delineation",
@@ -55,12 +57,13 @@ export const Annotate: ProductDetails = {
   ],
   supportedStructures: ANNOTATE_ALL_STRUCTURES,
   structuresProvenance: {
-    source: "Therapanacea Annotate product page (therapanacea.eu/our-products/annotate/)",
-    sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
+    source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026) and Therapanacea products page",
+    sourceUrl: "https://therapanacea.com/products",
     sourceAccess: "public",
-    sourceRetrievedOn: "2026-06-16",
-    notes: "CT models only. Seven CT models, each prefixed in the structure list: Head & Neck (CT); Female Thorax/Breast (CT); Male Thorax (CT); Heart Sub-Structures (CT); Lung SBRT (CT); Pelvis Male (CT); Pelvis Female (CT). MRI models belong to MR-Box (id: mr-box-synthetic). CBCT models belong to AdaptBox (id: therapanacea-adaptbox)."
+    sourceRetrievedOn: "2026-07-30",
+    notes: "CT models only, per vendor brochure v3.2.0. Four CT models, each prefixed in the structure list: Head & Neck (CT) 46 OARs + 19 LNs; Thorax/Breast/Abdo (CT) 73 OARs + 12 LNs (includes SBRT lung and heart sub-structures, previously published as separate lists); Pelvis Male (CT) 19 OARs + 15 LNs + 3 ROIs; Pelvis Female (CT) 18 OARs + 20 LNs + 2 ROIs per the vendor header (19 OAR entries are actually itemised in the brochure; the itemised names are used). Bilateral structures are split into _L/_R so totals match the vendor counts. Synthetic-CT models belong to AdaptBox (id: therapanacea-adaptbox), MR models to MR-Box (id: mr-box-synthetic) and the MR brachytherapy model to BrachyBox (id: therapanacea-brachybox)."
   },
+
   guidelines: [
     {
       name: "Grégoire et al. – Head & Neck LN delineation",
@@ -109,8 +112,50 @@ export const Annotate: ProductDetails = {
       reference: "https://doi.org/10.1016/j.ijrobp.2011.03.021",
       url: "https://doi.org/10.1016/j.ijrobp.2011.03.021",
       compliance: "full"
+    },
+    {
+      name: "DAHANCA – Head & Neck OAR delineation",
+      version: "2020",
+      url: "https://www.dahanca.dk/",
+      compliance: "full"
+    },
+    {
+      name: "EPTN (Eekers et al.) – Neurological OAR atlas",
+      version: "2021",
+      compliance: "full"
+    },
+    {
+      name: "Mir et al. – Global Harmonisation Group OAR consensus",
+      version: "2020",
+      compliance: "full"
+    },
+    {
+      name: "Kong et al. (RTOG) – Thoracic OAR atlas",
+      version: "2011",
+      compliance: "full"
+    },
+    {
+      name: "Jabbour et al. (RTOG) – Thoracic OAR delineation",
+      version: "2014",
+      compliance: "full"
+    },
+    {
+      name: "Milo et al. – Cardiac sub-structure delineation",
+      version: "2020",
+      compliance: "full"
+    },
+    {
+      name: "Valentini et al. – Pelvic lymph node delineation",
+      version: "2016",
+      compliance: "full"
+    },
+    {
+      name: "Hall et al. – Prostate CTVn delineation",
+      version: "2021",
+      compliance: "full"
     }
   ],
+
   technicalSpecifications: {
     population: "Adult patients",
     input: ["CT"],
@@ -160,7 +205,7 @@ export const Annotate: ProductDetails = {
   partOf: {
     name: "ART-Plan+",
     version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    productUrl: "https://therapanacea.com/products",
     relationship: "Module"
   },
   usesAI: true,
@@ -208,21 +253,23 @@ export const Annotate: ProductDetails = {
     }
   ],
   limitations: [
-    "CT models only; MRI-based OAR delineation is provided by the separate MR-Box product",
+    "CT models only; MR-based OAR delineation is provided by the separate MR-Box and BrachyBox products",
     "Not all models available in all markets",
     "Independent multi-center time-savings studies not yet published for all anatomical sites",
+    "Pelvic nodal structures added in v3.2.0 carry the vendor's '_Val' (Valentini 2016) suffix; no independent published evaluation of these new models yet",
     "Lê 2024 was conducted at an institution with an active Therapanacea research contract (declared conflict of interest)",
     "DECT performance is reconstruction-kernel dependent — PEI80-DD achieves highest DSC; other kernels show lower performance (Lê 2024)"
   ],
   version: "3.2.0",
   releaseDate: "2021",
-  lastUpdated: "2026-06-16",
+  lastUpdated: "2026-07-30",
   keyPapers: [
     {"doi":"10.1186/s13014-024-02554-y","title":"Clinical evaluation of TheraPanacea Annotate","authors":"Meyer P et al.","journal":"Radiother Oncol","year":"2024"},
     {"doi":"10.1007/s13246-024-01434-9","title":"Auto-contouring dosimetric impact","authors":"Kim H et al.","journal":"Phys Eng Sci Med","year":"2024"}
   ],
-  lastRevised: "2026-07-15",
-  source: "Therapanacea product page (therapanacea.eu/our-products/annotate/, accessed 2026-06-16); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+  lastRevised: "2026-07-30",
+  source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+
 };
 
 export const TumorBox: ProductDetails = {
@@ -244,7 +291,7 @@ export const TumorBox: ProductDetails = {
   name: "TumorBox",
   partOf: {
     name: "ART-Plan+",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    productUrl: "https://therapanacea.com/products",
     relationship: "Module"
   },
   source: "Company website - listed as 'Coming Soon'",
@@ -252,7 +299,7 @@ export const TumorBox: ProductDetails = {
   company: "Therapanacea",
   logoUrl: "/logos/therapanacea.png",
   version: "Art-Plan+ (v3.1.0)",
-  website: "https://www.therapanacea.eu/our-products/",
+  website: "https://therapanacea.com/products",
   category: "Auto-Contouring",
   features: [
     "Automatic tumor segmentation",
@@ -263,8 +310,8 @@ export const TumorBox: ProductDetails = {
   modality: ["CT", "MRI", "PET"],
   structuresUnavailable: true,
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-  companyUrl: "https://www.therapanacea.eu/",
-  productUrl: "https://www.therapanacea.eu/our-products/",
+  companyUrl: "https://therapanacea.com/",
+  productUrl: "https://therapanacea.com/products",
   regulatory: {
     fda: {
       class: "II",
@@ -273,7 +320,7 @@ export const TumorBox: ProductDetails = {
       decisionDate: "2025-12-23",
       clearanceNumber: "K253091"
     },
-    intendedUseStatement: "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 23 May 2026.)"
+    intendedUseStatement: "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 23 May 2026.)"
   },
   description: "AI-powered tumor segmentation module for the ART-Plan+ platform. Provides automated delineation of tumor volumes (GTV, CTV, PTV) using advanced deep learning algorithms.",
   keyFeatures: [

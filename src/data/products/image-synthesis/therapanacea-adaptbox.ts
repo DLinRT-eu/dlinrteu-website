@@ -1,5 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
-import { ADAPTBOX_PELVIS_MALE_CBCT } from "../auto-contouring/therapanacea-structures";
+import { ADAPTBOX_ALL_STRUCTURES } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -53,8 +53,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     name: "AdaptBox",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
     description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, daily cumulative dose tracking, and assisted off-line replanning decision support.",
     features: [
@@ -69,7 +69,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/adaptbox/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Head & Neck", "Breast", "Thorax", "Pelvis"],
     modality: ["CBCT"],
     subspeciality: "Radiation Oncology",
@@ -133,14 +133,15 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       },
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
-    supportedStructures: ADAPTBOX_PELVIS_MALE_CBCT,
+    supportedStructures: ADAPTBOX_ALL_STRUCTURES,
     structuresProvenance: {
-      source: "Therapanacea AdaptBox product page",
-      sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+      source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026), Syn-CT model pages",
+      sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-06-16",
-      notes: "Only the Pelvis (male) CBCT model is publicly itemised by the vendor (9 OARs). H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level (K253091) but per-structure lists are not publicly disclosed and are intentionally not enumerated here."
+      sourceRetrievedOn: "2026-07-30",
+      notes: "Three synthetic-CT models itemised by the vendor in v3.2.0, each prefixed in the structure list: Pelvis Male (Syn-CT) 7 OARs + 2 ROIs; Thorax/Breast (Syn-CT) 12 OARs; Head & Neck (Syn-CT) 26 OARs. Bilateral structures are split into _L/_R so totals match the vendor counts. No separate CBCT-only structure list is published — do not add one."
     },
+
     limitations: [
       "Indicated for adult patients only; ART-Plan+ is not intended for patients less than 18 years of age (FDA K253091 IFU).",
       "CBCT image quality is critical: low-resolution, noisy or lossily compressed CBCTs can produce incorrect synthetic CTs and contours; user must verify primary image quality before processing (Therapanacea Technical Information, 2026-06-16).",
@@ -158,13 +159,13 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     partOf: {
       name: "ART-Plan+",
       version: "3.2.0",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     version: "3.2.0",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-06-16",
-    lastRevised: "2026-06-16",
+    lastUpdated: "2026-07-30",
+    lastRevised: "2026-07-30",
     source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530).",
     evidenceRigor: "E2",
     evidenceRigorNotes: "E2 retained 2026-06-15 after cross-check: Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826) verified as a prostate-specific AI-driven daily dose-reconstruction workflow study consistent with the AdaptBox pipeline; supported by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026). H&N and Breast/Thorax FDA-cleared anatomies have limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",

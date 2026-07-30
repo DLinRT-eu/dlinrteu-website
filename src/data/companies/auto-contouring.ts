@@ -142,20 +142,21 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "id": "therapanacea",
     "name": "Therapanacea",
     "description": "Innovators in AI solutions for radiation oncology and medical imaging.",
-    "website": "https://www.therapanacea.eu",
+    "website": "https://therapanacea.com/",
     "productIds": [
       "therapanacea-annotate",
+      "therapanacea-brachybox",
       "therapanacea-adaptbox",
       "mr-box-synthetic",
       "therapanacea-smartfuse",
-      "therapanacea-tumorbox-pipeline",
-      "therapanacea-smartplan-pipeline",
-      "therapanacea-brachybox-pipeline"
+      "therapanacea-smartplan",
+      "therapanacea-tumorbox-pipeline"
     ],
+
     "category": "Auto-Contouring",
     "logoUrl": "/logos/therapanacea.png",
     "primaryTask": "Auto-Contouring",
-    "secondaryTasks": ["Image Synthesis", "Registration"]
+    "secondaryTasks": ["Image Synthesis", "Registration", "Treatment Planning"]
   },
   {
     "id": "vysioneer",

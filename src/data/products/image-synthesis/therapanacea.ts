@@ -23,8 +23,8 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     name: "MR-Box",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu",
-    productUrl: "https://www.therapanacea.eu/our-products/mr-box/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     description: "AI-powered software module within the ART-Plan+ platform for generating MR-based pseudo-CT (synthetic CT) images with co-registered organs-at-risk (OAR) delineations from standard MR images, supporting MR-only radiotherapy workflows and reducing physical CT demand. Naming caveat: 'MR-Box' is the Therapanacea commercial brand name; FDA 510(k) submissions (K234068, K242822, K253091) describe the same functionality as the Annotate module / pseudo-CT generation feature of ART-Plan and do not use the 'MR-Box' label.",
     features: [
       "AI-based MR-to-pseudo-CT (synthetic CT) generation in one click",
@@ -38,7 +38,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
-    website: "https://www.therapanacea.eu/our-products/mr-box/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Pelvis", "Brain", "Abdomen"],
     modality: ["MRI"],
     subspeciality: "Radiation Oncology",
@@ -100,22 +100,22 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     supportedStructures: MRBOX_ALL_STRUCTURES,
     structuresProvenance: {
-      source: "Therapanacea MR-Box product page; FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
-      sourceUrl: "https://www.therapanacea.eu/our-products/mr-box/",
+      source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026); FDA 510(k) K234068 (MR-Box pseudo-CT, 2024-04)",
+      sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-06-16",
-      notes: "Three MR models, each prefixed in the structure list: Brain (MR T1); Pelvis Male (MR T2 Elekta MR-Linac); Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay)."
+      sourceRetrievedOn: "2026-07-30",
+      notes: "Three MR models per brochure v3.2.0, each prefixed in the structure list: Brain (MR T1) 27 OARs; Pelvis Male (MR T2 Elekta MR-Linac) 11 OARs + 2 ROIs; Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay) 7 pelvis OARs + 9 abdomen OARs + 2 ROIs. Bilateral structures are split into _L/_R so totals match the vendor counts. The MR brachytherapy model is published separately as BrachyBox (id: therapanacea-brachybox)."
     },
     partOf: {
       name: "ART-Plan+",
       version: "3.2.0 (Public Technical Info) / 3.1.0 (FDA Cleared)",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-06-16",
-    lastRevised: "2026-06-16",
+    lastUpdated: "2026-07-30",
+    lastRevised: "2026-07-30",
     source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
     categoryEvidence: {
       "Image Synthesis": {
