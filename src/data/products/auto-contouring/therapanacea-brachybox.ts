@@ -90,7 +90,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)",
-        notes: "The notified body attribution (GMED 0459) is not restated on the vendor's public Technical Information 3.2 page; treat it as vendor-reported.",
+        
         notes: "Published in the CE (EU) edition of the ART-Plan™ v3.2.0 structures brochure, which declares ART-Plan+ a class IIb device in the EU. The notified body attribution (GMED 0459) is not restated on the vendor's public Technical Information 3.2 page; treat it as vendor-reported."
       },
       fda: {
