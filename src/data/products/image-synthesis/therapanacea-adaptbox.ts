@@ -1,5 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
-import { ADAPTBOX_PELVIS_MALE_CBCT } from "../auto-contouring/therapanacea-structures";
+import { ADAPTBOX_ALL_STRUCTURES } from "../auto-contouring/therapanacea-structures";
 
 export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
   {
@@ -133,7 +133,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       },
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
-    supportedStructures: ADAPTBOX_PELVIS_MALE_CBCT,
+    supportedStructures: ADAPTBOX_ALL_STRUCTURES,
     structuresProvenance: {
       source: "Therapanacea AdaptBox product page",
       sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
