@@ -63,7 +63,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         class: "Class IIb",
         type: "MDR",
         regulation: "MDR 2017/745",
-        notifiedBody: "GMED (Notified Body 0459)"
+        notifiedBody: "GMED (Notified Body 0459)",
+        notes: "The notified body attribution (GMED 0459) is not restated on the vendor's public Technical Information 3.2 page; treat it as vendor-reported."
       },
       fda: {
         status: "not_applicable",

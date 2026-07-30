@@ -119,7 +119,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)",
-        notes: "Therapanacea states that ART-Plan is CE-marked Class IIb under GMED 0459. All modules may not be commercially available in all regional markets."
+        notes: "Therapanacea states that ART-Plan is CE-marked Class IIb under GMED 0459 (vendor-reported; not restated on the public Technical Information 3.2 page). All modules may not be commercially available in all regional markets."
       },
       fda: {
         status: "510k_cleared",
