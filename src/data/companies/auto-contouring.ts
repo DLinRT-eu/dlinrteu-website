@@ -156,7 +156,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "category": "Auto-Contouring",
     "logoUrl": "/logos/therapanacea.png",
     "primaryTask": "Auto-Contouring",
-    "secondaryTasks": ["Image Synthesis", "Registration"]
+    "secondaryTasks": ["Image Synthesis", "Registration", "Treatment Planning"]
   },
   {
     "id": "vysioneer",
