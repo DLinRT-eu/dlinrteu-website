@@ -135,12 +135,13 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     supportedStructures: ADAPTBOX_ALL_STRUCTURES,
     structuresProvenance: {
-      source: "Therapanacea AdaptBox product page",
+      source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026), Syn-CT model pages",
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-06-16",
-      notes: "Only the Pelvis (male) CBCT model is publicly itemised by the vendor (9 OARs). H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level (K253091) but per-structure lists are not publicly disclosed and are intentionally not enumerated here."
+      sourceRetrievedOn: "2026-07-30",
+      notes: "Three synthetic-CT models itemised by the vendor in v3.2.0, each prefixed in the structure list: Pelvis Male (Syn-CT) 7 OARs + 2 ROIs; Thorax/Breast (Syn-CT) 12 OARs; Head & Neck (Syn-CT) 26 OARs. Bilateral structures are split into _L/_R so totals match the vendor counts. No separate CBCT-only structure list is published — do not add one."
     },
+
     limitations: [
       "Indicated for adult patients only; ART-Plan+ is not intended for patients less than 18 years of age (FDA K253091 IFU).",
       "CBCT image quality is critical: low-resolution, noisy or lossily compressed CBCTs can produce incorrect synthetic CTs and contours; user must verify primary image quality before processing (Therapanacea Technical Information, 2026-06-16).",
