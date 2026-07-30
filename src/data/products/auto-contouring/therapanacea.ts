@@ -273,70 +273,132 @@ export const Annotate: ProductDetails = {
 };
 
 export const TumorBox: ProductDetails = {
-  id: "therapanacea-tumorbox-pipeline",
+  id: "therapanacea-tumorbox",
+  name: "TumorBox",
+  company: "Therapanacea",
+  companyUrl: "https://therapanacea.com/",
+  productUrl: "https://therapanacea.com/products",
+  website: "https://therapanacea.com/products",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
+  logoUrl: "/logos/therapanacea.png",
+  category: "Auto-Contouring",
+  subspeciality: "Radiation Oncology",
+  description: "AI tumor-segmentation module of the ART-Plan+ platform. In v3.2.0 the vendor publishes tumor segmentation for MR glioblastoma and multiple brain metastases; the module is cleared as part of 'Annotate including TumorBox' under FDA K253091. No itemised tumour-structure list is published by the vendor.",
+  anatomicalLocation: ["Brain"],
+  modality: ["MRI"],
+  diseaseTargeted: ["Glioblastoma", "Brain Metastases"],
+  usesAI: true,
+  structuresUnavailable: true,
+  keyFeatures: [
+    "Automatic tumour segmentation on MR images (glioblastoma, multiple brain metastases)",
+    "Runs inside the Annotate contouring workspace of ART-Plan+",
+    "Protocol-based model selection (vendor recommends a dedicated glioblastoma protocol without brain-metastasis structures)",
+    "DICOM-RTSTRUCT export to the treatment planning system"
+  ],
+  features: [
+    "Automatic tumor segmentation",
+    "MR-based delineation",
+    "Guideline/protocol configuration",
+    "DICOM export to TPS"
+  ],
+  technicalSpecifications: {
+    population: "Adult patients undergoing radiotherapy",
+    input: ["MRI"],
+    inputFormat: ["DICOM"],
+    output: ["Structure sets"],
+    outputFormat: ["DICOM-RTSTRUCT"]
+  },
+  technology: {
+    integration: ["Cloud-based web application", "DICOM export to TPS"],
+    deployment: ["Cloud-based (GDPR-compliant)", "On-premise server"],
+    triggerForAnalysis: "Protocol-based automatic contouring within Annotate",
+    processingTime: "2–3 minutes per anatomy under optimal conditions (vendor Technical Information 3.2)"
+  },
   trainingData: {
-      disclosureLevel: "minimal",
-      source: "FDA 510(k) summary K253091",
-      description: "Not publicly disclosed. Product is a deep learning module for tumor segmentation (GTV/CTV/PTV).",
-      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf"
+    disclosureLevel: "minimal",
+    description: "Not publicly disclosed. Deep-learning tumour-segmentation models for MR glioblastoma and multiple brain metastases.",
+    source: "FDA 510(k) summary K253091; Therapanacea products page (v3.2.0 feature list)",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+    sourceAccess: "public",
+    sourceRetrievedOn: "2026-07-30"
   },
   evaluationData: {
-      primaryEndpoint: "Not specified",
-      source: "FDA 510(k) summary K253091",
-      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
-      description: "Software validation and verification for FDA 510(k) clearance as an AI tumor-segmentation module for ART-Plan+.",
-      results: "Not publicly disclosed",
-      studyDesign: "Software V&V (FDA 510(k))"
+    studyDesign: "Software verification and validation submitted for FDA 510(k) clearance",
+    description: "No module-specific peer-reviewed evaluation of TumorBox identified. The vendor resource library lists conference abstracts on GBM and multi-metastasis GTV contouring; these are vendor-affiliated and not peer-reviewed full papers.",
+    results: "Not publicly disclosed",
+    primaryEndpoint: "Not publicly disclosed",
+    source: "FDA 510(k) summary K253091; Therapanacea resource library",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+    sourceAccess: "public",
+    sourceRetrievedOn: "2026-07-30"
   },
-  name: "TumorBox",
+  regulatory: {
+    ce: {
+      status: "cleared",
+      class: "Class IIb",
+      type: "MDR",
+      regulation: "MDR 2017/745",
+      notes: "Covered by the ART-Plan+ v3.2.0 CE marking (UDI (01)03770019940020(8012) v3.2.0(11)260525). The notified body is not stated on the vendor's public Technical Information 3.2 page; the GMED 0459 attribution used elsewhere in this catalogue is not repeated here."
+    },
+    fda: {
+      status: "510k_cleared",
+      class: "Class II",
+      type: "510(k)",
+      clearanceNumber: "K253091",
+      productCode: "MUJ, QKB, LLZ",
+      regulationNumber: "21 CFR 892.2050",
+      decisionDate: "2025-12-23",
+      notes: "K253091 (ART-Plan+ v3.1.0, decision 2025-12-23) names the cleared module as 'Annotate including TumorBox'. TumorBox has no separate 510(k) number."
+    },
+    intendedUseStatement: "Automatic generation of contours for tumours on medical images (CT and MR) within ART-Plan+, for use by trained radiotherapy professionals; all contours must be verified and validated by an authorised person. (Sources: Therapanacea Technical Information 3.2, https://therapanacea.com/technical-information-2; FDA 510(k) K253091, decision 2025-12-23; both retrieved 2026-07-30.)"
+  },
+  market: {
+    onMarketSince: "2025",
+    distributionChannels: ["Direct sales", "Cloud SaaS"],
+    availability: "Not all modules are available in all markets (vendor statement, Technical Information 3.2)."
+  },
   partOf: {
     name: "ART-Plan+",
+    version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
     productUrl: "https://therapanacea.com/products",
     relationship: "Module"
   },
-  source: "Company website - listed as 'Coming Soon'",
-  usesAI: true,
-  company: "Therapanacea",
-  logoUrl: "/logos/therapanacea.png",
-  version: "Art-Plan+ (v3.1.0)",
-  website: "https://therapanacea.com/products",
-  category: "Auto-Contouring",
-  features: [
-    "Automatic tumor segmentation",
-    "GTV/CTV/PTV delineation",
-    "Multi-modality support",
-    "Adaptive contouring"
-  ],
-  modality: ["CT", "MRI", "PET"],
-  structuresUnavailable: true,
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-  companyUrl: "https://therapanacea.com/",
-  productUrl: "https://therapanacea.com/products",
-  regulatory: {
-    fda: {
-      class: "II",
-      status: "Approved",
-      productCode: "MUJ, QKB, LLZ ",
-      decisionDate: "2025-12-23",
-      clearanceNumber: "K253091"
-    },
-    intendedUseStatement: "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 23 May 2026.)"
+  evidenceRigor: "E0",
+  evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1.",
+  clinicalImpact: "I0",
+  clinicalImpactNotes: "No independently published dosimetric, workflow or outcome data for AI tumour segmentation with this module.",
+  adoptionReadiness: "R2",
+  adoptionReadinessNotes: "Derived from E0 + CE/FDA: tumour delineation is a high-consequence task, so local validation on the institution's MR sequences, protocol configuration and expert review of every contour are required before clinical use.",
+  evidenceVendorIndependent: false,
+  evidenceMultiCenter: false,
+  evidenceMultiNational: false,
+  evidenceProspective: false,
+  evidenceExternalValidation: false,
+  burdenFactors: {
+    commissioningRequired: true,
+    localValidationRequired: true,
+    workflowRedesign: false,
+    integrationComplexity: "low",
+    humanFactorsTesting: true,
+    economicCaseRequired: false,
+    subgroupValidationGaps: true,
+    postMarketMonitoringPlan: false
   },
-  description: "AI-powered tumor segmentation module for the ART-Plan+ platform. Provides automated delineation of tumor volumes (GTV, CTV, PTV) using advanced deep learning algorithms.",
-  keyFeatures: [
-    "Automatic GTV delineation using deep learning",
-    "CTV and PTV expansion algorithms",
-    "Multi-modality image fusion support",
-    "Adaptive re-contouring for ART workflows"
+  limitations: [
+    "No itemised tumour-structure list published by the vendor",
+    "No peer-reviewed publication evaluating the module identified as of 2026-07-30",
+    "Automatic contours are a proposal only and must be verified and validated by an authorised person (vendor warning)",
+    "MR auto-contouring is limited to the sequences and anatomies supported by ART-Plan+ (Brain T1, Abdo TF, Pelvis T2, Pelvis TF)",
+    "The vendor recommends dedicated protocols (e.g. a glioblastoma protocol without brain-metastasis structures) to avoid unwanted structures",
+    "Contours may be generated in incorrect locations for atypical anatomy, post-surgical organs, poor image quality or incorrect DICOM tags",
+    "Not all modules are available in all markets"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  certification: "CE & FDA",
+  version: "3.2.0",
   releaseDate: "2025-12-23",
-  certification: "510(k) K253091",
-  subspeciality: "Radiation Oncology",
-  diseaseTargeted: ["Multiple Cancer Types"],
-  developmentStage: "pipeline",
-  anatomicalLocation: ["Multi-site"]
+  lastUpdated: "2026-07-30",
+  lastRevised: "2026-07-30",
+  source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23)."
 };
 
 export const THERAPANACEA_PRODUCTS: ProductDetails[] = [Annotate, TumorBox];
