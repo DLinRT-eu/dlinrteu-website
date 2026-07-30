@@ -1,5 +1,4 @@
 import { ProductDetails } from "@/types/productDetails";
-import { THERAPANACEA_PIPELINE_PRODUCTS } from "./therapanacea";
 import { MEDLEVER_PIPELINE_PRODUCTS } from "./medlever";
 import { GE_HEALTHCARE_PIPELINE_PRODUCTS } from "./ge-healthcare";
 import { UNITED_IMAGING_PIPELINE_PRODUCTS } from "./united-imaging";
@@ -8,7 +7,6 @@ import { NEURALRAD_PIPELINE_PRODUCTS } from "./neuralrad";
 
 // Combine all pipeline products
 export const PIPELINE_PRODUCTS: ProductDetails[] = [
-  ...THERAPANACEA_PIPELINE_PRODUCTS,
   ...MEDLEVER_PIPELINE_PRODUCTS,
   ...GE_HEALTHCARE_PIPELINE_PRODUCTS,
   ...UNITED_IMAGING_PIPELINE_PRODUCTS,
@@ -17,7 +15,6 @@ export const PIPELINE_PRODUCTS: ProductDetails[] = [
 ];
 
 export {
-  THERAPANACEA_PIPELINE_PRODUCTS,
   MEDLEVER_PIPELINE_PRODUCTS,
   GE_HEALTHCARE_PIPELINE_PRODUCTS,
   UNITED_IMAGING_PIPELINE_PRODUCTS,

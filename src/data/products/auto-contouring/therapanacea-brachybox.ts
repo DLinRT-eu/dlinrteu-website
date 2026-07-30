@@ -90,7 +90,8 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
         type: "MDR",
         regulation: "MDR 2017/745",
         notifiedBody: "GMED (Notified Body 0459)",
-        notes: "Published in the CE (EU) edition of the ART-Plan™ v3.2.0 structures brochure, which declares ART-Plan+ a class IIb device in the EU."
+        
+        notes: "Published in the CE (EU) edition of the ART-Plan™ v3.2.0 structures brochure, which declares ART-Plan+ a class IIb device in the EU. The notified body attribution (GMED 0459) is not restated on the vendor's public Technical Information 3.2 page; treat it as vendor-reported."
       },
       fda: {
         status: "510k_cleared",
@@ -111,7 +112,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
+      version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
@@ -141,12 +142,16 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       "No applicator reconstruction is published for this model",
       "MR only; sequence dependence not publicly characterised",
       "Adult patients only (18+ years)",
-      "No independent peer-reviewed evaluation published as of 2026-07-30"
+      "No independent peer-reviewed evaluation published as of 2026-07-30",
+      "Vendor warning: automatic contours are a proposal and must be verified and validated by one or more authorised persons before use",
+      "Vendor warning: MR auto-contouring is only supported for the sequences and anatomies Brain T1, Abdo TF, Pelvis T2 and Pelvis TF; other sequences may generate inappropriate contours",
+      "Vendor warning: contours may be inappropriate for atypical anatomy, post-surgical organs, poor image quality, or incorrect Patient Position (0018,5100) / Patient's Sex (0010,0040) DICOM tags",
+      "Vendor warning: symmetrical structures may be subject to right/left inversion"
     ],
     version: "3.2.0",
     releaseDate: "2026-03-01",
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
-    source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30)."
+    source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30)."
   }
 ];

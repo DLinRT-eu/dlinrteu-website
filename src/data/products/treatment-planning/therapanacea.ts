@@ -90,7 +90,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
+      version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
@@ -120,12 +120,18 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
       "Plan is not dose-calculated by SmartPlan — dose calculation, review and approval remain in the user's TPS",
       "Adult patients only (18+ years)",
       "No independent peer-reviewed evaluation published as of 2026-07-30",
-      "Not all models available in all markets"
+      "Not all models available in all markets",
+      "Vendor warning: only Monaco-Mosaiq, Eclipse-ARIA and RayStation TPS/R&V configurations are validated for plan generation",
+      "Vendor warning: only 1 or 2 beams can be used in the ballistic configuration",
+      "Vendor warning: the structure-mapping configuration influences plan generation and the task fails on ambiguous matching; the input RTSS must be checked for adequacy",
+      "Vendor warning: the treatment couch is detected from structures typed 'support' or 'fixation'; without such a structure the software assumes no couch",
+      "Vendor warning: the dose engine must be validated by the user, who must generate the RTDose in their own TPS to validate the RTPlan",
+      "Vendor warning: 2D DICOM images (e.g. scout images) cannot be processed in the SmartPlan module"
     ],
     version: "3.2.0",
     releaseDate: "2025-12-23",
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
-    source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30)."
+    source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30)."
   }
 ];
