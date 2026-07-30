@@ -1,90 +1,9 @@
 import { ProductDetails } from "@/types/productDetails";
 
-export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
-  {
-    id: "therapanacea-smartplan-pipeline",
-    name: "SmartPlan",
-    company: "Therapanacea",
-    companyUrl: "https://therapanacea.com/",
-    productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-    description: "AI-powered automatic treatment planning module for the ART-Plan+ platform. Generates optimized treatment plans using deep learning, reducing planning time while maintaining clinical quality standards.",
-    features: [
-      "AI-driven dose optimization",
-      "Automatic treatment plan generation",
-      "Multi-criteria optimization",
-      "Clinical protocol compliance"
-    ],
-    category: "Treatment Planning",
-    certification: "Pipeline",
-    developmentStage: "pipeline",
-    logoUrl: "/logos/therapanacea.png",
-    website: "https://therapanacea.com/products",
-    anatomicalLocation: ["Multi-site"],
-    modality: ["CT", "MRI"],
-    subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: [
-      "Automatic treatment plan generation using deep learning",
-      "Multi-criteria dose optimization",
-      "Clinical protocol-guided planning",
-      "Seamless integration with ART-Plan+ workflow"
-    ],
-    partOf: {
-      name: "ART-Plan+",
-      productUrl: "https://therapanacea.com/products",
-      relationship: "Module"
-    },
-    usesAI: true,
-    regulatory: {
-      intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI treatment-planning module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 16 June 2026.)",
-    },
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website - listed as 'Coming Soon'"
-  },
-  {
-    id: "therapanacea-brachybox-pipeline",
-    name: "BrachyBox",
-    company: "Therapanacea",
-    companyUrl: "https://therapanacea.com/",
-    productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-    description: "AI-powered brachytherapy delineation module for the ART-Plan+ platform. Provides automated contouring of organs at risk and applicator reconstruction for brachytherapy procedures.",
-    features: [
-      "Brachytherapy OAR contouring",
-      "Applicator reconstruction",
-      "Dose optimization support",
-      "Multi-site support"
-    ],
-    category: "Auto-Contouring",
-    certification: "Pipeline",
-    developmentStage: "pipeline",
-    logoUrl: "/logos/therapanacea.png",
-    website: "https://therapanacea.com/products",
-    anatomicalLocation: ["Pelvis", "Female Pelvis", "Head & Neck"],
-    modality: ["CT", "MRI"],
-    subspeciality: "Brachytherapy",
-    diseaseTargeted: ["Cervical Cancer", "Prostate Cancer", "Head & Neck Cancer"],
-    keyFeatures: [
-      "Automated OAR delineation for brachytherapy",
-      "Applicator reconstruction and verification",
-      "Integration with treatment planning systems",
-      "Support for gynecological and prostate brachytherapy"
-    ],
-    partOf: {
-      name: "ART-Plan+",
-      productUrl: "https://therapanacea.com/products",
-      relationship: "Module"
-    },
-    usesAI: true,
-    regulatory: {
-      intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI brachytherapy delineation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 23 May 2026.)",
-    },
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website - listed as 'Coming Soon'"
-  }
-];
+/**
+ * Therapanacea currently has no pre-market (pipeline) products listed.
+ * SmartPlan and BrachyBox were promoted to released products on 2026-07-30:
+ *   - SmartPlan  -> src/data/products/treatment-planning/therapanacea.ts (FDA K253091, prostate)
+ *   - BrachyBox  -> src/data/products/auto-contouring/therapanacea-brachybox.ts (ART-Plan v3.2.0 MRI Brachy model)
+ */
+export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [];
