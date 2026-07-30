@@ -239,7 +239,9 @@ export const ANNOTATE_PELVIS_MALE_CT = [
   "Pelvis Male (CT): SeminalVes",
 ];
 
-// 4) CT Pelvis Female — 18 OARs, 20 LNs & 2 ROIs
+// 4) CT Pelvis Female — vendor header states 18 OARs, 20 LNs & 2 ROIs.
+// The brochure itemises 19 OAR entries once bilateral structures are split
+// (the vendor header appears to under-count by one); the itemised names are used here.
 // Guidelines: OARs per Gay et al 2012 and Mir et al 2020; LN per Valentini et al 2016.
 export const ANNOTATE_PELVIS_FEMALE_CT = [
   "Pelvis Female (CT): AnalCanal",

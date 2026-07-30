@@ -61,7 +61,7 @@ export const Annotate: ProductDetails = {
     sourceUrl: "https://therapanacea.com/products",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-07-30",
-    notes: "CT models only, per vendor brochure v3.2.0. Four CT models, each prefixed in the structure list: Head & Neck (CT) 46 OARs + 19 LNs; Thorax/Breast/Abdo (CT) 73 OARs + 12 LNs (includes SBRT lung and heart sub-structures, previously published as separate lists); Pelvis Male (CT) 19 OARs + 15 LNs + 3 ROIs; Pelvis Female (CT) 18 OARs + 20 LNs + 2 ROIs. Bilateral structures are split into _L/_R so totals match the vendor counts. Synthetic-CT models belong to AdaptBox (id: therapanacea-adaptbox), MR models to MR-Box (id: mr-box-synthetic) and the MR brachytherapy model to BrachyBox (id: therapanacea-brachybox)."
+    notes: "CT models only, per vendor brochure v3.2.0. Four CT models, each prefixed in the structure list: Head & Neck (CT) 46 OARs + 19 LNs; Thorax/Breast/Abdo (CT) 73 OARs + 12 LNs (includes SBRT lung and heart sub-structures, previously published as separate lists); Pelvis Male (CT) 19 OARs + 15 LNs + 3 ROIs; Pelvis Female (CT) 18 OARs + 20 LNs + 2 ROIs per the vendor header (19 OAR entries are actually itemised in the brochure; the itemised names are used). Bilateral structures are split into _L/_R so totals match the vendor counts. Synthetic-CT models belong to AdaptBox (id: therapanacea-adaptbox), MR models to MR-Box (id: mr-box-synthetic) and the MR brachytherapy model to BrachyBox (id: therapanacea-brachybox)."
   },
 
   guidelines: [
