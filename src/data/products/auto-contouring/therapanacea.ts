@@ -253,21 +253,23 @@ export const Annotate: ProductDetails = {
     }
   ],
   limitations: [
-    "CT models only; MRI-based OAR delineation is provided by the separate MR-Box product",
+    "CT models only; MR-based OAR delineation is provided by the separate MR-Box and BrachyBox products",
     "Not all models available in all markets",
     "Independent multi-center time-savings studies not yet published for all anatomical sites",
+    "Pelvic nodal structures added in v3.2.0 carry the vendor's '_Val' (Valentini 2016) suffix; no independent published evaluation of these new models yet",
     "Lê 2024 was conducted at an institution with an active Therapanacea research contract (declared conflict of interest)",
     "DECT performance is reconstruction-kernel dependent — PEI80-DD achieves highest DSC; other kernels show lower performance (Lê 2024)"
   ],
   version: "3.2.0",
   releaseDate: "2021",
-  lastUpdated: "2026-06-16",
+  lastUpdated: "2026-07-30",
   keyPapers: [
     {"doi":"10.1186/s13014-024-02554-y","title":"Clinical evaluation of TheraPanacea Annotate","authors":"Meyer P et al.","journal":"Radiother Oncol","year":"2024"},
     {"doi":"10.1007/s13246-024-01434-9","title":"Auto-contouring dosimetric impact","authors":"Kim H et al.","journal":"Phys Eng Sci Med","year":"2024"}
   ],
-  lastRevised: "2026-07-15",
-  source: "Therapanacea product page (therapanacea.com/products, accessed 2026-06-16); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+  lastRevised: "2026-07-30",
+  source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+
 };
 
 export const TumorBox: ProductDetails = {
