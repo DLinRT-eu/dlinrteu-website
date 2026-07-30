@@ -45,7 +45,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
       description: "Wittenstein et al. Strahlenther Onkol 2019: Retrospective pilot evaluation of Brainlab Anatomical Mapping Release 1.0 (legacy version) for 9 extracranial OARs in 24 patients. Indirect for current Contouring 5.0/APM."
     },
     {
-      link: "https://www.therapanacea.eu/brainlab-therapanacea-collaboration/",
+      link: "https://therapanacea.com/brainlab-therapanacea-collaboration/",
       type: "Manufacturer/Partner Source",
       description: "TheraPanacea and Brainlab announced integration of AI-powered extracranial OAR and lymph-node segmentation into the Brainlab Elements portfolio."
     }

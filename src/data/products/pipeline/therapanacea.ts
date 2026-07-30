@@ -5,8 +5,8 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     id: "therapanacea-smartplan-pipeline",
     name: "SmartPlan",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
     description: "AI-powered automatic treatment planning module for the ART-Plan+ platform. Generates optimized treatment plans using deep learning, reducing planning time while maintaining clinical quality standards.",
     features: [
@@ -19,7 +19,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     certification: "Pipeline",
     developmentStage: "pipeline",
     logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Multi-site"],
     modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
@@ -32,13 +32,13 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     ],
     partOf: {
       name: "ART-Plan+",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     usesAI: true,
     regulatory: {
       intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI treatment-planning module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 16 June 2026.)",
+        "\"Coming Soon.\" Pre-market AI treatment-planning module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 16 June 2026.)",
     },
     lastUpdated: "2026-03-08",
     lastRevised: "2026-05-30",
@@ -48,8 +48,8 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     id: "therapanacea-brachybox-pipeline",
     name: "BrachyBox",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
     description: "AI-powered brachytherapy delineation module for the ART-Plan+ platform. Provides automated contouring of organs at risk and applicator reconstruction for brachytherapy procedures.",
     features: [
@@ -62,7 +62,7 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     certification: "Pipeline",
     developmentStage: "pipeline",
     logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Pelvis", "Female Pelvis", "Head & Neck"],
     modality: ["CT", "MRI"],
     subspeciality: "Brachytherapy",
@@ -75,13 +75,13 @@ export const THERAPANACEA_PIPELINE_PRODUCTS: ProductDetails[] = [
     ],
     partOf: {
       name: "ART-Plan+",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     usesAI: true,
     regulatory: {
       intendedUseStatement:
-        "\"Coming Soon.\" Pre-market AI brachytherapy delineation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 23 May 2026.)",
+        "\"Coming Soon.\" Pre-market AI brachytherapy delineation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 23 May 2026.)",
     },
     lastUpdated: "2026-03-08",
     lastRevised: "2026-05-30",

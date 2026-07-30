@@ -7,7 +7,7 @@ export const Annotate: ProductDetails = {
     description: "Models trained on expert-delineated CT datasets following international contouring guidelines across major cancer sites (Head & Neck, Thorax, Breast, Pelvis, SBRT Lung). Training data reviewed and validated by clinical experts. Dataset details not fully disclosed publicly.",
     disclosureLevel: "partial",
     source: "Therapanacea product page and FDA 510(k) summary K211539",
-    sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
+    sourceUrl: "https://therapanacea.com/products",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-06-16"
   },
@@ -21,14 +21,14 @@ export const Annotate: ProductDetails = {
   },
   name: "Annotate",
   company: "Therapanacea",
-  companyUrl: "https://www.therapanacea.eu/",
-  productUrl: "https://www.therapanacea.eu/our-products/annotate/",
+  companyUrl: "https://therapanacea.com/",
+  productUrl: "https://therapanacea.com/products",
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
   description: "AI-powered, CE-marked and FDA-cleared auto-contouring software providing zero-click, automatic delineation of more than 200 organs at risk (OARs) and lymph nodes for all major cancer sites (CT models: Head & Neck, Thorax, Breast, Pelvis, SBRT Lung). Delineates with the same accuracy as clinical experts in a matter of minutes. Cloud-based, GDPR-compliant, with seamless TPS integration and batch processing. MRI models are part of MR-Box (separate product).",
   category: "Auto-Contouring",
   certification: "CE & FDA",
   logoUrl: "/logos/therapanacea.png",
-  website: "https://www.therapanacea.eu/our-products/annotate/",
+  website: "https://therapanacea.com/products",
   anatomicalLocation: ["Head & Neck", "Thorax", "Breast", "Pelvis", "Lung"],
   modality: ["CT"],
   subspeciality: "Radiation Oncology",
@@ -55,8 +55,8 @@ export const Annotate: ProductDetails = {
   ],
   supportedStructures: ANNOTATE_ALL_STRUCTURES,
   structuresProvenance: {
-    source: "Therapanacea Annotate product page (therapanacea.eu/our-products/annotate/)",
-    sourceUrl: "https://www.therapanacea.eu/our-products/annotate/",
+    source: "Therapanacea Annotate product page (therapanacea.com/products)",
+    sourceUrl: "https://therapanacea.com/products",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-06-16",
     notes: "CT models only. Seven CT models, each prefixed in the structure list: Head & Neck (CT); Female Thorax/Breast (CT); Male Thorax (CT); Heart Sub-Structures (CT); Lung SBRT (CT); Pelvis Male (CT); Pelvis Female (CT). MRI models belong to MR-Box (id: mr-box-synthetic). CBCT models belong to AdaptBox (id: therapanacea-adaptbox)."
@@ -160,7 +160,7 @@ export const Annotate: ProductDetails = {
   partOf: {
     name: "ART-Plan+",
     version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    productUrl: "https://therapanacea.com/products",
     relationship: "Module"
   },
   usesAI: true,
@@ -222,7 +222,7 @@ export const Annotate: ProductDetails = {
     {"doi":"10.1007/s13246-024-01434-9","title":"Auto-contouring dosimetric impact","authors":"Kim H et al.","journal":"Phys Eng Sci Med","year":"2024"}
   ],
   lastRevised: "2026-07-15",
-  source: "Therapanacea product page (therapanacea.eu/our-products/annotate/, accessed 2026-06-16); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
+  source: "Therapanacea product page (therapanacea.com/products, accessed 2026-06-16); FDA 510(k) K253091 (decision 2025-12-23); PubMed verified 2026-06-16."
 };
 
 export const TumorBox: ProductDetails = {
@@ -244,7 +244,7 @@ export const TumorBox: ProductDetails = {
   name: "TumorBox",
   partOf: {
     name: "ART-Plan+",
-    productUrl: "https://www.therapanacea.eu/our-products/",
+    productUrl: "https://therapanacea.com/products",
     relationship: "Module"
   },
   source: "Company website - listed as 'Coming Soon'",
@@ -252,7 +252,7 @@ export const TumorBox: ProductDetails = {
   company: "Therapanacea",
   logoUrl: "/logos/therapanacea.png",
   version: "Art-Plan+ (v3.1.0)",
-  website: "https://www.therapanacea.eu/our-products/",
+  website: "https://therapanacea.com/products",
   category: "Auto-Contouring",
   features: [
     "Automatic tumor segmentation",
@@ -263,8 +263,8 @@ export const TumorBox: ProductDetails = {
   modality: ["CT", "MRI", "PET"],
   structuresUnavailable: true,
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/therapanacea.ts",
-  companyUrl: "https://www.therapanacea.eu/",
-  productUrl: "https://www.therapanacea.eu/our-products/",
+  companyUrl: "https://therapanacea.com/",
+  productUrl: "https://therapanacea.com/products",
   regulatory: {
     fda: {
       class: "II",
@@ -273,7 +273,7 @@ export const TumorBox: ProductDetails = {
       decisionDate: "2025-12-23",
       clearanceNumber: "K253091"
     },
-    intendedUseStatement: "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://www.therapanacea.eu/our-products/, retrieved 23 May 2026.)"
+    intendedUseStatement: "\"Coming Soon.\" Pre-market AI tumor-segmentation module for ART-Plan+; no Indications for Use published and no regulatory clearance disclosed. (Source: Therapanacea product page, https://therapanacea.com/products, retrieved 23 May 2026.)"
   },
   description: "AI-powered tumor segmentation module for the ART-Plan+ platform. Provides automated delineation of tumor volumes (GTV, CTV, PTV) using advanced deep learning algorithms.",
   keyFeatures: [

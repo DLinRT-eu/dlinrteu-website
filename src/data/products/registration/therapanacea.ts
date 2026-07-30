@@ -7,7 +7,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         source: "Therapanacea product page (manufacturer)",
         disclosureLevel: "minimal",
         description: "AI-powered rigid and deformable image registration. Training dataset details are not publicly disclosed. Note: FDA 510(k) K253091 (ART-Plan+ v3.1.0) was previously cited here but does not name SmartFuse — corrected on 2026-06-15.",
-        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceUrl: "https://therapanacea.com/products",
         sourceAccess: "public",
         sourceRetrievedOn: "2026-06-15"
     },
@@ -17,20 +17,20 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         description: "Manufacturer claims sub-voxel registration accuracy for AI-powered rigid and deformable image fusion. No SmartFuse-specific peer-reviewed or regulatory evaluation document confirmed (CE Mark documentation not publicly indexed). FDA K253091 was previously cited here but verified on 2026-06-15 to cover the ART-Plan+ platform (SmartPlan, Annotate/TumorBox, AdaptBox modules) without naming SmartFuse.",
         source: "Therapanacea product page (manufacturer)",
         studyDesign: "Manufacturer specification",
-        sourceUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+        sourceUrl: "https://therapanacea.com/products",
         sourceAccess: "public",
         sourceRetrievedOn: "2026-06-15"
     },
     name: "SmartFuse",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/smartfuse/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/therapanacea.ts",
     description: "AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. Part of the ART-Plan+ platform.",
     category: "Registration",
     certification: "CE & TGA",
     logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/smartfuse/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Whole body"],
     modality: ["CT", "MRI", "CBCT", "PET/CT"],
     subspeciality: "Radiation Oncology",
@@ -73,7 +73,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
         status: "TGA Cleared",
         notes: "Cleared for Australian market (manufacturer-reported)"
       },
-      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15.)"
+      intendedUseStatement: "SmartFuse is an AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. (Source: Therapanacea product page, therapanacea.com/products, accessed 2026-06-15.)"
     },
     market: {
       onMarketSince: "2020",
@@ -82,7 +82,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     partOf: {
       name: "ART-Plan+",
       version: "3.1.2",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     evidenceRigor: "E0",
@@ -100,6 +100,6 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-01-01",
     lastUpdated: "2026-06-15",
     lastRevised: "2026-06-15",
-    source: "Therapanacea official website (therapanacea.eu/our-products/smartfuse/, accessed 2026-06-15)"
+    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-06-15)"
   }
 ];

@@ -21,7 +21,7 @@ Highlights tracked in the catalog:
 
 ## TheraPanacea
 
-TheraPanacea announced [16 accepted abstracts](https://www.therapanacea.eu/our-scientific-work-at-estro-2026/) for ESTRO 2026, developed with Gustave Roussy, Institut Curie, Centre Léon Bérard, CHU Nîmes and Penn Medicine. The work spans auto-segmentation, adaptive radiotherapy with AI-generated synthetic CT, automated treatment planning (prostate, breast, head & neck) and emerging dose-modelling approaches. No new product launches were announced; individual product evidence entries will be updated once the abstracts have stable DOIs after the congress.
+TheraPanacea announced [16 accepted abstracts](https://therapanacea.com/our-scientific-work-at-estro-2026/) for ESTRO 2026, developed with Gustave Roussy, Institut Curie, Centre Léon Bérard, CHU Nîmes and Penn Medicine. The work spans auto-segmentation, adaptive radiotherapy with AI-generated synthetic CT, automated treatment planning (prostate, breast, head & neck) and emerging dose-modelling approaches. No new product launches were announced; individual product evidence entries will be updated once the abstracts have stable DOIs after the congress.
 
 ## RaySearch Laboratories
 

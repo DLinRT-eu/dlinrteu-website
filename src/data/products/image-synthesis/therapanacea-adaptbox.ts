@@ -53,8 +53,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     name: "AdaptBox",
     company: "Therapanacea",
-    companyUrl: "https://www.therapanacea.eu/",
-    productUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+    companyUrl: "https://therapanacea.com/",
+    productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
     description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, daily cumulative dose tracking, and assisted off-line replanning decision support.",
     features: [
@@ -69,7 +69,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    website: "https://www.therapanacea.eu/our-products/adaptbox/",
+    website: "https://therapanacea.com/products",
     anatomicalLocation: ["Head & Neck", "Breast", "Thorax", "Pelvis"],
     modality: ["CBCT"],
     subspeciality: "Radiation Oncology",
@@ -136,7 +136,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     supportedStructures: ADAPTBOX_ALL_STRUCTURES,
     structuresProvenance: {
       source: "Therapanacea AdaptBox product page",
-      sourceUrl: "https://www.therapanacea.eu/our-products/adaptbox/",
+      sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
       sourceRetrievedOn: "2026-06-16",
       notes: "Only the Pelvis (male) CBCT model is publicly itemised by the vendor (9 OARs). H&N and Breast/Thorax CBCT models are FDA-cleared at the platform level (K253091) but per-structure lists are not publicly disclosed and are intentionally not enumerated here."
@@ -158,7 +158,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     partOf: {
       name: "ART-Plan+",
       version: "3.2.0",
-      productUrl: "https://www.therapanacea.eu/our-products/",
+      productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     version: "3.2.0",
