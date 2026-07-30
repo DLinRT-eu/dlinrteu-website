@@ -142,7 +142,11 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       "No applicator reconstruction is published for this model",
       "MR only; sequence dependence not publicly characterised",
       "Adult patients only (18+ years)",
-      "No independent peer-reviewed evaluation published as of 2026-07-30"
+      "No independent peer-reviewed evaluation published as of 2026-07-30",
+      "Vendor warning: automatic contours are a proposal and must be verified and validated by one or more authorised persons before use",
+      "Vendor warning: MR auto-contouring is only supported for the sequences and anatomies Brain T1, Abdo TF, Pelvis T2 and Pelvis TF; other sequences may generate inappropriate contours",
+      "Vendor warning: contours may be inappropriate for atypical anatomy, post-surgical organs, poor image quality, or incorrect Patient Position (0018,5100) / Patient's Sex (0010,0040) DICOM tags",
+      "Vendor warning: symmetrical structures may be subject to right/left inversion"
     ],
     version: "3.2.0",
     releaseDate: "2026-03-01",
