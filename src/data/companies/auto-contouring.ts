@@ -145,13 +145,14 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "website": "https://therapanacea.com/",
     "productIds": [
       "therapanacea-annotate",
+      "therapanacea-brachybox",
       "therapanacea-adaptbox",
       "mr-box-synthetic",
       "therapanacea-smartfuse",
-      "therapanacea-tumorbox-pipeline",
-      "therapanacea-smartplan-pipeline",
-      "therapanacea-brachybox-pipeline"
+      "therapanacea-smartplan",
+      "therapanacea-tumorbox-pipeline"
     ],
+
     "category": "Auto-Contouring",
     "logoUrl": "/logos/therapanacea.png",
     "primaryTask": "Auto-Contouring",
