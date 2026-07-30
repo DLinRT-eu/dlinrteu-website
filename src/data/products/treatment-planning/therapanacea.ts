@@ -90,7 +90,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
+      version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },

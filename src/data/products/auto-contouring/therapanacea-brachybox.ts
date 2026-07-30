@@ -112,7 +112,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.1.0 (FDA cleared) / 3.2.0 (current)",
+      version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
@@ -154,4 +154,4 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     lastRevised: "2026-07-30",
     source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30)."
   }
-];
+]; Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).
