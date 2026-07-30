@@ -1,48 +1,42 @@
-## Context
+## Context (verified this turn)
 
-The reply-fan-out you are seeing on `noreply@dlinrt.eu` is caused by an IONOS-side **distribution list / group alias** on that address. Anything sent (or replied) to `noreply@dlinrt.eu` is expanded by IONOS to every member of that list. Resend is only the *outbound* sender — it is not what fans replies out. The app code already sets `reply_to: info@dlinrt.eu` on every transactional email, so once the IONOS list is gone, replies will land in `info@` and nowhere else.
+- `therapanacea.eu` now 302 → `therapanacea.com`, and **every** old per-module page (`/our-products/annotate/`, `/mr-box/`, `/adaptbox/`, `/smartfuse/`) redirects to a single page: `https://therapanacea.com/products`. All our stored URLs are stale.
+- The new page publishes an updated **Structures Library (v3.2)** with per-model counts:
+  - CT Head & Neck: 46 OAR | 19 LN — now includes vessels not in our list (common/external/internal carotid arteries, internal/external jugular veins), Cauda Equina, Pituitary, external contours.
+  - CT Thorax / Breast / Abdo: 73 OAR | 12 LN — heart substructures now folded into one model (Coronary Sinus, LAD, circumflex branches, ventricle segments, Ribs 1–12, pericardium, etc.).
+  - CT Pelvis Male: 19 OAR | 15 LN | 3 ROI (Valentini 2016 LN set, CTVN_Prostate per Hall 2021).
+  - CT Pelvis Female: 18 OAR | 20 LN | 2 ROI.
+  - MR Brain T1: 27 OAR (EPTN Eekers 2021); MR Pelvis Male T2 (Elekta): 11 OAR | 2 ROI; MR Pelvis Male & Abdo TrueFISP: 7 + 9 OAR | 2 ROI; **MRI Brachy Pelvis: 4 OAR** (new).
+  - AdaptBox "Adaptive Models": Syn-CT Pelvis Male (7 OAR | 2 ROI) plus CT Thorax/Breast/Abdo and a further CT model list.
+  - New headline claims: "270+ OARs and LNs", Tumor Segmentation (MR GBM and Multi-Mets), Brachytherapy segmentation, Fusion incl. ITV from 4DCT.
+- Our current data: `Annotate` (200+ OARs, 7 CT models), `MR-Box`, `AdaptBox`, `SmartFuse`, plus pipeline entries `SmartPlan` and `BrachyBox` marked "Coming Soon".
 
-The fix is entirely in the **IONOS control panel** (and optionally DNS). Lovable cannot make these changes for you — no code change is needed or possible here. Below is the exact sequence to run.
+## Plan
 
-## Plan (IONOS + DNS actions, in order)
+### 1. Source refresh (all Therapanacea files)
+Replace `therapanacea.eu/our-products/...` with `https://therapanacea.com/products` in `productUrl`, `website`, `sourceUrl`, `companyUrl` (→ `https://therapanacea.com/`), provenance blocks, and intended-use citations across:
+`auto-contouring/therapanacea.ts`, `auto-contouring/therapanacea-structures.ts`, `image-synthesis/therapanacea.ts`, `image-synthesis/therapanacea-adaptbox.ts`, `registration/therapanacea.ts`, `pipeline/therapanacea.ts`, and `companies/auto-contouring.ts`. Set `sourceRetrievedOn: "2026-07-30"`.
 
-### 1. Export the current IONOS list members (safety net)
-- IONOS Control Panel → **Email** → **Mailing Lists** (or **Group Addresses** / **Distribution Lists**, depending on your IONOS plan) → open `noreply@dlinrt.eu`.
-- Export or copy the member list to a local file. This is your rollback reference — do not skip it.
-- Confirm the members are in fact your newsletter subscribers (that will confirm the IONOS list is the fan-out source).
+### 2. Structure library update (`therapanacea-structures.ts`)
+Download the vendor **Structures Brochure PDF** (linked on the page) as the authoritative source; fall back to the page listing where the PDF disagrees. Then:
+- Add the newly listed CT H&N vessel OARs, Cauda Equina and other missing entries; reconcile our H&N block to the stated 46 OAR | 19 LN.
+- Rebuild Thorax/Breast/Abdo as the single 73 OAR | 12 LN model the vendor now publishes (keeping heart substructures inside it), retaining our `Region: Structure Name` convention and DICOM nomenclature mapping.
+- Update Pelvis Male/Female to the Valentini-2016 `_Val` nodal sets and ROI entries.
+- Add the new **MRI Brachy Pelvis (4 OAR)** model to MR-Box.
+- Expand AdaptBox structures to the published Adaptive Models (Syn-CT Pelvis Male + thorax/abdo model). No invented structures — anything not itemised stays out, with a comment noting why.
+- Update per-model comments with the guideline citations now printed on the page (DAHANCA 2020, Eekers 2021, Mir 2020, Grégoire 2014, Offersen 2015, Gay 2012, Valentini 2016, Kong 2011, Jabbour 2014, UK SABR 2019, Duane 2017, Pötter 2018/EMBRACE).
 
-### 2. Delete the IONOS distribution list for `noreply@`
-- In the same IONOS screen, **delete** the `noreply@dlinrt.eu` mailing list / group alias.
-- Do **not** recreate it as a mailbox or forwarder. `noreply@` should not accept inbound mail at all.
+### 3. Product record revisions
+- **Annotate**: description/keyFeatures updated to "270+ OARs and LNs", add Valentini 2016 + DAHANCA 2020 + Mir 2020 to `guidelines`, refresh `structuresProvenance`, bump `version`/`lastUpdated`/`lastRevised`.
+- **MR-Box**: add brachytherapy MR OAR model and MR tumour (GBM / multi-mets) coverage if the page attributes it to MR-Box; otherwise note it under Annotate/TumorBox.
+- **AdaptBox**: add "Deep Learning sCT and augmented CBCT", automated DIR, dose comparison, protocol-based alerts, dashboards to key features; update structures.
+- **SmartFuse**: add ITV generation from 4DCT and the multi-modality list (CT/MR/PET/CBCT) now published; keep the existing E0/I1 and the K253091 non-attribution note intact.
+- **Pipeline review**: the new site presents **Planning (SmartPlan)** as a shipping module with clinical-validation claims, and FDA K253091 names SmartPlan; brachytherapy segmentation is now inside the shipping Segmentation library. Proposal: promote `therapanacea-smartplan-pipeline` to a full Treatment Planning product (new `src/data/products/treatment-planning/therapanacea.ts`, keeping a redirect from the old id) and retire/merge `therapanacea-brachybox-pipeline` into the MR-Box brachy model. This happens **only if** step 2's brochure/regulatory check confirms clearance coverage; otherwise both stay in pipeline with refreshed text, and I'll report the reason.
 
-### 3. Reject inbound mail to `noreply@dlinrt.eu`
-Pick one of these, in order of preference:
-- **Preferred:** in IONOS, create `noreply@dlinrt.eu` as a **catch-and-reject alias** (some IONOS plans call this "Bounce" or "Reject"). Inbound mail gets SMTP 550, nothing is stored, nothing is forwarded.
-- **Fallback:** create it as a mailbox with **no forwarding, no group membership, no auto-reply**, and never check it. Replies silently die there. Less clean than reject, but acceptable.
-- Do **not** forward `noreply@` to `info@` — that would dump every bounce and every stray reply into `info@`.
+### 4. Propagation and verification
+- Update `companies/auto-contouring.ts` productIds and website; add `App.tsx` redirects + `sitemap.xml` entries for any changed product id.
+- Re-run structure counting/classification sanity checks and the product audit for the Therapanacea entries; confirm the product pages render the new structure groups correctly in the preview.
 
-### 4. Confirm `info@dlinrt.eu` still works
-- Send a manual test to `info@dlinrt.eu` from an external address and confirm it lands in the intended IONOS mailbox (this is where all app replies now go, per the `reply_to` header we set earlier).
-
-### 5. Confirm Resend is not re-introducing the fan-out
-- Resend Dashboard → **Domains → dlinrt.eu → Inbound / Webhooks**: no route for `noreply@` (or catch-all) should forward to a webhook that writes to the audience or triggers `send-newsletter-broadcast`.
-- Resend Dashboard → **Audiences**: search for `noreply@dlinrt.eu` as a contact. If present, remove it.
-- No changes to Resend sending config are needed — `noreply@dlinrt.eu` stays as the verified **From** identity for outbound only.
-
-### 6. DNS sanity (optional but recommended)
-- Confirm SPF includes only Resend (`v=spf1 include:_spf.resend.com -all` or your current equivalent) and IONOS if you still send from IONOS mailboxes.
-- Confirm DKIM for Resend is green in the Resend dashboard.
-- Confirm DMARC is at least `p=quarantine` (ideally `p=reject`) with `rua=` reporting to a monitored address.
-- No MX changes are required — IONOS remains the MX host for `dlinrt.eu` because `info@` and other real mailboxes still live there.
-
-### 7. Verify the fix end-to-end
-- From a personal external address (Gmail, etc.), send a plain email **to** `noreply@dlinrt.eu`. Expected: SMTP 550 bounce (or silent drop if you used the fallback). **Not** expected: any subscriber receiving a copy.
-- Trigger one transactional email from the app (e.g. `admin-reset-user-password` on a test user). Inspect headers: `From: noreply@dlinrt.eu`, `Reply-To: info@dlinrt.eu`. Hit Reply → confirm the draft goes to `info@` and only `info@`.
-- Ask one trusted subscriber to confirm they did **not** receive a copy of your test-to-`noreply@` from step 7.
-
-## Out of scope
-
-- No code changes. The `reply_to: info@dlinrt.eu` patch across the 20 Edge Functions is already deployed and is what makes the IONOS deletion safe.
-- No changes to newsletter templates, audience membership, Supabase tables, or GDPR opt-in flow.
-- No migration of newsletter sending away from Resend — Resend stays as the sole sender.
-- Lovable cannot access IONOS or your DNS provider; steps 1–6 are actions you perform in those dashboards.
+## Notes
+- Every changed factual field keeps a disclosed source (`https://therapanacea.com/products` or the brochure PDF URL) with `sourceAccess: "public"` and `sourceRetrievedOn: "2026-07-30"`.
+- No evidence-level (E/I/R) changes are proposed here — the new site adds no new peer-reviewed citations, only marketing whitepapers/PDFs. If the "Physician Acceptance" publication PDF turns out to be a peer-reviewed paper, I'll flag it for a separate re-scoring pass rather than silently upgrading scores.
