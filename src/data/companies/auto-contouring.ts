@@ -150,7 +150,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
       "mr-box-synthetic",
       "therapanacea-smartfuse",
       "therapanacea-smartplan",
-      "therapanacea-tumorbox-pipeline"
+      "therapanacea-tumorbox"
     ],
 
     "category": "Auto-Contouring",
