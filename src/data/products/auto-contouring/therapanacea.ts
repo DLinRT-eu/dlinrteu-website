@@ -112,8 +112,50 @@ export const Annotate: ProductDetails = {
       reference: "https://doi.org/10.1016/j.ijrobp.2011.03.021",
       url: "https://doi.org/10.1016/j.ijrobp.2011.03.021",
       compliance: "full"
+    },
+    {
+      name: "DAHANCA – Head & Neck OAR delineation",
+      version: "2020",
+      url: "https://www.dahanca.dk/",
+      compliance: "full"
+    },
+    {
+      name: "EPTN (Eekers et al.) – Neurological OAR atlas",
+      version: "2021",
+      compliance: "full"
+    },
+    {
+      name: "Mir et al. – Global Harmonisation Group OAR consensus",
+      version: "2020",
+      compliance: "full"
+    },
+    {
+      name: "Kong et al. (RTOG) – Thoracic OAR atlas",
+      version: "2011",
+      compliance: "full"
+    },
+    {
+      name: "Jabbour et al. (RTOG) – Thoracic OAR delineation",
+      version: "2014",
+      compliance: "full"
+    },
+    {
+      name: "Milo et al. – Cardiac sub-structure delineation",
+      version: "2020",
+      compliance: "full"
+    },
+    {
+      name: "Valentini et al. – Pelvic lymph node delineation",
+      version: "2016",
+      compliance: "full"
+    },
+    {
+      name: "Hall et al. – Prostate CTVn delineation",
+      version: "2021",
+      compliance: "full"
     }
   ],
+
   technicalSpecifications: {
     population: "Adult patients",
     input: ["CT"],
