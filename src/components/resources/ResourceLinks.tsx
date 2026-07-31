@@ -14,6 +14,28 @@ const ResourceLinks = () => {
       category: "EU Regulation"
     },
     {
+      title: "MDR/IVDR Simplification Proposal — procedure 2025/0404(COD)",
+      description: "EUR-Lex procedure file for COM(2025) 1023 (16 Dec 2025), amending MDR, IVDR, Reg. 2022/123 and the AI Act Annex I list — ongoing, first reading",
+      url: "https://eur-lex.europa.eu/procedure/EN/2025_404",
+      icon: FileText,
+      category: "EU Regulation"
+    },
+    {
+      title: "Proposal to simplify medical device rules (Commission)",
+      description: "Commission publication page with the full text and annexes of the MDR/IVDR simplification proposal",
+      url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
+      icon: FileText,
+      category: "EU Regulation"
+    },
+    {
+      title: "EPRS briefing PE 785.663 — Medical devices: Simplifying the rules",
+      description: "European Parliament Research Service briefing (March 2026) tracking the legislative progress of 2025/0404(COD)",
+      url: "https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/785663/EPRS_BRI(2026)785663_EN.pdf",
+      icon: BookOpen,
+      category: "EU Regulation"
+    },
+
+    {
       title: "EU AI Act (Regulation 2024/1689)",
       description: "Comprehensive EU regulation on artificial intelligence systems including medical AI",
       url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",

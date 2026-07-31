@@ -48,12 +48,13 @@ const CoreDocuments = () => {
         },
 
         {
-          title: "MDR Targeted Revision Proposal (Dec 2025)",
-          description: "Commission proposal simplifying MDR/IVDR rules including in-house use",
+          title: "MDR/IVDR Simplification Proposal — COM(2025) 1023",
+          description: "Commission proposal of 16 Dec 2025 amending MDR/IVDR, EMA expert-panel support and the AI Act Annex I list. Procedure 2025/0404(COD) — proposal, not in force.",
           url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
           type: "Proposal",
           reference: "[NEW]"
         }
+
       ]
     },
     {

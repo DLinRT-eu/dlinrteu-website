@@ -53,6 +53,12 @@ const RegulatoryFramework = () => {
             Each class has specific requirements for clinical evidence, quality management, 
             and post-market surveillance.
           </p>
+          <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+            Note: the classification and conformity-assessment rules summarised here are those in force today. 
+            They are subject to the pending simplification proposal COM(2025) 1023 / 2025/0404(COD), which is 
+            still in first reading and has not been adopted.
+          </p>
+
         </CardContent>
       </Card>
 
