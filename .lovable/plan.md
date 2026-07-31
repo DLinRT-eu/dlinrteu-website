@@ -1,56 +1,39 @@
-## What I verified
+## Goal
 
-Resolved link `link.europa.eu/XhXyV4` → EC press release IP/26/1714 (30–31 Jul 2026), "Commission starts enforcing AI Act rules and new transparency requirements on 2 August":
+Audit every MDR statement on the Resources & Compliance page and bring the "Proposed MDR Revision" card up to date (as of 31 July 2026), including the proposal's direct link to the AI Act.
 
-- **2 Aug 2026** — the AI Office and national authorities **begin enforcing** the AI Act: GPAI model obligations, prohibited practices, and Article 50 **transparency obligations start to apply** (AI-interaction disclosure, deepfake labelling, machine-readable marking of AI-generated content). Enforcement split: AI Office (systems from the same provider as the GPAI model, plus VLOP/VLOSE-integrated systems), national competent authorities (all other systems), EDPS (EU institutions).
-- The **AI Omnibus is in force** (no longer "pending publication in the OJ") and postpones high-risk rules to **2 Dec 2027** (Annex III) and **2 Aug 2028** (high-risk AI in regulated products, incl. medical devices).
-- **2 Dec 2026** — new prohibitions on AI-generated non-consensual sexual content and CSAM apply. This is *not* the end of an Art. 50 transparency grace period.
-- Supporting material now published: Code of Practice on Transparency of AI-Generated Content (180+ signatories), draft Art. 50 guidelines, draft high-risk classification guidelines, AI Act Service Desk, Complaint and Whistleblower tools, Scientific Panel.
+## What I verified (sources)
 
-## What is wrong on the site today
+- The proposal is **COM(2025) 1023 final, procedure 2025/0404(COD)**, adopted 16 December 2025. It amends **MDR 2017/745**, **IVDR 2017/746**, **Reg. 2022/123** (EMA support to medical-device expert panels) **and Reg. 2024/1689 (AI Act) as regards the list of Union harmonisation legislation in its Annex I**.
+- Status: still **ongoing, not adopted**. EP lead committee **SANT**, rapporteur **Oliver Schenk (EPP, DE)**, appointed 13 Feb 2026; draft report presented 14 Apr 2026; first SANT examination of the draft report on **14 July 2026** (balance between simplification and patient safety). Council: **progress report 9801/26 of 5 June 2026** — no general approach yet.
+- Background reading: EPRS briefing **PE 785.663 (March 2026)**, "Medical devices: Simplifying the rules".
+- Consequence: **MDR/IVDR as currently in force still apply unchanged**; nothing in the proposal is binding today.
 
-In `src/components/resources/RegulatoryLandscape.tsx` (EU: AI Act card):
+## Issues found on the page
 
-- Badge and body say the Digital Omnibus is "Council-approved 29 Jun 2026 … pending publication in the Official Journal" — outdated; it is in force.
-- No mention at all of **2 Aug 2026**, the single most relevant near-term date.
-- The bullet "2 Dec 2026 — end of the grace period for transparency on AI-generated content (Art. 50)" is inaccurate; Art. 50 applies from 2 Aug 2026, and 2 Dec 2026 carries only the new NCII/CSAM prohibitions.
-- The "2 Aug 2027 sandboxes" bullet is unverified against the post-Omnibus text.
+1. `RegulatoryLandscape.tsx` — the "Proposed MDR Revision (December 2025)" card gives no document reference, no legislative status, and omits that the proposal touches the **AI Act Annex I list** and the EMA expert-panel regulation. A reader can't tell it is still a proposal in first reading.
+2. Risk of confusion between two different files: **AI Omnibus COM(2025) 836** (AI Act) and **MDR/IVDR simplification COM(2025) 1023**. The page mentions the first only; the two are described in adjacent cards without distinguishing them.
+3. The "Interplay: MDR + AI Act" card explains the Omnibus narrowing but does not mention that the MDR proposal itself edits the AI Act Annex I list — the most concrete MDR↔AI Act link for radiotherapy SaMD.
+4. `CoreDocuments.tsx` — "MDR Targeted Revision Proposal (Dec 2025)" entry lacks the COM/procedure number and a status label.
+5. `ResourceLinks.tsx` — no link to the proposal procedure file, the EPRS briefing, or the Council progress report.
 
-Correct as-is: 2 Dec 2027 / 2 Aug 2028 dates, the Annex I sectoral-interplay point, AI Office competence, machinery exemption.
+## Changes
 
-## Plan
+**`src/components/resources/RegulatoryLandscape.tsx`**
+- Rewrite the proposal card: title "MDR/IVDR Simplification Proposal — COM(2025) 1023, 2025/0404(COD)"; status badge "Ordinary legislative procedure — first reading, not adopted"; explicit note that MDR 2017/745 and IVDR 2017/746 apply unchanged until adoption.
+- Add a short status timeline: 16 Dec 2025 proposal · 13 Feb 2026 EP rapporteur (Schenk, SANT) · 14 Apr 2026 draft report · 5 Jun 2026 Council progress report 9801/26 · 14 Jul 2026 SANT examination of draft report.
+- Summarise the substance accurately: risk-proportionate simplification of conformity-assessment procedures, in-house device rules for health institutions, digitalisation/EUDAMED, EMA support for expert panels, and the amendment of AI Act Annex I.
+- In the "Interplay: MDR + AI Act" card, add a sentence that the MDR proposal amends the AI Act Annex I list, so the boundary between MDR conformity assessment and AI Act high-risk obligations for medical AI may shift before the 2 Aug 2028 date.
+- Keep the AI Omnibus (COM(2025) 836) content, but label the two files distinctly to avoid conflation.
 
-### 1. Rewrite the EU: AI Act card (`RegulatoryLandscape.tsx`)
-- Change the badge to "AI Omnibus in force — enforcement from 2 Aug 2026".
-- Replace the "What changed (Jun 2026)" box with a clean **AI Act timeline** ordered by date:
-  - *2 Feb 2025* — prohibited practices applicable.
-  - *2 Aug 2025* — GPAI obligations applicable.
-  - **2 Aug 2026 (now)** — enforcement begins (AI Office + national authorities + EDPS); Article 50 transparency obligations apply: disclose AI interaction, label deepfakes, machine-readable marking of AI-generated/altered content.
-  - *2 Dec 2026* — new prohibitions on non-consensual sexual content / CSAM.
-  - *2 Dec 2027* — Annex III high-risk obligations.
-  - *2 Aug 2028* — Annex I high-risk AI embedded in regulated products, incl. **medical devices** (the DLinRT-relevant date).
-- Drop the unverified 2 Aug 2027 sandbox bullet (or restate it only if I can confirm it in the consolidated text before writing).
-- Keep and retain the sectoral-interplay (Annex I / MDR) paragraph, updating "Council-approved" wording to "in force".
+**`src/components/resources/CoreDocuments.tsx`**
+- Update the proposal entry with COM(2025) 1023 / 2025/0404(COD) and a "proposal — not in force" qualifier; point to the Commission publication page.
 
-### 2. Add a "What 2 Aug 2026 means for radiotherapy AI" note
-Short, factual sub-block: for CE-marked RT AI (Annex I high-risk via MDR), the high-risk obligations still do not bite until 2 Aug 2028, but Article 50 transparency can already apply where a product generates or alters content shown to users, or interacts conversationally — with the disclaimer that this is informational, not legal advice.
+**`src/components/resources/ResourceLinks.tsx`**
+- Add to the MDR group: EUR-Lex procedure file 2025/0404(COD), the Commission publication page for the proposal, and the EPRS briefing PE 785.663. Each with a one-line description and date.
 
-### 3. Update the Interplay: MDR + AI Act card
-Replace "Council-approved 29 Jun 2026" with the in-force framing; keep the MDCG 2025-6 reference.
+**Other MDR mentions** (`PurposeSection`, `RegulatoryFramework`, `ComplianceChecklist`, `StandardsGuidelines`): reviewed — statements about MDR 2017/745, SaMD classification (Rule 11), ISO 13485/14971, MDCG guidance and TPLC monitoring are accurate; no changes planned beyond a caveat in `RegulatoryFramework` that classification rules are subject to the pending simplification proposal.
 
-### 4. Refresh links (`ResourceLinks.tsx`, `CoreDocuments.tsx`)
-Add, in the existing EU AI Act group, with the existing card/search pattern:
-- Enforcement of the AI Act (digital-strategy)
-- Guidelines on Transparency of AI-generated Content
-- Code of Practice on Transparency of AI-Generated Content
-- AI Act Service Desk (FAQ)
-- Press release IP/26/1714 as the dated source
-Keep `CoreDocuments.tsx` curated: add only the Art. 50 transparency guidelines there.
+## Notes
 
-### 5. Verification
-- Type-check.
-- Load `/resources-compliance` in the browser and screenshot the AI Act and Interplay cards to confirm rendering and that every new link resolves (HTTP 200).
-
-## Technical notes
-
-Files touched: `src/components/resources/RegulatoryLandscape.tsx`, `src/components/resources/ResourceLinks.tsx`, `src/components/resources/CoreDocuments.tsx`. Presentation-only; no data-model or product changes. All dates sourced from EC press release IP/26/1714 and the digital-strategy enforcement pages, retrieved 2026-07-31.
+All text stays informational, dated, and non-legal-advice; no product data, business logic, or backend changes.
