@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertCircle } from 'lucide-react';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT } from '@/data/resources/verification';
 
 const ComplianceChecklist = () => {
   const checklistItems = [
@@ -67,6 +69,14 @@ const ComplianceChecklist = () => {
                   <CardTitle className="text-lg font-semibold text-foreground leading-tight">
                     {item.title}
                   </CardTitle>
+                  <div className="mt-2">
+                    <VerifiedBadge
+                      lastVerified={RESOURCES_LAST_AUDIT}
+                      status="guidance"
+                      note="Checklist step reviewed against MDR, AI Act and FDA guidance current at this date."
+                      compact
+                    />
+                  </div>
                 </div>
               </div>
             </CardHeader>

@@ -8,6 +8,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT } from '@/data/resources/verification';
 
 const RegulatoryFramework = () => {
   const riskClasses = [
@@ -45,6 +47,12 @@ const RegulatoryFramework = () => {
           <CardTitle className="text-2xl font-bold text-foreground">
             Medical Device Regulation (MDR - EU 2017/745)
           </CardTitle>
+          <VerifiedBadge
+            lastVerified={RESOURCES_LAST_AUDIT}
+            version="Regulation (EU) 2017/745 — consolidated text"
+            status="in-force"
+            note="Subject to pending proposal COM(2025) 1023 / 2025/0404(COD), not adopted."
+          />
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed">
@@ -68,6 +76,12 @@ const RegulatoryFramework = () => {
           <CardTitle className="text-xl font-semibold text-foreground">
             MDR Risk Classifications
           </CardTitle>
+          <VerifiedBadge
+            lastVerified={RESOURCES_LAST_AUDIT}
+            version="Regulation (EU) 2017/745 — consolidated text"
+            status="in-force"
+            note="Subject to pending proposal COM(2025) 1023 / 2025/0404(COD), not adopted."
+          />
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
