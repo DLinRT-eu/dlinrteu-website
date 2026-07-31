@@ -1,39 +1,37 @@
 ## Goal
 
-Audit every MDR statement on the Resources & Compliance page and bring the "Proposed MDR Revision" card up to date (as of 31 July 2026), including the proposal's direct link to the AI Act.
+Audit every factual claim on `/resources` (Resources & Compliance) and make provenance visible: each regulatory card, core document, standard and library link gets a **Last verified** date and, where applicable, a **version/status note** (e.g. "Reg. (EU) 2024/1689, consolidated", "COM(2025) 1023 — proposal, not in force").
 
-## What I verified (sources)
+## Part 1 — Accuracy audit (no assumptions, verified before edits)
 
-- The proposal is **COM(2025) 1023 final, procedure 2025/0404(COD)**, adopted 16 December 2025. It amends **MDR 2017/745**, **IVDR 2017/746**, **Reg. 2022/123** (EMA support to medical-device expert panels) **and Reg. 2024/1689 (AI Act) as regards the list of Union harmonisation legislation in its Annex I**.
-- Status: still **ongoing, not adopted**. EP lead committee **SANT**, rapporteur **Oliver Schenk (EPP, DE)**, appointed 13 Feb 2026; draft report presented 14 Apr 2026; first SANT examination of the draft report on **14 July 2026** (balance between simplification and patient safety). Council: **progress report 9801/26 of 5 June 2026** — no general approach yet.
-- Background reading: EPRS briefing **PE 785.663 (March 2026)**, "Medical devices: Simplifying the rules".
-- Consequence: **MDR/IVDR as currently in force still apply unchanged**; nothing in the proposal is binding today.
+For each section of `src/pages/ResourcesCompliance.tsx`:
 
-## Issues found on the page
+1. **RegulatoryLandscape.tsx** — re-verify EU AI Act dates (2 Aug 2026 enforcement + Art. 50 transparency, 2 Dec 2027 Annex III, 2 Aug 2028 Annex I), AI Omnibus COM(2025) 836 status, MDR proposal COM(2025) 1023 / 2025/0404(COD) legislative state, FDA and international cards.
+2. **StandardsGuidelines.tsx**, **RegulatoryFramework.tsx**, **ComplianceChecklist.tsx** — check standard numbers/editions (ISO 13485, IEC 62304, ISO 14971, IEC 81001-5-1, AAPM/ESTRO reports) and any claim of current applicability.
+3. **CoreDocuments.tsx** and **ResourceLinks.tsx** — link-check every URL (HTTP status + redirect target) and confirm each title/description matches the page it points to.
+4. **Evidence/taxonomy sections** — confirm text matches `docs/review/GUIDE.md` and `src/data/evidence-impact-levels.ts`.
 
-1. `RegulatoryLandscape.tsx` — the "Proposed MDR Revision (December 2025)" card gives no document reference, no legislative status, and omits that the proposal touches the **AI Act Annex I list** and the EMA expert-panel regulation. A reader can't tell it is still a proposal in first reading.
-2. Risk of confusion between two different files: **AI Omnibus COM(2025) 836** (AI Act) and **MDR/IVDR simplification COM(2025) 1023**. The page mentions the first only; the two are described in adjacent cards without distinguishing them.
-3. The "Interplay: MDR + AI Act" card explains the Omnibus narrowing but does not mention that the MDR proposal itself edits the AI Act Annex I list — the most concrete MDR↔AI Act link for radiotherapy SaMD.
-4. `CoreDocuments.tsx` — "MDR Targeted Revision Proposal (Dec 2025)" entry lacks the COM/procedure number and a status label.
-5. `ResourceLinks.tsx` — no link to the proposal procedure file, the EPRS briefing, or the Council progress report.
+Findings are fixed in place; anything that cannot be verified is flagged in-copy as "unverified" rather than silently kept.
 
-## Changes
+## Part 2 — Verification metadata model
 
-**`src/components/resources/RegulatoryLandscape.tsx`**
-- Rewrite the proposal card: title "MDR/IVDR Simplification Proposal — COM(2025) 1023, 2025/0404(COD)"; status badge "Ordinary legislative procedure — first reading, not adopted"; explicit note that MDR 2017/745 and IVDR 2017/746 apply unchanged until adoption.
-- Add a short status timeline: 16 Dec 2025 proposal · 13 Feb 2026 EP rapporteur (Schenk, SANT) · 14 Apr 2026 draft report · 5 Jun 2026 Council progress report 9801/26 · 14 Jul 2026 SANT examination of draft report.
-- Summarise the substance accurately: risk-proportionate simplification of conformity-assessment procedures, in-house device rules for health institutions, digitalisation/EUDAMED, EMA support for expert panels, and the amendment of AI Act Annex I.
-- In the "Interplay: MDR + AI Act" card, add a sentence that the MDR proposal amends the AI Act Annex I list, so the boundary between MDR conformity assessment and AI Act high-risk obligations for medical AI may shift before the 2 Aug 2028 date.
-- Keep the AI Omnibus (COM(2025) 836) content, but label the two files distinctly to avoid conflation.
+Add a single source of truth so dates are not scattered in JSX:
 
-**`src/components/resources/CoreDocuments.tsx`**
-- Update the proposal entry with COM(2025) 1023 / 2025/0404(COD) and a "proposal — not in force" qualifier; point to the Commission publication page.
+- New `src/data/resources/verification.ts` exporting a `VerificationMeta` type (`lastVerified: string` ISO date, `version?: string`, `status?: 'in-force' | 'proposal' | 'guidance' | 'superseded'`, `note?: string`).
+- New `src/components/resources/VerifiedBadge.tsx` — compact, accessible badge rendering `Verified <date>` with an optional tooltip carrying the version/status note. Uses existing shadcn `Badge` + `Tooltip` and design tokens only.
 
-**`src/components/resources/ResourceLinks.tsx`**
-- Add to the MDR group: EUR-Lex procedure file 2025/0404(COD), the Commission publication page for the proposal, and the EPRS briefing PE 785.663. Each with a one-line description and date.
+## Part 3 — Apply to every item
 
-**Other MDR mentions** (`PurposeSection`, `RegulatoryFramework`, `ComplianceChecklist`, `StandardsGuidelines`): reviewed — statements about MDR 2017/745, SaMD classification (Rule 11), ISO 13485/14971, MDCG guidance and TPLC monitoring are accurate; no changes planned beyond a caveat in `RegulatoryFramework` that classification rules are subject to the pending simplification proposal.
+- **RegulatoryLandscape**: each card header gets a `VerifiedBadge` plus an explicit version line (regulation number, consolidated-text date, or proposal status).
+- **CoreDocuments**: each document entry gains `lastVerified` and `version`/`status`; badge shown next to the existing type badge.
+- **ResourceLinks**: each link entry gains `lastVerified`; badge shown in the card footer, and the existing search filter is extended to match version text.
+- **StandardsGuidelines** / **RegulatoryFramework** / **ComplianceChecklist**: per-item verified date and edition/year.
+- **Page header**: a summary line "All entries verified as of <most recent date>" derived from the data, not hardcoded.
 
-## Notes
+## Technical notes
 
-All text stays informational, dated, and non-legal-advice; no product data, business logic, or backend changes.
+- All new logic in TypeScript with explicit types; no `any`.
+- Dates stored as `YYYY-MM-DD` strings in data files; formatted for display in one helper.
+- Semantic tokens only — no hardcoded colours.
+- Verification via Playwright screenshots of `/resources` sections plus a link-check pass; lint/test/build run at the end.
+- No changes to product data, backend, or unrelated pages.

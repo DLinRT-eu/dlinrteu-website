@@ -2,81 +2,116 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, FileText, Database, Shield, Users, Globe, BookOpen, Award, Building, Stethoscope } from 'lucide-react';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT, type VerificationMeta } from '@/data/resources/verification';
+
+interface ResourceEntry extends Partial<VerificationMeta> {
+  title: string;
+  description: string;
+  url: string;
+  icon: React.ComponentType<{ className?: string }>;
+  category: string;
+}
 
 const ResourceLinks = () => {
-  const resources = [
+  const resources: ResourceEntry[] = [
+
     // Regulatory Bodies - EU
     {
       title: "European Medical Device Regulation (MDR)",
       description: "Official text of EU Regulation 2017/745 governing medical devices in Europe",
       url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745",
       icon: FileText,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Regulation (EU) 2017/745 — consolidated text",
+      status: "in-force"
     },
     {
       title: "MDR/IVDR Simplification Proposal — procedure 2025/0404(COD)",
       description: "EUR-Lex procedure file for COM(2025) 1023 (16 Dec 2025), amending MDR, IVDR, Reg. 2022/123 and the AI Act Annex I list — ongoing, first reading",
       url: "https://eur-lex.europa.eu/procedure/EN/2025_404",
       icon: FileText,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "2025/0404(COD) — first reading",
+      status: "proposal",
+      note: "MDR 2017/745 and IVDR 2017/746 continue to apply unchanged."
     },
     {
       title: "Proposal to simplify medical device rules (Commission)",
       description: "Commission publication page with the full text and annexes of the MDR/IVDR simplification proposal",
       url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
       icon: FileText,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "COM(2025) 1023 final, 16 Dec 2025",
+      status: "proposal"
     },
     {
       title: "EPRS briefing PE 785.663 — Medical devices: Simplifying the rules",
       description: "European Parliament Research Service briefing (March 2026) tracking the legislative progress of 2025/0404(COD)",
       url: "https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/785663/EPRS_BRI(2026)785663_EN.pdf",
       icon: BookOpen,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "PE 785.663 (March 2026)",
+      status: "guidance"
     },
+
 
     {
       title: "EU AI Act (Regulation 2024/1689)",
       description: "Comprehensive EU regulation on artificial intelligence systems including medical AI",
       url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
       icon: FileText,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Regulation (EU) 2024/1689, as amended by the AI Omnibus COM(2025) 836",
+      status: "in-force",
+      note: "Enforcement from 2 Aug 2026; Annex I high-risk obligations from 2 Aug 2028."
     },
     {
       title: "Enforcement of the AI Act",
       description: "Commission page on who enforces what from 2 August 2026 (AI Office, national competent authorities, EDPS), plus complaint and whistleblower tools",
       url: "https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act",
       icon: Shield,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Commission policy page (July 2026)",
+      status: "guidance"
     },
     {
       title: "Guidelines on Transparency of AI-generated Content (Art. 50)",
       description: "Commission guidelines on the transparency obligations applying from 2 August 2026: AI-interaction disclosure, deepfake labelling and machine-readable marking",
       url: "https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content",
       icon: FileText,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Article 50 guidelines (July 2026)",
+      status: "guidance"
     },
     {
       title: "Code of Practice on Transparency of AI-Generated Content",
       description: "Voluntary code operationalising Article 50, signed by 180+ organisations as of July 2026",
       url: "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content",
       icon: BookOpen,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Voluntary code (July 2026)",
+      status: "guidance"
     },
     {
       title: "AI Act Service Desk (FAQ)",
       description: "Official helpdesk and FAQ for interpreting AI Act obligations",
       url: "https://ai-act-service-desk.ec.europa.eu/en/faq",
       icon: Users,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "Living FAQ — continuously updated",
+      status: "guidance"
     },
     {
       title: "Press release IP/26/1714 — enforcement starts 2 August 2026",
       description: "Commission announcement that AI Act enforcement and the new transparency requirements start on 2 August 2026 (30 July 2026)",
       url: "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1714",
       icon: Globe,
-      category: "EU Regulation"
+      category: "EU Regulation",
+      version: "IP/26/1714, 30 July 2026",
+      status: "in-force"
     },
+
 
     {
       title: "European Database on Medical Devices (EUDAMED)",
@@ -118,12 +153,16 @@ const ResourceLinks = () => {
 
     // UK Regulation
     {
-      title: "MHRA - Software and AI as Medical Devices",
-      description: "UK MHRA guidance on standalone software including AI/ML-based medical devices (UKCA)",
-      url: "https://www.gov.uk/guidance/medical-device-standalone-software-including-apps-including-ivdmds",
+      title: "MHRA - Software and AI as a Medical Device",
+      description: "UK MHRA publication hub on software and AI as a medical device, including UKCA expectations and the Change Programme",
+      url: "https://www.gov.uk/government/publications/software-and-artificial-intelligence-ai-as-a-medical-device",
       icon: Shield,
-      category: "UK Regulation"
+      category: "UK Regulation",
+      version: "MHRA publication hub",
+      status: "guidance",
+      note: "Replaces the retired gov.uk standalone-software guidance URL (404)."
     },
+
 
     // Australia Regulation
     {
@@ -143,12 +182,16 @@ const ResourceLinks = () => {
       category: "FDA Resources"
     },
     {
-      title: "FDA AI/ML Software as Medical Device Guidance",
-      description: "FDA guidance on artificial intelligence and machine learning-based software as medical devices",
-      url: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices",
+      title: "FDA AI-Enabled Medical Devices",
+      description: "FDA hub for AI-enabled medical devices, including the authorised device list and current guidance",
+      url: "https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices",
       icon: Shield,
-      category: "FDA Guidance"
+      category: "FDA Guidance",
+      version: "FDA CDRH resource page",
+      status: "guidance",
+      note: "Replaces an earlier FDA guidance URL that now returns 404."
     },
+
     {
       title: "FDA PCCP Final Guidance (Dec 2024)",
       description: "Predetermined Change Control Plans for AI/ML-enabled device software functions",
@@ -325,29 +368,38 @@ const ResourceLinks = () => {
       description: "International standard for medical device software development and maintenance",
       url: "https://www.iso.org/standard/64686.html",
       icon: FileText,
-      category: "Standards"
+      category: "Standards",
+      version: "IEC 62304:2006/AMD1:2015",
+      status: "standard"
     },
     {
       title: "ISO 13485 - Medical Device Quality Management",
       description: "International standard for quality management systems in medical device manufacturing",
       url: "https://www.iso.org/standard/59752.html",
       icon: Award,
-      category: "Standards"
+      category: "Standards",
+      version: "ISO 13485:2016 (Amd 1:2021)",
+      status: "standard"
     },
     {
       title: "ISO/IEC 42001:2023 - AI Management System",
       description: "Framework for establishing AI management systems (supports AI Act compliance)",
       url: "https://www.iso.org/standard/81230.html",
       icon: Award,
-      category: "Standards"
+      category: "Standards",
+      version: "ISO/IEC 42001:2023",
+      status: "standard"
     },
     {
       title: "IEC 82304-1 - Health Software Safety",
       description: "General requirements for health software product safety",
       url: "https://www.iso.org/standard/59543.html",
       icon: Award,
-      category: "Standards"
+      category: "Standards",
+      version: "IEC 82304-1:2016",
+      status: "standard"
     },
+
     {
       title: "DICOM Standards Committee",
       description: "Digital Imaging and Communications in Medicine standards for medical imaging",
@@ -464,9 +516,18 @@ const ResourceLinks = () => {
                     </div>
                   </div>
                   <CardTitle className="text-base leading-tight">{resource.title}</CardTitle>
+                  <div className="pt-1">
+                    <VerifiedBadge
+                      lastVerified={resource.lastVerified ?? RESOURCES_LAST_AUDIT}
+                      version={resource.version}
+                      status={resource.status}
+                      note={resource.note}
+                    />
+                  </div>
                   <CardDescription className="text-sm leading-relaxed flex-1">
                     {resource.description}
                   </CardDescription>
+
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Button 
