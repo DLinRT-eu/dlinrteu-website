@@ -118,7 +118,7 @@ const RegulatoryLandscape = () => {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). From <strong>2 August 2026</strong> the Commission's <strong>AI Office</strong>, national competent authorities and the EDPS begin <strong>enforcing</strong> the Act, and the <strong>Article 50 transparency obligations start to apply</strong>. The <strong>AI Omnibus on AI</strong> (COM(2025) 836) is now in force and postpones the high-risk obligations; for regulated medical AI relevant to DLinRT these apply alongside MDR (see MDCG guidance).
+            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). From <strong>2 August 2026</strong> the Commission's <strong>AI Office</strong>, national competent authorities and the EDPS begin <strong>enforcing</strong> the Act, and the <strong>Article 50 transparency obligations start to apply</strong>. The <strong>AI Omnibus</strong> — COM(2025) 836, the file amending the AI Act itself, not to be confused with the MDR/IVDR simplification proposal COM(2025) 1023 — is now in force and postpones the high-risk obligations; for regulated medical AI relevant to DLinRT these apply alongside MDR (see MDCG guidance).
           </p>
           <div className="mb-4 rounded-md border border-border bg-muted/40 p-4">
             <p className="text-sm font-semibold text-foreground mb-2">AI Act timeline</p>
