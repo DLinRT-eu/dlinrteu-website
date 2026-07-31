@@ -40,6 +40,14 @@ const CoreDocuments = () => {
           reference: "[4]"
         },
         {
+          title: "Guidelines on Transparency of AI-generated Content (Art. 50)",
+          description: "Transparency obligations applying from 2 August 2026, when AI Act enforcement begins",
+          url: "https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content",
+          type: "Guidance",
+          reference: "[NEW]"
+        },
+
+        {
           title: "MDR Targeted Revision Proposal (Dec 2025)",
           description: "Commission proposal simplifying MDR/IVDR rules including in-house use",
           url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",

@@ -21,6 +21,42 @@ const ResourceLinks = () => {
       category: "EU Regulation"
     },
     {
+      title: "Enforcement of the AI Act",
+      description: "Commission page on who enforces what from 2 August 2026 (AI Office, national competent authorities, EDPS), plus complaint and whistleblower tools",
+      url: "https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act",
+      icon: Shield,
+      category: "EU Regulation"
+    },
+    {
+      title: "Guidelines on Transparency of AI-generated Content (Art. 50)",
+      description: "Commission guidelines on the transparency obligations applying from 2 August 2026: AI-interaction disclosure, deepfake labelling and machine-readable marking",
+      url: "https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content",
+      icon: FileText,
+      category: "EU Regulation"
+    },
+    {
+      title: "Code of Practice on Transparency of AI-Generated Content",
+      description: "Voluntary code operationalising Article 50, signed by 180+ organisations as of July 2026",
+      url: "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content",
+      icon: BookOpen,
+      category: "EU Regulation"
+    },
+    {
+      title: "AI Act Service Desk (FAQ)",
+      description: "Official helpdesk and FAQ for interpreting AI Act obligations",
+      url: "https://ai-act-service-desk.ec.europa.eu/en/faq",
+      icon: Users,
+      category: "EU Regulation"
+    },
+    {
+      title: "Press release IP/26/1714 — enforcement starts 2 August 2026",
+      description: "Commission announcement that AI Act enforcement and the new transparency requirements start on 2 August 2026 (30 July 2026)",
+      url: "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1714",
+      icon: Globe,
+      category: "EU Regulation"
+    },
+
+    {
       title: "European Database on Medical Devices (EUDAMED)",
       description: "Official EU database for medical device registration and regulatory information",
       url: "https://ec.europa.eu/tools/eudamed/",
