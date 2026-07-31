@@ -79,23 +79,31 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: AI Act
             </CardTitle>
-            <Badge variant="outline">Digital Omnibus — Council-approved 29 Jun 2026</Badge>
+            <Badge variant="outline">AI Omnibus in force — enforcement from 2 Aug 2026</Badge>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). The <strong>Digital Omnibus on AI</strong> amendments (COM(2025) 836) were adopted by the European Parliament on <strong>16 June 2026</strong> and approved by the Council of the EU on <strong>29 June 2026</strong>, pending publication in the Official Journal. Prohibited AI practices have applied since Feb 2025; the high-risk obligations are deferred as follows for regulated medical AI relevant to DLinRT, and apply alongside MDR (see MDCG guidance).
+            The AI Act defines rules for AI systems, with strict obligations for <strong>high-risk</strong> systems (datasets, transparency, human oversight, risk management). From <strong>2 August 2026</strong> the Commission's <strong>AI Office</strong>, national competent authorities and the EDPS begin <strong>enforcing</strong> the Act, and the <strong>Article 50 transparency obligations start to apply</strong>. The <strong>AI Omnibus on AI</strong> (COM(2025) 836) is now in force and postpones the high-risk obligations; for regulated medical AI relevant to DLinRT these apply alongside MDR (see MDCG guidance).
           </p>
           <div className="mb-4 rounded-md border border-border bg-muted/40 p-4">
-            <p className="text-sm font-semibold text-foreground mb-2">What changed (Jun 2026)</p>
+            <p className="text-sm font-semibold text-foreground mb-2">AI Act timeline</p>
             <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-              <li><strong>New application dates:</strong> Annex III high-risk AI → <strong>2 Dec 2027</strong>; Annex I high-risk AI embedded in regulated products (incl. medical devices) → <strong>2 Aug 2028</strong>.</li>
-              <li><strong>2 Aug 2027</strong> — deadline for national competent authorities to establish AI regulatory sandboxes.</li>
-              <li><strong>2 Dec 2026</strong> — end of the grace period for transparency on AI-generated content (Art. 50); new prohibition enters into force on generation of non-consensual sexual/intimate content and CSAM (incl. nudifying real photos).</li>
+              <li><strong>2 Feb 2025</strong> — prohibited AI practices applicable.</li>
+              <li><strong>2 Aug 2025</strong> — obligations for providers of general-purpose AI (GPAI) models applicable.</li>
+              <li><strong>2 Aug 2026 (now in effect)</strong> — enforcement begins: the AI Office supervises GPAI models and systems built on a GPAI model by the same provider (plus systems in VLOPs/VLOSEs), national competent authorities supervise other AI systems, and the EDPS supervises EU institutions. <strong>Article 50 transparency</strong> applies: disclose to users that they are interacting with AI, label deepfakes, and machine-readable marking of AI-generated or altered content.</li>
+              <li><strong>2 Dec 2026</strong> — new prohibitions apply on AI systems generating non-consensual sexually explicit content and child sexual abuse material.</li>
+              <li><strong>2 Dec 2027</strong> — Annex III high-risk AI obligations apply.</li>
+              <li><strong>2 Aug 2028</strong> — Annex I high-risk AI embedded in regulated products, <strong>including medical devices</strong> — the date most relevant to radiotherapy AI.</li>
               <li><strong>Sectoral interplay (Annex I):</strong> where MDR and similar sectoral laws already impose AI-specific requirements equivalent to the AI Act, direct AI Act application is limited; the Commission must issue guidance to <em>minimise compliance burden</em> for Annex I operators — directly relevant to radiotherapy SaMD.</li>
-              <li><strong>AI Office competence clarified</strong> for systems built on a GPAI model by the same provider, with carve-outs preserving national authorities for law enforcement, border management, judicial authorities and financial supervisors.</li>
-              <li><strong>Machinery exemption:</strong> products covered by the Machinery Regulation (previously Annex I high-risk) are exempted from direct AI Act applicability; the Commission may add AI-related health & safety requirements under the Machinery Regulation instead.</li>
+              <li><strong>Machinery exemption:</strong> products covered by the Machinery Regulation (previously Annex I high-risk) are exempted from direct AI Act applicability; the Commission may add AI-related health &amp; safety requirements under the Machinery Regulation instead.</li>
             </ul>
+          </div>
+          <div className="mb-4 rounded-md border border-primary/30 bg-primary/5 p-4">
+            <p className="text-sm font-semibold text-foreground mb-2">What 2 Aug 2026 means for radiotherapy AI</p>
+            <p className="text-sm text-muted-foreground">
+              CE-marked radiotherapy AI is high-risk under <strong>Annex I</strong> (via MDR), so the high-risk chapter does not apply until <strong>2 Aug 2028</strong>. However, <strong>Article 50 transparency already applies</strong> where a product generates or alters content shown to users, or interacts conversationally (for example an embedded assistant or chatbot in a planning platform). Enforcement powers, the complaint and whistleblower channels and the AI Act Service Desk are live as of 2 Aug 2026. This summary is informational and not legal advice.
+            </p>
           </div>
           <div className="flex flex-col gap-2">
             <a
@@ -108,15 +116,34 @@ const RegulatoryLandscape = () => {
               <span>EU AI Act Official Text (Regulation 2024/1689)</span>
             </a>
             <a
+              href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1714"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Commission press release IP/26/1714 — enforcement and transparency from 2 Aug 2026</span>
+            </a>
+            <a
+              href="https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Enforcement of the AI Act</span>
+            </a>
+            <a
               href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0836"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Digital Omnibus on AI — COM(2025) 836 (texts adopted 16 Jun 2026)</span>
+              <span>AI Omnibus — COM(2025) 836</span>
             </a>
           </div>
+
         </CardContent>
       </Card>
 
