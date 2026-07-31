@@ -41,7 +41,19 @@ const ResourcesCompliance = () => {
               Learn about our classification taxonomy, understand clinical tasks, and access essential regulatory 
               resources for deploying deep-learning solutions in clinical workflows.
             </p>
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <VerifiedBadge
+                lastVerified={RESOURCES_LAST_AUDIT}
+                status="guidance"
+                note="Every card, standard, document and link on this page was link-checked and version-checked on this date."
+              />
+              <p className="text-xs text-muted-foreground">
+                All resources on this page were last verified on {formatVerifiedDate(RESOURCES_LAST_AUDIT)}. Individual
+                items show their own verification date, version and legal status.
+              </p>
+            </div>
           </div>
+
 
           {/* Quick Navigation Index */}
           <PageIndex />
