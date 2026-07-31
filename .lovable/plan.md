@@ -1,43 +1,56 @@
-## Goal
+## What I verified
 
-Bring every Therapanacea entry in line with what the vendor actually publishes today (platform, Technical Information 3.2, resource library, structures brochure v3.2.0) and with the primary regulatory records, and resolve the remaining pipeline entry.
+Resolved link `link.europa.eu/XhXyV4` → EC press release IP/26/1714 (30–31 Jul 2026), "Commission starts enforcing AI Act rules and new transparency requirements on 2 August":
 
-## What I verified during this review
+- **2 Aug 2026** — the AI Office and national authorities **begin enforcing** the AI Act: GPAI model obligations, prohibited practices, and Article 50 **transparency obligations start to apply** (AI-interaction disclosure, deepfake labelling, machine-readable marking of AI-generated content). Enforcement split: AI Office (systems from the same provider as the GPAI model, plus VLOP/VLOSE-integrated systems), national competent authorities (all other systems), EDPS (EU institutions).
+- The **AI Omnibus is in force** (no longer "pending publication in the OJ") and postpones high-risk rules to **2 Dec 2027** (Annex III) and **2 Aug 2028** (high-risk AI in regulated products, incl. medical devices).
+- **2 Dec 2026** — new prohibitions on AI-generated non-consensual sexual content and CSAM apply. This is *not* the end of an Art. 50 transparency grace period.
+- Supporting material now published: Code of Practice on Transparency of AI-Generated Content (180+ signatories), draft Art. 50 guidelines, draft high-risk classification guidelines, AI Act Service Desk, Complaint and Whistleblower tools, Scientific Panel.
 
-- **Technical Information 3.2** (therapanacea.com/technical-information-2): ART-Plan+ v3.2.0, UDI `(01)03770019940020(8012) v3.2.0(11)260525`, manufacturer 8-10 Avenue Ledru-Rollin, Paris. Full intended-use text, contraindications and a long warnings list (pediatric images, prostatectomy, patient age ranges for H&N and pelvic models, scanner dependence for H&N nodes/lacrimal glands, only Monaco-Mosaiq / Eclipse-ARIA / RayStation validated for plan generation, 1–2 beams only, CBCT FOV augmentation unreliable).
-- **FDA K253091** (decision 2025-12-23) names the cleared modules explicitly: *"Annotate including TumorBox"*, *SmartPlan*, *AdaptBox*. It also lists the "extension of existing anatomy to the use of brachytherapy" (the basis for BrachyBox). It does **not** name SmartFuse or MR-Box.
-- **Resource library**: ~110 publications, newest dated **2024** — several are module-relevant (ART-Plan H&N blinded evaluation, guidelines-based segmentation, breast across genders, prostate end-to-end planning, CBCT synthetic-CT series, GBM GTV evaluation). Nearly all are vendor-affiliated conference abstracts, not independent full papers.
-- **Current data issue**: `TumorBox` is still stored as `therapanacea-tumorbox-pipeline` with `developmentStage: "pipeline"`, an intended-use string saying *"Coming Soon … no regulatory clearance disclosed"*, and a non-standard `certification: "510(k) K253091"` — while simultaneously carrying an FDA cleared block. The vendor now advertises Tumor Segmentation (MR glioblastoma and multi-mets) as a shipping v3.2 feature.
+## What is wrong on the site today
+
+In `src/components/resources/RegulatoryLandscape.tsx` (EU: AI Act card):
+
+- Badge and body say the Digital Omnibus is "Council-approved 29 Jun 2026 … pending publication in the Official Journal" — outdated; it is in force.
+- No mention at all of **2 Aug 2026**, the single most relevant near-term date.
+- The bullet "2 Dec 2026 — end of the grace period for transparency on AI-generated content (Art. 50)" is inaccurate; Art. 50 applies from 2 Aug 2026, and 2 Dec 2026 carries only the new NCII/CSAM prohibitions.
+- The "2 Aug 2027 sandboxes" bullet is unverified against the post-Omnibus text.
+
+Correct as-is: 2 Dec 2027 / 2 Aug 2028 dates, the Annex I sectoral-interplay point, AI Office competence, machinery exemption.
 
 ## Plan
 
-### 1. Resolve the pipeline entry (TumorBox)
-- Promote it to a released product: new id `therapanacea-tumorbox`, drop `developmentStage: "pipeline"`, replace the "Coming Soon" intended-use text with the K253091 wording, set `certification: "CE & FDA"`, add proper `ce` (Class IIb, MDR, GMED 0459) and `fda` (510(k) K253091) blocks, scope it to MR GBM / multi-mets per the vendor feature list, and mark `partOf: ART-Plan+ 3.2.0`.
-- Add a redirect `product/therapanacea-tumorbox-pipeline → product/therapanacea-tumorbox` in `App.tsx`, update `public/sitemap.xml` and the Therapanacea `productIds` in `src/data/companies/auto-contouring.ts`.
-- Therapanacea then has no pipeline products left: delete `src/data/products/pipeline/therapanacea.ts` and its import/export in `src/data/products/pipeline/index.ts`.
-- *Alternative if you prefer:* fold TumorBox into Annotate as a feature rather than keeping a separate card. Say the word and I'll do that instead.
+### 1. Rewrite the EU: AI Act card (`RegulatoryLandscape.tsx`)
+- Change the badge to "AI Omnibus in force — enforcement from 2 Aug 2026".
+- Replace the "What changed (Jun 2026)" box with a clean **AI Act timeline** ordered by date:
+  - *2 Feb 2025* — prohibited practices applicable.
+  - *2 Aug 2025* — GPAI obligations applicable.
+  - **2 Aug 2026 (now)** — enforcement begins (AI Office + national authorities + EDPS); Article 50 transparency obligations apply: disclose AI interaction, label deepfakes, machine-readable marking of AI-generated/altered content.
+  - *2 Dec 2026* — new prohibitions on non-consensual sexual content / CSAM.
+  - *2 Dec 2027* — Annex III high-risk obligations.
+  - *2 Aug 2028* — Annex I high-risk AI embedded in regulated products, incl. **medical devices** (the DLinRT-relevant date).
+- Drop the unverified 2 Aug 2027 sandbox bullet (or restate it only if I can confirm it in the consolidated text before writing).
+- Keep and retain the sectoral-interplay (Annex I / MDR) paragraph, updating "Council-approved" wording to "in force".
 
-### 2. Regulatory validation pass (all 7 modules)
-For Annotate, TumorBox, SmartPlan, AdaptBox, MR-Box, BrachyBox, SmartFuse:
-- Cross-check every clearance number against the FDA record (K253091, K242822, K234068) and keep a claim only where the module is actually named or explicitly covered; otherwise state that plainly in `notes` (as already done for SmartFuse).
-- Confirm the CE Class IIb / MDR 2017/745 / GMED 0459 claim against a public source; where the notified body is not publicly stated, soften the field and record `sourceAccess`.
-- Add the UDI, manufacturer name/address and the Technical Information 3.2 URL as a disclosed source on each module.
-- Harmonise `version` to 3.2.0 and `partOf.version` to "3.2.0 (current) / 3.1.0 (FDA cleared)" consistently.
+### 2. Add a "What 2 Aug 2026 means for radiotherapy AI" note
+Short, factual sub-block: for CE-marked RT AI (Annex I high-risk via MDR), the high-risk obligations still do not bite until 2 Aug 2028, but Article 50 transparency can already apply where a product generates or alters content shown to users, or interacts conversationally — with the disclaimer that this is informational, not legal advice.
 
-### 3. Limitations and intended use from Technical Information 3.2
-Add the vendor's own published constraints to each module's `limitations` (currently only AdaptBox carries them): pediatric/atypical anatomy, patient positioning and DICOM tag dependencies, age-range and scanner caveats for H&N and pelvic models, post-surgical organs, L/R inversion risk, MR sequence compatibility (Brain T1, Abdo TF, Pelvis T2, Pelvis TF), SmartPlan's validated TPS/R&V list and 1–2 beam limit, dose-engine validation duty.
+### 3. Update the Interplay: MDR + AI Act card
+Replace "Council-approved 29 Jun 2026" with the in-force framing; keep the MDCG 2025-6 reference.
 
-### 4. Evidence and keyPapers refresh
-- Add `keyPapers` (with DOIs) to the modules that lack them, drawn from the verified resource library, each tagged as vendor-affiliated where applicable: Annotate (blinded H&N evaluation, guideline-based improvements, breast cohorts), SmartPlan (prostate end-to-end planning and evaluation), AdaptBox (CBCT synthetic-CT series, replanning decision support), MR-Box (existing Frontiers 2023 plus MR-only CyberKnife PoC), TumorBox (GBM GTV evaluation).
-- Re-check E/I/R against the rubric. Expected outcome: conference abstracts by vendor-affiliated authors do **not** justify rigor upgrades, so SmartPlan/BrachyBox/SmartFuse stay E0 and TumorBox starts at E0; Annotate (E2/I2) and AdaptBox (E2/I1) are re-confirmed rather than raised. Any change will be justified in `evidenceRigorNotes`.
-- Set `evidenceVendorIndependent` and related flags honestly, and refresh `lastRevised`/`lastUpdated` to the review date.
+### 4. Refresh links (`ResourceLinks.tsx`, `CoreDocuments.tsx`)
+Add, in the existing EU AI Act group, with the existing card/search pattern:
+- Enforcement of the AI Act (digital-strategy)
+- Guidelines on Transparency of AI-generated Content
+- Code of Practice on Transparency of AI-Generated Content
+- AI Act Service Desk (FAQ)
+- Press release IP/26/1714 as the dated source
+Keep `CoreDocuments.tsx` curated: add only the Art. 50 transparency guidelines there.
 
 ### 5. Verification
-- Type-check the project.
-- Re-run the product audit checks for the Therapanacea entries (enum validity, required fields, source disclosure, structure naming).
-- Load each Therapanacea product page and the old pipeline URL in the browser to confirm rendering and redirects.
+- Type-check.
+- Load `/resources-compliance` in the browser and screenshot the AI Act and Interplay cards to confirm rendering and that every new link resolves (HTTP 200).
 
 ## Technical notes
 
-- Files touched: `src/data/products/auto-contouring/therapanacea.ts` (+ new `therapanacea-tumorbox.ts`), `.../therapanacea-brachybox.ts`, `src/data/products/treatment-planning/therapanacea.ts`, `src/data/products/image-synthesis/therapanacea.ts` and `-adaptbox.ts`, `src/data/products/registration/therapanacea.ts`, `src/data/products/pipeline/{therapanacea.ts,index.ts}`, `src/data/companies/auto-contouring.ts`, `src/App.tsx`, `public/sitemap.xml`.
-- One brochure inconsistency stays documented rather than "fixed": the CT Pelvis Female header says 18 OARs while 19 OAR entries are itemised; the itemised names are used.
+Files touched: `src/components/resources/RegulatoryLandscape.tsx`, `src/components/resources/ResourceLinks.tsx`, `src/components/resources/CoreDocuments.tsx`. Presentation-only; no data-model or product changes. All dates sourced from EC press release IP/26/1714 and the digital-strategy enforcement pages, retrieved 2026-07-31.
