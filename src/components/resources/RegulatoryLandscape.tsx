@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, AlertTriangle } from 'lucide-react';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT } from '@/data/resources/verification';
 const RegulatoryLandscape = () => {
   return (
     <div className="grid gap-8 lg:grid-cols-2 xl:gap-12">
@@ -12,6 +14,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: MDR (Medical Device Regulation)
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="secondary">EU 2017/745</Badge>
           </div>
         </CardHeader>
@@ -39,6 +42,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-lg font-semibold text-foreground">
               MDR/IVDR Simplification Proposal — COM(2025) 1023
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="outline" className="border-amber-500 text-amber-700 dark:text-amber-400">
               2025/0404(COD) — first reading, not adopted
             </Badge>
@@ -113,6 +117,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: AI Act
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="outline">AI Omnibus in force — enforcement from 2 Aug 2026</Badge>
           </div>
         </CardHeader>
@@ -188,6 +193,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               Interplay: MDR + AI Act
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="default">Critical</Badge>
           </div>
         </CardHeader>
@@ -218,6 +224,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               USA: FDA Pathway
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="secondary">SaMD Framework</Badge>
           </div>
         </CardHeader>
@@ -244,6 +251,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               UK: UKCA Pathway
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="secondary">Post-Brexit</Badge>
           </div>
         </CardHeader>
@@ -270,6 +278,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               Australia & International
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="secondary">TGA / IMDRF</Badge>
           </div>
         </CardHeader>
@@ -296,6 +305,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               EU: Health Technology Assessment Regulation (HTAR)
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="secondary">EU 2021/2282</Badge>
             <Badge variant="outline">In application: 12 Jan 2025</Badge>
           </div>
@@ -345,6 +355,7 @@ const RegulatoryLandscape = () => {
             <CardTitle className="text-xl font-semibold text-foreground">
               General-Purpose AI (GPAI) Governance
             </CardTitle>
+            <VerifiedBadge lastVerified={RESOURCES_LAST_AUDIT} />
             <Badge variant="outline">AI Act Chapter V</Badge>
           </div>
         </CardHeader>
