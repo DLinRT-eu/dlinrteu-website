@@ -31,32 +31,55 @@ const RegulatoryLandscape = () => {
         </CardContent>
       </Card>
 
-      {/* MDR Targeted Revision Alert */}
+      {/* MDR/IVDR Simplification Proposal */}
       <Card className="border-amber-500/50 bg-amber-50/50 dark:bg-amber-950/20">
         <CardHeader className="pb-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             <CardTitle className="text-lg font-semibold text-foreground">
-              Proposed MDR Revision (December 2025)
+              MDR/IVDR Simplification Proposal — COM(2025) 1023
             </CardTitle>
             <Badge variant="outline" className="border-amber-500 text-amber-700 dark:text-amber-400">
-              Proposal
+              2025/0404(COD) — first reading, not adopted
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-3">
-            On 16 December 2025, the European Commission proposed a <strong>targeted simplification</strong> of MDR and IVDR rules. Key changes include revised requirements for <strong>in-house manufactured devices</strong>, simplified procedures for healthcare institutions, and support for digitalization. This proposal aims to make rules easier, faster, and more effective while maintaining patient safety.
+            On 16 December 2025 the European Commission adopted a proposal to <strong>simplify and reduce the burden</strong> of the medical device rules. It amends <strong>MDR (EU) 2017/745</strong> and <strong>IVDR (EU) 2017/746</strong>, <strong>Regulation (EU) 2022/123</strong> (EMA support to the medical-device expert panels) and — importantly for AI — <strong>Regulation (EU) 2024/1689 (AI Act) as regards the list of Union harmonisation legislation in its Annex I</strong>.
+          </p>
+          <div className="mb-3 rounded-md border border-border bg-background/60 p-4">
+            <p className="text-sm font-semibold text-foreground mb-2">Main elements of the proposal</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+              <li>More risk-proportionate conformity assessment and notified-body procedures.</li>
+              <li>Revised rules for <strong>in-house devices</strong> manufactured and used within health institutions.</li>
+              <li>Digitalisation of documentation and EUDAMED-related streamlining.</li>
+              <li>EMA support for the medical-device expert panels.</li>
+              <li>Update of the AI Act Annex I list of Union harmonisation legislation.</li>
+            </ul>
+          </div>
+          <div className="mb-3 rounded-md border border-border bg-background/60 p-4">
+            <p className="text-sm font-semibold text-foreground mb-2">Legislative status (as of 31 July 2026)</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+              <li><strong>16 Dec 2025</strong> — Commission proposal COM(2025) 1023 final.</li>
+              <li><strong>13 Feb 2026</strong> — European Parliament rapporteur appointed: <strong>Oliver Schenk (EPP, DE)</strong>, lead committee <strong>SANT</strong> (opinions: BUDG, IMCO).</li>
+              <li><strong>14 Apr 2026</strong> — draft report presented in committee.</li>
+              <li><strong>5 Jun 2026</strong> — Council progress report <strong>9801/26</strong>; no general approach yet.</li>
+              <li><strong>14 Jul 2026</strong> — SANT first examination of the draft report (balance between simplification and patient safety).</li>
+            </ul>
+          </div>
+          <p className="text-sm text-muted-foreground mb-3">
+            <strong>Nothing in this proposal is binding today.</strong> MDR 2017/745 and IVDR 2017/746 continue to apply unchanged until the amending regulation is adopted and enters into application.
           </p>
           <div className="flex flex-wrap gap-3">
             <a 
-              href="https://health.ec.europa.eu/medical-devices-sector/new-regulations_en#simpler-and-more-effective-rules-for-medical-devices--commission-proposal-for-a-targeted-revision-of-the-medical-devices-regulations"
+              href="https://eur-lex.europa.eu/procedure/EN/2025_404"
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>EC Overview</span>
+              <span>Procedure file 2025/0404(COD)</span>
             </a>
             <span className="text-muted-foreground">|</span>
             <a 
@@ -66,11 +89,22 @@ const RegulatoryLandscape = () => {
               className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Full Proposal</span>
+              <span>Full proposal (Commission)</span>
+            </a>
+            <span className="text-muted-foreground">|</span>
+            <a 
+              href="https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/785663/EPRS_BRI(2026)785663_EN.pdf"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>EPRS briefing PE 785.663 (Mar 2026)</span>
             </a>
           </div>
         </CardContent>
       </Card>
+
 
       {/* EU: AI Act Section */}
       <Card>
