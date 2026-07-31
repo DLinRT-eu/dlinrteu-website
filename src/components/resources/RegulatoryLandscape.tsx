@@ -193,7 +193,11 @@ const RegulatoryLandscape = () => {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            MDCG's FAQ (MDCG 2025-6) explains joint applicability, classification cues, and practical expectations for MDAI (Medical Device AI). Follow MDCG guidance for harmonised interpretation. Under the <strong>AI Omnibus on AI</strong> (now in force), the AI Act's direct application is narrowed where MDR already imposes equivalent AI-specific requirements, and the Commission is mandated to issue guidance that <em>minimises duplicate compliance</em> for Annex I operators such as medical-device manufacturers. High-risk obligations for these Annex I products apply from <strong>2 Aug 2028</strong>, while Article 50 transparency applies from <strong>2 Aug 2026</strong>.
+            MDCG's FAQ (MDCG 2025-6) explains joint applicability, classification cues, and practical expectations for MDAI (Medical Device AI). Follow MDCG guidance for harmonised interpretation. Under the <strong>AI Omnibus</strong> COM(2025) 836 (now in force), the AI Act's direct application is narrowed where MDR already imposes equivalent AI-specific requirements, and the Commission is mandated to issue guidance that <em>minimises duplicate compliance</em> for Annex I operators such as medical-device manufacturers. High-risk obligations for these Annex I products apply from <strong>2 Aug 2028</strong>, while Article 50 transparency applies from <strong>2 Aug 2026</strong>.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            A second, separate file also moves this boundary: the <strong>MDR/IVDR simplification proposal COM(2025) 1023 (2025/0404(COD))</strong> amends the AI Act's <strong>Annex I list of Union harmonisation legislation</strong>. Because CE-marked radiotherapy AI is high-risk precisely through that Annex I route, the split between MDR conformity assessment and AI Act high-risk obligations for medical AI may change before the 2 Aug 2028 date. The proposal is still in first reading and is not law yet.
+
           </p>
           <a
             href="https://health.ec.europa.eu/medical-devices-sector/new-regulations/guidance-mdcg-endorsed-documents-and-other-guidance_en"
