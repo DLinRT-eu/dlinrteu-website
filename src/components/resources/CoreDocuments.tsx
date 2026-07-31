@@ -3,9 +3,27 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, FileText, Gavel, Shield, Globe } from 'lucide-react';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT, type VerificationMeta } from '@/data/resources/verification';
+
+interface CoreDocument extends Partial<VerificationMeta> {
+  title: string;
+  description: string;
+  url: string;
+  type: string;
+  reference: string;
+}
+
+interface CoreDocumentCategory {
+  title: string;
+  icon: React.ReactNode;
+  badge: string;
+  documents: CoreDocument[];
+}
 
 const CoreDocuments = () => {
-  const documentCategories = [
+  const documentCategories: CoreDocumentCategory[] = [
+
     {
       title: "EU Regulatory Framework",
       icon: <Gavel className="h-5 w-5" />,
@@ -16,35 +34,46 @@ const CoreDocuments = () => {
           description: "Official Medical Device Regulation text",
           url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745",
           type: "Official Text",
-          reference: "[1]"
+          reference: "[1]",
+          version: "Regulation (EU) 2017/745 — consolidated",
+          status: "in-force"
         },
         {
           title: "EU AI Act (Regulation 2024/1689)",
           description: "Official AI Act text governing high-risk AI systems",
           url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
           type: "Official Text",
-          reference: "[2]"
+          reference: "[2]",
+          version: "Regulation (EU) 2024/1689, as amended by COM(2025) 836",
+          status: "in-force",
+          note: "Enforcement from 2 Aug 2026; Annex I high-risk from 2 Aug 2028."
         },
         {
           title: "MDCG 2025-6 - MDR/AI Act Interplay FAQ", 
           description: "Joint applicability guidance for medical device AI",
           url: "https://health.ec.europa.eu/latest-updates/mdcg-2025-6-faq-interplay-between-medical-devices-regulation-vitro-diagnostic-medical-devices-2025-06-19_en",
           type: "Guidance",
-          reference: "[3]"
+          reference: "[3]",
+          version: "MDCG 2025-6 (19 June 2025)",
+          status: "guidance"
         },
         {
           title: "EU AI Act Overview",
           description: "Commission guidance on AI in healthcare",
           url: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
           type: "Overview",
-          reference: "[4]"
+          reference: "[4]",
+          version: "Commission policy page",
+          status: "guidance"
         },
         {
           title: "Guidelines on Transparency of AI-generated Content (Art. 50)",
           description: "Transparency obligations applying from 2 August 2026, when AI Act enforcement begins",
           url: "https://digital-strategy.ec.europa.eu/en/policies/guidelines-transparency-ai-generated-content",
           type: "Guidance",
-          reference: "[NEW]"
+          reference: "[19]",
+          version: "Article 50 guidelines (July 2026)",
+          status: "guidance"
         },
 
         {
@@ -52,8 +81,12 @@ const CoreDocuments = () => {
           description: "Commission proposal of 16 Dec 2025 amending MDR/IVDR, EMA expert-panel support and the AI Act Annex I list. Procedure 2025/0404(COD) — proposal, not in force.",
           url: "https://health.ec.europa.eu/publications/proposal-regulation-simplify-rules-medical-and-vitro-diagnostic-devices_en",
           type: "Proposal",
-          reference: "[NEW]"
+          reference: "[20]",
+          version: "COM(2025) 1023 final — 2025/0404(COD)",
+          status: "proposal",
+          note: "First reading; MDR/IVDR apply unchanged."
         }
+
 
       ]
     },
@@ -95,22 +128,29 @@ const CoreDocuments = () => {
           description: "Framework for AI management systems (supports AI Act compliance)",
           url: "https://www.iso.org/standard/81230.html",
           type: "Standard",
-          reference: "[8]"
+          reference: "[8]",
+          version: "ISO/IEC 42001:2023",
+          status: "standard"
         },
         {
           title: "IEC 82304-1 - Health Software Safety",
           description: "General requirements for health software product safety",
           url: "https://www.iso.org/standard/59543.html",
           type: "Standard",
-          reference: "[9]"
+          reference: "[9]",
+          version: "IEC 82304-1:2016",
+          status: "standard"
         },
         {
           title: "ISO 14971 - Risk Management",
           description: "Risk management process for medical devices",
           url: "https://www.iso.org/standard/72704.html",
           type: "Standard",
-          reference: "[10]"
+          reference: "[10]",
+          version: "ISO 14971:2019 (Amd 1:2021)",
+          status: "standard"
         }
+
       ]
     },
     {
@@ -223,7 +263,7 @@ const CoreDocuments = () => {
                   className="flex items-start justify-between gap-4 p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
                       <h4 className="font-medium text-foreground">
                         {doc.title}
                       </h4>
@@ -233,11 +273,24 @@ const CoreDocuments = () => {
                       <span className="text-xs text-muted-foreground font-mono">
                         {doc.reference}
                       </span>
+                      <VerifiedBadge
+                        lastVerified={doc.lastVerified ?? RESOURCES_LAST_AUDIT}
+                        version={doc.version}
+                        status={doc.status}
+                        note={doc.note}
+                        compact
+                      />
                     </div>
                     <p className="text-sm text-muted-foreground">
                       {doc.description}
                     </p>
+                    {doc.version && (
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        <span className="font-medium">Version:</span> {doc.version}
+                      </p>
+                    )}
                   </div>
+
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -265,11 +318,13 @@ const CoreDocuments = () => {
       <Card className="bg-muted/30">
         <CardContent className="p-4">
           <p className="text-sm text-muted-foreground">
-            <strong>Note:</strong> Reference numbers [1] through [18] correspond to the footnote-style citations in the regulatory guidance. 
+            <strong>Note:</strong> Reference numbers [1] through [20] correspond to the footnote-style citations in the regulatory guidance.
             These documents represent the core starting points for understanding regulatory requirements for AI in medical devices.
+            Each entry shows the date on which its link, version and status were last verified.
           </p>
         </CardContent>
       </Card>
+
     </div>
   );
 };
