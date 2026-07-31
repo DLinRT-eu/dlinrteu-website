@@ -14,6 +14,9 @@ import ResourceLinks from '@/components/resources/ResourceLinks';
 import DisclaimerBox from '@/components/resources/DisclaimerBox';
 import PageIndex from '@/components/resources/PageIndex';
 import StakeholderUseCases from '@/components/about/StakeholderUseCases';
+import VerifiedBadge from '@/components/resources/VerifiedBadge';
+import { RESOURCES_LAST_AUDIT, formatVerifiedDate } from '@/data/resources/verification';
+
 
 const ResourcesCompliance = () => {
   return (
