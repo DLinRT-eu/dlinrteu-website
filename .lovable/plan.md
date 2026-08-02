@@ -1,37 +1,37 @@
-## Goal
+## 1. Resources & Compliance — add the FLI AI Safety Index
 
-Audit every factual claim on `/resources` (Resources & Compliance) and make provenance visible: each regulatory card, core document, standard and library link gets a **Last verified** date and, where applicable, a **version/status note** (e.g. "Reg. (EU) 2024/1689, consolidated", "COM(2025) 1023 — proposal, not in force").
+In `src/components/resources/ResourceLinks.tsx`, next to the existing index entries (Stanford AI Index 2025, MIT AI Agent Index 2025, International AI Safety Report 2025) in the "AI/ML Guidelines" group:
 
-## Part 1 — Accuracy audit (no assumptions, verified before edits)
+- **AI Safety Index — Summer 2026 Edition** (Future of Life Institute, July 2026). Independent expert panel grading nine leading AI developers (Anthropic, OpenAI, Google DeepMind, Meta, xAI, DeepSeek, Mistral, Z.ai, Alibaba Cloud) on safety and security domains; highest overall grade C+.
+- URL: `https://futureoflife.org/ai-safety-index-summer-2026/`
+- Carry the same verification metadata used across the page: `version: "Summer 2026 edition"`, `status: 'guidance'`, `lastVerified: '2026-08-02'`, rendered via the existing `VerifiedBadge`.
 
-For each section of `src/pages/ResourcesCompliance.tsx`:
+## 2. Initiatives — add CancerData
 
-1. **RegulatoryLandscape.tsx** — re-verify EU AI Act dates (2 Aug 2026 enforcement + Art. 50 transparency, 2 Dec 2027 Annex III, 2 Aug 2028 Annex I), AI Omnibus COM(2025) 836 status, MDR proposal COM(2025) 1023 / 2025/0404(COD) legislative state, FDA and international cards.
-2. **StandardsGuidelines.tsx**, **RegulatoryFramework.tsx**, **ComplianceChecklist.tsx** — check standard numbers/editions (ISO 13485, IEC 62304, ISO 14971, IEC 81001-5-1, AAPM/ESTRO reports) and any claim of current applicability.
-3. **CoreDocuments.tsx** and **ResourceLinks.tsx** — link-check every URL (HTTP status + redirect target) and confirm each title/description matches the page it points to.
-4. **Evidence/taxonomy sections** — confirm text matches `docs/review/GUIDE.md` and `src/data/evidence-impact-levels.ts`.
+New entry in `src/data/initiatives/datasets.ts` (Open Dataset category, matching the page's inclusion criteria):
 
-Findings are fixed in place; anything that cannot be verified is flagged in-copy as "unverified" rather than silently kept.
+- **CancerData** — open-source resource sharing platform for cancer research data, contouring atlases and OAR dose-constraint guidelines (currently focused on neuro-oncology), `https://cancerdata.org/`, organization MAASTRO / CancerData consortium, status Active, tags for Open Access, Contouring Atlas, Dose Constraints, Neuro-Oncology.
+- Description will note the site is being rebuilt ("under construction" banner) so readers know content is in migration.
 
-## Part 2 — Verification metadata model
+## 3. Initiatives audit + "Last revised" date
 
-Add a single source of truth so dates are not scattered in JSX:
+Audit every entry in `challenges.ts`, `datasets.ts`, `modelzoo.ts`, `llmplatforms.ts` by fetching each `website` and checking status, dates, results links and dead URLs. Known corrections already identified:
 
-- New `src/data/resources/verification.ts` exporting a `VerificationMeta` type (`lastVerified: string` ISO date, `version?: string`, `status?: 'in-force' | 'proposal' | 'guidance' | 'superseded'`, `note?: string`).
-- New `src/components/resources/VerifiedBadge.tsx` — compact, accessible badge rendering `Verified <date>` with an optional tooltip carrying the version/status note. Uses existing shadcn `Badge` + `Tooltip` and design tokens only.
+- **SynthRAD2023 / SynthRAD2025**: mark as post-challenge — data and leaderboards remain open for submission after the ranking deadline.
+- **COBRA2026**: currently "Upcoming"; registration is now open, so it moves to "Active" with updated participation info.
+- Anything else the audit turns up (broken links, challenges that have since closed, changed leaderboard URLs) is corrected in the same pass.
 
-## Part 3 — Apply to every item
+Support for the post-challenge label:
 
-- **RegulatoryLandscape**: each card header gets a `VerifiedBadge` plus an explicit version line (regulation number, consolidated-text date, or proposal status).
-- **CoreDocuments**: each document entry gains `lastVerified` and `version`/`status`; badge shown next to the existing type badge.
-- **ResourceLinks**: each link entry gains `lastVerified`; badge shown in the card footer, and the existing search filter is extended to match version text.
-- **StandardsGuidelines** / **RegulatoryFramework** / **ComplianceChecklist**: per-item verified date and edition/year.
-- **Page header**: a summary line "All entries verified as of <most recent date>" derived from the data, not hardcoded.
+- Extend `Initiative` in `src/types/initiative.d.ts` with an optional `postChallenge?: boolean` flag (and an optional `lastVerified?: string`).
+- Render a small neutral "Post-challenge open" badge in `src/components/initiatives/InitiativeCard.tsx` next to the status badge, using existing badge styling — no new colour system.
+
+Date stamp:
+
+- Add `INITIATIVES_LAST_AUDIT` (ISO date) in a small module under `src/data/initiatives/`, and show "Last revised: 2 Aug 2026" in `src/components/initiatives/InitiativesHeader.tsx` under the intro paragraph, mirroring the wording used on Resources & Compliance.
 
 ## Technical notes
 
-- All new logic in TypeScript with explicit types; no `any`.
-- Dates stored as `YYYY-MM-DD` strings in data files; formatted for display in one helper.
-- Semantic tokens only — no hardcoded colours.
-- Verification via Playwright screenshots of `/resources` sections plus a link-check pass; lint/test/build run at the end.
-- No changes to product data, backend, or unrelated pages.
+- No backend or schema changes; all edits are static data plus two presentational components.
+- Field additions are optional, so existing initiative records stay valid.
+- Verification of external URLs is done with read-only fetches during implementation; any URL that cannot be confirmed live is flagged in the final report rather than silently changed.
