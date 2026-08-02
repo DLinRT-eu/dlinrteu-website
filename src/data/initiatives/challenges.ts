@@ -9,12 +9,16 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://panther.grand-challenge.org/",
     organization: "MICCAI",
     startDate: "2025-04-15",
-    status: "Active",
+    endDate: "2025-08-31",
+    status: "Completed",
+    postChallenge: true,
+    lastVerified: "2026-08-04",
     tags: ["Pancreatic Cancer", "MRI", "Segmentation", "Radiation Therapy"],
     features: ["3D MRI datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
     dataAccess: "Available on Zenodo",
     resultsUrl: "https://panther.grand-challenge.org/evaluation/open-development-phase/leaderboard/",
-    participationInfo: "Open to academic and commercial participants worldwide",
+    participationInfo:
+      "Closed testing phase ended 31 Aug 2025; winning solutions published. Open development phase re-opened for post-challenge submissions.",
     logoUrl: "/logos/panther-2025.jpeg",
   },
   {
@@ -27,11 +31,12 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "HES-SO Valais / University Hospital of Zürich",
     startDate: "2020-01-01",
     status: "Active",
+    lastVerified: "2026-08-04",
     tags: ["Head and Neck Cancer", "PET/CT", "Segmentation", "Multi-Modal", "Outcome Prediction"],
     features: ["3D PET/CT datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
     dataAccess: "Available after registration",
     resultsUrl: "https://hecktor25.grand-challenge.org/test-leaderboard/",
-    participationInfo: "Open to academic and commercial participants worldwide",
+    participationInfo: "Testing phase open; submissions via Grand Challenge (5th edition, MICCAI 2025)",
     relatedPublications: [
       {
         title: "Overview of the HECKTOR Challenge at MICCAI 2020",
@@ -52,11 +57,14 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     startDate: "2023-01-15",
     endDate: "2023-09-30",
     status: "Completed",
+    postChallenge: true,
+    lastVerified: "2026-08-04",
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Multi-institutional dataset", "Various anatomical sites", "Standardized evaluation framework"],
     dataAccess: "Available after registration",
     resultsUrl: "https://synthrad2023.grand-challenge.org/evaluation/results/",
-    participationInfo: "Open to academic and commercial participants worldwide",
+    participationInfo:
+      "Challenge concluded; post-challenge phases remain open for submissions. Report: Med. Image Anal. 2024, doi:10.1016/j.media.2024.103276",
     logoUrl: "/logos/synthrad-2023.jpeg",
   },
   {
@@ -68,10 +76,13 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://synthrad2025.grand-challenge.org/",
     organization: "MICCAI/ESTRO",
     startDate: "2025-03-01",
-    status: "Active",
+    endDate: "2025-09-30",
+    status: "Completed",
+    lastVerified: "2026-08-04",
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Enhanced dataset", "Multiple anatomical regions", "Advanced evaluation metrics"],
-    participationInfo: "Currently ongoing",
+    participationInfo:
+      "Challenge concluded (MICCAI 2025); challenge report preprint available at arXiv:2605.13555",
     logoUrl: "/logos/synthrad-2025.jpeg",
   },
   {
@@ -82,13 +93,18 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://trackrad2025.grand-challenge.org/",
     organization: "MICCAI/ESTRO",
     startDate: "2025-03-15",
-    status: "Active",
-    tags: ["MRI", "Radiation Therapy"],
-    features: ["2D-cine", "Multiple anatomical regions", "Advanced evaluation metrics"],
-    participationInfo: "Currently ongoing",
+    endDate: "2025-09-30",
+    status: "Completed",
+    postChallenge: true,
+    lastVerified: "2026-08-04",
+    tags: ["MRI", "Tracking", "Real-Time", "Radiation Therapy"],
+    features: ["2D-cine MRI", "Multiple anatomical regions", "Real-time tracking metrics"],
+    resultsUrl: "https://trackrad2025.grand-challenge.org/winners-announcement/",
+    participationInfo: "Leaderboard announced; post-challenge phase open for submissions",
   },
   {
     id: "autortp",
+    lastVerified: "2026-08-04",
     name: "AUTO-RTP",
     category: "Grand Challenge",
     description:
@@ -106,6 +122,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "structseg",
+    lastVerified: "2026-08-04",
     name: "StructSeg Challenge",
     category: "Grand Challenge",
     description:
@@ -123,6 +140,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-thoracic",
+    lastVerified: "2026-08-04",
     name: "AAPM Thoracic Auto-Segmentation Challenge",
     category: "Grand Challenge",
     description:
@@ -139,6 +157,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "hnts-mrg-2024",
+    lastVerified: "2026-08-04",
     name: "HNTS-MRG 2024",
     category: "Grand Challenge",
     description:
@@ -160,6 +179,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-gdp-hmm",
+    lastVerified: "2026-08-04",
     name: "AAPM GDP-HMM 2025",
     category: "Grand Challenge",
     description:
@@ -174,6 +194,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-match",
+    lastVerified: "2026-08-04",
     name: "AAPM MATCH",
     category: "Grand Challenge",
     description:
@@ -197,6 +218,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "icassp-3dcbct-2024",
+    lastVerified: "2026-08-04",
     name: "ICASSP 3D CBCT Challenge 2024",
     category: "Grand Challenge",
     description:
@@ -224,6 +246,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "MICCAI",
     startDate: "2026-04-01",
     status: "Active",
+    lastVerified: "2026-08-04",
     tags: [
       "Dose Calculation",
       "Photon Therapy",
@@ -240,7 +263,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Clinically relevant beam parameters (MLC apertures, pencil beams)",
       "Supports adaptive and MRI-guided RT workflows",
     ],
-    participationInfo: "Open to all participants",
+    participationInfo: "Open to all participants; submissions ongoing via Grand Challenge",
     logoUrl: "/logos/doserad-2026.png",
   },
   {
@@ -251,9 +274,10 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Cone-Beam CT Reconstruction for Radiation Therapy. Advances reconstruction algorithms that transform raw CBCT projection data into high-quality volumetric images comparable to fan-beam planning CT, enabling CBCT-only adaptive radiotherapy workflows.",
     website: "https://cobra2026.grand-challenge.org/",
     organization: "MIDL",
-    startDate: "2026-06-30",
-    endDate: "2027-03-10",
-    status: "Upcoming",
+    startDate: "2026-07-13",
+    endDate: "2027-02-15",
+    status: "Active",
+    lastVerified: "2026-08-04",
     tags: [
       "CBCT",
       "Image Reconstruction",
@@ -264,16 +288,19 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Pelvis",
     ],
     features: [
-      "Multi-institutional pelvic dataset from 7 clinical centers (~1,000 cases)",
-      "Real-world task: clinical CBCT projections with deformably-registered planning CT references",
+      "Raw cone-beam projections from six clinical centres (Elekta and Varian systems)",
+      "Real-world task: clinical CBCT projections with planning CT references",
       "Synthetic task: simulated projections with known ground truth (scatter, noise, breathing motion)",
-      "Virtual kick-off 30/06/2026; final submissions 15/02/2027",
+      "Training phase from 13 Jul 2026; validation/preliminary test from 01 Dec 2026; final submissions 15 Feb 2027",
+      "Results announced 22 Mar 2027, presented at MIDL 2027",
     ],
-    participationInfo: "Registration opens 01/07/2026 via Grand Challenge platform",
+    participationInfo:
+      "Registration open via Grand Challenge; training phase running (virtual kick-off moved to 10 Aug 2026)",
     logoUrl: "/logos/cobra-2026.png",
   },
   {
     id: "segrap-2023",
+    lastVerified: "2026-08-04",
     name: "SegRap2023",
     category: "Grand Challenge",
     description:

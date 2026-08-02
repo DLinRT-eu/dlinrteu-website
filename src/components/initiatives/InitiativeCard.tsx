@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Initiative } from '@/types/initiative';
+import { formatInitiativeDate } from '@/data/initiatives/verification';
 
 interface InitiativeCardProps extends Initiative {}
 
@@ -16,10 +17,13 @@ const InitiativeCard = ({
   organization,
   status,
   tags,
-  logoUrl
+  logoUrl,
+  postChallenge,
+  lastVerified
 }: InitiativeCardProps) => {
   const [logoFailed, setLogoFailed] = useState(false);
   const showLogo = Boolean(logoUrl) && !logoFailed;
+
 
   // Determine badge color based on status
   const getBadgeColor = () => {
@@ -53,9 +57,16 @@ const InitiativeCard = ({
             )}
             <CardTitle className="text-xl text-[#1A1F2C]">{name}</CardTitle>
           </div>
-          <Badge variant="outline" className={getBadgeColor()}>
-            {status}
-          </Badge>
+          <div className="flex flex-col items-end gap-1">
+            <Badge variant="outline" className={getBadgeColor()}>
+              {status}
+            </Badge>
+            {postChallenge && (
+              <Badge variant="outline" className="bg-teal-100 text-teal-800 hover:bg-teal-200 text-xs whitespace-nowrap">
+                Post-challenge open
+              </Badge>
+            )}
+          </div>
         </div>
         <CardDescription className="text-gray-600 mt-2">
           {organization}
@@ -79,7 +90,10 @@ const InitiativeCard = ({
           )}
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex-col items-stretch gap-2">
+        {lastVerified && (
+          <p className="text-xs text-muted-foreground">Verified {formatInitiativeDate(lastVerified)}</p>
+        )}
         <Button asChild variant="outline" className="w-full">
           <a href={website} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
             Visit Website <ExternalLink className="ml-2 h-4 w-4" />

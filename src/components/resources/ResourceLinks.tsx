@@ -274,6 +274,17 @@ const ResourceLinks = () => {
       category: "AI/ML Guidelines"
     },
     {
+      title: "FLI AI Safety Index — Summer 2026",
+      description: "Future of Life Institute independent index grading leading AI companies on risk management, safety frameworks, governance and transparency. Useful benchmark alongside the Stanford AI Index and the International AI Safety Report",
+      url: "https://futureoflife.org/ai-safety-index-summer-2026/",
+      icon: Shield,
+      category: "AI/ML Guidelines",
+      version: "Summer 2026 edition",
+      status: "guidance",
+      lastVerified: "2026-08-04"
+    },
+
+    {
       title: "AID-RT: Standardised AI Documentation in Radiotherapy",
       description: "Domain-specific model card standard for AI in radiotherapy (Phys. Imaging Radiat. Oncol. 2026). Defines a structured 6-section schema covering model info, architecture, training and evaluation data methodology",
       url: "https://doi.org/10.1016/j.phro.2026.100940",
