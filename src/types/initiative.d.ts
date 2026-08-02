@@ -9,8 +9,13 @@ export interface Initiative {
   startDate?: string;
   endDate?: string;
   status: "Active" | "Completed" | "Upcoming";
+  /** Challenge concluded but submissions remain open in a post-challenge phase. */
+  postChallenge?: boolean;
+  /** ISO date (YYYY-MM-DD) on which status, link and claims were last checked. */
+  lastVerified?: string;
   tags: string[];
   logoUrl?: string;
+
   features?: string[];
   dataAccess?: string;
   resultsUrl?: string;
