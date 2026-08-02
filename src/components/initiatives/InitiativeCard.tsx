@@ -16,10 +16,13 @@ const InitiativeCard = ({
   organization,
   status,
   tags,
-  logoUrl
+  logoUrl,
+  postChallenge,
+  lastVerified
 }: InitiativeCardProps) => {
   const [logoFailed, setLogoFailed] = useState(false);
   const showLogo = Boolean(logoUrl) && !logoFailed;
+
 
   // Determine badge color based on status
   const getBadgeColor = () => {
