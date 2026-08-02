@@ -1,6 +1,7 @@
 import React from 'react';
 import { Beaker, Info } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { INITIATIVES_LAST_AUDIT, formatInitiativeDate } from '@/data/initiatives/verification';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const InitiativesHeader = () => {
@@ -25,6 +26,10 @@ const InitiativesHeader = () => {
           <h1 className="text-3xl font-bold text-gray-900">Research Initiatives</h1>
         </div>
         <p className="text-lg text-gray-700 max-w-3xl">Discover resources for AI/Deep Learning development in radiotherapy: grand challenges with standardized benchmarks, open datasets with RT structures and dose distributions, and model zoos with pre-trained models or frameworks to facilitate model preparation. All resources are freely accessible for research.</p>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          Last revised {formatInitiativeDate(INITIATIVES_LAST_AUDIT)} — all challenge statuses, links and dates re-checked against their official pages.
+        </p>
 
         <Collapsible>
           <CollapsibleTrigger className="flex items-center gap-1.5 mt-3 text-sm text-muted-foreground hover:text-foreground transition-colors">
