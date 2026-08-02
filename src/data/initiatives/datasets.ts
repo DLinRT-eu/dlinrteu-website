@@ -3,6 +3,25 @@ import { Initiative } from "@/types/initiative";
 
 export const DATASET_INITIATIVES: Initiative[] = [
   {
+    id: "cancerdata",
+    name: "CancerData",
+    category: "Open Dataset",
+    description:
+      "Open data platform hosting curated oncology imaging, clinical and radiotherapy datasets published alongside peer-reviewed studies, with a focus on reproducible research and FAIR data sharing.",
+    website: "https://cancerdata.org/",
+    organization: "MAASTRO Clinic / CancerData consortium",
+    status: "Active",
+    lastVerified: "2026-08-04",
+    tags: ["Cancer", "Imaging", "Clinical Data", "Radiotherapy", "Open Access", "FAIR"],
+    features: [
+      "Datasets linked to peer-reviewed publications",
+      "Imaging, clinical and outcome data",
+      "DOI-referenced collections",
+    ],
+    dataAccess: "Freely available; some collections require registration or a data use agreement",
+    participationInfo: "Platform is being migrated to a new version; parts of the site are under construction",
+  },
+  {
     id: "tcia",
     name: "The Cancer Imaging Archive (TCIA)",
     category: "Open Dataset",
