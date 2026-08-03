@@ -12,7 +12,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     endDate: "2025-08-31",
     status: "Completed",
     postChallenge: true,
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["Pancreatic Cancer", "MRI", "Segmentation", "Radiation Therapy"],
     features: ["3D MRI datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
     dataAccess: "Available on Zenodo",
@@ -31,7 +31,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "HES-SO Valais / University Hospital of Zürich",
     startDate: "2020-01-01",
     status: "Active",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["Head and Neck Cancer", "PET/CT", "Segmentation", "Multi-Modal", "Outcome Prediction"],
     features: ["3D PET/CT datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
     dataAccess: "Available after registration",
@@ -58,7 +58,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     endDate: "2023-09-30",
     status: "Completed",
     postChallenge: true,
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Multi-institutional dataset", "Various anatomical sites", "Standardized evaluation framework"],
     dataAccess: "Available after registration",
@@ -78,7 +78,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     startDate: "2025-03-01",
     endDate: "2025-09-30",
     status: "Completed",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["MRI", "CT", "Synthetic CT", "Image Synthesis", "Radiation Therapy"],
     features: ["Enhanced dataset", "Multiple anatomical regions", "Advanced evaluation metrics"],
     participationInfo:
@@ -96,7 +96,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     endDate: "2025-09-30",
     status: "Completed",
     postChallenge: true,
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["MRI", "Tracking", "Real-Time", "Radiation Therapy"],
     features: ["2D-cine MRI", "Multiple anatomical regions", "Real-time tracking metrics"],
     resultsUrl: "https://trackrad2025.grand-challenge.org/winners-announcement/",
@@ -104,7 +104,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "autortp",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "AUTO-RTP",
     category: "Grand Challenge",
     description:
@@ -122,7 +122,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "structseg",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "StructSeg Challenge",
     category: "Grand Challenge",
     description:
@@ -140,7 +140,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-thoracic",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "AAPM Thoracic Auto-Segmentation Challenge",
     category: "Grand Challenge",
     description:
@@ -157,7 +157,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "hnts-mrg-2024",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "HNTS-MRG 2024",
     category: "Grand Challenge",
     description:
@@ -179,7 +179,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-gdp-hmm",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "AAPM GDP-HMM 2025",
     category: "Grand Challenge",
     description:
@@ -194,7 +194,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-match",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "AAPM MATCH",
     category: "Grand Challenge",
     description:
@@ -218,7 +218,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "icassp-3dcbct-2024",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "ICASSP 3D CBCT Challenge 2024",
     category: "Grand Challenge",
     description:
@@ -246,7 +246,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     organization: "MICCAI",
     startDate: "2026-04-01",
     status: "Active",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: [
       "Dose Calculation",
       "Photon Therapy",
@@ -277,7 +277,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     startDate: "2026-07-13",
     endDate: "2027-02-15",
     status: "Active",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: [
       "CBCT",
       "Image Reconstruction",
@@ -300,7 +300,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "segrap-2023",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     name: "SegRap2023",
     category: "Grand Challenge",
     description:

@@ -1,37 +1,23 @@
-## 1. Resources & Compliance — add the FLI AI Safety Index
+## What's actually wrong
 
-In `src/components/resources/ResourceLinks.tsx`, next to the existing index entries (Stanford AI Index 2025, MIT AI Agent Index 2025, International AI Safety Report 2025) in the "AI/ML Guidelines" group:
+Verified by reading the files:
 
-- **AI Safety Index — Summer 2026 Edition** (Future of Life Institute, July 2026). Independent expert panel grading nine leading AI developers (Anthropic, OpenAI, Google DeepMind, Meta, xAI, DeepSeek, Mistral, Z.ai, Alibaba Cloud) on safety and security domains; highest overall grade C+.
-- URL: `https://futureoflife.org/ai-safety-index-summer-2026/`
-- Carry the same verification metadata used across the page: `version: "Summer 2026 edition"`, `status: 'guidance'`, `lastVerified: '2026-08-02'`, rendered via the existing `VerifiedBadge`.
+- 18 entries carry `lastVerified` / audit date **2026-08-04**, which is in the future (today is 3 Aug 2026): `src/data/initiatives/verification.ts` (`INITIATIVES_LAST_AUDIT`), 16 entries in `src/data/initiatives/challenges.ts`, 1 in `src/data/initiatives/datasets.ts`, and the FLI AI Safety Index entry in `src/components/resources/ResourceLinks.tsx`.
+- **31 July 2026 is a real date** — July has 31 days — so `RESOURCES_LAST_AUDIT = '2026-07-31'` in `src/data/resources/verification.ts` is valid and stays as is. Same for the Therapanacea `2026-07-30` stamps.
+- Both date formatters (`formatInitiativeDate`, `formatVerifiedDate`) render with `timeZone: 'UTC'`. For a CET/CEST reader this can show the previous day around midnight.
 
-## 2. Initiatives — add CancerData
+## Changes
 
-New entry in `src/data/initiatives/datasets.ts` (Open Dataset category, matching the page's inclusion criteria):
-
-- **CancerData** — open-source resource sharing platform for cancer research data, contouring atlases and OAR dose-constraint guidelines (currently focused on neuro-oncology), `https://cancerdata.org/`, organization MAASTRO / CancerData consortium, status Active, tags for Open Access, Contouring Atlas, Dose Constraints, Neuro-Oncology.
-- Description will note the site is being rebuilt ("under construction" banner) so readers know content is in migration.
-
-## 3. Initiatives audit + "Last revised" date
-
-Audit every entry in `challenges.ts`, `datasets.ts`, `modelzoo.ts`, `llmplatforms.ts` by fetching each `website` and checking status, dates, results links and dead URLs. Known corrections already identified:
-
-- **SynthRAD2023 / SynthRAD2025**: mark as post-challenge — data and leaderboards remain open for submission after the ranking deadline.
-- **COBRA2026**: currently "Upcoming"; registration is now open, so it moves to "Active" with updated participation info.
-- Anything else the audit turns up (broken links, challenges that have since closed, changed leaderboard URLs) is corrected in the same pass.
-
-Support for the post-challenge label:
-
-- Extend `Initiative` in `src/types/initiative.d.ts` with an optional `postChallenge?: boolean` flag (and an optional `lastVerified?: string`).
-- Render a small neutral "Post-challenge open" badge in `src/components/initiatives/InitiativeCard.tsx` next to the status badge, using existing badge styling — no new colour system.
-
-Date stamp:
-
-- Add `INITIATIVES_LAST_AUDIT` (ISO date) in a small module under `src/data/initiatives/`, and show "Last revised: 2 Aug 2026" in `src/components/initiatives/InitiativesHeader.tsx` under the intro paragraph, mirroring the wording used on Resources & Compliance.
+1. Replace every `2026-08-04` verification date with **`2026-08-03`** (today) across:
+   - `src/data/initiatives/verification.ts`
+   - `src/data/initiatives/challenges.ts` (16 entries)
+   - `src/data/initiatives/datasets.ts`
+   - `src/components/resources/ResourceLinks.tsx` (AI Safety Index)
+   Note: `startDate: "2026-07-13"` for the COBRA entry is a challenge date, not a verification stamp — left untouched.
+2. Switch both formatters to `timeZone: 'Europe/Amsterdam'` so displayed dates match the maintainer's local calendar day.
+3. Add a small dev-only sanity guard: a shared helper that warns (console, dev builds only) if a `lastVerified` date is in the future, so future-dated stamps get caught immediately instead of shipping.
 
 ## Technical notes
 
-- No backend or schema changes; all edits are static data plus two presentational components.
-- Field additions are optional, so existing initiative records stay valid.
-- Verification of external URLs is done with read-only fetches during implementation; any URL that cannot be confirmed live is flagged in the final report rather than silently changed.
+- Dates are stored as ISO `YYYY-MM-DD` strings; only string values change, no schema change.
+- The guard lives next to the existing helpers in `src/data/resources/verification.ts` and is re-used by the initiatives formatter — no new dependency, no runtime cost in production.

@@ -281,7 +281,7 @@ const ResourceLinks = () => {
       category: "AI/ML Guidelines",
       version: "Summer 2026 edition",
       status: "guidance",
-      lastVerified: "2026-08-04"
+      lastVerified: "2026-08-03"
     },
 
     {
