@@ -6,6 +6,8 @@
  * link and claims were last confirmed.
  */
 
+import { VERIFICATION_TIME_ZONE, assertNotFutureDate } from '@/data/resources/verification';
+
 /** Date of the most recent full audit of the Research Initiatives page. */
 export const INITIATIVES_LAST_AUDIT = '2026-08-03';
 
