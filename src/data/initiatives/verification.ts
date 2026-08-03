@@ -10,12 +10,13 @@
 export const INITIATIVES_LAST_AUDIT = '2026-08-03';
 
 export const formatInitiativeDate = (isoDate: string): string => {
-  const parsed = new Date(`${isoDate}T00:00:00Z`);
+  const parsed = new Date(`${isoDate}T12:00:00Z`);
   if (Number.isNaN(parsed.getTime())) return isoDate;
+  assertNotFutureDate(isoDate, 'initiative lastVerified');
   return parsed.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-    timeZone: 'UTC',
+    timeZone: VERIFICATION_TIME_ZONE,
   });
 };
