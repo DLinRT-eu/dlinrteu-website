@@ -7,7 +7,7 @@
  */
 
 /** Date of the most recent full audit of the Research Initiatives page. */
-export const INITIATIVES_LAST_AUDIT = '2026-08-04';
+export const INITIATIVES_LAST_AUDIT = '2026-08-03';
 
 export const formatInitiativeDate = (isoDate: string): string => {
   const parsed = new Date(`${isoDate}T00:00:00Z`);

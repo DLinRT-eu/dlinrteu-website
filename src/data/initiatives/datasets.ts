@@ -11,7 +11,7 @@ export const DATASET_INITIATIVES: Initiative[] = [
     website: "https://cancerdata.org/",
     organization: "MAASTRO Clinic / CancerData consortium",
     status: "Active",
-    lastVerified: "2026-08-04",
+    lastVerified: "2026-08-03",
     tags: ["Cancer", "Imaging", "Clinical Data", "Radiotherapy", "Open Access", "FAIR"],
     features: [
       "Datasets linked to peer-reviewed publications",
