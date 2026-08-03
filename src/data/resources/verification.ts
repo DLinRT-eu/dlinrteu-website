@@ -35,14 +35,27 @@ const STATUS_LABELS: Record<VerificationStatus, string> = {
   superseded: 'Superseded',
 };
 
+/** Display timezone for all verification dates (maintainer team is CET/CEST). */
+export const VERIFICATION_TIME_ZONE = 'Europe/Amsterdam';
+
+/** Warns in development when a verification date lies in the future. */
+export const assertNotFutureDate = (isoDate: string, label = 'lastVerified'): void => {
+  if (!import.meta.env?.DEV) return;
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: VERIFICATION_TIME_ZONE });
+  if (isoDate > today) {
+    console.warn(`[verification] ${label} "${isoDate}" is in the future (today is ${today}).`);
+  }
+};
+
 export const formatVerifiedDate = (isoDate: string): string => {
-  const parsed = new Date(`${isoDate}T00:00:00Z`);
+  const parsed = new Date(`${isoDate}T12:00:00Z`);
   if (Number.isNaN(parsed.getTime())) return isoDate;
+  assertNotFutureDate(isoDate);
   return parsed.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-    timeZone: 'UTC',
+    timeZone: VERIFICATION_TIME_ZONE,
   });
 };
 
