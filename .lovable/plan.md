@@ -1,23 +1,30 @@
-## What's actually wrong
+# Homepage AIinRT 2027 promotional banner
 
-Verified by reading the files:
+## Goal
+Add a visually prominent, on-brand banner to the DLinRT.eu homepage that drives attention to AIinRT 2027 (https://aiinrt.org/) and clearly states DLinRT.eu's support for the symposium.
 
-- 18 entries carry `lastVerified` / audit date **2026-08-04**, which is in the future (today is 3 Aug 2026): `src/data/initiatives/verification.ts` (`INITIATIVES_LAST_AUDIT`), 16 entries in `src/data/initiatives/challenges.ts`, 1 in `src/data/initiatives/datasets.ts`, and the FLI AI Safety Index entry in `src/components/resources/ResourceLinks.tsx`.
-- **31 July 2026 is a real date** — July has 31 days — so `RESOURCES_LAST_AUDIT = '2026-07-31'` in `src/data/resources/verification.ts` is valid and stays as is. Same for the Therapanacea `2026-07-30` stamps.
-- Both date formatters (`formatInitiativeDate`, `formatVerifiedDate`) render with `timeZone: 'UTC'`. For a CET/CEST reader this can show the previous day around midnight.
+## Content to surface
+- Headline: "DLinRT.eu supports AIinRT 2027"
+- Sub-line: Peer-reviewed scientific symposium on Artificial Intelligence in Radiotherapy
+- Key facts: 1–2 April 2027 · Princess Máxima Center, Utrecht
+- CTA: "Visit AIinRT.org" (external link, opens in new tab)
+- Supporting link (optional): "Read the announcement →" to `/news/aiinrt-2027-support`
 
-## Changes
+## Proposed placement
+Insert a new `AIinRTBanner` section on `src/pages/Index.tsx` directly below `SearchHero` and above `StatsRow`, so it sits immediately under the search bar and above the stats/orbit visuals. This keeps it above the fold without interfering with the existing hero flow.
 
-1. Replace every `2026-08-04` verification date with **`2026-08-03`** (today) across:
-   - `src/data/initiatives/verification.ts`
-   - `src/data/initiatives/challenges.ts` (16 entries)
-   - `src/data/initiatives/datasets.ts`
-   - `src/components/resources/ResourceLinks.tsx` (AI Safety Index)
-   Note: `startDate: "2026-07-13"` for the COBRA entry is a challenge date, not a verification stamp — left untouched.
-2. Switch both formatters to `timeZone: 'Europe/Amsterdam'` so displayed dates match the maintainer's local calendar day.
-3. Add a small dev-only sanity guard: a shared helper that warns (console, dev builds only) if a `lastVerified` date is in the future, so future-dated stamps get caught immediately instead of shipping.
+## Design approach
+- Full-width banner with a subtle gradient using the existing DLinRT steel-blue accent (`#5090D0` / `hsl(var(--primary))`) on a light background.
+- Use a calendar/date icon and a small "Save the date" chip.
+- CTA button styled with the primary button variant; secondary text link to the news item.
+- Responsive: stacked on mobile, horizontal layout on desktop.
+- Respect `prefers-reduced-motion` and keep animations minimal (only a gentle hover state on the CTA).
 
-## Technical notes
+## Files to change
+1. Create `src/components/homepage/AIinRTBanner.tsx` — new banner component.
+2. Update `src/pages/Index.tsx` — import and render `AIinRTBanner` between `SearchHero` and `StatsRow`.
 
-- Dates are stored as ISO `YYYY-MM-DD` strings; only string values change, no schema change.
-- The guard lives next to the existing helpers in `src/data/resources/verification.ts` and is re-used by the initiatives formatter — no new dependency, no runtime cost in production.
+## Out of scope
+- No changes to the news item content or routing.
+- No backend/data changes.
+- No modifications to the OrbitHero, FeatureCards, or mailing-list sections.
