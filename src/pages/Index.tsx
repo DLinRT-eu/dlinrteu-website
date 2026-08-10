@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import HomeIntroTop from "../components/homepage/HomeIntroTop";
 import OrbitHero from "@/components/homepage/OrbitHero";
 import SearchHero from "../components/homepage/SearchHero";
+import AIinRTBanner from "@/components/homepage/AIinRTBanner";
 import StatsRow from "@/components/homepage/StatsRow";
 import FeatureCards from "@/components/homepage/FeatureCards";
 import TaskTaxonomy from "@/components/TaskTaxonomy";
@@ -66,6 +67,7 @@ const Index = () => {
 
       <HomeIntroTop />
       <SearchHero />
+      <AIinRTBanner />
       <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} />
       <OrbitHero />
       <FeatureCards />
