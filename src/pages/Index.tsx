@@ -67,6 +67,7 @@ const Index = () => {
 
       <HomeIntroTop />
       <SearchHero />
+      <AIinRTBanner />
       <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} />
       <OrbitHero />
       <FeatureCards />
