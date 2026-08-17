@@ -36,37 +36,27 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/dashboard</loc>
+    <loc>https://dlinrt.eu/resources-compliance</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/evidence-impact-guide</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/guides/ai-auto-contouring-comparison</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/about</loc>
     <lastmod>2026-05-13</lastmod>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/support</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/donate</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/maintenance-team</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/timeline</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/changelog</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.5</priority>
   </url>
@@ -74,21 +64,6 @@
     <loc>https://dlinrt.eu/transparency</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/resources-compliance</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/evidence-impact-guide</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/guides/ai-auto-contouring-comparison</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/roles</loc>
@@ -101,252 +76,262 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/privacy-policy</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/terms-of-use</loc>
+    <loc>https://dlinrt.eu/changelog</loc>
     <lastmod>2026-05-13</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/security</loc>
     <lastmod>2026-05-13</lastmod>
-    <priority>0.4</priority>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/privacy-policy</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/terms-of-use</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/accuray-synchrony</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ai-medical-jazz</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/subtle-aimify</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/airs-swiftmr</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/algomedica-pixelshine</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/brainlab-elements-ai-tumor-seg</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/brainlab-elements-rt-seg</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/canon-aice-ct</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/canon-aice-mr</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/canon-piqe</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/carina-intcontour</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/claripi-clariace</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/claripi-clarict-ai</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/coreline-aview-rt-acs</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/siemens-directorgans</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/elekta-iris</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/everfortune-rt-suite</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/everfortune-seg-pro-v3</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-air-recon-dl</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-air-recon-dl-enhancement</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-auto-segmentation</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-healthcare-irt</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/ge-irt-theranostics-pipeline</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-mr-contour-dl</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ge-precision-dl</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/product/ge-truefidelity-pro</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://dlinrt.eu/product/ge-truefidelity</loc>
+    <lastmod>2026-06-18</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/hura-dvtarget</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/limbus-contour</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/lumonus-ai</loc>
+    <lastmod>2026-07-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-accucontour</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-acculearning</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-mozi</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/medcom-prosoma-dart</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/medlever-assistant-pipeline</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/medlever-copilot-pipeline</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/medlever-workflow-management</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/medmind-rt-mind-ai</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mim-contour-protegeai</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mirada-dlc</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mr-box-synthetic</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-ai-contouring</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-ai-workspace-plus</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/mvision-dose-plus</loc>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-verify</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/neuralrad-brain-pipeline</loc>
+    <lastmod>2026-05-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/oncosoft-oncostudio</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-mrcat-brain</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-mrcat-head-and-neck</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-mrcat-pelvis</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-mrcat-prostate-auto-contouring</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/philips-precise-image</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-petct-adaptive-reconstruction</loc>
+    <lastmod>2026-06-17</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/philips-precise-image</loc>
     <lastmod>2026-06-17</lastmod>
     <priority>0.6</priority>
   </url>
@@ -357,383 +342,445 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/philips-smartspeed</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/philips-smartspeed-precise</loc>
+    <lastmod>2026-06-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/plan-ai</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/ptw-aqualis</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/pymedix-registration</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/quanta-qoca-image-smart-rt</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/radformation-autocontour</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/product/radformation-clearcheck</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://dlinrt.eu/product/raysearch-rayintelligence</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/raysearch-raystation</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/raysearch-raystation-planning</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/rpa-radiation-planning-assistant</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/siemens-ai-rad-companion</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/siemens-deep-resolve</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/product/siemens-dual-energy-optimizer</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://dlinrt.eu/product/siemens-directorgans</loc>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/siemens-syngo-ct</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/spectronic-mriplanner</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/subtle-aimify</loc>
+    <lastmod>2026-06-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/subtle-hd</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/subtle-hd-ct</loc>
+    <lastmod>2026-06-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/subtle-hd-pet</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/subtle-mr</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/subtle-pet</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/sun-nuclear-suncheck-patient</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-18</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/synaptiq-mediq-rt</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/product/syntheticmr-neuro</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/syntheticmr-spine</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://dlinrt.eu/product/synaptiq-mediq-rt-4dct-pipeline</loc>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/taimedimg-deepmets</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-adaptbox</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-annotate</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-brachybox</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-smartfuse</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-smartplan</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-tumorbox</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/united-hd-tof</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/united-uai-vision-recon</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/united-uaifi-umr</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/product/united-ucs-ai</loc>
-    <lastmod>2026-05-13</lastmod>
+    <loc>https://dlinrt.eu/product/united-uct610-sim-dl-recon-pipeline</loc>
+    <lastmod>2026-05-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/united-urt-auto-contouring</loc>
+    <lastmod>2026-06-13</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/united-urt-auto-planning</loc>
+    <lastmod>2026-06-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/varian-eclipse-ai-contouring</loc>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/varian-ethos-ai-segmentation</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/product/varian-mobius3d</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/vysioner-vbrain</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/wisdom-deep-contour</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/products/company/neuralrad</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://dlinrt.eu/product/wisdom-deep-plan</loc>
+    <lastmod>2026-06-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/accuray</loc>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/products/company/ai-medical</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/carina-ai</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/coreline-soft</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/everfortune-ai</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/hura-imaging</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/limbus-ai</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/manteia</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/mim-software</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/mirada-medical</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/mvision-ai</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/radformation</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/synaptiq</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/therapanacea</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/vysioner</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/wisdom-tech</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/oncosoft</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/medcom</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/ge-healthcare</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/philips-healthcare</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/siemens-healthineers</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/canon-medical</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/united-imaging</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/taiwan-medical-imaging</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/algomedica</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/spectronic-medical</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/syntheticmr</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/raysearch</loc>
-    <lastmod>2026-06-10</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/products/company/airs-medical</loc>
-    <lastmod>2026-06-10</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://dlinrt.eu/products/company/claripi</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/subtle-medical</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/ptw-dosimetry</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/pymedix</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/medlever</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/elekta</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/accuray</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/sun-nuclear</loc>
-    <lastmod>2026-06-10</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://dlinrt.eu/products/company/md-anderson</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://dlinrt.eu/products/company/algomedica</loc>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/products/company/brainlab</loc>
-    <lastmod>2026-06-10</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/canon-medical</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/carina-ai</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/claripi</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/coreline-soft</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/elekta</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/everfortune-ai</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/ge-healthcare</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/hura-imaging</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/limbus-ai</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/lumonus</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/manteia</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/md-anderson</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/medcom</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/medlever</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/medmind-technology</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/mim-software</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/mirada-medical</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/mvision-ai</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/neuralrad</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/oncosoft</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/philips-healthcare</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/ptw-dosimetry</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/pymedix</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/quanta-computer</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/radformation</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/raysearch</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/siemens-healthineers</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/spectronic-medical</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/subtle-medical</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/sun-nuclear</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/synaptiq</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/taiwan-medical-imaging</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/therapanacea</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/united-imaging</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/varian</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/vysioneer</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/wisdom-tech</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/aapm-2026-and-certification-milestone</loc>
+    <lastmod>2026-07-19</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/aiinrt-2027-support</loc>
+    <lastmod>2026-07-21</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/communication-features-launch</loc>
+    <lastmod>2025-05-27</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/company-certification-launch</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/december-2025-platform-update</loc>
+    <lastmod>2025-12-01</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/estro-2026-announcements</loc>
+    <lastmod>2026-05-14</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/fda-ai-list-update-july-2025</loc>
+    <lastmod>2025-07-14</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/project-launch</loc>
+    <lastmod>2025-04-26</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/second-round-review-and-evidence-axes</loc>
+    <lastmod>2026-06-18</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/webinar-success-reviewers-call</loc>
+    <lastmod>2025-09-25</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/website-launch-webinar</loc>
+    <lastmod>2025-09-02</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/website-restyle-and-second-review</loc>
+    <lastmod>2026-05-30</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/website-v0-11-release</loc>
+    <lastmod>2025-05-27</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>
-
