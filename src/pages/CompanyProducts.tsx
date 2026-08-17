@@ -50,7 +50,11 @@ const CompanyProducts = () => {
   if (!company) {
     return (
       <div className="min-h-screen bg-white">
-        <SEO title="Company not found" description="The requested company could not be found." />
+        <SEO
+          title="Company not found"
+          description="This company is not listed in the DLinRT catalogue."
+          noindex
+        />
         <main className="max-w-3xl mx-auto px-4 md:px-8 py-16 text-center">
           <Building className="h-10 w-10 text-gray-300 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">Company not found</h1>
