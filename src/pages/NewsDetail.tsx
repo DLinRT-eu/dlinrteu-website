@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ReactMarkdown from 'react-markdown';
@@ -15,14 +15,20 @@ const NewsDetail = () => {
 
   if (!newsItem) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background">
         <SEO
           title="News Not Found"
-          description="The requested news article could not be found."
-          canonical={`https://dlinrt.eu/news`}
+          description="This news article is not available."
+          noindex
         />
-        <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
-          <h1 className="text-3xl font-bold mb-6">News Article Not Found</h1>
+        <main className="max-w-3xl mx-auto px-4 md:px-8 py-16 text-center">
+          <h1 className="text-3xl font-bold mb-4">News article not found</h1>
+          <p className="text-muted-foreground mb-6">
+            This article does not exist or has been removed.
+          </p>
+          <Button asChild>
+            <Link to="/news">Back to all news</Link>
+          </Button>
         </main>
         <Footer />
       </div>

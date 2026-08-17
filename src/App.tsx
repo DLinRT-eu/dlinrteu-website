@@ -194,6 +194,8 @@ const App = () => (
                 <Route path="donate" element={<Navigate to="/support" replace />} />
                 <Route path="product/aimify" element={<Navigate to="/product/subtle-aimify" replace />} />
                 <Route path="product/directorgans" element={<Navigate to="/product/siemens-directorgans" replace />} />
+                <Route path="product/ge-truefidelity-pro" element={<Navigate to="/product/ge-truefidelity" replace />} />
+                <Route path="product/united-ucs-ai" element={<Navigate to="/product/united-uaifi-umr" replace />} />
                 <Route path="product/therapanacea-tumorbox-pipeline" element={<Navigate to="/product/therapanacea-tumorbox" replace />} />
                 <Route path="product/therapanacea-smartplan-pipeline" element={<Navigate to="/product/therapanacea-smartplan" replace />} />
                 <Route path="product/therapanacea-brachybox-pipeline" element={<Navigate to="/product/therapanacea-brachybox" replace />} />

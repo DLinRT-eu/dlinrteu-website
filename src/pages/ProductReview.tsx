@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import SEO from '@/components/SEO';
 import { ProductReviewStatus } from '@/components/revision/ProductReviewStatus';
 import { GitHubUrlCard } from '@/components/revision/GitHubUrlCard';
 import { useCompanyData } from '@/hooks/useCompanyData';
@@ -25,7 +26,15 @@ const ProductReview = () => {
   if (!product) {
     return (
       <div className="container mx-auto py-8">
+        <SEO
+          title="Product not found"
+          description="This product is not available for review."
+          noindex
+        />
         <h1 className="text-2xl font-bold mb-4">Product not found</h1>
+        <p className="text-muted-foreground mb-4">
+          This product is not (or no longer) in the catalogue, so it cannot be reviewed.
+        </p>
         <Button asChild variant="outline">
           <Link to="/review">
             <ArrowLeft className="mr-2 h-4 w-4" />
