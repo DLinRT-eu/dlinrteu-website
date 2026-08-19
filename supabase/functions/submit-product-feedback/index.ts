@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { getAdminNotificationEmails } from "../_shared/admin-recipients.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
@@ -203,7 +204,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       await resend.emails.send({
         from: "DLinRT.eu Product Feedback <noreply@dlinrt.eu>",
-        to: ["info@dlinrt.eu"],
+        to: getAdminNotificationEmails(),
         reply_to: submitter_email,
         subject: `Product Feedback: ${escapeHtml(typeLabel)} — ${escapeHtml(product_name)}`,
         html: `

@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { getAdminNotificationEmails } from "../_shared/admin-recipients.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 
 // Service-role Supabase client for server-side inserts (bypasses RLS by design;
@@ -209,7 +210,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email via Resend with escaped content to prevent HTML injection
     const emailResponse = await resend.emails.send({
       from: "DLinRT.eu Contact Form <noreply@dlinrt.eu>",
-      to: ["info@dlinrt.eu"],
+      to: getAdminNotificationEmails(),
       reply_to: email,
       subject: `Contact Form: ${escapeHtml(subject)}`,
       html: `

@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { getAdminNotificationEmails } from "../_shared/admin-recipients.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 
 const ALLOWED_ORIGINS = [
@@ -150,7 +151,7 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "DLinRT.eu User Registration <noreply@dlinrt.eu>",
       reply_to: "info@dlinrt.eu",
-      to: ["info@dlinrt.eu"],
+      to: getAdminNotificationEmails(),
       subject: `🔔 New User Registration - Verification Required${!isInstitutional ? ' (Non-Institutional Email)' : ''}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

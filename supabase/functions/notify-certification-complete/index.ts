@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { getAdminNotificationEmails } from "../_shared/admin-recipients.ts";
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
@@ -236,7 +237,7 @@ const handler = async (req: Request): Promise<Response> => {
       await resend.emails.send({
         from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
         reply_to: "info@dlinrt.eu",
-        to: ["info@dlinrt.eu"],
+        to: getAdminNotificationEmails(),
         subject: `New Product Certification: ${productName} (${companyName})`,
         html: `
           <!DOCTYPE html>
@@ -293,7 +294,7 @@ const handler = async (req: Request): Promise<Response> => {
           </html>
         `,
       });
-      emailsSent.push("info@dlinrt.eu");
+      emailsSent.push(...getAdminNotificationEmails());
       console.log("Admin notification email sent");
     } catch (emailError) {
       console.error("Error sending admin notification:", emailError);
