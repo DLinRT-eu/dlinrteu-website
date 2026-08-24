@@ -49,13 +49,17 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const {
     evidence,
     limitations,
-    evidenceRigor,
     evidenceRigorNotes,
-    clinicalImpact,
     clinicalImpactNotes,
     adoptionReadiness,
     adoptionReadinessNotes,
   } = displayProduct;
+
+  // Product score is the max across scored papers (override wins when set),
+  // falling back to the stored product-level values.
+  const computedScore = computeProductEvidenceScore(displayProduct);
+  const evidenceRigor = computedScore.rigor;
+  const clinicalImpact = computedScore.impact;
 
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
@@ -63,6 +67,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const hasDualAxis = !!(evidenceRigor || clinicalImpact);
   const hasBurden = !!adoptionReadiness;
   const hasTriAxis = hasDualAxis || hasBurden;
+
 
   if (!showEditor && !hasEvidence && !hasLimitations && !hasTriAxis) {
     return null;
