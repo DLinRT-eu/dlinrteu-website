@@ -131,7 +131,7 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Cloud-based data storage and visualization"
   ],
   keyPapers: [
-    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026"}
+    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true}
   ],
   lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",

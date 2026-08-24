@@ -81,9 +81,9 @@ const rawProduct: ProductDetails = {
   lastUpdated: "2026-06-15",
   lastRevised: "2026-07-15",
   keyPapers: [
-    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024"},
-    {doi: "10.3857/roj.2021.00234", title: "aview RT-ACS clinical validation", authors: "Byun HK et al.", journal: "Radiat Oncol J", year: "2021"},
-    {doi: "10.3389/fonc.2020.626277", title: "Deep-learning auto-segmentation evaluation", authors: "Chung SY et al.", journal: "Front Oncol", year: "2020"}
+    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
+    {doi: "10.3857/roj.2021.00234", title: "aview RT-ACS clinical validation", authors: "Byun HK et al.", journal: "Radiat Oncol J", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
+    {doi: "10.3389/fonc.2020.626277", title: "Deep-learning auto-segmentation evaluation", authors: "Chung SY et al.", journal: "Front Oncol", year: "2020", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
   ],
   supportedStructures: [
     // Head & Neck
@@ -165,7 +165,7 @@ const rawProduct: ProductDetails = {
     "Pelvis: SpinalCord",
     "Pelvis: Prostate"
   ],
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   clinicalImpact: "I2",
   evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation.",
 

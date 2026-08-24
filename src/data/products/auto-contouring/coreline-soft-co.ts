@@ -89,8 +89,8 @@ export const AviewRTACS: ProductDetails = {
     "Breast contouring support"
   ],
   keyPapers: [
-    {"doi":"10.3857/roj.2021.00234","title":"aview RT-ACS clinical validation","authors":"Byun HK et al.","journal":"Radiat Oncol J","year":"2021"},
-    {"doi":"10.3389/fonc.2020.626277","title":"Deep-learning auto-segmentation evaluation","authors":"Chung SY et al.","journal":"Front Oncol","year":"2020"}
+    {"doi":"10.3857/roj.2021.00234","title":"aview RT-ACS clinical validation","authors":"Byun HK et al.","journal":"Radiat Oncol J","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints."},
+    {"doi":"10.3389/fonc.2020.626277","title":"Deep-learning auto-segmentation evaluation","authors":"Chung SY et al.","journal":"Front Oncol","year":"2020","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
   ],
   lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",
@@ -102,7 +102,7 @@ export const AviewRTACS: ProductDetails = {
     disclosureLevel: "minimal"
   },
   certification: "CE & FDA",
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I2",
   evaluationData: {

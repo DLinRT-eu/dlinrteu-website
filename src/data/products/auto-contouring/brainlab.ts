@@ -95,9 +95,9 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Optional TheraPanacea Art-Plan interface for extracranial OAR and lymph-node segmentation"
   ],
   keyPapers: [
-    {"doi":"10.1007/s00066-019-01446-5","title":"Elements Contouring clinical validation","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019"},
-    {"doi":"10.3389/fonc.2022.842579","title":"Brainlab Elements segmentation evaluation","authors":"Yu C et al.","journal":"Front Oncol","year":"2022"},
-    {"doi":"10.3389/fonc.2022.827195","title":"Deep-learning auto-segmentation multi-site","journal":"Front Oncol","year":"2022"}
+    {"doi":"10.1007/s00066-019-01446-5","title":"Elements Contouring clinical validation","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints.","vendorIndependent":true},
+    {"doi":"10.3389/fonc.2022.842579","title":"Brainlab Elements segmentation evaluation","authors":"Yu C et al.","journal":"Front Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre segmentation accuracy evaluation.","vendorIndependent":true},
+    {"doi":"10.3389/fonc.2022.827195","title":"Deep-learning auto-segmentation multi-site","journal":"Front Oncol","year":"2022","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-site auto-segmentation evaluation with geometric endpoints.","multiCenter":true,"externalValidation":true}
   ],
   lastRevised: "2026-07-15",
   lastUpdated: "2026-06-15",
@@ -120,7 +120,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     }
   ],
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "I1",
   diseaseTargeted: ["Multiple Cancer Types"],
   developmentStage: "certified",
   adoptionReadiness: "R3",
