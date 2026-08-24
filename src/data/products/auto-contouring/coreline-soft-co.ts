@@ -102,7 +102,7 @@ export const AviewRTACS: ProductDetails = {
     disclosureLevel: "minimal"
   },
   certification: "CE & FDA",
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I2",
   evaluationData: {

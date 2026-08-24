@@ -120,7 +120,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     }
   ],
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "I1",
   diseaseTargeted: ["Multiple Cancer Types"],
   developmentStage: "certified",
   adoptionReadiness: "R3",

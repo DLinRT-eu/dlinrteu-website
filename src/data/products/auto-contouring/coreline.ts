@@ -165,7 +165,7 @@ const rawProduct: ProductDetails = {
     "Pelvis: SpinalCord",
     "Pelvis: Prostate"
   ],
-  evidenceRigor: "E1",
+  evidenceRigor: "E2",
   clinicalImpact: "I2",
   evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation.",
 

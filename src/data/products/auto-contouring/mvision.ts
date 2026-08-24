@@ -107,7 +107,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     },
     contactEmail: "info@mvision.ai",
     evidenceRigor: "E2",
-    clinicalImpact: "I3",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "Independent peer-reviewed studies (Doolan 2023, Miura 2025 x2) demonstrate multi-site validation. Multi-national HARMONY study pending peer review. No prospective/RCT so E3 not met.",
     clinicalImpactNotes: "Workflow and consistency benefits documented in independent literature support I3.",
     adoptionReadiness: "R4",

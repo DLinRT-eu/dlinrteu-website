@@ -88,8 +88,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
     evidenceRigorNotes: "Independent single-centre peer-reviewed studies (Sharma 2025, Ng 2022, Gorgisyan 2022) support E2.",
     clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     adoptionReadiness: "R3",

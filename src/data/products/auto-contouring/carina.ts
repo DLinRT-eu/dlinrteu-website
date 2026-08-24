@@ -243,7 +243,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Only single-centre vendor-affiliated studies (Duan 2022, 2023). Sufficient for E1.",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     clinicalImpactNotes: "Reported geometric accuracy and workflow time savings; no prospective clinical outcome data identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",

@@ -78,7 +78,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2019",
       distributionChannels: ["Direct sales"],
     },
-    evidenceRigor: "E3",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent multi-institutional peer-reviewed studies (Rayn 2024, Kim 2024, Yamauchi 2024, Maduro Bustos 2023, Marschner 2022) confirm E3.",
     clinicalImpactNotes: "Independent study found time-saving efficiency of 67-84%. Multi-institutional evaluation confirms consistent geometric accuracy. Comparative studies show competitive performance against 6 other AI systems.",

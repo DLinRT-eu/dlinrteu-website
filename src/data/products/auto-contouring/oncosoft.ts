@@ -311,7 +311,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2022",
       distributionChannels: ["Direct sales", "Partner distributors"]
     },
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
     evidenceRigorNotes: "Retrospective multi-institutional plus single-centre studies (Choi 2024, Hoshina 2025, Kawaguchi 2025/2026). No prospective/RCT/meta-analysis — downgraded from E3 to E2.",
     clinicalImpactNotes: "Extensive clinical deployment (4M+ contours, 80K+ patients). Multiple peer-reviewed geometric and dosimetric accuracy assessments across prostate, lung, H&N, thorax, abdomen, pelvis.",

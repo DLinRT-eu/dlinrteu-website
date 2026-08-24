@@ -97,7 +97,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     version: "3.0",
     releaseDate: "2023-06-15",
     evidenceRigor: "E2",
-    clinicalImpact: "I3",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent multi-institutional peer-reviewed studies (Starke 2024, Radici 2022, Grossi 2025, Doolan 2023, Tabita 2025) support E2. No prospective/RCT evidence — insufficient for E3.",
     clinicalImpactNotes: "Independent workflow-adoption and time-saving evidence (Radici 2022) plus consistency benefits supports I3.",
     adoptionReadiness: "R4",

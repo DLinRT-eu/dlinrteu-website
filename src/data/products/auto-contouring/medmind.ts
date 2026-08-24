@@ -108,7 +108,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "I1",
     evidenceRigorNotes: "Zhu 2025 feasibility plus one multi-vendor comparison; sparse independent literature — downgraded from E2 to E1.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",
     adoptionReadiness: "R3",

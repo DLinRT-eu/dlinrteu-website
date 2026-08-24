@@ -151,7 +151,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head R",
       "Pelvis: Prostate"
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",

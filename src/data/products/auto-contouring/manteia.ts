@@ -228,8 +228,8 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "Pelvis: CTV Cervix",
       "Pelvis: CTV Para-aortic Nodes"
     ],
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
     evidenceRigorNotes: "Wang 2022 (Front Oncol) confirmed; additional independent studies support E2 (conditional on product-name verification in full text).",
     clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement.",
     adoptionReadiness: "R3",
