@@ -335,8 +335,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-    {"doi":"10.1016/j.ejmp.2024.103324","title":"Multi-institutional evaluation of AI-Rad Companion","authors":"Rayn K et al.","journal":"Phys Med","year":"2024"},
-    {"doi":"10.1016/j.radonc.2022.04.020","title":"Clinical validation of AI-Rad Companion OAR","authors":"Marschner S et al.","journal":"Radiother Oncol","year":"2022"}
+    {"doi":"10.1016/j.ejmp.2024.103324","title":"Multi-institutional evaluation of AI-Rad Companion","authors":"Rayn K et al.","journal":"Phys Med","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-institutional evaluation including contour editing workload.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+    {"doi":"10.1016/j.radonc.2022.04.020","title":"Clinical validation of AI-Rad Companion OAR","authors":"Marschner S et al.","journal":"Radiother Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Clinical validation with vendor collaboration; reports contouring time and acceptability."}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",

@@ -121,7 +121,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     releaseDate: "2022-03-25",
     lastUpdated: "2026-06-13",
     keyPapers: [
-    {"doi":"10.1002/acm2.14350","title":"RT-Mind-AI feasibility evaluation","authors":"Zhu J et al.","journal":"J Appl Clin Med Phys","year":"2025"}
+    {"doi":"10.1002/acm2.14350","title":"RT-Mind-AI feasibility evaluation","authors":"Zhu J et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre feasibility and accuracy evaluation."}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01)."

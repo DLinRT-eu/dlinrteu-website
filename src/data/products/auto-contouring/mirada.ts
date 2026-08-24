@@ -92,10 +92,10 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-05-20",
     lastUpdated: "2026-06-15",
     keyPapers: [
-    {"doi":"10.1016/j.radonc.2020.05.028","title":"Independent evaluation of DLCExpert for H&N contouring","authors":"Brouwer CL et al.","journal":"Radiother Oncol","year":"2020"},
-    {"doi":"10.1016/j.radonc.2020.04.013","title":"Automated liver segmentation using Mirada DLC","authors":"Choi Y et al.","journal":"Radiother Oncol","year":"2020"},
-    {"doi":"10.1080/0284186X.2021.1892183","title":"Multi-vendor DL auto-segmentation comparison","authors":"Zhu J et al.","journal":"Acta Oncol","year":"2021"},
-    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"}
+    {"doi":"10.1016/j.radonc.2020.05.028","title":"Independent evaluation of DLCExpert for H&N contouring","authors":"Brouwer CL et al.","journal":"Radiother Oncol","year":"2020","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent evaluation with clinical acceptability and editing assessment on external data.","vendorIndependent":true,"externalValidation":true},
+    {"doi":"10.1016/j.radonc.2020.04.013","title":"Automated liver segmentation using Mirada DLC","authors":"Choi Y et al.","journal":"Radiother Oncol","year":"2020","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre geometric validation for liver segmentation.","vendorIndependent":true},
+    {"doi":"10.1080/0284186X.2021.1892183","title":"Multi-vendor DL auto-segmentation comparison","authors":"Zhu J et al.","journal":"Acta Oncol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent multi-vendor comparison on external data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
     lastRevised: "2026-07-15",
     source: "Historical records - product discontinued; citation re-verified 2026-06-15 (Doolan 2023 directly evaluates Mirada per its Methods)."

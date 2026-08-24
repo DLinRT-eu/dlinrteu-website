@@ -235,8 +235,8 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       "Female Pelvis: Rectum (investigational)"
     ],
     keyPapers: [
-    {"doi":"10.1002/mp.15525","title":"Deep-learning contouring on CT for RT planning","authors":"Duan J et al.","journal":"Med Phys","year":"2022"},
-    {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023"}
+    {"doi":"10.1002/mp.15525","title":"Deep-learning contouring on CT for RT planning","authors":"Duan J et al.","journal":"Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre technical validation of contour accuracy."},
+    {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Follow-up single-centre evaluation reporting editing effort."}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",

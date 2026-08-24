@@ -153,9 +153,9 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-27",
     lastUpdated: "2026-06-15",
     keyPapers: [
-    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring including MVision","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"},
-    {"doi":"10.1016/j.meddos.2024.11.001","title":"Clinical evaluation of MVision AI contouring","authors":"Miura H et al.","journal":"Med Dosim","year":"2025"},
-    {"doi":"10.5603/rpor.104186","title":"MVision AI dosimetric evaluation","authors":"Miura H et al.","journal":"RPOR","year":"2025"}
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring including MVision","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
+    {"doi":"10.1016/j.meddos.2024.11.001","title":"Clinical evaluation of MVision AI contouring","authors":"Miura H et al.","journal":"Med Dosim","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
+    {"doi":"10.5603/rpor.104186","title":"MVision AI dosimetric evaluation","authors":"Miura H et al.","journal":"RPOR","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre dosimetric/geometric evaluation.","vendorIndependent":true}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."

@@ -146,10 +146,10 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-06-15",
     keyPapers: [
-    {"doi":"10.1259/bjr.20230211","title":"Multi-institutional evaluation of Limbus auto-contouring for radiotherapy","authors":"Starke S et al.","journal":"BJR","year":"2024"},
-    {"doi":"10.3390/life12122088","title":"Workflow impact of Limbus AI auto-contouring","authors":"Radici L et al.","journal":"Life","year":"2022"},
-    {"doi":"10.3390/curroncol32020078","title":"Multicentric evaluation of Limbus contour","authors":"Grossi C et al.","journal":"Curr Oncol","year":"2025"},
-    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial deep-learning auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023"}
+    {"doi":"10.1259/bjr.20230211","title":"Multi-institutional evaluation of Limbus auto-contouring for radiotherapy","authors":"Starke S et al.","journal":"BJR","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-institutional clinical evaluation of contour augmentation; reports editing effort, not only geometry.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+    {"doi":"10.3390/life12122088","title":"Workflow impact of Limbus AI auto-contouring","authors":"Radici L et al.","journal":"Life","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre workflow study reporting contouring time saved.","vendorIndependent":true},
+    {"doi":"10.3390/curroncol32020078","title":"Multicentric evaluation of Limbus contour","authors":"Grossi C et al.","journal":"Curr Oncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multicentric geometric evaluation of pelvic volumes against clinical reference contours.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial deep-learning auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K241837), company official sources. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include Limbus per Methods."

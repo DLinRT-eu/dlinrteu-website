@@ -353,9 +353,9 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-01-01",
     lastUpdated: "2026-06-15",
     keyPapers: [
-    {"doi":"10.3390/cancers16213670","title":"OncoStudio auto-contouring clinical evaluation","authors":"Choi Y et al.","journal":"Cancers","year":"2024"},
-    {"doi":"10.7759/cureus.94067","title":"OncoStudio dosimetric study","authors":"Hoshina R et al.","journal":"Cureus","year":"2025"},
-    {"doi":"10.7759/cureus.91810","title":"OncoStudio clinical workflow","authors":"Kawaguchi H et al.","journal":"Cureus","year":"2025"}
+    {"doi":"10.3390/cancers16213670","title":"OncoStudio auto-contouring clinical evaluation","authors":"Choi Y et al.","journal":"Cancers","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints."},
+    {"doi":"10.7759/cureus.94067","title":"OncoStudio dosimetric study","authors":"Hoshina R et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre dosimetric evaluation."},
+    {"doi":"10.7759/cureus.91810","title":"OncoStudio clinical workflow","authors":"Kawaguchi H et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre workflow evaluation reporting contouring time."}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",

@@ -267,7 +267,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-    {"doi":"10.3389/fonc.2022.833816","title":"AccuContour clinical evaluation","authors":"Wang J et al.","journal":"Front Oncol","year":"2022"}
+    {"doi":"10.3389/fonc.2022.833816","title":"AccuContour clinical evaluation","authors":"Wang J et al.","journal":"Front Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints."}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",

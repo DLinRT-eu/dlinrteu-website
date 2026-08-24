@@ -106,7 +106,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-06-13",
     keyPapers: [
-    {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025"}
+    {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent external validation cohort; geometric detection/segmentation endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
     lastRevised: "2026-07-15",
     companyRevisionDate: "",
