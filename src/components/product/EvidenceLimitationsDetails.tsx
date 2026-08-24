@@ -265,6 +265,11 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
           <EvidenceEditor fieldPath="evidence" />
         )}
 
+        {/* Per-publication scoring (max across papers) */}
+        {!showEditor && <KeyPapersScoring product={displayProduct} />}
+
+
+
         {/* Evidence Section - display only when not in edit mode */}
         {!showEditor && hasEvidence && (
           <div>
