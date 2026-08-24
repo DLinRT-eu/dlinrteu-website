@@ -125,7 +125,34 @@ export interface ProductDetails extends Product {
     journal?: string;
     year?: string;
     link?: string;
+    // Per-paper scoring (product score = max across papers, per axis)
+    evidenceRigor?: "E0" | "E1" | "E2" | "E3";
+    clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    /** One line explaining why this paper sits at these levels. */
+    rationale?: string;
+    // Study quality sub-attributes for this specific paper
+    vendorIndependent?: boolean;
+    multiCenter?: boolean;
+    multiNational?: boolean;
+    prospective?: boolean;
+    externalValidation?: boolean;
+    /** For multi-category products: which category this paper supports. */
+    appliesToCategory?: string;
   }>;
+
+  /**
+   * Documented manual override of the computed (max-across-papers) score.
+   * Use when the top-scoring paper is off-label, retracted, or not about the
+   * marketed version. The computed value is still shown for transparency.
+   */
+  evidenceScoreOverride?: {
+    rigor?: "E0" | "E1" | "E2" | "E3";
+    impact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    reason: string;
+    setBy?: string;
+    setOn?: string;
+  };
+
 
   // Adoption Readiness axis (R) — DLinRT extension to the E/I matrix.
   // Higher R = lower residual effort = higher adoption readiness.

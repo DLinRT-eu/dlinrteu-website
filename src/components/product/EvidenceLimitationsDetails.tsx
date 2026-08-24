@@ -6,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
 import EvidenceCitation from "./EvidenceCitation";
+import KeyPapersScoring from "./KeyPapersScoring";
+import { computeProductEvidenceScore } from "@/utils/evidenceScoring";
+
 import AutoLinkText from "@/components/ui/AutoLinkText";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 import {
@@ -49,13 +52,17 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const {
     evidence,
     limitations,
-    evidenceRigor,
     evidenceRigorNotes,
-    clinicalImpact,
     clinicalImpactNotes,
     adoptionReadiness,
     adoptionReadinessNotes,
   } = displayProduct;
+
+  // Product score is the max across scored papers (override wins when set),
+  // falling back to the stored product-level values.
+  const computedScore = computeProductEvidenceScore(displayProduct);
+  const evidenceRigor = computedScore.rigor;
+  const clinicalImpact = computedScore.impact;
 
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
@@ -63,6 +70,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   const hasDualAxis = !!(evidenceRigor || clinicalImpact);
   const hasBurden = !!adoptionReadiness;
   const hasTriAxis = hasDualAxis || hasBurden;
+
 
   if (!showEditor && !hasEvidence && !hasLimitations && !hasTriAxis) {
     return null;
@@ -256,6 +264,11 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         {showEditor && (
           <EvidenceEditor fieldPath="evidence" />
         )}
+
+        {/* Per-publication scoring (max across papers) */}
+        {!showEditor && <KeyPapersScoring product={displayProduct} />}
+
+
 
         {/* Evidence Section - display only when not in edit mode */}
         {!showEditor && hasEvidence && (
