@@ -6,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import EvidenceImpactBadges from "./EvidenceImpactBadges";
 import EvidenceCitation from "./EvidenceCitation";
+import KeyPapersScoring from "./KeyPapersScoring";
+import { computeProductEvidenceScore } from "@/utils/evidenceScoring";
+
 import AutoLinkText from "@/components/ui/AutoLinkText";
 import { EditableField, useProductEdit, EvidenceEditor } from "@/components/product-editor";
 import {
