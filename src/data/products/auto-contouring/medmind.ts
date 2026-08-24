@@ -120,6 +120,12 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     releaseDate: "2022-03-25",
     lastUpdated: "2026-06-13",
+    evidenceScoreOverride: {
+      impact: "I2",
+      reason: "Multicentre blinded randomised CTV validation studies listed under evidence (Front Oncol 2021, Radiat Oncol 2023) report clinically viable contours in 96-100% of cases and reduced delineation workload, supporting workflow-level impact beyond the single scored paper.",
+      setBy: "DLinRT evidence sweep (auto-contouring wave 1)",
+      setOn: "2026-08-25"
+    },
     keyPapers: [
     {"doi":"10.1002/acm2.14350","title":"RT-Mind-AI feasibility evaluation","authors":"Zhu J et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre feasibility and accuracy evaluation."}
   ],
