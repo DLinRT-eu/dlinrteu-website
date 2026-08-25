@@ -359,7 +359,7 @@ The changelog system supports the full project history across repository migrati
 | Period | Repository |
 |--------|------------|
 | April 2025 - September 2025 | `DLinRT-eu/website` (original) |
-| October 2025 - Present | `DLinRT-eu/dlinrteu-website` (current) |
+| October 2025 - Present | `DLinRT-eu/website` (current) |
 
 The **backfill function** automatically queries both repositories to generate complete changelog entries from the project's launch in April 2025.
 
@@ -457,14 +457,14 @@ When you click "Sync to GitHub" on an approved edit:
 
 A **"Test GitHub access"** button at the top of `/admin/edit-approvals` runs the `test-github-access` edge function to verify the configured `GITHUB_TOKEN` PAT before approvals are synced.
 
-The check runs four probes against `DLinRT-eu/dlinrteu-website`:
+The check runs four probes against `DLinRT-eu/website`:
 1. **Repo read** — confirms the token can see the repository.
 2. **Branch read** — fetches the `main` ref.
 3. **Write probe** — creates and immediately deletes a throwaway branch to confirm write access.
 4. **Token-scoped permissions** — reports `admin`, `push`, `pull`, `maintain`, `triage` flags returned by GitHub.
 
 **If the check fails**:
-1. Generate a new fine-grained PAT scoped to the `DLinRT-eu/dlinrteu-website` repo with permissions `Contents: Read & write` and `Pull requests: Read & write`.
+1. Generate a new fine-grained PAT scoped to the `DLinRT-eu/website` repo with permissions `Contents: Read & write` and `Pull requests: Read & write`.
 2. Update the `GITHUB_TOKEN` secret in Supabase → Edge Functions → Secrets.
 3. Re-run "Test GitHub access" until all four checks pass before approving edits.
 

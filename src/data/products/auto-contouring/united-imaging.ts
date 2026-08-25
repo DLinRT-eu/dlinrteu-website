@@ -47,7 +47,7 @@ export const uRTAutoContouring: ProductDetails = {
     "Native integration in uRT workflow"
   ],
   modality: ["CT", "CBCT"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/united-imaging.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/united-imaging.ts",
   companyUrl: "https://www.united-imaging.com/",
   productUrl: "https://eu.united-imaging.com/en/product-service/products/rt",
   regulatory: {

@@ -6,7 +6,7 @@ export const PrecisePosition: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/positioning/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/positioning/philips.ts",
   description:
     "Camera-based AI patient auto-positioning for Philips CT. Uses convolutional neural networks to identify anatomical landmarks and automatically position the patient at isocenter, improving vertical accuracy and inter-operator consistency in CT simulation workflows.",
   features: [

@@ -7,7 +7,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
     productUrl: "https://medlever.com/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/medlever.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/medlever.ts",
     description: "AI-powered workflow assistant for radiation oncology. Leverages large language models to provide contextual guidance, automate documentation, and assist with clinical decision support throughout the treatment workflow.",
     features: [
       "AI-powered contextual assistance",
@@ -50,7 +50,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
     productUrl: "https://medlever.com/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/medlever.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/medlever.ts",
     description: "AI copilot for radiation oncology clinical decision-making. Analyzes patient data, treatment parameters, and clinical protocols to provide intelligent recommendations and identify potential issues before they impact patient care.",
     features: [
       "Intelligent clinical recommendations",

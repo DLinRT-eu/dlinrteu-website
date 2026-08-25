@@ -340,6 +340,6 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
 ];

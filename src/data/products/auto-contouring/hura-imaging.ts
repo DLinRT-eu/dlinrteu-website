@@ -14,7 +14,7 @@ export const DVTARGET: ProductDetails = {
   website: "http://www.huraimaging.com/dvtarget/",
   category: "Auto-Contouring",
   modality: ["CT"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
   companyUrl: "https://huraimaging.com",
   productUrl: "http://www.huraimaging.com/dvtarget/",
   regulatory: {

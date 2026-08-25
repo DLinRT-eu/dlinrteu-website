@@ -96,7 +96,7 @@ export const MediqRT: ProductDetails = {
     }
   ],
   modality: ["CT", "MRI"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
   companyUrl: "https://synaptiq.io/",
   productUrl: "https://synaptiq.io/product/",
   regulatory: {

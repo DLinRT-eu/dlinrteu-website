@@ -31,7 +31,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     company: "Taiwan Medical Imaging Co.",
     companyUrl: "https://www.taimedimg.tw/",
     productUrl: "https://www.taimedimg.tw/en/samd/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/taiwan-medical-imaging.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/taiwan-medical-imaging.ts",
     description: "AI software that provides initial GTV contours for known brain metastases on axial contrast-enhanced T1-weighted brain MRI. Automatic outputs are intended as initial contours and require review and finalization by a trained medical professional before use in treatment planning.",
     category: "Auto-Contouring",
     certification: "TFDA SaMD (2022), FDA 510(k) K250427; regional registrations reported (e.g., Vietnam)",

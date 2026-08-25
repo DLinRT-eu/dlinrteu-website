@@ -30,7 +30,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/unitedimaging.png",
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://www.united-imaging.com/en/products/ct",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],
@@ -226,7 +226,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-13",
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K222755, K193073), United Imaging product pages.",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },
   {
@@ -327,7 +327,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-13",
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database and company website",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   }
 ];

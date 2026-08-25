@@ -33,7 +33,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/accuray.png",
     companyUrl: "https://www.accuray.com/",
     productUrl: "https://www.accuray.com/software/synchrony/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/accuray.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/tracking/accuray.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["kV X-ray", "Optical respiratory surrogate", "Real-time imaging"],
     diseaseTargeted: ["Tumors or other targeted tissues requiring radiation therapy"],

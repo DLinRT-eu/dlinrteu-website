@@ -60,7 +60,7 @@ export function createEditUrl(product: any): string {
     filePath = `src/data/products/${categorySlug}/${companySlug}.ts`;
   }
   
-  return `https://github.com/DLinRT-eu/dlinrteu-website/edit/main/${filePath}`;
+  return `https://github.com/DLinRT-eu/website/edit/main/${filePath}`;
 }
 
 export function createIssueUrl(product: any): string {
@@ -83,7 +83,7 @@ File: ${githubInfo.filePath || 'Unknown'}
   }
   
   // Fallback to default repo
-  return `https://github.com/DLinRT-eu/dlinrteu-website/issues/new?title=Review%3A+${encodeURIComponent(product.name)}&template=product-review.md&labels=review`;
+  return `https://github.com/DLinRT-eu/website/issues/new?title=Review%3A+${encodeURIComponent(product.name)}&template=product-review.md&labels=review`;
 }
 
 export function createPullRequestUrl(product: any): string {
@@ -94,7 +94,7 @@ export function createPullRequestUrl(product: any): string {
   }
   
   // Fallback to default repo
-  return `https://github.com/DLinRT-eu/dlinrteu-website/compare/main...review/${product.id}?expand=1&title=Review:%20${encodeURIComponent(product.name)}&labels=review`;
+  return `https://github.com/DLinRT-eu/website/compare/main...review/${product.id}?expand=1&title=Review:%20${encodeURIComponent(product.name)}&labels=review`;
 }
 
 export function getProductGitHubUrl(product: any): string | null {
@@ -126,5 +126,5 @@ export function getProductGitHubUrl(product: any): string | null {
     filePath = `src/data/products/${categorySlug}/${companySlug}.ts`;
   }
   
-  return `https://github.com/DLinRT-eu/dlinrteu-website/tree/main/${filePath}`;
+  return `https://github.com/DLinRT-eu/website/tree/main/${filePath}`;
 }

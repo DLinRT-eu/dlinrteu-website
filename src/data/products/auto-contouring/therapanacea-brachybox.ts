@@ -8,7 +8,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea-brachybox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/therapanacea-brachybox.ts",
     description: "AI-powered MR-based organ-at-risk delineation for gynaecological brachytherapy, published by Therapanacea as the MRI Brachy Pelvis model of the ART-Plan+ segmentation library (4 OARs: bladder, rectum, sigmoid, small bowel), contoured according to the EMBRACE / Pötter et al. 2018 (ESTRO) recommendations.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

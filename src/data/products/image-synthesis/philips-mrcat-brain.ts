@@ -9,7 +9,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1016/j.phro.2024.100589","title":"Clinical implementation of a commercial synthetic computed tomography solution for radiotherapy treatment of glioblastoma","authors":"Emin S et al.","journal":"Phys Imaging Radiat Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent single-centre clinical implementation report for glioblastoma MR-only planning.","vendorIndependent":true,"externalValidation":true},
       {"doi":"10.1002/acm2.14494","title":"Clinical validation of MR-generated synthetic CT by MRCAT for brain tumor radiotherapy","authors":"Yip TTY et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of dosimetric accuracy; technical-level endpoints.","vendorIndependent":true,"externalValidation":true},
       {"pmid":"39956751","title":"Evaluation of an MRI-only workflow using a commercial synthetic CT generator for brain and head-and-neck radiotherapy","authors":"Buschmann M et al.","journal":"Zeitschrift für Medizinische Physik","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Vendor-independent single-centre retrospective MR-only workflow evaluation (n=10) covering brain and head-and-neck sites with dose-calculation accuracy endpoints. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MRCAT evaluation, therefore unscored."}
+      {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true,"appliesToCategory":"Image Synthesis"}
     ],
     trainingData: {
         source: "FDA 510(k) summary K193109",
@@ -32,7 +32,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     company: "Philips",
     companyUrl: "https://www.philips.com/",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-brain.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/philips-mrcat-brain.ts",
     description: "AI-powered MR-only simulation solution that generates synthetic CT images from MR scans for radiation therapy planning of brain tumors, avoiding the need for a separate CT scan and improving workflow efficiency.",
     features: [
       "MR-only planning",
@@ -102,7 +102,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     releaseDate: "2020-01-20",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
-    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
+    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [
       {
@@ -127,7 +127,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark. Raised to E2 in the 2026-08-25 per-paper sweep: three independent clinical validations (Aljaafari 2025, Emin 2024, Yip 2025) constitute external validation.",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark. Raised to E2 in the 2026-08-25 per-paper sweep: three independent clinical validations (Aljaafari 2025, Emin 2024, Yip 2025) constitute external validation. 2026-08-25 Wave 5: E2 set by the MESCAL multi-centre benchmark (doi 10.1016/j.radonc.2026.111530); I2 set by Buschmann et al. 2026 (doi 10.1016/j.zemedi.2025.01.003), a complete clinical MR-only workflow. Law et al. Med Phys 2024 (10.1002/mp.16666) names MRCAT but does not state the anatomy, so it was left unrouted pending a full-text check.",
     clinicalImpact: "I2",
     clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results. Raised to I2 in the 2026-08-25 sweep: clinical implementation reports support an MR-only brain planning workflow.",
     adoptionReadiness: "R3",

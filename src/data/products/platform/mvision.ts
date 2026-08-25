@@ -8,7 +8,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/workspace/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/mvision.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/platform/mvision.ts",
     description: "Enterprise-grade AI integration platform for radiation oncology that provides unified access to multiple AI-powered clinical modules including image synthesis (Image+), deformable registration (Adapt+), and automated treatment planning (Dose+). Seamlessly integrates with existing clinical workflows through PACS, TPS, and OIS connections.",
     features: [
       "Unified platform for multiple AI modules",
