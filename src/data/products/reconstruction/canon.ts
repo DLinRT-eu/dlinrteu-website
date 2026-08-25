@@ -235,7 +235,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01.",
+    evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01. Lowered to E1 in the 2026-08-25 per-paper sweep: the single direct study (Akai 2023) is independent but single-centre.",
     clinicalImpactNotes: "Workflow improvement through up to ~50% reduction in MRI scan time with maintained or improved image quality (Akai 2023; vendor materials).",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",

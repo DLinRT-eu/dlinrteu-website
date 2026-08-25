@@ -126,9 +126,9 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark.",
+    evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark. Raised to E2 in the 2026-08-25 per-paper sweep: three independent clinical validations (Aljaafari 2025, Emin 2024, Yip 2025) constitute external validation.",
     clinicalImpact: "I2",
-    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results.",
+    clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results. Raised to I2 in the 2026-08-25 sweep: clinical implementation reports support an MR-only brain planning workflow.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
