@@ -89,10 +89,13 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     ],
     version: "2.0",
     releaseDate: "2022-10-20",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15",
     clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
+    keyPapers: [
+      {"pmid":"39956751","title":"Evaluation of an MRI-only workflow using a commercial synthetic CT generator for brain and head-and-neck radiotherapy","authors":"Buschmann M et al.","journal":"Zeitschrift für Medizinische Physik","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Vendor-independent single-centre retrospective evaluation (n=10) of the MRCAT MR-only workflow with dose-calculation accuracy endpoints; supports workflow-level clinical utility but not outcome endpoints. Verified against PubMed in the 2026-08-25 sweep.","vendorIndependent":true}
+    ],
     evidenceRigor: "E1",
     evidenceRigorNotes: "Independent peer-reviewed retrospective clinical workflow and dosimetric validation study (Buschmann et al. 2026, Z Med Phys, PMID 39956751, single-center, n=10). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 5.0, 6 hospitals × 85 patients): mean PTV dose difference 0.02 ± 0.27%, 99.7% voxels passing 2%/2 mm gamma and 97.9% passing the stricter 1%/1 mm criterion (body-outline matched). Vendor V&V does not by itself promote E (not vendor-independent), but materially extends multi-center technical evidence. Indirect-comparative context: Cusumano, Maspero et al. Radiother Oncol 2026;... MESCAL initiative benchmark dataset and acceptance levels for MRI-only RT commissioning (DOI 10.1016/j.radonc.2026.111530) — provides community acceptance levels relevant to any MR-only sCT workflow including MRCAT H&N, but does not directly evaluate MRCAT.",
     clinicalImpact: "I2",
