@@ -38,7 +38,7 @@ Before contributing, please review:
 - Clone your fork to your local machine.
 
 ```bash
-git clone https://github.com/DLinRT-eu/website.git
+git clone https://github.com/DLinRT-eu/dlinrteu-website.git
 ```
 
 ### 2. Create a Branch

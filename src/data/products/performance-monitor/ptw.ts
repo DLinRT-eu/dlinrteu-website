@@ -22,7 +22,7 @@ export const AIQUALIS: ProductDetails = {
     "Performance tracking"
   ],
   modality: ["RT Struct"],
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/ptw.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/ptw.ts",
   companyUrl: "https://www.ptwdosimetry.com",
   productUrl: "https://www.ptwdosimetry.com/en/products/aiqualis",
   regulatory: {

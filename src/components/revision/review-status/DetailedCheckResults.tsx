@@ -57,7 +57,7 @@ const DetailedCheckResults: React.FC<DetailedCheckResultsProps> = ({
           
           <div className="flex justify-end">
             <Button variant="outline" asChild>
-              <a href="https://github.com/DLinRT-eu/website/issues" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/DLinRT-eu/dlinrteu-website/issues" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4 mr-2" />
                 View All Issues
               </a>

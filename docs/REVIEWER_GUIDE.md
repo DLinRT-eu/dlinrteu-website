@@ -335,7 +335,7 @@ The fastest way for logged-in reviewers to fix product data directly on the site
 
 Ideal when you want to report a problem but prefer not to edit the data yourself.
 
-1. Go to <https://github.com/DLinRT-eu/website/issues/new>
+1. Go to <https://github.com/DLinRT-eu/dlinrteu-website/issues/new>
 2. Give the issue a descriptive title (e.g., *"Incorrect CE status for ProductX"*)
 3. In the description, include:
    - The **product name** and **company**
@@ -349,7 +349,7 @@ No DLinRT account is needed; a GitHub account is sufficient.
 
 For developers or contributors comfortable with code.
 
-1. **Fork** the repository: <https://github.com/DLinRT-eu/website>
+1. **Fork** the repository: <https://github.com/DLinRT-eu/dlinrteu-website>
 2. **Clone** your fork and create a feature branch
 3. **Edit** the relevant TypeScript product file in `src/data/products/[category]/`
 4. **Commit** with a clear message describing the change and its rationale

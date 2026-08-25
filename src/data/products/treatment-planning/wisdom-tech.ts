@@ -40,7 +40,7 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     company: "Wisdom Tech",
     companyUrl: "http://www.wisdom-tech.online/",
     productUrl: "http://www.wisdom-tech.online/view-15.html",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/wisdom-tech.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/wisdom-tech.ts",
     description: "AI-assisted treatment planning system integrating deep-learning auto-delineation, multi-modality image registration, Monte Carlo dose calculation, and DeepOPT inverse/multi-objective optimization with GPU acceleration.",
     features: ["AI auto-delineation", "Monte Carlo dose engine", "DeepOPT optimization", "GPU acceleration"],
     category: "Treatment Planning",

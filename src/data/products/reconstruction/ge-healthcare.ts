@@ -31,7 +31,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     category: "Reconstruction",
     companyUrl: "https://www.gehealthcare.com",
     productUrl: "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-healthcare.ts",
     description: "Deep learning-based MR image reconstruction technology that processes raw MR data to reduce noise and ringing/truncation artifacts, improve image sharpness, and support shorter MRI scan times on compatible GE MR systems.",
     features: [
       "Deep learning reconstruction",

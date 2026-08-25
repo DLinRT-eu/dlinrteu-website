@@ -33,7 +33,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/canon.jpg", 
     companyUrl: "https://global.medical.canon/",
     productUrl: "https://global.medical.canon/products/computed-tomography/aice",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/canon.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Trauma"],
@@ -248,7 +248,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-13",
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/canon.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
   {
     id: "canon-piqe",
@@ -279,7 +279,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/canon.jpg",
     companyUrl: "https://global.medical.canon/",
     productUrl: "https://global.medical.canon/products/magnetic-resonance/piqe",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/canon.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["MRI"],
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Abdominal pathologies"],

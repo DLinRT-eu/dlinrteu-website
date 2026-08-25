@@ -74,7 +74,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     company: "Spectronic Medical",
     companyUrl: "https://medical.spectronic.se/",
     productUrl: "https://medical.spectronic.se/page-2/page6/index.html",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/spectronic.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/spectronic.ts",
     description: "AI-based software solution that converts standard MR images to synthetic CT for MR-only radiotherapy planning, with integrated auto-segmentation capabilities.",
     features: [
       "MR-only workflow",

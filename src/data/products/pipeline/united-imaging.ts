@@ -8,7 +8,7 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://estro-united-imaging-healthcare-europe.framer.ai/",
     githubUrl:
-      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/united-imaging.ts",
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/united-imaging.ts",
     description:
       "Deep Learning Full-Field-of-View (Full-FOV) reconstruction announced for the uCT 610 Sim, an 87 cm ultra-wide-bore CT simulator presented at ESTRO 2026. Designed to provide artifact-suppressed, full-FOV images across the entire bore for radiotherapy simulation, including large patients and immobilisation devices. Labelled by the vendor as 'under development; not for sale or clinical use, not yet available in Europe.'",
     features: [

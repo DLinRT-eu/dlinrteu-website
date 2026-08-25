@@ -435,7 +435,7 @@ ${JSON.stringify(categorized, null, 2)}
             github_data: {
               repository: monthCommits.length > 0 && monthCommits[0].sourceRepo 
                 ? monthCommits[0].sourceRepo 
-                : 'DLinRT-eu/website',
+                : 'DLinRT-eu/dlinrteu-website',
               totalCommits: monthCommits.length,
               filteredOut: allCommits.filter(c => {
                 const d = new Date(c.commit.author.date);

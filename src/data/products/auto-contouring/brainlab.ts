@@ -51,7 +51,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     }
   ],
   modality: ["CT", "MRI"],
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/brainlab.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/brainlab.ts",
   companyUrl: "https://www.brainlab.com/",
   productUrl: "https://www.brainlab.com/radiosurgery-products/elements/",
   regulatory: {

@@ -32,7 +32,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     name: "ClariCT.AI",
     company: "ClariPi",
     category: "Image Enhancement",
-    githubUrl: "https://https://github.com/DLinRT-eu/website/blob/main/src/data/products/image-enhancement/claripi.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/blob/main/src/data/products/image-enhancement/claripi.ts",
     description: "AI-powered CT image denoising solution using deep learning to enhance low-dose CT scans while preserving anatomical details and natural textures.",
     certification: "CE Mark, FDA 510(k)",
     logoUrl: "/logos/claripi.jpg",
@@ -157,8 +157,8 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "FDA 510(k) K183460/K212074 plus nine peer-reviewed studies: five independent (Lee DH 2024 — prospective multicenter multinational, n=296; Park 2025; Dehdab 2025; Kazimierczak 2024; Kim C 2022) and four vendor-affiliated via a recurring SNU Bundang Hospital/ClariPi Research collaboration (Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026).",
     releaseDate: "2019-06-13",
-    lastUpdated: "2026-06-18",
-    lastRevised: "2026-06-18",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
   },
   {
@@ -169,7 +169,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     name: "ClariACE",
     company: "ClariPi",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/blob/main/src/data/products/image-enhancement/claripi.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/blob/main/src/data/products/image-enhancement/claripi.ts",
     description: "AI-powered iodine contrast enhancement solution for contrast-enhanced CT (CECT). Uses a pre-trained deep-learning model to selectively boost iodine contrast signal in CT images without amplifying noise, supporting reduced iodinated contrast agent dose while preserving diagnostic image quality.",
     certification: "MFDS",
     logoUrl: "/logos/claripi.jpg",
@@ -238,8 +238,8 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Korea MFDS approval plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed enhancement, single centre, Korea).",
     releaseDate: "2021",
-    lastUpdated: "2026-07-01",
-    lastRevised: "2026-07-01",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
   }
 ];

@@ -345,7 +345,7 @@ export default function EditApprovals() {
               GitHub access health check
             </CardTitle>
             <CardDescription>
-              Verify that GITHUB_TOKEN can create branches on DLinRT-eu/website before approving edits.
+              Verify that GITHUB_TOKEN can create branches on DLinRT-eu/dlinrteu-website before approving edits.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -387,7 +387,7 @@ export default function EditApprovals() {
                       <p className="font-semibold">How to fix</p>
                       <ol className="list-decimal pl-5 space-y-1">
                         <li>Open GitHub → Settings → Developer settings → <em>Fine-grained personal access tokens</em>.</li>
-                        <li>Create or edit a token scoped only to <code>DLinRT-eu/website</code>.</li>
+                        <li>Create or edit a token scoped only to <code>DLinRT-eu/dlinrteu-website</code>.</li>
                         <li>
                           Under <em>Repository permissions</em>, set:
                           <ul className="list-disc pl-5">

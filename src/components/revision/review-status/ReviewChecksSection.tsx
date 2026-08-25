@@ -30,7 +30,7 @@ const ReviewChecksSection: React.FC<ReviewChecksSectionProps> = ({ check }) => {
       `<!-- Add any additional information or context here -->`
     );
     
-    return `https://github.com/DLinRT-eu/website/issues/new?title=${issueTitle}&body=${issueBody}&labels=review`;
+    return `https://github.com/DLinRT-eu/dlinrteu-website/issues/new?title=${issueTitle}&body=${issueBody}&labels=review`;
   };
 
   return (
@@ -100,7 +100,7 @@ const ReviewChecksSection: React.FC<ReviewChecksSectionProps> = ({ check }) => {
               className="gap-1"
               asChild
             >
-              <a href={`https://github.com/DLinRT-eu/website/search?q=${encodeURIComponent(check.field)}`} target="_blank" rel="noopener noreferrer">
+              <a href={`https://github.com/DLinRT-eu/dlinrteu-website/search?q=${encodeURIComponent(check.field)}`} target="_blank" rel="noopener noreferrer">
                 <Code className="h-3.5 w-3.5" />
                 View Code References
               </a>

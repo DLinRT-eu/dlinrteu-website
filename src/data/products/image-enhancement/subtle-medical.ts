@@ -29,7 +29,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SubtleMR",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered solution for enhancing MRI images, allowing for faster scan times while maintaining or improving image quality through noise reduction and resolution enhancement.",
     features: ["Deep learning enhancement", "MRI specific", "Scan time reduction", "Noise reduction"],
     certification: "FDA Cleared",
@@ -147,8 +147,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Cloud-based deployment option processes images off-site on manufacturer servers, which may have data-governance implications for some institutions",
     ],
     clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
-    lastUpdated: "2026-06-18",
-    lastRevised: "2026-06-18",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025)"
   },
   {
@@ -176,7 +176,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SubtlePET",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered PET image enhancement technology that enables faster scan times or lower dose while maintaining diagnostic image quality across multiple radiotracers.",
     features: ["Deep learning enhancement", "PET specific", "Dose reduction", "Multi-tracer support"],
     certification: "FDA Cleared",
@@ -302,8 +302,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Nine peer-reviewed studies (one vendor-led multicenter trial; eight independent single/multi-site studies) across six countries and four radiotracers, plus FDA 510(k) clearances K182336 and K211964.",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-06-18",
-    lastRevised: "2026-06-18",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
@@ -325,7 +325,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SubtleHD(PET)",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "Next-generation AI-powered PET image enhancement and acceleration software. Supports all FDA-approved radiotracers (including theranostic agents beyond 18F-FDG), enables up to 75% faster PET imaging on existing PET/CT and PET/MR scanners, leverages anatomical CT data to improve reconstruction quality, and provides adjustable denoising and improved SUVmax quantitative accuracy.",
     features: ["Deep learning enhancement", "PET acceleration", "All FDA-approved radiotracers", "Adjustable denoising", "CT-guided reconstruction"],
     certification: "FDA Cleared",
@@ -400,8 +400,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
   {
@@ -423,7 +423,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "AiMIFY",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered solution for enhancing gadolinium-based contrast agent MRI images, improving contrast-to-noise ratio and lesion visibility in brain imaging.",
     features: ["Deep learning enhancement", "Contrast enhancement", "Brain MRI", "GBCA optimization"],
     certification: "FDA Cleared",
@@ -478,14 +478,14 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Distribution partners", "Bracco (EU distribution, launched ECR 2026)"]
     },
     keyPapers: [
-      {"doi":"10.3174/ajnr.A9591","pmid":"42595464","title":"Evaluation of an AI-powered tool in improving lesion visualization on standard-dose contrast-enhanced brain MRI: a retrospective, multicenter study","authors":"Gao Y et al.","journal":"AJNR American Journal of Neuroradiology","year":"2026","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Retrospective multicentre (3 hospitals, Wenzhou Medical University network) multireader study of 86 patients explicitly naming AiMIFY; blinded assessment by three neuroradiologists with quantitative CNR/LBR/CEP endpoints and significant subjective improvements. Vendor-independent — meets the multi-centre bar for E2; endpoints are image quality/lesion visualization (I2), with no demonstrated change in management or outcome. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
+      {"doi":"10.3174/ajnr.A9591","pmid":"42595464","title":"Evaluation of an AI-powered tool in improving lesion visualization on standard-dose contrast-enhanced brain MRI: a retrospective, multicenter study","authors":"Gao Y et al.","journal":"AJNR American Journal of Neuroradiology","year":"2026","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Retrospective multicentre (3 hospitals, Wenzhou Medical University network) multireader study of 86 patients explicitly naming AiMIFY; blinded assessment by three neuroradiologists with quantitative CNR/LBR/CEP endpoints and significant subjective improvements. Vendor-independent — meets the multi-centre bar for E2. Impact corrected I2 -> I1 on 2026-08-25: the endpoints are image-quality metrics (CNR, LBR, CEP), Likert image quality and reader preference, which the rubric places at I1 (technical/analytical validation); I2 requires workflow or pathway effects such as review time or throughput, which this study does not measure. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "I1",
     evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: upgraded E1 to E2 on the strength of the first peer-reviewed AiMIFY publication — Gao et al., AJNR 2026 (doi:10.3174/ajnr.A9591, PMID 42595464), a vendor-independent retrospective multicentre multireader study across three hospitals (n=86). FDA validation K240290. Bracco EU launch at ECR 2026. 14 ECR presentations. PubMed re-searched 2026-08-25.",
-    clinicalImpactNotes: "I2 (workflow / image quality): Gao 2026 reports significantly higher CNR, lesion-to-brain ratio and contrast-enhancement percentage plus improved border delineation and reader preference versus standard post-contrast images. No study yet demonstrates changed patient management (I3) or outcomes (I4). Potential gadolinium-dose reduction remains a manufacturer-stated goal, not a published finding.",
+    clinicalImpactNotes: "I1 (technical / analytical validation), corrected from I2 on 2026-08-25: Gao 2026 reports significantly higher CNR, lesion-to-brain ratio and contrast-enhancement percentage plus improved border delineation and reader preference versus standard post-contrast images. These are image-quality and reader-preference endpoints, which sit at I1 under the rubric; nothing yet measures workflow or pathway effects (I2), changed patient management (I3) or outcomes (I4). Potential gadolinium-dose reduction remains a manufacturer-stated goal, not a published finding. Evidence rigor is unchanged at E2 — the Gao study is explicitly retrospective, multicentre and multireader, so it clears the E2 bar.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
@@ -511,7 +511,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SubtleHD",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered general-purpose MRI enhancement software for noise reduction and image sharpness improvement across all body parts. Part of the Subtle-ELITE suite alongside SubtleSYNTH and SubtleALIGN.",
     features: ["Deep learning enhancement", "Noise reduction", "All body parts", "Image sharpness"],
     certification: "FDA Cleared",
@@ -598,7 +598,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SubtleHD(CT)",
     company: "Subtle Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered CT image enhancement software that reduces noise and improves low-contrast detectability across CT scanner generations, integrating into existing clinical workflows.",
     features: ["Deep learning enhancement", "CT specific", "Noise reduction", "Low contrast detectability"],
     certification: "FDA Cleared",

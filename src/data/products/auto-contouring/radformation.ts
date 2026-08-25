@@ -23,7 +23,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     company: "RadFormation",
     companyUrl: "https://www.radformation.com/",
     productUrl: "https://www.radformation.com/autocontour/autocontour",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/radformation.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/radformation.ts",
     description: "Unified AI-driven contouring platform (AutoContour + Limbus Contour) delivering fast, guideline-based contouring across CT, MR, and CBCT, with seamless Eclipse and DICOM-compatible TPS integration.",
     category: "Auto-Contouring",
     certification: "CE MDR & FDA 510(k)",

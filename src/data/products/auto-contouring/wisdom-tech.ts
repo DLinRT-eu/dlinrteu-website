@@ -14,7 +14,7 @@ export const DeepContour: ProductDetails = {
   website: "http://www.wisdom-tech.online/view-16.html",
   category: "Auto-Contouring",
   modality: ["CT"],
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
   companyUrl: "http://www.wisdom-tech.online/",
   productUrl: "http://www.wisdom-tech.online/view-16.html",
   regulatory: {

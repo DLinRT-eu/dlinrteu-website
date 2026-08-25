@@ -490,7 +490,7 @@ export default function ReviewerGuide() {
                 </ol>
                 <Button asChild size="sm" variant="outline" className="w-full">
                   <a
-                    href="https://github.com/DLinRT-eu/website/issues/new"
+                    href="https://github.com/DLinRT-eu/dlinrteu-website/issues/new"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -528,7 +528,7 @@ export default function ReviewerGuide() {
                 </ol>
                 <Button asChild size="sm" variant="outline" className="w-full">
                   <a
-                    href="https://github.com/DLinRT-eu/website"
+                    href="https://github.com/DLinRT-eu/dlinrteu-website"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -698,7 +698,7 @@ export default function ReviewerGuide() {
                 </Button>
                 <Button asChild variant="outline">
                   <a
-                    href="https://github.com/DLinRT-eu/website/issues/new"
+                    href="https://github.com/DLinRT-eu/dlinrteu-website/issues/new"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
