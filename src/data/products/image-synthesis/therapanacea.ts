@@ -118,14 +118,14 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-07-30",
     lastRevised: "2026-07-30",
     keyPapers: [
-      {"doi":"10.3389/fonc.2023.1245054","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J et al.","journal":"Frontiers in Oncology","year":"2023"},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026"}
+      {"doi":"10.3389/fonc.2023.1245054","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J et al.","journal":"Frontiers in Oncology","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centric evaluation across 8 institutions; technical pseudo-CT accuracy endpoints.","vendorIndependent":true,"multiCenter":true,"multiNational":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MR-Box evaluation, therefore unscored."}
     ],
     source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).",
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
-        evidenceRigor: "E1",
+        evidenceRigor: "E2",
         evidenceRigorNotes: "Vendor-assisted peer-reviewed multi-centric study (Frontiers in Oncology 2023, DOI 10.3389/fonc.2023.1245054) across 8 institutions for pelvic TrueFISP and brain pseudo-CT generation.",
         clinicalImpact: "I1",
       },
@@ -166,7 +166,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       "Importing data with missing required DICOM tags, incorrect Patient Position / Sex attributes, or corrupted volumes will cause import to fail or generate inappropriate output.",
       "Dose engine must be validated locally by the user before clinical use."
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",

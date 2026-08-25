@@ -4,6 +4,12 @@ import { ProductDetails } from "@/types/productDetails";
 export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-deep-resolve",
+    keyPapers: [
+      {"doi":"10.3174/ajnr.A9081","title":"Deep Resolve Boost in 2D MRI for neuroradiology: diagnostic gains and potential risks","authors":"Hakim A et al.","journal":"AJNR Am J Neuroradiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent single-centre clinical evaluation reporting diagnostic gains and acceleration, with documented risks.","vendorIndependent":true},
+      {"doi":"10.1097/RLI.0000000000001158","title":"Deep learning reconstruction combined with conventional acceleration improves image quality of 3T brain MRI","authors":"Wilpert C et al.","journal":"Invest Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre image-quality study.","vendorIndependent":true},
+      {"doi":"10.1007/s00330-024-10883-5","title":"Image quality of whole-body diffusion MR comparing deep-learning accelerated and conventional sequences","authors":"Ponsiglione A et al.","journal":"Eur Radiol","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent 50-patient image-quality comparison.","vendorIndependent":true},
+      {"doi":"10.1093/radadv/umaf029","title":"Deep learning MRI halves scan time across routine neuroradiologic examinations","authors":"Bash S et al.","journal":"Radiology Advances","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-site routine-practice evaluation showing halved acquisition time across neuroradiology protocols.","multiCenter":true}
+    ],
     trainingData: {
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K213693.pdf",
         source: "FDA 510(k) summary K213693",
@@ -75,9 +81,9 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in MAGNETOM MRI systems", "Software upgrade for compatible systems"]
     },
     
-    evidenceRigor: "E3",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "10+ PubMed-indexed studies. Key: Hakim et al. AJNR 2025 (Deep Resolve Boost neuroradiology evaluation), Wilpert et al. Invest Radiol 2025 (3T brain, DL+acceleration), Ponsiglione et al. Eur Radiol 2024 (whole-body diffusion, 50 patients), Estler et al. Radiol Med 2024 (back pain MRI, 60 patients). PubMed verified 2026-02-26.",
+    evidenceRigorNotes: "10+ PubMed-indexed studies. Key: Hakim et al. AJNR 2025 (Deep Resolve Boost neuroradiology evaluation), Wilpert et al. Invest Radiol 2025 (3T brain, DL+acceleration), Ponsiglione et al. Eur Radiol 2024 (whole-body diffusion, 50 patients), Estler et al. Radiol Med 2024 (back pain MRI, 60 patients). PubMed verified 2026-02-26. Set to E2 in the 2026-08-25 per-paper sweep: the strongest direct study is a multi-site routine-practice evaluation (Bash 2025); no prospective multicentre trial identified.",
     clinicalImpactNotes: "Workflow improvement through up to 70% faster brain imaging with maintained diagnostic quality across neuro, spine, MSK, and whole-body applications.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",

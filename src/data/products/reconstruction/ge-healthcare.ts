@@ -3,6 +3,13 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-air-recon-dl",
+    keyPapers: [
+      {"doi":"10.3390/diagnostics16020348","title":"Impact of deep learning-based reconstruction on the accuracy and precision of cardiac tissue characterization","authors":"Gorodezky M et al.","journal":"Diagnostics","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre quantitative accuracy study.","vendorIndependent":true},
+      {"doi":"10.1007/s00247-025-06313-3","title":"Deep learning reconstruction for improving image quality of pediatric abdomen MRI using a 3D T1 fast spoiled gradient echo acquisition","authors":"Zucker EJ et al.","journal":"Pediatr Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre paediatric image-quality study.","vendorIndependent":true},
+      {"doi":"10.1186/s13244-024-01825-2","title":"Comparison of image quality and lesion conspicuity between conventional and deep learning reconstruction in gadoxetic acid-enhanced liver MRI","authors":"Yoon JH et al.","journal":"Insights Imaging","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent clinical image-quality comparison.","vendorIndependent":true},
+      {"doi":"10.1148/ryai.230181","title":"Impact of deep learning image reconstruction methods on MRI throughput","authors":"Yang J et al.","journal":"Radiol Artif Intell","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Vendor-independent multi-scanner health-system study demonstrating throughput/workflow gains.","vendorIndependent":true,"multiCenter":true},
+      {"doi":"10.1007/s00330-025-11423-5","title":"The scientific evidence of commercial AI products for MRI acceleration: systematic review","authors":"Fransen SJ et al.","journal":"Eur Radiol","year":"2025","rationale":"Indirect-comparative multi-product systematic review; unscored."}
+    ],
     trainingData: {
         description: "The model is trained on a large dataset of raw MR k-space data to learn how to reduce noise and ringing/truncation artifacts during reconstruction.",
         demographics: "Adult and pediatric patients",
@@ -96,9 +103,9 @@ export const GE_PRODUCTS: ProductDetails[] = [
       ],
       deploymentScale: "At least 3.5 million patients scanned globally as of September 2022; available on the vast majority of GE HealthCare 1.5T, 3.0T, and 7.0T SIGNA MRI systems via MR 30 software platform"
     },
-    evidenceRigor: "E3",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent peer-reviewed studies and FDA summaries support improved SNR, image sharpness, and/or scan-time reduction feasibility across neuro, spine, liver, cardiac, and pediatric/body MRI applications. Evidence includes regulatory performance testing, clinical reader evaluations, external clinical studies, and real-world workflow/throughput evaluation. The previously listed Radiology Advances paper by Lyo et al. was removed from the product-specific evidence list because it primarily evaluated Siemens Deep Resolve rather than AIR Recon DL.",
+    evidenceRigorNotes: "Multiple independent peer-reviewed studies and FDA summaries support improved SNR, image sharpness, and/or scan-time reduction feasibility across neuro, spine, liver, cardiac, and pediatric/body MRI applications. Evidence includes regulatory performance testing, clinical reader evaluations, external clinical studies, and real-world workflow/throughput evaluation. The previously listed Radiology Advances paper by Lyo et al. was removed from the product-specific evidence list because it primarily evaluated Siemens Deep Resolve rather than AIR Recon DL. Set to E2 in the 2026-08-25 per-paper sweep: the highest-scoring direct study is the vendor-independent multi-scanner throughput analysis (Radiol Artif Intell 2024); other direct studies are single-centre.",
     clinicalImpactNotes: "Workflow impact is mainly shorter MRI acquisition times and improved image quality while maintaining diagnostic quality. Clinical benefit depends on protocol design, anatomy, scanner platform, sequence type, reconstruction strength, and local validation.",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from FDA 510(k) clearance, broad product availability, public CE-marking statements for selected configurations, and mature peer-reviewed evidence. Local commissioning, sequence-specific optimization, radiologist review, and quantitative workflow validation remain necessary.",

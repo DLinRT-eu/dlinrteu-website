@@ -4,6 +4,10 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-pelvis",
+    keyPapers: [
+      {"doi":"10.1016/j.phro.2018.09.002","title":"Feasibility of MRI-only rectum radiotherapy with a commercial synthetic CT generation solution","authors":"Maspero M et al.","journal":"Phys Imaging Radiat Oncol","year":"2018","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre feasibility and dosimetric accuracy study.","vendorIndependent":true},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MRCAT evaluation, therefore unscored."}
+    ],
     trainingData: {
         disclosureLevel: "minimal",
         description: "AI-based MR-only simulation platform using proprietary algorithms to generate synthetic CT images from MR scans. Training details are not explicitly disclosed in the regulatory documentation.",

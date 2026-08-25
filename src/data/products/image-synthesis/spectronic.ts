@@ -3,6 +3,13 @@ import { ProductDetails } from "@/types/productDetails";
 export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
   {
     id: "spectronic-mriplanner",
+    keyPapers: [
+      {"doi":"10.1016/j.ijrobp.2017.06.006","title":"MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images","authors":"Persson E et al.","journal":"Int J Radiat Oncol Biol Phys","year":"2017","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multicentre, multivendor validation in 170 patients supporting clinical MR-only prostate planning.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+      {"doi":"10.1186/s13014-021-01794-6","title":"Clinical validation of a commercially available deep learning software for synthetic CT generation for brain","authors":"Lerner M et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of brain sCT dosimetric and geometric accuracy.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2023.110052","title":"Deep learning MRI-only synthetic-CT generation for pelvis, brain and head and neck cancers","authors":"Bird D et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent multi-site evaluation across three anatomies; technical/dosimetric endpoints.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+      {"doi":"10.1186/s13014-025-02744-2","title":"Clinical implementation of deep learning-based synthetic CT for MRI-only VMAT in head and neck and pelvic cancer patients","authors":"Earwong P et al.","journal":"Radiat Oncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent clinical implementation of an MR-only VMAT workflow.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."}
+    ],
     trainingData: {
         source: "FDA 510(k) summary K211841",
         disclosureLevel: "minimal",
@@ -30,7 +37,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         },
         evidenceRigor: "E2",
         evidenceRigorNotes: "Multi-center, vendor-independent and external validation across multiple anatomies (Persson 2017, Lerner 2021, Bird 2024, Earwong 2025).",
-        clinicalImpact: "I1",
+        clinicalImpact: "I2",
         clinicalImpactNotes: "Technical/dosimetric efficacy demonstrated for MRI-only planning; no outcome-level benefit yet.",
       },
       "Auto-Contouring": {
@@ -167,7 +174,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     evidenceRigorNotes: "Evidence includes FDA 510(k) clearance, CE-marked status reported by the company, MR-OPERA multicenter/multivendor prostate validation directly evaluating Spectronic MRiPlanner (Persson 2017, 170 prostate patients at 4 centers — DOI verified 2026-06-15 as the original MR-OPERA paper and confirmed to evaluate the Spectronic sCT product), independent brain validation (Lerner et al. 2021), multi-site dosimetric validation across pelvis, brain and head & neck (Bird et al. 2024), and clinical implementation evidence in H&N and pelvic VMAT workflows (Earwong et al. 2025). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Evidence is strong for technical and dosimetric validation, but not outcome-level clinical benefit.",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric accuracy and workflow feasibility have been reported across prostate/pelvis, brain and head & neck synthetic-CT workflows. Published evidence supports MRI-only planning implementation and QA, but does not yet demonstrate improved patient outcomes.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE-marked status + FDA 510(k): moderate implementation effort — local MRI sequence validation, TPS/DICOM integration testing, OAR-contour scope checks and site-specific QA required before adoption.",
