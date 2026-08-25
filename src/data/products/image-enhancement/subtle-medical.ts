@@ -477,10 +477,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2024",
       distributionChannels: ["Direct sales", "Distribution partners", "Bracco (EU distribution, launched ECR 2026)"]
     },
-    evidenceRigor: "E1",
+    keyPapers: [
+      {"doi":"10.3174/ajnr.A9591","pmid":"42595464","title":"Evaluation of an AI-powered tool in improving lesion visualization on standard-dose contrast-enhanced brain MRI: a retrospective, multicenter study","authors":"Gao Y et al.","journal":"AJNR American Journal of Neuroradiology","year":"2026","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Retrospective multicentre (3 hospitals, Wenzhou Medical University network) multireader study of 86 patients explicitly naming AiMIFY; blinded assessment by three neuroradiologists with quantitative CNR/LBR/CEP endpoints and significant subjective improvements. Vendor-independent — meets the multi-centre bar for E2; endpoints are image quality/lesion visualization (I2), with no demonstrated change in management or outcome. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
+    ],
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA validation K240290. Bracco EU launch at ECR 2026. 14 ECR presentations. PubMed searched 2026-03-08.",
-    clinicalImpactNotes: "Workflow improvement through enhanced contrast-to-noise ratio in brain MRI, potentially reducing gadolinium dose.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: upgraded E1 to E2 on the strength of the first peer-reviewed AiMIFY publication — Gao et al., AJNR 2026 (doi:10.3174/ajnr.A9591, PMID 42595464), a vendor-independent retrospective multicentre multireader study across three hospitals (n=86). FDA validation K240290. Bracco EU launch at ECR 2026. 14 ECR presentations. PubMed re-searched 2026-08-25.",
+    clinicalImpactNotes: "I2 (workflow / image quality): Gao 2026 reports significantly higher CNR, lesion-to-brain ratio and contrast-enhancement percentage plus improved border delineation and reader preference versus standard post-contrast images. No study yet demonstrates changed patient management (I3) or outcomes (I4). Potential gadolinium-dose reduction remains a manufacturer-stated goal, not a published finding.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
@@ -563,10 +566,13 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA validation K243250 only. Very new product (Feb 2025), no independent publications.",
-    clinicalImpactNotes: "No independently demonstrated clinical impact yet.",
+    keyPapers: [
+      {"doi":"10.1002/jmri.70507","pmid":"42593101","title":"Deep learning-based enhancement of already diagnostic-quality MRI for Alzheimer's disease classification: effects on model performance and training data requirements","authors":"Zhang Z et al.","journal":"Journal of Magnetic Resonance Imaging","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single retrospective cohort study explicitly naming SubtleHD; endpoint is downstream classification-model performance on enhanced images, i.e. technical image-quality utility rather than a clinical workflow or decision endpoint. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true}
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: first SubtleHD-naming peer-reviewed publication found (Zhang et al., JMRI 2026, doi:10.1002/jmri.70507, PMID 42593101), single-centre retrospective — moves the product from E0 to E1. FDA validation K243250.",
+    clinicalImpactNotes: "I1 (technical efficacy): the only published study measures the effect of SubtleHD enhancement on a downstream classification model, not on clinical workflow, decisions or outcomes.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",

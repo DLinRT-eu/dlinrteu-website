@@ -80,8 +80,8 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     },
     version: "VB80",
     releaseDate: "2024-09-20",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
     evidence: [
       {
@@ -96,10 +96,10 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         relationship: "Shares the DI2IN OAR contouring engine with AI-Rad Companion Organs RT. Literature evaluating 'Siemens syngo.via' contouring (Lin/Fan JACMP 2025) directly applies to this product; Rayn et al. J Cancer Res Ther 2024 evaluates the same underlying algorithm under the AI-Rad Companion name."
       }
     ],
-    evidenceRigor: "E1",
-    evidenceRigorNotes: "Published clinical studies on syngo.via RT synthetic CT referenced in peer-reviewed literature; single-center validations available. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation.",
-    clinicalImpact: "I1",
-    clinicalImpactNotes: "Technical efficacy demonstrated in clinical studies for brain and pelvic synthetic CT generation.",
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: PubMed was re-searched for publications naming syngo.via RT Image Suite synthetic CT and none were found. The previous E1 rested on an uncited claim that \"published clinical studies\" exist; without a verifiable product-naming publication the score is corrected to E0 (vendor-validated only). Re-instate E1 or higher only when a specific citation can be verified. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation.",
+    clinicalImpact: "I0",
+    clinicalImpactNotes: "I0 after the 2026-08-25 sweep: no verifiable published evaluation of this product, so the previously claimed technical efficacy for brain and pelvic synthetic CT cannot be substantiated.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
   }

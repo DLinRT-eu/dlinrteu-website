@@ -80,7 +80,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Platform product (2025). No independent peer-reviewed publications. Vendor-reported InstaPlan study (iRT + RayStation, n=20) reports simulation-to-plan time reduced from 7 days to 7 minutes (GE HealthCare ESTRO 2026 press release). Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform product (2025). No independent peer-reviewed publications. Vendor-reported InstaPlan study (iRT + RayStation, n=20) reports simulation-to-plan time reduced from 7 days to 7 minutes (GE HealthCare ESTRO 2026 press release). Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08.",
     clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions. Marengo CIMS case study reports 25% reduction in treatment planning times; vendor-reported InstaPlan data report simulation-to-plan time reduced from 7 days to 7 minutes (n=20).",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",

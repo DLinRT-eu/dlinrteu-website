@@ -85,7 +85,7 @@ export const PrecisePosition: ProductDetails = {
   evidenceRigor: "E0",
   clinicalImpact: "I1",
   evidenceRigorNotes:
-    "E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514.",
+    "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514.",
   clinicalImpactNotes:
     "I1 (Technical performance / workflow claim, vendor-reported): Philips reports improved vertical positioning accuracy and reduced setup time; no independent evidence of changed treatment management (I3) or patient outcomes (I4).",
   adoptionReadiness: "R3",

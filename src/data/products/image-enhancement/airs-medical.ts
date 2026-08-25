@@ -105,19 +105,24 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
         link: "https://www.prnewswire.com/news-releases/airs-medicals-swiftmr-receives-fda-clearance-to-work-in-conjunction-with-oem-deep-learning-reconstruction-solutions-302742387.html"
       }
     ],
-    evidenceRigor: "E2",
+    keyPapers: [
+      {"doi":"10.1038/s41598-026-60802-5","pmid":"42420358","title":"Leveraging a vendor-neutral deep learning reconstruction algorithm to reduce scan time and enhance image quality in T2-weighted liver MRI","authors":"Jeong B et al.","journal":"Scientific Reports","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre retrospective reader study naming SwiftMR; shows scan-time reduction with preserved/improved image quality — workflow-level impact. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true},
+      {"doi":"10.1016/j.forsciint.2026.112973","pmid":"42019274","title":"Signal-to-noise ratio improvement in postmortem MRI using deep learning reconstruction (SwiftMR)","authors":"Hyodoh H et al.","journal":"Forensic Science International","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre quantitative SNR study explicitly naming SwiftMR; technical image-quality endpoint only, non-clinical (postmortem) setting. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true},
+      {"doi":"10.1007/s00330-025-11423-5","title":"The scientific evidence of commercial AI products for MRI acceleration: systematic review","authors":"Fransen SJ et al.","journal":"European Radiology","year":"2025","rationale":"Indirect-comparative systematic review covering 14 commercial products including SwiftMR; carries no per-product E/I level under the rubric.","vendorIndependent":true}
+    ],
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "FDA 510(k) K230854 + OEM-DL expansion (Apr 2026). Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SwiftMR among 14 products with peer-reviewed noise-reduction articles). Clinical white paper: 184 exams, 18 radiologists. Two previously cited DOIs (Yoo et al. 10.1007/s00330-023-09679-2; Lee et al. 10.1038/s41598-023-44471-8) were removed on 2026-06-15: both return DOI-Not-Found and could not be verified to specific SwiftMR papers without a confirmed alternative DOI. PubMed re-searched 2026-06-15.",
-    clinicalImpactNotes: "Workflow improvement supported by vendor white paper and indirect-comparative systematic review; primary prospective SwiftMR scan-time studies pending DOI verification before re-citation.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: two verified SwiftMR-naming primary publications were added (Jeong 2026 Sci Rep doi:10.1038/s41598-026-60802-5; Hyodoh 2026 Forensic Sci Int doi:10.1016/j.forsciint.2026.112973), both single-centre. Under per-paper scoring the maximum rigor is E1, so the product-level score moves from E2 to E1: the previous E2 rested on a vendor white paper and an indirect-comparative systematic review, neither of which carries a level. FDA 510(k) K230854 + OEM-DL expansion (Apr 2026). Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SwiftMR among 14 products with peer-reviewed noise-reduction articles). Clinical white paper: 184 exams, 18 radiologists. Two previously cited DOIs (Yoo et al. 10.1007/s00330-023-09679-2; Lee et al. 10.1038/s41598-023-44471-8) were removed on 2026-06-15: both return DOI-Not-Found and could not be verified to specific SwiftMR papers without a confirmed alternative DOI. PubMed re-searched 2026-06-15.",
+    clinicalImpactNotes: "I2 retained — Jeong 2026 demonstrates scan-time reduction with preserved image quality (workflow level). Workflow improvement supported by vendor white paper and indirect-comparative systematic review; primary prospective SwiftMR scan-time studies pending DOI verification before re-citation.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "R3 retained after the E2→E1 rescoring (CE + FDA cleared, widely deployed). Derived from + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR. Direct primary-evidence DOIs require re-verification before re-citation.",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-08-25",
     lastRevised: "2026-06-15",
     source: "FDA 510(k) database, company website, PubMed"
   }
