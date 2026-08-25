@@ -12,12 +12,17 @@ export const uRTAutoContouring: ProductDetails = {
       "Integrated with uRT-linac 506c"
     ]
   },
-  source: "Vendor press release (ESTRO 2026) and company website",
+  source: "Vendor press release (ESTRO 2026) and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "United Imaging",
   logoUrl: "/logos/unitedimaging.png",
   version: "506c",
   category: "Auto-Contouring",
   evidence: [
+    {
+      type: "Indirect-Comparative",
+      description: "Med Phys 2025 risk assessment of the all-in-one CT-linac workflow (PMID 39794280). Covers the integrated device, not the auto-contouring module specifically.",
+      link: "https://doi.org/10.1002/mp.17620"
+    },
     {
       link: "https://www.prnewswire.com/news-releases/united-imaging-unveils-its-full-radiotherapy-portfolio-at-estro-2026-highlighting-the-ce-marked-urt-linac-506c-302773402.html",
       type: "Vendor Press Release",
@@ -83,8 +88,8 @@ export const uRTAutoContouring: ProductDetails = {
     "Used in the uCT-ART online adaptive workflow (~15 min adaptive planning)",
     "Tightly integrated with uRT-linac 506c imaging, planning and QA"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Integrated component of the uRT ecosystem; not marketed as a standalone product",
     "No model card, training-data description or standalone intended-use document has been published by the vendor",

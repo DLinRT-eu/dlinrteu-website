@@ -3,6 +3,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
   {
     id: "medlever-assistant-pipeline",
+    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored.",
     name: "MedLever Assistant",
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
@@ -40,12 +41,13 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
       intendedUseStatement:
         "\"Coming Soon.\" Pre-market workflow assistant; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
     },
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website - listed as 'Coming Soon'"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
     id: "medlever-copilot-pipeline",
+    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored.",
     name: "MedLever Copilot",
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
@@ -83,8 +85,8 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
       intendedUseStatement:
         "\"Coming Soon.\" Pre-market clinical decision support copilot; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
     },
-    lastUpdated: "2026-03-08",
-    lastRevised: "2026-05-30",
-    source: "Company website - listed as 'Coming Soon'"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

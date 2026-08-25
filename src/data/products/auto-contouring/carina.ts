@@ -68,7 +68,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2025-06-10",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-08-25",
     supportedStructures: [
       // ========================================
       // HEAD & NECK MODEL - Approved Structures
@@ -236,10 +236,11 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     ],
     keyPapers: [
     {"doi":"10.1002/mp.15525","title":"Deep-learning contouring on CT for RT planning","authors":"Duan J et al.","journal":"Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre technical validation of contour accuracy."},
-    {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Follow-up single-centre evaluation reporting editing effort."}
+    {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Follow-up single-centre evaluation reporting editing effort."},
+      {"doi":"10.3389/fonc.2025.1603593","pmid":"41127020","title":"Evaluating the impact of different deface algorithms on deep learning segmentation software","authors":"Not stated","journal":"Frontiers in Oncology","year":"2025","link":"https://doi.org/10.3389/fonc.2025.1603593","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Robustness of the commercial segmentation software to de-identification defacing.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
-    lastRevised: "2026-07-15",
-    source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E1",
     evidenceRigorNotes: "Only single-centre vendor-affiliated studies (Duan 2022, 2023). Sufficient for E1.",
