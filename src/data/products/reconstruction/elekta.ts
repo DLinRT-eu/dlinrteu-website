@@ -120,7 +120,7 @@ export const IRISEvo: ProductDetails = {
   clinicalEvidence: "Vendor materials describe improved target delineation and image quality with Iris-enhanced CBCT; no independent peer-reviewed validation available yet.",
   adoptionReadiness: "R3",
   anatomicalLocation: ["Pelvis"],
-  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01). Wave 5B: three Elekta iterative-CBCT candidates (10.1177/15330338211067312, 10.1016/j.ejmp.2021.11.004, 10.1016/j.ejmp.2021.05.027) require full-text confirmation that IRIS is the evaluated algorithm before scoring.",
+  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01). Wave 5B open question RESOLVED 2026-08-25 — EXCLUDED: the three iterative-CBCT candidates (10.1177/15330338211067312, 10.1016/j.ejmp.2021.11.004, 10.1016/j.ejmp.2021.05.027) all come from one centre (Osaka International Cancer Institute) and recalculate dose with AAA and Acuros XB, i.e. a Varian Eclipse environment; the 'iCBCT' evaluated is Varian's iterative reconstruction, not Elekta IRIS. Neither vendor is named in the abstracts, so they cannot be attributed to IRIS Evo. E0 stands.",
   clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance and adaptive workflows (vendor materials).",
   evidenceMultiCenter: false,
   evidenceProspective: false,
