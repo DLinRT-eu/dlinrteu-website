@@ -95,7 +95,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     releaseDate: "2022-09-01",
     evidenceRigor: "E2",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) K250427 performance summary plus one peer-reviewed external validation (Akdemir et al. 2025) showing variable performance. No further independent literature — E1.",
+    evidenceRigorNotes: "FDA 510(k) K250427 performance summary plus one peer-reviewed external validation (Akdemir et al. 2025) showing variable performance. No further independent literature — E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Technical feasibility demonstrated; external validation shows variable performance (lower sensitivity for small lesions) and high revision rates, indicating limited clinical impact without prospective outcome data.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -104,12 +104,12 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-08-25",
     keyPapers: [
     {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent external validation cohort; geometric detection/segmentation endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-25",
     companyRevisionDate: "",
-    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports"
+    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

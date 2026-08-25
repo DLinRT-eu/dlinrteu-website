@@ -3,6 +3,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_HEALTHCARE_PIPELINE_PRODUCTS: ProductDetails[] = [
 {
 id: "ge-irt-theranostics-pipeline",
+evidenceRigorNotes: "2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
 name: "iRT for Theranostics",
 company: "GE Healthcare",
 companyUrl: "https://www.gehealthcare.com/",
@@ -45,9 +46,9 @@ regulatory: {
 intendedUseStatement:
 "\"Technology in development. Not for sale. Not cleared or approved by the U.S. FDA or any global regulator for commercial availability.\" (Source: GE HealthCare ESTRO 2026 press release, 12 May 2026.)",
 },
-lastUpdated: "2026-05-14",
-lastRevised: "2026-06-10",
+lastUpdated: "2026-08-25",
+lastRevised: "2026-08-25",
 source:
-"GE HealthCare ESTRO 2026 press release (12 May 2026): explicitly described as 'Technology in development. Not for sale. Not cleared or approved by the U.S. FDA or any global regulator for commercial availability.' Additional context from GE HealthCare ASTRO 2025 press release: iRT for theranostics is described as integrating with EMRs and OIS and guiding clinicians through patient intake, patient assessment, scheduling, medication dosing, dosimetry, and clinical reviews. Evidence classification: E0 / I0 for iRT for Theranostics specifically, because no public regulatory clearance, peer-reviewed validation, or clinical outcome evidence was identified for this development-stage module.",
+"GE HealthCare ESTRO 2026 press release (12 May 2026): explicitly described as 'Technology in development. Not for sale. Not cleared or approved by the U.S. FDA or any global regulator for commercial availability.' Additional context from GE HealthCare ASTRO 2025 press release: iRT for theranostics is described as integrating with EMRs and OIS and guiding clinicians through patient intake, patient assessment, scheduling, medication dosing, dosimetry, and clinical reviews. Evidence classification: E0 / I0 for iRT for Theranostics specifically, because no public regulatory clearance, peer-reviewed validation, or clinical outcome evidence was identified for this development-stage module.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
 },
 ];

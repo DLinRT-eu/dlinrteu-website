@@ -104,13 +104,13 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA K242925 clearance documentation only. No independent peer-reviewed publications identified (web-searched 2026-06-01).",
+    evidenceRigorNotes: "FDA K242925 clearance documentation only. No independent peer-reviewed publications identified (web-searched 2026-06-01). 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Provides automated MRI-based OAR contouring within GE imaging ecosystem and the iRT MR Direct workflow. No published outcome data.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module. releaseDate proxied from FDA decision date (2026-06-01)."
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K242925), GE HealthCare ESTRO 2025/2026 and ASTRO 2025 press releases. Vendor does not publicly publish a numeric version for this module. releaseDate proxied from FDA decision date (2026-06-01).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

@@ -372,7 +372,7 @@ export const TumorBox: ProductDetails = {
     relationship: "Module"
   },
   evidenceRigor: "E0",
-  evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1.",
+  evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpact: "I0",
   clinicalImpactNotes: "No independently published dosimetric, workflow or outcome data for AI tumour segmentation with this module.",
   adoptionReadiness: "R2",
@@ -404,9 +404,9 @@ export const TumorBox: ProductDetails = {
   certification: "CE & FDA",
   version: "3.2.0",
   releaseDate: "2025-12-23",
-  lastUpdated: "2026-07-30",
-  lastRevised: "2026-07-30",
-  source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23)."
+  lastUpdated: "2026-08-25",
+  lastRevised: "2026-08-25",
+  source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
 };
 
 export const THERAPANACEA_PRODUCTS: ProductDetails[] = [Annotate, TumorBox];

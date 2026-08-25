@@ -41,7 +41,7 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Pre-market announcement at ESTRO 2026 (microsite). No model card, training-data description, peer-reviewed validation or regulatory clearance available.",
+      "Pre-market announcement at ESTRO 2026 (microsite). No model card, training-data description, peer-reviewed validation or regulatory clearance available. 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes:
       "No clinical evidence; pre-market technology disclosure only.",
     adoptionReadiness: "R0",
@@ -56,9 +56,9 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
       intendedUseStatement:
         "\"Under development; not for sale or clinical use, not yet available in Europe.\" (Source: United Imaging ESTRO 2026 microsite, https://estro-united-imaging-healthcare-europe.framer.ai/, retrieved 19 May 2026.)",
     },
-    lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source:
-      "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'",
+      "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   },
 ];

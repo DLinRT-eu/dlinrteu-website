@@ -96,7 +96,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Regulatory clearance (FDA K253091) and CE class IIb coverage only. No peer-reviewed publication naming SmartPlan identified as of 2026-07-30; vendor material references conference abstracts and testimonials, which do not qualify for E1.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Regulatory clearance (FDA K253091) and CE class IIb coverage only. No peer-reviewed publication naming SmartPlan identified as of 2026-07-30; vendor material references conference abstracts and testimonials, which do not qualify for E1. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Manufacturer and clinical-user testimonials claim one-click plan generation in minutes with reduced planner variability for prostate; no independently published dosimetric or workflow outcome data located.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE/FDA: automatic planning changes a core clinical process, so local commissioning, plan-quality benchmarking against institutional standards and physicist sign-off workflows are required before routine use.",
@@ -130,8 +130,8 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     ],
     version: "3.2.0",
     releaseDate: "2025-12-23",
-    lastUpdated: "2026-07-30",
-    lastRevised: "2026-07-30",
-    source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30)."
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

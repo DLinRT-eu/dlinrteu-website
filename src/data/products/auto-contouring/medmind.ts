@@ -109,7 +109,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Zhu 2025 feasibility plus one multi-vendor comparison; sparse independent literature — downgraded from E2 to E1.",
+    evidenceRigorNotes: "Zhu 2025 feasibility plus one multi-vendor comparison; sparse independent literature — downgraded from E2 to E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -119,7 +119,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidenceMultiNational: false,
     releaseDate: "2022-03-25",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-08-25",
     evidenceScoreOverride: {
       impact: "I2",
       reason: "Multicentre blinded randomised CTV validation studies listed under evidence (Front Oncol 2021, Radiat Oncol 2023) report clinically viable contours in 96-100% of cases and reduced delineation workload, supporting workflow-level impact beyond the single scored paper.",
@@ -129,7 +129,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"doi":"10.1002/acm2.14350","title":"RT-Mind-AI feasibility evaluation","authors":"Zhu J et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre feasibility and accuracy evaluation."}
   ],
-    lastRevised: "2026-07-15",
-    source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01)."
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

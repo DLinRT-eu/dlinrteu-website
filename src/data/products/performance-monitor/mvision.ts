@@ -69,12 +69,12 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-08-15",
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA visualization tool. No peer-reviewed publications. MDR exempt.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA visualization tool. No peer-reviewed publications. MDR exempt. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "QA/monitoring tool for comparing AI-generated and manual contours.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
-    lastUpdated: "2026-02-23",
-    lastRevised: "2026-05-30",
-    source: "MVision AI official website, regulatory classification based on product function"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "MVision AI official website, regulatory classification based on product function; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

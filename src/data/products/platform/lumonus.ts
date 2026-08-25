@@ -111,7 +111,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available.",
+      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes:
       "Vendor-claimed workflow and planning-efficiency benefits; no independent clinical-impact study identified.",
     adoptionReadiness: "R2",
@@ -143,8 +143,8 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
         clinicalImpact: "I0",
       },
     },
-    lastUpdated: "2026-07-19",
-    lastRevised: "2026-07-19",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     evidence: [
       {
         type: "Vendor product page",
@@ -182,7 +182,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Outputs are assistive and require clinician review, editing and approval before any clinical use.",
     ],
     source:
-      "Lumonus company website (product and Dosimetry pages, retrieved 2026-07-19), Rook QS regulatory case study (retrieved 2026-07-19), PR Newswire MSK collaboration announcement (April 2026), Lumonus/Aviron Series B blog post (2026).",
+      "Lumonus company website (product and Dosimetry pages, retrieved 2026-07-19), Rook QS regulatory case study (retrieved 2026-07-19), PR Newswire MSK collaboration announcement (April 2026), Lumonus/Aviron Series B blog post (2026).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence:
       "No peer-reviewed clinical validation identified. MSK Cancer Center collaboration announced April 2026 — non-peer-reviewed at time of listing.",
   },

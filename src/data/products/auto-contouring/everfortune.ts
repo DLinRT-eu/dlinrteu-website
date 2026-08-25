@@ -78,7 +78,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2022-04-28",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-08-25",
     supersededBy: "everfortune-seg-pro-v3",
     supportedStructures: [
       // Head & Neck Structures - OARs (17 confirmed per FDA clearance)
@@ -108,11 +108,11 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26.",
+    evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-06-15",
+    lastRevised: "2026-08-25",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -143,7 +143,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Performance may vary with CT acquisition protocols and DICOM routing/workflow configuration",
       "This version has been superseded by Seg Pro V3 with expanded multi-region support"
     ],
-    source: "FDA 510(k) database (K220264), company official sources"
+    source: "FDA 510(k) database (K220264), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
     id: "everfortune-seg-pro-v3",
@@ -232,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-08-25",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -366,7 +366,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed literature identified as of 2026-07-14. FDA K251306 (Jan 2026) regulatory clearance only.",
+    evidenceRigorNotes: "No independent peer-reviewed literature identified as of 2026-07-14. FDA K251306 (Jan 2026) regulatory clearance only. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "No clinical impact data published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
@@ -375,7 +375,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-25",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -418,6 +418,6 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Performance may vary with imaging protocols and DICOM configurations",
       "102 structures verified from CMUH source; company claims 182 total - additional models may exist"
     ],
-    source: "FDA 510(k) database (K251306), CMUH Digital Imaging documentation, company announcement"
+    source: "FDA 510(k) database (K251306), CMUH Digital Imaging documentation, company announcement; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

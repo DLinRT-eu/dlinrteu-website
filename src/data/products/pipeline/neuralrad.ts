@@ -61,7 +61,7 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Pre-market product. No peer-reviewed validation identified at time of listing (2026-05-23).",
+      "Pre-market product. No peer-reviewed validation identified at time of listing (2026-05-23). 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "No clinical impact data available.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes:
@@ -71,14 +71,14 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-05-23",
-    lastRevised: "2026-05-23",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     limitations: [
       "Pre-market — regulatory clearance pending; not available for clinical use",
       "No independent validation publications identified",
       "Brain metastases only; other intracranial pathologies not supported"
     ],
     source:
-      "NeuralRad vendor website (https://www.neuralrad.com/, retrieved 2026-05-23)."
+      "NeuralRad vendor website (https://www.neuralrad.com/, retrieved 2026-05-23).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

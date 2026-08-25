@@ -7,7 +7,7 @@ export const DVTARGET: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K202928), company official sources",
+  source: "FDA 510(k) database (K202928), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "Hura Imaging",
   logoUrl: "/logos/huraimaging.png",
   version: "2.5",
@@ -50,8 +50,8 @@ export const DVTARGET: ProductDetails = {
     "User-friendly interface with manual correction tools",
     "Fully automated organ segmentation"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Only intended for normal organ contouring; not validated for tumor or clinical target volume (CTV) contouring",
     "FDA clearance is for CT images only; MRI use may not be FDA-cleared",
@@ -84,7 +84,7 @@ export const DVTARGET: ProductDetails = {
     "Breast",
     "Pelvis"
   ],
-  evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-06-15.",
+  evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-06-15. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-06-15.",
   supportedStructures: [
     "Brain: Brain",

@@ -89,7 +89,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "No independent peer-reviewed studies identified as of 2026-07-14. FDA K231855 (Feb 2024) regulatory clearance only.",
+    evidenceRigorNotes: "No independent peer-reviewed studies identified as of 2026-07-14. FDA K231855 (Feb 2024) regulatory clearance only. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Time-saving for OAR contouring; awaiting independent multi-center clinical validation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -122,8 +122,8 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K231855"
     },
     releaseDate: "2024-02-13",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-07-15",
-    source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2024-02-13)"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2024-02-13); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];
