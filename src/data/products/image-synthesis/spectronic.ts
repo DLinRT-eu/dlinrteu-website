@@ -3,8 +3,6 @@ import { ProductDetails } from "@/types/productDetails";
 export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
   {
     id: "spectronic-mriplanner",
-    evidenceExternalValidation: true,
-    evidenceProspective: true,
     keyPapers: [
       {"doi":"10.1016/j.ijrobp.2017.06.006","title":"MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images","authors":"Persson E et al.","journal":"Int J Radiat Oncol Biol Phys","year":"2017","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multicentre, multivendor validation in 170 patients supporting clinical MR-only prostate planning.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
       {"doi":"10.1186/s13014-021-01794-6","title":"Clinical validation of a commercially available deep learning software for synthetic CT generation for brain","authors":"Lerner M et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of brain sCT dosimetric and geometric accuracy.","vendorIndependent":true,"externalValidation":true},
@@ -190,6 +188,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
+    evidenceProspective: true,
     evidenceExternalValidation: true
   }
 ];
