@@ -104,7 +104,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified.",
+      "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified.",
     clinicalImpactNotes: "No independent clinical impact data available at time of listing.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
