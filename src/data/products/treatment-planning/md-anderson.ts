@@ -83,10 +83,17 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     },
     version: "Latest",
     releaseDate: "2024-01-01",
-    evidenceRigor: "E3",
-    clinicalImpact: "I4",
-    evidenceRigorNotes: "Netherton et al. JCO GO 2023 (direct) and Court et al. JCO GO 2024 (direct, 16 institutions / 6 countries, >90% plan acceptability) confirmed via abstract verification. Kavuma 2025 and Sackett 2025 RapidPlan papers re-evaluated 2026-06-15: Sackett 2025 evaluates Varian RapidPlan v15.6 in Eclipse and does not mention RPA — removed. Kavuma 2025 evaluates RapidPlan KBP in LMICs without RPA attribution — retained as indirect-comparative only. Lloyd 2026 remains pending full-text verification. First patient treated clinically in South Africa in 2024.",
-    clinicalImpactNotes: "Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Actively deployed in South Africa since 2024. Validated across head and neck, cervical, breast, and brain cancers with >90% plan acceptability across 16 institutions in 6 countries (Court 2024).",
+    keyPapers: [
+      {"doi":"10.1200/GO.22.00431","title":"Addressing the Global Expertise Gap in Radiation Oncology: The Radiation Planning Assistant","authors":"Netherton TJ et al.","journal":"JCO Global Oncology","year":"2023","evidenceRigor":"E1","clinicalImpact":"I5","rationale":"Developer-authored report of the RPA service and its deployment model for low- and middle-income countries; access-to-care framing, single-developer origin.","vendorIndependent":false},
+      {"doi":"10.1200/GO.23.00376","title":"Artificial Intelligence-Based Radiotherapy Contouring and Planning to Improve Global Access to Cancer Care","authors":"Court LE et al.","journal":"JCO Global Oncology","year":"2024","evidenceRigor":"E2","clinicalImpact":"I5","rationale":"Multi-institutional evaluation across 16 institutions in 6 countries with >90% plan acceptability, framed around access to radiotherapy in resource-limited settings.","vendorIndependent":false,"multiCenter":true,"multiNational":true,"externalValidation":true},
+      {"doi":"10.1002/mp.17588","title":"An automated treatment planning portfolio for whole breast radiotherapy","authors":"Baroudi H et al.","journal":"Medical Physics","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"End-to-end automated breast planning portfolio evaluated with collaborating centres in Argentina and Switzerland; dosimetric and workflow endpoints.","vendorIndependent":false,"multiCenter":true,"multiNational":true,"externalValidation":true},
+      {"doi":"10.3332/ecancer.2025.1988","title":"Feasibility and impact of knowledge-based automated radiotherapy treatment planning in low- and middle-income countries","authors":"Kavuma A et al.","journal":"ecancermedicalscience","year":"2025","rationale":"Indirect-comparative: evaluates Varian RapidPlan KBP in LMICs without RPA attribution, so it carries no E/I level for this product."},
+      {"doi":"10.1016/j.meddos.2025.12.001","title":"Externally validated knowledge-based planning model for machine learning-assisted radiation therapy treatment of high-grade glioma","authors":"Lloyd SA et al.","journal":"Medical Dosimetry","year":"2026","rationale":"Indirect-comparative: full text (verified 2026-08-25) evaluates a RapidPlan model at BC Cancer and never names the RPA, so it carries no E/I level for this product."}
+    ],
+    evidenceRigor: "E2",
+    clinicalImpact: "I5",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: rigor recomputed as the maximum across scored papers. Court 2024 (16 institutions / 6 countries) and Baroudi 2025 (Med Phys, multi-national breast planning portfolio) are multi-centre external evaluations = E2; no RCT, meta-analysis or systematic review of the RPA exists, so the previous E3 was an over-estimation. Lloyd 2026 full-text verified 2026-08-25: it evaluates a RapidPlan model at BC Cancer and does not name the RPA — reclassified as indirect-comparative. Netherton et al. JCO GO 2023 (direct) and Court et al. JCO GO 2024 (direct, 16 institutions / 6 countries, >90% plan acceptability) confirmed via abstract verification. Kavuma 2025 and Sackett 2025 RapidPlan papers re-evaluated 2026-06-15: Sackett 2025 evaluates Varian RapidPlan v15.6 in Eclipse and does not mention RPA — removed. Kavuma 2025 evaluates RapidPlan KBP in LMICs without RPA attribution — retained as indirect-comparative only. Lloyd 2026 remains pending full-text verification. First patient treated clinically in South Africa in 2024.",
+    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: impact set to I5 (societal / access to care) — Netherton 2023 and Court 2024 both frame the RPA around extending access to quality radiotherapy in resource-limited settings. No toxicity or survival study supports the previously stored I4 (outcome). Clinical outcome improvement through automated RT planning enabling access to quality care in resource-limited settings. Actively deployed in South Africa since 2024. Validated across head and neck, cervical, breast, and brain cancers with >90% plan acceptability across 16 institutions in 6 countries (Court 2024).",
     adoptionReadiness: "R4",
     adoptionReadinessNotes: "Derived from E3 + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected. Clinical deployment ongoing in LMICs.",
     evidenceVendorIndependent: true,
@@ -106,13 +113,18 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1200/GO.23.00376"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Baroudi et al. An automated treatment planning portfolio for whole breast radiotherapy (RPA breast planning, MD Anderson with collaborating centres in Argentina and Switzerland). Med Phys 2025;52(3):1779-1788.",
+        link: "https://doi.org/10.1002/mp.17588"
+      },
+      {
         type: "Indirect-comparative",
         description: "Kavuma et al. Feasibility and impact of knowledge-based automated RT planning in LMICs (uses Varian RapidPlan in Eclipse — not RPA). ecancermedicalscience 2025;19:1988. Retained as adjacent KBP-in-LMIC context only.",
         link: "https://doi.org/10.3332/ecancer.2025.1988"
       },
       {
-        type: "Peer-reviewed Publication",
-        description: "Lloyd et al. Externally validated KBP model for ML-assisted RT of high-grade glioma (RTQA context). Med Dosim 2026. Full-text product-name attribution pending manual verification.",
+        type: "Indirect-comparative",
+        description: "Lloyd et al. Externally validated KBP model for ML-assisted RT of high-grade glioma. Med Dosim 2026;51(2):213-217. Full text verified 2026-08-25: evaluates a Varian RapidPlan model at BC Cancer and does not name the RPA — retained as adjacent KBP context only.",
         link: "https://doi.org/10.1016/j.meddos.2025.12.001"
       },
       {
@@ -126,7 +138,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
         link: "https://rpa.mdanderson.org/publications"
       }
     ],
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
   },
 ];
