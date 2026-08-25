@@ -111,7 +111,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available.",
+      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available.",
     clinicalImpactNotes:
       "Vendor-claimed workflow and planning-efficiency benefits; no independent clinical-impact study identified.",
     adoptionReadiness: "R2",

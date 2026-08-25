@@ -8,6 +8,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1016/j.tipsro.2025.100328","title":"Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning","authors":"Aljaafari A et al.","journal":"Tech Innov Patient Support Radiat Oncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent clinical validation in 93 patients with 572 CBCT registrations; dose differences <0.4% support an MR-only brain workflow.","vendorIndependent":true,"externalValidation":true},
       {"doi":"10.1016/j.phro.2024.100589","title":"Clinical implementation of a commercial synthetic computed tomography solution for radiotherapy treatment of glioblastoma","authors":"Emin S et al.","journal":"Phys Imaging Radiat Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent single-centre clinical implementation report for glioblastoma MR-only planning.","vendorIndependent":true,"externalValidation":true},
       {"doi":"10.1002/acm2.14494","title":"Clinical validation of MR-generated synthetic CT by MRCAT for brain tumor radiotherapy","authors":"Yip TTY et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of dosimetric accuracy; technical-level endpoints.","vendorIndependent":true,"externalValidation":true},
+      {"pmid":"39956751","title":"Evaluation of an MRI-only workflow using a commercial synthetic CT generator for brain and head-and-neck radiotherapy","authors":"Buschmann M et al.","journal":"Zeitschrift für Medizinische Physik","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Vendor-independent single-centre retrospective MR-only workflow evaluation (n=10) covering brain and head-and-neck sites with dose-calculation accuracy endpoints. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true},
       {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MRCAT evaluation, therefore unscored."}
     ],
     trainingData: {
@@ -99,8 +100,8 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.0",
     releaseDate: "2020-01-20",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [

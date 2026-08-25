@@ -147,7 +147,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-21",
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Platform-level evidence: CE Mark Class IIa (Oct 21, 2025) for Workspace+. Two previously cited Dose+ references (PR + FDA K250064) were removed on 2026-06-15: they evaluate the Dose+ module, not the Workspace+ platform, and were misleading at the platform level.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform-level evidence: CE Mark Class IIa (Oct 21, 2025) for Workspace+. Two previously cited Dose+ references (PR + FDA K250064) were removed on 2026-06-15: they evaluate the Dose+ module, not the Workspace+ platform, and were misleading at the platform level.",
     clinicalImpactNotes: "Vendor-claimed workflow improvement through unified AI platform integration; no platform-level independent clinical impact study identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",

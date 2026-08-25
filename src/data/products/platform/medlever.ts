@@ -65,7 +65,7 @@ export const MEDLEVER_PLATFORM_PRODUCTS: ProductDetails[] = [
     usesAI: false,
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Non-Device-MDDS. Workflow management tool. No clinical outcome publications.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Non-Device-MDDS. Workflow management tool. No clinical outcome publications.",
     clinicalImpactNotes: "QA/monitoring tool for workflow orchestration and documentation in radiation oncology.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
