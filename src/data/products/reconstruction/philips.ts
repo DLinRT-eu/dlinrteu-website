@@ -29,7 +29,7 @@ export const PreciseImage: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
   description: "AI-driven solution for enhancing low-dose CT images to achieve diagnostic quality comparable to standard dose acquisitions.",
   features: ["Low-dose CT enhancement", "Increased user consistency", "Reduced interventional procedure time"],
   category: "Reconstruction",
@@ -158,6 +158,11 @@ export const PreciseImage: ProductDetails = {
 
 export const SmartSpeed: ProductDetails = {
     id: "philips-smartspeed",
+    keyPapers: [
+      {"doi":"10.1097/RCT.0000000000001648","pmid":"39190703","title":"Impact of Emerging Deep Learning-Based MR Image Reconstruction Algorithms on Abdominal MRI Radiomic Features","journal":"Journal of Computer Assisted Tomography","year":"2024","link":"https://doi.org/10.1097/RCT.0000000000001648","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-vendor comparison of DL reconstruction against conventional reconstruction for radiomic stability.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.3390/diagnostics15101206","pmid":"40428199","title":"Is a 3-Minute Knee MRI Protocol Sufficient for Daily Clinical Practice? A SuperResolution Reconstruction Approach","journal":"Diagnostics","year":"2025","link":"https://doi.org/10.3390/diagnostics15101206","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective 20-volunteer evaluation of an accelerated protocol reconstructed with the commercial DL engine.","vendorIndependent":true,"multiCenter":false,"prospective":true,"externalValidation":false},
+      {"doi":"10.1371/journal.pone.0318599","pmid":"40238781","title":"Deep learning-based acceleration of muscle water T2 mapping in patients with neuromuscular diseases","journal":"PLoS One","year":"2025","link":"https://doi.org/10.1371/journal.pone.0318599","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Quantitative-accuracy evaluation of the DL-accelerated acquisition against conventional mapping.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+    ],
     trainingData: {
       disclosureLevel: "minimal",
       description:
@@ -182,7 +187,7 @@ export const SmartSpeed: ProductDetails = {
     company: "Philips",
     category: "Reconstruction",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
     description:
       "AI-powered MRI acceleration and reconstruction software integrated with Philips' Compressed SENSE speed engine. It is designed to reduce scan time and/or improve image resolution across a broad range of Philips MR protocols while keeping reconstruction within the scanner workflow.",
     certification: "FDA Cleared",
@@ -286,11 +291,11 @@ export const SmartSpeed: ProductDetails = {
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "I1",
     evidenceRigorNotes:
       "Downgraded from E2 to E1 because FDA documentation emphasizes non-clinical V&V/substantial equivalence, and peer-reviewed clinical evidence is summarized as limited/heterogeneous in the 2025 systematic review. Vendor claims are strong but not equivalent to prospective multicenter outcome evidence.",
     clinicalImpactNotes:
-      "Potential workflow impact through shorter MRI acquisition/reconstruction workflows and/or higher image resolution. Claimed throughput gains should be validated locally by protocol, anatomy, field strength, and reader confidence.",
+      "Potential workflow impact through shorter MRI acquisition/reconstruction workflows and/or higher image resolution. Claimed throughput gains should be validated locally by protocol, anatomy, field strength, and reader confidence. 2026-08-25 Wave 5B: impact corrected I2 → I1 — the max across the newly scored SmartSpeed papers (Jeong 2024 JCAT, Diagnostics 2025, PLoS One 2025) is I1; no publication reports pathway- or outcome-level impact.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes:
       "FDA-cleared and commercially deployed in compatible Philips environments. European CE/MDR status should be verified locally. Local protocol validation and radiologist acceptance testing remain advisable.",
@@ -302,10 +307,10 @@ export const SmartSpeed: ProductDetails = {
     clinicalEvidence:
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
     supersededBy: "philips-smartspeed-precise",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source:
-      "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature."
+      "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
 
 export const SmartSpeedPrecise: ProductDetails = {
@@ -332,7 +337,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     company: "Philips",
     category: "Reconstruction",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
     description:
       "Next-generation Philips MRI reconstruction and image-enhancement software combining Compressed SENSE with dual AI engines for denoising and image sharpening/anti-ringing. FDA documentation describes it as a machine-learning-based reconstruction feature intended to increase SNR, increase sharpness, and reduce residual ringing artifacts in MR images.",
     certification: "FDA Cleared",
@@ -432,7 +437,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Maintained as E0 because evidence currently consists of FDA clearance/V&V and manufacturer-reported performance claims. No independent peer-reviewed clinical validation specific to SmartSpeed Precise was identified in the public sources reviewed.",
+      "Maintained as E0 because evidence currently consists of FDA clearance/V&V and manufacturer-reported performance claims. No independent peer-reviewed clinical validation specific to SmartSpeed Precise was identified in the public sources reviewed. 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. The only record retrieved is a Research Square preprint (10.21203/rs.3.rs-9442562/v1), excluded by policy as non-peer-reviewed.",
     clinicalImpactNotes:
       "Manufacturer-reported improvements include up to 3x faster scanning, up to 80% sharper images, and a less-than-10-second brain scan example. Independent evidence for diagnostic accuracy, downstream clinical outcomes, or real-world throughput impact is not yet established.",
     adoptionReadiness: "R2",
@@ -452,10 +457,10 @@ export const SmartSpeedPrecise: ProductDetails = {
         fdaClearance: "K213583/K223442 context"
       }
     ],
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source:
-      "FDA K251397 and Philips press release 2025-07-02."
+      "FDA K251397 and Philips press release 2025-07-02.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
 
 export const PETCTAdaptiveReconstruction: ProductDetails = {
@@ -464,7 +469,7 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/solutions/pet-ct",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
   description:
     "AI-based smart processing of PET data during reconstruction to reduce image noise and enhance image contrast, designed to improve PET/CT image quality. Implemented as look-up tables for automated selection of PET reconstruction parameters.",
   features: [
@@ -540,7 +545,7 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   evidenceRigor: "E0",
   clinicalImpact: "I1",
   evidenceRigorNotes:
-    "E0 (Vendor-validated only): no independent peer-reviewed clinical evaluation of this specific feature identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-internal review by nuclear medicine experts as described on the Philips AI-enabled solutions page.",
+    "E0 (Vendor-validated only): no independent peer-reviewed clinical evaluation of this specific feature identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-internal review by nuclear medicine experts as described on the Philips AI-enabled solutions page. 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes:
     "I1 (Technical performance / image-quality claim, vendor-reported): Philips reports improved PET image noise and contrast; no independent evidence of changed treatment management (I3) or patient outcomes (I4).",
   adoptionReadiness: "R3",
@@ -552,9 +557,9 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   evidenceProspective: false,
   evidenceExternalValidation: false,
   clinicalEvidence: "Vendor 'AI-enabled solutions' disclosure and FDA listing of Vereos PET/CT (K211764) with AI/ML attributes; no independent peer-reviewed clinical studies specific to this feature identified as of 2026-06-17.",
-  lastUpdated: "2026-06-17",
-  lastRevised: "2026-06-17",
-  source: "Philips 'AI-enabled solutions' page; FDA 510(k) Vereos PET/CT (K211764)",
+  lastUpdated: "2026-08-25",
+  lastRevised: "2026-08-25",
+  source: "Philips 'AI-enabled solutions' page; FDA 510(k) Vereos PET/CT (K211764); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   evidence: [
     {
       type: "Regulatory Clearance",

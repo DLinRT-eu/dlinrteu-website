@@ -27,7 +27,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
     description: "Deep learning CT auto-segmentation application on Edison HealthLink that generates DICOM Radiotherapy Structure Sets (RTSS) with organs-at-risk contours for radiation therapy planning review and editing.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
@@ -82,7 +82,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-05-12",
     evidenceRigor: "E1",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Only one identifiable GE-specific peer-reviewed evaluation (PMC10741804) — insufficient for E2. Downgraded to E1.",
+    evidenceRigorNotes: "Only one identifiable GE-specific peer-reviewed evaluation (PMC10741804) — insufficient for E2. Downgraded to E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Supports workflow acceleration for initial OAR contour generation and standardization, with required user review/editing. Evidence is geometric and qualitative; no prospective clinical outcome or time-and-motion publication specific to GE Auto Segmentation was identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE Mark + FDA 510(k): moderate implementation effort — local validation, DICOM interface testing and workflow confirmation required before adoption.",
@@ -91,12 +91,12 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-08-25",
     keyPapers: [
     {"pmid":"PMC10741804","title":"Evaluation of GE auto-segmentation for RT","journal":"Front Oncol","year":"2023"}
   ],
-    lastRevised: "2026-07-15",
-    source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [
       {

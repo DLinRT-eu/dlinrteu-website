@@ -31,7 +31,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com",
     productUrl: "https://www.gehealthcare.com/en-us/products/molecular-imaging/pet-ct/omni-legend",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/ge-healthcare.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["PET/CT"],
     diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac conditions"],

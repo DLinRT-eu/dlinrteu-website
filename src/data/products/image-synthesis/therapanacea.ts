@@ -37,7 +37,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
     website: "https://therapanacea.com/products",
     anatomicalLocation: ["Pelvis", "Brain", "Abdomen"],
     modality: ["MRI"],
@@ -115,13 +115,14 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-07-30",
-    lastRevised: "2026-07-30",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     keyPapers: [
-      {"doi":"10.3389/fonc.2023.1245054","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J et al.","journal":"Frontiers in Oncology","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centric evaluation across 8 institutions; technical pseudo-CT accuracy endpoints.","vendorIndependent":true,"multiCenter":true,"multiNational":true,"externalValidation":true},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MR-Box evaluation, therefore unscored."}
+      {"doi":"10.3389/fonc.2023.1245054","pmid":"38023165","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J, Gungor G, Gevaert T, et al.","journal":"Frontiers in Oncology","year":"2023","link":"https://doi.org/10.3389/fonc.2023.1245054","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre clinical evaluation of the TheraPanacea pseudo-CT model for low-field pelvic MRI; developed with the vendor.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
+      {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
+      {"doi":"10.1002/acm2.70725","pmid":"42547906","title":"Image-based evaluation of a commercial AI synthetic CT generator for brain and prostate MR-only radiotherapy","authors":"Aire M, Matthews C, Jones J, et al.","journal":"Journal of Applied Clinical Medical Physics","year":"2026","link":"https://doi.org/10.1002/acm2.70725","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent image-quality and geometric-surrogate characterisation of the FDA-cleared AI sCT generator.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
-    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).",
+    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
@@ -167,7 +168,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       "Dose engine must be validated locally by the user before clinical use."
     ],
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark.",
+    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. 2026-08-25 Wave 5: E2/I1 retained — E2 set by Prunaretty et al. 2023 and the MESCAL benchmark. Open question: confirm with the vendor whether the low-field pelvic MR model of Prunaretty 2023 is marketed as MR-Box or as part of AdaptBox; move the paper if it belongs to AdaptBox.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",
     adoptionReadiness: "R2",

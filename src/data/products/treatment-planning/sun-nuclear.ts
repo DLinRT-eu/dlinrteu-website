@@ -24,7 +24,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.sunnuclear.com/",
     productUrl: "https://www.sunnuclear.com/products/plan-ai",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/sun-nuclear.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/sun-nuclear.ts",
     description:
       "AI-powered treatment planning assistant that provides predictive, patient-specific insights on achievable dosimetric goals before planning begins. Uses machine learning models based on 5000+ clinically delivered plans from Johns Hopkins University to drive continuous improvement in plan quality.",
     features: [
@@ -103,7 +103,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: E2 confirmed on the strength of Shade 2026 alone — external validation at a second institution meets the E2 criterion, but the study is retrospective, vendor-authored and spans only two sites, so it does not reach E3. The ESTRO/AAPM/ICCR items are conference abstracts and carry no E/I level under the rubric. Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: E2 confirmed on the strength of Shade 2026 alone — external validation at a second institution meets the E2 criterion, but the study is retrospective, vendor-authored and spans only two sites, so it does not reach E3. The ESTRO/AAPM/ICCR items are conference abstracts and carry no E/I level under the rubric. Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024. Wave 5D open question: Adv Radiat Oncol 2026 (10.1016/j.adro.2026.102036, PMID 42382856) validates a knowledge-based planning platform called “Predictive Planning” on 5334 plans — confirm product identity before scoring; if confirmed it is a strong E2/I1.",
     clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: I2 (workflow / plan-quality) supported by the Shade 2026 dosimetric comparison; no decision-level or outcome-level endpoint published. Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
@@ -114,7 +114,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
-    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22)",
+    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Peer-reviewed internal validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {

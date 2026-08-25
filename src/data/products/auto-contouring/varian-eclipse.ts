@@ -7,7 +7,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     company: "Varian (Siemens Healthineers)",
     companyUrl: "https://www.varian.com",
     productUrl: "https://cancercare.siemens-healthineers.com/en-ch/products/radiotherapy/treatment-planning/eclipse",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-eclipse.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/varian-eclipse.ts",
     description: "Deep learning-based auto-contouring integrated with the Varian Eclipse treatment planning system. Automates routine OAR contouring in the offline planning workflow to reduce manual effort and inter-observer variability. Shares the underlying AI Segmentation deep-learning algorithm family previously deployed on the Ethos adaptive console, now packaged for the Eclipse TPS installed base.",
     features: [
       "Deep learning-based auto-segmentation of organs at risk",

@@ -22,7 +22,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
     productUrl: "https://www.manteiamedical.com/mozi",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
     description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, AI-driven planning optimization, and built-in deep learning auto-contouring for radiation therapy (auto-contouring validated on 187 patients per FDA K223724).",
     features: ["Monte Carlo dose engine", "GPU-powered computation", "AI-driven optimization", "Built-in auto-contouring", "Vendor independence"],
     category: "Treatment Planning",

@@ -54,7 +54,7 @@ For developers who prefer traditional version control:
 
 Beyond the editing methods above, there are additional ways to report missing or incorrect information:
 
-- **Open a GitHub Issue** — Describe the problem at <https://github.com/DLinRT-eu/dlinrteu-website/issues/new>. Include the product name, what is wrong, and a supporting reference.
+- **Open a GitHub Issue** — Describe the problem at <https://github.com/DLinRT-eu/website/issues/new>. Include the product name, what is wrong, and a supporting reference.
 - **Public Feedback Form** — No login needed. Go to <https://dlinrt.eu/support#product-feedback>, select "missing product" or "incorrect info", and fill in the details.
 - **Submit a Pull Request** — Fork the repository, edit the product TypeScript file in `src/data/products/[category]/`, and open a PR. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for writing standards and the review process.
 

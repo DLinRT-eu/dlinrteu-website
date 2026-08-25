@@ -29,7 +29,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     company: "RaySearch Laboratories",
     companyUrl: "https://www.raysearchlabs.com/",
     productUrl: "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/raysearch-planning.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/raysearch-planning.ts",
     description: "Deep learning dose prediction module within RayStation that uses trained models to predict clinically acceptable dose distributions. The predicted dose is used as input for dose mimicking optimization, enabling rapid generation of high-quality treatment plans.",
     features: ["Deep learning dose prediction", "Dose mimicking optimization", "Multi-technique support (VMAT, IMRT, PBS)", "Automated plan generation"],
     category: "Treatment Planning",

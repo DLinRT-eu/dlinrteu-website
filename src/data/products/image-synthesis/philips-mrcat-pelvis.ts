@@ -6,7 +6,10 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     id: "philips-mrcat-pelvis",
     keyPapers: [
       {"doi":"10.1016/j.phro.2018.09.002","title":"Feasibility of MRI-only rectum radiotherapy with a commercial synthetic CT generation solution","authors":"Maspero M et al.","journal":"Phys Imaging Radiat Oncol","year":"2018","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre feasibility and dosimetric accuracy study.","vendorIndependent":true},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MRCAT evaluation, therefore unscored."}
+      {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true,"appliesToCategory":"Image Synthesis"},
+      {"doi":"10.1080/0284186X.2017.1293290","pmid":"28270011","title":"Magnetic resonance-only simulation and dose calculation in external beam radiation therapy: a feasibility study for pelvic cancers","authors":"Kemppainen R, Suilamo S, Tuokkola T, et al.","journal":"Acta Oncologica","year":"2017","link":"https://doi.org/10.1080/0284186X.2017.1293290","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Extends the MRCAT pseudo-CT approach beyond prostate to rectal and gynaecological pelvic cancers (15 patients).","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":false,"appliesToCategory":"Image Synthesis"},
+      {"doi":"10.1038/s41598-024-59014-6","pmid":"38605094","title":"Clinical feasibility of deep learning-based synthetic CT images from T2-weighted MR images for cervical cancer patients compared to MRCAT","authors":"Kim H, Yoo SK, Kim JS, et al.","journal":"Scientific Reports","year":"2024","link":"https://doi.org/10.1038/s41598-024-59014-6","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Comparative study in which MRCAT is the commercial reference arm; genuinely evaluated, but as comparator.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false,"appliesToCategory":"Image Synthesis"},
+      {"doi":"10.1002/acm2.70332","pmid":"41194508","title":"Validating clinical feasibility of MRCAT and deep learning-based synthetic CT images for cervical cancer patient","authors":"Yoo D, Kim H, Park S, et al.","journal":"Journal of Applied Clinical Medical Physics","year":"2025","link":"https://doi.org/10.1002/acm2.70332","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Small single-centre validation (five cervical-cancer patients); exploratory sample size.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false,"appliesToCategory":"Image Synthesis"}
     ],
     trainingData: {
         disclosureLevel: "minimal",
@@ -27,7 +30,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     company: "Philips",
     companyUrl: "https://www.philips.com/",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/philips-mrcat-pelvis.ts",
     description: "AI-based MR-only simulation platform that generates synthetic CT images from MR scans for radiation therapy planning of pelvic cancers, streamlining the radiation therapy planning process with proprietary algorithms.",
     features: [
       "MR-only planning",
@@ -96,9 +99,9 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     ],
     version: "Current",
     releaseDate: "2018",
-    lastUpdated: "2026-06-15",
-    lastRevised: "2026-06-15",
-    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Independent feasibility study by Maspero et al. (Phys Imaging Radiat Oncol 2018, DOI 10.1016/j.phro.2018.09.002) directly evaluating the commercial Philips MRCAT pelvis synthetic CT generator for MR-only rectum radiotherapy, complemented by vendor V&V across 4 hospitals (Philips IFU appendix).",
     evidence: [
       {
@@ -112,8 +115,8 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
-    evidenceRigor: "E1",
-    evidenceRigorNotes: "Restored to E1 on 2026-06-15 after adding Maspero et al. 2018 (Phys Imaging Radiat Oncol, DOI 10.1016/j.phro.2018.09.002), an independent peer-reviewed feasibility study that directly evaluates Philips MRCAT pelvis for MR-only rectal cancer RT. Cusumano/Maspero MESCAL 2026 (Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) kept as indirect-comparative community benchmark. Vendor V&V across 4 hospitals × 103 patients in the Philips IFU appendix complements but does not by itself promote E.",
+    evidenceRigor: "E2",
+    evidenceRigorNotes: "Restored to E1 on 2026-06-15 after adding Maspero et al. 2018 (Phys Imaging Radiat Oncol, DOI 10.1016/j.phro.2018.09.002), an independent peer-reviewed feasibility study that directly evaluates Philips MRCAT pelvis for MR-only rectal cancer RT. Cusumano/Maspero MESCAL 2026 (Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) kept as indirect-comparative community benchmark. Vendor V&V across 4 hospitals × 103 patients in the Philips IFU appendix complements but does not by itself promote E. 2026-08-25 Wave 5: E2 set by the MESCAL multi-centre benchmark (doi 10.1016/j.radonc.2026.111530); impact stays I1. Farjam et al. JACMP 2019 (10.1002/acm2.12501) was flagged but not added — the evaluated atlas method may be in-house rather than the commercial product.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Independent feasibility evidence (Maspero 2018, rectum) plus vendor V&V across 4 hospitals demonstrate dosimetric equivalence to CT-based planning for pelvic RT; no outcome-level data.",
     adoptionReadiness: "R3",

@@ -33,7 +33,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://eu.united-imaging.com/en/product-service/products/rt",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/united-imaging.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/united-imaging.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["RT Plan", "CT"],
     subspeciality: "Radiation Oncology",

@@ -8,7 +8,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/specialties/oncology-solutions/intelligent-rt",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/platform/ge-healthcare.ts",
     description: "Fully-interoperable radiation therapy collaboration system (RTCS) for patient workflow management - designed with clinicians for clinicians. AI-supported platform integrating GE Healthcare and third-party AI solutions for comprehensive oncology department management.",
     features: [
       "Analytics reporting for department efficiency",
@@ -80,7 +80,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform product (2025). No independent peer-reviewed publications. Vendor-reported InstaPlan study (iRT + RayStation, n=20) reports simulation-to-plan time reduced from 7 days to 7 minutes (GE HealthCare ESTRO 2026 press release). Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform product (2025). No independent peer-reviewed publications. Vendor-reported InstaPlan study (iRT + RayStation, n=20) reports simulation-to-plan time reduced from 7 days to 7 minutes (GE HealthCare ESTRO 2026 press release). Marengo CIMS case study (2025) documents 25% treatment planning time reduction. PubMed searched 2026-03-08. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Workflow improvement through unified workflow management integrating multiple AI solutions. Marengo CIMS case study reports 25% reduction in treatment planning times; vendor-reported InstaPlan data report simulation-to-plan time reduced from 7 days to 7 minutes (n=20).",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
@@ -102,9 +102,9 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
       }
     ],
     releaseDate: "2023-05-12",
-    lastUpdated: "2026-05-14",
-    lastRevised: "2026-05-20",
-    source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717. Marengo CIMS case study 2025. GE HealthCare ESTRO 2026 press release (12 May 2026).",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717. Marengo CIMS case study 2025. GE HealthCare ESTRO 2026 press release (12 May 2026).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization. Marengo CIMS case study (2025) reports 25% reduction in treatment planning times."
   }
 ];

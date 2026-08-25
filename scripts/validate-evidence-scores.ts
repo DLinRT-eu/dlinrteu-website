@@ -71,7 +71,7 @@ for (const category of categories) {
   const products = await loadCategory(category);
   for (const p of products) {
     productCount += 1;
-    const score = computeProductEvidenceScore(p, { category });
+    const score = computeProductEvidenceScore(p, { category: p.category ?? category });
     const storedRigor = p.evidenceRigor;
     const storedImpact = p.clinicalImpact;
 

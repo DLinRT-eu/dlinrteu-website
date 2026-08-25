@@ -7,14 +7,14 @@ export const DeepContour: ProductDetails = {
     onMarketSince: "2024",
     distributionChannels: ["Direct sales (China)"]
   },
-  source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928",
+  source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "Wisdom Tech",
   logoUrl: "/logos/wisdom-tech.png",
   version: "2.0",
   website: "http://www.wisdom-tech.online/view-16.html",
   category: "Auto-Contouring",
   modality: ["CT"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/wisdom-tech.ts",
   companyUrl: "http://www.wisdom-tech.online/",
   productUrl: "http://www.wisdom-tech.online/view-16.html",
   regulatory: {
@@ -41,8 +41,8 @@ export const DeepContour: ProductDetails = {
   },
   description: "AI solution for automatic contour segmentation in radiation therapy planning.",
   keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."
   ],
@@ -74,7 +74,7 @@ export const DeepContour: ProductDetails = {
     "Abdomen",
     "Pelvis"
   ],
-  evidenceRigorNotes: "FDA cleared (K232928) but no peer-reviewed publications found. PubMed searched 2026-06-15.",
+  evidenceRigorNotes: "FDA cleared (K232928) but no peer-reviewed publications found. PubMed searched 2026-06-15. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-06-15.",
   supportedStructures: [
     "Head & Neck: Brain",

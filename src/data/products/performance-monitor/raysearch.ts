@@ -7,7 +7,7 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     company: "RaySearch Laboratories",
     companyUrl: "https://www.raysearchlabs.com/",
     productUrl: "https://www.raysearchlabs.com/rayintelligence/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/raysearch.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/raysearch.ts",
     description: "Oncology analytics system that connects directly to primary oncology data sources (RayStation, RayCare, and third-party OIS/RIS) to surface clinical, operational, and AI-performance signals. v2026 introduces Deep Learning Segmentation (DLS) monitoring, enabling clinical teams to track the real-world performance of AI contouring alongside plan benchmarking, device utilization, and team expertise mapping.",
     features: [
       "AI performance monitoring (Deep Learning Segmentation)",
@@ -77,15 +77,15 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Analytics/monitoring platform. No peer-reviewed evaluations located; only vendor press releases and product page (retrieved 2026-07-01).",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Analytics/monitoring platform. No peer-reviewed evaluations located; only vendor press releases and product page (retrieved 2026-07-01). 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Provides monitoring of AI contouring and plan quality signals; clinical impact not independently quantified.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + MDR-exempt analytics: sparse public evidence; adopting sites should validate internally before relying on outputs for QA decisions.",
     version: "v2026",
     releaseDate: "2026",
-    lastUpdated: "2026-07-01",
-    lastRevised: "2026-07-01",
-    source: "RaySearch official product page (https://www.raysearchlabs.com/rayintelligence/) and press releases for RayIntelligence v2025 (2025-09-01) and v2026, retrieved 2026-07-01",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "RaySearch official product page (https://www.raysearchlabs.com/rayintelligence/) and press releases for RayIntelligence v2025 (2025-09-01) and v2026, retrieved 2026-07-01; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidence: [
       {
         type: "Vendor Product Page",

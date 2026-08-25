@@ -23,7 +23,7 @@ export const MD_ANDERSON_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.mdanderson.org/",
     productUrl: "https://rpa.mdanderson.org/",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/md-anderson.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/md-anderson.ts",
     description:
       "The Radiation Planning Assistant offers a suite of fully automated contouring and radiotherapy planning tools for cervix, breast, head and neck, and whole brain cancers. Developed at MD Anderson Cancer Center and offered free to clinics in low- and middle-income countries (LMICs) to improve global access to high-quality radiotherapy. Not marketed in the USA despite FDA clearance.",
     features: ["Automated contouring", "Radiotherapy planning", "Multi-anatomical site support", "FDA cleared"],

@@ -7,7 +7,7 @@ export const AIQUALIS: ProductDetails = {
     onMarketSince: "2024",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "Automatically retrieved and revised",
+  source: "Automatically retrieved and revised; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   usesAI: false,
   company: "PTW",
   logoUrl: "/logos/ptw.jpg",
@@ -22,7 +22,7 @@ export const AIQUALIS: ProductDetails = {
     "Performance tracking"
   ],
   modality: ["RT Struct"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/ptw.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/ptw.ts",
   companyUrl: "https://www.ptwdosimetry.com",
   productUrl: "https://www.ptwdosimetry.com/en/products/aiqualis",
   regulatory: {
@@ -55,8 +55,8 @@ export const AIQUALIS: ProductDetails = {
     "Performance analytics",
     "Quality metrics tracking"
   ],
-  lastRevised: "2026-05-20",
-  lastUpdated: "2026-02-23",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Not intended to determine correctness of contouring or to assess/review/influence treatment of an individual patient",
     "Outputs depend on the quality/consistency of the compared contours and local workflow practices",
@@ -70,7 +70,7 @@ export const AIQUALIS: ProductDetails = {
   diseaseTargeted: ["Cancer"],
   adoptionReadiness: "R1",
   anatomicalLocation: ["Multiple"],
-  evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024). Poster from RCR Global AI conference: https://www.ptwdosimetry.com/fileadmin/user_upload/Downloads/Papers/DETECTING_AUTOMATION_BIAS_Doolan.pdf. ",
+  evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024). Poster from RCR Global AI conference: https://www.ptwdosimetry.com/fileadmin/user_upload/Downloads/Papers/DETECTING_AUTOMATION_BIAS_Doolan.pdf.  2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   monitorsAIProducts: ["Auto-Contouring outputs"],
   clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
   adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",

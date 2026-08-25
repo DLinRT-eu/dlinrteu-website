@@ -8,7 +8,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea-brachybox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/therapanacea-brachybox.ts",
     description: "AI-powered MR-based organ-at-risk delineation for gynaecological brachytherapy, published by Therapanacea as the MRI Brachy Pelvis model of the ART-Plan+ segmentation library (4 OARs: bladder, rectum, sigmoid, small bowel), contoured according to the EMBRACE / Pötter et al. 2018 (ESTRO) recommendations.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
@@ -118,7 +118,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Regulatory documentation only (FDA K253091, CE class IIb brochure). No peer-reviewed publication evaluating the MR brachytherapy model identified as of 2026-07-30.",
+    evidenceRigorNotes: "Regulatory documentation only (FDA K253091, CE class IIb brochure). No peer-reviewed publication evaluating the MR brachytherapy model identified as of 2026-07-30. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Manufacturer-claimed workflow benefit for MR-guided brachytherapy OAR delineation; no independent clinical or dosimetric outcome data published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE/FDA: limited public evidence and a small structure set; local validation on the institution's MR sequences and applicator setup is required before clinical use.",
@@ -150,8 +150,8 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     ],
     version: "3.2.0",
     releaseDate: "2026-03-01",
-    lastUpdated: "2026-07-30",
-    lastRevised: "2026-07-30",
-    source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30)."
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

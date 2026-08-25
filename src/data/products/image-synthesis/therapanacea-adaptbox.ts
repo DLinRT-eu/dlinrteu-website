@@ -55,7 +55,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
     description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, daily cumulative dose tracking, and assisted off-line replanning decision support.",
     features: [
       "AI-based synthetic/augmented CT generation from daily CBCT images",
@@ -164,17 +164,18 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-07-30",
-    lastRevised: "2026-07-30",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     keyPapers: [
-      {"doi":"10.3390/cancers18111826","title":"Implementation of an AI-Driven Workflow for Daily Dose Reconstruction in Prostate Cancer Radiotherapy","authors":"Prunaretty J et al.","journal":"Cancers","year":"2026","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical workflow implementation study for daily dose reconstruction; accuracy and cumulative-dose tracking endpoints.","vendorIndependent":true,"externalValidation":true},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."}
+      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Names AdaptBox v2.3.2 and evaluates daily delivered dose in 20 prostate patients — a workflow-level implementation.","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."},
+      {"doi":"10.3389/fonc.2026.1756153","pmid":"41800047","title":"Self-learning GAN based synthetic CT generation: unlocking CBCT-based adaptive radiotherapy","authors":"Prunaretty J, Colombo L, Romdhani S, Teboul O, et al.","journal":"Frontiers in Oncology","year":"2026","link":"https://doi.org/10.3389/fonc.2026.1756153","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre CBCT-to-sCT models across pelvis, head and neck, lung and breast; clinically evaluated but vendor-developed.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true}
     ],
-    source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530). Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).",
+    source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530). Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidenceRigor: "E2",
     evidenceRigorNotes: "E2 retained 2026-06-15 after cross-check: Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826) verified as a prostate-specific AI-driven daily dose-reconstruction workflow study consistent with the AdaptBox pipeline; supported by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026). H&N and Breast/Thorax FDA-cleared anatomies have limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",
-    clinicalImpact: "I1",
-    clinicalImpactNotes: "Upgraded from I0 to I1. Evidence supports daily dose reconstruction accuracy and effective offline cumulative tracking of OAR deviation, supporting clinical replanning decisions. High-level evidence regarding long-term clinical outcome benefits, toxicity reduction, or randomized disease control is not yet available.",
+    clinicalImpact: "I2",
+    clinicalImpactNotes: "Upgraded from I0 to I1. Evidence supports daily dose reconstruction accuracy and effective offline cumulative tracking of OAR deviation, supporting clinical replanning decisions. High-level evidence regarding long-term clinical outcome benefits, toxicity reduction, or randomized disease control is not yet available. 2026-08-25 Wave 5: impact raised I1 → I2, set by Prunaretty et al., Cancers 2026 (doi 10.3390/cancers18111826), which names AdaptBox v2.3.2 and reports a workflow-level daily dose-reconstruction implementation in 20 prostate patients.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k). The presence of both technical sCT validation and independent clinical workflow tracking supports integration. However, because image synthetic and calculation processes are sensitive to bad CBCT quality, standard local commissioning, intensive initial QA, and independent physical/clinical review of contours remain recommended."
   }

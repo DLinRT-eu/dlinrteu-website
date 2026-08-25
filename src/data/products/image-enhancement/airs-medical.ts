@@ -20,7 +20,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     name: "SwiftMR",
     company: "AIRS Medical",
     category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/airs-medical.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-enhancement/airs-medical.ts",
     description: "AI-powered MRI enhancement solution that improves image quality and resolution of accelerated or low-quality MR scans.",
     certification: "CE Mark",
     logoUrl: "/logos/airs.jpg",

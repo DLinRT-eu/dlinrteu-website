@@ -24,7 +24,7 @@ async function fetchPullRequests(): Promise<{ pullRequests: PullRequest[]; meta:
     pullRequests: data.data || [],
     meta: data.meta || {
       count: 0,
-      repository: 'DLinRT-eu/dlinrteu-website',
+      repository: 'DLinRT-eu/website',
       rate_limit: { remaining: null, limit: null, reset: null },
       
     },

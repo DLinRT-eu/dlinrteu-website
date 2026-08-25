@@ -37,7 +37,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/products/computed-tomography/ct-technologies/truefidelity",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-truefidelity.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/ge-truefidelity.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],

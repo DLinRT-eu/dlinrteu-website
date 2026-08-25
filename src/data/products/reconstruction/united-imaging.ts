@@ -30,7 +30,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/unitedimaging.png",
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://www.united-imaging.com/en/products/ct",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     diseaseTargeted: ["Cancer", "Cardiovascular disease", "Pulmonary disorders"],
@@ -100,7 +100,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA K193073 (Deep Recon) clearance plus Liao et al. Cell Rep Med 2023 — peer-reviewed, vendor-affiliated. No independent multi-center publication identified (web-searched 2026-06-01).",
+    evidenceRigorNotes: "FDA K193073 (Deep Recon) clearance plus Liao et al. Cell Rep Med 2023 — peer-reviewed, vendor-affiliated. No independent multi-center publication identified (web-searched 2026-06-01). 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Technical efficacy demonstrated in vendor-affiliated peer-reviewed work (lower noise, dose-reduction potential). No independent clinical-outcome data.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
@@ -110,9 +110,9 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K193073), peer-reviewed literature, company website."
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K193073), peer-reviewed literature, company website.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
 
   },
   {
@@ -213,7 +213,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "FDA K222755 (uMR 680 with uAIFI) and predicate K193073 (DeepRecon). No independent peer-reviewed publication identified (web-searched 2026-06-01).",
+    evidenceRigorNotes: "FDA K222755 (uMR 680 with uAIFI) and predicate K193073 (DeepRecon). No independent peer-reviewed publication identified (web-searched 2026-06-01). 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "No independently demonstrated clinical impact. Vendor describes SNR/resolution gains and acquisition-time reduction in product materials.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
@@ -223,10 +223,10 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K222755, K193073), United Imaging product pages.",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K222755, K193073), United Imaging product pages.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   },
   {
@@ -300,6 +300,11 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
 },
     evidence: [
       {
+        type: "Indirect-Comparative",
+        description: "Ann Nucl Med 2025 review of Bayesian penalised-likelihood PET reconstruction (PMID 40681770). Discusses HYPER DLR but is not a product evaluation of HD TOF 2.0.",
+        link: "https://doi.org/10.1007/s12149-025-02088-7"
+      },
+      {
         type: "Company News / Product Context",
         description:
           "United Imaging news item describing 'SiPM-based HD TOF (time of flight)' as part of their PET/MR technology stack (uPMR 790 context).",
@@ -324,10 +329,10 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "United Imaging describes HD TOF (time-of-flight) capability as part of its PET technology stack; quantitative improvements and scan-time/dose tradeoffs depend on local protocol and system configuration.",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database and company website",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 
   }
 ];

@@ -22,7 +22,7 @@ const rawProduct: ProductDetails = {
   company: "Coreline Soft Co",
   companyUrl: "https://www.corelinesoft.com/en/",
   productUrl: "https://www.corelinesoft.com/en/solutions/rt-acs",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/coreline.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/coreline.ts",
   description: "AI-powered automatic contouring server for radiation therapy planning, providing rapid and accurate organ segmentation using deep learning algorithms across brain, head & neck, thorax, breast, abdomen, and pelvis regions.",
   category: "Auto-Contouring",
   certification: "CE & FDA",
@@ -78,8 +78,8 @@ const rawProduct: ProductDetails = {
   },
   version: "4.0",
   releaseDate: "2025-08-20",
-  lastUpdated: "2026-06-15",
-  lastRevised: "2026-07-15",
+  lastUpdated: "2026-08-25",
+  lastRevised: "2026-08-25",
   keyPapers: [
     {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
     {doi: "10.3857/roj.2021.00234", title: "aview RT-ACS clinical validation", authors: "Byun HK et al.", journal: "Radiat Oncol J", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
@@ -167,7 +167,7 @@ const rawProduct: ProductDetails = {
   ],
   evidenceRigor: "E2",
   clinicalImpact: "I2",
-  evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation.",
+  evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
 
   clinicalImpactNotes: "Large-scale clinical implementation demonstrates workflow improvement for breast RT contouring.",
   evidenceVendorIndependent: true,
@@ -192,7 +192,7 @@ const rawProduct: ProductDetails = {
       link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
     }
   ],
-  source: "Company official sources, peer-reviewed publications",
+  source: "Company official sources, peer-reviewed publications; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
 };
 
 // Apply all the standardization functions

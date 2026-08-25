@@ -23,7 +23,7 @@ export const Jazz: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K231572), company official sources",
+  source: "FDA 510(k) database (K231572), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "AI Medical",
   logoUrl: "/logos/ai-medical.png",
   version: "2.0",
@@ -42,7 +42,7 @@ export const Jazz: ProductDetails = {
     }
   ],
   modality: ["MRI"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ai-medical.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/ai-medical.ts",
   companyUrl: "https://www.ai-medical.ch/",
   productUrl: "https://www.ai-medical.ch/jazz",
   regulatory: {
@@ -77,8 +77,8 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-06-15",
-  lastUpdated: "2026-06-15",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",
@@ -95,7 +95,7 @@ export const Jazz: ProductDetails = {
   clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
   adoptionReadiness: "R3",
   anatomicalLocation: ["Brain"],
-  evidenceRigorNotes: "Vendor references Medical Physics Journal 2023 and ESTRO 2022 abstract, but specific DOIs not found in PubMed search (2026-02-26). Downgraded from E2 to E1 as peer-reviewed publications cannot be verified.",
+  evidenceRigorNotes: "Vendor references Medical Physics Journal 2023 and ESTRO 2022 abstract, but specific DOIs not found in PubMed search (2026-02-26). Downgraded from E2 to E1 as peer-reviewed publications cannot be verified. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes: "Vendor-reported clinical evidence for lesion tracking workflow. No independently verifiable clinical impact data.",
   evidenceMultiCenter: false,
   evidenceProspective: false,

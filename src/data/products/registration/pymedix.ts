@@ -22,7 +22,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     company: "PyMedix",
     companyUrl: "https://pymedix.com/",
     productUrl: "https://pymedix.com/autofuse/",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/registration/pymedix.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/pymedix.ts",
     description: "Advanced medical imaging registration solution with AI-powered alignment algorithms for multi-modal image fusion in radiotherapy planning.",
     features: ["Multi-modal registration", "AI-powered alignment", "Real-time processing", "Clinical workflow integration"],
     category: "Registration",
@@ -80,7 +80,7 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
 },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 for Autofuse/Pymedix — no peer-reviewed publication found, so no keyPapers could be scored and rigor is E0 (regulatory submission and vendor brochure only). FDA K233572 validation. No independent peer-reviewed clinical accuracy publications identified (web-searched 2026-06-01). Note: PyMedix explicitly markets Autofuse as 'machine perception, not deep learning' — flagged for inclusion review against the AI/DL inclusion gate.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 for Autofuse/Pymedix — no peer-reviewed publication found, so no keyPapers could be scored and rigor is E0 (regulatory submission and vendor brochure only). FDA K233572 validation. No independent peer-reviewed clinical accuracy publications identified (web-searched 2026-06-01). Note: PyMedix explicitly markets Autofuse as 'machine perception, not deep learning' — flagged for inclusion review against the AI/DL inclusion gate. Wave 5D open question: 10.1007/s11548-025-03538-3 (PMID 41196526) appears to use Autofuse only as a comparator — likely exclude.",
     clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: impact lowered to I0 — the previous I2 rested on vendor workflow claims with no published registration-accuracy, time-saving or outcome endpoint. Vendor claims workflow improvement through automated multi-modal image registration.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -109,8 +109,8 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     ],
     version: "2.1",
     releaseDate: "2023-08-15",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
-    source: "FDA 510(k) database (K233572), company website. Version 2.1 retained from prior revision — vendor does not publicly publish a numeric version."
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
+    source: "FDA 510(k) database (K233572), company website. Version 2.1 retained from prior revision — vendor does not publicly publish a numeric version.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

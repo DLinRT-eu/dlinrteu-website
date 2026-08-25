@@ -29,7 +29,7 @@ export const IRISEvo: ProductDetails = {
     productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all/",
     relationship: "Imaging Module"
   },
-  source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026). Version not publicly published; provisional 1.0.",
+  source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026). Version not publicly published; provisional 1.0.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "Elekta",
   logoUrl: "/logos/Elekta.png",
   version: "1.0",
@@ -63,7 +63,7 @@ export const IRISEvo: ProductDetails = {
   ],
   features: ["Deep learning reconstruction", "CBCT imaging", "Radiotherapy"],
   modality: ["CBCT"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/elekta.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/elekta.ts",
   companyUrl: "https://www.elekta.com/",
   productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all",
   regulatory: {
@@ -103,8 +103,8 @@ export const IRISEvo: ProductDetails = {
     "Seamless integration with Elekta linacs",
     "Available as upgrade for existing Elekta linacs"
   ],
-  lastRevised: "2026-06-13",
-  lastUpdated: "2026-06-13",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
     "Recently launched product (Elekta Evo, May 2024); FDA cleared January 2026",
@@ -120,7 +120,7 @@ export const IRISEvo: ProductDetails = {
   clinicalEvidence: "Vendor materials describe improved target delineation and image quality with Iris-enhanced CBCT; no independent peer-reviewed validation available yet.",
   adoptionReadiness: "R3",
   anatomicalLocation: ["Pelvis"],
-  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01).",
+  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01). Wave 5B: three Elekta iterative-CBCT candidates (10.1177/15330338211067312, 10.1016/j.ejmp.2021.11.004, 10.1016/j.ejmp.2021.05.027) require full-text confirmation that IRIS is the evaluated algorithm before scoring.",
   clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance and adaptive workflows (vendor materials).",
   evidenceMultiCenter: false,
   evidenceProspective: false,

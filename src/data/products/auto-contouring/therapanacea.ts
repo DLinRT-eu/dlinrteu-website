@@ -23,7 +23,7 @@ export const Annotate: ProductDetails = {
   company: "Therapanacea",
   companyUrl: "https://therapanacea.com/",
   productUrl: "https://therapanacea.com/products",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
   description: "AI-powered, CE-marked and FDA-cleared auto-contouring software providing zero-click, automatic delineation of organs at risk (OARs) and lymph nodes for all major cancer sites. The ART-Plan structure library v3.2.0 publishes four CT models: Head & Neck (46 OARs, 19 LNs), Thorax/Breast/Abdo including SBRT lung and heart sub-structures (73 OARs, 12 LNs), Pelvis Male (19 OARs, 15 LNs, 3 ROIs) and Pelvis Female (18 OARs, 20 LNs, 2 ROIs). Cloud-based, GDPR-compliant, with seamless TPS integration and batch processing. MRI models are part of MR-Box and BrachyBox (separate products).",
   category: "Auto-Contouring",
   certification: "CE & FDA",
@@ -287,7 +287,7 @@ export const TumorBox: ProductDetails = {
   companyUrl: "https://therapanacea.com/",
   productUrl: "https://therapanacea.com/products",
   website: "https://therapanacea.com/products",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/therapanacea.ts",
   logoUrl: "/logos/therapanacea.png",
   category: "Auto-Contouring",
   subspeciality: "Radiation Oncology",
@@ -372,7 +372,7 @@ export const TumorBox: ProductDetails = {
     relationship: "Module"
   },
   evidenceRigor: "E0",
-  evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1.",
+  evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpact: "I0",
   clinicalImpactNotes: "No independently published dosimetric, workflow or outcome data for AI tumour segmentation with this module.",
   adoptionReadiness: "R2",
@@ -404,9 +404,9 @@ export const TumorBox: ProductDetails = {
   certification: "CE & FDA",
   version: "3.2.0",
   releaseDate: "2025-12-23",
-  lastUpdated: "2026-07-30",
-  lastRevised: "2026-07-30",
-  source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23)."
+  lastUpdated: "2026-08-25",
+  lastRevised: "2026-08-25",
+  source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
 };
 
 export const THERAPANACEA_PRODUCTS: ProductDetails[] = [Annotate, TumorBox];

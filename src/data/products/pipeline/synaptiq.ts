@@ -8,7 +8,7 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://synaptiq.io/",
     productUrl: "https://synaptiq.io/product/",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/synaptiq.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/synaptiq.ts",
     description:
       "4D CT auto-contouring capability offered as an option inside a research module of Synaptiq's Mediq RT platform. Reported by the vendor at the ESTRO 2026 booth as available for research use only; explicitly outside the CE-cleared scope of the main Mediq RT product. No model card, training-data description or independent validation has been published.",
     features: [

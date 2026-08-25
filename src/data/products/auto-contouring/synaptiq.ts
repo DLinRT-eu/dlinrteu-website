@@ -52,7 +52,7 @@ export const MediqRT: ProductDetails = {
     onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
     distributionChannels: ["Direct sales", "Hospital partnerships"]
   },
-  source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature, and vendor-provided System Requirements documentation (2026-06-10). CE clearance details pending verification against EUDAMED listing or vendor press release.",
+  source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature, and vendor-provided System Requirements documentation (2026-06-10). CE clearance details pending verification against EUDAMED listing or vendor press release.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   company: "Synaptiq",
   logoUrl: "/logos/synaptiq.png",
   version: "1.5",
@@ -96,7 +96,7 @@ export const MediqRT: ProductDetails = {
     }
   ],
   modality: ["CT", "MRI"],
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/synaptiq.ts",
   companyUrl: "https://synaptiq.io/",
   productUrl: "https://synaptiq.io/product/",
   regulatory: {
@@ -131,10 +131,11 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Cloud-based data storage and visualization"
   ],
   keyPapers: [
-    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true}
+    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
+    {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and undersampled imaging","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
-  lastRevised: "2026-07-15",
-  lastUpdated: "2026-06-15",
+  lastRevised: "2026-08-25",
+  lastUpdated: "2026-08-25",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
     "Exclusion: paediatric patients — the software is primarily designed for adult anatomy and accuracy has not been validated for paediatric use",

@@ -8,7 +8,7 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.united-imaging.com/",
     productUrl: "https://estro-united-imaging-healthcare-europe.framer.ai/",
     githubUrl:
-      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/united-imaging.ts",
+      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/united-imaging.ts",
     description:
       "Deep Learning Full-Field-of-View (Full-FOV) reconstruction announced for the uCT 610 Sim, an 87 cm ultra-wide-bore CT simulator presented at ESTRO 2026. Designed to provide artifact-suppressed, full-FOV images across the entire bore for radiotherapy simulation, including large patients and immobilisation devices. Labelled by the vendor as 'under development; not for sale or clinical use, not yet available in Europe.'",
     features: [
@@ -41,7 +41,7 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Pre-market announcement at ESTRO 2026 (microsite). No model card, training-data description, peer-reviewed validation or regulatory clearance available.",
+      "Pre-market announcement at ESTRO 2026 (microsite). No model card, training-data description, peer-reviewed validation or regulatory clearance available. 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes:
       "No clinical evidence; pre-market technology disclosure only.",
     adoptionReadiness: "R0",
@@ -56,9 +56,9 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
       intendedUseStatement:
         "\"Under development; not for sale or clinical use, not yet available in Europe.\" (Source: United Imaging ESTRO 2026 microsite, https://estro-united-imaging-healthcare-europe.framer.ai/, retrieved 19 May 2026.)",
     },
-    lastUpdated: "2026-05-19",
-    lastRevised: "2026-05-30",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source:
-      "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'",
+      "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   },
 ];

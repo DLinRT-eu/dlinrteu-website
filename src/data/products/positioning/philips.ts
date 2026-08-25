@@ -6,7 +6,7 @@ export const PrecisePosition: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
-  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/positioning/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/positioning/philips.ts",
   description:
     "Camera-based AI patient auto-positioning for Philips CT. Uses convolutional neural networks to identify anatomical landmarks and automatically position the patient at isocenter, improving vertical accuracy and inter-operator consistency in CT simulation workflows.",
   features: [
@@ -85,7 +85,7 @@ export const PrecisePosition: ProductDetails = {
   evidenceRigor: "E0",
   clinicalImpact: "I1",
   evidenceRigorNotes:
-    "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514.",
+    "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes:
     "I1 (Technical performance / workflow claim, vendor-reported): Philips reports improved vertical positioning accuracy and reduced setup time; no independent evidence of changed treatment management (I3) or patient outcomes (I4).",
   adoptionReadiness: "R3",
@@ -97,9 +97,9 @@ export const PrecisePosition: ProductDetails = {
   evidenceProspective: false,
   evidenceExternalValidation: false,
   clinicalEvidence: "Vendor white paper and FDA 510(k) K203514 summary only; no independent peer-reviewed clinical studies identified as of 2026-06-17.",
-  lastUpdated: "2026-06-17",
-  lastRevised: "2026-06-17",
-  source: "FDA 510(k) database (K203514); Philips 'AI-enabled solutions' page; Philips Precise Position white paper",
+  lastUpdated: "2026-08-25",
+  lastRevised: "2026-08-25",
+  source: "FDA 510(k) database (K203514); Philips 'AI-enabled solutions' page; Philips Precise Position white paper; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   evidence: [
     {
       type: "Regulatory Clearance",

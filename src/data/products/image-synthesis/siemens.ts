@@ -14,7 +14,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         studyDesign: "Software V&V (FDA 510(k)) and single-center clinical validations",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232799.pdf",
         source: "FDA 510(k) summary K232799",
-        description: "Synthetic CT generation for brain and pelvic cancer patients, demonstrating technical efficacy and clinical utility for radiotherapy planning. Peer-reviewed literature (e.g., Aljaafari et al. 2025) and single-center validations support its use.",
+        description: "Synthetic CT generation for brain and pelvic cancer patients, demonstrating technical efficacy and clinical utility for radiotherapy planning.",
         results: "Technical efficacy demonstrated for brain and pelvic synthetic CT generation.",
         primaryEndpoint: "Not specified"
     },
@@ -27,7 +27,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     category: "Image Synthesis",
     certification: "CE & FDA",
     logoUrl: "/logos/siemens.png",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/siemens.ts",
+    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/siemens.ts",
     website: "https://www.siemens-healthineers.com/radiotherapy/software-solutions/syngovia-rt-image-suite",
     anatomicalLocation: ["Brain", "Pelvis"],
     modality: ["MRI"],
@@ -82,7 +82,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-09-20",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
-    source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530)",
+    source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidence: [
       {
         type: "Indirect-Comparative",
@@ -97,7 +97,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E0",
-    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: PubMed was re-searched for publications naming syngo.via RT Image Suite synthetic CT and none were found. The previous E1 rested on an uncited claim that \"published clinical studies\" exist; without a verifiable product-naming publication the score is corrected to E0 (vendor-validated only). Re-instate E1 or higher only when a specific citation can be verified. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: PubMed was re-searched for publications naming syngo.via RT Image Suite synthetic CT and none were found. The previous E1 rested on an uncited claim that \"published clinical studies\" exist; without a verifiable product-naming publication the score is corrected to E0 (vendor-validated only). Re-instate E1 or higher only when a specific citation can be verified. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation. 2026-08-25 Wave 5A re-sweep (Europe PMC 2014-2026, 3115 records screened for 'syngo.via' gated on synthetic-CT terms): still no publication names this product as the sCT generator under evaluation. The previously cited Aljaafari 2025 evaluates Philips MRCAT Brain and was removed as a misattribution.",
     clinicalImpact: "I0",
     clinicalImpactNotes: "I0 after the 2026-08-25 sweep: no verifiable published evaluation of this product, so the previously claimed technical efficacy for brain and pelvic synthetic CT cannot be substantiated.",
     adoptionReadiness: "R3",
