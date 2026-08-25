@@ -291,11 +291,11 @@ export const SmartSpeed: ProductDetails = {
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "I1",
     evidenceRigorNotes:
       "Downgraded from E2 to E1 because FDA documentation emphasizes non-clinical V&V/substantial equivalence, and peer-reviewed clinical evidence is summarized as limited/heterogeneous in the 2025 systematic review. Vendor claims are strong but not equivalent to prospective multicenter outcome evidence.",
     clinicalImpactNotes:
-      "Potential workflow impact through shorter MRI acquisition/reconstruction workflows and/or higher image resolution. Claimed throughput gains should be validated locally by protocol, anatomy, field strength, and reader confidence.",
+      "Potential workflow impact through shorter MRI acquisition/reconstruction workflows and/or higher image resolution. Claimed throughput gains should be validated locally by protocol, anatomy, field strength, and reader confidence. 2026-08-25 Wave 5B: impact corrected I2 → I1 — the max across the newly scored SmartSpeed papers (Jeong 2024 JCAT, Diagnostics 2025, PLoS One 2025) is I1; no publication reports pathway- or outcome-level impact.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes:
       "FDA-cleared and commercially deployed in compatible Philips environments. European CE/MDR status should be verified locally. Local protocol validation and radiologist acceptance testing remain advisable.",

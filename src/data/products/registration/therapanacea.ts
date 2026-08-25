@@ -89,9 +89,9 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse. 2026-08-25 Wave 5D: E1/I2 set by JACMP 2026 (doi 10.1002/acm2.70479), which names Smartfuse and assesses automatic target propagation in an offline adaptive head-and-neck workflow.",
     clinicalImpactNotes: "Manufacturer-claimed workflow improvement through AI-powered rigid and deformable image fusion; no independently confirmed clinical impact study identified.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
