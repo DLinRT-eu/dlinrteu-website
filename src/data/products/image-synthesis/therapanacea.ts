@@ -166,7 +166,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       "Importing data with missing required DICOM tags, incorrect Patient Position / Sex attributes, or corrupted volumes will cause import to fail or generate inappropriate output.",
       "Dose engine must be validated locally by the user before clinical use."
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark.",
     clinicalImpact: "I1",
     clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",

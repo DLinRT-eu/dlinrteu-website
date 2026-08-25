@@ -174,7 +174,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     evidenceRigorNotes: "Evidence includes FDA 510(k) clearance, CE-marked status reported by the company, MR-OPERA multicenter/multivendor prostate validation directly evaluating Spectronic MRiPlanner (Persson 2017, 170 prostate patients at 4 centers — DOI verified 2026-06-15 as the original MR-OPERA paper and confirmed to evaluate the Spectronic sCT product), independent brain validation (Lerner et al. 2021), multi-site dosimetric validation across pelvis, brain and head & neck (Bird et al. 2024), and clinical implementation evidence in H&N and pelvic VMAT workflows (Earwong et al. 2025). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Evidence is strong for technical and dosimetric validation, but not outcome-level clinical benefit.",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     clinicalImpactNotes: "Technical efficacy demonstrated: dosimetric accuracy and workflow feasibility have been reported across prostate/pelvis, brain and head & neck synthetic-CT workflows. Published evidence supports MRI-only planning implementation and QA, but does not yet demonstrate improved patient outcomes.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE-marked status + FDA 510(k): moderate implementation effort — local MRI sequence validation, TPS/DICOM integration testing, OAR-contour scope checks and site-specific QA required before adoption.",
