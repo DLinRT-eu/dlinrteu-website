@@ -69,7 +69,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-08-15",
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "QA visualization tool. No peer-reviewed publications. MDR exempt.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA visualization tool. No peer-reviewed publications. MDR exempt.",
     clinicalImpactNotes: "QA/monitoring tool for comparing AI-generated and manual contours.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",

@@ -119,25 +119,29 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     version: "2026",
     releaseDate: "2025-05-02",
-    evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Eriksson et al. Phys Med 2024 prostate dose prediction. FDA K240398. DL dose prediction for VMAT (Rad Oncol 2024, doi:10.1186/s13014-024-02534-2). RayStation v2025 with ECHO algorithm (MSK). PubMed verified 2026-03-08. RayStation v2026 (July 2026) adds three new deep learning planning models: breast locoregional, lung proton, and prostate. Vendor states v2026 is subject to regulatory clearance in some markets and is not available for use or sale in USA/Canada; v2026 models therefore not factored into evidence scoring.",
-    clinicalImpactNotes: "Workflow improvement through rapid automated plan generation with deep learning dose prediction. ECHO algorithm integration further accelerates planning.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    keyPapers: [
+      {"doi":"10.1186/s13014-024-02534-2","title":"A deep learning-based dose calculation method for volumetric modulated arc therapy","journal":"Radiation Oncology","year":"2024","rationale":"Indirect-comparative: generic DL dose-calculation method paper that does not evaluate the RayStation deep learning planning models, so it carries no E/I level for this product."},
+      {"doi":"10.1002/acm2.70291","title":"Evaluation of deep learning-based automated radiotherapy planning for early-stage lung cancer using SBRT-VMAT: A comparison with manual planning","authors":"Nemoto H et al.","journal":"J Appl Clin Med Phys","year":"2025","rationale":"Indirect-comparative: the dose-prediction model is RatoGuide (AiRato Inc.); RayStation is only the host TPS used for dose mimicking, so it carries no E/I level for this product."}
+    ],
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: the previously cited \"Eriksson et al. Phys Med 2024 prostate dose prediction\" could not be verified — DOI 10.1016/j.ejmp.2024.103419 resolves to an unrelated digital breast tomosynthesis phantom study and no matching paper exists on PubMed or Crossref, so the citation was removed. Rad Oncol 2024 (doi:10.1186/s13014-024-02534-2) is a generic DL dose-calculation method paper and Nemoto 2025 evaluates the RatoGuide model with RayStation only as host TPS; both are indirect-comparative. No verified peer-reviewed evaluation of the RayStation deep learning planning models remains, so rigor is E0 (regulatory clearance K240398 and vendor model catalogue only). RayStation v2025 with ECHO algorithm (MSK). RayStation v2026 (July 2026) adds three new deep learning planning models: breast locoregional, lung proton, and prostate. Vendor states v2026 is subject to regulatory clearance in some markets and is not available for use or sale in USA/Canada; v2026 models therefore not factored into evidence scoring.",
+    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: no published dosimetric or workflow endpoint for the RayStation DL planning models survives verification, so impact is I0. Vendor claims workflow improvement through rapid automated plan generation with deep learning dose prediction; ECHO algorithm integration is claimed to further accelerate planning, but neither claim is independently published.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): cleared and commercially mature, but with no verified peer-reviewed evaluation local validation is essential — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-07-01",
-    lastRevised: "2026-07-01",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website, RayStation v2026 release page",
     evidence: [
       {
-        type: "Peer-reviewed Publication",
-        description: "Eriksson et al. Prostate dose prediction study in Physics in Medicine 2024",
-        link: "https://doi.org/10.1016/j.ejmp.2024.103419"
+        type: "Indirect-comparative",
+        description: "Nemoto et al. Evaluation of deep learning-based automated radiotherapy planning for early-stage lung cancer using SBRT-VMAT. J Appl Clin Med Phys 2025;26(10):e70291. Uses the RatoGuide (AiRato Inc.) prediction model with RayStation as host TPS — not a RayStation DL planning model evaluation.",
+        link: "https://doi.org/10.1002/acm2.70291"
       },
       {
         type: "FDA 510(k) Database Entry",

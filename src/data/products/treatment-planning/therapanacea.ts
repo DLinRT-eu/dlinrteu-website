@@ -96,7 +96,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Regulatory clearance (FDA K253091) and CE class IIb coverage only. No peer-reviewed publication naming SmartPlan identified as of 2026-07-30; vendor material references conference abstracts and testimonials, which do not qualify for E1.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Regulatory clearance (FDA K253091) and CE class IIb coverage only. No peer-reviewed publication naming SmartPlan identified as of 2026-07-30; vendor material references conference abstracts and testimonials, which do not qualify for E1.",
     clinicalImpactNotes: "Manufacturer and clinical-user testimonials claim one-click plan generation in minutes with reduced planner variability for prostate; no independently published dosimetric or workflow outcome data located.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE/FDA: automatic planning changes a core clinical process, so local commissioning, plan-quality benchmarking against institutional standards and physicist sign-off workflows are required before routine use.",

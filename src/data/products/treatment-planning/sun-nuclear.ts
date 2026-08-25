@@ -98,10 +98,13 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     },
     version: "1.0",
     releaseDate: "2021-03-12",
+    keyPapers: [
+      {"doi":"10.1016/j.adro.2026.102036","pmid":"42382856","title":"Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy","authors":"Shade JK et al.","journal":"Advances in Radiation Oncology","year":"2026","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Models trained on 5334 plans from two institutions and validated by replanning 72 clinical cases across four anatomical sites, including an external site (Montefiore Einstein); predictive plans matched or lowered OAR dose with equal or better target coverage. Vendor-authored (Oncospace employees).","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":true}
+    ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
-    clinicalImpactNotes: "Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: E2 confirmed on the strength of Shade 2026 alone — external validation at a second institution meets the E2 criterion, but the study is retrospective, vendor-authored and spans only two sites, so it does not reach E3. The ESTRO/AAPM/ICCR items are conference abstracts and carry no E/I level under the rubric. Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: I2 (workflow / plan-quality) supported by the Shade 2026 dosimetric comparison; no decision-level or outcome-level endpoint published. Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
     evidenceVendorIndependent: false,
@@ -109,15 +112,15 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-22",
-    lastRevised: "2026-06-22",
+    lastUpdated: "2026-08-25",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22)",
     clinicalEvidence: "Peer-reviewed internal validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {
         type: "Peer-reviewed Validation",
-        description: "Shade et al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External-Beam Radiotherapy. Adv Radiat Oncol 2026.",
-        link: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
+        description: "Shade et al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy. Adv Radiat Oncol 2026;11(8):102036 (PMID 42382856).",
+        link: "https://doi.org/10.1016/j.adro.2026.102036"
       },
       {
         type: "Validation",

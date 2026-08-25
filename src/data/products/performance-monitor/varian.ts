@@ -66,9 +66,13 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2012",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
-    evidenceRigor: "E2",
+    keyPapers: [
+      {"doi":"10.1002/acm2.12572","title":"Commissioning of the Mobius3D independent dose verification system for TomoTherapy","journal":"J Appl Clin Med Phys","year":"2019","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent single-centre commissioning study of Mobius3D independent dose verification; QA-level endpoint.","vendorIndependent":true},
+      {"doi":"10.3389/fonc.2024.1478118","title":"Development of a new VMAT QA framework for Mobius3D using control-point specific EPID images","journal":"Frontiers in Oncology","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent single-centre methodological study extending Mobius3D VMAT QA with EPID images; QA-level endpoint.","vendorIndependent":true}
+    ],
+    evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Czarnecki et al. Med Phys 2018. Seok et al. Front Oncol 2024 new VMAT QA framework (doi:10.3389/fonc.2024.1478118). Review in PMC12672138 on measurement-based PSQA. PubMed verified 2026-02-27.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: the stored 'Czarnecki et al. Med Phys 2018' citation was removed — DOI 10.1002/mp.12736 resolves to an unrelated silicon-strip-detector paper and no matching Mobius3D publication exists. Replaced with the verified JACMP 2019 commissioning study (doi:10.1002/acm2.12572). Both scored papers are vendor-independent but single-centre, so rigor is E1 rather than the previously stored E2. Seok et al. Front Oncol 2024 verified (doi:10.3389/fonc.2024.1478118). Review in PMC12672138 on measurement-based PSQA.",
     clinicalImpactNotes: "QA/monitoring tool for independent dose verification and treatment delivery verification.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -76,12 +80,12 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: true,
+    evidenceExternalValidation: false,
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Czarnecki et al. Independent dose verification. Med Phys 2018",
-        link: "https://doi.org/10.1002/mp.12736"
+        description: "Commissioning of the Mobius3D independent dose verification system for TomoTherapy. J Appl Clin Med Phys 2019.",
+        link: "https://doi.org/10.1002/acm2.12572"
       },
       {
         type: "Peer-reviewed Publication",

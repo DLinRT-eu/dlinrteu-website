@@ -62,13 +62,16 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
+    keyPapers: [
+      {"doi":"10.3389/fonc.2025.1694883","pmid":"41333223","title":"Automated contouring, treatment planning, and quality assurance for total marrow lymphoid irradiation","authors":"Simiele E et al.","journal":"Frontiers in Oncology","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre workflow study using ClearCheck for automated plan checking within a total marrow lymphoid irradiation pipeline; QA-level endpoint.","vendorIndependent":true}
+    ],
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Published TG-275 compliance automation studies. Simiele et al. Front Oncol 2025 (ClearCheck in total marrow lymphoid irradiation workflow). PubMed verified 2026-03-08.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: the stored Simiele DOI (10.3389/fonc.2025.1500941) did not resolve; the correct record is Front Oncol 2025, doi:10.3389/fonc.2025.1694883 (PMID 41333223) — citation corrected 2026-08-25. Single-centre workflow study keeps rigor at E1. Published TG-275 compliance automation studies.",
     clinicalImpactNotes: "QA/monitoring tool for automated plan checking and structure validation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: false,
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
@@ -76,8 +79,8 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     evidence: [
       {
         type: "Peer-reviewed Publication",
-        description: "Simiele et al. Automated contouring and QA for total marrow lymphoid irradiation using Radformation tools. Front Oncol 2025",
-        link: "https://doi.org/10.3389/fonc.2025.1500941"
+        description: "Simiele et al. Automated contouring, treatment planning, and quality assurance for total marrow lymphoid irradiation (ClearCheck used for automated plan checking). Front Oncol 2025 (PMID 41333223).",
+        link: "https://doi.org/10.3389/fonc.2025.1694883"
       }
     ],
     releaseDate: "2016-12-01",

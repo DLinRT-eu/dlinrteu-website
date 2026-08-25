@@ -93,7 +93,7 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     lastRevised: "2026-06-15",
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "No peer-reviewed publications located. PubMed searched 2026-05-31.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. No peer-reviewed publications located. PubMed searched 2026-05-31.",
     clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-05-31.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E0 + NMPA only: high implementation burden — vendor-only evidence; structured pilot, external validation, and human-factors testing recommended before clinical adoption.",

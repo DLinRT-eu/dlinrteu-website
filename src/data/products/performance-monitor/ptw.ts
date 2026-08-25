@@ -70,7 +70,7 @@ export const AIQUALIS: ProductDetails = {
   diseaseTargeted: ["Cancer"],
   adoptionReadiness: "R1",
   anatomicalLocation: ["Multiple"],
-  evidenceRigorNotes: "QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024). Poster from RCR Global AI conference: https://www.ptwdosimetry.com/fileadmin/user_upload/Downloads/Papers/DETECTING_AUTOMATION_BIAS_Doolan.pdf. ",
+  evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. QA monitoring tool. MDR exempt. No peer-reviewed publications yet. New product (2024). Poster from RCR Global AI conference: https://www.ptwdosimetry.com/fileadmin/user_upload/Downloads/Papers/DETECTING_AUTOMATION_BIAS_Doolan.pdf. ",
   monitorsAIProducts: ["Auto-Contouring outputs"],
   clinicalImpactNotes: "QA/monitoring tool for auditing AI contour quality in clinical practice.",
   adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
