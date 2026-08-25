@@ -4,6 +4,12 @@ import { ProductDetails } from "@/types/productDetails";
 export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
   {
     id: "philips-mrcat-brain",
+    keyPapers: [
+      {"doi":"10.1016/j.tipsro.2025.100328","title":"Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning","authors":"Aljaafari A et al.","journal":"Tech Innov Patient Support Radiat Oncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent clinical validation in 93 patients with 572 CBCT registrations; dose differences <0.4% support an MR-only brain workflow.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.phro.2024.100589","title":"Clinical implementation of a commercial synthetic computed tomography solution for radiotherapy treatment of glioblastoma","authors":"Emin S et al.","journal":"Phys Imaging Radiat Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent single-centre clinical implementation report for glioblastoma MR-only planning.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1002/acm2.14494","title":"Clinical validation of MR-generated synthetic CT by MRCAT for brain tumor radiotherapy","authors":"Yip TTY et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of dosimetric accuracy; technical-level endpoints.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; not a direct MRCAT evaluation, therefore unscored."}
+    ],
     trainingData: {
         source: "FDA 510(k) summary K193109",
         demographics: "Adult and pediatric patients",
@@ -119,9 +125,9 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     evidenceRigorNotes: "Single-center vendor-independent clinical validation with 93 patients (Aljaafari et al. 2025, Leeds Teaching Hospitals NHS Trust, UK). Complemented by multi-center vendor V&V disclosed in the Philips IFU appendix (RTgo 4.0, 3 hospitals × 138 patients): mean PTV dose difference −0.02 ± 0.24%, 99.9% voxels passing 2%/2 mm gamma. Vendor V&V does not by itself promote E (not vendor-independent), but documents multi-center technical performance. MESCAL 2026 (Cusumano, Maspero et al., DOI 10.1016/j.radonc.2026.111530) kept separately as indirect-comparative community benchmark.",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     clinicalImpactNotes: "Technical efficacy demonstrated: PTV dose differences <0.4%, CBCT positioning within ±1mm/±1° (Aljaafari et al. 2025); vendor V&V across 3 hospitals consistent with these results.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",

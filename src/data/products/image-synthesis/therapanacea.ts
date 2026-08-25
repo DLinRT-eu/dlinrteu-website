@@ -125,7 +125,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
-        evidenceRigor: "E1",
+        evidenceRigor: "E2",
         evidenceRigorNotes: "Vendor-assisted peer-reviewed multi-centric study (Frontiers in Oncology 2023, DOI 10.3389/fonc.2023.1245054) across 8 institutions for pelvic TrueFISP and brain pseudo-CT generation.",
         clinicalImpact: "I1",
       },

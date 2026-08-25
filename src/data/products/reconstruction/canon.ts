@@ -4,6 +4,11 @@ import { ProductDetails } from "@/types/productDetails";
 export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-aice-ct",
+    keyPapers: [
+      {"doi":"10.2214/AJR.19.21809","title":"Image quality and lesion detection on deep learning reconstruction and iterative reconstruction of submillisievert chest and abdominal CT","authors":"Singh R et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Prospective multi-institutional patient study supporting submillisievert protocols with maintained lesion detection.","vendorIndependent":true,"multiCenter":true,"prospective":true},
+      {"doi":"10.1038/s41598-023-42775-x","title":"Validation of deep learning-based CT image reconstruction for treatment planning","authors":"Yasui K et al.","journal":"Sci Rep","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Phantom study on a large-bore RT planning CT; CT-number stability endpoints.","vendorIndependent":true},
+      {"doi":"10.21037/qims-21-1216","title":"Deep learning reconstruction allows low-dose imaging while maintaining image quality in contrast-enhanced abdominal CT","authors":"Tamura A et al.","journal":"Quant Imaging Med Surg","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent single-centre clinical study supporting dose reduction in routine abdominal CT.","vendorIndependent":true}
+    ],
     trainingData: {
         disclosureLevel: "minimal",
         source: "FDA 510(k) summary K181862",
@@ -121,6 +126,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "canon-aice-mr",
+    keyPapers: [
+      {"doi":"10.1186/s12880-023-00962-2","title":"Acceleration of knee MRI using a combination of compressed sensing and commercially available deep learning reconstruction","authors":"Akai H et al.","journal":"BMC Med Imaging","year":"2023","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent single-centre study demonstrating clinically usable acceleration.","vendorIndependent":true}
+    ],
     trainingData: {
         demographics: "Adult and pediatric (intended population)",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K192574.pdf",
@@ -225,7 +233,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       "Performance varies by pulse sequence and anatomy",
       "Not specifically validated for radiotherapy planning workflow"
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "I2",
     evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01.",
     clinicalImpactNotes: "Workflow improvement through up to ~50% reduction in MRI scan time with maintained or improved image quality (Akai 2023; vendor materials).",
@@ -244,6 +252,11 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "canon-piqe",
+    keyPapers: [
+      {"doi":"10.1186/s41747-025-00670-2","title":"Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings","authors":"Greffier J et al.","journal":"Eur Radiol Exp","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom comparison.","vendorIndependent":true},
+      {"doi":"10.1016/j.ejrad.2025.111953","title":"PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma","authors":"Nagayama Y et al.","journal":"Eur J Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical image-quality study.","vendorIndependent":true},
+      {"doi":"10.1016/j.acra.2024.09.012","title":"Advances in spatial resolution using super-resolution deep learning reconstruction for abdominal CT","authors":"Funama Y et al.","journal":"Acad Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Technical spatial-resolution evaluation.","vendorIndependent":true}
+    ],
     trainingData: {
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243335.pdf",
         source: "FDA 510(k) summary K243335",

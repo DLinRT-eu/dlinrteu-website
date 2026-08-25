@@ -4,6 +4,9 @@ import { ProductDetails } from "@/types/productDetails";
 export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-uai-vision-recon",
+    keyPapers: [
+      {"doi":"10.1016/j.xcrm.2023.101119","title":"Fast and low-dose medical imaging generation empowered by hybrid deep-learning and iterative reconstruction","authors":"Liao S et al.","journal":"Cell Rep Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated technical description of the underlying DL + iterative reconstruction pipeline.","vendorIndependent":false}
+    ],
     trainingData: {
         description: "Deep neural network reconstruction trained on CT data, integrated into uCT scanners and the uCloud platform.",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193073.pdf",

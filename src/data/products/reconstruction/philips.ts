@@ -2,6 +2,14 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const PreciseImage: ProductDetails = {
   id: "philips-precise-image",
+    keyPapers: [
+      {"doi":"10.1002/mp.15807","title":"Impact of an artificial intelligence deep-learning reconstruction algorithm for CT on image quality and potential dose reduction: a phantom study","authors":"Greffier J et al.","journal":"Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent chest phantom study; technical image-quality endpoints.","vendorIndependent":true},
+      {"doi":"10.1007/s00330-022-09003-y","title":"Improved image quality and dose reduction in abdominal CT with deep-learning reconstruction algorithm: a phantom study","authors":"Greffier J et al.","journal":"Eur Radiol","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom detectability study.","vendorIndependent":true},
+      {"doi":"10.1016/j.ejmp.2022.102517","title":"Image quality evaluation of the Precise Image CT deep learning reconstruction algorithm compared to FBP and iDose4: a phantom study at different dose levels","authors":"Barca P et al.","journal":"Phys Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom comparison at multiple dose levels.","vendorIndependent":true},
+      {"doi":"10.12688/f1000research.150773.1","title":"Comparison of image quality between deep learning image reconstruction and iterative reconstruction technique for CT brain — a pilot study","authors":"Chandran S et al.","journal":"F1000Research","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-centre pilot in 30 patients; one vendor-affiliated co-author.","prospective":true},
+      {"doi":"10.3390/jimaging11090317","title":"Quantitative evaluation of low-dose CT image quality using deep learning reconstruction: Philips Precise Image vs GE TrueFidelity","authors":"Shim J, Lee S, Kim H","journal":"J Imaging","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent head-to-head phantom comparison.","vendorIndependent":true},
+      {"doi":"10.21037/jmai-2025-173","title":"Deep learning precise image reconstruction algorithm for abdominal CT: impact on image quality and radiation dose reduction","authors":"Liu Y et al.","journal":"J Med Artif Intell","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Retrospective clinical study in 60 patients reporting achievable dose reduction in routine abdominal CT."}
+    ],
   trainingData: {
       description: "The model is a deep learning-based CT image enhancement solution trained to generate images with an appearance similar to traditional filtered back-projection (FBP) while reducing dose and improving image quality",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf21/K210760.pdf",

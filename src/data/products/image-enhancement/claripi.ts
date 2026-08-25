@@ -4,6 +4,15 @@ import { ProductDetails } from "@/types/productDetails";
 export const CLARIPI_PRODUCTS: ProductDetails[] = [
   {
     id: "claripi-clarict-ai",
+    keyPapers: [
+      {"doi":"10.1148/ryai.230192","title":"Image quality and diagnostic performance of low-dose liver CT with deep learning reconstruction versus standard-dose CT","authors":"Lee DH et al.","journal":"Radiol Artif Intell","year":"2024","evidenceRigor":"E3","clinicalImpact":"I2","rationale":"Prospective multicentre, multinational noninferiority trial (n=296) confirming malignant tumour detection at 33% dose.","vendorIndependent":true,"multiCenter":true,"multiNational":true,"prospective":true,"externalValidation":true},
+      {"doi":"10.1007/s00330-025-11742-7","title":"Diagnostic performance of lumbar spine CT using deep learning denoising to evaluate disc herniation and spinal stenosis","authors":"Park J et al.","journal":"Eur Radiol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent clinical study reporting improved diagnostic sensitivity against an MRI reference.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.acra.2024.12.041","title":"Evaluation of a deep learning denoising algorithm for dose reduction in whole-body photon-counting CT imaging: a cadaveric study","authors":"Dehdab R et al.","journal":"Acad Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent cadaveric study; technical dose-reduction endpoints.","vendorIndependent":true},
+      {"doi":"10.3390/jcm13051502","title":"Noise-optimized CBCT imaging of temporomandibular joints — the impact of AI on image quality","authors":"Kazimierczak N et al.","journal":"J Clin Med","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent off-label CBCT image-quality study.","vendorIndependent":true},
+      {"doi":"10.1371/journal.pone.0270122","title":"Accuracy of two deep learning-based reconstruction methods compared with ASIR-V for nodule volumetry on low- and ultra-low-dose chest CT: a phantom study","authors":"Kim C et al.","journal":"PLoS One","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent head-to-head phantom volumetry study.","vendorIndependent":true},
+      {"doi":"10.3348/kjr.2021.0140","title":"Deep learning algorithm for simultaneous noise reduction and edge sharpening in low-dose CT images: a pilot study using lumbar spine CT","authors":"Yeoh H et al.","journal":"Korean J Radiol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated retrospective pilot (n=52).","vendorIndependent":false},
+      {"doi":"10.1007/s00330-021-08199-9","title":"Dose reduction potential of a vendor-agnostic deep learning model compared with a DL-based image reconstruction algorithm on CT: a phantom study","authors":"Choi H et al.","journal":"Eur Radiol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated phantom head-to-head comparison.","vendorIndependent":false}
+    ],
     trainingData: {
         description: "Image-based CT denoising using a U-Net CNN (contracting + expansive paths). Per Yeoh et al. Korean J Radiol 2021, training used >1,000,000 CT images covering ~2,100 combinations of scan/reconstruction conditions (varying kV, mAs, AEC, slice thickness, contrast, kernels) across 24 scanner models from 4 major vendors (GE, Siemens, Philips, Canon). Synthetic sinogram-based LDCT simulation generated paired LDCT/standard-dose training data; 80/20 train/validation split, with additional external validation in 4 independent clinical studies.",
         datasetSize: ">1,000,000 CT images (~2,100 scan/recon condition combinations)",
@@ -135,7 +144,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
       "No dedicated pediatric peer-reviewed study identified despite pediatric imaging being a listed target use",
       "Version identifier inconsistent across sources (1.1.0 vs 1.2.3); current production version not publicly confirmed",
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E3",
     clinicalImpact: "I2",
     evidenceRigorNotes: "E2 (Validated Evidence): Lee DH et al. 2024 alone meets the full E2 bar within a single study — prospective, multicenter (3 sites, Korea and Germany), large cohort (n=296), externally validated, registered (NCT05804799), independent of ClariPi. This is corroborated by four further independent single-/multi-site studies (Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022) spanning three additional countries and both clinical and phantom/cadaveric designs. Four further studies (Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026) are vendor-affiliated via a recurring Seoul National University Bundang Hospital / ClariPi Research collaboration and are retained as supplementary technical evidence, not as independent validation.",
     clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): Lee DH et al. 2024 demonstrates noninferior diagnostic performance for malignant liver tumor detection at 33% dose (prospective, n=296, multicenter); Park et al. 2025 demonstrates improved diagnostic accuracy for lumbar disc herniation/stenosis against an MRI reference standard. Both are genuine diagnostic-accuracy endpoints, not just image-quality metrics, supporting I2. No evidence identified of changed treatment management (I3) or patient outcomes (I4).",
@@ -154,6 +163,9 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "claripi-clariace",
+    keyPapers: [
+      {"doi":"10.31320/jksct.2024.26.2.33","title":"Diagnostic usefulness of contrast enhancement and noise reduction of AI-based ClariACE in delayed enhancement imaging of cardiac CT","authors":"Kim S et al.","journal":"J Korean Soc CT Technol","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation in a vendor-affiliated context; technical image-quality endpoints.","vendorIndependent":false}
+    ],
     name: "ClariACE",
     company: "ClariPi",
     category: "Image Enhancement",

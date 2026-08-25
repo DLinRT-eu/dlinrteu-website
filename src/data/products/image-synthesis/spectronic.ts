@@ -3,6 +3,13 @@ import { ProductDetails } from "@/types/productDetails";
 export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
   {
     id: "spectronic-mriplanner",
+    keyPapers: [
+      {"doi":"10.1016/j.ijrobp.2017.06.006","title":"MR-OPERA: A Multicenter/Multivendor Validation of MRI-Only Prostate Treatment Planning Using Synthetic CT Images","authors":"Persson E et al.","journal":"Int J Radiat Oncol Biol Phys","year":"2017","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multicentre, multivendor validation in 170 patients supporting clinical MR-only prostate planning.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+      {"doi":"10.1186/s13014-021-01794-6","title":"Clinical validation of a commercially available deep learning software for synthetic CT generation for brain","authors":"Lerner M et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent clinical validation of brain sCT dosimetric and geometric accuracy.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2023.110052","title":"Deep learning MRI-only synthetic-CT generation for pelvis, brain and head and neck cancers","authors":"Bird D et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent multi-site evaluation across three anatomies; technical/dosimetric endpoints.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+      {"doi":"10.1186/s13014-025-02744-2","title":"Clinical implementation of deep learning-based synthetic CT for MRI-only VMAT in head and neck and pelvic cancer patients","authors":"Earwong P et al.","journal":"Radiat Oncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent clinical implementation of an MR-only VMAT workflow.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiother Oncol","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."}
+    ],
     trainingData: {
         source: "FDA 510(k) summary K211841",
         disclosureLevel: "minimal",
@@ -30,7 +37,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         },
         evidenceRigor: "E2",
         evidenceRigorNotes: "Multi-center, vendor-independent and external validation across multiple anatomies (Persson 2017, Lerner 2021, Bird 2024, Earwong 2025).",
-        clinicalImpact: "I1",
+        clinicalImpact: "I2",
         clinicalImpactNotes: "Technical/dosimetric efficacy demonstrated for MRI-only planning; no outcome-level benefit yet.",
       },
       "Auto-Contouring": {

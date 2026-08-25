@@ -3,6 +3,11 @@ import { ProductDetails } from "@/types/productDetails";
 export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
   {
     id: "algomedica-pixelshine",
+    keyPapers: [
+      {"doi":"10.3390/diagnostics12071627","title":"Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization","authors":"Steuwe A et al.","journal":"Diagnostics","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent single-centre quantitative study.","vendorIndependent":true},
+      {"doi":"10.3390/tomography8040140","title":"AI denoising improves image quality and radiological workflows in pediatric ultra-low-dose thorax CT","authors":"Brendlin AS et al.","journal":"Tomography","year":"2022","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Vendor-independent blinded multi-reader study in 100 consecutive patients reporting workflow gains and shortest time to diagnosis.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.2214/AJR.19.22680","title":"Combination of deep learning-based denoising and iterative reconstruction for ultra-low-dose chest CT","authors":"Hata A et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent clinical study at mean 0.19 mSv with Lung-RADS evaluation supporting dose reduction.","vendorIndependent":true}
+    ],
     trainingData: {
         disclosureLevel: "minimal",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf",
