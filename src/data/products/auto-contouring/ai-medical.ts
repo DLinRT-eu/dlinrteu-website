@@ -42,7 +42,7 @@ export const Jazz: ProductDetails = {
     }
   ],
   modality: ["MRI"],
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/ai-medical.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ai-medical.ts",
   companyUrl: "https://www.ai-medical.ch/",
   productUrl: "https://www.ai-medical.ch/jazz",
   regulatory: {

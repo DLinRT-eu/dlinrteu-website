@@ -51,7 +51,7 @@ const SyMRINeuro: ProductDetails = {
     "Quantitative tissue mapping"
   ],
   modality: "MRI",
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/syntheticmr.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/syntheticmr.ts",
   companyUrl: "https://syntheticmr.com/",
   productUrl: "https://syntheticmr.com/products/symri-neuro/",
   regulatory: {

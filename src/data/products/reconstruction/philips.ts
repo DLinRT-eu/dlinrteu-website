@@ -29,7 +29,7 @@ export const PreciseImage: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/technology/ct-smart-workflow",
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
   description: "AI-driven solution for enhancing low-dose CT images to achieve diagnostic quality comparable to standard dose acquisitions.",
   features: ["Low-dose CT enhancement", "Increased user consistency", "Reduced interventional procedure time"],
   category: "Reconstruction",
@@ -187,7 +187,7 @@ export const SmartSpeed: ProductDetails = {
     company: "Philips",
     category: "Reconstruction",
     githubUrl:
-      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
     description:
       "AI-powered MRI acceleration and reconstruction software integrated with Philips' Compressed SENSE speed engine. It is designed to reduce scan time and/or improve image resolution across a broad range of Philips MR protocols while keeping reconstruction within the scanner workflow.",
     certification: "FDA Cleared",
@@ -337,7 +337,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     company: "Philips",
     category: "Reconstruction",
     githubUrl:
-      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
     description:
       "Next-generation Philips MRI reconstruction and image-enhancement software combining Compressed SENSE with dual AI engines for denoising and image sharpening/anti-ringing. FDA documentation describes it as a machine-learning-based reconstruction feature intended to increase SNR, increase sharpness, and reduce residual ringing artifacts in MR images.",
     certification: "FDA Cleared",
@@ -469,7 +469,7 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
   productUrl: "https://www.philips.com/healthcare/solutions/pet-ct",
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/reconstruction/philips.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
   description:
     "AI-based smart processing of PET data during reconstruction to reduce image noise and enhance image contrast, designed to improve PET/CT image quality. Implemented as look-up tables for automated selection of PET reconstruction parameters.",
   features: [

@@ -7,7 +7,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/treatment-planning/therapanacea.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/therapanacea.ts",
     description: "AI-powered automatic treatment planning module of the ART-Plan+ platform. SmartPlan generates a complete radiotherapy plan from a planning CT and an RT structure set, which the user imports into their own treatment planning system for dose calculation, review and approval. FDA clearance (K253091) limits the indication to supported prostate prescriptions.",
     category: "Treatment Planning",
     certification: "CE & FDA",

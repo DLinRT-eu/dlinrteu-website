@@ -28,7 +28,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     company: "Therapanacea",
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/registration/therapanacea.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/registration/therapanacea.ts",
     description: "AI-powered software for high-precision rigid and deformable image fusion with real-time contour deformation for faster replanning. Part of the ART-Plan+ platform.",
     category: "Registration",
     certification: "CE & TGA",

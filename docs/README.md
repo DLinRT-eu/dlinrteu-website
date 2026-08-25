@@ -238,7 +238,7 @@ The full bundle (ZIP) ships with a `manifest.json` and `README.md` describing sc
 ## 🔗 External Resources
 
 - **Platform**: [https://dlinrt.eu](https://dlinrt.eu)
-- **GitHub**: [DLinRT-eu/website](https://github.com/DLinRT-eu/website)
+- **GitHub**: [DLinRT-eu/dlinrteu-website](https://github.com/DLinRT-eu/dlinrteu-website)
 - **Contact**: info@dlinrt.eu
 
 ---

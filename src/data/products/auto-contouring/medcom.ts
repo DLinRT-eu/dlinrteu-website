@@ -21,7 +21,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     company: "MedCom",
     companyUrl: "https://www.medcom-online.de/",
     productUrl: "https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/medcom.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/medcom.ts",
     description:
       "AI-based fully-automatic anatomical contouring engine bundled with the ProSoma RT toolkit. Provided as configurable per-region modules — Head & Neck (41 VOIs), Prostate (11 VOIs), and Mamma (11 VOIs) — for OAR and target delineation in external beam planning. VOI counts reported on the vendor DART product page; per-structure lists are not publicly disclosed.",
     category: "Auto-Contouring",

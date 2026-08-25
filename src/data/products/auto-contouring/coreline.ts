@@ -22,7 +22,7 @@ const rawProduct: ProductDetails = {
   company: "Coreline Soft Co",
   companyUrl: "https://www.corelinesoft.com/en/",
   productUrl: "https://www.corelinesoft.com/en/solutions/rt-acs",
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/coreline.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/coreline.ts",
   description: "AI-powered automatic contouring server for radiation therapy planning, providing rapid and accurate organ segmentation using deep learning algorithms across brain, head & neck, thorax, breast, abdomen, and pelvis regions.",
   category: "Auto-Contouring",
   certification: "CE & FDA",

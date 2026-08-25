@@ -7,7 +7,7 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     company: "RaySearch Laboratories",
     companyUrl: "https://www.raysearchlabs.com/",
     productUrl: "https://www.raysearchlabs.com/rayintelligence/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/raysearch.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/raysearch.ts",
     description: "Oncology analytics system that connects directly to primary oncology data sources (RayStation, RayCare, and third-party OIS/RIS) to surface clinical, operational, and AI-performance signals. v2026 introduces Deep Learning Segmentation (DLS) monitoring, enabling clinical teams to track the real-world performance of AI contouring alongside plan benchmarking, device utilization, and team expertise mapping.",
     features: [
       "AI performance monitoring (Deep Learning Segmentation)",

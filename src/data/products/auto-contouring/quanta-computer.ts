@@ -7,7 +7,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     company: "Quanta Computer Inc.",
     companyUrl: "https://www.quantatw.com/quanta/english/default.aspx",
     productUrl: "https://www.qoca.net/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/quanta-computer.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/quanta-computer.ts",
     description: "AI-powered post-processing software that automatically delineates organs at risk on planning CT scans for radiation therapy. Designed to reduce contouring time and inter-observer variability in radiation oncology workflows.",
     version: "1.0 (ZSWR901)",
     features: [

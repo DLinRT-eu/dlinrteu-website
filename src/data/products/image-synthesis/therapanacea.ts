@@ -37,7 +37,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-mrbox.ts",
     website: "https://therapanacea.com/products",
     anatomicalLocation: ["Pelvis", "Brain", "Abdomen"],
     modality: ["MRI"],

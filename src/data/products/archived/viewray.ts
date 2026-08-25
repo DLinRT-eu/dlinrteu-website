@@ -78,6 +78,6 @@ export const VIEWRAY_ARCHIVED_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-01-29",
     lastRevised: "2026-01-29",
     source: "FDA 510(k) database (K162393, K181989), ViewRay official website",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/archived/viewray.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/archived/viewray.ts"
   }
 ];

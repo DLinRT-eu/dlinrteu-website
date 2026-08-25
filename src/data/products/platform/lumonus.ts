@@ -8,7 +8,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.lumonus.com",
     productUrl: "https://www.lumonus.com/",
     githubUrl:
-      "https://github.com/DLinRT-eu/website/tree/main/src/data/products/platform/lumonus.ts",
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/lumonus.ts",
     description:
       "AI-driven \"Oncology Intelligence Layer\" for radiation oncology that automates workflow, documentation and planning management across the patient journey. Uses large language models and traditional machine learning integrated with EMR, OIS and TPS. Modules span Consult, Document, Plan (dosimetry workspace with planning automation and web-based review/approval) and Improve (analytics).",
     features: [

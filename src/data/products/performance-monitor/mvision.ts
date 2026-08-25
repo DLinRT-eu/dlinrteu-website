@@ -8,7 +8,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     company: "MVision AI",
     companyUrl: "https://www.mvision.ai/",
     productUrl: "https://mvision.ai/verify/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/mvision.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/mvision.ts",
     description: "Contour comparison tool for visualizing and comparing user-generated and AI-generated contours. Note: This is a QA/visualization tool for monitoring AI contour quality—it may or may not use AI itself.",
     features: [
       "Contour comparison", 

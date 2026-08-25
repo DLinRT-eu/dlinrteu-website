@@ -8,7 +8,7 @@ export const RADFORMATION_CLEARCHECK_ARCHIVED: ProductDetails[] = [
     company: "Radformation",
     companyUrl: "https://radformation.com",
     productUrl: "https://radformation.com/clearcheck/clearcheck",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/performance-monitor/radformation.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/radformation.ts",
     description: "Automated plan check and documentation software with structure validation, ensuring high-quality treatment plans through in-depth contour checks, plan comparison, and TG-275 compliance. Note: This QA tool can validate AI-generated contours and plans—it may or may not use AI itself.",
     features: [
       "Structure validation",

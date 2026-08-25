@@ -22,7 +22,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     company: "Vysioneer",
     companyUrl: "https://www.vysioneer.com/",
     productUrl: "https://www.vysioneer.com/solutions/vbrain",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/vysioner.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/vysioner.ts",
     description: "AI-powered brain tumor auto-contouring solution for radiation therapy planning, including brain metastases, meningioma, and acoustic neuroma.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

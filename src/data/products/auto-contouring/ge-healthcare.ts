@@ -27,7 +27,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     company: "GE Healthcare",
     companyUrl: "https://www.gehealthcare.com/",
     productUrl: "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/ge-healthcare.ts",
     description: "Deep learning CT auto-segmentation application on Edison HealthLink that generates DICOM Radiotherapy Structure Sets (RTSS) with organs-at-risk contours for radiation therapy planning review and editing.",
     category: "Auto-Contouring",
     certification: "CE & FDA",

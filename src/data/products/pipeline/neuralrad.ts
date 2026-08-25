@@ -7,7 +7,7 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     company: "NeuralRad",
     companyUrl: "https://www.neuralrad.com/",
     productUrl: "https://www.neuralrad.com/",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/pipeline/neuralrad.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/neuralrad.ts",
     description:
       "Pre-market AI platform for brain stereotactic radiosurgery: automated brain-metastasis detection, segmentation, 3D visualisation and multi-course lesion tracking. Listed as a pipeline / pre-market entry until FDA 510(k) is issued.",
     features: [

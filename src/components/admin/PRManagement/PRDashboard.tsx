@@ -159,7 +159,7 @@ export default function PRDashboard() {
             Pull Requests
           </h2>
           <p className="text-muted-foreground text-sm">
-            {data?.meta?.repository || 'DLinRT-eu/website'}
+            {data?.meta?.repository || 'DLinRT-eu/dlinrteu-website'}
           </p>
         </div>
         
@@ -180,7 +180,7 @@ export default function PRDashboard() {
           </Button>
           <Button variant="outline" size="sm" asChild>
             <a
-              href="https://github.com/DLinRT-eu/website/pulls"
+              href="https://github.com/DLinRT-eu/dlinrteu-website/pulls"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -22,7 +22,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
     productUrl: "https://www.manteiamedical.com/accucontour",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/manteia.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia.ts",
     description: "AI-assisted auto-contouring and image-processing software for radiation therapy workflows, supporting CT-based segmentation of OARs and selected target templates, with registration, plan review, and dose-evaluation functions depending on configuration.",
     category: "Auto-Contouring",
     certification: "FDA 510(k); CE not independently verified",

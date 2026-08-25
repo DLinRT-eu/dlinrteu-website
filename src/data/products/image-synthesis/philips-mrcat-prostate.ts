@@ -91,7 +91,7 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
     company: "Philips",
     companyUrl: "https://www.philips.com/healthcare",
     productUrl: "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/image-synthesis/philips-mrcat-prostate.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-prostate.ts",
     description: "MR-only radiotherapy solution for prostate that combines synthetic CT generation (MRCAT, model-based bulk-density) with model-based adaptive auto-contouring, enabling complete treatment planning workflow without CT imaging.",
     certification: "CE & FDA",
     logoUrl: "/logos/philips.png",

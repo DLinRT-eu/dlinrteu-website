@@ -60,6 +60,6 @@ export const LEO_CANCER_CARE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-01-27",
     lastRevised: "2026-01-27",
     source: "Leo Cancer Care press release (July 2025)",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/tracking/leo-cancer-care.ts"
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/leo-cancer-care.ts"
   }
 ];

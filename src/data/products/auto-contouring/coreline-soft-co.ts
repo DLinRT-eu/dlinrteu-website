@@ -51,7 +51,7 @@ export const AviewRTACS: ProductDetails = {
     "Quality assurance tools"
   ],
   modality: ["CT"],
-  githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/coreline.ts",
+  githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/coreline.ts",
   companyUrl: "https://www.corelinesoft.com/en/",
   productUrl: "https://www.corelinesoft.com/en/solutions/rt-acs",
   regulatory: {

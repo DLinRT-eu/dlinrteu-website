@@ -8,7 +8,7 @@ export const AATMA_PRODUCTS: ProductDetails[] = [
     company: "Elekta",
     companyUrl: "",
     productUrl: "",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/aatma.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/aatma.ts",
     description: "AI-powered auto-contouring solution for radiation therapy planning.",
     category: "Auto-Contouring",
     certification: "FDA",

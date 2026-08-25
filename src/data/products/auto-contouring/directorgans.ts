@@ -25,7 +25,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     company: "Siemens Healthineers",
     companyUrl: "https://www.siemens-healthineers.com/",
     productUrl: "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
-    githubUrl: "https://github.com/DLinRT-eu/website/tree/main/src/data/products/auto-contouring/directorgans.ts",
+    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/directorgans.ts",
     description: "World's first CT simulator-integrated auto-contouring solution. DirectORGANS uses optimized reconstruction and deep learning to generate organ-at-risk contours directly during CT image acquisition, eliminating the need for separate contouring workstations. Available on SOMATOM go.Sim and SOMATOM go.Open Pro.",
     category: "Auto-Contouring",
     certification: "CE",
