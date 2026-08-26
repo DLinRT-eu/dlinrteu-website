@@ -61,8 +61,13 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
   // Product score is the max across scored papers (override wins when set),
   // falling back to the stored product-level values.
   const computedScore = computeProductEvidenceScore(displayProduct);
-  const evidenceRigor = computedScore.rigor;
-  const clinicalImpact = computedScore.impact;
+  // In edit mode the controls must reflect the stored (edited) fields, not the
+  // paper-derived maximum, otherwise a manual selection appears to snap back.
+  const storedRigor = displayProduct.evidenceRigor as EvidenceRigorCode | undefined;
+  const storedImpact = displayProduct.clinicalImpact as ClinicalImpactCode | undefined;
+  const evidenceRigor = showEditor ? storedRigor : computedScore.rigor;
+  const clinicalImpact = showEditor ? storedImpact : computedScore.impact;
+
 
   // Check what data exists
   const hasEvidence = evidence && evidence.length > 0;
