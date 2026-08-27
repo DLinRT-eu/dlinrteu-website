@@ -46,7 +46,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     },
     technology: {
       integration: ["Native integration with MIM Software (requires MIM 7.4.5 or later)", "TPS integration"],
-      deployment: ["On-premises"],
+      deployment: ["On-premises", "Cloud (CPU)", "Cloud (GPU)"],
       triggerForAnalysis: "Within clinical workflow",
       processingTime: "Minutes per case"
     },
