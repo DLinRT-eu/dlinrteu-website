@@ -57,7 +57,7 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
         "\"Under development; not for sale or clinical use, not yet available in Europe.\" (Source: United Imaging ESTRO 2026 microsite, https://estro-united-imaging-healthcare-europe.framer.ai/, retrieved 19 May 2026.)",
     },
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source:
       "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   },

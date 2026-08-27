@@ -94,7 +94,7 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2022-12-03",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     evidenceRigor: "E1",
     clinicalImpact: "I1",
     evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. No peer-reviewed publications located. PubMed searched 2026-05-31. 2026-08-25 Wave 5D: E1/I1 set by Radiat Oncol 2025 (doi 10.1186/s13014-025-02742-4) and BMC Cancer 2026 (doi 10.1186/s12885-026-16337-z), both planning-quality evaluations using DeepPlan.",

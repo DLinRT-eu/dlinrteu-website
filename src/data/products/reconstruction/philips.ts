@@ -105,7 +105,7 @@ export const PreciseImage: ProductDetails = {
   evidenceExternalValidation: true,
   clinicalEvidence: "Four independent peer-reviewed phantom studies (France x2, Italy, South Korea) and two single-center clinical studies, each with one Philips-affiliated co-author (India, n=30 brain CT; China, n=60 abdominal CT), alongside FDA 510(k) clearances K210760 and K232491.",
   lastUpdated: "2026-06-17",
-  lastRevised: "2026-06-17",
+  lastRevised: "2026-08-27",
   source: "FDA 510(k) database (K210760, K232491); peer-reviewed literature (Greffier 2022/2023, Barca 2023, Chandran 2024, Shim 2025, Liu 2026)",
   evidence: [
     {
@@ -308,7 +308,7 @@ export const SmartSpeed: ProductDetails = {
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
     supersededBy: "philips-smartspeed-precise",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source:
       "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
@@ -458,7 +458,7 @@ export const SmartSpeedPrecise: ProductDetails = {
       }
     ],
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source:
       "FDA K251397 and Philips press release 2025-07-02.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
@@ -558,7 +558,7 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   evidenceExternalValidation: false,
   clinicalEvidence: "Vendor 'AI-enabled solutions' disclosure and FDA listing of Vereos PET/CT (K211764) with AI/ML attributes; no independent peer-reviewed clinical studies specific to this feature identified as of 2026-06-17.",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   source: "Philips 'AI-enabled solutions' page; FDA 510(k) Vereos PET/CT (K211764); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   evidence: [
     {

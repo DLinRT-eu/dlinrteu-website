@@ -358,7 +358,7 @@ export const ONCOSOFT_PRODUCTS: ProductDetails[] = [
     {"doi":"10.7759/cureus.91810","title":"OncoStudio clinical workflow","authors":"Kawaguchi H et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre workflow evaluation reporting contouring time."},
     {"doi": "10.7759/cureus.102180", "title": "Dosimetric Discrepancy Between Whole-Lung and Lobe-Specific Metrics in Lung Stereotactic Body Radiotherapy and Its Implications for Regional Dose Assessment", "authors": "Miura H et al.", "journal": "Cureus", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre dosimetric analysis of lung SBRT metrics derived from OncoStudio segmentations.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (Feb 2025), company official sources, product documentation",
     clinicalEvidence: "Proven in clinical practice with over 4M contours processed for 80K+ patients since 2022"
   }

@@ -128,7 +128,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     },
     keyPapers: [
   ],
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

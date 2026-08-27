@@ -58,7 +58,7 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
         "\"4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope.\" Research use only; not for clinical use. (Source: Synaptiq booth communication, ESTRO 2026, Stockholm, 15–19 May 2026.)",
     },
     lastUpdated: "2026-05-20",
-    lastRevised: "2026-05-30",
+    lastRevised: "2026-08-27",
     source:
       "Vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026): 4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope.",
   },

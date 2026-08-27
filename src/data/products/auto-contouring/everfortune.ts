@@ -112,7 +112,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -375,7 +375,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     guidelines: [
       {
         name: "AAPM TG-263",

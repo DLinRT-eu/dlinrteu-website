@@ -61,7 +61,7 @@ export const GE_ARCHIVED_PRODUCTS: ProductDetails[] = [
     },
     clinicalEvidence: "Multiple clinical evaluations demonstrating improved diagnostic confidence and reduced interpretation time",
     lastUpdated: "2025-01-20",
-    lastRevised: "2026-01-27",
+    lastRevised: "2026-08-27",
     source: "Company website - ARCHIVED: No specific FDA clearance number found"
   }
 ];

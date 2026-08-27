@@ -121,7 +121,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "One independent prospective peer-reviewed study (Svalkvist et al. J Appl Clin Med Phys 2023, n=25, chest CT) demonstrating image quality non-inferiority to ASIR-V iterative reconstruction at two dose levels, in addition to FDA 510(k) clearance K183202.",
     lastUpdated: "2026-06-18",
-    lastRevised: "2026-06-18",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K183202), GE HealthCare product page, Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13823). PubMed searched 2026-06-18."
   }
 ];

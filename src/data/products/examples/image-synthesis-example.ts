@@ -70,7 +70,7 @@ export const imageSynthesisExample: ProductDetails = {
   ],
   
   lastUpdated: "2023-05-28",
-  lastRevised: "2023-05-28",
+  lastRevised: "2026-08-27",
   lastVerified: "2023-05-28"
 };
 

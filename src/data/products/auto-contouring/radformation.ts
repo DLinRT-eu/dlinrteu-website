@@ -714,7 +714,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1002/acm2.70010", "title": "Evaluation and failure analysis of four commercial deep learning‐based autosegmentation software for abdominal organs at risk", "authors": "Fan M et al.", "journal": "J Applied Clin Med Phys", "year": "2025", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Vendor-independent evaluation and failure analysis of four commercial systems on abdominal OARs; Radformation explicitly included.", "vendorIndependent": true, "externalValidation": true},
     {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including Radformation; geometric endpoints.", "vendorIndependent": true, "externalValidation": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15)."
   }
 ];

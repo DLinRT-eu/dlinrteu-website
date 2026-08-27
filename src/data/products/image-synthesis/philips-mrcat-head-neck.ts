@@ -90,7 +90,7 @@ export const PHILIPS_MRCAT_HEAD_NECK_PRODUCTS: ProductDetails[] = [
     version: "2.0",
     releaseDate: "2022-10-20",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) K214081; Philips product documentation; peer-reviewed clinical validation study; Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Peer-reviewed retrospective clinical workflow study (Buschmann et al. 2026, Z Med Phys, PubMed PMID 39956751) in 10 head-and-neck patients reported median dosimetric deviations of 0.4 ± 0.7% for target volumes and 0.4 ± 0.9% for organs at risk versus planning CT, supporting MR-only RT planning feasibility with acceptable clinical accuracy.",
     keyPapers: [

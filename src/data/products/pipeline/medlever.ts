@@ -42,7 +42,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
         "\"Coming Soon.\" Pre-market workflow assistant; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
     },
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
@@ -86,7 +86,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
         "\"Coming Soon.\" Pre-market clinical decision support copilot; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
     },
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

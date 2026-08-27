@@ -55,7 +55,7 @@ export const AIQUALIS: ProductDetails = {
     "Performance analytics",
     "Quality metrics tracking"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   lastUpdated: "2026-08-25",
   limitations: [
     "Not intended to determine correctness of contouring or to assess/review/influence treatment of an individual patient",

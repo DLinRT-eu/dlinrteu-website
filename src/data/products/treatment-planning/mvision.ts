@@ -116,7 +116,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     releaseDate: "2025-09-04",
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastRevised: "2026-08-27",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",

@@ -70,7 +70,7 @@ export const treatmentPlanningExample: ProductDetails = {
   ],
   
   lastUpdated: "2023-06-05",
-  lastRevised: "2023-06-05",
+  lastRevised: "2026-08-27",
   lastVerified: "2023-06-05"
 };
 

@@ -123,7 +123,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     releaseDate: "2024-02-13",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database K231855, Quanta Computer corporate website; releaseDate proxied from FDA decision date (2024-02-13); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

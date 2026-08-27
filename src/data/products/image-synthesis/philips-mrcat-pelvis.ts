@@ -101,7 +101,7 @@ export const PHILIPS_MRCAT_PELVIS_PRODUCTS: ProductDetails[] = [
     version: "Current",
     releaseDate: "2018",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "Company website; Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "Independent feasibility study by Maspero et al. (Phys Imaging Radiat Oncol 2018, DOI 10.1016/j.phro.2018.09.002) directly evaluating the commercial Philips MRCAT pelvis synthetic CT generator for MR-only rectum radiotherapy, complemented by vendor V&V across 4 hospitals (Philips IFU appendix).",
     evidence: [

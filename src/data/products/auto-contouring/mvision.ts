@@ -160,7 +160,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1186/s13014-024-02554-y", "title": "Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas", "authors": "Meyer C et al.", "journal": "Radiat Oncol", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of AI contouring for OARs and lymph node areas.", "vendorIndependent": true},
     {"doi": "10.3390/diagnostics10110959", "title": "A Deep Learning-Based Automated CT Segmentation of Prostate Cancer Anatomy for Radiation Therapy Planning-A Retrospective Multicenter Study", "authors": "Kiljunen T et al.", "journal": "Diagnostics", "year": "2020", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Multicentre prostate segmentation study across six clinics; geometric endpoints.", "multiCenter": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
   }
 ];

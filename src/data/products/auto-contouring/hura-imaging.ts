@@ -50,7 +50,7 @@ export const DVTARGET: ProductDetails = {
     "User-friendly interface with manual correction tools",
     "Fully automated organ segmentation"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   lastUpdated: "2026-08-25",
   limitations: [
     "Only intended for normal organ contouring; not validated for tumor or clinical target volume (CTV) contouring",

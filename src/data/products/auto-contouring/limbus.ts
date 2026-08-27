@@ -156,7 +156,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including two Limbus versions; geometric endpoints.", "vendorIndependent": true, "externalValidation": true},
     {"doi": "10.3390/app16115681", "title": "Comparison of Two Auto-Contouring Systems for Head and Neck Organs at Risk to Institutional Reference Standard in Radiotherapy Planning", "authors": "Bayley C et al.", "journal": "Applied Sciences", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre comparison against institutional reference contours for head-and-neck OARs.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K241837), company official sources. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include Limbus per Methods."
   }
 ];

@@ -75,7 +75,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     releaseDate: "2017-10-25",
     lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastRevised: "2026-08-27",
     source: "Sun Nuclear official website; releaseDate proxied from FDA K170307 SunCHECK decision date (2026-06-01)"
   }
 ];

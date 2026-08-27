@@ -88,7 +88,7 @@ export const uRTAutoContouring: ProductDetails = {
     "Used in the uCT-ART online adaptive workflow (~15 min adaptive planning)",
     "Tightly integrated with uRT-linac 506c imaging, planning and QA"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   lastUpdated: "2026-08-25",
   limitations: [
     "Integrated component of the uRT ecosystem; not marketed as a standalone product",

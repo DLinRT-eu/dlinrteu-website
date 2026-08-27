@@ -113,7 +113,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     {"doi":"10.1016/j.adro.2023.101177","title":"Eclipse AI contouring comparative evaluation","authors":"Pera Ò et al.","journal":"Adv Radiat Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent comparative evaluation on external clinical data.","vendorIndependent":true,"externalValidation":true},
     {"doi":"10.1002/acm2.14620","title":"Eclipse AI contouring clinical validation","authors":"Wang Y et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical validation including editing effort.","vendorIndependent":true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "Siemens Healthineers press release (2026-05-15) https://www.siemens-healthineers.com/press/releases/estro2026 ; Siemens Healthineers autocontouring product page ; FDA 510(k) K232923 cited for algorithm lineage only (Ethos packaging). Sibling product: Ethos AI Segmentation (varian-ethos-ai-segmentation) shares the underlying deep-learning algorithm family but is a distinct product tied to the Ethos adaptive console. Structure set and FDA status for the Eclipse packaging marked (unverified) pending vendor confirmation via the certification program."
   }
 ];

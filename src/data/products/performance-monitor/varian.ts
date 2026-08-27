@@ -95,7 +95,7 @@ export const VARIAN_MONITOR_PRODUCTS: ProductDetails[] = [
     ],
     releaseDate: "2016-04-29",
     lastUpdated: "2026-06-01",
-    lastRevised: "2026-06-01",
+    lastRevised: "2026-08-27",
     source: "Varian official website; releaseDate proxied from FDA K153014 Mobius3D decision date (2026-06-01)"
   }
 ];

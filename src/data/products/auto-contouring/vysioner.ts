@@ -91,7 +91,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"doi":"10.1186/s13014-023-02246-z","title":"vBrain auto-contouring for brain metastases","authors":"Wang J et al.","journal":"Radiat Oncol","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation for brain metastases delineation accuracy."}
   ],
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K212116), company official sources, Vysioneer VBrain product page, Radiat Oncol 2023 validation study (10.1186/s13014-023-02246-z); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidence: [
       {

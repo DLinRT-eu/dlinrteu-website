@@ -123,7 +123,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR. Direct primary-evidence DOIs require re-verification before re-citation.",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-06-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database, company website, PubMed"
   }
 ];
