@@ -7,7 +7,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     id: "mim-contour-protegeai",
     trainingData: {
         description: "The product uses machine-learning algorithms to create contours across a variety of CT and MR anatomical locations, including Brain, Head & Neck, Thorax, Abdomen, and Pelvis for adult patients.",
-        scannerModels: ["CT", "MRI"],
+        scannerModels: ["CT", "MRI", "CBCT"],
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253270.pdf",
         countries: 1,
         disclosureLevel: "minimal",
