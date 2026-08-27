@@ -17,7 +17,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     evaluationData: {
       primaryEndpoint: "Image quality non-inferiority to ASIR-V at comparable dose levels",
       source: "Svalkvist A et al. J Appl Clin Med Phys 2023;24(1):e13823",
-      sourceUrl: "https://doi.org/10.1002/acm2.13823",
+      sourceUrl: "https://doi.org/10.1002/acm2.13871",
       description: "Svalkvist et al. (J Appl Clin Med Phys 2023): prospective comparative observer study, 25 patients, chest CT at full dose and ultra-low-dose. TrueFidelity-H rated ≥ ASIR-V 40% on subjective image quality. Direct named evaluation of TrueFidelity on GE Revolution CT.",
       studyDesign: "Prospective comparative observer study (n=25, two dose levels, chest CT)",
       results: "TrueFidelity-H non-inferior to ASIR-V 40% at full dose; rated superior at ultra-low dose for subjective noise and overall quality."
@@ -87,7 +87,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "One confirmed independent peer-reviewed study: Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13823) — prospective observer study, 25 patients, chest CT, directly names TrueFidelity on GE Revolution CT. FDA K183202 clearance. Two further candidate studies (Insights into Imaging 2024 on liver metastases; MDPI JI 2025 comparative) referenced but DOIs not independently confirmed; excluded pending verification. PubMed searched 2026-06-18.",
+    evidenceRigorNotes: "One confirmed independent peer-reviewed study: Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13871) — prospective observer study, 25 patients, chest CT, directly names TrueFidelity on GE Revolution CT. FDA K183202 clearance. Two further candidate studies (Insights into Imaging 2024 on liver metastases; MDPI JI 2025 comparative) referenced but DOIs not independently confirmed; excluded pending verification. PubMed searched 2026-06-18.",
     clinicalImpactNotes: "Workflow improvement and dose reduction potential demonstrated for chest CT (Svalkvist 2023). No RT-specific outcome study published; use in CT simulation requires independent local commissioning.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high residual implementation burden — limited independent evidence, no RT-specific validation; structured local commissioning and validation required before clinical adoption for CT simulation.",
@@ -106,7 +106,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
       {
         type: "Peer-reviewed Publication",
         description: "Svalkvist A, Zange L, Bäcklund M, et al. Evaluation of deep-learning image reconstruction for chest CT examinations at two different dose levels. J Appl Clin Med Phys 2023;24(1):e13823. Prospective comparative observer study, 25 patients, chest CT at full dose and ultra-low-dose on GE Revolution CT; TrueFidelity-H rated ≥ ASIR-V 40% on subjective image quality.",
-        link: "https://doi.org/10.1002/acm2.13823"
+        link: "https://doi.org/10.1002/acm2.13871"
       },
       {
         type: "FDA 510(k) Summary",
@@ -120,8 +120,8 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "One independent prospective peer-reviewed study (Svalkvist et al. J Appl Clin Med Phys 2023, n=25, chest CT) demonstrating image quality non-inferiority to ASIR-V iterative reconstruction at two dose levels, in addition to FDA 510(k) clearance K183202.",
-    lastUpdated: "2026-06-18",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K183202), GE HealthCare product page, Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13823). PubMed searched 2026-06-18."
+    source: "FDA 510(k) database (K183202), GE HealthCare product page, Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13871). PubMed searched 2026-06-18."
   }
 ];

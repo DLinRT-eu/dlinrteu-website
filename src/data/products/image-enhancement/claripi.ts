@@ -11,8 +11,11 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
       {"doi":"10.3390/jcm13051502","title":"Noise-optimized CBCT imaging of temporomandibular joints — the impact of AI on image quality","authors":"Kazimierczak N et al.","journal":"J Clin Med","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent off-label CBCT image-quality study.","vendorIndependent":true},
       {"doi":"10.1371/journal.pone.0270122","title":"Accuracy of two deep learning-based reconstruction methods compared with ASIR-V for nodule volumetry on low- and ultra-low-dose chest CT: a phantom study","authors":"Kim C et al.","journal":"PLoS One","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent head-to-head phantom volumetry study.","vendorIndependent":true},
       {"doi":"10.3348/kjr.2021.0140","title":"Deep learning algorithm for simultaneous noise reduction and edge sharpening in low-dose CT images: a pilot study using lumbar spine CT","authors":"Yeoh H et al.","journal":"Korean J Radiol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated retrospective pilot (n=52).","vendorIndependent":false},
-      {"doi":"10.1007/s00330-021-08199-9","title":"Dose reduction potential of vendor-agnostic deep learning model in comparison with deep learning–based image reconstruction algorithm on CT: a phantom study","authors":"Choi H et al.","journal":"Eur Radiol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated phantom head-to-head comparison.","vendorIndependent":false}
+      {"doi":"10.1007/s00330-021-08199-9","title":"Dose reduction potential of vendor-agnostic deep learning model in comparison with deep learning–based image reconstruction algorithm on CT: a phantom study","authors":"Choi H et al.","journal":"Eur Radiol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated phantom head-to-head comparison.","vendorIndependent":false},
+      {"doi":"10.3390/diagnostics14010096","title":"AntiHalluciNet: a potential auditing tool of the behavior of deep learning denoising models in low-dose computed tomography","authors":"Ahn CK et al.","journal":"Diagnostics","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated technical study auditing hallucination behaviour of ClariCT.AI denoising; analytical endpoints only, no clinical outcome. Backfilled and Crossref-verified in the Wave 6 Batch B sweep (2026-08-27).","vendorIndependent":false},
+      {"pmid":"42306167","title":"Additional dose reduction potential of a vendor-agnostic deep learning model: a phantom study","authors":"Kim H et al.","journal":"J Korean Soc Radiol","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Phantom study of incremental dose reduction on top of vendor DLR; technical image-quality endpoints only. No DOI indexed in Crossref; PubMed record verified in the Wave 6 Batch B sweep (2026-08-27).","vendorIndependent":true}
     ],
+
     trainingData: {
         description: "Image-based CT denoising using a U-Net CNN (contracting + expansive paths). Per Yeoh et al. Korean J Radiol 2021, training used >1,000,000 CT images covering ~2,100 combinations of scan/reconstruction conditions (varying kV, mAs, AEC, slice thickness, contrast, kernels) across 24 scanner models from 4 major vendors (GE, Siemens, Philips, Canon). Synthetic sinogram-based LDCT simulation generated paired LDCT/standard-dose training data; 80/20 train/validation split, with additional external validation in 4 independent clinical studies.",
         datasetSize: ">1,000,000 CT images (~2,100 scan/recon condition combinations)",
@@ -105,7 +108,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
       {
         type: "Peer-reviewed Publication",
         description: "Dehdab et al. (2025). Evaluation of a Deep Learning Denoising Algorithm for Dose Reduction in Whole-Body Photon-Counting CT Imaging: A Cadaveric Study. Acad Radiol 32(6):3519-3531. n=24 cadavers, 192 datasets, Tübingen. Up to 75% dose reduction with maintained quality. Independent.",
-        link: "https://doi.org/10.1016/j.acra.2024.12.041"
+        link: "https://doi.org/10.1016/j.acra.2024.12.052"
       },
       {
         type: "Peer-reviewed Publication",
@@ -157,7 +160,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "FDA 510(k) K183460/K212074 plus nine peer-reviewed studies: five independent (Lee DH 2024 — prospective multicenter multinational, n=296; Park 2025; Dehdab 2025; Kazimierczak 2024; Kim C 2022) and four vendor-affiliated via a recurring SNU Bundang Hospital/ClariPi Research collaboration (Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026).",
     releaseDate: "2019-06-13",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
   },
@@ -238,7 +241,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Korea MFDS approval plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed enhancement, single centre, Korea).",
     releaseDate: "2021",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
   }
