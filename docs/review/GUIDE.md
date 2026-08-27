@@ -284,9 +284,21 @@ Every product should have an evidence level assigned. The classification uses a 
 | I4 | Outcome | Levels 4–5 | Toxicity reduction, survival, patient outcomes |
 | I5 | Societal | Level 6 | Cost-effectiveness, access to care |
 
+### Per-publication scoring (mandatory)
+
+Every citation that explicitly names the product must be entered in the product's `keyPapers[]` array with its own `evidenceRigor`, `clinicalImpact`, `rationale` and study-quality flags. Listing a study only in `evidence[]` is **not** sufficient — the product page renders a "Per-publication scoring" block from `keyPapers[]`, and a citation that is absent there is reported as an unscored gap by `npm run evidence:coverage`.
+
+Rules:
+
+- The product-level score is the **maximum reached on each axis** across scored papers, computed by `computeProductEvidenceScore()`. Do not hand-set `evidenceRigor` / `clinicalImpact` to a value the papers do not support; use `evidenceScoreOverride` with a written `reason` when an override is genuinely justified.
+- Every DOI must resolve on Crossref to the cited article. Before scoring a paper, verify author, year and title against the DOI record. If the DOI resolves to a different article and the intended paper cannot be found, remove the scored entry and note this in `evidenceRigorNotes` rather than keeping an unverifiable citation.
+- Citations that do not name the product (indirect or engine-level literature) stay in `evidence[]` only, with a short note explaining why they are not scored.
+- Conference abstracts stay unscored unless a full peer-reviewed publication exists.
+- After every change run `npm run validate:evidence -- --all` (no mismatches allowed) and `npm run evidence:coverage` to check remaining gaps.
+
 ### Study Quality Sub-Attributes
 
-In addition to the E0-E3 level, products can be tagged with study quality sub-attributes (optional booleans):
+In addition to the E0-E3 level, products can be tagged with study quality sub-attributes (optional booleans, also available per paper in `keyPapers[]` as `vendorIndependent`, `multiCenter`, `multiNational`, `prospective`, `externalValidation`):
 
 | Attribute | Description | Source |
 |-----------|-------------|--------|
@@ -295,6 +307,7 @@ In addition to the E0-E3 level, products can be tagged with study quality sub-at
 | `evidenceMultiNational` | Data from multiple countries | van Leeuwen 2025 |
 | `evidenceProspective` | At least one prospective study design | van Leeuwen 2025 |
 | `evidenceExternalValidation` | Validated on external dataset | Pham 2023 |
+
 
 ### Key References
 
