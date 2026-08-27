@@ -33,7 +33,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/mimsoftware.svg",
     website: "https://www.mimsoftware.com/radiation-oncology",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Pelvis"],
-    modality: ["CT", "MRI"],
+    modality: ["CT", "MRI", "CBCT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["AI-based segmentation", "Integration with MIM platform (requires MIM 7.4.5 or later)", "Multiple modality support"],
