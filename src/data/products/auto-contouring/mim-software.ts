@@ -39,7 +39,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     keyFeatures: ["AI-based segmentation", "Integration with MIM platform (requires MIM 7.4.5 or later)", "CT, MR and CBCT support", "On-premises and cloud deployment (CPU/GPU)"],
     technicalSpecifications: {
       population: "Adult patients",
-      input: ["CT", "MRI"],
+      input: ["CT", "MRI", "CBCT"],
       inputFormat: ["DICOM"],
       output: ["Structure sets"],
       outputFormat: ["DICOM-RTSTRUCT"]
