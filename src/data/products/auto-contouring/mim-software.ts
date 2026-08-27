@@ -107,7 +107,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/app16115681"
       }
     ],
-    version: "1.4.0",
+    version: "2.0.0",
+    priorVersions: [
+      { name: "Contour ProtégéAI CE", version: "1.3.2", notes: "CE-marked version under MDD Class IIa." },
+      { name: "Contour ProtégéAI MDR", version: "2.0.1", notes: "Under preparation for MDR 2017/745." }
+    ],
     releaseDate: "2026-03-27",
     lastUpdated: "2026-06-15",
     keyPapers: [
