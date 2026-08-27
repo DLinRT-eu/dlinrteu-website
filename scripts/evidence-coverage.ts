@@ -123,11 +123,14 @@ const counts = rows.reduce(
 for (const row of rows) {
   if (row.status === "full") continue;
   console.log(
-    `${row.status.padEnd(7)} ${row.category.padEnd(20)} ${row.id.padEnd(42)} evidence=${String(
+    `${row.status.padEnd(7)} ${row.category.padEnd(20)} ${row.id.padEnd(42)} publications=${String(
+      row.publicationCount
+    ).padStart(2)} scored=${String(row.scoredPaperCount).padStart(2)} (evidence=${String(
       row.evidenceCount
-    ).padStart(2)} scored=${String(row.scoredPaperCount).padStart(2)}`
+    ).padStart(2)})`
   );
 }
+
 
 console.log(
   `\n${rows.length} products — none: ${counts.none}, partial: ${counts.partial}, full: ${counts.full}`
