@@ -27,7 +27,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.mimsoftware.com/",
     productUrl: "https://www.mimsoftware.com/radiation-oncology/contour-protegeai-plus",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mim-software.ts",
-    description: "Advanced AI-based auto-segmentation solution integrated within the MIM Software ecosystem for radiation oncology.",
+    description: "Advanced AI-based auto-segmentation solution integrated within the MIM Software ecosystem for radiation oncology. MIM Software is now part of GE Healthcare.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/mimsoftware.svg",
