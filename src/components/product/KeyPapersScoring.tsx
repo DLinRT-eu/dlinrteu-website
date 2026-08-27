@@ -32,9 +32,11 @@ const NON_PUBLICATION_TYPE =
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
   const papers = product.keyPapers ?? [];
   const evidence = product.evidence ?? [];
-  const publicationCount = evidence.filter(
-    (e) => e.type && !NON_PUBLICATION_TYPE.test(e.type)
-  ).length;
+  const publicationCount = evidence.filter((e) => {
+    const type = typeof e === "string" ? "" : e.type;
+    return !!type && !NON_PUBLICATION_TYPE.test(type);
+  }).length;
+
 
   const score = computeProductEvidenceScore(product, { category });
   const scored = score.scoredPaperCount;
