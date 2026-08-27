@@ -11,6 +11,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "validate:evidence": "bun scripts/validate-evidence-scores.ts",
+    "evidence:coverage": "bun scripts/evidence-coverage.ts",
     "preview": "vite preview"
   },
   "dependencies": {
