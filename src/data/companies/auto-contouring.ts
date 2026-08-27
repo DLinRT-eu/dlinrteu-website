@@ -90,7 +90,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   {
     "id": "mim-software",
     "name": "MIM Software",
-    "description": "Provider of medical imaging software for radiation oncology and other specialties.",
+    "description": "Provider of medical imaging software for radiation oncology and other specialties. Now part of GE Healthcare.",
     "website": "https://www.mimsoftware.com/",
     "productIds": ["mim-contour-protegeai"],
     "category": "Auto-Contouring",
