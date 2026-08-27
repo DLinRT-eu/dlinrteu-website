@@ -34,7 +34,7 @@ type CoverageStatus = "none" | "partial" | "full";
  * clearances, vendor pages, brochures and press releases are legitimately
  * unscored, so they must not count against coverage.
  */
-const NON_PUBLICATION_TYPE = /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation/i;
+const NON_PUBLICATION_TYPE = /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation|indirect|review|preprint|arxiv|algorithm paper|use cases/i;
 const isPublication = (type?: string) =>
   !!type && !NON_PUBLICATION_TYPE.test(type);
 

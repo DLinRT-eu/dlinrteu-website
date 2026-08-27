@@ -27,7 +27,7 @@ const QUALITY_LABELS: Record<string, string> = {
 // Regulatory clearances, vendor pages and press items cannot carry a per-paper
 // score, so they are excluded from the coverage count.
 const NON_PUBLICATION_TYPE =
-  /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation/i;
+  /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation|indirect|review|preprint|arxiv|algorithm paper|use cases/i;
 
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
   const papers = product.keyPapers ?? [];
