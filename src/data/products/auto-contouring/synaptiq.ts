@@ -131,8 +131,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Cloud-based data storage and visualization"
   ],
   keyPapers: [
-    {"doi":"10.1016/j.phro.2026.100935","title":"MediQ-RT clinical evaluation","authors":"Fedrau J et al.","journal":"Phys Imag Radiat Oncol","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
-    {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and undersampled imaging","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+    {"doi":"10.1016/j.phro.2026.100935","title":"Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy","authors":"Moignier A et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
+    {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and under-reported organs at risk in prostate cancer radiotherapy","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
   lastRevised: "2026-08-25",
   lastUpdated: "2026-08-25",

@@ -4,7 +4,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     keyPapers: [
-      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head-and-neck radiotherapy","journal":"Journal of Applied Clinical Medical Physics","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Names Smartfuse (Therapanacea) explicitly; assesses clinical utility of automatic target propagation in an offline adaptive workflow across ten patients.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Names Smartfuse (Therapanacea) explicitly; assesses clinical utility of automatic target propagation in an offline adaptive workflow across ten patients.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
     trainingData: {
         source: "Therapanacea product page (manufacturer)",

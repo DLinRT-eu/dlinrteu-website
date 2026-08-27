@@ -103,8 +103,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-12-01",
     lastUpdated: "2026-07-01",
     keyPapers: [
-    {"doi":"10.1016/j.clon.2025.103686","title":"RayStation DL auto-segmentation for H&N","authors":"Sharma A et al.","journal":"Clin Oncol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of head and neck auto-segmentation accuracy.","vendorIndependent":true},
-    {"doi":"10.3390/app12147210","title":"Evaluation of RayStation DL contouring","authors":"Ng WT et al.","journal":"Appl Sci","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre geometric evaluation of the deep-learning segmentation module.","vendorIndependent":true}
+    {"doi":"10.1016/j.clon.2025.103796","title":"Geometric and Dosimetric Evaluation of a RayStation Deep Learning Model for Auto-Segmentation of Organs at Risk in a Real-World Head and Neck Cancer Dataset","authors":"Sharma D et al.","journal":"Clinical Oncology","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of head and neck auto-segmentation accuracy.","vendorIndependent":true}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf), RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",

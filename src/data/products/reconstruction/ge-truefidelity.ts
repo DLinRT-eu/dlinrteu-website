@@ -5,7 +5,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-truefidelity",
     keyPapers: [
-      {"doi":"10.1002/acm2.13823","title":"Evaluation of deep-learning image reconstruction for chest CT examinations at two different dose levels","authors":"Svalkvist A et al.","journal":"J Appl Clin Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective independent observer study in 25 patients at full and ultra-low dose; single centre.","vendorIndependent":true,"prospective":true}
+      {"doi":"10.1002/acm2.13871","title":"Evaluation of deep‐learning image reconstruction for chest CT examinations at two different dose levels","authors":"Svalkvist A et al.","journal":"J Applied Clin Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective independent observer study in 25 patients at full and ultra-low dose; single centre.","vendorIndependent":true,"prospective":true}
     ],
     trainingData: {
       disclosureLevel: "minimal",

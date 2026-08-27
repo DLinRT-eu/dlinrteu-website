@@ -4,8 +4,8 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
   {
     id: "wisdom-deep-plan",
     keyPapers: [
-      {"doi":"10.1186/s13014-025-02742-4","pmid":"41219976","title":"Spiral volumetric modulated arc therapy for whole-brain radiotherapy with simultaneous integrated boost","journal":"Radiation Oncology","year":"2025","link":"https://doi.org/10.1186/s13014-025-02742-4","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Planning-quality comparison using the commercial planning system.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
-      {"doi":"10.1186/s12885-026-16337-z","pmid":"42343259","title":"Spiral volumetric modulated arc therapy enhances peak-to-valley dose contrast for 3D-GRID radiotherapy","journal":"BMC Cancer","year":"2026","link":"https://doi.org/10.1186/s12885-026-16337-z","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Planning-quality evaluation for GRID delivery.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1186/s13014-025-02742-4","pmid":"41219976","title":"Spiral volumetric modulated arc therapy for whole-brain radiotherapy with simultaneous integrated boost to multiple brain metastases","journal":"Radiat Oncol","year":"2025","link":"https://doi.org/10.1186/s13014-025-02742-4","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Planning-quality comparison using the commercial planning system.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.1186/s12885-026-16337-z","pmid":"42343259","title":"Spiral volumetric modulated arc therapy enhances peak-to-valley dose contrast for 3D-GRID radiotherapy compared to VMAT and tomotherapy","journal":"BMC Cancer","year":"2026","link":"https://doi.org/10.1186/s12885-026-16337-z","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Planning-quality evaluation for GRID delivery.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
     trainingData: {
         sourceUrl: "http://www.wisdom-tech.online/view-15.html",

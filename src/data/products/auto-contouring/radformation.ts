@@ -710,7 +710,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-06-15",
     keyPapers: [
     {"doi":"10.1186/s13014-024-02451-4","title":"Auto-contouring comparison across 5 facilities including Radformation","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-centre evaluation across five facilities including review and edit effort.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
-    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
+    {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
     lastRevised: "2026-07-15",
     source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15)."
