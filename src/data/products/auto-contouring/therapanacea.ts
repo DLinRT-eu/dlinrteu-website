@@ -275,7 +275,7 @@ export const Annotate: ProductDetails = {
     {"doi":"10.4103/jmp.jmp_11_25","title":"Evaluation of Two Commercial Artificial Intelligence Segmentation Systems for Radiation Therapy","authors":"DiTusa C et al.","journal":"Journal of Medical Physics","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent two-system comparative evaluation on external clinical data.","vendorIndependent":true,"externalValidation":true},
     {"doi":"10.1016/j.phro.2024.100654","title":"Head and neck automatic multi-organ segmentation on Dual-Energy Computed Tomography","authors":"Lê AT et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre technical validation on dual-energy CT.","vendorIndependent":true}
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-07-30",
   source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; therapanacea.com, accessed 2026-07-30); FDA 510(k) K253091 (decision 2025-12-23); DOIs verified against Crossref 2026-07-30."
 
 };
@@ -405,7 +405,7 @@ export const TumorBox: ProductDetails = {
   version: "3.2.0",
   releaseDate: "2025-12-23",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-08-25",
   source: "Therapanacea products page and Technical Information 3.2 (therapanacea.com, retrieved 2026-07-30); FDA 510(k) K253091 summary (decision 2025-12-23).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
 };
 

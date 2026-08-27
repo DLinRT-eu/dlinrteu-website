@@ -103,7 +103,7 @@ export const IRISEvo: ProductDetails = {
     "Seamless integration with Elekta linacs",
     "Available as upgrade for existing Elekta linacs"
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-08-25",
   lastUpdated: "2026-08-25",
   limitations: [
     "No independent peer-reviewed publications identified (web-searched 2026-06-01)",

@@ -116,7 +116,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     version: "3.2.0",
     releaseDate: "2021",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     keyPapers: [
       {"doi":"10.3389/fonc.2023.1245054","pmid":"38023165","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J, Gungor G, Gevaert T, et al.","journal":"Frontiers in Oncology","year":"2023","link":"https://doi.org/10.3389/fonc.2023.1245054","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre clinical evaluation of the TheraPanacea pseudo-CT model for low-field pelvic MRI; developed with the vendor.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
       {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},

@@ -81,7 +81,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     version: "VB80",
     releaseDate: "2024-09-20",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidence: [
       {

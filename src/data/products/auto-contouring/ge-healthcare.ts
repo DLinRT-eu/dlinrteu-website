@@ -95,7 +95,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"pmid":"PMC10741804","title":"Evaluation of GE auto-segmentation for RT","journal":"Front Oncol","year":"2023"}
   ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K230082), FDA 510(k) K242925 for separate MR Contour DL, GE HealthCare product documentation and DICOM conformance statement; CE Mark confirmed from GE HealthCare public statements, CE class not publicly disclosed.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "FDA 510(k) validation using 2552 generated contours from 302 retrospective adult CT radiotherapy-planning exams across multiple clinical sites in North America, Asia and Europe, plus a clinical reader study by three qualified radiotherapy practitioners.",
     evidence: [

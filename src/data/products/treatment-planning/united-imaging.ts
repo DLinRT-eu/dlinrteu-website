@@ -120,7 +120,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-06-15",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-15",
     source: "Yu et al. Nat Commun 2025 (PMC12827991); vendor press release (ESTRO 2026) and company website"
   }
 ];

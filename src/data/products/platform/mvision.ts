@@ -181,7 +181,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
     },
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     evidence: [
       {
         type: "Company Press Release",

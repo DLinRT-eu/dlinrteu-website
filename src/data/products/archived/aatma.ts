@@ -54,7 +54,7 @@ export const AATMA_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Minimal entry based on FDA clearance. No independent publications identified. Limited public documentation.",
     clinicalImpactNotes: "Limited public documentation available.",
     lastUpdated: "2026-02-26",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-02-26",
     source: "FDA 510(k) database (K212218). Minimal entry — needs further research and verification."
   }
 ];

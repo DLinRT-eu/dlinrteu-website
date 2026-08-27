@@ -85,7 +85,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     ],
     releaseDate: "2016-12-01",
     lastUpdated: "2026-06-01",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-01",
     source: "Radformation official website, PubMed; releaseDate proxied from FDA K162468 decision date (2026-06-01)"
   }
 ];

@@ -88,7 +88,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-06-16",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-16",
     source: "Vendor product page (MedCom ProSoma DART, accessed 2026-06-16; OAR counts and runtimes from vendor runtimes graphic)."
   },
 ];

@@ -103,7 +103,7 @@ export const GE_HEALTHCARE_PLATFORM_PRODUCTS: ProductDetails[] = [
     ],
     releaseDate: "2023-05-12",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     source: "Company website, CE MDR documentation. FDA component clearances: K230082, K213717. Marengo CIMS case study 2025. GE HealthCare ESTRO 2026 press release (12 May 2026).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "CE Mark and FDA clearance (via integrated components) demonstrate conformity with regulatory requirements. Platform designed to integrate proven AI solutions including GE HealthCare's MR Contour DL (K213717), Auto Segmentation (K230082), and established third-party systems (MVision Contour+, MIM Contour ProtégéAI+) for clinical workflow optimization. Marengo CIMS case study (2025) reports 25% reduction in treatment planning times."
   }

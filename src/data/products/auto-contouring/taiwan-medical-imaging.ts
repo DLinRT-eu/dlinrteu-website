@@ -108,7 +108,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent external validation cohort; geometric detection/segmentation endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     companyRevisionDate: "",
     source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }

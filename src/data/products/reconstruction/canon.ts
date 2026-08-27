@@ -121,7 +121,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Independent peer-reviewed validation across one prospective multi-institutional AJR study (Singh 2020), a radiotherapy-specific phantom study on Canon large-bore CT (Yasui Sci Rep 2023), and a contrast-enhanced abdominal CT comparison (Tamura QIMS 2022), in addition to FDA 510(k) clearance K181862.",
     lastUpdated: "2026-06-16",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-16",
     source: "FDA 510(k) database (K181862), Canon product page, and peer-reviewed literature (Singh AJR 2020, Yasui Sci Rep 2023, Tamura QIMS 2022 — all verified 2026-06-16 via Crossref and full-text fetch)"
   },
   {
@@ -246,7 +246,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
     lastUpdated: "2026-06-13",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
   },
@@ -367,7 +367,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
     lastUpdated: "2026-06-13", 
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-13",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }
 ];

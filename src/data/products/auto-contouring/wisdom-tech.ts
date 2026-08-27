@@ -41,7 +41,7 @@ export const DeepContour: ProductDetails = {
   },
   description: "AI solution for automatic contour segmentation in radiation therapy planning.",
   keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-08-25",
   lastUpdated: "2026-08-25",
   limitations: [
     "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."

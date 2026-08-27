@@ -84,7 +84,7 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     version: "v2026",
     releaseDate: "2026",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     source: "RaySearch official product page (https://www.raysearchlabs.com/rayintelligence/) and press releases for RayIntelligence v2025 (2025-09-01) and v2026, retrieved 2026-07-01; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidence: [
       {

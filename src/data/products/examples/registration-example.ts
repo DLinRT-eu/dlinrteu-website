@@ -70,7 +70,7 @@ export const registrationExample: ProductDetails = {
   ],
   
   lastUpdated: "2023-05-15",
-  lastRevised: "2026-08-27",
+  lastRevised: "2023-05-15",
   lastVerified: "2023-05-15"
 };
 

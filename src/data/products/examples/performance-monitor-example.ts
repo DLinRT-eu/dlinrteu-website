@@ -78,7 +78,7 @@ export const performanceMonitorExample: ProductDetails = {
   ],
   
   lastUpdated: "2026-01-19",
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-01-19",
   lastVerified: "2026-01-19"
 };
 

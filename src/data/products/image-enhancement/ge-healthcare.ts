@@ -123,7 +123,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     lastUpdated: "2026-06-17",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-17",
     source: "FDA 510(k) database, peer-review publications"
   },
   {
@@ -211,7 +211,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "Three FDA clearances (K193282, K213717, K252379) and independent peer-reviewed studies on liver MRI (Zerunian Radiol Med 2022) and brain volumetrics (Hu Psychoradiology 2025).",
     lastUpdated: "2026-06-16",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-06-16",
     source: "FDA 510(k) database and company website; peer-reviewed literature (Zerunian Radiol Med 2022, Hu Psychoradiology 2025 — verified via Crossref 2026-06-16)",
     evidence: [
       {

@@ -87,7 +87,7 @@ const SyMRINeuro: ProductDetails = {
     "Reduced scan time",
     "Streamlined workflow"
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-06-16",
   lastUpdated: "2026-06-16",
   releaseDate: "2024-12-06",
   certification: "CE & FDA",

@@ -74,7 +74,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     source: "MVision AI official website, regulatory classification based on product function; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

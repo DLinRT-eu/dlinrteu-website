@@ -105,7 +105,7 @@ export const autoContouringExample: ProductDetails = {
   ],
   
   lastUpdated: "2023-06-15",
-  lastRevised: "2026-08-27",
+  lastRevised: "2023-06-15",
   lastVerified: "2023-06-15"
 };
 

@@ -72,7 +72,7 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-25",
     limitations: [
       "Pre-market — regulatory clearance pending; not available for clinical use",
       "No independent validation publications identified",
