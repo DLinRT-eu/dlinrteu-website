@@ -26,10 +26,28 @@ const QUALITY_LABELS: Record<string, string> = {
 
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
   const papers = product.keyPapers ?? [];
-  if (papers.length === 0) return null;
+  const evidenceCount = product.evidence?.length ?? 0;
 
   const score = computeProductEvidenceScore(product, { category });
-  if (score.scoredPaperCount === 0) return null;
+  const scored = score.scoredPaperCount;
+
+  if (papers.length === 0 && evidenceCount === 0) return null;
+
+  const coverageNote =
+    scored === 0
+      ? `None of the ${evidenceCount} cited publication${evidenceCount === 1 ? " has" : "s have"} been individually scored yet — all citations are listed under Clinical Evidence.`
+      : scored < evidenceCount
+        ? `${scored} of ${evidenceCount} cited publications have been individually scored — the remaining citations are listed under Clinical Evidence.`
+        : null;
+
+  if (scored === 0) {
+    return (
+      <div className="space-y-2">
+        <h3 className="font-medium text-lg">Per-publication scoring</h3>
+        <p className="text-sm text-muted-foreground">{coverageNote}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">
@@ -39,6 +57,11 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
           Product score = highest level reached on each axis
         </span>
       </div>
+
+      {coverageNote && (
+        <p className="text-xs text-muted-foreground">{coverageNote}</p>
+      )}
+
 
       <div className="rounded-lg border bg-muted/40 p-3 text-sm space-y-1">
         <div>
