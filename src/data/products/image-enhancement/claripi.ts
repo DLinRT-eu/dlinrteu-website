@@ -160,7 +160,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "FDA 510(k) K183460/K212074 plus nine peer-reviewed studies: five independent (Lee DH 2024 — prospective multicenter multinational, n=296; Park 2025; Dehdab 2025; Kazimierczak 2024; Kim C 2022) and four vendor-affiliated via a recurring SNU Bundang Hospital/ClariPi Research collaboration (Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026).",
     releaseDate: "2019-06-13",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
   },
@@ -241,7 +241,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Korea MFDS approval plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed enhancement, single centre, Korea).",
     releaseDate: "2021",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
   }

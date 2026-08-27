@@ -147,7 +147,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Cloud-based deployment option processes images off-site on manufacturer servers, which may have data-governance implications for some institutions",
     ],
     clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025)"
   },
@@ -309,7 +309,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Nine peer-reviewed studies (one vendor-led multicenter trial; eight independent single/multi-site studies) across six countries and four radiotracers, plus FDA 510(k) clearances K182336 and K211964.",
     supersededBy: "subtle-hd-pet",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Dambrain 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
@@ -407,7 +407,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       }
     ],
     clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
@@ -494,7 +494,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
@@ -583,7 +583,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K243250) and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
@@ -666,7 +666,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
     source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
