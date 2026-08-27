@@ -88,10 +88,10 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "Independent single-centre peer-reviewed studies (Sharma 2025, Ng 2022, Gorgisyan 2022) support E2.",
-    clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Sharma 2025 DOI was corrected to doi:10.1016/j.clon.2025.103796 (Geometric and dosimetric evaluation of a RayStation deep learning model); the Ng 2022 entry was removed because DOI 10.3390/app12147210 resolves to an unrelated computer-science article. Remaining independent single-centre studies support E1.",
+    clinicalImpactNotes: "Raised to I2 in the 2026-08-27 Wave 6 backfill: Mikalsen et al. Acta Oncol 2023 reports editing effort and clinical acceptance for the thorax and breast models. Rigor E2 follows the independent five-system benchmark (Doolan 2023).",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
@@ -103,10 +103,11 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-12-01",
     lastUpdated: "2026-07-01",
     keyPapers: [
-    {"doi":"10.1016/j.clon.2025.103686","title":"RayStation DL auto-segmentation for H&N","authors":"Sharma A et al.","journal":"Clin Oncol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of head and neck auto-segmentation accuracy.","vendorIndependent":true},
-    {"doi":"10.3390/app12147210","title":"Evaluation of RayStation DL contouring","authors":"Ng WT et al.","journal":"Appl Sci","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre geometric evaluation of the deep-learning segmentation module.","vendorIndependent":true}
+    {"doi":"10.1016/j.clon.2025.103796","title":"Geometric and Dosimetric Evaluation of a RayStation Deep Learning Model for Auto-Segmentation of Organs at Risk in a Real-World Head and Neck Cancer Dataset","authors":"Sharma D et al.","journal":"Clinical Oncology","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of head and neck auto-segmentation accuracy.","vendorIndependent":true},
+    {"doi": "10.3389/fonc.2023.1213068", "title": "A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy", "authors": "Doolan PJ et al.", "journal": "Front. Oncol.", "year": "2023", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent benchmark of five commercial contouring systems on external clinical data.", "vendorIndependent": true, "externalValidation": true},
+    {"doi": "10.1080/0284186X.2023.2270152", "title": "Extensive clinical testing of Deep Learning Segmentation models for thorax and breast cancer radiotherapy planning", "authors": "Mikalsen SG et al.", "journal": "Acta Oncologica", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Extensive single-centre clinical testing of the RayStation deep learning segmentation models for thorax and breast, reporting editing effort.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf), RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [

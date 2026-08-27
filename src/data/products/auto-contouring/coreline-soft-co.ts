@@ -89,10 +89,10 @@ export const AviewRTACS: ProductDetails = {
     "Breast contouring support"
   ],
   keyPapers: [
-    {"doi":"10.3857/roj.2021.00234","title":"aview RT-ACS clinical validation","authors":"Byun HK et al.","journal":"Radiat Oncol J","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints."},
-    {"doi":"10.3389/fonc.2020.626277","title":"Deep-learning auto-segmentation evaluation","authors":"Chung SY et al.","journal":"Front Oncol","year":"2020","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
+    {"doi":"10.1186/s13014-021-01923-1","title":"Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy","authors":"Byun HK et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints."},
+    {"doi":"10.3389/fonc.2023.1119008","title":"Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer","authors":"Chung SY et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
   ],
-  lastRevised: "2026-07-15",
+  lastRevised: "2026-08-27",
   lastUpdated: "2026-06-15",
   releaseDate: "2025-08-20",
   trainingData: {

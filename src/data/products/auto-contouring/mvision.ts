@@ -145,7 +145,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Systematic Review",
-        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025",
+        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025. NOTE (2026-08-27 citation audit): the stored DOI 10.3390/info16010001 resolves to an unrelated Parkinson's-disease article on Crossref; the intended review could not be verified and this citation must be re-sourced before it is scored.",
         link: "https://doi.org/10.3390/info16010001"
       }
     ],
@@ -153,11 +153,14 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-27",
     lastUpdated: "2026-06-15",
     keyPapers: [
-    {"doi":"10.3389/fonc.2023.1104149","title":"Benchmarking commercial DL auto-contouring including MVision","authors":"Doolan P et al.","journal":"Front Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
-    {"doi":"10.1016/j.meddos.2024.11.001","title":"Clinical evaluation of MVision AI contouring","authors":"Miura H et al.","journal":"Med Dosim","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
-    {"doi":"10.5603/rpor.104186","title":"MVision AI dosimetric evaluation","authors":"Miura H et al.","journal":"RPOR","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre dosimetric/geometric evaluation.","vendorIndependent":true}
+    {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
+    {"doi":"10.5603/rpor.104144","title":"Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation","authors":"Miura H et al.","journal":"Rep Pract Oncol Radiother.","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
+    {"doi": "10.1038/s41746-025-01624-z", "title": "Multicentre evaluation of deep learning CT autosegmentation of the head and neck region for radiotherapy", "authors": "Pang EPP et al.", "journal": "npj Digit. Med.", "year": "2025", "evidenceRigor": "E2", "clinicalImpact": "I2", "rationale": "Multicentre evaluation across nine clinics in seven countries with clinical acceptability endpoints.", "vendorIndependent": true, "multiCenter": true, "multiNational": true, "externalValidation": true},
+    {"doi": "10.1038/s41598-025-18598-3", "title": "Geometric, dosimetric and psychometric evaluation of three commercial AI software solutions for OAR auto-segmentation in head and neck radiotherapy", "authors": "Podobnik G et al.", "journal": "Sci Rep", "year": "2025", "evidenceRigor": "E2", "clinicalImpact": "I2", "rationale": "Independent three-vendor head-and-neck comparison with geometric, dosimetric and psychometric endpoints.", "vendorIndependent": true, "externalValidation": true},
+    {"doi": "10.1186/s13014-024-02554-y", "title": "Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas", "authors": "Meyer C et al.", "journal": "Radiat Oncol", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of AI contouring for OARs and lymph node areas.", "vendorIndependent": true},
+    {"doi": "10.3390/diagnostics10110959", "title": "A Deep Learning-Based Automated CT Segmentation of Prostate Cancer Anatomy for Radiation Therapy Planning-A Retrospective Multicenter Study", "authors": "Kiljunen T et al.", "journal": "Diagnostics", "year": "2020", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Multicentre prostate segmentation study across six clinics; geometric endpoints.", "multiCenter": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
   }
 ];

@@ -120,7 +120,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     version: "2026",
     releaseDate: "2025-05-02",
     keyPapers: [
-      {"doi":"10.1186/s13014-024-02534-2","title":"A deep learning-based dose calculation method for volumetric modulated arc therapy","journal":"Radiation Oncology","year":"2024","rationale":"Indirect-comparative: generic DL dose-calculation method paper that does not evaluate the RayStation deep learning planning models, so it carries no E/I level for this product."},
+      {"doi":"10.1186/s13014-024-02534-2","title":"A deep learning-based dose calculation method for volumetric modulated arc therapy","journal":"Radiat Oncol","year":"2024","rationale":"Indirect-comparative: generic DL dose-calculation method paper that does not evaluate the RayStation deep learning planning models, so it carries no E/I level for this product."},
       {"doi":"10.1002/acm2.70291","title":"Evaluation of deep learning-based automated radiotherapy planning for early-stage lung cancer using SBRT-VMAT: A comparison with manual planning","authors":"Nemoto H et al.","journal":"J Appl Clin Med Phys","year":"2025","rationale":"Indirect-comparative: the dose-prediction model is RatoGuide (AiRato Inc.); RayStation is only the host TPS used for dose mimicking, so it carries no E/I level for this product."}
     ],
     evidenceRigor: "E0",
@@ -135,7 +135,7 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website, RayStation v2026 release page",
     evidence: [
       {

@@ -70,7 +70,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales"]
     },
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Growing 2023-2025 comparative multi-vendor literature (Pera 2023, Wang 2025, Mandal 2022, PMC10741804, PMC11997002) supports upgrade to E2. Algorithm lineage shared with Ethos AI Segmentation.",
+    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Mandal 2022 entry was removed — DOI 10.1002/pro6.1174 resolves to an unrelated article and the publication could not be verified. Remaining support is comparative multi-vendor literature plus the algorithm lineage shared with Ethos AI Segmentation.",
     clinicalImpact: "I2",
     clinicalImpactNotes: "Independent comparative evaluations show workflow and consistency benefits — upgraded to I2.",
     adoptionReadiness: "R2",
@@ -111,10 +111,9 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-07-07",
     keyPapers: [
     {"doi":"10.1016/j.adro.2023.101177","title":"Eclipse AI contouring comparative evaluation","authors":"Pera Ò et al.","journal":"Adv Radiat Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent comparative evaluation on external clinical data.","vendorIndependent":true,"externalValidation":true},
-    {"doi":"10.1002/acm2.14620","title":"Eclipse AI contouring clinical validation","authors":"Wang Y et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical validation including editing effort.","vendorIndependent":true},
-    {"doi":"10.1002/pro6.1174","title":"Deep-learning contouring in Eclipse workflow","authors":"Mandal A et al.","journal":"Precis Radiat Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre workflow evaluation of contouring in the planning system.","vendorIndependent":true}
+    {"doi":"10.1002/acm2.14620","title":"Eclipse AI contouring clinical validation","authors":"Wang Y et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical validation including editing effort.","vendorIndependent":true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "Siemens Healthineers press release (2026-05-15) https://www.siemens-healthineers.com/press/releases/estro2026 ; Siemens Healthineers autocontouring product page ; FDA 510(k) K232923 cited for algorithm lineage only (Ethos packaging). Sibling product: Ethos AI Segmentation (varian-ethos-ai-segmentation) shares the underlying deep-learning algorithm family but is a distinct product tied to the Ethos adaptive console. Structure set and FDA status for the Eclipse packaging marked (unverified) pending vendor confirmation via the certification program."
   }
 ];

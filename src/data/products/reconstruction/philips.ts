@@ -4,9 +4,9 @@ export const PreciseImage: ProductDetails = {
   id: "philips-precise-image",
     keyPapers: [
       {"doi":"10.1002/mp.15807","title":"Impact of an artificial intelligence deep-learning reconstruction algorithm for CT on image quality and potential dose reduction: a phantom study","authors":"Greffier J et al.","journal":"Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent chest phantom study; technical image-quality endpoints.","vendorIndependent":true},
-      {"doi":"10.1007/s00330-022-09003-y","title":"Improved image quality and dose reduction in abdominal CT with deep-learning reconstruction algorithm: a phantom study","authors":"Greffier J et al.","journal":"Eur Radiol","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom detectability study.","vendorIndependent":true},
+      {"doi":"10.1007/s00330-022-09003-y","title":"Improved image quality and dose reduction in abdominal CT with deep-learning reconstruction algorithm: a phantom study","authors":"Greffier J et al.","journal":"Eur Radiol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom detectability study.","vendorIndependent":true},
       {"doi":"10.1016/j.ejmp.2022.102517","title":"Image quality evaluation of the Precise Image CT deep learning reconstruction algorithm compared to FBP and iDose4: a phantom study at different dose levels","authors":"Barca P et al.","journal":"Phys Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom comparison at multiple dose levels.","vendorIndependent":true},
-      {"doi":"10.12688/f1000research.150773.1","title":"Comparison of image quality between deep learning image reconstruction and iterative reconstruction technique for CT brain — a pilot study","authors":"Chandran S et al.","journal":"F1000Research","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-centre pilot in 30 patients; one vendor-affiliated co-author.","prospective":true},
+      {"doi":"10.12688/f1000research.150773.1","title":"Comparison of image quality between Deep learning image reconstruction and Iterative reconstruction technique for CT Brain- a pilot study","authors":"Chandran M O et al.","journal":"F1000Res","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-centre pilot in 30 patients; one vendor-affiliated co-author.","prospective":true},
       {"doi":"10.3390/jimaging11090317","title":"Quantitative evaluation of low-dose CT image quality using deep learning reconstruction: Philips Precise Image vs GE TrueFidelity","authors":"Shim J, Lee S, Kim H","journal":"J Imaging","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent head-to-head phantom comparison.","vendorIndependent":true},
       {"doi":"10.21037/jmai-2025-173","title":"Deep learning precise image reconstruction algorithm for abdominal CT: impact on image quality and radiation dose reduction","authors":"Liu Y et al.","journal":"J Med Artif Intell","year":"2026","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Retrospective clinical study in 60 patients reporting achievable dose reduction in routine abdominal CT."}
     ],
@@ -105,7 +105,7 @@ export const PreciseImage: ProductDetails = {
   evidenceExternalValidation: true,
   clinicalEvidence: "Four independent peer-reviewed phantom studies (France x2, Italy, South Korea) and two single-center clinical studies, each with one Philips-affiliated co-author (India, n=30 brain CT; China, n=60 abdominal CT), alongside FDA 510(k) clearances K210760 and K232491.",
   lastUpdated: "2026-06-17",
-  lastRevised: "2026-06-17",
+  lastRevised: "2026-08-27",
   source: "FDA 510(k) database (K210760, K232491); peer-reviewed literature (Greffier 2022/2023, Barca 2023, Chandran 2024, Shim 2025, Liu 2026)",
   evidence: [
     {
@@ -159,9 +159,9 @@ export const PreciseImage: ProductDetails = {
 export const SmartSpeed: ProductDetails = {
     id: "philips-smartspeed",
     keyPapers: [
-      {"doi":"10.1097/RCT.0000000000001648","pmid":"39190703","title":"Impact of Emerging Deep Learning-Based MR Image Reconstruction Algorithms on Abdominal MRI Radiomic Features","journal":"Journal of Computer Assisted Tomography","year":"2024","link":"https://doi.org/10.1097/RCT.0000000000001648","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-vendor comparison of DL reconstruction against conventional reconstruction for radiomic stability.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
-      {"doi":"10.3390/diagnostics15101206","pmid":"40428199","title":"Is a 3-Minute Knee MRI Protocol Sufficient for Daily Clinical Practice? A SuperResolution Reconstruction Approach","journal":"Diagnostics","year":"2025","link":"https://doi.org/10.3390/diagnostics15101206","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective 20-volunteer evaluation of an accelerated protocol reconstructed with the commercial DL engine.","vendorIndependent":true,"multiCenter":false,"prospective":true,"externalValidation":false},
-      {"doi":"10.1371/journal.pone.0318599","pmid":"40238781","title":"Deep learning-based acceleration of muscle water T2 mapping in patients with neuromuscular diseases","journal":"PLoS One","year":"2025","link":"https://doi.org/10.1371/journal.pone.0318599","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Quantitative-accuracy evaluation of the DL-accelerated acquisition against conventional mapping.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1097/RCT.0000000000001648","pmid":"39190703","title":"Impact of Emerging Deep Learning–Based MR Image Reconstruction Algorithms on Abdominal MRI Radiomic Features","journal":"J Comput Assist Tomogr","year":"2024","link":"https://doi.org/10.1097/RCT.0000000000001648","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-vendor comparison of DL reconstruction against conventional reconstruction for radiomic stability.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.3390/diagnostics15101206","pmid":"40428199","title":"Is a 3-Minute Knee MRI Protocol Sufficient for Daily Clinical Practice? A SuperResolution Reconstruction Approach Using AI and Compressed Sensing","journal":"Diagnostics","year":"2025","link":"https://doi.org/10.3390/diagnostics15101206","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective 20-volunteer evaluation of an accelerated protocol reconstructed with the commercial DL engine.","vendorIndependent":true,"multiCenter":false,"prospective":true,"externalValidation":false},
+      {"doi":"10.1371/journal.pone.0318599","pmid":"40238781","title":"Deep learning-based acceleration of muscle water T2 mapping in patients with neuromuscular diseases by more than 50% - translating quantitative MRI from research to clinical routine","journal":"PLoS ONE","year":"2025","link":"https://doi.org/10.1371/journal.pone.0318599","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Quantitative-accuracy evaluation of the DL-accelerated acquisition against conventional mapping.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
     trainingData: {
       disclosureLevel: "minimal",
@@ -308,7 +308,7 @@ export const SmartSpeed: ProductDetails = {
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
     supersededBy: "philips-smartspeed-precise",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source:
       "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
@@ -458,7 +458,7 @@ export const SmartSpeedPrecise: ProductDetails = {
       }
     ],
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source:
       "FDA K251397 and Philips press release 2025-07-02.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   };
@@ -558,7 +558,7 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   evidenceExternalValidation: false,
   clinicalEvidence: "Vendor 'AI-enabled solutions' disclosure and FDA listing of Vereos PET/CT (K211764) with AI/ML attributes; no independent peer-reviewed clinical studies specific to this feature identified as of 2026-06-17.",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   source: "Philips 'AI-enabled solutions' page; FDA 510(k) Vereos PET/CT (K211764); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
   evidence: [
     {

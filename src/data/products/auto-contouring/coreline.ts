@@ -12,10 +12,10 @@ const rawProduct: ProductDetails = {
   },
   evaluationData: {
       primaryEndpoint: "Not specified",
-      source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.01.001)",
+      source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.02.041)",
       results: "Not publicly disclosed",
       studyDesign: "Retrospective large-scale clinical implementation study",
-      sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.01.001",
+      sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.02.041",
       description: "Independent evaluation of breast RT planning across 2,000 cases and validation of automated segmentation for target volumes in postoperative breast cancer."
   },
   name: "Aview RT ACS",
@@ -79,11 +79,11 @@ const rawProduct: ProductDetails = {
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   keyPapers: [
     {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
-    {doi: "10.3857/roj.2021.00234", title: "aview RT-ACS clinical validation", authors: "Byun HK et al.", journal: "Radiat Oncol J", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
-    {doi: "10.3389/fonc.2020.626277", title: "Deep-learning auto-segmentation evaluation", authors: "Chung SY et al.", journal: "Front Oncol", year: "2020", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
+    {doi: "10.1186/s13014-021-01923-1", title: "Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy", authors: "Byun HK et al.", journal: "Radiat Oncol", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
+    {doi: "10.3389/fonc.2023.1119008", title: "Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer", authors: "Chung SY et al.", journal: "Front. Oncol.", year: "2023", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
   ],
   supportedStructures: [
     // Head & Neck
@@ -179,7 +179,7 @@ const rawProduct: ProductDetails = {
     {
       type: "Peer-reviewed Publication",
       description: "Lee et al. Experience of implementing DL auto-contouring in breast RT planning: insights from over 2,000 cases. IJROBP 2024.",
-      link: "https://doi.org/10.1016/j.ijrobp.2024.01.001"
+      link: "https://doi.org/10.1016/j.ijrobp.2024.02.041"
     },
     {
       type: "Peer-reviewed Publication",

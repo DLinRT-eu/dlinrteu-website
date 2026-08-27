@@ -6,7 +6,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     keyPapers: [
       {"doi":"10.3174/ajnr.A7358","title":"Deep learning enables 60% accelerated volumetric brain MRI","authors":"Bash S et al.","journal":"AJNR Am J Neuroradiol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Prospective multicentre study (5 institutions, 6 scanners) demonstrating clinically acceptable 60% acceleration; vendor-led.","vendorIndependent":false,"multiCenter":true,"prospective":true},
       {"doi":"10.1148/ryai.210059","title":"Clinical assessment of deep learning-based super-resolution for 3D volumetric brain MRI","authors":"Rudie JD et al.","journal":"Radiol Artif Intell","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-centre assessment; vendor-led.","vendorIndependent":false,"prospective":true},
-      {"doi":"10.1007/s00062-021-01121-2","title":"Deep learning image processing enables 40% faster spinal MR scans","authors":"Bash S et al.","journal":"Clin Neuroradiol","year":"2022","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Prospective multicentre (4 institutions) acceleration study; vendor-led.","vendorIndependent":false,"multiCenter":true,"prospective":true},
+      {"doi":"10.1007/s00062-021-01121-2","title":"Deep Learning Image Processing Enables 40% Faster Spinal MR Scans Which Match or Exceed Quality of Standard of Care","authors":"Bash S et al.","journal":"Clin Neuroradiol","year":"2021","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Prospective multicentre (4 institutions) acceleration study; vendor-led.","vendorIndependent":false,"multiCenter":true,"prospective":true},
       {"doi":"10.1186/s41747-024-00470-0","title":"Deep learning reconstruction for lumbar spine MRI acceleration","authors":"Tang X et al.","journal":"Eur Radiol Exp","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Prospective single-centre study with disclosed vendor co-authorship.","vendorIndependent":false,"prospective":true},
       {"doi":"10.1016/j.canrad.2023.11.004","title":"Artificial intelligence solution to accelerate the acquisition of MRI images: impact on therapeutic care in radiology and radiotherapy departments","authors":"Lemaire C et al.","journal":"Cancer Radiother","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Independent prospective evaluation including radiotherapy use, reporting workflow impact.","vendorIndependent":true,"prospective":true,"externalValidation":true},
       {"doi":"10.1148/ryai.230181","title":"Impact of deep learning image reconstruction methods on MRI throughput","authors":"Yang J et al.","journal":"Radiol Artif Intell","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Vendor-independent retrospective analysis of 7,346 examinations across 10 scanners showing throughput gains.","vendorIndependent":true,"multiCenter":true},
@@ -148,7 +148,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025)"
   },
   {
@@ -303,7 +303,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Nine peer-reviewed studies (one vendor-led multicenter trial; eight independent single/multi-site studies) across six countries and four radiotracers, plus FDA 510(k) clearances K182336 and K211964.",
     supersededBy: "subtle-hd-pet",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
@@ -401,7 +401,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
   },
   {
@@ -488,7 +488,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
@@ -577,7 +577,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K243250) and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
@@ -660,7 +660,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-27",
     source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

@@ -77,7 +77,7 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-08-27",
   lastUpdated: "2026-08-25",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
@@ -88,9 +88,12 @@ export const Jazz: ProductDetails = {
   ],
   releaseDate: "2023-05-15",
   certification: "CE & FDA",
+  keyPapers: [
+    {"doi": "10.1007/s00234-024-03293-3", "title": "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software", "authors": "Federau C et al.", "journal": "Neuroradiology", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre evaluation of reading quality and productivity for multiple sclerosis follow-up MRI; vendor-affiliated authorship."}
+  ],
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "I2",
   diseaseTargeted: ["Multiple Cancer Types"],
   clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
   adoptionReadiness: "R3",

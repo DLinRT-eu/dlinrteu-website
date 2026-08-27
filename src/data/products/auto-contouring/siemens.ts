@@ -335,10 +335,13 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-    {"doi":"10.1016/j.ejmp.2024.103324","title":"Multi-institutional evaluation of AI-Rad Companion","authors":"Rayn K et al.","journal":"Phys Med","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-institutional evaluation including contour editing workload.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
-    {"doi":"10.1016/j.radonc.2022.04.020","title":"Clinical validation of AI-Rad Companion OAR","authors":"Marschner S et al.","journal":"Radiother Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Clinical validation with vendor collaboration; reports contouring time and acceptability."}
+    {"doi":"10.4103/jcrt.jcrt_769_23","title":"Evaluation of a deep image-to-image network (DI2IN) auto-segmentation algorithm across a network of cancer centers","authors":"Rayn K et al.","journal":"Journal of Cancer Research and Therapeutics","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-institutional evaluation including contour editing workload.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+    {"doi":"10.1186/s13014-022-02102-6","title":"A deep image-to-image network organ segmentation algorithm for radiation treatment planning: principles and evaluation","authors":"Marschner S et al.","journal":"Radiat Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Clinical validation with vendor collaboration; reports contouring time and acceptability."},
+    {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including AI-Rad Companion; geometric endpoints.", "vendorIndependent": true, "externalValidation": true},
+    {"doi": "10.1016/j.meddos.2023.11.002", "title": "Clinical evaluation of deep learning and atlas-based auto-segmentation for organs at risk delineation", "authors": "Yamauchi R et al.", "journal": "Medical Dosimetry", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre clinical comparison of deep-learning and atlas-based OAR delineation.", "vendorIndependent": true},
+    {"doi": "10.1002/acm2.14090", "title": "Feasibility evaluation of novel AI‐based deep‐learning contouring algorithm for radiotherapy", "authors": "Maduro Bustos LA et al.", "journal": "J Applied Clin Med Phys", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre feasibility evaluation on 30 CT datasets reporting 67-84% contouring time savings.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) K242745, Siemens Healthineers official documentation",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }
