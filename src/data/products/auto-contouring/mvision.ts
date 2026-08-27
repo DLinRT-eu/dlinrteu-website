@@ -145,7 +145,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Systematic Review",
-        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025",
+        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025. NOTE (2026-08-27 citation audit): the stored DOI 10.3390/info16010001 resolves to an unrelated Parkinson's-disease article on Crossref; the intended review could not be verified and this citation must be re-sourced before it is scored.",
         link: "https://doi.org/10.3390/info16010001"
       }
     ],

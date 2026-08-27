@@ -12,10 +12,10 @@ const rawProduct: ProductDetails = {
   },
   evaluationData: {
       primaryEndpoint: "Not specified",
-      source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.01.001)",
+      source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.02.041)",
       results: "Not publicly disclosed",
       studyDesign: "Retrospective large-scale clinical implementation study",
-      sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.01.001",
+      sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.02.041",
       description: "Independent evaluation of breast RT planning across 2,000 cases and validation of automated segmentation for target volumes in postoperative breast cancer."
   },
   name: "Aview RT ACS",
@@ -179,7 +179,7 @@ const rawProduct: ProductDetails = {
     {
       type: "Peer-reviewed Publication",
       description: "Lee et al. Experience of implementing DL auto-contouring in breast RT planning: insights from over 2,000 cases. IJROBP 2024.",
-      link: "https://doi.org/10.1016/j.ijrobp.2024.01.001"
+      link: "https://doi.org/10.1016/j.ijrobp.2024.02.041"
     },
     {
       type: "Peer-reviewed Publication",
