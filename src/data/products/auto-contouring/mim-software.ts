@@ -117,7 +117,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"doi":"10.1186/s13014-024-02451-4","title":"Multi-vendor auto-contouring comparison across 5 facilities","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-centre evaluation across five facilities including review and edit effort.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
   ],
-    lastRevised: "2026-07-15",
+    lastRevised: "2026-08-27",
     source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
