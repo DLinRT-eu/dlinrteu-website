@@ -105,7 +105,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
       {
         type: "Peer-reviewed Publication",
         description: "Dehdab et al. (2025). Evaluation of a Deep Learning Denoising Algorithm for Dose Reduction in Whole-Body Photon-Counting CT Imaging: A Cadaveric Study. Acad Radiol 32(6):3519-3531. n=24 cadavers, 192 datasets, Tübingen. Up to 75% dose reduction with maintained quality. Independent.",
-        link: "https://doi.org/10.1016/j.acra.2024.12.041"
+        link: "https://doi.org/10.1016/j.acra.2024.12.052"
       },
       {
         type: "Peer-reviewed Publication",
