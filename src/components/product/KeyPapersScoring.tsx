@@ -24,20 +24,30 @@ const QUALITY_LABELS: Record<string, string> = {
   externalValidation: "External validation",
 };
 
+// Regulatory clearances, vendor pages and press items cannot carry a per-paper
+// score, so they are excluded from the coverage count.
+const NON_PUBLICATION_TYPE =
+  /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation/i;
+
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
   const papers = product.keyPapers ?? [];
-  const evidenceCount = product.evidence?.length ?? 0;
+  const evidence = product.evidence ?? [];
+  const publicationCount = evidence.filter(
+    (e) => e.type && !NON_PUBLICATION_TYPE.test(e.type)
+  ).length;
 
   const score = computeProductEvidenceScore(product, { category });
   const scored = score.scoredPaperCount;
 
-  if (papers.length === 0 && evidenceCount === 0) return null;
+  if (papers.length === 0 && evidence.length === 0) return null;
 
   const coverageNote =
     scored === 0
-      ? `None of the ${evidenceCount} cited publication${evidenceCount === 1 ? " has" : "s have"} been individually scored yet — all citations are listed under Clinical Evidence.`
-      : scored < evidenceCount
-        ? `${scored} of ${evidenceCount} cited publications have been individually scored — the remaining citations are listed under Clinical Evidence.`
+      ? publicationCount === 0
+        ? "No peer-reviewed publication naming this product has been identified yet — the listed sources are regulatory or vendor documents."
+        : `None of the ${publicationCount} cited publication${publicationCount === 1 ? " has" : "s have"} been individually scored yet — all citations are listed under Clinical Evidence.`
+      : scored < publicationCount
+        ? `${scored} of ${publicationCount} cited publications have been individually scored — the remaining citations are listed under Clinical Evidence.`
         : null;
 
   if (scored === 0) {
@@ -48,6 +58,7 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
       </div>
     );
   }
+
 
   return (
     <div className="space-y-3">
