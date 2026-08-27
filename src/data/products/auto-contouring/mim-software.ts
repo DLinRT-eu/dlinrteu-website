@@ -113,7 +113,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       { name: "Contour ProtégéAI MDR v2.0.1", notes: "Under preparation for MDR 2017/745." }
     ],
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-08-27",
     keyPapers: [
     {"doi":"10.1186/s13014-024-02451-4","title":"Multi-vendor auto-contouring comparison across 5 facilities","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-centre evaluation across five facilities including review and edit effort.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
   ],
