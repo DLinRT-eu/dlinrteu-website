@@ -54,8 +54,9 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       ce: {
         status: "cleared",
         class: "IIa",
-        type: "MDR",
-        regulation: "MDR 2017/745"
+        type: "MDD",
+        regulation: "MDD 93/42/EEC",
+        notes: "CE-marked version is 1.3.2 under MDD Class IIa. Version 2.0.1 is under preparation for MDR 2017/745."
       },
       fda: {
         status: "510k_cleared",
