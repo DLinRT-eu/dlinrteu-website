@@ -71,9 +71,9 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Discontinued - no longer actively marketed"]
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent peer-reviewed multi-institutional studies (Brouwer 2020, Choi 2020, Zhu 2021, Doolan 2023) confirm E2.",
-    clinicalImpactNotes: "Multi-center study demonstrated comparable contouring accuracy. Product now discontinued.",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Brouwer 2020, Choi 2020 and Zhu 2021 entries were removed as scored papers — their stored DOIs resolve to unrelated articles on Crossref and no matching publication could be verified. Only Doolan 2023 (doi:10.3389/fonc.2023.1213068), an independent multi-system benchmark with geometric endpoints, remains, so the effective score is E2/I1.",
+    clinicalImpactNotes: "Impact lowered to I1: the single verified publication reports geometric accuracy only. Product now discontinued.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,

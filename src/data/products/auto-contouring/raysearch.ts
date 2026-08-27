@@ -90,7 +90,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "Independent single-centre peer-reviewed studies (Sharma 2025, Ng 2022, Gorgisyan 2022) support E2.",
+    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Sharma 2025 DOI was corrected to doi:10.1016/j.clon.2025.103796 (Geometric and dosimetric evaluation of a RayStation deep learning model); the Ng 2022 entry was removed because DOI 10.3390/app12147210 resolves to an unrelated computer-science article. Remaining independent single-centre studies support E1.",
     clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",

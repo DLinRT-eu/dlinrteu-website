@@ -70,7 +70,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales"]
     },
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Growing 2023-2025 comparative multi-vendor literature (Pera 2023, Wang 2025, Mandal 2022, PMC10741804, PMC11997002) supports upgrade to E2. Algorithm lineage shared with Ethos AI Segmentation.",
+    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Mandal 2022 entry was removed — DOI 10.1002/pro6.1174 resolves to an unrelated article and the publication could not be verified. Remaining support is comparative multi-vendor literature plus the algorithm lineage shared with Ethos AI Segmentation.",
     clinicalImpact: "I2",
     clinicalImpactNotes: "Independent comparative evaluations show workflow and consistency benefits — upgraded to I2.",
     adoptionReadiness: "R2",
