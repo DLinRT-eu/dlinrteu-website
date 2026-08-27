@@ -118,7 +118,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     {"doi":"10.1186/s13014-024-02451-4","title":"Multi-vendor auto-contouring comparison across 5 facilities","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-centre evaluation across five facilities including review and edit effort.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
   ],
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K253270, cleared 2026-03-27), company official sources. Structure list and v1.4.0 (requires MIM 7.4.5+) updated 2026-06-01 per vendor. Featured in GE HealthCare ESTRO 2026 press release (12 May 2026) as a zero-click AI auto-contouring solution within the GE/MIM oncology portfolio. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
+    source: "FDA 510(k) database (K253270, cleared 2026-03-27). Company official sources confirm MIM Software is now part of GE Healthcare. CE-marked version 1.3.2 is under MDD Class IIa; FDA-cleared version 2.0.0 is K253270 (decision date 2026-03-27); version 2.0.1 is under MDR 2017/745 preparation. CBCT, CT and MR modalities supported; on-premises and cloud (CPU/GPU) deployment. Structure list updated 2026-06-01 per vendor. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
       "Head & Neck: BrachialPlex_L",
