@@ -173,11 +173,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         description: "Deep learning-based PET image enhancement for noise reduction and image sharpness improvement across multiple radiotracers. Underlying low-count PET training and multicenter validation are described in Chaudhari et al. npj Digital Medicine 2021 (Subtle Medical / Stanford), which evaluated the platform externally across multiple centers and tracers."
     },
     evaluationData: {
-        description: "FDA 510(k) software V&V (K182336, K211964) plus nine peer-reviewed studies — one vendor-led multicenter trial with true external validation (Chaudhari 2021), and eight independent single- or multi-site studies (Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023) — spanning six countries and four radiotracers. See evidence array for full citations.",
+        description: "FDA 510(k) software V&V (K182336, K211964) plus nine peer-reviewed studies — one vendor-led multicenter trial with true external validation (Chaudhari 2021), and eight independent single- or multi-site studies (Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Dambrain 2026, Ciborowski 2023) — spanning six countries and four radiotracers. See evidence array for full citations.",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K182336.pdf",
         primaryEndpoint: "Lesion detectability and image quality at reduced PET acquisition time/dose",
         studyDesign: "FDA 510(k) software V&V + multicenter externally-validated trial + eight independent prospective/retrospective single- and multi-site studies",
-        source: "FDA 510(k) summaries K182336, K211964; peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023)",
+        source: "FDA 510(k) summaries K182336, K211964; peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Dambrain 2026, Ciborowski 2023)",
         results: "Consistent across independent studies: AI-denoised reduced-count/reduced-dose PET is non-inferior or improved versus standard acquisition for image quality, lesion detectability, and SUV accuracy (e.g., Weyts 2022: non-inferior at half acquisition time, n=195; Chaudhari 2021: preserved quality across 3 external centers and tracer types, n=50)."
     },
     name: "SubtlePET",
@@ -241,7 +241,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "I2",
     evidenceRigorNotes: "E2 (Validated Evidence): nine peer-reviewed studies across six countries (US/Canada, France, Italy, Luxembourg, Poland) and multiple tracers (FDG, PSMA-11, FDOPA, amyloid). One multicenter prospective trial with true external validation is vendor-led (Chaudhari 2021: 3 institutions, n=50; 6 of 11 authors financially tied to Subtle Medical, including 2 cofounders/patent holders). Eight further studies are independent, spanning single- and multi-site designs, prospective and retrospective, n=30-282. The combination of multi-site, multinational, externally-validated evidence (vendor-led and independent together) clearly meets the E2 bar; this is the most extensive independent evidence base of any product reviewed in this series so far.",
-    clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): consistent finding across all nine studies that AI-denoised reduced-count/reduced-dose PET preserves or improves diagnostic image quality, lesion detectability, and SUV/quantitative accuracy versus standard acquisition, generalizing across scanner vendors and radiotracers. Zhang-Yin 2025 adds an occupational-safety dimension (reduced technologist radiation exposure). Katsari 2021 and Lacombe 2026 evaluate real-world/business-case deployment. Ciborowski 2023 explicitly assessed impact on clinical decisions, though specific decision-change findings were not verified in detail. No evidence confirmed of altered treatment management (I3) or patient outcomes (I4).",
+    clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): consistent finding across all nine studies that AI-denoised reduced-count/reduced-dose PET preserves or improves diagnostic image quality, lesion detectability, and SUV/quantitative accuracy versus standard acquisition, generalizing across scanner vendors and radiotracers. Zhang-Yin 2025 adds an occupational-safety dimension (reduced technologist radiation exposure). Katsari 2021 and Dambrain 2026 evaluate real-world/business-case deployment. Ciborowski 2023 explicitly assessed impact on clinical decisions, though specific decision-change findings were not verified in detail. No evidence confirmed of altered treatment management (I3) or patient outcomes (I4).",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + a documented real-world deployment framework (Katsari 2021's nine-stage business-case assessment): multi-site, multinational clinical acceptability evidence exists, supporting R3 (enhanced implementation readiness). Not elevated to R4, as no documented TG-100/RBAAF-aligned risk management, formal incident-management framework, or national-guidance alignment was identified across the available literature.",
     evidenceVendorIndependent: true,
@@ -292,7 +292,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Lacombe, Dufour, Lacoeuille et al. (2026). Clinical value of artificial intelligence in reducing PET image acquisition time: routine clinical validation using qualitative, quantitative, and radiomic analysis on a cohort of 282 patients. EJNMMI Phys 13:27. Phantom + n=282, 634 lesions, 5 readers, 2 tracers (FDG, PSMA-11). Independent (French academic).",
+        description: "Dambrain, Lacombe, Dufour, Lacoeuille et al. (2026). Clinical value of artificial intelligence in reducing PET image acquisition time: routine clinical validation using qualitative, quantitative, and radiomic analysis on a cohort of 282 patients. EJNMMI Phys 13:27. Phantom + n=282, 634 lesions, 5 readers, 2 tracers (FDG, PSMA-11). Independent (French academic).",
         link: "https://doi.org/10.1186/s40658-026-00835-x"
       },
       {
@@ -303,7 +303,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     limitations: [
       "The only fully multicenter, prospectively externally-validated trial (Chaudhari 2021) is vendor-led; full independence is distributed across eight smaller single- or dual-site studies rather than concentrated in one large independent trial",
-      "Independent study sample sizes are mostly modest (n=30-195), with one large independent cohort (Lacombe 2026, n=282)",
+      "Independent study sample sizes are mostly modest (n=30-195), with one large independent cohort (Dambrain 2026, n=282)",
       "No evidence confirmed of changed treatment management or patient outcomes despite broad image-quality and workflow evidence",
       "Vendor-claimed performance (4x faster scans / 75% dose reduction) exceeds the more modest reductions typically replicated independently (twofold acquisition-time reduction in Weyts 2022; ~25-33% time/dose reduction in Zhang-Yin 2025; two-thirds dose in Katsari 2021)",
     ],
@@ -311,7 +311,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     supersededBy: "subtle-hd-pet",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Lacombe 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
+    source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Dambrain 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
   },
   {
     id: "subtle-hd-pet",
