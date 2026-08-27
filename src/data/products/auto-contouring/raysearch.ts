@@ -88,10 +88,10 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2018",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    evidenceRigor: "E2",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Sharma 2025 DOI was corrected to doi:10.1016/j.clon.2025.103796 (Geometric and dosimetric evaluation of a RayStation deep learning model); the Ng 2022 entry was removed because DOI 10.3390/app12147210 resolves to an unrelated computer-science article. Remaining independent single-centre studies support E1.",
-    clinicalImpactNotes: "Demonstrates clinical usability with workflow time savings across breast and thorax contouring.",
+    clinicalImpactNotes: "Raised to I2 in the 2026-08-27 Wave 6 backfill: Mikalsen et al. Acta Oncol 2023 reports editing effort and clinical acceptance for the thorax and breast models. Rigor E2 follows the independent five-system benchmark (Doolan 2023).",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,

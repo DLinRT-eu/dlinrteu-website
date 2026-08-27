@@ -93,7 +93,7 @@ export const Jazz: ProductDetails = {
   ],
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "I2",
   diseaseTargeted: ["Multiple Cancer Types"],
   clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
   adoptionReadiness: "R3",
