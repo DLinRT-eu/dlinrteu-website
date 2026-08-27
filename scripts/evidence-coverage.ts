@@ -29,11 +29,21 @@ const categories = positional.length > 0 ? positional : allCategories;
 
 type CoverageStatus = "none" | "partial" | "full";
 
+/**
+ * Only citation-like evidence entries can carry a per-paper score. Regulatory
+ * clearances, vendor pages, brochures and press releases are legitimately
+ * unscored, so they must not count against coverage.
+ */
+const NON_PUBLICATION_TYPE = /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation/i;
+const isPublication = (type?: string) =>
+  !!type && !NON_PUBLICATION_TYPE.test(type);
+
 interface Row {
   id: string;
   name: string;
   category: string;
   evidenceCount: number;
+  publicationCount: number;
   keyPaperCount: number;
   scoredPaperCount: number;
   status: CoverageStatus;
@@ -57,30 +67,38 @@ for (const category of categories) {
     if (seen.has(product.id)) continue;
     seen.add(product.id);
 
-    const evidenceCount = product.evidence?.length ?? 0;
+    const evidence = product.evidence ?? [];
+    const evidenceCount = evidence.length;
+    const publicationCount = evidence.filter((e) => isPublication(e.type)).length;
     const papers = product.keyPapers ?? [];
     const scoredPaperCount = papers.filter(
       (p) => p.evidenceRigor || p.clinicalImpact
     ).length;
 
     const status: CoverageStatus =
-      scoredPaperCount === 0
-        ? "none"
-        : scoredPaperCount < evidenceCount
-          ? "partial"
-          : "full";
+      publicationCount === 0
+        ? scoredPaperCount > 0
+          ? "full"
+          : "none"
+        : scoredPaperCount === 0
+          ? "none"
+          : scoredPaperCount < publicationCount
+            ? "partial"
+            : "full";
 
     rows.push({
       id: product.id,
       name: product.name,
       category,
       evidenceCount,
+      publicationCount,
       keyPaperCount: papers.length,
       scoredPaperCount,
       status,
     });
   }
 }
+
 
 const weight: Record<CoverageStatus, number> = { none: 0, partial: 1, full: 2 };
 rows.sort(
