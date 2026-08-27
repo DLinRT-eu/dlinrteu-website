@@ -88,6 +88,9 @@ export const Jazz: ProductDetails = {
   ],
   releaseDate: "2023-05-15",
   certification: "CE & FDA",
+  keyPapers: [
+    {"doi": "10.1007/s00234-024-03293-3", "title": "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software", "authors": "Federau C et al.", "journal": "Neuroradiology", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre evaluation of reading quality and productivity for multiple sclerosis follow-up MRI; vendor-affiliated authorship."}
+  ],
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "I1",
