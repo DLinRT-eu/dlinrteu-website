@@ -74,7 +74,7 @@ for (const category of categories) {
 
     const evidence = product.evidence ?? [];
     const evidenceCount = evidence.length;
-    const publicationCount = evidence.filter((e) => isPublication(typeof e === "string" ? undefined : e.type)).length;
+    const publicationCount = evidence.filter((e) => (typeof e === "string" ? false : isPublication(e.type, e.description))).length;
     const papers = product.keyPapers ?? [];
     const scoredPaperCount = papers.filter(
       (p) => p.evidenceRigor || p.clinicalImpact
