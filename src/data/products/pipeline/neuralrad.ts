@@ -61,7 +61,7 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Pre-market product. No peer-reviewed validation identified at time of listing (2026-05-23). 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+      "Pre-market product. No peer-reviewed validation identified at time of listing (2026-05-23). 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. 2026-08-28 Batch C sweep: the closest hit (Kim et al., Bioengineering 2024, doi:10.3390/bioengineering11050454) is a narrative review with NeuralRad co-founder affiliations, not a product evaluation; the AAPM 2022 item is a meeting abstract. Neither is scoreable. E0 stands.",
     clinicalImpactNotes: "No clinical impact data available.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes:

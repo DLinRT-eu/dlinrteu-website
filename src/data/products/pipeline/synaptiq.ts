@@ -41,7 +41,7 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Pre-market disclosure via vendor booth communication at ESTRO 2026. No peer-reviewed publication, model card, training-data description or regulatory clearance available for the 4D CT module.",
+      "Pre-market disclosure via vendor booth communication at ESTRO 2026. No peer-reviewed publication, model card, training-data description or regulatory clearance available for the 4D CT module. 2026-08-28 Batch C sweep: only vendor-reported internal evaluations and ESTRO presentations located; no indexed journal publication. E0 stands.",
     clinicalImpactNotes:
       "No clinical evidence; research-module disclosure only.",
     adoptionReadiness: "R0",

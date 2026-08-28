@@ -111,7 +111,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. 2026-08-28 Batch C sweep: only a vendor-authored ASTRO meeting abstract located (Int J Radiat Oncol Biol Phys 2024, doi:10.1016/j.ijrobp.2024.07.2065); conference abstracts are not scoreable. E0 stands.",
     clinicalImpactNotes:
       "Vendor-claimed workflow and planning-efficiency benefits; no independent clinical-impact study identified.",
     adoptionReadiness: "R2",
