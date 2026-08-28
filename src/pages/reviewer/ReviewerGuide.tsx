@@ -393,7 +393,13 @@ export default function ReviewerGuide() {
                   <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
                     <li>Product name, version, company, and category</li>
                     <li>Regulatory status (CE, FDA, TGA, TFDA)</li>
-                    <li>Evidence classification — assign <strong>E0–E3</strong> rigor and <strong>I0–I5</strong> impact</li>
+                    <li>
+                      Evidence classification — score <strong>each peer-reviewed publication individually</strong> on
+                      <strong> E0–E3</strong> rigor and <strong>I0–I5</strong> impact, with a rationale and the five
+                      study-quality flags. The product-level E/I is the maximum across scored publications; regulatory
+                      clearances, vendor documents, press items and conference abstracts are sources but are not scoreable.
+                    </li>
+
                     <li>Data transparency — training data details and evaluation/validation data</li>
                     <li>Safety corrective actions — check FDA Recalls, BfArM, MHRA, EUDAMED</li>
                     <li>Supported modalities, anatomical structures, and features</li>
