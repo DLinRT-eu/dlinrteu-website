@@ -34,6 +34,11 @@ const ClinicalTasksGlossary = () => {
       definition: "Real-time monitoring and tracking of patient positioning and organ motion during treatment delivery. AI systems can detect and compensate for patient movement and anatomical changes to ensure accurate radiation delivery."
     },
     {
+      id: "positioning",
+      title: "Positioning",
+      definition: "AI-based support for patient setup and positioning, including automated setup verification from surface, camera or in-room imaging data and guidance for repositioning before and during treatment delivery."
+    },
+    {
       id: "treatment-planning",
       title: "Treatment Planning",
       definition: "AI-assisted optimization of radiation therapy treatment plans using advanced algorithms. This includes beam angle selection, fluence optimization, dose prediction, and plan quality assessment to improve treatment efficiency and outcomes."
@@ -54,9 +59,14 @@ const ClinicalTasksGlossary = () => {
       definition: "AI models for predicting clinical outcomes, treatment response, and toxicity risk based on patient data and imaging features. This emerging field aims to personalize treatment decisions and improve patient outcomes through predictive analytics."
     },
     {
+      id: "platform",
+      title: "Platform",
+      definition: "Vendor ecosystems that bundle several AI tasks — such as contouring, planning, adaptive workflows and analytics — behind a single deployment, orchestration and integration layer, rather than addressing one isolated clinical task."
+    },
+    {
       id: "reporting",
-      title: "Reporting",
-      definition: "Automated generation of clinical reports, treatment summaries, and documentation using natural language processing and AI. This emerging technology promises to reduce administrative burden while ensuring comprehensive and standardized reporting."
+      title: "Reporting (emerging)",
+      definition: "Automated generation of clinical reports, treatment summaries, and documentation using natural language processing and AI. This task is listed for completeness of the taxonomy: no product in the catalogue is currently classified under Reporting."
     }
   ];
 

@@ -393,7 +393,13 @@ export default function ReviewerGuide() {
                   <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
                     <li>Product name, version, company, and category</li>
                     <li>Regulatory status (CE, FDA, TGA, TFDA)</li>
-                    <li>Evidence classification — assign <strong>E0–E3</strong> rigor and <strong>I0–I5</strong> impact</li>
+                    <li>
+                      Evidence classification — score <strong>each peer-reviewed publication individually</strong> on
+                      <strong> E0–E3</strong> rigor and <strong>I0–I5</strong> impact, with a rationale and the five
+                      study-quality flags. The product-level E/I is the maximum across scored publications; regulatory
+                      clearances, vendor documents, press items and conference abstracts are sources but are not scoreable.
+                    </li>
+
                     <li>Data transparency — training data details and evaluation/validation data</li>
                     <li>Safety corrective actions — check FDA Recalls, BfArM, MHRA, EUDAMED</li>
                     <li>Supported modalities, anatomical structures, and features</li>
@@ -639,9 +645,9 @@ export default function ReviewerGuide() {
               <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                 <h4 className="font-semibold mb-2">Always Set Evidence Levels</h4>
                 <p className="text-sm text-muted-foreground">
-                  Every product should have an evidence classification: assign <strong>E0–E3</strong> for
-                  evidence rigor and <strong>I0–I5</strong> for clinical impact. Add justification notes
-                  and cite the supporting publications.
+                  Every product should have an evidence classification. Score each peer-reviewed publication
+                  individually on <strong>E0–E3</strong> rigor and <strong>I0–I5</strong> clinical impact with a
+                  justification note; the product-level score is the maximum across scored publications.
                 </p>
               </div>
 

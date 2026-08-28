@@ -62,16 +62,28 @@ const ResourcesCompliance = () => {
           <PageIndex />
 
           {/* Platform Scope Note */}
-          <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700">
+          <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700 space-y-2">
             <p>
               <strong>Platform scope:</strong> DLinRT catalogs products that use AI/Deep Learning (neural networks) 
-              for core clinical functions in radiotherapy, including QA tools that explicitly reference AI-generated outputs. 
+              for core clinical functions in radiotherapy, including QA tools that explicitly reference AI-generated outputs.
+            </p>
+            <p>
+              <strong>Included:</strong> products whose core clinical function in radiotherapy relies on neural networks,
+              or QA/monitoring tools whose intended use explicitly references AI-generated outputs.
+            </p>
+            <p>
+              <strong>Excluded:</strong> classical image processing (e.g. deformable registration or contour propagation
+              without neural networks), general QA tools without an explicit AI reference in their intended use, and
+              products lacking sufficient public documentation.
+            </p>
+            <p>
               See the full{' '}
-              <Link to="/products" className="text-[#00A6D6] hover:underline font-medium">
+              <Link to="/products#inclusion-criteria" className="text-[#00A6D6] hover:underline font-medium">
                 inclusion criteria on the Products page
               </Link>.
             </p>
           </div>
+
 
           {/* Who DLinRT.eu helps & how */}
           <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
@@ -118,18 +130,25 @@ const ResourcesCompliance = () => {
               Evaluating scientific evidence for radiotherapy AI
             </h3>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              We classify products using a tri-axial system: <strong>evidence rigor</strong> (E0–E3) and
+              We classify products on two evidence axes: <strong>evidence rigor</strong> (E0–E3) and
               <strong> clinical impact</strong> (I0–I5) — adapted from van Leeuwen et al. (2021, updated 2025),
-              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991) —
-              extended with an internally proposed third axis, <strong>adoption readiness</strong> (R0–R5),
-              that captures how close a product is to clinical deployment. Each product is further assessed on five granular study quality sub-attributes —
+              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991).
+              Each product is further assessed on five granular study quality sub-attributes —
               vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
+            </p>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
+              <strong>Scoring is performed per publication.</strong> Each peer-reviewed publication is scored individually
+              on rigor (E) and impact (I) with a written rationale and the five study-quality flags; the product-level E/I
+              shown in badges and dashboards is the maximum across its scored publications. Regulatory clearances, vendor
+              documents, press items and conference abstracts are listed as sources but are not scoreable and never raise a
+              product score.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
               As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Adoption Readiness (R0–R5)</strong> — 
               capturing how ready a product is for clinical adoption (commissioning, local validation, workflow redesign, monitoring, governance, and the presence of national/international guidelines).
               Higher R indicates higher readiness; missing guidelines delay (but do not block) adoption. Toggle the visualisation below between <strong>2D</strong> (Rigor × Impact) and <strong>3D</strong> (Rigor × Impact × Readiness) to explore the full E/I/R framework.
             </p>
+
             
             {/* Pyramid Visualization */}
             <div className="mb-10">
