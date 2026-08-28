@@ -21,7 +21,12 @@ interface SupportedStructuresProps {
   unavailable?: boolean;
   /** Disclose whether the structures list is public, regulatory, or vendor-provided. */
   provenance?: ProductDetails["structuresProvenance"];
+  /** Archived structure lists of previous versions (display-only). */
+  history?: ProductDetails["structureHistory"];
+  /** Version label of the currently listed structures. */
+  currentVersion?: string;
 }
+
 
 interface StructureGroup {
   name: string;
