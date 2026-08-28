@@ -10,15 +10,34 @@ export interface ProductDetails extends Product {
   diseaseTargeted?: string[];
   keyFeatures?: string[];
   suggestedUse?: string;
+  /** Structure list of the CURRENT product version. This is the single source
+   *  used for statistics, charts, comparison and exports. */
   supportedStructures?: string[] | Array<{
     name: string;
     type: string;
     accuracy?: string;
     validationDataset?: string;
   }>;
+  /** Archived structure lists of previous product versions. Display-only:
+   *  never counted in statistics, comparison or exports. */
+  structureHistory?: Array<{
+    version: string;
+    releaseDate?: string;
+    retrievedOn?: string;
+    source?: string;
+    sourceUrl?: string;
+    notes?: string;
+    structures: string[] | Array<{
+      name: string;
+      type: string;
+      accuracy?: string;
+      validationDataset?: string;
+    }>;
+  }>;
   /** Set true when the vendor has not published a verified list of supported structures.
    *  Triggers an explicit "structure list unavailable" card instead of a blank section. */
   structuresUnavailable?: boolean;
+
   technicalSpecifications?: {
     population?: string;
     input?: string[];
