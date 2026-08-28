@@ -378,7 +378,6 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-08-28",
     lastRevised: "2026-08-28",
     guidelines: [
       {
