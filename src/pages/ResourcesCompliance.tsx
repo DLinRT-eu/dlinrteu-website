@@ -130,18 +130,25 @@ const ResourcesCompliance = () => {
               Evaluating scientific evidence for radiotherapy AI
             </h3>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              We classify products using a tri-axial system: <strong>evidence rigor</strong> (E0–E3) and
+              We classify products on two evidence axes: <strong>evidence rigor</strong> (E0–E3) and
               <strong> clinical impact</strong> (I0–I5) — adapted from van Leeuwen et al. (2021, updated 2025),
-              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991) —
-              extended with an internally proposed third axis, <strong>adoption readiness</strong> (R0–R5),
-              that captures how close a product is to clinical deployment. Each product is further assessed on five granular study quality sub-attributes —
+              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991).
+              Each product is further assessed on five granular study quality sub-attributes —
               vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
+            </p>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
+              <strong>Scoring is performed per publication.</strong> Each peer-reviewed publication is scored individually
+              on rigor (E) and impact (I) with a written rationale and the five study-quality flags; the product-level E/I
+              shown in badges and dashboards is the maximum across its scored publications. Regulatory clearances, vendor
+              documents, press items and conference abstracts are listed as sources but are not scoreable and never raise a
+              product score.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
               As an internally proposed DLinRT extension, the matrix is augmented with a <strong>third axis — Adoption Readiness (R0–R5)</strong> — 
               capturing how ready a product is for clinical adoption (commissioning, local validation, workflow redesign, monitoring, governance, and the presence of national/international guidelines).
               Higher R indicates higher readiness; missing guidelines delay (but do not block) adoption. Toggle the visualisation below between <strong>2D</strong> (Rigor × Impact) and <strong>3D</strong> (Rigor × Impact × Readiness) to explore the full E/I/R framework.
             </p>
+
             
             {/* Pyramid Visualization */}
             <div className="mb-10">
