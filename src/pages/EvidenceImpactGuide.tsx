@@ -254,6 +254,29 @@ const EvidenceImpactGuide = () => {
           </CardContent>
         </Card>
 
+        {/* Per-publication scoring */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>Per-publication scoring</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              Each peer-reviewed publication is scored individually on rigor (E) and impact (I), with a written
+              rationale and the five study-quality flags (vendor independence, multi-center, multi-national,
+              prospective design, external validation).
+            </p>
+            <p>
+              The product-level E/I shown in badges and dashboards is the <strong>maximum across its scored
+              publications</strong>. Product pages list every scored publication so the origin of the product score is
+              traceable.
+            </p>
+            <p>
+              Regulatory clearances, vendor documents, press items and conference abstracts are listed as sources but
+              are <strong>not scoreable</strong> and never raise a product score.
+            </p>
+          </CardContent>
+        </Card>
+
 
         {/* Example Classifications */}
         <Card className="mb-8">
