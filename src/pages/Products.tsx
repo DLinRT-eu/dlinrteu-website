@@ -24,7 +24,20 @@ const Products = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [advancedSearch, setAdvancedSearch] = useState(false);
+  const [inclusionOpen, setInclusionOpen] = useState(false);
   const location = useLocation();
+
+  // Open and reveal the inclusion criteria when linked with #inclusion-criteria
+  useEffect(() => {
+    if (location.hash !== "#inclusion-criteria") return;
+    setInclusionOpen(true);
+    const timer = setTimeout(() => {
+      document
+        .getElementById("inclusion-criteria")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [location.hash]);
 
   // Get all products and pipeline products
   const allProducts = dataService.getAllProducts();
@@ -171,7 +184,12 @@ const Products = () => {
       />
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         {/* Inclusion Criteria */}
-        <Collapsible className="mb-6">
+        <Collapsible
+          id="inclusion-criteria"
+          className="mb-6 scroll-mt-24"
+          open={inclusionOpen}
+          onOpenChange={setInclusionOpen}
+        >
           <CollapsibleTrigger className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#00A6D6] transition-colors group cursor-pointer">
             <Info className="h-4 w-4" />
             <span>Inclusion criteria</span>
