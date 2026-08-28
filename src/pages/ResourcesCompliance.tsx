@@ -62,16 +62,28 @@ const ResourcesCompliance = () => {
           <PageIndex />
 
           {/* Platform Scope Note */}
-          <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700">
+          <div className="mb-12 bg-blue-50 border border-blue-200 rounded-lg p-5 text-sm text-gray-700 space-y-2">
             <p>
               <strong>Platform scope:</strong> DLinRT catalogs products that use AI/Deep Learning (neural networks) 
-              for core clinical functions in radiotherapy, including QA tools that explicitly reference AI-generated outputs. 
+              for core clinical functions in radiotherapy, including QA tools that explicitly reference AI-generated outputs.
+            </p>
+            <p>
+              <strong>Included:</strong> products whose core clinical function in radiotherapy relies on neural networks,
+              or QA/monitoring tools whose intended use explicitly references AI-generated outputs.
+            </p>
+            <p>
+              <strong>Excluded:</strong> classical image processing (e.g. deformable registration or contour propagation
+              without neural networks), general QA tools without an explicit AI reference in their intended use, and
+              products lacking sufficient public documentation.
+            </p>
+            <p>
               See the full{' '}
-              <Link to="/products" className="text-[#00A6D6] hover:underline font-medium">
+              <Link to="/products#inclusion-criteria" className="text-[#00A6D6] hover:underline font-medium">
                 inclusion criteria on the Products page
               </Link>.
             </p>
           </div>
+
 
           {/* Who DLinRT.eu helps & how */}
           <div className="mb-12 -mx-4 sm:-mx-6 lg:-mx-8">
