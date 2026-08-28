@@ -94,7 +94,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
       {
         type: "Multicenter Blinded Randomized Validation",
         description: "Rectal cancer CTV (DSC 0.85) and GTV (DSC 0.87) auto-delineation with multicenter blind evaluation. 96-100% clinically viable scores.",
-        link: "https://doi.org/10.1186/s13014-023-2350-9"
+        link: "https://doi.org/10.1186/s13014-023-02350-0"
       },
       {
         type: "Blinded Randomized Clinical Trial",
@@ -107,9 +107,9 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1186/s13014-024-02463-0"
       }
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "I2",
-    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the stored Zhu 2025 paper was removed — DOI 10.1002/acm2.14350 resolves to an unrelated prior-information CTV segmentation paper (Wang 2024) and no RT-Mind-AI-naming publication could be verified on Crossref. No scored publication remains.",
+    evidenceRigorNotes: "2026-08-28 Batch C per-paper sweep: the four peer-reviewed MedMind-affiliated validation studies are now scored individually (E2/E2/E1/E1). E2 is set by the two multicentre blinded randomised validations (Liu 2021, Radiat Oncol 2023); neither is vendor-independent or prospective, so E3 is not reached. Papers describe the MedMind DLAS engine behind RT-Mind-AI rather than naming the commercial product, which is disclosed here. Earlier note retained for traceability: the stored Zhu 2025 paper was removed in the 2026-08-27 audit because DOI 10.1002/acm2.14350 resolves to an unrelated study.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -119,16 +119,14 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     evidenceMultiNational: false,
     releaseDate: "2022-03-25",
-    lastUpdated: "2026-08-25",
-    evidenceScoreOverride: {
-      impact: "I2",
-      reason: "Multicentre blinded randomised CTV validation studies listed under evidence (Front Oncol 2021, Radiat Oncol 2023) report clinically viable contours in 96-100% of cases and reduced delineation workload, supporting workflow-level impact beyond the single scored paper.",
-      setBy: "DLinRT evidence sweep (auto-contouring wave 1)",
-      setOn: "2026-08-25"
-    },
+    lastUpdated: "2026-08-28",
     keyPapers: [
+      {"doi":"10.3389/fonc.2021.702270","pmid":"34490103","title":"An Adversarial Deep-Learning-Based Model for Cervical Cancer CTV Segmentation With Multicenter Blinded Randomized Controlled Validation","authors":"Liu Z et al.","journal":"Frontiers in Oncology","year":"2021","link":"https://doi.org/10.3389/fonc.2021.702270","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multicentre (6 sites, 9 oncologists) blinded randomised controlled validation of the MedMind cervical CTV engine with a Turing-style acceptability endpoint; MedMind co-authors, so not vendor-independent.","vendorIndependent":false,"multiCenter":true,"multiNational":false,"prospective":false,"externalValidation":true},
+      {"doi":"10.1186/s13014-023-02350-0","title":"Towards deep-learning (DL) based fully automated target delineation for rectal cancer neoadjuvant radiotherapy using a divide-and-conquer strategy: a study with multicenter blind and randomized validation","journal":"Radiation Oncology","year":"2023","link":"https://doi.org/10.1186/s13014-023-02350-0","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multicentre blinded randomised validation of rectal CTV/GTV delineation reporting 96-100% clinically viable contours; vendor-affiliated. DOI corrected 2026-08-28 (previously 10.1186/s13014-023-2350-9, which does not resolve).","vendorIndependent":false,"multiCenter":true,"multiNational":false,"prospective":false,"externalValidation":true},
+      {"doi":"10.1002/cam4.4441","pmid":"34811957","title":"A blind randomized validated convolutional neural network for auto-segmentation of clinical target volume in rectal cancer patients receiving neoadjuvant radiotherapy","authors":"Wu Y et al.","journal":"Cancer Medicine","year":"2021","link":"https://doi.org/10.1002/cam4.4441","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Blinded randomised single-institution validation with geometric and expert-rating endpoints; vendor co-authored.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.1186/s13014-024-02463-0","title":"Localized fine-tuning and clinical evaluation of deep-learning based auto-segmentation (DLAS) model for clinical target volume (CTV) and organs-at-risk (OAR) in rectal cancer radiotherapy","authors":"Geng J et al.","journal":"Radiation Oncology","year":"2024","link":"https://doi.org/10.1186/s13014-024-02463-0","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation of locally fine-tuned models with geometric and editing-effort endpoints.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
   ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-08-28",
     source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];
