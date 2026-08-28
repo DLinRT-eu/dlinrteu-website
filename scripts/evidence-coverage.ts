@@ -31,12 +31,17 @@ type CoverageStatus = "none" | "partial" | "full";
 
 /**
  * Only citation-like evidence entries can carry a per-paper score. Regulatory
- * clearances, vendor pages, brochures and press releases are legitimately
- * unscored, so they must not count against coverage.
+ * clearances, vendor pages, brochures, press releases and conference abstracts
+ * are legitimately unscored, so they must not count against coverage.
  */
-const NON_PUBLICATION_TYPE = /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation|indirect|review|preprint|arxiv|algorithm paper|use cases/i;
-const isPublication = (type?: string) =>
-  !!type && !NON_PUBLICATION_TYPE.test(type);
+const NON_PUBLICATION_TYPE = /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation|indirect|review|preprint|arxiv|algorithm paper|use cases|conference|abstract|poster|proceedings/i;
+/** Conference material is often typed generically ("Validation"), so the
+ *  description is inspected as well. */
+const NON_PUBLICATION_DESCRIPTION =
+  /abstract book|\bposter\b|\babstract\b|oral presentation|conference paper|proceedings|\bESTRO \d{4}\b|\bAAPM \d{4}\b|\bASTRO \d{4}\b|\bICCR \d{4}\b/i;
+const isPublication = (type?: string, description?: string) =>
+  !!type && !NON_PUBLICATION_TYPE.test(type) && !NON_PUBLICATION_DESCRIPTION.test(description ?? "");
+
 
 interface Row {
   id: string;
