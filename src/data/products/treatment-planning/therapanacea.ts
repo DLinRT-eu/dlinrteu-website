@@ -137,7 +137,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
       "FDA indication is limited to supported prostate prescriptions; other anatomies are not cleared in the US",
       "Plan is not dose-calculated by SmartPlan — dose calculation, review and approval remain in the user's TPS",
       "Adult patients only (18+ years)",
-      "No independent peer-reviewed evaluation published as of 2026-07-30",
+      "Only peer-reviewed evaluation (Prunaretty 2024) is single-centre and vendor-collaborative; no independent external validation published as of 2026-08-28",
       "Not all models available in all markets",
       "Vendor warning: only Monaco-Mosaiq, Eclipse-ARIA and RayStation TPS/R&V configurations are validated for plan generation",
       "Vendor warning: only 1 or 2 beams can be used in the ballistic configuration",
@@ -148,8 +148,8 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     ],
     version: "3.2.0",
     releaseDate: "2025-12-23",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastUpdated: "2026-08-28",
+    lastRevised: "2026-08-28",
     source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];
