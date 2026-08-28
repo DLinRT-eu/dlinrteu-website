@@ -1,6 +1,8 @@
 /** @jsxImportSource react */
 import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import { Shield, Target, CircleDot, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
