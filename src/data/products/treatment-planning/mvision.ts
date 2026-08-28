@@ -104,7 +104,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified.",
+      "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified. 2026-08-28 Batch C sweep: all located MVision publications name Contour+ (segmentation), not Dose+. No publication evaluates the dose-prediction product. E0 stands.",
     clinicalImpactNotes: "No independent clinical impact data available at time of listing.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:

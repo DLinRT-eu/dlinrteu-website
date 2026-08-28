@@ -94,10 +94,28 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
-    evidenceRigor: "E0",
+    keyPapers: [
+      {
+        doi: "10.3390/cancers16223735",
+        title: "Quantitative Evaluation of a Fully Automated Planning Solution for Prostate-Only and Whole-Pelvic Radiotherapy",
+        authors: "Prunaretty J, Ungun B, Vauclin R, Costea M, Bus N, Paragios N, Fenoglietto P",
+        journal: "Cancers",
+        year: "2024",
+        link: "https://doi.org/10.3390/cancers16223735",
+        evidenceRigor: "E1",
+        clinicalImpact: "I1",
+        rationale: "Single-centre retrospective evaluation (238 training / 86 validation / 40 end-to-end cases) of TheraPanacea's fully automated dose-prediction plus direct-aperture VMAT optimisation pipeline, i.e. the SmartPlan functionality, versus manual clinical plans. Endpoints are DVH/plan-quality metrics, portal-dosimetry gamma, MU and modulation complexity — technical/dosimetric only. Three co-authors are TheraPanacea employees (Vauclin, Bus, Paragios), so the study is not vendor-independent; no external multi-centre validation.",
+        vendorIndependent: false,
+        multiCenter: false,
+        multiNational: false,
+        prospective: false,
+        externalValidation: false
+      }
+    ],
+    evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Regulatory clearance (FDA K253091) and CE class IIb coverage only. No peer-reviewed publication naming SmartPlan identified as of 2026-07-30; vendor material references conference abstracts and testimonials, which do not qualify for E1. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
-    clinicalImpactNotes: "Manufacturer and clinical-user testimonials claim one-click plan generation in minutes with reduced planner variability for prostate; no independently published dosimetric or workflow outcome data located.",
+    evidenceRigorNotes: "2026-08-28 Batch C sweep: Prunaretty et al., Cancers 2024 (doi:10.3390/cancers16223735, Crossref-verified) is now scored per paper. It is a single-centre, vendor-collaborative retrospective evaluation of the automated prostate/whole-pelvis planning pipeline underlying SmartPlan, which supports E1. The paper describes the pipeline functionality rather than the released SmartPlan v3.2.0 module by name; that attribution limit is disclosed in the paper rationale. Regulatory basis remains FDA K253091 and CE class IIb.",
+    clinicalImpactNotes: "I1 — published endpoints are dosimetric/plan-quality and QA gamma only. Manufacturer and clinical-user testimonials claim one-click plan generation in minutes with reduced planner variability for prostate; no independent decision-level or outcome data located.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE/FDA: automatic planning changes a core clinical process, so local commissioning, plan-quality benchmarking against institutional standards and physicist sign-off workflows are required before routine use.",
     burdenFactors: {
@@ -119,7 +137,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
       "FDA indication is limited to supported prostate prescriptions; other anatomies are not cleared in the US",
       "Plan is not dose-calculated by SmartPlan — dose calculation, review and approval remain in the user's TPS",
       "Adult patients only (18+ years)",
-      "No independent peer-reviewed evaluation published as of 2026-07-30",
+      "Only peer-reviewed evaluation (Prunaretty 2024) is single-centre and vendor-collaborative; no independent external validation published as of 2026-08-28",
       "Not all models available in all markets",
       "Vendor warning: only Monaco-Mosaiq, Eclipse-ARIA and RayStation TPS/R&V configurations are validated for plan generation",
       "Vendor warning: only 1 or 2 beams can be used in the ballistic configuration",
@@ -130,8 +148,8 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
     ],
     version: "3.2.0",
     releaseDate: "2025-12-23",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastUpdated: "2026-08-28",
+    lastRevised: "2026-08-28",
     source: "FDA 510(k) K253091 Indications for Use and summary (decision 2025-12-23); ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); Therapanacea products page (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

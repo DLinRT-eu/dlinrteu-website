@@ -134,8 +134,8 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastUpdated: "2026-08-28",
+    lastRevised: "2026-08-28",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website, RayStation v2026 release page",
     evidence: [
       {
@@ -154,8 +154,8 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
         link: "https://www.raysearchlabs.com/machine-learning-in-raystation/"
       },
       {
-        type: "RaySearch Publication",
-        description: "Deep Learning Planning Model Catalogue",
+        type: "Vendor Publication",
+        description: "RaySearch Deep Learning Planning Model Catalogue (vendor document, not peer-reviewed)",
         link: "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/"
       },
       {

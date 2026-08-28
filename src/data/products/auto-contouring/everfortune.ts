@@ -232,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-28",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -364,10 +364,13 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Abdomen-CT: VB S",
       "Abdomen-CT: VB S1"
     ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "No independent peer-reviewed literature identified as of 2026-07-14. FDA K251306 (Jan 2026) regulatory clearance only. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
-    clinicalImpactNotes: "No clinical impact data published.",
+    keyPapers: [
+      {"doi":"10.1016/j.radonc.2023.109528","pmid":"36773828","title":"Developing an AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy","authors":"Lin CY et al.","journal":"Radiotherapy and Oncology","year":"2023","link":"https://doi.org/10.1016/j.radonc.2023.109528","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of an AI-assisted HA-WBRT pipeline that uses EFAI RT Suite contours; geometric and plan-quality endpoints. Evaluates the shared EFAI segmentation engine rather than the Seg Pro V3 release specifically, and the site collaborates with the vendor.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    evidenceRigorNotes: "2026-08-28 Batch C sweep: Lin CY et al., Radiother Oncol 2023 (doi:10.1016/j.radonc.2023.109528, PMID 36773828) is now scored per paper — a single-centre, vendor-collaborative evaluation of the EFAI RT Suite contours inside an HA-WBRT pipeline, giving E1. No publication names Seg Pro V3 itself; engine-level attribution is disclosed in the paper rationale. FDA K251306 (Jan 2026) remains the regulatory basis.",
+    clinicalImpactNotes: "I1 (technical / geometric plus plan-quality endpoints in Lin 2023). No decision-level, outcome-level or multi-site workflow evidence published for Seg Pro V3.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     evidenceVendorIndependent: false,
@@ -375,7 +378,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-08-28",
     guidelines: [
       {
         name: "AAPM TG-263",

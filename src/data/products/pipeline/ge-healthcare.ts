@@ -3,7 +3,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const GE_HEALTHCARE_PIPELINE_PRODUCTS: ProductDetails[] = [
 {
 id: "ge-irt-theranostics-pipeline",
-evidenceRigorNotes: "2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+evidenceRigorNotes: "2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. 2026-08-28 Batch C sweep: only launch announcements and marketing material located; no indexed publication. E0 stands.",
 name: "iRT for Theranostics",
 company: "GE Healthcare",
 companyUrl: "https://www.gehealthcare.com/",

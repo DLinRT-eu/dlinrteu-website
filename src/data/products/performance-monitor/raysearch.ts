@@ -77,7 +77,7 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     },
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Analytics/monitoring platform. No peer-reviewed evaluations located; only vendor press releases and product page (retrieved 2026-07-01). 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Analytics/monitoring platform. No peer-reviewed evaluations located; only vendor press releases and product page (retrieved 2026-07-01). 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. 2026-08-28 Batch C sweep: only RaySearch press releases and brochures located; no peer-reviewed publication names RayIntelligence. E0 stands.",
     clinicalImpactNotes: "Provides monitoring of AI contouring and plan quality signals; clinical impact not independently quantified.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + MDR-exempt analytics: sparse public evidence; adopting sites should validate internally before relying on outputs for QA decisions.",

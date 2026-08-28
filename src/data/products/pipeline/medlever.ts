@@ -3,7 +3,7 @@ import { ProductDetails } from "@/types/productDetails";
 export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
   {
     id: "medlever-assistant-pipeline",
-    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored.",
+    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored. 2026-08-28 Batch C sweep: only vendor website/blog content located; no indexed publication names MedLever. E0 stands.",
     name: "MedLever Assistant",
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
@@ -47,7 +47,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "medlever-copilot-pipeline",
-    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored.",
+    evidenceRigorNotes: "Wave 5D indirect context: Med Dosim 2020 (10.1016/j.meddos.2020.07.004, PMID 32807611) evaluates a Medlever workflow-management tool across five sites but predates the catalogued AI products; not scored. 2026-08-28 Batch C sweep: only vendor website/blog content located; no indexed publication names MedLever. E0 stands.",
     name: "MedLever Copilot",
     company: "MedLever, Inc.",
     companyUrl: "https://medlever.com/",
