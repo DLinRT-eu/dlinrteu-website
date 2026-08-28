@@ -232,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-08-28",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
