@@ -21,7 +21,12 @@ interface SupportedStructuresProps {
   unavailable?: boolean;
   /** Disclose whether the structures list is public, regulatory, or vendor-provided. */
   provenance?: ProductDetails["structuresProvenance"];
+  /** Archived structure lists of previous versions (display-only). */
+  history?: ProductDetails["structureHistory"];
+  /** Version label of the currently listed structures. */
+  currentVersion?: string;
 }
+
 
 interface StructureGroup {
   name: string;
@@ -68,7 +73,52 @@ const ProvenanceBanner: React.FC<{ p: NonNullable<ProductDetails["structuresProv
   </div>
 );
 
-const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance }) => {
+const StructureHistorySection: React.FC<{
+  history: NonNullable<ProductDetails["structureHistory"]>;
+  currentVersion?: string;
+}> = ({ history, currentVersion }) => (
+  <Card className="mt-4">
+    <CardHeader>
+      <CardTitle className="text-base">Previous structure versions</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <p className="text-xs text-muted-foreground mb-3">
+        Historical lists are shown for traceability only. Statistics, charts, comparison
+        and exports use the current version
+        {currentVersion ? ` (${currentVersion})` : ""} only.
+      </p>
+      <Accordion type="single" collapsible className="w-full">
+        {history.map((entry) => (
+          <AccordionItem key={entry.version} value={entry.version}>
+            <AccordionTrigger className="text-sm">
+              Version {entry.version}
+              {Array.isArray(entry.structures) && (
+                <span className="ml-2 font-normal text-muted-foreground">
+                  ({entry.structures.length} structures)
+                </span>
+              )}
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="text-xs text-muted-foreground mb-3 space-y-1">
+                {entry.releaseDate && <div>Released: {entry.releaseDate}</div>}
+                {entry.retrievedOn && <div>Retrieved: {entry.retrievedOn}</div>}
+                {entry.source && <div>Source: {entry.source}</div>}
+                {entry.sourceUrl && (
+                  <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer"
+                    className="text-primary hover:underline">View source</a>
+                )}
+                {entry.notes && <div>{entry.notes}</div>}
+              </div>
+              <StructuresDisplay structures={entry.structures} />
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </CardContent>
+  </Card>
+);
+
+const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance, history, currentVersion }) => {
   const { isEditMode, editedProduct, canEdit } = useProductEdit();
   
   // Use edited structures when in edit mode
@@ -76,6 +126,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
     ? editedProduct.supportedStructures 
     : structures;
   const showEditor = isEditMode && canEdit;
+  const hasHistory = !!history && history.length > 0;
   
   // Show editor if in edit mode
   if (showEditor) {
@@ -93,7 +144,12 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
 
   if (!displayStructures || displayStructures.length === 0) {
     if (unavailable) {
-      return <UnavailableStructuresCard />;
+      return (
+        <div>
+          <UnavailableStructuresCard />
+          {hasHistory && <StructureHistorySection history={history!} currentVersion={currentVersion} />}
+        </div>
+      );
     }
     return null;
   }
@@ -102,9 +158,11 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
     <div>
       {provenance && <ProvenanceBanner p={provenance} />}
       <StructuresDisplay structures={displayStructures} />
+      {hasHistory && <StructureHistorySection history={history!} currentVersion={currentVersion} />}
     </div>
   );
 };
+
 
 // Extracted display component
 interface StructuresDisplayProps {

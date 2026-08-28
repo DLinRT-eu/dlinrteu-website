@@ -136,7 +136,10 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
               structures={product.supportedStructures}
               unavailable={product.structuresUnavailable}
               provenance={product.structuresProvenance}
+              history={product.structureHistory}
+              currentVersion={product.version}
             />
+
           )}
           
           {product.category === "Treatment Planning" && product.dosePredictionModels && (
