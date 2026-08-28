@@ -113,7 +113,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
       { name: "Contour ProtégéAI MDR v2.0.1", notes: "Under preparation for MDR 2017/745." }
     ],
     releaseDate: "2026-03-27",
-    lastUpdated: "2026-08-27",
+    lastUpdated: "2026-08-28",
     keyPapers: [
     {"doi":"10.1186/s13014-024-02451-4","title":"Multi-vendor auto-contouring comparison across 5 facilities","authors":"Goddard L et al.","journal":"Radiother Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Multi-centre evaluation across five facilities including review and edit effort.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
     {"doi": "10.3389/fonc.2024.1375096", "title": "Clinical validation of commercial deep-learning based auto-segmentation models for organs at risk in the head and neck region: a single institution study", "authors": "Johnson CL et al.", "journal": "Front. Oncol.", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-institution head-and-neck validation of two commercial systems for 22 OARs; MIM ProtegeAI explicitly included.", "vendorIndependent": true},
@@ -121,8 +121,14 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including MIM; geometric endpoints.", "vendorIndependent": true, "externalValidation": true},
     {"doi": "10.3390/app16115681", "title": "Comparison of Two Auto-Contouring Systems for Head and Neck Organs at Risk to Institutional Reference Standard in Radiotherapy Planning", "authors": "Bayley C et al.", "journal": "Applied Sciences", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre comparison of MIM Contour ProtegeAI against institutional reference contours for head-and-neck OARs.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K253270, cleared 2026-03-27). Company official sources confirm MIM Software is now part of GE Healthcare. CE-marked version 1.3.2 is under MDD Class IIa; FDA-cleared version 2.0.0 is K253270 (decision date 2026-03-27); version 2.0.1 is under MDR 2017/745 preparation. CBCT, CT and MR modalities supported; on-premises and cloud (CPU/GPU) deployment. Structure list updated 2026-06-01 per vendor. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
+    lastRevised: "2026-08-28",
+    source: "FDA 510(k) database (K253270, cleared 2026-03-27). Company official sources confirm MIM Software is now part of GE Healthcare. CE-marked version 1.3.2 is under MDD Class IIa; FDA-cleared version 2.0.0 is K253270 (decision date 2026-03-27); version 2.0.1 is under MDR 2017/745 preparation. CBCT, CT and MR modalities supported; on-premises and cloud (CPU/GPU) deployment. Structure list updated 2026-08-28 from the vendor KB article "Contour ProtegeAI+ 2.0.0 Models and Contours" (last edited 2026-08-06); the previous catalogued list is archived under structureHistory as version 1.4.0. Two obvious KB spelling errors were normalised to the vendor DICOM-style naming (Gland_Lacrinal_L -> Glnd_Lacrimal_L, Gland_Submindibular_R -> Glnd_Submand_R). Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
+    structuresProvenance: {
+      source: "MIM Software KB article: Contour ProtegeAI+ 2.0.0 Models and Contours (last edited 2026-08-06)",
+      sourceAccess: "vendor-provided",
+      sourceRetrievedOn: "2026-08-28",
+      notes: "Model versions: Head and Neck 4.1.1, Thorax 4.2.0, Abdomen 4.2.0, Male Pelvis CT 5.0.0, Female Pelvis CT 4.2.0, Brain MR 4.3.0, SurePlan MRT CT 4.2.0, Whole Body 4.1.0, Prostate MR 1.0.1."
+    },
     supportedStructures: [
       "Head & Neck: Bone_Mandible",
       "Head & Neck: Brachial_Plexus_L",
