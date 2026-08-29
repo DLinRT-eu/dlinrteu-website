@@ -47,10 +47,13 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "Training Demographics", "Training Scanner Models", "Training Institutions",
     "Training Countries", "Training Public Datasets", "Training Disclosure Level",
     "Training Data Source", "Training Data Source URL",
+    "Training Source Access", "Training Source Retrieved On",
     "Evaluation Description", "Evaluation Dataset Size", "Evaluation Sites",
     "Evaluation Countries", "Evaluation Demographics", "Evaluation Study Design",
     "Evaluation Primary Endpoint", "Evaluation Results",
     "Evaluation Source", "Evaluation Source URL",
+    "Evaluation Source Access", "Evaluation Source Retrieved On",
+
     "Safety Corrective Actions",
     "Compatible Systems", "Training Required", "Support Email",
     "Last Updated", "Last Revised", "Source"
