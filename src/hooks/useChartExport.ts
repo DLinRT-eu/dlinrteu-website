@@ -60,7 +60,12 @@ async function containerToDataUrl(container: HTMLElement, bgColor = '#ffffff'): 
     const { width, height } = svg.getBoundingClientRect();
     return width > 0 && height > 0;
   });
-  if (renderable.length === 0) throw new Error('No renderable SVG found in container');
+  const rect = container.getBoundingClientRect();
+  // Some dashboard charts (e.g. the evidence/impact matrix) are pure HTML grids,
+  // so an SVG is not required — only a container with real dimensions.
+  if (renderable.length === 0 && (rect.width === 0 || rect.height === 0)) {
+    throw new Error('Chart container has no renderable content');
+  }
 
   try {
     const { default: html2canvas } = await import('html2canvas');
@@ -77,6 +82,7 @@ async function containerToDataUrl(container: HTMLElement, bgColor = '#ffffff'): 
     console.warn('html2canvas capture failed, falling back to SVG capture:', e);
   }
 
+  if (renderable.length === 0) throw new Error('No renderable SVG found in container');
   return svgToDataUrl(renderable[0], bgColor);
 }
 
