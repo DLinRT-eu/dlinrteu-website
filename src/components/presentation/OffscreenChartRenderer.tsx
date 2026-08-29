@@ -40,18 +40,46 @@ const OffscreenChartRenderer: React.FC<OffscreenChartRendererProps> = ({ onReady
   const { companyData, totalCompanies } = useCompanyData(undefined, filteredProducts);
 
   useEffect(() => {
-    // Wait for Recharts to finish rendering SVGs
-    const timer = setTimeout(async () => {
+    let cancelled = false;
+
+    // Poll until Recharts has actually painted geometry (a blind timeout can
+    // capture charts mid-animation, producing half-drawn images).
+    const waitForCharts = async () => {
+      const deadline = Date.now() + 8000;
+      let stableFrames = 0;
+      let lastCount = -1;
+
+      while (!cancelled && Date.now() < deadline) {
+        const rendered = document.querySelectorAll(
+          '[id^="chart-"] svg path, [id^="chart-"] svg rect.recharts-rectangle, [id^="chart-"] svg circle'
+        ).length;
+
+        if (rendered > 0 && rendered === lastCount) {
+          stableFrames += 1;
+          if (stableFrames >= 3) break;
+        } else {
+          stableFrames = 0;
+        }
+        lastCount = rendered;
+        await new Promise(resolve => setTimeout(resolve, 150));
+      }
+
+      if (cancelled) return;
+
       try {
         const images = await captureAllDashboardCharts();
-        onReady(images);
+        if (!cancelled) onReady(images);
       } catch (e) {
         console.warn('Offscreen chart capture failed:', e);
-        onReady({});
+        if (!cancelled) onReady({});
       }
-    }, 2000);
+    };
 
-    return () => clearTimeout(timer);
+    void waitForCharts();
+
+    return () => {
+      cancelled = true;
+    };
   }, [onReady]);
 
   const noop = () => {};
