@@ -50,14 +50,42 @@ async function svgToDataUrl(svgEl: SVGSVGElement, bgColor = '#ffffff'): Promise<
 }
 
 /**
- * Captures the full chart container (including titles, legends, etc.) as a PNG.
- * Falls back to SVG-only capture if html2canvas-style approach fails.
+ * Captures the full chart container (including titles, HTML legends, etc.) as a PNG.
+ * html2canvas is used first because Recharts renders legends as HTML next to the
+ * SVG plot; the SVG-only path stays as a fallback.
  */
-async function containerToDataUrl(container: HTMLElement): Promise<string> {
-  const svg = container.querySelector('svg');
-  if (!svg) throw new Error('No SVG found in container');
-  return svgToDataUrl(svg as SVGSVGElement);
+async function containerToDataUrl(container: HTMLElement, bgColor = '#ffffff'): Promise<string> {
+  const svgs = Array.from(container.querySelectorAll('svg')) as SVGSVGElement[];
+  const renderable = svgs.filter(svg => {
+    const { width, height } = svg.getBoundingClientRect();
+    return width > 0 && height > 0;
+  });
+  const rect = container.getBoundingClientRect();
+  // Some dashboard charts (e.g. the evidence/impact matrix) are pure HTML grids,
+  // so an SVG is not required — only a container with real dimensions.
+  if (renderable.length === 0 && (rect.width === 0 || rect.height === 0)) {
+    throw new Error('Chart container has no renderable content');
+  }
+
+  try {
+    const { default: html2canvas } = await import('html2canvas');
+    const canvas = await html2canvas(container, {
+      backgroundColor: bgColor,
+      scale: 2,
+      logging: false,
+      useCORS: true,
+    });
+    if (canvas.width > 0 && canvas.height > 0) {
+      return canvas.toDataURL('image/png');
+    }
+  } catch (e) {
+    console.warn('html2canvas capture failed, falling back to SVG capture:', e);
+  }
+
+  if (renderable.length === 0) throw new Error('No renderable SVG found in container');
+  return svgToDataUrl(renderable[0], bgColor);
 }
+
 
 export function useChartExport(chartId?: string) {
   const chartRef = useRef<HTMLDivElement>(null);

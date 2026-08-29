@@ -218,6 +218,30 @@ export class PptxExporter {
   }
 
   /**
+   * Reads intrinsic PNG dimensions straight from the base64 IHDR chunk so image
+   * placement can stay synchronous.
+   */
+  private pngSizeFromDataUrl(dataUrl: string): { width: number; height: number } | null {
+    try {
+      const base64 = dataUrl.split(',')[1];
+      if (!base64) return null;
+      const header = atob(base64.slice(0, 64));
+      if (header.charCodeAt(1) !== 0x50 || header.charCodeAt(2) !== 0x4e) return null;
+      const readUint32 = (offset: number) =>
+        (header.charCodeAt(offset) << 24) |
+        (header.charCodeAt(offset + 1) << 16) |
+        (header.charCodeAt(offset + 2) << 8) |
+        header.charCodeAt(offset + 3);
+      const width = readUint32(16);
+      const height = readUint32(20);
+      if (!width || !height) return null;
+      return { width, height };
+    } catch {
+      return null;
+    }
+  }
+
+  /**
    * Adds a chart image slide if the image data URL is available, otherwise falls back to native chart.
    * Returns true if the image was used.
    */
@@ -237,13 +261,31 @@ export class PptxExporter {
       bold: true,
       fontFace: "Arial"
     });
-    
+
+    const boxX = this.layout.margin.left;
+    const boxY = 1.6;
+    const boxW = contentWidth;
+    const boxH = 5.2;
+
+    // Preserve the captured aspect ratio; stretching charts distorts fonts and bars.
+    let w = boxW;
+    let h = boxH;
+    const size = this.pngSizeFromDataUrl(imageDataUrl);
+    if (size) {
+      const imgAspect = size.width / size.height;
+      if (imgAspect > boxW / boxH) {
+        h = boxW / imgAspect;
+      } else {
+        w = boxH * imgAspect;
+      }
+    }
+
     slide.addImage({
       data: imageDataUrl,
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
+      x: boxX + (boxW - w) / 2,
+      y: boxY + (boxH - h) / 2,
+      w,
+      h,
     });
     
     return true;
@@ -624,31 +666,44 @@ export class PptxExporter {
       return;
     }
     
-    // Create chart data with proper validation
-    const chartData = validCategoryData.map(item => ({
-      name: item.name,
-      labels: [item.name],
-      values: [item.count]
-    }));
-    
+    // pptxgenjs pie charts take a single series with all labels/values.
+    const chartData = [{
+      name: "Products by Category",
+      labels: validCategoryData.map(item => item.name),
+      values: validCategoryData.map(item => item.count)
+    }];
+
+    // Shares are computed against the categorised total so the pie and table agree.
+    const categorisedTotal = validCategoryData.reduce((sum, item) => sum + item.count, 0);
+
     try {
       // Add chart - better positioned
       slide.addChart("pie", chartData, {
         x: this.layout.margin.left,
         y: 1.8,
         w: halfWidth,
-        h: 4.5,
+        h: 4.2,
         showTitle: false,
         showLegend: true,
         legendPos: "r",
-        chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444", "#8B5CF6"]
+        legendFontSize: 10,
+        chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444", "#8B5CF6", "#0EA5E9", "#D946EF"]
       });
     } catch (error) {
       console.warn('Failed to add chart:', error);
     }
-    
-    // Add table with details - use sum of valid categories so percentages add to 100%
-    const totalProducts = validCategoryData.reduce((sum, item) => sum + item.count, 0);
+
+    slide.addText(`n = ${categorisedTotal} categorised products`, {
+      x: this.layout.margin.left,
+      y: 6.1,
+      w: halfWidth,
+      h: 0.3,
+      fontSize: 10,
+      color: this.brandColors.secondary,
+      fontFace: "Arial"
+    });
+
+    // Add table with details - same denominator as the pie
     const tableData = [
       [
         { text: "Category", options: { bold: true, fontSize: 14 } },
@@ -658,7 +713,7 @@ export class PptxExporter {
       ...validCategoryData.map(item => [
         { text: item.name, options: { fontSize: 12 } },
         { text: item.count.toString(), options: { fontSize: 12 } },
-        { text: `${Math.round((item.count / totalProducts) * 100)}%`, options: { fontSize: 12 } }
+        { text: `${Math.round((item.count / categorisedTotal) * 100)}%`, options: { fontSize: 12 } }
       ])
     ];
     
@@ -857,7 +912,12 @@ export class PptxExporter {
     });
     
     // Products by Category table (real data)
-    const validCategories = (data.analyticsData.categoryBreakdown || data.categoryBreakdown || []).slice(0, 8);
+    const allCategories = (data.analyticsData.categoryBreakdown || data.categoryBreakdown || []).filter(
+      item => item && typeof item.count === 'number' && item.count > 0
+    );
+    // Same denominator as the "AI Solution Categories" slide so shares match across the deck.
+    const categorisedTotal = allCategories.reduce((sum, item) => sum + item.count, 0) || 1;
+    const validCategories = allCategories.slice(0, 8);
     if (validCategories.length > 0) {
       const tableData = [
         [
@@ -868,7 +928,7 @@ export class PptxExporter {
         ...validCategories.map(item => [
           { text: item.name || "Unknown", options: { fontSize: 12 } },
           { text: item.count.toString(), options: { fontSize: 12 } },
-          { text: `${Math.round((item.count / (data.totalProducts || 1)) * 100)}%`, options: { fontSize: 12 } }
+          { text: `${Math.round((item.count / categorisedTotal) * 100)}%`, options: { fontSize: 12 } }
         ])
       ];
       

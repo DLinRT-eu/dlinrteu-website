@@ -40,18 +40,57 @@ const OffscreenChartRenderer: React.FC<OffscreenChartRendererProps> = ({ onReady
   const { companyData, totalCompanies } = useCompanyData(undefined, filteredProducts);
 
   useEffect(() => {
-    // Wait for Recharts to finish rendering SVGs
-    const timer = setTimeout(async () => {
+    let cancelled = false;
+
+    // Poll until Recharts geometry stops changing (a blind timeout, or counting
+    // elements only, can capture charts mid-animation as half-drawn shapes).
+    const geometrySignature = () => {
+      const nodes = document.querySelectorAll(
+        '[id^="chart-"] svg path, [id^="chart-"] svg rect, [id^="chart-"] svg circle'
+      );
+      let sig = `${nodes.length}`;
+      nodes.forEach(node => {
+        const el = node as SVGGraphicsElement;
+        sig += `|${el.getAttribute('d') ?? ''}${el.getAttribute('width') ?? ''}${el.getAttribute('height') ?? ''}${el.getAttribute('r') ?? ''}`;
+      });
+      return sig;
+    };
+
+    const waitForCharts = async () => {
+      const deadline = Date.now() + 15000;
+      let stableFrames = 0;
+      let lastSig = '';
+
+      while (!cancelled && Date.now() < deadline) {
+        const sig = geometrySignature();
+
+        if (sig.length > 1 && sig === lastSig) {
+          stableFrames += 1;
+          if (stableFrames >= 4) break;
+        } else {
+          stableFrames = 0;
+        }
+        lastSig = sig;
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
+
+      if (cancelled) return;
+
       try {
         const images = await captureAllDashboardCharts();
-        onReady(images);
+        if (!cancelled) onReady(images);
       } catch (e) {
         console.warn('Offscreen chart capture failed:', e);
-        onReady({});
+        if (!cancelled) onReady({});
       }
-    }, 2000);
+    };
 
-    return () => clearTimeout(timer);
+    void waitForCharts();
+
+    return () => {
+      cancelled = true;
+    };
   }, [onReady]);
 
   const noop = () => {};
