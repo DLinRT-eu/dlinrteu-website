@@ -912,7 +912,12 @@ export class PptxExporter {
     });
     
     // Products by Category table (real data)
-    const validCategories = (data.analyticsData.categoryBreakdown || data.categoryBreakdown || []).slice(0, 8);
+    const allCategories = (data.analyticsData.categoryBreakdown || data.categoryBreakdown || []).filter(
+      item => item && typeof item.count === 'number' && item.count > 0
+    );
+    // Same denominator as the "AI Solution Categories" slide so shares match across the deck.
+    const categorisedTotal = allCategories.reduce((sum, item) => sum + item.count, 0) || 1;
+    const validCategories = allCategories.slice(0, 8);
     if (validCategories.length > 0) {
       const tableData = [
         [
@@ -923,7 +928,7 @@ export class PptxExporter {
         ...validCategories.map(item => [
           { text: item.name || "Unknown", options: { fontSize: 12 } },
           { text: item.count.toString(), options: { fontSize: 12 } },
-          { text: `${Math.round((item.count / (data.totalProducts || 1)) * 100)}%`, options: { fontSize: 12 } }
+          { text: `${Math.round((item.count / categorisedTotal) * 100)}%`, options: { fontSize: 12 } }
         ])
       ];
       
