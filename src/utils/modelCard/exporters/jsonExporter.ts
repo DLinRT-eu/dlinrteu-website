@@ -39,8 +39,8 @@ export const exportModelCardToJSON = (product: ProductDetails) => {
           regulationNumber: (product as any)?.regulatory?.fda?.regulationNumber || "",
           productCode: (product as any)?.regulatory?.fda?.productCode || "",
         }
-        }
       },
+
       // Original product data, matching the bulk JSON export shape
       rawProductData: product
     }, null, 2);
