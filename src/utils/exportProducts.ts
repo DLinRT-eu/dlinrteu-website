@@ -263,6 +263,8 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.trainingData?.disclosureLevel),
     escapeValueForCsv(product.trainingData?.source),
     escapeValueForCsv(product.trainingData?.sourceUrl),
+    escapeValueForCsv(product.trainingData?.sourceAccess),
+    escapeValueForCsv(product.trainingData?.sourceRetrievedOn),
     escapeValueForCsv(product.evaluationData?.description),
     escapeValueForCsv(product.evaluationData?.datasetSize),
     escapeValueForCsv(product.evaluationData?.sites),
@@ -273,6 +275,9 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.evaluationData?.results),
     escapeValueForCsv(product.evaluationData?.source),
     escapeValueForCsv(product.evaluationData?.sourceUrl),
+    escapeValueForCsv(product.evaluationData?.sourceAccess),
+    escapeValueForCsv(product.evaluationData?.sourceRetrievedOn),
+
     escapeValueForCsv(formatFSCAs(product.safetyCorrectiveActions)),
     escapeValueForCsv(product.compatibleSystems),
     escapeValueForCsv(product.trainingRequired),
