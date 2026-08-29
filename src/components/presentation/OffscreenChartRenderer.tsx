@@ -42,27 +42,38 @@ const OffscreenChartRenderer: React.FC<OffscreenChartRendererProps> = ({ onReady
   useEffect(() => {
     let cancelled = false;
 
-    // Poll until Recharts has actually painted geometry (a blind timeout can
-    // capture charts mid-animation, producing half-drawn images).
+    // Poll until Recharts geometry stops changing (a blind timeout, or counting
+    // elements only, can capture charts mid-animation as half-drawn shapes).
+    const geometrySignature = () => {
+      const nodes = document.querySelectorAll(
+        '[id^="chart-"] svg path, [id^="chart-"] svg rect, [id^="chart-"] svg circle'
+      );
+      let sig = `${nodes.length}`;
+      nodes.forEach(node => {
+        const el = node as SVGGraphicsElement;
+        sig += `|${el.getAttribute('d') ?? ''}${el.getAttribute('width') ?? ''}${el.getAttribute('height') ?? ''}${el.getAttribute('r') ?? ''}`;
+      });
+      return sig;
+    };
+
     const waitForCharts = async () => {
-      const deadline = Date.now() + 8000;
+      const deadline = Date.now() + 15000;
       let stableFrames = 0;
-      let lastCount = -1;
+      let lastSig = '';
 
       while (!cancelled && Date.now() < deadline) {
-        const rendered = document.querySelectorAll(
-          '[id^="chart-"] svg path, [id^="chart-"] svg rect.recharts-rectangle, [id^="chart-"] svg circle'
-        ).length;
+        const sig = geometrySignature();
 
-        if (rendered > 0 && rendered === lastCount) {
+        if (sig.length > 1 && sig === lastSig) {
           stableFrames += 1;
-          if (stableFrames >= 3) break;
+          if (stableFrames >= 4) break;
         } else {
           stableFrames = 0;
         }
-        lastCount = rendered;
-        await new Promise(resolve => setTimeout(resolve, 150));
+        lastSig = sig;
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
+
 
       if (cancelled) return;
 
