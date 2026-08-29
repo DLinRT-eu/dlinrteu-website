@@ -209,7 +209,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.productUrl),
     escapeValueForCsv(product.githubUrl),
     escapeValueForCsv(product.clinicalEvidence),
-    escapeValueForCsv(product.evidence),
+    escapeValueForCsv(formatEvidence(product.evidence)),
     escapeValueForCsv(product.limitations),
     escapeValueForCsv(product.evidenceRigor),
     escapeValueForCsv(product.evidenceRigorNotes),
