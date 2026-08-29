@@ -50,9 +50,9 @@ async function svgToDataUrl(svgEl: SVGSVGElement, bgColor = '#ffffff'): Promise<
 }
 
 /**
- * Captures the full chart container (including titles, legends, etc.) as a PNG.
- * Multiple SVGs (e.g. chart + separate legend) are composited on one canvas so
- * nothing rendered next to the plot is lost.
+ * Captures the full chart container (including titles, HTML legends, etc.) as a PNG.
+ * html2canvas is used first because Recharts renders legends as HTML next to the
+ * SVG plot; the SVG-only path stays as a fallback.
  */
 async function containerToDataUrl(container: HTMLElement, bgColor = '#ffffff'): Promise<string> {
   const svgs = Array.from(container.querySelectorAll('svg')) as SVGSVGElement[];
@@ -61,38 +61,25 @@ async function containerToDataUrl(container: HTMLElement, bgColor = '#ffffff'): 
     return width > 0 && height > 0;
   });
   if (renderable.length === 0) throw new Error('No renderable SVG found in container');
-  if (renderable.length === 1) return svgToDataUrl(renderable[0], bgColor);
 
-  const containerRect = container.getBoundingClientRect();
-  const scale = 2;
-  const canvas = document.createElement('canvas');
-  canvas.width = Math.max(1, Math.round(containerRect.width * scale));
-  canvas.height = Math.max(1, Math.round(containerRect.height * scale));
-  const ctx = canvas.getContext('2d')!;
-  ctx.scale(scale, scale);
-  ctx.fillStyle = bgColor;
-  ctx.fillRect(0, 0, containerRect.width, containerRect.height);
-
-  for (const svg of renderable) {
-    const rect = svg.getBoundingClientRect();
-    const dataUrl = await svgToDataUrl(svg, 'transparent');
-    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-      const image = new Image();
-      image.onload = () => resolve(image);
-      image.onerror = reject;
-      image.src = dataUrl;
+  try {
+    const { default: html2canvas } = await import('html2canvas');
+    const canvas = await html2canvas(container, {
+      backgroundColor: bgColor,
+      scale: 2,
+      logging: false,
+      useCORS: true,
     });
-    ctx.drawImage(
-      img,
-      rect.left - containerRect.left,
-      rect.top - containerRect.top,
-      rect.width,
-      rect.height
-    );
+    if (canvas.width > 0 && canvas.height > 0) {
+      return canvas.toDataURL('image/png');
+    }
+  } catch (e) {
+    console.warn('html2canvas capture failed, falling back to SVG capture:', e);
   }
 
-  return canvas.toDataURL('image/png');
+  return svgToDataUrl(renderable[0], bgColor);
 }
+
 
 export function useChartExport(chartId?: string) {
   const chartRef = useRef<HTMLDivElement>(null);
