@@ -301,7 +301,7 @@ export const exportProductsToCSV = (products: ProductDetails[]): void => {
     const a = document.createElement("a");
     a.setAttribute("hidden", "");
     a.setAttribute("href", url);
-    a.setAttribute("download", "dlinrt-products.csv");
+    a.setAttribute("download", `dlinrt-products-${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
