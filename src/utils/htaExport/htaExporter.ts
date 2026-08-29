@@ -98,9 +98,9 @@ function buildEFF(products: ProductDetails[]): ExcelSheet {
     data: products.map((p) => {
       const rigor = (p as any).evidenceRigor;
       const impact = (p as any).clinicalImpact;
-      const sq: any = (p as any).studyQuality ?? {};
       const evalData: any = (p as any).evaluationData ?? {};
       const evidence = (p as any).evidence;
+      const keyPapers = Array.isArray((p as any).keyPapers) ? (p as any).keyPapers : [];
       const topPubs = Array.isArray(evidence)
         ? evidence.slice(0, 3).map((e: any) => e?.url ?? e?.doi ?? e?.title ?? stringify(e)).join(" | ")
         : stringify(evidence);
@@ -110,11 +110,15 @@ function buildEFF(products: ProductDetails[]): ExcelSheet {
         "Rigor — meaning": rigor ? EVIDENCE_RIGOR_EXPLAIN[rigor] ?? "" : "",
         "Clinical impact (I0–I5)": impact ?? "",
         "Impact — meaning": impact ? CLINICAL_IMPACT_EXPLAIN[impact] ?? "" : "",
-        "Vendor independent": sq.vendorIndependent ? "Yes" : "No",
-        "Multi-centre": sq.multiCenter ? "Yes" : "No",
-        "Multi-national": sq.multiNational ? "Yes" : "No",
-        "Prospective": sq.prospective ? "Yes" : "No",
-        "External validation": sq.externalValidation ? "Yes" : "No",
+        "Vendor independent": p.evidenceVendorIndependent ? "Yes" : "No",
+        "Multi-centre": p.evidenceMultiCenter ? "Yes" : "No",
+        "Multi-national": p.evidenceMultiNational ? "Yes" : "No",
+        "Prospective": p.evidenceProspective ? "Yes" : "No",
+        "External validation": p.evidenceExternalValidation ? "Yes" : "No",
+        "Individually scored publications": keyPapers.length,
+        "Per-publication scores": keyPapers
+          .map((k: any) => `${k.citation ?? k.title ?? ""} (${k.evidenceRigor ?? "-"}/${k.clinicalImpact ?? "-"})`)
+          .join(" | "),
         "Evaluation dataset size": stringify(evalData.datasetSize),
         "Evaluation sites": stringify(evalData.sites),
         "Evaluation countries": stringify(evalData.countries),
@@ -129,26 +133,37 @@ function buildSAF(products: ProductDetails[]): ExcelSheet {
   return {
     name: "SAF — Safety",
     data: products.map((p) => {
-      const fsca: any = (p as any).safetyCorrectiveActions ?? {};
+      const actions = Array.isArray(p.safetyCorrectiveActions) ? p.safetyCorrectiveActions : [];
+      const structureName = (s: any): string =>
+        typeof s === "string" ? s : s?.name ?? String(s ?? "");
+      const structures = Array.isArray((p as any).supportedStructures)
+        ? (p as any).supportedStructures.map(structureName)
+        : [];
       return {
         "Product": p.name ?? "",
         "Known limitations": stringify((p as any).limitations),
-        "Supported structures (count)": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.length
-          : 0,
-        "Investigational structures": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.filter((s: string) => /investigational/i.test(s)).length
-          : 0,
-        "Unverified structures": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.filter((s: string) => /unverified/i.test(s)).length
-          : 0,
-        "FSCA count": fsca.count ?? 0,
-        "FSCA summary": stringify(fsca.summary),
-        "FSCA details": stringify(fsca.actions ?? fsca.details),
+        "Supported structures (count)": structures.length,
+        "Investigational structures": structures.filter((s) => /investigational/i.test(s)).length,
+        "Unverified structures": structures.filter((s) => /unverified/i.test(s)).length,
+        "FSCA count": actions.length,
+        "FSCA summary": actions.length
+          ? `${actions.length} action(s): ${actions.filter((a: any) => a.status === "open").length} open, ${actions.filter((a: any) => a.status === "closed").length} closed`
+          : "No safety corrective actions reported",
+        "FSCA details": actions
+          .map((a: any) => {
+            let s = `${a.type}: ${a.description}`;
+            if (a.date) s = `[${a.date}] ${s}`;
+            if (a.identifier) s += ` (${a.identifier})`;
+            if (a.authority) s += ` — ${a.authority}`;
+            if (a.status) s += ` [${a.status}]`;
+            return s;
+          })
+          .join("; "),
       };
     }),
   };
 }
+
 
 function buildETH(products: ProductDetails[]): ExcelSheet {
   return {
