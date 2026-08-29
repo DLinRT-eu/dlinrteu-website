@@ -191,9 +191,11 @@ function buildORG(products: ProductDetails[]): ExcelSheet {
     name: "ORG — Organizational",
     data: products.map((p) => ({
       "Product": p.name ?? "",
-      "Deployment": stringify((p as any).deployment),
-      "Integration": stringify((p as any).integration),
-      "Market presence": stringify((p as any).marketPresence),
+      "Deployment": stringify(p.technology?.deployment),
+      "Integration": stringify(p.technology?.integration),
+      "On market since": stringify(p.market?.onMarketSince),
+      "Distribution channels": stringify(p.market?.distributionChannels),
+      "Training required": stringify((p as any).trainingRequired),
     })),
   };
 }
@@ -208,11 +210,16 @@ function buildLEG(products: ProductDetails[]): ExcelSheet {
       "TGA": stringify(p.regulatory?.tga),
       "TFDA": stringify(p.regulatory?.tfda),
       "Other certification": stringify((p as any).certification),
-      "Intended use statement": stringify((p as any).intendedUse),
-      "Guideline compliance": stringify((p as any).guidelines),
+      "Intended use statement": stringify(p.regulatory?.intendedUseStatement),
+      "Guideline compliance": (p.guidelines ?? [])
+        .map((g: any) =>
+          `${g.name}${g.version ? ` v${g.version}` : ""}${g.compliance ? ` (${g.compliance})` : ""}`
+        )
+        .join("; "),
     })),
   };
 }
+
 
 function buildIMP(products: ProductDetails[]): ExcelSheet {
   return {
