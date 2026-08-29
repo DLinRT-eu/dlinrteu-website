@@ -666,31 +666,44 @@ export class PptxExporter {
       return;
     }
     
-    // Create chart data with proper validation
-    const chartData = validCategoryData.map(item => ({
-      name: item.name,
-      labels: [item.name],
-      values: [item.count]
-    }));
-    
+    // pptxgenjs pie charts take a single series with all labels/values.
+    const chartData = [{
+      name: "Products by Category",
+      labels: validCategoryData.map(item => item.name),
+      values: validCategoryData.map(item => item.count)
+    }];
+
+    // Shares are computed against the categorised total so the pie and table agree.
+    const categorisedTotal = validCategoryData.reduce((sum, item) => sum + item.count, 0);
+
     try {
       // Add chart - better positioned
       slide.addChart("pie", chartData, {
         x: this.layout.margin.left,
         y: 1.8,
         w: halfWidth,
-        h: 4.5,
+        h: 4.2,
         showTitle: false,
         showLegend: true,
         legendPos: "r",
-        chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444", "#8B5CF6"]
+        legendFontSize: 10,
+        chartColors: [this.brandColors.primaryLight, this.brandColors.secondary, "#F59E0B", "#10B981", "#EF4444", "#8B5CF6", "#0EA5E9", "#D946EF"]
       });
     } catch (error) {
       console.warn('Failed to add chart:', error);
     }
-    
-    // Add table with details - use sum of valid categories so percentages add to 100%
-    const totalProducts = validCategoryData.reduce((sum, item) => sum + item.count, 0);
+
+    slide.addText(`n = ${categorisedTotal} categorised products`, {
+      x: this.layout.margin.left,
+      y: 6.1,
+      w: halfWidth,
+      h: 0.3,
+      fontSize: 10,
+      color: this.brandColors.secondary,
+      fontFace: "Arial"
+    });
+
+    // Add table with details - same denominator as the pie
     const tableData = [
       [
         { text: "Category", options: { bold: true, fontSize: 14 } },
@@ -700,7 +713,7 @@ export class PptxExporter {
       ...validCategoryData.map(item => [
         { text: item.name, options: { fontSize: 12 } },
         { text: item.count.toString(), options: { fontSize: 12 } },
-        { text: `${Math.round((item.count / totalProducts) * 100)}%`, options: { fontSize: 12 } }
+        { text: `${Math.round((item.count / categorisedTotal) * 100)}%`, options: { fontSize: 12 } }
       ])
     ];
     
