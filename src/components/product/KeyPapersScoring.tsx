@@ -37,8 +37,10 @@ const PUBLICATION_TYPE =
 
 const isScoreablePublication = (type: string | undefined): boolean => {
   if (!type) return false;
-  if (NON_PUBLICATION_TYPE.test(type)) return false;
-  return PUBLICATION_TYPE.test(type);
+  // "Multi-vendor Comparative Study" is an independent study, not vendor material.
+  const normalized = type.replace(/multi-?vendor/gi, "comparative");
+  if (NON_PUBLICATION_TYPE.test(normalized)) return false;
+  return PUBLICATION_TYPE.test(normalized);
 };
 
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
