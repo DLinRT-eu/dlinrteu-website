@@ -95,6 +95,66 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     return structures.map(s => typeof s === 'string' ? s : s.name || String(s)).join("; ");
   };
 
+  // Helper to format the evidence field (string | string[] | object[])
+  const formatEvidence = (evidence: any): string => {
+    if (!evidence) return "";
+    if (typeof evidence === "string") return evidence;
+    if (!Array.isArray(evidence)) return String(evidence);
+    return evidence
+      .map((e: any) => {
+        if (typeof e === "string") return e;
+        if (!e || typeof e !== "object") return String(e);
+        const head = [e.type, e.description].filter(Boolean).join(": ");
+        const ref = e.link || e.url || e.doi;
+        return ref ? `${head} [${ref}]` : head || String(e);
+      })
+      .join("; ");
+  };
+
+  // Helper to format individually scored publications
+  const formatKeyPapers = (papers: any[] | undefined): string => {
+    if (!papers || papers.length === 0) return "";
+    return papers
+      .map((p) => {
+        const label = p.title || p.doi || p.pmid || p.link || "Untitled";
+        const scores = `${p.evidenceRigor ?? "-"}/${p.clinicalImpact ?? "-"}`;
+        return `${label} (${scores})`;
+      })
+      .join("; ");
+  };
+
+  const formatCategoryEvidence = (ce: Record<string, any> | undefined): string => {
+    if (!ce) return "";
+    return Object.entries(ce)
+      .map(([cat, v]) => `${cat}: ${v?.evidenceRigor ?? "-"}/${v?.clinicalImpact ?? "-"}`)
+      .join("; ");
+  };
+
+  const formatPriorVersions = (versions: any[] | undefined): string => {
+    if (!versions || versions.length === 0) return "";
+    return versions
+      .map((v) => `${v.name}${v.fdaClearance ? ` (${v.fdaClearance})` : ""}`)
+      .join("; ");
+  };
+
+  const formatStructureHistory = (history: any[] | undefined): string => {
+    if (!history || history.length === 0) return "";
+    return history
+      .map((h) => `v${h.version}: ${Array.isArray(h.structures) ? h.structures.length : 0} structures`)
+      .join("; ");
+  };
+
+  const formatProvenance = (prov: any | undefined): string => {
+    if (!prov) return "";
+    return [prov.source, prov.sourceAccess, prov.sourceRetrievedOn].filter(Boolean).join(" · ");
+  };
+
+  const formatScoreOverride = (o: any | undefined): string => {
+    if (!o) return "";
+    return `${o.rigor ?? "-"}/${o.impact ?? "-"} — ${o.reason}`;
+  };
+
+
   const data = products.map(product => [
     escapeValueForCsv(product.id),
     escapeValueForCsv(product.name),
