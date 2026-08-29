@@ -24,18 +24,30 @@ const QUALITY_LABELS: Record<string, string> = {
   externalValidation: "External validation",
 };
 
-// Regulatory clearances, vendor pages and press items cannot carry a per-paper
-// score, so they are excluded from the coverage count.
+// Regulatory clearances, vendor pages, press items, indirect citations and
+// non-peer-reviewed material cannot carry a per-paper score, so they are
+// excluded from the coverage count. Checked before the positive match so that
+// e.g. "Vendor Publication" is not counted as a scoreable publication.
 const NON_PUBLICATION_TYPE =
-  /regulatory|clearance|510|fda|ce mark|product|vendor|white paper|press|news|case study|brochure|landing|documentation|indirect|review|preprint|arxiv|algorithm paper|use cases/i;
+  /510|fda|ce mark|\bmdr\b|\bmdd\b|regulatory|clearance|press release|white paper|brochure|landing|product page|product information|product release|vendor|documentation|release notes|software tool|software development|publications database|use cases|case study|indirect|announcement|systematic review|preprint|arxiv|algorithm paper|conference|unknown/i;
+
+// Positive match for citation types that represent a scoreable publication.
+const PUBLICATION_TYPE =
+  /peer-review|publication|study|studies|journal|analysis|validation|multicenter|multi-cent|comparative|implementation|paper/i;
+
+const isScoreablePublication = (type: string | undefined): boolean => {
+  if (!type) return false;
+  if (NON_PUBLICATION_TYPE.test(type)) return false;
+  return PUBLICATION_TYPE.test(type);
+};
 
 const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
   const papers = product.keyPapers ?? [];
   const evidence = product.evidence ?? [];
-  const publicationCount = evidence.filter((e) => {
-    const type = typeof e === "string" ? "" : e.type;
-    return !!type && !NON_PUBLICATION_TYPE.test(type);
-  }).length;
+  const publicationCount = evidence.filter((e) =>
+    isScoreablePublication(typeof e === "string" ? undefined : e.type)
+  ).length;
+
 
 
   const score = computeProductEvidenceScore(product, { category });
