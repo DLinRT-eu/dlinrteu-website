@@ -218,6 +218,30 @@ export class PptxExporter {
   }
 
   /**
+   * Reads intrinsic PNG dimensions straight from the base64 IHDR chunk so image
+   * placement can stay synchronous.
+   */
+  private pngSizeFromDataUrl(dataUrl: string): { width: number; height: number } | null {
+    try {
+      const base64 = dataUrl.split(',')[1];
+      if (!base64) return null;
+      const header = atob(base64.slice(0, 64));
+      if (header.charCodeAt(1) !== 0x50 || header.charCodeAt(2) !== 0x4e) return null;
+      const readUint32 = (offset: number) =>
+        (header.charCodeAt(offset) << 24) |
+        (header.charCodeAt(offset + 1) << 16) |
+        (header.charCodeAt(offset + 2) << 8) |
+        header.charCodeAt(offset + 3);
+      const width = readUint32(16);
+      const height = readUint32(20);
+      if (!width || !height) return null;
+      return { width, height };
+    } catch {
+      return null;
+    }
+  }
+
+  /**
    * Adds a chart image slide if the image data URL is available, otherwise falls back to native chart.
    * Returns true if the image was used.
    */
@@ -237,13 +261,31 @@ export class PptxExporter {
       bold: true,
       fontFace: "Arial"
     });
-    
+
+    const boxX = this.layout.margin.left;
+    const boxY = 1.6;
+    const boxW = contentWidth;
+    const boxH = 5.2;
+
+    // Preserve the captured aspect ratio; stretching charts distorts fonts and bars.
+    let w = boxW;
+    let h = boxH;
+    const size = this.pngSizeFromDataUrl(imageDataUrl);
+    if (size) {
+      const imgAspect = size.width / size.height;
+      if (imgAspect > boxW / boxH) {
+        h = boxW / imgAspect;
+      } else {
+        w = boxH * imgAspect;
+      }
+    }
+
     slide.addImage({
       data: imageDataUrl,
-      x: this.layout.margin.left,
-      y: 1.6,
-      w: contentWidth,
-      h: 5.2,
+      x: boxX + (boxW - w) / 2,
+      y: boxY + (boxH - h) / 2,
+      w,
+      h,
     });
     
     return true;
