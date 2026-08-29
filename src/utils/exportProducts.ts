@@ -26,7 +26,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "Release Date", "Version", "Website", "Company URL", "Product URL", "GitHub URL",
     "Clinical Evidence", "Evidence", "Limitations",
     "Evidence Rigor", "Evidence Rigor Notes", "Clinical Impact", "Clinical Impact Notes",
-    "Implementation Burden", "Implementation Burden Notes", "Readiness Signal",
+    "Adoption Readiness", "Adoption Readiness Notes", "Readiness Signal",
     "Burden: Commissioning Required", "Burden: Local Validation Required",
     "Burden: Workflow Redesign", "Burden: Integration Complexity",
     "Burden: Human Factors Testing", "Burden: Economic Case Required",
@@ -34,18 +34,26 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "Burden: Unresolved Safety Signal",
     "Evidence Vendor Independent", "Evidence Multi-Center", "Evidence Multi-National",
     "Evidence Prospective", "Evidence External Validation",
+    "Scored Publications Count", "Scored Publications",
+    "Evidence Score Override", "Category Evidence",
     "Guidelines",
     "Developed By", "Developed By Relationship", "Part Of", "Part Of Relationship",
-    "Uses AI", "Development Stage",
+    "Uses AI", "Monitors AI Products", "Development Stage",
+    "Prior Versions", "Superseded By",
+    "Structure History", "Structures Provenance",
     "Dose Prediction Models",
+
     "Training Data Description", "Training Dataset Size", "Training Dataset Sources",
     "Training Demographics", "Training Scanner Models", "Training Institutions",
     "Training Countries", "Training Public Datasets", "Training Disclosure Level",
     "Training Data Source", "Training Data Source URL",
+    "Training Source Access", "Training Source Retrieved On",
     "Evaluation Description", "Evaluation Dataset Size", "Evaluation Sites",
     "Evaluation Countries", "Evaluation Demographics", "Evaluation Study Design",
     "Evaluation Primary Endpoint", "Evaluation Results",
     "Evaluation Source", "Evaluation Source URL",
+    "Evaluation Source Access", "Evaluation Source Retrieved On",
+
     "Safety Corrective Actions",
     "Compatible Systems", "Training Required", "Support Email",
     "Last Updated", "Last Revised", "Source"
@@ -86,6 +94,66 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     if (!structures || structures.length === 0) return "";
     return structures.map(s => typeof s === 'string' ? s : s.name || String(s)).join("; ");
   };
+
+  // Helper to format the evidence field (string | string[] | object[])
+  const formatEvidence = (evidence: any): string => {
+    if (!evidence) return "";
+    if (typeof evidence === "string") return evidence;
+    if (!Array.isArray(evidence)) return String(evidence);
+    return evidence
+      .map((e: any) => {
+        if (typeof e === "string") return e;
+        if (!e || typeof e !== "object") return String(e);
+        const head = [e.type, e.description].filter(Boolean).join(": ");
+        const ref = e.link || e.url || e.doi;
+        return ref ? `${head} [${ref}]` : head || String(e);
+      })
+      .join("; ");
+  };
+
+  // Helper to format individually scored publications
+  const formatKeyPapers = (papers: any[] | undefined): string => {
+    if (!papers || papers.length === 0) return "";
+    return papers
+      .map((p) => {
+        const label = p.title || p.doi || p.pmid || p.link || "Untitled";
+        const scores = `${p.evidenceRigor ?? "-"}/${p.clinicalImpact ?? "-"}`;
+        return `${label} (${scores})`;
+      })
+      .join("; ");
+  };
+
+  const formatCategoryEvidence = (ce: Record<string, any> | undefined): string => {
+    if (!ce) return "";
+    return Object.entries(ce)
+      .map(([cat, v]) => `${cat}: ${v?.evidenceRigor ?? "-"}/${v?.clinicalImpact ?? "-"}`)
+      .join("; ");
+  };
+
+  const formatPriorVersions = (versions: any[] | undefined): string => {
+    if (!versions || versions.length === 0) return "";
+    return versions
+      .map((v) => `${v.name}${v.fdaClearance ? ` (${v.fdaClearance})` : ""}`)
+      .join("; ");
+  };
+
+  const formatStructureHistory = (history: any[] | undefined): string => {
+    if (!history || history.length === 0) return "";
+    return history
+      .map((h) => `v${h.version}: ${Array.isArray(h.structures) ? h.structures.length : 0} structures`)
+      .join("; ");
+  };
+
+  const formatProvenance = (prov: any | undefined): string => {
+    if (!prov) return "";
+    return [prov.source, prov.sourceAccess, prov.sourceRetrievedOn].filter(Boolean).join(" · ");
+  };
+
+  const formatScoreOverride = (o: any | undefined): string => {
+    if (!o) return "";
+    return `${o.rigor ?? "-"}/${o.impact ?? "-"} — ${o.reason}`;
+  };
+
 
   const data = products.map(product => [
     escapeValueForCsv(product.id),
@@ -141,7 +209,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.productUrl),
     escapeValueForCsv(product.githubUrl),
     escapeValueForCsv(product.clinicalEvidence),
-    escapeValueForCsv(product.evidence),
+    escapeValueForCsv(formatEvidence(product.evidence)),
     escapeValueForCsv(product.limitations),
     escapeValueForCsv(product.evidenceRigor),
     escapeValueForCsv(product.evidenceRigorNotes),
@@ -166,14 +234,24 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.evidenceMultiNational),
     escapeValueForCsv(product.evidenceProspective),
     escapeValueForCsv(product.evidenceExternalValidation),
+    escapeValueForCsv(product.keyPapers?.length ?? 0),
+    escapeValueForCsv(formatKeyPapers(product.keyPapers)),
+    escapeValueForCsv(formatScoreOverride(product.evidenceScoreOverride)),
+    escapeValueForCsv(formatCategoryEvidence(product.categoryEvidence as any)),
     escapeValueForCsv(formatGuidelines(product.guidelines)),
     escapeValueForCsv(product.developedBy?.company),
     escapeValueForCsv(product.developedBy?.relationship),
     escapeValueForCsv(product.partOf?.name),
     escapeValueForCsv(product.partOf?.relationship),
     escapeValueForCsv(product.usesAI),
+    escapeValueForCsv(product.monitorsAIProducts),
     escapeValueForCsv(product.developmentStage),
+    escapeValueForCsv(formatPriorVersions(product.priorVersions)),
+    escapeValueForCsv(product.supersededBy),
+    escapeValueForCsv(formatStructureHistory(product.structureHistory)),
+    escapeValueForCsv(formatProvenance(product.structuresProvenance)),
     escapeValueForCsv(formatDoseModels(product.dosePredictionModels)),
+
     escapeValueForCsv(product.trainingData?.description),
     escapeValueForCsv(product.trainingData?.datasetSize),
     escapeValueForCsv(product.trainingData?.datasetSources),
@@ -185,6 +263,8 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.trainingData?.disclosureLevel),
     escapeValueForCsv(product.trainingData?.source),
     escapeValueForCsv(product.trainingData?.sourceUrl),
+    escapeValueForCsv(product.trainingData?.sourceAccess),
+    escapeValueForCsv(product.trainingData?.sourceRetrievedOn),
     escapeValueForCsv(product.evaluationData?.description),
     escapeValueForCsv(product.evaluationData?.datasetSize),
     escapeValueForCsv(product.evaluationData?.sites),
@@ -195,6 +275,9 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.evaluationData?.results),
     escapeValueForCsv(product.evaluationData?.source),
     escapeValueForCsv(product.evaluationData?.sourceUrl),
+    escapeValueForCsv(product.evaluationData?.sourceAccess),
+    escapeValueForCsv(product.evaluationData?.sourceRetrievedOn),
+
     escapeValueForCsv(formatFSCAs(product.safetyCorrectiveActions)),
     escapeValueForCsv(product.compatibleSystems),
     escapeValueForCsv(product.trainingRequired),
@@ -218,7 +301,7 @@ export const exportProductsToCSV = (products: ProductDetails[]): void => {
     const a = document.createElement("a");
     a.setAttribute("hidden", "");
     a.setAttribute("href", url);
-    a.setAttribute("download", "dlinrt-products.csv");
+    a.setAttribute("download", `dlinrt-products-${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

@@ -98,9 +98,9 @@ function buildEFF(products: ProductDetails[]): ExcelSheet {
     data: products.map((p) => {
       const rigor = (p as any).evidenceRigor;
       const impact = (p as any).clinicalImpact;
-      const sq: any = (p as any).studyQuality ?? {};
       const evalData: any = (p as any).evaluationData ?? {};
       const evidence = (p as any).evidence;
+      const keyPapers = Array.isArray((p as any).keyPapers) ? (p as any).keyPapers : [];
       const topPubs = Array.isArray(evidence)
         ? evidence.slice(0, 3).map((e: any) => e?.url ?? e?.doi ?? e?.title ?? stringify(e)).join(" | ")
         : stringify(evidence);
@@ -110,11 +110,15 @@ function buildEFF(products: ProductDetails[]): ExcelSheet {
         "Rigor — meaning": rigor ? EVIDENCE_RIGOR_EXPLAIN[rigor] ?? "" : "",
         "Clinical impact (I0–I5)": impact ?? "",
         "Impact — meaning": impact ? CLINICAL_IMPACT_EXPLAIN[impact] ?? "" : "",
-        "Vendor independent": sq.vendorIndependent ? "Yes" : "No",
-        "Multi-centre": sq.multiCenter ? "Yes" : "No",
-        "Multi-national": sq.multiNational ? "Yes" : "No",
-        "Prospective": sq.prospective ? "Yes" : "No",
-        "External validation": sq.externalValidation ? "Yes" : "No",
+        "Vendor independent": p.evidenceVendorIndependent ? "Yes" : "No",
+        "Multi-centre": p.evidenceMultiCenter ? "Yes" : "No",
+        "Multi-national": p.evidenceMultiNational ? "Yes" : "No",
+        "Prospective": p.evidenceProspective ? "Yes" : "No",
+        "External validation": p.evidenceExternalValidation ? "Yes" : "No",
+        "Individually scored publications": keyPapers.length,
+        "Per-publication scores": keyPapers
+          .map((k: any) => `${k.citation ?? k.title ?? ""} (${k.evidenceRigor ?? "-"}/${k.clinicalImpact ?? "-"})`)
+          .join(" | "),
         "Evaluation dataset size": stringify(evalData.datasetSize),
         "Evaluation sites": stringify(evalData.sites),
         "Evaluation countries": stringify(evalData.countries),
@@ -129,26 +133,37 @@ function buildSAF(products: ProductDetails[]): ExcelSheet {
   return {
     name: "SAF — Safety",
     data: products.map((p) => {
-      const fsca: any = (p as any).safetyCorrectiveActions ?? {};
+      const actions = Array.isArray(p.safetyCorrectiveActions) ? p.safetyCorrectiveActions : [];
+      const structureName = (s: any): string =>
+        typeof s === "string" ? s : s?.name ?? String(s ?? "");
+      const structures = Array.isArray((p as any).supportedStructures)
+        ? (p as any).supportedStructures.map(structureName)
+        : [];
       return {
         "Product": p.name ?? "",
         "Known limitations": stringify((p as any).limitations),
-        "Supported structures (count)": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.length
-          : 0,
-        "Investigational structures": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.filter((s: string) => /investigational/i.test(s)).length
-          : 0,
-        "Unverified structures": Array.isArray((p as any).supportedStructures)
-          ? (p as any).supportedStructures.filter((s: string) => /unverified/i.test(s)).length
-          : 0,
-        "FSCA count": fsca.count ?? 0,
-        "FSCA summary": stringify(fsca.summary),
-        "FSCA details": stringify(fsca.actions ?? fsca.details),
+        "Supported structures (count)": structures.length,
+        "Investigational structures": structures.filter((s) => /investigational/i.test(s)).length,
+        "Unverified structures": structures.filter((s) => /unverified/i.test(s)).length,
+        "FSCA count": actions.length,
+        "FSCA summary": actions.length
+          ? `${actions.length} action(s): ${actions.filter((a: any) => a.status === "open").length} open, ${actions.filter((a: any) => a.status === "closed").length} closed`
+          : "No safety corrective actions reported",
+        "FSCA details": actions
+          .map((a: any) => {
+            let s = `${a.type}: ${a.description}`;
+            if (a.date) s = `[${a.date}] ${s}`;
+            if (a.identifier) s += ` (${a.identifier})`;
+            if (a.authority) s += ` — ${a.authority}`;
+            if (a.status) s += ` [${a.status}]`;
+            return s;
+          })
+          .join("; "),
       };
     }),
   };
 }
+
 
 function buildETH(products: ProductDetails[]): ExcelSheet {
   return {
@@ -176,9 +191,11 @@ function buildORG(products: ProductDetails[]): ExcelSheet {
     name: "ORG — Organizational",
     data: products.map((p) => ({
       "Product": p.name ?? "",
-      "Deployment": stringify((p as any).deployment),
-      "Integration": stringify((p as any).integration),
-      "Market presence": stringify((p as any).marketPresence),
+      "Deployment": stringify(p.technology?.deployment),
+      "Integration": stringify(p.technology?.integration),
+      "On market since": stringify(p.market?.onMarketSince),
+      "Distribution channels": stringify(p.market?.distributionChannels),
+      "Training required": stringify((p as any).trainingRequired),
     })),
   };
 }
@@ -193,11 +210,16 @@ function buildLEG(products: ProductDetails[]): ExcelSheet {
       "TGA": stringify(p.regulatory?.tga),
       "TFDA": stringify(p.regulatory?.tfda),
       "Other certification": stringify((p as any).certification),
-      "Intended use statement": stringify((p as any).intendedUse),
-      "Guideline compliance": stringify((p as any).guidelines),
+      "Intended use statement": stringify(p.regulatory?.intendedUseStatement),
+      "Guideline compliance": (p.guidelines ?? [])
+        .map((g: any) =>
+          `${g.name}${g.version ? ` v${g.version}` : ""}${g.compliance ? ` (${g.compliance})` : ""}`
+        )
+        .join("; "),
     })),
   };
 }
+
 
 function buildIMP(products: ProductDetails[]): ExcelSheet {
   return {
@@ -212,9 +234,9 @@ function buildIMP(products: ProductDetails[]): ExcelSheet {
       );
       return {
         "Product": p.name ?? "",
-        "Implementation burden (Z0–Z5)": burden ?? "",
-        "Burden — meaning": burden ? BURDEN_EXPLAIN[burden] ?? "" : "",
-        "Burden notes": stringify((p as any).adoptionReadinessNotes),
+        "Adoption readiness (R0–R5)": burden ?? "",
+        "Readiness — meaning": burden ? BURDEN_EXPLAIN[burden] ?? "" : "",
+        "Readiness notes": stringify((p as any).adoptionReadinessNotes),
         "Readiness signal (composite)": signal.label,
         "Commissioning required": factors.commissioningRequired ? "Yes" : "No",
         "Local validation required": factors.localValidationRequired ? "Yes" : "No",
@@ -237,8 +259,8 @@ function buildReadme(): ExcelSheet {
       { Field: "About this export", Value: "DLinRT HTA dossier — fields organised by EUnetHTA Core Model domains (CUR, TEC, EFF, SAF, ETH, ORG, SOC, LEG)." },
       { Field: "Regulation", Value: "EU Regulation 2021/2282 on Health Technology Assessment (HTAR), in application since 12 January 2025 for oncology medicines and ATMPs; medical devices (incl. AI/SaMD) follow staged scope." },
       { Field: "Methodology", Value: "EUnetHTA 21 deliverables — see https://www.eunethta.eu/eunethta-21" },
-      { Field: "Effectiveness scoring", Value: "Evidence rigor (E0–E3) × Clinical impact (I0–I5), see https://dlinrt.eu/resources-compliance#evidence-levels" },
-      { Field: "Implementation/assurance burden", Value: "Z0–Z5 (lower is better) — DLinRT-proposed third axis; composite Readiness Signal derived from E/I/Z. See IMP sheet." },
+      { Field: "Effectiveness scoring", Value: "Evidence rigor (E0–E3) × Clinical impact (I0–I5), each cited publication scored individually, see https://dlinrt.eu/resources-compliance#evidence-levels" },
+      { Field: "Adoption readiness", Value: "R0–R5 (lower is better) — DLinRT-proposed third axis; composite Readiness Signal derived from E/I/R. See IMP sheet." },
       { Field: "Out of scope (ECO)", Value: "DLinRT does not collect pricing, budget impact or cost-effectiveness data. Combine this export with vendor quotations and local cost data." },
       { Field: "Disclaimer", Value: "This export is informational only. It does NOT constitute a JCA submission and is not a substitute for an official HTA dossier or regulatory filing." },
       { Field: "Source", Value: "https://dlinrt.eu" },
