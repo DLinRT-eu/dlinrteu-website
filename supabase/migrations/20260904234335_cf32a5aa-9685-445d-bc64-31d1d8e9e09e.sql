@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.admin_health_check() TO authenticated;
