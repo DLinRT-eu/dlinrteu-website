@@ -144,6 +144,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "description": "Innovators in AI solutions for radiation oncology and medical imaging.",
     "website": "https://therapanacea.com/",
     "productIds": [
+      "therapanacea-art-plan",
       "therapanacea-annotate",
       "therapanacea-brachybox",
       "therapanacea-adaptbox",
