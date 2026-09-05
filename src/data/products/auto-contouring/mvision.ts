@@ -25,7 +25,12 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/contour/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mvision.ts",
-    description: "AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation. Supports 300+ structures including 90 lymph node areas and follows 25+ international contouring guidelines.",
+    description: "Auto-contouring module of the MVision AI Workspace+ platform. AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation. The vendor advertises 300+ structures including 90 lymph node areas and follows 25+ international contouring guidelines.",
+    partOf: {
+      name: "Workspace+",
+      productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
+      relationship: "Module"
+    },
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/mvision-ai.png",
