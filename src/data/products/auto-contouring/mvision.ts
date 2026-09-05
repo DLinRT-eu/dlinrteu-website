@@ -1,6 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
-import { MVISION_ALL_STRUCTURES } from "./mvision-structures";
+import { MVISION_ALL_STRUCTURES, MVISION_STRUCTURES_PREVIOUS } from "./mvision-structures";
 
 export const MVISION_PRODUCTS: ProductDetails[] = [
   {
