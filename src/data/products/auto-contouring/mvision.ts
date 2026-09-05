@@ -1,6 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
-import { MVISION_ALL_STRUCTURES } from "./mvision-structures";
+import { MVISION_ALL_STRUCTURES, MVISION_STRUCTURES_PREVIOUS } from "./mvision-structures";
 
 export const MVISION_PRODUCTS: ProductDetails[] = [
   {
@@ -25,7 +25,12 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/contour/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mvision.ts",
-    description: "AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation. Supports 300+ structures including 90 lymph node areas and follows 25+ international contouring guidelines.",
+    description: "Auto-contouring module of the MVision AI Workspace+ platform. AI-powered auto-contouring solution for radiation therapy planning with deep learning algorithms for accurate guideline-based organ-at-risk and lymph node region delineation. The vendor advertises 300+ structures including 90 lymph node areas and follows 25+ international contouring guidelines.",
+    partOf: {
+      name: "Workspace+",
+      productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
+      relationship: "Module"
+    },
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/mvision-ai.png",
@@ -40,7 +45,23 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       "Clinical workflow integration",
       "Cloud or on-premise deployment"
     ],
+    structuresProvenance: {
+      source: "MVision AI Contour+ Structure Library (https://mvision.ai/contour/)",
+      sourceUrl: "https://mvision.ai/contour/",
+      sourceAccess: "public",
+      sourceRetrievedOn: "2026-09-05",
+      notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 unique structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than unique names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT."
+    },
     supportedStructures: MVISION_ALL_STRUCTURES,
+    structureHistory: [
+      {
+        version: "Pre-2026-09 catalogued list",
+        retrievedOn: "2026-06-13",
+        source: "MVision AI structure list previously catalogued in DLinRT.eu",
+        notes: "Superseded by the 2026-09-05 refresh of the vendor Structure Library. Model naming differed (e.g. 'Male Pelvis MR Dixon', 'Head & Neck-CT (Elective)', 'Rectum CT with Lymph Nodes') and the Jaws CT, Head & Neck MR, Abdomen MR and Female Pelvis MR T2 models were not represented.",
+        structures: MVISION_STRUCTURES_PREVIOUS
+      }
+    ],
     guidelines: [
       {
         name: "AAPM TG-263",
@@ -151,7 +172,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-09-05",
     keyPapers: [
     {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
     {"doi":"10.5603/rpor.104144","title":"Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation","authors":"Miura H et al.","journal":"Rep Pract Oncol Radiother.","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
@@ -160,7 +181,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1186/s13014-024-02554-y", "title": "Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas", "authors": "Meyer C et al.", "journal": "Radiat Oncol", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of AI contouring for OARs and lymph node areas.", "vendorIndependent": true},
     {"doi": "10.3390/diagnostics10110959", "title": "A Deep Learning-Based Automated CT Segmentation of Prostate Cancer Anatomy for Radiation Therapy Planning-A Retrospective Multicenter Study", "authors": "Kiljunen T et al.", "journal": "Diagnostics", "year": "2020", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Multicentre prostate segmentation study across six clinics; geometric endpoints.", "multiCenter": true}
   ],
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
+    lastRevised: "2026-09-05",
+    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
   }
 ];

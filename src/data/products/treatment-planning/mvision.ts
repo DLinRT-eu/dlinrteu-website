@@ -24,7 +24,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     productUrl: "https://mvision.ai/dose/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/mvision.ts",
     description:
-      "AI dose-prediction software that generates patient-specific 3D dose distributions from planning CT to support and accelerate radiation therapy plan creation. Delivered as part of the Workspace+ vendor-neutral AI platform.",
+      "Dose-prediction module of the MVision AI Workspace+ platform. AI software that generates patient-specific 3D dose distributions from planning CT to support and accelerate radiation therapy plan creation.",
     features: [
       "Patient-specific 3D dose prediction",
       "Cloud-native deployment",
@@ -81,7 +81,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "Workspace+",
-      productUrl: "https://mvision.ai/workspace/",
+      productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
       relationship: "Module"
     },
     usesAI: true,
