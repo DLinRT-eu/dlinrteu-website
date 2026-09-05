@@ -173,7 +173,7 @@ const Products = () => {
     <div className="min-h-screen bg-white">
       <SEO
         title="AI Products for Radiotherapy"
-        description="Browse the DLinRT catalog of AI and deep learning products for radiotherapy: auto-contouring, treatment planning, image synthesis and enhancement, registration, tracking, positioning, and QA monitoring."
+        description="Catalog of AI and deep learning products for radiotherapy: auto-contouring, treatment planning, image synthesis, registration, tracking, positioning and QA monitoring."
         canonical="https://dlinrt.eu/products"
         ogImage="/products-og.png"
         structuredData={structuredData}
