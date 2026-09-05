@@ -9,7 +9,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/therapanacea-brachybox.ts",
-    description: "AI-powered MR-based organ-at-risk delineation for gynaecological brachytherapy, published by Therapanacea as the MRI Brachy Pelvis model of the ART-Plan+ segmentation library (4 OARs: bladder, rectum, sigmoid, small bowel), contoured according to the EMBRACE / Pötter et al. 2018 (ESTRO) recommendations.",
+    description: "Brachytherapy segmentation module of the ART-Plan+ platform (see product 'ART-Plan+'), providing AI-powered MR-based organ-at-risk delineation for gynaecological brachytherapy. Published by Therapanacea as the MRI Brachy Pelvis model of the ART-Plan+ segmentation library (4 OARs: bladder, rectum, sigmoid, small bowel), contoured according to the EMBRACE / Pötter et al. 2018 (ESTRO) recommendations.",
     category: "Auto-Contouring",
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
@@ -37,8 +37,8 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026), 'MRI BrachyBox' page",
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-07-30",
-      notes: "Single MR model with 4 OARs. No target volumes (HR-CTV/IR-CTV) and no applicator reconstruction are published by the vendor for this model — none are listed here."
+      sourceRetrievedOn: "2026-09-05",
+      notes: "Single MR model with 4 OARs. No target volumes (HR-CTV/IR-CTV) and no applicator reconstruction are published by the vendor for this model — none are listed here. Re-verified 2026-09-05 against the vendor products page structures library (MRI Brachy Pelvis, 4 OAR): unchanged."
     },
     guidelines: [
       {

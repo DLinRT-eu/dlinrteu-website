@@ -138,8 +138,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       source: "ART-Plan™ 'Structures Delineated' brochure v3.2.0 (ref ART-BRO-AN-07EU, March 2026), Syn-CT model pages",
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-07-30",
-      notes: "Three synthetic-CT models itemised by the vendor in v3.2.0, each prefixed in the structure list: Pelvis Male (Syn-CT) 7 OARs + 2 ROIs; Thorax/Breast (Syn-CT) 12 OARs; Head & Neck (Syn-CT) 26 OARs. Bilateral structures are split into _L/_R so totals match the vendor counts. No separate CBCT-only structure list is published — do not add one."
+      sourceRetrievedOn: "2026-09-05",
+      notes: "Three synthetic-CT models itemised by the vendor in v3.2.0, each prefixed in the structure list: Pelvis Male (Syn-CT) 7 OARs + 2 ROIs; Thorax/Breast (Syn-CT) 12 OARs; Head & Neck (Syn-CT) 26 OARs. Bilateral structures are split into _L/_R so totals match the vendor counts. No separate CBCT-only structure list is published — do not add one. Re-verified 2026-09-05 against brochure v3.2.0: the syn-CT model set and counts are unchanged; the vendor products page lists only the CT/MR models, so the brochure remains the source for these."
     },
 
     limitations: [
