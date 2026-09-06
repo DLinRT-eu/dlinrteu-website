@@ -19,13 +19,16 @@ export interface StructureTypeCounts {
 }
 
 /**
- * Checks if a structure name contains left/right pattern (L/R, R/L)
+ * Checks if a structure name bundles both sides in one entry (L/R, R/L).
+ * Single-sided names such as "Cerebellum L" or "Femoral Head (R)" describe one
+ * structure only and must NOT be counted twice.
  * @param structure Structure name
- * @returns true if structure contains L/R or R/L pattern
+ * @returns true if the name bundles left and right in a single entry
  */
 export function hasLateralityPattern(structure: string): boolean {
-  return /\(L\/R\)|\(R\/L\)|\sL\/R\s|\sR\/L\s|\s\(L\/R\)|\s\(R\/L\)|\(L\)|\(R\)|\sL\s|\sR\s/.test(structure);
+  return /\(\s*[LR]\s*\/\s*[RL]\s*\)|(^|[\s_\-])[LR]\s*\/\s*[RL]($|[\s_\-)])/i.test(structure);
 }
+
 
 /**
  * Checks if a structure is marked as investigational use only
@@ -66,13 +69,15 @@ export function classifyStructure(structure: string): { isTarget: boolean; isEle
   // Determine structure types with pattern matching on the FULL string
   // Target pattern - looking for CTV, GTV, PTV, and lesion references
   // Note: nodal CTVs (CTVn, CTVn_*, CTV_n, CTV_n_*, CTV_LN, CTV_LN_*) are excluded
-  // here and handled as Elective below. The negative lookahead omits the trailing
-  // word boundary so that suffixes like "_L1_L" (underscore is a word char) still
-  // disqualify the match from Target.
+  // here and handled as Elective below. No trailing word boundary is required, so
+  // underscore-suffixed volumes such as "CTV_Central" or "PTV_High" still match.
   const isTarget = (
-    /\b(CTV(?!n|[_\-\s]n|[_\-\s]LN)|GTV|PTV|Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
+    /\bCTV(?!n\b|n[_\-\s]|[_\-\s]n(?:[_\-\s]|\b)|[_\-\s]LN)/i.test(structure) ||
+    /\b(GTV|PTV)/i.test(structure) ||
+    /\b(Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
     /\blesion[s]?\b|\blesional\b/i.test(structure)
   );
+
 
   // Enhanced lymph node and elective structure pattern matching
   // Note: CTV and PTV are now classified as Targets, not Elective.
