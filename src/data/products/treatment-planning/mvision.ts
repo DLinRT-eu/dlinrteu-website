@@ -63,7 +63,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
         notes: "CE-MDR submission in progress (vendor communication, 2025). Confirm before publishing."
       },
       fda: {
-        status: "510(k) Cleared",
+        status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K250064",
@@ -115,14 +115,14 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-09-04",
-    lastUpdated: "2026-06-13",
-    lastRevised: "2026-06-13",
+    lastUpdated: "2026-09-06",
+    lastRevised: "2026-09-06",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",
       "No independent peer-reviewed publications identified at time of listing"
     ],
     source:
-      "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page. releaseDate proxied from FDA K250064 decision date (2026-06-01)."
+      "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page. releaseDate proxied from FDA K250064 decision date (2026-06-01). 2026-09-06 standard-field consistency pass: FDA status value normalised to the site-wide '510k_cleared' convention."
   }
 ];

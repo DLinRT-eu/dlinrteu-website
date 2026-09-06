@@ -45,6 +45,19 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
       "Clinical workflow integration",
       "Cloud or on-premise deployment"
     ],
+    features: [
+      "Guideline-based auto-contouring of organs at risk and lymph node regions",
+      "CT and MR models across head & neck, thorax, abdomen and pelvis",
+      "Cloud or on-premise deployment",
+      "TPS and PACS integration",
+      "Structure naming aligned with AAPM TG-263"
+    ],
+    limitations: [
+      "Contours are an initial template and must be reviewed, edited and approved by a clinician",
+      "Not intended to detect lesions or tumours, and not intended for real-time adaptive planning",
+      "Available structures differ per model; not every structure is produced for every anatomy",
+      "No prospective or randomised evidence identified"
+    ],
     structuresProvenance: {
       source: "MVision AI Contour+ Structure Library (https://mvision.ai/contour/)",
       sourceUrl: "https://mvision.ai/contour/",
@@ -130,9 +143,9 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "I2",
     evidenceRigorNotes: "Independent peer-reviewed studies (Doolan 2023, Miura 2025 x2) demonstrate multi-site validation. Multi-national HARMONY study pending peer review. No prospective/RCT so E3 not met.",
-    clinicalImpactNotes: "Workflow and consistency benefits documented in independent literature support I3.",
+    clinicalImpactNotes: "Independent literature documents geometric accuracy plus workflow and consistency benefits, including reduced editing effort; consistent with I2. No prospective outcome study identified.",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
+    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -165,14 +178,14 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.3390/diagnostics10110959"
       },
       {
-        type: "Systematic Review",
-        description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025. NOTE (2026-08-27 citation audit): the stored DOI 10.3390/info16010001 resolves to an unrelated Parkinson's-disease article on Crossref; the intended review could not be verified and this citation must be re-sourced before it is scored.",
-        link: "https://doi.org/10.3390/info16010001"
+        type: "Peer-reviewed Publication",
+        description: "Miura et al. Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation. Rep Pract Oncol Radiother 2025. Single-centre clinical evaluation including contour review effort.",
+        link: "https://doi.org/10.5603/rpor.104144"
       }
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-09-05",
+    lastUpdated: "2026-09-06",
     keyPapers: [
     {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
     {"doi":"10.5603/rpor.104144","title":"Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation","authors":"Miura H et al.","journal":"Rep Pract Oncol Radiother.","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
@@ -181,7 +194,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1186/s13014-024-02554-y", "title": "Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas", "authors": "Meyer C et al.", "journal": "Radiat Oncol", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of AI contouring for OARs and lymph node areas.", "vendorIndependent": true},
     {"doi": "10.3390/diagnostics10110959", "title": "A Deep Learning-Based Automated CT Segmentation of Prostate Cancer Anatomy for Radiation Therapy Planning-A Retrospective Multicenter Study", "authors": "Kiljunen T et al.", "journal": "Diagnostics", "year": "2020", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Multicentre prostate segmentation study across six clinics; geometric endpoints.", "multiCenter": true}
   ],
-    lastRevised: "2026-09-05",
-    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers."
+    lastRevised: "2026-09-06",
+    source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 standard-field consistency pass: removed the unverifiable Ng et al. citation (DOI resolved to an unrelated article), added the Miura 2025 paper already scored in keyPapers, added features and limitations, and reconciled the impact/readiness notes with the stored E2/I2/R4 scores."
   }
 ];
