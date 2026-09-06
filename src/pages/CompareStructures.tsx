@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { countStructureTypes } from '@/utils/structureClassification';
 import { ProductDetails } from '@/types/productDetails';
 import dataService from '@/services/DataService';
 import StructureComparisonTable from '@/components/comparison/StructureComparisonTable';
@@ -142,8 +143,10 @@ const CompareStructures = () => {
                             {company}
                           </h4>
                           {products.map(product => {
-                            const structureCount = Array.isArray(product.supportedStructures) 
-                              ? product.supportedStructures.length 
+                            const structureCount = Array.isArray(product.supportedStructures)
+                              ? countStructureTypes(
+                                  product.supportedStructures.map((s: any) => typeof s === 'string' ? s : s.name)
+                                ).total
                               : 0;
                             const isSelected = selectedProductIds.has(product.id);
                             
