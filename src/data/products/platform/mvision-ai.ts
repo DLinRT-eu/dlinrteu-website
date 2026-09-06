@@ -57,7 +57,7 @@ export const Workspace: ProductDetails = {
       "Treatment Planning Systems"
     ],
     processingTime: "Minutes per case (varies by module)",
-    triggerForAnalysis: "Integrated within clinical workflow"
+    triggerForAnalysis: "Integrated within clinical workflow; Manual"
   },
   description: "Enterprise-grade AI integration platform for radiation oncology that provides unified access to multiple AI-powered clinical modules including image synthesis (Image+), deformable registration (Adapt+), and automated treatment planning (Dose+). Seamlessly integrates with existing clinical workflows through PACS, TPS, and OIS connections.",
   keyFeatures: [
@@ -133,14 +133,14 @@ export const Workspace: ProductDetails = {
         "Rigid registration",
         "Conventional deformable image registration",
         "Deep learning deformable registration",
-        "CT-to-CT, CBCT, and synthetic CT alignment",
-        "Offline adaptive workflow support"
+        "Offline adaptive workflow support",
+        "CT-to-CT alignment"
       ]
     },
     {
       name: "Dose+",
       category: "Dose Prediction",
-      productUrl: "https://dlinrt.eu/product/mvision-dose-plus",
+      productUrl: "https://dlinrt.eu/products/mvision-dose-plus",
       description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimization for workflow efficiency and plan consistency.",
       keyFeatures: [
         "Patient-specific 3D dose prediction",
@@ -152,8 +152,8 @@ export const Workspace: ProductDetails = {
     },
     {
       name: "Contour+",
-      category: "Auto-contouring",
-      productUrl: "https://dlinrt.eu/product/mvision-ai-contouring",
+      category: "Auto-Contouring",
+      productUrl: "https://dlinrt.eu/products/mvision-ai-contouring",
       description: "AI-powered auto-contouring module that generates guideline-based contours for radiotherapy, supporting consistent delineation of organs-at-risk and lymph node regions across major anatomical sites.",
       keyFeatures: [
         "Guideline-based auto-contouring",
@@ -177,12 +177,7 @@ export const Workspace: ProductDetails = {
   clinicalImpactNotes: "Vendor-claimed workflow improvement through unified AI platform integration; no platform-level independent clinical impact study identified.",
   evidenceMultiCenter: false,
   evidenceProspective: false,
-  secondaryCategories: [
-    "Image Synthesis",
-    "Registration",
-    "Treatment Planning",
-    "Auto-contouring"
-  ],
+  secondaryCategories: ["Image Synthesis", "Registration", "Treatment Planning"],
   dosePredictionModels: [
     {
       name: "Prostate Model",
@@ -215,9 +210,8 @@ export const Workspace: ProductDetails = {
     output: [
       "Synthetic CT images",
       "Propagated contours",
-      "Dose distributions",
-      "Structure sets",
-      "Treatment plans"
+      "Treatment plans",
+      "Dose distributions"
     ],
     population: "Adult patients",
     inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
