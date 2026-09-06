@@ -139,7 +139,7 @@ export const Workspace: ProductDetails = {
     },
     {
       name: "Dose+",
-      category: "Dose Prediction",
+      category: "Treatment Planning",
       productUrl: "https://dlinrt.eu/products/mvision-dose-plus",
       description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimization for workflow efficiency and plan consistency.",
       keyFeatures: [
@@ -152,7 +152,7 @@ export const Workspace: ProductDetails = {
     },
     {
       name: "Contour+",
-      category: "Auto-Contouring",
+      category: "Auto-contouring",
       productUrl: "https://dlinrt.eu/products/mvision-ai-contouring",
       description: "AI-powered auto-contouring module that generates guideline-based contours for radiotherapy, supporting consistent delineation of organs-at-risk and lymph node regions across major anatomical sites.",
       keyFeatures: [
