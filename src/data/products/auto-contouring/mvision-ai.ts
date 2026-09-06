@@ -51,6 +51,13 @@ export const Contour: ProductDetails = {
       description: "Miura et al. Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation. Rep Pract Oncol Radiother 2025. Single-centre clinical evaluation including contour review effort."
     }
   ],
+  features: [
+    "Guideline-based auto-contouring of organs at risk and lymph node regions",
+    "CT and MR models across head & neck, thorax, abdomen and pelvis",
+    "Cloud or on-premise deployment",
+    "TPS and PACS integration",
+    "Structure naming aligned with AAPM TG-263"
+  ],
   modality: ["CT", "MRI"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mvision.ts",
   keyPapers: [
@@ -187,8 +194,14 @@ export const Contour: ProductDetails = {
     "Clinical workflow integration",
     "Cloud or on-premise deployment"
   ],
-  lastRevised: "2026-09-05",
-  lastUpdated: "2026-09-05",
+  lastRevised: "2026-09-06",
+  lastUpdated: "2026-09-06",
+  limitations: [
+    "Contours are an initial template and must be reviewed, edited and approved by a clinician",
+    "Not intended to detect lesions or tumours, and not intended for real-time adaptive planning",
+    "Available structures differ per model; not every structure is produced for every anatomy",
+    "No prospective or randomised evidence identified"
+  ],
   releaseDate: "2025-10-27",
   contactEmail: "info@mvision.ai",
   trainingData: {
