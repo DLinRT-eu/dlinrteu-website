@@ -19,13 +19,16 @@ export interface StructureTypeCounts {
 }
 
 /**
- * Checks if a structure name contains left/right pattern (L/R, R/L)
+ * Checks if a structure name bundles both sides in one entry (L/R, R/L).
+ * Single-sided names such as "Cerebellum L" or "Femoral Head (R)" describe one
+ * structure only and must NOT be counted twice.
  * @param structure Structure name
- * @returns true if structure contains L/R or R/L pattern
+ * @returns true if the name bundles left and right in a single entry
  */
 export function hasLateralityPattern(structure: string): boolean {
-  return /\(L\/R\)|\(R\/L\)|\sL\/R\s|\sR\/L\s|\s\(L\/R\)|\s\(R\/L\)|\(L\)|\(R\)|\sL\s|\sR\s/.test(structure);
+  return /\(\s*[LR]\s*\/\s*[RL]\s*\)|(^|[\s_\-])[LR]\s*\/\s*[RL]($|[\s_\-)])/i.test(structure);
 }
+
 
 /**
  * Checks if a structure is marked as investigational use only
