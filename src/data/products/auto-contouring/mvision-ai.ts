@@ -13,7 +13,7 @@ export const Contour: ProductDetails = {
     productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
     relationship: "Module"
   },
-  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers.",
+  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 consistency pass: replaced an unresolved Ng et al. citation with the verified Miura 2025 publication and aligned narrative notes with stored evidence/impact levels.",
   company: "MVision AI",
   logoUrl: "/logos/mvision-ai.png",
   version: "1.3.1",
@@ -46,9 +46,9 @@ export const Contour: ProductDetails = {
       description: "Kiljunen et al. Multicenter DL-based automated CT segmentation for prostate cancer (30 patients, 6 clinics). Diagnostics 2020;10(11):959"
     },
     {
-      link: "https://doi.org/10.3390/info16010001",
-      type: "Systematic Review",
-      description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025. NOTE (2026-08-27 citation audit): the stored DOI 10.3390/info16010001 resolves to an unrelated Parkinson's-disease article on Crossref; the intended review could not be verified and this citation must be re-sourced before it is scored."
+      link: "https://doi.org/10.5603/rpor.104144",
+      type: "Peer-reviewed Publication",
+      description: "Miura et al. Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation. Rep Pract Oncol Radiother 2025. Single-centre clinical evaluation including contour review effort."
     }
   ],
   modality: ["CT", "MRI"],
@@ -740,7 +740,7 @@ export const Contour: ProductDetails = {
     "Pelvis"
   ],
   evidenceRigorNotes: "Independent peer-reviewed studies (Doolan 2023, Miura 2025 x2) demonstrate multi-site validation. Multi-national HARMONY study pending peer review. No prospective/RCT so E3 not met.",
-  clinicalImpactNotes: "Workflow and consistency benefits documented in independent literature support I3.",
+  clinicalImpactNotes: "Independent literature documents geometric accuracy plus workflow and consistency benefits, including reduced editing effort; consistent with I2. No prospective outcome study identified.",
   evidenceMultiCenter: true,
   evidenceProspective: false,
   supportedStructures: [
@@ -1425,14 +1425,14 @@ export const Contour: ProductDetails = {
     "Female Pelvis: Canal_Anal"
   ],
   structuresProvenance: {
-    notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 unique structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than unique names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
+    notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 bundled structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than bundled names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
     source: "MVision AI Contour+ Structure Library (https://mvision.ai/contour/)",
     sourceUrl: "https://mvision.ai/contour/",
     sourceAccess: "public",
     sourceRetrievedOn: "2026-09-05"
   },
   evidenceMultiNational: true,
-  adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
+  adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
   technicalSpecifications: {
     input: ["CT", "MRI"],
     output: ["Structure sets"],
