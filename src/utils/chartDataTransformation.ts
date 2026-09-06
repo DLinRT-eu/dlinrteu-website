@@ -2,7 +2,7 @@ import { ProductDetails } from '@/types/productDetails';
 import { getAllOptions } from './filterOptions';
 import { LOCATION_COLORS, getTaskColor, getModalityColor, getCertificationColor } from './chartColors';
 import { getStandardizedCertificationTags } from './regulatoryUtils';
-import { countStructureTypes } from './structureClassification';
+import { countStructureTypes, getDistinctStructureNames } from './structureClassification';
 import { matchesTask, countModelsInProduct, countTotalModels, countModelsForTask } from './modelCounting';
 import { filterProductsByLocation, filterProductsByModality } from './productFiltering';
 
@@ -138,10 +138,14 @@ export const transformStructureData = (
   autoContouringProducts.forEach((product: ProductDetails) => {
     if (product.supportedStructures) {
       if (Array.isArray(product.supportedStructures)) {
-        product.supportedStructures.forEach(structure => {
-          // Handle both string and object structures
-          const structureName = typeof structure === 'string' ? 
-            structure : structure.name;
+        // Count each distinct structure name once per product: vendors publish the
+        // same structure for several models, which would otherwise inflate the chart.
+        const names = getDistinctStructureNames(
+          product.supportedStructures.map(structure =>
+            typeof structure === 'string' ? structure : structure.name
+          )
+        );
+        names.forEach(structureName => {
           structureCounts[structureName] = (structureCounts[structureName] || 0) + 1;
         });
       }
@@ -183,7 +187,8 @@ export const transformStructureTypeData = (
       }
     }
     
-    const counts = countStructureTypes(structureList);
+    // Dashboards report the distinct structure library, not model-specific entries
+    const counts = countStructureTypes(getDistinctStructureNames(structureList));
     return {
       productName: product.name,
       companyName: product.company,

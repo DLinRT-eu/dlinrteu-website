@@ -61,6 +61,34 @@ export function cleanStructureName(structure: string): string {
 }
 
 /**
+ * Strips an optional "Model: " / "Region: " prefix from a structure entry.
+ */
+export function stripStructurePrefix(structure: string): string {
+  const idx = structure.indexOf(':');
+  return idx === -1 ? structure.trim() : structure.slice(idx + 1).trim();
+}
+
+/**
+ * Reduces a list of model-specific structure entries to distinct structure names.
+ * Vendors publish the same structure for several models; dashboards must report
+ * the distinct library size, not the model-specific entry count.
+ * @param structures Structure entries, optionally prefixed with a model/region
+ * @returns Distinct structure names (prefix and status markers removed)
+ */
+export function getDistinctStructureNames(structures: string[]): string[] {
+  const seen = new Map<string, string>();
+  structures.forEach(structure => {
+    const name = cleanStructureName(stripStructurePrefix(structure));
+    if (!name) return;
+    const key = name.toLowerCase();
+    if (!seen.has(key)) seen.set(key, structure.includes('(investigational)') ? `${name} (investigational)` : name);
+  });
+  return Array.from(seen.values());
+}
+
+
+
+/**
  * Classifies a structure name into OAR, Targets, or Elective
  * @param structure Full structure name (can include region prefix)
  * @returns Object indicating which type the structure is
