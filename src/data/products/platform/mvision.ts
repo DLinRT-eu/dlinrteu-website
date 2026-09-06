@@ -147,7 +147,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     releaseDate: "2025-10-21",
     evidenceRigor: "E1",
     clinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform-level evidence: CE Mark Class IIa (Oct 21, 2025) for Workspace+. Two previously cited Dose+ references (PR + FDA K250064) were removed on 2026-06-15: they evaluate the Dose+ module, not the Workspace+ platform, and were misleading at the platform level. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+    evidenceRigorNotes: "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. Platform-level evidence: CE Mark Class IIa (Oct 21, 2025) for Workspace+. Two previously cited Dose+ references (PR + FDA K250064) were removed on 2026-06-15: they evaluate the Dose+ module, not the Workspace+ platform, and were misleading at the platform level. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E1 stands: the score rests on the CE Class IIa certification and vendor-reported module validation, with no peer-reviewed publication naming the platform.",
     clinicalImpactNotes: "Vendor-claimed workflow improvement through unified AI platform integration; no platform-level independent clinical impact study identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE: moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
