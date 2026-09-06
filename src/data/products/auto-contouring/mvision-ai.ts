@@ -46,9 +46,9 @@ export const Contour: ProductDetails = {
       description: "Kiljunen et al. Multicenter DL-based automated CT segmentation for prostate cancer (30 patients, 6 clinics). Diagnostics 2020;10(11):959"
     },
     {
-      link: "https://doi.org/10.3390/info16010001",
-      type: "Systematic Review",
-      description: "Ng et al. Performance of Commercial Deep Learning-Based Auto-Segmentation software. Information (MDPI) 2025. NOTE (2026-08-27 citation audit): the stored DOI 10.3390/info16010001 resolves to an unrelated Parkinson's-disease article on Crossref; the intended review could not be verified and this citation must be re-sourced before it is scored."
+      link: "https://doi.org/10.5603/rpor.104144",
+      type: "Peer-reviewed Publication",
+      description: "Miura et al. Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation. Rep Pract Oncol Radiother 2025. Single-centre clinical evaluation including contour review effort."
     }
   ],
   modality: ["CT", "MRI"],
@@ -740,7 +740,7 @@ export const Contour: ProductDetails = {
     "Pelvis"
   ],
   evidenceRigorNotes: "Independent peer-reviewed studies (Doolan 2023, Miura 2025 x2) demonstrate multi-site validation. Multi-national HARMONY study pending peer review. No prospective/RCT so E3 not met.",
-  clinicalImpactNotes: "Workflow and consistency benefits documented in independent literature support I3.",
+  clinicalImpactNotes: "Independent literature documents geometric accuracy plus workflow and consistency benefits, including reduced editing effort; consistent with I2. No prospective outcome study identified.",
   evidenceMultiCenter: true,
   evidenceProspective: false,
   supportedStructures: [
@@ -1432,7 +1432,7 @@ export const Contour: ProductDetails = {
     sourceRetrievedOn: "2026-09-05"
   },
   evidenceMultiNational: true,
-  adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
+  adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
   technicalSpecifications: {
     input: ["CT", "MRI"],
     output: ["Structure sets"],
