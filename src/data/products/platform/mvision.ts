@@ -25,7 +25,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     certification: "CE",
     logoUrl: "/logos/mvision-ai.png",
     website: "https://mvision.ai/workspace/",
-    anatomicalLocation: ["Brain", "Pelvis", "Male Pelvis", "Prostate", "Head & Neck", "Thorax", "Abdomen", "Multiple Sites"],
+    anatomicalLocation: ["Brain", "Pelvis", "Male Pelvis", "Female Pelvis", "Head & Neck", "Thorax", "Abdomen"],
     modality: ["MRI", "CBCT", "CT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
