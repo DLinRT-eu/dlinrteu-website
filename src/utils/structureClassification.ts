@@ -69,13 +69,15 @@ export function classifyStructure(structure: string): { isTarget: boolean; isEle
   // Determine structure types with pattern matching on the FULL string
   // Target pattern - looking for CTV, GTV, PTV, and lesion references
   // Note: nodal CTVs (CTVn, CTVn_*, CTV_n, CTV_n_*, CTV_LN, CTV_LN_*) are excluded
-  // here and handled as Elective below. The negative lookahead omits the trailing
-  // word boundary so that suffixes like "_L1_L" (underscore is a word char) still
-  // disqualify the match from Target.
+  // here and handled as Elective below. No trailing word boundary is required, so
+  // underscore-suffixed volumes such as "CTV_Central" or "PTV_High" still match.
   const isTarget = (
-    /\b(CTV(?!n|[_\-\s]n|[_\-\s]LN)|GTV|PTV|Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
+    /\bCTV(?!n\b|n[_\-\s]|[_\-\s]n(?:[_\-\s]|\b)|[_\-\s]LN)/i.test(structure) ||
+    /\b(GTV|PTV)/i.test(structure) ||
+    /\b(Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
     /\blesion[s]?\b|\blesional\b/i.test(structure)
   );
+
 
   // Enhanced lymph node and elective structure pattern matching
   // Note: CTV and PTV are now classified as Targets, not Elective.
