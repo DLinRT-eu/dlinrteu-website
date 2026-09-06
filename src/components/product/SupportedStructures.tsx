@@ -142,7 +142,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
         <StructuresEditor fieldPath="supportedStructures" />
         {/* Also show existing display below for reference */}
         {displayStructures && displayStructures.length > 0 && (
-          <StructuresDisplay structures={displayStructures} />
+          <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
         )}
       </div>
     );
@@ -163,7 +163,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
   return (
     <div>
       {provenance && <ProvenanceBanner p={provenance} />}
-      <StructuresDisplay structures={displayStructures} />
+      <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
       {hasHistory && <StructureHistorySection history={history!} currentVersion={currentVersion} />}
     </div>
   );
@@ -178,9 +178,11 @@ interface StructuresDisplayProps {
     accuracy?: string;
     validationDataset?: string;
   }>;
+  downloadLabel?: string;
+  version?: string;
 }
 
-const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures }) => {
+const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downloadLabel, version }) => {
 
   // Parse and categorize structures
   const groupedStructures: Record<string, StructureGroup> = {};
@@ -388,11 +390,11 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures }) => 
         Structure: structure.name,
         Type: structure.type,
         Investigational: structure.isInvestigational ? "yes" : "no",
-        Version: currentVersion || "current",
+        Version: version || "current",
       }))
     );
     if (rows.length === 0) return;
-    const safeName = (productName || "product").replace(/[^a-zA-Z0-9]+/g, "_");
+    const safeName = (downloadLabel || "product").replace(/[^a-zA-Z0-9]+/g, "_");
     downloadCsv(objectsToCsv(rows), `${safeName}_structures.csv`);
   };
 
