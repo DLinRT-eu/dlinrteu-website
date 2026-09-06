@@ -42,43 +42,43 @@ export const THERAPANACEA_PLATFORM_PRODUCTS: ProductDetails[] = [
         name: "Annotate",
         description: "CT auto-contouring of organs at risk and lymph nodes across head & neck, thorax/breast/abdomen and male/female pelvis, following international contouring guidelines.",
         category: "Auto-Contouring",
-        productUrl: "https://dlinrt.eu/products/therapanacea-annotate"
+        productUrl: "https://dlinrt.eu/product/therapanacea-annotate"
       },
       {
         name: "TumorBox",
         description: "MR tumour segmentation for glioblastoma and multiple brain metastases, cleared as part of 'Annotate including TumorBox'.",
         category: "Auto-Contouring",
-        productUrl: "https://dlinrt.eu/products/therapanacea-tumorbox"
+        productUrl: "https://dlinrt.eu/product/therapanacea-tumorbox"
       },
       {
         name: "MR-Box",
         description: "MR-based synthetic CT generation with co-registered OAR delineation for MR-only workflows (brain T1, pelvis male T2, pelvis/abdomen TrueFISP).",
         category: "Image Synthesis",
-        productUrl: "https://dlinrt.eu/products/mr-box-synthetic"
+        productUrl: "https://dlinrt.eu/product/mr-box-synthetic"
       },
       {
         name: "AdaptBox",
         description: "Synthetic/augmented CT from daily CBCT with OAR delineation, dose tracking and assisted offline adaptation decision support.",
         category: "Image Synthesis",
-        productUrl: "https://dlinrt.eu/products/therapanacea-adaptbox"
+        productUrl: "https://dlinrt.eu/product/therapanacea-adaptbox"
       },
       {
         name: "BrachyBox",
         description: "MR-based OAR delineation for gynaecological brachytherapy (bladder, rectum, sigmoid, small bowel) per EMBRACE / Pötter et al. 2018.",
         category: "Auto-Contouring",
-        productUrl: "https://dlinrt.eu/products/therapanacea-brachybox"
+        productUrl: "https://dlinrt.eu/product/therapanacea-brachybox"
       },
       {
         name: "SmartFuse",
         description: "Rigid and deformable multi-modality image fusion with contour deformation for replanning.",
         category: "Registration",
-        productUrl: "https://dlinrt.eu/products/therapanacea-smartfuse"
+        productUrl: "https://dlinrt.eu/product/therapanacea-smartfuse"
       },
       {
         name: "SmartPlan",
         description: "Automatic radiotherapy plan generation for supported prostate prescriptions, imported into the user's own TPS for dose calculation, review and approval.",
         category: "Treatment Planning",
-        productUrl: "https://dlinrt.eu/products/therapanacea-smartplan"
+        productUrl: "https://dlinrt.eu/product/therapanacea-smartplan"
       }
     ],
     technicalSpecifications: {
