@@ -13,7 +13,7 @@ export const Contour: ProductDetails = {
     productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
     relationship: "Module"
   },
-  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers.",
+  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 consistency pass: replaced an unresolved Ng et al. citation with the verified Miura 2025 publication and aligned narrative notes with stored evidence/impact levels.",
   company: "MVision AI",
   logoUrl: "/logos/mvision-ai.png",
   version: "1.3.1",
