@@ -138,6 +138,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
               provenance={product.structuresProvenance}
               history={product.structureHistory}
               currentVersion={product.version}
+              productName={product.name}
             />
 
           )}

@@ -3,7 +3,9 @@ import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-import { Shield, Target, CircleDot, AlertTriangle } from "lucide-react";
+import { Shield, Target, CircleDot, AlertTriangle, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { objectsToCsv, downloadCsv } from "@/utils/csv";
 import { cn } from "@/lib/utils";
 import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
 import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
@@ -27,6 +29,8 @@ interface SupportedStructuresProps {
   history?: ProductDetails["structureHistory"];
   /** Version label of the currently listed structures. */
   currentVersion?: string;
+  /** Product name, used for the CSV filename. */
+  productName?: string;
 }
 
 
@@ -120,7 +124,7 @@ const StructureHistorySection: React.FC<{
   </Card>
 );
 
-const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance, history, currentVersion }) => {
+const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance, history, currentVersion, productName }) => {
   const { isEditMode, editedProduct, canEdit } = useProductEdit();
   
   // Use edited structures when in edit mode
@@ -138,7 +142,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
         <StructuresEditor fieldPath="supportedStructures" />
         {/* Also show existing display below for reference */}
         {displayStructures && displayStructures.length > 0 && (
-          <StructuresDisplay structures={displayStructures} />
+          <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
         )}
       </div>
     );
@@ -159,7 +163,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
   return (
     <div>
       {provenance && <ProvenanceBanner p={provenance} />}
-      <StructuresDisplay structures={displayStructures} />
+      <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
       {hasHistory && <StructureHistorySection history={history!} currentVersion={currentVersion} />}
     </div>
   );
@@ -174,9 +178,11 @@ interface StructuresDisplayProps {
     accuracy?: string;
     validationDataset?: string;
   }>;
+  downloadLabel?: string;
+  version?: string;
 }
 
-const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures }) => {
+const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downloadLabel, version }) => {
 
   // Parse and categorize structures
   const groupedStructures: Record<string, StructureGroup> = {};
@@ -376,12 +382,34 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures }) => 
 
   const categoryLabel = getCategoryLabel();
 
+  const handleDownloadCsv = () => {
+    const rows = sortedGroups.flatMap((group) =>
+      group.structures.map((structure) => ({
+        Model: group.model || "",
+        Region: group.name,
+        Structure: structure.name,
+        Type: structure.type,
+        Investigational: structure.isInvestigational ? "yes" : "no",
+        Version: version || "current",
+      }))
+    );
+    if (rows.length === 0) return;
+    const safeName = (downloadLabel || "product").replace(/[^a-zA-Z0-9]+/g, "_");
+    downloadCsv(objectsToCsv(rows), `${safeName}_structures.csv`);
+  };
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
-          Supported Structures {categoryLabel && <span className="text-base font-normal text-gray-500 ml-2">({categoryLabel})</span>}
-        </CardTitle>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <CardTitle>
+            Supported Structures {categoryLabel && <span className="text-base font-normal text-gray-500 ml-2">({categoryLabel})</span>}
+          </CardTitle>
+          <Button variant="outline" size="sm" onClick={handleDownloadCsv} className="gap-2">
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Download list (CSV)
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         {/* Summary badges section */}
