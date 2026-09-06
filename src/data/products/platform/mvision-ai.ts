@@ -139,7 +139,7 @@ export const Workspace: ProductDetails = {
     },
     {
       name: "Dose+",
-      category: "Treatment Planning",
+      category: "Dose Prediction",
       productUrl: "https://dlinrt.eu/products/mvision-dose-plus",
       description: "AI-based dose prediction module that generates patient-specific 3D dose distributions to support treatment planning optimization for workflow efficiency and plan consistency.",
       keyFeatures: [
