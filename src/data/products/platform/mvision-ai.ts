@@ -133,8 +133,8 @@ export const Workspace: ProductDetails = {
         "Rigid registration",
         "Conventional deformable image registration",
         "Deep learning deformable registration",
-        "Offline adaptive workflow support",
-        "CT-to-CT alignment"
+        "CT-to-CT, CBCT, and synthetic CT alignment",
+        "Offline adaptive workflow support"
       ]
     },
     {
