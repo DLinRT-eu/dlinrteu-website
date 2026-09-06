@@ -1359,8 +1359,6 @@ export const Contour: ProductDetails = {
     "Whole Body CT: Buccal_Mucosa_L",
     "Whole Body CT: Buccal_Mucosa_R",
     "Whole Body CT: Cavity_Oral",
-    "Whole Body CT: Cochlea_L",
-    "Whole Body CT: Cochlea_R",
     "Whole Body CT: Cricophar_inlet",
     "Whole Body CT: Duodenum",
     "Whole Body CT: Esophagus",
