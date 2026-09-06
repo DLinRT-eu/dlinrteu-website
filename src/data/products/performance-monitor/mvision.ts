@@ -43,7 +43,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     technology: {
       integration: ["TPS integration", "PACS integration", "LINAC connectivity"],
       deployment: ["Cloud-based", "On-premises"],
-      triggerForAnalysis: "Automatic after treatment delivery",
+      triggerForAnalysis: "Manual or automated on availability of a structure set for comparison",
       processingTime: "Minutes per patient"
     },
     regulatory: {
