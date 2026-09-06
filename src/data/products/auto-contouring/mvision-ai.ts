@@ -1425,7 +1425,7 @@ export const Contour: ProductDetails = {
     "Female Pelvis: Canal_Anal"
   ],
   structuresProvenance: {
-    notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 unique structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than unique names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
+    notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 bundled structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than bundled names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
     source: "MVision AI Contour+ Structure Library (https://mvision.ai/contour/)",
     sourceUrl: "https://mvision.ai/contour/",
     sourceAccess: "public",
