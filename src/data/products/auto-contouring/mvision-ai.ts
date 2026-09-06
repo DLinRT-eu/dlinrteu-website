@@ -10,10 +10,10 @@ export const Contour: ProductDetails = {
   },
   partOf: {
     name: "Workspace+",
-    productUrl: "https://dlinrt.eu/product/mvision-ai-workspace-plus",
+    productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
     relationship: "Module"
   },
-  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (324 distinct names across 18 models, 683 model-specific entries); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 standard-field consistency pass: removed the unverifiable Ng et al. citation (DOI resolved to an unrelated article), added the Miura 2025 paper already scored in keyPapers, added features and limitations, and reconciled the impact/readiness notes with the stored E2/I2/R4 scores. 2026-09-06 count correction following vendor feedback: left/right structures are counted individually, giving 324 distinct structure names rather than the previously stated 223 bundled names.",
+  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (223 unique names across 18 models); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 consistency pass: replaced an unresolved Ng et al. citation with the verified Miura 2025 publication and aligned narrative notes with stored evidence/impact levels.",
   company: "MVision AI",
   logoUrl: "/logos/mvision-ai.png",
   version: "1.3.1",
@@ -50,13 +50,6 @@ export const Contour: ProductDetails = {
       type: "Peer-reviewed Publication",
       description: "Miura et al. Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation. Rep Pract Oncol Radiother 2025. Single-centre clinical evaluation including contour review effort."
     }
-  ],
-  features: [
-    "Guideline-based auto-contouring of organs at risk and lymph node regions",
-    "CT and MR models across head & neck, thorax, abdomen and pelvis",
-    "Cloud or on-premise deployment",
-    "TPS and PACS integration",
-    "Structure naming aligned with AAPM TG-263"
   ],
   modality: ["CT", "MRI"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/mvision.ts",
@@ -194,14 +187,8 @@ export const Contour: ProductDetails = {
     "Clinical workflow integration",
     "Cloud or on-premise deployment"
   ],
-  lastRevised: "2026-09-06",
-  lastUpdated: "2026-09-06",
-  limitations: [
-    "Contours are an initial template and must be reviewed, edited and approved by a clinician",
-    "Not intended to detect lesions or tumours, and not intended for real-time adaptive planning",
-    "Available structures differ per model; not every structure is produced for every anatomy",
-    "No prospective or randomised evidence identified"
-  ],
+  lastRevised: "2026-09-05",
+  lastUpdated: "2026-09-05",
   releaseDate: "2025-10-27",
   contactEmail: "info@mvision.ai",
   trainingData: {
@@ -773,7 +760,6 @@ export const Contour: ProductDetails = {
     "Abdomen & Lung CT: Chestwall_R",
     "Abdomen & Lung CT: Duodenum",
     "Abdomen & Lung CT: Esophagus",
-    "Abdomen & Lung CT: Glnd_Thyroid",
     "Abdomen & Lung CT: Heart",
     "Abdomen & Lung CT: Heart+A_Pulm",
     "Abdomen & Lung CT: Humerus_Head_L",
@@ -1373,8 +1359,6 @@ export const Contour: ProductDetails = {
     "Whole Body CT: Buccal_Mucosa_L",
     "Whole Body CT: Buccal_Mucosa_R",
     "Whole Body CT: Cavity_Oral",
-    "Whole Body CT: Cochlea_L",
-    "Whole Body CT: Cochlea_R",
     "Whole Body CT: Cricophar_inlet",
     "Whole Body CT: Duodenum",
     "Whole Body CT: Esophagus",
@@ -1435,10 +1419,13 @@ export const Contour: ProductDetails = {
     "Whole Body CT: UteroCervix",
     "Whole Body CT: V_Venacava_I",
     "Whole Body CT: V_Venacava_S",
-    "Whole Body CT: Vagina"
+    "Whole Body CT: Vagina",
+    "Breast: BrTW_RTOG_L",
+    "Breast: BrTW_RTOG_R",
+    "Female Pelvis: Canal_Anal"
   ],
   structuresProvenance: {
-    notes: "Derived from the vendor's published Structure Library: 324 distinct structure names (left and right counted separately, expanding the vendor's bilateral 'X_L/R' notation into _L and _R) across 18 models, giving 683 model-specific entries because many structures are published for more than one model. This is consistent with the vendor's '300+ structures'. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
+    notes: "Rebuilt 2026-09-05 from the published Structure Library: 223 bundled structure names across 18 models (683 model-specific entries after expanding the vendor's bilateral 'X_L/R' notation into _L and _R). The vendor's marketing claim of '300+ structures' counts model-specific instances rather than bundled names. Models published: Abdomen & Lung CT, Abdomen MR, Bones CT, Brachy Cervix CT, Brain CT, Brain MR, Breast CT, Female Pelvis CT, Female Pelvis MR T2, Head & Neck CT, Head & Neck MR, Jaws CT, Male Pelvis CT, Male Pelvis MR T1 Dixon, Male Pelvis MR T2, Mediastinum CT, Rectum CT, Whole Body CT.",
     source: "MVision AI Contour+ Structure Library (https://mvision.ai/contour/)",
     sourceUrl: "https://mvision.ai/contour/",
     sourceAccess: "public",
