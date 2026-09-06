@@ -215,8 +215,9 @@ export const Workspace: ProductDetails = {
     output: [
       "Synthetic CT images",
       "Propagated contours",
-      "Treatment plans",
-      "Dose distributions"
+      "Dose distributions",
+      "Structure sets",
+      "Treatment plans"
     ],
     population: "Adult patients",
     inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
