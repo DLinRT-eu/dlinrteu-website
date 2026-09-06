@@ -152,7 +152,7 @@ export const Workspace: ProductDetails = {
     },
     {
       name: "Contour+",
-      category: "Auto-Contouring",
+      category: "Auto-contouring",
       productUrl: "https://dlinrt.eu/products/mvision-ai-contouring",
       description: "AI-powered auto-contouring module that generates guideline-based contours for radiotherapy, supporting consistent delineation of organs-at-risk and lymph node regions across major anatomical sites.",
       keyFeatures: [
@@ -177,7 +177,12 @@ export const Workspace: ProductDetails = {
   clinicalImpactNotes: "Vendor-claimed workflow improvement through unified AI platform integration; no platform-level independent clinical impact study identified.",
   evidenceMultiCenter: false,
   evidenceProspective: false,
-  secondaryCategories: ["Image Synthesis", "Registration", "Treatment Planning"],
+  secondaryCategories: [
+    "Image Synthesis",
+    "Registration",
+    "Treatment Planning",
+    "Auto-contouring"
+  ],
   dosePredictionModels: [
     {
       name: "Prostate Model",
@@ -211,7 +216,8 @@ export const Workspace: ProductDetails = {
       "Synthetic CT images",
       "Propagated contours",
       "Dose distributions",
-      "Structure sets"
+      "Structure sets",
+      "Treatment plans"
     ],
     population: "Adult patients",
     inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
