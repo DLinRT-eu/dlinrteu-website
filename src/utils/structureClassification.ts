@@ -69,6 +69,18 @@ export function stripStructurePrefix(structure: string): string {
 }
 
 /**
+ * Detects placeholder entries that stand for an undisclosed set of volumes
+ * (e.g. "OARs", "41 VOIs (per-structure list not publicly disclosed)").
+ * These are region-specific and must not be merged across regions.
+ */
+function isPlaceholderStructureName(name: string): boolean {
+  const cleaned = cleanStructureName(name).replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+  return /^(OARs?|VOIs?|Targets?|Structures?)$/i.test(cleaned) ||
+    /^\d+\s+(VOIs?|OARs?|structures?)$/i.test(cleaned) ||
+    /not\s+publicly\s+disclosed/i.test(name);
+}
+
+/**
  * Reduces a list of model-specific structure entries to distinct structure names.
  * Vendors publish the same structure for several models; dashboards must report
  * the distinct library size, not the model-specific entry count.
@@ -78,13 +90,16 @@ export function stripStructurePrefix(structure: string): string {
 export function getDistinctStructureNames(structures: string[]): string[] {
   const seen = new Map<string, string>();
   structures.forEach(structure => {
-    const name = cleanStructureName(stripStructurePrefix(structure));
+    const stripped = stripStructurePrefix(structure);
+    const usePrefix = isPlaceholderStructureName(stripped);
+    const name = cleanStructureName(usePrefix ? structure : stripped);
     if (!name) return;
     const key = name.toLowerCase();
     if (!seen.has(key)) seen.set(key, structure.includes('(investigational)') ? `${name} (investigational)` : name);
   });
   return Array.from(seen.values());
 }
+
 
 
 
