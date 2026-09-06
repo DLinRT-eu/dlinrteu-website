@@ -81,7 +81,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "Workspace+",
-      productUrl: "https://dlinrt.eu/products/mvision-ai-workspace-plus",
+      productUrl: "https://dlinrt.eu/product/mvision-ai-workspace-plus",
       relationship: "Module"
     },
     usesAI: true,
