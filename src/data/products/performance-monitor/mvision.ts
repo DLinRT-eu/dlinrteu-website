@@ -62,9 +62,8 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2020",
-      distributionChannels: ["Direct sales", "Distribution partners"],
-
-},
+      distributionChannels: ["Direct sales", "Distribution partners"]
+    },
     version: "2.1",
     releaseDate: "2023-08-15",
     evidenceRigor: "E0",
@@ -73,8 +72,14 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "QA/monitoring tool for comparing AI-generated and manual contours.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Derived from E0 + no public regulatory clearance: major assurance burden — sparse peer-reviewed evidence and/or no public clearance; not adoption-ready, generate evidence first.",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
-    source: "MVision AI official website, regulatory classification based on product function; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    limitations: [
+      "Comparison and visualization only — does not generate or correct contours",
+      "Comparison metrics depend on the quality of the chosen reference structure set",
+      "No peer-reviewed publication evaluating this tool has been identified",
+      "Version and release date are derived from the vendor product page and are not independently documented"
+    ],
+    lastUpdated: "2026-09-06",
+    lastRevised: "2026-09-06",
+    source: "MVision AI official website (https://mvision.ai/verify/), regulatory classification based on product function; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref). 2026-09-06 standard-field consistency pass: certification tag normalised to 'MDR exempt', modality and anatomy aligned to the controlled vocabularies, analysis trigger corrected, limitations added."
   }
 ];
