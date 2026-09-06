@@ -7,7 +7,7 @@ import { Shield, Target, CircleDot, AlertTriangle, Download } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { objectsToCsv, downloadCsv } from "@/utils/csv";
 import { cn } from "@/lib/utils";
-import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName } from '@/utils/structureClassification';
+import { classifyStructure, StructureTypes, hasLateralityPattern, isInvestigationalStructure, cleanStructureName, countStructureTypes } from '@/utils/structureClassification';
 import InvestigationalStructureBadge from "@/components/InvestigationalStructureBadge";
 import { useProductEdit, StructuresEditor } from "@/components/product-editor";
 import SourceProvenanceChip from "./SourceProvenanceChip";
