@@ -100,7 +100,7 @@ const StructureHistorySection: React.FC<{
               Version {entry.version}
               {Array.isArray(entry.structures) && (
                 <span className="ml-2 font-normal text-muted-foreground">
-                  ({entry.structures.length} structures)
+                  ({countStructureTypes(entry.structures).total} structures)
                 </span>
               )}
             </AccordionTrigger>
