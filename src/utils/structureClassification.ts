@@ -114,7 +114,16 @@ export function classifyStructure(structure: string): { isTarget: boolean; isEle
   // Note: nodal CTVs (CTVn, CTVn_*, CTV_n, CTV_n_*, CTV_LN, CTV_LN_*) are excluded
   // here and handled as Elective below. No trailing word boundary is required, so
   // underscore-suffixed volumes such as "CTV_Central" or "PTV_High" still match.
+  // Vendor-specific breast CTV naming (MVision Breast CT): partial/whole-breast
+  // RTOG target volumes named Br_1234_RTOG_L, BrTW_234_RTOG_R, BrTW_RTOG_L, etc.
+  // "Breast_*" whole-breast ROIs are deliberately excluded: they are dual-use and
+  // are counted as organs-at-risk.
+  const isBreastRtogTarget = /^(Br|BrTW)(_\d+)?_RTOG(_[LR])?$/i.test(
+    cleanStructureName(stripStructurePrefix(structure))
+  );
+
   const isTarget = (
+    isBreastRtogTarget ||
     /\bCTV(?!n\b|n[_\-\s]|[_\-\s]n(?:[_\-\s]|\b)|[_\-\s]LN)/i.test(structure) ||
     /\b(GTV|PTV)/i.test(structure) ||
     /\b(Clinical\s+Target|Planning\s+Target|Gross\s+Tumor|Gross\s+Target)\b/i.test(structure) ||
