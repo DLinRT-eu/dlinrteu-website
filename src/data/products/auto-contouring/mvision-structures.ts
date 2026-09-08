@@ -2,8 +2,8 @@
 // Source: https://mvision.ai/contour/ (Structure Library), retrieved 2026-09-05.
 // Entries are listed per published AI model; bilateral structures published as
 // "X_L/R" by the vendor are expanded into explicit _L and _R entries here.
-// 324 distinct structure names (left and right counted separately) across 18
-// models = 683 model-specific entries, because many structures are published
+// 326 distinct structure names (left and right counted separately) across 18
+// models = 685 model-specific entries, because many structures are published
 // for more than one model.
 export const MVISION_ALL_STRUCTURES = [
   // Abdomen & Lung CT (39)
