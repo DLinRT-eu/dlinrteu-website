@@ -2,8 +2,8 @@
 // Source: https://mvision.ai/contour/ (Structure Library), retrieved 2026-09-05.
 // Entries are listed per published AI model; bilateral structures published as
 // "X_L/R" by the vendor are expanded into explicit _L and _R entries here.
-// 324 distinct structure names (left and right counted separately) across 18
-// models = 683 model-specific entries, because many structures are published
+// 326 distinct structure names (left and right counted separately) across 18
+// models = 685 model-specific entries, because many structures are published
 // for more than one model.
 export const MVISION_ALL_STRUCTURES = [
   // Abdomen & Lung CT (39)
@@ -201,7 +201,7 @@ export const MVISION_ALL_STRUCTURES = [
   "Brain MR: Thalamus_L",
   "Brain MR: Thalamus_R",
 
-  // Breast CT (73)
+  // Breast CT (75)
   "Breast CT: A_Aorta",
   "Breast CT: A_Carotid_L",
   "Breast CT: A_Carotid_R",
@@ -224,6 +224,8 @@ export const MVISION_ALL_STRUCTURES = [
   "Breast CT: BrTW_1234_RTOG_R",
   "Breast CT: BrTW_234_RTOG_L",
   "Breast CT: BrTW_234_RTOG_R",
+  "Breast CT: BrTW_RTOG_L",
+  "Breast CT: BrTW_RTOG_R",
   "Breast CT: Esophagus",
   "Breast CT: Glnd_Thyroid",
   "Breast CT: Heart",
