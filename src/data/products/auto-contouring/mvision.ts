@@ -185,7 +185,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     ],
     version: "1.3.1",
     releaseDate: "2025-10-27",
-    lastUpdated: "2026-09-06",
+    lastUpdated: "2026-09-08",
     keyPapers: [
     {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true},
     {"doi":"10.5603/rpor.104144","title":"Performance evaluation of MVision AI Contour+ in gastric MALT lymphoma segmentation","authors":"Miura H et al.","journal":"Rep Pract Oncol Radiother.","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical evaluation including contour review effort.","vendorIndependent":true},
@@ -194,7 +194,7 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1186/s13014-024-02554-y", "title": "Artificial intelligence contouring in radiotherapy for organs-at-risk and lymph node areas", "authors": "Meyer C et al.", "journal": "Radiat Oncol", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of AI contouring for OARs and lymph node areas.", "vendorIndependent": true},
     {"doi": "10.3390/diagnostics10110959", "title": "A Deep Learning-Based Automated CT Segmentation of Prostate Cancer Anatomy for Radiation Therapy Planning-A Retrospective Multicenter Study", "authors": "Kiljunen T et al.", "journal": "Diagnostics", "year": "2020", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Multicentre prostate segmentation study across six clinics; geometric endpoints.", "multiCenter": true}
   ],
-    lastRevised: "2026-09-06",
+    lastRevised: "2026-09-08",
     source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (324 distinct names across 18 models, 683 model-specific entries); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 standard-field consistency pass: removed the unverifiable Ng et al. citation (DOI resolved to an unrelated article), added the Miura 2025 paper already scored in keyPapers, added features and limitations, and reconciled the impact/readiness notes with the stored E2/I2/R4 scores. 2026-09-06 count correction following vendor feedback: left/right structures are counted individually, giving 324 distinct structure names rather than the previously stated 223 bundled names."
   }
 ];
