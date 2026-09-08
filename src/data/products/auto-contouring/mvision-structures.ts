@@ -201,7 +201,7 @@ export const MVISION_ALL_STRUCTURES = [
   "Brain MR: Thalamus_L",
   "Brain MR: Thalamus_R",
 
-  // Breast CT (73)
+  // Breast CT (75)
   "Breast CT: A_Aorta",
   "Breast CT: A_Carotid_L",
   "Breast CT: A_Carotid_R",
