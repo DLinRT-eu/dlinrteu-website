@@ -224,6 +224,8 @@ export const MVISION_ALL_STRUCTURES = [
   "Breast CT: BrTW_1234_RTOG_R",
   "Breast CT: BrTW_234_RTOG_L",
   "Breast CT: BrTW_234_RTOG_R",
+  "Breast CT: BrTW_RTOG_L",
+  "Breast CT: BrTW_RTOG_R",
   "Breast CT: Esophagus",
   "Breast CT: Glnd_Thyroid",
   "Breast CT: Heart",
