@@ -1,4 +1,4 @@
-# Nalvera.AI: list as a Model Zoo initiative, clarify Platform + research-only scope
+# Nalvera.AI: assess and hold for group alignment
 
 ## Assessment
 
@@ -14,12 +14,43 @@ for vendor ecosystems bundling several clinical AI tasks behind one deployment l
 
 It does fit **Research Initiatives → Model Zoo**, next to MHub.ai, MONAI Model Zoo and NVIDIA Clara.
 
-## 1. Add Nalvera.AI to Research Initiatives (Model Zoo)
+## Decision
+
+Hold implementation until after the group meeting on Monday. The clinical-use line is the right
+gating principle, but the exact category for research-only model-hosting services should be aligned
+with the whole team before listing.
+
+## Proposed reply to send now
+
+> Hi Brent, hi Ana,
+>
+> Thanks for the detailed context. Certification really is not a requirement for DLinRT — we record it,
+> we do not gate on it. The line we do draw is whether the tool is intended for clinical use: a
+> catalogue product has to perform a radiotherapy task itself, from the list of tasks in the filter
+> menu, and "Platform" in our taxonomy means a vendor ecosystem bundling several of those clinical
+> tasks behind one deployment and integration layer (Workspace+, ART-Plan+ and similar). Nalvera is
+> something else and, I think, something we should still show: it makes existing open models runnable
+> without a GPU, and the models it serves today (TotalSegmentator CT/MR, MOOSE v3, MuscleMap,
+> MAISI-v2, Merlin) are other groups' models rather than Nalvera's own clinical tools.
+>
+> Our tentative proposal is to list Nalvera.AI under Research Initiatives as a Model Zoo, alongside
+> MHub.ai, the MONAI Model Zoo and NVIDIA Clara, clearly marked as a commercial, research-only service
+> with no CE/FDA/MDR claim. That would give the visibility you are after without implying clinical
+> status. We will confirm the final category after our internal alignment meeting next Monday, so we
+> can come back with a single aligned answer.
+>
+> If Nalvera later serves radiotherapy-specific models of its own — auto-contouring, synthesis or
+> planning — those become candidates for the product catalogue on their own merits, certified or not.
+> Happy to revisit then.
+
+## Post-meeting implementation (if approved)
+
+### 1. Add Nalvera.AI to Research Initiatives (Model Zoo)
 
 New entry in `src/data/initiatives/modelzoo.ts`:
 
 - Name Nalvera.AI, organization Nalvera (Belgium), category Model Zoo, status Active,
-  website https://nalvera.ai, `lastVerified` set to today.
+  website https://nalvera.ai, `lastVerified` set to implementation date.
 - Description: managed cloud inference for peer-reviewed and in-house medical imaging AI models;
   researchers upload a scan, pick a model, get reproducible results without local GPU/CUDA setup.
 - Features: hosted catalogue of open models (TotalSegmentator CT/MR, MOOSE v3, MuscleMap, MAISI-v2,
@@ -30,7 +61,7 @@ New entry in `src/data/initiatives/modelzoo.ts`:
 - Tags: Segmentation, CT, MRI, Synthetic Imaging, Cloud Inference, Commercial.
 - Logo added only if provided by the vendor; otherwise omitted.
 
-## 2. Publish the Platform definition where it is needed
+### 2. Publish the Platform definition where it is needed
 
 The Platform definition already exists in the Resources glossary but is not visible where people
 decide whether they qualify. Add it to the inclusion-criteria panel on `/products`:
@@ -39,34 +70,13 @@ decide whether they qualify. Add it to the inclusion-criteria panel on `/product
 > workflows, analytics — behind one deployment, orchestration and integration layer, rather than
 > addressing one isolated clinical task.
 
-## 3. State how research-only tools are handled
+### 3. State how research-only tools are handled
 
 Add one line to the same inclusion panel and mirror it in the Resources page scope box:
 
-> Regulatory clearance is not required for listing, but the product must perform a radiotherapy
-> clinical task itself. Research-only services that host or serve third-party open models are listed
-> under Research Initiatives (Model Zoo) instead of the product catalogue.
-
-## 4. Reply to send
-
-> Hi Brent, hi Ana,
->
-> Thanks for the detailed context. Certification really is not a requirement for DLinRT — we record it,
-> we do not gate on it. The line we do draw is different: a catalogue entry has to perform a
-> radiotherapy task itself, from the list of tasks in the filter menu, and "Platform" in our taxonomy
-> means a vendor ecosystem bundling several of those clinical tasks behind one deployment and
-> integration layer (Workspace+, ART-Plan+ and similar). Nalvera is something else and, I think,
-> something we should still show: it makes existing open models runnable without a GPU, and the models
-> it serves today (TotalSegmentator CT/MR, MOOSE v3, MuscleMap, MAISI-v2, Merlin) are other groups'
-> models rather than Nalvera's own clinical tools.
->
-> So our proposal is to list Nalvera.AI under Research Initiatives as a Model Zoo, alongside MHub.ai,
-> the MONAI Model Zoo and NVIDIA Clara, clearly marked as a commercial, research-only service with no
-> CE/FDA/MDR claim. That gives the visibility you are after without implying clinical status.
->
-> If Nalvera later serves radiotherapy-specific models of its own — auto-contouring, synthesis or
-> planning — those become candidates for the product catalogue on their own merits, certified or not.
-> Happy to revisit then. Could you confirm the wording and send a logo we can use?
+> Regulatory clearance is not required for listing, but the product must be intended for clinical use
+> and perform a radiotherapy task itself. Research-only services that host or serve third-party open
+> models are listed under Research Initiatives (Model Zoo) instead of the product catalogue.
 
 ## Technical notes
 
