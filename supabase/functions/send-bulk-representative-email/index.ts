@@ -238,8 +238,20 @@ const handler = async (req: Request): Promise<Response> => {
       const personalizedSubject = substitute(subject, vars);
       const html = buildHtml({ bodyMarkdown, subject: personalizedSubject, companyName, companyUrl, vars });
 
+      if (await isSuppressed(admin, toEmail)) {
+        recipientsLog.push({ email: toEmail, name: vars.full_name, company: companyName, status: "suppressed" });
+        await logEmailSend(admin, {
+          functionName: "send-bulk-representative-email",
+          recipient: toEmail,
+          subject: personalizedSubject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
-        await sendViaResend(RESEND_API_KEY, {
+        const response = await sendViaResend(RESEND_API_KEY, {
           from: "DLinRT.eu <noreply@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [toEmail],
@@ -248,10 +260,24 @@ const handler = async (req: Request): Promise<Response> => {
         });
         successCount++;
         recipientsLog.push({ email: toEmail, name: vars.full_name, company: companyName, status: "sent" });
+        await logEmailSend(admin, {
+          functionName: "send-bulk-representative-email",
+          recipient: toEmail,
+          subject: personalizedSubject,
+          status: "sent",
+          resendId: (response as { id?: string } | null)?.id ?? null,
+        });
       } catch (e: any) {
         failureCount++;
         recipientsLog.push({ email: toEmail, name: vars.full_name, company: companyName, status: "failed", error: e?.message });
         console.error(`Send failed to ${toEmail}:`, e?.message);
+        await logEmailSend(admin, {
+          functionName: "send-bulk-representative-email",
+          recipient: toEmail,
+          subject: personalizedSubject,
+          status: "failed",
+          error: e?.message ?? "unknown",
+        });
       }
 
       // Throttle ~6/sec
