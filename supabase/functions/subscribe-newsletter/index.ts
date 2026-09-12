@@ -233,6 +233,21 @@ const handler = async (req: Request): Promise<Response> => {
     // Push to Resend audience (best-effort, non-blocking)
     await syncContactToResend(email, firstName, lastName);
 
+    // Skip mail to addresses that previously hard-bounced or complained
+    if (await isSuppressed(supabase, email)) {
+      await logEmailSend(supabase, {
+        functionName: "subscribe-newsletter",
+        recipient: email,
+        subject: "Welcome to the DLinRT Newsletter!",
+        status: "suppressed",
+        error: "Recipient previously hard-bounced or complained",
+      });
+      return new Response(
+        JSON.stringify({ success: true, message: "Successfully subscribed to newsletter" }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     // Send welcome email to subscriber
     const welcomeEmailResponse = await resend.emails.send({
       from: "DLinRT Newsletter <noreply@dlinrt.eu>",
