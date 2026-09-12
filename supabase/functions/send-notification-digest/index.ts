@@ -184,18 +184,45 @@ const handler = async (req: Request): Promise<Response> => {
         </html>
       `;
 
+      const digestSubject = `DLinRT.eu — ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Notification Digest (${userNotifs.length} unread)`;
+
+      if (await isSuppressed(supabase, profile.email)) {
+        await logEmailSend(supabase, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
-        await resend.emails.send({
+        const response = await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [profile.email],
-          subject: `DLinRT.eu — ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Notification Digest (${userNotifs.length} unread)`,
+          subject: digestSubject,
           html: htmlContent,
         });
         emailsSent++;
+        await logEmailSend(supabase, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "sent",
+          resendId: resendMessageId(response),
+        });
       } catch (emailErr) {
         console.error(`Failed to send digest to ${profile.email}:`, emailErr);
         emailsFailed++;
+        await logEmailSend(supabase, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "failed",
+          error: (emailErr as Error).message,
+        });
       }
     }
 
