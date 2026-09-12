@@ -26,6 +26,7 @@ function createResend(apiKey: string | undefined) {
 }
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
+import { isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 
@@ -184,18 +185,45 @@ const handler = async (req: Request): Promise<Response> => {
         </html>
       `;
 
+      const digestSubject = `DLinRT.eu — ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Notification Digest (${userNotifs.length} unread)`;
+
+      if (await isSuppressed(adminClient, profile.email)) {
+        await logEmailSend(adminClient, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
-        await resend.emails.send({
+        const response = await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [profile.email],
-          subject: `DLinRT.eu — ${frequency.charAt(0).toUpperCase() + frequency.slice(1)} Notification Digest (${userNotifs.length} unread)`,
+          subject: digestSubject,
           html: htmlContent,
         });
         emailsSent++;
+        await logEmailSend(adminClient, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "sent",
+          resendId: resendMessageId(response),
+        });
       } catch (emailErr) {
         console.error(`Failed to send digest to ${profile.email}:`, emailErr);
         emailsFailed++;
+        await logEmailSend(adminClient, {
+          functionName: "send-notification-digest",
+          recipient: profile.email,
+          subject: digestSubject,
+          status: "failed",
+          error: (emailErr as Error).message,
+        });
       }
     }
 

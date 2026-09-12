@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { getAdminNotificationEmails } from "../_shared/admin-recipients.ts";
+import { isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
   return {
@@ -233,6 +233,21 @@ const handler = async (req: Request): Promise<Response> => {
     // Push to Resend audience (best-effort, non-blocking)
     await syncContactToResend(email, firstName, lastName);
 
+    // Skip mail to addresses that previously hard-bounced or complained
+    if (await isSuppressed(supabase, email)) {
+      await logEmailSend(supabase, {
+        functionName: "subscribe-newsletter",
+        recipient: email,
+        subject: "Welcome to the DLinRT Newsletter!",
+        status: "suppressed",
+        error: "Recipient previously hard-bounced or complained",
+      });
+      return new Response(
+        JSON.stringify({ success: true, message: "Successfully subscribed to newsletter" }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     // Send welcome email to subscriber
     const welcomeEmailResponse = await resend.emails.send({
       from: "DLinRT Newsletter <noreply@dlinrt.eu>",
@@ -276,35 +291,17 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Send notification email to admin
-    const adminEmailResponse = await resend.emails.send({
-      from: "DLinRT Newsletter <noreply@dlinrt.eu>",
-      reply_to: "info@dlinrt.eu",
-      to: getAdminNotificationEmails(),
-      subject: "New Newsletter Subscription",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-            New Newsletter Subscription
-          </h2>
-          
-          <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #374151; margin-top: 0;">Subscriber Details</h3>
-            <p><strong>Name:</strong> ${safeFirst} ${safeLast}</p>
-            <p><strong>Email:</strong> ${safeEmail}</p>
-            <p><strong>Subscribed at:</strong> ${new Date().toLocaleString()}</p>
-            <p><strong>Consent given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
-          </div>
-          
-          <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 12px;">
-            <p>This notification was sent from the DLinRT newsletter system</p>
-          </div>
-        </div>
-      `,
+    await logEmailSend(supabase, {
+      functionName: "subscribe-newsletter",
+      recipient: email,
+      subject: "Welcome to the DLinRT Newsletter!",
+      status: "sent",
+      resendId: resendMessageId(welcomeEmailResponse),
     });
 
-    console.log("Welcome email sent successfully:", welcomeEmailResponse);
-    console.log("Admin notification sent successfully:", adminEmailResponse);
+    // No per-signup admin notification: subscribers are visible in the admin
+    // newsletter screen, and one email per signup floods the team inbox.
+    console.log("Welcome email sent successfully");
 
     return new Response(
       JSON.stringify({ 
