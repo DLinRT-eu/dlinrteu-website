@@ -117,6 +117,7 @@ const UserProductAdoptions = lazyPage(() => import("./pages/admin/UserProductAdo
 const CertificationManagement = lazyPage(() => import("./pages/admin/CertificationManagement"));
 const NewsletterManagement = lazyPage(() => import("./pages/admin/NewsletterManagement"));
 const NewsletterBroadcast = lazyPage(() => import("./pages/admin/NewsletterBroadcast"));
+const EmailHealth = lazyPage(() => import("./pages/admin/EmailHealth"));
 const Unsubscribe = lazyPage(() => import("./pages/Unsubscribe"));
 const CompareStructures = lazyPage(() => import("./pages/CompareStructures"));
 
