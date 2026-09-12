@@ -26,6 +26,7 @@ function createResend(apiKey: string | undefined) {
 }
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
+import { isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 

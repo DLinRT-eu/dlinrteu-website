@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
+import { isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
 
 // Resend HTTP shim — matches the pattern used in notify-role-request-outcome
 function createResend(apiKey: string | undefined) {
