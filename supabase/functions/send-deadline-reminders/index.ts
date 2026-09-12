@@ -299,6 +299,17 @@ const handler = async (req: Request): Promise<Response> => {
         </html>
       `;
 
+      if (await isSuppressed(supabase, reviewer.reviewer_email)) {
+        await logEmailSend(supabase, {
+          functionName: "send-deadline-reminders",
+          recipient: reviewer.reviewer_email,
+          subject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
         const emailResponse = await resend.emails.send({
           from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
@@ -308,12 +319,26 @@ const handler = async (req: Request): Promise<Response> => {
           html: htmlContent,
         });
 
-        console.log(`Email sent to ${reviewer.reviewer_email}:`, emailResponse);
+        console.log(`Email sent to ${reviewer.reviewer_email}`);
         emailsSent++;
         sentReviewIds.push(...reviewerReviews.map(r => r.review_id));
+        await logEmailSend(supabase, {
+          functionName: "send-deadline-reminders",
+          recipient: reviewer.reviewer_email,
+          subject,
+          status: "sent",
+          resendId: resendMessageId(emailResponse),
+        });
       } catch (emailError: any) {
         console.error(`Failed to send email to ${reviewer.reviewer_email}:`, emailError);
         emailsFailed++;
+        await logEmailSend(supabase, {
+          functionName: "send-deadline-reminders",
+          recipient: reviewer.reviewer_email,
+          subject,
+          status: "failed",
+          error: (emailError as Error).message,
+        });
       }
     }
 
