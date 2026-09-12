@@ -591,6 +591,22 @@ export default function AdminOverview() {
                     <Button
                       variant="outline"
                       className="justify-start h-auto py-3"
+                      onClick={() => navigate('/admin/email-health')}
+                    >
+                      <div className="flex items-start gap-3 w-full">
+                        <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
+                        <div className="text-left flex-1">
+                          <div className="font-semibold">Email Health</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">
+                            See delivery outcomes and blocked addresses
+                          </div>
+                        </div>
+                      </div>
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      className="justify-start h-auto py-3"
                       onClick={() => navigate('/admin/financials')}
                     >
                       <div className="flex items-start gap-3 w-full">
