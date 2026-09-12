@@ -238,8 +238,19 @@ const handler = async (req: Request): Promise<Response> => {
         </html>
       `;
 
+      if (await isSuppressed(supabase, admin.email!)) {
+        await logEmailSend(supabase, {
+          functionName: "send-role-request-digest",
+          recipient: admin.email!,
+          subject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
-        await resend.emails.send({
+        const response = await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [admin.email!],
@@ -247,9 +258,23 @@ const handler = async (req: Request): Promise<Response> => {
           html,
         });
         emailsSent++;
+        await logEmailSend(supabase, {
+          functionName: "send-role-request-digest",
+          recipient: admin.email!,
+          subject,
+          status: "sent",
+          resendId: resendMessageId(response),
+        });
       } catch (err: any) {
         console.error(`Failed to send digest to ${admin.email}:`, err?.message ?? err);
         sendErrors.push({ email: admin.email!, error: err?.message ?? "unknown" });
+        await logEmailSend(supabase, {
+          functionName: "send-role-request-digest",
+          recipient: admin.email!,
+          subject,
+          status: "failed",
+          error: err?.message ?? "unknown",
+        });
       }
     }
 
