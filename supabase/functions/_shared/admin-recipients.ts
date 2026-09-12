@@ -14,5 +14,10 @@ export function getAdminNotificationEmails(): string[] {
     .map((e) => e.trim())
     .filter((e) => e.length > 0 && e.includes("@"));
 
-  return parsed.length > 0 ? parsed : [...FALLBACK_ADMIN_EMAILS];
+  if (parsed.length > 0) return parsed;
+
+  console.warn(
+    "admin-recipients: ADMIN_NOTIFICATION_EMAILS is not set or invalid; using the built-in fallback list",
+  );
+  return [...FALLBACK_ADMIN_EMAILS];
 }
