@@ -395,6 +395,11 @@ const App = () => (
                     <NewsletterBroadcast />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/email-health" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <EmailHealth />
+                  </ProtectedRoute>
+                } />
                 <Route path="/admin/edit-approvals" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <EditApprovals />
