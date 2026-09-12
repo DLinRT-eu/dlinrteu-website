@@ -229,6 +229,17 @@ const handler = async (req: Request): Promise<Response> => {
       const personalizedSubject = subjectTemplate.replace(/\{CompanyName\}/g, companyName);
       const htmlContent = buildHtml(bodyToHtml(personalizedBody), firstName, lastName);
 
+      if (await isSuppressed(adminClient, email)) {
+        await logEmailSend(adminClient, {
+          functionName: "send-certification-reminder",
+          recipient: email,
+          subject: personalizedSubject,
+          status: "suppressed",
+          error: "Recipient previously hard-bounced or complained",
+        });
+        continue;
+      }
+
       try {
         const emailResponse = await resend.emails.send({
           from: "DLinRT.eu <noreply@dlinrt.eu>",
@@ -239,13 +250,27 @@ const handler = async (req: Request): Promise<Response> => {
           html: htmlContent,
         });
 
-        console.log(`Email sent to ${email} (${companyName}):`, emailResponse);
+        console.log(`Email sent to ${email} (${companyName})`);
         emailsSent++;
         companiesContacted.add(companyName);
         recipientsList.push({ email, name: `${firstName} ${lastName}`.trim(), company: companyName });
+        await logEmailSend(adminClient, {
+          functionName: "send-certification-reminder",
+          recipient: email,
+          subject: personalizedSubject,
+          status: "sent",
+          resendId: resendMessageId(emailResponse),
+        });
       } catch (emailError: any) {
         console.error(`Failed to send email to ${email}:`, emailError);
         emailsFailed++;
+        await logEmailSend(adminClient, {
+          functionName: "send-certification-reminder",
+          recipient: email,
+          subject: personalizedSubject,
+          status: "failed",
+          error: emailError?.message ?? "unknown",
+        });
       }
     }
 
