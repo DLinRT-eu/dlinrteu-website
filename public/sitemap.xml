@@ -277,7 +277,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-ai-contouring</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -288,6 +288,11 @@
   <url>
     <loc>https://dlinrt.eu/product/mvision-dose-plus</loc>
     <lastmod>2026-09-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/mvision-image-plus</loc>
+    <lastmod>2026-09-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
