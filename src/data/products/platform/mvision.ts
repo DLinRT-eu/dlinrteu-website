@@ -43,7 +43,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         name: "Image+",
         description: "Generate synthetic CT images from MRI, CBCT, or contrast-enhanced CT scans to support photon dose calculation in treatment planning and offline adaptive workflows.",
         category: "Image Synthesis",
-        productUrl: "https://mvision.ai/image/",
+        productUrl: "https://dlinrt.eu/product/mvision-image-plus",
         keyFeatures: [
           "Brain MR T1 synthetic CT model",
           "Pelvis MR T2 synthetic CT model",
