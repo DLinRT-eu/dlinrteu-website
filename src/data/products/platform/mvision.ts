@@ -163,7 +163,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       "Image Synthesis": {
         usesAI: true,
-        notes: "Image+ module — brain MR T1 sCT, pelvis MR T2 sCT, CBCT→sCT, and VNC from contrast-enhanced CT. Validation is internal/vendor-reported; no peer-reviewed module-specific publication located.",
+        notes: "Image+ module — brain MR T1 sCT, pelvis MR T2 sCT, CBCT→sCT, and VNC from contrast-enhanced CT. Tracked from 2026-09-13 under its own DLinRT entry (mvision-image-plus). Validation is internal/vendor-reported; no peer-reviewed module-specific publication located.",
         evidenceRigor: "E0",
         clinicalImpact: "I0",
       },
@@ -194,7 +194,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Module availability may vary by country/market and regulatory status",
       "Performance depends on input image quality, acquisition protocols, and site-specific workflows",
     ],
-    source: "MVision AI company press releases (CE Mark Oct 2025). Dose+ module FDA K250064 tracked separately under the Dose+ product entry. 2026-09-06 standard-field consistency pass: anatomy tags aligned to the controlled vocabulary, evidence-rigor note reconciled with the stored E1 score. Image+ and Adapt+ have no standalone DLinRT entries, so their module links point at the vendor pages while Contour+ and Dose+ link to their DLinRT pages.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "MVision AI company press releases (CE Mark Oct 2025). Dose+ module FDA K250064 tracked separately under the Dose+ product entry. 2026-09-06 standard-field consistency pass: anatomy tags aligned to the controlled vocabulary, evidence-rigor note reconciled with the stored E1 score. 2026-09-13: Image+ split out as a standalone DLinRT entry (mvision-image-plus), so Contour+, Dose+ and Image+ now link to their DLinRT pages; Adapt+ is the only module still without a standalone entry and its link points at the vendor page.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. Cloud-native, vendor-neutral platform unifying AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025."
   }
 ];
