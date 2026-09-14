@@ -87,7 +87,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-09-13",
+    lastUpdated: "2026-09-14",
     lastRevised: "2026-09-13",
     evidence: [
       {
@@ -95,6 +95,24 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
         description:
           "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025) — the platform certification within which Image+ is delivered",
         link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
+      },
+      {
+        type: "Academic Thesis (grey literature, not peer-reviewed)",
+        description:
+          "Magnetic Resonance Only Planning Validation Using Synthetic CT by MVision — MSc thesis, Virginia Commonwealth University, 2026. Vendor-independent single-centre validation of MR-only planning using MVision synthetic CT; not peer-reviewed, so it does not raise evidence rigor above E0.",
+        link: "https://scholarscompass.vcu.edu/etd/8304"
+      },
+      {
+        type: "Vendor Product Page",
+        description:
+          "MVision AI Image+ product page — source for the module scope: synthetic CT from MRI, CBCT and contrast-enhanced CT (brain MR T1, pelvis MR T2, CBCT→sCT, virtual non-contrast), retrieved 2026-09-14",
+        link: "https://mvision.ai/image/"
+      },
+      {
+        type: "Vendor Article",
+        description:
+          "MVision AI, 'Advancing Radiotherapy Care Through Synthetic CT Imaging' (28 May 2026) — vendor-authored background on the synthetic CT models, retrieved 2026-09-14",
+        link: "https://mvision.ai/advancing-radiotherapy-care-through-synthetic-ct-imaging/"
       }
     ],
     limitations: [
