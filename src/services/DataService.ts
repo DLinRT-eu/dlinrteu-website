@@ -69,11 +69,21 @@ class DataService {
   }
 
   // Product methods
+  /** Keep one entry per product id so products listed under several categories are counted once */
+  private dedupeById(products: ProductDetails[]): ProductDetails[] {
+    const seen = new Map<string, ProductDetails>();
+    products.forEach((product, index) => {
+      const key = product.id || `no-id-${index}`;
+      if (!seen.has(key)) seen.set(key, product);
+    });
+    return Array.from(seen.values());
+  }
+
   getAllProducts(): ProductDetails[] {
     // Return all products with regulatory approval (excludes pipeline products)
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
-    return productList.filter(product => 
-      hasRegulatoryApproval(product) && !isPipelineProduct(product)
+    return this.dedupeById(
+      productList.filter(product => hasRegulatoryApproval(product) && !isPipelineProduct(product))
     );
   }
 
@@ -82,14 +92,14 @@ class DataService {
    */
   getPipelineProducts(): ProductDetails[] {
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
-    return productList.filter(product => isPipelineProduct(product));
+    return this.dedupeById(productList.filter(product => isPipelineProduct(product)));
   }
 
   /**
-   * Get total product count including pipeline products (for homepage display)
+   * Get total unique product count including pipeline products (for homepage display)
    */
   getTotalProductCount(): number {
-    return this.getAllProducts().length + this.getPipelineProducts().length;
+    return this.dedupeById([...this.getAllProducts(), ...this.getPipelineProducts()]).length;
   }
 
   getProductById(id: string): ProductDetails | undefined {

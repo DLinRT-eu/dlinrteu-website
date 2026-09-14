@@ -32,12 +32,18 @@ const Index = () => {
       if (cancelled) return;
       const products = dataService.getAllProducts();
       const pipelineProducts = dataService.getPipelineProducts();
+      // Count each product once even if it appears in several category lists or in both catalogue and pipeline
+      const uniqueProducts = Array.from(
+        new Map(
+          [...products, ...pipelineProducts].map((p, i) => [p.id ?? `no-id-${i}`, p])
+        ).values()
+      );
       setStats({
-        productCount: products.length + pipelineProducts.length,
+        productCount: uniqueProducts.length,
         companyCount: dataService.getAllCompaniesWithProducts().length,
       });
       const counts = new Map<string, number>();
-      [...products, ...pipelineProducts].forEach(p => {
+      uniqueProducts.forEach(p => {
         if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
       });
       setTaskCounts(Array.from(counts, ([name, count]) => ({ name, count })));
