@@ -57,7 +57,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
         name: "Adapt+",
         description: "AI-powered contour propagation for adaptive radiotherapy. Transfers and aligns existing contours between image sets using multiple registration methods including rigid, conventional deformable, and deep learning deformable approaches.",
         category: "Registration",
-        productUrl: "https://mvision.ai/adapt/",
+        productUrl: "https://dlinrt.eu/product/mvision-adapt-plus",
         keyFeatures: [
           "Automated contour propagation",
           "Rigid registration",
