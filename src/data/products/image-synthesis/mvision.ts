@@ -75,7 +75,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Validation is internal/vendor-reported; no peer-reviewed publication naming the Image+ module was located. Content and score migrated on 2026-09-13 from the Workspace+ categoryEvidence['Image Synthesis'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
+      "E0 retained after a dedicated evidence check on 2026-09-14: no peer-reviewed publication naming the Image+ module or MVision synthetic CT was located. The only third-party evaluation identified is a university thesis (Virginia Commonwealth University, 2026) validating MR-only planning with MVision synthetic CT — grey literature, not peer-reviewed, so it does not raise rigor above E0 and evidenceVendorIndependent is kept false (that flag denotes peer-reviewed independent evidence). The 2025 Leeds brain MRI-only synthetic CT validation study (Tech Innov Patient Support Radiat Oncol 2025;35:100328) was screened and excluded: it evaluates Philips MRCAT Brain, a different vendor's product. Content and score originally migrated on 2026-09-13 from the Workspace+ categoryEvidence['Image Synthesis'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
     clinicalImpactNotes:
       "No independent clinical impact data identified for the Image+ module at time of listing.",
     adoptionReadiness: "R2",
