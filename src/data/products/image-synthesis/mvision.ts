@@ -75,7 +75,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Validation is internal/vendor-reported; no peer-reviewed publication naming the Image+ module was located. Content and score migrated on 2026-09-13 from the Workspace+ categoryEvidence['Image Synthesis'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
+      "E0 retained after a dedicated evidence check on 2026-09-14: no peer-reviewed publication naming the Image+ module or MVision synthetic CT was located. The only third-party evaluation identified is a university thesis (Virginia Commonwealth University, 2026) validating MR-only planning with MVision synthetic CT — grey literature, not peer-reviewed, so it does not raise rigor above E0 and evidenceVendorIndependent is kept false (that flag denotes peer-reviewed independent evidence). The 2025 Leeds brain MRI-only synthetic CT validation study (Tech Innov Patient Support Radiat Oncol 2025;35:100328) was screened and excluded: it evaluates Philips MRCAT Brain, a different vendor's product. Content and score originally migrated on 2026-09-13 from the Workspace+ categoryEvidence['Image Synthesis'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
     clinicalImpactNotes:
       "No independent clinical impact data identified for the Image+ module at time of listing.",
     adoptionReadiness: "R2",
@@ -87,7 +87,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-09-13",
+    lastUpdated: "2026-09-14",
     lastRevised: "2026-09-13",
     evidence: [
       {
@@ -95,6 +95,24 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
         description:
           "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025) — the platform certification within which Image+ is delivered",
         link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
+      },
+      {
+        type: "Academic Thesis (grey literature, not peer-reviewed)",
+        description:
+          "Magnetic Resonance Only Planning Validation Using Synthetic CT by MVision — MSc thesis, Virginia Commonwealth University, 2026. Vendor-independent single-centre validation of MR-only planning using MVision synthetic CT; not peer-reviewed, so it does not raise evidence rigor above E0.",
+        link: "https://scholarscompass.vcu.edu/etd/8304"
+      },
+      {
+        type: "Vendor Product Page",
+        description:
+          "MVision AI Image+ product page — source for the module scope: synthetic CT from MRI, CBCT and contrast-enhanced CT (brain MR T1, pelvis MR T2, CBCT→sCT, virtual non-contrast), retrieved 2026-09-14",
+        link: "https://mvision.ai/image/"
+      },
+      {
+        type: "Vendor Article",
+        description:
+          "MVision AI, 'Advancing Radiotherapy Care Through Synthetic CT Imaging' (28 May 2026) — vendor-authored background on the synthetic CT models, retrieved 2026-09-14",
+        link: "https://mvision.ai/advancing-radiotherapy-care-through-synthetic-ct-imaging/"
       }
     ],
     limitations: [
