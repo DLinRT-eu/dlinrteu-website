@@ -75,7 +75,7 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Validation is internal/vendor-reported; no peer-reviewed publication naming the Adapt+ module was located. Content and score migrated on 2026-09-13 from the Workspace+ categoryEvidence['Registration'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
+      "E0 confirmed by a dedicated evidence check on 2026-09-14: no peer-reviewed publication, conference abstract or independent evaluation naming the Adapt+ module was located. Vendor and distributor listings describe 'clinically evaluated image registration' without citing a study, so that claim is not scored. Content and score originally migrated on 2026-09-13 from the Workspace+ categoryEvidence['Registration'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
     clinicalImpactNotes:
       "No independent clinical impact data identified for the Adapt+ module at time of listing.",
     adoptionReadiness: "R2",
@@ -87,7 +87,7 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-09-13",
+    lastUpdated: "2026-09-14",
     lastRevised: "2026-09-13",
     evidence: [
       {
@@ -95,16 +95,22 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
         description:
           "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025) — the platform certification within which Adapt+ is delivered",
         link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
+      },
+      {
+        type: "Vendor Product Page",
+        description:
+          "MVision AI Adapt+ product page — source for the module scope: contour propagation across CT, synthetic CT and CBCT using rigid, conventional deformable and deep-learning deformable registration, retrieved 2026-09-14",
+        link: "https://mvision.ai/adapt/"
       }
     ],
     limitations: [
       "Propagated contours are assistive and require clinician review and approval before use in planning",
       "Regulatory basis is the Workspace+ platform CE mark; no Adapt+-specific clearance is published",
       "Registration accuracy depends on image quality, anatomical change and field of view",
-      "No independent peer-reviewed publication identified at time of listing",
+      "No independent peer-reviewed publication or conference abstract identified at time of listing (checked 2026-09-14)",
       "No public disclosure of training or evaluation data for this module"
     ],
     source:
-      "MVision AI Adapt+ product page (https://mvision.ai/adapt/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13. Entry created 2026-09-13 by splitting the Adapt+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Registration'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Adapt+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
+      "MVision AI Adapt+ product page (https://mvision.ai/adapt/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14 with no publication or abstract found. Entry created 2026-09-13 by splitting the Adapt+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Registration'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Adapt+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
   }
 ];

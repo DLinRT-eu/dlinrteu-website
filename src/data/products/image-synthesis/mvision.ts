@@ -121,9 +121,10 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
       "Synthetic CT accuracy depends on acquisition protocol, sequence and field of view",
       "Anatomical coverage of MR-based models limited to brain (T1) and pelvis (T2) as described by the vendor",
       "No independent peer-reviewed publication identified at time of listing",
+      "The only third-party evaluation identified is grey literature (a 2026 university thesis), which has not undergone peer review",
       "No public disclosure of training or evaluation data for this module"
     ],
     source:
-      "MVision AI Image+ product page (https://mvision.ai/image/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13. Entry created 2026-09-13 by splitting the Image+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Image Synthesis'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Image+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
+      "MVision AI Image+ product page (https://mvision.ai/image/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14, with the VCU thesis and vendor synthetic CT article retrieved that date. Entry created 2026-09-13 by splitting the Image+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Image Synthesis'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Image+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
   }
 ];
