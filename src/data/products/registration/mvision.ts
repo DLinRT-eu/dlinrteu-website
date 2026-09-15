@@ -107,10 +107,10 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
       "Propagated contours are assistive and require clinician review and approval before use in planning",
       "Regulatory basis is the Workspace+ platform CE mark; no Adapt+-specific clearance is published",
       "Registration accuracy depends on image quality, anatomical change and field of view",
-      "No independent peer-reviewed publication identified at time of listing",
+      "No independent peer-reviewed publication or conference abstract identified at time of listing (checked 2026-09-14)",
       "No public disclosure of training or evaluation data for this module"
     ],
     source:
-      "MVision AI Adapt+ product page (https://mvision.ai/adapt/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13. Entry created 2026-09-13 by splitting the Adapt+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Registration'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Adapt+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
+      "MVision AI Adapt+ product page (https://mvision.ai/adapt/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14 with no publication or abstract found. Entry created 2026-09-13 by splitting the Adapt+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Registration'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Adapt+-specific release date is published. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
   }
 ];
