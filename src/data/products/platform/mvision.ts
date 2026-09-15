@@ -163,7 +163,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       "Image Synthesis": {
         usesAI: true,
-        notes: "Image+ module — brain MR T1 sCT, pelvis MR T2 sCT, CBCT→sCT, and VNC from contrast-enhanced CT. Tracked from 2026-09-13 under its own DLinRT entry (mvision-image-plus). Validation is internal/vendor-reported; no peer-reviewed module-specific publication located.",
+        notes: "Image+ module — brain MR T1 sCT, pelvis MR T2 sCT, CBCT→sCT, and VNC from contrast-enhanced CT. Tracked from 2026-09-13 under its own DLinRT entry (mvision-image-plus). No peer-reviewed module-specific publication located (re-checked 2026-09-14); the only third-party evaluation is a 2026 VCU MSc thesis on MR-only planning with MVision synthetic CT — grey literature, so E0 stands.",
         evidenceRigor: "E0",
         clinicalImpact: "I0",
       },
