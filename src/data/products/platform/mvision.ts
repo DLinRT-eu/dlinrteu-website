@@ -169,7 +169,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
       "Registration": {
         usesAI: true,
-        notes: "Adapt+ module — rigid, conventional and deep-learning deformable registration for contour propagation. Tracked from 2026-09-13 under its own DLinRT entry (mvision-adapt-plus). No standalone peer-reviewed validation located.",
+        notes: "Adapt+ module — rigid, conventional and deep-learning deformable registration for contour propagation. Tracked from 2026-09-13 under its own DLinRT entry (mvision-adapt-plus). No standalone peer-reviewed validation or conference abstract located (re-checked 2026-09-14).",
         evidenceRigor: "E0",
         clinicalImpact: "I0",
       },
