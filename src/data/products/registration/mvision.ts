@@ -87,7 +87,7 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-09-13",
+    lastUpdated: "2026-09-14",
     lastRevised: "2026-09-13",
     evidence: [
       {
@@ -95,6 +95,12 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
         description:
           "Workspace+ CE Mark Class IIa certification under EU MDR 2017/745 (Oct 21, 2025) — the platform certification within which Adapt+ is delivered",
         link: "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/"
+      },
+      {
+        type: "Vendor Product Page",
+        description:
+          "MVision AI Adapt+ product page — source for the module scope: contour propagation across CT, synthetic CT and CBCT using rigid, conventional deformable and deep-learning deformable registration, retrieved 2026-09-14",
+        link: "https://mvision.ai/adapt/"
       }
     ],
     limitations: [
