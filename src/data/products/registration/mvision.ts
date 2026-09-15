@@ -75,7 +75,7 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E0",
     clinicalImpact: "I0",
     evidenceRigorNotes:
-      "Validation is internal/vendor-reported; no peer-reviewed publication naming the Adapt+ module was located. Content and score migrated on 2026-09-13 from the Workspace+ categoryEvidence['Registration'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
+      "E0 confirmed by a dedicated evidence check on 2026-09-14: no peer-reviewed publication, conference abstract or independent evaluation naming the Adapt+ module was located. Vendor and distributor listings describe 'clinically evaluated image registration' without citing a study, so that claim is not scored. Content and score originally migrated on 2026-09-13 from the Workspace+ categoryEvidence['Registration'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
     clinicalImpactNotes:
       "No independent clinical impact data identified for the Adapt+ module at time of listing.",
     adoptionReadiness: "R2",
