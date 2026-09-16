@@ -8,17 +8,20 @@ interface CategorySectionProps {
   title: string;
   initiatives: Initiative[];
   icon?: ReactNode;
+  description?: string;
 }
 
-const CategorySection = ({ title, initiatives, icon }: CategorySectionProps) => {
+const CategorySection = ({ title, initiatives, icon, description }: CategorySectionProps) => {
   if (initiatives.length === 0) return null;
   
   return (
     <div className="mb-12">
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-2">
         {icon ? icon : <Database className="h-5 w-5 text-[#1A1F2C]" />}
         <h2 className="text-2xl font-bold text-[#1A1F2C] border-b pb-2">{title}</h2>
       </div>
+      {description && <p className="text-sm text-gray-600 mb-6">{description}</p>}
+      {!description && <div className="mb-4" />}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {initiatives.map((initiative) => (
           <InitiativeCard key={initiative.id} {...initiative} />
