@@ -22,6 +22,26 @@ export const MODEL_ZOO_INITIATIVES: Initiative[] = [
     logoUrl: "/logos/mhub-ai.png"
   },
   {
+    id: "nalvera-ai",
+    name: "Nalvera.AI",
+    category: "Model Zoo",
+    description: "A managed cloud inference service for medical imaging AI models: users upload a scan, select a model from the hosted catalogue and receive results without a local GPU or CUDA setup. The catalogue consists of third-party open research models. Explicitly research use only — not a medical device, with no CE/FDA/MDR clearance.",
+    website: "https://nalvera.ai",
+    organization: "Nalvera (Belgium)",
+    status: "Active",
+    lastVerified: "2026-09-16",
+    tags: ["Segmentation", "CT", "MRI", "Synthetic Imaging", "Cloud Inference", "Commercial"],
+    features: [
+      "Hosted catalogue of open models (TotalSegmentator CT/MR, MOOSE v3 Clinical, MuscleMap MRI, MAISI-v2, Merlin)",
+      "Per-model model cards describing intended use and inputs",
+      "EU-hosted GPU compute, no local installation required",
+      "Private model sharing between teams",
+      "Reproducible inference runs on uploaded imaging data"
+    ],
+    dataAccess: "Commercial subscription with credits; research use only, not a medical device (no CE/FDA/MDR clearance)",
+    participationInfo: "Open to researchers via account registration; models served are third-party open models"
+  },
+  {
     id: "monai-model-zoo",
     name: "MONAI Model Zoo",
     category: "Model Zoo",
