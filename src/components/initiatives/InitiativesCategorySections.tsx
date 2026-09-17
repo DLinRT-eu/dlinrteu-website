@@ -29,7 +29,12 @@ const InitiativesCategorySections = ({
         icon={<Brain className="h-5 w-5 text-[#00A6D6]" />}
         description="Only collections offering multiple models through a shared hub, catalogue or toolkit are listed here, and at least part of the collection must be applicable to radiotherapy. Individual models are not listed."
       />
-      <CategorySection title="LLM Inference Platforms" initiatives={llmPlatforms} icon={<Server className="h-5 w-5 text-[#00A6D6]" />} />
+      <CategorySection
+        title="LLM Inference Platforms"
+        initiatives={llmPlatforms}
+        icon={<Server className="h-5 w-5 text-[#00A6D6]" />}
+        description="Only engines and frameworks able to host multiple open models are listed here. Services tied to a single model, and hosted assistants that cannot serve other models, are not listed."
+      />
 
       {filteredInitiatives.length === 0 && (
         <div className="text-center py-16">
