@@ -12,6 +12,7 @@ import { downloadFHIRBundle, downloadFHIRBundleWithReport, getFHIRExportPreview 
 import { exportHTADossier } from "@/utils/htaExport";
 import { objectsToCsv } from "@/utils/csv";
 import { downloadProductsBundle } from "@/utils/exportBundle";
+import { downloadEvidenceBySourceCsv } from "@/utils/evidenceSourceExport";
 import { exportBulkProductsToAidrt } from "@/utils/modelCard/exporters/bulkAidrtExporter";
 import { exportProductToAidrtJSON } from "@/utils/modelCard/aidrtExporter";
 import {
@@ -20,7 +21,7 @@ import {
 } from "@/utils/initiativesExport";
 
 
-export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta" | "bundle" | "aidrt" | "jsonld";
+export type ExportFormat = "csv" | "excel" | "pdf" | "json" | "fhir" | "hta" | "bundle" | "aidrt" | "jsonld" | "evidence";
 export type ExportType = "products" | "initiatives" | "comparison" | "analytics";
 
 interface ExportOptions {
@@ -51,6 +52,9 @@ class ExportService {
     switch (format) {
       case "csv":
         exportProductsToCSV(products);
+        break;
+      case "evidence":
+        downloadEvidenceBySourceCsv(products);
         break;
       case "excel":
         if (products.length === 1) {
