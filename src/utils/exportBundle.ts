@@ -8,6 +8,7 @@ import JSZip from "jszip";
 import type { ProductDetails } from "@/types/productDetails";
 import type { CompanyDetails } from "@/types/company";
 import { buildProductsCsv } from "@/utils/exportProducts";
+import { buildEvidenceBySourceCsv } from "@/utils/evidenceSourceExport";
 import { exportToFHIR } from "@/utils/fhir";
 import { buildManifest, renderManifestReadme } from "@/utils/exportManifest";
 
@@ -34,6 +35,11 @@ export async function downloadProductsBundle(
         path: "products.csv",
         description: "Catalog export, RFC 4180 CSV with ~110 columns.",
         schema: "public/schemas/dlinrt-csv-fields.md",
+      },
+      {
+        path: "evidence-by-source.csv",
+        description:
+          "One row per publication/source per product, with its own E/I scores, study-quality flags and DOI or link.",
       },
       {
         path: "products.json",
