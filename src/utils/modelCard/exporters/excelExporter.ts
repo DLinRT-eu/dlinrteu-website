@@ -2,6 +2,10 @@ import { ProductDetails } from "@/types/productDetails";
 import { exportToExcelMultiSheet } from "../../excelExport";
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import {
+  buildEvidenceBySourceRows,
+  buildProductEvidenceSummary,
+} from "@/utils/evidenceSourceExport";
 
 export const exportModelCardToExcel = async (product: ProductDetails) => {
   try {
@@ -58,6 +62,16 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { Field: "Limitations", Value: modelCard.performance.limitations },
       { Field: "Evidence", Value: modelCard.performance.evidence },
     ];
+
+    // Evidence Scores Sheet (product level)
+    const evidenceSummary = buildProductEvidenceSummary(product);
+    const evidenceScoreData = Object.entries(evidenceSummary).map(([Field, Value]) => ({
+      Field,
+      Value,
+    }));
+
+    // Evidence by Source Sheet (one row per publication/source)
+    const evidenceSourceData = buildEvidenceBySourceRows([product]);
     
     // Guidelines Compliance Sheet
     const guidelinesData = [
