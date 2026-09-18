@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network, Package, FileCode } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, FileJson, Scale, FileType, Network, Package, FileCode, BookOpen } from "lucide-react";
 import { Product } from "@/types/product";
 import SortControls, { SortOption } from "./SortControls";
 import { ProductDetails } from "@/types/productDetails";
@@ -157,6 +157,10 @@ const ProductGridControls = ({
                   <FileJson className="w-4 h-4 mr-2" />
                   JSON
                 </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleExport('evidence', false)}>
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Evidence by source (CSV)
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport('pdf', false)}>
                   <FileType className="w-4 h-4 mr-2" />
                   PDF report
@@ -194,6 +198,10 @@ const ProductGridControls = ({
             <DropdownMenuItem onClick={() => handleExport('json', true)}>
               <FileJson className="w-4 h-4 mr-2" />
               JSON
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('evidence', true)}>
+              <BookOpen className="w-4 h-4 mr-2" />
+              Evidence by source (CSV)
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport('pdf', true)}>
               <FileType className="w-4 h-4 mr-2" />
