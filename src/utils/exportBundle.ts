@@ -25,6 +25,7 @@ export async function downloadProductsBundle(
   const zip = new JSZip();
 
   const csv = buildProductsCsv(products);
+  const evidenceCsv = buildEvidenceBySourceCsv(products);
   const json = JSON.stringify(products, null, 2);
   const fhirResult = exportToFHIR(products, companies, {});
   const fhirJson = JSON.stringify(fhirResult.bundle, null, 2);
@@ -68,6 +69,7 @@ export async function downloadProductsBundle(
   );
 
   zip.file("products.csv", csv);
+  zip.file("evidence-by-source.csv", evidenceCsv);
   zip.file("products.json", json);
   zip.file("products-fhir.json", fhirJson);
   zip.file(
