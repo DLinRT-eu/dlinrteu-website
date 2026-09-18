@@ -2,6 +2,10 @@
 import { ProductDetails } from "@/types/productDetails";
 import { ModelCardData } from "./types";
 import { getKeyFeatures, getLogoInfo } from "@/lib/utils";
+import {
+  buildEvidenceBySourceRows,
+  buildProductEvidenceSummary,
+} from "@/utils/evidenceSourceExport";
 
 const formatArray = (arr: any[] | undefined): string => {
   if (!arr || arr.length === 0) return "N/A";

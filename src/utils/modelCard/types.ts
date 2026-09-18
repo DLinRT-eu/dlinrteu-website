@@ -42,6 +42,43 @@ export interface ModelCardData {
     evidenceLevelNotes: string;
     dosePredictionModels: string;
   };
+  /** Product-level dual-axis score (plus the DLinRT adoption readiness axis). */
+  evidenceScore: {
+    evidenceRigor: string;
+    evidenceRigorNotes: string;
+    clinicalImpact: string;
+    clinicalImpactNotes: string;
+    adoptionReadiness: string;
+    adoptionReadinessNotes: string;
+    readinessSignal: string;
+    /** papers | override | stored | none (per axis when they differ). */
+    scoreOrigin: string;
+    scoreOverrideReason: string;
+    scoredPublicationsCount: number;
+    listedPublicationsCount: number;
+  };
+  /** One entry per publication/source used to set the score. */
+  evidenceSources: Array<{
+    title: string;
+    authors: string;
+    journal: string;
+    year: string;
+    doi: string;
+    pmid: string;
+    link: string;
+    evidenceRigor: string;
+    clinicalImpact: string;
+    rationale: string;
+    appliesToCategory: string;
+    vendorIndependent: string;
+    multiCenter: string;
+    multiNational: string;
+    prospective: string;
+    externalValidation: string;
+    setsProductRigor: string;
+    setsProductImpact: string;
+    note: string;
+  }>;
   studyQuality: {
     vendorIndependent: string;
     multiCenter: string;
