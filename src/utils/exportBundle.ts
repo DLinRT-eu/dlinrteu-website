@@ -8,6 +8,7 @@ import JSZip from "jszip";
 import type { ProductDetails } from "@/types/productDetails";
 import type { CompanyDetails } from "@/types/company";
 import { buildProductsCsv } from "@/utils/exportProducts";
+import { buildEvidenceBySourceCsv } from "@/utils/evidenceSourceExport";
 import { exportToFHIR } from "@/utils/fhir";
 import { buildManifest, renderManifestReadme } from "@/utils/exportManifest";
 
@@ -24,6 +25,7 @@ export async function downloadProductsBundle(
   const zip = new JSZip();
 
   const csv = buildProductsCsv(products);
+  const evidenceCsv = buildEvidenceBySourceCsv(products);
   const json = JSON.stringify(products, null, 2);
   const fhirResult = exportToFHIR(products, companies, {});
   const fhirJson = JSON.stringify(fhirResult.bundle, null, 2);
@@ -34,6 +36,11 @@ export async function downloadProductsBundle(
         path: "products.csv",
         description: "Catalog export, RFC 4180 CSV with ~110 columns.",
         schema: "public/schemas/dlinrt-csv-fields.md",
+      },
+      {
+        path: "evidence-by-source.csv",
+        description:
+          "One row per publication/source per product, with its own E/I scores, study-quality flags and DOI or link.",
       },
       {
         path: "products.json",
@@ -62,6 +69,7 @@ export async function downloadProductsBundle(
   );
 
   zip.file("products.csv", csv);
+  zip.file("evidence-by-source.csv", evidenceCsv);
   zip.file("products.json", json);
   zip.file("products-fhir.json", fhirJson);
   zip.file(

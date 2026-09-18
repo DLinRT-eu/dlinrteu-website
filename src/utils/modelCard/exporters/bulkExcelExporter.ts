@@ -2,22 +2,46 @@ import { ProductDetails } from "@/types/productDetails";
 import { exportToExcelMultiSheet } from "../../excelExport";
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import {
+  buildEvidenceBySourceRows,
+  buildProductEvidenceSummary,
+} from "@/utils/evidenceSourceExport";
 
 export const exportBulkProductsToExcel = async (products: ProductDetails[]) => {
   try {
     // Summary Sheet
-    const summaryData = products.map((product, index) => ({
-      "#": index + 1,
+    const summaryData = products.map((product, index) => {
+      const evidence = buildProductEvidenceSummary(product);
+      return {
+        "#": index + 1,
+        "Product Name": product.name,
+        "Company": product.company,
+        "Category": product.category,
+        "CE Status": product.regulatory?.ce?.status || "N/A",
+        "FDA Status": typeof product.regulatory?.fda === 'string'
+          ? product.regulatory.fda
+          : product.regulatory?.fda?.status || "N/A",
+        "Evidence Rigor": evidence["Evidence Rigor"],
+        "Clinical Impact": evidence["Clinical Impact"],
+        "Adoption Readiness": evidence["Adoption Readiness"],
+        "Readiness Signal": evidence["Readiness Signal"],
+        "Scored Publications Count": evidence["Scored Publications Count"],
+        "Last Updated": product.lastUpdated || "N/A",
+        "Release Date": product.releaseDate || "N/A"
+      };
+    });
+
+    // Evidence Scores Sheet (product level)
+    const evidenceData = products.map(product => ({
+      "Product ID": product.id,
       "Product Name": product.name,
       "Company": product.company,
       "Category": product.category,
-      "CE Status": product.regulatory?.ce?.status || "N/A",
-      "FDA Status": typeof product.regulatory?.fda === 'string' 
-        ? product.regulatory.fda 
-        : product.regulatory?.fda?.status || "N/A",
-      "Last Updated": product.lastUpdated || "N/A",
-      "Release Date": product.releaseDate || "N/A"
+      ...buildProductEvidenceSummary(product),
     }));
+
+    // Evidence by Source Sheet (one row per publication/source)
+    const evidenceSourceData = buildEvidenceBySourceRows(products);
     
     // Detailed comparison sheet
     const detailedData = products.map(product => {
@@ -85,6 +109,8 @@ export const exportBulkProductsToExcel = async (products: ProductDetails[]) => {
       { name: "Products Summary", data: summaryData },
       { name: "Detailed Comparison", data: detailedData },
       { name: "Regulatory Details", data: regulatoryData },
+      { name: "Evidence Scores", data: evidenceData },
+      { name: "Evidence by Source", data: evidenceSourceData },
     ], fileName);
   } catch (error) {
     console.error('Error exporting bulk products to Excel:', error);
