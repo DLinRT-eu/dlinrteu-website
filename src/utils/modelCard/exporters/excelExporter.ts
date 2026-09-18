@@ -120,6 +120,8 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { name: "Clinical Application", data: clinicalData },
       { name: "Technical Specs", data: technicalData },
       { name: "Performance", data: performanceData },
+      { name: "Evidence Scores", data: evidenceScoreData },
+      { name: "Evidence by Source", data: evidenceSourceData },
       { name: "Guidelines", data: guidelinesData },
       { name: "Regulatory & Market", data: regulatoryData },
       { name: "Contact Information", data: contactData },
