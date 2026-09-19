@@ -112,3 +112,31 @@ For interoperable formats, see also:
 - **AID-RT model card** — JSON aligned with the AID-RT schema
   (https://github.com/MIRO-UCLouvain/RT-AI-Model-Card).
 - **Full bundle (ZIP)** — CSV + JSON + FHIR + manifest + README in one file.
+
+---
+
+## Evidence by source (`evidence-by-source.csv`)
+
+A second CSV, one row per publication or source per product, so each score can
+be checked at source level. Products with no scored publication appear as a
+single row with `Note = No scored publication`.
+
+| Column | Meaning |
+| --- | --- |
+| `Product ID`, `Product Name`, `Company`, `Category` | Product the source is attached to. |
+| `Applies To Category` | For multi-category products, the category this source supports. |
+| `Title`, `Authors`, `Journal`, `Year` | Bibliographic reference as recorded. |
+| `DOI`, `PMID` | Identifiers as recorded. |
+| `Link` | Direct URL; derived from the DOI (`https://doi.org/…`) or PMID when no explicit link is stored. |
+| `Evidence Rigor` | E0–E3 assigned to this individual source. |
+| `Clinical Impact` | I0–I5 assigned to this individual source. |
+| `Rationale` | One-line justification for this source's levels. |
+| `Vendor Independent`, `Multi-Center`, `Multi-National`, `Prospective`, `External Validation` | Study-quality attributes of this source. |
+| `Sets Product Rigor`, `Sets Product Impact` | Whether this source sets the product maximum on that axis. |
+| `Product Rigor`, `Product Impact`, `Product Adoption Readiness` | Product-level scores, repeated for context. |
+| `Product Score Origin` | `papers`, `override`, `stored` or `none`; two values separated by `/` when the axes differ. |
+| `Note` | `No scored publication`, or `Listed source, not scored`. |
+
+Adoption Readiness (R) is a product-level judgement about residual
+implementation effort, not a property of an individual publication, so it is
+not scored per source.
