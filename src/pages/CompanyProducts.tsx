@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import ProductFeedbackBanner from "@/components/ProductFeedbackBanner";
 import { Badge } from "@/components/ui/badge";
+import EudamedRegistration from "@/components/company/EudamedRegistration";
 
 const CompanyProducts = () => {
   const { companyId = "" } = useParams<{ companyId: string }>();
@@ -181,6 +182,8 @@ const CompanyProducts = () => {
             <div className="text-2xl font-bold mt-1">{stats.fdaCount}</div>
           </div>
         </div>
+
+        {company.eudamed && <EudamedRegistration eudamed={company.eudamed} />}
 
         {/* Products grouped by category */}
         {products.length === 0 ? (

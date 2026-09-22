@@ -93,6 +93,15 @@ export interface ModelCardData {
     tfdaDetails: string;
     intendedUseStatement: string;
     marketPresence: string;
+    /** Public EUDAMED device registration, present only when recorded. */
+    eudamed?: {
+      basicUdi: string;
+      riskClass: string;
+      registeredTradeName: string;
+      manufacturerSrn: string;
+      sourceUrl: string;
+      lastVerified: string;
+    };
   };
   contact: {
     website: string;

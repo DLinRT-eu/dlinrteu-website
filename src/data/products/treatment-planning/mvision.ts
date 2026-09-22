@@ -59,6 +59,14 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "642983006423Dose1.0DH",
+          riskClass: "class-iia",
+          registeredTradeName: "Dose+",
+          manufacturerSrn: "FI-MF-000013082",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Dose%2B",
+          lastVerified: "2026-09-22"
+      },
         status: "under_review",
         notes: "CE-MDR submission in progress (vendor communication, 2025). Confirm before publishing."
       },

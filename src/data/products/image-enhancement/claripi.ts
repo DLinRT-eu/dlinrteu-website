@@ -68,6 +68,14 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "B-88000468CAI-066B3Z",
+          riskClass: "class-iia",
+          registeredTradeName: "ClariCT.AI",
+          manufacturerSrn: "KR-MF-000031518",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=ClariCT.AI",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "Medical Device",

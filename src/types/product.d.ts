@@ -1,4 +1,6 @@
 
+import type { EudamedDeviceRegistration } from './eudamed';
+
 export interface Product {
   id?: string;
   name: string;
@@ -57,6 +59,7 @@ export interface Product {
       notifiedBody?: string;
       certificateNumber?: string;
       regulation?: string;
+      eudamed?: EudamedDeviceRegistration;
     };
     fda?: {
       status: string;

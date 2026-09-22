@@ -58,6 +58,14 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "697312740MOZITPS77",
+          riskClass: "class-iib",
+          registeredTradeName: "MOZI TPS",
+          manufacturerSrn: "CN-MF-000023911",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=MOZI+TPS",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "Medical Device",

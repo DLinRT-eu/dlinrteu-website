@@ -65,6 +65,14 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "08600001712SubtleMR225",
+          riskClass: "class-iia",
+          registeredTradeName: "SubtleMR (Software as a Service for post-processing of Magnetic Resonance data)",
+          manufacturerSrn: "US-MF-000032747",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=SubtleMR",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "Medical Device",
@@ -218,6 +226,14 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "08600001712SubtlePET2B3",
+          riskClass: "class-iia",
+          registeredTradeName: "SubtlePET (Software as a Service for post-processing of Positron Emission Tomography data)",
+          manufacturerSrn: "US-MF-000032747",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=SubtlePET",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "Medical Device",

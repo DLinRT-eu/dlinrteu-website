@@ -7,6 +7,7 @@ import { getStandardizedCertificationTags, parseFDAInfo, parseCEInfo, formatFDAI
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { EditableField, useProductEdit, RegulatoryEditor } from "@/components/product-editor";
 import AutoLinkText from "@/components/ui/AutoLinkText";
+import { formatEudamedRiskClass, getProductEudamed } from "@/utils/eudamed";
 
 interface RegulatoryInformationProps {
   product: ProductDetails;
@@ -198,6 +199,7 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
     };
   };
   
+  const eudamed = getProductEudamed(displayProduct);
   const ceStatus = getCEStatus();
   const fdaStatus = getFDAStatus();
   
@@ -243,6 +245,28 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
                 {ceStatus.details.certificateNumber && <div>Certificate: {ceStatus.details.certificateNumber}</div>}
                 {ceStatus.details.notifiedBody && <div>Notified Body: {ceStatus.details.notifiedBody}</div>}
                 {ceStatus.details.regulation && <div>Regulation: {ceStatus.details.regulation}</div>}
+              </div>
+            )}
+            {eudamed && (
+              <div className="mt-2 border-t pt-2 text-xs text-muted-foreground space-y-1">
+                <div className="font-medium text-foreground">EUDAMED registration</div>
+                <div>Basic UDI-DI: {eudamed.basicUdi}</div>
+                {eudamed.riskClass && <div>Risk class: {formatEudamedRiskClass(eudamed.riskClass)}</div>}
+                {eudamed.registeredTradeName && <div>Registered name: {eudamed.registeredTradeName}</div>}
+                {eudamed.manufacturerSrn && <div>Manufacturer SRN: {eudamed.manufacturerSrn}</div>}
+                {eudamed.sourceUrl && (
+                  <div>
+                    <a
+                      href={eudamed.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-foreground"
+                    >
+                      Public EUDAMED record
+                    </a>
+                    {eudamed.lastVerified && <span> · checked {eudamed.lastVerified}</span>}
+                  </div>
+                )}
               </div>
             )}
           </div>

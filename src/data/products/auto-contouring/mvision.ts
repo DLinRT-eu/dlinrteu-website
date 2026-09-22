@@ -113,6 +113,14 @@ export const MVISION_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "64298300642AISEG1.2SZ",
+          riskClass: "class-iia",
+          registeredTradeName: "Contour+ (MVision AI Segmentation)",
+          manufacturerSrn: "FI-MF-000013082",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Contour%2B",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "Class IIa",
         type: "MDR",

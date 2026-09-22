@@ -124,6 +124,14 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "B-07350097430017",
+          riskClass: "class-iib",
+          registeredTradeName: "MRI Planner",
+          manufacturerSrn: "SE-MF-000024476",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=MRI+Planner",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "Not publicly verified",
         type: "Medical Device",

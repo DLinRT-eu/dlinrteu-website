@@ -34,6 +34,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "coreline-soft",
+    "eudamed": {
+      "srn": "KR-MF-000011555",
+      "registeredName": "Coreline Soft Co., Ltd.",
+      "role": "Manufacturer",
+      "country": "KR",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Coreline+Soft+Co",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Coreline Soft Co",
     "description": "Medical imaging software company focused on AI-powered contouring solutions.",
     "website": "https://www.corelinesoft.com/",
@@ -64,6 +73,18 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "limbus-ai",
+    "eudamed": {
+      "srn": "CA-MF-000025514",
+      "registeredName": "Limbus AI Inc.",
+      "role": "Manufacturer",
+      "country": "CA",
+      "status": "active",
+      "certificates": [
+        {"certificateNumber": "21M00123SUP01", "notifiedBody": "1912", "type": "quality-management-system", "validFrom": "2026-06-30", "validUntil": "2029-03-01", "status": "supplemented"}
+      ],
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Limbus+AI",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Limbus AI",
     "description": "Specializing in AI-powered auto-contouring solutions for radiation therapy planning.",
     "website": "https://www.limbus.ai",
@@ -74,6 +95,18 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "manteia",
+    "eudamed": {
+      "srn": "CN-MF-000023911",
+      "registeredName": "Manteia Technologies Co., Ltd.",
+      "role": "Manufacturer",
+      "country": "CN",
+      "status": "active",
+      "certificates": [
+        {"certificateNumber": "28620166008", "notifiedBody": "2862", "type": "quality-management-system", "validFrom": "2025-09-11", "validUntil": "2028-07-20", "status": "issued"}
+      ],
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Manteia",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Manteia",
     "description": "Canadian company developing AI solutions for radiation oncology.",
     "website": "https://manteia.ca/",
@@ -109,6 +142,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "mvision-ai",
+    "eudamed": {
+      "srn": "FI-MF-000013082",
+      "registeredName": "MVision AI Oy",
+      "role": "Manufacturer",
+      "country": "FI",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=MVision+AI",
+      "lastVerified": "2026-09-22"
+    },
     "name": "MVision AI",
     "description": "Pioneers in cloud-based auto-segmentation solutions for radiation therapy.",
     "website": "https://mvision.ai/",
@@ -120,6 +162,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "radformation",
+    "eudamed": {
+      "srn": "US-MF-000009824",
+      "registeredName": "Radformation, Inc.",
+      "role": "Manufacturer",
+      "country": "US",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=RadFormation",
+      "lastVerified": "2026-09-22"
+    },
     "name": "RadFormation",
     "description": "Developers of quality assurance and automation tools for radiation oncology.",
     "website": "https://radformation.com/",
@@ -130,6 +181,18 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "synaptiq",
+    "eudamed": {
+      "srn": "RO-MF-000038617",
+      "registeredName": "SYNAPTIQ TECHNOLOGIES SRL",
+      "role": "Manufacturer",
+      "country": "RO",
+      "status": "active",
+      "certificates": [
+        {"certificateNumber": "HZ 2447216-1", "notifiedBody": "0197", "type": "quality-management-system", "validFrom": "2026-04-01", "validUntil": "2031-03-31", "status": "issued"}
+      ],
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Synaptiq",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Synaptiq",
     "description": "AI company developing solutions for medical imaging and radiation therapy.",
     "website": "https://synaptiq.io/",
@@ -140,6 +203,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "therapanacea",
+    "eudamed": {
+      "srn": "FR-MF-000007672",
+      "registeredName": "THERAPANACEA",
+      "role": "Manufacturer",
+      "country": "FR",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Therapanacea",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Therapanacea",
     "description": "Innovators in AI solutions for radiation oncology and medical imaging.",
     "website": "https://therapanacea.com/",
@@ -190,6 +262,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "oncosoft",
+    "eudamed": {
+      "srn": "KR-MF-000049550",
+      "registeredName": "Oncosoft Inc.",
+      "role": "Manufacturer",
+      "country": "KR",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Oncosoft",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Oncosoft",
     "description": "AI-driven precision and efficiency for radiation therapy with proven auto-contouring solutions.",
     "website": "https://www.oncosoft.io/",

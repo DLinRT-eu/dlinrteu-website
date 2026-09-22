@@ -1,5 +1,6 @@
 
 import { Product } from './product';
+import type { EudamedDeviceRegistration } from './eudamed';
 
 export interface ProductDetails extends Product {
   // No need to re-declare properties from Product
@@ -60,6 +61,8 @@ export interface ProductDetails extends Product {
       certificateNumber?: string;
       regulation?: string;
       notes?: string;
+      /** Public EUDAMED device registration (UDI-DI module). Verified, not inferred. */
+      eudamed?: EudamedDeviceRegistration;
     };
     fda?: {
       status: string;

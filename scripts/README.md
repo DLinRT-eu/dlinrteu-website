@@ -13,7 +13,13 @@ npm run audit:eudamed                                  # companies + products
 bun scripts/eudamed-audit.ts --companies-only
 bun scripts/eudamed-audit.ts --company="MVision AI"
 bun scripts/eudamed-audit.ts --limit=5 --delay=2500 --no-cache --json
+bun scripts/eudamed-audit.ts --diff                    # compare the sweep with recorded eudamed blocks
 ```
+
+`--diff` prints, instead of writing a report: confirmed EUDAMED records missing
+from the catalogue, recorded SRN/Basic UDI-DI values that differ from EUDAMED,
+and CE risk-class mismatches. It never edits data — discrepancies are resolved
+by a human.
 
 Outputs `docs/audits/eudamed/YYYY-MM-DD-eudamed-audit.md` and `.csv`, one row
 per company/product, each with the EUDAMED query URL so every claim is checkable

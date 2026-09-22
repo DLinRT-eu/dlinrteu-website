@@ -128,6 +128,23 @@ function createIdentifiers(product: ProductDetails): FHIRIdentifier[] {
     });
   }
 
+  // EUDAMED Basic UDI-DI
+  if (product.regulatory?.ce?.eudamed?.basicUdi) {
+    identifiers.push({
+      use: "official",
+      type: {
+        coding: [{
+          system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+          code: "UDI",
+          display: "Universal Device Identifier"
+        }],
+        text: "EUDAMED Basic UDI-DI"
+      },
+      system: "https://ec.europa.eu/tools/eudamed",
+      value: product.regulatory.ce.eudamed.basicUdi
+    });
+  }
+
   // Product ID as identifier
   identifiers.push({
     use: "usual",

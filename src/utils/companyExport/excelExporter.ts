@@ -22,6 +22,8 @@ export const exportCompaniesToExcel = async (companiesData: CompanyExportData[])
         'Product': product.name,
         'Category': product.category,
         'CE Status': product.regulatory?.ce?.status || 'N/A',
+        'EUDAMED Basic UDI-DI': product.regulatory?.ce?.eudamed?.basicUdi || 'N/A',
+        'EUDAMED Risk Class': product.regulatory?.ce?.eudamed?.riskClass || 'N/A',
         'FDA Status': typeof product.regulatory?.fda === 'string' 
           ? product.regulatory.fda 
           : product.regulatory?.fda?.status || 'N/A',
