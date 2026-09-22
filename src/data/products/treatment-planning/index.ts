@@ -7,6 +7,7 @@ import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
 import { MVISION_PLANNING_PRODUCTS } from "./mvision";
 import { WISDOM_TECH_PLANNING_PRODUCTS } from "./wisdom-tech";
 import { THERAPANACEA_PLANNING_PRODUCTS } from "./therapanacea";
+import { INFORMAI_PRODUCTS } from "./informai";
 
 export const TREATMENT_PLANNING_PRODUCTS: ProductDetails[] = [
   ...RAYSEARCH_PLANNING_PRODUCTS,
@@ -16,6 +17,7 @@ export const TREATMENT_PLANNING_PRODUCTS: ProductDetails[] = [
   ...UNITED_IMAGING_PRODUCTS,
   ...MVISION_PLANNING_PRODUCTS,
   ...WISDOM_TECH_PLANNING_PRODUCTS,
-  ...THERAPANACEA_PLANNING_PRODUCTS
+  ...THERAPANACEA_PLANNING_PRODUCTS,
+  ...INFORMAI_PRODUCTS
 ];
 
