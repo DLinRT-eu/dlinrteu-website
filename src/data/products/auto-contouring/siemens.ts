@@ -67,12 +67,13 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510k_cleared",
         class: "II",
-        clearanceNumber: "K242745",
+        clearanceNumber: "K252548",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2025-03-27"
+        decisionDate: "2026-04-10",
+        notes: "Most recent clearance: K252548 (AI-Rad Companion Organs RT VA70, decision 2026-04-10). Versus the predicate K242745 (VA60, 2025-03-27) it adds a new MR brain metastases contouring algorithm and a new MR brain OAR algorithm, enhances the CT and MR pelvis algorithms, and modifies the indications and intended patient population. All models remain locked. Sources: https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252548.pdf and https://www.accessdata.fda.gov/cdrh_docs/pdf24/K242745.pdf"
       },
-      intendedUseStatement: "AI-Rad Companion Organs RT is a post-processing software intended to automatically contour DICOM CT and MR pre-defined structures using deep-learning-based algorithms. Contours may be used as input for clinical workflows including external beam radiation therapy treatment planning. Must be used in conjunction with Treatment Planning Systems to review, edit, and accept contours. Not intended to automatically detect or contour lesions."
+      intendedUseStatement: "AI-Rad Companion Organs RT is a post-processing software intended to automatically contour DICOM CT and MR pre-defined structures, including known (diagnosed) brain metastases, using deep-learning-based algorithms. Contours may be used as input for clinical workflows including external beam radiation therapy treatment planning. Must be used in conjunction with Treatment Planning Systems to review, edit, and accept contours. Not intended to automatically detect or contour lesions."
     },
     market: {
       onMarketSince: "2019",

@@ -660,13 +660,13 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K260509",
+        clearanceNumber: "K262452",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2026-03-19",
-        notes: "Commercially branded as AutoContour v2.7 (unified AutoContour + Limbus Contour platform). FDA database lists K260509 for AutoContour (RADAC V5) as a Special 510(k), product code QKB, decision date 2026-03-19. FDA summary describes CT or MR DICOM input and 420 CT-based plus 62 MR-based machine-learning contouring models; the public product page markets 480 AI-trained models across CT, MR, and CBCT. Previous AutoContour clearances include K242729 (V4, 2024-12-09), K230685 (V3, 2023-04-14), K220598 (V2, 2022-08-24), and K200323 (original, 2020-10-30). Limbus Contour (K241837) is used as a reference device after the Limbus AI acquisition announced April 30, 2024."
+        decisionDate: "2026-08-14",
+        notes: "Most recent clearance: K262452 for AutoContour (RADAC V6), Special 510(k), product code QKB, decision date 2026-08-14; the FDA summary describes 442 CT-based plus 81 MR-based machine-learning contouring models (predicate RADAC V5 had 420 CT and 62 MR models). Previous clearance K260509 (RADAC V5, Special 510(k), 2026-03-19) described CT or MR DICOM input with 420 CT and 62 MR models; the public product page markets 480 AI-trained models across CT, MR, and CBCT. Previous AutoContour clearances include K242729 (V4, 2024-12-09), K230685 (V3, 2023-04-14), K220598 (V2, 2022-08-24), and K200323 (original, 2020-10-30). Limbus Contour (K241837) is used as a reference device after the Limbus AI acquisition announced April 30, 2024."
       },
-      intendedUseStatement: "AutoContour is intended to assist radiation treatment planners in contouring and reviewing structures within medical images in preparation for radiation therapy treatment planning. (Source: FDA 510(k) K260509 Summary; FDA database page last updated 2026-06-08)"
+      intendedUseStatement: "AutoContour is intended to assist radiation treatment planners in contouring and reviewing structures within medical images in preparation for radiation therapy treatment planning. (Source: FDA 510(k) K262452 Summary, accessed 2026-09-22)"
     },
     market: {
       onMarketSince: "2020",
