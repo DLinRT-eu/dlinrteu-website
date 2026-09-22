@@ -133,9 +133,9 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
           lastVerified: "2026-09-22"
       },
         status: "cleared",
-        class: "Not publicly verified",
+        class: "Class IIb",
         type: "Medical Device",
-        regulation: "CE marked; public MDR class/source not located"
+        regulation: "CE marked; Class IIb per EUDAMED"
       },
       fda: {
         status: "510k_cleared",
