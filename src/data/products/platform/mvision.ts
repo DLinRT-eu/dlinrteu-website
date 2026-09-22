@@ -109,6 +109,14 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "642983006424WS1.0ZQ",
+          riskClass: "class-iia",
+          registeredTradeName: "Workspace+",
+          manufacturerSrn: "FI-MF-000013082",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Workspace%2B",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "MDR",

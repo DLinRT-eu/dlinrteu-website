@@ -227,6 +227,18 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       tfdaDetails: tfdaDetails,
       intendedUseStatement: product.regulatory?.intendedUseStatement || "N/A",
       marketPresence: product.market?.onMarketSince || "N/A",
+      ...(product.regulatory?.ce?.eudamed
+        ? {
+            eudamed: {
+              basicUdi: product.regulatory.ce.eudamed.basicUdi || "",
+              riskClass: product.regulatory.ce.eudamed.riskClass || "",
+              registeredTradeName: product.regulatory.ce.eudamed.registeredTradeName || "",
+              manufacturerSrn: product.regulatory.ce.eudamed.manufacturerSrn || "",
+              sourceUrl: product.regulatory.ce.eudamed.sourceUrl || "",
+              lastVerified: product.regulatory.ce.eudamed.lastVerified || "",
+            },
+          }
+        : {}),
     },
     contact: {
       website: product.website || "N/A",

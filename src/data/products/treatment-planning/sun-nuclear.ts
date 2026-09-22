@@ -83,6 +83,14 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         notes: "K242748 (Apr 2025). Prior clearances: K222803 (Feb 2023), K202284 (Mar 2021, original Oncospace clearance)"
       },
       ce: {
+        eudamed: {
+          basicUdi: "506060888PlanAIXR",
+          riskClass: "class-iib",
+          registeredTradeName: "Plan AI",
+          manufacturerSrn: "US-MF-000020245",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Plan+AI",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "Class IIb",
         type: "Medical Device",

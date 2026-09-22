@@ -19,6 +19,7 @@
  *   bun scripts/eudamed-audit.ts --company="MVision AI"
  *   bun scripts/eudamed-audit.ts --limit=5 --no-cache --json
  *   bun scripts/eudamed-audit.ts --delay=2500
+ *   bun scripts/eudamed-audit.ts --diff          # compare sweep vs recorded data
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -47,6 +48,7 @@ const options = {
   company: value("company"),
   limit: Number(value("limit") ?? "0") || 0,
   delayMs: Number(value("delay") ?? "1500") || 1500,
+  diff: flag("diff"),
 };
 
 /* ------------------------------------------------------------- API types */
@@ -329,12 +331,16 @@ const loadCatalogue = async (): Promise<{
     id: c.id,
     name: c.name,
     productIds: c.productIds ?? [],
+    eudamed: (c as { eudamed?: { srn?: string } }).eudamed,
   }));
 
   const products = (productsModule.ALL_PRODUCTS as CatalogueProduct[]).map((p) => ({
     id: p.id,
     name: p.name,
     company: p.company,
+    regulatory: (p as {
+      regulatory?: { ce?: { class?: string; eudamed?: { basicUdi?: string; riskClass?: string } } };
+    }).regulatory,
   }));
 
   return { companies, products };
@@ -606,6 +612,69 @@ human-reviewed change with the EUDAMED query URL recorded as the source.
 `;
 };
 
+/* ------------------------------------------------------------------ diff */
+
+interface DiffFinding {
+  kind: "company" | "product";
+  name: string;
+  issue: string;
+}
+
+/** Strips refdata prefixes so "refdata.risk-class.class-iia" compares as "class-iia". */
+const bareCode = (raw?: string): string =>
+  (raw ?? "").trim().toLowerCase().split(".").pop() ?? "";
+
+/** Normalises a recorded CE class ("Class IIa", "IIa") to the EUDAMED shape. */
+const normaliseCeClass = (raw?: string): string => {
+  const cleaned = (raw ?? "").trim().toLowerCase().replace(/^class\s*/, "");
+  return cleaned ? `class-${cleaned}` : "";
+};
+
+const reportDiff = (
+  companyRows: AuditRow[],
+  productRows: AuditRow[],
+  companies: Array<{ id?: string; name: string; eudamed?: { srn?: string } }>,
+  products: Array<{
+    id?: string;
+    name: string;
+    regulatory?: { ce?: { class?: string; eudamed?: { basicUdi?: string; riskClass?: string } } };
+  }>
+): DiffFinding[] => {
+  const findings: DiffFinding[] = [];
+
+  for (const row of companyRows) {
+    const company = companies.find((c) => c.id === row.dlinrtId || c.name === row.dlinrtName);
+    const recordedSrn = company?.eudamed?.srn ?? "";
+    if (row.status === "confirmed" && !recordedSrn) {
+      findings.push({ kind: "company", name: row.dlinrtName, issue: `EUDAMED confirms SRN ${row.srn} but no eudamed block is recorded` });
+      continue;
+    }
+    if (recordedSrn && row.status === "confirmed" && recordedSrn !== row.srn) {
+      findings.push({ kind: "company", name: row.dlinrtName, issue: `recorded SRN ${recordedSrn} differs from EUDAMED ${row.srn}` });
+    }
+  }
+
+  for (const row of productRows) {
+    const product = products.find((p) => p.id === row.dlinrtId || p.name === row.dlinrtName);
+    const recorded = product?.regulatory?.ce?.eudamed;
+    if (row.status === "confirmed" && !recorded?.basicUdi) {
+      findings.push({ kind: "product", name: row.dlinrtName, issue: `EUDAMED confirms Basic UDI-DI ${row.basicUdi} but no eudamed block is recorded` });
+      continue;
+    }
+    if (!recorded?.basicUdi) continue;
+    if (row.status === "confirmed" && recorded.basicUdi !== row.basicUdi) {
+      findings.push({ kind: "product", name: row.dlinrtName, issue: `recorded Basic UDI-DI ${recorded.basicUdi} differs from EUDAMED ${row.basicUdi}` });
+    }
+    const recordedCeClass = normaliseCeClass(product?.regulatory?.ce?.class);
+    const eudamedClass = bareCode(recorded.riskClass || row.riskClass);
+    if (recordedCeClass && eudamedClass && recordedCeClass !== eudamedClass) {
+      findings.push({ kind: "product", name: row.dlinrtName, issue: `recorded CE class ${recordedCeClass} vs EUDAMED ${eudamedClass} — needs human resolution` });
+    }
+  }
+
+  return findings;
+};
+
 /* ------------------------------------------------------------------ main */
 
 const main = async (): Promise<void> => {
@@ -645,6 +714,17 @@ const main = async (): Promise<void> => {
 
   const date = new Date().toISOString().slice(0, 10);
   const allRows = [...companyRows, ...productRows];
+
+  if (options.diff) {
+    const findings = reportDiff(companyRows, productRows, companies as never, products as never);
+    if (findings.length === 0) {
+      console.log("\nDiff: catalogue matches the EUDAMED sweep — no discrepancies.");
+    } else {
+      console.log(`\nDiff: ${findings.length} discrepanc${findings.length === 1 ? "y" : "ies"}:`);
+      for (const f of findings) console.log(`  [${f.kind}] ${f.name}: ${f.issue}`);
+    }
+    return;
+  }
 
   if (options.json) {
     console.log(JSON.stringify({ date, rows: allRows }, null, 2));

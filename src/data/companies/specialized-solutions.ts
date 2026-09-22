@@ -4,6 +4,15 @@ import { CompanyDetails } from "@/types/company";
 export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   {
     "id": "spectronic-medical",
+    "eudamed": {
+      "srn": "SE-MF-000024476",
+      "registeredName": "Spectronic Medical AB",
+      "role": "Manufacturer",
+      "country": "SE",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Spectronic+Medical",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Spectronic Medical",
     "description": "Specialists in MRI-only radiotherapy planning solutions.",
     "website": "https://spectronicmedical.com/",
@@ -24,6 +33,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "raysearch",
+    "eudamed": {
+      "srn": "SE-MF-000001908",
+      "registeredName": "RAYSEARCH LABORATORIES AB (PUBL)",
+      "role": "Manufacturer",
+      "country": "SE",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=RaySearch+Laboratories",
+      "lastVerified": "2026-09-22"
+    },
     "name": "RaySearch Laboratories",
     "description": "Developer of innovative software solutions for radiation therapy treatment planning.",
     "website": "https://www.raysearchlabs.com",
@@ -35,6 +53,19 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "airs-medical",
+    "eudamed": {
+      "srn": "KR-MF-000009149",
+      "registeredName": "AIRS Medical Inc.",
+      "role": "Manufacturer",
+      "country": "KR",
+      "status": "active",
+      "certificates": [
+        {"certificateNumber": "SCAR-23.2.1.0", "notifiedBody": "3022", "type": "quality-management-system", "validFrom": "2026-07-24", "validUntil": "2029-01-05", "status": "issued"},
+        {"certificateNumber": "C596987", "notifiedBody": "2460", "type": "quality-management-system", "validFrom": "2024-01-05", "validUntil": "2029-01-05", "status": "issued"}
+      ],
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=AIRS+Medical",
+      "lastVerified": "2026-09-22"
+    },
     "name": "AIRS Medical",
     "description": "AI company focused on enhancing medical imaging efficiency and quality.",
     "website": "https://airsmed.com/",
@@ -47,6 +78,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "claripi",
+    "eudamed": {
+      "srn": "KR-MF-000031518",
+      "registeredName": "ClariPi Inc.",
+      "role": "Manufacturer",
+      "country": "KR",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=ClariPi",
+      "lastVerified": "2026-09-22"
+    },
     "name": "ClariPi",
     "description": "Korean AI medical imaging company specializing in CT image denoising and dose reduction solutions, founded in 2015 with roots at Seoul National University.",
     "website": "https://claripi.com/",
@@ -57,6 +97,18 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "subtle-medical",
+    "eudamed": {
+      "srn": "US-MF-000032747",
+      "registeredName": "Subtle Medical, Inc.",
+      "role": "Manufacturer",
+      "country": "US",
+      "status": "active",
+      "certificates": [
+        {"certificateNumber": "28620157147", "notifiedBody": "2862", "type": "quality-management-system", "validFrom": "2023-10-10", "validUntil": "2028-07-14", "status": "issued"}
+      ],
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Subtle+Medical",
+      "lastVerified": "2026-09-22"
+    },
     "name": "Subtle Medical",
     "description": "AI company focused on enhancing medical imaging efficiency and quality.",
     "website": "https://subtlemedical.com/",
@@ -74,6 +126,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     "id": "ptw-dosimetry",
+    "eudamed": {
+      "srn": "DE-MF-000005794",
+      "registeredName": "PTW-Freiburg Physikalisch-Technische Werkst\u00e4tten Dr. Pychlau GmbH",
+      "role": "Manufacturer",
+      "country": "DE",
+      "status": "active",
+      "sourceUrl": "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=PTW",
+      "lastVerified": "2026-09-22"
+    },
     "name": "PTW",
     "description": "Leading provider of dosimetry solutions and quality assurance systems for radiation therapy.",
     "website": "https://www.ptwdosimetry.com",
@@ -114,6 +175,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
   },
   {
     id: "quanta-computer",
+    eudamed: {
+      srn: "TW-MF-000022042",
+      registeredName: "Quanta Computer Inc.",
+      role: "Manufacturer",
+      country: "TW",
+      status: "active",
+      sourceUrl: "https://ec.europa.eu/tools/eudamed/api/eos?page=0&pageSize=20&size=20&languageIso2Code=en&name=Quanta+Computer+Inc.",
+      lastVerified: "2026-09-22"
+    },
     name: "Quanta Computer Inc.",
     description: "Taiwanese technology company developing AI-powered medical imaging solutions, including the QOCA® image Smart RT Contouring System for organ-at-risk delineation in radiotherapy planning.",
     website: "https://www.quantatw.com/quanta/english/default.aspx",

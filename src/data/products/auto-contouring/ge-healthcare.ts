@@ -58,6 +58,14 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "8406821BUG00320GZ",
+          riskClass: "class-iib",
+          registeredTradeName: "Auto Segmentation",
+          manufacturerSrn: "US-MF-000018315",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Auto+Segmentation",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "Class IIb",
         type: "CE Mark",

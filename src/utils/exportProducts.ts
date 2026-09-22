@@ -17,6 +17,8 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "Technical Output", "Technical Output Format",
     "Integration Methods", "Deployment Options", "Trigger For Analysis", "Processing Time",
     "CE Status", "CE Class", "CE Type", "CE Certificate Number", "CE Regulation Number",
+    "EUDAMED Basic UDI-DI", "EUDAMED Risk Class", "EUDAMED Registered Trade Name",
+    "EUDAMED Manufacturer SRN", "EUDAMED Source URL", "EUDAMED Last Verified",
     "FDA Status", "FDA Clearance Number", "FDA Regulation Number", "FDA Product Code",
     "TGA Status", "TGA Notes",
     "TFDA Status", "TFDA Approval Number", "TFDA Decision Date",
@@ -184,6 +186,12 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.regulatory?.ce?.type),
     escapeValueForCsv(product.regulatory?.ce?.certificateNumber),
     escapeValueForCsv(product.regulatory?.ce?.regulation),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.basicUdi),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.riskClass),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.registeredTradeName),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.manufacturerSrn),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.sourceUrl),
+    escapeValueForCsv(product.regulatory?.ce?.eudamed?.lastVerified),
     escapeValueForCsv(
       typeof product.regulatory?.fda === 'string'
         ? product.regulatory.fda

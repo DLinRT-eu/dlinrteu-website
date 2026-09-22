@@ -52,6 +52,14 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "B-00850009343307",
+          riskClass: "class-iia",
+          registeredTradeName: "Contour ProtégéAI+",
+          manufacturerSrn: "US-MF-000007063",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Contour+Prot%C3%A9g%C3%A9AI%2B",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "IIa",
         type: "MDD",

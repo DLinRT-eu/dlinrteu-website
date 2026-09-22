@@ -72,6 +72,14 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
+        eudamed: {
+          basicUdi: "B-00628011382177",
+          riskClass: "class-i",
+          registeredTradeName: "Limbus Contour",
+          manufacturerSrn: "CA-MF-000025514",
+          sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=Limbus+Contour",
+          lastVerified: "2026-09-22"
+      },
         status: "cleared",
         class: "Class IIa",
         type: "MDR",

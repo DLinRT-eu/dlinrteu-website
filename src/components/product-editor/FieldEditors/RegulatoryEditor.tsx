@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronDown, ChevronRight, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { EudamedDeviceRegistration } from '@/types/eudamed';
 
 interface RegulatoryEditorProps {
   fieldPath: string;
@@ -34,6 +35,7 @@ interface CEInfo {
   certificateNumber?: string;
   regulation?: string;
   notes?: string;
+  eudamed?: EudamedDeviceRegistration;
 }
 
 interface FDAInfo {
@@ -186,6 +188,17 @@ export function RegulatoryEditor({ fieldPath, label = 'Regulatory Information' }
                 className="bg-background"
               />
             </div>
+            {ce.eudamed && (
+              <div className="rounded-md border bg-muted/40 p-3 space-y-1">
+                <Label className="text-xs">EUDAMED registration (verified, read-only)</Label>
+                <p className="text-xs text-muted-foreground">
+                  Basic UDI-DI {ce.eudamed.basicUdi}
+                  {ce.eudamed.riskClass ? ` · ${ce.eudamed.riskClass}` : ''}
+                  {ce.eudamed.manufacturerSrn ? ` · SRN ${ce.eudamed.manufacturerSrn}` : ''}
+                  {ce.eudamed.lastVerified ? ` · checked ${ce.eudamed.lastVerified}` : ''}
+                </p>
+              </div>
+            )}
           </CollapsibleContent>
         </Collapsible>
 
