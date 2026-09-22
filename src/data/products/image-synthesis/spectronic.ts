@@ -135,7 +135,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         status: "cleared",
         class: "Class IIb",
         type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
+        regulation: "CE marked; Class IIb per EUDAMED"
       },
       fda: {
         status: "510k_cleared",
