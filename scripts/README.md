@@ -31,6 +31,27 @@ The script never edits `src/data/`. Matching is name-based, so rows are marked
 auto-accepted. MDR registration only becomes mandatory on 28 May 2026, so
 `not-registered` is not evidence of a missing CE mark.
 
+## eudamed-discovery.ts
+
+Read-only discovery sweep for products registered under EMDN/CND branches in
+EUDAMED. It downloads the official EMDN workbook, expands the selected branches
+to terminal codes, queries `devices/udiDiData` with `cndCode`, enriches candidate
+rows through `devices/basicUdiData/udiDiData/{uuid}`, and diffs results against
+DLinRT by Basic UDI-DI plus manufacturer/name matching.
+
+```bash
+npm run audit:eudamed:discovery
+bun scripts/eudamed-discovery.ts --branches=Z1101,Z1104 --delay=750
+bun scripts/eudamed-discovery.ts --limit-codes=5 --limit-pages=1 --json
+bun scripts/eudamed-discovery.ts --no-cache --enrich=all
+```
+
+Outputs `docs/audits/eudamed/YYYY-MM-DD-eudamed-emdn-discovery.{md,csv,json}`.
+Rows are screening leads only. The script marks existing catalogue matches,
+possible missing candidates and manual-review rows, but never edits `src/data/`.
+A product should be added only after separate public-source review confirms a
+disclosed AI/deep-learning core radiotherapy function.
+
 ## generate-estro-flyers.mjs
 
 One-off generator for the ESTRO 2026 flyers in `public/flyers/`. Requires `pdfkit` and `qrcode`:
