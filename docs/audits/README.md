@@ -29,8 +29,9 @@ carry `regulatory.ce.eudamed` (Basic UDI-DI, risk class, registered trade name,
 manufacturer SRN, source URL, date checked). Run
 `bun scripts/eudamed-audit.ts --diff` to compare the live sweep against those
 recorded blocks; class mismatches are listed for human resolution and never
-overwritten. Open discrepancies (2026-09-22): Limbus Contour (IIa vs class-i),
-MRI Planner (no verified class vs class-iib), MOZI TPS (IIa vs class-iib).
+overwritten. The three class discrepancies identified on 2026-09-22 were
+resolved by human review: Limbus Contour (Class IIa), MRI Planner (Class IIb),
+and MOZI TPS (Class IIb).
 
 MDR registration of certificates and devices becomes mandatory on 28 May 2026
 (Commission Decision (EU) 2025/2371), so a `not-registered` row before that date

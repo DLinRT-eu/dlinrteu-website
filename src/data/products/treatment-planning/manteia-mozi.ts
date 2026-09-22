@@ -67,7 +67,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
           lastVerified: "2026-09-22"
       },
         status: "cleared",
-        class: "IIa",
+        class: "Class IIb",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)"
       },
