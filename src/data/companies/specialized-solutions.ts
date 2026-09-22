@@ -14,6 +14,15 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "secondaryTasks": ["Auto-Contouring"]
   },
   {
+    "id": "informai",
+    "name": "InformAI",
+    "description": "US developer of AI software for healthcare, including deep learning dose prediction for radiotherapy planning.",
+    "website": "https://www.informai.com",
+    "productIds": ["informai-radoncai"],
+    "category": "Specialized Solutions",
+    "primaryTask": "Treatment Planning"
+  },
+  {
     "id": "raysearch",
     "name": "RaySearch Laboratories",
     "description": "Developer of innovative software solutions for radiation therapy treatment planning.",

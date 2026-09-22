@@ -16,7 +16,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
       "Targets routine contouring workload reduction"
     ],
     category: "Auto-Contouring",
-    certification: "CE",
+    certification: "CE/FDA",
     logoUrl: "/logos/varian.jpg",
     website: "https://cancercare.siemens-healthineers.com/en-ch/products/radiotherapy/treatment-planning/eclipse",
     anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis", "Breast"],
@@ -60,10 +60,16 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
         type: "Medical Device"
       },
       fda: {
-        status: "unknown",
-        notes: "Underlying Varian 'AI Segmentation' algorithm family has FDA 510(k) clearances K203469 (2021), K211881 (2021) and K232923 (2024) shipped in Ethos. Whether the Eclipse-integrated packaging is separately 510(k)-cleared in the US is not publicly confirmed; pending vendor confirmation. (unverified)"
+        status: "510k_cleared",
+        class: "Class II",
+        type: "510(k)",
+        clearanceNumber: "K261306",
+        productCode: "QKB",
+        regulationNumber: "21 CFR 892.2050",
+        decisionDate: "2026-07-10",
+        notes: "Cleared as AI Contouring VA10A (Traditional 510(k), decision 2026-07-10) for automatic segmentation of anatomical structures and known (diagnosed) brain metastases on CT and MR images, integrated into compatible Varian platforms (Eclipse, Velocity). The FDA summary describes four independent deep-learning MR segmentation models (brain metastases on T1w post-contrast, brain OARs, pelvis OARs T1-weighted, pelvis OARs T2-weighted) plus multiple DI2IN CT segmentation models, with template configuration and margin/Boolean/cropping expansion of auto-contoured structures. Reference device: syngo.via RT Image Suite VC10 (K252304). The underlying AI Segmentation algorithm family shipped in Ethos under K203469 (2021), K211881 (2021) and K232923 (2024). Source: https://www.accessdata.fda.gov/cdrh_docs/pdf26/K261306.pdf, retrieved 2026-09-22"
       },
-      intendedUseStatement: "Deep-learning auto-contouring for organs at risk integrated with the Eclipse treatment planning system, intended to automate routine contouring during radiotherapy planning. (Full IFU pending publication.)"
+      intendedUseStatement: "AI Contouring VA10A is intended for the automatic segmentation (auto-contouring) of anatomical structures and pathologies, including known (diagnosed) brain metastases, on CT and MR images to support radiation therapy treatment planning, providing consistent editable contours of organs at risk and target volumes within compatible Varian platforms such as Eclipse and Velocity. (Source: FDA 510(k) K261306 Summary, accessed 2026-09-22)"
     },
     market: {
       onMarketSince: "2026",
@@ -74,13 +80,18 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "I2",
     clinicalImpactNotes: "Independent comparative evaluations show workflow and consistency benefits — upgraded to I2.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "CE-only, vendor-source evidence, no independent Eclipse-specific validation. Local commissioning and validation required before clinical adoption.",
+    adoptionReadinessNotes: "CE MDR plus FDA 510(k) (K261306) clearance, vendor-source evidence, no independent Eclipse-specific validation. Local commissioning and validation required before clinical adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     evidence: [
+      {
+        type: "Regulatory Submission",
+        description: "FDA 510(k) summary K261306: AI Contouring VA10A, four MR deep-learning segmentation models plus multiple DI2IN CT models, cleared 2026-07-10.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf26/K261306.pdf"
+      },
       {
         type: "Vendor Announcement",
         description: "Siemens Healthineers press release: CE mark for AI Contouring for Eclipse (ESTRO 2026, 15 May 2026)",

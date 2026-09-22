@@ -180,6 +180,15 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "primaryTask": "Auto-Contouring"
   },
   {
+    "id": "aitewan",
+    "name": "Aitewan Biomedical Technology",
+    "description": "Taiwanese developer of deep learning brain tumour contouring software for radiotherapy planning.",
+    "website": "https://www.aitewan.com",
+    "productIds": ["aitewan-deepbt-detector-plus"],
+    "category": "Auto-Contouring",
+    "primaryTask": "Auto-Contouring"
+  },
+  {
     "id": "oncosoft",
     "name": "Oncosoft",
     "description": "AI-driven precision and efficiency for radiation therapy with proven auto-contouring solutions.",

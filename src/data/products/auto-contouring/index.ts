@@ -31,6 +31,7 @@ import { VARIAN_ECLIPSE_PRODUCTS } from "./varian-eclipse";
 import { QUANTA_COMPUTER_PRODUCTS } from "./quanta-computer";
 import { MEDCOM_PRODUCTS } from "./medcom";
 import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
+import { AITEWAN_PRODUCTS } from "./aitewan";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -63,5 +64,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...VARIAN_ECLIPSE_PRODUCTS,
   ...QUANTA_COMPUTER_PRODUCTS,
   ...MEDCOM_PRODUCTS,
-  ...UNITED_IMAGING_PRODUCTS
+  ...UNITED_IMAGING_PRODUCTS,
+  ...AITEWAN_PRODUCTS
 ];
