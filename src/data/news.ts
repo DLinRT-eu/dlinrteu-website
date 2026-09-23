@@ -12,8 +12,10 @@ import { websiteRestyleAndSecondReview } from "./news/website-restyle-and-second
 import { secondRoundReviewAndEvidenceAxes } from "./news/second-round-review-and-evidence-axes";
 import { aapm2026AndCertificationMilestone } from "./news/aapm-2026-and-certification-milestone";
 import { aiinrt2027Support } from "./news/aiinrt-2027-support";
+import { september2026CatalogueAndEudamedUpdate } from "./news/september-2026-catalogue-and-eudamed-update";
 
 export const NEWS_ITEMS: NewsItem[] = [
+  september2026CatalogueAndEudamedUpdate,
   aiinrt2027Support,
   aapm2026AndCertificationMilestone,
   secondRoundReviewAndEvidenceAxes,
