@@ -71,9 +71,9 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Discontinued - no longer actively marketed"]
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Brouwer 2020, Choi 2020 and Zhu 2021 entries were removed as scored papers — their stored DOIs resolve to unrelated articles on Crossref and no matching publication could be verified. Only Doolan 2023 (doi:10.3389/fonc.2023.1213068), an independent multi-system benchmark with geometric endpoints, remains, so the effective score is E2/I1.",
-    clinicalImpactNotes: "Impact lowered to I1: the single verified publication reports geometric accuracy only. Product now discontinued.",
+    clinicalImpactNotes: "Raised to I2 in the 2026-09-23 HAIR cross-check: a multi-centre UK study reports contouring time savings (doi:10.1016/j.phro.2022.11.003) and a replanning study reports dosimetric endpoints (doi:10.1016/j.meddos.2025.04.004). Product now discontinued.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,
@@ -82,6 +82,11 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
+      {"type": "Peer-reviewed Publication", "description": "Hague C et al. An evaluation of MR based deep learning auto-contouring for planning head and neck radiotherapy. Radiother Oncol 2021. Single-centre evaluation of DLCExpert CT and MR H&N models; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.radonc.2021.02.018"},
+      {"type": "Peer-reviewed Publication", "description": "Yuen J et al. Assessment of contour accuracy in head and neck replanning: Deep learning trained model compared with deformable image registration propagation technique. Med Dosim 2025. Single-centre replanning comparison of Mirada DLC models vs DIR; geometric and dosimetric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.meddos.2025.04.004"},
+      {"type": "Peer-reviewed Publication", "description": "Gibbons E et al. Clinical evaluation of deep learning and atlas-based auto-segmentation for critical organs at risk in radiation therapy. J Med Radiat Sci 2023. Single-centre comparison of Mirada DLC Expert vs atlas; geometric and clinical-rating endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1002/jmrs.618"},
+      {"type": "Peer-reviewed Publication", "description": "Walker Z et al. Evaluating the Effectiveness of Deep Learning Contouring across Multiple Radiotherapy Centres. Phys Imaging Radiat Oncol 2022. Multi-centre UK evaluation of DLCExpert reporting time savings. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2022.11.003"},
+      {"type": "Peer-reviewed Publication", "description": "Brunenberg E et al. External validation of deep learning-based contouring of head and neck organs at risk. Physics and Imaging in Radiation Oncology 2020. External validation of DLCExpert H&N models on an independent centre; Mirada co-authors. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2020.06.006"},
       {
         type: "Multi-vendor Comparative Study",
         description: "Doolan et al. Clinical evaluation of 5 commercial AI contouring systems (Mirada [Mir], MVision, Radformation, RayStation, TheraPanacea) on 80 patients (breast/H&N/lung/prostate). Mirada explicitly included and benchmarked — direct evidence for this product. Front Oncol 2023;13:1213068.",
@@ -92,9 +97,14 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-05-20",
     lastUpdated: "2026-06-15",
     keyPapers: [
+    {"doi": "10.1016/j.radonc.2021.02.018", "title": "An evaluation of MR based deep learning auto-contouring for planning head and neck radiotherapy", "authors": "Hague C et al.", "journal": "Radiother Oncol", "year": "2021", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre evaluation of DLCExpert CT and MR H&N models; geometric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi": "10.1016/j.meddos.2025.04.004", "title": "Assessment of contour accuracy in head and neck replanning: Deep learning trained model compared with deformable image registration propagation technique", "authors": "Yuen J et al.", "journal": "Med Dosim", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre replanning comparison of Mirada DLC models vs DIR; geometric and dosimetric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi": "10.1002/jmrs.618", "title": "Clinical evaluation of deep learning and atlas-based auto-segmentation for critical organs at risk in radiation therapy", "authors": "Gibbons E et al.", "journal": "J Med Radiat Sci", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre comparison of Mirada DLC Expert vs atlas; geometric and clinical-rating endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi": "10.1016/j.phro.2022.11.003", "title": "Evaluating the Effectiveness of Deep Learning Contouring across Multiple Radiotherapy Centres", "authors": "Walker Z et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2022", "evidenceRigor": "E2", "clinicalImpact": "I2", "rationale": "Multi-centre UK evaluation of DLCExpert reporting time savings.", "vendorIndependent": true, "multiCenter": true, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi": "10.1016/j.phro.2020.06.006", "title": "External validation of deep learning-based contouring of head and neck organs at risk", "authors": "Brunenberg E et al.", "journal": "Physics and Imaging in Radiation Oncology", "year": "2020", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "External validation of DLCExpert H&N models on an independent centre; Mirada co-authors.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": true},
   {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-09-23",
     source: "Historical records - product discontinued; citation re-verified 2026-06-15 (Doolan 2023 directly evaluates Mirada per its Methods)."
   }
 ];

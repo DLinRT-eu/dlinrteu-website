@@ -138,6 +138,8 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: true,
     evidenceExternalValidation: true,
     evidence: [
+      {"type": "Peer-reviewed Publication", "description": "Byrne M et al. Varian ethos online adaptive radiotherapy for prostate cancer: Early results of contouring accuracy, treatment plan quality, and treatment time. J Appl Clin Med Phys 2022. Single-centre early Ethos prostate results including AI contouring accuracy. HAIR label Eclipse corrected to Ethos. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1002/acm2.13479"},
+      {"type": "Peer-reviewed Publication", "description": "Schmidt R et al. Feasibility of automated AI-based contouring and stable radiomic feature assessment by HyperSight-CBCT Imaging for adaptive high-precision radiotherapy of prostate cancer. Sci Rep 2026. Single-centre feasibility of Ethos AI contouring on HyperSight CBCT with radiomic stability. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1038/s41598-026-46359-3"},
       {
         type: "Peer-reviewed Publication",
         description: "Byrne et al. Feasibility of Ethos generated treatment plans for head and neck cancer patients. Tech Innov Patient Support Radiat Oncol 2023",
@@ -210,13 +212,15 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024-04-30",
     lastUpdated: "2026-06-13",
     keyPapers: [
+    {"doi": "10.1002/acm2.13479", "title": "Varian ethos online adaptive radiotherapy for prostate cancer: Early results of contouring accuracy, treatment plan quality, and treatment time", "authors": "Byrne M et al.", "journal": "J Appl Clin Med Phys", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre early Ethos prostate results including AI contouring accuracy. HAIR label Eclipse corrected to Ethos.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi": "10.1038/s41598-026-46359-3", "title": "Feasibility of automated AI-based contouring and stable radiomic feature assessment by HyperSight-CBCT Imaging for adaptive high-precision radiotherapy of prostate cancer", "authors": "Schmidt R et al.", "journal": "Sci Rep", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre feasibility of Ethos AI contouring on HyperSight CBCT with radiomic stability.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
     {"doi":"10.1002/acm2.13399","title":"Prospects for daily online adaptive radiotherapy via ethos for prostate cancer patients without nodal involvement using unedited CBCT auto‐segmentation","authors":"Moazzezi M et al.","journal":"J Applied Clin Med Phys","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre technical evaluation of the online-adaptive segmentation step.","vendorIndependent":true},
     {"doi":"10.1016/j.phro.2020.12.004","title":"First clinical experience with Ethos","authors":"Sibolt P et al.","journal":"Phys Imag Radiat Oncol","year":"2021","evidenceRigor":"E3","clinicalImpact":"I3","rationale":"Prospective first clinical experience where AI contours drive online adaptive plan selection.","vendorIndependent":true,"prospective":true},
     {"doi":"10.3389/fonc.2024.1507806","title":"Ethos AI segmentation multi-site evaluation","authors":"Prunaretty A et al.","journal":"Front Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-site evaluation of the segmentation step; geometric endpoints.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
     {"doi":"10.1002/acm2.70067","title":"Geometric and dosimetric evaluation of a commercial AI auto‐contouring tool on multiple anatomical sites in CT scans","authors":"Finnegan RN et al.","journal":"J Applied Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre dosimetric evaluation of adaptive contours.","vendorIndependent":true},
     {"doi": "10.1016/j.tipsro.2023.100216", "title": "Investigating the feasibility of using Ethos generated treatment plans for head and neck cancer patients", "authors": "El-qmache A et al.", "journal": "Technical Innovations &amp; Patient Support in Radiation Oncology", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre feasibility study of Ethos-generated head-and-neck plans built on AI segmentation, reporting plan quality.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-09-23",
     source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
   }
 ];

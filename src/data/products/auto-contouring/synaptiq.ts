@@ -27,9 +27,9 @@ export const MediqRT: ProductDetails = {
   categoryEvidence: {
     "Auto-Contouring": {
       usesAI: true,
-      notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy.",
+      notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy, plus a 2026 H&N secondary-OAR dose-compliance study (doi:10.3390/diagnostics16111748).",
       evidenceRigor: "E1",
-      clinicalImpact: "I1",
+      clinicalImpact: "I2",
     },
     "Registration": {
       usesAI: true,
@@ -59,6 +59,7 @@ export const MediqRT: ProductDetails = {
   website: "https://synaptiq.io/product/",
   category: "Auto-Contouring",
   evidence: [
+      {"type": "Peer-reviewed Publication", "description": "Costin IC et al. AI-Based Dose Compliance of Secondary Organs at Risk in Head and Neck Cancer Radiotherapy. Diagnostics (Basel) 2026. Single-centre H&N study of Mediq RT secondary-OAR dose compliance. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.3390/diagnostics16111748"},
     {
       link: "https://doi.org/10.1016/j.phro.2026.100935",
       type: "journal",
@@ -131,10 +132,11 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Cloud-based data storage and visualization"
   ],
   keyPapers: [
+    {"doi": "10.3390/diagnostics16111748", "title": "AI-Based Dose Compliance of Secondary Organs at Risk in Head and Neck Cancer Radiotherapy", "authors": "Costin IC et al.", "journal": "Diagnostics (Basel)", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre H&N study of Mediq RT secondary-OAR dose compliance.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
     {"doi":"10.1016/j.phro.2026.100935","title":"Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy","authors":"Moignier A et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
     {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and under-reported organs at risk in prostate cancer radiotherapy","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-09-23",
   lastUpdated: "2026-08-25",
   limitations: [
     "Exclusion: patients with large metal implants (e.g. hip prosthesis) or motion artefacts in the imaging area — metal can significantly distort the images, potentially leading to inaccurate contouring",
@@ -148,7 +150,7 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
   certification: "CE",
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "I2",
   diseaseTargeted: [
     "Brain tumours (glioblastoma, astrocytoma, etc.)",
     "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",
@@ -172,7 +174,7 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Brachytherapy"
   ],
   evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
-  clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
+  clinicalImpactNotes: "Raised to I2 in the 2026-09-23 HAIR cross-check: a single-centre head-and-neck study reports dose compliance of secondary OARs with Mediq RT contours (doi:10.3390/diagnostics16111748). No patient-outcome data.",
   secondaryCategories: ["Registration"],
   supportedStructures: [
     "Head & Neck: Brain",
