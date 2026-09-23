@@ -29,7 +29,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     logoUrl: "/logos/manteia.png",
     website: "https://www.manteiamedical.com/",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Pelvis"],
-    modality: ["CT"],
+    modality: ["CT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration", "Guideline-based contouring support", "Target and OAR contouring"],
@@ -573,9 +573,9 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       notes: "392 distinct CT ROI names are listed here out of 397 in the vendor file; five vendor abbreviations (CIN, EIN, IIN, ON, SN) could not be resolved to an anatomical structure and are omitted pending manufacturer clarification. Region grouping was assigned by DLinRT from the ROI names; the vendor file lists TG-263 ROI names without a body-site column. MRI ROI names are listed separately under the \"MRI\" prefix; distinct-name counting collapses names shared with the CT models."
     },
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "Wang 2022 (Front Oncol) confirmed; additional independent studies support E2 (conditional on product-name verification in full text).",
-    clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement.",
+    clinicalImpact: "I2",
+    evidenceRigorNotes: "Wang 2022 (Front Oncol) confirmed; additional independent studies support E2 (conditional on product-name verification in full text). 2026-09-23 manufacturer material review: Li et al., Radiother Oncol 2022 (doi 10.1016/j.radonc.2022.11.004, DOI resolved via Crossref) added as a scored paper — six abdominal/pelvic patients on an MR-linac, Manteia co-authored, so rigor stays E1.",
+    clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement. Raised to I2 on 2026-09-23: Li et al. 2022 reports measured workflow endpoints (contouring 73.4 ± 6.5 s vs 12–22 min manual; adaptive session 1650 ± 274 s vs 3251.8 ± 447 s) in a six-patient MRgART series. No patient-outcome endpoint is demonstrated.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + FDA 510(k): peer-reviewed retrospective evidence and U.S. regulatory clearance are present, but public CE evidence was not independently verified and local commissioning, model acceptance testing, governance, and user training remain required.",
     evidenceVendorIndependent: true,
@@ -598,6 +598,48 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
         type: "Multi-vendor Comparative Study",
         description: "Yan et al. Comparison of four commercial deep-learning contouring models, including AccuContour, for nasopharyngeal carcinoma structures and GTV. Sci Rep 2026. AccuContour is one of four evaluated commercial models (verified in Methods).",
         link: "https://doi.org/10.1038/s41598-025-33567-6"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Li Z, Zhang W, Li B, et al. Patient-specific daily updated deep learning auto-segmentation for MRI-guided adaptive radiotherapy. Radiother Oncol 2022;177:222–230. Patient-specific model updating on longitudinal MRI in six abdominal/pelvic MRgART cases: mean DSC 0.90 (95% CI 0.88–0.95) vs 0.63 for deformable registration and 0.74 for a frozen model; contouring time 73.4 ± 6.5 s vs 12–22 min manual. Manteia co-authored, so not vendor-independent.",
+        link: "https://doi.org/10.1016/j.radonc.2022.11.004"
+      },
+      {
+        type: "Conference Presentation (abstract-level, not scored)",
+        description: "D'Andrea M et al. Offline and online adaptive workflow with MOZI in a Varian environment — ESTRO 2026 presentation, IRCCS Regina Elena National Cancer Institute (IFO), Rome. Head & neck, breast and prostate cases with HU and DVH comparison; AccuContour-ecosystem workflow. Manufacturer-supplied slide deck, vendor-provided, retrieved 2026-09-23. Abstract-level evidence, not scored.",
+        link: "https://www.manteiamedical.com/"
+      },
+      {
+        type: "Manufacturer Publication List (vendor-provided)",
+        description: "Manteia publication summary supplied 2026-09-23 (vendor-provided, retrieved 2026-09-23): 81 records naming Manteia systems — 36 journal publications and 45 conference abstracts/posters; 10 name AccuContour alone, 43 name AccuContour together with MOZI, 2 together with AccuLearning. 66 of the 81 are Manteia-led or collaborative and 15 are independent user publications. Abstracts and posters are listed for transparency and are not scored; entries marked 'in development' in the list are not recorded as product capabilities.",
+        link: "https://www.manteiamedical.com/"
+      }
+    ],
+    guidelines: [
+      {
+        name: "CT-based delineation of organs at risk in the head and neck region (DAHANCA, EORTC, GORTEC, HKNPCSG, NCIC CTG, NCRI, NRG Oncology, TROG consensus guidelines)",
+        reference: "Manteia Technical Sheet: Contouring Guidelines in AccuContour (vendor-provided, retrieved 2026-09-23)",
+        compliance: "partial"
+      },
+      {
+        name: "RTOG consensus contouring definitions (including RTOG 1106 for thoracic and abdominal organs at risk)",
+        reference: "Manteia Technical Sheet: Contouring Guidelines in AccuContour (vendor-provided, retrieved 2026-09-23)",
+        compliance: "partial"
+      },
+      {
+        name: "Brouwer et al. CT-based OAR delineation consensus, Radiother Oncol 2015;117:83",
+        reference: "Manteia Technical Sheet: Contouring Guidelines in AccuContour (vendor-provided, retrieved 2026-09-23)",
+        compliance: "partial"
+      },
+      {
+        name: "TG-263 nomenclature for ROI naming",
+        reference: "Manteia AccuContour ROI full list, column 'ROI Name(TG-263)' (vendor-provided, retrieved 2026-09-23)",
+        compliance: "partial"
+      },
+      {
+        name: "Anatomical reference atlases used for structures without a radiotherapy consensus guideline (Radiopaedia reference articles, Netter Atlas of Human Anatomy)",
+        reference: "Manteia Technical Sheet: Contouring Guidelines in AccuContour (vendor-provided, retrieved 2026-09-23)",
+        compliance: "partial"
       }
     ],
     relatedProducts: [
