@@ -134,7 +134,9 @@ const About = () => {
         "@type": "Person",
         name: member.name,
         jobTitle: member.role,
-        image: member.image,
+        image: member.image.startsWith("http")
+          ? member.image
+          : `${SITE_ORIGIN}${member.image}`,
         sameAs: member.bio,
       })),
     },
