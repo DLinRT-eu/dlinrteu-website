@@ -58,7 +58,7 @@ const Index = () => {
     "@type": "Organization",
     name: "Deep Learning in Radiotherapy",
     url: "https://dlinrt.eu",
-    logo: "https://dlinrt.eu/logo.png",
+    logo: "https://dlinrt.eu/LogoDLinRT.eu.png",
     description: "Search and explore deep learning products in Radiotherapy",
   };
 

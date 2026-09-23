@@ -12,6 +12,8 @@ import { Shield, Eye, Building2, User, BarChart3 } from "lucide-react";
 import SponsorAcknowledgement from "@/components/SponsorAcknowledgement";
 import usmanLulaAsset from "../../public/people/Usman_Lula.jpeg.asset.json";
 
+const SITE_ORIGIN = "https://dlinrt.eu";
+
 const TEAM_MEMBERS = [
   {
     name: "Matteo Maspero",
@@ -134,7 +136,9 @@ const About = () => {
         "@type": "Person",
         name: member.name,
         jobTitle: member.role,
-        image: member.image,
+        image: member.image.startsWith("http")
+          ? member.image
+          : `${SITE_ORIGIN}${member.image}`,
         sameAs: member.bio,
       })),
     },
