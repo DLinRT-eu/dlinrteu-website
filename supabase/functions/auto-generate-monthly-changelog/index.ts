@@ -150,10 +150,10 @@ serve(async (req) => {
         .eq('role', 'admin');
 
       if (roles && roles.length > 0) {
-        console.log('Authenticated as admin:', user.email);
+        console.log('Authenticated as admin');
         isAuthorized = true;
       } else {
-        console.error('User is not an admin:', user.email);
+        console.error('Authenticated user lacks admin role');
         return new Response(
           JSON.stringify({ error: 'Admin access required' }),
           { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 403 }

@@ -4,14 +4,16 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 const ALLOWED_ORIGINS = [
   "https://dlinrt.eu",
   "https://www.dlinrt.eu",
+  "https://dlinrteu-website.lovable.app",
+  "https://id-preview--7e82abf4-4ab2-47b7-8256-c0abaf5b5420.lovable.app",
   "http://localhost:5173",
   "http://localhost:3000",
 ];
 
 function getCorsHeaders(origin: string | null): HeadersInit {
-  const isAllowed = origin && (ALLOWED_ORIGINS.includes(origin) || origin.endsWith(".lovable.app"));
+  const isAllowed = !!origin && ALLOWED_ORIGINS.includes(origin);
   return {
-    'Access-Control-Allow-Origin': isAllowed ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Origin': isAllowed ? origin! : ALLOWED_ORIGINS[0],
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Credentials': 'true',
   };
