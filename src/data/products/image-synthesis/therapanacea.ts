@@ -116,8 +116,9 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     version: "3.2.0",
     releaseDate: "2021",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-09-23",
     keyPapers: [
+    {"doi": "10.1186/s13014-023-02336-y", "title": "Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy", "authors": "Autret D et al.", "journal": "Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre comparison of four commercial sCT generators; dosimetric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
       {"doi":"10.3389/fonc.2023.1245054","pmid":"38023165","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J, Gungor G, Gevaert T, et al.","journal":"Frontiers in Oncology","year":"2023","link":"https://doi.org/10.3389/fonc.2023.1245054","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre clinical evaluation of the TheraPanacea pseudo-CT model for low-field pelvic MRI; developed with the vendor.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
       {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
       {"doi":"10.1002/acm2.70725","pmid":"42547906","title":"Image-based evaluation of a commercial AI synthetic CT generator for brain and prostate MR-only radiotherapy","authors":"Aire M, Matthews C, Jones J, et al.","journal":"Journal of Applied Clinical Medical Physics","year":"2026","link":"https://doi.org/10.1002/acm2.70725","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent image-quality and geometric-surrogate characterisation of the FDA-cleared AI sCT generator.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
@@ -147,6 +148,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       },
     },
     evidence: [
+      {"type": "Multi-vendor Comparative Study", "description": "Autret D et al. Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy. Radiat Oncol 2023. Single-centre comparison of four commercial sCT generators; dosimetric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1186/s13014-023-02336-y"},
       {
         type: "Multicenter Study",
         description: "International retrospective multi-centric study across 8 institutions of pelvic (TrueFisp 0.35T) and brain MR pseudo-CT generation with ART-Plan/MR-Box. Frontiers in Oncology 2023.",
