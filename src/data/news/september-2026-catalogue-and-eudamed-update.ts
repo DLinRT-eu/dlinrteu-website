@@ -23,7 +23,7 @@ Devices in the same FDA product codes without a deep-learning claim (bolus, dose
 - Four clearance records brought up to date, with earlier clearances retained in the entry history: **[AutoContour](/product/radformation-autocontour)** (K262452, RADAC V6), **[AI Contouring for Eclipse](/product/varian-eclipse-ai-contouring)** (K261306, VA10A), **[OncoStudio](/product/oncosoft-oncostudio)** (K260528, broadened indications) and **[AI-Rad Companion Organs RT](/product/siemens-ai-rad-companion)** (K252548, VA70 plus MR brain metastases and OAR models).
 - **[MIM Contour ProtégéAI+](/product/mim-contour-protegeai)** updated to CE 1.3.2 / FDA 2.0.0 with a **versioned structure list**: dashboards and comparisons now count only the current version.
 - The **MVision portfolio** was reconciled end to end — structure lists rebuilt from vendor documentation, bundled bilateral structures counted as two, and breast and cervical entries reclassified between target and elective categories.
-- **Structure counts are now distinct per vendor** across the dashboards and the [structure comparison](/compare) page. Previously every model-specific entry was counted separately, which inflated the figures; the catalog now reports 2,473 organs at risk, 36 targets and 526 elective structures.
+- **Structure counts are now distinct per vendor** across the dashboards and the [structure comparison](/compare/structures) page. Previously every model-specific entry was counted separately, which inflated the figures; the catalog now reports 2,473 organs at risk, 36 targets and 526 elective structures.
 
 ## 🇪🇺 EUDAMED verification now live
 
