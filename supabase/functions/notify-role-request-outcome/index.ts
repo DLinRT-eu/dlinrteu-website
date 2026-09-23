@@ -180,13 +180,13 @@ const handler = async (req: Request): Promise<Response> => {
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
-    const { userId, email, firstName, role, approved, rejectionReason } = parsed.data;
+    const { userId, firstName, role, approved, rejectionReason } = parsed.data;
 
     // Escaped versions for safe HTML interpolation
     const safeFirstName = escapeHtml(firstName);
     const safeRejectionReason = rejectionReason ? escapeHtml(rejectionReason) : undefined;
 
-    console.log(`Processing role request ${approved ? 'approval' : 'rejection'} for:`, email, 'role:', role);
+    console.log(`Processing role request ${approved ? 'approval' : 'rejection'} for role:`, role);
 
     // Check notification preferences (registration_updates category)
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -195,9 +195,20 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { data: targetProfile } = await supabase
       .from("profiles")
-      .select("notification_preferences")
+      .select("email, notification_preferences")
       .eq("id", userId)
       .single();
+
+    // The recipient is always the address stored on the profile, never a
+    // caller-supplied address.
+    const email = targetProfile?.email;
+    if (!email) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'Recipient profile not found' }),
+        { status: 404, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
 
     const prefs = (targetProfile?.notification_preferences as any) || {};
     const categoryPrefs = prefs?.categories?.registration_updates;
