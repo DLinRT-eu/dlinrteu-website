@@ -67,7 +67,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Account deletion requested for user: ${user.id} (${user.email})`);
+    console.log('Account deletion requested by authenticated user');
 
     // Parse request body for password verification
     const { password } = await req.json();

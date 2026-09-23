@@ -4,19 +4,19 @@ import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 
 const MAX_UNUSED_CODES = 10;
 
+const ALLOWED_ORIGINS = [
+  'https://dlinrt.eu',
+  'https://www.dlinrt.eu',
+  'https://lovable.dev',
+  'https://dlinrteu-website.lovable.app',
+  'https://id-preview--7e82abf4-4ab2-47b7-8256-c0abaf5b5420.lovable.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
 const getAllowedOrigin = (req: Request) => {
   const origin = req.headers.get('origin') || '';
-  const allowedOrigins = [
-    'https://dlinrt.eu',
-    'https://www.dlinrt.eu',
-    'https://lovable.dev',
-    /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
-  ];
-  for (const allowed of allowedOrigins) {
-    if (typeof allowed === 'string' && origin === allowed) return origin;
-    if (allowed instanceof RegExp && allowed.test(origin)) return origin;
-  }
-  return 'https://dlinrt.eu';
+  return ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
 };
 
 const corsHeaders = (req: Request) => ({
