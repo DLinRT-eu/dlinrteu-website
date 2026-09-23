@@ -31,6 +31,8 @@ import {
   Loader2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { buildBundles, ProductBundle } from '@/utils/draftBundling';
+import { ProductEditBundle, BundleDecision } from '@/components/admin/edit-bundles/ProductEditBundle';
 
 interface EditDraft {
   id: string;
@@ -67,6 +69,7 @@ export default function EditApprovals() {
   const [syncingId, setSyncingId] = useState<string | null>(null);
   const [testingAccess, setTestingAccess] = useState(false);
   const [accessResult, setAccessResult] = useState<any | null>(null);
+  const [bundleSubmitting, setBundleSubmitting] = useState<string | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -305,6 +308,58 @@ export default function EditApprovals() {
   const rejectedDrafts = drafts.filter(d => d.status === 'rejected');
   const allOtherDrafts = drafts.filter(d => !['pending_review', 'approved', 'rejected'].includes(d.status));
 
+  const bundles = buildBundles(
+    pendingDrafts.map(d => ({ ...d, draft_data: d.draft_data as unknown as Record<string, unknown> })),
+    id => ALL_PRODUCTS.find(p => p.id === id),
+  );
+
+  const approveBundle = async (bundle: ProductBundle, merged: Record<string, unknown>, decisions: BundleDecision[]) => {
+    if (!user) return;
+    setBundleSubmitting(bundle.productId);
+    try {
+      const accepted = decisions.filter(d => d.decision === 'accept').map(d => d.path);
+      const rejected = decisions.filter(d => d.decision === 'reject');
+      const now = new Date().toISOString();
+      const { data: combined, error: insErr } = await supabase
+        .from('product_edit_drafts')
+        .insert({
+          product_id: bundle.productId,
+          created_by: user.id,
+          draft_data: merged as never,
+          changed_fields: accepted,
+          edit_summary: `Bundled review of ${bundle.drafts.length} edits (${bundle.drafts.map(d => d.id.slice(0, 8)).join(', ')})`,
+          status: 'approved',
+          reviewed_by: user.id,
+          reviewed_at: now,
+        })
+        .select()
+        .single();
+      if (insErr || !combined) throw insErr ?? new Error('Failed to create bundle');
+
+      const rejectionNote = rejected.length
+        ? ` Rejected fields: ${rejected.map(r => `${r.path}${r.reason ? ` (${r.reason})` : ''}`).join('; ')}.`
+        : '';
+      const { error: updErr } = await supabase
+        .from('product_edit_drafts')
+        .update({
+          status: 'approved',
+          reviewed_by: user.id,
+          reviewed_at: now,
+          review_feedback: `Merged into bundle ${combined.id}.${rejectionNote}`,
+        })
+        .in('id', bundle.drafts.map(d => d.id));
+      if (updErr) throw updErr;
+
+      toast({ title: 'Bundle approved', description: 'Creating GitHub pull request…' });
+      await syncToGitHub(combined.id);
+    } catch (error: any) {
+      toast({ title: 'Error', description: error.message ?? 'Failed to approve bundle', variant: 'destructive' });
+    } finally {
+      setBundleSubmitting(null);
+      fetchDrafts();
+    }
+  };
+
   if (loading || authLoading) {
     return (
       <PageLayout>
@@ -409,8 +464,14 @@ export default function EditApprovals() {
         </Card>
 
 
-        <Tabs defaultValue="pending" className="space-y-4">
+        <Tabs defaultValue="bundles" className="space-y-4">
           <TabsList>
+            <TabsTrigger value="bundles" className="gap-2">
+              By product
+              {bundles.length > 0 && (
+                <Badge variant="secondary" className="ml-1">{bundles.length}</Badge>
+              )}
+            </TabsTrigger>
             <TabsTrigger value="pending" className="gap-2">
               Pending Review
               {pendingDrafts.length > 0 && (
@@ -421,6 +482,29 @@ export default function EditApprovals() {
             <TabsTrigger value="rejected">Rejected</TabsTrigger>
             <TabsTrigger value="all">All Drafts</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="bundles" className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Pending edits are combined per product; for each field the newest value wins. Check every field, then approve the bundle to open one pull request.
+            </p>
+            {bundles.length === 0 ? (
+              <Card><CardContent className="py-8 text-center text-muted-foreground">No pending edits</CardContent></Card>
+            ) : (
+              bundles.map(b => {
+                const current = getOriginalProduct(b.productId);
+                return (
+                  <ProductEditBundle
+                    key={b.productId}
+                    bundle={b}
+                    productName={current ? `${current.name} (${current.company})` : b.productId}
+                    currentProduct={current as unknown as Record<string, unknown> | undefined}
+                    submitting={bundleSubmitting === b.productId}
+                    onApprove={(merged, decisions) => approveBundle(b, merged, decisions)}
+                  />
+                );
+              })
+            )}
+          </TabsContent>
 
           <TabsContent value="pending" className="space-y-4">
             {pendingDrafts.length === 0 ? (
