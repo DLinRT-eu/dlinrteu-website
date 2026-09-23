@@ -86,6 +86,64 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2023",
       distributionChannels: ["Direct sales", "Cloud platform", "Distributors"]
     },
+    dosePredictionModels: [
+      {
+        name: "Cervical cancer dose prediction model",
+        anatomicalSite: "Cervix / pelvis",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 4500 cGy. Prediction inputs: PCTV, bladder, rectum, small intestine and body, with bone marrow, femoral heads and spinal cord as additional organs at risk. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Esophageal cancer dose prediction model",
+        anatomicalSite: "Esophagus / thorax",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 5600 cGy. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Rectal cancer dose prediction model",
+        anatomicalSite: "Rectum / pelvis",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 5200 cGy. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Nasopharyngeal carcinoma dose prediction model — stage I",
+        anatomicalSite: "Nasopharynx / head & neck",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 7100 cGy. Targets PTV-GTV, PTV-1 and PTV-2 with approximately 25 head-and-neck organs at risk. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Nasopharyngeal carcinoma dose prediction model — stage II",
+        anatomicalSite: "Nasopharynx / head & neck",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 7000 cGy. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Nasopharyngeal carcinoma dose prediction model — stage III",
+        anatomicalSite: "Nasopharynx / head & neck",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 7100 cGy. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      },
+      {
+        name: "Nasopharyngeal carcinoma dose prediction model — stage IV",
+        anatomicalSite: "Nasopharynx / head & neck",
+        technique: "IMRT/VMAT",
+        intent: "Curative",
+        description: "Prescription 7000 cGy. Source: Manteia 'Details of Dose Prediction Models' (vendor-provided, retrieved 2026-09-23).",
+        status: "approved"
+      }
+    ],
     version: "3.0",
     releaseDate: "2023-07-10",
     evidenceRigor: "E0",
