@@ -215,7 +215,7 @@ const handler = async (req: Request): Promise<Response> => {
           resendId: resendMessageId(response),
         });
       } catch (emailErr) {
-        console.error(`Failed to send digest to ${profile.email}:`, emailErr);
+        console.error(`Failed to send digest to user ${profile.id}:`, (emailErr as Error).message);
         emailsFailed++;
         await logEmailSend(adminClient, {
           functionName: "send-notification-digest",
