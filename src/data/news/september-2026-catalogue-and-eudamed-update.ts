@@ -3,7 +3,6 @@ import { NewsItem } from "@/types/news";
 export const september2026CatalogueAndEudamedUpdate: NewsItem = {
   id: "september-2026-catalogue-and-eudamed-update",
   date: "2026-09-23",
-  linkedinPostUrl: "", // TODO: add URL once posted
   title: "New Products, EUDAMED Verification Live, Evidence-by-Source Exports · AIinRT 2027 Abstracts Open",
   summary:
     "Summer round-up: two newly cleared FDA products added, the MVision portfolio split into standalone entries, automated EUDAMED verification of companies and products now live on the site, per-publication evidence exports released, and abstract submission open for AIinRT 2027.",
@@ -49,35 +48,10 @@ One important caveat: registration in EUDAMED only became mandatory on **28 May 
 
 ## 🙋 Still open: review round and certification
 
-- The next **review round runs 1 November – 15 December 2026**. Many hands make the workload lighter — if you can spare a few hours, [get in touch](/support).
+- The next **review round runs 1 November – 15 December 2026**. Next to verifying entries as usual, a focus of this round is to **double-check evidence levels where the evidence rests on a single source** — entries scored from one publication or one source only. Many hands make the workload lighter; if you can spare a few hours, [get in touch](/support).
+- Pending the publication of a paper, **one product review may be anticipated** — this is still under discussion and will be confirmed in due course.
 - The **company certification round remains open**. Manufacturer-verified entries carry the green **"Verified by Company"** badge; an outdated certification shows amber until the manufacturer re-verifies.
 
----
-
-## 📣 LinkedIn post (draft)
-
-*Draft copy for the accompanying LinkedIn post — pending review before publication.*
-
-> **DLinRT.eu September update — European regulatory verification is live.**
->
-> Our catalog of AI products in radiotherapy is now cross-checked against the public EUDAMED database: 15 companies with their official registration (10 with certificate and notified-body numbers) and 12 products showing their Basic UDI-DI and EU risk class, each with a public record link and the date checked. Three risk-class discrepancies were investigated and resolved.
->
-> Also new since July:
-> • RadOncAI (InformAI, FDA K253050) and DeepBT Detector-Plus (Aitewan, FDA K252190) added
-> • MVision Image+ and Adapt+ now standalone entries
-> • Four clearance records updated; MIM Contour ProtégéAI+ structure lists versioned
-> • Structure counts corrected to distinct structures per vendor
-> • New evidence-by-source export: every publication behind a score, with its rating and a DOI or link — 244 sources across 88 products
->
-> 📅 AIinRT 2027 (1–2 April 2027, Princess Máxima Center, Utrecht): abstract submission is open — aiinrt.org
->
-> 🙋 Our next review round runs 1 November – 15 December 2026. Reviewers welcome.
->
-> Full update: https://dlinrt.eu/news/september-2026-catalogue-and-eudamed-update
->
-> #RadiationOncology #MedicalPhysics #ArtificialIntelligence #EUDAMED #MDR #RadiotherapyAI
-
----
 
 *Spotted something inaccurate or missing? Contact us at info@dlinrt.eu.*
 `,
