@@ -15,7 +15,7 @@ Update the three Manteia entries (AccuContour, MOZI TPS, AccuLearning) with the 
 ## MOZI TPS (Treatment Planning)
 
 - Add the seven dose-prediction models from the vendor sheet: cervix 4500 cGy, oesophagus 5600 cGy, rectum 5200 cGy, and nasopharynx stages I–IV (7100/7000/7100/7000 cGy), each with its target and organ set.
-- Describe the Smart Optimization Engine: experience-guided supervisory loop over the native optimiser, automatic overlap-split and ring support structures, Monte Carlo recalculation, tested for IMRT and VMAT on eleven sites under conventional fractionation. Record the white paper's caution that hypofractionated and stereotactic plans need stricter review and case-specific adjustment, and add it as a limitation.
+- Describe the Smart Optimization Engine if this is proven to be working with AI, otherwise do not consider (re-chevk our inclusion criteria): experience-guided supervisory loop over the native optimiser, automatic overlap-split and ring support structures, Monte Carlo recalculation, tested for IMRT and VMAT on eleven sites under conventional fractionation. Record the white paper's caution that hypofractionated and stereotactic plans need stricter review and case-specific adjustment, and add it as a limitation.
 - Record the evaluated planning setting (3 mm dose grid, Monte Carlo at 2% uncertainty, 20 iterations, ~13–28 min per case) as vendor-provided technical evaluation, explicitly not a clinical validation.
 - Keep the current evidence scores; add papers from the list that name MOZI as scored key papers only where a DOI resolves, abstracts as unscored items.
 
