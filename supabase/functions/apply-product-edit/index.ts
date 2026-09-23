@@ -348,14 +348,10 @@ function resolveFilePath(product: Record<string, unknown>): string {
   if (category === 'clinical-prediction' || category === 'clinical-decision-support') {
     return 'src/data/products/clinical-prediction.ts';
   }
-  if (category === 'registration') {
-    return 'src/data/products/registration/index.ts';
-  }
-
-  // Standard category/company structure
+  // Standard category/company structure (never an index.ts aggregator file)
   const path = `src/data/products/${category}/${company}.ts`;
-  if (!path.startsWith('src/data/products/')) {
-    throw new Error('Resolved file path is outside products directory');
+  if (!path.startsWith('src/data/products/') || path.endsWith('/index.ts')) {
+    throw new Error('Resolved file path is not a product data file');
   }
   return path;
 }
