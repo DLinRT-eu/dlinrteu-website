@@ -655,16 +655,19 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     keyPapers: [
     {"doi":"10.3389/fonc.2022.833816","title":"AccuContour clinical evaluation","authors":"Wang J et al.","journal":"Front Oncol","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints."},
     {"doi": "10.3389/fonc.2024.1375096", "title": "Clinical validation of commercial deep-learning based auto-segmentation models for organs at risk in the head and neck region: a single institution study", "authors": "Johnson CL et al.", "journal": "Front. Oncol.", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-institution head-and-neck validation of two commercial systems for 22 OARs; AccuContour explicitly included.", "vendorIndependent": true},
-    {"doi": "10.1038/s41598-025-33567-6", "title": "Consistency evaluation and performance optimization of deep learning-based auto-contouring for nasopharyngeal carcinoma", "authors": "Yan L et al.", "journal": "Sci Rep", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre consistency evaluation of four commercial models for nasopharyngeal structures.", "vendorIndependent": true}
+    {"doi": "10.1038/s41598-025-33567-6", "title": "Consistency evaluation and performance optimization of deep learning-based auto-contouring for nasopharyngeal carcinoma", "authors": "Yan L et al.", "journal": "Sci Rep", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre consistency evaluation of four commercial models for nasopharyngeal structures.", "vendorIndependent": true},
+    {"doi": "10.1016/j.radonc.2022.11.004", "title": "Patient-specific daily updated deep learning auto-segmentation for MRI-guided adaptive radiotherapy", "authors": "Li Z, Zhang W, Li B, et al.", "journal": "Radiother Oncol", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Six-patient longitudinal MRgART series with measured contouring and adaptive session times; Manteia co-authored.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
   ],
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature",
+    lastRevised: "2026-09-23",
+    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature. 2026-09-23: manufacturer-supplied documentation added (vendor-provided, retrieved 2026-09-23) — 'AccuContour ROI full list' (411 model entries, 397 distinct TG-263 ROI names), 'MRI organs list' (88-ROI MRI model plus brain MRI target model), 'Technical Sheet: Contouring Guidelines in AccuContour' and a publication summary of 81 records.",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",
       "Pediatric performance was not established in the reviewed direct AccuContour clinical validation studies",
       "Requires manual verification and editing in complex anatomical regions",
-      "Vendor advertises >300 OARs, >20 tumor targets, and use in >1200 worldwide centers; the complete model atlas and per-structure validation matrix are not publicly enumerated on the vendor page.",
+      "The structure library is the manufacturer-supplied list of 2026-09-23: 397 distinct CT ROI names (392 listed here, 5 unresolved vendor abbreviations omitted) and 91 MRI ROI names. A per-structure validation matrix is not published, so accuracy per structure cannot be verified.",
+      "MRI ROI models are listed by the manufacturer, while the cleared indication (FDA K251351) covers CT input; MRI use requires local validation.",
+      "Contouring guideline references are supplied per structure by the manufacturer and are not independently verified; several structures are referenced to anatomical atlases rather than radiotherapy consensus guidelines.",
       "Public EU MDR/CE certificate details were not located during this audit.",
       "K251351 compatible contouring input is non-contrast CT DICOM 3.0, including original CT and synthetic CT; contrast-enhanced or unusual imaging workflows require local validation."
     ]
