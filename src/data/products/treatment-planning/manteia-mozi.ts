@@ -167,9 +167,9 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         relationship: "AccuLearning is Manteia's custom model training platform. Models trained in AccuLearning can be deployed into MOZI TPS for site-specific contouring and planning workflows."
       }
     ],
-    lastUpdated: "2026-06-19",
-    lastRevised: "2026-06-19",
-    source: "FDA 510(k) database (K223724), manufacturer official website",
+    lastUpdated: "2026-09-23",
+    lastRevised: "2026-09-23",
+    source: "FDA 510(k) database (K223724), manufacturer official website. 2026-09-23: manufacturer documentation added (vendor-provided, retrieved 2026-09-23) — 'Details of Dose Prediction Models' (7 models), 'Smart Optimization Engine (SOE) Technical White Paper' v1 for MOZI TPS 4.0.7, and a publication summary of 81 records.",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
       {
@@ -177,6 +177,22 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         description: "FDA 510(k) clearance K223724 received January 3, 2023 - Class II device under 21 CFR 892.5050",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
       },
+      {
+        type: "Manufacturer Documentation (vendor-provided)",
+        description: "Manteia 'Details of Dose Prediction Models' — source for the seven deep-learning dose-prediction models listed above (cervix 4500 cGy, esophagus 5600 cGy, rectum 5200 cGy, nasopharynx stages I–IV 7100/7000/7100/7000 cGy) with their target and organ-at-risk sets. Vendor-provided, retrieved 2026-09-23; not publicly published and not independently verified.",
+        link: "https://www.manteiamedical.com/mozi"
+      },
+      {
+        type: "Manufacturer Publication List (vendor-provided)",
+        description: "Manteia publication summary supplied 2026-09-23 (vendor-provided, retrieved 2026-09-23): of 81 records naming Manteia systems, 22 name MOZI alone and 43 name MOZI together with AccuContour. Most are algorithm-development studies (dose calculation, registration, radiomics) rather than evaluations of the marketed MOZI TPS, and the list marks 40 records as 'in development'; none was found to evaluate the cleared MOZI TPS product, so the evidence scores are unchanged. Abstracts and posters are listed for transparency and are not scored.",
+        link: "https://www.manteiamedical.com/mozi"
+      }
+    ],
+    limitations: [
+      "The Smart Optimization Engine (SOE) described in the manufacturer's white paper (v1, MOZI TPS 4.0.7, vendor-provided, retrieved 2026-09-23) is a deterministic rule-based constraint-adjustment layer — the document states it is not implemented as a machine-learning model. It is therefore not recorded as an AI feature of this entry under the catalogue's AI/deep-learning inclusion threshold; MOZI TPS is listed for its deep-learning auto-contouring and dose prediction.",
+      "The SOE white paper's technical evaluation covers conventionally fractionated IMRT and VMAT plans only; the manufacturer advises stricter clinical review and case-specific manual adjustment for hypofractionated and stereotactic plans.",
+      "Dose-prediction model details are vendor-provided and not publicly published; per-model performance is not disclosed and requires local validation before clinical use.",
+      "No peer-reviewed publication evaluating the marketed MOZI TPS was identified (evidence rigor E0)."
     ],
   }
 ];
