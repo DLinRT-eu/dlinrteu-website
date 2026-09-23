@@ -104,6 +104,17 @@ serve(async (req) => {
           status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
+      // Test sends may only go to the requesting admin or an official project mailbox,
+      // so the sending domain cannot be used to mail arbitrary third parties.
+      const selfEmail = (user.email || "").trim().toLowerCase();
+      const isOwnAddress = selfEmail.length > 0 && recipient === selfEmail;
+      const isProjectAddress = recipient.endsWith("@dlinrt.eu");
+      if (!isOwnAddress && !isProjectAddress) {
+        return new Response(
+          JSON.stringify({ error: "Test sends are only allowed to your own address or a @dlinrt.eu address" }),
+          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
       const html = renderNewsletterHtml({
         subject,
         preheader,
