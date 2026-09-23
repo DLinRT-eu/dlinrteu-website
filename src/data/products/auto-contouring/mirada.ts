@@ -71,9 +71,9 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Discontinued - no longer actively marketed"]
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I1",
+    clinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Brouwer 2020, Choi 2020 and Zhu 2021 entries were removed as scored papers — their stored DOIs resolve to unrelated articles on Crossref and no matching publication could be verified. Only Doolan 2023 (doi:10.3389/fonc.2023.1213068), an independent multi-system benchmark with geometric endpoints, remains, so the effective score is E2/I1.",
-    clinicalImpactNotes: "Impact lowered to I1: the single verified publication reports geometric accuracy only. Product now discontinued.",
+    clinicalImpactNotes: "Raised to I2 in the 2026-09-23 HAIR cross-check: a multi-centre UK study reports contouring time savings (doi:10.1016/j.phro.2022.11.003) and a replanning study reports dosimetric endpoints (doi:10.1016/j.meddos.2025.04.004). Product now discontinued.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: true,

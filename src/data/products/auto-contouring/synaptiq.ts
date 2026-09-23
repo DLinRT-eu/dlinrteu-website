@@ -29,7 +29,7 @@ export const MediqRT: ProductDetails = {
       usesAI: true,
       notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy.",
       evidenceRigor: "E1",
-      clinicalImpact: "I1",
+      clinicalImpact: "I2",
     },
     "Registration": {
       usesAI: true,
@@ -174,7 +174,7 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Brachytherapy"
   ],
   evidenceRigorNotes: "Peer-reviewed journal publication in PHIRO (doi:10.1016/j.phro.2026.100935) plus six conference abstracts (ESTRO 2023, 2024, 2025). Single-center/vendor-associated studies; not independently validated across multiple sites.",
-  clinicalImpactNotes: "No published clinical impact data. Product in investigation phase only. Published evidence is comparative technical analysis.",
+  clinicalImpactNotes: "Raised to I2 in the 2026-09-23 HAIR cross-check: a single-centre head-and-neck study reports dose compliance of secondary OARs with Mediq RT contours (doi:10.3390/diagnostics16111748). No patient-outcome data.",
   secondaryCategories: ["Registration"],
   supportedStructures: [
     "Head & Neck: Brain",
