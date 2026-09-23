@@ -27,7 +27,7 @@ export const MediqRT: ProductDetails = {
   categoryEvidence: {
     "Auto-Contouring": {
       usesAI: true,
-      notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy.",
+      notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy, plus a 2026 H&N secondary-OAR dose-compliance study (doi:10.3390/diagnostics16111748).",
       evidenceRigor: "E1",
       clinicalImpact: "I2",
     },
@@ -150,7 +150,7 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
   certification: "CE",
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "I2",
   diseaseTargeted: [
     "Brain tumours (glioblastoma, astrocytoma, etc.)",
     "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",
