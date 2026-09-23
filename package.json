@@ -116,6 +116,7 @@
     "mdast-util-to-hast": "^13.2.1",
     "postcss": "^8.5.23",
     "dompurify": "^3.4.13",
-    "fflate": "^0.8.3"
+    "fflate": "^0.8.3",
+    "image-size": "^2.0.4"
   }
 }
