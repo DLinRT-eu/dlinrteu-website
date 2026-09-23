@@ -4,6 +4,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
   {
     id: "mvision-image-plus",
     name: "Image+",
+    version: "1.0.2",
     company: "MVision AI",
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/image/",
@@ -43,7 +44,7 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     },
     technology: {
       integration: ["Workspace+", "PACS", "TPS via DICOM"],
-      deployment: ["Cloud-based"],
+      deployment: ["Cloud-based", "On-premise"],
       triggerForAnalysis: "Manual or automated within Workspace+",
       processingTime: "Minutes per case (vendor-reported)"
     },
@@ -138,6 +139,6 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
       "No public disclosure of training or evaluation data for this module"
     ],
     source:
-      "MVision AI Image+ product page (https://mvision.ai/image/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14, with the VCU thesis and vendor synthetic CT article retrieved that date. Entry created 2026-09-13 by splitting the Image+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Image Synthesis'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Image+-specific release date is published. 2026-09-23: added two peer-reviewed JACMP papers (DOIs 10.1002/acm2.70571, 10.1002/acm2.70765; authors/affiliations checked via Crossref) and rescored E1/I1. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
+      "MVision AI Image+ product page (https://mvision.ai/image/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14, with the VCU thesis and vendor synthetic CT article retrieved that date. Entry created 2026-09-13 by splitting the Image+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Image Synthesis'] blocks. releaseDate proxied from the Workspace+ CE certification date (2025-10-21); no Image+-specific release date is published. 2026-09-23: added two peer-reviewed JACMP papers (DOIs 10.1002/acm2.70571, 10.1002/acm2.70765; authors/affiliations checked via Crossref) and rescored E1/I1. version 1.0.2 and on-premise deployment are vendor-provided (merged 2026-09-23 from the approved representative edits). trainingData and evaluationData intentionally omitted: no disclosed source describes them."
   }
 ];
