@@ -150,7 +150,7 @@ const handler = async (req: Request): Promise<Response> => {
       }), { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } });
     }
 
-    console.log("Sending email to:", profile.email);
+    console.log("Sending assignment email for reviewer:", reviewerId);
 
     const dashboardUrl = "https://dlinrt.eu/reviewer/dashboard";
 
