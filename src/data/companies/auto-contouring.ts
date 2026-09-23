@@ -108,7 +108,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
       "lastVerified": "2026-09-22"
     },
     "name": "Manteia",
-    "description": "Canadian company developing AI solutions for radiation oncology.",
+    "description": "Chinese company developing AI solutions for radiation oncology.",
     "website": "https://manteia.ca/",
     "productIds": [
       "manteia-accucontour",
