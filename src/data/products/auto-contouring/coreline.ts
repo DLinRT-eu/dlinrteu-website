@@ -79,7 +79,7 @@ const rawProduct: ProductDetails = {
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-09-23",
   keyPapers: [
     {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
     {doi: "10.1186/s13014-021-01923-1", title: "Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy", authors: "Byun HK et al.", journal: "Radiat Oncol", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
@@ -176,6 +176,7 @@ const rawProduct: ProductDetails = {
   evidenceProspective: false,
   evidenceExternalValidation: true,
   evidence: [
+      {"type": "Peer-reviewed Publication", "description": "Lee W et al. Quality assurance incorporating artificial intelligence-generated reference contours in a phase II radiotherapy trial. Physics and Imaging in Radiation Oncology 2026. Uses a customised version of the AVIEW engine for trial RTQA reference contours; listed, not scored as the cleared product. Listed for transparency, not scored. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2026.100949"},
     {
       type: "Peer-reviewed Publication",
       description: "Lee et al. Experience of implementing DL auto-contouring in breast RT planning: insights from over 2,000 cases. IJROBP 2024.",
