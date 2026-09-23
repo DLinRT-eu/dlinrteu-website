@@ -138,15 +138,27 @@ Deno.serve(async (req) => {
 
     const typedDraft = draft as ProductEditDraft;
 
-    // Generate file path based on product category and company
-    const filePath = resolveFilePath(typedDraft.draft_data);
-    
-    // Generate TypeScript code
-    const productCode = generateProductCode(typedDraft.draft_data);
-
     // GitHub repository info
     const owner = 'DLinRT-eu';
     const repo = 'dlinrteu-website';
+
+    // Locate the file that actually defines this product and splice only its object
+    const filePath = resolveFilePath(typedDraft.draft_data);
+    const sourceRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}?ref=main`,
+      { headers: { Authorization: `Bearer ${githubToken}`, Accept: 'application/vnd.github.raw+json' } }
+    );
+    const existingSource = sourceRes.ok ? await sourceRes.text() : '';
+    const productCode = spliceProductObject(existingSource, typedDraft.product_id, typedDraft.draft_data);
+    if (!productCode) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: `Product "${typedDraft.product_id}" was not found in ${filePath}. Nothing was committed; fix the product's githubUrl or apply the edit manually.`,
+        }),
+        { status: 422, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     const timestamp = Math.floor(Date.now() / 1000);
     const branchName = `visual-edit/${typedDraft.product_id}/${timestamp}`;
 
@@ -333,27 +345,38 @@ ${typedDraft.edit_summary ? `### Summary\n${typedDraft.edit_summary}` : ''}
 });
 
 function resolveFilePath(product: Record<string, unknown>): string {
-  const category = String(product.category || '').toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-  const company = String(product.company || '').toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
+  const url = String(product.githubUrl || '');
+  const m = url.match(/\/(?:tree|blob)\/main\/(src\/data\/products\/[A-Za-z0-9_\-/]+\.ts)$/);
+  if (m && !m[1].includes('..') && !m[1].endsWith('/index.ts')) return m[1];
+  throw new Error('Product githubUrl does not point to a product data file');
+}
 
-  if (!category || !company) {
-    throw new Error('Invalid category or company in draft data');
+// Replace the object literal whose `id` matches productId; returns null if not found.
+function spliceProductObject(source: string, productId: string, product: Record<string, unknown>): string | null {
+  if (!source) return null;
+  const idRe = new RegExp(`\\bid:\\s*["']${productId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`);
+  const idMatch = idRe.exec(source);
+  if (!idMatch) return null;
+  let depth = 0, start = -1;
+  for (let k = idMatch.index; k >= 0; k--) {
+    const c = source[k];
+    if (c === '}') depth++;
+    else if (c === '{') { if (depth === 0) { start = k; break; } depth--; }
   }
-
-  // Special cases for single-file categories
-  if (category === 'clinical-prediction' || category === 'clinical-decision-support') {
-    return 'src/data/products/clinical-prediction.ts';
+  if (start < 0) return null;
+  let end = -1; depth = 0;
+  let inStr: string | null = null;
+  for (let k = start; k < source.length; k++) {
+    const c = source[k];
+    if (inStr) { if (c === '\\') { k++; continue; } if (c === inStr) inStr = null; continue; }
+    if (c === '"' || c === "'" || c === '`') { inStr = c; continue; }
+    if (c === '{') depth++;
+    else if (c === '}') { depth--; if (depth === 0) { end = k; break; } }
   }
-  // Standard category/company structure (never an index.ts aggregator file)
-  const path = `src/data/products/${category}/${company}.ts`;
-  if (!path.startsWith('src/data/products/') || path.endsWith('/index.ts')) {
-    throw new Error('Resolved file path is not a product data file');
-  }
-  return path;
+  if (end < 0) return null;
+  const lineStart = source.lastIndexOf('\n', start) + 1;
+  const indent = Math.floor((start - lineStart) / 2);
+  return source.slice(0, start) + serializeValue(product, indent) + source.slice(end + 1);
 }
 
 function generateProductCode(product: Record<string, unknown>): string {
