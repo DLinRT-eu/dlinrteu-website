@@ -26,11 +26,12 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, AI-driven planning optimization, and built-in deep learning auto-contouring for radiation therapy (auto-contouring validated on 187 patients per FDA K223724).",
     features: ["Monte Carlo dose engine", "GPU-powered computation", "AI-driven optimization", "Built-in auto-contouring", "Vendor independence"],
     category: "Treatment Planning",
+    secondaryCategories: ["Image Synthesis"],
     certification: "CE & FDA",
     logoUrl: "/logos/manteia.png",
     website: "https://www.manteiamedical.com/mozi",
     anatomicalLocation: ["All sites"],
-    modality: ["RT Plan", "CT"],
+    modality: ["RT Plan", "CT", "CBCT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: [
@@ -41,7 +42,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       "Full workflow automation from dose prediction to final plan",
       "Auto-planning models validated on standard protocols",
       "Customizable to clinical goals",
-      "Vendor-independent, fully interoperable system"
+      "Vendor-independent, fully interoperable system",
+      "Deep-learning (RegGAN) conversion of daily CBCT to synthetic CT for offline adaptive re-planning (vendor-reported; see Image Synthesis evidence and limitations)"
     ],
     technicalSpecifications: {
       population: "Adult patients",
@@ -168,7 +170,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-09-23",
-    lastRevised: "2026-09-23",
+    lastRevised: "2026-09-24",
     source: "FDA 510(k) database (K223724), manufacturer official website. 2026-09-23: manufacturer documentation added (vendor-provided, retrieved 2026-09-23) — 'Details of Dose Prediction Models' (7 models), 'Smart Optimization Engine (SOE) Technical White Paper' v1 for MOZI TPS 4.0.7, and a publication summary of 81 records.",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
@@ -192,7 +194,46 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       "The Smart Optimization Engine (SOE) described in the manufacturer's white paper (v1, MOZI TPS 4.0.7, vendor-provided, retrieved 2026-09-23) is a deterministic rule-based constraint-adjustment layer — the document states it is not implemented as a machine-learning model. It is therefore not recorded as an AI feature of this entry under the catalogue's AI/deep-learning inclusion threshold; MOZI TPS is listed for its deep-learning auto-contouring and dose prediction.",
       "The SOE white paper's technical evaluation covers conventionally fractionated IMRT and VMAT plans only; the manufacturer advises stricter clinical review and case-specific manual adjustment for hypofractionated and stereotactic plans.",
       "Dose-prediction model details are vendor-provided and not publicly published; per-model performance is not disclosed and requires local validation before clinical use.",
-      "No peer-reviewed publication evaluating the marketed MOZI TPS was identified (evidence rigor E0)."
+      "No peer-reviewed publication evaluating the marketed MOZI TPS was identified (evidence rigor E0).",
+      "Synthetic CT generation (CBCT to sCT) has not been confirmed as part of the CE or FDA cleared scope; the FDA K223724 intended use covers photon treatment planning only.",
+      "Online adaptive re-planning within MOZI TPS is not documented in the reviewed material; only offline CBCT-based adaptive re-planning is described."
     ],
+    categoryEvidence: {
+      "Image Synthesis": {
+        usesAI: true,
+        notes: "MOZI TPS converts daily CBCT into synthetic CT for offline adaptive re-planning. The conversion is deep learning: the underlying RegGAN model is described in two Manteia co-authored papers that the manufacturer lists as 'Released' for AccuContour and MOZI (vendor publication summary, vendor-provided, retrieved 2026-09-23). MR-to-synthetic-CT is reported only in one ASTRO 2023 abstract and is not listed as a product feature.",
+        evidenceRigor: "E0",
+        evidenceRigorNotes: "2026-09-24: Neither RegGAN paper (Li et al., BMC Cancer 2023; Wang et al., Strahlenther Onkol 2023) names MOZI TPS in its full text (Europe PMC full text checked 2026-09-24); both are Manteia co-authored algorithm studies. They are recorded as supporting evidence and not scored. The ESTRO 2026 clinical presentation is a 4-patient single-centre abstract, also unscored. E0 stands.",
+        clinicalImpact: "I0",
+        clinicalImpactNotes: "2026-09-24: No peer-reviewed dosimetric or workflow endpoint for the synthetic CT function of the marketed MOZI TPS. I0.",
+        evidence: [
+          {
+            type: "Peer-reviewed method paper (not scored — product not named)",
+            description: "Li et al., 'Using RegGAN to generate synthetic CT images from CBCT images acquired with different linear accelerators', BMC Cancer 2023. Training on 100 head-and-neck CBCT/CT pairs, testing on 40 patients from four linacs. Manteia co-authored; does not name MOZI TPS.",
+            link: "https://doi.org/10.1186/s12885-023-11274-7"
+          },
+          {
+            type: "Peer-reviewed method paper (not scored — product not named)",
+            description: "Wang et al., 'Improving CBCT image quality to the CT level using RegGAN in esophageal cancer adaptive radiotherapy', Strahlentherapie und Onkologie 2023. 150 esophageal patients (120 training, 30 testing); higher gamma passing rates on sCT than on CBCT. Manteia co-authored; does not name MOZI TPS.",
+            link: "https://doi.org/10.1007/s00066-022-02039-5"
+          },
+          {
+            type: "Conference presentation (vendor-provided, not scored)",
+            description: "D'Andrea (IRCCS Regina Elena), ESTRO 2026: offline adaptive workflow — daily CBCT, CBCT-to-sCT transformation, MOZI adaptive plan, AI contouring. Dose on sCT vs re-planning CT (Acuros), gamma 3%/3mm: 94.4–97.4% in 2 head-and-neck and 2 lung cases. Slides vendor-provided, retrieved 2026-09-23.",
+            link: "https://www.manteiamedical.com/mozi"
+          },
+          {
+            type: "Conference abstract (not scored)",
+            description: "'A generalized deep learning model for synthetic CT generation based on multi-modal images', ASTRO 2023 (Manteia-led; listed as 'Released' in the vendor publication summary, retrieved 2026-09-23).",
+            link: "https://www.redjournal.org/article/S0360-3016(23)06115-1/fulltext"
+          }
+        ],
+        limitations: [
+          "Synthetic CT function not confirmed within the CE/FDA cleared scope.",
+          "Clinical data limited to a 4-patient single-centre conference presentation.",
+          "MR-to-synthetic-CT supported only by a conference abstract."
+        ]
+      }
+    },
   }
 ];
