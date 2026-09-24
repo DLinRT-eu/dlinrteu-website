@@ -170,7 +170,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-09-23",
-    lastRevised: "2026-09-23",
+    lastRevised: "2026-09-24",
     source: "FDA 510(k) database (K223724), manufacturer official website. 2026-09-23: manufacturer documentation added (vendor-provided, retrieved 2026-09-23) — 'Details of Dose Prediction Models' (7 models), 'Smart Optimization Engine (SOE) Technical White Paper' v1 for MOZI TPS 4.0.7, and a publication summary of 81 records.",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
