@@ -94,6 +94,11 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "First-in-Men Online Adaptive Robotic SBRT for high-risk prostate cancer. Adv Radiat Oncol. 2025 — supporting only (unscored): MIM Protégé v2.0 compared with rigid/deformable propagation on 3 patients for editing time",
+        link: "https://doi.org/10.1016/j.adro.2024.101701"
+      },
       {"type": "Peer-reviewed Publication", "description": "Ates O et al. Comparative Analysis of Atlas and Neural Network Autosegmentation Methods for Pediatric Craniospinal Irradiation With the Development of a Knowledge-Based Quality Assurance Tool. Adv Radiat Oncol 2025. Single-centre paediatric CSI comparison (Atlas, Contour ProtégéAI, in-house AI); geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.adro.2025.101847"},
       {"type": "Peer-reviewed Publication", "description": "Urago Y et al. Evaluation of auto-segmentation accuracy of cloud-based artificial intelligence and atlas-based models. Radiat Oncol 2021. Single-centre comparison of Contour ProtégéAI vs atlas; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1186/s13014-021-01896-1"},
       {"type": "Peer-reviewed Publication", "description": "Nakaichi T et al. Evaluation of segmentation accuracy and the improvement of time effectiveness using deep learning-based segmentation in &lt;sup&gt;177&lt;/sup&gt;Lu-DOTATATE dosimetry. EJNMMI Phys 2026. Uses Contour ProtégéAI for SPECT/CT kidney segmentation in molecular radiotherapy dosimetry, outside the RT-planning use; listed, not scored. MIM co-authors. Listed for transparency, not scored. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1186/s40658-026-00897-x"},

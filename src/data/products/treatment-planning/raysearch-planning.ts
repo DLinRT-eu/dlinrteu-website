@@ -120,6 +120,10 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     version: "2026",
     releaseDate: "2025-05-02",
     keyPapers: [
+      {"doi": "10.1016/j.phro.2023.100494", "title": "A geometry and dose-volume based performance monitoring of artificial intelligence models in radiotherapy treatment planning for prostate cancer", "authors": "", "journal": "Phys Imaging Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name RSL-Prostate-3625-SBRT v3.0.0 deep learning planning model in RayStation 11B; retrospective single-network monitoring; no competing interests declared.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+      {"doi": "10.1002/mp.17682", "title": "Enhancing automated right-sided early-stage breast cancer treatments via deep learning model adaptation without additional training", "authors": "", "journal": "Med Phys", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Full text checked 2026-09-25 (Europe PMC). RayStation 12A deep learning auto-planning adapted for right-sided breast; adapted model then used for clinical plans in 10 further patients. Developed in collaboration with RaySearch, so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": true, "externalValidation": false},
+      {"doi": "10.1016/j.phro.2025.100834", "title": "Evaluation and tuning of a commercial automated planning system for prostate radiotherapy", "authors": "", "journal": "Phys Imaging Radiat Oncol", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). RayStation v12A automatic planning (U-Net dose prediction + dose mimicking) with a manufacturer-supplied baseline model; 318 single-centre prostate plans; no competing interests declared.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+      {"doi": "10.1016/j.phro.2023.100496", "title": "Evaluation of a clinically introduced deep learning model for radiotherapy treatment planning of breast cancer", "authors": "Bakx N, van der Sangen M, Theuws J, Bluemink J, Hurkmans C, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Full text checked 2026-09-25 (Europe PMC). RaySearch 3D U-Net dose prediction model commissioned in RayStation (May 2022), evaluated in clinical use for left-sided breast. First author funded by RaySearch, so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": true, "externalValidation": false},
     {"doi": "10.1016/j.ctro.2025.100933", "title": "A fully automated machine-learning-based workflow for radiation treatment planning in prostate cancer", "authors": "Bolten JH et al.", "journal": "Clin Transl Radiat Oncol", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre fully automated prostate workflow in RayStation (DL segmentation + ML planning).", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
     {"doi": "10.1016/j.phro.2025.100839", "title": "A multi-centre evaluation of deep learning based radiotherapy planning for left-sided node-negative breast cancer", "authors": "Besouw M et al.", "journal": "Physics and Imaging in Radiation Oncology", "year": "2025", "evidenceRigor": "E2", "clinicalImpact": "I2", "rationale": "Multi-centre evaluation of RayStation DL planning for left-sided nodal breast; one author funded by RaySearch.", "vendorIndependent": false, "multiCenter": true, "multiNational": false, "prospective": false, "externalValidation": false},
     {"doi": "10.1016/j.phro.2026.100961", "title": "Automated deep learning segmentation and planning for left-sided breast radiotherapy with minimised adaptations based on dose, TCP and NTCP criteria", "authors": "van Acht N et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre automated DL segmentation and planning for left-sided breast in RayStation.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
@@ -143,6 +147,26 @@ export const RAYSEARCH_PLANNING_PRODUCTS: ProductDetails[] = [
     lastRevised: "2026-09-23",
     source: "FDA 510(k) database (K240398), RaySearch DLP Model Catalogue, RaySearch official website, RayStation v2026 release page",
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "A geometry and dose-volume based performance monitoring of AI models in radiotherapy treatment planning for prostate cancer. Phys Imaging Radiat Oncol. 2023 (RSL-Prostate-3625-SBRT)",
+        link: "https://doi.org/10.1016/j.phro.2023.100494"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Enhancing automated right-sided early-stage breast cancer treatments via deep learning model adaptation without additional training. Med Phys. 2025",
+        link: "https://doi.org/10.1002/mp.17682"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Evaluation and tuning of a commercial automated planning system for prostate radiotherapy. Phys Imaging Radiat Oncol. 2025",
+        link: "https://doi.org/10.1016/j.phro.2025.100834"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Bakx N et al. Evaluation of a clinically introduced deep learning model for radiotherapy treatment planning of breast cancer. Phys Imaging Radiat Oncol. 2023",
+        link: "https://doi.org/10.1016/j.phro.2023.100496"
+      },
       {"type": "Peer-reviewed Publication", "description": "Bolten JH et al. A fully automated machine-learning-based workflow for radiation treatment planning in prostate cancer. Clin Transl Radiat Oncol 2025. Single-centre fully automated prostate workflow in RayStation (DL segmentation + ML planning). (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.ctro.2025.100933"},
       {"type": "Peer-reviewed Publication", "description": "Besouw M et al. A multi-centre evaluation of deep learning based radiotherapy planning for left-sided node-negative breast cancer. Physics and Imaging in Radiation Oncology 2025. Multi-centre evaluation of RayStation DL planning for left-sided nodal breast; one author funded by RaySearch. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2025.100839"},
       {"type": "Peer-reviewed Publication", "description": "van Acht N et al. Automated deep learning segmentation and planning for left-sided breast radiotherapy with minimised adaptations based on dose, TCP and NTCP criteria. Phys Imaging Radiat Oncol 2026. Single-centre automated DL segmentation and planning for left-sided breast in RayStation. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2026.100961"},
