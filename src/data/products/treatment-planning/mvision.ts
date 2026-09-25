@@ -111,7 +111,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-      {"doi": "10.1016/j.phro.2026.100977", "title": "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting", "authors": "", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name Dose+ (MVision AI) compared with RapidPlan for prostate focal boost; single-centre retrospective dosimetric comparison. Done in collaboration with MVision (algorithm and technical support provided), so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
+      {"doi": "10.1016/j.phro.2026.100977", "title": "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting", "authors": "Piliero MA, Angrisani A, Bosetti DG, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name Dose+ (MVision AI) compared with RapidPlan for prostate focal boost; single-centre retrospective dosimetric comparison. Done in collaboration with MVision (algorithm and technical support provided), so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
     ],
     evidence: [
       {
