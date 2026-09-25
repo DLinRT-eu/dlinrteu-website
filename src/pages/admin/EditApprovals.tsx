@@ -339,16 +339,31 @@ export default function EditApprovals() {
       const rejectionNote = rejected.length
         ? ` Rejected fields: ${rejected.map(r => `${r.path}${r.reason ? ` (${r.reason})` : ''}`).join('; ')}.`
         : '';
-      const { error: updErr } = await supabase
-        .from('product_edit_drafts')
-        .update({
-          status: 'approved',
-          reviewed_by: user.id,
-          reviewed_at: now,
-          review_feedback: `Merged into bundle ${combined.id}.${rejectionNote}`,
-        })
-        .in('id', bundle.drafts.map(d => d.id));
-      if (updErr) throw updErr;
+
+      // Per-draft outcome: a draft is rejected only when every field it touched was rejected.
+      const rejectedPaths = new Set(rejected.map(r => r.path));
+      const perDraft = bundle.drafts.map(d => {
+        const touched = bundle.fields.filter(f => f.history.some(h => h.draftId === d.id)).map(f => f.path);
+        const draftRejected = touched.filter(p => rejectedPaths.has(p));
+        const allRejected = touched.length > 0 && draftRejected.length === touched.length;
+        return { id: d.id, allRejected, draftRejected };
+      });
+
+      for (const d of perDraft) {
+        const feedback = d.allRejected
+          ? `Reviewed in bundle ${combined.id}: all changed fields rejected.${rejectionNote}`
+          : `Merged into bundle ${combined.id}.${d.draftRejected.length ? ` Rejected fields from this edit: ${d.draftRejected.join('; ')}.` : ''}${rejectionNote}`;
+        const { error: updErr } = await supabase
+          .from('product_edit_drafts')
+          .update({
+            status: d.allRejected ? 'rejected' : 'approved',
+            reviewed_by: user.id,
+            reviewed_at: now,
+            review_feedback: feedback,
+          })
+          .eq('id', d.id);
+        if (updErr) throw updErr;
+      }
 
       toast({ title: 'Bundle approved', description: 'Creating GitHub pull request…' });
       await syncToGitHub(combined.id);
