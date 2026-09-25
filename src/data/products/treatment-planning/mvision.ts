@@ -110,14 +110,24 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
         status: "approved"
       }
     ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
+    keyPapers: [
+      {"doi": "10.1016/j.phro.2026.100977", "title": "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting", "authors": "Piliero MA, Angrisani A, Bosetti DG, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name Dose+ (MVision AI) compared with RapidPlan for prostate focal boost; single-centre retrospective dosimetric comparison. Done in collaboration with MVision (algorithm and technical support provided), so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
+    ],
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting. Phys Imaging Radiat Oncol. 2026",
+        link: "https://doi.org/10.1016/j.phro.2026.100977"
+      },
+    ],
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
     evidenceRigorNotes:
-      "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified. 2026-08-28 Batch C sweep: all located MVision publications name Contour+ (segmentation), not Dose+. No publication evaluates the dose-prediction product. E0 stands.",
-    clinicalImpactNotes: "No independent clinical impact data available at time of listing.",
+      "2026-09-25 HAIR follow-up: raised E0 to E1. First peer-reviewed paper naming Dose+ (doi:10.1016/j.phro.2026.100977), a single-centre retrospective comparison with RapidPlan run in collaboration with MVision. Earlier: 2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified. 2026-08-28 Batch C sweep: all located MVision publications name Contour+ (segmentation), not Dose+. No publication evaluates the dose-prediction product. E0 stands.",
+    clinicalImpactNotes: "2026-09-25: raised I0 to I1 — dosimetric plan-quality endpoints only (vendor-collaboration study); no workflow or patient-outcome data.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes:
-      "FDA 510(k) cleared but E0 evidence: structured pilot and local validation recommended before clinical adoption.",
+      "FDA 510(k) cleared with E1 evidence from a single vendor-collaboration study: structured pilot and local validation recommended before clinical adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -129,7 +139,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",
-      "No independent peer-reviewed publications identified at time of listing"
+      "Only one peer-reviewed study (vendor collaboration, single centre) as of 2026-09-25"
     ],
     source:
       "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page. releaseDate proxied from FDA K250064 decision date (2025-09-04). 2026-09-23: version 1.0.3 vendor-provided (merged from the approved representative edits). 2026-09-06 standard-field consistency pass: FDA status value normalised to the site-wide '510k_cleared' convention."
