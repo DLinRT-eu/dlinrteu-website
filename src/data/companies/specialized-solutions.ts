@@ -32,6 +32,16 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "primaryTask": "Treatment Planning"
   },
   {
+    id: "airato",
+    name: "AiRato",
+    description: "Japanese radiotherapy AI startup (Sendai, founded 2022, Tohoku University spin-out) developing AI-supported contouring and dose-prediction treatment planning software.",
+    website: "https://airato.jp/en/",
+    productIds: ["airato-ratoai"],
+    category: "Specialized Solutions",
+    primaryTask: "Treatment Planning",
+    secondaryTasks: ["Auto-Contouring"]
+  },
+  {
     "id": "raysearch",
     "eudamed": {
       "srn": "SE-MF-000001908",
