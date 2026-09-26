@@ -12,7 +12,7 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
     category: "Treatment Planning",
     secondaryCategories: ["Auto-Contouring"],
     certification: "PMDA",
-    logoUrl: "/placeholder.svg",
+    logoUrl: "/logos/airato.png",
     website: "https://airato.jp/en/",
     anatomicalLocation: ["Head & Neck", "Thorax", "Pelvis"],
     modality: ["CT"],
