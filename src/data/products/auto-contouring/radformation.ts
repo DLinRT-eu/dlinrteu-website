@@ -34,7 +34,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: [
-      "520+ AI-trained models across CT, MR & CBCT (vendor-reported, v2.8)",
+      "520+ AI-trained models across CT, MR & CBCT (vendor-reported, v2.8; 523 distinct models on the product page: 435 CT, 81 MR, 7 CBCT)",
       "CT, MR & CBCT support; new MR abdomen models in v2.8",
       "v2.8 additions: mediastinal lymph node models, EPTN brain MR structures (e.g. caudate nucleus, fornix, pineal gland)",
       "Aligned with RTOG/NRG/RADCOMP/ESTRO/DAHANCA/EORTC/EPTN guidelines",
@@ -675,7 +675,6 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     structureHistory: [
       {
         version: "2.7",
-        retrievedOn: "2026-06-15",
         source: "Radformation AutoContour product page (v2.7 model list as previously catalogued in DLinRT.eu)",
         notes: "Structure list of the previous catalogued release (v2.7), superseded by the v2.8 model set. Names were normalised with spaces instead of underscores.",
         structures: [
@@ -1361,6 +1360,6 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including Radformation; geometric endpoints.", "vendorIndependent": true, "externalValidation": true}
   ],
     lastRevised: "2026-09-26",
-    source: "FDA 510(k) database (K260509, cleared 2026-03-19; K262452, cleared 2026-08-14), FDA summaries, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15). v2.8 features and 520+ model count from Radformation blog 'AutoContour v2.8' (2026-09-25, https://blog.radformation.com/autocontour-v2.8-broader-coverage-smarter-automation-and-more-plan-ready-workflows, retrieved 2026-09-26); the announcement does not state which clearance covers v2.8, and the per-structure list has not yet been re-synced to v2.8."
+    source: "FDA 510(k) database (K260509, cleared 2026-03-19; K262452, cleared 2026-08-14), FDA summaries, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15). v2.8 features and 520+ model count from Radformation blog 'AutoContour v2.8' (2026-09-25, https://blog.radformation.com/autocontour-v2.8-broader-coverage-smarter-automation-and-more-plan-ready-workflows, retrieved 2026-09-26); the announcement does not state which clearance covers v2.8, and it does not say which clearance covers v2.8. Per-structure list re-synced to v2.8 from the Radformation AutoContour product page (https://www.radformation.com/autocontour/autocontour, retrieved 2026-09-26): 17 model groups whose listed counts (607 entries in total, with left/right counted separately) match the extracted names exactly; the same structure appearing in several groups is listed under each, giving 523 distinct models (435 CT, 81 MR, 7 CBCT), consistent with the vendor's '520+'. The previous v2.7 list is kept under structureHistory."
   }
 ];
