@@ -11,7 +11,7 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
     description: "Deep learning dose-prediction software that generates a three-dimensional dose distribution for head & neck radiotherapy from a CT simulation scan together with clinician-defined target volumes and organs at risk. The predicted dose is exported as a DICOM RT Dose object for use as guidance in a compatible treatment planning system.",
     category: "Treatment Planning",
     certification: "FDA",
-    logoUrl: "/placeholder.svg",
+    logoUrl: "/logos/informai.png",
     website: "https://www.informai.com",
     anatomicalLocation: ["Head & Neck"],
     modality: ["CT"],

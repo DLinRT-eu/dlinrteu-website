@@ -3,6 +3,16 @@ import { CompanyDetails } from "@/types/company";
 
 export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   {
+    "id": "atomoai",
+    "name": "AtomoAI",
+    "description": "US radiation oncology AI startup developing deep learning tumour segmentation (iContour, pre-market).",
+    "website": "https://atomoai.ai/",
+    "productIds": ["atomoai-icontour-pipeline"],
+    "category": "Auto-Contouring",
+    "logoUrl": "/logos/atomoai.svg",
+    "primaryTask": "Auto-Contouring"
+  },
+  {
     "id": "neuralrad",
     "name": "NeuralRad",
     "description": "Pre-market developer of AI-powered brain stereotactic radiosurgery tools, including automated metastasis detection, segmentation and multi-course tracking.",
@@ -255,9 +265,10 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "id": "aitewan",
     "name": "Aitewan Biomedical Technology",
     "description": "Taiwanese developer of deep learning brain tumour contouring software for radiotherapy planning.",
-    "website": "https://www.aitewan.com",
+    "website": "https://www.aitewan-bio.com/en/",
     "productIds": ["aitewan-deepbt-detector-plus"],
     "category": "Auto-Contouring",
+    "logoUrl": "/logos/aitewan.svg",
     "primaryTask": "Auto-Contouring"
   },
   {
