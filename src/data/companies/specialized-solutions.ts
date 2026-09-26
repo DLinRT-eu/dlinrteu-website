@@ -29,6 +29,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     "website": "https://www.informai.com",
     "productIds": ["informai-radoncai"],
     "category": "Specialized Solutions",
+    "logoUrl": "/logos/informai.png",
     "primaryTask": "Treatment Planning"
   },
   {
@@ -38,6 +39,7 @@ export const SPECIALIZED_SOLUTIONS_COMPANIES: CompanyDetails[] = [
     website: "https://airato.jp/en/",
     productIds: ["airato-ratoai"],
     category: "Specialized Solutions",
+    logoUrl: "/logos/airato.png",
     primaryTask: "Treatment Planning",
     secondaryTasks: ["Auto-Contouring"]
   },
