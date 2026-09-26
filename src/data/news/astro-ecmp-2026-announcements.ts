@@ -5,7 +5,7 @@ export const astroEcmp2026Announcements: NewsItem = {
   date: "2026-09-26",
   title: "ASTRO 2026 and ECMP 2026: AI-in-RT announcements",
   summary:
-    "Round-up of AI announcements for radiotherapy around ASTRO 2026 (Boston, 26–30 September) and ECMP 2026 (Valencia, 23–26 September): Radformation AutoContour v2.8, our check on OptiPlan, RaySearch, GE HealthCare/MIM and the catalogue updates that followed.",
+    "Round-up of AI announcements for radiotherapy around ASTRO 2026 (Boston, 26–30 September) and ECMP 2026 (Valencia, 23–26 September): Radformation AutoContour v2.8, our check on OptiPlan, a screen of all 185 ASTRO exhibitors (one new entry: AiRato RatoAI), RaySearch, GE HealthCare/MIM and the catalogue updates that followed.",
   content: `
 Two congresses overlap this week: the **ASTRO 2026 Annual Meeting** in Boston (26–30 September; exhibition 27–29 September) and the **6th European Congress of Medical Physics (ECMP 2026)** in Valencia (23–26 September), organised by EFOMP with the Spanish Society of Medical Physics. As with previous congress round-ups, only announcements with a clear AI/deep-learning component for radiotherapy are summarised here. Vendor statements are reported as vendor-reported and are not independent validation.
 
