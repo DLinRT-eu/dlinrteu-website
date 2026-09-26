@@ -4,6 +4,7 @@ import { GE_HEALTHCARE_PIPELINE_PRODUCTS } from "./ge-healthcare";
 import { UNITED_IMAGING_PIPELINE_PRODUCTS } from "./united-imaging";
 import { SYNAPTIQ_PIPELINE_PRODUCTS } from "./synaptiq";
 import { NEURALRAD_PIPELINE_PRODUCTS } from "./neuralrad";
+import { ATOMOAI_PIPELINE_PRODUCTS } from "./atomoai";
 
 // Combine all pipeline products
 export const PIPELINE_PRODUCTS: ProductDetails[] = [
@@ -12,6 +13,7 @@ export const PIPELINE_PRODUCTS: ProductDetails[] = [
   ...UNITED_IMAGING_PIPELINE_PRODUCTS,
   ...SYNAPTIQ_PIPELINE_PRODUCTS,
   ...NEURALRAD_PIPELINE_PRODUCTS,
+  ...ATOMOAI_PIPELINE_PRODUCTS,
 ];
 
 export {
@@ -20,4 +22,5 @@ export {
   UNITED_IMAGING_PIPELINE_PRODUCTS,
   SYNAPTIQ_PIPELINE_PRODUCTS,
   NEURALRAD_PIPELINE_PRODUCTS,
+  ATOMOAI_PIPELINE_PRODUCTS,
 };

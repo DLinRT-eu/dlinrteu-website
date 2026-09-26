@@ -20,7 +20,7 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     developmentStage: "pipeline",
     logoUrl: "/logos/atomoai.svg",
     website: "https://atomoai.ai/",
-    anatomicalLocation: ["Thorax"],
+    anatomicalLocation: ["Multiple"],
     modality: ["CT"],
     subspeciality: "Radiation Oncology",
     keyFeatures: [
