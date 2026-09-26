@@ -5,7 +5,7 @@ export const astroEcmp2026Announcements: NewsItem = {
   date: "2026-09-26",
   title: "ASTRO 2026 and ECMP 2026: AI-in-RT announcements",
   summary:
-    "Round-up of AI announcements for radiotherapy around ASTRO 2026 (Boston, 26–30 September) and ECMP 2026 (Valencia, 23–26 September): Radformation AutoContour v2.8, our check on OptiPlan, RaySearch, GE HealthCare/MIM and the catalogue updates that followed.",
+    "Round-up of AI announcements for radiotherapy around ASTRO 2026 (Boston, 26–30 September) and ECMP 2026 (Valencia, 23–26 September): Radformation AutoContour v2.8, our check on OptiPlan, a screen of all 185 ASTRO exhibitors (one new entry: AiRato RatoAI), RaySearch, GE HealthCare/MIM and the catalogue updates that followed.",
   content: `
 Two congresses overlap this week: the **ASTRO 2026 Annual Meeting** in Boston (26–30 September; exhibition 27–29 September) and the **6th European Congress of Medical Physics (ECMP 2026)** in Valencia (23–26 September), organised by EFOMP with the Spanish Society of Medical Physics. As with previous congress round-ups, only announcements with a clear AI/deep-learning component for radiotherapy are summarised here. Vendor statements are reported as vendor-reported and are not independent validation.
 
@@ -34,6 +34,18 @@ We checked whether **OptiPlan**, Radformation's automated VMAT planning module [
 
 On the scientific side, the programme includes sessions on generative AI and LLM-driven planning agents, AI for global oncology, and prospective pilots of AI decision support for CBCT review. These are research presentations, not commercial products.
 
+## Exhibitor check: are we missing anyone?
+
+On 26 September 2026 we went through all **185 exhibitors** in the [ASTRO 2026 exhibitor directory](https://amportal.astro.org/exhibitors) and compared them with the catalogue. Most are already listed (for example Accuray, Brainlab, Elekta, GE HealthCare/MIM, Lumonus, Manteia, MedLever, MVision AI, Oncosoft, Philips, PTW, Radformation, RaySearch, Siemens Healthineers, Sun Nuclear and TheraPanacea) or are outside our scope: hardware, brachytherapy and dosimetry vendors, pharmaceutical and diagnostics companies, hospitals, societies, publishers, construction and staffing firms. We then checked the remaining software companies, mostly startups, against our [inclusion criteria](/resources-compliance), which require a documented AI component and a recognised regulatory clearance:
+
+- **AiRato** (Japan): **added** as [RatoAI](/product/airato-ratoai). The vendor describes machine-learning dose prediction and auto-contouring of 100+ organs. It received Japanese Class III approval on 24 June 2026 ([press release](https://airato.jp/en/ratoai-pressrelease/)). There is no peer-reviewed evidence yet, so it starts at E0/I0.
+- **AtomoAI** (US): deep learning tumour segmentation (iContour/iSeg) ([website](https://atomoai.ai/)). We found no regulatory clearance, so it is **not added** for now and will be considered for Pipeline once public evidence exists.
+- **Cortechs.ai** (US): NeuroQuant Brain Tumor is an FDA-cleared AI segmentation tool with DICOM-RTSTRUCT export ([product page](https://www.cortechs.ai/neuroquant-brain-tumor/)). Its main use is radiology tumour monitoring, so we have put it on the list for the next review round to judge whether it fits the catalogue. It is **not added yet**.
+- **SeeTreat** (Australia): ART.1 offline adaptive decision support, CE/UKCA/TGA and FDA cleared (vendor-reported, [website](https://www.seetreatmedical.com/)). Its public material describes purpose-built registration and dose calculation algorithms but does not document an AI model, so it is **not added**. We will ask the company.
+- **Gosta Labs** (Finland) and **5thPort** (US): AI tools for clinical documentation or patient engagement, not radiotherapy software. They are **out of scope**.
+
+If you know of an AI product we missed, please [let us know](/support).
+
 ## ECMP 2026
 
 ECMP 2026 ([ecmp2026.efomp.org](https://ecmp2026.efomp.org/)) includes a dedicated track on artificial intelligence and imaging biomarkers alongside radiotherapy. We found no new commercial AI radiotherapy product launches tied to ECMP at the time of writing.
@@ -42,6 +54,7 @@ ECMP 2026 ([ecmp2026.efomp.org](https://ecmp2026.efomp.org/)) includes a dedicat
 
 - [Radformation AutoContour](/product/radformation-autocontour): version 2.8, updated feature list and model count (vendor-reported), with the source disclosed.
 - OptiPlan: assessed and not included (no documented AI component).
+- New entry: [AiRato RatoAI](/product/airato-ratoai), found through the exhibitor check (Japanese approval, vendor-reported features).
 
 ## Reminders
 
