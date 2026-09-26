@@ -34,11 +34,15 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: [
-      "480 AI-trained models (115 lymph node models)",
-      "CT, MR & CBCT support",
-      "Aligned with RTOG/NRG/RADCOMP/ESTRO/DAHANCA/EORTC guidelines",
+      "520+ AI-trained models across CT, MR & CBCT (vendor-reported, v2.8)",
+      "CT, MR & CBCT support; new MR abdomen models in v2.8",
+      "v2.8 additions: mediastinal lymph node models, EPTN brain MR structures (e.g. caudate nucleus, fornix, pineal gland)",
+      "Aligned with RTOG/NRG/RADCOMP/ESTRO/DAHANCA/EORTC/EPTN guidelines",
       "TG-263 nomenclature",
       "Eclipse integration & DICOM vendor-neutral",
+      "Planning Structures with Clean and Smooth post-processing (v2.8)",
+      "Zero-Click queue dashboard with prioritisation and re-run (v2.8)",
+      "Cloud or on-premises processing (parallel CPU, optional GPU)",
       "Deformable registration & re-irradiation workflows",
       "Unified AutoContour + Limbus Contour platform"
     ],
@@ -709,9 +713,9 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1007/s13246-024-01434-9"
       }
     ],
-    version: "2.7",
+    version: "2.8",
     releaseDate: "2026-03-19",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-09-26",
     keyPapers: [
     {"doi": "10.1002/acm2.14461", "title": "Geometric and dosimetric evaluation for breast and regional nodal auto-segmentation structures", "authors": "Tsui T et al.", "journal": "J Appl Clin Med Phys", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre retrospective geometric and dosimetric validation of AutoContour for breast and regional nodes.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
     {"doi": "10.1177/15330338251403601", "title": "Artificial Intelligence in Radiation Treatment Planning: A Survey-Based Observational Study From A Cancer Centre in Nigeria", "authors": "Alabi AO et al.", "journal": "Technol Cancer Res Treat", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Survey-based observational study of AutoContour users reporting perceived workflow impact.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
@@ -722,7 +726,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1002/acm2.70010", "title": "Evaluation and failure analysis of four commercial deep learning‐based autosegmentation software for abdominal organs at risk", "authors": "Fan M et al.", "journal": "J Applied Clin Med Phys", "year": "2025", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Vendor-independent evaluation and failure analysis of four commercial systems on abdominal OARs; Radformation explicitly included.", "vendorIndependent": true, "externalValidation": true},
     {"doi": "10.1007/s13246-024-01434-9", "title": "Investigation on performance of multiple AI-based auto-contouring systems in organs at risks (OARs) delineation", "authors": "Kim YW et al.", "journal": "Phys Eng Sci Med", "year": "2024", "evidenceRigor": "E2", "clinicalImpact": "I1", "rationale": "Independent comparative benchmark of seven commercial systems including Radformation; geometric endpoints.", "vendorIndependent": true, "externalValidation": true}
   ],
-    lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K260509, cleared 2026-03-19), FDA K260509 summary, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15)."
+    lastRevised: "2026-09-26",
+    source: "FDA 510(k) database (K260509, cleared 2026-03-19; K262452, cleared 2026-08-14), FDA summaries, Radformation product page and EU AI/MDR compliance page, BusinessWire MDR CE Mark release, peer-reviewed validation studies (Doolan 2023; Goddard 2024; Kim 2024; Lin/Fan 2025) — all four explicitly include Radformation per their Methods sections (re-verified 2026-06-15). v2.8 features and 520+ model count from Radformation blog 'AutoContour v2.8' (2026-09-25, https://blog.radformation.com/autocontour-v2.8-broader-coverage-smarter-automation-and-more-plan-ready-workflows, retrieved 2026-09-26); the announcement does not state which clearance covers v2.8, and the per-structure list has not yet been re-synced to v2.8."
   }
 ];

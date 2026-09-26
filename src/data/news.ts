@@ -13,8 +13,10 @@ import { secondRoundReviewAndEvidenceAxes } from "./news/second-round-review-and
 import { aapm2026AndCertificationMilestone } from "./news/aapm-2026-and-certification-milestone";
 import { aiinrt2027Support } from "./news/aiinrt-2027-support";
 import { september2026CatalogueAndEudamedUpdate } from "./news/september-2026-catalogue-and-eudamed-update";
+import { astroEcmp2026Announcements } from "./news/astro-ecmp-2026-announcements";
 
 export const NEWS_ITEMS: NewsItem[] = [
+  astroEcmp2026Announcements,
   september2026CatalogueAndEudamedUpdate,
   aiinrt2027Support,
   aapm2026AndCertificationMilestone,
