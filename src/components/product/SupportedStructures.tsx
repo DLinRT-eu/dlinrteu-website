@@ -198,6 +198,9 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
   let approvedOARs = 0;
   let approvedGTV = 0;
   let approvedElective = 0;
+  let totalEntries = 0;
+  let distinctModels = 0;
+  const countedModels = new Set<string>();
 
   // Process and group structures
   const processStructures = structures.map(structure => {
@@ -267,7 +270,16 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
     const isOAR = type === "OAR";
     
     // Update structure counts with laterality check
-    const multiplier = hasLateralityPattern(structureName) ? 2 : 1;
+    const lateralMultiplier = hasLateralityPattern(structureName) ? 2 : 1;
+    totalEntries += lateralMultiplier;
+
+    // A model listed under several site groups counts once (same name + modality)
+    const modalityKey = /\bCBCT\b/i.test(region) ? 'CBCT' : /\bMRI?\b/i.test(region) ? 'MR' : 'CT';
+    const countKey = `${modalityKey}|${structureName.toLowerCase()}`;
+    const isRepeat = countedModels.has(countKey);
+    countedModels.add(countKey);
+    const multiplier = isRepeat ? 0 : lateralMultiplier;
+    distinctModels += multiplier;
     
     // Track investigational separately
     if (isInvestigational) {
@@ -455,6 +467,11 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
             </div>
           )}
         </div>
+        {totalEntries > distinctModels && (
+          <p className="text-sm text-muted-foreground -mt-4 mb-6">
+            {totalEntries} entries across site groups; {distinctModels} distinct models (a model listed in several groups is counted once in the totals above).
+          </p>
+        )}
 
         {/* Detailed structures grouped by region */}
         <div className="space-y-4">
