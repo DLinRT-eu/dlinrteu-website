@@ -275,7 +275,7 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
 
     // A model listed under several site groups counts once (same name + modality)
     const modalityKey = /\bCBCT\b/i.test(region) ? 'CBCT' : /\bMRI?\b/i.test(region) ? 'MR' : 'CT';
-    const countKey = `${modalityKey}|${structureName.toLowerCase()}`;
+    const countKey = isPlaceholderStructureName(structureName) ? `${region}|${structureName.toLowerCase()}` : `${modalityKey}|${structureName.toLowerCase()}`;
     const isRepeat = countedModels.has(countKey);
     countedModels.add(countKey);
     const multiplier = isRepeat ? 0 : lateralMultiplier;
