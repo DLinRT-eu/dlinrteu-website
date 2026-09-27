@@ -73,7 +73,7 @@ export function stripStructurePrefix(structure: string): string {
  * (e.g. "OARs", "41 VOIs (per-structure list not publicly disclosed)").
  * These are region-specific and must not be merged across regions.
  */
-function isPlaceholderStructureName(name: string): boolean {
+export function isPlaceholderStructureName(name: string): boolean {
   const cleaned = cleanStructureName(name).replace(/\s*\([^)]*\)\s*/g, ' ').trim();
   return /^(OARs?|VOIs?|Targets?|Structures?)$/i.test(cleaned) ||
     /^\d+\s+(VOIs?|OARs?|structures?)$/i.test(cleaned) ||
