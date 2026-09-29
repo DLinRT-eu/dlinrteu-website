@@ -5,7 +5,7 @@ export const astroEcmp2026Announcements: NewsItem = {
   date: "2026-09-29",
   title: "ASTRO, ECMP and MICCAI 2026: AI-in-RT updates",
   summary:
-    "Completed round-up of AI announcements for radiotherapy around ASTRO and ECMP 2026, plus MICCAI's inaugural MIART workshop on 1 October and the opening of AIinRT 2027 registration.",
+    "Completed round-up of AI announcements for radiotherapy around ASTRO and ECMP 2026, plus MICCAI's inaugural MIART workshop on 1 October and the opening of AIinRT2027 registration.",
   content: `
 Two congresses overlap this week: the **ASTRO 2026 Annual Meeting** in Boston (26–30 September; exhibition 27–29 September) and the **6th European Congress of Medical Physics (ECMP 2026)** in Valencia (23–26 September), organised by EFOMP with the Spanish Society of Medical Physics. As with previous congress round-ups, only announcements with a clear AI/deep-learning component for radiotherapy are summarised here. Vendor statements are reported as vendor-reported and are not independent validation.
 
@@ -38,6 +38,13 @@ On the scientific side, the programme includes sessions on generative AI and LLM
 
 Following the final vendor announcements, we repeated the check across the companies represented at ASTRO. We found no further source-confirmed new AI/deep-learning radiotherapy product requiring a catalogue addition. Other booth material concerned products already listed, research presentations, or workflows without a documented AI component.
 
+## What changed in the catalogue
+
+- [Radformation AutoContour](/product/radformation-autocontour): version 2.8, updated feature list and model count (vendor-reported), with the source disclosed.
+- OptiPlan: assessed and not included (no documented AI component).
+- New entry: [AiRato RatoAI](/product/airato-ratoai), found through the exhibitor check below (Japanese approval, vendor-reported features).
+- New Pipeline entry: [AtomoAI iContour](/product/atomoai-icontour-pipeline), listed as pre-market because no regulatory clearance was found.
+
 ## Exhibitor check: are we missing anyone?
 
 On 26 September 2026 we went through all **185 exhibitors** in the [ASTRO 2026 exhibitor directory](https://amportal.astro.org/exhibitors) and compared them with the catalogue. Most are already listed (for example Accuray, Brainlab, Elekta, GE HealthCare/MIM, Lumonus, Manteia, MedLever, MVision AI, Oncosoft, Philips, PTW, Radformation, RaySearch, Siemens Healthineers, Sun Nuclear and TheraPanacea) or are outside our scope: hardware, brachytherapy and dosimetry vendors, pharmaceutical and diagnostics companies, hospitals, societies, publishers, construction and staffing firms. We then checked the remaining software companies, mostly startups, against our [inclusion criteria](/resources-compliance), which require a documented AI component and a recognised regulatory clearance:
@@ -61,21 +68,15 @@ ECMP 2026 ([ecmp2026.efomp.org](https://ecmp2026.efomp.org/)) includes a dedicat
 
 The organisers describe MIART 2026 as the first MICCAI workshop dedicated to radiotherapy. Its research presentations are covered here as a community milestone, not as clinical validation of any method or as evidence for adding a commercial product to the catalogue.
 
-## What changed in the catalogue
+## AIinRT2027: registration opens 1 October
 
-- [Radformation AutoContour](/product/radformation-autocontour): version 2.8, updated feature list and model count (vendor-reported), with the source disclosed.
-- OptiPlan: assessed and not included (no documented AI component).
-- New entry: [AiRato RatoAI](/product/airato-ratoai), found through the exhibitor check (Japanese approval, vendor-reported features).
-
-## AIinRT 2027: registration opens 1 October
-
-Registration for **AIinRT 2027** opens on **1 October 2026**. Abstract submission is a separate process: it is already open and closes on **1 December 2026**. The peer-reviewed scientific symposium takes place **1–2 April 2027** at the Princess Máxima Center in Utrecht. Event and submission information is available at [aiinrt.org](https://www.aiinrt.org/).
+Registration for **AIinRT2027** opens on **1 October 2026**. Abstract submission is a separate process: it is already open and closes on **1 December 2026**. The peer-reviewed scientific symposium takes place **1–2 April 2027** at the Princess Máxima Center in Utrecht. Event and submission information is available at [aiinrt.org](https://www.aiinrt.org/).
 
 ## Reminders
 
-- The next review round runs **1 November – 15 December 2026**. The focus is verifying each entry once and double-checking evidence levels that rest on a single source. Reviewers are welcome to [get in touch](/support).
+- The next review round runs **1 November – 15 December 2026**. The focus is verifying each entry once and double-checking evidence levels that rest on a single source.
 - The company certification round remains open. Certified entries carry the "Verified by Company" badge.
-- **AIinRT 2027:** registration opens 1 October 2026 and abstract submission closes 1 December 2026.
+- **AIinRT2027:** registration opens 1 October 2026 and abstract submission closes 1 December 2026.
 
 *DLinRT.eu is an educational catalogue; listed information is not a clinical validation of any product.*
 `,
