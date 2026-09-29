@@ -106,6 +106,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://dlinrt.eu/product/airato-ratoai</loc>
+    <lastmod>2026-09-26</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://dlinrt.eu/product/airs-swiftmr</loc>
     <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
@@ -118,6 +123,11 @@
   <url>
     <loc>https://dlinrt.eu/product/algomedica-pixelshine</loc>
     <lastmod>2026-06-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/product/atomoai-icontour-pipeline</loc>
+    <lastmod>2026-09-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -142,7 +152,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/carina-intcontour</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -157,7 +167,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/coreline-aview-rt-acs</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -227,7 +237,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/limbus-contour</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -237,17 +247,17 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-accucontour</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-acculearning</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/manteia-mozi</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -272,27 +282,27 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mim-contour-protegeai</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mirada-dlc</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mr-box-synthetic</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-adapt-plus</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-ai-contouring</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -302,12 +312,12 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-dose-plus</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/mvision-image-plus</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -392,7 +402,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/radformation-autocontour</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -402,12 +412,12 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/raysearch-raystation</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://dlinrt.eu/product/raysearch-raystation-planning</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -417,7 +427,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/siemens-ai-rad-companion</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -437,7 +447,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/spectronic-mriplanner</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -472,7 +482,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/synaptiq-mediq-rt</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -492,7 +502,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/therapanacea-annotate</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -557,7 +567,7 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/product/varian-ethos-ai-segmentation</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -589,6 +599,10 @@
   </url>
   <url>
     <loc>https://dlinrt.eu/products/company/algomedica</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/products/company/atomoai</loc>
     <priority>0.5</priority>
   </url>
   <url>
@@ -754,6 +768,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://dlinrt.eu/news/astro-ecmp-2026-announcements</loc>
+    <lastmod>2026-09-29</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://dlinrt.eu/news/communication-features-launch</loc>
     <lastmod>2025-05-27</lastmod>
     <priority>0.5</priority>
@@ -786,6 +805,11 @@
   <url>
     <loc>https://dlinrt.eu/news/second-round-review-and-evidence-axes</loc>
     <lastmod>2026-06-18</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dlinrt.eu/news/september-2026-catalogue-and-eudamed-update</loc>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
