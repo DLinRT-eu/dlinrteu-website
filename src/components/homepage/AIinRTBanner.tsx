@@ -27,7 +27,7 @@ const AIinRTBanner = () => {
 
             <h2 className="text-xl md:text-2xl font-bold text-slate-900">
               DLinRT.eu supports{" "}
-              <span className="text-sky-700">AIinRT 2027</span>
+              <span className="text-sky-700">AIinRT2027</span>
             </h2>
 
             <p className="max-w-2xl text-sm md:text-base text-slate-600 leading-relaxed">
