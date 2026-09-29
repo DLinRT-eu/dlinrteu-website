@@ -62,6 +62,8 @@ If you know of an AI product we missed, please [let us know](/support).
 
 ECMP 2026 ([ecmp2026.efomp.org](https://ecmp2026.efomp.org/)) includes a dedicated track on artificial intelligence and imaging biomarkers alongside radiotherapy. We found no new commercial AI radiotherapy product launches tied to ECMP at the time of writing.
 
+- An ECMP 2026 abstract (P1172, [doi:10.1016/j.ejmp.2026.106484](https://doi.org/10.1016/j.ejmp.2026.106484)) from an Italian centre reports a feasibility study of the online-adaptive module in [MOZI TPS](/product/manteia-mozi) on a standard C-arm linac (phantom plus 5 retrospectively simulated prostate SBRT patients). It does not describe an AI component, so MOZI's evidence level stays the same; the abstract is listed on the product page as unscored supporting evidence.
+
 ## MICCAI 2026: the inaugural MIART workshop
 
 [MICCAI 2026](https://conferences.miccai.org/2026/en/) takes place in Strasbourg from **27 September to 1 October 2026**. On **1 October**, the conference hosts **MIART — Medical Image AI in Radiation Therapy**, an official half-day workshop dedicated to AI across radiotherapy imaging, contouring, dose modelling, treatment planning, adaptation, outcome prediction, interpretability and clinical deployment. The [official MICCAI workshop programme](https://conferences.miccai.org/2026/en/workshops.asp) lists MIART under the Radiotherapy theme; the [workshop website](https://miart-workshop.github.io/) provides its programme and contributions.
