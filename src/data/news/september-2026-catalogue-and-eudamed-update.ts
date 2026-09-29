@@ -3,9 +3,9 @@ import { NewsItem } from "@/types/news";
 export const september2026CatalogueAndEudamedUpdate: NewsItem = {
   id: "september-2026-catalogue-and-eudamed-update",
   date: "2026-09-23",
-  title: "New Products, EUDAMED Verification Live, Evidence-by-Source Exports · AIinRT 2027 Abstracts Open",
+  title: "New Products, EUDAMED Verification Live, Evidence-by-Source Exports · AIinRT2027 Abstracts Open",
   summary:
-    "Summer round-up: two newly cleared FDA products added, the MVision portfolio split into standalone entries, automated EUDAMED verification of companies and products now live on the site, per-publication evidence exports released, and abstract submission open for AIinRT 2027.",
+    "Summer round-up: two newly cleared FDA products added, the MVision portfolio split into standalone entries, automated EUDAMED verification of companies and products now live on the site, per-publication evidence exports released, and abstract submission open for AIinRT2027.",
   content: `
 Since our [July update](/news/aapm-2026-and-certification-milestone) the catalog has grown, a full European regulatory verification layer has gone live, and exports now expose the evidence behind every score. Here is what changed.
 
@@ -42,9 +42,9 @@ One important caveat: registration in EUDAMED only became mandatory on **28 May 
 - A new **evidence-by-source export** lists each publication used to build a score, with its own rigor and impact rating, study-quality flags and a **DOI or direct link** — currently 244 source rows across 88 products, so any score can be checked at the source.
 - The **Model Zoo** and **LLM inference platform** lists were curated down to genuine multi-model collections; single models are no longer listed, and the rule is stated on the page.
 
-## 📅 AIinRT 2027 — abstract submission open
+## 📅 AIinRT2027 — abstract submission open
 
-**[AIinRT 2027](https://www.aiinrt.org)** takes place **1–2 April 2027** at the **Princess Máxima Center, Utrecht**: two days, six sessions, double-blind peer review. **Abstract submission opened on 1 September 2026.** DLinRT.eu is proud to support the meeting — see our [earlier announcement](/news/aiinrt-2027-support) for the full programme outline.
+**[AIinRT2027](https://www.aiinrt.org)** takes place **1–2 April 2027** at the **Princess Máxima Center, Utrecht**: two days, six sessions, double-blind peer review. **Abstract submission opened on 1 September 2026.** DLinRT.eu is proud to support the meeting — see our [earlier announcement](/news/aiinrt-2027-support) for the full programme outline.
 
 ## 🙋 Still open: review round and certification
 
