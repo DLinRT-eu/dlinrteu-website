@@ -3,7 +3,8 @@ import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-import { Shield, Target, CircleDot, AlertTriangle, Download } from "lucide-react";
+import { Shield, Target, CircleDot, AlertTriangle, Download, Info } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { objectsToCsv, downloadCsv } from "@/utils/csv";
 import { cn } from "@/lib/utils";
