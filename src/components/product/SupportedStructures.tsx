@@ -31,6 +31,9 @@ interface SupportedStructuresProps {
   currentVersion?: string;
   /** Product name, used for the CSV filename. */
   productName?: string;
+  /** Count a model listed under several site groups once in the badge totals.
+   *  Only enable when the vendor states a distinct-model count (e.g. AutoContour). */
+  dedupeModels?: boolean;
 }
 
 
@@ -124,7 +127,7 @@ const StructureHistorySection: React.FC<{
   </Card>
 );
 
-const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance, history, currentVersion, productName }) => {
+const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, unavailable, provenance, history, currentVersion, productName, dedupeModels }) => {
   const { isEditMode, editedProduct, canEdit } = useProductEdit();
   
   // Use edited structures when in edit mode
@@ -142,7 +145,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
         <StructuresEditor fieldPath="supportedStructures" />
         {/* Also show existing display below for reference */}
         {displayStructures && displayStructures.length > 0 && (
-          <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
+          <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} dedupeModels={dedupeModels} />
         )}
       </div>
     );
@@ -163,7 +166,7 @@ const SupportedStructures: React.FC<SupportedStructuresProps> = ({ structures, u
   return (
     <div>
       {provenance && <ProvenanceBanner p={provenance} />}
-      <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} />
+      <StructuresDisplay structures={displayStructures} downloadLabel={productName} version={currentVersion} dedupeModels={dedupeModels} />
       {hasHistory && <StructureHistorySection history={history!} currentVersion={currentVersion} />}
     </div>
   );
@@ -180,9 +183,10 @@ interface StructuresDisplayProps {
   }>;
   downloadLabel?: string;
   version?: string;
+  dedupeModels?: boolean;
 }
 
-const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downloadLabel, version }) => {
+const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downloadLabel, version, dedupeModels = false }) => {
 
   // Parse and categorize structures
   const groupedStructures: Record<string, StructureGroup> = {};
@@ -273,12 +277,17 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
     const lateralMultiplier = hasLateralityPattern(structureName) ? 2 : 1;
     totalEntries += lateralMultiplier;
 
-    // A model listed under several site groups counts once (same name + modality)
-    const modalityKey = /\bCBCT\b/i.test(region) ? 'CBCT' : /\bMRI?\b/i.test(region) ? 'MR' : 'CT';
-    const countKey = isPlaceholderStructureName(structureName) ? `${region}|${structureName.toLowerCase()}` : `${modalityKey}|${structureName.toLowerCase()}`;
-    const isRepeat = countedModels.has(countKey);
-    countedModels.add(countKey);
-    const multiplier = isRepeat ? 0 : lateralMultiplier;
+    // A model listed under several site groups counts once (same name + modality).
+    // Only applied for products that opt in via dedupeModels (e.g. AutoContour,
+    // whose vendor states a distinct-model count); other products count every entry.
+    let multiplier = lateralMultiplier;
+    if (dedupeModels) {
+      const modalityKey = /\bCBCT\b/i.test(region) ? 'CBCT' : /\bMRI?\b/i.test(region) ? 'MR' : 'CT';
+      const countKey = isPlaceholderStructureName(structureName) ? `${region}|${structureName.toLowerCase()}` : `${modalityKey}|${structureName.toLowerCase()}`;
+      const isRepeat = countedModels.has(countKey);
+      countedModels.add(countKey);
+      multiplier = isRepeat ? 0 : lateralMultiplier;
+    }
     distinctModels += multiplier;
     
     // Track investigational separately

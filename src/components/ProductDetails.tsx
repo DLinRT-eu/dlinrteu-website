@@ -139,6 +139,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
               history={product.structureHistory}
               currentVersion={product.version}
               productName={product.name}
+              dedupeModels={product.id === 'radformation-autocontour'}
             />
 
           )}
