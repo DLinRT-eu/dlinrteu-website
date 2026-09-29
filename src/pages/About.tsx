@@ -320,6 +320,9 @@ const About = () => {
                   <li>• Max 10 representatives per company</li>
                   <li>• All regular user capabilities</li>
                 </ul>
+                <Link to="/company/guide" className="inline-block mt-4 text-sm text-primary hover:underline font-medium">
+                  View complete company guide →
+                </Link>
               </CardContent>
             </Card>
 
@@ -343,6 +346,9 @@ const About = () => {
                   <li>• Oversee company certifications</li>
                   <li>• Full access to all platform features</li>
                 </ul>
+                <Link to="/admin/guide" className="inline-block mt-4 text-sm text-primary hover:underline font-medium">
+                  View complete admin guide →
+                </Link>
               </CardContent>
             </Card>
           </div>
