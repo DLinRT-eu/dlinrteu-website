@@ -375,11 +375,7 @@ const App = () => (
                     <SecurityMonitoring />
                   </ProtectedRoute>
                 } />
-                <Route path="/admin/guide" element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminGuide />
-                  </ProtectedRoute>
-                } />
+                <Route path="/admin/guide" element={<AdminGuide />} />
                 <Route path="/admin/financials" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <FinancialsAdmin />
@@ -422,11 +418,7 @@ const App = () => (
                     <DueReviews />
                   </ProtectedRoute>
                 } />
-                <Route path="/reviewer/guide" element={
-                  <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
-                    <ReviewerGuide />
-                  </ProtectedRoute>
-                } />
+                <Route path="/reviewer/guide" element={<ReviewerGuide />} />
                 <Route path="/reviewer/preferences" element={
                   <ProtectedRoute allowedRoles={['reviewer', 'admin']}>
                     <ReviewerPreferences />
@@ -449,11 +441,7 @@ const App = () => (
                     <CompanyProductsManager />
                   </ProtectedRoute>
                 } />
-                <Route path="/company/guide" element={
-                  <ProtectedRoute allowedRoles={['company', 'admin']}>
-                    <CompanyGuide />
-                  </ProtectedRoute>
-                } />
+                <Route path="/company/guide" element={<CompanyGuide />} />
                 <Route path="/company/certification" element={
                   <ProtectedRoute allowedRoles={['company', 'admin']}>
                     <CompanyCertification />
