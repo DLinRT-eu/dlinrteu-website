@@ -73,6 +73,12 @@ All free-text fields rendered through `<AutoLinkText>` apply the same rule: only
 | `anatomicalLocation` / `anatomy` | ➖ | Anatomical regions covered. | Array of tags (Brain, Thorax, Pelvis, etc.). | Confirm against vendor claims and publications. |
 | `diseaseTargeted` | ➖ | Specific pathologies addressed. | Array of disease names. | Cite evidence if disease-specific claims exist. |
 | `supportedStructures` | ➖ | Structures auto-contoured or analyzed. | Array of strings or objects `{ name, type, accuracy, validationDataset }`. | Ensure each structure has correct type (OAR, Targets, Elective). |
+
+**Counting rule for `supportedStructures` (shown to visitors via the info icon on the product page):**
+- Each listed entry counts as one structure.
+- Left/right paired names (e.g. `Kidney_L/R`) count as two models; do not also list `_L` and `_R` separately for the same model, or they will be double-counted.
+- Entries marked `(investigational)` are counted only in the Investigational badge, not in the OAR/Target/Elective totals.
+- Exception: for products whose vendor states a distinct-model count (currently only Radformation AutoContour, via the `dedupeModels` flag), a model listed under several site groups is counted once per name + modality in the badge totals; the full grouped list and CSV export still show every entry.
 | `useCases` | ➖ | Typical clinical scenarios. | Array of short phrases. | Avoid marketing speak—focus on workflow tasks. |
 | `trainingRequired` | ➖ | Indicates if formal training is needed. | Boolean. | Set `true` when vendor mandates onboarding. |
 
