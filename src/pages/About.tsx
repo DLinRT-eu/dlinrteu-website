@@ -294,6 +294,9 @@ const About = () => {
                   <li>• Submit feedback on product information</li>
                   <li>• All regular user capabilities</li>
                 </ul>
+                <Link to="/reviewer/guide" className="inline-block mt-4 text-sm text-primary hover:underline font-medium">
+                  View complete reviewer guide →
+                </Link>
               </CardContent>
             </Card>
 
