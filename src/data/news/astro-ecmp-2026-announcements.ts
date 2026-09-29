@@ -2,10 +2,10 @@ import { NewsItem } from "@/types/news";
 
 export const astroEcmp2026Announcements: NewsItem = {
   id: "astro-ecmp-2026-announcements",
-  date: "2026-09-26",
-  title: "ASTRO 2026 and ECMP 2026: AI-in-RT announcements",
+  date: "2026-09-29",
+  title: "ASTRO, ECMP and MICCAI 2026: AI-in-RT updates",
   summary:
-    "Round-up of AI announcements for radiotherapy around ASTRO 2026 (Boston, 26–30 September) and ECMP 2026 (Valencia, 23–26 September): Siemens Healthineers Accela, Radformation AutoContour v2.8, our check on OptiPlan, a screen of all 185 ASTRO exhibitors (one new entry: AiRato RatoAI), RaySearch, GE HealthCare/MIM and the catalogue updates that followed.",
+    "Completed round-up of AI announcements for radiotherapy around ASTRO and ECMP 2026, plus MICCAI's inaugural MIART workshop on 1 October and the opening of AIinRT 2027 registration.",
   content: `
 Two congresses overlap this week: the **ASTRO 2026 Annual Meeting** in Boston (26–30 September; exhibition 27–29 September) and the **6th European Congress of Medical Physics (ECMP 2026)** in Valencia (23–26 September), organised by EFOMP with the Spanish Society of Medical Physics. As with previous congress round-ups, only announcements with a clear AI/deep-learning component for radiotherapy are summarised here. Vendor statements are reported as vendor-reported and are not independent validation.
 
@@ -24,7 +24,7 @@ The [AutoContour entry](/product/radformation-autocontour) has been updated to v
 
 ### OptiPlan — checked, not added
 
-We checked whether **OptiPlan**, Radformation's automated VMAT planning module [introduced in August 2026](https://blog.radformation.com/introducing-optiplan-automated-vmat-planning), uses AI. Radformation's [product page](https://radformation.com/optiplan/optiplan) describes it as using the TPS-native Eclipse optimisation tools and ClearCheck-driven planning objectives, with "no extensive model training or commissioning required". None of the public material describes a machine-learning or deep-learning model. Per the [inclusion criteria](/resources-compliance), OptiPlan is therefore **not added** to the catalogue. For reference, Radformation states that EZFluence with OptiPlan is CE marked and FDA 510(k) pending (K261718) ([webinar page](https://resources.radformation.com/webinar-recording-introducing-optiplan-1)). We will review this again if Radformation documents an AI component.
+We checked whether **OptiPlan**, Radformation's automated VMAT planning module [introduced in August 2026](https://blog.radformation.com/introducing-optiplan-automated-vmat-planning), uses AI. Radformation's [product page](https://radformation.com/optiplan/optiplan) describes it as using the TPS-native Eclipse optimisation tools and ClearCheck-driven planning objectives, with "no extensive model training or commissioning required". None of the public material describes a machine-learning or deep-learning model. Per the [inclusion criteria](/resources-compliance), OptiPlan is therefore **not added** to the catalogue. Radformation [announced on 21 September 2026](https://www.radformation.com/press/optiplan-fda-clearance) that the FDA 510(k) clearance for EZFluence (K261718) had been expanded to include OptiPlan; this regulatory update does not change the AI assessment. We will review the decision if Radformation documents an AI component.
 
 ## Other ASTRO 2026 announcements
 
@@ -32,8 +32,11 @@ We checked whether **OptiPlan**, Radformation's automated VMAT planning module [
 - **RaySearch Laboratories** ([press release, 24 September 2026](https://storage.mfn.se/c95d76cb-c964-4a76-b64a-2c953bad3be9/raysearch-to-showcase-latest-innovations-in-automation-speed-and-advanced-analytics-at-astro-2026.pdf)): demonstrations of RayStation Deep Learning Segmentation, one-click synthetic CT generation and automated replanning, plus RayIntelligence v2026 for AI-performance monitoring. These are already listed in the catalogue ([RayIntelligence](/product/raysearch-rayintelligence)); no new product was announced.
 - **GE HealthCare + MIM Software** ([ASTRO 2026 event page](https://events.gehealthcare.com/events/astro-2026/)): joint booth for the first time, showing MIM Contour ProtégéAI+ 2.0 (FDA cleared June 2026, already in the catalogue) alongside the Intelligent RT portfolio. No new AI clearance was announced.
 - **Artera** ([release, 25 September 2026](https://business.am-news.com/am-news/article/bizwire-2026-9-25-new-data-highlight-arteras-mmai-consistency-across-diverse-patient-populations-at-astro-2026)): five abstracts on its multimodal AI prostate cancer biomarker. This is a prognostic test for systemic-therapy decisions, not a radiotherapy software device, so it is outside the catalogue scope.
+- **Elekta** ([press release, 27 September 2026](https://ir.elekta.com/files/mfn/25ea0d10-173e-405c-90bb-a0e42fc59100/elekta-expands-adaptive-workflows-across-its-radiotherapy-portfolio.pdf)): announced expanded adaptive workflows across its radiotherapy portfolio, including online adaptation for Elekta Harmony and the pre-commercial Elekta Prostate Guideway. The announcement does not describe an AI, machine-learning or deep-learning component, so these developments are not added to DLinRT.
 
 On the scientific side, the programme includes sessions on generative AI and LLM-driven planning agents, AI for global oncology, and prospective pilots of AI decision support for CBCT review. These are research presentations, not commercial products.
+
+Following the final vendor announcements, we repeated the check across the companies represented at ASTRO. We found no further source-confirmed new AI/deep-learning radiotherapy product requiring a catalogue addition. Other booth material concerned products already listed, research presentations, or workflows without a documented AI component.
 
 ## Exhibitor check: are we missing anyone?
 
@@ -52,17 +55,27 @@ If you know of an AI product we missed, please [let us know](/support).
 
 ECMP 2026 ([ecmp2026.efomp.org](https://ecmp2026.efomp.org/)) includes a dedicated track on artificial intelligence and imaging biomarkers alongside radiotherapy. We found no new commercial AI radiotherapy product launches tied to ECMP at the time of writing.
 
+## MICCAI 2026: the inaugural MIART workshop
+
+[MICCAI 2026](https://conferences.miccai.org/2026/en/) takes place in Strasbourg from **27 September to 1 October 2026**. On **1 October**, the conference hosts **MIART — Medical Image AI in Radiation Therapy**, an official half-day workshop dedicated to AI across radiotherapy imaging, contouring, dose modelling, treatment planning, adaptation, outcome prediction, interpretability and clinical deployment. The [official MICCAI workshop programme](https://conferences.miccai.org/2026/en/workshops.asp) lists MIART under the Radiotherapy theme; the [workshop website](https://miart-workshop.github.io/) provides its programme and contributions.
+
+The organisers describe MIART 2026 as the first MICCAI workshop dedicated to radiotherapy. Its research presentations are covered here as a community milestone, not as clinical validation of any method or as evidence for adding a commercial product to the catalogue.
+
 ## What changed in the catalogue
 
 - [Radformation AutoContour](/product/radformation-autocontour): version 2.8, updated feature list and model count (vendor-reported), with the source disclosed.
 - OptiPlan: assessed and not included (no documented AI component).
 - New entry: [AiRato RatoAI](/product/airato-ratoai), found through the exhibitor check (Japanese approval, vendor-reported features).
 
+## AIinRT 2027: registration opens 1 October
+
+Registration for **AIinRT 2027** opens on **1 October 2026**. Abstract submission is a separate process: it is already open and closes on **1 December 2026**. The peer-reviewed scientific symposium takes place **1–2 April 2027** at the Princess Máxima Center in Utrecht. Event and submission information is available at [aiinrt.org](https://www.aiinrt.org/).
+
 ## Reminders
 
 - The next review round runs **1 November – 15 December 2026**. The focus is verifying each entry once and double-checking evidence levels that rest on a single source. Reviewers are welcome to [get in touch](/support).
 - The company certification round remains open. Certified entries carry the "Verified by Company" badge.
-- **AIinRT 2027** (1–2 April 2027, Princess Máxima Center, Utrecht) is accepting abstracts: [aiinrt.org](https://www.aiinrt.org).
+- **AIinRT 2027:** registration opens 1 October 2026 and abstract submission closes 1 December 2026.
 
 *DLinRT.eu is an educational catalogue; listed information is not a clinical validation of any product.*
 `,
