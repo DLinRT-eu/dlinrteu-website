@@ -174,7 +174,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         relationship: "AccuLearning is Manteia's custom model training platform. Models trained in AccuLearning can be deployed into MOZI TPS for site-specific contouring and planning workflows."
       }
     ],
-    lastUpdated: "2026-09-23",
+    lastUpdated: "2026-09-29",
     lastRevised: "2026-09-29",
     source: "FDA 510(k) database (K223724), manufacturer official website. 2026-09-23: manufacturer documentation added (vendor-provided, retrieved 2026-09-23) — 'Details of Dose Prediction Models' (7 models), 'Smart Optimization Engine (SOE) Technical White Paper' v1 for MOZI TPS 4.0.7, and a publication summary of 81 records. Intertek MDR Annex IX certificate 28620166008 and 2025-06-04 product list, manufacturer-supplied, received 2026-09-29. MRI-to-synthetic-CT product capability user-confirmed 2026-09-29; supporting ASTRO 2023 abstract is not product-specific clinical validation.",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",

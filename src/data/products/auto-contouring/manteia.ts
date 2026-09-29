@@ -75,7 +75,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2026-01-23",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-09-29",
     supportedStructures: [
       // Head & Neck (156)
       "Head & Neck: A_CommonCarotid_L",

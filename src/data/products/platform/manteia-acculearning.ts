@@ -128,7 +128,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   version: "N/D",
   releaseDate: "2017-01-01",
    lastRevised: "2026-09-29",
-  lastUpdated: "2026-09-23",
+  lastUpdated: "2026-09-29",
    source: "Manteia AccuLearning product page; manufacturer publication summary (vendor-provided, retrieved 2026-09-23). Intertek MDR certificate 28620166008 product list reviewed 2026-09-29: AccuLearning is not listed; no CE status inferred from this document."
 }
 ];
