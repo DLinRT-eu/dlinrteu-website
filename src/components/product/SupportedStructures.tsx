@@ -3,7 +3,8 @@ import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-import { Shield, Target, CircleDot, AlertTriangle, Download } from "lucide-react";
+import { Shield, Target, CircleDot, AlertTriangle, Download, Info } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { objectsToCsv, downloadCsv } from "@/utils/csv";
 import { cn } from "@/lib/utils";
@@ -434,7 +435,29 @@ const StructuresDisplay: React.FC<StructuresDisplayProps> = ({ structures, downl
       </CardHeader>
       <CardContent>
         {/* Summary badges section */}
-        <div className="flex flex-wrap gap-3 mb-6">
+        <div className="flex flex-wrap items-center gap-3 mb-6">
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                aria-label="How structures are counted"
+                className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Info className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 text-sm" align="start">
+              <p className="font-medium mb-2">How structures are counted</p>
+              <ul className="list-disc pl-4 space-y-1 text-muted-foreground">
+                <li>Each listed entry counts as one structure.</li>
+                <li>Left/right paired names (e.g. "Kidney_L/R") count as two models.</li>
+                <li>Entries marked "(investigational)" appear only in the Investigational badge, not in the OAR/Target/Elective totals.</li>
+                {dedupeModels && (
+                  <li>For this product, a model listed under several site groups is counted once (same name and modality), matching the vendor's stated distinct-model count. The full list below still shows every entry.</li>
+                )}
+              </ul>
+            </PopoverContent>
+          </Popover>
           {approvedOARs > 0 && (
             <div className={cn(
               "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5",
