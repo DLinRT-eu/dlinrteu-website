@@ -198,6 +198,11 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         type: "Manufacturer Publication List (vendor-provided)",
         description: "Manteia publication summary supplied 2026-09-23 (vendor-provided, retrieved 2026-09-23): of 81 records naming Manteia systems, 22 name MOZI alone and 43 name MOZI together with AccuContour. Most are algorithm-development studies (dose calculation, registration, radiomics) rather than evaluations of the marketed MOZI TPS, and the list marks 40 records as 'in development'; none was found to evaluate the cleared MOZI TPS product, so the evidence scores are unchanged. Abstracts and posters are listed for transparency and are not scored.",
         link: "https://www.manteiamedical.com/mozi"
+      },
+      {
+        type: "Conference Abstract (not scored; workflow-level, AI component not evaluated)",
+        description: "Cilla S. et al., 'MOZI: bringing daily online adaptive radiotherapy for prostate cancer SBRT treatments to a standard C-arm linac', ECMP 2026 poster P1172, Physica Medica 149S1 (2026) 106484 (Responsible Research Hospital, Tema Sinergie, University of Bologna). End-to-end phantom QA (measured vs planned dose within 4%) and 5 retrospectively simulated patients with daily CBCT-based adapted plans (median adaptation time 18 min). No AI, auto-contouring or synthetic-CT component is described; single centre, no external validation. Evidence scores unchanged.",
+        link: "https://doi.org/10.1016/j.ejmp.2026.106484"
       }
     ],
     limitations: [
@@ -206,7 +211,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       "Dose-prediction model details are vendor-provided and not publicly published; per-model performance is not disclosed and requires local validation before clinical use.",
       "No peer-reviewed publication evaluating the marketed MOZI TPS was identified (evidence rigor E0).",
       "The manufacturer-supplied MDR certificate lists MOZI TPS v1.3 and v4.0 for photon external-beam planning, but does not separately establish CE clearance for CBCT-to-synthetic-CT or MRI-to-synthetic-CT generation; FDA K223724 likewise does not confirm feature-specific scope. Both paths require local validation.",
-      "Online adaptive re-planning within MOZI TPS is not documented in the reviewed material; only offline CBCT-based adaptive re-planning is described."
+      "Online adaptive re-planning: an ECMP 2026 conference abstract (Cilla et al., P1172) reports a single-centre feasibility study of MOZI's 'Assistant Adaptive Radiotherapy' module (CBCT-based; phantom plus 5 retrospectively simulated prostate SBRT patients). It describes no AI component, so it does not evaluate the catalogued AI features and is not scored."
     ],
     categoryEvidence: {
       "Image Synthesis": {
