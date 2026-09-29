@@ -1,5 +1,6 @@
 
 import { ProductDetails } from "@/types/productDetails";
+import manteiaMdrCertificate from "@/assets/certificates/manteia-intertek-mdr-28620166008.pdf.asset.json";
 
 export const MANTEIA_PRODUCTS: ProductDetails[] = [
   {
@@ -25,7 +26,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/manteia.ts",
     description: "AI-assisted auto-contouring and image-processing software for radiation therapy workflows, supporting CT-based segmentation of OARs and selected target templates, with registration, plan review, and dose-evaluation functions depending on configuration.",
     category: "Auto-Contouring",
-    certification: "FDA 510(k); CE not independently verified",
+    certification: "FDA 510(k); CE MDR Class IIa (AccuContour v3.1 on supplied certificate)",
     logoUrl: "/logos/manteia.png",
     website: "https://www.manteiamedical.com/",
     anatomicalLocation: ["Brain", "Head & Neck", "Thorax", "Abdomen", "Pelvis"],
@@ -49,9 +50,12 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     regulatory: {
       ce: {
         status: "cleared",
-        class: "IIa",
+        class: "Class IIa",
         type: "MDR",
-        regulation: "MDR 2017/745"
+        regulation: "MDR 2017/745",
+        notifiedBody: "Intertek Medical Notified Body AB (2862)",
+        certificateNumber: "28620166008",
+        notes: "Intertek Annex IX quality-management-system certificate issued 2024-01-29, expires 2028-07-20; product list issued 2025-06-04 names AccuContour v3.1 (Class IIa, Basic UDI-DI 697312740AccuContourXE, EMDN Z11010492) and separately AccuContour-Lite v3.1 (Class IIa, Basic UDI-DI 697312740AccuContourLTQ3). Manufacturer-supplied 2026-09-29; the listed EU version is not the FDA-cleared AccuContour 4.0. MRI segmentation and synthetic CT features are not individually specified by this certificate."
       },
       fda: {
         status: "510k_cleared",
@@ -71,7 +75,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     },
     version: "4.0",
     releaseDate: "2026-01-23",
-    lastUpdated: "2026-06-15",
+    lastUpdated: "2026-09-29",
     supportedStructures: [
       // Head & Neck (156)
       "Head & Neck: A_CommonCarotid_L",
@@ -577,13 +581,18 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     evidenceRigorNotes: "Wang 2022 (Front Oncol) confirmed; additional independent studies support E2 (conditional on product-name verification in full text). 2026-09-23 manufacturer material review: Li et al., Radiother Oncol 2022 (doi 10.1016/j.radonc.2022.11.004, DOI resolved via Crossref) added as a scored paper — six abdominal/pelvic patients on an MR-linac, Manteia co-authored, so rigor stays E1.",
     clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement. Raised to I2 on 2026-09-23: Li et al. 2022 reports measured workflow endpoints (contouring 73.4 ± 6.5 s vs 12–22 min manual; adaptive session 1650 ± 274 s vs 3251.8 ± 447 s) in a six-patient MRgART series. No patient-outcome endpoint is demonstrated.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): peer-reviewed retrospective evidence and U.S. regulatory clearance are present, but public CE evidence was not independently verified and local commissioning, model acceptance testing, governance, and user training remain required.",
+    adoptionReadinessNotes: "Peer-reviewed retrospective evidence, FDA 510(k) clearance for v4.0 and a manufacturer-supplied MDR certificate listing AccuContour v3.1 are present; local commissioning, model acceptance testing, governance, and user training remain required. The certificate does not establish cleared MRI segmentation or cover the FDA v4.0 version.",
     evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "EU MDR certificate (manufacturer-supplied; regulatory document, not clinical evidence)",
+        description: "Intertek Annex IX QMS certificate 28620166008, issued 2024-01-29, expires 2028-07-20; product list dated 2025-06-04 names AccuContour v3.1, Class IIa, Basic UDI-DI 697312740AccuContourXE, and AccuContour-Lite v3.1 separately. Manufacturer-supplied, received 2026-09-29. Does not establish clinical validation or feature-specific MRI clearance.",
+        link: manteiaMdrCertificate.url
+      },
       {"type": "Multi-vendor Comparative Study", "description": "Zhu L et al. Establishing prospective performance monitoring for real-world implementation of deep learning-based auto-segmentation in prostate cancer radiotherapy. Physics and Imaging in Radiation Oncology 2025. Single-centre prospective performance monitoring comparing two commercial systems in clinical use; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2025.100886"},
       {"type": "Peer-reviewed Publication", "description": "Yucheng L et al. Development and validation of a deep reinforcement learning algorithm for auto-delineation of organs at risk in cervical cancer radiotherapy. Scientific Reports 2025. Develops a reinforcement-learning refinement on top of AccuContour; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1038/s41598-025-91362-9"},
       {"type": "Peer-reviewed Publication", "description": "Im JH et al. Impact of Denoising on Deep-Learning-Based Automatic Segmentation Framework for Breast Cancer Radiotherapy Planning. Cancers (Basel) 2022. Single-centre study of denoising as input to AccuContour; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.3390/cancers14153581"},
@@ -668,8 +677,8 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1038/s41598-025-33567-6", "title": "Consistency evaluation and performance optimization of deep learning-based auto-contouring for nasopharyngeal carcinoma", "authors": "Yan L et al.", "journal": "Sci Rep", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-centre consistency evaluation of four commercial models for nasopharyngeal structures.", "vendorIndependent": true},
     {"doi": "10.1016/j.radonc.2022.11.004", "title": "Patient-specific daily updated deep learning auto-segmentation for MRI-guided adaptive radiotherapy", "authors": "Li Z, Zhang W, Li B, et al.", "journal": "Radiother Oncol", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Six-patient longitudinal MRgART series with measured contouring and adaptive session times; Manteia co-authored.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
   ],
-    lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature. 2026-09-23: manufacturer-supplied documentation added (vendor-provided, retrieved 2026-09-23) — 'AccuContour ROI full list' (411 model entries, 397 distinct TG-263 ROI names), 'MRI organs list' (88-ROI MRI model plus brain MRI target model), 'Technical Sheet: Contouring Guidelines in AccuContour' and a publication summary of 81 records.",
+    lastRevised: "2026-09-29",
+    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature. 2026-09-23: manufacturer-supplied documentation added (vendor-provided, retrieved 2026-09-23) — 'AccuContour ROI full list' (411 model entries, 397 distinct TG-263 ROI names), 'MRI organs list' (88-ROI MRI model plus brain MRI target model), 'Technical Sheet: Contouring Guidelines in AccuContour' and a publication summary of 81 records. Intertek MDR Annex IX certificate 28620166008 and 2025-06-04 product list, manufacturer-supplied, received 2026-09-29.",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",
@@ -678,7 +687,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       "The structure library is the manufacturer-supplied list of 2026-09-23: 397 distinct CT ROI names (392 listed here, 5 unresolved vendor abbreviations omitted) and 91 MRI ROI names. A per-structure validation matrix is not published, so accuracy per structure cannot be verified.",
       "MRI ROI models are listed by the manufacturer, while the cleared indication (FDA K251351) covers CT input; MRI use requires local validation.",
       "Contouring guideline references are supplied per structure by the manufacturer and are not independently verified; several structures are referenced to anatomical atlases rather than radiotherapy consensus guidelines.",
-      "Public EU MDR/CE certificate details were not located during this audit.",
+      "The manufacturer-supplied Intertek MDR certificate lists AccuContour v3.1; it does not establish that FDA-cleared AccuContour 4.0 or MRI segmentation is within that EU version's scope.",
       "K251351 compatible contouring input is non-contrast CT DICOM 3.0, including original CT and synthetic CT; contrast-enhanced or unusual imaging workflows require local validation."
     ]
   }

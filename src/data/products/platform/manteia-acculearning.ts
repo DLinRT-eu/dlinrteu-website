@@ -10,7 +10,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/manteia-acculearning.ts",
   description: "Localized deep learning platform for clinics to build/train custom AI models for radiation therapy using institutional data.",
   category: "Platform",
-  certification: "For research use. Clinical deployment requires separate validation",
+   certification: "For research use; no AccuLearning CE listing in the supplied Manteia certificate. Clinical deployment requires separate validation",
   logoUrl: "/logos/manteia.png",
   website: "https://www.manteiamedical.com/acculearning",
   anatomicalLocation: ["All Sites"],
@@ -36,12 +36,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     triggerForAnalysis: "Model training request", // Added missing required property
     processingTime: "1-4 hours depending on dataset size" // Added missing required property
   },
-  regulatory: {
-    ce: {
-      status: "cleared",
-      class: "I",
-      type: "Software Development Environment"
-    },
+   regulatory: {
     intendedUseStatement: "AccuLearning is a deep learning–powered platform built for localized, small-sample training in radiation oncology. Designed to help clinics build customized AI models with their own data, it enables smarter, site-specific adaptation and integration across the Manteia ecosystem. (Source: Manteia AccuLearning product page, https://www.manteiatech.com/acculearning, accessed 2026-05-30. No verbatim regulatory IFU available — research-use platform.)"
   },
   market: {
@@ -76,7 +71,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   evidenceRigorNotes: "2026-09-23, manufacturer material review: two independent user publications naming AccuLearning were identified in the manufacturer's publication summary — a single-centre study establishing automatic cervical-cancer target delineation with a locally trained model (Digit Med 2025) and an MR-Linac adaptive radiotherapy case report (2023). Single-centre retrospective work with geometric endpoints places rigor at E1; the case report alone would be E0. Three further records naming AccuLearning are conference abstracts/posters and are not scored.",
   clinicalImpactNotes: "Impact is limited to geometric agreement of locally trained segmentation models; no dosimetric, workflow-time or patient-outcome endpoint is reported for the platform itself.",
   adoptionReadiness: "R1",
-  adoptionReadinessNotes: "Research-use model-training environment without a clinical clearance: any model built here needs local training-data curation, independent validation, acceptance testing and clinical governance before use. Effort is therefore high.",
+   adoptionReadinessNotes: "Research-use model-training environment without a documented clinical clearance: the manufacturer-supplied Intertek MDR certificate 28620166008 (received 2026-09-29) does not list AccuLearning. Any model built here needs local training-data curation, independent validation, acceptance testing and clinical governance before use. Effort is therefore high.",
   evidenceVendorIndependent: true,
   evidenceMultiCenter: false,
   evidenceMultiNational: false,
@@ -126,14 +121,14 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     }
   ],
   limitations: [
-    "Research-use platform: models trained here are not covered by a clinical clearance and require local validation before clinical deployment",
+     "Research-use platform: AccuLearning is not listed on the manufacturer-supplied Intertek MDR certificate 28620166008; no CE Class I claim is supported by that document. Models trained here require separate local validation before clinical deployment",
     "Model performance depends entirely on the quality and size of the institution's own training data",
     "No published evaluation of the platform itself; the identified evidence concerns individual models trained with it"
   ],
   version: "N/D",
   releaseDate: "2017-01-01",
-  lastRevised: "2026-09-23",
-  lastUpdated: "2026-09-23",
-  source: "Manteia AccuLearning product page; manufacturer publication summary (vendor-provided, retrieved 2026-09-23)"
+   lastRevised: "2026-09-29",
+  lastUpdated: "2026-09-29",
+   source: "Manteia AccuLearning product page; manufacturer publication summary (vendor-provided, retrieved 2026-09-23). Intertek MDR certificate 28620166008 product list reviewed 2026-09-29: AccuLearning is not listed; no CE status inferred from this document."
 }
 ];

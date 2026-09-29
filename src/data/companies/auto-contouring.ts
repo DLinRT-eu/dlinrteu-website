@@ -118,7 +118,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
       "lastVerified": "2026-09-22"
     },
     "name": "Manteia",
-    "description": "Chinese company developing AI solutions for radiation oncology.",
+    "description": "Chinese company developing AI solutions for radiation oncology. A manufacturer-supplied Intertek MDR Annex IX certificate (no. 28620166008; issued 2024-01-29, expires 2028-07-20; received 2026-09-29) lists AccuContour v3.1, AccuContour-Lite v3.1, MOZI TPS v1.3/v4.0 and AccuCheck v1.2; it does not list AccuLearning. The separate EUDAMED certificate registration is shown below with its own dates.",
     "website": "https://manteia.ca/",
     "productIds": [
       "manteia-accucontour",
