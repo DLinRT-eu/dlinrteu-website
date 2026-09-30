@@ -20,7 +20,8 @@ import {
   ALL_INITIATIVES, 
   CHALLENGE_INITIATIVES, 
   DATASET_INITIATIVES,
-  MODEL_ZOO_INITIATIVES
+  MODEL_ZOO_INITIATIVES,
+  RESEARCH_SOFTWARE_INITIATIVES
 } from "./initiatives";
 
 // Combine all products (including pipeline products)
