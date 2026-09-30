@@ -25,6 +25,7 @@ const Initiatives = () => {
     datasets,
     modelZoos,
     llmPlatforms,
+    researchSoftware,
     handleSortChange,
     handleDirectionChange
   } = useInitiativesSorting(filteredInitiatives);
