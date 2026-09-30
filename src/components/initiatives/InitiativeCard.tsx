@@ -19,7 +19,8 @@ const InitiativeCard = ({
   tags,
   logoUrl,
   postChallenge,
-  lastVerified
+  lastVerified,
+  additionalLinks
 }: InitiativeCardProps) => {
   const [logoFailed, setLogoFailed] = useState(false);
   const showLogo = Boolean(logoUrl) && !logoFailed;
@@ -99,6 +100,13 @@ const InitiativeCard = ({
             Visit Website <ExternalLink className="ml-2 h-4 w-4" />
           </a>
         </Button>
+        {additionalLinks?.map((link) => (
+          <Button key={link.url} asChild variant="outline" className="w-full">
+            <a href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+              {link.label} <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
+        ))}
       </CardFooter>
     </Card>
   );

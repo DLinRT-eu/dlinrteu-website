@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Brain, Server } from 'lucide-react';
+import { Brain, Server, Code2 } from 'lucide-react';
 import CategorySection from './CategorySection';
 import { Initiative } from '@/types/initiative';
 
@@ -9,6 +9,7 @@ interface InitiativesCategorySectionsProps {
   datasets: Initiative[];
   modelZoos: Initiative[];
   llmPlatforms: Initiative[];
+  researchSoftware: Initiative[];
   filteredInitiatives: Initiative[];
 }
 
@@ -17,6 +18,7 @@ const InitiativesCategorySections = ({
   datasets,
   modelZoos,
   llmPlatforms,
+  researchSoftware,
   filteredInitiatives
 }: InitiativesCategorySectionsProps) => {
   return (
@@ -34,6 +36,12 @@ const InitiativesCategorySections = ({
         initiatives={llmPlatforms}
         icon={<Server className="h-5 w-5 text-[#00A6D6]" />}
         description="Only engines and frameworks able to host multiple open models are listed here. Services tied to a single model, and hosted assistants that cannot serve other models, are not listed."
+      />
+      <CategorySection
+        title="Research Software"
+        initiatives={researchSoftware}
+        icon={<Code2 className="h-5 w-5 text-[#00A6D6]" />}
+        description="Curated collections of open-source research software for radiotherapy. These are research tools, not medical devices — inclusion does not imply regulatory clearance or clinical validation."
       />
 
       {filteredInitiatives.length === 0 && (

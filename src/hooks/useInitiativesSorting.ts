@@ -109,6 +109,12 @@ export const useInitiativesSorting = (filteredInitiatives: Initiative[]) => {
     );
   }, [sortedInitiatives]);
 
+  const researchSoftware = useMemo(() => {
+    return sortedInitiatives.filter(
+      (initiative) => initiative.category === 'Research Software'
+    );
+  }, [sortedInitiatives]);
+
   return {
     sortBy,
     ascending,
@@ -117,6 +123,7 @@ export const useInitiativesSorting = (filteredInitiatives: Initiative[]) => {
     datasets,
     modelZoos,
     llmPlatforms,
+    researchSoftware,
     handleSortChange,
     handleDirectionChange
   };
