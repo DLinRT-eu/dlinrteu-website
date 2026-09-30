@@ -5,6 +5,8 @@ export interface Initiative {
   category: string;
   description: string;
   website: string;
+  /** Secondary links shown as extra buttons on the card (e.g. a mirrored catalogue). */
+  additionalLinks?: { label: string; url: string }[];
   organization: string;
   startDate?: string;
   endDate?: string;
