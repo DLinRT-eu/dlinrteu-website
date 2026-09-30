@@ -55,6 +55,7 @@ const Initiatives = () => {
         datasets={datasets}
         modelZoos={modelZoos}
         llmPlatforms={llmPlatforms}
+        researchSoftware={researchSoftware}
         filteredInitiatives={filteredInitiatives}
       />
       
