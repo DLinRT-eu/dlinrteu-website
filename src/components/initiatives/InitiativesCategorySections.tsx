@@ -41,7 +41,7 @@ const InitiativesCategorySections = ({
         title="Research Software"
         initiatives={researchSoftware}
         icon={<Code2 className="h-5 w-5 text-[#00A6D6]" />}
-        description="Curated collections of open-source research software for radiotherapy. These are research tools, not medical devices — inclusion does not imply regulatory clearance or clinical validation."
+        description="Curated collections of open-source research software for radiotherapy. Only community-curated resources are included — we do not accept requests about individual packages or software versions; contact RS4RT to have your software included in its catalogue. These are research tools, not medical devices — inclusion does not imply regulatory clearance or clinical validation."
       />
 
       {filteredInitiatives.length === 0 && (
