@@ -105,7 +105,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
       sourceRetrievedOn: "2026-09-05",
-      notes: "Three MR models per brochure v3.2.0, each prefixed in the structure list: Brain (MR T1) 27 OARs; Pelvis Male (MR T2 Elekta MR-Linac) 11 OARs + 2 ROIs; Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay) 7 pelvis OARs + 9 abdomen OARs + 2 ROIs. Bilateral structures are split into _L/_R so totals match the vendor counts. The MR brachytherapy model is published separately as BrachyBox (id: therapanacea-brachybox). Re-verified 2026-09-05 against the vendor products page structures library and brochure v3.2.0: published model set and counts unchanged."
+      notes: "Three MR models per brochure v3.2.0, each prefixed in the structure list: Brain (MR T1) 27 OARs; Pelvis Male (MR T2 Elekta MR-Linac) 11 OARs + 2 ROIs; Pelvis/Abdomen (MR TrueFISP 0.35T, ViewRay) 7 pelvis OARs + 9 abdomen OARs + 2 ROIs. Bilateral structures are split into _L/_R so totals match the vendor counts. The MR brachytherapy model is published separately as BrachyBox (id: therapanacea-brachybox). Re-verified 2026-09-05 against the vendor products page structures library and brochure v3.2.0: published model set and counts unchanged. Re-verified 2026-10-03 against brochure ART-BRO-AN-07EU (v3.2.0, March 2026): model set, assignment and counts unchanged."
     },
     partOf: {
       name: "ART-Plan+",
