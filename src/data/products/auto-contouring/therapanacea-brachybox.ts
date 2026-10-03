@@ -38,7 +38,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
       sourceRetrievedOn: "2026-09-05",
-      notes: "Single MR model with 4 OARs. No target volumes (HR-CTV/IR-CTV) and no applicator reconstruction are published by the vendor for this model — none are listed here. Re-verified 2026-09-05 against the vendor products page structures library (MRI Brachy Pelvis, 4 OAR): unchanged."
+      notes: "Single MR model with 4 OARs. No target volumes (HR-CTV/IR-CTV) and no applicator reconstruction are published by the vendor for this model — none are listed here. Re-verified 2026-09-05 against the vendor products page structures library (MRI Brachy Pelvis, 4 OAR): unchanged. Re-verified 2026-10-03 against brochure ART-BRO-AN-07EU (v3.2.0, March 2026): unchanged."
     },
     guidelines: [
       {

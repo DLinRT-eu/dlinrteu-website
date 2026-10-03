@@ -12,7 +12,7 @@
  *
  * Sources:
  *   - ART-Plan™ "Structures Delineated" brochure, version 3.2.0, ref ART-BRO-AN-07EU,
- *     March 2026: https://d2oi0h5pbjc5wm.cloudfront.net/product/products-structures-brochure.pdf
+ *     March 2026 (doc. ART-BRO-AN-07EU; re-verified 2026-10-03): https://d2oi0h5pbjc5wm.cloudfront.net/product/products-structures-brochure.pdf
  *   - Therapanacea products page: https://therapanacea.com/products
  *   - FDA 510(k) K253091 (ART-Plan+ v3.1.0, decision 2025-12-23)
  *   - FDA 510(k) K234068 (ART-Plan v2.2.0, MR-Box pseudo-CT, 2024-04)
