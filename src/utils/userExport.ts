@@ -71,10 +71,10 @@ export const exportToExcel = async (users: ExportUserData[], filename: string = 
     // Data rows
     ...users.map(user => [
       user.id,
-      user.email,
-      user.firstName,
-      user.lastName,
-      user.institution || '',
+      sanitizeCsvCell(user.email),
+      sanitizeCsvCell(user.firstName),
+      sanitizeCsvCell(user.lastName),
+      sanitizeCsvCell(user.institution || ''),
       user.roles.join(', '),
       user.approvalStatus || 'pending',
       user.createdAt

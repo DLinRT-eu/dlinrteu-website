@@ -84,9 +84,9 @@ export const exportNewsletterToExcel = async (
   const worksheetData = [
     ['Email', 'First Name', 'Last Name', 'Consent Given', 'Subscribed Date', 'Unsubscribed Date', 'Status'],
     ...subscribers.map(sub => [
-      sub.email,
-      sub.first_name,
-      sub.last_name,
+      sanitizeCsvCell(sub.email),
+      sanitizeCsvCell(sub.first_name),
+      sanitizeCsvCell(sub.last_name),
       sub.consent_given ? 'Yes' : 'No',
       formatExportDate(sub.created_at),
       sub.unsubscribed_at ? formatExportDate(sub.unsubscribed_at) : '',
