@@ -227,9 +227,10 @@ export default function Auth() {
         setError(signUpError.message || 'Failed to create account');
         setWarning(null); // Clear warning if there's an error
       } else {
-        // Best-effort newsletter subscription (only if user explicitly opted in).
+        // Best-effort newsletter handling (never blocks account creation).
         // GDPR Art. 6(1)(a): marketing consent is separate from account consent.
         if (validation.newsletterOptIn) {
+          // Explicit opt-in: subscribe immediately.
           try {
             await supabase.functions.invoke('subscribe-newsletter', {
               body: {
@@ -241,6 +242,19 @@ export default function Auth() {
             });
           } catch (newsletterErr) {
             console.warn('Newsletter subscription failed (non-blocking):', newsletterErr);
+          }
+        } else {
+          // No opt-in: send a one-time consent invite with a confirmation link.
+          try {
+            await supabase.functions.invoke('send-newsletter-consent-invite', {
+              body: {
+                email: validation.email,
+                firstName: validation.firstName,
+                lastName: validation.lastName,
+              },
+            });
+          } catch (inviteErr) {
+            console.warn('Newsletter consent invite failed (non-blocking):', inviteErr);
           }
         }
         setSuccessMessage('Account created! Please check your email to verify your account.');
