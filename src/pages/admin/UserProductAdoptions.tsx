@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Download, Search, Package } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { escapeCsvCell } from '@/utils/csvSanitize';
 
 interface UserProductAdoption {
   first_name: string;
@@ -104,7 +105,7 @@ export default function UserProductAdoptions() {
 
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+      ...rows.map(row => row.map(cell => `"${escapeCsvCell(cell)}"`).join(','))
     ].join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv' });

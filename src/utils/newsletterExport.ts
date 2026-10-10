@@ -1,4 +1,5 @@
 import { exportToExcelAoa } from './excelExport';
+import { escapeCsvCell, sanitizeCsvCell } from './csvSanitize';
 
 export interface NewsletterSubscriber {
   id: string;
@@ -57,13 +58,7 @@ export const exportNewsletterToCSV = (
 
   const csvContent = [
     headers.join(','),
-    ...rows.map(row => row.map(cell => {
-      const cellStr = String(cell);
-      if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
-        return `"${cellStr.replace(/"/g, '""')}"`;
-      }
-      return cellStr;
-    }).join(','))
+    ...rows.map(row => row.map(escapeCsvCell).join(','))
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -89,9 +84,9 @@ export const exportNewsletterToExcel = async (
   const worksheetData = [
     ['Email', 'First Name', 'Last Name', 'Consent Given', 'Subscribed Date', 'Unsubscribed Date', 'Status'],
     ...subscribers.map(sub => [
-      sub.email,
-      sub.first_name,
-      sub.last_name,
+      sanitizeCsvCell(sub.email),
+      sanitizeCsvCell(sub.first_name),
+      sanitizeCsvCell(sub.last_name),
       sub.consent_given ? 'Yes' : 'No',
       formatExportDate(sub.created_at),
       sub.unsubscribed_at ? formatExportDate(sub.unsubscribed_at) : '',
