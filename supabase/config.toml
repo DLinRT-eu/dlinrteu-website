@@ -16,6 +16,9 @@ verify_jwt = false  # Public unsubscribe link (uses token)
 [functions.confirm-newsletter-resubscribe]
 verify_jwt = false  # Public confirmation link (uses signed token)
 
+[functions.send-newsletter-consent-invite]
+verify_jwt = false  # Called right after signup; rate-limited, signed-token confirm link
+
 [functions.rss-feed]
 verify_jwt = false  # Public RSS feed
 
