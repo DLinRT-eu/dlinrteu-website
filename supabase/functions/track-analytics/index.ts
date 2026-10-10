@@ -118,6 +118,14 @@ Deno.serve(async (req) => {
   const isNonNegInt = (v: unknown): v is number =>
     typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 1_000_000_000;
 
+  // Only today and yesterday (UTC) are writable — blocks rewriting history.
+  const isRecentDate = (date: string): boolean => {
+    const now = new Date();
+    const today = now.toISOString().slice(0, 10);
+    const yesterday = new Date(now.getTime() - 86400000).toISOString().slice(0, 10);
+    return date === today || date === yesterday;
+  };
+
   try {
     if (body.action === "record_unique_visitor") {
       const { date, visitorId } = body;
@@ -126,6 +134,9 @@ Deno.serve(async (req) => {
       }
       if (!DATE_RE.test(date) || visitorId.length > 200 || visitorId.length < 1) {
         return jsonResponse({ error: "Invalid field values" }, 400, corsHeaders);
+      }
+      if (!isRecentDate(date)) {
+        return jsonResponse({ error: "Only recent dates are accepted" }, 400, corsHeaders);
       }
 
       // Hash visitor ID for privacy
@@ -163,6 +174,9 @@ Deno.serve(async (req) => {
       if (!DATE_RE.test(date)) {
         return jsonResponse({ error: "Invalid date format" }, 400, corsHeaders);
       }
+      if (!isRecentDate(date)) {
+        return jsonResponse({ error: "Only recent dates are accepted" }, 400, corsHeaders);
+      }
       if (!isNonNegInt((data as any).totalVisits) || !isNonNegInt((data as any).uniqueVisitors)) {
         return jsonResponse({ error: "Invalid visit counts" }, 400, corsHeaders);
       }
@@ -183,27 +197,50 @@ Deno.serve(async (req) => {
         }
       }
 
+      // Never decrease existing totals: a call can only raise counts, not
+      // erase or rewrite them downward.
+      const { data: existingDaily } = await supabase
+        .from("analytics_daily")
+        .select("total_visits, unique_visitors")
+        .eq("date", date)
+        .maybeSingle();
+
       const { error: dailyErr } = await supabase
         .from("analytics_daily")
         .upsert(
           {
             date,
-            total_visits: data.totalVisits,
-            unique_visitors: data.uniqueVisitors,
+            total_visits: Math.max(existingDaily?.total_visits ?? 0, data.totalVisits),
+            unique_visitors: Math.max(existingDaily?.unique_visitors ?? 0, data.uniqueVisitors),
             updated_at: new Date().toISOString(),
           },
           { onConflict: "date" }
         );
       if (dailyErr) throw dailyErr;
 
-      const pageRows = Object.entries(data.pageVisits).map(([path, v]) => ({
-        date,
-        path,
-        title: path,
-        visit_count: v.count,
-        total_duration: v.totalDuration,
-        updated_at: new Date().toISOString(),
-      }));
+      const pageEntries = Object.entries(data.pageVisits);
+      let existingPages: { path: string; visit_count: number; total_duration: number }[] = [];
+      if (pageEntries.length) {
+        const { data: rows } = await supabase
+          .from("analytics_page_visits")
+          .select("path, visit_count, total_duration")
+          .eq("date", date)
+          .in("path", pageEntries.map(([p]) => p));
+        existingPages = rows ?? [];
+      }
+      const existingByPath = new Map(existingPages.map((r) => [r.path, r]));
+
+      const pageRows = pageEntries.map(([path, v]) => {
+        const existing = existingByPath.get(path);
+        return {
+          date,
+          path,
+          title: path,
+          visit_count: Math.max(existing?.visit_count ?? 0, v.count),
+          total_duration: Math.max(existing?.total_duration ?? 0, v.totalDuration),
+          updated_at: new Date().toISOString(),
+        };
+      });
 
       if (pageRows.length) {
         const { error: pageErr } = await supabase
