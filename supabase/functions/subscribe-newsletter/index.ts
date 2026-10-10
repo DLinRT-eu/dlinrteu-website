@@ -28,6 +28,7 @@ function createResend(apiKey: string | undefined) {
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { getOrCreateAudienceId, upsertContact } from "../_shared/resend-audience.ts";
+import { createResubscribeToken } from "../_shared/resubscribe-token.ts";
 
 const resend = createResend(Deno.env.get("RESEND_API_KEY"));
 
@@ -196,22 +197,60 @@ const handler = async (req: Request): Promise<Response> => {
           }
         );
       } else {
-        // Reactivate subscription
-        const { error: updateError } = await supabase
-          .from('newsletter_subscribers')
-          .update({
-            first_name: firstName,
-            last_name: lastName,
-            consent_given: consentGiven,
-            unsubscribed_at: null,
-            updated_at: new Date().toISOString()
-          })
-          .eq('email', email);
+        // Previously unsubscribed: require email confirmation before reactivating,
+        // so only the mailbox owner can undo an unsubscribe.
+        const token = await createResubscribeToken({
+          email: email.toLowerCase(),
+          firstName,
+          lastName,
+          expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+        const confirmUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/confirm-newsletter-resubscribe?token=${token}`;
 
-        if (updateError) {
-          console.error('Error reactivating subscription:', updateError);
-          throw new Error('Failed to reactivate subscription');
+        try {
+          await resend.emails.send({
+            from: "DLinRT Newsletter <noreply@dlinrt.eu>",
+            reply_to: "info@dlinrt.eu",
+            to: [email],
+            subject: "Confirm your DLinRT newsletter subscription",
+            html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
+                  Confirm your subscription
+                </h2>
+                <p>Hello ${safeFirst},</p>
+                <p>We received a request to re-subscribe this email address to the DLinRT newsletter. Because this address was previously unsubscribed, we need your confirmation before reactivating it.</p>
+                <p style="text-align: center; margin: 30px 0;">
+                  <a href="${confirmUrl}" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+                    Confirm subscription
+                  </a>
+                </p>
+                <p style="color: #666; font-size: 14px;">This link expires in 7 days. If you did not request this, you can simply ignore this email — your unsubscribe stays in effect.</p>
+              </div>
+            `,
+          });
+          await logEmailSend(supabase, {
+            functionName: "subscribe-newsletter",
+            recipient: email,
+            subject: "Confirm your DLinRT newsletter subscription",
+            status: "sent",
+          });
+        } catch (emailError) {
+          console.error('Error sending resubscribe confirmation email:', emailError);
+          await logEmailSend(supabase, {
+            functionName: "subscribe-newsletter",
+            recipient: email,
+            subject: "Confirm your DLinRT newsletter subscription",
+            status: "failed",
+            error: emailError instanceof Error ? emailError.message : String(emailError),
+          });
+          throw new Error('Failed to send confirmation email');
         }
+
+        return new Response(
+          JSON.stringify({ success: true, message: "Please check your inbox to confirm your subscription" }),
+          { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
       }
     } else {
       // Insert new subscriber
