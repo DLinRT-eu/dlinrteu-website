@@ -1,4 +1,5 @@
 import { exportToExcelAoa } from './excelExport';
+import { escapeCsvCell, sanitizeCsvCell } from './csvSanitize';
 
 export interface ExportUserData {
   id: string;
@@ -42,14 +43,7 @@ export const exportToCSV = (users: ExportUserData[], filename: string = 'users_e
   // Combine headers and rows
   const csvContent = [
     headers.join(','),
-    ...rows.map(row => row.map(cell => {
-      // Escape cells containing commas or quotes
-      const cellStr = String(cell);
-      if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
-        return `"${cellStr.replace(/"/g, '""')}"`;
-      }
-      return cellStr;
-    }).join(','))
+    ...rows.map(row => row.map(escapeCsvCell).join(','))
   ].join('\n');
 
   // Create blob and download
