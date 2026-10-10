@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Download, Search, Package } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { escapeCsvCell } from '@/utils/csvSanitize';
 
 interface UserProductAdoption {
   first_name: string;
