@@ -118,6 +118,14 @@ Deno.serve(async (req) => {
   const isNonNegInt = (v: unknown): v is number =>
     typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 1_000_000_000;
 
+  // Only today and yesterday (UTC) are writable — blocks rewriting history.
+  const isRecentDate = (date: string): boolean => {
+    const now = new Date();
+    const today = now.toISOString().slice(0, 10);
+    const yesterday = new Date(now.getTime() - 86400000).toISOString().slice(0, 10);
+    return date === today || date === yesterday;
+  };
+
   try {
     if (body.action === "record_unique_visitor") {
       const { date, visitorId } = body;
@@ -126,6 +134,9 @@ Deno.serve(async (req) => {
       }
       if (!DATE_RE.test(date) || visitorId.length > 200 || visitorId.length < 1) {
         return jsonResponse({ error: "Invalid field values" }, 400, corsHeaders);
+      }
+      if (!isRecentDate(date)) {
+        return jsonResponse({ error: "Only recent dates are accepted" }, 400, corsHeaders);
       }
 
       // Hash visitor ID for privacy
@@ -162,6 +173,9 @@ Deno.serve(async (req) => {
       }
       if (!DATE_RE.test(date)) {
         return jsonResponse({ error: "Invalid date format" }, 400, corsHeaders);
+      }
+      if (!isRecentDate(date)) {
+        return jsonResponse({ error: "Only recent dates are accepted" }, 400, corsHeaders);
       }
       if (!isNonNegInt((data as any).totalVisits) || !isNonNegInt((data as any).uniqueVisitors)) {
         return jsonResponse({ error: "Invalid visit counts" }, 400, corsHeaders);
