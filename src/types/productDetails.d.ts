@@ -346,6 +346,8 @@ export interface ProductDetails extends Product {
     evidenceRigor?: ProductDetails['evidenceRigor'];
     evidenceRigorNotes?: string;
     clinicalImpact?: ProductDetails['clinicalImpact'];
+    legacyClinicalImpact?: ProductDetails['legacyClinicalImpact'];
+    efficacyProvisional?: boolean;
     clinicalImpactNotes?: string;
     adoptionReadiness?: ProductDetails['adoptionReadiness'];
     adoptionReadinessNotes?: string;

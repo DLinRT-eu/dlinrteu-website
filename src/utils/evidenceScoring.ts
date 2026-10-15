@@ -1,7 +1,9 @@
 import type { ProductDetails } from "@/types/productDetails";
-import type {
-  EvidenceRigorCode,
-  ClinicalImpactCode,
+import {
+  efficacyRank,
+  resolveEfficacyLevel,
+  type EvidenceRigorCode,
+  type ClinicalImpactCode,
 } from "@/data/evidence-impact-levels";
 
 export type ScoredPaper = NonNullable<ProductDetails["keyPapers"]>[number];
@@ -37,7 +39,6 @@ export interface ComputedEvidenceScore {
 }
 
 const RIGOR_ORDER: EvidenceRigorCode[] = ["E0", "E1", "E2", "E3"];
-const IMPACT_ORDER: ClinicalImpactCode[] = ["I0", "I1", "I2", "I3", "I4", "I5"];
 
 const rank = <T extends string>(order: T[], code?: T): number =>
   code ? order.indexOf(code) : -1;
@@ -83,15 +84,15 @@ export function computeProductEvidenceScore(
       rigorSource = paper;
     }
     if (
-      rank(IMPACT_ORDER, paper.clinicalImpact) >
-      rank(IMPACT_ORDER, impactSource?.clinicalImpact)
+      efficacyRank(paper.clinicalImpact) >
+      efficacyRank(impactSource?.clinicalImpact)
     ) {
       impactSource = paper;
     }
   }
 
   const computedRigor = rigorSource?.evidenceRigor;
-  const computedImpact = impactSource?.clinicalImpact;
+  const computedImpact = resolveEfficacyLevel(impactSource?.clinicalImpact).level;
   const override = product.evidenceScoreOverride;
 
   const resolve = <T extends string>(
@@ -112,8 +113,8 @@ export function computeProductEvidenceScore(
   );
   const impact = resolve(
     computedImpact,
-    override?.impact,
-    product.clinicalImpact as ClinicalImpactCode | undefined
+    resolveEfficacyLevel(override?.impact).level,
+    resolveEfficacyLevel(product.clinicalImpact).level as ClinicalImpactCode | undefined
   );
 
   const orFlag = (
