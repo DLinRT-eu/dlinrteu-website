@@ -137,7 +137,7 @@ export interface ProductDetails extends Product {
   // Dual-axis evidence classification (separates rigor from impact)
   evidenceRigor?: "E0" | "E1" | "E2" | "E3"; // How robust is the evidence methodology?
   evidenceRigorNotes?: string;
-  // Levels of Efficacy (L1t–L6). Legacy I0–I5 values are converted provisionally until re-scored.
+  // Levels of Efficacy (L1t–L6). Legacy L1t–L6 values are converted provisionally until re-scored.
   clinicalImpact?: "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6" | "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
   /** Original I-code kept for audit after re-scoring to Levels of Efficacy. */
   legacyClinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";

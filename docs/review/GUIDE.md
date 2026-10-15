@@ -31,7 +31,7 @@ DLinRT.eu supports two methods for reviewing products:
    - Changes auto-save every 30 seconds
 
 3. **Set Evidence Classification**
-   - Assign evidence rigor (E0–E3), clinical impact (I0–I5), and adoption readiness (R0–R5) using the [tri-axial system](#evidence-level-classification)
+   - Assign evidence rigor (E0–E3), levels of efficacy (L1t–L6), and adoption readiness (R0–R5) using the [tri-axial system](#evidence-level-classification)
    - The Evidence & Limitations section is always visible
    - Select levels from dropdowns and add justification notes
 
@@ -262,7 +262,7 @@ All examples include:
 
 ## Evidence Level Classification
 
-Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Levels of Efficacy (I0–I5), with a third axis for Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension (higher R = closer to clinical adoption) — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
+Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Levels of Efficacy (L1t–L6), with a third axis for Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension (higher R = closer to clinical adoption) — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
 
 ### Evidence Rigor (E0-E3)
 
@@ -339,6 +339,6 @@ Reviewers must assign `adoptionReadiness` (R0–R5) alongside E and I. Use the r
 - **Minor commissioning, training or workflow confirmation** → R4 (deploy with monitoring)
 - **Documentation, validation, integration, QA and governance complete, aligned with guidelines** → R5 (adoption-ready)
 
-A product can only be marked **Adoption-grade** when E≥E2, I≥I2 AND R=R5. Low R constrains the public Readiness Signal even when E and I are strong.
+A product can only be marked **Adoption-grade** when E≥E2, L≥L3 AND R=R5. Low R constrains the public Readiness Signal even when E and I are strong.
 
 **Strength of evidence note.** Peer-review status, funding independence, and conflict-of-interest are not collapsed into E. They are captured via the study-quality sub-attributes (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`) so reviewers can score rigor methodologically while keeping these signals visible.

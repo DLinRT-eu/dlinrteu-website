@@ -435,7 +435,7 @@ Different fields have different editing experiences:
 
 #### Evidence Level Classification (Tri-Axial System)
 
-Every product should have an evidence classification using the tri-axial framework: **Evidence Rigor** (E0–E3), **Clinical Impact** (I0–I5), and **Adoption Readiness** (R0–R5), plus optional study-quality sub-attributes for the rigor axis.
+Every product should have an evidence classification using the tri-axial framework: **Evidence Rigor** (E0–E3), **Clinical Impact** (L1t–L6), and **Adoption Readiness** (R0–R5), plus optional study-quality sub-attributes for the rigor axis.
 
 > For the full criteria tables and academic references, see the [Product Review Guide – Evidence Level Classification](review/GUIDE.md#evidence-level-classification).
 

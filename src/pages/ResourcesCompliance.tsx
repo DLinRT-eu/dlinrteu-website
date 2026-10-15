@@ -131,7 +131,7 @@ const ResourcesCompliance = () => {
             </h3>
             <p className="text-muted-foreground mb-4 leading-relaxed">
               We classify products on two evidence axes: <strong>evidence rigor</strong> (E0–E3) and
-              <strong> clinical impact</strong> (I0–I5) — adapted from van Leeuwen et al. (2021, updated 2025),
+              <strong> levels of efficacy</strong> (L1t–L6) — adapted from van Leeuwen et al. (2021, updated 2025),
               with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991).
               Each product is further assessed on five granular study quality sub-attributes —
               vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
@@ -221,7 +221,7 @@ const ResourcesCompliance = () => {
                   <tbody className="divide-y divide-border">
                     <tr><td className="py-2 pr-4 font-mono text-xs">CUR</td><td className="py-2 pr-4">Intended use, target indication, anatomy, modality, clinical task</td></tr>
                     <tr><td className="py-2 pr-4 font-mono text-xs">TEC</td><td className="py-2 pr-4">Key features, technical specs, AI/model details, dose prediction models</td></tr>
-                    <tr><td className="py-2 pr-4 font-mono text-xs">EFF</td><td className="py-2 pr-4">Evidence rigor (E0–E3), clinical impact (I0–I5), evaluation dataset, study quality</td></tr>
+                    <tr><td className="py-2 pr-4 font-mono text-xs">EFF</td><td className="py-2 pr-4">Evidence rigor (E0–E3), levels of efficacy (L1t–L6), evaluation dataset, study quality</td></tr>
                     <tr><td className="py-2 pr-4 font-mono text-xs">SAF</td><td className="py-2 pr-4">Supported structures (with status flags), limitations, safety/corrective actions</td></tr>
                     <tr><td className="py-2 pr-4 font-mono text-xs">ETH</td><td className="py-2 pr-4">Training data sources, demographics, public datasets, disclosure level</td></tr>
                     <tr><td className="py-2 pr-4 font-mono text-xs">ORG</td><td className="py-2 pr-4">Deployment model, integration, market presence</td></tr>

@@ -2,7 +2,7 @@
 
 > A peer-reviewed catalog of AI and deep-learning products used in radiotherapy. Independent reference for clinicians, researchers, and vendors covering auto-contouring, treatment planning, image synthesis, registration, reconstruction, performance monitoring, and more.
 
-DLinRT.eu tracks commercially available and pipeline AI/DL products for radiotherapy with structured metadata: regulatory status (CE/FDA/TGA/TFDA), evidence rigor (E0–E3) and clinical impact (I0–I5), training/evaluation data transparency, supported anatomies and structures, modality, and manufacturer information. Reviews follow a published rubric; companies can certify their listings.
+DLinRT.eu tracks commercially available and pipeline AI/DL products for radiotherapy with structured metadata: regulatory status (CE/FDA/TGA/TFDA), evidence rigor (E0–E3) and levels of efficacy (L1t–L6), training/evaluation data transparency, supported anatomies and structures, modality, and manufacturer information. Reviews follow a published rubric; companies can certify their listings.
 
 ## Pages
 

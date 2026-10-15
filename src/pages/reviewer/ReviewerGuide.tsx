@@ -122,7 +122,7 @@ export default function ReviewerGuide() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-purple-600 mt-1">•</span>
-                    <span>Classify evidence levels using the tri-axial framework (E0–E3 rigor, I0–I5 impact, R0–R5 adoption readiness)</span>
+                    <span>Classify evidence levels using the tri-axial framework (E0–E3 rigor, L1t–L6 levels of efficacy, R0–R5 adoption readiness)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-purple-600 mt-1">•</span>
@@ -395,7 +395,7 @@ export default function ReviewerGuide() {
                     <li>Regulatory status (CE, FDA, TGA, TFDA)</li>
                     <li>
                       Evidence classification — score <strong>each peer-reviewed publication individually</strong> on
-                      <strong> E0–E3</strong> rigor and <strong>I0–I5</strong> impact, with a rationale and the five
+                      <strong> E0–E3</strong> rigor and <strong>L1t–L6</strong> level of efficacy, with a rationale and the five
                       study-quality flags. The product-level E/I is the maximum across scored publications; regulatory
                       clearances, vendor documents, press items and conference abstracts are sources but are not scoreable.
                     </li>
@@ -646,7 +646,7 @@ export default function ReviewerGuide() {
                 <h4 className="font-semibold mb-2">Always Set Evidence Levels</h4>
                 <p className="text-sm text-muted-foreground">
                   Every product should have an evidence classification. Score each peer-reviewed publication
-                  individually on <strong>E0–E3</strong> rigor and <strong>I0–I5</strong> clinical impact with a
+                  individually on <strong>E0–E3</strong> rigor and <strong>L1t–L6</strong> level of efficacy with a
                   justification note; the product-level score is the maximum across scored publications.
                 </p>
               </div>

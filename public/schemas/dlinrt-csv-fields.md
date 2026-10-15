@@ -129,7 +129,7 @@ single row with `Note = No scored publication`.
 | `DOI`, `PMID` | Identifiers as recorded. |
 | `Link` | Direct URL; derived from the DOI (`https://doi.org/…`) or PMID when no explicit link is stored. |
 | `Evidence Rigor` | E0–E3 assigned to this individual source. |
-| `Clinical Impact` | I0–I5 assigned to this individual source. |
+| `Clinical Impact` | L1t–L6 assigned to this individual source. |
 | `Rationale` | One-line justification for this source's levels. |
 | `Vendor Independent`, `Multi-Center`, `Multi-National`, `Prospective`, `External Validation` | Study-quality attributes of this source. |
 | `Sets Product Rigor`, `Sets Product Impact` | Whether this source sets the product maximum on that axis. |

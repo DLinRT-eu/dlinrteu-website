@@ -137,7 +137,7 @@ All free-text fields rendered through `<AutoLinkText>` apply the same rule: only
 
 ## Evidence Level Classification (Tri-Axial System)
 
-Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Levels of Efficacy (I0–I5), and Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension capturing how close a product is to clinical adoption (higher R = closer to ready) — see the [§Adoption Readiness](#implementation--assurance-burden-z-axis) section below.
+Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6), and Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension capturing how close a product is to clinical adoption (higher R = closer to ready) — see the [§Adoption Readiness](#implementation--assurance-burden-z-axis) section below.
 
 ### Evidence Rigor (E0-E3)
 
@@ -321,7 +321,7 @@ When using the in-browser visual editor, fields use specialized editor component
 ## Quick Checklist for Reviewers
 
 1. Confirm **core identity** fields (name, company, description, category).
-2. **Set evidence classification** (E0–E3 rigor + I0–I5 impact + R0–R5 adoption readiness) — prominently displayed.
+2. **Set evidence classification** (E0–E3 rigor + L1t–L6 levels of efficacy + R0–R5 adoption readiness) — prominently displayed.
 3. Validate **modality, anatomy, supportedStructures** against current evidence.
 4. Update **versioning and dates** even if no other change is required.
 5. Verify **regulatory** claims with certificates or official databases (CE, FDA, TGA, TFDA).

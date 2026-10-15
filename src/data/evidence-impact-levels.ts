@@ -73,7 +73,7 @@ export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
 // the Fryback & Thornbury (1991) hierarchy of diagnostic efficacy.
 
 export type EfficacyLevelCode = "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6";
-/** @deprecated Legacy Levels of Efficacy codes (I0–I5); read-only, converted provisionally. */
+/** @deprecated Legacy Levels of Efficacy codes (L1t–L6); read-only, converted provisionally. */
 export type LegacyClinicalImpactCode = "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
 /** Second-axis code. Kept under the historic name to avoid churn across consumers. */
 export type ClinicalImpactCode = EfficacyLevelCode;
@@ -805,7 +805,7 @@ export const METHODOLOGY_REFERENCES: MethodologyReferenceGroup[] = [
         citation:
           "DLinRT.eu. Evidence Matrix proposal v1.1: tri-axial E/I/R appraisal framework for radiotherapy AI. Internal methodology document; 2026.",
         notes:
-          "Source for the E0–E3 / I0–I5 / R0–R5 level definitions, level-assignment rules and composite readiness signal used on the public site.",
+          "Source for the E0–E3 / L1t–L6 / R0–R5 level definitions, level-assignment rules and composite readiness signal used on the public site.",
       },
       {
         citation:

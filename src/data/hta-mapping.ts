@@ -52,7 +52,7 @@ export const HTA_FIELD_MAP: Record<string, { domain: HTADomainCode; label: strin
 
   "evidence":                 { domain: "EFF", label: "Clinical evidence" },
   "evidenceRigor":            { domain: "EFF", label: "Evidence rigor (E0–E3)" },
-  "clinicalImpact":           { domain: "EFF", label: "Clinical impact (I0–I5)" },
+  "clinicalImpact":           { domain: "EFF", label: "Levels of efficacy (L1t–L6)" },
   "evaluationData":           { domain: "EFF", label: "Evaluation dataset" },
   "studyQuality":             { domain: "EFF", label: "Study quality attributes" },
 
