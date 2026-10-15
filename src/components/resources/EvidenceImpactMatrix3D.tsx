@@ -1,12 +1,13 @@
 import React, { useMemo, useRef, useState, useEffect, Suspense } from "react";
-import { Canvas, useFrame, ThreeEvent } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, Text, Html, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import {
   EVIDENCE_RIGOR_LEVELS,
-  CLINICAL_IMPACT_LEVELS,
+  EFFICACY_LEVELS,
   ADOPTION_READINESS_LEVELS,
 } from "@/data/evidence-impact-levels";
+import { getEvidenceMatrixProducts } from "@/utils/evidenceMatrix";
 import dataService from "@/services/DataService";
 import type { ProductDetails } from "@/types/productDetails";
 import { Button } from "@/components/ui/button";
@@ -16,11 +17,11 @@ import { RotateCw, RefreshCw, Eye, X, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 /**
- * Real interactive WebGL 3D plot of the Evidence × Impact × Implementation-Burden matrix.
+ * Interactive Evidence Rigor × Levels of Efficacy × Adoption Readiness matrix.
  *
  * Axes (3D world):
  *  - X : Levels of Efficacy   L1t → L6
- *  - Y : Implementation Burden Z0 → Z5  (vertical, height of bars also encodes count)
+ *  - Y : Adoption Readiness R0 → R5  (vertical, height of bars also encodes count)
  *  - Z : Evidence Rigor       E0 → E3
  *
  * Each (E, I, Z) bucket with ≥1 product → one box.
@@ -61,7 +62,7 @@ const compositeColor = (rigor: string, impact: string, burden: string): string =
 };
 
 const RIGOR = EVIDENCE_RIGOR_LEVELS;          // E0..E3
-const IMPACT = CLINICAL_IMPACT_LEVELS;        // L1t..L6
+const IMPACT = EFFICACY_LEVELS;        // L1t..L6
 const BURDEN = ADOPTION_READINESS_LEVELS;     // R0..R5
 
 interface BucketProduct {
@@ -69,6 +70,7 @@ interface BucketProduct {
   name: string;
   company?: string;
   category?: string;
+  provisional: boolean;
 }
 
 interface Bucket {
@@ -285,7 +287,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
         rotation={[-Math.PI / 2, 0, Math.PI / 2]}
         fontSize={0.34}
       >
-        Evidence rigour (E-axis) →
+        Evidence Rigor (E-axis) →
       </Text>
 
       {/* === Z axis (Implementation burden) — vertical at back-right corner === */}
@@ -293,7 +295,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
       {BURDEN.map((z, i) => {
         const y = (i + 0.5) * (zHeight / BURDEN.length);
         const labelText =
-          i === 0 ? `${z.level} low` : i === BURDEN.length - 1 ? `${z.level} high` : z.level;
+          i === 0 ? `${z.level} blocked` : i === BURDEN.length - 1 ? `${z.level} routine` : z.level;
         return (
           <group key={`z-${z.level}`}>
             <mesh position={[rightX + 0.08, y, backZ]}>
@@ -316,7 +318,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
         rotation={[0, 0, Math.PI / 2]}
         fontSize={0.34}
       >
-        Implementation effort / assurance burden (Z-axis) ↑
+        Adoption Readiness (R-axis) ↑
       </Text>
     </group>
   );
@@ -357,11 +359,13 @@ const Scene: React.FC<SceneProps> = ({
   controlsRef,
   autoRotate,
 }) => {
-  const cols = IMPACT.length;       // 6
+  const cols = IMPACT.length;       // 7
   const rows = RIGOR.length;        // 4
   const zCount = BURDEN.length;     // 6
   const zSlot = 1.1;                // vertical units per Z slot
   const zHeight = zCount * zSlot;
+  const { size } = useThree();
+  const cameraScale = Math.max(1, size.height / size.width) * 1.2;
 
   const maxCount = Math.max(1, ...buckets.map((b) => b.count));
   const heightFor = (count: number) => {
@@ -438,7 +442,7 @@ const Scene: React.FC<SceneProps> = ({
 
       {renderedBars}
 
-      <PerspectiveCamera makeDefault position={[cols * 1.7, zHeight * 1.1, rows * 2.6]} fov={40} />
+      <PerspectiveCamera makeDefault position={[cols * 1.7 * cameraScale, zHeight * 1.1 * cameraScale, rows * 2.6 * cameraScale]} fov={40} />
       <OrbitControls
         ref={controlsRef}
         target={[(cols - 1) / 2, zHeight / 3, (rows - 1) / 2]}
@@ -467,7 +471,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
   const buckets = useMemo<Bucket[]>(() => {
     const map = new Map<string, Bucket>();
     const source = products ?? dataService.getAllProducts();
-    for (const p of source) {
+    for (const p of getEvidenceMatrixProducts(source)) {
       const e = p.evidenceRigor;
       const i = p.clinicalImpact;
       const z = p.adoptionReadiness;
@@ -478,6 +482,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
         name: p.name,
         company: p.company,
         category: p.category,
+        provisional: p.efficacyProvisional === true,
       };
       const existing = map.get(key);
       if (existing) {
@@ -606,19 +611,19 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
         <aside className="rounded-lg border bg-card p-3 text-xs space-y-3">
           <div>
             <div className="font-semibold text-sm mb-1">
-              {detail ? "Bucket details" : "Burden axis (Z)"}
+              {detail ? "Bucket details" : "Adoption Readiness (R)"}
             </div>
             {detail && detailMeta ? (
               <div className="space-y-2">
                 <div className="text-muted-foreground">
-                  <span className="font-medium text-foreground">Rigor:</span> {detailMeta.rigor?.name}
+                  <span className="font-medium text-foreground">Evidence Rigor:</span> {detailMeta.rigor?.name}
                 </div>
                 <div className="text-muted-foreground">
-                  <span className="font-medium text-foreground">Impact:</span>{" "}
+                  <span className="font-medium text-foreground">Levels of Efficacy:</span>{" "}
                   {detailMeta.impact?.name}
                 </div>
                 <div className="text-muted-foreground">
-                  <span className="font-medium text-foreground">Burden:</span>{" "}
+                  <span className="font-medium text-foreground">Adoption Readiness:</span>{" "}
                   {detailMeta.burden?.name}
                 </div>
                 {detailMeta.burden && (
@@ -655,6 +660,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                               </span>
                               <ExternalLink className="h-3 w-3 mt-0.5 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100" />
                             </div>
+                            {prod.provisional && <div className="text-[10px] text-muted-foreground">Provisional efficacy — pending source review</div>}
                             {(prod.company || prod.category) && (
                               <div className="text-[10px] text-muted-foreground mt-0.5">
                                 {[prod.company, prod.category].filter(Boolean).join(" · ")}
@@ -680,7 +686,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
           </div>
 
           <div className="pt-2 border-t">
-            <div className="font-semibold mb-1.5">Burden palette</div>
+            <div className="font-semibold mb-1.5">Adoption Readiness palette</div>
             <ul className="space-y-1">
               {BURDEN.map((z) => (
                 <li key={z.level} className="flex items-center gap-2">
@@ -689,7 +695,7 @@ const EvidenceImpactMatrix3D: React.FC<EvidenceImpactMatrix3DProps> = ({ product
                     style={{ backgroundColor: R_COLORS[z.level] }}
                   />
                   <span className="font-medium">{z.level}</span>
-                  <span className="text-muted-foreground truncate">{z.name}</span>
+                  <span className="text-muted-foreground break-words">{z.name}</span>
                 </li>
               ))}
             </ul>

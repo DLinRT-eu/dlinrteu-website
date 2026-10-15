@@ -11,33 +11,22 @@ import {
 } from "@/components/ui/tooltip";
 import { useChartExport } from "@/hooks/useChartExport";
 import ChartExportButton from './ChartExportButton';
-import { ADOPTION_READINESS_LEVELS } from '@/data/evidence-impact-levels';
+import { ADOPTION_READINESS_LEVELS, EVIDENCE_RIGOR_LEVELS, EFFICACY_LEVELS } from '@/data/evidence-impact-levels';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import EvidenceImpactMatrix3D from "@/components/resources/EvidenceImpactMatrix3D";
+
+import { getEvidenceMatrixProducts } from "@/utils/evidenceMatrix";
 
 interface EvidenceImpactScatterChartProps {
   filteredProducts: ProductDetails[];
 }
 
-const RIGOR_MAP: Record<string, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
-const IMPACT_MAP: Record<string, number> = { L1t: 0, L1c: 1, L2: 2, L3: 3, L4: 4, L5: 5, L6: 6 };
-
-const RIGOR_LEVELS = [
-  { key: 'E3', label: 'E3', name: 'Systematic' },
-  { key: 'E2', label: 'E2', name: 'Validated' },
-  { key: 'E1', label: 'E1', name: 'Preliminary' },
-  { key: 'E0', label: 'E0', name: 'No Evidence' },
-];
-
-const IMPACT_LEVELS = [
-  { key: 'L1t', label: 'L1t', name: 'Technical' },
-  { key: 'L1c', label: 'L1c', name: 'Feasibility' },
-  { key: 'L2', label: 'L2', name: 'Accuracy' },
-  { key: 'L3', label: 'L3', name: 'Workflow' },
-  { key: 'L4', label: 'L4', name: 'Therapeutic' },
-  { key: 'L5', label: 'L5', name: 'Outcome' },
-  { key: 'L6', label: 'L6', name: 'Societal' },
-];
+const RIGOR_LEVELS = [...EVIDENCE_RIGOR_LEVELS].reverse().map(level => ({
+  key: level.level, label: level.level, name: level.name, description: level.description,
+}));
+const IMPACT_LEVELS = EFFICACY_LEVELS.map(level => ({
+  key: level.level, label: level.level, name: level.name, description: level.description,
+}));
 
 interface CellProduct {
   name: string;
@@ -48,6 +37,7 @@ interface CellProduct {
   impactLabel: string;
   rigorNotes: string;
   impactNotes: string;
+  provisional: boolean;
   burden?: string;
   burdenLabel?: string;
   burdenNotes?: string;
@@ -60,12 +50,15 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
   const isMobile = useIsMobile();
   const [view, setView] = useState<"2d" | "3d">("2d");
 
+  const assessedProducts = useMemo(() => getEvidenceMatrixProducts(filteredProducts), [filteredProducts]);
+  const readinessCount = assessedProducts.filter(product => product.adoptionReadiness).length;
+
   const { cellMap, totalCount, categories } = useMemo(() => {
     const map: CellMap = {};
     const catSet = new Map<string, string>();
     let count = 0;
 
-    for (const p of filteredProducts) {
+    for (const p of assessedProducts) {
       if (!p.evidenceRigor || !p.clinicalImpact) continue;
       const key = `${p.evidenceRigor}-${p.clinicalImpact}`;
       const color = getTaskColor(p.category);
@@ -79,9 +72,10 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
         impactLabel: `${p.clinicalImpact} – ${IMPACT_LEVELS.find(i => i.key === p.clinicalImpact)?.name ?? ''}`,
         rigorNotes: p.evidenceRigorNotes ?? '',
         impactNotes: p.clinicalImpactNotes ?? '',
+        provisional: p.efficacyProvisional === true,
         burden: p.adoptionReadiness,
         burdenLabel: p.adoptionReadiness
-          ? `${p.adoptionReadiness} – ${ADOPTION_READINESS_LEVELS.find(b => b.level === p.adoptionReadiness)?.name ?? 'Implementation burden'}`
+          ? `${p.adoptionReadiness} – ${ADOPTION_READINESS_LEVELS.find(b => b.level === p.adoptionReadiness)?.name ?? 'Adoption Readiness'}`
           : undefined,
         burdenNotes: p.adoptionReadinessNotes ?? '',
       });
@@ -90,7 +84,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
     }
 
     return { cellMap: map, totalCount: count, categories: Array.from(catSet.entries()) };
-  }, [filteredProducts]);
+  }, [assessedProducts]);
 
   if (totalCount === 0) {
     return (
@@ -114,7 +108,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       <CardHeader className="pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <CardTitle className="text-lg md:text-2xl">
-            Evidence Rigor vs Levels of Efficacy{view === "3d" ? " × Readiness" : ""} ({totalCount} products)
+            Evidence Rigor vs Levels of Efficacy{view === "3d" ? " × Adoption Readiness" : ""} ({view === "3d" ? readinessCount : totalCount} products)
           </CardTitle>
           <div className="flex items-center gap-2 flex-wrap">
             <ToggleGroup
@@ -139,28 +133,28 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       </CardHeader>
       <CardContent>
         {view === "3d" ? (
-          <EvidenceImpactMatrix3D products={filteredProducts} />
+          <EvidenceImpactMatrix3D products={assessedProducts} />
         ) : (
         <div>
-        <div id="chart-evidence-impact" ref={chartRef} className="overflow-x-auto">
-          <div className="min-w-[640px]">
+        <div className="overflow-x-auto">
+          <div id="chart-evidence-impact" ref={chartRef} className="min-w-[960px]">
             {/* Column headers */}
-            <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px mb-1">
-              <div /> {/* empty corner */}
+            <div className="grid grid-cols-[160px_repeat(7,minmax(0,1fr))] gap-px mb-1">
+              <div className="text-xs font-semibold text-muted-foreground px-2">Evidence Rigor ↓<br />Levels of Efficacy →</div>
               {IMPACT_LEVELS.map(imp => (
-                <div key={imp.key} className="text-center px-1">
+                <div key={imp.key} title={imp.description} className="text-center px-1 pb-2">
                   <div className="text-xs font-semibold text-foreground">{imp.label}</div>
-                  <div className="text-[10px] text-muted-foreground truncate">{imp.name}</div>
+                  <div className="text-[10px] text-muted-foreground break-words">{imp.name}</div>
                 </div>
               ))}
             </div>
 
             {/* Grid rows (E3 at top, E0 at bottom) */}
-            <div className="grid grid-cols-[80px_repeat(6,1fr)] gap-px">
+            <div className="grid grid-cols-[160px_repeat(7,minmax(0,1fr))] gap-px">
               {RIGOR_LEVELS.map(rig => (
                 <div key={rig.key} className="contents">
                   {/* Row label */}
-                  <div className="flex items-center justify-end pr-2 min-h-[72px]">
+                  <div title={rig.description} className="flex items-center justify-end pr-2 min-h-[72px]">
                     <div>
                       <div className="text-xs font-semibold text-foreground text-right">{rig.label}</div>
                       <div className="text-[10px] text-muted-foreground text-right">{rig.name}</div>
@@ -176,6 +170,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                     return (
                       <div
                         key={key}
+                        data-evidence-cell={key}
                         className={`relative border border-border rounded min-h-[72px] p-1.5 flex flex-wrap content-start gap-1 transition-colors ${
                           hasProducts ? 'bg-muted/40' : 'bg-background'
                         }`}
@@ -190,6 +185,8 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                             <Tooltip key={i}>
                               <TooltipTrigger asChild>
                                 <span
+                                  tabIndex={0}
+                                  aria-label={`${prod.name}: ${prod.rigorLabel}; ${prod.impactLabel}`}
                                   className={`${dotSize} rounded-full inline-block cursor-pointer hover:scale-125 transition-transform`}
                                   style={{
                                     backgroundColor: prod.color,
@@ -197,15 +194,16 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                   }}
                                 />
                               </TooltipTrigger>
-                              <TooltipContent side="top" className="max-w-xs text-sm">
+                              <TooltipContent data-html2canvas-ignore side="top" className="max-w-xs text-sm">
                                 <p className="font-semibold">{prod.name}</p>
                                 <p className="text-muted-foreground text-xs">{prod.company}</p>
                                 <div className="mt-1 space-y-0.5 text-xs">
                                   <p><span className="font-medium">Task:</span> <span style={{ color: prod.color }}>{prod.category}</span></p>
-                                  <p><span className="font-medium">Rigor:</span> {prod.rigorLabel}</p>
-                                  <p><span className="font-medium">Impact:</span> {prod.impactLabel}</p>
+                                  <p><span className="font-medium">Evidence Rigor:</span> {prod.rigorLabel}</p>
+                                  <p><span className="font-medium">Levels of Efficacy:</span> {prod.impactLabel}</p>
+                                  {prod.provisional && <p className="text-muted-foreground">Provisional efficacy — pending source review</p>}
                                   {prod.burdenLabel && (
-                                    <p><span className="font-medium">Burden:</span> {prod.burdenLabel}</p>
+                                    <p><span className="font-medium">Adoption Readiness:</span> {prod.burdenLabel}</p>
                                   )}
                                 </div>
                                 {(prod.rigorNotes || prod.impactNotes || prod.burdenNotes) && (
@@ -238,7 +236,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
           ))}
         </div>
         <p className="mt-3 text-sm text-muted-foreground text-center">
-          Each dot is a product, fill = task. Hover for evidence, impact and implementation burden.
+          Products with assessed Evidence Rigor and Levels of Efficacy; color indicates task.
         </p>
         </div>
         )}
