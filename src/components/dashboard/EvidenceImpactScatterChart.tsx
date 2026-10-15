@@ -194,7 +194,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
                                   }}
                                 />
                               </TooltipTrigger>
-                              <TooltipContent side="top" className="max-w-xs text-sm">
+                              <TooltipContent data-html2canvas-ignore side="top" className="max-w-xs text-sm">
                                 <p className="font-semibold">{prod.name}</p>
                                 <p className="text-muted-foreground text-xs">{prod.company}</p>
                                 <div className="mt-1 space-y-0.5 text-xs">

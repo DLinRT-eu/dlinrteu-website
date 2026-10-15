@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState, useEffect, Suspense } from "react";
-import { Canvas, useFrame, ThreeEvent } from "@react-three/fiber";
+import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, Text, Html, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import {
@@ -364,6 +364,8 @@ const Scene: React.FC<SceneProps> = ({
   const zCount = BURDEN.length;     // 6
   const zSlot = 1.1;                // vertical units per Z slot
   const zHeight = zCount * zSlot;
+  const { size } = useThree();
+  const cameraScale = Math.max(1, size.height / size.width) * 1.2;
 
   const maxCount = Math.max(1, ...buckets.map((b) => b.count));
   const heightFor = (count: number) => {
@@ -440,7 +442,7 @@ const Scene: React.FC<SceneProps> = ({
 
       {renderedBars}
 
-      <PerspectiveCamera makeDefault position={[cols * 1.7, zHeight * 1.1, rows * 2.6]} fov={40} />
+      <PerspectiveCamera makeDefault position={[cols * 1.7 * cameraScale, zHeight * 1.1 * cameraScale, rows * 2.6 * cameraScale]} fov={40} />
       <OrbitControls
         ref={controlsRef}
         target={[(cols - 1) / 2, zHeight / 3, (rows - 1) / 2]}

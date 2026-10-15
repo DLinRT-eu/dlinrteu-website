@@ -17,10 +17,10 @@ export function getEvidenceMatrixProducts(products: ProductDetails[]): ProductDe
       efficacyProvisional: score.impactProvisional,
       adoptionReadiness: readiness,
       evidenceRigorNotes: score.rigorOrigin === "papers"
-        ? `Set by ${paperLabel(score.rigorSource)}` : score.rigorOrigin === "override"
+        ? `Set by ${paperLabel(score.rigorSource).replace(/et al\. et al\./g, "et al.")}` : score.rigorOrigin === "override"
           ? score.overrideReason : product.evidenceRigorNotes,
       clinicalImpactNotes: score.impactOrigin === "papers"
-        ? `Set by ${paperLabel(score.impactSource)}` : score.impactOrigin === "override"
+        ? `Set by ${paperLabel(score.impactSource).replace(/et al\. et al\./g, "et al.")}` : score.impactOrigin === "override"
           ? score.overrideReason : product.clinicalImpactNotes,
     }];
   });
