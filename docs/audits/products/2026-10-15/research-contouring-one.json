@@ -1,0 +1,630 @@
+[
+  {
+    "id": "limbus-contour",
+    "queries": [
+      {
+        "query": "Limbus AI Limbus Contour vendor website structures models 2026",
+        "url": "https://limbus.ai/",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Limbus Contour FDA 510(k) K241837",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K241837.pdf",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1093/bjr/tqae077 Starke Limbus prostate nodes",
+        "url": "https://doi.org/10.1093/bjr/tqae077",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "evidenceRigor",
+        "severity": "low",
+        "observation": "Starke et al. BJR 2024 is a genuine multi-institutional (Canada & UK) evaluation reporting editing-time endpoints; E2/L3 labelling is reasonably supported. No mismatch found.",
+        "suggestedFix": "No action; retain as-is."
+      },
+      {
+        "role": "impactSource",
+        "field": "attribution",
+        "severity": "medium",
+        "observation": "impactSource rationale notes 'HAIR label Image+ corrected to Contour+' inside the Limbus Contour record — an MVision Image+/Contour+ label-correction note embedded under a Limbus citation (Bordigoni et al. evaluates MVision AND LimbusAI jointly). The correction note is legitimate but its placement under Limbus's impactSource is easy to misread as describing the Limbus product itself rather than a shared multi-vendor study footnote.",
+        "suggestedFix": "Clarify rationale text to state explicitly that the Image+→Contour+ correction applies to the MVision arm of the same multi-vendor study, not to Limbus Contour."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1093/bjr/tqae077",
+        "title": "Clinical evaluation of the efficacy of limbus artificial intelligence software to augment contouring for prostate and nodes radiotherapy",
+        "url": "https://doi.org/10.1093/bjr/tqae077",
+        "attribution": "Limbus Contour (Limbus AI) — correct, Limbus named directly in methods",
+        "status": "verified"
+      }
+    ],
+    "limitations": "Vendor site and FDA 510(k) summary reviewed; full text of Starke et al. not independently re-read beyond abstract/metadata."
+  },
+  {
+    "id": "mvision-ai-contouring",
+    "queries": [
+      {
+        "query": "jjrt.26-1649 MVision Contour+",
+        "url": "http://dx.doi.org/10.6009/jjrt.26-1649",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "MVision Contour+ clinical evaluation vendor site",
+        "url": "https://mvision.ai/contour/",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.3389/fonc.2023.1213068 Doolan five commercial AI contouring",
+        "url": "https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2023.1213068/full",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate",
+        "field": "newCitation",
+        "severity": "low",
+        "observation": "10.6009/jjrt.26-1649 (Miura et al., Jpn J Radiol Technol, 2026) is a genuine, correctly attributed thoracic clinical validation of Contour+ (MVision AI): DSC 0.86–1.00 across lungs/trachea/bronchus/esophagus/spinal cord/heart, mean Likert score 4.4/5. Confirmed via Crossref and journal abstract; no title/attribution mismatch.",
+        "suggestedFix": "Add as a corroborating E1-E2 single-centre thoracic evidence entry; does not change current E2/L3 primary rigor source (Doolan 2023)."
+      },
+      {
+        "role": "rigorSource",
+        "field": "vendorIndependence",
+        "severity": "low",
+        "observation": "Doolan et al. 2023 (fonc.2023.1213068) benchmarks five vendors including MVision; vendor-independent, multi-site. Correctly used as rigor source.",
+        "suggestedFix": "None."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.6009/jjrt.26-1649",
+        "title": "Clinical Evaluation of AI-based Automatic Contouring for Thoracic Structures",
+        "url": "http://dx.doi.org/10.6009/jjrt.26-1649",
+        "attribution": "Contour+ (MVision AI) — correct, named explicitly in abstract",
+        "status": "verified-new"
+      }
+    ],
+    "limitations": "jjrt.26-1649 abstract and Crossref metadata reviewed; Japanese-language full text not retrieved."
+  },
+  {
+    "id": "mirada-dlc",
+    "queries": [
+      {
+        "query": "Mirada DLCExpert auto-contouring vendor product page models",
+        "url": "https://www.mirada-medical.com/radiation-oncology",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Clinical evaluation of three deep learning contouring models for head and neck Miovecz tipsro 2026.100437",
+        "url": "https://doi.org/10.1016/j.tipsro.2026.100437",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1016/j.phro.2022.11.003 Walker DLCExpert multi-centre",
+        "url": "https://doi.org/10.1016/j.phro.2022.11.003",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate",
+        "field": "newCitation",
+        "severity": "high",
+        "observation": "New paper 10.1016/j.tipsro.2026.100437 (Miovecz et al., tipsRO, 2026) compares Mirada DLCExpert, Limbus AI, and MVision Contour+ for H&N OARs/nodes and reports that Mirada ('Model D') applies a materially different anatomical definition for esophagus and spinal canal, yielding DSC of only 0.40 and 0.57 (model volumes 35% and 44% of expert volume) — a clinically important discordance not currently reflected anywhere in Mirada's audited evidence base.",
+        "suggestedFix": "Add this DOI as a rigor/impact source or at minimum a qualityFlag/limitation noting structure-definition discordance for esophagus and spinal canal; do not let the paper's favorable 5-OAR performance (DSC 0.92) overshadow the 2-OAR divergence in any impact rationale."
+      },
+      {
+        "role": "impactSource",
+        "field": "vendorIndependence",
+        "severity": "low",
+        "observation": "Current impactSource (Vaassen 2020) is explicitly flagged vendorIndependent:false and prototype-stage, which is already transparently disclosed — correctly not marked 'clean'.",
+        "suggestedFix": "None; this is a good example of accurate non-clean labelling."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1016/j.tipsro.2026.100437",
+        "title": "Clinical evaluation of three deep learning contouring models for head and neck organs at risk and lymph node levels",
+        "url": "https://doi.org/10.1016/j.tipsro.2026.100437",
+        "attribution": "Mirada DLCExpert, Limbus AI, MVision Contour+ — correct, all three named in abstract",
+        "status": "verified-new"
+      }
+    ],
+    "limitations": "Abstract and Crossref metadata reviewed for tipsro.2026.100437; full text with per-structure numeric table not retrieved."
+  },
+  {
+    "id": "raysearch-raystation",
+    "queries": [
+      {
+        "query": "RaySearch RayStation Deep Learning Segmentation clinical validation vendor",
+        "url": "https://www.raysearchlabs.com/media/publications/case-studies/deep-learning-segmentation/",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1016/j.phro.2026.100999 Neugebauer prospective blinded prostate RayStation",
+        "url": "https://doi.org/10.1016/j.phro.2026.100999",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "RayStation DLS regression test commercial auto-segmentation acm2.70824",
+        "url": "https://www.ovid.com/journals/jacmp/fulltext/10.1002/acm2.70824",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "doi-reuse",
+        "severity": "medium",
+        "observation": "The same DOI (10.1016/j.phro.2026.100999) is used for BOTH rigorSource and impactSource, which is internally consistent but means the E2/L4 rating rests on a single prospective single-centre study rather than independent corroboration. A second relevant paper exists (Barati/Duan et al., regression-test study of a commercial RayStation DLS model, acm2.70824) that could diversify the evidence base.",
+        "suggestedFix": "Consider adding the regression-test study as a secondary rigor/impact source, or note in qualityFlags that evidence currently relies on a single study/DOI for both scores."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1016/j.phro.2026.100999",
+        "title": "Prospective blinded clinical evaluation of a fully automated workflow for prostate radiotherapy",
+        "url": "https://doi.org/10.1016/j.phro.2026.100999",
+        "attribution": "RayStation (RaySearch) — plausible given RapidPlan/VMAT automated workflow context; not independently re-verified word-for-word",
+        "status": "plausible-unverified"
+      }
+    ],
+    "limitations": "Did not retrieve full text of phro.2026.100999 to confirm RayStation is explicitly named in methods; relying on static-audit rationale text only."
+  },
+  {
+    "id": "therapanacea-annotate",
+    "queries": [
+      {
+        "query": "Therapanacea Annotate CE FDA clearance",
+        "url": "https://www.therapanacea.us/annotate",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1007/s13246-024-01434-9 Kim multiple AI auto-contouring systems",
+        "url": "https://doi.org/10.1007/s13246-024-01434-9",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1093/bjr/tqaf098 Young ART-Plan real-world H&N",
+        "url": "https://doi.org/10.1093/bjr/tqaf098",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "impactSource",
+        "field": "productIdentity",
+        "severity": "medium",
+        "observation": "impactSource rationale names 'ART-Plan' (Therapanacea's umbrella platform) for a real-world H&N evaluation, but Annotate is the contouring module within ART-Plan, not a separately branded product in the cited study. This is a brand-granularity issue: product-level attribution (Annotate) vs. platform-level attribution (ART-Plan) is blurred.",
+        "suggestedFix": "Clarify in rationale whether the paper tested the Annotate module specifically or the ART-Plan platform broadly, since both Annotate and SmartPlan are marketed as separate modules of ART-Plan."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1093/bjr/tqaf098",
+        "title": "Real-world performance evaluation of commercial autocontouring software for head and neck cancer radiotherapy",
+        "url": "https://doi.org/10.1093/bjr/tqaf098",
+        "attribution": "ART-Plan/Annotate (Therapanacea) — module-level attribution ambiguous",
+        "status": "needs-clarification"
+      }
+    ],
+    "limitations": "Full text of both cited DOIs not retrieved; module vs. platform naming could not be confirmed from abstract metadata alone."
+  },
+  {
+    "id": "therapanacea-tumorbox",
+    "queries": [
+      {
+        "query": "Therapanacea TumorBox tumor contouring clinical evidence",
+        "url": "https://www.therapanacea.us/ai-cancer-treatment-solutions",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "TumorBox DLinRT FDA CE clearance",
+        "url": "https://dlinrt.eu/products/company/therapanacea",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "evidenceBase",
+        "severity": "low",
+        "observation": "static-audit.json correctly shows rigor E0 / impact L1c (stored, provisional, paperCount 0, vendorIndependent:false) for TumorBox — no inflated or falsely-clean scoring found; vendor marketing states '93% time saved' but this is explicitly NOT reflected in the independently computed score.",
+        "suggestedFix": "None; this is an example of appropriately conservative (non-'clean') scoring that should be preserved."
+      }
+    ],
+    "candidates": [],
+    "limitations": "No peer-reviewed, TumorBox-specific clinical paper was located in this pass; vendor page is marketing-only (93% time-saved figure attributed to ART-Plan broadly, not isolated to TumorBox)."
+  },
+  {
+    "id": "therapanacea-brachybox",
+    "queries": [
+      {
+        "query": "Therapanacea BrachyBox brachytherapy auto-segmentation clinical",
+        "url": "https://www.therapanacea.us/ai-cancer-treatment-solutions",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "productMaturity",
+        "severity": "low",
+        "observation": "Vendor's own US site lists BrachyBox under 'Coming Soon' (not yet released) as of the search snapshot, while static-audit.json already shows E0/L2 stored/provisional with paperCount 0 — consistent, not falsely 'clean'.",
+        "suggestedFix": "Confirm current release status before any future score upgrade; flag product as pre-release in public-facing records if still accurate."
+      }
+    ],
+    "candidates": [],
+    "limitations": "Release status taken from a single vendor page snapshot; could not cross-check with company-level press release for a firm release date."
+  },
+  {
+    "id": "ai-medical-jazz",
+    "queries": [
+      {
+        "query": "AI Medical Jazz contouring radiotherapy France vendor product",
+        "url": "https://www.ai-medical.ch/jazz",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Federau neuroradiological reading multiple sclerosis follow-up MRI intelligent automation",
+        "url": "https://doi.org/10.1007/s00234-024-03293-3",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "category",
+        "field": "classification",
+        "severity": "high",
+        "observation": "Jazz is described on the vendor's own site as a neuroradiology 'lesion tracking and reporting' tool for diagnostic MS follow-up (single-click annotation, volumetric lesion tracking, automated report generation) — it is not a radiotherapy organ/target auto-contouring product. Its sole supporting publication (Federau et al., Neuroradiology 2024) evaluates diagnostic MS-lesion reading productivity/quality, not RT contouring. Classifying Jazz under 'Auto-Contouring' (an RT category) alongside true OAR/target contouring tools like Limbus or MVision is a category-fit mismatch.",
+        "suggestedFix": "Re-examine whether Jazz belongs in the Auto-Contouring (radiotherapy) category at all, or whether it should be reclassified/footnoted as a diagnostic neuroradiology tool with only tangential RT relevance. At minimum, the impact rationale should state explicitly that the supporting evidence is diagnostic, not RT-contouring, evidence."
+      },
+      {
+        "role": "impactSource",
+        "field": "clinicalDomain",
+        "severity": "high",
+        "observation": "L3 clinical impact label for Jazz is derived from a diagnostic-radiology productivity study, not a radiotherapy planning/dosimetric study — applying an RT clinical-impact tier to non-RT evidence risks a false 'clean' L3 impact rating.",
+        "suggestedFix": "Down-grade or re-derive the impact label using RT-specific criteria, or mark impact as not-applicable/out-of-scope for RT auto-contouring comparisons."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1007/s00234-024-03293-3",
+        "title": "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software",
+        "url": "https://doi.org/10.1007/s00234-024-03293-3",
+        "attribution": "Jazz (AI Medical) — correct product attribution, but diagnostic-domain study used to score an RT-category product",
+        "status": "domain-mismatch"
+      }
+    ],
+    "limitations": "Only one supporting paper exists for Jazz; no RT-specific (OAR/target volume) contouring literature was found for this product."
+  },
+  {
+    "id": "carina-intcontour",
+    "queries": [
+      {
+        "query": "10.1002/mp.16299 IntContour Carina AI follow-up evaluation",
+        "url": "https://doi.org/10.1002/mp.16299",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Carina AI IntContour vendor product adro.2024.101638 LMIC",
+        "url": "https://doi.org/10.1016/j.adro.2024.101638",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate",
+        "field": "titleAttribution",
+        "severity": "high",
+        "observation": "publication-checks.json requestedTitle for key 10.1002/mp.16299 is 'Follow-up evaluation of IntContour', but the actual paper (Duan, Bernard, Castle, Feng, Wang, Kenamond, Chen, Med Phys 2023) is 'Contouring quality assurance methodology based on multiple geometric features against deep learning auto-segmentation' — a generic DLAS-based manual-contour QA classifier study using a public 339-case dataset, not a clinical evaluation of the IntContour product itself. Two co-authors (Castle, Feng) are listed as affiliated with 'Carina Medical LLC' per the University of Kentucky repository record, so the paper has an undisclosed vendor-affiliation link to Carina AI, but it is not a 'follow-up evaluation of IntContour' as the requested title implies.",
+        "suggestedFix": "Correct the requestedTitle/attribution to the paper's actual title and scope (a generic QA-classifier methodology study with Carina-affiliated co-authors), and flag vendorIndependent:false rather than implying it is an independent or product-specific follow-up validation."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1002/mp.16299",
+        "title": "Contouring quality assurance methodology based on multiple geometric features against deep learning auto-segmentation",
+        "url": "https://doi.org/10.1002/mp.16299",
+        "attribution": "Mislabeled as 'Follow-up evaluation of IntContour' — actual paper is a generic QA methodology study with Carina Medical-affiliated co-authors (not an IntContour product evaluation)",
+        "status": "mismatch-confirmed"
+      }
+    ],
+    "limitations": "Confirmed via Crossref, AAPM/Wiley, and UKnowledge repository record showing Carina Medical LLC affiliations; full PDF not retrieved to check for any incidental IntContour product mention in-text."
+  },
+  {
+    "id": "coreline-aview-rt-acs",
+    "queries": [
+      {
+        "query": "Coreline Soft Aview RT ACS auto contouring clinical validation",
+        "url": "https://www.corelinesoft.com/en/publications/RT-ACS/",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1016/j.ijrobp.2024.02.041 Lee breast 2000 cases auto-contouring",
+        "url": "https://doi.org/10.1016/j.ijrobp.2024.02.041",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "scopeNarrowness",
+        "severity": "low",
+        "observation": "Both rigorSource and impactSource use the identical DOI (10.1016/j.ijrobp.2024.02.041) and both are breast-only; AVIEW RT-ACS has several other vendor-published breast studies (2020, 2021 IJROBP/Radiat Oncol) that could broaden the evidence base but all are also breast-specific and largely vendor-coauthored.",
+        "suggestedFix": "Note in limitations/qualityFlags that AVIEW RT-ACS's clinical evidence to date is concentrated in a single anatomical site (breast) and largely authored by groups with repeat vendor collaboration (Coreline-affiliated co-authors across multiple cited studies)."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1016/j.ijrobp.2024.02.041",
+        "title": "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases",
+        "url": "https://doi.org/10.1016/j.ijrobp.2024.02.041",
+        "attribution": "AVIEW RT-ACS (Coreline Soft) — plausible match to the vendor's own '2,428 cases' IJROBP publication listing",
+        "status": "plausible-unverified"
+      }
+    ],
+    "limitations": "Vendor publication list and abstracts reviewed; exact DOI-to-vendor-listing match not independently cross-verified against CrossRef metadata in this pass."
+  },
+  {
+    "id": "everfortune-rt-suite",
+    "queries": [
+      {
+        "query": "Ever Fortune AI RT Suite FDA 510k K231928",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K231928.pdf",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "EverFortune AutoSeg clinical literature radonc.2023.109528",
+        "url": "https://doi.org/10.1016/j.radonc.2023.109528",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "evidenceBase",
+        "severity": "low",
+        "observation": "static-audit.json correctly scores RT Suite v1 as E0/L1c stored/provisional with paperCount 0 — no clinical paper is directly tied to this product in the scoring, which is accurate since the one identified EFAI-related paper (radonc.2023.109528) is attached to Seg Pro V3's record instead, not RT Suite's.",
+        "suggestedFix": "None — appropriately conservative, non-'clean' scoring."
+      }
+    ],
+    "candidates": [],
+    "limitations": "FDA 510(k) K231928 (EFAI RTSUITE CT HCAP-Segmentation System) confirms regulatory clearance only; no independent clinical outcome literature specific to RT Suite v1 was found."
+  },
+  {
+    "id": "everfortune-seg-pro-v3",
+    "queries": [
+      {
+        "query": "Ever Fortune Seg Pro V3 RT-300 FDA 510k K251306",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251306.pdf",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.1016/j.radonc.2023.109528 Lin hippocampal avoidance whole brain EFAI",
+        "url": "https://doi.org/10.1016/j.radonc.2023.109528",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "productVersionMismatch",
+        "severity": "medium",
+        "observation": "static-audit.json rationale for Seg Pro V3 is self-disclosed as evaluating 'the shared EFAI segmentation engine rather than the Seg Pro V3 release specifically' with vendorIndependent:false — this is already correctly flagged as non-clean/non-independent, consistent with the FDA record showing Seg Pro V3 (RT-300, K251306) is a later, distinct 510(k) clearance from the original EFAI RTSUITE (K231928) used in the 2023 paper.",
+        "suggestedFix": "None required beyond what is already disclosed; confirm in any future product-page copy that Seg Pro V3 and the cited 2023 paper's software version are not conflated as identical products."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1016/j.radonc.2023.109528",
+        "title": "Developing an AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy",
+        "url": "https://doi.org/10.1016/j.radonc.2023.109528",
+        "attribution": "EFAI engine (predecessor to Seg Pro V3) — correctly flagged as not product-version-specific and vendor-collaborative",
+        "status": "verified-with-caveat"
+      }
+    ],
+    "limitations": "Two separate FDA 510(k) numbers (K231928 vs K251306) confirm RT Suite and Seg Pro V3 are formally distinct clearances across different submission years."
+  },
+  {
+    "id": "ge-auto-segmentation",
+    "queries": [
+      {
+        "query": "GE Healthcare Auto Segmentation AI contouring clinical evaluation",
+        "url": "https://www.gehealthcare.com/en/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "evidenceOrigin",
+        "severity": "medium",
+        "observation": "rigorOrigin/impactOrigin are 'stored' (not 'papers') with paperCount 1 but scoredPaperCount 0, meaning the E1/L3 rating is not derived from a scored literature entry yet qualityFlags report multiCenter:true, multiNational:true and externalValidation:true as if already substantiated — a potential false 'clean' quality-flag state given no scored paper backs the claim.",
+        "suggestedFix": "Either attach the specific paperCount=1 source explicitly so its multi-center/multi-national/external-validation claims can be verified, or set these qualityFlags to false/unknown until a scorable source is linked."
+      }
+    ],
+    "candidates": [],
+    "limitations": "Vendor product page confirms CT-only OAR auto-segmentation with GE-qualified scanner dependency; the single uncited supporting paper referenced by paperCount:1 could not be identified by DOI in this pass."
+  },
+  {
+    "id": "hura-dvtarget",
+    "queries": [
+      {
+        "query": "Hura Imaging DV.TARGET auto contouring product",
+        "url": "http://www.huraimaging.com/dvtarget/",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "DV.Target FDA 510k K202928 Deepvoxel",
+        "url": "https://fda.innolitics.com/device/K202928",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "evidenceBase",
+        "severity": "low",
+        "observation": "static-audit.json correctly scores DV.TARGET E0/L1c, stored/provisional, paperCount 0, vendorIndependent:false — consistent with the FDA 510(k) summary (K202928) showing only a single-site (City of Hope) retrospective comparison study, no independent peer-reviewed clinical publication identified.",
+        "suggestedFix": "None — conservative scoring correctly avoids a false 'clean' rating despite vendor-listed publications (Tang 2019, Zhu 2019, Sun 2020) that describe the underlying algorithm research rather than the commercial DV.TARGET product in clinical use."
+      }
+    ],
+    "candidates": [],
+    "limitations": "FDA Innolitics summary and vendor publications list reviewed; none of the three vendor-listed research papers (Nature Machine Intelligence 2019; Med Phys 2019; ISBI 2020) are product-validation studies of the commercial DV.TARGET release."
+  },
+  {
+    "id": "manteia-accucontour",
+    "queries": [
+      {
+        "query": "Manteia AccuContour FDA CE clinical evaluation nasopharyngeal",
+        "url": "https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2024.1375096/full",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "10.3389/fonc.2022.833816 AccuContour nasopharyngeal carcinoma",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9008357/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate",
+        "field": "titleAttribution",
+        "severity": "low",
+        "observation": "publication-checks.json requestedTitle for 10.3389/fonc.2022.833816 is 'AccuContour clinical evaluation' vs. actual title 'Evaluation Exploration of Atlas-Based and Deep Learning-Based Automatic Contouring for Nasopharyngeal Carcinoma.' Unlike the IntContour case, the abstract DOES confirm AccuContour® is the DL-based model used, and two co-authors (Chen, Yang) are Manteia Technologies employees. The requestedTitle is a paraphrase/shorthand, not a false attribution — product and vendor-affiliation are both correctly identifiable from the real title/abstract.",
+        "suggestedFix": "Low-priority: replace the paraphrased requestedTitle with the verbatim published title to avoid any appearance of a mismatch, but no substantive correction needed."
+      },
+      {
+        "role": "rigorSource",
+        "field": "vendorIndependence",
+        "severity": "medium",
+        "observation": "Current rigorSource (Zhu et al. 2025, phro.2025.100886) is vendor-independent per qualityFlags, but a more recent, more directly relevant Manteia-coauthored paper exists (Yan/Fei et al., Sci Rep 2025, 'Consistency evaluation and performance optimization of deep learning-based auto-contouring for nasopharyngeal carcinoma') with Manteia Technologies co-authors — not currently reflected in the scored evidence set.",
+        "suggestedFix": "Consider adding the 2025 Scientific Reports paper as an additional (vendor-affiliated) evidence point, clearly flagged vendorIndependent:false."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.3389/fonc.2022.833816",
+        "title": "Evaluation Exploration of Atlas-Based and Deep Learning-Based Automatic Contouring for Nasopharyngeal Carcinoma",
+        "url": "https://doi.org/10.3389/fonc.2022.833816",
+        "attribution": "AccuContour (Manteia) — correct, confirmed in abstract/methods and via Manteia-affiliated co-authors",
+        "status": "verified"
+      }
+    ],
+    "limitations": "fonc.2024.1375096 (Johnson/Press et al., single-institution AccuContour vs MIM ProtégéAI comparison) also reviewed as corroborating but independent evidence not yet incorporated into static-audit.json."
+  },
+  {
+    "id": "mim-contour-protegeai",
+    "queries": [
+      {
+        "query": "MIM Software Contour ProtegeAI+ FDA clearance clinical validation 2025 2026",
+        "url": "https://www.gehealthcare.com/en-us/about/newsroom/press-releases/ge-healthcare-receives-fda-510-k-clearance-for-mim-contour-protegeai-2-0-advancing-ai-enabled-radiation-therapy-planning-with-expanded-clinical-capabilities",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Goddard Velten Tang Skalina Boyd Martin Basavatia Garg Tome multi-vendor AI autocontouring solutions affiliation institution",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11143643/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "journalTitle",
+        "severity": "high",
+        "observation": "static-audit.json lists the journal for DOI 10.1186/s13014-024-02451-4 as 'Radiother Oncol' (Elsevier's Radiotherapy and Oncology). The actual journal is 'Radiation Oncology' (BioMed Central/Springer open-access journal, ISSN 1748-717X, PMC-indexed as 'Radiat Oncol'), a distinct journal from Elsevier's Radiotherapy and Oncology. This is a confirmed journal-identity mismatch.",
+        "suggestedFix": "Correct journal field to 'Radiation Oncology' (BMC) across all records citing this DOI."
+      },
+      {
+        "role": "rigorSource",
+        "field": "studyDesignClaim",
+        "severity": "high",
+        "observation": "static-audit.json title/rationale for this DOI reads 'Multi-vendor auto-contouring comparison across 5 facilities' and 'Multi-centre evaluation across five facilities including review and edit effort,' with multiCenter:true in both score and qualityFlags. The actual paper (Goddard et al. 2024) is a SINGLE-institution study: all nine authors are affiliated with Montefiore Medical Center / Albert Einstein College of Medicine, using one Siemens-SOMATOMgo scanner and 47 patients — there is no mention of '5 facilities' anywhere in the title, abstract, or author affiliations. This fabricated 'five facilities' / 'multi-centre' claim inflates both the evidentiary rigor (contributing to the E2 rating) and the multiCenter/externalValidation quality flags for mim-contour-protegeai.",
+        "suggestedFix": "Correct title field to 'Evaluation of multiple-vendor AI autocontouring solutions', remove the fabricated '5 facilities'/multi-centre framing from the rationale, set multiCenter:false in both score.rigorSource and qualityFlags, and re-assess whether E2 rigor is still warranted for a single-institution, single-scanner, 47-patient study (likely should drop toward E1 unless other corroborating multi-site evidence is added)."
+      },
+      {
+        "role": "qualityFlags",
+        "field": "multiCenter",
+        "severity": "high",
+        "observation": "Top-level qualityFlags.multiCenter:true for mim-contour-protegeai is a false 'clean' flag directly caused by the fabricated '5 facilities' claim above; this flag should not be marked true/passing.",
+        "suggestedFix": "Set qualityFlags.multiCenter to false and re-derive computedRigor accordingly."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1186/s13014-024-02451-4",
+        "title": "Evaluation of multiple-vendor AI autocontouring solutions",
+        "url": "https://doi.org/10.1186/s13014-024-02451-4",
+        "attribution": "MIM-ProtégéAI+, Radformation-AutoContour, Siemens-DirectORGANS — all three correctly named in methods, but journal name and 'multi-centre/5 facilities' framing are both fabricated/incorrect; true setting is single-institution (Montefiore/Einstein), single CT scanner, 47 patients",
+        "status": "mismatch-confirmed"
+      }
+    ],
+    "limitations": "Verified via PMC, Springer Nature Link, and Einstein institutional repository that all nine authors share a single institutional affiliation; no secondary site is named anywhere in the paper."
+  },
+  {
+    "id": "radformation-autocontour",
+    "queries": [
+      {
+        "query": "Radformation AutoContour 2.8 number of models CT MR CBCT target volumes",
+        "url": "https://www.radformation.com/autocontour/autocontour",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "AutoContour v2.8 blog Radformation",
+        "url": "https://blog.radformation.com/autocontour-v2.8-broader-coverage-smarter-automation-and-more-plan-ready-workflows",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "dlinrt.eu AutoContour 523 models CT435 MR81 CBCT7",
+        "url": "https://dlinrt.eu/product/radformation-autocontour",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "rigorSource",
+        "field": "journalTitle",
+        "severity": "high",
+        "observation": "Identical journal-name error as mim-contour-protegeai: 'Radiother Oncol' listed instead of the correct 'Radiation Oncology' (BMC) for DOI 10.1186/s13014-024-02451-4.",
+        "suggestedFix": "Correct journal field to 'Radiation Oncology' (BMC)."
+      },
+      {
+        "role": "rigorSource",
+        "field": "studyDesignClaim",
+        "severity": "high",
+        "observation": "Same fabricated claim as mim-contour-protegeai: requestedTitle/rationale state 'Auto-contouring comparison across 5 facilities including Radformation' and 'Multi-centre evaluation across five facilities,' with multiCenter:true — but Goddard et al. 2024 is a single-institution (Montefiore/Einstein), single-scanner, 47-patient study. This is the same confirmed fabrication propagated to a second product's rigor source.",
+        "suggestedFix": "Correct title to 'Evaluation of multiple-vendor AI autocontouring solutions', remove 'five facilities'/multi-centre language, set multiCenter:false, and re-assess E2 rigor rating given the smaller single-site evidence base."
+      },
+      {
+        "role": "qualityFlags",
+        "field": "multiCenter",
+        "severity": "high",
+        "observation": "qualityFlags.multiCenter:true is again a false 'clean' flag for radformation-autocontour, inherited from the same fabricated claim.",
+        "suggestedFix": "Set to false and re-derive computedRigor."
+      },
+      {
+        "role": "structures",
+        "field": "modelCountClaim",
+        "severity": "low",
+        "observation": "The specific numeric claims in the audit directive — AutoContour 2.8 has no model labelled as a target volume, and 523 distinct models (435 CT / 81 MR / 7 CBCT) consistent with vendor's '520+' — are independently source-verifiable: the vendor blog and product page (dlinrt.eu/product/radformation-autocontour, revised 2026-09-26) confirm '520+ AI-trained models across CT, MR, and CBCT' for v2.8, and the per-structure breakdown methodology (counting repeated structures once per listed group) is documented and traceable to the vendor's own structure list.",
+        "suggestedFix": "No correction needed; this claim is adequately source-verified and should NOT be treated as unverified or flagged."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1186/s13014-024-02451-4",
+        "title": "Evaluation of multiple-vendor AI autocontouring solutions",
+        "url": "https://doi.org/10.1186/s13014-024-02451-4",
+        "attribution": "Radformation-AutoContour correctly named in methods, but journal name and 'multi-centre/5-facilities' framing are both fabricated/incorrect (same error as in mim-contour-protegeai record)",
+        "status": "mismatch-confirmed"
+      }
+    ],
+    "limitations": "Vendor blog/product-page figures (523/435/81/7) reviewed and judged adequately source-verified per the audit directive's own verification criterion; underlying per-model CSV/XML export not independently re-counted structure-by-structure in this pass."
+  }
+]

@@ -26,6 +26,7 @@ See [Resources & Compliance → Who we help](https://dlinrt.eu/resources-complia
 - **[Field Reference](./docs/FIELD_REFERENCE.md)** - Definitions for every product field (useful when updating `lastUpdated`/`lastRevised`)
 - **[Security Policy](./SECURITY.md)** - Security features, GDPR compliance, and reporting vulnerabilities
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
+- **[Product and Compliance Audits](./docs/audits/README.md)** - Read-only audit findings, source-search limitations, and reviewer worklists
 
 For the complete documentation index, see [docs/README.md](./docs/README.md).
 

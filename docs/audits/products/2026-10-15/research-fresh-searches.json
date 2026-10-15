@@ -1,0 +1,2706 @@
+[
+  {
+    "id": "limbus-contour",
+    "queries": [
+      {
+        "query": "\"Limbus Contour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Limbus%20Contour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1038/s41598-025-18598-3",
+        "title": "Geometric, dosimetric and psychometric evaluation of three commercial AI software solutions for OAR auto-segmentation in head and neck radiotherapy.",
+        "url": "https://doi.org/10.1038/s41598-025-18598-3",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2026.100935",
+        "title": "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy.",
+        "url": "https://doi.org/10.1016/j.phro.2026.100935",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-ai-contouring",
+    "queries": [
+      {
+        "query": "\"Contour+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Contour%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-11289874/v1",
+        "title": "Hybrid Breast Augmentation Using Subglandular Implants and Intraoperative Contour-Guided Fat Grafting in a Slender Patient: A Case Report",
+        "url": "https://doi.org/10.21203/rs.3.rs-11289874/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1037/xhp0001459",
+        "title": "The dominant role of physical contour and the modulatory role of psychological contour in fat face illusion.",
+        "url": "https://doi.org/10.1037/xhp0001459",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.2147/ccid.s606211",
+        "title": "Anatomy-Driven Aesthetic Design for Facial Contouring in Northeast Asian Females: A Conceptual Framework and Case Report.",
+        "url": "https://doi.org/10.2147/ccid.s606211",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mirada-dlc",
+    "queries": [
+      {
+        "query": "\"DLC Expert\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DLC%20Expert%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.5603/rpor.109519",
+        "title": "Automatic pelvic bone segmentation for radiotherapy using diagnostic imaging workstation.",
+        "url": "https://doi.org/10.5603/rpor.109519",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "raysearch-raystation",
+    "queries": [
+      {
+        "query": "\"Deep Learning Segmentation\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Deep%20Learning%20Segmentation%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-11005901/v1",
+        "title": "Quantitative super-resolution imaging with deep learning segmentation reveals early mitochondrial network remodeling and altered mitochondria-lysosome interactions in Pompe disease muscle",
+        "url": "https://doi.org/10.21203/rs.3.rs-11005901/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.ejvs.2026.09.041",
+        "title": "Validation of Automated Strain Calculation Initialised by Deep Learning Segmentation for Abdominal Aortic Aneurysm Ultrasound.",
+        "url": "https://doi.org/10.1016/j.ejvs.2026.09.041",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1039/d6lc00125d",
+        "title": "Biocementation shows a three-dimensional geometry dependence in microfluidic pore networks mapped by deep-learning segmentation.",
+        "url": "https://doi.org/10.1039/d6lc00125d",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s10278-026-02271-w",
+        "title": "Deep Learning Segmentation of Abdominal Organs Across Ultrasound, MRI, and CT: A Scoping Review of Modality-Specific Approaches and the Emerging Role of Foundation Models and LLM-Based Agents.",
+        "url": "https://doi.org/10.1007/s10278-026-02271-w",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/path.70113",
+        "title": "DUCK-Net: automated deep learning segmentation of ductular reactions in murine liver injury captures multicellular niche dynamics from H&amp;E morphology.",
+        "url": "https://doi.org/10.1002/path.70113",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-annotate",
+    "queries": [
+      {
+        "query": "\"Annotate\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Annotate%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1109/ichi69079.2026.00022",
+        "title": "Using reasoning LLMs to extract SDOH events from clinical notes.",
+        "url": "https://doi.org/10.1109/ichi69079.2026.00022",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1109/tnsre.2026.3737698",
+        "title": "Sensory Survey 3D: an open source utility for the annotation of projected fields for sensory neural interfaces.",
+        "url": "https://doi.org/10.1109/tnsre.2026.3737698",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41746-026-02912-y",
+        "title": "A scoping review of human-AI collaboration patterns and task divisions in healthcare applications.",
+        "url": "https://doi.org/10.1038/s41746-026-02912-y",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.64898/2026.08.24.746336",
+        "title": "CytoGate-Bench: an LLM benchmark for cross-panel cell gating in cytometry",
+        "url": "https://doi.org/10.64898/2026.08.24.746336",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21769/bioprotoc.5800",
+        "title": "Identification of DNA-Binding Factor Enrichment in Chromatin Accessibility Data to Define a Persister Cell Signature.",
+        "url": "https://doi.org/10.21769/bioprotoc.5800",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-tumorbox",
+    "queries": [
+      {
+        "query": "\"TumorBox\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22TumorBox%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-brachybox",
+    "queries": [
+      {
+        "query": "\"BrachyBox\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22BrachyBox%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ai-medical-jazz",
+    "queries": [
+      {
+        "query": "\"Jazz\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Jazz%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1053/j.gastro.2026.09.016",
+        "title": "Stating the Head, Playing the Changes: A Jazz Reading of Rome V.",
+        "url": "https://doi.org/10.1053/j.gastro.2026.09.016",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.actpsy.2026.107461",
+        "title": "Digital jazz and emotional regulation: A neuroaffective and streaming behavior analysis of psychological escapism.",
+        "url": "https://doi.org/10.1016/j.actpsy.2026.107461",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1097/nmg.0000000000000386",
+        "title": "Improvising through ambiguity: Jazz leadership principles for nurse leaders.",
+        "url": "https://doi.org/10.1097/nmg.0000000000000386",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s10441-026-09533-8",
+        "title": "Permanent Scaffolding of Social Expertise.",
+        "url": "https://doi.org/10.1007/s10441-026-09533-8",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1001/jamaoncol.2026.3376",
+        "title": "Melding Structured Care With Improvisation-Jazz in Medicine.",
+        "url": "https://doi.org/10.1001/jamaoncol.2026.3376",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "carina-intcontour",
+    "queries": [
+      {
+        "query": "\"INTContour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22INTContour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.adro.2025.101928",
+        "title": "Lessons Learned From an Epic Transformation of a Radiation Oncology Department in Guatemala: Keys to Success.",
+        "url": "https://doi.org/10.1016/j.adro.2025.101928",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/cancers17121935",
+        "title": "Improving the Precision of Deep-Learning-Based Head and Neck Target Auto-Segmentation by Leveraging Radiology Reports Using a Large Language Model.",
+        "url": "https://doi.org/10.3390/cancers17121935",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.7759/cureus.91810",
+        "title": "Dosimetric Comparison of Organs At Risk Between Artificial Intelligence-Based Auto-Contouring and Manual Contouring for High-Risk Prostate Cancer Radiotherapy: A Retrospective Study.",
+        "url": "https://doi.org/10.7759/cureus.91810",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "coreline-aview-rt-acs",
+    "queries": [
+      {
+        "query": "\"Aview RT ACS\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Aview%20RT%20ACS%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "everfortune-rt-suite",
+    "queries": [
+      {
+        "query": "\"RT Suite v1 HCAP-Segmentation\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RT%20Suite%20v1%20HCAP-Segmentation%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "everfortune-seg-pro-v3",
+    "queries": [
+      {
+        "query": "\"Seg Pro V3 RT-300\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Seg%20Pro%20V3%20RT-300%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-auto-segmentation",
+    "queries": [
+      {
+        "query": "\"Auto Segmentation\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Auto%20Segmentation%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/acm2.70757",
+        "title": "Clinical evaluation of novel deep learning-based auto-segmentation software: Utility and potential pitfalls.",
+        "url": "https://doi.org/10.1002/acm2.70757",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1088/2057-1976/aeaf5c",
+        "title": "External evaluation of a deep learning-based algorithm for automated lung tumor and esophagus segmentation on CBCT.",
+        "url": "https://doi.org/10.1088/2057-1976/aeaf5c",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/cancers18162607",
+        "title": "Integration of AI-Based Synthetic CT Generation and Auto-Segmentation for CBCT-Guided Adaptive Radiotherapy in Prostate Cancer: A Feasibility Study.",
+        "url": "https://doi.org/10.3390/cancers18162607",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s43046-026-00382-7",
+        "title": "A prospective development and evaluation of a 2D convolutional neural network-based auto-segmentation model for cervical cancer radiotherapy.",
+        "url": "https://doi.org/10.1186/s43046-026-00382-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "hura-dvtarget",
+    "queries": [
+      {
+        "query": "\"DV.TARGET\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DV.TARGET%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "manteia-accucontour",
+    "queries": [
+      {
+        "query": "\"AccuContour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AccuContour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3389/fonc.2025.1603593",
+        "title": "Evaluating the impact of different deface algorithms on deep learning segmentation software performance.",
+        "url": "https://doi.org/10.3389/fonc.2025.1603593",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2026.100949",
+        "title": "Quality assurance incorporating artificial intelligence-generated reference contours in a phase II radiotherapy trial.",
+        "url": "https://doi.org/10.1016/j.phro.2026.100949",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3857/roj.2025.00416",
+        "title": "Machine learning-based prediction of severe oral mucositis from head and neck cancer radiation therapy.",
+        "url": "https://doi.org/10.3857/roj.2025.00416",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s13014-026-02821-0",
+        "title": "Assessing respiratory motion effects after breathing training on hybrid and IMRT plans in hypofractionated breast radiotherapy.",
+        "url": "https://doi.org/10.1186/s13014-026-02821-0",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mim-contour-protegeai",
+    "queries": [
+      {
+        "query": "\"Contour ProtégéAI+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Contour%20Prot%C3%A9g%C3%A9AI%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/acm2.70748",
+        "title": "Deep learning auto-contouring of target and organs-at-risk on post-catheter implant CT images for prostate HDR brachytherapy.",
+        "url": "https://doi.org/10.1002/acm2.70748",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/acm2.70725",
+        "title": "Image-based evaluation of a commercial AI synthetic CT generator for brain and prostate MR-only radiotherapy.",
+        "url": "https://doi.org/10.1002/acm2.70725",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.2967/jnmt.125.271114",
+        "title": "Evaluation of AI-Driven Automatic Segmentation Algorithms for Lung Shunt Fraction Estimation in &lt;sup&gt;90&lt;/sup&gt;Y-Labeled Microsphere Therapy.",
+        "url": "https://doi.org/10.2967/jnmt.125.271114",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41598-025-18598-3",
+        "title": "Geometric, dosimetric and psychometric evaluation of three commercial AI software solutions for OAR auto-segmentation in head and neck radiotherapy.",
+        "url": "https://doi.org/10.1038/s41598-025-18598-3",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "radformation-autocontour",
+    "queries": [
+      {
+        "query": "\"AutoContour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AutoContour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.phro.2026.100983",
+        "title": "Evaluation of a quasi-automatic treatment planning workflow for head-and-neck cancer in radiotherapy.",
+        "url": "https://doi.org/10.1016/j.phro.2026.100983",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.ctro.2026.101144",
+        "title": "Inter-observer variability in radiotherapy contouring with the use of autocontouring software: A systematic review.",
+        "url": "https://doi.org/10.1016/j.ctro.2026.101144",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41598-025-18598-3",
+        "title": "Geometric, dosimetric and psychometric evaluation of three commercial AI software solutions for OAR auto-segmentation in head and neck radiotherapy.",
+        "url": "https://doi.org/10.1038/s41598-025-18598-3",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fonc.2026.1809864",
+        "title": "Economics achieved through the use of artificial intelligence-powered contouring solutions in a network of oncology clinics in low- and middle-income countries.",
+        "url": "https://doi.org/10.3389/fonc.2026.1809864",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "siemens-ai-rad-companion",
+    "queries": [
+      {
+        "query": "\"AI-Rad Companion Organs RT\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AI-Rad%20Companion%20Organs%20RT%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.2967/jnmt.125.271114",
+        "title": "Evaluation of AI-Driven Automatic Segmentation Algorithms for Lung Shunt Fraction Estimation in &lt;sup&gt;90&lt;/sup&gt;Y-Labeled Microsphere Therapy.",
+        "url": "https://doi.org/10.2967/jnmt.125.271114",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2026.100935",
+        "title": "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy.",
+        "url": "https://doi.org/10.1016/j.phro.2026.100935",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00066-025-02403-1",
+        "title": "Contouring in transition: perceptions of AI-based autocontouring by radiation oncologists and medical physicists in German-speaking countries.",
+        "url": "https://doi.org/10.1007/s00066-025-02403-1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "synaptiq-mediq-rt",
+    "queries": [
+      {
+        "query": "\"Mediq RT\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Mediq%20RT%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 2 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "vysioner-vbrain",
+    "queries": [
+      {
+        "query": "\"Vbrain\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Vbrain%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1093/noajnl/vdag236",
+        "title": "Artificial intelligence-enabled early intracranial volumetric response predicts systemic progression-free survival in the phase III CROWN study.",
+        "url": "https://doi.org/10.1093/noajnl/vdag236",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1101/2025.11.02.685597",
+        "title": "Non-invasive in vivo acoustoelectric neuromodulation and its contribution to ultrasound stimulation",
+        "url": "https://doi.org/10.1101/2025.11.02.685597",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/psp4.70279",
+        "title": "AI-Powered Lesion-Level Tumor Growth Inhibition Modeling Improves Model Stability and Prognostic Association With PFS.",
+        "url": "https://doi.org/10.1002/psp4.70279",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.24272/j.issn.2095-8137.2025.152",
+        "title": "Peptide OM-LV20 demonstrates neuroprotective effects by attenuating mitochondria-mediated neuronal apoptosis and dysfunction in mice with traumatic brain injury.",
+        "url": "https://doi.org/10.24272/j.issn.2095-8137.2025.152",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/mp.70566",
+        "title": "Feasibility of convection-enhanced delivery of unlabeled &lt;sup&gt;225&lt;/sup&gt;Ac for glioblastoma: Transport, dosimetry, and clonogenic survival modeling.",
+        "url": "https://doi.org/10.1002/mp.70566",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "wisdom-deep-contour",
+    "queries": [
+      {
+        "query": "\"DeepContour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DeepContour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/mp.17796",
+        "title": "Uncertainty quantification for CT dosimetry based on 10 281 subjects using automatic image segmentation and fast Monte Carlo calculations.",
+        "url": "https://doi.org/10.1002/mp.17796",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41598-025-07638-7",
+        "title": "Diffusion probabilistic model for Tibetan painted sketch extraction.",
+        "url": "https://doi.org/10.1038/s41598-025-07638-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/biomedicines13123005",
+        "title": "Machine Learning-Enabled Medical Devices Authorized by the US Food and Drug Administration in 2024: Regulatory Characteristics, Predicate Lineage, and Transparency Reporting.",
+        "url": "https://doi.org/10.3390/biomedicines13123005",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 3 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "siemens-directorgans",
+    "queries": [
+      {
+        "query": "\"DirectORGANS\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DirectORGANS%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-7933568/v1",
+        "title": "The Dosimetric Impacts of CT-Based Autocontouring Algorithm for Breast Cancer Radiotherapy Planning",
+        "url": "https://doi.org/10.21203/rs.3.rs-7933568/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s13014-026-02920-y",
+        "title": "How reliable is deep inspiration breath hold at CT simulation? Clinical impact of surface-guided breathing training in breast cancer radiotherapy.",
+        "url": "https://doi.org/10.1186/s13014-026-02920-y",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/bjr/tqaf103",
+        "title": "Reproducibility of lung density quantification across photon-counting and conventional energy-integrating CT: a comparative study.",
+        "url": "https://doi.org/10.1093/bjr/tqaf103",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "oncosoft-oncostudio",
+    "queries": [
+      {
+        "query": "\"OncoStudio\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22OncoStudio%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.7759/cureus.111686",
+        "title": "Deep Learning-Based CT Segmentation of a Non-radiopaque Hydrogel Rectal Spacer in Prostate Radiotherapy.",
+        "url": "https://doi.org/10.7759/cureus.111686",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s12194-026-01080-8",
+        "title": "Clinical edge-case stress testing of two Asia-developed AI auto-contouring systems using prostate radiotherapy planning CT images.",
+        "url": "https://doi.org/10.1007/s12194-026-01080-8",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.7759/cureus.103403",
+        "title": "Dosimetric Impact of Artificial Intelligence (AI)-Based Autocontouring Software, OncoStudio, in High-Risk Prostate Cancer Treatment Planning: A Three-Group Comparative Study on the Slice Ranges of Seminal Vesicles.",
+        "url": "https://doi.org/10.7759/cureus.103403",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.64898/2026.03.31.26349802",
+        "title": "Evaluating the Large Language Model-Based Quality Assurance Tool for Auto-Contouring",
+        "url": "https://doi.org/10.64898/2026.03.31.26349802",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "taimedimg-deepmets",
+    "queries": [
+      {
+        "query": "\"TAIMedImg DeepMets\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22TAIMedImg%20DeepMets%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "brainlab-elements-rt-seg",
+    "queries": [
+      {
+        "query": "\"Brainlab Elements Contouring 5.0 APM / Elements Segmentation\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Brainlab%20Elements%20Contouring%205.0%20APM%20%2F%20Elements%20Segmentation%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-mr-contour-dl",
+    "queries": [
+      {
+        "query": "\"MR Contour DL\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MR%20Contour%20DL%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1097/moo.0000000000001117",
+        "title": "Artificial intelligence in head and neck cancer rehabilitation services: current state and future perspectives.",
+        "url": "https://doi.org/10.1097/moo.0000000000001117",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "medmind-rt-mind-ai",
+    "queries": [
+      {
+        "query": "\"RT-Mind-AI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RT-Mind-AI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.phro.2025.100823",
+        "title": "Hybrid deep learning enables multi-institutional delineation of active bone marrow for gynecologic radiotherapy.",
+        "url": "https://doi.org/10.1016/j.phro.2025.100823",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "varian-ethos-ai-segmentation",
+    "queries": [
+      {
+        "query": "\"Ethos AI Segmentation\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Ethos%20AI%20Segmentation%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "varian-eclipse-ai-contouring",
+    "queries": [
+      {
+        "query": "\"AI Contouring for Eclipse\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AI%20Contouring%20for%20Eclipse%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "quanta-qoca-image-smart-rt",
+    "queries": [
+      {
+        "query": "\"QOCA® image Smart RT Contouring System\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22QOCA%C2%AE%20image%20Smart%20RT%20Contouring%20System%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/biomedicines13123005",
+        "title": "Machine Learning-Enabled Medical Devices Authorized by the US Food and Drug Administration in 2024: Regulatory Characteristics, Predicate Lineage, and Transparency Reporting.",
+        "url": "https://doi.org/10.3390/biomedicines13123005",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "medcom-prosoma-dart",
+    "queries": [
+      {
+        "query": "\"ProSoma DART AI Segmentation Engine\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22ProSoma%20DART%20AI%20Segmentation%20Engine%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-urt-auto-contouring",
+    "queries": [
+      {
+        "query": "\"uRT Auto-Contouring\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22uRT%20Auto-Contouring%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "aitewan-deepbt-detector-plus",
+    "queries": [
+      {
+        "query": "\"DeepBT Detector-Plus\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DeepBT%20Detector-Plus%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/biomedicines14071595",
+        "title": "AI-Assisted Brain Tumor MRI Reporting and Treatment-Planning Segmentation: A Retrospective Paired Workflow Evaluation.",
+        "url": "https://doi.org/10.3390/biomedicines14071595",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-mrcat-brain",
+    "queries": [
+      {
+        "query": "\"MRCAT Brain\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MRCAT%20Brain%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.phro.2026.100924",
+        "title": "Dental metal artifacts in magnetic resonance-based synthetic computed tomography for brain radiotherapy: Impact on dose, patient setup, and geometric distortion.",
+        "url": "https://doi.org/10.1016/j.phro.2026.100924",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fradi.2024.1433457",
+        "title": "Current state and promise of user-centered design to harness explainable AI in clinical decision-support systems for patients with CNS tumors.",
+        "url": "https://doi.org/10.3389/fradi.2024.1433457",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 3 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-mrcat-pelvis",
+    "queries": [
+      {
+        "query": "\"MRCAT Pelvis\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MRCAT%20Pelvis%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.ijpt.2026.101298",
+        "title": "Evaluation of Magnetic Resonance Imaging-Derived Synthetic Computed Tomography in Prostate Cancer Carbon Ion Radiotherapy: Impact of Fixation Shell.",
+        "url": "https://doi.org/10.1016/j.ijpt.2026.101298",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-mrcat-head-and-neck",
+    "queries": [
+      {
+        "query": "\"MRCAT Head and Neck\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MRCAT%20Head%20and%20Neck%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-mrcat-prostate-auto-contouring",
+    "queries": [
+      {
+        "query": "\"MRCAT Prostate + Auto-Contouring\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MRCAT%20Prostate%20%2B%20Auto-Contouring%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "siemens-syngo-ct",
+    "queries": [
+      {
+        "query": "\"syngo.via RT Image Suite\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22syngo.via%20RT%20Image%20Suite%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1007/s12194-026-01040-2",
+        "title": "A comparative evaluation of commercial software programs for automatic segmentation in breast cancer radiotherapy planning.",
+        "url": "https://doi.org/10.1007/s12194-026-01040-2",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.adro.2025.101957",
+        "title": "Accuracy of Photon Dose Calculation on Photon-Counting Computed Tomography-A Comparison Study Based on Virtual Monoenergetic and Electron Density (Rho) Images for Pancreatic Cases.",
+        "url": "https://doi.org/10.1016/j.adro.2025.101957",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/acm2.70499",
+        "title": "Development and implementation of an MRI-only simulation, planning, and treatment workflow for prostate radiotherapy using synthetic CT on MR-linac.",
+        "url": "https://doi.org/10.1002/acm2.70499",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2026.101062",
+        "title": "Phantom benchmarking for quality assurance of synthetic computed tomography in cranial magnetic resonance-only radiotherapy.",
+        "url": "https://doi.org/10.1016/j.phro.2026.101062",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2025.100825",
+        "title": "Advancing offline magnetic resonance-guided prostate radiotherapy through dedicated imaging and deep learning-based automatic contouring of targets and neurovascular structures.",
+        "url": "https://doi.org/10.1016/j.phro.2025.100825",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "spectronic-mriplanner",
+    "queries": [
+      {
+        "query": "\"MRI Planner\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MRI%20Planner%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-image-plus",
+    "queries": [
+      {
+        "query": "\"Image+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Image%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-10893690/v1",
+        "title": "A generalized similarity metric based on Sobolev space geometry for deformable image registration in image-guided radiotherapy",
+        "url": "https://doi.org/10.21203/rs.3.rs-10893690/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/dmfr/twag047",
+        "title": "Image sharpening improves the visibility of reference points on low-dose lateral cephalometric radiographs: a phantom study.",
+        "url": "https://doi.org/10.1093/dmfr/twag047",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mr-box-synthetic",
+    "queries": [
+      {
+        "query": "\"MR-Box\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MR-Box%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1001/jamahealthforum.2025.4639",
+        "title": "Employment and Health Burden Changes Among Medicaid Expansion Enrollees.",
+        "url": "https://doi.org/10.1001/jamahealthforum.2025.4639",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41588-025-02331-x",
+        "title": "Mitigating inconsistencies in GWAS follow-up analyses with LocusCompare2.",
+        "url": "https://doi.org/10.1038/s41588-025-02331-x",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.tipsro.2025.100328",
+        "title": "Clinical validation of using a commercial synthetic-computed tomography solution for brain MRI-only radiotherapy treatment planning.",
+        "url": "https://doi.org/10.1016/j.tipsro.2025.100328",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-adaptbox",
+    "queries": [
+      {
+        "query": "\"AdaptBox\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AdaptBox%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/acm2.70546",
+        "title": "Developing a web-based dashboard for adaptive radiotherapy workflows.",
+        "url": "https://doi.org/10.1002/acm2.70546",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 2 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "pymedix-registration",
+    "queries": [
+      {
+        "query": "\"Autofuse\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Autofuse%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1007/s11548-025-03538-3",
+        "title": "A label-aware diffusion model for weakly supervised deformable registration of multimodal MRI-TRUS in prostate cancer.",
+        "url": "https://doi.org/10.1007/s11548-025-03538-3",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/frai.2026.1873938",
+        "title": "A survey of transformer-based architectures in medical image analysis: models, applications, and challenges.",
+        "url": "https://doi.org/10.3389/frai.2026.1873938",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.mcpdig.2026.100342",
+        "title": "State of the AI: Post-Deployment Monitoring of Radiology-Focused Internally Developed AI.",
+        "url": "https://doi.org/10.1016/j.mcpdig.2026.100342",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1073/pnas.2526097123",
+        "title": "Soft giant magnetoimpedance electronics enable contact-free human-machine interactions.",
+        "url": "https://doi.org/10.1073/pnas.2526097123",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21037/jss-24-160",
+        "title": "Patterns of intra-discal vacuum phenomenon in adult degenerative scoliosis.",
+        "url": "https://doi.org/10.21037/jss-24-160",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-smartfuse",
+    "queries": [
+      {
+        "query": "\"SmartFuse\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SmartFuse%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-adapt-plus",
+    "queries": [
+      {
+        "query": "\"Adapt+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Adapt%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1109/tbme.2026.3653051",
+        "title": "ECG-Adapt: A Novel Framework for Robust Electrocardiogram Classification Across Diverse Populations and Recording Conditions.",
+        "url": "https://doi.org/10.1109/tbme.2026.3653051",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21203/rs.3.rs-11020014/v1",
+        "title": "Preservice Physical Education Teachers Learn to Adapt Instructional Decisions Across the Spectrum During a Structured Field Experience",
+        "url": "https://doi.org/10.21203/rs.3.rs-11020014/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/humrep/deag121",
+        "title": "Reply: Methodological considerations in the ADAPT-1 ovarian stimulation study.",
+        "url": "https://doi.org/10.1093/humrep/deag121",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/humrep/deag120",
+        "title": "Methodological considerations in the ADAPT-1 ovarian stimulation study.",
+        "url": "https://doi.org/10.1093/humrep/deag120",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21203/rs.3.rs-10963104/v1",
+        "title": "ADAPT-IDS: An Unsupervised Multi-Metric Framework forReliable Concept Drift Detection and Adaptive Intrusion Detectionin Evolving Network Streams",
+        "url": "https://doi.org/10.21203/rs.3.rs-10963104/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-ai-workspace-plus",
+    "queries": [
+      {
+        "query": "\"Workspace+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Workspace%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.64898/2026.09.28.755172",
+        "title": "Psychedelics Restructure the Global Workspace of Consciousness",
+        "url": "https://doi.org/10.64898/2026.09.28.755172",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/s26175550",
+        "title": "Configuration Design and Workspace Analysis of a Large-Scale Motion Simulator Based on Cable-Driven Parallel Technology.",
+        "url": "https://doi.org/10.3390/s26175550",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/vision10040062",
+        "title": "Congruent Head Orientation in the Absence of Sight Facilitates Motor Performance.",
+        "url": "https://doi.org/10.3390/vision10040062",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/s26175651",
+        "title": "Comparison of Reachable Workspace Capacity to Real-World Arm Use Performance: A Wearable Accelerometry Study on Chronic Stroke.",
+        "url": "https://doi.org/10.3390/s26175651",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.apergo.2026.104888",
+        "title": "The effects of resilience-oriented workspace interventions: combining social network analysis and organizational quality indicators.",
+        "url": "https://doi.org/10.1016/j.apergo.2026.104888",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-healthcare-irt",
+    "queries": [
+      {
+        "query": "\"Intelligent Radiation Therapy iRT\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Intelligent%20Radiation%20Therapy%20iRT%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "manteia-acculearning",
+    "queries": [
+      {
+        "query": "\"AccuLearning\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AccuLearning%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1177/15330338261426261",
+        "title": "A Preliminary Study on the Auto-Segmentation of Targets and Organs at Risk in Pediatric Total Marrow and Lymphoid Irradiation.",
+        "url": "https://doi.org/10.1177/15330338261426261",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s13014-025-02634-7",
+        "title": "Deep learning-powered radiotherapy dose prediction: clinical insights from 622 patients across multiple sites tumor at a single institution.",
+        "url": "https://doi.org/10.1186/s13014-025-02634-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/acm2.70524",
+        "title": "Accumulated dose on daily iCBCT for rectal cancer: Effects of inter-fraction bowel cavity motion volume.",
+        "url": "https://doi.org/10.1002/acm2.70524",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/frai.2024.1487207",
+        "title": "Application progress of artificial intelligence in tumor diagnosis and treatment.",
+        "url": "https://doi.org/10.3389/frai.2024.1487207",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 4 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "lumonus-ai",
+    "queries": [
+      {
+        "query": "\"Lumonus AI Oncology Intelligence Layer\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Lumonus%20AI%20Oncology%20Intelligence%20Layer%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-art-plan",
+    "queries": [
+      {
+        "query": "\"ART-Plan+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22ART-Plan%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.ctro.2026.101205",
+        "title": "Daily adaptive radiotherapy in head and neck squamous cell carcinoma can negatively impact organ at risk dosimetry.",
+        "url": "https://doi.org/10.1016/j.ctro.2026.101205",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.phro.2026.101060",
+        "title": "Clinical indicators for dose re-optimization in magnetic resonance-guided online adaptive radiotherapy for prostate cancer.",
+        "url": "https://doi.org/10.1016/j.phro.2026.101060",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/bjr/tqaf098",
+        "title": "Real-world performance evaluation of commercial autocontouring software for head and neck cancer radiotherapy.",
+        "url": "https://doi.org/10.1093/bjr/tqaf098",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/acm2.70405",
+        "title": "An all-in-one workflow for emergency hippocampal-avoidance whole-brain radiotherapy in brain metastases, with optional online adaptive extension.",
+        "url": "https://doi.org/10.1002/acm2.70405",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.apradiso.2026.112738",
+        "title": "A study on the effects of intrafractional changes in bladder volume on positional accuracy and target dosimetry in online adaptive radiotherapy for cervical cancer.",
+        "url": "https://doi.org/10.1016/j.apradiso.2026.112738",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "raysearch-raystation-planning",
+    "queries": [
+      {
+        "query": "\"RayStation Deep Learning Dose Prediction\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RayStation%20Deep%20Learning%20Dose%20Prediction%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "manteia-mozi",
+    "queries": [
+      {
+        "query": "\"MOZI TPS\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MOZI%20TPS%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/mp.70423",
+        "title": "A simulation study of a novel spiral volumetric modulated arc therapy for enhanced dose delivery efficiency and quality in radiotherapy.",
+        "url": "https://doi.org/10.1002/mp.70423",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21037/qims-2025-168",
+        "title": "Fully automated intensity-modulated radiotherapy plans for rectal cancer based on deep learning predictions of three-dimensional dose distributions.",
+        "url": "https://doi.org/10.21037/qims-2025-168",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41698-025-00986-7",
+        "title": "Progress and challenges of artificial intelligence in lung cancer clinical translation.",
+        "url": "https://doi.org/10.1038/s41698-025-00986-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 3 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "plan-ai",
+    "queries": [
+      {
+        "query": "\"Plan AI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Plan%20AI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.20944/preprints202610.0379.v1",
+        "title": "RAISE: A Synthesized Implementation Science Framework for AI Integration in Health Professions Education",
+        "url": "https://doi.org/10.20944/preprints202610.0379.v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.31083/fbl49331",
+        "title": "The Role of Hippocampal Microglial cGAS-STING Signaling Pathway in Postoperative Cognitive Dysfunction in Diabetic Mice.",
+        "url": "https://doi.org/10.31083/fbl49331",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1177/10815589261462547",
+        "title": "Artificial intelligence perceptions and experiences among first and second year medical students.",
+        "url": "https://doi.org/10.1177/10815589261462547",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "rpa-radiation-planning-assistant",
+    "queries": [
+      {
+        "query": "\"Radiation Planning Assistant RPA\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Radiation%20Planning%20Assistant%20RPA%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/acm2.70759",
+        "title": "Can physics review catch prescription and PTV margin errors in fully automated radiotherapy plans? A hazard study.",
+        "url": "https://doi.org/10.1002/acm2.70759",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/acm2.70640",
+        "title": "Global spotlight editorial: Advancing treatment planning to promote equity through AI and automation in clinical medical physics.",
+        "url": "https://doi.org/10.1002/acm2.70640",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1200/go-25-00702",
+        "title": "Artificial Intelligence-Powered Radiotherapy for Resource-Limited Settings: Advancing Cervical and Prostate Cancer Treatment Planning With the Radiation Planning Assistant.",
+        "url": "https://doi.org/10.1200/go-25-00702",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1200/go-26-00181",
+        "title": "Artificial Intelligence and the Global Radiotherapy Gap.",
+        "url": "https://doi.org/10.1200/go-26-00181",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-urt-auto-planning",
+    "queries": [
+      {
+        "query": "\"uRT Auto-Planning\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22uRT%20Auto-Planning%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-dose-plus",
+    "queries": [
+      {
+        "query": "\"Dose+\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Dose%2B%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/sim.70746",
+        "title": "Calibration of Priors for Bayesian Model-Based Dose-Finding Trial Designs With Joint Outcomes.",
+        "url": "https://doi.org/10.1002/sim.70746",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "wisdom-deep-plan",
+    "queries": [
+      {
+        "query": "\"DeepPlan\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22DeepPlan%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/pro6.70078",
+        "title": "Dosimetric comparison of lattice radiotherapy across three modern linear accelerator platforms.",
+        "url": "https://doi.org/10.1002/pro6.70078",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 3 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "therapanacea-smartplan",
+    "queries": [
+      {
+        "query": "\"SmartPlan\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SmartPlan%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.14814/phy2.70900",
+        "title": "A new model of heart failure with preserved ejection fraction using external radiation therapy in male rats.",
+        "url": "https://doi.org/10.14814/phy2.70900",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "informai-radoncai",
+    "queries": [
+      {
+        "query": "\"RadOncAI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RadOncAI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "airato-ratoai",
+    "queries": [
+      {
+        "query": "\"RatoAI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RatoAI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-precise-image",
+    "queries": [
+      {
+        "query": "\"Precise Image\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Precise%20Image%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1155/rrp/2214739",
+        "title": "Application of Deep Learning Algorithm-Based Image Reconstruction in Improving Abdominal CT Image Quality in Adrenal and Renal Lesions Detection.",
+        "url": "https://doi.org/10.1155/rrp/2214739",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/children13091147",
+        "title": "Performance of Commercial Deep Learning-Based Radiation Dose Optimization Software in Pediatric Radiology: A Systematic Review.",
+        "url": "https://doi.org/10.3390/children13091147",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1038/s41598-026-52554-z",
+        "title": "Evaluation of image quality between hybrid iterative reconstruction and deep learning reconstruction in low dose abdominopelvic CT in low body mass index individuals.",
+        "url": "https://doi.org/10.1038/s41598-026-52554-z",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fradi.2026.1824489",
+        "title": "Deep learning image reconstruction technique for improving image quality and radiation dose reduction compared to iterative reconstruction technique in non-contrast CT head imaging.",
+        "url": "https://doi.org/10.3389/fradi.2026.1824489",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.64898/2026.09.10.26362104",
+        "title": "Deep Learning Reconstruction versus Hybrid Iterative Reconstruction for Spectral CT: A Multi-Institutional Image Quality Assessment",
+        "url": "https://doi.org/10.64898/2026.09.10.26362104",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-smartspeed",
+    "queries": [
+      {
+        "query": "\"SmartSpeed\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SmartSpeed%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-9442562/v1",
+        "title": "Deep Learning–Based SmartSpeed Precise DWI for Hepatocellular Carcinoma: Comparison with Conventional DWI",
+        "url": "https://doi.org/10.21203/rs.3.rs-9442562/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fphys.2026.1786449",
+        "title": "Effects of unilateral vs. bilateral flywheel-based complex training on change-of-direction and sprint performance in elite male volleyball players.",
+        "url": "https://doi.org/10.3389/fphys.2026.1786449",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fphys.2026.1911961",
+        "title": "Comparative effects of short- and long-distance sprint training on speed, change-of-direction ability, and intermittent aerobic endurance in collegiate basketball players.",
+        "url": "https://doi.org/10.3389/fphys.2026.1911961",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1519/jsc.0000000000005242",
+        "title": "The Acute Effects of Hill Sprinting on Acceleration Kinematics of Subelite GAA Players.",
+        "url": "https://doi.org/10.1519/jsc.0000000000005242",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.11005/jbm.26.022",
+        "title": "Impact of Vitamin D Status on Speed, Power, and Sport-Specific Skills in Young Soccer Players Living Above 55° North Latitude.",
+        "url": "https://doi.org/10.11005/jbm.26.022",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-smartspeed-precise",
+    "queries": [
+      {
+        "query": "\"SmartSpeed Precise\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SmartSpeed%20Precise%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-9442562/v1",
+        "title": "Deep Learning–Based SmartSpeed Precise DWI for Hepatocellular Carcinoma: Comparison with Conventional DWI",
+        "url": "https://doi.org/10.21203/rs.3.rs-9442562/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.5397/cise.2025.00990",
+        "title": "Artificial intelligence revolution in shoulder magnetic resonance imaging: current evidence and future directions for rotator cuff diagnosis.",
+        "url": "https://doi.org/10.5397/cise.2025.00990",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00330-026-12482-y",
+        "title": "Deep learning improves image quality in motion-robust and sedation-free pediatric brain MRI.",
+        "url": "https://doi.org/10.1007/s00330-026-12482-y",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1097/rct.0000000000001762",
+        "title": "Deep Learning-accelerated MRI in Body and Chest.",
+        "url": "https://doi.org/10.1097/rct.0000000000001762",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-petct-adaptive-reconstruction",
+    "queries": [
+      {
+        "query": "\"PET/CT Adaptive Reconstruction\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22PET%2FCT%20Adaptive%20Reconstruction%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-air-recon-dl",
+    "queries": [
+      {
+        "query": "\"AIR Recon DL\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AIR%20Recon%20DL%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.25259/jcis_32_2026",
+        "title": "Image quality evaluation of neonatal brain magnetic resonance imaging using a deep learning reconstruction algorithm: A quantitative and multireader study using variable denoising levels at 3 tesla.",
+        "url": "https://doi.org/10.25259/jcis_32_2026",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1016/j.ejrad.2026.113140",
+        "title": "Reproducibility and discriminative power of MRI liver radiomics: Impact of deep learning-based image reconstruction.",
+        "url": "https://doi.org/10.1016/j.ejrad.2026.113140",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21203/rs.3.rs-10081506/v1",
+        "title": "DL-based Highly-Accelerated Hepatobiliary-Phase Gadoxetate-Enhanced MRI ; Preliminary Experience",
+        "url": "https://doi.org/10.21203/rs.3.rs-10081506/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s10334-026-01372-5",
+        "title": "Denoising strategies for higher resolution Q-space trajectory imaging with limited scanner hardware.",
+        "url": "https://doi.org/10.1007/s10334-026-01372-5",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/radadv/umag019",
+        "title": "Improved prostate diffusion imaging using deep learning denoising and phase correction with ultra-high-density coil array.",
+        "url": "https://doi.org/10.1093/radadv/umag019",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-truefidelity",
+    "queries": [
+      {
+        "query": "\"TrueFidelity\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22TrueFidelity%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/children13091147",
+        "title": "Performance of Commercial Deep Learning-Based Radiation Dose Optimization Software in Pediatric Radiology: A Systematic Review.",
+        "url": "https://doi.org/10.3390/children13091147",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/rpd/ncaf143",
+        "title": "Assessing the influence of kernel selection on chest computed tomography image quality across varying dose levels using TrueFidelity reconstruction.",
+        "url": "https://doi.org/10.1093/rpd/ncaf143",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1371/journal.pone.0358342",
+        "title": "Feasibility of deep learning-based image reconstruction using TrueFidelity for coronary calcium scoring.",
+        "url": "https://doi.org/10.1371/journal.pone.0358342",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1093/rpd/ncaf160",
+        "title": "Nonprewhitening model observers in the Fourier and spatial domain: a comparison of predictions for iterative and deep learning reconstruction in computed tomography.",
+        "url": "https://doi.org/10.1093/rpd/ncaf160",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s41747-026-00818-8",
+        "title": "Quantitative comparison of 68-keV monoenergetic, routine-dose, and low-dose 120-kVp CT for calcium-mimicking inserts in thoracic phantoms: effects of phantom size and reconstruction method.",
+        "url": "https://doi.org/10.1186/s41747-026-00818-8",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "siemens-deep-resolve",
+    "queries": [
+      {
+        "query": "\"Deep Resolve\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Deep%20Resolve%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-10886959/v1",
+        "title": "Deep Learning Reconstruction in Pediatric Knee MRI: Evaluation of Image Quality, Reader Preference, and Acquisition Time",
+        "url": "https://doi.org/10.21203/rs.3.rs-10886959/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.64898/2026.09.08.26362537",
+        "title": "Automated Brain Segmentation in Accelerated T2-Weighted MRI: Effects of Deep Learning-Based Reconstruction",
+        "url": "https://doi.org/10.64898/2026.09.08.26362537",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s12880-026-02317-z",
+        "title": "How deep resolve affects the stability of texture features for different MR image acceleration methods - a phantom and a human brain study.",
+        "url": "https://doi.org/10.1186/s12880-026-02317-z",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/diagnostics16050681",
+        "title": "Insights into Accelerated MRI Protocols for Pediatric Brain Assessment in Emergency Cases.",
+        "url": "https://doi.org/10.3390/diagnostics16050681",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "canon-aice-ct",
+    "queries": [
+      {
+        "query": "\"AiCE CT\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AiCE%20CT%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "canon-aice-mr",
+    "queries": [
+      {
+        "query": "\"AiCE MR\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AiCE%20MR%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "canon-piqe",
+    "queries": [
+      {
+        "query": "\"PIQE Precise IQ Engine\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22PIQE%20Precise%20IQ%20Engine%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1136/openhrt-2025-003505",
+        "title": "Cardiac CT in the era of artificial intelligence: precision imaging, treatment guidance and optimised risk stratification for coronary artery disease.",
+        "url": "https://doi.org/10.1136/openhrt-2025-003505",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00256-025-05080-4",
+        "title": "Diagnostic value of a second-generation super-resolution deep learning-based reconstruction combined with a metal artifact reduction algorithm for pelvic CT.",
+        "url": "https://doi.org/10.1007/s00256-025-05080-4",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s12880-025-02015-2",
+        "title": "Impact of contrast enhancement boost and super-resolution deep learning reconstruction on pediatric congenital heart disease CTA scans: ultra-low contrast dose.",
+        "url": "https://doi.org/10.1186/s12880-025-02015-2",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.4274/dir.2025.253550",
+        "title": "Photon-counting detector computed tomography in thoracic oncology: revolutionizing tumor imaging through precision and detail.",
+        "url": "https://doi.org/10.4274/dir.2025.253550",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-uai-vision-recon",
+    "queries": [
+      {
+        "query": "\"uAIFI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22uAIFI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1186/s12880-025-01763-5",
+        "title": "Accelerating brain T2-weighted imaging using artificial intelligence-assisted compressed sensing combined with deep learning-based reconstruction: a feasibility study at 5.0T MRI.",
+        "url": "https://doi.org/10.1186/s12880-025-01763-5",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21037/qims-24-2326",
+        "title": "Cerebral flow estimated from 3D pCASL for prediction of intraoperative blood loss in non-embolized meningiomas: a feasibility study.",
+        "url": "https://doi.org/10.21037/qims-24-2326",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s11604-025-01735-3",
+        "title": "Recent trends in scientific research in chest radiology: What to do or not to do? That is the critical question in research.",
+        "url": "https://doi.org/10.1007/s11604-025-01735-3",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 3 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-uaifi-umr",
+    "queries": [
+      {
+        "query": "\"uAIFI on uMR\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22uAIFI%20on%20uMR%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-hd-tof",
+    "queries": [
+      {
+        "query": "\"HD TOF 2.0\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22HD%20TOF%202.0%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "elekta-iris",
+    "queries": [
+      {
+        "query": "\"IRIS Evo\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22IRIS%20Evo%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-precision-dl",
+    "queries": [
+      {
+        "query": "\"Precision DL\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Precision%20DL%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.2967/jnmt.125.270450",
+        "title": "Impact of Deep Learning-Based Time-of-Flight PET Images of Small Tumors Using a Human Anatomic Phantom.",
+        "url": "https://doi.org/10.2967/jnmt.125.270450",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s12149-025-02088-7",
+        "title": "Innovations in clinical PET image reconstruction: advances in Bayesian penalized likelihood algorithm and deep learning.",
+        "url": "https://doi.org/10.1007/s12149-025-02088-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1371/journal.pcbi.1013589",
+        "title": "A semi-automated algorithm for image analysis of respiratory organoids.",
+        "url": "https://doi.org/10.1371/journal.pcbi.1013589",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s41824-025-00279-z",
+        "title": "Enhanced attenuation correction in FDG-PET/CT with respiratory mismatch correction.",
+        "url": "https://doi.org/10.1186/s41824-025-00279-z",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-air-recon-dl-enhancement",
+    "queries": [
+      {
+        "query": "\"AIR Recon DL Enhancement Mode\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AIR%20Recon%20DL%20Enhancement%20Mode%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "airs-swiftmr",
+    "queries": [
+      {
+        "query": "\"SwiftMR\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SwiftMR%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.jneumeth.2026.110813",
+        "title": "Denoising preclinical MRI with vendor-neutral deep learning-based image reconstruction.",
+        "url": "https://doi.org/10.1016/j.jneumeth.2026.110813",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s11604-025-01945-9",
+        "title": "Deep learning reconstruction enhances 1.5T MR angiography beyond 3T in vascular visualization for Moyamoya disease.",
+        "url": "https://doi.org/10.1007/s11604-025-01945-9",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00330-025-11920-7",
+        "title": "Deep learning-based image enhancement for improved black blood imaging in brain metastasis.",
+        "url": "https://doi.org/10.1007/s00330-025-11920-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-mr",
+    "queries": [
+      {
+        "query": "\"SubtleMR\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SubtleMR%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/diagnostics16182957",
+        "title": "Comparison of Deep-Learning-Based Reconstruction of Knee MRI with Conventional Sequences in Patients with Knee Pain.",
+        "url": "https://doi.org/10.3390/diagnostics16182957",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s44263-026-00310-w",
+        "title": "Overcoming barriers to neurosurgical care with technology and innovation.",
+        "url": "https://doi.org/10.1186/s44263-026-00310-w",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3348/jksr.2025.0004",
+        "title": "Fast MRI Techniques of the Liver and Pancreaticobiliary Tract: Overview and Application.",
+        "url": "https://doi.org/10.3348/jksr.2025.0004",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1371/journal.pone.0352200",
+        "title": "Artificial intelligence in spine care: A scoping review of diagnostic applications.",
+        "url": "https://doi.org/10.1371/journal.pone.0352200",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-pet",
+    "queries": [
+      {
+        "query": "\"SubtlePET\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SubtlePET%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.zemedi.2026.06.002",
+        "title": "Evaluation of PET/CT Artificial Intelligence Image Reconstructions VS Harmonized Clinical Reconstruction.",
+        "url": "https://doi.org/10.1016/j.zemedi.2026.06.002",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.21037/qims-2025-1321",
+        "title": "Dual-branch residual encoder-decoder convolutional neural network (DB-REDCNN): a computed tomography-integrated multimodal network for positron emission tomography denoising.",
+        "url": "https://doi.org/10.21037/qims-2025-1321",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s12149-025-02088-7",
+        "title": "Innovations in clinical PET image reconstruction: advances in Bayesian penalized likelihood algorithm and deep learning.",
+        "url": "https://doi.org/10.1007/s12149-025-02088-7",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-hd-pet",
+    "queries": [
+      {
+        "query": "\"SubtleHD PET\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SubtleHD%20PET%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-aimify",
+    "queries": [
+      {
+        "query": "\"AiMIFY\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AiMIFY%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21037/qims-2026-1-0383",
+        "title": "Artificial intelligence-amplified contrast enhancement in brain magnetic resonance imaging for improving image quality and lesion visualization: a prospective pilot study.",
+        "url": "https://doi.org/10.21037/qims-2026-1-0383",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/biomedicines13123005",
+        "title": "Machine Learning-Enabled Medical Devices Authorized by the US Food and Drug Administration in 2024: Regulatory Characteristics, Predicate Lineage, and Transparency Reporting.",
+        "url": "https://doi.org/10.3390/biomedicines13123005",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1002/mrm.70157",
+        "title": "Gadolinium Pollution-A Future Forward Perspective on Human and Environmental Impact.",
+        "url": "https://doi.org/10.1002/mrm.70157",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 4 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-hd",
+    "queries": [
+      {
+        "query": "\"SubtleHD\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SubtleHD%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1002/jmri.70501",
+        "title": "Editorial for \"Deep Learning-Based Enhancement of Already Diagnostic-Quality MRI for Alzheimer's Disease Classification: Effects on Model Performance and Training Data Requirements\".",
+        "url": "https://doi.org/10.1002/jmri.70501",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.5397/cise.2025.00990",
+        "title": "Artificial intelligence revolution in shoulder magnetic resonance imaging: current evidence and future directions for rotator cuff diagnosis.",
+        "url": "https://doi.org/10.5397/cise.2025.00990",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s13045-026-01781-y",
+        "title": "Implementing generative artificial intelligence in precision oncology: safety, governance, and significance.",
+        "url": "https://doi.org/10.1186/s13045-026-01781-y",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 4 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "subtle-hd-ct",
+    "queries": [
+      {
+        "query": "\"SubtleHD CT\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22SubtleHD%20CT%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "algomedica-pixelshine",
+    "queries": [
+      {
+        "query": "\"PixelShine\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22PixelShine%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.4103/jmp.jmp_115_24",
+        "title": "Evaluation of Low-dose Computed Tomography Images Reconstructed Using Artificial Intelligence-based Adaptive Filtering for Denoising: A Comparison with Computed Tomography Reconstructed with Iterative Reconstruction Algorithm.",
+        "url": "https://doi.org/10.4103/jmp.jmp_115_24",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.6009/jjrt.25-1537",
+        "title": "[Comparison of the Impact of Deep Learning Techniques on Low-noise Head CT Images].",
+        "url": "https://doi.org/10.6009/jjrt.25-1537",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/children13091147",
+        "title": "Performance of Commercial Deep Learning-Based Radiation Dose Optimization Software in Pediatric Radiology: A Systematic Review.",
+        "url": "https://doi.org/10.3390/children13091147",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1186/s41747-025-00562-5",
+        "title": "AI for image quality and patient safety in CT and MRI.",
+        "url": "https://doi.org/10.1186/s41747-025-00562-5",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/jcm14124153",
+        "title": "AI in Medical Imaging and Image Processing.",
+        "url": "https://doi.org/10.3390/jcm14124153",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "claripi-clarict-ai",
+    "queries": [
+      {
+        "query": "\"ClariCT.AI\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22ClariCT.AI%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/children13091147",
+        "title": "Performance of Commercial Deep Learning-Based Radiation Dose Optimization Software in Pediatric Radiology: A Systematic Review.",
+        "url": "https://doi.org/10.3390/children13091147",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3348/jksr.2025.0047",
+        "title": "Additional Dose Reduction Potential of Vendor-Agnostic Deep Learning Model: A Phantom Study.",
+        "url": "https://doi.org/10.3348/jksr.2025.0047",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/jcm14124214",
+        "title": "Enhancing Image Quality in Dental-Maxillofacial CBCT: The Impact of Iterative Reconstruction and AI on Noise Reduction-A Systematic Review.",
+        "url": "https://doi.org/10.3390/jcm14124214",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00234-026-03955-4",
+        "title": "Deep-learning reconstruction for noncontrast head computed tomography: Improved image quality and potential diagnostic impact in acute ischemic stroke.",
+        "url": "https://doi.org/10.1007/s00234-026-03955-4",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "claripi-clariace",
+    "queries": [
+      {
+        "query": "\"ClariACE\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22ClariACE%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1097/mao.0000000000004647",
+        "title": "Feasibility of Dose Reduction in the Context of Preoperative Diagnostics in Cochlear Implant Surgery With a Photon-Counting Detector CT and Deep Learning-Supported Denoising.",
+        "url": "https://doi.org/10.1097/mao.0000000000004647",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s00261-025-05271-6",
+        "title": "Deep learning-based combined noise reduction and contrast enhancement for post-neoadjuvant pancreatic cancer CT: does improved image quality translate to better resectability assessment?",
+        "url": "https://doi.org/10.1007/s00261-025-05271-6",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3348/kjr.2025.1520",
+        "title": "Deep Learning-Based Augmented Contrast-Enhancement and Denoising for Reduced-Iodine and Low-Radiation 70-kVp Cerebral CT Angiography: A Prospective Study.",
+        "url": "https://doi.org/10.3348/kjr.2025.1520",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/diagnostics15182325",
+        "title": "Deep Learning-Based Iodine Contrast Augmentation for Suboptimally Enhanced CT Pulmonary Angiography: Implications for Pulmonary Embolism Diagnosis.",
+        "url": "https://doi.org/10.3390/diagnostics15182325",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3390/tomography12040056",
+        "title": "Double Boosting Strategy for Low-Iodine-Dose Dual-Source DECT Follow-Up CT After Intervention with Raw DICOM-Level Deep Learning Iodine Boosting and Low-keV Dual-Energy-Derived Images.",
+        "url": "https://doi.org/10.3390/tomography12040056",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ptw-aqualis",
+    "queries": [
+      {
+        "query": "\"AIQUALIS\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22AIQUALIS%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.3390/cancers17101598",
+        "title": "Deep Learning for Automated Ventricle and Periventricular Space Segmentation on CT and T1CE MRI in Neuro-Oncology Patients.",
+        "url": "https://doi.org/10.3390/cancers17101598",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 1 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "mvision-verify",
+    "queries": [
+      {
+        "query": "\"Verify\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Verify%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-10394609/v1",
+        "title": "An independent third-party autoverification platform iXLAB Verify and its application in a core clinical biochemistry laboratory",
+        "url": "https://doi.org/10.21203/rs.3.rs-10394609/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.7759/cureus.117238",
+        "title": "The Verification Gap: Artificial Intelligence Adoption, Hallucination Awareness, and Verification Practices Among Medical Trainees and Professionals in Pakistan.",
+        "url": "https://doi.org/10.7759/cureus.117238",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.20944/preprints202609.2474.v1",
+        "title": "Memory-Driven Trust: A Unified Foundation for Self-Verifiability in Digital Infrastructure",
+        "url": "https://doi.org/10.20944/preprints202609.2474.v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s11523-026-01233-0",
+        "title": "P-VERIFY: Real-World Comparative Overall Survival and Progression-Free Survival of CDK4/6 Inhibitors Plus an Aromatase Inhibitor in Patients with HR+/HER2- Metastatic Breast Cancer in the USA-A Vodcast.",
+        "url": "https://doi.org/10.1007/s11523-026-01233-0",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "raysearch-rayintelligence",
+    "queries": [
+      {
+        "query": "\"RayIntelligence\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22RayIntelligence%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "accuray-synchrony",
+    "queries": [
+      {
+        "query": "\"Synchrony®\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Synchrony%C2%AE%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.1016/j.ejmp.2026.107196",
+        "title": "Preliminary investigation of iodine-doped MR-based polymer gel dosimeter for fiducial-free tumour-tracking radiotherapy.",
+        "url": "https://doi.org/10.1016/j.ejmp.2026.107196",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3389/fonc.2026.1871489",
+        "title": "A glimpse into the CyberKnife robotic radiosurgery system: technical specifications and developments during thirty years.",
+        "url": "https://doi.org/10.3389/fonc.2026.1871489",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.7759/cureus.83742",
+        "title": "Prostate Stereotactic Body Radiotherapy With Synchrony®-Based Fiducial Tracking on Radixact® X9.",
+        "url": "https://doi.org/10.7759/cureus.83742",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1007/s12194-025-00960-9",
+        "title": "Margin for compensating displacement of adrenal gland metastasis and fiducial marker along with respiratory phase in real-time motion-tracking radiation therapy.",
+        "url": "https://doi.org/10.1007/s12194-025-00960-9",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "philips-precise-position",
+    "queries": [
+      {
+        "query": "\"Precise Position\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Precise%20Position%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [
+      {
+        "doi": "10.21203/rs.3.rs-10572101/v1",
+        "title": "Hybrid Software Controller for Precise Position and Trajectory Control of Quadcopters",
+        "url": "https://doi.org/10.21203/rs.3.rs-10572101/v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.20944/preprints202610.0438.v1",
+        "title": "Calibration of Differential Wheeled Mobile Robot with Trajectory Measuring Device",
+        "url": "https://doi.org/10.20944/preprints202610.0438.v1",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.64898/2026.08.17.745304",
+        "title": "Phosphorylation alters the bulk chemical properties of Orc1 to tune DNA binding, phase separation, and heterochromatin partitioning",
+        "url": "https://doi.org/10.64898/2026.08.17.745304",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.1109/tcyb.2025.3633231",
+        "title": "Cooperative Tracking Control of VTOL Drones: A Fixed-Time Super-Twisting Approach.",
+        "url": "https://doi.org/10.1109/tcyb.2025.3633231",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      },
+      {
+        "doi": "10.3399/bjgp26x746301",
+        "title": "Letting the island come to you: can GPs be wayfinders?",
+        "url": "https://doi.org/10.3399/bjgp26x746301",
+        "attribution": "Name-query hit only; full-text product and RT-task attribution not verified",
+        "status": "unverified-name-match"
+      }
+    ],
+    "limitations": "Exact marketed-name Europe PMC search returned 5 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "medlever-assistant-pipeline",
+    "queries": [
+      {
+        "query": "\"MedLever Assistant\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MedLever%20Assistant%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "medlever-copilot-pipeline",
+    "queries": [
+      {
+        "query": "\"MedLever Copilot\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22MedLever%20Copilot%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "ge-irt-theranostics-pipeline",
+    "queries": [
+      {
+        "query": "\"iRT for Theranostics\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22iRT%20for%20Theranostics%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "united-uct610-sim-dl-recon-pipeline",
+    "queries": [
+      {
+        "query": "\"uCT 610 Sim — Deep Learning Full-FOV Reconstruction\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22uCT%20610%20Sim%20%E2%80%94%20Deep%20Learning%20Full-FOV%20Reconstruction%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "synaptiq-mediq-rt-4dct-pipeline",
+    "queries": [
+      {
+        "query": "\"Mediq RT — 4D CT Research Module\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Mediq%20RT%20%E2%80%94%204D%20CT%20Research%20Module%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "neuralrad-brain-pipeline",
+    "queries": [
+      {
+        "query": "\"NeuralRadBrain\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22NeuralRadBrain%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  },
+  {
+    "id": "atomoai-icontour-pipeline",
+    "queries": [
+      {
+        "query": "\"iContour\" AND FIRST_PDATE:[2025-01-01 TO 2026-10-15]",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22iContour%22%20AND%20FIRST_PDATE%3A%5B2025-01-01%20TO%202026-10-15%5D&format=json&resultType=core&pageSize=5&sort_date:y",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": "Exact marketed-name Europe PMC search returned 0 of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately."
+  }
+]

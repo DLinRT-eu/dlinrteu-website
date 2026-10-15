@@ -138,6 +138,21 @@ async function checkPublication(paper: NonNullable<ProductDetails["keyPapers"]>[
   } catch (error) {return {key, requestedTitle: paper.title, sourceUrl, error: error instanceof Error ? error.message : String(error)};}
 }
 
+async function searchProductLiterature(product: ProductDetails) {
+  const terms = product.name.replace(/["()]/g, " ").replace(/\s+/g, " ").trim();
+  const query = `"${terms}" AND FIRST_PDATE:[2025-01-01 TO ${new Date().toISOString().slice(0, 10)}]`;
+  const url = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${encodeURIComponent(query)}&format=json&resultType=core&pageSize=5&sort_date:y`;
+  try {
+    const response = await fetchPublic(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const result = (await response.json() as EpmcResponse).resultList?.result ?? [];
+    const candidates = result.filter(paper => paper.doi && !product.keyPapers?.some(existing => existing.doi?.toLowerCase() === paper.doi?.toLowerCase())).map(paper => ({ doi: paper.doi, title: paper.title, url: `https://doi.org/${paper.doi}`, attribution: "Name-query hit only; full-text product and RT-task attribution not verified", status: "unverified-name-match" }));
+    return { id: product.id, queries: [{ query, url, date: new Date().toISOString().slice(0,10) }], findings: [], candidates, limitations: `Exact marketed-name Europe PMC search returned ${result.length} of at most 5 results. Synonyms, non-indexed abstracts and subscription full text may be missed; no result is not proof of no evidence. Vendor-page retrieval is recorded separately.` };
+  } catch (error) {
+    return { id: product.id, queries: [{ query, url, date: new Date().toISOString().slice(0,10) }], findings: [], candidates: [], limitations: `Fresh name-query retrieval failed: ${error instanceof Error ? error.message : String(error)}; existing citation lookup is not a substitute for discovery.` };
+  }
+}
+
 mkdirSync(OUTPUT, {recursive:true});
 const registry = sourceRegistry(resolve("src/data/products"));
 for (const p of ALL_PRODUCTS) staticReview(p, registry);
@@ -150,6 +165,7 @@ console.log(`Static audit: ${report.productCount} products; ${report.activeCount
 if (NETWORK) {
   console.log(`Retrieving ${websites.length} product URLs and ${papers.size} unique publication identifiers`);
   await Promise.all([
+    parallelMap(ALL_PRODUCTS, 6, searchProductLiterature).then(results => { writeFileSync(resolve(OUTPUT, "research-fresh-searches.json"), JSON.stringify(results, null, 2)); console.log(`Fresh literature name queries: ${results.length}; unverified new-name hits: ${results.reduce((count, item) => count + item.candidates.length, 0)}`); }),
     parallelMap(websites, 8, checkWebsite).then(results=>{writeFileSync(resolve(OUTPUT,"website-checks.json"),JSON.stringify(results,null,2));console.log(`Websites: ${results.filter(r=>r.status && r.status<400).length}/${results.length} accessible; failures need manual verification`);}),
     parallelMap([...papers.values()], 6, checkPublication).then(results=>{writeFileSync(resolve(OUTPUT,"publication-checks.json"),JSON.stringify(results,null,2));console.log(`Publications: ${results.filter(r=>r.title).length}/${results.length} retrieved; ${results.filter(r=>r.abstract).length} abstracts; ${results.filter(r=>r.titleSimilarity!==undefined && r.titleSimilarity<0.45).length} title mismatch flags`);})
   ]);

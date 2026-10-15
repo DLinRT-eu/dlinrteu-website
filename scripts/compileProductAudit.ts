@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { ALL_PRODUCTS } from "../src/data";
 import { computeProductEvidenceScore } from "../src/utils/evidenceScoring";
 import { isPipelineProduct } from "../src/utils/productFilters";
+import { isExternalSearch, normalizeAuditRole, normalizeAuditSeverity } from "./productAuditNormalization";
 
 interface Finding { id: string; role: string; field: string; severity: string; observation: string; suggestedFix: string }
 interface Query { query: string; url?: string; date?: string }
@@ -24,7 +25,7 @@ const research = readdirSync(input).filter(name => /^research-.*\.json$/.test(na
 const roles = ["Identity", "Inclusion", "Regulatory", "Technical", "Structures", "Evidence", "Transparency", "Cross-check"];
 const proposals: Record<string, Proposal> = {
   "varian-eclipse-ai-contouring": { E: "E0", L: "L1c", doi: "10.1016/j.adro.2023.101177", rationale: "Both scored citations evaluate other contouring systems: Pera evaluates Siemens syngo.via; Wang evaluates anonymized third-party tools hosted alongside Eclipse. A predicate/reference-device relationship is not direct validation of AI Contouring VA10A. Retain as unscored indirect context; proposed L1c is provisional descriptive fallback, not demonstrated clinical efficacy. Keep R unchanged pending reviewer assessment." },
-  "ge-healthcare-irt": { E: "E0", L: "L1c", doi: "10.3390/cancers15245735", rationale: "PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged." },
+  "ge-auto-segmentation": { E: "E0", L: "L1c", doi: "10.3390/cancers15245735", rationale: "PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged." },
   "elekta-iris": { E: "E0", L: "L1c", rationale: "No attributable peer-reviewed study confirmed in this targeted pass; existing E1 contradicts its own E0/no-publication explanation. FDA/system validation and vendor performance claims alone support E0. Proposed L1c is descriptive/provisional, not measured clinical benefit; R unchanged for separate qualitative review." },
   "philips-mrcat-brain": { E: "E2", L: "L2", doi: "10.1016/j.zemedi.2025.01.003", rationale: "Buschmann et al. directly names MRCAT; retrospective 13 brain + 10 head-and-neck patients, dosimetry/geometric endpoints (L2), not measured editing time or prospective patient management. Resolve legacy I2 provisional L3 to final L2, correct title and cohort. MESCAL directly includes MRCAT brain/pelvis, so E2 remains supported." },
   "philips-mrcat-head-and-neck": { E: "E1", L: "L2", doi: "10.1016/j.zemedi.2025.01.003", rationale: "Buschmann directly studies 10 H&N patients in one retrospective cohort with dosimetric/geometric endpoints (L2). MESCAL studies brain/pelvis only: remove its scores for this H&N product or keep unscored indirect commissioning context. Vendor multicentre V&V is not itself peer-reviewed H&N evidence. Retain R unchanged pending separate assessment." },
@@ -33,7 +34,10 @@ const proposals: Record<string, Proposal> = {
 
 const findings: Finding[] = baseline.findings.filter(f => f.observation !== "No static finding; external-source review still required");
 const add = (id: string, role: string, field: string, severity: string, observation: string, suggestedFix: string) => findings.push({ id, role, field, severity, observation, suggestedFix });
-for (const item of research) for (const finding of item.findings ?? []) findings.push({ ...finding, id: item.id });
+for (const item of research) for (const finding of item.findings ?? []) {
+  if (!ALL_PRODUCTS.some(product => product.id === item.id)) continue;
+  findings.push({ ...finding, id: item.id, role: normalizeAuditRole(finding.role, finding.field), severity: normalizeAuditSeverity(finding.severity) });
+}
 for (const p of ALL_PRODUCTS) {
   const website = websites.find(check => check.url === (p.productUrl ?? p.website));
   if (website?.error || (website?.status ?? 200) >= 400) add(p.id, "Identity", "productUrl", "warn", `Public retrieval unsuccessful (${website?.status ?? website?.error}); server blocking and network failures are not proof of a broken URL.`, "Check in a normal browser/official navigation before changing the URL");
@@ -44,7 +48,7 @@ for (const p of ALL_PRODUCTS) {
     if (result?.error) add(p.id, "Evidence", `keyPapers:${key}`, "warn", `Public-source retrieval failed: ${result.error}`, "Keep provisional until a source is retrieved");
   }
   if (proposals[p.id]) add(p.id, "Evidence", "rescoring", "warn", proposals[p.id].rationale, "Separate correction pass; reviewer-check source attribution and score notes first");
-  const searches = research.filter(item => item.id === p.id).flatMap(item => item.queries ?? []);
+  const searches = research.filter(item => item.id === p.id).flatMap(item => item.queries ?? []).filter(isExternalSearch);
   if (!searches.length) add(p.id, "Evidence", "fresh-literature-search", "warn", "No durable product-specific fresh-search log was available to the compiler; existing DOI/PMID metadata retrieval is complete but does not establish literature-search coverage.", "Run or recover a targeted vendor and literature search before marking the full source review complete");
   for (const role of roles) {
     if (findings.some(f => f.id === p.id && f.role === role)) continue;
@@ -60,7 +64,7 @@ const cell = (value: unknown): string => `"${String(value ?? "").replace(/"/g, '
 const csv = (rows: unknown[][]): string => rows.map(row => row.map(cell).join(",")).join("\r\n") + "\r\n";
 const md = (value: unknown): string => String(value ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
 const counts = Object.fromEntries(["error", "warn", "info"].map(severity => [severity, findings.filter(f => f.severity === severity).length]));
-const logIds = new Set(research.filter(item => item.queries?.length).map(item => item.id));
+const logIds = new Set(research.filter(item => item.queries?.some(isExternalSearch) && ALL_PRODUCTS.some(product => product.id === item.id)).map(item => item.id));
 const report: string[] = [
   `# Product Audit Report — ${baseline.date}`,
   "",

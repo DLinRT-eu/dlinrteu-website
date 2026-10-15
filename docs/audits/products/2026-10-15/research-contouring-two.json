@@ -1,0 +1,163 @@
+[
+  {
+    "id": "siemens-ai-rad-companion",
+    "queries": [
+      {"query": "Gupta Economics achieved artificial intelligence contouring oncology clinics low- and middle-income countries Frontiers Oncology 2026", "url": "https://doi.org/10.3389/fonc.2026.1809864", "date": "2026-10-15"},
+      {"query": "Kim AI-based auto-contouring systems Phys Eng Sci Med 2024 Siemens AI-Rad Companion", "url": "https://doi.org/10.1007/s13246-024-01434-9", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Biostatistician/Health Economist", "field": "clinicalImpact / clinicalImpactNotes", "severity": "medium", "observation": "Confirmed real paper (Gupta V et al., Front Oncol 2026, doi:10.3389/fonc.2026.1809864; 18 Indian centres, 116 cases, 6 physicians, INR 37-670/case net savings) is the sole L6-qualifying (economic) study behind the product's top-level clinicalImpact='L6'. Per rubric, a valid L6 economic endpoint is retained even as a lone paper and should NOT be downgraded solely for that reason; the maximum-scoring rule is preserved. However, the top-level clinicalImpactNotes text only narrates the unrelated 67-84% time-saving figure (an L3 claim) and never mentions the Gupta paper or its non-vendor-independent status (co-author affiliation 'Allegheny Health Network and Varian Medical Systems', a Siemens Healthineers company), even though the per-paper keyPapers entry already correctly flags vendorIndependent:false.", "suggestedFix": "Rewrite clinicalImpactNotes to name Gupta et al. 2026 explicitly as the basis for the L6 rating and restate the existing non-vendor-independent/single-country caveat already present in keyPapers, without changing the L6 field value."}
+    ],
+    "candidates": [
+      {"doi": "10.3389/fonc.2026.1809864", "title": "Economics achieved through the use of artificial intelligence-powered contouring solutions in a network of oncology clinics in low- and middle-income countries", "url": "https://doi.org/10.3389/fonc.2026.1809864", "attribution": "Confirmed real, confirmed on-topic for AI-Rad Companion Organs RT (named in abstract); already present in product record", "status": "verified-already-included"}
+    ],
+    "limitations": ["Adams/Tomita/Hu 2026-09-23 HAIR additions not independently re-verified this pass (redundant with prior pass); Kim 2024/Marschner 2022/Rayn 2024/Yamauchi 2024/Maduro Bustos 2023 not re-pulled beyond DOI-format/abstract check."]
+  },
+  {
+    "id": "synaptiq-mediq-rt",
+    "queries": [
+      {"query": "PMC12955686 fulltext Moignier Mediq Synaptiq seven commercial solutions cardiac substructures", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12955686/", "date": "2026-10-15"},
+      {"query": "Moignier Prangères Stoica cardiac substructures AI contouring PHRO 2026 Synaptiq seven commercial solutions", "url": "https://doi.org/10.1016/j.phro.2026.100935", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Literature Reviewer", "field": "evaluationData.source", "severity": "high", "observation": "Live product record's evaluationData.source still reads 'Fedrau et al. Physics and Imaging in Radiation Oncology (2026)'. The PMC open-access full text (PMC12955686, retrieved and grep'd directly, not just the abstract) confirms the paper's actual corresponding author is Alexandra Moignier; no author named 'Fedrau' appears anywhere in the byline or affiliations list. The product's own keyPapers array already correctly lists 'Moignier A et al.' for the same DOI, so this is an internal inconsistency, not just an external citation error.", "suggestedFix": "Correct evaluationData.source (and the matching 'source' top-level field, which still lists 'Fedrau et al.') to 'Moignier A et al., Physics and Imaging in Radiation Oncology (2026)' to match the already-correct keyPapers entry."},
+      {"role": "Literature Reviewer / Vendor-Independence Auditor", "field": "evaluationData / keyPapers attribution confidence", "severity": "high", "observation": "CORRECTION TO THE PRELIMINARY REVIEW: the preliminary report (2026-10-15 draft) recommended downgrading this citation from 'evaluates Mediq RT' to 'product-specific attribution not confirmed', reasoning that the abstract never names a specific commercial product. This is incorrect — the PMC full text (not just the abstract) explicitly lists the seven commercial solutions tested, including 'Mediq, Version 1.1, Synaptiq Technologies SRL, Cluj-Napoca, Romania' by name, confirmed via direct text extraction from the open-access PMC HTML. The product-specific attribution is therefore CONFIRMED, not merely inferred from co-authorship, and no downgrade of this citation is warranted.", "suggestedFix": "No change needed to the clinicalImpact/evidenceRigor values for this paper; retain it as direct product-specific evidence. Optionally add an explicit note '(Mediq named among seven commercial solutions evaluated, confirmed via PMC full text PMC12955686)' to evaluationData.description for future auditors."}
+    ],
+    "candidates": [
+      {"doi": "10.1016/j.phro.2026.100935", "title": "Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12955686/", "attribution": "Confirmed real; confirmed to name 'Mediq' as one of seven commercial AI solutions evaluated (full text, not abstract)", "status": "verified-already-included-attribution-upgraded"}
+    ],
+    "limitations": ["CE-pending-EUDAMED disclosure wording was already checked as adequate in the preliminary pass and not re-verified here (redundant)."]
+  },
+  {
+    "id": "vysioner-vbrain",
+    "queries": [
+      {"query": "Lu Xiao Vysioneer brain metastases deep learning randomized Neuro-Oncology 2021 vs IJROBP", "url": "https://doi.org/10.1093/neuonc/noab071", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Literature Reviewer", "field": "evaluationData.description", "severity": "high", "observation": "The live product record still contains the uncorrected text 'A separate evaluation in IJROBP 2021 focused on deep learning brain metastases auto-segmentation.' The 2021 randomized multi-reader brain-metastases DNN study with Vysioneer co-authorship was published in Neuro-Oncology (Neuro Oncol 2021;23(9):1560-1568, doi:10.1093/neuonc/noab071, PMC8408868), not IJROBP. No matching IJROBP 2021 VBrain paper exists.", "suggestedFix": "Replace 'a separate evaluation in IJROBP 2021' with 'a separate randomized multi-reader evaluation in Neuro-Oncology 2021 (doi:10.1093/neuonc/noab071)' and optionally add the DOI to keyPapers."}
+    ],
+    "candidates": [
+      {"doi": "10.1093/neuonc/noab071", "title": "Randomized multi-reader evaluation of deep learning brain metastases auto-segmentation", "url": "https://doi.org/10.1093/neuonc/noab071", "attribution": "Confirmed real; Vysioneer Inc. co-authorship; not currently in keyPapers array", "status": "candidate-to-add"}
+    ],
+    "limitations": ["FDA K212116 not re-pulled this pass (redundant with prior check)."]
+  },
+  {
+    "id": "wisdom-deep-contour",
+    "queries": [
+      {"query": "Wisdom Tech DeepContour K232928 FDA 510k clearance letter", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf", "date": "2026-10-15"}
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["No independent peer-reviewed literature exists for this product per both this pass and the prior Wave 5C sweep; K232928 letter content not re-pulled (time-budget trade-off, low priority since record already conservatively E0/I0)."]
+  },
+  {
+    "id": "siemens-directorgans",
+    "queries": [
+      {"query": "Çatlı Dinç DirectORGANS BMC Urology 2025 dosimetric prostate", "url": "https://doi.org/10.1186/s12894-025-01875-8", "date": "2026-10-15"}
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["FDA K233650/K250822 letters not re-pulled this pass (prior pass already confirmed consistency); no corrections identified."]
+  },
+  {
+    "id": "oncosoft-oncostudio",
+    "queries": [
+      {"query": "Choi 2024 Cancers OncoStudio ProtegeAI comparative 1200 patients auto-segmentation Korean", "url": "https://doi.org/10.3390/cancers16213670", "date": "2026-10-15"}
+    ],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["Confirmed real and matches the product record exactly: 1200 Korean patients, head-to-head OncoStudio vs Protégé AI, Turing-test component, OncoStudio outperforming in 85% of evaluated OARs (Choi SH et al., Cancers 2024;16(21):3670). No correction needed. Hoshina/Kawaguchi/Miura Cureus papers not re-verified this pass (redundant with prior check)."]
+  },
+  {
+    "id": "taimedimg-deepmets",
+    "queries": [
+      {"query": "Kotecha Akdemir Comprehensive performance testing external validation AI algorithm brain metastases Neuro-Oncology 2026", "url": "https://doi.org/10.1093/neuonc/noag152", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Literature Reviewer", "field": "keyPapers (candidate addition)", "severity": "low", "observation": "Confirmed real paper, now published in print as Kotecha R et al., Neuro-Oncology 2026;28(10):2449-2460, doi:10.1093/neuonc/noag152, same Miami Cancer Institute/Akdemir group plus University of Bern co-authors, explicitly framed as FDA-clearance-process performance testing of 'a previously developed U-Net-based AI model'. The abstract text retrieved does not literally name 'TAIMedImg DeepMets' or 'DeepBT'; the product-name link is inferential (same authors/group/timeline as the K250427 clearance) but not textually confirmed.", "suggestedFix": "Do not add as direct evidence yet; keep on the worklist pending confirmation of the specific commercial product name in the full text (paywalled at time of this check)."}
+    ],
+    "candidates": [
+      {"doi": "10.1093/neuonc/noag152", "title": "Comprehensive performance testing and external validation of an AI algorithm to detect and segment brain metastases", "url": "https://doi.org/10.1093/neuonc/noag152", "attribution": "Confirmed real, same author group as Akdemir 2025; product-name match not textually confirmed in the retrieved abstract", "status": "pending-confirmation"}
+    ],
+    "limitations": ["Full text not accessed (paywalled); product-name confirmation left open per prior pass's own caveat."]
+  },
+  {
+    "id": "brainlab-elements-rt-seg",
+    "queries": [],
+    "findings": [
+      {"role": "Regulatory Auditor", "field": "regulatory.fda.notes", "severity": "medium", "observation": "Carried forward from the preliminary pass without redundant re-verification: FDA K243633 clears a bundle (Brainlab Elements 7.0, including Elements Contouring 5.0, Image Fusion, Fibertracking, BOLD MRI Mapping) under product codes QIH/JAK/LLZ, confirming Contouring 5.0 is one module within a multi-module clearance rather than a dedicated contouring-only 510(k). The product's live regulatory.fda.notes text already states this correctly ('Cleared as part of Brainlab Elements 7.0 suite, including Contouring 5.0'), so no further correction is needed beyond what is already recorded.", "suggestedFix": "No action required; record already reflects the bundle scope accurately."}
+    ],
+    "candidates": [],
+    "limitations": ["Not re-verified independently this pass; relying on prior pass's FDA letter read."]
+  },
+  {
+    "id": "ge-mr-contour-dl",
+    "queries": [],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["Carried forward from preliminary pass without re-verification: K242925 and ESTRO/ASTRO 2025 press releases previously confirmed consistent; no independent peer-reviewed literature identified; E0/I1 rating appropriately conservative."]
+  },
+  {
+    "id": "medmind-rt-mind-ai",
+    "queries": [
+      {"query": "Sillanpaa Journal of Radiotherapy in Practice 2025 RT-Mind_AI Autocontour Annotate head and neck geometric dosimetric comparison", "url": "https://doi.org/10.1017/s1460396925100204", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Literature Reviewer / Vendor-Independence Auditor", "field": "evidence / keyPapers (candidate addition)", "severity": "medium", "observation": "Confirmed real, vendor-independent, external comparative paper not currently in the product's evidence or keyPapers arrays: Sillanpaa JK, Sood AJ, Reynolds M, 'A geometric and dosimetric comparison of three AI-based autocontouring packages in the head and neck region,' J Radiother Pract 2025, doi:10.1017/S1460396925100204 (University of Minnesota). The paper explicitly names and tests 'RT-Mind_AI 1.0 (MM)' head-to-head against Radformation AutoContour and TheraPanacea Annotate on 13 CT sets/14 OARs, reporting RT-Mind slightly underperforming the other two on geometric metrics (50.0% of OARs with Dice>0.7 vs 57.1%/64.3%) and receiving mixed physician accuracy/acceptability scores. This is the first fully vendor-independent, non-MedMind-co-authored comparative evidence for this product; all four papers currently in the record have MedMind co-authors (vendorIndependent:false throughout).", "suggestedFix": "Add this DOI to keyPapers/evidence as a vendor-independent comparative study (balanced result: RT-Mind performed somewhat worse than two peer products on the tested cohort); consider whether evidenceVendorIndependent should move from false toward 'mixed' given this independent paper now exists alongside the vendor-affiliated set."}
+    ],
+    "candidates": [
+      {"doi": "10.1017/S1460396925100204", "title": "A geometric and dosimetric comparison of three AI-based autocontouring packages in the head and neck region", "url": "https://doi.org/10.1017/s1460396925100204", "attribution": "Confirmed real; explicitly names 'RT-Mind_AI 1.0'; vendor-independent (University of Minnesota, no MedMind co-authors)", "status": "candidate-to-add"}
+    ],
+    "limitations": ["Not yet full-text-confirmed beyond the public abstract; recommend pulling the PDF to confirm exact OAR list and statistical significance claims before scoring changes."]
+  },
+  {
+    "id": "varian-ethos-ai-segmentation",
+    "queries": [],
+    "findings": [
+      {"role": "Regulatory Auditor", "field": "regulatory.fda", "severity": "medium", "observation": "Confirmed via the live record's own regulatory block (not re-pulled from FDA, cross-checked for internal consistency): K232923 carries product codes IYE/MUJ and regulation 21 CFR 892.5050 ('Medical Charged-Particle Radiation Therapy System'), i.e. the Ethos adaptive-RT linac/system clearance, not a dedicated QKB Radiological-Image-Processing-Software clearance like the other 15 products in this batch. The record's regulatory.fda.notes text already states this distinction accurately ('K232923... AI segmentation deep learning algorithms for contouring with additional anatomical site support' as part of the whole-system clearance), consistent with the preliminary pass's finding.", "suggestedFix": "No further action required beyond what the preliminary pass already recommended; confirmed accurate as currently written."}
+    ],
+    "candidates": [],
+    "limitations": ["Not independently re-pulled from accessdata.fda.gov this pass; relying on internal consistency check of the already-detailed regulatory.fda.notes text."]
+  },
+  {
+    "id": "varian-eclipse-ai-contouring",
+    "queries": [
+      {"query": "10.1016/j.adro.2023.101177 Pera Eclipse AI contouring", "url": "https://doi.org/10.1016/j.adro.2023.101177", "date": "2026-10-15"},
+      {"query": "10.1002/acm2.14620 Wang Eclipse AI contouring clinical validation", "url": "https://doi.org/10.1002/acm2.14620", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "Literature Reviewer", "field": "keyPapers[0] title/description", "severity": "high", "observation": "Citation mismatch (metadata-level check only; full-text review intentionally left to the other agent verifying this product to avoid redundant work). keyPapers lists doi:10.1016/j.adro.2023.101177 with the fabricated title 'Eclipse AI contouring comparative evaluation' by 'Pera Ò et al.'. The actual paper at that DOI is Pera O et al., 'Clinical Validation of Siemens' Syngo.via Automatic Contouring System,' Adv Radiat Oncol 2023 — it validates Siemens syngo.via (the DI2IN/AI-Rad-Companion-family engine, reviewed using the Eclipse Contouring module as the viewer only), not a standalone 'AI Contouring for Eclipse' product evaluation. This paper plausibly belongs to the siemens-ai-rad-companion / syngo.via lineage note already present elsewhere in the dataset, not to this 2026-released Eclipse packaging.", "suggestedFix": "Remove or re-title this keyPapers entry; if retained, clarify it describes syngo.via (viewed in Eclipse), not an independent validation of 'AI Contouring for Eclipse' VA10A."},
+      {"role": "Literature Reviewer", "field": "keyPapers[1] title/description", "severity": "high", "observation": "Citation mismatch (metadata-level check only). keyPapers lists doi:10.1002/acm2.14620 with the title 'Eclipse AI contouring clinical validation' by 'Wang Y et al.'. The actual paper at that DOI is Wang T et al. (Mount Sinai), 'Evaluation of AI-based auto-contouring tools in radiotherapy: A single-institution study,' J Appl Clin Med Phys 2025 — it evaluates two anonymized commercial tools ('Software A' and 'Software B') and does not name 'Eclipse' or 'AI Contouring for Eclipse' anywhere in the retrieved abstract/metadata.", "suggestedFix": "Remove or re-title this keyPapers entry pending full-text confirmation of which named products 'Software A/B' refer to; do not present it as an Eclipse-specific validation without that confirmation."}
+    ],
+    "candidates": [],
+    "limitations": ["Deliberately did not pull full text for either paper, since the task notes another agent is already verifying this product in depth; this entry is limited to DOI/title/author metadata cross-checks to flag the mismatch without duplicating that work."]
+  },
+  {
+    "id": "quanta-qoca-image-smart-rt",
+    "queries": [],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["Carried forward from preliminary pass without re-verification: FDA K231855 training/validation dataset detail (220 cases, TCIA, Gold Atlas Male Pelvis) previously reported from third-party FDA-database mirrors, not re-pulled from accessdata.fda.gov directly this pass; disclosureLevel upgrade recommendation from the preliminary pass stands but is not independently re-confirmed here."]
+  },
+  {
+    "id": "medcom-prosoma-dart",
+    "queries": [],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["No corrections identified; record already correctly distinguishes DART (E0) from the ABAS predecessor literature (Karagiannis 2021, Doolan 2023). Not independently re-searched for a new DART-specific paper this pass (time-budget trade-off; recommended for a future pass given DART's E0 status)."]
+  },
+  {
+    "id": "united-urt-auto-contouring",
+    "queries": [],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["PRNewswire URL and ~90% time-reduction attribution not re-tested for resolution/specificity this pass; evidence correctly labelled E0/vendor-reported per the preliminary pass, no corrections identified."]
+  },
+  {
+    "id": "aitewan-deepbt-detector-plus",
+    "queries": [],
+    "findings": [],
+    "candidates": [],
+    "limitations": ["K252190 not re-pulled from accessdata.fda.gov this pass; the cross-vendor personnel link to Wan-Yuo Guo (also a VBrain 2021 Neuro-Oncology co-author) noted in the preliminary pass is an interesting provenance observation but not an actionable data-correction, so it is not repeated as a finding here."]
+  }
+]
