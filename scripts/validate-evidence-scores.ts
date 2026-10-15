@@ -111,7 +111,7 @@ for (const category of categories) {
       add("error", "impact-invalid", `unknown level of efficacy "${p.clinicalImpact}"`);
     }
     if (legacyPapers > 0 || isLegacyImpactCode(p.clinicalImpact)) {
-      add("warning", "legacy-impact-code", `${legacyPapers} paper(s) still on a legacy I-code; level is provisional until re-scored`);
+      add("warning", "legacy-impact-code", legacyPapers > 0 ? `${legacyPapers} paper(s) still on a legacy I-code; level is provisional until re-scored` : `product level still on legacy ${p.clinicalImpact}; provisional until re-scored`);
     }
     if (score.hasOverride && !score.overrideReason?.trim()) {
       add("error", "override-without-reason", "evidenceScoreOverride set without a reason");
