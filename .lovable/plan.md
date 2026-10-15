@@ -1,0 +1,36 @@
+# Full product accuracy, evidence and discovery review
+
+## Outcome
+Review every live catalogue and Pipeline product, search for new sources and eligible new products, and deliver a complete reviewer worklist. Apply verified changes category by category without further approval, as requested. Uncertain claims remain explicitly unresolved rather than guessed.
+
+## Scope and sequence
+1. **Establish the baseline.** Enumerate unique live product IDs from the catalogue exports, separating active and Pipeline records and recording category coverage. Check archived and previously excluded records for duplicate/reintroduced candidates, without treating them as active. Reconcile existing audit and efficacy-rescoring worklists so unresolved papers are not missed.
+2. **Run the Product Audit Swarm checklist.** For each product review identity and links; AI/radiotherapy inclusion; regulatory status and exact certified scope; technical specifications and modalities; structures and model counts; attributable publications; training/evaluation transparency and safety notices; company, version and cross-product consistency. Record a result for every role, including clean or not-applicable results.
+3. **Search fresh sources for every product.** Check official product pages, current brochures/manuals, public regulatory records and PubMed/Europe PMC, Crossref and publisher sources. Search by product name, former names, company and relevant task. Include older missed publications as well as updates since the last review. Verify DOI/title/product attribution, distinguish abstracts from full papers, and avoid counting the same study twice as independent evidence. Record search dates, queries, URLs, access limitations and negative searches.
+4. **Verify and update evidence.** Audit existing paper scores as well as newly found papers against Evidence Rigor E0–E3 and Levels of Efficacy L1t, L1c, L2–L6. Award only endpoints supported by the retrieved source; identify abstract-only judgments. Prioritise provisional/unretrievable records and higher-level claims. Preserve legacy scores for traceability, category-specific attribution and documented overrides. Recalculate product aggregates with the existing shared logic. Keep the R0–R5 framework unchanged; change an individual readiness score only when verified findings support it under that same rubric, with a recorded reason.
+5. **Discover missing products.** In parallel with category reviews, screen vendor portfolios, recent radiotherapy conference announcements, publications and regulatory discovery leads. Compare candidates against live, Pipeline and archived IDs. Add only documented in-scope AI/DL products, or explicitly AI-output-focused QA tools; put eligible pre-market products in Pipeline. Record exclusions and insufficiently documented leads with reasons, rather than presenting them as confirmed products. Add associated company records and verified logos where needed.
+6. **Apply and report in category waves.** Audit and compile findings first, then perform a separate correction pass using your standing authorisation—no additional approval pause. Cover Auto-Contouring, Image Synthesis, Image Enhancement, Reconstruction, Treatment Planning, Tracking, Registration, Platform, Performance Monitor, Positioning and any populated Clinical Prediction records, with Pipeline reviewed explicitly. Update only source-supported fields and relevant review dates; preserve version histories, source disclosures and existing UI behaviour. Report each completed wave and continue through the remaining categories.
+
+## Safeguards
+- Every changed factual claim must have a disclosed supporting source. Preserve non-public source labels and retrieval dates; regulatory clearance does not prove every feature is certified or clinically validated.
+- A broken or inaccessible link alone is not proof a product is discontinued. Distinguish confirmed errors, missing disclosure, conflicting evidence and unavailable sources.
+- Papers must evaluate the named product/component and relevant task. Workflow-level papers must not inflate evidence for an untested AI feature.
+- Preserve the existing structure-count convention, modality/model distinctions and investigational labels; do not infer target volumes from synthetic-CT model regions.
+- Preserve educational/non-clinical-validation disclaimers and neutral vendor presentation. No unrelated design, account, email, security or news changes.
+- Completion means every baseline product has a documented review and search outcome, not that all information was retrievable or that discovery can prove no other product exists.
+
+## Deliverables
+- Full dated Markdown report, with all eight audit roles and consulted sources per product.
+- Findings CSV and per-product rescoring CSV using the existing audit schemas; clearly document that historical `current_I`/`proposed_I` columns contain the new L-codes.
+- Reviewer progress CSV with product/category, field or paper, before/after values, evidence URL, rationale, search date, applied/unresolved status and blocker.
+- Candidate-product CSV showing added-to-catalogue, added-to-Pipeline, excluded or needs-more-evidence decisions.
+- Per-category reports plus a final reconciliation of reviewed products, changes, new sources/products and unresolved items, delivered through Files.
+
+## Technical details and verification
+- Use `src/data/index.ts` and category exports as the live inventory; inspect raw records too, so normalisation does not conceal remaining legacy values.
+- Reuse `scripts/audit-swarm.ts`, evidence validation/coverage scripts and regulatory discovery tools where suitable. Check their coverage and assumptions before treating their output as authoritative; a static pass is not a literature or regulatory-source review.
+- The bundled swarm scoring cheatsheet still describes I0–I5 and R0–R4. Use the current `src/data/evidence-impact-levels.ts`, methodology guide and reviewer documentation instead; never reintroduce the stale rubric.
+- Split independent product/source research among parallel agents, keep product-file edits coordinated, and maintain a category checklist in `roadmap.md` after implementation begins.
+- Run evidence validation and relevant existing tests after each wave. Add focused tests only if a shared counting, scoring or inclusion rule must change. Run lint, record unrelated existing failures separately, and inspect automatic build diagnostics rather than launching a manual build/typecheck.
+- Verify changed product pages and new entries through the browser, including structure totals, paper badges, category-specific evidence, links and logos. At the end check catalogue/Pipeline placement, company links, dashboard evidence aggregates and export consistency. Validate report coverage and CSV row counts against the final inventory.
+- If external sources block a claim, leave it on the reviewer worklist with a concrete reason. Do not describe the overall run as complete while products remain unreviewed.
