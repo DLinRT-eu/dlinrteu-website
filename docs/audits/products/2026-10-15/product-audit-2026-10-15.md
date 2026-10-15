@@ -1,7 +1,7 @@
 # Product Audit Report — 2026-10-15
 
 - Scope: all 98 live catalogue records (91 non-Pipeline, 7 Pipeline); archived/examples excluded. The bundled enumerator lists 104 source files, not 104 active products; unused definitions and relationship IDs do not equal live entries.
-- Findings: 1 errors, 147 warnings, 721 information rows; one CSV row per Markdown finding.
+- Findings: 1 errors, 147 warnings, 720 information rows; one CSV row per Markdown finding.
 - Source retrieval: 265/265 distinct DOI/PMID records; 263 abstracts. Vendor URLs: 77/86 accessible on this run. Failures may reflect blocking, not retirement.
 - Durable product-specific fresh-search logs: 98/98. Targeted, timeboxed public searches only; not an exhaustive systematic review.
 - Product records have NOT been edited. Proposals are a worklist for a separate correction pass, following Product Audit Swarm / Minimal Intervention. No new product is automatically admitted from discovery leads.
@@ -428,11 +428,10 @@
 | Role | Field | Severity | Observation | Suggested fix |
 | --- | --- | --- | --- | --- |
 | Identity | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
-| Inclusion | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
+| Inclusion | classification | warn | Jazz is described on the vendor's own site as a neuroradiology 'lesion tracking and reporting' tool for diagnostic MS follow-up (single-click annotation, volumetric lesion tracking, automated report generation) — it is not a radiotherapy organ/target auto-contouring product. Its sole supporting publication (Federau et al., Neuroradiology 2024) evaluates diagnostic MS-lesion reading productivity/quality, not RT contouring. Classifying Jazz under 'Auto-Contouring' (an RT category) alongside true OAR/target contouring tools like Limbus or MVision is a category-fit mismatch. | Re-examine whether Jazz belongs in the Auto-Contouring (radiotherapy) category at all, or whether it should be reclassified/footnoted as a diagnostic neuroradiology tool with only tangential RT relevance. At minimum, the impact rationale should state explicitly that the supporting evidence is diagnostic, not RT-contouring, evidence. |
 | Regulatory | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 | Technical | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 | Structures | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
-| Evidence | classification | warn | Jazz is described on the vendor's own site as a neuroradiology 'lesion tracking and reporting' tool for diagnostic MS follow-up (single-click annotation, volumetric lesion tracking, automated report generation) — it is not a radiotherapy organ/target auto-contouring product. Its sole supporting publication (Federau et al., Neuroradiology 2024) evaluates diagnostic MS-lesion reading productivity/quality, not RT contouring. Classifying Jazz under 'Auto-Contouring' (an RT category) alongside true OAR/target contouring tools like Limbus or MVision is a category-fit mismatch. | Re-examine whether Jazz belongs in the Auto-Contouring (radiotherapy) category at all, or whether it should be reclassified/footnoted as a diagnostic neuroradiology tool with only tangential RT relevance. At minimum, the impact rationale should state explicitly that the supporting evidence is diagnostic, not RT-contouring, evidence. |
 | Evidence | clinicalDomain | warn | L3 clinical impact label for Jazz is derived from a diagnostic-radiology productivity study, not a radiotherapy planning/dosimetric study — applying an RT clinical-impact tier to non-RT evidence risks a false 'clean' L3 impact rating. | Down-grade or re-derive the impact label using RT-specific criteria, or mark impact as not-applicable/out-of-scope for RT auto-contouring comparisons. |
 | Transparency | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 | Cross-check | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
@@ -670,13 +669,14 @@
 | Evidence | keyPapers | warn | E1 claimed without scored attributable peer-reviewed papers | Verify source before editing |
 | Evidence | evidenceOrigin | warn | rigorOrigin/impactOrigin are 'stored' (not 'papers') with paperCount 1 but scoredPaperCount 0, meaning the E1/L3 rating is not derived from a scored literature entry yet qualityFlags report multiCenter:true, multiNational:true and externalValidation:true as if already substantiated — a potential false 'clean' quality-flag state given no scored paper backs the claim. | Either attach the specific paperCount=1 source explicitly so its multi-center/multi-national/external-validation claims can be verified, or set these qualityFlags to false/unknown until a scorable source is linked. |
 | Evidence | keyPapers:pmid:PMC10741804 | warn | Citation title differs from retrieved metadata: Clinical Use of a Commercial Artificial Intelligence-Based Software for Autocontouring in Radiation Therapy: Geometric Performance and Dosimetric Impact.. Similarity is a triage flag, not a determination of wrong attribution. | Verify full title/authors, product identity and study endpoints before correcting or rescoring |
+| Evidence | rescoring | warn | PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged. | Separate correction pass; reviewer-check source attribution and score notes first |
 | Transparency | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 | Cross-check | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 
 #### Re-scoring proposal
 
-- Proposed: E1 / L3 / R3 (not applied)
-- Rationale: No verified score change proposed in this read-only targeted pass. Retain current effective axes pending reviewer checks; absent or inaccessible sources are not evidence of no publications.
+- Proposed: E0 / L1c / R3 (not applied)
+- Rationale: PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged.
 - Search date: 2026-10-15
 
 #### Sources consulted
@@ -2276,14 +2276,13 @@
 | Structures | — | info | n/a — no enumerated auto-contouring structure list for this primary task | — |
 | Evidence | keyPapers | info | No scored attributable publications recorded; literature search required | Keep evidence uncertainty explicit |
 | Evidence | evidence[]/evidenceRigorNotes | info | No new independent peer-reviewed publication naming iRT was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence. | No change required at this time; keep flagged for the next periodic Europe PMC sweep. |
-| Evidence | rescoring | warn | PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged. | Separate correction pass; reviewer-check source attribution and score notes first |
 | Transparency | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 | Cross-check | — | info | No automated inconsistency identified; this is not independent verification of every factual field. See source-search limitations. | Human verification remains required for undisclosed or inaccessible claims |
 
 #### Re-scoring proposal
 
-- Proposed: E0 / L1c / R2 (not applied)
-- Rationale: PMC10741804 is Hoque et al., PMID 38136281, evaluating Limbus Contour v1.0.18, not GE Auto Segmentation. Remove the misattributed scored paper. Existing GE notes already state E0; L1c is a provisional descriptive fallback only. FDA validation must remain distinguished from peer-reviewed evidence; keep R unchanged.
+- Proposed: E0 / L3 / R2 (not applied)
+- Rationale: No verified score change proposed in this read-only targeted pass. Retain current effective axes pending reviewer checks; absent or inaccessible sources are not evidence of no publications.
 - Search date: 2026-10-15
 
 #### Sources consulted
