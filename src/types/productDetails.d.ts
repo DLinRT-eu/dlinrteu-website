@@ -137,7 +137,12 @@ export interface ProductDetails extends Product {
   // Dual-axis evidence classification (separates rigor from impact)
   evidenceRigor?: "E0" | "E1" | "E2" | "E3"; // How robust is the evidence methodology?
   evidenceRigorNotes?: string;
-  clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5"; // What outcomes does it demonstrate?
+  // Levels of Efficacy (L1t–L6). Legacy I0–I5 values are converted provisionally until re-scored.
+  clinicalImpact?: "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6" | "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+  /** Original I-code kept for audit after re-scoring to Levels of Efficacy. */
+  legacyClinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+  /** True while the efficacy level is a provisional conversion of a legacy I-code. */
+  efficacyProvisional?: boolean;
   clinicalImpactNotes?: string;
   keyPapers?: Array<{
     doi?: string;
@@ -149,7 +154,9 @@ export interface ProductDetails extends Product {
     link?: string;
     // Per-paper scoring (product score = max across papers, per axis)
     evidenceRigor?: "E0" | "E1" | "E2" | "E3";
-    clinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    clinicalImpact?: "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6" | "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    legacyClinicalImpact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    efficacyProvisional?: boolean;
     /** One line explaining why this paper sits at these levels. */
     rationale?: string;
     // Study quality sub-attributes for this specific paper
@@ -169,7 +176,7 @@ export interface ProductDetails extends Product {
    */
   evidenceScoreOverride?: {
     rigor?: "E0" | "E1" | "E2" | "E3";
-    impact?: "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+    impact?: "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6" | "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
     reason: string;
     setBy?: string;
     setOn?: string;

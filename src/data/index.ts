@@ -1,4 +1,5 @@
 import { ProductDetails } from "@/types/productDetails";
+import { normalizeProductEfficacy } from "@/utils/normalizeEfficacy";
 import { CompanyDetails } from "@/types/company";
 import { NewsItem } from "@/types/news";
 import { Initiative } from "@/types/initiative";
@@ -38,7 +39,7 @@ export const ALL_PRODUCTS: ProductDetails[] = [
   ...TRACKING_PRODUCTS,
   ...POSITIONING_PRODUCTS,
   ...PIPELINE_PRODUCTS
-];
+].map(normalizeProductEfficacy);
 
 // Export everything
 export {
