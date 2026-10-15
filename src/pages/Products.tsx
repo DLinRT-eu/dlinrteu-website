@@ -290,6 +290,9 @@ const Products = () => {
         
         
         {/* Pipeline Products Link */}
+        <Link to="/products/discontinued" className="mb-6 flex items-center gap-2 border-b border-border py-3 text-primary">
+          <Clock className="h-5 w-5" />Discontinued products ({dataService.getDiscontinuedProducts().length})<ArrowRight className="ml-auto h-5 w-5" />
+        </Link>
         {pipelineProducts.length > 0 && (
           <Link to="/products/pipeline" className="block mb-6">
             <div className="p-4 bg-violet-50 rounded-lg border border-violet-200 hover:border-violet-400 transition-colors">

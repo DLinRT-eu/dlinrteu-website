@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import ProductFeedbackBanner from "@/components/ProductFeedbackBanner";
 import { Badge } from "@/components/ui/badge";
 import EudamedRegistration from "@/components/company/EudamedRegistration";
+import UnifiedProductCard from '@/components/common/UnifiedProductCard';
 
 const CompanyProducts = () => {
   const { companyId = "" } = useParams<{ companyId: string }>();
@@ -26,6 +27,8 @@ const CompanyProducts = () => {
         : [],
     [company]
   );
+
+  const discontinuedProducts = company ? dataService.getDiscontinuedProductsByCompany(company.id) : [];
 
 
   const stats = useMemo(() => {
@@ -185,6 +188,7 @@ const CompanyProducts = () => {
 
         {company.eudamed && <EudamedRegistration eudamed={company.eudamed} />}
 
+        <h2 className="mb-4 text-2xl font-semibold">Current products</h2>
         {/* Products grouped by category */}
         {products.length === 0 ? (
           <div className="text-center py-12 border rounded-lg bg-gray-50">
@@ -216,6 +220,11 @@ const CompanyProducts = () => {
           </div>
         )}
 
+        {discontinuedProducts.length > 0 && <section className="mt-12 space-y-4">
+          <h2 className="text-2xl font-semibold">Discontinued products ({discontinuedProducts.length})</h2>
+          <p className="text-muted-foreground">Historical records — excluded from current-product and certification totals.</p>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">{discontinuedProducts.map(product => <UnifiedProductCard key={product.id} product={product} />)}</div>
+        </section>}
         {pipelineProducts.length > 0 && (
           <section className="mt-12">
             <Link to="/products/pipeline" className="block mb-4">

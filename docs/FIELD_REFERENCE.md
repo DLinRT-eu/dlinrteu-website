@@ -123,6 +123,7 @@ All free-text fields rendered through `<AutoLinkText>` apply the same rule: only
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `market.onMarketSince` | ➖ | Year product entered market. | `YYYY` or `YYYY-MM`. | Derive from first commercial availability. |
+| `market.status` | ➖ | Sourced commercial lifecycle event, separate from task and regulatory approval. | `verification`: confirmed/unconfirmed; `event`: end-of-sales/end-of-support/availability-review; reason, optional effectiveDate/region, source/sourceUrl/sourceAccess/sourceRetrievedOn. | Only confirmed end-of-sales records use discontinued lifecycle. Never invent a date, successor, support termination or regulatory withdrawal. |
 | `market.distributionChannels` | ➖ | Sales/partner channels. | Array of strings. | Optional; use when vendor publishes info. |
 | `pricing.model` | ➖ | Commercial model. | Array of tags (`subscription`, `per_exam`, `license`). | Avoid speculative pricing; only include confirmed details. |
 | `pricing.basedOn` | ➖ | Pricing drivers. | Array (`number_of_sites`, `exam_volume`). | Record only if published. |
@@ -260,6 +261,7 @@ Products can have safety-related corrective actions tracked from regulatory data
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `developmentStage` | ➖ | Product lifecycle stage | `"certified"`, `"pipeline"`, `"research"`, `"discontinued"` | Use "certified" for products with CE/FDA clearance |
+Discontinued products remain accessible by ID and at `/products/discontinued`, with a separate vendor section. They are excluded from current-market listings, counts and default evidence dashboards; retained E/L/R values and clearances describe historical assessments. Archived duplicate or rejected records are not automatically included. Unconfirmed availability concerns do not change current-market counts.
 | `priorVersions` | ➖ | Links to earlier product versions | Array of product ID strings | For tracking version evolution |
 | `supersededBy` | ➖ | ID of product that replaces this one | Product ID string | Set when product is discontinued/replaced |
 | `dosePredictionModels` | ➖ | Dose prediction capabilities (Treatment Planning) | Array of model descriptors | Specific to treatment planning products |
