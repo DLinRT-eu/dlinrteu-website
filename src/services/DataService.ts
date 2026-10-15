@@ -268,7 +268,7 @@ class DataService {
     return COMPANIES.filter(company => {
       const activeProducts = ALL_PRODUCTS.filter(product =>
         company.productIds.includes(product.id || '') &&
-        hasRegulatoryApproval(product)
+        hasRegulatoryApproval(product) && !isDiscontinuedProduct(product) && !isPipelineProduct(product)
       );
       return activeProducts.length > 0;
     });
