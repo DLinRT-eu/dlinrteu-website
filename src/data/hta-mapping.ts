@@ -52,7 +52,7 @@ export const HTA_FIELD_MAP: Record<string, { domain: HTADomainCode; label: strin
 
   "evidence":                 { domain: "EFF", label: "Clinical evidence" },
   "evidenceRigor":            { domain: "EFF", label: "Evidence rigor (E0–E3)" },
-  "clinicalImpact":           { domain: "EFF", label: "Clinical impact (I0–I5)" },
+  "clinicalImpact":           { domain: "EFF", label: "Levels of efficacy (L1t–L6)" },
   "evaluationData":           { domain: "EFF", label: "Evaluation dataset" },
   "studyQuality":             { domain: "EFF", label: "Study quality attributes" },
 
@@ -82,10 +82,11 @@ export const EVIDENCE_RIGOR_EXPLAIN: Record<string, string> = {
 };
 
 export const CLINICAL_IMPACT_EXPLAIN: Record<string, string> = {
-  I0: "Technical performance only (no clinical outcome demonstrated).",
-  I1: "Technical performance only (no clinical outcome demonstrated).",
-  I2: "Diagnostic thinking impact (changes clinician decisions).",
-  I3: "Therapeutic impact (changes treatment plan).",
-  I4: "Patient outcome impact (clinical benefit demonstrated).",
-  I5: "Societal / population-level impact.",
+  L1t: "Technical efficacy: reliable performance under test conditions, independent of clinical context.",
+  L1c: "Potential clinical efficacy: clinical feasibility demonstrated (proof of concept).",
+  L2: "Accuracy efficacy: stand-alone performance against a reference standard or accepted comparator.",
+  L3: "Decision/workflow efficacy: impact on clinical decision-making or workflow.",
+  L4: "Therapeutic/patient management efficacy: prospective use changes patient management.",
+  L5: "Patient outcome efficacy: impact on patient outcomes.",
+  L6: "Societal efficacy: impact on society through economic analysis.",
 };

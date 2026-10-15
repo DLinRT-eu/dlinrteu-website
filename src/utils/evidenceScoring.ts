@@ -1,7 +1,9 @@
 import type { ProductDetails } from "@/types/productDetails";
-import type {
-  EvidenceRigorCode,
-  ClinicalImpactCode,
+import {
+  efficacyRank,
+  resolveEfficacyLevel,
+  type EvidenceRigorCode,
+  type ClinicalImpactCode,
 } from "@/data/evidence-impact-levels";
 
 export type ScoredPaper = NonNullable<ProductDetails["keyPapers"]>[number];
@@ -25,6 +27,8 @@ export interface ComputedEvidenceScore {
   scoredPaperCount: number;
   paperCount: number;
   hasOverride: boolean;
+  /** True when the effective level is a provisional conversion of a legacy I-code. */
+  impactProvisional: boolean;
   overrideReason?: string;
   /** OR across scored papers, falling back to product-level flags. */
   qualityFlags: {
@@ -37,7 +41,6 @@ export interface ComputedEvidenceScore {
 }
 
 const RIGOR_ORDER: EvidenceRigorCode[] = ["E0", "E1", "E2", "E3"];
-const IMPACT_ORDER: ClinicalImpactCode[] = ["I0", "I1", "I2", "I3", "I4", "I5"];
 
 const rank = <T extends string>(order: T[], code?: T): number =>
   code ? order.indexOf(code) : -1;
@@ -53,6 +56,7 @@ export function computeProductEvidenceScore(
     | "keyPapers"
     | "evidenceRigor"
     | "clinicalImpact"
+    | "efficacyProvisional"
     | "evidenceScoreOverride"
     | "evidenceVendorIndependent"
     | "evidenceMultiCenter"
@@ -83,15 +87,15 @@ export function computeProductEvidenceScore(
       rigorSource = paper;
     }
     if (
-      rank(IMPACT_ORDER, paper.clinicalImpact) >
-      rank(IMPACT_ORDER, impactSource?.clinicalImpact)
+      efficacyRank(paper.clinicalImpact) >
+      efficacyRank(impactSource?.clinicalImpact)
     ) {
       impactSource = paper;
     }
   }
 
   const computedRigor = rigorSource?.evidenceRigor;
-  const computedImpact = impactSource?.clinicalImpact;
+  const computedImpact = resolveEfficacyLevel(impactSource?.clinicalImpact).level;
   const override = product.evidenceScoreOverride;
 
   const resolve = <T extends string>(
@@ -112,8 +116,8 @@ export function computeProductEvidenceScore(
   );
   const impact = resolve(
     computedImpact,
-    override?.impact,
-    product.clinicalImpact as ClinicalImpactCode | undefined
+    resolveEfficacyLevel(override?.impact).level,
+    resolveEfficacyLevel(product.clinicalImpact).level as ClinicalImpactCode | undefined
   );
 
   const orFlag = (
@@ -140,6 +144,14 @@ export function computeProductEvidenceScore(
     scoredPaperCount,
     paperCount: papers.length,
     hasOverride: !!(override?.rigor || override?.impact),
+    impactProvisional:
+      impact.origin === "papers"
+        ? impactSource?.efficacyProvisional === true ||
+          resolveEfficacyLevel(impactSource?.clinicalImpact).provisional
+        : impact.origin === "stored"
+          ? product.efficacyProvisional === true ||
+            resolveEfficacyLevel(product.clinicalImpact).provisional
+          : false,
     overrideReason: override?.reason,
     qualityFlags: {
       vendorIndependent: orFlag(

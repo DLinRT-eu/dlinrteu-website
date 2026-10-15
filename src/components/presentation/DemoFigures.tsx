@@ -49,12 +49,12 @@ function EvidenceImpactSummary() {
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold text-primary mb-2">Impact Axis</p>
+            <p className="text-xs font-semibold text-primary mb-2">Levels of Efficacy</p>
             <ul className="text-xs text-muted-foreground space-y-1">
-              <li><span className="font-medium text-foreground">I0</span> — No workflow change</li>
-              <li><span className="font-medium text-foreground">I1–I2</span> — Assistance / review aid</li>
-              <li><span className="font-medium text-foreground">I3–I4</span> — Significant time savings</li>
-              <li><span className="font-medium text-foreground">I5</span> — Full automation</li>
+              <li><span className="font-medium text-foreground">L1t–L1c</span> — Technical / feasibility</li>
+              <li><span className="font-medium text-foreground">L2</span> — Accuracy vs. reference</li>
+              <li><span className="font-medium text-foreground">L3–L4</span> — Workflow / patient management</li>
+              <li><span className="font-medium text-foreground">L5–L6</span> — Patient outcome / societal</li>
             </ul>
           </div>
         </div>

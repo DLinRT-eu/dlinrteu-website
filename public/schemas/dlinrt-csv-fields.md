@@ -54,7 +54,7 @@ The full machine-readable JSON schema lives at
 - **Evidence Rigor** — `E0`–`E3`. See `docs/review/GUIDE.md`.
 - **Evidence Rigor Notes**.
 - **Clinical Impact** — `I0`–`I5`. See `docs/review/GUIDE.md`.
-- **Clinical Impact Notes**.
+- **Levels of Efficacy Notes**.
 - **Implementation Burden** — Adoption-readiness level.
 - **Implementation Burden Notes**.
 - **Readiness Signal** — Computed badge from the three axes above.
@@ -129,7 +129,7 @@ single row with `Note = No scored publication`.
 | `DOI`, `PMID` | Identifiers as recorded. |
 | `Link` | Direct URL; derived from the DOI (`https://doi.org/…`) or PMID when no explicit link is stored. |
 | `Evidence Rigor` | E0–E3 assigned to this individual source. |
-| `Clinical Impact` | I0–I5 assigned to this individual source. |
+| `Clinical Impact` | L1t–L6 assigned to this individual source. |
 | `Rationale` | One-line justification for this source's levels. |
 | `Vendor Independent`, `Multi-Center`, `Multi-National`, `Prospective`, `External Validation` | Study-quality attributes of this source. |
 | `Sets Product Rigor`, `Sets Product Impact` | Whether this source sets the product maximum on that axis. |

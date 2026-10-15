@@ -16,6 +16,7 @@ import { readdirSync, existsSync, statSync, writeFileSync, mkdirSync } from "nod
 import { resolve } from "node:path";
 import type { ProductDetails } from "../src/types/productDetails";
 import { computeProductEvidenceScore } from "../src/utils/evidenceScoring";
+import { resolveEfficacyLevel, isLegacyImpactCode } from "../src/data/evidence-impact-levels";
 
 const ROOT = resolve("src/data/products");
 const SKIP_DIRS = new Set(["archived", "examples", "pipeline"]);
@@ -73,7 +74,8 @@ for (const category of categories) {
     productCount += 1;
     const score = computeProductEvidenceScore(p, { category: p.category ?? category });
     const storedRigor = p.evidenceRigor;
-    const storedImpact = p.clinicalImpact;
+    const storedImpact = resolveEfficacyLevel(p.clinicalImpact).level;
+    const legacyPapers = (p.keyPapers ?? []).filter((k) => isLegacyImpactCode(k.clinicalImpact)).length;
 
     const add = (severity: Issue["severity"], code: string, detail: string) =>
       issues.push({
@@ -104,6 +106,12 @@ for (const category of categories) {
     }
     if (score.impact && !storedImpact) {
       add("error", "impact-missing", `effective ${score.impact} but product has no clinicalImpact`);
+    }
+    if (p.clinicalImpact && !resolveEfficacyLevel(p.clinicalImpact).level) {
+      add("error", "impact-invalid", `unknown level of efficacy "${p.clinicalImpact}"`);
+    }
+    if (legacyPapers > 0 || isLegacyImpactCode(p.clinicalImpact)) {
+      add("warning", "legacy-impact-code", legacyPapers > 0 ? `${legacyPapers} paper(s) still on a legacy I-code; level is provisional until re-scored` : `product level still on legacy ${p.clinicalImpact}; provisional until re-scored`);
     }
     if (score.hasOverride && !score.overrideReason?.trim()) {
       add("error", "override-without-reason", "evidenceScoreOverride set without a reason");

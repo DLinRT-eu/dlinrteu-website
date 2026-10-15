@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "How accurate are AI-generated contours compared with manual delineation?",
-    a: "Reported Dice similarity coefficients are typically 0.80–0.95 for well-defined OARs (lungs, liver, kidneys) and lower for variable structures (lymph node levels, GTV). DLinRT.eu rates the rigor of the evidence on an E0–E3 scale and its clinical impact on an I0–I5 scale; see the Evidence & Impact Guide.",
+    a: "Reported Dice similarity coefficients are typically 0.80–0.95 for well-defined OARs (lungs, liver, kidneys) and lower for variable structures (lymph node levels, GTV). DLinRT.eu rates the rigor of the evidence on an E0–E3 scale and its level of efficacy on an L1t–L6 scale; see the Evidence & Impact Guide.",
   },
   {
     q: "Which anatomical structures can AI auto-contouring tools segment?",
@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: "How do I compare evidence quality across vendors?",
-    a: "Use the dual-axis system: Evidence Rigor (E0–E3) measures methodological strength (vendor-independent, multi-center, multi-national, prospective, external validation); Clinical Impact (I0–I5) measures the demonstrated effect on clinical workflow or outcomes.",
+    a: "Use the dual-axis system: Evidence Rigor (E0–E3) measures methodological strength (vendor-independent, multi-center, multi-national, prospective, external validation); Levels of Efficacy (L1t–L6) measures the demonstrated effect on clinical workflow or outcomes.",
   },
   {
     q: "Does AI auto-contouring work on MR and CBCT, or only CT?",
@@ -112,8 +112,8 @@ const AiAutoContouringComparison = () => {
               Health Canada, ANVISA, or MHRA/UKCA clearance is required for catalog inclusion.
             </li>
             <li>
-              <strong>Evidence quality</strong> — dual-axis scoring of Rigor (E0–E3) and Clinical Impact
-              (I0–I5). See the{" "}
+              <strong>Evidence quality</strong> — dual-axis scoring of Rigor (E0–E3) and Levels of Efficacy
+              (L1t–L6). See the{" "}
               <Link to="/evidence-impact-guide" className="text-[#5090D0] underline">
                 Evidence &amp; Impact Guide
               </Link>{" "}

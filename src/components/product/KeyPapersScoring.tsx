@@ -153,6 +153,14 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
                       className={`${getClinicalImpactColor(paper.clinicalImpact)} text-xs border`}
                     >
                       {paper.clinicalImpact}
+                      {paper.efficacyProvisional && (
+                        <span
+                          className="ml-1 opacity-70"
+                          title={`Provisional: converted from legacy ${paper.legacyClinicalImpact ?? "score"}, pending re-scoring against Levels of Efficacy`}
+                        >
+                          *
+                        </span>
+                      )}
                     </Badge>
                   )}
                 </div>

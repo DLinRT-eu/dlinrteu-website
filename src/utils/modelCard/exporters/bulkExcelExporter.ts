@@ -22,7 +22,7 @@ export const exportBulkProductsToExcel = async (products: ProductDetails[]) => {
           ? product.regulatory.fda
           : product.regulatory?.fda?.status || "N/A",
         "Evidence Rigor": evidence["Evidence Rigor"],
-        "Clinical Impact": evidence["Clinical Impact"],
+        "Levels of Efficacy": evidence["Levels of Efficacy"],
         "Adoption Readiness": evidence["Adoption Readiness"],
         "Readiness Signal": evidence["Readiness Signal"],
         "Scored Publications Count": evidence["Scored Publications Count"],

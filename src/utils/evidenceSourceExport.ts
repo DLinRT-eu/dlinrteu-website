@@ -28,7 +28,7 @@ export interface EvidenceSourceRow {
   PMID: string;
   Link: string;
   "Evidence Rigor": string;
-  "Clinical Impact": string;
+  "Levels of Efficacy": string;
   Rationale: string;
   "Vendor Independent": string;
   "Multi-Center": string;
@@ -97,7 +97,7 @@ export const buildEvidenceBySourceRows = (
         PMID: "",
         Link: "",
         "Evidence Rigor": "",
-        "Clinical Impact": "",
+        "Levels of Efficacy": "",
         Rationale: "",
         "Vendor Independent": "",
         "Multi-Center": "",
@@ -124,7 +124,7 @@ export const buildEvidenceBySourceRows = (
         PMID: paper.pmid ?? "",
         Link: resolveLink(paper),
         "Evidence Rigor": paper.evidenceRigor ?? "",
-        "Clinical Impact": paper.clinicalImpact ?? "",
+        "Levels of Efficacy": paper.clinicalImpact ?? "",
         Rationale: paper.rationale ?? "",
         "Vendor Independent": flag(paper.vendorIndependent),
         "Multi-Center": flag(paper.multiCenter),
@@ -155,7 +155,7 @@ const EVIDENCE_SOURCE_HEADERS: (keyof EvidenceSourceRow)[] = [
   "PMID",
   "Link",
   "Evidence Rigor",
-  "Clinical Impact",
+  "Levels of Efficacy",
   "Rationale",
   "Vendor Independent",
   "Multi-Center",
@@ -193,8 +193,8 @@ export const buildProductEvidenceSummary = (product: ProductDetails) => {
   return {
     "Evidence Rigor": score.rigor ?? "",
     "Evidence Rigor Notes": product.evidenceRigorNotes ?? "",
-    "Clinical Impact": score.impact ?? "",
-    "Clinical Impact Notes": product.clinicalImpactNotes ?? "",
+    "Levels of Efficacy": score.impact ?? "",
+    "Levels of Efficacy Notes": product.clinicalImpactNotes ?? "",
     "Adoption Readiness": product.adoptionReadiness ?? "",
     "Adoption Readiness Notes": product.adoptionReadinessNotes ?? "",
     "Readiness Signal": signal.label,

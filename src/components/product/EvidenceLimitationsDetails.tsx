@@ -106,6 +106,12 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
+        {!showEditor && computedScore.impactProvisional && (
+          <p className="text-xs text-muted-foreground">
+            Level of efficacy is provisional: converted from the previous Clinical Impact scale and pending
+            re-scoring of each publication against Levels of Efficacy (L1t–L6).
+          </p>
+        )}
         {/* Tri-Axis Classification */}
         {(hasTriAxis || showEditor) && (
           <div className="p-4 bg-muted/50 rounded-lg border space-y-4">
@@ -153,11 +159,11 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
               </EditableField>
             </div>
 
-            {/* Clinical Impact */}
+            {/* Levels of Efficacy */}
             <div className="space-y-2">
               {showEditor ? (
                 <>
-                  <Label className="text-sm font-medium">Clinical Impact (I0-I5)</Label>
+                  <Label className="text-sm font-medium">Levels of Efficacy (L1t–L6)</Label>
                   <Select
                     value={clinicalImpact || ''}
                     onValueChange={(v) => updateField('clinicalImpact', v || undefined)}
@@ -176,7 +182,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 </>
               ) : clinicalImpact && (
                 <div className="text-sm">
-                  <span className="font-medium">Clinical Impact:</span>{" "}
+                  <span className="font-medium">Levels of Efficacy:</span>{" "}
                   <span className="text-muted-foreground">
                     {CLINICAL_IMPACT_OPTIONS.find(o => o.value === clinicalImpact)?.label}
                   </span>

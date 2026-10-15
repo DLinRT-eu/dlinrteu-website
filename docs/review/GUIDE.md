@@ -31,7 +31,7 @@ DLinRT.eu supports two methods for reviewing products:
    - Changes auto-save every 30 seconds
 
 3. **Set Evidence Classification**
-   - Assign evidence rigor (E0–E3), clinical impact (I0–I5), and adoption readiness (R0–R5) using the [tri-axial system](#evidence-level-classification)
+   - Assign evidence rigor (E0–E3), levels of efficacy (L1t–L6), and adoption readiness (R0–R5) using the [tri-axial system](#evidence-level-classification)
    - The Evidence & Limitations section is always visible
    - Select levels from dropdowns and add justification notes
 
@@ -262,7 +262,7 @@ All examples include:
 
 ## Evidence Level Classification
 
-Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Clinical Impact (I0–I5), with a third axis for Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Clinical Impact axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension (higher R = closer to clinical adoption) — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
+Every product should have an evidence level assigned. The classification uses a **tri-axial system** separating Evidence Rigor (E0–E3) from Levels of Efficacy (L1t–L6), with a third axis for Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension (higher R = closer to clinical adoption) — see the [Tri-Axial Evidence & Readiness Classification guide](https://dlinrt.eu/evidence-impact-guide).
 
 ### Evidence Rigor (E0-E3)
 
@@ -273,16 +273,19 @@ Every product should have an evidence level assigned. The classification uses a 
 | E2 | Validated Evidence | Multi-center (3+ sites), large prospective cohorts, external validation |
 | E3 | Systematic Evidence | Systematic reviews, meta-analyses, RCTs |
 
-### Clinical Impact (I0-I5)
+### Levels of Efficacy (L1t–L6)
 
 | Level | Name | F&T Level | When to Use |
 |-------|------|-----------|-------------|
-| I0 | None Demonstrated | — | Feasibility only, no benefit shown |
-| I1 | Quality Assurance | Level 1 | QA tools, monitoring, consistency checks |
-| I2 | Workflow | Level 2 | Time savings, variability reduction, dose reduction |
-| I3 | Decision | Level 3 | Changes in treatment management or plan selection |
-| I4 | Outcome | Levels 4–5 | Toxicity reduction, survival, patient outcomes |
-| I5 | Societal | Level 6 | Cost-effectiveness, access to care |
+| L1t | Technical efficacy | Level 1 | Processing time, reproducibility, failure rate, PACS/TPS/OIS integration, version-to-version agreement, robustness |
+| L1c | Potential clinical efficacy | Level 1 | Proof of concept: expert visual inspection, comparison with a non-AI baseline, Turing-style test |
+| L2 | Accuracy efficacy | Level 2 | (s)DSC, HD95, MSD; sensitivity/specificity/AUC; SNR/CNR/SSIM/PSNR; DVH, gamma, plan quality; blinded acceptance, Likert |
+| L3 | Decision/workflow efficacy | Level 3 | Editing/workflow time, manual-correction effort, drift monitoring, inter-observer variability, simulated decision impact |
+| L4 | Therapeutic/patient management efficacy | Level 4 | Prospective use changing plan selection, dose, fractionation, technique, replanning, triage or time to treatment |
+| L5 | Patient outcome efficacy | Level 5 | Toxicity, local recurrence, overall survival, PROMs |
+| L6 | Societal efficacy | Level 6 | Costs, QALYs, incremental cost per QALY |
+
+Legacy I0–I5 values are converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional until each paper is re-scored. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
 
 ### Per-publication scoring (mandatory)
 
@@ -339,6 +342,6 @@ Reviewers must assign `adoptionReadiness` (R0–R5) alongside E and I. Use the r
 - **Minor commissioning, training or workflow confirmation** → R4 (deploy with monitoring)
 - **Documentation, validation, integration, QA and governance complete, aligned with guidelines** → R5 (adoption-ready)
 
-A product can only be marked **Adoption-grade** when E≥E2, I≥I2 AND R=R5. Low R constrains the public Readiness Signal even when E and I are strong.
+A product can only be marked **Adoption-grade** when E≥E2, L≥L3 AND R=R5. Low R constrains the public Readiness Signal even when E and I are strong.
 
 **Strength of evidence note.** Peer-review status, funding independence, and conflict-of-interest are not collapsed into E. They are captured via the study-quality sub-attributes (`evidenceVendorIndependent`, `evidenceMultiCenter`, `evidenceMultiNational`, `evidenceProspective`, `evidenceExternalValidation`) so reviewers can score rigor methodologically while keeping these signals visible.
