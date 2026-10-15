@@ -16,6 +16,7 @@ import { readdirSync, existsSync, statSync, writeFileSync, mkdirSync } from "nod
 import { resolve } from "node:path";
 import type { ProductDetails } from "../src/types/productDetails";
 import { computeProductEvidenceScore } from "../src/utils/evidenceScoring";
+import { resolveEfficacyLevel, isLegacyImpactCode } from "../src/data/evidence-impact-levels";
 
 const ROOT = resolve("src/data/products");
 const SKIP_DIRS = new Set(["archived", "examples", "pipeline"]);
