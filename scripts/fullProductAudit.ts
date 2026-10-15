@@ -28,7 +28,9 @@ function sourceRegistry(folder: string, registry = new Map<string, string[]>()):
     if (!entry.name.endsWith(".ts")) continue;
     const ast = ts.createSourceFile(path, readFileSync(path, "utf8"), ts.ScriptTarget.Latest, true);
     const visit = (node: ts.Node): void => {
-      if (ts.isPropertyAssignment(node) && node.name.getText(ast) === "id" && ts.isStringLiteral(node.initializer)) {
+      if (ts.isPropertyAssignment(node) && node.name.getText(ast) === "id" && ts.isStringLiteral(node.initializer)
+        && ts.isObjectLiteralExpression(node.parent)
+        && node.parent.properties.some(property => ts.isPropertyAssignment(property) && property.name.getText(ast) === "category")) {
         const id = node.initializer.text;
         registry.set(id, [...(registry.get(id) ?? []), path.replace(`${process.cwd()}/`, "")]);
       }
@@ -45,7 +47,7 @@ function staticReview(product: ProductDetails, registry: Map<string, string[]>):
   if (files.length === 0) add(p.id, "Identity", "id", "error", "No source definition found");
   if (files.length > 1) add(p.id, "Cross-check", "id", "warn", `Multiple source definitions (may be unused or archived): ${files.join(", ")}`);
   if (p.logoUrl?.startsWith("/") && !existsSync(resolve("public", p.logoUrl.slice(1)))) add(p.id, "Identity", "logoUrl", "error", `Missing local logo ${p.logoUrl}`);
-  if (!COMPANIES.some(c => c.name === p.company)) add(p.id, "Cross-check", "company", "error", `Company not in active registry: ${p.company}`);
+  if (!COMPANIES.some(c => c.name === p.company)) add(p.id, "Cross-check", "company", "warn", `Company label does not exactly match registry; check legal-name aliases before calling it missing: ${p.company}`);
   if (p.usesAI === false && !p.monitorsAIProducts?.length) add(p.id, "Inclusion", "usesAI", "warn", "No AI use or explicit monitored-AI product list; check task-specific exception");
   const fda = typeof p.regulatory?.fda === "object" ? p.regulatory.fda : undefined;
   if (fda?.status === "510k_cleared" && !fda.clearanceNumber) add(p.id, "Regulatory", "regulatory.fda.clearanceNumber", "warn", "510(k) cleared but structured clearance number missing");
@@ -60,7 +62,7 @@ function staticReview(product: ProductDetails, registry: Map<string, string[]>):
   if (!p.keyPapers?.length) add(p.id, "Evidence", "keyPapers", "info", "No scored attributable publications recorded; literature search required", "Keep evidence uncertainty explicit");
   for (const field of ["trainingData", "evaluationData", "structuresProvenance"] as const) {
     const value = p[field];
-    if (value && (!value.source || !value.sourceUrl)) add(p.id, "Transparency", field, "warn", "Disclosure lacks source label or URL");
+    if (value && (!value.source || (!value.sourceUrl && (!value.sourceAccess || value.sourceAccess === "public")))) add(p.id, "Transparency", field, "warn", "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL");
     if (value?.sourceAccess && value.sourceAccess !== "public" && !value.sourceRetrievedOn) add(p.id, "Transparency", field, "warn", "Non-public source lacks retrieval date");
   }
   if (p.categoryEvidence) add(p.id, "Evidence", "categoryEvidence", "info", `Review evidence separately for ${Object.keys(p.categoryEvidence).join(", ")}`, "Do not flatten evidence across tasks");
@@ -100,7 +102,7 @@ function titleSimilarity(a: string, b: string): number {
 
 async function checkPublication(paper: NonNullable<ProductDetails["keyPapers"]>[number]): Promise<PublicationCheck> {
   const key = paper.doi?.toLowerCase() ?? `pmid:${paper.pmid}`;
-  const query = paper.doi ? `DOI:"${paper.doi}"` : `EXT_ID:${paper.pmid} AND SRC:MED`;
+  const query = paper.doi ? `DOI:"${paper.doi}"` : paper.pmid?.startsWith("PMC") ? `PMCID:${paper.pmid}` : `EXT_ID:${paper.pmid} AND SRC:MED`;
   const sourceUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${encodeURIComponent(query)}&format=json&resultType=core&pageSize=1`;
   try {
     const response = await fetchPublic(sourceUrl);
