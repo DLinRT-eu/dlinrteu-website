@@ -67,102 +67,167 @@ export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
   }
 ];
 
-// ==================== CLINICAL IMPACT AXIS ====================
-// Focuses on what outcomes are measured, independent of rigor
-// Cross-referenced with the Fryback & Thornbury hierarchy of diagnostic efficacy
+// ==================== LEVELS OF EFFICACY AXIS ====================
+// Scores what was measured, independent of rigor. Adapted from van Leeuwen
+// et al. (2021), updated against Antonissen et al. (2026), cross-referenced to
+// the Fryback & Thornbury (1991) hierarchy of diagnostic efficacy.
 
-export type ClinicalImpactCode = "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+export type EfficacyLevelCode = "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6";
+/** @deprecated Legacy Clinical Impact codes (I0–I5); read-only, converted provisionally. */
+export type LegacyClinicalImpactCode = "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
+/** Second-axis code. Kept under the historic name to avoid churn across consumers. */
+export type ClinicalImpactCode = EfficacyLevelCode;
+
+export const EFFICACY_LEVEL_ORDER: EfficacyLevelCode[] = ["L1t", "L1c", "L2", "L3", "L4", "L5", "L6"];
 
 export interface ClinicalImpactLevel {
-  level: ClinicalImpactCode;
+  level: EfficacyLevelCode;
   name: string;
   description: string;
+  /** Typical measures (verbatim from the DLinRT Table 3). */
   rtExamples: string[];
   color: string;
-  frybackThornburyLevel?: string; // Cross-reference to Fryback & Thornbury hierarchy
+  frybackThornburyLevel?: string;
 }
+export type EfficacyLevel = ClinicalImpactLevel;
 
 export const CLINICAL_IMPACT_LEVELS: ClinicalImpactLevel[] = [
   {
-    level: "I0",
-    name: "Feasibility only",
-    description: "Studies demonstrate that the method runs or produces plausible outputs, without any predefined clinical, workflow or service endpoint. No equivalent in the Fryback & Thornbury hierarchy.",
+    level: "L1t",
+    name: "Technical efficacy",
+    description: "Demonstrates that the product performs reliably under test conditions, independent of clinical context.",
     rtExamples: [
-      "Runtime / output-plausibility demonstration",
-      "Proof-of-concept without prespecified endpoint",
-      "Usability pilots without clinical metrics",
-      "Computational benchmarks without patient context"
+      "Product processing time",
+      "Reproducibility across repeated runs",
+      "Inter-product/version agreement",
+      "Failure/crash rate",
+      "Compatibility with existing systems (PACS/TPS/OIS integration)",
+      "Outlier detection and analysis",
+      "Version-to-version comparison without a reference standard",
+      "Robustness to input variation"
     ],
-    color: "slate"
-  },
-  {
-    level: "I1",
-    name: "Technical, analytical or geometric validation",
-    description: "Predefined technical, analytical or geometric endpoints (DSC, Hausdorff, sensitivity/specificity, image-quality metrics, reader-study accuracy) without demonstrated downstream effect on workflow, decisions or outcomes. Corresponds to Fryback & Thornbury Level 1 (Technical Efficacy).",
-    rtExamples: [
-      "Dice / Hausdorff vs. reference contours",
-      "Sensitivity / specificity vs. ground truth",
-      "Image-quality metrics (PSNR, SSIM, NIQE)",
-      "Reader-study accuracy",
-      "Automated QA / consistency checks on AI outputs"
-    ],
-    color: "blue",
+    color: "slate",
     frybackThornburyLevel: "Level 1: Technical Efficacy"
   },
   {
-    level: "I2",
-    name: "Workflow or pathway-level effects",
-    description: "Evidence of impact on workflow or pathway-level processes — review/edit time, planning timeliness, throughput or staff workload — measured prospectively or in audited routine practice. Corresponds to Fryback & Thornbury Level 2 (Diagnostic Accuracy Efficacy), adapted for therapeutic AI tasks.",
+    level: "L1c",
+    name: "Potential clinical efficacy",
+    description: "The product's clinical feasibility is demonstrated.",
     rtExamples: [
-      "Contour review / edit time",
-      "Treatment-planning timeliness",
-      "Throughput and staff workload",
-      "Alert rate / inter-observer variability reduction"
+      "Proof of concept: visual/expert inspection",
+      "Basic comparison against an established non-AI baseline appropriate to the task (e.g., deformable image registration or atlas-based methods for segmentation; deterministic reconstruction kernels for image enhancement; rule-based or protocol-driven methods for planning or workflow tasks)",
+      "Turing-style indistinguishability test"
     ],
-    color: "teal",
+    color: "gray",
+    frybackThornburyLevel: "Level 1: Technical Efficacy (clinical feasibility)"
+  },
+  {
+    level: "L2",
+    name: "Accuracy efficacy",
+    description: "Demonstrates the product's stand-alone performance against a reference standard or accepted comparator.",
+    rtExamples: [
+      "Spatial/geometric accuracy (segmentation, registration, contour-based outputs): (s)DSC, HD95, HDmax, MSD",
+      "Detection/classification accuracy (lesion detection, triage, outcome prediction): sensitivity, specificity, PPV/NPV, FP/FN, AUC",
+      "Image-quality accuracy (reconstruction, enhancement, synthetic imaging): SNR, CNR, SSIM, PSNR, noise characteristics",
+      "Dosimetric/planning accuracy (treatment planning, dose prediction, QA): DVH metrics, gamma passing rate, plan-quality scores, LET overlap (proton therapy), worst-case robustness",
+      "Qualitative accuracy (any product type): blinded acceptance rate without manual adjustment, Likert-scale scoring, inter-rater agreement"
+    ],
+    color: "blue",
     frybackThornburyLevel: "Level 2: Diagnostic Accuracy Efficacy"
   },
   {
-    level: "I3",
-    name: "Clinical decision or pathway",
-    description: "Evidence that the tool changes clinical decisions, plans or delivered treatments in a way that is plausibly beneficial and safe (e.g. adaptive-RT triggers, escalation/de-escalation, replanning). Corresponds to Fryback & Thornbury Level 3 (Diagnostic Thinking Efficacy).",
+    level: "L3",
+    name: "Decision/workflow efficacy",
+    description: "Impact on clinical decision-making or workflow.",
     rtExamples: [
-      "Change in treatment plans or intent",
-      "Adaptive-RT replan triggers",
-      "Escalation / de-escalation decisions",
-      "Plan-selection influence in audited practice"
+      "Workflow time: human–AI workflow time or editing time",
+      "Magnitude of manual correction required and its downstream effect (e.g., contour edit distance for segmentation outputs, plan-parameter changes for planning outputs, override/rejection rate for decision-support outputs; resulting dose differences or change in QA pass/fail rate)",
+      "Clinical behavior: performance drift, longitudinal monitoring, interobserver variability with or without AI support",
+      "Clinical impact: simulated impact on downstream decisions (e.g., replanning, triage, referral)"
     ],
-    color: "orange",
+    color: "teal",
     frybackThornburyLevel: "Level 3: Diagnostic Thinking Efficacy"
   },
   {
-    level: "I4",
-    name: "Patient, service or resource outcomes",
-    description: "Demonstrated impact on patient outcomes (toxicity, local control, survival, QoL) and/or service outcomes (waiting times, cancellations, resource use). Corresponds to Fryback & Thornbury Levels 4–5 (Therapeutic + Patient Outcome Efficacy).",
+    level: "L4",
+    name: "Therapeutic/patient management efficacy",
+    description: "Prospective use affecting patient management.",
     rtExamples: [
-      "Reduced radiation toxicity",
-      "Improved tumour control or survival",
-      "Patient-reported outcomes",
-      "Reduced waiting times / cancellations",
-      "Resource / capacity savings"
+      "Prospective use affecting plan selection, prescribed dose distribution, fractionation, treatment technique, replanning or triage decisions, or time to start of treatment"
     ],
-    color: "purple",
-    frybackThornburyLevel: "Levels 4–5: Therapeutic + Patient Outcome Efficacy"
+    color: "orange",
+    frybackThornburyLevel: "Level 4: Therapeutic Efficacy"
   },
   {
-    level: "I5",
-    name: "System-level or societal value",
-    description: "Sustained, scalable benefit at network, regional or national level — equity, access, workforce sustainability, system efficiency, cost-effectiveness. Corresponds to Fryback & Thornbury Level 6 (Societal Efficacy).",
+    level: "L5",
+    name: "Patient outcome efficacy",
+    description: "Demonstrates the impact of the product on patient outcomes.",
     rtExamples: [
-      "Regional / national benchmarking",
-      "Workforce sustainability and capacity",
-      "Equity and access improvements",
-      "Cost per QALY / health-economic modeling"
+      "Toxicity",
+      "Local recurrence",
+      "Overall survival",
+      "Patient-reported outcome measures (PROMs)"
+    ],
+    color: "purple",
+    frybackThornburyLevel: "Level 5: Patient Outcome Efficacy"
+  },
+  {
+    level: "L6",
+    name: "Societal efficacy",
+    description: "Demonstrates the impact of the product on society through economic analysis.",
+    rtExamples: [
+      "Effect on costs and quality-adjusted life years",
+      "Incremental cost per quality-adjusted life year"
     ],
     color: "rose",
     frybackThornburyLevel: "Level 6: Societal Efficacy"
   }
 ];
+export const EFFICACY_LEVELS = CLINICAL_IMPACT_LEVELS;
+
+export const EFFICACY_ABBREVIATIONS =
+  "AUC, area under the receiver-operating-characteristic curve; CNR, contrast-to-noise ratio; DSC/sDSC, (surface) Dice similarity coefficient; DVH, dose–volume histogram; FP/FN, false positive/false negative; HD95/HDmax, 95th-percentile/maximum Hausdorff distance; LET, linear energy transfer; MSD, mean surface distance; OIS, Oncology Information System; PACS, Picture Archiving and Communication System; PPV/NPV, positive/negative predictive value; PROMs, patient-reported outcome measures; PSNR, peak signal-to-noise ratio; QA, quality assurance; SNR, signal-to-noise ratio; SSIM, structural similarity index measure; TPS, Treatment Planning System.";
+
+/**
+ * Provisional conversion of legacy I-codes, used only until a paper is
+ * re-read against the new table. I3 maps conservatively to L3 (L4 requires
+ * prospective use, which must be verified per paper).
+ */
+export const LEGACY_IMPACT_TO_EFFICACY: Record<LegacyClinicalImpactCode, EfficacyLevelCode> = {
+  I0: "L1c",
+  I1: "L2",
+  I2: "L3",
+  I3: "L3",
+  I4: "L5",
+  I5: "L6",
+};
+
+export const isEfficacyLevelCode = (code?: string): code is EfficacyLevelCode =>
+  !!code && (EFFICACY_LEVEL_ORDER as string[]).includes(code);
+
+export const isLegacyImpactCode = (code?: string): code is LegacyClinicalImpactCode =>
+  !!code && code in LEGACY_IMPACT_TO_EFFICACY;
+
+export interface ResolvedEfficacy {
+  level?: EfficacyLevelCode;
+  provisional: boolean;
+  legacy?: LegacyClinicalImpactCode;
+}
+
+/** Resolve a stored second-axis value (new or legacy) to a Levels-of-Efficacy code. */
+export const resolveEfficacyLevel = (code?: string): ResolvedEfficacy => {
+  if (isEfficacyLevelCode(code)) return { level: code, provisional: false };
+  if (isLegacyImpactCode(code)) {
+    return { level: LEGACY_IMPACT_TO_EFFICACY[code], provisional: true, legacy: code };
+  }
+  return { provisional: false };
+};
+
+export const efficacyRank = (code?: string): number => {
+  const level = resolveEfficacyLevel(code).level;
+  return level ? EFFICACY_LEVEL_ORDER.indexOf(level) : -1;
+};
+
 
 // ==================== ADOPTION READINESS AXIS (R) ====================
 // Third axis (DLinRT extension): adoption readiness for the intended use.
@@ -297,19 +362,19 @@ const READINESS_DESCRIPTORS: Record<ReadinessSignal, ReadinessSignalDescriptor> 
 };
 
 const E_RANK: Record<EvidenceRigorCode, number> = { E0: 0, E1: 1, E2: 2, E3: 3 };
-const I_RANK: Record<ClinicalImpactCode, number> = { I0: 0, I1: 1, I2: 2, I3: 3, I4: 4, I5: 5 };
 
 export const computeReadinessSignal = (
   evidenceRigor?: EvidenceRigorCode,
-  clinicalImpact?: ClinicalImpactCode,
+  clinicalImpact?: string,
   adoptionReadiness?: AdoptionReadinessCode,
 ): ReadinessSignalDescriptor => {
   if (!evidenceRigor || !clinicalImpact || !adoptionReadiness) {
     return READINESS_DESCRIPTORS["not-assessed"];
   }
   const e = E_RANK[evidenceRigor];
-  const i = I_RANK[clinicalImpact];
-  const strong = e >= 2 && i >= 2;
+  const i = efficacyRank(clinicalImpact);
+  // "Strong" = E2+ rigor and at least decision/workflow efficacy (L3).
+  const strong = e >= 2 && i >= EFFICACY_LEVEL_ORDER.indexOf("L3");
 
   if (adoptionReadiness === "R0") return READINESS_DESCRIPTORS.blocked;
   if (adoptionReadiness === "R1") return READINESS_DESCRIPTORS["pilot-only"];
@@ -330,8 +395,9 @@ export const getEvidenceRigorLevel = (level: string): EvidenceRigorLevel | undef
   return EVIDENCE_RIGOR_LEVELS.find(l => l.level === level);
 };
 
-export const getClinicalImpactLevel = (level: string): ClinicalImpactLevel | undefined => {
-  return CLINICAL_IMPACT_LEVELS.find(l => l.level === level);
+export const getClinicalImpactLevel = (level?: string): ClinicalImpactLevel | undefined => {
+  const resolved = resolveEfficacyLevel(level).level;
+  return CLINICAL_IMPACT_LEVELS.find(l => l.level === resolved);
 };
 
 export const getEvidenceRigorColor = (level: string): string => {
@@ -358,6 +424,7 @@ export const getClinicalImpactColor = (level: string): string => {
     teal: "bg-teal-100 text-teal-700 border-teal-300 dark:bg-teal-900/30 dark:text-teal-300 dark:border-teal-700",
     orange: "bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700",
     purple: "bg-purple-100 text-purple-700 border-purple-300 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700",
+    gray: "bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600",
     rose: "bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-700"
   };
   
@@ -403,8 +470,8 @@ export const getReadinessSignalColor = (color: string): string => {
 // ==================== REFERENCE ====================
 
 export const EVIDENCE_IMPACT_REFERENCE = {
-  description: "This dual-axis classification separates evidence rigor (study quality) from clinical impact (what is measured). This addresses a key limitation of single-scale hierarchies that conflate rigorous technical validation with clinical outcomes. The clinical impact axis is cross-referenced with the Fryback & Thornbury hierarchy of diagnostic efficacy.",
-  rationale: "A product can have excellent evidence rigor (E3: systematic reviews) for technical performance (I0) but no outcome data (I4). Conversely, a product may claim patient outcomes (I4) with only preliminary evidence (E1). Both dimensions matter for informed decision-making.",
+  description: "This dual-axis classification separates Evidence Rigor (E0–E3, study design quality independent of outcome) from Levels of Efficacy (L1t–L6, what was measured). This addresses a key limitation of single-scale hierarchies that conflate rigorous technical validation with clinical outcomes. The Levels of Efficacy axis is adapted from van Leeuwen et al., updated against Antonissen et al., and cross-referenced with the Fryback & Thornbury hierarchy of diagnostic efficacy.",
+  rationale: "A product can have excellent evidence rigor (E3) for accuracy only (L2) but no outcome data (L5). Conversely, a product may claim patient outcomes (L5) with only preliminary evidence (E1). Both dimensions matter for informed decision-making.",
   originalReference: {
     citation: "Adapted from van Leeuwen KG, et al. Artificial intelligence in radiology: 100 commercially available products and their scientific evidence. Eur Radiol. 2021;31(6):3797-3804.",
     doi: "10.1007/s00330-021-07892-z",
@@ -435,7 +502,7 @@ export const EVIDENCE_IMPACT_REFERENCE = {
     citation: "Fryback DG, Thornbury JR. The efficacy of diagnostic imaging. Med Decis Making. 1991;11(2):88-94.",
     doi: "10.1177/0272989X9101100203",
     url: "https://doi.org/10.1177/0272989X9101100203",
-    notes: "Original 6-level hierarchical model of diagnostic efficacy, used as foundation for the clinical impact axis."
+    notes: "Original 6-level hierarchical model of diagnostic efficacy, used as foundation for the Levels of Efficacy axis."
   }
 };
 
