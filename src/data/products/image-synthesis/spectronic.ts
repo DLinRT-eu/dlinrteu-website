@@ -48,7 +48,8 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
         },
         evidenceRigor: "E2",
         evidenceRigorNotes: "Multi-center, vendor-independent and external validation across multiple anatomies (Persson 2017, Lerner 2021, Bird 2024, Earwong 2025).",
-        clinicalImpact: "I2",
+        clinicalImpact: "L4",
+    legacyClinicalImpact: "I2",
         clinicalImpactNotes: "Technical/dosimetric efficacy demonstrated for MRI-only planning; no outcome-level benefit yet.",
       },
       "Auto-Contouring": {

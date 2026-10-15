@@ -232,7 +232,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2026-01-28",
-    lastUpdated: "2026-08-28",
+    lastUpdated: "2026-10-15",
     priorVersions: [
       {
         productId: "everfortune-rt-suite",
@@ -368,7 +368,8 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1016/j.radonc.2023.109528","pmid":"36773828","title":"Developing an AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy","authors":"Lin CY et al.","journal":"Radiotherapy and Oncology","year":"2023","link":"https://doi.org/10.1016/j.radonc.2023.109528","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation of an AI-assisted HA-WBRT pipeline that uses EFAI RT Suite contours; geometric and plan-quality endpoints. Evaluates the shared EFAI segmentation engine rather than the Seg Pro V3 release specifically, and the site collaborates with the vendor.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes: "2026-08-28 Batch C sweep: Lin CY et al., Radiother Oncol 2023 (doi:10.1016/j.radonc.2023.109528, PMID 36773828) is now scored per paper — a single-centre, vendor-collaborative evaluation of the EFAI RT Suite contours inside an HA-WBRT pipeline, giving E1. No publication names Seg Pro V3 itself; engine-level attribution is disclosed in the paper rationale. FDA K251306 (Jan 2026) remains the regulatory basis.",
     clinicalImpactNotes: "I1 (technical / geometric plus plan-quality endpoints in Lin 2023). No decision-level, outcome-level or multi-site workflow evidence published for Seg Pro V3.",
     adoptionReadiness: "R2",

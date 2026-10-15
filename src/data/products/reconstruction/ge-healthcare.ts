@@ -104,7 +104,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       deploymentScale: "At least 3.5 million patients scanned globally as of September 2022; available on the vast majority of GE HealthCare 1.5T, 3.0T, and 7.0T SIGNA MRI systems via MR 30 software platform"
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent peer-reviewed studies and FDA summaries support improved SNR, image sharpness, and/or scan-time reduction feasibility across neuro, spine, liver, cardiac, and pediatric/body MRI applications. Evidence includes regulatory performance testing, clinical reader evaluations, external clinical studies, and real-world workflow/throughput evaluation. The previously listed Radiology Advances paper by Lyo et al. was removed from the product-specific evidence list because it primarily evaluated Siemens Deep Resolve rather than AIR Recon DL. Set to E2 in the 2026-08-25 per-paper sweep: the highest-scoring direct study is the vendor-independent multi-scanner throughput analysis (Radiol Artif Intell 2024); other direct studies are single-centre.",
     clinicalImpactNotes: "Workflow impact is mainly shorter MRI acquisition times and improved image quality while maintaining diagnostic quality. Clinical benefit depends on protocol design, anatomy, scanner platform, sequence type, reconstruction strength, and local validation.",
     adoptionReadiness: "R4",

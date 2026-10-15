@@ -78,7 +78,7 @@ export const Jazz: ProductDetails = {
     "Lesion tracking - mark once, remember forever"
   ],
   lastRevised: "2026-08-27",
-  lastUpdated: "2026-08-25",
+  lastUpdated: "2026-10-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",
@@ -93,7 +93,8 @@ export const Jazz: ProductDetails = {
   ],
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
   diseaseTargeted: ["Multiple Cancer Types"],
   clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
   adoptionReadiness: "R3",

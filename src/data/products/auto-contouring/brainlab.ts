@@ -100,7 +100,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     {"doi":"10.3389/fonc.2022.827195","title":"Evaluation of a Dedicated Software “Elements™ Spine SRS, Brainlab®” for Target Volume Definition in the Treatment of Spinal Bone Metastases With Stereotactic Body Radiotherapy","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-site auto-segmentation evaluation with geometric endpoints.","multiCenter":true,"externalValidation":true}
   ],
   lastRevised: "2026-08-27",
-  lastUpdated: "2026-06-15",
+  lastUpdated: "2026-10-15",
   limitations: [
     "APM 1.1 minimum requirements include 12 CPU cores and 24 GB RAM",
     "Cranial tumor segmentation support requires a GPU with at least 8 GB vRAM, compatible driver/CUDA support, and CUDA compute capability >5.2",
@@ -120,7 +120,8 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     }
   ],
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I1",
   diseaseTargeted: ["Multiple Cancer Types"],
   developmentStage: "certified",
   adoptionReadiness: "R3",

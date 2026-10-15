@@ -55,7 +55,8 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
         evidenceRigor: "E2",
         evidenceRigorNotes:
           "Multiple independent, peer-reviewed clinical dosimetric validation studies directly evaluating Philips MRCAT for prostate: Tyagi 2017, Kemppainen 2017, Maspero 2017a (photon, DOI aa4fe7) and Maspero 2017b (proton, DOI aa9677). Vendor-independent and multi-center, though all retrospective and limited to adult prostate cohorts. MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed because it evaluates Spectronic MRiPlanner, not Philips MRCAT. Not a DL component, so rubric applied by analogy. Christiansen 2017 removed 2026-08-25 — the cited DOI resolves to an unrelated paper and no Christiansen MRCAT publication exists in Europe PMC.",
-        clinicalImpact: "I2",
+        clinicalImpact: "L4",
+    legacyClinicalImpact: "I2",
         clinicalImpactNotes:
           "2026-08-25 Wave 5: clinical impact raised I1 → I2, set by Tyagi et al. Radiat Oncol 2017 (doi 10.1186/s13014-017-0854-4), which reports a routine MR-only prostate simulation and planning workflow in 48 patients with process-level endpoints. Enables MR-only prostate workflows in routine clinical use at several centers, eliminating the planning CT for selected patients. Dosimetric equivalence to CT-based planning demonstrated, but no randomised or large-scale outcome data.",
       },

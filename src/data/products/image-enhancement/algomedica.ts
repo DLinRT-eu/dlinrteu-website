@@ -108,7 +108,8 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Steuwe et al. Diagnostics 2022;12(7):1627 (University Düsseldorf, independent, urolithiasis). Brendlin et al. Tomography 2022;8(4):1665 (pediatric ULDCT, n=100, 8 readers). Hata et al. AJR 2020;215(6):1321 (lung RADS ULDCT, n=41). Tian et al. pelvic CTA 70kVp (Japanese J Radiol 2018, PMID 30523499). AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-06-14.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols across whole body CT, including pediatric and lung screening applications.",
     adoptionReadiness: "R3",

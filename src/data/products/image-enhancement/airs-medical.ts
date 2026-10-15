@@ -111,7 +111,8 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1007/s00330-025-11423-5","title":"The scientific evidence of commercial AI products for MRI acceleration: systematic review","authors":"Fransen SJ et al.","journal":"European Radiology","year":"2025","rationale":"Indirect-comparative systematic review covering 14 commercial products including SwiftMR; carries no per-product E/I level under the rubric.","vendorIndependent":true}
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: two verified SwiftMR-naming primary publications were added (Jeong 2026 Sci Rep doi:10.1038/s41598-026-60802-5; Hyodoh 2026 Forensic Sci Int doi:10.1016/j.forsciint.2026.112973), both single-centre. Under per-paper scoring the maximum rigor is E1, so the product-level score moves from E2 to E1: the previous E2 rested on a vendor white paper and an indirect-comparative systematic review, neither of which carries a level. FDA 510(k) K230854 + OEM-DL expansion (Apr 2026). Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SwiftMR among 14 products with peer-reviewed noise-reduction articles). Clinical white paper: 184 exams, 18 radiologists. Two previously cited DOIs (Yoo et al. 10.1007/s00330-023-09679-2; Lee et al. 10.1038/s41598-023-44471-8) were removed on 2026-06-15: both return DOI-Not-Found and could not be verified to specific SwiftMR papers without a confirmed alternative DOI. PubMed re-searched 2026-06-15.",
     clinicalImpactNotes: "I2 retained — Jeong 2026 demonstrates scan-time reduction with preserved image quality (workflow level). Workflow improvement supported by vendor white paper and indirect-comparative systematic review; primary prospective SwiftMR scan-time studies pending DOI verification before re-citation.",
     adoptionReadiness: "R3",

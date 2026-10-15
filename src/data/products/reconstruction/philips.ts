@@ -93,7 +93,8 @@ export const PreciseImage: ProductDetails = {
     distributionChannels: ["Direct sales", "Integrated solution"],
   },
   evidenceRigor: "E1",
-  clinicalImpact: "I2",
+  clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
   evidenceRigorNotes: "E1 (Preliminary): evidence comprises four independent peer-reviewed phantom studies (Greffier 2022/2023 — France; Barca 2023 — Italy; Shim 2025 — South Korea) and two single-center clinical (patient) studies (Chandran 2024, n=30, brain CT, India; Liu 2026, n=60, abdominal CT, China). Neither clinical study is multi-center or fully vendor-independent (each has one Philips-affiliated co-author), and the Liu 2026 dose-reduction estimate (~80%) is simulated via slice-thickness substitution rather than measured at an actual reduced dose. No multi-center cohort, large prospective dose-reduction trial, or fully independent clinical study meets the E2 bar (multi-center, large prospective cohort, external validation).",
   clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): two independent clinical studies (Chandran 2024; Liu 2026) found radiologist-assessed diagnostic image quality improvements over iDose4 across two anatomical regions and two countries, corroborated by independent phantom evidence on noise reduction and lesion detectability (Greffier 2022/2023; Barca 2023; Shim 2025). No evidence identified of changed treatment management (I3) or patient outcomes (I4).",
   adoptionReadiness: "R3",
@@ -291,7 +292,8 @@ export const SmartSpeed: ProductDetails = {
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes:
       "Downgraded from E2 to E1 because FDA documentation emphasizes non-clinical V&V/substantial equivalence, and peer-reviewed clinical evidence is summarized as limited/heterogeneous in the 2025 systematic review. Vendor claims are strong but not equivalent to prospective multicenter outcome evidence.",
     clinicalImpactNotes:

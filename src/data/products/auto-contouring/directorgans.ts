@@ -81,7 +81,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     },
     version: "VA30+",
     releaseDate: "2023-05-25",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-10-15",
     supportedStructures: [
       // Brain
       "Brain: Brain",
@@ -152,7 +152,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Prostate"
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
     adoptionReadiness: "R3",

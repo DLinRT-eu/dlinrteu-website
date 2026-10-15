@@ -82,7 +82,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Restored to E2 on 2026-06-16 after evidence re-verification. Three independent peer-reviewed studies confirmed as evaluating AiCE on Canon equipment: (1) Singh R. et al. AJR 2020;214(3):566-573 — prospective multi-institutional submillisievert chest/abdominopelvic CT on Aquilion ONE; (2) Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) — full text explicitly names AiCE, Aquilion and Canon Medical Systems (re-verified via Nature full-text fetch 2026-06-16; prior 2026-06-15 removal was based on abstract-only screening and is reversed); (3) Tamura et al. QIMS 2022 (DOI 10.21037/qims-21-1216) — AiCE vs hybrid IR for low-dose contrast-enhanced abdominal CT. Plus FDA K181862 clearance.",
     clinicalImpactNotes: "Independent prospective multi-institutional and phantom evidence supports dose reduction (Singh AJR 2020; Tamura QIMS 2022) with maintained image quality, and applicability to radiotherapy treatment planning on large-bore CT (Yasui Sci Rep 2023).",
     adoptionReadiness: "R3",
@@ -234,7 +235,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       "Not specifically validated for radiotherapy planning workflow"
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01. Lowered to E1 in the 2026-08-25 per-paper sweep: the single direct study (Akai 2023) is independent but single-centre.",
     clinicalImpactNotes: "Workflow improvement through up to ~50% reduction in MRI scan time with maintained or improved image quality (Akai 2023; vendor materials).",
     adoptionReadiness: "R3",
@@ -245,7 +247,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
@@ -355,7 +357,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes: "FDA K243335 (Jan 2025). Greffier et al. Eur Radiol Exp 2026 independent phantom study comparing PIQE vs AiCE. Nagayama et al. Eur J Radiol 2025 clinical evaluation for pancreatic cancer. Funama et al. Acad Radiol 2025 spatial resolution evaluation. PubMed searched 2026-03-08.",
     clinicalImpactNotes: "Technical efficacy demonstrated: improved spatial resolution and low-contrast detectability in phantom and clinical studies. PubMed searched 2026-03-08.",
     adoptionReadiness: "R3",
@@ -366,7 +369,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
-    lastUpdated: "2026-06-13", 
+    lastUpdated: "2026-10-15", 
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }

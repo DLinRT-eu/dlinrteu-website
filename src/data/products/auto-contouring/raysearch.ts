@@ -89,7 +89,8 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales"]
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L4",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Sharma 2025 DOI was corrected to doi:10.1016/j.clon.2025.103796 (Geometric and dosimetric evaluation of a RayStation deep learning model); the Ng 2022 entry was removed because DOI 10.3390/app12147210 resolves to an unrelated computer-science article. Remaining independent single-centre studies support E1.",
     clinicalImpactNotes: "Raised to I2 in the 2026-08-27 Wave 6 backfill: Mikalsen et al. Acta Oncol 2023 reports editing effort and clinical acceptance for the thorax and breast models. Rigor E2 follows the independent five-system benchmark (Doolan 2023).",
     adoptionReadiness: "R3",
@@ -101,7 +102,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     version: "2026",
     releaseDate: "2023-12-01",
-    lastUpdated: "2026-07-01",
+    lastUpdated: "2026-10-15",
     keyPapers: [
       {"doi": "10.1016/j.phro.2023.100494", "title": "A geometry and dose-volume based performance monitoring of artificial intelligence models in radiotherapy treatment planning for prostate cancer", "authors": "De Kerf G, Claessens M, Raouassi F, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name RSL Male Pelvic CT v1.0.0 (RaySearch) in RayStation 11B; single-network retrospective monitoring study; no competing interests declared.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
       {"doi": "10.1016/j.tipsro.2023.100211", "title": "Clinical evaluation of a deep learning segmentation model including manual adjustments afterwards for locally advanced breast cancer", "authors": "Bakx N, Rijkaart D, van der Sangen M, et al.", "journal": "Tech Innov Patient Support Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Full text checked 2026-09-25 (Europe PMC). Institution-trained model built in the RaySearch deep learning framework (RayStation 9B/10B); timed editing shows 42% (OAR) and 58% (CTV) time reduction. RaySearch research grant and training support acknowledged, so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},

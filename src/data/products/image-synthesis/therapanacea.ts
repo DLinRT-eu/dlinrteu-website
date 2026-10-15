@@ -115,7 +115,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     version: "3.2.0",
     releaseDate: "2021",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-09-23",
     keyPapers: [
     {"doi": "10.1186/s13014-023-02336-y", "title": "Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy", "authors": "Autret D et al.", "journal": "Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I2", "rationale": "Single-centre comparison of four commercial sCT generators; dosimetric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
@@ -129,7 +129,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
         usesAI: true,
         evidenceRigor: "E2",
         evidenceRigorNotes: "Vendor-assisted peer-reviewed multi-centric study (Frontiers in Oncology 2023, DOI 10.3389/fonc.2023.1245054) across 8 institutions for pelvic TrueFISP and brain pseudo-CT generation.",
-        clinicalImpact: "I1",
+        clinicalImpact: "L2", legacyClinicalImpact: "I1",
       },
       "Auto-Contouring": {
         usesAI: true,

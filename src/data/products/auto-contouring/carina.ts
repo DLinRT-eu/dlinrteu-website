@@ -68,7 +68,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     },
     version: "3.0",
     releaseDate: "2025-06-10",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-10-15",
     supportedStructures: [
       // ========================================
       // HEAD & NECK MODEL - Approved Structures
@@ -248,7 +248,8 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E2",
     evidenceRigorNotes: "Raised to E2 in the 2026-09-23 HAIR cross-check: an evaluation across two low- and middle-income country clinics and one US clinic (doi:10.1016/j.adro.2024.101638) adds multi-centre, multi-national evidence to the single-centre studies (Duan 2022, 2023; swallowing OARs 2022; masticatory muscles 2020; prospective performance monitoring 2025). No prospective comparative trial, so E3 is not met.",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     clinicalImpactNotes: "Reported geometric accuracy and workflow time savings; no prospective clinical outcome data identified.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
