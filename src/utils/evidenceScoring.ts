@@ -27,6 +27,8 @@ export interface ComputedEvidenceScore {
   scoredPaperCount: number;
   paperCount: number;
   hasOverride: boolean;
+  /** True when the effective level is a provisional conversion of a legacy I-code. */
+  impactProvisional: boolean;
   overrideReason?: string;
   /** OR across scored papers, falling back to product-level flags. */
   qualityFlags: {
@@ -54,6 +56,7 @@ export function computeProductEvidenceScore(
     | "keyPapers"
     | "evidenceRigor"
     | "clinicalImpact"
+    | "efficacyProvisional"
     | "evidenceScoreOverride"
     | "evidenceVendorIndependent"
     | "evidenceMultiCenter"
@@ -141,6 +144,14 @@ export function computeProductEvidenceScore(
     scoredPaperCount,
     paperCount: papers.length,
     hasOverride: !!(override?.rigor || override?.impact),
+    impactProvisional:
+      impact.origin === "papers"
+        ? impactSource?.efficacyProvisional === true ||
+          resolveEfficacyLevel(impactSource?.clinicalImpact).provisional
+        : impact.origin === "stored"
+          ? product.efficacyProvisional === true ||
+            resolveEfficacyLevel(product.clinicalImpact).provisional
+          : false,
     overrideReason: override?.reason,
     qualityFlags: {
       vendorIndependent: orFlag(
