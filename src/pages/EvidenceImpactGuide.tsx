@@ -124,11 +124,11 @@ const EvidenceImpactGuide = () => {
                 The Solution: Three Axes
               </h4>
               <p className="text-sm text-green-900 dark:text-green-100">
-                By separating <strong>Evidence Rigor</strong> (E0–E3), <strong>Clinical Impact</strong> (I0–I5),
+                By separating <strong>Evidence Rigor</strong> (E0–E3), <strong>Levels of Efficacy</strong> (L1t–L6),
                 and <strong>Implementation &amp; Assurance Burden</strong> (R5–R0), each dimension is rated
                 independently and combined into a composite readiness signal. The favorite-color AI becomes
-                E3/I0/R5 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
-                E0/I4/R2 (claimed impact, evidence and integration both pending).
+                E3/L1t/R5 (rigorous, no clinical value, easy to deploy); a high-promise unproven device is
+                E0/L5/R2 (claimed impact, evidence and integration both pending).
               </p>
             </div>
           </CardContent>
@@ -170,10 +170,10 @@ const EvidenceImpactGuide = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5 text-teal-600" />
-                Clinical Impact (I0-I5)
+                Levels of Efficacy (L1t–L6)
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                What outcomes does the evidence demonstrate?
+                What was measured? Adapted from van Leeuwen et al., updated against Antonissen et al., cross-referenced to Fryback & Thornbury.
               </p>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -240,12 +240,12 @@ const EvidenceImpactGuide = () => {
                 The user-facing badge is computed from all three axes:
               </p>
               <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
-                <li><strong>Adoption-grade</strong> — R4 or R5 with E≥E2 and I≥I2.</li>
-                <li><strong>Deploy with monitoring</strong> — R4/R5 with weaker E or I, or R3 with E≥E2 and I≥I2.</li>
-                <li><strong>Conditional</strong> — R2, or R3 with weaker E or I (conditional pilot or evidence-generation deployment).</li>
+                <li><strong>Adoption-grade</strong> — R4 or R5 with E≥E2 and L≥L3.</li>
+                <li><strong>Deploy with monitoring</strong> — R4/R5 with weaker E or I, or R3 with E≥E2 and L≥L3.</li>
+                <li><strong>Conditional</strong> — R2, or R3 with weaker E or L (conditional pilot or evidence-generation deployment).</li>
                 <li><strong>Pilot only</strong> — R1 (tightly controlled, exploratory use).</li>
                 <li><strong>Blocked</strong> — R0 (horizon scanning only; cannot support adoption-grade use regardless of E and I).</li>
-                <li><strong>Not assessed</strong> — any axis unassigned (insufficient documentation; guardrail equivalent to E(-1) / I(-1) / R(-1)).</li>
+                <li><strong>Not assessed</strong> — any axis unassigned (insufficient documentation; guardrail equivalent to E(-1) / L(-1) / R(-1)).</li>
               </ul>
               <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
                 Aligned with the DLinRT.eu Evidence Matrix proposal v1.1 (2026).
@@ -261,12 +261,12 @@ const EvidenceImpactGuide = () => {
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-muted-foreground">
             <p>
-              Each peer-reviewed publication is scored individually on rigor (E) and impact (I), with a written
+              Each peer-reviewed publication is scored individually on rigor (E) and level of efficacy (L), with a written
               rationale and the five study-quality flags (vendor independence, multi-center, multi-national,
               prospective design, external validation).
             </p>
             <p>
-              The product-level E/I shown in badges and dashboards is the <strong>maximum across its scored
+              The product-level E/L shown in badges and dashboards is the <strong>maximum across its scored
               publications</strong>. Product pages list every scored publication so the origin of the product score is
               traceable.
             </p>
@@ -297,42 +297,42 @@ const EvidenceImpactGuide = () => {
                   <tr>
                     <td className="py-3 pr-4">Mature auto-contouring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="R4" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="L3" adoptionReadiness="R4" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Multi-center validation, light QA needed at deployment</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">QA/Monitoring tool</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I1" adoptionReadiness="R5" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="L3" adoptionReadiness="R5" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Well-validated, plug-in monitoring with negligible burden</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Workflow-validated planning AI</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="I2" adoptionReadiness="R3" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E2" clinicalImpact="L3" adoptionReadiness="R3" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Strong evidence but commissioning &amp; site-specific QA required</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">New AI with pilot study</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="I2" adoptionReadiness="R2" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E1" clinicalImpact="L3" adoptionReadiness="R2" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Single-center workflow validation; structured pilot only</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">Product with no publications</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="I0" adoptionReadiness="R1" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E0" clinicalImpact="L1c" adoptionReadiness="R1" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Vendor claims only, integration effort unknown</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4">"Favorite color" AI (example)</td>
                     <td className="py-3 pr-4">
-                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="I0" adoptionReadiness="R5" size="sm" showTooltip={false} />
+                      <EvidenceImpactBadges evidenceRigor="E3" clinicalImpact="L1t" adoptionReadiness="R5" size="sm" showTooltip={false} />
                     </td>
                     <td className="py-3 text-muted-foreground">Highest rigor (RCTs), but no clinical benefit demonstrated</td>
                   </tr>
@@ -355,9 +355,9 @@ const EvidenceImpactGuide = () => {
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">1</Badge>
                 <span>
-                  <strong>Impact describes benefit, not validation method.</strong> "Accuracy" 
-                  or "speed" are how you measure—the impact is what value that provides 
-                  (e.g., faster contouring → I2 Workflow benefit).
+                  <strong>The level describes what was measured.</strong> Dice against a reference is L2 (accuracy); 
+                  editing time or manual-correction effort is L3 (decision/workflow); prospective changes to the 
+                  delivered plan are L4.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -370,15 +370,15 @@ const EvidenceImpactGuide = () => {
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">3</Badge>
                 <span>
-                  <strong>QA tools matter.</strong> I1 (Quality Assurance) recognizes tools 
-                  that monitor other AI systems—they enable safe use of AI even if they don't 
-                  directly treat patients.
+                  <strong>QA tools matter.</strong> Drift and longitudinal monitoring of AI outputs is L3; 
+                  reproducibility and failure-rate checks are L1t. These tools enable safe use of AI even if they 
+                  don't directly treat patients.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <Badge className="mt-0.5 shrink-0">4</Badge>
                 <span>
-                  <strong>E3 and I5 are rare.</strong> Most RT AI products occupy the E1-E2/I1-I2 zone. 
+                  <strong>E3 and L5–L6 are rare.</strong> Most RT AI products occupy the E1–E2/L2–L3 zone. 
                   Don't penalize products for not having RCTs if their intended use doesn't require them.
                 </span>
               </li>

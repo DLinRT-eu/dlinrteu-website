@@ -39,11 +39,11 @@ const EvidenceImpactMatrix = ({
   const getZoneDescription = (rigor: string, impact: string): { common: boolean; description: string } => {
     // Common zones for RT AI products
     const commonZones: Record<string, string> = {
-      "E1-I0": "New products with feasibility demonstrated only",
-      "E1-I1": "QA tools with preliminary validation",
-      "E2-I1": "Mature QA/monitoring tools",
-      "E2-I2": "Workflow-validated tools with time savings",
-      "E1-I2": "Single-center workflow studies",
+      "E1-L1c": "Proof of concept / feasibility only",
+      "E1-L2": "Single-center accuracy studies (e.g. Dice, gamma)",
+      "E2-L2": "Externally validated accuracy",
+      "E2-L3": "Validated workflow or monitoring studies",
+      "E1-L3": "Single-center workflow studies",
     };
 
     const key = `${rigor}-${impact}`;
@@ -55,7 +55,7 @@ const EvidenceImpactMatrix = ({
     if (rigor === "E3") {
       return { common: false, description: "Requires systematic reviews or RCTs" };
     }
-    if (impact === "I4" || impact === "I5") {
+    if (impact === "L5" || impact === "L6") {
       return { common: false, description: "Outcome/societal studies are rare in RT AI" };
     }
     if (rigor === "E0") {
@@ -72,7 +72,7 @@ const EvidenceImpactMatrix = ({
       return "bg-primary/10 hover:bg-primary/20 border-primary/30";
     }
     
-    if (rigor === "E3" && impact === "I5") {
+    if (rigor === "E3" && impact === "L6") {
       // Aspirational zone
       return "bg-purple-100 dark:bg-purple-900/30 hover:bg-purple-200 dark:hover:bg-purple-900/50 border-purple-300 dark:border-purple-700";
     }
@@ -226,7 +226,7 @@ const EvidenceImpactMatrix = ({
                               {zone.common && (
                                 <div className="w-3 h-3 rounded-full bg-primary/60" />
                               )}
-                              {rigor.level === "E3" && impact.level === "I5" && (
+                              {rigor.level === "E3" && impact.level === "L6" && (
                                 <span className="text-lg">★</span>
                               )}
                             </div>
@@ -274,14 +274,14 @@ const EvidenceImpactMatrix = ({
           </div>
           <div className="flex items-center gap-2">
             <span className="text-lg leading-none">★</span>
-            <span>Aspirational (E3/I5)</span>
+            <span>Aspirational (E3/L6)</span>
           </div>
         </div>
 
         {/* Interpretation note */}
         <p className="mt-4 text-xs text-muted-foreground">
-          Most radiotherapy AI products occupy the E1-E2/I1-I2 zone (QA and Workflow impact). 
-          I0 indicates no benefit demonstrated yet; I1 recognizes QA tools that ensure safe AI use. 
+          Most radiotherapy AI products occupy the E1–E2/L2–L3 zone (accuracy and workflow efficacy). 
+          L1t/L1c indicate technical or feasibility evidence only. 
           Hover over cells for details.
         </p>
         </>

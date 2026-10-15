@@ -74,7 +74,7 @@ const EvidenceLevelTable = () => {
           <div>
             <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
               <Target className="h-5 w-5 text-teal-600" />
-              Clinical Impact (I0-I5)
+              Levels of Efficacy (L1t–L6)
             </h3>
             <div className="overflow-x-auto">
               <Table>
