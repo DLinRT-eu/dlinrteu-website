@@ -4,8 +4,8 @@ import { LIMBUS_PRODUCTS } from "./limbus";
 import { MVISION_PRODUCTS } from "./mvision";
 import { MIRADA_PRODUCTS } from "./mirada";
 import { RAYSEARCH_PRODUCTS } from "./raysearch";
-import { THERAPANACEA_PRODUCTS } from "./therapanacea";
-import { THERAPANACEA_BRACHYBOX_PRODUCTS } from "./therapanacea-brachybox";
+import { THERAPANACEA_SEGMENTATION } from "../therapanaceaApplications";
+
 
 import { AI_MEDICAL_PRODUCTS } from "./ai-medical";
 import { CARINA_PRODUCTS } from "./carina";
@@ -38,8 +38,8 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...MVISION_PRODUCTS,
   ...MIRADA_PRODUCTS,
   ...RAYSEARCH_PRODUCTS,
-  ...THERAPANACEA_PRODUCTS,
-  ...THERAPANACEA_BRACHYBOX_PRODUCTS,
+  THERAPANACEA_SEGMENTATION,
+
 
   ...AI_MEDICAL_PRODUCTS,
   ...CARINA_PRODUCTS,

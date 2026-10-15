@@ -14,7 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { DiffViewer } from '@/components/product-editor/DiffViewer';
-import { ALL_PRODUCTS } from '@/data';
+import { ALL_PRODUCTS, getProductForStoredRecord } from '@/data';
 import { ProductDetails } from '@/types/productDetails';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
@@ -283,7 +283,7 @@ export default function EditApprovals() {
 
 
   const getOriginalProduct = (productId: string): ProductDetails | undefined => {
-    return ALL_PRODUCTS.find(p => p.id === productId);
+    return getProductForStoredRecord(productId);
   };
 
   const getStatusBadge = (status: string) => {
@@ -310,7 +310,7 @@ export default function EditApprovals() {
 
   const bundles = buildBundles(
     pendingDrafts.map(d => ({ ...d, draft_data: d.draft_data as unknown as Record<string, unknown> })),
-    id => ALL_PRODUCTS.find(p => p.id === id),
+    id => getProductForStoredRecord(id),
   );
 
   const approveBundle = async (bundle: ProductBundle, merged: Record<string, unknown>, decisions: BundleDecision[]) => {

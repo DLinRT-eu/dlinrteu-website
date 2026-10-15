@@ -58,7 +58,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
 
     "Safety Corrective Actions",
     "Compatible Systems", "Training Required", "Support Email",
-    "Last Updated", "Last Revised", "Source"
+    "Last Updated", "Last Revised", "Source", "Name History", "Function Evidence"
   ];
   
   // Map product data to CSV rows
@@ -292,7 +292,9 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.supportEmail),
     escapeValueForCsv(product.lastUpdated),
     escapeValueForCsv(product.lastRevised),
-    escapeValueForCsv(product.source)
+    escapeValueForCsv(product.source),
+    escapeValueForCsv(product.nameHistory ? JSON.stringify(product.nameHistory) : ''),
+    escapeValueForCsv(product.functionEvidence ? JSON.stringify(product.functionEvidence) : '')
   ]);
 
   return [

@@ -19,7 +19,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
 import { updateProductReviewAdmin } from "@/utils/reviewRoundUtils";
-import { ALL_PRODUCTS } from "@/data";
+import { ALL_PRODUCTS, getProductForStoredRecord } from "@/data";
 import { RoundActionsMenu } from "@/components/admin/review-rounds/RoundActionsMenu";
 import { AssignmentActionsMenu } from "@/components/admin/review-rounds/AssignmentActionsMenu";
 import { BulkActionsMenu } from "@/components/admin/review-rounds/BulkActionsMenu";
@@ -163,7 +163,7 @@ export default function ReviewRoundDetails() {
   };
 
   const getProductName = (productId: string) => {
-    return ALL_PRODUCTS.find(p => p.id === productId)?.name || productId;
+    return getProductForStoredRecord(productId)?.name || productId;
   };
 
   const getChangeTypeBadge = (type: string) => {

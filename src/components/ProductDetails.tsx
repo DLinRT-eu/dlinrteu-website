@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ClipboardEdit, FileSpreadsheet, Download, FileText, FileImage, AlertTriangle, ArrowRightLeft, Scale } from "lucide-react";
 import type { ProductDetails as ProductDetailsType } from "@/types/productDetails";
 import ProductHeaderInfo from "./product/ProductHeaderInfo";
+import ProductNameHistory from "./product/ProductNameHistory";
 import GeneralInformationDetails from "./product/GeneralInformationDetails";
 import ProductFeaturesDetails from "./product/ProductFeaturesDetails";
 import TechnicalSpecificationsDetails from "./product/TechnicalSpecificationsDetails";
@@ -118,6 +119,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       </div>
       
       {/* Edit Toolbar - appears when in edit mode */}
+      <ProductNameHistory product={product} />
       <EditToolbar />
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">

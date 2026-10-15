@@ -35,5 +35,8 @@ export function normalizeProductEfficacy(product: ProductDetails): ProductDetail
     }
     next.categoryEvidence = ce;
   }
+  if (product.functionEvidence) {
+    next.functionEvidence = product.functionEvidence.map(f => ({ ...f, product: normalizeProductEfficacy(f.product) }));
+  }
   return next;
 }

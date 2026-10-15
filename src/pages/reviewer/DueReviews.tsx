@@ -15,7 +15,7 @@ import BulkReviewerActions from '@/components/reviewer/BulkReviewerActions';
 import ReviewStatusControl from '@/components/reviewer/ReviewStatusControl';
 import { Calendar, Clock, AlertCircle, FileCheck, BookOpen, ChevronRight, ClipboardList } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import { ALL_PRODUCTS } from '@/data';
+import { getProductForStoredRecord } from '@/data';
 
 interface ReviewAssignment {
   id: string;
@@ -32,13 +32,13 @@ interface ReviewAssignment {
 
 // Helper to get product name from product ID
 const getProductName = (productId: string): string => {
-  const product = ALL_PRODUCTS.find(p => p.id === productId);
+  const product = getProductForStoredRecord(productId);
   return product?.name || productId;
 };
 
 // Helper to get product company from product ID
 const getProductCompany = (productId: string): string | null => {
-  const product = ALL_PRODUCTS.find(p => p.id === productId);
+  const product = getProductForStoredRecord(productId);
   return product?.company || null;
 };
 

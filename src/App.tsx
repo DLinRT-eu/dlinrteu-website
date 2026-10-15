@@ -13,6 +13,7 @@ import ErrorBoundary from "@/components/common/ErrorBoundary";
 import Header from "./components/Header";
 import { AuthenticatedLayout } from "./components/layout/AuthenticatedLayout";
 import { AuthenticatedStatusBar } from "./components/layout/AuthenticatedStatusBar";
+import { PRODUCT_ALIASES } from "@/utils/productAliases";
 
 const WORKSPACE_PREFIXES = [
   "/dashboard-home",
@@ -197,9 +198,9 @@ const App = () => (
                 <Route path="product/directorgans" element={<Navigate to="/product/siemens-directorgans" replace />} />
                 <Route path="product/ge-truefidelity-pro" element={<Navigate to="/product/ge-truefidelity" replace />} />
                 <Route path="product/united-ucs-ai" element={<Navigate to="/product/united-uaifi-umr" replace />} />
-                <Route path="product/therapanacea-tumorbox-pipeline" element={<Navigate to="/product/therapanacea-tumorbox" replace />} />
-                <Route path="product/therapanacea-smartplan-pipeline" element={<Navigate to="/product/therapanacea-smartplan" replace />} />
-                <Route path="product/therapanacea-brachybox-pipeline" element={<Navigate to="/product/therapanacea-brachybox" replace />} />
+                {Object.entries(PRODUCT_ALIASES).map(([oldId, currentId]) => (
+                  <Route key={oldId} path={`product/${oldId}`} element={<Navigate to={`/product/${currentId}`} replace />} />
+                ))}
 
                 <Route path="product/:id" element={<ProductDetails />} />
                 <Route path="security" element={<Security />} />

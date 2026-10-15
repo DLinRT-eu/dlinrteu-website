@@ -12,14 +12,14 @@ import VisualEditHistory from '@/components/reviewer/VisualEditHistory';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Clipboard, HelpCircle, FileText, Pencil } from 'lucide-react';
-import { ALL_PRODUCTS } from '@/data';
+import { getProductForStoredRecord } from '@/data';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { createIssueUrl } from '@/utils/githubUrlHelper';
 import { EditModeToggle, EditToolbar } from '@/components/product-editor';
 
 const ProductReview = () => {
   const { id } = useParams<{ id: string }>();
-  const product = ALL_PRODUCTS.find(p => p.id === id);
+  const product = getProductForStoredRecord(id);
   const { companyData } = useCompanyData();
   const company = product ? companyData.find(c => c.name === product.company) : null;
 

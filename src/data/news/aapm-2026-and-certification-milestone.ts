@@ -36,7 +36,7 @@ GE HealthCare [announced](https://www.biospace.com/press-releases/ge-healthcare-
 
 ### TheraPanacea
 
-TheraPanacea [confirmed attendance](https://www.linkedin.com/posts/therapc_aapm2026-medicalphysics-radiationoncology-activity-7481013466716295168-CBbk) at booth 1103, promoting **ART-Plan™** for AI-driven adaptive and automated treatment planning. No new product or regulatory milestone was announced for AAPM 2026; the existing [TheraPanacea Annotate](/product/therapanacea-annotate) and pipeline entries are unchanged.
+TheraPanacea [confirmed attendance](https://www.linkedin.com/posts/therapc_aapm2026-medicalphysics-radiationoncology-activity-7481013466716295168-CBbk) at booth 1103, promoting **ART-Plan™** for AI-driven adaptive and automated treatment planning. No new product or regulatory milestone was announced for AAPM 2026. Catalogue naming update (15 October 2026): the current vendor presentation is represented by [ART-Plan Segmentation](/product/therapanacea-art-plan-segmentation), [ART-Plan Planning](/product/therapanacea-art-plan-planning), and [ART-Plan Adaptive](/product/therapanacea-art-plan-adaptive), preserving former module names and function-specific evidence; this is not a claim of a new clearance.
 
 ### Other exhibitors
 

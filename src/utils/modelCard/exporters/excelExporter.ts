@@ -26,6 +26,7 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { Field: "Last Updated", Value: modelCard.basicInfo.lastUpdated },
       { Field: "CE Status", Value: modelCard.basicInfo.ceStatus },
       { Field: "FDA Status", Value: modelCard.basicInfo.fdaStatus },
+      ...(product.nameHistory?.length ? [{ Field: 'Name History', Value: JSON.stringify(product.nameHistory) }] : []),
     ];
     
     // Key Features Sheet
@@ -61,6 +62,7 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { Field: "Supported Structures", Value: modelCard.performance.supportedStructures },
       { Field: "Limitations", Value: modelCard.performance.limitations },
       { Field: "Evidence", Value: modelCard.performance.evidence },
+      ...(product.functionEvidence?.length ? [{ Field: 'Function Evidence', Value: JSON.stringify(product.functionEvidence) }] : []),
     ];
 
     // Evidence Scores Sheet (product level)

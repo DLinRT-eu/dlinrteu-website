@@ -17,6 +17,7 @@ import { PERFORMANCE_MONITOR_PRODUCTS } from "./products/performance-monitor";
 import { TRACKING_PRODUCTS } from "./products/tracking";
 import { PIPELINE_PRODUCTS } from "./products/pipeline";
 import { POSITIONING_PRODUCTS } from "./products/positioning";
+import { THERAPANACEA_HISTORICAL_PRODUCTS } from './products/therapanaceaApplications';
 import { 
   ALL_INITIATIVES, 
   CHALLENGE_INITIATIVES, 
@@ -40,6 +41,10 @@ export const ALL_PRODUCTS: ProductDetails[] = [
   ...POSITIONING_PRODUCTS,
   ...PIPELINE_PRODUCTS
 ].map(normalizeProductEfficacy);
+
+const historicalProducts = THERAPANACEA_HISTORICAL_PRODUCTS.map(normalizeProductEfficacy);
+export const getProductForStoredRecord = (id: string | undefined): ProductDetails | undefined =>
+  ALL_PRODUCTS.find(p => p.id === id) ?? historicalProducts.find(p => p.id === id);
 
 // Export everything
 export {

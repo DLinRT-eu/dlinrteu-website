@@ -1,7 +1,7 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { supabase } from '@/integrations/supabase/client';
-import { ALL_PRODUCTS } from '@/data';
+import { getProductForStoredRecord } from '@/data';
 import type { ReviewRound } from './reviewRoundUtils';
 
 interface AuditLogEntry {
@@ -312,7 +312,7 @@ async function addRoundDetailSection(doc: jsPDF, round: ReviewRound, startY: num
 
   if (assignments && assignments.length > 0) {
     const tableData = assignments.map((a: any) => {
-      const product = ALL_PRODUCTS.find(p => p.id === a.product_id);
+      const product = getProductForStoredRecord(a.product_id);
       const reviewer = a.profiles;
       
       return [
@@ -375,7 +375,7 @@ function addAssignmentHistorySection(
 
   const tableData = history.slice(0, 50).map(entry => {
     const round = rounds.find(r => r.id === entry.review_round_id);
-    const product = ALL_PRODUCTS.find(p => p.id === entry.product_id);
+    const product = getProductForStoredRecord(entry.product_id);
     
     return [
       new Date(entry.created_at).toLocaleDateString(),
