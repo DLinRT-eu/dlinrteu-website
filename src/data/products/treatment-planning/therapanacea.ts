@@ -103,7 +103,7 @@ export const THERAPANACEA_PLANNING_PRODUCTS: ProductDetails[] = [
         year: "2024",
         link: "https://doi.org/10.3390/cancers16223735",
         evidenceRigor: "E1",
-        clinicalImpact: "I1",
+        clinicalImpact: "L2", legacyClinicalImpact: "I1",
         rationale: "Single-centre retrospective evaluation (238 training / 86 validation / 40 end-to-end cases) of TheraPanacea's fully automated dose-prediction plus direct-aperture VMAT optimisation pipeline, i.e. the SmartPlan functionality, versus manual clinical plans. Endpoints are DVH/plan-quality metrics, portal-dosimetry gamma, MU and modulation complexity — technical/dosimetric only. Three co-authors are TheraPanacea employees (Vauclin, Bus, Paragios), so the study is not vendor-independent; no external multi-centre validation.",
         vendorIndependent: false,
         multiCenter: false,

@@ -4,7 +4,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     keyPapers: [
-      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Names Smartfuse (Therapanacea) explicitly; assesses clinical utility of automatic target propagation in an offline adaptive workflow across ten patients.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse (Therapanacea) explicitly; assesses clinical utility of automatic target propagation in an offline adaptive workflow across ten patients.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
     trainingData: {
         source: "Therapanacea product page (manufacturer)",
@@ -90,7 +90,8 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       relationship: "Module"
     },
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse. 2026-08-25 Wave 5D: E1/I2 set by JACMP 2026 (doi 10.1002/acm2.70479), which names Smartfuse and assesses automatic target propagation in an offline adaptive head-and-neck workflow.",
     clinicalImpactNotes: "Manufacturer-claimed workflow improvement through AI-powered rigid and deformable image fusion; no independently confirmed clinical impact study identified.",
     adoptionReadiness: "R2",
@@ -110,7 +111,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     ],
     version: "3.1.2",
     releaseDate: "2025-01-01",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-08-27",
     source: "Therapanacea official website (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30). Multi-modal rigid and deformable registration of CT, MR, PET-CT, 4D-CT and synthetic-CT is listed in the published ART-Plan+ intended use.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }

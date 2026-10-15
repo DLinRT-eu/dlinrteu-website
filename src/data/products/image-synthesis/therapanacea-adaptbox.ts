@@ -33,7 +33,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         },
         evidenceRigor: "E2",
         evidenceRigorNotes: "E2 retained based on independent peer-reviewed prostate evaluation (Prunaretty 2026, Cancers, DOI verified 2026-06-15). Vendor-assisted multi-center support from Frontiers in Oncology 2026. H&N and Breast/Thorax anatomies have FDA clearance but limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",
-        clinicalImpact: "I1",
+        clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
       },
       "Auto-Contouring": {
         usesAI: true,
@@ -167,9 +168,9 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
     keyPapers: [
-      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Names AdaptBox v2.3.2 and evaluates daily delivered dose in 20 prostate patients — a workflow-level implementation.","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names AdaptBox v2.3.2 and evaluates daily delivered dose in 20 prostate patients — a workflow-level implementation.","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":false},
       {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."},
-      {"doi":"10.3389/fonc.2026.1756153","pmid":"41800047","title":"Self-learning GAN based synthetic CT generation: unlocking CBCT-based adaptive radiotherapy","authors":"Prunaretty J, Colombo L, Romdhani S, Teboul O, et al.","journal":"Frontiers in Oncology","year":"2026","link":"https://doi.org/10.3389/fonc.2026.1756153","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-centre CBCT-to-sCT models across pelvis, head and neck, lung and breast; clinically evaluated but vendor-developed.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true}
+      {"doi":"10.3389/fonc.2026.1756153","pmid":"41800047","title":"Self-learning GAN based synthetic CT generation: unlocking CBCT-based adaptive radiotherapy","authors":"Prunaretty J, Colombo L, Romdhani S, Teboul O, et al.","journal":"Frontiers in Oncology","year":"2026","link":"https://doi.org/10.3389/fonc.2026.1756153","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-centre CBCT-to-sCT models across pelvis, head and neck, lung and breast; clinically evaluated but vendor-developed.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true}
     ],
     source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530). Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     evidenceRigor: "E2",

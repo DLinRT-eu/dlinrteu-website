@@ -107,7 +107,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2021-03-12",
     keyPapers: [
-      {"doi":"10.1016/j.adro.2026.102036","pmid":"42382856","title":"Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy","authors":"Shade JK et al.","journal":"Advances in Radiation Oncology","year":"2026","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Models trained on 5334 plans from two institutions and validated by replanning 72 clinical cases across four anatomical sites, including an external site (Montefiore Einstein); predictive plans matched or lowered OAR dose with equal or better target coverage. Vendor-authored (Oncospace employees).","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":true}
+      {"doi":"10.1016/j.adro.2026.102036","pmid":"42382856","title":"Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy","authors":"Shade JK et al.","journal":"Advances in Radiation Oncology","year":"2026","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Models trained on 5334 plans from two institutions and validated by replanning 72 clinical cases across four anatomical sites, including an external site (Montefiore Einstein); predictive plans matched or lowered OAR dose with equal or better target coverage. Vendor-authored (Oncospace employees).","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":true}
     ],
     evidenceRigor: "E2",
     clinicalImpact: "I2",

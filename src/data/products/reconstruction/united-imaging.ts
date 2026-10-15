@@ -5,7 +5,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
   {
     id: "united-uai-vision-recon",
     keyPapers: [
-      {"doi":"10.1016/j.xcrm.2023.101119","title":"Fast and low-dose medical imaging generation empowered by hybrid deep-learning and iterative reconstruction","authors":"Liao S et al.","journal":"Cell Rep Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-affiliated technical description of the underlying DL + iterative reconstruction pipeline.","vendorIndependent":false}
+      {"doi":"10.1016/j.xcrm.2023.101119","title":"Fast and low-dose medical imaging generation empowered by hybrid deep-learning and iterative reconstruction","authors":"Liao S et al.","journal":"Cell Rep Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"L1c", "legacyClinicalImpact": "I1","rationale":"Vendor-affiliated technical description of the underlying DL + iterative reconstruction pipeline.","vendorIndependent":false}
     ],
     trainingData: {
         description: "Deep neural network reconstruction trained on CT data, integrated into uCT scanners and the uCloud platform.",
@@ -99,7 +99,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "No published radiotherapy-planning-specific validation"
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L1c",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes: "FDA K193073 (Deep Recon) clearance plus Liao et al. Cell Rep Med 2023 — peer-reviewed, vendor-affiliated. No independent multi-center publication identified (web-searched 2026-06-01). 2026-08-25 Wave 5B sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Technical efficacy demonstrated in vendor-affiliated peer-reviewed work (lower noise, dose-reduction potential). No independent clinical-outcome data.",
     adoptionReadiness: "R2",
@@ -110,7 +111,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing significant dose reduction with maintained diagnostic accuracy",
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-08-25",
     source: "FDA 510(k) database (K193073), peer-reviewed literature, company website.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
 

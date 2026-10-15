@@ -365,7 +365,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Abdomen-CT: VB S1"
     ],
     keyPapers: [
-      {"doi":"10.1016/j.radonc.2023.109528","pmid":"36773828","title":"Developing an AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy","authors":"Lin CY et al.","journal":"Radiotherapy and Oncology","year":"2023","link":"https://doi.org/10.1016/j.radonc.2023.109528","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre evaluation of an AI-assisted HA-WBRT pipeline that uses EFAI RT Suite contours; geometric and plan-quality endpoints. Evaluates the shared EFAI segmentation engine rather than the Seg Pro V3 release specifically, and the site collaborates with the vendor.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1016/j.radonc.2023.109528","pmid":"36773828","title":"Developing an AI-assisted planning pipeline for hippocampal avoidance whole brain radiotherapy","authors":"Lin CY et al.","journal":"Radiotherapy and Oncology","year":"2023","link":"https://doi.org/10.1016/j.radonc.2023.109528","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation of an AI-assisted HA-WBRT pipeline that uses EFAI RT Suite contours; geometric and plan-quality endpoints. Evaluates the shared EFAI segmentation engine rather than the Seg Pro V3 release specifically, and the site collaborates with the vendor.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
     ],
     evidenceRigor: "E1",
     clinicalImpact: "I1",
