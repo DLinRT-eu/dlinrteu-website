@@ -1,0 +1,692 @@
+[
+  {
+    "id": "rpa-radiation-planning-assistant",
+    "queries": [
+      {
+        "query": "10.1200/go-25-00702 Europe PMC",
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:%2210.1200/GO-25-00702%22&format=json",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Netherton Radiation Planning Assistant cervical prostate JCO Global Oncology 2026",
+        "url": "https://researchonline.lshtm.ac.uk/id/eprint/4682683/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]",
+        "severity": "info",
+        "observation": "New RPA paper confirmed real and indexed: Netherton TJ et al., 'Artificial Intelligence-Powered Radiotherapy for Resource-Limited Settings: Advancing Cervical and Prostate Cancer Treatment Planning With the Radiation Planning Assistant', JCO Global Oncology 2026;12(7):e2500702, DOI 10.1200/GO-25-00702, PMID 42424567, verified present in Europe PMC (hitCount=1, firstPublicationDate 2026-07-09).",
+        "suggestedFix": "Add this DOI to the RPA evidence array as a new multi-institutional peer-reviewed publication (prostate >1,000 plans, cervical 110 plans, EMBRACE II-aligned, nnU-Net auto-contouring + knowledge-based planning); it strengthens \u2014 but on its own does not elevate beyond \u2014 the existing E2 rating since it is MD Anderson-led (not yet independently externally authored in the same sense as Court 2024)."
+      },
+      {
+        "role": "evidence",
+        "field": "evidenceRigorNotes",
+        "severity": "low",
+        "observation": "The stored evidenceRigorNotes narrative predates this 2026-07-09 publication and does not yet mention it; the catalogue's most recent RPA sweep language stops at Lloyd 2026/Kavuma 2025 context.",
+        "suggestedFix": "Append a dated note referencing GO-25-00702 and re-confirm whether E2 should be retained or whether this new prospective/validated expansion to cervical+prostate workflows with EMBRACE II alignment should be considered toward E3 criteria (would still require independent/non-MDACC confirmation)."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.1200/GO-25-00702",
+        "title": "Artificial Intelligence-Powered Radiotherapy for Resource-Limited Settings: Advancing Cervical and Prostate Cancer Treatment Planning With the Radiation Planning Assistant",
+        "url": "https://doi.org/10.1200/GO-25-00702",
+        "attribution": "MD Anderson Cancer Center (Netherton, Court et al.) + international collaborators (LMIC sites)",
+        "status": "verified-new-evidence-add"
+      }
+    ],
+    "limitations": [
+      "Did not independently re-derive the >90% plan-acceptability figures from the new paper's full text (abstract/metadata only, paywalled); recommend pulling full text before finalizing wording."
+    ]
+  },
+  {
+    "id": "raysearch-raystation-planning",
+    "queries": [
+      {
+        "query": "10.1016/j.ejmp.2024.103419 Eriksson RayStation dose prediction",
+        "url": "https://doi.org/10.1016/j.ejmp.2024.103419",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evaluationData",
+        "field": "evaluationData.sourceUrl / evaluationData.source",
+        "severity": "high",
+        "observation": "evaluationData still cites DOI 10.1016/j.ejmp.2024.103419 ('Eriksson et al. Phys Med 2024') as the source/sourceUrl for dose-prediction evaluation claims. This exact DOI was investigated and discredited in the product's own evidenceRigorNotes ('resolves to an unrelated digital breast tomosynthesis phantom study and no matching paper exists on PubMed or Crossref, so the citation was removed'). The removal was applied to the evidence[] array and the rigor narrative but NOT to the evaluationData block, which still presents the stale/incorrect DOI as the authoritative evaluation source.",
+        "suggestedFix": "Delete the ejmp.2024.103419 DOI and the 'Eriksson et al. Phys Med 2024' attribution from evaluationData.source/sourceUrl; replace with one of the verified per-paper citations already in evidence[] (e.g., Neugebauer 2026 doi:10.1016/j.phro.2026.100999, or Besouw 2025 doi:10.1016/j.phro.2025.100839), consistent with the E2 rationale."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not exhaustively re-verify every one of the 9 evidence[] DOIs individually (relied on the existing 2026-09-23 HAIR cross-check annotations); evaluationData.studyDesign/results text may also need rewording once the source citation is fixed."
+    ]
+  },
+  {
+    "id": "manteia-mozi",
+    "queries": [
+      {
+        "query": "MOZI TPS K223724 FDA 510k scope",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "ARTAssistant K250780 FDA 510k Manteia",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250780.pdf",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "AccuContour 4.0 K251351 FDA 510k Manteia",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K251351.pdf",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate-distinction",
+        "field": "description / related products",
+        "severity": "info",
+        "observation": "Verified three distinct Manteia FDA clearances exist: MOZI TPS (K223724, full treatment-planning system \u2014 dose calculation, Monte Carlo, plan optimization, photon EBRT); AccuContour 4.0 (K251351, pure segmentation: 'used by the radiation oncology department to segment CT images'); and ARTAssistant (K250780, NOT in inventory \u2014 an adaptive-RT image-processing assistant whose three functions are (1) rigid/deformable registration, (2) sCT GENERATION from CBCT or MR, and (3) assisted/manual OAR contouring). ARTAssistant's predicate is AccuContour (K221706) and references MRI Planner (K211841) and RayStation (K220141), confirming it is a separate product line, not a MOZI/AccuContour version bump.",
+        "suggestedFix": "No change needed to MOZI TPS entry itself; this finding supports NOT conflating MOZI (planning), AccuContour (segmentation), and ARTAssistant (registration+sCT generation+contour-assist) as the same product, per instruction not to conflate sCT generation and sCT segmentation \u2014 ARTAssistant performs sCT generation (image conversion) as a separate function from its (non-AI-specified) contouring tool, and is functionally distinct from AccuContour's segmentation-only clearance."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": null,
+        "title": "ARTAssistant (Manteia Technologies) \u2014 FDA 510(k) K250780, cleared 2025-12-05",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250780.pdf",
+        "attribution": "Manteia Technologies Co., Ltd.",
+        "status": "new-candidate-not-in-inventory"
+      }
+    ],
+    "limitations": [
+      "AccuContour 4.0 (K251351) is already correctly tracked inside the existing 'AccuContour' auto-contouring inventory entry (lines ~6513 of inventory.json), so it is NOT a missing/duplicate candidate \u2014 confirmed to avoid false-positive duplication flag."
+    ]
+  },
+  {
+    "id": "mvision-ai-workspace-plus",
+    "queries": [
+      {
+        "query": "Workspace+ radiotherapy peer-reviewed publication 2026",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "No new independent peer-reviewed publication naming Workspace+ was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence.",
+        "suggestedFix": "No change required at this time; keep flagged for the next periodic Europe PMC sweep."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not perform an exhaustive independent primary-source re-verification of every vendor claim for Workspace+ (e.g. CE Eudamed lookups, every press release) within the time available for this audit; relied on cross-checking against existing dated sweep notes plus one targeted web search."
+    ]
+  },
+  {
+    "id": "ge-healthcare-irt",
+    "queries": [
+      {
+        "query": "iRT radiotherapy peer-reviewed publication 2026",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "No new independent peer-reviewed publication naming iRT was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence.",
+        "suggestedFix": "No change required at this time; keep flagged for the next periodic Europe PMC sweep."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not perform an exhaustive independent primary-source re-verification of every vendor claim for iRT (e.g. CE Eudamed lookups, every press release) within the time available for this audit; relied on cross-checking against existing dated sweep notes plus one targeted web search."
+    ]
+  },
+  {
+    "id": "manteia-acculearning",
+    "queries": [
+      {
+        "query": "AccuLearning radiotherapy peer-reviewed publication 2026",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "No new independent peer-reviewed publication naming AccuLearning was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence.",
+        "suggestedFix": "No change required at this time; keep flagged for the next periodic Europe PMC sweep."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not perform an exhaustive independent primary-source re-verification of every vendor claim for AccuLearning (e.g. CE Eudamed lookups, every press release) within the time available for this audit; relied on cross-checking against existing dated sweep notes plus one targeted web search."
+    ]
+  },
+  {
+    "id": "lumonus-ai",
+    "queries": [
+      {
+        "query": "Lumonus AI radiotherapy peer-reviewed publication 2026",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "No new independent peer-reviewed publication naming Lumonus AI was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence.",
+        "suggestedFix": "No change required at this time; keep flagged for the next periodic Europe PMC sweep."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not perform an exhaustive independent primary-source re-verification of every vendor claim for Lumonus AI (e.g. CE Eudamed lookups, every press release) within the time available for this audit; relied on cross-checking against existing dated sweep notes plus one targeted web search."
+    ]
+  },
+  {
+    "id": "therapanacea-art-plan",
+    "queries": [
+      {
+        "query": "ART-Plan+ radiotherapy peer-reviewed publication 2026",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "No new independent peer-reviewed publication naming ART-Plan+ was discovered beyond what the catalogue's existing Wave 4/5D/Batch-C sweeps already captured; current E0/E1 rating and supporting notes appear internally consistent with sourced evidence.",
+        "suggestedFix": "No change required at this time; keep flagged for the next periodic Europe PMC sweep."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not perform an exhaustive independent primary-source re-verification of every vendor claim for ART-Plan+ (e.g. CE Eudamed lookups, every press release) within the time available for this audit; relied on cross-checking against existing dated sweep notes plus one targeted web search."
+    ]
+  },
+  {
+    "id": "plan-ai",
+    "queries": [
+      {
+        "query": "Plan AI (Sun Nuclear / Oncospace) FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for Plan AI (Sun Nuclear / Oncospace) (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for Plan AI (Sun Nuclear / Oncospace); did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "united-urt-auto-planning",
+    "queries": [
+      {
+        "query": "uRT Auto-Planning FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for uRT Auto-Planning (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for uRT Auto-Planning; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "mvision-dose-plus",
+    "queries": [
+      {
+        "query": "Dose+ FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for Dose+ (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for Dose+; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "wisdom-deep-plan",
+    "queries": [
+      {
+        "query": "DeepPlan FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for DeepPlan (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for DeepPlan; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "therapanacea-smartplan",
+    "queries": [
+      {
+        "query": "SmartPlan FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for SmartPlan (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for SmartPlan; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "informai-radoncai",
+    "queries": [
+      {
+        "query": "RadOncAI FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for RadOncAI (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for RadOncAI; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "airato-ratoai",
+    "queries": [
+      {
+        "query": "RatoAI FDA 510k clearance peer-reviewed",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]/evidenceRigorNotes",
+        "severity": "info",
+        "observation": "Existing evidence base for RatoAI (regulatory clearance + evidence[] list) is consistent with its stated evidenceRigor; no additional product-naming peer-reviewed study or contradicting regulatory record was found in this pass.",
+        "suggestedFix": "None required; re-check at next sweep, especially RadOncAI and RatoAI which are very recent (2026) clearances with no peer-reviewed literature yet (E0 correctly conservative)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Shallow single-pass check only for RatoAI; did not run full Europe PMC/Crossref alias-gated query matrix as done in prior HAIR waves."
+    ]
+  },
+  {
+    "id": "ptw-aqualis",
+    "queries": [
+      {
+        "query": "AIQUALIS radiotherapy QA monitoring peer-reviewed publication",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]",
+        "severity": "info",
+        "observation": "AIQUALIS remains E0 (no peer-reviewed, product-naming publication located); vendor/poster-only evidence base confirmed consistent with existing notes.",
+        "suggestedFix": "No change required."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "No new literature found in a single-pass web check; relied primarily on existing documented sweep history."
+    ]
+  },
+  {
+    "id": "mvision-verify",
+    "queries": [
+      {
+        "query": "Verify radiotherapy QA monitoring peer-reviewed publication",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]",
+        "severity": "info",
+        "observation": "Verify remains E0 (no peer-reviewed, product-naming publication located); vendor/poster-only evidence base confirmed consistent with existing notes.",
+        "suggestedFix": "No change required."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "No new literature found in a single-pass web check; relied primarily on existing documented sweep history."
+    ]
+  },
+  {
+    "id": "raysearch-rayintelligence",
+    "queries": [
+      {
+        "query": "RayIntelligence radiotherapy QA monitoring peer-reviewed publication",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]",
+        "severity": "info",
+        "observation": "RayIntelligence remains E0 (no peer-reviewed, product-naming publication located); vendor/poster-only evidence base confirmed consistent with existing notes.",
+        "suggestedFix": "No change required."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "No new literature found in a single-pass web check; relied primarily on existing documented sweep history."
+    ]
+  },
+  {
+    "id": "accuray-synchrony",
+    "queries": [
+      {
+        "query": "Synchrony Radixact REMIND trial multicenter prospective",
+        "url": "https://clinicaltrials.gov/study/NCT05844761",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidenceRigorNotes",
+        "severity": "info",
+        "observation": "E1 rating (downgraded from E2 in a prior sweep because all located studies are single-centre/retrospective) is consistent with current literature; the ongoing 2-site REMIND trial (NCT05844761, completion 2027) is correctly noted as not yet available evidence.",
+        "suggestedFix": "No change required; revisit once REMIND publishes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not re-verify each of the 13 listed evidence citations individually; spot-checked only the overall rigor narrative."
+    ]
+  },
+  {
+    "id": "philips-precise-position",
+    "queries": [
+      {
+        "query": "Philips Precise Position CT patient positioning peer-reviewed",
+        "url": "https://europepmc.org/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "evidence",
+        "field": "evidence[]",
+        "severity": "info",
+        "observation": "E0 rating confirmed consistent: only vendor white paper and FDA 510(k) K203514 found; no independent peer-reviewed clinical study located.",
+        "suggestedFix": "No change required."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Single-pass check only."
+    ]
+  },
+  {
+    "id": "medlever-assistant-pipeline",
+    "queries": [
+      {
+        "query": "MedLever Assistant (pre-market, 'Coming Soon') FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for MedLever Assistant (pre-market, 'Coming Soon'): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for MedLever Assistant (pre-market, 'Coming Soon'); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "medlever-copilot-pipeline",
+    "queries": [
+      {
+        "query": "MedLever Copilot (pre-market, 'Coming Soon') FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for MedLever Copilot (pre-market, 'Coming Soon'): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for MedLever Copilot (pre-market, 'Coming Soon'); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "ge-irt-theranostics-pipeline",
+    "queries": [
+      {
+        "query": "iRT for Theranostics (GE, 'not for sale') FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for iRT for Theranostics (GE, 'not for sale'): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for iRT for Theranostics (GE, 'not for sale'); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "united-uct610-sim-dl-recon-pipeline",
+    "queries": [
+      {
+        "query": "uCT 610 Sim DL Full-FOV Reconstruction (United Imaging, pre-market) FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for uCT 610 Sim DL Full-FOV Reconstruction (United Imaging, pre-market): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for uCT 610 Sim DL Full-FOV Reconstruction (United Imaging, pre-market); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "synaptiq-mediq-rt-4dct-pipeline",
+    "queries": [
+      {
+        "query": "Mediq RT 4D CT research module (Synaptiq, research-only) FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for Mediq RT 4D CT research module (Synaptiq, research-only): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for Mediq RT 4D CT research module (Synaptiq, research-only); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "neuralrad-brain-pipeline",
+    "queries": [
+      {
+        "query": "NeuralRadBrain (NeuralRad, FDA pending) FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for NeuralRadBrain (NeuralRad, FDA pending): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for NeuralRadBrain (NeuralRad, FDA pending); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "atomoai-icontour-pipeline",
+    "queries": [
+      {
+        "query": "iContour (AtomoAI, no clearance found) FDA clearance OR peer-reviewed publication",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "pipeline-status",
+        "field": "regulatory/evidenceRigor",
+        "severity": "info",
+        "observation": "Confirmed pipeline/pre-market status for iContour (AtomoAI, no clearance found): product is explicitly labelled by the vendor as not-for-sale, research-only, or clearance-pending, and the catalogue correctly records null/E0 evidence and R0/R1 adoption readiness accordingly.",
+        "suggestedFix": "Preserve as pipeline entry; no premature promotion to a cleared-product record until regulatory status changes. Re-check FDA database periodically for NeuralRadBrain and iContour clearance status changes."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not find independent confirmation beyond vendor/booth statements for iContour (AtomoAI, no clearance found); genuinely unresolved pending regulatory action \u2014 explicitly preserved as unresolved rather than guessed at."
+    ]
+  },
+  {
+    "id": "candidate-seetreat-art1",
+    "queries": [
+      {
+        "query": "SeeTreat ART.1 ART.1-US K253078 FDA 510k",
+        "url": "https://fda.innolitics.com/device/K253078",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "candidate-screening",
+        "field": "n/a (not in inventory)",
+        "severity": "info",
+        "observation": "SeeTreat ART.1 / ART.1-US (K253078, cleared 2026-05-14, product code MUJ) performs adaptive-RT image registration, synthetic CT generation, contour propagation and dose calculation for daily CBCT-based replan decision support. The vendor explicitly describes it as built on 'purpose-built image registration and dose calculation algorithms' without claiming a deep-learning/AI basis in its public materials (product page, FDA RWE summary); no AI/ML terminology is used in the Indications for Use or device description.",
+        "suggestedFix": "Treat as OUT OF SCOPE for this AI-in-RT catalogue (classical/non-AI algorithmic adaptive-RT QA tool) unless the manufacturer discloses a deep-learning component in the 510(k) summary; do not add as a new AI product candidate. Confirmed distinct from, and not a duplicate of, any existing Performance Monitor entry (it computes dose/contours itself rather than merely monitoring another AI's outputs)."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": null,
+        "title": "ART.1-US (SeeTreat Pty Ltd) \u2014 FDA 510(k) K253078",
+        "url": "https://fda.innolitics.com/device/K253078",
+        "attribution": "SeeTreat Pty Ltd (Sydney, founded by Nguyen & Keall)",
+        "status": "excluded-non-AI-classical-algorithm"
+      }
+    ],
+    "limitations": [
+      "Could not access the full K253078 510(k) summary PDF directly (only third-party Innolitics/FDA metadata) within the time available; if SeeTreat later discloses a trained ML/DL component, this exclusion should be revisited."
+    ]
+  }
+]

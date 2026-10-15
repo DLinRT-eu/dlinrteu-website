@@ -1,0 +1,702 @@
+[
+  {
+    "id": "philips-precise-image",
+    "queries": [
+      {
+        "query": "Crossref API lookup 10.21037/jmai-2025-173",
+        "url": "https://api.crossref.org/works/10.21037/jmai-2025-173",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "jmai-24-10776 (alternate/legacy article ID check)",
+        "url": "https://jmai.amegroups.org/article/view/10776/html",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Crossref API lookup 10.21037/jmai-24-10776 (not a valid DOI)",
+        "url": "https://api.crossref.org/works/10.21037/jmai-24-10776",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "evidence[].doi (10.21037/jmai-2025-173)",
+        "severity": "info",
+        "observation": "DOI 10.21037/jmai-2025-173 resolves correctly via Crossref to 'Deep learning precise image reconstruction algorithm for abdominal CT: impact on image quality and radiation dose reduction\u2014a model validation study' by Xiaojing Liu et al., Journal of Medical Artificial Intelligence, published 2026-04 (online ahead 2025-07-28 per journal site article ID jmai-24-10776). The inventory record's DOI, title, authors ('Liu Y et al.' vs actual first author Xiaojing Liu), journal and year are all directionally correct \u2014 the DOI is NOT invalid as a prior sweep may have flagged.",
+        "suggestedFix": "No fix required for the DOI itself; keep 10.21037/jmai-2025-173. Optionally correct 'Liu Y et al.' to 'Liu X et al.' to match the actual first author (Xiaojing Liu) and add full author list (Liu, Ning, Liao, Gui, Wu, Lei) for precision."
+      },
+      {
+        "role": "auditor",
+        "field": "evidence[].doi \u2014 publisher internal article ID confusion",
+        "severity": "low",
+        "observation": "'jmai-24-10776' is not a second DOI or an alternate/competing identifier for a different paper \u2014 it is AME Publishing's internal manuscript/article slug for the SAME article (URL https://jmai.amegroups.org/article/view/10776/html), assigned when the paper was received in 2024 (hence the '24' prefix) and later published with DOI suffix 'jmai-2025-173' reflecting the 2025 acceptance/publication-year numbering convention AME uses. It is not a registered Crossref DOI on its own (10.21037/jmai-24-10776 returns no Crossref record) and should not be treated as 'the real DOI' replacing jmai-2025-173.",
+        "suggestedFix": "Keep DOI as 10.21037/jmai-2025-173 (Crossref-registered, resolves, metadata matches). Do not substitute jmai-24-10776; it is only a publisher URL slug, not a citable DOI."
+      }
+    ],
+    "candidates": [
+      {
+        "doi": "10.21037/jmai-2025-173",
+        "title": "Deep learning precise image reconstruction algorithm for abdominal CT: impact on image quality and radiation dose reduction\u2014a model validation study",
+        "url": "https://doi.org/10.21037/jmai-2025-173",
+        "attribution": "Philips Precise Image (Philips Clinical Science co-author S. Gui); vendor-affiliated single-center Chinese study (Wuhan Union Hospital)",
+        "status": "verified_valid"
+      }
+    ],
+    "limitations": [
+      "Checked only the specific DOI flagged by audit metadata; the other 4 evidence[] entries for this product (Greffier, Barca, Chandran, Shim) were not independently re-verified in this pass."
+    ]
+  },
+  {
+    "id": "subtle-hd-pet",
+    "queries": [
+      {
+        "query": "openFDA 510(k) lookup K254013",
+        "url": "https://api.fda.gov/device/510k.json?search=k_number:K254013",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "FDA 510(k) summary PDF K254013",
+        "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda.productCode / regulatory.fda.regulationNumber",
+        "severity": "high",
+        "observation": "openFDA's authoritative record for K254013 (applicant: Subtle Medical, Inc.; device name: 'SubtleHD-PET (1.x)'; decision date 2026-05-14, Substantially Equivalent) lists product_code='LLZ' and regulation_number is NOT populated/returned as '892.1200' \u2014 the device classification panel is Radiology with no 21 CFR 892.1200 mapping returned by openFDA for this record. The inventory instead lists productCode 'KPS' and regulationNumber '21 CFR 892.1200'. KPS/892.1200 is the product code/regulation used elsewhere in this same inventory for Philips PET/CT Adaptive Reconstruction (K211764) \u2014 i.e. these values appear to have been copied from a different Subtle/competitor PET record rather than looked up for K254013 specifically. LLZ is the code Subtle Medical uses consistently across SubtleMR, SubtlePET and AiMIFY in this same inventory, which is internally consistent with K254013 also being LLZ.",
+        "suggestedFix": "Correct regulatory.fda.productCode to 'LLZ' and remove/replace the unsupported regulationNumber '21 CFR 892.1200' (or confirm against the underlying CFR regulation for LLZ, which is typically listed as 892.2050 for this device family in other Subtle Medical products in the inventory) based on the actual K254013 510(k) summary, not an assumed cross-reference to KPS/892.1200."
+      },
+      {
+        "role": "auditor",
+        "field": "regulatory.fda.clearanceNumber / decisionDate",
+        "severity": "info",
+        "observation": "K254013 decision date 2026-05-14 and device name 'SubtleHD-PET (1.x)' are confirmed correct per openFDA.",
+        "suggestedFix": "No change needed to clearanceNumber or decisionDate."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Did not independently verify the CE 'under_review' status or the PRNewswire/Diagnostic Imaging training-data citations beyond the FDA regulatory fields explicitly flagged for audit."
+    ]
+  },
+  {
+    "id": "elekta-iris",
+    "queries": [
+      {
+        "query": "openFDA 510(k) search applicant:Elekta sort by decision_date desc",
+        "url": "https://api.fda.gov/device/510k.json?search=applicant:%22Elekta%22&sort=decision_date:desc&limit=10",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "openFDA 510(k) lookup K252188",
+        "url": "https://api.fda.gov/device/510k.json?search=k_number:K252188",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "FDA 510(k) database record K252188 (PMN lookup)",
+        "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K252188",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Innolitics FDA AI/ML device page for K252188 (CBCT reconstruction performance data)",
+        "url": "https://fda.innolitics.com/device/K252188",
+        "date": "2026-10-15"
+      },
+      {
+        "query": "Elekta press release \u2014 FDA 510(k) clearance for Elekta Evo linear accelerator",
+        "url": "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda.notes / regulatory.fda.decisionDate (K-number)",
+        "severity": "high",
+        "observation": "The actual 510(k) number IS now published: K252188, 'EMLA (Elekta Evo); EMLA (VersaHD); EMLA (Elekta Harmony Pro); EMLA (Elekta Infintiy); EMLA (Elekta Harmony); EMLA (Elekta Synergy)', applicant Elekta Solutions AB, decision date 2026-01-15 (Substantially Equivalent, product code IYE, regulation 21 CFR 892.5050, device class II). Innolitics' FDA AI/ML performance extract for K252188 explicitly lists an 'CBCT Image Reconstruction' algorithm ('Iterative reconstruction method using ordered subset and steepest descent') validated on 124 clinical datasets + 13 clinical patient CBCT projection datasets \u2014 this is the Iris reconstruction module bundled inside the whole-system EMLA linac clearance. The inventory's note 'K-number not yet published in FDA database as of Feb 2026' is now stale/incorrect, and the recorded decisionDate '2026-01-16' is off by one day versus FDA's official decision date of 2026-01-15 (2026-01-16 is the date of Elekta's press release announcing the clearance, not the FDA decision date).",
+        "suggestedFix": "Update regulatory.fda.clearanceNumber to 'K252188', decisionDate to '2026-01-15', and regulation/product code to 892.5050 / IYE (whole linac system clearance; Iris is a bundled CBCT reconstruction feature, not separately coded). Revise the notes field to remove the 'not yet published' language and instead state that Iris is cleared as the CBCT image-reconstruction feature within the EMLA (Elekta Evo/VersaHD/Harmony/Harmony Pro/Infinity/Synergy) 510(k), citing the Innolitics AI/ML performance table (124 clinical datasets, 13 patient CBCT projection datasets, iterative OS-SD algorithm)."
+      },
+      {
+        "role": "auditor",
+        "field": "evidenceRigor (E1) vs evidenceRigorNotes narrative (concludes 'E0 stands')",
+        "severity": "medium",
+        "observation": "Internal inconsistency: the top-level field evidenceRigor is set to 'E1', but the attached evidenceRigorNotes narrative concludes a Wave 5B investigation of three candidate iterative-CBCT publications by stating 'Neither vendor is named in the abstracts, so they cannot be attributed to IRIS Evo. E0 stands.' This reads as though the resolved/intended grade is E0 (vendor claims only, no attributable independent evidence), while the machine-readable evidenceRigor field was left at E1. The FDA AI/ML performance table for K252188 does show an internal validation on clinical data (124+13 datasets), which is sponsor-run V&V, not independent peer-reviewed evidence \u2014 consistent with an E0/E1 boundary call needing an explicit, unambiguous decision rather than a self-contradicting field+note pair.",
+        "suggestedFix": "Resolve the contradiction: either (a) set evidenceRigor to 'E0' to match the notes' explicit conclusion ('E0 stands'), since no independent peer-reviewed publication was attributable to IRIS Evo, or (b) if E1 is intentionally retained on the basis of the newly-identified FDA 510(k) sponsor V&V data (124 clinical + 13 patient CBCT datasets), rewrite evidenceRigorNotes to justify E1 explicitly rather than ending on an 'E0 stands' conclusion that contradicts the field value. Pick one and make field and narrative consistent."
+      },
+      {
+        "role": "auditor",
+        "field": "clinicalEvidence / limitations \u2014 FDA sponsor V&V dataset now available",
+        "severity": "low",
+        "observation": "Prior record states 'Validation evidence is currently limited to vendor brochures and press releases' and 'results': 'Not publicly disclosed'. The Innolitics AI/ML extract of K252188 now provides at least summary-level sponsor V&V detail (124 clinical image sets + 13 patient CBCT projection datasets, >1 reader) that was not reflected in the record.",
+        "suggestedFix": "Add this sponsor V&V detail to evaluationData.description/results, while still flagging it as non-independent, sponsor-run verification (not a peer-reviewed clinical study)."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Could not access the full K252188 510(k) summary PDF directly (FDA site returned HTTP 302/empty); findings rely on openFDA structured data, the FDA PMN database page, and the Innolitics AI/ML extract, which are consistent with each other but were not cross-checked against the primary summary PDF text."
+    ]
+  },
+  {
+    "id": "philips-smartspeed",
+    "queries": [
+      {
+        "query": "Inventory cross-check: philips-smartspeed regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "No vendor/literature contradiction identified in this pass; K213583/K223442 pairing with product codes LNH/LNI and the 'no clinical study required' SE rationale is internally consistent and matches typical MR reconstruction 510(k) patterns.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "philips-smartspeed-precise",
+    "queries": [
+      {
+        "query": "Inventory cross-check: philips-smartspeed-precise regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K251397 (2025-06-04) and 'not yet CE marked' note are internally consistent with the July 2025 vendor press release citation already in the record.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "philips-petct-adaptive-reconstruction",
+    "queries": [
+      {
+        "query": "Inventory cross-check: philips-petct-adaptive-reconstruction regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Record already flags itself (E0, ce: null, notes acknowledging no dedicated standalone 510(k) trade name was found) \u2014 this is an honest self-reported gap rather than a factual error.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "ge-air-recon-dl",
+    "queries": [
+      {
+        "query": "Inventory cross-check: ge-air-recon-dl regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Three-clearance chain (K193282 \u2192 K213717 \u2192 K252379) with LNH/LNI/MOS product codes is consistent with GE's documented SIGNA Premier \u2192 PROPELLER \u2192 Phase Correction expansion history.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "ge-truefidelity",
+    "queries": [
+      {
+        "query": "Inventory cross-check: ge-truefidelity regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K183202 (2019-04-19), product code JAK, regulation 892.1750 \u2014 matches Canon AiCE CT's identical classification, consistent with both being CT reconstruction algorithms under the same FDA regulation.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "siemens-deep-resolve",
+    "queries": [
+      {
+        "query": "Inventory cross-check: siemens-deep-resolve regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Multiple clearance numbers (K213693/K232322/K250436/K251822) spanning 2022\u20132025 across different MAGNETOM platforms is plausible for an evolving reconstruction suite but was not independently re-verified against openFDA in this pass.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "Clearance chain not independently re-verified via openFDA in this review cycle."
+    ]
+  },
+  {
+    "id": "canon-aice-ct",
+    "queries": [
+      {
+        "query": "Inventory cross-check: canon-aice-ct regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K181862 (2019-01-15), JAK/892.1750 consistent with GE TrueFidelity's identical classification (both CT deep-learning reconstruction predicates in the same family).",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "canon-aice-mr",
+    "queries": [
+      {
+        "query": "Inventory cross-check: canon-aice-mr regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K192574 (2019-12-20), LNH/892.1000 is consistent with MR reconstruction product-code conventions used elsewhere in this inventory (Philips SmartSpeed, Siemens Deep Resolve).",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "canon-piqe",
+    "queries": [
+      {
+        "query": "Inventory cross-check: canon-piqe regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K243335 (2025-01-07), LNH/892.1000 consistent with the MR reconstruction product-code pattern.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "united-uai-vision-recon",
+    "queries": [
+      {
+        "query": "Inventory cross-check: united-uai-vision-recon regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Record acknowledges clearance is bundled within whole-system CT clearances (e.g., K241166) rather than a dedicated feature-level 510(k); this self-disclosed limitation is reasonable for an embedded OEM reconstruction feature.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "Specific K-number for the uAIFI reconstruction feature itself (vs. the host CT system) not independently confirmed."
+    ]
+  },
+  {
+    "id": "united-uaifi-umr",
+    "queries": [
+      {
+        "query": "Inventory cross-check: united-uaifi-umr regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Same embedded-feature pattern as uAI Vision Recon; E0 rigor appropriately reflects the lack of a dedicated, independently verifiable clearance or publication.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "Specific K-number for feature-level clearance not independently confirmed."
+    ]
+  },
+  {
+    "id": "united-hd-tof",
+    "queries": [
+      {
+        "query": "Inventory cross-check: united-hd-tof regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Same embedded-feature pattern (PET/CT and PET/MR system-level clearance bundling); E0 rigor appropriately conservative.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "Specific K-number for feature-level clearance not independently confirmed."
+    ]
+  },
+  {
+    "id": "ge-precision-dl",
+    "queries": [
+      {
+        "query": "Inventory cross-check: ge-precision-dl regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K223212 (2023-05-22), product code MYN, regulation 892.2050 is a plausible nuclear-medicine/SPECT reconstruction classification distinct from the CT/MR codes used elsewhere; not independently re-verified.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "K223212 not independently re-verified via openFDA in this review cycle."
+    ]
+  },
+  {
+    "id": "ge-air-recon-dl-enhancement",
+    "queries": [
+      {
+        "query": "Inventory cross-check: ge-air-recon-dl-enhancement regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Record correctly treats this as a mode within the parent AIR Recon DL clearances (K193282/K213717/K252379) rather than claiming a separate K-number, which is internally consistent.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "airs-swiftmr",
+    "queries": [
+      {
+        "query": "Inventory cross-check: airs-swiftmr regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K230854 (2023-10-27), LLZ/892.2050 plus a cited 2026-04-15 OEM-interoperability clearance announcement; product code LLZ matches the pattern used for Subtle Medical's MR/PET enhancement products, supporting internal consistency.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "subtle-mr",
+    "queries": [
+      {
+        "query": "Inventory cross-check: subtle-mr regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Multiple clearance numbers (K191688/K203182/K223623) culminating 2023-05-11, LLZ/892.2050, plus an EUDAMED cross-reference with a concrete Basic UDI-DI \u2014 this is a stronger-than-average evidentiary trail among the 27 records.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "subtle-pet",
+    "queries": [
+      {
+        "query": "Inventory cross-check: subtle-pet regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K182336/K211964 (final decision 2021-09-28), LLZ/892.2050, plus EUDAMED Basic UDI-DI cross-reference; internally consistent with subtle-mr's pattern.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "subtle-aimify",
+    "queries": [
+      {
+        "query": "Inventory cross-check: subtle-aimify regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K240290 (2024-08-21), LLZ/892.2050 is consistent with the Subtle Medical LLZ pattern confirmed for subtle-mr/subtle-pet, and by contrast makes the subtle-hd-pet KPS/892.1200 values look more clearly anomalous.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "subtle-hd",
+    "queries": [
+      {
+        "query": "Inventory cross-check: subtle-hd regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K243250 (2025-02-12) uses product code QIH rather than LLZ \u2014 distinct from other Subtle products in this inventory; not independently re-verified against openFDA in this pass, flagged only for awareness alongside the confirmed subtle-hd-pet discrepancy.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "QIH product code for K243250 not independently re-verified via openFDA in this review cycle; worth confirming given the KPS/LLZ confusion found in the sibling subtle-hd-pet record."
+    ]
+  },
+  {
+    "id": "subtle-hd-ct",
+    "queries": [
+      {
+        "query": "Inventory cross-check: subtle-hd-ct regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K254120 ('2026-05', day not specified) also uses product code QIH matching subtle-hd; not independently re-verified against openFDA in this pass.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "K254120 exact decision day and QIH product code not independently re-verified via openFDA in this review cycle."
+    ]
+  },
+  {
+    "id": "algomedica-pixelshine",
+    "queries": [
+      {
+        "query": "Inventory cross-check: algomedica-pixelshine regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K161625 (2016-09-19), LLZ/892.2050, CE under the legacy MDD (not MDR) regime with a named Notified Body (BSI 0086) \u2014 appropriately reflects PixelShine's early (2016) clearance predating MDR transition.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "claripi-clarict-ai",
+    "queries": [
+      {
+        "query": "Inventory cross-check: claripi-clarict-ai regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "K183460 (2019-06-13) plus K212074 (2021) extension, LLZ/892.2050, with EUDAMED UDI-DI cross-reference; evidenceRigor E3 is the highest in this batch and was not independently re-verified but is plausible given the 10 cited evidence entries.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields.",
+      "E3 rigor classification and full evidence list (10 entries) not individually re-verified in this pass."
+    ]
+  },
+  {
+    "id": "claripi-clariace",
+    "queries": [
+      {
+        "query": "Inventory cross-check: claripi-clariace regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Regulatory fields correctly marked not_applicable; appears to be a research/companion tool without its own standalone clearance, which is an honest self-reported status rather than an error.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  },
+  {
+    "id": "united-uct610-sim-dl-recon-pipeline",
+    "queries": [
+      {
+        "query": "Inventory cross-check: united-uct610-sim-dl-recon-pipeline regulatory/evidence field consistency against product-code/DOI patterns observed elsewhere in the same dataset (no new external source fetched for this record in this pass)",
+        "url": "n/a - internal cross-check only",
+        "date": "2026-10-15"
+      }
+    ],
+    "findings": [
+      {
+        "role": "auditor",
+        "field": "regulatory.fda / evidence (general)",
+        "severity": "info",
+        "observation": "Regulatory fields are null and evidenceRigor E0/adoptionReadiness R0 \u2014 appropriately conservative for what the record frames as a simulation/pipeline component rather than a cleared clinical product.",
+        "suggestedFix": "No change required based on this pass; recommend a dedicated openFDA/vendor verification pass if this product is prioritized in a future audit cycle."
+      }
+    ],
+    "candidates": [],
+    "limitations": [
+      "Not independently queried against openFDA/vendor/literature sources in this review cycle; assessed only via internal consistency cross-check against the other 26 records and the inventory's own self-reported fields."
+    ]
+  }
+]

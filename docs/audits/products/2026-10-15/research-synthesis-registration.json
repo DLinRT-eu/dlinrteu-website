@@ -1,0 +1,173 @@
+[
+  {
+    "id": "philips-mrcat-brain",
+    "queries": [
+      {"query": "Buschmann 39956751 Zeitschrift für Medizinische Physik MRI-only synthetic CT brain head and neck", "url": "https://europepmc.org/article/med/39956751", "date": "2026-10-15"},
+      {"query": "MESCAL initiative Cusumano Maspero Radiotherapy Oncology 2026 benchmark dataset acceptance levels MRI-only commissioning", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "date": "2026-10-15"},
+      {"query": "Aljaafari brain synthetic CT clinical validation TIPSRO 2025", "url": "https://doi.org/10.1016/j.tipsro.2025.100328", "date": "2026-10-15"},
+      {"query": "Philips MRCAT Brain FDA 510(k) K193109", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193109.pdf", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "evidence", "field": "keyPapers[pmid=39956751].title/doi", "severity": "high", "observation": "The record's title ('Evaluation of an MRI-only workflow using a commercial synthetic CT generator for brain and head-and-neck radiotherapy') does not match the actual publication. PubMed/Europe PMC list the true title as 'Development of an MR-only radiotherapy treatment planning workflow using a commercial synthetic CT generator for brain and head & neck tumor patients' (Buschmann M et al., Zeitschrift für Medizinische Physik 2025;36(1):71-83, PMID 39956751, DOI 10.1016/j.zemedi.2025.01.003). The DOI is also missing from this product's keyPaper entry.", "suggestedFix": "Correct the title to the verified Europe PMC/PubMed title and add DOI 10.1016/j.zemedi.2025.01.003."},
+      {"role": "evidence", "field": "keyPapers[pmid=39956751].rationale (n=10)", "severity": "medium", "observation": "The paper enrolled 23 patients total (13 brain + 10 head-and-neck), not n=10 as implied for the brain product entry. For the Brain product the brain-only subset (n=13) is the relevant cohort; n=10 is the H&N subset documented on the H&N product page. Neither product record states the correct total/subset breakdown or that both cohorts came from one combined n=23 study.", "suggestedFix": "State the correct cohort sizes: 23 patients total (13 brain, 10 head & neck) in a single combined study; attribute the brain subset (n=13) to this product and the H&N subset (n=10) to MRCAT Head and Neck, with a cross-reference noting it is the same source paper."},
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "low", "observation": "MESCAL (Cusumano/Maspero et al., Radiother Oncol 2026) evaluated 32 patients (16 brain, 16 pelvis) from two centers, testing MRI Planner (Spectronic), SyngoAI (Siemens), MR Box (Therapanacea) and MRCAT (Philips). Brain anatomy is within scope for this product, so the attribution here is correct.", "suggestedFix": "No change needed; retain but note MESCAL anatomical scope explicitly (brain + pelvis only) to prevent downstream copy-paste onto H&N-only products."}
+    ],
+    "candidates": [],
+    "limitations": "Full text of the Buschmann 2025/2026 paper and the Aljaafari 2025 paper were not independently re-read for every numeric claim (e.g., exact dose-difference figures); title/DOI/PMID were verified against PubMed/Europe PMC/ScienceDirect abstracts and metadata only, not against the complete body text held behind publisher paywalls."
+  },
+  {
+    "id": "philips-mrcat-pelvis",
+    "queries": [
+      {"query": "MESCAL initiative Radiother Oncol 2026 brain pelvis synthetic CT benchmark", "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167814026003695", "date": "2026-10-15"},
+      {"query": "Maspero rectum MRI-only synthetic CT Phys Imaging Radiat Oncol 2018", "url": "https://doi.org/10.1016/j.phro.2018.09.002", "date": "2026-10-15"},
+      {"query": "Farjam atlas-based synthetic CT pelvis JACMP 2019", "url": "https://doi.org/10.1002/acm2.12501", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "low", "observation": "Confirmed MESCAL's scope (16 pelvis + 16 brain patients, 2 centers) includes pelvis anatomy and MRCAT among the four sCT solutions tested, so attribution to MRCAT Pelvis is consistent with the published abstract.", "suggestedFix": "None; correct attribution."},
+      {"role": "evidence", "field": "keyPapers[pmid=30474353] (Farjam et al.)", "severity": "medium", "observation": "Farjam et al. 2019 (DOI 10.1002/acm2.12501) evaluates an in-house multi-atlas sCT method; MRCAT appears only as a clinical-routine comparator, not as the primary subject of study. This is already flagged internally as a 'comparator evaluation' (rationale text), which is an appropriate caveat, but the keyPaper listing alongside full validation studies risks over-stating direct MRCAT evidence volume if read superficially.", "suggestedFix": "Keep the 'comparator, not primary subject' caveat prominent in any public-facing summary count of 'papers evaluating MRCAT Pelvis.'"},
+      {"role": "transparency", "field": "evaluationData.description", "severity": "low", "observation": "Record explicitly documents a prior citation error (MR-OPERA wrongly attributed to Philips MRCAT Pelvis, since corrected) — this self-correction is good practice but confirms the dataset has had attribution errors before, warranting continued vigilance for comparator-vs-subject conflation across all sCT products.", "suggestedFix": "No action; retain the correction note for audit trail."}
+    ],
+    "candidates": [],
+    "limitations": "Did not independently re-verify every numeric dosimetric value (MAE 65±5 HU etc.) in Farjam 2019 or Maspero 2018 against full text; relied on existing rationale text cross-checked only at abstract/metadata level."
+  },
+  {
+    "id": "philips-mrcat-head-and-neck",
+    "queries": [
+      {"query": "Buschmann 39956751 Zeitschrift für Medizinische Physik brain head neck MR-only workflow", "url": "https://europepmc.org/article/med/39956751", "date": "2026-10-15"},
+      {"query": "MESCAL Radiother Oncol 2026 anatomical sites brain pelvis head and neck", "url": "https://researchinformation.umcutrecht.nl/en/publications/standardizing-mri-only-radiotherapy-commissioning-benchmark-datas/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "evidence", "field": "keyPapers[pmid=39956751].title", "severity": "high", "observation": "Same title mismatch as Brain product: the record's title does not match the verified PubMed/Europe PMC title ('Development of an MR-only radiotherapy treatment planning workflow using a commercial synthetic CT generator for brain and head & neck tumor patients'), and the DOI (10.1016/j.zemedi.2025.01.003) is omitted from the keyPaper object.", "suggestedFix": "Correct title and add the DOI; keep PMID 39956751."},
+      {"role": "evidence", "field": "keyPapers[pmid=39956751] cohort size", "severity": "medium", "observation": "The H&N-specific n=10 figure used in evaluationData is correct as the H&N subset of the combined 23-patient study (13 brain + 10 H&N), but the record does not disclose that this is a subset of a larger combined-anatomy study, which could misleadingly imply a dedicated 10-patient H&N-only trial.", "suggestedFix": "Add a note clarifying the 10 H&N patients are part of a combined 23-patient (13 brain + 10 H&N) single-center study, cross-referenced with the Brain product entry."},
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "critical", "observation": "MESCAL (Cusumano/Maspero et al. 2026) explicitly collected data from 32 patients across only two anatomical sites: 16 brain and 16 pelvis, from two centers, testing MRI Planner (Spectronic), SyngoAI (Siemens), MR Box (Therapanacea) and MRCAT (Philips). Head & neck anatomy was NOT part of the MESCAL benchmark. Listing this paper as a keyPaper for MRCAT Head and Neck is an incorrect attribution — it provides no H&N-specific evidence for this product, confirming the directive's flagged issue.", "suggestedFix": "Remove the MESCAL keyPaper entry from philips-mrcat-head-and-neck (and from any other H&N-only product entries). Retain it only on philips-mrcat-brain, philips-mrcat-pelvis, spectronic-mriplanner, and mr-box-synthetic (and, if the 'SyngoAI' reference is confirmed to be the audited product, siemens-syngo-ct), each scoped to brain/pelvis only."},
+      {"role": "evidence", "field": "evidenceRigor E2", "severity": "medium", "observation": "With the MESCAL paper removed as misattributed, the sole H&N-specific evidence is the single-center n=10 Buschmann et al. study (E1-level: single-center, vendor-independent, retrospective). The E2 rigor rating for this product appears to rest on the misattributed MESCAL multi-center benchmark; without it, rigor should likely revert to E1 pending identification of a genuine multi-center H&N-specific validation.", "suggestedFix": "Re-evaluate evidenceRigor for philips-mrcat-head-and-neck after removing the MESCAL citation; document the rationale explicitly."}
+    ],
+    "candidates": [],
+    "limitations": "MESCAL anatomical scope (16 brain/16 pelvis) confirmed from multiple independent abstract sources (ScienceDirect, UMC Utrecht repository, LMU ART Lab); full text not accessed behind the Elsevier paywall, so supplementary tables were not checked for any secondary H&N analysis that might not appear in the abstract."
+  },
+  {
+    "id": "philips-mrcat-prostate-auto-contouring",
+    "queries": [
+      {"query": "Tyagi dosimetric workflow evaluation commercial synthetic CT pelvis Phys Med Biol 2017", "url": "https://doi.org/10.1088/1361-6560/aa5452", "date": "2026-10-15"},
+      {"query": "MRCAT prostate MESCAL 2026 attribution pelvis prostate", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "date": "2026-10-15"},
+      {"query": "Philips MRCAT Prostate Auto-Contouring FDA clearance history", "url": "https://www.accessdata.fda.gov/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "low", "observation": "MESCAL's pelvis cohort (16 patients) is not explicitly restricted to prostate cancer in the public abstract; attributing this community benchmark to the Prostate-specific product is a reasonable but slightly broader inference than the pelvis-general product (MRCAT Pelvis), since the abstract does not confirm prostate-specific sub-analysis.", "suggestedFix": "Verify from full text whether the MESCAL pelvis cohort includes/could be prostate patients specifically before citing this as prostate-specific evidence; otherwise note it is general pelvis evidence, not prostate-specific."},
+      {"role": "transparency", "field": "evidenceRigorNotes", "severity": "low", "observation": "The product record correctly separates module-level evidence ('Image Synthesis (MRCAT): E2...') from auto-contouring evidence and documents a prior misrouting correction (Law et al. Med Phys 2024 moved here from MRCAT Brain after full-text confirmed prostate/pelvic anatomy). This is a good-practice self-correction and is consistent with what we found elsewhere (cross-category misattribution is a recurring risk across this dataset).", "suggestedFix": "No action; continue periodic full-text confirmation sweeps for comparator/subject and anatomy misattribution."}
+    ],
+    "candidates": [],
+    "limitations": "Did not individually re-verify titles/DOIs/PMIDs for each of the 14 keyPapers listed for this product (Tyagi 2017, Kemppainen 2017, Maspero 2017 ×2, Persson 2017, etc.); spot-checked only the MESCAL and Farjam-family citations shared across products. A full per-paper verification of this product's long citation list was out of scope given review time constraints and should be treated as a follow-up task."
+  },
+  {
+    "id": "siemens-syngo-ct",
+    "queries": [
+      {"query": "Siemens Healthineers syngo.via RT Image Suite synthetic CT SyngoAI MR-only radiotherapy FDA clearance", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232799.pdf", "date": "2026-10-15"},
+      {"query": "SyngoAI synthetic CT MESCAL Siemens brain pelvis", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "evidence", "field": "evidenceRigor E0", "severity": "low", "observation": "The record already self-documents (evidenceRigorNotes) a 2026-08-25 correction from a previously unsupported E1 down to E0 after confirming no PubMed-indexed publication names 'syngo.via RT Image Suite' directly. This is methodologically sound and transparent.", "suggestedFix": "No action; this is a model of good self-correction practice."},
+      {"role": "cross-check", "field": "MESCAL 'SyngoAI' naming", "severity": "medium", "observation": "MESCAL (Cusumano/Maspero 2026) tested a solution named 'SyngoAI (Siemens)', which is plausibly syngo.via RT Image Suite's synthetic-CT module, but the product name in the paper does not exactly match this inventory entry's name, and the keyPapers list for siemens-syngo-ct is currently empty (MESCAL is not attached here). This is an unresolved identity question: if 'SyngoAI' = this product, MESCAL evidence is missing from this record; if it is a distinct/future Siemens product, no action is needed.", "suggestedFix": "Obtain the MESCAL full text or correspond with Siemens to confirm whether 'SyngoAI' refers to syngo.via RT Image Suite's synthetic-CT functionality before adding or withholding the MESCAL citation here."}
+    ],
+    "candidates": [
+      {"doi": "10.1016/j.radonc.2026.111530", "title": "Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "attribution": "possible — pending confirmation that 'SyngoAI' = syngo.via RT Image Suite", "status": "unverified"}
+    ],
+    "limitations": "Full text of MESCAL was not accessible (publisher paywall); the 'SyngoAI' vs 'syngo.via RT Image Suite' naming equivalence could not be independently confirmed from public abstracts alone."
+  },
+  {
+    "id": "spectronic-mriplanner",
+    "queries": [
+      {"query": "MESCAL MRI Planner Spectronic brain pelvis synthetic CT benchmark", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "date": "2026-10-15"},
+      {"query": "MR-OPERA multicenter multivendor validation MRI-only prostate synthetic CT", "url": "https://doi.org/10.1016/j.ijrobp.2017.06.006", "date": "2026-10-15"},
+      {"query": "Spectronic Medical MRI Planner FDA clearance CE EUDAMED", "url": "https://ec.europa.eu/tools/eudamed/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "low", "observation": "MESCAL evaluated 'MRI Planner (Spectronic)' directly per the published abstract; attribution to this product is confirmed correct and anatomically scoped correctly (brain + pelvis).", "suggestedFix": "None."},
+      {"role": "evidence", "field": "evidenceRigor E3 / breadth", "severity": "low", "observation": "This product has by far the largest keyPapers list (16 entries spanning brain, H&N, pelvis/prostate) of all 12 products reviewed, consistent with MRI Planner being on the market longest among non-Philips competitors; the E3 rigor rating appears proportionate given the volume of independent multi-site literature (e.g., MR-OPERA, MR-PROTECT) but was not line-by-line re-verified in this pass.", "suggestedFix": "Recommend a dedicated deep-dive audit of this product's full citation list in a follow-up session given its size; not all titles/DOIs/PMIDs were independently re-confirmed here."}
+    ],
+    "candidates": [],
+    "limitations": "Given the large number of associated papers (16), only the MESCAL and MR-OPERA citations were independently spot-checked against public sources; the remaining 14 were not individually re-verified for title/DOI/PMID accuracy in this pass."
+  },
+  {
+    "id": "mvision-image-plus",
+    "queries": [
+      {"query": "MVision AI Image+ synthetic CT 1.5T MR-Linac clinical validation", "url": "https://doi.org/10.1002/acm2.70571", "date": "2026-10-15"},
+      {"query": "MVision Image+ synthetic CT prostate AI segmentation evaluation", "url": "https://doi.org/10.1002/acm2.70765", "date": "2026-10-15"},
+      {"query": "MVision AI Workspace+ CE mark class IIa certification Image+", "url": "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "regulatory", "field": "certification", "severity": "low", "observation": "Record lists certification as 'CE' only (no FDA), consistent with the MVision CE-mark-only press release (Workspace+ Class IIa under MDR 2017/745, Oct 2025) found in vendor search; no FDA 510(k) found for Image+ in this pass.", "suggestedFix": "None; consistent with current public vendor disclosures."},
+      {"role": "evidence", "field": "keyPapers", "severity": "low", "observation": "Both cited papers (acm2.70571, acm2.70765) are recent (2025-vintage ACMP journal DOIs) and were not independently retrieved in full text during this pass; titles appear plausible and product-specific (pelvic/abdominal MR-Linac validation and prostate AI segmentation + sCT).", "suggestedFix": "Follow-up: pull abstracts via PubMed/Europe PMC to confirm these DOIs resolve to papers that name MVision Image+ specifically (as opposed to a generic in-house GAN method), given the pattern of comparator-vs-subject conflation seen elsewhere in this dataset."}
+    ],
+    "candidates": [],
+    "limitations": "Could not fully verify the two Image+-specific DOIs against full text in this pass (not retrieved); regulatory status was verified against the vendor's own CE-mark announcement, not an EUDAMED registry lookup."
+  },
+  {
+    "id": "mr-box-synthetic",
+    "queries": [
+      {"query": "MESCAL MR Box Therapanacea brain pelvis synthetic CT", "url": "https://doi.org/10.1016/j.radonc.2026.111530", "date": "2026-10-15"},
+      {"query": "self-learning GAN pseudo-CT low field pelvic MRI multi-centric evaluation Frontiers Oncology", "url": "https://doi.org/10.3389/fonc.2023.1245054", "date": "2026-10-15"},
+      {"query": "Therapanacea MR-Box FDA CE clearance synthetic CT", "url": "https://www.accessdata.fda.gov/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "low", "observation": "MESCAL explicitly tested 'MR Box (Therapanacea)' per the published abstract; attribution to this product is correct and anatomically scoped correctly (brain + pelvis, matching MR-Box's anatomical coverage listed in this inventory).", "suggestedFix": "None."},
+      {"role": "identity", "field": "product vs AdaptBox relationship", "severity": "medium", "observation": "MR-Box (image-synthesis, brain/pelvis/abdomen) and AdaptBox (registration/adaptive, H&N/breast/thorax/pelvis) are both Therapanacea products sharing underlying GAN-based sCT technology per the vendor's public materials; the inventory does not clearly document whether they share the same underlying sCT algorithm/regulatory clearance or are fully independent devices, which matters for correctly scoping shared literature (e.g., the self-learning GAN CBCT paper DOI 10.3389/fonc.2026.1756153 cited under AdaptBox).", "suggestedFix": "Add an explicit technology-lineage note clarifying whether MR-Box and AdaptBox share a core sCT engine, to prevent future cross-attribution errors between the two Therapanacea products."}
+    ],
+    "candidates": [],
+    "limitations": "Full text of the multi-centric GAN pseudo-CT paper (10.3389/fonc.2023.1245054) was not retrieved in this pass; relied on title/DOI metadata only."
+  },
+  {
+    "id": "therapanacea-adaptbox",
+    "queries": [
+      {"query": "Therapanacea AdaptBox synthetic CT CBCT adaptive radiotherapy regulatory clearance", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf", "date": "2026-10-15"},
+      {"query": "AI-driven workflow daily dose reconstruction prostate cancer radiotherapy Cancers 2026", "url": "https://doi.org/10.3390/cancers18111826", "date": "2026-10-15"},
+      {"query": "self-learning GAN synthetic CT CBCT adaptive radiotherapy Frontiers Oncology 2026", "url": "https://doi.org/10.3389/fonc.2026.1756153", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "regulatory", "field": "certification", "severity": "medium", "observation": "FDA 510(k) search surfaced Therapanacea devices named 'ART-Plan' (K232479/K234068) and 'ART-Plan+' (K242822/K253091), product codes MUJ/QKB/LLZ — these trade names do not match 'AdaptBox' anywhere found in this pass. It is unclear whether AdaptBox is the commercial/marketing name for ART-Plan+ or a separate, not-yet-FDA-cleared product; the inventory's 'CE & FDA' certification claim for AdaptBox could not be independently confirmed against a 510(k) record bearing the 'AdaptBox' name.", "suggestedFix": "Confirm with Therapanacea or FDA correspondence file whether 'AdaptBox' is an alternate/marketing name for ART-Plan+ (K253091) before retaining the FDA-cleared certification claim verbatim; if confirmed, cite the specific 510(k) number in the record."},
+      {"role": "cross-check", "field": "keyPapers[doi=10.1016/j.radonc.2026.111530] (MESCAL)", "severity": "medium", "observation": "MESCAL tested four sCT solutions (MRI Planner, SyngoAI, MR Box, MRCAT) across brain/pelvis only — AdaptBox (a registration/adaptive-workflow product with H&N/breast/thorax/pelvis scope, not one of the four named MESCAL solutions) is not evidenced by MESCAL at all. Its presence as a keyPaper here is a likely misattribution analogous to the Head & Neck/MESCAL issue already confirmed.", "suggestedFix": "Remove the MESCAL keyPaper entry from therapanacea-adaptbox; MESCAL's tested 'MR Box' is the correct Therapanacea product for that citation, not AdaptBox."}
+    ],
+    "candidates": [],
+    "limitations": "Could not confirm the exact commercial relationship between 'AdaptBox' and the FDA-listed 'ART-Plan'/'ART-Plan+' trade names from public sources in this pass; this identity question should be resolved directly with the vendor or FDA 510(k) summary full text before any certification claims are relied upon."
+  },
+  {
+    "id": "pymedix-registration",
+    "queries": [
+      {"query": "PyMedix Autofuse deformable image registration radiotherapy CE FDA", "url": "https://fda.innolitics.com/device/K233572", "date": "2026-10-15"},
+      {"query": "Autofuse FDA 510k K233572 clinical evidence", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "evidence", "field": "evidenceRigor E0 / clinical evidence basis", "severity": "low", "observation": "FDA 510(k) K233572 summary (via Innolitics) states explicitly 'No clinical data. Bench testing only' for Autofuse — consistent with this product's E0 rigor rating and absence of keyPapers in the inventory. No peer-reviewed clinical publication naming Autofuse was found in this pass.", "suggestedFix": "None; E0 rating appears well supported. Recommend periodic re-search for emerging literature."},
+      {"role": "transparency", "field": "trainingData", "severity": "low", "observation": "Confirmed via vendor product page that Autofuse explicitly markets itself as NOT deep-learning-based ('machine perception', not deep learning) — this is a notable identity/technology distinction from most other products in this review (which use deep-learning sCT/registration), and should be reflected clearly so readers do not assume AI/DL techniques are used.", "suggestedFix": "Add an explicit note that Autofuse's registration algorithm is vendor-described as non-deep-learning ('machine perception') technology, distinguishing it from DL-based competitors in this category."}
+    ],
+    "candidates": [],
+    "limitations": "Did not review the full 510(k) summary PDF beyond the Innolitics-indexed excerpt; bench-testing-only characterization is based on a third-party aggregator's summary of the FDA submission, not the primary FDA PDF text itself."
+  },
+  {
+    "id": "therapanacea-smartfuse",
+    "queries": [
+      {"query": "Therapanacea SmartFuse automatic target volume segmentation offline adaptive head neck radiotherapy", "url": "https://doi.org/10.1002/acm2.70479", "date": "2026-10-15"},
+      {"query": "Therapanacea SmartFuse CE TGA registration deformable image registration", "url": "https://www.therapanacea.eu/", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "identity", "field": "name/category vs cited paper topic", "severity": "medium", "observation": "The sole keyPaper (DOI 10.1002/acm2.70479) is titled 'Automatic target volume segmentation for offline adaptive head-and-neck radiotherapy' — a segmentation-focused title, while SmartFuse is categorized here as a Registration product. It was not confirmed in this pass whether SmartFuse's registration function is a necessary/explicit component evaluated within that paper, or whether the paper primarily evaluates an auto-contouring component bundled in the same workflow.", "suggestedFix": "Obtain the full text or abstract of 10.1002/acm2.70479 to confirm it directly evaluates SmartFuse's image-registration functionality (not merely a co-located segmentation tool), and document the specific registration-relevant endpoints reported."},
+      {"role": "regulatory", "field": "certification 'CE & TGA'", "severity": "low", "observation": "TGA (Australian Therapeutic Goods Administration) clearance is comparatively unusual among the 12 products reviewed (most list CE/FDA only); this was not independently verified against the TGA public database in this pass.", "suggestedFix": "Verify the TGA listing via the Australian Register of Therapeutic Goods (ARTG) search and cite the ARTG entry number if confirmed."}
+    ],
+    "candidates": [],
+    "limitations": "TGA clearance claim and the registration-vs-segmentation scope of the single cited paper were not independently verified against primary regulatory/publisher sources in this pass."
+  },
+  {
+    "id": "mvision-adapt-plus",
+    "queries": [
+      {"query": "MVision AI Adapt+ deformable registration adaptive radiotherapy CE mark", "url": "https://mvision.ai/adapt/", "date": "2026-10-15"},
+      {"query": "MVision Workspace+ CE Class IIa certification October 2025", "url": "https://mvision.ai/mvision-ais-workspace-receives-ce-mark-class-iia-certification/", "date": "2026-10-15"},
+      {"query": "MVision Adapt+ peer-reviewed publication contour propagation", "url": "https://dlinrt.eu/product/mvision-adapt-plus", "date": "2026-10-15"}
+    ],
+    "findings": [
+      {"role": "evidence", "field": "evidenceRigor E0 / keyPapers absent", "severity": "low", "observation": "Confirmed no peer-reviewed publication specific to Adapt+ exists publicly as of this search; the DLinRT product page itself records 'evidence completeness check performed 2026-09-14 with no publication or abstract found,' consistent with the E0 rating and empty keyPapers list.", "suggestedFix": "None; transparent and consistent self-disclosure. Recommend re-check in future sweeps as Adapt+ is a newly split-out product (created 2026-09-13) with release date 2026-01-09."},
+      {"role": "regulatory", "field": "certification 'CE'", "severity": "low", "observation": "Confirmed via MVision's own press release that Workspace+ (the platform containing Adapt+) received CE Class IIa marking under MDR 2017/745 in October 2025 (CE 2797 notified body); consistent with the inventory's 'CE' certification field. No FDA clearance found or claimed.", "suggestedFix": "None."}
+    ],
+    "candidates": [],
+    "limitations": "Adapt+ is a very recently split-out product entry with no independent literature; findings rely entirely on vendor-published material (website, brochure, press release), which could not be cross-checked against an independent source in this pass."
+  }
+]
