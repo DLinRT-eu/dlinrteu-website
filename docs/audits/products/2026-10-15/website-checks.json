@@ -331,9 +331,9 @@
   },
   {
     "url": "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
-    "status": 200,
-    "finalUrl": "https://www.gehealthcare.com/en-us/products/magnetic-resonance-imaging/signa-mr-vision/effortless-imaging-ai-mri-solutions/air-recon-dl",
-    "title": "AIR Recon DL | GE HealthCare (United States)"
+    "status": 404,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/magnetic-resonance-imaging/applications/air-recon-dl",
+    "title": "404 | GE HealthCare (United States)"
   },
   {
     "url": "https://www.gehealthcare.com/products/computed-tomography/ct-technologies/truefidelity",

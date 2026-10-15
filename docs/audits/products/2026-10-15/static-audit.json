@@ -660,9 +660,7 @@
       "category": "Auto-Contouring",
       "pipeline": false,
       "sourceFiles": [
-        "src/data/products/auto-contouring/manteia.ts",
-        "src/data/products/platform/manteia-acculearning.ts",
-        "src/data/products/treatment-planning/manteia-mozi.ts"
+        "src/data/products/auto-contouring/manteia.ts"
       ],
       "score": {
         "rigor": "E1",
@@ -839,8 +837,7 @@
       "category": "Auto-Contouring",
       "pipeline": false,
       "sourceFiles": [
-        "src/data/products/auto-contouring/siemens.ts",
-        "src/data/products/image-synthesis/siemens.ts"
+        "src/data/products/auto-contouring/siemens.ts"
       ],
       "score": {
         "rigor": "E2",
@@ -1789,7 +1786,6 @@
       "category": "Image Synthesis",
       "pipeline": false,
       "sourceFiles": [
-        "src/data/products/auto-contouring/siemens.ts",
         "src/data/products/image-synthesis/siemens.ts"
       ],
       "score": {
@@ -2226,9 +2222,7 @@
       "category": "Platform",
       "pipeline": false,
       "sourceFiles": [
-        "src/data/products/auto-contouring/manteia.ts",
-        "src/data/products/platform/manteia-acculearning.ts",
-        "src/data/products/treatment-planning/manteia-mozi.ts"
+        "src/data/products/platform/manteia-acculearning.ts"
       ],
       "score": {
         "rigor": "E1",
@@ -2400,8 +2394,6 @@
       "category": "Treatment Planning",
       "pipeline": false,
       "sourceFiles": [
-        "src/data/products/auto-contouring/manteia.ts",
-        "src/data/products/platform/manteia-acculearning.ts",
         "src/data/products/treatment-planning/manteia-mozi.ts"
       ],
       "score": {
@@ -5151,6 +5143,14 @@
     },
     {
       "id": "ge-auto-segmentation",
+      "role": "Evidence",
+      "field": "keyPapers",
+      "severity": "warn",
+      "observation": "E1 claimed without scored attributable peer-reviewed papers",
+      "suggestedFix": "Verify source before editing"
+    },
+    {
+      "id": "ge-auto-segmentation",
       "role": "Identity",
       "field": "—",
       "severity": "info",
@@ -5184,14 +5184,6 @@
     {
       "id": "ge-auto-segmentation",
       "role": "Structures",
-      "field": "—",
-      "severity": "info",
-      "observation": "No static finding; external-source review still required",
-      "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "ge-auto-segmentation",
-      "role": "Evidence",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -5279,14 +5271,6 @@
     },
     {
       "id": "manteia-accucontour",
-      "role": "Cross-check",
-      "field": "id",
-      "severity": "warn",
-      "observation": "Multiple source definitions (may be unused or archived): src/data/products/auto-contouring/manteia.ts, src/data/products/platform/manteia-acculearning.ts, src/data/products/treatment-planning/manteia-mozi.ts",
-      "suggestedFix": "Verify source before editing"
-    },
-    {
-      "id": "manteia-accucontour",
       "role": "Evidence",
       "field": "keyPapers",
       "severity": "warn",
@@ -5295,14 +5279,6 @@
     },
     {
       "id": "manteia-accucontour",
-      "role": "Transparency",
-      "field": "structuresProvenance",
-      "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
-      "suggestedFix": "Verify source before editing"
-    },
-    {
-      "id": "manteia-accucontour",
       "role": "Identity",
       "field": "—",
       "severity": "info",
@@ -5342,12 +5318,20 @@
       "suggestedFix": "Complete source review"
     },
     {
-      "id": "mim-contour-protegeai",
+      "id": "manteia-accucontour",
       "role": "Transparency",
-      "field": "structuresProvenance",
-      "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
-      "suggestedFix": "Verify source before editing"
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "manteia-accucontour",
+      "role": "Cross-check",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
     },
     {
       "id": "mim-contour-protegeai",
@@ -5399,6 +5383,14 @@
     },
     {
       "id": "mim-contour-protegeai",
+      "role": "Transparency",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "mim-contour-protegeai",
       "role": "Cross-check",
       "field": "—",
       "severity": "info",
@@ -5468,14 +5460,6 @@
       "severity": "info",
       "observation": "No static finding; external-source review still required",
       "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "siemens-ai-rad-companion",
-      "role": "Cross-check",
-      "field": "id",
-      "severity": "warn",
-      "observation": "Multiple source definitions (may be unused or archived): src/data/products/auto-contouring/siemens.ts, src/data/products/image-synthesis/siemens.ts",
-      "suggestedFix": "Verify source before editing"
     },
     {
       "id": "siemens-ai-rad-companion",
@@ -5534,12 +5518,12 @@
       "suggestedFix": "Complete source review"
     },
     {
-      "id": "synaptiq-mediq-rt",
-      "role": "Transparency",
-      "field": "structuresProvenance",
-      "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
-      "suggestedFix": "Verify source before editing"
+      "id": "siemens-ai-rad-companion",
+      "role": "Cross-check",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
     },
     {
       "id": "synaptiq-mediq-rt",
@@ -5584,6 +5568,14 @@
     {
       "id": "synaptiq-mediq-rt",
       "role": "Structures",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "synaptiq-mediq-rt",
+      "role": "Transparency",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -5855,6 +5847,14 @@
     },
     {
       "id": "taimedimg-deepmets",
+      "role": "Structures",
+      "field": "supportedStructures",
+      "severity": "warn",
+      "observation": "1 entries lack Region: Structure Name form",
+      "suggestedFix": "Verify source before editing"
+    },
+    {
+      "id": "taimedimg-deepmets",
       "role": "Identity",
       "field": "—",
       "severity": "info",
@@ -5880,14 +5880,6 @@
     {
       "id": "taimedimg-deepmets",
       "role": "Technical",
-      "field": "—",
-      "severity": "info",
-      "observation": "No static finding; external-source review still required",
-      "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "taimedimg-deepmets",
-      "role": "Structures",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -6114,7 +6106,7 @@
       "role": "Transparency",
       "field": "trainingData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -6178,7 +6170,7 @@
       "role": "Transparency",
       "field": "trainingData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -6250,7 +6242,7 @@
       "role": "Transparency",
       "field": "trainingData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -6433,8 +6425,8 @@
       "id": "aitewan-deepbt-detector-plus",
       "role": "Cross-check",
       "field": "company",
-      "severity": "error",
-      "observation": "Company not in active registry: Aitewan Biomedical Technology, Inc.",
+      "severity": "warn",
+      "observation": "Company label does not exactly match registry; check legal-name aliases before calling it missing: Aitewan Biomedical Technology, Inc.",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -6666,7 +6658,7 @@
       "role": "Transparency",
       "field": "evaluationData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -6775,14 +6767,6 @@
     },
     {
       "id": "siemens-syngo-ct",
-      "role": "Cross-check",
-      "field": "id",
-      "severity": "warn",
-      "observation": "Multiple source definitions (may be unused or archived): src/data/products/auto-contouring/siemens.ts, src/data/products/image-synthesis/siemens.ts",
-      "suggestedFix": "Verify source before editing"
-    },
-    {
-      "id": "siemens-syngo-ct",
       "role": "Evidence",
       "field": "keyPapers",
       "severity": "info",
@@ -6832,6 +6816,14 @@
     {
       "id": "siemens-syngo-ct",
       "role": "Transparency",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "siemens-syngo-ct",
+      "role": "Cross-check",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -7292,6 +7284,14 @@
       "severity": "info",
       "observation": "No scored attributable publications recorded; literature search required",
       "suggestedFix": "Keep evidence uncertainty explicit"
+    },
+    {
+      "id": "mvision-ai-workspace-plus",
+      "role": "Evidence",
+      "field": "keyPapers",
+      "severity": "warn",
+      "observation": "E1 claimed without scored attributable peer-reviewed papers",
+      "suggestedFix": "Verify source before editing"
     },
     {
       "id": "mvision-ai-workspace-plus",
@@ -7423,14 +7423,6 @@
     },
     {
       "id": "manteia-acculearning",
-      "role": "Cross-check",
-      "field": "id",
-      "severity": "warn",
-      "observation": "Multiple source definitions (may be unused or archived): src/data/products/auto-contouring/manteia.ts, src/data/products/platform/manteia-acculearning.ts, src/data/products/treatment-planning/manteia-mozi.ts",
-      "suggestedFix": "Verify source before editing"
-    },
-    {
-      "id": "manteia-acculearning",
       "role": "Evidence",
       "field": "keyPapers",
       "severity": "warn",
@@ -7480,6 +7472,14 @@
     {
       "id": "manteia-acculearning",
       "role": "Transparency",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "manteia-acculearning",
+      "role": "Cross-check",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -7559,6 +7559,14 @@
     },
     {
       "id": "therapanacea-art-plan",
+      "role": "Identity",
+      "field": "secondaryCategories",
+      "severity": "warn",
+      "observation": "Secondary category list violates documented constraints",
+      "suggestedFix": "Verify source before editing"
+    },
+    {
+      "id": "therapanacea-art-plan",
       "role": "Evidence",
       "field": "keyPapers",
       "severity": "info",
@@ -7575,14 +7583,6 @@
     },
     {
       "id": "therapanacea-art-plan",
-      "role": "Identity",
-      "field": "—",
-      "severity": "info",
-      "observation": "No static finding; external-source review still required",
-      "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "therapanacea-art-plan",
       "role": "Inclusion",
       "field": "—",
       "severity": "info",
@@ -7692,14 +7692,6 @@
       "severity": "info",
       "observation": "No static finding; external-source review still required",
       "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "manteia-mozi",
-      "role": "Cross-check",
-      "field": "id",
-      "severity": "warn",
-      "observation": "Multiple source definitions (may be unused or archived): src/data/products/auto-contouring/manteia.ts, src/data/products/platform/manteia-acculearning.ts, src/data/products/treatment-planning/manteia-mozi.ts",
-      "suggestedFix": "Verify source before editing"
     },
     {
       "id": "manteia-mozi",
@@ -7760,6 +7752,14 @@
     {
       "id": "manteia-mozi",
       "role": "Transparency",
+      "field": "—",
+      "severity": "info",
+      "observation": "No static finding; external-source review still required",
+      "suggestedFix": "Complete source review"
+    },
+    {
+      "id": "manteia-mozi",
+      "role": "Cross-check",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
@@ -8153,8 +8153,8 @@
       "id": "informai-radoncai",
       "role": "Cross-check",
       "field": "company",
-      "severity": "error",
-      "observation": "Company not in active registry: InformAI, Inc.",
+      "severity": "warn",
+      "observation": "Company label does not exactly match registry; check legal-name aliases before calling it missing: InformAI, Inc.",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -8217,8 +8217,8 @@
       "id": "airato-ratoai",
       "role": "Cross-check",
       "field": "company",
-      "severity": "error",
-      "observation": "Company not in active registry: AiRato, Inc.",
+      "severity": "warn",
+      "observation": "Company label does not exactly match registry; check legal-name aliases before calling it missing: AiRato, Inc.",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -9159,6 +9159,14 @@
     },
     {
       "id": "elekta-iris",
+      "role": "Evidence",
+      "field": "keyPapers",
+      "severity": "warn",
+      "observation": "E1 claimed without scored attributable peer-reviewed papers",
+      "suggestedFix": "Verify source before editing"
+    },
+    {
+      "id": "elekta-iris",
       "role": "Identity",
       "field": "—",
       "severity": "info",
@@ -10114,7 +10122,7 @@
       "role": "Transparency",
       "field": "trainingData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -10122,7 +10130,7 @@
       "role": "Transparency",
       "field": "evaluationData",
       "severity": "warn",
-      "observation": "Disclosure lacks source label or URL",
+      "observation": "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL",
       "suggestedFix": "Verify source before editing"
     },
     {
@@ -10239,6 +10247,14 @@
     },
     {
       "id": "philips-precise-position",
+      "role": "Technical",
+      "field": "modality",
+      "severity": "warn",
+      "observation": "Modality should be an array",
+      "suggestedFix": "Verify source before editing"
+    },
+    {
+      "id": "philips-precise-position",
       "role": "Evidence",
       "field": "keyPapers",
       "severity": "info",
@@ -10264,14 +10280,6 @@
     {
       "id": "philips-precise-position",
       "role": "Regulatory",
-      "field": "—",
-      "severity": "info",
-      "observation": "No static finding; external-source review still required",
-      "suggestedFix": "Complete source review"
-    },
-    {
-      "id": "philips-precise-position",
-      "role": "Technical",
       "field": "—",
       "severity": "info",
       "observation": "No static finding; external-source review still required",
