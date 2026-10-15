@@ -165,7 +165,7 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
       "Pelvis: Body Outline"
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L4",
     evidenceRigorNotes: "Aggregate across modules. Image Synthesis (MRCAT): E2 — independent peer-reviewed dosimetric validation studies directly on MRCAT prostate (Tyagi 2017 DOI aa5452, Kemppainen 2017, Maspero 2017 DOI aa4fe7 photon, Maspero 2017 DOI aa9677 proton). MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) included as indirect-comparative community benchmark. Persson 2017 MR-OPERA removed 2026-06-15 — it validates Spectronic MRiPlanner, not Philips MRCAT. Auto-Contouring: E0 — no module-specific peer-reviewed publications. See categoryEvidence for per-module detail. Christiansen 2017 removed 2026-08-25 — the cited DOI resolves to an unrelated paper and no Christiansen MRCAT publication exists in Europe PMC.",
     clinicalImpactNotes: "Aggregate. MRCAT enables MR-only prostate workflows in clinical use at several centers (I1). Auto-Contouring component has no published clinical impact data (I0). 2026-08-25 Wave 5: clinical impact raised I1 → I2, set by Tyagi et al. Radiat Oncol 2017 (doi 10.1186/s13014-017-0854-4), which reports a routine MR-only prostate simulation and planning workflow in 48 patients with process-level endpoints.",
     adoptionReadiness: "R3",

@@ -171,7 +171,8 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E2",
     evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. 2026-08-25 Wave 5: E2/I1 retained — E2 set by Prunaretty et al. 2023 and the MESCAL benchmark. Open question: confirm with the vendor whether the low-field pelvic MR model of Prunaretty 2023 is marketed as MR-Box or as part of AdaptBox; move the paper if it belongs to AdaptBox.",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "CE-marked Class IIb and FDA 510(k) cleared commercial product. High implementation safeguards are necessary: deployment requires extensive local commissioning, MR sequence compatibility checks, MR scanner QA program, synthetic CT dose validation, and manual expert verification of all synthetic scans and structures before clinical use."

@@ -1310,7 +1310,8 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Direct sales", "Integrated cloud contouring service", "Includes Limbus AI (acquisition announced April 30, 2024)"]
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Independent multi-institutional evaluation (Goddard 2024, 5 facilities) plus Doolan 2023 and Fan 2025 support E2.",
     clinicalImpactNotes: "I2: Peer-reviewed studies support contour quality, physician acceptability, and workflow time savings, but also show anatomy/guideline-dependent failure modes requiring expert review and local QA. No prospective evidence of improved tumor control, toxicity, or survival was identified.",
     adoptionReadiness: "R3",

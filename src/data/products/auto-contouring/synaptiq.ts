@@ -151,7 +151,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
   certification: "CE",
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+  legacyClinicalImpact: "I2",
   diseaseTargeted: [
     "Brain tumours (glioblastoma, astrocytoma, etc.)",
     "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",

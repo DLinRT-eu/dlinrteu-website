@@ -225,7 +225,8 @@ export const Contour: ProductDetails = {
   certification: "CE & FDA",
   evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+  legacyClinicalImpact: "I2",
   evaluationData: {
     source: "Pang et al. NPJ Digit Med 2025 (DOI: 10.1038/s41746-025-01624-z)",
     results: "DSC 0.92-0.99 for gastric MALT lymphoma segmentation.",

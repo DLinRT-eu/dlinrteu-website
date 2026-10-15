@@ -577,7 +577,8 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
       notes: "392 distinct CT ROI names are listed here out of 397 in the vendor file; five vendor abbreviations (CIN, EIN, IIN, ON, SN) could not be resolved to an anatomical structure and are omitted pending manufacturer clarification. Region grouping was assigned by DLinRT from the ROI names; the vendor file lists TG-263 ROI names without a body-site column. MRI ROI names are listed separately under the \"MRI\" prefix; distinct-name counting collapses names shared with the CT models."
     },
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Wang 2022 (Front Oncol) confirmed; additional independent studies support E2 (conditional on product-name verification in full text). 2026-09-23 manufacturer material review: Li et al., Radiother Oncol 2022 (doi 10.1016/j.radonc.2022.11.004, DOI resolved via Crossref) added as a scored paper — six abdominal/pelvic patients on an MR-linac, Manteia co-authored, so rigor stays E1.",
     clinicalImpactNotes: "Evidence supports contouring efficiency and geometric agreement for selected OARs, with clinically necessary review/editing; impact is workflow/contouring support rather than demonstrated patient outcome improvement. Raised to I2 on 2026-09-23: Li et al. 2022 reports measured workflow endpoints (contouring 73.4 ± 6.5 s vs 12–22 min manual; adaptive session 1650 ± 274 s vs 3251.8 ± 447 s) in a six-patient MRgART series. No patient-outcome endpoint is demonstrated.",
     adoptionReadiness: "R3",
