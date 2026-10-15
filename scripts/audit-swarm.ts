@@ -28,7 +28,7 @@ const ALLOWED_CATEGORIES = new Set([
   "Performance Monitor", "Platform", "Reconstruction", "Registration", "Tracking", "Treatment Planning",
 ]);
 const E_CODES = new Set(["E0", "E1", "E2", "E3"]);
-const I_CODES = new Set(["I0", "I1", "I2", "I3", "I4", "I5"]);
+const I_CODES = new Set(["L1t", "L1c", "L2", "L3", "L4", "L5", "L6", "I0", "I1", "I2", "I3", "I4", "I5"]); // I* = legacy, provisional
 const R_CODES = new Set(["R0", "R1", "R2", "R3", "R4", "R5"]);
 const CE_STATUS = new Set(["cleared", "under_review", "not_applicable", "withdrawn"]);
 const FDA_STATUS = new Set(["510k_cleared", "de_novo", "pma_approved", "not_approved", "pending", "not_applicable", "withdrawn"]);
@@ -141,7 +141,7 @@ for (const p of allProducts) {
   const ci = (p as any).clinicalImpact;
   const ar = (p as any).adoptionReadiness;
   if (er && !E_CODES.has(er)) add(id, "Evidence", "evidenceRigor", "error", `Invalid E "${er}"`, "Use E0-E3");
-  if (ci && !I_CODES.has(ci)) add(id, "Evidence", "clinicalImpact", "error", `Invalid I "${ci}"`, "Use L1t–L6");
+  if (ci && !I_CODES.has(ci)) add(id, "Evidence", "clinicalImpact", "error", `Invalid level of efficacy "${ci}"`, "Use L1t–L6");
   if (ar && !R_CODES.has(ar)) add(id, "Evidence", "adoptionReadiness", "error", `Invalid R "${ar}"`, "Use R0-R5");
   if (!er) add(id, "Evidence", "evidenceRigor", "warn", "evidenceRigor unset", "Score E0-E3");
   if (!ci) add(id, "Evidence", "clinicalImpact", "warn", "clinicalImpact unset", "Score L1t–L6");
