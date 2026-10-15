@@ -1,5 +1,10 @@
 # Roadmap
 
+## Discontinued products
+- [ ] Central lifecycle selectors, sourced market status and GE unconfirmed report.
+- [ ] Historical hub, vendor groups, notices, exports and current-market counts.
+- [ ] Documentation, focused tests and browser verification.
+
 ## Full product review — 2026-10-15
 - [x] Baseline: 98 live entries (91 non-Pipeline, seven Pipeline), 265 distinct cited identifiers retrieved; existing validator flags three aggregate mismatches and 72 warnings.
 - [x] Auto-Contouring: targeted source checks and eight-role report; identified incorrect citation/product attribution and study-design descriptions, not silently applied.

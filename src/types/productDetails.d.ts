@@ -118,6 +118,17 @@ export interface ProductDetails extends Product {
     intendedUseStatement?: string;
   };
   market?: {
+    status?: {
+      verification: 'confirmed' | 'unconfirmed';
+      event: 'end-of-sales' | 'end-of-support' | 'availability-review';
+      reason: string;
+      effectiveDate?: string;
+      region?: string;
+      source: string;
+      sourceUrl?: string;
+      sourceAccess: 'public' | 'vendor-provided' | 'restricted';
+      sourceRetrievedOn: string;
+    };
     onMarketSince?: string;
     distributionChannels?: string[];
     availability?: string;
