@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { ALL_PRODUCTS } from "../src/data";
 import { computeProductEvidenceScore } from "../src/utils/evidenceScoring";
 import { isPipelineProduct } from "../src/utils/productFilters";
+import { isExternalSearch, normalizeAuditRole, normalizeAuditSeverity } from "./productAuditNormalization";
 
 interface Finding { id: string; role: string; field: string; severity: string; observation: string; suggestedFix: string }
 interface Query { query: string; url?: string; date?: string }
@@ -33,7 +34,10 @@ const proposals: Record<string, Proposal> = {
 
 const findings: Finding[] = baseline.findings.filter(f => f.observation !== "No static finding; external-source review still required");
 const add = (id: string, role: string, field: string, severity: string, observation: string, suggestedFix: string) => findings.push({ id, role, field, severity, observation, suggestedFix });
-for (const item of research) for (const finding of item.findings ?? []) findings.push({ ...finding, id: item.id });
+for (const item of research) for (const finding of item.findings ?? []) {
+  if (!ALL_PRODUCTS.some(product => product.id === item.id)) continue;
+  findings.push({ ...finding, id: item.id, role: normalizeAuditRole(finding.role, finding.field), severity: normalizeAuditSeverity(finding.severity) });
+}
 for (const p of ALL_PRODUCTS) {
   const website = websites.find(check => check.url === (p.productUrl ?? p.website));
   if (website?.error || (website?.status ?? 200) >= 400) add(p.id, "Identity", "productUrl", "warn", `Public retrieval unsuccessful (${website?.status ?? website?.error}); server blocking and network failures are not proof of a broken URL.`, "Check in a normal browser/official navigation before changing the URL");
@@ -44,7 +48,7 @@ for (const p of ALL_PRODUCTS) {
     if (result?.error) add(p.id, "Evidence", `keyPapers:${key}`, "warn", `Public-source retrieval failed: ${result.error}`, "Keep provisional until a source is retrieved");
   }
   if (proposals[p.id]) add(p.id, "Evidence", "rescoring", "warn", proposals[p.id].rationale, "Separate correction pass; reviewer-check source attribution and score notes first");
-  const searches = research.filter(item => item.id === p.id).flatMap(item => item.queries ?? []);
+  const searches = research.filter(item => item.id === p.id).flatMap(item => item.queries ?? []).filter(isExternalSearch);
   if (!searches.length) add(p.id, "Evidence", "fresh-literature-search", "warn", "No durable product-specific fresh-search log was available to the compiler; existing DOI/PMID metadata retrieval is complete but does not establish literature-search coverage.", "Run or recover a targeted vendor and literature search before marking the full source review complete");
   for (const role of roles) {
     if (findings.some(f => f.id === p.id && f.role === role)) continue;
@@ -60,7 +64,7 @@ const cell = (value: unknown): string => `"${String(value ?? "").replace(/"/g, '
 const csv = (rows: unknown[][]): string => rows.map(row => row.map(cell).join(",")).join("\r\n") + "\r\n";
 const md = (value: unknown): string => String(value ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
 const counts = Object.fromEntries(["error", "warn", "info"].map(severity => [severity, findings.filter(f => f.severity === severity).length]));
-const logIds = new Set(research.filter(item => item.queries?.length).map(item => item.id));
+const logIds = new Set(research.filter(item => item.queries?.some(isExternalSearch) && ALL_PRODUCTS.some(product => product.id === item.id)).map(item => item.id));
 const report: string[] = [
   `# Product Audit Report — ${baseline.date}`,
   "",
