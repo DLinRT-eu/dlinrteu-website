@@ -14,6 +14,7 @@ import {
 } from "@/utils/productFilters";
 import { transformTaskData, transformLocationData, transformModalityData, transformStructureData, transformStructureTypeData } from "@/utils/chartDataTransformation";
 import { resolveProductId } from '@/utils/productAliases';
+import { isDiscontinuedProduct } from '@/utils/productLifecycle';
 
 /**
  * Helper function to check if a product matches a task/category
@@ -84,7 +85,7 @@ class DataService {
     // Return all products with regulatory approval (excludes pipeline products)
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     return this.dedupeById(
-      productList.filter(product => hasRegulatoryApproval(product) && !isPipelineProduct(product))
+      productList.filter(product => hasRegulatoryApproval(product) && !isPipelineProduct(product) && !isDiscontinuedProduct(product))
     );
   }
 
@@ -93,7 +94,18 @@ class DataService {
    */
   getPipelineProducts(): ProductDetails[] {
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
-    return this.dedupeById(productList.filter(product => isPipelineProduct(product)));
+    return this.dedupeById(productList.filter(product => isPipelineProduct(product) && !isDiscontinuedProduct(product)));
+  }
+
+  getDiscontinuedProducts(): ProductDetails[] {
+    const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
+    return this.dedupeById(productList.filter(isDiscontinuedProduct));
+  }
+
+  getDiscontinuedProductsByCompany(companyId: string): ProductDetails[] {
+    const company = this.getCompanyById(companyId);
+    if (!company) return [];
+    return this.getDiscontinuedProducts().filter(p => company.productIds.includes(p.id));
   }
 
   /**
@@ -115,13 +127,13 @@ class DataService {
     
     // Allow finding both certified and pipeline products by ID
     return productList.find(product => product.id === actualId && 
-      (hasRegulatoryApproval(product) || isPipelineProduct(product)));
+      (hasRegulatoryApproval(product) || isPipelineProduct(product) || isDiscontinuedProduct(product)));
   }
 
   getProductsByCategory(category: string): ProductDetails[] {
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     return productList.filter(product => 
-      matchesTask(product, category) && hasRegulatoryApproval(product)
+      matchesTask(product, category) && hasRegulatoryApproval(product) && !isDiscontinuedProduct(product)
     );
   }
 
@@ -131,7 +143,7 @@ class DataService {
     
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     return productList.filter(product => 
-      company.productIds.includes(product.id || '') && hasRegulatoryApproval(product)
+      company.productIds.includes(product.id || '') && hasRegulatoryApproval(product) && !isDiscontinuedProduct(product) && !isPipelineProduct(product)
     );
   }
 
@@ -144,6 +156,7 @@ class DataService {
     );
     
     return productList.filter((product: ProductDetails) => {
+      if (isDiscontinuedProduct(product)) return false;
       const productIsPipeline = isPipelineProduct(product);
       
       // If Pipeline filter is selected, include pipeline products
@@ -243,7 +256,7 @@ class DataService {
       ...company,
       products: ALL_PRODUCTS.filter(product => 
         company.productIds.includes(product.id || '') && 
-        hasRegulatoryApproval(product)
+        hasRegulatoryApproval(product) && !isDiscontinuedProduct(product) && !isPipelineProduct(product)
       )
     })) as CompanyDetails[];
   }

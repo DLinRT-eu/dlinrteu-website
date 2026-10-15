@@ -10,6 +10,7 @@ import { getKeyFeatures, getLogoInfo } from "@/lib/utils";
 import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
 import { isPipelineProduct } from "@/utils/productFilters";
 import { PipelineBadge } from "@/components/PipelineBadge";
+import { isDiscontinuedProduct } from '@/utils/productLifecycle';
 
 interface UnifiedProductCardProps {
   product: ProductDetails;
@@ -70,6 +71,7 @@ const UnifiedProductCard = ({
   };
 
   const renderCertificationBadge = () => {
+    if (isDiscontinuedProduct(product)) return <Badge variant="outline">Discontinued · historical</Badge>;
     // Check for pipeline products first
     if (isPipelineProduct(product)) {
       return <PipelineBadge />;
