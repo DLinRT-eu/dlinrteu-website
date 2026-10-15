@@ -38,3 +38,7 @@ Read-only inspection found 17 review records, two drafts, five revision-date rec
 No database rows were changed or deleted. Historical review and draft screens/export lookups retain original IDs and original module scope through `getProductForStoredRecord`; public URLs redirect to the new application. Historical timestamps and review outcomes remain unchanged. New catalogue selections use the three current application IDs. Authenticated end-to-end verification is unavailable with this externally managed Supabase connection; public pages and function tabs are browser-checked separately.
 
 Educational catalogue information is not a claim that these functions are clinically validated or suitable for a particular patient.
+
+## Verification
+
+Twenty-one focused regression tests pass, including seven application-consolidation tests. The latest preview build is successful. Public browser checks confirmed former and pipeline redirects, all three company cards, an Adaptive card click, SmartFuse name-history search, MR-specific evidence tabs and the narrow-screen function selector; no browser page errors were recorded. Existing repository lint failures remain outside this maintenance scope. Authenticated review/draft flows were not browser-verified because this external Supabase connection has no managed test session.

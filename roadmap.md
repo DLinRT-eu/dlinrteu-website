@@ -16,6 +16,6 @@
 - [x] Re-score every paper against Levels of Efficacy, one category per wave (296 papers): Auto-Contouring (147), Image Synthesis (52), Image Enhancement (39), Reconstruction (26), Treatment Planning (18), Tracking (12), Registration (1), Platform (1). Each wave: report → user review → apply. (done 2026-10-15; reviewer check pending)
 
 ## TheraPanacea consolidation — 2026-10-15
-- [ ] Create three ART-Plan applications with function-scoped evidence and naming history.
-- [ ] Preserve old URLs and inspect/remap stored product references safely.
-- [ ] Update catalogue links, documentation and tests; browser-verify pages.
+- [x] Create three ART-Plan applications with function-scoped evidence and naming history.
+- [x] Preserve old URLs and inspect stored references; keep original database IDs to avoid review collisions.
+- [x] Update catalogue links, documentation and tests; 21 focused tests pass, latest build OK, public redirects/function tabs/former-name search/company card and narrow-screen layout browser-verified. Authenticated checks unavailable for externally managed Supabase; existing repository lint errors remain outside this scope.
