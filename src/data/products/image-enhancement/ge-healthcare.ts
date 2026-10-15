@@ -4,11 +4,11 @@ export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-precision-dl",
     keyPapers: [
-      {"doi":"10.1007/s00259-022-05824-7","title":"Deep learning-based time-of-flight (ToF) image enhancement of non-ToF PET scans","authors":"Mehranian A et al.","journal":"Eur J Nucl Med Mol Imaging","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-led foundational algorithm paper.","vendorIndependent":false},
-      {"doi":"10.1007/s00259-025-07119-z","title":"Deep learning-based time-of-flight enhancement of non-ToF PET scans for different radiotracers","authors":"Mehranian A et al.","journal":"Eur J Nucl Med Mol Imaging","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Vendor-led but 11-site multicentre cohort extending validation beyond FDG.","vendorIndependent":false,"multiCenter":true},
-      {"doi":"10.1186/s40658-025-00742-7","title":"Effects of a deep learning-based image quality enhancement method on a digital-BGO PET/CT system for 18F-FDG whole-body examination","authors":"Miwa K et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Vendor-independent external validation combining phantom and 30 clinical scans.","vendorIndependent":true,"externalValidation":true},
-      {"doi":"10.1186/s40658-024-00688-2","title":"Assessing the deep learning based image quality enhancements for the BGO based GE Omni Legend PET/CT","authors":"Dadgar M et al.","journal":"EJNMMI Phys","year":"2024","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent NEMA phantom study.","vendorIndependent":true},
-      {"doi":"10.1186/s40658-025-00814-8","title":"Deep learning-enhanced digital-BGO versus ToF PET/CT: comparative assessment of detection, quantitation, and overall image quality","authors":"Maronnier Q et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Academic-led 30-patient comparison with detection endpoints supporting scanner-level substitution."}
+      {"doi":"10.1007/s00259-022-05824-7","title":"Deep learning-based time-of-flight (ToF) image enhancement of non-ToF PET scans","authors":"Mehranian A et al.","journal":"Eur J Nucl Med Mol Imaging","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-led foundational algorithm paper.","vendorIndependent":false},
+      {"doi":"10.1007/s00259-025-07119-z","title":"Deep learning-based time-of-flight enhancement of non-ToF PET scans for different radiotracers","authors":"Mehranian A et al.","journal":"Eur J Nucl Med Mol Imaging","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-led but 11-site multicentre cohort extending validation beyond FDG.","vendorIndependent":false,"multiCenter":true},
+      {"doi":"10.1186/s40658-025-00742-7","title":"Effects of a deep learning-based image quality enhancement method on a digital-BGO PET/CT system for 18F-FDG whole-body examination","authors":"Miwa K et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent external validation combining phantom and 30 clinical scans.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.1186/s40658-024-00688-2","title":"Assessing the deep learning based image quality enhancements for the BGO based GE Omni Legend PET/CT","authors":"Dadgar M et al.","journal":"EJNMMI Phys","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent NEMA phantom study.","vendorIndependent":true},
+      {"doi":"10.1186/s40658-025-00814-8","title":"Deep learning-enhanced digital-BGO versus ToF PET/CT: comparative assessment of detection, quantitation, and overall image quality","authors":"Maronnier Q et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Academic-led 30-patient comparison with detection endpoints supporting scanner-level substitution."}
     ],
     trainingData: {
         source: "FDA 510(k) database",
@@ -112,7 +112,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       "Tight vendor integration, can only be used with specific GE scanners",
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Five peer-reviewed publications identified, three vendor-independent (Miwa 2025 Japan, Dadgar 2024 Belgium, Maronnier 2025 France) constituting external validation across three countries, plus a vendor-led 11-site multi-tracer training/validation cohort (Mehranian 2025). Caveat: each individual clinical validation of the Omni Legend/BGO product is single-center",
     clinicalImpactNotes: "Workflow/diagnostic-accuracy improvement (F&T Level 2): contrast recovery, contrast-to-noise ratio, lesion detectability and quantitative accuracy (SUV) consistently reported across studies. No identified evidence of change in treatment management (I3) or patient outcomes (I4).",
     adoptionReadiness: "R3",
@@ -129,8 +130,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-air-recon-dl-enhancement",
     keyPapers: [
-      {"doi":"10.1007/s11547-022-01539-9","title":"Artificial intelligence based image quality enhancement in liver MRI: a quantitative and qualitative evaluation","authors":"Zerunian M et al.","journal":"Radiol Med","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent single-centre image-quality evaluation.","vendorIndependent":true},
-      {"doi":"10.1093/psyrad/kkaf036","title":"Impact of AIR Recon DL on MRI-based quantitative brain structure measurements","authors":"Hu N et al.","journal":"Psychoradiology","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Independent quantitative-accuracy study of volumetric measurements.","vendorIndependent":true}
+      {"doi":"10.1007/s11547-022-01539-9","title":"Artificial intelligence based image quality enhancement in liver MRI: a quantitative and qualitative evaluation","authors":"Zerunian M et al.","journal":"Radiol Med","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent single-centre image-quality evaluation.","vendorIndependent":true},
+      {"doi":"10.1093/psyrad/kkaf036","title":"Impact of AIR Recon DL on MRI-based quantitative brain structure measurements","authors":"Hu N et al.","journal":"Psychoradiology","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent quantitative-accuracy study of volumetric measurements.","vendorIndependent":true}
     ],
     trainingData: {
         disclosureLevel: "minimal",
@@ -199,7 +200,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
 
 },
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes: "Three FDA 510(k) clearances (K193282, K213717, K252379) plus two independent peer-reviewed studies added on 2026-06-16: (1) Zerunian M et al. La Radiologia Medica 2022 — quantitative/qualitative image quality enhancement in liver MRI on GE SIGNA with AIR Recon DL (full text confirms AIR Recon DL, GE Healthcare, SIGNA — verified 2026-06-16); (2) Hu N et al. Psychoradiology 2025;6:kkaf036 — impact of AIR Recon DL on quantitative brain-structure measurements. A previously listed Lee et al. JMRI 2022 citation (doi:10.1002/jmri.28239) had been removed 2026-06-15 because that DOI resolves to an unrelated APT-CEST glioma study (Wamelink et al.) — confirmed and remains removed. Lowered to E1 in the 2026-08-25 per-paper sweep: both direct studies (Zerunian 2022, Hu 2025) are independent but single-centre image-quality/measurement evaluations.",
     clinicalImpactNotes: "Independent evidence demonstrates improved image quality (Zerunian 2022) and preserved quantitative measurement validity (Hu 2025), supporting workflow improvement through enhanced MR image quality and scan acceleration potential. Lowered to I1 in the 2026-08-25 sweep: endpoints are image quality and quantitative measurement validity, not workflow or diagnostic-accuracy outcomes.",
     adoptionReadiness: "R3",
@@ -210,7 +212,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Three FDA clearances (K193282, K213717, K252379) and independent peer-reviewed studies on liver MRI (Zerunian Radiol Med 2022) and brain volumetrics (Hu Psychoradiology 2025).",
-    lastUpdated: "2026-06-16",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-06-16",
     source: "FDA 510(k) database and company website; peer-reviewed literature (Zerunian Radiol Med 2022, Hu Psychoradiology 2025 — verified via Crossref 2026-06-16)",
     evidence: [

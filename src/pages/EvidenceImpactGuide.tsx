@@ -103,7 +103,7 @@ const EvidenceImpactGuide = () => {
                 </h4>
                 <p className="text-sm text-muted-foreground">
                   A device claimed to save lives but with no publications yet. On a single scale this looks
-                  "Level 0" despite having <em>high potential clinical impact</em>.
+                  "Level 0" despite a <em>high potential efficacy level</em>.
                 </p>
               </div>
               <div className="p-4 bg-background rounded-lg border">

@@ -95,12 +95,12 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Optional TheraPanacea Art-Plan interface for extracranial OAR and lymph-node segmentation"
   ],
   keyPapers: [
-    {"doi":"10.1007/s00066-019-01463-4","title":"Automatic image segmentation based on synthetic tissue model for delineating organs at risk in spinal metastasis treatment planning","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints.","vendorIndependent":true},
-    {"doi":"10.3389/fonc.2022.842579","title":"Clinical Evaluation of an Auto-Segmentation Tool for Spine SBRT Treatment","authors":"Chen Y et al.","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre segmentation accuracy evaluation.","vendorIndependent":true},
-    {"doi":"10.3389/fonc.2022.827195","title":"Evaluation of a Dedicated Software “Elements™ Spine SRS, Brainlab®” for Target Volume Definition in the Treatment of Spinal Bone Metastases With Stereotactic Body Radiotherapy","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E2","clinicalImpact":"I1","rationale":"Multi-site auto-segmentation evaluation with geometric endpoints.","multiCenter":true,"externalValidation":true}
+    {"doi":"10.1007/s00066-019-01463-4","title":"Automatic image segmentation based on synthetic tissue model for delineating organs at risk in spinal metastasis treatment planning","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical validation with geometric endpoints.","vendorIndependent":true},
+    {"doi":"10.3389/fonc.2022.842579","title":"Clinical Evaluation of an Auto-Segmentation Tool for Spine SBRT Treatment","authors":"Chen Y et al.","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre segmentation accuracy evaluation.","vendorIndependent":true},
+    {"doi":"10.3389/fonc.2022.827195","title":"Evaluation of a Dedicated Software “Elements™ Spine SRS, Brainlab®” for Target Volume Definition in the Treatment of Spinal Bone Metastases With Stereotactic Body Radiotherapy","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-site auto-segmentation evaluation with geometric endpoints.","multiCenter":true,"externalValidation":true}
   ],
   lastRevised: "2026-08-27",
-  lastUpdated: "2026-06-15",
+  lastUpdated: "2026-10-15",
   limitations: [
     "APM 1.1 minimum requirements include 12 CPU cores and 24 GB RAM",
     "Cranial tumor segmentation support requires a GPU with at least 8 GB vRAM, compatible driver/CUDA support, and CUDA compute capability >5.2",
@@ -120,7 +120,8 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     }
   ],
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I1",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I1",
   diseaseTargeted: ["Multiple Cancer Types"],
   developmentStage: "certified",
   adoptionReadiness: "R3",

@@ -81,7 +81,7 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     },
     version: "VA30+",
     releaseDate: "2023-05-25",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-10-15",
     supportedStructures: [
       // Brain
       "Brain: Brain",
@@ -152,7 +152,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Prostate"
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
     adoptionReadiness: "R3",
@@ -170,8 +171,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-    {"doi":"10.1186/s12894-025-01875-8","title":"The dosimetric impacts of ct-based deep learning autocontouring algorithm for prostate cancer radiotherapy planning dosimetric accuracy of DirectORGANS","journal":"BMC Urol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre dosimetric/geometric evaluation of pelvic auto-contours.","vendorIndependent":true},
-    {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical assessment including contour correction effort.","vendorIndependent":true}
+    {"doi":"10.1186/s12894-025-01875-8","title":"The dosimetric impacts of ct-based deep learning autocontouring algorithm for prostate cancer radiotherapy planning dosimetric accuracy of DirectORGANS","journal":"BMC Urol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre dosimetric/geometric evaluation of pelvic auto-contours.","vendorIndependent":true},
+    {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Single-centre clinical assessment including contour correction effort.","vendorIndependent":true}
   ],
     lastRevised: "2026-08-27",
     source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"

@@ -81,10 +81,11 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated with uRT-linac 506c"]
     },
     keyPapers: [
-      {"doi":"10.1038/s41467-025-67581-z","pmid":"41398177","title":"Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types","authors":"Yu L et al.","journal":"Nature Communications","year":"2025","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"DL dose prediction implemented in the uTPS ATP module, trained at one institution and tested across three institutions and five disease sites; >80% of 250 auto-plans met clinical criteria and 60% were preferred over manual plans in blinded review, with plans deliverable within five minutes.","vendorIndependent":false,"multiCenter":true,"externalValidation":true}
+      {"doi":"10.1038/s41467-025-67581-z","pmid":"41398177","title":"Multicenter study on the versatility and adoption of AI-driven automated radiotherapy planning across cancer types","authors":"Yu L et al.","journal":"Nature Communications","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"DL dose prediction implemented in the uTPS ATP module, trained at one institution and tested across three institutions and five disease sites; >80% of 250 auto-plans met clinical criteria and 60% were preferred over manual plans in blinded review, with plans deliverable within five minutes.","vendorIndependent":false,"multiCenter":true,"externalValidation":true}
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes:
       "2026-08-25 Wave 3 per-paper sweep: raised to E2 — Yu et al. Nat Commun 2025 (PMID 41398177, doi:10.1038/s41467-025-67581-z) tests the uTPS ATP models retrospectively across three institutions with external validation, meeting the multi-centre criterion. European debut at ESTRO 2026 (Stockholm). Yu et al. Nat Commun 2025 (PMC12827991) — a multicenter clinical evaluation of DL-based ATP — explicitly states 'Executable plans were generated in uTPS through inverse optimization … The prediction models … have been implemented in the ATP module of the uTPS' (Shanghai United Imaging Healthcare co-authors). Re-attributed from Sun Nuclear Plan AI on 2026-06-15 after citation verification. Other than this publication, vendor has not released a model card or standalone intended-use document for the integrated auto-planning module.",
     clinicalImpactNotes:

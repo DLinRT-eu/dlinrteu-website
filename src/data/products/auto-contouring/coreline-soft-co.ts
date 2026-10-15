@@ -89,11 +89,11 @@ export const AviewRTACS: ProductDetails = {
     "Breast contouring support"
   ],
   keyPapers: [
-    {"doi":"10.1186/s13014-021-01923-1","title":"Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy","authors":"Byun HK et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical validation with geometric endpoints."},
-    {"doi":"10.3389/fonc.2023.1119008","title":"Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer","authors":"Chung SY et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
+    {"doi":"10.1186/s13014-021-01923-1","title":"Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy","authors":"Byun HK et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical validation with geometric endpoints."},
+    {"doi":"10.3389/fonc.2023.1119008","title":"Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer","authors":"Chung SY et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
   ],
   lastRevised: "2026-08-27",
-  lastUpdated: "2026-06-15",
+  lastUpdated: "2026-10-15",
   releaseDate: "2025-08-20",
   trainingData: {
     source: "FDA 510(k) summary K200714",
@@ -104,7 +104,8 @@ export const AviewRTACS: ProductDetails = {
   certification: "CE & FDA",
   evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
   evaluationData: {
     source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.01.001)",
     results: "Not publicly disclosed",

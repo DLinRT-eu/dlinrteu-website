@@ -78,7 +78,7 @@ export const Jazz: ProductDetails = {
     "Lesion tracking - mark once, remember forever"
   ],
   lastRevised: "2026-08-27",
-  lastUpdated: "2026-08-25",
+  lastUpdated: "2026-10-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
     "Designed as a diagnostic aid for lesion annotation and tracking; does not replace clinical assessment by radiologists or radio-oncologists",
@@ -89,11 +89,12 @@ export const Jazz: ProductDetails = {
   releaseDate: "2023-05-15",
   certification: "CE & FDA",
   keyPapers: [
-    {"doi": "10.1007/s00234-024-03293-3", "title": "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software", "authors": "Federau C et al.", "journal": "Neuroradiology", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre evaluation of reading quality and productivity for multiple sclerosis follow-up MRI; vendor-affiliated authorship."}
+    {"doi": "10.1007/s00234-024-03293-3", "title": "Evaluation of the quality and the productivity of neuroradiological reading of multiple sclerosis follow-up MRI scans using an intelligent automation software", "authors": "Federau C et al.", "journal": "Neuroradiology", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Single-centre evaluation of reading quality and productivity for multiple sclerosis follow-up MRI; vendor-affiliated authorship."}
   ],
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
   diseaseTargeted: ["Multiple Cancer Types"],
   clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
   adoptionReadiness: "R3",

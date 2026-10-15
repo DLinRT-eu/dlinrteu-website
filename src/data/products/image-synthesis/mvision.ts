@@ -74,7 +74,8 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     },
     usesAI: true,
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes:
       "Raised E0 → E1 on 2026-09-23: two peer-reviewed, vendor-independent retrospective studies in J Appl Clin Med Phys (2026) evaluate Image+ synthetic CT — Gaban et al. (Riviera-Chablais Hospital, 31 patients, pelvic and abdominal T1/T2 MR on a 1.5T MR-Linac; geometric, HU and dosimetric endpoints) and Östensson & Jonsson (Umeå University, 19 patients from the public Gold Atlas dataset; HU and dose recalculation endpoints). Both single-institution, no MVision co-authors per the Crossref author records. Previous history: E0 retained after a dedicated evidence check on 2026-09-14: no peer-reviewed publication naming the Image+ module or MVision synthetic CT was located. The only third-party evaluation identified is a university thesis (Virginia Commonwealth University, 2026) validating MR-only planning with MVision synthetic CT — grey literature, not peer-reviewed, so it does not raise rigor above E0 and evidenceVendorIndependent is kept false (that flag denotes peer-reviewed independent evidence). The 2025 Leeds brain MRI-only synthetic CT validation study (Tech Innov Patient Support Radiat Oncol 2025;35:100328) was screened and excluded: it evaluates Philips MRCAT Brain, a different vendor's product. Content and score originally migrated on 2026-09-13 from the Workspace+ categoryEvidence['Image Synthesis'] block, which recorded E0 following the 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated).",
     clinicalImpactNotes:
@@ -88,11 +89,11 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     releaseDate: "2025-10-21",
-    lastUpdated: "2026-09-23",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-09-23",
     keyPapers: [
-      {"doi": "10.1002/acm2.70571", "title": "Synthetic CT imaging for pelvic and abdominal MR-only radiotherapy: Clinical validation on a 1.5T MR-Linac", "authors": "Gaban C, Pisaturo O, Moeckli R, Pachoud M, Ghandour S", "journal": "J Appl Clin Med Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Single-institution retrospective evaluation of two Image+ sCT models (T1/T2) in 31 pelvic and abdominal patients; geometric, HU and gamma/dose endpoints against deformed CT and bulk-density CT.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": true},
-      {"doi": "10.1002/acm2.70765", "title": "Evaluation of AI-based segmentation and synthetic CT generation for MRI-only prostate radiotherapy planning", "authors": "Östensson A, Jonsson J", "journal": "J Appl Clin Med Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Retrospective evaluation of MVision sCT and segmentation on 19 public Gold Atlas prostate patients; HU similarity and dose recalculation versus reference CT.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": true}
+      {"doi": "10.1002/acm2.70571", "title": "Synthetic CT imaging for pelvic and abdominal MR-only radiotherapy: Clinical validation on a 1.5T MR-Linac", "authors": "Gaban C, Pisaturo O, Moeckli R, Pachoud M, Ghandour S", "journal": "J Appl Clin Med Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I1", "rationale": "Single-institution retrospective evaluation of two Image+ sCT models (T1/T2) in 31 pelvic and abdominal patients; geometric, HU and gamma/dose endpoints against deformed CT and bulk-density CT.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": true},
+      {"doi": "10.1002/acm2.70765", "title": "Evaluation of AI-based segmentation and synthetic CT generation for MRI-only prostate radiotherapy planning", "authors": "Östensson A, Jonsson J", "journal": "J Appl Clin Med Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I1", "rationale": "Retrospective evaluation of MVision sCT and segmentation on 19 public Gold Atlas prostate patients; HU similarity and dose recalculation versus reference CT.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": true}
     ],
     evidence: [
       {

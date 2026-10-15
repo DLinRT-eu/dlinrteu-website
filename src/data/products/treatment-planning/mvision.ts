@@ -111,7 +111,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
-      {"doi": "10.1016/j.phro.2026.100977", "title": "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting", "authors": "Piliero MA, Angrisani A, Bosetti DG, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name Dose+ (MVision AI) compared with RapidPlan for prostate focal boost; single-centre retrospective dosimetric comparison. Done in collaboration with MVision (algorithm and technical support provided), so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
+      {"doi": "10.1016/j.phro.2026.100977", "title": "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting", "authors": "Piliero MA, Angrisani A, Bosetti DG, et al.", "journal": "Phys Imaging Radiat Oncol", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I1", "rationale": "Full text checked 2026-09-25 (Europe PMC). Methods name Dose+ (MVision AI) compared with RapidPlan for prostate focal boost; single-centre retrospective dosimetric comparison. Done in collaboration with MVision (algorithm and technical support provided), so not vendor-independent.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
     ],
     evidence: [
       {
@@ -121,7 +121,8 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
       },
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes:
       "2026-09-25 HAIR follow-up: raised E0 to E1. First peer-reviewed paper naming Dose+ (doi:10.1016/j.phro.2026.100977), a single-centre retrospective comparison with RapidPlan run in collaboration with MVision. Earlier: 2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. Vendor announcement only as of 2026-05-23. No peer-reviewed validation publication identified. 2026-08-28 Batch C sweep: all located MVision publications name Contour+ (segmentation), not Dose+. No publication evaluates the dose-prediction product. E0 stands.",
     clinicalImpactNotes: "2026-09-25: raised I0 to I1 — dosimetric plan-quality endpoints only (vendor-collaboration study); no workflow or patient-outcome data.",
@@ -134,7 +135,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     releaseDate: "2025-09-04",
-    lastUpdated: "2026-09-23",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-09-23",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",

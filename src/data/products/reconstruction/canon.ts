@@ -5,9 +5,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-aice-ct",
     keyPapers: [
-      {"doi":"10.2214/AJR.19.21809","title":"Image quality and lesion detection on deep learning reconstruction and iterative reconstruction of submillisievert chest and abdominal CT","authors":"Singh R et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Prospective multi-institutional patient study supporting submillisievert protocols with maintained lesion detection.","vendorIndependent":true,"multiCenter":true,"prospective":true},
-      {"doi":"10.1038/s41598-023-42775-x","title":"Validation of deep learning-based CT image reconstruction for treatment planning","authors":"Yasui K et al.","journal":"Sci Rep","year":"2023","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Phantom study on a large-bore RT planning CT; CT-number stability endpoints.","vendorIndependent":true},
-      {"doi":"10.21037/qims-21-1216","title":"Deep learning reconstruction allows low-dose imaging while maintaining image quality in contrast-enhanced abdominal CT","authors":"Tamura A et al.","journal":"Quant Imaging Med Surg","year":"2022","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent single-centre clinical study supporting dose reduction in routine abdominal CT.","vendorIndependent":true}
+      {"doi":"10.2214/AJR.19.21809","title":"Image quality and lesion detection on deep learning reconstruction and iterative reconstruction of submillisievert chest and abdominal CT","authors":"Singh R et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Prospective multi-institutional patient study supporting submillisievert protocols with maintained lesion detection.","vendorIndependent":true,"multiCenter":true,"prospective":true},
+      {"doi":"10.1038/s41598-023-42775-x","title":"Validation of deep learning-based CT image reconstruction for treatment planning","authors":"Yasui K et al.","journal":"Sci Rep","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Phantom study on a large-bore RT planning CT; CT-number stability endpoints.","vendorIndependent":true},
+      {"doi":"10.21037/qims-21-1216","title":"Deep learning reconstruction allows low-dose imaging while maintaining image quality in contrast-enhanced abdominal CT","authors":"Tamura A et al.","journal":"Quant Imaging Med Surg","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent single-centre clinical study supporting dose reduction in routine abdominal CT.","vendorIndependent":true}
     ],
     trainingData: {
         disclosureLevel: "minimal",
@@ -82,7 +82,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       distributionChannels: ["Integrated in new CT systems", "Upgrade for compatible systems"],
     },
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Restored to E2 on 2026-06-16 after evidence re-verification. Three independent peer-reviewed studies confirmed as evaluating AiCE on Canon equipment: (1) Singh R. et al. AJR 2020;214(3):566-573 — prospective multi-institutional submillisievert chest/abdominopelvic CT on Aquilion ONE; (2) Yasui et al. Sci Rep 2023 (DOI 10.1038/s41598-023-42775-x) — full text explicitly names AiCE, Aquilion and Canon Medical Systems (re-verified via Nature full-text fetch 2026-06-16; prior 2026-06-15 removal was based on abstract-only screening and is reversed); (3) Tamura et al. QIMS 2022 (DOI 10.21037/qims-21-1216) — AiCE vs hybrid IR for low-dose contrast-enhanced abdominal CT. Plus FDA K181862 clearance.",
     clinicalImpactNotes: "Independent prospective multi-institutional and phantom evidence supports dose reduction (Singh AJR 2020; Tamura QIMS 2022) with maintained image quality, and applicability to radiotherapy treatment planning on large-bore CT (Yasui Sci Rep 2023).",
     adoptionReadiness: "R3",
@@ -127,7 +128,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-aice-mr",
     keyPapers: [
-      {"doi":"10.1186/s12880-023-00962-2","title":"Acceleration of knee MRI using a combination of compressed sensing and commercially available deep learning reconstruction","authors":"Akai H et al.","journal":"BMC Med Imaging","year":"2023","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent single-centre study demonstrating clinically usable acceleration.","vendorIndependent":true}
+      {"doi":"10.1186/s12880-023-00962-2","title":"Acceleration of knee MRI using a combination of compressed sensing and commercially available deep learning reconstruction","authors":"Akai H et al.","journal":"BMC Med Imaging","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent single-centre study demonstrating clinically usable acceleration.","vendorIndependent":true}
     ],
     trainingData: {
         demographics: "Adult and pediatric (intended population)",
@@ -234,7 +235,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       "Not specifically validated for radiotherapy planning workflow"
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I2",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "FDA K192574 validation plus Akai et al. BMC Med Imaging 2023 — independent single-center peer-reviewed study (knee MRI). Vendor white papers and case studies (UCSD spine, Canon MSK/brain) provide additional supporting data. Web-searched 2026-06-01. Lowered to E1 in the 2026-08-25 per-paper sweep: the single direct study (Akai 2023) is independent but single-centre.",
     clinicalImpactNotes: "Workflow improvement through up to ~50% reduction in MRI scan time with maintained or improved image quality (Akai 2023; vendor materials).",
     adoptionReadiness: "R3",
@@ -245,7 +247,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Growing body of clinical evidence showing comparable diagnostic performance with significantly reduced scan times",
-    lastUpdated: "2026-06-13",
+    lastUpdated: "2026-10-15",
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database (K192574), peer-reviewed literature, Canon Medical Systems white papers and case studies. Version 1.5 retained from prior revision; vendor does not publicly publish a numeric version.",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/canon.ts"
@@ -253,9 +255,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-piqe",
     keyPapers: [
-      {"doi":"10.1186/s41747-025-00670-2","title":"Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings","authors":"Greffier J et al.","journal":"Eur Radiol Exp","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent phantom comparison.","vendorIndependent":true},
-      {"doi":"10.1016/j.ejrad.2025.111953","title":"PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma","authors":"Nagayama Y et al.","journal":"Eur J Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical image-quality study.","vendorIndependent":true},
-      {"doi":"10.1016/j.acra.2024.09.012","title":"Advances in spatial resolution using super-resolution deep learning reconstruction for abdominal CT","authors":"Funama Y et al.","journal":"Acad Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Technical spatial-resolution evaluation.","vendorIndependent":true}
+      {"doi":"10.1186/s41747-025-00670-2","title":"Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings","authors":"Greffier J et al.","journal":"Eur Radiol Exp","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent phantom comparison.","vendorIndependent":true},
+      {"doi":"10.1016/j.ejrad.2025.111953","title":"PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma","authors":"Nagayama Y et al.","journal":"Eur J Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical image-quality study.","vendorIndependent":true},
+      {"doi":"10.1016/j.acra.2024.09.012","title":"Advances in spatial resolution using super-resolution deep learning reconstruction for abdominal CT","authors":"Funama Y et al.","journal":"Acad Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Technical spatial-resolution evaluation.","vendorIndependent":true}
     ],
     trainingData: {
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243335.pdf",
@@ -355,7 +357,8 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E1",
-    clinicalImpact: "I1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
     evidenceRigorNotes: "FDA K243335 (Jan 2025). Greffier et al. Eur Radiol Exp 2026 independent phantom study comparing PIQE vs AiCE. Nagayama et al. Eur J Radiol 2025 clinical evaluation for pancreatic cancer. Funama et al. Acad Radiol 2025 spatial resolution evaluation. PubMed searched 2026-03-08.",
     clinicalImpactNotes: "Technical efficacy demonstrated: improved spatial resolution and low-contrast detectability in phantom and clinical studies. PubMed searched 2026-03-08.",
     adoptionReadiness: "R3",
@@ -366,7 +369,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     clinicalEvidence: "Independent phantom and clinical studies demonstrating significantly improved spatial resolution, low-contrast detectability, and image sharpness compared to standard DL reconstruction",
-    lastUpdated: "2026-06-13", 
+    lastUpdated: "2026-10-15", 
     lastRevised: "2026-06-13",
     source: "FDA 510(k) database, company website, and peer-reviewed publications"
   }

@@ -72,7 +72,7 @@ export const Contour: ProductDetails = {
       journal: "Front. Oncol.",
       rationale: "Independent benchmark of several commercial systems on external clinical data; geometric endpoints.",
       evidenceRigor: "E2",
-      clinicalImpact: "I1",
+      clinicalImpact: "L3", legacyClinicalImpact: "I1",
       vendorIndependent: true,
       externalValidation: true
     },
@@ -84,7 +84,7 @@ export const Contour: ProductDetails = {
       journal: "Rep Pract Oncol Radiother.",
       rationale: "Single-centre clinical evaluation including contour review effort.",
       evidenceRigor: "E1",
-      clinicalImpact: "I2",
+      clinicalImpact: "L3", legacyClinicalImpact: "I2",
       vendorIndependent: true
     },
     {
@@ -97,7 +97,7 @@ export const Contour: ProductDetails = {
       multiCenter: true,
       evidenceRigor: "E2",
       multiNational: true,
-      clinicalImpact: "I2",
+      clinicalImpact: "L3", legacyClinicalImpact: "I2",
       vendorIndependent: true,
       externalValidation: true
     },
@@ -109,7 +109,7 @@ export const Contour: ProductDetails = {
       journal: "Sci Rep",
       rationale: "Independent three-vendor head-and-neck comparison with geometric, dosimetric and psychometric endpoints.",
       evidenceRigor: "E2",
-      clinicalImpact: "I2",
+      clinicalImpact: "L2", legacyClinicalImpact: "I2",
       vendorIndependent: true,
       externalValidation: true
     },
@@ -121,7 +121,7 @@ export const Contour: ProductDetails = {
       journal: "Radiat Oncol",
       rationale: "Single-centre evaluation of AI contouring for OARs and lymph node areas.",
       evidenceRigor: "E1",
-      clinicalImpact: "I1",
+      clinicalImpact: "L2", legacyClinicalImpact: "I1",
       vendorIndependent: true
     },
     {
@@ -133,7 +133,7 @@ export const Contour: ProductDetails = {
       rationale: "Multicentre prostate segmentation study across six clinics; geometric endpoints.",
       multiCenter: true,
       evidenceRigor: "E2",
-      clinicalImpact: "I1"
+      clinicalImpact: "L3", legacyClinicalImpact: "I1"
     }
   ],
   companyUrl: "https://mvision.ai/",
@@ -225,7 +225,8 @@ export const Contour: ProductDetails = {
   certification: "CE & FDA",
   evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+  legacyClinicalImpact: "I2",
   evaluationData: {
     source: "Pang et al. NPJ Digit Med 2025 (DOI: 10.1038/s41746-025-01624-z)",
     results: "DSC 0.92-0.99 for gastric MALT lymphoma segmentation.",

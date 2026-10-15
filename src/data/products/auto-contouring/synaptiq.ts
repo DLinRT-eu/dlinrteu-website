@@ -29,7 +29,8 @@ export const MediqRT: ProductDetails = {
       usesAI: true,
       notes: "Primary, CE-cleared function. Evidence is contouring-focused: PHIRO 2026 cardiac substructure paper + ESTRO 2023–2025 abstracts on H&N OARs, breast, GTV delineation and brachytherapy, plus a 2026 H&N secondary-OAR dose-compliance study (doi:10.3390/diagnostics16111748).",
       evidenceRigor: "E1",
-      clinicalImpact: "I2",
+      clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     },
     "Registration": {
       usesAI: true,
@@ -132,9 +133,9 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
     "Cloud-based data storage and visualization"
   ],
   keyPapers: [
-    {"doi": "10.3390/diagnostics16111748", "title": "AI-Based Dose Compliance of Secondary Organs at Risk in Head and Neck Cancer Radiotherapy", "authors": "Costin IC et al.", "journal": "Diagnostics (Basel)", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "I2", "rationale": "Single-centre H&N study of Mediq RT secondary-OAR dose compliance.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
-    {"doi":"10.1016/j.phro.2026.100935","title":"Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy","authors":"Moignier A et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2026","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
-    {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and under-reported organs at risk in prostate cancer radiotherapy","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+    {"doi": "10.3390/diagnostics16111748", "title": "AI-Based Dose Compliance of Secondary Organs at Risk in Head and Neck Cancer Radiotherapy", "authors": "Costin IC et al.", "journal": "Diagnostics (Basel)", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Single-centre H&N study of Mediq RT secondary-OAR dose compliance.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    {"doi":"10.1016/j.phro.2026.100935","title":"Comparative analysis of artificial intelligence-based contouring of cardiac substructures on computed tomography scans for radiation therapy","authors":"Moignier A et al.","journal":"Physics and Imaging in Radiation Oncology","year":"2026","evidenceRigor":"E1","clinicalImpact":"L1t", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical evaluation with geometric endpoints.","vendorIndependent":true},
+    {"doi":"10.1016/j.ejmp.2026.105901","pmid":"42480395","title":"Qualitative and dosimetric evaluation of AI-generated contours for conventional and under-reported organs at risk in prostate cancer radiotherapy","journal":"Physica Medica","year":"2026","link":"https://doi.org/10.1016/j.ejmp.2026.105901","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Names MediQ RT explicitly; qualitative plus dosimetric-impact endpoints.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
   lastRevised: "2026-09-23",
   lastUpdated: "2026-08-25",
@@ -150,7 +151,8 @@ Intended Medical Indication: Mediq RT automatically segments organs-at-risk (OAR
   certification: "CE",
   evidenceRigor: "E1",
   subspeciality: "Radiation Oncology",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+  legacyClinicalImpact: "I2",
   diseaseTargeted: [
     "Brain tumours (glioblastoma, astrocytoma, etc.)",
     "Head and neck tumours (oral cavity, laryngeal, nasopharyngeal cancers, etc.)",

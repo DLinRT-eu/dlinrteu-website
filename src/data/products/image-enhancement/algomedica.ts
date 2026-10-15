@@ -4,9 +4,9 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
   {
     id: "algomedica-pixelshine",
     keyPapers: [
-      {"doi":"10.3390/diagnostics12071627","title":"Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization","authors":"Steuwe A et al.","journal":"Diagnostics","year":"2022","evidenceRigor":"E1","clinicalImpact":"I1","rationale":"Vendor-independent single-centre quantitative study.","vendorIndependent":true},
-      {"doi":"10.3390/tomography8040140","title":"AI denoising improves image quality and radiological workflows in pediatric ultra-low-dose thorax CT","authors":"Brendlin AS et al.","journal":"Tomography","year":"2022","evidenceRigor":"E2","clinicalImpact":"I2","rationale":"Vendor-independent blinded multi-reader study in 100 consecutive patients reporting workflow gains and shortest time to diagnosis.","vendorIndependent":true,"externalValidation":true},
-      {"doi":"10.2214/AJR.19.22680","title":"Combination of deep learning-based denoising and iterative reconstruction for ultra-low-dose chest CT","authors":"Hata A et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Independent clinical study at mean 0.19 mSv with Lung-RADS evaluation supporting dose reduction.","vendorIndependent":true}
+      {"doi":"10.3390/diagnostics12071627","title":"Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization","authors":"Steuwe A et al.","journal":"Diagnostics","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent single-centre quantitative study.","vendorIndependent":true},
+      {"doi":"10.3390/tomography8040140","title":"AI denoising improves image quality and radiological workflows in pediatric ultra-low-dose thorax CT","authors":"Brendlin AS et al.","journal":"Tomography","year":"2022","evidenceRigor":"E2","clinicalImpact":"L3", "legacyClinicalImpact": "I2","rationale":"Vendor-independent blinded multi-reader study in 100 consecutive patients reporting workflow gains and shortest time to diagnosis.","vendorIndependent":true,"externalValidation":true},
+      {"doi":"10.2214/AJR.19.22680","title":"Combination of deep learning-based denoising and iterative reconstruction for ultra-low-dose chest CT","authors":"Hata A et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent clinical study at mean 0.19 mSv with Lung-RADS evaluation supporting dose reduction.","vendorIndependent":true}
     ],
     trainingData: {
         disclosureLevel: "minimal",
@@ -108,7 +108,8 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "I2",
+    clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
     evidenceRigorNotes: "Steuwe et al. Diagnostics 2022;12(7):1627 (University Düsseldorf, independent, urolithiasis). Brendlin et al. Tomography 2022;8(4):1665 (pediatric ULDCT, n=100, 8 readers). Hata et al. AJR 2020;215(6):1321 (lung RADS ULDCT, n=41). Tian et al. pelvic CTA 70kVp (Japanese J Radiol 2018, PMID 30523499). AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-06-14.",
     clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols across whole body CT, including pediatric and lung screening applications.",
     adoptionReadiness: "R3",

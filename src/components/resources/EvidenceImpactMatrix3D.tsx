@@ -186,7 +186,7 @@ const Floor: React.FC<{ cols: number; rows: number }> = ({ cols, rows }) => {
 // ---------- Axes (E, I, Z) drawn like the reference figure ----------
 // Layout convention:
 //   X = Evidence rigor (E)   — front-left edge along the floor
-//   Z = Clinical impact (I)  — front-right edge along the floor
+//   Z = Levels of Efficacy (L)  — front-right edge along the floor
 //   Y = Implementation burden (Z) — vertical, back-right corner
 const AxisLine: React.FC<{
   from: [number, number, number];
@@ -234,7 +234,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
 
   return (
     <group>
-      {/* === I axis (Clinical impact) — front edge, runs along X (length = cols) === */}
+      {/* === L axis (Levels of Efficacy) — front edge, runs along X (length = cols) === */}
       <AxisLine from={[leftX, 0, frontZ]} to={[rightX, 0, frontZ]} />
       {IMPACT.map((imp, i) => (
         <group key={`i-${imp.level}`}>
@@ -258,7 +258,7 @@ const Axes: React.FC<{ cols: number; rows: number; zHeight: number }> = ({
         rotation={[-Math.PI / 2, 0, 0]}
         fontSize={0.34}
       >
-        Clinical impact (I-axis) →
+        Levels of Efficacy (L-axis) →
       </Text>
 
       {/* === E axis (Evidence rigour) — right edge, runs along Z (length = rows) === */}
