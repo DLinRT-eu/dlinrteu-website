@@ -78,12 +78,12 @@ const rawProduct: ProductDetails = {
   },
   version: "4.0",
   releaseDate: "2025-08-20",
-  lastUpdated: "2026-08-25",
+  lastUpdated: "2026-10-15",
   lastRevised: "2026-09-23",
   keyPapers: [
-    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
-    {doi: "10.1186/s13014-021-01923-1", title: "Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy", authors: "Byun HK et al.", journal: "Radiat Oncol", year: "2021", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
-    {doi: "10.3389/fonc.2023.1119008", title: "Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer", authors: "Chung SY et al.", journal: "Front. Oncol.", year: "2023", evidenceRigor: "E1", clinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
+    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "L3", legacyClinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
+    {doi: "10.1186/s13014-021-01923-1", title: "Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy", authors: "Byun HK et al.", journal: "Radiat Oncol", year: "2021", evidenceRigor: "E1", clinicalImpact: "L3", legacyClinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
+    {doi: "10.3389/fonc.2023.1119008", title: "Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer", authors: "Chung SY et al.", journal: "Front. Oncol.", year: "2023", evidenceRigor: "E1", clinicalImpact: "L3", legacyClinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
   ],
   supportedStructures: [
     // Head & Neck
@@ -166,7 +166,8 @@ const rawProduct: ProductDetails = {
     "Pelvis: Prostate"
   ],
   evidenceRigor: "E2",
-  clinicalImpact: "I2",
+  clinicalImpact: "L3",
+    legacyClinicalImpact: "I2",
   evidenceRigorNotes: "Two peer-reviewed studies (Byun 2021, Chung 2020) from the same Yonsei research group plus Lee 2024 breast implementation. Insufficient independent multi-site validation for E2 — downgraded to E1 pending confirmation. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
 
   clinicalImpactNotes: "Large-scale clinical implementation demonstrates workflow improvement for breast RT contouring.",
