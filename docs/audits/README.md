@@ -47,6 +47,15 @@ publicly disclosed AI/deep-learning use in a core radiotherapy function.
 
 ## Adding a new audit
 
+## Full product catalogue review
+
+- [2026-10-15 report](./products/2026-10-15/product-audit-2026-10-15.md): 98 live records including seven Pipeline entries; eight-role read-only findings, citation metadata and timeboxed product-name literature searches. Product records are unchanged; proposed corrections require a separate pass.
+- [Findings CSV](./products/2026-10-15/product-audit-2026-10-15.csv), [rescoring proposals](./products/2026-10-15/product-audit-2026-10-15-rescoring.csv), [source queries](./products/2026-10-15/product-audit-2026-10-15-source-searches.csv), [unverified source leads](./products/2026-10-15/product-audit-2026-10-15-new-source-leads.csv).
+- Reproduce retrieval: `bun scripts/fullProductAudit.ts --network --out=docs/audits/products/2026-10-15`; compile cached results: `bun scripts/compileProductAudit.ts --out=docs/audits/products/2026-10-15`. Role normalization tests: `bun test scripts/productAuditNormalization.test.ts`.
+- Retrieval failures are not proof of broken links; exact-name search hits are not attributable evidence. Public abstract/metadata checks do not validate every product field, and undisclosed/paywalled claims remain reviewer work.
+
+## Adding a new audit (procedure)
+
 1. Pick (or create) a topic folder under `docs/audits/<topic>/`.
 2. Save the report as `YYYY-MM-DD-<phase>.md` (+ optional `.csv` for tabular findings).
 3. Append a row to the table above with status.

@@ -5,7 +5,7 @@ export function normalizeAuditRole(role: string, field: string): AuditRole {
   const value = role.toLowerCase();
   if (/regulatory|regulator|pipeline-status/.test(value)) return "Regulatory";
   if (/cross-check|candidate-distinction/.test(value)) return "Cross-check";
-  if (/inclusion|candidate-screening/.test(value)) return "Inclusion";
+  if (/inclusion|candidate-screening|^category$/.test(value)) return "Inclusion";
   if (/identity/.test(value)) return "Identity";
   if (/structures/.test(value)) return "Structures";
   if (/technical/.test(value)) return "Technical";
