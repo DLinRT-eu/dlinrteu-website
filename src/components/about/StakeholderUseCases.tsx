@@ -22,7 +22,7 @@ const USE_CASES: UseCase[] = [
     question: "Is this product safe and mature enough to use on my patients?",
     view: "Product page + Evidence/Impact badges",
     viewLink: "/products",
-    thresholds: "Aim for ≥E2, ≥I2, ≥R4",
+    thresholds: "Aim for ≥E2, ≥L3, ≥R4",
   },
   {
     icon: Coins,
@@ -41,7 +41,7 @@ const USE_CASES: UseCase[] = [
     question: "How do clinicians and researchers find and evaluate my product — and is the information they see correct?",
     view: "Company page + Certification programme + Evidence/Impact scatter",
     viewLink: "/companies",
-    thresholds: "Claim your company profile to certify product data (green/amber badge). Benchmark against per-task medians (≥E2 ∧ ≥I2 ∧ ≥R3 to be competitive).",
+    thresholds: "Claim your company profile to certify product data (green/amber badge). Benchmark against per-task medians (≥E2 ∧ ≥L3 ∧ ≥R3 to be competitive).",
     extra: "DLinRT is often the first access point users have to your product — accurate, certified information improves trust and the adoption signal.",
   },
   {

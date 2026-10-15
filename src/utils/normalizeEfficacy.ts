@@ -18,7 +18,7 @@ function normalizeCarrier<T extends ImpactCarrier>(item: T): T {
   };
 }
 
-/** Convert legacy L1t–L6 values on a product (and its papers) to provisional L-codes. */
+/** Convert legacy I0–I5 values on a product (and its papers) to provisional L-codes. */
 export function normalizeProductEfficacy(product: ProductDetails): ProductDetails {
   const next = normalizeCarrier(product as ProductDetails & ImpactCarrier) as ProductDetails;
   if (product.keyPapers) {
