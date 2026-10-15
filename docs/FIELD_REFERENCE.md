@@ -137,7 +137,9 @@ All free-text fields rendered through `<AutoLinkText>` apply the same rule: only
 
 ## Evidence Level Classification (Tri-Axial System)
 
-Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6), and Adoption Readiness (R0–R5). The E and I axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension capturing how close a product is to clinical adoption (higher R = closer to ready) — see the [§Adoption Readiness](#implementation--assurance-burden-z-axis) section below.
+Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6), and Adoption Readiness (R0–R5). The E and L axes are adapted from [van Leeuwen et al. (2021)](https://doi.org/10.1007/s00330-021-07892-z) and updated with [Antonissen et al. (2025)](https://doi.org/10.1007/s00330-025-11830-8); the Levels of Efficacy axis is cross-referenced with the [Fryback & Thornbury hierarchy](https://doi.org/10.1177/0272989X9101100203). The R axis is an internally proposed DLinRT extension capturing how close a product is to clinical adoption (higher R = closer to ready) — see the [§Adoption Readiness](#implementation--assurance-burden-z-axis) section below.
+
+The dashboard plots a discrete E3–E0 × L1t/L1c/L2–L6 matrix using the highest per-paper score on each axis, with documented overrides taking precedence and stored scores as fallback. Provisional efficacy is identified in product tooltips. Each dot counts one product regardless of model-counting mode. The 2D count requires E and L; the 3D count also requires Adoption Readiness. The R axis is unchanged. These classifications are educational and do not imply clinical validation.
 
 ### Evidence Rigor (E0-E3)
 
