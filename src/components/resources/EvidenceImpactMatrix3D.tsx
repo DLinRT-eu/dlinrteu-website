@@ -17,7 +17,7 @@ import { RotateCw, RefreshCw, Eye, X, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
 /**
- * Real interactive WebGL 3D plot of the Evidence × Impact × Implementation-Burden matrix.
+ * Interactive Evidence Rigor × Levels of Efficacy × Adoption Readiness matrix.
  *
  * Axes (3D world):
  *  - X : Levels of Efficacy   L1t → L6

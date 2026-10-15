@@ -133,7 +133,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       </CardHeader>
       <CardContent>
         {view === "3d" ? (
-          <EvidenceImpactMatrix3D products={filteredProducts} />
+          <EvidenceImpactMatrix3D products={assessedProducts} />
         ) : (
         <div>
         <div className="overflow-x-auto">
