@@ -152,12 +152,15 @@ Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3
 
 | Level | Name | F&T Level | When to Use |
 |-------|------|-----------|-------------|
-| I0 | None Demonstrated | — | Feasibility only, no benefit shown |
-| I1 | Quality Assurance | Level 1 | QA tools, monitoring, consistency checks |
-| I2 | Workflow | Level 2 | Time savings, variability reduction, dose reduction, image quality improvement |
-| I3 | Decision | Level 3 | Changes in treatment management or plan selection |
-| I4 | Outcome | Levels 4–5 | Toxicity reduction, survival, patient outcomes |
-| I5 | Societal | Level 6 | Cost-effectiveness, access to care |
+| L1t | Technical efficacy | Level 1 | Processing time, reproducibility, failure rate, PACS/TPS/OIS integration, version-to-version agreement, robustness |
+| L1c | Potential clinical efficacy | Level 1 | Proof of concept: expert visual inspection, comparison with a non-AI baseline, Turing-style test |
+| L2 | Accuracy efficacy | Level 2 | (s)DSC, HD95, MSD; sensitivity/specificity/AUC; SNR/CNR/SSIM/PSNR; DVH, gamma, plan quality; blinded acceptance, Likert |
+| L3 | Decision/workflow efficacy | Level 3 | Editing/workflow time, manual-correction effort, drift monitoring, inter-observer variability, simulated decision impact |
+| L4 | Therapeutic/patient management efficacy | Level 4 | Prospective use changing plan selection, dose, fractionation, technique, replanning, triage or time to treatment |
+| L5 | Patient outcome efficacy | Level 5 | Toxicity, local recurrence, overall survival, PROMs |
+| L6 | Societal efficacy | Level 6 | Costs, QALYs, incremental cost per QALY |
+
+Legacy I0–I5 values are converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional until each paper is re-scored. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
 
 ### Study Quality Sub-Attributes
 
@@ -172,7 +175,7 @@ Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `evidenceRigor` | ➖ | Evidence rigor level | `"E0"`, `"E1"`, `"E2"`, `"E3"` | Assign based on strongest published evidence methodology |
-| `clinicalImpact` | ➖ | Clinical impact level | `"I0"`, `"I1"`, `"I2"`, `"I3"`, `"I4"`, `"I5"` | I2 = workflow/dose/image quality; I3 = treatment decision changes |
+| `clinicalImpact` | ➖ | Clinical impact level | `"L1t"`, `"L1c"`, `"L2"`–`"L6"` (legacy `"I0"`–`"I5"` read as provisional) | L2 = accuracy vs reference; L3 = workflow/decision; L4 = prospective patient management |
 | `evidenceLevelNotes` | ➖ | Justification for classification | Free text | Cite key supporting publications |
 | `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Clinical impact (I) and implementation burden (Z) remain product-level only. |
 
