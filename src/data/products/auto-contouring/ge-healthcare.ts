@@ -86,9 +86,9 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
       status: {
         verification: 'unconfirmed', event: 'availability-review',
         reason: 'Reported concern that CT Auto Segmentation is no longer marketed. GE still publishes its product page; withdrawal from new sales has not been independently confirmed. MR Contour DL is a separate product.',
-        source: 'User-reported availability concern; GE public product page checked separately',
+        source: 'GE public product page checked; it does not confirm current sales or withdrawal',
         sourceUrl: 'https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation',
-        sourceAccess: 'restricted', sourceRetrievedOn: '2026-10-15',
+        sourceAccess: 'public', sourceRetrievedOn: '2026-10-15',
       },
       onMarketSince: "2023",
       distributionChannels: ["Direct sales"]

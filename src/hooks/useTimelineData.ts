@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { ALL_PRODUCTS } from '@/data';
 import { ProductDetails } from '@/types/productDetails';
 import { hasRegulatoryApproval, normalizeAnatomicalLocations } from '@/utils/productFilters';
+import { isDiscontinuedProduct } from '@/utils/productLifecycle';
 
 interface TimelineFilters {
   selectedTask: string;
@@ -29,7 +30,7 @@ const matchesTask = (product: ProductDetails, task: string): boolean => {
 
 export const useTimelineData = (filters: TimelineFilters) => {
   const productsWithApproval = useMemo(
-    () => ALL_PRODUCTS.filter(product => hasRegulatoryApproval(product)),
+    () => ALL_PRODUCTS.filter(product => hasRegulatoryApproval(product) && !isDiscontinuedProduct(product)),
     []
   );
 
