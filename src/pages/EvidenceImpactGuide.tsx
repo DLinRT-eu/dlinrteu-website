@@ -35,7 +35,7 @@ const EvidenceImpactGuide = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Tri-Axial Evidence & Readiness Classification"
-        description="A tri-axial methodology separating evidence rigor (E), clinical impact (I), and implementation burden (Z) for evaluating radiotherapy AI products"
+        description="A tri-axial methodology separating evidence rigor (E), levels of efficacy (L), and implementation burden (Z) for evaluating radiotherapy AI products"
         canonical="https://dlinrt.eu/evidence-impact-guide"
       />
       
@@ -57,7 +57,7 @@ const EvidenceImpactGuide = () => {
             Tri-Axial Evidence &amp; Readiness Classification
           </h1>
           <p className="text-lg text-muted-foreground">
-            Separating evidence rigor (E), clinical impact (I), and implementation burden (Z)
+            Separating evidence rigor (E), levels of efficacy (L), and implementation burden (Z)
             for nuanced product evaluation
           </p>
           <p className="text-sm text-muted-foreground mt-2">
@@ -206,7 +206,7 @@ const EvidenceImpactGuide = () => {
             </CardTitle>
             <p className="text-sm text-muted-foreground">
               The third axis captures how close a product is to clinical adoption for its intended use,
-              after evidence (E) and clinical impact (I) have been assigned (a DLinRT extension).{" "}
+              after evidence (E) and levels of efficacy (L) have been assigned (a DLinRT extension).{" "}
               <strong>Higher R = lower residual effort = closer to adoption-ready.</strong>{" "}
               Missing national or international guidelines do not block adoption but delay it, and R surfaces that gap.
               Low R constrains the public readiness signal even when E and I appear favourable.

@@ -206,7 +206,7 @@ const EvidenceImpactMatrix = ({
               </div>
 
               {/* Matrix cells */}
-              <div className="flex-1 grid grid-cols-6 gap-1">
+              <div className="flex-1 grid grid-cols-7 gap-1">
                 {rigorLevels.map((rigor) => (
                   impactLevels.map((impact) => {
                     const zone = getZoneDescription(rigor.level, impact.level);
