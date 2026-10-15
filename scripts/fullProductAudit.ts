@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync, existsSync } from 
 import { resolve } from "node:path";
 import ts from "typescript";
 import { ALL_PRODUCTS, COMPANIES } from "../src/data";
+import { isEfficacyLevelCode, isLegacyImpactCode } from "../src/data/evidence-impact-levels";
 import { computeProductEvidenceScore } from "../src/utils/evidenceScoring";
 import { isPipelineProduct } from "../src/utils/productFilters";
 import type { ProductDetails } from "../src/types/productDetails";
@@ -28,7 +29,9 @@ function sourceRegistry(folder: string, registry = new Map<string, string[]>()):
     if (!entry.name.endsWith(".ts")) continue;
     const ast = ts.createSourceFile(path, readFileSync(path, "utf8"), ts.ScriptTarget.Latest, true);
     const visit = (node: ts.Node): void => {
-      if (ts.isPropertyAssignment(node) && node.name.getText(ast) === "id" && ts.isStringLiteral(node.initializer)) {
+      if (ts.isPropertyAssignment(node) && node.name.getText(ast) === "id" && ts.isStringLiteral(node.initializer)
+        && ts.isObjectLiteralExpression(node.parent)
+        && node.parent.properties.some(property => ts.isPropertyAssignment(property) && property.name.getText(ast) === "category")) {
         const id = node.initializer.text;
         registry.set(id, [...(registry.get(id) ?? []), path.replace(`${process.cwd()}/`, "")]);
       }
@@ -43,9 +46,18 @@ function staticReview(product: ProductDetails, registry: Map<string, string[]>):
   const p = product;
   const files = registry.get(p.id) ?? [];
   if (files.length === 0) add(p.id, "Identity", "id", "error", "No source definition found");
+  for (const field of ["id", "name", "company", "category", "description"] as const) {
+    if (!p[field]) add(p.id, "Identity", field, "error", "Required core field missing");
+  }
+  if (!p.website && !p.productUrl) add(p.id, "Identity", "productUrl", "error", "No product website recorded");
+  if (ALL_PRODUCTS.filter(product => product.id === p.id).length > 1) add(p.id, "Cross-check", "id", "error", "Duplicate ID in live aggregate");
+  if (!/^[-a-z0-9]+$/.test(p.id)) add(p.id, "Identity", "id", "warn", "ID does not match lowercase hyphenated convention");
+  const categories = ["Auto-Contouring", "Clinical Prediction", "Image Enhancement", "Image Synthesis", "Performance Monitor", "Platform", "Reconstruction", "Registration", "Tracking", "Treatment Planning", "Positioning"];
+  if (!categories.includes(p.category)) add(p.id, "Identity", "category", "error", `Unrecognized category ${p.category}`);
+  if ((p.secondaryCategories?.length ?? 0) > 3 || p.secondaryCategories?.some(category => !categories.includes(category) || category === p.category)) add(p.id, "Identity", "secondaryCategories", "warn", "Secondary category list violates documented constraints");
   if (files.length > 1) add(p.id, "Cross-check", "id", "warn", `Multiple source definitions (may be unused or archived): ${files.join(", ")}`);
   if (p.logoUrl?.startsWith("/") && !existsSync(resolve("public", p.logoUrl.slice(1)))) add(p.id, "Identity", "logoUrl", "error", `Missing local logo ${p.logoUrl}`);
-  if (!COMPANIES.some(c => c.name === p.company)) add(p.id, "Cross-check", "company", "error", `Company not in active registry: ${p.company}`);
+  if (!COMPANIES.some(c => c.name === p.company)) add(p.id, "Cross-check", "company", "warn", `Company label does not exactly match registry; check legal-name aliases before calling it missing: ${p.company}`);
   if (p.usesAI === false && !p.monitorsAIProducts?.length) add(p.id, "Inclusion", "usesAI", "warn", "No AI use or explicit monitored-AI product list; check task-specific exception");
   const fda = typeof p.regulatory?.fda === "object" ? p.regulatory.fda : undefined;
   if (fda?.status === "510k_cleared" && !fda.clearanceNumber) add(p.id, "Regulatory", "regulatory.fda.clearanceNumber", "warn", "510(k) cleared but structured clearance number missing");
@@ -53,14 +65,22 @@ function staticReview(product: ProductDetails, registry: Map<string, string[]>):
   if (p.regulatory?.ce?.status === "cleared" && /not (publicly )?(verified|disclosed)|not confirmed/i.test(p.regulatory.ce.notes ?? "")) add(p.id, "Regulatory", "regulatory.ce", "warn", "Confirmed CE status conflicts with unverified-source caveat");
   if (/DICOM\s+RT[-\s]?(Struct|Plan|Dose)/i.test(JSON.stringify(p.technicalSpecifications ?? {}))) add(p.id, "Technical", "technicalSpecifications", "warn", "Nonstandard DICOM-RT nomenclature");
   if (p.category === "Auto-Contouring" && !p.supportedStructures?.length && !p.structuresUnavailable) add(p.id, "Structures", "supportedStructures", "warn", "No structures or explicit unavailability flag");
+  const unnamedStructures = (p.supportedStructures ?? []).filter(structure => !/^[^:]+:\s*\S/.test(typeof structure === "string" ? structure : structure.name));
+  if (unnamedStructures.length) add(p.id, "Structures", "supportedStructures", "warn", `${unnamedStructures.length} entries lack Region: Structure Name form`);
+  if (p.modality && !Array.isArray(p.modality)) add(p.id, "Technical", "modality", "warn", "Modality should be an array");
+  if (p.evidenceRigor && !["E0", "E1", "E2", "E3"].includes(p.evidenceRigor)) add(p.id, "Evidence", "evidenceRigor", "error", "Invalid rigor enum");
+  if (p.clinicalImpact && !isEfficacyLevelCode(p.clinicalImpact) && !isLegacyImpactCode(p.clinicalImpact)) add(p.id, "Evidence", "clinicalImpact", "error", "Invalid efficacy enum");
+  if (p.adoptionReadiness && !/^R[0-5]$/.test(p.adoptionReadiness)) add(p.id, "Evidence", "adoptionReadiness", "error", "Invalid readiness enum");
+  if (p.lastRevised && (Date.now() - Date.parse(p.lastRevised)) / 86400000 > 180) add(p.id, "Transparency", "lastRevised", "warn", "Last revised more than 180 days ago");
   const score = computeProductEvidenceScore(p, {category: p.category});
   if (score.rigor !== p.evidenceRigor || score.impact !== p.clinicalImpact) add(p.id, "Evidence", "aggregate", "warn", `Stored ${p.evidenceRigor}/${p.clinicalImpact} vs effective ${score.rigor}/${score.impact}; do not promote provisional papers mechanically`);
   const provisional = (p.keyPapers ?? []).filter(k => k.efficacyProvisional);
   if (provisional.length) add(p.id, "Evidence", "keyPapers", "warn", `${provisional.length} provisional paper scores require source retrieval`);
   if (!p.keyPapers?.length) add(p.id, "Evidence", "keyPapers", "info", "No scored attributable publications recorded; literature search required", "Keep evidence uncertainty explicit");
+  if (p.evidenceRigor && p.evidenceRigor !== "E0" && !p.keyPapers?.some(paper => paper.evidenceRigor)) add(p.id, "Evidence", "keyPapers", "warn", `${p.evidenceRigor} claimed without scored attributable peer-reviewed papers`);
   for (const field of ["trainingData", "evaluationData", "structuresProvenance"] as const) {
     const value = p[field];
-    if (value && (!value.source || !value.sourceUrl)) add(p.id, "Transparency", field, "warn", "Disclosure lacks source label or URL");
+    if (value && (!value.source || (!value.sourceUrl && (!value.sourceAccess || value.sourceAccess === "public")))) add(p.id, "Transparency", field, "warn", "Public disclosure lacks source label or URL; non-public disclosures may use a dated source label without a public URL");
     if (value?.sourceAccess && value.sourceAccess !== "public" && !value.sourceRetrievedOn) add(p.id, "Transparency", field, "warn", "Non-public source lacks retrieval date");
   }
   if (p.categoryEvidence) add(p.id, "Evidence", "categoryEvidence", "info", `Review evidence separately for ${Object.keys(p.categoryEvidence).join(", ")}`, "Do not flatten evidence across tasks");
@@ -100,7 +120,7 @@ function titleSimilarity(a: string, b: string): number {
 
 async function checkPublication(paper: NonNullable<ProductDetails["keyPapers"]>[number]): Promise<PublicationCheck> {
   const key = paper.doi?.toLowerCase() ?? `pmid:${paper.pmid}`;
-  const query = paper.doi ? `DOI:"${paper.doi}"` : `EXT_ID:${paper.pmid} AND SRC:MED`;
+  const query = paper.doi ? `DOI:"${paper.doi}"` : paper.pmid?.startsWith("PMC") ? `PMCID:${paper.pmid}` : `EXT_ID:${paper.pmid} AND SRC:MED`;
   const sourceUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${encodeURIComponent(query)}&format=json&resultType=core&pageSize=1`;
   try {
     const response = await fetchPublic(sourceUrl);
