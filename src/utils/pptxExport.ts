@@ -1190,11 +1190,11 @@ export class PptxExporter {
 
   private addEvidenceImpactSlide(data: PresentationData) {
     const slide = this.pptx.addSlide();
-    if (this.addChartImageSlide(slide, data.chartImages?.evidenceImpact, "Evidence Rigor vs Clinical Impact")) return;
+    if (this.addChartImageSlide(slide, data.chartImages?.evidenceImpact, "Evidence Rigor vs Levels of Efficacy")) return;
 
     const contentWidth = this.getContentWidth();
     slide.background = { color: this.brandColors.background };
-    slide.addText("Evidence Rigor vs Clinical Impact", {
+    slide.addText("Evidence Rigor vs Levels of Efficacy", {
       x: this.layout.margin.left, y: this.layout.margin.top, w: contentWidth, h: 1,
       fontSize: 32, color: this.brandColors.primary, bold: true, fontFace: "Arial"
     });

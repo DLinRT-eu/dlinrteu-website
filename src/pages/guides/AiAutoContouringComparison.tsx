@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: "How do I compare evidence quality across vendors?",
-    a: "Use the dual-axis system: Evidence Rigor (E0–E3) measures methodological strength (vendor-independent, multi-center, multi-national, prospective, external validation); Clinical Impact (I0–I5) measures the demonstrated effect on clinical workflow or outcomes.",
+    a: "Use the dual-axis system: Evidence Rigor (E0–E3) measures methodological strength (vendor-independent, multi-center, multi-national, prospective, external validation); Levels of Efficacy (I0–I5) measures the demonstrated effect on clinical workflow or outcomes.",
   },
   {
     q: "Does AI auto-contouring work on MR and CBCT, or only CT?",
@@ -112,7 +112,7 @@ const AiAutoContouringComparison = () => {
               Health Canada, ANVISA, or MHRA/UKCA clearance is required for catalog inclusion.
             </li>
             <li>
-              <strong>Evidence quality</strong> — dual-axis scoring of Rigor (E0–E3) and Clinical Impact
+              <strong>Evidence quality</strong> — dual-axis scoring of Rigor (E0–E3) and Levels of Efficacy
               (I0–I5). See the{" "}
               <Link to="/evidence-impact-guide" className="text-[#5090D0] underline">
                 Evidence &amp; Impact Guide

@@ -106,7 +106,7 @@ export function generateMedicalDeviceSchema(product: ProductDetails): MedicalDev
   if (product.clinicalImpact) {
     additionalProps.push({
       "@type": "PropertyValue",
-      name: "Clinical Impact",
+      name: "Levels of Efficacy",
       value: product.clinicalImpact,
     });
   }

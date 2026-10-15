@@ -180,11 +180,11 @@ const PlatformPage = () => {
         </div>
       </div>
 
-      {/* Clinical Impact Section */}
+      {/* Levels of Efficacy Section */}
       <div className="py-16 bg-violet-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Clinical Impact</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Levels of Efficacy</h2>
             <p className="text-lg text-gray-700 mb-8">
               AI integration platforms are revolutionizing radiation oncology workflows by reducing implementation complexity, 
               improving operational efficiency, and ensuring consistent quality across multiple AI-powered applications. 

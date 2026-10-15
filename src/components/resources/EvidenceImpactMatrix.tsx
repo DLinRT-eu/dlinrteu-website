@@ -168,7 +168,7 @@ const EvidenceImpactMatrix = ({
             {/* Impact arrow */}
             {showLabels && (
               <div className="flex items-center justify-center mb-2 pl-20">
-                <span className="text-xs text-muted-foreground mr-2">Clinical Impact</span>
+                <span className="text-xs text-muted-foreground mr-2">Levels of Efficacy</span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </div>
             )}

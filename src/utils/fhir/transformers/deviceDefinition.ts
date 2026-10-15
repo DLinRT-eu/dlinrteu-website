@@ -400,7 +400,7 @@ function createProperties(product: ProductDetails, warnings: FHIRValidationWarni
         coding: [{
           system: DLINRT_PROPERTIES_SYSTEM,
           code: "clinical-impact",
-          display: "Clinical Impact Level"
+          display: "Levels of Efficacy Level"
         }]
       },
       valueString: [product.clinicalImpact]

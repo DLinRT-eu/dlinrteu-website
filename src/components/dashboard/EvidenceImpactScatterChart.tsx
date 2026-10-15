@@ -96,7 +96,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
     return (
       <Card className="w-full col-span-full">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg md:text-2xl">Evidence Rigor vs Clinical Impact</CardTitle>
+          <CardTitle className="text-lg md:text-2xl">Evidence Rigor vs Levels of Efficacy</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center min-h-[350px]">
@@ -114,7 +114,7 @@ const EvidenceImpactScatterChart: React.FC<EvidenceImpactScatterChartProps> = ({
       <CardHeader className="pb-2">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <CardTitle className="text-lg md:text-2xl">
-            Evidence Rigor vs Clinical Impact{view === "3d" ? " × Readiness" : ""} ({totalCount} products)
+            Evidence Rigor vs Levels of Efficacy{view === "3d" ? " × Readiness" : ""} ({totalCount} products)
           </CardTitle>
           <div className="flex items-center gap-2 flex-wrap">
             <ToggleGroup

@@ -490,7 +490,7 @@ For developers and those who prefer traditional version control:
 - Product category (primary and secondary)
 - Description and key features
 - Regulatory status (CE, FDA, TGA, TFDA)
-- **Evidence classification** (E0-E3 rigor + I0-I5 impact — always set this!)
+- **Evidence classification** (E0-E3 rigor + L1t–L6 impact — always set this!)
 
 **Technical Details**:
 - Supported modalities

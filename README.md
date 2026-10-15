@@ -72,7 +72,7 @@ Every factual field must trace to a disclosed source. Use the top-level `source`
    - All dates follow `YYYY-MM-DD`
    - Include regulatory information (`regulatory.ce` / `.fda` / `.tga` / `.tfda` / etc.) and a one-line `certification` summary
    - Set `usesAI` explicitly to `false` for non-AI tools (e.g. classical QA monitors); the default is `true`
-   - Assign Evidence Rigor (E0–E3), Clinical Impact (I0–I5), and Adoption Readiness (R0–R5) with `*Notes` justification
+   - Assign Evidence Rigor (E0–E3), Levels of Efficacy (I0–I5), and Adoption Readiness (R0–R5) with `*Notes` justification
 
 4. **Update the category index** — add the export in the category `index.ts`
 

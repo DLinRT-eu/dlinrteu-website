@@ -153,11 +153,11 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
               </EditableField>
             </div>
 
-            {/* Clinical Impact */}
+            {/* Levels of Efficacy */}
             <div className="space-y-2">
               {showEditor ? (
                 <>
-                  <Label className="text-sm font-medium">Clinical Impact (I0-I5)</Label>
+                  <Label className="text-sm font-medium">Levels of Efficacy (L1t–L6)</Label>
                   <Select
                     value={clinicalImpact || ''}
                     onValueChange={(v) => updateField('clinicalImpact', v || undefined)}
@@ -176,7 +176,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 </>
               ) : clinicalImpact && (
                 <div className="text-sm">
-                  <span className="font-medium">Clinical Impact:</span>{" "}
+                  <span className="font-medium">Levels of Efficacy:</span>{" "}
                   <span className="text-muted-foreground">
                     {CLINICAL_IMPACT_OPTIONS.find(o => o.value === clinicalImpact)?.label}
                   </span>

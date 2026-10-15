@@ -66,7 +66,7 @@ const StakeholderUseCases = () => {
             primary audiences, the questions they bring, and the view that best answers them.
           </p>
           <p className="text-sm text-muted-foreground max-w-3xl mx-auto mt-2">
-            Evidence (E0–E3), Clinical Impact (I0–I5) and Adoption Readiness (R0–R5) are explained in
+            Evidence (E0–E3), Levels of Efficacy (I0–I5) and Adoption Readiness (R0–R5) are explained in
             the{" "}
             <Link to="/evidence-impact-guide" className="text-primary hover:underline">
               Evidence & Impact Guide

@@ -54,7 +54,7 @@ The full machine-readable JSON schema lives at
 - **Evidence Rigor** — `E0`–`E3`. See `docs/review/GUIDE.md`.
 - **Evidence Rigor Notes**.
 - **Clinical Impact** — `I0`–`I5`. See `docs/review/GUIDE.md`.
-- **Clinical Impact Notes**.
+- **Levels of Efficacy Notes**.
 - **Implementation Burden** — Adoption-readiness level.
 - **Implementation Burden Notes**.
 - **Readiness Signal** — Computed badge from the three axes above.

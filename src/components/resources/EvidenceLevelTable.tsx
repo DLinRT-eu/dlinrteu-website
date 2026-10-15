@@ -70,7 +70,7 @@ const EvidenceLevelTable = () => {
             </div>
           </div>
 
-          {/* Clinical Impact Table */}
+          {/* Levels of Efficacy Table */}
           <div>
             <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
               <Target className="h-5 w-5 text-teal-600" />

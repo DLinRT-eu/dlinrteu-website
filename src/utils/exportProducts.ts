@@ -27,7 +27,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "Pricing Model", "Pricing Based On",
     "Release Date", "Version", "Website", "Company URL", "Product URL", "GitHub URL",
     "Clinical Evidence", "Evidence", "Limitations",
-    "Evidence Rigor", "Evidence Rigor Notes", "Clinical Impact", "Clinical Impact Notes",
+    "Evidence Rigor", "Evidence Rigor Notes", "Levels of Efficacy", "Levels of Efficacy Notes",
     "Adoption Readiness", "Adoption Readiness Notes", "Readiness Signal",
     "Burden: Commissioning Required", "Burden: Local Validation Required",
     "Burden: Workflow Redesign", "Burden: Integration Complexity",

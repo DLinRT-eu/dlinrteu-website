@@ -165,7 +165,7 @@ const EvidenceImpactGuide = () => {
             </CardContent>
           </Card>
 
-          {/* Clinical Impact Axis */}
+          {/* Levels of Efficacy Axis */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

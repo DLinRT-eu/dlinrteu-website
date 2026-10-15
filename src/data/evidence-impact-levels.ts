@@ -1,6 +1,6 @@
 
 // Dual-Axis Evidence Classification System
-// Separates Evidence Rigor (study quality) from Clinical Impact (what is measured)
+// Separates Evidence Rigor (study quality) from Levels of Efficacy (what is measured)
 
 // ==================== EVIDENCE RIGOR AXIS ====================
 // Focuses purely on study quality and methodology
@@ -73,7 +73,7 @@ export const EVIDENCE_RIGOR_LEVELS: EvidenceRigorLevel[] = [
 // the Fryback & Thornbury (1991) hierarchy of diagnostic efficacy.
 
 export type EfficacyLevelCode = "L1t" | "L1c" | "L2" | "L3" | "L4" | "L5" | "L6";
-/** @deprecated Legacy Clinical Impact codes (I0–I5); read-only, converted provisionally. */
+/** @deprecated Legacy Levels of Efficacy codes (I0–I5); read-only, converted provisionally. */
 export type LegacyClinicalImpactCode = "I0" | "I1" | "I2" | "I3" | "I4" | "I5";
 /** Second-axis code. Kept under the historic name to avoid churn across consumers. */
 export type ClinicalImpactCode = EfficacyLevelCode;

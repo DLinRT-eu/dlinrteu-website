@@ -66,7 +66,7 @@ export const registrationExample: ProductDetails = {
       link: "https://example.com/validation"
     },
     {
-      type: "Clinical Impact Study",
+      type: "Levels of Efficacy Study",
       description: "Time savings and accuracy improvements in clinical workflow",
       link: "https://doi.org/10.xxxx/xxxx.xxxx"
     }

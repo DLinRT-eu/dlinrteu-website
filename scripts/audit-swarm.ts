@@ -141,10 +141,10 @@ for (const p of allProducts) {
   const ci = (p as any).clinicalImpact;
   const ar = (p as any).adoptionReadiness;
   if (er && !E_CODES.has(er)) add(id, "Evidence", "evidenceRigor", "error", `Invalid E "${er}"`, "Use E0-E3");
-  if (ci && !I_CODES.has(ci)) add(id, "Evidence", "clinicalImpact", "error", `Invalid I "${ci}"`, "Use I0-I5");
+  if (ci && !I_CODES.has(ci)) add(id, "Evidence", "clinicalImpact", "error", `Invalid I "${ci}"`, "Use L1t–L6");
   if (ar && !R_CODES.has(ar)) add(id, "Evidence", "adoptionReadiness", "error", `Invalid R "${ar}"`, "Use R0-R5");
   if (!er) add(id, "Evidence", "evidenceRigor", "warn", "evidenceRigor unset", "Score E0-E3");
-  if (!ci) add(id, "Evidence", "clinicalImpact", "warn", "clinicalImpact unset", "Score I0-I5");
+  if (!ci) add(id, "Evidence", "clinicalImpact", "warn", "clinicalImpact unset", "Score L1t–L6");
   const keyPapers = (p as any).keyPapers as any[] | undefined;
   if (er && er !== "E0" && (!keyPapers || keyPapers.length === 0))
     add(id, "Evidence", "keyPapers", "warn", `evidenceRigor=${er} but keyPapers empty`, "Cite the strongest paper");
