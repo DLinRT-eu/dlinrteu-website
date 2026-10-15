@@ -1,0 +1,511 @@
+[
+  {
+    "url": "https://limbus.ai/",
+    "status": 200,
+    "finalUrl": "https://limbus.ai/",
+    "title": "Limbus AI - Automatic Contouring for Radiation Therapy"
+  },
+  {
+    "url": "https://mvision.ai/contour/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/contour/",
+    "title": "Contour+ | AI Segmentation | MVision AI"
+  },
+  {
+    "url": "https://www.mirada-medical.com/radiation-oncology",
+    "status": 404,
+    "finalUrl": "https://www.mirada-medical.com/radiation-oncology",
+    "title": "404 Error: Page Not Found"
+  },
+  {
+    "url": "https://www.raysearchlabs.com/media/publications/deep-learning-segmentation-model-catalogue/",
+    "status": 200,
+    "finalUrl": "https://www.raysearchlabs.com/media/publications/deep-learning-segmentation-model-catalogue/",
+    "title": "Deep Learning Segmentation Model catalogue Flip PDF | RaySearch Laboratories"
+  },
+  {
+    "url": "https://therapanacea.com/products",
+    "status": 200,
+    "finalUrl": "https://therapanacea.com/products",
+    "title": "Products | Therapanacea"
+  },
+  {
+    "url": "https://www.ai-medical.ch/jazz",
+    "status": 200,
+    "finalUrl": "https://www.ai-medical.ch/jazz",
+    "title": "Jazz | AI Medical"
+  },
+  {
+    "url": "https://www.carinaai.com/intcontour.html",
+    "status": 200,
+    "finalUrl": "https://www.carinaai.com/intcontour",
+    "title": "INTContour · FDA-cleared AI auto-contouring for radiation oncology — Carina AI"
+  },
+  {
+    "url": "https://www.corelinesoft.com/en/solutions/rt-acs",
+    "status": 200,
+    "finalUrl": "https://corelinesoft.com/en/",
+    "title": "CT-Based Medical AI Software | Main (Global) | Coreline Soft"
+  },
+  {
+    "url": "https://www.everfortuneai.com.tw/en/2023/11/10/%e6%94%be%e5%b0%84%e6%b2%bb%e7%99%82%e5%99%a8%e5%ae%98%e5%8b%be%e5%8b%92%e7%b3%bb%e7%b5%b1/",
+    "status": 404,
+    "finalUrl": "https://www.everfortuneai.com.tw/en/2023/11/10/%e6%94%be%e5%b0%84%e6%b2%bb%e7%99%82%e5%99%a8%e5%ae%98%e5%8b%be%e5%8b%92%e7%b3%bb%e7%b5%b1/"
+  },
+  {
+    "url": "https://www.everfortuneai.com.tw/en/",
+    "status": 404,
+    "finalUrl": "https://www.everfortuneai.com.tw/en/"
+  },
+  {
+    "url": "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation",
+    "title": "Auto Segmentation | GE HealthCare (United States)"
+  },
+  {
+    "url": "http://www.huraimaging.com/dvtarget/",
+    "status": 200,
+    "finalUrl": "http://www.huraimaging.com/dvtarget/",
+    "title": "Home: DV.Target | Hura Imaging"
+  },
+  {
+    "url": "https://www.manteiamedical.com/accucontour",
+    "status": 200,
+    "finalUrl": "https://www.manteiamedical.com/accucontour"
+  },
+  {
+    "url": "https://www.mimsoftware.com/radiation-oncology/contour-protegeai-plus",
+    "status": 200,
+    "finalUrl": "https://www.mimsoftware.com/radiation-oncology/contour-protegeai-plus",
+    "title": "Contour ProtégéAI+™ | Zero-Click Auto-Contouring"
+  },
+  {
+    "url": "https://www.radformation.com/autocontour/autocontour",
+    "status": 200,
+    "finalUrl": "https://www.radformation.com/autocontour/autocontour",
+    "title": "AutoContour | Radformation&#39;s Deep Learning Automated AI Contouring Software"
+  },
+  {
+    "url": "https://www.siemens-healthineers.com/en-us/digital-health-solutions/ai-rad-companion",
+    "status": 200,
+    "finalUrl": "https://www.siemens-healthineers.com/en-us/digital-health-solutions/ai-rad-companion",
+    "title": "AI-Rad Companion - Siemens Healthineers USA"
+  },
+  {
+    "url": "https://synaptiq.io/product/",
+    "status": 200,
+    "finalUrl": "https://synaptiq.io/product/",
+    "title": "Mediq RT - AI Auto Contouring Software for Radiation Therapy - Synaptiq"
+  },
+  {
+    "url": "https://www.vysioneer.com/solutions/vbrain",
+    "status": 404,
+    "finalUrl": "https://vysioneer.com/solutions/vbrain",
+    "title": "404: This page could not be found"
+  },
+  {
+    "url": "http://www.wisdom-tech.online/view-16.html",
+    "status": 200,
+    "finalUrl": "http://www.wisdom-tech.online/view-16.html",
+    "title": "DeepContour"
+  },
+  {
+    "url": "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
+    "status": 200,
+    "finalUrl": "https://www.siemens-healthineers.com/en-us/radiotherapy/software-solutions/autocontouring",
+    "title": "Autocontouring in radiation therapy - Siemens Healthineers - Siemens Healthineers USA"
+  },
+  {
+    "url": "https://www.oncosoft.io/products-eng",
+    "status": 200,
+    "finalUrl": "https://oncosoft.io/products-eng",
+    "title": "Products"
+  },
+  {
+    "url": "https://www.taimedimg.tw/en/samd/",
+    "status": 200,
+    "finalUrl": "https://www.taimedimg.tw/en/samd/",
+    "title": "SaMD | TAIMedimg"
+  },
+  {
+    "url": "https://www.brainlab.com/radiosurgery-products/elements/",
+    "status": 200,
+    "finalUrl": "https://www.brainlab.com/radiosurgery-products/elements/",
+    "title": "Elements: Radiotherapy &amp; Radiosurgery Treatment Planning | Brainlab"
+  },
+  {
+    "url": "https://www.gehealthcare.com/",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us",
+    "title": "English | GE HealthCare (United States)"
+  },
+  {
+    "url": "http://www.medicalmind.cn/product.html",
+    "status": 404,
+    "finalUrl": "https://www.medicalmind.cn/product.html"
+  },
+  {
+    "url": "https://www.varian.com/ethos",
+    "status": 200,
+    "finalUrl": "https://cancercare.siemens-healthineers.com/products/adaptive-therapy/ethos",
+    "title": "Ethos | Siemens Healthineers | Cancer Care"
+  },
+  {
+    "url": "https://cancercare.siemens-healthineers.com/en-ch/products/radiotherapy/treatment-planning/eclipse",
+    "status": 200,
+    "finalUrl": "https://cancercare.siemens-healthineers.com/en-ch/products/radiotherapy/treatment-planning/eclipse",
+    "title": "Eclipse | Siemens Healthineers | Cancer Care"
+  },
+  {
+    "url": "https://www.qoca.net/",
+    "status": 200,
+    "finalUrl": "https://www.qoca.net/",
+    "title": "QOCA® Smart Healthcare - Generating smarter health with AI"
+  },
+  {
+    "url": "https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/",
+    "status": 200,
+    "finalUrl": "https://www.medcom-online.de/products/radiation-oncology/prosoma-dart/",
+    "title": "Prosoma Dart - MedCom Gesellschaft für Medizinische Bildverarbeitung mbH"
+  },
+  {
+    "url": "https://eu.united-imaging.com/en/product-service/products/rt",
+    "status": 200,
+    "finalUrl": "https://eu.united-imaging.com/en/product-service/products/rt",
+    "title": "United Imaging_Radiotherapy System_uRT_Linear Accelerator"
+  },
+  {
+    "url": "https://www.aitewan-bio.com/en/",
+    "status": 200,
+    "finalUrl": "https://www.aitewan-bio.com/en/",
+    "title": "AI-Assisted Brain Tumor Contouring for Radiotherapy Workflows | AItewan"
+  },
+  {
+    "url": "https://www.usa.philips.com/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/product/HCNMRF320/mrcat-brain-mr-rt-clinical-application",
+    "title": "Philips - MRCAT Brain MR-RT clinical application - Philips"
+  },
+  {
+    "url": "https://www.usa.philips.com/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/product/HCNMRF266/mrcat-pelvis-mr-rt-clinical-application",
+    "title": "Philips - MRCAT Pelvis MR-RT clinical application - Philips"
+  },
+  {
+    "url": "https://www.usa.philips.com/healthcare/product/HCNMRF439/mrcat-head-and-neck-hcnmrf439-mr-rt-clinical-application",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/product/HCNMRF439/mrcat-head-and-neck-hcnmrf439-mr-rt-clinical-application",
+    "title": "Philips - MRCAT Head and Neck HCNMRF439 MR-RT clinical application - Philips"
+  },
+  {
+    "url": "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/product/HCNMRB780/mrcat-prostate-auto-contouring-mr-rt-clinical-application",
+    "title": "Philips - MRCAT Prostate + Auto-Contouring MR-RT clinical application. - Philips"
+  },
+  {
+    "url": "https://www.siemens-healthineers.com/magnetic-resonance-imaging/clinical-specialities/synthetic-ct",
+    "status": 200,
+    "finalUrl": "https://www.siemens-healthineers.com/magnetic-resonance-imaging/clinical-specialities/synthetic-ct",
+    "title": "MR-only Radiotherapy Planning - Siemens Healthineers"
+  },
+  {
+    "url": "https://medical.spectronic.se/page-2/page6/index.html",
+    "status": 200,
+    "finalUrl": "https://medical.spectronic.se/page-2/page6/index.html",
+    "title": "MriPlanner"
+  },
+  {
+    "url": "https://mvision.ai/image/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/image/",
+    "title": "Image+ | Powering Radiotherapy With Synthetic Imaging | MVision AI"
+  },
+  {
+    "url": "https://pymedix.com/autofuse/",
+    "status": 200,
+    "finalUrl": "https://pymedix.com/autofuse__trashed/",
+    "title": "Autofuse | Pymedix - Open the Future"
+  },
+  {
+    "url": "https://mvision.ai/adapt/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/adapt/",
+    "title": "Adapt+ | Adaptive AI-Based Contour Propagation | MVision AI"
+  },
+  {
+    "url": "https://mvision.ai/workspace/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/workspace/",
+    "title": "Workspace+ | Intelligent AI PlatformFor Radiotherapy | MVision AI"
+  },
+  {
+    "url": "https://www.gehealthcare.com/specialties/oncology-solutions/intelligent-rt",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us/specialties/oncology-solutions/intelligent-rt",
+    "title": "Intelligent RT™ | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://www.manteiatech.com/acculearning",
+    "status": 200,
+    "finalUrl": "https://www.manteiamedical.com/acculearning"
+  },
+  {
+    "url": "https://www.lumonus.com/",
+    "status": 200,
+    "finalUrl": "https://www.lumonus.com/",
+    "title": "Lumonus"
+  },
+  {
+    "url": "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/",
+    "status": 200,
+    "finalUrl": "https://www.raysearchlabs.com/media/publications/deep-learning-planning-model-catalogue-flip-pdf/",
+    "title": "Deep Learning planning model catalogue Flip PDF | RaySearch Laboratories"
+  },
+  {
+    "url": "https://www.manteiamedical.com/mozi",
+    "status": 200,
+    "finalUrl": "https://www.manteiamedical.com/mozi"
+  },
+  {
+    "url": "https://www.sunnuclear.com/products/plan-ai",
+    "status": 200,
+    "finalUrl": "https://www.sunnuclear.com/products/plan-ai",
+    "title": "Plan AI - Sun Nuclear"
+  },
+  {
+    "url": "https://rpa.mdanderson.org/",
+    "status": 200,
+    "finalUrl": "https://rpa.mdanderson.org/",
+    "title": "Radiation Planning Assistant | MD Anderson Cancer Center"
+  },
+  {
+    "url": "https://mvision.ai/dose/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/dose/",
+    "title": "Dose+ | AI-powered dose prediction | MVision AI"
+  },
+  {
+    "url": "http://www.wisdom-tech.online/view-15.html",
+    "status": 200,
+    "finalUrl": "http://www.wisdom-tech.online/view-15.html",
+    "title": "DeepPlan"
+  },
+  {
+    "url": "https://www.informai.com",
+    "status": 200,
+    "finalUrl": "https://www.informai.com/",
+    "title": "InformAI | InformAI"
+  },
+  {
+    "url": "https://airato.jp/en/product/",
+    "status": 200,
+    "finalUrl": "https://airato.jp/en/product/",
+    "title": "Products | RatoEra Radiotherapy AI Platform | Airato"
+  },
+  {
+    "url": "https://www.philips.com/healthcare/technology/ct-smart-workflow",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/technology/ct-smart-workflow",
+    "title": "CT Smart Workflow - Philips"
+  },
+  {
+    "url": "https://www.usa.philips.com/healthcare/technology/smartspeed-ai",
+    "status": 200,
+    "finalUrl": "https://www.usa.philips.com/healthcare/technology/smartspeed-ai",
+    "title": "MR SmartSpeed fast imaging technology - Philips"
+  },
+  {
+    "url": "https://www.philips.com/a-w/about/news/archive/standard/news/articles/2025/philips-advances-mri-speed-and-precision-with-fda-510k-clearance-of-smartspeed-precise-dual-ai-software.html",
+    "status": 200,
+    "finalUrl": "https://www.philips.com/a-w/about/news/archive/standard/news/articles/2025/philips-advances-mri-speed-and-precision-with-fda-510k-clearance-of-smartspeed-precise-dual-ai-software.html",
+    "title": "FDA clearance for Philips SmartSpeed Precise | Philips"
+  },
+  {
+    "url": "https://www.philips.com/healthcare/solutions/pet-ct",
+    "status": 404,
+    "finalUrl": "https://www.usa.philips.com/healthcare/solutions/pet-ct",
+    "title": "%s - Philips"
+  },
+  {
+    "url": "https://www.gehealthcare.com/products/magnetic-resonance-imaging/air-recon-dl",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/magnetic-resonance-imaging/signa-mr-vision/effortless-imaging-ai-mri-solutions/air-recon-dl",
+    "title": "AIR Recon DL | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://www.gehealthcare.com/products/computed-tomography/ct-technologies/truefidelity",
+    "status": 404,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/computed-tomography/ct-technologies/truefidelity",
+    "title": "404 | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve",
+    "status": 200,
+    "finalUrl": "https://www.siemens-healthineers.com/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve",
+    "title": "Deep Resolve - Siemens Healthineers"
+  },
+  {
+    "url": "https://global.medical.canon/products/computed-tomography/aice",
+    "status": 200,
+    "finalUrl": "https://global.medical.canon/products/computed-tomography/aice/",
+    "title": "Advanced intelligent Clear-IQ Engine (AiCE) | Computed Tomography | Canon Medical Systems | Canon Inc."
+  },
+  {
+    "url": "https://global.medical.canon/products/magnetic-resonance/aice",
+    "status": 200,
+    "finalUrl": "https://global.medical.canon/products/magnetic-resonance-imaging/",
+    "title": "Magnetic Resonance Imaging | Canon Medical Systems | Canon Inc."
+  },
+  {
+    "url": "https://global.medical.canon/products/magnetic-resonance/piqe",
+    "status": 200,
+    "finalUrl": "https://global.medical.canon/products/magnetic-resonance-imaging/",
+    "title": "Magnetic Resonance Imaging | Canon Medical Systems | Canon Inc."
+  },
+  {
+    "url": "https://www.united-imaging.com/en/products/ct",
+    "status": 200,
+    "finalUrl": "https://www.united-imaging.com/404.html",
+    "title": "404 - File or directory not found."
+  },
+  {
+    "url": "https://eu.united-imaging.com/en/product-service/products/mr/uaifi-technology",
+    "status": 200,
+    "finalUrl": "https://eu.united-imaging.com/en/product-service/products/mr/uaifi-technology",
+    "title": "uAIFI Technology"
+  },
+  {
+    "url": "https://www.united-imaging.com/en/products/molecular-imaging",
+    "status": 200,
+    "finalUrl": "https://www.united-imaging.com/404.html",
+    "title": "404 - File or directory not found."
+  },
+  {
+    "url": "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all",
+    "status": 200,
+    "finalUrl": "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all/",
+    "title": "Elekta Evo | Radiation Therapy | Elekta"
+  },
+  {
+    "url": "https://www.gehealthcare.com/en-us/products/molecular-imaging/pet-ct/omni-legend",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/molecular-imaging/pet-ct/omni-legend",
+    "title": "Omni Legend | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://www.gehealthcare.com/products/magnetic-resonance-imaging",
+    "status": 200,
+    "finalUrl": "https://www.gehealthcare.com/en-us/products/magnetic-resonance-imaging",
+    "title": "Magnetic Resonance Imaging Products, Technology &amp; Solutions | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://airsmed.com/swiftmr/",
+    "status": 200,
+    "finalUrl": "https://airsmed.com/swiftmr/",
+    "title": "SwiftMR® AI MRI Reconstruction and Scan-Time Reduction | AIRS Medical"
+  },
+  {
+    "url": "https://subtlemedical.com/subtle-mr/",
+    "status": 200,
+    "finalUrl": "https://subtlemedical.com/",
+    "title": "Subtle Medical - Deep Learning boosts healthcare. Faster, Safer, Smarter."
+  },
+  {
+    "url": "https://subtlemedical.com/subtle-pet/",
+    "status": 200,
+    "finalUrl": "https://subtlemedical.com/",
+    "title": "Subtle Medical - Deep Learning boosts healthcare. Faster, Safer, Smarter."
+  },
+  {
+    "url": "https://subtlemedical.com/",
+    "status": 200,
+    "finalUrl": "https://subtlemedical.com/",
+    "title": "Subtle Medical - Deep Learning boosts healthcare. Faster, Safer, Smarter."
+  },
+  {
+    "url": "https://subtlemedical.com/aimify/",
+    "status": 200,
+    "finalUrl": "https://subtlemedical.com/",
+    "title": "Subtle Medical - Deep Learning boosts healthcare. Faster, Safer, Smarter."
+  },
+  {
+    "url": "https://subtlemedical.com/subtle-hd/",
+    "status": 200,
+    "finalUrl": "https://subtlemedical.com/subtle-hdmr-26/",
+    "title": "Subtle Medical - Deep Learning boosts healthcare. Faster, Safer, Smarter."
+  },
+  {
+    "url": "https://algomedica.com/low-radation-ct-scans-algomedica",
+    "status": 200,
+    "finalUrl": "https://algomedica.com/low-radation-ct-scans-algomedica",
+    "title": "AlgoMedica | Low Radiation CT Scan Medical Software"
+  },
+  {
+    "url": "https://claripi.com/clarict-ai/",
+    "status": 500,
+    "finalUrl": "https://claripi.com/clarict-ai/"
+  },
+  {
+    "url": "https://claripi.com/clari-ace/",
+    "status": 200,
+    "finalUrl": "https://claripi.com/clari-ace/",
+    "title": "ClariAce | AI-Powered VCF &amp; Osteoporosis Detection Solution with Low-dose CT Screening"
+  },
+  {
+    "url": "https://www.ptwdosimetry.com/en/products/aiqualis",
+    "status": 200,
+    "finalUrl": "https://www.ptwdosimetry.com/en/products/aiqualis",
+    "title": "AIQUALIS | PTW"
+  },
+  {
+    "url": "https://mvision.ai/verify/",
+    "status": 200,
+    "finalUrl": "https://mvision.ai/verify/",
+    "title": "Verify | Contour Comparison | MVision AI"
+  },
+  {
+    "url": "https://www.raysearchlabs.com/rayintelligence/",
+    "status": 200,
+    "finalUrl": "https://www.raysearchlabs.com/rayintelligence/",
+    "title": "Oncology analytics system &#x2013; RayIntelligence | RaySearch Laboratories"
+  },
+  {
+    "url": "https://www.accuray.com/software/synchrony/",
+    "status": 200,
+    "finalUrl": "https://www.accuray.com/software/synchrony/",
+    "title": "Synchrony Motion Synchronization Technology for Radiation Therapy - Accuray"
+  },
+  {
+    "url": "https://medlever.com/",
+    "status": 200,
+    "finalUrl": "https://medlever.com/",
+    "title": "Home - MedLever"
+  },
+  {
+    "url": "https://www.gehealthcare.com/en-us/about/newsroom/press-releases/estro-2026-congress--ge-healthcare-to-spotlight-ai-enabled-solutions-to-advance-precision-care-across-radiation-therapy-and-image-guided-interventions",
+    "status": 404,
+    "finalUrl": "https://www.gehealthcare.com/en-us/about/newsroom/press-releases/estro-2026-congress--ge-healthcare-to-spotlight-ai-enabled-solutions-to-advance-precision-care-across-radiation-therapy-and-image-guided-interventions",
+    "title": "404 | GE HealthCare (United States)"
+  },
+  {
+    "url": "https://estro-united-imaging-healthcare-europe.framer.ai/",
+    "status": 200,
+    "finalUrl": "https://estro-united-imaging-healthcare-europe.framer.ai/",
+    "title": "ESTRO 2026 | United Imaging Healthcare Europe"
+  },
+  {
+    "url": "https://www.neuralrad.com/",
+    "status": 200,
+    "finalUrl": "https://www.neuralrad.com/",
+    "title": "NeuralRad - AI-Powered Stereotactic Radiosurgery Platform"
+  },
+  {
+    "url": "https://atomoai.ai/services",
+    "status": 200,
+    "finalUrl": "https://atomoai.ai/services",
+    "title": "AtomoAI"
+  }
+]
