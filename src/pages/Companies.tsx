@@ -308,6 +308,7 @@ const Companies = () => {
                 website={company.website}
                 logoUrl={company.logoUrl}
                 products={company.products as any[]}
+                discontinuedCount={company.discontinuedCount}
                 description={company.description}
                 primaryTask={company.primaryTask}
                 secondaryTasks={company.secondaryTasks}

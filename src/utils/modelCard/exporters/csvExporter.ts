@@ -59,6 +59,9 @@ export const exportModelCardToCSV = (product: ProductDetails) => {
       { Section: "Regulatory & Market", Field: "FDA Details", Value: modelCard.regulatory.fdaDetails },
       { Section: "Regulatory & Market", Field: "Intended Use Statement", Value: modelCard.regulatory.intendedUseStatement },
       { Section: "Regulatory & Market", Field: "Market Presence", Value: modelCard.regulatory.marketPresence },
+      { Section: 'Regulatory & Market', Field: 'Development Stage', Value: product.developmentStage ?? '' },
+      { Section: 'Regulatory & Market', Field: 'Market Status', Value: product.market?.status ? JSON.stringify(product.market.status) : '' },
+      { Section: 'Regulatory & Market', Field: 'Superseded By', Value: product.supersededBy ?? '' },
       
       // Contact Information
       { Section: "Contact Information", Field: "Website", Value: modelCard.contact.website },
