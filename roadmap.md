@@ -1,5 +1,10 @@
 # Roadmap
 
+## Discontinued products
+- [x] Central lifecycle selectors, sourced market status and GE unconfirmed report; no database edits or ID changes.
+- [x] Historical hub, vendor groups, notices, exports and current-market counts; historical-only vendor pages retained.
+- [x] Documentation and 18 focused tests pass; public search/filter/export/product/vendor flow browser-verified with no page errors. Build OK. Existing lint failures (614 errors, 59 warnings) and pre-existing mobile footer overflow left unchanged.
+
 ## Full product review — 2026-10-15
 - [x] Baseline: 98 live entries (91 non-Pipeline, seven Pipeline), 265 distinct cited identifiers retrieved; existing validator flags three aggregate mismatches and 72 warnings.
 - [x] Auto-Contouring: targeted source checks and eight-role report; identified incorrect citation/product attribution and study-design descriptions, not silently applied.

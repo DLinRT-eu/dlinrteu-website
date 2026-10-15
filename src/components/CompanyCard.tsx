@@ -14,11 +14,12 @@ interface CompanyCardProps {
   website?: string;
   logoUrl?: string;
   products: ProductDetails[];
+  discontinuedCount?: number;
   primaryTask?: string;
   secondaryTasks?: string[];
 }
 
-const CompanyCard = ({ id, name, description, website, logoUrl, products, primaryTask, secondaryTasks }: CompanyCardProps) => {
+const CompanyCard = ({ id, name, description, website, logoUrl, products, primaryTask, secondaryTasks, discontinuedCount = 0 }: CompanyCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded(!expanded);
@@ -88,7 +89,7 @@ const CompanyCard = ({ id, name, description, website, logoUrl, products, primar
 
               <div className="flex items-center mt-2 text-gray-500">
                 <Package className="w-4 h-4 mr-1" />
-                <span>{products.length} product{products.length !== 1 ? 's' : ''}</span>
+                <span>{products.length} current product{products.length !== 1 ? 's' : ''}{discontinuedCount > 0 ? ` · ${discontinuedCount} historical` : ''}</span>
               </div>
             </div>
           </div>

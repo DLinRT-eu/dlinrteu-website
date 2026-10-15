@@ -1,10 +1,12 @@
 import type { ProductDetails } from "../types/productDetails";
 import { ADOPTION_READINESS_LEVELS, EVIDENCE_RIGOR_LEVELS, EFFICACY_LEVELS } from "../data/evidence-impact-levels";
 import { computeProductEvidenceScore, paperLabel } from "./evidenceScoring";
+import { isDiscontinuedProduct } from './productLifecycle';
 
 /** Shared assessed product set for the dashboard's two- and three-axis views. */
 export function getEvidenceMatrixProducts(products: ProductDetails[]): ProductDetails[] {
   return products.flatMap((product) => {
+    if (isDiscontinuedProduct(product)) return [];
     const score = computeProductEvidenceScore(product);
     if (!EVIDENCE_RIGOR_LEVELS.some((level) => level.level === score.rigor) ||
         !EFFICACY_LEVELS.some((level) => level.level === score.impact)) return [];

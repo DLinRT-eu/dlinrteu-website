@@ -1,5 +1,7 @@
 # AGENTS.md
 
+- Commercial lifecycle is centralized in `productLifecycle`; current-market selectors exclude discontinued entries while public ID lookups retain them — why: market availability must not overwrite task, historical regulatory facts, evidence or stored review IDs.
+
 - Vendor application consolidations use canonical product IDs with central legacy aliases, sourced naming history and function-scoped historical evidence; do not export the source module records as active products — why: regrouping must preserve attribution and old links without inflating catalogue counts.
 - Historical review/draft lookups use `getProductForStoredRecord` and retain original IDs and module scope; public lookups resolve aliases to the current application — why: many-to-one remapping would collide with review-round uniqueness and overwrite independent histories.
 

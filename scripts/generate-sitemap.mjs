@@ -25,6 +25,7 @@ const STATIC_PAGES = [
   { path: "/initiatives", priority: "0.8", lastmod: "2026-05-13" },
   { path: "/compare/structures", priority: "0.7", lastmod: "2026-05-13" },
   { path: "/news", priority: "0.7", lastmod: "2026-05-13" },
+  { path: '/products/discontinued', priority: '0.6', lastmod: '2026-10-15' },
   { path: "/resources-compliance", priority: "0.7", lastmod: "2026-05-13" },
   { path: "/evidence-impact-guide", priority: "0.6", lastmod: "2026-05-13" },
   { path: "/guides/ai-auto-contouring-comparison", priority: "0.6", lastmod: "2026-05-13" },

@@ -15,6 +15,10 @@ This guide covers all aspects of working with products on DLinRT.eu, including r
 
 ## Reviewing Products
 
+### Commercial lifecycle and historical records
+
+Keep clinical task categories unchanged when new sales stop. Use `developmentStage: "discontinued"` with sourced `market.status` metadata for documented end of sales; distinguish this from end of support, regional availability and regulatory withdrawal. Unknown dates and regions remain absent. Unconfirmed reports use availability-review metadata and do not remove a product from current-market counts. Historical pages, vendor history, papers and E/L/R assessments remain accessible; these are not claims of current availability or clinical validation. Do not delete or remap stored review/draft IDs or reactivate rejected archived duplicates.
+
 DLinRT.eu supports two methods for reviewing products:
 
 ### Method 1: Visual Editing (Recommended)

@@ -88,6 +88,7 @@ const Transparency = lazyPage(() => import("./pages/Transparency"));
 const NewsDetail = lazyPage(() => import("./pages/NewsDetail"));
 const Products = lazyPage(() => import("./pages/Products"));
 const Pipeline = lazyPage(() => import("./pages/Pipeline"));
+const DiscontinuedProducts = lazyPage(() => import('./pages/DiscontinuedProducts'));
 const CompanyProducts = lazyPage(() => import("./pages/CompanyProducts"));
 const Dashboard = lazyPage(() => import("./pages/Dashboard"));
 const Dashboard_Authenticated = lazyPage(() => import("./pages/Dashboard_Authenticated"));
@@ -188,6 +189,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="products" element={<Products />} />
                 <Route path="products/pipeline" element={<Pipeline />} />
+                <Route path="products/discontinued" element={<DiscontinuedProducts />} />
                 <Route path="products/company/:companyId" element={<CompanyProducts />} />
                 <Route path="compare/structures" element={<CompareStructures />} />
                 <Route path="initiatives" element={<Initiatives />} />

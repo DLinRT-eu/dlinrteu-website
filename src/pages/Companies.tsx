@@ -58,6 +58,7 @@ const Companies = () => {
         return {
           ...company,
           products: companyProducts,
+          discontinuedCount: dataService.getDiscontinuedProductsByCompany(company.id).length,
           productCount: companyProducts.length
         };
       });
@@ -106,7 +107,7 @@ const Companies = () => {
       company.products.some(product => 
         product.name.toLowerCase().includes(query) || 
         product.description.toLowerCase().includes(query)
-      )
+      ) || dataService.getDiscontinuedProductsByCompany(company.id).some(product => product.name.toLowerCase().includes(query))
     );
   }, [taskFilteredCompanies, searchQuery]);
 
@@ -307,6 +308,7 @@ const Companies = () => {
                 website={company.website}
                 logoUrl={company.logoUrl}
                 products={company.products as any[]}
+                discontinuedCount={company.discontinuedCount}
                 description={company.description}
                 primaryTask={company.primaryTask}
                 secondaryTasks={company.secondaryTasks}

@@ -83,6 +83,9 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
     
     // Regulatory & Market Sheet
     const regulatoryData = [
+      { Field: 'Development Stage', Value: product.developmentStage ?? '' },
+      { Field: 'Market Status', Value: product.market?.status ? JSON.stringify(product.market.status) : '' },
+      { Field: 'Superseded By', Value: product.supersededBy ?? '' },
       { Field: "CE Details", Value: modelCard.regulatory.ceDetails },
       { Field: "CE Class", Value: (product as any)?.regulatory?.ce?.class || "" },
       { Field: "CE Type", Value: (product as any)?.regulatory?.ce?.type || "" },

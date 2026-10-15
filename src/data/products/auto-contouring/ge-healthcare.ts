@@ -83,6 +83,13 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "Auto Segmentation is intended to be used as a workflow tool for initial anatomy segmentation of organs at risk on CT images as an aid in radiation therapy planning after user confirmation. It generates a Radiotherapy Structure Set (RTSS) DICOM with segmented organs at risk which can be used by dosimetrists, medical physicists, and radiation oncologists as initial contours to accelerate workflow for radiation therapy planning. It is the responsibility of the user to verify the processed output contours and user-defined labels for each organ at risk and correct the contours/labels as needed. Auto Segmentation may be used with images acquired on CT scanners, in adult patients. (Source: FDA 510(k) K230082 Summary, accessed 2026-06-11)"
     },
     market: {
+      status: {
+        verification: 'unconfirmed', event: 'availability-review',
+        reason: 'Reported concern that CT Auto Segmentation is no longer marketed. GE still publishes its product page; withdrawal from new sales has not been independently confirmed. MR Contour DL is a separate product.',
+        source: 'GE public product page checked; it does not confirm current sales or withdrawal',
+        sourceUrl: 'https://www.gehealthcare.com/en-us/products/imaging-applications/advanced-visualization-applications/auto-segmentation',
+        sourceAccess: 'public', sourceRetrievedOn: '2026-10-15',
+      },
       onMarketSince: "2023",
       distributionChannels: ["Direct sales"]
     },

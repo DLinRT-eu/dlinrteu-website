@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AUTO_CONTOURING_PRODUCTS } from "@/data/products/auto-contouring";
 import { hasRegulatoryApproval } from "@/utils/productFilters";
+import { isDiscontinuedProduct } from '@/utils/productLifecycle';
 import { ArrowRight } from "lucide-react";
 
 const FAQS = [
@@ -44,7 +45,7 @@ const FAQS = [
 ];
 
 const AiAutoContouringComparison = () => {
-  const products = AUTO_CONTOURING_PRODUCTS.filter((p) => hasRegulatoryApproval(p));
+  const products = AUTO_CONTOURING_PRODUCTS.filter((p) => hasRegulatoryApproval(p) && !isDiscontinuedProduct(p));
 
   const structuredData = {
     "@context": "https://schema.org",
