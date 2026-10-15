@@ -170,6 +170,9 @@ function createDeviceNames(product: ProductDetails): FHIRDeviceDefinitionName[] 
     }
   }];
 
+  for (const item of product.nameHistory ?? []) {
+    names.push({ name: item.name, type: { coding: [{ system: 'http://hl7.org/fhir/devicedefinition-nametype', code: 'other', display: 'Other name' }] } });
+  }
   return names;
 }
 
@@ -258,6 +261,9 @@ function createClassifications(product: ProductDetails): FHIRDeviceDefinitionCla
  */
 function createProperties(product: ProductDetails, warnings: FHIRValidationWarning[]): FHIRDeviceDefinitionProperty[] {
   const properties: FHIRDeviceDefinitionProperty[] = [];
+  for (const item of product.functionEvidence ?? []) {
+    properties.push({ type: { coding: [{ system: DLINRT_PROPERTIES_SYSTEM, code: 'function-evidence', display: item.label }] }, valueString: [JSON.stringify(item)] });
+  }
 
   // Modality property
   const modalities = normalizeModalities(product.modality);

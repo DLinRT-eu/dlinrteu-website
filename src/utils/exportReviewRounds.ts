@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { ALL_PRODUCTS } from "@/data";
+import { getProductForStoredRecord } from "@/data";
 import { exportToExcelSimple } from './excelExport';
 
 export interface AssignmentExportData {
@@ -58,7 +58,7 @@ export async function fetchRoundAssignments(roundId: string): Promise<Assignment
 
   // Build the export data
   const exportData: AssignmentExportData[] = reviews.map((review: any) => {
-    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
+    const product = getProductForStoredRecord(review.product_id);
     const reviewer = review.profiles;
     
     return {
@@ -116,7 +116,7 @@ export async function fetchSelectedRoundAssignments(roundIds: string[]): Promise
 
   // Build the export data
   const exportData: AssignmentExportData[] = reviews.map((review: any) => {
-    const product = ALL_PRODUCTS.find(p => p.id === review.product_id);
+    const product = getProductForStoredRecord(review.product_id);
     const reviewer = review.profiles;
     const round = rounds.find(r => r.id === review.review_round_id);
     
@@ -157,7 +157,7 @@ export async function fetchAllRoundAssignments(): Promise<AssignmentExportData[]
 
   // Build the export data from RPC result
   const exportData: AssignmentExportData[] = response.data.map((item: any) => {
-    const product = ALL_PRODUCTS.find(p => p.id === item.product_id);
+    const product = getProductForStoredRecord(item.product_id);
     
     return {
       roundName: item.round_name,

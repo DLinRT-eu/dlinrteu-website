@@ -23,6 +23,7 @@ export const exportModelCardToCSV = (product: ProductDetails) => {
       { Section: "Basic Information", Field: "Last Updated", Value: modelCard.basicInfo.lastUpdated },
       { Section: "Basic Information", Field: "CE Status", Value: modelCard.basicInfo.ceStatus },
       { Section: "Basic Information", Field: "FDA Status", Value: modelCard.basicInfo.fdaStatus },
+      ...(product.nameHistory?.length ? [{ Section: 'Basic Information', Field: 'Name History', Value: JSON.stringify(product.nameHistory) }] : []),
       
       // Key Features
       { Section: "Key Features", Field: "Features Count", Value: modelCard.keyFeatures.count.toString() },
@@ -51,6 +52,7 @@ export const exportModelCardToCSV = (product: ProductDetails) => {
       { Section: "Performance & Validation", Field: "Supported Structures", Value: modelCard.performance.supportedStructures },
       { Section: "Performance & Validation", Field: "Limitations", Value: modelCard.performance.limitations },
       { Section: "Performance & Validation", Field: "Evidence", Value: modelCard.performance.evidence },
+      ...(product.functionEvidence?.length ? [{ Section: 'Performance & Validation', Field: 'Function Evidence', Value: JSON.stringify(product.functionEvidence) }] : []),
       
       // Regulatory & Market
       { Section: "Regulatory & Market", Field: "CE Details", Value: modelCard.regulatory.ceDetails },

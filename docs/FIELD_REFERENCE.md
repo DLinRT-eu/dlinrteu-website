@@ -33,6 +33,8 @@ The UI surfaces non-public sources via a "Vendor-provided · retrieved YYYY-MM-D
 
 ## Core Identification
 
+Catalogue records follow the vendor's current application boundaries. When former modules are regrouped, preserve their IDs as redirects and source-attributed aliases rather than counting them as additional active products. `nameHistory` records former labels, functions, known versions and dated sources; `functionEvidence` retains each function's attributable papers, structures, limitations and E/L/R scores. A merged application's aggregate score does not validate every included function. Legal device names and cleared versions remain distinct from current marketing names.
+
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `id` | ✅ | Unique stable identifier (used in URLs, exports, assignments). | Lowercase `company-product` slug. No spaces. | Never change once published; create new entry for major revisions. |

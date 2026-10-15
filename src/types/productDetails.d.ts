@@ -3,6 +3,20 @@ import { Product } from './product';
 import type { EudamedDeviceRegistration } from './eudamed';
 
 export interface ProductDetails extends Product {
+  nameHistory?: Array<{
+    name: string;
+    productId?: string;
+    function: string;
+    version?: string;
+    sourceUrl: string;
+    retrievedOn: string;
+    notes?: string;
+  }>;
+  functionEvidence?: Array<{
+    id: string;
+    label: string;
+    product: ProductDetails;
+  }>;
   // No need to re-declare properties from Product
   companyUrl?: string;
   productUrl?: string;

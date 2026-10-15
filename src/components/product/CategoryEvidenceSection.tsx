@@ -27,6 +27,22 @@ interface Props {
 const CategoryEvidenceSection = ({ product }: Props) => {
   const categories = useMemo(() => getCategoriesForProduct(product), [product]);
   const [active, setActive] = useState(categories[0] ?? "");
+  const [activeFunction, setActiveFunction] = useState(product.functionEvidence?.[0]?.id ?? '');
+
+  if (product.functionEvidence?.length) {
+    const selected = product.functionEvidence.find(f => f.id === activeFunction) ?? product.functionEvidence[0];
+    return (
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold">Evidence by function</h2>
+        <Tabs value={selected.id} onValueChange={setActiveFunction}>
+          <TabsList className="flex h-auto max-w-full flex-wrap justify-start gap-1">
+            {product.functionEvidence.map(f => <TabsTrigger className="max-w-full whitespace-normal break-words text-left" key={f.id} value={f.id}>{f.label}</TabsTrigger>)}
+          </TabsList>
+        </Tabs>
+        <CategoryEvidenceSection key={selected.id} product={selected.product} />
+      </section>
+    );
+  }
 
   if (!hasCategoryEvidence(product) || categories.length < 2) {
     return (

@@ -13,6 +13,7 @@ import {
   isPipelineProduct
 } from "@/utils/productFilters";
 import { transformTaskData, transformLocationData, transformModalityData, transformStructureData, transformStructureTypeData } from "@/utils/chartDataTransformation";
+import { resolveProductId } from '@/utils/productAliases';
 
 /**
  * Helper function to check if a product matches a task/category
@@ -109,7 +110,7 @@ class DataService {
       "philips-smartspeed-ai": "philips-smartspeed"
     };
     
-    const actualId = legacyIdMapping[id] || id;
+    const actualId = resolveProductId(legacyIdMapping[id] || id);
     const productList = this.verificationsLoaded ? this.products : ALL_PRODUCTS;
     
     // Allow finding both certified and pipeline products by ID

@@ -38,6 +38,8 @@ export const useProductSearch = ({ products, searchQuery, advancedSearch }: Prod
         return false;
       };
 
+      if (searchInValue(product.nameHistory)) return true;
+
       if (!advancedSearch) {
         // Basic search: main identifying fields plus model-sheet identifiers
         const basicFields = [

@@ -69,6 +69,7 @@ export const createSearchFilter = (searchTerm: string) => {
       product.company,
       product.description,
       product.category,
+      ...(product.nameHistory?.map(h => h.name) ?? []),
       ...(product.features || []),
       ...(product.keyFeatures || [])
     ];

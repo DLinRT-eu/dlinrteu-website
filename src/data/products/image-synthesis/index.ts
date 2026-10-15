@@ -7,8 +7,8 @@ import { SIEMENS_PRODUCTS } from "./siemens";
 import { SPECTRONIC_PRODUCTS } from "./spectronic";
 import { MVISION_IMAGE_SYNTHESIS_PRODUCTS } from "./mvision";
 
-import { THERAPANACEA_MRBOX_PRODUCTS } from "./therapanacea";
-import { THERAPANACEA_ADAPTBOX_PRODUCTS } from "./therapanacea-adaptbox";
+
+import { THERAPANACEA_ADAPTIVE } from "../therapanaceaApplications";
 
 export const IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
   ...PHILIPS_MRCAT_BRAIN_PRODUCTS,
@@ -18,6 +18,6 @@ export const IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
   ...SIEMENS_PRODUCTS,
   ...SPECTRONIC_PRODUCTS,
   ...MVISION_IMAGE_SYNTHESIS_PRODUCTS,
-  ...THERAPANACEA_MRBOX_PRODUCTS,
-  ...THERAPANACEA_ADAPTBOX_PRODUCTS
+
+  THERAPANACEA_ADAPTIVE
 ];

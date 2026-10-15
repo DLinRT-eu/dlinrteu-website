@@ -17,7 +17,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, UserPlus, Search, Filter } from 'lucide-react';
-import { ALL_PRODUCTS } from '@/data';
+import { ALL_PRODUCTS, getProductForStoredRecord } from '@/data';
 import { DataControlsBar, SortDirection } from '@/components/common/DataControlsBar';
 import { exportToCSV, exportToExcel, exportToJSON } from '@/utils/exportUtils';
 import { toast as sonnerToast } from 'sonner';
@@ -634,7 +634,7 @@ export default function ReviewAssignment() {
                   </TableRow>
                 ) : (
                   filteredAndSortedReviews.map((review) => {
-                    const product = products.find(p => p.id === review.product_id);
+                    const product = getProductForStoredRecord(review.product_id);
                     return (
                       <TableRow key={review.id}>
                         <TableCell className="font-medium">
