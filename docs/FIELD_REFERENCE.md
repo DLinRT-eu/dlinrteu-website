@@ -160,7 +160,7 @@ Products are classified using a **tri-axial framework**: Evidence Rigor (E0–E3
 | L5 | Patient outcome efficacy | Level 5 | Toxicity, local recurrence, overall survival, PROMs |
 | L6 | Societal efficacy | Level 6 | Costs, QALYs, incremental cost per QALY |
 
-Legacy I0–I5 values are converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional until each paper is re-scored. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
+Papers were re-scored against the Levels of Efficacy table on 2026-10-15 (old code kept as `legacyClinicalImpact`). Any remaining legacy I0–I5 value is converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
 
 ### Study Quality Sub-Attributes
 
@@ -175,9 +175,9 @@ Legacy I0–I5 values are converted provisionally (I0→L1c, I1→L2, I2→L3, I
 | Field | Required? | Purpose | Allowed Values / Format | Reviewer Notes |
 | --- | --- | --- | --- | --- |
 | `evidenceRigor` | ➖ | Evidence rigor level | `"E0"`, `"E1"`, `"E2"`, `"E3"` | Assign based on strongest published evidence methodology |
-| `clinicalImpact` | ➖ | Clinical impact level | `"L1t"`, `"L1c"`, `"L2"`–`"L6"` (legacy `"I0"`–`"I5"` read as provisional) | L2 = accuracy vs reference; L3 = workflow/decision; L4 = prospective patient management |
+| `clinicalImpact` | ➖ | Level of Efficacy | `"L1t"`, `"L1c"`, `"L2"`–`"L6"` (legacy `"I0"`–`"I5"` read as provisional) | L2 = accuracy vs reference; L3 = workflow/decision; L4 = prospective patient management |
 | `evidenceLevelNotes` | ➖ | Justification for classification | Free text | Cite key supporting publications |
-| `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Clinical impact (I) and implementation burden (Z) remain product-level only. |
+| `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Level of Efficacy (L) and implementation burden (Z) remain product-level only. |
 
 **Key References**:
 - van Leeuwen KG, et al. *Eur Radiol.* 2021;31(6):3797-3804. [DOI](https://doi.org/10.1007/s00330-021-07892-z)

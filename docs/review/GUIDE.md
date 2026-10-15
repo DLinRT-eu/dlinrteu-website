@@ -285,7 +285,7 @@ Every product should have an evidence level assigned. The classification uses a 
 | L5 | Patient outcome efficacy | Level 5 | Toxicity, local recurrence, overall survival, PROMs |
 | L6 | Societal efficacy | Level 6 | Costs, QALYs, incremental cost per QALY |
 
-Legacy I0–I5 values are converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional until each paper is re-scored. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
+Papers were re-scored against the Levels of Efficacy table on 2026-10-15 (old code kept as `legacyClinicalImpact`). Any remaining legacy I0–I5 value is converted provisionally (I0→L1c, I1→L2, I2→L3, I3→L3, I4→L5, I5→L6) and shown as provisional. Adapted from van Leeuwen et al. (2021), updated against Antonissen et al. (2026), cross-referenced to Fryback & Thornbury (1991).
 
 ### Per-publication scoring (mandatory)
 
