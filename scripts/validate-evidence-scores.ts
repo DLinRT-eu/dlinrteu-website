@@ -73,7 +73,8 @@ for (const category of categories) {
     productCount += 1;
     const score = computeProductEvidenceScore(p, { category: p.category ?? category });
     const storedRigor = p.evidenceRigor;
-    const storedImpact = p.clinicalImpact;
+    const storedImpact = resolveEfficacyLevel(p.clinicalImpact).level;
+    const legacyPapers = (p.keyPapers ?? []).filter((k) => isLegacyImpactCode(k.clinicalImpact)).length;
 
     const add = (severity: Issue["severity"], code: string, detail: string) =>
       issues.push({
@@ -104,6 +105,12 @@ for (const category of categories) {
     }
     if (score.impact && !storedImpact) {
       add("error", "impact-missing", `effective ${score.impact} but product has no clinicalImpact`);
+    }
+    if (p.clinicalImpact && !resolveEfficacyLevel(p.clinicalImpact).level) {
+      add("error", "impact-invalid", `unknown level of efficacy "${p.clinicalImpact}"`);
+    }
+    if (legacyPapers > 0 || isLegacyImpactCode(p.clinicalImpact)) {
+      add("warning", "legacy-impact-code", `${legacyPapers} paper(s) still on a legacy I-code; level is provisional until re-scored`);
     }
     if (score.hasOverride && !score.overrideReason?.trim()) {
       add("error", "override-without-reason", "evidenceScoreOverride set without a reason");
