@@ -68,6 +68,75 @@ const StandardsGuidelines = () => {
           version: "ISO/IEC 23894:2023",
           status: "standard",
           note: "Previously listed here as ISO/IEC 23053, which instead defines an ML framework."
+        },
+        {
+          standard: "ISO/IEC TS 4213",
+          description: "Assessment of machine learning classification performance",
+          scope: "Metrics and methods for evaluating ML classifiers",
+          version: "ISO/IEC TS 4213:2022",
+          status: "standard",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "ISO/IEC TR 24028",
+          description: "Overview of trustworthiness in artificial intelligence",
+          scope: "Robustness, transparency, bias and reliability considerations",
+          version: "ISO/IEC TR 24028:2020",
+          status: "standard",
+          lastVerified: "2026-10-16"
+        }
+      ]
+    },
+    {
+      category: "AI Risk & Trustworthiness Frameworks",
+      items: [
+        {
+          standard: "NIST AI 600-1",
+          description: "Generative AI Profile of the NIST AI RMF",
+          scope: "Risk management actions specific to generative AI",
+          version: "NIST AI 600-1 (July 2024)",
+          status: "guidance",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "NIST AI 100-2",
+          description: "Adversarial machine learning taxonomy and terminology",
+          scope: "Attacks on and mitigations for ML systems",
+          version: "NIST AI 100-2 E2025",
+          status: "guidance",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "ALTAI",
+          description: "EU HLEG Assessment List for Trustworthy AI",
+          scope: "Self-assessment checklist for trustworthy AI",
+          version: "Final assessment list (July 2020)",
+          status: "guidance",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "EU MCC-AI",
+          description: "EU model contractual clauses for procurement of AI",
+          scope: "Procurement: contract clauses for buying (high-risk) AI systems",
+          version: "Public Buyers Community, updated clauses (2025)",
+          status: "guidance",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "OWASP GenAI",
+          description: "OWASP GenAI Security Project (incl. LLM Top 10)",
+          scope: "Security risks — relevant mainly for LLM-based tools",
+          version: "OWASP GenAI Security Project",
+          status: "guidance",
+          lastVerified: "2026-10-16"
+        },
+        {
+          standard: "Stanford HELM",
+          description: "Holistic Evaluation of Language Models",
+          scope: "Benchmarking framework — relevant mainly for LLM-based tools",
+          version: "Stanford CRFM HELM",
+          status: "guidance",
+          lastVerified: "2026-10-16"
         }
       ]
     },
