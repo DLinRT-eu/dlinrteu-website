@@ -25,7 +25,7 @@ export interface VerificationMeta {
 }
 
 /** Date of the most recent full audit of the Resources & Compliance page. */
-export const RESOURCES_LAST_AUDIT = '2026-07-31';
+export const RESOURCES_LAST_AUDIT = '2026-10-16';
 
 const STATUS_LABELS: Record<VerificationStatus, string> = {
   'in-force': 'In force',
