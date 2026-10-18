@@ -267,7 +267,7 @@ const handler = async (req: Request): Promise<Response> => {
           resendId: resendMessageId(response),
         });
       } catch (err: any) {
-        console.error(`Failed to send digest to ${admin.email}:`, err?.message ?? err);
+        console.error(`Failed to send digest to an admin:`, err?.message ?? err);
         sendErrors.push({ email: admin.email!, error: err?.message ?? "unknown" });
         await logEmailSend(supabase, {
           functionName: "send-role-request-digest",

@@ -159,7 +159,7 @@ const handler = async (req: Request): Promise<Response> => {
     const safeLast = escapeHtml(lastName);
     const safeEmail = escapeHtml(email);
 
-    console.log("Received newsletter subscription from:", email);
+    console.log("Received newsletter subscription request");
 
     // Validate required fields and email format
     const isValidEmail = typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

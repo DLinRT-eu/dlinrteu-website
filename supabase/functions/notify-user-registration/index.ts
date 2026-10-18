@@ -133,7 +133,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Check if email is institutional (but don't block non-institutional)
     const isInstitutional = isInstitutionalEmail(email);
     if (!isInstitutional) {
-      console.warn(`Non-institutional email registration detected: ${email}`);
+      console.warn(`Non-institutional email registration detected for user ${userId}`);
       // Log but don't block - admin will review
     }
 
