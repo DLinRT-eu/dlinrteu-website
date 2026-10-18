@@ -19,7 +19,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus, CalendarClock, Shuffle } from "lucide-react";
+import { MoreVertical, CheckCircle2, Archive, Copy, PlayCircle, Trash2, PackagePlus, CalendarClock, Shuffle, Mail } from "lucide-react";
+import { SendRoundStartDialog } from "./SendRoundStartDialog";
 import { toast } from "sonner";
 import { updateRoundStatusAdmin, cloneReviewRoundAdmin } from "@/utils/reviewRoundUtils";
 import type { ReviewRound } from "@/utils/reviewRoundUtils";
@@ -49,6 +50,7 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
   const [showAddProductsDialog, setShowAddProductsDialog] = useState(false);
   const [showDeadlineDialog, setShowDeadlineDialog] = useState(false);
   const [showShuffleDialog, setShowShuffleDialog] = useState(false);
+  const [showStartEmailDialog, setShowStartEmailDialog] = useState(false);
   const [cloning, setCloning] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [cloneData, setCloneData] = useState({
@@ -162,6 +164,10 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
               <DropdownMenuItem onClick={() => setShowAddProductsDialog(true)}>
                 <PackagePlus className="h-4 w-4 mr-2" />
                 Add Products…
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setShowStartEmailDialog(true)}>
+                <Mail className="h-4 w-4 mr-2" />
+                Notify reviewers: round started…
               </DropdownMenuItem>
             </>
           )}
@@ -315,6 +321,12 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
         onOpenChange={setShowAddProductsDialog}
         round={round}
         onUpdate={onUpdate}
+      />
+
+      <SendRoundStartDialog
+        open={showStartEmailDialog}
+        onOpenChange={setShowStartEmailDialog}
+        round={round}
       />
 
       <ShuffleAssignmentsDialog
