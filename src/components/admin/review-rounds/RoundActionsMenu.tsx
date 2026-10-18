@@ -317,6 +317,12 @@ export function RoundActionsMenu({ round, onUpdate }: RoundActionsMenuProps) {
         onUpdate={onUpdate}
       />
 
+      <SendRoundStartDialog
+        open={showStartEmailDialog}
+        onOpenChange={setShowStartEmailDialog}
+        round={round}
+      />
+
       <ShuffleAssignmentsDialog
         open={showShuffleDialog}
         onOpenChange={setShowShuffleDialog}
