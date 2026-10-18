@@ -80,7 +80,6 @@
     "recharts": "^3.10.1",
     "sanitize-html": "^2.17.7",
     "sonner": "^1.7.4",
-    "source-map-js": "^1.2.2",
     "tailwind-merge": "^2.6.1",
     "tailwindcss-animate": "^1.0.7",
     "three": "0.160.0",
