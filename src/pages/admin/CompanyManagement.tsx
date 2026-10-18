@@ -1,3 +1,4 @@
+import { sanitizeCsvCell } from '@/utils/csvSanitize';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -361,7 +362,7 @@ export default function CompanyManagement() {
 
     const headers = Object.keys(csvData[0]).join(',');
     const rows = csvData.map(row => 
-      Object.values(row).map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+      Object.values(row).map(v => `"${sanitizeCsvCell(v).replace(/"/g, '""')}"`).join(',')
     );
     const csv = [headers, ...rows].join('\n');
 

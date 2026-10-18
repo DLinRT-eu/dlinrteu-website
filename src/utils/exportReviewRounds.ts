@@ -1,3 +1,4 @@
+import { sanitizeCsvCell } from '@/utils/csvSanitize';
 import { supabase } from "@/integrations/supabase/client";
 import { getProductForStoredRecord } from "@/data";
 import { exportToExcelSimple } from './excelExport';
@@ -228,7 +229,7 @@ export function exportToCSV(data: AssignmentExportData[], filename: string = 're
     headers.join(','),
     ...rows.map(row => row.map(cell => {
       // Escape quotes and wrap in quotes if contains comma
-      const cellStr = String(cell);
+      const cellStr = sanitizeCsvCell(cell);
       if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
         return `"${cellStr.replace(/"/g, '""')}"`;
       }

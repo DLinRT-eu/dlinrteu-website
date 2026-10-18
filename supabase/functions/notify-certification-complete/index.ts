@@ -224,7 +224,7 @@ const handler = async (req: Request): Promise<Response> => {
           `,
         });
         emailsSent.push(profile.email);
-        console.log("Confirmation email sent to company representative:", profile.email);
+        console.log("Confirmation email sent to company representative");
       } catch (emailError) {
         console.error("Error sending confirmation to representative:", emailError);
       }

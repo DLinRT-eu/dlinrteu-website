@@ -320,7 +320,7 @@ const handler = async (req: Request): Promise<Response> => {
           html: htmlContent,
         });
 
-        console.log(`Email sent to ${reviewer.reviewer_email}`);
+        console.log(`Deadline reminder sent to reviewer ${reviewerId}`);
         emailsSent++;
         sentReviewIds.push(...reviewerReviews.map(r => r.review_id));
         await logEmailSend(supabase, {
@@ -331,7 +331,7 @@ const handler = async (req: Request): Promise<Response> => {
           resendId: resendMessageId(emailResponse),
         });
       } catch (emailError: any) {
-        console.error(`Failed to send email to ${reviewer.reviewer_email}:`, emailError);
+        console.error(`Failed to send deadline reminder to reviewer ${reviewerId}:`, emailError);
         emailsFailed++;
         await logEmailSend(supabase, {
           functionName: "send-deadline-reminders",

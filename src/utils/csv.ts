@@ -1,3 +1,4 @@
+import { sanitizeCsvCell } from "./csvSanitize";
 /**
  * RFC 4180 compliant CSV utilities.
  * Centralized to avoid ad-hoc CSV writers across the codebase.
@@ -18,6 +19,7 @@ export const escapeCsvValue = (value: unknown): string => {
   } else {
     stringValue = String(value);
   }
+  stringValue = sanitizeCsvCell(stringValue);
 
   const needsQuoting = /[",\n\r]/.test(stringValue);
 

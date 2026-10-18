@@ -1,3 +1,4 @@
+import { sanitizeCsvCell } from '@/utils/csvSanitize';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -152,7 +153,7 @@ export function RoundExportButton({ round, assignments, history }: RoundExportBu
       const csvContent = [
         headers.join(','),
         ...rows.map(row => row.map(cell => {
-          const cellStr = String(cell);
+          const cellStr = sanitizeCsvCell(cell);
           if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
             return `"${cellStr.replace(/"/g, '""')}"`;
           }

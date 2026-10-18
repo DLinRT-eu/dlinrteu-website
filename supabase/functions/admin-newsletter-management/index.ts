@@ -66,7 +66,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Admin ${user.email} performing newsletter management operation`);
+    console.log(`Admin ${user.id} performing newsletter management operation`);
 
     let body: any = {};
     try {

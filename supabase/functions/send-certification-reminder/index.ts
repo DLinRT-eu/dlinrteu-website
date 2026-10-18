@@ -251,7 +251,7 @@ const handler = async (req: Request): Promise<Response> => {
           html: htmlContent,
         });
 
-        console.log(`Email sent to ${email} (${companyName})`);
+        console.log(`Reminder email sent (${companyName})`);
         emailsSent++;
         companiesContacted.add(companyName);
         recipientsList.push({ email, name: `${firstName} ${lastName}`.trim(), company: companyName });
@@ -263,7 +263,7 @@ const handler = async (req: Request): Promise<Response> => {
           resendId: resendMessageId(emailResponse),
         });
       } catch (emailError: any) {
-        console.error(`Failed to send email to ${email}:`, emailError);
+        console.error(`Failed to send reminder email:`, emailError);
         emailsFailed++;
         await logEmailSend(adminClient, {
           functionName: "send-certification-reminder",

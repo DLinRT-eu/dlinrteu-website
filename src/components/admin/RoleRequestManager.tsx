@@ -1,3 +1,4 @@
+import { sanitizeCsvCell } from '@/utils/csvSanitize';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -427,7 +428,7 @@ export const RoleRequestManager = () => {
     const headers = Object.keys(csvData[0]).join(',');
     const rows = csvData.map(row => 
       Object.values(row).map(value => 
-        `"${String(value).replace(/"/g, '""')}"`
+        `"${sanitizeCsvCell(value).replace(/"/g, '""')}"`
       ).join(',')
     );
     const csv = [headers, ...rows].join('\n');

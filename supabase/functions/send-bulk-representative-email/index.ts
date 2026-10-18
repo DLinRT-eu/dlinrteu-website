@@ -210,7 +210,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Test send mode: render with first target's data but send only to testEmail.
     const sendList: Array<{ rep: any; toEmail: string }> = testEmail
-      ? [{ rep: targets[0], toEmail: testEmail }]
+      ? [{ rep: targets[0], toEmail: userData.user.email as string }]
       : targets.map((rep: any) => ({ rep, toEmail: rep.profiles?.email })).filter((x) => !!x.toEmail);
 
     let successCount = 0;
@@ -271,7 +271,7 @@ const handler = async (req: Request): Promise<Response> => {
       } catch (e: any) {
         failureCount++;
         recipientsLog.push({ email: toEmail, name: vars.full_name, company: companyName, status: "failed", error: e?.message });
-        console.error(`Send failed to ${toEmail}:`, e?.message);
+        console.error(`Send failed for representative ${rep?.id ?? "unknown"}:`, e?.message);
         await logEmailSend(admin, {
           functionName: "send-bulk-representative-email",
           recipient: toEmail,
