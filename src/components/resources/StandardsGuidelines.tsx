@@ -29,6 +29,14 @@ const StandardsGuidelines = () => {
           status: "standard"
         },
         {
+          standard: "EN 18286",
+          description: "Quality management system for EU AI Act regulatory purposes (CEN/CENELEC)",
+          scope: "First harmonised standard under the AI Act: presumption of conformity with Art. 17 QMS requirements for high-risk AI providers; layers on ISO 13485 or ISO/IEC 42001 rather than replacing them",
+          version: "EN 18286:2026 — referenced by Implementing Decision (EU) 2026/2274",
+          status: "standard",
+          lastVerified: "2026-10-20"
+        },
+        {
           standard: "IEC 62304",
           description: "Medical device software lifecycle processes",
           scope: "Software development and maintenance requirements",
@@ -59,7 +67,8 @@ const StandardsGuidelines = () => {
           description: "AI management system standard",
           scope: "Framework for establishing AI management systems (supports AI Act)",
           version: "ISO/IEC 42001:2023",
-          status: "standard"
+          status: "standard",
+          note: "Not harmonised: presumption of conformity for AI Act Art. 17 comes from EN 18286, not ISO/IEC 42001."
         },
         {
           standard: "ISO/IEC 23894",
