@@ -108,8 +108,24 @@ const newsEntries = [...NEWS_ITEMS]
     priority: "0.5",
   }));
 
+const latest = (values) => values.filter(Boolean).sort().at(-1);
+const latestProduct = latest(productEntries.map((e) => e.lastmod));
+const latestNews = latest(newsEntries.map((e) => e.lastmod));
+// Listing pages change when their underlying records change; use the newest record date.
+const DERIVED_LASTMOD = {
+  "/products": latestProduct,
+  "/companies": latestProduct,
+  "/compare/structures": latestProduct,
+  "/news": latestNews,
+  "/": latest([latestProduct, latestNews]),
+};
+
 const entries = [
-  ...STATIC_PAGES.map((page) => ({ loc: page.path, lastmod: page.lastmod, priority: page.priority })),
+  ...STATIC_PAGES.map((page) => ({
+    loc: page.path,
+    lastmod: latest([page.lastmod, DERIVED_LASTMOD[page.path]]),
+    priority: page.priority,
+  })),
   ...productEntries,
   ...companyEntries,
   ...newsEntries,

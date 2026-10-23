@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { lazy, Suspense, type ComponentType } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -31,6 +32,19 @@ const WORKSPACE_PREFIXES = [
 const isWorkspacePath = (pathname: string) => {
   if (pathname === "/review" || pathname.startsWith("/review/")) return true;
   return WORKSPACE_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
+};
+
+const PUBLIC_GUIDES = ["/admin/guide", "/reviewer/guide", "/company/guide"];
+
+/** Signed-in workspace pages must never appear in search, even when a crawler only sees the sign-in screen. */
+const WorkspaceNoindex = () => {
+  const { pathname } = useLocation();
+  if (!isWorkspacePath(pathname) || PUBLIC_GUIDES.includes(pathname)) return null;
+  return (
+    <Helmet>
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
+  );
 };
 
 const ConditionalHeader = () => {
@@ -177,6 +191,7 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <WorkspaceNoindex />
               <ConditionalHeader />
               <ErrorBoundary>
                 <Suspense fallback={
