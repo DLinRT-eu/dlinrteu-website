@@ -7,7 +7,7 @@ import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips } from ".
 
 export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
   try {
-    const doc = new jsPDF();
+    const doc = makePdfSafe(new jsPDF());
     
     // Set up colors and styling
     const secondaryColor = [52, 73, 94]; // Dark gray

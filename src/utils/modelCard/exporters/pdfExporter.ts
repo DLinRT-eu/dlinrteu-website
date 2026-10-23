@@ -8,7 +8,7 @@ import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips, drawStru
 export const exportModelCardToPDF = (product: ProductDetails) => {
   try {
     const modelCard = generateModelCardData(product);
-    const doc = new jsPDF();
+    const doc = makePdfSafe(new jsPDF());
     
     // Set up colors and styling
     const secondaryColor = [52, 73, 94]; // Dark gray
