@@ -48,7 +48,6 @@ const SEO = ({
       <meta name="description" content={description} />
       <link rel="canonical" href={resolvedCanonical} />
       {noindex && <meta name="robots" content="noindex" />}
-      {noindex && <meta name="prerender-status-code" content="404" />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
