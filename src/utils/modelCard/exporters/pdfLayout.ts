@@ -106,3 +106,262 @@ export const clampLines = (doc: Doc, text: string, width: number, maxLines: numb
   kept[maxLines - 1] = `${kept[maxLines - 1].replace(/\s+\S*$/, "")}…`;
   return kept;
 };
+
+// ---------- Visual primitives (badges, chips, boxes) ----------
+
+export type Rgb = [number, number, number];
+
+/** Tailwind 100 (fill), 300 (border) and 700/800 (text) shades, matching website badges. */
+export const PALETTE: Record<string, { fill: Rgb; border: Rgb; text: Rgb }> = {
+  gray: { fill: [243, 244, 246], border: [209, 213, 219], text: [55, 65, 81] },
+  slate: { fill: [241, 245, 249], border: [203, 213, 225], text: [51, 65, 85] },
+  blue: { fill: [219, 234, 254], border: [147, 197, 253], text: [29, 78, 216] },
+  green: { fill: [220, 252, 231], border: [134, 239, 172], text: [21, 128, 61] },
+  teal: { fill: [204, 251, 241], border: [94, 234, 212], text: [15, 118, 110] },
+  purple: { fill: [243, 232, 255], border: [216, 180, 254], text: [126, 34, 206] },
+  orange: { fill: [255, 237, 213], border: [253, 186, 116], text: [194, 65, 12] },
+  yellow: { fill: [254, 249, 195], border: [253, 224, 71], text: [133, 77, 14] },
+  red: { fill: [254, 226, 226], border: [252, 165, 165], text: [185, 28, 28] },
+  rose: { fill: [255, 228, 230], border: [253, 164, 175], text: [190, 18, 60] },
+};
+
+export const ACCENT: Rgb = [80, 144, 208]; // DLinRT steel blue
+export const INK: Rgb = [26, 26, 46];
+
+export const paletteFor = (color?: string) => PALETTE[color ?? "gray"] ?? PALETTE.gray;
+
+type DrawDoc = Doc & Pick<jsPDF, "setFillColor" | "setDrawColor" | "roundedRect" | "rect" | "getTextWidth" | "setLineWidth" | "textWithLink">;
+
+/** Draws a rounded badge at (x, y-baseline) and returns its width. */
+export const drawBadge = (doc: DrawDoc, x: number, y: number, text: string, color?: string, fontSize = 8): number => {
+  const p = paletteFor(color);
+  doc.setFontSize(fontSize);
+  doc.setFont("helvetica", "bold");
+  const w = doc.getTextWidth(text) + 4;
+  const h = fontSize * 0.5 + 1.5;
+  doc.setFillColor(p.fill[0], p.fill[1], p.fill[2]);
+  doc.setDrawColor(p.border[0], p.border[1], p.border[2]);
+  doc.setLineWidth(0.2);
+  doc.roundedRect(x, y - h + 1.2, w, h, 1, 1, "FD");
+  doc.setTextColor(p.text[0], p.text[1], p.text[2]);
+  doc.text(text, x + 2, y);
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "normal");
+  return w;
+};
+
+/** Lays out badges left to right, wrapping to new rows. */
+export const drawBadgeRow = (
+  doc: DrawDoc,
+  cursor: PdfCursor,
+  badges: Array<{ text: string; color?: string }>,
+  x0: number,
+  maxWidth: number,
+  fontSize = 8
+): void => {
+  const rowH = fontSize * 0.5 + 3.5;
+  ensureSpace(doc, cursor, rowH);
+  let x = x0;
+  badges.forEach((b) => {
+    doc.setFontSize(fontSize);
+    doc.setFont("helvetica", "bold");
+    const w = doc.getTextWidth(b.text) + 4;
+    if (x + w > x0 + maxWidth && x > x0) {
+      cursor.y += rowH;
+      ensureSpace(doc, cursor, rowH);
+      x = x0;
+    }
+    x += drawBadge(doc, x, cursor.y, b.text, b.color, fontSize) + 2;
+  });
+  cursor.y += rowH;
+};
+
+/** Thin accent-bar section header. */
+export const drawSectionHeader = (doc: DrawDoc, cursor: PdfCursor, title: string, margin: number, contentWidth: number): void => {
+  ensureSpace(doc, cursor, 22);
+  cursor.y += 4;
+  doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+  doc.rect(margin, cursor.y - 5, 2, 8, "F");
+  doc.setFontSize(13);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(INK[0], INK[1], INK[2]);
+  doc.text(clampLines(doc, title, contentWidth - 8, 1)[0] ?? "", margin + 5, cursor.y + 1);
+  doc.setDrawColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+  doc.setLineWidth(0.3);
+  doc.line?.(margin, cursor.y + 4, margin + contentWidth, cursor.y + 4);
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "normal");
+  cursor.y += 11;
+};
+
+/** Writes small wrapped muted text (notes). */
+export const writeNote = (doc: Doc, cursor: PdfCursor, text: string, x: number, width: number, fontSize = 8): void => {
+  if (!text || text === "N/A") return;
+  doc.setFontSize(fontSize);
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(90, 90, 100);
+  const lines: string[] = doc.splitTextToSize(text, width);
+  lines.forEach((l) => {
+    ensureSpace(doc, cursor, 4);
+    doc.text(l, x, cursor.y);
+    cursor.y += 4;
+  });
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "normal");
+};
+
+export interface StructureGroup {
+  region: string;
+  items: string[];
+}
+
+/** Groups "Region: Structure Name" strings by region, preserving first-seen order. */
+export const groupStructuresByRegion = (names: string[]): StructureGroup[] => {
+  const map = new Map<string, string[]>();
+  names.forEach((raw) => {
+    const s = String(raw ?? "").trim();
+    if (!s) return;
+    const idx = s.indexOf(":");
+    const region = idx > 0 ? s.slice(0, idx).trim() : "Other";
+    const item = idx > 0 ? s.slice(idx + 1).trim() : s;
+    if (!map.has(region)) map.set(region, []);
+    map.get(region)!.push(item);
+  });
+  return Array.from(map, ([region, items]) => ({ region, items }));
+};
+
+/** Draws a boxed group with a header and items in columns, splitting across pages. */
+export const drawStructureGroup = (
+  doc: DrawDoc,
+  cursor: PdfCursor,
+  group: StructureGroup,
+  margin: number,
+  contentWidth: number,
+  columns = 3
+): void => {
+  const rowH = 4.2;
+  const colW = (contentWidth - 6) / columns;
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  const cells = group.items.map((i) => clampLines(doc, i, colW - 2, 1)[0] ?? "");
+  const rows = Math.ceil(cells.length / columns);
+
+  let r = 0;
+  let first = true;
+  while (r < rows || first) {
+    ensureSpace(doc, cursor, 7 + rowH * Math.min(2, Math.max(rows - r, 1)) + 3);
+    const available = Math.max(1, Math.floor((PAGE_BOTTOM_LIMIT - cursor.y - 10) / rowH));
+    const take = Math.min(available, rows - r);
+    const boxH = 7 + take * rowH + 2;
+    const top = cursor.y - 4;
+    doc.setFillColor(247, 250, 253);
+    doc.setDrawColor(200, 215, 232);
+    doc.setLineWidth(0.2);
+    doc.roundedRect(margin, top, contentWidth, boxH, 1.5, 1.5, "FD");
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(INK[0], INK[1], INK[2]);
+    doc.text(`${group.region} — ${group.items.length}${first ? "" : " (cont.)"}`, margin + 3, cursor.y);
+    doc.setFontSize(7.5);
+    doc.setFont("helvetica", "normal");
+    let y = cursor.y + 5.5;
+    for (let i = 0; i < take; i++) {
+      for (let c = 0; c < columns; c++) {
+        const cell = cells[(r + i) * columns + c];
+        if (!cell) continue;
+        const flagged = /\((investigational|unverified)\)/i.test(cell);
+        if (flagged) doc.setTextColor(194, 65, 12);
+        doc.text(cell, margin + 3 + c * colW, y);
+        if (flagged) doc.setTextColor(INK[0], INK[1], INK[2]);
+      }
+      y += rowH;
+    }
+    doc.setTextColor(0, 0, 0);
+    cursor.y = top + boxH + 6;
+    r += take;
+    first = false;
+    if (rows === 0) break;
+  }
+};
+
+export interface SourceCardData {
+  title: string;
+  meta: string;
+  link?: string;
+  rigor?: { text: string; color?: string };
+  efficacy?: { text: string; color?: string };
+  setsLevel?: boolean;
+  rationale?: string;
+}
+
+/** Bordered card for one evidence source. */
+export const drawSourceCard = (
+  doc: DrawDoc,
+  cursor: PdfCursor,
+  card: SourceCardData,
+  margin: number,
+  contentWidth: number,
+  compact = false
+): void => {
+  const inner = contentWidth - 6;
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "bold");
+  const titleLines = clampLines(doc, card.title || "Untitled source", inner, compact ? 1 : 3);
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  const metaLines = clampLines(doc, card.meta, inner, compact ? 1 : 2);
+  const ratLines = compact || !card.rationale ? [] : clampLines(doc, card.rationale, inner, 3);
+  const linkLine = !compact && card.link ? 1 : 0;
+  const h = 4 + titleLines.length * 4.2 + metaLines.length * 3.6 + 5 + ratLines.length * 3.6 + linkLine * 3.8 + 2;
+
+  ensureSpace(doc, cursor, h + 2);
+  const top = cursor.y;
+  doc.setFillColor(255, 255, 255);
+  const edge = card.setsLevel ? ACCENT : ([210, 214, 222] as Rgb);
+  doc.setDrawColor(edge[0], edge[1], edge[2]);
+  doc.setLineWidth(card.setsLevel ? 0.5 : 0.2);
+  doc.roundedRect(margin, top, contentWidth, h, 1.5, 1.5, "FD");
+  if (card.setsLevel) {
+    doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+    doc.rect(margin, top, 1.2, h, "F");
+  }
+
+  let y = top + 4.5;
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(INK[0], INK[1], INK[2]);
+  titleLines.forEach((l) => { doc.text(l, margin + 3, y); y += 4.2; });
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(90, 90, 100);
+  metaLines.forEach((l) => { doc.text(l, margin + 3, y); y += 3.6; });
+  y += 1.4;
+  let x = margin + 3;
+  if (card.rigor) x += drawBadge(doc, x, y, card.rigor.text, card.rigor.color, 7) + 2;
+  if (card.efficacy) x += drawBadge(doc, x, y, card.efficacy.text, card.efficacy.color, 7) + 2;
+  if (card.setsLevel) drawBadge(doc, x, y, "Sets product level", "blue", 7);
+  y += 4;
+  doc.setFontSize(7.5);
+  doc.setTextColor(70, 70, 80);
+  ratLines.forEach((l) => { doc.text(l, margin + 3, y); y += 3.6; });
+  if (linkLine && card.link) {
+    doc.setTextColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+    const shown = clampLines(doc, card.link, inner, 1)[0] ?? card.link;
+    doc.textWithLink(shown, margin + 3, y, { url: card.link });
+  }
+  doc.setTextColor(0, 0, 0);
+  cursor.y = top + h + 3;
+};
+
+/** Status chip colour for regulatory text. */
+export const regulatoryColor = (status?: string): string => {
+  const s = String(status ?? "").toLowerCase();
+  if (!s || s === "n/a" || s.includes("not ")) return "gray";
+  if (/(pending|submitted|in progress|under review|planned)/.test(s)) return "orange";
+  if (/(withdrawn|recall|expired|revoked)/.test(s)) return "red";
+  if (/(certified|cleared|approved|granted|ce|510|de novo|registered|mdr|class)/.test(s)) return "green";
+  return "gray";
+};
+
+export const EDUCATIONAL_DISCLAIMER =
+  "For information only. Not a clinical validation or endorsement; verify with the manufacturer and local commissioning.";
