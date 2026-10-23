@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import { PdfCursor, clampLines, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 
 export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
   try {
@@ -11,63 +12,26 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
     const primaryColor = [41, 128, 185]; // Blue
     const secondaryColor = [52, 73, 94]; // Dark gray
     
-    let yPosition = 20;
     const pageWidth = doc.internal.pageSize.width;
     const margin = 20;
     const contentWidth = pageWidth - (margin * 2);
-    
-    // Helper function to check page break and add new page if needed
-    const checkPageBreak = (requiredHeight = 20) => {
-      if (yPosition + requiredHeight > 270) {
-        doc.addPage();
-        yPosition = 20;
-      }
-    };
-    
-    // Helper function to add section header
+    const cursor: PdfCursor = { y: 20 };
+
     const addSectionHeader = (title: string) => {
-      checkPageBreak(25);
-      
+      ensureSpace(doc, cursor, 30);
       doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-      doc.rect(margin, yPosition - 5, contentWidth, 14, 'F');
+      doc.rect(margin, cursor.y - 5, contentWidth, 14, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(16);
       doc.setFont('helvetica', 'bold');
-      doc.text(title, margin + 8, yPosition + 5);
-      yPosition += 22;
+      doc.text(title, margin + 8, cursor.y + 5);
+      cursor.y += 22;
       doc.setTextColor(0, 0, 0);
     };
-    
-    // Helper function to add field-value pairs with proper column separation
-    const addField = (label: string, value: string) => {
-      checkPageBreak(12);
-      
-      const safeLabel = String(label || '');
-      const safeValue = String(value || 'N/A');
-      
-      // Fixed two-column layout
-      const labelColumnWidth = 65; // Fixed width for label column
-      const valueColumnX = margin + labelColumnWidth + 5; // 5mm gap between columns
-      const valueColumnWidth = contentWidth - labelColumnWidth - 5;
-      
-      // Label column
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-      doc.text(safeLabel + ':', margin + 5, yPosition);
-      
-      // Value column
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(0, 0, 0);
-      const lines = doc.splitTextToSize(safeValue, valueColumnWidth);
-      doc.text(lines, valueColumnX, yPosition);
-      
-      // Calculate spacing based on content height
-      const lineHeight = 5;
-      const fieldSpacing = 3;
-      yPosition += Math.max(lines.length * lineHeight, 8) + fieldSpacing;
-    };
-    
+
+    const addField = (label: string, value: string) =>
+      writeWrappedField(doc, cursor, label, value, { margin, contentWidth, labelColor: secondaryColor, spacing: 3 });
+
     // Title page
     doc.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
     doc.rect(0, 0, pageWidth, 50, 'F');
@@ -77,44 +41,46 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
     doc.text('Product Catalog', margin, 25);
     doc.setFontSize(16);
     doc.text(`${products.length} Products`, margin, 40);
-    
     doc.setFontSize(12);
     doc.text(`Generated: ${new Date().toLocaleDateString()}`, pageWidth - margin - 60, 25);
     doc.text('DLinRT.eu Database', pageWidth - margin - 60, 35);
-    
-    yPosition = 70;
+
+    cursor.y = 70;
     doc.setTextColor(0, 0, 0);
-    
-    // Table of Contents
+
     addSectionHeader('Table of Contents');
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
     products.forEach((product, index) => {
-      checkPageBreak(8);
-      doc.setFontSize(10);
-      doc.text(`${index + 1}. ${product.name} (${product.company})`, margin + 5, yPosition);
-      yPosition += 8;
+      const lines: string[] = doc.splitTextToSize(`${index + 1}. ${product.name} (${product.company})`, contentWidth - 5);
+      lines.forEach((l) => {
+        ensureSpace(doc, cursor, 6);
+        doc.text(l, margin + 5, cursor.y);
+        cursor.y += 6;
+      });
     });
-    
-    // Add each product
+
     products.forEach((product, index) => {
       doc.addPage();
-      yPosition = 20;
-      
       const modelCard = generateModelCardData(product);
-      
-      // Product header
-      doc.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-      doc.rect(0, 0, pageWidth, 35, 'F');
-      doc.setTextColor(255, 255, 255);
+
       doc.setFontSize(18);
       doc.setFont('helvetica', 'bold');
-      doc.text(`${index + 1}. ${product.name}`, margin, 18);
+      const nameLines = clampLines(doc, `${index + 1}. ${product.name}`, contentWidth, 2);
       doc.setFontSize(12);
-      doc.text(product.company, margin, 28);
-      
-      yPosition = 50;
+      const companyLines = clampLines(doc, product.company, contentWidth, 1);
+      const barHeight = 14 + nameLines.length * 8 + 6;
+      doc.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
+      doc.rect(0, 0, pageWidth, barHeight, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(18);
+      nameLines.forEach((l, i) => doc.text(l, margin, 14 + i * 8));
+      doc.setFontSize(12);
+      doc.text(companyLines[0] ?? '', margin, 14 + nameLines.length * 8);
+
+      cursor.y = barHeight + 15;
       doc.setTextColor(0, 0, 0);
-      
-      // General Information
+
       addSectionHeader('General Information');
       addField('Product Name', product.name);
       addField('Company', product.company);
@@ -123,16 +89,10 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
       addField('Release Date', modelCard.basicInfo.releaseDate);
       addField('Last Updated', modelCard.basicInfo.lastUpdated);
       addField('Description', modelCard.clinicalApplication.intendedUse);
-      
-      // Key Features
+
       if (modelCard.keyFeatures.features.length > 0) {
         addSectionHeader('Key Features');
-        modelCard.keyFeatures.features.forEach(feature => {
-          checkPageBreak(8);
-          doc.setFontSize(9);
-          doc.text('• ' + feature, margin + 10, yPosition);
-          yPosition += 6;
-        });
+        writeWrappedBullets(doc, cursor, modelCard.keyFeatures.features, margin, contentWidth);
       }
       
       // Technical Specifications
