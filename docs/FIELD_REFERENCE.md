@@ -182,7 +182,7 @@ Papers were re-scored against the Levels of Efficacy table on 2026-10-15 (old co
 | `evidenceRigor` | ➖ | Evidence rigor level | `"E0"`, `"E1"`, `"E2"`, `"E3"` | Assign based on strongest published evidence methodology |
 | `clinicalImpact` | ➖ | Level of Efficacy | `"L1t"`, `"L1c"`, `"L2"`–`"L6"` (legacy `"I0"`–`"I5"` read as provisional) | L2 = accuracy vs reference; L3 = workflow/decision; L4 = prospective patient management |
 | `evidenceLevelNotes` | ➖ | Justification for classification | Free text | Cite key supporting publications |
-| `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Level of Efficacy (L) and implementation burden (Z) remain product-level only. |
+| `evidence[].level` | ➖ | Per-study rigor classification | Same E0–E3 rigor values (per-study) | Optional per-study detail. Per-paper Levels of Efficacy live in `keyPapers[].clinicalImpact`; Adoption Readiness (R) is product-level only. |
 
 **Key References**:
 - van Leeuwen KG, et al. *Eur Radiol.* 2021;31(6):3797-3804. [DOI](https://doi.org/10.1007/s00330-021-07892-z)

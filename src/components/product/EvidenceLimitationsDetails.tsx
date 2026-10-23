@@ -169,7 +169,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                     onValueChange={(v) => updateField('clinicalImpact', v || undefined)}
                   >
                     <SelectTrigger className="bg-background w-full">
-                      <SelectValue placeholder="Select clinical impact" />
+                      <SelectValue placeholder="Select level of efficacy" />
                     </SelectTrigger>
                     <SelectContent className="bg-background z-50">
                       {CLINICAL_IMPACT_OPTIONS.map(opt => (
@@ -193,7 +193,7 @@ const EvidenceLimitationsDetails = ({ product }: EvidenceLimitationsDetailsProps
                 fieldPath="clinicalImpactNotes"
                 value={clinicalImpactNotes}
                 type="textarea"
-                placeholder="Notes about clinical impact"
+                placeholder="Notes about level of efficacy"
               >
                 {clinicalImpactNotes && (
                   <p className="text-sm text-muted-foreground"><AutoLinkText text={clinicalImpactNotes} /></p>

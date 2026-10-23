@@ -132,7 +132,7 @@ const ResourcesCompliance = () => {
             <p className="text-muted-foreground mb-4 leading-relaxed">
               We classify products on two evidence axes: <strong>evidence rigor</strong> (E0–E3) and
               <strong> levels of efficacy</strong> (L1t–L6) — adapted from van Leeuwen et al. (2021, updated 2025),
-              with the clinical impact axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991).
+              with the levels-of-efficacy axis cross-referenced against the Fryback &amp; Thornbury hierarchy of diagnostic efficacy (1991).
               Each product is further assessed on five granular study quality sub-attributes —
               vendor independence, multi-center, multi-national, prospective design, and external validation — per Pham (2023) and van Leeuwen (2025).
             </p>
