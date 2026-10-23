@@ -2,7 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
-import { EDUCATIONAL_DISCLAIMER, PdfCursor, clampLines, drawSectionHeader, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { EDUCATIONAL_DISCLAIMER, makePdfSafe, PdfCursor, clampLines, drawSectionHeader, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips, drawStructures } from "./pdfSections";
 
 export const exportModelCardToPDF = (product: ProductDetails) => {
