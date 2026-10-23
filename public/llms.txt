@@ -18,7 +18,7 @@ DLinRT.eu tracks commercially available and pipeline AI/DL products for radiothe
 - [Changelog](/changelog): Recent additions and changes to the catalog.
 - [Transparency](/transparency): Methodology and editorial transparency.
 - [Resources & Compliance](/resources-compliance): Guidelines, references, and compliance resources.
-- [Evidence & Impact guide](/evidence-impact-guide): Methodology for evidence rigor and clinical impact classification.
+- [Evidence & Impact guide](/evidence-impact-guide): Methodology for Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6) and Adoption Readiness (R0–R5).
 - [About](/about): Mission, team, and governance.
 - [Support](/support): Donate or support the project.
 - [Roles](/roles): Reviewer, company, and admin role overview.

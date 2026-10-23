@@ -35,7 +35,7 @@ const EvidenceImpactGuide = () => {
     <div className="min-h-screen bg-background">
       <SEO
         title="Tri-Axial Evidence & Readiness Classification"
-        description="A tri-axial methodology separating evidence rigor (E), levels of efficacy (L), and implementation burden (Z) for evaluating radiotherapy AI products"
+        description="A tri-axial methodology separating evidence rigor (E), levels of efficacy (L), and adoption readiness (R) for evaluating radiotherapy AI products"
         canonical="https://dlinrt.eu/evidence-impact-guide"
       />
       
@@ -57,7 +57,7 @@ const EvidenceImpactGuide = () => {
             Tri-Axial Evidence &amp; Readiness Classification
           </h1>
           <p className="text-lg text-muted-foreground">
-            Separating evidence rigor (E), levels of efficacy (L), and implementation burden (Z)
+            Separating evidence rigor (E), levels of efficacy (L), and adoption readiness (R)
             for nuanced product evaluation
           </p>
           <p className="text-sm text-muted-foreground mt-2">
@@ -113,7 +113,7 @@ const EvidenceImpactGuide = () => {
                 </h4>
                 <p className="text-sm text-muted-foreground">
                   A multi-center validated tool that requires heavy commissioning, vendor-specific QA, or
-                  custom integration. Strong E and I, but a <em>high implementation burden</em> blocks routine adoption.
+                  custom integration. Strong E and L, but <em>low adoption readiness</em> blocks routine adoption.
                 </p>
               </div>
             </div>
@@ -209,7 +209,7 @@ const EvidenceImpactGuide = () => {
               after evidence (E) and levels of efficacy (L) have been assigned (a DLinRT extension).{" "}
               <strong>Higher R = lower residual effort = closer to adoption-ready.</strong>{" "}
               Missing national or international guidelines do not block adoption but delay it, and R surfaces that gap.
-              Low R constrains the public readiness signal even when E and I appear favourable.
+              Low R constrains the public readiness signal even when E and L appear favourable.
             </p>
           </CardHeader>
           <CardContent>
@@ -241,10 +241,10 @@ const EvidenceImpactGuide = () => {
               </p>
               <ul className="text-xs text-muted-foreground space-y-1 list-disc list-inside">
                 <li><strong>Adoption-grade</strong> — R4 or R5 with E≥E2 and L≥L3.</li>
-                <li><strong>Deploy with monitoring</strong> — R4/R5 with weaker E or I, or R3 with E≥E2 and L≥L3.</li>
+                <li><strong>Deploy with monitoring</strong> — R4/R5 with weaker E or L, or R3 with E≥E2 and L≥L3.</li>
                 <li><strong>Conditional</strong> — R2, or R3 with weaker E or L (conditional pilot or evidence-generation deployment).</li>
                 <li><strong>Pilot only</strong> — R1 (tightly controlled, exploratory use).</li>
-                <li><strong>Blocked</strong> — R0 (horizon scanning only; cannot support adoption-grade use regardless of E and I).</li>
+                <li><strong>Blocked</strong> — R0 (horizon scanning only; cannot support adoption-grade use regardless of E and L).</li>
                 <li><strong>Not assessed</strong> — any axis unassigned (insufficient documentation; guardrail equivalent to E(-1) / L(-1) / R(-1)).</li>
               </ul>
               <p className="text-[11px] text-muted-foreground mt-3 pt-3 border-t">
@@ -512,7 +512,7 @@ const EvidenceImpactGuide = () => {
           <CardHeader>
             <CardTitle>Extended methodology bibliography</CardTitle>
             <p className="text-sm text-muted-foreground mt-2">
-              Grouped references underpinning the dual-axis (E / I) and implementation-burden (Z) framework.
+              Grouped references underpinning the evidence (E / L) and adoption-readiness (R) framework.
               Each entry links to the canonical DOI or publisher source.
             </p>
           </CardHeader>

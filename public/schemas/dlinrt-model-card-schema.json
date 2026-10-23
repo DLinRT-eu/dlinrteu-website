@@ -59,8 +59,31 @@
         "limitations": { "type": "string[]", "required": false, "description": "Known limitations and constraints", "aidrtMapping": "model_basic_information.observed_limitations" },
         "evidenceRigor": { "type": "string", "required": false, "description": "Evidence methodology robustness level", "allowedValues": ["E0","E1","E2","E3"] },
         "evidenceRigorNotes": { "type": "string", "required": false, "description": "Free-text notes on evidence rigor classification" },
-        "clinicalImpact": { "type": "string", "required": false, "description": "Demonstrated clinical outcome level", "allowedValues": ["I0","I1","I2","I3","I4","I5"] },
-        "clinicalImpactNotes": { "type": "string", "required": false, "description": "Free-text notes on clinical impact classification" }
+        "clinicalImpact": { "type": "string", "required": false, "description": "Level of Efficacy (what was measured). Field name kept for compatibility; legacy I0–I5 values are converted provisionally.", "allowedValues": ["L1t","L1c","L2","L3","L4","L5","L6"] },
+        "clinicalImpactNotes": { "type": "string", "required": false, "description": "Free-text notes on the Level of Efficacy classification" }
+      }
+    },
+    "evidenceScore": {
+      "description": "Product-level tri-axial score computed from scored publications (or a documented override)",
+      "fields": {
+        "evidenceRigor": { "type": "string", "required": false, "description": "E0–E3" },
+        "clinicalImpact": { "type": "string", "required": false, "description": "Level of Efficacy L1t–L6" },
+        "adoptionReadiness": { "type": "string", "required": false, "description": "R0–R5" },
+        "readinessSignal": { "type": "string", "required": false, "description": "Computed public readiness signal" },
+        "scoreOrigin": { "type": "string", "required": false, "description": "papers | override | stored | none; provisional when derived from legacy codes" },
+        "scoredPublicationsCount": { "type": "number", "required": false, "description": "Number of publications individually scored" },
+        "listedPublicationsCount": { "type": "number", "required": false, "description": "Number of publications listed" }
+      }
+    },
+    "evidenceSources": {
+      "description": "One entry per publication/source, each with its own E and L scores, study-quality flags and DOI/link",
+      "fields": {
+        "title": { "type": "string", "required": false, "description": "Publication title" },
+        "doi": { "type": "string", "required": false, "description": "DOI" },
+        "evidenceRigor": { "type": "string", "required": false, "description": "E0–E3 for this source" },
+        "clinicalImpact": { "type": "string", "required": false, "description": "Level of Efficacy for this source" },
+        "setsProductRigor": { "type": "string", "required": false, "description": "Whether this source sets the product rigor" },
+        "setsProductImpact": { "type": "string", "required": false, "description": "Whether this source sets the product Level of Efficacy" }
       }
     },
     "studyQuality": {
