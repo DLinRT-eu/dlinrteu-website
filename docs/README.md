@@ -228,7 +228,13 @@ The catalog and initiatives index can be exported in multiple formats:
 The CSV column dictionary is published at [`/schemas/dlinrt-csv-fields.md`](../public/schemas/dlinrt-csv-fields.md).
 The full bundle (ZIP) ships with a `manifest.json` and `README.md` describing schema version, generation timestamp, license, and disclaimer.
 
-> HTA dossiers and AID-RT cards are **informational** only — not a substitute for an official HTA dossier or a manufacturer-validated model card.
+**PDF model card.** The single-product PDF shows the tri-axial evidence classification as coloured badges (Evidence Rigor E0–E3, Levels of Efficacy L1t–L6, Adoption Readiness R0–R5, plus a provisional tag), study-quality chips, one card per publication with its own E/L scores and DOI link, supported structures grouped by region in boxes, and CE/FDA status chips. Long fields continue across pages. The multi-product PDF catalogue uses the same evidence box with shorter one-line source cards. Every page carries an information-only disclaimer.
+
+**Structure counts.** Badges count distinct models (same name and modality counted once across site groups); full lists and CSV exports keep every listed entry. See `docs/FIELD_REFERENCE.md`.
+
+**Discontinued products** keep public historical pages under `/products/discontinued` and are excluded from current-market counts and default evidence dashboards; exports include lifecycle columns.
+
+> HTA dossiers, AID-RT cards and PDF model cards are **informational** only — not clinically validated, and not a substitute for an official HTA dossier or a manufacturer-validated model card.
 
 ---
 
