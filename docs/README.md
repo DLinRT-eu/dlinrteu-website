@@ -277,7 +277,8 @@ The full bundle (ZIP) ships with a `manifest.json` and `README.md` describing sc
 
 Compliance and security audits are stored under [`audits/`](./audits/README.md):
 
-- **GDPR** — see [`audits/gdpr/`](./audits/gdpr/) (initial 2026-06-20 + Wave E follow-up).
+- **GDPR** — see [`audits/gdpr/`](./audits/gdpr/) (initial 2026-06-20 + Wave E follow-up, newsletter sign-up assessment 2026-06-27).
+- **Products** — read-only catalogue audit of 2026-10-15 in [`audits/products/2026-10-15/`](./audits/products/2026-10-15/), including the [TheraPanacea ART-Plan consolidation note](./audits/products/2026-10-15/therapanacea-consolidation.md) (former Annotate, TumorBox, BrachyBox, MR-Box, SmartFuse, SmartPlan and AdaptBox names kept as history).
 
 ---
 
