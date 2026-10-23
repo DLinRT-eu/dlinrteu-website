@@ -375,7 +375,7 @@ const CHAR_MAP: Record<string, string> = {
   "\u00A0": " ", "\u2002": " ", "\u2003": " ", "\u2009": " ", "\u200A": " ", "\u202F": " ",
   "\u200B": "", "\u200C": "", "\u200D": "", "\uFEFF": "", "\u00AD": "",
   "\u2026": "...", "\u2022": "-", "\u2264": "<=", "\u2265": ">=", "\u2248": "~", "\u00D7": "x",
-  "\u2192": "->", "\u2190": "<-", "\u03B1": "alpha", "\u03B2": "beta", "\u03B3": "gamma", "\u03BC": "u", "\u2122": "(TM)",
+  "\u2192": "->", "\u2190": "<-", "\u03B1": "alpha", "\u03B2": "beta", "\u03B3": "gamma", "\u03BC": "u", "\u2122": "(TM)", "\u0131": "i",
 };
 
 /** Maps characters the built-in Helvetica (WinAnsi) font cannot draw to plain equivalents. */
