@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { PAGE_BOTTOM_LIMIT, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { PAGE_BOTTOM_LIMIT, writeWrappedBullets, writeWrappedField } from "../src/utils/modelCard/exporters/pdfLayout";
 
 const makeDoc = () => {
   const ys: number[] = [];
