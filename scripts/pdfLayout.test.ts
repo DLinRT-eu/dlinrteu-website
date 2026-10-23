@@ -32,3 +32,22 @@ describe("pdfLayout", () => {
     expect(pages()).toBe(2);
   });
 });
+
+import { groupStructuresByRegion, paletteFor, PALETTE } from "../src/utils/modelCard/exporters/pdfLayout";
+import { efficacyBadge } from "../src/utils/modelCard/exporters/pdfSections";
+import { getClinicalImpactLevel } from "../src/data/evidence-impact-levels";
+
+describe("pdf evidence visuals", () => {
+  it("uses the website's L3 colour and label", () => {
+    const b = efficacyBadge("L3")!;
+    expect(b.short).toBe("L3");
+    expect(b.color).toBe(getClinicalImpactLevel("L3")!.color);
+    expect(paletteFor(b.color)).toBe(PALETTE[b.color!]);
+    expect(b.text).toContain(getClinicalImpactLevel("L3")!.name);
+  });
+
+  it("groups 'Region: Structure' names by region", () => {
+    const g = groupStructuresByRegion(["Pelvis: Bladder", "Pelvis: Rectum", "Head & Neck: Brainstem", "Body"]);
+    expect(g.map((x) => [x.region, x.items.length])).toEqual([["Pelvis", 2], ["Head & Neck", 1], ["Other", 1]]);
+  });
+});
