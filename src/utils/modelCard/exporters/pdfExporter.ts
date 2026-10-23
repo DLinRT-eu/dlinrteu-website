@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import { PdfCursor, clampLines, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 
 export const exportModelCardToPDF = (product: ProductDetails) => {
   try {
@@ -13,108 +14,57 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     const secondaryColor = [52, 73, 94]; // Dark gray
     const lightGray = [245, 245, 245]; // Light background
     
-    let yPosition = 20;
     const pageWidth = doc.internal.pageSize.width;
     const margin = 20;
     const contentWidth = pageWidth - (margin * 2);
-    
-    // Helper function to add a section header matching webpage style
+    const cursor: PdfCursor = { y: 20 };
+
     const addSectionHeader = (title: string) => {
-      if (yPosition > 250) {
-        doc.addPage();
-        yPosition = 20;
-      }
-      
-      // Add some spacing before section
-      yPosition += 5;
-      
+      ensureSpace(doc, cursor, 32);
+      cursor.y += 5;
       doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-      doc.rect(margin, yPosition - 5, contentWidth, 14, 'F');
+      doc.rect(margin, cursor.y - 5, contentWidth, 14, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(16);
       doc.setFont('helvetica', 'bold');
-      doc.text(title, margin + 8, yPosition + 5);
-      yPosition += 22;
+      doc.text(clampLines(doc, title, contentWidth - 16, 1)[0] ?? '', margin + 8, cursor.y + 5);
+      cursor.y += 22;
       doc.setTextColor(0, 0, 0);
     };
-    
-    // Helper function to add field-value pairs with proper column separation
-    const addField = (label: string, value: string, isSubheading = false) => {
-      if (yPosition > 260) {
-        doc.addPage();
-        yPosition = 20;
-      }
-      
-      const safeLabel = String(label || '');
-      const safeValue = String(value || 'N/A');
-      
-      if (isSubheading) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-        doc.text(safeLabel, margin, yPosition);
-        yPosition += 12;
-        doc.setTextColor(0, 0, 0);
-      } else {
-        // Fixed two-column layout
-        const labelColumnWidth = 65; // Fixed width for label column
-        const valueColumnX = margin + labelColumnWidth + 5; // 5mm gap between columns
-        const valueColumnWidth = contentWidth - labelColumnWidth - 5;
-        
-        // Label column
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-        doc.text(safeLabel + ':', margin + 5, yPosition);
-        
-        // Value column
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(0, 0, 0);
-        const lines = doc.splitTextToSize(safeValue, valueColumnWidth);
-        doc.text(lines, valueColumnX, yPosition);
-        
-        // Calculate spacing based on content height
-        const lineHeight = 5;
-        const fieldSpacing = 4;
-        yPosition += Math.max(lines.length * lineHeight, 8) + fieldSpacing;
-      }
-    };
-    
-    // Helper function to add a list of items
-    const addList = (items: string[], indent = 10) => {
+
+    const addField = (label: string, value: string) =>
+      writeWrappedField(doc, cursor, label, value, { margin, contentWidth, labelColor: secondaryColor });
+
+    const addList = (items: string[]) => {
       if (!items || items.length === 0) return;
-      
-      items.forEach(item => {
-        if (yPosition > 270) {
-          doc.addPage();
-          yPosition = 20;
-        }
-        
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'normal');
-        doc.text('• ' + item, margin + indent, yPosition);
-        yPosition += 6;
-      });
+      writeWrappedBullets(doc, cursor, items, margin, contentWidth);
     };
-    
-    // Title header matching webpage
+
+    // Title header
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'normal');
+    const nameLines = clampLines(doc, modelCard.basicInfo.productName, contentWidth, 2);
+    const barHeight = 28 + nameLines.length * 7;
     doc.setFillColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
-    doc.rect(0, 0, pageWidth, 35, 'F');
+    doc.rect(0, 0, pageWidth, barHeight, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
     doc.text('AI Model Card', margin, 18);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'normal');
-    doc.text(modelCard.basicInfo.productName, margin, 28);
-    
-    // Add company logo space (placeholder)
-    doc.setFontSize(8);
+    nameLines.forEach((l, i) => doc.text(l, margin, 28 + i * 7));
+
+    doc.setFontSize(9);
     doc.setFont('helvetica', 'italic');
-    doc.text(`Generated: ${new Date().toLocaleDateString()}`, pageWidth - margin - 40, 15);
-    doc.text(`Company: ${modelCard.basicInfo.company}`, pageWidth - margin - 40, 22);
-    
-    yPosition = 50;
+    doc.setTextColor(secondaryColor[0], secondaryColor[1], secondaryColor[2]);
+    const metaLines: string[] = doc.splitTextToSize(
+      `Company: ${modelCard.basicInfo.company}  |  Generated: ${new Date().toLocaleDateString()}`,
+      contentWidth
+    );
+    cursor.y = barHeight + 8;
+    metaLines.forEach((l) => { doc.text(l, margin, cursor.y); cursor.y += 5; });
+    cursor.y += 6;
     doc.setTextColor(0, 0, 0);
     
     // General Information Section (matching webpage)
