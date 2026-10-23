@@ -2,7 +2,8 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
-import { PdfCursor, clampLines, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { EDUCATIONAL_DISCLAIMER, PdfCursor, clampLines, drawSectionHeader, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips, drawStructures } from "./pdfSections";
 
 export const exportModelCardToPDF = (product: ProductDetails) => {
   try {
@@ -10,27 +11,14 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     const doc = new jsPDF();
     
     // Set up colors and styling
-    const primaryColor = [41, 128, 185]; // Blue
     const secondaryColor = [52, 73, 94]; // Dark gray
-    const lightGray = [245, 245, 245]; // Light background
     
     const pageWidth = doc.internal.pageSize.width;
     const margin = 20;
     const contentWidth = pageWidth - (margin * 2);
     const cursor: PdfCursor = { y: 20 };
 
-    const addSectionHeader = (title: string) => {
-      ensureSpace(doc, cursor, 32);
-      cursor.y += 5;
-      doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-      doc.rect(margin, cursor.y - 5, contentWidth, 14, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.text(clampLines(doc, title, contentWidth - 16, 1)[0] ?? '', margin + 8, cursor.y + 5);
-      cursor.y += 22;
-      doc.setTextColor(0, 0, 0);
-    };
+    const addSectionHeader = (title: string) => drawSectionHeader(doc, cursor, title, margin, contentWidth);
 
     const addField = (label: string, value: string) =>
       writeWrappedField(doc, cursor, label, value, { margin, contentWidth, labelColor: secondaryColor });
@@ -79,6 +67,9 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     addField('Release Date', modelCard.basicInfo.releaseDate);
     addField('Last Updated', modelCard.basicInfo.lastUpdated);
     addField('Description', modelCard.clinicalApplication.intendedUse);
+
+    addSectionHeader('Evidence Classification');
+    drawEvidenceSummary(doc, cursor, modelCard, margin, contentWidth);
     
     // Key Features Section
     if (modelCard.keyFeatures.features.length > 0) {
@@ -99,19 +90,26 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     addField('Disease Targeted', modelCard.clinicalApplication.diseaseTargeted);
     
     // Supported Structures Section (for Auto-Contouring)
-    if (modelCard.performance.supportedStructures !== "N/A") {
-      addSectionHeader('Supported Structures');
-      addField('Structures', modelCard.performance.supportedStructures);
+    if (Array.isArray(product.supportedStructures) && product.supportedStructures.length > 0) {
+      addSectionHeader(`Supported Structures (${product.supportedStructures.length})`);
+      drawStructures(doc, cursor, product, margin, contentWidth);
     }
     
     // Evidence & Limitations Section
     addSectionHeader('Evidence & Limitations');
     addField('Clinical Evidence', modelCard.clinicalApplication.clinicalEvidence);
-    addField('Performance Evidence', modelCard.performance.evidence);
+    if ((modelCard.evidenceSources ?? []).length === 0) {
+      addField('Performance Evidence', modelCard.performance.evidence);
+    }
     addField('Limitations', modelCard.performance.limitations);
+    if ((modelCard.evidenceSources ?? []).length > 0) {
+      addSectionHeader(`Evidence by Source (${modelCard.evidenceSources.length})`);
+      drawEvidenceSources(doc, cursor, modelCard, margin, contentWidth);
+    }
     
     // Regulatory Information Section
     addSectionHeader('Regulatory Information');
+    drawRegulatoryChips(doc, cursor, modelCard, margin, contentWidth);
     addField('CE Certification', modelCard.basicInfo.ceStatus);
     addField('CE Details', modelCard.regulatory.ceDetails);
     addField('FDA Status', modelCard.basicInfo.fdaStatus);
@@ -161,7 +159,9 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
       doc.setTextColor(128, 128, 128);
       doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin - 20, doc.internal.pageSize.height - 10);
       doc.text('DLinRT.eu Model Card', margin, doc.internal.pageSize.height - 10);
-      doc.text(modelCard.basicInfo.productName, margin + 60, doc.internal.pageSize.height - 10);
+      doc.text(clampLines(doc, modelCard.basicInfo.productName, 60, 1)[0] ?? '', margin + 45, doc.internal.pageSize.height - 10);
+      doc.setFontSize(6.5);
+      doc.text(EDUCATIONAL_DISCLAIMER, margin, doc.internal.pageSize.height - 6);
     }
     
     // Save the PDF
