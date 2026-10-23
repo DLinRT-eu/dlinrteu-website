@@ -114,7 +114,7 @@ export function generateMedicalDeviceSchema(product: ProductDetails): MedicalDev
   if (product.adoptionReadiness) {
     additionalProps.push({
       "@type": "PropertyValue",
-      name: "Implementation Burden",
+      name: "Adoption Readiness",
       value: product.adoptionReadiness,
     });
   }
