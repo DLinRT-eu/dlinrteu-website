@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { PAGE_BOTTOM_LIMIT, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 
 const makeDoc = () => {
