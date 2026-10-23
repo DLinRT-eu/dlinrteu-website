@@ -23,6 +23,7 @@ See [Resources & Compliance → Who we help](https://dlinrt.eu/resources-complia
 - **[Admin Guide](./docs/ADMIN_GUIDE.md)** - User management, review assignment, security monitoring
 - **[Reviewer Guide](./docs/REVIEWER_GUIDE.md)** - Product review workflow and best practices
 - **[Review Guide](./docs/review/GUIDE.md)** - How to review and update product information
+- **[Methodology: Evidence & Readiness guide](https://dlinrt.eu/evidence-impact-guide)** - Public explanation of the three evidence axes
 - **[Field Reference](./docs/FIELD_REFERENCE.md)** - Definitions for every product field (useful when updating `lastUpdated`/`lastRevised`)
 - **[Security Policy](./SECURITY.md)** - Security features, GDPR compliance, and reporting vulnerabilities
 - **[Manufacturer Templates](./MANUFACTURER_TEMPLATES.md)** - Communication templates
@@ -67,7 +68,7 @@ Every factual field must trace to a disclosed source. Use the top-level `source`
    - Example: `src/data/products/auto-contouring/varian.ts`
 
 3. **Follow the data format**
-   - See [example templates](./src/data/products/examples) and the [Field Reference](./docs/FIELD_REFERENCE.md) for properly formatted data
+   - See [example templates](./docs/examples/products) and the [Field Reference](./docs/FIELD_REFERENCE.md) for properly formatted data
    - Include `secondaryCategories` for multi-category products
    - Use separate entries for major versions; cross-link via `priorVersions` / `supersededBy`
    - All dates follow `YYYY-MM-DD`
@@ -100,11 +101,14 @@ For complete examples, refer to `src/data/products/examples/`.
 - **Training Data Transparency**: Dataset size, demographics, disclosure level tracking per product
 - **FSCA/Recall Tracking**: Field Safety Corrective Actions and recalls from FDA, BfArM, MHRA, EUDAMED
 - **Compliance Resources**: Regulatory information and compliance checklists
-- **Research Initiatives**: Database of datasets, challenges, and model zoos
+- **Research Initiatives**: Community-curated grand challenges, datasets, model zoos, LLM platforms and research software (RS4RT; per-package or version requests are not accepted)
 - **User Tracking**: Track products you use or are evaluating
 - **Community Experiences**: Share and view product adoption experiences
 - **Healthcare Interoperability**: FHIR R4 export with TGA/TFDA support, evidence classification, and Schema.org JSON-LD SEO
-- **Comprehensive Exports**: CSV with 23+ transparency and safety columns, FHIR R4 bundles, model cards
+- **Comprehensive Exports**: CSV (~110 columns incl. transparency, safety, lifecycle and per-source evidence), FHIR R4 bundles, HTA dossier, AID-RT and PDF model cards with colour-coded evidence levels
+- **Tri-axial Evidence Classification**: Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6) and Adoption Readiness (R0–R5), scored per publication
+- **Discontinued Products**: Public historical pages, excluded from current-market counts
+- **Public Role Guides**: Company, reviewer and admin guides readable without an account
 - **GDPR Compliance**: Data export, anonymization, and consent management
 
 ## Backend & Database
