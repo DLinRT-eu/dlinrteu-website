@@ -2,14 +2,14 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
-import { PdfCursor, clampLines, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { EDUCATIONAL_DISCLAIMER, PdfCursor, clampLines, drawSectionHeader, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips } from "./pdfSections";
 
 export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
   try {
     const doc = new jsPDF();
     
     // Set up colors and styling
-    const primaryColor = [41, 128, 185]; // Blue
     const secondaryColor = [52, 73, 94]; // Dark gray
     
     const pageWidth = doc.internal.pageSize.width;
@@ -17,17 +17,7 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
     const contentWidth = pageWidth - (margin * 2);
     const cursor: PdfCursor = { y: 20 };
 
-    const addSectionHeader = (title: string) => {
-      ensureSpace(doc, cursor, 30);
-      doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-      doc.rect(margin, cursor.y - 5, contentWidth, 14, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.text(title, margin + 8, cursor.y + 5);
-      cursor.y += 22;
-      doc.setTextColor(0, 0, 0);
-    };
+    const addSectionHeader = (title: string) => drawSectionHeader(doc, cursor, title, margin, contentWidth);
 
     const addField = (label: string, value: string) =>
       writeWrappedField(doc, cursor, label, value, { margin, contentWidth, labelColor: secondaryColor, spacing: 3 });
@@ -90,6 +80,13 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
       addField('Last Updated', modelCard.basicInfo.lastUpdated);
       addField('Description', modelCard.clinicalApplication.intendedUse);
 
+      addSectionHeader('Evidence Classification');
+      drawEvidenceSummary(doc, cursor, modelCard, margin, contentWidth);
+      if ((modelCard.evidenceSources ?? []).length > 0) {
+        addSectionHeader(`Evidence by Source (${modelCard.evidenceSources.length})`);
+        drawEvidenceSources(doc, cursor, modelCard, margin, contentWidth, true);
+      }
+
       if (modelCard.keyFeatures.features.length > 0) {
         addSectionHeader('Key Features');
         writeWrappedBullets(doc, cursor, modelCard.keyFeatures.features, margin, contentWidth);
@@ -106,6 +103,7 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
       
       // Regulatory Information
       addSectionHeader('Regulatory Information');
+      drawRegulatoryChips(doc, cursor, modelCard, margin, contentWidth);
       addField('CE Status', modelCard.basicInfo.ceStatus);
       addField('FDA Status', modelCard.basicInfo.fdaStatus);
       addField('CE Details', modelCard.regulatory.ceDetails);
@@ -126,6 +124,8 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
       doc.setTextColor(128, 128, 128);
       doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin - 20, doc.internal.pageSize.height - 10);
       doc.text('DLinRT.eu Product Catalog', margin, doc.internal.pageSize.height - 10);
+      doc.setFontSize(6.5);
+      doc.text(EDUCATIONAL_DISCLAIMER, margin, doc.internal.pageSize.height - 6);
     }
     
     // Save the PDF

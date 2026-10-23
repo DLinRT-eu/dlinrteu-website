@@ -69,7 +69,7 @@ export const drawEvidenceSummary = (
   drawBadgeRow(
     doc,
     cursor,
-    chips.map(([label, v]) => ({ text: `${v === "Yes" ? "✓" : "–"} ${label}`.replace("✓", "+"), color: v === "Yes" ? "green" : "gray" })),
+    chips.map(([label, v]) => ({ text: `${v === "Yes" ? "+" : "-"} ${label}`, color: v === "Yes" ? "green" : "gray" })),
     margin + 3,
     contentWidth - 6,
     7
@@ -159,14 +159,6 @@ export const drawRegulatoryChips = (
     8
   );
   cursor.y += 1;
-};
-
-/** Light zebra background behind the next field row. */
-export const zebra = (doc: jsPDF, cursor: PdfCursor, index: number, margin: number, contentWidth: number): void => {
-  if (index % 2 === 0) return;
-  ensureSpace(doc, cursor, 8);
-  doc.setFillColor(246, 248, 251);
-  doc.rect(margin, cursor.y - 4, contentWidth, 7, "F");
 };
 
 export { ACCENT };
