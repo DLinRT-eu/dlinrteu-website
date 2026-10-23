@@ -48,18 +48,18 @@ The full machine-readable JSON schema lives at
 - **Pricing Model**, **Pricing Based On**.
 - **Release Date**, **Version**, **Website**, **Company URL**, **Product URL**, **GitHub URL**.
 
-## Evidence (dual-axis)
+## Evidence (tri-axial)
 
 - **Clinical Evidence**, **Evidence**, **Limitations**.
 - **Evidence Rigor** — `E0`–`E3`. See `docs/review/GUIDE.md`.
 - **Evidence Rigor Notes**.
-- **Clinical Impact** — `I0`–`I5`. See `docs/review/GUIDE.md`.
+- **Levels of Efficacy** — `L1t`, `L1c`, `L2`–`L6`. Legacy `I0`–`I5` values are converted provisionally (see `docs/review/GUIDE.md`).
 - **Levels of Efficacy Notes**.
-- **Implementation Burden** — Adoption-readiness level.
-- **Implementation Burden Notes**.
+- **Adoption Readiness** — `R0`–`R5`.
+- **Adoption Readiness Notes**.
 - **Readiness Signal** — Computed badge from the three axes above.
 
-### Implementation burden factors (booleans)
+### Adoption readiness factors (booleans, column prefix `Burden:` kept for compatibility)
 
 `Burden: Commissioning Required`, `Local Validation Required`,
 `Workflow Redesign`, `Integration Complexity`, `Human Factors Testing`,
@@ -129,7 +129,7 @@ single row with `Note = No scored publication`.
 | `DOI`, `PMID` | Identifiers as recorded. |
 | `Link` | Direct URL; derived from the DOI (`https://doi.org/…`) or PMID when no explicit link is stored. |
 | `Evidence Rigor` | E0–E3 assigned to this individual source. |
-| `Clinical Impact` | L1t–L6 assigned to this individual source. |
+| `Levels of Efficacy` | L1t–L6 assigned to this individual source. |
 | `Rationale` | One-line justification for this source's levels. |
 | `Vendor Independent`, `Multi-Center`, `Multi-National`, `Prospective`, `External Validation` | Study-quality attributes of this source. |
 | `Sets Product Rigor`, `Sets Product Impact` | Whether this source sets the product maximum on that axis. |
