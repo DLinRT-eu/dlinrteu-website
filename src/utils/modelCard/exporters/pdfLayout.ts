@@ -130,7 +130,7 @@ export const INK: Rgb = [26, 26, 46];
 
 export const paletteFor = (color?: string) => PALETTE[color ?? "gray"] ?? PALETTE.gray;
 
-type DrawDoc = Doc & Pick<jsPDF, "setFillColor" | "setDrawColor" | "roundedRect" | "rect" | "getTextWidth" | "setLineWidth" | "textWithLink">;
+type DrawDoc = Doc & Pick<jsPDF, "setFillColor" | "setDrawColor" | "roundedRect" | "rect" | "getTextWidth" | "setLineWidth" | "textWithLink" | "line">;
 
 /** Draws a rounded badge at (x, y-baseline) and returns its width. */
 export const drawBadge = (doc: DrawDoc, x: number, y: number, text: string, color?: string, fontSize = 8): number => {
@@ -188,7 +188,7 @@ export const drawSectionHeader = (doc: DrawDoc, cursor: PdfCursor, title: string
   doc.text(clampLines(doc, title, contentWidth - 8, 1)[0] ?? "", margin + 5, cursor.y + 1);
   doc.setDrawColor(ACCENT[0], ACCENT[1], ACCENT[2]);
   doc.setLineWidth(0.3);
-  doc.line?.(margin, cursor.y + 4, margin + contentWidth, cursor.y + 4);
+  doc.line(margin, cursor.y + 4, margin + contentWidth, cursor.y + 4);
   doc.setTextColor(0, 0, 0);
   doc.setFont("helvetica", "normal");
   cursor.y += 11;
