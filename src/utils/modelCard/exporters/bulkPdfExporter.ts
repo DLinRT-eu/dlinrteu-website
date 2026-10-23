@@ -2,12 +2,12 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
-import { EDUCATIONAL_DISCLAIMER, PdfCursor, clampLines, drawSectionHeader, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
+import { EDUCATIONAL_DISCLAIMER, makePdfSafe, PdfCursor, clampLines, drawSectionHeader, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips } from "./pdfSections";
 
 export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
   try {
-    const doc = new jsPDF();
+    const doc = makePdfSafe(new jsPDF());
     
     // Set up colors and styling
     const secondaryColor = [52, 73, 94]; // Dark gray

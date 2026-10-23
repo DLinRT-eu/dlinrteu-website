@@ -365,3 +365,59 @@ export const regulatoryColor = (status?: string): string => {
 
 export const EDUCATIONAL_DISCLAIMER =
   "For information only. Not a clinical validation or endorsement; verify with the manufacturer and local commissioning.";
+
+// ---------- Font-safe text ----------
+
+const CHAR_MAP: Record<string, string> = {
+  "\u2010": "-", "\u2011": "-", "\u2012": "-", "\u2013": "-", "\u2014": "-", "\u2015": "-", "\u2212": "-",
+  "\u2018": "'", "\u2019": "'", "\u201A": "'", "\u201B": "'", "\u2032": "'",
+  "\u201C": '"', "\u201D": '"', "\u201E": '"', "\u2033": '"',
+  "\u00A0": " ", "\u2002": " ", "\u2003": " ", "\u2009": " ", "\u200A": " ", "\u202F": " ",
+  "\u200B": "", "\u200C": "", "\u200D": "", "\uFEFF": "", "\u00AD": "",
+  "\u2026": "...", "\u2022": "-", "\u2264": "<=", "\u2265": ">=", "\u2248": "~", "\u00D7": "x",
+  "\u2192": "->", "\u2190": "<-", "\u03B1": "alpha", "\u03B2": "beta", "\u03B3": "gamma", "\u03BC": "u", "\u2122": "(TM)", "\u0131": "i",
+};
+
+/** Maps characters the built-in Helvetica (WinAnsi) font cannot draw to plain equivalents. */
+export const toPdfSafeText = (input: unknown): string => {
+  const s = String(input ?? "").normalize("NFC");
+  let out = "";
+  for (const ch of s) {
+    if (ch in CHAR_MAP) { out += CHAR_MAP[ch]; continue; }
+    const code = ch.codePointAt(0) ?? 0;
+    if (code === 10 || code === 9 || (code >= 32 && code <= 126) || (code >= 160 && code <= 255)) { out += ch; continue; }
+    const stripped = ch.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    out += /^[\x20-\x7e]+$/.test(stripped) ? stripped : "?";
+  }
+  return out;
+};
+
+/** Splits any line still wider than width (e.g. long DOI/URL) into hard-broken chunks. */
+export const hardBreakLines = (lines: string[], width: number, measure: (t: string) => number): string[] =>
+  lines.flatMap((line) => {
+    if (measure(line) <= width) return [line];
+    const parts: string[] = [];
+    let cur = "";
+    for (const ch of line) {
+      if (cur && measure(cur + ch) > width) { parts.push(cur); cur = ch.trimStart(); } else cur += ch;
+    }
+    if (cur) parts.push(cur);
+    return parts;
+  });
+
+/** Patches a jsPDF instance so every drawn/measured string is font-safe and wraps within width. */
+export const makePdfSafe = <T extends jsPDF>(doc: T): T => {
+  const text = doc.text.bind(doc);
+  const split = doc.splitTextToSize.bind(doc);
+  const link = doc.textWithLink.bind(doc);
+  const width = doc.getTextWidth.bind(doc);
+  const safe = (t: unknown) => (Array.isArray(t) ? t.map(toPdfSafeText) : toPdfSafeText(t));
+  (doc as jsPDF).text = ((t: string | string[], ...rest: unknown[]) =>
+    (text as (...a: unknown[]) => jsPDF)(safe(t), ...rest)) as jsPDF["text"];
+  (doc as jsPDF).splitTextToSize = ((t: string, w: number, o?: unknown) =>
+    hardBreakLines(split(toPdfSafeText(t), w, o as never) as string[], w, (s) => width(s))) as jsPDF["splitTextToSize"];
+  (doc as jsPDF).textWithLink = ((t: string, x: number, y: number, o: unknown) =>
+    link(toPdfSafeText(t), x, y, o as never)) as jsPDF["textWithLink"];
+  (doc as jsPDF).getTextWidth = ((t: string) => width(toPdfSafeText(t))) as jsPDF["getTextWidth"];
+  return doc;
+};

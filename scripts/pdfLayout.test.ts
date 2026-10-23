@@ -51,3 +51,17 @@ describe("pdf evidence visuals", () => {
     expect(g.map((x) => [x.region, x.items.length])).toEqual([["Pelvis", 2], ["Head & Neck", 1], ["Other", 1]]);
   });
 });
+
+import { hardBreakLines, toPdfSafeText } from "../src/utils/modelCard/exporters/pdfLayout";
+
+describe("pdf-safe text", () => {
+  it("replaces characters Helvetica cannot draw", () => {
+    expect(toPdfSafeText("Trade\u2010off D\u2019Aviero \u201Cx\u201D a\u2013b\u2026")).toBe("Trade-off D'Aviero \"x\" a-b...");
+    expect(toPdfSafeText("Bürkle Müller")).toBe("Bürkle Müller");
+  });
+  it("hard-breaks a long DOI so every line fits the width", () => {
+    const lines = hardBreakLines(["https://doi.org/10.1016/j.phro.2026.100942"], 10, (s) => s.length);
+    expect(lines.every((l) => l.length <= 10)).toBe(true);
+    expect(lines.join("")).toBe("https://doi.org/10.1016/j.phro.2026.100942");
+  });
+});
