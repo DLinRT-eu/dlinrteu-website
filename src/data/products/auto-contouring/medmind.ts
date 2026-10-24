@@ -108,7 +108,7 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E2",
-    clinicalImpact: "L2",
+    clinicalImpact: "L3",
     legacyClinicalImpact: "I2",
     evidenceRigorNotes: "2026-08-28 Batch C per-paper sweep: the four peer-reviewed MedMind-affiliated validation studies are now scored individually (E2/E2/E1/E1). E2 is set by the two multicentre blinded randomised validations (Liu 2021, Radiat Oncol 2023); neither is vendor-independent or prospective, so E3 is not reached. Papers describe the MedMind DLAS engine behind RT-Mind-AI rather than naming the commercial product, which is disclosed here. Earlier note retained for traceability: the stored Zhu 2025 paper was removed in the 2026-08-27 audit because DOI 10.1002/acm2.14350 resolves to an unrelated study.",
     clinicalImpactNotes: "Demonstrated workflow improvement through automated CTV and OAR contouring across cervical and rectal cancer, with clinically viable contours in 96-100% of cases and Turing test pass rates ~50%, indicating contours comparable to expert manual delineation.",

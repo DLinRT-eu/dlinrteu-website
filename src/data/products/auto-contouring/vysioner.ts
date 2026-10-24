@@ -74,7 +74,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"],
     },
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
     evidenceRigorNotes: "Wang et al., Radiat Oncol 2023 - stratified SRS assessment. Liang et al., IJROBP 2021. Single-center retrospective studies.",
