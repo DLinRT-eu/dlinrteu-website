@@ -90,6 +90,8 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-10-05",
     lastUpdated: "2026-10-15",
     keyPapers: [
+      {"doi": "10.1093/noajnl/vdag236", "title": "Artificial intelligence-enabled early intracranial volumetric response predicts systemic progression-free survival in the phase III CROWN study", "authors": "Lu S, Chang Y, Liang C, et al.", "journal": "Neuro-Oncology Advances", "year": "2026", "evidenceRigor": "E2", "clinicalImpact": "L2", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Secondary analysis of 72 CROWN trial patients using VBrain for automated brain-metastasis tracking; association with PFS, not a radiotherapy decision endpoint.", "vendorIndependent": false, "multiCenter": true, "multiNational": true, "prospective": false, "externalValidation": false},
+
     {"doi":"10.1186/s13014-023-02246-z","title":"vBrain auto-contouring for brain metastases","authors":"Wang J et al.","journal":"Radiat Oncol","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation for brain metastases delineation accuracy."}
   ],
     lastRevised: "2026-08-25",

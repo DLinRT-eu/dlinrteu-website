@@ -83,6 +83,9 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
     source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    keyPapers: [
+      {"doi": "10.1002/acm2.70829", "title": "Application of synthetic computed tomography based on a deep learning model in pelvic radiotherapy planning: A feasibility study", "authors": "Lin F, Hu J, Li Z, et al.", "journal": "Journal of Applied Clinical Medical Physics", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L3", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-centre retrospective feasibility study of the syngo.via VB60A pelvic deep-learning MR-to-synthetic-CT model; HU and dose recalculation endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+    ],
     evidence: [
       {
         type: "Indirect-Comparative",
