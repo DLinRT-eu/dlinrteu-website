@@ -167,8 +167,18 @@ const handler = async (req: Request): Promise<Response> => {
     const payload: Payload = await req.json();
     const { subject, bodyMarkdown, recipientIds, recipientFilter, testEmail, companies } = payload;
 
-    if (!subject?.trim() || !bodyMarkdown?.trim()) {
+    if (typeof subject !== "string" || typeof bodyMarkdown !== "string" || !subject.trim() || !bodyMarkdown.trim()) {
       return new Response(JSON.stringify({ error: "Subject and body are required" }), {
+        status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+    const idsOk = (v: unknown) => v === undefined || (Array.isArray(v) && v.length <= 500 && v.every((x) => typeof x === "string" && x.length <= 100));
+    if (
+      subject.length > 200 || /[\r\n]/.test(subject) || bodyMarkdown.length > 20000 ||
+      !idsOk(recipientIds) || !idsOk(recipientFilter?.companyIds) ||
+      (companies !== undefined && (!Array.isArray(companies) || companies.length > 500))
+    ) {
+      return new Response(JSON.stringify({ error: "Invalid input" }), {
         status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }

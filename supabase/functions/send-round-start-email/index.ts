@@ -33,6 +33,8 @@ function parseBody(raw: unknown): Body | null {
       if (typeof v === "string" && k.length < 200) names[k] = v.slice(0, 200);
     }
   }
+  if (Object.keys(names).length > 1000) return null;
+  if (Array.isArray(b.reviewer_ids) && b.reviewer_ids.length > 500) return null;
   const ids = Array.isArray(b.reviewer_ids) ? b.reviewer_ids.filter((x): x is string => typeof x === "string" && UUID_RE.test(x)) : undefined;
   return { round_id: b.round_id, intro: b.intro as string | undefined, product_names: names, reviewer_ids: ids, dry_run: b.dry_run === true };
 }
