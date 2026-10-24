@@ -171,6 +171,8 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       }
     ],
     keyPapers: [
+      {"doi": "10.22399/ijcesen.386", "title": "Evaluation of a Clinical Acceptability of Deep Learning-Based Autocontouring: An Example of The Use of Artificial Intelligence in Prostate Radiotherapy", "authors": "Çatlı Dinç S, Akmansu M, et al.", "journal": "International Journal of Computational and Experimental Science and Engineering", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-centre evaluation of DirectORGANS prostate contours on 10 patients against five physicians; geometric and acceptability endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+
     {"doi":"10.1186/s12894-025-01875-8","title":"The dosimetric impacts of ct-based deep learning autocontouring algorithm for prostate cancer radiotherapy planning dosimetric accuracy of DirectORGANS","journal":"BMC Urol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre dosimetric/geometric evaluation of pelvic auto-contours.","vendorIndependent":true},
     {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Single-centre clinical assessment including contour correction effort.","vendorIndependent":true}
   ],
