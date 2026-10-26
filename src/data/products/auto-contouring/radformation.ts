@@ -162,7 +162,7 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
         year: "2024",
         title: "Auto-contouring comparison across 5 facilities including Radformation",
         authors: "Goddard L et al.",
-        journal: "Radiother Oncol",
+        journal: "Radiat Oncol",
         rationale: "Multi-centre evaluation across five facilities including review and edit effort.",
         multiCenter: true,
         evidenceRigor: "E2",
