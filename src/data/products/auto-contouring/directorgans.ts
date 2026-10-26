@@ -151,10 +151,10 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head R",
       "Pelvis: Prostate"
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
+    evidenceRigorNotes: "Multi-facility independent evaluation (Goddard 2024) plus several single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
