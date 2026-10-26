@@ -151,10 +151,10 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
       "Pelvis: Femoral Head R",
       "Pelvis: Prostate"
     ],
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent single-centre dosimetric studies support E2.",
+    evidenceRigorNotes: "Multi-facility independent evaluation (Goddard 2024) plus several single-centre dosimetric studies support E2.",
     clinicalImpactNotes: "Innovative CT simulator-integrated approach eliminates separate contouring step. Independent dosimetric validation confirms clinical usability.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
@@ -168,13 +168,25 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
         type: "Independent Peer-reviewed Publication",
         description: "Çatlı Dinç et al. 2025: Dosimetric impacts of DirectORGANS deep learning autocontouring for prostate cancer RT planning. Gazi University, vendor-independent.",
         link: "https://doi.org/10.1186/s12894-025-01875-8"
+      },
+      {
+        type: "Peer-Reviewed Publication",
+        description: "Berenato S et al. Novel dosimetric validation of a commercial CT scanner based deep learning automated contour solution for prostate radiotherapy. Phys Med 2024.",
+        link: "https://doi.org/10.1016/j.ejmp.2024.103339"
+      },
+      {
+        type: "Peer-Reviewed Publication",
+        description: "Goddard L et al. Evaluation of multiple-vendor AI autocontouring solutions. Radiat Oncol 2024. Independent evaluation of AI autocontouring solutions using geometric accuracy metrics and blinded clinician acceptability ratings. No measured contouring time, turnaround time, workflow impact, or patient-outcome endpoint was reported.",
+        link: "https://doi.org/10.1186/s13014-024-02451-4"
       }
     ],
     keyPapers: [
       {"doi": "10.22399/ijcesen.386", "title": "Evaluation of a Clinical Acceptability of Deep Learning-Based Autocontouring: An Example of The Use of Artificial Intelligence in Prostate Radiotherapy", "authors": "Çatlı Dinç S, Akmansu M, et al.", "journal": "International Journal of Computational and Experimental Science and Engineering", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-centre evaluation of DirectORGANS prostate contours on 10 patients against five physicians; geometric and acceptability endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
 
     {"doi":"10.1186/s12894-025-01875-8","title":"The dosimetric impacts of ct-based deep learning autocontouring algorithm for prostate cancer radiotherapy planning dosimetric accuracy of DirectORGANS","journal":"BMC Urol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre dosimetric/geometric evaluation of pelvic auto-contours.","vendorIndependent":true},
-    {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Single-centre clinical assessment including contour correction effort.","vendorIndependent":true}
+    {"doi":"10.1002/jmrs.893","title":"DirectORGANS clinical assessment","authors":"Cant J et al.","journal":"J Med Radiat Sci","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Single-centre clinical assessment including contour correction effort.","vendorIndependent":true},
+    {"doi":"10.1016/j.ejmp.2024.103339","title":"Novel dosimetric validation of a commercial CT scanner based deep learning automated contour solution for prostate radiotherapy","authors":"Berenato S et al.","journal":"Phys Med","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-10-26 from reviewer suggestion; DOI metadata verified on Crossref; pending reviewer check. Dosimetric validation of DirectORGANS prostate contours.","vendorIndependent":true},
+    {"doi":"10.1186/s13014-024-02451-4","title":"Evaluation of multiple-vendor AI autocontouring solutions","authors":"Goddard L et al.","journal":"Radiat Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"L2","rationale":"Added 2026-10-26 from reviewer suggestion; multi-facility evaluation of three commercial systems including DirectORGANS; geometric accuracy and blinded clinician acceptability, no time or outcome endpoints.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
   ],
     lastRevised: "2026-08-27",
     source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
