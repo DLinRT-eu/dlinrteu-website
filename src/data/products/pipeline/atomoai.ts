@@ -3,7 +3,17 @@ import { ProductDetails } from "@/types/productDetails";
 export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
   {
     id: "atomoai-icontour-pipeline",
-    name: "iContour",
+    name: "iSecare",
+    nameHistory: [
+      {
+        name: "iContour",
+        productId: "atomoai-icontour-pipeline",
+        function: "Earlier DLinRT listing name for the same GTV/4D-CT ITV segmentation tool",
+        sourceUrl: "https://atomoai.ai/services",
+        retrievedOn: "2026-10-28",
+        notes: "Vendor services page now names the tool iSecare with the same description; the URL ID is kept so old links work.",
+      },
+    ],
     company: "AtomoAI",
     companyUrl: "https://atomoai.ai/",
     productUrl: "https://atomoai.ai/services",
@@ -38,15 +48,15 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
       ce: { status: "Not applicable" },
       fda: {
         status: "Not applicable",
-        notes: "No FDA clearance found (checked 2026-09-26 during the ASTRO 2026 exhibitor review). Update once a clearance is issued."
+        notes: "No FDA clearance found (checked 2026-09-26 during the ASTRO 2026 exhibitor review; rechecked 2026-10-28). Update once a clearance is issued."
       },
       intendedUseStatement:
-        "Vendor describes iContour as automated tumour segmentation in radiotherapy; no regulatory intended-use statement is published."
+        "Vendor describes iSecare (formerly listed as iContour) as automated tumour segmentation in radiotherapy; no regulatory intended-use statement is published."
     },
     usesAI: true,
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Pre-market product. No peer-reviewed validation naming iContour identified at time of listing (2026-09-26).",
+    evidenceRigorNotes: "Pre-market product. No peer-reviewed validation naming iContour or iSecare identified (checked 2026-09-26 and 2026-10-28).",
     clinicalImpactNotes: "No clinical impact data available.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Pre-market: no regulatory clearance found. Pipeline entry only.",
@@ -55,14 +65,14 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-09-26",
-    lastRevised: "2026-09-26",
+    lastUpdated: "2026-10-28",
+    lastRevised: "2026-10-28",
     limitations: [
       "Pre-market — no regulatory clearance found; not available for clinical use",
       "No independent validation publications identified",
       "All capability statements are vendor-reported; anatomical scope beyond 4D-CT (thoracic) targets not stated"
     ],
     source:
-      "AtomoAI website (https://atomoai.ai/ and https://atomoai.ai/services, retrieved 2026-09-26); ASTRO 2026 exhibitor directory (https://amportal.astro.org/exhibitors, retrieved 2026-09-26). Other AtomoAI tools (iTox, iGray, iBot) are announced as 'coming soon' and are not listed."
+      "AtomoAI website (https://atomoai.ai/ and https://atomoai.ai/services, retrieved 2026-09-26; services page rechecked 2026-10-28, now naming the tool 'iSecare'); ASTRO 2026 exhibitor directory (https://amportal.astro.org/exhibitors, retrieved 2026-09-26). Other AtomoAI tools (iTox, iGray, iBot, iCon) are announced as 'coming soon' and are not listed."
   }
 ];
