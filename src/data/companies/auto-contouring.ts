@@ -5,7 +5,7 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
   {
     "id": "atomoai",
     "name": "AtomoAI",
-    "description": "US radiation oncology AI startup developing deep learning tumour segmentation (iContour, pre-market).",
+    "description": "US radiation oncology AI startup developing deep learning tumour segmentation (iSecare, formerly listed as iContour; pre-market).",
     "website": "https://atomoai.ai/",
     "productIds": ["atomoai-icontour-pipeline"],
     "category": "Auto-Contouring",
