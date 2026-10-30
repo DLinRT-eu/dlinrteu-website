@@ -48,6 +48,7 @@ export default function DueReviews() {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const userId = user?.id ?? null;
 
@@ -141,6 +142,7 @@ export default function DueReviews() {
         setReviews(mappedReviews);
       } else {
         console.error('[DueReviews] ❌ Both RPC and direct query failed:', error?.message);
+        setLoadError(true);
         
         // Phase 3: Debug diagnostics
         const { data: debugData, error: debugError } = await supabase
@@ -336,7 +338,7 @@ export default function DueReviews() {
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <FileCheck className="h-12 w-12 text-muted-foreground mb-4" />
-                <p className="text-lg font-medium">No reviews assigned yet</p>
+                <p className="text-lg font-medium">{loadError ? "Couldn't load your reviews — please reload the page" : 'No reviews assigned yet'}</p>
               </CardContent>
             </Card>
           ) : (

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { pickInitialReviewerTab } from '@/utils/reviewerTabs';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRoles } from '@/contexts/RoleContext';
@@ -56,7 +57,9 @@ export default function ReviewerDashboard() {
   const userId = user?.id ?? null;
   const [reviews, setReviews] = useState<ReviewAssignment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('pending');
+  const [activeTab, setActiveTab] = useState<string>('pending');
+  const [loadError, setLoadError] = useState(false);
+  const tabChosenRef = useRef(false);
   const [rounds, setRounds] = useState<ReviewRound[]>([]);
   const [hasExpertise, setHasExpertise] = useState(true);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -102,6 +105,15 @@ export default function ReviewerDashboard() {
     }
   }, [userId]);
 
+  const applyReviews = useCallback((list: ReviewAssignment[]) => {
+    setReviews(list);
+    setLoadError(false);
+    if (!tabChosenRef.current) {
+      tabChosenRef.current = true;
+      setActiveTab(pickInitialReviewerTab(list.map(r => r.status)));
+    }
+  }, []);
+
   const fetchReviews = useCallback(async () => {
     if (!userId) {
       console.log('[Dashboard] No user, skipping fetch');
@@ -131,7 +143,7 @@ export default function ReviewerDashboard() {
           notes: r.notes ?? null,
           review_round_id: r.review_round_id
         }));
-        setReviews(mappedReviews);
+        applyReviews(mappedReviews);
         setLoading(false);
         return;
       }
@@ -147,9 +159,10 @@ export default function ReviewerDashboard() {
 
       if (!error && data) {
         console.log('[Dashboard] ✅ Direct query successful:', data.length, 'reviews');
-        setReviews(data as ReviewAssignment[]);
+        applyReviews(data as ReviewAssignment[]);
       } else {
         console.error('[Dashboard] ❌ Both RPC and direct query failed:', error?.message);
+        setLoadError(true);
         
         // Phase 3: Debug diagnostics
         const { data: debugData, error: debugError } = await supabase
@@ -161,6 +174,7 @@ export default function ReviewerDashboard() {
       }
     } catch (error) {
       console.error('[Dashboard] ❌ Unexpected error:', error);
+      setLoadError(true);
     } finally {
       setLoading(false);
     }
@@ -576,8 +590,17 @@ export default function ReviewerDashboard() {
           <TabsContent value="all" className="space-y-4">
             {reviews.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">No reviews assigned yet</p>
+                <CardContent className="py-12 text-center space-y-3">
+                  {loading ? (
+                    <p className="text-muted-foreground">Loading your reviews…</p>
+                  ) : loadError ? (
+                    <>
+                      <p className="text-muted-foreground">Couldn't load your reviews.</p>
+                      <Button size="sm" variant="outline" onClick={() => { setLoading(true); fetchReviews(); }}>Retry</Button>
+                    </>
+                  ) : (
+                    <p className="text-muted-foreground">No reviews assigned yet</p>
+                  )}
                 </CardContent>
               </Card>
             ) : (
