@@ -19,6 +19,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
     relationship: "Segmentation component"
   },
   version: "1.0",
+  releaseDate: "2026-02-19",
   certification: "CE & FDA",
   modality: ["MRI"],
   anatomicalLocation: ["Pelvis", "Head & Neck"],
@@ -139,13 +140,17 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
       status: "cleared",
       type: "Medical Device",
       regulation: "MDR (EU 2017/745)",
-      notes: "Cleared as part of Monaco for Unity per Elekta; certificate details not yet recorded."
+      notes: "CE status per Elekta. Not found in EUDAMED under any Elekta manufacturer (searched 2026-10-30)."
     },
     fda: {
       status: "510k_cleared",
       type: "510(k)",
       class: "Class II",
-      notes: "Cleared per Elekta; 510(k) number not yet recorded."
+      clearanceNumber: "K252002",
+      productCode: "MUJ",
+      regulationNumber: "21 CFR 892.5050",
+      decisionDate: "2026-02-19",
+      notes: "Cleared within 'Monaco RTP System (6.3)'. The 510(k) summary lists the AI segmentation component for MR images with Female Pelvis Intact & Hysterectomy (529 training images), Male Pelvis (250) and Head & Neck (1862) models; acceptance AVD < 3 mm met for all structures. Verified in the FDA 510(k) database 2026-10-30."
     },
     intendedUseStatement: "Intended for radiotherapy professionals (radiation oncologists, physicists, dosimetrists and therapists) to create candidate OAR contours that can be reviewed and edited as necessary within the Unity treatment planning workflow during the development of reference or adapted plans. Not intended for stand-alone use, for contouring primary targets, or to be used without review. (Source: Elekta TRM E076326/01, retrieved 2026-10-30)"
   },
@@ -158,6 +163,11 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
     "Evidence is vendor-generated only; no independent peer-reviewed publications identified"
   ],
   evidence: [
+    {
+      type: "Regulatory Clearance",
+      description: "FDA 510(k) K252002 summary, Monaco RTP System 6.3, cleared 2026-02-19: AI-based MR segmentation component and its four models.",
+      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252002.pdf"
+    },
     {
       type: "Technical Documentation",
       description: "Elekta Monaco Segmentation Component Technical Reference Manual, E076326 / 01 (2025): model architecture, training data, performance evaluation and limitations for the four Unity MR models. Vendor-provided, not publicly available; retrieved 2026-10-30. Link points to the public Unity product page.",
@@ -172,7 +182,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
   adoptionReadinessNotes: "E0 with CE and FDA: limited independent evidence; local commissioning on own Unity data recommended.",
   lastUpdated: "2026-10-30",
   lastRevised: "2026-10-30",
-  source: TRM
+  source: TRM + "; FDA 510(k) K252002 summary (public)"
 };
 
 export const ELEKTA_MONACO_PRODUCTS: ProductDetails[] = [ELEKTA_MONACO_SEGMENTATION];

@@ -37,6 +37,16 @@ export const IRISEvo: ProductDetails = {
   category: "Reconstruction",
   evidence: [
     {
+      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252188.pdf",
+      type: "Regulatory Clearance",
+      description: "FDA 510(k) K252188 summary (EMLA: Elekta Evo, Versa HD, Harmony Pro, …), cleared 2026-01-15; High Definition (Iris) reconstruction for pelvic anatomies."
+    },
+    {
+      link: "https://doi.org/10.1016/j.ijrobp.2026.06.1689",
+      type: "Conference Abstract",
+      description: "Keeler A, Mason J, Joyce T, et al. Quantitative Hounsfield Unit and Dose Calculation Accuracy of Iris CBCT for Head and Neck Radiotherapy. Int J Radiat Oncol Biol Phys 2026;126(1):e471 (ASTRO 2026 abstract)."
+    },
+    {
       link: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
       type: "Technical Documentation",
       description: "Elekta XVI Instructions for Use Vol. 3, doc 1575840_02 (2025), section 6.15.6: High Definition reconstruction algorithm, deep-learning scatter estimation trained on pelvic CT simulations, pelvis-only availability and limitations. Vendor-provided, not publicly available; retrieved 2026-10-30. Link points to the public product page."
@@ -77,14 +87,17 @@ export const IRISEvo: ProductDetails = {
       type: "Medical Device",
       class: "IIa",
       status: "cleared",
-      regulation: "MDR (EU 2017/745)"
+      regulation: "MDR (EU 2017/745)",
+      notes: "CE status per Elekta. Not found in EUDAMED under any Elekta manufacturer (searched 2026-10-30)."
     },
     fda: {
       type: "510(k)",
       class: "Class II",
-      notes: "Cleared as part of Elekta Evo CT-Linac system. K-number not yet published in FDA database as of Feb 2026. Available as upgrade for existing Elekta linacs.",
+      clearanceNumber: "K252188",
+      productCode: "IYE",
+      notes: "Cleared within K252188 'EMLA' (Elekta Evo, Versa HD, Harmony Pro and other Elekta linacs). The 510(k) summary describes the High Definition reconstruction (Polyquant iterative reconstruction with neural-network scatter estimation trained on simulated Monte Carlo data), supported currently for pelvic anatomies only. Verified in the FDA 510(k) database 2026-10-30.",
       status: "510k_cleared",
-      decisionDate: "2026-01-16"
+      decisionDate: "2026-01-15"
     },
     intendedUseStatement: "Iris high-definition, AI-enhanced imaging swiftly enhances image quality, precisely visualizing target areas for every fraction to expedite workflow and evolve the clinical practice. Iris is a component of Elekta medical linear accelerators and is intended to provide high-definition cone-beam CT (CBCT) images for target visualization and patient positioning during radiation therapy. (Source: Elekta Versa HD product brochure, elekta.com, accessed 2026-05-30)"
   },
@@ -115,7 +128,7 @@ export const IRISEvo: ProductDetails = {
     "Currently available only for certain pelvis acquisition presets; scatter network trained on pelvic CT-based simulations only (Elekta XVI IFU 1575840_02)",
     "Requires the High Definition licence and the correct collimator and site at acquisition (XVI IFU)",
     "IFU-listed artefacts: streaks and non-uniformity from residual scatter, metal, beam-hardening and truncation; blurring/noise; cone-beam and aliasing artefacts",
-    "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
+    "Only published study is a five-patient head-and-neck conference abstract on a research system (Keeler 2026); no full peer-reviewed paper on the cleared product",
     "Recently launched product (Elekta Evo, May 2024); FDA cleared January 2026",
     "Validation evidence is currently limited to vendor brochures and press releases",
     "Performance tied to Elekta Evo / Versa HD platform; results may vary across linac generations and protocols",
@@ -124,13 +137,16 @@ export const IRISEvo: ProductDetails = {
   releaseDate: "2024-05-14",
   certification: "CE & FDA",
   evidenceRigor: "E1",
-  clinicalImpact: "I2",
+  clinicalImpact: "L1t",
+  keyPapers: [
+    {"doi": "10.1016/j.ijrobp.2026.06.1689", "title": "Quantitative Hounsfield Unit and Dose Calculation Accuracy of Iris CBCT for Head and Neck Radiotherapy", "authors": "Keeler A, Mason J, Joyce T, Paulson ES, Awan MJ, Shukla ME, Omari EA", "journal": "Int J Radiat Oncol Biol Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L1t", "rationale": "Added 2026-10-30 at editor request; DOI metadata verified on Crossref; scored from the abstract, pending reviewer check. Conference abstract (ASTRO 2026 supplement, e471). Five head-and-neck patients reconstructed retrospectively on a research imaging system (not the cleared product); head and neck is outside the cleared pelvis-only use. HU error vs planning CT fell from 110-265 to 20-38 HU (soft tissue) and 285 to 62 HU (bone); gamma 3%/2 mm 58% to 99.4%. Technical image/dose-calculation accuracy (L1t). Likely vendor co-authored (J. Mason, Polyquant author); affiliations not verified.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
+  ],
   diseaseTargeted: ["Cancer"],
   clinicalEvidence: "Vendor materials describe improved target delineation and image quality with Iris-enhanced CBCT; no independent peer-reviewed validation available yet.",
   adoptionReadiness: "R3",
   anatomicalLocation: ["Pelvis"],
-  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01). Wave 5B open question RESOLVED 2026-08-25 — EXCLUDED: the three iterative-CBCT candidates (10.1177/15330338211067312, 10.1016/j.ejmp.2021.11.004, 10.1016/j.ejmp.2021.05.027) all come from one centre (Osaka International Cancer Institute) and recalculate dose with AAA and Acuros XB, i.e. a Varian Eclipse environment; the 'iCBCT' evaluated is Varian's iterative reconstruction, not Elekta IRIS. Neither vendor is named in the abstracts, so they cannot be attributed to IRIS Evo. E0 stands.",
-  clinicalImpactNotes: "Workflow improvement through enhanced CBCT quality for radiotherapy image guidance and adaptive workflows (vendor materials).",
+  evidenceRigorNotes: "FDA cleared Jan 2026. Too new for independent publications; supporting evidence limited to vendor brochures and press releases (web-searched 2026-06-01). Wave 5B open question RESOLVED 2026-08-25 — EXCLUDED: the three iterative-CBCT candidates (10.1177/15330338211067312, 10.1016/j.ejmp.2021.11.004, 10.1016/j.ejmp.2021.05.027) all come from one centre (Osaka International Cancer Institute) and recalculate dose with AAA and Acuros XB, i.e. a Varian Eclipse environment; the 'iCBCT' evaluated is Varian's iterative reconstruction, not Elekta IRIS. Neither vendor is named in the abstracts, so they cannot be attributed to IRIS Evo. 2026-10-30: E1 set by Keeler et al. 2026 (IJROBP ASTRO abstract, doi 10.1016/j.ijrobp.2026.06.1689), a small single-centre, likely vendor co-authored technical study on a research system; FDA K252188 verified.",
+  clinicalImpactNotes: "L1t: only technical image-quality and dose-calculation accuracy reported (Keeler 2026). Workflow improvement through enhanced CBCT quality for radiotherapy image guidance and adaptive workflows (vendor materials).",
   evidenceMultiCenter: false,
   evidenceProspective: false,
   evidenceMultiNational: false,
