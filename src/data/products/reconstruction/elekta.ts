@@ -37,6 +37,11 @@ export const IRISEvo: ProductDetails = {
   category: "Reconstruction",
   evidence: [
     {
+      link: "https://tu-dresden.de/med/mf/die-fakultaet/newsuebersicht/strahlentherapie-setzt-weltweit-erstmals-ki-gestuetzte-bildgebungsloesung-mit-versa-hd-ein",
+      type: "Press Release",
+      description: "TU Dresden / University Hospital Carl Gustav Carus (10 Feb 2025): first clinical use worldwide of the AI-supported Iris imaging on a Versa HD."
+    },
+    {
       link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252188.pdf",
       type: "Regulatory Clearance",
       description: "FDA 510(k) K252188 summary (EMLA: Elekta Evo, Versa HD, Harmony Pro, …), cleared 2026-01-15; High Definition (Iris) reconstruction for pelvic anatomies."
