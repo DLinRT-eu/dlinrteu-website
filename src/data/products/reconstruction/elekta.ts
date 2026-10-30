@@ -3,10 +3,11 @@ import { ProductDetails } from "@/types/productDetails";
 export const IRISEvo: ProductDetails = {
   id: "elekta-iris",
   trainingData: {
-      description: "Deep learning reconstruction module for CBCT imaging. Training details regarding dataset size, demographics, or specific institutions are not provided in available vendor documentation.",
-      disclosureLevel: "minimal",
-      source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026)",
-      sourceUrl: "https://ir.elekta.com/investors/press-releases/2026/elekta-receives-fda-510k-clearance-for-elekta-evo-linear-accelerator/"
+      description: "Per the XVI IFU, the AI component is a deep neural network that maps total projection images to scatter estimates used in the iterative reconstruction. It was trained on Monte Carlo simulated X-ray primary and scatter projections of CT images of the pelvis (method after Maier et al. 2019, deep scatter estimation). Dataset size and demographics not disclosed.",
+      disclosureLevel: "partial",
+      source: "Elekta Medical Linear Accelerator Instructions for Use Volume 3 - XVI, Document ID 1575840_02 (2025), section 6.15.6; manufacturer document provided to DLinRT, not publicly available",
+      sourceAccess: "vendor-provided",
+      sourceRetrievedOn: "2026-10-30"
   },
   evaluationData: {
       primaryEndpoint: "Not specified",
@@ -35,6 +36,11 @@ export const IRISEvo: ProductDetails = {
   version: "1.0",
   category: "Reconstruction",
   evidence: [
+    {
+      link: "https://www.elekta.com/products/radiation-therapy/elekta-evo/",
+      type: "Technical Documentation",
+      description: "Elekta XVI Instructions for Use Vol. 3, doc 1575840_02 (2025), section 6.15.6: High Definition reconstruction algorithm, deep-learning scatter estimation trained on pelvic CT simulations, pelvis-only availability and limitations. Vendor-provided, not publicly available; retrieved 2026-10-30. Link points to the public product page."
+    },
     {
       link: "https://www.elekta.com/products/radiation-therapy/versa-hd/go-further/Go%20further%20with%20Versa%20HD.PDF",
       type: "Vendor White Paper",
@@ -93,19 +99,22 @@ export const IRISEvo: ProductDetails = {
     processingTime: "<30 seconds per volume",
     triggerForAnalysis: "Automatic after CBCT acquisition"
   },
-  description: "AI-powered CBCT reconstruction module within Elekta's Evo CT-Linac system that improves image quality for radiation therapy planning and adaptive radiotherapy using deep learning techniques.",
+  description: "AI-enhanced CBCT reconstruction (XVI 'High Definition') on Elekta linacs: a deep neural network estimates scatter, which feeds an iterative Polyquant reconstruction with total-variation regularization. Per the Elekta XVI IFU, it is currently available only for certain pelvis acquisition presets.",
   keyFeatures: [
-    "AI-powered CBCT reconstruction",
+    "Deep-learning scatter estimation feeding iterative (Polyquant, pseudo-Huber TV) CBCT reconstruction",
+    "Currently available only for certain pelvis acquisition presets (XVI IFU)",
     "Improved soft tissue contrast",
     "Enhanced tumor and organ-at-risk visualization",
-    "Deep learning noise reduction algorithms",
     "Integrated within Elekta Evo CT-Linac platform",
     "Seamless integration with Elekta linacs",
     "Available as upgrade for existing Elekta linacs"
   ],
-  lastRevised: "2026-08-25",
-  lastUpdated: "2026-08-25",
+  lastRevised: "2026-10-30",
+  lastUpdated: "2026-10-30",
   limitations: [
+    "Currently available only for certain pelvis acquisition presets; scatter network trained on pelvic CT-based simulations only (Elekta XVI IFU 1575840_02)",
+    "Requires the High Definition licence and the correct collimator and site at acquisition (XVI IFU)",
+    "IFU-listed artefacts: streaks and non-uniformity from residual scatter, metal, beam-hardening and truncation; blurring/noise; cone-beam and aliasing artefacts",
     "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
     "Recently launched product (Elekta Evo, May 2024); FDA cleared January 2026",
     "Validation evidence is currently limited to vendor brochures and press releases",

@@ -43,6 +43,12 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
     deployment: ["On-premise"],
     triggerForAnalysis: "User-initiated within the Unity planning workflow"
   },
+  structuresProvenance: {
+    source: TRM,
+    sourceAccess: "vendor-provided",
+    sourceRetrievedOn: "2026-10-30",
+    notes: "Structure names as output by the models (Tables 4, 5, 11, 17)."
+  },
   supportedStructures: [
       { name: "Female Pelvis: Anus", type: "OAR" },
       { name: "Female Pelvis: Bladder", type: "OAR" },
@@ -113,7 +119,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
   ],
   trainingData: {
     description: "Developed by Elekta from T2-weighted Unity data in the MOMENTUM registry database. Female pelvis: 64 labelled datasets (64 patients) and 465 unlabelled datasets (75 patients; Unity plus Philips Ingenia 3.0T). Male pelvis: 85 labelled (85 patients) and 1777 unlabelled (219 patients). Head & neck: 60 labelled (60 patients) and 181 unlabelled (69 patients). No overlap between training and test data; labelled contours drawn by trained radiotherapy professionals to model-specific guidelines.",
-    disclosureLevel: "detailed",
+    disclosureLevel: "full",
     source: TRM,
     sourceAccess: "vendor-provided",
     sourceRetrievedOn: "2026-10-30",
@@ -154,9 +160,8 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
   evidence: [
     {
       type: "Technical Documentation",
-      description: "Elekta Monaco Segmentation Component Technical Reference Manual, E076326 / 01 (2025): model architecture, training data, performance evaluation and limitations for the four Unity MR models.",
-      sourceAccess: "vendor-provided",
-      sourceRetrievedOn: "2026-10-30"
+      description: "Elekta Monaco Segmentation Component Technical Reference Manual, E076326 / 01 (2025): model architecture, training data, performance evaluation and limitations for the four Unity MR models. Vendor-provided, not publicly available; retrieved 2026-10-30. Link points to the public Unity product page.",
+      link: "https://www.elekta.com/products/radiation-therapy/unity/"
     }
   ],
   evidenceRigor: "E0",
