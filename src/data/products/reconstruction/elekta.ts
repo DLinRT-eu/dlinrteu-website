@@ -19,7 +19,7 @@ export const IRISEvo: ProductDetails = {
   },
   name: "IRIS Evo",
   market: {
-    onMarketSince: "2022",
+    onMarketSince: "2024",
     distributionChannels: [
       "Integrated with Elekta systems",
       "Software upgrade"
@@ -36,6 +36,11 @@ export const IRISEvo: ProductDetails = {
   version: "1.0",
   category: "Reconstruction",
   evidence: [
+    {
+      link: "https://tu-dresden.de/med/mf/die-fakultaet/newsuebersicht/strahlentherapie-setzt-weltweit-erstmals-ki-gestuetzte-bildgebungsloesung-mit-versa-hd-ein",
+      type: "Press Release",
+      description: "TU Dresden / University Hospital Carl Gustav Carus (10 Feb 2025): first clinical use worldwide of the AI-supported Iris imaging on a Versa HD."
+    },
     {
       link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252188.pdf",
       type: "Regulatory Clearance",

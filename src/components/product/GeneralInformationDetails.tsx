@@ -127,14 +127,16 @@ const GeneralInformationDetails = ({ product }: GeneralInformationProps) => {
             <p className="text-sm font-medium">Anatomical Location:</p>
             <EditableField
               fieldPath="anatomy"
-              value={displayProduct.anatomy || []}
+              value={displayProduct.anatomy?.length ? displayProduct.anatomy : (displayProduct.anatomicalLocation || [])}
               type="array"
               placeholder="Add anatomy"
             >
               <p className="text-muted-foreground">
-                {displayProduct.anatomy && displayProduct.anatomy.length > 0 
-                  ? displayProduct.anatomy.join(", ") 
-                  : "-"}
+                {displayProduct.anatomy?.length
+                  ? displayProduct.anatomy.join(", ")
+                  : displayProduct.anatomicalLocation?.length
+                    ? displayProduct.anatomicalLocation.join(", ")
+                    : "-"}
               </p>
             </EditableField>
           </div>

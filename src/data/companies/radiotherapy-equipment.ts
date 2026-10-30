@@ -8,7 +8,8 @@ export const RADIOTHERAPY_EQUIPMENT_COMPANIES: CompanyDetails[] = [
     "description": "Provider of precision radiation medicine solutions with AI-enhanced imaging.",
     "website": "https://www.elekta.com/",
     "productIds": [
-      "elekta-iris"
+      "elekta-iris",
+      "elekta-monaco-segmentation-unity"
     ],
     "category": "Radiotherapy Equipment",
     "logoUrl": "/logos/Elekta.png",
