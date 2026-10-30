@@ -32,6 +32,7 @@ import { QUANTA_COMPUTER_PRODUCTS } from "./quanta-computer";
 import { MEDCOM_PRODUCTS } from "./medcom";
 import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
 import { AITEWAN_PRODUCTS } from "./aitewan";
+import { ELEKTA_MONACO_PRODUCTS } from "./elekta-monaco";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -65,5 +66,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...QUANTA_COMPUTER_PRODUCTS,
   ...MEDCOM_PRODUCTS,
   ...UNITED_IMAGING_PRODUCTS,
-  ...AITEWAN_PRODUCTS
+  ...AITEWAN_PRODUCTS,
+  ...ELEKTA_MONACO_PRODUCTS
 ];
