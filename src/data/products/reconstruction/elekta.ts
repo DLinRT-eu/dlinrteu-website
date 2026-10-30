@@ -19,7 +19,7 @@ export const IRISEvo: ProductDetails = {
   },
   name: "IRIS Evo",
   market: {
-    onMarketSince: "2022",
+    onMarketSince: "2024",
     distributionChannels: [
       "Integrated with Elekta systems",
       "Software upgrade"
