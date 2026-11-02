@@ -105,9 +105,9 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     ],
     evidenceRigor: "E0",
     evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: PubMed was re-searched for publications naming syngo.via RT Image Suite synthetic CT and none were found. The previous E1 rested on an uncited claim that \"published clinical studies\" exist; without a verifiable product-naming publication the score is corrected to E0 (vendor-validated only). Re-instate E1 or higher only when a specific citation can be verified. MESCAL 2026 (Cusumano, Maspero et al.) included as indirect-comparative community benchmark, not a direct syngo.via evaluation. 2026-08-25 Wave 5A re-sweep (Europe PMC 2014-2026, 3115 records screened for 'syngo.via' gated on synthetic-CT terms): still no publication names this product as the sCT generator under evaluation. The previously cited Aljaafari 2025 evaluates Philips MRCAT Brain and was removed as a misattribution.",
-    clinicalImpact: "I0",
-    clinicalImpactNotes: "I0 after the 2026-08-25 sweep: no verifiable published evaluation of this product, so the previously claimed technical efficacy for brain and pelvic synthetic CT cannot be substantiated.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    clinicalImpact: "L1t",
+    clinicalImpactNotes: "L1t (technical efficacy) per 2026-11-02 revision for VC10: published evaluations (MESCAL 2026, Lin 2026) concern earlier versions or unversioned SyngoAI; VC10 evidence is limited to vendor verification and validation in the FDA 510(k) K252304 summary.",
+    adoptionReadiness: "R2",
+    adoptionReadinessNotes: "R2 per 2026-11-02 revision: CE + FDA 510(k) for VC10 but no VC10-specific published evaluation; local validation, interface testing and workflow confirmation required before adoption.",
   }
 ];
