@@ -66,23 +66,26 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
-        clearanceNumber: "K232799",
+        clearanceNumber: "K252304",
         productCode: "MUJ",
-        regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2024-04-26",
-        notes: "K232799 (Apr 2024). Prior clearances: K220783 (Sep 2022), K211379 (Jul 2021), K201444 (Aug 2020)"
+        regulationNumber: "21 CFR 892.5050",
+        decisionDate: "2026-03-18",
+        notes: "K252304 (Mar 2026; VC10), submitted by Varian Medical Systems (part of Siemens Healthineers). Prior clearances: K232799 (Apr 2024; VB80), K220783 (Sep 2022), K211379 (Jul 2021), K201444 (Aug 2020)"
       },
-      intendedUseStatement: "syngo.via RT Image Suite is a 3D and 4D image visualization, multi-modality manipulation and contouring tool that helps the preparation of treatments such as, but not limited to those performed with radiation (for example, Brachytherapy, Particle Therapy, External Beam Radiation Therapy). The software combines tools for generation of a synthetic CT based on multiple pre-defined MR acquisitions. (Source: FDA 510(k) K232799 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "syngo.via RT Image Suite is a 3D and 4D image visualization, multi-modality manipulation and contouring tool that helps the preparation of treatments such as, but not limited to those performed with radiation (for example, Brachytherapy, Particle Therapy, External Beam Radiation Therapy). The software combines tools for generation of a synthetic CT based on multiple pre-defined MR acquisitions. (Source: FDA 510(k) K252304 Summary, accessed 2026-11-02)"
     },
     market: {
       onMarketSince: "2015",
       distributionChannels: ["Direct sales"],
     },
-    version: "VB80",
+    version: "VC10",
     releaseDate: "2024-09-20",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
-    source: "Company website; FDA 510(k) K232799; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    lastUpdated: "2026-11-02",
+    lastRevised: "2026-11-02",
+    limitations: [
+      "VC10 replaces the prior 2D synthetic CT model with a new 3D deep-learning algorithm. Evidence from VB60A/VB80 or from unversioned \"SyngoAI\" may not generalise to VC10. No prospective clinical, workflow or patient-outcome study of VC10 was identified. Local MR-sequence- and TPS-specific commissioning, dose and registration QA, and expert review are required before clinical use."
+    ],
+    source: "Company website; FDA 510(k) K252304 (VC10) and K232799 (VB80); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
     keyPapers: [
       {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"L2","rationale":"Added 2026-10-24; DOI verified on Crossref, abstract read via repository record. Multi-centre, multi-vendor benchmark naming SyngoAI among four commercial sCT solutions (brain and pelvis); image, dose and position-verification endpoints; scored identically to the other evaluated products, pending reviewer check.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
       {"doi": "10.1002/acm2.70829", "title": "Application of synthetic computed tomography based on a deep learning model in pelvic radiotherapy planning: A feasibility study", "authors": "Lin F, Hu J, Li Z, et al.", "journal": "Journal of Applied Clinical Medical Physics", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L3", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-centre retrospective feasibility study of the syngo.via VB60A pelvic deep-learning MR-to-synthetic-CT model; HU and dose recalculation endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
