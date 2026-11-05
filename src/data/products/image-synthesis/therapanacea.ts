@@ -7,19 +7,19 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     trainingData: {
         scannerModels: ["0.35T MRI"],
         institutions: 8,
-        datasetSources: ["8 global institutions"],
-        description: "Pelvic MR images (TrueFisp 0.35T) and brain mappings from multiple global institutions were used for validation and training as part of the software development and platform clearances.",
+        datasetSources: ["Prunaretty 2023 image test, 8 institutions"],
+        description: "K234068 does not publish this training set. Prunaretty 2023 trained the pelvis model on 350 CT / TrueFisp 0.35 T pairs. The image test was 20 cases from 8 institutions. Brain training counts are not in that paper.",
         disclosureLevel: "partial",
-        source: "FDA 510(k) summary K234068",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K234068.pdf"
+        source: "Prunaretty et al., Frontiers in Oncology 2023",
+        sourceUrl: "https://doi.org/10.3389/fonc.2023.1245054"
     },
     evaluationData: {
         studyDesign: "International retrospective multi-centric study",
         source: "DOI 10.3389/fonc.2023.1245054",
         sourceUrl: "https://doi.org/10.3389/fonc.2023.1245054",
-        results: "Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms.",
+        results: "Prunaretty 2023, 29 prostate patients at one centre: gamma greater than 96% at 1%/1 mm, greater than 99% at 2%/2 mm and 3%/3 mm, for AAA, AcurosXB and Monte Carlo. Targets within 1%. OARs within 2%.",
         primaryEndpoint: "Gamma passing rates and dose deviations",
-        description: "Retrospective multi-centric study across 8 global institutions for pelvic and brain mappings. Demonstrated excellent dosimetric equivalence with mean global gamma passing rates >96% (1mm/1mm) and target volume dose deviations within 1%."
+        description: "Prunaretty 2023: gamma greater than 96% at 1%/1 mm, and target dose difference within 1%, in 29 prostate patients at one centre. The eight institutions are the 20-case image test, not the dose cohort. There is no brain cohort in that dose result. Those figures are not in the K234068 summary. K234068 clears male pelvis and brain synthetic CT."
     },
     name: "MR-Box",
     company: "Therapanacea",
@@ -68,7 +68,7 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
         "On-premises clinical server or cloud deployment options based on institutional infrastructure"
       ],
       triggerForAnalysis: "User-initiated one-click workflow; batch/workflow integration within ART-Plan+",
-      processingTime: "Under 2-3 minutes for pseudo-CT generation and OAR delineation under optimal conditions"
+      processingTime: "Contouring is stated as 2-3 minutes per anatomy. A time for pseudo-CT generation was not on the technical page read 2026-11-05."
     },
     regulatory: {
       ce: {
@@ -109,21 +109,22 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.2.0 (current) / 3.1.0 (FDA cleared)",
+      version: "3.2.1 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
-    version: "3.2.0",
+    version: "3.2.1",
     releaseDate: "2021",
-    lastUpdated: "2026-10-15",
-    lastRevised: "2026-09-23",
+    lastUpdated: "2026-11-05",
+    lastRevised: "2026-11-05",
     keyPapers: [
     {"doi": "10.1186/s13014-023-02336-y", "title": "Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy", "authors": "Autret D et al.", "journal": "Radiat Oncol", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I2", "rationale": "Single-centre comparison of four commercial sCT generators; dosimetric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
-      {"doi":"10.3389/fonc.2023.1245054","pmid":"38023165","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J, Gungor G, Gevaert T, et al.","journal":"Frontiers in Oncology","year":"2023","link":"https://doi.org/10.3389/fonc.2023.1245054","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-centre clinical evaluation of the TheraPanacea pseudo-CT model for low-field pelvic MRI; developed with the vendor.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
-      {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-centre, multi-vendor benchmark of commercial sCT algorithms with defined acceptance levels; dosimetric/image endpoints only.","vendorIndependent":true,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true},
-      {"doi":"10.1002/acm2.70725","pmid":"42547906","title":"Image-based evaluation of a commercial AI synthetic CT generator for brain and prostate MR-only radiotherapy","authors":"Aire M, Matthews C, Jones J, et al.","journal":"Journal of Applied Clinical Medical Physics","year":"2026","link":"https://doi.org/10.1002/acm2.70725","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent image-quality and geometric-surrogate characterisation of the FDA-cleared AI sCT generator.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.3389/fonc.2023.1245054","pmid":"38023165","title":"A multi-centric evaluation of self-learning GAN based pseudo-CT generation software for low field pelvic magnetic resonance imaging","authors":"Prunaretty J, Gungor G, Gevaert T, et al.","journal":"Frontiers in Oncology","year":"2023","link":"https://doi.org/10.3389/fonc.2023.1245054","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-associated. Gamma greater than 96% at 1%/1 mm and a within-1% target difference are from 29 prostate patients at one centre. The eight institutions are the 20-case image test. No brain dose cohort. Not external validation.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":false,"multiNational":true},
+      {"doi":"10.1016/j.radonc.2026.111530","pmid":"41980670","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M, Vellini L, et al.","journal":"Radiotherapy and Oncology","year":"2026","link":"https://doi.org/10.1016/j.radonc.2026.111530","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent benchmark that names this product. The abstract does not name two countries, and the full text was not open, so multi-centre and multi-national stay false. Per-vendor numbers were not read.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":true,"multiNational":false},
+      {"doi":"10.1002/acm2.70725","pmid":"42547906","title":"Image-based evaluation of a commercial AI synthetic CT generator for brain and prostate MR-only radiotherapy","authors":"Aire M, Matthews C, Jones J, et al.","journal":"Journal of Applied Clinical Medical Physics","year":"2026","link":"https://doi.org/10.1002/acm2.70725","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent image-quality and geometric-surrogate characterisation of the FDA-cleared AI sCT generator.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.1002/acm2.14583","pmid":"39585187","title":"Brain MR-only workflow in clinical practice: A comparison among generators for quality assurance and patient positioning","authors":"Levardon M, Autret D, Le Dorze T, Guillerminet C, Dufreneix S","journal":"Journal of Applied Clinical Medical Physics","year":"2025","link":"https://doi.org/10.1002/acm2.14583","evidenceRigor":"E1","clinicalImpact":"L2","legacyClinicalImpact":"I1","rationale":"Names ART-Plan for brain synthetic-CT quality assurance and positioning. One centre. No vendor author. TheraPanacea provided the synthetic CTs free of charge under a collaboration contract. The abstract's largest positioning deviations are for the only non-Dixon AI generator, which the methods identify as ART-Plan.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
     ],
-    source: "Therapanacea MR-Box page; Therapanacea ART-Plan+ technical information pages; FDA 510(k) database K234068, K242822, K253091; indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "Therapanacea products page; FDA 510(k) summaries K234068, K242822 and K253091; Prunaretty 2023 (doi:10.3389/fonc.2023.1245054); MESCAL 2026 (doi:10.1016/j.radonc.2026.111530); Levardon 2025 (doi:10.1002/acm2.14583); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05).",
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
@@ -151,17 +152,18 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       {"type": "Multi-vendor Comparative Study", "description": "Autret D et al. Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy. Radiat Oncol 2023. Single-centre comparison of four commercial sCT generators; dosimetric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1186/s13014-023-02336-y"},
       {
         type: "Multicenter Study",
-        description: "International retrospective multi-centric study across 8 institutions of pelvic (TrueFisp 0.35T) and brain MR pseudo-CT generation with ART-Plan/MR-Box. Frontiers in Oncology 2023.",
+        description: "Prunaretty 2023, vendor-associated. Gamma greater than 96% at 1%/1 mm is from 29 prostate patients at one centre. The eight institutions are the 20-case image test. No brain dose cohort. The paper does not use the name MR-Box.",
         link: "https://doi.org/10.3389/fonc.2023.1245054"
       },
       {
         type: "Indirect-Comparative",
-        description: "Cusumano D, Maspero M et al. Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative. Radiother Oncol 2026. Community benchmark relevant to MR-Box commissioning; not a direct MR-Box evaluation.",
+        description: "Cusumano D, Maspero M et al. MESCAL, Radiother Oncol 2026. The abstract names MR Box (Therapanacea) as one of four synthetic-CT products. Data are from two centres. Per-vendor numbers were not in the open abstract.",
         link: "https://doi.org/10.1016/j.radonc.2026.111530"
       }
     ],
     limitations: [
       "Indicated for adult patients only; ART-Plan+ is not intended for patients less than 18 years of age (FDA K234068 IFU).",
+      "Abdomen is an MR organ-at-risk model on the vendor structure list. FDA synthetic CT in K234068 is male pelvis and brain, not abdomen.",
       "Auto-contouring on MR images is only valid for sequences/anatomies supported by the module: Brain T1, Abdomen TrueFISP, Pelvis T2, Pelvis TrueFISP (Therapanacea Technical Information, 2026-06-16). MR sequences outside this scope may generate inappropriate contours.",
       "Pelvis T2 model is validated for Elekta MR-Linac sequences; TrueFISP models are validated for 0.35 T ViewRay MR-Linac. Other scanners / sequences require local commissioning before clinical use.",
       "Pseudo-CT and contours are produced from MR data that are not validated; the user must check the synthetic CT quality and review all contours before any treatment-planning action (Therapanacea Technical Information, 2026-06-16).",
@@ -170,10 +172,10 @@ export const THERAPANACEA_MRBOX_PRODUCTS: ProductDetails[] = [
       "Dose engine must be validated locally by the user before clinical use."
     ],
     evidenceRigor: "E2",
-    evidenceRigorNotes: "Validated via a peer-reviewed, international retrospective multi-centric study across 8 global institutions utilizing pelvic MR images (TrueFisp 0.35T) and brain mappings. The study includes vendor-affiliated co-authors (including Therapanacea CEO Nikos Paragios), classifying the evidence rigor as E1 (vendor-assisted/collaborative peer-reviewed study). (Source: DOI 10.3389/fonc.2023.1245054). MESCAL 2026 (Cusumano, Maspero et al.) kept separately as indirect-comparative community benchmark. 2026-08-25 Wave 5: E2/I1 retained — E2 set by Prunaretty et al. 2023 and the MESCAL benchmark. Open question: confirm with the vendor whether the low-field pelvic MR model of Prunaretty 2023 is marketed as MR-Box or as part of AdaptBox; move the paper if it belongs to AdaptBox.",
+    evidenceRigorNotes: "E2 on 2026-11-05 is the maximum of the scored papers. Prunaretty 2023 is vendor-associated (TheraPanacea CEO) and is not external validation. MESCAL 2026 names MR Box and is independent on the author list; its data are from two centres, so multi-centre stays false. Autret 2023, Aire 2026 and Levardon 2025 are independent single-centre E1 studies. Levardon discloses a collaboration contract and free synthetic CTs. These papers do not raise the MR OAR contouring score.",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
-    clinicalImpactNotes: "Demonstrated excellent dosimetric equivalence for MR-only workflows. Mean global gamma passing rates exceeded 96% at 1mm/1mm criteria across AAA, AcurosXB, and Monte Carlo algorithms, with target volume dose deviations within 1%. No randomized prospective outcome data was identified.",
+    clinicalImpactNotes: "L2 from dose and image endpoints. Prunaretty 2023: gamma greater than 96% at 1%/1 mm in 29 prostate patients at one centre, targets within 1%. That figure is not a brain result and is not an eight-institution dose test. No randomized prospective outcome data was identified.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "CE-marked Class IIb and FDA 510(k) cleared commercial product. High implementation safeguards are necessary: deployment requires extensive local commissioning, MR sequence compatibility checks, MR scanner QA program, synthetic CT dose validation, and manual expert verification of all synthetic scans and structures before clinical use."
   }
