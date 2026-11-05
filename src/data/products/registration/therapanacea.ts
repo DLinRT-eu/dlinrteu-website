@@ -4,20 +4,20 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     keyPapers: [
-      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse (Therapanacea) explicitly; assesses clinical utility of automatic target propagation in an offline adaptive workflow across ten patients.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse. Ten head-and-neck patients, one centre, no vendor author. Median DSC 0.86 and HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage, and 39% did not. The paper says propagated volumes need medical review.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
     ],
     trainingData: {
         source: "Therapanacea product page (manufacturer)",
         disclosureLevel: "minimal",
-        description: "AI-powered rigid and deformable image registration. Training dataset details are not publicly disclosed. Note: FDA 510(k) K253091 (ART-Plan+ v3.1.0) was previously cited here but does not name SmartFuse — corrected on 2026-06-15.",
+        description: "Training dataset details are not publicly disclosed. SmartFuse is named in K202700 and K234068. It is not named in K242822 or K253091.",
         sourceUrl: "https://therapanacea.com/products",
         sourceAccess: "public",
         sourceRetrievedOn: "2026-07-30"
     },
     evaluationData: {
-        results: "Not publicly disclosed",
-        primaryEndpoint: "Sub-voxel registration accuracy",
-        description: "Manufacturer claims sub-voxel registration accuracy for AI-powered rigid and deformable image fusion. No SmartFuse-specific peer-reviewed or regulatory evaluation document confirmed (CE Mark documentation not publicly indexed). FDA K253091 was previously cited here but verified on 2026-06-15 to cover the ART-Plan+ platform (SmartPlan, Annotate/TumorBox, AdaptBox modules) without naming SmartFuse.",
+        results: "Moliner 2026: median DSC 0.86, HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage.",
+        primaryEndpoint: "Target propagation geometry and dose coverage",
+        description: "A sub-voxel registration-accuracy claim was not on the products page or the technical page read 2026-11-05, and K202700 does not publish a sub-voxel error. Moliner 2026 evaluates automatic target propagation, not a sub-voxel registration error.",
         source: "Therapanacea product page (manufacturer)",
         studyDesign: "Manufacturer specification",
         sourceUrl: "https://therapanacea.com/products",
@@ -42,7 +42,6 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       "AI-powered registration algorithm",
       "Rigid and deformable fusion",
       "Real-time contour deformation",
-      "Sub-voxel registration accuracy",
       "4D-CT management",
       "Multi-modality support (CT, MRI, CBCT, PET-CT)",
       "Checker-board visualization"
@@ -71,7 +70,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
       },
       fda: {
         status: "not_applicable",
-        notes: "No SmartFuse-specific FDA 510(k) clearance located as of 2026-06-15. FDA K253091 (ART-Plan+ v3.1.0) was previously associated with SmartFuse here, but its indications cover SmartPlan, Annotate/TumorBox, and AdaptBox modules only — SmartFuse is not named in K253091."
+        notes: "There is no SmartFuse-only 510(k). SmartFuse is named in K202700 (2021-01-14, 21 CFR 892.2050, QKB) and K234068 (2024-04-22, 21 CFR 892.5050, MUJ). It is not named in K242822 or K253091. Rigid and deformable registration remains in the ART-Plan+ v3.2.1 intended use."
       },
       tga: {
         status: "TGA Cleared",
@@ -85,34 +84,34 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.2.0 (current platform release)",
+      version: "3.2.1 (current) / 3.1.0 (FDA cleared)",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
     evidenceRigor: "E1",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 — no peer-reviewed publication naming this product was found, so no keyPapers could be scored and the stored score is unchanged. CE-marked module under Therapanacea's ART-Plan+ family. No SmartFuse-specific peer-reviewed publication identified. Two previously cited FDA K253091 references (trainingData and evaluationData) were removed on 2026-06-15: the K253091 clearance covers ART-Plan+ modules SmartPlan / Annotate/TumorBox / AdaptBox and does not name SmartFuse. 2026-08-25 Wave 5D: E1/I2 set by JACMP 2026 (doi 10.1002/acm2.70479), which names Smartfuse and assesses automatic target propagation in an offline adaptive head-and-neck workflow.",
-    clinicalImpactNotes: "Manufacturer-claimed workflow improvement through AI-powered rigid and deformable image fusion; no independently confirmed clinical impact study identified.",
+    evidenceRigorNotes: "E1 on 2026-11-05 from Moliner et al., JACMP 2026 (doi 10.1002/acm2.70479), which names Smartfuse and reports target-propagation geometry and dose coverage in ten patients at one centre.",
+    clinicalImpactNotes: "L2 from Moliner 2026 geometry and dose-coverage endpoints. The paper does not report a workflow-time result.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE: high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    evidenceVendorIndependent: false,
+    adoptionReadinessNotes: "Derived from E1 and CE marking. Independent evidence is one single-centre target-propagation study. Local commissioning and review of propagated volumes remain necessary.",
+    evidenceVendorIndependent: true,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
     limitations: [
-      "No SmartFuse-specific FDA 510(k) clearance; the module is not named in K253091",
-      "No module-specific peer-reviewed publication identified as of 2026-07-30",
+      "SmartFuse is named in K202700 and K234068. It is not named in K242822 or K253091. There is no SmartFuse-only 510(k). Rigid and deformable registration remains in the ART-Plan+ v3.2.1 intended use.",
+      "Moliner et al., JACMP (doi:10.1002/acm2.70479), evaluates automatic target propagation. 61% of physician PTVs met V95% at least 95%. The paper says propagated volumes need medical review. 39% of physician PTVs missed that coverage.",
       "Vendor warning: fused images and any derived contours must be verified and validated by an authorised person before use",
       "Vendor warning: results depend on input image quality; low-quality or artefact-laden volumes may cause misinterpretation of the anatomy",
       "Vendor warning: importing data with missing, incorrect or non-compatible required DICOM tags will cause import failure or malfunction",
       "Vendor warning: the platform is not for use on tablets or smartphones and is intended for screens of 17 inches and above"
     ],
-    version: "3.1.2",
-    releaseDate: "2025-01-01",
-    lastUpdated: "2026-10-15",
-    lastRevised: "2026-08-27",
-    source: "Therapanacea official website (therapanacea.com/products, accessed 2026-07-30); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; manufacturer TheraPanacea, 8-10 Avenue Ledru-Rollin, 75012 Paris, France; https://therapanacea.com/technical-information-2, retrieved 2026-07-30). Multi-modal rigid and deformable registration of CT, MR, PET-CT, 4D-CT and synthetic-CT is listed in the published ART-Plan+ intended use.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    version: "3.2.1",
+    releaseDate: "Not confirmed. 2020, 2025-01-01 and module build 3.1.2 were not on the technical page read 2026-11-05.",
+    lastUpdated: "2026-11-05",
+    lastRevised: "2026-11-05",
+    source: "Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05). FDA summaries K202700 and K234068 name SmartFuse. K242822 and K253091 do not. Moliner et al., JACMP 2026 (doi:10.1002/acm2.70479)."
   }
 ];
