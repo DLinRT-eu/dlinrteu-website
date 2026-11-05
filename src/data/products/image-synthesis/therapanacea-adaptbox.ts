@@ -22,34 +22,36 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
-        notes: "AdaptBox sCT generation from CBCT is the FDA-cleared image-synthesis component (K253091). Cross-check 2026-06-15: Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826, 'Implementation of an AI-Driven Workflow for Daily Dose Reconstruction in Prostate Cancer Radiotherapy') is verified to evaluate an ART-Plan/AdaptBox-style CBCT→sCT workflow for prostate; scope is prostate-specific and does not cover the H&N or Breast/Thorax FDA-cleared anatomies. MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530) is an MRI-only commissioning benchmark, not directly applicable to CBCT→sCT but included as indirect-comparative context for sCT acceptance levels.",
+        notes: "AdaptBox sCT generation from CBCT is the FDA-cleared image-synthesis component. The scored study is Prunaretty et al., Cancers 2026, male pelvis only, per fraction, one centre. Frontiers in Oncology 2026 does not name AdaptBox. MESCAL is MRI-only and is not used as AdaptBox evidence.",
         evaluationData: {
-          studyDesign: "Independent peer-reviewed cumulative-dose reconstruction workflow study (prostate) + multi-center dosimetric study",
-          primaryEndpoint: "Dosimetric accuracy of sCT-based dose reconstruction vs planning CT",
-          results: "Prunaretty et al. Cancers 2026 (prostate, DOI 10.3390/cancers18111826): cumulative dose reconstruction across multiple fractions consistent with planning CT for prostate. Multi-center dosimetric agreement reported (Frontiers in Oncology 2026). Evidence is direct for the prostate anatomy; H&N and Breast/Thorax remain less well characterised by peer-reviewed publications.",
-          description: "Synthetic-CT validation of the AdaptBox CBCT→sCT pipeline; strongest peer-reviewed evidence is for the male pelvis/prostate anatomy.",
-          source: "Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826, verified 2026-06-15); Frontiers in Oncology 2026; FDA 510(k) K253091; indirect-comparative MESCAL 2026 (DOI 10.1016/j.radonc.2026.111530)",
+          studyDesign: "Single-centre retrospective per-fraction dose comparison in 20 prostate patients. No TheraPanacea author.",
+          primaryEndpoint: "Per-fraction dose on synthetic CT versus the planning CT",
+          results: "Cancers 2026 compared dose fraction by fraction. It is not a cumulative multi-centre validation. In two patients, bladder dose deviations were automatic-contour errors. The FDA file reports pass/fail only.",
+          description: "Strongest peer-reviewed evidence is the male pelvis. Head and neck, breast and thorax are in the FDA indication and have less published dose evidence.",
+          source: "Prunaretty et al., Cancers 2026 (doi:10.3390/cancers18111826); FDA 510(k) K253091 for the labelled function",
           sourceUrl: "https://doi.org/10.3390/cancers18111826",
         },
-        evidenceRigor: "E2",
-        evidenceRigorNotes: "E2 retained based on independent peer-reviewed prostate evaluation (Prunaretty 2026, Cancers, DOI verified 2026-06-15). Vendor-assisted multi-center support from Frontiers in Oncology 2026. H&N and Breast/Thorax anatomies have FDA clearance but limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",
+        evidenceRigor: "E1",
+        evidenceRigorNotes: "E1 from Cancers 2026. Frontiers 2026 is not a named AdaptBox evaluation. MESCAL is not CBCT evidence.",
         clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
       },
       "Auto-Contouring": {
         usesAI: true,
-        notes: "OAR auto-contouring on augmented CBCT/sCT is bundled in AdaptBox; target contours are propagated from planning CT via registration. No standalone peer-reviewed validation of the OAR contouring module on synthetic CBCT located.",
+        notes: "OAR auto-contouring on augmented CBCT/sCT is bundled in AdaptBox. Target contours are propagated from the planning CT. Cancers 2026 found bladder dose deviations from automatic contours in two patients. There is no DSC study of this contour module.",
         evaluationData: {
-          studyDesign: "Software V&V (FDA 510(k)); no standalone peer-reviewed contouring validation located",
-          primaryEndpoint: "Geometric accuracy of OAR contours on augmented CBCT (not publicly disclosed)",
-          results: "Not publicly disclosed",
-          description: "OAR contouring validation is bundled into the K253091 submission for the offline adaptive workflow; module-specific peer-reviewed evidence is not yet available.",
-          source: "FDA 510(k) K253091",
-          sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
+          studyDesign: "No standalone contour study. One dose paper reports contour failures.",
+          primaryEndpoint: "Not a published DSC endpoint",
+          results: "Cancers 2026: in two of 20 prostate patients, bladder dose deviations were automatic-contour errors. No Dice study was found.",
+          description: "The product L2 does not validate contouring. Registration papers, including SmartFuse, are not used here.",
+          source: "Prunaretty et al., Cancers 2026",
+          sourceUrl: "https://doi.org/10.3390/cancers18111826",
         },
         evidenceRigor: "E0",
-        evidenceRigorNotes: "No peer-reviewed publication located specifically for the OAR contouring module. PubMed searched 2026-06-13.",
-        clinicalImpact: "I0",
+        evidenceRigorNotes: "No Dice study of AdaptBox OAR contouring. The only related finding is the bladder-contour failures in Cancers 2026.",
+        clinicalImpact: "L1c",
+        efficacyProvisional: true,
+        legacyClinicalImpact: "I0",
       },
     },
     name: "AdaptBox",
@@ -57,21 +59,21 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://therapanacea.com/",
     productUrl: "https://therapanacea.com/products",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/therapanacea-adaptbox.ts",
-    description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, daily cumulative dose tracking, and assisted off-line replanning decision support.",
+    description: "AI-powered offline adaptive radiotherapy module within the ART-Plan+ platform that generates synthetic/augmented CT images from daily CBCTs, supports organs-at-risk (OAR) delineation, dose metrics over the course of treatment as labelled by FDA, and assisted off-line replanning decision support. The published prostate study compared dose fraction by fraction. It did not show accumulated dose.",
     features: [
       "AI-based synthetic/augmented CT generation from daily CBCT images",
       "Organs-at-risk (OAR) delineation on augmented CBCT / synthetic CT images",
       "Dose computation on reference planning CT and synthetic/augmented CBCT images",
       "Daily dose tracking and comparison of daily cumulative dose/volume metrics",
       "Assisted CBCT-based off-line adaptation and replanning decision support",
-      "Vendor-reported workflow integration compatible with all TPS and Linac providers"
+      "Vendor states that it works with any TPS. A claim that it works with every linac is not made."
     ],
     category: "Image Synthesis",
     secondaryCategories: ["Auto-Contouring"],
     certification: "CE & FDA",
     logoUrl: "/logos/therapanacea.png",
     website: "https://therapanacea.com/products",
-    anatomicalLocation: ["Head & Neck", "Breast", "Thorax", "Pelvis"],
+    anatomicalLocation: ["Head & Neck", "Breast", "Thorax", "Pelvis (male)"],
     modality: ["CBCT"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Head and Neck Cancer", "Breast Cancer", "Thoracic Cancers", "Prostate Cancer"],
@@ -106,12 +108,12 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         "DICOM-based workflow integration",
         "TPS/PACS workflow integration",
         "ART-Plan+ ecosystem integration (Annotations and SmartFuse modules)",
-        "Vendor-reported compatibility with all TPS and Linac providers"
+        "Vendor states that it works with any TPS. Every linac is not claimed."
       ],
       deployment: ["On-premises", "Cloud-based"
       ],
       triggerForAnalysis: "Manual or automated batch workflow; exact automation and protocol configuration should be confirmed with the vendor",
-      processingTime: "Processing time varies by anatomy, hardware, and workflow load. Automatic contouring and sCT generation typically take 2–3 minutes under optimal conditions; manual review and QA by clinical staff are required before clinical action."
+      processingTime: "Vendor contouring text: 2–3 minutes under optimal conditions, plus user review. Cancers 2026 reports 2 min 40 s for the AdaptBox v2.3.2 workflow, which is not the current software."
     },
     regulatory: {
       ce: {
@@ -130,7 +132,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         productCode: "MUJ, QKB, LLZ",
         regulationNumber: "21 CFR 892.5050",
         decisionDate: "2025-12-23",
-        notes: "FDA clearance K253091 clears ART-Plan+ v3.1.0 including the AdaptBox module. AdaptBox allows synthetic CT generation from CBCT, dose computation, and off-line adaptive decision-making for Head & Neck, Breast/Thorax, and Pelvis (male). Prior relevant FDA clearances include K242822 (v3.0.0, Feb 2025) and K234068 (v2.2.0, Apr 2024)."
+        notes: "Current statement is K253091 (ART-Plan+ v3.1.0, decision 2025-12-23): CBCT synthetic CT, dose computation and offline adaptation for head and neck, breast/thorax and male pelvis. First summary that names AdaptBox is K232479 (2023-12-22, male pelvis only). K234068 (2024-04-22) adds thorax, breast and head and neck. K242822 does not describe AdaptBox. K202700, K220813 and K230023 do not name AdaptBox. There is no newer 510(k)."
       },
       intendedUseStatement: "AdaptBox allows generation of synthetic-CT from CBCT images, dose computation on CT images for external beam irradiation with photon beams and assisted CBCT-based off-line adaptation decision-making for the following anatomies: Head & Neck, Breast / Thorax, Pelvis (male). ART-Plan+ is not intended for patients less than 18 years of age. (Source: FDA 510(k) K253091 Summary)"
     },
@@ -159,25 +161,23 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     },
     partOf: {
       name: "ART-Plan+",
-      version: "3.2.0",
+      version: "3.2.1",
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
-    version: "3.2.0",
-    releaseDate: "2025-01-01",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    version: "3.2.1",
+    releaseDate: "Unknown. The stored date 2025-01-01 had no source and was removed.",
+    lastUpdated: "2026-11-05",
+    lastRevised: "2026-11-05",
     keyPapers: [
-      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names AdaptBox v2.3.2 and evaluates daily delivered dose in 20 prostate patients — a workflow-level implementation.","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":false},
-      {"doi":"10.1016/j.radonc.2026.111530","title":"Standardizing MRI-only radiotherapy commissioning: Benchmark dataset and acceptance levels from the MESCAL initiative","authors":"Cusumano D, Maspero M et al.","journal":"Radiotherapy and Oncology","year":"2026","rationale":"Indirect-comparative commissioning benchmark; unscored."},
-      {"doi":"10.3389/fonc.2026.1756153","pmid":"41800047","title":"Self-learning GAN based synthetic CT generation: unlocking CBCT-based adaptive radiotherapy","authors":"Prunaretty J, Colombo L, Romdhani S, Teboul O, et al.","journal":"Frontiers in Oncology","year":"2026","link":"https://doi.org/10.3389/fonc.2026.1756153","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-centre CBCT-to-sCT models across pelvis, head and neck, lung and breast; clinically evaluated but vendor-developed.","vendorIndependent":false,"multiCenter":true,"prospective":false,"externalValidation":true,"multiNational":true}
+      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names AdaptBox v2.3.2. Twenty prostate patients, one centre (Institut du Cancer de Montpellier). No TheraPanacea author. Dose was compared fraction by fraction, not as a cumulative course. In two patients, bladder dose deviations were automatic-contour errors. The 2 min 40 s figure is this v2.3.2 workflow, not the current software.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
     ],
-    source: "Therapanacea official AdaptBox and ART-Plan+ technical information portal; FDA 510(k) database entries K253091, K242822, and K234068; independent peer-reviewed literature (Prunaretty et al., Cancers 2026 DOI 10.3390/cancers18111826 verified 2026-06-15; Frontiers in Oncology 2026); indirect-comparative MESCAL 2026 (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530). Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.0, UDI (01)03770019940020(8012) v3.2.0(11)260525; https://therapanacea.com/technical-information-2, retrieved 2026-07-30).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
-    evidenceRigor: "E2",
-    evidenceRigorNotes: "E2 retained 2026-06-15 after cross-check: Prunaretty et al. Cancers 2026 (DOI 10.3390/cancers18111826) verified as a prostate-specific AI-driven daily dose-reconstruction workflow study consistent with the AdaptBox pipeline; supported by a vendor-assisted multi-center dosimetric study in Frontiers in Oncology (2026). H&N and Breast/Thorax FDA-cleared anatomies have limited independent peer-reviewed validation. MESCAL 2026 kept separately as indirect-comparative.",
+    source: "Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05). FDA summaries: K232479 (first AdaptBox clearance, 2023-12-22, male pelvis), K234068 (2024-04-22, thorax, breast, head and neck), K253091 (current statement, v3.1.0). K242822 does not describe AdaptBox. Prunaretty et al., Cancers 2026 (doi:10.3390/cancers18111826). Frontiers in Oncology 2026 (doi:10.3389/fonc.2026.1756153) was removed from keyPapers: it does not name AdaptBox, uses Eclipse, and includes the TheraPanacea CEO. MESCAL was removed from keyPapers because it is an MRI-only benchmark. Class IIb / GMED 0459 remains vendor-reported. Q4 2026 review.",
+    evidenceRigor: "E1",
+    evidenceRigorNotes: "E1 on 2026-11-05 from Prunaretty et al., Cancers 2026: 20 prostate patients, one centre, no TheraPanacea author, per-fraction dose. The Frontiers 2026 paper previously scored E2 does not name AdaptBox. MESCAL does not evaluate AdaptBox. Head and neck, breast and thorax are FDA-cleared and have less peer-reviewed dose evidence than the male pelvis.",
     clinicalImpact: "L2",
-    clinicalImpactNotes: "Upgraded from I0 to I1. Evidence supports daily dose reconstruction accuracy and effective offline cumulative tracking of OAR deviation, supporting clinical replanning decisions. High-level evidence regarding long-term clinical outcome benefits, toxicity reduction, or randomized disease control is not yet available. 2026-08-25 Wave 5: impact raised I1 → I2, set by Prunaretty et al., Cancers 2026 (doi 10.3390/cancers18111826), which names AdaptBox v2.3.2 and reports a workflow-level daily dose-reconstruction implementation in 20 prostate patients.",
+    clinicalImpactNotes: "L2 from per-fraction dose comparison in Cancers 2026, not from a cumulative multi-centre validation. The FDA text allows metrics over the course of treatment; that is the labelled function. The prostate paper compared dose fraction by fraction. In two patients, bladder dose deviations were automatic-contour errors. No outcome data.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE + FDA 510(k). The presence of both technical sCT validation and independent clinical workflow tracking supports integration. However, because image synthetic and calculation processes are sensitive to bad CBCT quality, standard local commissioning, intensive initial QA, and independent physical/clinical review of contours remain recommended."
+    adoptionReadinessNotes: "Cleared for the labelled anatomies, with local commissioning still required because CBCT quality changes the synthetic CT and the contours. R3 is not derived from an E2 score. CE Class IIb / GMED 0459 stays vendor-reported: it is not on the technical page."
   }
 ];
