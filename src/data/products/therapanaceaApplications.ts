@@ -10,7 +10,7 @@ import { THERAPANACEA_PLATFORM_PRODUCTS } from './platform/therapanacea-artplan'
 
 const SOURCE_URL = 'https://therapanacea.com/products';
 const TECHNICAL_URL = 'https://therapanacea.com/technical-information-2';
-const RETRIEVED_ON = '2026-10-15';
+const RETRIEVED_ON = '2026-11-05';
 
 function application(base: ProductDetails, id: string, name: string): ProductDetails {
   return {
@@ -75,7 +75,7 @@ function segmentation(): ProductDetails {
   product.efficacyProvisional = score.impactProvisional;
   product.evidenceRigorNotes = 'Application scores are maxima across attributable papers, not validation of every function. Refer to function-specific evidence below.';
   product.clinicalImpactNotes = product.evidenceRigorNotes;
-  product.limitations = ['Different functions have different evidence and regulatory scopes; a score for one function must not be interpreted as validation of all functions.', 'SmartFuse has no independently identified function-specific FDA clearance; the application certification summary must not be read as clearance of every registration function.', 'Structure models are modality-locked; CT, MR and MR-brachytherapy lists are not interchangeable across imaging modalities.', 'MR synthetic CT is distinct from CBCT synthetic CT in ART-Plan Adaptive.', 'Not all models are available in all markets. All generated images, contours and registrations require professional verification.', 'Tumour and brachytherapy functions retain their limited public evidence; see function-specific limitations.'];
+  product.limitations = ['Different functions have different evidence and regulatory scopes; a score for one function must not be interpreted as validation of all functions.', 'SmartFuse is named in FDA K202700 and K234068 and is not named in K242822 or K253091. There is no SmartFuse-only 510(k). The application badge must not be read as clearance of every function.', 'Structure models are modality-locked; CT, MR and MR-brachytherapy lists are not interchangeable across imaging modalities.', 'MR synthetic CT is distinct from CBCT synthetic CT in ART-Plan Adaptive.', 'Not all models are available in all markets. All generated images, contours and registrations require professional verification.', 'Tumour and brachytherapy functions retain their limited public evidence; see function-specific limitations.'];
   return product;
 }
 
@@ -102,23 +102,23 @@ function adaptive(): ProductDetails {
   product.evidence = base.evidence?.filter(e => typeof e === 'string' || !e.link?.includes('10.1016/j.radonc.2026.111530')) as ProductDetails['evidence'];
   product.evaluationData = {
     ...base.evaluationData,
-    description: 'Vendor-associated prostate dose-reconstruction study and vendor-associated multicentre CBCT synthetic-CT study. These publications do not establish independent validation of every adaptive function.',
-    studyDesign: 'Vendor-associated retrospective prostate workflow study and multicentre synthetic-CT evaluation',
-    source: 'Prunaretty et al., Cancers 2026 and Frontiers in Oncology 2026; per-paper affiliation and endpoint assessment retained below.',
+    description: 'Single-centre prostate dose-reconstruction study with no TheraPanacea author, plus a related method paper that does not name AdaptBox. These publications do not establish validation of every adaptive function.',
+    studyDesign: 'Retrospective prostate workflow study at one centre. The Frontiers 2026 paper is not scored as AdaptBox evidence.',
+    source: 'Prunaretty et al., Cancers 2026. Frontiers in Oncology 2026 does not name AdaptBox.',
     sourceUrl: 'https://doi.org/10.3390/cancers18111826',
   };
   product.categoryEvidence = {
     ...base.categoryEvidence,
     'Image Synthesis': {
       ...base.categoryEvidence?.['Image Synthesis'],
-      notes: 'CBCT-to-synthetic-CT and daily dose-reconstruction evidence is attributable to AdaptBox. Both listed studies involve the vendor. MRI-only MESCAL is retained solely with the MR synthetic-CT function in Segmentation.',
+      notes: 'CBCT-to-synthetic-CT and daily dose-reconstruction evidence is attributable to AdaptBox. E1 comes from Cancers 2026. Frontiers in Oncology 2026 is not a named AdaptBox evaluation. MRI-only MESCAL stays with the MR synthetic-CT function in Segmentation.',
       evaluationData: product.evaluationData,
-      evidenceRigorNotes: 'E2 is supported by the vendor-associated multicentre Frontiers in Oncology study; the single-centre Cancers workflow study is E1. Evidence is not independent validation of every anatomy or function.',
+      evidenceRigorNotes: 'E1 from the single-centre Cancers 2026 study, which has no TheraPanacea author. Frontiers 2026 is not a named AdaptBox evaluation. This is not validation of every anatomy or function.',
     },
     'Registration': {
       usesAI: true, evidenceRigor: 'E0', clinicalImpact: 'L1c', efficacyProvisional: true,
-      notes: 'Target propagation and deformable registration are included in the adaptive workflow, but no standalone function-specific assessment is assigned from the synthesis papers.',
-      evaluationData: { description: 'No separately assessed registration validation retained in this record.', source: 'ART-Plan+ technical information, retrieved 2026-10-15', sourceUrl: TECHNICAL_URL },
+      notes: 'Unscored placeholder for target propagation. The product L2 does not validate registration. SmartFuse papers are not used here.',
+      evaluationData: { description: 'No separately assessed registration validation retained in this record.', source: 'ART-Plan+ technical information, retrieved 2026-11-05', sourceUrl: TECHNICAL_URL },
     },
   };
   product.evidenceRigorNotes = product.categoryEvidence['Image Synthesis']?.evidenceRigorNotes;
