@@ -432,34 +432,34 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
   {
     id: "subtle-aimify",
     trainingData: {
-        description: "Not publicly disclosed. Training involves deep learning models for gadolinium-based contrast agent enhancement in brain MRI.",
-        disclosureLevel: "minimal",
-        source: "FDA 510(k) database (K240290)",
+        description: "K240290 describes a U-Net-style 2.5D network, use of the SubtleMR (K223623) denoising module, a low-dose versus regular-dose training comparison, and named source regions. The training-set count is not in the 510(k) summary. A count of 56 training and 13 validation cases appears in Yin 2026 only by citation of Pasumarthi 2021, which is a research model and is not inserted here as the cleared product's training size.",
+        disclosureLevel: "partial",
+        source: "FDA 510(k) summary K240290",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K240290.pdf"
     },
     evaluationData: {
-        description: "FDA 510(k) clinical validation studies demonstrated improved contrast-to-noise ratio (CNR) and lesion visibility in brain MRI images. Evidence includes 14 ECR presentations and a distribution launch via Bracco.",
-        studyDesign: "Software V&V (FDA 510(k))",
-        primaryEndpoint: "Contrast-to-noise ratio (CNR), contrast enhancement (CEP), and lesion-to-brain ratio (LBR)",
+        description: "K240290 is a bench test plus a reader study of standard-dose gadolinium brain MRI. The acceptance bar was an average improvement of at least 50% in CNR, LBR and CEP versus the acquired post-contrast image. ECR 2026 included several Bracco-sponsored AiMIFY sessions inside a fourteen-presentation Subtle programme covering MRI, PET and early CT. Those presentations are not AiMIFY evidence.",
+        studyDesign: "FDA 510(k) bench test plus reader study",
+        primaryEndpoint: "Contrast-to-noise ratio (CNR), contrast enhancement (CEP), and lesion-to-brain ratio (LBR), with a 50% average-improvement bar",
         source: "FDA 510(k) summary K240290",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K240290.pdf",
-        results: "Demonstrated improved CNR and lesion visibility for enhancing tissue in brain MRI."
+        results: "All 95 cases: CNR +559.94%, LBR +62.07%, CEP +133.29%. The 57 lesion cases: CNR +831.70%, LBR +58.80%, CEP +101.80%. The summary also reports false lesions and higher vessel conspicuity (11.58% versus 3.51%). Standard-of-care images were scored sufficient to identify the false lesions. The cleared use is the standard approved gadolinium dose, not a reduced dose."
     },
     name: "AiMIFY",
     company: "Subtle Medical",
     category: "Image Enhancement",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered solution for enhancing gadolinium-based contrast agent MRI images, improving contrast-to-noise ratio and lesion visibility in brain imaging.",
-    features: ["Deep learning enhancement", "Contrast enhancement", "Brain MRI", "GBCA optimization"],
+    features: ["Deep learning enhancement", "Contrast enhancement", "Brain MRI", "Standard-dose contrast amplification"],
     certification: "FDA Cleared",
     logoUrl: "/logos/SubtleMedical.jpg",
     companyUrl: "https://subtlemedical.com/",
     productUrl: "https://subtlemedical.com/aimify/",
     anatomicalLocation: ["Brain"],
     modality: ["MRI"],
-    diseaseTargeted: ["Brain tumors", "Metastases", "Neurological disorders"],
+    diseaseTargeted: ["Enhancing tissue on gadolinium-based contrast brain MRI. Reader-study pathologies are not the labelled indication."],
     releaseDate: "2024-08-21",
-    version: "1.0",
+    version: "1.x",
     keyFeatures: [
       "Deep learning contrast enhancement",
       "Improves contrast-to-noise ratio (CNR)",
@@ -469,7 +469,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Supports 2D T1 spin echo and T1 FLAIR"
     ],
     technicalSpecifications: {
-      population: "Adult",
+      population: "Public indications state no age limit. Performance data include age 7. Gao 2026 enrolled adults.",
       input: ["Pre-contrast T1 MRI", "Post-contrast T1 MRI"],
       inputFormat: ["DICOM"],
       output: ["Enhanced contrast MR images"],
@@ -477,15 +477,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     technology: {
       integration: ["PACS", "Scanner integration"],
-      deployment: ["Cloud-based", "On-premise"],
+      deployment: ["Background processing through an MDDS, on the facility network or remotely, with no user interface"],
       triggerForAnalysis: "Automated workflow",
-      processingTime: "<45 seconds per study"
+      processingTime: "Not stated in the documents read on 2026-11-05. The previous '<45 seconds per study' figure had no source and was removed."
     },
     regulatory: {
       ce: {
-        status: "under_review",
-        class: "IIa",
-        type: "Medical Device"
+        status: "cleared",
+        class: "Not stated",
+        type: "MDR",
+        notes: "Bracco and Subtle announced an MDR CE mark on 16 June 2025, and Bracco announced the EU launch on 2 March 2026. The announcements do not state the class or the notified body. Subtle manufactures the software for Bracco. Class IIa was removed until a certificate is seen."
       },
       fda: {
         status: "510k_cleared",
@@ -500,22 +501,30 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     },
     market: {
       onMarketSince: "2024",
-      distributionChannels: ["Direct sales", "Distribution partners", "Bracco (EU distribution, launched ECR 2026)"]
+      distributionChannels: ["Direct sales", "Distribution partners", "Bracco EU launch announced 2 March 2026. Subtle manufactures the software for Bracco. releaseDate 2024-08-21 is the FDA decision date."]
     },
     keyPapers: [
-      {"doi":"10.3174/ajnr.A9591","pmid":"42595464","title":"Evaluation of an AI-powered tool in improving lesion visualization on standard-dose contrast-enhanced brain MRI: a retrospective, multicenter study","authors":"Gao Y et al.","journal":"AJNR American Journal of Neuroradiology","year":"2026","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Retrospective multicentre (3 hospitals, Wenzhou Medical University network) multireader study of 86 patients explicitly naming AiMIFY; blinded assessment by three neuroradiologists with quantitative CNR/LBR/CEP endpoints and significant subjective improvements. Vendor-independent — meets the multi-centre bar for E2. Impact corrected I2 -> I1 on 2026-08-25: the endpoints are image-quality metrics (CNR, LBR, CEP), Likert image quality and reader preference, which the rubric places at I1 (technical/analytical validation); I2 requires workflow or pathway effects such as review time or throughput, which this study does not measure. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
+      {"doi":"10.3174/ajnr.A9591","pmid":"42595464","title":"Evaluation of an AI-powered tool in improving lesion visualization on standard-dose contrast-enhanced brain MRI: a retrospective, multicenter study","authors":"Gao Y et al.","journal":"AJNR American Journal of Neuroradiology","year":"2026","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Retrospective study of 86 adults at three hospitals in the Wenzhou Medical University network, explicitly naming AiMIFY. Abstract mean increases versus standard post-contrast: CNR 495.16%, LBR 58.94%, CEP 160.55%. Preference for AiMIFY images was 84.9%, 29.1% and 68.6% across three readers. 29.1% is not a majority. The conflict statement was not available on 2026-11-05 (full text not in PMC). Listed affiliations are hospitals, so vendorIndependent stays true until the PDF is read. Endpoints are image quality, which is L2 on the current scale. The stored legacy code remains I1.","vendorIndependent":true,"multiCenter":true,"externalValidation":true},
+      {"doi":"10.21037/qims-2026-1-0383","pmid":"42582656","title":"Artificial intelligence-amplified contrast enhancement in brain magnetic resonance imaging for improving image quality and lesion visualization: a prospective pilot study","authors":"Yin P et al.","journal":"Quantitative Imaging in Medicine and Surgery","year":"2026","evidenceRigor":"E2","clinicalImpact":"L2","legacyClinicalImpact":"I1","rationale":"Prospective single-centre pilot. 41 enhancing-lesion cases, standard-dose 3D T1, ages 7–70. Authors declare no conflict. Image-quality and confidence endpoints. Internal morphology was not significant. The authors state that diagnostic accuracy was not measured.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":true,"externalValidation":true}
     ],
     evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: upgraded E1 to E2 on the strength of the first peer-reviewed AiMIFY publication — Gao et al., AJNR 2026 (doi:10.3174/ajnr.A9591, PMID 42595464), a vendor-independent retrospective multicentre multireader study across three hospitals (n=86). FDA validation K240290. Bracco EU launch at ECR 2026. 14 ECR presentations. PubMed re-searched 2026-08-25.",
-    clinicalImpactNotes: "I1 (technical / analytical validation), corrected from I2 on 2026-08-25: Gao 2026 reports significantly higher CNR, lesion-to-brain ratio and contrast-enhancement percentage plus improved border delineation and reader preference versus standard post-contrast images. These are image-quality and reader-preference endpoints, which sit at I1 under the rubric; nothing yet measures workflow or pathway effects (I2), changed patient management (I3) or outcomes (I4). Potential gadolinium-dose reduction remains a manufacturer-stated goal, not a published finding. Evidence rigor is unchanged at E2 — the Gao study is explicitly retrospective, multicentre and multireader, so it clears the E2 bar.",
+    evidenceRigorNotes: "E2 still fits the studies that can be read. Gao 2026 is a retrospective three-hospital study in one university network. Yin 2026 (doi:10.21037/qims-2026-1-0383) also names AiMIFY and was missing from the 2026-08-25 note, which called Gao the first peer-reviewed AiMIFY paper. K240290 is the regulatory bench test. The fourteen ECR 2026 presentations are Subtle's programme, not AiMIFY evidence. Venkata 2026 does not name AiMIFY in the abstract and is not scored.",
+    clinicalImpactNotes: "L2: CNR, LBR, CEP and reader preference are accuracy and image-quality endpoints. Nothing yet measures a change in the chosen diagnosis, management or a patient outcome. Dose reduction is not a published finding. The cleared use is the standard approved gadolinium dose. legacyClinicalImpact I1 is the old code only. K240290 also reports false lesions and higher vessel conspicuity (11.58% versus 3.51%). A PCCP lists more contrast agents, infants and children, further scanners, shorter processing and vessel suppression as planned changes, not current functions.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating improved CNR and lesion visibility",
-    lastUpdated: "2026-10-15",
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K240290), company website, Bracco ECR 2026 press release; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    adoptionReadinessNotes: "FDA-cleared, with an announced MDR CE mark whose class and notified body are not in the announcement. Local validation is still required before adoption.",
+    clinicalEvidence: "K240290 bench test plus reader study: CNR +559.94% (+831.70% on 57 lesion cases), LBR +62.07% (+58.80%), CEP +133.29% (+101.80%), against a 50% acceptance bar. Gao 2026 and Yin 2026 are the peer-reviewed studies that name AiMIFY.",
+    limitations: [
+      "False lesions are reported in the 510(k) summary. Standard-of-care images were scored sufficient to identify them. Vessel conspicuity was higher on processed images (11.58% versus 3.51%).",
+      "The indication is the standard approved gadolinium dose. Dose reduction is not a published finding.",
+      "Public indications state no age limit. Performance data include a patient aged 7. Gao 2026 enrolled adults.",
+      "More contrast agents, infants and children, further scanners, shorter processing and vessel suppression are planned PCCP changes, not current functions.",
+      "The homepage line 'up to double the visibility of FDA-approved Gd doses' is not used. The summary's appearance figure is 93% higher calculated dose concentration on BRAVO, at the standard dose, and the CNR increase includes denoising."
+    ],
+    lastUpdated: "2026-11-05",
+    lastRevised: "2026-11-05",
+    source: "FDA 510(k) K240290 summary and openFDA (decision 2024-08-21, AiMIFY 1.x, product code LLZ, 21 CFR 892.2050); GUDID primary DI 00860000171298; Bracco MDR announcement 16 June 2025 and EU launch 2 March 2026; Gao 2026 (doi:10.3174/ajnr.A9591) and Yin 2026 (doi:10.21037/qims-2026-1-0383). Q4 2026 review, checked 2026-11-05. Other Subtle products in this file were not revised."
   },
   {
     id: "subtle-hd",
