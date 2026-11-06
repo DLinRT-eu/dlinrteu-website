@@ -81,7 +81,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     },
     market: {
       status: {
-        verification: 'confirmed', event: 'availability-review',
+        verification: 'confirmed', event: 'end-of-sales',
         reason: 'AccessGUDID record version dated 2026-11-04 lists primary DI 00195278560384 as Not in Commercial Distribution, commercial-distribution end date 2026-03-09. EUDAMED basic UDI-DI 8406821BUG00320GZ is class IIb and status no-longer-on-the-market (checked 2026-11-05). The three public product-page URLs returned HTTP 404 on 2026-11-05. No vendor withdrawal notice was found. FDA clearance K230082 itself remains on the FDA record. The date EUDAMED changed status is not in the API payload. MR Contour DL is a separate product.',
         source: 'AccessGUDID lookup for DI 00195278560384; EUDAMED basic UDI query; GE product URLs checked 2026-11-05',
         sourceUrl: 'https://accessgudid.nlm.nih.gov/api/v2/devices/lookup.json?di=00195278560384',
