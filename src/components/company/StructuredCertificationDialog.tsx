@@ -81,7 +81,7 @@ export function StructuredCertificationForm({
     for (const e of cleanedEvidence) {
       const parsed = evidenceSchema.safeParse(e);
       if (!parsed.success) {
-        toast({ title: 'Invalid evidence entry', description: parsed.error.errors[0]?.message ?? 'Check fields', variant: 'destructive' });
+        toast({ title: 'Invalid evidence entry', description: parsed.error.issues[0]?.message ?? 'Check fields', variant: 'destructive' });
         return;
       }
     }
