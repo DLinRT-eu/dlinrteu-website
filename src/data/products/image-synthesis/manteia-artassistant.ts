@@ -6,9 +6,9 @@ export const MANTEIA_ARTASSISTANT_PRODUCTS: ProductDetails[] = [
     name: "ARTAssistant",
     company: "Manteia",
     companyUrl: "https://www.manteiamedical.com/",
-    productUrl: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPMN/pmn.cfm?ID=K250780",
+    productUrl: "https://www.manteiamedical.com/mozi",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/manteia-artassistant.ts",
-    description: "Standalone software for adaptive radiotherapy image processing: deep-learning generation of synthetic CT from daily CBCT or MR, plus rigid and deformable image registration. Contouring tools are manual. An ESTRO 2026 abstract describes an 'ART Assistant module of the Mozi TPS'; whether it is the same software as this cleared device is not confirmed by Manteia.",
+    description: "Adaptive-radiotherapy module of MOZI TPS, separately FDA-cleared as ARTAssistant (K250780). It generates synthetic CT from daily CBCT or MR with a deep-learning model and performs rigid and deformable image registration; contouring tools are manual.",
     category: "Image Synthesis",
     certification: "FDA 510(k)",
     logoUrl: "/logos/manteia.png",
@@ -55,6 +55,11 @@ export const MANTEIA_ARTASSISTANT_PRODUCTS: ProductDetails[] = [
     market: {
       onMarketSince: "2025",
       distributionChannels: ["Direct sales"]
+    },
+    partOf: {
+      name: "MOZI TPS",
+      productUrl: "https://dlinrt.eu/product/manteia-mozi",
+      relationship: "Module"
     },
     usesAI: true,
     trainingData: {
@@ -103,11 +108,10 @@ export const MANTEIA_ARTASSISTANT_PRODUCTS: ProductDetails[] = [
       }
     ],
     limitations: [
-      "Not confirmed that the cleared device is the same software as the ART Assistant module of MOZI TPS.",
       "Training data from China only.",
       "The FDA summary does not report per-site numeric results.",
       "Local commissioning and validation are required before clinical use."
     ],
-    source: "FDA 510(k) database and summary K250780 (retrieved 2026-11-06); ESTRO 2026 Abstract Book Part II p. 646 (retrieved 2026-11-06); Li et al. BMC Cancer 2023; Wang et al. Strahlenther Onkol 2023; Manteia Intertek MDR product list (manufacturer-supplied, received 2026-09-29)."
+    source: "Module of MOZI TPS: not listed as a separate product on the Manteia website; user-confirmed 2026-11-06, consistent with the ESTRO 2026 abstract naming the 'ART Assistant module of the Mozi TPS'. FDA 510(k) database and summary K250780 (retrieved 2026-11-06); ESTRO 2026 Abstract Book Part II p. 646 (retrieved 2026-11-06); Li et al. BMC Cancer 2023; Wang et al. Strahlenther Onkol 2023; Manteia Intertek MDR product list (manufacturer-supplied, received 2026-09-29)."
   }
 ];
