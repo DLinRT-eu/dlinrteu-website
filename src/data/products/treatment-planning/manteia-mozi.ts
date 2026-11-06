@@ -175,7 +175,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-09-29",
-    lastRevised: "2026-09-29",
+    lastRevised: "2026-11-06",
     source: "FDA 510(k) database (K223724), manufacturer official website. 2026-09-23: manufacturer documentation added (vendor-provided, retrieved 2026-09-23) — 'Details of Dose Prediction Models' (7 models), 'Smart Optimization Engine (SOE) Technical White Paper' v1 for MOZI TPS 4.0.7, and a publication summary of 81 records. Intertek MDR Annex IX certificate 28620166008 and 2025-06-04 product list, manufacturer-supplied, received 2026-09-29. MRI-to-synthetic-CT product capability user-confirmed 2026-09-29; supporting ASTRO 2023 abstract is not product-specific clinical validation.",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
@@ -216,7 +216,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     categoryEvidence: {
       "Image Synthesis": {
         usesAI: true,
-        notes: "MOZI TPS converts daily CBCT into synthetic CT for offline adaptive re-planning. The conversion is deep learning: the underlying RegGAN model is described in two Manteia co-authored papers that the manufacturer lists as 'Released' for AccuContour and MOZI (vendor publication summary, vendor-provided, retrieved 2026-09-23). MRI-to-synthetic-CT on MOZI TPS was user-confirmed 2026-09-29; the ASTRO 2023 abstract supports a multi-modal deep-learning method but does not provide product-specific clinical validation. Neither feature is individually named in the manufacturer-supplied MDR certificate.",
+        notes: "MOZI TPS converts daily CBCT into synthetic CT for offline adaptive re-planning. The conversion is deep learning: the underlying RegGAN model is described in two Manteia co-authored papers that the manufacturer lists as 'Released' for AccuContour and MOZI (vendor publication summary, vendor-provided, retrieved 2026-09-23). MRI-to-synthetic-CT on MOZI TPS was user-confirmed 2026-09-29; the ASTRO 2023 abstract supports a multi-modal deep-learning method but does not provide product-specific clinical validation. Neither feature is individually named in the manufacturer-supplied MDR certificate. 2026-11-06: Manteia holds a separate FDA 510(k) for ARTAssistant (K250780, cleared 2025-12-05, QKB, 21 CFR 892.2050), whose summary states a deep-learning image-conversion algorithm for synthetic CT from CBCT or MR (560 training image sets from China, 247 test sets from the United States). An ESTRO 2026 abstract (IRCCS Regina Elena) names the 'ART Assistant module of the Mozi TPS' as the CBCT-to-sCT tool. Whether the cleared ARTAssistant device is the same software as the MOZI module is not confirmed by Manteia.",
         evidenceRigor: "E0",
         evidenceRigorNotes: "2026-09-24: Neither RegGAN paper (Li et al., BMC Cancer 2023; Wang et al., Strahlenther Onkol 2023) names MOZI TPS in its full text (Europe PMC full text checked 2026-09-24); both are Manteia co-authored algorithm studies. They are recorded as supporting evidence and not scored. The ESTRO 2026 clinical presentation is a 4-patient single-centre abstract, also unscored. E0 stands.",
         clinicalImpact: "I0",

@@ -48,7 +48,7 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
       ce: { status: "Not applicable" },
       fda: {
         status: "Not applicable",
-        notes: "No FDA clearance found (checked 2026-09-26 during the ASTRO 2026 exhibitor review; rechecked 2026-10-28). Update once a clearance is issued."
+        notes: "No FDA clearance found (checked 2026-09-26 during the ASTRO 2026 exhibitor review; rechecked 2026-10-28 and 2026-11-06 in openFDA). Update once a clearance is issued."
       },
       intendedUseStatement:
         "Vendor describes iSecare (formerly listed as iContour) as automated tumour segmentation in radiotherapy; no regulatory intended-use statement is published."
@@ -66,7 +66,7 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-10-28",
-    lastRevised: "2026-10-28",
+    lastRevised: "2026-11-06",
     limitations: [
       "Pre-market — no regulatory clearance found; not available for clinical use",
       "No independent validation publications identified",
