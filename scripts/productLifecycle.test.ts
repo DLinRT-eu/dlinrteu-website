@@ -22,10 +22,10 @@ describe('public historical market lifecycle', () => {
     expect(dataService.getProductsByCompany(vendor.id).some(p => p.id === 'mirada-dlc')).toBe(false);
     expect(dataService.getActiveCompanies().some(c => c.id === vendor.id)).toBe(false);
   });
-  test('GE availability review is confirmed but its distinct CT/MR records stay in current listings', () => {
+  test('GE Auto Segmentation is discontinued while MR Contour DL stays current', () => {
     expect(dataService.getProductById('ge-auto-segmentation')?.market?.status?.verification).toBe('confirmed');
-    for (const id of ['ge-auto-segmentation', 'ge-mr-contour-dl']) expect(dataService.getAllProducts().some(p => p.id === id)).toBe(true);
-    expect(dataService.getDiscontinuedProducts().some(p => p.id === 'ge-auto-segmentation')).toBe(false);
+    expect(dataService.getDiscontinuedProducts().some(p => p.id === 'ge-auto-segmentation')).toBe(true);
+    expect(dataService.getAllProducts().some(p => p.id === 'ge-mr-contour-dl')).toBe(true);
   });
   test('discontinuation does not mutate stored evidence and excludes the historical product from dashboard sets', () => {
     const historical = ALL_PRODUCTS.find(p => p.id === 'mirada-dlc');

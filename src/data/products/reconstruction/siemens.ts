@@ -5,6 +5,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
   {
     id: "siemens-deep-resolve",
     keyPapers: [
+      {"doi":"10.3390/diagnostics15151982","title":"Multidisciplinary, Clinical Assessment of Accelerated Deep-Learning MRI Protocols at 1.5 T and 3 T After Intracranial Tumor Surgery","authors":"Ruff C et al.","journal":"Diagnostics (Basel)","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-06 from a targeted Europe PMC search; DOI verified; scored from the abstract, pending reviewer check. Single-centre study (Tübingen) of Deep Resolve Boost versus conventional early postoperative brain MRI on MAGNETOM Sola/Vida Fit; image-quality and residual-tumour ratings by four specialties including a radiotherapist. No conflicts declared.","vendorIndependent":true},
       {"doi":"10.3174/ajnr.A9081","title":"Deep Resolve Boost in 2D MRI for neuroradiology: diagnostic gains and potential risks","authors":"Hakim A et al.","journal":"AJNR Am J Neuroradiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent single-centre clinical evaluation reporting diagnostic gains and acceleration, with documented risks.","vendorIndependent":true},
       {"doi":"10.1097/RLI.0000000000001158","title":"Deep learning reconstruction combined with conventional acceleration improves image quality of 3T brain MRI","authors":"Wilpert C et al.","journal":"Invest Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent single-centre image-quality study.","vendorIndependent":true},
       {"doi":"10.1007/s00330-024-10883-5","title":"Image quality of whole-body diffusion MR comparing deep-learning accelerated and conventional sequences","authors":"Ponsiglione A et al.","journal":"Eur Radiol","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent 50-patient image-quality comparison.","vendorIndependent":true},
@@ -94,6 +95,11 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Ruff C et al. Multidisciplinary, Clinical Assessment of Accelerated Deep-Learning MRI Protocols at 1.5 T and 3 T After Intracranial Tumor Surgery. Diagnostics (Basel) 2025. Single-centre study (Tübingen) of Deep Resolve Boost versus conventional early postoperative brain MRI on MAGNETOM Sola/Vida Fit; image-quality and residual-tumour ratings by four specialties including a radiotherapist. No conflicts declared.",
+        link: "https://doi.org/10.3390/diagnostics15151982"
+      },
       {
         type: "Peer-reviewed Publication",
         description: "Hakim et al. Deep Resolve Boost in 2D MRI for Neuroradiology: Diagnostic Gains and Potential Risks. AJNR Am J Neuroradiol 2025",

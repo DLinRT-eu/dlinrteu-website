@@ -5,6 +5,9 @@ export const CANON_PRODUCTS: ProductDetails[] = [
   {
     id: "canon-aice-ct",
     keyPapers: [
+      {"doi":"10.1093/bjr/tqaf318","title":"Introducing advanced ClearIQ engine (AiCE) deep learning reconstruction algorithm into a clinical radiotherapy workflow","authors":"Allred JD et al.","journal":"Br J Radiol","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-06 from a targeted Europe PMC search; DOI verified; scored from the abstract, pending reviewer check. Single-centre radiotherapy commissioning (Nottingham): electron-density phantom HU stability within IPEM 91 tolerance, clinical plans recalculated on AiCE images (max 0.45 Gy, median 0.02 Gy difference) and a 12% DLP reduction for breast planning CT; dosimetric endpoints, so L2.","vendorIndependent":true},
+      {"doi":"10.1007/s12194-025-00967-2","title":"Dose reduction in radiotherapy treatment planning CT via deep learning-based reconstruction: a single-institution study","authors":"Yasui K et al.","journal":"Radiol Phys Technol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-06 from a targeted Europe PMC search; DOI verified; scored from the abstract, pending reviewer check. Single-centre retrospective comparison of 1,674 planning CT scans on a large-bore CT reconstructed with AiCE versus AIDR; CTDIvol reduced 30.4–75.4% and DLP 23.1–73.5% across four sites. Imaging-dose endpoints only.","vendorIndependent":true},
+      {"doi":"10.1016/j.ejmp.2025.104970","title":"Assessment of CT-to-physical density table for multiple image reconstruction functions with a large-bore scanner for radiotherapy","authors":"Okumura T et al.","journal":"Phys Med","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-06 from a targeted Europe PMC search; DOI verified; scored from the abstract, pending reviewer check. Single-centre phantom study on the Aquilion Exceed LB: AiCE and AIDR CT-to-physical-density tables (ΔPD within ±0.02 g/cm3) and depth-dose differences; scored consistently with Yasui 2023.","vendorIndependent":true},
       {"doi":"10.2214/AJR.19.21809","title":"Image quality and lesion detection on deep learning reconstruction and iterative reconstruction of submillisievert chest and abdominal CT","authors":"Singh R et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Prospective multi-institutional patient study supporting submillisievert protocols with maintained lesion detection.","vendorIndependent":true,"multiCenter":true,"prospective":true},
       {"doi":"10.1038/s41598-023-42775-x","title":"Validation of deep learning-based CT image reconstruction for treatment planning","authors":"Yasui K et al.","journal":"Sci Rep","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Phantom study on a large-bore RT planning CT; CT-number stability endpoints.","vendorIndependent":true},
       {"doi":"10.21037/qims-21-1216","title":"Deep learning reconstruction allows low-dose imaging while maintaining image quality in contrast-enhanced abdominal CT","authors":"Tamura A et al.","journal":"Quant Imaging Med Surg","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent single-centre clinical study supporting dose reduction in routine abdominal CT.","vendorIndependent":true}
@@ -94,6 +97,21 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     evidenceProspective: true,
     evidenceExternalValidation: true,
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description: "Allred JD et al. Introducing advanced ClearIQ engine (AiCE) deep learning reconstruction algorithm into a clinical radiotherapy workflow. Br J Radiol 2026. Single-centre radiotherapy commissioning (Nottingham): electron-density phantom HU stability within IPEM 91 tolerance, clinical plans recalculated on AiCE images (max 0.45 Gy, median 0.02 Gy difference) and a 12% DLP reduction for breast planning CT; dosimetric endpoints, so L2.",
+        link: "https://doi.org/10.1093/bjr/tqaf318"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yasui K et al. Dose reduction in radiotherapy treatment planning CT via deep learning-based reconstruction: a single-institution study. Radiol Phys Technol 2025. Single-centre retrospective comparison of 1,674 planning CT scans on a large-bore CT reconstructed with AiCE versus AIDR; CTDIvol reduced 30.4–75.4% and DLP 23.1–73.5% across four sites. Imaging-dose endpoints only.",
+        link: "https://doi.org/10.1007/s12194-025-00967-2"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Okumura T et al. Assessment of CT-to-physical density table for multiple image reconstruction functions with a large-bore scanner for radiotherapy. Phys Med 2025. Single-centre phantom study on the Aquilion Exceed LB: AiCE and AIDR CT-to-physical-density tables (ΔPD within ±0.02 g/cm3) and depth-dose differences; scored consistently with Yasui 2023.",
+        link: "https://doi.org/10.1016/j.ejmp.2025.104970"
+      },
       {
         type: "Peer-reviewed Publication",
         description: "Singh R, Digumarthy SR, Muse VV, Kambadakone AR, Blake MA, Tabari A, et al. Image Quality and Lesion Detection on Deep Learning Reconstruction and Iterative Reconstruction of Submillisievert Chest and Abdominal CT. AJR Am J Roentgenol 2020;214(3):566-573. Prospective multi-institutional study, 59 adult patients on Aquilion ONE; AiCE-reconstructed LDCT acceptable for routine chest and abdominopelvic imaging.",
