@@ -21,8 +21,9 @@ describe('TheraPanacea application consolidation', () => {
     expect(active.map(p => p.id).sort()).toEqual(THERAPANACEA_APPLICATIONS.map(p => p.id).sort());
   });
   test('all former and pipeline IDs resolve to a current application', () => {
-    expect(Object.keys(PRODUCT_ALIASES).length).toBe(11);
-    for (const [oldId, currentId] of Object.entries(PRODUCT_ALIASES)) {
+    const theraAliases = Object.entries(PRODUCT_ALIASES).filter(([, id]) => id.startsWith('therapanacea-'));
+    expect(theraAliases.length).toBe(11);
+    for (const [oldId, currentId] of theraAliases) {
       expect(resolveProductId(oldId)).toBe(currentId);
       expect(THERAPANACEA_APPLICATIONS.some(p => p.id === currentId)).toBe(true);
       expect(THERAPANACEA_HISTORICAL_PRODUCTS.some(p => p.id === oldId)).toBe(true);
