@@ -123,7 +123,8 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "productIds": [
       "manteia-accucontour",
       "manteia-acculearning", 
-      "manteia-mozi"
+      "manteia-mozi",
+      "manteia-artassistant"
     ],
     "category": "Auto-Contouring",
     "logoUrl": "/logos/manteia.png",
