@@ -37,7 +37,7 @@ export const MANTEIA_ARTASSISTANT_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "not_confirmed",
+        status: "not_available",
         notes: "No CE certificate found. ARTAssistant is not on the Manteia Intertek MDR product list (issued 2025-06-04, manufacturer-supplied 2026-09-29)."
       },
       fda: {
