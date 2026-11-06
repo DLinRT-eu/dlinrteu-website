@@ -67,12 +67,12 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "510k_cleared",
         class: "Class II",
-        clearanceNumber: "K213693, K232322, K250436, K251822",
+        clearanceNumber: "K213693, K232322, K250436, K251822, K252838, K260265, K260852, K260758",
         regulationNumber: "21 CFR 892.1000",
         productCode: "LNH, LNI, MOS",
         type: "510(k)",
         decisionDate: "2022-02-25",
-        notes: "Initial clearance K213693 (Feb 2022). Product announced September 2020; first FDA clearance February 2022. K250436 for MAGNETOM Flow.Ace/Plus (June 2025). K251822 for MAGNETOM Free.Max/Free.Star (Nov 2025)."
+        notes: "Initial clearance K213693 (Feb 2022). Product announced September 2020; first FDA clearance February 2022. K250436 for MAGNETOM Flow.Ace/Plus (June 2025). K251822 for MAGNETOM Free.Max/Free.Star (Nov 2025). Later 510(k) summaries listing Deep Resolve Boost/Sharp extensions: K252838 (MAGNETOM Sola/Altea/Vida/Lumina and others, 2025-12-19), K260265 (MAGNETOM Flow.Ace/Plus, 2026-02-23), K260852 (MAGNETOM Flow.Elite/Neo/Rise/Pure, 2026-07-31), K260758 (MAGNETOM Free.Max/Free.Star, 2026-09-01). Source: FDA 510(k) database and summaries, retrieved 2026-11-06."
       },
       intendedUseStatement: "The MAGNETOM system is indicated for use as a magnetic resonance diagnostic device (MRDD) that produces transverse, sagittal, coronal and oblique cross sectional images. The system includes Deep Resolve, a deep learning-based image reconstruction technology (Deep Resolve Swift Brain and Deep Resolve Boost) intended to reduce acquisition time and improve image quality by denoising and enhancing sharpness. (Source: FDA 510(k) K213693 Summary, accessed 2026-05-30)"
     },
