@@ -73,7 +73,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
         productCode: "JAK",
         type: "510(k)",
         decisionDate: "2019-01-15",
-        notes: "K181862 is the 510(k) clearance for the Aquilion ONE / GENESIS Edition CT system. AiCE is the deep learning reconstruction option within this system."
+        notes: "K181862 is the 510(k) clearance for the Aquilion ONE / GENESIS Edition CT system. AiCE is the deep learning reconstruction option within this system. Recent Canon CT 510(k) summaries still describe AiCE as an available reconstruction: K260078 (Aquilion ServeSP V2.0, 2026-03-13) and K253596 (Aquilion ONE V2.0, 2026-05-20). Source: FDA 510(k) summaries, retrieved 2026-11-06."
       },
       intendedUseStatement: "The Advanced intelligent Clear-IQ Engine (AiCE) is a deep-learning-based reconstruction method intended to produce cross-sectional images of the head and body by computer reconstruction of x-ray transmission data taken at different angles and planes, including axial, helical, and dynamic scanning. AiCE is designed to generate CT images with lower image noise and improved low-contrast detectability. (Source: FDA 510(k) K181862 Summary, accessed 2026-05-30)"
     },

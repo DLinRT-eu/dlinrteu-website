@@ -12,8 +12,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
         disclosureLevel: "minimal"
     },
     evaluationData: {
-        description: "Independent validation of cumulative dose reconstruction over 800 fractions and multi-center dosimetric studies support daily dose tracking and OAR deviation monitoring for offline replanning decisions. Processing time for sCT generation is typically 2–3 minutes.",
-        studyDesign: "Independent peer-reviewed clinical validation and multi-center retrospective study",
+        description: "Independent validation of cumulative dose reconstruction over 800 fractions and multi-centre dosimetric studies support daily dose tracking and OAR deviation monitoring for offline replanning decisions. Processing time for sCT generation is typically 2–3 minutes.",
+        studyDesign: "Independent peer-reviewed clinical validation and multi-centre retrospective study",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
         results: "Not publicly disclosed",
         primaryEndpoint: "Not specified",
@@ -170,7 +170,7 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
     keyPapers: [
-      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J, Baudouin T, Riou O, Azria D, et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names AdaptBox v2.3.2. Twenty prostate patients, one centre (Institut du Cancer de Montpellier). No TheraPanacea author. Dose was compared fraction by fraction, not as a cumulative course. In two patients, bladder dose deviations were automatic-contour errors. The 2 min 40 s figure is this v2.3.2 workflow, not the current software.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.3390/cancers18111826","pmid":"42279408","title":"Implementation of an AI-driven workflow for daily dose reconstruction in prostate cancer radiotherapy","authors":"Prunaretty J et al.","journal":"Cancers","year":"2026","link":"https://doi.org/10.3390/cancers18111826","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names AdaptBox v2.3.2. Twenty prostate patients, one centre (Institut du Cancer de Montpellier). No TheraPanacea author. Dose was compared fraction by fraction, not as a cumulative course. In two patients, bladder dose deviations were automatic-contour errors. The 2 min 40 s figure is this v2.3.2 workflow, not the current software.","vendorIndependent":true}
     ],
     source: "Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05). FDA summaries: K232479 (first AdaptBox clearance, 2023-12-22, male pelvis), K234068 (2024-04-22, thorax, breast, head and neck), K253091 (current statement, v3.1.0). K242822 does not describe AdaptBox. Prunaretty et al., Cancers 2026 (doi:10.3390/cancers18111826). Frontiers in Oncology 2026 (doi:10.3389/fonc.2026.1756153) was removed from keyPapers: it does not name AdaptBox, uses Eclipse, and includes the TheraPanacea CEO. MESCAL was removed from keyPapers because it is an MRI-only benchmark. Class IIb / GMED 0459 remains vendor-reported. Q4 2026 review.",
     evidenceRigor: "E1",

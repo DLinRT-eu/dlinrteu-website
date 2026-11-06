@@ -4,7 +4,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     keyPapers: [
-      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse. Ten head-and-neck patients, one centre, no vendor author. Median DSC 0.86 and HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage, and 39% did not. The paper says propagated volumes need medical review.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
+      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse. Ten head-and-neck patients, one centre, no vendor author. Median DSC 0.86 and HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage, and 39% did not. The paper says propagated volumes need medical review.","vendorIndependent":true}
     ],
     trainingData: {
         source: "Therapanacea product page (manufacturer)",

@@ -64,7 +64,8 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     usesAI: true,
     evidenceRigor: "E0",
-    clinicalImpact: "I0",
+    clinicalImpact: "L1t",
+    legacyClinicalImpact: "I0",
     evidenceScoreOverride: {
       rigor: "E0",
       reason:
