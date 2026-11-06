@@ -396,7 +396,7 @@ export const TumorBox: ProductDetails = {
   evidenceRigorNotes: "Regulatory documentation only (FDA K253091, ART-Plan+ CE marking). No peer-reviewed publication evaluating TumorBox identified as of 2026-07-30; the vendor resource library contains only vendor-affiliated conference abstracts, which do not qualify for E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpact: "L1t",
   legacyClinicalImpact: "I0",
-  clinicalImpactNotes: "No independently published dosimetric, workflow or outcome data for AI tumour segmentation with this module.",
+  clinicalImpactNotes: "L1t (Levels of Efficacy), re-scored 2026-11-06 from regulatory documentation only. No independently published dosimetric, workflow or outcome data for AI tumour segmentation with this module.",
   adoptionReadiness: "R2",
   adoptionReadinessNotes: "Derived from E0 + CE/FDA: tumour delineation is a high-consequence task, so local validation on the institution's MR sequences, protocol configuration and expert review of every contour are required before clinical use.",
   evidenceVendorIndependent: false,

@@ -44,9 +44,9 @@ describe('TheraPanacea application consolidation', () => {
     const tumour = product.functionEvidence?.find(f => f.id === 'tumour')?.product;
     const brachy = product.functionEvidence?.find(f => f.id === 'brachytherapy')?.product;
     expect(tumour?.evidenceRigor).toBe('E0');
-    expect(tumour?.clinicalImpact).toBe('L1c');
+    expect(tumour?.clinicalImpact).toBe('L1t');
     expect(brachy?.evidenceRigor).toBe('E0');
-    expect(brachy?.clinicalImpact).toBe('L1c');
+    expect(brachy?.clinicalImpact).toBe('L1t');
     expect(computeProductEvidenceScore(product).rigor).toBe('E3');
     expect(computeProductEvidenceScore(product).impact).toBe('L3');
     expect(product.functionEvidence?.find(f => f.id === 'mr-synthetic-ct')?.product.categoryEvidence?.['Auto-Contouring']?.evidenceRigor).toBe('E0');
