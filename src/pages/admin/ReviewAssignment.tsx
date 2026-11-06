@@ -639,6 +639,9 @@ export default function ReviewAssignment() {
                       <TableRow key={review.id}>
                         <TableCell className="font-medium">
                           {product?.name || review.product_id}
+                          {!product && (
+                            <Badge variant="destructive" className="ml-2">No longer in catalogue</Badge>
+                          )}
                         </TableCell>
                         <TableCell>
                           {review.reviewer 
