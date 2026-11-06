@@ -6,6 +6,7 @@ import { PHILIPS_MRCAT_PROSTATE_PRODUCTS } from "./philips-mrcat-prostate";
 import { SIEMENS_PRODUCTS } from "./siemens";
 import { SPECTRONIC_PRODUCTS } from "./spectronic";
 import { MVISION_IMAGE_SYNTHESIS_PRODUCTS } from "./mvision";
+import { MANTEIA_ARTASSISTANT_PRODUCTS } from "./manteia-artassistant";
 
 
 import { THERAPANACEA_ADAPTIVE } from "../therapanaceaApplications";
@@ -18,6 +19,7 @@ export const IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
   ...SIEMENS_PRODUCTS,
   ...SPECTRONIC_PRODUCTS,
   ...MVISION_IMAGE_SYNTHESIS_PRODUCTS,
+  ...MANTEIA_ARTASSISTANT_PRODUCTS,
 
   THERAPANACEA_ADAPTIVE
 ];
