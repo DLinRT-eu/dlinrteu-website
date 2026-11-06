@@ -4,6 +4,7 @@ import { GE_HEALTHCARE_ALL_STRUCTURES } from "./ge-healthcare-structures";
 export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-auto-segmentation",
+    developmentStage: "discontinued",
     trainingData: {
         source: "FDA 510(k) summary K230082",
         description: "Deep learning CT auto-segmentation model for organs at risk in adult radiotherapy planning. The 510(k) summary states that the model was trained on 911 CT radiotherapy-planning exams from several sites in more than one country. Demographics of the training set are not further itemised.",
