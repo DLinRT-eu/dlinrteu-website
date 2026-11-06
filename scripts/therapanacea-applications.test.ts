@@ -46,7 +46,7 @@ describe('TheraPanacea application consolidation', () => {
     expect(tumour?.evidenceRigor).toBe('E0');
     expect(tumour?.clinicalImpact).toBe('L1c');
     expect(brachy?.evidenceRigor).toBe('E0');
-    expect(brachy?.clinicalImpact).toBe('L2');
+    expect(brachy?.clinicalImpact).toBe('L1c');
     expect(computeProductEvidenceScore(product).rigor).toBe('E2');
     expect(computeProductEvidenceScore(product).impact).toBe('L3');
     expect(product.functionEvidence?.find(f => f.id === 'mr-synthetic-ct')?.product.categoryEvidence?.['Auto-Contouring']?.evidenceRigor).toBe('E0');
@@ -60,6 +60,6 @@ describe('TheraPanacea application consolidation', () => {
     const product = normalizeProductEfficacy(THERAPANACEA_ADAPTIVE);
     expect(product.categoryEvidence?.['Auto-Contouring']?.evidenceRigor).toBe('E0');
     expect(product.categoryEvidence?.['Registration']?.evidenceRigor).toBe('E0');
-    expect(product.categoryEvidence?.['Image Synthesis']?.evidenceRigor).toBe('E2');
+    expect(product.categoryEvidence?.['Image Synthesis']?.evidenceRigor).toBe('E1');
   });
 });
