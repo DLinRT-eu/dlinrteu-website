@@ -10,6 +10,9 @@ export const PRODUCT_ALIASES: Readonly<Record<string, string>> = {
   "therapanacea-tumorbox-pipeline": "therapanacea-art-plan-segmentation",
   "therapanacea-brachybox-pipeline": "therapanacea-art-plan-segmentation",
   "therapanacea-smartplan-pipeline": "therapanacea-art-plan-planning",
+  "philips-smartdose-ct-enhancement": "philips-precise-image",
+  "philips-auto-contouring": "philips-mrcat-prostate-auto-contouring",
+  "aimify": "subtle-aimify",
 };
 
 export const resolveProductId = (id: string): string => PRODUCT_ALIASES[id] ?? id;
