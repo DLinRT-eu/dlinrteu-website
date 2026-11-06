@@ -118,8 +118,7 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       relationship: "Module"
     },
     evidenceRigor: "E0",
-    clinicalImpact: "L1t",
-    legacyClinicalImpact: "I0",
+    clinicalImpact: "I0",
     evidenceRigorNotes: "Regulatory documentation only (FDA K253091, CE class IIb brochure). No peer-reviewed publication evaluating the MR brachytherapy model identified as of 2026-07-30. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "Manufacturer-claimed workflow benefit for MR-guided brachytherapy OAR delineation; no independent clinical or dosimetric outcome data published.",
     adoptionReadiness: "R2",
