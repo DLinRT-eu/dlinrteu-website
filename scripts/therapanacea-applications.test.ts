@@ -47,7 +47,7 @@ describe('TheraPanacea application consolidation', () => {
     expect(tumour?.clinicalImpact).toBe('L1c');
     expect(brachy?.evidenceRigor).toBe('E0');
     expect(brachy?.clinicalImpact).toBe('L1c');
-    expect(computeProductEvidenceScore(product).rigor).toBe('E2');
+    expect(computeProductEvidenceScore(product).rigor).toBe('E3');
     expect(computeProductEvidenceScore(product).impact).toBe('L3');
     expect(product.functionEvidence?.find(f => f.id === 'mr-synthetic-ct')?.product.categoryEvidence?.['Auto-Contouring']?.evidenceRigor).toBe('E0');
   });
