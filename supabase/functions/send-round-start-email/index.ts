@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 import { Resend } from "npm:resend@4.0.0";
 import { getCorsHeaders, rejectDisallowedOrigin } from "../_shared/cors.ts";
-import { dailySendCount, isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
+import { dailySendCount, wouldExceedDailyCap, isSuppressed, logEmailSend, resendMessageId } from "../_shared/email-delivery.ts";
 const DAILY_SEND_CAP = 500;
 
 const FUNCTION_NAME = "send-round-start-email";
@@ -117,7 +117,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const sentToday = await dailySendCount(admin, FUNCTION_NAME);
-    if (sentToday + recipients.length > DAILY_SEND_CAP) return json({ error: "Daily sending limit reached. Please try again tomorrow." }, 429);
+    if (wouldExceedDailyCap(sentToday, recipients.length, DAILY_SEND_CAP)) return json({ error: "Daily sending limit reached. Please try again tomorrow." }, 429);
     const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
     const intro = body.intro?.trim() ||
       "The new DLinRT.eu review round has started and your products are ready for review. Please check each entry against its sources and update or confirm the information.";

@@ -101,6 +101,10 @@ export function resendMessageId(response: unknown): string | null {
 }
 
 // Server-chosen daily send ceiling per function (abuse protection for admin-authored mail).
+export function wouldExceedDailyCap(sentToday: number, batch: number, cap: number): boolean {
+  return sentToday + batch > cap;
+}
+
 export async function dailySendCount(client: any, functionName: string): Promise<number> {
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
   const { count } = await client.from("email_send_log").select("id", { count: "exact", head: true })

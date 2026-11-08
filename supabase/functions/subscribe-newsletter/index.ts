@@ -369,4 +369,13 @@ const handler = async (req: Request): Promise<Response> => {
   }
 };
 
-serve(handler);
+// Pad POST responses to a uniform minimum duration so existing and new subscribers are indistinguishable by timing.
+const MIN_RESPONSE_MS = 1500;
+serve(async (req: Request) => {
+  const started = Date.now();
+  const res = await handler(req);
+  if (req.method !== "POST") return res;
+  const remaining = MIN_RESPONSE_MS - (Date.now() - started);
+  if (remaining > 0) await new Promise((r) => setTimeout(r, remaining));
+  return res;
+});
