@@ -166,7 +166,7 @@ serve(async (req) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${RESEND_API_KEY}` },
       body: JSON.stringify({
-        from: 'DLinRT.eu <noreply@dlinrt.eu>',
+        from: 'DLinRT.eu <info@dlinrt.eu>',
         reply_to: "info@dlinrt.eu",
         to: [email],
         subject: `You're invited to join DLinRT.eu as a Reviewer`,

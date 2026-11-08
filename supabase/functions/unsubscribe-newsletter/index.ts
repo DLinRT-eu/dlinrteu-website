@@ -133,7 +133,7 @@ async function sendConfirmationEmail(email: string, confirmUrl: string): Promise
     method: "POST",
     headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "DLinRT.eu <noreply@dlinrt.eu>",
+      from: "DLinRT.eu <info@dlinrt.eu>",
       reply_to: "info@dlinrt.eu",
       to: [email],
       subject: "Confirm your unsubscribe request",

@@ -444,7 +444,7 @@ export default function BulkRepresentativeEmail() {
             </CardHeader>
             <CardContent>
               <div className="bg-muted/30 rounded-md p-3 mb-2 text-sm">
-                <div><span className="text-muted-foreground">From:</span> DLinRT.eu &lt;noreply@dlinrt.eu&gt;</div>
+                <div><span className="text-muted-foreground">From:</span> DLinRT.eu &lt;info@dlinrt.eu&gt;</div>
                 <div><span className="text-muted-foreground">Subject:</span> <strong>{previewSubject || <em className="text-muted-foreground">(empty)</em>}</strong></div>
               </div>
               <div className={`mx-auto border rounded-md overflow-hidden bg-white transition-all ${previewMode === 'mobile' ? 'max-w-[380px]' : 'max-w-full'}`}>

@@ -271,7 +271,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       try {
         const response = await sendViaResend(RESEND_API_KEY, {
-          from: "DLinRT.eu <noreply@dlinrt.eu>",
+          from: "DLinRT.eu <info@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [toEmail],
           subject: personalizedSubject,

@@ -209,7 +209,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email via Resend with escaped content to prevent HTML injection
     const emailResponse = await resend.emails.send({
-      from: "DLinRT.eu Contact Form <noreply@dlinrt.eu>",
+      from: "DLinRT.eu Contact Form <info@dlinrt.eu>",
       to: getAdminNotificationEmails(),
       reply_to: email,
       subject: `Contact Form: ${escapeHtml(subject)}`,

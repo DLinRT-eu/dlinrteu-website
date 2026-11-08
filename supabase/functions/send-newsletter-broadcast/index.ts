@@ -28,7 +28,7 @@ function getCorsHeaders(origin: string | null): HeadersInit {
   };
 }
 
-const FROM = "DLinRT.eu <noreply@dlinrt.eu>";
+const FROM = "DLinRT.eu <info@dlinrt.eu>";
 const REPLY_TO = "info@dlinrt.eu";
 
 interface BroadcastRequest {

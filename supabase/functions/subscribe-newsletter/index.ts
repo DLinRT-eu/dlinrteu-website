@@ -209,7 +209,7 @@ const handler = async (req: Request): Promise<Response> => {
 
         try {
           await resend.emails.send({
-            from: "DLinRT Newsletter <noreply@dlinrt.eu>",
+            from: "DLinRT Newsletter <info@dlinrt.eu>",
             reply_to: "info@dlinrt.eu",
             to: [email],
             subject: "Confirm your DLinRT newsletter subscription",
@@ -289,7 +289,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email to subscriber
     const welcomeEmailResponse = await resend.emails.send({
-      from: "DLinRT Newsletter <noreply@dlinrt.eu>",
+      from: "DLinRT Newsletter <info@dlinrt.eu>",
       reply_to: "info@dlinrt.eu",
       to: [email],
       subject: "Welcome to the DLinRT Newsletter!",

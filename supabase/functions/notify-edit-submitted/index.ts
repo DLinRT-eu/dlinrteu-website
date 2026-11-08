@@ -134,7 +134,7 @@ serve(async (req: Request) => {
     if (submitter?.email && submitterEmailAllowed) {
       try {
         await resend.emails.send({
-          from: "DLinRT.eu <noreply@dlinrt.eu>",
+          from: "DLinRT.eu <info@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [submitter.email],
           subject: `Edit submitted for review: ${productId}`,
@@ -202,7 +202,7 @@ serve(async (req: Request) => {
         if (!ap.email) continue;
         try {
           await resend.emails.send({
-            from: "DLinRT.eu <noreply@dlinrt.eu>",
+            from: "DLinRT.eu <info@dlinrt.eu>",
             reply_to: "info@dlinrt.eu",
             to: [ap.email],
             subject: `Product edit awaiting review: ${productId}`,

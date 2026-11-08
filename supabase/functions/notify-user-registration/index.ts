@@ -149,7 +149,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to admin
     const emailResponse = await resend.emails.send({
-      from: "DLinRT.eu User Registration <noreply@dlinrt.eu>",
+      from: "DLinRT.eu User Registration <info@dlinrt.eu>",
       reply_to: "info@dlinrt.eu",
       to: getAdminNotificationEmails(),
       subject: `🔔 New User Registration - Verification Required${!isInstitutional ? ' (Non-Institutional Email)' : ''}`,
