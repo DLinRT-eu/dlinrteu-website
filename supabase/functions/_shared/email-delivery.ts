@@ -99,3 +99,11 @@ export function resendMessageId(response: unknown): string | null {
   const data = (response as { data?: { id?: string } } | null)?.data;
   return data?.id ?? null;
 }
+
+// Server-chosen daily send ceiling per function (abuse protection for admin-authored mail).
+export async function dailySendCount(client: any, functionName: string): Promise<number> {
+  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const { count } = await client.from("email_send_log").select("id", { count: "exact", head: true })
+    .eq("function_name", functionName).eq("status", "sent").gte("created_at", since);
+  return count ?? 0;
+}
