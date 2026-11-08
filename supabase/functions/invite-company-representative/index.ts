@@ -101,6 +101,34 @@ serve(async (req) => {
       );
     }
 
+    const isStr = (v: unknown, max: number) => v === undefined || v === null || (typeof v === 'string' && v.length <= max);
+    if (
+      typeof email !== 'string' || email.length > 255 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) ||
+      typeof companyId !== 'string' || companyId.length > 100 ||
+      typeof companyName !== 'string' || companyName.length > 200 || /[\r\n]/.test(companyName) ||
+      !isStr(firstName, 100) || !isStr(lastName, 100) || !isStr(position, 150) || !isStr(message, 5000)
+    ) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid input: check email format and field lengths (message max 5,000 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Daily cap on invitations created by admins (server-side bound on outbound mail)
+    {
+      const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { count } = await adminClient
+        .from('company_invitations')
+        .select('id', { count: 'exact', head: true })
+        .gte('updated_at', since);
+      if ((count ?? 0) >= 100) {
+        return new Response(
+          JSON.stringify({ error: 'Daily invitation limit reached (100 per 24 hours). Please try again tomorrow.' }),
+          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
     const normalizedEmail = email.trim().toLowerCase();
 
     // ============================================================
