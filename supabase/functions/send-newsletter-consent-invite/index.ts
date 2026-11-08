@@ -71,7 +71,17 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
+const MIN_RESPONSE_MS = 1500;
+
 const handler = async (req: Request): Promise<Response> => {
+  const started = Date.now();
+  const res = await innerHandler(req);
+  const wait = MIN_RESPONSE_MS - (Date.now() - started);
+  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+  return res;
+};
+
+const innerHandler = async (req: Request): Promise<Response> => {
   const origin = req.headers.get("origin");
   const corsHeaders = getCorsHeaders(origin);
 
@@ -139,7 +149,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (existing && !existing.unsubscribed_at) {
       // Already subscribed — nothing to do.
       return new Response(
-        JSON.stringify({ success: true, message: "Already subscribed" }),
+        JSON.stringify({ success: true, message: "If eligible, a confirmation email has been sent" }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
       );
     }
@@ -180,7 +190,7 @@ const handler = async (req: Request): Promise<Response> => {
         error: "Recipient previously hard-bounced or complained",
       });
       return new Response(
-        JSON.stringify({ success: true, message: "Consent invite skipped (suppressed address)" }),
+        JSON.stringify({ success: true, message: "If eligible, a confirmation email has been sent" }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
       );
     }
@@ -229,7 +239,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: "Consent invite sent" }),
+      JSON.stringify({ success: true, message: "If eligible, a confirmation email has been sent" }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
     );
   } catch (error) {

@@ -174,6 +174,25 @@ const handler = async (req: Request): Promise<Response> => {
     // no body or invalid JSON
   }
 
+  if (customSubject !== undefined && (typeof customSubject !== "string" || customSubject.length > 200 || /[\r\n]/.test(customSubject))) {
+    return new Response(
+      JSON.stringify({ success: false, error: "Subject must be text up to 200 characters without line breaks" }),
+      { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+  if (customBody !== undefined && (typeof customBody !== "string" || customBody.length > 20000)) {
+    return new Response(
+      JSON.stringify({ success: false, error: "Message must be text up to 20,000 characters" }),
+      { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+  if (recipientRepIds && recipientRepIds.length > 500) {
+    return new Response(
+      JSON.stringify({ success: false, error: "Too many recipients (max 500)" }),
+      { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+
   try {
     console.log("Starting certification reminder email process...");
 
