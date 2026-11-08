@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
-import { isSuppressed, logEmailSend } from "../_shared/email-delivery.ts";
+import { dailySendCount, isSuppressed, logEmailSend } from "../_shared/email-delivery.ts";
+const DAILY_SEND_CAP = 1000;
 
 const ALLOWED_ORIGINS = [
   "https://dlinrt.eu",
@@ -180,6 +181,12 @@ const handler = async (req: Request): Promise<Response> => {
     ) {
       return new Response(JSON.stringify({ error: "Invalid input" }), {
         status: 400, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    if ((await dailySendCount(admin, "send-bulk-representative-email")) >= DAILY_SEND_CAP) {
+      return new Response(JSON.stringify({ error: "Daily sending limit reached. Please try again tomorrow." }), {
+        status: 429, headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
