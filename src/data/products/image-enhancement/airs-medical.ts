@@ -155,6 +155,6 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR + primary studies Yoo 2023, Lee 2023, Park 2025, Jeong 2026 and Hyodoh 2026.",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "FDA 510(k) database, company website, PubMed"
+    source: "FDA database; vendor website; peer-reviewed literature"
   }
 ];

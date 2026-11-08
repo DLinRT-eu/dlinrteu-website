@@ -126,6 +126,6 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
     keyPapers: [],
     releaseDate: "2026-06-18",
     lastUpdated: "2026-09-22",
-    source: "FDA 510(k) summary and database record K253050 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253050.pdf), retrieved 2026-09-22; InformAI company website https://www.informai.com, retrieved 2026-09-22. Training data, CE status, processing time and pricing are not disclosed by any public source and are left empty or marked as not disclosed."
+    source: "FDA 510(k) K253050; vendor website"
   }
 ];

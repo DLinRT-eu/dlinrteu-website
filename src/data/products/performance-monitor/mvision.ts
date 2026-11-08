@@ -80,6 +80,6 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-09-06",
     lastRevised: "2026-09-06",
-    source: "MVision AI official website (https://mvision.ai/verify/), regulatory classification based on product function; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref). 2026-09-06 standard-field consistency pass: certification tag normalised to 'MDR exempt', modality and anatomy aligned to the controlled vocabularies, analysis trigger corrected, limitations added."
+    source: "Vendor website; peer-reviewed literature"
   }
 ];

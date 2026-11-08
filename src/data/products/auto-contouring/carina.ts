@@ -244,7 +244,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
       {"doi":"10.3389/fonc.2025.1603593","pmid":"41127020","title":"Evaluating the impact of different deface algorithms on deep learning segmentation software performance","journal":"Front. Oncol.","year":"2025","link":"https://doi.org/10.3389/fonc.2025.1603593","evidenceRigor":"E1","clinicalImpact":"L1t", "legacyClinicalImpact": "I1","rationale":"Robustness of the commercial segmentation software to de-identification defacing.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
     lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K212274), structure list verified against official Carina AI documentation 2026-01-21.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "FDA 510(k) K212274; vendor website; peer-reviewed literature",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E2",
     evidenceRigorNotes: "Raised to E2 in the 2026-09-23 HAIR cross-check: an evaluation across two low- and middle-income country clinics and one US clinic (doi:10.1016/j.adro.2024.101638) adds multi-centre, multi-national evidence to the single-centre studies (Duan 2022, 2023; swallowing OARs 2022; masticatory muscles 2020; prospective performance monitoring 2025). No prospective comparative trial, so E3 is not met.",

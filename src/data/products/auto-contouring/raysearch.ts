@@ -132,7 +132,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1080/0284186X.2023.2270152", "title": "Extensive clinical testing of Deep Learning Segmentation models for thorax and breast cancer radiotherapy planning", "authors": "Mikalsen SG et al.", "journal": "Acta Oncologica", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Extensive single-centre clinical testing of the RayStation deep learning segmentation models for thorax and breast, reporting editing effort.", "vendorIndependent": true}
   ],
     lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K240398), RaySearch official documentation, DLS Model Catalogue (raysearchlabs.com/globalassets/digizuite/1882-en-deep-learning-segmentation-models-catalogue.pdf), RaySearch ESTRO 2026 LinkedIn announcement, RayStation v2026 release page (raysearchlabs.com/raystation-v2026)",
+    source: "FDA 510(k) K240398; vendor website; press releases",
     clinicalEvidence: "Clinical studies demonstrating improved contouring accuracy and efficiency.",
     evidence: [
       {

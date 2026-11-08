@@ -140,6 +140,6 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
-    source: "Ma and Zhou, Cureus 2024 (doi:10.7759/cureus.69703); ESTRO 2026 press release (15 May 2026); United Imaging linac and RT pages, read 2026-11-05; company announcement 2026-027 (21 July 2026); openFDA applicant search, database update 2026-10-26. Yu 2025 is not the data source for this product. Q4 2026 review."
+    source: "FDA database; press releases; peer-reviewed literature"
   }
 ];

@@ -123,7 +123,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
-    source: "FDA 510(k) database (K242748, K222803, K202284), Sun Nuclear official website, Sun Nuclear company representative (verified 2026-06-22); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "FDA 510(k) K242748, K222803 et al.; vendor website; peer-reviewed literature",
     clinicalEvidence: "Peer-reviewed internal validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
       {

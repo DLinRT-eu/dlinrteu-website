@@ -25,7 +25,7 @@ const SyMRINeuro: ProductDetails = {
     onMarketSince: "2023",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K242745, K233733) and company website",
+  source: "FDA 510(k) K242745, K233733; vendor website",
   company: "SyntheticMR",
   logoUrl: "/logos/syntheticMRI.png",
   version: "15",

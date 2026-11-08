@@ -187,6 +187,6 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     releaseDate: "2018-11-23",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database entries K182687; Accuray® official product documentation and AI-guided radiotherapy chronicles; technical whitepapers; integrated peer-reviewed research (JACMP 2020, Medical Physics 2020, Cureus 2025). Hoogeman 2009 DOI corrected on 2026-06-15 (10.1016/j.ijrobp.2008.09.011 → 10.1016/j.ijrobp.2008.12.041). Reviewed 2026-06-15."
+    source: "FDA 510(k) K182687; vendor website; vendor documentation; peer-reviewed literature"
   }
 ];

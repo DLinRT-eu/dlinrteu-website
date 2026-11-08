@@ -23,7 +23,7 @@ export const Jazz: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K231572), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "FDA 510(k) K231572; vendor website; peer-reviewed literature",
   company: "AI Medical",
   logoUrl: "/logos/ai-medical.png",
   version: "2.0",

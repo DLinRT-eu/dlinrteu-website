@@ -108,7 +108,7 @@ export const GE_HEALTHCARE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-11-05",
     keyPapers: [],
     lastRevised: "2026-11-05",
-    source: "openFDA and FDA 510(k) summaries K230082 (decision 2023-05-04) and K242925 (MR Contour DL, separate product); AccessGUDID DI 00195278560384 (record version 2026-11-04); EUDAMED basic UDI-DI 8406821BUG00320GZ (class IIb, no-longer-on-the-market, checked 2026-11-05); GE DICOM conformance statement DOC2719402; ESTRO 2023 announcement. Q4 2026 review: Crossref and Europe PMC, 2026-11-05. Product-page URLs returned HTTP 404. FDA decision date 2023-05-04; the stored release date 2023-05-12 is the ESTRO announcement date.",
+    source: "FDA 510(k) K230082, K242925; EUDAMED; press releases; peer-reviewed literature",
     clinicalEvidence: "FDA 510(k) K230082 only. Dice bench test: 302 retrospective adult CT radiotherapy-planning exams and 2552 contours. Separate Likert reader study by three qualified radiotherapy practitioners; the summary does not publish scores or say that all 2552 contours were read. No peer-reviewed evaluation of this product was identified.",
     evidence: [
       {

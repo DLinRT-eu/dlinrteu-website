@@ -143,7 +143,7 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Performance may vary with CT acquisition protocols and DICOM routing/workflow configuration",
       "This version has been superseded by Seg Pro V3 with expanded multi-region support"
     ],
-    source: "FDA 510(k) database (K220264), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K220264; vendor website; peer-reviewed literature"
   },
   {
     id: "everfortune-seg-pro-v3",
@@ -422,6 +422,6 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Performance may vary with imaging protocols and DICOM configurations",
       "102 structures verified from CMUH source; company claims 182 total - additional models may exist"
     ],
-    source: "FDA 510(k) database (K251306), CMUH Digital Imaging documentation, company announcement; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K251306; press releases; peer-reviewed literature"
   }
 ];

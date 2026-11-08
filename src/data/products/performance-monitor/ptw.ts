@@ -7,7 +7,7 @@ export const AIQUALIS: ProductDetails = {
     onMarketSince: "2024",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "Automatically retrieved and revised; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "Automated retrieval; peer-reviewed literature",
   usesAI: false,
   company: "PTW",
   logoUrl: "/logos/ptw.jpg",

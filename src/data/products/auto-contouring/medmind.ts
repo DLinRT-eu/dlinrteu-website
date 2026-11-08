@@ -130,6 +130,6 @@ export const MEDMIND_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1186/s13014-024-02463-0","title":"Localized fine-tuning and clinical evaluation of deep-learning based auto-segmentation (DLAS) model for clinical target volume (CTV) and organs-at-risk (OAR) in rectal cancer radiotherapy","authors":"Geng J et al.","journal":"Radiation Oncology","year":"2024","link":"https://doi.org/10.1186/s13014-024-02463-0","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical evaluation of locally fine-tuned models with geometric and editing-effort endpoints.","vendorIndependent":false,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false}
   ],
     lastRevised: "2026-08-28",
-    source: "FDA 510(k) database (K213155), NMPA Class III certification, company website (medicalmind.cn/en.html). Evidence from 4 peer-reviewed publications with multicenter validation (PMID: 34490103, 37803462, 34811957, 38956690). releaseDate proxied from FDA decision date (2026-06-01).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K213155; NMPA; vendor website; peer-reviewed literature"
   }
 ];

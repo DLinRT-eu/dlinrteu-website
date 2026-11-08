@@ -12,7 +12,7 @@ export const uRTAutoContouring: ProductDetails = {
       "Integrated with uRT-linac 506c"
     ]
   },
-  source: "Vendor press release (ESTRO 2026) and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "Vendor website; press releases; peer-reviewed literature",
   company: "United Imaging",
   logoUrl: "/logos/unitedimaging.png",
   version: "506c",

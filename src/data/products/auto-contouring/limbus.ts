@@ -205,6 +205,6 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     {"doi": "10.3390/app16115681", "title": "Comparison of Two Auto-Contouring Systems for Head and Neck Organs at Risk to Institutional Reference Standard in Radiotherapy Planning", "authors": "Bayley C et al.", "journal": "Applied Sciences", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I1", "rationale": "Single-centre comparison against institutional reference contours for head-and-neck OARs.", "vendorIndependent": true}
   ],
     lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K241837), company official sources. Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include Limbus per Methods."
+    source: "FDA 510(k) K241837; vendor website"
   }
 ];

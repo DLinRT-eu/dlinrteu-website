@@ -90,6 +90,6 @@ export const VARIAN_MOBIUS3D_ARCHIVED: ProductDetails[] = [
     ],
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
-    source: "Varian official website"
+    source: "Vendor website"
   }
 ];

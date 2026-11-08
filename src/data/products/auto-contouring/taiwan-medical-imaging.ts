@@ -111,6 +111,6 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
   ],
     lastRevised: "2026-08-25",
     companyRevisionDate: "",
-    source: "FDA 510(k) K250427 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K250427.pdf), Akdemir et al., Journal of Neuro-Oncology (DOI 10.1007/s11060-025-05294-5), TAIMedimg official website, industry reports; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K250427; vendor website; peer-reviewed literature"
   }
 ];

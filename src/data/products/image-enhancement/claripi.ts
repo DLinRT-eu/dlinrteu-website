@@ -177,7 +177,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     releaseDate: "2019-06-13",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
+    source: "FDA 510(k) K183460, K212074; peer-reviewed literature"
   },
   {
     id: "claripi-clariace",
@@ -274,6 +274,6 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     releaseDate: "2021",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
+    source: "MFDS; vendor website; peer-reviewed literature"
   }
 ];

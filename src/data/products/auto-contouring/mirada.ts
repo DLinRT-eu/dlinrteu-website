@@ -120,6 +120,6 @@ export const MIRADA_PRODUCTS: ProductDetails[] = [
   {"doi":"10.3389/fonc.2023.1213068","title":"A clinical evaluation of the performance of five commercial artificial intelligence contouring systems for radiotherapy","authors":"Doolan PJ et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E2","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Independent benchmark of several commercial systems on external clinical data; geometric endpoints.","vendorIndependent":true,"externalValidation":true}
   ],
     lastRevised: "2026-09-23",
-    source: "Historical records - product discontinued; citation re-verified 2026-06-15 (Doolan 2023 directly evaluates Mirada per its Methods)."
+    source: "Historical records (discontinued); peer-reviewed literature"
   }
 ];

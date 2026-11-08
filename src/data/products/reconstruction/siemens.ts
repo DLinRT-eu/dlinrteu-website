@@ -135,6 +135,6 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     releaseDate: "2022-02-25",
     lastUpdated: "2026-06-15",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database and company website"
+    source: "FDA database; vendor website"
   }
 ];

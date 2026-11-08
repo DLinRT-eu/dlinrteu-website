@@ -27,7 +27,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     productUrl: "https://www.brainlab.com/radiosurgery-products/elements/",
     relationship: "Module"
   },
-  source: "FDA 510(k) database and summary (K243633); FDA 510(k) summary (K250440) for RT Elements/APM/Art-Plan context; Brainlab product pages; TheraPanacea collaboration announcement; Wittenstein et al. Strahlenther Onkol 2019; Podobnik et al. Sci Rep 2025 checked and excluded as non-Brainlab evidence; public CE certificate not located during audit.",
+  source: "FDA 510(k) K243633, K250440; vendor website; press releases; peer-reviewed literature",
   usesAI: true,
   company: "Brainlab",
   logoUrl: "/logos/Brainlab.jpg",

@@ -202,7 +202,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Module availability may vary by country/market and regulatory status",
       "Performance depends on input image quality, acquisition protocols, and site-specific workflows",
     ],
-    source: "MVision AI company press releases (CE Mark Oct 2025). Dose+ module FDA K250064 tracked separately under the Dose+ product entry. 2026-09-06 standard-field consistency pass: anatomy tags aligned to the controlled vocabulary, evidence-rigor note reconciled with the stored E1 score. 2026-09-13: Image+ and Adapt+ split out as standalone DLinRT entries (mvision-image-plus, mvision-adapt-plus), so all four modules — Contour+, Dose+, Image+ and Adapt+ — now link to their DLinRT pages.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "FDA 510(k) K250064; press releases; peer-reviewed literature",
     clinicalEvidence: "CE Mark Class IIa certification achieved October 21, 2025. Cloud-native, vendor-neutral platform unifying AI-powered contouring, dose prediction, synthetic CT generation, and contour propagation. Cleared for clinical use across Europe and other MDR-recognized markets. Contour+ module received Singapore approval in May 2025."
   }
 ];

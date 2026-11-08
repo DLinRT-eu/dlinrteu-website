@@ -30,7 +30,7 @@ export const IRISEvo: ProductDetails = {
     productUrl: "https://www.elekta.com/products/radiation-therapy/elekta-evo/do-it-all/",
     relationship: "Imaging Module"
   },
-  source: "Elekta product pages, brochures and press releases; FDA 510(k) clearance announcement (Jan 2026). Version not publicly published; provisional 1.0.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "FDA database; vendor website; vendor documentation; press releases; peer-reviewed literature",
   company: "Elekta",
   logoUrl: "/logos/Elekta.png",
   version: "1.0",

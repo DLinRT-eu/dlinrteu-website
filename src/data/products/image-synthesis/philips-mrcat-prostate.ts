@@ -8,7 +8,7 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2015",
       distributionChannels: ["Direct sales"]
     },
-    source: "Philips product documentation (2019); releaseDate from Philips press release (31 Mar 2016); per-category evidence updated 2026-06-15 with independent peer-reviewed MRCAT prostate dosimetric validation studies (Tyagi 2017, Kemppainen 2017, Maspero 2017a photon DOI aa4fe7, Maspero 2017b proton DOI aa9677) and indirect-comparative MESCAL 2026 benchmark (Cusumano, Maspero et al. Radiother Oncol, DOI 10.1016/j.radonc.2026.111530); top-level limitations and intended-use refreshed from Philips Ingenia MR-RT IFU, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68, retrieved 2026-06-15; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "Vendor IFU; press releases; peer-reviewed literature",
     usesAI: true,
     company: "Philips",
     logoUrl: "/logos/philips.png",
