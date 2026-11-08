@@ -72,7 +72,6 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
       "No independent validation publications identified",
       "All capability statements are vendor-reported; anatomical scope beyond 4D-CT (thoracic) targets not stated"
     ],
-    source:
-      "AtomoAI website (https://atomoai.ai/ and https://atomoai.ai/services, retrieved 2026-09-26; services page rechecked 2026-10-28, now naming the tool 'iSecare'); ASTRO 2026 exhibitor directory (https://amportal.astro.org/exhibitors, retrieved 2026-09-26). Other AtomoAI tools (iTox, iGray, iBot, iCon) are announced as 'coming soon' and are not listed."
+    source: "Vendor website"
   }
 ];

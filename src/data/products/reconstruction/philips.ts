@@ -311,8 +311,7 @@ export const SmartSpeed: ProductDetails = {
     supersededBy: "philips-smartspeed-precise",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-27",
-    source:
-      "Philips press materials, FDA 510(k) summaries K213583 and K223442, and peer-reviewed systematic review literature.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K213583, K223442; peer-reviewed literature"
   };
 
 export const SmartSpeedPrecise: ProductDetails = {
@@ -461,8 +460,7 @@ export const SmartSpeedPrecise: ProductDetails = {
     ],
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-27",
-    source:
-      "FDA K251397 and Philips press release 2025-07-02.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K251397; press releases; peer-reviewed literature"
   };
 
 export const PETCTAdaptiveReconstruction: ProductDetails = {

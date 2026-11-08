@@ -181,8 +181,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
       "AI is scoped to workflow, documentation, planning management and analytics — not a validated DL dose-planning, auto-contouring or image-synthesis engine.",
       "Outputs are assistive and require clinician review, editing and approval before any clinical use.",
     ],
-    source:
-      "Lumonus company website (product and Dosimetry pages, retrieved 2026-07-19), Rook QS regulatory case study (retrieved 2026-07-19), PR Newswire MSK collaboration announcement (April 2026), Lumonus/Aviron Series B blog post (2026).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "Vendor website; press releases; peer-reviewed literature",
     clinicalEvidence:
       "No peer-reviewed clinical validation identified. MSK Cancer Center collaboration announced April 2026 — non-peer-reviewed at time of listing.",
   },

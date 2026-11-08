@@ -78,7 +78,6 @@ export const NEURALRAD_PIPELINE_PRODUCTS: ProductDetails[] = [
       "No independent validation publications identified",
       "Brain metastases only; other intracranial pathologies not supported"
     ],
-    source:
-      "NeuralRad vendor website (https://www.neuralrad.com/, retrieved 2026-05-23).; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "Vendor website; peer-reviewed literature"
   }
 ];

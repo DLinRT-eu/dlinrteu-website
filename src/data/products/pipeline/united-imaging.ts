@@ -117,7 +117,6 @@ export const UNITED_IMAGING_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
-    source:
-      "United Imaging ESTRO 2026 microsite (https://estro-united-imaging-healthcare-europe.framer.ai/, re-checked 2026-11-05). Vendor disclosure: 'under development; not for sale or clinical use, not yet available in Europe.'; Piao et al., Quant Imaging Med Surg 2026 (DOI 10.21037/qims-2026-1-0140; Crossref and Europe PMC full text checked 2026-11-05); NMPA announcement 2024 No. 141 (国械注准20243062017); openFDA 510(k) search 2026-11-05; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "Vendor website; press releases",
   },
 ];

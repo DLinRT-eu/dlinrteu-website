@@ -59,7 +59,6 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     lastUpdated: "2026-10-28",
     lastRevised: "2026-11-06",
-    source:
-      "Vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026): 4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope. Synaptiq news post \"ESTRO 2026: Bringing Active Intelligence to 4DCT GTV Contouring\" (22 June 2026, https://synaptiq.io/estro-2026-active-intelligence-to-4dtc-gtv-contouring/, retrieved 2026-10-28) describes 4DCT support for the Active Intelligence GTV feature; it does not state a regulatory status.",
+    source: "Vendor-supplied information (non-public); press releases",
   },
 ];
