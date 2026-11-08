@@ -190,9 +190,9 @@ const handler = async (req: Request): Promise<Response> => {
     if (existingSubscriber) {
       if (!existingSubscriber.unsubscribed_at) {
         return new Response(
-          JSON.stringify({ error: "This email is already subscribed to our newsletter" }),
+          JSON.stringify({ success: true, message: "Successfully subscribed to newsletter" }),
           { 
-            status: 400, 
+            status: 200, 
             headers: { "Content-Type": "application/json", ...corsHeaders } 
           }
         );

@@ -139,6 +139,12 @@ serve(async (req) => {
           // Fetch the existing user via listUsers (no admin.getUserByEmail in this SDK)
           const { data: list } = await supabaseAdmin.auth.admin.listUsers({ page: 1, perPage: 200 });
           const match = list?.users?.find((u: { email?: string }) => (u.email ?? '').toLowerCase() === normalizedEmail);
+          if (match && !(match as { email_confirmed_at?: string | null }).email_confirmed_at) {
+            return new Response(JSON.stringify({ error: 'This account has not confirmed its email address. Send a standard invitation instead.' }), {
+              status: 409,
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            });
+          }
           if (match) {
             userId = match.id;
             userAlreadyExisted = true;
