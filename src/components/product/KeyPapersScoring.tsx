@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Download, ExternalLink, Info, LayoutList, Rows3 } from "lucide-react";
+import { objectsToCsv, downloadCsv } from "@/utils/csv";
+import {
+  collectProductPapers,
+  downloadText,
+  groupPapersByLevels,
+  papersToBibtex,
+  papersToCsvRows,
+  papersToRis,
+} from "@/utils/evidenceExport";
 import type { ProductDetails } from "@/types/productDetails";
 import {
   computeProductEvidenceScore,
@@ -54,6 +64,43 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
 
   const score = computeProductEvidenceScore(product, { category });
   const scored = score.scoredPaperCount;
+  const [view, setView] = useState<"list" | "grouped">("list");
+  const groups = useMemo(() => groupPapersByLevels(papers), [papers]);
+  const exportPapers = useMemo(() => collectProductPapers(product), [product]);
+  const fileBase = `dlinrt-evidence-${(product.name ?? "product").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`;
+  const productName = product.name ?? "";
+
+  const exportBar = exportPapers.length > 0 && (
+    <div className="flex items-center gap-1.5 flex-wrap">
+      <span className="text-xs text-muted-foreground mr-1">
+        Export {exportPapers.length} publication{exportPapers.length === 1 ? "" : "s"}:
+      </span>
+      <Button
+        variant="outline"
+        size="sm"
+        className="h-7 px-2 text-xs"
+        onClick={() => downloadCsv(objectsToCsv(papersToCsvRows(productName, exportPapers)), `${fileBase}.csv`)}
+      >
+        <Download className="h-3 w-3 mr-1" /> CSV
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        className="h-7 px-2 text-xs"
+        onClick={() => downloadText(papersToRis(productName, exportPapers), `${fileBase}.ris`, "application/x-research-info-systems")}
+      >
+        <Download className="h-3 w-3 mr-1" /> RIS
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        className="h-7 px-2 text-xs"
+        onClick={() => downloadText(papersToBibtex(productName, exportPapers), `${fileBase}.bib`, "application/x-bibtex")}
+      >
+        <Download className="h-3 w-3 mr-1" /> BibTeX
+      </Button>
+    </div>
+  );
 
   if (papers.length === 0 && evidence.length === 0) return null;
 
@@ -71,57 +118,12 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
       <div className="space-y-2">
         <h3 className="font-medium text-lg">Per-publication scoring</h3>
         <p className="text-sm text-muted-foreground">{coverageNote}</p>
+        {exportBar}
       </div>
     );
   }
 
-
-  return (
-    <div className="space-y-3">
-      <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <h3 className="font-medium text-lg">Per-publication scoring</h3>
-        <span className="text-xs text-muted-foreground">
-          Product score = highest level reached on each axis
-        </span>
-      </div>
-
-      {coverageNote && (
-        <p className="text-xs text-muted-foreground">{coverageNote}</p>
-      )}
-
-
-      <div className="rounded-lg border bg-muted/40 p-3 text-sm space-y-1">
-        <div>
-          <span className="font-medium">Computed:</span>{" "}
-          {score.computedRigor ?? "—"} / {score.computedImpact ?? "—"}
-          {score.rigorSource && (
-            <span className="text-muted-foreground">
-              {" "}
-              · E set by {paperLabel(score.rigorSource)}
-            </span>
-          )}
-          {score.impactSource && (
-            <span className="text-muted-foreground">
-              {" "}
-              · I set by {paperLabel(score.impactSource)}
-            </span>
-          )}
-        </div>
-        {score.hasOverride && (
-          <div className="flex items-start gap-2 text-amber-700 dark:text-amber-500">
-            <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
-            <span>
-              <span className="font-medium">Manual override</span> to{" "}
-              {product.evidenceScoreOverride?.rigor ?? score.computedRigor ?? "—"} /{" "}
-              {product.evidenceScoreOverride?.impact ?? score.computedImpact ?? "—"}
-              {score.overrideReason ? ` — ${score.overrideReason}` : ""}
-            </span>
-          </div>
-        )}
-      </div>
-
-      <ul className="space-y-2">
-        {papers.map((paper, index) => {
+  const renderPaper = (paper: (typeof papers)[number], index: number) => {
           const flags = Object.keys(QUALITY_LABELS).filter(
             (key) => (paper as Record<string, unknown>)[key] === true
           );
@@ -190,7 +192,94 @@ const KeyPapersScoring = ({ product, category }: KeyPapersScoringProps) => {
               )}
             </li>
           );
-        })}
+  };
+
+
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-baseline justify-between flex-wrap gap-2">
+        <h3 className="font-medium text-lg">Per-publication scoring</h3>
+        <span className="text-xs text-muted-foreground">
+          Product score = highest level reached on each axis
+        </span>
+      </div>
+
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <div className="inline-flex rounded-md border p-0.5" role="group" aria-label="Publication view">
+          <Button
+            variant={view === "list" ? "secondary" : "ghost"}
+            size="sm"
+            className="h-7 px-2 text-xs"
+            aria-pressed={view === "list"}
+            onClick={() => setView("list")}
+          >
+            <LayoutList className="h-3 w-3 mr-1" /> List
+          </Button>
+          <Button
+            variant={view === "grouped" ? "secondary" : "ghost"}
+            size="sm"
+            className="h-7 px-2 text-xs"
+            aria-pressed={view === "grouped"}
+            onClick={() => setView("grouped")}
+          >
+            <Rows3 className="h-3 w-3 mr-1" /> Group by level
+          </Button>
+        </div>
+        {exportBar}
+      </div>
+
+      {coverageNote && (
+        <p className="text-xs text-muted-foreground">{coverageNote}</p>
+      )}
+
+
+      <div className="rounded-lg border bg-muted/40 p-3 text-sm space-y-1">
+        <div>
+          <span className="font-medium">Computed:</span>{" "}
+          {score.computedRigor ?? "—"} / {score.computedImpact ?? "—"}
+          {score.rigorSource && (
+            <span className="text-muted-foreground">
+              {" "}
+              · E set by {paperLabel(score.rigorSource)}
+            </span>
+          )}
+          {score.impactSource && (
+            <span className="text-muted-foreground">
+              {" "}
+              · I set by {paperLabel(score.impactSource)}
+            </span>
+          )}
+        </div>
+        {score.hasOverride && (
+          <div className="flex items-start gap-2 text-amber-700 dark:text-amber-500">
+            <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />
+            <span>
+              <span className="font-medium">Manual override</span> to{" "}
+              {product.evidenceScoreOverride?.rigor ?? score.computedRigor ?? "—"} /{" "}
+              {product.evidenceScoreOverride?.impact ?? score.computedImpact ?? "—"}
+              {score.overrideReason ? ` — ${score.overrideReason}` : ""}
+            </span>
+          </div>
+        )}
+      </div>
+
+      <ul className="space-y-2">
+        {view === "list" && papers.map(renderPaper)}
+        {view === "grouped" &&
+          groups.map((g) => (
+            <li key={g.key} className="space-y-2">
+              <div className="flex items-center gap-2 pt-1">
+                <Badge variant="outline" className={`${getEvidenceRigorColor(g.rigor)} text-xs border`}>{g.rigor}</Badge>
+                <span className="text-xs text-muted-foreground">×</span>
+                <Badge variant="outline" className={`${getClinicalImpactColor(g.impact)} text-xs border`}>{g.impact}</Badge>
+                <span className="text-xs text-muted-foreground">
+                  {g.papers.length} publication{g.papers.length === 1 ? "" : "s"}
+                </span>
+              </div>
+              <ul className="space-y-2">{g.papers.map(renderPaper)}</ul>
+            </li>
+          ))}
       </ul>
     </div>
   );

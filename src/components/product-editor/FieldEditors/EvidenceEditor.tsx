@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fetchOpenAlexWorkByDoi, normalizeDoi } from '@/utils/openalex';
 import { useProductEdit } from '../ProductEditContext';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -54,6 +55,7 @@ interface EvidenceItem {
 export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: EvidenceEditorProps) {
   const { isEditMode, editedProduct, updateField, changedFields } = useProductEdit();
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set([0]));
+  const [doiLookup, setDoiLookup] = useState<{ index: number; status: 'loading' | 'error' | 'done'; message?: string } | null>(null);
 
   if (!editedProduct || !isEditMode) return null;
 
@@ -101,6 +103,43 @@ export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: Evide
       i === index ? { ...item, [field]: value || undefined } : item
     );
     updateField('evidence', updated);
+  };
+
+  /** Fill empty citation fields from OpenAlex; never overwrites typed values. */
+  const handleDoiLookup = async (index: number) => {
+    const item = evidence[index];
+    const doi = normalizeDoi(item?.doi) ?? normalizeDoi(item?.link);
+    if (!doi) {
+      setDoiLookup({ index, status: 'error', message: 'Enter a DOI (10.xxxx/...) or a doi.org link first' });
+      return;
+    }
+    setDoiLookup({ index, status: 'loading' });
+    try {
+      const work = await fetchOpenAlexWorkByDoi(doi);
+      if (!work) {
+        setDoiLookup({ index, status: 'error', message: 'OpenAlex has no record for this DOI — check it on doi.org' });
+        return;
+      }
+      const updated = evidence.map((it, i) => {
+        if (i !== index) return it;
+        return {
+          ...it,
+          doi,
+          title: it.title || work.title,
+          authors: it.authors || work.authors,
+          year: it.year || work.year,
+          journal: it.journal || work.journal,
+          link: it.link || `https://doi.org/${doi}`,
+          description:
+            it.description ||
+            [work.authors, work.title, work.journal, work.year].filter(Boolean).join('. '),
+        };
+      });
+      updateField('evidence', updated);
+      setDoiLookup({ index, status: 'done', message: 'Filled from OpenAlex — please check before saving' });
+    } catch (e) {
+      setDoiLookup({ index, status: 'error', message: e instanceof Error ? e.message : 'Lookup failed' });
+    }
   };
 
   return (
@@ -271,12 +310,30 @@ export function EvidenceEditor({ fieldPath, label = 'Clinical Evidence' }: Evide
                     </div>
                     <div className="space-y-1">
                       <Label className="text-xs">DOI</Label>
-                      <Input
-                        value={item.doi || ''}
-                        onChange={(e) => handleUpdateEvidence(index, 'doi', e.target.value)}
-                        placeholder="10.xxxx/yyyy"
-                        className="bg-background"
-                      />
+                      <div className="flex gap-1.5">
+                        <Input
+                          value={item.doi || ''}
+                          onChange={(e) => handleUpdateEvidence(index, 'doi', e.target.value)}
+                          placeholder="10.xxxx/yyyy"
+                          className="bg-background"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="shrink-0"
+                          disabled={doiLookup?.index === index && doiLookup.status === 'loading'}
+                          onClick={() => handleDoiLookup(index)}
+                          title="Fill title, authors, journal and year from OpenAlex"
+                        >
+                          {doiLookup?.index === index && doiLookup.status === 'loading' ? 'Looking up…' : 'Fill from DOI'}
+                        </Button>
+                      </div>
+                      {doiLookup?.index === index && doiLookup.message && (
+                        <p className={doiLookup.status === 'error' ? 'text-xs text-destructive' : 'text-xs text-muted-foreground'}>
+                          {doiLookup.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

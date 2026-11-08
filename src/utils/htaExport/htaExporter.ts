@@ -10,6 +10,7 @@
 import { ProductDetails } from "@/types/productDetails";
 import { createExcelWorkbook, downloadBlob, type ExcelSheet } from "@/utils/excelExport";
 import { EVIDENCE_RIGOR_EXPLAIN, CLINICAL_IMPACT_EXPLAIN } from "@/data/hta-mapping";
+import { collectProductPapers } from "@/utils/evidenceExport";
 import {
   ADOPTION_READINESS_LEVELS,
   computeReadinessSignal,
@@ -252,6 +253,38 @@ function buildIMP(products: ProductDetails[]): ExcelSheet {
   };
 }
 
+// Levels of efficacy that address patient outcome (L5) or societal / economic
+// effects (L6) — the publications an HTA reviewer looks for first.
+const HTA_OUTCOME_LEVELS = new Set(["L5", "L6"]);
+
+/** One row per publication, so a single-product export is not a one-liner. */
+function buildPUB(products: ProductDetails[]): ExcelSheet {
+  const rows = products.flatMap((p) =>
+    collectProductPapers(p).map((paper) => ({
+      "Product": p.name ?? "",
+      "Title": paper.title ?? "",
+      "Authors": paper.authors ?? "",
+      "Journal": paper.journal ?? "",
+      "Year": paper.year ?? "",
+      "DOI": paper.doi ?? "",
+      "Evidence rigor": paper.evidenceRigor ?? "",
+      "Level of efficacy": paper.clinicalImpact ?? "",
+      "Individually scored": paper.scored ? "Yes" : "No (cited only)",
+      "Patient-outcome / societal level (L5–L6)": paper.clinicalImpact && HTA_OUTCOME_LEVELS.has(paper.clinicalImpact) ? "Yes" : "No",
+      "Vendor independent": paper.vendorIndependent === undefined ? "" : paper.vendorIndependent ? "Yes" : "No",
+      "Prospective": paper.prospective === undefined ? "" : paper.prospective ? "Yes" : "No",
+      "Scoring rationale": paper.rationale ?? "",
+      "URL": paper.url ?? "",
+    })),
+  );
+  return {
+    name: "PUB — Publications",
+    data: rows.length
+      ? rows
+      : [{ "Product": products.map((p) => p.name).join("; "), "Title": "No peer-reviewed publication with a DOI is catalogued for this selection." }],
+  };
+}
+
 function buildReadme(): ExcelSheet {
   return {
     name: "Readme",
@@ -261,7 +294,8 @@ function buildReadme(): ExcelSheet {
       { Field: "Methodology", Value: "EUnetHTA 21 deliverables — see https://www.eunethta.eu/eunethta-21" },
       { Field: "Effectiveness scoring", Value: "Evidence rigor (E0–E3) × Levels of efficacy (L1t–L6), each cited publication scored individually, see https://dlinrt.eu/resources-compliance#evidence-levels" },
       { Field: "Adoption readiness", Value: "R0–R5 (lower is better) — DLinRT-proposed third axis; composite Readiness Signal derived from E/I/R. See IMP sheet." },
-      { Field: "Out of scope (ECO)", Value: "DLinRT does not collect pricing, budget impact or cost-effectiveness data. Combine this export with vendor quotations and local cost data." },
+      { Field: "Publications (PUB)", Value: "One row per catalogued publication with its per-paper score. Papers at L5 (patient outcome) or L6 (societal) are flagged; these are the closest the catalogue gets to HTA outcome evidence." },
+      { Field: "Out of scope (ECO)", Value: "DLinRT does not collect pricing, budget impact or cost-effectiveness data, and no cost-effectiveness study is currently catalogued for any product. Combine this export with vendor quotations and local cost data." },
       { Field: "Disclaimer", Value: "This export is informational only. It does NOT constitute a JCA submission and is not a substitute for an official HTA dossier or regulatory filing." },
       { Field: "Source", Value: "https://dlinrt.eu" },
       { Field: "Generated", Value: new Date().toISOString() },
@@ -282,6 +316,7 @@ export async function exportHTADossier(
     buildCUR(products),
     buildTEC(products),
     buildEFF(products),
+    buildPUB(products),
     buildSAF(products),
     buildETH(products),
     buildORG(products),

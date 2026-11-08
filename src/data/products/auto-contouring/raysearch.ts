@@ -35,6 +35,12 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: ["Deep learning algorithms", "Within TPS", "Guideline-based contouring"],
+    limitations: [
+      "Contours are proposals and must be reviewed, edited and approved by a qualified user before clinical use",
+      "Small and large bowel structures (and female pelvic anatomies) were only announced with RayStation v2026; earlier versions list at most the male-pelvis bowel space (Spc_Bowel), so bowel-loop contouring requires the v2026 models",
+      "RayStation v2026 is subject to regulatory clearance in some markets and, per the vendor, not available for use or sale in the USA or Canada; available models depend on the local regulatory scope (RaySearch RayStation v2026 page, checked 8 Nov 2026)",
+      "No prospective or randomised evidence identified"
+    ],
     supportedStructures: RAYSTATION_SUPPORTED_STRUCTURES,
     technicalSpecifications: {
       population: "Adult patients",
@@ -102,7 +108,7 @@ export const RAYSEARCH_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     version: "2026",
     releaseDate: "2023-12-01",
-    lastUpdated: "2026-10-15",
+    lastUpdated: "2026-11-08",
     keyPapers: [
       {"doi": "10.3390/app122211681", "title": "Clinical Evaluation of Deep Learning and Atlas-Based Auto-Contouring for Head and Neck Radiation Therapy", "authors": "Ng CKC, Leung VWS, Hung RHM", "journal": "Applied Sciences", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-centre comparison of RaySearch deep-learning and atlas-based H&N OAR contouring on 45 CT datasets; geometric endpoints.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
 

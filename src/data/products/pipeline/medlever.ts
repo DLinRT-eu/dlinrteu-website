@@ -9,13 +9,8 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://medlever.com/",
     productUrl: "https://medlever.com/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/medlever.ts",
-    description: "AI-powered workflow assistant for radiation oncology. Leverages large language models to provide contextual guidance, automate documentation, and assist with clinical decision support throughout the treatment workflow.",
-    features: [
-      "AI-powered contextual assistance",
-      "Automated documentation drafting",
-      "Clinical decision support",
-      "Natural language interaction"
-    ],
+    description: "Announced on the MedLever website only as \"MedLever Assistant & Copilot for…\" under \"Coming soon\". MedLever has not published a product description, intended use, feature list or regulatory status (website checked 8 Nov 2026). Listed as pipeline until public details are available.",
+    features: [],
     category: "Platform",
     certification: "Pipeline",
     developmentStage: "pipeline",
@@ -25,12 +20,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     modality: ["Multi-modality"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: [
-      "LLM-powered contextual assistance for clinical workflows",
-      "Automated generation of clinical documentation",
-      "Real-time clinical decision support suggestions",
-      "Natural language query interface for workflow navigation"
-    ],
+    keyFeatures: [],
     partOf: {
       name: "MedLever Radiation Oncology Work Management",
       productUrl: "https://medlever.com/",
@@ -39,11 +29,11 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     usesAI: true,
     regulatory: {
       intendedUseStatement:
-        "\"Coming Soon.\" Pre-market workflow assistant; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
+        "\"Coming Soon.\" Pre-market workflow assistant; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026; re-checked 8 Nov 2026: the site shows \"MedLever Assistant & Copilot for…\" under \"Coming soon\" with no further detail.)",
     },
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-11-08",
     lastRevised: "2026-11-06",
-    source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "Company website - listed as 'Coming Soon' (re-checked 8 Nov 2026 after reviewer feedback: earlier description and feature text was not supported by any public source and was removed); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   },
   {
     id: "medlever-copilot-pipeline",
@@ -53,13 +43,8 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://medlever.com/",
     productUrl: "https://medlever.com/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/pipeline/medlever.ts",
-    description: "AI copilot for radiation oncology clinical decision-making. Analyzes patient data, treatment parameters, and clinical protocols to provide intelligent recommendations and identify potential issues before they impact patient care.",
-    features: [
-      "Intelligent clinical recommendations",
-      "Treatment parameter validation",
-      "Protocol compliance checking",
-      "Predictive issue detection"
-    ],
+    description: "Announced on the MedLever website only as \"MedLever Assistant & Copilot for…\" under \"Coming soon\". MedLever has not published a product description, intended use, feature list or regulatory status (website checked 8 Nov 2026). Listed as pipeline until public details are available.",
+    features: [],
     category: "Platform",
     certification: "Pipeline",
     developmentStage: "pipeline",
@@ -69,12 +54,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     modality: ["Multi-modality"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
-    keyFeatures: [
-      "AI-driven clinical recommendations based on patient data",
-      "Automated treatment parameter validation",
-      "Real-time protocol compliance verification",
-      "Predictive analytics for workflow optimization"
-    ],
+    keyFeatures: [],
     partOf: {
       name: "MedLever Radiation Oncology Work Management",
       productUrl: "https://medlever.com/",
@@ -83,10 +63,10 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     usesAI: true,
     regulatory: {
       intendedUseStatement:
-        "\"Coming Soon.\" Pre-market clinical decision support copilot; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026.)",
+        "\"Coming Soon.\" Pre-market clinical decision support copilot; no Indications for Use published and no regulatory clearance disclosed. (Source: MedLever company website, https://medlever.com/, retrieved 23 May 2026; re-checked 8 Nov 2026: the site shows \"MedLever Assistant & Copilot for…\" under \"Coming soon\" with no further detail.)",
     },
-    lastUpdated: "2026-08-25",
+    lastUpdated: "2026-11-08",
     lastRevised: "2026-11-06",
-    source: "Company website - listed as 'Coming Soon'; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "Company website - listed as 'Coming Soon' (re-checked 8 Nov 2026 after reviewer feedback: earlier description and feature text was not supported by any public source and was removed); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];

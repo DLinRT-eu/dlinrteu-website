@@ -258,7 +258,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
                   >
                     EU HTAR (2021/2282)
                   </a>
-                  . Informational only.
+                  . Includes one row per publication with its score. Economic evaluation (costs, budget impact, cost-effectiveness) is not collected by DLinRT.eu. Informational only.
                 </p>
               </div>
             </div>
