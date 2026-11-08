@@ -107,4 +107,4 @@ export const ELEKTA_MONACO_STRUCTURES = [
   ...MONACO_FEMALE_PELVIS_HYST,
   ...MONACO_MALE_PELVIS,
   ...MONACO_HEAD_NECK,
-].map((name) => ({ name, type: "OAR" as const }));
+];
