@@ -134,6 +134,7 @@ const CertificationManagement = lazyPage(() => import("./pages/admin/Certificati
 const NewsletterManagement = lazyPage(() => import("./pages/admin/NewsletterManagement"));
 const NewsletterBroadcast = lazyPage(() => import("./pages/admin/NewsletterBroadcast"));
 const EmailHealth = lazyPage(() => import("./pages/admin/EmailHealth"));
+const AdminInbox = lazyPage(() => import("./pages/admin/AdminInbox"));
 const Unsubscribe = lazyPage(() => import("./pages/Unsubscribe"));
 const CompareStructures = lazyPage(() => import("./pages/CompareStructures"));
 
@@ -407,6 +408,11 @@ const App = () => (
                 <Route path="/admin/newsletter-broadcast" element={
                   <ProtectedRoute allowedRoles={['admin']}>
                     <NewsletterBroadcast />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/inbox" element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminInbox />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/email-health" element={

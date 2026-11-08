@@ -68,6 +68,7 @@ const adminItems: Item[] = [
   { title: "Users", url: "/admin/users", icon: Users },
   { title: "Password Reset", url: "/admin/password-reset", icon: KeyRound },
   { title: "Newsletter", url: "/admin/newsletter", icon: Mail },
+  { title: "Inbox", url: "/admin/inbox", icon: Inbox },
   { title: "Email Health", url: "/admin/email-health", icon: MailWarning },
   { title: "Security", url: "/admin/security", icon: ShieldCheck },
   { title: "Changelog", url: "/admin/changelog", icon: Newspaper },
