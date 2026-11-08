@@ -91,7 +91,7 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
         decisionDate: "2019-06-13",
         notes: "Additional clearance K212074 (2021) for AI Marketplace integration"
       },
-      intendedUseStatement: "ClariCT.AI is intended to be used for denoise processing and enhancement of DICOM images acquired from any CT scanner to support clinical interpretation."
+      intendedUseStatement: "ClariCT.AI is a software device intended for networking, communication, processing and enhancement of CT images in DICOM format regardless of the manufacturer of CT scanner or model. (Source: FDA 510(k) K183460 Indications for Use)"
     },
     market: {
       onMarketSince: "2019",
@@ -154,6 +154,12 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
       "Reported dose-reduction magnitudes vary substantially by study and anatomy (86% phantom dose-reduction potential vs. 33% dose reduction with confirmed noninferiority in the largest clinical trial), indicating site- and protocol-specific validation is needed rather than a single universal dose-reduction figure",
       "No dedicated pediatric peer-reviewed study identified despite pediatric imaging being a listed target use",
       "Version identifier inconsistent across sources (1.1.0 vs 1.2.3); current production version not publicly confirmed",
+      "CBCT applications (e.g. Kazimierczak 2024) are outside the FDA indications, which cover CT images"
+    ],
+    compatibleSystems: [
+      "Any CT scanner manufacturer or model (FDA indication)",
+      "Low-dose CT images, including low-dose non-diagnostic filtered back projection and iterative reconstruction images (K254120 predicate comparison)",
+      "Requires a CUDA-supported graphics card (K183460)"
     ],
     evidenceRigor: "E3",
     clinicalImpact: "L2",
@@ -169,14 +175,16 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     clinicalEvidence: "FDA 510(k) K183460/K212074 plus nine peer-reviewed studies: five independent (Lee DH 2024 — prospective multicenter multinational, n=296; Park 2025; Dehdab 2025; Kazimierczak 2024; Kim C 2022) and four vendor-affiliated via a recurring SNU Bundang Hospital/ClariPi Research collaboration (Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026).",
     releaseDate: "2019-06-13",
-    lastUpdated: "2026-08-27",
-    lastRevised: "2026-08-27",
+    lastUpdated: "2026-11-08",
+    lastRevised: "2026-11-08",
     source: "FDA 510(k) database (K183460, K212074); peer-reviewed literature (Lee DH 2024, Park 2025, Dehdab 2025, Kazimierczak 2024, Kim C 2022, Yeoh 2021, Choi/Chang 2022, Ahn/Kim 2023, Kim J 2026)"
   },
   {
     id: "claripi-clariace",
     keyPapers: [
-      {"doi":"10.31320/jksct.2024.26.2.33","title":"Diagnostic Usefulness of Contrast Enhancement and Noise Reduction of Artificial Intelligence-based ClariACE in Delay Enhancement Imaging of Cardiac CT","authors":" et al.","journal":"Korean Soc Computed Tomographic Technol","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation in a vendor-affiliated context; technical image-quality endpoints.","vendorIndependent":false}
+      {"doi":"10.31320/jksct.2024.26.2.33","title":"Diagnostic Usefulness of Contrast Enhancement and Noise Reduction of Artificial Intelligence-based ClariACE in Delay Enhancement Imaging of Cardiac CT","authors":"Kim et al.","journal":"Korean Soc Computed Tomographic Technol","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation in a vendor-affiliated context; technical image-quality endpoints.","vendorIndependent":false},
+      {"doi":"10.1186/s40644-023-00616-0","title":"Renal protection CT protocol using low-dose and low-concentration iodine contrast medium in at-risk patients of HCC and with chronic kidney disease: a randomized controlled non-inferiority trial","authors":"Yoon JH et al.","journal":"Cancer Imaging","year":"2023","evidenceRigor":"E1","clinicalImpact":"L1c","rationale":"Added 2026-11-08 from Usman Lula's revision; DOI verified; scored from the abstract, pending reviewer check. Single-centre randomised non-inferiority trial (n=52, NCT04024514) naming ClariACE; image contrast, overall quality and lesion conspicuity endpoints only.","prospective":true},
+      {"doi":"10.3390/tomography12040056","title":"Double Boosting Strategy for Low-Iodine-Dose Dual-Source DECT Follow-Up CT After Intervention with Raw DICOM-Level Deep Learning Iodine Boosting and Low-keV Dual-Energy-Derived Images","authors":"Lee TY et al.","journal":"Tomography","year":"2026","evidenceRigor":"E1","clinicalImpact":"L1c","rationale":"Added 2026-11-08 from Usman Lula's revision; DOI verified; scored from the abstract, pending reviewer check. Single-centre retrospective study (n=43) naming ClariACE v1.1.1 on dual-source DECT; attenuation, SNR and reader image-quality endpoints."}
     ],
     name: "ClariACE",
     company: "ClariPi",
@@ -188,14 +196,17 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://claripi.com/",
     productUrl: "https://claripi.com/clari-ace/",
     anatomicalLocation: ["Chest", "Heart", "Abdomen", "Pelvis"],
+    anatomy: ["Chest", "Heart", "Abdomen", "Pelvis"],
     modality: ["CT"],
     diseaseTargeted: ["Contrast-enhanced imaging", "Cardiac imaging", "Oncology imaging"],
+    version: "1.1.1 (as reported in Lee et al. 2026)",
     keyFeatures: [
       "Selective iodine contrast enhancement",
       "Supports reduction of iodinated contrast agent dose",
       "Vendor-agnostic across CT scanners and contrast agents",
       "User-adjustable contrast boost ratio",
-      "DICOM-compliant, integrates with PACS"
+      "DICOM-compliant, integrates with PACS",
+      "Combined denoising and iodine boosting"
     ],
     technicalSpecifications: {
       population: "Adult",
@@ -229,11 +240,21 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Kim et al. (2024). Diagnostic Usefulness of Contrast Enhancement and Noise Reduction of Artificial Intelligence-based ClariACE in Delay Enhancement Imaging of Cardiac CT. J Korean Soc CT Technol 26(2):33. Single-center evaluation on cardiac CT delayed-phase imaging; vendor-affiliated context (Korean CT technologists' society journal, small cohort).",
         link: "https://doi.org/10.31320/jksct.2024.26.2.33"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yoon et al. (2023). Renal protection CT protocol using low-dose and low-concentration iodine contrast medium in at-risk patients of HCC and with chronic kidney disease: a randomized controlled non-inferiority trial. Cancer Imaging 23:100. Single-centre randomised trial (n=52, NCT04024514); ClariACE iodine boosting restored image contrast and quality at a lower iodine load. Funded by Riyeon Pharmaceuticals; authors retained data control.",
+        link: "https://doi.org/10.1186/s40644-023-00616-0"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Lee et al. (2026). Double Boosting Strategy for Low-Iodine-Dose Dual-Source DECT Follow-Up CT After Intervention with Raw DICOM-Level Deep Learning Iodine Boosting and Low-keV Dual-Energy-Derived Images. Tomography 12(4):56. Retrospective, single-centre, n=43; ClariACE v1.1.1 applied to dual-energy source DICOM.",
+        link: "https://doi.org/10.3390/tomography12040056"
       }
     ],
     limitations: [
       "No FDA 510(k) or CE Mark identified in public regulatory databases at the time of listing; recognised regulatory status limited to Korea MFDS.",
-      "Public peer-reviewed evidence limited to a single small-cohort application study in cardiac CT delayed-phase imaging; no multicenter or prospective independent validation identified.",
+      "Public peer-reviewed evidence limited to three single-centre studies (cardiac CT delayed phase, liver CT, abdominal DECT) with image-quality endpoints; no multicentre validation or diagnostic-accuracy study identified.",
       "Training data provenance (dataset size, scanner mix, patient demographics) not publicly disclosed.",
       "Quantitative contrast-dose-reduction magnitude achievable while preserving diagnostic performance is not publicly quantified."
     ],
@@ -247,12 +268,12 @@ export const CLARIPI_PRODUCTS: ProductDetails[] = [
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
-    evidenceProspective: false,
+    evidenceProspective: true,
     evidenceExternalValidation: false,
-    clinicalEvidence: "Korea MFDS approval plus one peer-reviewed application study (Kim et al. 2024, cardiac CT delayed enhancement, single centre, Korea).",
+    clinicalEvidence: "Korea MFDS approval plus three single-centre peer-reviewed studies from Korea: Kim et al. 2024 (cardiac CT delayed enhancement), Yoon et al. 2023 (randomised liver CT trial) and Lee et al. 2026 (abdominal DECT).",
     releaseDate: "2021",
-    lastUpdated: "2026-10-15",
-    lastRevised: "2026-08-27",
+    lastUpdated: "2026-11-08",
+    lastRevised: "2026-11-08",
     source: "ClariPi product page (https://claripi.com/clari-ace/, MFDS mark shown); Kim et al. J Korean Soc CT Technol 2024;26(2):33 (https://doi.org/10.31320/jksct.2024.26.2.33)"
   }
 ];
