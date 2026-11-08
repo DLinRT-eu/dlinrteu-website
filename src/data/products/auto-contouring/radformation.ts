@@ -61,6 +61,24 @@ export const RADFORMATION_PRODUCTS: ProductDetails[] = [
       }
     ],
     modality: ["CT", "MRI", "CBCT"],
+    // Vendor-submitted (Radformation, 2026-11-06); model/sequence variants folded into body regions.
+    anatomy: ["Brain", "Head & Neck", "Thorax", "Breast & Chestwall", "Abdomen", "Male Pelvis", "Female Pelvis", "Multisite"],
+    guidelines: [
+      {
+        name: "AAPM TG-263",
+        version: "2018",
+        reference: "https://doi.org/10.1002/mp.12909",
+        url: "https://www.aapm.org/pubs/reports/RPT_263.pdf",
+        compliance: "full"
+      },
+      {
+        name: "EPTN consensus brain OAR atlas (Eekers et al.)",
+        version: "2018",
+        reference: "https://doi.org/10.1016/j.radonc.2017.09.022",
+        url: "https://doi.org/10.1016/j.radonc.2017.09.022",
+        compliance: "partial"
+      }
+    ],
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/radformation.ts",
     keyPapers: [
       {
