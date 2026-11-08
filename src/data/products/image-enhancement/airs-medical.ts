@@ -144,7 +144,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
     evidenceRigorNotes: "2026-11-08: raised to E2 by Park 2025 (Sci Rep), a three-institution multinational study with AIRS Medical co-authors; Yoo 2023 (Eur Radiol) and Lee 2023 (Sci Rep) added as prospective single-centre studies with the correct DOIs (replacing the two unverifiable DOIs removed on 2026-06-15). 2026-08-25 Wave 4 per-paper sweep: two verified SwiftMR-naming primary publications were added (Jeong 2026 Sci Rep doi:10.1038/s41598-026-60802-5; Hyodoh 2026 Forensic Sci Int doi:10.1016/j.forsciint.2026.112973), both single-centre. Under per-paper scoring the maximum rigor is E1, so the product-level score moves from E2 to E1: the previous E2 rested on a vendor white paper and an indirect-comparative systematic review, neither of which carries a level. FDA 510(k) K230854 + OEM-DL expansion (Apr 2026). Fransen et al. Eur Radiol 2025 systematic review (indirect-comparative; names SwiftMR among 14 products with peer-reviewed noise-reduction articles). Clinical white paper: 184 exams, 18 radiologists. Two previously cited DOIs (Yoo et al. 10.1007/s00330-023-09679-2; Lee et al. 10.1038/s41598-023-44471-8) were removed on 2026-06-15: both return DOI-Not-Found and could not be verified to specific SwiftMR papers without a confirmed alternative DOI. PubMed re-searched 2026-06-15.",
-    clinicalImpactNotes: "I2 retained — Jeong 2026 demonstrates scan-time reduction with preserved image quality (workflow level). Workflow improvement supported by vendor white paper and indirect-comparative systematic review; primary prospective SwiftMR scan-time studies pending DOI verification before re-citation.",
+    clinicalImpactNotes: "I2 retained — Jeong 2026 demonstrates scan-time reduction with preserved image quality (workflow level). Workflow improvement supported by vendor white paper and indirect-comparative systematic review; prospective SwiftMR scan-time studies with diagnostic endpoints (Yoo 2023, Lee 2023) added 2026-11-08 with verified DOIs.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "R3 retained after the E2→E1 rescoring (CE + FDA cleared, widely deployed). Derived from + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
@@ -152,7 +152,7 @@ export const AIRS_MEDICAL_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: true,
     evidenceProspective: true,
     evidenceExternalValidation: false,
-    clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR. Direct primary-evidence DOIs require re-verification before re-citation.",
+    clinicalEvidence: "FDA clearances + AIRS clinical white paper (184 exams) + Fransen et al. 2025 systematic review naming SwiftMR + primary studies Yoo 2023, Lee 2023, Park 2025, Jeong 2026 and Hyodoh 2026.",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
     source: "FDA 510(k) database, company website, PubMed"
