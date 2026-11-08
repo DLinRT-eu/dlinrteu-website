@@ -8,7 +8,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1007/s00259-025-07119-z","title":"Deep learning-based time-of-flight enhancement of non-ToF PET scans for different radiotracers","authors":"Mehranian A et al.","journal":"Eur J Nucl Med Mol Imaging","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-led but 11-site multicentre cohort extending validation beyond FDG.","vendorIndependent":false,"multiCenter":true},
       {"doi":"10.1186/s40658-025-00742-7","title":"Effects of a deep learning-based image quality enhancement method on a digital-BGO PET/CT system for 18F-FDG whole-body examination","authors":"Miwa K et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent external validation combining phantom and 30 clinical scans.","vendorIndependent":true,"externalValidation":true},
       {"doi":"10.1186/s40658-024-00688-2","title":"Assessing the deep learning based image quality enhancements for the BGO based GE Omni Legend PET/CT","authors":"Dadgar M et al.","journal":"EJNMMI Phys","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent NEMA phantom study.","vendorIndependent":true},
-      {"doi":"10.1186/s40658-025-00814-8","title":"Deep learning-enhanced digital-BGO versus ToF PET/CT: comparative assessment of detection, quantitation, and overall image quality","authors":"Maronnier Q et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Academic-led 30-patient comparison with detection endpoints supporting scanner-level substitution."}
+      {"doi":"10.1186/s40658-025-00814-8","title":"Deep learning-enhanced digital-BGO versus ToF PET/CT: comparative assessment of detection, quantitation, and overall image quality","authors":"Maronnier Q et al.","journal":"EJNMMI Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Academic-led 30-patient comparison with detection endpoints supporting scanner-level substitution."},
+      {"doi":"10.2967/jnumed.123.266140","title":"Performance Characteristics of a New-Generation Digital Bismuth Germanium Oxide PET/CT System, Omni Legend 32, According to NEMA NU 2-2018 Standards","authors":"Yamagishi S et al.","journal":"J Nucl Med","year":"2023","evidenceRigor":"E1","clinicalImpact":"L1t","rationale":"Added 2026-11-08 from Usman Lula's revision; DOI verified; scored from the abstract, pending reviewer check. NEMA NU 2-2018 system performance of Omni Legend 32 with a visual first impression of Precision DL images; technical endpoints only."}
     ],
     trainingData: {
         source: "FDA 510(k) database",
@@ -34,17 +35,18 @@ export const GE_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/ge-healthcare.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["PET/CT"],
-    diseaseTargeted: ["Cancer", "Neurological disorders", "Cardiac conditions"],
-    releaseDate: "2023-05-22",
+    diseaseTargeted: ["Cancer"],
+    releaseDate: "2023-04-27",
     version: "Not publicly disclosed",
     keyFeatures: [
       "Deep learning-based PET image enhancement",
       "Improved signal-to-noise ratio",
       "Potential for reduced tracer dose",
-      "Compatible with various PET/CT systems"
+      "Available only on GE Omni Legend PET/CT",
+      "ToF-like image quality from non-ToF data (better contrast recovery, contrast-to-noise ratio, quantitation and small-lesion detectability)"
     ],
     technicalSpecifications: {
-      population: "Adult",
+      population: "All ages",
       input: ["PET images"],
       inputFormat: ["DICOM"],
       output: ["Enhanced PET images"],
@@ -65,12 +67,12 @@ export const GE_PRODUCTS: ProductDetails[] = [
         status: "510k_cleared",
         class: "Class II",
         clearanceNumber: "K223212",
-        regulationNumber: "21 CFR 892.2050",
-        productCode: "MYN",
+        regulationNumber: "21 CFR 892.1200",
+        productCode: "KPS",
         type: "510(k)",
-        decisionDate: "2023-05-22"
+        decisionDate: "2023-04-27"
       },
-      intendedUseStatement: "Precision DL is intended for use in PET image enhancement to improve image quality through noise reduction."
+      intendedUseStatement: "Precision DL is a deep learning-based image processing method intended to enhance image quality of non-ToF PET images for clinical oncology purpose, using F-18 FDG. Precision DL may be used for patients of all ages. (Source: FDA 510(k) K223212 Indications for Use)"
     },
     market: {
       onMarketSince: "2023",
@@ -106,10 +108,23 @@ export const GE_PRODUCTS: ProductDetails[] = [
         type: "Peer-reviewed Publication",
         description: "Maronnier et al. (2025). Deep learning-enhanced digital-BGO versus TOF PET/CT: comparative assessment of detection, quantitation, and overall image quality. EJNMMI Physics. 30 patients vs Discovery MI — academic-led (France), one GE co-author.",
         link: "https://doi.org/10.1186/s40658-025-00814-8"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Yamagishi et al. (2023). Performance Characteristics of a New-Generation Digital Bismuth Germanium Oxide PET/CT System, Omni Legend 32, According to NEMA NU 2-2018 Standards. J Nucl Med 64(12):1990–1997. NEMA system performance with a visual first impression of Precision DL images.",
+        link: "https://doi.org/10.2967/jnumed.123.266140"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "van de Burgt et al. (2025). [18F]FDG administered activity reduction capabilities of a 32-cm axial field-of-view solid-state digital bismuth germanium oxide PET/CT system while maintaining EARL compliance. Phys Med 131:104935. Omni Legend 32 activity-reduction study; use of Precision DL not confirmed from the available metadata, so unscored pending reviewer check.",
+        link: "https://doi.org/10.1016/j.ejmp.2025.104935"
       }
     ],
     limitations: [
       "Tight vendor integration, can only be used with specific GE scanners",
+      "FDA indication limited to 18F-FDG oncology imaging",
+      "Trained to emulate ToF image quality; Discovery MI (ToF) is listed as reference device in K223212",
+      "Little independent clinical evidence of diagnostic accuracy; most studies are phantom or image-quality studies"
     ],
     evidenceRigor: "E2",
     clinicalImpact: "L2",
@@ -123,8 +138,8 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: true,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-17",
-    lastRevised: "2026-06-17",
+    lastUpdated: "2026-11-08",
+    lastRevised: "2026-11-08",
     source: "FDA 510(k) database, peer-review publications"
   },
   {
