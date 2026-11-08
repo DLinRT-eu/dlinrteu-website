@@ -53,7 +53,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
     source: TRM,
     sourceAccess: "vendor-provided",
     sourceRetrievedOn: "2026-10-30",
-    notes: "Listed per model (Female Pelvis Intact, Female Pelvis Hysterectomy, Male Pelvis, Head & Neck); names as output by the models (Tables 4, 5, 11, 17)."
+    notes: "Listed per model (Female Pelvis Intact, Female Pelvis Hysterectomy, Male Pelvis, Head & Neck); names as output by the models (Tables 2, 9, 15)."
   },
   supportedStructures: ELEKTA_MONACO_STRUCTURES,
   trainingData: {

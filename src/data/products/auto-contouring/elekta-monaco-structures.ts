@@ -3,7 +3,7 @@
  * Naming: "Region: Structure Name", with each vendor model identified by its region label.
  * Structure names as output by the models.
  * Source: Elekta Monaco Segmentation Component Technical Reference Manual E076326/01 (2025),
- * Tables 4, 5, 11 and 17 (vendor-provided, retrieved 2026-10-30); models confirmed in FDA 510(k) K252002.
+ * Tables 2, 9 and 15 (vendor-provided, retrieved 2026-10-30); models confirmed in FDA 510(k) K252002.
  */
 
 // ekt_mr_femalepelvis 1.0 — 15 OARs
