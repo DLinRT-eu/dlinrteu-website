@@ -10,12 +10,11 @@
     "Indirect and non-efficacy references moved to evidence[] as required by guide."
   ],
   "pending": [
-    "DeepPlan DOI 10.1002/pro6.70078: publisher identity verified, Crossref retrieval unsuccessful; candidate remains unscored.",
-    "Zeverino 2023: conservative E1/L2 based on abstract; full-methods clinical-phase interpretation pending.",
-    "RPA Netherton 2026: E2 patient-data provenance pending; unsupported geographic flags removed.",
-    "Research/marketed-model equivalence for RatoGuide/RatoAI, iSeg/iSecare and custom MOZI dose prediction remains unresolved.",
-    "Safety searches were targeted, not exhaustive clearance of all global recall databases.",
-    "Full frontend build/typecheck remains unverified; four pre-existing evidence mismatches outside scope remain."
+    "Commercial-model equivalence is not established for RatoGuide/RatoAI, iSeg/iSecare or custom MOZI dose prediction. Public lineage and custom model development are documented.",
+    "RayStation installed-build mitigation and actual corrective-release availability cannot be certified from public notice alone.",
+    "Global recall search is not exhaustive.",
+    "Full frontend build remains blocked by repository dependency/override setup; targeted TypeScript and runtime data validation pass.",
+    "Written/executable E/R rubric discrepancy remains for maintainer reconciliation."
   ],
   "paper_reviews": [
     {
@@ -55,9 +54,9 @@
         {
           "doi": "10.1200/go-25-00702",
           "title": "Artificial Intelligence–Powered Radiotherapy for Resource-Limited Settings: Advancing Cervical and Prostate Cancer Treatment Planning With the Radiation Planning Assistant",
-          "E": "E2",
+          "E": "E1",
           "L": "L2",
-          "rationale": "Abstract-assessed retrospective extension in 50 cases (40 prostate, 10 cervix). E2 is retained pending full-methods verification of patient-data provenance; international authorship does not establish multicenter or multinational validation. L2 reflects clinical acceptability, not observed patient outcomes. Developer co-authors.",
+          "rationale": "Publisher methods and Table 1 verified 2026-11-08: retrospective internal testing, including 40 prostate end-to-end cases drawn from the 105-case held-out subset of the 1,069-patient MD Anderson cohort, plus ten cervical end-to-end cases. A separate test subset is not an external institution. No external or multicenter patient-data validation is established by the retrieved methods; E1/L2 reflects internal validation and clinical acceptability. Developer co-authors.",
           "crossref_this_pass": "retrieval unsuccessful; not proof of invalid DOI",
           "source": "https://doi.org/10.1200/go-25-00702"
         },
@@ -135,7 +134,7 @@
           "title": "Clinical implementation of deep learning-based automated left breast simultaneous integrated boost radiotherapy treatment planning",
           "E": "E1",
           "L": "L2",
-          "rationale": "Crossref metadata and PubMed/Europe PMC abstract verified 2026-11-08. Left-breast DL planning: 80 training plans, 10 validation patients and 17 subsequent clinical auto-plans. Conservative E1/L2 reflects the verified validation and dosimetric endpoints. Full methods and treatment-selection details require review before assigning E3/L4; clinical use alone is not assumed to establish that endpoint.",
+          "rationale": "Crossref metadata and full publisher text verified 2026-11-08 via Lausanne University repository. RayStation v12A model developed with RaySearch: 80 training plans, five tuning patients, ten validation patients and 17 subsequent clinical plans. Section 2.5 compares clinical and validation dose distributions, without a prospective plan-selection endpoint. E1/L2 retained; model-specific clinical use does not establish E3/L4 or patient-outcome benefit.",
           "crossref_this_pass": "retrieved",
           "source": "https://doi.org/10.1016/j.phro.2023.100492"
         },
@@ -251,6 +250,15 @@
       "file": "src/data/products/treatment-planning/wisdom-tech.ts",
       "papers": [
         {
+          "doi": "10.1002/pro6.70078",
+          "title": "Dosimetric comparison of lattice radiotherapy across three modern linear accelerator platforms",
+          "E": "E1",
+          "L": "L2",
+          "rationale": "Crossref and publisher full text verified 2026-11-08. Retrospective dosimetric comparison in ten patients using DeepPlan v1.4 for the NeuRT Aurora plans. This evaluates platform/TPS planning performance and does not isolate an AI optimization component.",
+          "source": "https://doi.org/10.1002/pro6.70078",
+          "crossref_this_pass": "retrieved"
+        },
+        {
           "doi": "10.1186/s13014-025-02742-4",
           "title": "Spiral volumetric modulated arc therapy for whole-brain radiotherapy with simultaneous integrated boost to multiple brain metastases",
           "E": "E1",
@@ -273,16 +281,42 @@
   ],
   "safety_findings": [
     {
-      "type": "software-update",
-      "identifier": "Medsafe 37679",
-      "date": "2026-10-06",
-      "description": "Dose deformation can lose dose outside the original grid when a deformable registration expands near its boundary, potentially underestimating dose in subsequent evaluation or planning. This is a RayStation platform correction; the notice does not identify the DL dose-prediction model as defective. Closure and local mitigation have not been verified.",
+      "type": "FSCA",
+      "identifier": "RSL-P-RS FSN 180167; Medsafe 37679",
+      "date": "2026-10-01",
+      "description": "Dose may be clipped during deformation near the original grid boundary, leading to underestimated accumulated dose. FSN issued October 1; Medsafe correction commenced October 6. This concerns platform dose deformation, not evidence of a defective DL predictor. No patient mistreatment was known to the manufacturer at notice issuance.",
       "affectedVersions": [
         "RayStation 4.7 through v2026, including some service packs"
       ],
-      "action": "Software upgrade; verify the manufacturer notice and mitigation for the installed version and affected dose-deformation workflow.",
-      "authority": "Medsafe (New Zealand)",
-      "sourceUrl": "https://www.medsafe.govt.nz/hot/Recalls/RecallDetail.asp?ID=37679"
+      "action": "Check the installed build against the notice. Review deformed dose before accumulation/evaluation, provide adequate grid margins and inform planning staff. The notice schedules a corrected release for December 2026, subject to market clearance; correction availability and local implementation are not verified.",
+      "authority": "RaySearch manufacturer notice published by Danish Medicines Agency; Medsafe listing",
+      "sourceUrl": "https://laegemiddelstyrelsen.dk/da/nyheder/senest-opdaterede-indhold/~/media/D5402C67A4AC4A6391E3A26BA667D72E.ashx"
     }
-  ]
+  ],
+  "verification_followup": {
+    "resolved": [
+      "DeepPlan DOI metadata verified on Crossref and publisher; added E1/L2 paper.",
+      "Zeverino 2023 full text retrieved; E1/L2 retained, vendorIndependent=false.",
+      "Netherton 2026 retrieved publisher methods establish internal test cohorts; paper corrected E2 to E1, product remains E2.",
+      "Original RayStation FSN 180167 verified: build-specific scope, interim precautions, planned December 2026 correction subject to clearance.",
+      "All ten revised product files pass isolated TypeScript checking."
+    ],
+    "remaining": [
+      "Commercial-model equivalence is not established for RatoGuide/RatoAI, iSeg/iSecare or custom MOZI dose prediction. Public lineage and custom model development are documented.",
+      "RayStation installed-build mitigation and actual corrective-release availability cannot be certified from public notice alone.",
+      "Global recall search is not exhaustive.",
+      "Full frontend build remains blocked by repository dependency/override setup; targeted TypeScript and runtime data validation pass.",
+      "Written/executable E/R rubric discrepancy remains for maintainer reconciliation."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1002/pro6.70078",
+      "https://onlinelibrary.wiley.com/doi/10.1002/pro6.70078",
+      "https://api.unil.ch/iris/server/api/core/bitstreams/180e5a50-ceb5-4234-86be-522071fd018e/content",
+      "https://ascopubs.org/doi/10.1200/GO-25-00702",
+      "https://laegemiddelstyrelsen.dk/da/nyheder/senest-opdaterede-indhold/~/media/D5402C67A4AC4A6391E3A26BA667D72E.ashx",
+      "https://airato.jp/yamanashi-airato-jacmp/",
+      "https://inqbationlab.northwestern.edu/news-events/news/2026-08-28_nxt-funding.html",
+      "https://qims.amegroups.org/article/view/145137/html"
+    ]
+  }
 }

@@ -47,6 +47,7 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
     },
     market: { onMarketSince: "2026", distributionChannels: ["Direct sales (Japan)"] },
     evidence: [
+      {"type": "Vendor explanation of research lineage (not scored)", "description": "AiRato states that research software RatoGuide contains RatoAI core technology. This supports a technical relationship, but does not identify identical released model weights or versions; commercial equivalence remains unverified.", "link": "https://airato.jp/yamanashi-airato-jacmp/"},
       {"type": "Supporting evidence (not scored)", "description": "RatoGuide research planning study, 12 plans in 11 head-and-neck patients; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1002/acm2.70715"},
       {"type": "Supporting evidence (not scored)", "description": "45-patient prostate RatoGuide/OncoStudio comparison; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1007/s12194-026-01080-8"},
       {"type": "Supporting evidence (not scored)", "description": "RatoGuide research segmentation evaluation, 69 patients; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1002/acm2.70757"},
