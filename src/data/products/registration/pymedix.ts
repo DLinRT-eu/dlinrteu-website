@@ -111,6 +111,6 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
     releaseDate: "2023-08-15",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
-    source: "FDA 510(k) database (K233572), company website. Version 2.1 retained from prior revision — vendor does not publicly publish a numeric version.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K233572; vendor website; peer-reviewed literature"
   }
 ];

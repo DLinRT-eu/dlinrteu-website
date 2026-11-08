@@ -102,7 +102,7 @@ export const WISDOM_TECH_PLANNING_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-05-31.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Derived from E0 + NMPA only: high implementation burden — vendor-only evidence; structured pilot, external validation, and human-factors testing recommended before clinical adoption.",
-    source: "Vendor official product page (http://www.wisdom-tech.online/view-15.html); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "Vendor website; peer-reviewed literature",
     limitations: [
       "Vendor advertises broad multi-particle support (photons, electrons, protons, heavy ions, neutrons); independent validation per particle modality is not published.",
       "Regulatory clearance outside China (CE, FDA) is not confirmed.",

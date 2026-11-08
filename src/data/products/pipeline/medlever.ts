@@ -33,7 +33,7 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-06",
-    source: "Company website - listed as 'Coming Soon' (re-checked 8 Nov 2026 after reviewer feedback: earlier description and feature text was not supported by any public source and was removed); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "Vendor website; peer-reviewed literature"
   },
   {
     id: "medlever-copilot-pipeline",
@@ -67,6 +67,6 @@ export const MEDLEVER_PIPELINE_PRODUCTS: ProductDetails[] = [
     },
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-06",
-    source: "Company website - listed as 'Coming Soon' (re-checked 8 Nov 2026 after reviewer feedback: earlier description and feature text was not supported by any public source and was removed); Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "Vendor website; peer-reviewed literature"
   }
 ];

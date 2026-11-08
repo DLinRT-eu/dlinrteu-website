@@ -107,7 +107,7 @@ export const PHILIPS_MRCAT_BRAIN_PRODUCTS: ProductDetails[] = [
     releaseDate: "2020-01-20",
     lastUpdated: "2026-10-30",
     lastRevised: "2026-08-27",
-    source: "Company website; first public announcement of MRCAT Brain (shown as work-in-progress) at ESTRO 2019, Milan: AuntMinnieEurope, 24 Apr 2019, https://www.auntminnieeurope.com/industry-news/product-news/article/15653406/philips-adds-to-radiation-oncology-portfolio-at-estro (publicly accessible, retrieved 2026-10-30); FDA 510(k) K193109 decision 24 Jan 2020; compatible MR systems as stated by Philips (Ingenia 1.5T/3.0T MR-RT, Ambition 1.5T MR-RT, Elition 3.0T MR-RT); Philips Ingenia MR-RT Instructions for Use, RTgo 5.12, 3000 113 93922/781 (2024-06), pp. 10–11, 63–68 (limitations and patient selection), retrieved 2026-06-15 from https://www.documents.philips.com/assets/Instruction%20for%20Use/20250625/aecaea1f0eb749a7babfb30700bf34b8.pdf?feed=ifu_docs_feed; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+    source: "FDA 510(k) K193109; vendor website; vendor IFU; press releases; peer-reviewed literature",
     clinicalEvidence: "Validated in clinical studies showing equivalent treatment planning accuracy compared to traditional CT-based planning",
     evidence: [
       {

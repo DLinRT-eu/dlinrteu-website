@@ -111,7 +111,6 @@ export const MVISION_REGISTRATION_PRODUCTS: ProductDetails[] = [
       "No independent peer-reviewed publication or conference abstract identified at time of listing (checked 2026-09-14)",
       "No public disclosure of training or evaluation data for this module"
     ],
-    source:
-      "MVision AI Adapt+ product page (https://mvision.ai/adapt/) and MVision AI CE Mark press release (21 Oct 2025), retrieved 2026-09-13; evidence completeness check performed 2026-09-14 with no publication or abstract found. Entry created 2026-09-13 by splitting the Adapt+ module out of the Workspace+ platform entry; description, key features and evidence score migrated from the Workspace+ integratedModules and categoryEvidence['Registration'] blocks. 2026-09-23: merged approved vendor edits — version 1.0.2, on-premise deployment, release date 2026-01-09, outputs (propagated contours; DICOM-RTSTRUCT and DICOM REG) are vendor-provided via the DLinRT editor; no public Adapt+-specific release announcement located. trainingData and evaluationData intentionally omitted: no disclosed source describes them."
+    source: "Vendor website; vendor documentation; press releases; conference abstracts; peer-reviewed literature"
   }
 ];

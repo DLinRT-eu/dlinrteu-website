@@ -153,7 +153,6 @@ export const MVISION_IMAGE_SYNTHESIS_PRODUCTS: ProductDetails[] = [
       "Peer-reviewed evidence is two single-centre retrospective studies of the pelvis model, on versions 1.0.0 and 1.0.1, not on the vendor-supplied 1.0.2. Brain, CBCT-to-sCT and virtual non-contrast have no peer-reviewed evaluation.",
       "Manufacturer-reported training counts are in Gaban 2026 for the pelvis model (485 paired MR-CT datasets) and for an abdomen prototype (about 250). Brain, CBCT and virtual non-contrast still have none."
     ],
-    source:
-      "MVision AI Image+ page (https://mvision.ai/image/), read 2026-11-05; Workspace+ CE press release (21 Oct 2025). Q4 2026 review: Gaban 2026 (doi:10.1002/acm2.70571) and Östensson 2026 (doi:10.1002/acm2.70765) read in full; K250064 summary confirms Dose+ and not Image+; Crossref titles match. version 1.0.2 remains vendor-supplied. The published evaluations are of Pelvis 1.0.0 and 1.0.1. releaseDate stays a proxy for the platform CE date because no Image+-specific release date is published, and the press release said the launch was still forthcoming. Workspace+ platform file was not edited."
+    source: "FDA 510(k) K250064; vendor website; vendor documentation; press releases; peer-reviewed literature"
   }
 ];

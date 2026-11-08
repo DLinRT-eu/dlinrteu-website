@@ -142,7 +142,6 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
       "CE-MDR status to be confirmed with vendor before clinical use in EU",
       "Only one peer-reviewed study (vendor collaboration, single centre) as of 2026-09-25"
     ],
-    source:
-      "FDA 510(k) database (K250064); MVision AI press release (2025-03-13); Dose+ product page. releaseDate proxied from FDA K250064 decision date (2025-09-04). 2026-09-23: version 1.0.3 vendor-provided (merged from the approved representative edits). 2026-09-06 standard-field consistency pass: FDA status value normalised to the site-wide '510k_cleared' convention."
+    source: "FDA 510(k) K250064; vendor website; press releases"
   }
 ];

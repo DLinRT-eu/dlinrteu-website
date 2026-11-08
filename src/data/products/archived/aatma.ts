@@ -55,6 +55,6 @@ export const AATMA_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "Limited public documentation available.",
     lastUpdated: "2026-02-26",
     lastRevised: "2026-02-26",
-    source: "FDA 510(k) database (K212218). Minimal entry — needs further research and verification."
+    source: "FDA 510(k) K212218"
   }
 ];

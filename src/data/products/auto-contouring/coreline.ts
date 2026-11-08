@@ -194,7 +194,7 @@ const rawProduct: ProductDetails = {
       link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
     }
   ],
-  source: "Company official sources, peer-reviewed publications; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "Vendor website; peer-reviewed literature",
 };
 
 // Apply all the standardization functions

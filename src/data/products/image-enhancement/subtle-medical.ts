@@ -165,7 +165,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025, Husain 2026)"
+    source: "FDA 510(k) K191688, K203182 et al.; peer-reviewed literature"
   },
   {
     id: "subtle-pet",
@@ -336,7 +336,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     supersededBy: "subtle-hd-pet",
     lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K182336, K211964); peer-reviewed literature (Chaudhari 2021, Weyts 2022/2023, Bonardel 2022, Katsari 2021, Margail 2023, Zhang-Yin 2025, Dambrain 2026, Ciborowski 2023). Superseded by next-generation SubtleHD(PET) cleared 2026-05-27."
+    source: "FDA 510(k) K182336, K211964; peer-reviewed literature"
   },
   {
     id: "subtle-hd-pet",
@@ -435,7 +435,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
     lastUpdated: "2026-08-27",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K254013); PRNewswire 2026-05-27."
+    source: "FDA 510(k) K254013; press releases"
   },
   {
     id: "subtle-aimify",
@@ -532,7 +532,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
-    source: "FDA 510(k) K240290 summary and openFDA (decision 2024-08-21, AiMIFY 1.x, product code LLZ, 21 CFR 892.2050); GUDID primary DI 00860000171298; Bracco MDR announcement 16 June 2025 and EU launch 2 March 2026; Gao 2026 (doi:10.3174/ajnr.A9591) and Yin 2026 (doi:10.21037/qims-2026-1-0383). Q4 2026 review, checked 2026-11-05. Other Subtle products in this file were not revised."
+    source: "FDA 510(k) K240290; press releases; peer-reviewed literature"
   },
   {
     id: "subtle-hd",
@@ -622,7 +622,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
     lastUpdated: "2026-10-15",
     lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K243250) and company website; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K243250; vendor website; peer-reviewed literature"
   },
   {
     id: "subtle-hd-ct",
@@ -712,6 +712,6 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
+    source: "FDA 510(k) K254120; press releases; peer-reviewed literature"
   }
 ];

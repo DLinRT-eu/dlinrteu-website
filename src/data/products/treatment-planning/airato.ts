@@ -73,6 +73,6 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
     releaseDate: "2026-06-24",
     lastUpdated: "2026-09-26",
     lastRevised: "2026-09-26",
-    source: "AiRato press release (https://airato.jp/en/ratoai-pressrelease/) and product page (https://airato.jp/en/product/), retrieved 2026-09-26; ASTRO 2026 exhibitor list (https://amportal.astro.org/exhibitors), retrieved 2026-09-26. Training data, evaluation data, integration and deployment are not publicly disclosed."
+    source: "Vendor website; press releases"
   }
 ];

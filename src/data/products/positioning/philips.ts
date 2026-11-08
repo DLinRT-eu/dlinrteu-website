@@ -99,7 +99,7 @@ export const PrecisePosition: ProductDetails = {
   clinicalEvidence: "Vendor white paper and FDA 510(k) K203514 summary only; no independent peer-reviewed clinical studies identified as of 2026-06-17.",
   lastUpdated: "2026-08-25",
   lastRevised: "2026-08-25",
-  source: "FDA 510(k) database (K203514); Philips 'AI-enabled solutions' page; Philips Precise Position white paper; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "FDA 510(k) K203514; vendor documentation; peer-reviewed literature",
   evidence: [
     {
       type: "Regulatory Clearance",

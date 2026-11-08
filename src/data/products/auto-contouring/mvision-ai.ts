@@ -13,7 +13,7 @@ export const Contour: ProductDetails = {
     productUrl: "https://dlinrt.eu/product/mvision-ai-workspace-plus",
     relationship: "Module"
   },
-  source: "FDA 510(k) database (K241490), TGA/Medsafe registries, company official sources. Structure library re-derived 2026-09-05 from the public vendor Structure Library at https://mvision.ai/contour/ (326 distinct names across 18 models, 685 model-specific entries); the previously catalogued list is archived under structureHistory. Citation hygiene 2026-06-15: removed duplicate HARMONY entry (same DOI as Pang 2025) and relabeled multi-vendor comparison papers. 2026-09-06 standard-field consistency pass: removed the unverifiable Ng et al. citation (DOI resolved to an unrelated article), added the Miura 2025 paper already scored in keyPapers, added features and limitations, and reconciled the impact/readiness notes with the stored E2/I2/R4 scores. 2026-09-06 count correction following vendor feedback: left/right structures are counted individually, giving 324 distinct structure names rather than the previously stated 223 bundled names. 2026-09-08 vendor correction: added BrTW_RTOG_L/R to the Breast CT model and classified the Br/BrTW RTOG breast volumes as CTV-type targets (326 distinct names, 685 entries); the dual-use whole-breast ROIs Breast_L/R and Breast_RTOG_L/R remain counted as organs at risk.",
+  source: "FDA 510(k) K241490; TGA; vendor website; vendor documentation; peer-reviewed literature",
   anatomy: [
     "Brain, head & neck, breast, abdomen & thorax, female pelvis, male pelvis, and bones"
   ],

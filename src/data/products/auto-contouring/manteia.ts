@@ -679,7 +679,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1016/j.radonc.2022.11.004", "title": "Patient-specific daily updated deep learning auto-segmentation for MRI-guided adaptive radiotherapy", "authors": "Li Z, Zhang W, Li B, et al.", "journal": "Radiother Oncol", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Six-patient longitudinal MRgART series with measured contouring and adaptive session times; Manteia co-authored.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
   ],
     lastRevised: "2026-09-29",
-    source: "FDA 510(k) database (K251351, K250780, K221706, K191928), Manteia official product page, peer-reviewed literature. 2026-09-23: manufacturer-supplied documentation added (vendor-provided, retrieved 2026-09-23) — 'AccuContour ROI full list' (411 model entries, 397 distinct TG-263 ROI names), 'MRI organs list' (88-ROI MRI model plus brain MRI target model), 'Technical Sheet: Contouring Guidelines in AccuContour' and a publication summary of 81 records. Intertek MDR Annex IX certificate 28620166008 and 2025-06-04 product list, manufacturer-supplied, received 2026-09-29.",
+    source: "FDA 510(k) K251351, K250780 et al.; vendor website; peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",
       "Reduced accuracy for post-surgical anatomy",

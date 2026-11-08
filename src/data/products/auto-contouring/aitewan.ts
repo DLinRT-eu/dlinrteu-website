@@ -108,6 +108,6 @@ export const AITEWAN_PRODUCTS: ProductDetails[] = [
     keyPapers: [],
     releaseDate: "2026-04-10",
     lastUpdated: "2026-09-22",
-    source: "FDA 510(k) summary and database record K252190 (https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252190.pdf), retrieved 2026-09-22. Deployment model, processing time, CE status and market details beyond the clearance date are not disclosed by any public source and are left as not disclosed."
+    source: "FDA 510(k) K252190"
   }
 ];

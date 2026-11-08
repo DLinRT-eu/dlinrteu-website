@@ -53,7 +53,7 @@ export const MediqRT: ProductDetails = {
     onMarketSince: "2021 (testing in 12+ Romanian clinics, EBRD-backed)",
     distributionChannels: ["Direct sales", "Hospital partnerships"]
   },
-  source: "Company website, internal clinical study (Jan 2024), PHIRO journal paper (2026), ESTRO 2023/2024/2025 conference abstracts, vendor communication at the Synaptiq booth at ESTRO 2026 (Stockholm, 15–19 May 2026) reporting CE clearance including the Active Contouring GTV delineation feature, and vendor-provided System Requirements documentation (2026-06-10). CE clearance details pending verification against EUDAMED listing or vendor press release.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "EUDAMED; vendor website; press releases; vendor-supplied information (non-public); conference abstracts; peer-reviewed literature",
   company: "Synaptiq",
   logoUrl: "/logos/synaptiq.png",
   version: "1.5",

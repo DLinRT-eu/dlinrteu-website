@@ -168,7 +168,7 @@ export const SPECTRONIC_PRODUCTS: ProductDetails[] = [
     releaseDate: "Not publicly verified",
     lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
-    source: "FDA 510(k) K211841 summary (decision 2022-08-25); EUDAMED Basic UDI-DI B-07350097430017, Class IIb, on the market, checked 2026-11-05; Spectronic vendor page; GE HealthCare 12 May 2026 release calling Spectronic a GE HealthCare company, with no close date added. Q4 2026 review: Bird 2024 removed; MR-PROTECT rescored E1; new papers Olsson 2024, Levardon 2024, af Wetterstedt 2026 and Coskun 2026. MR Contour DL is a GE product and is not this contour module.",
+    source: "FDA 510(k) K211841; EUDAMED; vendor website; vendor documentation",
     evidence: [
       {"type": "Peer-reviewed Publication", "description": "Høiskar MK et al. Dosimetric evaluation of magnetic resonance imaging based synthetic computed tomography for head and neck photon and proton therapy. J Appl Clin Med Phys 2025. Single-centre dosimetric evaluation of MRI Planner sCT for photon and proton H&N plans. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1002/acm2.70335"},
       {"type": "Multi-vendor Comparative Study", "description": "Autret D et al. Comparison of four synthetic CT generators for brain and prostate MR-only workflow in radiotherapy. Radiat Oncol 2023. Single-centre comparison of four commercial sCT generators; dosimetric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1186/s13014-023-02336-y"},

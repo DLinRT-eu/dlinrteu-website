@@ -112,6 +112,6 @@ export const MANTEIA_ARTASSISTANT_PRODUCTS: ProductDetails[] = [
       "The FDA summary does not report per-site numeric results.",
       "Local commissioning and validation are required before clinical use."
     ],
-    source: "Module of MOZI TPS: not listed as a separate product on the Manteia website; user-confirmed 2026-11-06, consistent with the ESTRO 2026 abstract naming the 'ART Assistant module of the Mozi TPS'. FDA 510(k) database and summary K250780 (retrieved 2026-11-06); ESTRO 2026 Abstract Book Part II p. 646 (retrieved 2026-11-06); Li et al. BMC Cancer 2023; Wang et al. Strahlenther Onkol 2023; Manteia Intertek MDR product list (manufacturer-supplied, received 2026-09-29)."
+    source: "FDA 510(k) K250780; vendor website; conference abstracts; peer-reviewed literature"
   }
 ];

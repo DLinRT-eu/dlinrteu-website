@@ -158,7 +158,7 @@ export const MIM_SOFTWARE_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1002/acm2.70748", "title": "Deep learning auto-contouring of target and organs-at-risk on post-catheter implant CT images for prostate HDR brachytherapy", "authors": "Wallat E et al.", "journal": "J Appl Clin Med Phys", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Single-centre geometric and dosimetric comparison of Contour ProtégéAI vs an in-house brachytherapy nnU-Net on 36 post-catheter CTs (off-label domain for ProtégéAI). Added 2026-10-30, pending reviewer check.", "vendorIndependent": true}
   ],
     lastRevised: "2026-09-23",
-    source: "FDA 510(k) database (K253270, cleared 2026-03-27). Company official sources confirm MIM Software is now part of GE Healthcare. CE-marked version 1.3.2 is under MDD Class IIa; FDA-cleared version 2.0.0 is K253270 (decision date 2026-03-27); version 2.0.1 is under MDR 2017/745 preparation. CBCT, CT and MR modalities supported; on-premises and cloud (CPU/GPU) deployment. Structure list updated 2026-08-28 from the vendor KB article Contour ProtegeAI+ 2.0.0 Models and Contours (last edited 2026-08-06); the previous catalogued list is archived under structureHistory as version 1.4.0. Two obvious KB spelling errors were normalised to the vendor DICOM-style naming (Gland_Lacrinal_L -> Glnd_Lacrimal_L, Gland_Submindibular_R -> Glnd_Submand_R). Multi-vendor comparison citations re-verified 2026-06-15 — all explicitly include MIM per Methods.",
+    source: "FDA 510(k) K253270; vendor website",
     structuresProvenance: {
       source: "MIM Software KB article: Contour ProtegeAI+ 2.0.0 Models and Contours (last edited 2026-08-06)",
       sourceAccess: "vendor-provided",

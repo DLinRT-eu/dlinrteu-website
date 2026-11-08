@@ -189,6 +189,6 @@ export const DIRECTORGANS_PRODUCTS: ProductDetails[] = [
     {"doi":"10.1186/s13014-024-02451-4","title":"Evaluation of multiple-vendor AI autocontouring solutions","authors":"Goddard L et al.","journal":"Radiat Oncol","year":"2024","evidenceRigor":"E2","clinicalImpact":"L2","rationale":"Added 2026-10-26 from reviewer suggestion; multi-facility evaluation of three commercial systems including DirectORGANS; geometric accuracy and blinded clinician acceptability, no time or outcome endpoints.","vendorIndependent":true,"multiCenter":true,"externalValidation":true}
   ],
     lastRevised: "2026-08-27",
-    source: "Siemens Healthineers official documentation, Çatlı Dinç et al. BMC Urol 2025 (doi:10.1186/s12894-025-01875-8), FDA 510(k) K233650, K250822"
+    source: "FDA 510(k) K233650, K250822; vendor website; peer-reviewed literature"
   }
 ];

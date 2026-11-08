@@ -7,7 +7,7 @@ export const DVTARGET: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) database (K202928), company official sources; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "FDA 510(k) K202928; vendor website; peer-reviewed literature",
   company: "Hura Imaging",
   logoUrl: "/logos/huraimaging.png",
   version: "2.5",

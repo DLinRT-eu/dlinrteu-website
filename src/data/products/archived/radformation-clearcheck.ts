@@ -81,6 +81,6 @@ export const RADFORMATION_CLEARCHECK_ARCHIVED: ProductDetails[] = [
     ],
     lastUpdated: "2026-03-08",
     lastRevised: "2026-03-08",
-    source: "Radformation official website, PubMed"
+    source: "Vendor website; peer-reviewed literature"
   }
 ];

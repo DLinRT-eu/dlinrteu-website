@@ -62,7 +62,7 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-01-27",
     lastRevised: "2026-01-27",
-    source: "FDA De Novo database (DEN220014), RefleXion official website",
+    source: "FDA De Novo DEN220014; vendor website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/reflexion.ts"
   },
   {
@@ -117,7 +117,7 @@ export const REFLEXION_PRODUCTS: ProductDetails[] = [
     ],
     lastUpdated: "2026-01-27",
     lastRevised: "2026-01-27",
-    source: "RefleXion press release (Jan 8, 2026)",
+    source: "Press releases",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/tracking/reflexion.ts"
   }
 ];

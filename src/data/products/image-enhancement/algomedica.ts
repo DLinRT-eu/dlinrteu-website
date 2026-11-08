@@ -121,6 +121,6 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-06-14",
     lastRevised: "2026-06-14",
-    source: "FDA 510(k) database and company provided information"
+    source: "FDA database; vendor-supplied information (non-public)"
   }
 ];

@@ -222,6 +222,6 @@ export const VARIAN_ETHOS_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1016/j.tipsro.2023.100216", "title": "Investigating the feasibility of using Ethos generated treatment plans for head and neck cancer patients", "authors": "El-qmache A et al.", "journal": "Technical Innovations &amp; Patient Support in Radiation Oncology", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I2", "rationale": "Single-centre feasibility study of Ethos-generated head-and-neck plans built on AI segmentation, reporting plan quality.", "vendorIndependent": true}
   ],
     lastRevised: "2026-09-23",
-    source: "FDA 510(k) K232923 summary, Varian official website, published literature (incl. Finnegan et al. JACMP 2025 doi:10.1002/acm2.70067), Ethos 2.0 Feb 2026 announcement; supportedStructures derived from Finnegan 2025 Figure 1 / Table S1 and marked (unverified) pending company confirmation; releaseDate proxied from FDA decision date."
+    source: "FDA 510(k) K232923; vendor website; press releases; peer-reviewed literature"
   }
 ];

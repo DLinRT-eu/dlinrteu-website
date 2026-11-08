@@ -72,7 +72,7 @@ export const MEDLEVER_PLATFORM_ARCHIVED: ProductDetails[] = [
     lastUpdated: "2026-02-23",
     lastRevised: "2026-03-08",
     companyRevisionDate: "2025-11-02",
-    source: "Company provided information. Regulatory classification based on FDA 2022 MDDS guidance.",
+    source: "Vendor-supplied information (non-public)",
     clinicalEvidence: "Non-Device-MDDS workflow management platform for radiation oncology. Platform designed to unify clinical and financial pathways, coordinate simulation, planning, treatment, and QA across all roles and modalities while ensuring data integrity and workflow alignment."
   }
 ];

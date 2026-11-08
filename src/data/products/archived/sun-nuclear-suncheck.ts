@@ -74,6 +74,6 @@ export const SUN_NUCLEAR_SUNCHECK_ARCHIVED: ProductDetails[] = [
     evidenceExternalValidation: false,
     lastUpdated: "2026-02-23",
     lastRevised: "2026-02-23",
-    source: "Sun Nuclear official website"
+    source: "Vendor website"
   }
 ];

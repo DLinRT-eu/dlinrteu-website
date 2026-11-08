@@ -120,7 +120,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
   adoptionReadinessNotes: "E0 with CE and FDA: limited independent evidence; local commissioning on own Unity data recommended.",
   lastUpdated: "2026-10-30",
   lastRevised: "2026-10-30",
-  source: TRM + "; FDA 510(k) K252002 summary (public)"
+  source: "Vendor technical reference manual (non-public); FDA 510(k) K252002"
 };
 
 export const ELEKTA_MONACO_PRODUCTS: ProductDetails[] = [ELEKTA_MONACO_SEGMENTATION];

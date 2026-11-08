@@ -140,7 +140,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-08",
-    source: "FDA 510(k) database, peer-review publications"
+    source: "FDA database; peer-reviewed literature"
   },
   {
     id: "ge-air-recon-dl-enhancement",
@@ -151,7 +151,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     trainingData: {
         disclosureLevel: "minimal",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf19/K193282.pdf",
-        source: "FDA 510(k) database and company website"
+        source: "FDA database; vendor website"
     },
     evaluationData: {
         studyDesign: "Software V&V (FDA 510(k)) plus independent retrospective clinical evaluations",
@@ -229,7 +229,7 @@ export const GE_PRODUCTS: ProductDetails[] = [
     clinicalEvidence: "Three FDA clearances (K193282, K213717, K252379) and independent peer-reviewed studies on liver MRI (Zerunian Radiol Med 2022) and brain volumetrics (Hu Psychoradiology 2025).",
     lastUpdated: "2026-10-15",
     lastRevised: "2026-06-16",
-    source: "FDA 510(k) database and company website; peer-reviewed literature (Zerunian Radiol Med 2022, Hu Psychoradiology 2025 — verified via Crossref 2026-06-16)",
+    source: "FDA database; vendor website; peer-reviewed literature",
     evidence: [
       {
         type: "Peer-reviewed Publication",

@@ -7,7 +7,7 @@ export const DeepContour: ProductDetails = {
     onMarketSince: "2024",
     distributionChannels: ["Direct sales (China)"]
   },
-  source: "Company official sources - NMPA (China) certified, FDA 510(k) K232928; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)",
+  source: "FDA 510(k) K232928; NMPA; vendor website; peer-reviewed literature",
   company: "Wisdom Tech",
   logoUrl: "/logos/wisdom-tech.png",
   version: "2.0",
