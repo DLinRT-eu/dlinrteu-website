@@ -117,7 +117,7 @@ serve(async (req) => {
     // Daily cap on invitations created by admins (server-side bound on outbound mail)
     {
       const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-      const { count } = await adminClient
+      const { count } = await supabaseAdmin
         .from('company_invitations')
         .select('id', { count: 'exact', head: true })
         .gte('updated_at', since);
