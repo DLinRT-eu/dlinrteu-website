@@ -10,7 +10,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       {"doi":"10.1186/s41747-024-00470-0","title":"Deep learning reconstruction for lumbar spine MRI acceleration","authors":"Tang X et al.","journal":"Eur Radiol Exp","year":"2024","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Prospective single-centre study with disclosed vendor co-authorship.","prospective":true},
       {"doi":"10.1016/j.canrad.2023.11.004","title":"Artificial intelligence solution to accelerate the acquisition of MRI images: impact on therapeutic care in radiology and radiotherapy departments","authors":"Lemaire C et al.","journal":"Cancer Radiother","year":"2024","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent prospective evaluation including radiotherapy use, reporting workflow impact.","vendorIndependent":true,"prospective":true,"externalValidation":true},
       {"doi":"10.1148/ryai.230181","title":"Impact of deep learning image reconstruction methods on MRI throughput","authors":"Yang J et al.","journal":"Radiol Artif Intell","year":"2024","evidenceRigor":"E2","clinicalImpact":"L3", "legacyClinicalImpact": "I2","rationale":"Vendor-independent retrospective analysis of 7,346 examinations across 10 scanners showing throughput gains.","vendorIndependent":true,"multiCenter":true},
-      {"doi":"10.1007/s00330-025-11423-5","title":"The scientific evidence of commercial AI products for MRI acceleration: systematic review","authors":"Fransen SJ et al.","journal":"Eur Radiol","year":"2025","rationale":"Indirect-comparative multi-product review; unscored."}
+      {"doi":"10.1007/s00330-025-11423-5","title":"The scientific evidence of commercial AI products for MRI acceleration: systematic review","authors":"Fransen SJ et al.","journal":"Eur Radiol","year":"2025","rationale":"Indirect-comparative multi-product review; unscored."},
+      {"doi":"10.3390/diagnostics16182957","title":"Comparison of Deep-Learning-Based Reconstruction of Knee MRI with Conventional Sequences in Patients with Knee Pain","authors":"Husain R et al.","journal":"Diagnostics","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-08 from Usman Lula's revision; DOI verified; scored from the abstract, pending reviewer check. Prospective single-centre 1.5T study (43 of 50 patients analysed) naming SubtleMR; no difference in overall diagnosis, image quality or artefacts at about half the acquisition time; one Subtle Medical co-author.","prospective":true}
     ],
     trainingData: {
         disclosureLevel: "minimal",
@@ -32,23 +33,24 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "AI-powered solution for enhancing MRI images, allowing for faster scan times while maintaining or improving image quality through noise reduction and resolution enhancement.",
     features: ["Deep learning enhancement", "MRI specific", "Scan time reduction", "Noise reduction"],
-    certification: "FDA Cleared",
+    certification: "CE & FDA",
     logoUrl: "/logos/SubtleMedical.jpg",
     companyUrl: "https://subtlemedical.com/",
     productUrl: "https://subtlemedical.com/subtle-mr/",
     anatomicalLocation: ["Brain", "Body"],
+    anatomy: ["Head", "Spine", "Neck", "Abdomen", "Pelvis", "Prostate", "Breast", "MSK"],
     modality: ["MRI"],
     diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Cancer"],
     releaseDate: "2019-09-16",
     version: "2.3.x",
     keyFeatures: [
       "Deep learning MRI enhancement",
-      "Enables up to 80% faster scanning",
       "Improves SNR and image sharpness",
       "Works with multiple contrasts",
       "Vendor-neutral compatibility",
       "Supports all body parts MRI",
-      "Integration with Siemens MAGNETOM scanners via Open Recon"
+      "Integration with Siemens MAGNETOM scanners via Open Recon",
+      "Enables up to 60% faster scanning"
     ],
     technicalSpecifications: {
       population: "Adult and pediatric",
@@ -87,7 +89,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         productCode: "LLZ",
         decisionDate: "2023-05-11"
       },
-      intendedUseStatement: "SubtleMR is an image processing software that can be used for image enhancement of MRI images. It can be used for noise reduction and increasing image sharpness."
+      intendedUseStatement: "SubtleMR is an image processing software that can be used for image enhancement in MRI images. It can be used to reduce image noise for head, spine, neck, abdomen, pelvis, prostate, breast, and musculoskeletal MRI, or increase image sharpness for head MRI. (Source: FDA 510(k) K223623 Indications for Use)"
     },
     market: {
       onMarketSince: "2019",
@@ -147,6 +149,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         type: "Systematic Review (indirect-comparative)",
         description: "Fransen et al. (2025). The scientific evidence of commercial AI products for MRI acceleration: systematic review. Eur Radiol 35:4736-4746. Names SubtleMR among 14 products reviewed.",
         link: "https://doi.org/10.1007/s00330-025-11423-5"
+      },
+      {
+        type: "Peer-reviewed Publication",
+        description: "Husain et al. (2026). Comparison of Deep-Learning-Based Reconstruction of Knee MRI with Conventional Sequences in Patients with Knee Pain. Diagnostics 16:2957. Prospective, single-centre (Mount Sinai), 1.5T, 43 of 50 patients analysed; one Subtle Medical co-author.",
+        link: "https://doi.org/10.3390/diagnostics16182957"
       }
     ],
     limitations: [
@@ -156,9 +163,9 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       "Cloud-based deployment option processes images off-site on manufacturer servers, which may have data-governance implications for some institutions",
     ],
     clinicalEvidence: "Five prospective multireader trials (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024; US, China, France) plus one large independent retrospective real-world study (Yang 2024, Mount Sinai) and an indirect-comparative systematic review (Fransen 2025).",
-    lastUpdated: "2026-08-27",
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025)"
+    lastUpdated: "2026-11-08",
+    lastRevised: "2026-11-08",
+    source: "FDA 510(k) database (K191688, K203182, K223623); peer-reviewed literature (Bash 2021/2022, Rudie 2022, Tang 2024, Lemaire 2024, Yang 2024, Fransen 2025, Husain 2026)"
   },
   {
     id: "subtle-pet",
@@ -410,8 +417,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     legacyClinicalImpact: "I0",
     evidenceRigorNotes: "FDA 510(k) K254013 cleared 2026-05-14 (announced 2026-05-27). No independent peer-reviewed publications yet.",
     clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
-    adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadiness: "R1",
+    adoptionReadinessNotes: "R1 (lowered from R2 on 2026-11-08): newly cleared, with no published commissioning or deployment experience. Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
     evidence: [
       {
@@ -641,12 +648,16 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     certification: "FDA Cleared",
     logoUrl: "/logos/SubtleMedical.jpg",
     companyUrl: "https://subtlemedical.com/",
-    productUrl: "https://subtlemedical.com/",
+    productUrl: "https://subtlemedical.com/subtlehdct/",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     diseaseTargeted: ["General diagnostic imaging", "Oncology"],
     releaseDate: "2026-06-10",
-    version: "1.0",
+    version: "1.x",
+    compatibleSystems: [
+      "Vendor-neutral (validation data from Canon, GE, Hitachi, Philips and Siemens scanners, per K254120)",
+      "Primary reconstructed FBP images only; performance with iterative or deep learning reconstructions is unknown (per K254120)"
+    ],
     keyFeatures: [
       "Deep learning CT image enhancement",
       "Noise reduction across CT scanner generations",
@@ -663,8 +674,8 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["PACS", "Scanner workstations"],
-      deployment: ["Cloud-based", "On-premise"],
+      integration: ["PACS", "Scanner workstations", "DICOM node / PACS (background service, no user interface)"],
+      deployment: ["Cloud-based", "On-premise", "On-premise virtual machine (Docker, GPU)"],
       triggerForAnalysis: "Automated workflow",
       processingTime: "<60 seconds per study"
     },
@@ -681,9 +692,9 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K254120",
         regulationNumber: "21 CFR 892.2050",
         productCode: "QIH",
-        decisionDate: "2026-05"
+        decisionDate: "2026-05-15"
       },
-      intendedUseStatement: "SubtleHD(CT) is an AI-powered image processing software intended for image enhancement of CT images. It can be used for noise reduction and to improve low-contrast detectability across a range of CT scanner generations."
+      intendedUseStatement: "SubtleHD-CT is an AI/ML software intended for the processing and enhancement of CT images regardless of the manufacturer or model of CT scanner. (Source: FDA 510(k) K254120 Indications for Use)"
     },
     market: {
       onMarketSince: "2026",
@@ -695,9 +706,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     clinicalImpactNotes: "Manufacturer-reported improvements in noise reduction and low-contrast detectability. No independently demonstrated clinical impact yet.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    limitations: [
+      "For radiotherapy: CT number accuracy (within ±5 HU of the FBP input) was shown only in phantoms; not validated for planning CT or dose calculation"
+    ],
     clinicalEvidence: "FDA 510(k) clearance based on validation studies; independent literature pending.",
-    lastUpdated: "2026-08-27",
-    lastRevised: "2026-08-27",
+    lastUpdated: "2026-11-08",
+    lastRevised: "2026-11-08",
     source: "Subtle Medical press release 2026-06-10; PRNewswire 2026-06-10; AuntMinnie 2026-06-11; FDA 510(k) database K254120.; Wave 5 literature-expansion sweep 2026-08-25 (Europe PMC 2014-2026, alias-gated, DOIs verified against Crossref)"
   }
 ];
