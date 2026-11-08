@@ -289,7 +289,7 @@ serve(async (req) => {
 
       const resend = new Resend(RESEND_API_KEY);
       const { error: sendError } = await resend.emails.send({
-        from: 'DLinRT.eu <noreply@dlinrt.eu>',
+        from: 'DLinRT.eu <info@dlinrt.eu>',
         reply_to: "info@dlinrt.eu",
         to: [normalizedEmail],
         subject: `Set your password for DLinRT.eu (${companyName} representative)`,
@@ -424,7 +424,7 @@ serve(async (req) => {
 
     const resend = new Resend(RESEND_API_KEY);
     const { error: sendError } = await resend.emails.send({
-      from: 'DLinRT.eu <noreply@dlinrt.eu>',
+      from: 'DLinRT.eu <info@dlinrt.eu>',
       reply_to: "info@dlinrt.eu",
       to: [normalizedEmail],
       subject: `You're invited to manage ${companyName} on DLinRT.eu`,

@@ -203,7 +203,7 @@ const handler = async (req: Request): Promise<Response> => {
     const typeLabel = submission_type === "missing_product" ? "Missing Product" : "Missing/Incorrect Info";
     try {
       await resend.emails.send({
-        from: "DLinRT.eu Product Feedback <noreply@dlinrt.eu>",
+        from: "DLinRT.eu Product Feedback <info@dlinrt.eu>",
         to: getAdminNotificationEmails(),
         reply_to: submitter_email,
         subject: `Product Feedback: ${escapeHtml(typeLabel)} — ${escapeHtml(product_name)}`,

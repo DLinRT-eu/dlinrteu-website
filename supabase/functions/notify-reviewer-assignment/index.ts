@@ -169,7 +169,7 @@ const handler = async (req: Request): Promise<Response> => {
     const safeLast = escapeHtml(profile.last_name);
 
     const emailResponse = await resend.emails.send({
-      from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
+      from: "DLinRT.eu Review System <info@dlinrt.eu>",
       reply_to: "info@dlinrt.eu",
       to: [profile.email],
       subject: `New Review Assignment: ${String(roundName ?? "").slice(0, 200)}`,

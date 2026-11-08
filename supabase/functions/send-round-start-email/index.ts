@@ -134,7 +134,7 @@ const handler = async (req: Request): Promise<Response> => {
       }
       try {
         const res = await resend.emails.send({
-          from: "DLinRT.eu Review System <noreply@dlinrt.eu>",
+          from: "DLinRT.eu Review System <info@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [r.email],
           subject,

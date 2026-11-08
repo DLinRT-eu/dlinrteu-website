@@ -158,7 +158,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (userEmailEnabled) {
       try {
         await resend.emails.send({
-          from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
+          from: "DLinRT.eu Certification <info@dlinrt.eu>",
           reply_to: "info@dlinrt.eu",
           to: [profile.email],
           subject: `Product Certification Confirmed: ${productName}`,
@@ -235,7 +235,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification to admin
     try {
       await resend.emails.send({
-        from: "DLinRT.eu Certification <noreply@dlinrt.eu>",
+        from: "DLinRT.eu Certification <info@dlinrt.eu>",
         reply_to: "info@dlinrt.eu",
         to: getAdminNotificationEmails(),
         subject: `New Product Certification: ${productName} (${companyName})`,
