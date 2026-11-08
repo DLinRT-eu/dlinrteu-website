@@ -18,7 +18,7 @@ function application(base: ProductDetails, id: string, name: string): ProductDet
     productUrl: SOURCE_URL, website: SOURCE_URL,
     githubUrl: 'https://github.com/DLinRT-eu/dlinrteu-website/blob/main/src/data/products/therapanaceaApplications.ts',
     partOf: { name: 'ART-Plan', version: '3.2.1', relationship: 'Application', productUrl: SOURCE_URL },
-    source: `Current application naming: ${SOURCE_URL} (retrieved ${RETRIEVED_ON}); Legal device ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724: ${TECHNICAL_URL} (retrieved ${RETRIEVED_ON}); ${base.source ?? ''}`,
+    source: "Vendor website; vendor technical information; FDA 510(k)",
     regulatory: {
       ...base.regulatory,
       intendedUseStatement: `${base.regulatory?.intendedUseStatement ?? ''} Current technical information identifies the legal device as ART-Plan+ v3.2.1; the public commercial presentation is ART-Plan. FDA K253091 concerns ART-Plan+ v3.1.0, not a separate clearance for v3.2.1. Source: ${TECHNICAL_URL}, retrieved ${RETRIEVED_ON}.`,
