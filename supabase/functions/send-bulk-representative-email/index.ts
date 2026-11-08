@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
-import { dailySendCount, isSuppressed, logEmailSend } from "../_shared/email-delivery.ts";
+import { dailySendCount, isSuppressed, wouldExceedDailyCap, logEmailSend } from "../_shared/email-delivery.ts";
 const DAILY_SEND_CAP = 1000;
 
 const ALLOWED_ORIGINS = [
@@ -184,12 +184,6 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    if ((await dailySendCount(admin, "send-bulk-representative-email")) >= DAILY_SEND_CAP) {
-      return new Response(JSON.stringify({ error: "Daily sending limit reached. Please try again tomorrow." }), {
-        status: 429, headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
-    }
-
     const companyNameById = new Map<string, string>();
     (companies || []).forEach((c) => companyNameById.set(c.id, c.name));
 
@@ -229,6 +223,13 @@ const handler = async (req: Request): Promise<Response> => {
     const sendList: Array<{ rep: any; toEmail: string }> = testEmail
       ? [{ rep: targets[0], toEmail: userData.user.email as string }]
       : targets.map((rep: any) => ({ rep, toEmail: rep.profiles?.email })).filter((x) => !!x.toEmail);
+
+    const sentToday = await dailySendCount(admin, "send-bulk-representative-email");
+    if (wouldExceedDailyCap(sentToday, sendList.length, DAILY_SEND_CAP)) {
+      return new Response(JSON.stringify({ error: "Daily sending limit reached. Please try again tomorrow." }), {
+        status: 429, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     let successCount = 0;
     let failureCount = 0;
