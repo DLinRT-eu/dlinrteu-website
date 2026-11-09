@@ -14,7 +14,7 @@
  * Usage:
  *   bun scripts/verify-eudamed.ts [--company="Elekta"] [--delay=500] [--dry-run]
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { ALL_PRODUCTS } from "../src/data";
 import { COMPANIES } from "../src/data/companies";
@@ -26,6 +26,7 @@ import {
   type DatalakeUdiRecord,
   type UdiMatch,
 } from "../src/utils/eudamedMatch";
+import { diffRegistry, mergeRegistry, type RegistryMap } from "../src/utils/eudamedRefresh";
 
 const API = "https://api.datalake.sante.service.ec.europa.eu/eudamed";
 const API_VERSION = "v1.0";
@@ -197,6 +198,8 @@ interface VerifiedEntry {
 
 async function main() {
   const verified: Record<string, VerifiedEntry[]> = {};
+  const refreshedIds = new Set<string>();
+  const skipped: string[] = [];
   const report: string[] = [
     `# EUDAMED Data Lake verification — ${TODAY}`,
     "",
@@ -212,20 +215,31 @@ async function main() {
     try {
       actors = await resolveSrns(company);
     } catch (e) {
-      report.push(`## ${company.name}\n- Actor lookup failed: ${(e as Error).message}\n`);
+      report.push(`## ${company.name}\n- Actor lookup failed: ${(e as Error).message}; previous records kept\n`);
+      skipped.push(company.name);
       continue;
     }
     report.push(`## ${company.name}`);
     if (actors.length === 0) {
       report.push("- No manufacturer SRN found by exact legal name.\n");
+      for (const p of ALL_PRODUCTS) if (p.id && company.productIds.includes(p.id)) refreshedIds.add(p.id);
       continue;
     }
     report.push(`- SRN: ${actors.map((a) => `${a.ACTOR_ID} (${a.NAME ?? "?"})`).join("; ")}`);
 
     const products = ALL_PRODUCTS.filter((p) => company.productIds.includes(p.id ?? ""));
+    const companyVerified: Record<string, VerifiedEntry[]> = {};
+    let failed = false;
     for (const actor of actors) {
       const udiUrl = buildUrl("udi", { MF_SRN: actor.ACTOR_ID! });
-      const records = await getAll<DatalakeUdiRecord>(udiUrl);
+      let records: DatalakeUdiRecord[];
+      try {
+        records = await getAll<DatalakeUdiRecord>(udiUrl);
+      } catch (e) {
+        report.push(`- ${actor.ACTOR_ID}: UDI lookup failed (${(e as Error).message}); previous records kept`);
+        failed = true;
+        break;
+      }
       report.push(`- ${actor.ACTOR_ID}: ${records.length} UDI-DI records`);
       for (const product of products) {
         const matches: UdiMatch[] = matchUdiRecords(productNames(product), records);
@@ -248,7 +262,7 @@ async function main() {
             (c) => c.productId === product.id && c.basicUdi === m.record.BASIC_UDI
           );
           if ((m.matchType !== "exact" && !confirmed) || !product.id) continue;
-          const list = (verified[product.id] ??= []);
+          const list = (companyVerified[product.id] ??= []);
           if (list.some((v) => v.basicUdi === m.record.BASIC_UDI)) continue;
           list.push({
             basicUdi: m.record.BASIC_UDI!,
@@ -263,17 +277,35 @@ async function main() {
         }
       }
     }
+    if (failed) {
+      skipped.push(company.name);
+    } else {
+      for (const p of products) if (p.id) refreshedIds.add(p.id);
+      Object.assign(verified, companyVerified);
+    }
     report.push("");
-    console.log(`${company.name}: ${actors.length} SRN(s)`);
+    console.log(`${company.name}: ${actors.length} SRN(s)${failed ? " — skipped, previous kept" : ""}`);
   }
 
   for (const association of CONFIRMED_REGISTRATIONS) {
     const product = ALL_PRODUCTS.find((p) => p.id === association.productId);
     if (!product || (onlyCompany && !product.company.toLowerCase().includes(onlyCompany))) continue;
     const sourceUrl = buildUrl("udi", { BASIC_UDI: association.basicUdi });
-    const records = await getAll<DatalakeUdiRecord>(sourceUrl);
+    let records: DatalakeUdiRecord[] = [];
+    try {
+      records = await getAll<DatalakeUdiRecord>(sourceUrl);
+    } catch {
+      /* handled below */
+    }
     const record = records.find((r) => r.BASIC_UDI === association.basicUdi && r.MF_SRN === association.manufacturerSrn);
-    if (!record) throw new Error(`Confirmed registration unavailable: ${association.productId}`);
+    if (!record) {
+      refreshedIds.delete(association.productId);
+      delete verified[association.productId];
+      skipped.push(`${product.name} (confirmed registration unavailable)`);
+      report.push(`- [editor-confirmed] ${product.name}: registry record unavailable; previous record kept`);
+      continue;
+    }
+    refreshedIds.add(association.productId);
     verified[association.productId] = [{
       basicUdi: association.basicUdi,
       primaryDi: record.PRIMARY_DI ?? undefined,
@@ -288,16 +320,30 @@ async function main() {
     report.push(`- [editor-confirmed] ${product.name} ↔ "${record.TRADE_NAME ?? record.DEVICE_NAME}" · Basic UDI-DI ${association.basicUdi}. ${association.registrationNote}`);
   }
 
-  const total = Object.keys(verified).length;
+  const previous: RegistryMap = existsSync(OUT_JSON)
+    ? (JSON.parse(readFileSync(OUT_JSON, "utf8")).products ?? {})
+    : {};
+  const next = mergeRegistry(previous, verified as RegistryMap, refreshedIds);
+  const changes = diffRegistry(previous, next);
+  const changeLines = changes.length
+    ? changes.map((c) => `- [${c.kind}] ${c.productId}: ${c.detail}`)
+    : ["- No changes to product registry details."];
+  report.push("## Changes to product pages", "", ...changeLines, "");
+  if (skipped.length) report.push("## Skipped (previous records kept)", "", ...skipped.map((s) => `- ${s}`), "");
+  const total = Object.keys(next).length;
   report.splice(5, 0, `**Products with an exact EUDAMED match: ${total}**`, "");
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}.md`), report.join("\n"));
   writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}.csv`), csv.join("\n"));
-  if (!dryRun && !onlyCompany) {
+  console.log(["Changes:", ...changeLines].join("\n"));
+  if (skipped.length) console.log(`Skipped (previous kept): ${skipped.join(", ")}`);
+  if (!dryRun) {
     mkdirSync(resolve("src/data/eudamed"), { recursive: true });
-    writeFileSync(OUT_JSON, JSON.stringify({ generatedOn: TODAY, products: verified }, null, 2) + "\n");
+    writeFileSync(OUT_JSON, JSON.stringify({ generatedOn: TODAY, products: next }, null, 2) + "\n");
+  } else {
+    console.log("Dry run: product pages not updated.");
   }
-  console.log(`Exact matches: ${total} products. Report in ${OUT_DIR}`);
+  console.log(`Products with registry details: ${total}. Report in ${OUT_DIR}`);
 }
 
 main().catch((e) => {

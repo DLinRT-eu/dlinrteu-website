@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "validate:evidence": "bun scripts/validate-evidence-scores.ts",
     "evidence:coverage": "bun scripts/evidence-coverage.ts",
+    "eudamed:refresh": "bun scripts/verify-eudamed.ts",
     "audit:eudamed": "bun scripts/eudamed-audit.ts",
     "audit:eudamed:discovery": "bun scripts/eudamed-discovery.ts",
     "preview": "vite preview"
