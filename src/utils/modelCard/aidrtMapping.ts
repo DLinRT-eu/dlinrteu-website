@@ -33,6 +33,13 @@ export const fieldMappings: FieldMapping[] = [
   { dlinrtPath: "regulatory.ce",  aidrtPath: "model_basic_information.clearance_type",                 matchType: "combined", notes: "DLinRT stores CE/FDA/TGA separately; AID-RT combines" },
   { dlinrtPath: "regulatory.fda", aidrtPath: "model_basic_information.clearance_type",                 matchType: "combined" },
   { dlinrtPath: "regulatory.intendedUseStatement", aidrtPath: "model_basic_information.clearance_additional_information", matchType: "approximate" },
+  // DLinRT extension: EUDAMED fields have no native AID-RT slot
+  { dlinrtPath: "eudamed.basicUdi",   aidrtPath: "model_basic_information.eudamed_basic_udi_di", matchType: "exact", notes: "DLinRT extension" },
+  { dlinrtPath: "eudamed.primaryDi",  aidrtPath: "model_basic_information.eudamed_udi_di",       matchType: "exact", notes: "DLinRT extension" },
+  { dlinrtPath: "eudamed.emdnCode",   aidrtPath: "model_basic_information.eudamed_emdn_code",    matchType: "exact", notes: "DLinRT extension; EMDN device-type code" },
+  { dlinrtPath: "eudamed.registeredTradeName", aidrtPath: "model_basic_information.eudamed_registered_trade_name", matchType: "exact", notes: "DLinRT extension" },
+  { dlinrtPath: "eudamed.manufacturerSrn", aidrtPath: "model_basic_information.eudamed_manufacturer", matchType: "combined", notes: "DLinRT extension; name + SRN" },
+  { dlinrtPath: "eudamed.registrationNote", aidrtPath: "model_basic_information.eudamed_registration_note", matchType: "exact", notes: "DLinRT extension" },
 
   // ── Technical specifications ──────────────────────────────────────
   { dlinrtPath: "technicalSpecifications.input",       aidrtPath: "technical_specifications.model_inputs",                    matchType: "exact" },

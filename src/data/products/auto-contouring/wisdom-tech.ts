@@ -10,7 +10,7 @@ export const DeepContour: ProductDetails = {
   source: "FDA 510(k) K232928; NMPA; vendor website; peer-reviewed literature",
   company: "Wisdom Tech",
   logoUrl: "/logos/wisdom-tech.png",
-  version: "2.0",
+  version: "V1.0 (FDA-cleared configuration; current commercial version requires confirmation)",
   website: "http://www.wisdom-tech.online/view-16.html",
   category: "Auto-Contouring",
   modality: ["CT"],
@@ -36,12 +36,19 @@ export const DeepContour: ProductDetails = {
   technology: {
     deployment: ["On-premises", "Cloud"],
     integration: ["TPS integration", "PACS integration"],
-    processingTime: "Minutes per case",
+    processingTime: "Vendor-reported: <30 seconds per anatomical site and <5 seconds per organ",
     triggerForAnalysis: "Manual or automated"
   },
   description: "AI solution for automatic contour segmentation in radiation therapy planning.",
-  keyFeatures: ["AI-powered segmentation", "Fast processing", "Clinical workflow integration"],
-  lastRevised: "2026-08-25",
+  keyFeatures: [
+    "AI-powered segmentation",
+    "Fast processing",
+    "Clinical workflow integration",
+    "Multimodal image registration and fusion (vendor-reported)",
+    "130 OARs and 17 targets (vendor-reported; clearance coverage requires confirmation)",
+    "Auto-learning platform and unattended automation service (vendor-reported)"
+  ],
+  lastRevised: "2026-11-09",
   lastUpdated: "2026-08-25",
   limitations: [
     "Vendor advertises 120+ OARs and 16+ tumor targets including brachytherapy applicators; only structures publicly documented and covered by FDA 510(k) K232928 are enumerated here. The full atlas (including tumor targets) is not published on the vendor website."

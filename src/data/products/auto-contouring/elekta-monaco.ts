@@ -78,7 +78,7 @@ export const ELEKTA_MONACO_SEGMENTATION: ProductDetails = {
       status: "cleared",
       type: "Medical Device",
       regulation: "MDR (EU 2017/745)",
-      notes: "CE status per Elekta. Not found in EUDAMED under any Elekta manufacturer (searched 2026-10-30)."
+      notes: "CE status per Elekta. Parent platform registered in EUDAMED as 'Monaco RTP System' (Elekta Solutions AB, searched 2026-11-09); the segmentation component is not separately named."
     },
     fda: {
       status: "510k_cleared",
