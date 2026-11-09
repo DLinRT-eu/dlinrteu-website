@@ -190,7 +190,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (existingSubscriber) {
       if (!existingSubscriber.unsubscribed_at) {
         return new Response(
-          JSON.stringify({ success: true, message: "Successfully subscribed to newsletter" }),
+          JSON.stringify({ success: true, message: "Thank you. If this address can be subscribed, you will receive a confirmation email shortly." }),
           { 
             status: 200, 
             headers: { "Content-Type": "application/json", ...corsHeaders } 
@@ -248,7 +248,7 @@ const handler = async (req: Request): Promise<Response> => {
         }
 
         return new Response(
-          JSON.stringify({ success: true, message: "Please check your inbox to confirm your subscription" }),
+          JSON.stringify({ success: true, message: "Thank you. If this address can be subscribed, you will receive a confirmation email shortly." }),
           { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
       }
@@ -282,7 +282,7 @@ const handler = async (req: Request): Promise<Response> => {
         error: "Recipient previously hard-bounced or complained",
       });
       return new Response(
-        JSON.stringify({ success: true, message: "Successfully subscribed to newsletter" }),
+        JSON.stringify({ success: true, message: "Thank you. If this address can be subscribed, you will receive a confirmation email shortly." }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -345,7 +345,7 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "Successfully subscribed to newsletter" 
+        message: "Thank you. If this address can be subscribed, you will receive a confirmation email shortly." 
       }),
       {
         status: 200,
