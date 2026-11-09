@@ -96,9 +96,13 @@ export interface ModelCardData {
     /** Public EUDAMED device registration, present only when recorded. */
     eudamed?: {
       basicUdi: string;
+      primaryDi: string;
+      emdnCode: string;
       riskClass: string;
       registeredTradeName: string;
       manufacturerSrn: string;
+      manufacturerName: string;
+      registrationNote: string;
       sourceUrl: string;
       lastVerified: string;
     };

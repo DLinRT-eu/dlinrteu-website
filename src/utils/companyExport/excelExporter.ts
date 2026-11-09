@@ -1,3 +1,4 @@
+import { getProductEudamed } from '@/utils/eudamed';
 import { exportToExcelMultiSheet } from '../excelExport';
 import { CompanyExportData } from './types';
 
@@ -22,8 +23,10 @@ export const exportCompaniesToExcel = async (companiesData: CompanyExportData[])
         'Product': product.name,
         'Category': product.category,
         'CE Status': product.regulatory?.ce?.status || 'N/A',
-        'EUDAMED Basic UDI-DI': product.regulatory?.ce?.eudamed?.basicUdi || 'N/A',
-        'EUDAMED Risk Class': product.regulatory?.ce?.eudamed?.riskClass || 'N/A',
+        'EUDAMED Basic UDI-DI': getProductEudamed(product)?.basicUdi || 'N/A',
+        'EUDAMED UDI-DI': getProductEudamed(product)?.primaryDi || 'N/A',
+        'EUDAMED EMDN Code': getProductEudamed(product)?.emdnCode || 'N/A',
+        'EUDAMED Risk Class': getProductEudamed(product)?.riskClass || 'N/A',
         'FDA Status': typeof product.regulatory?.fda === 'string' 
           ? product.regulatory.fda 
           : product.regulatory?.fda?.status || 'N/A',

@@ -1,3 +1,4 @@
+import { getProductEudamed } from "@/utils/eudamed";
 /**
  * Product to FHIR DeviceDefinition Transformer
  * 
@@ -128,8 +129,14 @@ function createIdentifiers(product: ProductDetails): FHIRIdentifier[] {
     });
   }
 
-  // EUDAMED Basic UDI-DI
-  if (product.regulatory?.ce?.eudamed?.basicUdi) {
+  // EUDAMED Basic UDI-DI and UDI-DI (curated or registry-verified)
+  const eudamed = getProductEudamed(product);
+  const udiIds: Array<[string | undefined, string]> = [
+    [eudamed?.basicUdi, "EUDAMED Basic UDI-DI"],
+    [eudamed?.primaryDi, "EUDAMED UDI-DI"],
+  ];
+  for (const [value, text] of udiIds) {
+    if (!value) continue;
     identifiers.push({
       use: "official",
       type: {
@@ -138,10 +145,10 @@ function createIdentifiers(product: ProductDetails): FHIRIdentifier[] {
           code: "UDI",
           display: "Universal Device Identifier"
         }],
-        text: "EUDAMED Basic UDI-DI"
+        text
       },
       system: "https://ec.europa.eu/tools/eudamed",
-      value: product.regulatory.ce.eudamed.basicUdi
+      value
     });
   }
 
