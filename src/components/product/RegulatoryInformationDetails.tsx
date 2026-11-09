@@ -250,7 +250,9 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
             {eudamed && (
               <div className="mt-2 border-t pt-2 text-xs text-muted-foreground space-y-1">
                 <div className="font-medium text-foreground">EUDAMED registration</div>
-                <div>Basic UDI-DI: {eudamed.basicUdi}</div>
+                <div>Basic UDI-DI: <span className="font-mono">{eudamed.basicUdi}</span></div>
+                {eudamed.primaryDi && <div>UDI-DI: <span className="font-mono">{eudamed.primaryDi}</span></div>}
+                {eudamed.emdnCode && <div>EMDN code: <span className="font-mono">{eudamed.emdnCode}</span></div>}
                 {eudamed.riskClass && <div>Risk class: {formatEudamedRiskClass(eudamed.riskClass)}</div>}
                 {eudamed.registeredTradeName && <div>Registered name: {eudamed.registeredTradeName}</div>}
                 {eudamed.manufacturerSrn && <div>Manufacturer SRN: {eudamed.manufacturerSrn}</div>}
