@@ -41,6 +41,10 @@ export interface EudamedActorRegistration {
 export interface EudamedDeviceRegistration {
   /** Basic UDI-DI as published. */
   basicUdi: string;
+  /** Primary UDI-DI of the device version, as published. */
+  primaryDi?: string;
+  /** EMDN nomenclature code as published, e.g. "Z11010292". */
+  emdnCode?: string;
   /** Risk class as published, e.g. "class-iia". */
   riskClass?: string;
   /** Trade name as registered, which may differ from our catalogue name. */

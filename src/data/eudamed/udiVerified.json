@@ -1,0 +1,219 @@
+{
+  "generatedOn": "2026-11-09",
+  "products": {
+    "ai-medical-jazz": [
+      {
+        "basicUdi": "7649990295JAZZNJ",
+        "primaryDi": "07649990295015",
+        "emdnCode": "Z11030592",
+        "registeredTradeName": "JAZZ",
+        "manufacturerSrn": "CH-MF-000026860",
+        "manufacturerName": "AI Medical AG",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=7649990295JAZZNJ&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "limbus-contour": [
+      {
+        "basicUdi": "6280113821608Q",
+        "primaryDi": "00628011382184",
+        "emdnCode": "Z11010282",
+        "registeredTradeName": "Limbus Contour",
+        "manufacturerSrn": "CA-MF-000025514",
+        "manufacturerName": "Limbus AI Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=6280113821608Q&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "B-00628011382177",
+        "primaryDi": "00628011382177",
+        "emdnCode": "Z11010282",
+        "registeredTradeName": "Limbus Contour",
+        "manufacturerSrn": "CA-MF-000025514",
+        "manufacturerName": "Limbus AI Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=B-00628011382177&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "manteia-accucontour": [
+      {
+        "basicUdi": "697312740AccuContourXE",
+        "primaryDi": "06973127400029",
+        "emdnCode": "Z11010492",
+        "registeredTradeName": "AccuContour",
+        "manufacturerSrn": "CN-MF-000023911",
+        "manufacturerName": "Manteia Technologies Co., Ltd.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=697312740AccuContourXE&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "manteia-mozi": [
+      {
+        "basicUdi": "697312740MOZITPS77",
+        "primaryDi": "06973127400081",
+        "emdnCode": "Z11010401",
+        "registeredTradeName": "MOZI TPS",
+        "manufacturerSrn": "CN-MF-000023911",
+        "manufacturerName": "Manteia Technologies Co., Ltd.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=697312740MOZITPS77&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "mim-contour-protegeai": [
+      {
+        "basicUdi": "B-00850009343307",
+        "primaryDi": "00850009343307",
+        "emdnCode": "Z110603",
+        "registeredTradeName": "Contour ProtégéAI+",
+        "manufacturerSrn": "US-MF-000007063",
+        "manufacturerName": "MIM Software Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=B-00850009343307&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "mvision-ai-workspace-plus": [
+      {
+        "basicUdi": "642983006424WS1.0ZQ",
+        "primaryDi": "06429830064244",
+        "emdnCode": "Z11010292",
+        "registeredTradeName": "Workspace+",
+        "manufacturerSrn": "FI-MF-000013082",
+        "manufacturerName": "MVision AI Oy",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=642983006424WS1.0ZQ&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "mvision-dose-plus": [
+      {
+        "basicUdi": "642983006423Dose1.0DH",
+        "primaryDi": "06429830064237",
+        "emdnCode": "Z11010292",
+        "registeredTradeName": "Dose+ ",
+        "manufacturerSrn": "FI-MF-000013082",
+        "manufacturerName": "MVision AI Oy",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=642983006423Dose1.0DH&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "radformation-autocontour": [
+      {
+        "basicUdi": "08600016727AutoContourEC",
+        "primaryDi": "00860001672732",
+        "emdnCode": "Z119092",
+        "registeredTradeName": "AutoContour",
+        "manufacturerSrn": "US-MF-000009824",
+        "manufacturerName": "Radformation, Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08600016727AutoContourEC&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "synaptiq-mediq-rt": [
+      {
+        "basicUdi": "42700043558MediqRT59",
+        "primaryDi": "04270004355802",
+        "emdnCode": "Z11010292",
+        "registeredTradeName": "Mediq RT",
+        "manufacturerSrn": "RO-MF-000038617",
+        "manufacturerName": "SYNAPTIQ TECHNOLOGIES SRL",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=42700043558MediqRT59&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "ge-mr-contour-dl": [
+      {
+        "basicUdi": "08406821BUG0059782",
+        "primaryDi": "00198953043387",
+        "emdnCode": "Z11050192",
+        "registeredTradeName": "MR Contour DL",
+        "manufacturerSrn": "US-MF-000001862",
+        "manufacturerName": "GE Healthcare",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08406821BUG0059782&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "spectronic-mriplanner": [
+      {
+        "basicUdi": "B-07350097430017",
+        "primaryDi": "07350097430017",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "MRI Planner",
+        "manufacturerSrn": "SE-MF-000024476",
+        "manufacturerName": "Spectronic Medical AB",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=B-07350097430017&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "airs-swiftmr": [
+      {
+        "basicUdi": "88001247SWIFTMRYN",
+        "primaryDi": "08800124700105",
+        "emdnCode": "Z11030592",
+        "registeredTradeName": "SwiftMR",
+        "manufacturerSrn": "KR-MF-000009149",
+        "manufacturerName": "AIRS Medical Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=88001247SWIFTMRYN&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "claripi-clarict-ai": [
+      {
+        "basicUdi": "B-88000468CAI-066B3Z",
+        "primaryDi": "D-88000468CAI-066B3Z",
+        "emdnCode": "Z11030692",
+        "registeredTradeName": "ClariCT.AI",
+        "manufacturerSrn": "KR-MF-000031518",
+        "manufacturerName": "ClariPi Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=B-88000468CAI-066B3Z&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "subtle-mr": [
+      {
+        "basicUdi": "08600001712SubtleMR225",
+        "primaryDi": "00860000171212",
+        "emdnCode": "Z11030582",
+        "registeredTradeName": "SubtleMR (Software as a Service for post-processing of Magnetic Resonance data)",
+        "manufacturerSrn": "US-MF-000032747",
+        "manufacturerName": "Subtle Medical, Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08600001712SubtleMR225&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "subtle-pet": [
+      {
+        "basicUdi": "08600001712SubtlePET2B3",
+        "primaryDi": "00860000171205",
+        "emdnCode": "Z11030582",
+        "registeredTradeName": "SubtlePET (Software as a Service for post-processing of Positron Emission Tomography data)",
+        "manufacturerSrn": "US-MF-000032747",
+        "manufacturerName": "Subtle Medical, Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08600001712SubtlePET2B3&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "subtle-aimify": [
+      {
+        "basicUdi": "08600001712AiMIFY13H",
+        "primaryDi": "00860000171298",
+        "emdnCode": "Z11030582",
+        "registeredTradeName": "AiMIFY",
+        "manufacturerSrn": "US-MF-000032747",
+        "manufacturerName": "Subtle Medical, Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08600001712AiMIFY13H&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "subtle-hd": [
+      {
+        "basicUdi": "08600001712SubtleHD1XV",
+        "primaryDi": "00860000171243",
+        "emdnCode": "Z11030582",
+        "registeredTradeName": "SubtleHD",
+        "manufacturerSrn": "US-MF-000032747",
+        "manufacturerName": "Subtle Medical, Inc.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=08600001712SubtleHD1XV&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ]
+  }
+}
