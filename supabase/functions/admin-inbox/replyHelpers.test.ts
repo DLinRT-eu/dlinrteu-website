@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { isAddressedToInbox, replySubject, threadHeaders, validateReply } from "./replyHelpers";
+import { firstOutsideRecipient, isAddressedToInbox, threadParticipants, replySubject, threadHeaders, validateReply } from "./replyHelpers";
 
 const id = "e2b6d792-de00-4806-b250-618254eacee9";
 
@@ -25,10 +25,11 @@ describe("admin inbox reply rules", () => {
   });
 });
 
-Deno.test("replies are limited to thread participants", async () => {
-  const { threadParticipants, firstOutsideRecipient } = await import("./replyHelpers.ts");
-  const p = threadParticipants({ from: "Ann <ann@x.org>", to: ["info@dlinrt.eu"], cc: ["bob@y.org"] });
-  if (firstOutsideRecipient(["ann@x.org", "bob@y.org"], p) !== null) throw new Error("participants rejected");
-  if (firstOutsideRecipient(["eve@z.org"], p) !== "eve@z.org") throw new Error("outsider allowed");
-  if (p.has("info@dlinrt.eu")) throw new Error("inbox included");
+describe("thread participants", () => {
+  it("limits replies to people on the conversation", () => {
+    const p = threadParticipants({ from: "Ann <ann@x.org>", to: ["info@dlinrt.eu"], cc: ["bob@y.org"] });
+    expect(firstOutsideRecipient(["ann@x.org", "bob@y.org"], p)).toBeNull();
+    expect(firstOutsideRecipient(["eve@z.org"], p)).toBe("eve@z.org");
+    expect(p.has("info@dlinrt.eu")).toBe(false);
+  });
 });
