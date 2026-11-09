@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import { getEudamedExportFields, getLifecycleExportFields } from "./registryFields";
 import { EDUCATIONAL_DISCLAIMER, makePdfSafe, PdfCursor, clampLines, drawSectionHeader, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips, drawStructures } from "./pdfSections";
 
@@ -115,10 +116,12 @@ export const exportModelCardToPDF = (product: ProductDetails) => {
     addField('FDA Status', modelCard.basicInfo.fdaStatus);
     addField('FDA Details', modelCard.regulatory.fdaDetails);
     addField('Intended Use Statement', modelCard.regulatory.intendedUseStatement);
+    getEudamedExportFields(product).forEach((f) => addField(f.label, f.value));
     
     // Market Information Section
     addSectionHeader('Market Information');
     addField('Market Presence', modelCard.regulatory.marketPresence);
+    getLifecycleExportFields(product).forEach((f) => addField(f.label, f.value));
     if (product.market?.onMarketSince) {
       addField('On Market Since', product.market.onMarketSince);
     }
