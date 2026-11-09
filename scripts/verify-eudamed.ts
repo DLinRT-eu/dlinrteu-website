@@ -158,11 +158,21 @@ async function resolveSrns(company: (typeof COMPANIES)[number]): Promise<ActorRe
   return [...found.values()];
 }
 
+/**
+ * Products registered in EUDAMED under their parent platform's trade name
+ * (one registration covers several catalogue applications); editor-confirmed.
+ */
+const REGISTERED_UNDER: Record<string, string[]> = {
+  "therapanacea-art-plan-segmentation": ["ART-Plan"],
+  "therapanacea-art-plan-adaptive": ["ART-Plan"],
+  "therapanacea-art-plan-planning": ["ART-Plan"],
+};
+
 const productNames = (p: ProductDetails): string[] => {
   const history = ((p as unknown as { nameHistory?: Array<{ name?: string }> }).nameHistory ?? [])
     .map((h) => h.name)
     .filter(Boolean) as string[];
-  return [p.name, ...history];
+  return [p.name, ...history, ...(REGISTERED_UNDER[p.id ?? ""] ?? [])];
 };
 
 interface VerifiedEntry {

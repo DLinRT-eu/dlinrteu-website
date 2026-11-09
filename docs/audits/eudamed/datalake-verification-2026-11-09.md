@@ -3,7 +3,7 @@
 Source: EUDAMED public Data Lake API (DG SANTE). Exact name matches are shown on product pages;
 candidates need manual confirmation. Absence from EUDAMED is not evidence of a missing CE mark.
 
-**Products with an exact EUDAMED match: 21**
+**Products with an exact EUDAMED match: 24**
 
 ## AtomoAI
 - No manufacturer SRN found by exact legal name.
@@ -72,6 +72,15 @@ candidates need manual confirmation. Absence from EUDAMED is not evidence of a m
 ## Therapanacea
 - SRN: FR-MF-000007672 (THERAPANACEA)
 - FR-MF-000007672: 3 UDI-DI records
+  - [exact] ART-Plan Segmentation ↔ "ART-Plan" · Basic UDI-DI 3770019940020YB · EMDN Z11010482
+  - [exact] ART-Plan Segmentation ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANN4 · EMDN Z11010482
+  - [exact] ART-Plan Segmentation ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANV2QP · EMDN Z11010482
+  - [exact] ART-Plan Adaptive ↔ "ART-Plan" · Basic UDI-DI 3770019940020YB · EMDN Z11010482
+  - [exact] ART-Plan Adaptive ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANN4 · EMDN Z11010482
+  - [exact] ART-Plan Adaptive ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANV2QP · EMDN Z11010482
+  - [exact] ART-Plan Planning ↔ "ART-Plan" · Basic UDI-DI 3770019940020YB · EMDN Z11010482
+  - [exact] ART-Plan Planning ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANN4 · EMDN Z11010482
+  - [exact] ART-Plan Planning ↔ "ART-Plan" · Basic UDI-DI 3770019940ARTPLANV2QP · EMDN Z11010482
 
 ## Vysioneer
 - No manufacturer SRN found by exact legal name.

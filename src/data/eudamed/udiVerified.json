@@ -151,6 +151,102 @@
         "lastVerified": "2026-11-09"
       }
     ],
+    "therapanacea-art-plan-segmentation": [
+      {
+        "basicUdi": "3770019940020YB",
+        "primaryDi": "03770019940020",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940020YB&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANN4",
+        "primaryDi": "03770019940006",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANN4&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANV2QP",
+        "primaryDi": "03770019940013",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANV2QP&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "therapanacea-art-plan-adaptive": [
+      {
+        "basicUdi": "3770019940020YB",
+        "primaryDi": "03770019940020",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940020YB&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANN4",
+        "primaryDi": "03770019940006",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANN4&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANV2QP",
+        "primaryDi": "03770019940013",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANV2QP&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "therapanacea-art-plan-planning": [
+      {
+        "basicUdi": "3770019940020YB",
+        "primaryDi": "03770019940020",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940020YB&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANN4",
+        "primaryDi": "03770019940006",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANN4&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      },
+      {
+        "basicUdi": "3770019940ARTPLANV2QP",
+        "primaryDi": "03770019940013",
+        "emdnCode": "Z11010482",
+        "registeredTradeName": "ART-Plan",
+        "manufacturerSrn": "FR-MF-000007672",
+        "manufacturerName": " THERAPANACEA",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=3770019940ARTPLANV2QP&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
     "ge-mr-contour-dl": [
       {
         "basicUdi": "08406821BUG0059782",
