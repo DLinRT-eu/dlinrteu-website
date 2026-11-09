@@ -68,17 +68,17 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
     },
     trainingData: {
       disclosureLevel: "minimal",
-      description: "ESTRO 2026 Limkin abstract 1590 reports 327 T2-weighted MRI training cases for a brachytherapy segmentation model. Equivalence to the exact marketed model/version is not fully documented; this is conference evidence.",
-      source: "ESTRO 2026 Limkin et al., abstract 1590",
-      sourceUrl: "https://online.flippingbook.com/view/701322381/63/",
+      description: "Training dataset composition for the MR brachytherapy model is not publicly disclosed.",
+      source: "Therapanacea products page and ART-Plan™ structures brochure v3.2.0",
+      sourceUrl: "https://therapanacea.com/products",
       sourceAccess: "public",
-      sourceRetrievedOn: "2026-11-08"
+      sourceRetrievedOn: "2026-07-30"
     },
     evaluationData: {
       studyDesign: "Software verification & validation for FDA 510(k) substantial equivalence",
       primaryEndpoint: "Substantial equivalence to predicate ART-Plan+ v3.0.0 (K242822)",
       results: "Not publicly disclosed. K253091 records the 'extension of existing anatomy to the use of brachytherapy within radiotherapy' as a change relative to the predicate, without published accuracy metrics. No peer-reviewed evaluation of the brachytherapy model located as of 2026-07-30.",
-      description: "Public evidence includes FDA K253091 and ESTRO 2026 Limkin abstract 1590: a two-center 42-case test set with a qualitative 18-case subset. The subset must not be added as independent patients. Conference evidence remains unscored and distinct from regulatory validation.",
+      description: "Publicly available evidence is limited to the 510(k) summary and the vendor structure brochure.",
       source: "FDA 510(k) summary K253091 (decision 2025-12-23)",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253091.pdf",
       sourceAccess: "public",
@@ -117,14 +117,11 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       productUrl: "https://therapanacea.com/products",
       relationship: "Module"
     },
-    evidence: [
-      {"type": "Conference abstract (not scored)", "description": "Limkin et al., ESTRO 2026 abstract 1590: 327 training T2 MRI cases, 42 two-center test cases and an 18-case qualitative subset; unscored conference evidence.", "link": "https://online.flippingbook.com/view/701322381/63/"},
-    ],
     evidenceRigor: "E0",
     clinicalImpact: "L1t",
     legacyClinicalImpact: "I0",
-    evidenceRigorNotes: "Public-evidence review 2026-11-08: E0 retained. FDA and vendor documents are supplemented by ESTRO 2026 abstract 1590, which reports training and two-center testing. No full peer-reviewed product-specific journal validation was verified; the conference study is unscored.",
-    clinicalImpactNotes: "L1t retained as provisional. Conference segmentation/qualitative results exist, but do not establish a scored journal-based clinical or dosimetric benefit for the marketed module.",
+    evidenceRigorNotes: "Regulatory documentation only (FDA K253091, CE class IIb brochure). No peer-reviewed publication evaluating the MR brachytherapy model identified as of 2026-07-30. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+    clinicalImpactNotes: "L1t (Levels of Efficacy), re-scored 2026-11-06 from regulatory documentation only. Manufacturer-claimed workflow benefit for MR-guided brachytherapy OAR delineation; no independent clinical or dosimetric outcome data published.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + CE/FDA: limited public evidence and a small structure set; local validation on the institution's MR sequences and applicator setup is required before clinical use.",
     burdenFactors: {
@@ -154,7 +151,8 @@ export const THERAPANACEA_BRACHYBOX_PRODUCTS: ProductDetails[] = [
       "Vendor warning: symmetrical structures may be subject to right/left inversion"
     ],
     version: "3.2.1",
-    lastUpdated: "2026-11-08",
+    releaseDate: "2025–2026 (K253091 decision and brochure March 2026). The day 2026-03-01 had no source and was removed.",
+    lastUpdated: "2026-11-05",
     lastRevised: "2026-11-05",
     source: "ART-Plan structures brochure v3.2.0 (ART-BRO-AN-07EU, March 2026); FDA 510(k) K253091 summary (decision 2025-12-23); Therapanacea Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05). Pötter 2018 (doi:10.1016/j.ctro.2018.01.001) is the cited contouring recommendation, not an evaluation of this model."
   }

@@ -5,18 +5,18 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
   {
     id: "manteia-mozi",
     trainingData: {
-        description: "FDA K223724 discloses 560 Chinese training image sets for auto-contouring. These are not a disclosed training cohort for commercial dose-prediction models. The SOE optimizer is deterministic; DL contouring and dose prediction are separate functions.",
+        description: "The MOZI TPS uses deep learning-driven plan optimization and auto-planning models validated on standard protocols.",
         disclosureLevel: "minimal",
         source: "FDA 510(k) summary K223724",
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf"
     },
     evaluationData: {
         sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
-        primaryEndpoint: "Auto-contouring accuracy and end-to-end software validation",
+        primaryEndpoint: "Not specified",
         description: "Validation included end-to-end testing (simulation CT, registration, contouring, and dose calculation) for 18 patients and auto-contouring validation for 187 patients across several anatomies.",
         source: "FDA 510(k) summary K223724",
-        results: "FDA summary reports per-structure Dice similarity coefficients and end-to-end verification; regulatory evidence, not peer-reviewed efficacy evidence.",
-        datasetSize: "187 auto-contouring cases; 18 end-to-end cases (overlap not disclosed; do not sum)",
+        results: "Not publicly disclosed",
+        datasetSize: "205 patients (187 for auto-contouring, 18 for end-to-end testing)",
         studyDesign: "Software V&V (FDA 510(k))"
     },
     name: "MOZI TPS",
@@ -24,21 +24,21 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.manteiamedical.com/",
     productUrl: "https://www.manteiamedical.com/mozi",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/manteia-mozi.ts",
-    description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, dose prediction and deterministic planning optimization, and built-in deep learning auto-contouring for radiation therapy (auto-contouring validated on 187 patients per FDA K223724).",
-    features: ["Monte Carlo dose engine", "GPU-powered computation", "Deterministic SOE optimization", "Built-in auto-contouring", "Vendor independence"],
+    description: "Next-generation treatment planning system combining precision, speed, and adaptability. Features Monte Carlo dose engine, GPU-powered computation, AI-driven planning optimization, and built-in deep learning auto-contouring for radiation therapy (auto-contouring validated on 187 patients per FDA K223724).",
+    features: ["Monte Carlo dose engine", "GPU-powered computation", "AI-driven optimization", "Built-in auto-contouring", "Vendor independence"],
     category: "Treatment Planning",
     secondaryCategories: ["Image Synthesis"],
     certification: "CE & FDA",
     logoUrl: "/logos/manteia.png",
     website: "https://www.manteiamedical.com/mozi",
     anatomicalLocation: ["All sites"],
-    modality: ["CT", "CBCT", "MRI"],
+    modality: ["RT Plan", "CT", "CBCT", "MRI"],
     subspeciality: "Radiation Oncology",
     diseaseTargeted: ["Multiple Cancer Types"],
     keyFeatures: [
       "Monte Carlo dose engine for high-precision dosing in complex cases",
       "GPU-powered lightning-fast processing for efficient planning",
-      "DL dose prediction with deterministic optimization",
+      "Deep learning-driven plan optimization",
       "Built-in DL auto-contouring (validated on 187 patients, FDA K223724)",
       "Full workflow automation from dose prediction to final plan",
       "Auto-planning models validated on standard protocols",
@@ -151,13 +151,12 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         status: "approved"
       }
     ],
-    structuresUnavailable: true,
     version: "3.0",
     releaseDate: "2023-07-10",
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Public-evidence review 2026-11-08: E0 retained for the marketed AI planning models. Liu et al. 2025 (10.21037/qims-2025-168) uses MOZI v3.3 with a custom research dose-prediction model; equivalence to a marketed model remains unconfirmed. K223724 contains regulatory contouring and end-to-end tests. AccuContour studies are not transferred to MOZI.",
-    clinicalImpactNotes: "Related research reports dosimetric planning endpoints, but commercial-model equivalence is unresolved. Regulatory and conference results remain unscored; no patient-outcome benefit is established.",
+    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: no peer-reviewed publication naming MOZI TPS was found (PubMed and Crossref re-searched 2026-08-25), so no keyPapers could be scored. Under the rubric, regulatory-submission data alone is E0 — the previous E1 relied solely on the 510(k) validation summary. FDA K223724 validation (18 patients end-to-end, 187 patients auto-contouring). Limited independent publications. PubMed searched 2026-02-26. 2026-08-28 Batch C sweep (Crossref/PubMed/Europe PMC, alias-gated): no publication names the MOZI TPS. Johnson et al., Front Oncol 2024 (doi:10.3390/fonc.2024.1375096) evaluates Manteia AccuContour, a different module, and is scored there only. E0 stands.",
+    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: impact lowered to I0 — no published dosimetric, workflow or outcome endpoint exists for MOZI TPS; the previous I2 rested on vendor workflow claims. Vendor claims workflow improvement through AI-driven planning optimization and Monte Carlo dose calculation. PubMed searched 2026-02-26.",
     adoptionReadiness: "R3",
     adoptionReadinessNotes: "Manufacturer-supplied MDR certificate lists MOZI TPS v1.3 and v4.0, with separate FDA 510(k) clearance; E0/I0 evidence remains unchanged. Local validation, interface testing and workflow confirmation are required, especially for synthetic CT functions whose feature-specific clearance is not established by the certificate.",
     evidenceVendorIndependent: false,
@@ -175,13 +174,11 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         relationship: "AccuLearning is Manteia's custom model training platform. Models trained in AccuLearning can be deployed into MOZI TPS for site-specific contouring and planning workflows."
       }
     ],
-    lastUpdated: "2026-11-08",
+    lastUpdated: "2026-09-29",
     lastRevised: "2026-11-06",
     source: "FDA 510(k) K223724; vendor website; vendor documentation; conference abstracts; peer-reviewed literature",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
-      {"type": "Conference abstract (not scored)", "description": "ESTRO 2026 D’Andrea abstract 4480: 20 patients (10 head-and-neck, 10 lung). Distinct from the four-case vendor slide presentation; image-synthesis conference evidence remains unscored.", "link": "https://online.flippingbook.com/view/700996046/645/"},
-      {"type": "Supporting evidence (not scored)", "description": "Liu et al. 2025 rectal IMRT planning using MOZI v3.3 and a custom 3D MT-U-Net dose-prediction model. Research-model equivalence to the marketed models is unconfirmed; retained unscored.", "link": "https://doi.org/10.21037/qims-2025-168"},
       {
         type: "EU MDR certificate (manufacturer-supplied; regulatory document, not clinical evidence)",
         description: "Intertek Annex IX QMS certificate 28620166008, issued 2024-01-29, expires 2028-07-20; product list dated 2025-06-04 names MOZI TPS v1.3 and v4.0, Class IIb, Basic UDI-DI 697312740MOZITPS77, EMDN Z11010401. Manufacturer-supplied, received 2026-09-29. The stated intended use is photon external-beam treatment planning, not feature-specific synthetic-CT clearance.",
@@ -189,7 +186,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Regulatory Clearance",
-        description: "FDA 510(k) clearance K223724 decided July 10, 2023 (submission received January 3, 2023) - Class II device under 21 CFR 892.5050",
+        description: "FDA 510(k) clearance K223724 received January 3, 2023 - Class II device under 21 CFR 892.5050",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223724.pdf",
       },
       {
@@ -221,7 +218,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
         usesAI: true,
         notes: "MOZI TPS converts daily CBCT into synthetic CT for offline adaptive re-planning. The conversion is deep learning: the underlying RegGAN model is described in two Manteia co-authored papers that the manufacturer lists as 'Released' for AccuContour and MOZI (vendor publication summary, vendor-provided, retrieved 2026-09-23). MRI-to-synthetic-CT on MOZI TPS was user-confirmed 2026-09-29; the ASTRO 2023 abstract supports a multi-modal deep-learning method but does not provide product-specific clinical validation. Neither feature is individually named in the manufacturer-supplied MDR certificate. 2026-11-06: Manteia holds a separate FDA 510(k) for ARTAssistant (K250780, cleared 2025-12-05, QKB, 21 CFR 892.2050), whose summary states a deep-learning image-conversion algorithm for synthetic CT from CBCT or MR (560 training image sets from China, 247 test sets from the United States). An ESTRO 2026 abstract (IRCCS Regina Elena) names the 'ART Assistant module of the Mozi TPS' as the CBCT-to-sCT tool. The synthetic CT function is the ARTAssistant module of MOZI TPS (user-confirmed 2026-11-06), separately FDA-cleared under K250780; see /product/manteia-artassistant. MOZI's scores are unchanged.",
         evidenceRigor: "E0",
-        evidenceRigorNotes: "2026-09-24: Neither RegGAN paper (Li et al., BMC Cancer 2023; Wang et al., Strahlenther Onkol 2023) names MOZI TPS in its full text (Europe PMC full text checked 2026-09-24); both are Manteia co-authored algorithm studies. They are recorded as supporting evidence and not scored. The four-case vendor slide presentation and public ESTRO 2026 abstract 4480 (20 patients) are separate conference reports, both unscored. E0 stands.",
+        evidenceRigorNotes: "2026-09-24: Neither RegGAN paper (Li et al., BMC Cancer 2023; Wang et al., Strahlenther Onkol 2023) names MOZI TPS in its full text (Europe PMC full text checked 2026-09-24); both are Manteia co-authored algorithm studies. They are recorded as supporting evidence and not scored. The ESTRO 2026 clinical presentation is a 4-patient single-centre abstract, also unscored. E0 stands.",
         clinicalImpact: "I0",
         clinicalImpactNotes: "2026-09-24: No peer-reviewed dosimetric or workflow endpoint for the synthetic CT function of the marketed MOZI TPS. I0.",
         evidence: [
@@ -247,8 +244,8 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
           }
         ],
         limitations: [
-          "MOZI K223724 and the supplied MDR certificate do not separately establish synthetic-CT clearance. ARTAssistant has a separate FDA clearance K250780; that scope must not be conflated with the MOZI TPS clearance.",
-          "Conference data include a four-case vendor presentation and a distinct 20-patient ESTRO 2026 abstract; neither is scored.",
+          "Neither CBCT-to-sCT nor MRI-to-sCT is individually confirmed within the CE/FDA cleared scope by the supplied MDR certificate or FDA intended use; local validation is required.",
+          "Clinical data limited to a 4-patient single-centre conference presentation.",
           "MRI-to-synthetic-CT is user-confirmed as a MOZI TPS capability, but published supporting evidence is limited to a non-product-specific conference abstract."
         ]
       }

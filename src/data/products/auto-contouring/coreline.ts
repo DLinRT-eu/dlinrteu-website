@@ -6,8 +6,8 @@ const rawProduct: ProductDetails = {
   id: "coreline-aview-rt-acs",
   trainingData: {
       disclosureLevel: "minimal",
-      source: "FDA 510(k) summary K200714",
-      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf",
+      source: "FDA 510(k) summary K220408",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220408.pdf",
       scannerModels: ["CT"]
   },
   evaluationData: {
@@ -64,24 +64,32 @@ const rawProduct: ProductDetails = {
       status: "510k_cleared",
       class: "Class II",
       type: "510(k)",
-      clearanceNumber: "K200714",
+      clearanceNumber: "K220408",
       productCode: "QKB",
       regulationNumber: "21 CFR 892.2050",
-      decisionDate: "2020-09-17",
-      notes: "Cleared as AVIEW platform. RT ACS is the radiation therapy auto-contouring module. URL: https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
+      decisionDate: "2022-11-10",
+      notes: "FDA-cleared device name: AVIEW RT ACS. Clearance K220408 is specific to this product (verified in the FDA 510(k) database 2026-11-09)."
     },
-    intendedUseStatement: "AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used to support the physician quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue images by providing image segmentation of sub-structures in lung, lobe, airways and cardiac, registration of inspiration and expiration which could analyze quantitative information such as air trapping volume, air trapped index, and inspiration/expiration ratio; volumetric and structure analysis, density evaluation and reporting tools. AVIEW is also used to store, transfer, inquire and display CT data set on premise and as cloud environment. (Source: FDA 510(k) K200714 Summary, accessed 2026-05-30. Note: K200714 is the base AVIEW platform clearance; the Aview RT ACS application runs on this cleared platform.)"
+    intendedUseStatement: "Summary (not verbatim): AVIEW RT ACS provides deep-learning-based automatic organ segmentation from CT images, generating DICOM-RT contours as initial contours for radiotherapy planning, to be reviewed, edited and approved by clinicians. (Source: FDA 510(k) K220408, cleared 2022-11-10; indications text not machine-readable in the public summary, retrieved 2026-11-09.)"
   },
   market: {
+    availability: "Commercially marketed by Coreline Soft as a radiotherapy auto-contouring solution; FDA-cleared in the United States under K220408. Supported structures and configurations may vary by country and installation.",
     onMarketSince: "2019",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
   version: "4.0",
   releaseDate: "2025-08-20",
   lastUpdated: "2026-10-15",
-  lastRevised: "2026-09-23",
+  lastRevised: "2026-11-09",
+  limitations: [
+    "FDA clearance (K220408) validated selected structures on 120 CT cases (Korean and US data): breast-region structures on contrast and non-contrast CT; head and neck, abdominal and pelvic structures on contrast CT only",
+    "Validation covers selected structures, not the full vendor-advertised contour library",
+    "Published studies often share investigators with the developer, and some evaluate research or customised engine versions",
+    "Relationship between catalogue version 4.0 and the FDA-listed configuration not confirmed",
+    "All contours require clinician review; automation bias is a recognised implementation risk"
+  ],
   keyPapers: [
-    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee et al.", journal: "IJROBP", year: "2024", evidenceRigor: "E2", clinicalImpact: "L3", legacyClinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
+    {doi: "10.1016/j.ijrobp.2024.02.041", title: "Deep-learning auto-contouring in breast radiation therapy: 2000+ cases", authors: "Lee BM et al.", journal: "Int J Radiat Oncol Biol Phys", year: "2024", evidenceRigor: "E2", clinicalImpact: "L3", legacyClinicalImpact: "I2", rationale: "Large clinical cohort (>2000 breast cases) with routine-practice contour acceptance.", externalValidation: true},
     {doi: "10.1186/s13014-021-01923-1", title: "Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy", authors: "Byun HK et al.", journal: "Radiat Oncol", year: "2021", evidenceRigor: "E1", clinicalImpact: "L3", legacyClinicalImpact: "I1", rationale: "Single-centre clinical validation with geometric endpoints."},
     {doi: "10.3389/fonc.2023.1119008", title: "Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer", authors: "Chung SY et al.", journal: "Front. Oncol.", year: "2023", evidenceRigor: "E1", clinicalImpact: "L3", legacyClinicalImpact: "I1", rationale: "Single-centre auto-segmentation accuracy evaluation."}
   ],
@@ -177,7 +185,7 @@ const rawProduct: ProductDetails = {
   evidenceProspective: false,
   evidenceExternalValidation: true,
   evidence: [
-      {"type": "Peer-reviewed Publication", "description": "Lee W et al. Quality assurance incorporating artificial intelligence-generated reference contours in a phase II radiotherapy trial. Physics and Imaging in Radiation Oncology 2026. Uses a customised version of the AVIEW engine for trial RTQA reference contours; listed, not scored as the cleared product. Listed for transparency, not scored. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2026.100949"},
+      {"type": "Peer-reviewed Publication", "description": "Lee W et al. Quality assurance incorporating artificial intelligence-generated reference contours in a phase II radiotherapy trial. Phys Imaging Radiat Oncol 2026. Uses a customised version of the AVIEW engine for trial RTQA reference contours; listed, not scored as the cleared product. Listed for transparency, not scored. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.phro.2026.100949"},
     {
       type: "Peer-reviewed Publication",
       description: "Lee et al. Experience of implementing DL auto-contouring in breast RT planning: insights from over 2,000 cases. IJROBP 2024.",
@@ -189,12 +197,12 @@ const rawProduct: ProductDetails = {
       link: "https://pubmed.ncbi.nlm.nih.gov/39308634/"
     },
     {
-      type: "indirect",
-      description: "FDA 510(k) clearance K200714 - AVIEW base pulmonary platform. Indirect: Aview RT ACS runs on this cleared platform but K200714 itself does not validate the RT auto-contouring module.",
-      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf"
+      type: "Regulatory Summary",
+      description: "FDA 510(k) K220408 (AVIEW RT ACS, cleared 2022-11-10). Standalone performance test on 120 CT cases (Korean and US, incl. TCIA) against a three-expert gold standard; DSC and 95% HD reported per organ.",
+      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220408.pdf"
     }
   ],
-  source: "Vendor website; peer-reviewed literature",
+  source: "FDA 510(k) K220408; vendor website; peer-reviewed literature",
 };
 
 // Apply all the standardization functions

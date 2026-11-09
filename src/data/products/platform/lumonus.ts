@@ -22,7 +22,7 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     ],
     category: "Platform",
     secondaryCategories: ["Performance Monitor", "Treatment Planning"],
-    certification: "Sigma CDSS non-device status (consultant-reported)",
+    certification: "FDA CDSS Exempt",
     logoUrl: "/logos/lumonus.jpeg",
     website: "https://www.lumonus.com/",
     anatomicalLocation: ["Multiple Sites"],
@@ -76,17 +76,17 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
     ],
     technicalSpecifications: {
-      population: "Not publicly disclosed",
+      population: "Adult radiation oncology patients",
       input: ["EMR data", "OIS data", "TPS metadata", "Clinical documentation"],
-      inputFormat: ["Not publicly disclosed"],
+      inputFormat: ["HL7 FHIR", "Proprietary APIs"],
       output: ["Structured notes", "Workflow tasks", "Plan-review artefacts", "Analytics dashboards"],
-      outputFormat: ["Web UI; interchange formats not publicly disclosed"],
+      outputFormat: ["JSON", "HL7 FHIR", "Web UI"],
     },
     technology: {
       integration: ["EMR", "OIS", "TPS"],
       deployment: ["Cloud-based"],
       triggerForAnalysis: "Integrated within clinical workflow (event-driven)",
-      processingTime: "Not publicly disclosed",
+      processingTime: "Near real-time (module-dependent)",
     },
     regulatory: {
       ce: {
@@ -97,10 +97,10 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
         status: "cdss_exempt",
         type: "21st Century Cures §3060 CDSS exemption",
         notes:
-          "Rook QS reports non-device CDSS status for Sigma. No public FDA determination letter was retrieved; this consultant account does not establish a platform-wide exemption or 510(k)/De Novo clearance.",
+          "Lumonus publicly disclosed an FDA Clinical Decision Support Software exemption for its Sigma module — an explicit non-device determination rather than 510(k)/De Novo clearance. Source: Rook QS case study (accessed 2026-07-19).",
       },
       intendedUseStatement:
-        "Software intended to support radiation oncology clinical workflow, documentation, planning management and analytics. A consultant reports non-device CDSS status for Sigma; regulatory status must be assessed per function and is not established for the entire platform by that account.",
+        "Software intended to support radiation oncology clinical workflow, documentation, planning management and analytics. Marketed under the FDA Clinical Decision Support Software (CDSS) exemption pathway; not classified as an FDA-regulated medical device.",
     },
     market: {
       onMarketSince: "2024",
@@ -110,11 +110,13 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
     releaseDate: "2024",
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Public-evidence review 2026-11-08: historical Horizon/Lumonus planning conference abstracts exist but remain unscored. No full attributable peer-reviewed validation of the current platform modules was verified. Conference results are not automatically transferred across renamed modules.",
+    evidenceRigorNotes:
+      "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. No peer-reviewed clinical validation identified as of 2026-07-19. A collaboration with Memorial Sloan Kettering Cancer Center to advance RT treatment planning was announced in April 2026 (press release), but no published validation is yet available. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands. 2026-08-28 Batch C sweep: only a vendor-authored ASTRO meeting abstract located (Int J Radiat Oncol Biol Phys 2024, doi:10.1016/j.ijrobp.2024.07.2065); conference abstracts are not scoreable. E0 stands.",
     clinicalImpactNotes:
       "Vendor-claimed workflow and planning-efficiency benefits; no independent clinical-impact study identified.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "R2 retained pending a separate implementation-readiness rubric review. The Sigma consultant account is not platform-wide regulatory evidence. Module-specific implementation and validation evidence remain limited.",
+    adoptionReadinessNotes:
+      "Derived from E0 + FDA CDSS exemption (non-device pathway): significant local validation, workflow assessment and governance review required before adoption. Not a cleared/CE-marked medical device.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -141,10 +143,9 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
         clinicalImpact: "I0",
       },
     },
-    lastUpdated: "2026-11-08",
+    lastUpdated: "2026-08-25",
     lastRevised: "2026-08-25",
     evidence: [
-      {"type": "Conference evidence (not scored)", "description": "Historical automated iterative planning evaluation; conference evidence, not validation of every current Lumonus module.", "link": "https://www.lumonus.com/blog/clinical-evaluation-of-an-automated-iterative-optimization-system-for-radiation-oncology"},
       {
         type: "Vendor product page",
         description: "Lumonus AI — Oncology Intelligence Layer (product overview)",
@@ -174,13 +175,13 @@ export const LUMONUS_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
     ],
     limitations: [
-      "Sigma non-device CDSS status is consultant-reported; no public FDA letter was retrieved and it does not establish platform-wide status.",
+      "FDA Clinical Decision Support Software exemption is a non-device pathway — not equivalent to a 510(k) or De Novo clearance.",
       "No CE marking or other recognised authority approval identified as of 2026-07-19.",
       "No peer-reviewed clinical validation of a specific DL-based RT function has been located.",
       "AI is scoped to workflow, documentation, planning management and analytics — not a validated DL dose-planning, auto-contouring or image-synthesis engine.",
       "Outputs are assistive and require clinician review, editing and approval before any clinical use.",
     ],
-    source: "Vendor website; consultant case study; press releases; conference abstracts",
+    source: "Vendor website; press releases; peer-reviewed literature",
     clinicalEvidence:
       "No peer-reviewed clinical validation identified. MSK Cancer Center collaboration announced April 2026 — non-peer-reviewed at time of listing.",
   },

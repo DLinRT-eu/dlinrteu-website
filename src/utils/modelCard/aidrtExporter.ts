@@ -9,6 +9,19 @@
  */
 import type { ProductDetails } from "@/types/productDetails";
 import { createSafeFileName } from "./exporters/shared";
+import { getProductEudamed } from "@/utils/eudamed";
+
+export function getEudamedAidrtFields(product: ProductDetails): Record<string, string> {
+  const e = getProductEudamed(product);
+  return {
+    eudamed_basic_udi_di: s(e?.basicUdi),
+    eudamed_udi_di: s(e?.primaryDi),
+    eudamed_emdn_code: s(e?.emdnCode?.trim()),
+    eudamed_registered_trade_name: s(e?.registeredTradeName),
+    eudamed_manufacturer: s([e?.manufacturerName, e?.manufacturerSrn].filter(Boolean).join(" — ")),
+    eudamed_registration_note: s(e?.registrationNote),
+  };
+}
 
 /** Return a string or "NA" */
 function s(v: unknown): string {
@@ -90,6 +103,8 @@ export function convertToAidrt(product: ProductDetails): AidrtModelCard {
       clearance_approved_by_institution: s(product.company),
       clearance_approved_by_contact_email: s(product.contactEmail),
       clearance_additional_information: "NA",
+      // DLinRT extension: EU registry (EUDAMED) details; AID-RT has no native slot.
+      ...getEudamedAidrtFields(product),
       intended_users: "NA",
       observed_limitations: s(product.limitations),
       potential_limitations: "NA",

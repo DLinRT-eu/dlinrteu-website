@@ -172,6 +172,7 @@ const CONFIRMED_REGISTRATIONS = [
   { productId: "brainlab-elements-rt-seg", basicUdi: "4056481ContouringZQ", manufacturerSrn: "DE-MF-000006183", registrationNote: "Registered as Brainlab Elements Contouring, 5.0." },
   { productId: "varian-eclipse-ai-contouring", basicUdi: "0405686902368W2", manufacturerSrn: "DE-MF-000006122", registrationNote: "Editor-confirmed association with AI Contouring registered by Siemens Healthcare GmbH; catalogue vendor: Varian (Siemens Healthineers)." },
   { productId: "accuray-synchrony", basicUdi: "081137603CyberKnifeTDS7J", manufacturerSrn: "US-MF-000010238", registrationNote: "CyberKnife platform registration; not a separate Synchrony registration and does not establish coverage of Radixact." },
+  { productId: "elekta-monaco-segmentation-unity", basicUdi: "00858164002BUDI0000002H9", manufacturerSrn: "SE-MF-000002125", registrationNote: "Monaco RTP System platform registration (treatment planning system); the segmentation component is not separately named in this record." },
   { productId: "mirada-dlc", basicUdi: "++B334RTxUW", manufacturerSrn: "GB-MF-000008724", registrationNote: "Editor-confirmed association with the RTx platform registration; DLC Expert is not separately named in this record." },
 ];
 

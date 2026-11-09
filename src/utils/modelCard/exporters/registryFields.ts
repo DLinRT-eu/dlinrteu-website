@@ -10,7 +10,10 @@ export interface ExportField {
 /** EUDAMED fields shown on the product page (curated or registry-verified); empty when none recorded. */
 export const getEudamedExportFields = (product: ProductDetails): ExportField[] => {
   const e = getProductEudamed(product);
-  if (!e) return [];
+  if (!e) {
+    const notes = (product.regulatory?.ce as { notes?: string } | undefined)?.notes;
+    return notes && /EUDAMED/i.test(notes) ? [{ label: "EUDAMED Status", value: notes }] : [];
+  }
   const rows: ExportField[] = [
     { label: "EUDAMED Basic UDI-DI", value: e.basicUdi },
     { label: "EUDAMED UDI-DI", value: e.primaryDi ?? "" },

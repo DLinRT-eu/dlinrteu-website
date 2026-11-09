@@ -93,7 +93,7 @@ export const IRISEvo: ProductDetails = {
       class: "IIa",
       status: "cleared",
       regulation: "MDR (EU 2017/745)",
-      notes: "CE status per Elekta. Not found in EUDAMED under any Elekta manufacturer (searched 2026-10-30)."
+      notes: "CE status per Elekta. Neither IRIS nor its parent platform (Versa HD / Evo linac, ELMA) found in EUDAMED under any Elekta manufacturer (searched 2026-11-09)."
     },
     fda: {
       type: "510(k)",

@@ -4,11 +4,11 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
   {
     id: "informai-radoncai",
     name: "RadOncAI",
-    company: "InformAI",
+    company: "InformAI, Inc.",
     companyUrl: "https://www.informai.com",
     productUrl: "https://www.informai.com",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/informai.ts",
-    description: "Deep learning dose-prediction software that generates a three-dimensional dose distribution for head & neck radiotherapy from a CT simulation scan together with clinician-defined target volumes and organs at risk. The predicted dose is exported as a DICOM-RTDOSE object for use as guidance in a compatible treatment planning system.",
+    description: "Deep learning dose-prediction software that generates a three-dimensional dose distribution for head & neck radiotherapy from a CT simulation scan together with clinician-defined target volumes and organs at risk. The predicted dose is exported as a DICOM RT Dose object for use as guidance in a compatible treatment planning system.",
     category: "Treatment Planning",
     certification: "FDA",
     logoUrl: "/logos/informai.png",
@@ -20,7 +20,7 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
     features: [
       "Deep learning 3D dose prediction",
       "Uses clinician-defined PTVs and organs at risk as input",
-      "DICOM-RTDOSE export to a compatible treatment planning system",
+      "DICOM RT Dose export to a compatible treatment planning system",
       "Locked model (no user modification)"
     ],
     keyFeatures: [
@@ -34,11 +34,11 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
       input: ["CT", "Clinician-defined PTV structures", "Clinician-supplied OAR structures"],
       inputFormat: ["DICOM", "DICOM-RTSTRUCT"],
       output: ["Predicted 3D dose distribution"],
-      outputFormat: ["DICOM-RTDOSE"]
+      outputFormat: ["DICOM RT Dose"]
     },
     technology: {
-      integration: ["Compatible treatment planning systems via DICOM-RTDOSE"],
-      deployment: ["Cloud-based (AWS)", "Clinic-provided on-premises infrastructure"],
+      integration: ["Compatible treatment planning systems via DICOM RT Dose"],
+      deployment: ["Cloud-based (AWS, HIPAA business associate agreement)"],
       triggerForAnalysis: "Manual submission of the CT simulation study with clinician-defined structures",
       processingTime: "Not publicly disclosed"
     },
@@ -92,18 +92,18 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253050.pdf"
     },
     evaluationData: {
-      description: "Retrospective validation on 500 head & neck patients from two US organizations at six locations (UT Southwestern Dallas and five Arizona Oncology locations), comprising 295 definitive and 205 post-operative/adjuvant cases. Target coverage equivalence was met for all 9 PTV endpoints within a ±300 cGy margin and non-inferiority was met for all 21 OAR endpoints with a +300 cGy margin, with Bonferroni correction for multiplicity.",
-      studyDesign: "Retrospective six-location validation with pre-specified equivalence and non-inferiority margins",
+      description: "Retrospective validation on 500 head & neck patients from two independent US sites (UT Southwestern and Arizona Oncology), comprising 295 definitive and 205 post-operative/adjuvant cases. Target coverage equivalence was met for all 9 PTV endpoints within a ±300 cGy margin and non-inferiority was met for all 21 OAR endpoints with a +300 cGy margin, with Bonferroni correction for multiplicity.",
+      studyDesign: "Retrospective two-site validation with pre-specified equivalence and non-inferiority margins",
       primaryEndpoint: "PTV dose equivalence and OAR dose non-inferiority versus clinically delivered plans",
       results: "9/9 PTV endpoints equivalent within ±300 cGy; 21/21 OAR endpoints non-inferior within +300 cGy",
-      sites: 6,
+      sites: 2,
       source: "FDA 510(k) summary K253050",
       sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253050.pdf"
     },
     evidence: [
       {
         type: "Regulatory Submission",
-        description: "FDA 510(k) summary K253050: 500-patient six-location retrospective validation with PTV equivalence and OAR non-inferiority endpoints.",
+        description: "FDA 510(k) summary K253050: 500-patient two-site retrospective validation with PTV equivalence and OAR non-inferiority endpoints.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K253050.pdf"
       },
       {
@@ -113,9 +113,9 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E0",
-    evidenceRigorNotes: "Public-evidence review 2026-11-08: E0 retained. FDA K253050 reports 500 patients (295 definitive, 205 adjuvant) from two organizations at six locations and a 50-case reader subset assessed by three oncologists. These are regulatory data, not scored peer-reviewed evidence.",
+    evidenceRigorNotes: "No peer-reviewed publication naming RadOncAI was identified at time of entry (2026-09-22). The only disclosed validation is the 500-patient two-site retrospective study reported in the FDA 510(k) summary, which is regulatory grey literature and therefore unscored. keyPapers is intentionally empty.",
     clinicalImpact: "I0",
-    clinicalImpactNotes: "FDA K253050 includes dosimetric equivalence/non-inferiority and a 50-case clinician-reader subset (150 assessments, not 150 additional patients). Regulatory evidence remains unscored; no attributable peer-reviewed workflow or patient-outcome study was identified.",
+    clinicalImpactNotes: "No published clinical outcome, workflow or acceptability data. The FDA validation reports dosimetric equivalence/non-inferiority only.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E0 + FDA 510(k): cleared for US prescription use, but with no peer-reviewed evidence local commissioning, plan-quality validation and clinical governance are required before adoption.",
     evidenceVendorIndependent: false,
@@ -125,8 +125,7 @@ export const INFORMAI_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     keyPapers: [],
     releaseDate: "2026-06-18",
-    lastUpdated: "2026-11-08",
-    limitations: ["Predicted dose is guidance, not a deliverable treatment plan or replacement for the primary TPS. Qualified professional review is required.", "FDA indication is adult head-and-neck radiotherapy; validation should not be generalized to other sites."],
+    lastUpdated: "2026-09-22",
     source: "FDA 510(k) K253050; vendor website"
   }
 ];

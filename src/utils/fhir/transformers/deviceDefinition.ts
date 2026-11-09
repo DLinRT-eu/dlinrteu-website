@@ -260,6 +260,21 @@ function createClassifications(product: ProductDetails): FHIRDeviceDefinitionCla
     });
   }
 
+  // EMDN (European Medical Device Nomenclature) device-type code from EUDAMED
+  const emdn = getProductEudamed(product)?.emdnCode?.trim();
+  if (emdn) {
+    classifications.push({
+      type: {
+        coding: [{
+          system: "https://webgate.ec.europa.eu/dyna2/emdn",
+          code: emdn,
+          display: `EMDN ${emdn}`
+        }],
+        text: "EMDN device-type code (EUDAMED)"
+      }
+    });
+  }
+
   return classifications;
 }
 

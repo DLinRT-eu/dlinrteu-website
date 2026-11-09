@@ -4,7 +4,7 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
   {
     id: "airato-ratoai",
     name: "RatoAI",
-    company: "AiRato",
+    company: "AiRato, Inc.",
     companyUrl: "https://airato.jp/en/",
     productUrl: "https://airato.jp/en/product/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/treatment-planning/airato.ts",
@@ -33,12 +33,12 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
       input: ["CT"],
       inputFormat: ["DICOM"],
       output: ["Organ contours", "Predicted dose distribution"],
-      outputFormat: ["DICOM-RT contour transfer (exact object class not specified)"]
+      outputFormat: ["Not publicly disclosed"]
     },
     technology: {
-      integration: ["Contour transfer to a treatment planning system"],
-      deployment: ["Local Windows 11 workstation"],
-      triggerForAnalysis: "Image import from a configured folder",
+      integration: ["Not publicly disclosed"],
+      deployment: ["Not publicly disclosed"],
+      triggerForAnalysis: "Not publicly disclosed",
       processingTime: "Not publicly disclosed"
     },
     regulatory: {
@@ -47,11 +47,6 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
     },
     market: { onMarketSince: "2026", distributionChannels: ["Direct sales (Japan)"] },
     evidence: [
-      {"type": "Vendor explanation of research lineage (not scored)", "description": "AiRato states that research software RatoGuide contains RatoAI core technology. This supports a technical relationship, but does not identify identical released model weights or versions; commercial equivalence remains unverified.", "link": "https://airato.jp/yamanashi-airato-jacmp/"},
-      {"type": "Supporting evidence (not scored)", "description": "RatoGuide research planning study, 12 plans in 11 head-and-neck patients; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1002/acm2.70715"},
-      {"type": "Supporting evidence (not scored)", "description": "45-patient prostate RatoGuide/OncoStudio comparison; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1007/s12194-026-01080-8"},
-      {"type": "Supporting evidence (not scored)", "description": "RatoGuide research segmentation evaluation, 69 patients; commercial RatoAI model equivalence unconfirmed.", "link": "https://doi.org/10.1002/acm2.70757"},
-      {"type": "Regulatory instructions for use", "description": "Official instructions for RatoAI, approval 30800BZX00163000, Class III JMDN 40887003; workstation, folder import and contour transfer specifications.", "link": "https://www.pmda.go.jp/PmdaSearch/kikiDetail/ResultDataSetPDF/113273_30800BZX00163000_1_01_01"},
       {
         type: "Vendor Announcement",
         description: "AiRato press release: RatoAI receives Japanese manufacturing and marketing approval as a Class III device (approval No. 30800BZX00163000, 24 June 2026).",
@@ -64,22 +59,20 @@ export const AIRATO_PRODUCTS: ProductDetails[] = [
       }
     ],
     evidenceRigor: "E0",
-    evidenceRigorNotes: "Public-evidence review 2026-11-08: E0 retained. RatoGuide research publications exist, but equivalence of their models/versions to the marketed RatoAI product is not established. PMDA instructions provide product-specific technical information; regulatory documents and related research remain unscored.",
+    evidenceRigorNotes: "Added after the ASTRO 2026 exhibitor check (2026-09-26). No peer-reviewed publication naming RatoAI was identified yet; keyPapers is intentionally empty.",
     clinicalImpact: "I0",
-    clinicalImpactNotes: "Related RatoGuide studies report segmentation and planning endpoints. These are not assigned to RatoAI until commercial-model equivalence is established.",
+    clinicalImpactNotes: "No published clinical, workflow or dosimetric outcome data naming the product.",
     adoptionReadiness: "R1",
-    adoptionReadinessNotes: "R1 retained pending a separate implementation-readiness rubric review. Japanese approval and public instructions are available; related RatoGuide research does not establish validation of the marketed model versions.",
+    adoptionReadinessNotes: "Approved in Japan only, with vendor-reported information and no peer-reviewed evidence.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    structuresUnavailable: true,
-    limitations: ["The full marketed contour library is not publicly enumerated.", "The software predicts dose and does not calculate deliverable treatment dose. Outputs require professional review; performance outside the training and prescription domain is not established."],
     keyPapers: [],
     releaseDate: "2026-06-24",
-    lastUpdated: "2026-11-08",
+    lastUpdated: "2026-09-26",
     lastRevised: "2026-09-26",
-    source: "PMDA instructions for use; vendor website; related research publications"
+    source: "Vendor website; press releases"
   }
 ];

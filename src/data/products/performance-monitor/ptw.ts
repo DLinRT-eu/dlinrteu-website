@@ -11,7 +11,7 @@ export const AIQUALIS: ProductDetails = {
   usesAI: false,
   company: "PTW",
   logoUrl: "/logos/ptw.jpg",
-  version: "2.0",
+  version: "1.2",
   website: "https://www.ptwdosimetry.com/en/products/aiqualis",
   category: "Performance Monitor",
   features: [

@@ -67,7 +67,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       integration: ["CyberKnife® System", "Radixact® Treatment Delivery System"],
       deployment: ["System-integrated"],
       triggerForAnalysis: "Real-time during treatment delivery",
-      processingTime: "Real-time motion synchronization; Accuray technical data reports overall residual respiratory latency on the order of ±10 ms, with mode-dependent imaging and model update intervals"
+      processingTime: "Real-time motion tracking and compensation; performance depends on platform and tracking mode. One Radixact Synchrony evaluation measured approximately 630 ms latency for fiducial tracking without external breathing monitoring (DOI: 10.1002/acm2.70492)."
     },
     regulatory: {
       ce: {
@@ -89,9 +89,22 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       intendedUseStatement: "FDA K182687: The Motion Tracking and Compensation Feature is an option within the indications for use of the Radixact Treatment Delivery System. The Radixact Treatment Delivery System is indicated for delivery of radiation therapy, stereotactic radiotherapy, or stereotactic radiosurgery to tumors or other targeted tissues anywhere in the body under the direction of a licensed medical practitioner. The 510(k) summary describes the feature as measuring tumor location and motion using kV images and predicting tumor location based on a respiration-amplitude measurement device, after which Radixact compensates for tumor motion by making real-time adjustments. Synchrony® is also available on CyberKnife® systems under separate CyberKnife® system clearances and clinical history."
     },
     market: {
+      availability: "Integrated motion-tracking feature on compatible Accuray CyberKnife and Radixact systems; supported tracking modes depend on system configuration, software version and jurisdiction.",
       onMarketSince: "2002 on CyberKnife®; 2019 launch on Radixact® after FDA K182687 clearance",
       distributionChannels: ["Integrated with Accuray® systems"]
     },
+    version: "Platform-dependent (CyberKnife / Radixact)",
+    guidelines: [
+      { name: "AAPM TG-264", version: "2021", reference: "Keall PJ et al. AAPM Task Group 264: The safe clinical implementation of MLC tracking in radiotherapy. Med Phys 2021", url: "https://doi.org/10.1002/mp.14625" },
+      { name: "AAPM TG-306", version: "2023", reference: "Chen Q et al. Quality control and assurance for tomotherapy: an update to Task Group Report 148. Med Phys 2023", url: "https://doi.org/10.1002/mp.16150" }
+    ],
+    limitations: [
+      "Tracking accuracy depends on target visibility, respiratory motion characteristics, image quality and fiducial configuration",
+      "Requires platform-specific commissioning, patient-specific QA and ongoing verification of motion-compensation accuracy",
+      "Evidence of improved patient outcomes attributable specifically to Synchrony is limited; most clinical studies are single-centre and observational",
+      "Tracking modes, performance and supported functionality differ between CyberKnife and Radixact",
+      "A rare erroneous MLC adaptation on Radixact was reported in 2026 (4 of 1,566 fractions) and resolved by a vendor software patch (Crowe SB, Kairn T, 2026)"
+    ],
     keyPapers: [
       {"doi": "10.46889/jcmr.2026.7120", "title": "Stereotactic Body Radiotherapy in Ultra-Central Lung Tumors using Radixact-X9 Tomotherapy with Artificial Intelligence based Synchrony Technology: An Institutional Experience", "authors": "Purkayastha A, Durai D, Stephen M, et al.", "journal": "Journal of Clinical Medical Research", "year": "2026", "evidenceRigor": "E0", "clinicalImpact": "L1c", "rationale": "Added 2026-10-24 from the uploaded literature-search hits (raw_hits.csv); DOI metadata verified on Crossref; scored from the abstract only, pending reviewer check. Single-institution experience report of Synchrony-tracked SBRT for ultra-central lung tumours; the AI component is described, not separately evaluated.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
 
@@ -107,6 +120,8 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
       {"pmid":"40486323","title":"Prostate stereotactic body radiotherapy with Synchrony-based fiducial tracking on Radixact X9","authors":"Acharya S et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"I2","rationale":"Single-centre clinical experience; feasibility and workflow endpoints.","vendorIndependent":true},
       {"doi":"10.7759/cureus.81598","pmid":"40330330","title":"Liver tumor motion-tracking assessment with Synchrony on Radixact","authors":"Okada H et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"L1t", "legacyClinicalImpact": "I1","rationale":"Single-centre motion-tracking accuracy assessment; QA-level endpoint.","vendorIndependent":true},
       {"doi":"10.7759/cureus.85083","pmid":"40585690","title":"Tomotherapy with Synchrony fiducial tracking for stereotactic body radiotherapy in prostate cancer: a single-centre toxicity report","authors":"Lo Conte V et al.","journal":"Cureus","year":"2025","evidenceRigor":"E1","clinicalImpact":"L5", "legacyClinicalImpact": "I2","rationale":"Single-arm single-centre toxicity report. Scored I2 rather than I4 because there is no comparator arm: the study documents acceptable toxicity under Synchrony tracking but does not demonstrate a toxicity reduction attributable to it.","vendorIndependent":true},
+      {"doi":"10.1002/acm2.70492","title":"Commissioning and clinical implementation of an MLC tracking system: An evaluation of AAPM TG-264 guidelines","authors":"Haraldsson A et al.","journal":"J Appl Clin Med Phys","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-09; DOI verified on Crossref; pending reviewer check. Single-centre commissioning and clinical implementation of Radixact Synchrony: geometric and dosimetric accuracy and tracking latency.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false},
+      {"doi":"10.1002/acm2.70855","title":"Retrospective log-based quality assurance of real-time MLC adaptation on a helical tomotherapy platform","authors":"Crowe SB, Kairn T","journal":"J Appl Clin Med Phys","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Added 2026-11-09; DOI verified on Crossref; pending reviewer check. Single-centre retrospective review of 1,566 fractions with telemetry-based verification; four erroneous adaptations (≤0.3 Gy) resolved by a vendor patch.","vendorIndependent":true,"multiCenter":false,"multiNational":false,"prospective":false,"externalValidation":false},
       {"pmid":"40600108","title":"Real-time motion management for a small lung target with large tumor motion using Radixact Synchrony","authors":"Chen L et al.","journal":"Cureus","year":"2025","rationale":"Single-patient case report; carries no E/I level under the rubric."}
     ],
     evidenceRigor: "E1",
@@ -183,10 +198,10 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.ijrobp.2008.12.041"
       }
     ],
-    clinicalEvidence: "The clinical and technical utility of Synchrony® has a highly established evidence base on the CyberKnife® System (extending nearly 25 years since 2002) and a growing clinical peer-reviewed record on the Radixact® Treatment Delivery System (since its launch in 2019). Clinical studies demonstrate accurate real-time tracking, low residual latencies (±10 ms), and reduced treatment-margins. Recent clinical studies (Acharya et al. 2025, Okada et al. 2025, Lo Conte et al. 2025) demonstrate feasibility and excellent toxicity outcomes in liver tumor tracking and prostate SBRT.",
+    clinicalEvidence: "The clinical and technical utility of Synchrony® has a highly established evidence base on the CyberKnife® System (extending nearly 25 years since 2002) and a growing clinical peer-reviewed record on the Radixact® Treatment Delivery System (since its launch in 2019). Clinical studies demonstrate accurate real-time tracking and support reduced treatment margins; measured latency depends on platform and mode. Recent clinical studies (Acharya et al. 2025, Okada et al. 2025, Lo Conte et al. 2025) demonstrate feasibility and excellent toxicity outcomes in liver tumor tracking and prostate SBRT.",
     releaseDate: "2018-11-23",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-11-09",
     source: "FDA 510(k) K182687; vendor website; vendor documentation; peer-reviewed literature"
   }
 ];
