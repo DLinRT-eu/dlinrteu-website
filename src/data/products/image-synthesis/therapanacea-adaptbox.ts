@@ -152,6 +152,8 @@ export const THERAPANACEA_ADAPTBOX_PRODUCTS: ProductDetails[] = [
       "User must ensure that the RTPlan and RTStruct sent for AdaptBox analysis correspond to the ones used for patient treatment (Therapanacea Technical Information, 2026-06-16).",
       "Results are produced on a synthetic CT and on contours that are not validated; clinical review of all synCT, contours and dose is required before any patient-management decision.",
       "Importing data with missing required DICOM tags, corrupted volumes, missing slices, or incorrect Patient Position / Sex attributes will cause import to fail or generate inappropriate contours.",
+      "Vendor warning: the AdaptBox pseudo-CT model is to be launched only on male pelvis anatomy and on Elekta or Varian CBCT; other anatomies, sexes or CBCT systems could lead to incorrect pseudo-CT. Pseudo-CTs only aim at detecting a need for replanning and should not be used for treatment planning (Therapanacea Technical Information, retrieved 2026-11-09).",
+      "Vendor warning: dose calculation has limited accuracy for small fields (<2 cm × 2 cm), does not support wedges or accessories, and must be validated locally before clinical use (Therapanacea Technical Information, retrieved 2026-11-09).",
       "Independent peer-reviewed evidence is strongest for the male pelvis / prostate workflow; H&N and Breast/Thorax CBCT models are FDA-cleared but have limited independent peer-reviewed validation to date."
     ],
     market: {
