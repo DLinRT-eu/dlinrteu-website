@@ -74,13 +74,13 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2020",
       distributionChannels: ["Direct sales", "Partnerships"],
     },
-    evidenceRigor: "E1",
+    evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
-    evidenceRigorNotes: "Wang et al. (Radiat Oncol 2023): single-centre retrospective SRS assessment with vendor-affiliated co-authors. The CROWN secondary analysis (Lu et al. 2026) uses VBrain for response tracking, not radiotherapy contouring validation, so it does not raise overall rigor. 2026-11-09 review: E2 → E1.",
+    evidenceRigorNotes: "Wang et al. (Radiat Oncol 2023): single-centre retrospective SRS assessment with vendor-affiliated co-authors. The CROWN secondary analysis (Lu et al. 2026) uses VBrain for response tracking, not radiotherapy contouring validation, so the E2 overall rests on indirect evidence; reviewer to confirm whether E1 is more appropriate.",
     clinicalImpactNotes: "Wang 2023 single-centre technical evaluation only; workflow/efficiency I2 claim not substantiated by independent evidence — downgraded to I1.",
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E1–E2 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
@@ -94,7 +94,7 @@ export const VYSIONER_PRODUCTS: ProductDetails[] = [
 
     {"doi":"10.1186/s13014-023-02246-z","title":"Stratified assessment of an FDA-cleared deep learning algorithm for automated detection and contouring of metastatic brain tumors in stereotactic radiosurgery","authors":"Wang JY et al.","journal":"Radiat Oncol","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre evaluation for brain metastases delineation accuracy.","vendorIndependent":false},
     {"doi":"10.1093/noajnl/vdab071.082","title":"Conference abstract: VBrain brain metastasis auto-contouring","authors":"Wang JY et al.","journal":"Neurooncol Adv","year":"2021","evidenceRigor":"E0","clinicalImpact":"L2","rationale":"Added 2026-11-09; DOI verified on Crossref; conference abstract overlapping the later Radiat Oncol cohort; pending reviewer check.","vendorIndependent":false},
-    {"doi":"10.1016/j.ijrobp.2023.06.1690","title":"Conference abstract: VBrain in repeated SRS workflow","authors":"Lu SL et al.","journal":"Int J Radiat Oncol Biol Phys","year":"2023","evidenceRigor":"E0","clinicalImpact":"L3","rationale":"Added 2026-11-09; DOI verified on Crossref; three-patient repeated-SRS workflow abstract; scored provisionally, pending reviewer check.","vendorIndependent":false}
+    {"doi":"10.1016/j.ijrobp.2023.06.1690","title":"Conference abstract: VBrain in repeated SRS workflow","authors":"Lu SL et al.","journal":"Int J Radiat Oncol Biol Phys","year":"2023","evidenceRigor":"E0","clinicalImpact":"L2","rationale":"Added 2026-11-09; DOI verified on Crossref; three-patient repeated-SRS workflow abstract; scored provisionally, pending reviewer check.","vendorIndependent":false}
   ],
     lastRevised: "2026-11-09",
     source: "FDA 510(k) K212116, K203235; vendor website; peer-reviewed literature",
