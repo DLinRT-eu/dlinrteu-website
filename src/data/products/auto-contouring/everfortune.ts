@@ -105,7 +105,8 @@ export const EVERFORTUNE_PRODUCTS: ProductDetails[] = [
       "Head & Neck: Pharyngeal Constrictor"
     ],
     evidenceRigor: "E0",
-    clinicalImpact: "I0",
+    clinicalImpact: "L1t",
+    legacyClinicalImpact: "I0",
     evidenceRigorNotes: "Superseded product. FDA cleared (K220264) but no independent peer-reviewed validation. PubMed searched 2026-02-26. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
     clinicalImpactNotes: "No published clinical impact data. Product superseded by Seg Pro V3. PubMed searched 2026-02-26.",
     adoptionReadiness: "R2",

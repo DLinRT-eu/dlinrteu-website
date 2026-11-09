@@ -66,7 +66,8 @@ export const DVTARGET: ProductDetails = {
   },
   certification: "CE & FDA",
   evidenceRigor: "E0",
-  clinicalImpact: "I0",
+  clinicalImpact: "L1t",
+  legacyClinicalImpact: "I0",
   evaluationData: {
     source: "FDA 510(k) summary K202928",
     results: "Not publicly disclosed",
