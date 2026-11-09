@@ -38,8 +38,7 @@ const summariseCe = (product: ProductDetails): ProductRegulatorySummary["ce"] =>
 };
 
 const summariseFda = (product: ProductDetails): ProductRegulatorySummary["fda"] => {
-  const fda = product.regulatory?.fda as ProductDetails["regulatory"] extends infer R
-    ? R extends { fda?: infer F } ? F | string : never : never;
+  const fda = product.regulatory?.fda as NonNullable<ProductDetails["regulatory"]>["fda"] | string | undefined;
   if (!fda) return { present: false, label: "—" };
   if (typeof fda === "string") return { present: !isNegative(fda), label: fda };
   if (isNegative(fda.status)) return { present: false, label: fda.status || "—" };

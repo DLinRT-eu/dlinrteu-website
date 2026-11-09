@@ -9,6 +9,8 @@ import ProductFeedbackBanner from "@/components/ProductFeedbackBanner";
 import { Badge } from "@/components/ui/badge";
 import EudamedRegistration from "@/components/company/EudamedRegistration";
 import UnifiedProductCard from '@/components/common/UnifiedProductCard';
+import CategoryRegulatoryTable from "@/components/company/CategoryRegulatoryTable";
+import { getCompanyRegulatoryCounts } from "@/utils/companyRegulatory";
 
 const CompanyProducts = () => {
   const { companyId = "" } = useParams<{ companyId: string }>();
@@ -38,7 +40,8 @@ const CompanyProducts = () => {
       const fda = p.regulatory?.fda;
       return typeof fda === "string" ? !!fda : !!fda?.status;
     }).length;
-    return { categories, ceCount, fdaCount };
+    const eudamedCount = getCompanyRegulatoryCounts(products).eudamed;
+    return { categories, ceCount, fdaCount, eudamedCount };
   }, [products]);
 
   const grouped = useMemo(() => {
@@ -161,7 +164,7 @@ const CompanyProducts = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
           <div className="border rounded-lg p-4 bg-white">
             <div className="flex items-center gap-2 text-gray-500 text-xs uppercase tracking-wide">
               <Package className="h-4 w-4" /> Products
@@ -183,6 +186,12 @@ const CompanyProducts = () => {
               <ShieldCheck className="h-4 w-4" /> FDA
             </div>
             <div className="text-2xl font-bold mt-1">{stats.fdaCount}</div>
+          </div>
+          <div className="border rounded-lg p-4 bg-white">
+            <div className="flex items-center gap-2 text-gray-500 text-xs uppercase tracking-wide">
+              <ShieldCheck className="h-4 w-4" /> EUDAMED matches
+            </div>
+            <div className="text-2xl font-bold mt-1">{stats.eudamedCount}</div>
           </div>
         </div>
 
@@ -206,6 +215,7 @@ const CompanyProducts = () => {
                     ({items.length})
                   </span>
                 </h2>
+                <CategoryRegulatoryTable products={items} />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {items.map((product) => (
                     <ProductCard
