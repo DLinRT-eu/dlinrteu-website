@@ -38,7 +38,7 @@ const value = (name: string): string | undefined =>
   args.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3).replace(/^"|"$/g, "");
 const dryRun = args.includes("--dry-run");
 const onlyCompany = value("company")?.toLowerCase();
-const delayMs = Number(value("delay") ?? "400") || 400;
+const delayMs = Number(value("delay") ?? "250") || 250;
 
 interface ActorRecord {
   ACTOR_ID?: string;
@@ -47,6 +47,75 @@ interface ActorRecord {
   STATUS?: string;
   ACT_COUNTRY_ISO2_CODE?: string;
 }
+
+/**
+ * Manufacturer SRNs found by searching the full EUDAMED actor list for each company's
+ * legal-entity names (searched 2026-11-09). Exact NAME filters miss these because the
+ * registered legal name differs (e.g. " THERAPANACEA" with a leading space).
+ */
+const KNOWN_SRNS: Record<string, Array<{ srn: string; name: string }>> = {
+  Therapanacea: [{ srn: "FR-MF-000007672", name: "THERAPANACEA" }],
+  Philips: [
+    { srn: "NL-MF-000001489", name: "Philips Medical Systems Nederland B.V." },
+    { srn: "DE-MF-000005362", name: "Philips Medical Systems DMC GmbH" },
+    { srn: "US-MF-000008701", name: "Philips Medical Systems (Cleveland), Inc." },
+    { srn: "US-MF-000002163", name: "Philips Medical Systems (Cleveland), Inc." },
+    { srn: "CN-MF-000003923", name: "Philips Healthcare (Suzhou) Co., Ltd." },
+    { srn: "US-MF-000033010", name: "Philips North America LLC" },
+  ],
+  "GE Healthcare": [
+    { srn: "FR-MF-000035870", name: "GE Medical Systems SCS" },
+    { srn: "FR-MF-000000687", name: "GE Medical Systems SCS" },
+    { srn: "JP-MF-000009291", name: "GE Healthcare Japan Corporation" },
+    { srn: "DE-MF-000005087", name: "GE Healthcare GmbH" },
+    { srn: "IL-MF-000039390", name: "GE Medical Systems Israel Ltd." },
+    { srn: "CN-MF-000001725", name: "GE Healthcare Tianjin Company Limited" },
+  ],
+  "Siemens Healthineers": [
+    { srn: "DE-MF-000006122", name: "Siemens Healthcare GmbH" },
+    { srn: "US-MF-000012284", name: "Siemens Medical Solutions USA Inc." },
+    { srn: "CN-MF-000013436", name: "Siemens Shenzhen Magnetic Resonance Ltd." },
+  ],
+  "Varian (Siemens Healthineers)": [
+    { srn: "US-MF-000007453", name: "Varian Medical Systems, Inc." },
+    { srn: "US-MF-000001784", name: "Varian Medical Systems, Inc." },
+    { srn: "DE-MF-000017075", name: "Varian Medical Systems München GmbH" },
+  ],
+  Elekta: [
+    { srn: "SE-MF-000002125", name: "Elekta Solutions AB" },
+    { srn: "GB-MF-000004884", name: "Elekta Limited" },
+    { srn: "US-MF-000004146", name: "Elekta Inc." },
+    { srn: "US-MF-000004507", name: "Elekta Inc." },
+  ],
+  "Canon Medical Systems": [
+    { srn: "JP-MF-000011499", name: "Canon Medical Systems Corporation" },
+    { srn: "DK-MF-000019622", name: "Canon Medical Informatics A/S" },
+  ],
+  "United Imaging": [
+    { srn: "CN-MF-000008501", name: "Shanghai United Imaging Healthcare Co.,Ltd." },
+    { srn: "CN-MF-000035682", name: "Shanghai United Imaging Intelligence Co., Ltd." },
+    { srn: "CN-MF-000030896", name: "Wuhan United Imaging Healthcare Co., Ltd." },
+  ],
+  "Mirada Medical": [{ srn: "GB-MF-000008724", name: "Mirada Medical Limited" }],
+  MedCom: [{ srn: "DE-MF-000020585", name: "MedCom Gesellschaft für medizinische Bildverarbeitung mbH" }],
+  "Accuray®": [{ srn: "US-MF-000010238", name: "Accuray Incorporated" }],
+  "Sun Nuclear (Mirion Medical)": [
+    { srn: "US-MF-000021541", name: "Sun Nuclear Corporation" },
+    { srn: "US-MF-000020245", name: "Sun Nuclear Corporation" },
+  ],
+  Brainlab: [{ srn: "DE-MF-000006183", name: "Brainlab SE" }],
+  "Quanta Computer Inc.": [{ srn: "TW-MF-000022042", name: "Quanta Computer Inc." }],
+  "Limbus AI": [{ srn: "CA-MF-000025514", name: "Limbus AI Inc." }],
+};
+
+/**
+ * Near-matches confirmed by the site editor; written as verified so they survive reruns.
+ */
+const CONFIRMED_CANDIDATES: Array<{ productId: string; basicUdi: string; confirmedOn: string }> = [
+  { productId: "manteia-accucontour", basicUdi: "697312740AccuContourLTQ3", confirmedOn: "2026-11-09" },
+  { productId: "mvision-ai-contouring", basicUdi: "64298300642AISEG1.2SZ", confirmedOn: "2026-11-09" },
+  { productId: "synaptiq-mediq-rt", basicUdi: "42700043558MediqOS4W", confirmedOn: "2026-11-09" },
+];
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -81,19 +150,29 @@ async function resolveSrns(company: (typeof COMPANIES)[number]): Promise<ActorRe
   if (company.eudamed?.srn && isManufacturerSrn(company.eudamed.srn)) {
     found.set(company.eudamed.srn, { ACTOR_ID: company.eudamed.srn, NAME: company.eudamed.registeredName });
   }
+  for (const k of KNOWN_SRNS[company.name] ?? []) found.set(k.srn, { ACTOR_ID: k.srn, NAME: k.name });
   for (const name of nameVariants(company)) {
     const actors = await getAll<ActorRecord>(buildUrl("actors", { NAME: name }));
     for (const a of actors) if (a.ACTOR_ID && isManufacturerSrn(a.ACTOR_ID)) found.set(a.ACTOR_ID, a);
-    if (found.size > 0 && !company.eudamed?.srn) break;
   }
   return [...found.values()];
 }
+
+/**
+ * Products registered in EUDAMED under their parent platform's trade name
+ * (one registration covers several catalogue applications); editor-confirmed.
+ */
+const REGISTERED_UNDER: Record<string, string[]> = {
+  "therapanacea-art-plan-segmentation": ["ART-Plan"],
+  "therapanacea-art-plan-adaptive": ["ART-Plan"],
+  "therapanacea-art-plan-planning": ["ART-Plan"],
+};
 
 const productNames = (p: ProductDetails): string[] => {
   const history = ((p as unknown as { nameHistory?: Array<{ name?: string }> }).nameHistory ?? [])
     .map((h) => h.name)
     .filter(Boolean) as string[];
-  return [p.name, ...history];
+  return [p.name, ...history, ...(REGISTERED_UNDER[p.id ?? ""] ?? [])];
 };
 
 interface VerifiedEntry {
@@ -156,7 +235,10 @@ async function main() {
               .map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`)
               .join(",")
           );
-          if (m.matchType !== "exact" || !product.id) continue;
+          const confirmed = CONFIRMED_CANDIDATES.some(
+            (c) => c.productId === product.id && c.basicUdi === m.record.BASIC_UDI
+          );
+          if ((m.matchType !== "exact" && !confirmed) || !product.id) continue;
           const list = (verified[product.id] ??= []);
           if (list.some((v) => v.basicUdi === m.record.BASIC_UDI)) continue;
           list.push({
