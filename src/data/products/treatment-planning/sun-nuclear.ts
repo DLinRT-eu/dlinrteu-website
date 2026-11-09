@@ -12,12 +12,12 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
         sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/"
     },
     evaluationData: {
-        description: "Retrospective external validation at Johns Hopkins: 72 re-planned cases across 4 anatomic regions, evaluating 51 OARs. Peer-reviewed in Shade et al., Adv Radiat Oncol 2026. Additional workflow-level external validations reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
+        description: "Retrospective internal clinical re-planning at Johns Hopkins: 72 re-planned cases across 4 anatomic regions, evaluating 51 OARs. Peer-reviewed in Shade et al., Adv Radiat Oncol 2026. Additional workflow-level external validations reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
         primaryEndpoint: "Non-inferiority of mean OAR dose vs. clinical plans; PTV coverage and conformity",
         results: "Non-inferiority demonstrated for mean OAR dose across all 51 OARs evaluated; no significant decrease in PTV coverage or conformity.",
         sourceUrl: "https://www.advancesradonc.org/article/S2452-1094(26)00043-6/fulltext/",
         source: "Shade et al., Adv Radiat Oncol 2026",
-        studyDesign: "Retrospective external validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
+        studyDesign: "Retrospective internal validation: 72 re-planned cases across 4 anatomic regions at Johns Hopkins"
     },
     name: "Plan AI",
     company: "Sun Nuclear (Mirion Medical)",
@@ -66,7 +66,7 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
       outputFormat: ["Dosimetric parameters", "TPS-compatible objectives"],
     },
     technology: {
-      integration: ["Treatment Planning Systems", "Cloud API", "TPS Interface Scripts"],
+      integration: ["Eclipse", "RayStation", "TPS interface scripts"],
       deployment: ["Cloud-native SaaS", "Microsoft Azure"],
       triggerForAnalysis: "CT and Structure Set upload from TPS",
       processingTime: "Real-time analysis",
@@ -107,25 +107,26 @@ export const SUN_NUCLEAR_PRODUCTS: ProductDetails[] = [
     version: "1.0",
     releaseDate: "2021-03-12",
     keyPapers: [
-      {"doi":"10.1016/j.adro.2026.102036","pmid":"42382856","title":"Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy","authors":"Shade JK et al.","journal":"Advances in Radiation Oncology","year":"2026","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Models trained on 5334 plans from two institutions and validated by replanning 72 clinical cases across four anatomical sites, including an external site (Montefiore Einstein); predictive plans matched or lowered OAR dose with equal or better target coverage. Vendor-authored (Oncospace employees).","vendorIndependent":false,"multiCenter":false,"prospective":false,"externalValidation":true}
+      {"doi": "10.1016/j.adro.2026.102036", "pmid": "42382856", "title": "Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy", "authors": "Shade JK et al.", "journal": "Advances in Radiation Oncology", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I2", "rationale": "Retrospective clinical re-planning of 72 Johns Hopkins cases across four regions. Development used 5,334 plans from two institutions, but the paper explicitly excludes independent external validation. Dosimetric endpoints support L2; workflow time was not measured. Vendor employee co-authors.", "vendorIndependent": false, "multiCenter": false, "prospective": false, "externalValidation": false}
     ],
-    evidenceRigor: "E2",
+    evidenceRigor: "E1",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: E2 confirmed on the strength of Shade 2026 alone — external validation at a second institution meets the E2 criterion, but the study is retrospective, vendor-authored and spans only two sites, so it does not reach E3. The ESTRO/AAPM/ICCR items are conference abstracts and carry no E/I level under the rubric. Peer-reviewed internal validation at Johns Hopkins (Shade et al., Adv Radiat Oncol 2026, https://doi.org/10.1016/j.adro.2026.102036) plus multiple external workflow-level validations presented at ESTRO 2025, AAPM 2024/2025, and ICCR 2024. Wave 5D open question RESOLVED 2026-08-25: the Shade 2026 full text states the models were 'deployed in a commercial system (Plan AI, Sun Nuclear Corporation)', confirming that the 'Predictive Planning' platform evaluated in that paper is this product. No score change; E2/I2 stands.",
-    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: I2 (workflow / plan-quality) supported by the Shade 2026 dosimetric comparison; no decision-level or outcome-level endpoint published. Workflow-level external validation demonstrated across head & neck and multi-site cases (AI-guided unattended/automated plan generation, knowledge-based planning). No outcome-level (toxicity/survival) evidence published.",
+    evidenceRigorNotes: "Public-evidence review 2026-11-08: Shade et al. 2026 supports E1. The 72 clinical re-plans are from Johns Hopkins; two-institution development data do not constitute external validation. The authors explicitly identify external validation as outside the study scope. Conference reports remain unscored.",
+    clinicalImpactNotes: "L2: Shade et al. reports dosimetric non-inferiority across 51 OARs with preserved target coverage and conformity. Human-in-the-loop workflow time and patient outcomes were not measured.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E2 + FDA 510(k) + CE mark: moderate implementation effort. Peer-reviewed external validation supports adoption; local commissioning and TPS interface testing still recommended.",
+    adoptionReadinessNotes: "R2 retained pending a separate implementation-readiness rubric review. FDA and CE records are listed separately; the scored journal study provides internal validation, not external implementation evidence.",
     evidenceVendorIndependent: false,
-    evidenceMultiCenter: true,
+    evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
-    evidenceExternalValidation: true,
-    lastUpdated: "2026-08-25",
+    evidenceExternalValidation: false,
+    lastUpdated: "2026-11-08",
     lastRevised: "2026-08-25",
     source: "FDA 510(k) K242748, K222803 et al.; vendor website; peer-reviewed literature",
     clinicalEvidence: "Peer-reviewed internal validation in Shade et al., Adv Radiat Oncol 2026 (72 re-plans, 51 OARs, Johns Hopkins). Workflow-level external validation also reported at ESTRO 2025, AAPM 2024/2025, and ICCR 2024.",
     evidence: [
+      {"type": "Peer-reviewed full text", "description": "Full text of Shade et al. 2026; limitations explicitly exclude external validation.", "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13316561/"},
       {
         type: "Peer-reviewed Validation",
         description: "Shade et al. Development and Clinical Validation of a Protocol-Agnostic Machine Learning Platform for Automated Treatment Planning in External Beam Radiation Therapy. Adv Radiat Oncol 2026;11(8):102036 (PMID 42382856).",
