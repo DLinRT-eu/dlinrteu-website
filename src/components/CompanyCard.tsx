@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Package, ChevronDown, ChevronUp, ExternalLink, ArrowRight } from 'lucide-react';
 import { ProductDetails } from '@/types/productDetails';
 import ProductCard from './ProductCard';
+import { getCompanyRegulatoryCounts } from '@/utils/companyRegulatory';
 
 interface CompanyCardProps {
   id?: string;
@@ -17,9 +18,10 @@ interface CompanyCardProps {
   discontinuedCount?: number;
   primaryTask?: string;
   secondaryTasks?: string[];
+  eudamedSrn?: string;
 }
 
-const CompanyCard = ({ id, name, description, website, logoUrl, products, primaryTask, secondaryTasks, discontinuedCount = 0 }: CompanyCardProps) => {
+const CompanyCard = ({ id, name, description, website, logoUrl, products, primaryTask, secondaryTasks, discontinuedCount = 0, eudamedSrn }: CompanyCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded(!expanded);
@@ -91,6 +93,17 @@ const CompanyCard = ({ id, name, description, website, logoUrl, products, primar
                 <Package className="w-4 h-4 mr-1" />
                 <span>{products.length} current product{products.length !== 1 ? 's' : ''}{discontinuedCount > 0 ? ` · ${discontinuedCount} historical` : ''}</span>
               </div>
+              {(() => {
+                const counts = getCompanyRegulatoryCounts(products);
+                return (
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    <Badge variant="outline" className="text-xs">CE {counts.ce}</Badge>
+                    <Badge variant="outline" className="text-xs">FDA {counts.fda}</Badge>
+                    <Badge variant="outline" className="text-xs">EUDAMED {counts.eudamed}</Badge>
+                    {eudamedSrn && <Badge variant="outline" className="text-xs font-mono">SRN {eudamedSrn}</Badge>}
+                  </div>
+                );
+              })()}
             </div>
           </div>
           <button
