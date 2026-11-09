@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 import { getCorsHeaders, rejectDisallowedOrigin } from "../_shared/cors.ts";
 import { dailySendCount, isSuppressed, logEmailSend, wouldExceedDailyCap } from "../_shared/email-delivery.ts";
-import { INBOX_ADDRESS, isAddressedToInbox, threadHeaders, validateReply } from "./replyHelpers.ts";
+import { INBOX_ADDRESS, firstOutsideRecipient, isAddressedToInbox, threadHeaders, threadParticipants, validateReply } from "./replyHelpers.ts";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
 const FUNCTION_NAME = "admin-inbox-reply";
@@ -87,6 +87,9 @@ serve(async (req) => {
         if (await isSuppressed(admin, r)) return json({ error: `${r} previously bounced or reported spam; not sent.` }, 400);
       }
       const original = await gateway(`/emails/receiving/${input.id}`);
+      if (!isAddressedToInbox(original.to, original.cc)) return json({ error: "Invalid message" }, 400);
+      const outsider = firstOutsideRecipient([...input.to, ...input.cc], threadParticipants(original));
+      if (outsider) return json({ error: `${outsider} is not on this conversation; replies can only go to its participants.` }, 400);
       const headers = threadHeaders(original.message_id, original.headers?.references ?? original.headers?.References);
       const html = `<div style="font-family:Arial,sans-serif;color:#1a1a2e;line-height:1.5">${esc(input.body).replace(/\n/g, "<br>")}</div>`;
       const result = await gateway("/emails", {

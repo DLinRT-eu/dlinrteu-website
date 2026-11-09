@@ -24,3 +24,11 @@ describe("admin inbox reply rules", () => {
     expect(typeof validateReply({ id, to, subject: "Re", body: "hi" })).toBe("string");
   });
 });
+
+Deno.test("replies are limited to thread participants", async () => {
+  const { threadParticipants, firstOutsideRecipient } = await import("./replyHelpers.ts");
+  const p = threadParticipants({ from: "Ann <ann@x.org>", to: ["info@dlinrt.eu"], cc: ["bob@y.org"] });
+  if (firstOutsideRecipient(["ann@x.org", "bob@y.org"], p) !== null) throw new Error("participants rejected");
+  if (firstOutsideRecipient(["eve@z.org"], p) !== "eve@z.org") throw new Error("outsider allowed");
+  if (p.has("info@dlinrt.eu")) throw new Error("inbox included");
+});
