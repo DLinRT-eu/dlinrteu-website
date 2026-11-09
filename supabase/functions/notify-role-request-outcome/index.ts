@@ -204,10 +204,11 @@ const handler = async (req: Request): Promise<Response> => {
     // never from the caller.
     const { data: request } = await supabase
       .from("role_requests")
-      .select("user_id, requested_role, status, updated_at")
+      .select("user_id, requested_role, status, reviewed_at, updated_at")
       .eq("id", requestId)
       .maybeSingle();
-    const decidedRecently = request?.updated_at && Date.now() - new Date(request.updated_at).getTime() < 60 * 60 * 1000;
+    const decidedAt = request?.reviewed_at ?? request?.updated_at;
+    const decidedRecently = !!decidedAt && Date.now() - new Date(decidedAt).getTime() < 60 * 60 * 1000;
     if (!request || request.user_id !== userId || request.requested_role !== role ||
         request.status !== (approved ? "approved" : "rejected") || !decidedRecently) {
       return new Response(
