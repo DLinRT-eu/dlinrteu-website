@@ -38,7 +38,7 @@ const value = (name: string): string | undefined =>
   args.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3).replace(/^"|"$/g, "");
 const dryRun = args.includes("--dry-run");
 const onlyCompany = value("company")?.toLowerCase();
-const delayMs = Number(value("delay") ?? "400") || 400;
+const delayMs = Number(value("delay") ?? "250") || 250;
 
 interface ActorRecord {
   ACTOR_ID?: string;
@@ -112,9 +112,9 @@ const KNOWN_SRNS: Record<string, Array<{ srn: string; name: string }>> = {
  * Near-matches confirmed by the site editor; written as verified so they survive reruns.
  */
 const CONFIRMED_CANDIDATES: Array<{ productId: string; basicUdi: string; confirmedOn: string }> = [
-  { productId: "", basicUdi: "697312740AccuContourLTQ3", confirmedOn: "2026-11-09" },
-  { productId: "", basicUdi: "64298300642AISEG1.2SZ", confirmedOn: "2026-11-09" },
-  { productId: "", basicUdi: "42700043558MediqOS4W", confirmedOn: "2026-11-09" },
+  { productId: "manteia-accucontour", basicUdi: "697312740AccuContourLTQ3", confirmedOn: "2026-11-09" },
+  { productId: "mvision-ai-contouring", basicUdi: "64298300642AISEG1.2SZ", confirmedOn: "2026-11-09" },
+  { productId: "synaptiq-mediq-rt", basicUdi: "42700043558MediqOS4W", confirmedOn: "2026-11-09" },
 ];
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

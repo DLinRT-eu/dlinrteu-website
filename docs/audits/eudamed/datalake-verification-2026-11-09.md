@@ -3,7 +3,7 @@
 Source: EUDAMED public Data Lake API (DG SANTE). Exact name matches are shown on product pages;
 candidates need manual confirmation. Absence from EUDAMED is not evidence of a missing CE mark.
 
-**Products with an exact EUDAMED match: 17**
+**Products with an exact EUDAMED match: 21**
 
 ## AtomoAI
 - No manufacturer SRN found by exact legal name.
@@ -48,7 +48,8 @@ candidates need manual confirmation. Absence from EUDAMED is not evidence of a m
   - [exact] Contour ProtégéAI+ ↔ "Contour ProtégéAI+" · Basic UDI-DI B-00850009343307 · EMDN Z110603
 
 ## Mirada Medical
-- No manufacturer SRN found by exact legal name.
+- SRN: GB-MF-000008724 (Mirada Medical Limited)
+- GB-MF-000008724: 4 UDI-DI records
 
 ## MVision AI
 - SRN: FI-MF-000013082 (MVision AI Oy)
@@ -86,26 +87,49 @@ candidates need manual confirmation. Absence from EUDAMED is not evidence of a m
 - KR-MF-000049550: 0 UDI-DI records
 
 ## MedCom
-- No manufacturer SRN found by exact legal name.
+- SRN: DE-MF-000020585 (MedCom Gesellschaft für medizinische Bildverarbeitung mbH)
+- DE-MF-000020585: 2 UDI-DI records
 
 ## GE Healthcare
-- SRN: US-MF-000001862 (GE Healthcare)
+- SRN: FR-MF-000035870 (GE Medical Systems SCS); FR-MF-000000687 (GE Medical Systems SCS); JP-MF-000009291 (GE Healthcare Japan Corporation); DE-MF-000005087 (GE Healthcare GmbH); IL-MF-000039390 (GE Medical Systems Israel Ltd.); CN-MF-000001725 (GE Healthcare Tianjin Company Limited); US-MF-000001862 (GE Healthcare)
+- FR-MF-000035870: 2 UDI-DI records
+- FR-MF-000000687: 189 UDI-DI records
+- JP-MF-000009291: 37 UDI-DI records
+- DE-MF-000005087: 3 UDI-DI records
+- IL-MF-000039390: 0 UDI-DI records
+- CN-MF-000001725: 18 UDI-DI records
 - US-MF-000001862: 19 UDI-DI records
   - [exact] MR Contour DL ↔ "MR Contour DL" · Basic UDI-DI 08406821BUG0059782 · EMDN Z11050192
 
 ## Philips
-- SRN: FI-MF-000001621 (Philips Oy)
+- SRN: NL-MF-000001489 (Philips Medical Systems Nederland B.V.); DE-MF-000005362 (Philips Medical Systems DMC GmbH); US-MF-000008701 (Philips Medical Systems (Cleveland), Inc.); US-MF-000002163 (Philips Medical Systems (Cleveland), Inc.); CN-MF-000003923 (Philips Healthcare (Suzhou) Co., Ltd.); US-MF-000033010 (Philips North America LLC); FI-MF-000001621 (Philips Oy)
+- NL-MF-000001489: 424 UDI-DI records
+- DE-MF-000005362: 272 UDI-DI records
+- US-MF-000008701: 1 UDI-DI records
+- US-MF-000002163: 0 UDI-DI records
+- CN-MF-000003923: 50 UDI-DI records
+- US-MF-000033010: 1 UDI-DI records
 - FI-MF-000001621: 1 UDI-DI records
 
 ## Siemens Healthineers
-- SRN: DE-MF-000038456 (Siemens Healthineers AG)
+- SRN: DE-MF-000006122 (Siemens Healthcare GmbH); US-MF-000012284 (Siemens Medical Solutions USA Inc.); CN-MF-000013436 (Siemens Shenzhen Magnetic Resonance Ltd.); DE-MF-000038456 (Siemens Healthineers AG)
+- DE-MF-000006122: 175 UDI-DI records
+  - [exact] AI-Rad Companion Organs RT ↔ "AI-Rad Companion Organs RT" · Basic UDI-DI 0405686902011UN · EMDN Z11069092
+  - [exact] syngo.via RT Image Suite ↔ "syngo.via RT Image Suite" · Basic UDI-DI 0405686901998X2 · EMDN Z11030692
+- US-MF-000012284: 87 UDI-DI records
+- CN-MF-000013436: 16 UDI-DI records
 - DE-MF-000038456: 37 UDI-DI records
 
 ## Canon Medical Systems
-- No manufacturer SRN found by exact legal name.
+- SRN: JP-MF-000011499 (Canon Medical Systems Corporation); DK-MF-000019622 (Canon Medical Informatics A/S)
+- JP-MF-000011499: 0 UDI-DI records
+- DK-MF-000019622: 19 UDI-DI records
 
 ## United Imaging
-- No manufacturer SRN found by exact legal name.
+- SRN: CN-MF-000008501 (Shanghai United Imaging Healthcare Co.,Ltd.); CN-MF-000035682 (Shanghai United Imaging Intelligence Co., Ltd.); CN-MF-000030896 (Wuhan United Imaging Healthcare Co., Ltd.)
+- CN-MF-000008501: 84 UDI-DI records
+- CN-MF-000035682: 8 UDI-DI records
+- CN-MF-000030896: 23 UDI-DI records
 
 ## Taiwan Medical Imaging Co.
 - No manufacturer SRN found by exact legal name.
@@ -167,20 +191,32 @@ candidates need manual confirmation. Absence from EUDAMED is not evidence of a m
 - No manufacturer SRN found by exact legal name.
 
 ## Elekta
-- SRN: FI-MF-000012331 (Elekta Oy)
+- SRN: SE-MF-000002125 (Elekta Solutions AB); GB-MF-000004884 (Elekta Limited); US-MF-000004146 (Elekta Inc.); US-MF-000004507 (Elekta Inc.); FI-MF-000012331 (Elekta Oy)
+- SE-MF-000002125: 139 UDI-DI records
+- GB-MF-000004884: 0 UDI-DI records
+- US-MF-000004146: 0 UDI-DI records
+- US-MF-000004507: 0 UDI-DI records
 - FI-MF-000012331: 1 UDI-DI records
 
 ## Accuray®
-- No manufacturer SRN found by exact legal name.
+- SRN: US-MF-000010238 (Accuray Incorporated)
+- US-MF-000010238: 4 UDI-DI records
 
 ## Sun Nuclear (Mirion Medical)
-- No manufacturer SRN found by exact legal name.
+- SRN: US-MF-000021541 (Sun Nuclear Corporation); US-MF-000020245 (Sun Nuclear Corporation)
+- US-MF-000021541: 21 UDI-DI records
+- US-MF-000020245: 37 UDI-DI records
+  - [exact] Plan AI ↔ "Plan AI" · Basic UDI-DI 506060888PlanAIXR · EMDN Z11010192
 
 ## MD Anderson Cancer Center
 - No manufacturer SRN found by exact legal name.
 
 ## Brainlab
-- No manufacturer SRN found by exact legal name.
+- SRN: DE-MF-000006183 (Brainlab SE)
+- DE-MF-000006183: 454 UDI-DI records
 
 ## Varian (Siemens Healthineers)
-- No manufacturer SRN found by exact legal name.
+- SRN: US-MF-000007453 (Varian Medical Systems, Inc.); US-MF-000001784 (Varian Medical Systems, Inc.); DE-MF-000017075 (Varian Medical Systems München GmbH)
+- US-MF-000007453: 70 UDI-DI records
+- US-MF-000001784: 742 UDI-DI records
+- DE-MF-000017075: 0 UDI-DI records
