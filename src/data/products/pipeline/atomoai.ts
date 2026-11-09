@@ -9,9 +9,9 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
         name: "iContour",
         productId: "atomoai-icontour-pipeline",
         function: "Earlier DLinRT listing name for the same GTV/4D-CT ITV segmentation tool",
-        sourceUrl: "https://atomoai.ai/services",
+        sourceUrl: "https://atomoai.ai/",
         retrievedOn: "2026-10-28",
-        notes: "Vendor services page now names the tool iSecare with the same description; the URL ID is kept so old links work.",
+        notes: "The homepage uses iSecare while indexed services material uses iContour. The historical ID is retained; the naming history does not establish equivalence to the published iSeg research model.",
       },
     ],
     company: "AtomoAI",
@@ -40,24 +40,23 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     technicalSpecifications: {
       population: "Not publicly disclosed",
       input: ["CT", "4D-CT"],
-      inputFormat: ["DICOM"],
+      inputFormat: ["Not publicly disclosed"],
       output: ["Tumour contours"],
       outputFormat: ["Not publicly disclosed"]
     },
     regulatory: {
-      ce: { status: "Not applicable" },
+      ce: { status: "not_available" },
       fda: {
-        status: "Not applicable",
+        status: "not_available",
         notes: "No FDA clearance found (checked 2026-09-26 during the ASTRO 2026 exhibitor review; rechecked 2026-10-28 and 2026-11-06 in openFDA). Update once a clearance is issued."
       },
       intendedUseStatement:
         "Vendor describes iSecare (formerly listed as iContour) as automated tumour segmentation in radiotherapy; no regulatory intended-use statement is published."
     },
+    structuresUnavailable: true,
     usesAI: true,
-    evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "Pre-market product. Sarkar S et al. (2025; DOI: 10.1038/s41698-025-00970-1) report multicentre external validation of iSeg. Co-author Mohamed E. Abazeed is AtomoAI's founder and CEO and first author Sagnik Sarkar its technical lead, so this is company-linked research lineage; it does not by itself establish equivalence between iSeg and the advertised iSecare configuration, so the entry stays E0 pending confirmation.",
     evidence: [
+      {"type": "University announcement", "description": "Northwestern identifies AtomoAI commercialization of iSeg; does not establish identical marketed model/version.", "link": "https://inqbationlab.northwestern.edu/news-events/news/2026-08-28_nxt-funding.html"},
       {
         type: "Peer-reviewed Publication",
         doi: "10.1038/s41698-025-00970-1",
@@ -67,9 +66,12 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
         authors: "Sarkar S et al.",
         journal: "NPJ Precis Oncol",
         description: "Retrospective multicentre development and external validation of iSeg for lung GTV segmentation and motion-resolved ITV generation (external cohorts of 161 and 102 patients; median DSC 0.70–0.71). Authors include AtomoAI's founder and technical lead. Company-linked research; equivalence to the current iSecare configuration requires confirmation. Not scored for this entry."
-      }
+      },
     ],
-    clinicalImpactNotes: "No clinical impact data available.",
+    evidenceRigor: "E0",
+    clinicalImpact: "I0",
+    evidenceRigorNotes: "Public-evidence review 2026-11-08: E0 retained. Sarkar et al. 2025 evaluates iSeg, and Northwestern identifies an AtomoAI commercialisation connection; AtomoAI's founder/CEO (Abazeed ME) and technical lead (Sarkar S) are study authors, so this is company-linked research lineage. Exact equivalence to iSecare/iContour is unconfirmed; the research study remains unscored for this product.",
+    clinicalImpactNotes: "Research-model validation is not attributed to the marketed tool without model/version equivalence. No product-specific clinical-impact evidence was verified.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Pre-market: no regulatory clearance found. Pipeline entry only.",
     evidenceVendorIndependent: false,
@@ -77,11 +79,11 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
-    lastUpdated: "2026-10-28",
+    lastUpdated: "2026-11-08",
     lastRevised: "2026-11-09",
     limitations: [
-      "Pre-market — no regulatory clearance found; not available for clinical use",
-      "No independent validation publications identified; company-linked iSeg research (Sarkar S et al., 2025) not yet confirmed as the same configuration",
+      "Pipeline entry: no public regulatory clearance verified; this does not establish a regulatory exemption or a legal availability determination",
+      "Related company-linked iSeg research exists (Sarkar S et al., 2025); equivalence to iSecare/iContour is not established",
       "All capability statements are vendor-reported; anatomical scope beyond 4D-CT (thoracic) targets not stated"
     ],
     source: "Vendor website"
