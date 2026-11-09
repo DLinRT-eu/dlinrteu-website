@@ -230,12 +230,12 @@ candidates need manual confirmation. Absence from EUDAMED is not evidence of a m
 - US-MF-000001784: 742 UDI-DI records
 - DE-MF-000017075: 0 UDI-DI records
 
-## Close calls awaiting editor decision (not shown on product pages)
+## Editor-confirmed associations (shown on product pages)
 Found by browsing every device registered under the vendors' SRNs (2026-11-09):
-- Brainlab Elements Contouring 5.0 ↔ "Brainlab Elements Contouring, 5.0" (Brainlab SE, DE-MF-000006183) — strong match, version suffix differs.
-- AI Contouring for Eclipse (Varian) ↔ "AI Contouring" registered by Siemens Healthcare GmbH (DE-MF-000006122) — vendor entity differs; confirm it is the Varian product.
-- Synchrony® (Accuray) ↔ "CyberKnife" (Accuray Incorporated, US-MF-000010238) — Synchrony is a CyberKnife feature, not separately registered.
-- DLC Expert (Mirada) ↔ "RTx" (Mirada Medical Limited, GB-MF-000008724) — DLC Expert may be covered by the RTx registration.
+- Brainlab Elements Contouring 5.0 ↔ "Brainlab Elements Contouring, 5.0" (Brainlab SE, DE-MF-000006183), Basic UDI-DI `4056481ContouringZQ`.
+- AI Contouring for Eclipse (Varian) ↔ "AI Contouring" registered by Siemens Healthcare GmbH (DE-MF-000006122), Basic UDI-DI `0405686902368W2` — editor-confirmed association; legal manufacturer explicitly retained.
+- Synchrony® (Accuray) ↔ "CyberKnife" (Accuray Incorporated, US-MF-000010238), Basic UDI-DI `081137603CyberKnifeTDS7J` — platform registration only; not a separate Synchrony registration or evidence of Radixact coverage.
+- DLC Expert (Mirada) ↔ device name "RTx" (Mirada Medical Limited, GB-MF-000008724), Basic UDI-DI `++B334RTxUW` — editor-confirmed platform association; DLC Expert is not named in the registry record.
 
 ## Vendors with SRNs but no catalogue device registered
 Philips (6 SRNs; MRCAT, SmartSpeed, Precise Image not registered under their own names), GE (no AIR Recon DL / TrueFidelity / Precision DL / iRT), Siemens (no DirectORGANS / Deep Resolve), Canon (0 devices under Canon Medical Systems Corporation), United Imaging (only generic names, e.g. "Radiotherapy Contouring Software"), Elekta (Monaco segmentation / IRIS Evo absent across 4 SRNs), MedCom, Quanta. These are likely registered as features of the scanner/TPS or under legacy MDD certificates.

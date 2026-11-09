@@ -51,6 +51,10 @@ export interface EudamedDeviceRegistration {
   registeredTradeName?: string;
   /** SRN of the registering manufacturer. */
   manufacturerSrn?: string;
+  /** Legal manufacturer name as published. */
+  manufacturerName?: string;
+  /** Scope of an editor-confirmed platform or related-entity association. */
+  registrationNote?: string;
   /** EUDAMED query URL used as the disclosed source. */
   sourceUrl?: string;
   /** ISO date (YYYY-MM-DD) on which EUDAMED was queried. */

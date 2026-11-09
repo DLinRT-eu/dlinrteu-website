@@ -7,8 +7,8 @@
  * 3. Cross-checks registered trade/device names against catalogue product names
  *    and reports the EMDN nomenclature code and Basic UDI-DI.
  *
- * Only exact name matches are written to `src/data/eudamed/udiVerified.json`,
- * which the product page displays. Partial matches are report-only candidates
+ * Exact and editor-confirmed matches are written to `src/data/eudamed/udiVerified.json`,
+ * which the product page displays. Other partial matches are report-only candidates
  * for manual review. Absence from EUDAMED is NOT evidence of a missing CE mark.
  *
  * Usage:
@@ -168,6 +168,13 @@ const REGISTERED_UNDER: Record<string, string[]> = {
   "therapanacea-art-plan-planning": ["ART-Plan"],
 };
 
+const CONFIRMED_REGISTRATIONS = [
+  { productId: "brainlab-elements-rt-seg", basicUdi: "4056481ContouringZQ", manufacturerSrn: "DE-MF-000006183", registrationNote: "Registered as Brainlab Elements Contouring, 5.0." },
+  { productId: "varian-eclipse-ai-contouring", basicUdi: "0405686902368W2", manufacturerSrn: "DE-MF-000006122", registrationNote: "Editor-confirmed association with AI Contouring registered by Siemens Healthcare GmbH; catalogue vendor: Varian (Siemens Healthineers)." },
+  { productId: "accuray-synchrony", basicUdi: "081137603CyberKnifeTDS7J", manufacturerSrn: "US-MF-000010238", registrationNote: "CyberKnife platform registration; not a separate Synchrony registration and does not establish coverage of Radixact." },
+  { productId: "mirada-dlc", basicUdi: "++B334RTxUW", manufacturerSrn: "GB-MF-000008724", registrationNote: "Editor-confirmed association with the RTx platform registration; DLC Expert is not separately named in this record." },
+];
+
 const productNames = (p: ProductDetails): string[] => {
   const history = ((p as unknown as { nameHistory?: Array<{ name?: string }> }).nameHistory ?? [])
     .map((h) => h.name)
@@ -182,6 +189,7 @@ interface VerifiedEntry {
   registeredTradeName?: string;
   manufacturerSrn?: string;
   manufacturerName?: string;
+  registrationNote?: string;
   sourceUrl: string;
   lastVerified: string;
 }
@@ -256,6 +264,27 @@ async function main() {
     }
     report.push("");
     console.log(`${company.name}: ${actors.length} SRN(s)`);
+  }
+
+  for (const association of CONFIRMED_REGISTRATIONS) {
+    const product = ALL_PRODUCTS.find((p) => p.id === association.productId);
+    if (!product || (onlyCompany && !product.company.toLowerCase().includes(onlyCompany))) continue;
+    const sourceUrl = buildUrl("udi", { BASIC_UDI: association.basicUdi });
+    const records = await getAll<DatalakeUdiRecord>(sourceUrl);
+    const record = records.find((r) => r.BASIC_UDI === association.basicUdi && r.MF_SRN === association.manufacturerSrn);
+    if (!record) throw new Error(`Confirmed registration unavailable: ${association.productId}`);
+    verified[association.productId] = [{
+      basicUdi: association.basicUdi,
+      primaryDi: record.PRIMARY_DI ?? undefined,
+      emdnCode: cleanEmdnCode(record.NOMENCLATURE_CODE),
+      registeredTradeName: record.TRADE_NAME ?? record.DEVICE_NAME ?? undefined,
+      manufacturerSrn: association.manufacturerSrn,
+      manufacturerName: record.MF_NAME ?? undefined,
+      registrationNote: association.registrationNote,
+      sourceUrl,
+      lastVerified: TODAY,
+    }];
+    report.push(`- [editor-confirmed] ${product.name} ↔ "${record.TRADE_NAME ?? record.DEVICE_NAME}" · Basic UDI-DI ${association.basicUdi}. ${association.registrationNote}`);
   }
 
   const total = Object.keys(verified).length;

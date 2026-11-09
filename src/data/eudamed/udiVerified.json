@@ -378,6 +378,58 @@
         "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=506060888PlanAIXR&format=json&api-version=v1.0",
         "lastVerified": "2026-11-09"
       }
+    ],
+    "brainlab-elements-rt-seg": [
+      {
+        "basicUdi": "4056481ContouringZQ",
+        "primaryDi": "04056481145880",
+        "emdnCode": "Z11069092",
+        "registeredTradeName": "Brainlab Elements Contouring, 5.0",
+        "manufacturerSrn": "DE-MF-000006183",
+        "manufacturerName": "Brainlab SE",
+        "registrationNote": "Registered as Brainlab Elements Contouring, 5.0.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=4056481ContouringZQ&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "varian-eclipse-ai-contouring": [
+      {
+        "basicUdi": "0405686902368W2",
+        "primaryDi": "04068151048117",
+        "emdnCode": "Z11069092",
+        "registeredTradeName": "AI Contouring",
+        "manufacturerSrn": "DE-MF-000006122",
+        "manufacturerName": "Siemens Healthcare GmbH",
+        "registrationNote": "Editor-confirmed association with AI Contouring registered by Siemens Healthcare GmbH; catalogue vendor: Varian (Siemens Healthineers).",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=0405686902368W2&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "accuray-synchrony": [
+      {
+        "basicUdi": "081137603CyberKnifeTDS7J",
+        "primaryDi": "00811376030016",
+        "emdnCode": "Z11010101",
+        "registeredTradeName": "CyberKnife",
+        "manufacturerSrn": "US-MF-000010238",
+        "manufacturerName": "Accuray Incorporated",
+        "registrationNote": "CyberKnife platform registration; not a separate Synchrony registration and does not establish coverage of Radixact.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=081137603CyberKnifeTDS7J&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
+    "mirada-dlc": [
+      {
+        "basicUdi": "++B334RTxUW",
+        "primaryDi": "B334RTX1P100",
+        "emdnCode": "Z110603",
+        "registeredTradeName": "RTx",
+        "manufacturerSrn": "GB-MF-000008724",
+        "manufacturerName": "Mirada Medical Limited",
+        "registrationNote": "Editor-confirmed association with the RTx platform registration; DLC Expert is not separately named in this record.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=%2B%2BB334RTxUW&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
     ]
   }
 }
