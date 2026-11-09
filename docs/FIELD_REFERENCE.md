@@ -359,6 +359,8 @@ When using the in-browser visual editor, fields use specialized editor component
 
 ---
 
+> Company pages show, per category, each current product's CE status, FDA clearance and EUDAMED match (exact or editor-confirmed, with Basic UDI-DI/EMDN), derived via `src/utils/companyRegulatory.ts`; the Companies list shows CE/FDA/EUDAMED counts and the company SRN.
+
 ## Company Certification Fields
 
 These fields are used when company representatives certify product information:
