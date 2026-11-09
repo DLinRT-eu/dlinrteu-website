@@ -312,6 +312,7 @@ const Companies = () => {
                 description={company.description}
                 primaryTask={company.primaryTask}
                 secondaryTasks={company.secondaryTasks}
+                eudamedSrn={dataService.getCompanyById(company.id)?.eudamed?.srn}
               />
             ))}
             
