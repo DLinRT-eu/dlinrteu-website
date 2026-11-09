@@ -46,6 +46,7 @@ function getCorsHeaders(origin: string | null): HeadersInit {
 
 interface NotificationRequest {
   reviewerId: string;
+  roundId: string;
   roundName: string;
   assignmentCount: number;
   deadline?: string;
@@ -113,10 +114,11 @@ const handler = async (req: Request): Promise<Response> => {
       }
     }
 
-    const { reviewerId, roundName, assignmentCount, deadline, productNames }: NotificationRequest = await req.json();
+    const body: Partial<NotificationRequest> = await req.json();
+    const { reviewerId, roundId } = body;
 
-    if (typeof reviewerId !== "string" || !UUID_RE.test(reviewerId)) {
-      return new Response(JSON.stringify({ error: "Invalid reviewerId" }), {
+    if (typeof reviewerId !== "string" || !UUID_RE.test(reviewerId) || typeof roundId !== "string" || !UUID_RE.test(roundId)) {
+      return new Response(JSON.stringify({ error: "Invalid reviewerId or roundId" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
@@ -125,6 +127,29 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Processing notification for reviewer:", reviewerId);
 
     const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Round name, count, deadline and products come from stored assignments,
+    // never from the caller.
+    const { data: round } = await supabase
+      .from("review_rounds").select("name, default_deadline").eq("id", roundId).maybeSingle();
+    const { data: assigned } = await supabase
+      .from("product_reviews").select("product_id, deadline")
+      .eq("review_round_id", roundId).eq("assigned_to", reviewerId);
+    if (!round || !assigned || assigned.length === 0) {
+      return new Response(JSON.stringify({ error: "No assignments for this reviewer in this round" }), {
+        status: 409,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+    const roundName = round.name;
+    const assignmentCount = assigned.length;
+    const deadline = assigned.find((a) => a.deadline)?.deadline ?? round.default_deadline ?? undefined;
+    // Client-supplied display names are used only when they map 1:1 to the stored
+    // assignments; otherwise the stored product IDs are shown.
+    const clientNames = Array.isArray(body.productNames) ? body.productNames : [];
+    const namesValid = clientNames.length === assignmentCount &&
+      clientNames.every((n) => typeof n === "string" && n.length <= 150 && !/(https?:\/\/|www\.|<)/i.test(n));
+    const productNames: string[] = namesValid ? clientNames : assigned.map((a) => a.product_id);
 
     // Get reviewer details including notification preferences
     const { data: profile, error: profileError } = await supabase

@@ -541,6 +541,7 @@ export async function bulkAssignProducts(
           await supabase.functions.invoke('notify-reviewer-assignment', {
             body: {
               reviewerId,
+              roundId,
               roundName: round?.name || 'Review Round',
               assignmentCount: productIds.length,
               deadline: deadline || null,
