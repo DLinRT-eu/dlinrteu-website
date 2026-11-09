@@ -429,6 +429,24 @@ export type Database = {
         }
         Relationships: []
       }
+      company_product_ownership: {
+        Row: {
+          company_id: string
+          created_at: string
+          product_id: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          product_id: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          product_id?: string
+        }
+        Relationships: []
+      }
       company_product_verifications: {
         Row: {
           company_id: string
