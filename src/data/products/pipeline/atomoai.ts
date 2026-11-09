@@ -56,7 +56,19 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     usesAI: true,
     evidenceRigor: "E0",
     clinicalImpact: "I0",
-    evidenceRigorNotes: "Pre-market product. No peer-reviewed validation naming iContour or iSecare identified (checked 2026-09-26 and 2026-10-28).",
+    evidenceRigorNotes: "Pre-market product. Sarkar S et al. (2025; DOI: 10.1038/s41698-025-00970-1) report multicentre external validation of iSeg. Co-author Mohamed E. Abazeed is AtomoAI's founder and CEO and first author Sagnik Sarkar its technical lead, so this is company-linked research lineage; it does not by itself establish equivalence between iSeg and the advertised iSecare configuration, so the entry stays E0 pending confirmation.",
+    evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        doi: "10.1038/s41698-025-00970-1",
+        link: "https://doi.org/10.1038/s41698-025-00970-1",
+        year: "2025",
+        title: "Deep learning for automated, motion-resolved tumor segmentation in radiotherapy",
+        authors: "Sarkar S et al.",
+        journal: "NPJ Precis Oncol",
+        description: "Retrospective multicentre development and external validation of iSeg for lung GTV segmentation and motion-resolved ITV generation (external cohorts of 161 and 102 patients; median DSC 0.70–0.71). Authors include AtomoAI's founder and technical lead. Company-linked research; equivalence to the current iSecare configuration requires confirmation. Not scored for this entry."
+      }
+    ],
     clinicalImpactNotes: "No clinical impact data available.",
     adoptionReadiness: "R1",
     adoptionReadinessNotes: "Pre-market: no regulatory clearance found. Pipeline entry only.",
@@ -66,10 +78,10 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-10-28",
-    lastRevised: "2026-11-06",
+    lastRevised: "2026-11-09",
     limitations: [
       "Pre-market — no regulatory clearance found; not available for clinical use",
-      "No independent validation publications identified",
+      "No independent validation publications identified; company-linked iSeg research (Sarkar S et al., 2025) not yet confirmed as the same configuration",
       "All capability statements are vendor-reported; anatomical scope beyond 4D-CT (thoracic) targets not stated"
     ],
     source: "Vendor website"
