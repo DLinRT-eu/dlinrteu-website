@@ -418,6 +418,19 @@
         "lastVerified": "2026-11-09"
       }
     ],
+    "elekta-monaco-segmentation-unity": [
+      {
+        "basicUdi": "00858164002BUDI0000002H9",
+        "primaryDi": "07340201500118",
+        "emdnCode": "Z11010401,Z11010492",
+        "registeredTradeName": "Monaco RTP System",
+        "manufacturerSrn": "SE-MF-000002125",
+        "manufacturerName": "Elekta Solutions AB",
+        "registrationNote": "Monaco RTP System platform registration (treatment planning system); the segmentation component is not separately named in this record.",
+        "sourceUrl": "https://api.datalake.sante.service.ec.europa.eu/eudamed/udi?BASIC_UDI=00858164002BUDI0000002H9&format=json&api-version=v1.0",
+        "lastVerified": "2026-11-09"
+      }
+    ],
     "mirada-dlc": [
       {
         "basicUdi": "++B334RTxUW",
