@@ -6,7 +6,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   id: "manteia-acculearning",
   name: "AccuLearning",
   company: "Manteia",
-  productUrl: "https://www.manteiatech.com/acculearning",
+  productUrl: "https://www.manteiamedical.com/acculearning",
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/platform/manteia-acculearning.ts",
   description: "Localized deep learning platform for clinics to build/train custom AI models for radiation therapy using institutional data.",
   category: "Platform",
@@ -37,7 +37,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     processingTime: "1-4 hours depending on dataset size" // Added missing required property
   },
    regulatory: {
-    intendedUseStatement: "AccuLearning is a deep learning–powered platform built for localized, small-sample training in radiation oncology. Designed to help clinics build customized AI models with their own data, it enables smarter, site-specific adaptation and integration across the Manteia ecosystem. (Source: Manteia AccuLearning product page, https://www.manteiatech.com/acculearning, accessed 2026-05-30. No verbatim regulatory IFU available — research-use platform.)"
+    intendedUseStatement: "AccuLearning is a deep learning–powered platform built for localized, small-sample training in radiation oncology. Designed to help clinics build customized AI models with their own data, it enables smarter, site-specific adaptation and integration across the Manteia ecosystem. (Source: Manteia AccuLearning product page, https://www.manteiamedical.com/acculearning, accessed 2026-05-30. No verbatim regulatory IFU available — research-use platform.)"
   },
   market: {
     onMarketSince: "2017",
@@ -112,7 +112,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
     {
       type: "Manufacturer Publication List (vendor-provided)",
       description: "Manteia publication summary supplied 2026-09-23 (vendor-provided, retrieved 2026-09-23): five of 81 records name AccuLearning — two independent user publications and three Manteia-authored conference abstracts/posters (active-learning query strategy 2020, platform description 2021, low-field MRI abdominal model comparison 2023). Abstracts are listed for transparency and are not scored.",
-      link: "https://www.manteiatech.com/acculearning"
+      link: "https://www.manteiamedical.com/acculearning"
     },
     {
       type: "Related Peer-reviewed Publication",
@@ -127,7 +127,7 @@ export const MANTEIA_LEARNING_PRODUCTS: ProductDetails[] = [
   ],
   version: "N/D",
   releaseDate: "2017-01-01",
-   lastRevised: "2026-09-29",
+   lastRevised: "2026-11-09",
   lastUpdated: "2026-09-29",
    source: "Vendor website; peer-reviewed literature"
 }

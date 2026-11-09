@@ -4,7 +4,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
   {
     id: "therapanacea-smartfuse",
     keyPapers: [
-      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse. Ten head-and-neck patients, one centre, no vendor author. Median DSC 0.86 and HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage, and 39% did not. The paper says propagated volumes need medical review.","vendorIndependent":true}
+      {"doi":"10.1002/acm2.70479","pmid":"41820031","title":"Automatic target volume segmentation for offline adaptive head–and‐neck radiotherapy","authors":"Moliner et al.","journal":"J Applied Clin Med Phys","year":"2026","link":"https://doi.org/10.1002/acm2.70479","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Names Smartfuse. Ten head-and-neck patients, one centre, no vendor author. Median DSC 0.86 and HD95 4.0 mm. All GTV+CTV met V95% at least 95%. 61% of physician PTVs met that coverage, and 39% did not. The paper says propagated volumes need medical review.","vendorIndependent":true}
     ],
     trainingData: {
         source: "Therapanacea product page (manufacturer)",
@@ -111,7 +111,7 @@ export const THERAPANACEA_SMARTFUSE_PRODUCTS: ProductDetails[] = [
     version: "3.2.1",
     releaseDate: "Not confirmed. 2020, 2025-01-01 and module build 3.1.2 were not on the technical page read 2026-11-05.",
     lastUpdated: "2026-11-05",
-    lastRevised: "2026-11-05",
+    lastRevised: "2026-11-09",
     source: "Therapanacea products page and Technical Information 3.2 (ART-Plan+ v3.2.1, UDI (01)03770019940020(8012) v3.2.1(11)260724, retrieved 2026-11-05). FDA summaries K202700 and K234068 name SmartFuse. K242822 and K253091 do not. Moliner et al., JACMP 2026 (doi:10.1002/acm2.70479)."
   }
 ];

@@ -2,12 +2,12 @@ import { ProductDetails } from "@/types/productDetails";
 
 export const DVTARGET: ProductDetails = {
   id: "hura-dvtarget",
-  name: "DV.TARGET",
+  name: "HuraRT (DV.Target)",
   market: {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) K202928; vendor website; peer-reviewed literature",
+  source: "FDA 510(k) K202928; vendor documentation",
   company: "Hura Imaging",
   logoUrl: "/logos/huraimaging.png",
   version: "2.5",
@@ -15,7 +15,7 @@ export const DVTARGET: ProductDetails = {
   category: "Auto-Contouring",
   modality: ["CT"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/hura-imaging.ts",
-  companyUrl: "https://huraimaging.com",
+  companyUrl: "http://www.huraimaging.com",
   productUrl: "http://www.huraimaging.com/dvtarget/",
   regulatory: {
     ce: {
@@ -50,7 +50,7 @@ export const DVTARGET: ProductDetails = {
     "User-friendly interface with manual correction tools",
     "Fully automated organ segmentation"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-11-09",
   lastUpdated: "2026-08-25",
   limitations: [
     "Only intended for normal organ contouring; not validated for tumor or clinical target volume (CTV) contouring",
@@ -66,7 +66,8 @@ export const DVTARGET: ProductDetails = {
   },
   certification: "CE & FDA",
   evidenceRigor: "E0",
-  clinicalImpact: "I0",
+  clinicalImpact: "L1t",
+  legacyClinicalImpact: "I0",
   evaluationData: {
     source: "FDA 510(k) summary K202928",
     results: "Not publicly disclosed",
@@ -82,10 +83,11 @@ export const DVTARGET: ProductDetails = {
     "Head & Neck",
     "Thorax",
     "Breast",
+    "Abdomen",
     "Pelvis"
   ],
-  evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-06-15. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
-  clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-06-15.",
+  evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-11-09. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
+  clinicalImpactNotes: "No published clinical impact data available. PubMed searched 2026-11-09.",
   supportedStructures: [
     "Brain: Brain",
     "Brain: Brainstem",
@@ -130,13 +132,12 @@ export const DVTARGET: ProductDetails = {
     "Abdomen: Spleen",
     "Abdomen: Spinal Cord (lumbar section)",
     "Abdomen: Stomach",
-    "Pelvis: Rectum",
     "Pelvis: Large Bowel (terminal end)",
     "Pelvis: Small Bowel (terminal end)"
   ],
   adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
   technicalSpecifications: {
-    input: ["CT", "MRI"],
+    input: ["CT"],
     output: ["Structure sets"],
     population: "Adult patients",
     inputFormat: ["DICOM"],
