@@ -103,7 +103,7 @@ export const AviewRTACS: ProductDetails = {
     {"doi":"10.1186/s13014-021-01923-1","title":"Evaluation of deep learning-based autosegmentation in breast cancer radiotherapy","authors":"Byun HK et al.","journal":"Radiat Oncol","year":"2021","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical validation with geometric endpoints."},
     {"doi":"10.3389/fonc.2023.1119008","title":"Comprehensive clinical evaluation of deep learning-based auto-segmentation for radiotherapy in patients with cervical cancer","authors":"Chung SY et al.","journal":"Front. Oncol.","year":"2023","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre auto-segmentation accuracy evaluation."}
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-11-09",
   lastUpdated: "2026-10-15",
   releaseDate: "2025-08-20",
   trainingData: {
@@ -112,16 +112,23 @@ export const AviewRTACS: ProductDetails = {
     scannerModels: ["CT"],
     disclosureLevel: "minimal"
   },
+  limitations: [
+    "FDA clearance (K220408) validated selected structures on 120 CT cases (Korean and US data): breast-region structures on contrast and non-contrast CT; head and neck, abdominal and pelvic structures on contrast CT only",
+    "Validation covers selected structures, not the full vendor-advertised contour library",
+    "Published studies often share investigators with the developer, and some evaluate research or customised engine versions",
+    "Relationship between catalogue version 4.0 and the FDA-listed configuration not confirmed",
+    "All contours require clinician review; automation bias is a recognised implementation risk"
+  ],
   certification: "CE & FDA",
   evidenceRigor: "E2",
   subspeciality: "Radiation Oncology",
   clinicalImpact: "L3",
     legacyClinicalImpact: "I2",
   evaluationData: {
-    source: "Lee et al. IJROBP 2024 (DOI: 10.1016/j.ijrobp.2024.01.001)",
+    source: "Lee BM et al. Int J Radiat Oncol Biol Phys 2024 (DOI: 10.1016/j.ijrobp.2024.02.041)",
     results: "Not publicly disclosed",
-    sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.01.001",
-    description: "Independent evaluation of breast RT planning across 2,000 cases and validation of automated segmentation for target volumes in postoperative breast cancer.",
+    sourceUrl: "https://doi.org/10.1016/j.ijrobp.2024.02.041",
+    description: "Single-institution evaluation of breast RT planning across 2,000 cases and validation of automated segmentation for target volumes in postoperative breast cancer.",
     studyDesign: "Retrospective large-scale clinical implementation study",
     primaryEndpoint: "Not specified"
   },
