@@ -12,7 +12,8 @@
  * for manual review. Absence from EUDAMED is NOT evidence of a missing CE mark.
  *
  * Usage:
- *   bun scripts/verify-eudamed.ts [--company="Elekta"] [--delay=500] [--dry-run]
+ *   bun run eudamed:refresh [-- --company="Elekta"] [--delay=500] [--dry-run]
+ * Company runs update only that vendor's products; failed lookups keep previous records.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -39,6 +40,7 @@ const value = (name: string): string | undefined =>
   args.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3).replace(/^"|"$/g, "");
 const dryRun = args.includes("--dry-run");
 const onlyCompany = value("company")?.toLowerCase();
+const reportSuffix = onlyCompany ? `-${onlyCompany.replace(/[^a-z0-9]+/g, "-")}` : "";
 const delayMs = Number(value("delay") ?? "250") || 250;
 
 interface ActorRecord {
@@ -333,8 +335,8 @@ async function main() {
   const total = Object.keys(next).length;
   report.splice(5, 0, `**Products with an exact EUDAMED match: ${total}**`, "");
   mkdirSync(OUT_DIR, { recursive: true });
-  writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}.md`), report.join("\n"));
-  writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}.csv`), csv.join("\n"));
+  writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}${reportSuffix}.md`), report.join("\n"));
+  writeFileSync(resolve(OUT_DIR, `datalake-verification-${TODAY}${reportSuffix}.csv`), csv.join("\n"));
   console.log(["Changes:", ...changeLines].join("\n"));
   if (skipped.length) console.log(`Skipped (previous kept): ${skipped.join(", ")}`);
   if (!dryRun) {
