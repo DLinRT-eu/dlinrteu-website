@@ -197,28 +197,11 @@ Deno.serve(async (req) => {
         }
       }
 
-      // Never decrease existing totals: a call can only raise counts, not
-      // erase or rewrite them downward.
-      const { data: existingDaily } = await supabase
-        .from("analytics_daily")
-        .select("total_visits, unique_visitors")
-        .eq("date", date)
-        .maybeSingle();
-
-      const { error: dailyErr } = await supabase
-        .from("analytics_daily")
-        .upsert(
-          {
-            date,
-            total_visits: Math.max(existingDaily?.total_visits ?? 0, data.totalVisits),
-            unique_visitors: Math.max(existingDaily?.unique_visitors ?? 0, data.uniqueVisitors),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "date" }
-        );
-      if (dailyErr) throw dailyErr;
-
-      const pageEntries = Object.entries(data.pageVisits);
+      // Daily totals are derived server-side from stored rows; caller totals
+      // are ignored. Page counters may only grow by a small bounded step per call.
+      const MAX_VISIT_STEP = 5;
+      const MAX_DURATION_STEP = 3600;
+      const pageEntries = Object.entries((pageVisits ?? {}) as Record<string, { count: number; totalDuration: number }>);
       let existingPages: { path: string; visit_count: number; total_duration: number }[] = [];
       if (pageEntries.length) {
         const { data: rows } = await supabase
@@ -231,13 +214,14 @@ Deno.serve(async (req) => {
       const existingByPath = new Map(existingPages.map((r) => [r.path, r]));
 
       const pageRows = pageEntries.map(([path, v]) => {
-        const existing = existingByPath.get(path);
+        const prevCount = existingByPath.get(path)?.visit_count ?? 0;
+        const prevDuration = existingByPath.get(path)?.total_duration ?? 0;
         return {
           date,
           path,
           title: path,
-          visit_count: Math.max(existing?.visit_count ?? 0, v.count),
-          total_duration: Math.max(existing?.total_duration ?? 0, v.totalDuration),
+          visit_count: Math.min(Math.max(prevCount, v.count), prevCount + MAX_VISIT_STEP),
+          total_duration: Math.min(Math.max(prevDuration, v.totalDuration), prevDuration + MAX_DURATION_STEP),
           updated_at: new Date().toISOString(),
         };
       });
@@ -248,6 +232,33 @@ Deno.serve(async (req) => {
           .upsert(pageRows, { onConflict: "date,path" });
         if (pageErr) throw pageErr;
       }
+
+      const { count: uniqueCount, error: uniqErr } = await supabase
+        .from("analytics_visitors")
+        .select("id", { count: "exact", head: true })
+        .eq("date", date);
+      if (uniqErr) throw uniqErr;
+
+      const { data: allPages, error: sumErr } = await supabase
+        .from("analytics_page_visits")
+        .select("visit_count")
+        .eq("date", date)
+        .limit(10000);
+      if (sumErr) throw sumErr;
+      const totalVisits = (allPages ?? []).reduce((acc, r) => acc + (r.visit_count ?? 0), 0);
+
+      const { error: dailyErr } = await supabase
+        .from("analytics_daily")
+        .upsert(
+          {
+            date,
+            total_visits: totalVisits,
+            unique_visitors: uniqueCount ?? 0,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "date" }
+        );
+      if (dailyErr) throw dailyErr;
 
       return jsonResponse({ ok: true }, 200, corsHeaders);
     }
