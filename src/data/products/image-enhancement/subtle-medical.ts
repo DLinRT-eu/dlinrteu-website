@@ -340,102 +340,163 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "subtle-hd-pet",
-    trainingData: {
-        source: "PRNewswire 2026-05-27; Diagnostic Imaging 2026-05-27",
-        disclosureLevel: "minimal",
-        description: "The model uses a next-generation deep learning PET enhancement architecture that leverages anatomical CT data to improve reconstruction quality.",
-        sourceUrl: "https://subtlemedical.com/"
-    },
-    evaluationData: {
-        studyDesign: "Software V&V (FDA 510(k))",
-        primaryEndpoint: "Not specified",
-        results: "Not publicly disclosed",
-        description: "FDA 510(k) K254013 validation across a broad range of accelerated low-count PET acquisitions. The software supports up to 75% faster PET imaging and aims to improve SUVmax quantitative accuracy.",
-        source: "FDA 510(k) K254013 (cleared 2026-05-14)",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
-    },
     name: "SubtleHD(PET)",
     company: "Subtle Medical",
-    category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
-    description: "Next-generation AI-powered PET image enhancement and acceleration software. Supports all FDA-approved radiotracers (including theranostic agents beyond 18F-FDG), enables up to 75% faster PET imaging on existing PET/CT and PET/MR scanners, leverages anatomical CT data to improve reconstruction quality, and provides adjustable denoising and improved SUVmax quantitative accuracy.",
-    features: ["Deep learning enhancement", "PET acceleration", "All FDA-approved radiotracers", "Adjustable denoising", "CT-guided reconstruction"],
-    certification: "FDA Cleared",
-    logoUrl: "/logos/SubtleMedical.jpg",
     companyUrl: "https://subtlemedical.com/",
-    productUrl: "https://subtlemedical.com/",
-    anatomicalLocation: ["Whole body"],
+    productUrl: "https://subtlemedical.com/subtlepet/",
+    githubUrl:
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    description:
+      "Prescription image-processing software intended for noise reduction of PET images, including PET/CT and PET/MR, obtained with any kind of radiotracer. The FDA-cleared device (SubtleHD-PET 1.x) has PET-only and PET/CT models. Subtle Medical advertises up to 75% faster imaging; this is a manufacturer claim, not an FDA-labeled performance guarantee.",
+    category: "Image Enhancement",
+    certification:
+      "FDA 510(k)-cleared (K254013; Class II). EU CE status not verified.",
+    logoUrl: "/logos/SubtleMedical.jpg",
+    anatomicalLocation: ["Brain", "Whole body"],
     modality: ["PET"],
-    diseaseTargeted: ["Cancer", "Theranostics", "Neurological disorders", "Cardiovascular disease"],
+    diseaseTargeted: [],
     releaseDate: "2026-05-27",
-    version: "1.0",
+    version: "1.x",
+    features: [
+      "Deep-learning PET noise reduction",
+      "PET-only and PET/CT processing models",
+      "DICOM routing through an MDDS",
+      "PET/CT and PET/MR image support",
+      "Manufacturer-reported accelerated acquisition workflows"
+    ],
     keyFeatures: [
-      "Next-generation deep learning PET enhancement architecture",
-      "Up to 75% faster PET imaging on existing scanners",
-      "Compatible with all FDA-approved radiotracers including theranostic agents",
-      "Adjustable denoising level to radiologist preference",
-      "Leverages anatomical CT data for improved PET reconstruction",
-      "Improved SUVmax quantitative accuracy",
-      "Supports PET/CT and PET/MR systems"
+      "FDA indication covers PET images obtained with any kind of radiotracer",
+      "PET-only model accepts PET DICOM; PET/CT model accepts paired PET and CT DICOM",
+      "FDA retrospective validation included 203 PET-only and 122 PET/CT studies",
+      "FDA performance testing assessed three denoising mix factors",
+      "FDA-submitted reader study assessed image quality, diagnostic confidence, artifacts, and lesion counts",
+      "Manufacturer advertises up to 75% faster imaging; benefits are protocol-specific and not established as universal outcomes"
     ],
     technicalSpecifications: {
-      population: "Adult and pediatric",
-      input: ["DICOM PET images", "Anatomical CT"],
+      population:
+        "FDA validation included ages 2-88; the FDA indication does not specify an age range.",
+      input: [
+        "PET DICOM series for the PET-only model",
+        "Paired PET and CT DICOM series for the PET/CT model"
+      ],
       inputFormat: ["DICOM"],
-      output: ["Enhanced PET images"],
+      output: ["Processed PET images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["PACS", "Scanner workstations"],
-      deployment: ["Cloud-based", "On-premise option"],
-      triggerForAnalysis: "Automated workflow",
-      processingTime: "<60 seconds per study"
+      integration: [
+        "DICOM routing through a Medical Device Data System (MDDS)",
+        "PACS/workstation destinations (manufacturer-described)"
+      ],
+      deployment: ["Cloud-based", "On-premises"],
+      triggerForAnalysis:
+        "DICOM images are routed through an MDDS; the FDA summary describes no dedicated user interface or direct scanner interaction.",
+      processingTime:
+        "Manufacturer states processing takes seconds and total transfer time is under five minutes; not an FDA performance endpoint."
+    },
+    trainingData: {
+      disclosureLevel: "minimal",
+      description:
+        "The FDA summary describes PET-only and PET/CT convolutional neural-network models and reports no subject, study, or image overlap between training and test data. Training cohort size, composition, and provenance are not disclosed; validation cohorts are not training-data descriptions.",
+      source: "FDA 510(k) Summary K254013",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
+    },
+    evaluationData: {
+      studyDesign:
+        "Manufacturer software verification and validation, retrospective performance validation, and retrospective reader study submitted in FDA 510(k) K254013.",
+      primaryEndpoint:
+        "Mean PSNR improvement of at least 1 dB with statistical significance; statistically significant SNR improvement. Reader endpoints included image quality/diagnostic confidence, artifact assessment, and false-positive/false-negative lesion counts.",
+      results:
+        "Both models passed the stated PSNR/SNR acceptance criteria. At default mix, mean PSNR gains were 1.935 dB (PET-only) and 1.215 dB (PET/CT); mean SNR gains were 3.179 dB and 4.590 dB. Reader ratings met the stated image-quality/diagnostic-confidence criteria, with no added false-positive or false-negative findings in the evaluated set; the artifact criterion passed. SUVmax results were exploratory and tracer-specific. The FDA summary advises caution with VPFX + PSF reconstruction.",
+      description:
+        "The FDA summary reports 203 PET-only studies and 122 PET/CT studies, with no combined unique-patient count stated. The retrospective test data included brain and whole-body exams, ages 2-88, nine radiotracers, and multiple scanner manufacturers. Results are regulatory-submission evidence, not independent prospective clinical validation.",
+      source: "FDA 510(k) Summary K254013",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
     },
     regulatory: {
       ce: {
-        status: "under_review",
-        class: "IIa",
-        type: "Medical Device"
+        status: "unverified",
+        class: "Not verified",
+        type: "Medical Device",
+        notes:
+          "No device-specific EU CE certificate or declaration for SubtleHD-PET was verified in the reviewed sources. A generic SubtleHD MHRA listing does not establish PET-specific EU status."
       },
       fda: {
         status: "510k_cleared",
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K254013",
-        regulationNumber: "21 CFR 892.1200",
-        productCode: "KPS",
+        regulationNumber: "21 CFR 892.2050",
+        productCode: "LLZ",
         decisionDate: "2026-05-14"
       },
-      intendedUseStatement: "SubtleHD(PET) is an AI-powered image processing software intended for enhancement of PET images acquired with FDA-approved radiotracers, supporting noise reduction, image acceleration, and improved quantitative accuracy on PET/CT and PET/MR systems."
+      intendedUseStatement:
+        "SubtleHD-PET is an image processing software intended for noise reduction of PET images (including PET/CT and PET/MR) obtained with any kind of radiotracer (e.g. 18F-FDG). Prescription use."
     },
     market: {
-      onMarketSince: "2026",
-      distributionChannels: ["Direct sales", "Distribution partners"]
+      distributionChannels: [
+        "AMG Medtech (UK; distribution agreement announced by Subtle Medical)",
+        "Medical Horizons (Italy; distribution agreement announced by Subtle Medical)"
+      ],
+      notes:
+        "The manufacturer announced both distribution agreements on 2026-10-20. The announcement does not establish product-specific installed sites or commissioning outcomes."
     },
-    evidenceRigor: "E0",
-    clinicalImpact: "L1t",
-    legacyClinicalImpact: "I0",
-    evidenceRigorNotes: "FDA 510(k) K254013 cleared 2026-05-14 (announced 2026-05-27). No independent peer-reviewed publications yet.",
-    clinicalImpactNotes: "Manufacturer-reported workflow improvements (up to 75% scan time reduction). No independently demonstrated clinical impact yet.",
+    evidenceRigor: "E1",
+    clinicalImpact: "I1",
+    legacyClinicalImpact: "I1",
+    evidenceRigorNotes:
+      "E1: FDA K254013 publicly documents manufacturer-generated retrospective validation and reader-study results. No independent peer-reviewed study specific to SubtleHD-PET (1.x) was identified.",
+    clinicalImpactNotes:
+      "I1: Retrospective reader assessment provides narrow image-quality relevance, but no product-specific workflow benefit, diagnostic-management change, radiotherapy-planning validation, or patient-outcome benefit was identified.",
     adoptionReadiness: "R1",
-    adoptionReadinessNotes: "R1 (lowered from R2 on 2026-11-08): newly cleared, with no published commissioning or deployment experience. Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    priorVersions: [{ productId: "subtle-pet", name: "SubtlePET", fdaClearance: "K182336, K211964" }],
+    adoptionReadinessNotes:
+      "R1: FDA-cleared and covered by manufacturer-announced UK and Italy distribution agreements, but public product-specific commissioning, routine QA, and monitoring evidence was not identified.",
+    priorVersions: [
+      {
+        productId: "subtle-pet",
+        name: "SubtlePET",
+        fdaClearance: "K182336, K211964"
+      }
+    ],
     evidence: [
       {
         type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance K254013 for SubtleHD-PET (1.x), cleared 2026-05-14.",
+        description:
+          "K254013 cleared SubtleHD-PET (1.x) on 2026-05-14; Class II, 21 CFR 892.2050, product code LLZ.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K254013.pdf"
       },
       {
-        type: "Press Release",
-        description: "PRNewswire 2026-05-27 announcement naming SubtleHD(PET) FDA clearance.",
-        link: "https://subtlemedical.com/"
+        type: "Manufacturer Product Page",
+        description:
+          "Subtle Medical describes its marketed acquisition-time examples, deployment options, and DICOM workflow.",
+        link: "https://subtlemedical.com/subtlepet/"
+      },
+      {
+        type: "Manufacturer Announcement",
+        description:
+          "Subtle Medical announced FDA clearance on 2026-05-27.",
+        link: "https://subtlemedical.com/subtle-medical-receives-fda-clearance-for-subtlehdpet-next-generation-ai-powered-image-acceleration-and-enhancement-software/"
+      },
+      {
+        type: "Manufacturer Distribution Announcement",
+        description:
+          "Subtle Medical announced UK and Italy distribution agreements on 2026-10-20.",
+        link: "https://subtlemedical.com/subtle-medical-adds-distribution-partners-in-the-uk-and-italy-to-support-european-growth/"
       }
     ],
-    clinicalEvidence: "FDA 510(k) K254013 clearance based on validation across accelerated low-count PET acquisitions; independent literature pending.",
-    lastUpdated: "2026-08-27",
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) K254013; press releases"
+    clinicalEvidence:
+      "FDA K254013 reports manufacturer-conducted retrospective performance validation and reader testing. No independent peer-reviewed study specific to SubtleHD-PET (1.x), prospective workflow study, or validation for radiotherapy treatment planning/dosimetry was identified. SubtlePET predecessor studies are not attributed to this version.",
+    limitations: [
+      "The 75% faster-acquisition figure is a manufacturer claim, not an FDA-labeled performance guarantee; the product page also displays selected examples labeled up to 90% time saving.",
+      "SUVmax findings in K254013 are exploratory and vary by tracer and model.",
+      "The FDA summary advises caution with VPFX + PSF reconstruction.",
+      "No device-specific EU CE certificate or declaration was verified.",
+      "FDA validation-set ages and radiotracers should not be interpreted as training-data characteristics or proof of equal performance across all populations and tracers."
+    ],
+    lastUpdated: "2026-11-10",
+    lastRevised: "2026-11-10",
+    source:
+      "FDA 510(k) K254013; Subtle Medical product page and announcements"
   },
   {
     id: "subtle-aimify",
@@ -536,63 +597,79 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
   },
   {
     id: "subtle-hd",
-    trainingData: {
-        source: "FDA 510(k) database (K243250) and company website",
-        disclosureLevel: "minimal",
-        demographics: "Adult and pediatric",
-        description: "The model is a deep learning-based noise reduction and image sharpness enhancement tool for MRI. Training details are not publicly disclosed in the source file beyond its application to all body parts and adult/pediatric populations.",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243250.pdf"
-    },
-    evaluationData: {
-        primaryEndpoint: "Equivalent or improved diagnostic quality",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243250.pdf",
-        description: "FDA validation study for 510(k) clearance (K243250) demonstrating equivalent or improved diagnostic quality for general-purpose MRI enhancement across all body parts.",
-        results: "Not publicly disclosed",
-        source: "FDA 510(k) summary K243250",
-        studyDesign: "Software V&V (FDA 510(k))"
-    },
     name: "SubtleHD",
     company: "Subtle Medical",
-    category: "Image Enhancement",
-    githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
-    description: "AI-powered general-purpose MRI enhancement software for noise reduction and image sharpness improvement across all body parts. Part of the Subtle-ELITE suite alongside SubtleSYNTH and SubtleALIGN.",
-    features: ["Deep learning enhancement", "Noise reduction", "All body parts", "Image sharpness"],
-    certification: "FDA Cleared",
-    logoUrl: "/logos/SubtleMedical.jpg",
     companyUrl: "https://subtlemedical.com/",
-    productUrl: "https://subtlemedical.com/subtle-hd/",
+    productUrl: "https://subtlemedical.com/subtlehdmr/",
+    githubUrl:
+      "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
+    description:
+      "Prescription MRI image-processing software for noise reduction and increased image sharpness across MRI images of all body parts. It is one component of the Subtle-ELITE suite; clinical benefit beyond image-quality and technical endpoints has not been established by the reviewed evidence.",
+    category: "Image Enhancement",
+    certification:
+      "FDA 510(k)-cleared (K243250); CE mark announced by the manufacturer, with Class IIa and Intertek Medical (2862) identified by a distributor",
+    logoUrl: "/logos/SubtleMedical.jpg",
     anatomicalLocation: ["Brain", "Spine", "Body", "Extremities"],
     modality: ["MRI"],
-    diseaseTargeted: ["Neurological disorders", "Musculoskeletal conditions", "Oncology", "General diagnostic imaging"],
-    releaseDate: "2025-02-12",
-    version: "1.0",
-    keyFeatures: [
-      "Deep learning-based noise reduction",
+    diseaseTargeted: ["General diagnostic MRI image enhancement"],
+    features: [
+      "Deep learning MRI enhancement",
+      "Noise reduction",
       "Image sharpness enhancement",
-      "Supports all body parts MRI",
-      "Vendor-neutral compatibility",
-      "General-purpose MRI enhancement",
-      "Up to 80% scan time reduction in certain sequences (as part of Subtle-ELITE suite)",
-      "Improved diagnostic image quality"
+      "MRI images of all body parts"
+    ],
+    releaseDate: "2025-02-14",
+    version: "1.x",
+    keyFeatures: [
+      "Prescription image-processing software for MRI denoising and sharpening",
+      "FDA-submission validation included retrospective data across multiple anatomical regions and scanner vendors",
+      "Manufacturer advertises up to 80% time savings on selected sequences; this is not a universal performance guarantee",
+      "Available as part of the Subtle-ELITE package with SubtleSYNTH and SubtleALIGN"
     ],
     technicalSpecifications: {
-      population: "Adult and pediatric",
+      population:
+        "Training cohort demographics are not publicly disclosed. FDA validation data included patients aged 3-94; these are evaluation data, not training demographics.",
       input: ["DICOM MR images"],
       inputFormat: ["DICOM"],
       output: ["Enhanced MR images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["PACS", "Scanner integration"],
-      deployment: ["Cloud-based", "On-premise"],
-      triggerForAnalysis: "Automated workflow",
-      processingTime: "<30 seconds per study"
+      integration: ["DICOM workflow", "SubtleEDGE", "PACS/workstation"],
+      deployment: [
+        "Cloud-based or on-premises options described for Subtle-ELITE"
+      ],
+      triggerForAnalysis:
+        "Configured DICOM-based post-processing; exact routing depends on site configuration",
+      processingTime:
+        "The manufacturer describes processing in seconds and under five minutes total transfer for Subtle-ELITE. A SubtleHD-specific per-study processing time was not established."
+    },
+    trainingData: {
+      disclosureLevel: "minimal",
+      description:
+        "Public sources reviewed do not disclose the deployed model's training-cohort size, demographics, or site composition. The 3-94 age range in the FDA summary describes validation data, not training data.",
+      source: "FDA 510(k) summary K243250",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243250.pdf"
+    },
+    evaluationData: {
+      studyDesign:
+        "FDA software verification and validation, retrospective image-quality testing, and a blinded reader study",
+      primaryEndpoint:
+        "ROI SNR, edge slope, gradient entropy, and reader ratings of perceived SNR, image quality, diagnostic confidence, artifacts, and small-structure visibility",
+      description:
+        "K243250 reports retrospective MRI testing across body, cardiac, neuro, and musculoskeletal exams. The blinded reader study compared 205 original image series with their enhanced counterparts.",
+      results:
+        "The FDA summary reports that default and high denoising modes met its criterion of at least 40% SNR improvement in at least 90% and 95% of the dataset, respectively. Reader acceptance allowed significant improvement or no significant difference on primary ratings. These image-quality results do not demonstrate improved diagnostic accuracy or patient outcomes.",
+      source: "FDA 510(k) summary K243250",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf24/K243250.pdf"
     },
     regulatory: {
       ce: {
-        status: "under_review",
+        status: "cleared",
         class: "IIa",
-        type: "Medical Device"
+        type: "MDR",
+        notes:
+          "Subtle Medical announced CE marking on 2025-03-17. Incepto identifies Class IIa and Intertek Medical (2862) as notified body; current certificate details were not independently reviewed."
       },
       fda: {
         status: "510k_cleared",
@@ -601,28 +678,58 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K243250",
         regulationNumber: "21 CFR 892.2050",
         productCode: "QIH",
-        decisionDate: "2025-02-12"
+        decisionDate: "2025-02-12",
+        notes:
+          "FDA database records a substantial-equivalence decision and states that no Predetermined Change Control Plan was authorized."
       },
-      intendedUseStatement: "SubtleHD is an image processing software that can be used for image enhancement of all body parts MRI images. It can be used for noise reduction and increasing image sharpness."
+      intendedUseStatement:
+        "Prescription-use MRI image-processing software for image enhancement of MRI images of all body parts by noise reduction and increasing image sharpness."
     },
     market: {
       onMarketSince: "2025",
       distributionChannels: ["Direct sales", "Distribution partners"]
     },
     keyPapers: [
-      {"doi":"10.1002/jmri.70507","pmid":"42593101","title":"Deep learning-based enhancement of already diagnostic-quality MRI for Alzheimer's disease classification: effects on model performance and training data requirements","authors":"Zhang Z et al.","journal":"Journal of Magnetic Resonance Imaging","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single retrospective cohort study explicitly naming SubtleHD; endpoint is downstream classification-model performance on enhanced images, i.e. technical image-quality utility rather than a clinical workflow or decision endpoint. Added and verified in the 2026-08-25 sweep.","vendorIndependent":true}
+      {
+        doi: "10.1002/jmri.70507",
+        pmid: "42593101",
+        title:
+          "Deep Learning-Based Enhancement of Already Diagnostic-Quality MRI for Alzheimer's Disease Classification: Effects on Model Performance and Training Data Requirements",
+        authors: "Zhang Z et al.",
+        journal: "Journal of Magnetic Resonance Imaging",
+        year: "2026",
+        evidenceRigor: "E2",
+        clinicalImpact: "L1t",
+        legacyClinicalImpact: "I1",
+        rationale:
+          "Retrospective study using 2,293 ADNI scans and 270 external NACC scans to evaluate downstream Alzheimer disease classification. Five of six listed authors have Subtle Medical affiliations. External macro-AUC values (0.679 standard-image-trained model; 0.819 SubtleHD-enhanced-image-trained model) are classifier results, not clinical diagnostic accuracy or patient outcomes.",
+        vendorIndependent: false,
+        externalValidation: true
+      }
     ],
-    evidenceRigor: "E1",
-    clinicalImpact: "L2",
+    evidenceRigor: "E2",
+    clinicalImpact: "L1t",
     legacyClinicalImpact: "I1",
-    evidenceRigorNotes: "2026-08-25 Wave 4 per-paper sweep: first SubtleHD-naming peer-reviewed publication found (Zhang et al., JMRI 2026, doi:10.1002/jmri.70507, PMID 42593101), single-centre retrospective — moves the product from E0 to E1. FDA validation K243250.",
-    clinicalImpactNotes: "I1 (technical efficacy): the only published study measures the effect of SubtleHD enhancement on a downstream classification model, not on clinical workflow, decisions or outcomes.",
+    evidenceRigorNotes:
+      "FDA validation and a peer-reviewed, product-specific retrospective study with an external test set support E2. The publication is vendor-affiliated, and independent product-specific clinical evidence remains limited.",
+    clinicalImpactNotes:
+      "Evidence covers image-quality testing and downstream research-classifier performance, not changes in clinical workflow, reader diagnosis, management, or patient outcomes.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
-    clinicalEvidence: "FDA 510(k) clearance based on clinical validation studies demonstrating equivalent or improved diagnostic quality",
-    lastUpdated: "2026-10-15",
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) K243250; vendor website; peer-reviewed literature"
+    adoptionReadinessNotes:
+      "FDA-cleared and commercially listed, but independent clinical evidence is limited. No radiotherapy-specific commissioning or routine-use evaluation was identified.",
+    clinicalEvidence:
+      "FDA K243250 reports retrospective image-quality validation and blinded reader ratings. Zhang et al. (2026) report technical downstream classifier outcomes on ADNI and external NACC data.",
+    limitations: [
+      "Public sources reviewed do not disclose model-training cohort size, demographics, or site composition.",
+      "FDA evaluation endpoints are image-quality and reader-rating measures, not demonstrated improvement in diagnostic accuracy or patient outcomes.",
+      "The advertised up-to-80% scan-time savings applies to selected sequences and is not a universal independently established result.",
+      "The FDA record states that no Predetermined Change Control Plan was authorized.",
+      "The current CE certificate was not independently inspected; Class IIa and notified body are reported by a distributor."
+    ],
+    lastUpdated: "2026-11-10",
+    lastRevised: "2026-11-10",
+    source:
+      "FDA 510(k) K243250 and AccessGUDID; Subtle Medical product and regulatory announcements; Incepto regulatory disclosure; Zhang et al., JMRI 2026, DOI 10.1002/jmri.70507."
   },
   {
     id: "subtle-hd-ct",
