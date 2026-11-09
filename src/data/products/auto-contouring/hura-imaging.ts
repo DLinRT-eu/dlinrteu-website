@@ -82,6 +82,7 @@ export const DVTARGET: ProductDetails = {
     "Head & Neck",
     "Thorax",
     "Breast",
+    "Abdomen",
     "Pelvis"
   ],
   evidenceRigorNotes: "FDA cleared (K202928) but no peer-reviewed publications found. PubMed searched 2026-11-09. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
