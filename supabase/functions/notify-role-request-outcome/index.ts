@@ -45,6 +45,7 @@ function getCorsHeaders(origin: string | null): HeadersInit {
 }
 
 interface NotificationRequest {
+  requestId: string;
   userId: string;
   email: string;
   firstName: string;
@@ -70,6 +71,7 @@ function validatePayload(body: unknown):
   if (!body || typeof body !== 'object') return { ok: false, error: 'Invalid request body' };
   const b = body as Record<string, unknown>;
 
+  const requestId = typeof b.requestId === 'string' ? b.requestId.trim() : '';
   const userId = typeof b.userId === 'string' ? b.userId.trim() : '';
   const email = typeof b.email === 'string' ? b.email.trim() : '';
   const firstName = typeof b.firstName === 'string' ? b.firstName.trim() : '';
@@ -77,6 +79,7 @@ function validatePayload(body: unknown):
   const approved = typeof b.approved === 'boolean' ? b.approved : null;
   const rejectionReason = typeof b.rejectionReason === 'string' ? b.rejectionReason.trim() : undefined;
 
+  if (!UUID_RE.test(requestId)) return { ok: false, error: 'Invalid requestId' };
   if (!UUID_RE.test(userId)) return { ok: false, error: 'Invalid userId' };
   if (!EMAIL_RE.test(email) || email.length > 255) return { ok: false, error: 'Invalid email' };
   if (firstName.length === 0 || firstName.length > 100) return { ok: false, error: 'Invalid firstName (1-100 chars)' };
@@ -85,8 +88,12 @@ function validatePayload(body: unknown):
   if (rejectionReason !== undefined && rejectionReason.length > 1000) {
     return { ok: false, error: 'rejectionReason exceeds 1000 chars' };
   }
+  if (rejectionReason && /(https?:\/\/|www\.)/i.test(rejectionReason)) {
+    return { ok: false, error: 'rejectionReason must not contain links' };
+  }
+  if (approved && rejectionReason) return { ok: false, error: 'rejectionReason only applies to rejections' };
 
-  return { ok: true, data: { userId, email, firstName, role, approved, rejectionReason } };
+  return { ok: true, data: { requestId, userId, email, firstName, role, approved, rejectionReason } };
 }
 
 const getRoleDescription = (role: string): string => {
@@ -180,10 +187,10 @@ const handler = async (req: Request): Promise<Response> => {
         { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
-    const { userId, firstName, role, approved, rejectionReason } = parsed.data;
+    const { requestId, userId, role, approved, rejectionReason } = parsed.data;
 
     // Escaped versions for safe HTML interpolation
-    const safeFirstName = escapeHtml(firstName);
+    let firstName = parsed.data.firstName;
     const safeRejectionReason = rejectionReason ? escapeHtml(rejectionReason) : undefined;
 
     console.log(`Processing role request ${approved ? 'approval' : 'rejection'} for role:`, role);
@@ -193,15 +200,33 @@ const handler = async (req: Request): Promise<Response> => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    // Outcome, role and recipient come from the stored, recently decided request,
+    // never from the caller.
+    const { data: request } = await supabase
+      .from("role_requests")
+      .select("user_id, requested_role, status, updated_at")
+      .eq("id", requestId)
+      .maybeSingle();
+    const decidedRecently = request?.updated_at && Date.now() - new Date(request.updated_at).getTime() < 60 * 60 * 1000;
+    if (!request || request.user_id !== userId || request.requested_role !== role ||
+        request.status !== (approved ? "approved" : "rejected") || !decidedRecently) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'No matching recent decision for this request' }),
+        { status: 409, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const { data: targetProfile } = await supabase
       .from("profiles")
-      .select("email, notification_preferences")
+      .select("email, first_name, notification_preferences")
       .eq("id", userId)
       .single();
 
     // The recipient is always the address stored on the profile, never a
     // caller-supplied address.
     const email = targetProfile?.email;
+    if (targetProfile?.first_name) firstName = targetProfile.first_name;
+    const safeFirstName = escapeHtml(firstName);
     if (!email) {
       return new Response(
         JSON.stringify({ success: false, error: 'Recipient profile not found' }),
