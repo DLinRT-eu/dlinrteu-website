@@ -4,10 +4,11 @@ export const AviewRTACS: ProductDetails = {
   id: "coreline-aview-rt-acs",
   name: "Aview RT ACS",
   market: {
+    availability: "Commercially marketed by Coreline Soft as a radiotherapy auto-contouring solution; FDA-cleared in the United States under K220408. Supported structures and configurations may vary by country and installation.",
     onMarketSince: "2019",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "Company official sources, peer-reviewed publications",
+  source: "FDA 510(k) K220408; vendor website; peer-reviewed literature",
   company: "Coreline Soft Co",
   logoUrl: "/logos/coreline.jpg",
   version: "4.0",
@@ -15,14 +16,14 @@ export const AviewRTACS: ProductDetails = {
   category: "Auto-Contouring",
   evidence: [
     {
-      doi: "10.1016/j.ijrobp.2024.02.041 ",
+      doi: "10.1016/j.ijrobp.2024.02.041",
       link: "https://doi.org/10.1016/j.ijrobp.2024.02.041",
       type: "Retrospective Analysis",
       year: "2024",
       level: "3",
       title: "Experience of Implementing Deep Learning-Based Automatic Contouring in Breast Radiation Therapy Planning: Insights From Over 2000 Cases",
-      authors: "Lee",
-      journal: "International Journal of Radiation Oncology Biology Physics",
+      authors: "Lee BM et al.",
+      journal: "Int J Radiat Oncol Biol Phys",
       description: "Lee et al. Experience of Implementing Deep Learning-Based Automatic Contouring in Breast Radiation Therapy Planning: Insights From Over 2000 Cases. IJROBP 2024."
     },
     {
@@ -32,9 +33,19 @@ export const AviewRTACS: ProductDetails = {
       description: "Lee et al. Significant Influence of Cardiac Radiation Dose on the Risk of Cardiotoxicity in Patients Receiving Adjuvant Trastuzumab and Radiation Therapy for Breast Cancer IJROBP  2024"
     },
     {
-      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf",
+      link: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220408.pdf",
+      type: "Regulatory Summary",
+      description: "FDA 510(k) K220408 (AVIEW RT ACS, cleared 2022-11-10). Standalone performance test on 120 CT cases (Korean and US, incl. TCIA) against a three-expert gold standard; DSC and 95% HD reported per organ."
+    },
+    {
+      doi: "10.1016/j.phro.2026.100949",
+      link: "https://doi.org/10.1016/j.phro.2026.100949",
       type: "indirect",
-      description: "FDA 510(k) clearance K200714 - AVIEW base pulmonary platform. Indirect: Aview RT ACS runs on this cleared platform but K200714 itself does not validate the RT auto-contouring module."
+      year: "2026",
+      title: "Quality assurance incorporating artificial intelligence-generated reference contours in a phase II radiotherapy trial",
+      authors: "Lee W et al.",
+      journal: "Phys Imaging Radiat Oncol",
+      description: "Lee W et al. (2026) used a customised version of the AVIEW engine to generate reference contours for trial radiotherapy QA. Research configuration; listed for transparency, not scored as the cleared product."
     },
     {
       link: "https://pubmed.ncbi.nlm.nih.gov/35151923/",
@@ -64,14 +75,14 @@ export const AviewRTACS: ProductDetails = {
     fda: {
       type: "510(k)",
       class: "Class II",
-      notes: "Cleared as AVIEW platform. RT ACS is the radiation therapy auto-contouring module. URL: https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf",
+      notes: "FDA-cleared device name: AVIEW RT ACS. Clearance K220408 is specific to this product (verified in the FDA 510(k) database 2026-11-09).",
       status: "510k_cleared",
       productCode: "QKB",
-      decisionDate: "2020-09-17",
-      clearanceNumber: "K200714",
+      decisionDate: "2022-11-10",
+      clearanceNumber: "K220408",
       regulationNumber: "21 CFR 892.2050"
     },
-    intendedUseStatement: "AVIEW provides CT values for pulmonary tissue from CT thoracic and cardiac datasets. This software could be used to support the physician quantitatively in the diagnosis, follow up evaluation and documentation of CT lung tissue images by providing image segmentation of sub-structures in lung, lobe, airways and cardiac, registration of inspiration and expiration which could analyze quantitative information such as air trapping volume, air trapped index, and inspiration/expiration ratio; volumetric and structure analysis, density evaluation and reporting tools. AVIEW is also used to store, transfer, inquire and display CT data set on premise and as cloud environment. (Source: FDA 510(k) K200714 Summary, accessed 2026-05-30. Note: K200714 is the base AVIEW platform clearance; the Aview RT ACS application runs on this cleared platform.)"
+    intendedUseStatement: "Summary (not verbatim): AVIEW RT ACS provides deep-learning-based automatic organ segmentation from CT images, generating DICOM-RT contours as initial contours for radiotherapy planning, to be reviewed, edited and approved by clinicians. (Source: FDA 510(k) K220408, cleared 2022-11-10; indications text not machine-readable in the public summary, retrieved 2026-11-09.)"
   },
   technology: {
     deployment: ["On-premises", "cloud"],
@@ -96,8 +107,8 @@ export const AviewRTACS: ProductDetails = {
   lastUpdated: "2026-10-15",
   releaseDate: "2025-08-20",
   trainingData: {
-    source: "FDA 510(k) summary K200714",
-    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf20/K200714.pdf",
+    source: "FDA 510(k) summary K220408",
+    sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K220408.pdf",
     scannerModels: ["CT"],
     disclosureLevel: "minimal"
   },
