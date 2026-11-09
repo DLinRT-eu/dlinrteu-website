@@ -253,6 +253,7 @@ export default function AdminOverview() {
       if (request) {
         supabase.functions.invoke('notify-role-request-outcome', {
           body: {
+            requestId: request.id,
             userId: request.user_id,
             email: request.profiles.email,
             firstName: request.profiles.first_name,
@@ -274,7 +275,7 @@ export default function AdminOverview() {
 
       const { error } = await supabase
         .from('role_requests')
-        .update({ status: 'rejected' })
+        .update({ status: 'rejected', reviewed_at: new Date().toISOString() })
         .eq('id', requestId);
 
       if (error) throw error;
@@ -286,6 +287,7 @@ export default function AdminOverview() {
       if (request) {
         supabase.functions.invoke('notify-role-request-outcome', {
           body: {
+            requestId: request.id,
             userId: request.user_id,
             email: request.profiles.email,
             firstName: request.profiles.first_name,

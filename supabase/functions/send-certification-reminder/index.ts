@@ -1,3 +1,4 @@
+import { disallowedLink } from "../_shared/admin-content.ts";
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 // Resend shim — calls the HTTP API directly to avoid npm package resolution issues in Deno edge runtime
 function createResend(apiKey: string | undefined) {
@@ -183,6 +184,13 @@ const handler = async (req: Request): Promise<Response> => {
   if (customBody !== undefined && (typeof customBody !== "string" || customBody.length > 20000)) {
     return new Response(
       JSON.stringify({ success: false, error: "Message must be text up to 20,000 characters" }),
+      { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
+  }
+  const badLink = disallowedLink(customSubject) ?? disallowedLink(customBody);
+  if (badLink) {
+    return new Response(
+      JSON.stringify({ success: false, error: `Links are limited to dlinrt.eu, aiinrt.org and doi.org (found ${badLink.slice(0, 80)})` }),
       { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }

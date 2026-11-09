@@ -146,31 +146,31 @@ const innerHandler = async (req: Request): Promise<Response> => {
       .eq("email", normalizedEmail)
       .maybeSingle();
 
-    if (existing && !existing.unsubscribed_at) {
-      // Already subscribed — nothing to do.
-      return new Response(
-        JSON.stringify({ success: true, message: "If eligible, a confirmation email has been sent" }),
-        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
-      );
-    }
+    const genericOk = () => new Response(
+      JSON.stringify({ success: true, message: "If eligible, a confirmation email has been sent" }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
+    );
 
-    if (!existing) {
-      // Pending row: unsubscribed_at set so the confirmation endpoint can
-      // activate it once the user clicks the link.
-      const { error: insertError } = await supabase
-        .from("newsletter_subscribers")
-        .insert({
-          first_name: firstName,
-          last_name: lastName,
-          email: normalizedEmail,
-          consent_given: false,
-          unsubscribed_at: new Date().toISOString(),
-        });
-      if (insertError) {
-        console.error("send-newsletter-consent-invite: insert failed", insertError);
-        throw new Error("Failed to create pending subscription");
-      }
-    }
+    if (existing && !existing.unsubscribed_at) return genericOk();
+
+    // Invites are only for people who just created a DLinRT account with this
+    // address; arbitrary addresses are silently ignored. No subscriber row is
+    // written here — confirm-newsletter-resubscribe creates it after the click.
+    const since = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+    const { data: account } = await supabase
+      .from("profiles")
+      .select("id")
+      .ilike("email", normalizedEmail)
+      .gte("created_at", since)
+      .maybeSingle();
+    if (!account) return genericOk();
+
+    const { count: alreadyInvited } = await supabase
+      .from("email_send_log")
+      .select("id", { count: "exact", head: true })
+      .eq("function_name", "send-newsletter-consent-invite")
+      .eq("recipient", normalizedEmail);
+    if ((alreadyInvited ?? 0) > 0) return genericOk();
 
     const token = await createResubscribeToken({
       email: normalizedEmail,

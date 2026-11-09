@@ -246,21 +246,24 @@ const handler = async (req: Request): Promise<Response> => {
 
     const { data: subscriber } = await supabase
       .from('newsletter_subscribers')
-      .select('id, unsubscribed_at, last_unsubscribe_request_at')
+      .select('id, unsubscribed_at')
       .eq('email', normalizedEmail)
       .maybeSingle();
 
     // No-op for non-subscribers / already unsubscribed
     if (!subscriber || subscriber.unsubscribed_at) return genericResponse;
 
-    // Per-email throttle: at most one confirmation email per hour. This neutralizes
-    // header-spoofed bulk attacks because spoofing IPs cannot bypass per-email throttling.
-    const lastSent = subscriber.last_unsubscribe_request_at
-      ? new Date(subscriber.last_unsubscribe_request_at).getTime()
-      : 0;
-    if (Date.now() - lastSent < 60 * 60 * 1000) {
-      return genericResponse;
-    }
+    // Per-email throttle tracked in the send log, not on the subscriber record, so
+    // unauthenticated requests never modify subscriber data. Newsletters also carry
+    // one-click unsubscribe links, so this cap cannot lock a subscriber in.
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { count: recent } = await supabase
+      .from('email_send_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('function_name', 'unsubscribe-newsletter')
+      .eq('recipient', normalizedEmail)
+      .gte('created_at', since);
+    if ((recent ?? 0) >= 3) return genericResponse;
 
     const token = await signToken(normalizedEmail);
     const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
@@ -268,10 +271,12 @@ const handler = async (req: Request): Promise<Response> => {
 
     try {
       await sendConfirmationEmail(normalizedEmail, confirmUrl);
-      await supabase
-        .from('newsletter_subscribers')
-        .update({ last_unsubscribe_request_at: new Date().toISOString() })
-        .eq('id', subscriber.id);
+      await supabase.from('email_send_log').insert({
+        function_name: 'unsubscribe-newsletter',
+        recipient: normalizedEmail,
+        subject: 'Confirm your DLinRT newsletter unsubscribe',
+        status: 'sent',
+      });
     } catch (e) {
       console.error("Failed to send confirmation email:", e);
       // Still return the generic response (don't leak success/failure)

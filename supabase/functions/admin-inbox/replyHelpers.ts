@@ -42,3 +42,17 @@ export function validateReply(raw: unknown): ReplyInput | string {
   if (typeof b.body !== "string" || !b.body.trim() || b.body.length > MAX_REPLY_CHARS) return "Message must be 1–20,000 characters";
   return { id: b.id, to, cc, subject: b.subject.trim(), body: b.body };
 }
+
+/** Addresses on the original received message (sender, reply-to, to, cc), excluding the inbox. */
+export function threadParticipants(original: { from?: string; reply_to?: string[] | string | null; to?: string[]; cc?: string[] }): Set<string> {
+  const replyTo = Array.isArray(original.reply_to) ? original.reply_to : original.reply_to ? [original.reply_to] : [];
+  const all = [original.from ?? "", ...replyTo, ...(original.to ?? []), ...(original.cc ?? [])]
+    .filter(Boolean)
+    .map(extractAddress);
+  return new Set(all.filter((a) => a !== INBOX_ADDRESS));
+}
+
+/** Replies may only go to people already on the thread; returns the first outsider, if any. */
+export function firstOutsideRecipient(recipients: string[], participants: Set<string>): string | null {
+  return recipients.find((r) => !participants.has(r)) ?? null;
+}

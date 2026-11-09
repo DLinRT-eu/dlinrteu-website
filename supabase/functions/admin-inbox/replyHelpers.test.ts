@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { isAddressedToInbox, replySubject, threadHeaders, validateReply } from "./replyHelpers";
+import { firstOutsideRecipient, isAddressedToInbox, threadParticipants, replySubject, threadHeaders, validateReply } from "./replyHelpers";
 
 const id = "e2b6d792-de00-4806-b250-618254eacee9";
 
@@ -22,5 +22,14 @@ describe("admin inbox reply rules", () => {
   it("rejects more than 20 recipients", () => {
     const to = Array.from({ length: 21 }, (_, i) => `u${i}@b.co`);
     expect(typeof validateReply({ id, to, subject: "Re", body: "hi" })).toBe("string");
+  });
+});
+
+describe("thread participants", () => {
+  it("limits replies to people on the conversation", () => {
+    const p = threadParticipants({ from: "Ann <ann@x.org>", to: ["info@dlinrt.eu"], cc: ["bob@y.org"] });
+    expect(firstOutsideRecipient(["ann@x.org", "bob@y.org"], p)).toBeNull();
+    expect(firstOutsideRecipient(["eve@z.org"], p)).toBe("eve@z.org");
+    expect(p.has("info@dlinrt.eu")).toBe(false);
   });
 });

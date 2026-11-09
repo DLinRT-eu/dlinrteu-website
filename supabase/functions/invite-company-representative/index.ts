@@ -1,3 +1,4 @@
+import { disallowedLink } from "../_shared/admin-content.ts";
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { Resend } from 'npm:resend@4.0.0';
@@ -112,6 +113,31 @@ serve(async (req) => {
         JSON.stringify({ error: 'Invalid input: check email format and field lengths (message max 5,000 characters)' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
+    }
+
+    const badLink = disallowedLink(message) ?? disallowedLink(position);
+    if (badLink) {
+      return new Response(
+        JSON.stringify({ error: `Links in invitations are limited to dlinrt.eu, aiinrt.org and doi.org (found ${badLink.slice(0, 80)})` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Per-company bound: at most 5 invitations sent for one company per 24 hours,
+    // so invitations cannot be used to mass-mail unrelated addresses.
+    {
+      const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { count } = await supabaseAdmin
+        .from('company_invitations')
+        .select('id', { count: 'exact', head: true })
+        .eq('company_id', companyId)
+        .gte('updated_at', since);
+      if ((count ?? 0) >= 5) {
+        return new Response(
+          JSON.stringify({ error: 'Invitation limit for this company reached (5 per 24 hours).' }),
+          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
     // Daily cap on invitations created by admins (server-side bound on outbound mail)

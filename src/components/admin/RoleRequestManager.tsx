@@ -171,6 +171,7 @@ export const RoleRequestManager = () => {
       try {
         await supabase.functions.invoke('notify-role-request-outcome', {
           body: {
+            requestId: request.id,
             userId: request.user_id,
             email: request.profiles.email,
             firstName: request.profiles.first_name || 'User',
@@ -223,6 +224,7 @@ export const RoleRequestManager = () => {
       try {
         await supabase.functions.invoke('notify-role-request-outcome', {
           body: {
+            requestId: request.id,
             userId: request.user_id,
             email: request.profiles.email,
             firstName: request.profiles.first_name || 'User',

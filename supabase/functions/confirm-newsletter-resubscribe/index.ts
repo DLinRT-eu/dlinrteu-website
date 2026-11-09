@@ -68,10 +68,20 @@ Deno.serve(async (req) => {
   }
 
   if (!existing) {
-    return htmlPage("No subscription found", "We could not find a subscription for this email address. Please subscribe again at dlinrt.eu.");
+    // Consent invites for new accounts create the record only once the recipient confirms.
+    const { error: insertError } = await supabase.from("newsletter_subscribers").insert({
+      first_name: payload.firstName,
+      last_name: payload.lastName,
+      email,
+      consent_given: true,
+    });
+    if (insertError) {
+      console.error("confirm-newsletter-resubscribe: insert failed", insertError);
+      return htmlPage("Something went wrong", "We could not confirm your subscription. Please try again later.");
+    }
   }
 
-  if (!existing.unsubscribed_at) {
+  if (existing && !existing.unsubscribed_at) {
     return htmlPage("Already confirmed", "This email address is already subscribed to the DLinRT newsletter.");
   }
 
