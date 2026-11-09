@@ -51,14 +51,14 @@ export const SYNAPTIQ_PIPELINE_PRODUCTS: ProductDetails[] = [
       "Research module — explicitly outside the CE-cleared scope of Mediq RT",
       "No regulatory clearance disclosed for the 4D CT capability",
       "No model card, training-data description or independent validation published",
-      "Information sourced from vendor booth communication; pending verification against vendor press release or product documentation",
+      "The vendor publicly describes 4D CT GTV contouring (ESTRO 2026 article), but module-specific regulatory scope remains unverified",
     ],
     regulatory: {
       intendedUseStatement:
         "\"4D CT capability offered as an option inside a research module of Mediq RT and not part of the CE-cleared scope.\" Research use only; not for clinical use. (Source: Synaptiq booth communication, ESTRO 2026, Stockholm, 15–19 May 2026.)",
     },
     lastUpdated: "2026-10-28",
-    lastRevised: "2026-11-06",
-    source: "Vendor-supplied information (non-public); press releases",
+    lastRevised: "2026-11-09",
+    source: "Vendor communication; vendor website",
   },
 ];

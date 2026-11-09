@@ -8,7 +8,7 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://www.varian.com",
     productUrl: "https://cancercare.siemens-healthineers.com/en-ch/products/radiotherapy/treatment-planning/eclipse",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/varian-eclipse.ts",
-    description: "Deep learning-based auto-contouring integrated with the Varian Eclipse treatment planning system. Automates routine OAR contouring in the offline planning workflow to reduce manual effort and inter-observer variability. Shares the underlying AI Segmentation deep-learning algorithm family previously deployed on the Ethos adaptive console, now packaged for the Eclipse TPS installed base.",
+    description: "Deep learning-based auto-contouring integrated with the Varian Eclipse treatment planning system. Automates routine OAR contouring in the offline planning workflow to reduce manual effort and inter-observer variability. The vendor reports CT and MR input, more than 200 structures, lymph nodes and diagnosed brain metastases.",
     features: [
       "Deep learning-based auto-segmentation of organs at risk",
       "Fully integrated into the Eclipse treatment planning workflow",
@@ -26,20 +26,10 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     keyFeatures: [
       "Deep learning autocontouring integrated with Eclipse TPS",
       "Designed to reduce manual effort and contouring variability",
-      "Shared algorithm lineage with Varian AI Segmentation (Ethos)",
+      "Vendor-reported library of 200+ structures, including lymph nodes and brain metastases",
       "Manual/scripted invocation in the offline planning session"
     ],
-    supportedStructures: [
-      // Structure set not published in a Siemens/Varian model card for the Eclipse
-      // packaging at time of entry. Listed as (unverified) pending vendor confirmation.
-      // Adjacent evidence: the Ethos AI Segmentation shares the algorithm family and
-      // has a broader published structure set (Finnegan et al. JACMP 2025).
-      "Head & Neck: OARs (unverified)",
-      "Thorax: OARs (unverified)",
-      "Abdomen: OARs (unverified)",
-      "Pelvis: OARs (unverified)",
-      "Breast: OARs (unverified)"
-    ],
+    supportedStructures: [],
     technicalSpecifications: {
       population: "Adult patients",
       input: ["CT", "MRI"],
@@ -56,7 +46,6 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
     regulatory: {
       ce: {
         status: "cleared",
-        class: "IIb",
         type: "Medical Device"
       },
       fda: {
@@ -75,11 +64,10 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
       onMarketSince: "2026",
       distributionChannels: ["Direct sales"]
     },
-    evidenceRigor: "E2",
-    evidenceRigorNotes: "2026-08-27 Wave 6 citation audit: the Mandal 2022 entry was removed — DOI 10.1002/pro6.1174 resolves to an unrelated article and the publication could not be verified. Remaining support is comparative multi-vendor literature plus the algorithm lineage shared with Ethos AI Segmentation.",
-    clinicalImpact: "L2",
-    legacyClinicalImpact: "I2",
-    clinicalImpactNotes: "Independent comparative evaluations show workflow and consistency benefits — upgraded to I2.",
+    evidenceRigor: "E0",
+    evidenceRigorNotes: "2026-11-09 review: no verified peer-reviewed validation explicitly naming AI Contouring for Eclipse. Two previously cited papers were removed: 10.1016/j.adro.2023.101177 evaluates Siemens syngo.via, and 10.1002/acm2.14620 does not establish Eclipse attribution.",
+    clinicalImpact: "L1c",
+        clinicalImpactNotes: "Provisional: vendor and regulatory materials only; no verified product-specific accuracy or workflow study identified (2026-11-09 review).",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "CE MDR plus FDA 510(k) (K261306) clearance, vendor-source evidence, no independent Eclipse-specific validation. Local commissioning and validation required before clinical adoption.",
     evidenceVendorIndependent: false,
@@ -119,13 +107,11 @@ export const VARIAN_ECLIPSE_PRODUCTS: ProductDetails[] = [
       source: "Siemens Healthineers press release (2026-05-15)",
       sourceUrl: "https://www.siemens-healthineers.com/press/releases/estro2026"
     },
+    version: "VA10A",
     releaseDate: "2026-05-15",
     lastUpdated: "2026-10-15",
-    keyPapers: [
-    {"doi":"10.1016/j.adro.2023.101177","title":"Eclipse AI contouring comparative evaluation","authors":"Pera Ò et al.","journal":"Adv Radiat Oncol","year":"2023","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent comparative evaluation on external clinical data.","vendorIndependent":true,"externalValidation":true},
-    {"doi":"10.1002/acm2.14620","title":"Eclipse AI contouring clinical validation","authors":"Wang Y et al.","journal":"J Appl Clin Med Phys","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Single-centre clinical validation including editing effort.","vendorIndependent":true}
-  ],
-    lastRevised: "2026-08-27",
-    source: "FDA 510(k) K232923; vendor website; press releases"
+    keyPapers: [],
+    lastRevised: "2026-11-09",
+    source: "FDA 510(k) K261306; vendor website; press release"
   }
 ];
