@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import { exportToExcelMultiSheet } from "../../excelExport";
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import { getEudamedExportFields, getLifecycleExportFields } from "./registryFields";
 import {
   buildEvidenceBySourceRows,
   buildProductEvidenceSummary,
@@ -97,6 +98,7 @@ export const exportModelCardToExcel = async (product: ProductDetails) => {
       { Field: "FDA Product Code", Value: (product as any)?.regulatory?.fda?.productCode || "" },
       { Field: "Intended Use Statement", Value: modelCard.regulatory.intendedUseStatement },
       { Field: "Market Presence", Value: modelCard.regulatory.marketPresence },
+      ...[...getEudamedExportFields(product), ...getLifecycleExportFields(product)].map((f) => ({ Field: f.label, Value: f.value })),
     ];
     
     // Contact Information Sheet

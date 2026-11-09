@@ -37,6 +37,7 @@ The full machine-readable JSON schema lives at
 ## Regulatory
 
 - **CE Status / Class / Type / Certificate Number / Regulation Number**.
+- **EUDAMED Basic UDI-DI / Risk Class / Registered Trade Name / Manufacturer SRN / Source URL / Last Verified / UDI-DI / EMDN Code / Manufacturer Name / Registration Note** — curated or EUDAMED Data Lake-verified registration; blank when none recorded (blank is not evidence of a missing CE mark).
 - **FDA Status / Clearance Number / Regulation Number / Product Code**.
 - **TGA Status / Notes**.
 - **TFDA Status / Approval Number / Decision Date**.

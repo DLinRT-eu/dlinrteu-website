@@ -105,7 +105,8 @@ For complete examples, refer to `src/data/products/examples/`.
 - **User Tracking**: Track products you use or are evaluating
 - **Community Experiences**: Share and view product adoption experiences
 - **Healthcare Interoperability**: FHIR R4 export with TGA/TFDA support, evidence classification, and Schema.org JSON-LD SEO
-- **Comprehensive Exports**: CSV (~110 columns incl. transparency, safety, lifecycle and per-source evidence), FHIR R4 bundles, HTA dossier, AID-RT and PDF model cards with colour-coded evidence levels
+- **EUDAMED Registry Check**: `bun scripts/verify-eudamed.ts` matches catalogue companies to EU manufacturer SRNs and products to registered devices via the public EUDAMED Data Lake; exact and editor-confirmed matches (Basic UDI-DI, UDI-DI, EMDN code) appear on product pages and in all exports. Absence from EUDAMED is never treated as a missing CE mark.
+- **Comprehensive Exports**: CSV (~115 columns incl. transparency, safety, lifecycle, EUDAMED UDI/EMDN and per-source evidence), FHIR R4 bundles, HTA dossier, AID-RT and PDF model cards with colour-coded evidence levels
 - **Tri-axial Evidence Classification**: Evidence Rigor (E0–E3), Levels of Efficacy (L1t–L6) and Adoption Readiness (R0–R5), scored per publication
 - **Discontinued Products**: Public historical pages, excluded from current-market counts
 - **Public Role Guides**: Company, reviewer and admin guides readable without an account

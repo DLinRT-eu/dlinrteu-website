@@ -2,6 +2,7 @@ import { ProductDetails } from "@/types/productDetails";
 import jsPDF from 'jspdf';
 import { generateModelCardData } from "../dataGenerator";
 import { createSafeFileName } from "./shared";
+import { getEudamedExportFields, getLifecycleExportFields } from "./registryFields";
 import { EDUCATIONAL_DISCLAIMER, makePdfSafe, PdfCursor, clampLines, drawSectionHeader, ensureSpace, writeWrappedBullets, writeWrappedField } from "./pdfLayout";
 import { drawEvidenceSources, drawEvidenceSummary, drawRegulatoryChips } from "./pdfSections";
 
@@ -108,6 +109,7 @@ export const exportBulkProductsToPDF = async (products: ProductDetails[]) => {
       addField('FDA Status', modelCard.basicInfo.fdaStatus);
       addField('CE Details', modelCard.regulatory.ceDetails);
       addField('FDA Details', modelCard.regulatory.fdaDetails);
+      [...getEudamedExportFields(product), ...getLifecycleExportFields(product)].forEach((f) => addField(f.label, f.value));
       
       // Contact Information
       addSectionHeader('Contact Information');

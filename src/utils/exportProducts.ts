@@ -2,6 +2,7 @@
 import { ProductDetails } from "@/types/productDetails";
 import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 import { escapeCsvValue as escapeValueForCsv } from "@/utils/csv";
+import { getProductEudamed } from "@/utils/eudamed";
 
 
 /**
@@ -19,6 +20,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "CE Status", "CE Class", "CE Type", "CE Certificate Number", "CE Regulation Number",
     "EUDAMED Basic UDI-DI", "EUDAMED Risk Class", "EUDAMED Registered Trade Name",
     "EUDAMED Manufacturer SRN", "EUDAMED Source URL", "EUDAMED Last Verified",
+    "EUDAMED UDI-DI", "EUDAMED EMDN Code", "EUDAMED Manufacturer Name", "EUDAMED Registration Note",
     "FDA Status", "FDA Clearance Number", "FDA Regulation Number", "FDA Product Code",
     "TGA Status", "TGA Notes",
     "TFDA Status", "TFDA Approval Number", "TFDA Decision Date",
@@ -186,12 +188,16 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.regulatory?.ce?.type),
     escapeValueForCsv(product.regulatory?.ce?.certificateNumber),
     escapeValueForCsv(product.regulatory?.ce?.regulation),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.basicUdi),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.riskClass),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.registeredTradeName),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.manufacturerSrn),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.sourceUrl),
-    escapeValueForCsv(product.regulatory?.ce?.eudamed?.lastVerified),
+    escapeValueForCsv(getProductEudamed(product)?.basicUdi),
+    escapeValueForCsv(getProductEudamed(product)?.riskClass),
+    escapeValueForCsv(getProductEudamed(product)?.registeredTradeName),
+    escapeValueForCsv(getProductEudamed(product)?.manufacturerSrn),
+    escapeValueForCsv(getProductEudamed(product)?.sourceUrl),
+    escapeValueForCsv(getProductEudamed(product)?.lastVerified),
+    escapeValueForCsv(getProductEudamed(product)?.primaryDi),
+    escapeValueForCsv(getProductEudamed(product)?.emdnCode),
+    escapeValueForCsv(getProductEudamed(product)?.manufacturerName),
+    escapeValueForCsv(getProductEudamed(product)?.registrationNote),
     escapeValueForCsv(
       typeof product.regulatory?.fda === 'string'
         ? product.regulatory.fda

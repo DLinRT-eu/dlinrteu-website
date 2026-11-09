@@ -41,6 +41,7 @@ The catalog exports in multiple machine-readable formats from the products page:
 - **FHIR R4 bundle** — HL7 FHIR Device + Organization resources for healthcare interoperability.
 - **HTA dossier** — EUnetHTA Core Model Excel workbook (informational, not an official dossier).
 - **AID-RT model cards** — JSON aligned with the AID-RT model card schema for radiotherapy AI.
+- **EUDAMED** — Basic UDI-DI, UDI-DI, EMDN code, manufacturer SRN and registration scope are included in every export where a verified registry match exists.
 - **Full bundle (ZIP)** — CSV + JSON + FHIR + manifest + README in a single archive.
 
 Initiatives can be exported as CSV, JSON, Excel, and schema.org JSON-LD.
