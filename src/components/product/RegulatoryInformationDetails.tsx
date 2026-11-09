@@ -255,7 +255,9 @@ const RegulatoryInformationDetails = ({ product }: RegulatoryInformationProps) =
                 {eudamed.emdnCode && <div>EMDN code: <span className="font-mono">{eudamed.emdnCode}</span></div>}
                 {eudamed.riskClass && <div>Risk class: {formatEudamedRiskClass(eudamed.riskClass)}</div>}
                 {eudamed.registeredTradeName && <div>Registered name: {eudamed.registeredTradeName}</div>}
+                {eudamed.manufacturerName && <div>Registered manufacturer: {eudamed.manufacturerName}</div>}
                 {eudamed.manufacturerSrn && <div>Manufacturer SRN: {eudamed.manufacturerSrn}</div>}
+                {eudamed.registrationNote && <div>{eudamed.registrationNote}</div>}
                 {eudamed.sourceUrl && (
                   <div>
                     <a
