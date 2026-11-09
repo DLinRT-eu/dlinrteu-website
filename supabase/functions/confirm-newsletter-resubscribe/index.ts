@@ -81,7 +81,7 @@ Deno.serve(async (req) => {
     }
   }
 
-  if (!existing.unsubscribed_at) {
+  if (existing && !existing.unsubscribed_at) {
     return htmlPage("Already confirmed", "This email address is already subscribed to the DLinRT newsletter.");
   }
 
