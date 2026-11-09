@@ -95,7 +95,7 @@ export const ACCURAY_PRODUCTS: ProductDetails[] = [
     },
     version: "Platform-dependent (CyberKnife / Radixact)",
     guidelines: [
-      { name: "AAPM TG-264", version: "2021", reference: "Keall PJ et al. The first clinical implementation of real-time adaptive radiotherapy using MLC tracking... see: Safe clinical implementation of MLC tracking in radiotherapy. Med Phys 2021", url: "https://doi.org/10.1002/mp.14625" },
+      { name: "AAPM TG-264", version: "2021", reference: "Keall PJ et al. AAPM Task Group 264: The safe clinical implementation of MLC tracking in radiotherapy. Med Phys 2021", url: "https://doi.org/10.1002/mp.14625" },
       { name: "AAPM TG-306", version: "2023", reference: "Chen Q et al. Quality control and assurance for tomotherapy: an update to Task Group Report 148. Med Phys 2023", url: "https://doi.org/10.1002/mp.16150" }
     ],
     limitations: [
