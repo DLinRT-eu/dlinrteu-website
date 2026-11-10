@@ -224,7 +224,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
           registeredTradeName: "SubtlePET (Software as a Service for post-processing of Positron Emission Tomography data)",
           manufacturerSrn: "US-MF-000032747",
           sourceUrl: "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=20&size=20&languageIso2Code=en&tradeName=SubtlePET",
-          lastVerified: "2026-09-22",
+          lastVerified: "2026-09-22"
+        },
+        status: "cleared",
+        class: "IIa",
+        type: "Medical Device",
+        regulation: "MDR (EU 2017/745)",
         notes: "Subtle Medical announced CE marking for SubtlePET 2.0 in June 2021. Current certificate validity and device-specific EUDAMED details remain unverified."
       },
       fda: {
