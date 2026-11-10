@@ -3,67 +3,141 @@ import { ProductDetails } from "@/types/productDetails";
 export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
   {
     id: "algomedica-pixelshine",
-    keyPapers: [
-      {"doi":"10.3390/diagnostics12071627","title":"Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization","authors":"Steuwe A et al.","journal":"Diagnostics","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent single-centre quantitative study.","vendorIndependent":true},
-      {"doi":"10.3390/tomography8040140","title":"AI denoising improves image quality and radiological workflows in pediatric ultra-low-dose thorax CT","authors":"Brendlin AS et al.","journal":"Tomography","year":"2022","evidenceRigor":"E2","clinicalImpact":"L3", "legacyClinicalImpact": "I2","rationale":"Vendor-independent blinded multi-reader study in 100 consecutive patients reporting workflow gains and shortest time to diagnosis.","vendorIndependent":true,"externalValidation":true},
-      {"doi":"10.2214/AJR.19.22680","title":"Combination of deep learning-based denoising and iterative reconstruction for ultra-low-dose chest CT","authors":"Hata A et al.","journal":"AJR Am J Roentgenol","year":"2020","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Independent clinical study at mean 0.19 mSv with Lung-RADS evaluation supporting dose reduction.","vendorIndependent":true}
-    ],
-    trainingData: {
-        disclosureLevel: "minimal",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf",
-        description: "Training data details are not publicly disclosed. The original 510(k) K161625 (2016) describes a non-linear filter for noise reduction; later company materials describe the technology as machine learning/deep learning-based.",
-        source: "FDA 510(k) summary K161625"
-    },
-    evaluationData: {
-        studyDesign: "Independent Retrospective Evaluation",
-        description: "Multiple independent peer-reviewed studies have evaluated PixelShine across CT applications including urolithiasis characterization (Steuwe et al. Diagnostics 2022), pediatric ultra-low-dose thorax CT (Brendlin et al. Tomography 2022), and lung cancer screening ULDCT (Hata et al. AJR 2020). The product is also supported by clinical case studies and FDA 510(k) software verification.",
-        source: "Steuwe et al. Diagnostics 2022; Brendlin et al. Tomography 2022; Hata et al. AJR 2020",
-        results: "Consistent improvements in objective image quality (noise, SNR, CNR) across studies; shorter time-to-diagnosis in pediatric ULDCT (Brendlin et al.); equivalent Lung-RADS performance at ultra-low dose (Hata et al.).",
-        primaryEndpoint: "CT values, image noise, stone characterization, diagnostic accuracy",
-        sourceUrl: "https://doi.org/10.3390/diagnostics12071627"
-    },
     name: "PixelShine",
     company: "AlgoMedica",
-    category: "Image Enhancement",
-    certification: "FDA Cleared",
-    releaseDate: "2016-09-19",
-    description:
-      "CT image denoising software that enhances image quality and supports low-radiation protocols; vendor-agnostic across CT scanners.",
-    logoUrl: "/logos/algomedica.png",
     companyUrl: "https://algomedica.com/",
     productUrl: "https://algomedica.com/low-radation-ct-scans-algomedica",
     githubUrl:
       "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/algomedica.ts",
-    contactEmail: "info@algomedica.com",
+    description:
+      "CT image-processing software that denoises reconstructed DICOM CT images to assist professional radiologists and specialists in diagnosis. FDA labeling states processing is ineffective for abnormalities smaller than 3 mm and excludes mammography. Clinical evidence is limited to retrospective evaluations in selected protocols.",
+    category: "Image Enhancement",
+    certification:
+      "FDA 510(k) cleared (K161625); historical CE marking reported, current certificate and scope unverified",
+    logoUrl: "/logos/algomedica.png",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
     keyFeatures: [
-      "Noise reduction while maintaining diagnostic detail",
-      "Improved SNR and low-contrast detectability",
-      "Enables lower-dose CT protocols without compromising quality",
-      "Vendor-agnostic: compatible with any CT scanner model or age",
-      "Seamless integration into existing workflows",
-      "Processing speed of approximately 11 slices/second",
-      "Supports lung screening, pediatric imaging, and obese patient protocols"
+      "Post-processes reconstructed DICOM CT images to reduce image noise",
+      "FDA-cleared to assist professional diagnosis within the labeled scope",
+      "FDA labeling states processing is ineffective for lesions, masses, or abnormalities smaller than 3 mm",
+      "Mammography images are outside the FDA-cleared intended use",
+      "Evaluated retrospectively in selected pediatric and adult CT protocols",
+      "Compatibility and deployment configuration require confirmation for the specific product version"
     ],
+    keyPapers: [
+      {
+        doi: "10.3390/diagnostics12071627",
+        title:
+          "Influence of a Deep Learning Noise Reduction on the CT Values, Image Noise and Characterization of Kidney and Ureter Stones",
+        authors: "Steuwe A et al.",
+        journal: "Diagnostics",
+        year: "2022",
+        evidenceRigor: "E2",
+        clinicalImpact: "L2",
+        legacyClinicalImpact: "I1",
+        rationale:
+          "Retrospective single-center evaluation of 45 patients assessing stone measurements and image-quality metrics. AlgoMedica supplied the software.",
+        vendorIndependent: false,
+        externalValidation: true
+      },
+      {
+        doi: "10.3390/tomography8040140",
+        title:
+          "AI Denoising Improves Image Quality and Radiological Workflows in Pediatric Ultra-Low-Dose Thorax Computed Tomography Scans",
+        authors: "Brendlin AS et al.",
+        journal: "Tomography",
+        year: "2022",
+        evidenceRigor: "E2",
+        clinicalImpact: "L3",
+        legacyClinicalImpact: "I2",
+        rationale:
+          "Retrospective study of 100 pediatric scans with blinded readers. Faster pneumonia severity-score completion was reported for the medical student and residents, not consultant radiologists. AlgoMedica supplied the software.",
+        vendorIndependent: false,
+        externalValidation: true
+      },
+      {
+        doi: "10.2214/AJR.19.22680",
+        title:
+          "Combination of Deep Learning-Based Denoising and Iterative Reconstruction for Ultra-Low-Dose CT of the Chest: Image Quality and Lung-RADS Evaluation",
+        authors: "Hata A et al.",
+        journal: "AJR American Journal of Roentgenology",
+        year: "2020",
+        evidenceRigor: "E2",
+        clinicalImpact: "L2",
+        legacyClinicalImpact: "I1",
+        rationale:
+          "Retrospective study of 41 patients and 252 nodules at a mean ultra-low-dose CT exposure of approximately 0.19 mSv. AlgoMedica provided technical support and performed PixelShine image processing.",
+        vendorIndependent: false,
+        externalValidation: true
+      },
+      {
+        doi: "10.1038/s41598-024-62394-4",
+        title:
+          "Assessment of Image Quality and Impact of Deep Learning-Based Software in Non-Contrast Head CT Scans",
+        authors: "Bos et al.",
+        journal: "Scientific Reports",
+        year: "2024",
+        evidenceRigor: "E2",
+        clinicalImpact: "L2",
+        legacyClinicalImpact: "I1",
+        rationale:
+          "Retrospective evaluation of 152 exams acquired on three scanners. Objective findings varied by comparator; overall subjective image quality did not show a general improvement.",
+        vendorIndependent: false,
+        externalValidation: true
+      },
+      {
+        doi: "10.3390/bioengineering11121285",
+        title:
+          "Impact of Deep Learning-Based Image Reconstruction on Tumor Visibility and Diagnostic Confidence in Computed Tomography",
+        authors: "Bertl M et al.",
+        journal: "Bioengineering",
+        year: "2024",
+        evidenceRigor: "E2",
+        clinicalImpact: "L2",
+        legacyClinicalImpact: "I1",
+        rationale:
+          "Comparative reader evaluation across 33 contrast-enhanced staging CT exams. Scanner-based deep-learning reconstruction generally rated above PixelShine.",
+        externalValidation: true
+      }
+    ],
+    trainingData: {
+      disclosureLevel: "minimal",
+      sourceUrl: "https://www.fujifilm.com/at/en/healthcare/x-ray/fct/fct-pixelshine",
+      description:
+        "The FDA K161625 summary describes Version 1 as a nonlinear filter. Fujifilm describes deep-learning training with paired low-dose and standard-dose CT images for FCT PixelShine, but does not publish cohort size or composition. These descriptions should not be generalized across versions.",
+      source:
+        "FDA 510(k) summary K161625 and Fujifilm FCT PixelShine product information"
+    },
+    evaluationData: {
+      studyDesign: "Retrospective comparative studies",
+      description:
+        "External academic studies evaluated PixelShine in selected urinary-stone, pediatric chest, adult ultra-low-dose chest, head CT, and staging CT protocols. Studies mainly assessed image quality, image-noise measures, or reader scoring; several disclose software provision or image processing by AlgoMedica.",
+      source:
+        "Steuwe et al. Diagnostics 2022; Brendlin et al. Tomography 2022; Hata et al. AJR 2020; Bos et al. Scientific Reports 2024; Bertl et al. Bioengineering 2024",
+      results:
+        "Image-noise and image-quality effects were protocol- and comparator-dependent. In the pediatric reader study, severity-score completion was faster for junior readers but not consultant radiologists. No reviewed study establishes general dose-reduction effectiveness or broad patient-outcome benefit.",
+      primaryEndpoint:
+        "Image noise and quality, stone measurements, reader severity-score completion time, and Lung-RADS agreement",
+      sourceUrl: "https://doi.org/10.3390/tomography8040140"
+    },
     technicalSpecifications: {
-      population: "Adult and pediatric",
-      input: ["DICOM CT images"],
+      population:
+        "Adults and children were included in retrospective studies; applicability depends on protocol and configuration",
+      input: ["Reconstructed CT images"],
       inputFormat: ["DICOM"],
-      output: ["Enhanced CT images"],
+      output: ["Processed CT images"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["PACS", "Scanner console", "Imaging gateways"],
-      deployment: ["On-premise", "Edge device", "Cloud (optional)"]
+      integration: ["DICOM CT workflow", "PACS (configuration-dependent)"],
+      deployment: ["On-premise DICOM server (documented FCT configuration)"]
     },
     regulatory: {
       ce: {
-        status: "cleared",
-        class: "Class IIa",
-        type: "MDD",
-        notifiedBody: "BSI (Notified Body 0086)",
-        regulation: "MDD 93/42/EEC"
+        status: "unknown",
+        notes:
+          "Historical CE marking is reported in trade press and Fujifilm material. The certificate number, scope, notified body, validity, and current EU status were not verified."
       },
       fda: {
         status: "510k_cleared",
@@ -75,52 +149,82 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
         decisionDate: "2016-09-19"
       },
       intendedUseStatement:
-        "The AlgoMedica PixelShine System is intended for networking, communication, processing and enhancement of CT images in DICOM format. It is specifically indicated for assisting professional radiologists and specialists in reaching their own diagnosis. The device processing is not effective for lesion, mass or abnormalities of sizes less than 3.0 mm. The AlgoMedica PixelShine is not intended for use with or for diagnostic interpretation of mammography images. (Source: FDA 510(k) K161625 Summary, accessed 2026-06-14)"
+        "The AlgoMedica PixelShine System is intended for networking, communication, processing, and enhancement of CT images in DICOM format to assist professional radiologists and specialists in reaching their own diagnosis. FDA labeling states that processing is not effective for lesions, masses, or abnormalities smaller than 3.0 mm and that the device is not intended for use with or diagnostic interpretation of mammography images. Source: FDA 510(k) K161625."
     },
     market: {
-      onMarketSince: "2019-05"
+      onMarketSince: "2019"
     },
     evidence: [
       {
-        type: "Independent Peer-reviewed Publication",
-        description: "Steuwe et al. 2022: Influence of PixelShine deep learning noise reduction on CT values, image noise and kidney/ureter stone characterization. University Düsseldorf, vendor-independent. Diagnostics 2022;12(7):1627.",
-        link: "https://doi.org/10.3390/diagnostics12071627"
-      },
-      {
-        type: "Independent Peer-reviewed Publication",
-        description: "Brendlin et al. 2022: AI denoising improves image quality and radiological workflows in pediatric ultra-low-dose thorax CT. 100 consecutive patients, 8 blinded readers. PixelShine outperformed ADMIRE2 and wFBP; shortest time to diagnosis. Tomography 2022;8(4):1665-1679.",
-        link: "https://doi.org/10.3390/tomography8040140"
-      },
-      {
-        type: "Independent Peer-reviewed Publication",
-        description: "Hata et al. 2020: Combination of deep learning-based denoising (PixelShine) and iterative reconstruction for ultra-low-dose chest CT (mean 0.19 mSv); 41 patients, 252 nodules, Lung-RADS evaluation. AJR 2020;215(6):1321-1328.",
-        link: "https://doi.org/10.2214/AJR.19.22680"
-      },
-      {
         type: "FDA 510(k) Summary",
-        description: "FDA 510(k) clearance documentation for PixelShine (K161625). Class II, 21 CFR 892.2050, Product Code LLZ. Cleared September 19, 2016.",
+        description:
+          "FDA 510(k) K161625 verifies the Class II clearance, decision date, intended-use scope, and labeling limitations.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf16/K161625.pdf"
       },
       {
-        type: "Use cases and scientific publications",
-        description: "Clinical case studies and scientific publications demonstrating PixelShine effectiveness across CT applications.",
-        link: "https://algomedica.com/medical-imaging-resources#case-studies"
+        type: "Peer-reviewed Clinical Study",
+        description:
+          "Steuwe et al. (2022): retrospective evaluation of PixelShine for urinary-stone measurements and image quality in 45 patients; AlgoMedica supplied the software.",
+        link: "https://doi.org/10.3390/diagnostics12071627"
+      },
+      {
+        type: "Peer-reviewed Clinical Study",
+        description:
+          "Brendlin et al. (2022): retrospective pediatric ultra-low-dose chest CT study of 100 scans with blinded readers; measured image quality and severity-score completion time.",
+        link: "https://doi.org/10.3390/tomography8040140"
+      },
+      {
+        type: "Peer-reviewed Clinical Study",
+        description:
+          "Hata et al. (2020): retrospective ultra-low-dose chest CT study of 41 patients and 252 nodules; AlgoMedica performed PixelShine image processing.",
+        link: "https://doi.org/10.2214/AJR.19.22680"
+      },
+      {
+        type: "Peer-reviewed Clinical Study",
+        description:
+          "Bos et al. (2024): retrospective assessment of 152 head CT exams acquired on three scanners; results depended on the comparator.",
+        link: "https://doi.org/10.1038/s41598-024-62394-4"
+      },
+      {
+        type: "Peer-reviewed Clinical Study",
+        description:
+          "Bertl et al. (2024): comparative reader evaluation across 33 contrast-enhanced staging CT exams.",
+        link: "https://doi.org/10.3390/bioengineering11121285"
+      },
+      {
+        type: "Manufacturer Product Information",
+        description:
+          "Fujifilm describes the FCT PixelShine configuration, paired-image training approach, and FCT-series compatibility limitation.",
+        link: "https://www.fujifilm.com/at/en/healthcare/x-ray/fct/fct-pixelshine"
+      },
+      {
+        type: "Clinical Trial Registry",
+        description:
+          "ClinicalTrials.gov NCT03033615 has no results posted and an unknown status; it is not evidence of effectiveness.",
+        link: "https://clinicaltrials.gov/study/NCT03033615"
       }
     ],
     evidenceRigor: "E2",
     clinicalImpact: "L3",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "Steuwe et al. Diagnostics 2022;12(7):1627 (University Düsseldorf, independent, urolithiasis). Brendlin et al. Tomography 2022;8(4):1665 (pediatric ULDCT, n=100, 8 readers). Hata et al. AJR 2020;215(6):1321 (lung RADS ULDCT, n=41). Tian et al. pelvic CTA 70kVp (Japanese J Radiol 2018, PMID 30523499). AI for CT image quality meta-analysis (PMID:40053787, 2025). PubMed verified 2026-06-14.",
-    clinicalImpactNotes: "Workflow improvement through CT denoising enabling low-radiation protocols across whole body CT, including pediatric and lung screening applications.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E2 + CE (MDD) + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
-    evidenceVendorIndependent: true,
+    legacyClinicalImpact: "I2",
+    evidenceRigorNotes:
+      "E2: Multiple peer-reviewed academic evaluations exist, but they are retrospective and limited in scope. AlgoMedica supplied software or processed images in several studies; no completed prospective results were identified.",
+    clinicalImpactNotes:
+      "L3 (legacy I2): Evidence supports protocol-specific image-quality changes and a narrow reader-task effect. It does not establish prospective patient benefit, routine-workflow effectiveness, or broad dose-reduction outcomes.",
+    adoptionReadiness: "R0",
+    adoptionReadinessNotes:
+      "R0: Public evidence reviewed does not verify current compatibility, local commissioning, QA, monitoring, or routine clinical deployment. Site-specific validation is not documented in these public sources.",
+    evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: true,
-    lastUpdated: "2026-06-14",
-    lastRevised: "2026-06-14",
-    source: "FDA database; vendor-supplied information (non-public)"
+    releaseDate: "2016-09-19",
+    contactEmail: "info@algomedica.com",
+    lastUpdated: "2026-11-09",
+    lastRevised: "2026-11-09",
+    source:
+      "FDA K161625; Fujifilm FCT PixelShine product information; peer-reviewed studies listed above. Current EU certificate, first commercial-sale date, and universal compatibility are unverified."
   }
 ];
