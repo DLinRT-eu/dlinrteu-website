@@ -7,6 +7,7 @@ export const uRTAutoContouring: ProductDetails = {
   id: "united-urt-auto-contouring",
   name: "uRT Auto-Contouring",
   market: {
+    availability: "Offered as an integrated feature of compatible United Imaging uRT radiotherapy systems; the CE-marked uRT-linac 506c was introduced in Europe in May 2026. Availability, regulatory authorisation and supported models depend on jurisdiction and system configuration. Not verified as a separately marketed product.",
     onMarketSince: "2026",
     distributionChannels: [
       "Integrated with uRT-linac 506c"
@@ -22,6 +23,11 @@ export const uRTAutoContouring: ProductDetails = {
       type: "Indirect-Comparative",
       description: "Med Phys 2025 risk assessment of the all-in-one CT-linac workflow (PMID 39794280). Covers the integrated device, not the auto-contouring module specifically.",
       link: "https://doi.org/10.1002/mp.17620"
+    },
+    {
+      type: "indirect",
+      description: "Li et al. Radiat Oncol 2025: Institution-developed nnU-Net models integrated into the United Imaging uRT TPS for rectal cancer target segmentation, with external testing at two hospitals and reduced contouring time. Customised research models; equivalence to the standard commercial uRT Auto-Contouring models not established.",
+      link: "https://doi.org/10.1186/s13014-025-02694-9"
     },
     {
       link: "https://www.prnewswire.com/news-releases/united-imaging-unveils-its-full-radiotherapy-portfolio-at-estro-2026-highlighting-the-ce-marked-urt-linac-506c-302773402.html",
@@ -143,7 +149,7 @@ export const uRTAutoContouring: ProductDetails = {
     "Abdomen: Gall bladder",
     "Abdomen: Pancreas",
     "Abdomen: Colon",
-    "Male Pelvis: Prostrate",
+    "Male Pelvis: Prostate",
     "Male Pelvis: Testes",
     "Pelvis: Rectum",
     "Whole body: Spinal Canal",
