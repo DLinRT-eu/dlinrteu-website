@@ -84,7 +84,8 @@ export const PrecisePosition: ProductDetails = {
     distributionChannels: ["Integrated in new Philips CT systems", "Software option for compatible installed base"],
   },
   evidenceRigor: "E0",
-  clinicalImpact: "I1",
+  clinicalImpact: "L2",
+  legacyClinicalImpact: "I1",
   evidenceRigorNotes:
     "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes:
