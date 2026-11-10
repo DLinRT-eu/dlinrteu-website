@@ -93,12 +93,13 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K241837",
         productCode: "QKB",
         regulationNumber: "21 CFR 892.2050",
-        decisionDate: "2024-11-15",
-        notes: "Previous clearance: K230575 (2023). Now distributed by Radformation (acquired April 30, 2024)."
+        decisionDate: "2024-10-09",
+        notes: "K241837 cleared Limbus Contour v1.8 on 9 October 2024 for CT/MR-based radiotherapy contouring; indications list CT and MR only (CBCT models not covered). Previous clearance: K230575 (2023). Now distributed by Radformation (acquired 30 April 2024); Radformation AutoContour is a separately cleared successor platform (e.g., K260509, K262452)."
       },
       intendedUseStatement: "Limbus Contour is a software-only medical device intended for use by trained radiation oncologists, dosimetrists and physicists to derive optimal contours for input to radiation treatment planning. Supported image modalities are Computed Tomography and Magnetic Resonance. The Limbus Contour Software assists in the following scenarios: Operates in conjunction with radiation treatment planning systems or DICOM viewing systems to load, save, and display medical images and contours for treatment evaluation and treatment planning; Creation, transformation, and modification of contours for applications including, but not limited to: transferring contours to radiotherapy treatment planning systems, aiding adaptive therapy and archiving contours for patient follow-up; Localization and definition of healthy anatomical structures. Limbus Contour is not intended for use with digital mammography. (Source: FDA 510(k) K241837 Summary, accessed 2026-05-30)"
     },
     market: {
+      availability: "Established commercial product originally developed by Limbus AI, acquired by Radformation in April 2024 and incorporated into Radformation's unified AutoContour platform (v2.8, September 2026). Legacy Limbus Contour deployments and AutoContour configurations should be distinguished when assessing regulatory status, models and validation.",
       onMarketSince: "2019",
       distributionChannels: ["Direct sales", "Partnerships via Radformation (acquired April 30, 2024)"]
     },
@@ -107,10 +108,16 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "L3",
     legacyClinicalImpact: "I2",
-    evidenceRigorNotes: "Multiple independent multi-institutional peer-reviewed studies (Starke 2024, Radici 2022, Grossi 2025, Doolan 2023, Tabita 2025) support E2. No prospective/RCT evidence — insufficient for E3.",
-    clinicalImpactNotes: "Independent workflow-adoption and time-saving evidence (Radici 2022) plus consistency benefits supports I3.",
+    evidenceRigorNotes: "E2: Extensive peer-reviewed validation including independent multi-institutional and comparative evaluations against external reference contours (Grossi et al. 2025, Doolan et al. 2023), plus single-centre workflow and dosimetric studies (Starke et al. 2024, Radici et al. 2022, Tabita et al. 2025). No randomised or prospective outcome evidence — insufficient for E3.",
+    clinicalImpactNotes: "L3: Independent studies show reduced contouring time and editing burden in routine planning (Starke et al. 2024: about 13–26 min saved per prostate case; Radici et al. 2022; Tabita et al. 2025). Dosimetric evaluations underline the need to review and correct AI contours. No evidence yet of improved treatment decisions or patient outcomes.",
     adoptionReadiness: "R4",
-    adoptionReadinessNotes: "Derived from E3 + CE + FDA 510(k): mature peer-reviewed multi-center evidence with regulatory clearance; minor local commissioning and user training expected.",
+    adoptionReadinessNotes: "R4: Commercially deployed with FDA 510(k) clearance, EU MDR registration, substantial peer-reviewed validation and documented routine clinical use. Local commissioning, structure-specific evaluation, training and ongoing QA remain necessary; the successor AutoContour platform has a separate regulatory history.",
+    limitations: [
+      "AI-generated contours require qualified clinical review and correction before treatment planning; performance varies by structure, modality, protocol, pathology and software version",
+      "Independent studies report clinically relevant failures, e.g., bowel contours overlapping prostate targets and differences in regional nodal delineation; in Starke et al. (2024), 5 of 20 plans optimised on unmodified AI OAR contours compromised PTV coverage unnecessarily",
+      "Geometric agreement does not guarantee dosimetric equivalence; paediatric, CBCT and brachytherapy uses require configuration-specific validation",
+      "Findings from legacy Limbus Contour versions should not be transferred automatically to Radformation AutoContour v2.8"
+    ],
     evidenceVendorIndependent: true,
     evidenceMultiCenter: true,
     evidenceMultiNational: true,
@@ -123,7 +130,7 @@ export const LIMBUS_PRODUCTS: ProductDetails[] = [
         link: "https://doi.org/10.1016/j.phro.2026.100942"
       },
       {"type": "Peer-reviewed Publication", "description": "Thibodeau‐Antonacci et al. Trade‐off of different deep learning‐based auto‐segmentation approaches for treatment planning of pediatric craniospinal irradiation autocontouring of OARs for pediatric CSI. Medical Physics 2025. Single-centre paediatric CSI comparison of LimbusAI vs in-house U-Nets; geometric and planning endpoints. HAIR label AutoContour corrected to Limbus Contour. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1002/mp.17782"},
-      {"type": "Multi-vendor Comparative Study", "description": "Meixner E et al. Validation of different automated segmentation models for target volume contouring in postoperative radiotherapy for breast cancer and regional nodal irradiation. Clin Transl Radiat Oncol 2024. Single-centre comparison of three commercial models for post-operative breast CTVs; geometric endpoints. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.ctro.2024.100855"},
+      {"type": "Multi-vendor Comparative Study", "description": "Meixner E et al. Validation of different automated segmentation models for target volume contouring in postoperative radiotherapy for breast cancer and regional nodal irradiation. Clin Transl Radiat Oncol 2024. Single-centre independent comparison of Limbus Contour v1.8.0-B2, RayStation and MVision for postoperative breast and regional nodal CTVs in 50 patients; Limbus contours needed no or only minor corrections in 64% of cases. Geometric and clinical-usability endpoints.", "link": "https://doi.org/10.1016/j.ctro.2024.100855"},
       {"type": "Multi-vendor Comparative Study", "description": "Bordigoni B et al. Automated segmentation in pelvic radiotherapy: A comprehensive evaluation of ATLAS-, machine learning-, and deep learning-based models. Phys Med 2024. Single-centre pelvic comparison of atlas, random forest, MVision and LimbusAI; geometric endpoints. HAIR label Image+ corrected to Contour+. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.ejmp.2024.104486"},
       {"type": "Peer-reviewed Publication", "description": "Bürkle et al. A student trained convolutional neural network competing with a commercial AI software and experts in organ at risk segmentation. Scientific Reports 2024. Single-centre comparison of Limbus Contour vs a student-trained CNN. HAIR label corrected to Limbus Contour. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1038/s41598-024-76288-y"},
       {"type": "Peer-reviewed Publication", "description": "Sarria G et al. Artificial Intelligence–Based Autosegmentation: Advantages in Delineation, Absorbed Dose-Distribution, and Logistics. Advances in Radiation Oncology 2024. Single-centre study of Limbus Contour on delineation, dose distribution and logistics. (Added 2026-09-23 from HAIR cross-check.)", "link": "https://doi.org/10.1016/j.adro.2023.101394"},

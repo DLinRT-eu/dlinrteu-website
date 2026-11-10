@@ -5,62 +5,61 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
   {
     id: "pymedix-registration",
     trainingData: {
-        source: "FDA 510(k) summary K233572",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
-        disclosureLevel: "minimal",
-        description: "Not publicly disclosed. Training information is not specified in the regulatory summary or vendor white paper."
+      source: "Pymedix method description and FDA 510(k) summary K233572",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
+      disclosureLevel: "none",
+      description: "Pymedix states that Autofuse uses machine perception without machine learning, deep learning, or neural networks. A training dataset is not applicable to the method as described by the manufacturer."
     },
     evaluationData: {
-        primaryEndpoint: "Not specified",
-        description: "Software validation and verification for FDA 510(k) clearance K233572 for multi-modal registration and fusion of DICOM medical images. Vendor brochures describes the tool as a fully automatic 3D deformable image registration approach.",
-        results: "Not publicly disclosed",
-        sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
-        studyDesign: "Software V&V (FDA 510(k))",
-        source: "FDA 510(k) summary K233572"
+      primaryEndpoint: "Not specified",
+      description: "The FDA 510(k) summary documents nonclinical software verification and validation in a simulated clinical environment. It does not report a clinical study or a numerical clinical registration-accuracy endpoint.",
+      results: "Nonclinical verification and validation are documented; clinical accuracy and workflow outcome results are not publicly reported in the summary.",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf",
+      studyDesign: "Nonclinical software verification and validation (FDA 510(k)); no clinical study reported in the public summary",
+      source: "FDA 510(k) summary K233572"
     },
     name: "Autofuse",
     company: "PyMedix",
     companyUrl: "https://pymedix.com/",
     productUrl: "https://pymedix.com/autofuse/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/registration/pymedix.ts",
-    description: "Advanced medical imaging registration solution with AI-powered alignment algorithms for multi-modal image fusion in radiotherapy planning.",
-    features: ["Multi-modal registration", "AI-powered alignment", "Real-time processing", "Clinical workflow integration"],
+    description: "DICOM-compliant medical-imaging software for display, annotation, volume operations and rendering, registration, and fusion as an aid in diagnostic radiology, oncology, and radiation therapy planning. Pymedix markets automatic 3D deformable registration and describes its approach as machine perception.",
+    features: [
+      "Medical-image display, annotation, volume operations, and rendering",
+      "Registration and fusion of DICOM-compliant medical images",
+      "Manufacturer-described automatic rigid and deformable registration"
+    ],
     category: "Registration",
-    certification: "CE & FDA",
+    certification: "FDA 510(k) cleared (K233572); EU CE status not verified",
     logoUrl: "/logos/pymedix.png",
     website: "https://pymedix.com/",
-    anatomicalLocation: ["Head & Neck", "Thorax", "Abdomen", "Pelvis"],
+    anatomicalLocation: [],
     modality: ["CT", "MRI", "PET"],
-    subspeciality: "Radiation Oncology",
-    diseaseTargeted: ["Multiple Cancer Types"],
+    subspeciality: "Radiology and Radiation Oncology",
+    diseaseTargeted: [],
     keyFeatures: [
-      "Automated multi-modal image registration",
-      "AI-enhanced alignment accuracy",
-      "Real-time deformation analysis",
-      "Seamless TPS integration",
-      "Quality assurance metrics"
+      "DICOM-compliant image display, annotation, volume operations, and rendering",
+      "Medical-image registration and fusion",
+      "Pymedix describes the registration approach as machine perception, not machine learning"
     ],
-    guidelines: [
-    ],
+    guidelines: [],
     technicalSpecifications: {
-      population: "Adult patients",
-      input: ["CT", "MRI", "PET"],
+      population: "No age group is specified in the FDA indications for use.",
+      input: ["DICOM-compliant medical images, including CT, MRI, and PET"],
       inputFormat: ["DICOM"],
-      output: ["Registered images", "Fused images"],
+      output: ["Registered or fused images", "Annotations and regions of interest"],
       outputFormat: ["DICOM"]
     },
     technology: {
-      integration: ["Treatment Planning Systems", "PACS"],
-      deployment: ["On-premises", "Cloud-based"],
-      triggerForAnalysis: "Manual or automated workflow",
-      processingTime: "Minutes per registration"
+      integration: ["DICOM-compatible clinical imaging and treatment-planning workflows"],
+      deployment: ["Standalone medical-imaging software; supported production environment not publicly verified"],
+      triggerForAnalysis: "Pymedix describes registration as automatic after image sets are selected; exact workflow configuration is not publicly specified.",
+      processingTime: "No verified runtime is publicly specified."
     },
     regulatory: {
       ce: {
-        status: "cleared",
-        class: "IIa",
-        type: "Medical Device",
-        regulation: "MDR (EU 2017/745)"
+        status: "unknown",
+        notes: "No product-specific CE certificate or declaration of conformity was verified in this review; EU status remains unverified."
       },
       fda: {
         status: "510k_cleared",
@@ -69,48 +68,81 @@ export const PYMEDIX_PRODUCTS: ProductDetails[] = [
         clearanceNumber: "K233572",
         regulationNumber: "21 CFR 892.2050",
         productCode: "LLZ",
-        decisionDate: "2024-03-06"
+        decisionDate: "2024-03-06",
+        notes: "FDA also lists subsequent product code MUJ. 510(k) clearance is not FDA approval."
       },
-      intendedUseStatement: "\"Autofuse is a software package that provides physicians a means for comparison of medical data including imaging data that is DICOM compliant. It allows the display, annotation, volume operation, volume rendering, registration and fusion of medical images as an aid during use by diagnostic radiology, oncology, radiation therapy planning, and other medical specialties.\" (Source: FDA 510(k) K233572 Summary, accessed 2026-05-30)"
+      intendedUseStatement: "Autofuse provides physicians a means to compare DICOM-compliant medical data using display, annotation, volume operations and rendering, registration, and fusion as an aid in diagnostic radiology, oncology, radiation therapy planning, and other specialties. It is not intended for mammography. (Paraphrased from FDA 510(k) K233572.)"
     },
-    market: {
-      onMarketSince: "2021",
-      distributionChannels: ["Direct sales", "Distribution partners"],
-
-},
     evidenceRigor: "E0",
-    clinicalImpact: "I0",
-    evidenceRigorNotes: "2026-08-25 Wave 3 per-paper sweep: PubMed and Crossref re-searched 2026-08-25 for Autofuse/Pymedix — no peer-reviewed publication found, so no keyPapers could be scored and rigor is E0 (regulatory submission and vendor brochure only). FDA K233572 validation. No independent peer-reviewed clinical accuracy publications identified (web-searched 2026-06-01). Note: PyMedix explicitly markets Autofuse as 'machine perception, not deep learning' — flagged for inclusion review against the AI/DL inclusion gate. Wave 5D open question RESOLVED 2026-08-25 — EXCLUDED: 10.1007/s11548-025-03538-3 (Yao et al., PMID 41196526) is an academic MRI-TRUS diffusion-registration method paper in which 'AutoFuse' is a published supervised registration network used as a baseline comparator alongside VoxelMorph and LocalNet, not the PyMedix product. E0 stands. 2026-08-28 Batch C sweep (Crossref/PubMed/Europe PMC): only FDA 510(k) K233572 and vendor material located; no peer-reviewed publication names Autofuse. E0 stands.",
-    clinicalImpactNotes: "2026-08-25 Wave 3 per-paper sweep: impact lowered to I0 — the previous I2 rested on vendor workflow claims with no published registration-accuracy, time-saving or outcome endpoint. Vendor claims workflow improvement through automated multi-modal image registration.",
-    adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    clinicalImpact: "L1t",
+    evidenceRigorNotes: "E0 (2026-11-09): FDA K233572 provides regulatory clearance and documents nonclinical software verification/validation. No independent product-specific clinical validation was identified. Manufacturer performance claims are not independently corroborated; the related CRAFT paper is not established as an evaluation of the cleared commercial version.",
+    clinicalImpactNotes: "L1t (2026-11-09): Autofuse has an intended role in medical-image registration and radiotherapy-planning workflow, but no product-specific evidence located here demonstrates patient-outcome benefit or independently measured workflow improvement.",
+    adoptionReadiness: "R0",
+    adoptionReadinessNotes: "Public sources reviewed do not verify site commissioning, current interoperability testing, local QA, monitoring, or routine clinical deployment. AccessGUDID commercial-distribution status does not establish implementation readiness.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: false,
     evidenceMultiNational: false,
     evidenceProspective: false,
     evidenceExternalValidation: false,
+    clinicalEvidence: "The FDA 510(k) summary reports nonclinical software verification and validation, not a clinical trial. No independent product-specific clinical accuracy, workflow, or patient-outcome study was identified in this review. Pymedix publishes manufacturer-reported benchmarks and workflow estimates.",
     evidence: [
       {
-        type: "FDA 510(k) Summary",
-        description: "Autofuse 510(k) K233572 (Pymedix), cleared 2024-03-06.",
-        link: "https://fda.innolitics.com/submissions/RA/subpart-b%E2%80%94diagnostic-devices/LLZ/K233572"
+        type: "FDA 510(k) Record",
+        description: "Official FDA record for Autofuse K233572; Class II, product code LLZ, subsequent product code MUJ, decision date 2024-03-06.",
+        link: "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K233572"
       },
       {
-        type: "Vendor White Paper",
-        description: "Pymedix Autofuse Brochure (2019) — describes the fully automatic 3D deformable image registration approach.",
+        type: "FDA 510(k) Summary",
+        description: "Indications for use, device description, and nonclinical software verification and validation.",
+        link: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K233572.pdf"
+      },
+      {
+        type: "FDA Device Record",
+        description: "AccessGUDID lists version/model 1 and commercial distribution; it does not establish the launch date or installed base.",
+        link: "https://accessgudid.nlm.nih.gov/devices/00860012197200"
+      },
+      {
+        type: "Manufacturer Product Page",
+        description: "Pymedix description of Autofuse and manufacturer-reported registration and workflow claims.",
+        link: "https://pymedix.com/autofuse/"
+      },
+      {
+        type: "Manufacturer Technical Statement",
+        description: "Pymedix describes Autofuse as machine perception without machine learning, deep learning, or neural networks.",
+        link: "https://pymedix.com/2019/01/15/mp-for-intelligence/"
+      },
+      {
+        type: "Manufacturer Brochure",
+        description: "Pymedix Autofuse brochure (2019), including manufacturer-reported benchmarks and workflow estimates.",
         link: "https://pymedix.com/wp-content/uploads/2019/04/Pymedix-Autofuse-Brochure-2019.pdf"
+      },
+      {
+        type: "Related Method Paper",
+        description: "Huang et al. (2019), CRAFT registration method; not verified as evaluation of the cleared commercial Autofuse version.",
+        link: "https://doi.org/10.1088/1361-6560/ab2202"
+      },
+      {
+        type: "General QA Guidance",
+        description: "AAPM Task Group 132 report on image-registration and fusion QA in radiotherapy; not product-specific validation.",
+        link: "https://www.aapm.org/pubs/reports/detail.asp?docid=164"
+      },
+      {
+        type: "Unrelated Academic Method",
+        description: "Meng et al. AutoFuse neural-network method, distinct from Pymedix Autofuse.",
+        link: "https://doi.org/10.1016/j.patcog.2024.111338"
       }
     ],
     limitations: [
-      "No independent peer-reviewed clinical accuracy or workflow study identified",
-      "Vendor describes the algorithm as 'machine perception' rather than deep learning — AI/DL inclusion to be reviewed",
-      "No published multi-center or multi-national validation",
-      "Limited public information on installed base and clinical adoption"
+      "No independent product-specific clinical accuracy, workflow, or patient-outcome study was identified",
+      "Manufacturer-reported benchmark and workflow estimates have not been independently corroborated",
+      "No verified processing-time or supported cloud-deployment specification was found",
+      "EU CE status was not verified; this is unresolved, not evidence that no CE documentation exists",
+      "Public sources do not establish local commissioning, QA, monitoring, installed base, or routine clinical deployment",
+      "A related CRAFT method paper and an academic AutoFuse neural network should not be represented as clinical validation of Pymedix Autofuse"
     ],
-    version: "2.1",
-    releaseDate: "2023-08-15",
-    lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
-    source: "FDA 510(k) K233572; vendor website; peer-reviewed literature"
+    version: "1",
+    lastUpdated: "2026-11-09",
+    lastRevised: "2026-11-09",
+    source: "FDA 510(k) K233572, AccessGUDID, Pymedix product documentation, related peer-reviewed method literature, and AAPM TG-132"
   }
 ];

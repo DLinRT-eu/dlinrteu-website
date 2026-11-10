@@ -47,6 +47,13 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
       "Treatment response assessment",
       "Multi-timepoint comparison"
     ],
+    evidence: [
+      {
+        type: "Clinical Study",
+        description: "Akdemir et al. J Neurooncol 2025: External retrospective evaluation of a DeepMets-associated federated AI algorithm in 50 SRS patients (236 metastases). Lesion-wise sensitivity 52.1%, PPV 78.0%, mean DSC 0.60; 46.3% of contours required major revision, with poorer performance for small lesions. Many metastases were below the FDA-cleared >= 10 mm threshold.",
+        link: "https://doi.org/10.1007/s11060-025-05294-5"
+      }
+    ],
     supportedStructures: BRAIN_METASTASES_STRUCTURES,
     guidelines: [
       {
@@ -96,10 +103,16 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
-    evidenceRigorNotes: "FDA 510(k) K250427 performance summary plus one peer-reviewed external validation (Akdemir et al. 2025) showing variable performance. No further independent literature — E1. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
-    clinicalImpactNotes: "Technical feasibility demonstrated; external validation shows variable performance (lower sensitivity for small lesions) and high revision rates, indicating limited clinical impact without prospective outcome data.",
+    evidenceRigorNotes: "E2: FDA K250427 standalone testing on 158 independent US patients from 16 imaging facilities (lesions >= 10 mm; lesion-wise sensitivity 89.97%, mean Dice 0.70) plus one peer-reviewed external clinical evaluation (Akdemir et al. 2025) across a broader lesion-size range (sensitivity 52.1%, mean Dice 0.60). The external study had Taiwan AI Labs-affiliated co-authors, so independence is limited; no prospective workflow or outcome evidence for E3.",
+    clinicalImpactNotes: "L2: FDA testing and external evaluation demonstrate technical accuracy for brain metastasis contouring, dependent on lesion size and imaging characteristics. Reduced sensitivity for small metastases and frequent major revisions support an assistive role under clinician supervision; no evidence yet of workflow, decision or outcome benefit.",
+    limitations: [
+      "FDA-cleared use is restricted to known brain metastases >= 10 mm on axial contrast-enhanced T1-weighted MRI in adults; smaller metastases, other brain tumours and other sequences are outside the stated indication",
+      "Patients with prior craniotomy and scans with excessive motion artefacts are excluded",
+      "External validation (Akdemir et al. 2025) showed reduced sensitivity for small lesions, mean Dice 0.60 and major contour revisions in 46.3% of evaluated segmentations; contours may underestimate lesion margins",
+      "No built-in manual contour editing; outputs must be reviewed and finalised in compatible external software before treatment planning"
+    ],
     adoptionReadiness: "R3",
-    adoptionReadinessNotes: "Derived from E1 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
+    adoptionReadinessNotes: "Derived from E2 + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption.",
     evidenceVendorIndependent: false,
     evidenceMultiCenter: true,
     evidenceMultiNational: false,
@@ -107,7 +120,7 @@ export const TAIWAN_MEDICAL_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: true,
     lastUpdated: "2026-10-15",
     keyPapers: [
-    {"doi":"10.1007/s11060-025-05294-5","title":"External validation of DeepMets brain metastases contouring","authors":"Akdemir E et al.","journal":"J Neurooncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Independent external validation cohort; geometric detection/segmentation endpoints.","vendorIndependent":true,"externalValidation":true}
+    {"doi":"10.1007/s11060-025-05294-5","title":"Evaluating the efficacy of a federated AI algorithm in assisting in the detection and segmentation of brain metastases: limitations and opportunities","authors":"Akdemir EY et al.","journal":"J Neurooncol","year":"2025","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"External retrospective SRS cohort (50 patients, 236 metastases) with detection/segmentation endpoints; developer-affiliated co-authors.","externalValidation":true}
   ],
     lastRevised: "2026-08-25",
     companyRevisionDate: "",

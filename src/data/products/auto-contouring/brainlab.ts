@@ -45,9 +45,19 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
       description: "Wittenstein et al. Strahlenther Onkol 2019: Retrospective pilot evaluation of Brainlab Anatomical Mapping Release 1.0 (legacy version) for 9 extracranial OARs in 24 patients. Indirect for current Contouring 5.0/APM."
     },
     {
-      link: "https://therapanacea.com/press-releases/therapanacea-partnering-with-brainlab-commitment-to-interoperability-and-open-interfaces",
-      type: "Manufacturer/Partner Source",
-      description: "TheraPanacea and Brainlab announced integration of AI-powered extracranial OAR and lymph-node segmentation into the Brainlab Elements portfolio."
+      link: "https://doi.org/10.3389/fonc.2022.827195",
+      type: "indirect",
+      description: "Rogé et al. Front Oncol 2022: Retrospective single-centre evaluation of Elements SmartBrush Spine v3.0 (Elements Spine SRS) in 30 patients with 35 spinal metastases, comparing semi-automatic CTV generation with expert manual contours; dosimetric comparison in 11 patients. Indirect for current Contouring 5.0/APM."
+    },
+    {
+      link: "https://doi.org/10.3233/JPD-225126",
+      type: "indirect",
+      description: "Rolland et al. J Parkinsons Dis 2023: Prospective evaluation of image-guided deep brain stimulation programming in 32 patients with Parkinson's disease, using Brainlab Elements anatomical mapping (version not reported) within the programming workflow. Non-radiotherapy use; not a standalone segmentation validation."
+    },
+    {
+      link: "https://doi.org/10.3390/s25175301",
+      type: "indirect",
+      description: "Neumann et al. Sensors 2025: Retrospective cohort of 28 epilepsy-surgery patients using Brainlab Elements anatomical mapping to segment the amygdala, hippocampus, brainstem and cerebrum for multimodal image guidance. Non-radiotherapy use; not a standalone segmentation validation."
     }
   ],
   modality: ["CT", "MRI"],
@@ -97,7 +107,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
   keyPapers: [
     {"doi":"10.1007/s00066-019-01463-4","title":"Automatic image segmentation based on synthetic tissue model for delineating organs at risk in spinal metastasis treatment planning","authors":"Wittenstein O et al.","journal":"Strahlenther Onkol","year":"2019","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical validation with geometric endpoints.","vendorIndependent":true},
     {"doi":"10.3389/fonc.2022.842579","title":"Clinical Evaluation of an Auto-Segmentation Tool for Spine SBRT Treatment","authors":"Chen Y et al.","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E1","clinicalImpact":"L3", "legacyClinicalImpact": "I1","rationale":"Single-centre segmentation accuracy evaluation.","vendorIndependent":true},
-    {"doi":"10.3389/fonc.2022.827195","title":"Evaluation of a Dedicated Software “Elements™ Spine SRS, Brainlab®” for Target Volume Definition in the Treatment of Spinal Bone Metastases With Stereotactic Body Radiotherapy","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E2","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Multi-site auto-segmentation evaluation with geometric endpoints.","multiCenter":true,"externalValidation":true}
+    {"doi":"10.3389/fonc.2022.827195","title":"Evaluation of a Dedicated Software “Elements™ Spine SRS, Brainlab®” for Target Volume Definition in the Treatment of Spinal Bone Metastases With Stereotactic Body Radiotherapy","journal":"Front. Oncol.","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","authors":"Rogé M et al.","rationale":"Retrospective single-centre evaluation (30 patients) of the semi-automatic SmartBrush Spine tool against expert contours, with geometric and dosimetric endpoints.","vendorIndependent":true}
   ],
   lastRevised: "2026-08-27",
   lastUpdated: "2026-10-15",
@@ -111,7 +121,7 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
   releaseDate: "2025-06-13",
   contactEmail: "regulatory.affairs@brainlab.com",
   certification: "CE MDR & FDA 510(k)",
-  evidenceRigor: "E2",
+  evidenceRigor: "E1",
   priorVersions: [
     {
       name: "Brainlab Elements 6.0",
@@ -134,9 +144,9 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Thorax",
     "Extracranial"
   ],
-  evidenceRigorNotes: "4-5 independent single-centre peer-reviewed studies (Wittenstein 2019, Yu 2022, Front Oncol 2022 groups) support upgrade to E2.",
-  clinicalImpactNotes: "I2: The baseline Contouring 5.0 software with APM 1.1 and TheraPanacea integration automates substantial OAR/lymph node contouring labor, directly accelerating radiation planning pipelines. However, local clinical QA, physician editing, and manual approvals are mandatory, and direct survival/toxicity benefits remain unmeasured in published prospective clinical papers.",
-  evidenceMultiCenter: true,
+  evidenceRigorNotes: "E1: Independent single-centre peer-reviewed evaluations of Brainlab segmentation tools (Wittenstein et al. 2019, Chen et al. 2022, Rogé et al. 2022) plus FDA K243633 performance testing. All published studies evaluate legacy or related modules rather than Contouring 5.0/APM 1.1; no multi-centre peer-reviewed validation identified. Yu et al. 2022 was removed because it evaluates a different Brainlab product (Knee 3).",
+  clinicalImpactNotes: "L3: The baseline Contouring 5.0 software with APM 1.1 and TheraPanacea integration automates substantial OAR/lymph node contouring labor, directly accelerating radiation planning pipelines. However, local clinical QA, physician editing, and manual approvals are mandatory, and direct survival/toxicity benefits remain unmeasured in published prospective clinical papers.",
+  evidenceMultiCenter: false,
   evidenceProspective: false,
   supportedStructures: [
     "Brain: Brain",
@@ -201,12 +211,12 @@ export const BrainlabElementsContouring50APMElementsSegmentation: ProductDetails
     "Thorax: Kidney R",
     "Extracranial: Full body OARs (via TheraPanacea integration) (unverified)"
   ],
-  evidenceMultiNational: true,
+  evidenceMultiNational: false,
   adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation, interface testing and workflow confirmation required before adoption. CE status is declared by manufacturer but certificate numbering search is limited.",
   technicalSpecifications: {
     input: ["CT", "MRI", "DICOM image data"],
     output: ["3D segmentation objects", "Structure sets"],
-    population: "No demographic, regional, or cultural limitations stated for Contouring 5.0; adult-only validation applies to the cranial AI tumor segmentation feature",
+    population: "No demographic, regional, or cultural limitations stated for Contouring 5.0; adult-only validation applies to the cranial AI tumour segmentation feature. FDA K243633 validation used 412 adult patients (595 scans, 1,878 annotations) from multiple US and European sites, including controls without cranial tumours; one quarter of the test pool came from three independent US sites",
     inputFormat: ["DICOM"],
     outputFormat: ["DICOM-RTSTRUCT"]
   },
