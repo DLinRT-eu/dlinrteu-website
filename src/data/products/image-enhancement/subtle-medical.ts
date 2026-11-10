@@ -550,12 +550,12 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
       notes:
         "The manufacturer announced both distribution agreements on 2026-10-20. The announcement does not establish product-specific installed sites or commissioning outcomes."
     },
-    evidenceRigor: "E1",
+    evidenceRigor: "E0",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
     legacyClinicalImpact: "I1",
     evidenceRigorNotes:
-      "E1: FDA K254013 publicly documents manufacturer-generated retrospective validation and reader-study results. No independent peer-reviewed study specific to SubtleHD-PET (1.x) was identified.",
+      "E0: FDA K254013 publicly documents manufacturer-generated retrospective validation and reader-study results. No independent peer-reviewed study specific to SubtleHD-PET (1.x) was identified.",
     clinicalImpactNotes:
       "L2 (legacy I1): Retrospective reader assessment provides narrow image-quality relevance, but no product-specific workflow benefit, diagnostic-management change, radiotherapy-planning validation, or patient-outcome benefit was identified.",
     adoptionReadiness: "R1",
