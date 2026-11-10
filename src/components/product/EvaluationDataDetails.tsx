@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { FlaskConical, Globe, ExternalLink } from 'lucide-react';
 import type { ProductDetails } from '@/types/productDetails';
 import SourceProvenanceChip from './SourceProvenanceChip';
+import { EditableField } from '@/components/product-editor';
 
 interface EvaluationDataDetailsProps {
   product: ProductDetails;
@@ -24,7 +25,9 @@ export default function EvaluationDataDetails({ product }: EvaluationDataDetails
         {data.description && (
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">Description</p>
-            <p className="text-sm">{data.description}</p>
+            <EditableField fieldPath="evaluationData.description" value={data.description} type="textarea" placeholder="Evaluation description">
+              <p className="text-sm">{data.description}</p>
+            </EditableField>
           </div>
         )}
 
@@ -65,14 +68,18 @@ export default function EvaluationDataDetails({ product }: EvaluationDataDetails
         {data.primaryEndpoint && (
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">Primary Endpoint</p>
-            <p className="text-sm">{data.primaryEndpoint}</p>
+            <EditableField fieldPath="evaluationData.primaryEndpoint" value={data.primaryEndpoint} type="textarea" placeholder="Evaluation primaryEndpoint">
+              <p className="text-sm">{data.primaryEndpoint}</p>
+            </EditableField>
           </div>
         )}
 
         {data.results && (
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">Results</p>
-            <p className="text-sm">{data.results}</p>
+            <EditableField fieldPath="evaluationData.results" value={data.results} type="textarea" placeholder="Evaluation results">
+              <p className="text-sm">{data.results}</p>
+            </EditableField>
           </div>
         )}
 
