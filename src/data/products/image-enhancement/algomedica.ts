@@ -207,7 +207,6 @@ export const ALGOMEDICA_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E2",
     clinicalImpact: "L3",
     legacyClinicalImpact: "I2",
-    legacyClinicalImpact: "I2",
     evidenceRigorNotes:
       "E2: Multiple peer-reviewed academic evaluations exist, but they are retrospective and limited in scope. AlgoMedica supplied software or processed images in several studies; no completed prospective results were identified.",
     clinicalImpactNotes:

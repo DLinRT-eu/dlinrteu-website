@@ -547,12 +547,11 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         "AMG Medtech (UK; distribution agreement announced by Subtle Medical)",
         "Medical Horizons (Italy; distribution agreement announced by Subtle Medical)"
       ],
-      notes:
+      availability:
         "The manufacturer announced both distribution agreements on 2026-10-20. The announcement does not establish product-specific installed sites or commissioning outcomes."
     },
     evidenceRigor: "E0",
     clinicalImpact: "L2",
-    legacyClinicalImpact: "I1",
     legacyClinicalImpact: "I1",
     evidenceRigorNotes:
       "E0: FDA K254013 publicly documents manufacturer-generated retrospective validation and reader-study results. No independent peer-reviewed study specific to SubtleHD-PET (1.x) was identified.",
