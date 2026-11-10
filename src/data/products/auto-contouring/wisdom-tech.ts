@@ -57,8 +57,11 @@ export const DeepContour: ProductDetails = {
   trainingData: {
     source: "FDA 510(k) summary K232928",
     sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
-    description: "Deep learning based medical imaging software for automatic contour segmentation. Training details are not publicly disclosed in the regulatory summary.",
-    disclosureLevel: "minimal"
+    description: "800 CT scans from 35 hospitals across China, collected over about 3 years (200 per region: head and neck, chest, abdomen, pelvis; 160 training / 40 validation per region). Initial segmentations were reviewed and corrected by two radiation oncologists, with internal adjudication. No test-site patients were included in training.",
+    datasetSize: "800 CT scans",
+    demographics: "Male 372 / female 428; age <50: 289, 50–70: 415, >70: 70, unknown 26",
+    scannerModels: ["Philips (301)", "GE (226)", "Siemens (128)", "Unknown (145)"],
+    disclosureLevel: "partial"
   },
   certification: "NMPA (China), FDA 510(k)",
   evidenceRigor: "E0",
@@ -68,9 +71,9 @@ export const DeepContour: ProductDetails = {
     source: "FDA 510(k) summary K232928",
     results: "Not publicly disclosed",
     sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
-    description: "Software verification and validation conducted as part of the FDA 510(k) process for automated CT image processing and contour creation across multiple anatomical regions (Brain, Head & Neck, Thorax, Abdomen, and Pelvis).",
-    studyDesign: "Software V&V (FDA 510(k))",
-    primaryEndpoint: "Not specified"
+    description: "Performance verified on 203 CT scans not used in training: 100 retrospective clinical cases from Peking Union Medical College Hospital (25 per region; ground truth by two radiation oncologists with >10 years' experience) and 103 US public cases (LCTSC thoracic, n=60; Pancreas-CT, n=43).",
+    studyDesign: "Software V&V (FDA 510(k)); retrospective standalone testing",
+    primaryEndpoint: "Dice similarity coefficient (mean, SD and lower 95% confidence bound)"
   },
   diseaseTargeted: ["Multiple Cancer Types"],
   adoptionReadiness: "R2",
