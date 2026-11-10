@@ -69,7 +69,7 @@ export const DeepContour: ProductDetails = {
   clinicalImpact: "I0",
   evaluationData: {
     source: "FDA 510(k) summary K232928",
-    results: "Not publicly disclosed",
+    results: "Per-organ mean and SD Dice reported in the FDA summary against the predicate device; acceptance required the lower 95% bound to be no more than 0.1 Dice below the predicate mean",
     sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K232928.pdf",
     description: "Performance verified on 203 CT scans not used in training: 100 retrospective clinical cases from Peking Union Medical College Hospital (25 per region; ground truth by two radiation oncologists with >10 years' experience) and 103 US public cases (LCTSC thoracic, n=60; Pancreas-CT, n=43).",
     studyDesign: "Software V&V (FDA 510(k)); retrospective standalone testing",
