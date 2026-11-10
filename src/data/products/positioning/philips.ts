@@ -79,6 +79,7 @@ export const PrecisePosition: ProductDetails = {
       "Precise Position is a camera-based feature on Philips CT systems intended to assist CT technologists with patient positioning by identifying anatomical landmarks and recommending table position to align the patient at scanner isocenter. Healthcare professionals remain in control and may modify the recommended position. (Source: Philips 'AI-enabled solutions' page and FDA 510(k) K203514, accessed 2026-06-17)",
   },
   market: {
+    availability: "Integrated AI-enabled positioning feature on compatible Philips CT systems (e.g., Incisive CT, CT 5300); availability depends on hardware, software and regional configuration. FDA K203514 documents Precise Position for Incisive CT.",
     onMarketSince: "2021",
     distributionChannels: ["Integrated in new Philips CT systems", "Software option for compatible installed base"],
   },
@@ -87,7 +88,7 @@ export const PrecisePosition: ProductDetails = {
   evidenceRigorNotes:
     "2026-08-25 Wave 4 sweep: PubMed re-searched, no new product-naming peer-reviewed publication found. E0 (Pre-clinical / vendor-validated only): no independent peer-reviewed clinical evaluation of Precise Position identified in public literature as of 2026-06-17. Validation evidence is limited to Philips-run phantom and volunteer testing summarised in the vendor white paper and FDA 510(k) K203514. 2026-08-25 Wave 5D sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
   clinicalImpactNotes:
-    "I1 (Technical performance / workflow claim, vendor-reported): Philips reports improved vertical positioning accuracy and reduced setup time; no independent evidence of changed treatment management (I3) or patient outcomes (I4).",
+    "L2 (vendor-reported): Philips reports up to 50% better vertical positioning accuracy, 70% better inter-operator consistency and 23% shorter positioning time in internal testing; a 2025 Philips-published case study (Stepping Hill Hospital) reported shorter preparation time and better centring. No independent peer-reviewed or radiotherapy-specific confirmation.",
   adoptionReadiness: "R3",
   adoptionReadinessNotes:
     "Derived from E0 + FDA 510(k): moderate implementation effort — requires compatible Philips CT hardware and ceiling-mounted camera; local validation of vertical accuracy and workflow integration recommended before adoption.",
@@ -96,11 +97,16 @@ export const PrecisePosition: ProductDetails = {
   evidenceMultiNational: false,
   evidenceProspective: false,
   evidenceExternalValidation: false,
-  clinicalEvidence: "Vendor white paper and FDA 510(k) K203514 summary only; no independent peer-reviewed clinical studies identified as of 2026-06-17.",
+  clinicalEvidence: "Vendor white paper, Philips-published 2025 case study and FDA 510(k) K203514 summary; no independent peer-reviewed clinical studies identified as of 2026-11-10.",
   lastUpdated: "2026-08-25",
   lastRevised: "2026-08-25",
   source: "FDA 510(k) K203514; vendor documentation; peer-reviewed literature",
   evidence: [
+    {
+      type: "Vendor Case Study",
+      description: "Philips-published 2025 observational evaluation at Stepping Hill Hospital (UK): 40 CT examinations with Precise Position vs 40 with manual positioning. Mean preparation time 79.4 s to 36.8 s; initial surview centring accuracy 68% to 93%; manual vertical adjustment 55% to 30%. Manufacturer-published, not peer-reviewed.",
+      link: "https://www.usa.philips.com/healthcare/case-study/enhance-ct-workflow-efficiency-and-accuracy"
+    },
     {
       type: "Regulatory Clearance",
       description: "FDA 510(k) clearance K203514 received June 17, 2021 — Precise Position, Class II under 21 CFR 892.1750 (applicant: Philips Healthcare (Suzhou) Co., Ltd.)",
