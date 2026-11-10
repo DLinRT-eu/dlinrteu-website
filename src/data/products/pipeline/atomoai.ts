@@ -82,6 +82,7 @@ export const ATOMOAI_PIPELINE_PRODUCTS: ProductDetails[] = [
     lastUpdated: "2026-11-08",
     lastRevised: "2026-11-09",
     limitations: [
+      "Vendor website (atomoai.ai) was unreachable when checked on 2026-11-10 (HTTP 503 reported by reviewer; certificate error on recheck); product details could not be re-verified against the vendor site",
       "Pipeline entry: no public regulatory clearance verified; this does not establish a regulatory exemption or a legal availability determination",
       "Related company-linked iSeg research exists (Sarkar S et al., 2025); equivalence to iSecare/iContour is not established",
       "All capability statements are vendor-reported; anatomical scope beyond 4D-CT (thoracic) targets not stated"
