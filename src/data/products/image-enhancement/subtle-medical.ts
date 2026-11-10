@@ -176,7 +176,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-enhancement/subtle-medical.ts",
     description: "DICOM-based PET image-processing software intended to transfer, store, and reduce noise in PET images acquired with the radiotracers listed in its FDA-cleared intended use. Published performance is protocol-specific; it does not establish a universal scan-time or dose reduction.",
     category: "Image Enhancement",
-    certification: "FDA 510(k)-cleared (K182336, K211964); CE mark announced by the manufacturer, current EU certificate not independently verified",
+    certification: "CE (EUDAMED-registered, class IIa) & FDA 510(k) K182336, K211964",
     logoUrl: "/logos/SubtleMedical.jpg",
     anatomicalLocation: ["Whole body"],
     modality: ["PET"],
@@ -230,7 +230,7 @@ export const SUBTLE_MEDICAL_PRODUCTS: ProductDetails[] = [
         class: "IIa",
         type: "Medical Device",
         regulation: "MDR (EU 2017/745)",
-        notes: "Subtle Medical announced CE marking for SubtlePET 2.0 in June 2021. Current certificate validity and device-specific EUDAMED details remain unverified."
+        notes: "Subtle Medical announced CE marking for SubtlePET 2.0 in June 2021. Registered in EUDAMED as class IIa (Basic UDI-DI 08600001712SubtlePET2B3, verified 2026-09-22); certificate number not public."
       },
       fda: {
         status: "510k_cleared",
