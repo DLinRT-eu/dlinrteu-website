@@ -183,11 +183,11 @@ Deno.serve(async (req) => {
       const pageVisits = (data as any).pageVisits;
       if (pageVisits && typeof pageVisits === 'object') {
         const entries = Object.entries(pageVisits);
-        if (entries.length > 5000) {
+        if (entries.length > 50) {
           return jsonResponse({ error: "Too many page visit entries" }, 400, corsHeaders);
         }
         for (const [path, v] of entries) {
-          if (typeof path !== 'string' || path.length > 2048) {
+          if (typeof path !== 'string' || path.length > 200 || !/^\/[A-Za-z0-9\-._~/%]*$/.test(path)) {
             return jsonResponse({ error: "Invalid page path" }, 400, corsHeaders);
           }
           const pv = v as any;
