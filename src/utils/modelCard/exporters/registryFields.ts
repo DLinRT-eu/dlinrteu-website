@@ -1,5 +1,5 @@
 import type { ProductDetails } from "@/types/productDetails";
-import { getProductEudamed, formatEudamedRiskClass } from "@/utils/eudamed";
+import { getExportEudamed, formatEudamedRiskClass } from "@/utils/eudamed";
 import { isDiscontinuedProduct } from "@/utils/productLifecycle";
 
 export interface ExportField {
@@ -9,7 +9,7 @@ export interface ExportField {
 
 /** EUDAMED fields shown on the product page (curated or registry-verified); empty when none recorded. */
 export const getEudamedExportFields = (product: ProductDetails): ExportField[] => {
-  const e = getProductEudamed(product);
+  const e = getExportEudamed(product).record;
   if (!e) {
     const notes = (product.regulatory?.ce as { notes?: string } | undefined)?.notes;
     return notes && /EUDAMED/i.test(notes) ? [{ label: "EUDAMED Status", value: notes }] : [];

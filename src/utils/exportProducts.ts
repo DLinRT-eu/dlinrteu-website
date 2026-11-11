@@ -2,7 +2,7 @@
 import { ProductDetails } from "@/types/productDetails";
 import { computeReadinessSignal } from "@/data/evidence-impact-levels";
 import { escapeCsvValue as escapeValueForCsv } from "@/utils/csv";
-import { getProductEudamed } from "@/utils/eudamed";
+import { getExportEudamed, EUDAMED_REGISTRY_SNAPSHOT_DATE } from "@/utils/eudamed";
 
 
 /**
@@ -21,6 +21,7 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     "EUDAMED Basic UDI-DI", "EUDAMED Risk Class", "EUDAMED Registered Trade Name",
     "EUDAMED Manufacturer SRN", "EUDAMED Source URL", "EUDAMED Last Verified",
     "EUDAMED UDI-DI", "EUDAMED EMDN Code", "EUDAMED Manufacturer Name", "EUDAMED Registration Note",
+    "EUDAMED Data Source", "EUDAMED Registry Snapshot Date", "EUDAMED Manual Mismatch", "EUDAMED All Basic UDI-DIs",
     "FDA Status", "FDA Clearance Number", "FDA Regulation Number", "FDA Product Code",
     "TGA Status", "TGA Notes",
     "TFDA Status", "TFDA Approval Number", "TFDA Decision Date",
@@ -188,16 +189,20 @@ export const buildProductsCsv = (products: ProductDetails[]): string => {
     escapeValueForCsv(product.regulatory?.ce?.type),
     escapeValueForCsv(product.regulatory?.ce?.certificateNumber),
     escapeValueForCsv(product.regulatory?.ce?.regulation),
-    escapeValueForCsv(getProductEudamed(product)?.basicUdi),
-    escapeValueForCsv(getProductEudamed(product)?.riskClass),
-    escapeValueForCsv(getProductEudamed(product)?.registeredTradeName),
-    escapeValueForCsv(getProductEudamed(product)?.manufacturerSrn),
-    escapeValueForCsv(getProductEudamed(product)?.sourceUrl),
-    escapeValueForCsv(getProductEudamed(product)?.lastVerified),
-    escapeValueForCsv(getProductEudamed(product)?.primaryDi),
-    escapeValueForCsv(getProductEudamed(product)?.emdnCode),
-    escapeValueForCsv(getProductEudamed(product)?.manufacturerName),
-    escapeValueForCsv(getProductEudamed(product)?.registrationNote),
+    escapeValueForCsv(getExportEudamed(product).record?.basicUdi),
+    escapeValueForCsv(getExportEudamed(product).record?.riskClass),
+    escapeValueForCsv(getExportEudamed(product).record?.registeredTradeName),
+    escapeValueForCsv(getExportEudamed(product).record?.manufacturerSrn),
+    escapeValueForCsv(getExportEudamed(product).record?.sourceUrl),
+    escapeValueForCsv(getExportEudamed(product).record?.lastVerified),
+    escapeValueForCsv(getExportEudamed(product).record?.primaryDi),
+    escapeValueForCsv(getExportEudamed(product).record?.emdnCode),
+    escapeValueForCsv(getExportEudamed(product).record?.manufacturerName),
+    escapeValueForCsv(getExportEudamed(product).record?.registrationNote),
+    escapeValueForCsv(getExportEudamed(product).source),
+    escapeValueForCsv(getExportEudamed(product).all.length ? EUDAMED_REGISTRY_SNAPSHOT_DATE : ""),
+    escapeValueForCsv(getExportEudamed(product).mismatch),
+    escapeValueForCsv(getExportEudamed(product).all.map((r) => r.basicUdi).join("; ")),
     escapeValueForCsv(
       typeof product.regulatory?.fda === 'string'
         ? product.regulatory.fda

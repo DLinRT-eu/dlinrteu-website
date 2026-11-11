@@ -1,22 +1,33 @@
 import { describe, expect, test } from "bun:test";
-import { ALL_PRODUCTS } from "../src/data";
-import { buildProductsCsv } from "../src/utils/exportProducts";
-import { getProductEudamed, getVerifiedUdiRecords } from "../src/utils/eudamed";
-import { getEudamedExportFields } from "../src/utils/modelCard/exporters/registryFields";
+import { resolveExportEudamed } from "../src/utils/eudamedExport";
 
-const registryOnly = ALL_PRODUCTS.find((p) => getVerifiedUdiRecords(p.id).length && !(p.regulatory?.ce as { eudamed?: unknown } | undefined)?.eudamed)!;
-const withNote = ALL_PRODUCTS.find((p) => getProductEudamed(p)?.registrationNote)!;
+const reg = {
+  p: [
+    { basicUdi: "A1", primaryDi: "D1", emdnCode: "Z1", lastVerified: "2026-11-09" },
+    { basicUdi: "B2", primaryDi: "D2" },
+  ],
+} as never;
+const prod = (eudamed?: object) => ({ id: "p", regulatory: { ce: { status: "Certified", eudamed } } }) as never;
 
-describe("EUDAMED in exports", () => {
-  test("registry-only product exports its Basic UDI-DI in the catalogue CSV", () => {
-    expect(registryOnly).toBeDefined();
-    const csv = buildProductsCsv([registryOnly]);
-    expect(csv).toContain("EUDAMED EMDN Code");
-    expect(csv).toContain(getProductEudamed(registryOnly)!.basicUdi);
+describe("registry-first EUDAMED export", () => {
+  test("registry overrides conflicting manual value", () => {
+    const r = resolveExportEudamed(prod({ basicUdi: "A1", emdnCode: "OLD", riskClass: "class-iia" }), reg);
+    expect(r.record?.emdnCode).toBe("Z1");
+    expect(r.record?.riskClass).toBe("class-iia");
+    expect(r.source).toBe("Registry + manual");
   });
-  test("platform/related-entity note is carried into model-card fields", () => {
-    expect(withNote).toBeDefined();
-    const note = getEudamedExportFields(withNote).find((f) => f.label === "EUDAMED Registration Note");
-    expect(note?.value).toBe(getProductEudamed(withNote)!.registrationNote);
+  test("manual used when no registry match", () => {
+    const r = resolveExportEudamed({ ...(prod({ basicUdi: "M" }) as object), id: "q" } as never, reg);
+    expect(r.record?.basicUdi).toBe("M");
+    expect(r.source).toBe("Manual");
+  });
+  test("stale manual Basic UDI-DI is flagged and registry wins", () => {
+    const r = resolveExportEudamed(prod({ basicUdi: "STALE" }), reg);
+    expect(r.mismatch).toBe("STALE");
+    expect(r.record?.basicUdi).toBe("A1");
+    expect(r.source).toBe("Registry");
+  });
+  test("all registry matches listed", () => {
+    expect(resolveExportEudamed(prod(), reg).all.map((x) => x.basicUdi)).toEqual(["A1", "B2"]);
   });
 });

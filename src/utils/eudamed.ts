@@ -1,6 +1,7 @@
 import type { ProductDetails } from "@/types/productDetails";
 import type { EudamedDeviceRegistration } from "@/types/eudamed";
 import udiVerified from "@/data/eudamed/udiVerified.json";
+import { resolveExportEudamed, type EudamedExportResult } from "@/utils/eudamedExport";
 
 /** "class-iia" → "Class IIa"; unknown shapes are returned unchanged. */
 export const formatEudamedRiskClass = (raw?: string): string => {
@@ -30,3 +31,10 @@ export const getProductEudamed = (
   const same = verified.find((v) => v.basicUdi === curated.basicUdi);
   return same ? { ...same, ...curated, emdnCode: curated.emdnCode ?? same.emdnCode, primaryDi: curated.primaryDi ?? same.primaryDi } : curated;
 };
+
+/** Date the verified registry file was last regenerated. */
+export const EUDAMED_REGISTRY_SNAPSHOT_DATE: string = (udiVerified as { generatedOn?: string }).generatedOn ?? "";
+
+/** Registry-first EUDAMED details for downloads (CSV, Excel, model cards). */
+export const getExportEudamed = (product?: Partial<ProductDetails> | null): EudamedExportResult =>
+  resolveExportEudamed(product, VERIFIED);
