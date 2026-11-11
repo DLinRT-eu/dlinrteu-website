@@ -361,6 +361,8 @@ When using the in-browser visual editor, fields use specialized editor component
 
 > Company pages show, per category, each current product's CE status, FDA clearance and EUDAMED match (exact or editor-confirmed, with Basic UDI-DI/EMDN), derived via `src/utils/companyRegulatory.ts`; the Companies list shows CE/FDA/EUDAMED counts and the company SRN.
 
+> Downloads (catalogue CSV, company Excel, model cards) take EUDAMED UDI details from the verified registry file first; a manual `regulatory.ce.eudamed` entry only fills empty fields, or is used when no registry match exists. Extra columns: Data Source, Registry Snapshot Date, Manual Mismatch (stale manual Basic UDI-DI), All Basic UDI-DIs.
+
 ## Company Certification Fields
 
 These fields are used when company representatives certify product information:
