@@ -9,10 +9,10 @@
  */
 import type { ProductDetails } from "@/types/productDetails";
 import { createSafeFileName } from "./exporters/shared";
-import { getProductEudamed } from "@/utils/eudamed";
+import { getExportEudamed } from "@/utils/eudamed";
 
 export function getEudamedAidrtFields(product: ProductDetails): Record<string, string> {
-  const e = getProductEudamed(product);
+  const e = getExportEudamed(product).record;
   return {
     eudamed_basic_udi_di: s(e?.basicUdi),
     eudamed_udi_di: s(e?.primaryDi),

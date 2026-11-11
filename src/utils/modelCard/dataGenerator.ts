@@ -1,4 +1,4 @@
-import { getProductEudamed } from "@/utils/eudamed";
+import { getExportEudamed } from "@/utils/eudamed";
 
 import { ProductDetails } from "@/types/productDetails";
 import { ModelCardData } from "./types";
@@ -229,7 +229,7 @@ export const generateModelCardData = (product: ProductDetails): ModelCardData =>
       intendedUseStatement: product.regulatory?.intendedUseStatement || "N/A",
       marketPresence: product.market?.onMarketSince || "N/A",
       ...(() => {
-        const e = getProductEudamed(product);
+        const e = getExportEudamed(product).record;
         if (!e) return {};
         return {
           eudamed: {

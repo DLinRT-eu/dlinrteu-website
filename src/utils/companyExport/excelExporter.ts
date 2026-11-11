@@ -1,4 +1,4 @@
-import { getProductEudamed } from '@/utils/eudamed';
+import { getExportEudamed } from '@/utils/eudamed';
 import { exportToExcelMultiSheet } from '../excelExport';
 import { CompanyExportData } from './types';
 
@@ -23,10 +23,12 @@ export const exportCompaniesToExcel = async (companiesData: CompanyExportData[])
         'Product': product.name,
         'Category': product.category,
         'CE Status': product.regulatory?.ce?.status || 'N/A',
-        'EUDAMED Basic UDI-DI': getProductEudamed(product)?.basicUdi || 'N/A',
-        'EUDAMED UDI-DI': getProductEudamed(product)?.primaryDi || 'N/A',
-        'EUDAMED EMDN Code': getProductEudamed(product)?.emdnCode || 'N/A',
-        'EUDAMED Risk Class': getProductEudamed(product)?.riskClass || 'N/A',
+        'EUDAMED Basic UDI-DI': getExportEudamed(product).record?.basicUdi || 'N/A',
+        'EUDAMED UDI-DI': getExportEudamed(product).record?.primaryDi || 'N/A',
+        'EUDAMED EMDN Code': getExportEudamed(product).record?.emdnCode || 'N/A',
+        'EUDAMED Risk Class': getExportEudamed(product).record?.riskClass || 'N/A',
+        'EUDAMED Data Source': getExportEudamed(product).source || 'N/A',
+        'EUDAMED All Basic UDI-DIs': getExportEudamed(product).all.map((r) => r.basicUdi).join('; ') || 'N/A',
         'FDA Status': typeof product.regulatory?.fda === 'string' 
           ? product.regulatory.fda 
           : product.regulatory?.fda?.status || 'N/A',
