@@ -678,7 +678,7 @@ export const MANTEIA_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1038/s41598-025-33567-6", "title": "Consistency evaluation and performance optimization of deep learning-based auto-contouring for nasopharyngeal carcinoma", "authors": "Yan L et al.", "journal": "Sci Rep", "year": "2025", "evidenceRigor": "E1", "clinicalImpact": "L2", "legacyClinicalImpact": "I1", "rationale": "Single-centre consistency evaluation of four commercial models for nasopharyngeal structures.", "vendorIndependent": true},
     {"doi": "10.1016/j.radonc.2022.11.004", "title": "Patient-specific daily updated deep learning auto-segmentation for MRI-guided adaptive radiotherapy", "authors": "Li Z, Zhang W, Li B, et al.", "journal": "Radiother Oncol", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Six-patient longitudinal MRgART series with measured contouring and adaptive session times; Manteia co-authored.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false}
   ],
-    lastRevised: "2026-09-29",
+    lastRevised: "2026-11-12",
     source: "FDA 510(k) K251351, K250780 et al.; vendor website; peer-reviewed literature",
     limitations: [
       "Limited performance on contrast-enhanced CT scans",

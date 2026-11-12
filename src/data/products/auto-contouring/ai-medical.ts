@@ -77,7 +77,7 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-11-12",
   lastUpdated: "2026-10-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",
