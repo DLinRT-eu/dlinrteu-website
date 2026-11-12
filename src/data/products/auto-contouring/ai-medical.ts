@@ -3,8 +3,8 @@ import { ProductDetails } from "@/types/productDetails";
 export const Jazz: ProductDetails = {
   id: "ai-medical-jazz",
   trainingData: {
-      source: "FDA 510(k) summary K231572",
-      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf23/K231572.pdf",
+      source: "FDA 510(k) summary K223659",
+      sourceUrl: "https://www.accessdata.fda.gov/cdrh_docs/pdf22/K223659.pdf",
       disclosureLevel: "minimal"
   },
   evaluationData: {
@@ -23,7 +23,7 @@ export const Jazz: ProductDetails = {
     onMarketSince: "2020",
     distributionChannels: ["Direct sales", "Distribution partners"]
   },
-  source: "FDA 510(k) K231572; vendor website; peer-reviewed literature",
+  source: "FDA 510(k) K223659; vendor website; peer-reviewed literature",
   company: "AI Medical",
   logoUrl: "/logos/ai-medical.png",
   version: "2.0",
@@ -58,8 +58,8 @@ export const Jazz: ProductDetails = {
       notes: "First FDA-cleared product from AI Medical AG (Swiss medtech startup)",
       status: "510k_cleared",
       productCode: "LLZ",
-      decisionDate: "2023-10-23",
-      clearanceNumber: "K231572",
+      decisionDate: "2023-09-22",
+      clearanceNumber: "K223659",
       regulationNumber: "21 CFR 892.2050"
     },
     intendedUseStatement: "AI-driven radiological software for long-term lesion tracking, quantification, and reporting in MR follow-up scan assessments. Intended to augment clinical assessment by radiologists and radio-oncologists."
@@ -77,7 +77,7 @@ export const Jazz: ProductDetails = {
     "Multiple anatomical sites",
     "Lesion tracking - mark once, remember forever"
   ],
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-11-12",
   lastUpdated: "2026-10-15",
   limitations: [
     "Indicated for MRI follow-up scans only; not validated for initial diagnostic imaging",

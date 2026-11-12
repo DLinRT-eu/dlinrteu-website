@@ -9,7 +9,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     companyUrl: "https://mvision.ai/",
     productUrl: "https://mvision.ai/verify/",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/performance-monitor/mvision.ts",
-    description: "Contour comparison tool for visualizing and comparing user-generated and AI-generated contours. Note: This is a QA/visualization tool for monitoring AI contour quality—it may or may not use AI itself.",
+    description: "Contour comparison tool for visualizing and comparing user-generated and AI-generated contours against selected reference structures and calculating comparison metrics. The vendor describes contour assessment, not a separate AI inference model.",
     features: [
       "Contour comparison", 
       "Visualization tools", 
@@ -79,7 +79,7 @@ export const MVISION_PERFORMANCE_PRODUCTS: ProductDetails[] = [
       "Version and release date are derived from the vendor product page and are not independently documented"
     ],
     lastUpdated: "2026-09-06",
-    lastRevised: "2026-09-06",
+    lastRevised: "2026-11-12",
     source: "Vendor website; peer-reviewed literature"
   }
 ];
