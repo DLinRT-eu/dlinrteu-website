@@ -115,6 +115,11 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     ],
     evidence: [
       {
+        type: "Vendor case study (not scored)",
+        description: "Newcastle evaluation of Dose+ predictions in 60 prostate cases: 30 standard cases and 30 cases involving pelvic lymph nodes, using RayStation. Vendor-hosted case study, published 2025-08-05; not an independently peer-reviewed validation and not used to raise evidence scores.",
+        link: "https://mvision.ai/case-study-evaluating-ai-dose-prediction-across-standard-and-complex-prostate-cases-at-nccc-newcastle/"
+      },
+      {
         type: "Peer-reviewed Publication",
         description: "A comparative assessment of deep learning and knowledge-based dose prediction models for advanced radiotherapy planning of prostate cancer with focal boosting. Phys Imaging Radiat Oncol. 2026",
         link: "https://doi.org/10.1016/j.phro.2026.100977"
@@ -136,7 +141,7 @@ export const MVISION_PLANNING_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     releaseDate: "2025-09-04",
     lastUpdated: "2026-10-15",
-    lastRevised: "2026-09-23",
+    lastRevised: "2026-11-12",
     limitations: [
       "Initial validation limited to prostate and pelvic lymph nodes",
       "CE-MDR status to be confirmed with vendor before clinical use in EU",

@@ -14,7 +14,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       "Unified platform for multiple AI modules",
       "Image synthesis from MRI/CBCT (Image+)",
       "Deformable registration and contour propagation (Adapt+)",
-      "Automated treatment planning (Dose+)",
+      "AI dose prediction to support treatment planning (Dose+)",
       "Automated contouring (Contour+)",
       "PACS and TPS integration",
       "Cloud-native architecture",
@@ -189,7 +189,7 @@ export const MVISION_PLATFORM_PRODUCTS: ProductDetails[] = [
       },
     },
     lastUpdated: "2026-09-06",
-    lastRevised: "2026-09-06",
+    lastRevised: "2026-11-12",
     evidence: [
       {
         type: "Company Press Release",

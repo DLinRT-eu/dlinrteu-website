@@ -58,7 +58,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
         class: "Class II",
         type: "510(k)",
         clearanceNumber: "K212274",
-        decisionDate: "2022-04-01"
+        decisionDate: "2022-04-08"
       },
       intendedUseStatement: "INTContour provides a machine learning-based approach for the automatic segmentation of structures including treatment targets and organs at risk to support the radiation therapy treatment planning process. INTContour is intended as an initial method to segment and contour study series; therefore, this software must be used in conjunction with an appropriate software to edit the segmentation results if necessary. It is not intended to replace a thorough review by qualified medical professionals. INTContour is developed for use by dosimetrists, medical physicists, and radiation oncologists. The currently supported anatomical regions for automatic segmentation are head and neck, thorax, abdomen, and male pelvis. (Source: FDA 510(k) K212274 Summary, accessed 2026-05-30)"
     },
@@ -243,7 +243,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Follow-up single-centre evaluation reporting editing effort."},
       {"doi":"10.3389/fonc.2025.1603593","pmid":"41127020","title":"Evaluating the impact of different deface algorithms on deep learning segmentation software performance","journal":"Front. Oncol.","year":"2025","link":"https://doi.org/10.3389/fonc.2025.1603593","evidenceRigor":"E1","clinicalImpact":"L1t", "legacyClinicalImpact": "I1","rationale":"Robustness of the commercial segmentation software to de-identification defacing.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
-    lastRevised: "2026-09-23",
+    lastRevised: "2026-11-12",
     source: "FDA 510(k) K212274; vendor website; peer-reviewed literature",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E2",

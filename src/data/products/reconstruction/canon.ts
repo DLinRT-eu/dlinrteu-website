@@ -274,7 +274,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     id: "canon-piqe",
     keyPapers: [
       {"doi":"10.1186/s41747-025-00670-2","title":"Phantom-based performance comparison of two commercial deep learning CT reconstruction algorithms with super- and normal-resolution settings","authors":"Greffier J et al.","journal":"Eur Radiol Exp","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Vendor-independent phantom comparison.","vendorIndependent":true},
-      {"doi":"10.1016/j.ejrad.2025.111953","title":"PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma","authors":"Nagayama Y et al.","journal":"Eur J Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical image-quality study.","vendorIndependent":true},
+      {"doi":"10.1016/j.ejrad.2025.111953","title":"Super-resolution deep-learning reconstruction with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma assessment","authors":"Nagayama Y et al.","journal":"Eur J Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Single-centre clinical image-quality study.","vendorIndependent":true},
       {"doi":"10.1016/j.acra.2024.09.012","title":"Advances in spatial resolution using super-resolution deep learning reconstruction for abdominal CT","authors":"Funama Y et al.","journal":"Acad Radiol","year":"2025","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Technical spatial-resolution evaluation.","vendorIndependent":true}
     ],
     trainingData: {
@@ -355,7 +355,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
       },
       {
         type: "Peer-reviewed Publication",
-        description: "Nagayama et al. PIQE with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma. European Journal of Radiology 2025",
+        description: "Nagayama et al. Super-resolution deep-learning reconstruction with 1024 matrix improves CT image quality for pancreatic ductal adenocarcinoma assessment. European Journal of Radiology 2025",
         link: "https://doi.org/10.1016/j.ejrad.2025.111953"
       },
       {

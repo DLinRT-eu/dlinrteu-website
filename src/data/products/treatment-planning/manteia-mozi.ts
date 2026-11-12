@@ -176,12 +176,12 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-11-08",
-    lastRevised: "2026-11-06",
+    lastRevised: "2026-11-12",
     source: "FDA 510(k) K223724; vendor website; vendor documentation; conference abstracts; peer-reviewed literature",
     clinicalEvidence: "FDA 510(k) validation studies with 18 patients for end-to-end testing (simulation CT, registration, contouring, and dose calculation), and 187 patients for auto-contouring across several anatomies.",
     evidence: [
       {"type": "Conference abstract (not scored)", "description": "ESTRO 2026 D’Andrea abstract 4480: 20 patients (10 head-and-neck, 10 lung). Distinct from the four-case vendor slide presentation; image-synthesis conference evidence remains unscored.", "link": "https://online.flippingbook.com/view/700996046/645/"},
-      {"type": "Supporting evidence (not scored)", "description": "Liu et al. 2025 rectal IMRT planning using MOZI v3.3 and a custom 3D MT-U-Net dose-prediction model. Research-model equivalence to the marketed models is unconfirmed; retained unscored.", "link": "https://doi.org/10.21037/qims-2025-168"},
+      {"type": "Supporting evidence (not scored)", "description": "Liu et al. 2025 explicitly uses MOZI TPS v3.3 to convert custom 3D MT-U-Net predictions into automated rectal IMRT plans. Retrospective cohorts: 99 training, 26 held-out testing and 15 additional cases treated by other physician groups; this does not establish an independent external institution. Manteia employee co-authors. Marketed-model equivalence remains unconfirmed; retained unscored.", "link": "https://doi.org/10.21037/qims-2025-168"},
       {
         type: "EU MDR certificate (manufacturer-supplied; regulatory document, not clinical evidence)",
         description: "Intertek Annex IX QMS certificate 28620166008, issued 2024-01-29, expires 2028-07-20; product list dated 2025-06-04 names MOZI TPS v1.3 and v4.0, Class IIb, Basic UDI-DI 697312740MOZITPS77, EMDN Z11010401. Manufacturer-supplied, received 2026-09-29. The stated intended use is photon external-beam treatment planning, not feature-specific synthetic-CT clearance.",
@@ -212,7 +212,7 @@ export const MANTEIA_MOZI_PRODUCTS: ProductDetails[] = [
       "The Smart Optimization Engine (SOE) described in the manufacturer's white paper (v1, MOZI TPS 4.0.7, vendor-provided, retrieved 2026-09-23) is a deterministic rule-based constraint-adjustment layer — the document states it is not implemented as a machine-learning model. It is therefore not recorded as an AI feature of this entry under the catalogue's AI/deep-learning inclusion threshold; MOZI TPS is listed for its deep-learning auto-contouring and dose prediction.",
       "The SOE white paper's technical evaluation covers conventionally fractionated IMRT and VMAT plans only; the manufacturer advises stricter clinical review and case-specific manual adjustment for hypofractionated and stereotactic plans.",
       "Dose-prediction model details are vendor-provided and not publicly published; per-model performance is not disclosed and requires local validation before clinical use.",
-      "No peer-reviewed publication evaluating the marketed MOZI TPS was identified (evidence rigor E0).",
+      "Liu et al. 2025 explicitly uses MOZI TPS v3.3 with a custom research dose-prediction model; equivalence to marketed prediction models is unconfirmed. This is supporting TPS-workflow evidence, not validation of the released AI models (https://doi.org/10.21037/qims-2025-168).",
       "The manufacturer-supplied MDR certificate lists MOZI TPS v1.3 and v4.0 for photon external-beam planning, but does not separately establish CE clearance for CBCT-to-synthetic-CT or MRI-to-synthetic-CT generation; FDA K223724 likewise does not confirm feature-specific scope. Both paths require local validation.",
       "Online adaptive re-planning: an ECMP 2026 conference abstract (Cilla et al., P1172) reports a single-centre feasibility study of MOZI's 'Assistant Adaptive Radiotherapy' module (CBCT-based; phantom plus 5 retrospectively simulated prostate SBRT patients). It describes no AI component, so it does not evaluate the catalogued AI features and is not scored."
     ],
