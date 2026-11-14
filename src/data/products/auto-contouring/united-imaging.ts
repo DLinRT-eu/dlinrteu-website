@@ -20,6 +20,16 @@ export const uRTAutoContouring: ProductDetails = {
   category: "Auto-Contouring",
   evidence: [
     {
+      type: "Peer-reviewed Publication",
+      year: "2026",
+      title: "First Implementation of an All-in-One Solution With Fully Automatic Workflow for Rectal Cancer Based on an Integrated CT-linac",
+      authors: "Li et al",
+      journal: "Practical Radiation Oncology",
+      doi: "10.1016/j.prro.2026.07.009",
+      link: "https://doi.org/10.1016/j.prro.2026.07.009",
+      description: "Prospective single-centre pilot, 20 rectal cancer patients treated with an All-in-One workflow on the integrated CT-linac, including AI auto-segmentation assessed by Dice and average surface distance. Likely the same institution-developed models as Li et al. 2025, so equivalence to the standard commercial models is not established. Not scored separately; full text not read."
+    },
+    {
       type: "Indirect-Comparative",
       description: "Med Phys 2025 risk assessment of the all-in-one CT-linac workflow (PMID 39794280). Covers the integrated device, not the auto-contouring module specifically.",
       link: "https://doi.org/10.1002/mp.17620"
@@ -72,7 +82,8 @@ export const uRTAutoContouring: ProductDetails = {
     fda: {
       type: "Unknown",
       class: "Unknown",
-      status: "not_approved"
+      status: "not_approved",
+      notes: "openFDA 510(k) search on 2026-11-14 found no United Imaging radiotherapy clearance. K191157, cited by a third-party site for the uRT-linac 506c, is the uMR 780/790 MR system."
     },
     intendedUseStatement: "uRT-linac 506c offers a more precise, efficient, and patient friendly radiotherapy. The entire workflow of radiotherapy, including simulation, contouring, plan, treatment and QA, can be developed or modified online to facilitate individualized precision radiotherapy. (Source: United Imaging uRT-linac 506c product page, https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c, accessed 2026-05-30. No verbatim standalone IFU publicly available for the uRT Auto-Contouring module — described as part of the uRT-linac ecosystem.)"
   },
@@ -94,7 +105,7 @@ export const uRTAutoContouring: ProductDetails = {
     "Used in the uCT-ART online adaptive workflow (~15 min adaptive planning)",
     "Tightly integrated with uRT-linac 506c imaging, planning and QA"
   ],
-  lastRevised: "2026-08-25",
+  lastRevised: "2026-11-14",
   lastUpdated: "2026-08-25",
   limitations: [
     "Integrated component of the uRT ecosystem; not marketed as a standalone product",
