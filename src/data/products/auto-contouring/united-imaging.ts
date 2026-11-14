@@ -20,6 +20,11 @@ export const uRTAutoContouring: ProductDetails = {
   category: "Auto-Contouring",
   evidence: [
     {
+      type: "Vendor Product Page",
+      link: "https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c",
+      description: "uRT-linac 506c product page, read 2026-11-14. 'Intelligent Auto-Contouring': OAR and target contours within seconds, more than 100 OAR and target volume models for lung, rectal and cervical cancers, powered by uIPW and uTPS OmniplanTx. The page says 'intelligent', not AI or deep learning; an asterisk on the feature is not explained."
+    },
+    {
       type: "Peer-reviewed Publication",
       year: "2026",
       title: "First Implementation of an All-in-One Solution With Fully Automatic Workflow for Rectal Cancer Based on an Integrated CT-linac",
@@ -65,17 +70,19 @@ export const uRTAutoContouring: ProductDetails = {
     "Deep learning segmentation",
     "Whole-body OAR coverage",
     "Multi-site tumor delineation",
-    "Native integration in uRT workflow"
+    "Native integration in uRT workflow",
+    "More than 100 OAR and target models for lung, rectal and cervical cancers (vendor page, read 2026-11-14)",
+    "Powered by uIPW and uTPS OmniplanTx (vendor page)"
   ],
   modality: ["CT", "CBCT"],
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/united-imaging.ts",
   companyUrl: "https://www.united-imaging.com/",
-  productUrl: "https://eu.united-imaging.com/en/product-service/products/rt",
+  productUrl: "https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c",
   regulatory: {
     ce: {
       type: "Medical Device",
-      class: "IIb",
-      notes: "CE marking covers the uRT-linac 506c system (ESTRO 2026). The auto-contouring module is an integrated component of that system rather than a separately marketed device.",
+      class: "Unresolved",
+      notes: "CE marking covers the uRT-linac 506c system (ESTRO 2026). The auto-contouring module is an integrated component of that system rather than a separately marketed device. Vendor page (read 2026-11-14): \"CE Marked. Not available for sale in all markets.\" and \"designed in compliance with Regulation (EU) 2017/745 and manufactured in accordance with ISO 13485\" (EN 60601-1, -2-44, -1-2, -1-3 listed). No class, notified body or certificate number given; the page says nothing about FDA. The previous class IIb value had no disclosed source and was removed.",
       status: "cleared",
       regulation: "MDR (EU 2017/745)"
     },
@@ -85,7 +92,7 @@ export const uRTAutoContouring: ProductDetails = {
       status: "not_approved",
       notes: "openFDA 510(k) search on 2026-11-14 found no United Imaging radiotherapy clearance. K191157, cited by a third-party site for the uRT-linac 506c, is the uMR 780/790 MR system."
     },
-    intendedUseStatement: "uRT-linac 506c offers a more precise, efficient, and patient friendly radiotherapy. The entire workflow of radiotherapy, including simulation, contouring, plan, treatment and QA, can be developed or modified online to facilitate individualized precision radiotherapy. (Source: United Imaging uRT-linac 506c product page, https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c, accessed 2026-05-30. No verbatim standalone IFU publicly available for the uRT Auto-Contouring module — described as part of the uRT-linac ecosystem.)"
+    intendedUseStatement: "uRT-linac 506c offers a more precise, efficient, and patient friendly radiotherapy. The entire workflow of radiotherapy, including simulation, contouring, plan, treatment and QA, can be developed or modified online to facilitate individualized precision radiotherapy. (Source: United Imaging uRT-linac 506c product page, https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c, accessed 2026-05-30, re-read 2026-11-14. No verbatim standalone IFU publicly available for the uRT Auto-Contouring module — described as part of the uRT-linac ecosystem.)"
   },
   technology: {
     deployment: ["On-system / integrated"],

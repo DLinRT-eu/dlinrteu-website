@@ -26,7 +26,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "AI-driven auto-planning",
       "GPU-accelerated Monte Carlo dose calculation (vendor-stated; not in a peer-reviewed test of the uCT-ART workflow)",
       "Online adaptive workflow (uCT-ART)",
-      "Native integration with imaging, contouring and QA"
+      "Native integration with imaging, contouring and QA",
+      "One-click Autoplan combining 3D dose modelling, beam orientation optimization and auto-optimization (vendor page, read 2026-11-14)"
     ],
     certification: "CE (uRT-linac 506c system)",
     logoUrl: "/logos/unitedimaging.png",
@@ -66,7 +67,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
         type: "Medical Device",
         regulation: "The vendor page and company announcement 2026-027 (21 July 2026) say the uRT-linac 506c system obtained CE certification. Class, notified body and certificate number were not found. The documents do not state that a linac certificate covers this auto-planning software or Monte Carlo.",
         notes:
-          "CE claim checked 2026-11-05 is for the uRT-linac 506c system only. Do not read it as a separate clearance of auto-planning or Monte Carlo. uTPS OmniplanTx is described on its own page with MDR wording and is not stated to be CE marked."
+          "CE claim checked 2026-11-05 is for the uRT-linac 506c system only. Do not read it as a separate clearance of auto-planning or Monte Carlo. uTPS OmniplanTx is described on its own page with MDR wording and is not stated to be CE marked. Vendor page (read 2026-11-14): \"CE Marked. Not available for sale in all markets.\" and \"designed in compliance with Regulation (EU) 2017/745 and manufactured in accordance with ISO 13485\" (EN 60601-1, -2-44, -1-2, -1-3 listed). No class, notified body or certificate number given; the page says nothing about FDA."
       },
       fda: {
         status: "not_approved",
@@ -104,6 +105,11 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "All AI-generated plans require qualified medical-physics and clinician review prior to clinical use"
     ],
     evidence: [
+      {
+        type: "Vendor Product Page",
+        link: "https://global.united-imaging.com/en/product-service/products/rt/urt-linac-506c",
+        description: "uRT-linac 506c product page, read 2026-11-14. 'Autoplan': integrates 3D dose modelling, beam orientation optimization and auto-optimization for one-click plan generation, powered by uIPW and uTPS OmniplanTx. States that a rectal cancer case takes about 15 minutes from CT simulation to delivery, depending on disease; Li et al. 2026 report a mean of 37.5 ± 6.9 minutes in 20 rectal patients. The page says 'intelligent', not AI or deep learning, and says nothing about FDA."
+      },
       {
         type: "Peer-reviewed Publication",
         description:
