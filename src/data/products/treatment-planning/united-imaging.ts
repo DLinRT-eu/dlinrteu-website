@@ -71,7 +71,8 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       fda: {
         status: "not_approved",
         class: "Unknown",
-        type: "Unknown"
+        type: "Unknown",
+        notes: "openFDA 510(k) search on 2026-11-14 found no United Imaging radiotherapy clearance (no uRT-linac, uRT-TPOIS or uCT-ART entry). K191157, cited by a third-party site for the uRT-linac 506c, is the uMR 780/790 MR system (cleared 2019-05-29)."
       },
       intendedUseStatement:
         "Described by the vendor as assisting radiotherapy treatment planning inside the uRT ecosystem, including the uCT-ART online adaptive workflow on the uRT-linac 506c. Clinician and physics review of plans is still required. No standalone intended-use document for this software module was found."
@@ -103,6 +104,12 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       "All AI-generated plans require qualified medical-physics and clinician review prior to clinical use"
     ],
     evidence: [
+      {
+        type: "Peer-reviewed Publication",
+        description:
+          "Li et al., Practical Radiation Oncology, online 14 September 2026 (doi:10.1016/j.prro.2026.07.009). Prospective single-centre pilot, 20 rectal cancer patients, All-in-One workflow on the integrated CT-linac: CT simulation, AI auto-segmentation, auto-planning, online verification and delivery without repositioning. Mean total treatment time 37.5 ± 6.9 minutes. Co-authors include L. Jia, who is affiliated with a United Imaging research institute in other papers; author affiliations were not checked in the full text. Not scored separately; Ma and Zhou remain the scored workflow source until the full text is read.",
+        link: "https://doi.org/10.1016/j.prro.2026.07.009"
+      },
       {
         type: "Peer-reviewed Publication",
         description:
@@ -139,7 +146,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
       }
     ],
     lastUpdated: "2026-11-05",
-    lastRevised: "2026-11-05",
+    lastRevised: "2026-11-14",
     source: "FDA database; press releases; peer-reviewed literature"
   }
 ];
