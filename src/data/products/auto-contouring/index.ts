@@ -33,6 +33,7 @@ import { MEDCOM_PRODUCTS } from "./medcom";
 import { UNITED_IMAGING_PRODUCTS } from "./united-imaging";
 import { AITEWAN_PRODUCTS } from "./aitewan";
 import { ELEKTA_MONACO_PRODUCTS } from "./elekta-monaco";
+import { NEOSOMA_PRODUCTS } from "./neosoma";
 
 export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...LIMBUS_PRODUCTS,
@@ -67,5 +68,6 @@ export const AUTO_CONTOURING_PRODUCTS: ProductDetails[] = [
   ...MEDCOM_PRODUCTS,
   ...UNITED_IMAGING_PRODUCTS,
   ...AITEWAN_PRODUCTS,
-  ...ELEKTA_MONACO_PRODUCTS
+  ...ELEKTA_MONACO_PRODUCTS,
+  ...NEOSOMA_PRODUCTS
 ];

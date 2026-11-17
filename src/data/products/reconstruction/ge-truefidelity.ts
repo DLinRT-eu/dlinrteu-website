@@ -5,7 +5,8 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
   {
     id: "ge-truefidelity",
     keyPapers: [
-      {"doi":"10.1002/acm2.13871","title":"Evaluation of deep‐learning image reconstruction for chest CT examinations at two different dose levels","authors":"Svalkvist A et al.","journal":"J Applied Clin Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Prospective independent observer study in 25 patients at full and ultra-low dose; single centre.","vendorIndependent":true,"prospective":true}
+      {"doi":"10.1002/acm2.13871","title":"Evaluation of deep‐learning image reconstruction for chest CT examinations at two different dose levels","authors":"Svalkvist A et al.","journal":"J Applied Clin Med Phys","year":"2022","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I1","rationale":"Prospective independent observer study in 25 patients at full and ultra-low dose; single centre.","vendorIndependent":true,"prospective":true},
+      {"doi":"10.1371/journal.pone.0358342","title":"Feasibility of deep learning-based image reconstruction using TrueFidelity for coronary calcium scoring","authors":"Kim JW et al.","journal":"PLoS One","year":"2026","evidenceRigor":"E1","clinicalImpact":"L2","rationale":"Single-centre retrospective comparison of TrueFidelity-High vs standard reconstruction for coronary calcium scoring; authors declare no competing interests.","vendorIndependent":true}
     ],
     trainingData: {
       disclosureLevel: "minimal",
@@ -36,7 +37,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     certification: "FDA Cleared",
     logoUrl: "/logos/ge_healthcare.png",
     companyUrl: "https://www.gehealthcare.com/",
-    productUrl: "https://www.gehealthcare.com/products/computed-tomography/ct-technologies/truefidelity",
+    productUrl: "https://www.gehealthcare.com/en-us/products/computed-tomography/applications/true-fidelity",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/ge-truefidelity.ts",
     anatomicalLocation: ["Whole body"],
     modality: ["CT"],
@@ -88,7 +89,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
     evidenceRigor: "E1",
     clinicalImpact: "L2",
     legacyClinicalImpact: "I1",
-    evidenceRigorNotes: "One confirmed independent peer-reviewed study: Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13871) — prospective observer study, 25 patients, chest CT, directly names TrueFidelity on GE Revolution CT. FDA K183202 clearance. Two further candidate studies (Insights into Imaging 2024 on liver metastases; MDPI JI 2025 comparative) referenced but DOIs not independently confirmed; excluded pending verification. PubMed searched 2026-06-18.",
+    evidenceRigorNotes: "One confirmed independent peer-reviewed study: Svalkvist et al. J Appl Clin Med Phys 2023 (DOI 10.1002/acm2.13871) — prospective observer study, 25 patients, chest CT, directly names TrueFidelity on GE Revolution CT. FDA K183202 clearance. Two further candidate studies (Insights into Imaging 2024 on liver metastases; MDPI JI 2025 comparative) referenced but DOIs not independently confirmed; excluded pending verification. PubMed searched 2026-06-18. 2026-11-17: added Kim et al. PLoS One 2026 (coronary calcium scoring, E1/L2); scores unchanged. GE now markets the product as \"TrueFidelity CT\" and, in the Effortless Recon DL portfolio press release, \"TrueFidelity DL\". No public version number; left blank pending vendor confirmation.",
     clinicalImpactNotes: "Workflow improvement and dose reduction potential demonstrated for chest CT (Svalkvist 2023). No RT-specific outcome study published; use in CT simulation requires independent local commissioning.",
     adoptionReadiness: "R2",
     adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high residual implementation burden — limited independent evidence, no RT-specific validation; structured local commissioning and validation required before clinical adoption for CT simulation.",
@@ -101,7 +102,7 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
       "No RT-specific validation published; CT simulation use requires independent local commissioning",
       "Training data details (size, demographics, institutions) not publicly disclosed",
       "Reconstruction strength level (Low/Medium/High) affects noise/resolution trade-off; optimal setting for CT simulation not established",
-      "Evidence limited to a single prospective observer study (n=25, chest CT); broader anatomical and dosimetric validation pending"
+      "Evidence limited to small single-centre studies (chest CT, coronary calcium scoring); broader anatomical and dosimetric validation pending"
     ],
     evidence: [
       {
@@ -115,14 +116,24 @@ export const GE_TRUEFIDELITY_PRODUCTS: ProductDetails[] = [
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf18/K183202.pdf"
       },
       {
+        type: "Peer-reviewed Publication",
+        description: "Kim JW et al. Feasibility of deep learning-based image reconstruction using TrueFidelity for coronary calcium scoring. PLoS One 2026;21(9):e0358342.",
+        link: "https://doi.org/10.1371/journal.pone.0358342"
+      },
+      {
         type: "Product Information",
-        description: "Official GE HealthCare TrueFidelity product page.",
-        link: "https://www.gehealthcare.com/products/computed-tomography/ct-technologies/truefidelity"
+        description: "Official GE HealthCare TrueFidelity CT product page.",
+        link: "https://www.gehealthcare.com/en-us/products/computed-tomography/applications/true-fidelity"
+      },
+      {
+        type: "Vendor Press Release",
+        description: "GE HealthCare expands its Effortless Recon DL portfolio (TrueFidelity DL naming).",
+        link: "https://www.gehealthcare.com/en/about/newsroom/press-releases/ge-healthcare-expands-its-effortless-recon-dl-portfolio-bringing-advanced-deep-learning-image-reconstruction-to-clinicians-worldwide"
       }
     ],
     clinicalEvidence: "One independent prospective peer-reviewed study (Svalkvist et al. J Appl Clin Med Phys 2023, n=25, chest CT) demonstrating image quality non-inferiority to ASIR-V iterative reconstruction at two dose levels, in addition to FDA 510(k) clearance K183202.",
     lastUpdated: "2026-10-15",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-11-17",
     source: "FDA 510(k) K183202; vendor website; peer-reviewed literature"
   }
 ];

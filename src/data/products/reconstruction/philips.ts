@@ -95,7 +95,7 @@ export const PreciseImage: ProductDetails = {
   evidenceRigor: "E1",
   clinicalImpact: "L2",
     legacyClinicalImpact: "I2",
-  evidenceRigorNotes: "E1 (Preliminary): evidence comprises four independent peer-reviewed phantom studies (Greffier 2022/2023 — France; Barca 2023 — Italy; Shim 2025 — South Korea) and two single-center clinical (patient) studies (Chandran 2024, n=30, brain CT, India; Liu 2026, n=60, abdominal CT, China). Neither clinical study is multi-center or fully vendor-independent (each has one Philips-affiliated co-author), and the Liu 2026 dose-reduction estimate (~80%) is simulated via slice-thickness substitution rather than measured at an actual reduced dose. No multi-center cohort, large prospective dose-reduction trial, or fully independent clinical study meets the E2 bar (multi-center, large prospective cohort, external validation).",
+  evidenceRigorNotes: "E1 (Preliminary): evidence comprises four independent peer-reviewed phantom studies (Greffier 2022/2023 — France; Barca 2023 — Italy; Shim 2025 — South Korea) and two single-center clinical (patient) studies (Chandran 2024, n=30, brain CT, India; Liu 2026, n=60, abdominal CT, China). Neither clinical study is multi-center or fully vendor-independent (each has one Philips-affiliated co-author), and the Liu 2026 dose-reduction estimate (~80%) is simulated via slice-thickness substitution rather than measured at an actual reduced dose. No multi-center cohort, large prospective dose-reduction trial, or fully independent clinical study meets the E2 bar (multi-center, large prospective cohort, external validation). 2026-11-17 reviewer check: the product page now redirects to Philips \"CT Smart Workflow\", which presents Precise Image within that suite; no newer PubMed publication naming \"Precise Image\" or \"CT Smart Workflow\" found. Evidence unchanged.",
   clinicalImpactNotes: "I2 (Workflow / diagnostic accuracy, F&T Level 2): two independent clinical studies (Chandran 2024; Liu 2026) found radiologist-assessed diagnostic image quality improvements over iDose4 across two anatomical regions and two countries, corroborated by independent phantom evidence on noise reduction and lesion detectability (Greffier 2022/2023; Barca 2023; Shim 2025). No evidence identified of changed treatment management (I3) or patient outcomes (I4).",
   adoptionReadiness: "R3",
   adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): moderate implementation effort — local validation of the five adjustable reconstruction strengths, interface testing, and workflow confirmation required before adoption. Independent phantom studies show optimal settings vary by anatomical region (chest vs. abdomen vs. head), reinforcing the need for site- and protocol-specific tuning.",
@@ -106,7 +106,7 @@ export const PreciseImage: ProductDetails = {
   evidenceExternalValidation: true,
   clinicalEvidence: "Four independent peer-reviewed phantom studies (France x2, Italy, South Korea) and two single-center clinical studies, each with one Philips-affiliated co-author (India, n=30 brain CT; China, n=60 abdominal CT), alongside FDA 510(k) clearances K210760 and K232491.",
   lastUpdated: "2026-06-17",
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-11-17",
   source: "FDA 510(k) K210760, K232491; peer-reviewed literature",
   evidence: [
     {
@@ -308,9 +308,14 @@ export const SmartSpeed: ProductDetails = {
     evidenceExternalValidation: false,
     clinicalEvidence:
       "Evidence includes FDA V&V/substantial-equivalence documentation, Philips-reported performance claims, and limited independent peer-reviewed literature summarized in a systematic review.",
+    limitations: [
+      "Vendor-specific reconstruction software; results may not be reproducible across scanner platforms (Baz et al. Eur Radiol 2026, doi:10.1007/s00330-026-12482-y)",
+      "Vendor-reported scan-time and resolution gains are institution- and protocol-specific and may vary (Philips SmartSpeed AI product page)",
+      "No public version number; superseded in new systems by SmartSpeed Precise, which adds denoising to sharpening, so evidence for one version does not automatically apply to the other"
+    ],
     supersededBy: "philips-smartspeed-precise",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-11-17",
     source: "FDA 510(k) K213583, K223442; peer-reviewed literature"
   };
 
@@ -468,7 +473,9 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   name: "PET/CT Adaptive Reconstruction",
   company: "Philips",
   companyUrl: "https://www.philips.com/healthcare",
-  productUrl: "https://www.philips.com/healthcare/solutions/pet-ct",
+  productUrl: "https://www.documents.philips.com/assets/Instruction%20for%20Use/20220624/20cb31739a4f4e9b9cbaaebe0107024c.pdf",
+  version: "1.0",
+  releaseDate: "2021-08-06",
   githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/philips.ts",
   description:
     "AI-based smart processing of PET data during reconstruction to reduce image noise and enhance image contrast, designed to improve PET/CT image quality. Implemented as look-up tables for automated selection of PET reconstruction parameters.",
@@ -558,9 +565,14 @@ export const PETCTAdaptiveReconstruction: ProductDetails = {
   evidenceExternalValidation: false,
   clinicalEvidence: "Vendor 'AI-enabled solutions' disclosure and FDA listing of Vereos PET/CT (K211764) with AI/ML attributes; no independent peer-reviewed clinical studies specific to this feature identified as of 2026-06-17.",
   lastUpdated: "2026-08-25",
-  lastRevised: "2026-08-27",
+  lastRevised: "2026-11-17",
   source: "FDA 510(k) K211764; vendor website; peer-reviewed literature",
   evidence: [
+    {
+      type: "Instructions for Use",
+      description: "Philips PET Adaptive Reconstruction Version 1.0 Instructions for Use (document 459801904271_C, dated 08/2021). No newer version found as of 2026-11-17. Release date set to the FDA clearance of Vereos PET/CT (K211764, 2021-08-06).",
+      link: "https://www.documents.philips.com/assets/Instruction%20for%20Use/20220624/20cb31739a4f4e9b9cbaaebe0107024c.pdf"
+    },
     {
       type: "Regulatory Clearance",
       description: "FDA 510(k) K211764 — Vereos PET/CT (Philips Medical Systems Nederland B.V.), decision August 6, 2021. FDA-listed with AI/ML attributes; encompasses the PET reconstruction feature set in which PET/CT Adaptive Reconstruction is described.",
