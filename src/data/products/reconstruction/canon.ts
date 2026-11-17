@@ -421,7 +421,7 @@ export const CANON_PRODUCTS: ProductDetails[] = [
     },
     regulatory: {
       ce: {
-        status: "Unresolved",
+        status: "not_available",
         class: "Not confirmed",
         type: "Medical Device",
         notes: "No public CE certificate or EUDAMED record for PIQE on CT identified as of 2026-11-17."

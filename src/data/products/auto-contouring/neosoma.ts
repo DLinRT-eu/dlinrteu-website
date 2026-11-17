@@ -38,7 +38,7 @@ export const NEOSOMA_PLATFORM: ProductDetails = {
   },
   regulatory: {
     ce: {
-      status: "not_ce",
+      status: "not_available",
       notes: "No CE marking or EUDAMED record identified as of 2026-11-17. The submitted issue listed CE as 'Under review'; no source confirms this."
     },
     fda: {
