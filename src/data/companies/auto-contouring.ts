@@ -296,4 +296,14 @@ export const AUTO_CONTOURING_COMPANIES: CompanyDetails[] = [
     "logoUrl": "/logos/medcom.png",
     "primaryTask": "Auto-Contouring"
   },
+  {
+    "id": "neosoma",
+    "name": "Neosoma",
+    "description": "US company providing deep learning brain tumour contouring, measurement and lesion tracking on MRI for neuro-oncology and radiotherapy teams.",
+    "website": "https://www.neosomainc.com",
+    "productIds": ["neosoma-platform"],
+    "category": "Auto-Contouring",
+    "logoUrl": "/logos/neosoma.png",
+    "primaryTask": "Auto-Contouring"
+  },
 ];
