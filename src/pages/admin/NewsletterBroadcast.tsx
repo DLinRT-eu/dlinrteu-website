@@ -330,6 +330,7 @@ export default function NewsletterBroadcast() {
             <CardContent>
               <iframe
                 title="newsletter preview"
+                sandbox=""
                 srcDoc={previewHtml}
                 className={`w-full h-[720px] rounded-md border ${previewTheme === "dark" ? "bg-[#0f0f23]" : "bg-white"}`}
                 style={{ colorScheme: previewTheme }}

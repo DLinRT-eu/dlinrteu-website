@@ -270,7 +270,7 @@ function imageHtml(alt: string, rawUrl: string): string {
   if (!url) return "";
   return `
     <div style="margin:14px 0 6px;text-align:center;">
-      <img src="${url}" alt="${escapeHtml(alt)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;border-radius:8px;margin:0 auto;" />
+      <img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;border-radius:8px;margin:0 auto;" />
     </div>
   `;
 }
@@ -279,7 +279,7 @@ function buttonHtml(label: string, rawUrl: string, color: string, small = false)
   const url = /^(https?:|mailto:)/i.test(rawUrl.trim()) ? rawUrl.trim() : "#";
   const pad = small ? "10px 22px" : "13px 30px";
   const fs = small ? "14px" : "15px";
-  return `<a href="${url}" class="nl-btn" style="display:inline-block;background:${color};color:#ffffff;padding:${pad};text-decoration:none;border-radius:999px;font-weight:600;font-size:${fs};box-shadow:0 4px 12px rgba(80,144,208,0.25);">${escapeHtml(label)}</a>`;
+  return `<a href="${escapeHtml(url)}" class="nl-btn" style="display:inline-block;background:${color};color:#ffffff;padding:${pad};text-decoration:none;border-radius:999px;font-weight:600;font-size:${fs};box-shadow:0 4px 12px rgba(80,144,208,0.25);">${escapeHtml(label)}</a>`;
 }
 
 // ─── Shell ──────────────────────────────────────────────────────────────────

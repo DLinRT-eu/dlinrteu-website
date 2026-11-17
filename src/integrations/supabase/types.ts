@@ -1996,6 +1996,7 @@ export type Database = {
       }
     }
     Functions: {
+      _caller_may_inspect: { Args: { _target: string }; Returns: boolean }
       _may_inspect_user: { Args: { _target: string }; Returns: boolean }
       admin_health_check: { Args: never; Returns: Json }
       approve_role_request: { Args: { p_request_id: string }; Returns: Json }
