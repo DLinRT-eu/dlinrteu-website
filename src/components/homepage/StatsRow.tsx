@@ -31,7 +31,7 @@ const StatsRow = ({ productCount, companyCount, scoredSources, totalSources }: S
       icon: FileCheck2,
       value: scoredSources > 0 ? `${scoredSources}` : "—",
       label: "Evidence sources scored",
-      sub: totalSources > 0 ? `of ${totalSources} listed papers · E0–E3 / L1t–L6` : "E0–E3 / L1t–L6",
+      sub: totalSources > 0 ? "rated for study quality and clinical benefit" : "Rated for study quality and clinical benefit",
       tint: "from-blue-100 to-sky-100 text-blue-600",
     },
     {
