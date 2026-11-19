@@ -32,3 +32,9 @@ export function diffRegistry(previous: RegistryMap, next: RegistryMap): Registry
   }
   return changes;
 }
+
+/** Snapshot date advances only when the registry actually answered at least one device lookup. */
+export function nextSnapshotDate(deviceLookupSucceeded: boolean, previousDate: string | undefined, today: string): string {
+  if (deviceLookupSucceeded) return today;
+  return previousDate ?? today;
+}

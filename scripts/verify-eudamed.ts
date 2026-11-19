@@ -27,7 +27,7 @@ import {
   type DatalakeUdiRecord,
   type UdiMatch,
 } from "../src/utils/eudamedMatch";
-import { diffRegistry, mergeRegistry, type RegistryMap } from "../src/utils/eudamedRefresh";
+import { diffRegistry, mergeRegistry, nextSnapshotDate, type RegistryMap } from "../src/utils/eudamedRefresh";
 
 const API = "https://api.datalake.sante.service.ec.europa.eu/eudamed";
 const API_VERSION = "v1.0";
@@ -328,7 +328,7 @@ async function main() {
   const previousFile = existsSync(OUT_JSON) ? JSON.parse(readFileSync(OUT_JSON, "utf8")) : {};
   const previous: RegistryMap = previousFile.products ?? {};
   // Snapshot date advances only when at least one lookup actually succeeded.
-  const generatedOn: string = udiLookupSucceeded ? TODAY : (previousFile.generatedOn ?? TODAY);
+  const generatedOn = nextSnapshotDate(udiLookupSucceeded, previousFile.generatedOn, TODAY);
   const next = mergeRegistry(previous, verified as RegistryMap, refreshedIds);
   const changes = diffRegistry(previous, next);
   const changeLines = changes.length
