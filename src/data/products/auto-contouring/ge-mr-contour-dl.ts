@@ -95,19 +95,23 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
         link: "https://www.businesswire.com/news/home/20250925074542/en/GE-HealthCare-debuts-AI-supported-solution-designed-to-improve-and-shorten-the-radiation-therapy-workflow-at-ASTRO-2025"
       }
     ],
+    keyPapers: [
+      {"doi": "10.1016/j.phro.2026.100918", "pmid": "41767107", "title": "A combined automatic organ at risk contouring and synthetic Computed Tomography solution for pelvic Magnetic Resonance-only radiotherapy", "authors": "Wyatt JJ et al.", "journal": "Physics and Imaging in Radiation Oncology", "year": "2026", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Added 2026-11-19 from the screened literature list (Marlie, >10,000 papers); DOI metadata verified on Crossref; scored from the full text (Europe PMC PMC12936674), provisional pending reviewer check (deadline 2026-12-11). Prospective, ethics-approved single-centre study (n=20 pelvic patients, Newcastle UK) comparing a MR-only workflow — automatic OAR contours used without manual editing plus a deep-learning sCT — against the manual MR-CT standard; mean dose differences were similar to manual inter-observer variability for all OARs except bowel bag and lower-dose bladder/rectum volumes. CAUTION for reviewer: the paper never names MR Contour DL; it describes GE Healthcare's separate 3D U-net per-organ models trained on 103 patients and cites Front Phys 2023 (doi:10.3389/fphy.2023.1236792) as the source of those models, i.e. the research basis of this product. GE Healthcare co-authors (Munich, Budapest) took part, so the study is vendor-involved.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": true, "externalValidation": false}
+    ],
     limitations: [
-      "No independent peer-reviewed publications identified (web-searched 2026-06-01)",
+      "No vendor-independent peer-reviewed publication names this product (web-searched 2026-06-01); the 2026 prospective pelvic MR-only study evaluates GE Healthcare's 3D U-net models without naming MR Contour DL",
       "Recently cleared (FDA K242925, April 2025) — limited published clinical-experience data",
       "Contour quality dependent on input MR sequence, scanner vendor and acquisition protocol",
       "User verification and editing of output contours required per FDA labelling",
       "Vendor does not publicly publish a numeric version for this module"
     ],
-    evidenceRigor: "E0",
-    clinicalImpact: "I1",
-    evidenceRigorNotes: "FDA K242925 clearance documentation only. No independent peer-reviewed publications identified (web-searched 2026-06-01). 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated): no publication names this product. E0 stands.",
-    clinicalImpactNotes: "Provides automated MRI-based OAR contouring within GE imaging ecosystem and the iRT MR Direct workflow. No published outcome data.",
+    evidenceRigor: "E1",
+    clinicalImpact: "L2",
+    legacyClinicalImpact: "I1",
+    evidenceRigorNotes: "FDA K242925 clearance documentation plus one prospective, ethics-approved single-centre study (Wyatt 2026, Phys Imaging Radiat Oncol, n=20) of GE Healthcare's pelvic 3D U-net OAR models used without manual editing. Vendor-involved (GE Healthcare co-authors) and the paper does not name MR Contour DL, so the level rests on product-identity inference. 2026-08-25 Wave 5C sweep (Europe PMC 2014-2026, alias-gated) found no publication naming this product; no vendor-independent publication identified.",
+    clinicalImpactNotes: "Prospective dosimetric comparison showed MR-only automatic contouring + sCT dose differences similar to manual inter-observer variability for most pelvic OARs. No outcome, efficiency or toxicity data; product identity not stated in the paper.",
     adoptionReadiness: "R2",
-    adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
+    adoptionReadinessNotes: "Derived from E1 + CE + FDA 510(k): high implementation burden — evidence is single-centre and vendor-involved; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
     lastUpdated: "2026-08-25",
     lastRevised: "2026-11-19",

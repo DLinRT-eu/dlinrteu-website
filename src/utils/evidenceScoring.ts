@@ -172,7 +172,12 @@ export function computeProductEvidenceScore(
 /** Short label for a paper, used in "set by" captions. */
 export function paperLabel(paper?: ScoredPaper): string {
   if (!paper) return "";
-  const first = paper.authors?.split(/[,;]/)[0]?.trim();
+  // Author strings are stored either comma-separated or already abbreviated
+  // ("Wyatt JJ et al."); drop the stored abbreviation before re-adding it.
+  const first = paper.authors
+    ?.split(/[,;]/)[0]
+    ?.trim()
+    .replace(/\s+et\s+al\.?$/i, "");
   const stem = first ? `${first} et al.` : paper.title ?? "Unlabelled paper";
   return paper.year ? `${stem} (${paper.year})` : stem;
 }
