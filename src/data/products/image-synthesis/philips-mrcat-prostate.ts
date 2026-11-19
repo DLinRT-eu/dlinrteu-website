@@ -18,6 +18,8 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
     modality: ["MRI"],
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/image-synthesis/philips-mrcat-prostate.ts",
     keyPapers: [
+      {"doi": "10.5603/rpor.a2022.0015", "title": "A study to determine the impact of IMPT optimization techniques on prostate synthetic CT image sets dose comparison against CT image sets", "authors": "Anto GJ et al.", "journal": "Rep Pract Oncol Radiother.", "year": "2022", "evidenceRigor": "E1", "clinicalImpact": "L2", "rationale": "Added 2026-11-19 from the screened literature list (Marlie, >10,000 papers); DOI metadata verified on Crossref; scored from the abstract, provisional pending reviewer check (deadline 2026-12-11). Single-center retrospective dosimetric comparison using MRCAT-derived sCT vs CT for IMPT plans. Product used as one arm of a comparison or with a version caveat.", "vendorIndependent": true, "multiCenter": false, "multiNational": false, "prospective": false, "externalValidation": false},
+      {"doi": "10.1016/j.phro.2020.09.009", "title": "Clinical experience and workflow challenges with magnetic resonance-only radiation therapy simulation and planning for prostate cancer", "authors": "Tyagi N et al.", "journal": "Physics and Imaging in Radiation Oncology", "year": "2020", "evidenceRigor": "E1", "clinicalImpact": "L3", "rationale": "Added 2026-11-19 from the screened literature list (Marlie, >10,000 papers); DOI metadata verified on Crossref; scored from the abstract, provisional pending reviewer check (deadline 2026-12-11). Prospective single-center evaluation of MRCAT-based MR-only workflow success/failure rates in 585 patients.", "vendorIndependent": false, "multiCenter": false, "multiNational": false, "prospective": true, "externalValidation": false},
       {
         doi: "10.1002/mp.16666",
         link: "https://doi.org/10.1002/mp.16666",
@@ -324,7 +326,7 @@ export const PHILIPS_MRCAT_PROSTATE_PRODUCTS: ProductDetails[] = [
       "Bulk motion correction via bone registration",
       "< 5 minute processing time"
     ],
-    lastRevised: "2026-08-27",
+    lastRevised: "2026-11-19",
     lastUpdated: "2026-08-25",
     limitations: [
       "Patient selection (IFU): not suitable for patients with large metal objects (e.g. hip prosthesis) in the imaging volume, cancers other than prostate cancer, bone anomalies/diseases in the pelvic area, or body diameter in the pelvic area exceeding 50 cm (L-R) or 30 cm (A-P) within the planning FOV.",
