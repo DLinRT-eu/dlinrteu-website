@@ -91,7 +91,8 @@ export async function recordUniqueVisitor(date: string, visitorId: string): Prom
       console.error('Edge function record_unique_visitor failed:', error);
       return false;
     }
-    return !!(resp as any)?.isNew;
+    void resp;
+    return false;
   } catch (error) {
     console.error('Failed to record unique visitor via edge function:', error);
     return false;

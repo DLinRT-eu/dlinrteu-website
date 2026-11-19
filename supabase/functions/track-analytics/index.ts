@@ -145,25 +145,13 @@ Deno.serve(async (req) => {
       });
       const finalVisitorId = hashedVisitorId || visitorId;
 
-      const { data: existing, error: selectErr } = await supabase
+      // Uniform response: callers must not learn whether an identifier was already recorded.
+      const { error: upsertErr } = await supabase
         .from("analytics_visitors")
-        .select("id")
-        .eq("date", date)
-        .eq("visitor_id", finalVisitorId)
-        .maybeSingle();
-      if (selectErr) throw selectErr;
+        .upsert({ date, visitor_id: finalVisitorId }, { onConflict: "date,visitor_id", ignoreDuplicates: true });
+      if (upsertErr && upsertErr.code !== "23505") throw upsertErr;
 
-      if (existing) return jsonResponse({ isNew: false }, 200, corsHeaders);
-
-      const { error: insertErr } = await supabase
-        .from("analytics_visitors")
-        .insert({ date, visitor_id: finalVisitorId });
-      if (insertErr) {
-        if (insertErr.code === "23505") return jsonResponse({ isNew: false }, 200, corsHeaders);
-        throw insertErr;
-      }
-
-      return jsonResponse({ isNew: true }, 200, corsHeaders);
+      return jsonResponse({ ok: true }, 200, corsHeaders);
     }
 
     if (body.action === "save_analytics") {
