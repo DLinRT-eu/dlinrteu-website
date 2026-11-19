@@ -181,3 +181,31 @@ export function paperLabel(paper?: ScoredPaper): string {
   const stem = first ? `${first} et al.` : paper.title ?? "Unlabelled paper";
   return paper.year ? `${stem} (${paper.year})` : stem;
 }
+
+export interface ScoredSourceCount {
+  scored: number;
+  total: number;
+}
+
+const sourceKey = (paper: ScoredPaper): string | undefined => {
+  const doi = paper.doi?.trim().toLowerCase().replace(/^https?:\/\/(dx\.)?doi\.org\//, "");
+  if (doi) return `doi:${doi}`;
+  const title = paper.title?.trim().toLowerCase().replace(/\s+/g, " ");
+  return title ? `title:${title}` : undefined;
+};
+
+/** Unique listed papers across products; scored = both E and L present. */
+export function countScoredSources(products: Pick<ProductDetails, "keyPapers">[]): ScoredSourceCount {
+  const seen = new Map<string, boolean>();
+  for (const product of products) {
+    for (const paper of product.keyPapers ?? []) {
+      const key = sourceKey(paper);
+      if (!key) continue;
+      const isScored = Boolean(paper.evidenceRigor && paper.clinicalImpact);
+      seen.set(key, (seen.get(key) ?? false) || isScored);
+    }
+  }
+  let scored = 0;
+  seen.forEach((v) => { if (v) scored += 1; });
+  return { scored, total: seen.size };
+}

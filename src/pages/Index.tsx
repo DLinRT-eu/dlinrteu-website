@@ -17,7 +17,7 @@ const MailingListSignup = lazy(() => import("@/components/MailingListSignup"));
 const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [stats, setStats] = useState({ productCount: 0, companyCount: 0 });
+  const [stats, setStats] = useState({ productCount: 0, companyCount: 0, scoredSources: 0, totalSources: 0 });
   const [taskCounts, setTaskCounts] = useState<{ name: string; count: number }[]>([]);
 
   useEffect(() => {
@@ -38,7 +38,11 @@ const Index = () => {
           [...products, ...pipelineProducts].map((p, i) => [p.id ?? `no-id-${i}`, p])
         ).values()
       );
+      const { countScoredSources } = await import("@/utils/evidenceScoring");
+      const sources = countScoredSources(uniqueProducts);
       setStats({
+        scoredSources: sources.scored,
+        totalSources: sources.total,
         productCount: uniqueProducts.length,
         companyCount: dataService.getAllCompaniesWithProducts().length,
       });
@@ -74,7 +78,7 @@ const Index = () => {
       <HomeIntroTop />
       <SearchHero />
       <AIinRTBanner />
-      <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} />
+      <StatsRow productCount={stats.productCount} companyCount={stats.companyCount} scoredSources={stats.scoredSources} totalSources={stats.totalSources} />
       <OrbitHero />
       <FeatureCards />
 

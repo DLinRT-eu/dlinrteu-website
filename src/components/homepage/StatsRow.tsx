@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import { Package, Building2, ClipboardCheck } from "lucide-react";
+import { Package, Building2, ClipboardCheck, FileCheck2 } from "lucide-react";
 
 interface StatsRowProps {
   productCount: number;
   companyCount: number;
+  scoredSources: number;
+  totalSources: number;
 }
 
-const StatsRow = ({ productCount, companyCount }: StatsRowProps) => {
+const StatsRow = ({ productCount, companyCount, scoredSources, totalSources }: StatsRowProps) => {
   const stats = [
     {
       to: "/products",
@@ -25,6 +27,14 @@ const StatsRow = ({ productCount, companyCount }: StatsRowProps) => {
       tint: "from-teal-100 to-emerald-100 text-teal-600",
     },
     {
+      to: "/dashboard",
+      icon: FileCheck2,
+      value: scoredSources > 0 ? `${scoredSources}` : "—",
+      label: "Evidence sources scored",
+      sub: totalSources > 0 ? `of ${totalSources} listed papers · E0–E3 / L1t–L6` : "E0–E3 / L1t–L6",
+      tint: "from-blue-100 to-sky-100 text-blue-600",
+    },
+    {
       to: "/resources-compliance",
       icon: ClipboardCheck,
       value: "20+",
@@ -36,7 +46,7 @@ const StatsRow = ({ productCount, companyCount }: StatsRowProps) => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-8 pt-6 md:pt-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 rounded-2xl bg-white border border-slate-200/80 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.15)] divide-y md:divide-y-0 md:divide-x divide-slate-100">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 rounded-2xl bg-white border border-slate-200/80 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.15)] divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
         {stats.map((s) => (
           <Link
             key={s.label}
