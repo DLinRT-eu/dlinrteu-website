@@ -88,7 +88,7 @@ export const MEDCOM_PRODUCTS: ProductDetails[] = [
     evidenceProspective: false,
     evidenceExternalValidation: false,
     lastUpdated: "2026-06-16",
-    lastRevised: "2026-06-16",
+    lastRevised: "2026-11-19",
     source: "Vendor website"
   },
 ];

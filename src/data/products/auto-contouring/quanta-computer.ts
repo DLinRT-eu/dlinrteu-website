@@ -123,7 +123,7 @@ export const QUANTA_COMPUTER_PRODUCTS: ProductDetails[] = [
     },
     releaseDate: "2024-02-13",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K231855; vendor website; peer-reviewed literature"
   }
 ];

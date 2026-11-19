@@ -354,7 +354,7 @@ export const SIEMENS_PRODUCTS: ProductDetails[] = [
     {"doi": "10.1016/j.meddos.2023.11.002", "title": "Clinical evaluation of deep learning and atlas-based auto-segmentation for organs at risk delineation", "authors": "Yamauchi R et al.", "journal": "Medical Dosimetry", "year": "2024", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I1", "rationale": "Single-centre clinical comparison of deep-learning and atlas-based OAR delineation.", "vendorIndependent": true},
     {"doi": "10.1002/acm2.14090", "title": "Feasibility evaluation of novel AI‐based deep‐learning contouring algorithm for radiotherapy", "authors": "Maduro Bustos LA et al.", "journal": "J Applied Clin Med Phys", "year": "2023", "evidenceRigor": "E1", "clinicalImpact": "L3", "legacyClinicalImpact": "I2", "rationale": "Single-centre feasibility evaluation on 30 CT datasets reporting 67-84% contouring time savings.", "vendorIndependent": true}
   ],
-    lastRevised: "2026-09-23",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K242745; vendor website",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/auto-contouring/siemens.ts"
   }

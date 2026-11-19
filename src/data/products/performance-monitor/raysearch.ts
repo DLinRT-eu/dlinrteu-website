@@ -84,7 +84,7 @@ export const RAYSEARCH_PERFORMANCE_PRODUCTS: ProductDetails[] = [
     version: "v2026",
     releaseDate: "2026",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-11-19",
     source: "Vendor website; press releases; peer-reviewed literature",
     evidence: [
       {

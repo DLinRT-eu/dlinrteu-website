@@ -110,7 +110,7 @@ export const GE_MR_CONTOUR_DL_PRODUCTS: ProductDetails[] = [
     adoptionReadinessNotes: "Derived from E0 + CE + FDA 510(k): high implementation burden — limited independent evidence; structured pilot, expanded validation and human-factors testing recommended.",
     releaseDate: "2025-04-01",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K242925; press releases; peer-reviewed literature"
   }
 ];

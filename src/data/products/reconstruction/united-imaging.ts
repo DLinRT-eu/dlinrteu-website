@@ -225,7 +225,7 @@ export const UNITED_IMAGING_PRODUCTS: ProductDetails[] = [
     evidenceExternalValidation: false,
     clinicalEvidence: "Emerging clinical evidence showing increase image quality",
     lastUpdated: "2026-08-25",
-    lastRevised: "2026-08-25",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K222755, K193073; vendor website; peer-reviewed literature",
     githubUrl: "https://github.com/DLinRT-eu/dlinrteu-website/tree/main/src/data/products/reconstruction/united-imaging.ts"
 

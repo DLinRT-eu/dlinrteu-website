@@ -92,10 +92,15 @@ export const AITEWAN_PRODUCTS: ProductDetails[] = [
         type: "Regulatory Submission",
         description: "FDA 510(k) summary K252190: training on 2,867 patients from 2 sites; standalone testing on 136 cases / 360 tumours from 16 institutions against a three-radiologist consensus.",
         link: "https://www.accessdata.fda.gov/cdrh_docs/pdf25/K252190.pdf"
+      },
+      {
+        type: "Peer-reviewed study (not scored)",
+        description: "Hong JS et al., Biomedicines 2026;14(7):1595 (PubMed 42512069): retrospective paired workflow study, 30 brain MRI cases (schwannoma, meningioma, metastases); AI assistance cut contouring time and raised Dice. The paper names AItewan's DeepBT software, but not the Detector-Plus version, so it is listed but not scored. Added 2026-11-19 from the abstract.",
+        link: "https://doi.org/10.3390/biomedicines14071595"
       }
     ],
     evidenceRigor: "E0",
-    evidenceRigorNotes: "No peer-reviewed publication naming DeepBT Detector-Plus was identified at time of entry (2026-09-22). The only disclosed validation is the multi-institutional standalone study reported in the FDA 510(k) summary, which is regulatory grey literature and therefore unscored. keyPapers is intentionally empty.",
+    evidenceRigorNotes: "No peer-reviewed publication naming DeepBT Detector-Plus was identified at time of entry (2026-09-22). The only disclosed validation is the multi-institutional standalone study reported in the FDA 510(k) summary, which is regulatory grey literature and therefore unscored. keyPapers is intentionally empty. Review 2026-11-19: Hong et al. 2026 (DeepBT, version unconfirmed) listed under evidence but not scored.",
     clinicalImpact: "I0",
     clinicalImpactNotes: "No published clinical workflow, acceptability or outcome data.",
     adoptionReadiness: "R2",
@@ -108,6 +113,7 @@ export const AITEWAN_PRODUCTS: ProductDetails[] = [
     keyPapers: [],
     releaseDate: "2026-04-10",
     lastUpdated: "2026-09-22",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K252190"
   }
 ];

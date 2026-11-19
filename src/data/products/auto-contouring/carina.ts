@@ -243,7 +243,7 @@ export const CARINA_PRODUCTS: ProductDetails[] = [
     {"doi":"10.1002/mp.16299","title":"Follow-up evaluation of IntContour","authors":"Duan J et al.","journal":"Med Phys","year":"2023","evidenceRigor":"E1","clinicalImpact":"L2", "legacyClinicalImpact": "I2","rationale":"Follow-up single-centre evaluation reporting editing effort."},
       {"doi":"10.3389/fonc.2025.1603593","pmid":"41127020","title":"Evaluating the impact of different deface algorithms on deep learning segmentation software performance","journal":"Front. Oncol.","year":"2025","link":"https://doi.org/10.3389/fonc.2025.1603593","evidenceRigor":"E1","clinicalImpact":"L1t", "legacyClinicalImpact": "I1","rationale":"Robustness of the commercial segmentation software to de-identification defacing.","vendorIndependent":true,"multiCenter":false,"prospective":false,"externalValidation":false}
   ],
-    lastRevised: "2026-11-12",
+    lastRevised: "2026-11-19",
     source: "FDA 510(k) K212274; vendor website; peer-reviewed literature",
     clinicalEvidence: "Publication in Medical Physics Journal 2023, ESTRO 2022 abstract",
     evidenceRigor: "E2",
