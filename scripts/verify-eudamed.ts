@@ -201,6 +201,7 @@ interface VerifiedEntry {
 async function main() {
   const verified: Record<string, VerifiedEntry[]> = {};
   const refreshedIds = new Set<string>();
+  let udiLookupSucceeded = false;
   const skipped: string[] = [];
   const report: string[] = [
     `# EUDAMED Data Lake verification — ${TODAY}`,
@@ -242,6 +243,7 @@ async function main() {
         failed = true;
         break;
       }
+      udiLookupSucceeded = true;
       report.push(`- ${actor.ACTOR_ID}: ${records.length} UDI-DI records`);
       for (const product of products) {
         const matches: UdiMatch[] = matchUdiRecords(productNames(product), records);
@@ -307,6 +309,7 @@ async function main() {
       report.push(`- [editor-confirmed] ${product.name}: registry record unavailable; previous record kept`);
       continue;
     }
+    udiLookupSucceeded = true;
     refreshedIds.add(association.productId);
     verified[association.productId] = [{
       basicUdi: association.basicUdi,
@@ -322,9 +325,10 @@ async function main() {
     report.push(`- [editor-confirmed] ${product.name} ↔ "${record.TRADE_NAME ?? record.DEVICE_NAME}" · Basic UDI-DI ${association.basicUdi}. ${association.registrationNote}`);
   }
 
-  const previous: RegistryMap = existsSync(OUT_JSON)
-    ? (JSON.parse(readFileSync(OUT_JSON, "utf8")).products ?? {})
-    : {};
+  const previousFile = existsSync(OUT_JSON) ? JSON.parse(readFileSync(OUT_JSON, "utf8")) : {};
+  const previous: RegistryMap = previousFile.products ?? {};
+  // Snapshot date advances only when at least one lookup actually succeeded.
+  const generatedOn: string = udiLookupSucceeded ? TODAY : (previousFile.generatedOn ?? TODAY);
   const next = mergeRegistry(previous, verified as RegistryMap, refreshedIds);
   const changes = diffRegistry(previous, next);
   const changeLines = changes.length
@@ -341,7 +345,7 @@ async function main() {
   if (skipped.length) console.log(`Skipped (previous kept): ${skipped.join(", ")}`);
   if (!dryRun) {
     mkdirSync(resolve("src/data/eudamed"), { recursive: true });
-    writeFileSync(OUT_JSON, JSON.stringify({ generatedOn: TODAY, products: next }, null, 2) + "\n");
+    writeFileSync(OUT_JSON, JSON.stringify({ generatedOn, products: next }, null, 2) + "\n");
   } else {
     console.log("Dry run: product pages not updated.");
   }
