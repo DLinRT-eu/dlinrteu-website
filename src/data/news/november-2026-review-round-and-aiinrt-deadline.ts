@@ -9,7 +9,7 @@ export const november2026ReviewRoundAndAiinrtDeadline: NewsItem = {
   content: `
 ## ⏰ AIinRT2027 — abstracts close in less than a week
 
-Abstract submission for **[AIinRT2027](https://www.aiinrt.org)** closes on **1 December 2026**. The peer-reviewed symposium takes place **1–2 April 2027** at the **Princess Máxima Center, Utrecht**. If you are working on AI in radiotherapy, this is the moment to submit — details at [aiinrt.org](https://www.aiinrt.org).
+Abstract submission for **[AIinRT2027](https://aiinrt.org)** closes on **1 December 2026**. The peer-reviewed symposium takes place **1–2 April 2027** at the **Princess Máxima Center, Utrecht**. If you are working on AI in radiotherapy, this is the moment to submit — details at [aiinrt.org](https://aiinrt.org).
 
 ## ✅ Review round closed, evidence list enlarged
 
