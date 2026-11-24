@@ -31,9 +31,9 @@ More will follow soon, through a collaboration we will reveal shortly.
 
 The EUDAMED device database has been unavailable for automated lookups since mid-November. We kept the last confirmed registry snapshot (**9 November 2026**) rather than overwrite it; it will be refreshed as soon as the service is back.
 
-## 🏆 Running challenges
+## 🏆 Open challenge: COBRA2026
 
-Several challenges listed on our [Initiatives page](/initiatives) are open now, including **HECKTOR**, **AAPM GDP-HMM 2025**, **DoseRAD2026** and **COBRA2026** (closing 15 February 2027).
+**[COBRA2026](https://cobra2026.grand-challenge.org/)** is a benchmark for cone-beam CT reconstruction in radiotherapy. It uses raw clinical projections from six centres, on both Elekta and Varian systems. The **validation phase opens on 1 December 2026** and submissions run until **15 February 2027**. The final event will be at MIDL 2027. Past challenges are listed on our [Initiatives page](/initiatives).
 
 ---
 
