@@ -30,13 +30,13 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://hecktor25.grand-challenge.org/",
     organization: "HES-SO Valais / University Hospital of Zürich",
     startDate: "2020-01-01",
-    status: "Active",
-    lastVerified: "2026-08-03",
+    status: "Completed",
+    lastVerified: "2026-11-24",
     tags: ["Head and Neck Cancer", "PET/CT", "Segmentation", "Multi-Modal", "Outcome Prediction"],
     features: ["3D PET/CT datasets", "Ground truth segmentations", "Standardized evaluation metrics"],
     dataAccess: "Available after registration",
     resultsUrl: "https://hecktor25.grand-challenge.org/test-leaderboard/",
-    participationInfo: "Testing phase open; submissions via Grand Challenge (5th edition, MICCAI 2025)",
+    participationInfo: "5th edition held at MICCAI 2025; challenge completed",
     relatedPublications: [
       {
         title: "Overview of the HECKTOR Challenge at MICCAI 2020",
@@ -179,7 +179,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
   },
   {
     id: "aapm-gdp-hmm",
-    lastVerified: "2026-08-03",
+    lastVerified: "2026-11-24",
     name: "AAPM GDP-HMM 2025",
     category: "Grand Challenge",
     description:
@@ -187,10 +187,10 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://www.aapm.org/GrandChallenge/GDP-HMM/",
     organization: "American Association of Physicists in Medicine",
     startDate: "2025-01-01",
-    status: "Active",
+    status: "Completed",
     tags: ["Dose Prediction", "Treatment Planning", "Multi-Site", "Radiation Therapy"],
     features: ["Multi-site datasets", "Heterogeneous treatment protocols", "Generalizability evaluation"],
-    participationInfo: "Open to academic and commercial participants worldwide",
+    participationInfo: "Held for the AAPM 2025 Annual Meeting; challenge completed",
   },
   {
     id: "aapm-match",
@@ -245,8 +245,8 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     website: "https://doserad2026.grand-challenge.org/",
     organization: "MICCAI",
     startDate: "2026-04-01",
-    status: "Active",
-    lastVerified: "2026-08-03",
+    status: "Completed",
+    lastVerified: "2026-11-24",
     tags: [
       "Dose Calculation",
       "Photon Therapy",
@@ -263,7 +263,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Clinically relevant beam parameters (MLC apertures, pencil beams)",
       "Supports adaptive and MRI-guided RT workflows",
     ],
-    participationInfo: "Open to all participants; submissions ongoing via Grand Challenge",
+    participationInfo: "Training/validation phase ran 10 Apr–31 Aug 2026; submissions closed",
     logoUrl: "/logos/doserad-2026.png",
   },
   {
@@ -277,7 +277,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
     startDate: "2026-07-13",
     endDate: "2027-02-15",
     status: "Active",
-    lastVerified: "2026-08-03",
+    lastVerified: "2026-11-24",
     tags: [
       "CBCT",
       "Image Reconstruction",
@@ -294,8 +294,7 @@ export const CHALLENGE_INITIATIVES: Initiative[] = [
       "Training phase from 13 Jul 2026; validation/preliminary test from 01 Dec 2026; final submissions 15 Feb 2027",
       "Results announced 22 Mar 2027, presented at MIDL 2027",
     ],
-    participationInfo:
-      "Registration open via Grand Challenge; training phase running (virtual kick-off moved to 10 Aug 2026)",
+    participationInfo: "Training phase running; validation phase opens 1 Dec 2026; final submissions 15 Feb 2027",
     logoUrl: "/logos/cobra-2026.png",
   },
   {
