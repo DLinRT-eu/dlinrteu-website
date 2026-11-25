@@ -2314,6 +2314,14 @@ export type Database = {
           verified_by: string
         }[]
       }
+      get_public_product_verifications: {
+        Args: never
+        Returns: {
+          content_hash: string
+          product_id: string
+          verified_at: string
+        }[]
+      }
       get_registration_notifications_admin: {
         Args: never
         Returns: {

@@ -13,14 +13,16 @@ import CompareButton from "./comparison/CompareButton";
 import FloatingCompareButton from "./comparison/FloatingCompareButton";
 import { Button } from "./ui/button";
 import { Scale } from "lucide-react";
+import { useProductVerifications } from "@/hooks/useProductVerifications";
 
 interface ProductGridProps {
   filters?: FilterState;
   searchQuery?: string;
   advancedSearch?: boolean;
+  verifiedOnly?: boolean;
 }
 
-const ProductGrid = ({ filters, searchQuery = "", advancedSearch = false }: ProductGridProps) => {
+const ProductGrid = ({ filters, searchQuery = "", advancedSearch = false, verifiedOnly = false }: ProductGridProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(50);
   const [sortBy, setSortBy] = useState<SortOption>("random");
@@ -32,9 +34,13 @@ const ProductGrid = ({ filters, searchQuery = "", advancedSearch = false }: Prod
   const [showComparison, setShowComparison] = useState(false);
 
   // Get filtered products from data service
-  const filteredProducts = filters 
+  const verifications = useProductVerifications();
+  const baseProducts = filters 
     ? dataService.filterProducts(filters)
     : dataService.getAllProducts();
+  const filteredProducts = verifiedOnly
+    ? baseProducts.filter(p => verifications.get(p.id || '')?.status === 'valid')
+    : baseProducts;
 
   // Shuffle products randomly on each reload (only once), but not in compare mode
   const shuffledProducts = useDailyProductShuffle(filteredProducts);
@@ -77,7 +83,8 @@ const ProductGrid = ({ filters, searchQuery = "", advancedSearch = false }: Prod
     filters.tasks.length > 0 || 
     filters.locations.length > 0 || 
     filters.modalities.length > 0 || 
-    filters.certifications.length > 0
+    filters.certifications.length > 0 ||
+    verifiedOnly
   );
 
   // Comparison handlers

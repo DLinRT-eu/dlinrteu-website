@@ -11,6 +11,8 @@ import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
 import { isPipelineProduct } from "@/utils/productFilters";
 import { PipelineBadge } from "@/components/PipelineBadge";
 import { isDiscontinuedProduct } from '@/utils/productLifecycle';
+import VerifiedBadge from '@/components/VerifiedBadge';
+import { useProductVerifications } from '@/hooks/useProductVerifications';
 
 interface UnifiedProductCardProps {
   product: ProductDetails;
@@ -31,6 +33,7 @@ const UnifiedProductCard = ({
   showFeatures = true,
   compactMode = false
 }: UnifiedProductCardProps) => {
+  const verifications = useProductVerifications();
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
   
@@ -173,6 +176,7 @@ const UnifiedProductCard = ({
             {product.category}
           </Badge>
           {renderCertificationBadge()}
+          <VerifiedBadge verification={verifications.get(product.id || '')} company={product.company} />
           {renderModalityBadges(product.modality)}
         </div>
         

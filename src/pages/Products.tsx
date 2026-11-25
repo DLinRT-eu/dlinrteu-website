@@ -1,5 +1,7 @@
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { BadgeCheck } from "lucide-react";
+import { useProductVerifications } from "@/hooks/useProductVerifications";
 import { useState, useEffect } from "react";
 import { Clock, ArrowRight, Info, ChevronDown, Building } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -26,6 +28,14 @@ const Products = () => {
   const [advancedSearch, setAdvancedSearch] = useState(false);
   const [inclusionOpen, setInclusionOpen] = useState(false);
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const verifiedOnly = searchParams.get('verified') === '1';
+  const verifications = useProductVerifications();
+  const toggleVerified = () => {
+    const next = new URLSearchParams(searchParams);
+    if (verifiedOnly) next.delete('verified'); else next.set('verified', '1');
+    setSearchParams(next, { replace: true });
+  };
 
   // Open and reveal the inclusion criteria when linked with #inclusion-criteria
   useEffect(() => {
@@ -44,6 +54,7 @@ const Products = () => {
   const pipelineProducts = dataService.getPipelineProducts();
   const totalProductCount = allProducts.length;
   const totalWithPipeline = dataService.getTotalProductCount();
+  const verifiedCount = allProducts.filter(p => verifications.get(p.id || '')?.status === 'valid').length;
 
   // Check URL parameters for initial filters
   useEffect(() => {
@@ -150,6 +161,7 @@ const Products = () => {
       certifications: [],
       modalities: [],
     });
+    if (verifiedOnly) toggleVerified();
     setSearchQuery("");
     toast.success("Filters have been reset");
   };
@@ -214,14 +226,14 @@ const Products = () => {
           <h2 className="text-xl font-semibold text-gray-900">
             Featured Products
             <span className="ml-2 text-sm font-normal text-gray-500">
-              ({totalProductCount} certified{pipelineProducts.length > 0 ? ` + ${pipelineProducts.length} in pipeline` : ''})
+              ({totalProductCount} certified{pipelineProducts.length > 0 ? ` + ${pipelineProducts.length} in pipeline` : ''}{verifiedCount > 0 ? ` · ${verifiedCount} verified by company` : ''})
             </span>
           </h2>
           <button 
             onClick={handleResetFilters}
             className="text-sm text-gray-500 hover:text-[#00A6D6] transition-colors cursor-pointer"
           >
-            {filtersActive || searchQuery ? 'Reset filters' : 'Showing all products'}
+            {filtersActive || searchQuery || verifiedOnly ? 'Reset filters' : 'Showing all products'}
           </button>
         </div>
         
@@ -229,6 +241,16 @@ const Products = () => {
           onFiltersChange={setFiltersActive}
           onFilterUpdate={handleFilterUpdate}
         />
+
+        <button
+          type="button"
+          onClick={toggleVerified}
+          aria-pressed={verifiedOnly}
+          className={`mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${verifiedOnly ? 'border-success bg-success text-success-foreground' : 'border-success/50 text-success hover:bg-success/10'}`}
+        >
+          <BadgeCheck className="h-4 w-4" />
+          Verified by Company only ({verifiedCount})
+        </button>
         
         {filtersActive && (
           <ActiveFilterChips 
@@ -316,6 +338,7 @@ const Products = () => {
           filters={currentFilters} 
           searchQuery={searchQuery}
           advancedSearch={advancedSearch}
+          verifiedOnly={verifiedOnly}
         />
         
         <ProductFeedbackBanner className="mt-8" />

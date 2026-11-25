@@ -9,6 +9,8 @@ import { getKeyFeatures } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getStandardizedCertificationTags } from "@/utils/regulatoryUtils";
 import { isInvestigationalProduct } from "@/utils/productFilters";
+import VerifiedBadge from "@/components/VerifiedBadge";
+import { useProductVerifications } from "@/hooks/useProductVerifications";
 
 interface ProductCardProps {
   id?: string;
@@ -52,6 +54,7 @@ const ProductCard = ({
   onSelectionChange
 }: ProductCardProps) => {
   const navigate = useNavigate();
+  const verifications = useProductVerifications();
 
   // Get the unified key features using the utility function
   const displayFeatures = getKeyFeatures({ features, keyFeatures } as ProductDetails);
@@ -236,6 +239,7 @@ const ProductCard = ({
         )}
         <div className="flex items-center flex-wrap gap-1 mt-2 mb-4">
           {renderCertificationBadge()}
+          <VerifiedBadge verification={id ? verifications.get(id) : undefined} company={company} />
           {modality && renderModalityBadges(modality)}
         </div>
       </CardContent>

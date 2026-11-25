@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useProductVerifications } from '@/hooks/useProductVerifications';
 import { ProductDetails } from '@/types/productDetails';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -25,6 +26,7 @@ interface ComparisonRow {
 }
 
 const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps) => {
+  const verifications = useProductVerifications();
   const [exportFormat, setExportFormat] = useState<'excel' | 'csv' | 'pdf'>('excel');
   const [isExporting, setIsExporting] = useState(false);
   const [activeTab, setActiveTab] = useState<'general' | 'structures'>('general');
@@ -46,6 +48,7 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
       { key: 'category', label: 'Category' },
       { key: 'secondaryCategories', label: 'Secondary Categories' },
       { key: 'certification', label: 'Certification' },
+      { key: 'companyVerified', label: 'Verified by Company' },
       { key: 'modality', label: 'Modality' },
       { key: 'anatomicalLocation', label: 'Anatomical Location' },
       { key: 'processingTime', label: 'Processing Time' },
@@ -104,6 +107,12 @@ const ProductComparison = ({ products, isOpen, onClose }: ProductComparisonProps
           case 'certification':
             value = product.certification;
             break;
+          case 'companyVerified': {
+            const v = verifications.get(product.id || '');
+            const d = v ? new Date(v.verifiedAt).toISOString().split('T')[0] : '';
+            value = !v ? 'Not verified' : v.status === 'valid' ? `Yes (${d})` : `Outdated (certified ${d})`;
+            break;
+          }
           case 'modality':
             value = product.modality;
             break;

@@ -11,9 +11,13 @@ import EudamedRegistration from "@/components/company/EudamedRegistration";
 import UnifiedProductCard from '@/components/common/UnifiedProductCard';
 import CategoryRegulatoryTable from "@/components/company/CategoryRegulatoryTable";
 import { getCompanyRegulatoryCounts } from "@/utils/companyRegulatory";
+import { useProductVerifications } from "@/hooks/useProductVerifications";
+import { countVerified } from "@/utils/certificationStatus";
+import { BadgeCheck } from "lucide-react";
 
 const CompanyProducts = () => {
   const { companyId = "" } = useParams<{ companyId: string }>();
+  const verifications = useProductVerifications();
 
   const company = useMemo(() => dataService.getCompanyById(companyId), [companyId]);
   const products = useMemo(
@@ -194,6 +198,16 @@ const CompanyProducts = () => {
             <div className="text-2xl font-bold mt-1">{stats.eudamedCount}</div>
           </div>
         </div>
+
+        {products.length > 0 && (() => {
+          const { valid, outdated } = countVerified(products.map(p => p.id || ""), verifications);
+          return (
+            <p className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
+              <BadgeCheck className="h-4 w-4 text-success" />
+              <span><strong className="text-success">{valid} of {products.length}</strong> products verified by the company{outdated > 0 ? ` · ${outdated} awaiting re-certification` : ""}</span>
+            </p>
+          );
+        })()}
 
         {company.eudamed && <EudamedRegistration eudamed={company.eudamed} />}
 
