@@ -28,14 +28,23 @@ import { toast } from 'sonner';
 import { format, formatDistanceToNow } from 'date-fns';
 
 const DEFAULT_SUBJECT =
-  "Action Required: Certify Your Product Information on DLinRT.eu – {CompanyName}";
+  "DLinRT.eu review round completed – please verify and certify your product information – {CompanyName}";
 
-const DEFAULT_BODY =
-  `We are reaching out regarding the DLinRT.eu Company Certification Program for {CompanyName}.
+const DEFAULT_BODY = `We have just completed a new review round on DLinRT.eu, in which our independent reviewers checked the product information and the evidence listed for {CompanyName}'s products.
 
-The certification portal is now open and we kindly invite you to review your company's product information and certify that everything is accurate and up to date.
+We kindly ask you to verify that the information shown for your products is accurate and up to date, and to certify it. You can do this in any of the following ways:
 
-Your participation helps maintain the quality and reliability of our platform for the entire radiotherapy community.`;
+1. Certify as is – if everything is correct, sign in, open your company dashboard and click "Certify Product" for each product.
+2. Submit a revision – from the company dashboard, click "Submit Revision" on a product to propose corrections (with sources). Our editorial team reviews it and you can follow its status there.
+3. Edit on the product page – while signed in, use the edit mode on the product page to change fields directly; changes are saved as a draft and sent to us for approval.
+4. GitHub – if you prefer, open a pull request on the public DLinRT repository for your product files.
+5. Reply to this email – send corrections or supporting documents to info@dlinrt.eu and we will apply them for you.
+
+A step-by-step guide for company representatives is available after signing in: https://dlinrt.eu/company/guide
+
+All changes must be supported by a publicly available source or a disclosed document. Certified products show a "Manufacturer certified" badge.
+
+Thank you for helping keep DLinRT.eu an accurate, independent reference for the radiotherapy community.`;
 
 interface Recipient {
   id: string;
