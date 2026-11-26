@@ -1,31 +1,14 @@
-# Resolve the critical audit findings per product
+# Cookie warnings: findings and proposed action
 
-## Scope
-The full-catalogue audit (15 Oct 2026) lists 868 findings. Of these, 148 are critical (1 error, 147 warnings) across 67 products. The 720 informational notes are out of scope. Many products were revised after the audit, so some findings may already be resolved.
+## What the scanner flagged
+1. **SameSite=None**: this is the `__cf_bm` cookie, which the hosting provider's (Cloudflare) bot protection sets on dlinrt.eu, www.dlinrt.eu and the lovable.app address. It is already HttpOnly, Secure and Partitioned, has a 30-minute lifetime and holds no user data. DLinRT code does not create it and cannot change it.
+2. **HttpOnly missing**: these are DLinRT's own cookies, the cookie-consent choice and the sidebar open/closed state. Only the browser's own page code can read them, and a cookie created by page code can never be HttpOnly. They already use SameSite=Strict/Lax and Secure in production. They hold no login token, because sign-in uses browser storage, not cookies.
 
-Main groups of critical findings:
-- Evidence (about 45): E1 claimed without a scored paper, provisional scores that need the source retrieved, rescoring proposals, vendor-independence / multi-centre flags, wrong journal titles or attribution, and the MESCAL paper cross-check (7 products).
-- Regulatory (about 17): FDA clearance numbers missing or not matching FDA, FDA/CE missing from the certification summary.
-- Identity (about 10): broken or redirected product links, secondary-category mismatches.
-- Transparency (about 9): training and evaluation data without a source.
-- Structures (4), Technical (2), Cross-check (5: duplicate product source files, company name mismatches).
-
-## Steps
-1. Re-check every critical finding against the current product data and mark it "already resolved", "to fix" or "needs reviewer".
-2. Fix the remaining ones, one source at a time:
-   - Evidence: retrieve the paper (Crossref / Europe PMC / OpenAlex), correct metadata, confirm or adjust the E/L score, and lower an E level when no attributable paper supports it.
-   - Regulatory: verify each number in the FDA database, then sync the certification summary.
-   - Links: check each product page, replace with the current vendor page or record the redirect.
-   - Transparency/structures: keep only what a disclosed source supports; otherwise mark it as not disclosed.
-   - Duplicate source files: confirm which file is used and remove or archive the unused one, keeping old links working.
-3. Never invent data: if a source can't be found, leave the field unchanged and list it for a reviewer.
-4. Stamp `lastRevised` on edited products, run the evidence checker and tests.
-
-## Deliverables
-- Corrected product entries.
-- A resolution report `docs/audits/products/2026-11-25/critical-findings-resolution.md` (+ CSV) with each finding's outcome and source, plus a short list of items left for reviewers.
+## Proposed action (no functional change)
+- Keep the cookies as they are. Making them HttpOnly would break the consent banner and the sidebar, and there is nothing secret in them to protect.
+- Add one line to the cookie/privacy section of `SECURITY.md` that names the `__cf_bm` hosting cookie, says why it uses SameSite=None, and says the consent and sidebar cookies are readable by page code on purpose.
+- No database, login or security-scan finding changes.
 
 ## Technical details
-- Input: `docs/audits/products/2026-10-15/product-audit-2026-10-15.csv` filtered to severity `warn`/`error`.
-- Work split by finding group across parallel subagents; edits applied centrally to avoid conflicts.
-- EUDAMED stays unchanged (registry still down); efficacy conversions stay in `normalizeProductEfficacy`.
+- Checked with `curl -I` on all three domains: `__cf_bm=...; HttpOnly; SameSite=None; Partitioned; Secure`.
+- `src/utils/cookieUtils.ts` (consent, SameSite=Strict) and `src/components/ui/sidebar.tsx` (SameSite=Lax) already have comments explaining why HttpOnly isn't possible.
