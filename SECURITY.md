@@ -166,6 +166,7 @@ GDPR penetration audits and follow-ups are archived in [`docs/audits/gdpr/`](./d
 - **No auth tokens or PII are stored in cookies.** Supabase session tokens live in `localStorage` (per the Supabase JS SDK); cookies only hold the GDPR consent record, an anonymous random visitor UUID, and UI state (sidebar).
 - **All client-written cookies use `SameSite=Strict` (or `Lax` for UI state) and `Secure` in production**, mitigating CSRF and network exposure.
 - **`HttpOnly` is not applicable** to cookies set via `document.cookie` — the flag can only be set by a server response header. The consent banner and analytics dedup logic require JS read access by design, so JS-readable cookies here are expected and not a vulnerability.
+- **`__cf_bm` (hosting bot-protection cookie)** is set by the hosting provider's CDN (Cloudflare), not by DLinRT code. It is already `HttpOnly; Secure; Partitioned`, expires after 30 minutes and holds no user data; `SameSite=None` is the provider's default and cannot be changed by the app.
 
 
 ---
