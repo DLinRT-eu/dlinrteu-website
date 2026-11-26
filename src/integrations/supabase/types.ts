@@ -2022,34 +2022,16 @@ export type Database = {
         Args: { user_id_param: string }
         Returns: boolean
       }
-      certify_product:
-        | {
-            Args: {
-              p_company_id: string
-              p_notes?: string
-              p_product_id: string
-            }
-            Returns: Json
-          }
-        | {
-            Args: {
-              p_company_id: string
-              p_notes?: string
-              p_product_id: string
-              p_product_last_revised?: string
-            }
-            Returns: Json
-          }
-        | {
-            Args: {
-              p_company_id: string
-              p_content_hash?: string
-              p_notes?: string
-              p_product_id: string
-              p_product_last_revised?: string
-            }
-            Returns: Json
-          }
+      certify_product: {
+        Args: {
+          p_company_id: string
+          p_content_hash?: string
+          p_notes?: string
+          p_product_id: string
+          p_product_last_revised?: string
+        }
+        Returns: Json
+      }
       check_github_file_modified: {
         Args: {
           current_file_modified: string
