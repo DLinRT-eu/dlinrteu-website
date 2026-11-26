@@ -141,6 +141,38 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Scrub records keyed only by email (GDPR Art. 17).
+    const emailScrub: Record<string, number> = {};
+    if (targetProfile?.email) {
+      const e = targetProfile.email;
+      const deletions: Array<[string, string]> = [
+        ['contact_submissions', 'email'],
+        ['product_feedback', 'submitter_email'],
+        ['newsletter_subscribers', 'email'],
+        ['company_invitations', 'email'],
+        ['reviewer_invitations', 'email'],
+      ];
+      for (const [table, col] of deletions) {
+        const { count, error } = await adminClient.from(table).delete({ count: 'exact' }).ilike(col, e);
+        if (error) console.log(`Note: Could not scrub ${table}:`, error.message);
+        emailScrub[table] = count ?? 0;
+      }
+      const { count: logCount, error: logScrubErr } = await adminClient
+        .from('email_send_log')
+        .update({ recipient: 'deleted-user', raw_event: null }, { count: 'exact' })
+        .ilike('recipient', e);
+      if (logScrubErr) console.log('Note: Could not anonymise email_send_log:', logScrubErr.message);
+      emailScrub['email_send_log_anonymised'] = logCount ?? 0;
+      const { count: regCount } = await adminClient
+        .from('user_registration_notifications')
+        .delete({ count: 'exact' })
+        .ilike('email', e);
+      emailScrub['user_registration_notifications'] = regCount ?? 0;
+    }
+
+    const emailHashBytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(targetEmail.toLowerCase()));
+    const hashedTargetEmail = 'sha256:' + Array.from(new Uint8Array(emailHashBytes)).map((b) => b.toString(16).padStart(2, '0')).join('');
+
     // Delete profile
     const { error: profileError } = await adminClient
       .from('profiles')
@@ -160,9 +192,9 @@ Deno.serve(async (req) => {
         performed_by: callerUser.id,
         performed_by_email: callerUser.email,
         target_user_id: targetUserId,
-        target_user_email: targetEmail,
+        target_user_email: hashedTargetEmail,
         details: {
-          target_name: targetName,
+          email_keyed_records_scrubbed: emailScrub,
           deleted_at: new Date().toISOString(),
           method: 'admin_delete_user_edge_function'
         }

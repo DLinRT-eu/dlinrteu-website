@@ -82,7 +82,15 @@ export function getCookie(name: string): string | null {
  * Delete a cookie
  */
 export function deleteCookie(name: string, path: string = '/'): void {
-  document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}`;
+  const base = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${path}`;
+  document.cookie = base;
+  // Also expire copies set on parent domains (e.g. .dlinrt.eu).
+  const parts = window.location.hostname.split('.');
+  for (let i = 0; i < parts.length - 1; i++) {
+    const domain = parts.slice(i).join('.');
+    document.cookie = `${base}; domain=${domain}`;
+    document.cookie = `${base}; domain=.${domain}`;
+  }
 }
 
 /**
@@ -94,6 +102,7 @@ export function setCookieConsent(consent: Omit<CookieConsent, 'timestamp' | 'ver
     timestamp: Date.now(),
     version: CONSENT_VERSION
   };
+  if (!consent.analytics) clearAnalyticsCookies();
   
   // Consent cookie is always allowed (necessary for legal compliance).
   // Hardened with SameSite=Strict + Secure (in production). HttpOnly is N/A
@@ -139,4 +148,11 @@ export function needsConsent(): boolean {
 export function clearAnalyticsCookies(): void {
   const cookiesToClear = ['dlinrt-visitor-id', 'dlinrt-session-id'];
   cookiesToClear.forEach(name => deleteCookie(name));
+  for (const storage of [window.localStorage, window.sessionStorage]) {
+    try {
+      cookiesToClear.forEach(name => storage.removeItem(name));
+    } catch {
+      // storage may be unavailable (private mode)
+    }
+  }
 }

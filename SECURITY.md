@@ -120,6 +120,11 @@ This prevents RLS bypass attacks where views could expose data from underlying t
 
 ## GDPR Compliance
 
+- Contact and product feedback forms show an inline privacy notice (purpose, legal basis, retention, link to the Privacy Policy).
+- Admin account deletion also deletes or anonymises email-keyed records (contact messages, feedback, newsletter, invitations, registration notifications, email send log); the audit log keeps only a SHA-256 hash of the deleted email.
+- "Download my data" covers drafts, reviewer expertise, documents and access log, assignment history, review comments, company representation and invitations.
+- Rejecting or withdrawing consent removes analytics cookies (host and parent domains) and session identifiers immediately.
+
 ### Data Anonymization
 
 - **IP Addresses**: All IP addresses are hashed using SHA-256 before storage

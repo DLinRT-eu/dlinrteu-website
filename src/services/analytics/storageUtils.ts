@@ -1,6 +1,6 @@
 
 import { DailyVisitData } from './types';
-import { setCookie, getCookie, getCookieConsent } from '@/utils/cookieUtils';
+import { setCookie, getCookie, getCookieConsent, clearAnalyticsCookies } from '@/utils/cookieUtils';
 import { supabase } from '@/integrations/supabase/client';
 
 // Storage keys for cookies
@@ -169,13 +169,8 @@ export function setSessionId(sessionId: string): void {
  * Clear visitor and session IDs (for GDPR compliance)
  */
 export function clearTrackingIds(): void {
-  // Clear cookie
-  const consent = getCookieConsent();
-  if (consent?.analytics) {
-    setCookie(VISITOR_ID_KEY, '', { expires: -1 });
-  }
-  // Clear session storage
-  sessionStorage.removeItem(SESSION_ID_KEY);
+  // Must work after consent is withdrawn, so never gate on consent here.
+  clearAnalyticsCookies();
 }
 
 /**

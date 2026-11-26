@@ -1,3 +1,4 @@
+import { setCookieConsent } from '@/utils/cookieUtils';
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -76,6 +77,9 @@ export const ConsentManagement = () => {
         .eq('id', profile?.id);
 
       if (error) throw error;
+
+      // Withdrawal also stops analytics tracking and removes its identifiers.
+      setCookieConsent({ analytics: false });
 
       // Log withdrawal
       await supabase.from('consent_audit_log').insert({

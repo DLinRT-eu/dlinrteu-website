@@ -1,3 +1,4 @@
+import PrivacyNotice from '@/components/PrivacyNotice';
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -183,6 +184,7 @@ const ContactForm = () => {
           {isSubmitting ? 'Sending...' : 'Send Message'}
           <Mail className="ml-2 h-4 w-4" />
         </Button>
+        <PrivacyNotice purpose="answer your message" retention="up to 2 years after the request is resolved" />
       </form>
     </Form>
   );

@@ -1,3 +1,4 @@
+import PrivacyNotice from '@/components/PrivacyNotice';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -201,6 +202,7 @@ const ProductFeedbackForm = () => {
         <Send className="h-4 w-4" />
         {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
       </Button>
+      <PrivacyNotice purpose="review and follow up on your feedback" retention="for as long as needed to process it, then deleted on request" />
     </form>
   );
 };
